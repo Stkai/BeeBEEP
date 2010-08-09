@@ -1,0 +1,45 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/beebeep.png</file>
+        <file>emoticons/smile.png</file>
+        <file>emoticons/cool.png</file>
+        <file>emoticons/tongue.png</file>
+        <file>emoticons/wink.png</file>
+        <file>emoticons/laugh.png</file>
+        <file>emoticons/cry.png</file>
+        <file>emoticons/kiss.png</file>
+        <file>emoticons/heart.png</file>
+        <file>emoticons/sideways.png</file>
+        <file>emoticons/devil.png</file>
+        <file>emoticons/sleep.png</file>
+        <file>emoticons/sick.png</file>
+        <file>emoticons/bandit.png</file>
+        <file>emoticons/love.png</file>
+        <file>emoticons/pinched.png</file>
+        <file>emoticons/pouty.png</file>
+        <file>emoticons/surprise.png</file>
+        <file>images/green-ball.png</file>
+        <file>images/red-ball.png</file>
+        <file>images/yellow-ball.png</file>
+        <file>emoticons/angel.png</file>
+        <file>emoticons/whistle.png</file>
+        <file>images/quit.png</file>
+        <file>images/qt.png</file>
+        <file>images/font-color.png</file>
+        <file>images/chat.png</file>
+        <file>emoticons/wizard.png</file>
+        <file>images/settings.png</file>
+        <file>images/connect.png</file>
+        <file>images/disconnect.png</file>
+        <file>images/info.png</file>
+        <file>images/emoticon.png</file>
+        <file>images/font.png</file>
+        <file>images/save-as.png</file>
+        <file>locale/beebeep_it.qm</file>
+        <file>images/search.png</file>
+        <file>images/send-file.png</file>
+        <file>images/user.png</file>
+        <file>images/user-online.png</file>
+        <file>images/user-offline.png</file>
+    </qresource>
+</RCC>
