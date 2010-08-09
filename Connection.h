@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: Connection.h 34 2010-07-13 18:45:23Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

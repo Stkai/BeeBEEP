@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: TransferFileManager.cpp 28 2010-06-20 17:53:16Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

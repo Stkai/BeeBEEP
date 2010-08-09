@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: BeeBEEP.h 31 2010-07-04 11:24:04Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

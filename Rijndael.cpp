@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: Protocol.cpp 38 2010-08-02 15:22:46Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

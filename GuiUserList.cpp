@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiUserList.cpp 35 2010-07-14 17:35:10Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

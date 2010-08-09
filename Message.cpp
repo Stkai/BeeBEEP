@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: Message.cpp 24 2010-06-13 17:36:35Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

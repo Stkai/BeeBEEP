@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: FileReceiver.cpp 30 2010-07-02 14:41:41Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

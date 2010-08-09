@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: FileSender.h 36 2010-07-19 15:50:50Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

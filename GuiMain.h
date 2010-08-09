@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiMain.h 10 2010-06-01 17:22:10Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
