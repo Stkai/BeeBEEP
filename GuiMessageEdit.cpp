@@ -28,6 +28,9 @@
 GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   : QTextEdit( parent )
 {
+  mp_timer = new QTimer( this );
+  mp_timer->setSingleShot( true );
+  connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
 }
 
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
@@ -44,6 +47,7 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     }
     else
     {
+      mp_timer->stop();
       emit returnPressed();
       e->accept();
       return;
@@ -58,4 +62,20 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
   // Fixed: when the text is fully cancelled the message box loose the color... patched with the line below
   if( reset_font_color )
     setTextColor( QColor( Settings::instance().chatFontColor() ) );
+
+  if( !mp_timer->isActive() )
+  {
+    mp_timer->start( WRITING_MESSAGE_TIMEOUT );
+  }
+}
+
+void GuiMessageEdit::checkWriting()
+{
+  if( !toPlainText().isEmpty() )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "You are writing";
+#endif
+    emit writing();
+  }
 }

@@ -137,7 +137,6 @@ void Connection::readData()
     qDebug() << "Pong sent";
 #endif
     break;
-
   case Message::Pong:
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Pong arrived";

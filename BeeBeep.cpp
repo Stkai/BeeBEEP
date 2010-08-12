@@ -259,8 +259,28 @@ void BeeBeep::sendMessage( const QString& chat_name, const QString& msg )
   emit newMessage( chat_name, cm );
 }
 
+void BeeBeep::sendWritingMessage( const QString& chat_name )
+{
+  if( !isWorking() )
+    return;
+  Connection* c = connection( chat_name );
+  if( c )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Sending Writing Message";
+#endif
+    c->sendMessage( Protocol::instance().writingMessage() );
+  }
+}
+
 void BeeBeep::dispatchMessage( const User& u, const Message& m )
 {
+  if( m.hasFlag( Message::Status ) && m.hasFlag( Message::Writing ) )
+  {
+    emit userIsWriting( u );
+    return;
+  }
+
   Chat c = m.hasFlag( Message::Private ) ? chat( Settings::instance().chatName( u ), true, false ) : chat( Settings::instance().defaultChatName(), false, false );
   ChatMessage cm( u, m );
   c.addMessage( cm );

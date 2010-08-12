@@ -60,6 +60,7 @@ private slots:
   void sendMessage( const QString&, const QString& );
   void toggleMenuBar( bool );
   void saveChat();
+  void showWritingUser( const User& );
 
 protected:
   void closeEvent( QCloseEvent* );

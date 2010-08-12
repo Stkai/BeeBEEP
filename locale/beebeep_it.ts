@@ -52,7 +52,7 @@
         <translation>Impossibile inviare il messaggio. Il destinatario non è connesso.</translation>
     </message>
     <message>
-        <location filename="../BeeBeep.cpp" line="297"/>
+        <location filename="../BeeBeep.cpp" line="317"/>
         <source>Sending Beep to %1...</source>
         <translation>Invio un Beep a %1...</translation>
     </message>
@@ -99,12 +99,12 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../GuiChat.cpp" line="61"/>
+        <location filename="../GuiChat.cpp" line="62"/>
         <source>(Last message %1)</source>
         <translation>(Ultimo messaggio %1)</translation>
     </message>
     <message>
-        <location filename="../GuiChat.cpp" line="71"/>
+        <location filename="../GuiChat.cpp" line="72"/>
         <source>To</source>
         <translation>A</translation>
     </message>
@@ -451,16 +451,21 @@ p, li { white-space: pre-wrap; }
         <translation>Mostra la lista degli utenti connessi e le conversazioni attive</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="495"/>
+        <location filename="../GuiMain.cpp" line="496"/>
         <source>&lt;html&gt;&lt;body&gt;&lt;b&gt;Chat with &apos;%1&apos; saved in date %2.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <translation>&lt;html&gt;&lt;body&gt;&lt;b&gt;Conversazione con &apos;%1&apos; salvata in data %2.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <location filename="../GuiMain.cpp" line="534"/>
+        <source>%1 is writing</source>
+        <translation>%1 sta scrivendo</translation>
     </message>
     <message>
         <source>%1 - Search users to contact</source>
         <translation type="obsolete">%1 - Cerca utenti da contattare</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="513"/>
+        <location filename="../GuiMain.cpp" line="514"/>
         <source>Please insert the Host Address or Broadcast Address to contact
 (ex. 10.184.15.186 or 10.184.15.255)</source>
         <translation>Inserisci l&apos;indirizzo IP o l&apos;indirizzo di Broadcast da contattare
@@ -479,7 +484,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Inserisci l&apos;indirizzo IP del computer da contattare (ad es. 10.184.15.186)</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="524"/>
+        <location filename="../GuiMain.cpp" line="525"/>
         <source>You have selected an invalid host address.</source>
         <translation>Hai selezionato un indirizzo IP non valido.</translation>
     </message>
@@ -488,18 +493,18 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Impossibile spedire il messaggio: la connessione non è attiva!</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="479"/>
+        <location filename="../GuiMain.cpp" line="480"/>
         <source>Please select a file to save the messages of &apos;Chat with %1&apos;</source>
         <translation>Seleziona un file dove salvare i messaggi della conversazione con %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="491"/>
-        <location filename="../GuiMain.cpp" line="523"/>
+        <location filename="../GuiMain.cpp" line="492"/>
+        <location filename="../GuiMain.cpp" line="524"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="492"/>
+        <location filename="../GuiMain.cpp" line="493"/>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
         <translation>%1: impossibile salvare i messaggi.
@@ -510,12 +515,12 @@ Controlla i permessi sul file selezionato o sulla cartella che lo contiene.</tra
         <translation type="obsolete">&lt;html&gt;&lt;body&gt;&lt;b&gt;Conversazione con &apos;%1&apos; salvata in data %2&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="502"/>
+        <location filename="../GuiMain.cpp" line="503"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="503"/>
+        <location filename="../GuiMain.cpp" line="504"/>
         <source>%1: save completed.</source>
         <translation>%1: salvataggio completato.</translation>
     </message>

@@ -45,9 +45,11 @@ public:
 
 signals:
   void newMessage( const QString&, const QString& );
+  void writing( const QString& );
 
 private slots:
   void sendMessage();
+  void checkWriting();
 
 private:
   QString m_chatName;

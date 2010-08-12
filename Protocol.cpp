@@ -33,8 +33,11 @@ const QString DATA_FIELD_SEPARATOR = ",";
 
 
 Protocol::Protocol()
-  : m_id( 10 )
+  : m_id( 10 ), m_writingMessage( Message::Chat, "*" )
 {
+  m_writingMessage.addFlag( Message::Private );
+  m_writingMessage.addFlag( Message::Status );
+  m_writingMessage.addFlag( Message::Writing );
 }
 
 QString Protocol::messageHeader( Message::Type mt ) const
@@ -170,15 +173,6 @@ QString Protocol::helloMessage() const
   data_list << Settings::instance().localUser().nickname();
   Message m( Message::Hello, data_list.join( HELLO_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().hash() );
-  return fromMessage( m );
-}
-
-QString Protocol::userIsWritingMessage() const
-{
-  Message m( Message::Chat, "*" );
-  m.addFlag( Message::Private );
-  m.addFlag( Message::Status );
-  m.addFlag( Message::Writing );
   return fromMessage( m );
 }
 

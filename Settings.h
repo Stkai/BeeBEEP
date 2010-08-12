@@ -88,6 +88,9 @@ public:
   inline bool useEncryption() const;
   inline void setUseEncryption( bool );
 
+  inline bool beepOnNewMessageArrived() const;
+  inline void setBeepOnNewMessageArrived( bool );
+
   void load( bool check_environment_also );
   void save();
 
@@ -144,6 +147,8 @@ private:
 
   bool m_useEncryption;
 
+  bool m_beepOnNewMessageArrived;
+
 };
 
 
@@ -191,5 +196,7 @@ inline const QString& Settings::lastDirectorySelected() const { return m_lastDir
 inline void Settings::setLastDirectorySelected( const QString& new_value ) { m_lastDirectorySelected = new_value; }
 inline bool Settings::useEncryption() const { return m_useEncryption; }
 inline void Settings::setUseEncryption( bool new_value ) { m_useEncryption = new_value; }
+inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessageArrived; }
+inline void Settings::setBeepOnNewMessageArrived( bool new_value ) { m_beepOnNewMessageArrived = new_value; }
 
 #endif // BEEBEEP_SETTINGS_H

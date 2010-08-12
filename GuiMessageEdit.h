@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_GUIMESSAGEEDIT_H
 #define BEEBEEP_GUIMESSAGEEDIT_H
 
-#include <QTextEdit>
+#include "Config.h"
 
 
 class GuiMessageEdit : public QTextEdit
@@ -36,9 +36,16 @@ public:
 
 signals:
   void returnPressed();
+  void writing();
 
 protected:
   void keyPressEvent( QKeyEvent* );
+
+private slots:
+  void checkWriting();
+
+private:
+  QTimer* mp_timer;
 
 };
 

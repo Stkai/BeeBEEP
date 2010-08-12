@@ -41,6 +41,7 @@ GuiChat::GuiChat( QWidget *parent )
   setChatFontColor( Settings::instance().chatFontColor() );
 
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
+  connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
 
 #ifdef Q_OS_SYMBIAN
   connect( mp_buttonSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
@@ -109,3 +110,7 @@ void GuiChat::setChatFontColor( const QString& color_name )
   mp_teMessage->setTextColor( QColor( color_name ) );
 }
 
+void GuiChat::checkWriting()
+{
+  emit writing( m_chatName );
+}

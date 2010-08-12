@@ -49,6 +49,7 @@ public:
 
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
+  void userIsWriting( const User& );
   void newUser( const User& );
   void removeUser( const User& );
   void newChat( const Chat& );
@@ -57,6 +58,7 @@ public slots:
   void start();
   void stop();
   void sendMessage( const QString&, const QString& );
+  void sendWritingMessage( const QString& );
 
 private slots:
   void newConnection( Connection* );

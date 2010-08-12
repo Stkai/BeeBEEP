@@ -50,14 +50,14 @@ GuiMain::GuiMain( QWidget *parent )
   createToolBars();
   createStatusBar();
 
-  connect( mp_beeBeep, SIGNAL( newMessage( const QString&, const ChatMessage& ) ),
-    this, SLOT( showMessage( const QString&, const ChatMessage& ) ) );
-  connect( mp_defaultChat, SIGNAL( newMessage( const QString&, const QString& ) ),
-    this, SLOT( sendMessage( const QString&, const QString& ) ) );
-  connect( mp_userList, SIGNAL( chatSelected( int, const QString& ) ), this, SLOT( chatSelected( int, const QString& ) ) );
-  connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
+  connect( mp_beeBeep, SIGNAL( newMessage( const QString&, const ChatMessage& ) ), this, SLOT( showMessage( const QString&, const ChatMessage& ) ) );
   connect( mp_beeBeep, SIGNAL( newUser( const User& ) ), this, SLOT( newUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( removeUser( const User& ) ), this, SLOT( removeUser( const User& ) ) );
+  connect( mp_beeBeep, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
+  connect( mp_defaultChat, SIGNAL( newMessage( const QString&, const QString& ) ), this, SLOT( sendMessage( const QString&, const QString& ) ) );
+  connect( mp_defaultChat, SIGNAL( writing( const QString& ) ), mp_beeBeep, SLOT( sendWritingMessage( const QString& ) ) );
+  connect( mp_userList, SIGNAL( chatSelected( int, const QString& ) ), this, SLOT( chatSelected( int, const QString& ) ) );
+  connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
   mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, false ) );
   refreshTitle();
@@ -70,7 +70,8 @@ void GuiMain::refreshTitle()
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  if( QMessageBox::question( this, tr( "Bye Bye Bee" ), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
+  if( !mp_beeBeep->isWorking() ||
+      QMessageBox::question( this, tr( "Bye Bye Bee" ), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::Yes )
   {
 #ifndef Q_OS_SYMBIAN
@@ -456,6 +457,22 @@ void GuiMain::sendMessage( const QString& chat_name, const QString& msg )
 
 void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )
 {
+  if( !cm.isSystem()
+#if !defined( BEEBEEP_DEBUG )
+    && cm.username() != Settings::instance().localUser().name()
+#endif
+    )
+  {
+    QApplication::alert( this, 2000 );
+    if( Settings::instance().beepOnNewMessageArrived() )
+    {
+#if defined( BEEBEEP_DEBUG )
+      qDebug() << "BEEP";
+#endif
+      QApplication::beep();
+    }
+  }
+
   if( chat_name == mp_defaultChat->chatName() )
   {
     Chat chat_showed = mp_beeBeep->chat( chat_name, true, true );
@@ -466,6 +483,7 @@ void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )
       txt = Bee::formatMessage( cm );
     mp_defaultChat->appendMessage( chat_name, txt );
     mp_defaultChat->setLastMessageTimestamp( chat_showed.lastMessageTimestamp() );
+    statusBar()->clearMessage();
     return;
   }
   Chat chat_hided = mp_beeBeep->chat( chat_name, true, false );
@@ -526,5 +544,11 @@ void GuiMain::searchUsers()
   }
 
   mp_beeBeep->searchUsers( host_address );
+}
+
+void GuiMain::showWritingUser( const User& u )
+{
+  QString msg = tr( "%1 is writing" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() );
+  statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
 }
 

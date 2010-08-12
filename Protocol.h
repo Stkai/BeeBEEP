@@ -42,7 +42,7 @@ public:
   QString pongMessage() const;
   QString broadcastMessage() const;
   QString helloMessage() const;
-  QString userIsWritingMessage() const;
+  inline const Message& writingMessage() const;
 
   User createUser( const Message& );
   inline User createLocalUser() const;
@@ -74,6 +74,7 @@ protected:
 
 private:
   int m_id;
+  Message m_writingMessage;
 
 };
 
@@ -82,5 +83,6 @@ private:
 
 inline int Protocol::messageMinimumSize() const { return 10; }
 inline User Protocol::createLocalUser() const { return User( 1 ); }
+inline const Message& Protocol::writingMessage() const { return m_writingMessage; }
 
 #endif // BEEBEEP_PROTOCOL_H
