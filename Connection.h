@@ -45,7 +45,6 @@ public:
 signals:
   void readyForUse();
   void newMessage( const User&, const Message& );
-  void newFileMessage( const User&, const Message& );
 
 private slots:
   void readData();

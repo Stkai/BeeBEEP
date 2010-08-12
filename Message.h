@@ -30,7 +30,7 @@
 class Message
 {
 public:
-  enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, File };
+  enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System };
   enum Flag { Private, NumFlags };
 
   Message();
@@ -78,7 +78,5 @@ inline const QString& Message::data() const { return m_data; }
 inline const QDateTime& Message::timestamp() const { return m_timestamp; }
 inline const QString& Message::text() const { return m_text; }
 inline bool Message::hasFlag( Flag f ) const { return m_flags != 0 && m_flags & (1 << f); }
-
-
 
 #endif // MESSAGE_H

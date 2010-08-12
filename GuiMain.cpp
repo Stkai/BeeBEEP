@@ -156,11 +156,6 @@ void GuiMain::createActions()
   mp_actSearch->setEnabled( false );
   connect( mp_actSearch, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
-  mp_actSendFile = new QAction( QIcon( ":/images/send-file.png" ), tr( "Send &file..." ), this );
-  mp_actSendFile->setStatusTip( tr( "Send a file to online user") );
-  mp_actSendFile->setEnabled( false );
-  connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
-
   mp_actSaveChat = new QAction( QIcon( ":/images/save-as.png" ), tr( "&Save chat..." ), this );
   mp_actSaveChat->setShortcuts( QKeySequence::Quit );
   mp_actSaveChat->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
@@ -214,7 +209,6 @@ void GuiMain::createMenus()
   menu->addAction( mp_actNickname );
   menu->addAction( mp_actSearch );
   menu->addSeparator();
-  menu->addAction( mp_actSendFile );
   menu->addAction( mp_actSaveChat );
   menu->addSeparator();
   menu->addAction( mp_actQuit );
@@ -307,7 +301,6 @@ void GuiMain::createToolBars()
   mp_barMain->addAction( mp_actNickname );
   mp_barMain->addAction( mp_actSearch );
   mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actSendFile );
   mp_barMain->addAction( mp_actSaveChat );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_menuSettingsIcon->menuAction() );
@@ -447,13 +440,10 @@ void GuiMain::chatSelected( int user_id, const QString& chat_name )
   if( user_id == Settings::instance().localUser().id())
   {
     mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, true ) );
-    mp_actSendFile->setEnabled( false );
     return;
   }
   Chat c = mp_beeBeep->chat( chat_name, true, true );
   mp_defaultChat->setChat( c );
-  User u = mp_beeBeep->user( user_id );
-  mp_actSendFile->setEnabled( u.isValid() );
 }
 
 void GuiMain::sendMessage( const QString& chat_name, const QString& msg )
@@ -535,21 +525,3 @@ void GuiMain::searchUsers()
   mp_beeBeep->searchUsers( host_address );
 }
 
-void GuiMain::sendFile()
-{
-  if( !mp_beeBeep->isWorking() )
-    return;
-
-  if( mp_defaultChat->chatName() == Settings::instance().defaultChatName() )
-    return;
-
-  QString file_name = QFileDialog::getOpenFileName( this,
-                        tr( "Please select a file to send" ),
-                        Settings::instance().lastDirectorySelected(), "All Files (*.*)" );
-  if( file_name.isNull() )
-    return;
-
-  QFileInfo file_info( file_name );
-  Settings::instance().setLastDirectorySelected( file_info.absolutePath() );
-  mp_beeBeep->sendFile( mp_defaultChat->chatName(), file_info );
-}

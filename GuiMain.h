@@ -59,7 +59,6 @@ private slots:
   void sendMessage( const QString&, const QString& );
   void toggleMenuBar( bool );
   void saveChat();
-  void sendFile();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -89,7 +88,6 @@ private:
   QAction* mp_actSaveChat;
   QAction* mp_actSearch;
   QAction* mp_actQuit;
-  QAction* mp_actSendFile;
   QAction* mp_actNickname;
   QAction* mp_actFont;
   QAction* mp_actFontColor;

@@ -32,7 +32,6 @@ class Connection;
 class Listener;
 class Message;
 class PeerManager;
-class TransferFileManager;
 
 
 class BeeBeep : public QObject
@@ -47,7 +46,6 @@ public:
   bool isWorking() const;
   QString id() const;
   void searchUsers( const QHostAddress& );
-  void sendFile( const QString& chat_name, const QFileInfo& );
 
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
@@ -77,12 +75,9 @@ protected:
 private:
   Listener* mp_listener;
   PeerManager* mp_peerManager;
-  TransferFileManager* mp_transferFileManager;
   QMultiHash<int, Connection*> m_peers;
   QHash<QString, Chat> m_chats;
 
 };
-
-
 
 #endif // BEEBEEP_CLIENT_H

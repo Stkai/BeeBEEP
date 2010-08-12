@@ -23,9 +23,6 @@ SOURCES += Listener.cpp \
     GuiMain.cpp \
     ChatMessage.cpp \
     BeeUtils.cpp \
-    TransferFileManager.cpp \
-    FileSender.cpp \
-    FileReceiver.cpp \
     Rijndael.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
@@ -47,9 +44,6 @@ HEADERS += sym_iap_util.h \
     GuiMain.h \
     ChatMessage.h \
     BeeUtils.h \
-    TransferFileManager.h \
-    FileSender.h \
-    FileReceiver.h \
     Rijndael.h
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc

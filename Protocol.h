@@ -42,8 +42,7 @@ public:
   QString pongMessage() const;
   QString broadcastMessage() const;
   QString helloMessage() const;
-  Message createSendFileMessage( const QFileInfo& ) const;
-  Message createSendFileMessageAnswer( const QString&, bool file_accepted ) const;
+
   User createUser( const Message& );
   inline User createLocalUser() const;
   bool isUserAuthorized( const QString& nick_name, const QString& md5 );

@@ -41,30 +41,30 @@ QString Protocol::messageHeader( Message::Type mt ) const
 {
   switch( mt )
   {
-  case Message::Beep:  return "MKM-BEEP";
-  case Message::Ping:  return "MKM-PING";
-  case Message::Pong:  return "MKM-PONG";
-  case Message::Chat:  return "MKM-CHAT";
-  case Message::Hello: return "MKM-CIAO";
-  case Message::File:  return "MKM-FILE";
-  default:             return "";
+  case Message::Beep:   return "BEE-BEEP";
+  case Message::Ping:   return "BEE-PING";
+  case Message::Pong:   return "BEE-PONG";
+  case Message::Chat:   return "BEE-CHAT";
+  case Message::Hello:  return "BEE-CIAO";
+  case Message::System: return "BEE-SYST";
+  default:              return "BEE-BOOH";
   }
 }
 
 Message::Type Protocol::messageType( const QString& msg_type ) const
 {
-  if( msg_type == "MKM-BEEP" )
+  if( msg_type == "BEE-BEEP" )
     return Message::Beep;
-  else if( msg_type == "MKM-PING" )
+  else if( msg_type == "BEE-PING" )
     return Message::Ping;
-  else if( msg_type == "MKM-PONG" )
+  else if( msg_type == "BEE-PONG" )
     return Message::Pong;
-  else if( msg_type == "MKM-CHAT")
+  else if( msg_type == "BEE-CHAT")
     return Message::Chat;
-  else if( msg_type == "MKM-CIAO")
+  else if( msg_type == "BEE-CIAO")
     return Message::Hello;
-  else if( msg_type == "MKM-FILE")
-    return Message::File;
+  else if( msg_type == "BEE-SYST")
+    return Message::System;
   else
     return Message::Undefined;
 }
@@ -161,27 +161,6 @@ QString Protocol::broadcastMessage() const
     return "";
   Message m( Message::Beep, QString::number( listener_port ) );
   return fromMessage( m );
-}
-
-Message Protocol::createSendFileMessage( const QFileInfo& file_info ) const
-{
-  Message m( Message::File, "?" );
-  QStringList data_list;
-  data_list << file_info.fileName();
-  data_list << QString::number( file_info.size() );
-  data_list << file_info.suffix();
-  m.setData( data_list.join( DATA_FIELD_SEPARATOR ) );
-  m.addFlag( Message::Private );
-  return m;
-}
-
-Message Protocol::createSendFileMessageAnswer( const QString& file_data, bool file_accepted ) const
-{
-  QString sAnswer = file_accepted ? "yes" : "no";
-  Message m( Message::File, sAnswer );
-  m.setData( file_data );
-  m.addFlag( Message::Private );
-  return m;
 }
 
 QString Protocol::helloMessage() const

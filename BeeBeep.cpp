@@ -28,7 +28,6 @@
 #include "PeerManager.h"
 #include "Protocol.h"
 #include "Settings.h"
-#include "TransferFileManager.h"
 
 
 BeeBeep::BeeBeep( QObject* parent )
@@ -36,7 +35,6 @@ BeeBeep::BeeBeep( QObject* parent )
 {
   mp_listener = new Listener( this );
   mp_peerManager = new PeerManager( this );
-  mp_transferFileManager = new TransferFileManager( this );
 
   (void)chat( Settings::instance().defaultChatName(), true, false );
 
@@ -131,7 +129,6 @@ void BeeBeep::readyForUse()
   if( !c || hasConnection( c->peerAddress(), c->peerPort() ) )
     return;
   connect( c, SIGNAL( newMessage( const User&, const Message& ) ), this, SLOT( dispatchMessage( const User&, const Message& ) ) );
-  connect( c, SIGNAL( newFileMessage( const User&, const Message& ) ), mp_transferFileManager, SLOT( fileMessageReceived( const User&, const Message& ) ) );
   m_peers.insert( c->id(), c );
   emit newUser( c->user() );
   QString sHtmlMsg = "<img src=':/images/green-ball.png' alt=' *O* '> ";
@@ -301,17 +298,3 @@ void BeeBeep::searchUsers( const QHostAddress& host_address )
   dispatchSystemMessage( Settings::instance().defaultChatName(), sHtmlMsg );
 }
 
-void BeeBeep::sendFile( const QString& chat_name, const QFileInfo& file_info )
-{
-  Connection* c = connection( chat_name );
-  if( !c )
-    return;
-
-  mp_transferFileManager->sendFile( c->user(), file_info.absoluteFilePath() );
-
-  Message m = Protocol::instance().createSendFileMessage( file_info );
-  c->sendMessage( m );
-  dispatchSystemMessage( chat_name, tr( "%1 Transfer request of the file %2 is sent." )
-                         .arg( "<img src=':/images/send-file.png' width=16 height=16 alt=' *F* '> " )
-                         .arg( file_info.fileName() ) );
-}

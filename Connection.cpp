@@ -145,13 +145,6 @@ void Connection::readData()
     m_pongTime.restart();
     break;
 
-  case Message::File:
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << "New File Request:" << m.text();
-#endif
-    emit newFileMessage( m_user, m );
-    break;
-
   default:
     qWarning() << "Invalid message type (in Connection):" << m.type();
     break;
