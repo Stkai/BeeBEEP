@@ -36,7 +36,7 @@ GuiMain::GuiMain( QWidget *parent )
 {
   mp_beeBeep = new BeeBeep( this );
 
-  setWindowIcon( QIcon( ":/images/beeBEEP.png") );
+  setWindowIcon( QIcon( ":/images/beebeep.png") );
   mp_defaultChat = new GuiChat( this );
   setCentralWidget( mp_defaultChat );
   mp_barMain = addToolBar( tr( "Show the ToolBar" ) );
