@@ -114,7 +114,7 @@ void Settings::load( bool check_environment_also )
   sets.beginGroup( "Gui" );
   m_showMenuBar = sets.value( "ShowMenuBar", false ).toBool();
   m_showToolBar = sets.value( "ShowToolBar", true ).toBool();
-  m_mainBarIconSize = sets.value( "MainBarIconSize", QSize( 22, 22 ) ).toSize();
+  m_mainBarIconSize = sets.value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
   m_debugMode = sets.value( "DebugMode", false ).toBool();
   m_language = sets.value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )

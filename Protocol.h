@@ -42,6 +42,7 @@ public:
   QString pongMessage() const;
   QString broadcastMessage() const;
   QString helloMessage() const;
+  QString userIsWritingMessage() const;
 
   User createUser( const Message& );
   inline User createLocalUser() const;

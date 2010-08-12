@@ -37,8 +37,8 @@
         <file>images/save-as.png</file>
         <file>locale/beebeep_it.qm</file>
         <file>images/search.png</file>
-        <file>images/user.png</file>
         <file>images/user-online.png</file>
         <file>images/user-offline.png</file>
+        <file>images/profile.png</file>
     </qresource>
 </RCC>

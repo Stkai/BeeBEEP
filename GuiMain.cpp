@@ -101,6 +101,14 @@ void GuiMain::selectNickname()
   Settings::instance().setLocalUserNickname( nick );
 }
 
+void GuiMain::startStopBeeBeep()
+{
+  if( mp_beeBeep->isWorking() )
+    stopBeeBeep();
+  else
+    startBeeBeep();
+}
+
 void GuiMain::startBeeBeep()
 {
   bool ok = false;
@@ -113,22 +121,24 @@ void GuiMain::startBeeBeep()
   if( !ok )
     return;
   Settings::instance().setPassword( pwd.simplified() );
-  mp_actStartBeeBeep->setEnabled( false );
   mp_beeBeep->start();
   mp_actSearch->setEnabled( true );
-  mp_actStopBeeBeep->setEnabled( true );
   refreshTitle();
+  mp_actStartStopBeeBeep->setIcon( QIcon( ":/images/disconnect.png") );
+  mp_actStartStopBeeBeep->setText( tr( "&Disconnect" ) );
+  mp_actStartStopBeeBeep->setStatusTip( tr( "Disconnect from %1 network").arg( Settings::instance().programName() ) );
 }
 
 void GuiMain::stopBeeBeep()
 {
-  mp_actStopBeeBeep->setEnabled( false );
   mp_actSearch->setEnabled( false );
   mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, true ) );
   mp_beeBeep->stop();
   mp_userList->clear();
-  mp_actStartBeeBeep->setEnabled( true );
   refreshTitle();
+  mp_actStartStopBeeBeep->setIcon( QIcon( ":/images/connect.png") );
+  mp_actStartStopBeeBeep->setText( tr( "&Connect" ) );
+  mp_actStartStopBeeBeep->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
 }
 
 void GuiMain::showAbout()
@@ -142,14 +152,9 @@ void GuiMain::showAbout()
 
 void GuiMain::createActions()
 {
-  mp_actStartBeeBeep = new QAction( QIcon( ":/images/connect.png"), tr( "&Connect"), this );
-  mp_actStartBeeBeep->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
-  connect( mp_actStartBeeBeep, SIGNAL( triggered() ), this, SLOT( startBeeBeep() ) );
-
-  mp_actStopBeeBeep = new QAction( QIcon( ":/images/disconnect.png"), tr( "&Disconnect"), this );
-  mp_actStopBeeBeep->setStatusTip( tr( "Disconnect from %1 network").arg( Settings::instance().programName() ) );
-  mp_actStopBeeBeep->setEnabled( false );
-  connect( mp_actStopBeeBeep, SIGNAL( triggered() ), this, SLOT( stopBeeBeep() ) );
+  mp_actStartStopBeeBeep = new QAction( QIcon( ":/images/connect.png"), tr( "&Connect"), this );
+  mp_actStartStopBeeBeep->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
+  connect( mp_actStartStopBeeBeep, SIGNAL( triggered() ), this, SLOT( startStopBeeBeep() ) );
 
   mp_actSearch = new QAction( QIcon( ":/images/search.png"), tr( "Search &users..."), this );
   mp_actSearch->setStatusTip( tr( "Search the users outside the %1 local network").arg( Settings::instance().programName() ) );
@@ -166,7 +171,7 @@ void GuiMain::createActions()
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( close() ) );
 
-  mp_actNickname = new QAction( QIcon( ":/images/user.png"), tr( "Change your nickname..." ), this );
+  mp_actNickname = new QAction( QIcon( ":/images/profile.png"), tr( "Change your nickname..." ), this );
   mp_actNickname->setStatusTip( tr( "Select your favourite chat nickname" ) );
   connect( mp_actNickname, SIGNAL( triggered() ), this, SLOT( selectNickname() ) );
 
@@ -203,8 +208,7 @@ void GuiMain::createMenus()
 
   /* Main Menu */
   menu = menuBar()->addMenu( tr( "&Main" ) );
-  menu->addAction( mp_actStartBeeBeep );
-  menu->addAction( mp_actStopBeeBeep );
+  menu->addAction( mp_actStartStopBeeBeep );
   menu->addSeparator();
   menu->addAction( mp_actNickname );
   menu->addAction( mp_actSearch );
@@ -295,8 +299,7 @@ void GuiMain::createMenus()
 
 void GuiMain::createToolBars()
 {
-  mp_barMain->addAction( mp_actStartBeeBeep );
-  mp_barMain->addAction( mp_actStopBeeBeep );
+  mp_barMain->addAction( mp_actStartStopBeeBeep );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actNickname );
   mp_barMain->addAction( mp_actSearch );

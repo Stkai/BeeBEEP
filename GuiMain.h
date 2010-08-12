@@ -41,11 +41,12 @@ public:
   GuiMain( QWidget* parent = 0 );
 
 public slots:
-  void startBeeBeep();
-  void stopBeeBeep();
+  void startStopBeeBeep();
 
 private slots:
   void showAbout();
+  void startBeeBeep();
+  void stopBeeBeep();
   void newUser( const User& );
   void removeUser( const User& );
   void selectNickname();
@@ -83,8 +84,7 @@ private:
 
   QToolBar *mp_barMain;
 
-  QAction* mp_actStartBeeBeep;
-  QAction* mp_actStopBeeBeep;
+  QAction* mp_actStartStopBeeBeep;
   QAction* mp_actSaveChat;
   QAction* mp_actSearch;
   QAction* mp_actQuit;

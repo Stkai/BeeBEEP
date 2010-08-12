@@ -173,6 +173,15 @@ QString Protocol::helloMessage() const
   return fromMessage( m );
 }
 
+QString Protocol::userIsWritingMessage() const
+{
+  Message m( Message::Chat, "*" );
+  m.addFlag( Message::Private );
+  m.addFlag( Message::Status );
+  m.addFlag( Message::Writing );
+  return fromMessage( m );
+}
+
 User Protocol::createUser( const Message& hello_message )
 {
   /* Read User Field Data */
@@ -191,7 +200,6 @@ User Protocol::createUser( const Message& hello_message )
   u.setNickname( sNickName.trimmed() );
   return u;
 }
-
 
 namespace
 {
