@@ -49,3 +49,7 @@ FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 OTHER_FILES += 
+
+debug {
+  DEFINES += BEEBEEP_DEBUG
+}

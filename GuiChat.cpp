@@ -42,6 +42,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
+  connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
 
 #ifdef Q_OS_SYMBIAN
   connect( mp_buttonSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );

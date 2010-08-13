@@ -46,6 +46,7 @@ public:
 signals:
   void newMessage( const QString&, const QString& );
   void writing( const QString& );
+  void nextChat();
 
 private slots:
   void sendMessage();

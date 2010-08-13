@@ -23,10 +23,11 @@
 
 #include "ChatMessage.h"
 #include "User.h"
+#include "Settings.h"
 
 
 ChatMessage::ChatMessage()
-  : m_username( "" ), m_nickname( "" ), m_message()
+  : m_username( "" ), m_nickname( "" ), m_local( false ), m_message()
 {
 }
 
@@ -36,7 +37,8 @@ ChatMessage::ChatMessage( const ChatMessage& cm )
 }
 
 ChatMessage::ChatMessage( const User& u, const Message& m )
-  : m_username( u.name() ), m_nickname( u.nickname() ), m_message( m )
+  : m_username( u.name() ), m_nickname( u.nickname() ),
+    m_local( u.id() == Settings::instance().localUser().id() ), m_message( m )
 {
 }
 
@@ -46,6 +48,7 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
   {
     m_username = cm.m_username;
     m_nickname = cm.m_nickname;
+    m_local = cm.m_local;
     m_message = cm.m_message;
   }
   return *this;

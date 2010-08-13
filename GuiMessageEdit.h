@@ -37,6 +37,7 @@ public:
 signals:
   void returnPressed();
   void writing();
+  void tabPressed();
 
 protected:
   void keyPressEvent( QKeyEvent* );

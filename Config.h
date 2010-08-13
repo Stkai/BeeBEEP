@@ -28,9 +28,6 @@
 #include <QtGui>
 #include <QtNetwork>
 
-#define BEEBEEP_DEBUG
-//#undef BEEBEEP_DEBUG
-
 const int MAX_BUFFER_SIZE = 1024000;
 const int TRANSFER_TIMEOUT = 30 * 1000;
 const int PONG_TIMEOUT = 90 * 1000;

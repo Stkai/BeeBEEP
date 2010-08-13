@@ -56,6 +56,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_beeBeep, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_defaultChat, SIGNAL( newMessage( const QString&, const QString& ) ), this, SLOT( sendMessage( const QString&, const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( writing( const QString& ) ), mp_beeBeep, SLOT( sendWritingMessage( const QString& ) ) );
+  connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( mp_userList, SIGNAL( chatSelected( int, const QString& ) ), this, SLOT( chatSelected( int, const QString& ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
@@ -86,6 +87,15 @@ void GuiMain::closeEvent( QCloseEvent* e )
   }
   else
     e->ignore();
+}
+
+void GuiMain::showNextChat()
+{
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Change chat view";
+#endif
+  if( !mp_userList->nextUserWithUnreadMessages() )
+    statusBar()->showMessage( tr( "No new message available" ) );
 }
 
 void GuiMain::selectNickname()
@@ -255,6 +265,13 @@ void GuiMain::createMenus()
   act->setData( 3 );
   mp_menuSettingsIcon->addAction( act );
 
+  act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().beepOnNewMessageArrived() );
+  act->setData( 4 );
+  mp_menuSettingsIcon->addAction( act );
+
   mp_menuSettings->addSeparator();
   mp_menuSettingsIcon->addSeparator();
 
@@ -265,14 +282,14 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "If enabled the IP addresses of the connected users are shown" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserIp() );
-  act->setData( 4 );
+  act->setData( 5 );
   mp_menuSettingsIcon->addAction( act );
 
   act = mp_menuSettings->addAction( tr( "Show user's nickname" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the nickname of the connected users are shown" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserNickname() );
-  act->setData( 5 );
+  act->setData( 6 );
   mp_menuSettingsIcon->addAction( act );
 
   /* Emoticons Menu for ToolBar and MenuBar */
@@ -420,10 +437,13 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 4:
+    Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
+    break;
+  case 5:
     Settings::instance().setShowUserIp( act->isChecked() );
     refresh_users = true;
     break;
-  case 5:
+  case 6:
     Settings::instance().setShowUserNickname( act->isChecked() );
     refresh_users = true;
     refresh_chat = true;
@@ -457,23 +477,25 @@ void GuiMain::sendMessage( const QString& chat_name, const QString& msg )
 
 void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )
 {
-  if( !cm.isSystem()
-#if !defined( BEEBEEP_DEBUG )
-    && cm.username() != Settings::instance().localUser().name()
-#endif
-    )
+  bool is_current_chat = chat_name == mp_defaultChat->chatName();
+
+  if( !cm.isSystem() && !cm.isLocal() )
   {
     QApplication::alert( this, 2000 );
-    if( Settings::instance().beepOnNewMessageArrived() )
+    if( Settings::instance().beepOnNewMessageArrived() && !(isVisible() && is_current_chat) )
     {
 #if defined( BEEBEEP_DEBUG )
-      qDebug() << "BEEP";
+      qDebug() << "New message arrived: BEEP";
 #endif
-      QApplication::beep();
+      QSound beep_sound( "beep.wav" );
+      if( QSound::isAvailable() )
+        beep_sound.play();
+      else
+        QApplication::beep();
     }
   }
 
-  if( chat_name == mp_defaultChat->chatName() )
+  if( is_current_chat )
   {
     Chat chat_showed = mp_beeBeep->chat( chat_name, true, true );
     QString txt = "";

@@ -61,6 +61,7 @@ private slots:
   void toggleMenuBar( bool );
   void saveChat();
   void showWritingUser( const User& );
+  void showNextChat();
 
 protected:
   void closeEvent( QCloseEvent* );

@@ -40,6 +40,8 @@ public:
 
   inline bool isValid() const;
   inline bool isSystem() const;
+  inline bool isLocal() const;
+  inline void setLocal( bool );
   inline const QString& username() const;
   inline void setUsername( const QString& );
   inline const QString& nickname() const;
@@ -50,6 +52,7 @@ public:
 private:
   QString m_username;
   QString m_nickname;
+  bool m_local;
   Message m_message;
 
 };
@@ -59,6 +62,8 @@ private:
 
 inline bool ChatMessage::isValid() const { return m_nickname.size() > 0 && m_message.isValid(); }
 inline bool ChatMessage::isSystem() const { return m_message.type() == Message::System; }
+inline bool ChatMessage::isLocal() const { return m_local; }
+inline void ChatMessage::setLocal( bool new_value ) { m_local = new_value; }
 inline const QString& ChatMessage::username() const { return m_username; }
 inline void ChatMessage::setUsername( const QString& new_value ) { m_username = new_value; }
 inline const QString& ChatMessage::nickname() const { return m_nickname; }

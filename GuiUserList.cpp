@@ -137,3 +137,18 @@ void GuiUserList::userDoubleClicked( QListWidgetItem* item )
   updateItem( item );
   emit chatSelected( item->data( UserId ).toInt(), item->data( UserChatName ).toString() );
 }
+
+bool GuiUserList::nextUserWithUnreadMessages()
+{
+  QList<QListWidgetItem*> item_list = findItems( " ", Qt::MatchContains );
+  foreach( QListWidgetItem* item, item_list )
+  {
+    if( item->data( UnreadMessages ).toInt() > 0 )
+    {
+      setCurrentItem( item );
+      userDoubleClicked( item );
+      return true;
+    }
+  }
+  return false;
+}

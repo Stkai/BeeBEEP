@@ -36,9 +36,17 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 {
   bool reset_font_color = false;
+  Qt::KeyboardModifiers mods = e->modifiers();
+
+  if( e->key() == Qt::Key_Tab && (mods & Qt::ControlModifier || mods & Qt::ShiftModifier) ) // switch between chats
+  {
+    e->accept();
+    emit tabPressed();
+    return;
+  }
+
   if( e->key() == Qt::Key_Return )
   {
-    Qt::KeyboardModifiers mods = e->modifiers();
     if( mods & Qt::ControlModifier || mods & Qt::ShiftModifier )
     {
       insertPlainText( "\n" );

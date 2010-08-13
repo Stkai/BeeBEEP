@@ -41,6 +41,7 @@ public:
   void removeUser( const User& );
   void setUnreadMessages( const QString& chat_name, int );
   void updateUsers();
+  bool nextUserWithUnreadMessages();
 
 signals:
   void chatSelected( int, const QString& );

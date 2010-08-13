@@ -39,19 +39,16 @@ Settings::Settings()
 
 QString Settings::getUserName( const QProcessEnvironment& pe )
 {
-  if( debugMode() )
-  {
-    return QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-  }
-  else
-  {
-    QString sTmp = pe.value( "USERNAME" );
-    if( sTmp.isNull() )
-      sTmp = pe.value( "USER" );
-    if( sTmp.isNull() )
-      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-    return sTmp;
-  }
+#if defined( BEEBEEP_DEBUG )
+  return QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
+#else
+  QString sTmp = pe.value( "USERNAME" );
+  if( sTmp.isNull() )
+    sTmp = pe.value( "USER" );
+  if( sTmp.isNull() )
+    sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
+  return sTmp;
+#endif
 }
 
 void Settings::checkSystemEnvinroment()
@@ -116,7 +113,11 @@ void Settings::load( bool check_environment_also )
   m_showMenuBar = sets.value( "ShowMenuBar", false ).toBool();
   m_showToolBar = sets.value( "ShowToolBar", true ).toBool();
   m_mainBarIconSize = sets.value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
+#if defined( BEEBEEP_DEBUG )
+  m_debugMode = sets.value( "DebugMode", true ).toBool();
+#else
   m_debugMode = sets.value( "DebugMode", false ).toBool();
+#endif
   m_language = sets.value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );

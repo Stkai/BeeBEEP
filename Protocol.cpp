@@ -267,7 +267,7 @@ QString Protocol::encrypt( const QString& txt ) const
       encrypted_string.append( QChar( ciphertext[ i ] ) );
   }
 
-  return encrypted_string.replace( "\n", "-NEWLINE-" );
+  return encrypted_string;
 }
 
 QString Protocol::decrypt( const QString& txt_encrypted ) const
@@ -288,10 +288,7 @@ QString Protocol::decrypt( const QString& txt_encrypted ) const
 
   nrounds = rijndaelSetupDecrypt( rk, key, KEYBITS );
 
-  QString txt = txt_encrypted;
-  txt.replace( "-NEWLINE-", "\n" );
-
-  QStringList string_list = SplitString( txt, 16 );
+  QStringList string_list = SplitString( txt_encrypted, 16 );
   unsigned char plaintext[16];
   unsigned char ciphertext[16];
   QString decrypted_string = "";
