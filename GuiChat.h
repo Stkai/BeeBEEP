@@ -51,6 +51,7 @@ signals:
 private slots:
   void sendMessage();
   void checkWriting();
+  void customContextMenu( const QPoint& );
 
 private:
   QString m_chatName;

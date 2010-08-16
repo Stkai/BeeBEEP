@@ -49,10 +49,6 @@ int main( int argc, char *argv[] )
   QApplication app( argc, argv );
   Q_INIT_RESOURCE( beebeep );
 
-  QSplashScreen splash_screen( QPixmap( ":/images/beebeep.png" ) );
-  splash_screen.show();
-  app.processEvents();
-
   /* Load Settings */
   Settings::instance().load( true );
 
@@ -75,8 +71,6 @@ int main( int argc, char *argv[] )
     mw.resize( QSize( 480, 320 ) );
   mw.show();
 #endif
-
-  splash_screen.finish( &mw );
 
   // Starting connection to BeeBEEP Network
   QTimer::singleShot( 500, &mw, SLOT( startBeeBeep() ) );

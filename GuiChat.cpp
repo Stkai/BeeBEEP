@@ -35,11 +35,13 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
   mp_teChat->setFocusPolicy( Qt::NoFocus );
   mp_teChat->setReadOnly( true );
+  mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_lPix->setPixmap( QPixmap( ":/images/chat.png" ) );
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
+  connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
@@ -49,6 +51,13 @@ GuiChat::GuiChat( QWidget *parent )
 #else
   mp_buttonSend->hide();
 #endif
+}
+
+void GuiChat::customContextMenu( const QPoint& p )
+{
+  QMenu custom_context_menu;
+  custom_context_menu.addAction( tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ) );
+  custom_context_menu.exec( mapToGlobal( p ) );
 }
 
 void GuiChat::setChatFont( const QFont& f )
