@@ -43,6 +43,9 @@ public:
   QString broadcastMessage() const;
   QString helloMessage() const;
   inline const Message& writingMessage() const;
+  inline Message systemMessage( const QString& ) const;
+  inline Message chatMessage( const QString& );
+
 
   User createUser( const Message& );
   inline User createLocalUser() const;
@@ -71,6 +74,7 @@ protected:
   Protocol();
   QString messageHeader( Message::Type ) const;
   Message::Type messageType( const QString& ) const;
+  int newId();
 
 private:
   int m_id;
@@ -82,7 +86,9 @@ private:
 // Inline Functions
 
 inline int Protocol::messageMinimumSize() const { return 10; }
-inline User Protocol::createLocalUser() const { return User( 1 ); }
+inline User Protocol::createLocalUser() const { return User( ID_LOCAL_USER ); }
 inline const Message& Protocol::writingMessage() const { return m_writingMessage; }
+inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
+inline Message Protocol::chatMessage( const QString& msg_txt ) { return Message( Message::Chat, newId(), msg_txt ); }
 
 #endif // BEEBEEP_PROTOCOL_H

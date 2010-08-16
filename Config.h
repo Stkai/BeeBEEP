@@ -34,6 +34,17 @@ const int PONG_TIMEOUT = 90 * 1000;
 const int PING_INTERVAL = 9 * 1000;
 const int WRITING_MESSAGE_TIMEOUT = 3 * 1000;
 const int BROADCAST_INTERVAL = 2000;
-const unsigned BROADCAST_PORT = 45000;
+const unsigned BROADCAST_PORT = 36475;
+const unsigned LISTENER_DEFAULT_PORT = 6475;
+
+// Protocol
+#define ID_LOCAL_USER      1
+#define ID_START           100
+#define ID_SYSTEM_MESSAGE  10
+#define ID_BEEP_MESSAGE    11
+#define ID_WRITING_MESSAGE 12
+#define ID_PING_MESSAGE    13
+#define ID_PONG_MESSAGE    14
+#define ID_HELLO_MESSAGE   15
 
 #endif // BEEBEEP_CONFIG_H

@@ -54,12 +54,19 @@ QString BeeBeep::id() const
 
 void BeeBeep::start()
 {
-  if( !mp_listener->listen( QHostAddress::Any ) )
+  if( !mp_listener->listen( QHostAddress::Any, LISTENER_DEFAULT_PORT ) )
   {
-    dispatchSystemMessage( Settings::instance().defaultChatName(),
-                           tr( "Unable to connect to %1 Network. Please check your firewall settings." ).arg( Settings::instance().programName() ) );
-    return;
+    if( !mp_listener->listen( QHostAddress::Any ) )
+    {
+      dispatchSystemMessage( Settings::instance().defaultChatName(),
+                             tr( "Unable to connect to %1 Network. Please check your firewall settings." ).arg( Settings::instance().programName() ) );
+      return;
+    }
   }
+
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Listen on port" << mp_listener->serverPort();
+#endif
   Settings::instance().setListenerPort( mp_listener->serverPort() );
   mp_peerManager->startBroadcasting();
   emit newUser( Settings::instance().localUser() );
@@ -198,8 +205,7 @@ Chat BeeBeep::chat( const QString& chat_name, bool create_if_need, bool read_all
       new_chat.setName( chat_name );
       QString sHtmlMsg = "<img src=':/images/chat.png' alt=' *C* '> ";
       sHtmlMsg += tr( "Chat with %1." ).arg( chat_name );
-      Message m( Message::System, sHtmlMsg );
-      ChatMessage cm( Settings::instance().localUser(), m );
+      ChatMessage cm( Settings::instance().localUser(), Protocol::instance().systemMessage( sHtmlMsg ) );
       new_chat.addMessage( cm );
       m_chats.insert( chat_name, new_chat );
       emit newChat( new_chat );
@@ -227,7 +233,7 @@ void BeeBeep::sendMessage( const QString& chat_name, const QString& msg )
   if( msg.isEmpty() )
     return;
 
-  Message m( Message::Chat, msg );
+  Message m = Protocol::instance().chatMessage( msg );
   m.setData( Settings::instance().chatFontColor() );
   if( chat_name == Settings::instance().defaultChatName() )
   {
@@ -293,7 +299,7 @@ void BeeBeep::dispatchMessage( const User& u, const Message& m )
 void BeeBeep::dispatchSystemMessage( const QString& chat_name, const QString& msg )
 {
   Chat c = chat( Settings::instance().defaultChatName(), false, false );
-  Message m( Message::System, msg );
+  Message m = Protocol::instance().systemMessage( msg );
   ChatMessage cm( Settings::instance().localUser(), m );
   c.addMessage( cm );
   m_chats.insert( c.name(), c );

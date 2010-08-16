@@ -82,7 +82,6 @@ private:
   QMenu *mp_menuSettings;
   QMenu *mp_menuSettingsIcon;
   QMenu *mp_menuEmoticons;
-  QMenu *mp_menuEmoticonsIcon;
 
   QToolBar *mp_barMain;
 

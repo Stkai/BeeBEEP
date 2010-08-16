@@ -33,11 +33,18 @@ const QString DATA_FIELD_SEPARATOR = ",";
 
 
 Protocol::Protocol()
-  : m_id( 10 ), m_writingMessage( Message::Chat, "*" )
+  : m_id( ID_START ), m_writingMessage( Message::Chat, ID_WRITING_MESSAGE, "*" )
 {
   m_writingMessage.addFlag( Message::Private );
   m_writingMessage.addFlag( Message::Status );
   m_writingMessage.addFlag( Message::Writing );
+}
+
+int Protocol::newId()
+{
+  if( m_id > 2147483600 )
+    m_id = ID_START;
+  return ++m_id;
 }
 
 QString Protocol::messageHeader( Message::Type mt ) const
@@ -78,6 +85,7 @@ QString Protocol::fromMessage( const Message& m ) const
     return "";
   QStringList sl;
   sl << messageHeader( m.type() );
+  sl << QString::number( m.id() );
   sl << QString::number( m.text().size() );
   sl << QString::number( m.flags() );
   sl << m.data();
@@ -90,7 +98,7 @@ Message Protocol::toMessage( const QString& message_data ) const
 {
   Message m;
   QStringList sl = message_data.split( PROTOCOL_FIELD_SEPARATOR, QString::KeepEmptyParts );
-  if( sl.size() < 6 )
+  if( sl.size() < 7 )
   {
     qWarning() << "Invalid message fields:" << message_data;
     return m;
@@ -103,6 +111,15 @@ Message Protocol::toMessage( const QString& message_data ) const
   }
   sl.removeFirst();
   bool ok = false;
+  int msg_id = sl.first().toInt( &ok );
+  if( !ok )
+  {
+    qWarning() << "Invalid message id:" << message_data;
+    m.setType( Message::Undefined );
+    return m;
+  }
+  m.setId( msg_id );
+  sl.removeFirst();
   int msg_size = sl.first().toInt( &ok );
   if( !ok )
   {
@@ -147,13 +164,13 @@ Message Protocol::toMessage( const QString& message_data ) const
 
 QString Protocol::pingMessage() const
 {
-  Message m( Message::Ping, "*" );
+  Message m( Message::Ping, ID_PING_MESSAGE, "*" );
   return fromMessage( m );
 }
 
 QString Protocol::pongMessage() const
 {
-  Message m( Message::Pong, "*" );
+  Message m( Message::Pong, ID_PONG_MESSAGE, "*" );
   return fromMessage( m );
 }
 
@@ -162,7 +179,7 @@ QString Protocol::broadcastMessage() const
   int listener_port = Settings::instance().listenerPort();
   if( listener_port <= 0 )
     return "";
-  Message m( Message::Beep, QString::number( listener_port ) );
+  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( listener_port ) );
   return fromMessage( m );
 }
 
@@ -171,7 +188,7 @@ QString Protocol::helloMessage() const
   QStringList data_list;
   data_list << Settings::instance().localUser().name();
   data_list << Settings::instance().localUser().nickname();
-  Message m( Message::Hello, data_list.join( HELLO_FIELD_SEPARATOR ) );
+  Message m( Message::Hello, ID_HELLO_MESSAGE, data_list.join( HELLO_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().hash() );
   return fromMessage( m );
 }
@@ -189,7 +206,7 @@ User Protocol::createUser( const Message& hello_message )
   if( hello_message.data() != Settings::instance().hash( sUserName ) )
     return User();
   /* Create User */
-  User u( ++m_id );
+  User u( newId() );
   u.setName( sUserName.trimmed() );
   u.setNickname( sNickName.trimmed() );
   return u;

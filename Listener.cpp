@@ -26,7 +26,7 @@
 
 
 Listener::Listener( QObject *parent )
-  : QTcpServer(parent)
+  : QTcpServer( parent )
 {
 }
 
