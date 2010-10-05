@@ -361,7 +361,7 @@ void GuiMain::newUser( const User& u )
 {
   if( !u.isValid() )
     return;
-  mp_userList->addUser( u, 0 );
+  mp_userList->setUser( u, 0 );
 }
 
 void GuiMain::removeUser( const User& u )

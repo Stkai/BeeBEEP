@@ -25,12 +25,12 @@
 
 
 User::User()
- : m_id( 0 ), m_name( "" ), m_nickname( "" ), m_hostAddress()
+ : m_id( 0 ), m_name( "" ), m_nickname( "" ), m_hostAddress(), m_status( 0 ), m_statusDescription( "" )
 {
 }
 
 User::User( int new_id )
- : m_id( new_id ), m_name( "Bee" ), m_nickname( "BeeBoh" ), m_hostAddress( "127.0.0.1" )
+ : m_id( new_id ), m_name( "Bee" ), m_nickname( "BeeBoh" ), m_hostAddress( "127.0.0.1" ), m_status( 0 ), m_statusDescription( "" )
 {
 }
 
@@ -47,6 +47,8 @@ User& User::operator=( const User& u )
     m_name = u.m_name;
     m_nickname = u.m_nickname;
     m_hostAddress = u.m_hostAddress;
+    m_status = u.m_status;
+    m_statusDescription = u.m_statusDescription;
   }
   return *this;
 }

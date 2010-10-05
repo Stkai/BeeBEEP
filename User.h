@@ -30,6 +30,7 @@
 class User
 {
 public:
+  enum Status { Offline, Online, Busy, Away, NumStatus };
   User();
   User( const User& );
   User( int );
@@ -45,12 +46,18 @@ public:
   inline const QString& nickname() const;
   inline void setHostAddress( const QHostAddress& );
   inline const QHostAddress& hostAddress() const;
+  inline void setStatus( int );
+  inline int status() const;
+  inline void setStatusDescription( const QString& );
+  inline const QString& statusDescription() const;
 
 private:
   int m_id;
   QString m_name;
   QString m_nickname;
   QHostAddress m_hostAddress;
+  int m_status;
+  QString m_statusDescription;
 
 };
 
@@ -66,5 +73,9 @@ inline void User::setNickname( const QString& new_value ) { m_nickname = new_val
 inline const QString& User::nickname() const { return m_nickname; }
 inline void User::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
 inline const QHostAddress& User::hostAddress() const { return m_hostAddress; }
+inline void User::setStatus( int new_value ) { m_status = new_value; }
+inline int User::status() const { return m_status; }
+inline void User::setStatusDescription( const QString& new_value ) { m_statusDescription = new_value; }
+inline const QString& User::statusDescription() const { return m_statusDescription; }
 
 #endif // BEEBEEP_USER_H

@@ -37,7 +37,7 @@ public:
 
   GuiUserList( QWidget* parent = 0 );
   virtual QSize sizeHint() const;
-  void addUser( const User&, int unread_messages );
+  void setUser( const User&, int unread_messages );
   void removeUser( const User& );
   void setUnreadMessages( const QString& chat_name, int );
   void updateUsers();

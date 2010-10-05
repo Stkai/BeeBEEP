@@ -87,7 +87,7 @@ void GuiUserList::setUnreadMessages( const QString& chat_name, int n )
   }
 }
 
-void GuiUserList::addUser( const User& u, int unread_messages )
+void GuiUserList::setUser( const User& u, int unread_messages )
 {
   QListWidgetItem* item = widgetItem( UserChatName, Settings::instance().chatName( u ) );
   if( !item )

@@ -115,6 +115,7 @@ void Connection::readData()
     m_pingTimer.start();
     m_pongTime.start();
     m_state = ReadyForUse;
+    m_user.setStatus( User::Online );
     emit readyForUse();
     return;
   }
