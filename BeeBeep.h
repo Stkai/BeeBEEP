@@ -50,6 +50,7 @@ public:
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
   void userIsWriting( const User& );
+  void userNewStatus( const User& );
   void newUser( const User& );
   void removeUser( const User& );
   void newChat( const Chat& );

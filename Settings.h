@@ -36,7 +36,7 @@ public:
   QString version() const;
   QString programName() const;
   inline const User& localUser() const;
-  inline void setLocalUserNickname( const QString& );
+  inline void setLocalUser( const User& );
   inline QString defaultChatName() const;
   inline QString chatName( const User& ) const;
   inline void setListenerPort( int );
@@ -155,7 +155,7 @@ private:
 // Inline Functions
 
 inline const User& Settings::localUser() const { return m_localUser; }
-inline void Settings::setLocalUserNickname( const QString& new_value ) { m_localUser.setNickname( new_value ); }
+inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline QString Settings::defaultChatName() const { return QObject::tr( "*All*" ); }
 inline QString Settings::chatName( const User& u ) const { return u == m_localUser ? defaultChatName() : QString( "%1 (%2@%3)" ).arg( u.nickname() ).arg( u.name() ).arg( u.hostAddress().toString() ); }
 inline void Settings::setListenerPort( int new_value ) { m_listenerPort = new_value; }

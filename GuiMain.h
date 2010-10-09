@@ -61,6 +61,7 @@ private slots:
   void toggleMenuBar( bool );
   void saveChat();
   void showWritingUser( const User& );
+  void showNewUserStatus( const User& );
   void showNextChat();
 
 protected:

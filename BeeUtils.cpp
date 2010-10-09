@@ -103,3 +103,19 @@ QString Bee::chatMessagesToText( const Chat& c )
   return s;
 }
 
+QString Bee::userStatusToString( int user_status )
+{
+  switch( user_status )
+  {
+  case User::Offline:
+    return QT_TR_NOOP( "offline" );
+  case User::Online:
+    return QT_TR_NOOP( "online" );
+  case User::Busy:
+    return QT_TR_NOOP( "busy" );
+  case User::Away:
+    return QT_TR_NOOP( "away" );
+  default:
+    return "";
+  }
+}

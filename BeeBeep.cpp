@@ -136,20 +136,23 @@ void BeeBeep::readyForUse()
   if( !c || hasConnection( c->peerAddress(), c->peerPort() ) )
     return;
   connect( c, SIGNAL( newMessage( const User&, const Message& ) ), this, SLOT( dispatchMessage( const User&, const Message& ) ) );
+  connect( c, SIGNAL( newStatus( const User& ) ), this, SIGNAL( userNewStatus( const User& ) ) );
+  connect( c, SIGNAL( isWriting( const User& ) ), this, SIGNAL( userIsWriting( const User& ) ) );
   m_peers.insert( c->id(), c );
   emit newUser( c->user() );
   QString sHtmlMsg = "<img src=':/images/green-ball.png' alt=' *O* '> ";
   sHtmlMsg += tr( "%1 has joined." ).arg( Settings::instance().chatName( c->user() ) );
   dispatchSystemMessage( Settings::instance().defaultChatName(), sHtmlMsg );
+  c->sendMessage( Protocol::instance().userStatusToMessage( Settings::instance().localUser() ) );
 }
 
-void BeeBeep::disconnected()
+void BeeBeep::connectionError( QAbstractSocket::SocketError )
 {
   if( Connection* c = qobject_cast<Connection*>( sender() ) )
     removeConnection( c );
 }
 
-void BeeBeep::connectionError( QAbstractSocket::SocketError )
+void BeeBeep::disconnected()
 {
   if( Connection* c = qobject_cast<Connection*>( sender() ) )
     removeConnection( c );
@@ -281,12 +284,6 @@ void BeeBeep::sendWritingMessage( const QString& chat_name )
 
 void BeeBeep::dispatchMessage( const User& u, const Message& m )
 {
-  if( m.hasFlag( Message::Status ) && m.hasFlag( Message::Writing ) )
-  {
-    emit userIsWriting( u );
-    return;
-  }
-
   Chat c = m.hasFlag( Message::Private ) ? chat( Settings::instance().chatName( u ), true, false ) : chat( Settings::instance().defaultChatName(), false, false );
   ChatMessage cm( u, m );
   c.addMessage( cm );

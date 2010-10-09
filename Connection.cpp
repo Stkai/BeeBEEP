@@ -123,10 +123,31 @@ void Connection::readData()
   switch( m.type() )
   {
   case Message::Chat:
+    {
+      if( m.hasFlag( Message::Status ) )
+      {
+        if( m.hasFlag( Message::Writing ) )
+        {
+          emit isWriting( m_user );
+        }
+        else
+        {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "New chat message:" << m.text();
+          qDebug() << "New status message: [" << m.data() << "] " << m.text();
 #endif
-    emit newMessage( m_user, m );
+          if( parseStatus( m ) )
+            emit newStatus( m_user );
+        }
+        return;
+      }
+      else
+      {
+#if defined( BEEBEEP_DEBUG )
+        qDebug() << "New chat message:" << m.text();
+#endif
+        emit newMessage( m_user, m );
+      }
+    }
     break;
 
   case Message::Ping:
@@ -149,6 +170,18 @@ void Connection::readData()
     qWarning() << "Invalid message type (in Connection):" << m.type();
     break;
   }
+}
+
+bool Connection::parseStatus( const Message& m )
+{
+  User u = Protocol::instance().userStatusFromMessage( m_user, m );
+  if( u.isValid() )
+  {
+    m_user = u;
+    return true;
+  }
+  else
+    return false;
 }
 
 void Connection::sendPing()

@@ -54,6 +54,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_beeBeep, SIGNAL( newUser( const User& ) ), this, SLOT( newUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( removeUser( const User& ) ), this, SLOT( removeUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
+  connect( mp_beeBeep, SIGNAL( userNewStatus( const User& ) ), this, SLOT( showNewUserStatus( const User& ) ) );
   connect( mp_defaultChat, SIGNAL( newMessage( const QString&, const QString& ) ), this, SLOT( sendMessage( const QString&, const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( writing( const QString& ) ), mp_beeBeep, SLOT( sendWritingMessage( const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
@@ -101,15 +102,19 @@ void GuiMain::showNextChat()
 void GuiMain::selectNickname()
 {
   bool ok = false;
+  User local_user = Settings::instance().localUser();
   QString nick = QInputDialog::getText( this,
                                         Settings::instance().programName(),
                                         tr( "Please insert your nickname"),
                                         QLineEdit::Normal,
-                                        Settings::instance().localUser().nickname(),
+                                        local_user.nickname(),
                                         &ok );
   if( !ok )
     return;
-  Settings::instance().setLocalUserNickname( nick );
+  if( nick.isNull() || nick.isEmpty() )
+    return;
+  local_user.setNickname( nick );
+  Settings::instance().setLocalUser( local_user );
 }
 
 void GuiMain::startStopBeeBeep()
@@ -572,3 +577,10 @@ void GuiMain::showWritingUser( const User& u )
   statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
 }
 
+void GuiMain::showNewUserStatus( const User& u )
+{
+  QString msg = tr( "%1 is %2%3" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
+                                  .arg( Bee::userStatusToString( u.status() ) )
+                                  .arg( u.statusDescription().isEmpty() ? "" : QString( ":%1").arg( u.statusDescription() ) );
+  statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
+}

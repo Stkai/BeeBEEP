@@ -45,6 +45,8 @@ public:
 signals:
   void readyForUse();
   void newMessage( const User&, const Message& );
+  void newStatus( const User& );
+  void isWriting( const User& );
 
 private slots:
   void readData();
@@ -55,6 +57,7 @@ private slots:
 private:
   void processData();
   bool writeMessageData( const QString& );
+  bool parseStatus( const Message& );
 
   User m_user;
   QTimer m_pingTimer;

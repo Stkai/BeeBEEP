@@ -193,6 +193,30 @@ QString Protocol::helloMessage() const
   return fromMessage( m );
 }
 
+Message Protocol::userStatusToMessage( const User& u )
+{
+  Message m = chatMessage( u.statusDescription() );
+  m.addFlag( Message::Status );
+  m.setData( QString::number( u.status() ) );
+  return m;
+}
+
+User Protocol::userStatusFromMessage( User u, const Message& m )
+{
+  if( m.hasFlag( Message::Status ) )
+  {
+    int user_status = m.data().toInt();
+    QString user_status_description = m.text();
+    if( u.status() != user_status || u.statusDescription() != user_status_description )
+    {
+      u.setStatus( user_status );
+      u.setStatusDescription( user_status_description );
+      return u;
+    }
+  }
+  return User();
+}
+
 User Protocol::createUser( const Message& hello_message )
 {
   /* Read User Field Data */
