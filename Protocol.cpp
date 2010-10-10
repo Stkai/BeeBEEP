@@ -33,10 +33,9 @@ const QString DATA_FIELD_SEPARATOR = ",";
 
 
 Protocol::Protocol()
-  : m_id( ID_START ), m_writingMessage( Message::Chat, ID_WRITING_MESSAGE, "*" )
+  : m_id( ID_START ), m_writingMessage( Message::User, ID_WRITING_MESSAGE, "*" )
 {
   m_writingMessage.addFlag( Message::Private );
-  m_writingMessage.addFlag( Message::Status );
   m_writingMessage.addFlag( Message::Writing );
 }
 
@@ -57,6 +56,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Chat:   return "BEE-CHAT";
   case Message::Hello:  return "BEE-CIAO";
   case Message::System: return "BEE-SYST";
+  case Message::User:   return "BEE-USER";
   default:              return "BEE-BOOH";
   }
 }
@@ -69,6 +69,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Ping;
   else if( msg_type == "BEE-PONG" )
     return Message::Pong;
+  else if( msg_type == "BEE-USER")
+    return Message::User;
   else if( msg_type == "BEE-CHAT")
     return Message::Chat;
   else if( msg_type == "BEE-CIAO")
@@ -195,7 +197,7 @@ QString Protocol::helloMessage() const
 
 Message Protocol::userStatusToMessage( const User& u )
 {
-  Message m = chatMessage( u.statusDescription() );
+  Message m( Message::User, ID_STATUS_MESSAGE, u.statusDescription() );
   m.addFlag( Message::Status );
   m.setData( QString::number( u.status() ) );
   return m;
@@ -203,7 +205,7 @@ Message Protocol::userStatusToMessage( const User& u )
 
 User Protocol::userStatusFromMessage( User u, const Message& m )
 {
-  if( m.hasFlag( Message::Status ) )
+  if( m.type() == Message::User && m.hasFlag( Message::Status ) )
   {
     int user_status = m.data().toInt();
     QString user_status_description = m.text();

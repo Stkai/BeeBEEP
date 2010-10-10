@@ -46,5 +46,6 @@ const unsigned LISTENER_DEFAULT_PORT = 6475;
 #define ID_PING_MESSAGE    13
 #define ID_PONG_MESSAGE    14
 #define ID_HELLO_MESSAGE   15
+#define ID_STATUS_MESSAGE  16
 
 #endif // BEEBEEP_CONFIG_H

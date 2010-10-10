@@ -57,7 +57,7 @@ private slots:
 private:
   void processData();
   bool writeMessageData( const QString& );
-  bool parseStatus( const Message& );
+  void parseUserMessage( const Message& );
 
   User m_user;
   QTimer m_pingTimer;

@@ -56,7 +56,7 @@ void Connection::readData()
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "New data available";
 #endif
-  QString line;
+  QString line = "";
   if( Settings::instance().useEncryption() )
   {
     QTextStream ts( this );
@@ -122,34 +122,15 @@ void Connection::readData()
 
   switch( m.type() )
   {
-  case Message::Chat:
-    {
-      if( m.hasFlag( Message::Status ) )
-      {
-        if( m.hasFlag( Message::Writing ) )
-        {
-          emit isWriting( m_user );
-        }
-        else
-        {
-#if defined( BEEBEEP_DEBUG )
-          qDebug() << "New status message: [" << m.data() << "] " << m.text();
-#endif
-          if( parseStatus( m ) )
-            emit newStatus( m_user );
-        }
-        return;
-      }
-      else
-      {
-#if defined( BEEBEEP_DEBUG )
-        qDebug() << "New chat message:" << m.text();
-#endif
-        emit newMessage( m_user, m );
-      }
-    }
+  case Message::User:
+    parseUserMessage( m );
     break;
-
+  case Message::Chat:
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "New chat message:" << m.text();
+#endif
+    emit newMessage( m_user, m );
+    break;
   case Message::Ping:
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Ping arrived";
@@ -172,16 +153,27 @@ void Connection::readData()
   }
 }
 
-bool Connection::parseStatus( const Message& m )
+void Connection::parseUserMessage( const Message& m )
 {
-  User u = Protocol::instance().userStatusFromMessage( m_user, m );
-  if( u.isValid() )
+  if( m.hasFlag( Message::Writing ) )
   {
-    m_user = u;
-    return true;
+    emit isWriting( m_user );
+    return;
+  }
+  else if( m.hasFlag( Message::Status ) )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "New status message: [" << m.data() << "] " << m.text();
+#endif
+    User u = Protocol::instance().userStatusFromMessage( m_user, m );
+    if( u.isValid() )
+    {
+      m_user = u;
+      emit newStatus( m_user );
+    }
   }
   else
-    return false;
+    qWarning() << "Invalid flag found in user message (in Connection)";
 }
 
 void Connection::sendPing()
