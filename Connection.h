@@ -57,6 +57,8 @@ private slots:
 private:
   void processData();
   bool writeMessageData( const QString& );
+  void parseMessage( const Message& );
+  void parseHelloMessage( const Message& );
   void parseUserMessage( const Message& );
 
   User m_user;

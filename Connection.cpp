@@ -46,7 +46,7 @@ bool Connection::sendMessage( const Message& m )
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Sending:" << message_data;
 #endif
-  return writeMessageData( message_data );
+  writeMessageData( message_data );
 }
 
 void Connection::readData()
@@ -92,34 +92,13 @@ void Connection::readData()
   }
 
   if( m_state == WaitingForHello )
-  {
-    if( m.type() != Message::Hello )
-    {
-      qWarning() << "Hello message not arrived from connection:" << peerAddress().toString();
-      abort();
-      return;
-    }
+    parseHelloMessage( m );
+  else
+    parseMessage( m );
+}
 
-    m_user = Protocol::instance().createUser( m );
-    if( !m_user.isValid() )
-    {
-      qDebug() << "Invalid user from connection:" << peerAddress().toString();
-      abort();
-      return;
-    }
-    qDebug() << "New user:" << m_user.nickname();
-    m_user.setHostAddress( peerAddress() );
-    if( !m_isHelloMessageSent )
-      sendHello();
-
-    m_pingTimer.start();
-    m_pongTime.start();
-    m_state = ReadyForUse;
-    m_user.setStatus( User::Online );
-    emit readyForUse();
-    return;
-  }
-
+void Connection::parseMessage( const Message& m )
+{
   switch( m.type() )
   {
   case Message::User:
@@ -151,6 +130,35 @@ void Connection::readData()
     qWarning() << "Invalid message type (in Connection):" << m.type();
     break;
   }
+}
+
+void Connection::parseHelloMessage( const Message& m )
+{
+  if( m.type() != Message::Hello )
+  {
+    qWarning() << "Hello message not arrived from connection:" << peerAddress().toString();
+    abort();
+    return;
+  }
+
+  m_user = Protocol::instance().createUser( m );
+  if( !m_user.isValid() )
+  {
+    qDebug() << "Invalid user from connection:" << peerAddress().toString();
+    abort();
+    return;
+  }
+
+  qDebug() << "New user:" << m_user.nickname();
+  m_user.setHostAddress( peerAddress() );
+  if( !m_isHelloMessageSent )
+    sendHello();
+
+  m_pingTimer.start();
+  m_pongTime.start();
+  m_state = ReadyForUse;
+  m_user.setStatus( User::Online );
+  emit readyForUse();
 }
 
 void Connection::parseUserMessage( const Message& m )
@@ -203,7 +211,23 @@ bool Connection::writeMessageData( const QString& message_data )
   {
     QTextStream ts( this );
     ts.setCodec( "UTF-16");
+
+#if defined( BEEBEEP_DEBUG )
+    int num_spaces = 0;
+    QString encrypted_data = Protocol::instance().encrypt( message_data, &num_spaces );
+    QString tmp = Protocol::instance().decrypt( encrypted_data );
+    tmp.chop( num_spaces );
+    if( tmp != message_data )
+    {
+      qWarning() << "Error occurred in writeMessageData - encrypt";
+      qWarning() << "Data:" << message_data;
+      qWarning() << "Encrypted:" << encrypted_data;
+      qWarning() << "Decrypted:" << tmp;
+      return false;
+    }
+#else
     QString encrypted_data = Protocol::instance().encrypt( message_data );
+#endif
     encrypted_data.replace( "\n", "-NEWLINE-" );
     ts << encrypted_data;
     ts << "\n";

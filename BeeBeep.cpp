@@ -256,7 +256,7 @@ void BeeBeep::sendMessage( const QString& chat_name, const QString& msg )
     }
     else
     {
-      dispatchSystemMessage( chat_name, tr( "Unable to send the message. That user is not online." ) );
+      dispatchSystemMessage( chat_name, tr( "Unable to send the message." ) );
       return;
     }
   }

@@ -276,7 +276,7 @@ namespace
 
 #define KEYBITS 256
 
-QString Protocol::encrypt( const QString& txt ) const
+QString Protocol::encrypt( const QString& txt, int* num_chars_used_to_fill ) const
 {
   unsigned long rk[RKLENGTH(KEYBITS)];
   unsigned char key[KEYLENGTH(KEYBITS)];
@@ -294,7 +294,7 @@ QString Protocol::encrypt( const QString& txt ) const
 
   nrounds = rijndaelSetupEncrypt( rk, key, KEYBITS );
 
-  QStringList string_list = SplitString( txt, 16 );
+  QStringList string_list = SplitString( txt, 16, num_chars_used_to_fill );
   unsigned char plaintext[16];
   unsigned char ciphertext[16];
   QString encrypted_string = "";
