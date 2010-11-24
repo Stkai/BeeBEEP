@@ -46,7 +46,7 @@ bool Connection::sendMessage( const Message& m )
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Sending:" << message_data;
 #endif
-  writeMessageData( message_data );
+  return writeMessageData( message_data );
 }
 
 void Connection::readData()

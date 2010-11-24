@@ -63,6 +63,7 @@ private slots:
   void showWritingUser( const User& );
   void showNewUserStatus( const User& );
   void showNextChat();
+  void statusSelected();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -83,6 +84,7 @@ private:
   QMenu *mp_menuSettings;
   QMenu *mp_menuSettingsIcon;
   QMenu *mp_menuEmoticons;
+  QMenu *mp_menuStatus;
 
   QToolBar *mp_barMain;
 

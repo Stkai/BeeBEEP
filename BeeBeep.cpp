@@ -321,3 +321,14 @@ void BeeBeep::searchUsers( const QHostAddress& host_address )
   dispatchSystemMessage( Settings::instance().defaultChatName(), sHtmlMsg );
 }
 
+void BeeBeep::setUserStatus( int new_status )
+{
+  if( Settings::instance().localUser().status() == new_status )
+    return;
+
+  User u = Settings::instance().localUser();
+  u.setStatus( new_status );
+  Settings::instance().setLocalUser( u );
+  emit( userNewStatus( u ) );
+}
+

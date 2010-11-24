@@ -311,6 +311,18 @@ void GuiMain::createMenus()
     ++it;
   }
 
+  /* Status Menu */
+  mp_menuStatus = new QMenu( tr( "Status" ), this );
+  mp_menuStatus->setStatusTip( tr( "Select your status" ) );
+  mp_menuStatus->setIcon( QIcon( ":/images/status.png" ) );
+  for( int i = User::Online; i < User::NumStatus; i++ )
+  {
+    act = mp_menuStatus->addAction( QIcon(), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
+    act->setData( i );
+    act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
+    act->setIconVisibleInMenu( true );
+  }
+
   /* Help Menu */
   menu = menuBar()->addMenu( "&?" );
   menu->addAction( mp_actAbout );
@@ -324,6 +336,7 @@ void GuiMain::createToolBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actNickname );
   mp_barMain->addAction( mp_actSearch );
+  mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actSaveChat );
   mp_barMain->addSeparator();
@@ -579,8 +592,21 @@ void GuiMain::showWritingUser( const User& u )
 
 void GuiMain::showNewUserStatus( const User& u )
 {
-  QString msg = tr( "%1 is %2%3" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
-                                  .arg( Bee::userStatusToString( u.status() ) )
-                                  .arg( u.statusDescription().isEmpty() ? "" : QString( ":%1").arg( u.statusDescription() ) );
+  QString msg;
+  if( Settings::instance().localUser() == u )
+    msg = tr( "You are" );
+  else
+    msg = (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + " is";
+
+   msg += QString( " %2%3" ).arg( Bee::userStatusToString( u.status() ) )
+                            .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
   statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
+}
+
+void GuiMain::statusSelected()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+  mp_beeBeep->setUserStatus( act->data().toInt() );
 }

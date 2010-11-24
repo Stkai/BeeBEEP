@@ -60,6 +60,7 @@ public slots:
   void stop();
   void sendMessage( const QString&, const QString& );
   void sendWritingMessage( const QString& );
+  void setUserStatus( int );
 
 private slots:
   void newConnection( Connection* );

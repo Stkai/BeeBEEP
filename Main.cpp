@@ -68,7 +68,7 @@ int main( int argc, char *argv[] )
   if( !ba.isEmpty() )
     mw.restoreGeometry( Settings::instance().guiGeometry() );
   else
-    mw.resize( QSize( 480, 320 ) );
+    mw.resize( QSize( 600, 340 ) );
   mw.show();
 #endif
 
