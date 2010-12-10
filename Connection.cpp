@@ -205,6 +205,7 @@ void Connection::sendHello()
     m_isHelloMessageSent = true;
 }
 
+
 bool Connection::writeMessageData( const QString& message_data )
 {
   if( Settings::instance().useEncryption() )
