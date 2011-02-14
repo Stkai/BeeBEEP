@@ -26,6 +26,7 @@
 
 #include <QListWidget>
 #include "User.h"
+#include "BeeUtils.h"
 
 
 class GuiUserList : public QListWidget
@@ -33,7 +34,7 @@ class GuiUserList : public QListWidget
   Q_OBJECT
 
 public:
-  enum UserDataType { UserId = Qt::UserRole, Username, UserNickname, UserHostAddress, UserChatName, UserOnline, UnreadMessages };
+  enum UserDataType { UserId = Qt::UserRole, Username, UserNickname, UserHostAddress, UserChatName, UnreadMessages, UserStatus, UserStatusDescription };
 
   GuiUserList( QWidget* parent = 0 );
   virtual QSize sizeHint() const;
@@ -52,7 +53,7 @@ protected slots:
   void showUserInfo( QListWidgetItem* );
 
 private:
-  inline QIcon userIcon( int unread_messages, bool is_online ) const;
+  inline QIcon userIcon( int unread_messages, int user_status ) const;
   void updateItem( QListWidgetItem* );
   QListWidgetItem* widgetItem( UserDataType, const QString& );
 
@@ -61,7 +62,7 @@ private:
 
 // Inline Functions
 
-inline QIcon GuiUserList::userIcon( int unread_messages, bool is_online ) const
-{ return unread_messages > 0 ?  QIcon( ":/images/chat.png" ) : ( is_online ? QIcon( ":/images/user-online.png" ) : QIcon( ":/images/user-offline.png" ) ); }
+inline QIcon GuiUserList::userIcon( int unread_messages, int user_status ) const
+{ return unread_messages > 0 ?  QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_status ); }
 
 #endif // BEEBEEP_GUIUSERLIST_H

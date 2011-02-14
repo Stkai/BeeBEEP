@@ -171,11 +171,14 @@ void Connection::parseUserMessage( const Message& m )
   else if( m.hasFlag( Message::Status ) )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "New status message: [" << m.data() << "] " << m.text();
+    qDebug() << "New status message: [" << m.data() << "]:" << m.text();
 #endif
     User u = Protocol::instance().userStatusFromMessage( m_user, m );
     if( u.isValid() )
     {
+#if defined( BEEBEEP_DEBUG )
+      qDebug() << "New status for user" << u.nickname() << ": [" << u.status() << "]:" << u.statusDescription();
+#endif
       m_user = u;
       emit newStatus( m_user );
     }

@@ -36,12 +36,17 @@ namespace Bee
   QString formatMessage( const ChatMessage& );
   QString formatSystemMessage( const ChatMessage& );
   QString userStatusToString( int );
+  QIcon userStatusIcon( int );
+  QString userStatusIconFileName( int );
 
   namespace Private
   {
     QString formatHtmlText( QString );
   }
-
 }
+
+
+// Inline Functions
+inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
 
 #endif // BEEBEEP_GUIUTILS_H

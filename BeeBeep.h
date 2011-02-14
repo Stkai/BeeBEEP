@@ -60,7 +60,8 @@ public slots:
   void stop();
   void sendMessage( const QString&, const QString& );
   void sendWritingMessage( const QString& );
-  void setUserStatus( int );
+  void sendUserStatus();
+  void setLocalUserStatus( int );
 
 private slots:
   void newConnection( Connection* );
@@ -70,6 +71,7 @@ private slots:
   void readyForUse();
   void dispatchMessage( const User&, const Message& );
   void dispatchSystemMessage( const QString& chat_name, const QString& sysmess );
+  void setUserStatus( const User& );
 
 protected:
   bool hasConnection( const QHostAddress& sender_ip, int sender_port = -1 ) const;

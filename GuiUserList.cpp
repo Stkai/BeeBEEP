@@ -41,22 +41,30 @@ void GuiUserList::updateItem( QListWidgetItem* item )
 {
   bool ok = false;
   int unread_messages = item->data( UnreadMessages ).toInt( &ok );
-  bool user_online = item->data( UserOnline ).toBool();
   if( !ok )
     unread_messages = 0;
+  int user_status = item->data( UserStatus ).toInt( &ok );
+  if( !user_status )
+    unread_messages = 0;
+
   bool is_local_user = item->data( UserId ).toInt() == Settings::instance().localUser().id();
+
   QString s = is_local_user ? item->data( UserChatName ).toString() :
               ( Settings::instance().showUserNickname() ?  item->data( UserNickname ).toString() : item->data( Username ).toString() );
-  if( !is_local_user && (!user_online || Settings::instance().showUserIp() ) )
+
+  if( !is_local_user && ( user_status == 0 || Settings::instance().showUserIp() ) )
     s += QString( "<%1@%2>" ).arg( item->data( Username ).toString() ).arg( item->data( UserHostAddress ).toString() );
+
   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
+  if( !is_local_user && user_status >= 2 )
+    s.append( QString( " [%1] " ).arg( Bee::userStatusToString( user_status ) ) );
   s += " ";
   item->setText( s );
   if( is_local_user )
-    item->setIcon( userIcon( 1, user_online ) );
+    item->setIcon( userIcon( 1, user_status ) );
   else
-    item->setIcon( userIcon( unread_messages, user_online ) );
+    item->setIcon( userIcon( unread_messages, user_status ) );
 }
 
 void GuiUserList::updateUsers()
@@ -99,8 +107,10 @@ void GuiUserList::setUser( const User& u, int unread_messages )
     item->setData( UserChatName, Settings::instance().chatName( u ) );
   }
   item->setData( UserId, u.id() );
-  item->setData( UserOnline, true );
-  item->setData( UnreadMessages, unread_messages );
+  item->setData( UserStatus, u.status() );
+  item->setData( UserStatusDescription, u.statusDescription() );
+  if( unread_messages >= 0 )
+    item->setData( UnreadMessages, unread_messages );
   updateItem( item );
   sortItems();
 }
@@ -110,7 +120,7 @@ void GuiUserList::removeUser( const User& u )
   QListWidgetItem* item = widgetItem( UserChatName, Settings::instance().chatName( u ) );
   if( item )
   {
-    item->setData( UserOnline, false );
+    item->setData( UserStatus, User::Offline );
     updateItem( item );
   }
 }

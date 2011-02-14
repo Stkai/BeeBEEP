@@ -34,6 +34,7 @@ const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
 Settings::Settings()
 {
   m_localUser = Protocol::instance().createLocalUser();
+  m_localUser.setStatus( User::Online );
   setPassword( defaultPassword() );
 }
 

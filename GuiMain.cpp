@@ -314,10 +314,11 @@ void GuiMain::createMenus()
   /* Status Menu */
   mp_menuStatus = new QMenu( tr( "Status" ), this );
   mp_menuStatus->setStatusTip( tr( "Select your status" ) );
-  mp_menuStatus->setIcon( QIcon( ":/images/status.png" ) );
+  mp_menuStatus->setIcon( QIcon( ":/images/user-status.png" ) );
   for( int i = User::Online; i < User::NumStatus; i++ )
   {
     act = mp_menuStatus->addAction( QIcon(), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
+    act->setIcon( Bee::userStatusIcon( i ) );
     act->setData( i );
     act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
     act->setIconVisibleInMenu( true );
@@ -592,15 +593,7 @@ void GuiMain::showWritingUser( const User& u )
 
 void GuiMain::showNewUserStatus( const User& u )
 {
-  QString msg;
-  if( Settings::instance().localUser() == u )
-    msg = tr( "You are" );
-  else
-    msg = (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + " is";
-
-   msg += QString( " %2%3" ).arg( Bee::userStatusToString( u.status() ) )
-                            .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
-  statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
+  mp_userList->setUser( u, -1 );
 }
 
 void GuiMain::statusSelected()
@@ -608,5 +601,5 @@ void GuiMain::statusSelected()
   QAction* act = qobject_cast<QAction*>( sender() );
   if( !act )
     return;
-  mp_beeBeep->setUserStatus( act->data().toInt() );
+  mp_beeBeep->setLocalUserStatus( act->data().toInt() );
 }

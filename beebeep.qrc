@@ -40,5 +40,8 @@
         <file>images/user-online.png</file>
         <file>images/user-offline.png</file>
         <file>images/profile.png</file>
+        <file>images/user-busy.png</file>
+        <file>images/user-away.png</file>
+        <file>images/user-status.png</file>
     </qresource>
 </RCC>

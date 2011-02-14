@@ -136,7 +136,7 @@ void BeeBeep::readyForUse()
   if( !c || hasConnection( c->peerAddress(), c->peerPort() ) )
     return;
   connect( c, SIGNAL( newMessage( const User&, const Message& ) ), this, SLOT( dispatchMessage( const User&, const Message& ) ) );
-  connect( c, SIGNAL( newStatus( const User& ) ), this, SIGNAL( userNewStatus( const User& ) ) );
+  connect( c, SIGNAL( newStatus( const User& ) ), this, SLOT( setUserStatus( const User& ) ) );
   connect( c, SIGNAL( isWriting( const User& ) ), this, SIGNAL( userIsWriting( const User& ) ) );
   m_peers.insert( c->id(), c );
   emit newUser( c->user() );
@@ -282,6 +282,16 @@ void BeeBeep::sendWritingMessage( const QString& chat_name )
   }
 }
 
+void BeeBeep::sendUserStatus()
+{
+  Message m = Protocol::instance().userStatusToMessage( Settings::instance().localUser() );
+  QList<Connection*> connections = m_peers.values();
+  foreach( Connection *c, connections )
+  {
+    c->sendMessage( m );
+  }
+}
+
 void BeeBeep::dispatchMessage( const User& u, const Message& m )
 {
   Chat c = m.hasFlag( Message::Private ) ? chat( Settings::instance().chatName( u ), true, false ) : chat( Settings::instance().defaultChatName(), false, false );
@@ -321,7 +331,7 @@ void BeeBeep::searchUsers( const QHostAddress& host_address )
   dispatchSystemMessage( Settings::instance().defaultChatName(), sHtmlMsg );
 }
 
-void BeeBeep::setUserStatus( int new_status )
+void BeeBeep::setLocalUserStatus( int new_status )
 {
   if( Settings::instance().localUser().status() == new_status )
     return;
@@ -329,6 +339,21 @@ void BeeBeep::setUserStatus( int new_status )
   User u = Settings::instance().localUser();
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
-  emit( userNewStatus( u ) );
+  sendUserStatus();
+
 }
 
+void BeeBeep::setUserStatus( const User& u )
+{
+  QString sHtmlMsg = QString( "<img src='%1' width=16 height=16 alt=' *+* '> " ).arg( Bee::userStatusIconFileName( u.status() ) );
+  if( Settings::instance().localUser() == u )
+    sHtmlMsg += tr( "You are" );
+  else
+    sHtmlMsg += (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + " is";
+
+   sHtmlMsg += QString( " %2%3." ).arg( Bee::userStatusToString( u.status() ) )
+                            .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
+
+  dispatchSystemMessage( Settings::instance().chatName( u ), sHtmlMsg );
+  emit( userNewStatus( u ) );
+}
