@@ -41,7 +41,6 @@ public:
   inline int id() const;
 
   bool sendMessage( const Message& );
-  void sendLocalUserStatus();
 
 signals:
   void readyForUse();

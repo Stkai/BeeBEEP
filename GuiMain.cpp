@@ -67,7 +67,7 @@ GuiMain::GuiMain( QWidget *parent )
 
 void GuiMain::refreshTitle()
 {
-  setWindowTitle( QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( mp_beeBeep->id() ) );
+  setWindowTitle( QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName() ).arg( mp_beeBeep->id() ).arg( Bee::userStatusToString( Settings::instance().localUser().status() ) ) );
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )
@@ -602,4 +602,5 @@ void GuiMain::statusSelected()
   if( !act )
     return;
   mp_beeBeep->setLocalUserStatus( act->data().toInt() );
+  refreshTitle();
 }
