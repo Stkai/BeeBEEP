@@ -48,8 +48,8 @@ HEADERS += sym_iap_util.h \
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
-OTHER_FILES += 
+OTHER_FILES +=
 
-debug {
+Debug {
   DEFINES += BEEBEEP_DEBUG
 }
