@@ -143,6 +143,9 @@ void BeeBeep::readyForUse()
   QString sHtmlMsg = "<img src=':/images/green-ball.png' alt=' *O* '> ";
   sHtmlMsg += tr( "%1 has joined." ).arg( Settings::instance().chatName( c->user() ) );
   dispatchSystemMessage( Settings::instance().defaultChatName(), sHtmlMsg );
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "New connection ready: sending my status message";
+#endif
   c->sendMessage( Protocol::instance().userStatusToMessage( Settings::instance().localUser() ) );
 }
 
@@ -340,7 +343,7 @@ void BeeBeep::setLocalUserStatus( int new_status )
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
   sendUserStatus();
-
+  setUserStatus( u );
 }
 
 void BeeBeep::setUserStatus( const User& u )

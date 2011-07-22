@@ -29,7 +29,7 @@
     <message>
         <location filename="../BeeBeep.cpp" line="62"/>
         <source>Unable to connect to %1 Network. Please check your firewall settings.</source>
-        <translation>Connessione alla rete %1 non riuscita. Controlla le impostazioni del tuo firewall.</translation>
+         <translation>Connessione alla rete %1 non riuscita. Controlla le impostazioni del tuo firewall.</translation>
     </message>
     <message>
         <source>%1 You are connected.</source>
@@ -70,12 +70,16 @@
         <translation>Impossibile spedire il messaggio: la connessione non è attiva.</translation>
     </message>
     <message>
-        <location filename="../BeeBeep.cpp" line="259"/>
-        <source>Unable to send the message. That user is not online.</source>
-        <translation>Impossibile inviare il messaggio. Il destinatario non è connesso.</translation>
+        <location filename="../BeeBeep.cpp" line="350"/>
+        <source>You are</source>
+        <translation>Sei</translation>
     </message>
     <message>
-        <location filename="../BeeBeep.cpp" line="320"/>
+        <source>Unable to send the message. That user is not online.</source>
+        <translation type="obsolete">Impossibile inviare il messaggio. Il destinatario non è connesso.</translation>
+    </message>
+    <message>
+        <location filename="../BeeBeep.cpp" line="330"/>
         <source>Sending Beep to %1...</source>
         <translation>Invio un Beep a %1...</translation>
     </message>
@@ -88,8 +92,9 @@
         <translation type="obsolete">%1 La richiesta di invio del file %2 è stata inviata.</translation>
     </message>
     <message>
+        <location filename="../BeeBeep.cpp" line="259"/>
         <source>Unable to send the message.</source>
-        <translation type="obsolete">Impossibile inviare il messaggio. Il destinatario non è connesso.</translation>
+        <translation>Impossibile inviare il messaggio. Il destinatario non è connesso.</translation>
     </message>
     <message>
         <source>Unable to send the message</source>
@@ -449,11 +454,6 @@ p, li { white-space: pre-wrap; }
         <translation>Se abilitata verrà mostrato il nickname degli utenti collegati</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="582"/>
-        <source>%1 is %2%3</source>
-        <translation>%1 è %2%3</translation>
-    </message>
-    <message>
         <source>&amp;Emoticons</source>
         <translation type="obsolete">&amp;Faccine</translation>
     </message>
@@ -468,42 +468,57 @@ p, li { white-space: pre-wrap; }
         <translation>Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="317"/>
+        <location filename="../GuiMain.cpp" line="315"/>
+        <source>Status</source>
+        <translation>Stato</translation>
+    </message>
+    <message>
+        <location filename="../GuiMain.cpp" line="316"/>
+        <source>Select your status</source>
+        <translation>Seleziona il tuo stato</translation>
+    </message>
+    <message>
+        <location filename="../GuiMain.cpp" line="323"/>
+        <source>Your status will be %1</source>
+        <translation>Il tuo stato sarà %1</translation>
+    </message>
+    <message>
+        <location filename="../GuiMain.cpp" line="330"/>
         <source>About &amp;Qt...</source>
         <translation>Informazioni su &amp;Qt...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="318"/>
+        <location filename="../GuiMain.cpp" line="331"/>
         <source>Show the informations about Qt library</source>
         <translation>Mostra le informazioni sulle librerie Qt</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="341"/>
+        <location filename="../GuiMain.cpp" line="355"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="346"/>
+        <location filename="../GuiMain.cpp" line="360"/>
         <source>Users</source>
         <translation>Utenti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="352"/>
+        <location filename="../GuiMain.cpp" line="366"/>
         <source>Show online users and active chats</source>
         <translation>Mostra gli utenti connessi</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="353"/>
+        <location filename="../GuiMain.cpp" line="367"/>
         <source>Show the list of the connected users and the active chats</source>
         <translation>Mostra la lista degli utenti connessi e le conversazioni attive</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="538"/>
+        <location filename="../GuiMain.cpp" line="552"/>
         <source>&lt;html&gt;&lt;body&gt;&lt;b&gt;Chat with &apos;%1&apos; saved in date %2.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <translation>&lt;html&gt;&lt;body&gt;&lt;b&gt;Conversazione con &apos;%1&apos; salvata in data %2.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="576"/>
+        <location filename="../GuiMain.cpp" line="590"/>
         <source>%1 is writing</source>
         <translation>%1 sta scrivendo</translation>
     </message>
@@ -512,7 +527,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">%1 - Cerca utenti da contattare</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="556"/>
+        <location filename="../GuiMain.cpp" line="570"/>
         <source>Please insert the Host Address or Broadcast Address to contact
 (ex. 10.184.15.186 or 10.184.15.255)</source>
         <translation>Inserisci l&apos;indirizzo IP o l&apos;indirizzo di Broadcast da contattare
@@ -531,7 +546,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Inserisci l&apos;indirizzo IP del computer da contattare (ad es. 10.184.15.186)</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="567"/>
+        <location filename="../GuiMain.cpp" line="581"/>
         <source>You have selected an invalid host address.</source>
         <translation>Hai selezionato un indirizzo IP non valido.</translation>
     </message>
@@ -540,18 +555,18 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Impossibile spedire il messaggio: la connessione non è attiva!</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="522"/>
+        <location filename="../GuiMain.cpp" line="536"/>
         <source>Please select a file to save the messages of &apos;Chat with %1&apos;</source>
         <translation>Seleziona un file dove salvare i messaggi della conversazione con %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="534"/>
-        <location filename="../GuiMain.cpp" line="566"/>
+        <location filename="../GuiMain.cpp" line="548"/>
+        <location filename="../GuiMain.cpp" line="580"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="535"/>
+        <location filename="../GuiMain.cpp" line="549"/>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
         <translation>%1: impossibile salvare i messaggi.
@@ -562,12 +577,12 @@ Controlla i permessi sul file selezionato o sulla cartella che lo contiene.</tra
         <translation type="obsolete">&lt;html&gt;&lt;body&gt;&lt;b&gt;Conversazione con &apos;%1&apos; salvata in data %2&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="545"/>
+        <location filename="../GuiMain.cpp" line="559"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="546"/>
+        <location filename="../GuiMain.cpp" line="560"/>
         <source>%1: save completed.</source>
         <translation>%1: salvataggio completato.</translation>
     </message>
@@ -575,12 +590,12 @@ Controlla i permessi sul file selezionato o sulla cartella che lo contiene.</tra
 <context>
     <name>GuiUserList</name>
     <message>
-        <location filename="../GuiUserList.cpp" line="124"/>
+        <location filename="../GuiUserList.cpp" line="134"/>
         <source>Chat with all users connected</source>
         <translation>Parla con tutti gli utenti connessi</translation>
     </message>
     <message>
-        <location filename="../GuiUserList.cpp" line="126"/>
+        <location filename="../GuiUserList.cpp" line="136"/>
         <source>Chat with %1@%2</source>
         <translation>Parla con %1@%2</translation>
     </message>
