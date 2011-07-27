@@ -26,8 +26,10 @@
 #include "sym_iap_util.h"
 #endif
 #include "GuiMain.h"
+#include "Log.h"
 #include "Protocol.h"
 #include "Settings.h"
+
 
 
 bool SetTranslator( QTranslator* translator, QString new_locale )
@@ -51,6 +53,10 @@ int main( int argc, char *argv[] )
 
   /* Load Settings */
   Settings::instance().load( true );
+
+  /* Starting Logs */
+  Log::boot( Settings::instance().logPath() );
+  qInstallMsgHandler( Log::MessageHandler );
 
   /* Apply system language */
   QTranslator translator;
@@ -82,7 +88,7 @@ int main( int argc, char *argv[] )
   Protocol::close();
   Settings::instance().save();
   Settings::close();
-
+  Log::close();
   /* Exit */
   return iRet;
 }

@@ -108,13 +108,13 @@ QString Bee::userStatusToString( int user_status )
   switch( user_status )
   {
   case User::Offline:
-    return QT_TR_NOOP( "offline" );
+    return QT_TRANSLATE_NOOP( "Bee", "offline" );
   case User::Online:
-    return QT_TR_NOOP( "online" );
+    return QT_TRANSLATE_NOOP( "Bee", "online" );
   case User::Busy:
-    return QT_TR_NOOP( "busy" );
+    return QT_TRANSLATE_NOOP( "Bee", "busy" );
   case User::Away:
-    return QT_TR_NOOP( "away" );
+    return QT_TRANSLATE_NOOP( "Bee", "away" );
   default:
     return "";
   }

@@ -207,10 +207,16 @@ User Protocol::userStatusFromMessage( User u, const Message& m )
 {
   if( m.type() == Message::User && m.hasFlag( Message::Status ) )
   {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Checking status for user" << u.name();
+#endif
     int user_status = m.data().toInt();
     QString user_status_description = m.text();
     if( u.status() != user_status || u.statusDescription() != user_status_description )
     {
+#if defined( BEEBEEP_DEBUG )
+      qDebug() << "Status for user" << u.name() << " changed";
+#endif
       u.setStatus( user_status );
       u.setStatusDescription( user_status_description );
       return u;

@@ -39,14 +39,38 @@ Connection::Connection( QObject *parent )
 bool Connection::sendMessage( const Message& m )
 {
   if( !m.isValid() )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Invalid message";
+#endif
     return false;
+  }
   QString message_data = Protocol::instance().fromMessage( m );
   if( message_data.isEmpty() )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Empty message data";
+#endif
     return false;
+  }
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Sending:" << message_data;
 #endif
-  return writeMessageData( message_data );
+
+  if( writeMessageData( message_data ) )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Data sent";
+#endif
+    return true;
+  }
+  else
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Unable to send data";
+#endif
+    return false;
+  }
 }
 
 void Connection::readData()
@@ -99,9 +123,15 @@ void Connection::readData()
 
 void Connection::parseMessage( const Message& m )
 {
+#if defined( BEEBEEP_DEBUG )
+   qDebug() << "Parsing message";
+#endif
   switch( m.type() )
   {
   case Message::User:
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "New status message for" << m_user.name();
+#endif
     parseUserMessage( m );
     break;
   case Message::Chat:
@@ -144,19 +174,23 @@ void Connection::parseHelloMessage( const Message& m )
   m_user = Protocol::instance().createUser( m );
   if( !m_user.isValid() )
   {
-    qDebug() << "Invalid user from connection:" << peerAddress().toString();
+    qWarning() << "Invalid user from connection:" << peerAddress().toString();
     abort();
     return;
   }
 
-  qDebug() << "New user:" << m_user.nickname();
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "New user:" << m_user.name();
+#endif
+
   m_user.setHostAddress( peerAddress() );
+  m_state = ReadyForUse;
+
   if( !m_isHelloMessageSent )
     sendHello();
 
   m_pingTimer.start();
   m_pongTime.start();
-  m_state = ReadyForUse;
   m_user.setStatus( User::Online );
   emit readyForUse();
 }
@@ -165,19 +199,22 @@ void Connection::parseUserMessage( const Message& m )
 {
   if( m.hasFlag( Message::Writing ) )
   {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "User" << m_user.name() << " is writing";
+#endif
     emit isWriting( m_user );
     return;
   }
   else if( m.hasFlag( Message::Status ) )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "New status message: [" << m.data() << "]:" << m.text();
+    qDebug() << "New status message from user" << m_user.id() << ": [" << m.data() << "]:" << m.text();
 #endif
     User u = Protocol::instance().userStatusFromMessage( m_user, m );
     if( u.isValid() )
     {
 #if defined( BEEBEEP_DEBUG )
-      qDebug() << "New status for user" << u.nickname() << ": [" << u.status() << "]:" << u.statusDescription();
+      qDebug() << "Set status for user" << u.name() << ": [" << u.status() << "]:" << u.statusDescription();
 #endif
       m_user = u;
       emit newStatus( m_user );
@@ -204,13 +241,33 @@ void Connection::sendPong()
 
 void Connection::sendHello()
 {
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Sending Hello to" << m_user.name();
+#endif
   if( writeMessageData( Protocol::instance().helloMessage() ) )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Hello sent to" << m_user.name();
+#endif
     m_isHelloMessageSent = true;
+  }
+  else
+    qWarning() << "Unable to send Hello to" << m_user.name();
 }
 
+bool Connection::sendLocalUserStatus()
+{
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Sending status to" << m_user.name();
+#endif
+  return sendMessage( Protocol::instance().userStatusToMessage( Settings::instance().localUser() ) );
+}
 
 bool Connection::writeMessageData( const QString& message_data )
 {
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Writing on socket:" << message_data;
+#endif
   if( Settings::instance().useEncryption() )
   {
     QTextStream ts( this );
@@ -236,6 +293,9 @@ bool Connection::writeMessageData( const QString& message_data )
     ts << encrypted_data;
     ts << "\n";
     ts.flush();
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Encrypted data wrote on socket";
+#endif
     return true;
   }
   else
@@ -243,6 +303,19 @@ bool Connection::writeMessageData( const QString& message_data )
     QByteArray byte_array = message_data.toUtf8();
     byte_array.replace( "\n", "-NEWLINE-" );
     byte_array += '\n';
-    return write( byte_array ) == byte_array.size();
+    if( write( byte_array ) == byte_array.size() )
+    {
+#if defined( BEEBEEP_DEBUG )
+      qDebug() << "Data wrote on socket";
+#endif
+      return true;
+    }
+    else
+    {
+#if defined( BEEBEEP_DEBUG )
+      qDebug() << "Unable to write data on socket";
+#endif
+      return false;
+    }
   }
 }

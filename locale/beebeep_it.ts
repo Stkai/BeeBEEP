@@ -6,12 +6,12 @@
     <message>
         <location filename="../BeeUtils.cpp" line="111"/>
         <source>offline</source>
-        <translation>offline</translation>
+        <translation>disconnesso</translation>
     </message>
     <message>
         <location filename="../BeeUtils.cpp" line="113"/>
         <source>online</source>
-        <translation>online</translation>
+        <translation>connesso</translation>
     </message>
     <message>
         <location filename="../BeeUtils.cpp" line="115"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../BeeBeep.cpp" line="62"/>
         <source>Unable to connect to %1 Network. Please check your firewall settings.</source>
-         <translation>Connessione alla rete %1 non riuscita. Controlla le impostazioni del tuo firewall.</translation>
+        <translation>Connessione alla rete %1 non riuscita. Controlla le impostazioni del tuo firewall.</translation>
     </message>
     <message>
         <source>%1 You are connected.</source>
@@ -683,7 +683,7 @@ Controlla i permessi sul file selezionato o sulla cartella che lo contiene.</tra
         <translation type="obsolete">pizzicato</translation>
     </message>
     <message>
-        <location filename="../Settings.h" line="159"/>
+        <location filename="../Settings.h" line="165"/>
         <source>*All*</source>
         <translation>*Tutti*</translation>
     </message>

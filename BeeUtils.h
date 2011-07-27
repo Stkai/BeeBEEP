@@ -31,7 +31,6 @@ class ChatMessage;
 
 namespace Bee
 {
-
   QString chatMessagesToText( const Chat& );
   QString formatMessage( const ChatMessage& );
   QString formatSystemMessage( const ChatMessage& );

@@ -42,6 +42,9 @@ public:
 
   bool sendMessage( const Message& );
 
+public slots:
+  bool sendLocalUserStatus();
+
 signals:
   void readyForUse();
   void newMessage( const User&, const Message& );

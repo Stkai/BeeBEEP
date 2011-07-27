@@ -35,6 +35,8 @@ class Settings
 public:
   QString version() const;
   QString programName() const;
+  inline QString logPath() const;
+  inline void setLogPath( const QString& );
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
   inline QString defaultChatName() const;
@@ -120,6 +122,8 @@ private:
   User m_localUser;
   int m_listenerPort;
 
+  QString m_logPath;
+
   bool m_showMenuBar;
   bool m_showToolBar;
 
@@ -154,6 +158,8 @@ private:
 
 // Inline Functions
 
+inline QString Settings::logPath() const { return m_logPath; }
+inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline QString Settings::defaultChatName() const { return QObject::tr( "*All*" ); }

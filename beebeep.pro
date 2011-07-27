@@ -44,7 +44,8 @@ HEADERS += sym_iap_util.h \
     GuiMain.h \
     ChatMessage.h \
     BeeUtils.h \
-    Rijndael.h
+    Rijndael.h \
+    Log.h
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc

@@ -101,6 +101,8 @@ void Settings::load( bool check_environment_also )
   m_showUserIp = sets.value( "ShowAddressIp", false ).toBool();
   m_showUserNickname = sets.value( "ShowNickname", true ).toBool();
   m_localUser.setNickname( sets.value( "LocalNickname", "" ).toString() );
+  m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
+  m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   sets.endGroup();
   sets.beginGroup( "Geometry" );
   m_guiGeometry = sets.value( "MainWindow", "" ).toByteArray();
@@ -123,6 +125,7 @@ void Settings::load( bool check_environment_also )
   if( m_language.size() > 2 )
     m_language.resize( 2 );
   m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDir::homePath() ).toString();
+  m_logPath = sets.value( "LogPath", "." ).toString();
   sets.endGroup();
 
   if( check_environment_also )
@@ -144,6 +147,8 @@ void Settings::save()
   sets.endGroup();
   sets.beginGroup( "User" );
   sets.setValue( "LocalNickname", m_localUser.nickname() );
+  sets.setValue( "LocalLastStatus", m_localUser.status() );
+  sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets.setValue( "ShowAddressIp", m_showUserIp );
   sets.setValue( "ShowNickname", m_showUserNickname );
   sets.endGroup();
@@ -158,6 +163,7 @@ void Settings::save()
   sets.setValue( "DebugMode", m_debugMode );
   sets.setValue( "Language", m_language );
   sets.setValue( "LastDirectorySelected", m_lastDirectorySelected );
+  sets.setValue( "LogPath", m_logPath );
   sets.endGroup();
   sets.sync();
 }
