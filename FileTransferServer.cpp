@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: BeeBeep.cpp 24 2011-07-29 08:26:19Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
