@@ -67,7 +67,7 @@ GuiMain::GuiMain( QWidget *parent )
 
 void GuiMain::refreshTitle()
 {
-  setWindowTitle( QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName() ).arg( mp_beeBeep->id() ).arg( Bee::userStatusToString( Settings::instance().localUser().status() ) ) );
+  setWindowTitle( QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName() ).arg( mp_beeBeep->id() ).arg( BeeBeep::userStatusToString( Settings::instance().localUser().status() ) ) );
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )
@@ -109,9 +109,7 @@ void GuiMain::selectNickname()
                                         QLineEdit::Normal,
                                         local_user.nickname(),
                                         &ok );
-  if( !ok )
-    return;
-  if( nick.isNull() || nick.isEmpty() )
+  if( !ok || nick.isNull() || nick.isEmpty() )
     return;
   local_user.setNickname( nick );
   Settings::instance().setLocalUser( local_user );
@@ -317,12 +315,14 @@ void GuiMain::createMenus()
   mp_menuStatus->setIcon( QIcon( ":/images/user-status.png" ) );
   for( int i = User::Online; i < User::NumStatus; i++ )
   {
-    act = mp_menuStatus->addAction( QIcon(), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
-    act->setIcon( Bee::userStatusIcon( i ) );
+    act = mp_menuStatus->addAction( Bee::userStatusIcon( i ), BeeBeep::userStatusToString( i ), this, SLOT( statusSelected() ) );
     act->setData( i );
-    act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
+    act->setStatusTip( tr( "Your status will be %1" ).arg( BeeBeep::userStatusToString( i ) ) );
     act->setIconVisibleInMenu( true );
   }
+
+  mp_menuStatus->addSeparator();
+  act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Add a status description..." ), this, SLOT( changeStatusDescription() ) );
 
   /* Help Menu */
   menu = menuBar()->addMenu( "&?" );
@@ -568,10 +568,7 @@ void GuiMain::searchUsers()
   bool ok = false;
   QString s = QInputDialog::getText( this, Settings::instance().programName(),
                            tr( "Please insert the Host Address or Broadcast Address to contact\n(ex. 10.184.15.186 or 10.184.15.255)" ), QLineEdit::Normal, "", &ok );
-  if( !ok )
-    return;
-
-  if( s.isEmpty() || s.isNull() )
+  if( !ok || s.isEmpty() || s.isNull() )
     return;
 
   QHostAddress host_address( s );
@@ -602,5 +599,16 @@ void GuiMain::statusSelected()
   if( !act )
     return;
   mp_beeBeep->setLocalUserStatus( act->data().toInt() );
+  refreshTitle();
+}
+
+void GuiMain::changeStatusDescription()
+{
+  bool ok = false;
+  QString status_description = QInputDialog::getText( this, Settings::instance().programName(),
+                           tr( "Please insert the new status description" ), QLineEdit::Normal, Settings::instance().localUser().statusDescription(), &ok );
+  if( !ok || status_description.isNull() )
+    return;
+  mp_beeBeep->setLocalUserStatusDescription( status_description );
   refreshTitle();
 }

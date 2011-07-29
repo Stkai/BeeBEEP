@@ -64,6 +64,7 @@ private slots:
   void showNewUserStatus( const User& );
   void showNextChat();
   void statusSelected();
+  void changeStatusDescription();
 
 protected:
   void closeEvent( QCloseEvent* );

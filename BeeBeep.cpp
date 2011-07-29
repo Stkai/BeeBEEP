@@ -69,12 +69,12 @@ void BeeBeep::start()
 #endif
   Settings::instance().setListenerPort( mp_listener->serverPort() );
   mp_peerManager->startBroadcasting();
-  emit newUser( Settings::instance().localUser() );
   dispatchSystemMessage( Settings::instance().defaultChatName(),
                          tr( "%1 You are connected to %2 Network." )
                          .arg( "<img src=':/images/green-ball.png'>" )
                          .arg( Settings::instance().programName() ) );
-
+  emit newUser( Settings::instance().localUser() );
+  setUserStatus( Settings::instance().localUser() );
 }
 
 void BeeBeep::stop()
@@ -343,17 +343,45 @@ void BeeBeep::setLocalUserStatus( int new_status )
   setUserStatus( u );
 }
 
+void BeeBeep::setLocalUserStatusDescription( const QString& new_status_description )
+{
+  if( Settings::instance().localUser().statusDescription() == new_status_description )
+    return;
+
+  User u = Settings::instance().localUser();
+  u.setStatusDescription( new_status_description );
+  Settings::instance().setLocalUser( u );
+  sendUserStatus();
+  setUserStatus( u );
+}
+
 void BeeBeep::setUserStatus( const User& u )
 {
   QString sHtmlMsg = QString( "<img src='%1' width=16 height=16 alt=' *+* '> " ).arg( Bee::userStatusIconFileName( u.status() ) );
   if( Settings::instance().localUser() == u )
     sHtmlMsg += tr( "You are" );
   else
-    sHtmlMsg += (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + " is";
+    sHtmlMsg += (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + QString( " " ) + tr( "is" );
 
-   sHtmlMsg += QString( " %2%3." ).arg( Bee::userStatusToString( u.status() ) )
+   sHtmlMsg += QString( " %2%3." ).arg( userStatusToString( u.status() ) )
                             .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
 
   dispatchSystemMessage( Settings::instance().chatName( u ), sHtmlMsg );
   emit( userNewStatus( u ) );
+}
+
+static const char* UserStatusToString[] =
+{
+  QT_TRANSLATE_NOOP( "BeeBeep", "offline" ),
+  QT_TRANSLATE_NOOP( "BeeBeep", "online" ),
+  QT_TRANSLATE_NOOP( "BeeBeep", "busy" ),
+  QT_TRANSLATE_NOOP( "BeeBeep", "away" )
+};
+
+QString BeeBeep::userStatusToString( int user_status )
+{
+  if( user_status < 0 || user_status >= User::NumStatus )
+    return "";
+  else
+    return tr( UserStatusToString[ user_status ] );
 }

@@ -23,6 +23,7 @@
 
 #include "GuiUserList.h"
 #include "Settings.h"
+#include "BeeBeep.h"
 
 
 GuiUserList::GuiUserList( QWidget* parent )
@@ -58,7 +59,7 @@ void GuiUserList::updateItem( QListWidgetItem* item )
   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
   if( !is_local_user && user_status >= 2 )
-    s.append( QString( " [%1] " ).arg( Bee::userStatusToString( user_status ) ) );
+    s.append( QString( " [%1] " ).arg( BeeBeep::userStatusToString( user_status ) ) );
   s += " ";
   item->setText( s );
   if( is_local_user )

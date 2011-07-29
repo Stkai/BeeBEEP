@@ -47,6 +47,8 @@ public:
   QString id() const;
   void searchUsers( const QHostAddress& );
 
+  static QString userStatusToString( int user_status );
+
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
   void userIsWriting( const User& );
@@ -62,6 +64,7 @@ public slots:
   void sendWritingMessage( const QString& );
   void sendUserStatus();
   void setLocalUserStatus( int );
+  void setLocalUserStatusDescription( const QString& );
 
 private slots:
   void newConnection( Connection* );

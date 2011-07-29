@@ -21,12 +21,17 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#undef LOGFILE_ENABLED
+
+
 #include <QApplication>
 #ifdef Q_OS_SYMBIAN
 #include "sym_iap_util.h"
 #endif
 #include "GuiMain.h"
+#if defined( LOGFILE_ENABLED )
 #include "Log.h"
+#endif
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -43,6 +48,8 @@ bool SetTranslator( QTranslator* translator, QString new_locale )
 }
 
 
+
+
 int main( int argc, char *argv[] )
 {
 #ifdef Q_OS_SYMBIAN
@@ -54,9 +61,11 @@ int main( int argc, char *argv[] )
   /* Load Settings */
   Settings::instance().load( true );
 
+#if defined( LOGFILE_ENABLED )
   /* Starting Logs */
   Log::boot( Settings::instance().logPath() );
   qInstallMsgHandler( Log::MessageHandler );
+#endif
 
   /* Apply system language */
   QTranslator translator;
@@ -88,7 +97,9 @@ int main( int argc, char *argv[] )
   Protocol::close();
   Settings::instance().save();
   Settings::close();
+#if defined( LOGFILE_ENABLED )
   Log::close();
+#endif
   /* Exit */
   return iRet;
 }

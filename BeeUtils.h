@@ -34,7 +34,6 @@ namespace Bee
   QString chatMessagesToText( const Chat& );
   QString formatMessage( const ChatMessage& );
   QString formatSystemMessage( const ChatMessage& );
-  QString userStatusToString( int );
   QIcon userStatusIcon( int );
   QString userStatusIconFileName( int );
 

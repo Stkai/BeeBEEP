@@ -103,23 +103,6 @@ QString Bee::chatMessagesToText( const Chat& c )
   return s;
 }
 
-QString Bee::userStatusToString( int user_status )
-{
-  switch( user_status )
-  {
-  case User::Offline:
-    return QT_TRANSLATE_NOOP( "Bee", "offline" );
-  case User::Online:
-    return QT_TRANSLATE_NOOP( "Bee", "online" );
-  case User::Busy:
-    return QT_TRANSLATE_NOOP( "Bee", "busy" );
-  case User::Away:
-    return QT_TRANSLATE_NOOP( "Bee", "away" );
-  default:
-    return "";
-  }
-}
-
 QString Bee::userStatusIconFileName( int user_status )
 {
   switch( user_status )
