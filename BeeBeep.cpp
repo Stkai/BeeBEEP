@@ -59,7 +59,9 @@ void BeeBeep::start()
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
       dispatchSystemMessage( Settings::instance().defaultChatName(),
-                             tr( "Unable to connect to %1 Network. Please check your firewall settings." ).arg( Settings::instance().programName() ) );
+                             tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
+                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
+                               .arg( Settings::instance().programName() ) );
       return;
     }
   }
@@ -71,7 +73,7 @@ void BeeBeep::start()
   mp_peerManager->startBroadcasting();
   dispatchSystemMessage( Settings::instance().defaultChatName(),
                          tr( "%1 You are connected to %2 Network." )
-                         .arg( "<img src=':/images/green-ball.png'>" )
+                         .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ) )
                          .arg( Settings::instance().programName() ) );
   emit newUser( Settings::instance().localUser() );
   setUserStatus( Settings::instance().localUser() );
@@ -88,7 +90,7 @@ void BeeBeep::stop()
   }
   m_peers.clear();
   dispatchSystemMessage( Settings::instance().defaultChatName(),
-                         tr( "%1 You are disconnected.").arg( "<img src=':/images/red-ball.png'>" ) );
+                         tr( "%1 You are disconnected.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ) ) );
 }
 
 Connection* BeeBeep::connection( const QString& chat_name )
@@ -138,10 +140,10 @@ void BeeBeep::readyForUse()
   connect( c, SIGNAL( newMessage( const User&, const Message& ) ), this, SLOT( dispatchMessage( const User&, const Message& ) ) );
   connect( c, SIGNAL( newStatus( const User& ) ), this, SLOT( setUserStatus( const User& ) ) );
   connect( c, SIGNAL( isWriting( const User& ) ), this, SIGNAL( userIsWriting( const User& ) ) );
+  connect( c, SIGNAL( newFileMessage( const User&, const Message& ) ), this, SLOT( parseFileMessage( const User&, const Message& ) ) );
   m_peers.insert( c->id(), c );
   emit newUser( c->user() );
-  QString sHtmlMsg = "<img src=':/images/green-ball.png' alt=' *O* '> ";
-  sHtmlMsg += tr( "%1 has joined." ).arg( Settings::instance().chatName( c->user() ) );
+  QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ) ).arg( Settings::instance().chatName( c->user() ) );
   dispatchSystemMessage( Settings::instance().defaultChatName(), sHtmlMsg );
   QTimer::singleShot( 500, c, SLOT( sendLocalUserStatus() ) );
 }
@@ -164,8 +166,7 @@ void BeeBeep::removeConnection( Connection *c )
   {
     m_peers.remove( c->id() );
     emit removeUser( c->user() );
-    QString sHtmlMsg = "<img src=':/images/red-ball.png' alt=' *X* '> ";
-    sHtmlMsg += tr( "%1 has left." ).arg( Settings::instance().chatName( c->user() ) );
+    QString sHtmlMsg = tr( "%1 %2 has left." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ).arg( Settings::instance().chatName( c->user() ) );
     dispatchSystemMessage( Settings::instance().chatName( c->user() ), sHtmlMsg );
   }
   c->deleteLater();
@@ -206,8 +207,7 @@ Chat BeeBeep::chat( const QString& chat_name, bool create_if_need, bool read_all
     {
       Chat new_chat;
       new_chat.setName( chat_name );
-      QString sHtmlMsg = "<img src=':/images/chat.png' alt=' *C* '> ";
-      sHtmlMsg += tr( "Chat with %1." ).arg( chat_name );
+      QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) ).arg( chat_name );
       ChatMessage cm( Settings::instance().localUser(), Protocol::instance().systemMessage( sHtmlMsg ) );
       new_chat.addMessage( cm );
       m_chats.insert( chat_name, new_chat );
@@ -229,7 +229,7 @@ void BeeBeep::sendMessage( const QString& chat_name, const QString& msg )
 {
   if( !isWorking() )
   {
-    dispatchSystemMessage( chat_name, tr( "Unable to send the message: you are not connected." ) );
+    dispatchSystemMessage( chat_name, tr( "%1 Unable to send the message: you are not connected." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ) );
     return;
   }
 
@@ -256,7 +256,7 @@ void BeeBeep::sendMessage( const QString& chat_name, const QString& msg )
     }
     else
     {
-      dispatchSystemMessage( chat_name, tr( "Unable to send the message." ) );
+      dispatchSystemMessage( chat_name, tr( "%1 Unable to send the message." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ) );
       return;
     }
   }
@@ -326,8 +326,7 @@ void BeeBeep::dispatchSystemMessage( const QString& chat_name, const QString& ms
 void BeeBeep::searchUsers( const QHostAddress& host_address )
 {
   mp_peerManager->sendDatagramToHost( host_address );
-  QString sHtmlMsg = "<img src=':/images/search.png' width=16 height=16 alt=' *+* '> ";
-  sHtmlMsg += tr( "Sending Beep to %1..." ).arg( host_address.toString() );
+  QString sHtmlMsg = tr( "%1 Sending Beep to %2..." ).arg( Bee::iconToHtml( ":/images/search.png", "*b*" ) ).arg( host_address.toString() );
   dispatchSystemMessage( Settings::instance().defaultChatName(), sHtmlMsg );
 }
 
@@ -357,7 +356,7 @@ void BeeBeep::setLocalUserStatusDescription( const QString& new_status_descripti
 
 void BeeBeep::setUserStatus( const User& u )
 {
-  QString sHtmlMsg = QString( "<img src='%1' width=16 height=16 alt=' *+* '> " ).arg( Bee::userStatusIconFileName( u.status() ) );
+  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
   if( Settings::instance().localUser() == u )
     sHtmlMsg += tr( "You are" );
   else
@@ -384,4 +383,35 @@ QString BeeBeep::userStatusToString( int user_status )
     return "";
   else
     return tr( UserStatusToString[ user_status ] );
+}
+
+bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
+{
+  QString icon_html = Bee::iconToHtml( ":/images/send-file.png", "*F*" );
+
+  QFileInfo file( file_path );
+  if( !file.exists() )
+  {
+     dispatchSystemMessage( chat_name, tr( "%1 %2: file not found." ).arg( icon_html ).arg( file_path ) );
+     return false;
+  }
+
+  Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
+  dispatchSystemMessage( chat_name, tr( "%1 You are sending %2..." ).arg( icon_html ).arg( file.fileName() ) );
+
+  Message m = Protocol::instance().sendFileMessage( file, 1234, "test_download" );
+  Connection* c = connection( chat_name );
+  if( !c )
+  {
+    dispatchSystemMessage( chat_name, tr( "%1 Unable to send file: user is not connected." ).arg( icon_html ) );
+    return false;
+  }
+  c->sendMessage( m );
+  return true;
+}
+
+void BeeBeep::parseFileMessage( const User& u, const Message& m )
+{
+  QString icon_html = Bee::iconToHtml( ":/images/send-file.png", "*F*" );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 File request arrived: %2." ).arg( icon_html ).arg( m.text() ) );
 }

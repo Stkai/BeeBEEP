@@ -47,7 +47,9 @@ public:
   QString id() const;
   void searchUsers( const QHostAddress& );
 
-  static QString userStatusToString( int user_status );
+  static QString userStatusToString( int );
+
+  bool sendFile( const QString& chat_name, const QString& file_path );
 
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
@@ -75,6 +77,7 @@ private slots:
   void dispatchMessage( const User&, const Message& );
   void dispatchSystemMessage( const QString& chat_name, const QString& sysmess );
   void setUserStatus( const User& );
+  void parseFileMessage( const User&, const Message& );
 
 protected:
   bool hasConnection( const QHostAddress& sender_ip, int sender_port = -1 ) const;

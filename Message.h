@@ -30,7 +30,7 @@
 class Message
 {
 public:
-  enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, User };
+  enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, User, File, NumTypes };
   enum Flag { Private, Writing, Status, NumFlags };
 
   Message();

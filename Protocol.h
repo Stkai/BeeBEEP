@@ -45,8 +45,10 @@ public:
   inline const Message& writingMessage() const;
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
-  Message userStatusToMessage( const User& );
-  User userStatusFromMessage( User, const Message& );
+  Message sendFileMessage( const QFileInfo&, int server_port, const QString& download_password );
+
+  Message userStatusToMessage( const User& ) const;
+  User userStatusFromMessage( User, const Message& ) const;
 
   User createUser( const Message& );
   inline User createLocalUser() const;

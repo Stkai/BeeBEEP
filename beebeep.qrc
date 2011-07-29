@@ -43,5 +43,6 @@
         <file>images/user-busy.png</file>
         <file>images/user-away.png</file>
         <file>images/user-status.png</file>
+        <file>images/send-file.png</file>
     </qresource>
 </RCC>

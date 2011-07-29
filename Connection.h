@@ -50,6 +50,7 @@ signals:
   void newMessage( const User&, const Message& );
   void newStatus( const User& );
   void isWriting( const User& );
+  void newFileMessage( const User&, const Message& );
 
 private slots:
   void readData();

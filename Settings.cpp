@@ -125,6 +125,7 @@ void Settings::load( bool check_environment_also )
   if( m_language.size() > 2 )
     m_language.resize( 2 );
   m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDir::homePath() ).toString();
+  m_downloadDirectory = sets.value( "DownloadDirectory", QDir::homePath() ).toString();
   m_logPath = sets.value( "LogPath", "." ).toString();
   sets.endGroup();
 
@@ -163,6 +164,7 @@ void Settings::save()
   sets.setValue( "DebugMode", m_debugMode );
   sets.setValue( "Language", m_language );
   sets.setValue( "LastDirectorySelected", m_lastDirectorySelected );
+  sets.setValue( "DownloadDirectory", m_downloadDirectory );
   sets.setValue( "LogPath", m_logPath );
   sets.endGroup();
   sets.sync();

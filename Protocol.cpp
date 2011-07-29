@@ -57,6 +57,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Hello:  return "BEE-CIAO";
   case Message::System: return "BEE-SYST";
   case Message::User:   return "BEE-USER";
+  case Message::File:   return "BEE-FILE";
   default:              return "BEE-BOOH";
   }
 }
@@ -77,6 +78,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Hello;
   else if( msg_type == "BEE-SYST")
     return Message::System;
+  else if( msg_type == "BEE-FILE" )
+    return Message::File;
   else
     return Message::Undefined;
 }
@@ -195,7 +198,7 @@ QString Protocol::helloMessage() const
   return fromMessage( m );
 }
 
-Message Protocol::userStatusToMessage( const User& u )
+Message Protocol::userStatusToMessage( const User& u ) const
 {
   Message m( Message::User, ID_STATUS_MESSAGE, u.statusDescription() );
   m.addFlag( Message::Status );
@@ -203,7 +206,7 @@ Message Protocol::userStatusToMessage( const User& u )
   return m;
 }
 
-User Protocol::userStatusFromMessage( User u, const Message& m )
+User Protocol::userStatusFromMessage( User u, const Message& m ) const
 {
   if( m.type() == Message::User && m.hasFlag( Message::Status ) )
   {
@@ -242,6 +245,17 @@ User Protocol::createUser( const Message& hello_message )
   u.setName( sUserName.trimmed() );
   u.setNickname( sNickName.trimmed() );
   return u;
+}
+
+Message Protocol::sendFileMessage( const QFileInfo& file, int server_port, const QString& download_password )
+{
+  Message m( Message::File, newId(), file.fileName() );
+  QStringList sl;
+  sl << QString::number( server_port );
+  sl << QString::number( file.size() );
+  sl << download_password;
+  m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
+  return m;
 }
 
 namespace

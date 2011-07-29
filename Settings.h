@@ -87,6 +87,9 @@ public:
   inline const QString& lastDirectorySelected() const;
   inline void setLastDirectorySelected( const QString& );
 
+  inline const QString& downloadDirectory() const;
+  inline void setDownloadDirectory( const QString& );
+
   inline bool useEncryption() const;
   inline void setUseEncryption( bool );
 
@@ -148,6 +151,7 @@ private:
   QString m_language;
 
   QString m_lastDirectorySelected;
+  QString m_downloadDirectory;
 
   bool m_useEncryption;
 
@@ -200,6 +204,8 @@ inline const QString& Settings::language() const { return m_language; }
 inline void Settings::setLanguage( const QString& new_value ) { m_language = new_value; }
 inline const QString& Settings::lastDirectorySelected() const { return m_lastDirectorySelected; }
 inline void Settings::setLastDirectorySelected( const QString& new_value ) { m_lastDirectorySelected = new_value; }
+inline const QString& Settings::downloadDirectory() const { return m_downloadDirectory; }
+inline void Settings::setDownloadDirectory( const QString& new_value ) { m_downloadDirectory = new_value; }
 inline bool Settings::useEncryption() const { return m_useEncryption; }
 inline void Settings::setUseEncryption( bool new_value ) { m_useEncryption = new_value; }
 inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessageArrived; }

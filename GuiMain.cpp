@@ -197,6 +197,11 @@ void GuiMain::createActions()
   mp_actFontColor->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
   connect( mp_actFontColor, SIGNAL( triggered() ), this, SLOT( selectFontColor() ) );
 
+  mp_actSendFile = new QAction( QIcon( ":/images/send-file.png"), tr( "Send a file..." ), this );
+  mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
+  connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
+
+
   mp_actMenuBar = new QAction( tr( "Show the MenuBar" ), this );
   mp_actMenuBar->setStatusTip( tr( "Show the main menu bar with the %1 options" ).arg( Settings::instance().programName() ) );
   mp_actMenuBar->setCheckable( true );
@@ -226,6 +231,7 @@ void GuiMain::createMenus()
   menu->addSeparator();
   menu->addAction( mp_actNickname );
   menu->addAction( mp_actSearch );
+  menu->addAction( mp_actSendFile );
   menu->addSeparator();
   menu->addAction( mp_actSaveChat );
   menu->addSeparator();
@@ -611,4 +617,12 @@ void GuiMain::changeStatusDescription()
     return;
   mp_beeBeep->setLocalUserStatusDescription( status_description );
   refreshTitle();
+}
+
+void GuiMain::sendFile()
+{
+  QString file_path = QFileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().lastDirectorySelected() );
+  if( file_path.isEmpty() || file_path.isNull() )
+    return;
+  mp_beeBeep->sendFile( mp_defaultChat->chatName(), file_path );
 }

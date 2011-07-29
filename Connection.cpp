@@ -155,6 +155,12 @@ void Connection::parseMessage( const Message& m )
 #endif
     m_pongTime.restart();
     break;
+ case Message::File:
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "New file message:" << m.text();
+#endif
+    emit newFileMessage( m_user, m );
+    break;
 
   default:
     qWarning() << "Invalid message type (in Connection):" << m.type();

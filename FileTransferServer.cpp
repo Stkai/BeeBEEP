@@ -17,36 +17,19 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: BeeBeep.cpp 24 2011-07-29 08:26:19Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIUTILS_H
-#define BEEBEEP_GUIUTILS_H
-
-#include "Config.h"
-class Chat;
-class ChatMessage;
+#include "FileTransferServer.h"
 
 
-namespace Bee
+FileTransferServer::FileTransferServer( QObject *parent )
+  : QTcpServer( parent )
 {
-  QString chatMessagesToText( const Chat& );
-  QString formatMessage( const ChatMessage& );
-  QString formatSystemMessage( const ChatMessage& );
-  QIcon userStatusIcon( int );
-  QString userStatusIconFileName( int );
-  inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
-
-  namespace Private
-  {
-    QString formatHtmlText( QString );
-  }
 }
 
+void FileTransferServer::incomingConnection( int socketDescriptor )
+{
 
-// Inline Functions
-inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
-inline QString Bee::iconToHtml( const QString& icon_path, const QString& icon_alt ) { return QString( "<img src='%1' width=16 height=16 alt=' %2 ' /> " ).arg( icon_path ).arg( icon_alt ); }
-
-#endif // BEEBEEP_GUIUTILS_H
+}

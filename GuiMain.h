@@ -65,6 +65,7 @@ private slots:
   void showNextChat();
   void statusSelected();
   void changeStatusDescription();
+  void sendFile();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -100,6 +101,7 @@ private:
   QAction* mp_actToolBar;
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
+  QAction* mp_actSendFile;
 
 
 };
