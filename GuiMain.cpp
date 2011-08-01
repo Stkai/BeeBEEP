@@ -508,7 +508,7 @@ void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )
     if( Settings::instance().beepOnNewMessageArrived() && !(isVisible() && is_current_chat) )
     {
 #if defined( BEEBEEP_DEBUG )
-      qDebug() << "New message arrived: BEEP";
+      qDebug() << "New message arrived in background: play BEEP";
 #endif
       QSound beep_sound( "beep.wav" );
       if( QSound::isAvailable() )

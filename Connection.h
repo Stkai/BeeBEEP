@@ -60,7 +60,7 @@ private slots:
 
 private:
   void processData();
-  bool writeMessageData( const QString& );
+  bool writeData( const QString& );
   void parseMessage( const Message& );
   void parseHelloMessage( const Message& );
   void parseUserMessage( const Message& );
@@ -71,6 +71,7 @@ private:
   State m_state;
   bool m_isHelloMessageSent;
 
+  quint16 m_rawDataSize;
 };
 
 

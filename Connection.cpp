@@ -27,7 +27,7 @@
 
 
 Connection::Connection( QObject *parent )
-  : QTcpSocket( parent ), m_user(), m_state( WaitingForHello ), m_isHelloMessageSent( false )
+  : QTcpSocket( parent ), m_user(), m_state( WaitingForHello ), m_isHelloMessageSent( false ), m_rawDataSize( 0 )
 {
   m_pingTimer.setInterval( PING_INTERVAL );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readData() ) );
@@ -57,17 +57,17 @@ bool Connection::sendMessage( const Message& m )
   qDebug() << "Sending:" << message_data;
 #endif
 
-  if( writeMessageData( message_data ) )
+  if( writeData( message_data ) )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "Data sent";
+    qDebug() << "Message sent";
 #endif
     return true;
   }
   else
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "Unable to send data";
+    qDebug() << "Unable to send message";
 #endif
     return false;
   }
@@ -75,43 +75,40 @@ bool Connection::sendMessage( const Message& m )
 
 void Connection::readData()
 {
-  if( !canReadLine() )
-    return;
+  QDataStream data_stream( this );
+  data_stream.setVersion( QDataStream::Qt_4_0 );
+  if( m_rawDataSize == 0 )
+  {
+    if( bytesAvailable() < (int)sizeof(quint16))
+      return;
+    data_stream >> m_rawDataSize;
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "New data available";
+    qDebug() << "Read raw data size:" << m_rawDataSize;
 #endif
-  QString line = "";
+  }
+
+  if( bytesAvailable() < m_rawDataSize )
+    return;
+
+  QString raw_data;
+  QString message_data;
+  data_stream >> raw_data;
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Read raw data:" << raw_data;
+#endif
   if( Settings::instance().useEncryption() )
-  {
-    QTextStream ts( this );
-    ts.setCodec( "UTF-16");
-    QString encrypted_data = ts.readLine( MAX_BUFFER_SIZE );
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Decrypt data:" << encrypted_data;
-#endif
-    encrypted_data.replace( "-NEWLINE-", "\n" );
-    line = Protocol::instance().decrypt( encrypted_data );
-  }
+    message_data = Protocol::instance().decrypt( raw_data );
   else
-  {
-    line = QString::fromUtf8( readLine( MAX_BUFFER_SIZE ) );
-    line.replace( "-NEWLINE-", "\n" );
-    line.chop( 1 ); // remove last '\n'
-  }
-
-  if( line.size() <= Protocol::instance().messageMinimumSize() )
-  {
-    qWarning() << "Invalid message data size:" << line;
-    return;
-  }
+    message_data = raw_data;
+ m_rawDataSize = 0;
 
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Message data:" << line;
+  qDebug() << "Message data:" << message_data;
 #endif
-  Message m = Protocol::instance().toMessage( line );
+  Message m = Protocol::instance().toMessage( message_data );
   if( !m.isValid() )
   {
-    qWarning() << "Skip message cause error occcurred:" << line;
+    qWarning() << "Skip message cause error occcurred:" << message_data;
     return;
   }
 
@@ -119,6 +116,7 @@ void Connection::readData()
     parseHelloMessage( m );
   else
     parseMessage( m );
+
 }
 
 void Connection::parseMessage( const Message& m )
@@ -237,12 +235,12 @@ void Connection::sendPing()
     abort();
     return;
   }
-  writeMessageData( Protocol::instance().pingMessage() );
+  writeData( Protocol::instance().pingMessage() );
 }
 
 void Connection::sendPong()
 {
-  writeMessageData( Protocol::instance().pongMessage() );
+  writeData( Protocol::instance().pongMessage() );
 }
 
 void Connection::sendHello()
@@ -250,7 +248,7 @@ void Connection::sendHello()
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Sending Hello to" << m_user.name();
 #endif
-  if( writeMessageData( Protocol::instance().helloMessage() ) )
+  if( writeData( Protocol::instance().helloMessage() ) )
   {
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Hello sent to" << m_user.name();
@@ -269,59 +267,23 @@ bool Connection::sendLocalUserStatus()
   return sendMessage( Protocol::instance().userStatusToMessage( Settings::instance().localUser() ) );
 }
 
-bool Connection::writeMessageData( const QString& message_data )
-{
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Writing on socket:" << message_data;
-#endif
-  if( Settings::instance().useEncryption() )
-  {
-    QTextStream ts( this );
-    ts.setCodec( "UTF-16");
 
-#if defined( BEEBEEP_DEBUG )
-    int num_spaces = 0;
-    QString encrypted_data = Protocol::instance().encrypt( message_data, &num_spaces );
-    QString tmp = Protocol::instance().decrypt( encrypted_data );
-    tmp.chop( num_spaces );
-    if( tmp != message_data )
-    {
-      qWarning() << "Error occurred in writeMessageData - encrypt";
-      qWarning() << "Data:" << message_data;
-      qWarning() << "Encrypted:" << encrypted_data;
-      qWarning() << "Decrypted:" << tmp;
-      return false;
-    }
-#else
-    QString encrypted_data = Protocol::instance().encrypt( message_data );
-#endif
-    encrypted_data.replace( "\n", "-NEWLINE-" );
-    ts << encrypted_data;
-    ts << "\n";
-    ts.flush();
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << "Encrypted data wrote on socket";
-#endif
-    return true;
-  }
+bool Connection::writeData( const QString& message_data )
+{
+  QString raw_data;
+  if( Settings::instance().useEncryption() )
+    raw_data = Protocol::instance().encrypt( message_data );
   else
-  {
-    QByteArray byte_array = message_data.toUtf8();
-    byte_array.replace( "\n", "-NEWLINE-" );
-    byte_array += '\n';
-    if( write( byte_array ) == byte_array.size() )
-    {
-#if defined( BEEBEEP_DEBUG )
-      qDebug() << "Data wrote on socket";
-#endif
-      return true;
-    }
-    else
-    {
-#if defined( BEEBEEP_DEBUG )
-      qDebug() << "Unable to write data on socket";
-#endif
-      return false;
-    }
-  }
-}
+    raw_data = message_data;
+
+  QByteArray data_block;
+  QDataStream data_stream( &data_block, QIODevice::WriteOnly );
+  data_stream.setVersion( QDataStream::Qt_4_6 );
+  data_stream << (quint16)0;
+  data_stream << raw_data;
+  data_stream.device()->seek( 0 );
+  data_stream << (quint16)(data_block.size() - sizeof(quint16));
+
+  return( write( data_block ) == data_block.size() );
+ }
+
