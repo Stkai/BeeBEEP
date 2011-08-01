@@ -29,9 +29,11 @@
 #include "User.h"
 class ChatMessage;
 class Connection;
+class FileTransferServer;
 class Listener;
 class Message;
 class PeerManager;
+
 
 
 class BeeBeep : public QObject
@@ -89,6 +91,7 @@ private:
   PeerManager* mp_peerManager;
   QMultiHash<int, Connection*> m_peers;
   QHash<QString, Chat> m_chats;
+  FileTransferServer* mp_fileServer;
 
 };
 

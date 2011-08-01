@@ -24,6 +24,7 @@
 #include "BeeBeep.h"
 #include "BeeUtils.h"
 #include "Connection.h"
+#include "FileTransferServer.h"
 #include "Listener.h"
 #include "PeerManager.h"
 #include "Protocol.h"
@@ -35,6 +36,7 @@ BeeBeep::BeeBeep( QObject* parent )
 {
   mp_listener = new Listener( this );
   mp_peerManager = new PeerManager( this );
+  mp_fileServer = new FileTransferServer( this );
 
   (void)chat( Settings::instance().defaultChatName(), true, false );
 
@@ -81,6 +83,7 @@ void BeeBeep::start()
 
 void BeeBeep::stop()
 {
+  mp_fileServer->close();
   mp_listener->close();
   mp_peerManager->stopBroadcasting();
   QList<Connection*> connection_list = m_peers.values();
@@ -399,7 +402,12 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
   Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
   dispatchSystemMessage( chat_name, tr( "%1 You are sending %2..." ).arg( icon_html ).arg( file.fileName() ) );
 
-  Message m = Protocol::instance().sendFileMessage( file, 1234, "test_download" );
+  if( !mp_fileServer->isListening() )
+    mp_fileServer->listen( QHostAddress::Any );
+
+  QString file_password = "test_download";
+  mp_fileServer->setupTransfer( file, file_password );
+  Message m = Protocol::instance().sendFileMessage( file, mp_fileServer->serverPort(), file_password );
   Connection* c = connection( chat_name );
   if( !c )
   {
@@ -414,4 +422,16 @@ void BeeBeep::parseFileMessage( const User& u, const Message& m )
 {
   QString icon_html = Bee::iconToHtml( ":/images/send-file.png", "*F*" );
   dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 File request arrived: %2." ).arg( icon_html ).arg( m.text() ) );
+
+
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
+
+  sl << QString::number( server_port );
+
+
+  sl << QString::number( file.size() );
+  sl << download_password;
+  m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
+
+
 }

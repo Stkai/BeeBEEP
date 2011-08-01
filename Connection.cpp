@@ -79,7 +79,7 @@ void Connection::readData()
   data_stream.setVersion( QDataStream::Qt_4_0 );
   if( m_rawDataSize == 0 )
   {
-    if( bytesAvailable() < (int)sizeof(quint16))
+    if( bytesAvailable() < (int)sizeof(quint32))
       return;
     data_stream >> m_rawDataSize;
 #if defined( BEEBEEP_DEBUG )
@@ -235,28 +235,34 @@ void Connection::sendPing()
     abort();
     return;
   }
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Sending PING to" << m_user.name();
+#endif
   writeData( Protocol::instance().pingMessage() );
 }
 
 void Connection::sendPong()
 {
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Sending PONG to" << m_user.name();
+#endif
   writeData( Protocol::instance().pongMessage() );
 }
 
 void Connection::sendHello()
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Sending Hello to" << m_user.name();
+  qDebug() << "Sending HELLO to" << m_user.name();
 #endif
   if( writeData( Protocol::instance().helloMessage() ) )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "Hello sent to" << m_user.name();
+    qDebug() << "HELLO sent to" << m_user.name();
 #endif
     m_isHelloMessageSent = true;
   }
   else
-    qWarning() << "Unable to send Hello to" << m_user.name();
+    qWarning() << "Unable to send HELLO to" << m_user.name();
 }
 
 bool Connection::sendLocalUserStatus()
@@ -278,11 +284,11 @@ bool Connection::writeData( const QString& message_data )
 
   QByteArray data_block;
   QDataStream data_stream( &data_block, QIODevice::WriteOnly );
-  data_stream.setVersion( QDataStream::Qt_4_6 );
-  data_stream << (quint16)0;
+  data_stream.setVersion( QDataStream::Qt_4_0 );
+  data_stream << (quint32)0;
   data_stream << raw_data;
   data_stream.device()->seek( 0 );
-  data_stream << (quint16)(data_block.size() - sizeof(quint16));
+  data_stream << (quint32)(data_block.size() - sizeof(quint32));
 
   return( write( data_block ) == data_block.size() );
  }

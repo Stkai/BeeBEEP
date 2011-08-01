@@ -28,12 +28,18 @@
 
 
 
-class FileTransferClient : public QObject
+class FileTransferClient : public QThread
 {
   Q_OBJECT
 
 public:
   FileTransferClient( QObject *parent = 0 );
+
+signals:
+  void error( const QString& );
+
+protected:
+  void virtual run();
 
 
 };

@@ -33,7 +33,7 @@ class Listener : public QTcpServer
   Q_OBJECT
 
 public:
-  Listener( QObject *parent = 0 );
+  explicit Listener( QObject *parent = 0 );
 
 signals:
   void newConnection( Connection* );

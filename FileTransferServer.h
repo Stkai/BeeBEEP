@@ -27,19 +27,25 @@
 #include "Config.h"
 
 
-
 class FileTransferServer : public QTcpServer
 {
   Q_OBJECT
 
 public:
-  FileTransferServer( QObject *parent = 0 );
+  explicit FileTransferServer( QObject *parent = 0 );
+
+  void setupTransfer( const QFileInfo&, const QString& file_password );
 
 signals:
   void bytesTransferred( int, int );
 
 protected:
   void incomingConnection( int );
+  void startTransfer();
+
+private:
+  QFileInfo m_fileInfo;
+  QString m_password;
 
 };
 

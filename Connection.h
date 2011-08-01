@@ -71,7 +71,7 @@ private:
   State m_state;
   bool m_isHelloMessageSent;
 
-  quint16 m_rawDataSize;
+  quint32 m_rawDataSize;
 };
 
 

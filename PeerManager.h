@@ -32,7 +32,7 @@ class PeerManager : public QObject
   Q_OBJECT
 
 public:
-  PeerManager( QObject* );
+  explicit PeerManager( QObject* );
   void startBroadcasting();
   void stopBroadcasting();
   bool isLocalHostAddress( const QHostAddress& );
