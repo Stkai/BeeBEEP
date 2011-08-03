@@ -25,6 +25,7 @@
 #define BEEBEEP_FILETRANSFERREAD_H
 
 #include "Config.h"
+#include "FileInfo.h"
 
 
 class FileTransferRead : public QThread
@@ -32,7 +33,7 @@ class FileTransferRead : public QThread
   Q_OBJECT
 
 public:
-  FileTransferRead( const QFileInfo&, int socket_descriptor, const QString& file_password, QObject *parent = 0);
+  FileTransferRead( const FileInfo&, int socket_descriptor, QObject *parent = 0);
 
 protected:
   virtual void run();
@@ -41,9 +42,8 @@ signals:
   void error( const QString& );
 
 private:
-  QFileInfo m_fileInfo;
+  FileInfo m_fileInfo;
   int m_socketDescriptor;
-  QString m_filePassword;
 
 
 };

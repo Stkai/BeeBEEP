@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Connection.h"
+#include "FileInfo.h"
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -155,9 +156,9 @@ void Connection::parseMessage( const Message& m )
     break;
  case Message::File:
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "New file message:" << m.text();
+    qDebug() << "New file message:" << m.text() << m.data();
 #endif
-    emit newFileMessage( m_user, m );
+    parseFileMessage( m );
     break;
 
   default:
@@ -226,6 +227,16 @@ void Connection::parseUserMessage( const Message& m )
   }
   else
     qWarning() << "Invalid flag found in user message (in Connection)";
+}
+
+void Connection::parseFileMessage( const Message& m )
+{
+  FileInfo fi = Protocol::instance().fileInfoFromMessage( m );
+  fi.setHostAddress( peerAddress() );
+  if( fi.isValid() )
+    emit newFileMessage( m_user, fi );
+  else
+    qWarning() << "Invalid FileInfo from user" << m_user.id() << ": [" << m.data() << "]:" << m.text();
 }
 
 void Connection::sendPing()

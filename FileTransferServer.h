@@ -1,3 +1,4 @@
+
 //////////////////////////////////////////////////////////////////////
 //
 // This file is part of BeeBEEP.
@@ -25,6 +26,7 @@
 #define BEEBEEP_FILETRANSFERSERVER_H
 
 #include "Config.h"
+#include "FileInfo.h"
 
 
 class FileTransferServer : public QTcpServer
@@ -34,7 +36,7 @@ class FileTransferServer : public QTcpServer
 public:
   explicit FileTransferServer( QObject *parent = 0 );
 
-  void setupTransfer( const QFileInfo&, const QString& file_password );
+  void setupTransfer( const FileInfo& );
 
 signals:
   void bytesTransferred( int, int );
@@ -44,8 +46,7 @@ protected:
   void startTransfer();
 
 private:
-  QFileInfo m_fileInfo;
-  QString m_password;
+  FileInfo m_fileInfo;
 
 };
 

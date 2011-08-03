@@ -29,6 +29,7 @@
 #include "User.h"
 class ChatMessage;
 class Connection;
+class FileInfo;
 class FileTransferServer;
 class Listener;
 class Message;
@@ -79,7 +80,7 @@ private slots:
   void dispatchMessage( const User&, const Message& );
   void dispatchSystemMessage( const QString& chat_name, const QString& sysmess );
   void setUserStatus( const User& );
-  void parseFileMessage( const User&, const Message& );
+  void checkFileMessage( const User&, const FileInfo& );
 
 protected:
   bool hasConnection( const QHostAddress& sender_ip, int sender_port = -1 ) const;

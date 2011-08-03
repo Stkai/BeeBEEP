@@ -26,6 +26,7 @@
 
 #include "User.h"
 class Message;
+class FileInfo;
 
 
 class Connection : public QTcpSocket
@@ -50,7 +51,7 @@ signals:
   void newMessage( const User&, const Message& );
   void newStatus( const User& );
   void isWriting( const User& );
-  void newFileMessage( const User&, const Message& );
+  void newFileMessage( const User&, const FileInfo& );
 
 private slots:
   void readData();
@@ -64,6 +65,7 @@ private:
   void parseMessage( const Message& );
   void parseHelloMessage( const Message& );
   void parseUserMessage( const Message& );
+  void parseFileMessage( const Message& );
 
   User m_user;
   QTimer m_pingTimer;

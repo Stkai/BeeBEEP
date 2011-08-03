@@ -25,10 +25,10 @@
 #include "FileTransferRead.h"
 
 
-FileTransferRead::FileTransferRead( const QFileInfo& fi, int socket_descriptor, const QString& file_password, QObject *parent )
-  : QThread( parent ), m_fileInfo( fi), m_socketDescriptor( socket_descriptor ), m_filePassword( file_password )
+FileTransferRead::FileTransferRead( const FileInfo& fi, int socket_descriptor, QObject *parent )
+  : QThread( parent ), m_fileInfo( fi), m_socketDescriptor( socket_descriptor )
 {
-  qDebug() << "Init file transfer:" << m_fileInfo.absoluteFilePath();
+  qDebug() << "Init file transfer:" << m_fileInfo.path();
 }
 
  void FileTransferRead::run()
@@ -42,7 +42,7 @@ FileTransferRead::FileTransferRead( const QFileInfo& fi, int socket_descriptor, 
      return;
    }
 
-   QFile file( m_fileInfo.absoluteFilePath() );
+   QFile file( m_fileInfo.path() );
    if( !file.open( QIODevice::ReadOnly) )
    {
      emit error( "Unable to open file" );

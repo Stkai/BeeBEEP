@@ -30,8 +30,8 @@
 
 const int MAX_BUFFER_SIZE = 1024000;
 const int TRANSFER_TIMEOUT = 30 * 1000;
-const int PONG_TIMEOUT = 11 * 1000;
-const int PING_INTERVAL = 33 * 1000;
+const int PONG_TIMEOUT = 84 * 1000;
+const int PING_INTERVAL = 21 * 1000;
 const int WRITING_MESSAGE_TIMEOUT = 3 * 1000;
 const int BROADCAST_INTERVAL = 2000;
 const unsigned BROADCAST_PORT = 36475;

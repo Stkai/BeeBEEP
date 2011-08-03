@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "FileInfo.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "EmoticonManager.h"
@@ -247,15 +248,31 @@ User Protocol::createUser( const Message& hello_message )
   return u;
 }
 
-Message Protocol::sendFileMessage( const QFileInfo& file, int server_port, const QString& download_password )
+Message Protocol::fileInfoToMessage( const FileInfo& fi )
 {
-  Message m( Message::File, newId(), file.fileName() );
+  Message m( Message::File, newId(), fi.name() );
   QStringList sl;
-  sl << QString::number( server_port );
-  sl << QString::number( file.size() );
-  sl << download_password;
+  sl << QString::number( fi.hostPort() );
+  sl << QString::number( fi.size() );
+  sl << fi.password();
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   return m;
+}
+
+FileInfo Protocol::fileInfoFromMessage( const Message& m )
+{
+  FileInfo fi;
+  fi.setName( m.text() );
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
+  if( sl.size() < 3 )
+    return FileInfo();
+  fi.setHostPort( sl.at( 0 ).toInt() );
+  sl.removeFirst();
+  fi.setSize( sl.at( 0 ).toInt() );
+  sl.removeFirst();
+  QString password = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
+  fi.setPassword( password );
+  return fi;
 }
 
 namespace

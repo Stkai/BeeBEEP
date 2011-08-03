@@ -30,15 +30,14 @@ FileTransferServer::FileTransferServer( QObject *parent )
 {
 }
 
-void FileTransferServer::setupTransfer( const QFileInfo& fi, const QString& file_password )
+void FileTransferServer::setupTransfer( const FileInfo& fi )
 {
   m_fileInfo = fi;
-  m_password = file_password;
 }
 
 void FileTransferServer::incomingConnection( int socketDescriptor )
 {
-  FileTransferRead *pftr = new FileTransferRead( m_fileInfo, socketDescriptor, m_password, this );
+  FileTransferRead *pftr = new FileTransferRead( m_fileInfo, socketDescriptor, this );
   connect( pftr, SIGNAL( finished() ), pftr, SLOT( deleteLater() ) );
   pftr->start();
 }

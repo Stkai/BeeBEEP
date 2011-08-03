@@ -26,6 +26,7 @@
 
 #include "Message.h"
 #include "User.h"
+class FileInfo;
 
 
 class Protocol
@@ -45,7 +46,8 @@ public:
   inline const Message& writingMessage() const;
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
-  Message sendFileMessage( const QFileInfo&, int server_port, const QString& download_password );
+  Message fileInfoToMessage( const FileInfo& );
+  FileInfo fileInfoFromMessage( const Message& );
 
   Message userStatusToMessage( const User& ) const;
   User userStatusFromMessage( User, const Message& ) const;

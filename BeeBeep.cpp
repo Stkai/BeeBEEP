@@ -143,7 +143,7 @@ void BeeBeep::readyForUse()
   connect( c, SIGNAL( newMessage( const User&, const Message& ) ), this, SLOT( dispatchMessage( const User&, const Message& ) ) );
   connect( c, SIGNAL( newStatus( const User& ) ), this, SLOT( setUserStatus( const User& ) ) );
   connect( c, SIGNAL( isWriting( const User& ) ), this, SIGNAL( userIsWriting( const User& ) ) );
-  connect( c, SIGNAL( newFileMessage( const User&, const Message& ) ), this, SLOT( parseFileMessage( const User&, const Message& ) ) );
+  connect( c, SIGNAL( newFileMessage( const User&, const FileInfo& ) ), this, SLOT( checkFileMessage( const User&, const FileInfo& ) ) );
   m_peers.insert( c->id(), c );
   emit newUser( c->user() );
   QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ) ).arg( Settings::instance().chatName( c->user() ) );
@@ -405,9 +405,16 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
   if( !mp_fileServer->isListening() )
     mp_fileServer->listen( QHostAddress::Any );
 
-  QString file_password = "test_download";
-  mp_fileServer->setupTransfer( file, file_password );
-  Message m = Protocol::instance().sendFileMessage( file, mp_fileServer->serverPort(), file_password );
+  FileInfo fi;
+  fi.setName( file.fileName() );
+  fi.setPath( file.absoluteFilePath() );
+  fi.setSize( file.size() );
+  fi.setHostAddress( mp_fileServer->serverAddress() );
+  fi.setHostPort( mp_fileServer->serverPort() );
+  fi.setPassword( "test_download" );
+
+  mp_fileServer->setupTransfer( fi );
+  Message m = Protocol::instance().fileInfoToMessage( fi );
   Connection* c = connection( chat_name );
   if( !c )
   {
@@ -418,20 +425,11 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
   return true;
 }
 
-void BeeBeep::parseFileMessage( const User& u, const Message& m )
+void BeeBeep::checkFileMessage( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/send-file.png", "*F*" );
-  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 File request arrived: %2." ).arg( icon_html ).arg( m.text() ) );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 File request arrived: %2." ).arg( icon_html ).arg( fi.name() ) );
 
-
-  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
-
-  sl << QString::number( server_port );
-
-
-  sl << QString::number( file.size() );
-  sl << download_password;
-  m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
 
 
 }

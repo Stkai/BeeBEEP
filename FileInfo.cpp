@@ -21,11 +21,25 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
-
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.1.39";
+#include "FileInfo.h"
 
 
-#endif // BEEBEEP_VERSION_H
+FileInfo::FileInfo()
+  : m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" )
+{
+}
+
+FileInfo& FileInfo::operator=( const FileInfo& fi )
+{
+  if( this != &fi )
+  {
+    m_name = fi.m_name;
+    m_path = fi.m_path;
+    m_size = fi.m_size;
+    m_hostAddress = fi.m_hostAddress;
+    m_hostPort = fi.m_hostPort;
+    m_password = fi.m_password;
+  }
+  return *this;
+}
+

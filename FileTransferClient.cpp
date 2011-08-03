@@ -25,8 +25,12 @@
 
 
 FileTransferClient::FileTransferClient( QObject *parent )
-  : QObject( parent )
+  : QThread( parent )
 {
 }
 
-
+void FileTransferClient::run()
+{
+  // quando c'e' un tcp socket e serve un loop si usa exec()
+  exec();
+}
