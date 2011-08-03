@@ -25,7 +25,7 @@
 #define BEEBEEP_FILETRANSFERCLIENT_H
 
 #include "Config.h"
-
+#include "FileInfo.h"
 
 
 class FileTransferClient : public QThread
@@ -33,15 +33,21 @@ class FileTransferClient : public QThread
   Q_OBJECT
 
 public:
-  FileTransferClient( QObject *parent = 0 );
+  FileTransferClient( const FileInfo&, QObject *parent = 0 );
 
 signals:
   void error( const QString& );
 
+protected slots:
+  void socketError( QAbstractSocket::SocketError );
+
 protected:
   void virtual run();
 
-
+private:
+  FileInfo m_fileInfo;
+  QTcpSocket* mp_socket;
+  QFile* mp_file;
 
 };
 

@@ -24,13 +24,32 @@
 #include "FileTransferClient.h"
 
 
-FileTransferClient::FileTransferClient( QObject *parent )
-  : QThread( parent )
+FileTransferClient::FileTransferClient( const FileInfo& fi, QObject *parent )
+  : QThread( parent ), m_fileInfo( fi )
 {
+  mp_socket = new QTcpSocket( this );
+  connect( mp_socket, SIGNAL( readyRead() ), this, SLOT( readData() ) );
+  connect( mp_socket, SIGNAL( disconnected() ), this, SLOT( quit() ) );
+  connect( mp_socket, SIGNAL( connected() ), this, SLOT( startTransfer() ) );
 }
 
 void FileTransferClient::run()
 {
+  mp_socket->connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
+
+
   // quando c'e' un tcp socket e serve un loop si usa exec()
   exec();
+}
+
+void FileTransferClient::socketError( QAbstractSocket::SocketError )
+{
+
+  quit();
+}
+
+void FileTransferClient::startTransfer()
+{
+
+
 }
