@@ -24,6 +24,7 @@
 #include "BeeBeep.h"
 #include "BeeUtils.h"
 #include "Connection.h"
+#include "FileTransferClient.h"
 #include "FileTransferServer.h"
 #include "Listener.h"
 #include "PeerManager.h"
@@ -411,7 +412,7 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
   fi.setSize( file.size() );
   fi.setHostAddress( mp_fileServer->serverAddress() );
   fi.setHostPort( mp_fileServer->serverPort() );
-  fi.setPassword( "test_download" );
+  fi.setPassword( Settings::instance().hash( "test_download" ) );
 
   mp_fileServer->setupTransfer( fi );
   Message m = Protocol::instance().fileInfoToMessage( fi );
@@ -430,6 +431,7 @@ void BeeBeep::checkFileMessage( const User& u, const FileInfo& fi )
   QString icon_html = Bee::iconToHtml( ":/images/send-file.png", "*F*" );
   dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 File request arrived: %2." ).arg( icon_html ).arg( fi.name() ) );
 
-
-
+  FileTransferClient *pftr = new FileTransferClient( fi, this );
+  connect( pftr, SIGNAL( finished() ), pftr, SLOT( deleteLater() ) );
+  pftr->startTransfer();
 }

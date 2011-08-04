@@ -42,35 +42,52 @@ FileTransferRead::FileTransferRead( const FileInfo& fi, int socket_descriptor, Q
      return;
    }
 
+   bool auth = false;
+   QByteArray file_password = m_fileInfo.password().toUtf8();
+
+   while( tcpSocket.bytesAvailable() < file_password.size() )
+     wait( 500 );
+
+   QByteArray password_to_check = tcpSocket.readAll();
+   if( password_to_check != file_password )
+   {
+     emit error( "Password Error" );
+     tcpSocket.close();
+     qDebug() << "PASSWORD ERROR";
+     return;
+   }
+
    QFile file( m_fileInfo.path() );
    if( !file.open( QIODevice::ReadOnly) )
    {
      emit error( "Unable to open file" );
+     qDebug() << "FILE ERROR";
+     tcpSocket.close();
      return;
    }
 
    qDebug() << "Read file";
-   QByteArray text;
-   QByteArray block;
-   QDataStream out(&block, QIODevice::WriteOnly);
-   out.setVersion(QDataStream::Qt_4_0);
-
-   text = file.readAll();
-
-   out << (quint32)0;
-   out << text;
-   out.device()->seek(0);
-   out << (quint32)(block.size() - sizeof(quint32));
-
-   qDebug() << "send";
-   tcpSocket.write(block);
-
-   qDebug() << "sent";
+   QByteArray raw_data;
+   while( !file.atEnd() )
+   {
+     raw_data = file.read( 32000 );
+     qDebug() << "FileTransfer read" << raw_data.size() << "bytes";
+     QByteArray data_block;
+     QDataStream data_stream( &data_block, QIODevice::WriteOnly );
+     data_stream.setVersion( QDataStream::Qt_4_0 );
+     data_stream << (quint32)0;
+     data_stream << raw_data;
+     data_stream.device()->seek( 0 );
+     data_stream << (quint32)(data_block.size() - sizeof(quint32));
+     tcpSocket.write( data_block );
+     if( tcpSocket.waitForBytesWritten() )
+       qDebug() << "FileTransfer" << (data_block.size() - sizeof(quint32)) << "bytes sent";
+   }
    file.close();
-
-   qDebug() << "disconnectiong";
+   qDebug() << "disconnecting";
    tcpSocket.disconnectFromHost();
-   tcpSocket.waitForDisconnected();
+   if( tcpSocket.state() == QAbstractSocket::ClosingState )
+     tcpSocket.waitForDisconnected();
    qDebug() << "disconnected";
    qDebug() << "finished";
  }

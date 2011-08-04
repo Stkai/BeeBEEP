@@ -28,26 +28,36 @@
 #include "FileInfo.h"
 
 
-class FileTransferClient : public QThread
+class FileTransferClient : public QObject
 {
   Q_OBJECT
 
 public:
   FileTransferClient( const FileInfo&, QObject *parent = 0 );
 
+  void startTransfer();
+
 signals:
   void error( const QString& );
+  void byteReceived( const FileInfo&, quint64 );
+  void transferCompleted( const FileInfo& );
+  void finished();
 
 protected slots:
-  void socketError( QAbstractSocket::SocketError );
+  void sendAuth();
+  void readData();
+  void catchError( QAbstractSocket::SocketError );
+  void closeAll();
 
 protected:
-  void virtual run();
+  bool writeToFile( const QByteArray& );
 
 private:
   FileInfo m_fileInfo;
-  QTcpSocket* mp_socket;
-  QFile* mp_file;
+  quint32 m_dataSize;
+  QTcpSocket m_socket;
+  QFile m_file;
+  quint64 m_byteReceived;
 
 };
 

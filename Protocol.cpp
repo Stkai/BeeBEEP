@@ -256,6 +256,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   sl << QString::number( fi.size() );
   sl << fi.password();
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
+  m.addFlag( Message::Private );
   return m;
 }
 

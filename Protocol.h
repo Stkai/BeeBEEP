@@ -54,7 +54,6 @@ public:
 
   User createUser( const Message& );
   inline User createLocalUser() const;
-  bool isUserAuthorized( const QString& nick_name, const QString& md5 );
 
   QString encrypt( const QString&, int* num_chars_used_to_fill = NULL ) const;
   QString decrypt( const QString& ) const;
