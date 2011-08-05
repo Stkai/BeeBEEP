@@ -21,34 +21,30 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_CONFIG_H
-#define BEEBEEP_CONFIG_H
+#ifndef BEEBEEP_CONNECTIONSOCKET_H
+#define BEEBEEP_CONNECTIONSOCKET_H
 
-#include <QtCore>
-#include <QtGui>
-#include <QtNetwork>
+#include "Config.h"
 
-const int MAX_BUFFER_SIZE = 1024000;
-const int TRANSFER_TIMEOUT = 30 * 1000;
-const int PONG_TIMEOUT = 84 * 1000;
-const int PING_INTERVAL = 21 * 1000;
-const int WRITING_MESSAGE_TIMEOUT = 3 * 1000;
-const int BROADCAST_INTERVAL = 2000;
-const unsigned BROADCAST_PORT = 36475;
-const unsigned LISTENER_DEFAULT_PORT = 6475;
-const int DATASTREAM_VERSION = QDataStream::Qt_4_0;
 
-#define DATA_BLOCK_SIZE quint16
+class ConnectionSocket : public QTcpSocket
+{
+  Q_OBJECT
 
-// Protocol
-#define ID_LOCAL_USER      1
-#define ID_START           100
-#define ID_SYSTEM_MESSAGE  10
-#define ID_BEEP_MESSAGE    11
-#define ID_WRITING_MESSAGE 12
-#define ID_PING_MESSAGE    13
-#define ID_PONG_MESSAGE    14
-#define ID_HELLO_MESSAGE   15
-#define ID_STATUS_MESSAGE  16
+public:
+  explicit ConnectionSocket( QObject* parent = 0 );
 
-#endif // BEEBEEP_CONFIG_H
+  bool sendData( const QByteArray& );
+
+signals:
+  void dataReceived( const QByteArray& );
+
+protected slots:
+  void readBlock();
+
+private:
+  DATA_BLOCK_SIZE m_blockSize;
+
+};
+
+#endif // BEEBEEP_CONNECTIONSOCKET_H

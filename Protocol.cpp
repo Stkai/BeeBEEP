@@ -254,7 +254,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   QStringList sl;
   sl << QString::number( fi.hostPort() );
   sl << QString::number( fi.size() );
-  sl << fi.password();
+  sl << QString::fromUtf8( fi.password() );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   return m;
@@ -272,7 +272,7 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   fi.setSize( sl.at( 0 ).toInt() );
   sl.removeFirst();
   QString password = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
-  fi.setPassword( password );
+  fi.setPassword( password.toUtf8() );
   return fi;
 }
 
@@ -386,4 +386,112 @@ QString Protocol::decrypt( const QString& txt_encrypted ) const
   }
 
   return decrypted_string;
+}
+
+
+
+/************************************************/
+
+namespace
+{
+  QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars )
+  {
+     QList<QByteArray> array_list;
+
+    if( byte_array.isEmpty() || byte_array.isNull() )
+      return array_list;
+
+    QByteArray tmp( num_chars, '\0' );
+
+    for( int i = 0; i < byte_array.size(); i++ )
+    {
+      tmp.append( byte_array.at( i ) );
+      if( tmp.size() == num_chars )
+      {
+        array_list.append( tmp );
+        tmp = QByteArray( num_chars, '\0' );
+      }
+    }
+
+    if( tmp.at( 0 ) != '\0' )
+      array_list.append( tmp );
+
+    return array_list;
+  }
+}
+
+QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
+{
+  unsigned long rk[RKLENGTH(KEYBITS)];
+  unsigned char key[KEYLENGTH(KEYBITS)];
+  unsigned int i;
+  int nrounds;
+
+  if( byte_array.isNull() || byte_array.isEmpty() )
+    return QByteArray();
+
+  QByteArray password = Settings::instance().password();
+  for( i = 0; i < sizeof( key ); i++ )
+  {
+    key[ i ] = (unsigned int)password.size() < i ? static_cast<unsigned char>( password[ i ] ) : 0;
+  }
+
+  nrounds = rijndaelSetupEncrypt( rk, key, KEYBITS );
+
+  QList<QByteArray> byte_array_list = SplitByteArray( byte_array, 16 );
+
+  unsigned char plaintext[16];
+  unsigned char ciphertext[16];
+
+  QByteArray encrypted_byte_array;
+
+  foreach( QByteArray ba, byte_array_list )
+  {
+    for( i = 0; i < sizeof( plaintext ); i++ )
+      plaintext[ i ] = static_cast<unsigned char>( ba[ i ] );
+
+    rijndaelEncrypt( rk, nrounds, plaintext, ciphertext );
+
+    encrypted_byte_array.append( QByteArray( (const char*)ciphertext ) );
+  }
+
+  return encrypted_byte_array;
+}
+
+QByteArray Protocol::decryptByteArray( const QByteArray& byte_array_encrypted ) const
+{
+  unsigned long rk[RKLENGTH(KEYBITS)];
+  unsigned char key[KEYLENGTH(KEYBITS)];
+  unsigned int i;
+  int nrounds;
+
+  if( byte_array_encrypted.isNull() || byte_array_encrypted.isEmpty() )
+    return QByteArray();
+
+  QByteArray password = Settings::instance().password();
+  for( i = 0; i < sizeof( key ); i++ )
+  {
+    key[ i ] = (unsigned int)password.size() < i ? static_cast<unsigned char>( password[ i ] ) : 0;
+  }
+
+  nrounds = rijndaelSetupDecrypt( rk, key, KEYBITS );
+
+  QList<QByteArray> byte_array_list = SplitByteArray( byte_array_encrypted, 16 );
+
+  unsigned char plaintext[16];
+  unsigned char ciphertext[16];
+
+  QByteArray decrypted_byte_array;
+
+  foreach( QByteArray ba, byte_array_list )
+  {
+    for( i = 0; i < sizeof( ciphertext ); i++ )
+      ciphertext[ i ] = static_cast<unsigned char>( ba[ i ] );
+
+    rijndaelDecrypt( rk, nrounds, ciphertext, plaintext );
+
+    decrypted_byte_array.append( QByteArray( (const char*)plaintext ) );
+  }
+
+  return decrypted_byte_array;
 }

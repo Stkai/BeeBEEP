@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "FileTransferServer.h"
-#include "FileTransferRead.h"
+#include "FileTransferServerPeer.h"
 
 
 FileTransferServer::FileTransferServer( QObject *parent )
@@ -37,7 +37,7 @@ void FileTransferServer::setupTransfer( const FileInfo& fi )
 
 void FileTransferServer::incomingConnection( int socketDescriptor )
 {
-  FileTransferRead *pftr = new FileTransferRead( m_fileInfo, socketDescriptor, this );
-  connect( pftr, SIGNAL( finished() ), pftr, SLOT( deleteLater() ) );
-  pftr->start();
+  FileTransferServerPeer *pftr = new FileTransferServerPeer( m_fileInfo, this );
+  connect( pftr, SIGNAL( transferFinished() ), pftr, SLOT( deleteLater() ) );
+  pftr->startTransfer( socketDescriptor );
 }

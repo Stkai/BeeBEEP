@@ -46,8 +46,8 @@ public:
   inline void setHostAddress( const QHostAddress& );
   inline int hostPort() const;
   inline void setHostPort( int );
-  inline const QString& password() const;
-  inline void setPassword( const QString& );
+  inline const QByteArray& password() const;
+  inline void setPassword( const QByteArray& );
 
 private:
   QString m_name;
@@ -55,7 +55,7 @@ private:
   int m_size;
   QHostAddress m_hostAddress;
   int m_hostPort;
-  QString m_password;
+  QByteArray m_password;
 
 };
 
@@ -73,7 +73,7 @@ inline const QHostAddress& FileInfo::hostAddress() const { return m_hostAddress;
 inline void FileInfo::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
 inline int FileInfo::hostPort() const { return m_hostPort; }
 inline void FileInfo::setHostPort( int new_value ) { m_hostPort = new_value; }
-inline const QString& FileInfo::password() const { return m_password; }
-inline void FileInfo::setPassword( const QString& new_value ) { m_password = new_value; }
+inline const QByteArray& FileInfo::password() const { return m_password; }
+inline void FileInfo::setPassword( const QByteArray& new_value ) { m_password = new_value; }
 
 #endif // BEEBEEP_FILEINFO_H

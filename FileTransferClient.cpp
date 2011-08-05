@@ -25,83 +25,65 @@
 
 
 FileTransferClient::FileTransferClient( const FileInfo& fi, QObject *parent )
-  : QObject( parent ), m_fileInfo( fi ), m_dataSize( 0 ), m_socket(), m_file(), m_byteReceived( 0 )
+  : FileTransferPeer( fi, parent )
 {
-  connect( &m_socket, SIGNAL( connected() ), this, SLOT( sendAuth() ) );
-  connect( &m_socket, SIGNAL( readyRead() ), this, SLOT( readData() ) );
-  connect( &m_socket, SIGNAL( disconnected() ), this, SLOT( closeAll() ) );
-
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "File transfer client created for file" << m_fileInfo.name();
+#endif
 }
 
-void FileTransferClient::startTransfer()
+void FileTransferClient::sendData()
 {
-  m_file.setFileName( m_fileInfo.name() );
-  m_socket.connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
-  m_byteReceived = 0;
-  m_dataSize = 0;
+  switch( m_state )
+  {
+  case FileTransferPeer::Auth:
+    sendAuth();
+    break;
+  case FileTransferPeer::Transferring:
+    sendDataConfirmation();
+    break;
+  default:
+    // do_nothing
+    break;
+  }
 }
 
 void FileTransferClient::sendAuth()
 {
-  qDebug() << "Send FILE AUTH";
-  m_socket.write( m_fileInfo.password().toUtf8() );
+  m_socket.sendData( m_fileInfo.password() );
 }
 
-void FileTransferClient::catchError( QAbstractSocket::SocketError se )
+
+void FileTransferClient::sendDataConfirmation()
 {
-  qWarning() << "FileTransferClient error" << se;
-  emit error( "File Transfer Error" );
+   m_socket.sendData( QByteArray::number( m_bytesTransferred ) );
 }
 
-void FileTransferClient::closeAll()
+void FileTransferClient::checkData( const QByteArray& byte_array )
 {
-  qDebug() << "FileTransferClient close all";
-  if( m_socket.isOpen() )
-    m_socket.close();
-  if( m_file.isOpen() )
-    m_file.close();
-  emit finished();
-}
+  m_bytesTransferred = byte_array.size();
+  m_totalBytesTransferred += m_bytesTransferred;
 
-void FileTransferClient::readData()
-{
-  QTcpSocket* mp_socket = qobject_cast<QTcpSocket*>( sender() );
-  QDataStream data_stream( mp_socket );
-  data_stream.setVersion( QDataStream::Qt_4_0 );
-  if( m_dataSize == 0 )
+  if( !m_file.isOpen() )
   {
-    if( mp_socket->bytesAvailable() < (int)sizeof(quint32))
+    if( !m_file.open( QIODevice::WriteOnly ) )
+    {
+      setError( tr( "Unable to open file") );
       return;
-    data_stream >> m_dataSize;
-    qDebug() << "FileTransferClient" << m_dataSize << "bytes to read";
+    }
   }
 
-  if( mp_socket->bytesAvailable() < m_dataSize )
-   return;
-
-  QByteArray raw_data;
-  data_stream >> raw_data;
-  qDebug() << "FileTransferClient read" << raw_data.size() << "bytes";
-  m_dataSize = 0;
-  m_byteReceived += raw_data.size();
-  writeToFile( raw_data );
-  emit byteReceived( m_fileInfo, m_byteReceived );
-
-  if( m_byteReceived == m_fileInfo.size() )
+  if( m_file.write( byte_array ) == m_bytesTransferred )
   {
-    emit transferCompleted( m_fileInfo );
-    qDebug() << "COMPLETED";
+    sendData();
   }
+  else
+  {
+    setError( tr( "Unable to write in the file" ) );
+    return;
+  }
+
+  if( m_totalBytesTransferred == m_fileInfo.size() )
+    setTransferCompleted();
 }
 
-bool FileTransferClient::writeToFile( const QByteArray& data )
-{
-  if( !m_file.isOpen() && !m_file.open( QIODevice::WriteOnly ) )
-  {
-    qWarning() << "Unable to open file" << m_file.fileName();
-    closeAll();
-    return false;
-  }
-
-  return m_file.write( data ) == data.size();
-}

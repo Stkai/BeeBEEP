@@ -21,31 +21,29 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_FILETRANSFERREAD_H
-#define BEEBEEP_FILETRANSFERREAD_H
+#ifndef BEEBEEP_FILETRANSFERSERVERPEER_H
+#define BEEBEEP_FILETRANSFERSERVERPEER_H
 
-#include "Config.h"
-#include "FileInfo.h"
+#include "FileTransferPeer.h"
 
 
-class FileTransferRead : public QThread
+class FileTransferServerPeer : public FileTransferPeer
 {
   Q_OBJECT
 
 public:
-  FileTransferRead( const FileInfo&, int socket_descriptor, QObject *parent = 0);
+  enum TransferState { Unknown, Auth, Sending, Error, Completed };
+
+  FileTransferServerPeer( const FileInfo&, QObject *parent = 0 );
+
+protected slots:
+  void sendData();
+  void checkData( const QByteArray& );
 
 protected:
-  virtual void run();
-
-signals:
-  void error( const QString& );
-
-private:
-  FileInfo m_fileInfo;
-  int m_socketDescriptor;
-
+  void checkAuth( const QByteArray& );
+  void checkSending( const QByteArray& );
 
 };
 
-#endif // BEEBEEP_FILETRANSFERREAD_H
+#endif // BEEBEEP_FILETRANSFERSERVERPEER_H

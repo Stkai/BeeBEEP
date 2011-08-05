@@ -21,30 +21,49 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_FILETRANSFERCLIENT_H
-#define BEEBEEP_FILETRANSFERCLIENT_H
+#ifndef BEEBEEP_FILETRANSFERPEER_H
+#define BEEBEEP_FILETRANSFERPEER_H
 
-#include "FileTransferPeer.h"
+#include "Config.h"
+#include "ConnectionSocket.h"
+#include "FileInfo.h"
 
 
 
-class FileTransferClient : public FileTransferPeer
+class FileTransferPeer : public QObject
 {
   Q_OBJECT
 
 public:
-  FileTransferClient( const FileInfo&, QObject *parent = 0 );
+  enum TransferState { Unknown, Auth, Transferring, Completed, Error };
+
+  FileTransferPeer( const FileInfo&, QObject *parent = 0 );
+
+  void startTransfer( int socket_descriptor ); // if descriptor = 0 socket tries to connect to remote host (client side)
 
 protected slots:
-  void checkData( const QByteArray& );
-  void sendData();
+  void socketError( QAbstractSocket::SocketError );
+
+  virtual void checkData( const QByteArray& ) = 0;
+  virtual void sendData() = 0;
+
+signals:
+  void transferMessage( const FileInfo&, const QString& );
+  void transferFinished();
 
 protected:
-  void sendAuth();
-  void sendDataConfirmation();
+  void setError( const QString& );
+  void setTransferCompleted();
+  void closeAll();
 
+protected:
+  FileInfo m_fileInfo;
+  ConnectionSocket m_socket;
+  QFile m_file;
+  TransferState m_state;
+  int m_bytesTransferred;
+  int m_totalBytesTransferred;
 
 };
 
-
-#endif // BEEBEEP_FILETRANSFERCLIENT_H
+#endif // BEEBEEP_FILETRANSFERSERVERPEER_H
