@@ -43,6 +43,7 @@ BeeBeep::BeeBeep( QObject* parent )
 
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( newConnection( Connection* ) ) );
+  connect( mp_fileServer, SIGNAL( transferMessage( const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const FileInfo&, const QString& ) ) );
 }
 
 bool BeeBeep::isWorking() const
@@ -432,12 +433,19 @@ void BeeBeep::checkFileMessage( const User& u, const FileInfo& fi )
   dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 File request arrived: %2." ).arg( icon_html ).arg( fi.name() ) );
 
   //FIXME
-  QString path = QDir::homePath() + "/" +  fi.name();
+  QString path = QString( "E:/" ) +  fi.name();
 
   FileInfo file_info = fi;
   file_info.setPath( path );
 
-  FileTransferClient *pftr = new FileTransferClient( fi, this );
-  connect( pftr, SIGNAL( transferFinished() ), pftr, SLOT( deleteLater() ) );
-  pftr->startTransfer( 0 );
+  FileTransferClient *client_peer = new FileTransferClient( file_info, this );
+  connect( client_peer, SIGNAL( transferFinished() ), client_peer, SLOT( deleteLater() ) );
+  connect( client_peer, SIGNAL( transferMessage( const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const FileInfo&, const QString& ) ) );
+  client_peer->startTransfer( 0 );
+}
+
+void BeeBeep::checkFileTransfer( const FileInfo& fi, const QString& msg )
+{
+  QString icon_html = Bee::iconToHtml( ":/images/send-file.png", "*F*" );
+  dispatchSystemMessage( Settings::instance().defaultChatName(), tr( "%1 %2: %3." ).arg( icon_html ).arg( fi.name() ).arg( msg ) );
 }

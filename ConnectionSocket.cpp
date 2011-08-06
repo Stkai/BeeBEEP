@@ -44,7 +44,7 @@ void ConnectionSocket::readBlock()
       return;
     data_stream >> m_blockSize;
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "ConnectionSocket read the block size:" << m_blockSize;
+    qDebug() << "Socket read the block size:" << m_blockSize;
 #endif
   }
 
@@ -56,13 +56,13 @@ void ConnectionSocket::readBlock()
   data_stream >> byte_array_read;
 
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "ConnectionSocket read a byte array:" << byte_array_read;
+  qDebug() << "Socket read a byte array:" << byte_array_read;
 #endif
 
   m_blockSize = 0;
   if( Settings::instance().useEncryption() )
   {
-    QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
+    QByteArray decrypted_byte_array = byte_array_read; //Protocol::instance().decryptByteArray( byte_array_read );
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Data decrypted:" << decrypted_byte_array;
 #endif
@@ -75,12 +75,12 @@ void ConnectionSocket::readBlock()
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "ConnectionSocket send a byte array:" << byte_array;
+  qDebug() << "Socket send a byte array:" << byte_array;
 #endif
   QByteArray byte_array_to_send;
   if( Settings::instance().useEncryption() )
   {
-    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array );
+    byte_array_to_send = byte_array; //Protocol::instance().encryptByteArray( byte_array );
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Encrypt data:" << byte_array_to_send;
 #endif
@@ -97,9 +97,11 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   data_stream << (DATA_BLOCK_SIZE)(data_block.size() - sizeof(DATA_BLOCK_SIZE));
 
 #if defined( BEEBEEP_DEBUG )
+  qDebug() << "Send block size:" << (DATA_BLOCK_SIZE)(data_block.size() - sizeof(DATA_BLOCK_SIZE));
+  qDebug() << "Send data:" << data_block;
   if( write( data_block ) == data_block.size() )
   {
-    qDebug() << "ConnectionSocket send" << data_block.size() << "bytes";
+    qDebug() << "Socket send" << data_block.size() << "bytes";
     return true;
   }
   else

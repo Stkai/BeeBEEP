@@ -81,6 +81,7 @@ private slots:
   void dispatchSystemMessage( const QString& chat_name, const QString& sysmess );
   void setUserStatus( const User& );
   void checkFileMessage( const User&, const FileInfo& );
+  void checkFileTransfer( const FileInfo&, const QString& );
 
 protected:
   bool hasConnection( const QHostAddress& sender_ip, int sender_port = -1 ) const;

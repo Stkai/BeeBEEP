@@ -39,7 +39,7 @@ public:
   void setupTransfer( const FileInfo& );
 
 signals:
-  void bytesTransferred( int, int );
+  void transferMessage( const FileInfo&, const QString& );
 
 protected:
   void incomingConnection( int );

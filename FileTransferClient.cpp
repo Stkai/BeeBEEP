@@ -51,6 +51,7 @@ void FileTransferClient::sendData()
 void FileTransferClient::sendAuth()
 {
   m_socket.sendData( m_fileInfo.password() );
+  m_state = FileTransferPeer::Transferring;
 }
 
 

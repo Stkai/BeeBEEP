@@ -37,7 +37,8 @@ void FileTransferServer::setupTransfer( const FileInfo& fi )
 
 void FileTransferServer::incomingConnection( int socketDescriptor )
 {
-  FileTransferServerPeer *pftr = new FileTransferServerPeer( m_fileInfo, this );
-  connect( pftr, SIGNAL( transferFinished() ), pftr, SLOT( deleteLater() ) );
-  pftr->startTransfer( socketDescriptor );
+  FileTransferServerPeer *server_peer = new FileTransferServerPeer( m_fileInfo, this );
+  connect( server_peer, SIGNAL( transferFinished() ), server_peer, SLOT( deleteLater() ) );
+  connect( server_peer, SIGNAL( transferMessage( const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const FileInfo&, const QString& ) ) );
+  server_peer->startTransfer( socketDescriptor );
 }
