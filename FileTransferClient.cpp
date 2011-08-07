@@ -57,6 +57,9 @@ void FileTransferClient::sendAuth()
 
 void FileTransferClient::sendDataConfirmation()
 {
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "File transfer send a corfirmation for" << m_bytesTransferred << "bytes";
+#endif
    m_socket.sendData( QByteArray::number( m_bytesTransferred ) );
 }
 

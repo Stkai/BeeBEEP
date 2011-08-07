@@ -48,7 +48,28 @@ bool SetTranslator( QTranslator* translator, QString new_locale )
 }
 
 
+void make_test()
+{
+  QByteArray ba16( "1234567890987654" );
+  QByteArray ba32( "12345678909876541234567890987654" );
+  QByteArray ba39( "abcdefghilmnopgrstuvwyz31234567890hgfdt" );
+  QByteArray enc_ba;
+  QByteArray dec_ba;
 
+  QList<QByteArray> blist;
+  blist << ba16 << ba32 << ba39;
+
+  foreach( QByteArray ba, blist )
+  {
+    qDebug() << "Encrypt:" << ba;
+    enc_ba = Protocol::instance().encryptByteArray( ba );
+    qDebug() << "Encrypted:" << enc_ba;
+    dec_ba = Protocol::instance().decryptByteArray( enc_ba );
+    qDebug() << "Decrypted:" << dec_ba;
+    if( dec_ba == ba )
+      qDebug() << "OK";
+  }
+}
 
 int main( int argc, char *argv[] )
 {
@@ -74,6 +95,7 @@ int main( int argc, char *argv[] )
   /* Init Protocol */
   (void)Protocol::instance();
 
+  //make_test();
   /* Show Main Window */
   GuiMain mw;
 #ifdef Q_OS_SYMBIAN

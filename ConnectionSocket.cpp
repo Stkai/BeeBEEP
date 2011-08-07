@@ -62,7 +62,7 @@ void ConnectionSocket::readBlock()
   m_blockSize = 0;
   if( Settings::instance().useEncryption() )
   {
-    QByteArray decrypted_byte_array = byte_array_read; //Protocol::instance().decryptByteArray( byte_array_read );
+    QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Data decrypted:" << decrypted_byte_array;
 #endif
@@ -80,7 +80,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   QByteArray byte_array_to_send;
   if( Settings::instance().useEncryption() )
   {
-    byte_array_to_send = byte_array; //Protocol::instance().encryptByteArray( byte_array );
+    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array );
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Encrypt data:" << byte_array_to_send;
 #endif

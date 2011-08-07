@@ -394,27 +394,32 @@ QString Protocol::decrypt( const QString& txt_encrypted ) const
 
 namespace
 {
-  QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars )
+QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars, char fill_char = '\0' )
   {
      QList<QByteArray> array_list;
 
     if( byte_array.isEmpty() || byte_array.isNull() )
       return array_list;
 
-    QByteArray tmp( num_chars, '\0' );
+    QByteArray tmp( num_chars, fill_char );
+    int j = -1;
 
     for( int i = 0; i < byte_array.size(); i++ )
     {
-      tmp.append( byte_array.at( i ) );
-      if( tmp.size() == num_chars )
+      tmp[ ++j ] = byte_array.at( i );
+      if( j == (num_chars-1) )
       {
         array_list.append( tmp );
-        tmp = QByteArray( num_chars, '\0' );
+        tmp = QByteArray( num_chars, fill_char );
+        j = -1;
       }
     }
 
-    if( tmp.at( 0 ) != '\0' )
+    if( tmp.at( 0 ) != fill_char )
+    {
+      qDebug() << "Splitted:" << tmp;
       array_list.append( tmp );
+    }
 
     return array_list;
   }
@@ -452,7 +457,12 @@ QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
 
     rijndaelEncrypt( rk, nrounds, plaintext, ciphertext );
 
-    encrypted_byte_array.append( QByteArray( (const char*)ciphertext ) );
+    for( i = 0; i < sizeof( ciphertext ); i++ )
+      encrypted_byte_array.append( static_cast<char>( ciphertext[ i ] ) );
+
+    memset( ciphertext, 0, sizeof( ciphertext ) );
+    memset( plaintext, 0, sizeof( plaintext ) );
+
   }
 
   return encrypted_byte_array;
@@ -490,7 +500,12 @@ QByteArray Protocol::decryptByteArray( const QByteArray& byte_array_encrypted ) 
 
     rijndaelDecrypt( rk, nrounds, ciphertext, plaintext );
 
-    decrypted_byte_array.append( QByteArray( (const char*)plaintext ) );
+    for( i = 0; i < sizeof( plaintext ); i++ )
+      if( plaintext[ i ] != '\0' )
+        decrypted_byte_array.append( static_cast<char>( plaintext[ i ] ) );
+
+    memset( ciphertext, 0, sizeof( ciphertext ) );
+    memset( plaintext, 0, sizeof( plaintext ) );
   }
 
   return decrypted_byte_array;

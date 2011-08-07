@@ -76,7 +76,7 @@ void FileTransferServerPeer::checkSending( const QByteArray& byte_array )
     sendData();
   }
   else
-    setError( tr( "%1 bytes sent not confirmed").arg( m_bytesTransferred ) );
+    setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( byte_array.toInt() ) );
 }
 
 void FileTransferServerPeer::sendData()
