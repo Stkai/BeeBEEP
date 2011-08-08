@@ -24,8 +24,8 @@
 #include "FileTransferPeer.h"
 
 
-FileTransferPeer::FileTransferPeer( const FileInfo& fi, QObject *parent )
-  : QObject( parent ), m_fileInfo( fi ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ), m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 )
+FileTransferPeer::FileTransferPeer( const User& u, const FileInfo& fi, QObject *parent )
+  : QObject( parent ), m_user( u ), m_fileInfo( fi ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ), m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 )
 {
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Peer created for file" << m_fileInfo.name();
@@ -45,6 +45,7 @@ void FileTransferPeer::closeAll()
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Closing socket";
 #endif
+    m_socket.flush();
     m_socket.close();
   }
   if( m_file.isOpen() )
@@ -52,6 +53,7 @@ void FileTransferPeer::closeAll()
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Closing file";
 #endif
+    m_file.flush();
     m_file.close();
   }
   emit transferFinished();
@@ -91,7 +93,7 @@ void FileTransferPeer::setTransferCompleted()
   qDebug() << m_fileInfo.name() << ": transfer completed";
 #endif
   m_state = FileTransferPeer::Completed;
-  emit transferMessage( m_fileInfo, tr( "file transfer completed") );
+  emit transferMessage( m_user, m_fileInfo, tr( "transfer completed") );
   closeAll();
 }
 
@@ -103,8 +105,18 @@ void FileTransferPeer::socketError( QAbstractSocket::SocketError se )
 void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
-  QString s = tr( "file transfer error occurred. %1" ).arg( str_err );
+  QString s = tr( "transfer error: %1" ).arg( str_err );
   qWarning() << s;
-  emit transferMessage( m_fileInfo, str_err );
+  emit transferMessage( m_user, m_fileInfo, str_err );
   closeAll();
+}
+
+void FileTransferPeer::showProgress()
+{
+  QString s = tr( "%1: %2 %3 of %4 bytes (%5%)" ).arg( m_file.fileName() )
+      .arg( m_fileInfo.transferType() == FileInfo::Upload ? tr( "upload" ) : tr( "download" ) )
+                                             .arg( QString::number( m_totalBytesTransferred ) )
+                                             .arg( QString::number( m_fileInfo.size() ) )
+      .arg( QString::number( static_cast<int>( (m_totalBytesTransferred * 100) / m_fileInfo.size())) );
+  emit transferMessage( m_user, m_fileInfo, s );
 }

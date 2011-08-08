@@ -27,6 +27,7 @@
 
 #include "Config.h"
 #include "FileInfo.h"
+#include "User.h"
 
 
 class FileTransferServer : public QTcpServer
@@ -36,16 +37,17 @@ class FileTransferServer : public QTcpServer
 public:
   explicit FileTransferServer( QObject *parent = 0 );
 
-  void setupTransfer( const FileInfo& );
+  void uploadFile( const User&, const FileInfo& );
+  void downloadFile( const User&, const FileInfo& );
 
 signals:
-  void transferMessage( const FileInfo&, const QString& );
+  void transferMessage( const User&, const FileInfo&, const QString& );
 
 protected:
   void incomingConnection( int );
-  void startTransfer();
 
 private:
+  User m_user;
   FileInfo m_fileInfo;
 
 };

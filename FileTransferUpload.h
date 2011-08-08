@@ -21,20 +21,20 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_FILETRANSFERSERVERPEER_H
-#define BEEBEEP_FILETRANSFERSERVERPEER_H
+#ifndef BEEBEEP_FILETRANSFERUPLOAD_H
+#define BEEBEEP_FILETRANSFERUPLOAD_H
 
 #include "FileTransferPeer.h"
 
 
-class FileTransferServerPeer : public FileTransferPeer
+class FileTransferUpload : public FileTransferPeer
 {
   Q_OBJECT
 
 public:
   enum TransferState { Unknown, Auth, Sending, Error, Completed };
 
-  FileTransferServerPeer( const FileInfo&, QObject *parent = 0 );
+  FileTransferUpload( const User&, const FileInfo&, QObject *parent = 0 );
 
 protected slots:
   void sendData();
@@ -46,4 +46,4 @@ protected:
 
 };
 
-#endif // BEEBEEP_FILETRANSFERSERVERPEER_H
+#endif // BEEBEEP_FILETRANSFERUPLOAD_H

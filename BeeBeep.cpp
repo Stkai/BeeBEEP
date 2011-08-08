@@ -24,7 +24,6 @@
 #include "BeeBeep.h"
 #include "BeeUtils.h"
 #include "Connection.h"
-#include "FileTransferClient.h"
 #include "FileTransferServer.h"
 #include "Listener.h"
 #include "PeerManager.h"
@@ -43,7 +42,7 @@ BeeBeep::BeeBeep( QObject* parent )
 
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( newConnection( Connection* ) ) );
-  connect( mp_fileServer, SIGNAL( transferMessage( const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const FileInfo&, const QString& ) ) );
+  connect( mp_fileServer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const User&, const FileInfo&, const QString& ) ) );
 }
 
 bool BeeBeep::isWorking() const
@@ -401,13 +400,20 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
      return false;
   }
 
+  Connection* c = connection( chat_name );
+  if( !c )
+  {
+    dispatchSystemMessage( chat_name, tr( "%1 Unable to send file: user is not connected." ).arg( icon_html ) );
+    return false;
+  }
+
   Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
   dispatchSystemMessage( chat_name, tr( "%1 You are sending %2..." ).arg( icon_html ).arg( file.fileName() ) );
 
   if( !mp_fileServer->isListening() )
     mp_fileServer->listen( QHostAddress::Any );
 
-  FileInfo fi;
+  FileInfo fi( FileInfo::Upload );
   fi.setName( file.fileName() );
   fi.setPath( file.absoluteFilePath() );
   fi.setSize( file.size() );
@@ -415,14 +421,8 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
   fi.setHostPort( mp_fileServer->serverPort() );
   fi.setPassword( Settings::instance().hash( "test_download" ).toUtf8() );
 
-  mp_fileServer->setupTransfer( fi );
+  mp_fileServer->uploadFile( c->user(), fi );
   Message m = Protocol::instance().fileInfoToMessage( fi );
-  Connection* c = connection( chat_name );
-  if( !c )
-  {
-    dispatchSystemMessage( chat_name, tr( "%1 Unable to send file: user is not connected." ).arg( icon_html ) );
-    return false;
-  }
   c->sendMessage( m );
   return true;
 }
@@ -437,15 +437,11 @@ void BeeBeep::checkFileMessage( const User& u, const FileInfo& fi )
 
   FileInfo file_info = fi;
   file_info.setPath( path );
-
-  FileTransferClient *client_peer = new FileTransferClient( file_info, this );
-  connect( client_peer, SIGNAL( transferFinished() ), client_peer, SLOT( deleteLater() ) );
-  connect( client_peer, SIGNAL( transferMessage( const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const FileInfo&, const QString& ) ) );
-  client_peer->startTransfer( 0 );
+  mp_fileServer->downloadFile( u, file_info );
 }
 
-void BeeBeep::checkFileTransfer( const FileInfo& fi, const QString& msg )
+void BeeBeep::checkFileTransfer( const User& u, const FileInfo& fi, const QString& msg )
 {
   QString icon_html = Bee::iconToHtml( ":/images/send-file.png", "*F*" );
-  dispatchSystemMessage( Settings::instance().defaultChatName(), tr( "%1 %2: %3." ).arg( icon_html ).arg( fi.name() ).arg( msg ) );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 %2: %3." ).arg( icon_html ).arg( fi.name() ).arg( msg ) );
 }

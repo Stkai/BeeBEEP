@@ -30,12 +30,15 @@
 class FileInfo
 {
 public:
-  FileInfo();
+  enum TransferType { Upload, Download };
+
+  explicit FileInfo( TransferType );
   inline FileInfo( const FileInfo& );
 
   FileInfo& operator=( const FileInfo& );
 
   inline bool isValid() const;
+  inline TransferType transferType() const;
   inline const QString& name() const;
   inline void setName( const QString& );
   inline const QString& path() const;
@@ -50,6 +53,7 @@ public:
   inline void setPassword( const QByteArray& );
 
 private:
+  TransferType m_transferType;
   QString m_name;
   QString m_path;
   int m_size;
@@ -63,6 +67,7 @@ private:
 // Inline Functions
 inline FileInfo::FileInfo( const FileInfo& fi ) { (void)operator=( fi ); }
 inline bool FileInfo::isValid() const { return m_name.size() > 0; }
+inline FileInfo::TransferType FileInfo::transferType() const { return m_transferType; }
 inline const QString& FileInfo::name() const { return m_name; }
 inline void FileInfo::setName( const QString& new_value ) { m_name = new_value; }
 inline const QString& FileInfo::path() const { return m_path; }

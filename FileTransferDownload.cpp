@@ -21,18 +21,18 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "FileTransferClient.h"
+#include "FileTransferDownload.h"
 
 
-FileTransferClient::FileTransferClient( const FileInfo& fi, QObject *parent )
-  : FileTransferPeer( fi, parent )
+FileTransferDownload::FileTransferDownload( const User& u, const FileInfo& fi, QObject *parent )
+  : FileTransferPeer( u, fi, parent )
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "File transfer client created for file" << m_fileInfo.name();
+  qDebug() << "Download the file" << m_fileInfo.name();
 #endif
 }
 
-void FileTransferClient::sendData()
+void FileTransferDownload::sendData()
 {
   switch( m_state )
   {
@@ -48,22 +48,25 @@ void FileTransferClient::sendData()
   }
 }
 
-void FileTransferClient::sendAuth()
+void FileTransferDownload::sendAuth()
 {
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Sending AUTH:" << m_fileInfo.password();
+#endif
   m_socket.sendData( m_fileInfo.password() );
   m_state = FileTransferPeer::Transferring;
 }
 
 
-void FileTransferClient::sendDataConfirmation()
+void FileTransferDownload::sendDataConfirmation()
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "File transfer send a corfirmation for" << m_bytesTransferred << "bytes";
+  qDebug() << "Download corfirmation for" << m_bytesTransferred << "bytes";
 #endif
    m_socket.sendData( QByteArray::number( m_bytesTransferred ) );
 }
 
-void FileTransferClient::checkData( const QByteArray& byte_array )
+void FileTransferDownload::checkData( const QByteArray& byte_array )
 {
   m_bytesTransferred = byte_array.size();
   m_totalBytesTransferred += m_bytesTransferred;
@@ -76,6 +79,8 @@ void FileTransferClient::checkData( const QByteArray& byte_array )
       return;
     }
   }
+
+  showProgress();
 
   if( m_file.write( byte_array ) == m_bytesTransferred )
   {

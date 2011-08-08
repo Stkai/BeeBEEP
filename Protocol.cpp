@@ -262,11 +262,11 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
 
 FileInfo Protocol::fileInfoFromMessage( const Message& m )
 {
-  FileInfo fi;
+  FileInfo fi( FileInfo::Download );
   fi.setName( m.text() );
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 3 )
-    return FileInfo();
+    return FileInfo( FileInfo::Download );
   fi.setHostPort( sl.at( 0 ).toInt() );
   sl.removeFirst();
   fi.setSize( sl.at( 0 ).toInt() );

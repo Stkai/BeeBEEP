@@ -22,18 +22,18 @@
 //////////////////////////////////////////////////////////////////////
 
 
-#include "FileTransferServerPeer.h"
+#include "FileTransferUpload.h"
 
 
-FileTransferServerPeer::FileTransferServerPeer( const FileInfo& fi, QObject *parent )
-  : FileTransferPeer( fi, parent )
+FileTransferUpload::FileTransferUpload( const User& u, const FileInfo& fi, QObject *parent )
+  : FileTransferPeer( u, fi, parent )
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Server Peer created for file" << m_fileInfo.name();
+  qDebug() << "Upload the file" << m_fileInfo.name();
 #endif
 }
 
-void FileTransferServerPeer::checkData( const QByteArray& byte_array )
+void FileTransferUpload::checkData( const QByteArray& byte_array )
 {
   switch( m_state )
   {
@@ -49,12 +49,12 @@ void FileTransferServerPeer::checkData( const QByteArray& byte_array )
   }
 }
 
-void FileTransferServerPeer::checkAuth( const QByteArray& byte_array )
+void FileTransferUpload::checkAuth( const QByteArray& byte_array )
 {
   if( byte_array == m_fileInfo.password() )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "Server Peer auth received for file" << m_fileInfo.name();
+    qDebug() << "AUTH received for file" << m_fileInfo.name();
 #endif
     m_state = FileTransferPeer::Transferring;
     sendData();
@@ -65,21 +65,22 @@ void FileTransferServerPeer::checkAuth( const QByteArray& byte_array )
   }
 }
 
-void FileTransferServerPeer::checkSending( const QByteArray& byte_array )
+void FileTransferUpload::checkSending( const QByteArray& byte_array )
 {
   if( byte_array.toInt() == m_bytesTransferred )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent confirmed";
+    qDebug() << m_bytesTransferred << "bytes sent confirmed";
 #endif
     m_totalBytesTransferred += m_bytesTransferred;
+    showProgress();
     sendData();
   }
   else
     setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( byte_array.toInt() ) );
 }
 
-void FileTransferServerPeer::sendData()
+void FileTransferUpload::sendData()
 {
   if( m_state != FileTransferPeer::Transferring )
   {

@@ -27,6 +27,7 @@
 #include "Config.h"
 #include "ConnectionSocket.h"
 #include "FileInfo.h"
+#include "User.h"
 
 
 
@@ -37,7 +38,7 @@ class FileTransferPeer : public QObject
 public:
   enum TransferState { Unknown, Auth, Transferring, Completed, Error };
 
-  FileTransferPeer( const FileInfo&, QObject *parent = 0 );
+  FileTransferPeer( const User&, const FileInfo&, QObject *parent = 0 );
 
   void startTransfer( int socket_descriptor ); // if descriptor = 0 socket tries to connect to remote host (client side)
 
@@ -48,15 +49,17 @@ protected slots:
   virtual void sendData() = 0;
 
 signals:
-  void transferMessage( const FileInfo&, const QString& );
+  void transferMessage( const User&, const FileInfo&, const QString& );
   void transferFinished();
 
 protected:
+  void showProgress();
   void setError( const QString& );
   void setTransferCompleted();
   void closeAll();
 
 protected:
+  User m_user;
   FileInfo m_fileInfo;
   ConnectionSocket m_socket;
   QFile m_file;

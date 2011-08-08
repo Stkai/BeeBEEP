@@ -21,19 +21,19 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_FILETRANSFERCLIENT_H
-#define BEEBEEP_FILETRANSFERCLIENT_H
+#ifndef BEEBEEP_FILETRANSFERDOWNLOAD_H
+#define BEEBEEP_FILETRANSFERDOWNLOAD_H
 
 #include "FileTransferPeer.h"
 
 
 
-class FileTransferClient : public FileTransferPeer
+class FileTransferDownload : public FileTransferPeer
 {
   Q_OBJECT
 
 public:
-  FileTransferClient( const FileInfo&, QObject *parent = 0 );
+  FileTransferDownload( const User&, const FileInfo&, QObject *parent = 0 );
 
 protected slots:
   void checkData( const QByteArray& );
@@ -47,4 +47,4 @@ protected:
 };
 
 
-#endif // BEEBEEP_FILETRANSFERCLIENT_H
+#endif // BEEBEEP_FILETRANSFERDOWNLOAD_H

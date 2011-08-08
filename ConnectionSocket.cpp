@@ -27,6 +27,8 @@
 #include "Settings.h"
 
 
+#undef USE_ENCRYPTION
+
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 )
@@ -60,6 +62,7 @@ void ConnectionSocket::readBlock()
 #endif
 
   m_blockSize = 0;
+#if defined( USE_ENCRYPTION )
   if( Settings::instance().useEncryption() )
   {
     QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
@@ -69,6 +72,7 @@ void ConnectionSocket::readBlock()
     emit dataReceived( decrypted_byte_array );
   }
   else
+#endif
     emit dataReceived( byte_array_read );
 }
 
@@ -78,6 +82,8 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   qDebug() << "Socket send a byte array:" << byte_array;
 #endif
   QByteArray byte_array_to_send;
+
+#if defined( USE_ENCRYPTION )
   if( Settings::instance().useEncryption() )
   {
     byte_array_to_send = Protocol::instance().encryptByteArray( byte_array );
@@ -86,6 +92,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #endif
   }
   else
+#endif
     byte_array_to_send = byte_array;
 
   QByteArray data_block;

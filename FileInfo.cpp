@@ -24,8 +24,8 @@
 #include "FileInfo.h"
 
 
-FileInfo::FileInfo()
-  : m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" )
+FileInfo::FileInfo( FileInfo::TransferType tt )
+  : m_transferType( tt ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" )
 {
 }
 
@@ -33,6 +33,7 @@ FileInfo& FileInfo::operator=( const FileInfo& fi )
 {
   if( this != &fi )
   {
+    m_transferType = fi.m_transferType;
     m_name = fi.m_name;
     m_path = fi.m_path;
     m_size = fi.m_size;

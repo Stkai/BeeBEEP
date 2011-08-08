@@ -22,23 +22,34 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "FileTransferServer.h"
-#include "FileTransferServerPeer.h"
+#include "FileTransferDownload.h"
+#include "FileTransferUpload.h"
+
 
 
 FileTransferServer::FileTransferServer( QObject *parent )
-  : QTcpServer( parent )
+  : QTcpServer( parent ), m_user(), m_fileInfo( FileInfo::Upload )
 {
 }
 
-void FileTransferServer::setupTransfer( const FileInfo& fi )
+void FileTransferServer::uploadFile( const User& u, const FileInfo& fi )
 {
+  m_user = u;
   m_fileInfo = fi;
 }
 
 void FileTransferServer::incomingConnection( int socketDescriptor )
 {
-  FileTransferServerPeer *server_peer = new FileTransferServerPeer( m_fileInfo, this );
-  connect( server_peer, SIGNAL( transferFinished() ), server_peer, SLOT( deleteLater() ) );
-  connect( server_peer, SIGNAL( transferMessage( const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const FileInfo&, const QString& ) ) );
-  server_peer->startTransfer( socketDescriptor );
+  FileTransferUpload *upload_peer = new FileTransferUpload( m_user, m_fileInfo, this );
+  connect( upload_peer, SIGNAL( transferFinished() ), upload_peer, SLOT( deleteLater() ) );
+  connect( upload_peer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ) );
+  upload_peer->startTransfer( socketDescriptor );
+}
+
+void FileTransferServer::downloadFile( const User& u, const FileInfo& fi )
+{
+  FileTransferDownload *download_peer = new FileTransferDownload( u, fi, this );
+  connect( download_peer, SIGNAL( transferFinished() ), download_peer, SLOT( deleteLater() ) );
+  connect( download_peer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ) );
+  download_peer->startTransfer( 0 );
 }
