@@ -94,7 +94,6 @@ void Settings::load( bool check_environment_also )
   m_chatAddNewLineToMessage = sets.value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets.value( "ShowMessageTimestamp", false ).toBool();
   m_chatSaveDirectory = sets.value( "SaveDirectory", "." ).toString();
-  m_useEncryption = sets.value( "UseEncryption", true ).toBool();
   m_beepOnNewMessageArrived = sets.value( "BeepOnNewMessageArrived", true ).toBool();
   sets.endGroup();
   sets.beginGroup( "User" );
@@ -143,7 +142,6 @@ void Settings::save()
   sets.setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
   sets.setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
   sets.setValue( "SaveDirectory", m_chatSaveDirectory );
-  sets.setValue( "UseEncryption", m_useEncryption );
   sets.setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets.endGroup();
   sets.beginGroup( "User" );

@@ -276,148 +276,32 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   return fi;
 }
 
-namespace
-{
-  QStringList SplitString( const QString& s, int num_chars, int* num_chars_to_fill_used = NULL, const QChar& char_to_fill = ' ' )
-  {
-    QStringList string_list;
-
-    if( s.isEmpty() || s.isNull() )
-      return string_list;
-
-    QString string_tmp = "";
-
-    for( int i = 0; i < s.size(); i++ )
-    {
-      string_tmp.append( s.at( i ) );
-      if( string_tmp.size() == num_chars )
-      {
-        string_list.append( string_tmp );
-        string_tmp = "";
-      }
-    }
-    int num_chars_to_fill = 0;
-    if( !string_tmp.isEmpty() )
-    {
-      while( string_tmp.size() < num_chars )
-      {
-        string_tmp.append( char_to_fill );
-        num_chars_to_fill++;
-      }
-      string_list.append( string_tmp );
-    }
-    if( num_chars_to_fill_used )
-      *num_chars_to_fill_used = num_chars_to_fill;
-    return string_list;
-  }
-}
-
-#define KEYBITS 256
-
-QString Protocol::encrypt( const QString& txt, int* num_chars_used_to_fill ) const
-{
-  unsigned long rk[RKLENGTH(KEYBITS)];
-  unsigned char key[KEYLENGTH(KEYBITS)];
-  unsigned int i;
-  int nrounds;
-
-  if( txt.isNull() || txt.isEmpty() )
-    return "";
-
-  QByteArray password = Settings::instance().password();
-  for( i = 0; i < sizeof( key ); i++ )
-  {
-    key[ i ] = (unsigned int)password.size() < i ? (char)password[ i ] : 0;
-  }
-
-  nrounds = rijndaelSetupEncrypt( rk, key, KEYBITS );
-
-  QStringList string_list = SplitString( txt, 16, num_chars_used_to_fill );
-  unsigned char plaintext[16];
-  unsigned char ciphertext[16];
-  QString encrypted_string = "";
-
-  foreach( QString s, string_list )
-  {
-    for( i = 0; i < sizeof( plaintext ); i++ )
-      plaintext[ i ] = s.at( i ).unicode();
-
-    rijndaelEncrypt( rk, nrounds, plaintext, ciphertext );
-
-    for( i = 0; i < sizeof( ciphertext ); i++ )
-      encrypted_string.append( QChar( ciphertext[ i ] ) );
-  }
-
-  return encrypted_string;
-}
-
-QString Protocol::decrypt( const QString& txt_encrypted ) const
-{
-  unsigned long rk[RKLENGTH(KEYBITS)];
-  unsigned char key[KEYLENGTH(KEYBITS)];
-  unsigned int i;
-  int nrounds;
-
-  if( txt_encrypted.isNull() || txt_encrypted.isEmpty() )
-    return "";
-
-  QByteArray password = Settings::instance().password();
-  for( i = 0; i < sizeof( key ); i++ )
-  {
-    key[ i ] = (unsigned int)password.size() < i ? (char)password[ i ] : 0;
-  }
-
-  nrounds = rijndaelSetupDecrypt( rk, key, KEYBITS );
-
-  QStringList string_list = SplitString( txt_encrypted, 16 );
-  unsigned char plaintext[16];
-  unsigned char ciphertext[16];
-  QString decrypted_string = "";
-
-  foreach( QString s, string_list )
-  {
-    for( i = 0; i < sizeof( ciphertext ); i++ )
-      ciphertext[ i ] =  s.at( i ).unicode();
-
-    rijndaelDecrypt( rk, nrounds, ciphertext, plaintext );
-
-    for( i = 0; i < sizeof( plaintext ); i++ )
-      decrypted_string.append( QChar( plaintext[ i ] ) );
-  }
-
-  return decrypted_string;
-}
-
-
-
-/************************************************/
+/* Encryption */
 
 namespace
 {
-QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars, char fill_char = '\0' )
+  QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars, char fill_char = '\0' )
   {
-     QList<QByteArray> array_list;
+    QList<QByteArray> array_list;
 
     if( byte_array.isEmpty() || byte_array.isNull() )
       return array_list;
 
-    QByteArray tmp( num_chars, fill_char );
-    int j = -1;
+    QByteArray tmp;
 
     for( int i = 0; i < byte_array.size(); i++ )
     {
-      tmp[ ++j ] = byte_array.at( i );
-      if( j == (num_chars-1) )
+      tmp += byte_array.at( i );
+      if( tmp.size() == num_chars )
       {
         array_list.append( tmp );
-        tmp = QByteArray( num_chars, fill_char );
-        j = -1;
+        tmp = "";
       }
     }
 
-    if( tmp.at( 0 ) != fill_char )
+    if( !tmp.isEmpty() )
     {
-      qDebug() << "Splitted:" << tmp;
+      qDebug() << "Last chars:" << tmp;
       array_list.append( tmp );
     }
 
@@ -425,10 +309,12 @@ QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars, c
   }
 }
 
+
+
 QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
 {
-  unsigned long rk[RKLENGTH(KEYBITS)];
-  unsigned char key[KEYLENGTH(KEYBITS)];
+  unsigned long rk[ RKLENGTH(ENCRYPTION_KEYBITS) ];
+  unsigned char key[ KEYLENGTH(ENCRYPTION_KEYBITS) ];
   unsigned int i;
   int nrounds;
 
@@ -441,27 +327,35 @@ QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
     key[ i ] = (unsigned int)password.size() < i ? static_cast<unsigned char>( password[ i ] ) : 0;
   }
 
-  nrounds = rijndaelSetupEncrypt( rk, key, KEYBITS );
+  nrounds = rijndaelSetupEncrypt( rk, key, ENCRYPTION_KEYBITS );
 
-  QList<QByteArray> byte_array_list = SplitByteArray( byte_array, 16 );
+  QList<QByteArray> byte_array_list = SplitByteArray( byte_array, ENCRYPTED_DATA_BLOCK_SIZE );
 
-  unsigned char plaintext[16];
-  unsigned char ciphertext[16];
+  unsigned char plaintext[ ENCRYPTED_DATA_BLOCK_SIZE ];
+  unsigned char ciphertext[ ENCRYPTED_DATA_BLOCK_SIZE ];
+
+  memset( ciphertext, 0, sizeof( ciphertext ) );
+  memset( plaintext, 0, sizeof( plaintext ) );
 
   QByteArray encrypted_byte_array;
 
   foreach( QByteArray ba, byte_array_list )
   {
-    for( i = 0; i < sizeof( plaintext ); i++ )
-      plaintext[ i ] = static_cast<unsigned char>( ba[ i ] );
+    if( ba.size() == sizeof( plaintext ) )
+    {
+      for( i = 0; i < sizeof( plaintext ); i++ )
+        plaintext[ i ] = static_cast<unsigned char>( ba[ i ] );
 
-    rijndaelEncrypt( rk, nrounds, plaintext, ciphertext );
+      rijndaelEncrypt( rk, nrounds, plaintext, ciphertext );
 
-    for( i = 0; i < sizeof( ciphertext ); i++ )
-      encrypted_byte_array.append( static_cast<char>( ciphertext[ i ] ) );
+      for( i = 0; i < sizeof( ciphertext ); i++ )
+        encrypted_byte_array.append( static_cast<char>( ciphertext[ i ] ) );
 
-    memset( ciphertext, 0, sizeof( ciphertext ) );
-    memset( plaintext, 0, sizeof( plaintext ) );
+      memset( ciphertext, 0, sizeof( ciphertext ) );
+      memset( plaintext, 0, sizeof( plaintext ) );
+    }
+    else
+      encrypted_byte_array += ba;
 
   }
 
@@ -470,8 +364,8 @@ QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
 
 QByteArray Protocol::decryptByteArray( const QByteArray& byte_array_encrypted ) const
 {
-  unsigned long rk[RKLENGTH(KEYBITS)];
-  unsigned char key[KEYLENGTH(KEYBITS)];
+  unsigned long rk[RKLENGTH(ENCRYPTION_KEYBITS)];
+  unsigned char key[KEYLENGTH(ENCRYPTION_KEYBITS)];
   unsigned int i;
   int nrounds;
 
@@ -484,28 +378,35 @@ QByteArray Protocol::decryptByteArray( const QByteArray& byte_array_encrypted ) 
     key[ i ] = (unsigned int)password.size() < i ? static_cast<unsigned char>( password[ i ] ) : 0;
   }
 
-  nrounds = rijndaelSetupDecrypt( rk, key, KEYBITS );
+  nrounds = rijndaelSetupDecrypt( rk, key, ENCRYPTION_KEYBITS );
 
-  QList<QByteArray> byte_array_list = SplitByteArray( byte_array_encrypted, 16 );
+  QList<QByteArray> byte_array_list = SplitByteArray( byte_array_encrypted, ENCRYPTED_DATA_BLOCK_SIZE );
 
-  unsigned char plaintext[16];
-  unsigned char ciphertext[16];
+  unsigned char plaintext[ ENCRYPTED_DATA_BLOCK_SIZE ];
+  unsigned char ciphertext[ ENCRYPTED_DATA_BLOCK_SIZE ];
+
+  memset( ciphertext, 0, sizeof( ciphertext ) );
+  memset( plaintext, 0, sizeof( plaintext ) );
 
   QByteArray decrypted_byte_array;
 
   foreach( QByteArray ba, byte_array_list )
   {
-    for( i = 0; i < sizeof( ciphertext ); i++ )
-      ciphertext[ i ] = static_cast<unsigned char>( ba[ i ] );
+    if( ba.size() == sizeof( ciphertext ) )
+    {
+      for( i = 0; i < sizeof( ciphertext ); i++ )
+        ciphertext[ i ] = static_cast<unsigned char>( ba[ i ] );
 
-    rijndaelDecrypt( rk, nrounds, ciphertext, plaintext );
+      rijndaelDecrypt( rk, nrounds, ciphertext, plaintext );
 
-    for( i = 0; i < sizeof( plaintext ); i++ )
-      if( plaintext[ i ] != '\0' )
+      for( i = 0; i < sizeof( plaintext ); i++ )
         decrypted_byte_array.append( static_cast<char>( plaintext[ i ] ) );
 
-    memset( ciphertext, 0, sizeof( ciphertext ) );
-    memset( plaintext, 0, sizeof( plaintext ) );
+      memset( ciphertext, 0, sizeof( ciphertext ) );
+      memset( plaintext, 0, sizeof( plaintext ) );
+    }
+    else
+      decrypted_byte_array += ba;
   }
 
   return decrypted_byte_array;

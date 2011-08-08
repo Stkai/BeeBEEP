@@ -55,9 +55,6 @@ public:
   User createUser( const Message& );
   inline User createLocalUser() const;
 
-  QString encrypt( const QString&, int* num_chars_used_to_fill = NULL ) const;
-  QString decrypt( const QString& ) const;
-
   QByteArray encryptByteArray( const QByteArray& ) const;
   QByteArray decryptByteArray( const QByteArray& ) const;
 

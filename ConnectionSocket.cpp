@@ -21,13 +21,9 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-
 #include "ConnectionSocket.h"
 #include "Protocol.h"
 #include "Settings.h"
-
-
-#undef USE_ENCRYPTION
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
@@ -54,7 +50,6 @@ void ConnectionSocket::readBlock()
     return;
 
   QByteArray byte_array_read;
-
   data_stream >> byte_array_read;
 
 #if defined( BEEBEEP_DEBUG )
@@ -62,18 +57,9 @@ void ConnectionSocket::readBlock()
 #endif
 
   m_blockSize = 0;
-#if defined( USE_ENCRYPTION )
-  if( Settings::instance().useEncryption() )
-  {
-    QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << "Data decrypted:" << decrypted_byte_array;
-#endif
-    emit dataReceived( decrypted_byte_array );
-  }
-  else
-#endif
-    emit dataReceived( byte_array_read );
+
+  QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
+  emit dataReceived( decrypted_byte_array );
 }
 
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
@@ -81,19 +67,10 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Socket send a byte array:" << byte_array;
 #endif
-  QByteArray byte_array_to_send;
-
-#if defined( USE_ENCRYPTION )
-  if( Settings::instance().useEncryption() )
-  {
-    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array );
+  QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array );
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Encrypt data:" << byte_array_to_send;
 #endif
-  }
-  else
-#endif
-    byte_array_to_send = byte_array;
 
   QByteArray data_block;
   QDataStream data_stream( &data_block, QIODevice::WriteOnly );

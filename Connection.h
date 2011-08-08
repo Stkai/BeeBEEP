@@ -24,12 +24,13 @@
 #ifndef BEEBEEP_CONNECTION_H
 #define BEEBEEP_CONNECTION_H
 
+#include "ConnectionSocket.h"
 #include "User.h"
 class Message;
 class FileInfo;
 
 
-class Connection : public QTcpSocket
+class Connection : public ConnectionSocket
 {
   Q_OBJECT
 
@@ -54,7 +55,7 @@ signals:
   void newFileMessage( const User&, const FileInfo& );
 
 private slots:
-  void readData();
+  void checkData( const QByteArray& );
   void sendPing();
   void sendPong();
   void sendHello();
@@ -73,7 +74,6 @@ private:
   State m_state;
   bool m_isHelloMessageSent;
 
-  quint32 m_rawDataSize;
 };
 
 

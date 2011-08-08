@@ -28,10 +28,10 @@
 
 
 Connection::Connection( QObject *parent )
-  : QTcpSocket( parent ), m_user(), m_state( WaitingForHello ), m_isHelloMessageSent( false ), m_rawDataSize( 0 )
+  : ConnectionSocket( parent ), m_user(), m_state( WaitingForHello ), m_isHelloMessageSent( false )
 {
   m_pingTimer.setInterval( PING_INTERVAL );
-  connect( this, SIGNAL( readyRead() ), this, SLOT( readData() ) );
+  connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkData( const QByteArray& ) ) );
   connect( this, SIGNAL( disconnected() ), &m_pingTimer, SLOT( stop() ) );
   connect( &m_pingTimer, SIGNAL( timeout() ), this, SLOT( sendPing() ) );
   connect( this, SIGNAL( connected() ), this, SLOT( sendHello() ) );
@@ -74,39 +74,12 @@ bool Connection::sendMessage( const Message& m )
   }
 }
 
-void Connection::readData()
+void Connection::checkData( const QByteArray& message_data )
 {
-  QDataStream data_stream( this );
-  data_stream.setVersion( QDataStream::Qt_4_0 );
-  if( m_rawDataSize == 0 )
-  {
-    if( bytesAvailable() < (int)sizeof(quint32))
-      return;
-    data_stream >> m_rawDataSize;
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << "Read raw data size:" << m_rawDataSize;
-#endif
-  }
-
-  if( bytesAvailable() < m_rawDataSize )
-    return;
-
-  QString raw_data;
-  QString message_data;
-  data_stream >> raw_data;
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Read raw data:" << raw_data;
-#endif
-  if( Settings::instance().useEncryption() )
-    message_data = Protocol::instance().decrypt( raw_data );
-  else
-    message_data = raw_data;
- m_rawDataSize = 0;
-
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Message data:" << message_data;
 #endif
-  Message m = Protocol::instance().toMessage( message_data );
+  Message m = Protocol::instance().toMessage( QString::fromUtf8( message_data ) );
   if( !m.isValid() )
   {
     qWarning() << "Skip message cause error occcurred:" << message_data;
@@ -287,20 +260,9 @@ bool Connection::sendLocalUserStatus()
 
 bool Connection::writeData( const QString& message_data )
 {
-  QString raw_data;
-  if( Settings::instance().useEncryption() )
-    raw_data = Protocol::instance().encrypt( message_data );
-  else
-    raw_data = message_data;
-
-  QByteArray data_block;
-  QDataStream data_stream( &data_block, QIODevice::WriteOnly );
-  data_stream.setVersion( QDataStream::Qt_4_0 );
-  data_stream << (quint32)0;
-  data_stream << raw_data;
-  data_stream.device()->seek( 0 );
-  data_stream << (quint32)(data_block.size() - sizeof(quint32));
-
-  return( write( data_block ) == data_block.size() );
- }
+  QString message_data_filled = message_data;
+  while( message_data_filled.size() % ENCRYPTED_DATA_BLOCK_SIZE )
+    message_data_filled.append( QChar( ' ' ) );
+  return sendData( message_data_filled.toUtf8() );
+}
 

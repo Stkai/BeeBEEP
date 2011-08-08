@@ -39,6 +39,8 @@ const unsigned LISTENER_DEFAULT_PORT = 6475;
 const int DATASTREAM_VERSION = QDataStream::Qt_4_0;
 
 #define DATA_BLOCK_SIZE quint16
+#define ENCRYPTED_DATA_BLOCK_SIZE 16
+#define ENCRYPTION_KEYBITS 256
 
 // Protocol
 #define ID_LOCAL_USER      1
