@@ -43,6 +43,7 @@ BeeBeep::BeeBeep( QObject* parent )
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( newConnection( Connection* ) ) );
   connect( mp_fileServer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_fileServer, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ) );
 }
 
 bool BeeBeep::isWorking() const
@@ -392,6 +393,12 @@ QString BeeBeep::userStatusToString( int user_status )
 bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
 {
   QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+
+  if( mp_fileServer->isBusy() )
+  {
+    dispatchSystemMessage( chat_name, tr( "%1 Another file transfer is in progress. Please wait." ).arg( icon_html ) );
+    return false;
+  }
 
   QFileInfo file( file_path );
   if( !file.exists() )

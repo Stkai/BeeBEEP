@@ -69,6 +69,7 @@ private slots:
   void sendFile();
   void downloadFile( const User&, const FileInfo& );
   void selectDownloadDirectory();
+  void showTransferProgress( const User&, const FileInfo&, int );
 
 protected:
   void closeEvent( QCloseEvent* );

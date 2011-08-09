@@ -117,10 +117,5 @@ void FileTransferPeer::setError( const QString& str_err )
 
 void FileTransferPeer::showProgress()
 {
-  QString s = tr( "%1: %2 %3 of %4 bytes (%5%)" ).arg( m_file.fileName() )
-      .arg( m_fileInfo.transferType() == FileInfo::Upload ? tr( "upload" ) : tr( "download" ) )
-                                             .arg( QString::number( m_totalBytesTransferred ) )
-                                             .arg( QString::number( m_fileInfo.size() ) )
-      .arg( QString::number( static_cast<int>( (m_totalBytesTransferred * 100) / m_fileInfo.size())) );
-  emit transferMessage( m_user, m_fileInfo, s );
+  emit transferProgress( m_user, m_fileInfo, m_totalBytesTransferred );
 }

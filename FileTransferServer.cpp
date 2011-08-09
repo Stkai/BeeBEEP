@@ -28,7 +28,7 @@
 
 
 FileTransferServer::FileTransferServer( QObject *parent )
-  : QTcpServer( parent ), m_user(), m_fileInfo( FileInfo::Upload )
+  : QTcpServer( parent ), m_user(), m_fileInfo( FileInfo::Upload ), m_isBusy( false )
 {
 }
 
@@ -40,9 +40,12 @@ void FileTransferServer::uploadFile( const User& u, const FileInfo& fi )
 
 void FileTransferServer::incomingConnection( int socketDescriptor )
 {
+  m_isBusy = true;
   FileTransferUpload *upload_peer = new FileTransferUpload( m_user, m_fileInfo, this );
+  connect( upload_peer, SIGNAL( transferFinished() ), this, SLOT( stopUpload() ) );
   connect( upload_peer, SIGNAL( transferFinished() ), upload_peer, SLOT( deleteLater() ) );
   connect( upload_peer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ) );
+  connect( upload_peer, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ) );
   upload_peer->startTransfer( socketDescriptor );
 }
 
@@ -51,5 +54,13 @@ void FileTransferServer::downloadFile( const User& u, const FileInfo& fi )
   FileTransferDownload *download_peer = new FileTransferDownload( u, fi, this );
   connect( download_peer, SIGNAL( transferFinished() ), download_peer, SLOT( deleteLater() ) );
   connect( download_peer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ) );
+  connect( download_peer, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ) );
   download_peer->startTransfer( 0 );
+}
+
+void FileTransferServer::stopUpload()
+{
+  m_isBusy = false;
+  if( isListening() )
+    close();
 }

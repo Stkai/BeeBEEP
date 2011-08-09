@@ -40,17 +40,28 @@ public:
   void uploadFile( const User&, const FileInfo& );
   void downloadFile( const User&, const FileInfo& );
 
+  inline bool isBusy() const;
+
 signals:
   void transferMessage( const User&, const FileInfo&, const QString& );
+  void transferProgress( const User&, const FileInfo&, int );
 
 protected:
   void incomingConnection( int );
 
+protected slots:
+  void stopUpload();
+
 private:
   User m_user;
   FileInfo m_fileInfo;
+  bool m_isBusy;
 
 };
+
+
+// Inline Functions
+inline bool FileTransferServer::isBusy() const { return m_isBusy; }
 
 
 #endif // BEEBEEP_FILETRANSFERSERVER_H

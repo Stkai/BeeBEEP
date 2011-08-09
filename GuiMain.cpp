@@ -57,9 +57,12 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_beeBeep, SIGNAL( removeUser( const User& ) ), this, SLOT( removeUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( userNewStatus( const User& ) ), this, SLOT( showNewUserStatus( const User& ) ) );
+  connect( mp_beeBeep, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ), this, SLOT( showTransferProgress( const User&, const FileInfo&, int ) ) );
+
   connect( mp_defaultChat, SIGNAL( newMessage( const QString&, const QString& ) ), this, SLOT( sendMessage( const QString&, const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( writing( const QString& ) ), mp_beeBeep, SLOT( sendWritingMessage( const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
+
   connect( mp_userList, SIGNAL( chatSelected( int, const QString& ) ), this, SLOT( chatSelected( int, const QString& ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
@@ -624,6 +627,12 @@ void GuiMain::changeStatusDescription()
 
 void GuiMain::sendFile()
 {
+  if( mp_defaultChat->chatName() == Settings::instance().defaultChatName() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Before select the user to whom you would like to send a file." ) );
+    return;
+  }
+
   QString file_path = QFileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().lastDirectorySelected() );
   if( file_path.isEmpty() || file_path.isNull() )
     return;
@@ -659,4 +668,17 @@ void GuiMain::selectDownloadDirectory()
   if( download_directory_path.isNull() )
     return;
   Settings::instance().setDownloadDirectory( download_directory_path );
+}
+
+void GuiMain::showTransferProgress( const User& u, const FileInfo& fi, int bytes )
+{
+  QString debug_progress = tr( "%1: %2 %3 of %4 bytes (%5%)" ).arg( fi.name() )
+      .arg( fi.transferType() == FileInfo::Upload ? tr( "upload" ) : tr( "download" ) )
+                                             .arg( QString::number( bytes ) )
+                                             .arg( QString::number( fi.size() ) )
+      .arg( QString::number( static_cast<int>( (bytes * 100) / fi.size())) );
+  statusBar()->showMessage( debug_progress );
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << debug_progress;
+#endif
 }

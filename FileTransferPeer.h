@@ -50,6 +50,7 @@ protected slots:
 
 signals:
   void transferMessage( const User&, const FileInfo&, const QString& );
+  void transferProgress( const User&, const FileInfo&, int );
   void transferFinished();
 
 protected:

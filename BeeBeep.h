@@ -63,6 +63,7 @@ signals:
   void newUser( const User& );
   void removeUser( const User& );
   void newChat( const Chat& );
+  void transferProgress( const User&, const FileInfo&, int );
 
 public slots:
   void start();
