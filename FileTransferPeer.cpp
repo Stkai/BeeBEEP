@@ -25,7 +25,8 @@
 
 
 FileTransferPeer::FileTransferPeer( const User& u, const FileInfo& fi, QObject *parent )
-  : QObject( parent ), m_user( u ), m_fileInfo( fi ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ), m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 )
+  : QObject( parent ), m_user( u ), m_fileInfo( fi ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ),
+    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 )//, m_connectionTimer()
 {
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Peer created for file" << m_fileInfo.name();
@@ -90,7 +91,7 @@ void FileTransferPeer::startTransfer( int socket_descriptor )
 void FileTransferPeer::setTransferCompleted()
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << m_fileInfo.name() << ": transfer completed";
+  qDebug() << m_fileInfo.name() << "transfer completed";
 #endif
   m_state = FileTransferPeer::Completed;
   emit transferMessage( m_user, m_fileInfo, tr( "transfer completed") );
@@ -99,7 +100,10 @@ void FileTransferPeer::setTransferCompleted()
 
 void FileTransferPeer::socketError( QAbstractSocket::SocketError se )
 {
-  setError( tr( "connection error #%1" ).arg( QString::number( se ) ) );
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Connection error id" << se << ":" << m_socket.errorString();
+#endif
+  setError( tr( "connection error" ) );
 }
 
 void FileTransferPeer::setError( const QString& str_err )

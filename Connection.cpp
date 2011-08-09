@@ -178,7 +178,7 @@ void Connection::parseUserMessage( const Message& m )
   if( m.hasFlag( Message::Writing ) )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "User" << m_user.name() << " is writing";
+    qDebug() << "User" << m_user.name() << "is writing";
 #endif
     emit isWriting( m_user );
     return;

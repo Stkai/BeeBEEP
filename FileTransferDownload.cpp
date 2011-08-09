@@ -46,6 +46,9 @@ void FileTransferDownload::sendData()
     // do_nothing
     break;
   }
+  //if( m_connectionTimer.isActive() )
+  //  m_connectionTimer.stop();
+  //m_connectionTimer.start();
 }
 
 void FileTransferDownload::sendAuth()
@@ -63,7 +66,7 @@ void FileTransferDownload::sendDataConfirmation()
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Download corfirmation for" << m_bytesTransferred << "bytes";
 #endif
-   m_socket.sendData( QByteArray::number( m_bytesTransferred ) );
+  m_socket.sendData( QByteArray::number( m_bytesTransferred ) );
 }
 
 void FileTransferDownload::checkData( const QByteArray& byte_array )

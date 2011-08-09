@@ -301,7 +301,7 @@ namespace
 
     if( !tmp.isEmpty() )
     {
-      qDebug() << "Last chars:" << tmp;
+      qDebug() << "Not encrypted string:" << tmp;
       array_list.append( tmp );
     }
 

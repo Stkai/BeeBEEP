@@ -53,9 +53,11 @@ public:
   static QString userStatusToString( int );
 
   bool sendFile( const QString& chat_name, const QString& file_path );
+  void acceptFile( const User&, const FileInfo& );
 
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
+  void newFileToDownload( const User&, const FileInfo& );
   void userIsWriting( const User& );
   void userNewStatus( const User& );
   void newUser( const User& );

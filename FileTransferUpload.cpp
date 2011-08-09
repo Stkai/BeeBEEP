@@ -72,6 +72,8 @@ void FileTransferUpload::checkSending( const QByteArray& byte_array )
 #if defined( BEEBEEP_DEBUG )
     qDebug() << m_bytesTransferred << "bytes sent confirmed";
 #endif
+   // if( m_connectionTimer.isActive() )
+    //  m_connectionTimer.stop();
     m_totalBytesTransferred += m_bytesTransferred;
     showProgress();
     sendData();
@@ -111,6 +113,9 @@ void FileTransferUpload::sendData()
 #if defined( BEEBEEP_DEBUG )
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent";
 #endif
+    //if( m_connectionTimer.isActive() )
+    //  m_connectionTimer.stop();
+   // m_connectionTimer.start();
   }
   else
   {

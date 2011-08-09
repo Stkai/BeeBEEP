@@ -44,6 +44,7 @@ protected:
   void checkAuth( const QByteArray& );
   void checkSending( const QByteArray& );
 
+
 };
 
 #endif // BEEBEEP_FILETRANSFERUPLOAD_H

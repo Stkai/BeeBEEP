@@ -24,6 +24,7 @@
 #include "BeeBeep.h"
 #include "BeeUtils.h"
 #include "EmoticonManager.h"
+#include "FileInfo.h"
 #include "GuiChat.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
@@ -51,6 +52,7 @@ GuiMain::GuiMain( QWidget *parent )
   createStatusBar();
 
   connect( mp_beeBeep, SIGNAL( newMessage( const QString&, const ChatMessage& ) ), this, SLOT( showMessage( const QString&, const ChatMessage& ) ) );
+  connect( mp_beeBeep, SIGNAL( newFileToDownload( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_beeBeep, SIGNAL( newUser( const User& ) ), this, SLOT( newUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( removeUser( const User& ) ), this, SLOT( removeUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
@@ -197,7 +199,7 @@ void GuiMain::createActions()
   mp_actFontColor->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
   connect( mp_actFontColor, SIGNAL( triggered() ), this, SLOT( selectFontColor() ) );
 
-  mp_actSendFile = new QAction( QIcon( ":/images/send-file.png"), tr( "Send a file..." ), this );
+  mp_actSendFile = new QAction( QIcon( ":/images/upload.png"), tr( "Send a file..." ), this );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
   connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
 
@@ -234,6 +236,7 @@ void GuiMain::createMenus()
   menu->addAction( mp_actSendFile );
   menu->addSeparator();
   menu->addAction( mp_actSaveChat );
+  act = menu->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download directory..."), this, SLOT( selectDownloadDirectory() ) );
   menu->addSeparator();
   menu->addAction( mp_actQuit );
 
@@ -400,7 +403,7 @@ void GuiMain::emoticonSelected()
 {
   QAction* act = qobject_cast<QAction*>( sender() );
   if( act )
-    mp_defaultChat->addToMyMessage( QString( " %1 " ).arg( act->data().toString() ) );
+    mp_defaultChat->addToMyMessage( QString( "%1" ).arg( act->data().toString() ) );
 }
 
 void GuiMain::refreshUserList()
@@ -625,4 +628,35 @@ void GuiMain::sendFile()
   if( file_path.isEmpty() || file_path.isNull() )
     return;
   mp_beeBeep->sendFile( mp_defaultChat->chatName(), file_path );
+}
+
+void GuiMain::downloadFile( const User& u, const FileInfo& fi )
+{
+  QString msg = tr( "Do you want to download from %1\n%2?" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() ).arg( fi.name() );
+  if( QMessageBox::information( this, Settings::instance().programName(), msg, tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+  {
+    // Accepted
+    QFileInfo qfile_info( Settings::instance().downloadDirectory(), fi.name() );
+    if( qfile_info.exists() )
+    {
+      QString file_name = QFileDialog::getSaveFileName( this,
+                          tr( "%1 already exists.\nPlease select a new filename." ),
+                          Settings::instance().downloadDirectory() );
+      if( file_name.isNull() )
+        return;
+      qfile_info = QFileInfo( file_name );
+    }
+    FileInfo file_info = fi;
+    file_info.setName( qfile_info.fileName() );
+    file_info.setPath( qfile_info.absoluteFilePath() );
+    mp_beeBeep->acceptFile( u, file_info );
+  }
+}
+
+void GuiMain::selectDownloadDirectory()
+{
+  QString download_directory_path = QFileDialog::getExistingDirectory( this, Settings::instance().programName(), Settings::instance().downloadDirectory() );
+  if( download_directory_path.isNull() )
+    return;
+  Settings::instance().setDownloadDirectory( download_directory_path );
 }

@@ -28,6 +28,7 @@
 #include "Config.h"
 class BeeBeep;
 class ChatMessage;
+class FileInfo;
 class GuiChat;
 class GuiUserList;
 class User;
@@ -66,6 +67,8 @@ private slots:
   void statusSelected();
   void changeStatusDescription();
   void sendFile();
+  void downloadFile( const User&, const FileInfo& );
+  void selectDownloadDirectory();
 
 protected:
   void closeEvent( QCloseEvent* );

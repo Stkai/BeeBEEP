@@ -38,6 +38,7 @@ public:
   FileInfo& operator=( const FileInfo& );
 
   inline bool isValid() const;
+  inline bool isDownload() const;
   inline TransferType transferType() const;
   inline const QString& name() const;
   inline void setName( const QString& );
@@ -67,6 +68,7 @@ private:
 // Inline Functions
 inline FileInfo::FileInfo( const FileInfo& fi ) { (void)operator=( fi ); }
 inline bool FileInfo::isValid() const { return m_name.size() > 0; }
+inline bool FileInfo::isDownload() const { return m_transferType == FileInfo::Download; }
 inline FileInfo::TransferType FileInfo::transferType() const { return m_transferType; }
 inline const QString& FileInfo::name() const { return m_name; }
 inline void FileInfo::setName( const QString& new_value ) { m_name = new_value; }

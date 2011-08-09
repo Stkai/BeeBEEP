@@ -30,13 +30,26 @@
 
 QString Bee::Private::formatHtmlText( QString text )
 {
-  text.replace( "<3", "-heart-emoticon-" ); // save the heart emoticon
   QString text_formatted = "";
 
   for( int i = 0; i < text.length(); i++ )
   {
-    if( text.at( i ) == QLatin1Char( '<' ) )
-      text_formatted += QLatin1String( "&lt;" );
+    if( text.at( i ) == QLatin1Char( ' ' ) )
+    {
+      if( (i + 1) < text.length() && text.at( (i+1) ) == QLatin1Char( ' ' ) )
+        text_formatted += QLatin1String( "&nbsp;" );
+      else
+        text_formatted += QLatin1Char( ' ' );
+    }
+    else if( text.at( i ) == QLatin1Char( '\n' ) )
+      text_formatted += QLatin1String( "<br />" );
+    else if( text.at( i ) == QLatin1Char( '<' ) )
+    {
+      if( (i + 1) < text.length() && text.at( (i+1) ) == QLatin1Char( '3' ) )
+        text_formatted += QLatin1Char( '<' ); // save the heart emoticon
+      else
+        text_formatted += QLatin1String( "&lt;" );
+    }
     else if(text.at( i ) == QLatin1Char( '>' ) )
       text_formatted += QLatin1String( "&gt;" );
     else if(text.at( i ) == QLatin1Char( '"' ) )
@@ -51,10 +64,7 @@ QString Bee::Private::formatHtmlText( QString text )
   text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
 
-  text_formatted.replace( "-heart-emoticon-", "<3" ); // save the heart emoticon
-
-  text = EmoticonManager::instance().parseEmoticons( text_formatted );
-  return text.replace( "\n", "<br />" );
+  return EmoticonManager::instance().parseEmoticons( text_formatted );
 }
 
 QString Bee::formatMessage( const ChatMessage& cm )
