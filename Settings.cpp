@@ -71,9 +71,9 @@ QString Settings::programName() const
   return QString( BEEBEEP_NAME );
 }
 
-QString Settings::hash( const QString& nick ) const
+QByteArray Settings::hash( const QString& string_to_hash ) const
 {
-  QByteArray hash_pre = nick.toUtf8() + m_password;
+  QByteArray hash_pre = string_to_hash.toUtf8() + m_password;
   QByteArray hash_generated = QCryptographicHash::hash( hash_pre, QCryptographicHash::Sha1 );
   return hash_generated.toHex();
 }
@@ -81,7 +81,7 @@ QString Settings::hash( const QString& nick ) const
 void Settings::setPassword( const QString& new_value )
 {
   m_password = QCryptographicHash::hash( QString( (new_value.isEmpty() || new_value == defaultPassword()) ? "*6475*" : new_value ).toUtf8(), QCryptographicHash::Sha1 ).toHex();
-  m_hash = hash( m_localUser.name() );
+  m_hash = QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
 void Settings::load( bool check_environment_also )

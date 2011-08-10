@@ -33,13 +33,13 @@ public:
   enum Status { Offline, Online, Busy, Away, NumStatus };
   User();
   User( const User& );
-  User( int );
+  explicit User( VNumber );
 
   User& operator=( const User& );
   inline bool operator==( const User& ) const;
 
   inline bool isValid() const;
-  inline int id() const;
+  inline VNumber id() const;
   inline void setName( const QString& );
   inline const QString& name() const;
   inline void setNickname( const QString& );
@@ -52,7 +52,7 @@ public:
   inline const QString& statusDescription() const;
 
 private:
-  int m_id;
+  VNumber m_id;
   QString m_name;
   QString m_nickname;
   QHostAddress m_hostAddress;
@@ -66,7 +66,7 @@ private:
 
 inline bool User::operator==( const User& u ) const { return m_id == u.m_id; }
 inline bool User::isValid() const { return m_id > 0 && !m_nickname.isEmpty(); }
-inline int User::id() const { return m_id; }
+inline VNumber User::id() const { return m_id; }
 inline void User::setName( const QString& new_value ) { m_name = new_value; }
 inline const QString& User::name() const { return m_name; }
 inline void User::setNickname( const QString& new_value ) { m_nickname = new_value; }

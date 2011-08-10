@@ -34,7 +34,7 @@ Message::Message( const Message& m )
   (void)operator=( m );
 }
 
-Message::Message( Type msg_type, int msg_id, const QString& msg_txt )
+Message::Message( Type msg_type, VNumber msg_id, const QString& msg_txt )
   : m_type( msg_type ), m_id( msg_id ), m_flags( 0 ), m_data( "" ), m_timestamp( QDateTime::currentDateTime() ), m_text( msg_txt )
 {
 }

@@ -40,7 +40,7 @@ protected slots:
   void sendData();
 
 protected:
-  void sendAuth();
+  void sendDownlodRequest();
   void sendDataConfirmation();
 
 

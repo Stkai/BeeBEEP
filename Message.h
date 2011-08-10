@@ -35,12 +35,12 @@ public:
 
   Message();
   Message( const Message& );
-  Message( Type, int, const QString& );
+  Message( Type, VNumber, const QString& );
 
   inline bool isValid() const;
-  inline bool id() const;
+  inline VNumber id() const;
   inline void setType( Type );
-  inline void setId( int );
+  inline void setId( VNumber );
   inline void setFlags( int );
   inline void setData( const QString& );
   inline void setTimestamp( const QDateTime& );
@@ -57,7 +57,7 @@ public:
 
 private:
   Type m_type;
-  int m_id;
+  VNumber m_id;
   int m_flags;
   QString m_data;
   QDateTime m_timestamp;
@@ -69,8 +69,8 @@ private:
 // Inline Functions
 
 inline bool Message::isValid() const { return m_type != Message::Undefined; }
-inline bool Message::id() const { return m_id; }
-inline void Message::setId( int new_value ) { m_id = new_value; }
+inline VNumber Message::id() const { return m_id; }
+inline void Message::setId( VNumber new_value ) { m_id = new_value; }
 inline void Message::setType( Type new_value ) { m_type = new_value; }
 inline void Message::setFlags( int new_value ) { m_flags = new_value; }
 inline void Message::setData( const QString& new_value ) { m_data = new_value; }

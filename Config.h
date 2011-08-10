@@ -28,6 +28,11 @@
 #include <QtGui>
 #include <QtNetwork>
 
+// Type definition
+typedef quint64 VNumber;
+typedef quint64 FileSizeType;
+
+// General
 const int PONG_TIMEOUT = 84 * 1000;
 const int PING_INTERVAL = 21 * 1000;
 const int WRITING_MESSAGE_TIMEOUT = 3 * 1000;
@@ -44,7 +49,7 @@ const int FILE_TRANSFER_CONFIRM_TIMEOUT = 15 * 1000;
 
 // Protocol
 #define ID_LOCAL_USER      1
-#define ID_START           100
+#define ID_START           1000
 #define ID_SYSTEM_MESSAGE  10
 #define ID_BEEP_MESSAGE    11
 #define ID_WRITING_MESSAGE 12

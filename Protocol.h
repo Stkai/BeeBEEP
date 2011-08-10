@@ -24,9 +24,9 @@
 #ifndef BEEBEEP_PROTOCOL_H
 #define BEEBEEP_PROTOCOL_H
 
+#include "FileInfo.h"
 #include "Message.h"
 #include "User.h"
-class FileInfo;
 
 
 class Protocol
@@ -36,13 +36,13 @@ class Protocol
 
 public:
   inline int messageMinimumSize() const;
-  QString fromMessage( const Message& ) const;
-  Message toMessage( const QString& ) const;
+  QByteArray fromMessage( const Message& ) const;
+  Message toMessage( const QByteArray& ) const;
 
-  QString pingMessage() const;
-  QString pongMessage() const;
-  QString broadcastMessage() const;
-  QString helloMessage() const;
+  QByteArray pingMessage() const;
+  QByteArray pongMessage() const;
+  QByteArray broadcastMessage() const;
+  QByteArray helloMessage() const;
   inline const Message& writingMessage() const;
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
@@ -78,17 +78,17 @@ protected:
   Protocol();
   QString messageHeader( Message::Type ) const;
   Message::Type messageType( const QString& ) const;
-  int newId();
+  inline VNumber newId();
 
 private:
-  int m_id;
+  VNumber m_id;
   Message m_writingMessage;
 
 };
 
 
 // Inline Functions
-
+inline VNumber Protocol::newId() { return ++m_id; }
 inline int Protocol::messageMinimumSize() const { return 10; }
 inline User Protocol::createLocalUser() const { return User( ID_LOCAL_USER ); }
 inline const Message& Protocol::writingMessage() const { return m_writingMessage; }

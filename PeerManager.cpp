@@ -61,13 +61,12 @@ bool PeerManager::isLocalHostAddress( const QHostAddress& address )
 
 bool PeerManager::sendDatagramToHost( const QHostAddress& host_address )
 {
-  QByteArray datagram = Protocol::instance().broadcastMessage().toUtf8();
-  return m_broadcastSocket.writeDatagram( datagram, host_address, BROADCAST_PORT ) > 0;
+  return m_broadcastSocket.writeDatagram( Protocol::instance().broadcastMessage(), host_address, BROADCAST_PORT ) > 0;
 }
 
 void PeerManager::sendBroadcastDatagram()
 {
-  QByteArray datagram = Protocol::instance().broadcastMessage().toUtf8();
+  QByteArray datagram = Protocol::instance().broadcastMessage();
   bool validBroadcastAddresses = true;
   foreach( QHostAddress address, m_broadcastAddresses )
   {
@@ -94,7 +93,7 @@ void PeerManager::readBroadcastDatagram()
       qWarning() << "Invalid datagram size:" << datagram;
       continue;
     }
-    Message m = Protocol::instance().toMessage( QString::fromUtf8( datagram ) );
+    Message m = Protocol::instance().toMessage( datagram );
     if( !m.isValid() || m.type() != Message::Beep )
       continue;
 

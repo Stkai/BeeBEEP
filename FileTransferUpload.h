@@ -32,18 +32,20 @@ class FileTransferUpload : public FileTransferPeer
   Q_OBJECT
 
 public:
-  enum TransferState { Unknown, Auth, Sending, Error, Completed };
+  explicit FileTransferUpload( QObject *parent = 0 );
 
-  FileTransferUpload( const User&, const FileInfo&, QObject *parent = 0 );
+  void startTransfer( const FileInfo& );
+
+signals:
+  void fileTransferRequest( VNumber, const QByteArray& );
 
 protected slots:
   void sendData();
   void checkData( const QByteArray& );
 
 protected:
-  void checkAuth( const QByteArray& );
+  void checkRequest( const QByteArray& );
   void checkSending( const QByteArray& );
-
 
 };
 

@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "FileInfo.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "EmoticonManager.h"
@@ -38,13 +37,6 @@ Protocol::Protocol()
 {
   m_writingMessage.addFlag( Message::Private );
   m_writingMessage.addFlag( Message::Writing );
-}
-
-int Protocol::newId()
-{
-  if( m_id > 2147483600 )
-    m_id = ID_START;
-  return ++m_id;
 }
 
 QString Protocol::messageHeader( Message::Type mt ) const
@@ -85,7 +77,7 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Undefined;
 }
 
-QString Protocol::fromMessage( const Message& m ) const
+QByteArray Protocol::fromMessage( const Message& m ) const
 {
   if( !m.isValid() )
     return "";
@@ -97,11 +89,12 @@ QString Protocol::fromMessage( const Message& m ) const
   sl << m.data();
   sl << m.timestamp().toString( Qt::ISODate );
   sl << m.text();
-  return sl.join( PROTOCOL_FIELD_SEPARATOR );
+  return sl.join( PROTOCOL_FIELD_SEPARATOR ).toUtf8();
 }
 
-Message Protocol::toMessage( const QString& message_data ) const
+Message Protocol::toMessage( const QByteArray& byte_array_data ) const
 {
+  QString message_data = QString::fromUtf8( byte_array_data );
   Message m;
   QStringList sl = message_data.split( PROTOCOL_FIELD_SEPARATOR, QString::KeepEmptyParts );
   if( sl.size() < 7 )
@@ -168,19 +161,19 @@ Message Protocol::toMessage( const QString& message_data ) const
   return m;
 }
 
-QString Protocol::pingMessage() const
+QByteArray Protocol::pingMessage() const
 {
   Message m( Message::Ping, ID_PING_MESSAGE, "*" );
   return fromMessage( m );
 }
 
-QString Protocol::pongMessage() const
+QByteArray Protocol::pongMessage() const
 {
   Message m( Message::Pong, ID_PONG_MESSAGE, "*" );
   return fromMessage( m );
 }
 
-QString Protocol::broadcastMessage() const
+QByteArray Protocol::broadcastMessage() const
 {
   int listener_port = Settings::instance().listenerPort();
   if( listener_port <= 0 )
@@ -189,7 +182,7 @@ QString Protocol::broadcastMessage() const
   return fromMessage( m );
 }
 
-QString Protocol::helloMessage() const
+QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
   data_list << Settings::instance().localUser().name();
@@ -239,7 +232,7 @@ User Protocol::createUser( const Message& hello_message )
   sl.removeFirst();
   QString sNickName = sl.size() > 1 ? sl.join( HELLO_FIELD_SEPARATOR ) : sl.at( 0 );
   /* Auth */
-  if( hello_message.data() != Settings::instance().hash( sUserName ) )
+  if( hello_message.data().toUtf8() != Settings::instance().hash( sUserName ) )
     return User();
   /* Create User */
   User u( newId() );
@@ -254,6 +247,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   QStringList sl;
   sl << QString::number( fi.hostPort() );
   sl << QString::number( fi.size() );
+  sl << QString::number( fi.id() );
   sl << QString::fromUtf8( fi.password() );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
@@ -262,14 +256,16 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
 
 FileInfo Protocol::fileInfoFromMessage( const Message& m )
 {
-  FileInfo fi( FileInfo::Download );
+  FileInfo fi( 0, FileInfo::Download );
   fi.setName( m.text() );
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
-  if( sl.size() < 3 )
-    return FileInfo( FileInfo::Download );
+  if( sl.size() < 4 )
+    return FileInfo( 0, FileInfo::Download );
   fi.setHostPort( sl.at( 0 ).toInt() );
   sl.removeFirst();
-  fi.setSize( sl.at( 0 ).toInt() );
+  fi.setSize( sl.at( 0 ).toULongLong() ); // FIXME ???
+  sl.removeFirst();
+  fi.setId( sl.at( 0 ).toULongLong() ); // FIXME ???
   sl.removeFirst();
   QString password = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
   fi.setPassword( password.toUtf8() );
@@ -308,8 +304,6 @@ namespace
     return array_list;
   }
 }
-
-
 
 QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
 {

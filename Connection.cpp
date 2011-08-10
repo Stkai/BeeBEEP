@@ -46,7 +46,7 @@ bool Connection::sendMessage( const Message& m )
 #endif
     return false;
   }
-  QString message_data = Protocol::instance().fromMessage( m );
+  QByteArray message_data = Protocol::instance().fromMessage( m );
   if( message_data.isEmpty() )
   {
 #if defined( BEEBEEP_DEBUG )
@@ -79,7 +79,7 @@ void Connection::checkData( const QByteArray& message_data )
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Message data:" << message_data;
 #endif
-  Message m = Protocol::instance().toMessage( QString::fromUtf8( message_data ) );
+  Message m = Protocol::instance().toMessage( message_data );
   if( !m.isValid() )
   {
     qWarning() << "Skip message cause error occcurred:" << message_data;
@@ -258,11 +258,11 @@ bool Connection::sendLocalUserStatus()
 }
 
 
-bool Connection::writeData( const QString& message_data )
+bool Connection::writeData( const QByteArray& message_data )
 {
-  QString message_data_filled = message_data;
+  QByteArray message_data_filled = message_data;
   while( message_data_filled.size() % ENCRYPTED_DATA_BLOCK_SIZE )
-    message_data_filled.append( QChar( ' ' ) );
-  return sendData( message_data_filled.toUtf8() );
+    message_data_filled.append( ' ' );
+  return sendData( message_data_filled );
 }
 

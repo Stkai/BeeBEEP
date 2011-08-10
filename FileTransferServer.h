@@ -1,4 +1,3 @@
-
 //////////////////////////////////////////////////////////////////////
 //
 // This file is part of BeeBEEP.
@@ -37,31 +36,42 @@ class FileTransferServer : public QTcpServer
 public:
   explicit FileTransferServer( QObject *parent = 0 );
 
-  void uploadFile( const User&, const FileInfo& );
+  bool startServer();
+  void stopServer();
+  bool isWorking() const;
+
+  FileInfo addFile( const QFileInfo& );
+  FileInfo fileInfo( VNumber ) const;
+  FileInfo fileInfo( const QString& file_absolute_path ) const;
   void downloadFile( const User&, const FileInfo& );
 
-  inline bool isBusy() const;
+  inline void clearFiles();
 
 signals:
   void transferMessage( const User&, const FileInfo&, const QString& );
-  void transferProgress( const User&, const FileInfo&, int );
+  void transferProgress( const User&, const FileInfo&, FileSizeType );
 
 protected:
   void incomingConnection( int );
+  inline VNumber newFileId();
+  void resetServerFiles();
 
 protected slots:
   void stopUpload();
+  void stopDownload();
+  void checkFileTransferRequest( VNumber, const QByteArray& );
 
 private:
-  User m_user;
-  FileInfo m_fileInfo;
-  bool m_isBusy;
+  VNumber m_id;
+  QList<FileInfo> m_files;
 
 };
 
 
 // Inline Functions
-inline bool FileTransferServer::isBusy() const { return m_isBusy; }
+inline bool FileTransferServer::isWorking() const { return isListening(); }
+inline void FileTransferServer::clearFiles() { m_files.clear(); }
+inline VNumber FileTransferServer::newFileId() { return ++m_id; }
 
 
 #endif // BEEBEEP_FILETRANSFERSERVER_H

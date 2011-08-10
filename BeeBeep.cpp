@@ -43,7 +43,7 @@ BeeBeep::BeeBeep( QObject* parent )
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( newConnection( Connection* ) ) );
   connect( mp_fileServer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const User&, const FileInfo&, const QString& ) ) );
-  connect( mp_fileServer, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ) );
+  connect( mp_fileServer, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ) );
 }
 
 bool BeeBeep::isWorking() const
@@ -85,7 +85,7 @@ void BeeBeep::start()
 
 void BeeBeep::stop()
 {
-  mp_fileServer->close();
+  mp_fileServer->stopServer();
   mp_listener->close();
   mp_peerManager->stopBroadcasting();
   QList<Connection*> connection_list = m_peers.values();
@@ -190,7 +190,7 @@ QList<User> BeeBeep::users() const
 }
 
 
-User BeeBeep::user( int user_id ) const
+User BeeBeep::user( VNumber user_id ) const
 {
   if( user_id == Settings::instance().localUser().id() )
     return Settings::instance().localUser();
@@ -394,12 +394,6 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
 {
   QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
 
-  if( mp_fileServer->isBusy() )
-  {
-    dispatchSystemMessage( chat_name, tr( "%1 Another file transfer is in progress. Please wait." ).arg( icon_html ) );
-    return false;
-  }
-
   QFileInfo file( file_path );
   if( !file.exists() )
   {
@@ -414,37 +408,41 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
     return false;
   }
 
+  if( !mp_fileServer->isWorking() )
+  {
+    if( !mp_fileServer->startServer() )
+    {
+      dispatchSystemMessage( chat_name, tr( "%1 Unable to send file: bind address/port failed." ).arg( icon_html ) );
+      return false;
+    }
+  }
+
+  FileInfo fi = mp_fileServer->addFile( file );
+  if( !fi.isValid() )
+  {
+    dispatchSystemMessage( chat_name, tr( "%1 Unable to send file: bind address/port failed." ).arg( icon_html ) );
+    return false;
+  }
+
   Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
-  dispatchSystemMessage( chat_name, tr( "%1 You are sending %2..." ).arg( icon_html ).arg( file.fileName() ) );
-
-  if( !mp_fileServer->isListening() )
-    mp_fileServer->listen( QHostAddress::Any );
-
-  FileInfo fi( FileInfo::Upload );
-  fi.setName( file.fileName() );
-  fi.setPath( file.absoluteFilePath() );
-  fi.setSize( file.size() );
-  fi.setHostAddress( mp_fileServer->serverAddress() );
-  fi.setHostPort( mp_fileServer->serverPort() );
-  fi.setPassword( Settings::instance().hash( file.absoluteFilePath() + QDateTime::currentDateTime().toString() + QString::number( QTime::currentTime().second() ) ).toUtf8() );
-
-  mp_fileServer->uploadFile( c->user(), fi );
+  dispatchSystemMessage( chat_name, tr( "%1 You send the file to %2: %3." ).arg( icon_html ).arg( Settings::instance().showUserNickname() ? c->user().nickname() : c->user().name() ).arg( file.fileName() ) );
   Message m = Protocol::instance().fileInfoToMessage( fi );
   c->sendMessage( m );
+
   return true;
 }
 
 void BeeBeep::checkFileMessage( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 File request arrived: %2." ).arg( icon_html ).arg( fi.name() ) );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 %2 wants to send to you the file: %3." ).arg( icon_html ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() ).arg( fi.name() ) );
   emit newFileToDownload( u, fi );
 }
 
 void BeeBeep::acceptFile( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 %2 download started." ).arg( icon_html ).arg( fi.name() ) );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 Downloading %2..." ).arg( icon_html ).arg( fi.name() ) );
   mp_fileServer->downloadFile( u, fi );
 }
 

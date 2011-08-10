@@ -44,7 +44,7 @@ class BeeBeep : public QObject
 public:
   BeeBeep( QObject* parent = 0 );
   QList<User> users() const;
-  User user( int ) const;
+  User user( VNumber ) const;
   Chat chat( const QString&, bool create_if_need, bool read_all_message );
   bool isWorking() const;
   QString id() const;
@@ -63,7 +63,7 @@ signals:
   void newUser( const User& );
   void removeUser( const User& );
   void newChat( const Chat& );
-  void transferProgress( const User&, const FileInfo&, int );
+  void transferProgress( const User&, const FileInfo&, FileSizeType );
 
 public slots:
   void start();

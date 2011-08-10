@@ -24,8 +24,8 @@
 #include "FileTransferPeer.h"
 
 
-FileTransferPeer::FileTransferPeer( const User& u, const FileInfo& fi, QObject *parent )
-  : QObject( parent ), m_user( u ), m_fileInfo( fi ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ),
+FileTransferPeer::FileTransferPeer( QObject *parent )
+  : QObject( parent ), m_user(), m_fileInfo( 0, FileInfo::Upload ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 )//, m_connectionTimer()
 {
 #if defined( BEEBEEP_DEBUG )
@@ -34,6 +34,16 @@ FileTransferPeer::FileTransferPeer( const User& u, const FileInfo& fi, QObject *
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
   connect( &m_socket, SIGNAL( connected() ), this, SLOT( sendData() ) );
   connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkData( const QByteArray& ) ) );
+}
+
+void FileTransferPeer::cancelTransfer()
+{
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << m_fileInfo.name() << "transfer cancelled";
+#endif
+  m_state = FileTransferPeer::Cancelled;
+  emit transferMessage( m_user, m_fileInfo, tr( "transfer cancelled" ) );
+  closeAll();
 }
 
 void FileTransferPeer::closeAll()
@@ -60,18 +70,24 @@ void FileTransferPeer::closeAll()
   emit transferFinished();
 }
 
-void FileTransferPeer::startTransfer( int socket_descriptor )
+void FileTransferPeer::setFileInfo( const FileInfo& fi )
 {
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Start transfer with socket" << socket_descriptor;
-#endif
-  m_state = FileTransferPeer::Auth;
-  m_bytesTransferred = 0;
-  m_totalBytesTransferred = 0;
-  m_file.setFileName( m_fileInfo.path() );
+  m_fileInfo = fi;
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Init the file" << m_file.fileName();
 #endif
+  m_file.setFileName( m_fileInfo.path() );
+}
+
+void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
+{
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Setup connection with socket" << socket_descriptor;
+#endif
+  m_state = FileTransferPeer::Request;
+  m_bytesTransferred = 0;
+  m_totalBytesTransferred = 0;
+
   if( socket_descriptor )
   {
     m_socket.setSocketDescriptor( socket_descriptor );

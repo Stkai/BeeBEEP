@@ -48,7 +48,8 @@ void GuiUserList::updateItem( QListWidgetItem* item )
   if( !user_status )
     unread_messages = 0;
 
-  bool is_local_user = item->data( UserId ).toInt() == Settings::instance().localUser().id();
+  VNumber user_id = Bee::qVariantToVNumber( item->data( UserId ) );
+  bool is_local_user =  user_id == Settings::instance().localUser().id();
 
   QString s = is_local_user ? item->data( UserChatName ).toString() :
               ( Settings::instance().showUserNickname() ?  item->data( UserNickname ).toString() : item->data( Username ).toString() );
@@ -131,7 +132,7 @@ void GuiUserList::showUserInfo( QListWidgetItem* item )
   if( !item )
     return;
   QString sInfo;
-  if( item->data( UserId ).toInt() == Settings::instance().localUser().id() )
+  if( Bee::qVariantToVNumber( item->data( UserId ) ) == Settings::instance().localUser().id() )
     sInfo = tr( "Chat with all users connected" );
   else
     sInfo = tr( "Chat with %1@%2" )

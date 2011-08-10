@@ -488,7 +488,7 @@ void GuiMain::settingsChanged()
     refreshChat();
 }
 
-void GuiMain::chatSelected( int user_id, const QString& chat_name )
+void GuiMain::chatSelected( VNumber user_id, const QString& chat_name )
 {
   if( user_id == Settings::instance().localUser().id())
   {
@@ -670,13 +670,13 @@ void GuiMain::selectDownloadDirectory()
   Settings::instance().setDownloadDirectory( download_directory_path );
 }
 
-void GuiMain::showTransferProgress( const User& u, const FileInfo& fi, int bytes )
+void GuiMain::showTransferProgress( const User& u, const FileInfo& fi, FileSizeType bytes )
 {
   QString debug_progress = tr( "%1: %2 %3 of %4 bytes (%5%)" ).arg( fi.name() )
       .arg( fi.transferType() == FileInfo::Upload ? tr( "upload" ) : tr( "download" ) )
                                              .arg( QString::number( bytes ) )
                                              .arg( QString::number( fi.size() ) )
-      .arg( QString::number( static_cast<int>( (bytes * 100) / fi.size())) );
+      .arg( QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
   statusBar()->showMessage( debug_progress );
 #if defined( BEEBEEP_DEBUG )
   qDebug() << debug_progress;

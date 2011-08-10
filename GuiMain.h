@@ -56,7 +56,7 @@ private slots:
   void searchUsers();
   void settingsChanged();
   void emoticonSelected();
-  void chatSelected( int, const QString& );
+  void chatSelected( VNumber, const QString& );
   void showMessage( const QString&, const ChatMessage& );
   void sendMessage( const QString&, const QString& );
   void toggleMenuBar( bool );
@@ -69,7 +69,7 @@ private slots:
   void sendFile();
   void downloadFile( const User&, const FileInfo& );
   void selectDownloadDirectory();
-  void showTransferProgress( const User&, const FileInfo&, int );
+  void showTransferProgress( const User&, const FileInfo&, FileSizeType );
 
 protected:
   void closeEvent( QCloseEvent* );

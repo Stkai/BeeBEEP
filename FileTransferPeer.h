@@ -36,11 +36,19 @@ class FileTransferPeer : public QObject
   Q_OBJECT
 
 public:
-  enum TransferState { Unknown, Auth, Transferring, Completed, Error };
+  enum TransferState { Unknown, Request, Transferring, Completed, Error, Cancelled };
 
-  FileTransferPeer( const User&, const FileInfo&, QObject *parent = 0 );
+  explicit FileTransferPeer( QObject *parent = 0 );
 
-  void startTransfer( int socket_descriptor ); // if descriptor = 0 socket tries to connect to remote host (client side)
+  void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
+
+  inline void setUser( const User& );
+  inline const User& user() const;
+  void setFileInfo( const FileInfo& );
+  inline const FileInfo& fileInfo() const;
+
+public slots:
+  void cancelTransfer();
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );
@@ -50,7 +58,7 @@ protected slots:
 
 signals:
   void transferMessage( const User&, const FileInfo&, const QString& );
-  void transferProgress( const User&, const FileInfo&, int );
+  void transferProgress( const User&, const FileInfo&, FileSizeType );
   void transferFinished();
 
 protected:
@@ -66,8 +74,15 @@ protected:
   QFile m_file;
   TransferState m_state;
   int m_bytesTransferred;
-  int m_totalBytesTransferred;
+  FileSizeType m_totalBytesTransferred;
 
 };
+
+
+// Inline Functions
+inline void FileTransferPeer::setUser( const User& new_value ) { m_user = new_value; }
+inline const User& FileTransferPeer::user() const { return m_user; }
+inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
+
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

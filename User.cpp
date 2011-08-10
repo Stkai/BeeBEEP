@@ -29,7 +29,7 @@ User::User()
 {
 }
 
-User::User( int new_id )
+User::User( VNumber new_id )
  : m_id( new_id ), m_name( "Bee" ), m_nickname( "BeeBoh" ), m_hostAddress( "127.0.0.1" ), m_status( 0 ), m_statusDescription( "" )
 {
 }

@@ -24,8 +24,13 @@
 #include "FileInfo.h"
 
 
-FileInfo::FileInfo( FileInfo::TransferType tt )
-  : m_transferType( tt ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" )
+FileInfo::FileInfo()
+  : m_transferType( FileInfo::Upload ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( 0 )
+{
+}
+
+FileInfo::FileInfo( VNumber id, FileInfo::TransferType tt )
+  : m_transferType( tt ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( id )
 {
 }
 
@@ -40,6 +45,7 @@ FileInfo& FileInfo::operator=( const FileInfo& fi )
     m_hostAddress = fi.m_hostAddress;
     m_hostPort = fi.m_hostPort;
     m_password = fi.m_password;
+    m_id =  fi.m_id;
   }
   return *this;
 }

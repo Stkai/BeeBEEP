@@ -40,7 +40,7 @@ public:
   Connection( QObject *parent = 0 );
 
   inline const User& user() const;
-  inline int id() const;
+  inline VNumber id() const;
 
   bool sendMessage( const Message& );
 
@@ -62,7 +62,7 @@ private slots:
 
 private:
   void processData();
-  bool writeData( const QString& );
+  bool writeData( const QByteArray& );
   void parseMessage( const Message& );
   void parseHelloMessage( const Message& );
   void parseUserMessage( const Message& );
@@ -79,7 +79,7 @@ private:
 
 // Inline Functions
 
-inline int Connection::id() const { return m_user.id(); }
+inline VNumber Connection::id() const { return m_user.id(); }
 inline const User& Connection::user() const { return m_user; }
 
 

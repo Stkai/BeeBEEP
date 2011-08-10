@@ -37,6 +37,7 @@ namespace Bee
   QIcon userStatusIcon( int );
   QString userStatusIconFileName( int );
   inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
+  inline VNumber qVariantToVNumber( const QVariant& );
 
   namespace Private
   {
@@ -48,5 +49,6 @@ namespace Bee
 // Inline Functions
 inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
 inline QString Bee::iconToHtml( const QString& icon_path, const QString& icon_alt ) { return QString( "<img src='%1' width=16 height=16 alt=' %2 ' /> " ).arg( icon_path ).arg( icon_alt ); }
+inline VNumber Bee::qVariantToVNumber( const QVariant& v ) { return v.toULongLong(); }
 
 #endif // BEEBEEP_GUIUTILS_H

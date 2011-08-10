@@ -22,13 +22,16 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "FileTransferDownload.h"
+#include "Protocol.h"
 
 
 FileTransferDownload::FileTransferDownload( const User& u, const FileInfo& fi, QObject *parent )
-  : FileTransferPeer( u, fi, parent )
+  : FileTransferPeer( parent )
 {
+  setUser( u );
+  setFileInfo( fi );
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Download the file" << m_fileInfo.name();
+  qDebug() << "Download the file" << m_fileInfo.name() << "from user" << m_user.name();
 #endif
 }
 
@@ -36,8 +39,8 @@ void FileTransferDownload::sendData()
 {
   switch( m_state )
   {
-  case FileTransferPeer::Auth:
-    sendAuth();
+  case FileTransferPeer::Request:
+    sendDownlodRequest();
     break;
   case FileTransferPeer::Transferring:
     sendDataConfirmation();
@@ -46,20 +49,16 @@ void FileTransferDownload::sendData()
     // do_nothing
     break;
   }
-  //if( m_connectionTimer.isActive() )
-  //  m_connectionTimer.stop();
-  //m_connectionTimer.start();
 }
 
-void FileTransferDownload::sendAuth()
+void FileTransferDownload::sendDownlodRequest()
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Sending AUTH:" << m_fileInfo.password();
+  qDebug() << "Sending REQUEST:" << m_fileInfo.password();
 #endif
-  m_socket.sendData( m_fileInfo.password() );
+  m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) );
   m_state = FileTransferPeer::Transferring;
 }
-
 
 void FileTransferDownload::sendDataConfirmation()
 {

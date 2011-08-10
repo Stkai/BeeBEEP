@@ -72,7 +72,7 @@ public:
   inline void setGuiGeometry( const QByteArray& );
   inline const QByteArray& guiGeometry() const;
 
-  QString hash( const QString& nick ) const;
+  QByteArray hash( const QString& ) const;
   inline const QString& hash() const;
   void setPassword( const QString& );
   inline const QByteArray& password() const;

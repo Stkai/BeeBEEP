@@ -23,13 +23,14 @@
 
 
 #include "FileTransferUpload.h"
+#include "Protocol.h"
 
 
-FileTransferUpload::FileTransferUpload( const User& u, const FileInfo& fi, QObject *parent )
-  : FileTransferPeer( u, fi, parent )
+FileTransferUpload::FileTransferUpload( QObject *parent )
+  : FileTransferPeer( parent )
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Upload the file" << m_fileInfo.name();
+  qDebug() << "FileTransferPeer created in Upload Mode";
 #endif
 }
 
@@ -37,8 +38,8 @@ void FileTransferUpload::checkData( const QByteArray& byte_array )
 {
   switch( m_state )
   {
-  case FileTransferPeer::Auth:
-    checkAuth( byte_array );
+  case FileTransferPeer::Request:
+    checkRequest( byte_array );
     break;
   case FileTransferPeer::Transferring:
     checkSending( byte_array );
@@ -49,20 +50,43 @@ void FileTransferUpload::checkData( const QByteArray& byte_array )
   }
 }
 
-void FileTransferUpload::checkAuth( const QByteArray& byte_array )
+void FileTransferUpload::checkRequest( const QByteArray& byte_array )
 {
-  if( byte_array == m_fileInfo.password() )
+  Message m = Protocol::instance().toMessage( byte_array );
+  if( !m.isValid() )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "AUTH received for file" << m_fileInfo.name();
+    qDebug() << "Invalid file request received:" << byte_array;
 #endif
-    m_state = FileTransferPeer::Transferring;
-    sendData();
+    cancelTransfer();
+    return;
   }
-  else
+
+  FileInfo file_info = Protocol::instance().fileInfoFromMessage( m );
+  if( !file_info.isValid() )
   {
-    setError( tr( "Not authorized" ) );
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Invalid file info in message:" << byte_array;
+#endif
+    cancelTransfer();
+    return;
   }
+
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "File request received:" << file_info.id() << file_info.password();
+#endif
+  emit fileTransferRequest( file_info.id(), file_info.password() );
+
+}
+
+void FileTransferUpload::startTransfer( const FileInfo& fi )
+{
+  setFileInfo( fi );
+  m_state = FileTransferPeer::Transferring;
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << fi.path() << "file transfer started";
+#endif
+  sendData();
 }
 
 void FileTransferUpload::checkSending( const QByteArray& byte_array )
@@ -72,8 +96,6 @@ void FileTransferUpload::checkSending( const QByteArray& byte_array )
 #if defined( BEEBEEP_DEBUG )
     qDebug() << m_bytesTransferred << "bytes sent confirmed";
 #endif
-   // if( m_connectionTimer.isActive() )
-    //  m_connectionTimer.stop();
     m_totalBytesTransferred += m_bytesTransferred;
     showProgress();
     sendData();
@@ -113,9 +135,6 @@ void FileTransferUpload::sendData()
 #if defined( BEEBEEP_DEBUG )
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent";
 #endif
-    //if( m_connectionTimer.isActive() )
-    //  m_connectionTimer.stop();
-   // m_connectionTimer.start();
   }
   else
   {
