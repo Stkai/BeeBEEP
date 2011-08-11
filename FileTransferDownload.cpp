@@ -25,14 +25,14 @@
 #include "Protocol.h"
 
 
-FileTransferDownload::FileTransferDownload( const User& u, const FileInfo& fi, QObject *parent )
-  : FileTransferPeer( parent )
+FileTransferDownload::FileTransferDownload( VNumber peer_id, const FileInfo& fi, QObject *parent )
+  : FileTransferPeer( peer_id, parent )
 {
-  setUser( u );
   setFileInfo( fi );
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Download the file" << m_fileInfo.name() << "from user" << m_user.name();
+  qDebug() << "Download the file" << m_fileInfo.name() << "from address" << m_fileInfo.hostAddress().toString() << m_fileInfo.hostPort();
 #endif
+  connect( this, SIGNAL( userAuthenticated() ), this, SLOT( sendData() ) );
 }
 
 void FileTransferDownload::sendData()

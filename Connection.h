@@ -35,9 +35,7 @@ class Connection : public ConnectionSocket
   Q_OBJECT
 
 public:
-  enum State { WaitingForHello, ReadyForUse };
-
-  Connection( QObject *parent = 0 );
+  explicit Connection( QObject *parent = 0 );
 
   inline const User& user() const;
   inline VNumber id() const;
@@ -55,24 +53,17 @@ signals:
   void newFileMessage( const User&, const FileInfo& );
 
 private slots:
-  void checkData( const QByteArray& );
+  void parseData( const QByteArray& );
   void sendPing();
   void sendPong();
-  void sendHello();
+  void setReadyForUse();
 
 private:
-  void processData();
-  bool writeData( const QByteArray& );
-  void parseMessage( const Message& );
-  void parseHelloMessage( const Message& );
   void parseUserMessage( const Message& );
   void parseFileMessage( const Message& );
 
-  User m_user;
   QTimer m_pingTimer;
   QTime m_pongTime;
-  State m_state;
-  bool m_isHelloMessageSent;
 
 };
 

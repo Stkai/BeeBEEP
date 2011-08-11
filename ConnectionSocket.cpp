@@ -27,8 +27,9 @@
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
-  : QTcpSocket( parent ), m_blockSize( 0 )
+  : QTcpSocket( parent ), m_user(), m_blockSize( 0 ), m_isHelloSent( false )
 {
+  connect( this, SIGNAL( connected() ), this, SLOT( sendHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
 }
 
@@ -59,7 +60,11 @@ void ConnectionSocket::readBlock()
   m_blockSize = 0;
 
   QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
-  emit dataReceived( decrypted_byte_array );
+
+  if( !m_user.isValid() )
+    checkHello( decrypted_byte_array );
+  else
+    emit dataReceived( decrypted_byte_array );
 }
 
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
@@ -98,3 +103,53 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #endif
 }
 
+void ConnectionSocket::sendHello()
+{
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Sending HELLO to" << peerAddress().toString();
+#endif
+  if( sendData( Protocol::instance().helloMessage() ) )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "HELLO sent to" << peerAddress().toString();
+#endif
+    m_isHelloSent = true;
+  }
+  else
+    qWarning() << "Unable to send HELLO to" <<  peerAddress().toString();
+}
+
+void ConnectionSocket::checkHello( const QByteArray& array_data )
+{
+  Message m = Protocol::instance().toMessage( array_data );
+  if( !m.isValid() )
+  {
+    qWarning() << "Invalid hello message arrived from connection:" << peerAddress().toString();
+    abort();
+    return;
+  }
+
+  if( m.type() != Message::Hello )
+  {
+    qWarning() << "Hello message not arrived from connection:" << peerAddress().toString();
+    abort();
+    return;
+  }
+
+  m_user = Protocol::instance().createUser( m, peerAddress() );
+  if( !m_user.isValid() )
+  {
+    qWarning() << "Invalid user from connection:" << peerAddress().toString();
+    abort();
+    return;
+  }
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "New user:" << m_user.path();
+#endif
+  m_user.setStatus( User::Online );
+
+  if( !m_isHelloSent )
+    sendHello();
+
+  emit userAuthenticated();
+}

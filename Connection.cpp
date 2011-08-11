@@ -28,13 +28,13 @@
 
 
 Connection::Connection( QObject *parent )
-  : ConnectionSocket( parent ), m_user(), m_state( WaitingForHello ), m_isHelloMessageSent( false )
+  : ConnectionSocket( parent )
 {
   m_pingTimer.setInterval( PING_INTERVAL );
-  connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkData( const QByteArray& ) ) );
+  connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( parseData( const QByteArray& ) ) );
   connect( this, SIGNAL( disconnected() ), &m_pingTimer, SLOT( stop() ) );
   connect( &m_pingTimer, SIGNAL( timeout() ), this, SLOT( sendPing() ) );
-  connect( this, SIGNAL( connected() ), this, SLOT( sendHello() ) );
+  connect( this, SIGNAL( userAuthenticated() ), this, SLOT( setReadyForUse() ) );
 }
 
 bool Connection::sendMessage( const Message& m )
@@ -58,7 +58,7 @@ bool Connection::sendMessage( const Message& m )
   qDebug() << "Sending:" << message_data;
 #endif
 
-  if( writeData( message_data ) )
+  if( sendData( message_data ) )
   {
 #if defined( BEEBEEP_DEBUG )
     qDebug() << "Message sent";
@@ -74,7 +74,7 @@ bool Connection::sendMessage( const Message& m )
   }
 }
 
-void Connection::checkData( const QByteArray& message_data )
+void Connection::parseData( const QByteArray& message_data )
 {
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Message data:" << message_data;
@@ -86,15 +86,6 @@ void Connection::checkData( const QByteArray& message_data )
     return;
   }
 
-  if( m_state == WaitingForHello )
-    parseHelloMessage( m );
-  else
-    parseMessage( m );
-
-}
-
-void Connection::parseMessage( const Message& m )
-{
 #if defined( BEEBEEP_DEBUG )
    qDebug() << "Parsing message";
 #endif
@@ -140,36 +131,10 @@ void Connection::parseMessage( const Message& m )
   }
 }
 
-void Connection::parseHelloMessage( const Message& m )
+void Connection::setReadyForUse()
 {
-  if( m.type() != Message::Hello )
-  {
-    qWarning() << "Hello message not arrived from connection:" << peerAddress().toString();
-    abort();
-    return;
-  }
-
-  m_user = Protocol::instance().createUser( m );
-  if( !m_user.isValid() )
-  {
-    qWarning() << "Invalid user from connection:" << peerAddress().toString();
-    abort();
-    return;
-  }
-
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "New user:" << m_user.name();
-#endif
-
-  m_user.setHostAddress( peerAddress() );
-  m_state = ReadyForUse;
-
-  if( !m_isHelloMessageSent )
-    sendHello();
-
   m_pingTimer.start();
   m_pongTime.start();
-  m_user.setStatus( User::Online );
   emit readyForUse();
 }
 
@@ -222,7 +187,8 @@ void Connection::sendPing()
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Sending PING to" << m_user.name();
 #endif
-  writeData( Protocol::instance().pingMessage() );
+  if( !sendData( Protocol::instance().pingMessage() ) )
+    qWarning() << "Unable to send PING to" << peerAddress().toString();
 }
 
 void Connection::sendPong()
@@ -230,39 +196,16 @@ void Connection::sendPong()
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Sending PONG to" << m_user.name();
 #endif
-  writeData( Protocol::instance().pongMessage() );
-}
-
-void Connection::sendHello()
-{
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Sending HELLO to" << m_user.name();
-#endif
-  if( writeData( Protocol::instance().helloMessage() ) )
-  {
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << "HELLO sent to" << m_user.name();
-#endif
-    m_isHelloMessageSent = true;
-  }
-  else
-    qWarning() << "Unable to send HELLO to" << m_user.name();
+  if( !sendData( Protocol::instance().pongMessage() ) )
+    qWarning() << "Unable to send PONG to" << peerAddress().toString();
 }
 
 bool Connection::sendLocalUserStatus()
 {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "Sending status to" << m_user.name();
+  qDebug() << "Sending status to" << m_user.name();
 #endif
   return sendMessage( Protocol::instance().userStatusToMessage( Settings::instance().localUser() ) );
 }
 
-
-bool Connection::writeData( const QByteArray& message_data )
-{
-  QByteArray message_data_filled = message_data;
-  while( message_data_filled.size() % ENCRYPTED_DATA_BLOCK_SIZE )
-    message_data_filled.append( ' ' );
-  return sendData( message_data_filled );
-}
 

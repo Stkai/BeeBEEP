@@ -21,27 +21,27 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "FileTransferServer.h"
+#include "FileTransfer.h"
 #include "FileTransferDownload.h"
 #include "FileTransferUpload.h"
 #include "Settings.h"
 
 
 
-FileTransferServer::FileTransferServer( QObject *parent )
-  : QTcpServer( parent ), m_id( ID_START ), m_files()
+FileTransfer::FileTransfer( QObject *parent )
+  : QTcpServer( parent ), m_id( ID_START ), m_files(), m_peers()
 {
 }
 
-bool FileTransferServer::startServer()
+bool FileTransfer::startListener()
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Starting FileTransferServer";
+  qDebug() << "Starting FileTransfer listener";
 #endif
   if( isListening() )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "FileTransferServer is already listening";
+    qDebug() << "FileTransfer is already listening";
 #endif
     return true;
   }
@@ -49,30 +49,30 @@ bool FileTransferServer::startServer()
   if( !listen( QHostAddress::Any ) )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "FileTransferServer cannot bind an address or a port";
+    qDebug() << "FileTransfer cannot bind an address or a port";
 #endif
     return false;
   }
 
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "FileTransferServer listen" << serverAddress() << serverPort();
+  qDebug() << "FileTransfer listen" << serverAddress() << serverPort();
 #endif
   resetServerFiles();
   return true;
 }
 
-void FileTransferServer::stopServer()
+void FileTransfer::stopListener()
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "FileTransferServer closed";
+  qDebug() << "FileTransfer listener closed";
 #endif
   close();
 }
 
-void FileTransferServer::resetServerFiles()
+void FileTransfer::resetServerFiles()
 {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "FileTransferServer reset files to" << serverAddress() << serverPort();
+  qDebug() << "FileTransfer reset files to" << serverAddress() << serverPort();
 #endif
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )
@@ -83,7 +83,7 @@ void FileTransferServer::resetServerFiles()
   }
 }
 
-FileInfo FileTransferServer::fileInfo( VNumber file_id ) const
+FileInfo FileTransfer::fileInfo( VNumber file_id ) const
 {
   QList<FileInfo>::const_iterator it = m_files.begin();
   while( it != m_files.end() )
@@ -95,7 +95,7 @@ FileInfo FileTransferServer::fileInfo( VNumber file_id ) const
   return FileInfo();
 }
 
-FileInfo FileTransferServer::fileInfo( const QString& file_absolute_path ) const
+FileInfo FileTransfer::fileInfo( const QString& file_absolute_path ) const
 {
   QList<FileInfo>::const_iterator it = m_files.begin();
   while( it != m_files.end() )
@@ -107,7 +107,7 @@ FileInfo FileTransferServer::fileInfo( const QString& file_absolute_path ) const
   return FileInfo();
 }
 
-FileInfo FileTransferServer::addFile( const QFileInfo& fi )
+FileInfo FileTransfer::addFile( const QFileInfo& fi )
 {
   FileInfo file_info = fileInfo( fi.absoluteFilePath() );
   if( file_info.isValid() )
@@ -124,17 +124,20 @@ FileInfo FileTransferServer::addFile( const QFileInfo& fi )
   return file_info;
 }
 
-void FileTransferServer::incomingConnection( int socketDescriptor )
+void FileTransfer::incomingConnection( int socketDescriptor )
 {
-  FileTransferUpload *upload_peer = new FileTransferUpload( this );
+  FileTransferUpload *upload_peer = new FileTransferUpload( newFileId(), this );
+
   connect( upload_peer, SIGNAL( transferFinished() ), this, SLOT( stopUpload() ) );
   connect( upload_peer, SIGNAL( fileTransferRequest( VNumber, const QByteArray& ) ), this, SLOT( checkFileTransferRequest( VNumber, const QByteArray& ) ) );
-  connect( upload_peer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ) );
-  connect( upload_peer, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( upload_peer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( message( const User&, const FileInfo&, const QString& ) ) );
+  connect( upload_peer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( upload_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
+  m_peers.append( upload_peer );
   upload_peer->setConnectionDescriptor( socketDescriptor );
 }
 
-void FileTransferServer::checkFileTransferRequest( VNumber file_id, const QByteArray& file_password )
+void FileTransfer::checkFileTransferRequest( VNumber file_id, const QByteArray& file_password )
 {
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Checking file request:" << file_id << file_password;
@@ -143,14 +146,14 @@ void FileTransferServer::checkFileTransferRequest( VNumber file_id, const QByteA
   FileTransferUpload *upload_peer = qobject_cast<FileTransferUpload*>( sender() );
   if( !upload_peer )
   {
-    qWarning() << "FileTransferServer received a signal from invalid FileTransferUpload instance";
+    qWarning() << "FileTransfer received a signal from invalid FileTransferUpload instance";
     return;
   }
 
   FileInfo file_info = fileInfo( file_id );
   if( !file_info.isValid() )
   {
-    qWarning() << "FileTransferServer received a request of a file not in list";
+    qWarning() << "FileTransfer received a request of a file not in list";
     upload_peer->cancelTransfer();
     return;
   }
@@ -158,35 +161,79 @@ void FileTransferServer::checkFileTransferRequest( VNumber file_id, const QByteA
   upload_peer->startTransfer( file_info );
 }
 
-
-
-void FileTransferServer::downloadFile( const User& u, const FileInfo& fi )
+void FileTransfer::downloadFile( const FileInfo& fi )
 {
-  FileTransferDownload *download_peer = new FileTransferDownload( u, fi, this );
+  FileTransferDownload *download_peer = new FileTransferDownload( newFileId(), fi, this );
   connect( download_peer, SIGNAL( transferFinished() ), this, SLOT( stopDownload() ) );
-  connect( download_peer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ) );
-  connect( download_peer, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( download_peer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( message( const User&, const FileInfo&, const QString& ) ) );
+  connect( download_peer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( download_peer, SIGNAL( destroyed() ), this, SLOT( dowloadPeerDestroyed() ) );
+
+  m_peers.append( download_peer );
   download_peer->setConnectionDescriptor( 0 );
 }
 
-void FileTransferServer::stopUpload()
+FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
+{
+  QList<FileTransferPeer*>::const_iterator it = m_peers.begin();
+  while( it != m_peers.end() )
+  {
+    if( (*it)->id() == peer_id )
+      return *it;
+    ++it;
+  }
+  return 0;
+}
+
+void FileTransfer::peerDestroyed()
+{
+  if( !sender() )
+  {
+    qWarning() << "Unable to cast object FileTransferPeer from the sender of the signal. List become invalid";
+    return;
+  }
+
+  if( m_peers.removeOne( (FileTransferPeer*)sender() ) )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Removing peer from list." << m_peers.size() << "peers remained";
+#endif
+  }
+}
+
+bool FileTransfer::cancelTransfer( VNumber peer_id )
+{
+  FileTransferPeer* transfer_peer = peer( peer_id );
+  if( transfer_peer )
+  {
+#if defined( BEEBEEP_DEBUG )
+    qDebug() << "Cancel transfer in progress of peer" << transfer_peer->id();
+#endif
+    transfer_peer->cancelTransfer();
+    return true;
+  }
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Unable to cancel transfer in progress. Peer not found";
+#endif
+  return false;
+}
+
+void FileTransfer::stopUpload()
 {
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Upload finished";
 #endif
-  if( isListening() )
-    close();
   FileTransferUpload *upload_peer = qobject_cast<FileTransferUpload*>( sender() );
   if( upload_peer )
   {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Deleting peer";
+    qDebug() << "Deleting peer";
 #endif
     upload_peer->deleteLater();
   }
 }
 
-void FileTransferServer::stopDownload()
+void FileTransfer::stopDownload()
 {
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Download finished";
@@ -195,7 +242,7 @@ void FileTransferServer::stopDownload()
   if( download_peer )
   {
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << "Deleting peer";
+    qDebug() << "Deleting peer";
 #endif
     download_peer->deleteLater();
   }

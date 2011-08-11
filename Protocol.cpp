@@ -89,7 +89,10 @@ QByteArray Protocol::fromMessage( const Message& m ) const
   sl << m.data();
   sl << m.timestamp().toString( Qt::ISODate );
   sl << m.text();
-  return sl.join( PROTOCOL_FIELD_SEPARATOR ).toUtf8();
+  QByteArray byte_array = sl.join( PROTOCOL_FIELD_SEPARATOR ).toUtf8();
+  while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )
+    byte_array.append( ' ' );
+  return byte_array;
 }
 
 Message Protocol::toMessage( const QByteArray& byte_array_data ) const
@@ -222,7 +225,7 @@ User Protocol::userStatusFromMessage( User u, const Message& m ) const
   return User();
 }
 
-User Protocol::createUser( const Message& hello_message )
+User Protocol::createUser( const Message& hello_message, const QHostAddress& host_address )
 {
   /* Read User Field Data */
   QStringList sl = hello_message.text().split( HELLO_FIELD_SEPARATOR, QString::KeepEmptyParts );
@@ -238,6 +241,7 @@ User Protocol::createUser( const Message& hello_message )
   User u( newId() );
   u.setName( sUserName.trimmed() );
   u.setNickname( sNickName.trimmed() );
+  u.setHostAddress( host_address );
   return u;
 }
 

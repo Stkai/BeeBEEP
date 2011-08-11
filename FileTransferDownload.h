@@ -27,13 +27,12 @@
 #include "FileTransferPeer.h"
 
 
-
 class FileTransferDownload : public FileTransferPeer
 {
   Q_OBJECT
 
 public:
-  FileTransferDownload( const User&, const FileInfo&, QObject *parent = 0 );
+  FileTransferDownload( VNumber, const FileInfo&, QObject *parent = 0 );
 
 protected slots:
   void checkData( const QByteArray& );
@@ -42,7 +41,6 @@ protected slots:
 protected:
   void sendDownlodRequest();
   void sendDataConfirmation();
-
 
 };
 

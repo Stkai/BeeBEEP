@@ -38,16 +38,14 @@ class FileTransferPeer : public QObject
 public:
   enum TransferState { Unknown, Request, Transferring, Completed, Error, Cancelled };
 
-  explicit FileTransferPeer( QObject *parent = 0 );
+  explicit FileTransferPeer( VNumber, QObject *parent = 0 );
 
   void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
 
-  inline void setUser( const User& );
-  inline const User& user() const;
   void setFileInfo( const FileInfo& );
   inline const FileInfo& fileInfo() const;
 
-public slots:
+  inline VNumber id() const;
   void cancelTransfer();
 
 protected slots:
@@ -57,9 +55,10 @@ protected slots:
   virtual void sendData() = 0;
 
 signals:
-  void transferMessage( const User&, const FileInfo&, const QString& );
-  void transferProgress( const User&, const FileInfo&, FileSizeType );
+  void message( const User&, const FileInfo&, const QString& );
+  void progress( const User&, const FileInfo&, FileSizeType );
   void transferFinished();
+  void userAuthenticated();
 
 protected:
   void showProgress();
@@ -68,7 +67,7 @@ protected:
   void closeAll();
 
 protected:
-  User m_user;
+  VNumber m_id;
   FileInfo m_fileInfo;
   ConnectionSocket m_socket;
   QFile m_file;
@@ -80,8 +79,7 @@ protected:
 
 
 // Inline Functions
-inline void FileTransferPeer::setUser( const User& new_value ) { m_user = new_value; }
-inline const User& FileTransferPeer::user() const { return m_user; }
+inline VNumber FileTransferPeer::id() const { return m_id; }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 
 

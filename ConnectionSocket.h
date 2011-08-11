@@ -25,6 +25,7 @@
 #define BEEBEEP_CONNECTIONSOCKET_H
 
 #include "Config.h"
+#include "User.h"
 
 
 class ConnectionSocket : public QTcpSocket
@@ -35,16 +36,28 @@ public:
   explicit ConnectionSocket( QObject* parent = 0 );
 
   bool sendData( const QByteArray& );
+  inline const User& user() const;
 
 signals:
   void dataReceived( const QByteArray& );
+  void userAuthenticated();
 
 protected slots:
   void readBlock();
+  void sendHello();
+
+protected:
+  void checkHello( const QByteArray& );
+  User m_user;
 
 private:
   DATA_BLOCK_SIZE m_blockSize;
+  bool m_isHelloSent;
 
 };
+
+
+// Inline Functions
+inline const User& ConnectionSocket::user() const { return m_user; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

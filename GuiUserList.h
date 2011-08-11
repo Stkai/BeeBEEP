@@ -45,7 +45,7 @@ public:
   bool nextUserWithUnreadMessages();
 
 signals:
-  void chatSelected( int, const QString& );
+  void chatSelected( VNumber, const QString& );
   void stringToShow( const QString&, int );
 
 protected slots:

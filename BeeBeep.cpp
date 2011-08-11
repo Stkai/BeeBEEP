@@ -24,7 +24,7 @@
 #include "BeeBeep.h"
 #include "BeeUtils.h"
 #include "Connection.h"
-#include "FileTransferServer.h"
+#include "FileTransfer.h"
 #include "Listener.h"
 #include "PeerManager.h"
 #include "Protocol.h"
@@ -36,14 +36,14 @@ BeeBeep::BeeBeep( QObject* parent )
 {
   mp_listener = new Listener( this );
   mp_peerManager = new PeerManager( this );
-  mp_fileServer = new FileTransferServer( this );
+  mp_fileTransfer = new FileTransfer( this );
 
   (void)chat( Settings::instance().defaultChatName(), true, false );
 
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( newConnection( Connection* ) ) );
-  connect( mp_fileServer, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const User&, const FileInfo&, const QString& ) ) );
-  connect( mp_fileServer, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_fileTransfer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ) );
 }
 
 bool BeeBeep::isWorking() const
@@ -58,6 +58,9 @@ QString BeeBeep::id() const
 
 void BeeBeep::start()
 {
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << Settings::instance().programName() << "started";
+#endif
   if( !mp_listener->listen( QHostAddress::Any, LISTENER_DEFAULT_PORT ) )
   {
     if( !mp_listener->listen( QHostAddress::Any ) )
@@ -85,7 +88,7 @@ void BeeBeep::start()
 
 void BeeBeep::stop()
 {
-  mp_fileServer->stopServer();
+  mp_fileTransfer->stopListener();
   mp_listener->close();
   mp_peerManager->stopBroadcasting();
   QList<Connection*> connection_list = m_peers.values();
@@ -408,16 +411,16 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
     return false;
   }
 
-  if( !mp_fileServer->isWorking() )
+  if( !mp_fileTransfer->isWorking() )
   {
-    if( !mp_fileServer->startServer() )
+    if( !mp_fileTransfer->startListener() )
     {
       dispatchSystemMessage( chat_name, tr( "%1 Unable to send file: bind address/port failed." ).arg( icon_html ) );
       return false;
     }
   }
 
-  FileInfo fi = mp_fileServer->addFile( file );
+  FileInfo fi = mp_fileTransfer->addFile( file );
   if( !fi.isValid() )
   {
     dispatchSystemMessage( chat_name, tr( "%1 Unable to send file: bind address/port failed." ).arg( icon_html ) );
@@ -435,20 +438,24 @@ bool BeeBeep::sendFile( const QString& chat_name, const QString& file_path )
 void BeeBeep::checkFileMessage( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 %2 wants to send to you the file: %3." ).arg( icon_html ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() ).arg( fi.name() ) );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 %2 is sending to you the file: %3." ).arg( icon_html ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() ).arg( fi.name() ) );
   emit newFileToDownload( u, fi );
 }
 
 void BeeBeep::acceptFile( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 Downloading %2..." ).arg( icon_html ).arg( fi.name() ) );
-  mp_fileServer->downloadFile( u, fi );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 Downloading %2 from %3." ).arg( icon_html ).arg( fi.name() )
+                         .arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() ));
+  mp_fileTransfer->downloadFile( fi );
 }
 
 
 void BeeBeep::checkFileTransfer( const User& u, const FileInfo& fi, const QString& msg )
 {
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 %2: %3." ).arg( icon_html ).arg( fi.name() ).arg( msg ) );
+  dispatchSystemMessage( Settings::instance().chatName( u ), tr( "%1 %2 %3 %4: %5." ).arg( icon_html ).arg( fi.name() )
+                         .arg( fi.isDownload() ? tr( "from") : tr( "to" ) )
+                         .arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
+                         .arg( msg ) );
 }

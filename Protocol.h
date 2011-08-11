@@ -52,7 +52,7 @@ public:
   Message userStatusToMessage( const User& ) const;
   User userStatusFromMessage( User, const Message& ) const;
 
-  User createUser( const Message& );
+  User createUser( const Message&, const QHostAddress& );
   inline User createLocalUser() const;
 
   QByteArray encryptByteArray( const QByteArray& ) const;

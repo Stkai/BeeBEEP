@@ -57,13 +57,13 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_beeBeep, SIGNAL( removeUser( const User& ) ), this, SLOT( removeUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( userNewStatus( const User& ) ), this, SLOT( showNewUserStatus( const User& ) ) );
-  connect( mp_beeBeep, SIGNAL( transferProgress( const User&, const FileInfo&, int ) ), this, SLOT( showTransferProgress( const User&, const FileInfo&, int ) ) );
+  connect( mp_beeBeep, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SLOT( showTransferProgress( const User&, const FileInfo&, FileSizeType ) ) );
 
   connect( mp_defaultChat, SIGNAL( newMessage( const QString&, const QString& ) ), this, SLOT( sendMessage( const QString&, const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( writing( const QString& ) ), mp_beeBeep, SLOT( sendWritingMessage( const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
 
-  connect( mp_userList, SIGNAL( chatSelected( int, const QString& ) ), this, SLOT( chatSelected( int, const QString& ) ) );
+  connect( mp_userList, SIGNAL( chatSelected( VNumber, const QString& ) ), this, SLOT( chatSelected( VNumber, const QString& ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
   mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, false ) );
@@ -649,9 +649,9 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
     if( qfile_info.exists() )
     {
       QString file_name = QFileDialog::getSaveFileName( this,
-                          tr( "%1 already exists.\nPlease select a new filename." ),
-                          Settings::instance().downloadDirectory() );
-      if( file_name.isNull() )
+                            tr( "%1 already exists. Please select a new filename." ).arg( qfile_info.fileName() ),
+                            Settings::instance().downloadDirectory() );
+      if( file_name.isNull() || file_name.isEmpty() )
         return;
       qfile_info = QFileInfo( file_name );
     }

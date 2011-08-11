@@ -26,8 +26,8 @@
 #include "Protocol.h"
 
 
-FileTransferUpload::FileTransferUpload( QObject *parent )
-  : FileTransferPeer( parent )
+FileTransferUpload::FileTransferUpload( VNumber peer_id, QObject *parent )
+  : FileTransferPeer( peer_id, parent )
 {
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "FileTransferPeer created in Upload Mode";
@@ -76,7 +76,6 @@ void FileTransferUpload::checkRequest( const QByteArray& byte_array )
   qDebug() << "File request received:" << file_info.id() << file_info.password();
 #endif
   emit fileTransferRequest( file_info.id(), file_info.password() );
-
 }
 
 void FileTransferUpload::startTransfer( const FileInfo& fi )

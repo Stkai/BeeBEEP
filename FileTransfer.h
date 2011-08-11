@@ -21,57 +21,62 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_FILETRANSFERSERVER_H
-#define BEEBEEP_FILETRANSFERSERVER_H
+#ifndef BEEBEEP_FILETRANSFER_H
+#define BEEBEEP_FILETRANSFER_H
 
 #include "Config.h"
 #include "FileInfo.h"
 #include "User.h"
+class FileTransferPeer;
 
 
-class FileTransferServer : public QTcpServer
+class FileTransfer : public QTcpServer
 {
   Q_OBJECT
 
 public:
-  explicit FileTransferServer( QObject *parent = 0 );
+  explicit FileTransfer( QObject *parent = 0 );
 
-  bool startServer();
-  void stopServer();
+  bool startListener();
+  void stopListener();
   bool isWorking() const;
 
   FileInfo addFile( const QFileInfo& );
   FileInfo fileInfo( VNumber ) const;
   FileInfo fileInfo( const QString& file_absolute_path ) const;
-  void downloadFile( const User&, const FileInfo& );
+  void downloadFile( const FileInfo& );
+  bool cancelTransfer( VNumber peer_id );
 
   inline void clearFiles();
 
 signals:
-  void transferMessage( const User&, const FileInfo&, const QString& );
-  void transferProgress( const User&, const FileInfo&, FileSizeType );
+  void message( const User&, const FileInfo&, const QString& );
+  void progress( const User&, const FileInfo&, FileSizeType );
 
 protected:
   void incomingConnection( int );
   inline VNumber newFileId();
   void resetServerFiles();
+  FileTransferPeer* peer( VNumber ) const;
 
 protected slots:
   void stopUpload();
   void stopDownload();
   void checkFileTransferRequest( VNumber, const QByteArray& );
+  void peerDestroyed();
 
 private:
   VNumber m_id;
   QList<FileInfo> m_files;
+  QList<FileTransferPeer*> m_peers;
 
 };
 
 
 // Inline Functions
-inline bool FileTransferServer::isWorking() const { return isListening(); }
-inline void FileTransferServer::clearFiles() { m_files.clear(); }
-inline VNumber FileTransferServer::newFileId() { return ++m_id; }
+inline bool FileTransfer::isWorking() const { return isListening(); }
+inline void FileTransfer::clearFiles() { m_files.clear(); }
+inline VNumber FileTransfer::newFileId() { return ++m_id; }
 
 
 #endif // BEEBEEP_FILETRANSFERSERVER_H

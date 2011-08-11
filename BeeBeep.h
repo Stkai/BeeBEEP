@@ -30,7 +30,7 @@
 class ChatMessage;
 class Connection;
 class FileInfo;
-class FileTransferServer;
+class FileTransfer;
 class Listener;
 class Message;
 class PeerManager;
@@ -96,7 +96,7 @@ private:
   PeerManager* mp_peerManager;
   QMultiHash<int, Connection*> m_peers;
   QHash<QString, Chat> m_chats;
-  FileTransferServer* mp_fileServer;
+  FileTransfer* mp_fileTransfer;
 
 };
 

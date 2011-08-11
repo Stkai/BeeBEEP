@@ -24,12 +24,12 @@ SOURCES += Listener.cpp \
     ChatMessage.cpp \
     BeeUtils.cpp \
     Rijndael.cpp \
-    FileTransferServer.cpp \
     FileInfo.cpp \
     ConnectionSocket.cpp \
     FileTransferPeer.cpp \
     FileTransferUpload.cpp \
-    FileTransferDownload.cpp
+    FileTransferDownload.cpp \
+    FileTransfer.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -52,12 +52,12 @@ HEADERS += sym_iap_util.h \
     BeeUtils.h \
     Rijndael.h \
     Log.h \
-    FileTransferServer.h \
     FileInfo.h \
     ConnectionSocket.h \
     FileTransferPeer.h \
     FileTransferUpload.h \
-    FileTransferDownload.h
+    FileTransferDownload.h \
+    FileTransfer.h
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc

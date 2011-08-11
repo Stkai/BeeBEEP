@@ -30,8 +30,10 @@ User::User()
 }
 
 User::User( VNumber new_id )
- : m_id( new_id ), m_name( "Bee" ), m_nickname( "BeeBoh" ), m_hostAddress( "127.0.0.1" ), m_status( 0 ), m_statusDescription( "" )
+  : m_id( new_id ), m_name(), m_nickname(), m_hostAddress( "127.0.0.1" ), m_status( 0 ), m_statusDescription( "" )
 {
+  m_name = QString( "Bee%1" ).arg( QString::number( new_id ) );
+  m_nickname = m_name;
 }
 
 User::User( const User& u )

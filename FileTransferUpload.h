@@ -32,7 +32,7 @@ class FileTransferUpload : public FileTransferPeer
   Q_OBJECT
 
 public:
-  explicit FileTransferUpload( QObject *parent = 0 );
+  explicit FileTransferUpload( VNumber, QObject *parent = 0 );
 
   void startTransfer( const FileInfo& );
 

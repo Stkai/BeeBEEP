@@ -162,7 +162,7 @@ inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_v
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline QString Settings::defaultChatName() const { return QObject::tr( "*All*" ); }
-inline QString Settings::chatName( const User& u ) const { return u == m_localUser ? defaultChatName() : QString( "%1 (%2@%3)" ).arg( u.nickname() ).arg( u.name() ).arg( u.hostAddress().toString() ); }
+inline QString Settings::chatName( const User& u ) const { return u == m_localUser ? defaultChatName() : u.path(); }
 inline void Settings::setListenerPort( int new_value ) { m_listenerPort = new_value; }
 inline int Settings::listenerPort() const { return m_listenerPort; }
 inline void Settings::setShowMenuBar( bool new_value) { m_showMenuBar = new_value; }
