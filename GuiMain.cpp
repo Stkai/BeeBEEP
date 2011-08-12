@@ -338,6 +338,9 @@ void GuiMain::createMenus()
 
   /* Help Menu */
   menu = menuBar()->addMenu( "&?" );
+  act = menu->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), mp_beeBeep, SLOT( showTipOfTheDay() ) );
+  act->setStatusTip( tr( "Show me the tip of the day" ) );
+  menu->addSeparator();
   menu->addAction( mp_actAbout );
   act = menu->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
@@ -632,7 +635,6 @@ void GuiMain::sendFile()
     QMessageBox::information( this, Settings::instance().programName(), tr( "Before select the user to whom you would like to send a file." ) );
     return;
   }
-
   QString file_path = QFileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().lastDirectorySelected() );
   if( file_path.isEmpty() || file_path.isNull() )
     return;

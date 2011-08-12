@@ -27,7 +27,6 @@
 #include "Settings.h"
 
 
-
 FileTransfer::FileTransfer( QObject *parent )
   : QTcpServer( parent ), m_id( ID_START ), m_files(), m_peers()
 {
@@ -227,7 +226,7 @@ void FileTransfer::stopUpload()
   if( upload_peer )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "Deleting peer";
+    qDebug() << "Deleting peer" << upload_peer->id();
 #endif
     upload_peer->deleteLater();
   }
@@ -242,7 +241,7 @@ void FileTransfer::stopDownload()
   if( download_peer )
   {
 #if defined( BEEBEEP_DEBUG )
-    qDebug() << "Deleting peer";
+    qDebug() << "Deleting peer" << download_peer->id();
 #endif
     download_peer->deleteLater();
   }

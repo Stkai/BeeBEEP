@@ -55,6 +55,8 @@ public:
   bool sendFile( const QString& chat_name, const QString& file_path );
   void acceptFile( const User&, const FileInfo& );
 
+  QString tipOfTheDay() const;
+
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
   void newFileToDownload( const User&, const FileInfo& );
@@ -73,6 +75,7 @@ public slots:
   void sendUserStatus();
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
+  void showTipOfTheDay();
 
 private slots:
   void newConnection( Connection* );

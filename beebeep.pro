@@ -57,7 +57,9 @@ HEADERS += sym_iap_util.h \
     FileTransferPeer.h \
     FileTransferUpload.h \
     FileTransferDownload.h \
-    FileTransfer.h
+    FileTransfer.h \
+    Tips.h \
+    Random.h
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc

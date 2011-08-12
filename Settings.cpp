@@ -128,6 +128,10 @@ void Settings::load( bool check_environment_also )
   m_logPath = sets.value( "LogPath", "." ).toString();
   sets.endGroup();
 
+  sets.beginGroup( "Tools" );
+  m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
+  sets.endGroup();
+
   if( check_environment_also )
     checkSystemEnvinroment();
 }
@@ -164,6 +168,9 @@ void Settings::save()
   sets.setValue( "LastDirectorySelected", m_lastDirectorySelected );
   sets.setValue( "DownloadDirectory", m_downloadDirectory );
   sets.setValue( "LogPath", m_logPath );
+  sets.endGroup();
+  sets.beginGroup( "Tools" );
+  sets.setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets.endGroup();
   sets.sync();
 }

@@ -29,6 +29,8 @@
 #include "PeerManager.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "Random.h"
+#include "Tips.h"
 
 
 BeeBeep::BeeBeep( QObject* parent )
@@ -82,8 +84,11 @@ void BeeBeep::start()
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ) )
                          .arg( Settings::instance().programName() ) );
+
   emit newUser( Settings::instance().localUser() );
   setUserStatus( Settings::instance().localUser() );
+  if( Settings::instance().showTipsOfTheDay() )
+    showTipOfTheDay();
 }
 
 void BeeBeep::stop()
@@ -450,7 +455,6 @@ void BeeBeep::acceptFile( const User& u, const FileInfo& fi )
   mp_fileTransfer->downloadFile( fi );
 }
 
-
 void BeeBeep::checkFileTransfer( const User& u, const FileInfo& fi, const QString& msg )
 {
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
@@ -458,4 +462,15 @@ void BeeBeep::checkFileTransfer( const User& u, const FileInfo& fi, const QStrin
                          .arg( fi.isDownload() ? tr( "from") : tr( "to" ) )
                          .arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
                          .arg( msg ) );
+}
+
+QString BeeBeep::tipOfTheDay() const
+{
+  return tr( BeeBeepTips[ Random::number( 0, (BeeBeepTipsSize-1) ) ] );
+}
+
+void BeeBeep::showTipOfTheDay()
+{
+  QString icon_html = Bee::iconToHtml( ":/images/tip.png", "*T*" );
+  dispatchSystemMessage( Settings::instance().defaultChatName(), tr( "%1 %2" ).arg( icon_html ).arg( tipOfTheDay() ) );
 }

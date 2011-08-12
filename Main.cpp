@@ -33,6 +33,7 @@
 #include "Log.h"
 #endif
 #include "Protocol.h"
+#include "Random.h"
 #include "Settings.h"
 
 
@@ -54,6 +55,9 @@ int main( int argc, char *argv[] )
 #endif
   QApplication app( argc, argv );
   Q_INIT_RESOURCE( beebeep );
+
+  /* Randomize */
+  Random::init();
 
   /* Load Settings */
   Settings::instance().load( true );

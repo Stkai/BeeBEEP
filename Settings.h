@@ -93,6 +93,10 @@ public:
   inline bool beepOnNewMessageArrived() const;
   inline void setBeepOnNewMessageArrived( bool );
 
+  inline bool showTipsOfTheDay() const;
+  inline void setShowTipsOfTheDay( bool );
+
+
   void load( bool check_environment_also );
   void save();
 
@@ -152,6 +156,8 @@ private:
 
   bool m_beepOnNewMessageArrived;
 
+  bool m_showTipsOfTheDay;
+
 };
 
 
@@ -203,5 +209,7 @@ inline const QString& Settings::downloadDirectory() const { return m_downloadDir
 inline void Settings::setDownloadDirectory( const QString& new_value ) { m_downloadDirectory = new_value; }
 inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessageArrived; }
 inline void Settings::setBeepOnNewMessageArrived( bool new_value ) { m_beepOnNewMessageArrived = new_value; }
+inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
+inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
 
 #endif // BEEBEEP_SETTINGS_H

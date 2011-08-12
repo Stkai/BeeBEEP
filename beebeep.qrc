@@ -46,5 +46,6 @@
         <file>images/upload.png</file>
         <file>images/download.png</file>
         <file>images/download-folder.png</file>
+        <file>images/tip.png</file>
     </qresource>
 </RCC>
