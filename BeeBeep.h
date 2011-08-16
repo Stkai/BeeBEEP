@@ -54,6 +54,7 @@ public:
 
   bool sendFile( const QString& chat_name, const QString& file_path );
   void acceptFile( const User&, const FileInfo& );
+  bool cancelTransfer( VNumber );
 
   QString tipOfTheDay() const;
 
@@ -66,6 +67,7 @@ signals:
   void removeUser( const User& );
   void newChat( const Chat& );
   void transferProgress( const User&, const FileInfo&, FileSizeType );
+  void transferMessage( const User&, const FileInfo&, const QString& );
 
 public slots:
   void start();

@@ -27,9 +27,8 @@
 #include "Rijndael.h"
 
 Protocol* Protocol::mp_instance = NULL;
-const QString PROTOCOL_FIELD_SEPARATOR = "|";
-const QString HELLO_FIELD_SEPARATOR = ",";
-const QString DATA_FIELD_SEPARATOR = ",";
+const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
+const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 
 
 Protocol::Protocol()
@@ -190,7 +189,7 @@ QByteArray Protocol::helloMessage() const
   QStringList data_list;
   data_list << Settings::instance().localUser().name();
   data_list << Settings::instance().localUser().nickname();
-  Message m( Message::Hello, ID_HELLO_MESSAGE, data_list.join( HELLO_FIELD_SEPARATOR ) );
+  Message m( Message::Hello, ID_HELLO_MESSAGE, data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().hash() );
   return fromMessage( m );
 }
@@ -228,12 +227,12 @@ User Protocol::userStatusFromMessage( User u, const Message& m ) const
 User Protocol::createUser( const Message& hello_message, const QHostAddress& host_address )
 {
   /* Read User Field Data */
-  QStringList sl = hello_message.text().split( HELLO_FIELD_SEPARATOR, QString::KeepEmptyParts );
+  QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
   if( sl.size() < 2 )
     return User();
   QString sUserName = sl.at( 0 );
   sl.removeFirst();
-  QString sNickName = sl.size() > 1 ? sl.join( HELLO_FIELD_SEPARATOR ) : sl.at( 0 );
+  QString sNickName = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( sUserName ) )
     return User();

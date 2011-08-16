@@ -32,16 +32,19 @@ class ChatMessage;
 namespace Bee
 {
   QString chatMessagesToText( const Chat& );
-  QString formatMessage( const ChatMessage& );
-  QString formatSystemMessage( const ChatMessage& );
+  QString chatMessageToText( const ChatMessage& );
   QIcon userStatusIcon( int );
   QString userStatusIconFileName( int );
   inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
   inline VNumber qVariantToVNumber( const QVariant& );
+  QString bytesToString( FileSizeType, int precision = 1 );
+
 
   namespace Private
   {
     QString formatHtmlText( QString );
+    QString formatMessage( const ChatMessage& );
+    QString formatSystemMessage( const ChatMessage& );
   }
 }
 

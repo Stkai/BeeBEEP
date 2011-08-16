@@ -56,7 +56,7 @@ GuiChat::GuiChat( QWidget *parent )
 void GuiChat::customContextMenu( const QPoint& p )
 {
   QMenu custom_context_menu;
-  custom_context_menu.addAction( tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ) );
+  custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ) );
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
@@ -81,19 +81,19 @@ void GuiChat::setChat( const Chat& c )
   m_chatName = c.name();
   mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( m_chatName ) );
   mp_teChat->setText( Bee::chatMessagesToText( c ) );
+  QScrollBar *bar = mp_teChat->verticalScrollBar();
+  bar->setValue( bar->maximum() );
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   mp_teMessage->setFocus();
 }
 
-void GuiChat::appendMessage( const QString& chat_name, const QString& msg_to_append )
+void GuiChat::appendMessage( const QString& chat_name, const ChatMessage& msg )
 {
   if( chat_name != m_chatName )
     return;
   QTextCursor cursor( mp_teChat->textCursor() );
   cursor.movePosition( QTextCursor::End );
-  QString msg = msg_to_append;
-  msg.replace( "\n", "<br />" );
-  cursor.insertHtml( QString( "%1<br />" ).arg( msg ) );
+  cursor.insertHtml( Bee::chatMessageToText( msg ) );
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
 }

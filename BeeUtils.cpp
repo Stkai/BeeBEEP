@@ -67,7 +67,20 @@ QString Bee::Private::formatHtmlText( QString text )
   return EmoticonManager::instance().parseEmoticons( text_formatted );
 }
 
-QString Bee::formatMessage( const ChatMessage& cm )
+QString Bee::chatMessageToText( const ChatMessage& cm )
+{
+  QString s;
+  if( cm.isSystem() )
+    s = Private::formatSystemMessage( cm );
+  else
+    s = Private::formatMessage( cm );
+  if( Settings::instance().chatAddNewLineToMessage() )
+    s.append( "<br />" );
+  s.append( "<br />" );
+  return s;
+}
+
+QString Bee::Private::formatMessage( const ChatMessage& cm )
 {
   QString text_formatted = Private::formatHtmlText( cm.message().text() );
   if( cm.message().data().size() > 0 )
@@ -84,18 +97,14 @@ QString Bee::formatMessage( const ChatMessage& cm )
             .arg( Settings::instance().showUserNickname() ? cm.nickname() : cm.username() )
             .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
             .arg( text_formatted );
-  if( Settings::instance().chatAddNewLineToMessage() )
-    sHtmlMessage.prepend( "<br />" );
   return sHtmlMessage;
 }
 
-QString Bee::formatSystemMessage( const ChatMessage& cm )
+QString Bee::Private::formatSystemMessage( const ChatMessage& cm )
 {
   QString sHtmlMessage = QString( "%1<font color=gray>%2</font>" )
             .arg( Settings::instance().chatShowMessageTimestamp() ? cm.message().timestamp().toString( "(hh:mm:ss) " ) : "" )
             .arg( cm.message().text() );
-  if( Settings::instance().chatAddNewLineToMessage() )
-    sHtmlMessage.prepend( "<br />" );
   return sHtmlMessage;
 }
 
@@ -104,11 +113,7 @@ QString Bee::chatMessagesToText( const Chat& c )
   QString s = "";
   foreach( ChatMessage cm, c.messages() )
   {
-    if( cm.isSystem() )
-      s += formatSystemMessage( cm );
-    else
-      s += formatMessage( cm );
-    s += "<br />";
+    s += chatMessageToText( cm );
   }
   return s;
 }
@@ -129,3 +134,29 @@ QString Bee::userStatusIconFileName( int user_status )
   }
 }
 
+QString Bee::bytesToString( FileSizeType bytes, int precision )
+{
+  QString suffix;
+  double result = 0;
+  if( bytes > 1000000000 )
+  {
+    suffix = "Gb";
+    result = bytes / 1000000000.0;
+  }
+  else if( bytes > 1000000 )
+  {
+    suffix = "Mb";
+    result = bytes / 1000000.0;
+  }
+  else if( bytes > 1000 )
+  {
+    suffix = "kb";
+    result = bytes / 1000.0;
+  }
+  else
+  {
+    suffix = "bytes";
+    result = bytes;
+  }
+  return QString( "%1 %2").arg( result, 0, 'f', precision ).arg( suffix );
+}

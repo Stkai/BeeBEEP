@@ -47,5 +47,11 @@
         <file>images/download.png</file>
         <file>images/download-folder.png</file>
         <file>images/tip.png</file>
+        <file>images/redo.png</file>
+        <file>images/undo.png</file>
+        <file>images/copy.png</file>
+        <file>images/paste.png</file>
+        <file>images/cut.png</file>
+        <file>images/select-all.png</file>
     </qresource>
 </RCC>

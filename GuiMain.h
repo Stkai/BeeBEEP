@@ -30,6 +30,7 @@ class BeeBeep;
 class ChatMessage;
 class FileInfo;
 class GuiChat;
+class GuiTransferFile;
 class GuiUserList;
 class User;
 
@@ -84,6 +85,7 @@ protected:
 
 private:
   GuiChat* mp_defaultChat;
+  GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   BeeBeep *mp_beeBeep;
 
@@ -106,6 +108,7 @@ private:
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
   QAction* mp_actSendFile;
+  QAction* mp_actViewFileTransfer;
 
 
 };

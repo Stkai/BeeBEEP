@@ -26,6 +26,7 @@
 #include "EmoticonManager.h"
 #include "FileInfo.h"
 #include "GuiChat.h"
+#include "GuiTransferFile.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "Settings.h"
@@ -65,6 +66,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber, const QString& ) ), this, SLOT( chatSelected( VNumber, const QString& ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
+
+  connect( mp_beeBeep, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( const User&, const FileInfo&, const QString& ) ) );
 
   mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, false ) );
   refreshTitle();
@@ -373,7 +376,6 @@ void GuiMain::createStatusBar()
 void GuiMain::createDockWindows()
 {
   QDockWidget *dock_widget = new QDockWidget( tr( "Users" ), this );
-  dock_widget->setAllowedAreas( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
   mp_userList = new GuiUserList( dock_widget );
   dock_widget->setWidget( mp_userList );
   addDockWidget( Qt::RightDockWidgetArea, dock_widget );
@@ -381,6 +383,15 @@ void GuiMain::createDockWindows()
   mp_actViewUsers->setText( tr( "Show online users and active chats" ) );
   mp_actViewUsers->setStatusTip( tr( "Show the list of the connected users and the active chats" ) );
   mp_actViewUsers->setData( 99 );
+
+  dock_widget = new QDockWidget( tr( "File Transfers" ), this );
+  mp_fileTransfer = new GuiTransferFile( this );
+  dock_widget->setWidget( mp_fileTransfer );
+  addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
+  mp_actViewFileTransfer = dock_widget->toggleViewAction();
+  mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
+  mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
+  mp_actViewFileTransfer->setData( 99 );
 }
 
 void GuiMain::toggleMenuBar( bool is_enabled )
@@ -530,18 +541,13 @@ void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )
   if( is_current_chat )
   {
     Chat chat_showed = mp_beeBeep->chat( chat_name, true, true );
-    QString txt = "";
-    if( cm.isSystem() )
-      txt = Bee::formatSystemMessage( cm );
-    else
-      txt = Bee::formatMessage( cm );
-    mp_defaultChat->appendMessage( chat_name, txt );
+    mp_defaultChat->appendMessage( chat_name, cm );
     mp_defaultChat->setLastMessageTimestamp( chat_showed.lastMessageTimestamp() );
     statusBar()->clearMessage();
     return;
   }
-  Chat chat_hided = mp_beeBeep->chat( chat_name, true, false );
-  mp_userList->setUnreadMessages( chat_name, chat_hided.unreadMessages() );
+  Chat chat_hidden = mp_beeBeep->chat( chat_name, true, false );
+  mp_userList->setUnreadMessages( chat_name, chat_hidden.unreadMessages() );
 }
 
 void GuiMain::saveChat()
@@ -643,7 +649,8 @@ void GuiMain::sendFile()
 
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
-  QString msg = tr( "Do you want to download from %1\n%2?" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() ).arg( fi.name() );
+  QString msg = tr( "Do you want to download from %1\n%2 (%3)?" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
+                                                                 .arg( fi.name() ).arg( Bee::bytesToString( fi.size() ) );
   if( QMessageBox::information( this, Settings::instance().programName(), msg, tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
     // Accepted
@@ -674,13 +681,17 @@ void GuiMain::selectDownloadDirectory()
 
 void GuiMain::showTransferProgress( const User& u, const FileInfo& fi, FileSizeType bytes )
 {
-  QString debug_progress = tr( "%1: %2 %3 of %4 bytes (%5%)" ).arg( fi.name() )
-      .arg( fi.transferType() == FileInfo::Upload ? tr( "upload" ) : tr( "download" ) )
-                                             .arg( QString::number( bytes ) )
-                                             .arg( QString::number( fi.size() ) )
-      .arg( QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
-  statusBar()->showMessage( debug_progress );
+  mp_fileTransfer->setProgress( u, fi, bytes );
+  if( !mp_fileTransfer->isVisible() )
+  {
+    QString debug_progress = tr( "%1: %2 %3 of %4 (%5%)" ).arg( fi.name() )
+                               .arg( fi.transferType() == FileInfo::Upload ? tr( "upload" ) : tr( "download" ) )
+                               .arg( Bee::bytesToString( bytes ) )
+                               .arg( Bee::bytesToString( fi.size() ) )
+                               .arg( QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
+    statusBar()->showMessage( debug_progress, 1000 );
 #if defined( BEEBEEP_DEBUG )
-  qDebug() << debug_progress;
+    qDebug() << debug_progress;
 #endif
+  }
 }

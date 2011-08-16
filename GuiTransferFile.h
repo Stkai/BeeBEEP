@@ -21,34 +21,42 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIMESSAGEEDIT_H
-#define BEEBEEP_GUIMESSAGEEDIT_H
+#ifndef BEEBEEP_GUITRANSFERFILE_H
+#define BEEBEEP_GUITRANSFERFILE_H
+
 
 #include "Config.h"
+class FileInfo;
+class FileTransfer;
+class User;
 
 
-class GuiMessageEdit : public QTextEdit
+class GuiTransferFile : public QTreeWidget
 {
   Q_OBJECT
 
 public:
-  GuiMessageEdit( QWidget* parent );
+  enum ColumnType { ColumnFile = 0, ColumnUser, ColumnProgress };
+  enum FileDataType { FileId = Qt::UserRole, FilePath };
+
+  GuiTransferFile( QWidget* parent = 0 );
+
+public slots:
+  void setProgress( const User&, const FileInfo&, FileSizeType );
+  void setMessage( const User&, const FileInfo&, const QString& );
 
 signals:
-  void returnPressed();
-  void writing();
-  void tabPressed();
+  void transferCancelled( VNumber );
 
 protected:
-  void keyPressEvent( QKeyEvent* );
-  void contextMenuEvent( QContextMenuEvent* );
+  QTreeWidgetItem* findItem( VNumber );
+  void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType );
 
 private slots:
-  void checkWriting();
+  void cancelTransfer();
 
-private:
-  QTimer* mp_timer;
 
 };
 
-#endif // BEEBEEP_GUIMESSAGEEDIT_H
+
+#endif // BEEBEEP_GUITRANSFERFILE_H

@@ -462,7 +462,14 @@ void BeeBeep::checkFileTransfer( const User& u, const FileInfo& fi, const QStrin
                          .arg( fi.isDownload() ? tr( "from") : tr( "to" ) )
                          .arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
                          .arg( msg ) );
+  emit transferMessage( u, fi, msg );
 }
+
+bool BeeBeep::cancelTransfer( VNumber file_info_id )
+{
+  return mp_fileTransfer->cancelTransfer( file_info_id );
+}
+
 
 QString BeeBeep::tipOfTheDay() const
 {
