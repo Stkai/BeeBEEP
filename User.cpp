@@ -25,12 +25,14 @@
 
 
 User::User()
- : m_id( 0 ), m_name( "" ), m_nickname( "" ), m_hostAddress(), m_status( 0 ), m_statusDescription( "" )
+  : m_id( 0 ), m_name( "" ), m_nickname( "" ), m_hostAddress(), m_hostPort( 0 ),
+    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" )
 {
 }
 
 User::User( VNumber new_id )
-  : m_id( new_id ), m_name(), m_nickname(), m_hostAddress( "127.0.0.1" ), m_status( 0 ), m_statusDescription( "" )
+  : m_id( new_id ), m_name(), m_nickname(), m_hostAddress( "127.0.0.1" ), m_hostPort( LISTENER_DEFAULT_PORT ),
+    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" )
 {
   m_name = QString( "Bee%1" ).arg( QString::number( new_id ) );
   m_nickname = m_name;
@@ -49,8 +51,10 @@ User& User::operator=( const User& u )
     m_name = u.m_name;
     m_nickname = u.m_nickname;
     m_hostAddress = u.m_hostAddress;
+    m_hostPort = u.m_hostPort;
     m_status = u.m_status;
     m_statusDescription = u.m_statusDescription;
+    m_color = u.m_color;
   }
   return *this;
 }

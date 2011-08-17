@@ -39,6 +39,7 @@ public:
   inline bool operator==( const User& ) const;
 
   inline bool isValid() const;
+  inline void setId( VNumber );
   inline VNumber id() const;
   inline void setName( const QString& );
   inline const QString& name() const;
@@ -46,10 +47,14 @@ public:
   inline const QString& nickname() const;
   inline void setHostAddress( const QHostAddress& );
   inline const QHostAddress& hostAddress() const;
+  inline void setHostPort( int );
+  inline int hostPort() const;
   inline void setStatus( int );
   inline int status() const;
   inline void setStatusDescription( const QString& );
   inline const QString& statusDescription() const;
+  inline void setColor( const QString& );
+  inline const QString& color() const;
 
   inline QString path() const;
 
@@ -58,16 +63,18 @@ private:
   QString m_name;
   QString m_nickname;
   QHostAddress m_hostAddress;
+  int m_hostPort;
   int m_status;
   QString m_statusDescription;
+  QString m_color;
 
 };
 
 
 // Inline Functions
-
 inline bool User::operator==( const User& u ) const { return m_id == u.m_id; }
-inline bool User::isValid() const { return m_id > 0 && !m_nickname.isEmpty(); }
+inline bool User::isValid() const { return m_id > 0; }
+inline void User::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber User::id() const { return m_id; }
 inline void User::setName( const QString& new_value ) { m_name = new_value; }
 inline const QString& User::name() const { return m_name; }
@@ -75,10 +82,14 @@ inline void User::setNickname( const QString& new_value ) { m_nickname = new_val
 inline const QString& User::nickname() const { return m_nickname; }
 inline void User::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
 inline const QHostAddress& User::hostAddress() const { return m_hostAddress; }
+inline void User::setHostPort( int new_value ) { m_hostPort = new_value; }
+inline int User::hostPort() const { return m_hostPort; }
 inline void User::setStatus( int new_value ) { m_status = new_value; }
 inline int User::status() const { return m_status; }
 inline void User::setStatusDescription( const QString& new_value ) { m_statusDescription = new_value; }
 inline const QString& User::statusDescription() const { return m_statusDescription; }
-inline QString User::path() const { return QString( "%1 (%2@%3)" ).arg( m_nickname ).arg( m_name ).arg( m_hostAddress.toString() ); }
+inline void User::setColor( const QString& new_value ) { m_color = new_value; }
+inline const QString& User::color() const { return m_color; }
+inline QString User::path() const { return QString( "%1 (%2@%3:%4)" ).arg( m_nickname ).arg( m_name ).arg( m_hostAddress.toString() ).arg( m_hostPort ); }
 
 #endif // BEEBEEP_USER_H
