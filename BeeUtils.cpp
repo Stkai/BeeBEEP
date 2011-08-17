@@ -92,8 +92,9 @@ QString Bee::Private::formatMessage( const ChatMessage& cm )
       text_formatted.append( QString( "</font>" ) );
     }
   }
-  QString sHtmlMessage = QString( "%1<b>%2</b>%3%4" )
-            .arg( Settings::instance().chatShowMessageTimestamp() ? cm.message().timestamp().toString( "(hh:mm:ss) " ) : "" )
+  QString sHtmlMessage = QString( "%1<font color='%2'><b>%3</b>%4%5</font>" )
+            .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=gray>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
+            .arg( cm.defaultColor() )
             .arg( Settings::instance().showUserNickname() ? cm.nickname() : cm.username() )
             .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
             .arg( text_formatted );
@@ -102,7 +103,7 @@ QString Bee::Private::formatMessage( const ChatMessage& cm )
 
 QString Bee::Private::formatSystemMessage( const ChatMessage& cm )
 {
-  QString sHtmlMessage = QString( "%1<font color=gray>%2</font>" )
+  QString sHtmlMessage = QString( "<font color=gray>%1 %2</font>" )
             .arg( Settings::instance().chatShowMessageTimestamp() ? cm.message().timestamp().toString( "(hh:mm:ss) " ) : "" )
             .arg( cm.message().text() );
   return sHtmlMessage;
