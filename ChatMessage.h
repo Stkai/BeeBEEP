@@ -46,12 +46,15 @@ public:
   inline void setUsername( const QString& );
   inline const QString& nickname() const;
   inline void setNickname( const QString& );
+  inline const QString& defaultColor() const;
+  inline void setDefaultColor( const QString& );
   inline const Message& message() const;
   inline void setMessage( const Message& );
 
 private:
   QString m_username;
   QString m_nickname;
+  QString m_defaultColor;
   bool m_local;
   Message m_message;
 
@@ -68,6 +71,8 @@ inline const QString& ChatMessage::username() const { return m_username; }
 inline void ChatMessage::setUsername( const QString& new_value ) { m_username = new_value; }
 inline const QString& ChatMessage::nickname() const { return m_nickname; }
 inline void ChatMessage::setNickname( const QString& new_value ) { m_nickname = new_value; }
+inline const QString& ChatMessage::defaultColor() const { return m_defaultColor; }
+inline void ChatMessage::setDefaultColor( const QString& new_value ) { m_defaultColor = new_value; }
 inline const Message& ChatMessage::message() const { return m_message; }
 inline void ChatMessage::setMessage( const Message& new_value ) { m_message = new_value; }
 
