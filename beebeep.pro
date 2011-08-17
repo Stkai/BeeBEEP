@@ -30,7 +30,9 @@ SOURCES += Listener.cpp \
     FileTransferUpload.cpp \
     FileTransferDownload.cpp \
     FileTransfer.cpp \
-    GuiTransferFile.cpp
+    GuiTransferFile.cpp \
+    ColorManager.cpp \
+    UserManager.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -61,7 +63,9 @@ HEADERS += sym_iap_util.h \
     FileTransfer.h \
     Tips.h \
     Random.h \
-    GuiTransferFile.h
+    GuiTransferFile.h \
+    ColorManager.h \
+    UserManager.h
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
