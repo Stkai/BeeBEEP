@@ -23,11 +23,10 @@
 
 #include "PeerManager.h"
 #include "Protocol.h"
-#include "Settings.h"
 
 
 PeerManager::PeerManager( QObject *parent )
- : QObject( parent )
+  : QObject( parent ), m_listenerPort( 0 )
 {
   updateAddresses();
 
@@ -37,8 +36,9 @@ PeerManager::PeerManager( QObject *parent )
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
 }
 
-void PeerManager::startBroadcasting()
+void PeerManager::startBroadcasting( int listener_port )
 {
+  m_listenerPort = listener_port;
   m_broadcastSocket.bind( QHostAddress::Any, BROADCAST_PORT, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint );
   m_broadcastTimer.start();
 }
@@ -102,7 +102,7 @@ void PeerManager::readBroadcastDatagram()
     if( !ok )
       continue;
 
-    if( isLocalHostAddress( sender_ip ) && senderServerPort == Settings::instance().listenerPort() )
+    if( isLocalHostAddress( sender_ip ) && senderServerPort == m_listenerPort )
       continue;
 
     emit newPeerFound( sender_ip, senderServerPort );

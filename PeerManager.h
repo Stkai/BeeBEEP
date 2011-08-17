@@ -33,7 +33,7 @@ class PeerManager : public QObject
 
 public:
   explicit PeerManager( QObject* );
-  void startBroadcasting();
+  void startBroadcasting( int );
   void stopBroadcasting();
   bool isLocalHostAddress( const QHostAddress& );
   bool sendDatagramToHost( const QHostAddress& );
@@ -52,6 +52,7 @@ private:
   QList<QHostAddress> m_ipAddresses;
   QUdpSocket m_broadcastSocket;
   QTimer m_broadcastTimer;
+  int m_listenerPort;
 
 };
 
