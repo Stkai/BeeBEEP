@@ -38,28 +38,7 @@ Settings::Settings()
   setPassword( defaultPassword() );
 }
 
-QString Settings::getUserName( const QProcessEnvironment& pe )
-{
-#if defined( BEEBEEP_DEBUG )
-  return QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-#else
-  QString sTmp = pe.value( "USERNAME" );
-  if( sTmp.isNull() )
-    sTmp = pe.value( "USER" );
-  if( sTmp.isNull() )
-    sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-  return sTmp;
-#endif
-}
 
-void Settings::checkSystemEnvinroment()
-{
-  QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
-  QString sName = getUserName( pe );
-  m_localUser.setName( sName );
-  if( m_localUser.nickname().isEmpty() )
-    m_localUser.setNickname( sName );
-}
 
 QString Settings::version() const
 {
@@ -84,7 +63,7 @@ void Settings::setPassword( const QString& new_value )
   m_hash = QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
-void Settings::load( bool check_environment_also )
+void Settings::load()
 {
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
   sets.beginGroup( "Chat" );
@@ -131,9 +110,6 @@ void Settings::load( bool check_environment_also )
   sets.beginGroup( "Tools" );
   m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
   sets.endGroup();
-
-  if( check_environment_also )
-    checkSystemEnvinroment();
 }
 
 void Settings::save()

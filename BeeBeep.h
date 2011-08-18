@@ -61,7 +61,7 @@ public:
 signals:
   void newMessage( const QString& chat_name, const ChatMessage& );
   void newFileToDownload( const User&, const FileInfo& );
-  void userIsWriting( const User& );
+  void userIsWriting( VNumber );
   void userNewStatus( const User& );
   void newUser( const User& );
   void removeUser( const User& );
@@ -85,21 +85,22 @@ private slots:
   void connectionError( QAbstractSocket::SocketError );
   void disconnected();
   void readyForUse();
-  void dispatchMessage( const User&, const Message& );
+  void parseMessage( )
+  void dispatchChatMessage( VNumber, const Message& );
   void dispatchSystemMessage( const QString& chat_name, const QString& sysmess );
-  void setUserStatus( const User& );
-  void checkFileMessage( const User&, const FileInfo& );
+  void setUserStatus( VNumber );
+  void checkFileMessage( VNumber, const FileInfo& );
   void checkFileTransfer( const User&, const FileInfo&, const QString& );
 
 protected:
   bool hasConnection( const QHostAddress& sender_ip, int sender_port = -1 ) const;
   void removeConnection( Connection* );
-  Connection* connection( const QString& chat_name );
+  Connection* connection( VNumber );
 
 private:
   Listener* mp_listener;
   PeerManager* mp_peerManager;
-  QMultiHash<int, Connection*> m_peers;
+  QList<Connection*> m_peers;
   QHash<QString, Chat> m_chats;
   FileTransfer* mp_fileTransfer;
 

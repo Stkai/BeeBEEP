@@ -38,18 +38,18 @@ public:
   inline bool operator==( const Chat& ) const;
 
   inline bool isValid() const;
-  inline const QString& name() const;
-  inline void setName( const QString& );
+  inline VNumber id() const;
+  inline void setId( VNumber );
   inline const QDateTime& lastMessageTimestamp() const;
   inline void setLastMessageTimestamp( const QDateTime& );
   inline int unreadMessages() const;
   inline void addUnreadMessage();
   inline void readAllMessages();
   inline const QList<ChatMessage> messages() const;
-  void addMessage( const ChatMessage& );
+  inline void addMessage( const ChatMessage& );
 
 private:
-  QString m_name;
+  VNumber m_id;
   QList<ChatMessage> m_messages;
   QDateTime m_lastMessageTimestamp;
   int m_unreadMessages;
@@ -58,11 +58,10 @@ private:
 
 
 // Inline Functions
-
-inline bool Chat::operator==( const Chat& c ) const { return m_name == c.m_name; }
-inline bool Chat::isValid() const { return m_name.size() > 0; }
-inline const QString& Chat::name() const { return m_name; }
-inline void Chat::setName( const QString& new_value ) { m_name = new_value; }
+inline bool Chat::operator==( const Chat& c ) const { return m_id == c.m_id; }
+inline bool Chat::isValid() const { return m_id > 0; }
+inline VNumber Chat::id() const { return m_id; }
+inline void Chat::setId( VNumber new_value ) { m_id = new_value; }
 inline const QDateTime& Chat::lastMessageTimestamp() const { return m_lastMessageTimestamp; }
 inline void Chat::setLastMessageTimestamp( const QDateTime& new_value ) { m_lastMessageTimestamp = new_value; }
 inline int Chat::unreadMessages() const { return m_unreadMessages; }

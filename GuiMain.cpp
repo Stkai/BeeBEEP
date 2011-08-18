@@ -30,7 +30,7 @@
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "Settings.h"
-
+#include "UserManager.h"
 
 
 GuiMain::GuiMain( QWidget *parent )
@@ -56,7 +56,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_beeBeep, SIGNAL( newFileToDownload( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_beeBeep, SIGNAL( newUser( const User& ) ), this, SLOT( newUser( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( removeUser( const User& ) ), this, SLOT( removeUser( const User& ) ) );
-  connect( mp_beeBeep, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
+  connect( mp_beeBeep, SIGNAL( userIsWriting( VNumber ) ), this, SLOT( showWritingUser( VNumber ) ) );
   connect( mp_beeBeep, SIGNAL( userNewStatus( const User& ) ), this, SLOT( showNewUserStatus( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SLOT( showTransferProgress( const User&, const FileInfo&, FileSizeType ) ) );
 
@@ -69,7 +69,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_beeBeep, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( const User&, const FileInfo&, const QString& ) ) );
 
-  mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, false ) );
+  mp_defaultChat->setChat( mp_beeBeep->chat( UserManager::instance().defaultChat(), true, false ) );
   refreshTitle();
 }
 
@@ -154,7 +154,7 @@ void GuiMain::startBeeBeep()
 void GuiMain::stopBeeBeep()
 {
   mp_actSearch->setEnabled( false );
-  mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, true ) );
+  mp_defaultChat->setChat( mp_beeBeep->chat( UserManager::instance().defaultChat(), true, true ) );
   mp_beeBeep->stop();
   mp_userList->clear();
   refreshTitle();
@@ -506,7 +506,7 @@ void GuiMain::chatSelected( VNumber user_id, const QString& chat_name )
 {
   if( user_id == Settings::instance().localUser().id())
   {
-    mp_defaultChat->setChat( mp_beeBeep->chat( Settings::instance().defaultChatName(), true, true ) );
+    mp_defaultChat->setChat( mp_beeBeep->chat( UserManager::instance().defaultChat(), true, true ) );
     return;
   }
   Chat c = mp_beeBeep->chat( chat_name, true, true );
@@ -603,8 +603,9 @@ void GuiMain::searchUsers()
   mp_beeBeep->searchUsers( host_address );
 }
 
-void GuiMain::showWritingUser( const User& u )
+void GuiMain::showWritingUser( VNumber user_id )
 {
+  User u = UserManager::instance().user( user_id );
   QString msg = tr( "%1 is writing" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() );
   statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
 }
@@ -636,7 +637,7 @@ void GuiMain::changeStatusDescription()
 
 void GuiMain::sendFile()
 {
-  if( mp_defaultChat->chatName() == Settings::instance().defaultChatName() )
+  if( mp_defaultChat->chatName() == UserManager::instance().defaultChat() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Before select the user to whom you would like to send a file." ) );
     return;

@@ -23,8 +23,9 @@
 
 #include "Chat.h"
 
+
 Chat::Chat()
- : m_name( "" ), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 )
+ : m_id( 0 ), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 )
 {
 }
 
@@ -37,7 +38,7 @@ Chat& Chat::operator=( const Chat& c )
 {
   if( this != &c )
   {
-    m_name = c.m_name;
+    m_id = c.m_id;
     m_messages = c.m_messages;
     m_lastMessageTimestamp = c.m_lastMessageTimestamp;
     m_unreadMessages = c.m_unreadMessages;

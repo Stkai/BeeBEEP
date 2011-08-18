@@ -37,31 +37,21 @@ class Connection : public ConnectionSocket
 public:
   explicit Connection( QObject *parent = 0 );
 
-  inline const User& user() const;
-  inline VNumber id() const;
-
   bool sendMessage( const Message& );
 
-public slots:
-  bool sendLocalUserStatus();
+  void setReadyForUse( VNumber );
+  inline VNumber userId() const;
 
 signals:
-  void readyForUse();
-  void newMessage( const User&, const Message& );
-  void newStatus( const User& );
-  void isWriting( const User& );
-  void newFileMessage( const User&, const FileInfo& );
+  void newMessage( VNumber, const Message& );
 
-private slots:
+protected slots:
   void parseData( const QByteArray& );
   void sendPing();
   void sendPong();
-  void setReadyForUse();
 
 private:
-  void parseUserMessage( const Message& );
-  void parseFileMessage( const Message& );
-
+  VNumber m_userId;
   QTimer m_pingTimer;
   QTime m_pongTime;
 
@@ -69,9 +59,6 @@ private:
 
 
 // Inline Functions
-
-inline VNumber Connection::id() const { return m_user.id(); }
-inline const User& Connection::user() const { return m_user; }
-
+inline VNumber Connection::userId() const { return m_userId; }
 
 #endif // BEEBEEP_CONNECTION_H

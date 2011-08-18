@@ -22,12 +22,10 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "ChatMessage.h"
-#include "User.h"
-#include "Settings.h"
 
 
 ChatMessage::ChatMessage()
-  : m_username( "" ), m_nickname( "" ), m_defaultColor( "#000000" ), m_local( false ), m_message()
+  : m_userId( 0 ), m_message()
 {
 }
 
@@ -36,9 +34,8 @@ ChatMessage::ChatMessage( const ChatMessage& cm )
   (void)operator=( cm );
 }
 
-ChatMessage::ChatMessage( const User& u, const Message& m )
-  : m_username( u.name() ), m_nickname( u.nickname() ), m_defaultColor( u.color() ),
-    m_local( u.id() == Settings::instance().localUser().id() ), m_message( m )
+ChatMessage::ChatMessage( VNumber user_id, const Message& m )
+  : m_userId( user_id ), m_message( m )
 {
 }
 
@@ -46,10 +43,7 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
 {
   if( this != &cm )
   {
-    m_username = cm.m_username;
-    m_nickname = cm.m_nickname;
-    m_defaultColor = cm.m_defaultColor;
-    m_local = cm.m_local;
+    m_userId = cm.m_userId;
     m_message = cm.m_message;
   }
   return *this;

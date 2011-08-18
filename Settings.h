@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_SETTINGS_H
 #define BEEBEEP_SETTINGS_H
 
-#include "User.h"
+#include "Config.h"
 
 
 class Settings
@@ -37,12 +37,6 @@ public:
   QString programName() const;
   inline QString logPath() const;
   inline void setLogPath( const QString& );
-  inline const User& localUser() const;
-  inline void setLocalUser( const User& );
-  inline QString defaultChatName() const;
-  inline QString chatName( const User& ) const;
-  inline void setListenerPort( int );
-  inline int listenerPort() const;
 
   inline void setShowMenuBar( bool );
   inline bool showMenuBar() const;
@@ -96,10 +90,8 @@ public:
   inline bool showTipsOfTheDay() const;
   inline void setShowTipsOfTheDay( bool );
 
-
-  void load( bool check_environment_also );
+  void load();
   void save();
-
 
   static Settings& instance()
   {
@@ -119,13 +111,8 @@ public:
 
 protected:
   Settings();
-  QString getUserName( const QProcessEnvironment& );
-  void checkSystemEnvinroment();
 
 private:
-  User m_localUser;
-  int m_listenerPort;
-
   QString m_logPath;
 
   bool m_showMenuBar;
@@ -162,15 +149,8 @@ private:
 
 
 // Inline Functions
-
 inline QString Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
-inline const User& Settings::localUser() const { return m_localUser; }
-inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
-inline QString Settings::defaultChatName() const { return QObject::tr( "*All*" ); }
-inline QString Settings::chatName( const User& u ) const { return u == m_localUser ? defaultChatName() : u.path(); }
-inline void Settings::setListenerPort( int new_value ) { m_listenerPort = new_value; }
-inline int Settings::listenerPort() const { return m_listenerPort; }
 inline void Settings::setShowMenuBar( bool new_value) { m_showMenuBar = new_value; }
 inline bool Settings::showMenuBar() const { return m_showMenuBar; }
 inline void Settings::setShowToolBar( bool new_value ) { m_showToolBar = new_value; }

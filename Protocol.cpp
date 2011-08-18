@@ -23,7 +23,6 @@
 
 #include "Protocol.h"
 #include "Settings.h"
-#include "EmoticonManager.h"
 #include "Rijndael.h"
 
 Protocol* Protocol::mp_instance = NULL;
@@ -177,70 +176,60 @@ QByteArray Protocol::pongMessage() const
 
 QByteArray Protocol::broadcastMessage() const
 {
-  int listener_port = Settings::instance().listenerPort();
-  if( listener_port <= 0 )
-    return "";
-  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( listener_port ) );
+  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( UserManager::instance().localUser().hostPort() ) );
   return fromMessage( m );
 }
 
 QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
-  data_list << Settings::instance().localUser().name();
-  data_list << Settings::instance().localUser().nickname();
+  data_list << UserManager::instance().localUser().name();
+  data_list << UserManager::instance().localUser().nickname();
   Message m( Message::Hello, ID_HELLO_MESSAGE, data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().hash() );
   return fromMessage( m );
 }
 
-Message Protocol::userStatusToMessage( const User& u ) const
+QByteArray Protocol::localUserStatusMessage() const
 {
-  Message m( Message::User, ID_STATUS_MESSAGE, u.statusDescription() );
+  Message m( Message::User, ID_STATUS_MESSAGE, UserManager::instance().localUser().statusDescription() );
   m.addFlag( Message::Status );
-  m.setData( QString::number( u.status() ) );
-  return m;
+  m.setData( QString::number( UserManager::instance().localUser().status() ) );
+  return fromMessage( m );
 }
 
-User Protocol::userStatusFromMessage( User u, const Message& m ) const
+bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
 {
-  if( m.type() == Message::User && m.hasFlag( Message::Status ) )
+  int user_status = m.data().toInt();
+  QString user_status_description = m.text();
+  if( u->status() != user_status || u->statusDescription() != user_status_description )
   {
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << "Checking status for user" << u.name();
-#endif
-    int user_status = m.data().toInt();
-    QString user_status_description = m.text();
-    if( u.status() != user_status || u.statusDescription() != user_status_description )
-    {
-#if defined( BEEBEEP_DEBUG )
-      qDebug() << "Status for user" << u.name() << " changed";
-#endif
-      u.setStatus( user_status );
-      u.setStatusDescription( user_status_description );
-      return u;
-    }
+    u->setStatus( user_status );
+    u->setStatusDescription( user_status_description );
+    return true;
   }
-  return User();
+  return false;
 }
 
-User Protocol::createUser( const Message& hello_message, const QHostAddress& host_address )
+User Protocol::createUser( const Message& hello_message, const QHostAddress& host_address, int host_port )
 {
   /* Read User Field Data */
   QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
   if( sl.size() < 2 )
     return User();
-  QString sUserName = sl.at( 0 );
+  QString user_name = sl.at( 0 );
   sl.removeFirst();
-  QString sNickName = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
+  QString user_nickname = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
   /* Auth */
-  if( hello_message.data().toUtf8() != Settings::instance().hash( sUserName ) )
+  if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
     return User();
   /* Create User */
   User u( newId() );
-  u.setName( sUserName.trimmed() );
-  u.setNickname( sNickName.trimmed() );
+  u.setName( user_name );
+  u.setNickname( user_nickname );
   u.setHostAddress( host_address );
+  u.setHostPort( host_port );
+  u.setStatus( User::Online );
   return u;
 }
 

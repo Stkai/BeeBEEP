@@ -29,9 +29,6 @@
 
 class UserManager
 {
-// Singleton Object
-  static UserManager* mp_instance;
-
 public:
   inline const QList<User>& users() const;
   inline const User& localUser() const;
@@ -42,27 +39,8 @@ public:
   void setUser( const User& );
   User user( VNumber ) const;
 
-  inline QString defaultChat() const;
-  inline QString chat( VNumber ) const;
-
   void load();
   void save();
-
-  static UserManager& instance()
-  {
-    if( !mp_instance )
-      mp_instance = new UserManager();
-    return *mp_instance;
-  }
-
-  static void close()
-  {
-    if( mp_instance )
-    {
-      delete mp_instance;
-      mp_instance = NULL;
-    }
-  }
 
 protected:
   UserManager();

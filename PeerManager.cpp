@@ -36,10 +36,15 @@ PeerManager::PeerManager( QObject *parent )
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
 }
 
-void PeerManager::startBroadcasting( int listener_port )
+bool PeerManager::startBroadcasting( int listener_port )
 {
   m_listenerPort = listener_port;
-  m_broadcastSocket.bind( QHostAddress::Any, BROADCAST_PORT, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint );
+  if( !m_broadcastSocket.bind( QHostAddress::Any, BROADCAST_PORT, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint )
+  {
+    qWarning() << "PeerManager cannot bind the broadcast port" << BROADCAST_PORT;
+    return false;
+  }
+  qDebug() << "PeerManager start broadcasting with listener port" << m_listenerPort;
   m_broadcastTimer.start();
 }
 

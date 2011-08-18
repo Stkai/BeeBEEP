@@ -49,11 +49,10 @@ public:
   Message fileInfoToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
 
-  Message userStatusToMessage( const User& ) const;
-  User userStatusFromMessage( User, const Message& ) const;
+  QByteArray localUserStatusMessage() const;
+  bool changeUserStatusFromMessage( User*, const Message& ) const;
 
-  User createUser( const Message&, const QHostAddress& );
-  inline User createLocalUser() const;
+  User createUser( const Message&, const QHostAddress&, int );
 
   QByteArray encryptByteArray( const QByteArray& ) const;
   QByteArray decryptByteArray( const QByteArray& ) const;
@@ -90,7 +89,6 @@ private:
 // Inline Functions
 inline VNumber Protocol::newId() { return ++m_id; }
 inline int Protocol::messageMinimumSize() const { return 10; }
-inline User Protocol::createLocalUser() const { return User( ID_LOCAL_USER ); }
 inline const Message& Protocol::writingMessage() const { return m_writingMessage; }
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
 inline Message Protocol::chatMessage( const QString& msg_txt ) { return Message( Message::Chat, newId(), msg_txt ); }

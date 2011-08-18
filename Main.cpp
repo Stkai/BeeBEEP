@@ -28,6 +28,7 @@
 #ifdef Q_OS_SYMBIAN
 #include "sym_iap_util.h"
 #endif
+#include "ColorManager.h"
 #include "GuiMain.h"
 #if defined( LOGFILE_ENABLED )
 #include "Log.h"
@@ -35,6 +36,7 @@
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 
@@ -72,8 +74,14 @@ int main( int argc, char *argv[] )
   QTranslator translator;
   SetTranslator( &translator, Settings::instance().language() );
 
+  /* Init User Manager */
+  UserManager::instance().load();
+
   /* Init Protocol */
   (void)Protocol::instance();
+
+  /* Init Color Manager */
+  (void)ColorManager::instance();
 
   /* test encryption */
   //make_test();
@@ -98,9 +106,13 @@ int main( int argc, char *argv[] )
   int iRet = app.exec();
 
   /* CleanUp */
+  ColorManager::close();
   Protocol::close();
+  UserManager::instance().save();
+  UserManager::close();
   Settings::instance().save();
   Settings::close();
+
 #if defined( LOGFILE_ENABLED )
   Log::close();
 #endif
