@@ -70,7 +70,7 @@ Chat Core::chat( const QString& chat_name, bool create_if_need, bool read_all_me
 
 Chat Core::privateChatForUser( VNumber user_id )
 {
-  return chat( user_id );
+  return user_id == ID_LOCAL_USER ? chat( ID_DEFAULT_CHAT ) : chat( user_id );
 }
 
 Chat Core::chat( VNumber chat_id ) const
@@ -98,6 +98,59 @@ void Core::setChat( const Chat& c )
     ++it
   }
   m_chats.append( c );
+}
+
+void Core::sendChatMessage( VNumber chat_id, const QString& msg )
+{
+  if( !isWorking() )
+  {
+    dispatchSystemMessage( chat_id, m_localUser.id(), tr( "%1 Unable to send the message: you are not connected." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ) );
+    return;
+  }
+
+  if( msg.isEmpty() )
+    return;
+
+  Message m = Protocol::instance().chatMessage( msg );
+  m.setData( Settings::instance().chatFontColor() );
+
+  if( chat_id == ID_DEFAULT_CHAT )
+  {
+    foreach( Connection *c, m_connections )
+      c->sendMessage( m );
+  }
+  else
+  {
+    m.addFlag( Message::Private );
+    Connection* c = connection( chat_id ); // user_id and chat_id is == for now...
+    if( c )
+    {
+      c->sendMessage( m );
+    }
+    else
+    {
+      dispatchSystemMessage( chat_id, m_localUser.id(), tr( "%1 Unable to send the message." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ) );
+      return;
+    }
+  }
+
+  ChatMessage cm( m_localUser.id(), m );
+  Chat c = chat( chat_id );
+  c.addMessage( cm );
+  emit newChatMessage( chat_id, cm );
+}
+
+void Core::sendWritingMessage( VNumber chat_id )
+{
+  if( !isWorking() )
+    return;
+
+  Connection* c = connection( chat_id ); // FIXME: user_id!!! (for now works)
+  if( c )
+  {
+    qDebug() << "Sending Writing Message to" << c->peerAddress() << c->peerPort();
+    c->sendMessage( Protocol::instance().writingMessage() );
+  }
 }
 
 

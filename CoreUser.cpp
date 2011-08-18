@@ -64,53 +64,57 @@ void Core::setUser( const User& u )
   m_users.append( u );
 }
 
-namespace
+void BeeBeep::setLocalUserStatus( int new_status )
 {
-  QString GetUserNameFromSystemEnvinroment()
-  {
-#if defined( BEEBEEP_DEBUG )
-    return QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-#else
-    qDebug() << "Checking local user system environment";
-    QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
-    QString sTmp = pe.value( "USERNAME" );
-    if( sTmp.isNull() )
-      sTmp = pe.value( "USER" );
-    if( sTmp.isNull() )
-      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-    return sTmp;
-#endif
-  }
+  if( Settings::instance().localUser().status() == new_status )
+    return;
+
+  User u = Settings::instance().localUser();
+  u.setStatus( new_status );
+  Settings::instance().setLocalUser( u );
+  sendUserStatus();
+  setUserStatus( u );
 }
 
-void Core::createLocalUser()
+void Core::setLocalUserStatusDescription( const QString& new_status_description )
 {
-  qDebug() << "Creating local user";
-  QString sName = GetUserNameFromSystem();
-  m_localUser.setName( sName );
+  if( Settings::instance().localUser().statusDescription() == new_status_description )
+    return;
 
-  qDebug() << "Loading local user settings";
-  QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
-  sets.beginGroup( "LocalUser" );
-  m_localUser.setNickname( sets.value( "Nickname", "" ).toString() );
-  m_localUser.setStatus( sets.value( "LastStatus", m_localUser.status() ).toInt() );
-  m_localUser.setStatusDescription( sets.value( "LastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_localUser.setHostPort( sets.value( "HostPort", LISTENER_DEFAULT_PORT ) );
-  sets.endGroup();
-  if( m_localUser.nickname().isEmpty() )
-    m_localUser.setNickname( sName );
-  qDebug() << "Local user:" << m_localUser.path();
+  User u = Settings::instance().localUser();
+  u.setStatusDescription( new_status_description );
+  Settings::instance().setLocalUser( u );
+  sendUserStatus();
+  setUserStatus( u );
 }
 
-void UserManager::saveLocalUser()
+void Core::setUserStatus( const User& u )
 {
-  QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
-  sets.beginGroup( "LocalUser" );
-  sets.setValue( "Nickname", m_localUser.nickname() );
-  sets.setValue( "LastStatus", m_localUser.status() );
-  sets.setValue( "LastStatusDescription", m_localUser.statusDescription() );
-  sets.setValue( "HostPort", m_localUser.hostPort() );
-  sets.endGroup();
-  sets.sync();
-  qDebug() << "Local user saved";
+  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
+  if( Settings::instance().localUser() == u )
+    sHtmlMsg += tr( "You are" );
+  else
+    sHtmlMsg += (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + QString( " " ) + tr( "is" );
+
+   sHtmlMsg += QString( " %2%3." ).arg( userStatusToString( u.status() ) )
+                            .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
+
+  dispatchSystemMessage( privateChatForUser( u.id() ).id(), u.id(), sHtmlMsg );
+  emit( userNewStatus( u ) );
+}
+
+static const char* UserStatusToString[] =
+{
+  QT_TRANSLATE_NOOP( "User", "offline" ),
+  QT_TRANSLATE_NOOP( "User", "online" ),
+  QT_TRANSLATE_NOOP( "User", "busy" ),
+  QT_TRANSLATE_NOOP( "User", "away" )
+};
+
+QString BeeBeep::userStatusToString( int user_status )
+{
+  if( user_status < 0 || user_status >= User::NumStatus )
+    return "";
+  else
+    return tr( UserStatusToString[ user_status ] );
 }

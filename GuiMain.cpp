@@ -21,7 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BeeBeep.h"
+#include "Core.h"
 #include "BeeUtils.h"
 #include "EmoticonManager.h"
 #include "FileInfo.h"
@@ -60,8 +60,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_beeBeep, SIGNAL( userNewStatus( const User& ) ), this, SLOT( showNewUserStatus( const User& ) ) );
   connect( mp_beeBeep, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SLOT( showTransferProgress( const User&, const FileInfo&, FileSizeType ) ) );
 
-  connect( mp_defaultChat, SIGNAL( newMessage( const QString&, const QString& ) ), this, SLOT( sendMessage( const QString&, const QString& ) ) );
-  connect( mp_defaultChat, SIGNAL( writing( const QString& ) ), mp_beeBeep, SLOT( sendWritingMessage( const QString& ) ) );
+  connect( mp_defaultChat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
+  connect( mp_defaultChat, SIGNAL( writing( VNumber ) ), mp_beeBeep, SLOT( sendWritingMessage( VNumber ) ) );
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber, const QString& ) ), this, SLOT( chatSelected( VNumber, const QString& ) ) );
@@ -69,7 +69,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_beeBeep, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( const User&, const FileInfo&, const QString& ) ) );
 
-  mp_defaultChat->setChat( mp_beeBeep->chat( UserManager::instance().defaultChat(), true, false ) );
+  mp_defaultChat->setChat( mp_beeBeep->defaultChat(), false );
   refreshTitle();
 }
 
@@ -154,7 +154,7 @@ void GuiMain::startBeeBeep()
 void GuiMain::stopBeeBeep()
 {
   mp_actSearch->setEnabled( false );
-  mp_defaultChat->setChat( mp_beeBeep->chat( UserManager::instance().defaultChat(), true, true ) );
+  mp_defaultChat->setChat( mp_beeBeep->defaultChat(), true );
   mp_beeBeep->stop();
   mp_userList->clear();
   refreshTitle();
@@ -513,9 +513,9 @@ void GuiMain::chatSelected( VNumber user_id, const QString& chat_name )
   mp_defaultChat->setChat( c );
 }
 
-void GuiMain::sendMessage( const QString& chat_name, const QString& msg )
+void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
-  mp_beeBeep->sendMessage( chat_name, msg );
+  mp_beeBeep->sendChatMessage( chat_id, msg );
 }
 
 void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )

@@ -41,7 +41,7 @@ public:
 
   QByteArray pingMessage() const;
   QByteArray pongMessage() const;
-  QByteArray broadcastMessage() const;
+  QByteArray broadcastMessage( int listener_port ) const;
   QByteArray helloMessage() const;
   inline const Message& writingMessage() const;
   inline Message systemMessage( const QString& ) const;

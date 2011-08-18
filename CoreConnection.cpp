@@ -49,6 +49,16 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
   return false;
 }
 
+void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
+{
+  if( !hasConnection( sender_ip, sender_port ) ) // Check it: before the sender port is not checked and it was passed -1
+  {
+    Connection *c = new Connection( this );
+    setNewConnection( c );
+    c->connectToHost( sender_ip, sender_port );
+  }
+}
+
 void Core::setNewConnection( Connection *c )
 {
   qDebug() << "Connecting SIGNAL/SLOT to connection from" << c->peerAddress() << c->peerPort();

@@ -32,6 +32,7 @@ const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
 
 
 Settings::Settings()
+ : m_localUser( ID_LOCAL_USER )
 {
   m_localUser = Protocol::instance().createLocalUser();
   m_localUser.setStatus( User::Online );
@@ -63,8 +64,37 @@ void Settings::setPassword( const QString& new_value )
   m_hash = QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
+void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
+{
+  m_localUser.setHostAddress( host_address );
+  m_localUser.setHostPort( host_port );
+}
+
+namespace
+{
+  QString GetUserNameFromSystemEnvinroment()
+  {
+#if defined( BEEBEEP_DEBUG )
+    return QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
+#else
+    qDebug() << "Checking local user system environment";
+    QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
+    QString sTmp = pe.value( "USERNAME" );
+    if( sTmp.isNull() )
+      sTmp = pe.value( "USER" );
+    if( sTmp.isNull() )
+      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
+    return sTmp;
+#endif
+  }
+}
+
 void Settings::load()
 {
+  qDebug() << "Creating local user and loading settings";
+  QString sName = GetUserNameFromSystem();
+  m_localUser.setName( sName );
+
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
   sets.beginGroup( "Chat" );
   m_chatFont.fromString( sets.value( "Font", QApplication::font().toString() ).toString() );
@@ -81,6 +111,7 @@ void Settings::load()
   m_localUser.setNickname( sets.value( "LocalNickname", "" ).toString() );
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
+  m_localUser.setHostPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ) );
   sets.endGroup();
   sets.beginGroup( "Geometry" );
   m_guiGeometry = sets.value( "MainWindow", "" ).toByteArray();
@@ -110,10 +141,15 @@ void Settings::load()
   sets.beginGroup( "Tools" );
   m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
   sets.endGroup();
+
+  if( m_localUser.nickname().isEmpty() )
+    m_localUser.setNickname( sName );
+  qDebug() << "Local user:" << m_localUser.path();
 }
 
 void Settings::save()
 {
+  qDebug() << "Saving settings";
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
   sets.beginGroup( "Chat" );
   sets.setValue( "Font", m_chatFont.toString() );
@@ -128,6 +164,7 @@ void Settings::save()
   sets.setValue( "LocalNickname", m_localUser.nickname() );
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
+  sets.setValue( "LocalListenerPort", m_localUser.hostPort() );
   sets.setValue( "ShowAddressIp", m_showUserIp );
   sets.setValue( "ShowNickname", m_showUserNickname );
   sets.endGroup();
@@ -149,4 +186,5 @@ void Settings::save()
   sets.setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets.endGroup();
   sets.sync();
+  qDebug() << "Settings saved";
 }

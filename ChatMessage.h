@@ -40,7 +40,7 @@ public:
 
   inline bool isValid() const;
   inline bool isSystem() const;
-  inline bool isFromLocal() const;
+  inline bool isFromLocalUser() const;
   inline void setLocal( bool );
   inline const Message& message() const;
   inline void setMessage( const Message& );
@@ -56,7 +56,7 @@ private:
 
 inline bool ChatMessage::isValid() const { return m_userId > 0 && m_message.isValid(); }
 inline bool ChatMessage::isSystem() const { return m_message.type() == Message::System; }
-inline bool ChatMessage::isLocal() const { return m_userId == ID_LOCAL_USER; }
+inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
 inline const Message& ChatMessage::message() const { return m_message; }
 inline void ChatMessage::setMessage( const Message& new_value ) { m_message = new_value; }
 

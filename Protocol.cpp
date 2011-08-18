@@ -25,6 +25,7 @@
 #include "Settings.h"
 #include "Rijndael.h"
 
+
 Protocol* Protocol::mp_instance = NULL;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
 const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
@@ -176,7 +177,7 @@ QByteArray Protocol::pongMessage() const
 
 QByteArray Protocol::broadcastMessage() const
 {
-  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( UserManager::instance().localUser().hostPort() ) );
+  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().hostPort() ) );
   return fromMessage( m );
 }
 
@@ -192,9 +193,9 @@ QByteArray Protocol::helloMessage() const
 
 QByteArray Protocol::localUserStatusMessage() const
 {
-  Message m( Message::User, ID_STATUS_MESSAGE, UserManager::instance().localUser().statusDescription() );
+  Message m( Message::User, ID_STATUS_MESSAGE, Settings::instance().localUser().statusDescription() );
   m.addFlag( Message::Status );
-  m.setData( QString::number( UserManager::instance().localUser().status() ) );
+  m.setData( QString::number( Settings::instance().localUser().status() ) );
   return fromMessage( m );
 }
 

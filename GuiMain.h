@@ -26,7 +26,7 @@
 
 
 #include "Config.h"
-class BeeBeep;
+class Core;
 class ChatMessage;
 class FileInfo;
 class GuiChat;
@@ -59,7 +59,7 @@ private slots:
   void emoticonSelected();
   void chatSelected( VNumber, const QString& );
   void showMessage( const QString&, const ChatMessage& );
-  void sendMessage( const QString&, const QString& );
+  void sendMessage( VNumber, const QString& );
   void toggleMenuBar( bool );
   void saveChat();
   void showWritingUser( const User& );
@@ -87,7 +87,7 @@ private:
   GuiChat* mp_defaultChat;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
-  BeeBeep *mp_beeBeep;
+  Core *mp_beeBeep;
 
   QMenu *mp_menuSettings;
   QMenu *mp_menuSettingsIcon;
@@ -109,7 +109,6 @@ private:
   QAction* mp_actViewUsers;
   QAction* mp_actSendFile;
   QAction* mp_actViewFileTransfer;
-
 
 };
 

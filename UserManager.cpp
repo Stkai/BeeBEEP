@@ -33,31 +33,7 @@ UserManager::UserManager()
 {
 }
 
-QString UserManager::getUserName( const QProcessEnvironment& pe )
-{
-#if defined( BEEBEEP_DEBUG )
-  return QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-#else
-  QString sTmp = pe.value( "USERNAME" );
-  if( sTmp.isNull() )
-    sTmp = pe.value( "USER" );
-  if( sTmp.isNull() )
-    sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-  return sTmp;
-#endif
-}
 
-void UserManager::checkSystemEnvinroment()
-{
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Checking local user system environment";
-#endif
-  QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
-  QString sName = getUserName( pe );
-  m_localUser.setName( sName );
-  if( m_localUser.nickname().isEmpty() )
-    m_localUser.setNickname( sName );
-}
 
 void UserManager::load()
 {

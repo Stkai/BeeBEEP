@@ -35,22 +35,25 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   emit chatMessage( c.id(), cm );
 }
 
-void Core::dispatchSystemMessage( VNumber from_user_id, const QString& msg )
+void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg )
 {
   Message m = Protocol::instance().systemMessage( msg );
   ChatMessage cm( from_user_id, m );
-  if( from_user_id == ID_LOCAL_USER )
+  if( chat_id == ID_ALL_CHATS )
   {
     dispatchToAllChats( cm );
     return;
   }
 
-  c = defaultChat();
+  Chat c = privateChatForUser( from_user_id );
   c.addMessage( cm );
   setChat( c );
   emit chatMessage( c.id(), cm );
 
-  Chat c = privateChatForUser( from_user_id );
+  if( from_user_id == chat_id )
+    return;
+
+  c = defaultChat();
   c.addMessage( cm );
   setChat( c );
   emit chatMessage( c.id(), cm );

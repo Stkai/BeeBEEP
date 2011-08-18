@@ -35,17 +35,17 @@ class GuiChat : public QWidget, private Ui::GuiChatWidget
 public:
   GuiChat( QWidget* parent = 0 );
   void addToMyMessage( const QString& ); // For emoticons
-  void appendMessage( const QString&, const ChatMessage& );
+  void appendMessage( VNumber, const ChatMessage& );
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
   void setChat( const Chat& );
-  inline const QString& chatName() const;
+  inline VNumber chatId() const;
   void setLastMessageTimestamp( const QDateTime& );
   inline QString toHtml() const;
 
 signals:
-  void newMessage( const QString&, const QString& );
-  void writing( const QString& );
+  void newMessage( VNumber, const QString& );
+  void writing( VNumber );
   void nextChat();
 
 private slots:
@@ -54,14 +54,14 @@ private slots:
   void customContextMenu( const QPoint& );
 
 private:
-  QString m_chatName;
+  VNumber m_chatId;
 
 };
 
 
 // Inline Functions
 
-inline const QString& GuiChat::chatName() const { return m_chatName; }
+inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline QString GuiChat::toHtml() const { return mp_teChat->toHtml(); }
 
 

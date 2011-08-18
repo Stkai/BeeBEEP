@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Connection.h"
+#include "Protocol.h"
 
 
 Connection::Connection( QObject *parent )

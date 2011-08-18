@@ -40,8 +40,10 @@ class Core : public QObject
 public:
   explicit Core( QObject* parent = 0 );
 
+  void sendChatMessage( VNumber chat_id, const QString& );
+
   /* CoreChat */
-  Chat defaultChat();
+  inline Chat defaultChat( bool read_all_messages  );
   Chat chat( VNumber, bool read_all_messages );
 
 signals:
@@ -52,14 +54,12 @@ signals:
   void transferProgress( const User&, const FileInfo&, FileSizeType );
 
 public slots:
-  /* CoreConnection */
-  void setNewConnection( Connection* );
+  void sendWritingMessage( VNumber );
 
 protected slots:
-  /* Core */
-  void newPeerFound( const QHostAddress&, int );
-
   /* CoreConnection */
+  void setNewConnection( Connection* );
+  void newPeerFound( const QHostAddress&, int );
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();
   void checkUserAuthentication( const Message& );
@@ -80,8 +80,6 @@ protected:
   void parseFileMessage( const User&, const Message& );
 
   /* CoreUser */
-  void createLocalUser();
-  void saveLocalUser();
   User user( const QString& user_name, const QString& user_nick, const QHostAddress&, int ) const;
   User user( VNumber ) const;
   void setUser( const User& );
@@ -94,12 +92,11 @@ protected:
   void setChat( const Chat& );
 
   /* CoreDispatcher */
-  void dispatchSystemMessage( VNumber from_user_id, const QString& msg );
+  void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg );
   void dispatchChatMessageReceived( VNumber from_user_id, const Message& m );
   void dispatchToAllChats( const ChatMessage& );
 
 private:
-  User m_localUser;
   QList<User> m_users;
   QList<Chat> m_chats;
   QList<Connection*> m_connections;

@@ -25,6 +25,7 @@
 #define BEEBEEP_SETTINGS_H
 
 #include "Config.h"
+#include "User.h"
 
 
 class Settings
@@ -35,6 +36,11 @@ class Settings
 public:
   QString version() const;
   QString programName() const;
+
+  inline const User& localUser() const;
+  inline void setLocalUser( const User& );
+  void setLocalUserHost( const QHostAddress&, int );
+
   inline QString logPath() const;
   inline void setLogPath( const QString& );
 
@@ -113,6 +119,8 @@ protected:
   Settings();
 
 private:
+  User m_localUser;
+
   QString m_logPath;
 
   bool m_showMenuBar;
@@ -149,6 +157,8 @@ private:
 
 
 // Inline Functions
+inline const User& Settings::localUser() const { return m_localUser; }
+inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline QString Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline void Settings::setShowMenuBar( bool new_value) { m_showMenuBar = new_value; }

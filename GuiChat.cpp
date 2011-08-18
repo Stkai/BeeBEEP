@@ -78,8 +78,8 @@ void GuiChat::setChat( const Chat& c )
 {
   if( !c.isValid() )
     return;
-  m_chatName = c.name();
-  mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( m_chatName ) );
+  m_chatId = c.id();
+  mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( "FIXME" ) );
   mp_teChat->setText( Bee::chatMessagesToText( c ) );
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
@@ -87,9 +87,9 @@ void GuiChat::setChat( const Chat& c )
   mp_teMessage->setFocus();
 }
 
-void GuiChat::appendMessage( const QString& chat_name, const ChatMessage& msg )
+void GuiChat::appendMessage( VNumber chat_id, const ChatMessage& msg )
 {
-  if( chat_name != m_chatName )
+  if( chat_id != m_chatId )
     return;
   QTextCursor cursor( mp_teChat->textCursor() );
   cursor.movePosition( QTextCursor::End );
@@ -103,7 +103,7 @@ void GuiChat::sendMessage()
   QString text = mp_teMessage->toPlainText();
   if( text.isEmpty() )
     return;
-  emit newMessage( m_chatName, text );
+  emit newMessage( m_chatId, text );
   mp_teMessage->clear();
   setChatFontColor( Settings::instance().chatFontColor() );
 }
@@ -122,5 +122,5 @@ void GuiChat::setChatFontColor( const QString& color_name )
 
 void GuiChat::checkWriting()
 {
-  emit writing( m_chatName );
+  emit writing( m_chatId );
 }

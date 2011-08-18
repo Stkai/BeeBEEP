@@ -25,13 +25,14 @@
 #include "Listener.h"
 #include "PeerManager.h"
 #include "Settings.h"
+#include "Protocol.h"
+#include "Chat.h"
 
 
 Core::Core( QObject* parent )
-  : QObject( parent ), m_localUser( ID_LOCAL_USER ), m_users(), m_chats(), m_connections()
+  : QObject( parent ), m_users(), m_chats(), m_connections()
 {
   qDebug() << "Core created";
-  createLocalUser();
   createDefaultChat();
 
   mp_listener = new Listener( this );
@@ -50,11 +51,11 @@ Core::Core( QObject* parent )
 void Core::start()
 {
   qDebug() << "Starting" << Settings::instance().programName() << "core";
-  if( !mp_listener->listen( QHostAddress::Any, m_localUser.hostPort() ) )
+  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser.hostPort() ) )
   {
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
-      dispatchSystemMessage( ID_LOCAL_USER,
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
                                .arg( Settings::instance().programName() ) );
@@ -63,12 +64,14 @@ void Core::start()
   }
 
   qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
-  m_localUser.setHostAddress( mp_listener->serverAddress() );
-  m_localUser.setHostPort( mp_listener->serverPort() );
+  User local_user = Settings::instance().localUser();
+  local_user.setHostAddress( mp_listener->serverAddress() );
+  local_user.setHostPort( mp_listener->serverPort() );
+  Settings::instance().setLocalUser( local_user );
 
   if( !mp_peerManager->startBroadcasting( mp_listener->serverPort() ) )
   {
-    dispatchSystemMessage( ID_LOCAL_USER,
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
                              .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
                              .arg( Settings::instance().programName() ) );
@@ -76,12 +79,10 @@ void Core::start()
     return;
   }
 
-  dispatchSystemMessage( UserManager::instance().defaultChat(),
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ) )
                          .arg( Settings::instance().programName() ) );
-
-  m_localUser.setStatus( User::Online );
 
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
@@ -89,26 +90,15 @@ void Core::start()
 
 void Core::stop()
 {
-  saveLocalUser();
   mp_peerManager->stopBroadcasting();
   mp_fileTransfer->stopListener();
   mp_listener->close();
 
-  foreach( Connection* c, m_peers )
-  {
+  foreach( Connection* c, m_connections )
     removeConnection( c );
-  }
-  m_peers.clear();
-  dispatchSystemMessage( UserManager::instance().defaultChat(),
+
+  m_connections.clear();
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ) ) );
 }
 
-void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
-{
-  if( !hasConnection( sender_ip, sender_port ) ) // Check it: before the sender port is not checked and it was passed -1
-  {
-    Connection *c = new Connection( this );
-    setNewConnection( c );
-    c->connectToHost( sender_ip, sender_port );
-  }
-}
