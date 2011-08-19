@@ -41,6 +41,8 @@ public:
   inline void setLocalUser( const User& );
   void setLocalUserHost( const QHostAddress&, int );
 
+  inline int broadcastPort() const;
+
   inline QString logPath() const;
   inline void setLogPath( const QString& );
 
@@ -120,7 +122,7 @@ protected:
 
 private:
   User m_localUser;
-
+  int m_broadcastPort;
   QString m_logPath;
 
   bool m_showMenuBar;
@@ -159,6 +161,7 @@ private:
 // Inline Functions
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
+inline int Settings::broadcastPort() const { return m_broadcastPort; }
 inline QString Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline void Settings::setShowMenuBar( bool new_value) { m_showMenuBar = new_value; }

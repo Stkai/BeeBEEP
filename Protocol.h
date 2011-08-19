@@ -24,6 +24,7 @@
 #ifndef BEEBEEP_PROTOCOL_H
 #define BEEBEEP_PROTOCOL_H
 
+#include "Chat.h"
 #include "FileInfo.h"
 #include "Message.h"
 #include "User.h"
@@ -41,9 +42,9 @@ public:
 
   QByteArray pingMessage() const;
   QByteArray pongMessage() const;
-  QByteArray broadcastMessage( int listener_port ) const;
+  QByteArray broadcastMessage() const;
   QByteArray helloMessage() const;
-  inline const Message& writingMessage() const;
+  inline const QByteArray& writingMessage() const;
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
   Message fileInfoToMessage( const FileInfo& );
@@ -53,6 +54,7 @@ public:
   bool changeUserStatusFromMessage( User*, const Message& ) const;
 
   User createUser( const Message&, const QHostAddress&, int );
+  Chat createChat( const QList<VNumber>& user_list );
 
   QByteArray encryptByteArray( const QByteArray& ) const;
   QByteArray decryptByteArray( const QByteArray& ) const;
@@ -81,7 +83,7 @@ protected:
 
 private:
   VNumber m_id;
-  Message m_writingMessage;
+  QByteArray m_writingMessage;
 
 };
 
@@ -89,8 +91,8 @@ private:
 // Inline Functions
 inline VNumber Protocol::newId() { return ++m_id; }
 inline int Protocol::messageMinimumSize() const { return 10; }
-inline const Message& Protocol::writingMessage() const { return m_writingMessage; }
-inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
+inline const QByteArray& Protocol::writingMessage() const { return m_writingMessage; }
 inline Message Protocol::chatMessage( const QString& msg_txt ) { return Message( Message::Chat, newId(), msg_txt ); }
+inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
 
 #endif // BEEBEEP_PROTOCOL_H

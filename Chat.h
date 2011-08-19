@@ -36,10 +36,14 @@ public:
 
   Chat& operator=( const Chat& );
   inline bool operator==( const Chat& ) const;
-
   inline bool isValid() const;
   inline VNumber id() const;
   inline void setId( VNumber );
+  inline const QList<VNumber>& usersId() const;
+  bool addUser( VNumber );
+  inline bool hasUser( VNumber ) const;
+  inline bool removeUser( VNumber );
+  inline bool isPrivateForUser( VNumber ) const;
   inline const QDateTime& lastMessageTimestamp() const;
   inline void setLastMessageTimestamp( const QDateTime& );
   inline int unreadMessages() const;
@@ -50,6 +54,7 @@ public:
 
 private:
   VNumber m_id;
+  QList<VNumber> m_usersId;
   QList<ChatMessage> m_messages;
   QDateTime m_lastMessageTimestamp;
   int m_unreadMessages;
@@ -62,6 +67,10 @@ inline bool Chat::operator==( const Chat& c ) const { return m_id == c.m_id; }
 inline bool Chat::isValid() const { return m_id > 0; }
 inline VNumber Chat::id() const { return m_id; }
 inline void Chat::setId( VNumber new_value ) { m_id = new_value; }
+inline const QList<VNumber>& Chat::usersId() const { return m_usersId; }
+inline bool Chat::hasUser( VNumber user_id ) const { return m_usersId.contains( user_id ); }
+inline bool Chat::removeUser( VNumber user_id ) { return m_usersId.removeOne( user_id ); }
+inline bool Chat::isPrivateForUser( VNumber user_id ) const { return m_usersId.size() == 2 && hasUser( user_id ); }
 inline const QDateTime& Chat::lastMessageTimestamp() const { return m_lastMessageTimestamp; }
 inline void Chat::setLastMessageTimestamp( const QDateTime& new_value ) { m_lastMessageTimestamp = new_value; }
 inline int Chat::unreadMessages() const { return m_unreadMessages; }

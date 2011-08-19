@@ -34,12 +34,9 @@ const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
 Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
-  m_localUser = Protocol::instance().createLocalUser();
   m_localUser.setStatus( User::Online );
   setPassword( defaultPassword() );
 }
-
-
 
 QString Settings::version() const
 {
@@ -92,7 +89,7 @@ namespace
 void Settings::load()
 {
   qDebug() << "Creating local user and loading settings";
-  QString sName = GetUserNameFromSystem();
+  QString sName = GetUserNameFromSystemEnvinroment();
   m_localUser.setName( sName );
 
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
@@ -111,7 +108,8 @@ void Settings::load()
   m_localUser.setNickname( sets.value( "LocalNickname", "" ).toString() );
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_localUser.setHostPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ) );
+  m_localUser.setHostPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
+  m_broadcastPort = sets.value( "LocalBroadcastPort", BROADCAST_DEFAULT_PORT ).toInt();
   sets.endGroup();
   sets.beginGroup( "Geometry" );
   m_guiGeometry = sets.value( "MainWindow", "" ).toByteArray();
@@ -165,6 +163,7 @@ void Settings::save()
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets.setValue( "LocalListenerPort", m_localUser.hostPort() );
+  sets.setValue( "LocalBroadcastPort", m_broadcastPort );
   sets.setValue( "ShowAddressIp", m_showUserIp );
   sets.setValue( "ShowNickname", m_showUserNickname );
   sets.endGroup();

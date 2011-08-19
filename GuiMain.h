@@ -43,51 +43,56 @@ public:
   GuiMain( QWidget* parent = 0 );
 
 public slots:
-  void startStopBeeBeep();
+  void startStopCore();
 
 private slots:
   void showAbout();
-  void startBeeBeep();
-  void stopBeeBeep();
-  void newUser( const User& );
-  void removeUser( const User& );
+  void checkUser( const User& );
+  void showWritingUser( const User& );
+  void showSelectedChat( VNumber chat_id );
+  void showChatMessage( VNumber, const ChatMessage& );
+  void sendMessage( VNumber, const QString& );
+  void showTipOfTheDay();
+
   void selectNickname();
   void selectFontColor();
   void selectFont();
   void searchUsers();
   void settingsChanged();
   void emoticonSelected();
-  void chatSelected( VNumber, const QString& );
-  void showMessage( const QString&, const ChatMessage& );
-  void sendMessage( VNumber, const QString& );
+
   void toggleMenuBar( bool );
   void saveChat();
-  void showWritingUser( const User& );
-  void showNewUserStatus( const User& );
+
+
   void showNextChat();
   void statusSelected();
   void changeStatusDescription();
   void sendFile();
   void downloadFile( const User&, const FileInfo& );
   void selectDownloadDirectory();
-  void showTransferProgress( const User&, const FileInfo&, FileSizeType );
+
 
 protected:
   void closeEvent( QCloseEvent* );
-  void refreshUserList();
-  void refreshChat();
-  void refreshTitle();
+
+private:
   void createActions();
   void createMenus();
   void createToolBars();
   void createStatusBar();
   void createDockWindows();
+  void refreshUserList();
+  void refreshChat();
+  void refreshTitle();
+  void startCore();
+  void stopCore();
 
 private:
   GuiChat* mp_defaultChat;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
-  Core *mp_beeBeep;
+  Core *mp_core;
 
   QMenu *mp_menuSettings;
   QMenu *mp_menuSettingsIcon;
@@ -96,7 +101,7 @@ private:
 
   QToolBar *mp_barMain;
 
-  QAction* mp_actStartStopBeeBeep;
+  QAction* mp_actStartStopCore;
   QAction* mp_actSaveChat;
   QAction* mp_actSearch;
   QAction* mp_actQuit;

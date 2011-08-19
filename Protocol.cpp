@@ -32,10 +32,12 @@ const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 
 
 Protocol::Protocol()
-  : m_id( ID_START ), m_writingMessage( Message::User, ID_WRITING_MESSAGE, "*" )
+  : m_id( ID_START ), m_writingMessage()
 {
-  m_writingMessage.addFlag( Message::Private );
-  m_writingMessage.addFlag( Message::Writing );
+  Message writing_message( Message::User, ID_WRITING_MESSAGE, "*" );
+  writing_message.addFlag( Message::Private );
+  writing_message.addFlag( Message::Writing );
+  m_writingMessage = fromMessage( writing_message );
 }
 
 QString Protocol::messageHeader( Message::Type mt ) const
@@ -184,8 +186,10 @@ QByteArray Protocol::broadcastMessage() const
 QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
-  data_list << UserManager::instance().localUser().name();
-  data_list << UserManager::instance().localUser().nickname();
+  data_list << Settings::instance().localUser().name();
+  data_list << Settings::instance().localUser().nickname();
+  data_list << QString::number( Settings::instance().localUser().status() );
+  data_list << Settings::instance().localUser().statusDescription();
   Message m( Message::Hello, ID_HELLO_MESSAGE, data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().hash() );
   return fromMessage( m );
@@ -214,24 +218,45 @@ bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
 
 User Protocol::createUser( const Message& hello_message, const QHostAddress& host_address, int host_port )
 {
-  /* Read User Field Data */
+ /* Read User Field Data */
   QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
-  if( sl.size() < 2 )
+  if( sl.size() < 4 )
     return User();
   QString user_name = sl.at( 0 );
-  sl.removeFirst();
-  QString user_nickname = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
+
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
     return User();
+
+  sl.removeFirst();
+  QString user_nickname = sl.at( 0 );
+  sl.removeFirst();
+  bool ok = false;
+  int user_status = sl.at( 0 ).toInt( &ok );
+  if( !ok )
+    user_status = User::Online;
+  sl.removeFirst();
+  QString user_status_description =  sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
+
   /* Create User */
   User u( newId() );
   u.setName( user_name );
   u.setNickname( user_nickname );
   u.setHostAddress( host_address );
   u.setHostPort( host_port );
-  u.setStatus( User::Online );
+  u.setStatus( user_status );
+  u.setStatusDescription( user_status_description );
   return u;
+}
+
+Chat Protocol::createChat( const QList<VNumber>& user_list )
+{
+  Chat c;
+  c.setId( newId() );
+  foreach( VNumber user_id, user_list )
+    c.addUser( user_id );
+  c.addUser( ID_LOCAL_USER );
+  return c;
 }
 
 Message Protocol::fileInfoToMessage( const FileInfo& fi )

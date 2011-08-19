@@ -85,7 +85,6 @@ private slots:
   void connectionError( QAbstractSocket::SocketError );
   void disconnected();
   void readyForUse();
-  void parseMessage( )
   void dispatchChatMessage( VNumber, const Message& );
   void dispatchSystemMessage( const QString& chat_name, const QString& sysmess );
   void setUserStatus( VNumber );

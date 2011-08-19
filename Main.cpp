@@ -23,7 +23,6 @@
 
 #undef LOGFILE_ENABLED
 
-
 #include <QApplication>
 #ifdef Q_OS_SYMBIAN
 #include "sym_iap_util.h"
@@ -36,8 +35,6 @@
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
-#include "UserManager.h"
-
 
 
 bool SetTranslator( QTranslator* translator, QString new_locale )
@@ -62,7 +59,7 @@ int main( int argc, char *argv[] )
   Random::init();
 
   /* Load Settings */
-  Settings::instance().load( true );
+  Settings::instance().load();
 
 #if defined( LOGFILE_ENABLED )
   /* Starting Logs */
@@ -73,9 +70,6 @@ int main( int argc, char *argv[] )
   /* Apply system language */
   QTranslator translator;
   SetTranslator( &translator, Settings::instance().language() );
-
-  /* Init User Manager */
-  UserManager::instance().load();
 
   /* Init Protocol */
   (void)Protocol::instance();
@@ -100,7 +94,7 @@ int main( int argc, char *argv[] )
 #endif
 
   // Starting connection to BeeBEEP Network
-  QTimer::singleShot( 500, &mw, SLOT( startBeeBeep() ) );
+  QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
 
   /* Event Loop */
   int iRet = app.exec();
@@ -108,8 +102,6 @@ int main( int argc, char *argv[] )
   /* CleanUp */
   ColorManager::close();
   Protocol::close();
-  UserManager::instance().save();
-  UserManager::close();
   Settings::instance().save();
   Settings::close();
 

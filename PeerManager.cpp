@@ -23,10 +23,11 @@
 
 #include "PeerManager.h"
 #include "Protocol.h"
+#include "Settings.h"
 
 
 PeerManager::PeerManager( QObject *parent )
-  : QObject( parent ), m_listenerPort( 0 )
+  : QObject( parent ), m_broadcastData()
 {
   updateAddresses();
 
@@ -36,15 +37,16 @@ PeerManager::PeerManager( QObject *parent )
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
 }
 
-bool PeerManager::startBroadcasting( int listener_port )
+bool PeerManager::startBroadcasting()
 {
-  m_listenerPort = listener_port;
-  if( !m_broadcastSocket.bind( QHostAddress::Any, BROADCAST_PORT, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
+  if( !m_broadcastSocket.bind( QHostAddress::Any, Settings::instance().broadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
   {
-    qWarning() << "PeerManager cannot bind the broadcast port" << BROADCAST_PORT;
+    qWarning() << "PeerManager cannot bind the broadcast port" << Settings::instance().broadcastPort();
     return false;
   }
-  qDebug() << "PeerManager start broadcasting with listener port" << m_listenerPort;
+  qDebug() << "PeerManager generate broadcast message data";
+  m_broadcastData = Protocol::instance().broadcastMessage();
+  qDebug() << "PeerManager start broadcasting with listener port" << Settings::instance().localUser().hostPort();
   m_broadcastTimer.start();
   return true;
 }
@@ -67,16 +69,15 @@ bool PeerManager::isLocalHostAddress( const QHostAddress& address )
 
 bool PeerManager::sendDatagramToHost( const QHostAddress& host_address )
 {
-  return m_broadcastSocket.writeDatagram( Protocol::instance().broadcastMessage(), host_address, BROADCAST_PORT ) > 0;
+  return m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().broadcastPort() ) > 0;
 }
 
 void PeerManager::sendBroadcastDatagram()
 {
-  QByteArray datagram = Protocol::instance().broadcastMessage();
   bool validBroadcastAddresses = true;
   foreach( QHostAddress address, m_broadcastAddresses )
   {
-    if( m_broadcastSocket.writeDatagram( datagram, address, BROADCAST_PORT ) == -1 )
+    if( m_broadcastSocket.writeDatagram( m_broadcastData, address, Settings::instance().broadcastPort() ) == -1 )
       validBroadcastAddresses = false;
   }
 
@@ -96,19 +97,21 @@ void PeerManager::readBroadcastDatagram()
       continue;
     if( datagram.size() <= Protocol::instance().messageMinimumSize() )
     {
-      qWarning() << "Invalid datagram size:" << datagram;
+      qDebug() << "PeerManager has received an invalid data size:" << datagram;
       continue;
     }
     Message m = Protocol::instance().toMessage( datagram );
     if( !m.isValid() || m.type() != Message::Beep )
+    {
+      qDebug() << "PeerManager has received an invalid data:" << datagram;
       continue;
-
+    }
     bool ok = false;
     int senderServerPort = m.text().toInt( &ok );
     if( !ok )
       continue;
 
-    if( isLocalHostAddress( sender_ip ) && senderServerPort == m_listenerPort )
+    if( isLocalHostAddress( sender_ip ) && senderServerPort == Settings::instance().localUser().hostPort() )
       continue;
 
     emit newPeerFound( sender_ip, senderServerPort );

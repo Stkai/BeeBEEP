@@ -21,12 +21,11 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "Core.h"
-#include "Listener.h"
 #include "PeerManager.h"
 #include "Settings.h"
 #include "Protocol.h"
-#include "Chat.h"
 
 
 Core::Core( QObject* parent )
@@ -44,22 +43,22 @@ Core::Core( QObject* parent )
 
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
-  connect( mp_fileTransfer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransfer( const User&, const FileInfo&, const QString& ) ) );
-  connect( mp_fileTransfer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_fileTransfer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( fileTransferProgress( const User&, const FileInfo&, FileSizeType ) ) );
 }
 
-void Core::start()
+bool Core::start()
 {
   qDebug() << "Starting" << Settings::instance().programName() << "core";
-  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser.hostPort() ) )
+  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
   {
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
-                               .arg( Settings::instance().programName() ) );
-      return;
+                               .arg( Settings::instance().programName() ), DispatchToChat );
+      return false;
     }
   }
 
@@ -69,23 +68,23 @@ void Core::start()
   local_user.setHostPort( mp_listener->serverPort() );
   Settings::instance().setLocalUser( local_user );
 
-  if( !mp_peerManager->startBroadcasting( mp_listener->serverPort() ) )
+  if( !mp_peerManager->startBroadcasting() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
                              .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
-                             .arg( Settings::instance().programName() ) );
+                             .arg( Settings::instance().programName() ), DispatchToChat );
     mp_listener->close();
-    return;
+    return false;
   }
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are connected to %2 Network." )
-                         .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ) )
-                         .arg( Settings::instance().programName() ) );
+                         tr( "%1 You are connected." )
+                         .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ) ), DispatchToAllChatsWithUser );
 
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
+  return true;
 }
 
 void Core::stop()
@@ -95,10 +94,9 @@ void Core::stop()
   mp_listener->close();
 
   foreach( Connection* c, m_connections )
-    removeConnection( c );
+    closeConnection( c );
 
   m_connections.clear();
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are disconnected.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ) ) );
+                         tr( "%1 You are disconnected.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ) ), DispatchToAllChatsWithUser );
 }
-

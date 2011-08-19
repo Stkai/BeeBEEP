@@ -21,8 +21,11 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
+#include "Connection.h"
 #include "Core.h"
 #include "FileInfo.h"
+#include "Protocol.h"
 
 
 void Core::parseMessage( VNumber user_id, const Message& m )
@@ -55,8 +58,8 @@ void Core::parseUserMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::Writing ) )
   {
-    qDebug() << "User" << m_userId << "is writing";
-    emit isWriting( u );
+    qDebug() << "User" << u.path() << "is writing";
+    emit userIsWriting( u );
     return;
   }
   else if( m.hasFlag( Message::Status ) )
@@ -66,7 +69,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     {
       qDebug() << "User" << user_with_new_status.path() << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
       setUser( user_with_new_status );
-      emit userChanged( user_with_new_status );
+      setUserStatus( u );
     }
   }
   else
@@ -90,7 +93,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   }
   fi.setHostAddress( c->peerAddress() );
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( u.id(), tr( "%1 %2 is sending to you the file: %3." ).arg( icon_html, Settings::instance().showUserNickname() ? u.nickname() : u.name(), fi.name() ) );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is sending to you the file: %3." ).arg( icon_html, u.path(), fi.name() ), DispatchToAllChatsWithUser );
   emit fileDownloadRequest( u, fi );
 }
 

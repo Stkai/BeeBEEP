@@ -77,12 +77,15 @@ QTreeWidgetItem* GuiTransferFile::findItem( VNumber file_info_id )
 
 void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, FileSizeType bytes )
 {
-  QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" )
-                                     .arg( fi.isDownload() ? tr( "Downloading") : tr( "Uploading") )
-                                     .arg( Bee::bytesToString( bytes ) )
-                                     .arg( Bee::bytesToString( fi.size() ) )
-                                     .arg( QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
+  QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading") : tr( "Uploading"),
+                                      Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
+                                      QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
   item->setText( ColumnProgress, file_transfer_progress );
+
+  file_transfer_progress.prepend( QString( "[%1] " ).arg( fi.name() ) );
+  if( !isVisible() )
+    emit stringToShow( file_transfer_progress, 1000 );
+  qDebug() << file_transfer_progress;
 }
 
 void GuiTransferFile::setMessage( const User& u, const FileInfo& fi, const QString& msg )

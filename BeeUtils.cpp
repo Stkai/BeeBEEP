@@ -94,8 +94,8 @@ QString Bee::Private::formatMessage( const ChatMessage& cm )
   }
   QString sHtmlMessage = QString( "%1<font color='%2'><b>%3</b>%4%5</font>" )
             .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=gray>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
-            .arg( cm.defaultColor() )
-            .arg( Settings::instance().showUserNickname() ? cm.nickname() : cm.username() )
+            //.arg( cm.defaultColor() )
+            //.arg( Settings::instance().showUserNickname() ? cm.nickname() : cm.username() )
             .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
             .arg( text_formatted );
   return sHtmlMessage;
@@ -133,6 +133,22 @@ QString Bee::userStatusIconFileName( int user_status )
   default:
     return QString( ":/images/user-away.png" );
   }
+}
+
+static const char* UserStatusToString[] =
+{
+  QT_TRANSLATE_NOOP( "User", "offline" ),
+  QT_TRANSLATE_NOOP( "User", "online" ),
+  QT_TRANSLATE_NOOP( "User", "busy" ),
+  QT_TRANSLATE_NOOP( "User", "away" ),
+  QT_TRANSLATE_NOOP( "User", "status error" ),
+};
+
+QString Bee::userStatusToString( int user_status )
+{
+  if( user_status < 0 || user_status > User::NumStatus )
+    user_status = User::NumStatus;
+  return qApp->translate( "User", UserStatusToString[ user_status ] );
 }
 
 QString Bee::bytesToString( FileSizeType bytes, int precision )

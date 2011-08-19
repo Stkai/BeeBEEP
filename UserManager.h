@@ -24,42 +24,6 @@
 #ifndef BEEBEEP_USERMANAGER_H
 #define BEEBEEP_USERMANAGER_H
 
-#include "User.h"
 
-
-class UserManager
-{
-public:
-  inline const QList<User>& users() const;
-  inline const User& localUser() const;
-  inline void setLocalUser( const User& );
-  void setLocalhost( const QHostAddress&, int );
-
-  User createUser( const QString& user_name, const QString& user_nickname, const QHostAddress& user_address, int user_port );
-  void setUser( const User& );
-  User user( VNumber ) const;
-
-  void load();
-  void save();
-
-protected:
-  UserManager();
-  inline VNumber newId();
-
-private:
-  VNumber m_id;
-  User m_localUser;
-  QList<User> m_users;
-
-};
-
-
-// Inline Function
-inline VNumber UserManager::newId() { return ++m_id; }
-inline const User& UserManager::localUser() const { return m_localUser; }
-inline void UserManager::setLocalUser( const User& new_value ) { m_localUser = new_value; }
-inline const QList<User>& UserManager::users() const { return m_users; }
-inline QString UserManager::defaultChat() const { return chat( ID_LOCAL_USER ); }
-inline QString UserManager::chat( VNumber user_id ) const { return user_id == ID_LOCAL_USER ? QObject::tr( "*All*" ) : user( user_id ).path(); }
 
 #endif // BEEBEEP_USERMANAGER_H

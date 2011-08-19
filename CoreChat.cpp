@@ -21,8 +21,13 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Connection.h"
 #include "Core.h"
 #include "BeeUtils.h"
+#include "Protocol.h"
+#include "Random.h"
+#include "Settings.h"
+#include "Tips.h"
 
 
 void Core::createDefaultChat()
@@ -30,47 +35,53 @@ void Core::createDefaultChat()
   qDebug() << "Creating default chat";
   Chat c;
   c.setId( ID_DEFAULT_CHAT );
+  c.addUser( ID_LOCAL_USER );
   QString sHtmlMsg = tr( "%1 Chat with all people." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
-  ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
+  ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
   setChat( c );
-
 }
 
 void Core::createPrivateChat( const User& u )
 {
   qDebug() << "Creating private chat room for user" << u.path();
-  Chat c;
-  c.setId( u.id() );
+  QList<VNumber> user_list;
+  user_list.append( u.id() );
+  Chat c = Protocol::instance().createChat( user_list );
   QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.path() );
   ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
   setChat( c );
 }
 
-Chat Core::chat( const QString& chat_name, bool create_if_need, bool read_all_messages )
+Chat Core::chat( VNumber chat_id, bool read_all_messages )
 {
-  Chat c = m_chats.value( chat_name, Chat() );
-  if( !c.isValid() )
+  QList<Chat>::iterator it = m_chats.begin();
+  while( it != m_chats.end() )
   {
-    if( create_if_need )
+    if( chat_id == (*it).id() )
     {
-
+      if( read_all_messages )
+        (*it).readAllMessages();
+      return *it;
     }
-    return c;
+    ++it;
   }
-
-  if( read_all_messages )
-  {
-    c.readAllMessages();
-    m_chats.insert( c.name(), c );
-  }
-  return c;
+  return Chat();
 }
 
-Chat Core::privateChatForUser( VNumber user_id )
+Chat Core::privateChatForUser( VNumber user_id ) const
 {
-  return user_id == ID_LOCAL_USER ? chat( ID_DEFAULT_CHAT ) : chat( user_id );
+  if( user_id == ID_LOCAL_USER )
+    return chat( ID_DEFAULT_CHAT );
+  QList<Chat>::const_iterator it = m_chats.begin();
+  while( it != m_chats.end() )
+  {
+    if( (*it).isPrivateForUser( user_id ) )
+      return *it;
+    ++it;
+  }
+  return Chat();
 }
 
 Chat Core::chat( VNumber chat_id ) const
@@ -95,62 +106,87 @@ void Core::setChat( const Chat& c )
       (*it) = c;
       return;
     }
-    ++it
+    ++it;
   }
   m_chats.append( c );
 }
 
-void Core::sendChatMessage( VNumber chat_id, const QString& msg )
+int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 {
-  if( !isWorking() )
+  if( !isConnected() )
   {
-    dispatchSystemMessage( chat_id, m_localUser.id(), tr( "%1 Unable to send the message: you are not connected." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ) );
-    return;
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send the message: you are not connected." )
+                           .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ), DispatchToChat );
+    return 0;
   }
 
   if( msg.isEmpty() )
-    return;
+    return 0;
 
   Message m = Protocol::instance().chatMessage( msg );
   m.setData( Settings::instance().chatFontColor() );
 
+  int messages_sent = 0;
+
   if( chat_id == ID_DEFAULT_CHAT )
   {
     foreach( Connection *c, m_connections )
-      c->sendMessage( m );
+    {
+      if( !c->sendMessage( m ) )
+        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send the message to %2." )
+                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), user( c->userId() ).path() ), DispatchToChat );
+      else
+        messages_sent += 1;
+    }
   }
   else
   {
     m.addFlag( Message::Private );
-    Connection* c = connection( chat_id ); // user_id and chat_id is == for now...
-    if( c )
+    Chat from_chat = chat( chat_id );
+    QList<VNumber> user_list = from_chat.usersId();
+    foreach( VNumber user_id, user_list )
     {
-      c->sendMessage( m );
-    }
-    else
-    {
-      dispatchSystemMessage( chat_id, m_localUser.id(), tr( "%1 Unable to send the message." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ) );
-      return;
+      if( user_id == ID_LOCAL_USER )
+        continue;
+      Connection* c = connection( user_id );
+      if( c && c->sendMessage( m ) )
+        messages_sent += 1;
+      else
+        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send the message to %2." )
+                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), user( user_id ).path() ), DispatchToChat );
     }
   }
 
-  ChatMessage cm( m_localUser.id(), m );
-  Chat c = chat( chat_id );
-  c.addMessage( cm );
-  emit newChatMessage( chat_id, cm );
+  ChatMessage cm( ID_LOCAL_USER, m );
+  dispatchToChat( cm, chat_id );
+  return messages_sent;
 }
 
 void Core::sendWritingMessage( VNumber chat_id )
 {
-  if( !isWorking() )
+  if( !isConnected() )
     return;
 
-  Connection* c = connection( chat_id ); // FIXME: user_id!!! (for now works)
-  if( c )
+  Chat from_chat = chat( chat_id );
+  QList<VNumber> user_list = from_chat.usersId();
+  foreach( VNumber user_id, user_list )
   {
-    qDebug() << "Sending Writing Message to" << c->peerAddress() << c->peerPort();
-    c->sendMessage( Protocol::instance().writingMessage() );
+    if( user_id == ID_LOCAL_USER )
+      continue;
+    Connection* c = connection( user_id );
+    if( c )
+    {
+      qDebug() << "Sending Writing Message to" << c->peerAddress() << c->peerPort();
+      c->sendData( Protocol::instance().writingMessage() );
+    }
   }
+}
+
+void Core::showTipOfTheDay()
+{
+  QString tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),
+                                                   qApp->translate( "Tips", BeeBeepTips[ Random::number( 0, (BeeBeepTipsSize-1) ) ] ) );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
 }
 
 

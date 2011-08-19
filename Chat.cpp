@@ -25,7 +25,7 @@
 
 
 Chat::Chat()
- : m_id( 0 ), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 )
+  : m_id( 0 ), m_usersId(), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 )
 {
 }
 
@@ -39,9 +39,18 @@ Chat& Chat::operator=( const Chat& c )
   if( this != &c )
   {
     m_id = c.m_id;
+    m_usersId = c.m_usersId;
     m_messages = c.m_messages;
     m_lastMessageTimestamp = c.m_lastMessageTimestamp;
     m_unreadMessages = c.m_unreadMessages;
   }
   return *this;
+}
+
+bool Chat::addUser( VNumber user_id )
+{
+  if( hasUser( user_id ) )
+    return false;
+  m_usersId.append( user_id );
+  return true;
 }

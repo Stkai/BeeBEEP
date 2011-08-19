@@ -34,18 +34,18 @@ class GuiUserList : public QListWidget
   Q_OBJECT
 
 public:
-  enum UserDataType { UserId = Qt::UserRole, Username, UserNickname, UserHostAddress, UserChatName, UnreadMessages, UserStatus, UserStatusDescription };
+  enum UserDataType { UserId = Qt::UserRole, Username, UserNickname, UserHostAddress, UserHostPort, UnreadMessages, UserStatus, UserStatusDescription, PrivateChatId };
 
   GuiUserList( QWidget* parent = 0 );
   virtual QSize sizeHint() const;
-  void setUser( const User&, int unread_messages );
+  void setUser( const User&, VNumber private_chat_id, int unread_messages );
   void removeUser( const User& );
-  void setUnreadMessages( const QString& chat_name, int );
+  void setUnreadMessages( VNumber, int );
   void updateUsers();
   bool nextUserWithUnreadMessages();
 
 signals:
-  void chatSelected( VNumber, const QString& );
+  void chatSelected( VNumber chat_id );
   void stringToShow( const QString&, int );
 
 protected slots:
@@ -55,7 +55,7 @@ protected slots:
 private:
   inline QIcon userIcon( int unread_messages, int user_status ) const;
   void updateItem( QListWidgetItem* );
-  QListWidgetItem* widgetItem( UserDataType, const QString& );
+  QListWidgetItem* userItem( VNumber );
 
 };
 

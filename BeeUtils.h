@@ -35,6 +35,7 @@ namespace Bee
   QString chatMessageToText( const ChatMessage& );
   QIcon userStatusIcon( int );
   QString userStatusIconFileName( int );
+  QString userStatusToString( int );
   inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
   inline VNumber qVariantToVNumber( const QVariant& );
   QString bytesToString( FileSizeType, int precision = 1 );

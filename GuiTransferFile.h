@@ -47,6 +47,7 @@ public slots:
 
 signals:
   void transferCancelled( VNumber );
+  void stringToShow( const QString&, int );
 
 protected:
   QTreeWidgetItem* findItem( VNumber );

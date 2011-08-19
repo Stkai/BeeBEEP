@@ -50,6 +50,7 @@ public:
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );
+  void checkAuthentication( const Message& );
 
   virtual void checkData( const QByteArray& ) = 0;
   virtual void sendData() = 0;
@@ -68,6 +69,7 @@ protected:
 
 protected:
   VNumber m_id;
+  User m_user;
   FileInfo m_fileInfo;
   ConnectionSocket m_socket;
   QFile m_file;

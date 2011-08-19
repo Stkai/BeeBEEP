@@ -21,14 +21,18 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
+#include "ColorManager.h"
+#include "Connection.h"
 #include "Core.h"
+#include "Protocol.h"
 #include "Settings.h"
 
 
 Connection* Core::connection( VNumber user_id )
 {
-  QList<Connection*>::iterator it = m_peers.begin();
-  while( it != m_peers.end() )
+  QList<Connection*>::iterator it = m_connections.begin();
+  while( it != m_connections.end() )
   {
     if( (*it)->userId() == user_id )
       return *it;
@@ -39,8 +43,8 @@ Connection* Core::connection( VNumber user_id )
 
 bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
 {
-  QList<Connection*>::const_iterator it = m_peers.begin();
-  while( it != m_peers.end() )
+  QList<Connection*>::const_iterator it = m_connections.begin();
+  while( it != m_connections.end() )
   {
     if( (sender_port == -1 || (*it)->peerPort() == sender_port) && (*it)->peerAddress() == sender_ip )
       return true;
@@ -61,7 +65,7 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 
 void Core::setNewConnection( Connection *c )
 {
-  qDebug() << "Connecting SIGNAL/SLOT to connection from" << c->peerAddress() << c->peerPort();
+  qDebug() << "Connecting SIGNAL/SLOT to connection from" << c->peerAddress().toString() << c->peerPort();
   connect( c, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( setConnectionError( QAbstractSocket::SocketError ) ) );
   connect( c, SIGNAL( disconnected() ), this, SLOT( setConnectionClosed() ) );
   connect( c, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkUserAuthentication( const Message& ) ) );
@@ -71,7 +75,7 @@ void Core::setConnectionReadyForUse( Connection* c )
 {
   if( hasConnection( c->peerAddress(), c->peerPort() ) )
   {
-    qWarning() << "Connection from" << sender_ip.toString() << sender_port << "is, already, ready for use";
+    qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "is, already, ready for use";
     return;
   }
   qDebug() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "is ready for use";
@@ -111,15 +115,19 @@ void Core::closeConnection( Connection *c )
     u.setStatus( User::Offline );
     setUser( u );
     emit userChanged( u );
+    QString sHtmlMsg = tr( "%1 %2 has left." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), u.path() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   }
   else
     qWarning() << "User" << c->userId() << "not found while closing connection";
 
+  Chat default_chat = defaultChat( false );
+  if( default_chat.removeUser( u.id() ) )
+    setChat( default_chat );
+
   if( m_connections.removeAll( c ) != 1 )
     qWarning() << "Various pointers of a single connection found in connection list";
 
-  QString sHtmlMsg = tr( "%1 %2 has left." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), Settings::instance().showUserNickname() ? u.nickname() : u.name() ); );
-  dispatchSystemMessage( u.id(), sHtmlMsg );
   c->deleteLater();
 }
 
@@ -135,13 +143,13 @@ void Core::checkUserAuthentication( const Message& m )
   User u = Protocol::instance().createUser( m, c->peerAddress(), c->peerPort() );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to create a new user from the message arrived from:" << peerAddress().toString() << peerPort();
+    qWarning() << "Unable to create a new user from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
     c->abort();
     c->deleteLater();
     return;
   }
 
-  User user_found = user( u.name(), u.nickname(), u.hostAddress(), u.hostPort() );
+  User user_found = user( u.path() );
   if( user_found.isValid() )
   {
     u.setId( user_found.id() );
@@ -155,6 +163,12 @@ void Core::checkUserAuthentication( const Message& m )
     createPrivateChat( u );
   }
 
+  qDebug() << "Adding user" << u.path() << "to default chat";
+  Chat default_chat = defaultChat( false );
+  if( default_chat.addUser( u.id() ) )
+    setChat( default_chat );
+
+  c->setUserAuthenticated( true );
   c->setReadyForUse( u.id() );
   setConnectionReadyForUse( c );
 
@@ -162,6 +176,5 @@ void Core::checkUserAuthentication( const Message& m )
   emit userChanged( u );
 
   QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ), Settings::instance().showUserNickname() ? u.nickname() : u.name() );
-  dispatchSystemMessage( u.id(), sHtmlMsg );
-  QTimer::singleShot( 500, c, SLOT( sendLocalUserStatus() ) );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }

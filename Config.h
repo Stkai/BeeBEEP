@@ -37,7 +37,7 @@ const int PONG_TIMEOUT = 84 * 1000;
 const int PING_INTERVAL = 21 * 1000;
 const int WRITING_MESSAGE_TIMEOUT = 3 * 1000;
 const int BROADCAST_INTERVAL = 2 * 1000;
-const unsigned BROADCAST_PORT = 36475;
+const unsigned BROADCAST_DEFAULT_PORT = 36475;
 const unsigned LISTENER_DEFAULT_PORT = 6475;
 const int DATASTREAM_VERSION = QDataStream::Qt_4_0;
 const int FILE_TRANSFER_CONFIRM_TIMEOUT = 15 * 1000;
@@ -50,7 +50,6 @@ const int FILE_TRANSFER_CONFIRM_TIMEOUT = 15 * 1000;
 // Protocol
 #define ID_LOCAL_USER      1
 #define ID_DEFAULT_CHAT    2
-#define ID_ALL_CHATS       3
 #define ID_START           1000
 #define ID_SYSTEM_MESSAGE  10
 #define ID_BEEP_MESSAGE    11

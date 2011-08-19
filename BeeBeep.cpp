@@ -31,7 +31,7 @@
 #include "Settings.h"
 #include "Random.h"
 #include "Tips.h"
-#include "UserManager.h"
+
 
 
 BeeBeep::BeeBeep( QObject* parent )
@@ -41,7 +41,6 @@ BeeBeep::BeeBeep( QObject* parent )
   mp_peerManager = new PeerManager( this );
   mp_fileTransfer = new FileTransfer( this );
 
-  (void)chat( UserManager::instance().defaultChat(), true, false );
 
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( newConnection( Connection* ) ) );
@@ -56,7 +55,7 @@ bool BeeBeep::isWorking() const
 
 QString BeeBeep::id() const
 {
-  return UserManager::instance().localUser().nickname();
+  return Settings::instance().localUser().nickname();
 }
 
 void BeeBeep::start()
@@ -64,14 +63,16 @@ void BeeBeep::start()
 #if defined( BEEBEEP_DEBUG )
   qDebug() << Settings::instance().programName() << "started";
 #endif
-  if( !mp_listener->listen( QHostAddress::Any, UserManager::instance().localUser().hostPort() ) )
+  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
   {
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
+      /*
       dispatchSystemMessage( UserManager::instance().defaultChat(),
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
                                .arg( Settings::instance().programName() ) );
+                               */
       return;
     }
   }
@@ -79,17 +80,18 @@ void BeeBeep::start()
 #if defined( BEEBEEP_DEBUG )
   qDebug() << "Listen on port" << mp_listener->serverPort();
 #endif
-  UserManager::instance().setLocalhost( mp_listener->serverAddress(), mp_listener->serverPort() );
+  Settings::instance().setLocalUserHost( mp_listener->serverAddress(), mp_listener->serverPort() );
 
-  mp_peerManager->startBroadcasting( mp_listener->serverPort() );
+  mp_peerManager->startBroadcasting();
 
+  /*
   dispatchSystemMessage( UserManager::instance().defaultChat(),
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ) )
                          .arg( Settings::instance().programName() ) );
-
-  emit newUser( UserManager::instance().localUser() );
-  setUserStatus( UserManager::instance().localUser().id() );
+*/
+  emit newUser( Settings::instance().localUser() );
+  setUserStatus( Settings::instance().localUser().id() );
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
 }
@@ -105,8 +107,9 @@ void BeeBeep::stop()
     removeConnection( c );
   }
   m_peers.clear();
+  /*
   dispatchSystemMessage( UserManager::instance().defaultChat(),
-                         tr( "%1 You are disconnected.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ) ) );
+                         tr( "%1 You are disconnected.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ) ) );*/
 }
 
 Connection* BeeBeep::connection( VNumber user_id )
@@ -155,6 +158,7 @@ void BeeBeep::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 
 void BeeBeep::readyForUse()
 {
+
   Connection* c = qobject_cast<Connection*>( sender() );
   if( !c || hasConnection( c->peerAddress(), c->peerPort() ) )
     return;
@@ -163,10 +167,11 @@ void BeeBeep::readyForUse()
   connect( c, SIGNAL( isWriting( VNumber ) ), this, SIGNAL( userIsWriting( VNumber ) ) );
   connect( c, SIGNAL( newFileMessage( VNumber, const FileInfo& ) ), this, SLOT( checkFileMessage( VNumber, const FileInfo& ) ) );
   m_peers.append( c );
-  emit newUser( c->user() );
-  QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ) ).arg( UserManager::instance().chat( c->user() ) );
-  dispatchSystemMessage( UserManager::instance().defaultChat(), sHtmlMsg );
-  QTimer::singleShot( 500, c, SLOT( sendLocalUserStatus() ) );
+  //emit newUser( c->userId() );
+  //QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ) ).arg( UserManager::instance().chat( c->user() ) );
+  //dispatchSystemMessage( UserManager::instance().defaultChat(), sHtmlMsg );
+  //QTimer::singleShot( 500, c, SLOT( sendLocalUserStatus() ) );
+
 }
 
 void BeeBeep::connectionError( QAbstractSocket::SocketError )
@@ -183,12 +188,13 @@ void BeeBeep::disconnected()
 
 void BeeBeep::removeConnection( Connection *c )
 {
-  if( m_peers.contains( c->userId() ) )
+
+  //if( m_peers.contains( c->userId() ) )
   {
-    m_peers.remove( c->id() );
-    emit removeUser( c->user() );
-    QString sHtmlMsg = tr( "%1 %2 has left." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ).arg( UserManager::instance().chat( c->user() ) );
-    dispatchSystemMessage( UserManager::instance().chat( c->user() ), sHtmlMsg );
+    //m_peers.remove( c->id() );
+    //emit removeUser( c->user() );
+    //QString sHtmlMsg = tr( "%1 %2 has left." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ).arg( UserManager::instance().chat( c->user() ) );
+    //dispatchSystemMessage( UserManager::instance().chat( c->user() ), sHtmlMsg );
   }
   c->deleteLater();
 }
@@ -196,12 +202,13 @@ void BeeBeep::removeConnection( Connection *c )
 QList<User> BeeBeep::users() const
 {
   QList<User> user_list;
+  /*
   user_list.append( Settings::instance().localUser() );
   QList<Connection*> connection_list = m_peers.values();
   foreach( Connection *c, connection_list )
   {
     user_list.append( c->user() );
-  }
+  }*/
   return user_list;
 }
 
@@ -210,12 +217,13 @@ User BeeBeep::user( VNumber user_id ) const
 {
   if( user_id == Settings::instance().localUser().id() )
     return Settings::instance().localUser();
+  /*
   QList<Connection*> connection_list = m_peers.values();
   foreach( Connection* c, connection_list )
   {
     if( c->id() == user_id )
       return c->user();
-  }
+  }*/
   return User();
 }
 
@@ -227,7 +235,7 @@ Chat BeeBeep::chat( const QString& chat_name, bool create_if_need, bool read_all
     if( create_if_need )
     {
       Chat new_chat;
-      new_chat.setName( chat_name );
+      //new_chat.setName( chat_name );
       QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) ).arg( chat_name );
       ChatMessage cm( Settings::instance().localUser(), Protocol::instance().systemMessage( sHtmlMsg ) );
       new_chat.addMessage( cm );

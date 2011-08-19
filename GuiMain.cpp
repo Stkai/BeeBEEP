@@ -36,7 +36,7 @@
 GuiMain::GuiMain( QWidget *parent )
  : QMainWindow( parent )
 {
-  mp_beeBeep = new BeeBeep( this );
+  mp_core = new Core( this );
 
   setWindowIcon( QIcon( ":/images/beebeep.png") );
   mp_defaultChat = new GuiChat( this );
@@ -52,36 +52,36 @@ GuiMain::GuiMain( QWidget *parent )
   createToolBars();
   createStatusBar();
 
-  connect( mp_beeBeep, SIGNAL( newMessage( const QString&, const ChatMessage& ) ), this, SLOT( showMessage( const QString&, const ChatMessage& ) ) );
-  connect( mp_beeBeep, SIGNAL( newFileToDownload( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
-  connect( mp_beeBeep, SIGNAL( newUser( const User& ) ), this, SLOT( newUser( const User& ) ) );
-  connect( mp_beeBeep, SIGNAL( removeUser( const User& ) ), this, SLOT( removeUser( const User& ) ) );
-  connect( mp_beeBeep, SIGNAL( userIsWriting( VNumber ) ), this, SLOT( showWritingUser( VNumber ) ) );
-  connect( mp_beeBeep, SIGNAL( userNewStatus( const User& ) ), this, SLOT( showNewUserStatus( const User& ) ) );
-  connect( mp_beeBeep, SIGNAL( transferProgress( const User&, const FileInfo&, FileSizeType ) ), this, SLOT( showTransferProgress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
+  connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
+  connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
+  connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
+
+  connect( mp_core, SIGNAL( fileTransferProgress( const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_core, SIGNAL( fileTransferMessage( const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_defaultChat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
-  connect( mp_defaultChat, SIGNAL( writing( VNumber ) ), mp_beeBeep, SLOT( sendWritingMessage( VNumber ) ) );
+  connect( mp_defaultChat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
 
-  connect( mp_userList, SIGNAL( chatSelected( VNumber, const QString& ) ), this, SLOT( chatSelected( VNumber, const QString& ) ) );
+  connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
-  connect( mp_beeBeep, SIGNAL( transferMessage( const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( const User&, const FileInfo&, const QString& ) ) );
+  mp_defaultChat->setChat( mp_core->defaultChat( false ) );
 
-  mp_defaultChat->setChat( mp_beeBeep->defaultChat(), false );
   refreshTitle();
 }
 
 void GuiMain::refreshTitle()
 {
-  setWindowTitle( QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName() ).arg( mp_beeBeep->id() ).arg( BeeBeep::userStatusToString( Settings::instance().localUser().status() ) ) );
+  setWindowTitle( QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName() ).arg( Settings::instance().localUser().nickname() ).arg( Bee::userStatusToString( Settings::instance().localUser().status() ) ) );
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  if( !mp_beeBeep->isWorking() ||
-      QMessageBox::question( this, tr( "Bye Bye Bee" ), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
+  if( !mp_core->isConnected() ||
+      QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::Yes )
   {
 #ifndef Q_OS_SYMBIAN
@@ -90,8 +90,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
     Settings::instance().setUserListWidth( mp_userList->size().width() );
     Settings::instance().setShowMenuBar( mp_actMenuBar->isChecked() );
     Settings::instance().setShowToolBar( mp_actToolBar->isChecked() );
-    if( mp_beeBeep->isWorking() )
-      mp_beeBeep->stop();
+    if( mp_core->isConnected() )
+      mp_core->stop();
     e->accept();
   }
   else
@@ -100,9 +100,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
 void GuiMain::showNextChat()
 {
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Change chat view";
-#endif
+  qDebug() << "Show next chat in list with unread messages";
   if( !mp_userList->nextUserWithUnreadMessages() )
     statusBar()->showMessage( tr( "No new message available" ) );
 }
@@ -123,15 +121,15 @@ void GuiMain::selectNickname()
   Settings::instance().setLocalUser( local_user );
 }
 
-void GuiMain::startStopBeeBeep()
+void GuiMain::startStopCore()
 {
-  if( mp_beeBeep->isWorking() )
-    stopBeeBeep();
+  if( mp_core->isConnected() )
+    stopCore();
   else
-    startBeeBeep();
+    startCore();
 }
 
-void GuiMain::startBeeBeep()
+void GuiMain::startCore()
 {
   bool ok = false;
   QString pwd = QInputDialog::getText( this,
@@ -143,24 +141,25 @@ void GuiMain::startBeeBeep()
   if( !ok )
     return;
   Settings::instance().setPassword( pwd.simplified() );
-  mp_beeBeep->start();
+  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  mp_core->start();
   mp_actSearch->setEnabled( true );
   refreshTitle();
-  mp_actStartStopBeeBeep->setIcon( QIcon( ":/images/disconnect.png") );
-  mp_actStartStopBeeBeep->setText( tr( "&Disconnect" ) );
-  mp_actStartStopBeeBeep->setStatusTip( tr( "Disconnect from %1 network").arg( Settings::instance().programName() ) );
+  mp_actStartStopCore->setIcon( QIcon( ":/images/disconnect.png") );
+  mp_actStartStopCore->setText( tr( "&Disconnect" ) );
+  mp_actStartStopCore->setStatusTip( tr( "Disconnect from %1 network").arg( Settings::instance().programName() ) );
 }
 
-void GuiMain::stopBeeBeep()
+void GuiMain::stopCore()
 {
   mp_actSearch->setEnabled( false );
-  mp_defaultChat->setChat( mp_beeBeep->defaultChat(), true );
-  mp_beeBeep->stop();
+  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  mp_core->stop();
   mp_userList->clear();
   refreshTitle();
-  mp_actStartStopBeeBeep->setIcon( QIcon( ":/images/connect.png") );
-  mp_actStartStopBeeBeep->setText( tr( "&Connect" ) );
-  mp_actStartStopBeeBeep->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
+  mp_actStartStopCore->setIcon( QIcon( ":/images/connect.png") );
+  mp_actStartStopCore->setText( tr( "&Connect" ) );
+  mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
 }
 
 void GuiMain::showAbout()
@@ -174,9 +173,9 @@ void GuiMain::showAbout()
 
 void GuiMain::createActions()
 {
-  mp_actStartStopBeeBeep = new QAction( QIcon( ":/images/connect.png"), tr( "&Connect"), this );
-  mp_actStartStopBeeBeep->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
-  connect( mp_actStartStopBeeBeep, SIGNAL( triggered() ), this, SLOT( startStopBeeBeep() ) );
+  mp_actStartStopCore = new QAction( QIcon( ":/images/connect.png"), tr( "&Connect"), this );
+  mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
+  connect( mp_actStartStopCore, SIGNAL( triggered() ), this, SLOT( startStopCore() ) );
 
   mp_actSearch = new QAction( QIcon( ":/images/search.png"), tr( "Search &users..."), this );
   mp_actSearch->setStatusTip( tr( "Search the users outside the %1 local network").arg( Settings::instance().programName() ) );
@@ -235,7 +234,7 @@ void GuiMain::createMenus()
 
   /* Main Menu */
   menu = menuBar()->addMenu( tr( "&Main" ) );
-  menu->addAction( mp_actStartStopBeeBeep );
+  menu->addAction( mp_actStartStopCore );
   menu->addSeparator();
   menu->addAction( mp_actNickname );
   menu->addAction( mp_actSearch );
@@ -330,9 +329,9 @@ void GuiMain::createMenus()
   mp_menuStatus->setIcon( QIcon( ":/images/user-status.png" ) );
   for( int i = User::Online; i < User::NumStatus; i++ )
   {
-    act = mp_menuStatus->addAction( Bee::userStatusIcon( i ), BeeBeep::userStatusToString( i ), this, SLOT( statusSelected() ) );
+    act = mp_menuStatus->addAction( Bee::userStatusIcon( i ), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
     act->setData( i );
-    act->setStatusTip( tr( "Your status will be %1" ).arg( BeeBeep::userStatusToString( i ) ) );
+    act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
     act->setIconVisibleInMenu( true );
   }
 
@@ -341,7 +340,7 @@ void GuiMain::createMenus()
 
   /* Help Menu */
   menu = menuBar()->addMenu( "&?" );
-  act = menu->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), mp_beeBeep, SLOT( showTipOfTheDay() ) );
+  act = menu->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), this, SLOT( showTipOfTheDay() ) );
   act->setStatusTip( tr( "Show me the tip of the day" ) );
   menu->addSeparator();
   menu->addAction( mp_actAbout );
@@ -351,7 +350,7 @@ void GuiMain::createMenus()
 
 void GuiMain::createToolBars()
 {
-  mp_barMain->addAction( mp_actStartStopBeeBeep );
+  mp_barMain->addAction( mp_actStartStopCore );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actNickname );
   mp_barMain->addAction( mp_actSearch );
@@ -402,18 +401,22 @@ void GuiMain::toggleMenuBar( bool is_enabled )
     menuBar()->hide();
 }
 
-void GuiMain::newUser( const User& u )
+void GuiMain::checkUser( const User& u )
 {
   if( !u.isValid() )
+  {
+    qDebug() << "Invalid user found in GuiMain::checkUser( const User& u )";
     return;
-  mp_userList->setUser( u, 0 );
-}
+  }
 
-void GuiMain::removeUser( const User& u )
-{
-  if( !u.isValid() )
-    return;
-  mp_userList->removeUser( u );
+  Chat private_chat = mp_core->privateChatForUser( u.id() );
+  if( !private_chat.isValid() )
+    qDebug() << "Invalid chat found in GuiMain::checkUser( const User& u )";
+
+  if( u.status() == User::Offline )
+    mp_userList->removeUser( u );
+  else
+    mp_userList->setUser( u, private_chat.id(), private_chat.unreadMessages() );
 }
 
 void GuiMain::emoticonSelected()
@@ -430,9 +433,11 @@ void GuiMain::refreshUserList()
 
 void GuiMain::refreshChat()
 {
-  Chat c = mp_beeBeep->chat( mp_defaultChat->chatName(), false, true );
+  Chat c = mp_core->chat( mp_defaultChat->chatId(), true );
   if( c.isValid() )
     mp_defaultChat->setChat( c );
+  else
+    qWarning() << "Chat" << mp_defaultChat->chatId() << "not found. Unable to refresh it";
 }
 
 void GuiMain::selectFont()
@@ -502,37 +507,36 @@ void GuiMain::settingsChanged()
     refreshChat();
 }
 
-void GuiMain::chatSelected( VNumber user_id, const QString& chat_name )
+void GuiMain::showSelectedChat( VNumber chat_id )
 {
-  if( user_id == Settings::instance().localUser().id())
-  {
-    mp_defaultChat->setChat( mp_beeBeep->chat( UserManager::instance().defaultChat(), true, true ) );
-    return;
-  }
-  Chat c = mp_beeBeep->chat( chat_name, true, true );
-  mp_defaultChat->setChat( c );
+  Chat c = mp_core->chat( chat_id, true );
+  if( c.isValid() )
+    mp_defaultChat->setChat( c );
+  else
+    qWarning() << "Selected chat" << chat_id << "is not found";
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
-  mp_beeBeep->sendChatMessage( chat_id, msg );
+  int num_messages = mp_core->sendChatMessage( chat_id, msg );
+  qDebug() << num_messages << "messages sent";
 }
 
-void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )
+void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
-  bool is_current_chat = chat_name == mp_defaultChat->chatName();
+  bool is_current_chat = chat_id == mp_defaultChat->chatId();
 
-  if( !cm.isSystem() && !cm.isLocal() )
+  if( !cm.isSystem() && !cm.isFromLocalUser() )
   {
     QApplication::alert( this, 2000 );
     if( Settings::instance().beepOnNewMessageArrived() && !(isVisible() && is_current_chat) )
     {
-#if defined( BEEBEEP_DEBUG )
-      qDebug() << "New message arrived in background: play BEEP";
-#endif
-      QSound beep_sound( "beep.wav" );
+      qDebug() << "New message arrived in background: play BEEP sound";
       if( QSound::isAvailable() )
+      {
+        QSound beep_sound( "beep.wav" );
         beep_sound.play();
+      }
       else
         QApplication::beep();
     }
@@ -540,29 +544,31 @@ void GuiMain::showMessage( const QString& chat_name, const ChatMessage& cm )
 
   if( is_current_chat )
   {
-    Chat chat_showed = mp_beeBeep->chat( chat_name, true, true );
-    mp_defaultChat->appendMessage( chat_name, cm );
+    Chat chat_showed = mp_core->chat( chat_id, true );
+    mp_defaultChat->appendMessage( chat_id, cm );
     mp_defaultChat->setLastMessageTimestamp( chat_showed.lastMessageTimestamp() );
     statusBar()->clearMessage();
     return;
   }
-  Chat chat_hidden = mp_beeBeep->chat( chat_name, true, false );
-  mp_userList->setUnreadMessages( chat_name, chat_hidden.unreadMessages() );
+  Chat chat_hidden = mp_core->chat( chat_id, false );
+  mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
 }
 
 void GuiMain::saveChat()
 {
-  QString chat_name = mp_defaultChat->chatName();
   QString file_name = QFileDialog::getSaveFileName( this,
-                        tr( "Please select a file to save the messages of 'Chat with %1'" ).arg( chat_name ),
+                        tr( "Please select a file to save the messages of the chat." ),
                         Settings::instance().chatSaveDirectory(), "HTML Chat Files (*.htm)" );
-  if( file_name.isNull() )
+  if( file_name.isNull() || file_name.isEmpty() )
     return;
   QFileInfo file_info( file_name );
   Settings::instance().setChatSaveDirectory( file_info.absolutePath() );
-  Chat c = mp_beeBeep->chat( chat_name, false, true );
+  Chat c = mp_core->chat( mp_defaultChat->chatId(), false );
   if( !c.isValid() )
+  {
+    qDebug() << "Chat" << mp_defaultChat->chatId() << "is invalid. Unable to save it";
     return;
+  }
   QFile file( file_name );
   if( !file.open( QFile::WriteOnly ) )
   {
@@ -570,7 +576,7 @@ void GuiMain::saveChat()
       tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
     return;
   }
-  QString sHeader = QString( tr( "<html><body><b>Chat with '%1' saved in date %2.</b><br /><br />" ).arg( chat_name )
+  QString sHeader = QString( tr( "<html><body><b>Chat saved in date %1.</b><br /><br />" )
                              .arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleLongDate ) ) );
   QString sFooter = QString( "</body></html>" );
   file.write( sHeader.toLatin1() );
@@ -583,7 +589,7 @@ void GuiMain::saveChat()
 
 void GuiMain::searchUsers()
 {
-  if( !mp_beeBeep->isWorking() )
+  if( !mp_core->isConnected() )
     return;
 
   bool ok = false;
@@ -600,19 +606,15 @@ void GuiMain::searchUsers()
     return;
   }
 
-  mp_beeBeep->searchUsers( host_address );
+  // Message is showed only in default chat
+  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  mp_core->searchUsers( host_address );
 }
 
-void GuiMain::showWritingUser( VNumber user_id )
+void GuiMain::showWritingUser( const User& u )
 {
-  User u = UserManager::instance().user( user_id );
   QString msg = tr( "%1 is writing" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() );
   statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
-}
-
-void GuiMain::showNewUserStatus( const User& u )
-{
-  mp_userList->setUser( u, -1 );
 }
 
 void GuiMain::statusSelected()
@@ -620,7 +622,7 @@ void GuiMain::statusSelected()
   QAction* act = qobject_cast<QAction*>( sender() );
   if( !act )
     return;
-  mp_beeBeep->setLocalUserStatus( act->data().toInt() );
+  mp_core->setLocalUserStatus( act->data().toInt() );
   refreshTitle();
 }
 
@@ -631,21 +633,34 @@ void GuiMain::changeStatusDescription()
                            tr( "Please insert the new status description" ), QLineEdit::Normal, Settings::instance().localUser().statusDescription(), &ok );
   if( !ok || status_description.isNull() )
     return;
-  mp_beeBeep->setLocalUserStatusDescription( status_description );
+  mp_core->setLocalUserStatusDescription( status_description );
   refreshTitle();
 }
 
 void GuiMain::sendFile()
 {
-  if( mp_defaultChat->chatName() == UserManager::instance().defaultChat() )
+  bool ok = false;
+  QStringList user_string_list;
+  foreach( User u, mp_core->users() )
+    user_string_list << u.path();
+  QString user_path = QInputDialog::getItem( this, Settings::instance().programName(),
+                                             tr( "Please select the user to whom you would like to send a file."),
+                                             user_string_list, 0, false, &ok );
+  if( !ok )
+    return;
+
+  User user_selected = mp_core->user( user_path );
+  if( !user_selected.isValid() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Before select the user to whom you would like to send a file." ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "User %1 not found." ).arg( user_path ) );
     return;
   }
+
   QString file_path = QFileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().lastDirectorySelected() );
   if( file_path.isEmpty() || file_path.isNull() )
     return;
-  mp_beeBeep->sendFile( mp_defaultChat->chatName(), file_path );
+
+  mp_core->sendFile( user_selected, file_path );
 }
 
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
@@ -668,7 +683,7 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
     FileInfo file_info = fi;
     file_info.setName( qfile_info.fileName() );
     file_info.setPath( qfile_info.absoluteFilePath() );
-    mp_beeBeep->acceptFile( u, file_info );
+    mp_core->downloadFile( u, file_info );
   }
 }
 
@@ -680,19 +695,9 @@ void GuiMain::selectDownloadDirectory()
   Settings::instance().setDownloadDirectory( download_directory_path );
 }
 
-void GuiMain::showTransferProgress( const User& u, const FileInfo& fi, FileSizeType bytes )
+void GuiMain::showTipOfTheDay()
 {
-  mp_fileTransfer->setProgress( u, fi, bytes );
-  if( !mp_fileTransfer->isVisible() )
-  {
-    QString debug_progress = tr( "%1: %2 %3 of %4 (%5%)" ).arg( fi.name() )
-                               .arg( fi.transferType() == FileInfo::Upload ? tr( "upload" ) : tr( "download" ) )
-                               .arg( Bee::bytesToString( bytes ) )
-                               .arg( Bee::bytesToString( fi.size() ) )
-                               .arg( QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
-    statusBar()->showMessage( debug_progress, 1000 );
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << debug_progress;
-#endif
-  }
+  // Tip of the day is showed only in default chat
+  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  mp_core->showTipOfTheDay();
 }

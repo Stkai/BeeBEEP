@@ -12,7 +12,6 @@ SOURCES += Listener.cpp \
     Message.cpp \
     Protocol.cpp \
     User.cpp \
-    BeeBeep.cpp \
     GuiUserList.cpp \
     GuiMessageEdit.cpp \
     Emoticon.cpp \
@@ -38,7 +37,8 @@ SOURCES += Listener.cpp \
     CoreConnection.cpp \
     CoreUser.cpp \
     CoreChat.cpp \
-    CoreDispatcher.cpp
+    CoreDispatcher.cpp \
+    CoreFileTransfer.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -49,7 +49,6 @@ HEADERS += sym_iap_util.h \
     Protocol.h \
     User.h \
     Version.h \
-    BeeBeep.h \
     GuiUserList.h \
     GuiMessageEdit.h \
     Emoticon.h \

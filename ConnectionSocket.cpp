@@ -26,7 +26,7 @@
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
-  : QTcpSocket( parent ), m_userId( 0 ), m_blockSize( 0 ), m_isHelloSent( false )
+  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_isUserAuthenticated( false )
 {
   connect( this, SIGNAL( connected() ), this, SLOT( sendHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
@@ -56,7 +56,7 @@ void ConnectionSocket::readBlock()
 
   qDebug() << "ConnectionSocket read from" << peerAddress().toString() << peerPort() << "the byte array:" << decrypted_byte_array;
 
-  if( m_userId == 0 )
+  if( !m_isUserAuthenticated )
     checkHelloMessage( decrypted_byte_array );
   else
     emit dataReceived( decrypted_byte_array );

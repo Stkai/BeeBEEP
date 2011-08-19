@@ -37,6 +37,8 @@ public:
 
   bool sendData( const QByteArray& );
 
+  inline void setUserAuthenticated( bool );
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const Message& );
@@ -51,8 +53,13 @@ protected:
 private:
   DATA_BLOCK_SIZE m_blockSize;
   bool m_isHelloSent;
+  bool m_isUserAuthenticated;
 
 };
+
+
+// Inline Functions
+inline void ConnectionSocket::setUserAuthenticated( bool new_value ) { m_isUserAuthenticated = new_value; }
 
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

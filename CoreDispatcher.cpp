@@ -22,12 +22,13 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Core.h"
+#include "Protocol.h"
 
 
 void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 {
-  Chat c = m.hasFlag( Message::Private ) ? privateChatForUser( from_user_id ) : defaultChat();
-  ChatMessage cm( u, m );
+  Chat c = m.hasFlag( Message::Private ) ? privateChatForUser( from_user_id ) : defaultChat( false );
+  ChatMessage cm( from_user_id, m );
   c.addMessage( cm );
   c.addUnreadMessage();
   c.setLastMessageTimestamp( m.timestamp() );
@@ -35,28 +36,26 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   emit chatMessage( c.id(), cm );
 }
 
-void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg )
+void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt )
 {
   Message m = Protocol::instance().systemMessage( msg );
   ChatMessage cm( from_user_id, m );
-  if( chat_id == ID_ALL_CHATS )
+
+  switch( dt )
   {
+  case DispatchToAll:
     dispatchToAllChats( cm );
-    return;
+    break;
+  case DispatchToAllChatsWithUser:
+    dispatchToAllChatsWithUser( cm, from_user_id );
+    break;
+  case DispatchToChat:
+    dispatchToChat( cm, chat_id );
+    break;
+  default:
+    qWarning() << "Invalid dispatch type found while dispatching a system message";
+    dispatchToChat( cm, ID_DEFAULT_CHAT );
   }
-
-  Chat c = privateChatForUser( from_user_id );
-  c.addMessage( cm );
-  setChat( c );
-  emit chatMessage( c.id(), cm );
-
-  if( from_user_id == chat_id )
-    return;
-
-  c = defaultChat();
-  c.addMessage( cm );
-  setChat( c );
-  emit chatMessage( c.id(), cm );
 }
 
 void Core::dispatchToAllChats( const ChatMessage& cm )
@@ -66,6 +65,35 @@ void Core::dispatchToAllChats( const ChatMessage& cm )
   {
     (*it).addMessage( cm );
     emit chatMessage( (*it).id(), cm );
+    ++it;
+  }
+}
+
+void Core::dispatchToAllChatsWithUser( const ChatMessage& cm, VNumber user_id )
+{
+  QList<Chat>::iterator it = m_chats.begin();
+  while( it != m_chats.end() )
+  {
+    if( (*it).hasUser( user_id ) )
+    {
+      (*it).addMessage( cm );
+      emit chatMessage( (*it).id(), cm );
+    }
+    ++it;
+  }
+}
+
+void Core::dispatchToChat( const ChatMessage& cm, VNumber chat_id )
+{
+  QList<Chat>::iterator it = m_chats.begin();
+  while( it != m_chats.end() )
+  {
+    if( (*it).id() == chat_id )
+    {
+      (*it).addMessage( cm );
+      emit chatMessage( (*it).id(), cm );
+      return;
+    }
     ++it;
   }
 }

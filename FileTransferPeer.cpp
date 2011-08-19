@@ -22,48 +22,39 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "FileTransferPeer.h"
+#include "Protocol.h"
 
 
 FileTransferPeer::FileTransferPeer( VNumber peer_id, QObject *parent )
-  : QObject( parent ), m_id( peer_id ), m_fileInfo( 0, FileInfo::Upload ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ),
+  : QObject( parent ), m_id( peer_id ), m_user(), m_fileInfo( 0, FileInfo::Upload ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 )
 {
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Peer" << m_id << "created for file" << m_fileInfo.name();
-#endif
+  qDebug() << "Peer" << m_id << "created for transfer file";
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
   connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkData( const QByteArray& ) ) );
-  connect( &m_socket, SIGNAL( userAuthenticated() ), this, SIGNAL( userAuthenticated() ) );
+  connect( &m_socket, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthentication( const Message& ) ) );
 }
 
 void FileTransferPeer::cancelTransfer()
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << m_fileInfo.name() << "transfer cancelled";
-#endif
   m_state = FileTransferPeer::Cancelled;
-  emit message( m_socket.user(), m_fileInfo, tr( "transfer cancelled" ) );
+  emit message( m_user, m_fileInfo, tr( "transfer cancelled" ) );
   closeAll();
 }
 
 void FileTransferPeer::closeAll()
 {
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Making cleanup";
-#endif
+  qDebug() << "Making cleanup of peer" << m_id;
   if( m_socket.isOpen() )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Closing socket";
-#endif
     m_socket.flush();
     m_socket.close();
   }
   if( m_file.isOpen() )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Closing file";
-#endif
     m_file.flush();
     m_file.close();
   }
@@ -73,17 +64,13 @@ void FileTransferPeer::closeAll()
 void FileTransferPeer::setFileInfo( const FileInfo& fi )
 {
   m_fileInfo = fi;
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Init the file" << m_file.fileName();
-#endif
   m_file.setFileName( m_fileInfo.path() );
+  qDebug() << "Init the file" << m_file.fileName();
 }
 
 void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Setup connection with socket" << socket_descriptor;
-#endif
   m_state = FileTransferPeer::Request;
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;
@@ -91,34 +78,26 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
   if( socket_descriptor )
   {
     m_socket.setSocketDescriptor( socket_descriptor );
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Using socket descriptor" << socket_descriptor;
-#endif
   }
   else
   {
     m_socket.connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
-#endif
   }
 }
 
 void FileTransferPeer::setTransferCompleted()
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << m_fileInfo.name() << "transfer completed";
-#endif
   m_state = FileTransferPeer::Completed;
-  emit message( m_socket.user(), m_fileInfo, tr( "transfer completed" ) );
+  emit message( m_user, m_fileInfo, tr( "transfer completed" ) );
   closeAll();
 }
 
 void FileTransferPeer::socketError( QAbstractSocket::SocketError se )
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Connection error id" << se << ":" << m_socket.errorString();
-#endif
   setError( tr( "connection error (%1 - %2)" ).arg( QString::number( se ) ).arg( m_socket.errorString()) );
 }
 
@@ -127,11 +106,36 @@ void FileTransferPeer::setError( const QString& str_err )
   m_state = FileTransferPeer::Error;
   QString s = tr( "transfer error (%1)" ).arg( str_err );
   qWarning() << s;
-  emit message( m_socket.user(), m_fileInfo, str_err );
+  emit message( m_user, m_fileInfo, str_err );
   closeAll();
 }
 
 void FileTransferPeer::showProgress()
 {
-  emit progress( m_socket.user(), m_fileInfo, m_totalBytesTransferred );
+  emit progress( m_user, m_fileInfo, m_totalBytesTransferred );
+}
+
+void FileTransferPeer::checkAuthentication( const Message& m )
+{
+  ConnectionSocket* c = qobject_cast<ConnectionSocket*>( sender() );
+  if( !c )
+  {
+    qWarning() << "FileTransferPeer is unable to check authentication for an invalid connection socket object";
+    closeAll();
+    return;
+  }
+
+  User u = Protocol::instance().createUser( m, c->peerAddress(), c->peerPort() );
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to create a new user from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
+    c->abort();
+    closeAll();
+    return;
+  }
+
+  m_user = u;
+  c->setUserAuthenticated( true );
+
+  emit userAuthenticated();
 }

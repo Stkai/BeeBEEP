@@ -21,16 +21,20 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
+#include "Connection.h"
 #include "Core.h"
+#include "PeerManager.h"
+#include "Protocol.h"
+#include "Settings.h"
 
 
-User Core::user( const QString& user_name, const QString& user_nick, const QHostAddress& user_address, int user_port ) const
+User Core::user( const QString& user_path ) const
 {
   QList<User>::const_iterator it = m_users.begin();
   while( it != m_users.end() )
   {
-    if( user_port == (*it).hostPort() && (*it).hostAddress() == user_address &&
-        user_name == (*it).name() && user_nick == (*it).nickname() )
+    if( user_path == (*it).path() )
       return *it;
     ++it;
   }
@@ -59,16 +63,15 @@ void Core::setUser( const User& u )
       (*it) = u;
       return;
     }
-    ++it
+    ++it;
   }
   m_users.append( u );
 }
 
-void BeeBeep::setLocalUserStatus( int new_status )
+void Core::setLocalUserStatus( int new_status )
 {
   if( Settings::instance().localUser().status() == new_status )
     return;
-
   User u = Settings::instance().localUser();
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
@@ -80,7 +83,6 @@ void Core::setLocalUserStatusDescription( const QString& new_status_description 
 {
   if( Settings::instance().localUser().statusDescription() == new_status_description )
     return;
-
   User u = Settings::instance().localUser();
   u.setStatusDescription( new_status_description );
   Settings::instance().setLocalUser( u );
@@ -96,25 +98,23 @@ void Core::setUserStatus( const User& u )
   else
     sHtmlMsg += (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + QString( " " ) + tr( "is" );
 
-   sHtmlMsg += QString( " %2%3." ).arg( userStatusToString( u.status() ) )
+   sHtmlMsg += QString( " %2%3." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
 
-  dispatchSystemMessage( privateChatForUser( u.id() ).id(), u.id(), sHtmlMsg );
-  emit( userNewStatus( u ) );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  emit userChanged( u );
 }
 
-static const char* UserStatusToString[] =
+void Core::searchUsers( const QHostAddress& host_address )
 {
-  QT_TRANSLATE_NOOP( "User", "offline" ),
-  QT_TRANSLATE_NOOP( "User", "online" ),
-  QT_TRANSLATE_NOOP( "User", "busy" ),
-  QT_TRANSLATE_NOOP( "User", "away" )
-};
+  mp_peerManager->sendDatagramToHost( host_address );
+  QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." ).arg( Bee::iconToHtml( ":/images/search.png", "*b*" ) ).arg( host_address.toString() );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+}
 
-QString BeeBeep::userStatusToString( int user_status )
+void Core::sendUserStatus()
 {
-  if( user_status < 0 || user_status >= User::NumStatus )
-    return "";
-  else
-    return tr( UserStatusToString[ user_status ] );
+  QByteArray user_status_message = Protocol::instance().localUserStatusMessage();
+  foreach( Connection *c, m_connections )
+    c->sendData( user_status_message );
 }

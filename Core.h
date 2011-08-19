@@ -24,13 +24,10 @@
 #ifndef BEEBEEP_CORE_H
 #define BEEBEEP_CORE_H
 
-#include "Config.h"
 #include "Chat.h"
-#include "Connection.h"
-#include "User.h"
-class Listener;
+#include "Listener.h"
+#include "FileTransfer.h"
 class PeerManager;
-class FileTransfer;
 
 
 class Core : public QObject
@@ -40,21 +37,40 @@ class Core : public QObject
 public:
   explicit Core( QObject* parent = 0 );
 
-  void sendChatMessage( VNumber chat_id, const QString& );
+  inline bool isConnected() const;
+  bool start();
+  void stop();
+
+  inline const QList<User>& users() const;
+
+  /* CoreUser */
+  User user( const QString& user_path ) const;
+  void searchUsers( const QHostAddress& );
+  void setLocalUserStatus( int );
+  void setLocalUserStatusDescription( const QString& );
 
   /* CoreChat */
+  int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
   inline Chat defaultChat( bool read_all_messages  );
   Chat chat( VNumber, bool read_all_messages );
+  Chat privateChatForUser( VNumber ) const;
+  void showTipOfTheDay();
+
+  /* CoreFileTransfer */
+  bool sendFile( const User&, const QString& file_path );
+  void downloadFile( const User&, const FileInfo& );
+
+public slots:
+  /* CoreChat */
+  void sendWritingMessage( VNumber );
 
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );
   void fileDownloadRequest( const User&, const FileInfo& );
   void userIsWriting( const User& );
   void userChanged( const User& );
-  void transferProgress( const User&, const FileInfo&, FileSizeType );
-
-public slots:
-  void sendWritingMessage( VNumber );
+  void fileTransferProgress( const User&, const FileInfo&, FileSizeType );
+  void fileTransferMessage( const User&, const FileInfo&, const QString& );
 
 protected slots:
   /* CoreConnection */
@@ -67,12 +83,15 @@ protected slots:
   /* CoreParser */
   void parseMessage( VNumber, const Message& );
 
+  /* CoreFileTransfer */
+  void checkFileTransferMessage( const User&, const FileInfo&, const QString& );
+
 protected:
   /* CoreConnection */
   Connection* connection( VNumber );
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
-  void setConnectionReadyForUse( Connection*, const User& );
+  void setConnectionReadyForUse( Connection* );
 
   /* CoreParser */
   void parseUserMessage( const User&, const Message& );
@@ -80,21 +99,24 @@ protected:
   void parseFileMessage( const User&, const Message& );
 
   /* CoreUser */
-  User user( const QString& user_name, const QString& user_nick, const QHostAddress&, int ) const;
   User user( VNumber ) const;
   void setUser( const User& );
+  void setUserStatus( const User& );
+  void sendUserStatus();
 
   /* CoreChat */
   void createDefaultChat();
   void createPrivateChat( const User& );
-  Chat privateChatForUser( VNumber ) const;
   Chat chat( VNumber ) const;
   void setChat( const Chat& );
 
   /* CoreDispatcher */
-  void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg );
+  enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat };
+  void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType );
   void dispatchChatMessageReceived( VNumber from_user_id, const Message& m );
   void dispatchToAllChats( const ChatMessage& );
+  void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );
+  void dispatchToChat( const ChatMessage&, VNumber chat_id );
 
 private:
   QList<User> m_users;
@@ -108,7 +130,8 @@ private:
 
 
 // Inline Functions
-inline Chat Core::defaultChat( bool read_all_messages ) const { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
-
+inline Chat Core::defaultChat( bool read_all_messages ) { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
+inline bool Core::isConnected() const { return mp_listener->isListening(); }
+inline const QList<User>& Core::users() const { return m_users; }
 
 #endif // BEEBEEP_CLIENT_H
