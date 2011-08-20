@@ -28,6 +28,12 @@
 #include "Settings.h"
 
 
+void Core::validateUserForFileTransfer( const User& user_to_check )
+{
+  User user_connected = user( user_to_check.path() );
+  mp_fileTransfer->validateUser( user_to_check, user_connected );
+}
+
 void Core::downloadFile( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
@@ -41,7 +47,7 @@ void Core::checkFileTransferMessage( const User& u, const FileInfo& fi, const QS
 {
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
-                         fi.isDownload() ? tr( "from") : tr( "to" ), Settings::instance().showUserNickname() ? u.nickname() : u.name(), msg ),
+                         fi.isDownload() ? tr( "from") : tr( "to" ), u.path(), msg ),
                          DispatchToAllChatsWithUser );
   emit fileTransferMessage( u, fi, msg );
 }

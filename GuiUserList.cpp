@@ -123,8 +123,8 @@ void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_me
     item->setData( UserId, u.id() );
     item->setData( Username, u.name() );
     item->setData( UserNickname, u.nickname() );
-    item->setData( UserHostAddress, u.hostAddress().toString() );
-    item->setData( UserHostPort, u.hostPort() );
+    item->setData( UserHostAddress, u.peerAddress().toString() );
+    item->setData( UserHostPort, u.listenerPort() );
     item->setData( PrivateChatId, private_chat_id );
   }
   item->setData( UserStatus, u.status() );

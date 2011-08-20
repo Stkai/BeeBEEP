@@ -117,25 +117,36 @@ void FileTransferPeer::showProgress()
 
 void FileTransferPeer::checkAuthentication( const Message& m )
 {
-  ConnectionSocket* c = qobject_cast<ConnectionSocket*>( sender() );
-  if( !c )
-  {
-    qWarning() << "FileTransferPeer is unable to check authentication for an invalid connection socket object";
-    closeAll();
-    return;
-  }
-
-  User u = Protocol::instance().createUser( m, c->peerAddress(), c->peerPort() );
+  qDebug() << "File transfer is checking the authentication";
+  User u = Protocol::instance().createUser( m, m_socket.peerAddress(), m_socket.peerPort() );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to create a new user from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
-    c->abort();
+    qWarning() << "Unable to create a new user from the message arrived from:" << m_socket.peerAddress().toString() << m_socket.peerPort();
+    m_socket.abort();
     closeAll();
     return;
   }
 
   m_user = u;
-  c->setUserAuthenticated( true );
+  qDebug() << "FileTransfer has received connection (must be validated) from" << m_user.path();
+  emit userConnected( m_user );
+}
 
+void FileTransferPeer::setUserAuthenticated( const User& u )
+{
+  if( !u.isValid() )
+  {
+    qWarning() << m_user.path() << "is not authenticated. File transfer aborted";
+    m_socket.abort();
+    closeAll();
+    return;
+  }
+
+  m_user.setId( u.id() );
+  m_user.setColor( u.color() );
+
+  qDebug() << "File transfer has confirmed the user" << m_user.path();
+  m_socket.setUserAuthenticated( true );
+  qDebug() << "Authentication completed";
   emit userAuthenticated();
 }

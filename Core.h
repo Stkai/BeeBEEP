@@ -88,6 +88,7 @@ protected slots:
 
   /* CoreFileTransfer */
   void checkFileTransferMessage( const User&, const FileInfo&, const QString& );
+  void validateUserForFileTransfer( const User& );
 
 protected:
   /* CoreConnection */

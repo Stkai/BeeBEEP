@@ -179,13 +179,14 @@ QByteArray Protocol::pongMessage() const
 
 QByteArray Protocol::broadcastMessage() const
 {
-  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().hostPort() ) );
+  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().listenerPort() ) );
   return fromMessage( m );
 }
 
 QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
+  data_list << QString::number( Settings::instance().localUser().listenerPort() );
   data_list << Settings::instance().localUser().name();
   data_list << Settings::instance().localUser().nickname();
   data_list << QString::number( Settings::instance().localUser().status() );
@@ -216,17 +217,26 @@ bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
   return false;
 }
 
-User Protocol::createUser( const Message& hello_message, const QHostAddress& host_address, int host_port )
+User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address, int peer_port )
 {
  /* Read User Field Data */
   QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
-  if( sl.size() < 4 )
+  if( sl.size() < 5 )
+  {
+    qWarning() << "HELLO message has not 5 field data but" << sl.size();
     return User();
-  QString user_name = sl.at( 0 );
+  }
 
+  int listener_port = sl.at( 0 ).toInt();
+  sl.removeFirst();
+
+  QString user_name = sl.at( 0 );
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
+  {
+    qWarning() << "HELLO message use invalid password. Cannot authenticate the user.";
     return User();
+  }
 
   sl.removeFirst();
   QString user_nickname = sl.at( 0 );
@@ -242,8 +252,9 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& hos
   User u( newId() );
   u.setName( user_name );
   u.setNickname( user_nickname );
-  u.setHostAddress( host_address );
-  u.setHostPort( host_port );
+  u.setPeerAddress( peer_address );
+  u.setPeerPort( peer_port );
+  u.setListenerPort( listener_port );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
   return u;

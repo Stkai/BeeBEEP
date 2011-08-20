@@ -63,8 +63,9 @@ void Settings::setPassword( const QString& new_value )
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
-  m_localUser.setHostAddress( host_address );
-  m_localUser.setHostPort( host_port );
+  m_localUser.setPeerAddress( host_address );
+  m_localUser.setPeerPort( host_port );
+  m_localUser.setListenerPort( host_port );
 }
 
 namespace
@@ -108,7 +109,8 @@ void Settings::load()
   m_localUser.setNickname( sets.value( "LocalNickname", "" ).toString() );
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_localUser.setHostPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
+  m_localUser.setListenerPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
+  m_localUser.setPeerPort( m_localUser.listenerPort() );
   m_broadcastPort = sets.value( "LocalBroadcastPort", BROADCAST_DEFAULT_PORT ).toInt();
   sets.endGroup();
   sets.beginGroup( "Geometry" );
@@ -162,7 +164,7 @@ void Settings::save()
   sets.setValue( "LocalNickname", m_localUser.nickname() );
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
-  sets.setValue( "LocalListenerPort", m_localUser.hostPort() );
+  sets.setValue( "LocalListenerPort", m_localUser.listenerPort() );
   sets.setValue( "LocalBroadcastPort", m_broadcastPort );
   sets.setValue( "ShowAddressIp", m_showUserIp );
   sets.setValue( "ShowNickname", m_showUserNickname );

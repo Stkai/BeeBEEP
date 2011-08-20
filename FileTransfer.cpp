@@ -127,6 +127,7 @@ void FileTransfer::incomingConnection( int socketDescriptor )
 {
   FileTransferUpload *upload_peer = new FileTransferUpload( newFileId(), this );
 
+  connect( upload_peer, SIGNAL( userConnected( const User& ) ), this, SIGNAL( userConnected( const User& ) ) );
   connect( upload_peer, SIGNAL( transferFinished() ), this, SLOT( stopUpload() ) );
   connect( upload_peer, SIGNAL( fileTransferRequest( VNumber, const QByteArray& ) ), this, SLOT( checkFileTransferRequest( VNumber, const QByteArray& ) ) );
   connect( upload_peer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( message( const User&, const FileInfo&, const QString& ) ) );
@@ -136,12 +137,21 @@ void FileTransfer::incomingConnection( int socketDescriptor )
   upload_peer->setConnectionDescriptor( socketDescriptor );
 }
 
+void FileTransfer::validateUser( const User& user_to_check, const User& user_connected )
+{
+  qDebug() << "FileTransfer validate user" << user_to_check.path() << "with" << user_connected.path();
+  QList<FileTransferPeer*>::iterator it = m_peers.begin();
+  while( it != m_peers.end() )
+  {
+    if( (*it)->userId() == user_to_check.id() )
+      (*it)->setUserAuthenticated( user_connected );
+    ++it;
+  }
+}
+
 void FileTransfer::checkFileTransferRequest( VNumber file_id, const QByteArray& file_password )
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Checking file request:" << file_id << file_password;
-#endif
-
   FileTransferUpload *upload_peer = qobject_cast<FileTransferUpload*>( sender() );
   if( !upload_peer )
   {

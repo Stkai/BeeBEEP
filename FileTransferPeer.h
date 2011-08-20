@@ -46,7 +46,10 @@ public:
   inline const FileInfo& fileInfo() const;
 
   inline VNumber id() const;
+  inline VNumber userId() const;
   void cancelTransfer();
+
+  void setUserAuthenticated( const User& );
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );
@@ -59,6 +62,7 @@ signals:
   void message( const User&, const FileInfo&, const QString& );
   void progress( const User&, const FileInfo&, FileSizeType );
   void transferFinished();
+  void userConnected( const User& );
   void userAuthenticated();
 
 protected:
@@ -82,6 +86,7 @@ protected:
 
 // Inline Functions
 inline VNumber FileTransferPeer::id() const { return m_id; }
+inline VNumber FileTransferPeer::userId() const { return m_user.id(); }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 
 

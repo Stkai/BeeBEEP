@@ -113,7 +113,7 @@ void Core::closeConnection( Connection *c )
   int number_of_connection_pointers = m_connections.removeAll( c );
   if( number_of_connection_pointers <= 0 )
   {
-    qDebug() << "Connection already removed";
+    qDebug() << "Connection pointer is not present";
     return;
   }
 

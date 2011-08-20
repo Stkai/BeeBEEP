@@ -45,10 +45,12 @@ public:
   inline const QString& name() const;
   inline void setNickname( const QString& );
   inline const QString& nickname() const;
-  inline void setHostAddress( const QHostAddress& );
-  inline const QHostAddress& hostAddress() const;
-  inline void setHostPort( int );
-  inline int hostPort() const;
+  inline void setPeerAddress( const QHostAddress& );
+  inline const QHostAddress& peerAddress() const;
+  inline void setPeerPort( int );
+  inline int peerPort() const;
+  inline void setListenerPort( int );
+  inline int listenerPort() const;
   inline void setStatus( int );
   inline int status() const;
   inline void setStatusDescription( const QString& );
@@ -62,8 +64,9 @@ private:
   VNumber m_id;
   QString m_name;
   QString m_nickname;
-  QHostAddress m_hostAddress;
-  int m_hostPort;
+  QHostAddress m_peerAddress;
+  int m_peerPort;
+  int m_listenerPort;
   int m_status;
   QString m_statusDescription;
   QString m_color;
@@ -80,16 +83,18 @@ inline void User::setName( const QString& new_value ) { m_name = new_value; }
 inline const QString& User::name() const { return m_name; }
 inline void User::setNickname( const QString& new_value ) { m_nickname = new_value; }
 inline const QString& User::nickname() const { return m_nickname; }
-inline void User::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
-inline const QHostAddress& User::hostAddress() const { return m_hostAddress; }
-inline void User::setHostPort( int new_value ) { m_hostPort = new_value; }
-inline int User::hostPort() const { return m_hostPort; }
+inline void User::setPeerAddress( const QHostAddress& new_value ) { m_peerAddress = new_value; }
+inline const QHostAddress& User::peerAddress() const { return m_peerAddress; }
+inline void User::setPeerPort( int new_value ) { m_peerPort = new_value; }
+inline int User::peerPort() const { return m_peerPort; }
+inline void User::setListenerPort( int new_value ) { m_listenerPort = new_value; }
+inline int User::listenerPort() const { return m_listenerPort; }
 inline void User::setStatus( int new_value ) { m_status = new_value; }
 inline int User::status() const { return m_status; }
 inline void User::setStatusDescription( const QString& new_value ) { m_statusDescription = new_value; }
 inline const QString& User::statusDescription() const { return m_statusDescription; }
 inline void User::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& User::color() const { return m_color; }
-inline QString User::path() const { return QString( "%1 (%2@%3:%4)" ).arg( m_nickname, m_name, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
+inline QString User::path() const { return QString( "%1 (%2@%3:%4)" ).arg( m_nickname, m_name, m_peerAddress.toString(), QString::number( m_listenerPort ) ); }
 
 #endif // BEEBEEP_USER_H
