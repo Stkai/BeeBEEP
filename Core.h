@@ -57,6 +57,7 @@ public:
   void showTipOfTheDay();
   QString chatMessageToText( const ChatMessage& );
   QString chatMessagesToText( const Chat& );
+  QString chatUsers( const Chat&, const QString& user_separator );
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );

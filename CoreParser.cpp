@@ -30,6 +30,7 @@
 
 void Core::parseMessage( VNumber user_id, const Message& m )
 {
+  qDebug() << "Parsing message received from user" << user_id;
   User u = user( user_id );
   if( !u.isValid() )
   {
@@ -99,5 +100,6 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
 void Core::parseChatMessage( const User& u, const Message& m )
 {
+  qDebug() << "Chat message received from user" << u.path();
   dispatchChatMessageReceived( u.id(), m );
 }

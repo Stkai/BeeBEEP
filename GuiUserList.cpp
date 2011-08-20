@@ -29,8 +29,8 @@
 GuiUserList::GuiUserList( QWidget* parent )
   : QListWidget( parent )
 {
-  connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(userDoubleClicked(QListWidgetItem*)));
-  connect( this, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(showUserInfo(QListWidgetItem*)));
+  connect( this, SIGNAL( itemDoubleClicked( QListWidgetItem* ) ), this, SLOT( userDoubleClicked( QListWidgetItem* ) ) );
+  connect( this, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( showUserInfo( QListWidgetItem* ) ) );
 }
 
 QSize GuiUserList::sizeHint() const
@@ -55,7 +55,10 @@ void GuiUserList::updateItem( QListWidgetItem* item )
               ( Settings::instance().showUserNickname() ? item->data( UserNickname ).toString() : item->data( Username ).toString() );
 
   if( !is_local_user && ( user_status == 0 || Settings::instance().showUserIp() ) )
-    s += QString( "<%1@%2:3>" ).arg( item->data( Username ).toString() ).arg( item->data( UserHostAddress ).toString() ).arg( item->data( UserHostPort ).toInt() );
+    s += QString( "<%1@%2:3>" ).arg(
+          item->data( Username ).toString(),
+          item->data( UserHostAddress ).toString(),
+          QString::number( item->data( UserHostPort ).toInt() ) );
 
   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
@@ -87,14 +90,27 @@ QListWidgetItem* GuiUserList::userItem( VNumber user_id )
   return 0;
 }
 
-void GuiUserList::setUnreadMessages( VNumber user_id, int n )
+QListWidgetItem* GuiUserList::chatItem( VNumber chat_id )
 {
-  QListWidgetItem* item = userItem( user_id );
+  QList<QListWidgetItem*> item_list = findItems( " ", Qt::MatchContains );
+  foreach( QListWidgetItem* item, item_list )
+  {
+    if( Bee::qVariantToVNumber( item->data( PrivateChatId ) ) == chat_id )
+      return item;
+  }
+  return 0;
+}
+
+void GuiUserList::setUnreadMessages( VNumber chat_id, int n )
+{
+  QListWidgetItem* item = chatItem( chat_id );
   if( item )
   {
     item->setData( UnreadMessages, n );
     updateItem( item );
   }
+  else
+    qWarning() << "Unable to set unread messages in chat" << chat_id;
 }
 
 void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_messages )
@@ -102,6 +118,7 @@ void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_me
   QListWidgetItem* item = userItem( u.id() );
   if( !item )
   {
+    qDebug() << "Create new user item in GuiUserList";
     item = new QListWidgetItem( this );
     item->setData( UserId, u.id() );
     item->setData( Username, u.name() );
@@ -126,33 +143,42 @@ void GuiUserList::removeUser( const User& u )
     item->setData( UserStatus, User::Offline );
     updateItem( item );
   }
+  else
+    qWarning() << "Unable to set user" << u.id() << "offline in GuiUserList";
 }
 
 void GuiUserList::showUserInfo( QListWidgetItem* item )
 {
   if( !item )
+  {
+    qWarning() << "Item for show user info not found in GuiUserList";
     return;
+  }
   QString sInfo;
   if( Bee::qVariantToVNumber( item->data( UserId ) ) == Settings::instance().localUser().id() )
-    sInfo = tr( "Chat with all users connected" );
+    sInfo = tr( "Chat with all connected users" );
   else
     sInfo = tr( "Chat with %1@%2:%3" )
-              .arg( item->data( UserNickname ).toString() )
-              .arg( item->data( UserHostAddress ).toString() )
-              .arg( item->data( UserHostPort ).toInt() );
+              .arg( item->data( UserNickname ).toString(), item->data( UserHostAddress ).toString(),
+              QString::number( item->data( UserHostPort ).toInt() ) );
   emit stringToShow( sInfo, 6000 );
 }
 
 void GuiUserList::userDoubleClicked( QListWidgetItem* item )
 {
   if( !item )
+  {
+    qWarning() << "Item double clicked not found in GuiUserList";
     return;
+  }
   item->setData( UnreadMessages, 0 ); // read all messages
   updateItem( item );
-  if( item->data( PrivateChatId ).toULongLong() > 0 )
-    emit chatSelected( item->data( PrivateChatId ).toULongLong() );
+  VNumber chat_id = Bee::qVariantToVNumber( item->data( PrivateChatId ) );
+  qDebug() << "Item double clicked: chat" << chat_id << "of the user" <<  Bee::qVariantToVNumber( item->data( UserId ) ) <<"selected";
+  if( chat_id > 0 )
+    emit chatSelected( chat_id );
   else
-    qWarning() << "GuiUserList has invalid chat stored in item";
+    qWarning() << "GuiUserList has invalid chat id stored in item";
 }
 
 bool GuiUserList::nextUserWithUnreadMessages()
@@ -162,6 +188,7 @@ bool GuiUserList::nextUserWithUnreadMessages()
   {
     if( item->data( UnreadMessages ).toInt() > 0 )
     {
+      qDebug() << "Chat" << Bee::qVariantToVNumber( item->data( PrivateChatId ) ) << "with unread messages found";
       setCurrentItem( item );
       userDoubleClicked( item );
       return true;

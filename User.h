@@ -90,6 +90,6 @@ inline void User::setStatusDescription( const QString& new_value ) { m_statusDes
 inline const QString& User::statusDescription() const { return m_statusDescription; }
 inline void User::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& User::color() const { return m_color; }
-inline QString User::path() const { return QString( "%1 (%2@%3:%4)" ).arg( m_nickname ).arg( m_name ).arg( m_hostAddress.toString() ).arg( m_hostPort ); }
+inline QString User::path() const { return QString( "%1 (%2@%3:%4)" ).arg( m_nickname, m_name, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 
 #endif // BEEBEEP_USER_H

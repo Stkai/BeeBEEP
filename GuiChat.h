@@ -38,7 +38,7 @@ public:
   void appendMessage( VNumber, const QString& );
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
-  void setChat( const Chat&, const QString& chat_text );
+  void setChat( const Chat&, const QString& chat_users, const QString& chat_text );
   inline VNumber chatId() const;
   void setLastMessageTimestamp( const QDateTime& );
   inline QString toHtml() const;

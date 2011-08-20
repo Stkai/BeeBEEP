@@ -88,7 +88,7 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   Connection* c = qobject_cast<Connection*>( sender() );
   if( c )
   {
-    qDebug() << "Connection from" << c->peerAddress() << c->peerPort() << "has an error:" << c->errorString();
+    qDebug() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has an error:" << c->errorString() << "-" << (int)se;
     closeConnection( c );
   }
   else
@@ -97,11 +97,11 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
 
 void Core::setConnectionClosed()
 {
-  Connection* c = qobject_cast<Connection*>( sender() );
+  ConnectionSocket* c = qobject_cast<ConnectionSocket*>( sender() );
   if( c )
   {
-    qDebug() << "Connection from" << c->peerAddress() << c->peerPort() << "is closed";
-    closeConnection( c );
+    qDebug() << "Setting connection from" << c->peerAddress().toString() << c->peerPort() << "closed";
+    closeConnection( (Connection*)c );
   }
   else
     qWarning() << "Connection closed but the object caller is invalid";
@@ -109,14 +109,27 @@ void Core::setConnectionClosed()
 
 void Core::closeConnection( Connection *c )
 {
+  qDebug() << "Removing connection pointer from connection list";
+  int number_of_connection_pointers = m_connections.removeAll( c );
+  if( number_of_connection_pointers <= 0 )
+  {
+    qDebug() << "Connection already removed";
+    return;
+  }
+
+  if( number_of_connection_pointers != 1 )
+    qWarning() << number_of_connection_pointers << "pointers of a single connection found in connection list";
+
+  qDebug() << "Closing connection for user" << c->userId();
   User u = user( c->userId() );
   if( u.isValid() )
   {
+    qDebug() << "User" << u.path() << "goes offline";
     u.setStatus( User::Offline );
     setUser( u );
-    emit userChanged( u );
     QString sHtmlMsg = tr( "%1 %2 has left." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), u.path() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+    emit userChanged( u );
   }
   else
     qWarning() << "User" << c->userId() << "not found while closing connection";
@@ -124,9 +137,6 @@ void Core::closeConnection( Connection *c )
   Chat default_chat = defaultChat( false );
   if( default_chat.removeUser( u.id() ) )
     setChat( default_chat );
-
-  if( m_connections.removeAll( c ) != 1 )
-    qWarning() << "Various pointers of a single connection found in connection list";
 
   c->deleteLater();
 }
@@ -175,6 +185,6 @@ void Core::checkUserAuthentication( const Message& m )
   setUser( u );
   emit userChanged( u );
 
-  QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ), Settings::instance().showUserNickname() ? u.nickname() : u.name() );
+  QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ), u.path() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }

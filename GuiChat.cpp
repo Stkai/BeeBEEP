@@ -74,12 +74,11 @@ void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
     mp_lTimestamp->setText( "" );
 }
 
-void GuiChat::setChat( const Chat& c, const QString& chat_text )
+void GuiChat::setChat( const Chat& c, const QString& chat_users, const QString& chat_text )
 {
-  if( !c.isValid() )
-    return;
+  qDebug() << "Setting chat" << c.id() << "in default chat window";
   m_chatId = c.id();
-  mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( "FIXME" ) );
+  mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( chat_users ) );
   mp_teChat->setText( chat_text );
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   bar->setValue( bar->maximum() );

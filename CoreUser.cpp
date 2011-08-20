@@ -99,8 +99,8 @@ void Core::setUserStatus( const User& u )
     sHtmlMsg += tr( "You are" );
   else
     sHtmlMsg += (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + QString( " " ) + tr( "is" );
-
-   sHtmlMsg += QString( " %2%3." ).arg( Bee::userStatusToString( u.status() ) )
+   sHtmlMsg += QString( " " );
+   sHtmlMsg += QString( "%1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
@@ -110,7 +110,8 @@ void Core::setUserStatus( const User& u )
 void Core::searchUsers( const QHostAddress& host_address )
 {
   mp_peerManager->sendDatagramToHost( host_address );
-  QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." ).arg( Bee::iconToHtml( ":/images/search.png", "*b*" ) ).arg( host_address.toString() );
+  QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." )
+      .arg( Bee::iconToHtml( ":/images/search.png", "*b*" ), host_address.toString() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
 }
 

@@ -75,7 +75,10 @@ GuiMain::GuiMain( QWidget *parent )
 
 void GuiMain::refreshTitle()
 {
-  setWindowTitle( QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName() ).arg( Settings::instance().localUser().nickname() ).arg( Bee::userStatusToString( Settings::instance().localUser().status() ) ) );
+  setWindowTitle( QString( "%1 - %2 (%3)" ).arg(
+                    Settings::instance().programName(),
+                    Settings::instance().localUser().nickname(),
+                    Bee::userStatusToString( Settings::instance().localUser().status() ) ) );
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )
@@ -409,6 +412,7 @@ void GuiMain::checkUser( const User& u )
     return;
   }
 
+  qDebug() << "User" << u.path() << "has changed his info. Check it";
   Chat private_chat = mp_core->privateChatForUser( u.id() );
   if( !private_chat.isValid() )
     qDebug() << "Invalid chat found in GuiMain::checkUser( const User& u )";
@@ -509,6 +513,7 @@ void GuiMain::settingsChanged()
 
 void GuiMain::showSelectedChat( VNumber chat_id )
 {
+  qDebug() << "Showing chat" << chat_id;
   Chat c = mp_core->chat( chat_id, true );
   if( c.isValid() )
     showChat( c );
@@ -548,10 +553,12 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_defaultChat->appendMessage( chat_id, mp_core->chatMessageToText( cm ) );
     mp_defaultChat->setLastMessageTimestamp( chat_showed.lastMessageTimestamp() );
     statusBar()->clearMessage();
-    return;
   }
-  Chat chat_hidden = mp_core->chat( chat_id, false );
-  mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
+  else
+  {
+    Chat chat_hidden = mp_core->chat( chat_id, false );
+    mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
+  }
 }
 
 void GuiMain::saveChat()
@@ -566,7 +573,7 @@ void GuiMain::saveChat()
   Chat c = mp_core->chat( mp_defaultChat->chatId(), false );
   if( !c.isValid() )
   {
-    qDebug() << "Chat" << mp_defaultChat->chatId() << "is invalid. Unable to save it";
+    qWarning() << "Chat" << mp_defaultChat->chatId() << "is invalid. Unable to save it";
     return;
   }
   QFile file( file_name );
@@ -576,14 +583,15 @@ void GuiMain::saveChat()
       tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
     return;
   }
-  QString sHeader = QString( tr( "<html><body><b>Chat saved in date %1.</b><br /><br />" )
-                             .arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleLongDate ) ) );
+  QString sHeader = QString( tr( "<html><body><b>Chat with users %1 saved in date %2.</b><br /><br />" )
+                             .arg( mp_core->chatUsers( c, "," ),
+                                   QDateTime::currentDateTime().toString( Qt::SystemLocaleLongDate ) ) );
   QString sFooter = QString( "</body></html>" );
   file.write( sHeader.toLatin1() );
   file.write( mp_core->chatMessagesToText( c ).toLatin1() );
   file.write( sFooter.toLatin1() );
   file.close();
-  QMessageBox::information( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Information" ) ),
+  QMessageBox::information( this, QString( "%1 - %2" ).arg( Settings::instance().programName(), tr( "Information" ) ),
     tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
 }
 
@@ -613,7 +621,7 @@ void GuiMain::searchUsers()
 
 void GuiMain::showWritingUser( const User& u )
 {
-  QString msg = tr( "%1 is writing" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() );
+  QString msg = tr( "%1 is writing..." ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() );
   statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
 }
 
@@ -711,5 +719,7 @@ void GuiMain::showChat( const Chat& c )
   }
 
   QString chat_text = mp_core->chatMessagesToText( c );
-  mp_defaultChat->setChat( c, chat_text );
+  QString chat_users = mp_core->chatUsers( c, "," );
+  qDebug() << "Show chat" << c.id() << "with users:" << chat_users;
+  mp_defaultChat->setChat( c, chat_users, chat_text );
 }

@@ -40,7 +40,7 @@ public:
   virtual QSize sizeHint() const;
   void setUser( const User&, VNumber private_chat_id, int unread_messages );
   void removeUser( const User& );
-  void setUnreadMessages( VNumber, int );
+  void setUnreadMessages( VNumber private_chat_id, int );
   void updateUsers();
   bool nextUserWithUnreadMessages();
 
@@ -56,6 +56,7 @@ private:
   inline QIcon userIcon( int unread_messages, int user_status ) const;
   void updateItem( QListWidgetItem* );
   QListWidgetItem* userItem( VNumber );
+  QListWidgetItem* chatItem( VNumber );
 
 };
 

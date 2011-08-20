@@ -28,6 +28,7 @@
 void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 {
   Chat c = m.hasFlag( Message::Private ) ? privateChatForUser( from_user_id ) : defaultChat( false );
+  qDebug() << "Message dispatched to chat" << c.id();
   ChatMessage cm( from_user_id, m );
   c.addMessage( cm );
   c.addUnreadMessage();
@@ -38,6 +39,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt )
 {
+  qDebug() << "Dispatch system message to chat" << chat_id << "from user" << from_user_id << "with type" << (int)dt;
   Message m = Protocol::instance().systemMessage( msg );
   ChatMessage cm( from_user_id, m );
 

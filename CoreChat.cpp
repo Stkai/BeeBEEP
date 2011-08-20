@@ -37,7 +37,7 @@ void Core::createDefaultChat()
   Chat c;
   c.setId( ID_DEFAULT_CHAT );
   c.addUser( ID_LOCAL_USER );
-  QString sHtmlMsg = tr( "%1 Chat with all people." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
+  QString sHtmlMsg = tr( "%1 Chat with all users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
   setChat( c );
@@ -190,9 +190,8 @@ void Core::showTipOfTheDay()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
 }
 
-namespace
+namespace // begin of empty namespace
 {
-
 
 QString FormatHtmlText( QString text )
 {
@@ -262,23 +261,16 @@ QString FormatSystemMessage( const ChatMessage& cm )
   return sHtmlMessage;
 }
 
-}
+} // end of empty namespace
 
 QString Core::chatMessageToText( const ChatMessage& cm )
 {
   QString s;
   if( cm.isSystem() )
-  {
     s = FormatSystemMessage( cm );
-  }
   else
-  {
-    User u = user( cm.userId() );
-    s = FormatMessage( u, cm );
-  }
-  if( Settings::instance().chatAddNewLineToMessage() )
-    s.append( "<br />" );
-  s.append( "<br />" );
+    s = FormatMessage( user( cm.userId() ), cm );
+  s += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
   return s;
 }
 
@@ -286,9 +278,23 @@ QString Core::chatMessagesToText( const Chat& c )
 {
   QString s = "";
   foreach( ChatMessage cm, c.messages() )
-  {
     s += chatMessageToText( cm );
-  }
   return s;
 }
 
+QString Core::chatUsers( const Chat& c, const QString& user_separator )
+{
+  if( c.id() == ID_DEFAULT_CHAT )
+    return tr( "All users" );
+
+  QStringList sl;
+  User u;
+  foreach( VNumber user_id, c.usersId() )
+  {
+    if( user_id == ID_LOCAL_USER )
+      continue;
+    u = user( user_id );
+    sl << (Settings::instance().showUserNickname() ? u.nickname() : u.name());
+  }
+  return sl.size() == 0 ? tr( "Nobody" ) : sl.join( user_separator );
+}
