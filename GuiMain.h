@@ -27,6 +27,7 @@
 
 #include "Config.h"
 class Core;
+class Chat;
 class ChatMessage;
 class FileInfo;
 class GuiChat;
@@ -64,7 +65,6 @@ private slots:
   void toggleMenuBar( bool );
   void saveChat();
 
-
   void showNextChat();
   void statusSelected();
   void changeStatusDescription();
@@ -72,9 +72,9 @@ private slots:
   void downloadFile( const User&, const FileInfo& );
   void selectDownloadDirectory();
 
-
 protected:
   void closeEvent( QCloseEvent* );
+  void showChat( const Chat& );
 
 private:
   void createActions();

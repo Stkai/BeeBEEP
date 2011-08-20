@@ -35,10 +35,10 @@ class GuiChat : public QWidget, private Ui::GuiChatWidget
 public:
   GuiChat( QWidget* parent = 0 );
   void addToMyMessage( const QString& ); // For emoticons
-  void appendMessage( VNumber, const ChatMessage& );
+  void appendMessage( VNumber, const QString& );
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
-  void setChat( const Chat& );
+  void setChat( const Chat&, const QString& chat_text );
   inline VNumber chatId() const;
   void setLastMessageTimestamp( const QDateTime& );
   inline QString toHtml() const;

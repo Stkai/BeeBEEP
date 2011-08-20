@@ -24,7 +24,7 @@
 #include "GuiChat.h"
 #include "User.h"
 #include "Settings.h"
-#include "BeeUtils.h"
+
 
 
 GuiChat::GuiChat( QWidget *parent )
@@ -74,26 +74,26 @@ void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
     mp_lTimestamp->setText( "" );
 }
 
-void GuiChat::setChat( const Chat& c )
+void GuiChat::setChat( const Chat& c, const QString& chat_text )
 {
   if( !c.isValid() )
     return;
   m_chatId = c.id();
   mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( "FIXME" ) );
-  mp_teChat->setText( Bee::chatMessagesToText( c ) );
+  mp_teChat->setText( chat_text );
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   mp_teMessage->setFocus();
 }
 
-void GuiChat::appendMessage( VNumber chat_id, const ChatMessage& msg )
+void GuiChat::appendMessage( VNumber chat_id, const QString& msg )
 {
   if( chat_id != m_chatId )
     return;
   QTextCursor cursor( mp_teChat->textCursor() );
   cursor.movePosition( QTextCursor::End );
-  cursor.insertHtml( Bee::chatMessageToText( msg ) );
+  cursor.insertHtml( msg );
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
 }

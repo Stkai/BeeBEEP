@@ -68,7 +68,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
-  mp_defaultChat->setChat( mp_core->defaultChat( false ) );
+  showChat( mp_core->defaultChat( false ) );
 
   refreshTitle();
 }
@@ -141,7 +141,7 @@ void GuiMain::startCore()
   if( !ok )
     return;
   Settings::instance().setPassword( pwd.simplified() );
-  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  showChat( mp_core->defaultChat( true ) );
   mp_core->start();
   mp_actSearch->setEnabled( true );
   refreshTitle();
@@ -153,7 +153,7 @@ void GuiMain::startCore()
 void GuiMain::stopCore()
 {
   mp_actSearch->setEnabled( false );
-  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  showChat( mp_core->defaultChat( true ) );
   mp_core->stop();
   mp_userList->clear();
   refreshTitle();
@@ -435,7 +435,7 @@ void GuiMain::refreshChat()
 {
   Chat c = mp_core->chat( mp_defaultChat->chatId(), true );
   if( c.isValid() )
-    mp_defaultChat->setChat( c );
+    showChat( c );
   else
     qWarning() << "Chat" << mp_defaultChat->chatId() << "not found. Unable to refresh it";
 }
@@ -511,7 +511,7 @@ void GuiMain::showSelectedChat( VNumber chat_id )
 {
   Chat c = mp_core->chat( chat_id, true );
   if( c.isValid() )
-    mp_defaultChat->setChat( c );
+    showChat( c );
   else
     qWarning() << "Selected chat" << chat_id << "is not found";
 }
@@ -545,7 +545,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   if( is_current_chat )
   {
     Chat chat_showed = mp_core->chat( chat_id, true );
-    mp_defaultChat->appendMessage( chat_id, cm );
+    mp_defaultChat->appendMessage( chat_id, mp_core->chatMessageToText( cm ) );
     mp_defaultChat->setLastMessageTimestamp( chat_showed.lastMessageTimestamp() );
     statusBar()->clearMessage();
     return;
@@ -580,7 +580,7 @@ void GuiMain::saveChat()
                              .arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleLongDate ) ) );
   QString sFooter = QString( "</body></html>" );
   file.write( sHeader.toLatin1() );
-  file.write( Bee::chatMessagesToText( c ).toLatin1() );
+  file.write( mp_core->chatMessagesToText( c ).toLatin1() );
   file.write( sFooter.toLatin1() );
   file.close();
   QMessageBox::information( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Information" ) ),
@@ -607,7 +607,7 @@ void GuiMain::searchUsers()
   }
 
   // Message is showed only in default chat
-  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  showChat( mp_core->defaultChat( true ) );
   mp_core->searchUsers( host_address );
 }
 
@@ -698,6 +698,18 @@ void GuiMain::selectDownloadDirectory()
 void GuiMain::showTipOfTheDay()
 {
   // Tip of the day is showed only in default chat
-  mp_defaultChat->setChat( mp_core->defaultChat( true ) );
+  showChat( mp_core->defaultChat( true ) );
   mp_core->showTipOfTheDay();
+}
+
+void GuiMain::showChat( const Chat& c )
+{
+  if( !c.isValid() )
+  {
+    qWarning() << "Cannot show an invalid chat";
+    return;
+  }
+
+  QString chat_text = mp_core->chatMessagesToText( c );
+  mp_defaultChat->setChat( c, chat_text );
 }

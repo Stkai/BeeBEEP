@@ -55,7 +55,7 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
 
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
-  if( !hasConnection( sender_ip, sender_port ) ) // Check it: before the sender port is not checked and it was passed -1
+  if( !hasConnection( sender_ip, -1 ) ) // Check it: before the sender port is not checked and it was passed -1
   {
     Connection *c = new Connection( this );
     setNewConnection( c );

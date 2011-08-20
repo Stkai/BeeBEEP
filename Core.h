@@ -55,6 +55,8 @@ public:
   Chat chat( VNumber, bool read_all_messages );
   Chat privateChatForUser( VNumber ) const;
   void showTipOfTheDay();
+  QString chatMessageToText( const ChatMessage& );
+  QString chatMessagesToText( const Chat& );
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );

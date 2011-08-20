@@ -43,6 +43,8 @@ User Core::user( const QString& user_path ) const
 
 User Core::user( VNumber user_id ) const
 {
+  if( ID_LOCAL_USER == user_id )
+    return Settings::instance().localUser();
   QList<User>::const_iterator it = m_users.begin();
   while( it != m_users.end() )
   {

@@ -56,8 +56,8 @@ bool Core::start()
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
-                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
-                               .arg( Settings::instance().programName() ), DispatchToChat );
+                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
+                                     Settings::instance().programName() ), DispatchToChat );
       return false;
     }
   }
@@ -72,15 +72,19 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
-                             .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
-                             .arg( Settings::instance().programName() ), DispatchToChat );
+                             .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
+                                   Settings::instance().programName() ), DispatchToChat );
     mp_listener->close();
     return false;
   }
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are connected." )
-                         .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ) ), DispatchToAllChatsWithUser );
+                         tr( "%1 You are connected to %2 Network." )
+                         .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ),
+                               Settings::instance().programName() ), DispatchToAllChatsWithUser );
+
+  emit userChanged( Settings::instance().localUser() );
+  setUserStatus( Settings::instance().localUser() );
 
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
