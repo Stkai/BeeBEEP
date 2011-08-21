@@ -179,16 +179,15 @@ QByteArray Protocol::pongMessage() const
 
 QByteArray Protocol::broadcastMessage() const
 {
-  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().listenerPort() ) );
+  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().hostPort() ) );
   return fromMessage( m );
 }
 
 QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
-  data_list << QString::number( Settings::instance().localUser().listenerPort() );
+  data_list << QString::number( Settings::instance().localUser().hostPort() );
   data_list << Settings::instance().localUser().name();
-  data_list << Settings::instance().localUser().nickname();
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
   Message m( Message::Hello, ID_HELLO_MESSAGE, data_list.join( DATA_FIELD_SEPARATOR ) );
@@ -217,17 +216,23 @@ bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
   return false;
 }
 
-User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address, int peer_port )
+User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
  /* Read User Field Data */
   QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
-  if( sl.size() < 5 )
+  if( sl.size() < 4 )
   {
-    qWarning() << "HELLO message has not 5 field data but" << sl.size();
+    qWarning() << "HELLO message has not 4 field data but" << sl.size();
     return User();
   }
 
-  int listener_port = sl.at( 0 ).toInt();
+  bool ok = false;
+  int listener_port = sl.at( 0 ).toInt( &ok );
+  if( !ok )
+  {
+    qWarning() << "HELLO has an invalid Listener port";
+    return User();
+  }
   sl.removeFirst();
 
   QString user_name = sl.at( 0 );
@@ -239,9 +244,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   }
 
   sl.removeFirst();
-  QString user_nickname = sl.at( 0 );
-  sl.removeFirst();
-  bool ok = false;
+
   int user_status = sl.at( 0 ).toInt( &ok );
   if( !ok )
     user_status = User::Online;
@@ -251,10 +254,8 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   /* Create User */
   User u( newId() );
   u.setName( user_name );
-  u.setNickname( user_nickname );
-  u.setPeerAddress( peer_address );
-  u.setPeerPort( peer_port );
-  u.setListenerPort( listener_port );
+  u.setHostAddress( peer_address );
+  u.setHostPort( listener_port );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
   return u;

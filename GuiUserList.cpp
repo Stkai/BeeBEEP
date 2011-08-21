@@ -52,10 +52,10 @@ void GuiUserList::updateItem( QListWidgetItem* item )
   bool is_local_user =  user_id == Settings::instance().localUser().id();
 
   QString s = is_local_user ? tr( "* All *" ) :
-              ( Settings::instance().showUserNickname() ? item->data( UserNickname ).toString() : item->data( Username ).toString() );
+              ( Settings::instance().showOnlyUsername() ? item->data( Username ).toString() : item->data( UserPath ).toString() );
 
-  if( !is_local_user && ( user_status == 0 || Settings::instance().showUserIp() ) )
-    s += QString( "<%1@%2:3>" ).arg(
+  if( !is_local_user && ( user_status == 0 || !Settings::instance().showUserNickname() ) )
+    s += QString( "<%1@%2:%3>" ).arg(
           item->data( Username ).toString(),
           item->data( UserHostAddress ).toString(),
           QString::number( item->data( UserHostPort ).toInt() ) );

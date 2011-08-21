@@ -63,10 +63,8 @@ public:
   inline void setChatShowMessageTimestamp( bool );
   inline const QString& chatSaveDirectory() const;
   inline void setChatSaveDirectory( const QString& );
-  inline bool showUserIp() const;
-  inline void setShowUserIp( bool new_value );
-  inline bool showUserNickname() const;
-  inline void setShowUserNickname( bool );
+  inline bool showOnlyUsername() const;
+  inline void setShowOnlyUsername( bool );
 
   inline int userListWidth() const;
   inline void setUserListWidth( int );
@@ -134,8 +132,7 @@ private:
   bool m_chatAddNewLineToMessage;
   bool m_chatShowMessageTimestamp;
   QString m_chatSaveDirectory;
-  bool m_showUserIp;
-  bool m_showUserNickname;
+  bool m_showOnlyUsername;
 
   int m_userListWidth;
   QByteArray m_guiGeometry;
@@ -181,10 +178,8 @@ inline bool Settings::chatShowMessageTimestamp() const { return m_chatShowMessag
 inline void Settings::setChatShowMessageTimestamp( bool new_value ) { m_chatShowMessageTimestamp = new_value; }
 inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDirectory; }
 inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
-inline bool Settings::showUserIp() const { return m_showUserIp; }
-inline void Settings::setShowUserIp( bool new_value ) { m_showUserIp = new_value; }
-inline bool Settings::showUserNickname() const { return m_showUserNickname; }
-inline void Settings::setShowUserNickname( bool new_value ) { m_showUserNickname = new_value; }
+inline bool Settings::showOnlyUsername() const { return m_showOnlyUsername; }
+inline void Settings::setShowOnlyUsername( bool new_value ) { m_showOnlyUsername = new_value; }
 inline int Settings::userListWidth() const { return m_userListWidth; }
 inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeometry = new_value; }
 inline const QByteArray& Settings::guiGeometry() const { return m_guiGeometry; }

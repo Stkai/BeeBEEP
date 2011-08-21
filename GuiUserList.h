@@ -34,7 +34,7 @@ class GuiUserList : public QListWidget
   Q_OBJECT
 
 public:
-  enum UserDataType { UserId = Qt::UserRole, Username, UserNickname, UserHostAddress, UserHostPort, UnreadMessages, UserStatus, UserStatusDescription, PrivateChatId };
+  enum UserDataType { UserId = Qt::UserRole, Username, UserPath, UnreadMessages, UserStatus, UserStatusDescription, PrivateChatId };
 
   GuiUserList( QWidget* parent = 0 );
   virtual QSize sizeHint() const;

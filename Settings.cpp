@@ -64,7 +64,6 @@ void Settings::setPassword( const QString& new_value )
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
   m_localUser.setPeerAddress( host_address );
-  m_localUser.setPeerPort( host_port );
   m_localUser.setListenerPort( host_port );
 }
 
@@ -110,7 +109,6 @@ void Settings::load()
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   m_localUser.setListenerPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
-  m_localUser.setPeerPort( m_localUser.listenerPort() );
   m_broadcastPort = sets.value( "LocalBroadcastPort", BROADCAST_DEFAULT_PORT ).toInt();
   sets.endGroup();
   sets.beginGroup( "Geometry" );
@@ -142,8 +140,6 @@ void Settings::load()
   m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
   sets.endGroup();
 
-  if( m_localUser.nickname().isEmpty() )
-    m_localUser.setNickname( sName );
   qDebug() << "Local user:" << m_localUser.path();
 }
 
@@ -166,7 +162,6 @@ void Settings::save()
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets.setValue( "LocalListenerPort", m_localUser.listenerPort() );
   sets.setValue( "LocalBroadcastPort", m_broadcastPort );
-  sets.setValue( "ShowAddressIp", m_showUserIp );
   sets.setValue( "ShowNickname", m_showUserNickname );
   sets.endGroup();
   sets.beginGroup( "Geometry" );

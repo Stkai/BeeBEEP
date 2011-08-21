@@ -46,7 +46,7 @@ bool PeerManager::startBroadcasting()
   }
   qDebug() << "PeerManager generate broadcast message data";
   m_broadcastData = Protocol::instance().broadcastMessage();
-  qDebug() << "PeerManager start broadcasting with listener port" << Settings::instance().localUser().listenerPort();
+  qDebug() << "PeerManager start broadcasting with listener port" << Settings::instance().localUser().hostPort();
   m_broadcastTimer.start();
   return true;
 }
@@ -111,7 +111,7 @@ void PeerManager::readBroadcastDatagram()
     if( !ok )
       continue;
 
-    if( isLocalHostAddress( sender_ip ) && senderServerPort == Settings::instance().localUser().listenerPort() )
+    if( isLocalHostAddress( sender_ip ) && senderServerPort == Settings::instance().localUser().hostPort() )
       continue;
 
     emit newPeerFound( sender_ip, senderServerPort );
