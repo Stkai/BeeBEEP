@@ -53,6 +53,7 @@ bool Core::start()
   qDebug() << "Starting" << Settings::instance().programName() << "core";
   if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
   {
+    qDebug() << "Unable to bind" << Settings::instance().localUser().hostPort() << "port. Try to bind the first available";
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -65,7 +66,6 @@ bool Core::start()
 
   qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
   Settings::instance().setLocalUserHost( mp_listener->serverAddress(), mp_listener->serverPort() );
-
 
   if( !mp_peerManager->startBroadcasting() )
   {

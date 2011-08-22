@@ -150,7 +150,7 @@ void Settings::save()
   sets.setValue( "LocalName", m_localUser.name() );
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
-  sets.setValue( "LocalHostPort", m_localUser.hostPort() );
+  sets.setValue( "LocalListenerPort", m_localUser.hostPort() );
   sets.setValue( "LocalBroadcastPort", m_broadcastPort );
   sets.setValue( "ShowOnlyName", m_showOnlyUsername );
   sets.endGroup();

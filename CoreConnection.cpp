@@ -185,6 +185,7 @@ void Core::checkUserAuthentication( const Message& m )
   m_users.setUser( u );
   emit userChanged( u );
 
-  QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ), u.path() );
+  QString sHtmlMsg = tr( "%1 %2 has %3." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ),
+                                                u.path(), (user_found.isValid() ? tr( "reconnected" ) : tr( "joined")) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }
