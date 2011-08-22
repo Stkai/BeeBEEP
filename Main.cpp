@@ -94,7 +94,7 @@ int main( int argc, char *argv[] )
       mw.restoreState( Settings::instance().guiState() );
   }
   else
-    mw.resize( QSize( 600, 340 ) );
+    mw.resize( QSize( 500, 340 ) );
 
   mw.show();
 #endif

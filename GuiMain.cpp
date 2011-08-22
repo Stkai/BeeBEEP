@@ -361,6 +361,7 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
+  dock_widget->hide();
 }
 
 void GuiMain::toggleMenuBar( bool is_enabled )
