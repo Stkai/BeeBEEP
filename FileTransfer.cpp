@@ -158,6 +158,13 @@ void FileTransfer::checkFileTransferRequest( VNumber file_id, const QByteArray& 
     return;
   }
 
+  if( file_info.password() != file_password )
+  {
+    qWarning() << "FileTransfer received a request for the file" << file_info.name() << "but with the wrong password";
+    upload_peer->cancelTransfer();
+    return;
+  }
+
   upload_peer->startTransfer( file_info );
 }
 

@@ -104,8 +104,7 @@ void FileTransferPeer::socketError( QAbstractSocket::SocketError se )
 void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
-  QString s = tr( "transfer error (%1)" ).arg( str_err );
-  qWarning() << s;
+  qWarning() << m_fileInfo.name() << "transfer error:" << str_err;
   emit message( userId(), m_fileInfo, str_err );
   closeAll();
 }
