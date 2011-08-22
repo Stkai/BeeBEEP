@@ -29,47 +29,6 @@
 #include "Settings.h"
 
 
-User Core::user( const QString& user_path ) const
-{
-  QList<User>::const_iterator it = m_users.begin();
-  while( it != m_users.end() )
-  {
-    if( user_path == (*it).path() )
-      return *it;
-    ++it;
-  }
-  return User();
-}
-
-User Core::user( VNumber user_id ) const
-{
-  if( ID_LOCAL_USER == user_id )
-    return Settings::instance().localUser();
-  QList<User>::const_iterator it = m_users.begin();
-  while( it != m_users.end() )
-  {
-    if( user_id == (*it).id() )
-      return *it;
-    ++it;
-  }
-  return User();
-}
-
-void Core::setUser( const User& u )
-{
-  QList<User>::iterator it = m_users.begin();
-  while( it != m_users.end() )
-  {
-    if( (*it).id() == u.id() )
-    {
-      (*it) = u;
-      return;
-    }
-    ++it;
-  }
-  m_users.append( u );
-}
-
 void Core::setLocalUserStatus( int new_status )
 {
   if( Settings::instance().localUser().status() == new_status )
@@ -92,13 +51,26 @@ void Core::setLocalUserStatusDescription( const QString& new_status_description 
   setUserStatus( u );
 }
 
+void Core::setLocalUserName( const QString& user_name )
+{
+  if( Settings::instance().localUser().name() == user_name )
+    return;
+
+  User u = Settings::instance().localUser();
+  QString old_user_name = u.name();
+  u.setName( user_name.trimmed() );
+  Settings::instance().setLocalUser( u );
+  sendUserName();
+  setUserName( u, old_user_name );
+}
+
 void Core::setUserStatus( const User& u )
 {
   QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
-  if( Settings::instance().localUser() == u )
+  if( u.isLocal() )
     sHtmlMsg += tr( "You are" );
   else
-    sHtmlMsg += (Settings::instance().showUserNickname() ? u.nickname() : u.name()) + QString( " " ) + tr( "is" );
+    sHtmlMsg += (Settings::instance().showOnlyUsername() ? u.name() : u.path()) + QString( " " ) + tr( "is" );
    sHtmlMsg += QString( " " );
    sHtmlMsg += QString( "%1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
@@ -106,6 +78,19 @@ void Core::setUserStatus( const User& u )
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );
 }
+
+void Core::setUserName( const User& u, const QString& old_user_name )
+{
+  QString sHtmlMsg = Bee::iconToHtml( ":/images/profile.png", "*N*" ) + QString( " " );
+  if( u.isLocal() )
+    sHtmlMsg += tr( "You have changed your nickname from %1 to %2." ).arg( old_user_name, u.name() );
+  else
+    sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( old_user_name, u.name() );
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  emit userChanged( u );
+}
+
 
 void Core::searchUsers( const QHostAddress& host_address )
 {
@@ -120,4 +105,11 @@ void Core::sendUserStatus()
   QByteArray user_status_message = Protocol::instance().localUserStatusMessage();
   foreach( Connection *c, m_connections )
     c->sendData( user_status_message );
+}
+
+void Core::sendUserName()
+{
+  QByteArray user_name_message = Protocol::instance().localUserNameMessage();
+  foreach( Connection *c, m_connections )
+    c->sendData( user_name_message );
 }

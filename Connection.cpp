@@ -65,14 +65,15 @@ void Connection::parseData( const QByteArray& message_data )
     m_pongTime.restart();
     break;
   default:
-    emit newMessage( m_userId, m );
+    emit newMessage( userId(), m );
     break;
   }
 }
 
 void Connection::setReadyForUse( VNumber user_id )
 {
-  m_userId = user_id;
+  qDebug() << "Connection is ready for use by the user" << user_id;
+  setUserId( user_id );
   m_pingTimer.start();
   m_pongTime.start();
 }

@@ -48,8 +48,6 @@ public:
 
   inline void setShowMenuBar( bool );
   inline bool showMenuBar() const;
-  inline void setShowToolBar( bool );
-  inline bool showToolBar() const;
 
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
@@ -66,11 +64,11 @@ public:
   inline bool showOnlyUsername() const;
   inline void setShowOnlyUsername( bool );
 
-  inline int userListWidth() const;
-  inline void setUserListWidth( int );
   inline const QSize& mainBarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
   inline const QByteArray& guiGeometry() const;
+  inline void setGuiState( const QByteArray& );
+  inline const QByteArray& guiState() const;
 
   QByteArray hash( const QString& ) const;
   inline const QString& hash() const;
@@ -134,8 +132,8 @@ private:
   QString m_chatSaveDirectory;
   bool m_showOnlyUsername;
 
-  int m_userListWidth;
   QByteArray m_guiGeometry;
+  QByteArray m_guiState;
   QSize m_mainBarIconSize;
 
   QByteArray m_password;
@@ -163,8 +161,6 @@ inline QString Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline void Settings::setShowMenuBar( bool new_value) { m_showMenuBar = new_value; }
 inline bool Settings::showMenuBar() const { return m_showMenuBar; }
-inline void Settings::setShowToolBar( bool new_value ) { m_showToolBar = new_value; }
-inline bool Settings::showToolBar() const { return m_showToolBar; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }
@@ -180,10 +176,10 @@ inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDir
 inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
 inline bool Settings::showOnlyUsername() const { return m_showOnlyUsername; }
 inline void Settings::setShowOnlyUsername( bool new_value ) { m_showOnlyUsername = new_value; }
-inline int Settings::userListWidth() const { return m_userListWidth; }
 inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeometry = new_value; }
 inline const QByteArray& Settings::guiGeometry() const { return m_guiGeometry; }
-inline void Settings::setUserListWidth( int new_value ) { m_userListWidth = new_value; }
+inline void Settings::setGuiState( const QByteArray& new_value ) { m_guiState = new_value; }
+inline const QByteArray& Settings::guiState() const { return m_guiState; }
 inline const QString& Settings::hash() const { return m_hash; }
 inline const QByteArray& Settings::password() const { return m_password; }
 inline QString Settings::defaultPassword() const { return "*"; }

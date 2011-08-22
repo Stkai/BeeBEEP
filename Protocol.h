@@ -52,6 +52,8 @@ public:
 
   QByteArray localUserStatusMessage() const;
   bool changeUserStatusFromMessage( User*, const Message& ) const;
+  QByteArray localUserNameMessage() const;
+  bool changeUserNameFromMessage( User*, const Message& ) const;
 
   User createUser( const Message&, const QHostAddress& );
   Chat createChat( const QList<VNumber>& user_list );

@@ -31,7 +31,7 @@
 void Core::parseMessage( VNumber user_id, const Message& m )
 {
   qDebug() << "Parsing message received from user" << user_id;
-  User u = user( user_id );
+  User u = m_users.find( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Invalid user" << user_id << "found while parsing message";
@@ -57,21 +57,35 @@ void Core::parseMessage( VNumber user_id, const Message& m )
 
 void Core::parseUserMessage( const User& u, const Message& m )
 {
-  if( m.hasFlag( Message::Writing ) )
+  if( m.hasFlag( Message::UserWriting ) )
   {
     qDebug() << "User" << u.path() << "is writing";
     emit userIsWriting( u );
     return;
   }
-  else if( m.hasFlag( Message::Status ) )
+  else if( m.hasFlag( Message::UserStatus ) )
   {
     User user_with_new_status = u;
     if( Protocol::instance().changeUserStatusFromMessage( &user_with_new_status, m ) )
     {
       qDebug() << "User" << user_with_new_status.path() << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
-      setUser( user_with_new_status );
-      setUserStatus( u );
+      m_users.setUser( user_with_new_status );
+      setUserStatus( user_with_new_status );
     }
+    else
+      qWarning() << "Unable to change the status of the user" << u.path() << "because message is invalid";
+  }
+  else if( m.hasFlag( Message::UserName ) )
+  {
+    User user_with_new_name = u;
+    if( Protocol::instance().changeUserNameFromMessage( &user_with_new_name, m ) )
+    {
+      qDebug() << "User" << u.path() << "changes his name to" << user_with_new_name.name();
+      m_users.setUser( user_with_new_name );
+      setUserName( user_with_new_name, u.name() );
+    }
+    else
+      qWarning() << "Unable to change the username of the user" << u.path() << "because message is invalid";
   }
   else
     qWarning() << "Invalid flag found in user message (in Connection)";

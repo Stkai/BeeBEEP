@@ -34,45 +34,36 @@ FileTransfer::FileTransfer( QObject *parent )
 
 bool FileTransfer::startListener()
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Starting FileTransfer listener";
-#endif
   if( isListening() )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "FileTransfer is already listening";
-#endif
     return true;
   }
 
   if( !listen( QHostAddress::Any ) )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "FileTransfer cannot bind an address or a port";
-#endif
     return false;
   }
 
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "FileTransfer listen" << serverAddress() << serverPort();
-#endif
   resetServerFiles();
   return true;
 }
 
 void FileTransfer::stopListener()
 {
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "FileTransfer listener closed";
-#endif
-  close();
+  if( isListening() )
+  {
+    qDebug() << "FileTransfer listener closed";
+    close();
+  }
 }
 
 void FileTransfer::resetServerFiles()
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "FileTransfer reset files to" << serverAddress() << serverPort();
-#endif
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )
   {
@@ -130,8 +121,8 @@ void FileTransfer::incomingConnection( int socketDescriptor )
   connect( upload_peer, SIGNAL( userConnected( const User& ) ), this, SIGNAL( userConnected( const User& ) ) );
   connect( upload_peer, SIGNAL( transferFinished() ), this, SLOT( stopUpload() ) );
   connect( upload_peer, SIGNAL( fileTransferRequest( VNumber, const QByteArray& ) ), this, SLOT( checkFileTransferRequest( VNumber, const QByteArray& ) ) );
-  connect( upload_peer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( message( const User&, const FileInfo&, const QString& ) ) );
-  connect( upload_peer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( upload_peer, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ) );
+  connect( upload_peer, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ) );
   connect( upload_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
   m_peers.append( upload_peer );
   upload_peer->setConnectionDescriptor( socketDescriptor );
@@ -174,8 +165,8 @@ void FileTransfer::downloadFile( const FileInfo& fi )
 {
   FileTransferDownload *download_peer = new FileTransferDownload( newFileId(), fi, this );
   connect( download_peer, SIGNAL( transferFinished() ), this, SLOT( stopDownload() ) );
-  connect( download_peer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SIGNAL( message( const User&, const FileInfo&, const QString& ) ) );
-  connect( download_peer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( download_peer, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ) );
+  connect( download_peer, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ) );
   connect( download_peer, SIGNAL( destroyed() ), this, SLOT( dowloadPeerDestroyed() ) );
 
   m_peers.append( download_peer );
@@ -203,11 +194,7 @@ void FileTransfer::peerDestroyed()
   }
 
   if( m_peers.removeOne( (FileTransferPeer*)sender() ) )
-  {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Removing peer from list." << m_peers.size() << "peers remained";
-#endif
-  }
 }
 
 bool FileTransfer::cancelTransfer( VNumber peer_id )
@@ -215,44 +202,32 @@ bool FileTransfer::cancelTransfer( VNumber peer_id )
   FileTransferPeer* transfer_peer = peer( peer_id );
   if( transfer_peer )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Cancel transfer in progress of peer" << transfer_peer->id();
-#endif
     transfer_peer->cancelTransfer();
     return true;
   }
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Unable to cancel transfer in progress. Peer not found";
-#endif
   return false;
 }
 
 void FileTransfer::stopUpload()
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Upload finished";
-#endif
   FileTransferUpload *upload_peer = qobject_cast<FileTransferUpload*>( sender() );
   if( upload_peer )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Deleting peer" << upload_peer->id();
-#endif
     upload_peer->deleteLater();
   }
 }
 
 void FileTransfer::stopDownload()
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Download finished";
-#endif
   FileTransferDownload *download_peer = qobject_cast<FileTransferDownload*>( sender() );
   if( download_peer )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Deleting peer" << download_peer->id();
-#endif
     download_peer->deleteLater();
   }
 }

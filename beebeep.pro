@@ -31,14 +31,14 @@ SOURCES += Listener.cpp \
     FileTransfer.cpp \
     GuiTransferFile.cpp \
     ColorManager.cpp \
-    UserManager.cpp \
     Core.cpp \
     CoreParser.cpp \
     CoreConnection.cpp \
     CoreUser.cpp \
     CoreChat.cpp \
     CoreDispatcher.cpp \
-    CoreFileTransfer.cpp
+    CoreFileTransfer.cpp \
+    UserList.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -70,8 +70,8 @@ HEADERS += sym_iap_util.h \
     Random.h \
     GuiTransferFile.h \
     ColorManager.h \
-    UserManager.h \
-    Core.h
+    Core.h \
+    UserList.h
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc

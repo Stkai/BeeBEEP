@@ -27,8 +27,7 @@
 #include "Config.h"
 #include "ConnectionSocket.h"
 #include "FileInfo.h"
-#include "User.h"
-
+class User;
 
 
 class FileTransferPeer : public QObject
@@ -59,8 +58,8 @@ protected slots:
   virtual void sendData() = 0;
 
 signals:
-  void message( const User&, const FileInfo&, const QString& );
-  void progress( const User&, const FileInfo&, FileSizeType );
+  void message( VNumber, const FileInfo&, const QString& );
+  void progress( VNumber, const FileInfo&, FileSizeType );
   void transferFinished();
   void userConnected( const User& );
   void userAuthenticated();
@@ -73,7 +72,6 @@ protected:
 
 protected:
   VNumber m_id;
-  User m_user;
   FileInfo m_fileInfo;
   ConnectionSocket m_socket;
   QFile m_file;
@@ -86,7 +84,7 @@ protected:
 
 // Inline Functions
 inline VNumber FileTransferPeer::id() const { return m_id; }
-inline VNumber FileTransferPeer::userId() const { return m_user.id(); }
+inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 
 

@@ -29,13 +29,14 @@
 GuiUserList::GuiUserList( QWidget* parent )
   : QListWidget( parent )
 {
+  setObjectName( "GuiUserList" );
   connect( this, SIGNAL( itemDoubleClicked( QListWidgetItem* ) ), this, SLOT( userDoubleClicked( QListWidgetItem* ) ) );
   connect( this, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( showUserInfo( QListWidgetItem* ) ) );
 }
 
 QSize GuiUserList::sizeHint() const
 {
-  return QSize( Settings::instance().userListWidth(), 300 );
+  return QSize( 140, 300 );
 }
 
 void GuiUserList::updateItem( QListWidgetItem* item )
@@ -52,17 +53,11 @@ void GuiUserList::updateItem( QListWidgetItem* item )
   bool is_local_user =  user_id == Settings::instance().localUser().id();
 
   QString s = is_local_user ? tr( "* All *" ) :
-              ( Settings::instance().showOnlyUsername() ? item->data( Username ).toString() : item->data( UserPath ).toString() );
+              ( Settings::instance().showOnlyUsername() && user_status != User::Offline ? item->data( Username ).toString() : item->data( UserPath ).toString() );
 
-  if( !is_local_user && ( user_status == 0 || !Settings::instance().showUserNickname() ) )
-    s += QString( "<%1@%2:%3>" ).arg(
-          item->data( Username ).toString(),
-          item->data( UserHostAddress ).toString(),
-          QString::number( item->data( UserHostPort ).toInt() ) );
-
-  if( unread_messages > 0 )
+   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
-  if( !is_local_user && user_status >= 2 )
+  if( !is_local_user && user_status > User::Online )
     s.append( QString( " [%1] " ).arg( Bee::userStatusToString( user_status ) ) );
   s += " ";
   item->setText( s );
@@ -121,12 +116,10 @@ void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_me
     qDebug() << "Create new user item in GuiUserList";
     item = new QListWidgetItem( this );
     item->setData( UserId, u.id() );
-    item->setData( Username, u.name() );
-    item->setData( UserNickname, u.nickname() );
-    item->setData( UserHostAddress, u.peerAddress().toString() );
-    item->setData( UserHostPort, u.listenerPort() );
     item->setData( PrivateChatId, private_chat_id );
   }
+  item->setData( Username, u.name() );
+  item->setData( UserPath, u.path() );
   item->setData( UserStatus, u.status() );
   item->setData( UserStatusDescription, u.statusDescription() );
   if( unread_messages >= 0 )
@@ -158,9 +151,7 @@ void GuiUserList::showUserInfo( QListWidgetItem* item )
   if( Bee::qVariantToVNumber( item->data( UserId ) ) == Settings::instance().localUser().id() )
     sInfo = tr( "Chat with all connected users" );
   else
-    sInfo = tr( "Chat with %1@%2:%3" )
-              .arg( item->data( UserNickname ).toString(), item->data( UserHostAddress ).toString(),
-              QString::number( item->data( UserHostPort ).toInt() ) );
+    sInfo = tr( "Chat with %1" ).arg( item->data( UserPath ).toString() );
   emit stringToShow( sInfo, 6000 );
 }
 

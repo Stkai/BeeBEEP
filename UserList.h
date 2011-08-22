@@ -17,8 +17,36 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: UserManager.h 57 2011-08-19 16:24:06Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "UserManager.h"
+#ifndef BEEBEEP_USERLIST_H
+#define BEEBEEP_USERLIST_H
+
+#include "Config.h"
+#include "User.h"
+
+
+class UserList
+{
+public:
+  UserList();
+  UserList( const UserList& );
+  UserList& operator=( const UserList& );
+
+  User find( VNumber ) const;
+  User find( const QString& ) const;
+
+  void setUser( const User& );
+
+  QStringList toStringList( bool only_user_name ) const;
+  UserList fromUsersId( const QList<VNumber>& ) const;
+
+private:
+  QList<User> m_users;
+
+};
+
+
+#endif // BEEBEEP_USERLIST_H

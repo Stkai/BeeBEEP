@@ -39,6 +39,9 @@ public:
 
   inline void setUserAuthenticated( bool );
 
+  inline VNumber userId() const;
+  inline void setUserId( VNumber );
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const Message& );
@@ -54,12 +57,14 @@ private:
   DATA_BLOCK_SIZE m_blockSize;
   bool m_isHelloSent;
   bool m_isUserAuthenticated;
+  VNumber m_userId;
 
 };
 
 
 // Inline Functions
 inline void ConnectionSocket::setUserAuthenticated( bool new_value ) { m_isUserAuthenticated = new_value; }
-
+inline VNumber ConnectionSocket::userId() const { return m_userId; }
+inline void ConnectionSocket::setUserId( VNumber new_value ) { m_userId = new_value; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

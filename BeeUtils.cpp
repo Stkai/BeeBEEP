@@ -47,7 +47,7 @@ QString Bee::userStatusIconFileName( int user_status )
 static const char* UserStatusToString[] =
 {
   QT_TRANSLATE_NOOP( "User", "offline" ),
-  QT_TRANSLATE_NOOP( "User", "online" ),
+  QT_TRANSLATE_NOOP( "User", "available" ),
   QT_TRANSLATE_NOOP( "User", "busy" ),
   QT_TRANSLATE_NOOP( "User", "away" ),
   QT_TRANSLATE_NOOP( "User", "status error" ),

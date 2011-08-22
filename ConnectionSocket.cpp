@@ -26,7 +26,7 @@
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
-  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_isUserAuthenticated( false )
+  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_isUserAuthenticated( false ), m_userId( 0 )
 {
   connect( this, SIGNAL( connected() ), this, SLOT( sendHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
@@ -122,5 +122,6 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   if( !m_isHelloSent )
     sendHello();
 
+  qDebug() << "ConnectionSocket request an authentication";
   emit authenticationRequested( m );
 }

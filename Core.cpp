@@ -44,14 +44,14 @@ Core::Core( QObject* parent )
   connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
   connect( mp_fileTransfer, SIGNAL( userConnected( const User& ) ), this, SLOT( validateUserForFileTransfer( const User& ) ) );
-  connect( mp_fileTransfer, SIGNAL( message( const User&, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( const User&, const FileInfo&, const QString& ) ) );
-  connect( mp_fileTransfer, SIGNAL( progress( const User&, const FileInfo&, FileSizeType ) ), this, SIGNAL( fileTransferProgress( const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_fileTransfer, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, const FileInfo&, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, const FileInfo&, FileSizeType ) ) );
 }
 
 bool Core::start()
 {
   qDebug() << "Starting" << Settings::instance().programName() << "core";
-  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().listenerPort() ) )
+  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
   {
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
@@ -64,11 +64,8 @@ bool Core::start()
   }
 
   qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
-  User local_user = Settings::instance().localUser();
-  local_user.setPeerAddress( mp_listener->serverAddress() );
-  local_user.setPeerPort( mp_listener->serverPort() );
-  local_user.setListenerPort( mp_listener->serverPort() );
-  Settings::instance().setLocalUser( local_user );
+  Settings::instance().setLocalUserHost( mp_listener->serverAddress(), mp_listener->serverPort() );
+
 
   if( !mp_peerManager->startBroadcasting() )
   {
@@ -85,7 +82,6 @@ bool Core::start()
                          .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
 
-  emit userChanged( Settings::instance().localUser() );
   setUserStatus( Settings::instance().localUser() );
 
   if( Settings::instance().showTipsOfTheDay() )

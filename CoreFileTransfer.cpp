@@ -30,7 +30,7 @@
 
 void Core::validateUserForFileTransfer( const User& user_to_check )
 {
-  User user_connected = user( user_to_check.path() );
+  User user_connected = m_users.find( user_to_check.path() );
   mp_fileTransfer->validateUser( user_to_check, user_connected );
 }
 
@@ -38,18 +38,35 @@ void Core::downloadFile( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
-                         .arg( icon_html, fi.name(), Settings::instance().showUserNickname() ? u.nickname() : u.name() ),
+                         .arg( icon_html, fi.name(), u.path() ),
                          DispatchToAllChatsWithUser );
   mp_fileTransfer->downloadFile( fi );
 }
 
-void Core::checkFileTransferMessage( const User& u, const FileInfo& fi, const QString& msg )
+void Core::checkFileTransferMessage( VNumber user_id, const FileInfo& fi, const QString& msg )
 {
+  User u = m_users.find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
+    return;
+  }
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
                          fi.isDownload() ? tr( "from") : tr( "to" ), u.path(), msg ),
                          DispatchToAllChatsWithUser );
   emit fileTransferMessage( u, fi, msg );
+}
+
+void Core::checkFileTransferProgress( VNumber user_id, const FileInfo& fi, FileSizeType bytes )
+{
+  User u = m_users.find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
+    return;
+  }
+  emit fileTransferProgress( u, fi, bytes );
 }
 
 bool Core::sendFile( const User& u, const QString& file_path )

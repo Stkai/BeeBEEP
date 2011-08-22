@@ -36,7 +36,7 @@ Protocol::Protocol()
 {
   Message writing_message( Message::User, ID_WRITING_MESSAGE, "*" );
   writing_message.addFlag( Message::Private );
-  writing_message.addFlag( Message::Writing );
+  writing_message.addFlag( Message::UserWriting );
   m_writingMessage = fromMessage( writing_message );
 }
 
@@ -198,8 +198,15 @@ QByteArray Protocol::helloMessage() const
 QByteArray Protocol::localUserStatusMessage() const
 {
   Message m( Message::User, ID_STATUS_MESSAGE, Settings::instance().localUser().statusDescription() );
-  m.addFlag( Message::Status );
+  m.addFlag( Message::UserStatus );
   m.setData( QString::number( Settings::instance().localUser().status() ) );
+  return fromMessage( m );
+}
+
+QByteArray Protocol::localUserNameMessage() const
+{
+  Message m( Message::User, ID_STATUS_MESSAGE, Settings::instance().localUser().name() );
+  m.addFlag( Message::UserName );
   return fromMessage( m );
 }
 
@@ -214,6 +221,14 @@ bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
     return true;
   }
   return false;
+}
+
+bool Protocol::changeUserNameFromMessage( User* u, const Message& m ) const
+{
+  if( m.text().size() < 1 )
+    return false;
+  u->setName( m.text().trimmed() );
+  return true;
 }
 
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )

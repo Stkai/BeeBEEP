@@ -52,8 +52,8 @@ public:
   void validateUser( const User& user_to_check, const User& user_connected );
 
 signals:
-  void message( const User&, const FileInfo&, const QString& );
-  void progress( const User&, const FileInfo&, FileSizeType );
+  void message( VNumber, const FileInfo&, const QString& );
+  void progress( VNumber, const FileInfo&, FileSizeType );
   void userConnected( const User& );
 
 protected:

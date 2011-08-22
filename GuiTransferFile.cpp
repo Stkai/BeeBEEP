@@ -31,6 +31,7 @@
 GuiTransferFile::GuiTransferFile( QWidget *parent )
  : QTreeWidget( parent )
 {
+  setObjectName( "GuiTransferFile" );
   QStringList labels;
   labels << tr( "File" ) << tr( "User" ) << tr( "Status" );
   setHeaderLabels( labels );
@@ -38,6 +39,7 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 
   QHeaderView* hv = header();
   hv->setResizeMode( ColumnFile, QHeaderView::Stretch );
+  hv->setResizeMode( ColumnUser, QHeaderView::Stretch );
   hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
 }
 

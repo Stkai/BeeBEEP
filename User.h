@@ -39,6 +39,7 @@ public:
   inline bool operator==( const User& ) const;
 
   inline bool isValid() const;
+  inline bool isLocal() const;
   inline void setId( VNumber );
   inline VNumber id() const;
   inline void setName( const QString& );
@@ -71,6 +72,7 @@ private:
 // Inline Functions
 inline bool User::operator==( const User& u ) const { return m_id == u.m_id; }
 inline bool User::isValid() const { return m_id > 0; }
+inline bool User::isLocal() const { return m_id == ID_LOCAL_USER; }
 inline void User::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber User::id() const { return m_id; }
 inline void User::setName( const QString& new_value ) { m_name = new_value; }
@@ -85,6 +87,6 @@ inline void User::setStatusDescription( const QString& new_value ) { m_statusDes
 inline const QString& User::statusDescription() const { return m_statusDescription; }
 inline void User::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& User::color() const { return m_color; }
-inline QString User::path() const { return QString( "%1@%2:%3)" ).arg( m_name, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
+inline QString User::path() const { return QString( "%1@%2:%3" ).arg( m_name, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 
 #endif // BEEBEEP_USER_H

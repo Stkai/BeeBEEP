@@ -27,6 +27,7 @@
 #include "Chat.h"
 #include "Listener.h"
 #include "FileTransfer.h"
+#include "UserList.h"
 class PeerManager;
 
 
@@ -41,13 +42,13 @@ public:
   bool start();
   void stop();
 
-  inline const QList<User>& users() const;
+  inline const UserList& users() const;
 
   /* CoreUser */
-  User user( const QString& user_path ) const;
   void searchUsers( const QHostAddress& );
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
+  void setLocalUserName( const QString& );
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
@@ -87,7 +88,8 @@ protected slots:
   void parseMessage( VNumber, const Message& );
 
   /* CoreFileTransfer */
-  void checkFileTransferMessage( const User&, const FileInfo&, const QString& );
+  void checkFileTransferProgress( VNumber, const FileInfo&, FileSizeType );
+  void checkFileTransferMessage( VNumber, const FileInfo&, const QString& );
   void validateUserForFileTransfer( const User& );
 
 protected:
@@ -103,16 +105,17 @@ protected:
   void parseFileMessage( const User&, const Message& );
 
   /* CoreUser */
-  User user( VNumber ) const;
-  void setUser( const User& );
   void setUserStatus( const User& );
   void sendUserStatus();
+  void setUserName( const User&, const QString& );
+  void sendUserName();
 
   /* CoreChat */
   void createDefaultChat();
   void createPrivateChat( const User& );
   Chat chat( VNumber ) const;
   void setChat( const Chat& );
+  QString chatMessageToText( const UserList&, const ChatMessage& );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat };
@@ -123,7 +126,7 @@ protected:
   void dispatchToChat( const ChatMessage&, VNumber chat_id );
 
 private:
-  QList<User> m_users;
+  UserList m_users;
   QList<Chat> m_chats;
   QList<Connection*> m_connections;
   Listener* mp_listener;
@@ -136,6 +139,6 @@ private:
 // Inline Functions
 inline Chat Core::defaultChat( bool read_all_messages ) { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
 inline bool Core::isConnected() const { return mp_listener->isListening(); }
-inline const QList<User>& Core::users() const { return m_users; }
+inline const UserList& Core::users() const { return m_users; }
 
 #endif // BEEBEEP_CLIENT_H

@@ -30,21 +30,20 @@
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "Settings.h"
-#include "UserManager.h"
 
 
 GuiMain::GuiMain( QWidget *parent )
  : QMainWindow( parent )
 {
+  setObjectName( "GuiMainWindow" );
   mp_core = new Core( this );
 
   setWindowIcon( QIcon( ":/images/beebeep.png") );
   mp_defaultChat = new GuiChat( this );
   setCentralWidget( mp_defaultChat );
   mp_barMain = addToolBar( tr( "Show the ToolBar" ) );
+  mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
-  if( !Settings::instance().showToolBar() )
-    mp_barMain->hide();
 
   createActions();
   createDockWindows();
@@ -77,7 +76,7 @@ void GuiMain::refreshTitle()
 {
   setWindowTitle( QString( "%1 - %2 (%3)" ).arg(
                     Settings::instance().programName(),
-                    Settings::instance().localUser().nickname(),
+                    Settings::instance().localUser().name(),
                     Bee::userStatusToString( Settings::instance().localUser().status() ) ) );
 }
 
@@ -89,10 +88,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
   {
 #ifndef Q_OS_SYMBIAN
     Settings::instance().setGuiGeometry( saveGeometry() );
+    Settings::instance().setGuiState( saveState() );
 #endif
-    Settings::instance().setUserListWidth( mp_userList->size().width() );
     Settings::instance().setShowMenuBar( mp_actMenuBar->isChecked() );
-    Settings::instance().setShowToolBar( mp_actToolBar->isChecked() );
     if( mp_core->isConnected() )
       mp_core->stop();
     e->accept();
@@ -116,12 +114,11 @@ void GuiMain::selectNickname()
                                         Settings::instance().programName(),
                                         tr( "Please insert your nickname"),
                                         QLineEdit::Normal,
-                                        local_user.nickname(),
+                                        local_user.name(),
                                         &ok );
   if( !ok || nick.isNull() || nick.isEmpty() )
     return;
-  local_user.setNickname( nick );
-  Settings::instance().setLocalUser( local_user );
+  mp_core->setLocalUserName( nick );
 }
 
 void GuiMain::startStopCore()
@@ -207,7 +204,7 @@ void GuiMain::createActions()
   mp_actFontColor->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
   connect( mp_actFontColor, SIGNAL( triggered() ), this, SLOT( selectFontColor() ) );
 
-  mp_actSendFile = new QAction( QIcon( ":/images/upload.png"), tr( "Send a file..." ), this );
+  mp_actSendFile = new QAction( QIcon( ":/images/send-file.png"), tr( "Send a file..." ), this );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
   connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
 
@@ -241,78 +238,48 @@ void GuiMain::createMenus()
   menu->addSeparator();
   menu->addAction( mp_actNickname );
   menu->addAction( mp_actSearch );
-  menu->addAction( mp_actSendFile );
   menu->addSeparator();
-  menu->addAction( mp_actSaveChat );
-  act = menu->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download directory..."), this, SLOT( selectDownloadDirectory() ) );
+  act = menu->addAction( QIcon( ":/images/download-folder.png" ), tr( "Select download folder..."), this, SLOT( selectDownloadDirectory() ) );
   menu->addSeparator();
   menu->addAction( mp_actQuit );
 
   /* Settings Menu */
-  mp_menuSettingsIcon = new QMenu( tr( "Settings" ), this );
-  mp_menuSettingsIcon->setStatusTip( tr( "Choose your preferred %1 settings" ).arg( Settings::instance().programName() ) );
-  mp_menuSettingsIcon->setIcon( QIcon( ":/images/settings.png" ) );
   mp_menuSettings = menuBar()->addMenu( tr( "&Settings") );
-
-  mp_menuSettings->addAction( mp_actFont );
-  mp_menuSettings->addAction( mp_actFontColor );
-  mp_menuSettings->addSeparator();
-  mp_menuSettingsIcon->addAction( mp_actMenuBar );
   mp_menuSettings->addAction( mp_actMenuBar );
-  mp_menuSettingsIcon->addAction( mp_actToolBar );
   mp_menuSettings->addAction( mp_actToolBar );
   mp_menuSettings->addSeparator();
-  mp_menuSettingsIcon->addSeparator();
+
+  act = mp_menuSettings->addAction( tr( "Show only the nicknames" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled only the nickname of the connected users are shown" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showOnlyUsername() );
+  act->setData( 6 );
 
   act = mp_menuSettings->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatCompact() );
   act->setData( 1 );
-  mp_menuSettingsIcon->addAction( act );
 
   act = mp_menuSettings->addAction( tr( "Add a blank line between the messages" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the messages in the chat window are separated by a blank line" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatAddNewLineToMessage() );
   act->setData( 2 );
-  mp_menuSettingsIcon->addAction( act );
 
   act = mp_menuSettings->addAction( tr( "Show the messages' timestamp" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the message shows its timestamp in the chat window" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
-  mp_menuSettingsIcon->addAction( act );
 
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().beepOnNewMessageArrived() );
   act->setData( 4 );
-  mp_menuSettingsIcon->addAction( act );
 
-  mp_menuSettings->addSeparator();
-  mp_menuSettingsIcon->addSeparator();
-
-  mp_menuSettings->addAction( mp_actViewUsers );
-  mp_menuSettingsIcon->addAction( mp_actViewUsers );
-
-  act = mp_menuSettings->addAction( tr( "Show user's address IP" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the IP addresses of the connected users are shown" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserIp() );
-  act->setData( 5 );
-  mp_menuSettingsIcon->addAction( act );
-
-  act = mp_menuSettings->addAction( tr( "Show user's nickname" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the nickname of the connected users are shown" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserNickname() );
-  act->setData( 6 );
-  mp_menuSettingsIcon->addAction( act );
-
-  /* Emoticons Menu for ToolBar and MenuBar */
+  /* Emoticons Menu for ToolBar */
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
   mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
   mp_menuEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
@@ -353,21 +320,17 @@ void GuiMain::createMenus()
 
 void GuiMain::createToolBars()
 {
-  mp_barMain->addAction( mp_actStartStopCore );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actNickname );
-  mp_barMain->addAction( mp_actSearch );
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actSendFile );
   mp_barMain->addAction( mp_actSaveChat );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_menuSettingsIcon->menuAction() );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actFont );
   mp_barMain->addAction( mp_actFontColor );
   mp_barMain->addAction( mp_menuEmoticons->menuAction() );
   mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actAbout );
+  mp_barMain->addAction( mp_actViewUsers );
+  mp_barMain->addAction( mp_actViewFileTransfer );
 }
 
 void GuiMain::createStatusBar()
@@ -378,19 +341,23 @@ void GuiMain::createStatusBar()
 void GuiMain::createDockWindows()
 {
   QDockWidget *dock_widget = new QDockWidget( tr( "Users" ), this );
+  dock_widget->setObjectName( "GuiUserListDock" );
   mp_userList = new GuiUserList( dock_widget );
   dock_widget->setWidget( mp_userList );
   addDockWidget( Qt::RightDockWidgetArea, dock_widget );
   mp_actViewUsers = dock_widget->toggleViewAction();
+  mp_actViewUsers->setIcon( QIcon( ":/images/user-list.png" ) );
   mp_actViewUsers->setText( tr( "Show online users and active chats" ) );
   mp_actViewUsers->setStatusTip( tr( "Show the list of the connected users and the active chats" ) );
   mp_actViewUsers->setData( 99 );
 
   dock_widget = new QDockWidget( tr( "File Transfers" ), this );
+  dock_widget->setObjectName( "GuiFileTransferDock" );
   mp_fileTransfer = new GuiTransferFile( this );
   dock_widget->setWidget( mp_fileTransfer );
   addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
   mp_actViewFileTransfer = dock_widget->toggleViewAction();
+  mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
@@ -410,6 +377,11 @@ void GuiMain::checkUser( const User& u )
   {
     qDebug() << "Invalid user found in GuiMain::checkUser( const User& u )";
     return;
+  }
+
+  if( u.isLocal() )
+  {
+    refreshTitle();
   }
 
   qDebug() << "User" << u.path() << "has changed his info. Check it";
@@ -492,11 +464,10 @@ void GuiMain::settingsChanged()
     Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
     break;
   case 5:
-    Settings::instance().setShowUserIp( act->isChecked() );
-    refresh_users = true;
+    // not used
     break;
   case 6:
-    Settings::instance().setShowUserNickname( act->isChecked() );
+    Settings::instance().setShowOnlyUsername( act->isChecked() );
     refresh_users = true;
     refresh_chat = true;
   case 99:
@@ -621,7 +592,7 @@ void GuiMain::searchUsers()
 
 void GuiMain::showWritingUser( const User& u )
 {
-  QString msg = tr( "%1 is writing..." ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() );
+  QString msg = tr( "%1 is writing..." ).arg( Settings::instance().showOnlyUsername() ? u.name() : u.path() );
   statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
 }
 
@@ -648,16 +619,20 @@ void GuiMain::changeStatusDescription()
 void GuiMain::sendFile()
 {
   bool ok = false;
-  QStringList user_string_list;
-  foreach( User u, mp_core->users() )
-    user_string_list << u.path();
+  QStringList user_string_list = mp_core->users().toStringList( false );
+  if( user_string_list.isEmpty() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "There is no user connected." ) );
+    return;
+  }
+
   QString user_path = QInputDialog::getItem( this, Settings::instance().programName(),
                                              tr( "Please select the user to whom you would like to send a file."),
                                              user_string_list, 0, false, &ok );
   if( !ok )
     return;
 
-  User user_selected = mp_core->user( user_path );
+  User user_selected = mp_core->users().find( user_path );
   if( !user_selected.isValid() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "User %1 not found." ).arg( user_path ) );
@@ -673,7 +648,7 @@ void GuiMain::sendFile()
 
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
-  QString msg = tr( "Do you want to download from %1\n%2 (%3)?" ).arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
+  QString msg = tr( "Do you want to download from %1\n%2 (%3)?" ).arg( Settings::instance().showOnlyUsername() ? u.name() : u.path() )
                                                                  .arg( fi.name() ).arg( Bee::bytesToString( fi.size() ) );
   if( QMessageBox::information( this, Settings::instance().programName(), msg, tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {

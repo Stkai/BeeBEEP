@@ -121,12 +121,12 @@ void Core::closeConnection( Connection *c )
     qWarning() << number_of_connection_pointers << "pointers of a single connection found in connection list";
 
   qDebug() << "Closing connection for user" << c->userId();
-  User u = user( c->userId() );
+  User u = m_users.find( c->userId() );
   if( u.isValid() )
   {
     qDebug() << "User" << u.path() << "goes offline";
     u.setStatus( User::Offline );
-    setUser( u );
+    m_users.setUser( u );
     QString sHtmlMsg = tr( "%1 %2 has left." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), u.path() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
     emit userChanged( u );
@@ -150,7 +150,7 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
-  User u = Protocol::instance().createUser( m, c->peerAddress(), c->peerPort() );
+  User u = Protocol::instance().createUser( m, c->peerAddress() );
   if( !u.isValid() )
   {
     qWarning() << "Unable to create a new user from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
@@ -159,7 +159,7 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
-  User user_found = user( u.path() );
+  User user_found = m_users.find( u.path() );
   if( user_found.isValid() )
   {
     u.setId( user_found.id() );
@@ -182,7 +182,7 @@ void Core::checkUserAuthentication( const Message& m )
   c->setReadyForUse( u.id() );
   setConnectionReadyForUse( c );
 
-  setUser( u );
+  m_users.setUser( u );
   emit userChanged( u );
 
   QString sHtmlMsg = tr( "%1 %2 has joined." ).arg( Bee::iconToHtml( ":/images/green-ball.png", "*U*" ), u.path() );

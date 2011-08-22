@@ -31,8 +31,9 @@ GuiChat::GuiChat( QWidget *parent )
  : QWidget( parent )
 {
   setupUi( this );
-
+  setObjectName( "GuiChat" );
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
+  mp_teChat->setObjectName( "GuiChatViewer" );
   mp_teChat->setFocusPolicy( Qt::NoFocus );
   mp_teChat->setReadOnly( true );
   mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );

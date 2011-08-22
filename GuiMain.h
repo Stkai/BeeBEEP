@@ -95,7 +95,6 @@ private:
   Core *mp_core;
 
   QMenu *mp_menuSettings;
-  QMenu *mp_menuSettingsIcon;
   QMenu *mp_menuEmoticons;
   QMenu *mp_menuStatus;
 

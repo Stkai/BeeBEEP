@@ -38,9 +38,7 @@ public:
   explicit Connection( QObject *parent = 0 );
 
   bool sendMessage( const Message& );
-
   void setReadyForUse( VNumber );
-  inline VNumber userId() const;
 
 signals:
   void newMessage( VNumber, const Message& );
@@ -51,14 +49,10 @@ protected slots:
   void sendPong();
 
 private:
-  VNumber m_userId;
   QTimer m_pingTimer;
   QTime m_pongTime;
 
 };
 
-
-// Inline Functions
-inline VNumber Connection::userId() const { return m_userId; }
 
 #endif // BEEBEEP_CONNECTION_H

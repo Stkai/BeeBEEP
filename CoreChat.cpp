@@ -135,7 +135,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     {
       if( !c->sendMessage( m ) )
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send the message to %2." )
-                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), user( c->userId() ).path() ), DispatchToChat );
+                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), m_users.find( c->userId() ).path() ), DispatchToChat );
       else
         messages_sent += 1;
     }
@@ -154,7 +154,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
         messages_sent += 1;
       else
         dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send the message to %2." )
-                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), user( user_id ).path() ), DispatchToChat );
+                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), m_users.find( user_id ).path() ), DispatchToChat );
     }
   }
 
@@ -247,7 +247,7 @@ QString FormatMessage( const User& u, const ChatMessage& cm )
   QString sHtmlMessage = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
             .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=gray>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
             .arg( u.color() )
-            .arg( Settings::instance().showUserNickname() ? u.nickname() : u.name() )
+            .arg( u.isLocal() ? u.name() : (Settings::instance().showOnlyUsername() ? u.name() : u.path() ))
             .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
             .arg( text_formatted );
   return sHtmlMessage;
@@ -269,7 +269,18 @@ QString Core::chatMessageToText( const ChatMessage& cm )
   if( cm.isSystem() )
     s = FormatSystemMessage( cm );
   else
-    s = FormatMessage( user( cm.userId() ), cm );
+    s = FormatMessage( m_users.find( cm.userId() ), cm );
+  s += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
+  return s;
+}
+
+QString Core::chatMessageToText( const UserList& chat_users, const ChatMessage& cm )
+{
+  QString s;
+  if( cm.isSystem() )
+    s = FormatSystemMessage( cm );
+  else
+    s = FormatMessage( chat_users.find( cm.userId() ), cm );
   s += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
   return s;
 }
@@ -277,8 +288,16 @@ QString Core::chatMessageToText( const ChatMessage& cm )
 QString Core::chatMessagesToText( const Chat& c )
 {
   QString s = "";
+  UserList chat_users;
+  if( c.id() == ID_DEFAULT_CHAT )
+  {
+    chat_users = m_users;
+  }
+  else
+    chat_users = m_users.fromUsersId( c.usersId() );
+
   foreach( ChatMessage cm, c.messages() )
-    s += chatMessageToText( cm );
+    s += chatMessageToText( chat_users, cm );
   return s;
 }
 
@@ -293,8 +312,8 @@ QString Core::chatUsers( const Chat& c, const QString& user_separator )
   {
     if( user_id == ID_LOCAL_USER )
       continue;
-    u = user( user_id );
-    sl << (Settings::instance().showUserNickname() ? u.nickname() : u.name());
+    u = m_users.find( user_id );
+    sl << (Settings::instance().showOnlyUsername() ? u.name() : u.path() );
   }
   return sl.size() == 0 ? tr( "Nobody" ) : sl.join( user_separator );
 }

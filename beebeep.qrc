@@ -20,7 +20,6 @@
         <file>emoticons/surprise.png</file>
         <file>images/green-ball.png</file>
         <file>images/red-ball.png</file>
-        <file>images/yellow-ball.png</file>
         <file>emoticons/angel.png</file>
         <file>emoticons/whistle.png</file>
         <file>images/quit.png</file>
@@ -28,7 +27,6 @@
         <file>images/font-color.png</file>
         <file>images/chat.png</file>
         <file>emoticons/wizard.png</file>
-        <file>images/settings.png</file>
         <file>images/connect.png</file>
         <file>images/disconnect.png</file>
         <file>images/info.png</file>
@@ -53,5 +51,8 @@
         <file>images/paste.png</file>
         <file>images/cut.png</file>
         <file>images/select-all.png</file>
+        <file>images/file-transfer.png</file>
+        <file>images/user-list.png</file>
+        <file>images/send-file.png</file>
     </qresource>
 </RCC>

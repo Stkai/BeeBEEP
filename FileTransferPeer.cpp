@@ -26,7 +26,7 @@
 
 
 FileTransferPeer::FileTransferPeer( VNumber peer_id, QObject *parent )
-  : QObject( parent ), m_id( peer_id ), m_user(), m_fileInfo( 0, FileInfo::Upload ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ),
+  : QObject( parent ), m_id( peer_id ), m_fileInfo( 0, FileInfo::Upload ), m_socket(), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 )
 {
   qDebug() << "Peer" << m_id << "created for transfer file";
@@ -39,7 +39,7 @@ void FileTransferPeer::cancelTransfer()
 {
   qDebug() << m_fileInfo.name() << "transfer cancelled";
   m_state = FileTransferPeer::Cancelled;
-  emit message( m_user, m_fileInfo, tr( "transfer cancelled" ) );
+  emit message( userId(), m_fileInfo, tr( "transfer cancelled" ) );
   closeAll();
 }
 
@@ -91,7 +91,7 @@ void FileTransferPeer::setTransferCompleted()
 {
   qDebug() << m_fileInfo.name() << "transfer completed";
   m_state = FileTransferPeer::Completed;
-  emit message( m_user, m_fileInfo, tr( "transfer completed" ) );
+  emit message( userId(), m_fileInfo, tr( "transfer completed" ) );
   closeAll();
 }
 
@@ -106,19 +106,19 @@ void FileTransferPeer::setError( const QString& str_err )
   m_state = FileTransferPeer::Error;
   QString s = tr( "transfer error (%1)" ).arg( str_err );
   qWarning() << s;
-  emit message( m_user, m_fileInfo, str_err );
+  emit message( userId(), m_fileInfo, str_err );
   closeAll();
 }
 
 void FileTransferPeer::showProgress()
 {
-  emit progress( m_user, m_fileInfo, m_totalBytesTransferred );
+  emit progress( userId(), m_fileInfo, m_totalBytesTransferred );
 }
 
 void FileTransferPeer::checkAuthentication( const Message& m )
 {
   qDebug() << "File transfer is checking the authentication";
-  User u = Protocol::instance().createUser( m, m_socket.peerAddress(), m_socket.peerPort() );
+  User u = Protocol::instance().createUser( m, m_socket.peerAddress() );
   if( !u.isValid() )
   {
     qWarning() << "Unable to create a new user from the message arrived from:" << m_socket.peerAddress().toString() << m_socket.peerPort();
@@ -127,25 +127,23 @@ void FileTransferPeer::checkAuthentication( const Message& m )
     return;
   }
 
-  m_user = u;
-  qDebug() << "FileTransfer has received connection (must be validated) from" << m_user.path();
-  emit userConnected( m_user );
+  m_socket.setUserId( u.id() );
+  qDebug() << "FileTransfer has received connection (must be validated) from" << u.path();
+  emit userConnected( u );
 }
 
 void FileTransferPeer::setUserAuthenticated( const User& u )
 {
   if( !u.isValid() )
   {
-    qWarning() << m_user.path() << "is not authenticated. File transfer aborted";
+    qWarning() << "User" << m_socket.userId() << "is not authenticated. File transfer aborted";
     m_socket.abort();
     closeAll();
     return;
   }
 
-  m_user.setId( u.id() );
-  m_user.setColor( u.color() );
-
-  qDebug() << "File transfer has confirmed the user" << m_user.path();
+  m_socket.setUserId( u.id() );
+  qDebug() << "File transfer has confirmed the user" << u.path();
   m_socket.setUserAuthenticated( true );
   qDebug() << "Authentication completed";
   emit userAuthenticated();

@@ -63,17 +63,14 @@ void Settings::setPassword( const QString& new_value )
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
-  m_localUser.setPeerAddress( host_address );
-  m_localUser.setListenerPort( host_port );
+  m_localUser.setHostAddress( host_address );
+  m_localUser.setHostPort( host_port );
 }
 
 namespace
 {
   QString GetUserNameFromSystemEnvinroment()
   {
-#if defined( BEEBEEP_DEBUG )
-    return QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
-#else
     qDebug() << "Checking local user system environment";
     QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
     QString sTmp = pe.value( "USERNAME" );
@@ -82,16 +79,12 @@ namespace
     if( sTmp.isNull() )
       sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
     return sTmp;
-#endif
   }
 }
 
 void Settings::load()
 {
   qDebug() << "Creating local user and loading settings";
-  QString sName = GetUserNameFromSystemEnvinroment();
-  m_localUser.setName( sName );
-
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
   sets.beginGroup( "Chat" );
   m_chatFont.fromString( sets.value( "Font", QApplication::font().toString() ).toString() );
@@ -103,31 +96,18 @@ void Settings::load()
   m_beepOnNewMessageArrived = sets.value( "BeepOnNewMessageArrived", true ).toBool();
   sets.endGroup();
   sets.beginGroup( "User" );
-  m_showUserIp = sets.value( "ShowAddressIp", false ).toBool();
-  m_showUserNickname = sets.value( "ShowNickname", true ).toBool();
-  m_localUser.setNickname( sets.value( "LocalNickname", "" ).toString() );
+  m_localUser.setName( sets.value( "LocalName", "" ).toString() );
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_localUser.setListenerPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
+  m_localUser.setHostPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
   m_broadcastPort = sets.value( "LocalBroadcastPort", BROADCAST_DEFAULT_PORT ).toInt();
-  sets.endGroup();
-  sets.beginGroup( "Geometry" );
-  m_guiGeometry = sets.value( "MainWindow", "" ).toByteArray();
-#ifdef Q_OS_SYMBIAN
-  m_userListWidth = sets.value( "UserListWidth", 110 ).toInt();
-#else
-  m_userListWidth = sets.value( "UserListWidth", 140 ).toInt();
-#endif
+  m_showOnlyUsername = sets.value( "ShowOnlyName", true ).toBool();
   sets.endGroup();
   sets.beginGroup( "Gui" );
-  m_showMenuBar = sets.value( "ShowMenuBar", false ).toBool();
-  m_showToolBar = sets.value( "ShowToolBar", true ).toBool();
+  m_guiGeometry = sets.value( "MainWindowGeometry", "" ).toByteArray();
+  m_guiState = sets.value( "MainWindowState", "" ).toByteArray();
+  m_showMenuBar = sets.value( "ShowMenuBar", true ).toBool();
   m_mainBarIconSize = sets.value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
-#if defined( BEEBEEP_DEBUG )
-  m_debugMode = sets.value( "DebugMode", true ).toBool();
-#else
-  m_debugMode = sets.value( "DebugMode", false ).toBool();
-#endif
   m_language = sets.value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
@@ -137,9 +117,19 @@ void Settings::load()
   sets.endGroup();
 
   sets.beginGroup( "Tools" );
+#if defined( BEEBEEP_DEBUG )
+  m_debugMode = sets.value( "DebugMode", true ).toBool();
+#else
+  m_debugMode = sets.value( "DebugMode", false ).toBool();
+#endif
   m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
   sets.endGroup();
 
+  if( m_localUser.name().isEmpty() )
+  {
+    QString sName = GetUserNameFromSystemEnvinroment();
+    m_localUser.setName( sName );
+  }
   qDebug() << "Local user:" << m_localUser.path();
 }
 
@@ -157,28 +147,25 @@ void Settings::save()
   sets.setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets.endGroup();
   sets.beginGroup( "User" );
-  sets.setValue( "LocalNickname", m_localUser.nickname() );
+  sets.setValue( "LocalName", m_localUser.name() );
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
-  sets.setValue( "LocalListenerPort", m_localUser.listenerPort() );
+  sets.setValue( "LocalHostPort", m_localUser.hostPort() );
   sets.setValue( "LocalBroadcastPort", m_broadcastPort );
-  sets.setValue( "ShowNickname", m_showUserNickname );
-  sets.endGroup();
-  sets.beginGroup( "Geometry" );
-  sets.setValue( "MainWindow", m_guiGeometry );
-  sets.setValue( "UserListWidth", m_userListWidth );
+  sets.setValue( "ShowOnlyName", m_showOnlyUsername );
   sets.endGroup();
   sets.beginGroup( "Gui" );
+  sets.setValue( "MainWindowGeometry", m_guiGeometry );
+  sets.setValue( "MainWindowState", m_guiState );
   sets.setValue( "ShowMenuBar", m_showMenuBar );
-  sets.setValue( "ShowToolBar", m_showToolBar );
   sets.setValue( "MainBarIconSize", m_mainBarIconSize );
-  sets.setValue( "DebugMode", m_debugMode );
   sets.setValue( "Language", m_language );
   sets.setValue( "LastDirectorySelected", m_lastDirectorySelected );
   sets.setValue( "DownloadDirectory", m_downloadDirectory );
   sets.setValue( "LogPath", m_logPath );
   sets.endGroup();
   sets.beginGroup( "Tools" );
+  sets.setValue( "DebugMode", m_debugMode );
   sets.setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets.endGroup();
   sets.sync();

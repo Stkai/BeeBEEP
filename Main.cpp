@@ -87,9 +87,15 @@ int main( int argc, char *argv[] )
 #else
   QByteArray ba = Settings::instance().guiGeometry();
   if( !ba.isEmpty() )
+  {
     mw.restoreGeometry( Settings::instance().guiGeometry() );
+    ba = Settings::instance().guiState();
+    if( !ba.isEmpty() )
+      mw.restoreState( Settings::instance().guiState() );
+  }
   else
     mw.resize( QSize( 600, 340 ) );
+
   mw.show();
 #endif
 

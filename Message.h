@@ -31,7 +31,7 @@ class Message
 {
 public:
   enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, User, File, NumTypes };
-  enum Flag { Private, Writing, Status, NumFlags };
+  enum Flag { Private, UserWriting, UserStatus, UserName, NumFlags };
 
   Message();
   Message( const Message& );

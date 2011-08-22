@@ -28,6 +28,7 @@
 GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   : QTextEdit( parent )
 {
+  setObjectName( "GuiMessageEdit" );
   mp_timer = new QTimer( this );
   mp_timer->setSingleShot( true );
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
