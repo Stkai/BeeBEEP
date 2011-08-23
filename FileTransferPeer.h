@@ -24,56 +24,62 @@
 #ifndef BEEBEEP_FILETRANSFERPEER_H
 #define BEEBEEP_FILETRANSFERPEER_H
 
-#include "Config.h"
 #include "ConnectionSocket.h"
 #include "FileInfo.h"
-class User;
 
 
-class FileTransferPeer : public QObject
+class FileTransferPeer : public ConnectionSocket
 {
   Q_OBJECT
 
 public:
+  enum TransferType { Download, Upload };
   enum TransferState { Unknown, Request, Transferring, Completed, Error, Cancelled };
 
-  explicit FileTransferPeer( VNumber, QObject *parent = 0 );
+  explicit FileTransferPeer( QObject *parent = 0 );
 
+  inline void setTransferType( TransferType );
+  inline bool isDownload() const;
+  inline void setId( VNumber );
+  inline VNumber id() const;
   void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
-
   void setFileInfo( const FileInfo& );
   inline const FileInfo& fileInfo() const;
 
-  inline VNumber id() const;
-  inline VNumber userId() const;
+  void startUpload( const FileInfo& );
   void cancelTransfer();
-
-  void setUserAuthenticated( const User& );
-
-protected slots:
-  void socketError( QAbstractSocket::SocketError );
-  void checkAuthentication( const Message& );
-
-  virtual void checkData( const QByteArray& ) = 0;
-  virtual void sendData() = 0;
 
 signals:
   void message( VNumber, const FileInfo&, const QString& );
   void progress( VNumber, const FileInfo&, FileSizeType );
-  void transferFinished();
-  void userConnected( const User& );
-  void userAuthenticated();
+  void fileUploadRequest( VNumber, const QByteArray& );
+
+protected slots:
+  void socketError( QAbstractSocket::SocketError );
+  void checkTransferData( const QByteArray& );
 
 protected:
   void showProgress();
   void setError( const QString& );
   void setTransferCompleted();
   void closeAll();
+  void sendTransferData();
+
+  /* FileTransferUpload */
+  void checkUploadData( const QByteArray& );
+  void sendUploadData();
+  void checkUploadRequest( const QByteArray& );
+  void checkUploading( const QByteArray& );
+  /* FileTransferDownload */
+  void checkDownloadData( const QByteArray& );
+  void sendDownloadData();
+  void sendDownloadRequest();
+  void sendDownloadDataConfirmation();
 
 protected:
+  TransferType m_transferType;
   VNumber m_id;
   FileInfo m_fileInfo;
-  ConnectionSocket m_socket;
   QFile m_file;
   TransferState m_state;
   int m_bytesTransferred;
@@ -83,8 +89,10 @@ protected:
 
 
 // Inline Functions
+inline void FileTransferPeer::setTransferType( FileTransferPeer::TransferType new_value ) { m_transferType = new_value; }
+inline bool FileTransferPeer::isDownload() const { return m_transferType == FileTransferPeer::Download; }
+inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber FileTransferPeer::id() const { return m_id; }
-inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 
 

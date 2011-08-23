@@ -66,6 +66,9 @@ void Core::setLocalUserName( const QString& user_name )
 
 void Core::setUserStatus( const User& u )
 {
+  // Before signal is emitted, so chat is created in gui ... FIXME ??? ...
+  emit userChanged( u );
+
   QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
   if( u.isLocal() )
     sHtmlMsg += tr( "You are" );
@@ -74,9 +77,7 @@ void Core::setUserStatus( const User& u )
    sHtmlMsg += QString( " " );
    sHtmlMsg += QString( "%1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
-
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
-  emit userChanged( u );
 }
 
 void Core::setUserName( const User& u, const QString& old_user_name )

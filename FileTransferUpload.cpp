@@ -22,42 +22,32 @@
 //////////////////////////////////////////////////////////////////////
 
 
-#include "FileTransferUpload.h"
+#include "FileTransferPeer.h"
 #include "Protocol.h"
 
 
-FileTransferUpload::FileTransferUpload( VNumber peer_id, QObject *parent )
-  : FileTransferPeer( peer_id, parent )
-{
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "FileTransferPeer created in Upload Mode";
-#endif
-}
-
-void FileTransferUpload::checkData( const QByteArray& byte_array )
+void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
 {
   switch( m_state )
   {
   case FileTransferPeer::Request:
-    checkRequest( byte_array );
+    checkUploadRequest( byte_array );
     break;
   case FileTransferPeer::Transferring:
-    checkSending( byte_array );
+    checkUploading( byte_array );
     break;
   default:
     // discard data
-    qWarning() << "Server Peer discard data:" << byte_array;
+    qWarning() << "Upload Peer discard data:" << byte_array;
   }
 }
 
-void FileTransferUpload::checkRequest( const QByteArray& byte_array )
+void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
 {
   Message m = Protocol::instance().toMessage( byte_array );
   if( !m.isValid() )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Invalid file request received:" << byte_array;
-#endif
     cancelTransfer();
     return;
   }
@@ -65,46 +55,45 @@ void FileTransferUpload::checkRequest( const QByteArray& byte_array )
   FileInfo file_info = Protocol::instance().fileInfoFromMessage( m );
   if( !file_info.isValid() )
   {
-#if defined( BEEBEEP_DEBUG )
     qDebug() << "Invalid file info in message:" << byte_array;
-#endif
+
     cancelTransfer();
     return;
   }
 
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "File request received:" << file_info.id() << file_info.password();
-#endif
-  emit fileTransferRequest( file_info.id(), file_info.password() );
+  emit fileUploadRequest( file_info.id(), file_info.password() );
 }
 
-void FileTransferUpload::startTransfer( const FileInfo& fi )
+void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setFileInfo( fi );
-  m_state = FileTransferPeer::Transferring;
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << fi.path() << "file transfer started";
-#endif
-  sendData();
+  qDebug() << "Uploading" << fi.path();
+  sendUploadData();
 }
 
-void FileTransferUpload::checkSending( const QByteArray& byte_array )
+void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 {
   if( byte_array.toInt() == m_bytesTransferred )
   {
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << m_bytesTransferred << "bytes sent confirmed";
-#endif
+    qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent confirmed";
     m_totalBytesTransferred += m_bytesTransferred;
     showProgress();
-    sendData();
+    sendTransferData();
   }
   else
     setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( byte_array.toInt() ) );
 }
 
-void FileTransferUpload::sendData()
+void FileTransferPeer::sendUploadData()
 {
+  if( m_state == FileTransferPeer::Request )
+  {
+    // User Authorized... now we are waiting for file request
+    sendData( QByteArray( "OK" ) );
+    return;
+  }
+
   if( m_state != FileTransferPeer::Transferring )
   {
     qWarning() << m_fileInfo.name() << ": try to send data, but it id in state" << m_state;
@@ -128,12 +117,10 @@ void FileTransferUpload::sendData()
 
   QByteArray byte_array = m_file.read( 32704 );
 
-  if( m_socket.sendData( byte_array ) )
+  if( sendData( byte_array ) )
   {
     m_bytesTransferred = byte_array.size();
-#if defined( BEEBEEP_DEBUG )
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent";
-#endif
   }
   else
   {

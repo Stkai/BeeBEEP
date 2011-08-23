@@ -55,7 +55,7 @@ private:
 
 // Inline Functions
 
-inline bool ChatMessage::isValid() const { return m_userId > 0 && m_message.isValid(); }
+inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID && m_message.isValid(); }
 inline bool ChatMessage::isSystem() const { return m_message.type() == Message::System; }
 inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
 inline VNumber ChatMessage::userId() const { return m_userId; }

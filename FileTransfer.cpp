@@ -22,8 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "FileTransfer.h"
-#include "FileTransferDownload.h"
-#include "FileTransferUpload.h"
+#include "FileTransferPeer.h"
 #include "Settings.h"
 
 
@@ -116,11 +115,12 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi )
 
 void FileTransfer::incomingConnection( int socketDescriptor )
 {
-  FileTransferUpload *upload_peer = new FileTransferUpload( newFileId(), this );
+  FileTransferPeer *upload_peer = new FileTransferPeer( this );
+  upload_peer->setTransferType( FileTransferPeer::Upload );
+  upload_peer->setId( newFileId() );
+  connect( upload_peer, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthentication( const Message& ) ) );
 
-  connect( upload_peer, SIGNAL( userConnected( const User& ) ), this, SIGNAL( userConnected( const User& ) ) );
-  connect( upload_peer, SIGNAL( transferFinished() ), this, SLOT( stopUpload() ) );
-  connect( upload_peer, SIGNAL( fileTransferRequest( VNumber, const QByteArray& ) ), this, SLOT( checkFileTransferRequest( VNumber, const QByteArray& ) ) );
+  connect( upload_peer, SIGNAL( fileUploadRequest( VNumber, const QByteArray& ) ), this, SLOT( checkUploadRequest( VNumber, const QByteArray& ) ) );
   connect( upload_peer, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ) );
   connect( upload_peer, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ) );
   connect( upload_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
@@ -128,22 +128,41 @@ void FileTransfer::incomingConnection( int socketDescriptor )
   upload_peer->setConnectionDescriptor( socketDescriptor );
 }
 
-void FileTransfer::validateUser( const User& user_to_check, const User& user_connected )
+void FileTransfer::checkAuthentication( const Message& m )
 {
-  qDebug() << "FileTransfer validate user" << user_to_check.path() << "with" << user_connected.path();
+  qDebug() << "Checking authentication message";
+  FileTransferPeer* mp_peer = (FileTransferPeer*)sender();
+  emit userConnected( mp_peer->id(), mp_peer->peerAddress(), m );
+}
+
+void FileTransfer::validateUser( VNumber peer_id, VNumber user_id )
+{
+  qDebug() << "FileTransfer validate user for peer" << peer_id;
   QList<FileTransferPeer*>::iterator it = m_peers.begin();
   while( it != m_peers.end() )
   {
-    if( (*it)->userId() == user_to_check.id() )
-      (*it)->setUserAuthenticated( user_connected );
+    if( (*it)->id() == peer_id )
+    {
+      if( user_id == ID_INVALID )
+      {
+        qDebug() << "Peer not authorized";
+        (*it)->cancelTransfer();
+      }
+      else
+      {
+        qDebug() << "Peer authorized with user id" << user_id;
+        (*it)->setUserId( user_id );
+      }
+      return;
+    }
     ++it;
   }
 }
 
-void FileTransfer::checkFileTransferRequest( VNumber file_id, const QByteArray& file_password )
+void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_password )
 {
-  qDebug() << "Checking file request:" << file_id << file_password;
-  FileTransferUpload *upload_peer = qobject_cast<FileTransferUpload*>( sender() );
+  qDebug() << "Checking upload request:" << file_id << file_password;
+  FileTransferPeer *upload_peer = qobject_cast<FileTransferPeer*>( sender() );
   if( !upload_peer )
   {
     qWarning() << "FileTransfer received a signal from invalid FileTransferUpload instance";
@@ -165,16 +184,18 @@ void FileTransfer::checkFileTransferRequest( VNumber file_id, const QByteArray& 
     return;
   }
 
-  upload_peer->startTransfer( file_info );
+  upload_peer->startUpload( file_info );
 }
 
 void FileTransfer::downloadFile( const FileInfo& fi )
 {
-  FileTransferDownload *download_peer = new FileTransferDownload( newFileId(), fi, this );
-  connect( download_peer, SIGNAL( transferFinished() ), this, SLOT( stopDownload() ) );
+  FileTransferPeer *download_peer = new FileTransferPeer( this );
+  download_peer->setTransferType( FileTransferPeer::Download );
+  download_peer->setId( newFileId() );
+  download_peer->setFileInfo( fi );
   connect( download_peer, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ) );
   connect( download_peer, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ) );
-  connect( download_peer, SIGNAL( destroyed() ), this, SLOT( dowloadPeerDestroyed() ) );
+  connect( download_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
 
   m_peers.append( download_peer );
   download_peer->setConnectionDescriptor( 0 );
@@ -189,6 +210,7 @@ FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
       return *it;
     ++it;
   }
+  qWarning() << "FileTransferPeer" << peer_id << "not found";
   return 0;
 }
 
@@ -196,7 +218,7 @@ void FileTransfer::peerDestroyed()
 {
   if( !sender() )
   {
-    qWarning() << "Unable to cast object FileTransferPeer from the sender of the signal. List become invalid";
+    qWarning() << "Unable to find peer sender of signal destroyed(). List become invalid";
     return;
   }
 
@@ -215,26 +237,4 @@ bool FileTransfer::cancelTransfer( VNumber peer_id )
   }
   qDebug() << "Unable to cancel transfer in progress. Peer not found";
   return false;
-}
-
-void FileTransfer::stopUpload()
-{
-  qDebug() << "Upload finished";
-  FileTransferUpload *upload_peer = qobject_cast<FileTransferUpload*>( sender() );
-  if( upload_peer )
-  {
-    qDebug() << "Deleting peer" << upload_peer->id();
-    upload_peer->deleteLater();
-  }
-}
-
-void FileTransfer::stopDownload()
-{
-  qDebug() << "Download finished";
-  FileTransferDownload *download_peer = qobject_cast<FileTransferDownload*>( sender() );
-  if( download_peer )
-  {
-    qDebug() << "Deleting peer" << download_peer->id();
-    download_peer->deleteLater();
-  }
 }

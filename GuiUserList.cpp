@@ -23,7 +23,6 @@
 
 #include "GuiUserList.h"
 #include "Settings.h"
-#include "BeeBeep.h"
 
 
 GuiUserList::GuiUserList( QWidget* parent )

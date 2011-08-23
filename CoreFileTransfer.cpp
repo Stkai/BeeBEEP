@@ -28,10 +28,15 @@
 #include "Settings.h"
 
 
-void Core::validateUserForFileTransfer( const User& user_to_check )
+void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& peer_address, const Message& m  )
 {
+  User user_to_check = Protocol::instance().createUser( m, peer_address );
   User user_connected = m_users.find( user_to_check.path() );
-  mp_fileTransfer->validateUser( user_to_check, user_connected );
+  if( user_connected.isValid() )
+    qDebug() << "Found a connected user to validate file transfer:" << user_connected.path();
+  else
+    qDebug() << user_to_check.path() << "is not authorized to file transfer";
+  mp_fileTransfer->validateUser( peer_id, user_connected.id() );
 }
 
 void Core::downloadFile( const User& u, const FileInfo& fi )

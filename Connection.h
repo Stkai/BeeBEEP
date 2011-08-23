@@ -25,9 +25,7 @@
 #define BEEBEEP_CONNECTION_H
 
 #include "ConnectionSocket.h"
-#include "User.h"
 class Message;
-class FileInfo;
 
 
 class Connection : public ConnectionSocket

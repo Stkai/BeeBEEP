@@ -21,29 +21,19 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "FileTransferDownload.h"
+#include "FileTransferPeer.h"
 #include "Protocol.h"
 
 
-FileTransferDownload::FileTransferDownload( VNumber peer_id, const FileInfo& fi, QObject *parent )
-  : FileTransferPeer( peer_id, parent )
-{
-  setFileInfo( fi );
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Download the file" << m_fileInfo.name() << "from address" << m_fileInfo.hostAddress().toString() << m_fileInfo.hostPort();
-#endif
-  connect( this, SIGNAL( userAuthenticated() ), this, SLOT( sendData() ) );
-}
-
-void FileTransferDownload::sendData()
+void FileTransferPeer::sendDownloadData()
 {
   switch( m_state )
   {
   case FileTransferPeer::Request:
-    sendDownlodRequest();
+    sendDownloadRequest();
     break;
   case FileTransferPeer::Transferring:
-    sendDataConfirmation();
+    sendDownloadDataConfirmation();
     break;
   default:
     // do_nothing
@@ -51,25 +41,38 @@ void FileTransferDownload::sendData()
   }
 }
 
-void FileTransferDownload::sendDownlodRequest()
+void FileTransferPeer::sendDownloadRequest()
 {
-#if defined( BEEBEEP_DEBUG )
   qDebug() << "Sending REQUEST:" << m_fileInfo.password();
-#endif
-  m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) );
-  m_state = FileTransferPeer::Transferring;
+  if( sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
+    m_state = FileTransferPeer::Transferring;
+  else
+    cancelTransfer();
 }
 
-void FileTransferDownload::sendDataConfirmation()
+void FileTransferPeer::sendDownloadDataConfirmation()
 {
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Download corfirmation for" << m_bytesTransferred << "bytes";
-#endif
-  m_socket.sendData( QByteArray::number( m_bytesTransferred ) );
+  qDebug() << "Sending download corfirmation for" << m_bytesTransferred << "bytes";
+  if( !sendData( QByteArray::number( m_bytesTransferred ) ) )
+    cancelTransfer();
 }
 
-void FileTransferDownload::checkData( const QByteArray& byte_array )
+void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 {
+  if( m_state == FileTransferPeer::Request )
+  {
+    // after the authentication we receive "OK" from the other peer. Otherwise the connection is aborted.
+    // Skip OK, but we will send file request;
+    sendTransferData();
+    return;
+  }
+
+  if( m_state != FileTransferPeer::Transferring )
+  {
+    qWarning() << "FileTransferDownload tries to check data with invalid state" << m_state;
+    return;
+  }
+
   m_bytesTransferred = byte_array.size();
   m_totalBytesTransferred += m_bytesTransferred;
 
@@ -86,7 +89,7 @@ void FileTransferDownload::checkData( const QByteArray& byte_array )
 
   if( m_file.write( byte_array ) == m_bytesTransferred )
   {
-    sendData();
+    sendTransferData();
   }
   else
   {

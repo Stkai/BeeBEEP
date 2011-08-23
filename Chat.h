@@ -64,7 +64,7 @@ private:
 
 // Inline Functions
 inline bool Chat::operator==( const Chat& c ) const { return m_id == c.m_id; }
-inline bool Chat::isValid() const { return m_id > 0; }
+inline bool Chat::isValid() const { return m_id != ID_INVALID; }
 inline VNumber Chat::id() const { return m_id; }
 inline void Chat::setId( VNumber new_value ) { m_id = new_value; }
 inline const QList<VNumber>& Chat::usersId() const { return m_usersId; }

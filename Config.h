@@ -48,6 +48,7 @@ const int FILE_TRANSFER_CONFIRM_TIMEOUT = 15 * 1000;
 #define ENCRYPTION_KEYBITS 256
 
 // Protocol
+#define ID_INVALID         0
 #define ID_LOCAL_USER      1
 #define ID_DEFAULT_CHAT    2
 #define ID_START           1000

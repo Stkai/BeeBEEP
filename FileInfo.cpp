@@ -25,7 +25,7 @@
 
 
 FileInfo::FileInfo()
-  : m_transferType( FileInfo::Upload ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( 0 )
+  : m_transferType( FileInfo::Upload ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( ID_INVALID )
 {
 }
 

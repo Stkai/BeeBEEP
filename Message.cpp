@@ -25,7 +25,7 @@
 
 
 Message::Message()
-  : m_type( Undefined ), m_id( 0 ), m_flags( 0 ), m_data( "" ), m_timestamp(), m_text( "" )
+  : m_type( Undefined ), m_id( ID_INVALID ), m_flags( 0 ), m_data( "" ), m_timestamp(), m_text( "" )
 {
 }
 

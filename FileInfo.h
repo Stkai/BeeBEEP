@@ -74,7 +74,7 @@ private:
 // Inline Functions
 inline FileInfo::FileInfo( const FileInfo& fi ) { (void)operator=( fi ); }
 inline bool FileInfo::operator==( const FileInfo& fi ) { return m_id == fi.m_id; }
-inline bool FileInfo::isValid() const { return m_id > 0 && m_name.size() > 0; }
+inline bool FileInfo::isValid() const { return m_id != ID_INVALID && m_name.size() > 0; }
 inline bool FileInfo::isDownload() const { return m_transferType == FileInfo::Download; }
 inline FileInfo::TransferType FileInfo::transferType() const { return m_transferType; }
 inline void FileInfo::setTransferType( FileInfo::TransferType new_value ) { m_transferType = new_value; }

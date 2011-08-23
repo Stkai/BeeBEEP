@@ -6,6 +6,7 @@ TARGET = beebeep
 TEMPLATE = app
 TRANSLATIONS = locale/beebeep_it.ts
 SOURCES += Listener.cpp \
+	FileTransferPeer.cpp \
     Connection.cpp \
     PeerManager.cpp \
     GuiChat.cpp \
@@ -25,7 +26,6 @@ SOURCES += Listener.cpp \
     Rijndael.cpp \
     FileInfo.cpp \
     ConnectionSocket.cpp \
-    FileTransferPeer.cpp \
     FileTransferUpload.cpp \
     FileTransferDownload.cpp \
     FileTransfer.cpp \

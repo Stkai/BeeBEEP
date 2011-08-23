@@ -25,7 +25,7 @@
 
 
 Chat::Chat()
-  : m_id( 0 ), m_usersId(), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 )
+  : m_id( ID_INVALID ), m_usersId(), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 )
 {
 }
 

@@ -90,14 +90,14 @@ protected slots:
   /* CoreFileTransfer */
   void checkFileTransferProgress( VNumber, const FileInfo&, FileSizeType );
   void checkFileTransferMessage( VNumber, const FileInfo&, const QString& );
-  void validateUserForFileTransfer( const User& );
+  void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
 
 protected:
   /* CoreConnection */
   Connection* connection( VNumber );
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
-  void setConnectionReadyForUse( Connection* );
+  void addConnectionReadyForUse( Connection* );
 
   /* CoreParser */
   void parseUserMessage( const User&, const Message& );

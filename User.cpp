@@ -25,7 +25,7 @@
 
 
 User::User()
-  : m_id( 0 ), m_name( "" ), m_hostAddress(), m_hostPort( 0 ),
+  : m_id( ID_INVALID ), m_name( "" ), m_hostAddress(), m_hostPort( 0 ),
     m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" )
 {
 }

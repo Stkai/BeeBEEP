@@ -79,6 +79,11 @@ QTreeWidgetItem* GuiTransferFile::findItem( VNumber file_info_id )
 
 void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, FileSizeType bytes )
 {
+  if( fi.size() == 0 )
+  {
+    qWarning() << "GuiTransferFile::showProgress try to show progress divided by 0:" << fi.path();
+    return;
+  }
   QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading") : tr( "Uploading"),
                                       Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
                                       QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );

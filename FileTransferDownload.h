@@ -24,25 +24,6 @@
 #ifndef BEEBEEP_FILETRANSFERDOWNLOAD_H
 #define BEEBEEP_FILETRANSFERDOWNLOAD_H
 
-#include "FileTransferPeer.h"
-
-
-class FileTransferDownload : public FileTransferPeer
-{
-  Q_OBJECT
-
-public:
-  FileTransferDownload( VNumber, const FileInfo&, QObject *parent = 0 );
-
-protected slots:
-  void checkData( const QByteArray& );
-  void sendData();
-
-protected:
-  void sendDownlodRequest();
-  void sendDataConfirmation();
-
-};
 
 
 #endif // BEEBEEP_FILETRANSFERDOWNLOAD_H

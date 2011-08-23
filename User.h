@@ -71,7 +71,7 @@ private:
 
 // Inline Functions
 inline bool User::operator==( const User& u ) const { return m_id == u.m_id; }
-inline bool User::isValid() const { return m_id > 0; }
+inline bool User::isValid() const { return m_id != ID_INVALID; }
 inline bool User::isLocal() const { return m_id == ID_LOCAL_USER; }
 inline void User::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber User::id() const { return m_id; }

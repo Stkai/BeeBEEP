@@ -28,6 +28,7 @@
 #include "FileInfo.h"
 #include "User.h"
 class FileTransferPeer;
+class Message;
 
 
 class FileTransfer : public QTcpServer
@@ -49,12 +50,12 @@ public:
 
   inline void clearFiles();
 
-  void validateUser( const User& user_to_check, const User& user_connected );
+  void validateUser( VNumber peer_id, VNumber user_id );
 
 signals:
   void message( VNumber, const FileInfo&, const QString& );
   void progress( VNumber, const FileInfo&, FileSizeType );
-  void userConnected( const User& );
+  void userConnected( VNumber peer_id, const QHostAddress& peer_address, const Message& hello_message );
 
 protected:
   void incomingConnection( int );
@@ -63,9 +64,8 @@ protected:
   FileTransferPeer* peer( VNumber ) const;
 
 protected slots:
-  void stopUpload();
-  void stopDownload();
-  void checkFileTransferRequest( VNumber, const QByteArray& );
+  void checkAuthentication( const Message& m );
+  void checkUploadRequest( VNumber, const QByteArray& );
   void peerDestroyed();
 
 private:

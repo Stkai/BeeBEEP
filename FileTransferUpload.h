@@ -24,29 +24,6 @@
 #ifndef BEEBEEP_FILETRANSFERUPLOAD_H
 #define BEEBEEP_FILETRANSFERUPLOAD_H
 
-#include "FileTransferPeer.h"
 
-
-class FileTransferUpload : public FileTransferPeer
-{
-  Q_OBJECT
-
-public:
-  explicit FileTransferUpload( VNumber, QObject *parent = 0 );
-
-  void startTransfer( const FileInfo& );
-
-signals:
-  void fileTransferRequest( VNumber, const QByteArray& );
-
-protected slots:
-  void sendData();
-  void checkData( const QByteArray& );
-
-protected:
-  void checkRequest( const QByteArray& );
-  void checkSending( const QByteArray& );
-
-};
 
 #endif // BEEBEEP_FILETRANSFERUPLOAD_H
