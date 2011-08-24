@@ -118,7 +118,7 @@ void FileTransferPeer::sendUploadData()
   }
   else
   {
-    setError( tr( "Unable to sent %1" ).arg( byte_array.size() ) );
+    setError( tr( "Unable to upload data" ) );
     return;
   }
 }

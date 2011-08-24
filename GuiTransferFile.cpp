@@ -33,44 +33,71 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 {
   setObjectName( "GuiTransferFile" );
   QStringList labels;
-  labels << tr( "File" ) << tr( "User" ) << tr( "Status" );
+  labels << "" << tr( "File" ) << tr( "User" ) << tr( "Status" );
   setHeaderLabels( labels );
   setRootIsDecorated( false );
 
   QHeaderView* hv = header();
-  hv->setResizeMode( ColumnFile, QHeaderView::Stretch );
-  hv->setResizeMode( ColumnUser, QHeaderView::Stretch );
+  hv->setResizeMode( ColumnCancel, QHeaderView::Fixed );
+  setColumnWidth( ColumnCancel, 24 );
+  hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
+
+  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
 }
 
-void GuiTransferFile::setProgress( const User& u, const FileInfo& fi, FileSizeType bytes )
+void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
-  QTreeWidgetItem* item = findItem( fi.id() );
+  qDebug() << "GuiTransferFile setMessage:" << bytes << "of" << fi.size() << "bytes";
+  QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
   {
     item = new QTreeWidgetItem( this );
     item->setFirstColumnSpanned( false );
     item->setIcon( ColumnFile, fi.isDownload() ? QIcon( ":/images/download.png" ) : QIcon( ":/images/upload.png" ) );
     item->setText( ColumnFile, fi.name() );
+    item->setData( ColumnFile, PeerId, peer_id );
     item->setData( ColumnFile, FileId, fi.id() );
     item->setData( ColumnFile, FilePath, fi.path() );
+    item->setData( ColumnFile, TransferInProgress, true );
+    item->setData( ColumnFile, TransferCompleted, false );
     item->setText( ColumnUser, Settings::instance().showOnlyUsername() ? u.name() : u.path() );
+    item->setIcon( ColumnCancel, QIcon( ":/images/disconnect.png") );
   }
-  showProgress( item, fi, bytes );
+
+  if( item->data( ColumnFile, TransferInProgress ).toBool() )
+  {
+    qDebug() << "FileTransfer in progress";
+    item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
+    item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
+    showProgress( item, fi, bytes );
+  }
+  showIcon( item );
 }
 
-void GuiTransferFile::cancelTransfer()
+void GuiTransferFile::showIcon( QTreeWidgetItem* item )
 {
-  VNumber file_info_id = 0;
-  emit transferCancelled( file_info_id );
+  if( !item )
+    return;
+
+  QIcon icon;
+  if( item->data( ColumnFile, TransferCompleted ).toBool() )
+    icon = QIcon( ":/images/green-ball.png" );
+  else if( item->data( ColumnFile, TransferInProgress ).toBool() )
+    icon = QIcon( ":/images/disconnect.png" );
+  else
+    icon = QIcon( ":/images/red-ball.png" );
+
+  item->setIcon( ColumnCancel, icon );
 }
 
-QTreeWidgetItem* GuiTransferFile::findItem( VNumber file_info_id )
+QTreeWidgetItem* GuiTransferFile::findItem( VNumber peer_id )
 {
   QTreeWidgetItemIterator it( this );
   while( *it )
   {
-    if( (*it)->data( ColumnFile, FileId ).toULongLong() == file_info_id )
+    if( Bee::qVariantToVNumber( (*it)->data( ColumnFile, PeerId ) ) == peer_id )
       return *it;
     ++it;
   }
@@ -95,17 +122,40 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
   qDebug() << file_transfer_progress;
 }
 
-void GuiTransferFile::setMessage( const User& u, const FileInfo& fi, const QString& msg )
+void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
 {
-  QTreeWidgetItem* item = findItem( fi.id() );
+  qDebug() << "GuiTransferFile setMessage:" << msg;
+  QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
-    setProgress( u, fi, 0 );
+    setProgress( peer_id, u, fi, 0 );
   item = findItem( fi.id() );
   if( !item )
   {
     qWarning() << "Unable to find file transfer item with id" << fi.id();
     return;
   }
+
+  item->setData( ColumnFile, TransferInProgress, false );
   item->setText( ColumnProgress, msg );
+  showIcon( item );
 }
 
+void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )
+{
+  if( !item )
+  {
+    qWarning() << "GuiTransferFile::checkItemClicked has the item invalid";
+    return;
+  }
+
+  if( col == ColumnCancel && item->data( ColumnFile, TransferInProgress ).toBool() )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to cancel the transfer of %1?" ).arg( item->text( ColumnFile ) ),
+                           QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::Yes )
+    {
+      item->setIcon( ColumnCancel, QIcon( ":/images/red-ball.png") );
+      VNumber peer_id = Bee::qVariantToVNumber( item->data( ColumnFile, PeerId ) );
+      emit transferCancelled( peer_id );
+    }
+  }
+}

@@ -56,8 +56,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
 
-  connect( mp_core, SIGNAL( fileTransferProgress( const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( const User&, const FileInfo&, FileSizeType ) ) );
-  connect( mp_core, SIGNAL( fileTransferMessage( const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_defaultChat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );

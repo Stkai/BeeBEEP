@@ -53,8 +53,8 @@ public:
   void validateUser( VNumber peer_id, VNumber user_id );
 
 signals:
-  void message( VNumber, const FileInfo&, const QString& );
-  void progress( VNumber, const FileInfo&, FileSizeType );
+  void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
+  void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
   void userConnected( VNumber peer_id, const QHostAddress& peer_address, const Message& hello_message );
   void newPeerConnected( FileTransferPeer*, int );
 

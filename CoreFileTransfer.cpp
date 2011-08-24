@@ -48,7 +48,7 @@ void Core::downloadFile( const User& u, const FileInfo& fi )
   mp_fileTransfer->downloadFile( fi );
 }
 
-void Core::checkFileTransferMessage( VNumber user_id, const FileInfo& fi, const QString& msg )
+void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const FileInfo& fi, const QString& msg )
 {
   User u = m_users.find( user_id );
   if( !u.isValid() )
@@ -60,10 +60,10 @@ void Core::checkFileTransferMessage( VNumber user_id, const FileInfo& fi, const 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
                          fi.isDownload() ? tr( "from") : tr( "to" ), u.path(), msg ),
                          DispatchToAllChatsWithUser );
-  emit fileTransferMessage( u, fi, msg );
+  emit fileTransferMessage( peer_id, u, fi, msg );
 }
 
-void Core::checkFileTransferProgress( VNumber user_id, const FileInfo& fi, FileSizeType bytes )
+void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes )
 {
   User u = m_users.find( user_id );
   if( !u.isValid() )
@@ -71,7 +71,7 @@ void Core::checkFileTransferProgress( VNumber user_id, const FileInfo& fi, FileS
     qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
     return;
   }
-  emit fileTransferProgress( u, fi, bytes );
+  emit fileTransferProgress( peer_id, u, fi, bytes );
 }
 
 bool Core::sendFile( const User& u, const QString& file_path )
@@ -110,4 +110,10 @@ bool Core::sendFile( const User& u, const QString& file_path )
   c->sendMessage( m );
 
   return true;
+}
+
+void Core::cancelFileTransfer( VNumber peer_id )
+{
+  qDebug() << "Core received a request for cancelling file transfer" << peer_id;
+  mp_fileTransfer->cancelTransfer( peer_id );
 }

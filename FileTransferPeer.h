@@ -55,8 +55,8 @@ public:
   void cancelTransfer();
 
 signals:
-  void message( VNumber, const FileInfo&, const QString& );
-  void progress( VNumber, const FileInfo&, FileSizeType );
+  void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
+  void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
   void fileUploadRequest( VNumber, const QByteArray& );
   void authenticationRequested();
 

@@ -68,13 +68,16 @@ public slots:
   /* CoreChat */
   void sendWritingMessage( VNumber );
 
+  /* CoreFileTransfer */
+  void cancelFileTransfer( VNumber );
+
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );
   void fileDownloadRequest( const User&, const FileInfo& );
   void userIsWriting( const User& );
   void userChanged( const User& );
-  void fileTransferProgress( const User&, const FileInfo&, FileSizeType );
-  void fileTransferMessage( const User&, const FileInfo&, const QString& );
+  void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
+  void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
 
 protected slots:
   /* CoreConnection */
@@ -88,8 +91,8 @@ protected slots:
   void parseMessage( VNumber, const Message& );
 
   /* CoreFileTransfer */
-  void checkFileTransferProgress( VNumber, const FileInfo&, FileSizeType );
-  void checkFileTransferMessage( VNumber, const FileInfo&, const QString& );
+  void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType );
+  void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
 
 protected:

@@ -39,9 +39,10 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
 
 void FileTransferPeer::cancelTransfer()
 {
+  mp_socket->abort();
   qDebug() << m_fileInfo.name() << "transfer cancelled";
   m_state = FileTransferPeer::Cancelled;
-  emit message( userId(), m_fileInfo, tr( "transfer cancelled" ) );
+  emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
   closeAll();
 }
 
@@ -93,7 +94,7 @@ void FileTransferPeer::setTransferCompleted()
 {
   qDebug() << m_fileInfo.name() << "transfer completed";
   m_state = FileTransferPeer::Completed;
-  emit message( userId(), m_fileInfo, tr( "transfer completed" ) );
+  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed" ) );
   closeAll();
 }
 
@@ -106,13 +107,13 @@ void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
   qWarning() << m_fileInfo.name() << "transfer error occurred:" << str_err;
-  emit message( userId(), m_fileInfo, str_err );
+  emit message( id(), userId(), m_fileInfo, str_err );
   closeAll();
 }
 
 void FileTransferPeer::showProgress()
 {
-  emit progress( userId(), m_fileInfo, m_totalBytesTransferred );
+  emit progress( id(), userId(), m_fileInfo, m_totalBytesTransferred );
 }
 
 void FileTransferPeer::checkTransferData( const QByteArray& byte_array )
@@ -136,8 +137,6 @@ void FileTransferPeer::checkAuthenticationRequested( const Message& m )
   qDebug() << "Store authentication message";
   m_messageAuth = m;
   emit authenticationRequested();
-  //qDebug() << "Try test signal";
-  //emit testSignal();
 }
 
 void FileTransferPeer::setUserAuthorized( VNumber user_id )

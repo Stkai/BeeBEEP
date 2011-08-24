@@ -133,8 +133,8 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   }
 
   connect( transfer_peer, SIGNAL( authenticationRequested() ), this, SLOT( checkAuthentication() ) );
-  connect( transfer_peer, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, const FileInfo&, const QString& ) ) );
-  connect( transfer_peer, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, const FileInfo&, FileSizeType ) ) );
+  connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
+  connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
   transfer_peer->setConnectionDescriptor( socket_descriptor );
 }
