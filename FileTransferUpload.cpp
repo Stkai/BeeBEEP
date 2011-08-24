@@ -69,6 +69,7 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setFileInfo( fi );
   qDebug() << "Uploading" << fi.path();
+  m_state = FileTransferPeer::Transferring;
   sendUploadData();
 }
 
@@ -87,13 +88,6 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 
 void FileTransferPeer::sendUploadData()
 {
-  if( m_state == FileTransferPeer::Request )
-  {
-    // User Authorized... now we are waiting for file request
-    sendData( QByteArray( "OK" ) );
-    return;
-  }
-
   if( m_state != FileTransferPeer::Transferring )
   {
     qWarning() << m_fileInfo.name() << ": try to send data, but it id in state" << m_state;
@@ -117,7 +111,7 @@ void FileTransferPeer::sendUploadData()
 
   QByteArray byte_array = m_file.read( 32704 );
 
-  if( sendData( byte_array ) )
+  if( mp_socket->sendData( byte_array ) )
   {
     m_bytesTransferred = byte_array.size();
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent";

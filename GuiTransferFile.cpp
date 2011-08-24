@@ -54,7 +54,7 @@ void GuiTransferFile::setProgress( const User& u, const FileInfo& fi, FileSizeTy
     item->setText( ColumnFile, fi.name() );
     item->setData( ColumnFile, FileId, fi.id() );
     item->setData( ColumnFile, FilePath, fi.path() );
-    item->setText( ColumnUser, u.path() );
+    item->setText( ColumnUser, Settings::instance().showOnlyUsername() ? u.name() : u.path() );
   }
   showProgress( item, fi, bytes );
 }

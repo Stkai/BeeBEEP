@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "Rijndael.h"
@@ -308,9 +309,9 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
     return FileInfo( 0, FileInfo::Download );
   fi.setHostPort( sl.at( 0 ).toInt() );
   sl.removeFirst();
-  fi.setSize( sl.at( 0 ).toULongLong() ); // FIXME ???
+  fi.setSize( Bee::qVariantToVNumber( sl.at( 0 ) ) );
   sl.removeFirst();
-  fi.setId( sl.at( 0 ).toULongLong() ); // FIXME ???
+  fi.setId( Bee::qVariantToVNumber(  sl.at( 0 ) ) );
   sl.removeFirst();
   QString password = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
   fi.setPassword( password.toUtf8() );

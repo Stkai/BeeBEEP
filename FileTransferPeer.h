@@ -26,9 +26,10 @@
 
 #include "ConnectionSocket.h"
 #include "FileInfo.h"
+#include "Message.h"
 
 
-class FileTransferPeer : public ConnectionSocket
+class FileTransferPeer : public QObject
 {
   Q_OBJECT
 
@@ -42,10 +43,14 @@ public:
   inline bool isDownload() const;
   inline void setId( VNumber );
   inline VNumber id() const;
+  inline VNumber userId() const;
   void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
   void setFileInfo( const FileInfo& );
   inline const FileInfo& fileInfo() const;
+  inline const Message& messageAuth() const;
+  inline QHostAddress peerAddress() const;
 
+  void setUserAuthorized( VNumber );
   void startUpload( const FileInfo& );
   void cancelTransfer();
 
@@ -53,10 +58,12 @@ signals:
   void message( VNumber, const FileInfo&, const QString& );
   void progress( VNumber, const FileInfo&, FileSizeType );
   void fileUploadRequest( VNumber, const QByteArray& );
+  void authenticationRequested();
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );
   void checkTransferData( const QByteArray& );
+  void checkAuthenticationRequested( const Message& );
 
 protected:
   void showProgress();
@@ -84,6 +91,9 @@ protected:
   TransferState m_state;
   int m_bytesTransferred;
   FileSizeType m_totalBytesTransferred;
+  ConnectionSocket* mp_socket;
+  Message m_messageAuth; // This class for a ? reason does not emit an authentication signal with arguments
+                         // so i have to store message so the parent class can access it
 
 };
 
@@ -94,6 +104,8 @@ inline bool FileTransferPeer::isDownload() const { return m_transferType == File
 inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber FileTransferPeer::id() const { return m_id; }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
-
+inline VNumber FileTransferPeer::userId() const { return mp_socket->userId(); }
+inline const Message& FileTransferPeer::messageAuth() const { return m_messageAuth; }
+inline QHostAddress FileTransferPeer::peerAddress() const { return mp_socket->peerAddress(); }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

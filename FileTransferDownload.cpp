@@ -44,7 +44,7 @@ void FileTransferPeer::sendDownloadData()
 void FileTransferPeer::sendDownloadRequest()
 {
   qDebug() << "Sending REQUEST:" << m_fileInfo.password();
-  if( sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
+  if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
     m_state = FileTransferPeer::Transferring;
   else
     cancelTransfer();
@@ -53,7 +53,7 @@ void FileTransferPeer::sendDownloadRequest()
 void FileTransferPeer::sendDownloadDataConfirmation()
 {
   qDebug() << "Sending download corfirmation for" << m_bytesTransferred << "bytes";
-  if( !sendData( QByteArray::number( m_bytesTransferred ) ) )
+  if( !mp_socket->sendData( QByteArray::number( m_bytesTransferred ) ) )
     cancelTransfer();
 }
 
@@ -61,8 +61,8 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 {
   if( m_state == FileTransferPeer::Request )
   {
-    // after the authentication we receive "OK" from the other peer. Otherwise the connection is aborted.
-    // Skip OK, but we will send file request;
+    // after the authentication we receive "HELLO" from the other peer. Otherwise the connection is aborted.
+    // Skip HELLO, but we will send file request;
     sendTransferData();
     return;
   }

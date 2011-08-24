@@ -555,7 +555,7 @@ void GuiMain::saveChat()
       tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
     return;
   }
-  QString sHeader = QString( tr( "<html><body><b>Chat with users %1 saved in date %2.</b><br /><br />" )
+  QString sHeader = QString( tr( "<html><body><b>Chat with %1 saved in date %2.</b><br /><br />" )
                              .arg( mp_core->chatUsers( c, "," ),
                                    QDateTime::currentDateTime().toString( Qt::SystemLocaleLongDate ) ) );
   QString sFooter = QString( "</body></html>" );
