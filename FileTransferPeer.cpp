@@ -27,20 +27,19 @@
 
 FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileTransferPeer::Upload ), m_id( ID_INVALID ), m_fileInfo( 0, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
-    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_messageAuth()
+    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ), m_messageAuth()
 {
   setObjectName( "FileTransferPeer ");
-  mp_socket = new ConnectionSocket( this );
   qDebug() << "FileTransferPeer created for transfer file";
-  connect( mp_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
-  connect( mp_socket, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthenticationRequested( const Message& ) ) );
-  connect( mp_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
+  connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
+  connect( &m_socket, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthenticationRequested( const Message& ) ) );
+  connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
 }
 
 void FileTransferPeer::cancelTransfer()
 {
-  mp_socket->abort();
-  qDebug() << m_fileInfo.name() << "transfer cancelled";
+  m_socket.abort();
+  qDebug() << "FileTransferPeer" << m_id << "aborted connection due cancel transfer request";
   m_state = FileTransferPeer::Cancelled;
   emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
   closeAll();
@@ -49,11 +48,11 @@ void FileTransferPeer::cancelTransfer()
 void FileTransferPeer::closeAll()
 {
   qDebug() << "Making cleanup of peer" << m_id;
-  if( mp_socket->isOpen() )
+  if( m_socket.isOpen() )
   {
-    qDebug() << "Closing socket with descriptor" << mp_socket->socketDescriptor();
-    mp_socket->flush();
-    mp_socket->close();
+    qDebug() << "Closing socket with descriptor" << m_socket.socketDescriptor();
+    m_socket.flush();
+    m_socket.close();
   }
   if( m_file.isOpen() )
   {
@@ -80,12 +79,12 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
 
   if( socket_descriptor )
   {
-     mp_socket->setSocketDescriptor( socket_descriptor );
+     m_socket.setSocketDescriptor( socket_descriptor );
     qDebug() << "Using socket descriptor" << socket_descriptor;
   }
   else
   {
-    mp_socket->connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
+    m_socket.connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
     qDebug() << "Connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
   }
 }
@@ -100,13 +99,15 @@ void FileTransferPeer::setTransferCompleted()
 
 void FileTransferPeer::socketError( QAbstractSocket::SocketError )
 {
-  setError( mp_socket->errorString() );
+  // Make a check to remove the error after a transfer completed
+  if( m_state <= FileTransferPeer::Transferring )
+    setError( m_socket.errorString() );
 }
 
 void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
-  qWarning() << m_fileInfo.name() << "transfer error occurred:" << str_err;
+  qWarning() << m_fileInfo.name() << "transfer error:" << str_err;
   emit message( id(), userId(), m_fileInfo, str_err );
   closeAll();
 }
@@ -134,13 +135,13 @@ void FileTransferPeer::sendTransferData()
 
 void FileTransferPeer::checkAuthenticationRequested( const Message& m )
 {
-  qDebug() << "Store authentication message";
+  qDebug() << "Store authentication message (fixed a signal bug)";
   m_messageAuth = m;
   emit authenticationRequested();
 }
 
 void FileTransferPeer::setUserAuthorized( VNumber user_id )
 {
-  mp_socket->setUserId( user_id );
+  m_socket.setUserId( user_id );
   sendTransferData();
 }

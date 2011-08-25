@@ -116,8 +116,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 {
   if( !isConnected() )
   {
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send the message: you are not connected." )
-                           .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ) ), DispatchToChat );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat );
     return 0;
   }
 
@@ -134,8 +133,8 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     foreach( Connection *c, m_connections )
     {
       if( !c->sendMessage( m ) )
-        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send the message to %2." )
-                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), m_users.find( c->userId() ).path() ), DispatchToChat );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
+                               .arg( m_users.find( c->userId() ).path() ), DispatchToChat );
       else
         messages_sent += 1;
     }
@@ -153,13 +152,16 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       if( c && c->sendMessage( m ) )
         messages_sent += 1;
       else
-        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send the message to %2." )
-                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*X*" ), m_users.find( user_id ).path() ), DispatchToChat );
+        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( m_users.find( user_id ).path() ), DispatchToChat );
     }
   }
 
   ChatMessage cm( ID_LOCAL_USER, m );
   dispatchToChat( cm, chat_id );
+
+  if( messages_sent == 0 )
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat );
+
   return messages_sent;
 }
 

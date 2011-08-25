@@ -25,8 +25,11 @@
 #include "Protocol.h"
 
 
+#undef CONNECTION_SOCKET_IO_DEBUG
+
+
 ConnectionSocket::ConnectionSocket( QObject* parent )
-  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID )
+  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_preventLoop( 0 )
 {
   connect( this, SIGNAL( connected() ), this, SLOT( sendHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
@@ -41,7 +44,9 @@ void ConnectionSocket::readBlock()
     if( bytesAvailable() < (int)sizeof(DATA_BLOCK_SIZE))
       return;
     data_stream >> m_blockSize;
+#if defined( CONNECTION_SOCKET_IO_DEBUG )
     qDebug() << "ConnectionSocket read from" << peerAddress().toString() << peerPort() << "the block size:" << m_blockSize;
+#endif
   }
 
   if( bytesAvailable() < m_blockSize )
@@ -54,17 +59,29 @@ void ConnectionSocket::readBlock()
 
   QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
 
+#if defined( CONNECTION_SOCKET_IO_DEBUG )
   qDebug() << "ConnectionSocket read from" << peerAddress().toString() << peerPort() << "the byte array:" << decrypted_byte_array;
+#endif
 
   if( m_userId == ID_INVALID )
     checkHelloMessage( decrypted_byte_array );
   else
     emit dataReceived( decrypted_byte_array );
+
+  if( bytesAvailable() && m_preventLoop < MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT )
+  {
+    m_preventLoop++;
+    readBlock();
+  }
+  else
+    m_preventLoop = 0;
 }
 
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
 {
+#if defined( CONNECTION_SOCKET_IO_DEBUG )
   qDebug() << "ConnectionSocket sends to" << peerAddress().toString() << peerPort() << "the following data:" << byte_array;
+#endif
 
   QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array );
 
@@ -75,8 +92,9 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   data_stream << byte_array_to_send;
   data_stream.device()->seek( 0 );
   data_stream << (DATA_BLOCK_SIZE)(data_block.size() - sizeof(DATA_BLOCK_SIZE));
+#if defined( CONNECTION_SOCKET_IO_DEBUG )
   qDebug() << "ConnectionSocket sends to" << peerAddress().toString() << peerPort() << "the block size:" << (DATA_BLOCK_SIZE)(data_block.size() - sizeof(DATA_BLOCK_SIZE));
-
+#endif
   if( write( data_block ) == data_block.size() )
   {
     qDebug() << "ConnectionSocket sends" << data_block.size() << "bytes to" << peerAddress().toString() << peerPort();
@@ -91,8 +109,6 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 
 void ConnectionSocket::sendHello()
 {
-  qDebug() << "ConnectionSocket is sending HELLO to" << peerAddress().toString() << peerPort();
-
   if( sendData( Protocol::instance().helloMessage() ) )
   {
     qDebug() << "ConnectionSocket has sent HELLO to" << peerAddress().toString() << peerPort();

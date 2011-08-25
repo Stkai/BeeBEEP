@@ -56,6 +56,8 @@ private:
   bool m_isHelloSent;
   VNumber m_userId;
 
+  int m_preventLoop;
+
 };
 
 

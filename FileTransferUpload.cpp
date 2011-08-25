@@ -80,7 +80,10 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent confirmed";
     m_totalBytesTransferred += m_bytesTransferred;
     showProgress();
-    sendTransferData();
+    if( m_totalBytesTransferred == m_fileInfo.size() )
+      setTransferCompleted();
+    else
+      sendTransferData();
   }
   else
     setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( byte_array.toInt() ) );
@@ -104,14 +107,11 @@ void FileTransferPeer::sendUploadData()
   }
 
   if( m_file.atEnd() )
-  {
-    setTransferCompleted();
     return;
-  }
 
   QByteArray byte_array = m_file.read( 32704 );
 
-  if( mp_socket->sendData( byte_array ) )
+  if( m_socket.sendData( byte_array ) )
   {
     m_bytesTransferred = byte_array.size();
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent";

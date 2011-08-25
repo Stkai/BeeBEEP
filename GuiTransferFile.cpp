@@ -33,9 +33,12 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 {
   setObjectName( "GuiTransferFile" );
   QStringList labels;
-  labels << "" << tr( "File" ) << tr( "User" ) << tr( "Status" );
+  labels << "" << tr( "File" ) << tr( "User" ) << tr( "Status" ) << "";
   setHeaderLabels( labels );
   setRootIsDecorated( false );
+  setSortingEnabled( false );
+  setColumnHidden( ColumnSort, true );
+  sortItems( ColumnSort, Qt::DescendingOrder );
 
   QHeaderView* hv = header();
   hv->setResizeMode( ColumnCancel, QHeaderView::Fixed );
@@ -44,12 +47,13 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
 
+
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
 }
 
 void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
-  qDebug() << "GuiTransferFile setMessage:" << bytes << "of" << fi.size() << "bytes";
+  qDebug() << "GuiTransferFile setProgress::" << bytes << "of" << fi.size() << "bytes";
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
   {
@@ -64,6 +68,8 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, TransferCompleted, false );
     item->setText( ColumnUser, Settings::instance().showOnlyUsername() ? u.name() : u.path() );
     item->setIcon( ColumnCancel, QIcon( ":/images/disconnect.png") );
+    item->setText( ColumnSort, QString( "0%1").arg( peer_id ) );
+    sortItems( ColumnSort, Qt::DescendingOrder );
   }
 
   if( item->data( ColumnFile, TransferInProgress ).toBool() )
@@ -73,6 +79,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
     showProgress( item, fi, bytes );
   }
+
   showIcon( item );
 }
 
@@ -82,13 +89,24 @@ void GuiTransferFile::showIcon( QTreeWidgetItem* item )
     return;
 
   QIcon icon;
+  QString status_tip;
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
+  {
     icon = QIcon( ":/images/green-ball.png" );
+    status_tip = tr( "Completed" );
+  }
   else if( item->data( ColumnFile, TransferInProgress ).toBool() )
+  {
     icon = QIcon( ":/images/disconnect.png" );
+    status_tip = tr( "Cancel Transfer" );
+  }
   else
+  {
     icon = QIcon( ":/images/red-ball.png" );
+    status_tip = tr( "Not Completed" );
+  }
 
+  item->setToolTip( ColumnCancel, status_tip );
   item->setIcon( ColumnCancel, icon );
 }
 
@@ -111,6 +129,13 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
     qWarning() << "GuiTransferFile::showProgress try to show progress divided by 0:" << fi.path();
     return;
   }
+
+  if( item->data( ColumnFile, TransferCompleted ).toBool() )
+  {
+    item->setText( ColumnProgress, tr( "Transfer completed" ) );
+    return;
+  }
+
   QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading") : tr( "Uploading"),
                                       Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
                                       QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
@@ -124,14 +149,15 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
 
 void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
 {
+  qApp->processEvents();
   qDebug() << "GuiTransferFile setMessage:" << msg;
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
     setProgress( peer_id, u, fi, 0 );
-  item = findItem( fi.id() );
+  item = findItem( peer_id );
   if( !item )
   {
-    qWarning() << "Unable to find file transfer item with id" << fi.id();
+    qWarning() << "Unable to find file transfer item with id" << peer_id;
     return;
   }
 
@@ -155,6 +181,7 @@ void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )
     {
       item->setIcon( ColumnCancel, QIcon( ":/images/red-ball.png") );
       VNumber peer_id = Bee::qVariantToVNumber( item->data( ColumnFile, PeerId ) );
+      item->setData( ColumnFile, TransferInProgress, false );
       emit transferCancelled( peer_id );
     }
   }

@@ -37,6 +37,8 @@ public:
   Message( const Message& );
   Message( Type, VNumber, const QString& );
 
+  Message& operator=( const Message& );
+
   inline bool isValid() const;
   inline VNumber id() const;
   inline void setType( Type );
@@ -52,8 +54,6 @@ public:
   inline const QDateTime& timestamp() const;
   inline const QString& text() const;
   inline bool hasFlag( Flag ) const;
-
-  Message& operator=( const Message& );
 
 private:
   Type m_type;

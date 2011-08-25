@@ -97,7 +97,7 @@ void Core::searchUsers( const QHostAddress& host_address )
 {
   mp_peerManager->sendDatagramToHost( host_address );
   QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." )
-      .arg( Bee::iconToHtml( ":/images/search.png", "*b*" ), host_address.toString() );
+      .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
 }
 

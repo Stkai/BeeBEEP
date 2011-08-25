@@ -24,6 +24,9 @@
 #include "Connection.h"
 #include "Protocol.h"
 
+#undef CONNECTION_PING_PONG_DEBUG
+
+
 
 Connection::Connection( QObject *parent )
   : ConnectionSocket( parent )
@@ -57,11 +60,15 @@ void Connection::parseData( const QByteArray& message_data )
   switch( m.type() )
   {
   case Message::Ping:
+#if defined( CONNECTION_PING_PONG_DEBUG )
     qDebug() << "PING received from" << peerAddress().toString() << peerPort();
+#endif
     sendPong();
     break;
   case Message::Pong:
+#if defined( CONNECTION_PING_PONG_DEBUG )
     qDebug() << "PONG received from" << peerAddress().toString() << peerPort();
+#endif
     m_pongTime.restart();
     break;
   default:
@@ -86,14 +93,18 @@ void Connection::sendPing()
     return;
   }
 
+#if defined( CONNECTION_PING_PONG_DEBUG )
   qDebug() << "Sending PING to" << peerAddress().toString() << peerPort();
+#endif
   if( !sendData( Protocol::instance().pingMessage() ) )
     qWarning() << "Unable to send PING to" << peerAddress().toString() << peerPort();
 }
 
 void Connection::sendPong()
 {
+#if defined( CONNECTION_PING_PONG_DEBUG )
   qDebug() << "Sending PONG to" << peerAddress().toString() << peerPort();
+#endif
   if( !sendData( Protocol::instance().pongMessage() ) )
     qWarning() << "Unable to send PONG to" << peerAddress().toString() << peerPort();
 }

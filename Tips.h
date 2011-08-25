@@ -31,7 +31,7 @@ static const char* BeeBeepTips[ BeeBeepTipsSize ] =
   QT_TRANSLATE_NOOP( "Tips", "You can switch between chats with CTRL+TAB if there are new messages availables." ),
   QT_TRANSLATE_NOOP( "Tips", "If you want a <b>bold text</b> write a *bold text*." ),
   QT_TRANSLATE_NOOP( "Tips", "If you want an <i>italic text</i> write a /italic text/." ),
-  QT_TRANSLATE_NOOP( "Tips", "If you want an <i>underlined text</i> write a _underlined text_." )
+  QT_TRANSLATE_NOOP( "Tips", "If you want an <u>underlined text</u> write a _underlined text_." )
 };
 
 #endif // BEEBEEP_TIPS_H

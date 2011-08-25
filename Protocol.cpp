@@ -151,6 +151,7 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
     return m;
   }
   sl.removeFirst();
+
   QString msg_txt;
   if( sl.size() > 1 )
     msg_txt = sl.join( PROTOCOL_FIELD_SEPARATOR );

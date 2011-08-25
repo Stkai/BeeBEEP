@@ -156,7 +156,6 @@ void GuiMain::stopCore()
   mp_actSearch->setEnabled( false );
   showChat( mp_core->defaultChat( true ) );
   mp_core->stop();
-  mp_userList->clear();
   refreshTitle();
   mp_actStartStopCore->setIcon( QIcon( ":/images/connect.png") );
   mp_actStartStopCore->setText( tr( "&Connect" ) );
@@ -168,7 +167,7 @@ void GuiMain::showAbout()
   QString sAbout = QString( "<b>%1</b> - " ).arg( Settings::instance().programName() );
   QMessageBox::about( this, Settings::instance().programName(), sAbout +
      tr( "Secure Network Chat version %1" ).arg( Settings::instance().version() ) +
-     tr( "<br />developed by Marco \"Khelben\" Mastroddi<br />e-mail: marco.mastroddi@gmail.com<br /><br />" ) +
+     tr( "<br />developed by Marco Mastroddi<br />e-mail: marco.mastroddi@gmail.com<br /><br />" ) +
      tr( "&lt; Free is that mind guided by the fantasy &gt;" ) );
 }
 
@@ -556,13 +555,8 @@ void GuiMain::saveChat()
       tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
     return;
   }
-  QString sHeader = QString( tr( "<html><body><b>Chat with %1 saved in date %2.</b><br /><br />" )
-                             .arg( mp_core->chatUsers( c, "," ),
-                                   QDateTime::currentDateTime().toString( Qt::SystemLocaleLongDate ) ) );
-  QString sFooter = QString( "</body></html>" );
-  file.write( sHeader.toLatin1() );
-  file.write( mp_core->chatMessagesToText( c ).toLatin1() );
-  file.write( sFooter.toLatin1() );
+
+  file.write( mp_defaultChat->toHtml().toLatin1() );
   file.close();
   QMessageBox::information( this, QString( "%1 - %2" ).arg( Settings::instance().programName(), tr( "Information" ) ),
     tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );

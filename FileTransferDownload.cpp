@@ -44,7 +44,7 @@ void FileTransferPeer::sendDownloadData()
 void FileTransferPeer::sendDownloadRequest()
 {
   qDebug() << "Sending REQUEST:" << m_fileInfo.password();
-  if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
+  if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
     m_state = FileTransferPeer::Transferring;
   else
     cancelTransfer();
@@ -53,7 +53,7 @@ void FileTransferPeer::sendDownloadRequest()
 void FileTransferPeer::sendDownloadDataConfirmation()
 {
   qDebug() << "Sending download corfirmation for" << m_bytesTransferred << "bytes";
-  if( !mp_socket->sendData( QByteArray::number( m_bytesTransferred ) ) )
+  if( !m_socket.sendData( QByteArray::number( m_bytesTransferred ) ) )
     cancelTransfer();
 }
 

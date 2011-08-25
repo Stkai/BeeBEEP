@@ -25,7 +25,8 @@
 
 
 Message::Message()
-  : m_type( Undefined ), m_id( ID_INVALID ), m_flags( 0 ), m_data( "" ), m_timestamp(), m_text( "" )
+  : m_type( Undefined ), m_id( ID_INVALID ), m_flags( 0 ), m_data( "" ),
+    m_timestamp(), m_text( "" )
 {
 }
 
@@ -35,7 +36,8 @@ Message::Message( const Message& m )
 }
 
 Message::Message( Type msg_type, VNumber msg_id, const QString& msg_txt )
-  : m_type( msg_type ), m_id( msg_id ), m_flags( 0 ), m_data( "" ), m_timestamp( QDateTime::currentDateTime() ), m_text( msg_txt )
+  : m_type( msg_type ), m_id( msg_id ), m_flags( 0 ), m_data( "" ),
+    m_timestamp( QDateTime::currentDateTime() ), m_text( msg_txt )
 {
 }
 
