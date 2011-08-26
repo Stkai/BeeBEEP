@@ -52,6 +52,8 @@ public:
 
   void validateUser( VNumber peer_id, VNumber user_id );
 
+  FileTransferPeer* peer( VNumber ) const;
+
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
@@ -62,7 +64,6 @@ protected:
   void incomingConnection( int );
   inline VNumber newFileId();
   void resetServerFiles();
-  FileTransferPeer* peer( VNumber ) const;
 
 protected slots:
   void checkAuthentication();

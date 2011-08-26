@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "Connection.h"
 #include "Core.h"
+#include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -56,10 +57,23 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
     return;
   }
+
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
                          fi.isDownload() ? tr( "from") : tr( "to" ), u.path(), msg ),
                          DispatchToAllChatsWithUser );
+
+  FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
+  if( peer )
+  {
+    if( peer->isTransferCompleted() && fi.isDownload() )
+    {
+      QString s_open = tr( "Open" );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 <a href='%3'>%4</a>." )
+                             .arg( icon_html, s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() ),
+                             DispatchToAllChatsWithUser );
+    }
+  }
   emit fileTransferMessage( peer_id, u, fi, msg );
 }
 

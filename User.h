@@ -40,6 +40,7 @@ public:
 
   inline bool isValid() const;
   inline bool isLocal() const;
+  inline bool isConnected() const;
   inline void setId( VNumber );
   inline VNumber id() const;
   inline void setName( const QString& );
@@ -73,6 +74,7 @@ private:
 inline bool User::operator==( const User& u ) const { return m_id == u.m_id; }
 inline bool User::isValid() const { return m_id != ID_INVALID; }
 inline bool User::isLocal() const { return m_id == ID_LOCAL_USER; }
+inline bool User::isConnected() const { return m_status != User::Offline; }
 inline void User::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber User::id() const { return m_id; }
 inline void User::setName( const QString& new_value ) { m_name = new_value; }

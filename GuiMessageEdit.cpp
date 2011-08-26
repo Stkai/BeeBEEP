@@ -31,6 +31,8 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   setObjectName( "GuiMessageEdit" );
   mp_timer = new QTimer( this );
   mp_timer->setSingleShot( true );
+  m_undoAvailable = false;
+  m_redoAvailable = false;
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
 }
 
@@ -89,15 +91,29 @@ void GuiMessageEdit::checkWriting()
   }
 }
 
+void GuiMessageEdit::setUndoAvailable( bool new_value )
+{
+  m_undoAvailable = new_value;
+}
+
+void GuiMessageEdit::setRedoAvailable( bool new_value )
+{
+  m_redoAvailable = new_value;
+}
+
 void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
 {
   QMenu custom_context_menu;
-  custom_context_menu.addAction( QIcon( ":/images/undo.png" ), tr( "Undo" ), this, SLOT( undo() ), QKeySequence::Undo );
-  custom_context_menu.addAction( QIcon( ":/images/redo.png" ), tr( "Redo" ), this, SLOT( redo() ), QKeySequence::Redo );
+  QAction* act;
+  act = custom_context_menu.addAction( QIcon( ":/images/undo.png" ), tr( "Undo" ), this, SLOT( undo() ), QKeySequence::Undo );
+  act->setEnabled( m_undoAvailable );
+  act = custom_context_menu.addAction( QIcon( ":/images/redo.png" ), tr( "Redo" ), this, SLOT( redo() ), QKeySequence::Redo );
+  act->setEnabled( m_redoAvailable );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/cut.png" ), tr( "Cut" ), this, SLOT( cut() ), QKeySequence::Cut );
   custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy" ), this, SLOT( copy() ), QKeySequence::Copy );
-  custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
+  act = custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
+  act->setEnabled( canPaste() );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.exec( event->globalPos() );

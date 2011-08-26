@@ -195,6 +195,16 @@ void Core::showTipOfTheDay()
 namespace // begin of empty namespace
 {
 
+QString Linkify( QString text )
+{
+  text.prepend( " " ); // for matching www.miosito.it
+  text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.~#?&//=\\(\\)]+)" ), "<a href='\\1'>\\1</a>" );
+  text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.~#?&//=\\(\\)]+)" ), "\\1<a href='http://\\2'>\\2</a>" );
+  text.remove( 0, 1 ); // remove the space added
+  //text.replace( QRegExp( "([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,3})" ), "<a href=""mailto:\\1"">\\1</a>" );
+  return text;
+}
+
 QString FormatHtmlText( QString text )
 {
   QString text_formatted = "";
@@ -209,7 +219,7 @@ QString FormatHtmlText( QString text )
         text_formatted += QLatin1Char( ' ' );
     }
     else if( text.at( i ) == QLatin1Char( '\n' ) )
-      text_formatted += QLatin1String( "<br />" );
+      text_formatted += QLatin1String( "<br /> " ); // space added to match url after a \n
     else if( text.at( i ) == QLatin1Char( '<' ) )
     {
       if( (i + 1) < text.length() && text.at( (i+1) ) == QLatin1Char( '3' ) )
@@ -221,8 +231,8 @@ QString FormatHtmlText( QString text )
       text_formatted += QLatin1String( "&gt;" );
     else if(text.at( i ) == QLatin1Char( '"' ) )
       text_formatted += QLatin1String( "&quot;" );
-    else if(text.at( i ) == QLatin1Char( '&' ) )
-      text_formatted += QLatin1String( "&amp;" );
+    //else if(text.at( i ) == QLatin1Char( '&' ) ) // for Linkify (test!)
+    //  text_formatted += QLatin1String( "&amp;" );
     else
       text_formatted += text.at( i );
   }
@@ -230,6 +240,10 @@ QString FormatHtmlText( QString text )
   text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
+
+  text_formatted =  Linkify( text_formatted );
+
+  //qDebug() << "Linkify:" << text_formatted;
 
   return EmoticonManager::instance().parseEmoticons( text_formatted );
 }

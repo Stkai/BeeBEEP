@@ -52,6 +52,7 @@ private slots:
   void sendMessage();
   void checkWriting();
   void customContextMenu( const QPoint& );
+  void checkAnchorClicked( const QUrl& );
 
 private:
   VNumber m_chatId;

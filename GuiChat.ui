@@ -36,7 +36,7 @@
     <number>2</number>
    </property>
    <item row="0" column="0" colspan="4">
-    <widget class="QTextEdit" name="mp_teChat">
+    <widget class="QTextBrowser" name="mp_teChat">
      <property name="minimumSize">
       <size>
        <width>200</width>

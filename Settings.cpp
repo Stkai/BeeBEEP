@@ -111,8 +111,8 @@ void Settings::load()
   m_language = sets.value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
-  m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDir::homePath() ).toString();
-  m_downloadDirectory = sets.value( "DownloadDirectory", QDir::homePath() ).toString();
+  m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+  m_downloadDirectory = sets.value( "DownloadDirectory",QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_logPath = sets.value( "LogPath", "." ).toString();
   sets.endGroup();
 

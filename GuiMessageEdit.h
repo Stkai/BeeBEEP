@@ -45,9 +45,13 @@ protected:
 
 private slots:
   void checkWriting();
+  void setUndoAvailable( bool );
+  void setRedoAvailable( bool );
 
 private:
   QTimer* mp_timer;
+  bool m_undoAvailable;
+  bool m_redoAvailable;
 
 };
 

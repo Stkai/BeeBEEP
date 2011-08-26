@@ -168,7 +168,7 @@ void Core::checkUserAuthentication( const Message& m )
   else
   {
     u.setColor( ColorManager::instance().unselectedQString() );
-    qDebug() << "New user connected:" << u.path();
+    qDebug() << "New user connected:" << u.path() << "with color" << u.color();
     createPrivateChat( u );
   }
 

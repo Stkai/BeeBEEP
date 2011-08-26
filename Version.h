@@ -25,7 +25,7 @@
 #define BEEBEEP_VERSION_H
 
 const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.4.70";
+const char* BEEBEEP_VERSION = "0.4.72";
 
 
 #endif // BEEBEEP_VERSION_H

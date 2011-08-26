@@ -94,11 +94,14 @@ void UserList::setUser( const User& u )
   qDebug() << "User" << u.path() << "added to user list with id" << u.id();
 }
 
-QStringList UserList::toStringList( bool only_user_name ) const
+QStringList UserList::toStringList( bool only_user_name, bool only_connected ) const
 {
   QStringList sl;
   foreach( User u, m_users )
-    sl << (only_user_name ? u.name() : u.path() );
+  {
+    if( !only_connected || u.isConnected() )
+      sl << (only_user_name ? u.name() : u.path() );
+  }
   return sl;
 }
 

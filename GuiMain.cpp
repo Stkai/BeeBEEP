@@ -615,7 +615,7 @@ void GuiMain::changeStatusDescription()
 void GuiMain::sendFile()
 {
   bool ok = false;
-  QStringList user_string_list = mp_core->users().toStringList( false );
+  QStringList user_string_list = mp_core->users().toStringList( false, true );
   if( user_string_list.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "There is no user connected." ) );

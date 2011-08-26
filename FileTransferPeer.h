@@ -51,6 +51,7 @@ public:
   inline const Message& messageAuth() const; // Read below...
   inline QHostAddress peerAddress() const;
 
+  inline bool isTransferCompleted() const;
   void setUserAuthorized( VNumber );
   void startUpload( const FileInfo& );
   void cancelTransfer();
@@ -109,5 +110,6 @@ inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
 inline const Message& FileTransferPeer::messageAuth() const { return m_messageAuth; }
 inline QHostAddress FileTransferPeer::peerAddress() const { return m_socket.peerAddress(); }
+inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

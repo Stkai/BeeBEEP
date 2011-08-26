@@ -50,52 +50,62 @@
         <translation>Nessuno ha ricevuto il tuo messaggio.</translation>
     </message>
     <message>
-        <location filename="../CoreChat.cpp" line="309"/>
+        <location filename="../CoreChat.cpp" line="323"/>
         <source>All users</source>
         <translation>Tutti</translation>
     </message>
     <message>
-        <location filename="../CoreChat.cpp" line="320"/>
+        <location filename="../CoreChat.cpp" line="334"/>
         <source>Nobody</source>
         <translation>Nessuno</translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="45"/>
+        <location filename="../CoreFileTransfer.cpp" line="46"/>
         <source>%1 Downloading %2 from %3.</source>
         <translation>%1 Inizi a scaricare %2 da %3.</translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="60"/>
+        <location filename="../CoreFileTransfer.cpp" line="62"/>
         <source>%1 %2 %3 %4: %5.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="61"/>
+        <location filename="../CoreFileTransfer.cpp" line="63"/>
         <source>from</source>
         <translation>da</translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="61"/>
+        <location filename="../CoreFileTransfer.cpp" line="63"/>
         <source>to</source>
         <translation>a</translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="84"/>
+        <location filename="../CoreFileTransfer.cpp" line="71"/>
+        <source>Open</source>
+        <translation>Apri</translation>
+    </message>
+    <message>
+        <location filename="../CoreFileTransfer.cpp" line="72"/>
+        <source>%1 %2 &lt;a href=&apos;%3&apos;&gt;%4&lt;/a&gt;.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CoreFileTransfer.cpp" line="98"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: file non trovato.</translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="91"/>
+        <location filename="../CoreFileTransfer.cpp" line="105"/>
         <source>%1 Unable to send file: user is not connected.</source>
         <translation>%1 Impossibile inviare il file: l&apos;utente non è connesso.</translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="99"/>
+        <location filename="../CoreFileTransfer.cpp" line="113"/>
         <source>%1 Unable to send file: bind address/port failed.</source>
         <translation>%1 Impossibile inviare il file: controlla le impostazioni del tuo firewall.</translation>
     </message>
     <message>
-        <location filename="../CoreFileTransfer.cpp" line="107"/>
+        <location filename="../CoreFileTransfer.cpp" line="121"/>
         <source>%1 You send the file to %2: %3.</source>
         <translation>%1 Stai inviando il file a %2: %3.</translation>
     </message>
@@ -166,19 +176,34 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../GuiChat.cpp" line="60"/>
+        <location filename="../GuiChat.cpp" line="63"/>
         <source>Copy to clipboard</source>
         <translation>Copia in memoria</translation>
     </message>
     <message>
-        <location filename="../GuiChat.cpp" line="73"/>
+        <location filename="../GuiChat.cpp" line="65"/>
+        <source>Select All</source>
+        <translation>Seleziona tutto</translation>
+    </message>
+    <message>
+        <location filename="../GuiChat.cpp" line="78"/>
         <source>(Last message %1)</source>
         <translation>(Ultimo messaggio %1)</translation>
     </message>
     <message>
-        <location filename="../GuiChat.cpp" line="82"/>
+        <location filename="../GuiChat.cpp" line="87"/>
         <source>To</source>
         <translation>A</translation>
+    </message>
+    <message>
+        <location filename="../GuiChat.cpp" line="137"/>
+        <source>Unable to open %1</source>
+        <translation>Impossibile aprire %1</translation>
+    </message>
+    <message>
+        <location filename="../GuiChat.cpp" line="137"/>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -622,32 +647,32 @@ il file %2 (%3)?</translation>
 <context>
     <name>GuiMessageEdit</name>
     <message>
-        <location filename="../GuiMessageEdit.cpp" line="95"/>
+        <location filename="../GuiMessageEdit.cpp" line="108"/>
         <source>Undo</source>
         <translation>Indietro di un&apos;azione</translation>
     </message>
     <message>
-        <location filename="../GuiMessageEdit.cpp" line="96"/>
+        <location filename="../GuiMessageEdit.cpp" line="110"/>
         <source>Redo</source>
         <translation>Avanti di un&apos;azione</translation>
     </message>
     <message>
-        <location filename="../GuiMessageEdit.cpp" line="98"/>
+        <location filename="../GuiMessageEdit.cpp" line="113"/>
         <source>Cut</source>
         <translation>Taglia</translation>
     </message>
     <message>
-        <location filename="../GuiMessageEdit.cpp" line="99"/>
+        <location filename="../GuiMessageEdit.cpp" line="114"/>
         <source>Copy</source>
         <translation>Copia</translation>
     </message>
     <message>
-        <location filename="../GuiMessageEdit.cpp" line="100"/>
+        <location filename="../GuiMessageEdit.cpp" line="115"/>
         <source>Paste</source>
         <translation>Incolla</translation>
     </message>
     <message>
-        <location filename="../GuiMessageEdit.cpp" line="102"/>
+        <location filename="../GuiMessageEdit.cpp" line="118"/>
         <source>Select All</source>
         <translation>Seleziona tutto</translation>
     </message>

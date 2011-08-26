@@ -40,7 +40,7 @@ public:
 
   void setUser( const User& );
 
-  QStringList toStringList( bool only_user_name ) const;
+  QStringList toStringList( bool only_user_name, bool only_connected ) const;
   UserList fromUsersId( const QList<VNumber>& ) const;
 
 private:

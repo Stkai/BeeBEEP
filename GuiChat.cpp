@@ -37,12 +37,15 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setFocusPolicy( Qt::NoFocus );
   mp_teChat->setReadOnly( true );
   mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );
+  mp_teChat->setOpenExternalLinks( false );
+  mp_teChat->setOpenLinks( false );
   mp_lPix->setPixmap( QPixmap( ":/images/chat.png" ) );
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
+  connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
@@ -58,6 +61,8 @@ void GuiChat::customContextMenu( const QPoint& p )
 {
   QMenu custom_context_menu;
   custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ) );
+  custom_context_menu.addSeparator();
+  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ) );
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
@@ -80,7 +85,7 @@ void GuiChat::setChat( const Chat& c, const QString& chat_users, const QString& 
   qDebug() << "Setting chat" << c.id() << "in default chat window";
   m_chatId = c.id();
   mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( chat_users ) );
-  mp_teChat->setText( chat_text );
+  mp_teChat->setHtml( chat_text );
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
   setLastMessageTimestamp( c.lastMessageTimestamp() );
@@ -123,4 +128,11 @@ void GuiChat::setChatFontColor( const QString& color_name )
 void GuiChat::checkWriting()
 {
   emit writing( m_chatId );
+}
+
+void GuiChat::checkAnchorClicked( const QUrl& url )
+{
+  qDebug() << "Open url:" << url.toString();
+  if( !QDesktopServices::openUrl( url ) )
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1").arg( url.toString( QUrl::RemoveScheme ) ), tr( "Ok" ) );
 }
