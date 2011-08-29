@@ -102,6 +102,7 @@ void Settings::load()
   m_localUser.setHostPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
   m_broadcastPort = sets.value( "LocalBroadcastPort", BROADCAST_DEFAULT_PORT ).toInt();
   m_showOnlyUsername = sets.value( "ShowOnlyName", true ).toBool();
+  m_showUserColor = sets.value( "ShowColors", true ).toBool();
   sets.endGroup();
   sets.beginGroup( "Gui" );
   m_guiGeometry = sets.value( "MainWindowGeometry", "" ).toByteArray();
@@ -153,6 +154,7 @@ void Settings::save()
   sets.setValue( "LocalListenerPort", m_localUser.hostPort() );
   sets.setValue( "LocalBroadcastPort", m_broadcastPort );
   sets.setValue( "ShowOnlyName", m_showOnlyUsername );
+  sets.setValue( "ShowColors", m_showUserColor );
   sets.endGroup();
   sets.beginGroup( "Gui" );
   sets.setValue( "MainWindowGeometry", m_guiGeometry );

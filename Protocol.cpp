@@ -188,6 +188,7 @@ QByteArray Protocol::broadcastMessage() const
 QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
+  data_list << QString::number( PROTO_VERSION );
   data_list << QString::number( Settings::instance().localUser().hostPort() );
   data_list << Settings::instance().localUser().name();
   data_list << QString::number( Settings::instance().localUser().status() );
@@ -236,15 +237,25 @@ bool Protocol::changeUserNameFromMessage( User* u, const Message& m ) const
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
  /* Read User Field Data */
+  int proto_version = 1;
   QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
-  if( sl.size() < 4 )
+  bool ok = false;
+
+  if( sl.size() < 5 )
   {
-    qWarning() << "HELLO message has not 4 field data but" << sl.size();
+    qWarning() << "HELLO message has not 5 field data but" << sl.size();
     return User();
   }
 
-  bool ok = false;
-  int listener_port = sl.at( 0 ).toInt( &ok );
+  proto_version = sl.first().toInt( & ok );
+  if( !ok )
+  {
+    qWarning() << "HELLO has an invalid proto version";
+    return User();
+  }
+  sl.removeFirst();
+
+  int listener_port = sl.first().toInt( &ok );
   if( !ok )
   {
     qWarning() << "HELLO has an invalid Listener port";
@@ -252,7 +263,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   }
   sl.removeFirst();
 
-  QString user_name = sl.at( 0 );
+  QString user_name = sl.first();
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
   {
@@ -262,11 +273,11 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
   sl.removeFirst();
 
-  int user_status = sl.at( 0 ).toInt( &ok );
+  int user_status = sl.first().toInt( &ok );
   if( !ok )
     user_status = User::Online;
   sl.removeFirst();
-  QString user_status_description =  sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
+  QString user_status_description =  sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.first();
 
   /* Create User */
   User u( newId() );
@@ -275,6 +286,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setHostPort( listener_port );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
+  u.setProtoVersion( proto_version );
   return u;
 }
 
@@ -308,13 +320,13 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 4 )
     return FileInfo( 0, FileInfo::Download );
-  fi.setHostPort( sl.at( 0 ).toInt() );
+  fi.setHostPort( sl.first().toInt() );
   sl.removeFirst();
-  fi.setSize( Bee::qVariantToVNumber( sl.at( 0 ) ) );
+  fi.setSize( Bee::qVariantToVNumber( sl.first() ) );
   sl.removeFirst();
-  fi.setId( Bee::qVariantToVNumber(  sl.at( 0 ) ) );
+  fi.setId( Bee::qVariantToVNumber(  sl.first() ) );
   sl.removeFirst();
-  QString password = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.at( 0 );
+  QString password = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.first();
   fi.setPassword( password.toUtf8() );
   return fi;
 }

@@ -29,8 +29,12 @@ GuiUserList::GuiUserList( QWidget* parent )
   : QListWidget( parent )
 {
   setObjectName( "GuiUserList" );
+
+  setContextMenuPolicy( Qt::CustomContextMenu );
+
   connect( this, SIGNAL( itemDoubleClicked( QListWidgetItem* ) ), this, SLOT( userDoubleClicked( QListWidgetItem* ) ) );
   connect( this, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( showUserInfo( QListWidgetItem* ) ) );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
 }
 
 QSize GuiUserList::sizeHint() const
@@ -64,6 +68,19 @@ void GuiUserList::updateItem( QListWidgetItem* item )
     item->setIcon( userIcon( 1, user_status ) );
   else
     item->setIcon( userIcon( unread_messages, user_status ) );
+
+  if( !m_defaultForegroundColor.isValid() )
+    m_defaultForegroundColor = item->foreground().color();
+
+  if( user_status != User::Offline )
+  {
+    if( !is_local_user && Settings::instance().showUserColor() )
+      item->setForeground( QBrush( QColor( item->data( UserColor ).toString() ) ) );
+    else
+      item->setForeground( QBrush( m_defaultForegroundColor ) );
+  }
+  else
+    item->setForeground( QBrush( QColor( "#808080" ) ) );
 }
 
 void GuiUserList::updateUsers()
@@ -117,8 +134,10 @@ void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_me
     item->setData( UserId, u.id() );
     item->setData( PrivateChatId, private_chat_id );
   }
+
   item->setData( Username, u.name() );
   item->setData( UserPath, u.path() );
+  item->setData( UserColor, u.color() );
   item->setData( UserStatus, u.status() );
   item->setData( UserStatusDescription, u.statusDescription() );
   if( unread_messages >= 0 )
@@ -152,6 +171,51 @@ void GuiUserList::showUserInfo( QListWidgetItem* item )
   else
     sInfo = tr( "Chat with %1" ).arg( item->data( UserPath ).toString() );
   emit stringToShow( sInfo, 6000 );
+}
+
+void GuiUserList::showUserMenu( const QPoint& p )
+{
+  QListWidgetItem* item = itemAt( p );
+  if( !item )
+    return;
+
+  QMenu menu;
+  QAction* act;
+
+  if( Bee::qVariantToVNumber( item->data( UserId ) ) == Settings::instance().localUser().id() )
+  {
+    act = menu.addAction( QIcon( ":/images/chat.png"), tr( "Chat with all users") );
+    act->setData( 1 );
+  }
+  else
+  {
+    menu.addAction( item->icon(), Settings::instance().showOnlyUsername() ? item->data( Username ).toString() : item->data( UserPath ).toString() );
+    menu.addSeparator();
+    act = menu.addAction( QIcon( ":/images/chat.png"), tr( "Open the private chat") );
+    act->setData( 1 );
+    act = menu.addAction( QIcon( ":/images/upload.png" ), tr( "Send a file..." ) );
+    act->setEnabled( item->data( UserStatus ).toInt() > User::Offline );
+    act->setData( 2 );
+    act = menu.addAction( QIcon( ":/images/font-color.png"), tr( "Change the user color..." ) );
+    act->setData( 3 );
+  }
+
+  act = menu.exec( QCursor::pos() );
+
+  if( !act )
+    return;
+  switch( act->data().toInt() )
+  {
+  case 1:
+    userDoubleClicked( item );
+    break;
+  case 2:
+    emit sendFile( Bee::qVariantToVNumber( item->data( UserId ) ) );
+    break;
+  case 3:
+    emit changeColor( Bee::qVariantToVNumber( item->data( UserId ) ) );
+    break;
+  }
 }
 
 void GuiUserList::userDoubleClicked( QListWidgetItem* item )

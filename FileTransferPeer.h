@@ -66,6 +66,7 @@ protected slots:
   void socketError( QAbstractSocket::SocketError );
   void checkTransferData( const QByteArray& );
   void checkAuthenticationRequested( const Message& );
+  void connectionTimeout();
 
 protected:
   void showProgress();

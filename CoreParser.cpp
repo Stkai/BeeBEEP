@@ -100,6 +100,13 @@ void Core::parseFileMessage( const User& u, const Message& m )
     return;
   }
 
+  if( m.hasFlag( Message::Refused ) )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has refused to download %3." )
+                           .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.path(), fi.name() ), DispatchToAllChatsWithUser );
+    return;
+  }
+
   Connection* c = connection( u.id() );
   if( !c )
   {
@@ -107,8 +114,9 @@ void Core::parseFileMessage( const User& u, const Message& m )
     return;
   }
   fi.setHostAddress( c->peerAddress() );
-  QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is sending to you the file: %3." ).arg( icon_html, u.path(), fi.name() ), DispatchToAllChatsWithUser );
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is sending to you the file: %3." )
+                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.path(), fi.name() ), DispatchToAllChatsWithUser );
   emit fileDownloadRequest( u, fi );
 }
 

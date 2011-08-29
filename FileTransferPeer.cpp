@@ -79,7 +79,7 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
 
   if( socket_descriptor )
   {
-     m_socket.setSocketDescriptor( socket_descriptor );
+    m_socket.setSocketDescriptor( socket_descriptor );
     qDebug() << "Using socket descriptor" << socket_descriptor;
   }
   else
@@ -87,6 +87,8 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
     m_socket.connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
     qDebug() << "Connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
   }
+
+  QTimer::singleShot( FILE_TRANSFER_CONFIRM_TIMEOUT, this, SLOT( connectionTimeout() ) );
 }
 
 void FileTransferPeer::setTransferCompleted()
@@ -144,4 +146,10 @@ void FileTransferPeer::setUserAuthorized( VNumber user_id )
 {
   m_socket.setUserId( user_id );
   sendTransferData();
+}
+
+void FileTransferPeer::connectionTimeout()
+{
+  if( m_state <= FileTransferPeer::Request )
+    setError( tr( "Connection timeout" ) );
 }

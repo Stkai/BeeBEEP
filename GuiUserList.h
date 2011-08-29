@@ -34,7 +34,7 @@ class GuiUserList : public QListWidget
   Q_OBJECT
 
 public:
-  enum UserDataType { UserId = Qt::UserRole, Username, UserPath, UnreadMessages, UserStatus, UserStatusDescription, PrivateChatId };
+  enum UserDataType { UserId = Qt::UserRole, Username, UserPath, UnreadMessages, UserStatus, UserStatusDescription, UserColor, PrivateChatId };
 
   GuiUserList( QWidget* parent = 0 );
   virtual QSize sizeHint() const;
@@ -46,17 +46,22 @@ public:
 
 signals:
   void chatSelected( VNumber chat_id );
+  void sendFile( VNumber user_id );
+  void changeColor( VNumber user_id );
   void stringToShow( const QString&, int );
 
 protected slots:
   void userDoubleClicked( QListWidgetItem* );
   void showUserInfo( QListWidgetItem* );
+  void showUserMenu( const QPoint& );
 
 private:
   inline QIcon userIcon( int unread_messages, int user_status ) const;
   void updateItem( QListWidgetItem* );
   QListWidgetItem* userItem( VNumber );
   QListWidgetItem* chatItem( VNumber );
+
+  QColor m_defaultForegroundColor;
 
 };
 

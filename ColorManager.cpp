@@ -69,7 +69,6 @@ ColorManager::ColorManager()
   m_colors << "#FFC040";
   m_colors << "#FFC080";
   m_colors << "#FFC0C0";
-  m_colors << "#FFFF00";
   m_colors << "#FFFF40";
   m_colors << "#004000";
   m_colors << "#008000";
@@ -78,7 +77,6 @@ ColorManager::ColorManager()
   m_colors << "#40C000";
   m_colors << "#80C000";
   m_colors << "#00FF00";
-  m_colors << "#40FF00";
   m_colors << "#C0FF00";
   m_colors << "#80FF80";
   m_colors << "#00FFCO";
@@ -90,7 +88,6 @@ ColorManager::ColorManager()
   m_colors << "#00C0C0";
   m_colors << "#40C0C0";
   m_colors << "#80C0C0";
-  m_colors << "#00FFFF";
   m_colors << "#000040";
   m_colors << "#000080";
   m_colors << "#004080";

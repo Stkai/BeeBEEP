@@ -131,3 +131,22 @@ void Core::cancelFileTransfer( VNumber peer_id )
   qDebug() << "Core received a request for cancelling file transfer" << peer_id;
   mp_fileTransfer->cancelTransfer( peer_id );
 }
+
+void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
+{
+  qDebug() << "Download refused:" << fi.name() << "from" << u.path();
+
+  QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
+
+  Message m = Protocol::instance().fileInfoToMessage( fi );
+  m.addFlag( Message::Refused );
+
+  Connection* c = connection( u.id() );
+  if( !c )
+  {
+    qDebug() << u.path() << "is not connected. Unable to send download refused message";
+    return;
+  }
+  c->sendMessage( m );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
+}

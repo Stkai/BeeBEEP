@@ -67,6 +67,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
+  connect( mp_userList, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
+  connect( mp_userList, SIGNAL( changeColor( VNumber ) ), this, SLOT( changeUserColor( VNumber ) ) );
 
   showChat( mp_core->defaultChat( false ) );
 
@@ -273,6 +275,14 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
 
+  act = mp_menuSettings->addAction( tr( "Show the user's colors" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserColor() );
+  act->setData( 5 );
+
+  mp_menuSettings->addSeparator();
+
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
   act->setCheckable( true );
@@ -405,11 +415,13 @@ void GuiMain::emoticonSelected()
 
 void GuiMain::refreshUserList()
 {
+  qDebug() << "Refresh users";
   mp_userList->updateUsers();
 }
 
 void GuiMain::refreshChat()
 {
+  qDebug() << "Refresh chat";
   Chat c = mp_core->chat( mp_defaultChat->chatId(), true );
   if( c.isValid() )
     showChat( c );
@@ -435,6 +447,22 @@ void GuiMain::selectFontColor()
   {
     Settings::instance().setChatFontColor( c.name() );
     mp_defaultChat->setChatFontColor( c.name() );
+  }
+}
+
+void GuiMain::changeUserColor( VNumber user_id )
+{
+  User u = mp_core->users().find( user_id );
+  if( !u.isValid() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
+    return;
+  }
+  QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
+  if( c.isValid() )
+  {
+    if( mp_core->setUserColor( user_id, c.name() ) )
+      refreshChat();
   }
 }
 
@@ -465,7 +493,9 @@ void GuiMain::settingsChanged()
     Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
     break;
   case 5:
-    // not used
+    Settings::instance().setShowUserColor( act->isChecked() );
+    refresh_users = true;
+    refresh_chat = true;
     break;
   case 6:
     Settings::instance().setShowOnlyUsername( act->isChecked() );
@@ -635,7 +665,25 @@ void GuiMain::sendFile()
     return;
   }
 
-  QString file_path = QFileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().lastDirectorySelected() );
+  QString file_path = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), user_selected.name() ),
+                                                    Settings::instance().lastDirectorySelected() );
+  if( file_path.isEmpty() || file_path.isNull() )
+    return;
+
+  mp_core->sendFile( user_selected, file_path );
+}
+
+void GuiMain::sendFile( VNumber user_id )
+{
+  User user_selected = mp_core->users().find( user_id );
+  if( !user_selected.isValid() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
+    return;
+  }
+
+  QString file_path = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), user_selected.name() ),
+                                                    Settings::instance().lastDirectorySelected() );
   if( file_path.isEmpty() || file_path.isNull() )
     return;
 
@@ -664,6 +712,8 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
     file_info.setPath( qfile_info.absoluteFilePath() );
     mp_core->downloadFile( u, file_info );
   }
+  else
+    mp_core->refuseToDownloadFile( u, fi );
 }
 
 void GuiMain::selectDownloadDirectory()

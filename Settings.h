@@ -63,6 +63,8 @@ public:
   inline void setChatSaveDirectory( const QString& );
   inline bool showOnlyUsername() const;
   inline void setShowOnlyUsername( bool );
+  inline bool showUserColor() const;
+  inline void setShowUserColor( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
@@ -131,6 +133,7 @@ private:
   bool m_chatShowMessageTimestamp;
   QString m_chatSaveDirectory;
   bool m_showOnlyUsername;
+  bool m_showUserColor;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -195,5 +198,7 @@ inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessag
 inline void Settings::setBeepOnNewMessageArrived( bool new_value ) { m_beepOnNewMessageArrived = new_value; }
 inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
 inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
+inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new_value; }
+inline bool Settings::showUserColor() const { return m_showUserColor; }
 
 #endif // BEEBEEP_SETTINGS_H

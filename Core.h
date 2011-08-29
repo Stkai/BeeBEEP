@@ -49,6 +49,7 @@ public:
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
   void setLocalUserName( const QString& );
+  bool setUserColor( VNumber, const QString& );
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
@@ -63,6 +64,7 @@ public:
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );
   void downloadFile( const User&, const FileInfo& );
+  void refuseToDownloadFile( const User&, const FileInfo& );
 
 public slots:
   /* CoreChat */

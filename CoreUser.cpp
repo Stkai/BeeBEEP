@@ -114,3 +114,14 @@ void Core::sendUserName()
   foreach( Connection *c, m_connections )
     c->sendData( user_name_message );
 }
+
+bool Core::setUserColor( VNumber user_id, const QString& user_color )
+{
+  User u = m_users.find( user_id );
+  if( !u.isValid() )
+    return false;
+  u.setColor( user_color );
+  m_users.setUser( u );
+  userChanged( u );
+  return true;
+}

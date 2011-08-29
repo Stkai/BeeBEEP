@@ -53,6 +53,7 @@ private slots:
   void showSelectedChat( VNumber chat_id );
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
+  void changeUserColor( VNumber );
   void showTipOfTheDay();
 
   void selectNickname();
@@ -69,6 +70,7 @@ private slots:
   void statusSelected();
   void changeStatusDescription();
   void sendFile();
+  void sendFile( VNumber );
   void downloadFile( const User&, const FileInfo& );
   void selectDownloadDirectory();
 

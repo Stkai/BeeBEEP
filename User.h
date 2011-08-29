@@ -55,6 +55,8 @@ public:
   inline const QString& statusDescription() const;
   inline void setColor( const QString& );
   inline const QString& color() const;
+  inline void setProtoVersion( int );
+  inline int protoVersion() const;
 
   inline QString path() const;
 
@@ -66,6 +68,7 @@ private:
   int m_status;
   QString m_statusDescription;
   QString m_color;
+  int m_protoVersion;
 
 };
 
@@ -89,6 +92,9 @@ inline void User::setStatusDescription( const QString& new_value ) { m_statusDes
 inline const QString& User::statusDescription() const { return m_statusDescription; }
 inline void User::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& User::color() const { return m_color; }
+inline void User::setProtoVersion( int new_value ) { m_protoVersion = new_value; }
+inline int User::protoVersion() const { return m_protoVersion; }
+
 inline QString User::path() const { return QString( "%1@%2:%3" ).arg( m_name, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 
 #endif // BEEBEEP_USER_H
