@@ -21,18 +21,18 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_PEERMANAGER_H
-#define BEEBEEP_PEERMANAGER_H
+#ifndef BEEBEEP_BROADCASTER_H
+#define BEEBEEP_BROADCASTER_H
 
 #include "Config.h"
 
 
-class PeerManager : public QObject
+class Broadcaster : public QObject
 {
   Q_OBJECT
 
 public:
-  explicit PeerManager( QObject* );
+  explicit Broadcaster( QObject* );
   bool startBroadcasting();
   void stopBroadcasting();
   bool isLocalHostAddress( const QHostAddress& );
@@ -57,4 +57,4 @@ private:
 };
 
 
-#endif // BEEBEEP_PEERMANAGER_H
+#endif // BEEBEEP_BROADCASTER_H

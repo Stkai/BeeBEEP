@@ -36,7 +36,7 @@ typedef quint64 FileSizeType;
 const int PONG_TIMEOUT = 84 * 1000;
 const int PING_INTERVAL = 21 * 1000;
 const int WRITING_MESSAGE_TIMEOUT = 3 * 1000;
-const int BROADCAST_INTERVAL = 5 * 1000;
+const int BROADCAST_INTERVAL = 35 * 1000;
 const unsigned BROADCAST_DEFAULT_PORT = 36475;
 const unsigned LISTENER_DEFAULT_PORT = 6475;
 const int DATASTREAM_VERSION = QDataStream::Qt_4_0;
@@ -49,7 +49,6 @@ const int FILE_TRANSFER_CONFIRM_TIMEOUT = 30 * 1000;
 #define MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT 20
 
 // Protocol
-#define PROTO_VERSION      73
 #define ID_INVALID         0
 #define ID_LOCAL_USER      1
 #define ID_DEFAULT_CHAT    2

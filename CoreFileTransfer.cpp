@@ -138,8 +138,7 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
 
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
 
-  Message m = Protocol::instance().fileInfoToMessage( fi );
-  m.addFlag( Message::Refused );
+  Message m = Protocol::instance().fileInfoRefusedToMessage( fi );
 
   Connection* c = connection( u.id() );
   if( !c )

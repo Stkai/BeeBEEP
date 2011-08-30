@@ -80,7 +80,9 @@ void GuiMain::refreshTitle()
   setWindowTitle( QString( "%1 - %2 (%3)" ).arg(
                     Settings::instance().programName(),
                     Settings::instance().localUser().name(),
-                    Bee::userStatusToString( Settings::instance().localUser().status() ) ) );
+                    (mp_core->isConnected() ?
+                       Bee::userStatusToString( Settings::instance().localUser().status() ) :
+                       tr( "offline" ) ) ) );
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )

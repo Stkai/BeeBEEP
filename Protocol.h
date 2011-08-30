@@ -48,6 +48,7 @@ public:
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
   Message fileInfoToMessage( const FileInfo& );
+  Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
 
   QByteArray localUserStatusMessage() const;

@@ -24,7 +24,7 @@
 #include "BeeUtils.h"
 #include "Connection.h"
 #include "Core.h"
-#include "PeerManager.h"
+#include "Broadcaster.h"
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -95,7 +95,7 @@ void Core::setUserName( const User& u, const QString& old_user_name )
 
 void Core::searchUsers( const QHostAddress& host_address )
 {
-  mp_peerManager->sendDatagramToHost( host_address );
+  mp_broadcaster->sendDatagramToHost( host_address );
   QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." )
       .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );

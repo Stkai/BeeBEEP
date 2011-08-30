@@ -23,7 +23,7 @@
 
 #include "BeeUtils.h"
 #include "Core.h"
-#include "PeerManager.h"
+#include "Broadcaster.h"
 #include "Settings.h"
 #include "Protocol.h"
 
@@ -36,16 +36,17 @@ Core::Core( QObject* parent )
 
   mp_listener = new Listener( this );
   qDebug() << "Listener created";
-  mp_peerManager = new PeerManager( this );
-  qDebug() << "PeerManager created";
+  mp_broadcaster = new Broadcaster( this );
+  qDebug() << "Broadcaster created";
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
 
-  connect( mp_peerManager, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
+  connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
-   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
+
 }
 
 bool Core::start()
@@ -67,7 +68,7 @@ bool Core::start()
   qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
   Settings::instance().setLocalUserHost( mp_listener->serverAddress(), mp_listener->serverPort() );
 
-  if( !mp_peerManager->startBroadcasting() )
+  if( !mp_broadcaster->startBroadcasting() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
@@ -91,7 +92,7 @@ bool Core::start()
 
 void Core::stop()
 {
-  mp_peerManager->stopBroadcasting();
+  mp_broadcaster->stopBroadcasting();
   mp_fileTransfer->stopListener();
   mp_listener->close();
 
@@ -99,6 +100,8 @@ void Core::stop()
     closeConnection( c );
 
   m_connections.clear();
+
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are disconnected.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ) ), DispatchToAllChatsWithUser );
+                         tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ),
+                                                                              Settings::instance().programName() ), DispatchToAllChatsWithUser );
 }

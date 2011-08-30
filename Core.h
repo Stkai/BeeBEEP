@@ -28,7 +28,7 @@
 #include "Listener.h"
 #include "FileTransfer.h"
 #include "UserList.h"
-class PeerManager;
+class Broadcaster;
 
 
 class Core : public QObject
@@ -135,7 +135,7 @@ private:
   QList<Chat> m_chats;
   QList<Connection*> m_connections;
   Listener* mp_listener;
-  PeerManager* mp_peerManager;
+  Broadcaster* mp_broadcaster;
   FileTransfer* mp_fileTransfer;
 
 };

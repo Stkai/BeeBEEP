@@ -188,7 +188,6 @@ QByteArray Protocol::broadcastMessage() const
 QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
-  data_list << QString::number( PROTO_VERSION );
   data_list << QString::number( Settings::instance().localUser().hostPort() );
   data_list << Settings::instance().localUser().name();
   data_list << QString::number( Settings::instance().localUser().status() );
@@ -237,23 +236,14 @@ bool Protocol::changeUserNameFromMessage( User* u, const Message& m ) const
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
  /* Read User Field Data */
-  int proto_version = 1;
   QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
   bool ok = false;
 
-  if( sl.size() < 5 )
+  if( sl.size() < 4 )
   {
-    qWarning() << "HELLO message has not 5 field data but" << sl.size();
+    qWarning() << "HELLO message has not 4 field data but" << sl.size();
     return User();
   }
-
-  proto_version = sl.first().toInt( & ok );
-  if( !ok )
-  {
-    qWarning() << "HELLO has an invalid proto version";
-    return User();
-  }
-  sl.removeFirst();
 
   int listener_port = sl.first().toInt( &ok );
   if( !ok )
@@ -277,7 +267,13 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( !ok )
     user_status = User::Online;
   sl.removeFirst();
-  QString user_status_description =  sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.first();
+
+  QString user_status_description = sl.first();
+  sl.removeFirst();
+
+  /* Skip other data */
+  if( !sl.isEmpty() )
+    qDebug() << "HELLO message contains more data. Skip it";
 
   /* Create User */
   User u( newId() );
@@ -286,7 +282,6 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setHostPort( listener_port );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
-  u.setProtoVersion( proto_version );
   return u;
 }
 
@@ -298,6 +293,14 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
     c.addUser( user_id );
   c.addUser( ID_LOCAL_USER );
   return c;
+}
+
+Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
+{
+  Message m( Message::File, newId(), fi.name() );
+  m.addFlag( Message::Refused );
+  m.addFlag( Message::Private );
+  return m;
 }
 
 Message Protocol::fileInfoToMessage( const FileInfo& fi )
@@ -326,8 +329,13 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   sl.removeFirst();
   fi.setId( Bee::qVariantToVNumber(  sl.first() ) );
   sl.removeFirst();
-  QString password = sl.size() > 1 ? sl.join( DATA_FIELD_SEPARATOR ) : sl.first();
+  QString password = sl.first();
   fi.setPassword( password.toUtf8() );
+  sl.removeFirst();
+    /* Skip other data */
+  if( !sl.isEmpty() )
+    qDebug() << "FILEINFO message contains more data. Skip it";
+
   return fi;
 }
 

@@ -8,7 +8,6 @@ TRANSLATIONS = locale/beebeep_it.ts
 SOURCES += Listener.cpp \
 	FileTransferPeer.cpp \
     Connection.cpp \
-    PeerManager.cpp \
     GuiChat.cpp \
     Message.cpp \
     Protocol.cpp \
@@ -38,12 +37,12 @@ SOURCES += Listener.cpp \
     CoreChat.cpp \
     CoreDispatcher.cpp \
     CoreFileTransfer.cpp \
-    UserList.cpp  
+    UserList.cpp \  
+    Broadcaster.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
     Config.h \
-    PeerManager.h \
     GuiChat.h \
     Message.h \
     Protocol.h \
@@ -71,7 +70,8 @@ HEADERS += sym_iap_util.h \
     GuiTransferFile.h \
     ColorManager.h \
     Core.h \
-    UserList.h  
+    UserList.h \  
+    Broadcaster.h
 FORMS += GuiChat.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
