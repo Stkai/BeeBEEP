@@ -89,6 +89,7 @@ private:
   void refreshTitle();
   void startCore();
   void stopCore();
+  void initGuiItems();
 
 private:
   GuiChat* mp_defaultChat;

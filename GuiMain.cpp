@@ -140,30 +140,45 @@ void GuiMain::startCore()
   QString pwd = QInputDialog::getText( this,
                                        Settings::instance().programName(),
                                        tr( "Please insert the chat password (or just press Enter)"),
-                                       QLineEdit::Normal,
+                                       QLineEdit::Password,
                                        Settings::instance().defaultPassword(),
                                        &ok );
   if( !ok )
     return;
   Settings::instance().setPassword( pwd.simplified() );
-  showChat( mp_core->defaultChat( true ) );
   mp_core->start();
-  mp_actSearch->setEnabled( true );
-  refreshTitle();
-  mp_actStartStopCore->setIcon( QIcon( ":/images/disconnect.png") );
-  mp_actStartStopCore->setText( tr( "&Disconnect" ) );
-  mp_actStartStopCore->setStatusTip( tr( "Disconnect from %1 network").arg( Settings::instance().programName() ) );
+  initGuiItems();
 }
 
 void GuiMain::stopCore()
 {
-  mp_actSearch->setEnabled( false );
-  showChat( mp_core->defaultChat( true ) );
   mp_core->stop();
+  initGuiItems();
+}
+
+void GuiMain::initGuiItems()
+{
+  bool enable = mp_core->isConnected();
+
   refreshTitle();
-  mp_actStartStopCore->setIcon( QIcon( ":/images/connect.png") );
-  mp_actStartStopCore->setText( tr( "&Connect" ) );
-  mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
+  showChat( mp_core->defaultChat( true ) );
+
+  if( enable )
+  {
+    mp_actStartStopCore->setIcon( QIcon( ":/images/disconnect.png") );
+    mp_actStartStopCore->setText( tr( "&Disconnect" ) );
+    mp_actStartStopCore->setStatusTip( tr( "Disconnect from %1 network").arg( Settings::instance().programName() ) );
+  }
+  else
+  {
+    mp_actStartStopCore->setIcon( QIcon( ":/images/connect.png") );
+    mp_actStartStopCore->setText( tr( "&Connect" ) );
+    mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
+  }
+
+  mp_menuStatus->setEnabled( enable );
+  mp_actSendFile->setEnabled( enable );
+  mp_actSearch->setEnabled( enable );
 }
 
 void GuiMain::showAbout()
@@ -212,7 +227,6 @@ void GuiMain::createActions()
   mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
   connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
 
-
   mp_actMenuBar = new QAction( tr( "Show the MenuBar" ), this );
   mp_actMenuBar->setStatusTip( tr( "Show the main menu bar with the %1 options" ).arg( Settings::instance().programName() ) );
   mp_actMenuBar->setCheckable( true );
@@ -228,7 +242,6 @@ void GuiMain::createActions()
   mp_actAbout = new QAction( QIcon( ":/images/info.png" ), tr( "&About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setStatusTip( tr( "Show the informations about %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
-
 }
 
 void GuiMain::createMenus()

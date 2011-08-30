@@ -44,9 +44,9 @@ bool Broadcaster::startBroadcasting()
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().broadcastPort();
     return false;
   }
-  qDebug() << "Broadcaster generate broadcast message data";
+  qDebug() << "Broadcaster generates broadcast message data";
   m_broadcastData = Protocol::instance().broadcastMessage();
-  qDebug() << "Broadcaster start broadcasting with listener port" << Settings::instance().localUser().hostPort();
+  qDebug() << "Broadcaster starts broadcasting with listener port" << Settings::instance().localUser().hostPort();
   m_broadcastTimer.start();
   QTimer::singleShot( 1000, this, SLOT( sendBroadcastDatagram() ) ); // first broadcast now!
   return true;
@@ -54,6 +54,7 @@ bool Broadcaster::startBroadcasting()
 
 void Broadcaster::stopBroadcasting()
 {
+  qDebug() << "Broadcaster stops broadcasting";
   m_broadcastTimer.stop();
   m_broadcastSocket.abort();
 }
@@ -70,32 +71,29 @@ bool Broadcaster::isLocalHostAddress( const QHostAddress& address )
 
 bool Broadcaster::sendDatagramToHost( const QHostAddress& host_address )
 {
+  qDebug() << "Broadcaster casts to network:" << host_address.toString();
   return m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().broadcastPort() ) > 0;
 }
 
 void Broadcaster::sendBroadcastDatagram()
 {
-  int num_address = 0;
-
-  bool validBroadcastAddresses = true;
-  foreach( QHostAddress address, m_broadcastAddresses )
+  bool addresses_are_valid = true;
+  foreach( QHostAddress host_address, m_broadcastAddresses )
   {
-    if( m_broadcastSocket.writeDatagram( m_broadcastData, address, Settings::instance().broadcastPort() ) == -1 )
-      validBroadcastAddresses = false;
-    else
-      num_address++;
+    if( !sendDatagramToHost( host_address ) )
+      addresses_are_valid = false;
   }
 
-  qDebug() << "Broadcaster sends datagram to" << num_address << "hosts";
-
-  if( !validBroadcastAddresses )
+  if( !addresses_are_valid )
     updateAddresses();
 }
 
 void Broadcaster::readBroadcastDatagram()
 {
-  while( m_broadcastSocket.hasPendingDatagrams() )
+  int num_datagram_read = 0;
+  while( m_broadcastSocket.hasPendingDatagrams() && num_datagram_read < MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT )
   {
+    num_datagram_read++;
     QHostAddress sender_ip;
     quint16 sender_port;
     QByteArray datagram;
@@ -114,19 +112,23 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     }
     bool ok = false;
-    int senderServerPort = m.text().toInt( &ok );
+    int sender_listener_port = m.text().toInt( &ok );
     if( !ok )
       continue;
 
-    if( isLocalHostAddress( sender_ip ) && senderServerPort == Settings::instance().localUser().hostPort() )
+    if( isLocalHostAddress( sender_ip ) && sender_listener_port == Settings::instance().localUser().hostPort() )
       continue;
 
-    emit newPeerFound( sender_ip, senderServerPort );
+    emit newPeerFound( sender_ip, sender_listener_port );
   }
+
+  if( num_datagram_read > 1 )
+    qDebug() << "Broadcaster read" << num_datagram_read << "datagrams";
 }
 
 void Broadcaster::updateAddresses()
 {
+  qDebug() << "Broadcaster updates the addresses";
   m_broadcastAddresses.clear();
   m_ipAddresses.clear();
   foreach( QNetworkInterface interface, QNetworkInterface::allInterfaces() )
@@ -138,6 +140,7 @@ void Broadcaster::updateAddresses()
       {
         m_broadcastAddresses << broadcastAddress;
         m_ipAddresses << entry.ip();
+        qDebug() << "Broadcaster adds" << broadcastAddress.toString() << "and" << entry.ip().toString();
       }
     }
   }

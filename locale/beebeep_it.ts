@@ -4,24 +4,28 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../Core.cpp" line="60"/>
+        <location filename="../Core.cpp" line="61"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Impossibile connttersi nella rete %2. Controlla le impostazioni del tuo firewall.</translation>
     </message>
     <message>
-        <location filename="../Core.cpp" line="73"/>
+        <location filename="../Core.cpp" line="74"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Impossibile inviare messaggi nella rete %2. Controlla le impostazioni del tuo firewall.</translation>
     </message>
     <message>
-        <location filename="../Core.cpp" line="81"/>
+        <location filename="../Core.cpp" line="82"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Connessione alla rete %2 riuscita.</translation>
     </message>
     <message>
-        <location filename="../Core.cpp" line="103"/>
+        <location filename="../Core.cpp" line="105"/>
+        <source>%1 You are disconnected from %2 Network.</source>
+        <translation>%1 Disconnessione dalla rete %2.</translation>
+    </message>
+    <message>
         <source>%1 You are disconnected.</source>
-        <translation>%1 Disconnesso.</translation>
+        <translation type="obsolete">%1 Disconnesso.</translation>
     </message>
     <message>
         <location filename="../CoreChat.cpp" line="40"/>
@@ -266,49 +270,54 @@ p, li { white-space: pre-wrap; }
         <translation>Mostra la barra degli strumenti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="89"/>
+        <location filename="../GuiMain.cpp" line="85"/>
+        <source>offline</source>
+        <translation>disconnesso</translation>
+    </message>
+    <message>
+        <location filename="../GuiMain.cpp" line="91"/>
         <source>Do you really want to quit %1?</source>
         <translation>Vuoi realmente chiudere %1?</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="109"/>
+        <location filename="../GuiMain.cpp" line="111"/>
         <source>No new message available</source>
         <translation>Nessun nuovo messaggio disponibile</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="118"/>
+        <location filename="../GuiMain.cpp" line="120"/>
         <source>Please insert your nickname</source>
         <translation>Per favore inserisci il tuo nickname</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="140"/>
+        <location filename="../GuiMain.cpp" line="142"/>
         <source>Please insert the chat password (or just press Enter)</source>
         <translation>Inserisci la password per il collegamento (o premi solamente Invio)</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="152"/>
+        <location filename="../GuiMain.cpp" line="169"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Disconnetti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="153"/>
+        <location filename="../GuiMain.cpp" line="170"/>
         <source>Disconnect from %1 network</source>
         <translation>Disconnettiti dalla rete %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="163"/>
-        <location filename="../GuiMain.cpp" line="178"/>
+        <location filename="../GuiMain.cpp" line="175"/>
+        <location filename="../GuiMain.cpp" line="195"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connetti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="164"/>
-        <location filename="../GuiMain.cpp" line="179"/>
+        <location filename="../GuiMain.cpp" line="176"/>
+        <location filename="../GuiMain.cpp" line="196"/>
         <source>Connect to %1 network</source>
         <translation>Connettiti alla rete %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="171"/>
+        <location filename="../GuiMain.cpp" line="188"/>
         <source>Secure Network Chat version %1</source>
         <translation>Secure Network Chat versione %1</translation>
     </message>
@@ -317,366 +326,366 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&lt;br /&gt;sviluppata da Marco Mastroddi&lt;br /&gt;e-mail: marco.mastroddi@gmail.com&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="172"/>
+        <location filename="../GuiMain.cpp" line="189"/>
         <source>&lt;br /&gt;developed by Marco Mastroddi&lt;br /&gt;e-mail: marco.mastroddi@gmail.com&lt;br /&gt;&lt;br /&gt;</source>
         <translation>&lt;br /&gt;sviluppata da Marco Mastroddi&lt;br /&gt;e-mail: marco.mastroddi@gmail.com&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="173"/>
+        <location filename="../GuiMain.cpp" line="190"/>
         <source>&amp;lt; Free is that mind guided by the fantasy &amp;gt;</source>
         <translation>&amp;lt; Libera è quella mente guidata dalla fantasia &amp;gt;</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="182"/>
+        <location filename="../GuiMain.cpp" line="199"/>
         <source>Search &amp;users...</source>
         <translation>Cerca &amp;utenti...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="183"/>
+        <location filename="../GuiMain.cpp" line="200"/>
         <source>Search the users outside the %1 local network</source>
         <translation>Cerca nuovi utenti fuori dalla rete locale di %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="187"/>
+        <location filename="../GuiMain.cpp" line="204"/>
         <source>&amp;Save chat...</source>
         <translation>&amp;Salva la conversazione...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="189"/>
+        <location filename="../GuiMain.cpp" line="206"/>
         <source>Save the messages of the current chat to a file</source>
         <translation>Salva i messaggi della conversazione corrente in un file</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="192"/>
+        <location filename="../GuiMain.cpp" line="209"/>
         <source>&amp;Quit</source>
         <translation>&amp;Esci</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="194"/>
+        <location filename="../GuiMain.cpp" line="211"/>
         <source>Close the chat and quit %1</source>
         <translation>Esci da %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="197"/>
+        <location filename="../GuiMain.cpp" line="214"/>
         <source>Change your nickname...</source>
         <translation>Cambia il tuo nickname...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="198"/>
+        <location filename="../GuiMain.cpp" line="215"/>
         <source>Select your favourite chat nickname</source>
         <translation>Seleziona il tuo nickname favorito per le conversazioni</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="201"/>
+        <location filename="../GuiMain.cpp" line="218"/>
         <source>Chat font style...</source>
         <translation>Cambia il carattere...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="202"/>
+        <location filename="../GuiMain.cpp" line="219"/>
         <source>Select your favourite chat font style</source>
         <translation>Seleziona il carattere per i tuoi messaggi</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="205"/>
+        <location filename="../GuiMain.cpp" line="222"/>
         <source>My message font color...</source>
         <translation>Cambia il colore del carattere...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="206"/>
+        <location filename="../GuiMain.cpp" line="223"/>
         <source>Select your favourite font color for the chat messages</source>
         <translation>Seleziona il colore del carattere per i tuoi messaggi</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="209"/>
+        <location filename="../GuiMain.cpp" line="226"/>
         <source>Send a file...</source>
         <translation>Invia un file...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="210"/>
+        <location filename="../GuiMain.cpp" line="227"/>
         <source>Send a file to a user</source>
         <translation>Invia un file ad un utente</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="214"/>
+        <location filename="../GuiMain.cpp" line="230"/>
         <source>Show the MenuBar</source>
         <translation>Mostra la barra generale</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="215"/>
+        <location filename="../GuiMain.cpp" line="231"/>
         <source>Show the main menu bar with the %1 options</source>
         <translation>Mostra la barra generale con le opzioni di %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="223"/>
+        <location filename="../GuiMain.cpp" line="239"/>
         <source>Show the main tool bar with settings and emoticons</source>
         <translation>Mostra la barra degli strumenti con le opzioni e le faccine</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="226"/>
+        <location filename="../GuiMain.cpp" line="242"/>
         <source>&amp;About %1...</source>
         <translation>&amp;Informazioni su %1...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="227"/>
+        <location filename="../GuiMain.cpp" line="243"/>
         <source>Show the informations about %1</source>
         <translation>Mostra le informazioni sull&apos;applicazione %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="238"/>
+        <location filename="../GuiMain.cpp" line="253"/>
         <source>&amp;Main</source>
         <translation>&amp;Generale</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="244"/>
+        <location filename="../GuiMain.cpp" line="259"/>
         <source>Select download folder...</source>
         <translation>Seleziona una cartella per i downloads...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="249"/>
+        <location filename="../GuiMain.cpp" line="264"/>
         <source>&amp;Settings</source>
         <translation>&amp;Opzioni</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="254"/>
+        <location filename="../GuiMain.cpp" line="269"/>
         <source>Show only the nicknames</source>
         <translation>Mostra solo i nicknames degli utenti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="255"/>
+        <location filename="../GuiMain.cpp" line="270"/>
         <source>If enabled only the nickname of the connected users are shown</source>
         <translation>Se abilitata solamente i nicknames degli utenti connessi saranno mostrati</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="260"/>
+        <location filename="../GuiMain.cpp" line="275"/>
         <source>Enable the compact mode in chat window</source>
         <translation>Abilita la versione compatta dei messaggi</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="261"/>
+        <location filename="../GuiMain.cpp" line="276"/>
         <source>If enabled the sender&apos;s nickname and his message are in the same line</source>
         <translation>Se abilitata il nickname ed il messaggio relativo staranno sulla stessa linea</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="266"/>
+        <location filename="../GuiMain.cpp" line="281"/>
         <source>Add a blank line between the messages</source>
         <translation>Aggiungi una linea vuota tra i messaggi</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="267"/>
+        <location filename="../GuiMain.cpp" line="282"/>
         <source>If enabled the messages in the chat window are separated by a blank line</source>
         <translation>Se abilitata i messaggi saranno separati da una linea vuota</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="272"/>
+        <location filename="../GuiMain.cpp" line="287"/>
         <source>Show the messages&apos; timestamp</source>
         <translation>Mostra l&apos;orario nei messaggi</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="273"/>
+        <location filename="../GuiMain.cpp" line="288"/>
         <source>If enabled the message shows its timestamp in the chat window</source>
         <translation>Se abilitata i messaggi saranno preceduti dall&apos;orario di invio</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="278"/>
+        <location filename="../GuiMain.cpp" line="293"/>
         <source>Show the user&apos;s colors</source>
         <translation>Mostra i colori degli utenti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="279"/>
+        <location filename="../GuiMain.cpp" line="294"/>
         <source>If enabled the user&apos;s nickname in chat and in list is colored</source>
         <translation>Se abilitata il nickname degli utenti in chat e nella lista sarà colorato</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="286"/>
+        <location filename="../GuiMain.cpp" line="301"/>
         <source>Beep on new message arrived</source>
         <translation>Abilita suoni di notifica</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="287"/>
+        <location filename="../GuiMain.cpp" line="302"/>
         <source>If enabled when a new message is arrived a sound is emitted</source>
         <translation>Se abilitata un suono verrà emesso quando un nuovo messaggio arriverà</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="293"/>
+        <location filename="../GuiMain.cpp" line="308"/>
         <source>Emoticons</source>
         <translation>Faccine</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="294"/>
+        <location filename="../GuiMain.cpp" line="309"/>
         <source>Add your preferred emoticon to the message</source>
         <translation>Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="307"/>
+        <location filename="../GuiMain.cpp" line="322"/>
         <source>Status</source>
         <translation>Stato</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="308"/>
+        <location filename="../GuiMain.cpp" line="323"/>
         <source>Select your status</source>
         <translation>Seleziona il tuo stato</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="314"/>
+        <location filename="../GuiMain.cpp" line="329"/>
         <source>Your status will be %1</source>
         <translation>Il tuo stato sarà %1</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="319"/>
+        <location filename="../GuiMain.cpp" line="334"/>
         <source>Add a status description...</source>
         <translation>Aggiungi una descrizione al tuo stato...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="323"/>
+        <location filename="../GuiMain.cpp" line="338"/>
         <source>Tips of the day</source>
         <translation>Suggerimenti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="324"/>
+        <location filename="../GuiMain.cpp" line="339"/>
         <source>Show me the tip of the day</source>
         <translation>Mostrami il suggerimento del giorno</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="327"/>
+        <location filename="../GuiMain.cpp" line="342"/>
         <source>About &amp;Qt...</source>
         <translation>Informazioni su &amp;Qt...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="328"/>
+        <location filename="../GuiMain.cpp" line="343"/>
         <source>Show the informations about Qt library</source>
         <translation>Mostra le informazioni sulla libreria Qt</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="348"/>
+        <location filename="../GuiMain.cpp" line="363"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="353"/>
+        <location filename="../GuiMain.cpp" line="368"/>
         <source>Users</source>
         <translation>Utenti</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="360"/>
+        <location filename="../GuiMain.cpp" line="375"/>
         <source>Show online users and active chats</source>
         <translation>Mostra gli utenti connessi</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="361"/>
+        <location filename="../GuiMain.cpp" line="376"/>
         <source>Show the list of the connected users and the active chats</source>
         <translation>Mostra la liste degli utenti connessi e le relative conversazioni attive</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="364"/>
+        <location filename="../GuiMain.cpp" line="379"/>
         <source>File Transfers</source>
         <translation>Trasferimento files</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="371"/>
+        <location filename="../GuiMain.cpp" line="386"/>
         <source>Show the file transfers</source>
         <translation>Mostra i trasferimenti dei files</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="372"/>
+        <location filename="../GuiMain.cpp" line="387"/>
         <source>Show the list of the file transfers</source>
         <translation>Mostra la lista dei trasferimenti dei files</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="458"/>
-        <location filename="../GuiMain.cpp" line="681"/>
+        <location filename="../GuiMain.cpp" line="473"/>
+        <location filename="../GuiMain.cpp" line="696"/>
         <source>User not found.</source>
         <translation>Utente non trovato.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="569"/>
+        <location filename="../GuiMain.cpp" line="584"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Seleziona un file dove salvare la conversazione in corso.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="584"/>
-        <location filename="../GuiMain.cpp" line="609"/>
+        <location filename="../GuiMain.cpp" line="599"/>
+        <location filename="../GuiMain.cpp" line="624"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="585"/>
+        <location filename="../GuiMain.cpp" line="600"/>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
         <translation>%1: impossibile salvare i messaggi.
 Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="591"/>
+        <location filename="../GuiMain.cpp" line="606"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="592"/>
+        <location filename="../GuiMain.cpp" line="607"/>
         <source>%1: save completed.</source>
         <translation>%1: salvataggio completato.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="602"/>
+        <location filename="../GuiMain.cpp" line="617"/>
         <source>Please insert the Host Address or Broadcast Address to contact
 (ex. 10.184.15.186 or 10.184.15.255)</source>
         <translation>Inserisci l&apos;indirizzo IP o la sottorete in cui cercare nuovi utenti
 (es. 10.184.15.186 oppure 10.184.15.255)</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="610"/>
+        <location filename="../GuiMain.cpp" line="625"/>
         <source>You have selected an invalid host address.</source>
         <translation>Hai inserito un indirizzo IP o di sottorete non valido.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="621"/>
+        <location filename="../GuiMain.cpp" line="636"/>
         <source>%1 is writing...</source>
         <translation>%1 sta scrivendo...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="638"/>
+        <location filename="../GuiMain.cpp" line="653"/>
         <source>Please insert the new status description</source>
         <translation>Inserisci una descrizione per il tuo stato</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="651"/>
+        <location filename="../GuiMain.cpp" line="666"/>
         <source>There is no user connected.</source>
         <translation>Non ci sono utenti collegati.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="656"/>
+        <location filename="../GuiMain.cpp" line="671"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Seleziona l&apos;utente a cui vuoi inviare il file.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="664"/>
+        <location filename="../GuiMain.cpp" line="679"/>
         <source>User %1 not found.</source>
         <translation>L&apos;utente %1 non è stato trovato.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="668"/>
-        <location filename="../GuiMain.cpp" line="685"/>
+        <location filename="../GuiMain.cpp" line="683"/>
+        <location filename="../GuiMain.cpp" line="700"/>
         <source>%1 - Send a file to %2</source>
         <translation>%1 - Invia un file a %2</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="695"/>
+        <location filename="../GuiMain.cpp" line="710"/>
         <source>Do you want to download from %1
 %2 (%3)?</source>
         <translation>Vuoi scaricare da %1
 il file %2 (%3)?</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="697"/>
+        <location filename="../GuiMain.cpp" line="712"/>
         <source>Yes</source>
         <translation>Si</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="697"/>
+        <location filename="../GuiMain.cpp" line="712"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="704"/>
+        <location filename="../GuiMain.cpp" line="719"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 esiste già. Seleziona un nuovo nome per il file.</translation>
     </message>
