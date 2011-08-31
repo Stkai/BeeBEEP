@@ -86,3 +86,20 @@ QString Bee::bytesToString( FileSizeType bytes, int precision )
   }
   return QString( "%1 %2").arg( result, 0, 'f', precision ).arg( suffix );
 }
+
+QString Bee::timerToString( int time_elapsed )
+{
+  QTime t( 0, 0 );
+  t = t.addMSecs( time_elapsed );
+  QString s = "";
+  if( t.hour() == 0 && t.minute() == 0 && t.second() == 0 )
+    s = QString( "%1 ms" ).arg( t.msec() );
+  else if( t.hour() == 0 && t.minute() == 0 )
+    s = QString( "%1 s" ).arg( t.second() );
+  else if( t.hour() == 0 )
+    s = QString( "%1 m, %2 s" ).arg( t.minute() ).arg( t.second() );
+  else
+    s = QString( "%1 h, %2 m, %3 s" ).arg( t.hour() ).arg( t.minute() ).arg( t.second() );
+  return s;
+}
+

@@ -39,6 +39,7 @@ namespace Bee
   inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
   inline VNumber qVariantToVNumber( const QVariant& );
   QString bytesToString( FileSizeType, int precision = 1 );
+  QString timerToString( int msec );
 
 
   namespace Private

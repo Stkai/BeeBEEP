@@ -21,8 +21,10 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "FileTransferPeer.h"
 #include "Protocol.h"
+#include "Settings.h"
 
 
 FileTransferPeer::FileTransferPeer( QObject *parent )
@@ -31,6 +33,9 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
 {
   setObjectName( "FileTransferPeer ");
   qDebug() << "FileTransferPeer created for transfer file";
+
+  m_time = QTime::currentTime();
+
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
   connect( &m_socket, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthenticationRequested( const Message& ) ) );
   connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
@@ -77,6 +82,8 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;
 
+  m_time.start();
+
   if( socket_descriptor )
   {
     m_socket.setSocketDescriptor( socket_descriptor );
@@ -88,14 +95,14 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
     qDebug() << "Connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
   }
 
-  QTimer::singleShot( FILE_TRANSFER_CONFIRM_TIMEOUT, this, SLOT( connectionTimeout() ) );
+  QTimer::singleShot( Settings::instance().fileTransferConfirmTimeout(), this, SLOT( connectionTimeout() ) );
 }
 
 void FileTransferPeer::setTransferCompleted()
 {
   qDebug() << m_fileInfo.name() << "transfer completed";
   m_state = FileTransferPeer::Completed;
-  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed" ) );
+  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timerToString( m_time.elapsed() ) ) );
   closeAll();
 }
 

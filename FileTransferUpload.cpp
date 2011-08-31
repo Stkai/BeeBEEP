@@ -24,6 +24,7 @@
 
 #include "FileTransferPeer.h"
 #include "Protocol.h"
+#include "Settings.h"
 
 
 void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
@@ -109,7 +110,7 @@ void FileTransferPeer::sendUploadData()
   if( m_file.atEnd() )
     return;
 
-  QByteArray byte_array = m_file.read( 32704 );
+  QByteArray byte_array = m_file.read( Settings::instance().fileTransferBufferSize() );
 
   if( m_socket.sendData( byte_array ) )
   {

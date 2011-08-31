@@ -76,7 +76,7 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 
   if( !mp_timer->isActive() )
   {
-    mp_timer->start( WRITING_MESSAGE_TIMEOUT );
+    mp_timer->start( Settings::instance().writingTimeout() );
   }
 }
 

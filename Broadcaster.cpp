@@ -33,7 +33,7 @@ Broadcaster::Broadcaster( QObject *parent )
 
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
 
-  m_broadcastTimer.setInterval( BROADCAST_INTERVAL );
+  m_broadcastTimer.setInterval( Settings::instance().broadcastInterval() );
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
 }
 

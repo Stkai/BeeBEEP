@@ -99,8 +99,6 @@ void Settings::load()
   m_localUser.setName( sets.value( "LocalName", "" ).toString() );
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_localUser.setHostPort( sets.value( "LocalListenerPort", LISTENER_DEFAULT_PORT ).toInt() );
-  m_broadcastPort = sets.value( "LocalBroadcastPort", BROADCAST_DEFAULT_PORT ).toInt();
   m_showOnlyUsername = sets.value( "ShowOnlyName", true ).toBool();
   m_showUserColor = sets.value( "ShowColors", true ).toBool();
   sets.endGroup();
@@ -124,6 +122,20 @@ void Settings::load()
   m_debugMode = sets.value( "DebugMode", false ).toBool();
 #endif
   m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
+  sets.endGroup();
+
+  sets.beginGroup( "Misc" );
+  m_broadcastPort = sets.value( "BroadcastPort", 36475 ).toInt();
+  m_broadcastInterval = qMax( sets.value( "BroadcastInterval", 35000 ).toInt(), 1000 );
+  m_localUser.setHostPort( sets.value( "ListenerPort", 6475 ).toInt() );
+  m_pingInterval = qMax( sets.value( "PingInterval", 31000 ).toInt(), 1000 );
+  m_pongTimeout = qMax( sets.value( "PongTimeout", 93000 ).toInt(), 1000 );
+  m_writingTimeout = qMax( sets.value( "WritingTimeout", 3000 ).toInt(), 1000 );
+  m_fileTransferConfirmTimeout = qMax( sets.value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
+  m_fileTransferBufferSize = qMax( sets.value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
+  int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
+  if( mod_buffer_size > 0 )
+    m_fileTransferBufferSize -= mod_buffer_size;
   sets.endGroup();
 
   if( m_localUser.name().isEmpty() )
@@ -151,8 +163,6 @@ void Settings::save()
   sets.setValue( "LocalName", m_localUser.name() );
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
-  sets.setValue( "LocalListenerPort", m_localUser.hostPort() );
-  sets.setValue( "LocalBroadcastPort", m_broadcastPort );
   sets.setValue( "ShowOnlyName", m_showOnlyUsername );
   sets.setValue( "ShowColors", m_showUserColor );
   sets.endGroup();
@@ -169,6 +179,16 @@ void Settings::save()
   sets.beginGroup( "Tools" );
   sets.setValue( "DebugMode", m_debugMode );
   sets.setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
+  sets.endGroup();
+  sets.beginGroup( "Misc" );
+  sets.setValue( "BroadcastPort", m_broadcastPort );
+  sets.setValue( "BroadcastInterval", m_broadcastInterval );
+  sets.setValue( "ListenerPort", m_localUser.hostPort() );
+  sets.setValue( "PingInterval", m_pingInterval );
+  sets.setValue( "PongTimeout", m_pongTimeout );
+  sets.setValue( "WritingTimeout", m_writingTimeout );
+  sets.setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
+  sets.setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets.endGroup();
   sets.sync();
   qDebug() << "Settings saved";

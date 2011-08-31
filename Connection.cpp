@@ -23,6 +23,7 @@
 
 #include "Connection.h"
 #include "Protocol.h"
+#include "Settings.h"
 
 #undef CONNECTION_PING_PONG_DEBUG
 
@@ -31,7 +32,7 @@
 Connection::Connection( QObject *parent )
   : ConnectionSocket( parent )
 {
-  m_pingTimer.setInterval( PING_INTERVAL );
+  m_pingTimer.setInterval( Settings::instance().pingInterval() );
   connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( parseData( const QByteArray& ) ) );
   connect( this, SIGNAL( disconnected() ), &m_pingTimer, SLOT( stop() ) );
   connect( &m_pingTimer, SIGNAL( timeout() ), this, SLOT( sendPing() ) );
@@ -87,7 +88,7 @@ void Connection::setReadyForUse( VNumber user_id )
 
 void Connection::sendPing()
 {
-  if( m_pongTime.elapsed() > PONG_TIMEOUT )
+  if( m_pongTime.elapsed() > Settings::instance().pongTimeout() )
   {
     abort();
     return;

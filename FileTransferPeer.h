@@ -98,6 +98,7 @@ protected:
   ConnectionSocket m_socket;
   Message m_messageAuth; // This class for a ? reason does not emit an authentication signal with arguments
                          // so i have to store message so the parent class can access it
+  QTime m_time;
 
 };
 

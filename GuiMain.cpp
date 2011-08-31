@@ -634,7 +634,7 @@ void GuiMain::searchUsers()
 void GuiMain::showWritingUser( const User& u )
 {
   QString msg = tr( "%1 is writing..." ).arg( Settings::instance().showOnlyUsername() ? u.name() : u.path() );
-  statusBar()->showMessage( msg, WRITING_MESSAGE_TIMEOUT );
+  statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
 }
 
 void GuiMain::statusSelected()
