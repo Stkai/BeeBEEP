@@ -29,6 +29,7 @@
 #include "GuiTransferFile.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
+#include "GuiVCard.h"
 #include "Settings.h"
 
 
@@ -215,6 +216,10 @@ void GuiMain::createActions()
   mp_actNickname->setStatusTip( tr( "Select your favourite chat nickname" ) );
   connect( mp_actNickname, SIGNAL( triggered() ), this, SLOT( selectNickname() ) );
 
+  mp_actVCard = new QAction( QIcon( ":/images/profile.png"), tr( "Profile..." ), this );
+  mp_actVCard->setStatusTip( tr( "Change your profile data" ) );
+  connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
+
   mp_actFont = new QAction( QIcon( ":/images/font.png"), tr( "Chat font style..." ), this );
   mp_actFont->setStatusTip( tr( "Select your favourite chat font style" ) );
   connect( mp_actFont, SIGNAL( triggered() ), this, SLOT( selectFont() ) );
@@ -254,6 +259,7 @@ void GuiMain::createMenus()
   menu->addAction( mp_actStartStopCore );
   menu->addSeparator();
   menu->addAction( mp_actNickname );
+  menu->addAction( mp_actVCard );
   menu->addAction( mp_actSearch );
   menu->addSeparator();
   act = menu->addAction( QIcon( ":/images/download-folder.png" ), tr( "Select download folder..."), this, SLOT( selectDownloadDirectory() ) );
@@ -775,4 +781,18 @@ void GuiMain::showChat( const Chat& c )
   QString chat_users = mp_core->chatUsers( c, "," );
   qDebug() << "Show chat" << c.id() << "with users:" << chat_users;
   mp_defaultChat->setChat( c, chat_users, chat_text );
+}
+
+void GuiMain::changeVCard()
+{
+  GuiVCard gvc( this );
+  gvc.setWindowTitle( tr( "%1 - Profile" ).arg( Settings::instance().programName() ) );
+  gvc.setModal( true );
+  gvc.show();
+  gvc.setFixedSize( gvc.size() );
+  if( gvc.exec() == QDialog::Accepted )
+  {
+    qDebug() << "vCard changed";
+    //mp_core->setVCard( gvc.vCard() );
+  }
 }

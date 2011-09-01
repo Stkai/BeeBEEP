@@ -58,7 +58,7 @@ void GuiVCard::loadVCard()
   mp_deBirthday->setDate( m_vCard.birthday() );
   mp_leEmail->setText( m_vCard.email() );
 
-  mp_leFisrtName->setFocus();
+  mp_leFirstName->setFocus();
 }
 
 void GuiVCard::changePhoto()

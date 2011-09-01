@@ -73,6 +73,7 @@ private slots:
   void sendFile( VNumber );
   void downloadFile( const User&, const FileInfo& );
   void selectDownloadDirectory();
+  void changeVCard();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -108,6 +109,7 @@ private:
   QAction* mp_actSearch;
   QAction* mp_actQuit;
   QAction* mp_actNickname;
+  QAction* mp_actVCard;
   QAction* mp_actFont;
   QAction* mp_actFontColor;
   QAction* mp_actMenuBar;
