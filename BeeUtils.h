@@ -40,7 +40,7 @@ namespace Bee
   inline VNumber qVariantToVNumber( const QVariant& );
   QString bytesToString( FileSizeType, int precision = 1 );
   QString timerToString( int msec );
-
+  QString uniqueFilePath( const QString& );
 
   namespace Private
   {

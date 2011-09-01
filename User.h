@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_USER_H
 #define BEEBEEP_USER_H
 
-#include "Config.h"
+#include "VCard.h"
 
 
 class User
@@ -55,6 +55,8 @@ public:
   inline const QString& statusDescription() const;
   inline void setColor( const QString& );
   inline const QString& color() const;
+  inline void setVCard( const VCard& );
+  inline const VCard& vCard() const;
 
   inline QString path() const;
 
@@ -66,6 +68,7 @@ private:
   int m_status;
   QString m_statusDescription;
   QString m_color;
+  VCard m_vCard;
 
 };
 
@@ -89,6 +92,8 @@ inline void User::setStatusDescription( const QString& new_value ) { m_statusDes
 inline const QString& User::statusDescription() const { return m_statusDescription; }
 inline void User::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& User::color() const { return m_color; }
+inline void  User::setVCard( const VCard& new_value ) { m_vCard = new_value; }
+inline const VCard& User::vCard() const { return m_vCard; }
 
 inline QString User::path() const { return QString( "%1@%2:%3" ).arg( m_name, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 

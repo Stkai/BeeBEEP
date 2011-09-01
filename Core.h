@@ -50,6 +50,7 @@ public:
   void setLocalUserStatusDescription( const QString& );
   void setLocalUserName( const QString& );
   bool setUserColor( VNumber, const QString& );
+  void setVCard( const VCard& );
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)

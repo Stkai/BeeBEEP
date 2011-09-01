@@ -38,9 +38,9 @@ Settings::Settings()
   setPassword( defaultPassword() );
 }
 
-QString Settings::version() const
+QString Settings::version( bool complete ) const
 {
-  return QString( BEEBEEP_VERSION );
+  return complete ? QString( "%1 (b%2)" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ) : QString( BEEBEEP_VERSION );
 }
 
 QString Settings::programName() const
@@ -102,6 +102,21 @@ void Settings::load()
   m_showOnlyUsername = sets.value( "ShowOnlyName", true ).toBool();
   m_showUserColor = sets.value( "ShowColors", true ).toBool();
   sets.endGroup();
+
+  sets.beginGroup( "VCard" );
+  VCard vc;
+  vc.setFirstName( sets.value( "FirstName", "" ).toString() );
+  vc.setLastName( sets.value( "LastName", "" ).toString() );
+  vc.setGender( (sets.value( "Gender", 1 ).toInt() > 0 ? VCard::Female : VCard::Male) );
+  QDate dt = sets.value( "Birthday", QDate() ).toDate();
+  if( dt.isValid() )
+    vc.setBirthday( dt );
+  vc.setEmail( sets.value( "Email", "" ).toString() );
+  QPixmap pix = sets.value( "Photo", QPixmap() ).value<QPixmap>();
+  if( !pix.isNull() )
+    vc.setPhoto( pix );
+  sets.endGroup();
+
   sets.beginGroup( "Gui" );
   m_guiGeometry = sets.value( "MainWindowGeometry", "" ).toByteArray();
   m_guiState = sets.value( "MainWindowState", "" ).toByteArray();
@@ -122,6 +137,7 @@ void Settings::load()
   m_debugMode = sets.value( "DebugMode", false ).toBool();
 #endif
   m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
+  m_automaticFileName = sets.value( "AutomaticFileName", true ).toBool();
   sets.endGroup();
 
   sets.beginGroup( "Misc" );
@@ -166,6 +182,16 @@ void Settings::save()
   sets.setValue( "ShowOnlyName", m_showOnlyUsername );
   sets.setValue( "ShowColors", m_showUserColor );
   sets.endGroup();
+  sets.beginGroup( "VCard" );
+  sets.setValue( "FirstName", m_localUser.vCard().firstName() );
+  sets.setValue( "LastName", m_localUser.vCard().lastName() );
+  sets.setValue( "Gender", m_localUser.vCard().gender() );
+  if( m_localUser.vCard().birthday().isValid() )
+    sets.setValue( "Birthday", m_localUser.vCard().birthday() );
+  sets.setValue( "Email", m_localUser.vCard().email() );
+  if( !m_localUser.vCard().photo().isNull() )
+    sets.setValue( "Photo", m_localUser.vCard().photo() );
+  sets.endGroup();
   sets.beginGroup( "Gui" );
   sets.setValue( "MainWindowGeometry", m_guiGeometry );
   sets.setValue( "MainWindowState", m_guiState );
@@ -179,6 +205,7 @@ void Settings::save()
   sets.beginGroup( "Tools" );
   sets.setValue( "DebugMode", m_debugMode );
   sets.setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
+  sets.setValue( "AutomaticFileName", m_automaticFileName );
   sets.endGroup();
   sets.beginGroup( "Misc" );
   sets.setValue( "BroadcastPort", m_broadcastPort );

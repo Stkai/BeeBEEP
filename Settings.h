@@ -34,7 +34,7 @@ class Settings
   static Settings* mp_instance;
 
 public:
-  QString version() const;
+  QString version( bool ) const;
   QString programName() const;
 
   inline const User& localUser() const;
@@ -102,6 +102,9 @@ public:
   inline bool showTipsOfTheDay() const;
   inline void setShowTipsOfTheDay( bool );
 
+  inline bool automaticFileName() const;
+  inline void setAutomaticFileName( bool );
+
   void load();
   void save();
 
@@ -165,6 +168,7 @@ private:
   bool m_beepOnNewMessageArrived;
 
   bool m_showTipsOfTheDay;
+  bool m_automaticFileName;
 
 };
 
@@ -219,5 +223,7 @@ inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
 inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
 inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new_value; }
 inline bool Settings::showUserColor() const { return m_showUserColor; }
+inline bool Settings::automaticFileName() const { return m_automaticFileName; }
+inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 
 #endif // BEEBEEP_SETTINGS_H

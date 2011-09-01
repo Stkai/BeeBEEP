@@ -55,6 +55,8 @@ public:
   bool changeUserStatusFromMessage( User*, const Message& ) const;
   QByteArray localUserNameMessage() const;
   bool changeUserNameFromMessage( User*, const Message& ) const;
+  QByteArray localVCardMessage() const;
+  bool changeVCardFromMessage( User*, const Message& ) const;
 
   User createUser( const Message&, const QHostAddress& );
   Chat createChat( const QList<VNumber>& user_list );
@@ -83,6 +85,9 @@ protected:
   QString messageHeader( Message::Type ) const;
   Message::Type messageType( const QString& ) const;
   inline VNumber newId();
+
+  QString pixmapToString( const QPixmap& ) const;
+  QPixmap stringToPixmap( const QString& ) const;
 
 private:
   VNumber m_id;

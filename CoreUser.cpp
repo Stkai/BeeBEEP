@@ -125,3 +125,13 @@ bool Core::setUserColor( VNumber user_id, const QString& user_color )
   userChanged( u );
   return true;
 }
+
+void Core::setVCard( const VCard& vc )
+{
+  User u = Settings::instance().localUser();
+  u.setVCard( vc );
+  Settings::instance().setLocalUser( u );
+  QByteArray vcard_message = Protocol::instance().localVCardMessage();
+  foreach( Connection *c, m_connections )
+    c->sendData( vcard_message );
+}

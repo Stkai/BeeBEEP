@@ -38,7 +38,9 @@ SOURCES += Listener.cpp \
     CoreDispatcher.cpp \
     CoreFileTransfer.cpp \
     UserList.cpp \  
-    Broadcaster.cpp
+    Broadcaster.cpp \
+    VCard.cpp \
+    GuiVCard.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -71,8 +73,11 @@ HEADERS += sym_iap_util.h \
     ColorManager.h \
     Core.h \
     UserList.h \  
-    Broadcaster.h
-FORMS += GuiChat.ui
+    Broadcaster.h \
+    VCard.h \
+    GuiVCard.h
+FORMS += GuiChat.ui \
+    GuiVCard.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 OTHER_FILES +=

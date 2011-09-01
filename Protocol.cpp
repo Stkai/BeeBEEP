@@ -199,7 +199,7 @@ QByteArray Protocol::helloMessage() const
 
 QByteArray Protocol::localUserStatusMessage() const
 {
-  Message m( Message::User, ID_STATUS_MESSAGE, Settings::instance().localUser().statusDescription() );
+  Message m( Message::User, ID_USER_MESSAGE, Settings::instance().localUser().statusDescription() );
   m.addFlag( Message::UserStatus );
   m.setData( QString::number( Settings::instance().localUser().status() ) );
   return fromMessage( m );
@@ -207,7 +207,7 @@ QByteArray Protocol::localUserStatusMessage() const
 
 QByteArray Protocol::localUserNameMessage() const
 {
-  Message m( Message::User, ID_STATUS_MESSAGE, Settings::instance().localUser().name() );
+  Message m( Message::User, ID_USER_MESSAGE, Settings::instance().localUser().name() );
   m.addFlag( Message::UserName );
   return fromMessage( m );
 }
@@ -233,6 +233,66 @@ bool Protocol::changeUserNameFromMessage( User* u, const Message& m ) const
   return true;
 }
 
+QString Protocol::pixmapToString( const QPixmap& pix ) const
+{
+  if( pix.isNull() )
+    return "";
+  QByteArray byte_array;
+  QBuffer buf( &byte_array );
+  buf.open( QIODevice::WriteOnly );
+  pix.save( &buf, "PNG" );
+  return QString( byte_array.toBase64() );
+}
+
+QPixmap Protocol::stringToPixmap( const QString& s ) const
+{
+  QPixmap pix;
+  if( s.isEmpty() )
+    return pix;
+  QByteArray byte_array = QByteArray::fromBase64( s.toAscii() );
+  pix.loadFromData( byte_array, "PNG" );
+  return pix;
+}
+
+QByteArray Protocol::localVCardMessage() const
+{
+  const VCard& vc = Settings::instance().localUser().vCard();
+  Message m( Message::User, ID_USER_MESSAGE, pixmapToString( vc.photo() ) );
+  m.addFlag( Message::UserVCard );
+
+  QStringList data_list;
+  data_list << vc.firstName();
+  data_list << vc.lastName();
+  data_list << QString::number( vc.gender() );
+  data_list << vc.birthday().toString( Qt::ISODate );
+  data_list << vc.email();
+  m.setData( data_list.join( DATA_FIELD_SEPARATOR ) );
+
+  return fromMessage( m );
+}
+
+bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
+{
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
+  if( sl.size() < 5 )
+    return false;
+
+  VCard vc;
+  vc.setFirstName( sl.at( 0 ) );
+  vc.setLastName( sl.at( 1 ) );
+  vc.setGender( (sl.at( 2 ).toInt() == 1 ? VCard::Female : VCard::Male) );
+  vc.setBirthday( QDate::fromString( sl.at( 3 ), Qt::ISODate ) );
+  vc.setEmail( sl.at( 4 ) );
+
+  if( sl.size() > 5 )
+    qWarning() << "VCARD message contains more data. Skip it";
+
+  vc.setPhoto( stringToPixmap( m.text() ) );
+
+  u->setVCard( vc );
+  return true;
+}
+
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
  /* Read User Field Data */
@@ -245,15 +305,14 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
     return User();
   }
 
-  int listener_port = sl.first().toInt( &ok );
+  int listener_port = sl.at( 0 ).toInt( &ok );
   if( !ok )
   {
     qWarning() << "HELLO has an invalid Listener port";
     return User();
   }
-  sl.removeFirst();
 
-  QString user_name = sl.first();
+  QString user_name = sl.at( 1 );
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
   {
@@ -261,19 +320,15 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
     return User();
   }
 
-  sl.removeFirst();
-
-  int user_status = sl.first().toInt( &ok );
+  int user_status = sl.at( 2 ).toInt( &ok );
   if( !ok )
     user_status = User::Online;
-  sl.removeFirst();
 
-  QString user_status_description = sl.first();
-  sl.removeFirst();
+  QString user_status_description = sl.at( 3 );
 
   /* Skip other data */
-  if( !sl.isEmpty() )
-    qDebug() << "HELLO message contains more data. Skip it";
+  if( sl.size() > 4 )
+    qWarning() << "HELLO message contains more data. Skip it";
 
   /* Create User */
   User u( newId() );
@@ -323,18 +378,15 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 4 )
     return FileInfo( 0, FileInfo::Download );
-  fi.setHostPort( sl.first().toInt() );
-  sl.removeFirst();
-  fi.setSize( Bee::qVariantToVNumber( sl.first() ) );
-  sl.removeFirst();
-  fi.setId( Bee::qVariantToVNumber(  sl.first() ) );
-  sl.removeFirst();
-  QString password = sl.first();
+  fi.setHostPort( sl.at( 0 ).toInt() );
+  fi.setSize( Bee::qVariantToVNumber( sl.at( 1 ) ) );
+  fi.setId( Bee::qVariantToVNumber( sl.at( 2 ) ) );
+  QString password = sl.at( 3 );
   fi.setPassword( password.toUtf8() );
-  sl.removeFirst();
-    /* Skip other data */
-  if( !sl.isEmpty() )
-    qDebug() << "FILEINFO message contains more data. Skip it";
+
+  /* Skip other data */
+  if( sl.size() > 4 )
+    qWarning() << "FILEINFO message contains more data. Skip it";
 
   return fi;
 }

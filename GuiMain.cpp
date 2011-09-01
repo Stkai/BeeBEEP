@@ -185,7 +185,7 @@ void GuiMain::showAbout()
 {
   QString sAbout = QString( "<b>%1</b> - " ).arg( Settings::instance().programName() );
   QMessageBox::about( this, Settings::instance().programName(), sAbout +
-     tr( "Secure Network Chat version %1" ).arg( Settings::instance().version() ) +
+     tr( "Secure Network Chat version %1" ).arg( Settings::instance().version( true ) ) +
      tr( "<br />developed by Marco Mastroddi<br />e-mail: marco.mastroddi@gmail.com<br /><br />" ) +
      tr( "&lt; Free is that mind guided by the fantasy &gt;" ) );
 }
@@ -303,6 +303,14 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().beepOnNewMessageArrived() );
   act->setData( 4 );
+
+  mp_menuSettings->addSeparator();
+
+  act = mp_menuSettings->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().automaticFileName() );
+  act->setData( 99 );
 
   /* Emoticons Menu for ToolBar */
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
@@ -715,11 +723,20 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
     QFileInfo qfile_info( Settings::instance().downloadDirectory(), fi.name() );
     if( qfile_info.exists() )
     {
-      QString file_name = QFileDialog::getSaveFileName( this,
+      QString file_name;
+      if( Settings::instance().automaticFileName() )
+      {
+        file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath() );
+        qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save with" << file_name;
+      }
+      else
+      {
+        file_name = QFileDialog::getSaveFileName( this,
                             tr( "%1 already exists. Please select a new filename." ).arg( qfile_info.fileName() ),
                             Settings::instance().downloadDirectory() );
-      if( file_name.isNull() || file_name.isEmpty() )
-        return;
+        if( file_name.isNull() || file_name.isEmpty() )
+          return;
+      }
       qfile_info = QFileInfo( file_name );
     }
     FileInfo file_info = fi;

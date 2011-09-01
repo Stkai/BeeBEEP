@@ -158,6 +158,7 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
+  bool send_vcard = false;
   User user_found = m_users.find( u.path() );
   if( user_found.isValid() )
   {
@@ -170,6 +171,7 @@ void Core::checkUserAuthentication( const Message& m )
     u.setColor( ColorManager::instance().unselectedQString() );
     qDebug() << "New user connected:" << u.path() << "with color" << u.color();
     createPrivateChat( u );
+    send_vcard = true;
   }
 
   qDebug() << "Adding user" << u.path() << "to default chat";
@@ -182,4 +184,10 @@ void Core::checkUserAuthentication( const Message& m )
 
   m_users.setUser( u );
   setUserStatus( u );
+
+  if( send_vcard )
+  {
+    qDebug() << "Sending my VCard to" << u.path();
+    c->sendData( Protocol::instance().localVCardMessage() );
+  }
 }

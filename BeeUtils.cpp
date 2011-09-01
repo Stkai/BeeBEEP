@@ -103,3 +103,21 @@ QString Bee::timerToString( int time_elapsed )
   return s;
 }
 
+QString Bee::uniqueFilePath( const QString& file_path )
+{
+  int counter = 1;
+  QFileInfo fi( file_path );
+  QString dir_path = fi.absoluteDir().absolutePath();
+  QString file_base_name = fi.completeBaseName();
+  QString file_suffix = fi.suffix();
+  QString new_file_name;
+
+  while( fi.exists() )
+  {
+    new_file_name = QString( "%1 (%2)%3%4" ).arg( file_base_name ).arg( counter ).arg( (file_suffix.isEmpty() ? "" : ".") ).arg( file_suffix );
+    fi.setFile( dir_path, new_file_name );
+    counter++;
+  }
+
+  return fi.absoluteFilePath();
+}
