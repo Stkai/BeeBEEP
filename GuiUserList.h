@@ -46,9 +46,8 @@ public:
 
 signals:
   void chatSelected( VNumber chat_id );
-  void sendFile( VNumber user_id );
-  void changeColor( VNumber user_id );
   void stringToShow( const QString&, int );
+  void menuToShow( VNumber user_id );
 
 protected slots:
   void userDoubleClicked( QListWidgetItem* );

@@ -37,6 +37,10 @@ public:
 
   VCard& operator=( const VCard& );
 
+  inline bool isValid() const;
+
+  inline const QString& nickName() const;
+  inline void setNickName( const QString& );
   inline const QString& firstName() const;
   inline void setFirstName( const QString& );
   inline const QString& lastName() const;
@@ -52,6 +56,7 @@ public:
   inline void setPhoto( const QPixmap& );
 
 private:
+  QString m_nickName;
   QString m_firstName;
   QString m_lastName;
   int m_gender;
@@ -63,6 +68,8 @@ private:
 
 
 // Inline Functions
+inline const QString& VCard::nickName() const { return m_nickName; }
+inline void VCard::setNickName( const QString& new_value ) { m_nickName = new_value; }
 inline const QString& VCard::firstName() const { return m_firstName; }
 inline void VCard::setFirstName( const QString& new_value ) { m_firstName = new_value; }
 inline const QString& VCard::lastName() const { return m_lastName; }
@@ -76,5 +83,7 @@ inline const QString& VCard::email() const { return m_email; }
 inline void VCard::setEmail( const QString& new_value ) { m_email = new_value; }
 inline const QPixmap& VCard::photo() const { return m_photo; }
 inline void VCard::setPhoto( const QPixmap& new_value ) { m_photo = new_value; }
+
+inline bool VCard::isValid() const { return !m_firstName.isEmpty() || !m_lastName.isEmpty() || !m_birthday.isValid() || !m_email.isEmpty() || !m_photo.isNull(); }
 
 #endif // BEEBEEP_VCARD_H

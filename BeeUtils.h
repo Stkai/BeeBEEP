@@ -31,8 +31,6 @@ class ChatMessage;
 
 namespace Bee
 {
-  QString chatMessagesToText( const Chat& );
-  QString chatMessageToText( const ChatMessage& );
   QIcon userStatusIcon( int );
   QString userStatusIconFileName( int );
   QString userStatusToString( int );

@@ -21,52 +21,85 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiVCard.h"
+#include "User.h"
 
 
 GuiVCard::GuiVCard( QWidget *parent )
- : QDialog( parent )
+ : QWidget( parent )
 {
   setupUi( this );
   setObjectName( "GuiVCard" );
 
-  m_bgGender.addButton( mp_rbMale, 0 );
-  m_bgGender.addButton( mp_rbFemale, 1 );
-  m_bgGender.setExclusive( true );
-  mp_rbMale->setChecked( true );
+  setWindowFlags( Qt::Popup );
+  setAttribute( Qt::WA_DeleteOnClose );
 
-  connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
-  connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-  connect( mp_pbPhoto, SIGNAL( clicked() ), this, SLOT( changePhoto() ) );
+  QPalette palette = mp_frame->palette();
+  palette.setColor( QPalette::Background, QColor( 255, 255, 255 ) );
+  mp_frame->setPalette( palette );
+  mp_frame->setAutoFillBackground( true );
+
+  connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
+  connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
+  connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeColor() ) );
 }
 
-void GuiVCard::setVCard( const VCard& vc )
+GuiVCard::~GuiVCard()
 {
-  m_vCard = vc;
-  loadVCard();
+  qDebug() << "GuiVCard object deleted";
 }
 
-void GuiVCard::loadVCard()
+void GuiVCard::setVCard( const User& u, VNumber chat_id )
 {
-  mp_leFirstName->setText( m_vCard.firstName() );
-  mp_leLastName->setText( m_vCard.lastName() );
-  QAbstractButton* ab = m_bgGender.button( m_vCard.gender() );
-  if( ab )
-    ab->setChecked( true );
+  m_userId = u.id();
+  m_chatId = chat_id;
+
+  mp_lPath->setText( u.path() );
+
+  if( !u.vCard().firstName().isEmpty() || !u.vCard().lastName().isEmpty() )
+    mp_lName->setText( QString( "<b>%1 %2</b>" ).arg( u.vCard().firstName(), u.vCard().lastName() ) );
   else
-    mp_rbMale->setChecked( true );
-  mp_deBirthday->setDate( m_vCard.birthday() );
-  mp_leEmail->setText( m_vCard.email() );
+    mp_lName->setText( "" );
 
-  mp_leFirstName->setFocus();
+  if( u.vCard().birthday().isValid() )
+    mp_lBirthday->setText( tr( "Birthday: %1" ).arg( u.vCard().birthday().toString( Qt::SystemLocaleShortDate ) ) );
+  else
+    mp_lBirthday->setText( "" );
+
+  if( !u.vCard().email().isEmpty() )
+    mp_lEmail->setText( u.vCard().email() );
+  else
+    mp_lEmail->setText( "" );
+
+  if( !u.vCard().photo().isNull() )
+    mp_lPhoto->setPixmap( u.vCard().photo() );
+  else
+    mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png").pixmap( 96, 96 ) );
+
+  mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) ) );
+
+  qDebug() << "VCard showed for the user" << u.path();
 }
 
-void GuiVCard::changePhoto()
+void GuiVCard::showPrivateChat()
 {
-
+  hide();
+  emit showChat( m_chatId );
+  close();
 }
 
-void GuiVCard::checkData()
+void GuiVCard::sendFile()
 {
-  accept();
+  hide();
+  emit sendFile( m_userId );
+  close();
 }
+
+void GuiVCard::changeColor()
+{
+  hide();
+  emit changeUserColor( m_userId );
+  close();
+}
+

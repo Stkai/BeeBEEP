@@ -26,6 +26,7 @@
 #include "EmoticonManager.h"
 #include "FileInfo.h"
 #include "GuiChat.h"
+#include "GuiEditVCard.h"
 #include "GuiTransferFile.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
@@ -68,8 +69,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
-  connect( mp_userList, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
-  connect( mp_userList, SIGNAL( changeColor( VNumber ) ), this, SLOT( changeUserColor( VNumber ) ) );
+  connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
   showChat( mp_core->defaultChat( false ) );
 
@@ -110,21 +110,6 @@ void GuiMain::showNextChat()
   qDebug() << "Show next chat in list with unread messages";
   if( !mp_userList->nextUserWithUnreadMessages() )
     statusBar()->showMessage( tr( "No new message available" ) );
-}
-
-void GuiMain::selectNickname()
-{
-  bool ok = false;
-  User local_user = Settings::instance().localUser();
-  QString nick = QInputDialog::getText( this,
-                                        Settings::instance().programName(),
-                                        tr( "Please insert your nickname"),
-                                        QLineEdit::Normal,
-                                        local_user.name(),
-                                        &ok );
-  if( !ok || nick.isNull() || nick.isEmpty() )
-    return;
-  mp_core->setLocalUserName( nick );
 }
 
 void GuiMain::startStopCore()
@@ -212,10 +197,6 @@ void GuiMain::createActions()
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( close() ) );
 
-  mp_actNickname = new QAction( QIcon( ":/images/profile.png"), tr( "Change your nickname..." ), this );
-  mp_actNickname->setStatusTip( tr( "Select your favourite chat nickname" ) );
-  connect( mp_actNickname, SIGNAL( triggered() ), this, SLOT( selectNickname() ) );
-
   mp_actVCard = new QAction( QIcon( ":/images/profile.png"), tr( "Profile..." ), this );
   mp_actVCard->setStatusTip( tr( "Change your profile data" ) );
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
@@ -258,7 +239,6 @@ void GuiMain::createMenus()
   menu = menuBar()->addMenu( tr( "&Main" ) );
   menu->addAction( mp_actStartStopCore );
   menu->addSeparator();
-  menu->addAction( mp_actNickname );
   menu->addAction( mp_actVCard );
   menu->addAction( mp_actSearch );
   menu->addSeparator();
@@ -780,19 +760,37 @@ void GuiMain::showChat( const Chat& c )
   QString chat_text = mp_core->chatMessagesToText( c );
   QString chat_users = mp_core->chatUsers( c, "," );
   qDebug() << "Show chat" << c.id() << "with users:" << chat_users;
+  mp_userList->setUnreadMessages( c.id(), 0 );
   mp_defaultChat->setChat( c, chat_users, chat_text );
 }
 
 void GuiMain::changeVCard()
 {
-  GuiVCard gvc( this );
+  GuiEditVCard gvc( this );
   gvc.setWindowTitle( tr( "%1 - Profile" ).arg( Settings::instance().programName() ) );
   gvc.setModal( true );
+  gvc.setVCard( Settings::instance().localUser().vCard() );
   gvc.show();
   gvc.setFixedSize( gvc.size() );
   if( gvc.exec() == QDialog::Accepted )
   {
     qDebug() << "vCard changed";
-    //mp_core->setVCard( gvc.vCard() );
+    mp_core->setVCard( gvc.user().vCard() );
   }
+}
+
+void GuiMain::showUserMenu( VNumber user_id )
+{
+  User u = mp_core->users().find( user_id );
+  if( !u.isValid() )
+    return;
+
+  GuiVCard* gvc = new GuiVCard( this );
+  connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
+  connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
+  connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
+  gvc->setVCard( u, mp_core->privateChatForUser( user_id ).id() );
+  gvc->move( QCursor::pos() );
+  gvc->show();
+  gvc->setFixedSize( gvc->size() );
 }

@@ -60,7 +60,9 @@ void Core::setLocalUserName( const QString& user_name )
   QString old_user_name = u.name();
   u.setName( user_name.trimmed() );
   Settings::instance().setLocalUser( u );
-  sendUserName();
+  QByteArray user_name_message = Protocol::instance().localUserNameMessage();
+  foreach( Connection *c, m_connections )
+    c->sendData( user_name_message );
   setUserName( u, old_user_name );
 }
 
@@ -92,6 +94,17 @@ void Core::setUserName( const User& u, const QString& old_user_name )
   emit userChanged( u );
 }
 
+void Core::setUserVCard( const User& u )
+{
+  QString sHtmlMsg = Bee::iconToHtml( ":/images/profile.png", "*V*" ) + QString( " " );
+  if( u.isLocal() )
+    sHtmlMsg += tr( "You have changed your profile." );
+  else
+    sHtmlMsg += tr( "%1 has changed %2 profile." ).arg( u.name(), (u.vCard().isFemale() ? tr( "her" ), tr( "his" ) ) );
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  emit userChanged( u );
+}
 
 void Core::searchUsers( const QHostAddress& host_address )
 {
@@ -101,18 +114,11 @@ void Core::searchUsers( const QHostAddress& host_address )
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
 }
 
-void Core::sendUserStatus()
+void Core::sendLocalUserStatus()
 {
   QByteArray user_status_message = Protocol::instance().localUserStatusMessage();
   foreach( Connection *c, m_connections )
     c->sendData( user_status_message );
-}
-
-void Core::sendUserName()
-{
-  QByteArray user_name_message = Protocol::instance().localUserNameMessage();
-  foreach( Connection *c, m_connections )
-    c->sendData( user_name_message );
 }
 
 bool Core::setUserColor( VNumber user_id, const QString& user_color )
@@ -126,12 +132,19 @@ bool Core::setUserColor( VNumber user_id, const QString& user_color )
   return true;
 }
 
-void Core::setVCard( const VCard& vc )
+void Core::setLocalVCard( const VCard& vc )
 {
   User u = Settings::instance().localUser();
   u.setVCard( vc );
   Settings::instance().setLocalUser( u );
+
   QByteArray vcard_message = Protocol::instance().localVCardMessage();
+  QByteArray nick_message = Protocol::instance().localUserNameMessage();
+
   foreach( Connection *c, m_connections )
+  {
+    c->sendData( nick_message ); // for compatibility DEPRECATED (FIXME!!!)
     c->sendData( vcard_message );
+  }
+  userChanged( u );
 }

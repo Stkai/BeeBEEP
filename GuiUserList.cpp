@@ -179,43 +179,8 @@ void GuiUserList::showUserMenu( const QPoint& p )
   if( !item )
     return;
 
-  QMenu menu;
-  QAction* act;
-
-  if( Bee::qVariantToVNumber( item->data( UserId ) ) == Settings::instance().localUser().id() )
-  {
-    act = menu.addAction( QIcon( ":/images/chat.png"), tr( "Chat with all users") );
-    act->setData( 1 );
-  }
-  else
-  {
-    menu.addAction( item->icon(), Settings::instance().showOnlyUsername() ? item->data( Username ).toString() : item->data( UserPath ).toString() );
-    menu.addSeparator();
-    act = menu.addAction( QIcon( ":/images/chat.png"), tr( "Open the private chat") );
-    act->setData( 1 );
-    act = menu.addAction( QIcon( ":/images/upload.png" ), tr( "Send a file..." ) );
-    act->setEnabled( item->data( UserStatus ).toInt() > User::Offline );
-    act->setData( 2 );
-    act = menu.addAction( QIcon( ":/images/font-color.png"), tr( "Change the user color..." ) );
-    act->setData( 3 );
-  }
-
-  act = menu.exec( QCursor::pos() );
-
-  if( !act )
-    return;
-  switch( act->data().toInt() )
-  {
-  case 1:
-    userDoubleClicked( item );
-    break;
-  case 2:
-    emit sendFile( Bee::qVariantToVNumber( item->data( UserId ) ) );
-    break;
-  case 3:
-    emit changeColor( Bee::qVariantToVNumber( item->data( UserId ) ) );
-    break;
-  }
+  VNumber user_id = Bee::qVariantToVNumber( item->data( UserId ) );
+  emit menuToShow( user_id );
 }
 
 void GuiUserList::userDoubleClicked( QListWidgetItem* item )
@@ -225,8 +190,7 @@ void GuiUserList::userDoubleClicked( QListWidgetItem* item )
     qWarning() << "Item double clicked not found in GuiUserList";
     return;
   }
-  item->setData( UnreadMessages, 0 ); // read all messages
-  updateItem( item );
+
   VNumber chat_id = Bee::qVariantToVNumber( item->data( PrivateChatId ) );
   qDebug() << "Item double clicked: chat" << chat_id << "of the user" <<  Bee::qVariantToVNumber( item->data( UserId ) ) <<"selected";
   if( chat_id > 0 )

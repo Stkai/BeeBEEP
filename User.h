@@ -62,13 +62,12 @@ public:
 
 private:
   VNumber m_id;
-  QString m_name;
+  VCard m_vCard;
   QHostAddress m_hostAddress; // his listener address
   int m_hostPort;             // his listener port  (address+port = unique id)
   int m_status;
   QString m_statusDescription;
   QString m_color;
-  VCard m_vCard;
 
 };
 
@@ -80,8 +79,8 @@ inline bool User::isLocal() const { return m_id == ID_LOCAL_USER; }
 inline bool User::isConnected() const { return m_status != User::Offline; }
 inline void User::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber User::id() const { return m_id; }
-inline void User::setName( const QString& new_value ) { m_name = new_value; }
-inline const QString& User::name() const { return m_name; }
+inline void User::setName( const QString& new_value ) { m_vCard.setNickName( new_value ); }
+inline const QString& User::name() const { return m_vCard.nickName(); }
 inline void User::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
 inline const QHostAddress& User::hostAddress() const { return m_hostAddress; }
 inline void User::setHostPort( int new_value ) { m_hostPort = new_value; }
@@ -95,6 +94,6 @@ inline const QString& User::color() const { return m_color; }
 inline void  User::setVCard( const VCard& new_value ) { m_vCard = new_value; }
 inline const VCard& User::vCard() const { return m_vCard; }
 
-inline QString User::path() const { return QString( "%1@%2:%3" ).arg( m_name, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
+inline QString User::path() const { return QString( "%1@%2:%3" ).arg( name(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 
 #endif // BEEBEEP_USER_H

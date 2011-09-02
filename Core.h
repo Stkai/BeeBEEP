@@ -48,9 +48,8 @@ public:
   void searchUsers( const QHostAddress& );
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
-  void setLocalUserName( const QString& );
   bool setUserColor( VNumber, const QString& );
-  void setVCard( const VCard& );
+  void setLocalVCard( const VCard& );
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
@@ -114,7 +113,6 @@ protected:
   void setUserStatus( const User& );
   void sendUserStatus();
   void setUserName( const User&, const QString& );
-  void sendUserName();
 
   /* CoreChat */
   void createDefaultChat();

@@ -21,31 +21,40 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "VCard.h"
+#ifndef BEEBEEP_GUIEDITVCARD_H
+#define BEEBEEP_GUIEDITVCARD_H
+
+#include "ui_GuiEditVCard.h"
+#include "User.h"
 
 
-VCard::VCard()
-  : m_nickName( "" ), m_firstName( "" ), m_lastName( "" ), m_gender( VCard::Male ),
-    m_birthday(), m_email( "" ), m_photo()
-{}
-
-VCard::VCard( const VCard& vc )
+class GuiEditVCard : public QDialog, private Ui::GuiVCardDialog
 {
-  (void)operator=( vc );
-}
+  Q_OBJECT
 
-VCard& VCard::operator=( const VCard& vc )
-{
-  if( this != &vc )
-  {
-    m_nickName = vc.m_nickName;
-    m_firstName = vc.m_firstName;
-    m_lastName = vc.m_lastName;
-    m_gender = vc.m_gender;
-    m_birthday = vc.m_birthday;
-    m_email = vc.m_email;
-    m_photo = vc.m_photo;
-  }
-  return *this;
+public:
+  GuiEditVCard( QWidget* parent = 0 );
 
-}
+  void setVCard( const VCard& );
+  inline const VCard& vCard() const;
+
+protected:
+  void loadVCard();
+  bool checkLineEdit( QLineEdit*, const QString& );
+
+private slots:
+  void changePhoto();
+  void checkData();
+
+private:
+  VCard m_vCard;
+  QButtonGroup m_bgGender;
+
+};
+
+
+// Inline Functions
+inline const VCard& GuiEditVCard::vCard() const { return m_vCard; }
+
+
+#endif // BEEBEEP_GUIEDITVCARD_H

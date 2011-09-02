@@ -25,35 +25,34 @@
 #define BEEBEEP_GUIVCARD_H
 
 #include "ui_GuiVCard.h"
-#include "VCard.h"
+#include "Config.h"
+class User;
 
 
-class GuiVCard : public QDialog, private Ui::GuiVCardDialog
+class GuiVCard : public QWidget, private Ui::GuiVCardWidget
 {
   Q_OBJECT
 
 public:
   GuiVCard( QWidget* parent = 0 );
+  ~GuiVCard();
 
-  void setVCard( const VCard& );
-  inline const VCard& vCard() const;
+  void setVCard( const User&, VNumber chat_id );
 
-protected:
-  void loadVCard();
+signals:
+  void showChat( VNumber );
+  void sendFile( VNumber );
+  void changeUserColor( VNumber );
 
 private slots:
-  void changePhoto();
-  void checkData();
+  void showPrivateChat();
+  void sendFile();
+  void changeColor();
 
 private:
-  VCard m_vCard;
-  QButtonGroup m_bgGender;
+  VNumber m_userId;
+  VNumber m_chatId;
 
 };
-
-
-// Inline Functions
-inline const VCard& GuiVCard::vCard() const { return m_vCard; }
-
 
 #endif // BEEBEEP_GUIVCARD_H

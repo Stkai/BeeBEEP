@@ -53,27 +53,24 @@ private slots:
   void showSelectedChat( VNumber chat_id );
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
-  void changeUserColor( VNumber );
   void showTipOfTheDay();
-
-  void selectNickname();
   void selectFontColor();
   void selectFont();
   void searchUsers();
   void settingsChanged();
   void emoticonSelected();
-
   void toggleMenuBar( bool );
   void saveChat();
-
   void showNextChat();
   void statusSelected();
   void changeStatusDescription();
   void sendFile();
-  void sendFile( VNumber );
   void downloadFile( const User&, const FileInfo& );
   void selectDownloadDirectory();
   void changeVCard();
+  void showUserMenu( VNumber );
+  void changeUserColor( VNumber );
+  void sendFile( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -108,7 +105,6 @@ private:
   QAction* mp_actSaveChat;
   QAction* mp_actSearch;
   QAction* mp_actQuit;
-  QAction* mp_actNickname;
   QAction* mp_actVCard;
   QAction* mp_actFont;
   QAction* mp_actFontColor;

@@ -261,6 +261,7 @@ QByteArray Protocol::localVCardMessage() const
   m.addFlag( Message::UserVCard );
 
   QStringList data_list;
+  data_list << vc.nickName();
   data_list << vc.firstName();
   data_list << vc.lastName();
   data_list << QString::number( vc.gender() );
@@ -274,17 +275,18 @@ QByteArray Protocol::localVCardMessage() const
 bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
 {
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
-  if( sl.size() < 5 )
+  if( sl.size() < 6 )
     return false;
 
   VCard vc;
-  vc.setFirstName( sl.at( 0 ) );
-  vc.setLastName( sl.at( 1 ) );
-  vc.setGender( (sl.at( 2 ).toInt() == 1 ? VCard::Female : VCard::Male) );
-  vc.setBirthday( QDate::fromString( sl.at( 3 ), Qt::ISODate ) );
-  vc.setEmail( sl.at( 4 ) );
+  vc.setNickName( sl.at( 0 ) );
+  vc.setFirstName( sl.at( 1 ) );
+  vc.setLastName( sl.at( 2 ) );
+  vc.setGender( (sl.at( 3 ).toInt() == 1 ? VCard::Female : VCard::Male) );
+  vc.setBirthday( QDate::fromString( sl.at( 4 ), Qt::ISODate ) );
+  vc.setEmail( sl.at( 5 ) );
 
-  if( sl.size() > 5 )
+  if( sl.size() > 6 )
     qWarning() << "VCARD message contains more data. Skip it";
 
   vc.setPhoto( stringToPixmap( m.text() ) );

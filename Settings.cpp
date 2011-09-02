@@ -115,6 +115,8 @@ void Settings::load()
   QPixmap pix = sets.value( "Photo", QPixmap() ).value<QPixmap>();
   if( !pix.isNull() )
     vc.setPhoto( pix );
+  if( vc.isValid() )
+    m_localUser.setVCard( vc );
   sets.endGroup();
 
   sets.beginGroup( "Gui" );
@@ -182,16 +184,20 @@ void Settings::save()
   sets.setValue( "ShowOnlyName", m_showOnlyUsername );
   sets.setValue( "ShowColors", m_showUserColor );
   sets.endGroup();
-  sets.beginGroup( "VCard" );
-  sets.setValue( "FirstName", m_localUser.vCard().firstName() );
-  sets.setValue( "LastName", m_localUser.vCard().lastName() );
-  sets.setValue( "Gender", m_localUser.vCard().gender() );
-  if( m_localUser.vCard().birthday().isValid() )
-    sets.setValue( "Birthday", m_localUser.vCard().birthday() );
-  sets.setValue( "Email", m_localUser.vCard().email() );
-  if( !m_localUser.vCard().photo().isNull() )
-    sets.setValue( "Photo", m_localUser.vCard().photo() );
-  sets.endGroup();
+  if( m_localUser.vCard().isValid() )
+  {
+    qDebug() << "Saving VCard";
+    sets.beginGroup( "VCard" );
+    sets.setValue( "FirstName", m_localUser.vCard().firstName() );
+    sets.setValue( "LastName", m_localUser.vCard().lastName() );
+    sets.setValue( "Gender", m_localUser.vCard().gender() );
+    if( m_localUser.vCard().birthday().isValid() )
+      sets.setValue( "Birthday", m_localUser.vCard().birthday() );
+    sets.setValue( "Email", m_localUser.vCard().email() );
+    if( !m_localUser.vCard().photo().isNull() )
+      sets.setValue( "Photo", m_localUser.vCard().photo() );
+    sets.endGroup();
+  }
   sets.beginGroup( "Gui" );
   sets.setValue( "MainWindowGeometry", m_guiGeometry );
   sets.setValue( "MainWindowState", m_guiState );

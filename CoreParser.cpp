@@ -75,6 +75,18 @@ void Core::parseUserMessage( const User& u, const Message& m )
     else
       qWarning() << "Unable to change the status of the user" << u.path() << "because message is invalid";
   }
+  else if( m.hasFlag( Message::UserVCard ) )
+  {
+    User user_with_new_vcard = u;
+    if( Protocol::instance().changeVCardFromMessage( &user_with_new_vcard, m ) )
+    {
+      qDebug() << "User" << user_with_new_vcard.path() << "has new vCard";
+      m_users.setUser( user_with_new_vcard );
+      setUserVCard( user_with_new_vcard );
+    }
+    else
+      qWarning() << "Unable to read vCard from the user" << u.path();
+  }
   else if( m.hasFlag( Message::UserName ) )
   {
     User user_with_new_name = u;
