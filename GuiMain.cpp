@@ -68,7 +68,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
-  connect( mp_userList, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
   showChat( mp_core->defaultChat( false ) );
@@ -170,14 +169,13 @@ void GuiMain::initGuiItems()
 void GuiMain::showAbout()
 {
   QMessageBox::about( this, Settings::instance().programName(),
-                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br /><br /><i><b>&quot;%7&quot;</b></i>" )
+                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6" )
                       .arg( Settings::instance().programName() )
                       .arg( tr( "Secure Network Chat" ) )
                       .arg( tr( "Version" ) )
                       .arg( Settings::instance().version( true ) )
                       .arg( tr( "developed by Marco Mastroddi" ) )
-                      .arg( tr( "e-mail: marco.mastroddi@gmail.com") )
-                      .arg( tr( "Free is that mind guided by the fantasy" )  ) );
+                      .arg( tr( "e-mail: marco.mastroddi@gmail.com") ) );
 }
 
 void GuiMain::createActions()

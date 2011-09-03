@@ -46,12 +46,10 @@ public:
 
 signals:
   void chatSelected( VNumber chat_id );
-  void stringToShow( const QString&, int );
   void menuToShow( VNumber user_id );
 
 protected slots:
   void userDoubleClicked( QListWidgetItem* );
-  void showUserInfo( QListWidgetItem* );
   void showUserMenu( const QPoint& );
 
 private:

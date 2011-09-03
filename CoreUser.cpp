@@ -63,7 +63,7 @@ void Core::showUserStatusChanged( const User& u )
     sHtmlMsg += (Settings::instance().showOnlyUsername() ? u.name() : u.path()) + QString( " " ) + tr( "is" );
    sHtmlMsg += QString( " " );
    sHtmlMsg += QString( "%1%2." ).arg( Bee::userStatusToString( u.status() ) )
-                            .arg( u.statusDescription().isEmpty() ? "" : QString( ": %1").arg( u.statusDescription() ) );
+                            .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }
 
@@ -85,7 +85,7 @@ void Core::showUserVCardChanged( const User& u )
   if( u.isLocal() )
     sHtmlMsg += tr( "You have changed your profile." );
   else
-    sHtmlMsg += tr( "%1 has changed %2 profile." ).arg( u.name(), (u.vCard().isFemale() ? tr( "her" ) : tr( "his" ) ) );
+    sHtmlMsg += tr( "%1 has changed the profile." ).arg( u.name() );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );

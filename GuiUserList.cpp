@@ -31,9 +31,9 @@ GuiUserList::GuiUserList( QWidget* parent )
   setObjectName( "GuiUserList" );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
+  setMouseTracking( true );
 
   connect( this, SIGNAL( itemDoubleClicked( QListWidgetItem* ) ), this, SLOT( userDoubleClicked( QListWidgetItem* ) ) );
-  connect( this, SIGNAL( itemClicked( QListWidgetItem* ) ), this, SLOT( showUserInfo( QListWidgetItem* ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
 }
 
@@ -60,8 +60,7 @@ void GuiUserList::updateItem( QListWidgetItem* item )
 
    if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
-  if( !is_local_user && user_status > User::Online )
-    s.append( QString( " [%1] " ).arg( Bee::userStatusToString( user_status ) ) );
+
   s += " ";
   item->setText( s );
   if( is_local_user )
@@ -81,6 +80,23 @@ void GuiUserList::updateItem( QListWidgetItem* item )
   }
   else
     item->setForeground( QBrush( QColor( "#808080" ) ) );
+
+  QString status_tip;
+  QString tool_tip;
+  if( is_local_user )
+  {
+    status_tip = tr( "Open chat with all users" );
+    tool_tip = status_tip;
+  }
+  else
+  {
+    status_tip = tr( "Open chat with %1" ).arg( item->data( UserPath ).toString() );
+    tool_tip = tr( "%1 is %2" ).arg( item->data( Username ).toString(), Bee::userStatusToString( user_status ) );
+  }
+
+  item->setToolTip( tool_tip );
+  item->setStatusTip( status_tip );
+
 }
 
 void GuiUserList::updateUsers()
@@ -156,21 +172,6 @@ void GuiUserList::removeUser( const User& u )
   }
   else
     qWarning() << "Unable to set user" << u.id() << "offline in GuiUserList";
-}
-
-void GuiUserList::showUserInfo( QListWidgetItem* item )
-{
-  if( !item )
-  {
-    qWarning() << "Item for show user info not found in GuiUserList";
-    return;
-  }
-  QString sInfo;
-  if( Bee::qVariantToVNumber( item->data( UserId ) ) == Settings::instance().localUser().id() )
-    sInfo = tr( "Chat with all connected users" );
-  else
-    sInfo = tr( "Chat with %1" ).arg( item->data( UserPath ).toString() );
-  emit stringToShow( sInfo, 6000 );
 }
 
 void GuiUserList::showUserMenu( const QPoint& p )
