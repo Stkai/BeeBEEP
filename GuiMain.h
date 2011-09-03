@@ -115,6 +115,8 @@ private:
   QAction* mp_actSendFile;
   QAction* mp_actViewFileTransfer;
 
+  QDockWidget* mp_dockUserList;
+
 };
 
 #endif // BEEBEEP_GUIMAIN_H

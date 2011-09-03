@@ -192,7 +192,7 @@ QByteArray Protocol::helloMessage() const
   data_list << Settings::instance().localUser().name();
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
-  Message m( Message::Hello, ID_HELLO_MESSAGE, data_list.join( DATA_FIELD_SEPARATOR ) );
+  Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().hash() );
   return fromMessage( m );
 }

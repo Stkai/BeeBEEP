@@ -146,6 +146,9 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
     qDebug() << u.path() << "is not connected. Unable to send download refused message";
     return;
   }
-  c->sendMessage( m );
+
+  if( c->protoVersion() > 1 )
+    c->sendMessage( m );
+
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
 }

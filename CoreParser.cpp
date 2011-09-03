@@ -70,7 +70,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     {
       qDebug() << "User" << user_with_new_status.path() << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
       m_users.setUser( user_with_new_status );
-      setUserStatus( user_with_new_status );
+      showUserStatusChanged( user_with_new_status );
     }
     else
       qWarning() << "Unable to change the status of the user" << u.path() << "because message is invalid";
@@ -82,7 +82,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     {
       qDebug() << "User" << user_with_new_vcard.path() << "has new vCard";
       m_users.setUser( user_with_new_vcard );
-      setUserVCard( user_with_new_vcard );
+      showUserVCardChanged( user_with_new_vcard );
     }
     else
       qWarning() << "Unable to read vCard from the user" << u.path();
@@ -94,7 +94,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     {
       qDebug() << "User" << u.path() << "changes his name to" << user_with_new_name.name();
       m_users.setUser( user_with_new_name );
-      setUserName( user_with_new_name, u.name() );
+      showUserNameChanged( user_with_new_name, u.name() );
     }
     else
       qWarning() << "Unable to change the username of the user" << u.path() << "because message is invalid";

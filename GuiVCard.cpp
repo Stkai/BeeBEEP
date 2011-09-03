@@ -35,19 +35,9 @@ GuiVCard::GuiVCard( QWidget *parent )
   setWindowFlags( Qt::Popup );
   setAttribute( Qt::WA_DeleteOnClose );
 
-  QPalette palette = mp_frame->palette();
-  palette.setColor( QPalette::Background, QColor( 255, 255, 255 ) );
-  mp_frame->setPalette( palette );
-  mp_frame->setAutoFillBackground( true );
-
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
   connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeColor() ) );
-}
-
-GuiVCard::~GuiVCard()
-{
-  qDebug() << "GuiVCard object deleted";
 }
 
 void GuiVCard::setVCard( const User& u, VNumber chat_id )
@@ -78,6 +68,11 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
     mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png").pixmap( 96, 96 ) );
 
   mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) ) );
+
+  if( u.isLocal() )
+  {
+    mp_pbFile->hide();
+  }
 
   qDebug() << "VCard showed for the user" << u.path();
 }

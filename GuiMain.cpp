@@ -169,11 +169,15 @@ void GuiMain::initGuiItems()
 
 void GuiMain::showAbout()
 {
-  QString sAbout = QString( "<b>%1</b> - " ).arg( Settings::instance().programName() );
-  QMessageBox::about( this, Settings::instance().programName(), sAbout +
-     tr( "Secure Network Chat version %1" ).arg( Settings::instance().version( true ) ) +
-     tr( "<br />developed by Marco Mastroddi<br />e-mail: marco.mastroddi@gmail.com<br /><br />" ) +
-     tr( "&lt; Free is that mind guided by the fantasy &gt;" ) );
+  QMessageBox::about( this, Settings::instance().programName(),
+                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br /><br /><i><b>&quot;%7&quot;</b></i>" )
+                      .arg( Settings::instance().programName() )
+                      .arg( tr( "Secure Network Chat" ) )
+                      .arg( tr( "Version" ) )
+                      .arg( Settings::instance().version( true ) )
+                      .arg( tr( "developed by Marco Mastroddi" ) )
+                      .arg( tr( "e-mail: marco.mastroddi@gmail.com") )
+                      .arg( tr( "Free is that mind guided by the fantasy" )  ) );
 }
 
 void GuiMain::createActions()
@@ -359,18 +363,18 @@ void GuiMain::createStatusBar()
 
 void GuiMain::createDockWindows()
 {
-  QDockWidget *dock_widget = new QDockWidget( tr( "Users" ), this );
-  dock_widget->setObjectName( "GuiUserListDock" );
-  mp_userList = new GuiUserList( dock_widget );
-  dock_widget->setWidget( mp_userList );
-  addDockWidget( Qt::RightDockWidgetArea, dock_widget );
-  mp_actViewUsers = dock_widget->toggleViewAction();
+  mp_dockUserList = new QDockWidget( tr( "Users" ), this );
+  mp_dockUserList->setObjectName( "GuiUserListDock" );
+  mp_userList = new GuiUserList( mp_dockUserList );
+  mp_dockUserList->setWidget( mp_userList );
+  addDockWidget( Qt::RightDockWidgetArea, mp_dockUserList );
+  mp_actViewUsers = mp_dockUserList->toggleViewAction();
   mp_actViewUsers->setIcon( QIcon( ":/images/user-list.png" ) );
   mp_actViewUsers->setText( tr( "Show online users and active chats" ) );
   mp_actViewUsers->setStatusTip( tr( "Show the list of the connected users and the active chats" ) );
   mp_actViewUsers->setData( 99 );
 
-  dock_widget = new QDockWidget( tr( "File Transfers" ), this );
+  QDockWidget* dock_widget = new QDockWidget( tr( "File Transfers" ), this );
   dock_widget->setObjectName( "GuiFileTransferDock" );
   mp_fileTransfer = new GuiTransferFile( this );
   dock_widget->setWidget( mp_fileTransfer );
@@ -774,8 +778,13 @@ void GuiMain::changeVCard()
   gvc.setFixedSize( gvc.size() );
   if( gvc.exec() == QDialog::Accepted )
   {
+    if( gvc.vCard() == Settings::instance().localUser().vCard() )
+    {
+      qDebug() << "Ok pressed but vCard is not changed";
+      return;
+    }
     qDebug() << "vCard changed";
-    mp_core->setVCard( gvc.user().vCard() );
+    mp_core->setLocalUserVCard( gvc.vCard() );
   }
 }
 
@@ -790,7 +799,16 @@ void GuiMain::showUserMenu( VNumber user_id )
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
   gvc->setVCard( u, mp_core->privateChatForUser( user_id ).id() );
-  gvc->move( QCursor::pos() );
+
+  if( dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
+  {
+    // Ensure vCard visible
+    QPoint pos = QCursor::pos();
+    pos.setX( pos.x() - gvc->size().width() );
+    gvc->move( pos );
+  }
+  else
+    gvc->move( QCursor::pos() );
   gvc->show();
   gvc->setFixedSize( gvc->size() );
 }

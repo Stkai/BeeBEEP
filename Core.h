@@ -49,7 +49,7 @@ public:
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
   bool setUserColor( VNumber, const QString& );
-  void setLocalVCard( const VCard& );
+  void setLocalUserVCard( const VCard& );
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
@@ -110,9 +110,10 @@ protected:
   void parseFileMessage( const User&, const Message& );
 
   /* CoreUser */
-  void setUserStatus( const User& );
-  void sendUserStatus();
-  void setUserName( const User&, const QString& );
+  void showUserStatusChanged( const User& );
+  void showUserNameChanged( const User&, const QString& );
+  void showUserVCardChanged( const User& );
+  void sendLocalUserStatus();
 
   /* CoreChat */
   void createDefaultChat();

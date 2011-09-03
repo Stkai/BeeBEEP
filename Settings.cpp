@@ -40,7 +40,12 @@ Settings::Settings()
 
 QString Settings::version( bool complete ) const
 {
-  return complete ? QString( "%1 (b%2)" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ) : QString( BEEBEEP_VERSION );
+  return complete ? QString( "%1 (b%2p%3)" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION ) : QString( BEEBEEP_VERSION );
+}
+
+int Settings::protoVersion() const
+{
+  return BEEBEEP_PROTO_VERSION;
 }
 
 QString Settings::programName() const
@@ -86,6 +91,7 @@ void Settings::load()
 {
   qDebug() << "Creating local user and loading settings";
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
+
   sets.beginGroup( "Chat" );
   m_chatFont.fromString( sets.value( "Font", QApplication::font().toString() ).toString() );
   m_chatFontColor = sets.value( "FontColor", QColor( Qt::black ).name() ).toString();
@@ -95,8 +101,10 @@ void Settings::load()
   m_chatSaveDirectory = sets.value( "SaveDirectory", "." ).toString();
   m_beepOnNewMessageArrived = sets.value( "BeepOnNewMessageArrived", true ).toBool();
   sets.endGroup();
+
   sets.beginGroup( "User" );
-  m_localUser.setName( sets.value( "LocalName", "" ).toString() );
+  m_localUser.setName( sets.value( "LocalName", "" ).toString() ); // For Backward compatibility (FIXME!!!)
+  m_localUser.setColor( sets.value( "LocalColor", "#000000" ).toString() );
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   m_showOnlyUsername = sets.value( "ShowOnlyName", true ).toBool();
@@ -105,9 +113,10 @@ void Settings::load()
 
   sets.beginGroup( "VCard" );
   VCard vc;
+  vc.setNickName( sets.value( "NickName", m_localUser.name() ).toString() );
   vc.setFirstName( sets.value( "FirstName", "" ).toString() );
   vc.setLastName( sets.value( "LastName", "" ).toString() );
-  vc.setGender( (sets.value( "Gender", 1 ).toInt() > 0 ? VCard::Female : VCard::Male) );
+  vc.setGender( (sets.value( "Gender", 0 ).toInt() > 0 ? VCard::Female : VCard::Male) );
   QDate dt = sets.value( "Birthday", QDate() ).toDate();
   if( dt.isValid() )
     vc.setBirthday( dt );
@@ -115,8 +124,7 @@ void Settings::load()
   QPixmap pix = sets.value( "Photo", QPixmap() ).value<QPixmap>();
   if( !pix.isNull() )
     vc.setPhoto( pix );
-  if( vc.isValid() )
-    m_localUser.setVCard( vc );
+  m_localUser.setVCard( vc );
   sets.endGroup();
 
   sets.beginGroup( "Gui" );
@@ -168,6 +176,10 @@ void Settings::save()
 {
   qDebug() << "Saving settings";
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
+  sets.beginGroup( "Version" );
+  sets.setValue( "Program", version( true ) );
+  sets.setValue( "Proto", protoVersion() );
+  sets.endGroup();
   sets.beginGroup( "Chat" );
   sets.setValue( "Font", m_chatFont.toString() );
   sets.setValue( "FontColor", m_chatFontColor );
@@ -178,26 +190,21 @@ void Settings::save()
   sets.setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets.endGroup();
   sets.beginGroup( "User" );
-  sets.setValue( "LocalName", m_localUser.name() );
+  sets.setValue( "LocalColor", m_localUser.color() );
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets.setValue( "ShowOnlyName", m_showOnlyUsername );
   sets.setValue( "ShowColors", m_showUserColor );
   sets.endGroup();
-  if( m_localUser.vCard().isValid() )
-  {
-    qDebug() << "Saving VCard";
-    sets.beginGroup( "VCard" );
-    sets.setValue( "FirstName", m_localUser.vCard().firstName() );
-    sets.setValue( "LastName", m_localUser.vCard().lastName() );
-    sets.setValue( "Gender", m_localUser.vCard().gender() );
-    if( m_localUser.vCard().birthday().isValid() )
-      sets.setValue( "Birthday", m_localUser.vCard().birthday() );
-    sets.setValue( "Email", m_localUser.vCard().email() );
-    if( !m_localUser.vCard().photo().isNull() )
-      sets.setValue( "Photo", m_localUser.vCard().photo() );
-    sets.endGroup();
-  }
+  sets.beginGroup( "VCard" );
+  sets.setValue( "NickName", m_localUser.vCard().nickName() );
+  sets.setValue( "FirstName", m_localUser.vCard().firstName() );
+  sets.setValue( "LastName", m_localUser.vCard().lastName() );
+  sets.setValue( "Gender", m_localUser.vCard().gender() );
+  sets.setValue( "Birthday", m_localUser.vCard().birthday() );
+  sets.setValue( "Email", m_localUser.vCard().email() );
+  sets.setValue( "Photo", m_localUser.vCard().photo() );
+  sets.endGroup();
   sets.beginGroup( "Gui" );
   sets.setValue( "MainWindowGeometry", m_guiGeometry );
   sets.setValue( "MainWindowState", m_guiState );
@@ -223,6 +230,7 @@ void Settings::save()
   sets.setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets.setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets.endGroup();
+
   sets.sync();
   qDebug() << "Settings saved";
 }

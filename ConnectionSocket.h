@@ -40,6 +40,8 @@ public:
   inline VNumber userId() const;
   inline void setUserId( VNumber );
 
+  inline int protoVersion() const;
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const Message& );
@@ -55,6 +57,7 @@ private:
   DATA_BLOCK_SIZE m_blockSize;
   bool m_isHelloSent;
   VNumber m_userId;
+  int m_protoVersion;
 
   int m_preventLoop;
 
@@ -64,5 +67,6 @@ private:
 // Inline Functions
 inline VNumber ConnectionSocket::userId() const { return m_userId; }
 inline void ConnectionSocket::setUserId( VNumber new_value ) { m_userId = new_value; }
+inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

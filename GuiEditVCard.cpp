@@ -26,7 +26,7 @@
 
 
 GuiEditVCard::GuiEditVCard( QWidget *parent )
-  : QDialog( parent ), m_user()
+  : QDialog( parent ), m_vCard()
 {
   setupUi( this );
   setObjectName( "GuiEditVCard" );
@@ -38,7 +38,8 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-  connect( mp_pbPhoto, SIGNAL( clicked() ), this, SLOT( changePhoto() ) );
+  connect( mp_pbChangePhoto, SIGNAL( clicked() ), this, SLOT( changePhoto() ) );
+  connect( mp_pbRemovePhoto, SIGNAL( clicked() ), this, SLOT( removePhoto() ) );
 }
 
 void GuiEditVCard::setVCard( const VCard& vc )
@@ -90,6 +91,12 @@ void GuiEditVCard::changePhoto()
   QPixmap pix = QPixmap::fromImage( img );
   mp_lPhoto->setPixmap( pix );
   m_vCard.setPhoto( pix );
+}
+
+void GuiEditVCard::removePhoto()
+{
+  mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png" ).pixmap( 96, 96 ) );
+  m_vCard.setPhoto( QPixmap() );
 }
 
 bool GuiEditVCard::checkLineEdit( QLineEdit* ple, const QString& msg )

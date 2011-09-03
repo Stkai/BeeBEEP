@@ -83,7 +83,7 @@ bool Core::start()
                          .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
 
-  setUserStatus( Settings::instance().localUser() );
+  showUserStatusChanged( Settings::instance().localUser() );
 
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();

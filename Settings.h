@@ -35,6 +35,7 @@ class Settings
 
 public:
   QString version( bool ) const;
+  int protoVersion() const;
   QString programName() const;
 
   inline const User& localUser() const;

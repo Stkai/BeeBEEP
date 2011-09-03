@@ -129,7 +129,7 @@ void Core::closeConnection( Connection *c )
     qDebug() << "User" << u.path() << "goes offline";
     u.setStatus( User::Offline );
     m_users.setUser( u );
-    setUserStatus( u );
+    showUserStatusChanged( u );
   }
   else
     qWarning() << "User" << c->userId() << "not found while closing connection";
@@ -158,7 +158,6 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
-  bool send_vcard = false;
   User user_found = m_users.find( u.path() );
   if( user_found.isValid() )
   {
@@ -171,7 +170,6 @@ void Core::checkUserAuthentication( const Message& m )
     u.setColor( ColorManager::instance().unselectedQString() );
     qDebug() << "New user connected:" << u.path() << "with color" << u.color();
     createPrivateChat( u );
-    send_vcard = true;
   }
 
   qDebug() << "Adding user" << u.path() << "to default chat";
@@ -183,11 +181,14 @@ void Core::checkUserAuthentication( const Message& m )
   addConnectionReadyForUse( c );
 
   m_users.setUser( u );
-  setUserStatus( u );
+  showUserStatusChanged( u );
 
-  if( send_vcard )
+  if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
   {
-    qDebug() << "Sending my VCard to" << u.path();
-    c->sendData( Protocol::instance().localVCardMessage() );
+    if( c->protoVersion() > 1 )
+    {
+      qDebug() << "Sending my VCard to" << u.path();
+      c->sendData( Protocol::instance().localVCardMessage() );
+    }
   }
 }

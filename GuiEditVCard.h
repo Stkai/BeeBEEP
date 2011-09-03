@@ -44,6 +44,7 @@ protected:
 
 private slots:
   void changePhoto();
+  void removePhoto();
   void checkData();
 
 private:

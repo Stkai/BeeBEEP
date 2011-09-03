@@ -36,8 +36,9 @@ public:
   VCard( const VCard& );
 
   VCard& operator=( const VCard& );
+  inline bool operator==( const VCard& ) const;
 
-  inline bool isValid() const;
+  inline bool hasOnlyNickName() const;
 
   inline const QString& nickName() const;
   inline void setNickName( const QString& );
@@ -84,6 +85,14 @@ inline void VCard::setEmail( const QString& new_value ) { m_email = new_value; }
 inline const QPixmap& VCard::photo() const { return m_photo; }
 inline void VCard::setPhoto( const QPixmap& new_value ) { m_photo = new_value; }
 
-inline bool VCard::isValid() const { return !m_firstName.isEmpty() || !m_lastName.isEmpty() || !m_birthday.isValid() || !m_email.isEmpty() || !m_photo.isNull(); }
+inline bool VCard::hasOnlyNickName() const { return !m_firstName.isEmpty() || !m_lastName.isEmpty() || m_birthday.isValid() || !m_email.isEmpty() || !m_photo.isNull(); }
+inline bool VCard::operator==( const VCard& vc ) const
+{
+  return m_nickName == vc.m_nickName && m_firstName == vc.m_firstName
+      && m_lastName == vc.m_lastName && m_gender == vc.m_gender
+      && m_birthday == vc.m_birthday && m_email == vc.m_email
+      && m_photo.toImage() == vc.m_photo.toImage();
+}
+
 
 #endif // BEEBEEP_VCARD_H
