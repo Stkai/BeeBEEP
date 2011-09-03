@@ -68,7 +68,10 @@ void Settings::setPassword( const QString& new_value )
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
-  m_localUser.setHostAddress( host_address );
+  if( host_address.toString() == QString( "0.0.0.0" ) )
+    m_localUser.setHostAddress( QHostAddress( "127.0.0.1") );
+  else
+    m_localUser.setHostAddress( host_address );
   m_localUser.setHostPort( host_port );
 }
 
