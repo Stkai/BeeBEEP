@@ -397,7 +397,7 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
 
 namespace
 {
-  QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars, char fill_char = '\0' )
+  QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars )
   {
     QList<QByteArray> array_list;
 
