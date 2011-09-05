@@ -54,5 +54,7 @@
         <file>images/file-transfer.png</file>
         <file>images/user-list.png</file>
         <file>images/send-file.png</file>
+        <file>images/add.png</file>
+        <file>images/remove.png</file>
     </qresource>
 </RCC>

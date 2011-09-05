@@ -60,9 +60,8 @@ void Core::showUserStatusChanged( const User& u )
   if( u.isLocal() )
     sHtmlMsg += tr( "You are" );
   else
-    sHtmlMsg += (Settings::instance().showOnlyUsername() ? u.name() : u.path()) + QString( " " ) + tr( "is" );
-   sHtmlMsg += QString( " " );
-   sHtmlMsg += QString( "%1%2." ).arg( Bee::userStatusToString( u.status() ) )
+    sHtmlMsg += tr( "%1 is" ).arg( Settings::instance().showOnlyUsername() ? u.name() : u.path() );
+   sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }

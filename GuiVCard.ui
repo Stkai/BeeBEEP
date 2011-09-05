@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
+    <width>343</width>
     <height>127</height>
    </rect>
   </property>
@@ -23,6 +23,68 @@
    <property name="spacing">
     <number>1</number>
    </property>
+   <item row="1" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="mp_lStatus">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>S</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mp_pbChat">
+       <property name="text">
+        <string>Chat</string>
+       </property>
+       <property name="icon">
+        <iconset resource="beebeep.qrc">
+         <normaloff>:/images/chat.png</normaloff>:/images/chat.png</iconset>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mp_pbFile">
+       <property name="text">
+        <string>Send File</string>
+       </property>
+       <property name="icon">
+        <iconset resource="beebeep.qrc">
+         <normaloff>:/images/send-file.png</normaloff>:/images/send-file.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mp_pbColor">
+       <property name="text">
+        <string>Color</string>
+       </property>
+       <property name="icon">
+        <iconset resource="beebeep.qrc">
+         <normaloff>:/images/font-color.png</normaloff>:/images/font-color.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="mp_lPhoto">
      <property name="sizePolicy">
@@ -264,76 +326,7 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>2</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="mp_lStatus">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>S</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="mp_pbChat">
-       <property name="text">
-        <string>Chat</string>
-       </property>
-       <property name="icon">
-        <iconset resource="beebeep.qrc">
-         <normaloff>:/images/chat.png</normaloff>:/images/chat.png</iconset>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="mp_pbFile">
-       <property name="text">
-        <string>Send File</string>
-       </property>
-       <property name="icon">
-        <iconset resource="beebeep.qrc">
-         <normaloff>:/images/send-file.png</normaloff>:/images/send-file.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="mp_pbColor">
-       <property name="text">
-        <string>Color</string>
-       </property>
-       <property name="icon">
-        <iconset resource="beebeep.qrc">
-         <normaloff>:/images/font-color.png</normaloff>:/images/font-color.png</iconset>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
-  <zorder>mp_lPhoto</zorder>
-  <zorder>mp_frame</zorder>
-  <zorder>mp_lStatus</zorder>
-  <zorder>mp_pbChat</zorder>
-  <zorder>mp_pbFile</zorder>
-  <zorder>mp_pbColor</zorder>
-  <zorder>mp_pbFile</zorder>
  </widget>
  <resources>
   <include location="beebeep.qrc"/>

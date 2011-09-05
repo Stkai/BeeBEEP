@@ -30,8 +30,6 @@
 class VCard
 {
 public:
-  enum Gender { Male, Female };
-
   VCard();
   VCard( const VCard& );
 
@@ -46,9 +44,6 @@ public:
   inline void setFirstName( const QString& );
   inline const QString& lastName() const;
   inline void setLastName( const QString& );
-  inline int gender() const;
-  inline void setGender( Gender );
-  inline bool isFemale() const;
   inline const QDate& birthday() const;
   inline void setBirthday( const QDate& );
   inline const QString& email() const;
@@ -60,7 +55,6 @@ private:
   QString m_nickName;
   QString m_firstName;
   QString m_lastName;
-  int m_gender;
   QDate m_birthday;
   QString m_email;
   QPixmap m_photo;
@@ -75,9 +69,6 @@ inline const QString& VCard::firstName() const { return m_firstName; }
 inline void VCard::setFirstName( const QString& new_value ) { m_firstName = new_value; }
 inline const QString& VCard::lastName() const { return m_lastName; }
 inline void VCard::setLastName( const QString& new_value ) { m_lastName = new_value; }
-inline int VCard::gender() const { return (int)m_gender; }
-inline void VCard::setGender( Gender new_value ) { m_gender = new_value; }
-inline bool VCard::isFemale() const { return m_gender == VCard::Female; }
 inline const QDate& VCard::birthday() const { return m_birthday; }
 inline void VCard::setBirthday( const QDate& new_value ) { m_birthday = new_value; }
 inline const QString& VCard::email() const { return m_email; }
@@ -89,8 +80,8 @@ inline bool VCard::hasOnlyNickName() const { return !m_firstName.isEmpty() || !m
 inline bool VCard::operator==( const VCard& vc ) const
 {
   return m_nickName == vc.m_nickName && m_firstName == vc.m_firstName
-      && m_lastName == vc.m_lastName && m_gender == vc.m_gender
-      && m_birthday == vc.m_birthday && m_email == vc.m_email
+      && m_lastName == vc.m_lastName && m_birthday == vc.m_birthday
+      && m_email == vc.m_email
       && m_photo.toImage() == vc.m_photo.toImage();
 }
 

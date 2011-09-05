@@ -25,7 +25,7 @@
 
 
 VCard::VCard()
-  : m_nickName( "" ), m_firstName( "" ), m_lastName( "" ), m_gender( VCard::Male ),
+  : m_nickName( "" ), m_firstName( "" ), m_lastName( "" ),
     m_birthday(), m_email( "" ), m_photo()
 {}
 
@@ -41,7 +41,6 @@ VCard& VCard::operator=( const VCard& vc )
     m_nickName = vc.m_nickName;
     m_firstName = vc.m_firstName;
     m_lastName = vc.m_lastName;
-    m_gender = vc.m_gender;
     m_birthday = vc.m_birthday;
     m_email = vc.m_email;
     m_photo = vc.m_photo;

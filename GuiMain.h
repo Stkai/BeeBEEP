@@ -59,7 +59,6 @@ private slots:
   void searchUsers();
   void settingsChanged();
   void emoticonSelected();
-  void toggleMenuBar( bool );
   void saveChat();
   void showNextChat();
   void statusSelected();
@@ -79,7 +78,7 @@ protected:
 private:
   void createActions();
   void createMenus();
-  void createToolBars();
+  void createToolAndMenuBars();
   void createStatusBar();
   void createDockWindows();
   void refreshUserList();
@@ -95,6 +94,8 @@ private:
   GuiUserList* mp_userList;
   Core *mp_core;
 
+  QMenu *mp_menuMain;
+  QMenu *mp_menuInfo;
   QMenu *mp_menuSettings;
   QMenu *mp_menuEmoticons;
   QMenu *mp_menuStatus;
@@ -108,7 +109,6 @@ private:
   QAction* mp_actVCard;
   QAction* mp_actFont;
   QAction* mp_actFontColor;
-  QAction* mp_actMenuBar;
   QAction* mp_actToolBar;
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;

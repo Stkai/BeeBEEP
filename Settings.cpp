@@ -119,7 +119,6 @@ void Settings::load()
   vc.setNickName( sets.value( "NickName", m_localUser.name() ).toString() );
   vc.setFirstName( sets.value( "FirstName", "" ).toString() );
   vc.setLastName( sets.value( "LastName", "" ).toString() );
-  vc.setGender( (sets.value( "Gender", 0 ).toInt() > 0 ? VCard::Female : VCard::Male) );
   QDate dt = sets.value( "Birthday", QDate() ).toDate();
   if( dt.isValid() )
     vc.setBirthday( dt );
@@ -133,7 +132,6 @@ void Settings::load()
   sets.beginGroup( "Gui" );
   m_guiGeometry = sets.value( "MainWindowGeometry", "" ).toByteArray();
   m_guiState = sets.value( "MainWindowState", "" ).toByteArray();
-  m_showMenuBar = sets.value( "ShowMenuBar", true ).toBool();
   m_mainBarIconSize = sets.value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
   m_language = sets.value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
@@ -203,7 +201,6 @@ void Settings::save()
   sets.setValue( "NickName", m_localUser.vCard().nickName() );
   sets.setValue( "FirstName", m_localUser.vCard().firstName() );
   sets.setValue( "LastName", m_localUser.vCard().lastName() );
-  sets.setValue( "Gender", m_localUser.vCard().gender() );
   sets.setValue( "Birthday", m_localUser.vCard().birthday() );
   sets.setValue( "Email", m_localUser.vCard().email() );
   sets.setValue( "Photo", m_localUser.vCard().photo() );
@@ -211,7 +208,6 @@ void Settings::save()
   sets.beginGroup( "Gui" );
   sets.setValue( "MainWindowGeometry", m_guiGeometry );
   sets.setValue( "MainWindowState", m_guiState );
-  sets.setValue( "ShowMenuBar", m_showMenuBar );
   sets.setValue( "MainBarIconSize", m_mainBarIconSize );
   sets.setValue( "Language", m_language );
   sets.setValue( "LastDirectorySelected", m_lastDirectorySelected );

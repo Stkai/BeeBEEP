@@ -50,7 +50,7 @@ GuiMain::GuiMain( QWidget *parent )
   createActions();
   createDockWindows();
   createMenus();
-  createToolBars();
+  createToolAndMenuBars();
   createStatusBar();
 
   connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
@@ -95,7 +95,6 @@ void GuiMain::closeEvent( QCloseEvent* e )
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
 #endif
-    Settings::instance().setShowMenuBar( mp_actMenuBar->isChecked() );
     if( mp_core->isConnected() )
       mp_core->stop();
     e->accept();
@@ -130,7 +129,7 @@ void GuiMain::startCore()
                                        &ok );
   if( !ok )
     return;
-  Settings::instance().setPassword( pwd.simplified() );
+  Settings::instance().setPassword( pwd );
   mp_core->start();
   initGuiItems();
 }
@@ -215,14 +214,6 @@ void GuiMain::createActions()
   mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
   connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
 
-  mp_actMenuBar = new QAction( tr( "Show the MenuBar" ), this );
-  mp_actMenuBar->setStatusTip( tr( "Show the main menu bar with the %1 options" ).arg( Settings::instance().programName() ) );
-  mp_actMenuBar->setCheckable( true );
-  mp_actMenuBar->setChecked( Settings::instance().showMenuBar() );
-  mp_actMenuBar->setData( 99 );
-  toggleMenuBar( mp_actMenuBar->isChecked() );
-  connect( mp_actMenuBar, SIGNAL( toggled( bool ) ), this, SLOT( toggleMenuBar( bool ) ) );
-
   mp_actToolBar = mp_barMain->toggleViewAction();
   mp_actToolBar->setStatusTip( tr( "Show the main tool bar with settings and emoticons" ) );
   mp_actToolBar->setData( 99 );
@@ -235,22 +226,21 @@ void GuiMain::createActions()
 void GuiMain::createMenus()
 {
   QAction* act;
-  QMenu* menu;
 
   /* Main Menu */
-  menu = menuBar()->addMenu( tr( "&Main" ) );
-  menu->addAction( mp_actStartStopCore );
-  menu->addSeparator();
-  menu->addAction( mp_actVCard );
-  menu->addAction( mp_actSearch );
-  menu->addSeparator();
-  act = menu->addAction( QIcon( ":/images/download-folder.png" ), tr( "Select download folder..."), this, SLOT( selectDownloadDirectory() ) );
-  menu->addSeparator();
-  menu->addAction( mp_actQuit );
+  mp_menuMain = new QMenu( tr( "&Main" ), this );
+  mp_menuMain->addAction( mp_actStartStopCore );
+  mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actVCard );
+  mp_menuMain->addAction( mp_actSearch );
+  mp_menuMain->addSeparator();
+  act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
+  act->setStatusTip( tr( "Select the download folder" ) );
+  mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actQuit );
 
   /* Settings Menu */
-  mp_menuSettings = menuBar()->addMenu( tr( "&Settings") );
-  mp_menuSettings->addAction( mp_actMenuBar );
+  mp_menuSettings = new QMenu( tr( "&Settings" ), this );
   mp_menuSettings->addAction( mp_actToolBar );
   mp_menuSettings->addSeparator();
 
@@ -298,7 +288,7 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().automaticFileName() );
-  act->setData( 99 );
+  act->setData( 7 );
 
   /* Emoticons Menu for ToolBar */
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
@@ -330,17 +320,22 @@ void GuiMain::createMenus()
   act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Add a status description..." ), this, SLOT( changeStatusDescription() ) );
 
   /* Help Menu */
-  menu = menuBar()->addMenu( "&?" );
-  act = menu->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), this, SLOT( showTipOfTheDay() ) );
+  mp_menuInfo = new QMenu( tr("&?" ), this );
+  act = mp_menuInfo->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), this, SLOT( showTipOfTheDay() ) );
   act->setStatusTip( tr( "Show me the tip of the day" ) );
-  menu->addSeparator();
-  menu->addAction( mp_actAbout );
-  act = menu->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
+  mp_menuInfo->addSeparator();
+  mp_menuInfo->addAction( mp_actAbout );
+  act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
+
 }
 
-void GuiMain::createToolBars()
+void GuiMain::createToolAndMenuBars()
 {
+  menuBar()->addMenu( mp_menuMain );
+  menuBar()->addMenu( mp_menuSettings );
+  menuBar()->addMenu( mp_menuInfo );
+
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actSendFile );
@@ -383,14 +378,6 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
   dock_widget->hide();
-}
-
-void GuiMain::toggleMenuBar( bool is_enabled )
-{
-  if( is_enabled )
-    menuBar()->show();
-  else
-    menuBar()->hide();
 }
 
 void GuiMain::checkUser( const User& u )
@@ -512,6 +499,9 @@ void GuiMain::settingsChanged()
     Settings::instance().setShowOnlyUsername( act->isChecked() );
     refresh_users = true;
     refresh_chat = true;
+  case 7:
+    Settings::instance().setAutomaticFileName( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -721,7 +711,7 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
       {
         file_name = QFileDialog::getSaveFileName( this,
                             tr( "%1 already exists. Please select a new filename." ).arg( qfile_info.fileName() ),
-                            Settings::instance().downloadDirectory() );
+                            qfile_info.absoluteFilePath() );
         if( file_name.isNull() || file_name.isEmpty() )
           return;
       }
@@ -738,9 +728,13 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 
 void GuiMain::selectDownloadDirectory()
 {
-  QString download_directory_path = QFileDialog::getExistingDirectory( this, Settings::instance().programName(), Settings::instance().downloadDirectory() );
+  QString download_directory_path = QFileDialog::getExistingDirectory( this,
+                                                                       tr( "%1 - Select the download folder" )
+                                                                       .arg( Settings::instance().programName() ),
+                                                                       Settings::instance().downloadDirectory() );
   if( download_directory_path.isNull() )
     return;
+
   Settings::instance().setDownloadDirectory( download_directory_path );
 }
 

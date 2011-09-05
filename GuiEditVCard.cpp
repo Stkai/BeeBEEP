@@ -31,11 +31,6 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiEditVCard" );
 
-  m_bgGender.addButton( mp_rbMale, 0 );
-  m_bgGender.addButton( mp_rbFemale, 1 );
-  m_bgGender.setExclusive( true );
-  mp_rbMale->setChecked( true );
-
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_pbChangePhoto, SIGNAL( clicked() ), this, SLOT( changePhoto() ) );
@@ -53,11 +48,7 @@ void GuiEditVCard::loadVCard()
   mp_leNickname->setText( m_vCard.nickName() );
   mp_leFirstName->setText( m_vCard.firstName() );
   mp_leLastName->setText( m_vCard.lastName() );
-  QAbstractButton* ab = m_bgGender.button( m_vCard.gender() );
-  if( ab )
-    ab->setChecked( true );
-  else
-    mp_rbMale->setChecked( true );
+
   if( m_vCard.birthday().isValid() )
     mp_deBirthday->setDate( m_vCard.birthday() );
   else
@@ -119,10 +110,6 @@ void GuiEditVCard::checkData()
   m_vCard.setNickName( mp_leNickname->text().simplified() );
   m_vCard.setFirstName( mp_leFirstName->text().simplified() );
   m_vCard.setLastName( mp_leLastName->text().simplified() );
-  if( m_bgGender.checkedId() == 1 )
-    m_vCard.setGender( VCard::Female );
-  else
-    m_vCard.setGender( VCard::Male );
   if( mp_deBirthday->date() != QDate( 1900, 1, 1 ) )
     m_vCard.setBirthday( mp_deBirthday->date() );
   m_vCard.setEmail( mp_leEmail->text().simplified() );

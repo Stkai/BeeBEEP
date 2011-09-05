@@ -53,9 +53,6 @@ public:
   inline QString logPath() const;
   inline void setLogPath( const QString& );
 
-  inline void setShowMenuBar( bool );
-  inline bool showMenuBar() const;
-
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
   inline const QFont& chatFont() const;
@@ -140,9 +137,6 @@ private:
 
   QString m_logPath;
 
-  bool m_showMenuBar;
-  bool m_showToolBar;
-
   QString m_chatFontColor;
   QFont m_chatFont;
   bool m_chatCompact;
@@ -186,8 +180,6 @@ inline int Settings::fileTransferConfirmTimeout() const { return m_fileTransferC
 inline int Settings::fileTransferBufferSize() const { return m_fileTransferBufferSize; }
 inline QString Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
-inline void Settings::setShowMenuBar( bool new_value) { m_showMenuBar = new_value; }
-inline bool Settings::showMenuBar() const { return m_showMenuBar; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }

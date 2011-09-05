@@ -49,7 +49,6 @@ private slots:
 
 private:
   VCard m_vCard;
-  QButtonGroup m_bgGender;
 
 };
 
