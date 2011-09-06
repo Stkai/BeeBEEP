@@ -140,12 +140,12 @@
     <message>
         <location filename="../CoreUser.cpp" line="73"/>
         <source>You have changed your nickname from %1 to %2.</source>
-        <translation>Hai cambiato il tuo nickname da %1 a %2.</translation>
+        <translation>Hai cambiato il tuo soprannome da %1 a %2.</translation>
     </message>
     <message>
         <location filename="../CoreUser.cpp" line="75"/>
         <source>%1 has changed the nickname in %2.</source>
-        <translation>%1 ha cambiato il suo nickname in %2.</translation>
+        <translation>%1 ha cambiato il suo soprannome in %2.</translation>
     </message>
     <message>
         <location filename="../CoreUser.cpp" line="85"/>
@@ -278,24 +278,24 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>GuiEditVCard</name>
     <message>
-        <location filename="../GuiEditVCard.cpp" line="68"/>
+        <location filename="../GuiEditVCard.cpp" line="79"/>
         <source>%1 - Select your profile photo</source>
         <translation>%1 - Seleziona la foto del tuo profilo</translation>
     </message>
     <message>
-        <location filename="../GuiEditVCard.cpp" line="69"/>
+        <location filename="../GuiEditVCard.cpp" line="80"/>
         <source>Images (*.png *.xpm *.jpg *.jpeg)</source>
         <translation>Immagini (*.png *.xpm *.jpg *.jpeg)</translation>
     </message>
     <message>
-        <location filename="../GuiEditVCard.cpp" line="79"/>
+        <location filename="../GuiEditVCard.cpp" line="90"/>
         <source>Unable to load image %1.</source>
         <translation>Impossibile caricare l&apos;immagine %1.</translation>
     </message>
     <message>
-        <location filename="../GuiEditVCard.cpp" line="107"/>
+        <location filename="../GuiEditVCard.cpp" line="125"/>
         <source>Please insert your nickname.</source>
-        <translation>Il campo del tuo nickname non può essere vuoto.</translation>
+        <translation>Il campo del tuo soprannome non può essere vuoto.</translation>
     </message>
 </context>
 <context>
@@ -515,12 +515,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../GuiMain.cpp" line="247"/>
         <source>Show only the nicknames</source>
-        <translation>Mostra solo i nicknames degli utenti</translation>
+        <translation>Mostra solo i soprannomi degli utenti</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="248"/>
         <source>If enabled only the nickname of the connected users are shown</source>
-        <translation>Se abilitata solamente i nicknames degli utenti connessi saranno mostrati</translation>
+        <translation>Se abilitata solamente i soprannomi degli utenti connessi saranno mostrati</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="253"/>
@@ -530,7 +530,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../GuiMain.cpp" line="254"/>
         <source>If enabled the sender&apos;s nickname and his message are in the same line</source>
-        <translation>Se abilitata il nickname ed il messaggio relativo staranno sulla stessa linea</translation>
+        <translation>Se abilitata il soprannome ed il messaggio relativo staranno sulla stessa linea</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="259"/>
@@ -560,7 +560,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../GuiMain.cpp" line="272"/>
         <source>If enabled the user&apos;s nickname in chat and in list is colored</source>
-        <translation>Se abilitata il nickname degli utenti in chat e nella lista sarà colorato</translation>
+        <translation>Se abilitata il soprannome degli utenti in chat e nella lista sarà colorato</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="279"/>
@@ -674,110 +674,110 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="456"/>
-        <location filename="../GuiMain.cpp" line="679"/>
+        <location filename="../GuiMain.cpp" line="682"/>
         <source>User not found.</source>
         <translation>Utente non trovato.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="567"/>
+        <location filename="../GuiMain.cpp" line="570"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Seleziona un file dove salvare la conversazione in corso.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="582"/>
-        <location filename="../GuiMain.cpp" line="607"/>
+        <location filename="../GuiMain.cpp" line="585"/>
+        <location filename="../GuiMain.cpp" line="610"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="583"/>
+        <location filename="../GuiMain.cpp" line="586"/>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
         <translation>%1: impossibile salvare i messaggi.
 Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="589"/>
+        <location filename="../GuiMain.cpp" line="592"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="590"/>
+        <location filename="../GuiMain.cpp" line="593"/>
         <source>%1: save completed.</source>
         <translation>%1: salvataggio completato.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="600"/>
+        <location filename="../GuiMain.cpp" line="603"/>
         <source>Please insert the Host Address or Broadcast Address to contact
 (ex. 10.184.15.186 or 10.184.15.255)</source>
         <translation>Inserisci l&apos;indirizzo IP o la sottorete in cui cercare nuovi utenti
 (es. 10.184.15.186 oppure 10.184.15.255)</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="608"/>
+        <location filename="../GuiMain.cpp" line="611"/>
         <source>You have selected an invalid host address.</source>
         <translation>Hai inserito un indirizzo IP o di sottorete non valido.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="619"/>
+        <location filename="../GuiMain.cpp" line="622"/>
         <source>%1 is writing...</source>
         <translation>%1 sta scrivendo...</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="636"/>
+        <location filename="../GuiMain.cpp" line="639"/>
         <source>Please insert the new status description</source>
         <translation>Inserisci una descrizione per il tuo stato</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="649"/>
+        <location filename="../GuiMain.cpp" line="652"/>
         <source>There is no user connected.</source>
         <translation>Non ci sono utenti collegati.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="654"/>
+        <location filename="../GuiMain.cpp" line="657"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Seleziona l&apos;utente a cui vuoi inviare il file.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="662"/>
+        <location filename="../GuiMain.cpp" line="665"/>
         <source>User %1 not found.</source>
         <translation>L&apos;utente %1 non è stato trovato.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="666"/>
-        <location filename="../GuiMain.cpp" line="683"/>
+        <location filename="../GuiMain.cpp" line="669"/>
+        <location filename="../GuiMain.cpp" line="686"/>
         <source>%1 - Send a file to %2</source>
         <translation>%1 - Invia un file a %2</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="693"/>
+        <location filename="../GuiMain.cpp" line="696"/>
         <source>Do you want to download from %1
 %2 (%3)?</source>
         <translation>Vuoi scaricare da %1
 il file %2 (%3)?</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="695"/>
+        <location filename="../GuiMain.cpp" line="698"/>
         <source>Yes</source>
         <translation>Si</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="695"/>
+        <location filename="../GuiMain.cpp" line="698"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="710"/>
+        <location filename="../GuiMain.cpp" line="713"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 esiste già. Seleziona un nuovo nome per il file.</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="729"/>
+        <location filename="../GuiMain.cpp" line="732"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - Seleziona la cartella dove salvare i files scaricati</translation>
     </message>
     <message>
-        <location filename="../GuiMain.cpp" line="763"/>
+        <location filename="../GuiMain.cpp" line="766"/>
         <source>%1 - Profile</source>
         <translation>%1 - Profilo</translation>
     </message>
@@ -922,6 +922,11 @@ il file %2 (%3)?</translation>
         <source>Birthday: %1</source>
         <translation>Data di nascita: %1</translation>
     </message>
+    <message>
+        <location filename="../GuiVCard.cpp" line="75"/>
+        <source>Chat with all</source>
+        <translation>Parla con tutti</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
@@ -933,7 +938,7 @@ il file %2 (%3)?</translation>
     <message>
         <location filename="../GuiEditVCard.ui" line="127"/>
         <source>Nickname</source>
-        <translation></translation>
+        <translation>Soprannome</translation>
     </message>
     <message>
         <location filename="../GuiEditVCard.ui" line="184"/>
@@ -949,6 +954,11 @@ il file %2 (%3)?</translation>
         <location filename="../GuiEditVCard.ui" line="288"/>
         <source>Add or change photo</source>
         <translation>Aggiungi o cambia la tua foto</translation>
+    </message>
+    <message>
+        <location filename="../GuiEditVCard.ui" line="343"/>
+        <source>Change your nickname color</source>
+        <translation>Cambia il colore del tuo soprannome</translation>
     </message>
     <message>
         <source>Gender</source>
@@ -990,12 +1000,12 @@ il file %2 (%3)?</translation>
         <translation type="obsolete">Rimuovi</translation>
     </message>
     <message>
-        <location filename="../GuiEditVCard.ui" line="365"/>
+        <location filename="../GuiEditVCard.ui" line="391"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../GuiEditVCard.ui" line="372"/>
+        <location filename="../GuiEditVCard.ui" line="398"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>

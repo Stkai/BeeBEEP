@@ -72,6 +72,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   if( u.isLocal() )
   {
     mp_pbFile->hide();
+    mp_pbChat->setText( tr( "Chat with all" ) + " " );
   }
 
   qDebug() << "VCard showed for the user" << u.path();

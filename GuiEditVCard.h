@@ -37,6 +37,8 @@ public:
 
   void setVCard( const VCard& );
   inline const VCard& vCard() const;
+  void setUserColor( const QString& );
+  inline const QString& userColor() const;
 
 protected:
   void loadVCard();
@@ -46,15 +48,17 @@ private slots:
   void changePhoto();
   void removePhoto();
   void checkData();
+  void changeUserColor();
 
 private:
   VCard m_vCard;
+  QString m_userColor;
 
 };
 
 
 // Inline Functions
 inline const VCard& GuiEditVCard::vCard() const { return m_vCard; }
-
+inline const QString& GuiEditVCard::userColor() const { return m_userColor; }
 
 #endif // BEEBEEP_GUIEDITVCARD_H

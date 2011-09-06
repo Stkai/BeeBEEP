@@ -766,15 +766,23 @@ void GuiMain::changeVCard()
   gvc.setWindowTitle( tr( "%1 - Profile" ).arg( Settings::instance().programName() ) );
   gvc.setModal( true );
   gvc.setVCard( Settings::instance().localUser().vCard() );
+  gvc.setUserColor( Settings::instance().localUser().color() );
   gvc.show();
   gvc.setFixedSize( gvc.size() );
   if( gvc.exec() == QDialog::Accepted )
   {
+    if( gvc.userColor() != Settings::instance().localUser().color() )
+    {
+      qDebug() << "Local user color changed";
+      mp_core->setUserColor( Settings::instance().localUser().id(), gvc.userColor() );
+    }
+
     if( gvc.vCard() == Settings::instance().localUser().vCard() )
     {
       qDebug() << "Ok pressed but vCard is not changed";
       return;
     }
+
     qDebug() << "vCard changed";
     mp_core->setLocalUserVCard( gvc.vCard() );
   }

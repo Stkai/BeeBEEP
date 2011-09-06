@@ -35,6 +35,17 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_pbChangePhoto, SIGNAL( clicked() ), this, SLOT( changePhoto() ) );
   connect( mp_pbRemovePhoto, SIGNAL( clicked() ), this, SLOT( removePhoto() ) );
+  connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeUserColor() ) );
+}
+
+void GuiEditVCard::setUserColor( const QString& new_value )
+{
+  m_userColor = new_value;
+  QPalette palette = mp_leNickname->palette();
+  palette.setColor( QPalette::Text, QColor( m_userColor ) );
+  mp_leNickname->setPalette( palette );
+  palette.setColor( QPalette::Foreground, QColor( m_userColor ) );
+  mp_lNickname->setPalette( palette );
 }
 
 void GuiEditVCard::setVCard( const VCard& vc )
@@ -88,6 +99,13 @@ void GuiEditVCard::removePhoto()
 {
   mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png" ).pixmap( 96, 96 ) );
   m_vCard.setPhoto( QPixmap() );
+}
+
+void GuiEditVCard::changeUserColor()
+{
+  QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
+  if( c.isValid() )
+    setUserColor( c.name() );
 }
 
 bool GuiEditVCard::checkLineEdit( QLineEdit* ple, const QString& msg )

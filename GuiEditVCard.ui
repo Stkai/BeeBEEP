@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>389</width>
-    <height>194</height>
+    <width>383</width>
+    <height>191</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -280,8 +280,8 @@
       <widget class="QPushButton" name="mp_pbChangePhoto">
        <property name="maximumSize">
         <size>
-         <width>34</width>
-         <height>34</height>
+         <width>26</width>
+         <height>26</height>
         </size>
        </property>
        <property name="toolTip">
@@ -293,8 +293,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>32</width>
-         <height>32</height>
+         <width>24</width>
+         <height>24</height>
         </size>
        </property>
        <property name="flat">
@@ -306,8 +306,8 @@
       <widget class="QPushButton" name="mp_pbRemovePhoto">
        <property name="maximumSize">
         <size>
-         <width>34</width>
-         <height>34</height>
+         <width>26</width>
+         <height>26</height>
         </size>
        </property>
        <property name="toolTip">
@@ -322,8 +322,34 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>32</width>
-         <height>32</height>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mp_pbColor">
+       <property name="maximumSize">
+        <size>
+         <width>26</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Change your nickname color</string>
+       </property>
+       <property name="icon">
+        <iconset resource="beebeep.qrc">
+         <normaloff>:/images/font-color.png</normaloff>:/images/font-color.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
         </size>
        </property>
        <property name="flat">
@@ -383,6 +409,7 @@
   <tabstop>mp_leEmail</tabstop>
   <tabstop>mp_pbChangePhoto</tabstop>
   <tabstop>mp_pbRemovePhoto</tabstop>
+  <tabstop>mp_pbColor</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>
