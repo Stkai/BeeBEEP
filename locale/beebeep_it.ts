@@ -500,12 +500,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../GuiMain.cpp" line="237"/>
         <source>Download folder...</source>
-        <translation>Cartella files scaricati...</translation>
+        <translation>Cartella file scaricati...</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="238"/>
         <source>Select the download folder</source>
-        <translation>Seleziona una cartella dove salvare i files scaricati</translation>
+        <translation>Seleziona una cartella dove salvare i file scaricati</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="243"/>
@@ -660,17 +660,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../GuiMain.cpp" line="370"/>
         <source>File Transfers</source>
-        <translation>Trasferimento files</translation>
+        <translation>Trasferimento file</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="377"/>
         <source>Show the file transfers</source>
-        <translation>Mostra i trasferimenti dei files</translation>
+        <translation>Mostra i trasferimenti dei file</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="378"/>
         <source>Show the list of the file transfers</source>
-        <translation>Mostra la lista dei trasferimenti dei files</translation>
+        <translation>Mostra la lista dei trasferimenti dei file</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="456"/>
@@ -774,7 +774,7 @@ il file %2 (%3)?</translation>
     <message>
         <location filename="../GuiMain.cpp" line="732"/>
         <source>%1 - Select the download folder</source>
-        <translation>%1 - Seleziona la cartella dove salvare i files scaricati</translation>
+        <translation>%1 - Seleziona la cartella dove salvare i file scaricati</translation>
     </message>
     <message>
         <location filename="../GuiMain.cpp" line="766"/>
@@ -871,24 +871,20 @@ il file %2 (%3)?</translation>
 <context>
     <name>GuiUserList</name>
     <message>
-        <location filename="../GuiUserList.cpp" line="58"/>
         <source>* All *</source>
-        <translation>* Tutti *</translation>
+        <translation type="obsolete">* Tutti *</translation>
     </message>
     <message>
-        <location filename="../GuiUserList.cpp" line="88"/>
         <source>Open chat with all users</source>
-        <translation>Parla con tutti gli utenti</translation>
+        <translation type="obsolete">Parla con tutti gli utenti</translation>
     </message>
     <message>
-        <location filename="../GuiUserList.cpp" line="93"/>
         <source>Open chat with %1</source>
-        <translation>Parla con %1</translation>
+        <translation type="obsolete">Parla con %1</translation>
     </message>
     <message>
-        <location filename="../GuiUserList.cpp" line="94"/>
         <source>%1 is %2</source>
-        <translation>%1 è %2</translation>
+        <translation type="obsolete">%1 è %2</translation>
     </message>
     <message>
         <source>Chat with all connected users</source>
@@ -1056,6 +1052,29 @@ il file %2 (%3)?</translation>
         <location filename="../GuiVCard.ui" line="78"/>
         <source>Color</source>
         <translation>Colore</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../GuiUserItem.cpp" line="67"/>
+        <source>* All *</source>
+        <translation>* Tutti *</translation>
+    </message>
+    <message>
+        <location filename="../GuiUserItem.cpp" line="97"/>
+        <source>Open chat with all users</source>
+        <translation>Parla con tutti gli utenti</translation>
+    </message>
+    <message>
+        <location filename="../GuiUserItem.cpp" line="102"/>
+        <source>Open chat with %1</source>
+        <translation>Parla con %1</translation>
+    </message>
+    <message>
+        <location filename="../GuiUserItem.cpp" line="103"/>
+        <source>%1 is %2</source>
+        <translation>Lo stato di %1 è %2</translation>
     </message>
 </context>
 <context>

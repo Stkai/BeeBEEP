@@ -21,41 +21,24 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIUSERLIST_H
-#define BEEBEEP_GUIUSERLIST_H
+#ifndef BEEBEEP_PLUGININTERFACE_H
+#define BEEBEEP_PLUGININTERFACE_H
 
-#include "GuiUserItem.h"
+#include <QtPlugin>
 
-class GuiUserList : public QTreeWidget
+
+class PluginInterface
 {
-  Q_OBJECT
-
 public:
-  GuiUserList( QWidget* parent = 0 );
+  virtual ~PluginInterface() {}
 
-  virtual QSize sizeHint() const;
-
-  void setUser( const User&, VNumber private_chat_id, int unread_messages );
-  void removeUser( const User& );
-  void setUnreadMessages( VNumber private_chat_id, int );
-  void updateUsers();
-  bool nextUserWithUnreadMessages();
-
-signals:
-  void chatSelected( VNumber chat_id );
-  void menuToShow( VNumber user_id );
-
-protected slots:
-  void userDoubleClicked( QTreeWidgetItem*, int );
-  void showUserMenu( const QPoint& );
-
-private:
-  GuiUserItem* itemFromUserId( VNumber );
-  GuiUserItem* itemFromChatId( VNumber );
-
-  QColor m_defaultForegroundColor;
+  virtual QAction* menuAction() const = 0;
 
 };
 
 
-#endif // BEEBEEP_GUIUSERLIST_H
+
+Q_DECLARE_INTERFACE( PluginInterface, "BeeBeep.PluginInterface/1.0" )
+
+
+#endif // BEEBEEP_PLUGININTERFACE_H
