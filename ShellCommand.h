@@ -21,36 +21,46 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_SHELL_H
-#define BEEBEEP_SHELL_H
+#ifndef BEEBEEP_SHELLCOMMAND_H
+#define BEEBEEP_SHELLCOMMAND_H
 
 #include "Config.h"
-#include "ShellCommand.h"
 
 
-class Shell : public QObject
+class ShellCommand : public QObject
 {
   Q_OBJECT
 
 public:
-  explicit Shell( QObject* );
+  ShellCommand( const QString&, QObject* parent );
+  virtual ~ShellCommand();
 
-  bool parseCommand( const QString& );
+  inline const QString& command() const;
+  inline const QStringList& arguments() const;
+  inline void setArguments( const QStringList& );
+
+public slots:
+  virtual void start();
 
 signals:
   void message( const QString& );
 
 protected:
-  void loadCommands();
-  void clearCommands();
+  virtual bool checkArguments();
+  virtual void execute() = 0;
+  virtual void print( const QString& );
+  virtual void usage() = 0;
 
 private:
-  void addCommand( ShellCommand* );
-
-private:
-  QMap<QString, ShellCommand*> m_commands;
+  QString m_cmd;
+  QStringList m_args;
 
 };
 
 
-#endif // BEEBEEP_SHELL_H
+// Inline Functions
+inline const QString& ShellCommand::command() const { return m_cmd; }
+inline const QStringList& ShellCommand::arguments() const { return m_args; }
+inline void ShellCommand::setArguments( const QStringList& new_value ) { m_args = new_value; }
+
+#endif // BEEBEEP_SHELLCOMMAND_H

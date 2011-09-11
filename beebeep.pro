@@ -43,7 +43,8 @@ SOURCES += Listener.cpp \
     GuiVCard.cpp \
     GuiEditVCard.cpp \
     GuiUserItem.cpp \
-    Shell.cpp
+    Shell.cpp \
+    ShellCommand.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -82,7 +83,8 @@ HEADERS += sym_iap_util.h \
     GuiEditVCard.h \
     GuiUserItem.h \
     PluginInterface.h \
-    Shell.h
+    Shell.h \
+    ShellCommand.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui

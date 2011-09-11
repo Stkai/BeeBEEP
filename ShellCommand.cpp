@@ -21,28 +21,35 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "Shell.h"
+#include "ShellCommand.h"
 
 
-Shell::Shell( QObject* parent )
-  : QObject( parent )
+ShellCommand::ShellCommand( const QString& cmd, QObject* parent )
+  : QObject( parent ), m_cmd( cmd )
 {
-
+  qDebug() << "Shell command" << m_cmd << "created";
 }
 
-void Shell::loadCommands()
+ShellCommand::~ShellCommand()
 {
-
+  qDebug() << "Shell command" << m_cmd << "deleted";
 }
 
-void Shell::clearCommands()
+bool ShellCommand::checkArguments()
 {
-
+  return true;
 }
 
-bool Shell::parseCommand( const QString& cmd_to_parse )
+void ShellCommand::start()
 {
-  return false;
+  if( !checkArguments() )
+    usage();
+  else
+    execute();
 }
 
+void ShellCommand::print( const QString& msg )
+{
+  emit message( msg );
+}
 
