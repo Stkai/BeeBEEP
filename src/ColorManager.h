@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: ColorManager.h 48 2011-08-17 17:08:33Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

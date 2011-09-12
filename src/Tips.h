@@ -1,0 +1,65 @@
+//////////////////////////////////////////////////////////////////////
+//
+// This file is part of BeeBEEP.
+//
+// BeeBEEP is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License,
+// or (at your option) any later version.
+//
+// BeeBEEP is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+//
+// $Id$
+//
+//////////////////////////////////////////////////////////////////////
+
+#ifndef BEEBEEP_TIPS_H
+#define BEEBEEP_TIPS_H
+
+const int BeeBeepTipsSize = 25;
+
+static const char* BeeBeepTips[ BeeBeepTipsSize ] =
+{
+  QT_TRANSLATE_NOOP( "Tips", "You can switch between chats with CTRL+TAB if there are new messages availables." ),
+  QT_TRANSLATE_NOOP( "Tips", "If you want a <b>bold text</b> write a *bold text*." ),
+  QT_TRANSLATE_NOOP( "Tips", "If you want an <i>italic text</i> write a /italic text/." ),
+  QT_TRANSLATE_NOOP( "Tips", "If you want an <u>underlined text</u> write a _underlined text_." ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Free is that mind guided by the fantasy.</i> (Marco Mastroddi)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Stay hungry, stay foolish.</i> (Steve Jobs)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>There is always one more bug.</i> (Lubarsky's Law)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>If anything can go wrong, it will.</i> (Murphy's Law)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>If a program is useful, it will have to be changed.</i> (Law of Computer Programming)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Intellectuals solve problems; geniuses prevent them.</i> (Albert Einstein)" ),
+  /* 10 */
+  QT_TRANSLATE_NOOP( "Tips", "<i>What does not destroy me, makes me strong.</i> (Friedrich Nietzsche)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>I am not young enough to know everything.</i> (Oscar Wilde)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>A lack of doubt leads to a lack of creativity.</i> (Evert Jan Ouweneel)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Fear is the path to the dark side.</i> (Joda)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>I dream my painting and then paint my dream.</i> (Vincent Van Gogh)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Everything you can imagine is real.</i> (Pablo Picasso)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>All truths are easy to understand once they are discovered; the point is to discover them.</i> (Galileo Galilei)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Truth prevails where opinions are free.</i> (Thomas Paine)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>I've seen things you people wouldn't believe...</i> (Batty)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>A man`s character is his fate.</i> (Eraclitus)" ),
+  /* 20 */
+  QT_TRANSLATE_NOOP( "Tips", "<i>A different language is a different vision of life.</i> (Federico Fellini)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero</i> (Orazio)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Every day in Africa a gazelle wakes up. "
+    "It knows it must run faster than the fastest lion or it will be killed. "
+    "Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. "
+    "It doesn't matter whether you are a lion or a gazelle. "
+    "When the sun comes up, you better be running.</i> (Abe Gubegna)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Okay, Houston, we've had a problem here.</i> (John L. Swigert)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Second star to the right, and straight on till morning.</i> (Peter Pan)" )
+  /* 25 */
+};
+
+#endif // BEEBEEP_TIPS_H

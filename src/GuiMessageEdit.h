@@ -17,50 +17,42 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: ShellCommand.h 89 2011-09-11 19:23:38Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_SHELLCOMMAND_H
-#define BEEBEEP_SHELLCOMMAND_H
+#ifndef BEEBEEP_GUIMESSAGEEDIT_H
+#define BEEBEEP_GUIMESSAGEEDIT_H
 
 #include "Config.h"
 
 
-class ShellCommand : public QObject
+class GuiMessageEdit : public QTextEdit
 {
   Q_OBJECT
 
 public:
-  ShellCommand( const QString&, QObject* parent );
-  virtual ~ShellCommand();
-
-  inline const QString& command() const;
-  inline const QStringList& arguments() const;
-  inline void setArguments( const QStringList& );
-
-public slots:
-  virtual void start();
+  GuiMessageEdit( QWidget* parent );
 
 signals:
-  void message( const QString& );
+  void returnPressed();
+  void writing();
+  void tabPressed();
 
 protected:
-  virtual bool checkArguments();
-  virtual void execute() = 0;
-  virtual void print( const QString& );
-  virtual void usage() = 0;
+  void keyPressEvent( QKeyEvent* );
+  void contextMenuEvent( QContextMenuEvent* );
+
+private slots:
+  void checkWriting();
+  void setUndoAvailable( bool );
+  void setRedoAvailable( bool );
 
 private:
-  QString m_cmd;
-  QStringList m_args;
+  QTimer* mp_timer;
+  bool m_undoAvailable;
+  bool m_redoAvailable;
 
 };
 
-
-// Inline Functions
-inline const QString& ShellCommand::command() const { return m_cmd; }
-inline const QStringList& ShellCommand::arguments() const { return m_args; }
-inline void ShellCommand::setArguments( const QStringList& new_value ) { m_args = new_value; }
-
-#endif // BEEBEEP_SHELLCOMMAND_H
+#endif // BEEBEEP_GUIMESSAGEEDIT_H

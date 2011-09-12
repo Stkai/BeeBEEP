@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: Broadcaster.h 74 2011-08-30 15:17:34Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

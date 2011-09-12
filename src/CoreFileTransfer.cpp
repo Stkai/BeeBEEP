@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: CoreFileTransfer.cpp 84 2011-09-05 16:41:32Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

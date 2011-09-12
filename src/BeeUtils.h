@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: BeeUtils.h 79 2011-09-02 16:23:28Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

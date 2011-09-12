@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: CoreDispatcher.cpp 59 2011-08-20 20:37:16Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

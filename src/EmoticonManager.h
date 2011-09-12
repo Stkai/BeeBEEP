@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: EmoticonManager.h 2 2010-08-09 13:40:24Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

@@ -17,39 +17,32 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: ShellCommand.cpp 89 2011-09-11 19:23:38Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ShellCommand.h"
+#include "Shell.h"
 
 
-ShellCommand::ShellCommand( const QString& cmd, QObject* parent )
-  : QObject( parent ), m_cmd( cmd )
+Shell::Shell( QObject* parent )
+  : QObject( parent )
 {
-  qDebug() << "Shell command" << m_cmd << "created";
+
 }
 
-ShellCommand::~ShellCommand()
+void Shell::loadCommands()
 {
-  qDebug() << "Shell command" << m_cmd << "deleted";
+
 }
 
-bool ShellCommand::checkArguments()
+void Shell::clearCommands()
 {
-  return true;
+
 }
 
-void ShellCommand::start()
+bool Shell::parseCommand( const QString& cmd_to_parse )
 {
-  if( !checkArguments() )
-    usage();
-  else
-    execute();
+  return false;
 }
 
-void ShellCommand::print( const QString& msg )
-{
-  emit message( msg );
-}
 

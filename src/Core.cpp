@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: Core.cpp 80 2011-09-03 01:45:25Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

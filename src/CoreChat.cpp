@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: CoreChat.cpp 73 2011-08-29 18:05:36Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

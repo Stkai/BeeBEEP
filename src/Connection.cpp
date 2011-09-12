@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: Connection.cpp 76 2011-08-31 16:01:15Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

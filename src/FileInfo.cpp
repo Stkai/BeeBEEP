@@ -17,40 +17,36 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: Shell.h 89 2011-09-11 19:23:38Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_SHELL_H
-#define BEEBEEP_SHELL_H
-
-#include "Config.h"
-#include "ShellCommand.h"
+#include "FileInfo.h"
 
 
-class Shell : public QObject
+FileInfo::FileInfo()
+  : m_transferType( FileInfo::Upload ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( ID_INVALID )
 {
-  Q_OBJECT
+}
 
-public:
-  explicit Shell( QObject* );
+FileInfo::FileInfo( VNumber id, FileInfo::TransferType tt )
+  : m_transferType( tt ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( id )
+{
+}
 
-  bool parseCommand( const QString& );
+FileInfo& FileInfo::operator=( const FileInfo& fi )
+{
+  if( this != &fi )
+  {
+    m_transferType = fi.m_transferType;
+    m_name = fi.m_name;
+    m_path = fi.m_path;
+    m_size = fi.m_size;
+    m_hostAddress = fi.m_hostAddress;
+    m_hostPort = fi.m_hostPort;
+    m_password = fi.m_password;
+    m_id =  fi.m_id;
+  }
+  return *this;
+}
 
-signals:
-  void message( const QString& );
-
-protected:
-  void loadCommands();
-  void clearCommands();
-
-private:
-  void addCommand( ShellCommand* );
-
-private:
-  QMap<QString, ShellCommand*> m_commands;
-
-};
-
-
-#endif // BEEBEEP_SHELL_H

@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: ColorManager.cpp 87 2011-09-08 17:35:53Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
