@@ -5,7 +5,6 @@ QT += network
 TARGET = beebeep
 TEMPLATE = app
 TRANSLATIONS = locale/beebeep_it.ts
-SUBDIRS = shell
 SOURCES += Listener.cpp \
 	FileTransferPeer.cpp \
     Connection.cpp \
