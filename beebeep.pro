@@ -5,6 +5,7 @@ QT += network
 TARGET = beebeep
 TEMPLATE = app
 TRANSLATIONS = locale/beebeep_it.ts
+SUBDIRS = shell
 SOURCES += Listener.cpp \
 	FileTransferPeer.cpp \
     Connection.cpp \
@@ -42,9 +43,7 @@ SOURCES += Listener.cpp \
     VCard.cpp \
     GuiVCard.cpp \
     GuiEditVCard.cpp \
-    GuiUserItem.cpp \
-    Shell.cpp \
-    ShellCommand.cpp
+    GuiUserItem.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -82,9 +81,7 @@ HEADERS += sym_iap_util.h \
     GuiVCard.h \
     GuiEditVCard.h \
     GuiUserItem.h \
-    PluginInterface.h \
-    Shell.h \
-    ShellCommand.h
+    PluginInterface.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui
