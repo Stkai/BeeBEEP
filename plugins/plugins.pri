@@ -1,0 +1,3 @@
+
+INCLUDEPATH += ../../src
+ 

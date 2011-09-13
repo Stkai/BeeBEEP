@@ -25,6 +25,7 @@
 #include "Core.h"
 #include "EmoticonManager.h"
 #include "BeeUtils.h"
+#include "PluginManager.h"
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
@@ -123,7 +124,11 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   if( msg.isEmpty() )
     return 0;
 
-  Message m = Protocol::instance().chatMessage( msg );
+  QString parsed_msg = msg;
+  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
+    parsed_msg = text_marker->parseText( parsed_msg );
+
+  Message m = Protocol::instance().chatMessage( parsed_msg );
   m.setData( Settings::instance().chatFontColor() );
 
   int messages_sent = 0;
