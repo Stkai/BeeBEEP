@@ -21,38 +21,25 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_CONFIG_H
-#define BEEBEEP_CONFIG_H
+#ifndef BEEBEEP_INTERFACES_H
+#define BEEBEEP_INTERFACES_H
 
-#include <QtCore>
-#include <QtGui>
-#include <QtNetwork>
+#include <QtPlugin>
 
-// Type definition
-typedef quint64 VNumber;
-typedef quint64 FileSizeType;
 
-// General
-#define DATASTREAM_VERSION QDataStream::Qt_4_0
+class TextMarkerInterface
+{
+public:
+  virtual ~TextMarkerInterface() {}
 
-// Connection I/O
-#define DATA_BLOCK_SIZE quint16
-#define ENCRYPTED_DATA_BLOCK_SIZE 16
-#define ENCRYPTION_KEYBITS 256
-#define MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT 20
+  virtual QString name() const = 0;
 
-// Protocol
-#define ID_INVALID         0
-#define ID_LOCAL_USER      1
-#define ID_DEFAULT_CHAT    2
-#define ID_START           1000
-#define ID_SYSTEM_MESSAGE  10
-#define ID_BEEP_MESSAGE    11
-#define ID_WRITING_MESSAGE 12
-#define ID_PING_MESSAGE    13
-#define ID_PONG_MESSAGE    14
-#define ID_HELLO_MESSAGE   15
-#define ID_USER_MESSAGE    16
-#define ID_VCARD_MESSAGE   17
+  virtual QString parseText( const QString& ) const = 0;
 
-#endif // BEEBEEP_CONFIG_H
+};
+
+
+Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/1.0" )
+
+
+#endif // BEEBEEP_INTERFACES_H

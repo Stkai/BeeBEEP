@@ -17,30 +17,34 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: ShellCommand.h 94 2011-09-12 13:11:56Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
 #ifndef BEEBEEP_SHELLCOMMAND_H
 #define BEEBEEP_SHELLCOMMAND_H
 
-#include "Config.h"
+#include <QObject>
+#include <QStringList>
+#include "shellcommand_global.h"
 
 
-class ShellCommand : public QObject
+class SHELL_COMMAND_SHARED_EXPORT ShellCommand : public QObject
 {
   Q_OBJECT
 
 public:
-  ShellCommand( const QString&, QObject* parent );
+  ShellCommand( const QString& );
   virtual ~ShellCommand();
 
   inline const QString& command() const;
   inline const QStringList& arguments() const;
   inline void setArguments( const QStringList& );
 
+  inline bool isBusy() const;
+
 public slots:
-  virtual void start();
+  void start();
 
 signals:
   void message( const QString& );
@@ -49,11 +53,13 @@ protected:
   virtual bool checkArguments();
   virtual void execute() = 0;
   virtual void print( const QString& );
-  virtual void usage() = 0;
+  virtual void usage();
 
-private:
+protected:
   QString m_cmd;
   QStringList m_args;
+  QString m_usage;
+  bool m_busy;
 
 };
 
@@ -62,5 +68,6 @@ private:
 inline const QString& ShellCommand::command() const { return m_cmd; }
 inline const QStringList& ShellCommand::arguments() const { return m_args; }
 inline void ShellCommand::setArguments( const QStringList& new_value ) { m_args = new_value; }
+inline bool ShellCommand::isBusy() const { return m_busy; }
 
 #endif // BEEBEEP_SHELLCOMMAND_H

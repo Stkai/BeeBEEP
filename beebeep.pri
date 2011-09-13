@@ -1,8 +1,3 @@
-# Common definitions
-
-QT += network
-
-BEEBEEP_INCLUDE_DIR = $$PWD/src
 
 Debug {
   DEFINES += BEEBEEP_DEBUG

@@ -40,7 +40,8 @@ SOURCES += Listener.cpp \
     VCard.cpp \
     GuiVCard.cpp \
     GuiEditVCard.cpp \
-    GuiUserItem.cpp
+    GuiUserItem.cpp \
+    PluginManager.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -77,10 +78,11 @@ HEADERS += sym_iap_util.h \
     VCard.h \
     GuiVCard.h \
     GuiEditVCard.h \
-    GuiUserItem.h 
+    GuiUserItem.h \  
+    Interfaces.h \
+    PluginManager.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
-

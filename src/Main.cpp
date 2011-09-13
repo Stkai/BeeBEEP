@@ -32,6 +32,7 @@
 #if defined( LOGFILE_ENABLED )
 #include "Log.h"
 #endif
+#include "PluginManager.h"
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
@@ -76,6 +77,9 @@ int main( int argc, char *argv[] )
 
   /* Init Color Manager */
   (void)ColorManager::instance();
+
+  /* Init Plugins */
+  PluginManager::instance().loadPlugins();
 
   /* test encryption */
   //make_test();

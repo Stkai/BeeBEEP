@@ -21,36 +21,50 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_SHELL_H
-#define BEEBEEP_SHELL_H
+#ifndef BEEBEEP_PLUGINMANAGER_H
+#define BEEBEEP_PLUGINMANAGER_H
 
-#include "Config.h"
-#include "ShellCommand.h"
+#include "Interfaces.h"
 
 
-class Shell : public QObject
+class PluginManager
 {
-  Q_OBJECT
+// Singleton Object
+  static PluginManager* mp_instance;
 
 public:
-  explicit Shell( QObject* );
+  inline const QList<TextMarkerInterface*>& textMarkers() const;
 
-  bool parseCommand( const QString& );
+  void loadPlugins();
 
-signals:
-  void message( const QString& );
+  static PluginManager& instance()
+  {
+    if( !mp_instance )
+      mp_instance = new PluginManager();
+    return *mp_instance;
+  }
+
+  static void close()
+  {
+    if( mp_instance )
+    {
+      delete mp_instance;
+      mp_instance = NULL;
+    }
+  }
 
 protected:
-  void loadCommands();
-  void clearCommands();
+  PluginManager();
+
+  void addPlugin( const QString& );
 
 private:
-  void addCommand( ShellCommand* );
-
-private:
-  QMap<QString, ShellCommand*> m_commands;
+  QList<TextMarkerInterface*> m_textMarkers;
 
 };
 
 
-#endif // BEEBEEP_SHELL_H
+// Inline Functions
+inline const QList<TextMarkerInterface*>& PluginManager::textMarkers() const { return m_textMarkers; }
+
+#endif // BEEBEEP_PLUGINMANAGER_H

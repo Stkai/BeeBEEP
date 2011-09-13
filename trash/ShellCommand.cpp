@@ -17,15 +17,16 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: ShellCommand.cpp 94 2011-09-12 13:11:56Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
+#include <QtDebug>
 #include "ShellCommand.h"
 
 
-ShellCommand::ShellCommand( const QString& cmd, QObject* parent )
-  : QObject( parent ), m_cmd( cmd )
+ShellCommand::ShellCommand( const QString& cmd )
+  : QObject(), m_cmd( cmd ), m_args(), m_usage( "" ), m_busy( false )
 {
   qDebug() << "Shell command" << m_cmd << "created";
 }
@@ -42,10 +43,12 @@ bool ShellCommand::checkArguments()
 
 void ShellCommand::start()
 {
+  m_busy = true;
   if( !checkArguments() )
     usage();
   else
     execute();
+  m_busy = false;
 }
 
 void ShellCommand::print( const QString& msg )
@@ -53,3 +56,7 @@ void ShellCommand::print( const QString& msg )
   emit message( msg );
 }
 
+void ShellCommand::usage()
+{
+  print( tr( "Usage: %1" ).arg( m_usage ) );
+}

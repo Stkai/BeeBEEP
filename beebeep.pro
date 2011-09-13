@@ -2,6 +2,7 @@ include(beebeep.pri)
 
 TEMPLATE = subdirs
 
-SUBDIRS = src
+SUBDIRS = src\
+		plugins
 		  
 CONFIG += ordered

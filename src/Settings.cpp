@@ -139,6 +139,7 @@ void Settings::load()
   m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_downloadDirectory = sets.value( "DownloadDirectory",QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_logPath = sets.value( "LogPath", "." ).toString();
+  m_pluginPath = sets.value( "PluginPath", "." ).toString();
   sets.endGroup();
 
   sets.beginGroup( "Tools" );
@@ -156,7 +157,7 @@ void Settings::load()
   m_broadcastInterval = qMax( sets.value( "BroadcastInterval", 35000 ).toInt(), 1000 );
   m_localUser.setHostPort( sets.value( "ListenerPort", 6475 ).toInt() );
   m_pingInterval = qMax( sets.value( "PingInterval", 31000 ).toInt(), 1000 );
-  m_pongTimeout = qMax( sets.value( "PongTimeout", 93000 ).toInt(), 1000 );
+  m_pongTimeout = qMax( sets.value( "PongTimeout", 98000 ).toInt(), 1000 );
   m_writingTimeout = qMax( sets.value( "WritingTimeout", 3000 ).toInt(), 1000 );
   m_fileTransferConfirmTimeout = qMax( sets.value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
   m_fileTransferBufferSize = qMax( sets.value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
@@ -213,6 +214,7 @@ void Settings::save()
   sets.setValue( "LastDirectorySelected", m_lastDirectorySelected );
   sets.setValue( "DownloadDirectory", m_downloadDirectory );
   sets.setValue( "LogPath", m_logPath );
+  sets.setValue( "PluginPath", m_pluginPath );
   sets.endGroup();
   sets.beginGroup( "Tools" );
   sets.setValue( "DebugMode", m_debugMode );

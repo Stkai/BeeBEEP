@@ -17,32 +17,41 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: Shell.h 94 2011-09-12 13:11:56Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "Shell.h"
+#ifndef BEEBEEP_SHELL_H
+#define BEEBEEP_SHELL_H
+
+#include "Config.h"
+#include "ShellCommand.h"
 
 
-Shell::Shell( QObject* parent )
-  : QObject( parent )
+class Shell : public QObject
 {
+  Q_OBJECT
 
-}
+public:
+  explicit Shell( QObject* );
 
-void Shell::loadCommands()
-{
+  static QString defaultCommandPrefix();
 
-}
+  bool parseCommand( const QString& );
 
-void Shell::clearCommands()
-{
+signals:
+  void message( const QString& );
 
-}
+protected:
+  void loadCommands();
 
-bool Shell::parseCommand( const QString& cmd_to_parse )
-{
-  return false;
-}
+private:
+  void addCommand( const QString& );
+
+private:
+  QMap<QString, ShellCommand*> m_commands;
+
+};
 
 
+#endif // BEEBEEP_SHELL_H
