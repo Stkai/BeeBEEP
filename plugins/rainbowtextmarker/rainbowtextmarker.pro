@@ -1,7 +1,5 @@
 include(../plugins.pri)
 
-QT       -= gui
-
 TARGET = rainbowtextmarker
 TEMPLATE = lib
 
@@ -30,3 +28,8 @@ unix:!symbian {
     }
     INSTALLS += target
 }
+
+OTHER_FILES +=
+
+RESOURCES += \
+    rainbowtextmarker.qrc

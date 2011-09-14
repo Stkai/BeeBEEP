@@ -31,6 +31,7 @@
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "GuiVCard.h"
+#include "PluginManager.h"
 #include "Settings.h"
 
 
@@ -328,12 +329,16 @@ void GuiMain::createMenus()
   act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
 
+  /* Plugins Menu */
+  createPluginsMenu();
+
 }
 
 void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
   menuBar()->addMenu( mp_menuSettings );
+  menuBar()->addMenu( mp_menuPlugins );
   menuBar()->addMenu( mp_menuInfo );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
@@ -811,4 +816,23 @@ void GuiMain::showUserMenu( VNumber user_id )
     gvc->move( QCursor::pos() );
   gvc->show();
   gvc->setFixedSize( gvc->size() );
+}
+
+void GuiMain::createPluginsMenu()
+{
+  QAction* act;
+  mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
+  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
+  {
+    act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showTextMarkerPluginHelp() ) );
+    act->setData( tr( "<p>Plugin <b>%1</b> developed by <b>%2</b>.<br /><i>%3</i></p><br />" ).arg( text_marker->name(), text_marker->author(), text_marker->help() ) );
+    act->setIcon( text_marker->icon() );
+  }
+}
+
+void GuiMain::showTextMarkerPluginHelp()
+{
+  QAction* act = qobject_cast<QAction*>(sender());
+  if( act )
+    mp_defaultChat->appendMessage( mp_defaultChat->chatId(), act->data().toString() );
 }

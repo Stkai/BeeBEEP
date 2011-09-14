@@ -212,7 +212,6 @@ QString Linkify( QString text )
 
 bool IsHtmlTag( const QString& text )
 {
-  qDebug() << "Parsing html tags in" << text;
   if( text.contains( "<font ") || text.contains( "</font" ) )
     return true;
   else if( text.contains( "<a href=") || text.contains( "</a" ) )

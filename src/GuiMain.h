@@ -70,6 +70,7 @@ private slots:
   void showUserMenu( VNumber );
   void changeUserColor( VNumber );
   void sendFile( VNumber );
+  void showTextMarkerPluginHelp();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -87,6 +88,7 @@ private:
   void startCore();
   void stopCore();
   void initGuiItems();
+  void createPluginsMenu();
 
 private:
   GuiChat* mp_defaultChat;
@@ -99,6 +101,7 @@ private:
   QMenu *mp_menuSettings;
   QMenu *mp_menuEmoticons;
   QMenu *mp_menuStatus;
+  QMenu *mp_menuPlugins;
 
   QToolBar *mp_barMain;
 

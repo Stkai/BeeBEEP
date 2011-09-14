@@ -25,6 +25,7 @@
 #define BEEBEEP_INTERFACES_H
 
 #include <QtPlugin>
+#include <QIcon>
 
 
 class TextMarkerInterface
@@ -36,6 +37,7 @@ public:
   virtual QString version() const = 0;
   virtual QString help() const = 0;
   virtual QString author() const = 0;
+  virtual QIcon icon() const = 0;
   virtual QString parseText( QString ) = 0;
 
 };

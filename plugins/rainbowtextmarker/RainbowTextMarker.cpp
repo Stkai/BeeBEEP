@@ -50,6 +50,11 @@ QString RainbowTextMarker::help() const
   return tr( "If you want a <font color=#FF0000>r</font><font color=#FF8000>a</font><font color=#FFff00>i</font><font color=#7Fff00>n</font><font color=#00ff00>b</font><font color=#00ff80>o</font><font color=#00ffff>w</font><font color=#0080ff> </font><font color=#0000ff>t</font><font color=#7F00ff>e</font><font color=#FF00ff>x</font><font color=#FF0080>t</font> write a ~rainbow text~ ." );
 }
 
+QIcon RainbowTextMarker::icon() const
+{
+  return QIcon( ":/plugins/rainbow.png" );
+}
+
 QString RainbowTextMarker::parseText( QString txt )
 {
   qDebug() << name() << "parsing text";
@@ -73,6 +78,8 @@ QString RainbowTextMarker::parseText( QString txt )
         if( i >= index && i < (index+open_cmd.size()) )
         {
           // skip open command
+          if( i == index )
+            parsed_text.append( " *" );
         }
         else if( i >= (index+open_cmd.size()) && i < last_index )
         {
@@ -85,6 +92,8 @@ QString RainbowTextMarker::parseText( QString txt )
         else if( i >= last_index && i < (last_index+close_cmd.size()) )
         {
           // skip close command
+          if( i == last_index )
+            parsed_text.append( "* " );
         }
         else
           parsed_text.append( txt.at( i ) );

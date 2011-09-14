@@ -42,6 +42,7 @@ public:
   QString version() const;
   QString help() const;
   QString author() const;
+  QIcon icon() const;
   QString parseText( QString );
 
 private:

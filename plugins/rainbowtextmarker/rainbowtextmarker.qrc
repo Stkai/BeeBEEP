@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins">
+        <file>rainbow.png</file>
+    </qresource>
+</RCC>
