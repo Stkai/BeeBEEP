@@ -24,6 +24,8 @@
 #ifndef BEEBEEP_RANDOM_H
 #define BEEBEEP_RANDOM_H
 
+#include <QDateTime>
+
 namespace Random
 {
   inline int __double2int( double d ) { int i = static_cast<int>(d); return d-i >= 0.5 ? ++i : i; } // never negative in random

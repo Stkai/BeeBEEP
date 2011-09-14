@@ -27,7 +27,7 @@
 #include "rainbowtextmarker_global.h"
 #include "Interfaces.h"
 #include <QObject>
-#include <QString>
+#include <QStringList>
 
 
 class RAINBOWTEXTMARKERSHARED_EXPORT RainbowTextMarker : public QObject, public TextMarkerInterface
@@ -36,8 +36,16 @@ class RAINBOWTEXTMARKERSHARED_EXPORT RainbowTextMarker : public QObject, public 
   Q_INTERFACES( TextMarkerInterface )
 
 public:
+  RainbowTextMarker();
+
   QString name() const;
-  QString parseText( const QString& ) const;
+  QString version() const;
+  QString help() const;
+  QString author() const;
+  QString parseText( QString );
+
+private:
+  QStringList m_colors;
 
 };
 

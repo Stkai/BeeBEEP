@@ -140,6 +140,7 @@ void Settings::load()
   m_downloadDirectory = sets.value( "DownloadDirectory",QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_logPath = sets.value( "LogPath", "." ).toString();
   m_pluginPath = sets.value( "PluginPath", "." ).toString();
+  m_localePath = sets.value( "LocalePath", "." ).toString();
   sets.endGroup();
 
   sets.beginGroup( "Tools" );
@@ -215,6 +216,7 @@ void Settings::save()
   sets.setValue( "DownloadDirectory", m_downloadDirectory );
   sets.setValue( "LogPath", m_logPath );
   sets.setValue( "PluginPath", m_pluginPath );
+  sets.setValue( "LocalePath", m_localePath );
   sets.endGroup();
   sets.beginGroup( "Tools" );
   sets.setValue( "DebugMode", m_debugMode );

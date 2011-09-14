@@ -50,10 +50,12 @@ public:
   inline int fileTransferConfirmTimeout() const;
   inline int fileTransferBufferSize() const;
 
-  inline QString logPath() const;
+  inline const QString& logPath() const;
   inline void setLogPath( const QString& );
-  inline QString pluginPath() const;
+  inline const QString& pluginPath() const;
   inline void setPluginPath( const QString& );
+  inline const QString& localePath() const;
+  inline void setLocalePath( const QString& );
 
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
@@ -139,6 +141,7 @@ private:
 
   QString m_logPath;
   QString m_pluginPath;
+  QString m_localePath;
 
   QString m_chatFontColor;
   QFont m_chatFont;
@@ -181,10 +184,12 @@ inline int Settings::pongTimeout() const { return m_pongTimeout; }
 inline int Settings::writingTimeout() const { return m_writingTimeout; }
 inline int Settings::fileTransferConfirmTimeout() const { return m_fileTransferConfirmTimeout; }
 inline int Settings::fileTransferBufferSize() const { return m_fileTransferBufferSize; }
-inline QString Settings::logPath() const { return m_logPath; }
+inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
-inline QString Settings::pluginPath() const { return m_pluginPath; }
+inline const QString& Settings::pluginPath() const { return m_pluginPath; }
 inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath = new_value; }
+inline const QString& Settings::localePath() const { return m_localePath; }
+inline void Settings::setLocalePath( const QString& new_value ) { m_localePath = new_value; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }

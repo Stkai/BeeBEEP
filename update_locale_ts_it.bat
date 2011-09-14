@@ -1,0 +1,1 @@
+lupdate -recursive -pro src/src.pro -pro beebeep.pro -ts locale/beebeep_it.ts

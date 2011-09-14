@@ -33,8 +33,10 @@ public:
   virtual ~TextMarkerInterface() {}
 
   virtual QString name() const = 0;
-
-  virtual QString parseText( const QString& ) const = 0;
+  virtual QString version() const = 0;
+  virtual QString help() const = 0;
+  virtual QString author() const = 0;
+  virtual QString parseText( QString ) = 0;
 
 };
 

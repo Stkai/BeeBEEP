@@ -1,4 +1,6 @@
 
+DESTDIR = $$PWD/test
+
 Debug {
   DEFINES += BEEBEEP_DEBUG
 }
