@@ -103,6 +103,8 @@ void Settings::load()
   m_chatShowMessageTimestamp = sets.value( "ShowMessageTimestamp", false ).toBool();
   m_chatSaveDirectory = sets.value( "SaveDirectory", "." ).toString();
   m_beepOnNewMessageArrived = sets.value( "BeepOnNewMessageArrived", true ).toBool();
+  m_chatUseHtmlTags = sets.value( "UseHtmlTags", false ).toBool();
+  m_chatUseClickableLinks = sets.value( "UseClickableLinks", true ).toBool();
   sets.endGroup();
 
   sets.beginGroup( "User" );
@@ -191,6 +193,8 @@ void Settings::save()
   sets.setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
   sets.setValue( "SaveDirectory", m_chatSaveDirectory );
   sets.setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
+  sets.setValue( "UseHtmlTags", m_chatUseHtmlTags );
+  sets.setValue( "UseClickableLinks", m_chatUseClickableLinks );
   sets.endGroup();
   sets.beginGroup( "User" );
   sets.setValue( "LocalColor", m_localUser.color() );

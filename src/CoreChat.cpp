@@ -124,11 +124,18 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   if( msg.isEmpty() )
     return 0;
 
-  QString parsed_msg = msg;
-  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
-    parsed_msg = text_marker->parseText( parsed_msg );
+  Message m;
 
-  Message m = Protocol::instance().chatMessage( parsed_msg );
+  if( !Settings::instance().chatUseHtmlTags() )
+  {
+    QString msg_no_tags = msg;
+    msg_no_tags.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
+    msg_no_tags.replace( "&lt;3", "<3" ); // hearth emoticon
+    m = Protocol::instance().chatMessage( msg_no_tags );
+  }
+  else
+    m = Protocol::instance().chatMessage( msg );
+
   m.setData( Settings::instance().chatFontColor() );
 
   int messages_sent = 0;
@@ -184,7 +191,7 @@ void Core::sendWritingMessage( VNumber chat_id )
     Connection* c = connection( user_id );
     if( c )
     {
-      qDebug() << "Sending Writing Message to" << c->peerAddress() << c->peerPort();
+      qDebug() << "Sending Writing Message to" << c->peerAddress().toString() << c->peerPort();
       c->sendData( Protocol::instance().writingMessage() );
     }
   }
@@ -207,23 +214,14 @@ QString Linkify( QString text )
   text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
   text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
   text.remove( 0, 1 ); // remove the space added
+  qDebug() << "Linkify:" << text;
   return text;
-}
-
-bool IsHtmlTag( const QString& text )
-{
-  if( text.contains( "<font ") || text.contains( "</font" ) )
-    return true;
-  else if( text.contains( "<a href=") || text.contains( "</a" ) )
-    return true;
-  else
-    return false;
 }
 
 QString FormatHtmlText( const QString& text )
 {
   QString text_formatted = "";
-  int last_bracket_index = -1;
+  int last_semicolon_index = -1;
 
   for( int i = 0; i < text.length(); i++ )
   {
@@ -238,32 +236,34 @@ QString FormatHtmlText( const QString& text )
       text_formatted += QLatin1String( "<br /> " ); // space added to match url after a \n
     else if( text.at( i ) == QLatin1Char( '<' ) )
     {
-      if( last_bracket_index >= 0 )
-        text_formatted.replace( last_bracket_index, 1, QLatin1String( "&lt;" ) );
-      last_bracket_index = text_formatted.size();
-      text_formatted += QLatin1Char( '<' );
+      if( Settings::instance().chatUseHtmlTags() )
+      {
+        if( last_semicolon_index >= 0 )
+          text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
+
+        // preserve heart emoticon
+        if( (i+1) < text.size() && text.at( i+1 ) != QLatin1Char( '3' ) )
+          last_semicolon_index = text_formatted.size();
+
+        text_formatted += QLatin1Char( '<' );
+      }
+      else
+        text_formatted += QLatin1String( "&lt;" );
     }
     else if( text.at( i ) == QLatin1Char( '>' ) )
     {
-      if( last_bracket_index >= 0 )
+      if( Settings::instance().chatUseHtmlTags() )
       {
-        QString tmp = text_formatted.mid( last_bracket_index );
-        if( !IsHtmlTag( tmp ) )
-        {
-          text_formatted.replace( last_bracket_index, 1, QLatin1String( "&lt;" ) );
-          text_formatted += QLatin1String( "&gt;" );
-        }
-        else
-          text_formatted += QLatin1Char( '>' );
-
-        last_bracket_index = -1;
+        text_formatted += QLatin1Char( '>' );
+        if( last_semicolon_index >= 0 )
+          last_semicolon_index = -1;
       }
       else
         text_formatted += QLatin1String( "&gt;" );
     }
     else if( text.at( i ) == QLatin1Char( '"' ) )
     {
-      if( last_bracket_index >= 0 )
+      if( last_semicolon_index >= 0 )
         text_formatted += QLatin1Char( '"' );
       else
         text_formatted += QLatin1String( "&quot;" );
@@ -276,16 +276,18 @@ QString FormatHtmlText( const QString& text )
       text_formatted += text.at( i );
   }
 
-  if( last_bracket_index >= 0 )
-    text_formatted.replace( last_bracket_index, 1, QLatin1String( "&lt;" ) );
+  if( last_semicolon_index >= 0 )
+    text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
+
+  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
+    text_formatted = text_marker->parseText( text_formatted );
 
   text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
 
-  text_formatted = Linkify( text_formatted );
-
-  qDebug() << "Linkify:" << text_formatted;
+  if( Settings::instance().chatUseClickableLinks() )
+    text_formatted = Linkify( text_formatted );
 
   return EmoticonManager::instance().parseEmoticons( text_formatted );
 }

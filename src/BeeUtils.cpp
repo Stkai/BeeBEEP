@@ -22,10 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
-#include "Chat.h"
-#include "EmoticonManager.h"
-#include "ChatMessage.h"
-#include "Settings.h"
+#include "User.h"
 
 
 QString Bee::userStatusIconFileName( int user_status )
@@ -34,13 +31,12 @@ QString Bee::userStatusIconFileName( int user_status )
   {
   case User::Offline:
     return QString( ":/images/user-offline.png" );
-  case User::Online:
-    return QString( ":/images/user-online.png" );
+  case User::Away:
+    return QString( ":/images/user-away.png" );
   case User::Busy:
     return QString( ":/images/user-busy.png" );
-  case User::Away:
   default:
-    return QString( ":/images/user-away.png" );
+    return QString( ":/images/user-online.png" );
   }
 }
 

@@ -67,6 +67,10 @@ public:
   inline void setChatAddNewLineToMessage( bool );
   inline bool chatShowMessageTimestamp() const;
   inline void setChatShowMessageTimestamp( bool );
+  inline void setChatUseHtmlTags( bool );
+  inline bool chatUseHtmlTags() const;
+  inline void setChatUseClickableLinks( bool );
+  inline bool chatUseClickableLinks() const;
   inline const QString& chatSaveDirectory() const;
   inline void setChatSaveDirectory( const QString& );
   inline bool showOnlyUsername() const;
@@ -148,6 +152,8 @@ private:
   bool m_chatCompact;
   bool m_chatAddNewLineToMessage;
   bool m_chatShowMessageTimestamp;
+  bool m_chatUseHtmlTags;
+  bool m_chatUseClickableLinks;
   QString m_chatSaveDirectory;
   bool m_showOnlyUsername;
   bool m_showUserColor;
@@ -201,6 +207,10 @@ inline bool Settings::chatAddNewLineToMessage() const { return m_chatAddNewLineT
 inline void Settings::setChatAddNewLineToMessage( bool new_value ) { m_chatAddNewLineToMessage = new_value; }
 inline bool Settings::chatShowMessageTimestamp() const { return m_chatShowMessageTimestamp; }
 inline void Settings::setChatShowMessageTimestamp( bool new_value ) { m_chatShowMessageTimestamp = new_value; }
+inline void Settings::setChatUseHtmlTags( bool new_value ) { m_chatUseHtmlTags = new_value; }
+inline bool Settings::chatUseHtmlTags() const { return m_chatUseHtmlTags; }
+inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClickableLinks = new_value; }
+inline bool Settings::chatUseClickableLinks() const { return m_chatUseClickableLinks; }
 inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDirectory; }
 inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
 inline bool Settings::showOnlyUsername() const { return m_showOnlyUsername; }

@@ -275,6 +275,18 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showUserColor() );
   act->setData( 5 );
 
+  act = mp_menuSettings->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled HTML tags are not removed from the message" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseHtmlTags() );
+  act->setData( 8 );
+
+  act = mp_menuSettings->addAction( tr( "Use clickable links" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the links in the message are recognized and made clickable" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseClickableLinks() );
+  act->setData( 9 );
+
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
@@ -506,6 +518,14 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
   case 7:
     Settings::instance().setAutomaticFileName( act->isChecked() );
+    break;
+  case 8:
+    Settings::instance().setChatUseHtmlTags( act->isChecked() );
+    refresh_chat = true;
+    break;
+  case 9:
+    Settings::instance().setChatUseClickableLinks( act->isChecked() );
+    refresh_chat = true;
     break;
   case 99:
     break;
@@ -825,7 +845,7 @@ void GuiMain::createPluginsMenu()
   foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
   {
     act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showTextMarkerPluginHelp() ) );
-    act->setData( tr( "<p>Plugin <b>%1</b> developed by <b>%2</b>.<br /><i>%3</i></p><br />" ).arg( text_marker->name(), text_marker->author(), text_marker->help() ) );
+    act->setData( tr( "<p><b>%1</b> is a plugin developed by <b>%2</b>.<br /><i>%3</i></p><br />" ).arg( text_marker->name(), text_marker->author(), text_marker->help() ) );
     act->setIcon( text_marker->icon() );
   }
 }

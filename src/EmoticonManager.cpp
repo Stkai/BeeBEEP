@@ -103,5 +103,11 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
   if( text_to_match.size() > 0 )
     s += text_to_match;
 
-  return s;
+  if( s.contains( QLatin1String( "&lt;3" ) ) )
+  {
+    s.replace( QLatin1String( "&lt;3" ), QLatin1String( "<3" ) ); // hearth emoticon
+    return parseEmoticons( s );
+  }
+  else
+    return s;
 }

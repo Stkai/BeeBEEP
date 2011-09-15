@@ -636,6 +636,34 @@ il file %2 (%3)?</translation>
         <source>e-mail: marco.mastroddi@gmail.com</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Use HTML tags</source>
+        <translation>Usa tag HTML</translation>
+    </message>
+    <message>
+        <source>If enabled HTML tags are not removed from the message</source>
+        <translation>Se abilitata i tag HTML non saranno rimossi dai messaggi</translation>
+    </message>
+    <message>
+        <source>Use clickable links</source>
+        <translation>Mostra i link cliccabili</translation>
+    </message>
+    <message>
+        <source>If enabled the links in the message are recognized and made clickable</source>
+        <translation>Se abilitata i link nei messaggi saranno riconosciuti e resi cliccabili</translation>
+    </message>
+    <message>
+        <source>Plugins</source>
+        <translation>Plugin</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Plugin &lt;b&gt;%1&lt;/b&gt; developed by &lt;b&gt;%2&lt;/b&gt;.&lt;br /&gt;&lt;i&gt;%3&lt;/i&gt;&lt;/p&gt;&lt;br /&gt;</source>
+        <translation type="obsolete">&lt;p&gt;&lt;b&gt;%1&lt;/b&gt; è un plugin sviluppato da &lt;b&gt;%2&lt;/b&gt;.&lt;br /&gt;&lt;i&gt;%3&lt;/i&gt;&lt;/p&gt;&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;%1&lt;/b&gt; is a plugin developed by &lt;b&gt;%2&lt;/b&gt;.&lt;br /&gt;&lt;i&gt;%3&lt;/i&gt;&lt;/p&gt;&lt;br /&gt;</source>
+        <translation>&lt;p&gt;&lt;b&gt;%1&lt;/b&gt; è un plugin sviluppato da &lt;b&gt;%2&lt;/b&gt;.&lt;br /&gt;&lt;i&gt;%3&lt;/i&gt;&lt;/p&gt;&lt;br /&gt;</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

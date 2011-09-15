@@ -45,9 +45,6 @@ public:
   QIcon icon() const;
   QString parseText( QString );
 
-private:
-  QStringList m_colors;
-
 };
 
 #endif // RAINBOWTEXTMARKER_H

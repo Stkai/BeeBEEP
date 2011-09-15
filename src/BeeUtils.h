@@ -25,13 +25,11 @@
 #define BEEBEEP_GUIUTILS_H
 
 #include "Config.h"
-class Chat;
-class ChatMessage;
 
 
 namespace Bee
 {
-  QIcon userStatusIcon( int );
+  inline QIcon userStatusIcon( int );
   QString userStatusIconFileName( int );
   QString userStatusToString( int );
   inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
@@ -40,12 +38,6 @@ namespace Bee
   QString timerToString( int msec );
   QString uniqueFilePath( const QString& );
 
-  namespace Private
-  {
-    QString formatHtmlText( QString );
-    QString formatMessage( const ChatMessage& );
-    QString formatSystemMessage( const ChatMessage& );
-  }
 }
 
 
