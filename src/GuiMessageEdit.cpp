@@ -33,7 +33,66 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   mp_timer->setSingleShot( true );
   m_undoAvailable = false;
   m_redoAvailable = false;
+  m_historyIndex = 0;
+  m_history.append( "" );
+  m_lastMessage = "";
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
+  connect( this, SIGNAL( undoAvailable( bool) ), this, SLOT( setUndoAvailable( bool ) ) );
+  connect( this, SIGNAL( redoAvailable( bool ) ), this, SLOT( setRedoAvailable( bool ) ) );
+}
+
+QString GuiMessageEdit::message() const
+{
+  QString text = toPlainText();
+  return text.trimmed().isEmpty() ? QLatin1String( "" ) : text;
+}
+
+void GuiMessageEdit::clearMessage()
+{
+  clear();
+  setTextColor( QColor( Settings::instance().chatFontColor() ) );
+}
+
+void GuiMessageEdit::addMessageToHistory()
+{
+  m_lastMessage = "";
+  QString message_to_add = message();
+  m_history.removeOne( message_to_add ); // no duplicates
+  m_history.append( message_to_add );
+  if( historySize() > Settings::instance().chatMessageHistorySize() )
+    m_history.removeFirst();
+  m_historyIndex = m_history.size(); // +1 from historySize
+}
+
+bool GuiMessageEdit::nextMessageFromHistory()
+{
+  if( m_historyIndex > historySize() )
+    return false;
+  m_historyIndex++;
+  setMessageFromHistory();
+  return true;
+}
+
+bool GuiMessageEdit::prevMessageFromHistory()
+{
+  if( m_historyIndex < 0 )
+    return false;
+  m_historyIndex--;
+  setMessageFromHistory();
+  return true;
+}
+
+void GuiMessageEdit::setMessageFromHistory()
+{
+  if( m_lastMessage.isEmpty() && !message().isEmpty() )
+    m_lastMessage = message();
+
+  QString txt;
+  if( m_historyIndex < 0 || m_historyIndex > historySize() )
+    txt = m_lastMessage;
+  else
+    txt = m_history.at( m_historyIndex );
+  setText( txt );
 }
 
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
@@ -59,7 +118,28 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     else
     {
       mp_timer->stop();
-      emit returnPressed();
+
+      if( !message().isEmpty() )
+      {
+        addMessageToHistory();
+        emit returnPressed();
+      }
+      e->accept();
+      clearMessage();
+      return;
+    }
+  }
+
+  if( mods & Qt::ControlModifier )
+  {
+    if( e->key() == Qt::Key_Up && prevMessageFromHistory() )
+    {
+      e->accept();
+      return;
+    }
+
+    if( e->key() == Qt::Key_Down && nextMessageFromHistory() )
+    {
       e->accept();
       return;
     }
@@ -69,6 +149,8 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     reset_font_color = true;
 
   QTextEdit::keyPressEvent( e );
+
+  m_lastMessage = "";
 
   // Fixed: when the text is fully cancelled the message box loose the color... patched with the line below
   if( reset_font_color )

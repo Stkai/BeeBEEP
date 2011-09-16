@@ -360,7 +360,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select your favourite chat font style</source>
-        <translation>Seleziona il carattere per i tuoi messaggi</translation>
+        <translation>Seleziona il carattere in cui vuoi che vengano visualizzati i messaggi</translation>
     </message>
     <message>
         <source>My message font color...</source>
@@ -662,7 +662,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;%1&lt;/b&gt; is a plugin developed by &lt;b&gt;%2&lt;/b&gt;.&lt;br /&gt;&lt;i&gt;%3&lt;/i&gt;&lt;/p&gt;&lt;br /&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;%1&lt;/b&gt; è un plugin sviluppato da &lt;b&gt;%2&lt;/b&gt;.&lt;br /&gt;&lt;i&gt;%3&lt;/i&gt;&lt;/p&gt;&lt;br /&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;&lt;b&gt;%1&lt;/b&gt; è un plugin sviluppato da &lt;b&gt;%2&lt;/b&gt;.&lt;br /&gt;&lt;i&gt;%3&lt;/i&gt;&lt;/p&gt;&lt;br /&gt;</translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation>Gestione dei Plugin...</translation>
+    </message>
+    <message>
+        <source>Open the plugin manager dialog and manage the installed plugins</source>
+        <translation>Apri la finestra per gestire i plugin installati</translation>
+    </message>
+    <message>
+        <source>is a plugin developed by</source>
+        <translation>è un plugin sviluppato da</translation>
     </message>
 </context>
 <context>
@@ -690,6 +702,61 @@ il file %2 (%3)?</translation>
     <message>
         <source>Select All</source>
         <translation>Seleziona tutto</translation>
+    </message>
+</context>
+<context>
+    <name>GuiPluginManager</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Enable All</source>
+        <translation>Abilita Tutti</translation>
+    </message>
+    <message>
+        <source>Disable All</source>
+        <translation>Disabilita Tutti</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Chiudi</translation>
+    </message>
+    <message>
+        <source>Disable %1</source>
+        <translation>Disabilita %1</translation>
+    </message>
+    <message>
+        <source>Enable %1</source>
+        <translation>Abilita %1</translation>
+    </message>
+    <message>
+        <source>%1 is enabled</source>
+        <translation>Il plugin %1 è abilitato</translation>
+    </message>
+    <message>
+        <source>%1 is disabled</source>
+        <translation>Il plugin %1 è disabilitato</translation>
+    </message>
+    <message>
+        <source>Please select a plugin in the list.</source>
+        <translation>Seleziona un plugin dalla lista.</translation>
+    </message>
+    <message>
+        <source>%1 - Plugin Manager</source>
+        <translation>%1 - Gestione dei Plugin</translation>
+    </message>
+    <message>
+        <source>Plugin</source>
+        <translation>Plugin</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation>Versione</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Autore</translation>
     </message>
 </context>
 <context>
@@ -1042,6 +1109,29 @@ il file %2 (%3)?</translation>
     <message>
         <source>If you want an &lt;i&gt;underlined text&lt;/i&gt; write a _underlined text_.</source>
         <translation type="obsolete">Se vuoi usare il &lt;u&gt;testo sottilineato&lt;/u&gt; puoi usare il carattere _ e scrivere _testo sottolineato_.</translation>
+    </message>
+    <message>
+        <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
+        <translation>Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL FrecciaGiù.</translation>
+    </message>
+</context>
+<context>
+    <name>Ui</name>
+    <message>
+        <source>%1 - Plugin Manager</source>
+        <translation type="obsolete">%1 - Gestione dei Plugin</translation>
+    </message>
+    <message>
+        <source>Plugin</source>
+        <translation type="obsolete">Plugin</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation type="obsolete">Versione</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation type="obsolete">Autore</translation>
     </message>
 </context>
 <context>

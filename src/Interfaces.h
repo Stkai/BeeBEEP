@@ -28,19 +28,37 @@
 #include <QIcon>
 
 
-class TextMarkerInterface
+class PluginInterface
 {
 public:
-  virtual ~TextMarkerInterface() {}
+  virtual ~PluginInterface() {}
+
+  inline void setEnabled( bool );
+  inline bool isEnabled() const;
 
   virtual QString name() const = 0;
   virtual QString version() const = 0;
   virtual QString help() const = 0;
   virtual QString author() const = 0;
   virtual QIcon icon() const = 0;
-  virtual QString parseText( QString ) = 0;
+  virtual QString iconFileName() const = 0;
+
+protected:
+  bool m_isEnabled;
 
 };
+
+class TextMarkerInterface : public PluginInterface
+{
+public:
+  virtual bool parseText( QString* ) = 0;
+
+};
+
+
+// Inline Functions
+inline void PluginInterface::setEnabled( bool new_value ) { m_isEnabled = new_value; }
+inline bool PluginInterface::isEnabled() const { return m_isEnabled; }
 
 
 Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/1.0" )

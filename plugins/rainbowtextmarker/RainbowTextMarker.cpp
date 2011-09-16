@@ -54,7 +54,12 @@ QString RainbowTextMarker::help() const
 
 QIcon RainbowTextMarker::icon() const
 {
-  return QIcon( ":/plugins/rainbow.png" );
+  return QIcon( iconFileName() );
+}
+
+QString RainbowTextMarker::iconFileName() const
+{
+  return QLatin1String( ":/plugins/rainbow.png" );
 }
 
 namespace
@@ -131,20 +136,31 @@ namespace
 } // end of namespace
 
 
-QString RainbowTextMarker::parseText( QString txt )
+bool RainbowTextMarker::parseText( QString* p_txt )
 {
-  qDebug() << name() << "parsing text";
+  qDebug() << "Plugin" << name() << "starts to parse the text";
 
-  txt.prepend( QLatin1Char( ' ' ) );
-  txt.append( QLatin1Char( ' ' ) );
+  bool space_added_at_begin = false;
+  bool space_added_at_end = false;
+
+  if( p_txt->startsWith( open_cmd.trimmed() ) )
+  {
+    p_txt->prepend( QLatin1Char( ' ' ) );
+    space_added_at_begin = true;
+  }
+
+  if( p_txt->endsWith( close_cmd.trimmed() ) )
+  {
+    p_txt->append( QLatin1Char( ' ' ) );
+    space_added_at_end = true;
+  }
 
   QString parsed_text = "";
+  int index = p_txt->indexOf( open_cmd, 0, Qt::CaseInsensitive );
 
-  int index = txt.indexOf( open_cmd, 0, Qt::CaseInsensitive );
-
-  if( index >= 0 && txt.size() > index )
+  if( index >= 0 && p_txt->size() > index )
   {
-    int last_index = txt.indexOf( close_cmd, index+1, Qt::CaseInsensitive );
+    int last_index = p_txt->indexOf( close_cmd, index+1, Qt::CaseInsensitive );
     if( last_index > 0 )
     {
       qDebug() << name() << "rainbow found. Create HTML tags";
@@ -158,9 +174,9 @@ QString RainbowTextMarker::parseText( QString txt )
       int rainbow_index = 0;
       qreal scale = 3.14 * (2.0-0.21) / qMax( 1, (last_index-index-open_cmd.size()) );
 
-      for( int i = 0; i < txt.size(); i++ )
+      for( int i = 0; i < p_txt->size(); i++ )
       {
-        c = txt.at( i );
+        c = p_txt->at( i );
         if( c == QLatin1Char( '<' ) )
           is_in_tag = true;
 
@@ -178,15 +194,15 @@ QString RainbowTextMarker::parseText( QString txt )
         {
           QChar c_tmp;
           // Search forward until either a semicolon, tag, or space is found
-          for( int j=(i+1); j < txt.size(); j++ )
+          for( int j=(i+1); j < p_txt->size(); j++ )
           {
-            c_tmp = txt.at( j );
+            c_tmp = p_txt->at( j );
             if( c_tmp == QLatin1Char( '<' ) || c_tmp == QLatin1Char( '>' )
                 || c_tmp == QLatin1Char( ';' ) || c_tmp.isSpace() )
             {
               if( c_tmp == QLatin1Char( ';' ) )
               {
-                code_text = txt.mid( i, j-i+1 );
+                code_text = p_txt->mid( i, j-i+1 );
                 qDebug() << "Code text found" << code_text << "... skip it";
               }
               break;
@@ -230,21 +246,24 @@ QString RainbowTextMarker::parseText( QString txt )
       }
 
       if( parsed_text.contains( open_cmd ) )
-        parsed_text = parseText( parsed_text );
+        parseText( &parsed_text );
     }
   }
 
-  if( parsed_text.isEmpty() )
-    parsed_text = txt;
-  parsed_text.remove( 0, 1 );
-  parsed_text.chop( 1 );
-  qDebug() << name() << "text parsed";
-  return parsed_text;
+  if( !parsed_text.isEmpty() )
+    *p_txt = parsed_text;
+
+  if( space_added_at_begin )
+    p_txt->remove( 0, 1 );
+  if( space_added_at_end )
+    p_txt->chop( 1 );
+  return true;
 }
 
 RainbowTextMarker::RainbowTextMarker()
   : QObject()
 {
+  setEnabled( true );
   qDebug() << "RainbowTextMarker plugin loaded";
 }
 

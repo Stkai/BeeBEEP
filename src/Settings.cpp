@@ -105,6 +105,7 @@ void Settings::load()
   m_beepOnNewMessageArrived = sets.value( "BeepOnNewMessageArrived", true ).toBool();
   m_chatUseHtmlTags = sets.value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets.value( "UseClickableLinks", true ).toBool();
+  m_chatMessageHistorySize = sets.value( "MessageHistorySize", 10 ).toInt();
   sets.endGroup();
 
   sets.beginGroup( "User" );
@@ -195,6 +196,7 @@ void Settings::save()
   sets.setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets.setValue( "UseHtmlTags", m_chatUseHtmlTags );
   sets.setValue( "UseClickableLinks", m_chatUseClickableLinks );
+  sets.setValue( "MessageHistorySize", m_chatMessageHistorySize );
   sets.endGroup();
   sets.beginGroup( "User" );
   sets.setValue( "LocalColor", m_localUser.color() );

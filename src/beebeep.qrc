@@ -55,5 +55,6 @@
         <file>images/send-file.png</file>
         <file>images/add.png</file>
         <file>images/remove.png</file>
+        <file>images/plugin.png</file>
     </qresource>
 </RCC>

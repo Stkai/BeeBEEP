@@ -105,12 +105,7 @@ void GuiChat::appendMessage( VNumber chat_id, const QString& msg )
 
 void GuiChat::sendMessage()
 {
-  QString text = mp_teMessage->toPlainText();
-  if( text.isEmpty() )
-    return;
-  emit newMessage( m_chatId, text );
-  mp_teMessage->clear();
-  setChatFontColor( Settings::instance().chatFontColor() );
+  emit newMessage( m_chatId, mp_teMessage->message() );
 }
 
 void GuiChat::addToMyMessage( const QString& msg_to_add )

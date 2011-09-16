@@ -71,6 +71,7 @@ private slots:
   void changeUserColor( VNumber );
   void sendFile( VNumber );
   void showTextMarkerPluginHelp();
+  void showPluginManager();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -88,7 +89,7 @@ private:
   void startCore();
   void stopCore();
   void initGuiItems();
-  void createPluginsMenu();
+  void updadePluginMenu();
 
 private:
   GuiChat* mp_defaultChat;

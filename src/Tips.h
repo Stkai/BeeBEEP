@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_TIPS_H
 #define BEEBEEP_TIPS_H
 
-const int BeeBeepTipsSize = 25;
+const int BeeBeepTipsSize = 26;
 
 static const char* BeeBeepTips[ BeeBeepTipsSize ] =
 {
@@ -58,8 +58,9 @@ static const char* BeeBeepTips[ BeeBeepTipsSize ] =
     "It doesn't matter whether you are a lion or a gazelle. "
     "When the sun comes up, you better be running.</i> (Abe Gubegna)" ),
   QT_TRANSLATE_NOOP( "Tips", "<i>Okay, Houston, we've had a problem here.</i> (John L. Swigert)" ),
-  QT_TRANSLATE_NOOP( "Tips", "<i>Second star to the right, and straight on till morning.</i> (Peter Pan)" )
+  QT_TRANSLATE_NOOP( "Tips", "<i>Second star to the right, and straight on till morning.</i> (Peter Pan)" ),
   /* 25 */
+  QT_TRANSLATE_NOOP( "Tips", "You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys." )
 };
 
 #endif // BEEBEEP_TIPS_H

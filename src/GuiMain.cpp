@@ -28,6 +28,7 @@
 #include "GuiChat.h"
 #include "GuiEditVCard.h"
 #include "GuiTransferFile.h"
+#include "GuiPluginManager.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "GuiVCard.h"
@@ -342,8 +343,8 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
 
   /* Plugins Menu */
-  createPluginsMenu();
-
+  mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
+  updadePluginMenu();
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -838,15 +839,27 @@ void GuiMain::showUserMenu( VNumber user_id )
   gvc->setFixedSize( gvc->size() );
 }
 
-void GuiMain::createPluginsMenu()
+void GuiMain::updadePluginMenu()
 {
+  mp_menuPlugins->clear();
   QAction* act;
-  mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
+  act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
+  act->setStatusTip( tr( "Open the plugin manager dialog and manage the installed plugins" ) );
+
+  if( PluginManager::instance().count() <= 0 )
+    return;
+
+  mp_menuPlugins->addSeparator();
+
   foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
   {
     act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showTextMarkerPluginHelp() ) );
-    act->setData( tr( "<p><b>%1</b> is a plugin developed by <b>%2</b>.<br /><i>%3</i></p><br />" ).arg( text_marker->name(), text_marker->author(), text_marker->help() ) );
+    QString help_data_ts = tr( "is a plugin developed by" );
+    act->setData( QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" )
+                  .arg( Bee::iconToHtml( (text_marker->icon().isNull() ? ":/images/plugin.png" : text_marker->iconFileName()), "*P*" ),
+                        text_marker->name(), help_data_ts, text_marker->author(), text_marker->help() ) );
     act->setIcon( text_marker->icon() );
+    act->setEnabled( text_marker->isEnabled() );
   }
 }
 
@@ -855,4 +868,16 @@ void GuiMain::showTextMarkerPluginHelp()
   QAction* act = qobject_cast<QAction*>(sender());
   if( act )
     mp_defaultChat->appendMessage( mp_defaultChat->chatId(), act->data().toString() );
+}
+
+void GuiMain::showPluginManager()
+{
+  GuiPluginManager gpm( this );
+  gpm.setModal( true );
+  gpm.setSizeGripEnabled( true );
+  gpm.updatePlugins();
+  gpm.show();
+  gpm.exec();
+  if( gpm.isChanged() )
+    updadePluginMenu();
 }

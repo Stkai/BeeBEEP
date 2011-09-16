@@ -43,7 +43,9 @@ public:
   QString help() const;
   QString author() const;
   QIcon icon() const;
-  QString parseText( QString );
+  QString iconFileName() const;
+
+  bool parseText( QString* );
 
 };
 

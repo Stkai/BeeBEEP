@@ -209,6 +209,8 @@ namespace // begin of empty namespace
 
 QString Linkify( QString text )
 {
+  if( !text.contains( QLatin1Char( '.' ) ) )
+    return text;
   text.prepend( " " ); // for matching www.miosito.it
   text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "<a href=\"\\1\">\\1</a>" );
   text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
@@ -280,7 +282,16 @@ QString FormatHtmlText( const QString& text )
     text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
 
   foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
-    text_formatted = text_marker->parseText( text_formatted );
+  {
+    if( !text_marker->isEnabled() )
+      continue;
+
+    if( !text_marker->parseText( &text_formatted ) )
+    {
+      qDebug() << text_marker->name() << "has break text marker plugins loop";
+      break;
+    }
+  }
 
   text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );

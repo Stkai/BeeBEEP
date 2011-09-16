@@ -34,6 +34,9 @@ class GuiMessageEdit : public QTextEdit
 public:
   GuiMessageEdit( QWidget* parent );
 
+  QString message() const;
+  void clearMessage();
+
 signals:
   void returnPressed();
   void writing();
@@ -42,6 +45,11 @@ signals:
 protected:
   void keyPressEvent( QKeyEvent* );
   void contextMenuEvent( QContextMenuEvent* );
+  void addMessageToHistory();
+  bool nextMessageFromHistory();
+  bool prevMessageFromHistory();
+  inline int historySize() const;
+  void setMessageFromHistory();
 
 private slots:
   void checkWriting();
@@ -53,6 +61,14 @@ private:
   bool m_undoAvailable;
   bool m_redoAvailable;
 
+  QStringList m_history;
+  int m_historyIndex;
+  QString m_lastMessage;
+
 };
+
+
+//Inline Functions
+inline int GuiMessageEdit::historySize() const { return m_history.size()-1;}
 
 #endif // BEEBEEP_GUIMESSAGEEDIT_H

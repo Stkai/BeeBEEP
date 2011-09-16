@@ -57,6 +57,7 @@ public:
   inline const QString& localePath() const;
   inline void setLocalePath( const QString& );
 
+  inline int chatMessageHistorySize() const;
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
   inline const QFont& chatFont() const;
@@ -147,6 +148,7 @@ private:
   QString m_pluginPath;
   QString m_localePath;
 
+  int m_chatMessageHistorySize;
   QString m_chatFontColor;
   QFont m_chatFont;
   bool m_chatCompact;
@@ -197,6 +199,7 @@ inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath =
 inline const QString& Settings::localePath() const { return m_localePath; }
 inline void Settings::setLocalePath( const QString& new_value ) { m_localePath = new_value; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
+inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistorySize; }
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }
 inline const QFont& Settings::chatFont() const { return m_chatFont; }

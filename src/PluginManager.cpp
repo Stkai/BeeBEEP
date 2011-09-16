@@ -29,7 +29,7 @@ PluginManager* PluginManager::mp_instance = NULL;
 
 
 PluginManager::PluginManager()
- : m_textMarkers()
+  : m_textMarkers()
 {
 }
 
@@ -67,4 +67,19 @@ void PluginManager::addPlugin( const QString& file_path )
   }
   else
     qDebug() << file_path << "is not a plugin";
+}
+
+void PluginManager::setPluginEnabled( const QString& plugin_name, bool enabled )
+{
+  foreach( TextMarkerInterface* text_marker, m_textMarkers )
+  {
+    if( text_marker->name() == plugin_name )
+      text_marker->setEnabled( enabled );
+  }
+}
+
+void PluginManager::setPluginsEnabled( bool enabled )
+{
+  foreach( TextMarkerInterface* text_marker, m_textMarkers )
+    text_marker->setEnabled( enabled );
 }
