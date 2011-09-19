@@ -306,15 +306,13 @@ QString FormatHtmlText( const QString& text )
 QString FormatMessage( const User& u, const ChatMessage& cm )
 {
   QString text_formatted = FormatHtmlText( cm.message().text() );
-  if( cm.message().data().size() > 0 )
+  ChatMessageData cm_data = Protocol::instance().dataFromChatMessage( cm.message() );
+  if( cm_data.textColor().isValid() )
   {
-    QColor c( cm.message().data() );
-    if( c.isValid() )
-    {
-      text_formatted.prepend( QString( "<font color=%1>" ).arg( c.name() ) );
-      text_formatted.append( QString( "</font>" ) );
-    }
+    text_formatted.prepend( QString( "<font color=%1>" ).arg( cm_data.textColor().name() ) );
+    text_formatted.append( QString( "</font>" ) );
   }
+
   QString sHtmlMessage = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
             .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
             .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )

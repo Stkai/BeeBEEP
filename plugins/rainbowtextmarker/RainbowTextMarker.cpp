@@ -25,6 +25,8 @@
 #include <QtDebug>
 #include <QtCore/qmath.h>
 #include "RainbowTextMarker.h"
+#include "Version.h"
+
 
 #undef COLOR_GRADIENT_DEBUG
 
@@ -60,6 +62,16 @@ QIcon RainbowTextMarker::icon() const
 QString RainbowTextMarker::iconFileName() const
 {
   return QLatin1String( ":/plugins/rainbow.png" );
+}
+
+int RainbowTextMarker::priority() const
+{
+  return 1000;
+}
+
+QString RainbowTextMarker::coreVersion() const
+{
+  return QString( BEEBEEP_VERSION );
 }
 
 namespace

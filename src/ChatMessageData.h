@@ -21,34 +21,30 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef RAINBOWTEXTMARKER_H
-#define RAINBOWTEXTMARKER_H
+#ifndef BEEBEEP_CHATMESSAGEDATA_H
+#define BEEBEEP_CHATMESSAGEDATA_H
 
-#include "rainbowtextmarker_global.h"
-#include "Interfaces.h"
-#include <QObject>
-#include <QStringList>
+#include "Config.h"
 
 
-class RAINBOWTEXTMARKERSHARED_EXPORT RainbowTextMarker : public QObject, public TextMarkerInterface
+class ChatMessageData
 {
-  Q_OBJECT
-  Q_INTERFACES( TextMarkerInterface )
-
 public:
-  RainbowTextMarker();
+  ChatMessageData();
+  ChatMessageData( const ChatMessageData& );
+  ChatMessageData& operator=( const ChatMessageData& );
 
-  QString name() const;
-  QString version() const;
-  QString help() const;
-  QString author() const;
-  QIcon icon() const;
-  QString iconFileName() const;
-  int priority() const;
-  QString coreVersion() const;
+  inline const QColor& textColor() const;
+  inline void setTextColor( const QColor& );
 
-  bool parseText( QString* );
+private:
+  QColor m_textColor;
 
 };
 
-#endif // RAINBOWTEXTMARKER_H
+
+// Inline Functions
+inline const QColor& ChatMessageData::textColor() const { return m_textColor; }
+inline void ChatMessageData::setTextColor( const QColor& new_value ) { m_textColor = new_value; }
+
+#endif // BEEBEEP_CHATMESSAGEDATA_H

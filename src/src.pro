@@ -42,7 +42,8 @@ SOURCES += Listener.cpp \
     GuiEditVCard.cpp \
     GuiUserItem.cpp \
     PluginManager.cpp \
-    GuiPluginManager.cpp
+    GuiPluginManager.cpp \
+    ChatMessageData.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -82,7 +83,8 @@ HEADERS += sym_iap_util.h \
     GuiUserItem.h \  
     Interfaces.h \
     PluginManager.h \
-    GuiPluginManager.h
+    GuiPluginManager.h \
+    ChatMessageData.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \

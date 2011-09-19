@@ -391,6 +391,24 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   return fi;
 }
 
+ChatMessageData Protocol::dataFromChatMessage( const Message& m )
+{
+  ChatMessageData cmd;
+  if( m.data().size() <= 0 )
+    return cmd;
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
+  if( sl.size() <= 0 )
+    return cmd;
+
+  QColor c( sl.at( 0 ) );
+  if( c.isValid() )
+    cmd.setTextColor( c );
+  else
+    qWarning() << "Invalid text color in Chat Message Data:" << m.data();
+
+  return cmd;
+}
+
 /* Encryption */
 
 namespace

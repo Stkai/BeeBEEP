@@ -47,6 +47,7 @@ void PluginManager::loadPlugins()
     addPlugin( plugin_dir.absoluteFilePath( file_name ) );
 
   qDebug() << m_textMarkers.size() << "text marker plugins found";
+  sortPlugins();
 }
 
 void PluginManager::addPlugin( const QString& file_path )
@@ -82,4 +83,14 @@ void PluginManager::setPluginsEnabled( bool enabled )
 {
   foreach( TextMarkerInterface* text_marker, m_textMarkers )
     text_marker->setEnabled( enabled );
+}
+
+static bool TextMarkerForPriority( TextMarkerInterface* tm1, TextMarkerInterface* tm2 )
+{
+  return tm1->priority() < tm2->priority();
+}
+
+void PluginManager::sortPlugins()
+{
+  qSort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
 }

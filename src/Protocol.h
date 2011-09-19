@@ -27,6 +27,7 @@
 #include "Chat.h"
 #include "FileInfo.h"
 #include "Message.h"
+#include "ChatMessageData.h"
 #include "User.h"
 
 
@@ -50,6 +51,7 @@ public:
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
+  ChatMessageData dataFromChatMessage( const Message& );
 
   QByteArray localUserStatusMessage() const;
   bool changeUserStatusFromMessage( User*, const Message& ) const;

@@ -21,34 +21,27 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef RAINBOWTEXTMARKER_H
-#define RAINBOWTEXTMARKER_H
-
-#include "rainbowtextmarker_global.h"
-#include "Interfaces.h"
-#include <QObject>
-#include <QStringList>
+#include "ChatMessageData.h"
 
 
-class RAINBOWTEXTMARKERSHARED_EXPORT RainbowTextMarker : public QObject, public TextMarkerInterface
+ChatMessageData::ChatMessageData()
+  : m_textColor()
 {
-  Q_OBJECT
-  Q_INTERFACES( TextMarkerInterface )
 
-public:
-  RainbowTextMarker();
+}
 
-  QString name() const;
-  QString version() const;
-  QString help() const;
-  QString author() const;
-  QIcon icon() const;
-  QString iconFileName() const;
-  int priority() const;
-  QString coreVersion() const;
+ChatMessageData::ChatMessageData( const ChatMessageData& cmd )
+{
+  (void)operator=( cmd );
+}
 
-  bool parseText( QString* );
+ChatMessageData& ChatMessageData::operator=( const ChatMessageData& cmd )
+{
+  if( this != &cmd )
+  {
+    m_textColor = cmd.m_textColor;
+  }
 
-};
+  return *this;
+}
 
-#endif // RAINBOWTEXTMARKER_H

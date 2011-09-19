@@ -60,6 +60,7 @@ protected:
   PluginManager();
 
   void addPlugin( const QString& );
+  void sortPlugins();
 
 
 private:

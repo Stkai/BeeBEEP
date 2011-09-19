@@ -43,6 +43,11 @@ public:
   virtual QIcon icon() const = 0;
   virtual QString iconFileName() const = 0;
 
+  // Priority: 100 High, 1000 Normal, 10000 Low
+  virtual int priority() const = 0;
+
+  virtual QString coreVersion() const = 0;
+
 protected:
   bool m_isEnabled;
 
@@ -51,6 +56,7 @@ protected:
 class TextMarkerInterface : public PluginInterface
 {
 public:
+  // FALSE break the loop
   virtual bool parseText( QString* ) = 0;
 
 };
