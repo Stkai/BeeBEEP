@@ -170,6 +170,14 @@ void Settings::load()
     m_fileTransferBufferSize -= mod_buffer_size;
   sets.endGroup();
 
+  sets.beginGroup( "Network");
+  m_networkProxy.setHostName( sets.value( "ProxyAddress", "0.0.0.0" ).toString() );
+  m_networkProxy.setPort( sets.value( "ProxyPort", 0 ).toInt() );
+  m_networkProxy.setType( (QNetworkProxy::ProxyType)sets.value( "ProxyType", QNetworkProxy::NoProxy ).toInt() );
+  //m_networkProxy.setUser( sets.value( "ProxyUser", "" ) );
+  //m_networkProxy.setPassword( sets.value( "ProxyPassowrd", "" ) );
+  sets.endGroup();
+
   if( m_localUser.name().isEmpty() )
   {
     QString sName = GetUserNameFromSystemEnvinroment();
@@ -238,6 +246,13 @@ void Settings::save()
   sets.setValue( "WritingTimeout", m_writingTimeout );
   sets.setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets.setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
+  sets.endGroup();
+  sets.beginGroup( "Network");
+  sets.setValue( "ProxyAddress", m_networkProxy.hostName() );
+  sets.setValue( "ProxyPort", m_networkProxy.port() );
+  sets.setValue( "ProxyType", (int)m_networkProxy.type() );
+  //sets.setValue( "ProxyUser", m_networkProxy.user() );
+  //sets.setValue( "ProxyPassword", m_networkProxy.password() );
   sets.endGroup();
 
   sets.sync();

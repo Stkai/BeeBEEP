@@ -112,6 +112,10 @@ public:
   inline bool automaticFileName() const;
   inline void setAutomaticFileName( bool );
 
+  inline bool useNetworkProxy() const;
+  inline const QNetworkProxy& networkProxy() const;
+  inline void setNetworkProxy( const QNetworkProxy& );
+
   void load();
   void save();
 
@@ -179,6 +183,8 @@ private:
   bool m_showTipsOfTheDay;
   bool m_automaticFileName;
 
+  QNetworkProxy m_networkProxy;
+
 };
 
 
@@ -241,5 +247,9 @@ inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new
 inline bool Settings::showUserColor() const { return m_showUserColor; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
+inline bool Settings::useNetworkProxy() const { return m_networkProxy.type() != QNetworkProxy::NoProxy; }
+inline const QNetworkProxy& Settings::networkProxy() const { return m_networkProxy; }
+inline void Settings::setNetworkProxy( const QNetworkProxy& new_value ) { m_networkProxy = new_value; }
+
 
 #endif // BEEBEEP_SETTINGS_H

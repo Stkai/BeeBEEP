@@ -1,5 +1,5 @@
 include(../beebeep.pri)
-QT += network
+QT += network xml
 TARGET = beebeep
 TEMPLATE = app
 TRANSLATIONS = locale/beebeep_it.ts
@@ -43,7 +43,8 @@ SOURCES += Listener.cpp \
     GuiUserItem.cpp \
     PluginManager.cpp \
     GuiPluginManager.cpp \
-    ChatMessageData.cpp
+    ChatMessageData.cpp \
+    XmppManager.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -84,10 +85,16 @@ HEADERS += sym_iap_util.h \
     Interfaces.h \
     PluginManager.h \
     GuiPluginManager.h \
-    ChatMessageData.h
+    ChatMessageData.h \
+    XmppManager.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
     GuiPluginManager.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
+
+LIBS += -L$$PWD/../../qxmpp/lib/ -llibqxmpp
+INCLUDEPATH += $$PWD/../../qxmpp/src
+DEPENDPATH += $$PWD/../../qxmpp/src
+PRE_TARGETDEPS += $$PWD/../../qxmpp/lib/libqxmpp.a
