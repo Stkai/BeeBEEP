@@ -1,0 +1,9 @@
+BEEBEEP (Secure Network Chat)
+
+BeeBEEP 0.5.2
+- File Transfer improved
+- Plugin support enabled
+- vCard (profile)
+- HTML code in messages
+- Rainbow Text Marker plugin
+- Clickable url and email links
