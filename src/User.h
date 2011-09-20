@@ -57,8 +57,10 @@ public:
   inline const QString& color() const;
   inline void setVCard( const VCard& );
   inline const VCard& vCard() const;
-
+  inline void setPath( const QString& );
   inline QString path() const;
+
+  inline bool isOnLan() const { return m_path.isEmpty(); } // FIXME!!!
 
 private:
   VNumber m_id;
@@ -68,6 +70,7 @@ private:
   int m_status;
   QString m_statusDescription;
   QString m_color;
+  QString m_path;
 
 };
 
@@ -93,7 +96,7 @@ inline void User::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& User::color() const { return m_color; }
 inline void  User::setVCard( const VCard& new_value ) { m_vCard = new_value; }
 inline const VCard& User::vCard() const { return m_vCard; }
-
-inline QString User::path() const { return QString( "%1@%2:%3" ).arg( name(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
+inline void User::setPath( const QString& new_value ) { m_path = new_value; }
+inline QString User::path() const { return m_path.isEmpty() ? QString( "%1@%2:%3" ).arg( name(), m_hostAddress.toString(), QString::number( m_hostPort ) ) : m_path; }
 
 #endif // BEEBEEP_USER_H

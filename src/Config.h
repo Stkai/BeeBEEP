@@ -45,7 +45,6 @@ typedef quint64 FileSizeType;
 #define ID_INVALID         0
 #define ID_LOCAL_USER      1
 #define ID_DEFAULT_CHAT    2
-#define ID_XMPP_CHAT       3
 #define ID_START           1000
 #define ID_SYSTEM_MESSAGE  10
 #define ID_BEEP_MESSAGE    11

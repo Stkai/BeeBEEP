@@ -29,6 +29,7 @@
 #include "FileTransfer.h"
 #include "UserList.h"
 class Broadcaster;
+class XmppManager;
 
 
 class Core : public QObject
@@ -91,11 +92,17 @@ protected slots:
 
   /* CoreParser */
   void parseMessage( VNumber, const Message& );
+  void parseMessage( const User&, const Message& );
 
   /* CoreFileTransfer */
   void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType );
   void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
+
+  /* CoreXmpp */
+  void parseXmppMessage( const QString& user_path, const Message& );
+  void checkXmppUser( const User& );
+  void sendXmppChatMessage( const QString& user_path, const Message& );
 
 protected:
   /* CoreConnection */
@@ -137,6 +144,7 @@ private:
   Listener* mp_listener;
   Broadcaster* mp_broadcaster;
   FileTransfer* mp_fileTransfer;
+  XmppManager* mp_xmppManager;
 
 };
 

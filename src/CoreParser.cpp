@@ -37,7 +37,11 @@ void Core::parseMessage( VNumber user_id, const Message& m )
     qWarning() << "Invalid user" << user_id << "found while parsing message";
     return;
   }
+  parseMessage( u, m );
+}
 
+void Core::parseMessage( const User& u, const Message& m )
+{
   switch( m.type() )
   {
   case Message::User:
@@ -72,8 +76,6 @@ void Core::parseUserMessage( const User& u, const Message& m )
       m_users.setUser( user_with_new_status );
       showUserStatusChanged( user_with_new_status );
     }
-    else
-      qWarning() << "Unable to change the status of the user" << u.path() << "because message is invalid";
   }
   else if( m.hasFlag( Message::UserVCard ) )
   {

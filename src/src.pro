@@ -44,7 +44,8 @@ SOURCES += Listener.cpp \
     PluginManager.cpp \
     GuiPluginManager.cpp \
     ChatMessageData.cpp \
-    XmppManager.cpp
+    XmppManager.cpp \
+    CoreXmpp.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \

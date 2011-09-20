@@ -26,6 +26,7 @@
 #include "Broadcaster.h"
 #include "Settings.h"
 #include "Protocol.h"
+#include "XmppManager.h"
 
 
 Core::Core( QObject* parent )
@@ -40,13 +41,16 @@ Core::Core( QObject* parent )
   qDebug() << "Broadcaster created";
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
+  mp_xmppManager = new XmppManager( this );
+  qDebug() << "XmppManager created";
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
-
+  connect( mp_xmppManager, SIGNAL( message( const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const Message& ) ) );
+  connect( mp_xmppManager, SIGNAL( userChangedInRoster( const User& ) ), this, SLOT( checkXmppUser( const User& ) ) );
 }
 
 bool Core::start()
@@ -85,6 +89,8 @@ bool Core::start()
 
   showUserStatusChanged( Settings::instance().localUser() );
 
+  mp_xmppManager->connectToServer();
+
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
   return true;
@@ -92,6 +98,8 @@ bool Core::start()
 
 void Core::stop()
 {
+  if( mp_xmppManager->isConnected() )
+    mp_xmppManager->disconnectFromServer();
   mp_broadcaster->stopBroadcasting();
   mp_fileTransfer->stopListener();
   mp_listener->close();

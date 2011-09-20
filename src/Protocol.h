@@ -53,6 +53,7 @@ public:
   FileInfo fileInfoFromMessage( const Message& );
   ChatMessageData dataFromChatMessage( const Message& );
 
+  Message userStatusMessage( int user_status, const QString& user_status_description ) const;
   QByteArray localUserStatusMessage() const;
   bool changeUserStatusFromMessage( User*, const Message& ) const;
   QByteArray localUserNameMessage() const;
@@ -62,6 +63,8 @@ public:
 
   User createUser( const Message&, const QHostAddress& );
   Chat createChat( const QList<VNumber>& user_list );
+
+  inline VNumber newId();
 
   QByteArray encryptByteArray( const QByteArray& ) const;
   QByteArray decryptByteArray( const QByteArray& ) const;
@@ -86,7 +89,6 @@ protected:
   Protocol();
   QString messageHeader( Message::Type ) const;
   Message::Type messageType( const QString& ) const;
-  inline VNumber newId();
 
   QString pixmapToString( const QPixmap& ) const;
   QPixmap stringToPixmap( const QString& ) const;

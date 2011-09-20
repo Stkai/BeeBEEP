@@ -27,6 +27,7 @@
 #include "Config.h"
 #include "Message.h"
 #include "QXmppClient.h"
+#include "User.h"
 
 
 class XmppManager : public QObject
@@ -38,20 +39,35 @@ public:
 
   void connectToServer();
   void disconnectFromServer();
+  inline bool isConnected() const;
+
+  void sendMessage( const QString&, const Message& );
 
 signals:
-  void message( VNumber chat_id, const Message& m );
+  void message( const QString&, const Message& );
+  void userChangedInRoster( const User& );
 
 protected slots:
+  void serverConnected();
+  void serverDisconnected();
   void rosterReceived();
   void rosterChanged( const QString& );
   void errorOccurred( QXmppClient::Error );
   void presenceChanged( const QString&, const QString& );
   void messageReceived( const QXmppMessage& );
 
+protected:
+  void systemMessage( const QString& );
+  User::Status statusFromPresence( QXmppPresence::Status::Type );
+
 private:
   QXmppClient* mp_client;
 
 };
+
+
+// Inline Functions
+inline bool XmppManager::isConnected() const { return mp_client->isConnected(); }
+
 
 #endif // BEEBEEP_XMPPMANAGER_H

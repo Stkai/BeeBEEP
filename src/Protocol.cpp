@@ -197,12 +197,17 @@ QByteArray Protocol::helloMessage() const
   return fromMessage( m );
 }
 
+Message Protocol::userStatusMessage( int user_status, const QString& user_status_description ) const
+{
+  Message m( Message::User, ID_USER_MESSAGE, user_status_description );
+  m.addFlag( Message::UserStatus );
+  m.setData( QString::number( user_status ) );
+  return m;
+}
+
 QByteArray Protocol::localUserStatusMessage() const
 {
-  Message m( Message::User, ID_USER_MESSAGE, Settings::instance().localUser().statusDescription() );
-  m.addFlag( Message::UserStatus );
-  m.setData( QString::number( Settings::instance().localUser().status() ) );
-  return fromMessage( m );
+  return fromMessage( userStatusMessage( Settings::instance().localUser().status(), Settings::instance().localUser().statusDescription() ) );
 }
 
 QByteArray Protocol::localUserNameMessage() const

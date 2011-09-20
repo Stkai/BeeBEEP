@@ -160,6 +160,20 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     {
       if( user_id == ID_LOCAL_USER )
         continue;
+      User u = m_users.find( user_id );
+      if( !u.isValid() )
+        continue;
+
+      if( !u.isOnLan() )
+      {
+        //if( u.isConnected() )
+        {
+          sendXmppChatMessage( u.path(), m );
+          messages_sent += 1;
+          continue;
+        }
+      }
+
       Connection* c = connection( user_id );
       if( c && c->sendMessage( m ) )
         messages_sent += 1;
