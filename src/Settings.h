@@ -113,6 +113,8 @@ public:
   inline void setAutomaticFileName( bool );
 
   inline bool useNetworkProxy() const;
+  inline bool networkProxyUseAuthentication() const;
+  inline void setNetworkProxyUseAuthentication( bool );
   inline const QNetworkProxy& networkProxy() const;
   inline void setNetworkProxy( const QNetworkProxy& );
 
@@ -184,6 +186,7 @@ private:
   bool m_automaticFileName;
 
   QNetworkProxy m_networkProxy;
+  bool m_networkProxyUseAuthentication;
 
 };
 
@@ -248,6 +251,8 @@ inline bool Settings::showUserColor() const { return m_showUserColor; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::useNetworkProxy() const { return m_networkProxy.type() != QNetworkProxy::NoProxy; }
+inline bool Settings::networkProxyUseAuthentication() const { return m_networkProxyUseAuthentication; }
+inline void Settings::setNetworkProxyUseAuthentication( bool new_value ) { m_networkProxyUseAuthentication = new_value; }
 inline const QNetworkProxy& Settings::networkProxy() const { return m_networkProxy; }
 inline void Settings::setNetworkProxy( const QNetworkProxy& new_value ) { m_networkProxy = new_value; }
 

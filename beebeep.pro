@@ -2,7 +2,8 @@ include(beebeep.pri)
 
 TEMPLATE = subdirs
 
-SUBDIRS = src\
-		plugins
-		  
+SUBDIRS = qxmpp\
+        src\
+        plugins
+
 CONFIG += ordered

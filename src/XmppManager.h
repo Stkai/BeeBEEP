@@ -59,6 +59,11 @@ protected slots:
 protected:
   void systemMessage( const QString& );
   User::Status statusFromPresence( QXmppPresence::Status::Type );
+  void parseChatMessage( const QString&, const QXmppMessage& );
+  void parseErrorMessage( const QString&, const QXmppMessage& );
+
+private:
+  void dumpMessage( const QXmppMessage& );
 
 private:
   QXmppClient* mp_client;

@@ -27,8 +27,9 @@
 #include "FileInfo.h"
 #include "GuiChat.h"
 #include "GuiEditVCard.h"
-#include "GuiTransferFile.h"
+#include "GuiNetwork.h"
 #include "GuiPluginManager.h"
+#include "GuiTransferFile.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "GuiVCard.h"
@@ -236,6 +237,8 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addAction( mp_actSearch );
   mp_menuMain->addSeparator();
+  act = mp_menuMain->addAction( QIcon( ":/images/network-settings.png" ), tr( "Network settings..."), this, SLOT( showNetworkManager() ) );
+  act->setStatusTip( tr( "Show the network settings dialog" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
   act->setStatusTip( tr( "Select the download folder" ) );
   mp_menuMain->addSeparator();
@@ -880,4 +883,14 @@ void GuiMain::showPluginManager()
   gpm.exec();
   if( gpm.isChanged() )
     updadePluginMenu();
+}
+
+void GuiMain::showNetworkManager()
+{
+  GuiNetwork gn( this );
+  gn.setModal( true );
+  gn.loadSettings();
+  gn.show();
+  gn.setFixedSize( gn.size() );
+  gn.exec();
 }

@@ -72,6 +72,7 @@ private slots:
   void sendFile( VNumber );
   void showTextMarkerPluginHelp();
   void showPluginManager();
+  void showNetworkManager();
 
 protected:
   void closeEvent( QCloseEvent* );

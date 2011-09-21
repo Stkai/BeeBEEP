@@ -171,11 +171,14 @@ void Settings::load()
   sets.endGroup();
 
   sets.beginGroup( "Network");
-  m_networkProxy.setHostName( sets.value( "ProxyAddress", "0.0.0.0" ).toString() );
+  m_networkProxy.setType( (QNetworkProxy::ProxyType)sets.value( "ProxyType", QNetworkProxy::DefaultProxy ).toInt() );
+  QString proxy_address = sets.value( "ProxyAddress", "" ).toString();
+  if( !proxy_address.isEmpty() )
+    m_networkProxy.setHostName( proxy_address );
   m_networkProxy.setPort( sets.value( "ProxyPort", 0 ).toInt() );
-  m_networkProxy.setType( (QNetworkProxy::ProxyType)sets.value( "ProxyType", QNetworkProxy::NoProxy ).toInt() );
-  //m_networkProxy.setUser( sets.value( "ProxyUser", "" ) );
-  //m_networkProxy.setPassword( sets.value( "ProxyPassowrd", "" ) );
+  m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();
+  m_networkProxy.setUser( sets.value( "ProxyUser", "" ).toString() );
+  m_networkProxy.setPassword( sets.value( "ProxyPassword", "" ).toString() );
   sets.endGroup();
 
   if( m_localUser.name().isEmpty() )
@@ -248,11 +251,12 @@ void Settings::save()
   sets.setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets.endGroup();
   sets.beginGroup( "Network");
+  sets.setValue( "ProxyType", (int)m_networkProxy.type() );
   sets.setValue( "ProxyAddress", m_networkProxy.hostName() );
   sets.setValue( "ProxyPort", m_networkProxy.port() );
-  sets.setValue( "ProxyType", (int)m_networkProxy.type() );
-  //sets.setValue( "ProxyUser", m_networkProxy.user() );
-  //sets.setValue( "ProxyPassword", m_networkProxy.password() );
+  sets.setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
+  sets.setValue( "ProxyUser", m_networkProxy.user() );
+  sets.setValue( "ProxyPassword", m_networkProxy.password() );
   sets.endGroup();
 
   sets.sync();

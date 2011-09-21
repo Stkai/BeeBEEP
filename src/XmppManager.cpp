@@ -49,12 +49,18 @@ void XmppManager::connectToServer()
   QNetworkProxy proxy;
   proxy.setType( QNetworkProxy::HttpProxy );
   proxy.setHostName( "10.184.160.100" );
-  proxy.setPort( 8080);
+  proxy.setPort( 8080 );
+
+  QList<QNetworkProxy> proxy_list = QNetworkProxyFactory::systemProxyForQuery();
+  if( proxy_list.isEmpty() )
+    qDebug() << "System proxy not found";
+  else
+    qDebug() << "Proxy:" << proxy_list.first().hostName() << proxy_list.first().port() << "type:" << proxy_list.first().type();
 
   mp_client->configuration().setNetworkProxy( proxy );
   mp_client->configuration().setJid( "beebeep.test@gmail.com" );
   mp_client->configuration().setPassword( "TesT12345" );
-  mp_client->configuration().setResource( "BeeBEEP" );
+  mp_client->configuration().setResource( "beebeep" );
 
   mp_client->connectToServer( mp_client->configuration() );
   qDebug() << "XMPP> Connecting to" << mp_client->configuration().host();
@@ -131,25 +137,19 @@ void XmppManager::presenceChanged( const QString& bare_jid, const QString& jid_r
 void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )
 {
   QString user_path = jidToBareJid( xmpp_msg.from() );
-  Message m;
+  qDebug() << "XMPP> message received from" << user_path;
+  dumpMessage( xmpp_msg );
 
   switch( xmpp_msg.type() )
   {
   //case QXmppMessage::Normal:
-  case QXmppMessage::Chat:
   //case QXmppMessage::GroupChat:
   //case QXmppMessage::Headline:
-    m = Protocol::instance().chatMessage( xmpp_msg.body() );
-    m.addFlag( Message::Private );
-    m.setTimestamp( xmpp_msg.stamp() );
-    m.setData( QColor( 0, 0, 0 ).name() );
-    qDebug() << "XMPP> new message from" << user_path << "with body:" << m.text();
-    emit message( user_path, m );
+  case QXmppMessage::Chat:
+    parseChatMessage( user_path, xmpp_msg );
     break;
   case QXmppMessage::Error:
-    qDebug() << "XMPP> error" << xmpp_msg.error().condition() << "in message from" << user_path;
-    m = Protocol::instance().systemMessage( tr( "Error occurred (#%1)" ).arg( xmpp_msg.error().condition() ) );
-    emit message( user_path, m );
+    parseErrorMessage( user_path, xmpp_msg );
     break;
   default:
     qWarning() << "XMPP> cannot handle message type:" << xmpp_msg.type();
@@ -190,4 +190,43 @@ void XmppManager::sendMessage( const QString& user_path, const Message& m )
   {
     mp_client->sendMessage( user_path, m.text() );
   }
+}
+
+void XmppManager::parseChatMessage( const QString& user_path, const QXmppMessage& xmpp_msg )
+{
+  if( xmpp_msg.body().isEmpty() )
+    return;
+  Message m = Protocol::instance().chatMessage( xmpp_msg.body() );
+  m.addFlag( Message::Private );
+  m.setTimestamp( xmpp_msg.stamp() );
+  m.setData( QColor( 0, 0, 0 ).name() );
+  qDebug() << "XMPP> chat message from" << user_path << "with body:" << m.text();
+  emit message( user_path, m );
+}
+
+void XmppManager::parseErrorMessage( const QString& user_path, const QXmppMessage& xmpp_msg )
+{
+  qDebug() << "XMPP> error" << xmpp_msg.error().condition() << "in message from" << user_path;
+  Message m = Protocol::instance().systemMessage( tr( "Error occurred (#%1)" ).arg( xmpp_msg.error().condition() ) );
+  emit message( user_path, m );
+}
+
+void XmppManager::dumpMessage( const QXmppMessage& xmpp_msg )
+{
+  qDebug() << "XMPP> Message Begin";
+  qDebug() << "XMPP> Body:" << xmpp_msg.body();
+  qDebug() << "XMPP> Stamp:" << xmpp_msg.stamp().toString( Qt::ISODate );
+  qDebug() << "XMPP> State:" << (int)xmpp_msg.state();
+  qDebug() << "XMPP> Subject:" << xmpp_msg.subject();
+  qDebug() << "XMPP> Thread:" << xmpp_msg.thread();
+  qDebug() << "XMPP> Type:" << (int)xmpp_msg.type();
+  qDebug() << "XMPP> To:" << xmpp_msg.to();
+  qDebug() << "XMPP> From:" << xmpp_msg.from();
+  qDebug() << "XMPP> Id:" << xmpp_msg.id();
+  qDebug() << "XMPP> Lang:" << xmpp_msg.lang();
+  qDebug() << "XMPP> Error code:" << xmpp_msg.error().code();
+  qDebug() << "XMPP> Error text:" << xmpp_msg.error().text();
+  qDebug() << "XMPP> Error condition:" << (int)xmpp_msg.error().condition();
+  qDebug() << "XMPP> Error type:" << (int)xmpp_msg.error().type();
+  qDebug() << "XMPP> Message End";
 }

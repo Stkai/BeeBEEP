@@ -45,7 +45,8 @@ SOURCES += Listener.cpp \
     GuiPluginManager.cpp \
     ChatMessageData.cpp \
     XmppManager.cpp \
-    CoreXmpp.cpp
+    CoreXmpp.cpp \
+    GuiNetwork.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -87,15 +88,24 @@ HEADERS += sym_iap_util.h \
     PluginManager.h \
     GuiPluginManager.h \
     ChatMessageData.h \
-    XmppManager.h
+    XmppManager.h \
+    GuiNetwork.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
-    GuiPluginManager.ui
+    GuiPluginManager.ui \
+    GuiNetwork.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 
-LIBS += -L$$PWD/../../qxmpp/lib/ -llibqxmpp
-INCLUDEPATH += $$PWD/../../qxmpp/src
-DEPENDPATH += $$PWD/../../qxmpp/src
-PRE_TARGETDEPS += $$PWD/../../qxmpp/lib/libqxmpp.a
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../qxmpp/release/ -lqxmpp
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../qxmpp/debug/ -lqxmpp
+else:symbian: LIBS += -lqxmpp
+else:unix: LIBS += -L$$OUT_PWD/../qxmpp/ -lqxmpp
+
+INCLUDEPATH += $$PWD/../qxmpp
+DEPENDPATH += $$PWD/../qxmpp
+
+win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/release/libqxmpp.a
+else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/debug/libqxmpp.a
+else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/libqxmpp.a
