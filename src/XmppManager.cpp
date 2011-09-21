@@ -46,18 +46,20 @@ XmppManager::XmppManager( QObject* parent )
 
 void XmppManager::connectToServer()
 {
-  QNetworkProxy proxy;
-  proxy.setType( QNetworkProxy::HttpProxy );
-  proxy.setHostName( "10.184.160.100" );
-  proxy.setPort( 8080 );
+  QNetworkProxy proxy = Settings::instance().networkProxy();
 
-  QList<QNetworkProxy> proxy_list = QNetworkProxyFactory::systemProxyForQuery();
-  if( proxy_list.isEmpty() )
-    qDebug() << "System proxy not found";
-  else
-    qDebug() << "Proxy:" << proxy_list.first().hostName() << proxy_list.first().port() << "type:" << proxy_list.first().type();
+  if( proxy.type() == QNetworkProxy::DefaultProxy )
+  {
+    QList<QNetworkProxy> proxy_list = QNetworkProxyFactory::systemProxyForQuery();
+    if( !proxy_list.isEmpty() )
+      proxy = proxy_list.first();
+    else
+      proxy = QNetworkProxy( QNetworkProxy::NoProxy );
+  }
 
-  mp_client->configuration().setNetworkProxy( proxy );
+  if( proxy.type() != QNetworkProxy::NoProxy && proxy.type() != QNetworkProxy::DefaultProxy )
+    mp_client->configuration().setNetworkProxy( proxy );
+
   mp_client->configuration().setJid( "beebeep.test@gmail.com" );
   mp_client->configuration().setPassword( "TesT12345" );
   mp_client->configuration().setResource( "beebeep" );
@@ -127,6 +129,7 @@ void XmppManager::rosterChanged( const QString& bare_jid )
 
 void XmppManager::presenceChanged( const QString& bare_jid, const QString& jid_resource )
 {
+  qDebug() << "XMPP> presence changed for" << bare_jid;
   QXmppPresence presence = mp_client->rosterManager().getPresence( bare_jid, jid_resource );
   User::Status status = statusFromPresence( presence.status().type() );
   QString status_desc = presence.status().statusText();
