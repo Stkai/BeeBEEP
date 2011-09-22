@@ -30,6 +30,7 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiEditVCard" );
+  setWindowTitle( tr( "Profile - %1" ).arg( Settings::instance().programName() ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

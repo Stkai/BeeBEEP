@@ -89,7 +89,8 @@ bool Core::start()
 
   showUserStatusChanged( Settings::instance().localUser() );
 
-  mp_xmppManager->connectToServer();
+  if( Settings::instance().autoConnectToNetworkAccount() )
+    mp_xmppManager->connectToServer( Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );
 
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
@@ -98,8 +99,7 @@ bool Core::start()
 
 void Core::stop()
 {
-  if( mp_xmppManager->isConnected() )
-    mp_xmppManager->disconnectFromServer();
+  mp_xmppManager->disconnectFromServer();
   mp_broadcaster->stopBroadcasting();
   mp_fileTransfer->stopListener();
   mp_listener->close();

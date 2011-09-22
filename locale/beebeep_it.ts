@@ -131,6 +131,22 @@
         <source>%1 %2 &lt;a href=&apos;%3&apos;&gt;%4&lt;/a&gt;.</source>
         <translation></translation>
     </message>
+    <message>
+        <source>You are already connected to the network account.</source>
+        <translation>La connessione al servizio di rete è già attiva.</translation>
+    </message>
+    <message>
+        <source>Unable to connect to the network account. Username is empty.</source>
+        <translation>Impossibile connettersi al servizio di rete. Il nome utente non è stato specificato.</translation>
+    </message>
+    <message>
+        <source>Unable to connect to the network account. Password is empty.</source>
+        <translation>Impossibile connettersi al servizio di rete. La password non è valida.</translation>
+    </message>
+    <message>
+        <source>Connecting to %1...</source>
+        <translation>Connessione a %1...</translation>
+    </message>
 </context>
 <context>
     <name>FileTransferPeer</name>
@@ -242,6 +258,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Please insert your nickname.</source>
         <translation>Il campo del tuo soprannome non può essere vuoto.</translation>
+    </message>
+    <message>
+        <source>Profile - %1</source>
+        <translation>Profilo - %1</translation>
     </message>
 </context>
 <context>
@@ -630,7 +650,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 - Profile</source>
-        <translation>%1 - Profilo</translation>
+        <translation type="obsolete">%1 - Profilo</translation>
     </message>
     <message>
         <source>e-mail: marco.mastroddi@gmail.com</source>
@@ -676,6 +696,22 @@ il file %2 (%3)?</translation>
         <source>is a plugin developed by</source>
         <translation>è un plugin sviluppato da</translation>
     </message>
+    <message>
+        <source>Network account...</source>
+        <translation>Account di rete...</translation>
+    </message>
+    <message>
+        <source>Show the network account dialog</source>
+        <translation>Mostra la finestra per configurare il tuo account di rete</translation>
+    </message>
+    <message>
+        <source>Network settings...</source>
+        <translation>Opzioni di rete...</translation>
+    </message>
+    <message>
+        <source>Show the network settings dialog</source>
+        <translation>Mostra la finestra per impostare le opzioni di rete</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -702,6 +738,124 @@ il file %2 (%3)?</translation>
     <message>
         <source>Select All</source>
         <translation>Seleziona tutto</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetwork</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Proxy Configuration</source>
+        <translation>Configurazione del proxy</translation>
+    </message>
+    <message>
+        <source>Proxy</source>
+        <translation>Proxy</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Nessuno</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation>Automatico</translation>
+    </message>
+    <message>
+        <source>Manually</source>
+        <translation>Manuale</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation>Indirizzo</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Porta</translation>
+    </message>
+    <message>
+        <source>Use authentication</source>
+        <translation>Usa autenticazione</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation>Utente</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation>Password</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Network Manager - %1</source>
+        <translation>Opzioni di rete - %1</translation>
+    </message>
+    <message>
+        <source>Please insert the network proxy hostname or address.</source>
+        <translation>Inserisci l&apos;indirizzo o il nome del server proxy.</translation>
+    </message>
+    <message>
+        <source>Please insert the user for the proxy authorization.</source>
+        <translation>Inserisci l&apos;utente per l&apos;autenticazione sul server proxy.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkLogin</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation>Utente</translation>
+    </message>
+    <message>
+        <source>(ex: user@gmail.com)</source>
+        <translation>(es: utente@gmail.com)</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation>Password</translation>
+    </message>
+    <message>
+        <source>Remember user</source>
+        <translation>Ricorda il nome utente</translation>
+    </message>
+    <message>
+        <source>Remember password</source>
+        <translation>Ricorda la password</translation>
+    </message>
+    <message>
+        <source>Automatic connection</source>
+        <translation>Connessione automatica all&apos;avvio</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation>Accedi</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Login - %1</source>
+        <translation>Accesso alla rete - %1</translation>
+    </message>
+    <message>
+        <source>Please insert the username (JabberId)</source>
+        <translation>Inserisci il nome utente (JabberId)</translation>
+    </message>
+    <message>
+        <source>Please insert the password</source>
+        <translation>Inserisci la password</translation>
     </message>
 </context>
 <context>
@@ -744,7 +898,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 - Plugin Manager</source>
-        <translation>%1 - Gestione dei Plugin</translation>
+        <translation type="obsolete">%1 - Gestione dei Plugin</translation>
     </message>
     <message>
         <source>Plugin</source>
@@ -757,6 +911,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Author</source>
         <translation>Autore</translation>
+    </message>
+    <message>
+        <source>Plugin Manager - %1</source>
+        <translation>Gestione dei Plugin - %1</translation>
     </message>
 </context>
 <context>
@@ -1155,6 +1313,33 @@ il file %2 (%3)?</translation>
     <message>
         <source>status error</source>
         <translation>errore di stato</translation>
+    </message>
+</context>
+<context>
+    <name>XmppManager</name>
+    <message>
+        <source>socket</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>keep alive</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>xmpp stream</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>sconosciuto</translation>
+    </message>
+    <message>
+        <source>connection error (%1)</source>
+        <translation>errore di connessione (%1)</translation>
+    </message>
+    <message>
+        <source>Error occurred (#%1)</source>
+        <translation>C&apos;è stato un errore (#%1)</translation>
     </message>
 </context>
 </TS>

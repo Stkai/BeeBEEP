@@ -46,7 +46,8 @@ SOURCES += Listener.cpp \
     ChatMessageData.cpp \
     XmppManager.cpp \
     CoreXmpp.cpp \
-    GuiNetwork.cpp
+    GuiNetwork.cpp \
+    GuiNetworkLogin.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -89,12 +90,14 @@ HEADERS += sym_iap_util.h \
     GuiPluginManager.h \
     ChatMessageData.h \
     XmppManager.h \
-    GuiNetwork.h
+    GuiNetwork.h \
+    GuiNetworkLogin.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
     GuiPluginManager.ui \
-    GuiNetwork.ui
+    GuiNetwork.ui \
+    GuiNetworkLogin.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 

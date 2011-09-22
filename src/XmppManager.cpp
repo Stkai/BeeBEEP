@@ -44,7 +44,7 @@ XmppManager::XmppManager( QObject* parent )
   connect( mp_client, SIGNAL( messageReceived( const QXmppMessage& ) ), this, SLOT( messageReceived( const QXmppMessage& ) ) );
 }
 
-void XmppManager::connectToServer()
+void XmppManager::connectToServer( const QString& jid, const QString& passwd )
 {
   QNetworkProxy proxy = Settings::instance().networkProxy();
 
@@ -60,9 +60,9 @@ void XmppManager::connectToServer()
   if( proxy.type() != QNetworkProxy::NoProxy && proxy.type() != QNetworkProxy::DefaultProxy )
     mp_client->configuration().setNetworkProxy( proxy );
 
-  mp_client->configuration().setJid( "beebeep.test@gmail.com" );
-  mp_client->configuration().setPassword( "TesT12345" );
-  mp_client->configuration().setResource( "beebeep" );
+  mp_client->configuration().setJid( jid );
+  mp_client->configuration().setPassword( passwd );
+  mp_client->configuration().setResource( QString( "BeeBeep" ) );
 
   mp_client->connectToServer( mp_client->configuration() );
   qDebug() << "XMPP> Connecting to" << mp_client->configuration().host();
@@ -77,12 +77,12 @@ void XmppManager::disconnectFromServer()
 
 void XmppManager::serverConnected()
 {
-  qDebug() << "XMPP>" << mp_client->configuration().domain() << "server is connected";
+  makeSystemMessage( "connected to the server" );
 }
 
 void XmppManager::serverDisconnected()
 {
-  qDebug() << "XMPP>" << mp_client->configuration().domain() << "server is disconnected";
+  makeSystemMessage( "disconnected from the server" );
 }
 
 void XmppManager::errorOccurred( QXmppClient::Error err )
@@ -91,19 +91,19 @@ void XmppManager::errorOccurred( QXmppClient::Error err )
   switch( err )
   {
   case QXmppClient::SocketError:
-    s_error = tr( "socket error" );
+    s_error = tr( "socket" );
     break;
   case QXmppClient::KeepAliveError:
-    s_error = tr( "keep alive error" );
+    s_error = tr( "keep alive" );
     break;
   case QXmppClient::XmppStreamError:
-    s_error = tr( "xmpp stream error" );
+    s_error = tr( "xmpp stream" );
     break;
   default:
-    s_error = tr( "unknown error" );
+    s_error = tr( "unknown" );
   }
 
-  systemMessage( tr( "%1: %2 occurred." ).arg( mp_client->configuration().domain(), s_error ) );
+  makeSystemMessage( tr( "connection error (%1)" ).arg( s_error ) );
 }
 
 void XmppManager::rosterReceived()
@@ -159,10 +159,11 @@ void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )
   }
 }
 
-void XmppManager::systemMessage( const QString& txt )
+void XmppManager::makeSystemMessage( const QString& txt )
 {
-  qDebug() << mp_client->configuration().domain() << "send system message:" << txt;
-  Message m = Protocol::instance().systemMessage( txt );
+  QString msg = QString( "%1: %2." ).arg( mp_client->configuration().domain(), txt );
+  qDebug() << "XMPP>" << msg;
+  Message m = Protocol::instance().systemMessage( msg );
   emit message( Settings::instance().localUser().path(), m );
 }
 

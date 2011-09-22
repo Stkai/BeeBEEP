@@ -37,7 +37,7 @@ class XmppManager : public QObject
 public:
   explicit XmppManager( QObject* );
 
-  void connectToServer();
+  void connectToServer( const QString& jid, const QString& passwd );
   void disconnectFromServer();
   inline bool isConnected() const;
 
@@ -57,7 +57,7 @@ protected slots:
   void messageReceived( const QXmppMessage& );
 
 protected:
-  void systemMessage( const QString& );
+  void makeSystemMessage( const QString& );
   User::Status statusFromPresence( QXmppPresence::Status::Type );
   void parseChatMessage( const QString&, const QXmppMessage& );
   void parseErrorMessage( const QString&, const QXmppMessage& );

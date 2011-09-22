@@ -43,6 +43,9 @@ public:
   bool start();
   void stop();
 
+  bool connectToNetworkAccount( const QString& jid, const QString& passwd );
+  void disconnectFromNetworkAccount();
+
   inline const UserList& users() const;
 
   /* CoreUser */

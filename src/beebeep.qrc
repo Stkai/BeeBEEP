@@ -57,5 +57,6 @@
         <file>images/remove.png</file>
         <file>images/plugin.png</file>
         <file>images/network-settings.png</file>
+        <file>images/network-account.png</file>
     </qresource>
 </RCC>

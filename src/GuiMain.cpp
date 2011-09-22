@@ -28,6 +28,7 @@
 #include "GuiChat.h"
 #include "GuiEditVCard.h"
 #include "GuiNetwork.h"
+#include "GuiNetworkLogin.h"
 #include "GuiPluginManager.h"
 #include "GuiTransferFile.h"
 #include "GuiUserList.h"
@@ -237,6 +238,8 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addAction( mp_actSearch );
   mp_menuMain->addSeparator();
+  act = mp_menuMain->addAction( QIcon( ":/images/network-account.png" ), tr( "Network account..."), this, SLOT( showNetworkAccount() ) );
+  act->setStatusTip( tr( "Show the network account dialog" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/network-settings.png" ), tr( "Network settings..."), this, SLOT( showNetworkManager() ) );
   act->setStatusTip( tr( "Show the network settings dialog" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
@@ -792,7 +795,6 @@ void GuiMain::showChat( const Chat& c )
 void GuiMain::changeVCard()
 {
   GuiEditVCard gvc( this );
-  gvc.setWindowTitle( tr( "%1 - Profile" ).arg( Settings::instance().programName() ) );
   gvc.setModal( true );
   gvc.setVCard( Settings::instance().localUser().vCard() );
   gvc.setUserColor( Settings::instance().localUser().color() );
@@ -893,4 +895,21 @@ void GuiMain::showNetworkManager()
   gn.show();
   gn.setFixedSize( gn.size() );
   gn.exec();
+}
+
+void GuiMain::showNetworkAccount()
+{
+  GuiNetworkLogin gnl( this );
+  gnl.setModal( true );
+  gnl.loadSettings();
+  gnl.show();
+  gnl.setFixedSize( gnl.size() );
+  int result = gnl.exec();
+  if( result == QDialog::Accepted )
+  {
+    if( !mp_core->connectToNetworkAccount( gnl.user(), gnl.password() ) )
+    {
+      qDebug() << "Connection to network account failed";
+    }
+  }
 }

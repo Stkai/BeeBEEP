@@ -118,6 +118,11 @@ public:
   inline const QNetworkProxy& networkProxy() const;
   inline void setNetworkProxy( const QNetworkProxy& );
 
+  inline const QString& networkAccountUser() const;
+  inline const QString& networkAccountPassword() const;
+  inline bool autoConnectToNetworkAccount() const;
+  void setNetworkAccount( const QString&, const QString&, bool );
+
   void load();
   void save();
 
@@ -188,6 +193,10 @@ private:
   QNetworkProxy m_networkProxy;
   bool m_networkProxyUseAuthentication;
 
+  QString m_networkAccountUser;
+  QString m_networkAccountPassword;
+  bool m_autoConnectToNetworkAccount;
+
 };
 
 
@@ -255,6 +264,8 @@ inline bool Settings::networkProxyUseAuthentication() const { return m_networkPr
 inline void Settings::setNetworkProxyUseAuthentication( bool new_value ) { m_networkProxyUseAuthentication = new_value; }
 inline const QNetworkProxy& Settings::networkProxy() const { return m_networkProxy; }
 inline void Settings::setNetworkProxy( const QNetworkProxy& new_value ) { m_networkProxy = new_value; }
-
+inline const QString& Settings::networkAccountUser() const { return m_networkAccountUser; }
+inline const QString& Settings::networkAccountPassword() const { return m_networkAccountPassword; }
+inline bool Settings::autoConnectToNetworkAccount() const { return m_autoConnectToNetworkAccount; }
 
 #endif // BEEBEEP_SETTINGS_H

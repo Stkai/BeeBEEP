@@ -31,7 +31,7 @@ GuiNetwork::GuiNetwork( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiNetwork" );
-  setWindowTitle( tr( "%1 - Network Manager" ).arg( Settings::instance().programName() ) );
+  setWindowTitle( tr( "Network Manager - %1" ).arg( Settings::instance().programName() ) );
   m_bgProxyType.addButton( mp_rbProxyNone, 0 );
   m_bgProxyType.addButton( mp_rbProxyAutomatic, 1 );
   m_bgProxyType.addButton( mp_rbProxyManually, 2 );

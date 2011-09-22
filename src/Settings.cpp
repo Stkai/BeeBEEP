@@ -75,6 +75,13 @@ void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port
   m_localUser.setHostPort( host_port );
 }
 
+void Settings::setNetworkAccount( const QString& account_user, const QString& account_password, bool auto_connect )
+{
+  m_networkAccountUser = account_user;
+  m_networkAccountPassword = account_password;
+  m_autoConnectToNetworkAccount = auto_connect;
+}
+
 namespace
 {
   QString GetUserNameFromSystemEnvinroment()
@@ -178,7 +185,10 @@ void Settings::load()
   m_networkProxy.setPort( sets.value( "ProxyPort", 0 ).toInt() );
   m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();
   m_networkProxy.setUser( sets.value( "ProxyUser", "" ).toString() );
-  m_networkProxy.setPassword( sets.value( "ProxyPassword", "" ).toString() );
+  m_networkProxy.setPassword( Protocol::instance().simpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
+  m_networkAccountUser = sets.value( "AccountJid", "" ).toString();
+  m_networkAccountPassword = Protocol::instance().simpleDecrypt( sets.value( "AccountPassword", "" ).toString() );
+  m_autoConnectToNetworkAccount = sets.value( "AutoConnection", false ).toBool();
   sets.endGroup();
 
   if( m_localUser.name().isEmpty() )
@@ -256,7 +266,10 @@ void Settings::save()
   sets.setValue( "ProxyPort", m_networkProxy.port() );
   sets.setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
   sets.setValue( "ProxyUser", m_networkProxy.user() );
-  sets.setValue( "ProxyPassword", m_networkProxy.password() );
+  sets.setValue( "ProxyPassword", Protocol::instance().simpleEncrypt( m_networkProxy.password() ) );
+  sets.setValue( "AccountJid", m_networkAccountUser );
+  sets.setValue( "AccountPassword", Protocol::instance().simpleEncrypt( m_networkAccountPassword ) );
+  sets.setValue( "AutoConnection", m_autoConnectToNetworkAccount );
   sets.endGroup();
 
   sets.sync();

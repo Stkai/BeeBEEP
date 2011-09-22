@@ -547,3 +547,25 @@ QByteArray Protocol::decryptByteArray( const QByteArray& byte_array_encrypted ) 
 
   return decrypted_byte_array;
 }
+
+QString Protocol::simpleEncrypt( const QString& plain_text ) const
+{
+  if( plain_text.size() <= 0 )
+    return "";
+  char key = 'k';
+  QString encrypted_text = "";
+  for( int i = 0; i < plain_text.size(); i++ )
+    encrypted_text += plain_text.at( i ).toAscii() ^ (int(key) + i) % 255;
+  return encrypted_text;
+}
+
+QString Protocol::simpleDecrypt( const QString& encrypted_text ) const
+{
+  if( encrypted_text.size() <= 0 )
+    return "";
+  char key = 'k';
+  QString plain_text = "";
+  for( int i = 0; i < encrypted_text.size(); i++ )
+    plain_text += encrypted_text.at( i ).toAscii() ^ (int(key) + i) % 255;
+  return plain_text;
+}

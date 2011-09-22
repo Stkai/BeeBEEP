@@ -73,6 +73,7 @@ private slots:
   void showTextMarkerPluginHelp();
   void showPluginManager();
   void showNetworkManager();
+  void showNetworkAccount();
 
 protected:
   void closeEvent( QCloseEvent* );

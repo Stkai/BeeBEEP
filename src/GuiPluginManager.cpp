@@ -32,7 +32,7 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiPluginManager" );
 
-  setWindowTitle( tr( "%1 - Plugin Manager" ).arg( Settings::instance().programName() ) );
+  setWindowTitle( tr( "Plugin Manager - %1" ).arg( Settings::instance().programName() ) );
 
   m_changed = false;
 

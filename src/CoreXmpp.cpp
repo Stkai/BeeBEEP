@@ -21,11 +21,49 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "ColorManager.h"
 #include "Core.h"
 #include "Protocol.h"
 #include "XmppManager.h"
 
+
+bool Core::connectToNetworkAccount( const QString& jid, const QString& passwd )
+{
+  QString sHtmlMsg = Bee::iconToHtml( ":/images/network-account.png", "*@*" ) + QString( " " );
+
+  if( mp_xmppManager->isConnected() )
+  {
+    sHtmlMsg += tr( "You are already connected to the network account." );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+    return false;
+  }
+
+  if( jid.isEmpty() )
+  {
+    sHtmlMsg += tr( "Unable to connect to the network account. Username is empty." );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+    return false;
+  }
+
+  if( passwd.isEmpty() )
+  {
+    sHtmlMsg += tr( "Unable to connect to the network account. Password is empty." );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+    return false;
+  }
+
+  sHtmlMsg += tr( "Connecting to %1..." ).arg( jid );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+  mp_xmppManager->connectToServer( jid, passwd );
+  return true;
+}
+
+void Core::disconnectFromNetworkAccount()
+{
+  if( mp_xmppManager->isConnected() )
+    mp_xmppManager->disconnectFromServer();
+}
 
 void Core::parseXmppMessage( const QString& user_path, const Message& m )
 {
@@ -39,7 +77,10 @@ void Core::parseXmppMessage( const QString& user_path, const Message& m )
   switch( m.type() )
   {
   case Message::System:
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), m.text(), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
+                           QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/network-account.png", "*@*" ),
+                                                   m.text() ),
+                           DispatchToAllChatsWithUser );
     break;
   case Message::User:
   case Message::Chat:

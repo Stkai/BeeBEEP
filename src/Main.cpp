@@ -85,9 +85,6 @@ int main( int argc, char *argv[] )
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
-  /* test encryption */
-  //make_test();
-
   /* Show Main Window */
   GuiMain mw;
 #ifdef Q_OS_SYMBIAN
