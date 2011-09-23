@@ -53,7 +53,7 @@ User UserList::find( VNumber user_id ) const
       return *it;
     ++it;
   }
-  qDebug() << "Unable to find an user with id" << user_id;
+  qDebug() << "Unable to find user with id" << user_id;
   return User();
 }
 
@@ -68,7 +68,7 @@ User UserList::find( const QString& user_path ) const
       return *it;
     ++it;
   }
-  qDebug() << "Unable to find an user with path" << user_path;
+  qDebug() << "Unable to find user with path" << user_path;
   return User();
 }
 
@@ -111,4 +111,21 @@ UserList UserList::fromUsersId( const QList<VNumber>& users_id ) const
   foreach( VNumber user_id, users_id )
     ul.setUser( find( user_id ) );
   return ul;
+}
+
+bool UserList::removeUser( const QString& user_path )
+{
+  QList<User>::iterator it = m_users.begin();
+  while( it != m_users.end() )
+  {
+    if( user_path == (*it).path() )
+    {
+      m_users.erase( it );
+      qDebug() << "User" << user_path << "is removed from list";
+      return true;
+    }
+    ++it;
+  }
+  qDebug() << "Unable to remove user with path" << user_path;
+  return false;
 }

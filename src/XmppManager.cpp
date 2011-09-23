@@ -26,8 +26,12 @@
 #include "XmppManager.h"
 #include "QXmppClient.h"
 #include "QXmppMessage.h"
+#include "QXmppPresence.h"
+#include "QXmppReconnectionManager.h"
 #include "QXmppRosterManager.h"
 #include "QXmppUtils.h"
+#include "QXmppVCardIq.h"
+#include "QXmppVCardManager.h"
 
 
 XmppManager::XmppManager( QObject* parent )
@@ -41,7 +45,9 @@ XmppManager::XmppManager( QObject* parent )
   connect( &(mp_client->rosterManager()), SIGNAL( rosterReceived() ), this, SLOT( rosterReceived() ) );
   connect( &(mp_client->rosterManager()), SIGNAL( rosterChanged( const QString& ) ), this, SLOT( rosterChanged( const QString& ) ) );
   connect( &(mp_client->rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SLOT( presenceChanged( const QString&, const QString& ) ) );
+  connect( &(mp_client->vCardManager()), SIGNAL( vCardReceived( const QXmppVCardIq& ) ), this, SLOT( vCardReceived( const QXmppVCardIq& ) ) );
   connect( mp_client, SIGNAL( messageReceived( const QXmppMessage& ) ), this, SLOT( messageReceived( const QXmppMessage& ) ) );
+  connect( mp_client, SIGNAL( presenceReceived( const QXmppPresence& ) ), this, SLOT( presenceReceived( const QXmppPresence& ) ) );
 }
 
 void XmppManager::connectToServer( const QString& jid, const QString& passwd )
@@ -64,14 +70,20 @@ void XmppManager::connectToServer( const QString& jid, const QString& passwd )
   mp_client->configuration().setPassword( passwd );
   mp_client->configuration().setResource( QString( "BeeBeep" ) );
 
-  mp_client->connectToServer( mp_client->configuration() );
-  qDebug() << "XMPP> Connecting to" << mp_client->configuration().host();
+  if( jid.contains( "@gmail", Qt::CaseInsensitive ) )
+    m_service = "GTalk";
+  else
+    m_service = "Jabber";
 
+  makeSystemMessage( tr( "connection in progress.." ) );
+  mp_client->connectToServer( mp_client->configuration() );
+
+  qDebug() << "XMPP> Connecting to" << service();
 }
 
 void XmppManager::disconnectFromServer()
 {
-  qDebug() << "XMPP> Disconnecting from" << mp_client->configuration().host();
+  qDebug() << "XMPP> Disconnecting from" << service();
   mp_client->disconnectFromServer();
 }
 
@@ -83,6 +95,7 @@ void XmppManager::serverConnected()
 void XmppManager::serverDisconnected()
 {
   makeSystemMessage( "disconnected from the server" );
+  mp_client->reconnectionManager()->cancelReconnection();
 }
 
 void XmppManager::errorOccurred( QXmppClient::Error err )
@@ -97,7 +110,16 @@ void XmppManager::errorOccurred( QXmppClient::Error err )
     s_error = tr( "keep alive" );
     break;
   case QXmppClient::XmppStreamError:
-    s_error = tr( "xmpp stream" );
+  {
+    switch( mp_client->xmppStreamError() )
+    {
+    case QXmppStanza::Error::NotAuthorized:
+      s_error = tr( "invalid user or password" );
+      break;
+    default:
+      s_error = tr( "xmpp stream" );
+    }
+  }
     break;
   default:
     s_error = tr( "unknown" );
@@ -108,7 +130,7 @@ void XmppManager::errorOccurred( QXmppClient::Error err )
 
 void XmppManager::rosterReceived()
 {
-  qDebug() << "XMPP>" << mp_client->configuration().domain() << "has sent roster";
+  qDebug() << "XMPP>" << service() << "has sent roster";
   QStringList bare_jid_list = mp_client->rosterManager().getRosterBareJids();
   foreach( QString bare_jid, bare_jid_list )
     rosterChanged( bare_jid );
@@ -129,12 +151,48 @@ void XmppManager::rosterChanged( const QString& bare_jid )
 
 void XmppManager::presenceChanged( const QString& bare_jid, const QString& jid_resource )
 {
+  if( bare_jid == Settings::instance().localUser().path() )
+  {
+    qDebug() << "XMPP> skip local user presence";
+    return;
+  }
+
   qDebug() << "XMPP> presence changed for" << bare_jid;
   QXmppPresence presence = mp_client->rosterManager().getPresence( bare_jid, jid_resource );
   User::Status status = statusFromPresence( presence.status().type() );
   QString status_desc = presence.status().statusText();
   Message m = Protocol::instance().userStatusMessage( status, status_desc );
   emit message( bare_jid, m );
+
+  if( presence.type() == QXmppPresence::Available )
+  {
+    switch( presence.vCardUpdateType() )
+    {
+    case QXmppPresence::VCardUpdateNotReady:
+      break;
+    case QXmppPresence::VCardUpdateNone:
+    case QXmppPresence::VCardUpdateNoPhoto:
+    case QXmppPresence::VCardUpdateValidPhoto:
+      qDebug() << "XMPP> vCard is available for user" << bare_jid;
+      emit vCardAvailable( bare_jid );
+      break;
+    default:
+      qDebug() << "XMPP> vCardUpdateType unknown in presence message";
+    }
+  }
+}
+
+void XmppManager::requestVCard( const QString& bare_jid )
+{
+  qDebug() << "XMPP> requesting vCard for user" << bare_jid;
+  mp_client->vCardManager().requestVCard( bare_jid );
+}
+
+
+void XmppManager::checkPresence( const QString& bare_jid )
+{
+  qDebug() << "XMPP> check presence for" << bare_jid;
+  QList<QXmppPresence> presence_list;
 }
 
 void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )
@@ -145,9 +203,9 @@ void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )
 
   switch( xmpp_msg.type() )
   {
-  //case QXmppMessage::Normal:
   //case QXmppMessage::GroupChat:
   //case QXmppMessage::Headline:
+  case QXmppMessage::Normal:  // offline messages
   case QXmppMessage::Chat:
     parseChatMessage( user_path, xmpp_msg );
     break;
@@ -161,7 +219,7 @@ void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )
 
 void XmppManager::makeSystemMessage( const QString& txt )
 {
-  QString msg = QString( "%1: %2." ).arg( mp_client->configuration().domain(), txt );
+  QString msg = QString( "%1: %2." ).arg( service(), txt );
   qDebug() << "XMPP>" << msg;
   Message m = Protocol::instance().systemMessage( msg );
   emit message( Settings::instance().localUser().path(), m );
@@ -208,11 +266,192 @@ void XmppManager::parseChatMessage( const QString& user_path, const QXmppMessage
   emit message( user_path, m );
 }
 
+QString XmppManager::errorConditionToString( int condition ) const
+{
+  switch( condition )
+  {
+  case QXmppStanza::Error::BadRequest:
+    return tr( "bad request" );
+  case QXmppStanza::Error::Conflict:
+    return tr( "conflict" );
+  case QXmppStanza::Error::FeatureNotImplemented:
+    return tr( "feature not implemented" );
+  case QXmppStanza::Error::Forbidden:
+    return tr( "forbidden" );
+  case QXmppStanza::Error::Gone:
+    return tr( "gone" );
+  case QXmppStanza::Error::InternalServerError:
+    return tr( "internal server error" );
+  case QXmppStanza::Error::ItemNotFound:
+    return tr( "item not found" );
+  case QXmppStanza::Error::JidMalformed:
+    return tr( "jid malformed" );
+  case QXmppStanza::Error::NotAcceptable:
+    return tr( "not acceptable" );
+  case QXmppStanza::Error::NotAllowed:
+    return tr( "not allowed" );
+  case QXmppStanza::Error::NotAuthorized:
+    return tr( "not authorized" );
+  case QXmppStanza::Error::PaymentRequired:
+    return tr( "payment required" );
+  case QXmppStanza::Error::RecipientUnavailable:
+    return tr( "recipient unavailable" );
+  case QXmppStanza::Error::Redirect:
+    return tr( "redirect" );
+  case QXmppStanza::Error::RegistrationRequired:
+    return tr( "registration required" );
+  case QXmppStanza::Error::RemoteServerNotFound:
+    return tr( "remote server not found" );
+  case QXmppStanza::Error::RemoteServerTimeout:
+    return tr( "remote server timeout" );
+  case QXmppStanza::Error::ResourceConstraint:
+    return tr( "resource constraint" );
+  case QXmppStanza::Error::ServiceUnavailable:
+    return tr( "service unavailable" );
+  case QXmppStanza::Error::SubscriptionRequired:
+    return tr( "subscription required" );
+  case QXmppStanza::Error::UndefinedCondition:
+    return tr( "undefined condition" );
+  case QXmppStanza::Error::UnexpectedRequest:
+    return tr( "unexpected request" );
+  default:
+    return tr( "unknown" );
+  }
+}
+
 void XmppManager::parseErrorMessage( const QString& user_path, const QXmppMessage& xmpp_msg )
 {
-  qDebug() << "XMPP> error" << xmpp_msg.error().condition() << "in message from" << user_path;
-  Message m = Protocol::instance().systemMessage( tr( "Error occurred (#%1)" ).arg( xmpp_msg.error().condition() ) );
+  QString s_error = errorConditionToString( xmpp_msg.error().condition() );
+  qDebug() << "XMPP> error" << s_error << "in message from" << user_path;
+  Message m = Protocol::instance().systemMessage( tr( "%1: error occurred (%2)" ).arg( service(), s_error ) );
   emit message( user_path, m );
+}
+
+void XmppManager::subscribeUser( const QString& jid, bool accepted )
+{
+  if( accepted )
+  {
+    makeSystemMessage( tr( "adding %1 to the contact list").arg( jid ) );
+    QXmppPresence subscribed;
+    subscribed.setTo( jid );
+    subscribed.setType( QXmppPresence::Subscribed );
+    mp_client->sendPacket( subscribed );
+
+    // reciprocal subscription
+    QXmppPresence subscribe;
+    subscribe.setTo( jid );
+    subscribe.setType( QXmppPresence::Subscribe );
+    mp_client->sendPacket( subscribe );
+  }
+  else
+  {
+    makeSystemMessage( tr( "%1's request is rejected").arg( jid ) );
+    QXmppPresence unsubscribed;
+    unsubscribed.setTo( jid );
+    unsubscribed.setType( QXmppPresence::Unsubscribed );
+    mp_client->sendPacket( unsubscribed );
+  }
+}
+
+void XmppManager::removeUser( const QString& jid )
+{
+  makeSystemMessage( tr( "removing %1 from the contact list").arg( jid ) );
+  QXmppRosterIq remove;
+  remove.setType( QXmppIq::Set );
+  QXmppRosterIq::Item item_remove;
+  item_remove.setSubscriptionType( QXmppRosterIq::Item::Remove );
+  item_remove.setBareJid( jid );
+  remove.addItem( item_remove );
+  mp_client->sendPacket( remove );
+}
+
+void XmppManager::sendLocalUserPresence()
+{
+  QXmppPresence presence = mp_client->clientPresence();
+
+  const User& u = Settings::instance().localUser();
+
+  if( u.isConnected() )
+    presence.setType( QXmppPresence::Available );
+  else
+    presence.setType( QXmppPresence::Unavailable );
+
+  switch( u.status() )
+  {
+  case User::Busy:
+    presence.status().setType( QXmppPresence::Status::DND );
+    break;
+  case User::Away:
+    presence.status().setType( QXmppPresence::Status::Away );
+    break;
+  default:
+    presence.status().setType( QXmppPresence::Status::Online );
+  }
+
+  presence.status().setStatusText( u.statusDescription() );
+
+  mp_client->setClientPresence( presence );
+
+}
+
+void XmppManager::presenceReceived( const QXmppPresence& presence )
+{
+  QString from = presence.from();
+  QString msg = "";
+  bool subscribe_request = false;
+  bool subscription_accepted = false;
+
+  switch( presence.type() )
+  {
+  case QXmppPresence::Subscribe:
+    msg = tr( "%1 wants to subscribe to your contact list" );
+    subscribe_request = true;
+    break;
+  case QXmppPresence::Subscribed:
+    msg = tr( "%1 has accepted your subscription" );
+    subscription_accepted = true;
+    break;
+  case QXmppPresence::Unsubscribe:
+    ///< The sender is unsubscribing from another entity's presence.
+    break;
+  case QXmppPresence::Unsubscribed:
+    msg = tr( "%1 has reject your subscription" );
+    break;
+  default:
+   break;
+ }
+
+ if( msg.isEmpty() )
+   return;
+
+ makeSystemMessage( msg.arg( from ) );
+
+ if( subscribe_request )
+   emit userSubscriptionRequest( from );
+
+ if( subscription_accepted )
+   rosterChanged( from );
+}
+
+void XmppManager::vCardReceived( const QXmppVCardIq& vciq )
+{
+  QString bare_jid = vciq.from();
+  qDebug() << "XMPP> vCard received from user" << bare_jid;
+  qDebug() << "XMPP> vCard nickname" << vciq.nickName();
+  qDebug() << "XMPP> vCard firstname" << vciq.firstName();
+  qDebug() << "XMPP> vCard middlename" << vciq.middleName();
+  qDebug() << "XMPP> vCard lastname" << vciq.lastName();
+  qDebug() << "XMPP> vCard fullname" << vciq.fullName();
+  qDebug() << "XMPP> vCard email" << vciq.email();
+  qDebug() << "XMPP> vCard birthday" << vciq.birthday().toString( Qt::ISODate );
+
+  VCard vc;
+  vc.setNickName( !vciq.nickName().isEmpty() ? vciq.nickName() : (!vciq.fullName().isEmpty() ? vciq.fullName() : bare_jid) );
+  vc.setFirstName( vciq.firstName() );
+  vc.setLastName( vciq.lastName() );
+  vc.setEmail( vciq.email() );
+  vc.setBirthday( vciq.birthday() );
+  emit vCardReceived( bare_jid, vc );
 }
 
 void XmppManager::dumpMessage( const QXmppMessage& xmpp_msg )

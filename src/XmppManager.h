@@ -28,6 +28,7 @@
 #include "Message.h"
 #include "QXmppClient.h"
 #include "User.h"
+class QXmppVCardIq;
 
 
 class XmppManager : public QObject
@@ -41,11 +42,22 @@ public:
   void disconnectFromServer();
   inline bool isConnected() const;
 
+  inline QString service() const;
+  inline QString iconPath() const;
+
   void sendMessage( const QString&, const Message& );
+  void subscribeUser( const QString&, bool );
+  void removeUser( const QString& );
+  void checkPresence( const QString& );
+  void requestVCard( const QString& );
+  void sendLocalUserPresence();
 
 signals:
   void message( const QString&, const Message& );
   void userChangedInRoster( const User& );
+  void userSubscriptionRequest( const QString& );
+  void vCardReceived( const QString&, const VCard& );
+  void vCardAvailable( const QString& );
 
 protected slots:
   void serverConnected();
@@ -55,24 +67,30 @@ protected slots:
   void errorOccurred( QXmppClient::Error );
   void presenceChanged( const QString&, const QString& );
   void messageReceived( const QXmppMessage& );
+  void presenceReceived( const QXmppPresence& );
+  void vCardReceived( const QXmppVCardIq& );
 
 protected:
   void makeSystemMessage( const QString& );
   User::Status statusFromPresence( QXmppPresence::Status::Type );
   void parseChatMessage( const QString&, const QXmppMessage& );
   void parseErrorMessage( const QString&, const QXmppMessage& );
+  QString errorConditionToString( int ) const;
 
 private:
   void dumpMessage( const QXmppMessage& );
 
 private:
   QXmppClient* mp_client;
+  QString m_service;
 
 };
 
 
 // Inline Functions
 inline bool XmppManager::isConnected() const { return mp_client->isConnected(); }
+inline QString XmppManager::service() const { return m_service.isEmpty() ? "Jabber" : m_service; }
+inline QString XmppManager::iconPath() const { return m_service == "GTalk" ? ":/images/gtalk.png" : ":/images/jabber.png"; }
 
 
 #endif // BEEBEEP_XMPPMANAGER_H

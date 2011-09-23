@@ -38,6 +38,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
   connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeColor() ) );
+  connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removeUser() ) );
 }
 
 void GuiVCard::setVCard( const User& u, VNumber chat_id )
@@ -50,7 +51,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   if( !u.vCard().firstName().isEmpty() || !u.vCard().lastName().isEmpty() )
     mp_lName->setText( QString( "<b>%1 %2</b>" ).arg( u.vCard().firstName(), u.vCard().lastName() ) );
   else
-    mp_lName->setText( "" );
+    mp_lName->setText( QString( "<b>%1</b>" ).arg( u.vCard().nickName()) );
 
   if( u.vCard().birthday().isValid() )
     mp_lBirthday->setText( tr( "Birthday: %1" ).arg( u.vCard().birthday().toString( Qt::SystemLocaleShortDate ) ) );
@@ -70,10 +71,19 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) ) );
 
   if( u.isLocal() )
-  {
+    mp_pbChat->setToolTip( tr( "Chat with all" ) );
+  else
+    mp_pbChat->setToolTip( tr( "Open chat" ) );
+
+  if( u.isOnLan() && !u.isLocal() )
+    mp_pbFile->show();
+  else
     mp_pbFile->hide();
-    mp_pbChat->setText( tr( "Chat with all" ) + " " );
-  }
+
+  if( u.isOnLan() )
+    mp_pbRemove->hide();
+  else
+    mp_pbRemove->show();
 
   qDebug() << "VCard showed for the user" << u.path();
 }
@@ -99,3 +109,9 @@ void GuiVCard::changeColor()
   close();
 }
 
+void GuiVCard::removeUser()
+{
+  hide();
+  emit removeUser( m_userId );
+  close();
+}

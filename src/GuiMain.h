@@ -74,6 +74,8 @@ private slots:
   void showPluginManager();
   void showNetworkManager();
   void showNetworkAccount();
+  void showUserSubscriptionRequest( const QString& );
+  void removeUser( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );

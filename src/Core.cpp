@@ -51,6 +51,9 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( message( const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const Message& ) ) );
   connect( mp_xmppManager, SIGNAL( userChangedInRoster( const User& ) ), this, SLOT( checkXmppUser( const User& ) ) );
+  connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString& ) ), this, SIGNAL( userSubscriptionRequest( const QString& ) ) );
+  connect( mp_xmppManager, SIGNAL( vCardAvailable( const QString& ) ), this, SLOT( checkXmppUserVCard( const QString& ) ) );
+  connect( mp_xmppManager, SIGNAL( vCardReceived( const QString&, const VCard& ) ), this, SLOT( setXmppVCard( const QString&, const VCard& ) ) );
 }
 
 bool Core::start()
@@ -89,11 +92,12 @@ bool Core::start()
 
   showUserStatusChanged( Settings::instance().localUser() );
 
-  if( Settings::instance().autoConnectToNetworkAccount() )
-    mp_xmppManager->connectToServer( Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );
-
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
+
+  if( Settings::instance().autoConnectToNetworkAccount() )
+    connectToXmppServer( Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );
+
   return true;
 }
 

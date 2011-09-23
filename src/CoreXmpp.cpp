@@ -28,38 +28,37 @@
 #include "XmppManager.h"
 
 
-bool Core::connectToNetworkAccount( const QString& jid, const QString& passwd )
+bool Core::connectToXmppServer( const QString& jid, const QString& passwd )
 {
-  QString sHtmlMsg = Bee::iconToHtml( ":/images/network-account.png", "*@*" ) + QString( " " );
+  QString sHtmlMsg = Bee::iconToHtml( mp_xmppManager->iconPath(), "*@*" ) + QString( " " );
 
   if( mp_xmppManager->isConnected() )
   {
-    sHtmlMsg += tr( "You are already connected to the network account." );
+    sHtmlMsg += tr( "You are already connected to the %1 server." ).arg( mp_xmppManager->service() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
     return false;
   }
 
   if( jid.isEmpty() )
   {
-    sHtmlMsg += tr( "Unable to connect to the network account. Username is empty." );
+    sHtmlMsg += tr( "Unable to connect to the %1 server. Username is empty." ).arg( mp_xmppManager->service() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
     return false;
   }
 
   if( passwd.isEmpty() )
   {
-    sHtmlMsg += tr( "Unable to connect to the network account. Password is empty." );
+    sHtmlMsg += tr( "Unable to connect to the %1 server. Password is empty." ).arg( mp_xmppManager->service() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
     return false;
   }
 
-  sHtmlMsg += tr( "Connecting to %1..." ).arg( jid );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
   mp_xmppManager->connectToServer( jid, passwd );
+
   return true;
 }
 
-void Core::disconnectFromNetworkAccount()
+void Core::disconnectFromXmppServer()
 {
   if( mp_xmppManager->isConnected() )
     mp_xmppManager->disconnectFromServer();
@@ -78,7 +77,7 @@ void Core::parseXmppMessage( const QString& user_path, const Message& m )
   {
   case Message::System:
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
-                           QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/network-account.png", "*@*" ),
+                           QString( "%1 %2" ).arg( Bee::iconToHtml( mp_xmppManager->iconPath(), "*@*" ),
                                                    m.text() ),
                            DispatchToAllChatsWithUser );
     break;
@@ -98,6 +97,7 @@ void Core::checkXmppUser( const User& user_to_check )
   if( u.isValid() )
   {
     qDebug() << "XMPP>" << u.path() << "already exists";
+    mp_xmppManager->checkPresence( u.path() );
     return;
   }
 
@@ -115,3 +115,46 @@ void Core::sendXmppChatMessage( const QString& user_path, const Message& msg )
   mp_xmppManager->sendMessage( user_path, msg );
 }
 
+void Core::setXmppUserSubscription( const QString& user_path, bool accepted )
+{
+  mp_xmppManager->subscribeUser( user_path, accepted );
+}
+
+bool Core::removeXmppUser( const QString& user_path )
+{
+  if( m_users.removeUser( user_path ) )
+  {
+    mp_xmppManager->removeUser( user_path );
+    return true;
+  }
+  else
+    return false;
+}
+
+void Core::sendLocalUserStatusToXmppServer()
+{
+  mp_xmppManager->sendLocalUserPresence();
+}
+
+void Core::checkXmppUserVCard( const QString& user_path )
+{
+  User u = m_users.find( user_path );
+  if( u.isValid() )
+  {
+    if( u.vCard().hasOnlyNickName() )
+      mp_xmppManager->requestVCard( user_path );
+    else
+      qDebug() << "User" << user_path << "has already a vCard. Update not needed";
+  }
+}
+
+void Core::setXmppVCard( const QString& user_path, const VCard& vc )
+{
+  User u = m_users.find( user_path );
+  if( u.isValid() )
+  {
+    u.setVCard( vc );
+    m_users.setUser( u );
+    showUserVCardChanged( u );
+  }
+}

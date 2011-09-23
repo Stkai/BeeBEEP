@@ -61,6 +61,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
+  connect( mp_core, SIGNAL( userSubscriptionRequest( const QString& ) ), this, SLOT( showUserSubscriptionRequest( const QString& ) ) );
 
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
@@ -423,7 +424,7 @@ void GuiMain::checkUser( const User& u )
     qDebug() << "Invalid chat found in GuiMain::checkUser( const User& u )";
 
   if( u.status() == User::Offline )
-    mp_userList->removeUser( u );
+    mp_userList->removeUser( u, false );
   else
     mp_userList->setUser( u, private_chat.id(), private_chat.unreadMessages() );
 }
@@ -632,9 +633,16 @@ void GuiMain::searchUsers()
 
   bool ok = false;
   QString s = QInputDialog::getText( this, Settings::instance().programName(),
-                           tr( "Please insert the Host Address or Broadcast Address to contact\n(ex. 10.184.15.186 or 10.184.15.255)" ), QLineEdit::Normal, "", &ok );
+                           tr( "Please insert the Host Address or Broadcast Address to contact\n(ex. 10.184.15.186 or 10.184.15.255)\n" ) +
+                           tr( "or insert a valid jabber id (ex: user@gmail.com)" ), QLineEdit::Normal, "", &ok );
   if( !ok || s.isEmpty() || s.isNull() )
     return;
+
+  if( s.contains( "@gmail.com" ) || s.contains( "@jabber.org" ) )
+  {
+    mp_core->setXmppUserSubscription( s.trimmed(), true );
+    return;
+  }
 
   QHostAddress host_address( s );
   if( host_address.isNull() )
@@ -829,6 +837,7 @@ void GuiMain::showUserMenu( VNumber user_id )
   connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
+  connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUser( VNumber ) ) );
   gvc->setVCard( u, mp_core->privateChatForUser( user_id ).id() );
 
   if( dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
@@ -906,10 +915,43 @@ void GuiMain::showNetworkAccount()
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
   if( result == QDialog::Accepted )
+    mp_core->connectToXmppServer( gnl.user(), gnl.password() );
+}
+
+void GuiMain::showUserSubscriptionRequest( const QString& user_path )
+{
+  switch( QMessageBox::question( this, Settings::instance().programName(),
+                                 tr( "%1 wants to add you to the contact list. Do you accept?" ),
+                                 tr( "Yes"), tr( "No"), QString(), 1, 1 ) )
   {
-    if( !mp_core->connectToNetworkAccount( gnl.user(), gnl.password() ) )
+  case 0:
+    mp_core->setXmppUserSubscription( user_path, true );
+    break;
+  case 1:
+    mp_core->setXmppUserSubscription( user_path, false );
+    break;
+  }
+}
+
+void GuiMain::removeUser( VNumber user_id )
+{
+  User u = mp_core->users().find( user_id );
+  if( !u.isValid() )
+    return;
+  if( u.isOnLan() )
+    return;
+  int res = QMessageBox::question( this, Settings::instance().programName(),
+                                 tr( "Do you really want to remove %1 from the contact list?" ).arg( u.path() ),
+                                 tr( "Yes"), tr( "No"), QString(), 1, 1 );
+  if( res == 0 )
+  {
+    // remove the user
+    if( mp_core->removeXmppUser( u.path() ) )
     {
-      qDebug() << "Connection to network account failed";
+      mp_userList->removeUser( u, true );
     }
+    else
+      QMessageBox::warning( this, Settings::instance().programName(),
+                            tr( "Unable to remove %1 from the contact list." ).arg( u.path() ) );
   }
 }

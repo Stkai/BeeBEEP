@@ -43,8 +43,8 @@ public:
   bool start();
   void stop();
 
-  bool connectToNetworkAccount( const QString& jid, const QString& passwd );
-  void disconnectFromNetworkAccount();
+  bool connectToXmppServer( const QString& jid, const QString& passwd );
+  void disconnectFromXmppServer();
 
   inline const UserList& users() const;
 
@@ -70,6 +70,11 @@ public:
   void downloadFile( const User&, const FileInfo& );
   void refuseToDownloadFile( const User&, const FileInfo& );
 
+  /* CoreXmpp */
+  void setXmppUserSubscription( const QString& user_path, bool accepted );
+  bool removeXmppUser( const QString& );
+  void sendLocalUserStatusToXmppServer();
+
 public slots:
   /* CoreChat */
   void sendWritingMessage( VNumber );
@@ -84,6 +89,7 @@ signals:
   void userChanged( const User& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
+  void userSubscriptionRequest( const QString& );
 
 protected slots:
   /* CoreConnection */
@@ -106,6 +112,8 @@ protected slots:
   void parseXmppMessage( const QString& user_path, const Message& );
   void checkXmppUser( const User& );
   void sendXmppChatMessage( const QString& user_path, const Message& );
+  void checkXmppUserVCard( const QString& );
+  void setXmppVCard( const QString&, const VCard& );
 
 protected:
   /* CoreConnection */

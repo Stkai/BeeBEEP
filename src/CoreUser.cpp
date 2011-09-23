@@ -103,6 +103,7 @@ void Core::sendLocalUserStatus()
   QByteArray user_status_message = Protocol::instance().localUserStatusMessage();
   foreach( Connection *c, m_connections )
     c->sendData( user_status_message );
+  sendLocalUserStatusToXmppServer();
 }
 
 bool Core::setUserColor( VNumber user_id, const QString& user_color )
@@ -139,3 +140,4 @@ void Core::setLocalUserVCard( const VCard& vc )
 
   showUserVCardChanged( u );
 }
+

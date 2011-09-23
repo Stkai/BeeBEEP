@@ -113,11 +113,23 @@ void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_me
   item->updateItem();
 }
 
-void GuiUserList::removeUser( const User& u )
+void GuiUserList::removeUser( const User& u, bool erase )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
   if( item )
+  {
     item->setUserOffline();
+    if( erase )
+    {
+      qDebug() << "Delete user item from GuiUserList";
+      QTreeWidgetItem* root_item = invisibleRootItem();
+      if( root_item )
+      {
+        root_item->removeChild( (QTreeWidgetItem*)item );
+        delete item;
+      }
+    }
+  }
   else
     qWarning() << "Unable to set user" << u.id() << "offline in GuiUserList";
 }
