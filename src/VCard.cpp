@@ -26,7 +26,8 @@
 
 VCard::VCard()
   : m_nickName( "" ), m_firstName( "" ), m_lastName( "" ),
-    m_birthday(), m_email( "" ), m_photo()
+    m_fullName( "" ), m_birthday(), m_email( "" ), m_photoHash( "" ),
+    m_photo()
 {}
 
 VCard::VCard( const VCard& vc )
@@ -41,10 +42,26 @@ VCard& VCard::operator=( const VCard& vc )
     m_nickName = vc.m_nickName;
     m_firstName = vc.m_firstName;
     m_lastName = vc.m_lastName;
+    m_fullName = vc.m_fullName;
     m_birthday = vc.m_birthday;
     m_email = vc.m_email;
+    m_photoHash = vc.m_photoHash;
     m_photo = vc.m_photo;
   }
   return *this;
+}
 
+void VCard::setPhoto( const QPixmap& new_value )
+{
+  m_photo = new_value;
+  if( !m_photo.isNull() )
+  {
+    QByteArray bytes;
+    QBuffer buffer( &bytes );
+    buffer.open( QIODevice::WriteOnly );
+    m_photo.save( &buffer, "PNG" );
+    m_photoHash = QCryptographicHash::hash( bytes, QCryptographicHash::Sha1 );
+  }
+  else
+    m_photoHash = "";
 }

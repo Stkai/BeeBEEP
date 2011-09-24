@@ -44,19 +44,25 @@ public:
   inline void setFirstName( const QString& );
   inline const QString& lastName() const;
   inline void setLastName( const QString& );
+  inline QString fullName() const;
+  inline void setFullName( const QString& );
+  inline bool hasFullName() const;
   inline const QDate& birthday() const;
   inline void setBirthday( const QDate& );
   inline const QString& email() const;
   inline void setEmail( const QString& );
   inline const QPixmap& photo() const;
-  inline void setPhoto( const QPixmap& );
+  void setPhoto( const QPixmap& );
+  inline const QByteArray& photoHash() const;
 
 private:
   QString m_nickName;
   QString m_firstName;
   QString m_lastName;
+  QString m_fullName;
   QDate m_birthday;
   QString m_email;
+  QByteArray m_photoHash;
   QPixmap m_photo;
 
 };
@@ -69,19 +75,22 @@ inline const QString& VCard::firstName() const { return m_firstName; }
 inline void VCard::setFirstName( const QString& new_value ) { m_firstName = new_value; }
 inline const QString& VCard::lastName() const { return m_lastName; }
 inline void VCard::setLastName( const QString& new_value ) { m_lastName = new_value; }
+inline QString VCard::fullName() const { return !m_fullName.isEmpty() ? m_fullName : QString( "%1 %2" ).arg( m_firstName, m_lastName ); }
+inline void VCard::setFullName( const QString& new_value ) { m_fullName = new_value; }
 inline const QDate& VCard::birthday() const { return m_birthday; }
 inline void VCard::setBirthday( const QDate& new_value ) { m_birthday = new_value; }
 inline const QString& VCard::email() const { return m_email; }
 inline void VCard::setEmail( const QString& new_value ) { m_email = new_value; }
 inline const QPixmap& VCard::photo() const { return m_photo; }
-inline void VCard::setPhoto( const QPixmap& new_value ) { m_photo = new_value; }
-inline bool VCard::hasOnlyNickName() const { return m_firstName.isEmpty() && m_lastName.isEmpty() && !m_birthday.isValid() && m_email.isEmpty() && m_photo.isNull(); }
+inline const QByteArray& VCard::photoHash() const { return m_photoHash; }
+inline bool VCard::hasFullName() const { return fullName().trimmed().size() > 1; }
+inline bool VCard::hasOnlyNickName() const { return m_firstName.isEmpty() && m_lastName.isEmpty() && m_fullName.isEmpty() && !m_birthday.isValid() && m_email.isEmpty() && m_photoHash.isEmpty(); }
 inline bool VCard::operator==( const VCard& vc ) const
 {
   return m_nickName == vc.m_nickName && m_firstName == vc.m_firstName
-      && m_lastName == vc.m_lastName && m_birthday == vc.m_birthday
-      && m_email == vc.m_email
-      && m_photo.toImage() == vc.m_photo.toImage();
+      && m_lastName == vc.m_lastName && m_fullName == vc.m_fullName
+      && m_birthday == vc.m_birthday && m_email == vc.m_email
+      && m_photoHash == vc.m_photoHash;
 }
 
 

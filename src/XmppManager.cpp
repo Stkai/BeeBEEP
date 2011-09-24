@@ -446,11 +446,39 @@ void XmppManager::vCardReceived( const QXmppVCardIq& vciq )
   qDebug() << "XMPP> vCard birthday" << vciq.birthday().toString( Qt::ISODate );
 
   VCard vc;
-  vc.setNickName( !vciq.nickName().isEmpty() ? vciq.nickName() : (!vciq.fullName().isEmpty() ? vciq.fullName() : bare_jid) );
+  vc.setNickName( vciq.nickName() );
   vc.setFirstName( vciq.firstName() );
   vc.setLastName( vciq.lastName() );
+  vc.setFullName( vciq.fullName() );
   vc.setEmail( vciq.email() );
   vc.setBirthday( vciq.birthday() );
+  if( vc.nickName().isEmpty() )
+  {
+    if( vc.hasFullName() )
+      vc.setNickName( vc.fullName() );
+    else
+      vc.setNickName( bare_jid );
+  }
+
+  if( !vciq.photo().isEmpty() )
+  {
+    QImage img;
+    QByteArray bytes = vciq.photo();
+    QBuffer buffer( &bytes );
+    buffer.open( QIODevice::ReadOnly );
+    QImageReader img_reader( &buffer, vciq.photoType().toUtf8() );
+    img_reader.setAutoDetectImageFormat( true );
+    img_reader.setScaledSize( QSize( 96, 96 ) );
+    if( img_reader.read( &img ) )
+    {
+      QPixmap pix = QPixmap::fromImage( img );
+      vc.setPhoto( pix );
+      qDebug() << "XMPP> vCard avatar image type" << vciq.photoType() << "received";
+    }
+    else
+      qWarning() << "XMPP> unable to load avatar image type" << vciq.photoType();
+
+  }
   emit vCardReceived( bare_jid, vc );
 }
 

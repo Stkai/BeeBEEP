@@ -48,10 +48,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
 
   mp_lPath->setText( u.path() );
 
-  if( !u.vCard().firstName().isEmpty() || !u.vCard().lastName().isEmpty() )
-    mp_lName->setText( QString( "<b>%1 %2</b>" ).arg( u.vCard().firstName(), u.vCard().lastName() ) );
-  else
-    mp_lName->setText( QString( "<b>%1</b>" ).arg( u.vCard().nickName()) );
+  mp_lName->setText( QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.vCard().nickName()) );
 
   if( u.vCard().birthday().isValid() )
     mp_lBirthday->setText( tr( "Birthday: %1" ).arg( u.vCard().birthday().toString( Qt::SystemLocaleShortDate ) ) );
