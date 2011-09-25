@@ -80,15 +80,10 @@ void GuiUserItem::updateItem()
   if( !m_defaultForegroundColor.isValid() )
     m_defaultForegroundColor = foreground( 0 ).color();
 
-  if( user_status != User::Offline )
-  {
-    if( !is_local_user && Settings::instance().showUserColor() )
-      setForeground( 0, QBrush( QColor( data( 0, UserColor ).toString() ) ) );
-    else
-      setForeground( 0, QBrush( m_defaultForegroundColor ) );
-  }
-  else
+  if( user_status == User::Offline )
     setForeground( 0, QBrush( QColor( "#808080" ) ) );
+  else
+    setForeground( 0, QBrush( m_defaultForegroundColor ) );
 
   QString status_tip;
   QString tool_tip;

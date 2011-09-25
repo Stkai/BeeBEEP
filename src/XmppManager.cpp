@@ -69,6 +69,7 @@ void XmppManager::connectToServer( const QString& jid, const QString& passwd )
   mp_client->configuration().setJid( jid );
   mp_client->configuration().setPassword( passwd );
   mp_client->configuration().setResource( QString( "BeeBeep" ) );
+  mp_client->configuration().setAutoReconnectionEnabled( false );
 
   if( jid.contains( "@gmail", Qt::CaseInsensitive ) )
     m_service = "GTalk";
@@ -95,7 +96,6 @@ void XmppManager::serverConnected()
 void XmppManager::serverDisconnected()
 {
   makeSystemMessage( "disconnected from the server" );
-  mp_client->reconnectionManager()->cancelReconnection();
 }
 
 void XmppManager::errorOccurred( QXmppClient::Error err )

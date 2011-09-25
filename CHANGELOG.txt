@@ -1,5 +1,8 @@
 BEEBEEP (Secure Network Chat)
 
+BeeBEEP 0.6.2
+- Jabber XMPP Support
+
 BeeBEEP 0.5.2
 - File Transfer improved
 - Plugin support enabled
