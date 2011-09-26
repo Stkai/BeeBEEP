@@ -50,7 +50,6 @@ private slots:
   void showAbout();
   void checkUser( const User& );
   void showWritingUser( const User& );
-  void showSelectedChat( VNumber chat_id );
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
   void showTipOfTheDay();
@@ -76,10 +75,10 @@ private slots:
   void showNetworkAccount();
   void showUserSubscriptionRequest( const QString& );
   void removeUser( VNumber );
+  void showChat( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );
-  void showChat( const Chat& );
 
 private:
   void createActions();

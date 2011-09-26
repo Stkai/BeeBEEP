@@ -21,38 +21,16 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_USERLIST_H
-#define BEEBEEP_USERLIST_H
-
-#include "Config.h"
-#include "User.h"
+#include "XmppClient.h"
 
 
-class UserList
+XmppClient::XmppClient( QObject* parent )
+  : QXmppClient( parent ),
+    m_service( "Jabber" ), m_iconPath( ":/images/jabber.png" ),
+    m_connectionState( XmppClient::Offline )
 {
-public:
-  UserList();
-  UserList( const UserList& );
-  UserList& operator=( const UserList& );
-
-  User find( VNumber ) const;
-  User find( const QString& ) const;
-
-  void setUser( const User& );
-  bool removeUser( const QString& );
-
-  QStringList toStringList( bool only_user_name, bool only_connected ) const;
-  UserList fromUsersId( const QList<VNumber>& ) const;
-  UserList serviceUserList( const QString& ) const;
-  inline const QList<User>& toList() const;
-
-private:
-  QList<User> m_users;
-
-};
-
-
-// Inline Functions
-inline const QList<User>& UserList::toList() const { return m_users; }
-
-#endif // BEEBEEP_USERLIST_H
+  connect( &(rosterManager()), SIGNAL( rosterReceived() ), this, SIGNAL( rosterReceived() ) );
+  connect( &(rosterManager()), SIGNAL( rosterChanged( const QString& ) ), this, SIGNAL( rosterChanged( const QString& ) ) );
+  connect( &(rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SIGNAL( presenceChanged( const QString&, const QString& ) ) );
+  connect( &(vCardManager()), SIGNAL( vCardReceived( const QXmppVCardIq& ) ), this, SIGNAL( vCardReceived( const QXmppVCardIq& ) ) );
+}

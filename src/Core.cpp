@@ -30,7 +30,7 @@
 
 
 Core::Core( QObject* parent )
-  : QObject( parent ), m_users(), m_chats(), m_connections()
+  : QObject( parent ), m_connections()
 {
   qDebug() << "Core created";
   createDefaultChat();
@@ -49,7 +49,7 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
-  connect( mp_xmppManager, SIGNAL( message( const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const Message& ) ) );
+  connect( mp_xmppManager, SIGNAL( message( const QString&, const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const QString&, const Message& ) ) );
   connect( mp_xmppManager, SIGNAL( userChangedInRoster( const User& ) ), this, SLOT( checkXmppUser( const User& ) ) );
   connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString& ) ), this, SIGNAL( userSubscriptionRequest( const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( vCardAvailable( const QString& ) ), this, SLOT( checkXmppUserVCard( const QString& ) ) );

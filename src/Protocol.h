@@ -69,9 +69,6 @@ public:
   QByteArray encryptByteArray( const QByteArray& ) const;
   QByteArray decryptByteArray( const QByteArray& ) const;
 
-  QString simpleEncrypt( const QString& ) const;
-  QString simpleDecrypt( const QString& ) const;
-
   static Protocol& instance()
   {
     if( !mp_instance )

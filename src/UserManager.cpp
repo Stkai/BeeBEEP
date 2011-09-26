@@ -21,38 +21,13 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_USERLIST_H
-#define BEEBEEP_USERLIST_H
+#include "UserManager.h"
 
-#include "Config.h"
-#include "User.h"
+UserManager* UserManager::mp_instance = NULL;
 
 
-class UserList
+UserManager::UserManager()
+  : m_users()
 {
-public:
-  UserList();
-  UserList( const UserList& );
-  UserList& operator=( const UserList& );
+}
 
-  User find( VNumber ) const;
-  User find( const QString& ) const;
-
-  void setUser( const User& );
-  bool removeUser( const QString& );
-
-  QStringList toStringList( bool only_user_name, bool only_connected ) const;
-  UserList fromUsersId( const QList<VNumber>& ) const;
-  UserList serviceUserList( const QString& ) const;
-  inline const QList<User>& toList() const;
-
-private:
-  QList<User> m_users;
-
-};
-
-
-// Inline Functions
-inline const QList<User>& UserList::toList() const { return m_users; }
-
-#endif // BEEBEEP_USERLIST_H

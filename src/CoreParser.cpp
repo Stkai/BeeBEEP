@@ -26,12 +26,13 @@
 #include "Core.h"
 #include "FileInfo.h"
 #include "Protocol.h"
+#include "UserManager.h"
 
 
 void Core::parseMessage( VNumber user_id, const Message& m )
 {
   qDebug() << "Parsing message received from user" << user_id;
-  User u = m_users.find( user_id );
+  User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Invalid user" << user_id << "found while parsing message";
@@ -73,7 +74,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     if( Protocol::instance().changeUserStatusFromMessage( &user_with_new_status, m ) )
     {
       qDebug() << "User" << user_with_new_status.path() << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
-      m_users.setUser( user_with_new_status );
+      UserManager::instance().setUser( user_with_new_status );
       showUserStatusChanged( user_with_new_status );
     }
   }
@@ -83,7 +84,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     if( Protocol::instance().changeVCardFromMessage( &user_with_new_vcard, m ) )
     {
       qDebug() << "User" << user_with_new_vcard.path() << "has new vCard";
-      m_users.setUser( user_with_new_vcard );
+      UserManager::instance().setUser( user_with_new_vcard );
       showUserVCardChanged( user_with_new_vcard );
     }
     else
@@ -95,7 +96,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     if( Protocol::instance().changeUserNameFromMessage( &user_with_new_name, m ) )
     {
       qDebug() << "User" << u.path() << "changes his name to" << user_with_new_name.name();
-      m_users.setUser( user_with_new_name );
+      UserManager::instance().setUser( user_with_new_name );
       showUserNameChanged( user_with_new_name, u.name() );
     }
     else

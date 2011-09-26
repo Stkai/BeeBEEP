@@ -21,10 +21,15 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "ChatManager.h"
+#include "ChatMessage.h"
+#include "ChatMessageData.h"
+#include "EmoticonManager.h"
 #include "GuiChat.h"
-#include "User.h"
+#include "PluginManager.h"
+#include "Protocol.h"
 #include "Settings.h"
-
+#include "UserManager.h"
 
 
 GuiChat::GuiChat( QWidget *parent )
@@ -80,29 +85,6 @@ void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
     mp_lTimestamp->setText( "" );
 }
 
-void GuiChat::setChat( const Chat& c, const QString& chat_users, const QString& chat_text )
-{
-  qDebug() << "Setting chat" << c.id() << "in default chat window";
-  m_chatId = c.id();
-  mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( chat_users ) );
-  mp_teChat->setHtml( chat_text );
-  QScrollBar *bar = mp_teChat->verticalScrollBar();
-  bar->setValue( bar->maximum() );
-  setLastMessageTimestamp( c.lastMessageTimestamp() );
-  mp_teMessage->setFocus();
-}
-
-void GuiChat::appendMessage( VNumber chat_id, const QString& msg )
-{
-  if( chat_id != m_chatId )
-    return;
-  QTextCursor cursor( mp_teChat->textCursor() );
-  cursor.movePosition( QTextCursor::End );
-  cursor.insertHtml( msg );
-  QScrollBar *bar = mp_teChat->verticalScrollBar();
-  bar->setValue( bar->maximum() );
-}
-
 void GuiChat::sendMessage()
 {
   emit newMessage( m_chatId, mp_teMessage->message() );
@@ -130,4 +112,220 @@ void GuiChat::checkAnchorClicked( const QUrl& url )
   qDebug() << "Open url:" << url.toString();
   if( !QDesktopServices::openUrl( url ) )
     QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1").arg( url.toString( QUrl::RemoveScheme ) ), tr( "Ok" ) );
+}
+
+
+namespace // begin of empty namespace
+{
+
+QString Linkify( QString text )
+{
+  if( !text.contains( QLatin1Char( '.' ) ) )
+    return text;
+  text.prepend( " " ); // for matching www.miosito.it
+  text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "<a href=\"\\1\">\\1</a>" );
+  text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
+  text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
+  text.remove( 0, 1 ); // remove the space added
+  qDebug() << "Linkify:" << text;
+  return text;
+}
+
+QString FormatHtmlText( const QString& text )
+{
+  QString text_formatted = "";
+  int last_semicolon_index = -1;
+
+  for( int i = 0; i < text.length(); i++ )
+  {
+    if( text.at( i ) == QLatin1Char( ' ' ) )
+    {
+      if( (i + 1) < text.length() && text.at( (i+1) ) == QLatin1Char( ' ' ) )
+        text_formatted += QLatin1String( "&nbsp;" );
+      else
+        text_formatted += QLatin1Char( ' ' );
+    }
+    else if( text.at( i ) == QLatin1Char( '\n' ) )
+      text_formatted += QLatin1String( "<br /> " ); // space added to match url after a \n
+    else if( text.at( i ) == QLatin1Char( '<' ) )
+    {
+      if( Settings::instance().chatUseHtmlTags() )
+      {
+        if( last_semicolon_index >= 0 )
+          text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
+
+        // preserve heart emoticon
+        if( (i+1) < text.size() && text.at( i+1 ) != QLatin1Char( '3' ) )
+          last_semicolon_index = text_formatted.size();
+
+        text_formatted += QLatin1Char( '<' );
+      }
+      else
+        text_formatted += QLatin1String( "&lt;" );
+    }
+    else if( text.at( i ) == QLatin1Char( '>' ) )
+    {
+      if( Settings::instance().chatUseHtmlTags() )
+      {
+        text_formatted += QLatin1Char( '>' );
+        if( last_semicolon_index >= 0 )
+          last_semicolon_index = -1;
+      }
+      else
+        text_formatted += QLatin1String( "&gt;" );
+    }
+    else if( text.at( i ) == QLatin1Char( '"' ) )
+    {
+      if( last_semicolon_index >= 0 )
+        text_formatted += QLatin1Char( '"' );
+      else
+        text_formatted += QLatin1String( "&quot;" );
+    }
+    else if( text.at( i ) == QLatin1Char( '&' ) )
+    {
+      text_formatted += QLatin1Char( '&' ); // not &amp; for Linkify
+    }
+    else
+      text_formatted += text.at( i );
+  }
+
+  if( last_semicolon_index >= 0 )
+    text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
+
+  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
+  {
+    if( !text_marker->isEnabled() )
+      continue;
+
+    if( !text_marker->parseText( &text_formatted ) )
+    {
+      qDebug() << text_marker->name() << "has break text marker plugins loop";
+      break;
+    }
+  }
+
+  text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
+  text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
+  text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
+
+  if( Settings::instance().chatUseClickableLinks() )
+    text_formatted = Linkify( text_formatted );
+
+  return EmoticonManager::instance().parseEmoticons( text_formatted );
+}
+
+QString FormatMessage( const User& u, const ChatMessage& cm )
+{
+  QString text_formatted = FormatHtmlText( cm.message().text() );
+  ChatMessageData cm_data = Protocol::instance().dataFromChatMessage( cm.message() );
+  if( cm_data.textColor().isValid() )
+  {
+    text_formatted.prepend( QString( "<font color=%1>" ).arg( cm_data.textColor().name() ) );
+    text_formatted.append( QString( "</font>" ) );
+  }
+
+  QString sHtmlMessage = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
+            .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
+            .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
+            .arg( u.isLocal() ? u.name() : (Settings::instance().showOnlyUsername() ? u.name() : u.path() ))
+            .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
+            .arg( text_formatted );
+  return sHtmlMessage;
+}
+
+QString FormatSystemMessage( const ChatMessage& cm )
+{
+  QString sHtmlMessage = QString( "<font color=#808080>%1 %2</font>" )
+            .arg( Settings::instance().chatShowMessageTimestamp() ? cm.message().timestamp().toString( "(hh:mm:ss) " ) : "" )
+            .arg( cm.message().text() );
+  return sHtmlMessage;
+}
+
+} // end of empty namespace
+
+QString GuiChat::chatMessageToText( const ChatMessage& cm )
+{
+  QString s;
+  if( cm.isSystem() )
+    s = FormatSystemMessage( cm );
+  else
+    s = FormatMessage( m_users.find( cm.userId() ), cm );
+  s += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
+  return s;
+}
+
+void GuiChat::setChatUsers()
+{
+  QString chat_users;
+  if( m_chatId == ID_DEFAULT_CHAT )
+  {
+    chat_users = tr( "All users" );
+  }
+  else
+  {
+    QStringList sl = m_users.toStringList( true, false );
+    chat_users = sl.size() == 0 ? tr( "Nobody" ) : sl.join( ", " );
+  }
+  mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( chat_users ) );
+}
+
+bool GuiChat::setChatId( VNumber chat_id )
+{
+  qDebug() << "Setting chat" << chat_id << "in default chat window";
+  Chat c = ChatManager::instance().chat( chat_id, true );
+  if( !c.isValid() )
+    return false;
+  m_chatId = c.id();
+  m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
+  setChatUsers();
+  QString html_text;
+  foreach( ChatMessage cm, c.messages() )
+    html_text += chatMessageToText( cm );
+  mp_teChat->setHtml( html_text );
+
+  QScrollBar *bar = mp_teChat->verticalScrollBar();
+  bar->setValue( bar->maximum() );
+  setLastMessageTimestamp( c.lastMessageTimestamp() );
+  mp_teMessage->setFocus();
+  qDebug() << "Chat" << chat_id << "showed";
+  return true;
+}
+
+void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
+{
+  if( m_chatId != chat_id )
+  {
+    qWarning() << "Trying to append chat message of chat id" << chat_id << "in chat showed with id" << m_chatId << "... skip it";
+    return;
+  }
+
+  User u = m_users.find( cm.userId() );
+  if( !u.isValid() )
+  {
+    qDebug() << "User" << cm.userId() << "is not present in chat showed" << m_chatId << "... force update";
+    Chat c = ChatManager::instance().chat( m_chatId );
+    if( !c.isValid() )
+      return;
+    m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
+    u = m_users.find( cm.userId() );
+    if( !u.isValid() )
+    {
+      qWarning() << "User" << cm.userId() << "is not present in chat" << m_chatId << "... message is not showed";
+      return;
+    }
+    setChatUsers();
+  }
+
+  appendMessage( chatMessageToText( cm ) );
+  if( !cm.isFromLocalUser() && !cm.isSystem() )
+    setLastMessageTimestamp( cm.message().timestamp() );
+}
+
+void GuiChat::appendMessage( const QString& msg )
+{
+  QTextCursor cursor( mp_teChat->textCursor() );
+  cursor.movePosition( QTextCursor::End );
+  cursor.insertHtml( msg );
+  QScrollBar *bar = mp_teChat->verticalScrollBar();
+  bar->setValue( bar->maximum() );
 }

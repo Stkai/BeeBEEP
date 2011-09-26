@@ -27,12 +27,14 @@
 #ifdef Q_OS_SYMBIAN
 #include "sym_iap_util.h"
 #endif
+#include "ChatManager.h"
 #include "ColorManager.h"
 #include "GuiMain.h"
 #if defined( LOGFILE_ENABLED )
 #include "Log.h"
 #endif
 #include "PluginManager.h"
+#include "UserManager.h"
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
@@ -82,6 +84,12 @@ int main( int argc, char *argv[] )
   /* Init Color Manager */
   (void)ColorManager::instance();
 
+  /* Init User Manager */
+  (void)UserManager::instance();
+
+  /* Init Chat Manager */
+  (void)ChatManager::instance();
+
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
@@ -111,6 +119,8 @@ int main( int argc, char *argv[] )
   int iRet = app.exec();
 
   /* CleanUp */
+  ChatManager::close();
+  UserManager::close();
   ColorManager::close();
   Protocol::close();
   Settings::instance().save();

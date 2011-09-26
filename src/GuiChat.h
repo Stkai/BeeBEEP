@@ -25,7 +25,8 @@
 #define BEEBEEP_GUICHAT_H
 
 #include "ui_GuiChat.h"
-#include "Chat.h"
+#include "UserList.h"
+class ChatMessage;
 
 
 class GuiChat : public QWidget, private Ui::GuiChatWidget
@@ -35,18 +36,23 @@ class GuiChat : public QWidget, private Ui::GuiChatWidget
 public:
   GuiChat( QWidget* parent = 0 );
   void addToMyMessage( const QString& ); // For emoticons
-  void appendMessage( VNumber, const QString& );
+  void appendMessage( const QString& );
+  void appendChatMessage( VNumber, const ChatMessage& );
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
-  void setChat( const Chat&, const QString& chat_users, const QString& chat_text );
+  bool setChatId( VNumber );
   inline VNumber chatId() const;
-  void setLastMessageTimestamp( const QDateTime& );
   inline QString toHtml() const;
 
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );
   void nextChat();
+
+protected:
+  void setLastMessageTimestamp( const QDateTime& );
+  QString chatMessageToText( const ChatMessage& );
+  void setChatUsers();
 
 private slots:
   void sendMessage();
@@ -56,12 +62,12 @@ private slots:
 
 private:
   VNumber m_chatId;
+  UserList m_users;
 
 };
 
 
 // Inline Functions
-
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline QString GuiChat::toHtml() const { return mp_teChat->toHtml(); }
 

@@ -113,6 +113,17 @@ UserList UserList::fromUsersId( const QList<VNumber>& users_id ) const
   return ul;
 }
 
+UserList UserList::serviceUserList( const QString& service ) const
+{
+  UserList ul;
+  foreach( User u, m_users )
+  {
+    if( u.service() == service )
+      ul.setUser( u );
+  }
+  return ul;
+}
+
 bool UserList::removeUser( const QString& user_path )
 {
   QList<User>::iterator it = m_users.begin();

@@ -27,8 +27,8 @@
 #include "Chat.h"
 #include "Listener.h"
 #include "FileTransfer.h"
-#include "UserList.h"
 class Broadcaster;
+class UserList;
 class XmppManager;
 
 
@@ -46,8 +46,6 @@ public:
   bool connectToXmppServer( const QString& jid, const QString& passwd );
   void disconnectFromXmppServer();
 
-  inline const UserList& users() const;
-
   /* CoreUser */
   void searchUsers( const QHostAddress& );
   void setLocalUserStatus( int );
@@ -57,13 +55,7 @@ public:
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
-  inline Chat defaultChat( bool read_all_messages  );
-  Chat chat( VNumber, bool read_all_messages );
-  Chat privateChatForUser( VNumber ) const;
   void showTipOfTheDay();
-  QString chatMessageToText( const ChatMessage& );
-  QString chatMessagesToText( const Chat& );
-  QString chatUsers( const Chat&, const QString& user_separator );
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );
@@ -136,8 +128,6 @@ protected:
   /* CoreChat */
   void createDefaultChat();
   void createPrivateChat( const User& );
-  Chat chat( VNumber ) const;
-  void setChat( const Chat& );
   QString chatMessageToText( const UserList&, const ChatMessage& );
 
   /* CoreDispatcher */
@@ -149,8 +139,6 @@ protected:
   void dispatchToChat( const ChatMessage&, VNumber chat_id );
 
 private:
-  UserList m_users;
-  QList<Chat> m_chats;
   QList<Connection*> m_connections;
   Listener* mp_listener;
   Broadcaster* mp_broadcaster;
@@ -161,8 +149,6 @@ private:
 
 
 // Inline Functions
-inline Chat Core::defaultChat( bool read_all_messages ) { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
 inline bool Core::isConnected() const { return mp_listener->isListening(); }
-inline const UserList& Core::users() const { return m_users; }
 
 #endif // BEEBEEP_CLIENT_H

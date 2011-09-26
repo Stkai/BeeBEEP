@@ -26,7 +26,7 @@
 
 #include "Config.h"
 #include "Message.h"
-#include "QXmppClient.h"
+#include "XmppClient.h"
 #include "User.h"
 class QXmppVCardIq;
 
@@ -38,22 +38,24 @@ class XmppManager : public QObject
 public:
   explicit XmppManager( QObject* );
 
-  void connectToServer( const QString& jid, const QString& passwd );
+  XmppClient* client( const QString& ) const;
+  inline const QList<XmppClient*>& clientList() const;
+
+  XmppClient* createClient( const QString& client_service, const QString& client_icon_path );
+
+  void connectToServer( const QString& service, const QString& jid, const QString& passwd );
   void disconnectFromServer();
+  void disconnectFromServer( const QString& service );
   inline bool isConnected() const;
 
-  inline QString service() const;
-  inline QString iconPath() const;
-
-  void sendMessage( const QString&, const Message& );
-  void subscribeUser( const QString&, bool );
-  void removeUser( const QString& );
-  void checkPresence( const QString& );
-  void requestVCard( const QString& );
+  void sendMessage( const QString& service, const QString& bare_jid, const Message& );
+  void subscribeUser( const QString& service, const QString& bare_jid, bool );
+  void removeUser( const QString& service, const QString& bare_jid );
+  void requestVCard( const QString& service, const QString& bare_jid );
   void sendLocalUserPresence();
 
 signals:
-  void message( const QString&, const Message& );
+  void message( const QString&, const QString&, const Message& );
   void userChangedInRoster( const User& );
   void userSubscriptionRequest( const QString& );
   void vCardReceived( const QString&, const VCard& );
@@ -71,26 +73,27 @@ protected slots:
   void vCardReceived( const QXmppVCardIq& );
 
 protected:
-  void makeSystemMessage( const QString& );
+  void makeSystemMessage( XmppClient*, const QString& );
   User::Status statusFromPresence( QXmppPresence::Status::Type );
-  void parseChatMessage( const QString&, const QXmppMessage& );
-  void parseErrorMessage( const QString&, const QXmppMessage& );
+  void parseChatMessage( const QString& service, const QString& bare_jid, const QXmppMessage& );
+  void parseErrorMessage( const QString& service, const QString& bare_jid, const QXmppMessage& );
+  void checkUserChanged( XmppClient*, const QString& );
   QString errorConditionToString( int ) const;
 
-private:
   void dumpMessage( const QXmppMessage& );
 
 private:
-  QXmppClient* mp_client;
-  QString m_service;
+  QList<XmppClient*> m_clients;
 
 };
 
 
 // Inline Functions
-inline bool XmppManager::isConnected() const { return mp_client->isConnected(); }
-inline QString XmppManager::service() const { return m_service.isEmpty() ? "Jabber" : m_service; }
-inline QString XmppManager::iconPath() const { return m_service == "GTalk" ? ":/images/gtalk.png" : ":/images/jabber.png"; }
+inline const QList<XmppClient*>& XmppManager::clientList() const { return m_clients; }
+
+
+//inline QString XmppManager::service() const { return m_service.isEmpty() ? "Jabber" : m_service; }
+//inline QString XmppManager::iconPath() const { return m_service == "GTalk" ? ":/images/gtalk.png" : ":/images/jabber.png"; }
 
 
 #endif // BEEBEEP_XMPPMANAGER_H

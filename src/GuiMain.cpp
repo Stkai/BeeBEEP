@@ -23,6 +23,7 @@
 
 #include "Core.h"
 #include "BeeUtils.h"
+#include "ChatManager.h"
 #include "EmoticonManager.h"
 #include "FileInfo.h"
 #include "GuiChat.h"
@@ -36,6 +37,7 @@
 #include "GuiVCard.h"
 #include "PluginManager.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 GuiMain::GuiMain( QWidget *parent )
@@ -72,10 +74,10 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_defaultChat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
 
-  connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
+  connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
-  showChat( mp_core->defaultChat( false ) );
+  showChat( ID_DEFAULT_CHAT );
 
   refreshTitle();
 }
@@ -150,7 +152,7 @@ void GuiMain::initGuiItems()
   bool enable = mp_core->isConnected();
 
   refreshTitle();
-  showChat( mp_core->defaultChat( true ) );
+  showChat( ID_DEFAULT_CHAT );
 
   if( enable )
   {
@@ -416,17 +418,20 @@ void GuiMain::checkUser( const User& u )
   if( u.isLocal() )
   {
     refreshTitle();
+    return;
   }
 
   qDebug() << "User" << u.path() << "has changed his info. Check it";
-  Chat private_chat = mp_core->privateChatForUser( u.id() );
-  if( !private_chat.isValid() )
-    qDebug() << "Invalid chat found in GuiMain::checkUser( const User& u )";
-
   if( u.status() == User::Offline )
+  {
     mp_userList->removeUser( u, false );
-  else
-    mp_userList->setUser( u, private_chat.id(), private_chat.unreadMessages() );
+    return;
+  }
+
+  Chat private_chat = ChatManager::instance().privateChatForUser( u.id() );
+  if( !private_chat.isValid() )
+    return;
+  mp_userList->setUser( u, private_chat.id(), private_chat.unreadMessages() );
 }
 
 void GuiMain::emoticonSelected()
@@ -445,10 +450,7 @@ void GuiMain::refreshUserList()
 void GuiMain::refreshChat()
 {
   qDebug() << "Refresh chat";
-  Chat c = mp_core->chat( mp_defaultChat->chatId(), true );
-  if( c.isValid() )
-    showChat( c );
-  else
+  if( !mp_defaultChat->setChatId( mp_defaultChat->chatId() ) )
     qWarning() << "Chat" << mp_defaultChat->chatId() << "not found. Unable to refresh it";
 }
 
@@ -475,7 +477,7 @@ void GuiMain::selectFontColor()
 
 void GuiMain::changeUserColor( VNumber user_id )
 {
-  User u = mp_core->users().find( user_id );
+  User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
   {
     QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
@@ -547,16 +549,6 @@ void GuiMain::settingsChanged()
     refreshChat();
 }
 
-void GuiMain::showSelectedChat( VNumber chat_id )
-{
-  qDebug() << "Showing chat" << chat_id;
-  Chat c = mp_core->chat( chat_id, true );
-  if( c.isValid() )
-    showChat( c );
-  else
-    qWarning() << "Selected chat" << chat_id << "is not found";
-}
-
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
   int num_messages = mp_core->sendChatMessage( chat_id, msg );
@@ -585,14 +577,12 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( is_current_chat )
   {
-    Chat chat_showed = mp_core->chat( chat_id, true );
-    mp_defaultChat->appendMessage( chat_id, mp_core->chatMessageToText( cm ) );
-    mp_defaultChat->setLastMessageTimestamp( chat_showed.lastMessageTimestamp() );
+    mp_defaultChat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
   }
   else
   {
-    Chat chat_hidden = mp_core->chat( chat_id, false );
+    Chat chat_hidden = ChatManager::instance().chat( chat_id );
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
   }
 }
@@ -606,12 +596,7 @@ void GuiMain::saveChat()
     return;
   QFileInfo file_info( file_name );
   Settings::instance().setChatSaveDirectory( file_info.absolutePath() );
-  Chat c = mp_core->chat( mp_defaultChat->chatId(), false );
-  if( !c.isValid() )
-  {
-    qWarning() << "Chat" << mp_defaultChat->chatId() << "is invalid. Unable to save it";
-    return;
-  }
+
   QFile file( file_name );
   if( !file.open( QFile::WriteOnly ) )
   {
@@ -653,7 +638,7 @@ void GuiMain::searchUsers()
   }
 
   // Message is showed only in default chat
-  showChat( mp_core->defaultChat( true ) );
+  showChat( ID_DEFAULT_CHAT );
   mp_core->searchUsers( host_address );
 }
 
@@ -686,7 +671,7 @@ void GuiMain::changeStatusDescription()
 void GuiMain::sendFile()
 {
   bool ok = false;
-  QStringList user_string_list = mp_core->users().toStringList( false, true );
+  QStringList user_string_list = UserManager::instance().userList().serviceUserList( "Lan" ).toStringList( false, true );
   if( user_string_list.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "There is no user connected." ) );
@@ -699,7 +684,7 @@ void GuiMain::sendFile()
   if( !ok )
     return;
 
-  User user_selected = mp_core->users().find( user_path );
+  User user_selected = UserManager::instance().userList().find( user_path );
   if( !user_selected.isValid() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "User %1 not found." ).arg( user_path ) );
@@ -716,7 +701,7 @@ void GuiMain::sendFile()
 
 void GuiMain::sendFile( VNumber user_id )
 {
-  User user_selected = mp_core->users().find( user_id );
+  User user_selected = UserManager::instance().userList().find( user_id );
   if( !user_selected.isValid() )
   {
     QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
@@ -781,23 +766,14 @@ void GuiMain::selectDownloadDirectory()
 void GuiMain::showTipOfTheDay()
 {
   // Tip of the day is showed only in default chat
-  showChat( mp_core->defaultChat( true ) );
+  showChat( ID_DEFAULT_CHAT );
   mp_core->showTipOfTheDay();
 }
 
-void GuiMain::showChat( const Chat& c )
+void GuiMain::showChat( VNumber chat_id )
 {
-  if( !c.isValid() )
-  {
-    qWarning() << "Cannot show an invalid chat";
-    return;
-  }
-
-  QString chat_text = mp_core->chatMessagesToText( c );
-  QString chat_users = mp_core->chatUsers( c, "," );
-  qDebug() << "Show chat" << c.id() << "with users:" << chat_users;
-  mp_userList->setUnreadMessages( c.id(), 0 );
-  mp_defaultChat->setChat( c, chat_users, chat_text );
+  if( mp_defaultChat->setChatId( chat_id ) )
+    mp_userList->setUnreadMessages( chat_id, 0 );
 }
 
 void GuiMain::changeVCard()
@@ -829,16 +805,16 @@ void GuiMain::changeVCard()
 
 void GuiMain::showUserMenu( VNumber user_id )
 {
-  User u = mp_core->users().find( user_id );
+  User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
     return;
 
   GuiVCard* gvc = new GuiVCard( this );
-  connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showSelectedChat( VNumber ) ) );
+  connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
   connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUser( VNumber ) ) );
-  gvc->setVCard( u, mp_core->privateChatForUser( user_id ).id() );
+  gvc->setVCard( u, ChatManager::instance().privateChatForUser( user_id ).id() );
 
   if( dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
   {
@@ -881,7 +857,7 @@ void GuiMain::showTextMarkerPluginHelp()
 {
   QAction* act = qobject_cast<QAction*>(sender());
   if( act )
-    mp_defaultChat->appendMessage( mp_defaultChat->chatId(), act->data().toString() );
+    mp_defaultChat->appendMessage( act->data().toString() );
 }
 
 void GuiMain::showPluginManager()
@@ -935,7 +911,7 @@ void GuiMain::showUserSubscriptionRequest( const QString& user_path )
 
 void GuiMain::removeUser( VNumber user_id )
 {
-  User u = mp_core->users().find( user_id );
+  User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
     return;
   if( u.isOnLan() )

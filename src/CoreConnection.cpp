@@ -22,11 +22,13 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "ChatManager.h"
 #include "ColorManager.h"
 #include "Connection.h"
 #include "Core.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 Connection* Core::connection( VNumber user_id )
@@ -123,20 +125,20 @@ void Core::closeConnection( Connection *c )
     qDebug() << "Connection pointer removed from connection list";
 
   qDebug() << "Closing connection for user" << c->userId();
-  User u = m_users.find( c->userId() );
+  User u = UserManager::instance().userList().find( c->userId() );
   if( u.isValid() )
   {
     qDebug() << "User" << u.path() << "goes offline";
     u.setStatus( User::Offline );
-    m_users.setUser( u );
+    UserManager::instance().setUser( u );
     showUserStatusChanged( u );
   }
   else
     qWarning() << "User" << c->userId() << "not found while closing connection";
 
-  Chat default_chat = defaultChat( false );
+  Chat default_chat = ChatManager::instance().defaultChat( false );
   if( default_chat.removeUser( u.id() ) )
-    setChat( default_chat );
+    ChatManager::instance().setChat( default_chat );
   c->deleteLater();
 }
 
@@ -158,7 +160,7 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
-  User user_found = m_users.find( u.path() );
+  User user_found = UserManager::instance().userList().find( u.path() );
   if( user_found.isValid() )
   {
     u.setId( user_found.id() );
@@ -173,14 +175,14 @@ void Core::checkUserAuthentication( const Message& m )
   }
 
   qDebug() << "Adding user" << u.path() << "to default chat";
-  Chat default_chat = defaultChat( false );
+  Chat default_chat = ChatManager::instance().defaultChat( false );
   if( default_chat.addUser( u.id() ) )
-    setChat( default_chat );
+    ChatManager::instance().setChat( default_chat );
 
   c->setReadyForUse( u.id() );
   addConnectionReadyForUse( c );
 
-  m_users.setUser( u );
+  UserManager::instance().setUser( u );
   showUserStatusChanged( u );
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )

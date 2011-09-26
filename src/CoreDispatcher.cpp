@@ -21,19 +21,20 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "ChatManager.h"
 #include "Core.h"
 #include "Protocol.h"
 
 
 void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 {
-  Chat c = m.hasFlag( Message::Private ) ? privateChatForUser( from_user_id ) : defaultChat( false );
+  Chat c = m.hasFlag( Message::Private ) ? ChatManager::instance().privateChatForUser( from_user_id ) : ChatManager::instance().defaultChat( false );
   qDebug() << "Message dispatched to chat" << c.id();
   ChatMessage cm( from_user_id, m );
   c.addMessage( cm );
   c.addUnreadMessage();
   c.setLastMessageTimestamp( m.timestamp() );
-  setChat( c );
+  ChatManager::instance().setChat( c );
   emit chatMessage( c.id(), cm );
 }
 

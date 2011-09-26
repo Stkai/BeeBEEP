@@ -27,6 +27,7 @@
 #include "Broadcaster.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 void Core::setLocalUserStatus( int new_status )
@@ -108,11 +109,11 @@ void Core::sendLocalUserStatus()
 
 bool Core::setUserColor( VNumber user_id, const QString& user_color )
 {
-  User u = m_users.find( user_id );
+  User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
     return false;
   u.setColor( user_color );
-  m_users.setUser( u );
+  UserManager::instance().setUser( u );
   userChanged( u );
   return true;
 }

@@ -134,10 +134,7 @@ ColorManager::ColorManager()
   m_colors << "#000000";
 
   clearSelectedColors();
-
-#if defined( BEEBEEP_DEBUG )
   qDebug() << m_colors.size() << "colors: load completed";
-#endif
 }
 
 

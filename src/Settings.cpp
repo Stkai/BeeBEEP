@@ -95,6 +95,28 @@ namespace
       sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
     return sTmp;
   }
+
+  QString SimpleEncrypt( const QString& plain_text )
+  {
+    if( plain_text.size() <= 0 )
+      return "";
+    char key = 'k';
+    QString encrypted_text = "";
+    for( int i = 0; i < plain_text.size(); i++ )
+      encrypted_text += plain_text.at( i ).toAscii() ^ (int(key) + i) % 255;
+    return encrypted_text;
+  }
+
+  QString SimpleDecrypt( const QString& encrypted_text )
+  {
+    if( encrypted_text.size() <= 0 )
+      return "";
+    char key = 'k';
+    QString plain_text = "";
+    for( int i = 0; i < encrypted_text.size(); i++ )
+      plain_text += encrypted_text.at( i ).toAscii() ^ (int(key) + i) % 255;
+    return plain_text;
+  }
 }
 
 void Settings::load()
@@ -185,9 +207,9 @@ void Settings::load()
   m_networkProxy.setPort( sets.value( "ProxyPort", 0 ).toInt() );
   m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();
   m_networkProxy.setUser( sets.value( "ProxyUser", "" ).toString() );
-  m_networkProxy.setPassword( Protocol::instance().simpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
+  m_networkProxy.setPassword( SimpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
   m_networkAccountUser = sets.value( "AccountJid", "" ).toString();
-  m_networkAccountPassword = Protocol::instance().simpleDecrypt( sets.value( "AccountPassword", "" ).toString() );
+  m_networkAccountPassword = SimpleDecrypt( sets.value( "AccountPassword", "" ).toString() );
   m_autoConnectToNetworkAccount = sets.value( "AutoConnection", false ).toBool();
   sets.endGroup();
 
@@ -266,9 +288,9 @@ void Settings::save()
   sets.setValue( "ProxyPort", m_networkProxy.port() );
   sets.setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
   sets.setValue( "ProxyUser", m_networkProxy.user() );
-  sets.setValue( "ProxyPassword", Protocol::instance().simpleEncrypt( m_networkProxy.password() ) );
+  sets.setValue( "ProxyPassword", SimpleEncrypt( m_networkProxy.password() ) );
   sets.setValue( "AccountJid", m_networkAccountUser );
-  sets.setValue( "AccountPassword", Protocol::instance().simpleEncrypt( m_networkAccountPassword ) );
+  sets.setValue( "AccountPassword", SimpleEncrypt( m_networkAccountPassword ) );
   sets.setValue( "AutoConnection", m_autoConnectToNetworkAccount );
   sets.endGroup();
 

@@ -47,7 +47,10 @@ SOURCES += Listener.cpp \
     XmppManager.cpp \
     CoreXmpp.cpp \
     GuiNetwork.cpp \
-    GuiNetworkLogin.cpp
+    GuiNetworkLogin.cpp \
+    XmppClient.cpp \
+    UserManager.cpp \
+    ChatManager.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -91,7 +94,10 @@ HEADERS += sym_iap_util.h \
     ChatMessageData.h \
     XmppManager.h \
     GuiNetwork.h \
-    GuiNetworkLogin.h
+    GuiNetworkLogin.h \
+    XmppClient.h \
+    UserManager.h \
+    ChatManager.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \

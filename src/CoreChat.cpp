@@ -21,15 +21,15 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
+#include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
-#include "EmoticonManager.h"
-#include "BeeUtils.h"
-#include "PluginManager.h"
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
 #include "Tips.h"
+#include "UserManager.h"
 
 
 void Core::createDefaultChat()
@@ -41,7 +41,7 @@ void Core::createDefaultChat()
   QString sHtmlMsg = tr( "%1 Chat with all users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
-  setChat( c );
+  ChatManager::instance().setChat( c );
 }
 
 void Core::createPrivateChat( const User& u )
@@ -53,64 +53,7 @@ void Core::createPrivateChat( const User& u )
   QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.path() );
   ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
-  setChat( c );
-}
-
-Chat Core::chat( VNumber chat_id, bool read_all_messages )
-{
-  QList<Chat>::iterator it = m_chats.begin();
-  while( it != m_chats.end() )
-  {
-    if( chat_id == (*it).id() )
-    {
-      if( read_all_messages )
-        (*it).readAllMessages();
-      return *it;
-    }
-    ++it;
-  }
-  return Chat();
-}
-
-Chat Core::privateChatForUser( VNumber user_id ) const
-{
-  if( user_id == ID_LOCAL_USER )
-    return chat( ID_DEFAULT_CHAT );
-  QList<Chat>::const_iterator it = m_chats.begin();
-  while( it != m_chats.end() )
-  {
-    if( (*it).isPrivateForUser( user_id ) )
-      return *it;
-    ++it;
-  }
-  return Chat();
-}
-
-Chat Core::chat( VNumber chat_id ) const
-{
-  QList<Chat>::const_iterator it = m_chats.begin();
-  while( it != m_chats.end() )
-  {
-    if( chat_id == (*it).id() )
-      return *it;
-    ++it;
-  }
-  return Chat();
-}
-
-void Core::setChat( const Chat& c )
-{
-  QList<Chat>::iterator it = m_chats.begin();
-  while( it != m_chats.end() )
-  {
-    if( (*it).id() == c.id() )
-    {
-      (*it) = c;
-      return;
-    }
-    ++it;
-  }
-  m_chats.append( c );
+  ChatManager::instance().setChat( c );
 }
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )
@@ -146,7 +89,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     {
       if( !c->sendMessage( m ) )
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
-                               .arg( m_users.find( c->userId() ).path() ), DispatchToChat );
+                               .arg( UserManager::instance().userList().find( c->userId() ).path() ), DispatchToChat );
       else
         messages_sent += 1;
     }
@@ -154,19 +97,16 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   else
   {
     m.addFlag( Message::Private );
-    Chat from_chat = chat( chat_id );
-    QList<VNumber> user_list = from_chat.usersId();
-    foreach( VNumber user_id, user_list )
+    Chat from_chat = ChatManager::instance().chat( chat_id );
+    UserList user_list = UserManager::instance().userList().fromUsersId( from_chat.usersId() );
+    foreach( User u, user_list.toList() )
     {
-      if( user_id == ID_LOCAL_USER )
-        continue;
-      User u = m_users.find( user_id );
-      if( !u.isValid() )
-        continue;
+      if( u.isLocal() )
+        continue;     
 
       if( !u.isOnLan() )
       {
-        //if( u.isConnected() )
+        //if( u.isConnected() )  // FIXME!!!
         {
           sendXmppChatMessage( u.path(), m );
           messages_sent += 1;
@@ -174,11 +114,11 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
         }
       }
 
-      Connection* c = connection( user_id );
+      Connection* c = connection( u.id() );
       if( c && c->sendMessage( m ) )
         messages_sent += 1;
       else
-        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( m_users.find( user_id ).path() ), DispatchToChat );
+        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( u.path() ), DispatchToChat );
     }
   }
 
@@ -196,13 +136,20 @@ void Core::sendWritingMessage( VNumber chat_id )
   if( !isConnected() )
     return;
 
-  Chat from_chat = chat( chat_id );
-  QList<VNumber> user_list = from_chat.usersId();
-  foreach( VNumber user_id, user_list )
+  Chat from_chat = ChatManager::instance().chat( chat_id );
+  UserList user_list = UserManager::instance().userList().fromUsersId( from_chat.usersId() );
+  foreach( User u, user_list.toList() )
   {
-    if( user_id == ID_LOCAL_USER )
+    if( u.isLocal() )
       continue;
-    Connection* c = connection( user_id );
+
+    if( !u.isOnLan() )
+    {
+      //if( u.isConnected() )  // FIXME!!!
+
+    }
+
+    Connection* c = connection( u.id() );
     if( c )
     {
       qDebug() << "Sending Writing Message to" << c->peerAddress().toString() << c->peerPort();
@@ -218,185 +165,3 @@ void Core::showTipOfTheDay()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
 }
 
-namespace // begin of empty namespace
-{
-
-QString Linkify( QString text )
-{
-  if( !text.contains( QLatin1Char( '.' ) ) )
-    return text;
-  text.prepend( " " ); // for matching www.miosito.it
-  text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "<a href=\"\\1\">\\1</a>" );
-  text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
-  text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
-  text.remove( 0, 1 ); // remove the space added
-  qDebug() << "Linkify:" << text;
-  return text;
-}
-
-QString FormatHtmlText( const QString& text )
-{
-  QString text_formatted = "";
-  int last_semicolon_index = -1;
-
-  for( int i = 0; i < text.length(); i++ )
-  {
-    if( text.at( i ) == QLatin1Char( ' ' ) )
-    {
-      if( (i + 1) < text.length() && text.at( (i+1) ) == QLatin1Char( ' ' ) )
-        text_formatted += QLatin1String( "&nbsp;" );
-      else
-        text_formatted += QLatin1Char( ' ' );
-    }
-    else if( text.at( i ) == QLatin1Char( '\n' ) )
-      text_formatted += QLatin1String( "<br /> " ); // space added to match url after a \n
-    else if( text.at( i ) == QLatin1Char( '<' ) )
-    {
-      if( Settings::instance().chatUseHtmlTags() )
-      {
-        if( last_semicolon_index >= 0 )
-          text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
-
-        // preserve heart emoticon
-        if( (i+1) < text.size() && text.at( i+1 ) != QLatin1Char( '3' ) )
-          last_semicolon_index = text_formatted.size();
-
-        text_formatted += QLatin1Char( '<' );
-      }
-      else
-        text_formatted += QLatin1String( "&lt;" );
-    }
-    else if( text.at( i ) == QLatin1Char( '>' ) )
-    {
-      if( Settings::instance().chatUseHtmlTags() )
-      {
-        text_formatted += QLatin1Char( '>' );
-        if( last_semicolon_index >= 0 )
-          last_semicolon_index = -1;
-      }
-      else
-        text_formatted += QLatin1String( "&gt;" );
-    }
-    else if( text.at( i ) == QLatin1Char( '"' ) )
-    {
-      if( last_semicolon_index >= 0 )
-        text_formatted += QLatin1Char( '"' );
-      else
-        text_formatted += QLatin1String( "&quot;" );
-    }
-    else if( text.at( i ) == QLatin1Char( '&' ) )
-    {
-      text_formatted += QLatin1Char( '&' ); // not &amp; for Linkify
-    }
-    else
-      text_formatted += text.at( i );
-  }
-
-  if( last_semicolon_index >= 0 )
-    text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
-
-  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
-  {
-    if( !text_marker->isEnabled() )
-      continue;
-
-    if( !text_marker->parseText( &text_formatted ) )
-    {
-      qDebug() << text_marker->name() << "has break text marker plugins loop";
-      break;
-    }
-  }
-
-  text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
-  text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
-  text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
-
-  if( Settings::instance().chatUseClickableLinks() )
-    text_formatted = Linkify( text_formatted );
-
-  return EmoticonManager::instance().parseEmoticons( text_formatted );
-}
-
-QString FormatMessage( const User& u, const ChatMessage& cm )
-{
-  QString text_formatted = FormatHtmlText( cm.message().text() );
-  ChatMessageData cm_data = Protocol::instance().dataFromChatMessage( cm.message() );
-  if( cm_data.textColor().isValid() )
-  {
-    text_formatted.prepend( QString( "<font color=%1>" ).arg( cm_data.textColor().name() ) );
-    text_formatted.append( QString( "</font>" ) );
-  }
-
-  QString sHtmlMessage = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
-            .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
-            .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
-            .arg( u.isLocal() ? u.name() : (Settings::instance().showOnlyUsername() ? u.name() : u.path() ))
-            .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
-            .arg( text_formatted );
-  return sHtmlMessage;
-}
-
-QString FormatSystemMessage( const ChatMessage& cm )
-{
-  QString sHtmlMessage = QString( "<font color=#808080>%1 %2</font>" )
-            .arg( Settings::instance().chatShowMessageTimestamp() ? cm.message().timestamp().toString( "(hh:mm:ss) " ) : "" )
-            .arg( cm.message().text() );
-  return sHtmlMessage;
-}
-
-} // end of empty namespace
-
-QString Core::chatMessageToText( const ChatMessage& cm )
-{
-  QString s;
-  if( cm.isSystem() )
-    s = FormatSystemMessage( cm );
-  else
-    s = FormatMessage( m_users.find( cm.userId() ), cm );
-  s += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
-  return s;
-}
-
-QString Core::chatMessageToText( const UserList& chat_users, const ChatMessage& cm )
-{
-  QString s;
-  if( cm.isSystem() )
-    s = FormatSystemMessage( cm );
-  else
-    s = FormatMessage( chat_users.find( cm.userId() ), cm );
-  s += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
-  return s;
-}
-
-QString Core::chatMessagesToText( const Chat& c )
-{
-  QString s = "";
-  UserList chat_users;
-  if( c.id() == ID_DEFAULT_CHAT )
-  {
-    chat_users = m_users;
-  }
-  else
-    chat_users = m_users.fromUsersId( c.usersId() );
-
-  foreach( ChatMessage cm, c.messages() )
-    s += chatMessageToText( chat_users, cm );
-  return s;
-}
-
-QString Core::chatUsers( const Chat& c, const QString& user_separator )
-{
-  if( c.id() == ID_DEFAULT_CHAT )
-    return tr( "All users" );
-
-  QStringList sl;
-  User u;
-  foreach( VNumber user_id, c.usersId() )
-  {
-    if( user_id == ID_LOCAL_USER )
-      continue;
-    u = m_users.find( user_id );
-    sl << (Settings::instance().showOnlyUsername() ? u.name() : u.path() );
-  }
-  return sl.size() == 0 ? tr( "Nobody" ) : sl.join( user_separator );
-}

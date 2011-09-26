@@ -97,7 +97,6 @@ void Core::checkXmppUser( const User& user_to_check )
   if( u.isValid() )
   {
     qDebug() << "XMPP>" << u.path() << "already exists";
-    mp_xmppManager->checkPresence( u.path() );
     return;
   }
 
@@ -108,7 +107,6 @@ void Core::checkXmppUser( const User& user_to_check )
   createPrivateChat( u );
   m_users.setUser( u );
 }
-
 
 void Core::sendXmppChatMessage( const QString& user_path, const Message& msg )
 {
@@ -142,7 +140,7 @@ void Core::checkXmppUserVCard( const QString& user_path )
   if( u.isValid() )
   {
     if( u.vCard().hasOnlyNickName() )
-      mp_xmppManager->requestVCard( user_path );
+      mp_xmppManager->requestVCard( u.service(), user_path );
     else
       qDebug() << "User" << user_path << "has already a vCard. Update not needed";
   }

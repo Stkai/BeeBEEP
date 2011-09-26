@@ -57,10 +57,13 @@ public:
   inline const QString& color() const;
   inline void setVCard( const VCard& );
   inline const VCard& vCard() const;
-  inline void setPath( const QString& );
+  inline void setBareJid( const QString& );
+  inline const QString& bareJid() const;
   inline QString path() const;
+  inline void setService( const QString& );
+  inline const QString& service() const;
 
-  inline bool isOnLan() const { return m_path.isEmpty(); } // FIXME!!!
+  inline bool isOnLan() const;
 
 private:
   VNumber m_id;
@@ -70,7 +73,8 @@ private:
   int m_status;
   QString m_statusDescription;
   QString m_color;
-  QString m_path;
+  QString m_bareJid;
+  QString m_service;
 
 };
 
@@ -96,7 +100,12 @@ inline void User::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& User::color() const { return m_color; }
 inline void  User::setVCard( const VCard& new_value ) { m_vCard = new_value; }
 inline const VCard& User::vCard() const { return m_vCard; }
-inline void User::setPath( const QString& new_value ) { m_path = new_value; }
-inline QString User::path() const { return m_path.isEmpty() ? QString( "%1@%2:%3" ).arg( name(), m_hostAddress.toString(), QString::number( m_hostPort ) ) : m_path; }
+inline void User::setBareJid( const QString& new_value ) { m_bareJid = new_value; }
+inline const QString& User::bareJid() const { return m_bareJid; }
+inline QString User::path() const { return isOnLan() ? QString( "%1@%2:%3" ).arg( name(), m_hostAddress.toString(), QString::number( m_hostPort ) ) :
+                                                       QString( "%1:%2" ).arg( m_service, m_bareJid ); }
+inline void User::setService( const QString& new_value ) { m_service = new_value; }
+inline const QString& User::service() const { return m_service; }
+inline bool User::isOnLan() const { return m_service == "Lan"; }
 
 #endif // BEEBEEP_USER_H

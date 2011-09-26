@@ -21,38 +21,50 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_USERLIST_H
-#define BEEBEEP_USERLIST_H
+#ifndef BEEBEEP_USERMANAGER_H
+#define BEEBEEP_USERMANAGER_H
 
-#include "Config.h"
-#include "User.h"
+#include "UserList.h"
 
 
-class UserList
+class UserManager
 {
+// Singleton Object
+  static UserManager* mp_instance;
+
 public:
-  UserList();
-  UserList( const UserList& );
-  UserList& operator=( const UserList& );
+  inline void setUser( const User& );
+  inline bool removeUser( const QString& user_path );
+  inline const UserList& userList() const;
 
-  User find( VNumber ) const;
-  User find( const QString& ) const;
+  static UserManager& instance()
+  {
+    if( !mp_instance )
+      mp_instance = new UserManager();
+    return *mp_instance;
+  }
 
-  void setUser( const User& );
-  bool removeUser( const QString& );
+  static void close()
+  {
+    if( mp_instance )
+    {
+      delete mp_instance;
+      mp_instance = NULL;
+    }
+  }
 
-  QStringList toStringList( bool only_user_name, bool only_connected ) const;
-  UserList fromUsersId( const QList<VNumber>& ) const;
-  UserList serviceUserList( const QString& ) const;
-  inline const QList<User>& toList() const;
+protected:
+  UserManager();
 
 private:
-  QList<User> m_users;
+  UserList m_users;
 
 };
 
 
-// Inline Functions
-inline const QList<User>& UserList::toList() const { return m_users; }
+// Inline Function
+inline void UserManager::setUser( const User& u ) { m_users.setUser( u ); }
+inline bool UserManager::removeUser( const QString& user_path ) { return m_users.removeUser( user_path ); }
+inline const UserList& UserManager::userList() const { return m_users; }
 
-#endif // BEEBEEP_USERLIST_H
+#endif // BEEBEEP_USERMANAGER_H
