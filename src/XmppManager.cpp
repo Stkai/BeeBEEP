@@ -647,10 +647,10 @@ void XmppManager::dumpMessage( const QXmppMessage& xmpp_msg )
 
 void XmppManager::loadDefaultClients()
 {
-  XmppClient* mp_client = createClient( "gtalk", ":/images/gtalk.png" );
+  XmppClient* mp_client = createClient( "Gtalk", ":/images/gtalk.png" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
-  mp_client = createClient( "jabber", ":/images/jabber.png" );
+  mp_client = createClient( "Facebook", ":/images/facebook.png" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
-  mp_client = createClient( "facebook", ":/images/facebook.png" );
+  mp_client = createClient( "Jabber", ":/images/jabber.png" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
 }
