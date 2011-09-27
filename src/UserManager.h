@@ -34,7 +34,7 @@ class UserManager
 
 public:
   inline void setUser( const User& );
-  inline bool removeUser( const QString& user_path );
+  inline bool removeUser( const User& );
   inline const UserList& userList() const;
 
   static UserManager& instance()
@@ -63,8 +63,8 @@ private:
 
 
 // Inline Function
-inline void UserManager::setUser( const User& u ) { m_users.setUser( u ); }
-inline bool UserManager::removeUser( const QString& user_path ) { return m_users.removeUser( user_path ); }
+inline void UserManager::setUser( const User& u ) { m_users.set( u ); }
+inline bool UserManager::removeUser( const User& u ) { return m_users.remove( u ); }
 inline const UserList& UserManager::userList() const { return m_users; }
 
 #endif // BEEBEEP_USERMANAGER_H

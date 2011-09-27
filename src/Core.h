@@ -43,8 +43,8 @@ public:
   bool start();
   void stop();
 
-  bool connectToXmppServer( const QString& jid, const QString& passwd );
-  void disconnectFromXmppServer();
+  bool connectToXmppServer( const QString& service, const QString& bare_jid, const QString& passwd );
+  void disconnectFromXmppServer( const QString& service );
 
   /* CoreUser */
   void searchUsers( const QHostAddress& );
@@ -63,8 +63,8 @@ public:
   void refuseToDownloadFile( const User&, const FileInfo& );
 
   /* CoreXmpp */
-  void setXmppUserSubscription( const QString& user_path, bool accepted );
-  bool removeXmppUser( const QString& );
+  void setXmppUserSubscription( const QString& service, const QString& user_path, bool accepted );
+  bool removeXmppUser( const User& );
   void sendLocalUserStatusToXmppServer();
 
 public slots:
@@ -81,7 +81,7 @@ signals:
   void userChanged( const User& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
-  void userSubscriptionRequest( const QString& );
+  void xmppUserSubscriptionRequest( const QString&, const QString& );
 
 protected slots:
   /* CoreConnection */
@@ -101,11 +101,11 @@ protected slots:
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
 
   /* CoreXmpp */
-  void parseXmppMessage( const QString& user_path, const Message& );
+  void parseXmppMessage( const QString& service, const QString& bare_jid, const Message& );
   void checkXmppUser( const User& );
-  void sendXmppChatMessage( const QString& user_path, const Message& );
-  void checkXmppUserVCard( const QString& );
-  void setXmppVCard( const QString&, const VCard& );
+  void sendXmppChatMessage( const User&, const Message& );
+  void checkXmppUserVCard( const QString& service, const QString& bare_jid );
+  void setXmppVCard( const QString& service, const QString& bare_jid, const VCard& );
 
 protected:
   /* CoreConnection */

@@ -31,6 +31,7 @@ class ChatManager
 {
 // Singleton Object
   static ChatManager* mp_instance;
+  friend class Core;
 
 public:
   inline Chat defaultChat( bool read_all_messages  );
@@ -60,6 +61,8 @@ public:
 protected:
   ChatManager();
 
+  inline QList<Chat>& chatList();
+
 private:
   QList<Chat> m_chats;
 
@@ -69,6 +72,7 @@ private:
 // Inline Function
 inline Chat ChatManager::defaultChat( bool read_all_messages ) { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
 inline const QList<Chat>& ChatManager::chatList() const { return m_chats; }
+inline QList<Chat>& ChatManager::chatList() { return m_chats; }
 
 
 #endif // BEEBEEP_CHATMANAGER_H

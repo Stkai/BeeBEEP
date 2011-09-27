@@ -73,7 +73,7 @@ private slots:
   void showPluginManager();
   void showNetworkManager();
   void showNetworkAccount();
-  void showUserSubscriptionRequest( const QString& );
+  void showUserSubscriptionRequest( const QString&, const QString& );
   void removeUser( VNumber );
   void showChat( VNumber );
 

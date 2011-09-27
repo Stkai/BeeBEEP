@@ -63,8 +63,8 @@ void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const Q
 
 void Core::dispatchToAllChats( const ChatMessage& cm )
 {
-  QList<Chat>::iterator it = m_chats.begin();
-  while( it != m_chats.end() )
+  QList<Chat>::iterator it = ChatManager::instance().chatList().begin();
+  while( it != ChatManager::instance().chatList().end() )
   {
     (*it).addMessage( cm );
     emit chatMessage( (*it).id(), cm );
@@ -74,8 +74,8 @@ void Core::dispatchToAllChats( const ChatMessage& cm )
 
 void Core::dispatchToAllChatsWithUser( const ChatMessage& cm, VNumber user_id )
 {
-  QList<Chat>::iterator it = m_chats.begin();
-  while( it != m_chats.end() )
+  QList<Chat>::iterator it = ChatManager::instance().chatList().begin();
+  while( it != ChatManager::instance().chatList().end() )
   {
     if( (*it).hasUser( user_id ) )
     {
@@ -88,8 +88,8 @@ void Core::dispatchToAllChatsWithUser( const ChatMessage& cm, VNumber user_id )
 
 void Core::dispatchToChat( const ChatMessage& cm, VNumber chat_id )
 {
-  QList<Chat>::iterator it = m_chats.begin();
-  while( it != m_chats.end() )
+  QList<Chat>::iterator it = ChatManager::instance().chatList().begin();
+  while( it != ChatManager::instance().chatList().end() )
   {
     if( (*it).id() == chat_id )
     {

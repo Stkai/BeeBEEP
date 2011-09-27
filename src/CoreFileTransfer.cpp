@@ -27,12 +27,13 @@
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& peer_address, const Message& m  )
 {
   User user_to_check = Protocol::instance().createUser( m, peer_address );
-  User user_connected = m_users.find( user_to_check.path() );
+  User user_connected = UserManager::instance().userList().find( user_to_check.path() );
   if( user_connected.isValid() )
     qDebug() << "Found a connected user to validate file transfer:" << user_connected.path();
   else
@@ -51,7 +52,7 @@ void Core::downloadFile( const User& u, const FileInfo& fi )
 
 void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const FileInfo& fi, const QString& msg )
 {
-  User u = m_users.find( user_id );
+  User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
@@ -79,7 +80,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
 void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes )
 {
-  User u = m_users.find( user_id );
+  User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();

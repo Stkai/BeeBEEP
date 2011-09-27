@@ -106,12 +106,9 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 
       if( !u.isOnLan() )
       {
-        //if( u.isConnected() )  // FIXME!!!
-        {
-          sendXmppChatMessage( u.path(), m );
-          messages_sent += 1;
-          continue;
-        }
+        sendXmppChatMessage( u, m );
+        messages_sent += 1;
+        continue;
       }
 
       Connection* c = connection( u.id() );

@@ -51,9 +51,9 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( message( const QString&, const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const QString&, const Message& ) ) );
   connect( mp_xmppManager, SIGNAL( userChangedInRoster( const User& ) ), this, SLOT( checkXmppUser( const User& ) ) );
-  connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString& ) ), this, SIGNAL( userSubscriptionRequest( const QString& ) ) );
-  connect( mp_xmppManager, SIGNAL( vCardAvailable( const QString& ) ), this, SLOT( checkXmppUserVCard( const QString& ) ) );
-  connect( mp_xmppManager, SIGNAL( vCardReceived( const QString&, const VCard& ) ), this, SLOT( setXmppVCard( const QString&, const VCard& ) ) );
+  connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString&, const QString& ) ), this, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ) );
+  connect( mp_xmppManager, SIGNAL( vCardAvailable( const QString&, const QString& ) ), this, SLOT( checkXmppUserVCard( const QString&, const QString& ) ) );
+  connect( mp_xmppManager, SIGNAL( vCardReceived( const QString&, const QString&, const VCard& ) ), this, SLOT( setXmppVCard( const QString&, const QString&, const VCard& ) ) );
 }
 
 bool Core::start()
@@ -96,7 +96,7 @@ bool Core::start()
     showTipOfTheDay();
 
   if( Settings::instance().autoConnectToNetworkAccount() )
-    connectToXmppServer( Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );
+    connectToXmppServer( "GTalk", Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );  // FIXME!!!
 
   return true;
 }

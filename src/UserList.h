@@ -38,8 +38,8 @@ public:
   User find( VNumber ) const;
   User find( const QString& ) const;
 
-  void setUser( const User& );
-  bool removeUser( const QString& );
+  void set( const User& );
+  bool remove( const User& );
 
   QStringList toStringList( bool only_user_name, bool only_connected ) const;
   UserList fromUsersId( const QList<VNumber>& ) const;

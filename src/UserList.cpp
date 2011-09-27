@@ -72,7 +72,7 @@ User UserList::find( const QString& user_path ) const
   return User();
 }
 
-void UserList::setUser( const User& u )
+void UserList::set( const User& u )
 {
   if( u.id() == ID_LOCAL_USER )
   {
@@ -109,7 +109,7 @@ UserList UserList::fromUsersId( const QList<VNumber>& users_id ) const
 {
   UserList ul;
   foreach( VNumber user_id, users_id )
-    ul.setUser( find( user_id ) );
+    ul.set( find( user_id ) );
   return ul;
 }
 
@@ -119,24 +119,21 @@ UserList UserList::serviceUserList( const QString& service ) const
   foreach( User u, m_users )
   {
     if( u.service() == service )
-      ul.setUser( u );
+      ul.set( u );
   }
   return ul;
 }
 
-bool UserList::removeUser( const QString& user_path )
+bool UserList::remove( const User& u )
 {
-  QList<User>::iterator it = m_users.begin();
-  while( it != m_users.end() )
+  if( m_users.removeOne( u ) )
   {
-    if( user_path == (*it).path() )
-    {
-      m_users.erase( it );
-      qDebug() << "User" << user_path << "is removed from list";
-      return true;
-    }
-    ++it;
+    qDebug() << "User" << u.path() << "is removed from list";
+    return true;
   }
-  qDebug() << "Unable to remove user with path" << user_path;
-  return false;
+  else
+  {
+    qDebug() << "Unable to remove user with path" << u.path();
+    return false;
+  }
 }

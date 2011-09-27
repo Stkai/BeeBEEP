@@ -25,21 +25,22 @@
 #include "ColorManager.h"
 #include "Core.h"
 #include "Protocol.h"
+#include "UserManager.h"
 #include "XmppManager.h"
 
 
-bool Core::connectToXmppServer( const QString& jid, const QString& passwd )
+bool Core::connectToXmppServer( const QString& service, const QString& bare_jid, const QString& passwd )
 {
   QString sHtmlMsg = Bee::iconToHtml( mp_xmppManager->iconPath(), "*@*" ) + QString( " " );
 
-  if( mp_xmppManager->isConnected() )
+  if( mp_xmppManager->isConnected( service ) )
   {
-    sHtmlMsg += tr( "You are already connected to the %1 server." ).arg( mp_xmppManager->service() );
+    sHtmlMsg += tr( "You are already connected to the %1 server." ).arg( service );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
     return false;
   }
 
-  if( jid.isEmpty() )
+  if( bare_jid.isEmpty() )
   {
     sHtmlMsg += tr( "Unable to connect to the %1 server. Username is empty." ).arg( mp_xmppManager->service() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
@@ -53,7 +54,7 @@ bool Core::connectToXmppServer( const QString& jid, const QString& passwd )
     return false;
   }
 
-  mp_xmppManager->connectToServer( jid, passwd );
+  mp_xmppManager->connectToServer( service, bare_jid, passwd );
 
   return true;
 }
@@ -108,9 +109,9 @@ void Core::checkXmppUser( const User& user_to_check )
   m_users.setUser( u );
 }
 
-void Core::sendXmppChatMessage( const QString& user_path, const Message& msg )
+void Core::sendXmppChatMessage( const User& u, const Message& msg )
 {
-  mp_xmppManager->sendMessage( user_path, msg );
+  mp_xmppManager->sendMessage( u, msg );
 }
 
 void Core::setXmppUserSubscription( const QString& user_path, bool accepted )
@@ -118,9 +119,9 @@ void Core::setXmppUserSubscription( const QString& user_path, bool accepted )
   mp_xmppManager->subscribeUser( user_path, accepted );
 }
 
-bool Core::removeXmppUser( const QString& user_path )
+bool Core::removeXmppUser( const User& u )
 {
-  if( m_users.removeUser( user_path ) )
+  if( UserManager::instance().removeUser( u.path() )
   {
     mp_xmppManager->removeUser( user_path );
     return true;

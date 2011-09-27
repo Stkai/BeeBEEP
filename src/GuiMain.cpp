@@ -63,7 +63,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
-  connect( mp_core, SIGNAL( userSubscriptionRequest( const QString& ) ), this, SLOT( showUserSubscriptionRequest( const QString& ) ) );
+  connect( mp_core, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ), this, SLOT( showUserSubscriptionRequest( const QString&, const QString& ) ) );
 
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
@@ -623,9 +623,11 @@ void GuiMain::searchUsers()
   if( !ok || s.isEmpty() || s.isNull() )
     return;
 
+  QString service = "GTalk"; // FIXME!!!
+
   if( s.contains( "@gmail.com" ) || s.contains( "@jabber.org" ) )
   {
-    mp_core->setXmppUserSubscription( s.trimmed(), true );
+    mp_core->setXmppUserSubscription( service, s.trimmed(), true );
     return;
   }
 
@@ -891,20 +893,20 @@ void GuiMain::showNetworkAccount()
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
   if( result == QDialog::Accepted )
-    mp_core->connectToXmppServer( gnl.user(), gnl.password() );
+    mp_core->connectToXmppServer( "GTalk", gnl.user(), gnl.password() );
 }
 
-void GuiMain::showUserSubscriptionRequest( const QString& user_path )
+void GuiMain::showUserSubscriptionRequest( const QString& service, const QString& bare_jid )
 {
   switch( QMessageBox::question( this, Settings::instance().programName(),
-                                 tr( "%1 wants to add you to the contact list. Do you accept?" ),
+                                 tr( "%1 (%2) wants to add you to the contact list. Do you accept?" ).arg( bare_jid, service ),
                                  tr( "Yes"), tr( "No"), QString(), 1, 1 ) )
   {
   case 0:
-    mp_core->setXmppUserSubscription( user_path, true );
+    mp_core->setXmppUserSubscription( service, bare_jid, true );
     break;
   case 1:
-    mp_core->setXmppUserSubscription( user_path, false );
+    mp_core->setXmppUserSubscription( service, bare_jid, false );
     break;
   }
 }
@@ -922,7 +924,7 @@ void GuiMain::removeUser( VNumber user_id )
   if( res == 0 )
   {
     // remove the user
-    if( mp_core->removeXmppUser( u.path() ) )
+    if( mp_core->removeXmppUser( u ) )
     {
       mp_userList->removeUser( u, true );
     }

@@ -46,20 +46,20 @@ public:
   void connectToServer( const QString& service, const QString& jid, const QString& passwd );
   void disconnectFromServer();
   void disconnectFromServer( const QString& service );
-  inline bool isConnected() const;
+  bool isConnected( const QString& service ) const;
 
-  void sendMessage( const QString& service, const QString& bare_jid, const Message& );
+  void sendMessage( const User&, const Message& );
   void subscribeUser( const QString& service, const QString& bare_jid, bool );
   void removeUser( const QString& service, const QString& bare_jid );
   void requestVCard( const QString& service, const QString& bare_jid );
   void sendLocalUserPresence();
 
 signals:
-  void message( const QString&, const QString&, const Message& );
+  void message( const QString& service, const QString& bare_jid, const Message& );
   void userChangedInRoster( const User& );
-  void userSubscriptionRequest( const QString& );
-  void vCardReceived( const QString&, const VCard& );
-  void vCardAvailable( const QString& );
+  void userSubscriptionRequest( const QString& service, const QString& bare_jid );
+  void vCardReceived( const QString& service, const QString& bare_jid, const VCard& );
+  void vCardAvailable( const QString& service, const QString& bare_jid );
 
 protected slots:
   void serverConnected();
