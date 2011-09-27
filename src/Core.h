@@ -44,7 +44,7 @@ public:
   void stop();
 
   bool connectToXmppServer( const QString& service, const QString& bare_jid, const QString& passwd );
-  void disconnectFromXmppServer( const QString& service );
+  void disconnectFromXmppServer( const QString& service = "" ); // Empty service = All services
 
   /* CoreUser */
   void searchUsers( const QHostAddress& );

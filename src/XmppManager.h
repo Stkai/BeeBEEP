@@ -41,16 +41,17 @@ public:
   XmppClient* client( const QString& ) const;
   inline const QList<XmppClient*>& clientList() const;
 
+  void loadDefaultClients();
   XmppClient* createClient( const QString& client_service, const QString& client_icon_path );
 
-  void connectToServer( const QString& service, const QString& jid, const QString& passwd );
+  bool connectToServer( const QString& service, const QString& jid, const QString& passwd );
   void disconnectFromServer();
   void disconnectFromServer( const QString& service );
   bool isConnected( const QString& service ) const;
 
   void sendMessage( const User&, const Message& );
   void subscribeUser( const QString& service, const QString& bare_jid, bool );
-  void removeUser( const QString& service, const QString& bare_jid );
+  void removeUser( const User& );
   void requestVCard( const QString& service, const QString& bare_jid );
   void sendLocalUserPresence();
 

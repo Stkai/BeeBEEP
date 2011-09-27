@@ -218,6 +218,10 @@ void Settings::load()
     QString sName = GetUserNameFromSystemEnvinroment();
     m_localUser.setName( sName );
   }
+
+  if( m_localUser.bareJid().isEmpty() )
+    m_localUser.setBareJid( QString( "%1@localhost" ).arg( m_localUser.name() ) );
+
   qDebug() << "Local user:" << m_localUser.path();
 }
 

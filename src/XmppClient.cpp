@@ -22,13 +22,16 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "XmppClient.h"
+#include "QXmppRosterManager.h"
+#include "QXmppVCardManager.h"
 
 
 XmppClient::XmppClient( QObject* parent )
-  : QXmppClient( parent ),
-    m_service( "Jabber" ), m_iconPath( ":/images/jabber.png" ),
+  : QXmppClient( parent ), m_clientUser(),
+    m_iconPath( ":/images/jabber.png" ),
     m_connectionState( XmppClient::Offline )
 {
+  setService( "Jabber" );
   connect( &(rosterManager()), SIGNAL( rosterReceived() ), this, SIGNAL( rosterReceived() ) );
   connect( &(rosterManager()), SIGNAL( rosterChanged( const QString& ) ), this, SIGNAL( rosterChanged( const QString& ) ) );
   connect( &(rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SIGNAL( presenceChanged( const QString&, const QString& ) ) );

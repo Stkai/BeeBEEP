@@ -60,5 +60,6 @@
         <file>images/network-account.png</file>
         <file>images/gtalk.png</file>
         <file>images/jabber.png</file>
+        <file>images/facebook.png</file>
     </qresource>
 </RCC>

@@ -36,7 +36,8 @@ public:
   UserList& operator=( const UserList& );
 
   User find( VNumber ) const;
-  User find( const QString& ) const;
+  User find( const QString& user_path ) const;
+  User find( const QString& service, const QString& bare_jid ) const;
 
   void set( const User& );
   bool remove( const User& );

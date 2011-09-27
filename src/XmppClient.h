@@ -26,6 +26,7 @@
 
 #include "Config.h"
 #include "QXmppClient.h"
+#include "User.h"
 class QXmppVCardIq;
 
 
@@ -52,7 +53,7 @@ signals:
   void vCardReceived( const QXmppVCardIq& );
 
 private:
-  QString m_service;
+  User m_clientUser;
   QString m_iconPath;
   ConnectionState m_connectionState;
 
@@ -60,8 +61,8 @@ private:
 
 
 // Inline Functions
-inline const QString& XmppClient::service() const { return m_service; }
-inline void XmppClient::setService( const QString& new_value ) { m_service = new_value; }
+inline const QString& XmppClient::service() const { return m_clientUser.service(); }
+inline void XmppClient::setService( const QString& new_value ) { m_clientUser.setService( new_value ); }
 inline const QString& XmppClient::iconPath() const { return m_iconPath; }
 inline void XmppClient::setIconPath( const QString& new_value ) { m_iconPath = new_value; }
 inline bool XmppClient::isActive() const { return m_connectionState != XmppClient::Offline; }

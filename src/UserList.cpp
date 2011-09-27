@@ -72,6 +72,21 @@ User UserList::find( const QString& user_path ) const
   return User();
 }
 
+User UserList::find( const QString& service, const QString& bare_jid ) const
+{
+  if( bare_jid == Settings::instance().localUser().bareJid() )
+    return Settings::instance().localUser();
+  QList<User>::const_iterator it = m_users.begin();
+  while( it != m_users.end() )
+  {
+    if( service == (*it).service() && bare_jid == (*it).bareJid() )
+      return *it;
+    ++it;
+  }
+  qDebug() << "Unable to find user with service" << service << "and bare_jid" << bare_jid;
+  return User();
+}
+
 void UserList::set( const User& u )
 {
   if( u.id() == ID_LOCAL_USER )

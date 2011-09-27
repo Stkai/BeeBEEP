@@ -175,13 +175,16 @@ void GuiMain::initGuiItems()
 void GuiMain::showAbout()
 {
   QMessageBox::about( this, Settings::instance().programName(),
-                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6" )
+                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br /><br />%7" )
                       .arg( Settings::instance().programName() )
                       .arg( tr( "Secure Network Chat" ) )
                       .arg( tr( "Version" ) )
                       .arg( Settings::instance().version( true ) )
                       .arg( tr( "developed by Marco Mastroddi" ) )
-                      .arg( tr( "e-mail: marco.mastroddi@gmail.com") ) );
+                      .arg( tr( "e-mail: marco.mastroddi@gmail.com") )
+                      .arg( QString( "XMPP: QXmpp 0.3.0 (Manjeet Dahiya)") )
+                      );
+
 }
 
 void GuiMain::createActions()
@@ -416,10 +419,7 @@ void GuiMain::checkUser( const User& u )
   }
 
   if( u.isLocal() )
-  {
     refreshTitle();
-    return;
-  }
 
   qDebug() << "User" << u.path() << "has changed his info. Check it";
   if( u.status() == User::Offline )
@@ -623,7 +623,7 @@ void GuiMain::searchUsers()
   if( !ok || s.isEmpty() || s.isNull() )
     return;
 
-  QString service = "GTalk"; // FIXME!!!
+  QString service = "gtalk"; // FIXME!!!
 
   if( s.contains( "@gmail.com" ) || s.contains( "@jabber.org" ) )
   {
@@ -893,7 +893,7 @@ void GuiMain::showNetworkAccount()
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
   if( result == QDialog::Accepted )
-    mp_core->connectToXmppServer( "GTalk", gnl.user(), gnl.password() );
+    mp_core->connectToXmppServer( "gtalk", gnl.user(), gnl.password() );
 }
 
 void GuiMain::showUserSubscriptionRequest( const QString& service, const QString& bare_jid )

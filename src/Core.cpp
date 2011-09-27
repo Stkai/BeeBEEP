@@ -43,6 +43,7 @@ Core::Core( QObject* parent )
   qDebug() << "FileTransfer created";
   mp_xmppManager = new XmppManager( this );
   qDebug() << "XmppManager created";
+  mp_xmppManager->loadDefaultClients();
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
@@ -96,7 +97,7 @@ bool Core::start()
     showTipOfTheDay();
 
   if( Settings::instance().autoConnectToNetworkAccount() )
-    connectToXmppServer( "GTalk", Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );  // FIXME!!!
+    connectToXmppServer( "gtalk", Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );  // FIXME!!!
 
   return true;
 }

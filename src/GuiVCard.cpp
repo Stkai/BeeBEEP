@@ -46,7 +46,10 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   m_userId = u.id();
   m_chatId = chat_id;
 
-  mp_lPath->setText( u.path() );
+  if( u.isOnLan())
+    mp_lPath->setText( u.path() );
+  else
+    mp_lPath->setText( QString( "<b>%1</b>: %2" ).arg( u.service(), u.bareJid() ) );
 
   QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.vCard().nickName());
 
