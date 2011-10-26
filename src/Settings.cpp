@@ -202,7 +202,9 @@ void Settings::load()
   sets.beginGroup( "Network");
   m_networkProxy.setType( (QNetworkProxy::ProxyType)sets.value( "ProxyType", QNetworkProxy::DefaultProxy ).toInt() );
   QString proxy_address = sets.value( "ProxyAddress", "" ).toString();
-  if( !proxy_address.isEmpty() )
+  if( proxy_address.isEmpty() )
+    m_networkProxy.setType( QNetworkProxy::DefaultProxy );
+  else
     m_networkProxy.setHostName( proxy_address );
   m_networkProxy.setPort( sets.value( "ProxyPort", 0 ).toInt() );
   m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();

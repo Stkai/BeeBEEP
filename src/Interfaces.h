@@ -61,6 +61,13 @@ public:
 
 };
 
+class ServiceInterface : public PluginInterface
+{
+public:
+  virtual QString hostAddress() const = 0;
+  virtual int hostPort() const = 0;
+
+};
 
 // Inline Functions
 inline void PluginInterface::setEnabled( bool new_value ) { m_isEnabled = new_value; }
@@ -68,6 +75,6 @@ inline bool PluginInterface::isEnabled() const { return m_isEnabled; }
 
 
 Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/1.0" )
-
+Q_DECLARE_INTERFACE( ServiceInterface, "beebeep.plugin.ServiceInterface/1.0" )
 
 #endif // BEEBEEP_INTERFACES_H

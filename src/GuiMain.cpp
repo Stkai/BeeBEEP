@@ -623,7 +623,7 @@ void GuiMain::searchUsers()
   if( !ok || s.isEmpty() || s.isNull() )
     return;
 
-  QString service = "gtalk"; // FIXME!!!
+  QString service = "GTalk"; // FIXME!!!
 
   if( s.contains( "@gmail.com" ) || s.contains( "@jabber.org" ) )
   {
@@ -893,7 +893,7 @@ void GuiMain::showNetworkAccount()
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
   if( result == QDialog::Accepted )
-    mp_core->connectToXmppServer( "gtalk", gnl.user(), gnl.password() );
+    mp_core->connectToXmppServer( "GTalk", gnl.user(), gnl.password() );
 }
 
 void GuiMain::showUserSubscriptionRequest( const QString& service, const QString& bare_jid )

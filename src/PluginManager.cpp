@@ -29,7 +29,7 @@ PluginManager* PluginManager::mp_instance = NULL;
 
 
 PluginManager::PluginManager()
-  : m_textMarkers()
+  : m_textMarkers(), m_services()
 {
 }
 
@@ -59,12 +59,22 @@ void PluginManager::addPlugin( const QString& file_path )
     TextMarkerInterface* text_marker_plugin = qobject_cast<TextMarkerInterface*>( plugin );
     if( text_marker_plugin )
     {
-      qDebug() << text_marker_plugin->name() << "plugin found";
+      qDebug() << text_marker_plugin->name() << "is a text marker plugin";
       m_textMarkers.append( text_marker_plugin );
       return;
     }
     else
       qDebug() << file_path << "is not a text marker plugin";
+
+    ServiceInterface* service_plugin = qobject_cast<ServiceInterface*>( plugin );
+    if( service_plugin )
+    {
+      qDebug() << service_plugin->name() << "is a service plugin";
+      m_services.append( service_plugin );
+      return;
+    }
+    else
+      qDebug() << file_path << "is not a service plugin";
   }
   else
     qDebug() << file_path << "is not a plugin";
@@ -90,7 +100,13 @@ static bool TextMarkerForPriority( TextMarkerInterface* tm1, TextMarkerInterface
   return tm1->priority() < tm2->priority();
 }
 
+static bool ServiceForName( ServiceInterface* s1, ServiceInterface* s2 )
+{
+  return s1->name() < s2->name();
+}
+
 void PluginManager::sortPlugins()
 {
   qSort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
+  qSort( m_services.begin(), m_services.end(), ServiceForName );
 }

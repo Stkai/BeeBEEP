@@ -97,7 +97,7 @@ bool Core::start()
     showTipOfTheDay();
 
   if( Settings::instance().autoConnectToNetworkAccount() )
-    connectToXmppServer( "gtalk", Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );  // FIXME!!!
+    connectToXmppServer( "GTalk", Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );  // FIXME!!!
 
   return true;
 }

@@ -84,25 +84,25 @@ bool XmppManager::connectToServer( const QString& service, const QString& bare_j
 
   if( mp_client->isConnected() )
   {
-    makeSystemMessage( mp_client, tr( "already connected to the server." ) );
+    makeSystemMessage( mp_client, tr( "already connected to the server" ) );
     return false;
   }
 
   if( mp_client->isActive() )
   {
-    makeSystemMessage( mp_client, tr( "connection in progress to the server. Please wait." ) );
+    makeSystemMessage( mp_client, tr( "connection in progress to the server. Please wait" ) );
     return false;
   }
 
   if( bare_jid.isEmpty() )
   {
-    makeSystemMessage( mp_client, tr( "Username is empty. Unable to connect to the server." ) );
+    makeSystemMessage( mp_client, tr( "Username is empty. Unable to connect to the server" ) );
     return false;
   }
 
   if( passwd.isEmpty() )
   {
-    makeSystemMessage( mp_client, tr( "Password is empty. Unable to connect to the server." ) );
+    makeSystemMessage( mp_client, tr( "Password is empty. Unable to connect to the server" ) );
     return false;
   }
 
@@ -118,7 +118,10 @@ bool XmppManager::connectToServer( const QString& service, const QString& bare_j
   }
 
   if( proxy.type() != QNetworkProxy::NoProxy && proxy.type() != QNetworkProxy::DefaultProxy )
+  {
+    qDebug() << "XMPP> connection use proxy" << proxy.hostName() << proxy.port() << "with type" << proxy.type();
     mp_client->configuration().setNetworkProxy( proxy );
+  }
 
   mp_client->configuration().setJid( bare_jid );
   mp_client->configuration().setPassword( passwd );
@@ -138,7 +141,10 @@ void XmppManager::disconnectFromServer()
   foreach( XmppClient* mp_client, m_clients )
   {
     if( mp_client->isActive() )
+    {
       mp_client->disconnectFromServer();
+      mp_client->setConnectionState( XmppClient::Offline );
+    }
   }
 }
 
@@ -149,6 +155,7 @@ void XmppManager::disconnectFromServer( const QString& service )
     return;
   qDebug() << "XMPP> Disconnecting from" << mp_client->service();
   mp_client->disconnectFromServer();
+  mp_client->setConnectionState( XmppClient::Offline );
 }
 
 void XmppManager::serverConnected()
@@ -209,6 +216,7 @@ void XmppManager::errorOccurred( QXmppClient::Error err )
     s_error = tr( "unknown" );
   }
 
+  mp_client->setConnectionState( XmppClient::Offline );
   makeSystemMessage( mp_client, tr( "connection error (%1)" ).arg( s_error ) );
 }
 
@@ -335,7 +343,7 @@ void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )
 void XmppManager::makeSystemMessage( XmppClient* mp_client, const QString& txt )
 {
   QString msg = QString( "%1: %2." ).arg( mp_client->service(), txt );
-  qDebug() << "XMPP>" << msg;
+  qDebug() << "XMPP>" << qPrintable( msg );
   Message m = Protocol::instance().systemMessage( QString( "%1 %2" ).arg( Bee::iconToHtml( mp_client->iconPath(), "*@*" ), msg ) );
   emit message( mp_client->service(), Settings::instance().localUser().bareJid(), m );
 }
@@ -647,7 +655,7 @@ void XmppManager::dumpMessage( const QXmppMessage& xmpp_msg )
 
 void XmppManager::loadDefaultClients()
 {
-  XmppClient* mp_client = createClient( "Gtalk", ":/images/gtalk.png" );
+  XmppClient* mp_client = createClient( "GTalk", ":/images/gtalk.png" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
   mp_client = createClient( "Facebook", ":/images/facebook.png" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
