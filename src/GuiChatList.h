@@ -21,12 +21,34 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUICHATLIST_H
+#define BEEBEEP_GUICHATLIST_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.6.1";
-const int BEEBEEP_PROTO_VERSION = 52;
-const int BEEBEEP_BUILD = 115;
+#include "GuiChatItem.h"
 
-#endif // BEEBEEP_VERSION_H
+
+class GuiChatList : public QTreeWidget
+{
+  Q_OBJECT
+
+public:
+  GuiChatList( QWidget* parent = 0 );
+
+  virtual QSize sizeHint() const;
+
+  void updateChat( VNumber chat_id );
+  void updateChats();
+
+signals:
+  void chatSelected( VNumber chat_id );
+
+protected slots:
+  void chatDoubleClicked( QTreeWidgetItem*, int );
+
+private:
+  GuiChatItem* itemFromChatId( VNumber );
+
+};
+
+
+#endif // BEEBEEP_GUICHATLIST_H

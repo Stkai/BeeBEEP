@@ -31,6 +31,7 @@ class Chat;
 class ChatMessage;
 class FileInfo;
 class GuiChat;
+class GuiChatList;
 class GuiTransferFile;
 class GuiUserList;
 class User;
@@ -98,6 +99,7 @@ private:
   GuiChat* mp_defaultChat;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
+  GuiChatList* mp_chatList;
   Core *mp_core;
 
   QMenu *mp_menuMain;

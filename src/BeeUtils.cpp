@@ -117,3 +117,4 @@ QString Bee::uniqueFilePath( const QString& file_path )
 
   return fi.absoluteFilePath();
 }
+

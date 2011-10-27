@@ -21,12 +21,32 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUICHATITEM_H
+#define BEEBEEP_GUICHATITEM_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.6.1";
-const int BEEBEEP_PROTO_VERSION = 52;
-const int BEEBEEP_BUILD = 115;
+#include "Config.h"
+#include "BeeUtils.h"
 
-#endif // BEEBEEP_VERSION_H
+
+class GuiChatItem : public QTreeWidgetItem
+{
+
+public:
+  enum ChatDataType { ChatId = Qt::UserRole+2 };
+
+  GuiChatItem( QTreeWidget* );
+
+  inline void setChatId( VNumber );
+  inline VNumber chatId() const;
+
+  void updateItem();
+
+};
+
+
+// Inline Functions
+inline void GuiChatItem::setChatId( VNumber chat_id ) { setData( 0, ChatId, chat_id ); }
+inline VNumber GuiChatItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
+
+
+#endif // BEEBEEP_GUICHATITEM_H

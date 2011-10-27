@@ -27,6 +27,7 @@
 #include "EmoticonManager.h"
 #include "FileInfo.h"
 #include "GuiChat.h"
+#include "GuiChatList.h"
 #include "GuiEditVCard.h"
 #include "GuiNetwork.h"
 #include "GuiNetworkLogin.h"
@@ -76,6 +77,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
+
+  connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
 
   showChat( ID_DEFAULT_CHAT );
 
@@ -408,6 +411,19 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
   dock_widget->hide();
+
+  dock_widget = new QDockWidget( tr( "Chats" ), this );
+  dock_widget->setObjectName( "GuiChatListDock" );
+  mp_chatList = new GuiChatList( this );
+  dock_widget->setWidget( mp_chatList );
+  addDockWidget( Qt::RightDockWidgetArea, dock_widget );
+  //mp_actViewFileTransfer = dock_widget->toggleViewAction();
+  //mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
+  //mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
+  //mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
+  //mp_actViewFileTransfer->setData( 99 );
+  //dock_widget->hide();
+
 }
 
 void GuiMain::checkUser( const User& u )
@@ -585,6 +601,8 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
   }
+
+  mp_chatList->updateChat( chat_id );
 }
 
 void GuiMain::saveChat()

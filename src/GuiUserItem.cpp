@@ -64,18 +64,14 @@ void GuiUserItem::updateItem()
   VNumber user_id = Bee::qVariantToVNumber( data( 0, UserId ) );
   bool is_local_user =  user_id == Settings::instance().localUser().id();
 
-  QString s = is_local_user ? QObject::tr( "* All *" ) :
-              ( Settings::instance().showOnlyUsername() && user_status != User::Offline ? data( 0, Username ).toString() : data( 0, UserPath ).toString() );
+  QString s = Settings::instance().showOnlyUsername() && user_status != User::Offline ? data( 0, Username ).toString() : data( 0, UserPath ).toString();
 
   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
 
   s += " ";
   setText( 0, s );
-  if( is_local_user )
-    setIcon( 0, GetUserIcon( 1, user_status ) );
-  else
-    setIcon( 0, GetUserIcon( unread_messages, user_status ) );
+  setIcon( 0, GetUserIcon( 0, user_status ) );
 
   if( !m_defaultForegroundColor.isValid() )
     m_defaultForegroundColor = foreground( 0 ).color();

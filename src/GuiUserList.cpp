@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiUserList.h"
-#include "Settings.h"
+#include "User.h"
 
 
 GuiUserList::GuiUserList( QWidget* parent )
