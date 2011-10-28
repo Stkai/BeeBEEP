@@ -379,6 +379,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_menuEmoticons->menuAction() );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
+  mp_barMain->addAction( mp_actViewChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
 }
 
@@ -417,12 +418,12 @@ void GuiMain::createDockWindows()
   mp_chatList = new GuiChatList( this );
   dock_widget->setWidget( mp_chatList );
   addDockWidget( Qt::RightDockWidgetArea, dock_widget );
-  //mp_actViewFileTransfer = dock_widget->toggleViewAction();
-  //mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
-  //mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
-  //mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
-  //mp_actViewFileTransfer->setData( 99 );
-  //dock_widget->hide();
+  mp_actViewChats = dock_widget->toggleViewAction();
+  mp_actViewChats->setIcon( QIcon( ":/images/chat-list.png" ) );
+  mp_actViewChats->setText( tr( "Show the chat list" ) );
+  mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
+  mp_actViewChats->setData( 99 );
+  dock_widget->hide();
 
 }
 
@@ -793,7 +794,10 @@ void GuiMain::showTipOfTheDay()
 void GuiMain::showChat( VNumber chat_id )
 {
   if( mp_defaultChat->setChatId( chat_id ) )
+  {
     mp_userList->setUnreadMessages( chat_id, 0 );
+    mp_chatList->updateChat( chat_id );
+  }
 }
 
 void GuiMain::changeVCard()

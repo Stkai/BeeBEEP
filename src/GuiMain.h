@@ -123,6 +123,7 @@ private:
   QAction* mp_actViewUsers;
   QAction* mp_actSendFile;
   QAction* mp_actViewFileTransfer;
+  QAction* mp_actViewChats;
 
   QDockWidget* mp_dockUserList;
 

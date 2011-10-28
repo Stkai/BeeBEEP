@@ -25,6 +25,8 @@
 #define BEEBEEP_GUIUSERLIST_H
 
 #include "GuiUserItem.h"
+class User;
+
 
 class GuiUserList : public QTreeWidget
 {

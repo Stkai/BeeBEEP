@@ -26,27 +26,24 @@
 
 #include "Config.h"
 #include "BeeUtils.h"
-class User;
 
 
 class GuiUserItem : public QTreeWidgetItem
 {
 
 public:
-  enum UserDataType { UserId = Qt::UserRole+2, Username, UserPath, UserStatus, UserStatusDescription, UserColor, ChatId, UnreadMessages };
+  enum UserDataType { UserId = Qt::UserRole+2, ChatId, UnreadMessages };
 
   GuiUserItem( QTreeWidget* );
 
-  void setUser( const User& );
-
+  inline void setUserId( VNumber );
   inline VNumber userId() const;
   inline void setChatId( VNumber );
   inline VNumber chatId() const;
   inline void setUnreadMessages( int );
   inline int unreadMessages() const;
-  void setUserOffline();
 
-  void updateItem();
+  bool updateItem();
 
 private:
   QColor m_defaultForegroundColor;
@@ -55,6 +52,7 @@ private:
 
 
 // Inline Functions
+inline void GuiUserItem::setUserId( VNumber user_id ) { setData( 0, UserId, user_id ); }
 inline VNumber GuiUserItem::userId() const { return Bee::qVariantToVNumber( data( 0, UserId ) ); }
 inline void GuiUserItem::setChatId( VNumber chat_id ) { setData( 0, ChatId, chat_id ); }
 inline VNumber GuiUserItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }

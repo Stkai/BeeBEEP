@@ -71,6 +71,7 @@ void PluginManager::addPlugin( const QString& file_path )
     {
       qDebug() << service_plugin->name() << "is a service plugin";
       m_services.append( service_plugin );
+      m_serviceIcons.insert( service_plugin->name(), service_plugin->icon() );
       return;
     }
     else

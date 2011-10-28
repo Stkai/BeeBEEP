@@ -24,6 +24,7 @@
 #ifndef BEEBEEP_PLUGINMANAGER_H
 #define BEEBEEP_PLUGINMANAGER_H
 
+#include "Config.h"
 #include "Interfaces.h"
 
 
@@ -40,6 +41,8 @@ public:
   void loadPlugins();
   void setPluginEnabled( const QString& plugin_name, bool );
   void setPluginsEnabled( bool );
+
+  inline QIcon serviceIcon( const QString& );
 
   static PluginManager& instance()
   {
@@ -67,7 +70,7 @@ protected:
 private:
   QList<TextMarkerInterface*> m_textMarkers;
   QList<ServiceInterface*> m_services;
-
+  QMap<QString, QIcon> m_serviceIcons;
 
 };
 
@@ -76,5 +79,6 @@ private:
 inline const QList<TextMarkerInterface*>& PluginManager::textMarkers() const { return m_textMarkers; }
 inline const QList<ServiceInterface*>& PluginManager::services() const { return m_services; }
 inline int PluginManager::count() const { return m_textMarkers.size() + m_services.size(); }
+inline QIcon PluginManager::serviceIcon( const QString& service_name ) { return m_serviceIcons.value( service_name ); }
 
 #endif // BEEBEEP_PLUGINMANAGER_H

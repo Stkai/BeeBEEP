@@ -31,7 +31,7 @@ GuiChatItem::GuiChatItem( QTreeWidget* parent )
 {
 }
 
-void GuiChatItem::updateItem()
+bool GuiChatItem::updateItem()
 {
   setIcon( 0, QIcon( ":/images/chat.png" ) );
 
@@ -47,10 +47,7 @@ void GuiChatItem::updateItem()
   {
     Chat c = ChatManager::instance().chat( chatId() );
     if( !c.isValid() )
-    {
-      qWarning() << "Invalid chat id" << chatId() << "found in GuiChatItem::updateItem";
-      return;
-    }
+      return false;
 
     UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
     QStringList sl = user_list.toStringList( true, false );
@@ -66,4 +63,5 @@ void GuiChatItem::updateItem()
   setText( 0, chat_name );
   setToolTip( 0, tool_tip );
   setStatusTip( 0, tool_tip );
+  return true;
 }

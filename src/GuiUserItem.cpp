@@ -23,6 +23,8 @@
 
 #include "GuiUserItem.h"
 #include "Settings.h"
+#include "PluginManager.h"
+#include "UserManager.h"
 
 
 GuiUserItem::GuiUserItem( QTreeWidget* parent )
@@ -30,48 +32,35 @@ GuiUserItem::GuiUserItem( QTreeWidget* parent )
 {
 }
 
-void GuiUserItem::setUser( const User& u )
-{
-  setData( 0, UserId, u.id() );
-  setData( 0, Username, u.name() );
-  setData( 0, UserPath, u.path() );
-  setData( 0, UserColor, u.color() );
-  setData( 0, UserStatus, u.status() );
-  setData( 0, UserStatusDescription, u.statusDescription() );
-}
-
-void GuiUserItem::setUserOffline()
-{
-  setData( 0, UserStatus, User::Offline );
-  updateItem();
-}
-
 static QIcon GetUserIcon( int unread_messages, int user_status )
 {
   return unread_messages > 0 ? QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_status );
 }
 
-void GuiUserItem::updateItem()
+bool GuiUserItem::updateItem()
 {
+  User u = UserManager::instance().userList().find( userId() );
+  if( !u.isValid() )
+    return false;
   bool ok = false;
   int unread_messages = data( 0, UnreadMessages ).toInt( &ok );
   if( !ok )
     unread_messages = 0;
-  int user_status = data( 0, UserStatus ).toInt( &ok );
+  int user_status = u.status();
   if( !user_status )
     unread_messages = 0;
 
-  VNumber user_id = Bee::qVariantToVNumber( data( 0, UserId ) );
-  bool is_local_user =  user_id == Settings::instance().localUser().id();
-
-  QString s = Settings::instance().showOnlyUsername() && user_status != User::Offline ? data( 0, Username ).toString() : data( 0, UserPath ).toString();
+  QString s = u.isOnLan() ? (Settings::instance().showOnlyUsername() && user_status != User::Offline ? u.name() : u.path()) : u.name();
 
   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
 
   s += " ";
   setText( 0, s );
-  setIcon( 0, GetUserIcon( 0, user_status ) );
+  if( u.isOnLan() )
+    setIcon( 0, GetUserIcon( 0, user_status ) );
+  else
+    setIcon( 0, PluginManager::instance().serviceIcon( u.service() ) );
 
   if( !m_defaultForegroundColor.isValid() )
     m_defaultForegroundColor = foreground( 0 ).color();
@@ -83,17 +72,18 @@ void GuiUserItem::updateItem()
 
   QString status_tip;
   QString tool_tip;
-  if( is_local_user )
+  if( u.isLocal() )
   {
     status_tip = QObject::tr( "Open chat with all users" );
     tool_tip = status_tip;
   }
   else
   {
-    status_tip = QObject::tr( "Open chat with %1" ).arg( data( 0, UserPath ).toString() );
-    tool_tip = QObject::tr( "%1 is %2" ).arg( data( 0, Username ).toString(), Bee::userStatusToString( user_status ) );
+    status_tip = QObject::tr( "Open chat with %1" ).arg( u.name() );
+    tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
   }
 
   setToolTip( 0, tool_tip );
   setStatusTip( 0, status_tip );
+  return true;
 }

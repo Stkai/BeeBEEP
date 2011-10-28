@@ -39,7 +39,7 @@ public:
   inline void setChatId( VNumber );
   inline VNumber chatId() const;
 
-  void updateItem();
+  bool updateItem();
 
 };
 

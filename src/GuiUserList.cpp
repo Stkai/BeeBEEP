@@ -107,7 +107,7 @@ void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_me
     item = new GuiUserItem( this );
   }
 
-  item->setUser( u );
+  item->setUserId( u.id() );
   item->setChatId( private_chat_id );
   item->setUnreadMessages( unread_messages );
   item->updateItem();
@@ -118,7 +118,7 @@ void GuiUserList::removeUser( const User& u, bool erase )
   GuiUserItem* item = itemFromUserId( u.id() );
   if( item )
   {
-    item->setUserOffline();
+    item->updateItem();
     if( erase )
     {
       qDebug() << "Delete user item from GuiUserList";

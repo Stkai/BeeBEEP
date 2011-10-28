@@ -277,6 +277,7 @@ void XmppManager::presenceChanged( const QString& bare_jid, const QString& jid_r
     return;
   }
 
+  checkUserChanged( mp_client, bare_jid );
   qDebug() << "XMPP> presence changed for" << bare_jid;
   QXmppPresence presence = mp_client->rosterManager().getPresence( bare_jid, jid_resource );
   User::Status status = statusFromPresence( presence.status().type() );
@@ -656,9 +657,15 @@ void XmppManager::dumpMessage( const QXmppMessage& xmpp_msg )
 void XmppManager::loadDefaultClients()
 {
   XmppClient* mp_client = createClient( "GTalk", ":/images/gtalk.png" );
+  mp_client->configuration().setDomain( "gmail.com" );
+  mp_client->configuration().setHost( "talk.gmail.com" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
   mp_client = createClient( "Facebook", ":/images/facebook.png" );
+  mp_client->configuration().setDomain( "facebook.com" );
+  mp_client->configuration().setHost( "chat.facebook.com" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
   mp_client = createClient( "Jabber", ":/images/jabber.png" );
+  mp_client->configuration().setDomain( "jabber.org" );
+  mp_client->configuration().setHost( "jabber.org" );
   qDebug() << "XMPP> Service" << mp_client->service() << "created";
 }
