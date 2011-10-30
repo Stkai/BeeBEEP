@@ -1,4 +1,5 @@
 
 TEMPLATE = subdirs
 
-SUBDIRS = rainbowtextmarker 
+SUBDIRS = rainbowtextmarker \
+			facebookservice
