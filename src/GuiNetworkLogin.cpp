@@ -39,8 +39,17 @@ GuiNetworkLogin::GuiNetworkLogin( QWidget* parent )
 void GuiNetworkLogin::loadSettings()
 {
   int i = 0;
+  int current_index = 0;
   foreach( ServiceInterface* si, PluginManager::instance().services() )
-    mp_comboService->insertItem( i++, si->icon(), si->name() );
+  {
+    mp_comboService->insertItem( i, si->icon(), si->name() );
+    if( si->name() == Settings::instance().networkAccountService() )
+      current_index = i;
+    i++;
+  }
+
+  if( current_index > 0 )
+    mp_comboService->setCurrentIndex( current_index );
 
   QString passwd = Settings::instance().networkAccountPassword();
   if( passwd.isEmpty() )
@@ -109,7 +118,7 @@ void GuiNetworkLogin::doLogin()
   if( !mp_cbRememberPassword->isChecked() )
     user_password = "";
 
-  Settings::instance().setNetworkAccount( user_name, user_password, mp_cbAutomaticConnection->isChecked() );
+  Settings::instance().setNetworkAccount( mp_comboService->currentText(), user_name, user_password, mp_cbAutomaticConnection->isChecked() );
 
   accept();
 }

@@ -58,7 +58,7 @@ inline bool Emoticon::operator==( const Emoticon& e ) const { return m_textToMat
 inline bool Emoticon::isValid() const { return m_textToMatch.size() > 0 && m_name.size() > 0; }
 inline const QString& Emoticon::textToMatch() const { return m_textToMatch; }
 inline const QString& Emoticon::name() const { return m_name; }
-inline QString Emoticon::toHtml( const QString& theme ) const { return QString( "<img src=':/%1/%2.png' alt='%3'>").arg( theme.isEmpty() ? "emoticons" : theme ).arg( m_name ).arg( m_textToMatch ); }
+inline QString Emoticon::toHtml( const QString& theme ) const { return QString( "<img src=':/%1/%2.png'>").arg( theme.isEmpty() ? "emoticons" : theme ).arg( m_name ); }
 inline QPixmap Emoticon::pixmap( const QString& theme ) const { return QPixmap( QString( ":/%1/%2.png").arg( theme.isEmpty() ? "emoticons" : theme ).arg( m_name ) ); }
 
 

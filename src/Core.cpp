@@ -96,8 +96,8 @@ bool Core::start()
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
 
-  //if( Settings::instance().autoConnectToNetworkAccount() )
-  //  connectToXmppServer( "Facebook", Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );  // FIXME!!!
+  if( Settings::instance().autoConnectToNetworkAccount() )
+    connectToXmppServer( Settings::instance().networkAccountService(), Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );
 
   return true;
 }

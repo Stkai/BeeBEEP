@@ -72,7 +72,7 @@ bool GuiUserItem::updateItem()
   QString tool_tip;
   if( u.isLocal() )
   {
-    status_tip = QObject::tr( "Open chat with all users" );
+    status_tip = QObject::tr( "Open chat with all local users" );
     tool_tip = status_tip;
   }
   else
