@@ -21,29 +21,15 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUINETWORKLOGIN_H
-#define BEEBEEP_GUINETWORKLOGIN_H
+#ifndef BEE_GTALKSERVICE_GLOBAL_H
+#define BEE_GTALKSERVICE_GLOBAL_H
 
-#include "Config.h"
-#include "ui_GuiNetworkLogin.h"
+#include <QtCore/qglobal.h>
 
+#if defined(BEE_GTALKSERVICE_LIBRARY)
+#  define BEEGTALKSERVICESHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define BEEGTALKSERVICESHARED_EXPORT Q_DECL_IMPORT
+#endif
 
-class GuiNetworkLogin : public QDialog, private Ui::GuiNetworkLogin
-{
-  Q_OBJECT
-
-public:
-  explicit GuiNetworkLogin( QWidget *parent );
-
-  void loadSettings();
-
-  QString user() const;
-  QString password() const;
-  QString service() const;
-
-protected slots:
-  void doLogin();
-
-};
-
-#endif // BEEBEEP_GUINETWORKLOGIN_H
+#endif // BEE_GTALKSERVICE_GLOBAL_H

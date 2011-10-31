@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiNetworkLogin.h"
+#include "PluginManager.h"
 #include "Settings.h"
 
 
@@ -37,6 +38,10 @@ GuiNetworkLogin::GuiNetworkLogin( QWidget* parent )
 
 void GuiNetworkLogin::loadSettings()
 {
+  int i = 0;
+  foreach( ServiceInterface* si, PluginManager::instance().services() )
+    mp_comboService->insertItem( i++, si->icon(), si->name() );
+
   QString passwd = Settings::instance().networkAccountPassword();
   if( passwd.isEmpty() )
   {
@@ -74,6 +79,11 @@ QString GuiNetworkLogin::user() const
 QString GuiNetworkLogin::password() const
 {
   return mp_lePassword->text();
+}
+
+QString GuiNetworkLogin::service() const
+{
+  return mp_comboService->currentText();
 }
 
 void GuiNetworkLogin::doLogin()

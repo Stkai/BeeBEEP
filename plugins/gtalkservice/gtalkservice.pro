@@ -1,21 +1,21 @@
 include(../plugins.pri)
 
-TARGET = beefacebook
+TARGET = beegtalk
 TEMPLATE = lib
 
-DEFINES += BEE_FACEBOOKSERVICE_LIBRARY
+DEFINES += BEE_GTALKSERVICE_LIBRARY
 
-SOURCES += FacebookService.cpp
+SOURCES += GTalkService.cpp
 
-HEADERS += FacebookService.h\
-        facebookservice_global.h
+HEADERS += GTalkService.h\
+        gtalkservice_global.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN
     TARGET.UID3 = 0xE61CE10B
     TARGET.CAPABILITY = 
     TARGET.EPOCALLOWDLLDATA = 1
-    addFiles.sources = beefacebook.dll
+    addFiles.sources = beegtalk.dll
     addFiles.path = !:/sys/bin
     DEPLOYMENT += addFiles
 }
@@ -32,4 +32,4 @@ unix:!symbian {
 OTHER_FILES +=
 
 RESOURCES += \
-    facebookservice.qrc
+    gtalkservice.qrc

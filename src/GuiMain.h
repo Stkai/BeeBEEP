@@ -70,7 +70,7 @@ private slots:
   void showUserMenu( VNumber );
   void changeUserColor( VNumber );
   void sendFile( VNumber );
-  void showTextMarkerPluginHelp();
+  void showPluginHelp();
   void showPluginManager();
   void showNetworkManager();
   void showNetworkAccount();

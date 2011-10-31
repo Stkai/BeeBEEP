@@ -29,8 +29,8 @@
 
 namespace Bee
 {
-  inline QIcon userStatusIcon( int );
-  QString userStatusIconFileName( int );
+  inline QIcon userStatusIcon( const QString&, int );
+  QString userStatusIconFileName( const QString&, int );
   QString userStatusToString( int );
   inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
   inline VNumber qVariantToVNumber( const QVariant& );
@@ -42,7 +42,7 @@ namespace Bee
 
 
 // Inline Functions
-inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
+inline QIcon Bee::userStatusIcon( const QString& user_service, int user_status ) { return QIcon( userStatusIconFileName( user_service, user_status ) ); }
 inline QString Bee::iconToHtml( const QString& icon_path, const QString& icon_alt ) { return QString( "<img src='%1' width=16 height=16 alt=' %2 ' /> " ).arg( icon_path ).arg( icon_alt ); }
 inline VNumber Bee::qVariantToVNumber( const QVariant& v ) { return v.toULongLong(); }
 

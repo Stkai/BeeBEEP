@@ -57,7 +57,7 @@ void Core::showUserStatusChanged( const User& u )
   // Before signal is emitted, so chat is created in gui ... FIXME ??? ...
   emit userChanged( u );
 
-  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
+  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.service(), u.status() ), "*S*" ) + QString( " " );
   if( u.isLocal() )
     sHtmlMsg += tr( "You are" );
   else

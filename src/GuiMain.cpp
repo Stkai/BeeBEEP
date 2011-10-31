@@ -339,7 +339,7 @@ void GuiMain::createMenus()
   mp_menuStatus->setIcon( QIcon( ":/images/user-status.png" ) );
   for( int i = User::Online; i < User::NumStatus; i++ )
   {
-    act = mp_menuStatus->addAction( Bee::userStatusIcon( i ), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
+    act = mp_menuStatus->addAction( Bee::userStatusIcon( "", i ), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
     act->setData( i );
     act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
     act->setIconVisibleInMenu( true );
@@ -863,21 +863,34 @@ void GuiMain::updadePluginMenu()
   if( PluginManager::instance().count() <= 0 )
     return;
 
+  QString help_data_ts = tr( "is a plugin developed by" );
+  QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
   mp_menuPlugins->addSeparator();
 
   foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
   {
-    act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showTextMarkerPluginHelp() ) );
-    QString help_data_ts = tr( "is a plugin developed by" );
-    act->setData( QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" )
+    act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showPluginHelp() ) );
+
+    act->setData( help_data_format
                   .arg( Bee::iconToHtml( (text_marker->icon().isNull() ? ":/images/plugin.png" : text_marker->iconFileName()), "*P*" ),
                         text_marker->name(), help_data_ts, text_marker->author(), text_marker->help() ) );
     act->setIcon( text_marker->icon() );
     act->setEnabled( text_marker->isEnabled() );
   }
+
+  foreach( ServiceInterface* service, PluginManager::instance().services() )
+  {
+    act = mp_menuPlugins->addAction( service->name(), this, SLOT( showPluginHelp() ) );
+
+    act->setData( help_data_format
+                  .arg( Bee::iconToHtml( (service->icon().isNull() ? ":/images/plugin.png" : service->iconFileName()), "*P*" ),
+                        service->name(), help_data_ts, service->author(), service->help() ) );
+    act->setIcon( service->icon() );
+    act->setEnabled( service->isEnabled() );
+  }
 }
 
-void GuiMain::showTextMarkerPluginHelp()
+void GuiMain::showPluginHelp()
 {
   QAction* act = qobject_cast<QAction*>(sender());
   if( act )
@@ -915,7 +928,7 @@ void GuiMain::showNetworkAccount()
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
   if( result == QDialog::Accepted )
-    mp_core->connectToXmppServer( "GTalk", gnl.user(), gnl.password() );
+    mp_core->connectToXmppServer( gnl.service(), gnl.user(), gnl.password() );
 }
 
 void GuiMain::showUserSubscriptionRequest( const QString& service, const QString& bare_jid )

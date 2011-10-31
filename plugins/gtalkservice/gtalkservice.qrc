@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/plugins">
+        <file>gtalk.png</file>
+        <file>gtalk-away.png</file>
+        <file>gtalk-busy.png</file>
+        <file>gtalk-offline.png</file>
+        <file>gtalk-online.png</file>
+    </qresource>
+</RCC>

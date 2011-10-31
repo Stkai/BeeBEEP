@@ -73,7 +73,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else
     mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png").pixmap( 96, 96 ) );
 
-  mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) ) );
+  mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.service(), u.status() ), Bee::userStatusToString( u.status() ) ) );
 
   if( u.isLocal() )
     mp_pbChat->setToolTip( tr( "Chat with all" ) );

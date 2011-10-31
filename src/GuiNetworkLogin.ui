@@ -24,6 +24,19 @@
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
+       <widget class="QLabel" name="mp_lService">
+        <property name="text">
+         <string>Account</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="mp_comboService"/>
+      </item>
+      <item row="1" column="0">
        <widget class="QLabel" name="mp_lJid">
         <property name="text">
          <string>User</string>
@@ -33,24 +46,8 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="mp_leUser"/>
-      </item>
       <item row="1" column="1">
-       <widget class="QLabel" name="mp_lUserHelp">
-        <property name="text">
-         <string>(ex: user@gmail.com)</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::AutoText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
+       <widget class="QLineEdit" name="mp_leUser"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="mp_lPassword">
@@ -123,6 +120,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>mp_comboService</tabstop>
   <tabstop>mp_leUser</tabstop>
   <tabstop>mp_lePassword</tabstop>
   <tabstop>mp_cbRememberMe</tabstop>

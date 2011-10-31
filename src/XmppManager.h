@@ -41,10 +41,10 @@ public:
   XmppClient* client( const QString& ) const;
   inline const QList<XmppClient*>& clientList() const;
 
-  void loadDefaultClients();
+  void loadClients();
   XmppClient* createClient( const QString& client_service, const QString& client_icon_path );
 
-  bool connectToServer( const QString& service, const QString& jid, const QString& passwd );
+  bool connectToServer( const QString& service, const QString& user_name, const QString& passwd );
   void disconnectFromServer();
   void disconnectFromServer( const QString& service );
   bool isConnected( const QString& service ) const;

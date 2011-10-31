@@ -21,21 +21,21 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEE_FACEBOOKSERVICE_H
-#define BEE_FACEBOOKSERVICE_H
+#ifndef BEE_GTALKSERVICE_H
+#define BEE_GTALKSERVICE_H
 
-#include "facebookservice_global.h"
+#include "gtalkservice_global.h"
 #include "Interfaces.h"
 #include <QObject>
 
 
-class BEEFACEBOOKSERVICESHARED_EXPORT FacebookService : public QObject, public ServiceInterface
+class BEEGTALKSERVICESHARED_EXPORT GTalkService : public QObject, public ServiceInterface
 {
   Q_OBJECT
   Q_INTERFACES( ServiceInterface )
 
 public:
-  FacebookService();
+  GTalkService();
 
   QString name() const;
   QString version() const;
@@ -63,4 +63,4 @@ public:
 
 };
 
-#endif // BEE_FACEBOOKSERVICE_H
+#endif // BEE_GTALKSERVICE_H

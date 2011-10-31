@@ -64,33 +64,27 @@ public:
 class ServiceInterface : public PluginInterface
 {
 public:
-  inline void setUser( const QString& );
-  inline const QString& user() const;
-  inline void setPassword( const QString& );
-  inline const QString& password() const;
-  inline const QString& hostAddress() const;
-  inline int hostPort() const;
+  virtual QString protocol() const = 0;
+  virtual QString hostAddress() const = 0;
+  virtual int hostPort() const = 0;
+  virtual QString domain() const = 0;
+  virtual bool useSASLAuthentication() = 0;
+  virtual bool ignoreSslErrors() const = 0;
+  virtual int streamSecurityMode() const = 0;
+  virtual int nonSASLAuthMechanism() const = 0;
+  virtual int sASLAuthMechanism() const = 0;
 
-  virtual QString userStatusIconFileName( int ) const = 0;
-  virtual QIcon userStatusIcon( int ) const = 0;
-
-protected:
-  QString m_user;
-  QString m_password;
-  QString m_hostAddress;
-  int m_hostPort;
+  virtual QString userStatusOfflineIconPath() const = 0;
+  virtual QString userStatusOnlineIconPath() const = 0;
+  virtual QString userStatusBusyIconPath() const = 0;
+  virtual QString userStatusAwayIconPath() const = 0;
 
 };
 
 // Inline Functions
 inline void PluginInterface::setEnabled( bool new_value ) { m_isEnabled = new_value; }
 inline bool PluginInterface::isEnabled() const { return m_isEnabled; }
-inline void ServiceInterface::setUser( const QString& new_value ) { m_user = new_value; }
-inline const QString& ServiceInterface::user() const { return m_user; }
-inline void ServiceInterface::setPassword( const QString& new_value ) { m_password = new_value; }
-inline const QString& ServiceInterface::password() const { return m_password; }
-inline const QString& ServiceInterface::hostAddress() const { return m_hostAddress; }
-inline int ServiceInterface::hostPort() const { return m_hostPort; }
+
 
 Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/1.0" )
 Q_DECLARE_INTERFACE( ServiceInterface, "beebeep.plugin.ServiceInterface/1.0" )

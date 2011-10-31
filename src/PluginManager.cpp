@@ -47,6 +47,7 @@ void PluginManager::loadPlugins()
     addPlugin( plugin_dir.absoluteFilePath( file_name ) );
 
   qDebug() << m_textMarkers.size() << "text marker plugins found";
+  qDebug() << m_services.size() << "service plugins found";
   sortPlugins();
 }
 
@@ -71,7 +72,6 @@ void PluginManager::addPlugin( const QString& file_path )
     {
       qDebug() << service_plugin->name() << "is a service plugin";
       m_services.append( service_plugin );
-      m_serviceIcons.insert( service_plugin->name(), service_plugin->icon() );
       return;
     }
     else
@@ -88,12 +88,21 @@ void PluginManager::setPluginEnabled( const QString& plugin_name, bool enabled )
     if( text_marker->name() == plugin_name )
       text_marker->setEnabled( enabled );
   }
+
+  foreach( ServiceInterface* service, m_services )
+  {
+    if( service->name() == plugin_name )
+      service->setEnabled( enabled );
+  }
 }
 
 void PluginManager::setPluginsEnabled( bool enabled )
 {
   foreach( TextMarkerInterface* text_marker, m_textMarkers )
     text_marker->setEnabled( enabled );
+
+  foreach( ServiceInterface* service, m_services )
+    service->setEnabled( enabled );
 }
 
 static bool TextMarkerForPriority( TextMarkerInterface* tm1, TextMarkerInterface* tm2 )
@@ -110,4 +119,14 @@ void PluginManager::sortPlugins()
 {
   qSort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
   qSort( m_services.begin(), m_services.end(), ServiceForName );
+}
+
+ServiceInterface* PluginManager::service( const QString& service_name ) const
+{
+  foreach( ServiceInterface* si, m_services )
+  {
+    if( si->name() == service_name )
+      return si;
+  }
+  return 0;
 }

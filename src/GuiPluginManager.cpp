@@ -124,14 +124,26 @@ void GuiPluginManager::togglePlugin()
 void GuiPluginManager::updatePlugins()
 {
   mp_twPlugins->clear();
+  QTreeWidgetItem* item;
   foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
   {
-    QTreeWidgetItem* item = new QTreeWidgetItem( mp_twPlugins );
+    item = new QTreeWidgetItem( mp_twPlugins );
     setPluginEnabled( item, text_marker->isEnabled() );
     item->setIcon( 1, text_marker->icon().isNull() ? QIcon( ":/images/plugin.png" ) : text_marker->icon() );
     item->setText( 1, text_marker->name() );
     item->setText( 2, text_marker->version() );
     item->setText( 3, text_marker->author() );
+    updateItem( item );
+  }
+
+  foreach( ServiceInterface* service, PluginManager::instance().services() )
+  {
+    item = new QTreeWidgetItem( mp_twPlugins );
+    setPluginEnabled( item, service->isEnabled() );
+    item->setIcon( 1, service->icon().isNull() ? QIcon( ":/images/plugin.png" ) : service->icon() );
+    item->setText( 1, service->name() );
+    item->setText( 2, service->version() );
+    item->setText( 3, service->author() );
     updateItem( item );
   }
 }

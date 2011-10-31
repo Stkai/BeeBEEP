@@ -2,4 +2,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS = rainbowtextmarker \
-			facebookservice
+			facebookservice \
+			gtalkservice

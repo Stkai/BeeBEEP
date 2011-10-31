@@ -32,9 +32,9 @@ GuiUserItem::GuiUserItem( QTreeWidget* parent )
 {
 }
 
-static QIcon GetUserIcon( int unread_messages, int user_status )
+static QIcon GetUserIcon( int unread_messages, const QString& user_service, int user_status )
 {
-  return unread_messages > 0 ? QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_status );
+  return unread_messages > 0 ? QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_service, user_status );
 }
 
 bool GuiUserItem::updateItem()
@@ -57,10 +57,8 @@ bool GuiUserItem::updateItem()
 
   s += " ";
   setText( 0, s );
-  if( u.isOnLan() )
-    setIcon( 0, GetUserIcon( 0, user_status ) );
-  else
-    setIcon( 0, PluginManager::instance().serviceIcon( u.service() ) );
+
+  setIcon( 0, GetUserIcon( 0, u.service(), user_status ) );
 
   if( !m_defaultForegroundColor.isValid() )
     m_defaultForegroundColor = foreground( 0 ).color();

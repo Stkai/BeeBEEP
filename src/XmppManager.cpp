@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "PluginManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "XmppManager.h"
@@ -76,7 +77,7 @@ XmppClient* XmppManager::createClient( const QString& client_service, const QStr
   return mp_client;
 }
 
-bool XmppManager::connectToServer( const QString& service, const QString& bare_jid, const QString& passwd )
+bool XmppManager::connectToServer( const QString& service, const QString& user_name, const QString& passwd )
 {
   XmppClient* mp_client = client( service );
   if( !mp_client )
@@ -94,7 +95,7 @@ bool XmppManager::connectToServer( const QString& service, const QString& bare_j
     return false;
   }
 
-  if( bare_jid.isEmpty() )
+  if( user_name.isEmpty() )
   {
     makeSystemMessage( mp_client, tr( "Username is empty. Unable to connect to the server" ) );
     return false;
@@ -123,7 +124,7 @@ bool XmppManager::connectToServer( const QString& service, const QString& bare_j
     mp_client->configuration().setNetworkProxy( proxy );
   }
 
-  mp_client->configuration().setJid( bare_jid );
+  mp_client->configuration().setUser( user_name );
   mp_client->configuration().setPassword( passwd );
   mp_client->configuration().setResource( QString( "BeeBeep" ) );
   mp_client->configuration().setAutoReconnectionEnabled( false );
@@ -654,18 +655,17 @@ void XmppManager::dumpMessage( const QXmppMessage& xmpp_msg )
   qDebug() << "XMPP> Message End";
 }
 
-void XmppManager::loadDefaultClients()
+void XmppManager::loadClients()
 {
-  XmppClient* mp_client = createClient( "GTalk", ":/images/gtalk.png" );
-  mp_client->configuration().setDomain( "gmail.com" );
-  mp_client->configuration().setHost( "talk.gmail.com" );
-  qDebug() << "XMPP> Service" << mp_client->service() << "created";
-  mp_client = createClient( "Facebook", ":/images/facebook.png" );
-  mp_client->configuration().setDomain( "facebook.com" );
-  mp_client->configuration().setHost( "chat.facebook.com" );
-  qDebug() << "XMPP> Service" << mp_client->service() << "created";
-  mp_client = createClient( "Jabber", ":/images/jabber.png" );
-  mp_client->configuration().setDomain( "jabber.org" );
-  mp_client->configuration().setHost( "jabber.org" );
-  qDebug() << "XMPP> Service" << mp_client->service() << "created";
+  foreach( ServiceInterface* si, PluginManager::instance().services() )
+  {
+    if( si->protocol() == "xmpp" )
+    {
+      XmppClient* mp_client = createClient( si->name(), si->iconFileName() );
+      mp_client->configuration().setDomain( si->domain() );
+      mp_client->configuration().setHost( si->hostAddress() );
+      mp_client->configuration().setPort( si->hostPort() );
+      qDebug() << "XMPP> Service" << mp_client->service() << "created";
+    }
+  }
 }
