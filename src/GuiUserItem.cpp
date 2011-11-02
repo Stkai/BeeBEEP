@@ -28,8 +28,22 @@
 
 
 GuiUserItem::GuiUserItem( QTreeWidget* parent )
-  : QTreeWidgetItem( parent )
+  : QTreeWidgetItem( parent ), m_defaultForegroundColor()
 {
+}
+
+bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
+{
+  qDebug() << "PIPPO";
+  int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
+  int other_priority = item.data( 0, GuiUserItem::Priority ).toInt();
+  if( user_item_priority != other_priority )
+    return user_item_priority < other_priority;
+
+  QString user_item_name = data( 0, GuiUserItem::UserName ).toString().toLower();
+  QString other_name = item.data( 0, GuiUserItem::UserName ).toString().toLower();
+
+  return user_item_name < other_name;
 }
 
 static QIcon GetUserIcon( int unread_messages, const QString& user_service, int user_status )
@@ -41,7 +55,13 @@ bool GuiUserItem::updateItem()
 {
   User u = UserManager::instance().userList().find( userId() );
   if( !u.isValid() )
+  {
+    setData( 0, GuiUserItem::Priority, 10000000 );
     return false;
+  }
+
+  setData( 0, UserName, u.name() );
+
   bool ok = false;
   int unread_messages = data( 0, UnreadMessages ).toInt( &ok );
   if( !ok )
@@ -70,6 +90,8 @@ bool GuiUserItem::updateItem()
 
   QString status_tip;
   QString tool_tip;
+  int user_priority = 1;
+
   if( u.isLocal() )
   {
     status_tip = QObject::tr( "Open chat with all local users" );
@@ -79,8 +101,11 @@ bool GuiUserItem::updateItem()
   {
     status_tip = QObject::tr( "Open chat with %1" ).arg( u.name() );
     tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
+    user_priority = u.isOnLan() ? 100 : 1000;
+    user_priority += u.isConnected() ? (10*user_status) : 10000;
   }
 
+  setData( 0, GuiUserItem::Priority, user_priority );
   setToolTip( 0, tool_tip );
   setStatusTip( 0, status_tip );
   return true;

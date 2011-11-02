@@ -54,6 +54,7 @@ protected slots:
 private:
   GuiUserItem* itemFromUserId( VNumber );
   GuiUserItem* itemFromChatId( VNumber );
+  void sortUsers();
 
   QColor m_defaultForegroundColor;
 

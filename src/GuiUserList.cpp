@@ -36,9 +36,15 @@ GuiUserList::GuiUserList( QWidget* parent )
   setColumnCount( 1 );
   header()->hide();
   setRootIsDecorated( false );
+  setSortingEnabled( true );
 
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( userDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
+}
+
+void GuiUserList::sortUsers()
+{
+  sortItems( 0, Qt::AscendingOrder );
 }
 
 QSize GuiUserList::sizeHint() const
@@ -111,6 +117,7 @@ void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_me
   item->setChatId( private_chat_id );
   item->setUnreadMessages( unread_messages );
   item->updateItem();
+  sortUsers();
 }
 
 void GuiUserList::removeUser( const User& u, bool erase )
@@ -129,6 +136,8 @@ void GuiUserList::removeUser( const User& u, bool erase )
         delete item;
       }
     }
+    else
+      sortUsers();
   }
   else
     qWarning() << "Unable to set user" << u.id() << "offline in GuiUserList";

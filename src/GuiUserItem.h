@@ -32,9 +32,11 @@ class GuiUserItem : public QTreeWidgetItem
 {
 
 public:
-  enum UserDataType { UserId = Qt::UserRole+2, ChatId, UnreadMessages };
+  enum UserDataType { UserId = Qt::UserRole+2, ChatId, UnreadMessages, UserName, Priority };
 
   GuiUserItem( QTreeWidget* );
+
+  bool operator<( const QTreeWidgetItem& ) const;
 
   inline void setUserId( VNumber );
   inline VNumber userId() const;
@@ -58,6 +60,5 @@ inline void GuiUserItem::setChatId( VNumber chat_id ) { setData( 0, ChatId, chat
 inline VNumber GuiUserItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
 inline void GuiUserItem::setUnreadMessages( int unread_messages ) { setData( 0, UnreadMessages, unread_messages ); }
 inline int GuiUserItem::unreadMessages() const { return data( 0, UnreadMessages ).toInt(); }
-
 
 #endif // BEEBEEP_GUIUSERITEM_H
