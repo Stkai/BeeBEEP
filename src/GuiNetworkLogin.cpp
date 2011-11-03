@@ -36,68 +36,46 @@ GuiNetworkLogin::GuiNetworkLogin( QWidget* parent )
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
-void GuiNetworkLogin::loadSettings()
+void GuiNetworkLogin::setNetworkAccount( const NetworkAccount& na, const QString& network_service )
 {
   int i = 0;
   int current_index = 0;
   foreach( ServiceInterface* si, PluginManager::instance().services() )
   {
     mp_comboService->insertItem( i, si->icon(), si->name() );
-    if( si->name() == Settings::instance().networkAccountService() )
-      current_index = i;
+    if( na.isValid() )
+    {
+      if( si->name() == na.service() )
+        current_index = i;
+    }
+    else
+    {
+      if( si->name() == network_service )
+        current_index = i;
+    }
     i++;
   }
 
   if( current_index > 0 )
     mp_comboService->setCurrentIndex( current_index );
 
-  QString passwd = Settings::instance().networkAccountPassword();
-  if( passwd.isEmpty() )
-  {
-    mp_lePassword->setText( "" );
-    mp_cbRememberPassword->setChecked( false );
-    mp_lePassword->setFocus();
-  }
-  else
-  {
-    mp_lePassword->setText( passwd );
-    mp_cbRememberPassword->setChecked( true );
-  }
+  mp_leUser->setText( na.user() );
+  mp_lePassword->setText( na.password() );
+  mp_cbRememberMe->setChecked( na.saveUser() );
+  mp_cbRememberPassword->setChecked( na.savePassword() );
+  mp_cbAutomaticConnection->setChecked( na.autoConnect() );
 
-  QString jid = Settings::instance().networkAccountUser();
-  if( jid.isEmpty() )
-  {
-    mp_leUser->setText( "" );
-    mp_cbRememberMe->setChecked( false );
+  if( mp_leUser->text().trimmed().isEmpty() )
     mp_leUser->setFocus();
-  }
+  else if( mp_lePassword->text().trimmed().isEmpty() )
+    mp_lePassword->setFocus();
   else
-  {
-    mp_leUser->setText( jid );
-    mp_cbRememberMe->setChecked( true );
-  }
-
-  mp_cbAutomaticConnection->setChecked( Settings::instance().autoConnectToNetworkAccount() );
-}
-
-QString GuiNetworkLogin::user() const
-{
-  return mp_leUser->text().trimmed();
-}
-
-QString GuiNetworkLogin::password() const
-{
-  return mp_lePassword->text();
-}
-
-QString GuiNetworkLogin::service() const
-{
-  return mp_comboService->currentText();
+    mp_pbLogin->setFocus();
 }
 
 void GuiNetworkLogin::doLogin()
 {
-  QString user_name = user();
+  QString user_name = mp_leUser->text().trimmed();
   if( user_name.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert the username (JabberId)") );
@@ -105,7 +83,7 @@ void GuiNetworkLogin::doLogin()
     return;
   }
 
-  QString user_password = password();
+  QString user_password = mp_lePassword->text().trimmed();
   if( user_password.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert the password" ) );
@@ -113,12 +91,12 @@ void GuiNetworkLogin::doLogin()
     return;
   }
 
-  if( !mp_cbRememberMe->isChecked() )
-    user_name = "";
-  if( !mp_cbRememberPassword->isChecked() )
-    user_password = "";
-
-  Settings::instance().setNetworkAccount( mp_comboService->currentText(), user_name, user_password, mp_cbAutomaticConnection->isChecked() );
+  m_account.setService( mp_comboService->currentText() );
+  m_account.setUser( user_name );
+  m_account.setPassword( user_password );
+  m_account.setSaveUser( mp_cbRememberMe->isChecked() );
+  m_account.setSavePassword( mp_cbRememberPassword->isChecked() );
+  m_account.setAutoConnect( mp_cbAutomaticConnection->isChecked() );
 
   accept();
 }

@@ -32,6 +32,7 @@ GuiChatList::GuiChatList( QWidget* parent )
   setColumnCount( 1 );
   header()->hide();
   setRootIsDecorated( false );
+  setSortingEnabled( true );
 
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatDoubleClicked( QTreeWidgetItem*, int ) ) );
 }

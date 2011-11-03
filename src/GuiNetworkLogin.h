@@ -25,6 +25,7 @@
 #define BEEBEEP_GUINETWORKLOGIN_H
 
 #include "Config.h"
+#include "NetworkAccount.h"
 #include "ui_GuiNetworkLogin.h"
 
 
@@ -35,15 +36,19 @@ class GuiNetworkLogin : public QDialog, private Ui::GuiNetworkLogin
 public:
   explicit GuiNetworkLogin( QWidget *parent );
 
-  void loadSettings();
-
-  QString user() const;
-  QString password() const;
-  QString service() const;
+  void setNetworkAccount( const NetworkAccount&, const QString& network_service );
+  inline const NetworkAccount& account() const;
 
 protected slots:
   void doLogin();
 
+private:
+  NetworkAccount m_account;
+
 };
+
+
+// Inline Functions
+inline const NetworkAccount& GuiNetworkLogin::account() const { return m_account; }
 
 #endif // BEEBEEP_GUINETWORKLOGIN_H

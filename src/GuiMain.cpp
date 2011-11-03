@@ -246,11 +246,28 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addAction( mp_actSearch );
+
+  if( PluginManager::instance().services().size() > 0 )
+  {
+    mp_menuMain->addSeparator();
+    QMenu* pMenu = new QMenu( tr( "Network account" ), mp_menuMain );
+    pMenu->setIcon( QIcon( ":/images/network-account.png" ) );
+    QList<ServiceInterface*>::const_iterator it = PluginManager::instance().services().begin();
+    while( it != PluginManager::instance().services().end() )
+    {
+      act = pMenu->addAction( (*it)->icon(), (*it)->name(), this, SLOT( showNetworkAccount() ) );
+      act->setStatusTip( tr( "Show the %1 login" ).arg( (*it)->name() ) );
+      act->setData( (*it)->name() );
+      ++it;
+    }
+
+    mp_menuMain->addMenu( pMenu );
+
+    act = mp_menuMain->addAction( QIcon( ":/images/network-settings.png" ), tr( "Network settings..."), this, SLOT( showNetworkManager() ) );
+    act->setStatusTip( tr( "Show the network settings dialog" ) );
+  }
+
   mp_menuMain->addSeparator();
-  act = mp_menuMain->addAction( QIcon( ":/images/network-account.png" ), tr( "Network account..."), this, SLOT( showNetworkAccount() ) );
-  act->setStatusTip( tr( "Show the network account dialog" ) );
-  act = mp_menuMain->addAction( QIcon( ":/images/network-settings.png" ), tr( "Network settings..."), this, SLOT( showNetworkManager() ) );
-  act->setStatusTip( tr( "Show the network settings dialog" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
   act->setStatusTip( tr( "Select the download folder" ) );
   mp_menuMain->addSeparator();
@@ -921,14 +938,20 @@ void GuiMain::showNetworkManager()
 
 void GuiMain::showNetworkAccount()
 {
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
   GuiNetworkLogin gnl( this );
   gnl.setModal( true );
-  gnl.loadSettings();
+  gnl.setNetworkAccount( Settings::instance().networkAccount( act->data().toString() ), act->data().toString() );
   gnl.show();
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
   if( result == QDialog::Accepted )
-    mp_core->connectToXmppServer( gnl.service(), gnl.user(), gnl.password() );
+  {
+    Settings::instance().setNetworkAccount( gnl.account() );
+    mp_core->connectToXmppServer( gnl.account() );
+  }
 }
 
 void GuiMain::showUserSubscriptionRequest( const QString& service, const QString& bare_jid )

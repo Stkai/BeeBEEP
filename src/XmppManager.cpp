@@ -81,7 +81,11 @@ bool XmppManager::connectToServer( const QString& service, const QString& user_n
 {
   XmppClient* mp_client = client( service );
   if( !mp_client )
+  {
+    Message m = Protocol::instance().systemMessage( QString( "%1 %2: service unavailable." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ), service ) );
+    emit message( service, Settings::instance().localUser().bareJid(), m );
     return false;
+  }
 
   if( mp_client->isConnected() )
   {

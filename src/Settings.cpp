@@ -75,13 +75,35 @@ void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port
   m_localUser.setHostPort( host_port );
 }
 
-void Settings::setNetworkAccount( const QString& account_service, const QString& account_user, const QString& account_password, bool auto_connect )
+void Settings::setNetworkAccount( const NetworkAccount& na )
 {
-  m_networkAccountService = account_service;
-  m_networkAccountUser = account_user;
-  m_networkAccountPassword = account_password;
-  m_autoConnectToNetworkAccount = auto_connect;
+  if( !na.isValid() )
+    return;
+  QList<NetworkAccount>::iterator it = m_networkAccounts.begin();
+  while( it != m_networkAccounts.end() )
+  {
+    if( (*it).service() == na.service() )
+    {
+      (*it) = na;
+      return;
+    }
+    ++it;
+  }
+  m_networkAccounts.append( na );
 }
+
+NetworkAccount Settings::networkAccount( const QString& account_service ) const
+{
+  QList<NetworkAccount>::const_iterator it = m_networkAccounts.begin();
+  while( it != m_networkAccounts.end() )
+  {
+    if( (*it).service() == account_service )
+      return *it;
+    ++it;
+  }
+  return NetworkAccount();
+}
+
 
 namespace
 {
@@ -211,10 +233,29 @@ void Settings::load()
   m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();
   m_networkProxy.setUser( sets.value( "ProxyUser", "" ).toString() );
   m_networkProxy.setPassword( SimpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
-  m_networkAccountService = sets.value( "AccountService",  "" ).toString();
-  m_networkAccountUser = sets.value( "AccountJid", "" ).toString();
-  m_networkAccountPassword = SimpleDecrypt( sets.value( "AccountPassword", "" ).toString() );
-  m_autoConnectToNetworkAccount = sets.value( "AutoConnection", false ).toBool();
+  sets.endGroup();
+
+  sets.beginGroup( "NetworkAccount" );
+  int account_number = sets.value( "Accounts", 0 ).toInt();
+  if( account_number > 0 )
+  {
+    int account_index = 1;
+    QString account_data = "";
+    while( account_index <= account_number )
+    {
+      account_data = sets.value( QString( "Account%1" ).arg( account_index ), QString( "" ) ).toString();
+      if( account_data.size() > 0 )
+      {
+        NetworkAccount na;
+        if( na.fromString( SimpleDecrypt( account_data ) ) )
+        {
+          setNetworkAccount( na );
+          qDebug() << "Account loaded for service" << na.service();
+        }
+      }
+      account_index++;
+    }
+  }
   sets.endGroup();
 
   if( m_localUser.name().isEmpty() )
@@ -297,11 +338,23 @@ void Settings::save()
   sets.setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
   sets.setValue( "ProxyUser", m_networkProxy.user() );
   sets.setValue( "ProxyPassword", SimpleEncrypt( m_networkProxy.password() ) );
-  sets.setValue( "AccountService", m_networkAccountService );
-  sets.setValue( "AccountJid", m_networkAccountUser );
-  sets.setValue( "AccountPassword", SimpleEncrypt( m_networkAccountPassword ) );
-  sets.setValue( "AutoConnection", m_autoConnectToNetworkAccount );
   sets.endGroup();
+
+  if( m_networkAccounts.size() > 0 )
+  {
+    sets.beginGroup( "NetworkAccount" );
+    sets.setValue( "Accounts", m_networkAccounts.size() );
+    int account_number = 1;
+    QList<NetworkAccount>::const_iterator it = m_networkAccounts.begin();
+    while( it != m_networkAccounts.end() )
+    {
+      sets.setValue( QString( "Account%1" ).arg( account_number ), SimpleEncrypt( (*it).toString() ) );
+      ++it;
+      account_number++;
+    }
+    sets.endGroup();
+  }
+
 
   sets.sync();
   qDebug() << "Settings saved";

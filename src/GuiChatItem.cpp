@@ -31,6 +31,13 @@ GuiChatItem::GuiChatItem( QTreeWidget* parent )
 {
 }
 
+bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
+{
+  QString user_item_name = data( 0, GuiChatItem::ChatName ).toString().toLower();
+  QString other_name = item.data( 0, GuiChatItem::ChatName ).toString().toLower();
+  return user_item_name > other_name; // correct order
+}
+
 bool GuiChatItem::updateItem()
 {
   setIcon( 0, QIcon( ":/images/chat.png" ) );
@@ -42,6 +49,7 @@ bool GuiChatItem::updateItem()
   {
     chat_name = QObject::tr( "* All *" );
     tool_tip = QObject::tr( "Open chat with all local users" );
+    setData( 0, ChatName, " " );
   }
   else
   {
@@ -57,6 +65,8 @@ bool GuiChatItem::updateItem()
 
     if( c.unreadMessages() > 0 )
       chat_name.prepend( QString( "(%1) " ).arg( c.unreadMessages() ) );
+
+    setData( 0, ChatName, chat_name );
   }
 
   chat_name += " ";

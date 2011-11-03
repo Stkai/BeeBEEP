@@ -28,6 +28,7 @@
 #include "Listener.h"
 #include "FileTransfer.h"
 class Broadcaster;
+class NetworkAccount;
 class UserList;
 class XmppManager;
 
@@ -43,7 +44,7 @@ public:
   bool start();
   void stop();
 
-  bool connectToXmppServer( const QString& service, const QString& bare_jid, const QString& passwd );
+  bool connectToXmppServer( const NetworkAccount& );
   void disconnectFromXmppServer( const QString& service = "" ); // Empty service = All services
 
   /* CoreUser */

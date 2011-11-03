@@ -96,9 +96,13 @@ bool Core::start()
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
 
-  if( Settings::instance().autoConnectToNetworkAccount() )
-    connectToXmppServer( Settings::instance().networkAccountService(), Settings::instance().networkAccountUser(), Settings::instance().networkAccountPassword() );
-
+  QList<NetworkAccount>::const_iterator it = Settings::instance().networkAccounts().begin();
+  while( it != Settings::instance().networkAccounts().end() )
+  {
+    if( (*it).autoConnect() )
+      connectToXmppServer( *it );
+    ++it;
+  }
   return true;
 }
 

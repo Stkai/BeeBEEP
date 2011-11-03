@@ -33,7 +33,6 @@ GuiUserList::GuiUserList( QWidget* parent )
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
 
-  setColumnCount( 1 );
   header()->hide();
   setRootIsDecorated( false );
   setSortingEnabled( true );

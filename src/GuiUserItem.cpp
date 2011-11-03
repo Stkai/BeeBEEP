@@ -34,7 +34,6 @@ GuiUserItem::GuiUserItem( QTreeWidget* parent )
 
 bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
 {
-  qDebug() << "PIPPO";
   int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
   int other_priority = item.data( 0, GuiUserItem::Priority ).toInt();
   if( user_item_priority != other_priority )
@@ -72,6 +71,8 @@ bool GuiUserItem::updateItem()
 
   QString s = u.isOnLan() ? (Settings::instance().showOnlyUsername() && user_status != User::Offline ? u.name() : u.path()) : u.name();
 
+  int user_priority = 1;
+
   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
 
@@ -90,7 +91,6 @@ bool GuiUserItem::updateItem()
 
   QString status_tip;
   QString tool_tip;
-  int user_priority = 1;
 
   if( u.isLocal() )
   {
@@ -101,10 +101,12 @@ bool GuiUserItem::updateItem()
   {
     status_tip = QObject::tr( "Open chat with %1" ).arg( u.name() );
     tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
-    user_priority = u.isOnLan() ? 100 : 1000;
-    user_priority += u.isConnected() ? (10*user_status) : 10000;
+    user_priority += u.isOnLan() ? 1000 : 10000;
+    user_priority += u.isConnected() ? (100*user_status) : 100000;
   }
 
+  user_priority -= (unread_messages > 99 ? 99 : unread_messages);
+  user_priority = qMax( 0, user_priority );
   setData( 0, GuiUserItem::Priority, user_priority );
   setToolTip( 0, tool_tip );
   setStatusTip( 0, status_tip );

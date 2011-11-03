@@ -25,6 +25,7 @@
 #define BEEBEEP_SETTINGS_H
 
 #include "Config.h"
+#include "NetworkAccount.h"
 #include "User.h"
 
 
@@ -118,11 +119,9 @@ public:
   inline const QNetworkProxy& networkProxy() const;
   inline void setNetworkProxy( const QNetworkProxy& );
 
-  inline const QString& networkAccountService() const;
-  inline const QString& networkAccountUser() const;
-  inline const QString& networkAccountPassword() const;
-  inline bool autoConnectToNetworkAccount() const;
-  void setNetworkAccount( const QString&, const QString&, const QString&, bool );
+  inline const QList<NetworkAccount>& networkAccounts() const;
+  void setNetworkAccount( const NetworkAccount& );
+  NetworkAccount networkAccount( const QString& ) const;
 
   void load();
   void save();
@@ -194,10 +193,7 @@ private:
   QNetworkProxy m_networkProxy;
   bool m_networkProxyUseAuthentication;
 
-  QString m_networkAccountService;
-  QString m_networkAccountUser;
-  QString m_networkAccountPassword;
-  bool m_autoConnectToNetworkAccount;
+  QList<NetworkAccount> m_networkAccounts;
 
 };
 
@@ -266,9 +262,7 @@ inline bool Settings::networkProxyUseAuthentication() const { return m_networkPr
 inline void Settings::setNetworkProxyUseAuthentication( bool new_value ) { m_networkProxyUseAuthentication = new_value; }
 inline const QNetworkProxy& Settings::networkProxy() const { return m_networkProxy; }
 inline void Settings::setNetworkProxy( const QNetworkProxy& new_value ) { m_networkProxy = new_value; }
-inline const QString& Settings::networkAccountService() const { return m_networkAccountService; }
-inline const QString& Settings::networkAccountUser() const { return m_networkAccountUser; }
-inline const QString& Settings::networkAccountPassword() const { return m_networkAccountPassword; }
-inline bool Settings::autoConnectToNetworkAccount() const { return m_autoConnectToNetworkAccount; }
+inline const QList<NetworkAccount>& Settings::networkAccounts() const { return m_networkAccounts; }
+
 
 #endif // BEEBEEP_SETTINGS_H

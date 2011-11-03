@@ -24,14 +24,15 @@
 #include "BeeUtils.h"
 #include "ColorManager.h"
 #include "Core.h"
+#include "NetworkAccount.h"
 #include "Protocol.h"
 #include "UserManager.h"
 #include "XmppManager.h"
 
 
-bool Core::connectToXmppServer( const QString& service, const QString& bare_jid, const QString& passwd )
+bool Core::connectToXmppServer( const NetworkAccount& na )
 {
-  return mp_xmppManager->connectToServer( service, bare_jid, passwd );
+  return mp_xmppManager->connectToServer( na.service(), na.user(), na.password() );
 }
 
 void Core::disconnectFromXmppServer( const QString& service )
