@@ -82,6 +82,7 @@ void Core::checkXmppUser( const User& user_to_check )
   qDebug() << "XMPP> new user connected:" << u.path() << "with color" << u.color();
   createPrivateChat( u );
   UserManager::instance().setUser( u );
+  emit userChanged( u );
 }
 
 void Core::sendXmppChatMessage( const User& u, const Message& msg )

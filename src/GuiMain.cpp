@@ -456,11 +456,6 @@ void GuiMain::checkUser( const User& u )
     refreshTitle();
 
   qDebug() << "User" << u.path() << "has changed his info. Check it";
-  if( u.status() == User::Offline )
-  {
-    mp_userList->removeUser( u, false );
-    return;
-  }
 
   Chat private_chat = ChatManager::instance().privateChatForUser( u.id() );
   if( !private_chat.isValid() )

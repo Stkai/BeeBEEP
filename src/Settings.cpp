@@ -85,10 +85,12 @@ void Settings::setNetworkAccount( const NetworkAccount& na )
     if( (*it).service() == na.service() )
     {
       (*it) = na;
+      qDebug() << "New network account saved for service" << na.service();
       return;
     }
     ++it;
   }
+  qDebug() << "New network account added for service" << na.service();
   m_networkAccounts.append( na );
 }
 
@@ -235,8 +237,10 @@ void Settings::load()
   m_networkProxy.setPassword( SimpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
   sets.endGroup();
 
+  qDebug() << "Loading network accounts";
   sets.beginGroup( "NetworkAccount" );
   int account_number = sets.value( "Accounts", 0 ).toInt();
+  qDebug() << account_number << "accounts found";
   if( account_number > 0 )
   {
     int account_index = 1;
@@ -247,11 +251,14 @@ void Settings::load()
       if( account_data.size() > 0 )
       {
         NetworkAccount na;
-        if( na.fromString( SimpleDecrypt( account_data ) ) )
+        //if( na.fromString( SimpleDecrypt( account_data ) ) )
+        if( na.fromString( account_data ) )
         {
           setNetworkAccount( na );
           qDebug() << "Account loaded for service" << na.service();
         }
+        else
+          qWarning() << "Error occurred when loading account data";
       }
       account_index++;
     }
@@ -344,13 +351,14 @@ void Settings::save()
   {
     sets.beginGroup( "NetworkAccount" );
     sets.setValue( "Accounts", m_networkAccounts.size() );
-    int account_number = 1;
+    int account_index = 1;
     QList<NetworkAccount>::const_iterator it = m_networkAccounts.begin();
     while( it != m_networkAccounts.end() )
     {
-      sets.setValue( QString( "Account%1" ).arg( account_number ), SimpleEncrypt( (*it).toString() ) );
+      //sets.setValue( QString( "Account%1" ).arg( account_index ), SimpleEncrypt( (*it).toString() ) );
+      sets.setValue( QString( "Account%1" ).arg( account_index ), (*it).toString() );
       ++it;
-      account_number++;
+      account_index++;
     }
     sets.endGroup();
   }

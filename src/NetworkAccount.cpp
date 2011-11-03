@@ -55,15 +55,21 @@ QString NetworkAccount::toString() const
 {
   QStringList sl;
   sl << m_service;
-  sl << (m_saveUser ? m_user : "");
-  sl << (m_savePassword ? m_password : "");
+  if( m_saveUser )
+    sl << m_user;
+  else
+    sl << "";
+  if( m_savePassword )
+    sl << m_password;
+  else
+    sl << "";
   sl << QString::number( (int)m_autoConnect );
-  return sl.join( QString( QChar::LineSeparator ) );
+  return sl.join( QChar( QChar::LineSeparator ) );
 }
 
 bool NetworkAccount::fromString( const QString& account_data )
 {
-  QStringList sl = account_data.split( QString( QChar::LineSeparator ) );
+  QStringList sl = account_data.split( QChar( QChar::LineSeparator ) );
   if( sl.size() < 4 )
     return false;
   m_service = sl.at( 0 );
