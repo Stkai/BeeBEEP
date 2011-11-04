@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "NetworkAccount.h"
+#include "Protocol.h"
 
 
 NetworkAccount::NetworkAccount()
@@ -60,7 +61,7 @@ QString NetworkAccount::toString() const
   else
     sl << "";
   if( m_savePassword )
-    sl << m_password;
+    sl << Protocol::instance().simpleEncrypt( m_password );
   else
     sl << "";
   sl << QString::number( (int)m_autoConnect );
@@ -74,7 +75,7 @@ bool NetworkAccount::fromString( const QString& account_data )
     return false;
   m_service = sl.at( 0 );
   m_user = sl.at( 1 );
-  m_password = sl.at( 2 );
+  m_password = Protocol::instance().simpleDecrypt( sl.at( 2 ) );
   m_autoConnect = (bool)sl.at( 3 ).toInt();
   m_saveUser = !m_user.isEmpty();
   m_savePassword = !m_password.isEmpty();

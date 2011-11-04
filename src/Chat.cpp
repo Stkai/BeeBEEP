@@ -54,3 +54,13 @@ bool Chat::addUser( VNumber user_id )
   m_usersId.append( user_id );
   return true;
 }
+
+bool Chat::isEmpty() const
+{
+  foreach( ChatMessage cm, m_messages )
+  {
+    if( !cm.isSystem() && !cm.isFromLocalUser() )
+      return false;
+  }
+  return true;
+}

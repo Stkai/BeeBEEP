@@ -21,8 +21,10 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "ChatManager.h"
 #include "GuiUserList.h"
-#include "User.h"
+#include "Settings.h"
+#include "UserManager.h"
 
 
 GuiUserList::GuiUserList( QWidget* parent )
@@ -53,12 +55,11 @@ QSize GuiUserList::sizeHint() const
 
 void GuiUserList::updateUsers()
 {
-  GuiUserItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
+  clear();
+  QList<User>::const_iterator it = UserManager::instance().userList().toList().begin();
+  while( it != UserManager::instance().userList().toList().end() )
   {
-    item = (GuiUserItem*)(*it);
-    item->updateItem();
+    setUser( *it );
     ++it;
   }
 }
@@ -94,52 +95,61 @@ GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
 void GuiUserList::setUnreadMessages( VNumber chat_id, int n )
 {
   GuiUserItem* item = itemFromChatId( chat_id );
-  if( item )
-  {
-    item->setUnreadMessages( n );
-    item->updateItem();
-  }
-  else
-    qWarning() << "Unable to set unread messages in chat" << chat_id;
+  if( !item )
+    return;
+
+  item->setUnreadMessages( n );
+  item->updateItem();
 }
 
-void GuiUserList::setUser( const User& u, VNumber private_chat_id, int unread_messages )
+void GuiUserList::setUser( const User& u )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
+  bool user_item_created = false;
   if( !item )
   {
-    qDebug() << "Create new user item in GuiUserList";
-    item = new GuiUserItem( this );
+    if( u.isConnected() )
+    {
+      item = new GuiUserItem( this );
+      item->setUserId( u.id() );
+      user_item_created = true;
+    }
+    else
+      return;
   }
 
-  item->setUserId( u.id() );
-  item->setChatId( private_chat_id );
-  item->setUnreadMessages( unread_messages );
+  if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
+  {
+    QTreeWidgetItem* root_item = invisibleRootItem();
+    if( root_item )
+    {
+      root_item->removeChild( (QTreeWidgetItem*)item );
+      delete item;
+      return;
+    }
+  }
+
+  Chat c = ChatManager::instance().privateChatForUser( u.id() );
+  item->setChatId( c.id() );
+  item->setUnreadMessages( c.unreadMessages() );
   item->updateItem();
-  sortUsers();
+  if( !user_item_created )
+    sortUsers();
 }
 
-void GuiUserList::removeUser( const User& u, bool erase )
+void GuiUserList::removeUser( const User& u )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
   if( item )
   {
-    item->updateItem();
-    if( erase )
+    qDebug() << "Delete user item from GuiUserList";
+    QTreeWidgetItem* root_item = invisibleRootItem();
+    if( root_item )
     {
-      qDebug() << "Delete user item from GuiUserList";
-      QTreeWidgetItem* root_item = invisibleRootItem();
-      if( root_item )
-      {
-        root_item->removeChild( (QTreeWidgetItem*)item );
-        delete item;
-      }
+      root_item->removeChild( (QTreeWidgetItem*)item );
+      delete item;
     }
-    else
-      sortUsers();
   }
-  else
-    qWarning() << "Unable to set user" << u.id() << "offline in GuiUserList";
 }
 
 void GuiUserList::showUserMenu( const QPoint& p )

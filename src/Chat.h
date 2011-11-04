@@ -52,6 +52,9 @@ public:
   inline const QList<ChatMessage> messages() const;
   inline void addMessage( const ChatMessage& );
 
+  bool isEmpty() const;
+  bool isDefault() const;
+
 private:
   VNumber m_id;
   QList<VNumber> m_usersId;
@@ -65,6 +68,7 @@ private:
 // Inline Functions
 inline bool Chat::operator==( const Chat& c ) const { return m_id == c.m_id; }
 inline bool Chat::isValid() const { return m_id != ID_INVALID; }
+inline bool Chat::isDefault() const { return m_id == ID_DEFAULT_CHAT; }
 inline VNumber Chat::id() const { return m_id; }
 inline void Chat::setId( VNumber new_value ) { m_id = new_value; }
 inline const QList<VNumber>& Chat::usersId() const { return m_usersId; }

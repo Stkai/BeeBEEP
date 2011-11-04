@@ -70,7 +70,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, FilePath, fi.path() );
     item->setData( ColumnFile, TransferInProgress, true );
     item->setData( ColumnFile, TransferCompleted, false );
-    item->setText( ColumnUser, Settings::instance().showOnlyUsername() ? u.name() : u.path() );
+    item->setText( ColumnUser, u.name() );
     item->setIcon( ColumnCancel, QIcon( ":/images/disconnect.png") );
     item->setText( ColumnSort, QString( "0%1").arg( peer_id ) );
     sortItems( ColumnSort, Qt::DescendingOrder );

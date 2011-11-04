@@ -47,7 +47,6 @@ public:
   bool connectToServer( const QString& service, const QString& user_name, const QString& passwd );
   void disconnectFromServer();
   void disconnectFromServer( const QString& service );
-  bool isConnected( const QString& service ) const;
 
   void sendMessage( const User&, const Message& );
   void subscribeUser( const QString& service, const QString& bare_jid, bool );

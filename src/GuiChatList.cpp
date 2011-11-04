@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiChatList.h"
+#include "ChatManager.h"
 
 
 GuiChatList::GuiChatList( QWidget* parent )
@@ -70,6 +71,11 @@ GuiChatItem* GuiChatList::itemFromChatId( VNumber chat_id )
 
 void GuiChatList::updateChat( VNumber chat_id )
 {
+  Chat c = ChatManager::instance().chat( chat_id, false );
+  if( !c.isValid() )
+    return;
+  if( !c.isDefault() && c.isEmpty() )
+    return;
   GuiChatItem* item = itemFromChatId( chat_id );
   if( !item )
   {

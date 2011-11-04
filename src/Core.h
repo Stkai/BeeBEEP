@@ -44,9 +44,6 @@ public:
   bool start();
   void stop();
 
-  bool connectToXmppServer( const NetworkAccount& );
-  void disconnectFromXmppServer( const QString& service = "" ); // Empty service = All services
-
   /* CoreUser */
   void searchUsers( const QHostAddress& );
   void setLocalUserStatus( int );
@@ -67,6 +64,9 @@ public:
   void setXmppUserSubscription( const QString& service, const QString& user_path, bool accepted );
   bool removeXmppUser( const User& );
   void sendLocalUserStatusToXmppServer();
+  bool connectToXmppServer( const NetworkAccount& );
+  void disconnectFromXmppServer( const QString& service = "" ); // Empty service = All services
+  bool isXmppServerConnected( const QString& ) const;
 
 public slots:
   /* CoreChat */

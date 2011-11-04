@@ -120,28 +120,6 @@ namespace
       sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
     return sTmp;
   }
-
-  QString SimpleEncrypt( const QString& plain_text )
-  {
-    if( plain_text.size() <= 0 )
-      return "";
-    char key = 'k';
-    QString encrypted_text = "";
-    for( int i = 0; i < plain_text.size(); i++ )
-      encrypted_text += plain_text.at( i ).toAscii() ^ (int(key) + i) % 255;
-    return encrypted_text;
-  }
-
-  QString SimpleDecrypt( const QString& encrypted_text )
-  {
-    if( encrypted_text.size() <= 0 )
-      return "";
-    char key = 'k';
-    QString plain_text = "";
-    for( int i = 0; i < encrypted_text.size(); i++ )
-      plain_text += encrypted_text.at( i ).toAscii() ^ (int(key) + i) % 255;
-    return plain_text;
-  }
 }
 
 void Settings::load()
@@ -167,8 +145,8 @@ void Settings::load()
   m_localUser.setColor( sets.value( "LocalColor", "#000000" ).toString() );
   m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_showOnlyUsername = sets.value( "ShowOnlyName", true ).toBool();
-  m_showUserColor = sets.value( "ShowColors", true ).toBool();
+  m_showOnlyOnlineUsers = sets.value( "ShowOnlyOnlineUsers", true ).toBool();
+  m_showUserColor = sets.value( "ShowUserNameColor", true ).toBool();
   sets.endGroup();
 
   sets.beginGroup( "VCard" );
@@ -234,7 +212,7 @@ void Settings::load()
   m_networkProxy.setPort( sets.value( "ProxyPort", 0 ).toInt() );
   m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();
   m_networkProxy.setUser( sets.value( "ProxyUser", "" ).toString() );
-  m_networkProxy.setPassword( SimpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
+  m_networkProxy.setPassword( Protocol::simpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
   sets.endGroup();
 
   qDebug() << "Loading network accounts";
@@ -251,7 +229,6 @@ void Settings::load()
       if( account_data.size() > 0 )
       {
         NetworkAccount na;
-        //if( na.fromString( SimpleDecrypt( account_data ) ) )
         if( na.fromString( account_data ) )
         {
           setNetworkAccount( na );
@@ -301,8 +278,8 @@ void Settings::save()
   sets.setValue( "LocalColor", m_localUser.color() );
   sets.setValue( "LocalLastStatus", m_localUser.status() );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
-  sets.setValue( "ShowOnlyName", m_showOnlyUsername );
-  sets.setValue( "ShowColors", m_showUserColor );
+  sets.setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
+  sets.setValue( "ShowUserNameColor", m_showUserColor );
   sets.endGroup();
   sets.beginGroup( "VCard" );
   sets.setValue( "NickName", m_localUser.vCard().nickName() );
@@ -344,7 +321,7 @@ void Settings::save()
   sets.setValue( "ProxyPort", m_networkProxy.port() );
   sets.setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
   sets.setValue( "ProxyUser", m_networkProxy.user() );
-  sets.setValue( "ProxyPassword", SimpleEncrypt( m_networkProxy.password() ) );
+  sets.setValue( "ProxyPassword", Protocol::simpleEncrypt( m_networkProxy.password() ) );
   sets.endGroup();
 
   if( m_networkAccounts.size() > 0 )
@@ -355,14 +332,12 @@ void Settings::save()
     QList<NetworkAccount>::const_iterator it = m_networkAccounts.begin();
     while( it != m_networkAccounts.end() )
     {
-      //sets.setValue( QString( "Account%1" ).arg( account_index ), SimpleEncrypt( (*it).toString() ) );
       sets.setValue( QString( "Account%1" ).arg( account_index ), (*it).toString() );
       ++it;
       account_index++;
     }
     sets.endGroup();
   }
-
 
   sets.sync();
   qDebug() << "Settings saved";

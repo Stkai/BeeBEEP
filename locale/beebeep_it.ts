@@ -45,11 +45,11 @@
     </message>
     <message>
         <source>All users</source>
-        <translation>Tutti</translation>
+        <translation type="obsolete">Tutti</translation>
     </message>
     <message>
         <source>Nobody</source>
-        <translation>Nessuno</translation>
+        <translation type="obsolete">Nessuno</translation>
     </message>
     <message>
         <source>%1 Downloading %2 from %3.</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>%1 has changed the profile.</source>
-        <translation>%1 ha cambiato il suo profilo.</translation>
+        <translation type="obsolete">%1 ha cambiato il suo profilo.</translation>
     </message>
     <message>
         <source>%1 Looking for the available users in the network address %2...</source>
@@ -133,19 +133,34 @@
     </message>
     <message>
         <source>You are already connected to the network account.</source>
-        <translation>La connessione al servizio di rete è già attiva.</translation>
+        <translation type="obsolete">La connessione al servizio di rete è già attiva.</translation>
     </message>
     <message>
         <source>Unable to connect to the network account. Username is empty.</source>
-        <translation>Impossibile connettersi al servizio di rete. Il nome utente non è stato specificato.</translation>
+        <translation type="obsolete">Impossibile connettersi al servizio di rete. Il nome utente non è stato specificato.</translation>
     </message>
     <message>
         <source>Unable to connect to the network account. Password is empty.</source>
-        <translation>Impossibile connettersi al servizio di rete. La password non è valida.</translation>
+        <translation type="obsolete">Impossibile connettersi al servizio di rete. La password non è valida.</translation>
     </message>
     <message>
         <source>Connecting to %1...</source>
-        <translation>Connessione a %1...</translation>
+        <translation type="obsolete">Connessione a %1...</translation>
+    </message>
+    <message>
+        <source>%1 has updated the profile.</source>
+        <translation>%1 ha aggiornato il suo profilo.</translation>
+    </message>
+</context>
+<context>
+    <name>FacebookService</name>
+    <message>
+        <source>Facebook</source>
+        <translation>Facebook</translation>
+    </message>
+    <message>
+        <source>You can connect to the Facebook chat.</source>
+        <translation>Puoi connetterti alla chat di Facebook.</translation>
     </message>
 </context>
 <context>
@@ -184,6 +199,17 @@
     </message>
 </context>
 <context>
+    <name>GTalkService</name>
+    <message>
+        <source>GTalk</source>
+        <translation>GTalk</translation>
+    </message>
+    <message>
+        <source>You can connect to the Google chat.</source>
+        <translation>Puoi connetterti alla chat di Google.</translation>
+    </message>
+</context>
+<context>
     <name>GuiChat</name>
     <message>
         <source>Copy to clipboard</source>
@@ -208,6 +234,14 @@
     <message>
         <source>Ok</source>
         <translation>Ok</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation>Tutti</translation>
+    </message>
+    <message>
+        <source>Nobody</source>
+        <translation>Nessuno</translation>
     </message>
 </context>
 <context>
@@ -440,11 +474,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show only the nicknames</source>
-        <translation>Mostra solo i soprannomi degli utenti</translation>
+        <translation type="obsolete">Mostra solo i soprannomi degli utenti</translation>
     </message>
     <message>
         <source>If enabled only the nickname of the connected users are shown</source>
-        <translation>Se abilitata solamente i soprannomi degli utenti connessi saranno mostrati</translation>
+        <translation type="obsolete">Se abilitata solamente i soprannomi degli utenti connessi saranno mostrati</translation>
     </message>
     <message>
         <source>Enable the compact mode in chat window</source>
@@ -595,7 +629,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Please insert the Host Address or Broadcast Address to contact
 (ex. 10.184.15.186 or 10.184.15.255)</source>
-        <translation>Inserisci l&apos;indirizzo IP o la sottorete in cui cercare nuovi utenti
+        <translation type="obsolete">Inserisci l&apos;indirizzo IP o la sottorete in cui cercare nuovi utenti
 (es. 10.184.15.186 oppure 10.184.15.255)</translation>
     </message>
     <message>
@@ -698,11 +732,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Network account...</source>
-        <translation>Account di rete...</translation>
+        <translation type="obsolete">Account di rete...</translation>
     </message>
     <message>
         <source>Show the network account dialog</source>
-        <translation>Mostra la finestra per configurare il tuo account di rete</translation>
+        <translation type="obsolete">Mostra la finestra per configurare il tuo account di rete</translation>
     </message>
     <message>
         <source>Network settings...</source>
@@ -711,6 +745,61 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show the network settings dialog</source>
         <translation>Mostra la finestra per impostare le opzioni di rete</translation>
+    </message>
+    <message>
+        <source>Network account</source>
+        <translation>Account di rete</translation>
+    </message>
+    <message>
+        <source>Show the %1 login</source>
+        <translation>Mostra la finestra di connessione a %1</translation>
+    </message>
+    <message>
+        <source>Show only the online users</source>
+        <translation>Mostra solo gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>If enabled only the online users are shown in the list</source>
+        <translation>Se abilitata saranno visualizzati nella lista solo gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>Chats</source>
+        <translation>Conversazioni</translation>
+    </message>
+    <message>
+        <source>Show the chat list</source>
+        <translation>Mostra la lista delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Show the list of the chats</source>
+        <translation>Mostra la lista delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Please insert the Host Address or Broadcast Address to contact
+(ex. 10.184.15.186 or 10.184.15.255)
+</source>
+        <translation>Inserisci l&apos;indirizzo IP o la sottorete da contattare
+(es. 10.184.15.186 o 10.184.15.255)</translation>
+    </message>
+    <message>
+        <source>or insert a valid jabber id (ex: user@gmail.com)</source>
+        <translation>o inserisci un identificativo valido (es: mario.rossi@gmail.com)</translation>
+    </message>
+    <message>
+        <source>%1 (%2) wants to add you to the contact list. Do you accept?</source>
+        <translation>%1 (%2) vuole aggiungerti alla sua lista di contatti. Accetti?</translation>
+    </message>
+    <message>
+        <source>Do you really want to remove %1 from the contact list?</source>
+        <translation>Vuoi realmente eliminare %1 dalla tua lista dei contatti?</translation>
+    </message>
+    <message>
+        <source>Unable to remove %1 from the contact list.</source>
+        <translation>Impossibile eliminare %1 dalla lista dei contatti.</translation>
+    </message>
+    <message>
+        <source>Do you want to disconnect from %1 server?</source>
+        <translation>Vuoi disconnetterti da %1?</translation>
     </message>
 </context>
 <context>
@@ -819,7 +908,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>(ex: user@gmail.com)</source>
-        <translation>(es: utente@gmail.com)</translation>
+        <translation type="obsolete">(es: utente@gmail.com)</translation>
     </message>
     <message>
         <source>Password</source>
@@ -856,6 +945,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Please insert the password</source>
         <translation>Inserisci la password</translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation>Account</translation>
     </message>
 </context>
 <context>
@@ -1013,6 +1106,10 @@ il file %2 (%3)?</translation>
         <source>Chat with all</source>
         <translation>Parla con tutti</translation>
     </message>
+    <message>
+        <source>Open chat</source>
+        <translation>Apri la conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
@@ -1089,15 +1186,15 @@ il file %2 (%3)?</translation>
     <name>GuiVCardWidget</name>
     <message>
         <source>Chat</source>
-        <translation>Parla</translation>
+        <translation type="obsolete">Parla</translation>
     </message>
     <message>
         <source>Send File</source>
-        <translation>Invia file</translation>
+        <translation type="obsolete">Invia file</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Colore</translation>
+        <translation type="obsolete">Colore</translation>
     </message>
     <message>
         <source>Widget</source>
@@ -1123,6 +1220,33 @@ il file %2 (%3)?</translation>
         <source>Email</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Open chat</source>
+        <translation>Apri la conversazione</translation>
+    </message>
+    <message>
+        <source>Send a file</source>
+        <translation>Invia un file</translation>
+    </message>
+    <message>
+        <source>Change the nickname color</source>
+        <translation>Cambia il colore del nickname</translation>
+    </message>
+    <message>
+        <source>Remove from the contact list</source>
+        <translation>Elimina dalla lista dei contatti</translation>
+    </message>
+</context>
+<context>
+    <name>JabberService</name>
+    <message>
+        <source>Jabber</source>
+        <translation>Jabber</translation>
+    </message>
+    <message>
+        <source>You can connect to the Jabber.org server.</source>
+        <translation>Puoi connetterti al server di Jabber.org.</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -1132,7 +1256,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Open chat with all users</source>
-        <translation>Parla con tutti gli utenti</translation>
+        <translation type="obsolete">Parla con tutti gli utenti</translation>
     </message>
     <message>
         <source>Open chat with %1</source>
@@ -1141,6 +1265,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>%1 is %2</source>
         <translation>Lo stato di %1 è %2</translation>
+    </message>
+    <message>
+        <source>Me</source>
+        <translation>Io</translation>
+    </message>
+    <message>
+        <source>Open chat with all local users</source>
+        <translation>Apri la conversazione con tutti gli utenti locali</translation>
+    </message>
+    <message>
+        <source>Nobody</source>
+        <translation>Nessuno</translation>
     </message>
 </context>
 <context>
@@ -1339,7 +1475,147 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Error occurred (#%1)</source>
-        <translation>C&apos;è stato un errore (#%1)</translation>
+        <translation type="obsolete">C&apos;è stato un errore (#%1)</translation>
+    </message>
+    <message>
+        <source>already connected to the server</source>
+        <translation>già connesso al server</translation>
+    </message>
+    <message>
+        <source>connection in progress to the server. Please wait</source>
+        <translation>la connessione al server è in corso. Attendere prego</translation>
+    </message>
+    <message>
+        <source>Username is empty. Unable to connect to the server</source>
+        <translation>Il nome utente non è stato inserito. Impossibile effettuare la connessione</translation>
+    </message>
+    <message>
+        <source>Password is empty. Unable to connect to the server</source>
+        <translation>La password non è stata inserita. Impossibile effettuare la connessione</translation>
+    </message>
+    <message>
+        <source>connection in progress..</source>
+        <translation>connessione in corso..</translation>
+    </message>
+    <message>
+        <source>invalid user or password</source>
+        <translation>utente o password non validi</translation>
+    </message>
+    <message>
+        <source>bad request</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>conflict</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>feature not implemented</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>forbidden</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>gone</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>internal server error</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>item not found</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>jid malformed</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>not acceptable</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>not allowed</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>not authorized</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>payment required</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>recipient unavailable</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>redirect</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>registration required</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>remote server not found</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>remote server timeout</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>resource constraint</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>service unavailable</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>subscription required</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>undefined condition</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>unexpected request</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>%1: error occurred (%2)</source>
+        <translation>%1: si è verificato un errore (%2)</translation>
+    </message>
+    <message>
+        <source>adding %1 to the contact list</source>
+        <translation>%1 verrà aggiunto alla lista dei contatti</translation>
+    </message>
+    <message>
+        <source>%1&apos;s request is rejected</source>
+        <translation>la richiesta di %1 è stata rifiutata</translation>
+    </message>
+    <message>
+        <source>removing %1 from the contact list</source>
+        <translation>%1 verrà eliminato dalla lista dei contatti</translation>
+    </message>
+    <message>
+        <source>%1 wants to subscribe to your contact list</source>
+        <translation>%1 vorrebbe far parte della tua lista dei contatti</translation>
+    </message>
+    <message>
+        <source>%1 has accepted your subscription</source>
+        <translation>%1 ha accettato la tua richiesta</translation>
+    </message>
+    <message>
+        <source>%1 has reject your subscription</source>
+        <translation>%1 ha rifiutato la tua richiesta</translation>
     </message>
 </context>
 </TS>

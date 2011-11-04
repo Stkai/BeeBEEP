@@ -45,7 +45,7 @@ EmoticonManager::EmoticonManager()
   addEmoticon( ";)", "wink" );
   addEmoticon( "B)", "cool" );
   addEmoticon( "<3", "heart" );
-  addEmoticon( "=]", "sideways" );
+  addEmoticon( "=)", "sideways" );
   addEmoticon( "})", "devil" );
   addEmoticon( "o)", "angel" );
   addEmoticon( "x(", "sick" );

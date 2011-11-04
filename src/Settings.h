@@ -75,8 +75,8 @@ public:
   inline bool chatUseClickableLinks() const;
   inline const QString& chatSaveDirectory() const;
   inline void setChatSaveDirectory( const QString& );
-  inline bool showOnlyUsername() const;
-  inline void setShowOnlyUsername( bool );
+  inline bool showOnlyOnlineUsers() const;
+  inline void setShowOnlyOnlineUsers( bool );
   inline bool showUserColor() const;
   inline void setShowUserColor( bool );
 
@@ -168,7 +168,7 @@ private:
   bool m_chatUseHtmlTags;
   bool m_chatUseClickableLinks;
   QString m_chatSaveDirectory;
-  bool m_showOnlyUsername;
+  bool m_showOnlyOnlineUsers;
   bool m_showUserColor;
 
   QByteArray m_guiGeometry;
@@ -232,8 +232,8 @@ inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClic
 inline bool Settings::chatUseClickableLinks() const { return m_chatUseClickableLinks; }
 inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDirectory; }
 inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
-inline bool Settings::showOnlyUsername() const { return m_showOnlyUsername; }
-inline void Settings::setShowOnlyUsername( bool new_value ) { m_showOnlyUsername = new_value; }
+inline bool Settings::showOnlyOnlineUsers() const { return m_showOnlyOnlineUsers; }
+inline void Settings::setShowOnlyOnlineUsers( bool new_value ) { m_showOnlyOnlineUsers = new_value; }
 inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeometry = new_value; }
 inline const QByteArray& Settings::guiGeometry() const { return m_guiGeometry; }
 inline void Settings::setGuiState( const QByteArray& new_value ) { m_guiState = new_value; }

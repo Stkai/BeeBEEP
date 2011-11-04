@@ -28,11 +28,22 @@
 #include "Protocol.h"
 #include "UserManager.h"
 #include "XmppManager.h"
+#include "PluginManager.h"
 
+
+bool Core::isXmppServerConnected( const QString& xmpp_service ) const
+{
+  XmppClient* xmpp_client = mp_xmppManager->client( xmpp_service );
+  return xmpp_client && xmpp_client->isActive();
+}
 
 bool Core::connectToXmppServer( const NetworkAccount& na )
 {
-  return mp_xmppManager->connectToServer( na.service(), na.user(), na.password() );
+  ServiceInterface* s = PluginManager::instance().service( na.service() );
+  if( s && s->isEnabled() )
+    return mp_xmppManager->connectToServer( na.service(), na.user(), na.password() );
+  else
+    return false;
 }
 
 void Core::disconnectFromXmppServer( const QString& service )

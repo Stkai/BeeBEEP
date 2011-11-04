@@ -37,8 +37,8 @@ public:
 
   virtual QSize sizeHint() const;
 
-  void setUser( const User&, VNumber private_chat_id, int unread_messages );
-  void removeUser( const User&, bool erase );
+  void setUser( const User& );
+  void removeUser( const User& );
   void setUnreadMessages( VNumber private_chat_id, int );
   void updateUsers();
   bool nextUserWithUnreadMessages();

@@ -278,12 +278,6 @@ void GuiMain::createMenus()
   mp_menuSettings->addAction( mp_actToolBar );
   mp_menuSettings->addSeparator();
 
-  act = mp_menuSettings->addAction( tr( "Show only the nicknames" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled only the nickname of the connected users are shown" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showOnlyUsername() );
-  act->setData( 6 );
-
   act = mp_menuSettings->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
   act->setCheckable( true );
@@ -307,6 +301,12 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserColor() );
   act->setData( 5 );
+
+  act = mp_menuSettings->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
+  act->setData( 6 );
 
   act = mp_menuSettings->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled HTML tags are not removed from the message" ) );
@@ -455,12 +455,8 @@ void GuiMain::checkUser( const User& u )
   if( u.isLocal() )
     refreshTitle();
 
-  qDebug() << "User" << u.path() << "has changed his info. Check it";
-
-  Chat private_chat = ChatManager::instance().privateChatForUser( u.id() );
-  if( !private_chat.isValid() )
-    return;
-  mp_userList->setUser( u, private_chat.id(), private_chat.unreadMessages() );
+  qDebug() << "User" << u.path() << "has updated his info. Check it";
+  mp_userList->setUser( u );
 }
 
 void GuiMain::emoticonSelected()
@@ -552,7 +548,7 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 6:
-    Settings::instance().setShowOnlyUsername( act->isChecked() );
+    Settings::instance().setShowOnlyOnlineUsers( act->isChecked() );
     refresh_users = true;
     refresh_chat = true;
   case 7:
@@ -608,14 +604,17 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   {
     mp_defaultChat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
+    mp_userList->setUnreadMessages( chat_id, 0 );
   }
   else
   {
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
-    mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
+    if( chat_hidden.isValid() )
+    {
+      mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
+      mp_chatList->updateChat( chat_id );
+    }
   }
-
-  mp_chatList->updateChat( chat_id );
 }
 
 void GuiMain::saveChat()
@@ -677,7 +676,7 @@ void GuiMain::searchUsers()
 
 void GuiMain::showWritingUser( const User& u )
 {
-  QString msg = tr( "%1 is writing..." ).arg( Settings::instance().showOnlyUsername() ? u.name() : u.path() );
+  QString msg = tr( "%1 is writing..." ).arg( u.name() );
   statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
 }
 
@@ -751,7 +750,7 @@ void GuiMain::sendFile( VNumber user_id )
 
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
-  QString msg = tr( "Do you want to download from %1\n%2 (%3)?" ).arg( Settings::instance().showOnlyUsername() ? u.name() : u.path() )
+  QString msg = tr( "Do you want to download from %1\n%2 (%3)?" ).arg( u.name() )
                                                                  .arg( fi.name() ).arg( Bee::bytesToString( fi.size() ) );
   if( QMessageBox::information( this, Settings::instance().programName(), msg, tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
@@ -936,9 +935,22 @@ void GuiMain::showNetworkAccount()
   QAction* act = qobject_cast<QAction*>( sender() );
   if( !act )
     return;
+
+  QString xmpp_service = act->data().toString();
+  if( mp_core->isXmppServerConnected( xmpp_service ) )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "Do you want to disconnect from %1 server?").arg( xmpp_service ),
+                               tr( "Yes"), tr( "No" ), QString::null, 1, 1 ) == 0 )
+    {
+      mp_core->disconnectFromXmppServer( xmpp_service );
+    }
+    return;
+  }
+
   GuiNetworkLogin gnl( this );
   gnl.setModal( true );
-  gnl.setNetworkAccount( Settings::instance().networkAccount( act->data().toString() ), act->data().toString() );
+  gnl.setNetworkAccount( Settings::instance().networkAccount( xmpp_service ), xmpp_service );
   gnl.show();
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
@@ -979,7 +991,7 @@ void GuiMain::removeUser( VNumber user_id )
     // remove the user
     if( mp_core->removeXmppUser( u ) )
     {
-      mp_userList->removeUser( u, true );
+      mp_userList->removeUser( u );
     }
     else
       QMessageBox::warning( this, Settings::instance().programName(),
