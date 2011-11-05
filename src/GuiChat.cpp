@@ -299,13 +299,15 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
     return;
   }
 
+  bool read_all_messages = !cm.isFromLocalUser() && !cm.isSystem();
+  Chat c = ChatManager::instance().chat( m_chatId, read_all_messages );
+  if( !c.isValid() )
+    return;
+
   User u = m_users.find( cm.userId() );
   if( !u.isValid() )
   {
     qDebug() << "User" << cm.userId() << "is not present in chat showed" << m_chatId << "... force update";
-    Chat c = ChatManager::instance().chat( m_chatId, true );
-    if( !c.isValid() )
-      return;
     m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
     u = m_users.find( cm.userId() );
     if( !u.isValid() )
@@ -317,7 +319,8 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   }
 
   appendMessage( chatMessageToText( cm ) );
-  if( !cm.isFromLocalUser() && !cm.isSystem() )
+
+  if( read_all_messages )
     setLastMessageTimestamp( cm.message().timestamp() );
 }
 

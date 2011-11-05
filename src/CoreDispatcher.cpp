@@ -34,6 +34,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   c.addMessage( cm );
   c.addUnreadMessage();
   c.setLastMessageTimestamp( m.timestamp() );
+  qDebug() << "Chat" << c.id() << "has" << c.unreadMessages() << "unread messages";
   ChatManager::instance().setChat( c );
   emit chatMessage( c.id(), cm );
 }

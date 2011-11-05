@@ -381,6 +381,12 @@ void XmppManager::sendMessage( const User& u, const Message& m )
   if( !mp_client )
     return;
 
+  if( !mp_client->isConnected() )
+  {
+    makeSystemMessage( mp_client, tr( "unable to send the message. You are not connected to the server" ) );
+    return;
+  }
+
   if( m.type() == Message::Chat )
     mp_client->sendMessage( u.bareJid(), m.text() );
 }
@@ -529,11 +535,14 @@ void XmppManager::sendLocalUserPresence()
 
   foreach( XmppClient* mp_client, m_clients )
   {
-    QXmppPresence presence = mp_client->clientPresence();
-    presence.setType( presence_type );
-    presence.status().setType( presence_status_type );
-    presence.status().setStatusText( u.statusDescription() );
-    mp_client->setClientPresence( presence );
+    if( mp_client->isConnected() )
+    {
+      QXmppPresence presence = mp_client->clientPresence();
+      presence.setType( presence_type );
+      presence.status().setType( presence_status_type );
+      presence.status().setStatusText( u.statusDescription() );
+      mp_client->setClientPresence( presence );
+    }
   }
 }
 
