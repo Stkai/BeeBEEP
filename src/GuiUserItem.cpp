@@ -69,7 +69,7 @@ bool GuiUserItem::updateItem()
   if( !user_status )
     unread_messages = 0;
 
-  QString s = u.isOnLan() ? (user_status != User::Offline ? u.name() : u.path()) : u.name();
+  QString s = u.isLocal() ? QObject::tr( "* All *" ) : (u.isOnLan() ? (user_status != User::Offline ? u.name() : u.path()) : u.name());
 
   int user_priority = 1;
 

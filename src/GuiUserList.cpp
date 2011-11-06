@@ -56,6 +56,7 @@ QSize GuiUserList::sizeHint() const
 void GuiUserList::updateUsers()
 {
   clear();
+  setUser( Settings::instance().localUser() );
   QList<User>::const_iterator it = UserManager::instance().userList().toList().begin();
   while( it != UserManager::instance().userList().toList().end() )
   {
@@ -120,13 +121,8 @@ void GuiUserList::setUser( const User& u )
 
   if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
   {
-    QTreeWidgetItem* root_item = invisibleRootItem();
-    if( root_item )
-    {
-      root_item->removeChild( (QTreeWidgetItem*)item );
-      delete item;
-      return;
-    }
+    removeUser( u );
+    return;
   }
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );

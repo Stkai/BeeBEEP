@@ -152,3 +152,9 @@ bool UserList::remove( const User& u )
     return false;
   }
 }
+
+void UserList::set( const UserList& ul )
+{
+  foreach( User u, ul.toList() )
+    set( u );
+}

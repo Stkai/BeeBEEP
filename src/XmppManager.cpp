@@ -25,6 +25,7 @@
 #include "PluginManager.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "UserManager.h"
 #include "XmppManager.h"
 #include "QXmppClient.h"
 #include "QXmppMessage.h"
@@ -185,6 +186,13 @@ void XmppManager::serverDisconnected()
   }
   mp_client->setConnectionState( XmppClient::Offline );
   makeSystemMessage( mp_client, "disconnected from the server" );
+  UserList ul = UserManager::instance().userList().serviceUserList( mp_client->service() );
+  Message m;
+  foreach( User u, ul.toList() )
+  {
+    m = Protocol::instance().userStatusMessage( User::Offline, u.statusDescription() );
+    emit message( mp_client->service(), u.bareJid(), m );
+  }
 }
 
 void XmppManager::errorOccurred( QXmppClient::Error err )

@@ -940,7 +940,7 @@ void GuiMain::showNetworkAccount()
   if( mp_core->isXmppServerConnected( xmpp_service ) )
   {
     if( QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "Do you want to disconnect from %1 server?").arg( xmpp_service ),
+                               tr( "You are connected to %1. Do you want to disconnect?").arg( xmpp_service ),
                                tr( "Yes"), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
       mp_core->disconnectFromXmppServer( xmpp_service );
