@@ -94,6 +94,7 @@ private:
   void stopCore();
   void initGuiItems();
   void updadePluginMenu();
+  void updateStatusIcon();
 
 private:
   GuiChat* mp_defaultChat;

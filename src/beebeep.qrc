@@ -54,10 +54,12 @@
         <file>images/user-list.png</file>
         <file>images/send-file.png</file>
         <file>images/add.png</file>
-        <file>images/remove.png</file>
         <file>images/plugin.png</file>
         <file>images/network-settings.png</file>
         <file>images/network-account.png</file>
         <file>images/chat-list.png</file>
+        <file>images/user-delete.png</file>
+        <file>images/network-connected.png</file>
+        <file>images/network-disconnected.png</file>
     </qresource>
 </RCC>

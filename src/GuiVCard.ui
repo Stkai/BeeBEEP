@@ -356,7 +356,7 @@
        </property>
        <property name="icon">
         <iconset resource="beebeep.qrc">
-         <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
+         <normaloff>:/images/user-delete.png</normaloff>:/images/user-delete.png</iconset>
        </property>
       </widget>
      </item>

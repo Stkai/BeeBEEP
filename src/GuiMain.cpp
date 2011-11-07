@@ -83,6 +83,7 @@ GuiMain::GuiMain( QWidget *parent )
   showChat( ID_DEFAULT_CHAT );
 
   refreshTitle();
+  updateStatusIcon();
 }
 
 void GuiMain::refreshTitle()
@@ -687,6 +688,16 @@ void GuiMain::statusSelected()
     return;
   mp_core->setLocalUserStatus( act->data().toInt() );
   refreshTitle();
+  updateStatusIcon();
+}
+
+void GuiMain::updateStatusIcon()
+{
+  mp_menuStatus->setIcon( Bee::userStatusIcon( Settings::instance().localUser().service(), Settings::instance().localUser().status() ) );
+  QString tip = tr( "You are %1%2" ).arg( Bee::userStatusToString( Settings::instance().localUser().status() ) )
+      .arg( (Settings::instance().localUser().statusDescription().isEmpty() ? QString( "" ) : QString( ": %1" ).arg( Settings::instance().localUser().statusDescription() ) ) );
+  QAction* act = mp_menuStatus->menuAction();
+  act->setToolTip( tip );
 }
 
 void GuiMain::changeStatusDescription()

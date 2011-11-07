@@ -799,6 +799,14 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Do you want to disconnect from %1 server?</source>
+        <translation type="obsolete">Vuoi disconnetterti da %1?</translation>
+    </message>
+    <message>
+        <source>You are %1%2</source>
+        <translation>Il tuo stato è %1%2</translation>
+    </message>
+    <message>
+        <source>You are connected to %1. Do you want to disconnect?</source>
         <translation>Vuoi disconnetterti da %1?</translation>
     </message>
 </context>
@@ -1616,6 +1624,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>%1 has reject your subscription</source>
         <translation>%1 ha rifiutato la tua richiesta</translation>
+    </message>
+    <message>
+        <source>unable to send the message. You are not connected to the server</source>
+        <translation>impossibile inviare il messaggio. Il server non è connesso</translation>
     </message>
 </context>
 </TS>

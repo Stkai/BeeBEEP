@@ -67,7 +67,7 @@ bool Core::start()
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
-                               .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
+                               .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
                                      Settings::instance().programName() ), DispatchToChat );
       return false;
     }
@@ -80,7 +80,7 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
-                             .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
+                             .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
                                    Settings::instance().programName() ), DispatchToChat );
     mp_listener->close();
     return false;
@@ -88,7 +88,7 @@ bool Core::start()
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
-                         .arg( Bee::iconToHtml( ":/images/green-ball.png", "*C*" ),
+                         .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
 
   showUserStatusChanged( Settings::instance().localUser() );
@@ -119,6 +119,6 @@ void Core::stop()
   m_connections.clear();
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/red-ball.png", "*D*" ),
+                         tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
                                                                               Settings::instance().programName() ), DispatchToAllChatsWithUser );
 }

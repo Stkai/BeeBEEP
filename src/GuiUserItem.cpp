@@ -79,7 +79,10 @@ bool GuiUserItem::updateItem()
   s += " ";
   setText( 0, s );
 
-  setIcon( 0, GetUserIcon( 0, u.service(), user_status ) );
+  if( u.isLocal() )
+    setIcon( 0, QIcon( ":/images/chat.png" ) );
+  else
+    setIcon( 0, GetUserIcon( 0, u.service(), user_status ) );
 
   if( !m_defaultForegroundColor.isValid() )
     m_defaultForegroundColor = foreground( 0 ).color();
