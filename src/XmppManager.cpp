@@ -174,6 +174,7 @@ void XmppManager::serverConnected()
   }
   mp_client->setConnectionState( XmppClient::Online );
   makeSystemMessage( mp_client, "connected to the server" );
+  emit serviceConnected( mp_client->service() );
 }
 
 void XmppManager::serverDisconnected()
@@ -193,6 +194,8 @@ void XmppManager::serverDisconnected()
     m = Protocol::instance().userStatusMessage( User::Offline, u.statusDescription() );
     emit message( mp_client->service(), u.bareJid(), m );
   }
+
+  emit serviceDisconnected( mp_client->service() );
 }
 
 void XmppManager::errorOccurred( QXmppClient::Error err )

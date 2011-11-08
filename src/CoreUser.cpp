@@ -64,7 +64,7 @@ void Core::showUserStatusChanged( const User& u )
     sHtmlMsg += tr( "%1 is" ).arg( u.name() );
    sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }
 
 void Core::showUserNameChanged( const User& u, const QString& old_user_name )
@@ -75,7 +75,7 @@ void Core::showUserNameChanged( const User& u, const QString& old_user_name )
   else
     sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( old_user_name, u.name() );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );
 }
 
@@ -87,7 +87,7 @@ void Core::showUserVCardChanged( const User& u )
   else
     sHtmlMsg += tr( "%1 has updated the profile." ).arg( u.name() );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );
 }
 
@@ -96,7 +96,7 @@ void Core::searchUsers( const QHostAddress& host_address )
   mp_broadcaster->sendDatagramToHost( host_address );
   QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." )
       .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
 }
 
 void Core::sendLocalUserStatus()

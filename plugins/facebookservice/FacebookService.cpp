@@ -112,6 +112,11 @@ int FacebookService::sASLAuthMechanism() const
   return 1;
 }
 
+bool FacebookService::fileTransferIsEnabled() const
+{
+  return false;
+}
+
 QString FacebookService::userStatusOfflineIconPath() const
 {
   return QLatin1String( ":/plugins/facebook-offline.png" );

@@ -65,7 +65,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_core, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ), this, SLOT( showUserSubscriptionRequest( const QString&, const QString& ) ) );
-
+  connect( mp_core, SIGNAL( serviceConnected( const QString& ) ), this, SLOT( serviceConnected( const QString& ) ) );
+  connect( mp_core, SIGNAL( serviceDisconnected( const QString& ) ), this, SLOT( serviceDisconnected( const QString& ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
@@ -248,24 +249,26 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addAction( mp_actSearch );
 
+  mp_menuAccounts = new QMenu( tr( "Network account" ), mp_menuMain );
+  mp_menuAccounts->setIcon( QIcon( ":/images/network-account.png" ) );
+
   if( PluginManager::instance().services().size() > 0 )
   {
     mp_menuMain->addSeparator();
-    QMenu* pMenu = new QMenu( tr( "Network account" ), mp_menuMain );
-    pMenu->setIcon( QIcon( ":/images/network-account.png" ) );
     QList<ServiceInterface*>::const_iterator it = PluginManager::instance().services().begin();
     while( it != PluginManager::instance().services().end() )
     {
-      act = pMenu->addAction( (*it)->icon(), (*it)->name(), this, SLOT( showNetworkAccount() ) );
+      act = mp_menuAccounts->addAction( (*it)->icon(), (*it)->name(), this, SLOT( showNetworkAccount() ) );
       act->setStatusTip( tr( "Show the %1 login" ).arg( (*it)->name() ) );
       act->setData( (*it)->name() );
       ++it;
     }
 
-    mp_menuMain->addMenu( pMenu );
+    mp_menuMain->addMenu( mp_menuAccounts );
 
     act = mp_menuMain->addAction( QIcon( ":/images/network-settings.png" ), tr( "Network settings..."), this, SLOT( showNetworkManager() ) );
     act->setStatusTip( tr( "Show the network settings dialog" ) );
+    updateAccountMenu();
   }
 
   mp_menuMain->addSeparator();
@@ -910,6 +913,35 @@ void GuiMain::updadePluginMenu()
     act->setIcon( service->icon() );
     act->setEnabled( service->isEnabled() );
   }
+
+  QList<QAction*> account_list = mp_menuAccounts->actions();
+  foreach( QAction* account_act, account_list )
+  {
+    ServiceInterface* si = PluginManager::instance().service( account_act->data().toString() );
+    if( !si )
+      continue;
+
+    if( mp_core->isXmppServerConnected( si->name() ) )
+      account_act->setIcon( Bee::userStatusIcon(  si->name(), User::Online ) );
+    else
+      account_act->setIcon( si->icon() );
+  }
+}
+
+void GuiMain::updateAccountMenu()
+{
+  QList<QAction*> account_list = mp_menuAccounts->actions();
+  foreach( QAction* account_act, account_list )
+  {
+    ServiceInterface* si = PluginManager::instance().service( account_act->data().toString() );
+    if( !si )
+      continue;
+
+    if( mp_core->isXmppServerConnected( si->name() ) )
+      account_act->setIcon( Bee::userStatusIcon(  si->name(), User::Online ) );
+    else
+      account_act->setIcon( si->icon() );
+  }
 }
 
 void GuiMain::showPluginHelp()
@@ -928,7 +960,21 @@ void GuiMain::showPluginManager()
   gpm.show();
   gpm.exec();
   if( gpm.isChanged() )
+  {
     updadePluginMenu();
+    QList<ServiceInterface*> service_list = PluginManager::instance().services();
+    if( service_list.isEmpty() )
+      return;
+    foreach( ServiceInterface* si, service_list )
+    {
+      if( !si->isEnabled() )
+      {
+        if( mp_core->isXmppServerConnected( si->name() ) )
+          mp_core->disconnectFromXmppServer( si->name() );
+      }
+    }
+    updateAccountMenu();
+  }
 }
 
 void GuiMain::showNetworkManager()
@@ -968,7 +1014,8 @@ void GuiMain::showNetworkAccount()
   if( result == QDialog::Accepted )
   {
     Settings::instance().setNetworkAccount( gnl.account() );
-    mp_core->connectToXmppServer( gnl.account() );
+    if( !mp_core->connectToXmppServer( gnl.account() ) )
+      QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to connect to %1. Plugin is not present or is not enabled." ).arg( gnl.account().service() ) );
   }
 }
 
@@ -1008,4 +1055,14 @@ void GuiMain::removeUser( VNumber user_id )
       QMessageBox::warning( this, Settings::instance().programName(),
                             tr( "Unable to remove %1 from the contact list." ).arg( u.path() ) );
   }
+}
+
+void GuiMain::serviceConnected( const QString& )
+{
+  updateAccountMenu();
+}
+
+void GuiMain::serviceDisconnected( const QString& )
+{
+  updateAccountMenu();
 }

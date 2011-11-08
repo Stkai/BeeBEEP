@@ -60,6 +60,8 @@ signals:
   void userSubscriptionRequest( const QString& service, const QString& bare_jid );
   void vCardReceived( const QString& service, const QString& bare_jid, const VCard& );
   void vCardAvailable( const QString& service, const QString& bare_jid );
+  void serviceConnected( const QString& );
+  void serviceDisconnected( const QString& );
 
 protected slots:
   void serverConnected();

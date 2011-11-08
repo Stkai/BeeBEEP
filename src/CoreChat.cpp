@@ -60,7 +60,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 {
   if( !isConnected() )
   {
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat );
+    dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat );
     return 0;
   }
 
@@ -88,7 +88,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     foreach( Connection *c, m_connections )
     {
       if( !c->sendMessage( m ) )
-        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
+        dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
                                .arg( UserManager::instance().userList().find( c->userId() ).path() ), DispatchToChat );
       else
         messages_sent += 1;
@@ -115,7 +115,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       if( c && c->sendMessage( m ) )
         messages_sent += 1;
       else
-        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( u.path() ), DispatchToChat );
+        dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( u.path() ), DispatchToChat );
     }
   }
 
@@ -123,7 +123,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   dispatchToChat( cm, chat_id );
 
   if( messages_sent == 0 )
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat );
+    dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat );
 
   return messages_sent;
 }
@@ -159,6 +159,19 @@ void Core::showTipOfTheDay()
 {
   QString tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),
                                                    qApp->translate( "Tips", BeeBeepTips[ Random::number( 0, (BeeBeepTipsSize-1) ) ] ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
+}
+
+bool Core::chatHasService( const Chat& c, const QString& service_name )
+{
+  if( !c.isValid() )
+    return false;
+  if( c.isDefault() )
+    return true;
+  UserList chat_users = UserManager::instance().userList().fromUsersId( c.usersId() );
+  if( chat_users.serviceUserList( service_name ).toList().isEmpty() )
+    return false;
+  else
+    return true;
 }
 

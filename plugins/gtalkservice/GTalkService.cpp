@@ -112,6 +112,11 @@ int GTalkService::sASLAuthMechanism() const
   return 1;
 }
 
+bool GTalkService::fileTransferIsEnabled() const
+{
+  return true;
+}
+
 QString GTalkService::userStatusOfflineIconPath() const
 {
   return QLatin1String( ":/plugins/gtalk-offline.png" );

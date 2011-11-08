@@ -112,6 +112,11 @@ int JabberService::sASLAuthMechanism() const
   return 1;
 }
 
+bool JabberService::fileTransferIsEnabled() const
+{
+  return true;
+}
+
 QString JabberService::userStatusOfflineIconPath() const
 {
   return QLatin1String( ":/plugins/jabber-offline.png" );

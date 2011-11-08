@@ -77,6 +77,8 @@ private slots:
   void showUserSubscriptionRequest( const QString&, const QString& );
   void removeUser( VNumber );
   void showChat( VNumber );
+  void serviceConnected( const QString& );
+  void serviceDisconnected( const QString& );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -95,6 +97,7 @@ private:
   void initGuiItems();
   void updadePluginMenu();
   void updateStatusIcon();
+  void updateAccountMenu();
 
 private:
   GuiChat* mp_defaultChat;
@@ -109,6 +112,7 @@ private:
   QMenu *mp_menuEmoticons;
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;
+  QMenu *mp_menuAccounts;
 
   QToolBar *mp_barMain;
 

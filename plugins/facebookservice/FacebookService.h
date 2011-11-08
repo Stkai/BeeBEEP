@@ -56,6 +56,8 @@ public:
   int nonSASLAuthMechanism() const;
   int sASLAuthMechanism() const;
 
+  bool fileTransferIsEnabled() const;
+
   QString userStatusOfflineIconPath() const;
   QString userStatusOnlineIconPath() const;
   QString userStatusBusyIconPath() const;

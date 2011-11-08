@@ -55,6 +55,8 @@ Core::Core( QObject* parent )
   connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString&, const QString& ) ), this, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( vCardAvailable( const QString&, const QString& ) ), this, SLOT( checkXmppUserVCard( const QString&, const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( vCardReceived( const QString&, const QString&, const VCard& ) ), this, SLOT( setXmppVCard( const QString&, const QString&, const VCard& ) ) );
+  connect( mp_xmppManager, SIGNAL( serviceConnected( const QString& ) ), this, SIGNAL( serviceConnected( const QString& ) ) );
+  connect( mp_xmppManager, SIGNAL( serviceDisconnected( const QString& ) ), this, SIGNAL( serviceDisconnected( const QString& ) ) );
 }
 
 bool Core::start()
@@ -65,7 +67,7 @@ bool Core::start()
     qDebug() << "Unable to bind" << Settings::instance().localUser().hostPort() << "port. Try to bind the first available";
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
-      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
                                      Settings::instance().programName() ), DispatchToChat );
@@ -78,7 +80,7 @@ bool Core::start()
 
   if( !mp_broadcaster->startBroadcasting() )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
                              .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
                                    Settings::instance().programName() ), DispatchToChat );
@@ -86,7 +88,7 @@ bool Core::start()
     return false;
   }
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
@@ -118,7 +120,7 @@ void Core::stop()
 
   m_connections.clear();
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
                                                                               Settings::instance().programName() ), DispatchToAllChatsWithUser );
 }

@@ -66,7 +66,7 @@ void Core::parseXmppMessage( const QString& service, const QString& bare_jid, co
   switch( m.type() )
   {
   case Message::System:
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), m.text(), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( service, ID_DEFAULT_CHAT, u.id(), m.text(), DispatchToService );
     break;
   case Message::User:
   case Message::Chat:

@@ -44,7 +44,7 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
 void Core::downloadFile( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
                          .arg( icon_html, fi.name(), u.path() ),
                          DispatchToAllChatsWithUser );
   mp_fileTransfer->downloadFile( fi );
@@ -60,7 +60,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   }
 
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
                          fi.isDownload() ? tr( "from") : tr( "to" ), u.path(), msg ),
                          DispatchToAllChatsWithUser );
 
@@ -70,7 +70,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     if( peer->isTransferCompleted() && fi.isDownload() )
     {
       QString s_open = tr( "Open" );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 <a href='%3'>%4</a>." )
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 <a href='%3'>%4</a>." )
                              .arg( icon_html, s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() ),
                              DispatchToAllChatsWithUser );
     }
@@ -96,14 +96,14 @@ bool Core::sendFile( const User& u, const QString& file_path )
   QFileInfo file( file_path );
   if( !file.exists() )
   {
-     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ), DispatchToAllChatsWithUser );
+     dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ), DispatchToAllChatsWithUser );
      return false;
   }
 
   Connection* c = connection( u.id() );
   if( !c )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
     return false;
   }
 
@@ -111,7 +111,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
   {
     if( !mp_fileTransfer->startListener() )
     {
-      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send file: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send file: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
       return false;
     }
   }
@@ -119,7 +119,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
   FileInfo fi = mp_fileTransfer->addFile( file );
 
   Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file to %2: %3." )
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file to %2: %3." )
                          .arg( icon_html, u.path(), file.fileName() ), DispatchToAllChatsWithUser );
   Message m = Protocol::instance().fileInfoToMessage( fi );
   c->sendMessage( m );
@@ -151,5 +151,5 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
   if( c->protoVersion() > 1 )
     c->sendMessage( m );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
 }

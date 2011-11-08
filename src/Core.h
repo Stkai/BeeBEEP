@@ -83,6 +83,8 @@ signals:
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
   void xmppUserSubscriptionRequest( const QString&, const QString& );
+  void serviceConnected( const QString& );
+  void serviceDisconnected( const QString& );
 
 protected slots:
   /* CoreConnection */
@@ -130,14 +132,16 @@ protected:
   void createDefaultChat();
   void createPrivateChat( const User& );
   QString chatMessageToText( const UserList&, const ChatMessage& );
+  bool chatHasService( const Chat&, const QString& );
 
   /* CoreDispatcher */
-  enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat };
-  void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType );
+  enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToService };
+  void dispatchSystemMessage( const QString& service_name, VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType );
   void dispatchChatMessageReceived( VNumber from_user_id, const Message& m );
   void dispatchToAllChats( const ChatMessage& );
   void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );
   void dispatchToChat( const ChatMessage&, VNumber chat_id );
+  void dispatchToService( const ChatMessage&, const QString& service_name );
 
 private:
   QList<Connection*> m_connections;
