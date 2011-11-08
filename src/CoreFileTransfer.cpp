@@ -27,6 +27,7 @@
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "XmppManager.h"
 #include "UserManager.h"
 
 
@@ -100,30 +101,48 @@ bool Core::sendFile( const User& u, const QString& file_path )
      return false;
   }
 
-  Connection* c = connection( u.id() );
-  if( !c )
-  {
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
-    return false;
-  }
+  Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
+  FileInfo fi = mp_fileTransfer->addFile( file );
 
-  if( !mp_fileTransfer->isWorking() )
+  if( u.isOnLan() )
   {
-    if( !mp_fileTransfer->startListener() )
+    Connection* c = connection( u.id() );
+    if( !c )
     {
-      dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send file: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
+      return false;
+    }
+
+    if( !mp_fileTransfer->isWorking() )
+    {
+      if( !mp_fileTransfer->startListener() )
+      {
+        dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send the file: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
+        return false;
+      }
+    }
+
+    Message m = Protocol::instance().fileInfoToMessage( fi );
+    c->sendMessage( m );
+  }
+  else
+  {
+    if( !u.isConnected() )
+    {
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
+      return false;
+    }
+
+    if( !mp_xmppManager->sendFile( u, fi ) )
+    {
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file %2 to %3." )
+                             .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser );
       return false;
     }
   }
 
-  FileInfo fi = mp_fileTransfer->addFile( file );
-
-  Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file to %2: %3." )
-                         .arg( icon_html, u.path(), file.fileName() ), DispatchToAllChatsWithUser );
-  Message m = Protocol::instance().fileInfoToMessage( fi );
-  c->sendMessage( m );
-
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file %2 to %3." )
+                       .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser );
   return true;
 }
 

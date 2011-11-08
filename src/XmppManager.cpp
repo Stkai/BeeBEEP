@@ -693,3 +693,14 @@ void XmppManager::loadClients()
     }
   }
 }
+
+bool XmppManager::sendFile( const User& u, const FileInfo& fi )
+{
+  XmppClient* mp_client = client( u.service() );
+  if( !mp_client )
+    return false;
+  if( !mp_client->isConnected() )
+    return false;
+  mp_client->sendFile( u.bareJid(), fi );
+  return true;
+}

@@ -26,7 +26,9 @@
 
 #include "Config.h"
 #include "QXmppClient.h"
+#include "QXmppTransferManager.h"
 #include "User.h"
+class FileInfo;
 class QXmppVCardIq;
 
 
@@ -46,16 +48,29 @@ public:
   inline bool isActive() const;
   inline void setConnectionState( XmppClient::ConnectionState );
 
+  void sendFile( const QString& bare_jid, const FileInfo& );
+
 signals:
   void rosterReceived();
   void rosterChanged( const QString& );
   void presenceChanged( const QString&, const QString& );
   void vCardReceived( const QXmppVCardIq& );
 
+protected slots:
+  void checkFileTransferRequest( QXmppTransferJob* );
+  void checkFileTransferError( QXmppTransferJob::Error );
+  void checkFileTransferFinished();
+  void checkFileTransferProgress( qint64, qint64 );
+
+protected:
+  void setupFileTransferJob( QXmppTransferJob* );
+
 private:
   User m_clientUser;
   QString m_iconPath;
   ConnectionState m_connectionState;
+
+  QXmppTransferManager* mp_transferManager;
 
 };
 

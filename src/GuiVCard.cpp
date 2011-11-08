@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "GuiVCard.h"
+#include "PluginManager.h"
 #include "User.h"
 
 
@@ -80,10 +81,21 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else
     mp_pbChat->setToolTip( tr( "Open chat" ) );
 
-  if( u.isOnLan() && !u.isLocal() )
-    mp_pbFile->show();
+  if( u.isOnLan() )
+  {
+    if( !u.isLocal() )
+      mp_pbFile->show();
+    else
+      mp_pbFile->hide();
+  }
   else
-    mp_pbFile->hide();
+  {
+    ServiceInterface* si = PluginManager::instance().service( u.service() );
+    if( si && si->fileTransferIsEnabled() && u.isConnected() )
+      mp_pbFile->show();
+    else
+      mp_pbFile->hide();
+  }
 
   if( u.isOnLan() )
     mp_pbRemove->hide();

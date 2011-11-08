@@ -22,8 +22,11 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "XmppClient.h"
+#include "FileInfo.h"
+#include "Settings.h"
 #include "QXmppRosterManager.h"
 #include "QXmppVCardManager.h"
+
 
 
 XmppClient::XmppClient( QObject* parent )
@@ -32,8 +35,72 @@ XmppClient::XmppClient( QObject* parent )
     m_connectionState( XmppClient::Offline )
 {
   setService( "Jabber" );
+
+  mp_transferManager = new QXmppTransferManager;
+  mp_transferManager->setSupportedMethods( QXmppTransferJob::InBandMethod );
+  addExtension( mp_transferManager );
+
+  connect( mp_transferManager, SIGNAL( fileReceived( QXmppTransferJob* ) ), this, SLOT( checkFileTransferRequest( QXmppTransferJob* ) ) );
   connect( &(rosterManager()), SIGNAL( rosterReceived() ), this, SIGNAL( rosterReceived() ) );
   connect( &(rosterManager()), SIGNAL( rosterChanged( const QString& ) ), this, SIGNAL( rosterChanged( const QString& ) ) );
   connect( &(rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SIGNAL( presenceChanged( const QString&, const QString& ) ) );
   connect( &(vCardManager()), SIGNAL( vCardReceived( const QXmppVCardIq& ) ), this, SIGNAL( vCardReceived( const QXmppVCardIq& ) ) );
 }
+
+void XmppClient::sendFile( const QString& bare_jid, const FileInfo& fi )
+{
+  qDebug() << "XMPP> sending file" << fi.name() << "to" << bare_jid;
+  QXmppTransferJob *job = mp_transferManager->sendFile( bare_jid, fi.path(), QString::number( fi.id() ) );
+  qDebug() << "XMPP> started file transfer job with sid" << job->sid();
+  setupFileTransferJob( job );
+}
+
+void XmppClient::setupFileTransferJob( QXmppTransferJob* job )
+{
+  connect( job, SIGNAL( error( QXmppTransferJob::Error ) ), this, SLOT( checkFileTransferError( QXmppTransferJob::Error ) ) );
+  connect( job, SIGNAL( finished() ),this, SLOT( checkFileTransferFinished() ) );
+  connect( job, SIGNAL( progress( qint64, qint64 ) ),  this, SLOT( checkFileTransferProgress( qint64, qint64 ) ) );
+}
+
+void XmppClient::checkFileTransferRequest( QXmppTransferJob* job )
+{
+  // Disabled
+  qDebug() << "XMPP> file transfer request from" << job->jid() << ":" << job->fileName();
+  job->abort();
+}
+
+void XmppClient::checkFileTransferError( QXmppTransferJob::Error )
+{
+  QXmppTransferJob *job = qobject_cast<QXmppTransferJob*>(sender());
+  if( !job )
+  {
+    qWarning() << "Unable to cast qobject in QXmppTransferJob in XmppClient::checkFileTransferError";
+    return;
+  }
+  qDebug() << "XMPP> error occurred transferring file" << job->fileName() << "to" << job->jid();
+}
+
+void XmppClient::checkFileTransferFinished()
+{
+  QXmppTransferJob *job = qobject_cast<QXmppTransferJob*>(sender());
+  if( !job )
+  {
+    qWarning() << "Unable to cast qobject in QXmppTransferJob in XmppClient::checkFileTransferFinished";
+    return;
+  }
+  qDebug() << "XMPP> transfer file" << job->fileName() << "to" << job->jid() << "completed";
+}
+
+void XmppClient::checkFileTransferProgress( qint64 bytes_transferred, qint64 total_bytes )
+{
+  QXmppTransferJob *job = qobject_cast<QXmppTransferJob*>(sender());
+  if( !job )
+  {
+    qWarning() << "Unable to cast qobject in QXmppTransferJob in XmppClient::checkFileTransferProgress";
+    return;
+  }
+
+  qDebug() << "XMPP> transfer file" << job->fileName() << "to" << job->jid() << "in progress:" << bytes_transferred << "of" << total_bytes << "bytes";
+}
+
+

@@ -98,6 +98,7 @@ private:
   void updadePluginMenu();
   void updateStatusIcon();
   void updateAccountMenu();
+  void sendFile( const User& );
 
 private:
   GuiChat* mp_defaultChat;

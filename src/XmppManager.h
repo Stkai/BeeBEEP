@@ -28,6 +28,7 @@
 #include "Message.h"
 #include "XmppClient.h"
 #include "User.h"
+class FileInfo;
 class QXmppVCardIq;
 
 
@@ -53,6 +54,7 @@ public:
   void removeUser( const User& );
   void requestVCard( const QString& service, const QString& bare_jid );
   void sendLocalUserPresence();
+  bool sendFile( const User&, const FileInfo& );
 
 signals:
   void message( const QString& service, const QString& bare_jid, const Message& );

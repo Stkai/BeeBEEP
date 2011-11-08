@@ -718,6 +718,12 @@ void GuiMain::sendFile()
 {
   bool ok = false;
   QStringList user_string_list = UserManager::instance().userList().serviceUserList( "Lan" ).toStringList( false, true );
+  foreach( ServiceInterface* si, PluginManager::instance().services() )
+  {
+    if( si->fileTransferIsEnabled() )
+      user_string_list.append( UserManager::instance().userList().serviceUserList( si->name() ).toStringList( false, true ) );
+  }
+
   if( user_string_list.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "There is no user connected." ) );
@@ -730,36 +736,33 @@ void GuiMain::sendFile()
   if( !ok )
     return;
 
-  User user_selected = UserManager::instance().userList().find( user_path );
-  if( !user_selected.isValid() )
-  {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "User %1 not found." ).arg( user_path ) );
-    return;
-  }
-
-  QString file_path = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), user_selected.name() ),
-                                                    Settings::instance().lastDirectorySelected() );
-  if( file_path.isEmpty() || file_path.isNull() )
-    return;
-
-  mp_core->sendFile( user_selected, file_path );
+  User u = UserManager::instance().userList().find( user_path );
+  sendFile( u );
 }
 
 void GuiMain::sendFile( VNumber user_id )
 {
-  User user_selected = UserManager::instance().userList().find( user_id );
-  if( !user_selected.isValid() )
+  User u = UserManager::instance().userList().find( user_id );
+  sendFile( u );
+}
+
+void GuiMain::sendFile( const User& u )
+{
+  if( !u.isValid() )
   {
     QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
     return;
   }
 
-  QString file_path = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), user_selected.name() ),
+  QString file_path = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), u.name() ),
                                                     Settings::instance().lastDirectorySelected() );
   if( file_path.isEmpty() || file_path.isNull() )
     return;
 
-  mp_core->sendFile( user_selected, file_path );
+  Chat c = ChatManager::instance().privateChatForUser( u.id() );
+  if( c.isValid() )
+    showChat( c.id() );
+  mp_core->sendFile( u, file_path );
 }
 
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
