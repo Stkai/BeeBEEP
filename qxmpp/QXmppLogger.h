@@ -3,6 +3,7 @@
  *
  * Author:
  *  Manjeet Dahiya
+ *  Jeremy Lainé
  *
  * Source:
  *  http://code.google.com/p/qxmpp
@@ -33,13 +34,20 @@
 #define qxmpp_loggable_trace(x) (x)
 #endif
 
-/// \brief The QXmppLogger class represents a sink for logging messages. 
+class QXmppLoggerPrivate;
+
+/// \brief The QXmppLogger class represents a sink for logging messages.
 ///
 /// \ingroup Core
 
 class QXmppLogger : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(LoggingType)
+    Q_FLAGS(MessageType MessageTypes)
+    Q_PROPERTY(QString logFilePath READ logFilePath WRITE setLogFilePath)
+    Q_PROPERTY(LoggingType loggingType READ loggingType WRITE setLoggingType)
+    Q_PROPERTY(MessageTypes messageTypes READ messageTypes WRITE setMessageTypes)
 
 public:
     /// This enum describes how log message are handled.
@@ -49,13 +57,6 @@ public:
         FileLogging = 1,    ///< Log messages are written to a file
         StdoutLogging = 2,  ///< Log messages are written to the standard output
         SignalLogging = 4,  ///< Log messages are emitted as a signal
-
-        // Deprecated
-        /// \cond
-        NONE = 0,   ///< DEPRECATED Log messages are discarded
-        FILE = 1,   ///< DEPRECATED Log messages are written to a file
-        STDOUT = 2  ///< DEPRECATED Log messages are written to the standard output
-        /// \endcond
     };
 
     /// This enum describes a type of log message.
@@ -72,6 +73,8 @@ public:
     Q_DECLARE_FLAGS(MessageTypes, MessageType)
 
     QXmppLogger(QObject *parent = 0);
+    ~QXmppLogger();
+
     static QXmppLogger* getLogger();
 
     QXmppLogger::LoggingType loggingType();
@@ -85,6 +88,7 @@ public:
 
 public slots:
     void log(QXmppLogger::MessageType type, const QString& text);
+    void reopen();
 
 signals:
     /// This signal is emitted whenever a log message is received.
@@ -92,12 +96,10 @@ signals:
 
 private:
     static QXmppLogger* m_logger;
-    QXmppLogger::LoggingType m_loggingType;
-    QString m_logFilePath;
-    QXmppLogger::MessageTypes m_messageTypes;
+    QXmppLoggerPrivate *d;
 };
 
-/// \brief The QXmppLoggable class represents a source of logging messages. 
+/// \brief The QXmppLoggable class represents a source of logging messages.
 ///
 /// \ingroup Core
 

@@ -35,7 +35,7 @@ class QImage;
 /// \brief Represents the XMPP vCard.
 ///
 /// The functions names are self explanatory.
-/// Look at QXmppVCardManager and <B>XEP-0054: vcard-temp</B> for more details.
+/// Look at QXmppVCardManager and XEP-0054: vcard-temp for more details.
 ///
 /// There are many field of XMPP vCard which are not present in
 /// this class. File a issue for the same. We will add the requested
@@ -79,12 +79,6 @@ public:
 
     /// \cond
     static bool isVCard(const QDomElement &element);
-
-    // deprecated accessors, use the form without "get" instead
-    // deprecated in release 0.2.0
-    QString Q_DECL_DEPRECATED getFullName() const;
-    QString Q_DECL_DEPRECATED getNickName() const;
-    const QByteArray Q_DECL_DEPRECATED & getPhoto() const;
     /// \endcond
 
 protected:

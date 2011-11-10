@@ -46,7 +46,7 @@ public:
         Headline
     };
 
-    /// This enum describes a chat state as defined by 
+    /// This enum describes a chat state as defined by
     /// XEP-0085 : Chat State Notifications.
     enum State
     {
@@ -61,9 +61,12 @@ public:
     QXmppMessage(const QString& from = "", const QString& to = "",
                  const QString& body = "", const QString& thread = "");
     ~QXmppMessage();
-    
+
     QString body() const;
     void setBody(const QString&);
+
+    bool isAttentionRequested() const;
+    void setAttentionRequested(bool requested);
 
     QDateTime stamp() const;
     void setStamp(const QDateTime &stamp);
@@ -83,14 +86,6 @@ public:
     /// \cond
     void parse(const QDomElement &element);
     void toXml(QXmlStreamWriter *writer) const;
-
-    // deprecated in release 0.2.0
-    // deprecated accessors, use the form without "get" instead
-    QXmppMessage::Type Q_DECL_DEPRECATED getType() const;
-    QXmppMessage::State Q_DECL_DEPRECATED getState() const;
-    QString Q_DECL_DEPRECATED getBody() const;
-    QString Q_DECL_DEPRECATED getSubject() const;
-    QString Q_DECL_DEPRECATED getThread() const;
     /// \endcond
 
 private:
@@ -109,6 +104,7 @@ private:
     StampType m_stampType;
     State m_state;
 
+    bool m_attentionRequested;
     QString m_body;
     QString m_subject;
     QString m_thread;

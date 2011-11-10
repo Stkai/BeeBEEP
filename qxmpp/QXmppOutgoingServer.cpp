@@ -36,6 +36,7 @@
 class QXmppOutgoingServerPrivate
 {
 public:
+    QList<QByteArray> dataQueue;
     QString localDomain;
     QString localStreamKey;
     QString remoteDomain;
@@ -56,9 +57,14 @@ QXmppOutgoingServer::QXmppOutgoingServer(const QString &domain, QObject *parent)
     d(new QXmppOutgoingServerPrivate)
 {
     bool check;
+    Q_UNUSED(check);
 
     QSslSocket *socket = new QSslSocket(this);
     setSocket(socket);
+
+    check = connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),
+                    this, SLOT(socketError(QAbstractSocket::SocketError)));
+    Q_ASSERT(check);
 
     d->dialbackTimer = new QTimer(this);
     d->dialbackTimer->setInterval(5000);
@@ -121,6 +127,8 @@ void QXmppOutgoingServer::connectToHost(const QXmppSrvInfo &serviceInfo)
 
 void QXmppOutgoingServer::handleStart()
 {
+    QXmppStream::handleStart();
+
     QString data = QString("<?xml version='1.0'?><stream:stream"
         " xmlns='%1' xmlns:db='%2' xmlns:stream='%3' version='1.0'>").arg(
             ns_server,
@@ -173,7 +181,7 @@ void QXmppOutgoingServer::handleStanza(const QDomElement &stanza)
     }
     else if (ns == ns_tls)
     {
-        if (stanza.tagName() == "proceed")
+        if (stanza.tagName() == QLatin1String("proceed"))
         {
             debug("Starting encryption");
             socket()->startClientEncryption();
@@ -188,17 +196,24 @@ void QXmppOutgoingServer::handleStanza(const QDomElement &stanza)
         // check the request is valid
         if (response.from().isEmpty() ||
             response.to() != d->localDomain ||
-            response.type().isEmpty()) 
+            response.type().isEmpty())
         {
             warning("Invalid dialback response received");
             return;
         }
         if (response.command() == QXmppDialback::Result)
         {
-            if (response.type() == "valid")
+            if (response.type() == QLatin1String("valid"))
             {
                 info(QString("Outgoing server stream to %1 is ready").arg(response.from()));
                 d->ready = true;
+
+                // send queued data
+                foreach (const QByteArray &data, d->dataQueue)
+                    sendData(data);
+                d->dataQueue.clear();
+
+                // emit signal
                 emit connected();
             }
         }
@@ -245,6 +260,18 @@ void QXmppOutgoingServer::setVerify(const QString &id, const QString &key)
     d->verifyKey = key;
 }
 
+/// Sends or queues data until connected.
+///
+/// \param data
+
+void QXmppOutgoingServer::queueData(const QByteArray &data)
+{
+    if (isConnected())
+        sendData(data);
+    else
+        d->dataQueue.append(data);
+}
+
 /// Returns the remote server's domain.
 
 QString QXmppOutgoingServer::remoteDomain() const
@@ -285,5 +312,11 @@ void QXmppOutgoingServer::slotSslErrors(const QList<QSslError> &errors)
     for(int i = 0; i < errors.count(); ++i)
         warning(errors.at(i).errorString());
     socket()->ignoreSslErrors();
+}
+
+void QXmppOutgoingServer::socketError(QAbstractSocket::SocketError error)
+{
+    Q_UNUSED(error);
+    emit disconnected();
 }
 

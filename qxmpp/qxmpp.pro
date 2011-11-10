@@ -38,12 +38,12 @@ HEADERS = QXmppUtils.h \
     QXmppOutgoingClient.h \
     QXmppOutgoingServer.h \
     QXmppPacket.h \
+    QXmppPasswordChecker.h \
     QXmppPingIq.h \
     QXmppPresence.h \
     QXmppPubSubIq.h \
     QXmppReconnectionManager.h \
     QXmppRemoteMethod.h \
-    QXmppRoster.h \
     QXmppRosterIq.h \
     QXmppRosterManager.h \
     QXmppRpcIq.h \
@@ -64,11 +64,9 @@ HEADERS = QXmppUtils.h \
     QXmppTransferManager.h \
     QXmppVCardManager.h \
     QXmppVCardIq.h \
-    QXmppVCard.h \
     QXmppVersionIq.h \
-    QXmppVersionManager.h
-
-HEADERS += QXmppSrvInfo_p.h
+    QXmppVersionManager.h \
+	QXmppSrvInfo_p.h
 
 # Source files
 SOURCES += QXmppUtils.cpp \
@@ -104,6 +102,7 @@ SOURCES += QXmppUtils.cpp \
     QXmppOutgoingClient.cpp \
     QXmppOutgoingServer.cpp \
     QXmppPacket.cpp \
+    QXmppPasswordChecker.cpp \
     QXmppPingIq.cpp \
     QXmppPresence.cpp \
     QXmppPubSubIq.cpp \
@@ -136,6 +135,7 @@ DEFINES += QT_STATICPLUGIN
 HEADERS += \
     server/mod_disco.h \
     server/mod_ping.h \
+    server/mod_presence.h \
     server/mod_proxy65.h \
     server/mod_stats.h \
     server/mod_time.h \
@@ -143,9 +143,8 @@ HEADERS += \
 SOURCES += \
     server/mod_disco.cpp \
     server/mod_ping.cpp \
+    server/mod_presence.cpp \
     server/mod_proxy65.cpp \
     server/mod_stats.cpp \
     server/mod_time.cpp \
     server/mod_version.cpp
-
-

@@ -31,13 +31,17 @@
 #include "QXmppClientExtension.h"
 #include "QXmppLogger.h"
 
+class QHostAddress;
 class QXmppCallPrivate;
+class QXmppCallManager;
 class QXmppCallManagerPrivate;
 class QXmppIq;
 class QXmppJingleCandidate;
 class QXmppJingleIq;
 class QXmppJinglePayloadType;
-class QXmppRtpChannel;
+class QXmppPresence;
+class QXmppRtpAudioChannel;
+class QXmppRtpVideoChannel;
 
 /// \brief The QXmppCall class represents a Voice-Over-IP call to a remote party.
 ///
@@ -49,6 +53,13 @@ class QXmppRtpChannel;
 class QXmppCall : public QXmppLoggable
 {
     Q_OBJECT
+    Q_ENUMS(Direction State)
+    Q_FLAGS(QIODevice::OpenModeFlag QIODevice::OpenMode)
+    Q_PROPERTY(Direction direction READ direction CONSTANT)
+    Q_PROPERTY(QString jid READ jid CONSTANT)
+    Q_PROPERTY(State state READ state NOTIFY stateChanged)
+    Q_PROPERTY(QIODevice::OpenMode audioMode READ audioMode NOTIFY audioModeChanged)
+    Q_PROPERTY(QIODevice::OpenMode videoMode READ videoMode NOTIFY videoModeChanged)
 
 public:
     /// This enum is used to describe the direction of a call.
@@ -61,11 +72,10 @@ public:
     /// This enum is used to describe the state of a call.
     enum State
     {
-        OfferState = 0,         ///< The remote part is being called.
-        ConnectingState = 1,    ///< The call is being connected.
-        ActiveState = 2,        ///< The call is active.
-        DisconnectingState = 3, ///< The call is being disconnected.
-        FinishedState = 4,      ///< The call is finished.
+        ConnectingState = 0,    ///< The call is being connected.
+        ActiveState = 1,        ///< The call is active.
+        DisconnectingState = 2, ///< The call is being disconnected.
+        FinishedState = 3,      ///< The call is finished.
     };
 
     ~QXmppCall();
@@ -75,7 +85,10 @@ public:
     QString sid() const;
     QXmppCall::State state() const;
 
-    QXmppRtpChannel *audioChannel() const;
+    QXmppRtpAudioChannel *audioChannel() const;
+    QIODevice::OpenMode audioMode() const;
+    QXmppRtpVideoChannel *videoChannel() const;
+    QIODevice::OpenMode videoMode() const;
 
 signals:
     /// \brief This signal is emitted when a call is connected.
@@ -91,27 +104,31 @@ signals:
     /// instead use deleteLater().
     void finished();
 
-    /// \cond
-    void localCandidatesChanged();
-    /// \endcond
-
     /// \brief This signal is emitted when the remote party is ringing.
     void ringing();
 
     /// \brief This signal is emitted when the call state changes.
     void stateChanged(QXmppCall::State state);
 
+    /// \brief This signal is emitted when the audio channel changes.
+    void audioModeChanged(QIODevice::OpenMode mode);
+
+    /// \brief This signal is emitted when the video channel changes.
+    void videoModeChanged(QIODevice::OpenMode mode);
+
 public slots:
     void accept();
     void hangup();
+    void startVideo();
+    void stopVideo();
 
 private slots:
-    void terminate();
+    void localCandidatesChanged();
     void terminated();
     void updateOpenMode();
 
 private:
-    QXmppCall(const QString &jid, QXmppCall::Direction direction, QObject *parent);
+    QXmppCall(const QString &jid, QXmppCall::Direction direction, QXmppCallManager *parent);
 
     QXmppCallPrivate *d;
     friend class QXmppCallManager;
@@ -147,7 +164,10 @@ class QXmppCallManager : public QXmppClientExtension
 public:
     QXmppCallManager();
     ~QXmppCallManager();
-    QXmppCall *call(const QString &jid);
+    void setStunServer(const QHostAddress &host, quint16 port = 3478);
+    void setTurnServer(const QHostAddress &host, quint16 port = 3478);
+    void setTurnUser(const QString &user);
+    void setTurnPassword(const QString &password);
 
     /// \cond
     QStringList discoveryFeatures() const;
@@ -161,20 +181,27 @@ signals:
     /// To refuse the call, invoke the call's QXmppCall::hangup() method.
     void callReceived(QXmppCall *call);
 
+    void callStarted(QXmppCall *call);
+
+public slots:
+    QXmppCall *call(const QString &jid);
+
 protected:
     /// \cond
     void setClient(QXmppClient* client);
     /// \endcond
 
 private slots:
-    void callDestroyed(QObject *object);
-    void callStateChanged(QXmppCall::State state);
-    void iqReceived(const QXmppIq &iq);
-    void jingleIqReceived(const QXmppJingleIq &iq);
-    void localCandidatesChanged();
+    void _q_callDestroyed(QObject *object);
+    void _q_disconnected();
+    void _q_iqReceived(const QXmppIq &iq);
+    void _q_jingleIqReceived(const QXmppJingleIq &iq);
+    void _q_presenceReceived(const QXmppPresence &presence);
 
 private:
     QXmppCallManagerPrivate *d;
+    friend class QXmppCall;
+    friend class QXmppCallPrivate;
     friend class QXmppCallManagerPrivate;
 };
 

@@ -80,15 +80,27 @@ class QXmppVersionManager;
 class QXmppClient : public QXmppLoggable
 {
     Q_OBJECT
+    Q_ENUMS(Error State)
+    Q_PROPERTY(QXmppLogger* logger READ logger WRITE setLogger NOTIFY loggerChanged)
+    Q_PROPERTY(State state READ state NOTIFY stateChanged)
 
 public:
     /// An enumeration for type of error.
     /// Error could come due a TCP socket or XML stream or due to various stanzas.
     enum Error
     {
-        SocketError,        ///< Error due to TCP socket
-        KeepAliveError,     ///< Error due to no response to a keep alive
-        XmppStreamError,    ///< Error due to XML stream
+        NoError,            ///< No error.
+        SocketError,        ///< Error due to TCP socket.
+        KeepAliveError,     ///< Error due to no response to a keep alive.
+        XmppStreamError,    ///< Error due to XML stream.
+    };
+
+    /// This enumeration describes a client state.
+    enum State
+    {
+        DisconnectedState,  ///< Disconnected from the server.
+        ConnectingState,    ///< Trying to connect to the server.
+        ConnectedState,     ///< Connected to the server.
     };
 
     QXmppClient(QObject *parent = 0);
@@ -125,21 +137,19 @@ public:
     }
 
     void connectToServer(const QXmppConfiguration&,
-                         const QXmppPresence& initialPresence = 
+                         const QXmppPresence& initialPresence =
                          QXmppPresence());
-    void connectToServer(const QString &jid,
-                         const QString &password);
-    void disconnectFromServer();
     bool isConnected() const;
 
     QXmppPresence clientPresence() const;
     void setClientPresence(const QXmppPresence &presence);
 
     QXmppConfiguration &configuration();
-    QXmppLogger *logger();
+    QXmppLogger *logger() const;
     void setLogger(QXmppLogger *logger);
 
     QAbstractSocket::SocketError socketError();
+    State state() const;
     QXmppStanza::Error::Condition xmppStreamError();
 
     QXmppRosterManager& rosterManager();
@@ -148,43 +158,6 @@ public:
 
     QXmppReconnectionManager* reconnectionManager();
     bool setReconnectionManager(QXmppReconnectionManager*);
-
-    /// \cond
-    // FIXME: these methods are deprecated, their API is just too hard to read.
-    // If you need this level of customisation, work directly with QXmppConfiguration.
-    void Q_DECL_DEPRECATED connectToServer(const QString& host,
-                         const QString& user,
-                         const QString& password,
-                         const QString& domain,
-                         int port = 5222,
-                         const QXmppPresence& initialPresence =
-                         QXmppPresence());
-    void Q_DECL_DEPRECATED connectToServer(const QString& host,
-                         const QString& bareJid,
-                         const QString& password,
-                         int port = 5222,
-                         const QXmppPresence& initialPresence =
-                         QXmppPresence());
-
-    // deprecated in release 0.2.0
-    // deprecated accessors, use the form without "get" instead
-    const QXmppPresence Q_DECL_DEPRECATED & getClientPresence() const;
-    QXmppConfiguration Q_DECL_DEPRECATED & getConfiguration();
-    const QXmppConfiguration Q_DECL_DEPRECATED & getConfiguration() const;
-    QXmppReconnectionManager Q_DECL_DEPRECATED * getReconnectionManager();
-    QXmppRosterManager Q_DECL_DEPRECATED & getRoster();
-    QXmppVCardManager Q_DECL_DEPRECATED & getVCardManager();
-    QAbstractSocket::SocketError Q_DECL_DEPRECATED getSocketError();
-    QXmppStanza::Error::Condition Q_DECL_DEPRECATED getXmppStreamError();
-
-    /// was clashing with QObject::disconnect use disconnectFromServer() instead
-    void Q_DECL_DEPRECATED disconnect();
-
-    // deprecated methods, use setClientPresence(QXmppPresence) instead.
-    void Q_DECL_DEPRECATED setClientPresence(const QString& statusText);
-    void Q_DECL_DEPRECATED setClientPresence(QXmppPresence::Type presenceType);
-    void Q_DECL_DEPRECATED setClientPresence(QXmppPresence::Status::Type statusType);
-    /// \endcond
 
 signals:
 
@@ -220,23 +193,29 @@ signals:
     /// know the error.
     void error(QXmppClient::Error);
 
+    /// This signal is emitted when the logger changes.
+    void loggerChanged(QXmppLogger *logger);
+
     /// Notifies that an XMPP message stanza is received. The QXmppMessage
     /// parameter contains the details of the message sent to this client.
     /// In other words whenever someone sends you a message this signal is
     /// emitted.
-    void messageReceived(const QXmppMessage&);
+    void messageReceived(const QXmppMessage &message);
 
     /// Notifies that an XMPP presence stanza is received. The QXmppPresence
     /// parameter contains the details of the presence sent to this client.
     /// This signal is emitted when someone login/logout or when someone's status
     /// changes Busy, Idle, Invisible etc.
-    void presenceReceived(const QXmppPresence&);
+    void presenceReceived(const QXmppPresence &presence);
 
     /// Notifies that an XMPP iq stanza is received. The QXmppIq
     /// parameter contains the details of the iq sent to this client.
     /// IQ stanzas provide a structured request-response mechanism. Roster
     /// management, setting-getting vCards etc is done using iq stanzas.
-    void iqReceived(const QXmppIq&);
+    void iqReceived(const QXmppIq &iq);
+
+    /// This signal is emitted when the client state changes.
+    void stateChanged(State state);
 
     /// \cond
     // Deprecated in release 0.3.0
@@ -246,12 +225,17 @@ signals:
     /// \endcond
 
 public slots:
+    void connectToServer(const QString &jid,
+                         const QString &password);
+    void disconnectFromServer();
     bool sendPacket(const QXmppPacket&);
     void sendMessage(const QString& bareJid, const QString& message);
 
 private slots:
-    void slotElementReceived(const QDomElement &element, bool &handled);
-    void xmppConnected();
+    void _q_elementReceived(const QDomElement &element, bool &handled);
+    void _q_socketStateChanged(QAbstractSocket::SocketState state);
+    void _q_streamConnected();
+    void _q_streamDisconnected();
 
 private:
     QXmppClientPrivate * const d;

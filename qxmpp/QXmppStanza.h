@@ -104,13 +104,6 @@ public:
         /// \cond
         void parse(const QDomElement &element);
         void toXml(QXmlStreamWriter *writer) const;
-
-        // deprecated in release 0.2.0
-        // deprecated accessors, use the form without "get" instead
-        int Q_DECL_DEPRECATED getCode() const;
-        QString Q_DECL_DEPRECATED getText() const;
-        Condition Q_DECL_DEPRECATED getCondition() const;
-        Type Q_DECL_DEPRECATED getType() const;
         /// \endcond
 
     private:
@@ -128,7 +121,7 @@ public:
 
     QXmppStanza(const QString& from = QString(), const QString& to = QString());
     ~QXmppStanza();
-    
+
     QString to() const;
     void setTo(const QString&);
 
@@ -151,14 +144,6 @@ public:
     // FIXME : why is this needed?
     bool isErrorStanza();
 
-    // deprecated in release 0.2.0
-    // deprecated accessors, use the form without "get" instead
-    QString Q_DECL_DEPRECATED getTo() const;  
-    QString Q_DECL_DEPRECATED getFrom() const;
-    QString Q_DECL_DEPRECATED getId() const;    
-    QString Q_DECL_DEPRECATED getLang() const;    
-    QXmppStanza::Error Q_DECL_DEPRECATED getError() const;
-
 protected:
     void generateAndSetNextId();
     void parse(const QDomElement &element);
@@ -166,9 +151,9 @@ protected:
 
 private:
     static uint s_uniqeIdNo;
-    QString m_to;  
+    QString m_to;
     QString m_from;
-    QString m_id;    
+    QString m_id;
     QString m_lang;
     QXmppStanza::Error m_error;
     QXmppElementList m_extensions;

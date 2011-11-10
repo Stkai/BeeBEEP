@@ -56,7 +56,7 @@ public:
     void connectToHost();
     bool isConnected() const;
 
-    QAbstractSocket::SocketError socketError();
+    QSslSocket *socket() const { return QXmppStream::socket(); };
     QXmppStanza::Error::Condition xmppStreamError();
 
     QXmppConfiguration& configuration();
@@ -98,6 +98,7 @@ private slots:
 private:
     void sendAuthDigestMD5ResponseStep1(const QString& challenge);
     void sendAuthDigestMD5ResponseStep2(const QString& challenge);
+    void sendAuthXFacebookResponse(const QString& challenge);
     void sendNonSASLAuth(bool plaintext);
     void sendNonSASLAuthQuery();
 

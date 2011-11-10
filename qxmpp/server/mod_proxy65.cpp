@@ -160,14 +160,15 @@ class QXmppServerProxy65Private
 {
 public:
     // configuration
+    QString advertisedName;
+    QHostAddress advertisedAddress;
     QStringList allowedDomains;
     QString jid;
-    QHostAddress hostAddress;
     QString hostName;
     quint16 port;
 
     // state
-    QMap<QString, QTcpSocketPair*> pairs;
+    QHash<QString, QTcpSocketPair*> pairs;
     QXmppSocksServer *server;
 
     // statistics
@@ -180,6 +181,9 @@ public:
 QXmppServerProxy65::QXmppServerProxy65()
     : d(new QXmppServerProxy65Private)
 {
+    bool check;
+    Q_UNUSED(check);
+
     d->port = 7777;
     d->server = new QXmppSocksServer(this);
 
@@ -188,18 +192,38 @@ QXmppServerProxy65::QXmppServerProxy65()
     d->totalBytes = 0;
     d->totalTransfers = 0;
 
-    bool check = connect(d->server, SIGNAL(newConnection(QTcpSocket*, const QString&, quint16)),
-        this, SLOT(slotSocketConnected(QTcpSocket*, const QString &, quint16)));
+    check = connect(d->server, SIGNAL(newConnection(QTcpSocket*,QString,quint16)),
+                    this, SLOT(slotSocketConnected(QTcpSocket*,QString,quint16)));
     Q_ASSERT(check);
 
     check = connect(d->statisticsTimer, SIGNAL(timeout()),
-        this, SLOT(slotUpdateStatistics()));
+                    this, SLOT(slotUpdateStatistics()));
     Q_ASSERT(check);
 }
 
 QXmppServerProxy65::~QXmppServerProxy65()
 {
     delete d;
+}
+
+/// Returns the host which is advertised to clients for SOCKS5 connections.
+///
+/// You should only care about this if the host which the clients will see is
+/// different from \a host().
+
+QString QXmppServerProxy65::advertisedHost() const
+{
+    return d->advertisedName;
+}
+
+/// Sets the host which is advertised to clients for SOCKS5 connections.
+///
+/// You should only care about this if the host which the clients will see is
+/// different from \a host().
+
+void QXmppServerProxy65::setAdvertisedHost(const QString &advertisedHost)
+{
+    d->advertisedName = advertisedHost;
 }
 
 /// Returns the XMPP domains which are allowed to use the proxy.
@@ -281,10 +305,8 @@ QStringList QXmppServerProxy65::discoveryItems() const
     return QStringList() << d->jid;
 }
 
-bool QXmppServerProxy65::handleStanza(QXmppStream *stream, const QDomElement &element)
+bool QXmppServerProxy65::handleStanza(const QDomElement &element)
 {
-    Q_UNUSED(stream);
-
     if (element.attribute("to") != d->jid)
         return false;
 
@@ -338,7 +360,7 @@ bool QXmppServerProxy65::handleStanza(QXmppStream *stream, const QDomElement &el
 
             QXmppByteStreamIq::StreamHost streamHost;
             streamHost.setJid(d->jid);
-            streamHost.setHost(d->hostAddress);
+            streamHost.setHost(d->advertisedAddress);
             streamHost.setPort(d->port);
             streamHosts.append(streamHost);
 
@@ -386,10 +408,11 @@ bool QXmppServerProxy65::start()
     if (d->jid.isEmpty())
         d->jid = "proxy." + server()->domain();
 
-    // determine address
+    // determine bind address
     if (d->hostName.isEmpty())
         d->hostName = server()->domain();
-    if (!d->hostAddress.setAddress(d->hostName))
+    QHostAddress bindAddress;
+    if (!bindAddress.setAddress(d->hostName))
     {
         QHostInfo hostInfo = QHostInfo::fromName(d->hostName);
         if (hostInfo.addresses().isEmpty())
@@ -397,11 +420,27 @@ bool QXmppServerProxy65::start()
             warning(QString("Could not lookup host %1").arg(d->hostName));
             return false;
         }
-        d->hostAddress = hostInfo.addresses().first();
+        bindAddress = hostInfo.addresses().first();
+    }
+
+    // determine advertised address
+    if (d->advertisedName.isEmpty()) {
+        d->advertisedName = d->hostName;
+        d->advertisedAddress = bindAddress;
+    }
+    else if (!d->advertisedAddress.setAddress(d->advertisedName))
+    {
+        QHostInfo hostInfo = QHostInfo::fromName(d->advertisedName);
+        if (hostInfo.addresses().isEmpty())
+        {
+            warning(QString("Could not lookup host %1").arg(d->hostName));
+            return false;
+        }
+        d->advertisedAddress = hostInfo.addresses().first();
     }
 
     // start listening
-    if (!d->server->listen(d->hostAddress, d->port))
+    if (!d->server->listen(bindAddress, d->port))
         return false;
 
     // start statistics update
@@ -468,12 +507,16 @@ void QXmppServerProxy65::setStatistics(const QVariantMap &statistics)
 void QXmppServerProxy65::slotSocketConnected(QTcpSocket *socket, const QString &hostName, quint16 port)
 {
     Q_UNUSED(port);
-    bool check;
+
     QTcpSocketPair *pair = d->pairs.value(hostName);
     if (!pair)
     {
+        bool check;
+        Q_UNUSED(check);
+
         pair = new QTcpSocketPair(hostName, this);
-        check = connect(pair, SIGNAL(finished()), this, SLOT(slotPairFinished()));
+        check = connect(pair, SIGNAL(finished()),
+                        this, SLOT(slotPairFinished()));
         Q_ASSERT(check);
         d->pairs.insert(hostName, pair);
     }

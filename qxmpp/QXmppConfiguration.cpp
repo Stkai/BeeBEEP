@@ -22,6 +22,7 @@
  */
 
 
+#include <QSslSocket>
 #include "QXmppConfiguration.h"
 #include "QXmppUtils.h"
 
@@ -33,13 +34,14 @@ QXmppConfiguration::QXmppConfiguration() : m_port(5222),
                 m_sendIntialPresence(true),
                 m_sendRosterRequest(true),
                 m_keepAliveInterval(60),
-                m_keepAliveTimeout(0),
+                m_keepAliveTimeout(20),
                 m_autoReconnectionEnabled(true),
                 m_useSASLAuthentication(true),
                 m_ignoreSslErrors(true),
                 m_streamSecurityMode(QXmppConfiguration::TLSEnabled),
                 m_nonSASLAuthMechanism(QXmppConfiguration::NonSASLDigest),
-                m_SASLAuthMechanism(QXmppConfiguration::SASLDigestMD5)
+                m_SASLAuthMechanism(QXmppConfiguration::SASLDigestMD5),
+                m_caCertificates(QSslSocket::defaultCaCertificates())
 {
 
 }
@@ -226,6 +228,41 @@ QString QXmppConfiguration::jidBare() const
         return m_domain;
     else
         return m_user+"@"+m_domain;
+}
+
+/// Returns the access token used for X-FACEBOOK-PLATFORM authentication.
+
+QString QXmppConfiguration::facebookAccessToken() const
+{
+    return m_facebookAccessToken;
+}
+
+/// Sets the access token used for X-FACEBOOK-PLATFORM authentication.
+///
+/// This token is returned by Facebook at the end of the OAuth authentication
+/// process.
+///
+/// \param accessToken
+
+void QXmppConfiguration::setFacebookAccessToken(const QString& accessToken)
+{
+    m_facebookAccessToken = accessToken;
+}
+
+/// Returns the application ID used for X-FACEBOOK-PLATFORM authentication.
+
+QString QXmppConfiguration::facebookAppId() const
+{
+    return m_facebookAppId;
+}
+
+/// Sets the application ID used for X-FACEBOOK-PLATFORM authentication.
+///
+/// \param appId
+
+void QXmppConfiguration::setFacebookAppId(const QString& appId)
+{
+    m_facebookAppId = appId;
 }
 
 /// Returns the auto-accept-subscriptions-request configuration.
@@ -416,6 +453,8 @@ int QXmppConfiguration::keepAliveInterval() const
 ///
 /// If set to zero or a value larger than the keep alive interval,
 /// no timeout will occur.
+///
+/// The default value is 20 seconds.
 
 void QXmppConfiguration::setKeepAliveTimeout(int secs)
 {
@@ -423,101 +462,25 @@ void QXmppConfiguration::setKeepAliveTimeout(int secs)
 }
 
 /// Returns the keep alive timeout in seconds.
+///
+/// The default value is 20 seconds.
 
 int QXmppConfiguration::keepAliveTimeout() const
 {
     return m_keepAliveTimeout;
 }
 
-// obsolete
+/// Specifies a list of trusted CA certificates.
 
-QString QXmppConfiguration::passwd() const
+void QXmppConfiguration::setCaCertificates(const QList<QSslCertificate> &caCertificates)
 {
-    return m_password;
+    m_caCertificates = caCertificates;
 }
 
-void QXmppConfiguration::setPasswd(const QString& password)
-{
-    m_password = password;
-}
+/// Returns the a list of trusted CA certificates.
 
-QString QXmppConfiguration::getHost() const
+QList<QSslCertificate> QXmppConfiguration::caCertificates() const
 {
-    return m_host;
-}
-
-QString QXmppConfiguration::getDomain() const
-{
-    return m_domain;
-}
-
-int QXmppConfiguration::getPort() const
-{
-    return m_port;
-}
-
-QString QXmppConfiguration::getUser() const
-{
-    return m_user;
-}
-
-QString QXmppConfiguration::getPasswd() const
-{
-    return m_password;
-}
-
-QString QXmppConfiguration::getResource() const
-{
-    return m_resource;
-}
-
-QString QXmppConfiguration::getJid() const
-{
-    return jid();
-}
-
-QString QXmppConfiguration::getJidBare() const
-{
-    return jidBare();
-}
-
-bool QXmppConfiguration::getAutoAcceptSubscriptions() const
-{
-    return m_autoAcceptSubscriptions;
-}
-
-bool QXmppConfiguration::getAutoReconnectionEnabled() const
-{
-    return m_autoReconnectionEnabled;
-}
-
-bool QXmppConfiguration::getUseSASLAuthentication() const
-{
-    return m_useSASLAuthentication;
-}
-
-bool QXmppConfiguration::getIgnoreSslErrors() const
-{
-    return m_ignoreSslErrors;
-}
-
-QXmppConfiguration::StreamSecurityMode QXmppConfiguration::getStreamSecurityMode() const
-{
-    return m_streamSecurityMode;
-}
-
-QXmppConfiguration::NonSASLAuthMechanism QXmppConfiguration::getNonSASLAuthMechanism() const
-{
-    return m_nonSASLAuthMechanism;
-}
-
-QXmppConfiguration::SASLAuthMechanism QXmppConfiguration::getSASLAuthMechanism() const
-{
-    return m_SASLAuthMechanism;
-}
-
-QNetworkProxy QXmppConfiguration::getNetworkProxy() const
-{
-    return m_networkProxy;
+    return m_caCertificates;
 }
 

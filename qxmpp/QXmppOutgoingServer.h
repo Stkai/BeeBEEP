@@ -24,6 +24,8 @@
 #ifndef QXMPPOUTGOINGSERVER_H
 #define QXMPPOUTGOINGSERVER_H
 
+#include <QAbstractSocket>
+
 #include "QXmppStream.h"
 
 class QSslError;
@@ -44,7 +46,6 @@ public:
     QXmppOutgoingServer(const QString &domain, QObject *parent);
     ~QXmppOutgoingServer();
 
-    void connectToHost(const QString &domain);
     bool isConnected() const;
 
     QString localStreamKey() const;
@@ -64,10 +65,15 @@ protected:
     void handleStanza(const QDomElement &stanzaElement);
     /// \endcond
 
+public slots:
+    void connectToHost(const QString &domain);
+    void queueData(const QByteArray &data);
+
 private slots:
     void connectToHost(const QXmppSrvInfo &serviceInfo);
     void sendDialback();
     void slotSslErrors(const QList<QSslError> &errors);
+    void socketError(QAbstractSocket::SocketError error);
 
 private:
     Q_DISABLE_COPY(QXmppOutgoingServer)

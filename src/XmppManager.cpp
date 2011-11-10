@@ -370,7 +370,6 @@ User::Status XmppManager::statusFromPresence( QXmppPresence::Status::Type xmpp_p
   switch( xmpp_presence_status_type )
   {
   case QXmppPresence::Status::Offline:
-  case QXmppPresence::Status::Invisible:
     return User::Offline;
   case QXmppPresence::Status::Online:
   case QXmppPresence::Status::Chat:

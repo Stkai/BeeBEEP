@@ -55,10 +55,6 @@ bool QXmppVCardManager::handleStanza(const QDomElement &element)
 
         emit vCardReceived(vCardIq);
 
-    // deprecated in 0.3.0 release
-        QXmppVCard oldVCard(vCardIq);
-        emit vCardReceived(oldVCard);
-
         return true;
     }
 
@@ -114,7 +110,7 @@ QString QXmppVCardManager::requestClientVCard()
 ///
 /// \return bool
 ///
-bool QXmppVCardManager::isClientVCardReceived()
+bool QXmppVCardManager::isClientVCardReceived() const
 {
     return m_isClientVCardReceived;
 }

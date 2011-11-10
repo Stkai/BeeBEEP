@@ -42,7 +42,7 @@ QString getImageType(const QByteArray &contents)
     else if (contents.contains("/* XPM */"))
         return "image/x-xpm";
     else if (contents.contains("<?xml") && contents.contains("<svg"))
-        return "image/svg+xml"; 
+        return "image/svg+xml";
     else if (contents.startsWith("\xFF\xD8\xFF\xE0"))
         return "image/jpeg";
     return "image/unknown";
@@ -306,20 +306,5 @@ void QXmppVCardIq::toXmlElementFromChild(QXmlStreamWriter *writer) const
     }
 
     writer->writeEndElement();
-}
-
-QString QXmppVCardIq::getFullName() const
-{
-    return m_fullName;
-}
-
-QString QXmppVCardIq::getNickName() const
-{
-    return m_nickName;
-}
-
-const QByteArray& QXmppVCardIq::getPhoto() const
-{
-    return m_photo;
 }
 

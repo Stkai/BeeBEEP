@@ -26,6 +26,7 @@
 #define QXMPPPRESENCE_H
 
 #include "QXmppStanza.h"
+#include "QXmppMucIq.h"
 
 /// \brief The QXmppPresence class represents an XMPP presence stanza.
 ///
@@ -72,10 +73,9 @@ public:
             Offline = 0,
             Online,      ///< The entity or resource is online.
             Away,        ///< The entity or resource is temporarily away.
-            XA,          ///< The entity or resource is away for an extended period. 
+            XA,          ///< The entity or resource is away for an extended period.
             DND,         ///< The entity or resource is busy ("Do Not Disturb").
             Chat,        ///< The entity or resource is actively interested in chatting.
-            Invisible
         };
 
         Status(QXmppPresence::Status::Type type = QXmppPresence::Status::Online,
@@ -93,12 +93,6 @@ public:
         /// \cond
         void parse(const QDomElement &element);
         void toXml(QXmlStreamWriter *writer) const;
-
-        // deprecated in release 0.2.0
-        // deprecated accessors, use the form without "get" instead
-        int Q_DECL_DEPRECATED getPriority() const;
-        QString Q_DECL_DEPRECATED getStatusText() const;
-        QXmppPresence::Status::Type Q_DECL_DEPRECATED getType() const;
         /// \endcond
 
     private:
@@ -110,7 +104,7 @@ public:
         int m_priority;
     };
 
-    QXmppPresence(QXmppPresence::Type type = QXmppPresence::Available, 
+    QXmppPresence(QXmppPresence::Type type = QXmppPresence::Available,
         const QXmppPresence::Status& status = QXmppPresence::Status());
     ~QXmppPresence();
 
@@ -126,12 +120,21 @@ public:
     void toXml(QXmlStreamWriter *writer) const;
     /// \endcond
 
+    // XEP-0045: Multi-User Chat
+    QXmppMucItem mucItem() const;
+    void setMucItem(const QXmppMucItem &item);
+
+    QList<int> mucStatusCodes() const;
+    void setMucStatusCodes(const QList<int> &codes);
+
+    /// XEP-0153: vCard-Based Avatars
     QByteArray photoHash() const;
     void setPhotoHash(const QByteArray&);
 
     VCardUpdateType vCardUpdateType() const;
     void setVCardUpdateType(VCardUpdateType type);
 
+    // XEP-0115: Entity Capabilities
     QString capabilityHash() const;
     void setCapabilityHash(const QString&);
 
@@ -142,14 +145,6 @@ public:
     void setCapabilityVer(const QByteArray&);
 
     QStringList capabilityExt() const;
-
-    // deprecated in release 0.2.0
-    // deprecated accessors, use the form without "get" instead
-    /// \cond
-    QXmppPresence::Type Q_DECL_DEPRECATED getType() const;
-    QXmppPresence::Status Q_DECL_DEPRECATED & getStatus();
-    const QXmppPresence::Status Q_DECL_DEPRECATED & getStatus() const;
-    /// \endcond
 
 private:
     QString getTypeStr() const;
@@ -172,6 +167,10 @@ private:
     QByteArray m_capabilityVer;
     // Legacy XEP-0115: Entity Capabilities
     QStringList m_capabilityExt;
+
+    // XEP-0045: Multi-User Chat
+    QXmppMucItem m_mucItem;
+    QList<int> m_mucStatusCodes;
 };
 
 #endif // QXMPPPRESENCE_H
