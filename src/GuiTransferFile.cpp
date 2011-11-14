@@ -52,6 +52,11 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
 }
 
+QSize GuiTransferFile::sizeHint() const
+{
+  return QSize( 500, 80 );
+}
+
 void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
   QHeaderView* hv = header();

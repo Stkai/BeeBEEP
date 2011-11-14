@@ -17,16 +17,39 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: RainbowTextMarker.h 101 2011-09-19 11:59:48Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef NUMBERTEXTMARKER_H
+#define NUMBERTEXTMARKER_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.6.1";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 128;
+#include "numbertextmarker_global.h"
+#include "Interfaces.h"
+#include <QObject>
+#include <QStringList>
 
-#endif // BEEBEEP_VERSION_H
+
+class NUMBERTEXTMARKERSHARED_EXPORT NumberTextMarker : public QObject, public TextMarkerInterface
+{
+  Q_OBJECT
+  Q_INTERFACES( TextMarkerInterface )
+
+public:
+  NumberTextMarker();
+
+  QString name() const;
+  QString version() const;
+  QString help() const;
+  QString author() const;
+  QIcon icon() const;
+  QString iconFileName() const;
+  int priority() const;
+  QString coreVersion() const;
+
+  bool parseBeforeSending() const;
+  bool parseText( QString* );
+
+};
+
+#endif // RAINBOWTEXTMARKER_H

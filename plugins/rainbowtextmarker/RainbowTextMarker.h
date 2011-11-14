@@ -47,6 +47,7 @@ public:
   int priority() const;
   QString coreVersion() const;
 
+  bool parseBeforeSending() const;
   bool parseText( QString* );
 
 };

@@ -61,5 +61,6 @@
         <file>images/user-delete.png</file>
         <file>images/network-connected.png</file>
         <file>images/network-disconnected.png</file>
+        <file>images/secure.png</file>
     </qresource>
 </RCC>

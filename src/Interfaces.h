@@ -56,6 +56,7 @@ protected:
 class TextMarkerInterface : public PluginInterface
 {
 public:
+  virtual bool parseBeforeSending() const = 0;
   // FALSE break the loop
   virtual bool parseText( QString* ) = 0;
 

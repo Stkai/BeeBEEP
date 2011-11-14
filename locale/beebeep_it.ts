@@ -73,15 +73,15 @@
     </message>
     <message>
         <source>%1 Unable to send file: user is not connected.</source>
-        <translation>%1 Impossibile inviare il file: l&apos;utente non è connesso.</translation>
+        <translation type="obsolete">%1 Impossibile inviare il file: l&apos;utente non è connesso.</translation>
     </message>
     <message>
         <source>%1 Unable to send file: bind address/port failed.</source>
-        <translation>%1 Impossibile inviare il file: controlla le impostazioni del tuo firewall.</translation>
+        <translation type="obsolete">%1 Impossibile inviare il file: controlla le impostazioni del tuo firewall.</translation>
     </message>
     <message>
         <source>%1 You send the file to %2: %3.</source>
-        <translation>%1 Stai inviando il file a %2: %3.</translation>
+        <translation type="obsolete">%1 Stai inviando il file a %2: %3.</translation>
     </message>
     <message>
         <source>%1 You have refused to download %2 from %3.</source>
@@ -150,6 +150,22 @@
     <message>
         <source>%1 has updated the profile.</source>
         <translation>%1 ha aggiornato il suo profilo.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send the file: user is not connected.</source>
+        <translation>%1 Impossibile inviare il file: l&apos;utente non è connesso.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send the file: bind address/port failed.</source>
+        <translation>%1 Impossibile inviare il file: non è stato possibile creare una porta di comunicazione.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send the file %2 to %3.</source>
+        <translation>%1 Impossibile inviare il file %2 a %3.</translation>
+    </message>
+    <message>
+        <source>%1 You send the file %2 to %3.</source>
+        <translation>%1 Stai inviando il file %2 a %3.</translation>
     </message>
 </context>
 <context>
@@ -242,6 +258,10 @@
     <message>
         <source>Nobody</source>
         <translation>Nessuno</translation>
+    </message>
+    <message>
+        <source>%1 Secure Mode</source>
+        <translation>Connessione Sicura di %1</translation>
     </message>
 </context>
 <context>
@@ -654,7 +674,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>User %1 not found.</source>
-        <translation>L&apos;utente %1 non è stato trovato.</translation>
+        <translation type="obsolete">L&apos;utente %1 non è stato trovato.</translation>
     </message>
     <message>
         <source>%1 - Send a file to %2</source>
@@ -808,6 +828,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>You are connected to %1. Do you want to disconnect?</source>
         <translation>Vuoi disconnetterti da %1?</translation>
+    </message>
+    <message>
+        <source>Unable to connect to %1. Plugin is not present or is not enabled.</source>
+        <translation>Impossibile connettersi a %1. Il plugin non è presente o non è abilitato.</translation>
     </message>
 </context>
 <context>
@@ -1254,6 +1278,17 @@ il file %2 (%3)?</translation>
     <message>
         <source>You can connect to the Jabber.org server.</source>
         <translation>Puoi connetterti al server di Jabber.org.</translation>
+    </message>
+</context>
+<context>
+    <name>NumberTextMarker</name>
+    <message>
+        <source>Number Text Marker</source>
+        <translation>Cifratura di Stringhe</translation>
+    </message>
+    <message>
+        <source>If you want to encode your message with numbers write a #text to encode# .</source>
+        <translation>Se vuoi cifrare il tuo messaggio con dei numeri scrivi #testo da cifrare# .</translation>
     </message>
 </context>
 <context>

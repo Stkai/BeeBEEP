@@ -17,16 +17,19 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: rainbowtextmarker_global.h 96 2011-09-13 17:47:13Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef NUMBERTEXTMAKER_GLOBAL_H
+#define NUMBERTEXTMAKER_GLOBAL_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.6.1";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 128;
+#include <QtCore/qglobal.h>
 
-#endif // BEEBEEP_VERSION_H
+#if defined(NUMBERTEXTMARKER_LIBRARY)
+#  define NUMBERTEXTMARKERSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define NUMBERTEXTMARKERSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // NUMBERTEXTMAKER_GLOBAL_H

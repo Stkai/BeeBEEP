@@ -40,6 +40,7 @@ public:
   enum ConnectionState { Offline, InProgress, Online };
 
   explicit XmppClient( QObject* );
+  void setupManagers();
 
   inline const QString& service() const;
   inline void setService( const QString& );

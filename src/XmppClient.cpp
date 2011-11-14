@@ -37,14 +37,18 @@ XmppClient::XmppClient( QObject* parent )
   setService( "Jabber" );
 
   mp_transferManager = new QXmppTransferManager;
-  mp_transferManager->setSupportedMethods( QXmppTransferJob::InBandMethod );
-  addExtension( mp_transferManager );
 
-  connect( mp_transferManager, SIGNAL( fileReceived( QXmppTransferJob* ) ), this, SLOT( checkFileTransferRequest( QXmppTransferJob* ) ) );
   connect( &(rosterManager()), SIGNAL( rosterReceived() ), this, SIGNAL( rosterReceived() ) );
   connect( &(rosterManager()), SIGNAL( rosterChanged( const QString& ) ), this, SIGNAL( rosterChanged( const QString& ) ) );
   connect( &(rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SIGNAL( presenceChanged( const QString&, const QString& ) ) );
   connect( &(vCardManager()), SIGNAL( vCardReceived( const QXmppVCardIq& ) ), this, SIGNAL( vCardReceived( const QXmppVCardIq& ) ) );
+}
+
+void XmppClient::setupManagers()
+{
+  mp_transferManager->setSupportedMethods( QXmppTransferJob::InBandMethod );
+  addExtension( mp_transferManager );
+  connect( mp_transferManager, SIGNAL( fileReceived( QXmppTransferJob* ) ), this, SLOT( checkFileTransferRequest( QXmppTransferJob* ) ) );
 }
 
 void XmppClient::sendFile( const QString& bare_jid, const FileInfo& fi )

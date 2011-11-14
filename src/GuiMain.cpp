@@ -187,7 +187,7 @@ void GuiMain::showAbout()
                       .arg( Settings::instance().version( true ) )
                       .arg( tr( "developed by Marco Mastroddi" ) )
                       .arg( tr( "e-mail: marco.mastroddi@gmail.com") )
-                      .arg( QString( "XMPP: QXmpp 0.3.0 (Manjeet Dahiya)") )
+                      .arg( QString( "XMPP: QXmpp 0.3.91 (Manjeet Dahiya)") )
                       );
 
 }

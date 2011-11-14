@@ -52,6 +52,7 @@ public:
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
   ChatMessageData dataFromChatMessage( const Message& );
+  int protoVersion( const Message& ) const;
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
   QByteArray localUserStatusMessage() const;

@@ -102,7 +102,7 @@ inline void  User::setVCard( const VCard& new_value ) { m_vCard = new_value; }
 inline const VCard& User::vCard() const { return m_vCard; }
 inline void User::setBareJid( const QString& new_value ) { m_bareJid = new_value; }
 inline const QString& User::bareJid() const { return m_bareJid; }
-inline QString User::path() const { return isOnLan() ? QString( "%1@%2:%3" ).arg( name(), m_hostAddress.toString(), QString::number( m_hostPort ) ) :
+inline QString User::path() const { return isOnLan() ? QString( "%1@%2:%3" ).arg( m_bareJid, m_hostAddress.toString(), QString::number( m_hostPort ) ) :
                                                        QString( "%1:%2" ).arg( m_service, m_bareJid ); }
 inline void User::setService( const QString& new_value ) { m_service = new_value; }
 inline const QString& User::service() const { return m_service; }

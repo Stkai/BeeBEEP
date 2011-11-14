@@ -61,6 +61,7 @@ XmppClient* XmppManager::createClient( const QString& client_service, const QStr
   if( mp_client )
     return mp_client;
   mp_client = new XmppClient( this );
+  mp_client->setupManagers();
   mp_client->setService( client_service );
   mp_client->setIconPath( client_icon_path );
 

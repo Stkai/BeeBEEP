@@ -185,6 +185,11 @@ QByteArray Protocol::broadcastMessage() const
   return fromMessage( m );
 }
 
+int Protocol::protoVersion( const Message& m ) const
+{
+  return m.id() <= ID_HELLO_MESSAGE ? 1 : m.id();
+}
+
 QByteArray Protocol::helloMessage() const
 {
   QStringList data_list;
@@ -192,6 +197,7 @@ QByteArray Protocol::helloMessage() const
   data_list << Settings::instance().localUser().name();
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
+  data_list << Settings::instance().localUser().bareJid();
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().hash() );
   return fromMessage( m );
@@ -331,8 +337,14 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
   QString user_status_description = sl.at( 3 );
 
-  /* Skip other data */
+  QString user_bare_jid = "";
   if( sl.size() > 4 )
+    user_bare_jid = sl.at( 4 );
+  else
+    user_bare_jid = user_name;
+
+  /* Skip other data */
+  if( sl.size() > 5 )
     qWarning() << "HELLO message contains more data. Skip it";
 
   /* Create User */
@@ -342,6 +354,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setHostPort( listener_port );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
+  u.setBareJid( user_bare_jid );
   return u;
 }
 

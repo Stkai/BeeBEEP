@@ -192,17 +192,7 @@ QString FormatHtmlText( const QString& text )
   if( last_semicolon_index >= 0 )
     text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
 
-  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
-  {
-    if( !text_marker->isEnabled() )
-      continue;
-
-    if( !text_marker->parseText( &text_formatted ) )
-    {
-      qDebug() << text_marker->name() << "has break text marker plugins loop";
-      break;
-    }
-  }
+  PluginManager::instance().parseText( &text_formatted, false );
 
   text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
@@ -277,6 +267,19 @@ bool GuiChat::setChatId( VNumber chat_id )
     return false;
   m_chatId = c.id();
   m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
+
+  bool is_secure = c.isDefault() || (m_users.toList().size() >= 1 && m_users.toList().last().isOnLan() && c.isPrivateForUser( m_users.toList().last().id() ));
+  if( is_secure )
+  {
+    mp_lPixSecure->setPixmap( QPixmap( ":/images/secure.png" ) );
+    mp_lPixSecure->setToolTip( tr( "%1 Secure Mode" ).arg( Settings::instance().programName() ) );
+  }
+  else
+  {
+    mp_lPixSecure->setPixmap( QPixmap() );
+    mp_lPixSecure->setToolTip( "" );
+  }
+
   setChatUsers();
   QString html_text;
   foreach( ChatMessage cm, c.messages() )

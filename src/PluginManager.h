@@ -44,6 +44,8 @@ public:
 
   ServiceInterface* service( const QString& ) const;
 
+  bool parseText( QString*, bool before_sending ) const;
+
   static PluginManager& instance()
   {
     if( !mp_instance )

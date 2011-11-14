@@ -17,148 +17,103 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: NumberTextMarker.cpp 101 2011-09-19 11:59:48Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
 #include <QtPlugin>
 #include <QtDebug>
 #include <QtCore/qmath.h>
-#include "RainbowTextMarker.h"
+#include "NumberTextMarker.h"
 #include "Version.h"
 
 
-#undef COLOR_GRADIENT_DEBUG
-
-const QString open_cmd = " ~";
-const QString close_cmd = "~ ";
+const QString open_cmd = " #";
+const QString close_cmd = "# ";
 
 
-QString RainbowTextMarker::name() const
+QString NumberTextMarker::name() const
 {
-  return tr( "Rainbow Text Marker" );
+  return tr( "Number Text Marker" );
 }
 
-QString RainbowTextMarker::version() const
+QString NumberTextMarker::version() const
 {
   return "0.9b";
 }
 
-QString RainbowTextMarker::author() const
+QString NumberTextMarker::author() const
 {
   return "Marco Mastroddi";
 }
 
-QString RainbowTextMarker::help() const
+QString NumberTextMarker::help() const
 {
-  return tr( "If you want a <font color=#FF0000>r</font><font color=#FF8000>a</font><font color=#FFff00>i</font><font color=#7Fff00>n</font><font color=#00ff00>b</font><font color=#00ff80>o</font><font color=#00ffff>w</font><font color=#0080ff> </font><font color=#0000ff>t</font><font color=#7F00ff>e</font><font color=#FF00ff>x</font><font color=#FF0080>t</font> write a ~rainbow text~ ." );
+  return tr( "If you want to encode your message with numbers write a #text to encode# ." );
 }
 
-QIcon RainbowTextMarker::icon() const
+QIcon NumberTextMarker::icon() const
 {
   return QIcon( iconFileName() );
 }
 
-QString RainbowTextMarker::iconFileName() const
+QString NumberTextMarker::iconFileName() const
 {
-  return QLatin1String( ":/plugins/rainbow.png" );
+  return QLatin1String( ":/plugins/number.png" );
 }
 
-int RainbowTextMarker::priority() const
+int NumberTextMarker::priority() const
 {
   return 1000;
 }
 
-QString RainbowTextMarker::coreVersion() const
+QString NumberTextMarker::coreVersion() const
 {
   return QString( BEEBEEP_VERSION );
 }
 
-bool RainbowTextMarker::parseBeforeSending() const
+bool NumberTextMarker::parseBeforeSending() const
 {
-  return false;
-}
+  return true;
+} 
 
 namespace
 {
 
-  QColor GetRainbowColor( qreal k, bool reverse_color )
+  QChar GetCharToNumber( const QChar& c_to_parse )
   {
-    qreal r = 127.0 + 127.0 * qCos( k - 0.5 );
-    qreal g = 127.0 + 127.0 * qCos( k - 2.5 );
-    qreal b = 127.0 + 127.0 * qCos( k - 4.5 );
-
-    if( reverse_color )
+    char c = c_to_parse.toLower().toLatin1();
+    switch( c )
     {
-      r = 255.0 - r;
-      g = 255.0 - g;
-      b = 255.0 - b;
+    case 'a':
+      return '4';
+    case 'z':
+      return '2';
+    case 'o':
+      return '0';
+    case 'e':
+      return '3';
+    case 'i':
+      return '1';
+    case 's':
+      return '5';
+    case 't':
+      return '7';
+    default:
+      return c_to_parse;
     }
-
-#if defined( COLOR_GRADIENT_DEBUG )
-    qDebug() << "RGB color:" << r << g << b;
-#endif
-
-    // Make fully saturated
-    qreal min = qMin( r, qMin( g, b ) );
-    // Subtract the minimum from all values so that the darkest becomes zero
-    r -= min;
-    g -= min;
-    b -= min;
-
-#if defined( COLOR_GRADIENT_DEBUG )
-    qDebug() << "RGB color (satured):" << r << g << b;
-#endif
-
-    // Now find the highest value
-    qreal max = qMax( r, qMax( g, b ) );
-
-    // Scale the RGB values up so that the brightest equals the brightness input value.
-    max = 255.0 / max;
-    r *= max;
-    g *= max;
-    b *= max;
-
-#if defined( COLOR_GRADIENT_DEBUG )
-    qDebug() << "RGB color (brigth and contrast):" << r << g << b;
-#endif
-
-    // Adjust for brightness and contrast
-    /*
-    qreal tekBright = 200.0;
-    qreal tekContrast = 255.0;
-
-    max = (tekBright / 255.0) * (tekContrast / 255.0);
-    min = (255.0 - tekContrast) * (tekBright / 255.0);
-
-    r = r*max + min;
-    g = g*max + min;
-    b = b*max + min;
-*/
-    int color_r = qRound( qMax( 0.0, qMin( 255.0, r ) ) );
-    int color_g = qRound( qMax( 0.0, qMin( 255.0, g ) ) );
-    int color_b = qRound( qMax( 0.0, qMin( 255.0, b ) ) );
-
- #if defined( COLOR_GRADIENT_DEBUG )
-    qDebug() << "RGB color (end):" << color_r << color_g << color_b;
-#endif
-
-    QColor color( color_r, color_g, color_b );
-#if defined( COLOR_GRADIENT_DEBUG )
-    qDebug() << "RGB color (end):" << color.name();
-#endif
-    return color.isValid() ? color : QColor( 0, 0, 0 );
   }
 
 } // end of namespace
 
 
-bool RainbowTextMarker::parseText( QString* p_txt )
+bool NumberTextMarker::parseText( QString* p_txt )
 {
   qDebug() << "Plugin" << name() << "starts to parse the text";
 
   bool space_added_at_begin = false;
   bool space_added_at_end = false;
+  QString parsed_text = "";
 
   if( p_txt->startsWith( open_cmd.trimmed() ) )
   {
@@ -172,7 +127,6 @@ bool RainbowTextMarker::parseText( QString* p_txt )
     space_added_at_end = true;
   }
 
-  QString parsed_text = "";
   int index = p_txt->indexOf( open_cmd, 0, Qt::CaseInsensitive );
 
   if( index >= 0 && p_txt->size() > index )
@@ -180,16 +134,12 @@ bool RainbowTextMarker::parseText( QString* p_txt )
     int last_index = p_txt->indexOf( close_cmd, index+1, Qt::CaseInsensitive );
     if( last_index > 0 )
     {
-      qDebug() << name() << "rainbow found. Create HTML tags";
+      qDebug() << name() << "string to encode found. Replace chars with numbers";
 
       bool is_in_tag = false;
       QString code_text = "";
-      QChar c;
-
-      // Get the length and scale. For rainbows, the scale must be such that one cycle comes out to almost 2pi.
-      qreal k;
-      int rainbow_index = 0;
-      qreal scale = 3.14 * (2.0-0.21) / qMax( 1, (last_index-index-open_cmd.size()) );
+      QString str_to_append;
+      QChar c; 
 
       for( int i = 0; i < p_txt->size(); i++ )
       {
@@ -232,14 +182,12 @@ bool RainbowTextMarker::parseText( QString* p_txt )
           // skip open command
           if( i == index )
           {
-            rainbow_index = 1;
             parsed_text.append( " " );
           }
         }
         else if( i >= (index+open_cmd.size()) && i < last_index )
         {
-          k = scale * rainbow_index;
-          QString str_to_append = QString( "<font color=""%1"">" ).arg( GetRainbowColor( k, false ).name() );
+          QString str_to_append = "";
           if( code_text.size() > 0 )
           {
             str_to_append += code_text;
@@ -247,10 +195,8 @@ bool RainbowTextMarker::parseText( QString* p_txt )
             code_text = "";
           }
           else
-            str_to_append.append( c );
-          str_to_append.append( "</font>" );
+            str_to_append.append( GetCharToNumber( c ) );
           parsed_text.append( str_to_append );
-          rainbow_index++;
         }
         else if( i >= last_index && i < (last_index+close_cmd.size()) )
         {
@@ -277,11 +223,11 @@ bool RainbowTextMarker::parseText( QString* p_txt )
   return true;
 }
 
-RainbowTextMarker::RainbowTextMarker()
+NumberTextMarker::NumberTextMarker()
   : QObject()
 {
   setEnabled( true );
-  qDebug() << "RainbowTextMarker plugin loaded";
+  qDebug() << "NumberTextMarker plugin loaded";
 }
 
-Q_EXPORT_PLUGIN2( rainbowtextmarker, RainbowTextMarker )
+Q_EXPORT_PLUGIN2( numbertextmarker, NumberTextMarker )

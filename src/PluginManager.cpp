@@ -130,3 +130,30 @@ ServiceInterface* PluginManager::service( const QString& service_name ) const
   }
   return 0;
 }
+
+bool PluginManager::parseText( QString* pTxt, bool before_sending ) const
+{
+  if( pTxt->size() <= 0 )
+  {
+    *pTxt = "";
+    return false;
+  }
+
+  foreach( TextMarkerInterface* text_marker, m_textMarkers )
+  {
+    if( !text_marker->isEnabled() )
+      continue;
+
+    if( before_sending != text_marker->parseBeforeSending() )
+      continue;
+
+    if( !text_marker->parseText( pTxt ) )
+    {
+      qDebug() << text_marker->name() << "has break text marker plugins loop";
+      return false;
+    }
+  }
+
+  return true;
+}
+

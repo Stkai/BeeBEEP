@@ -26,6 +26,7 @@
 #include "Connection.h"
 #include "Core.h"
 #include "Protocol.h"
+#include "PluginManager.h"
 #include "Random.h"
 #include "Settings.h"
 #include "Tips.h"
@@ -68,17 +69,16 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     return 0;
 
   Message m;
+  QString msg_to_send = msg;
 
   if( !Settings::instance().chatUseHtmlTags() )
   {
-    QString msg_no_tags = msg;
-    msg_no_tags.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
-    msg_no_tags.replace( "&lt;3", "<3" ); // hearth emoticon
-    m = Protocol::instance().chatMessage( msg_no_tags );
+    msg_to_send.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
+    msg_to_send.replace( "&lt;3", "<3" ); // hearth emoticon
   }
-  else
-    m = Protocol::instance().chatMessage( msg );
 
+  PluginManager::instance().parseText( &msg_to_send, true );
+  m = Protocol::instance().chatMessage( msg_to_send );
   m.setData( Settings::instance().chatFontColor() );
 
   int messages_sent = 0;

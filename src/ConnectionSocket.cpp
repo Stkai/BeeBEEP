@@ -135,7 +135,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     return;
   }
 
-  m_protoVersion = (m.id() <= ID_HELLO_MESSAGE ? 1 : m.id());
+  m_protoVersion = Protocol::instance().protoVersion( m );
 
   if( !m_isHelloSent )
     sendHello();

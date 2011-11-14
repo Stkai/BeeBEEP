@@ -50,6 +50,7 @@ signals:
   void stringToShow( const QString&, int );
 
 protected:
+  QSize sizeHint() const;
   QTreeWidgetItem* findItem( VNumber );
   void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType );
   void showIcon( QTreeWidgetItem* );
