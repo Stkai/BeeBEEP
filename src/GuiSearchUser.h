@@ -21,48 +21,39 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BROADCASTER_H
-#define BEEBEEP_BROADCASTER_H
+#ifndef BEEBEEP_GUISEARCHUSER_H
+#define BEEBEEP_GUISEARCHUSER_H
 
-#include "Config.h"
+#include "ui_GuiSearchUser.h"
+#include <QDialog>
 
 
-class Broadcaster : public QObject
+class GuiSearchUser : public QDialog, private Ui::GuiSearchUser
 {
   Q_OBJECT
 
 public:
-  explicit Broadcaster( QObject* );
-  bool startBroadcasting();
-  void stopBroadcasting();
-  bool isLocalHostAddress( const QHostAddress& );
-  bool addAddress( const QHostAddress& );
-  inline void clearAddressAdded();
+  GuiSearchUser( QWidget* );
 
-signals:
-  void newPeerFound( const QHostAddress&, int );
+  void loadSettings();
 
-private slots:
-  void sendBroadcastDatagram();
-  void readBroadcastDatagram();
+  inline const QStringList& addresses() const;
+  QString service() const;
+  QString userId() const;
 
-protected:
-  bool sendDatagramToHost( const QHostAddress& );
-  void updateAddresses();
+protected slots:
+  void checkAndSearch();
 
 private:
-  QList<QHostAddress> m_broadcastAddresses;
-  QList<QHostAddress> m_ipAddresses;
-  QUdpSocket m_broadcastSocket;
-  QTimer m_broadcastTimer;
-  QByteArray m_broadcastData;
-
-  QList<QHostAddress> m_broadcastAddressesAdded;
+  QStringList m_addresses;
 
 };
 
 
-// Inline functions
-inline void Broadcaster::clearAddressAdded() { m_broadcastAddresses.clear(); }
+// Inline Functions
+inline const QStringList& GuiSearchUser::addresses() const
+{
+  return m_addresses;
+}
 
-#endif // BEEBEEP_BROADCASTER_H
+#endif // BEEBEEP_GUISEARCHUSER_H

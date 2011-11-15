@@ -123,6 +123,9 @@ public:
   void setNetworkAccount( const NetworkAccount& );
   NetworkAccount networkAccount( const QString& ) const;
 
+  inline const QStringList& broadcastAddresses() const;
+  inline void setBroadcastAddresses( const QStringList& );
+
   void load();
   void save();
 
@@ -195,6 +198,8 @@ private:
 
   QList<NetworkAccount> m_networkAccounts;
 
+  QStringList m_broadcastAddresses;
+
 };
 
 
@@ -263,6 +268,9 @@ inline void Settings::setNetworkProxyUseAuthentication( bool new_value ) { m_net
 inline const QNetworkProxy& Settings::networkProxy() const { return m_networkProxy; }
 inline void Settings::setNetworkProxy( const QNetworkProxy& new_value ) { m_networkProxy = new_value; }
 inline const QList<NetworkAccount>& Settings::networkAccounts() const { return m_networkAccounts; }
+inline const QStringList& Settings::broadcastAddresses() const { return m_broadcastAddresses; }
+inline void Settings::setBroadcastAddresses( const QStringList& new_value ) { m_broadcastAddresses = new_value; }
+
 
 
 #endif // BEEBEEP_SETTINGS_H

@@ -213,6 +213,7 @@ void Settings::load()
   m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();
   m_networkProxy.setUser( sets.value( "ProxyUser", "" ).toString() );
   m_networkProxy.setPassword( Protocol::simpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
+  m_broadcastAddresses = sets.value( "BroadcastAddresses", QStringList() ).toStringList();
   sets.endGroup();
 
   qDebug() << "Loading network accounts";
@@ -272,7 +273,7 @@ void Settings::save()
   sets.endGroup();
   sets.beginGroup( "User" );
   sets.setValue( "LocalColor", m_localUser.color() );
-  sets.setValue( "LocalLastStatus", m_localUser.status() );
+  sets.setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
   sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets.setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets.setValue( "ShowUserNameColor", m_showUserColor );
@@ -318,6 +319,7 @@ void Settings::save()
   sets.setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
   sets.setValue( "ProxyUser", m_networkProxy.user() );
   sets.setValue( "ProxyPassword", Protocol::simpleEncrypt( m_networkProxy.password() ) );
+  sets.setValue( "BroadcastAddresses", m_broadcastAddresses );
   sets.endGroup();
 
   if( m_networkAccounts.size() > 0 )

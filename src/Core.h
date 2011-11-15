@@ -44,8 +44,9 @@ public:
   bool start();
   void stop();
 
+  void addBroadcastAddress( const QHostAddress& );
+
   /* CoreUser */
-  void searchUsers( const QHostAddress& );
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
   bool setUserColor( VNumber, const QString& );

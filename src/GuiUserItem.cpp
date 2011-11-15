@@ -80,7 +80,7 @@ bool GuiUserItem::updateItem()
   setText( 0, s );
 
   if( u.isLocal() )
-    setIcon( 0, QIcon( ":/images/chat.png" ) );
+    setIcon( 0, QIcon( ":/images/connect.png" ) );
   else
     setIcon( 0, GetUserIcon( 0, u.service(), user_status ) );
 

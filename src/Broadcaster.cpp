@@ -84,8 +84,14 @@ void Broadcaster::sendBroadcastDatagram()
       addresses_are_valid = false;
   }
 
-  if( !addresses_are_valid )
-    updateAddresses();
+  QList<QHostAddress>::iterator it = m_broadcastAddressesAdded.begin();
+  while( it != m_broadcastAddressesAdded.end() )
+  {
+    if( !sendDatagramToHost( *it ) )
+      it = m_broadcastAddressesAdded.erase( it );
+    else
+      ++it;
+  }
 }
 
 void Broadcaster::readBroadcastDatagram()
@@ -144,4 +150,12 @@ void Broadcaster::updateAddresses()
       }
     }
   }
+}
+
+bool Broadcaster::addAddress( const QHostAddress& host_address )
+{
+  if( m_broadcastAddressesAdded.contains( host_address ) )
+    return false;
+  m_broadcastAddressesAdded.append( host_address );
+  return true;
 }

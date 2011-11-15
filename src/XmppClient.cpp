@@ -73,7 +73,7 @@ void XmppClient::checkFileTransferRequest( QXmppTransferJob* job )
   job->abort();
 }
 
-void XmppClient::checkFileTransferError( QXmppTransferJob::Error )
+void XmppClient::checkFileTransferError( QXmppTransferJob::Error tje )
 {
   QXmppTransferJob *job = qobject_cast<QXmppTransferJob*>(sender());
   if( !job )
@@ -81,7 +81,7 @@ void XmppClient::checkFileTransferError( QXmppTransferJob::Error )
     qWarning() << "Unable to cast qobject in QXmppTransferJob in XmppClient::checkFileTransferError";
     return;
   }
-  qDebug() << "XMPP> error occurred transferring file" << job->fileName() << "to" << job->jid();
+  qDebug() << "XMPP> error occurred" << tje << "transferring file" << job->fileName() << "to" << job->jid();
 }
 
 void XmppClient::checkFileTransferFinished()

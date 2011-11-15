@@ -34,11 +34,25 @@ void Core::setLocalUserStatus( int new_status )
 {
   if( Settings::instance().localUser().status() == new_status )
     return;
+
   User u = Settings::instance().localUser();
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
-  sendLocalUserStatus();
+
+  if( new_status == User::Offline )
+  {
+    if( isConnected() )
+      stop();
+    return;
+  }
+  else if( !isConnected() )
+  {
+    start();
+    return;
+  }
+
   showUserStatusChanged( u );
+  sendLocalUserStatus();
 }
 
 void Core::setLocalUserStatusDescription( const QString& new_status_description )
@@ -89,14 +103,6 @@ void Core::showUserVCardChanged( const User& u )
 
   dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );
-}
-
-void Core::searchUsers( const QHostAddress& host_address )
-{
-  mp_broadcaster->sendDatagramToHost( host_address );
-  QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." )
-      .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
 }
 
 void Core::sendLocalUserStatus()

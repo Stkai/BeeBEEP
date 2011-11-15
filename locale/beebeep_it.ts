@@ -654,7 +654,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>You have selected an invalid host address.</source>
-        <translation>Hai inserito un indirizzo IP o di sottorete non valido.</translation>
+        <translation type="obsolete">Hai inserito un indirizzo IP o di sottorete non valido.</translation>
     </message>
     <message>
         <source>%1 is writing...</source>
@@ -798,12 +798,12 @@ il file %2 (%3)?</translation>
         <source>Please insert the Host Address or Broadcast Address to contact
 (ex. 10.184.15.186 or 10.184.15.255)
 </source>
-        <translation>Inserisci l&apos;indirizzo IP o la sottorete da contattare
+        <translation type="obsolete">Inserisci l&apos;indirizzo IP o la sottorete da contattare
 (es. 10.184.15.186 o 10.184.15.255)</translation>
     </message>
     <message>
         <source>or insert a valid jabber id (ex: user@gmail.com)</source>
-        <translation>o inserisci un identificativo valido (es: mario.rossi@gmail.com)</translation>
+        <translation type="obsolete">o inserisci un identificativo valido (es: mario.rossi@gmail.com)</translation>
     </message>
     <message>
         <source>%1 (%2) wants to add you to the contact list. Do you accept?</source>
@@ -1040,6 +1040,55 @@ il file %2 (%3)?</translation>
     <message>
         <source>Plugin Manager - %1</source>
         <translation>Gestione dei Plugin - %1</translation>
+    </message>
+</context>
+<context>
+    <name>GuiSearchUser</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Broadcast</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Please enter the IP addresses (separed by comma) where the lan users are available.</source>
+        <translation>Inserire gli indirizzi IP, o una sottorete, (separati da una virgola) dove vuoi cercare utenti disponibili.</translation>
+    </message>
+    <message>
+        <source>Save addresses</source>
+        <translation>Memorizza gli indirizzi IP</translation>
+    </message>
+    <message>
+        <source>Add or search User</source>
+        <translation>Aggiungi o cerca un utente</translation>
+    </message>
+    <message>
+        <source>Please insert the ID of the user (ex: test@gmail.com)</source>
+        <translation>Inserire l&apos;identificativo dell&apos;utente che vuoi aggiungere (es: test@gmail.com)</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Search Users</source>
+        <translation>Cerca Utenti</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Attenzione</translation>
+    </message>
+    <message>
+        <source>You have inserted an invalid host address:
+%1 is removed from the list.</source>
+        <translation>Hai inserito un indirizzo IP non valido:
+%1 verrà rimosso dalla lista.</translation>
     </message>
 </context>
 <context>
@@ -1662,7 +1711,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>unable to send the message. You are not connected to the server</source>
-        <translation>impossibile inviare il messaggio. Il server non è connesso</translation>
+        <translation type="obsolete">impossibile inviare il messaggio. Il server non è connesso</translation>
+    </message>
+    <message>
+        <source>is not connected. Unable to send the message</source>
+        <translation>non è connesso. Impossibile inviare il messaggio</translation>
+    </message>
+    <message>
+        <source>is not connected. Unable to add %1 to the contact list</source>
+        <translation>non è connesso. Impossibile aggiungere %1 alla lista dei contatti</translation>
+    </message>
+    <message>
+        <source>is not connected. Unable to remove %1 from the contact list</source>
+        <translation>non è connesso. Impossibile rimuovere %1 dalla lista dei contatti</translation>
     </message>
 </context>
 </TS>

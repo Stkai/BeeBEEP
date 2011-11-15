@@ -32,6 +32,7 @@
 #include "GuiNetwork.h"
 #include "GuiNetworkLogin.h"
 #include "GuiPluginManager.h"
+#include "GuiSearchUser.h"
 #include "GuiTransferFile.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
@@ -172,9 +173,9 @@ void GuiMain::initGuiItems()
     mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
   }
 
-  mp_menuStatus->setEnabled( enable );
   mp_actSendFile->setEnabled( enable );
   mp_actSearch->setEnabled( enable );
+  updateStatusIcon();
 }
 
 void GuiMain::showAbout()
@@ -365,6 +366,11 @@ void GuiMain::createMenus()
     act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
     act->setIconVisibleInMenu( true );
   }
+
+  act = mp_menuStatus->addAction( Bee::userStatusIcon( "", User::Offline ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
+  act->setData( User::Offline );
+  act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( User::Offline ) ) );
+  act->setIconVisibleInMenu( true );
 
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Add a status description..." ), this, SLOT( changeStatusDescription() ) );
@@ -650,32 +656,25 @@ void GuiMain::searchUsers()
   if( !mp_core->isConnected() )
     return;
 
-  bool ok = false;
-  QString s = QInputDialog::getText( this, Settings::instance().programName(),
-                           tr( "Please insert the Host Address or Broadcast Address to contact\n(ex. 10.184.15.186 or 10.184.15.255)\n" ) +
-                           tr( "or insert a valid jabber id (ex: user@gmail.com)" ), QLineEdit::Normal, "", &ok );
-  if( !ok || s.isEmpty() || s.isNull() )
+  GuiSearchUser gsu( this );
+  gsu.loadSettings();
+  gsu.show();
+  gsu.setFixedSize( gsu.size() );
+  if( gsu.exec() != QDialog::Accepted )
     return;
 
-  QString service = "GTalk"; // FIXME!!!
-
-  if( s.contains( "@gmail.com" ) || s.contains( "@jabber.org" ) )
-  {
-    mp_core->setXmppUserSubscription( service, s.trimmed(), true );
-    return;
-  }
-
-  QHostAddress host_address( s );
-  if( host_address.isNull() )
-  {
-    QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
-      tr( "You have selected an invalid host address." ), QMessageBox::Ok );
-    return;
-  }
-
-  // Message is showed only in default chat
   showChat( ID_DEFAULT_CHAT );
-  mp_core->searchUsers( host_address );
+
+  if( !gsu.addresses().isEmpty() )
+  {
+    foreach( QString s, gsu.addresses() )
+      mp_core->addBroadcastAddress( QHostAddress( s ) );
+  }
+
+  if( !gsu.userId().isEmpty() )
+  {
+    mp_core->setXmppUserSubscription( gsu.service(), gsu.userId(), true );
+  }
 }
 
 void GuiMain::showWritingUser( const User& u )
@@ -689,9 +688,17 @@ void GuiMain::statusSelected()
   QAction* act = qobject_cast<QAction*>( sender() );
   if( !act )
     return;
-  mp_core->setLocalUserStatus( act->data().toInt() );
-  refreshTitle();
-  updateStatusIcon();
+
+  int user_status = act->data().toInt();
+
+  if( user_status != User::Offline && !mp_core->isConnected() )
+  {
+    startCore();
+    return;
+  }
+
+  mp_core->setLocalUserStatus( user_status );
+  initGuiItems();
 }
 
 void GuiMain::updateStatusIcon()

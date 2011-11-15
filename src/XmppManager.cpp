@@ -288,7 +288,7 @@ void XmppManager::presenceChanged( const QString& bare_jid, const QString& jid_r
     return;
   }
 
-  if( bare_jid == Settings::instance().localUser().path() )
+  if( bare_jid == mp_client->configuration().jidBare() )
   {
     qDebug() << "XMPP> skip local user presence received from" << mp_client->service();
     return;
@@ -394,7 +394,7 @@ void XmppManager::sendMessage( const User& u, const Message& m )
 
   if( !mp_client->isConnected() )
   {
-    makeSystemMessage( mp_client, tr( "unable to send the message. You are not connected to the server" ) );
+    makeSystemMessage( mp_client, tr( "is not connected. Unable to send the message" ) );
     return;
   }
 
@@ -481,6 +481,12 @@ void XmppManager::subscribeUser( const QString& service, const QString& bare_jid
   if( !mp_client )
     return;
 
+  if( !mp_client->isConnected() )
+  {
+    makeSystemMessage( mp_client, tr( "is not connected. Unable to add %1 to the contact list").arg( bare_jid ) );
+    return;
+  }
+
   if( accepted )
   {
     makeSystemMessage( mp_client, tr( "adding %1 to the contact list").arg( bare_jid ) );
@@ -510,6 +516,12 @@ void XmppManager::removeUser( const User& u )
   XmppClient* mp_client = client( u.service() );
   if( !mp_client )
     return;
+
+  if( !mp_client->isConnected() )
+  {
+    makeSystemMessage( mp_client, tr( "is not connected. Unable to remove %1 from the contact list").arg( u.bareJid() ) );
+    return;
+  }
 
   makeSystemMessage( mp_client, tr( "removing %1 from the contact list").arg( u.bareJid() ) );
   QXmppRosterIq remove;
@@ -567,6 +579,12 @@ void XmppManager::presenceReceived( const QXmppPresence& presence )
   }
 
   QString bare_jid = jidToBareJid( presence.from() );
+  if( bare_jid == mp_client->configuration().jidBare() )
+  {
+    qDebug() << "XMPP> presence from local user received... skip it";
+    return;
+  }
+
   QString msg = "";
   bool subscribe_request = false;
   bool subscription_accepted = false;

@@ -120,7 +120,27 @@ void Core::stop()
 
   m_connections.clear();
 
+  if( Settings::instance().localUser().status() != User::Offline )
+  {
+    User u = Settings::instance().localUser();
+    u.setStatus( User::Offline );
+    Settings::instance().setLocalUser( u );
+  }
+
+  showUserStatusChanged( Settings::instance().localUser() );
+
   dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
                                                                               Settings::instance().programName() ), DispatchToAllChatsWithUser );
 }
+
+void Core::addBroadcastAddress( const QHostAddress& host_address )
+{
+  if( mp_broadcaster->addAddress( host_address ) )
+  {
+    QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." )
+          .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+  }
+}
+
