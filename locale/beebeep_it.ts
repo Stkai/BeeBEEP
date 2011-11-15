@@ -167,6 +167,10 @@
         <source>%1 You send the file %2 to %3.</source>
         <translation>%1 Stai inviando il file %2 a %3.</translation>
     </message>
+    <message>
+        <source>%1 is connected to %2 network.</source>
+        <translation>%1 entra nella tua rete %2.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>

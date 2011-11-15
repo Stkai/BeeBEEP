@@ -183,7 +183,13 @@ void Core::checkUserAuthentication( const Message& m )
   addConnectionReadyForUse( c );
 
   UserManager::instance().setUser( u );
-  showUserStatusChanged( u );
+
+  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.service(), u.status() ), "*S*" ) + QString( " " );
+  sHtmlMsg += tr( "%1 is connected to %2 network." ).arg( u.name(), Settings::instance().programName() );
+  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+
+  if( !u.statusDescription().isEmpty() )
+    showUserStatusChanged( u );
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
   {

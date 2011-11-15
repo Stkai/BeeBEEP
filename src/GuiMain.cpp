@@ -173,9 +173,9 @@ void GuiMain::initGuiItems()
     mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
   }
 
+  mp_menuStatus->setEnabled( enable );
   mp_actSendFile->setEnabled( enable );
   mp_actSearch->setEnabled( enable );
-  updateStatusIcon();
 }
 
 void GuiMain::showAbout()
@@ -366,11 +366,6 @@ void GuiMain::createMenus()
     act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
     act->setIconVisibleInMenu( true );
   }
-
-  act = mp_menuStatus->addAction( Bee::userStatusIcon( "", User::Offline ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
-  act->setData( User::Offline );
-  act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( User::Offline ) ) );
-  act->setIconVisibleInMenu( true );
 
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Add a status description..." ), this, SLOT( changeStatusDescription() ) );
@@ -690,15 +685,8 @@ void GuiMain::statusSelected()
     return;
 
   int user_status = act->data().toInt();
-
-  if( user_status != User::Offline && !mp_core->isConnected() )
-  {
-    startCore();
-    return;
-  }
-
   mp_core->setLocalUserStatus( user_status );
-  initGuiItems();
+  updateStatusIcon();
 }
 
 void GuiMain::updateStatusIcon()

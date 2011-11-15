@@ -93,6 +93,13 @@ bool Core::start()
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
 
+  if( Settings::instance().localUser().status() == User::Offline )
+  {
+    User u = Settings::instance().localUser();
+    u.setStatus( User::Online );
+    Settings::instance().setLocalUser( u );
+  }
+
   showUserStatusChanged( Settings::instance().localUser() );
 
   if( Settings::instance().showTipsOfTheDay() )
@@ -119,15 +126,6 @@ void Core::stop()
     closeConnection( c );
 
   m_connections.clear();
-
-  if( Settings::instance().localUser().status() != User::Offline )
-  {
-    User u = Settings::instance().localUser();
-    u.setStatus( User::Offline );
-    Settings::instance().setLocalUser( u );
-  }
-
-  showUserStatusChanged( Settings::instance().localUser() );
 
   dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),

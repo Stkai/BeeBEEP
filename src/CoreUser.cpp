@@ -34,25 +34,12 @@ void Core::setLocalUserStatus( int new_status )
 {
   if( Settings::instance().localUser().status() == new_status )
     return;
-
   User u = Settings::instance().localUser();
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
-
-  if( new_status == User::Offline )
-  {
-    if( isConnected() )
-      stop();
-    return;
-  }
-  else if( !isConnected() )
-  {
-    start();
-    return;
-  }
-
   showUserStatusChanged( u );
-  sendLocalUserStatus();
+  if( isConnected() )
+    sendLocalUserStatus();
 }
 
 void Core::setLocalUserStatusDescription( const QString& new_status_description )
@@ -62,14 +49,18 @@ void Core::setLocalUserStatusDescription( const QString& new_status_description 
   User u = Settings::instance().localUser();
   u.setStatusDescription( new_status_description );
   Settings::instance().setLocalUser( u );
-  sendLocalUserStatus();
   showUserStatusChanged( u );
+  if( isConnected() )
+    sendLocalUserStatus();
 }
 
 void Core::showUserStatusChanged( const User& u )
 {
   // Before signal is emitted, so chat is created in gui ... FIXME ??? ...
   emit userChanged( u );
+
+  if( !isConnected() )
+    return;
 
   QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.service(), u.status() ), "*S*" ) + QString( " " );
   if( u.isLocal() )
