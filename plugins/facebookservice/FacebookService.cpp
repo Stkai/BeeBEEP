@@ -34,7 +34,7 @@ QString FacebookService::name() const
 
 QString FacebookService::version() const
 {
-  return "0.2b";
+  return "0.6.1";
 }
 
 QString FacebookService::author() const

@@ -34,7 +34,7 @@ QString JabberService::name() const
 
 QString JabberService::version() const
 {
-  return "0.2b";
+  return "0.6.1";
 }
 
 QString JabberService::author() const

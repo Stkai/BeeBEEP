@@ -34,7 +34,7 @@ QString GTalkService::name() const
 
 QString GTalkService::version() const
 {
-  return "0.2b";
+  return "0.6.1";
 }
 
 QString GTalkService::author() const
@@ -114,7 +114,7 @@ int GTalkService::sASLAuthMechanism() const
 
 bool GTalkService::fileTransferIsEnabled() const
 {
-  return true;
+  return false;
 }
 
 QString GTalkService::userStatusOfflineIconPath() const

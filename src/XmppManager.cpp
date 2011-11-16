@@ -174,7 +174,7 @@ void XmppManager::serverConnected()
     return;
   }
   mp_client->setConnectionState( XmppClient::Online );
-  makeSystemMessage( mp_client, "connected to the server" );
+  makeSystemMessage( mp_client, tr( "connected to the server with user %1" ).arg( mp_client->configuration().jidBare() ) );
   emit serviceConnected( mp_client->service() );
 }
 
@@ -187,7 +187,7 @@ void XmppManager::serverDisconnected()
     return;
   }
   mp_client->setConnectionState( XmppClient::Offline );
-  makeSystemMessage( mp_client, "disconnected from the server" );
+  makeSystemMessage( mp_client, tr( "disconnected from the server" ) );
   UserList ul = UserManager::instance().userList().serviceUserList( mp_client->service() );
   Message m;
   foreach( User u, ul.toList() )

@@ -57,8 +57,11 @@ class TextMarkerInterface : public PluginInterface
 {
 public:
   virtual bool parseBeforeSending() const = 0;
-  // FALSE break the loop
-  virtual bool parseText( QString* ) = 0;
+
+  virtual QString openCommand() const = 0;
+  virtual QString closeCommand() const = 0;
+  virtual void initParser( const QString& ) = 0; // pass the string between open and close command
+  virtual QString parseString( const QString& ) = 0; // FALSE break the loop
 
 };
 

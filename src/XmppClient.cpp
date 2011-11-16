@@ -28,7 +28,6 @@
 #include "QXmppVCardManager.h"
 
 
-
 XmppClient::XmppClient( QObject* parent )
   : QXmppClient( parent ), m_clientUser(),
     m_iconPath( ":/images/jabber.png" ),

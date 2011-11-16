@@ -48,7 +48,10 @@ public:
   QString coreVersion() const;
 
   bool parseBeforeSending() const;
-  bool parseText( QString* );
+  QString openCommand() const;
+  QString closeCommand() const;
+  void initParser( const QString& );
+  QString parseString( const QString& );
 
 };
 

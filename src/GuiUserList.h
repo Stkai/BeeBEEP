@@ -40,8 +40,10 @@ public:
   void setUser( const User& );
   void removeUser( const User& );
   void setUnreadMessages( VNumber private_chat_id, int );
-  void updateUsers();
+  void updateUsers( bool );
   bool nextUserWithUnreadMessages();
+
+  void setDefaultChatConnected( bool );
 
 signals:
   void chatSelected( VNumber chat_id );

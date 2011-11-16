@@ -68,6 +68,8 @@ protected:
   void addPlugin( const QString& );
   void sortPlugins();
 
+  bool parseTextWithPlugin( QString*, TextMarkerInterface* ) const;
+
 
 private:
   QList<TextMarkerInterface*> m_textMarkers;

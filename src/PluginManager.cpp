@@ -131,11 +131,12 @@ ServiceInterface* PluginManager::service( const QString& service_name ) const
   return 0;
 }
 
-bool PluginManager::parseText( QString* pTxt, bool before_sending ) const
+bool PluginManager::parseText( QString* p_txt, bool before_sending ) const
 {
-  if( pTxt->size() <= 0 )
+  qDebug() << "Plugins parsing text:" << p_txt->toLatin1();
+  if( p_txt->size() <= 0 )
   {
-    *pTxt = "";
+    *p_txt = "";
     return false;
   }
 
@@ -147,13 +148,131 @@ bool PluginManager::parseText( QString* pTxt, bool before_sending ) const
     if( before_sending != text_marker->parseBeforeSending() )
       continue;
 
-    if( !text_marker->parseText( pTxt ) )
+    if( !parseTextWithPlugin( p_txt, text_marker ) )
     {
       qDebug() << text_marker->name() << "has break text marker plugins loop";
       return false;
     }
   }
 
+  qDebug() << "Plugins has parsed:" << p_txt->toLatin1();
   return true;
 }
 
+bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tmi ) const
+{
+  qDebug() << "Plugin" << tmi->name() << "starts to parse the text";
+
+  bool space_added_at_begin = false;
+  bool space_added_at_end = false;
+
+  if( p_txt->startsWith( tmi->openCommand().trimmed() ) )
+  {
+    p_txt->prepend( QLatin1Char( ' ' ) );
+    space_added_at_begin = true;
+  }
+
+  if( p_txt->endsWith( tmi->closeCommand().trimmed() ) )
+  {
+    p_txt->append( QLatin1Char( ' ' ) );
+    space_added_at_end = true;
+  }
+
+  QString parsed_text = "";
+  int open_cmd_index = p_txt->indexOf( tmi->openCommand(), 0, Qt::CaseInsensitive );
+  int open_cmd_size = tmi->openCommand().size();
+  int close_cmd_size = tmi->closeCommand().size();
+
+  if( open_cmd_index >= 0 && open_cmd_index < p_txt->size() )
+  {
+    int close_cmd_index = p_txt->indexOf( tmi->closeCommand(), open_cmd_index+open_cmd_size, Qt::CaseInsensitive );
+    if( close_cmd_index > open_cmd_index )
+    {
+      qDebug() << tmi->name() << "has found open/close command";
+
+      tmi->initParser( p_txt->mid( open_cmd_index+open_cmd_size, close_cmd_index-open_cmd_index-open_cmd_size ) );
+
+      bool is_in_tag = false;
+      QString code_text = "";
+      QChar c;
+
+      for( int i = 0; i < p_txt->size(); i++ )
+      {
+        c = p_txt->at( i );
+        if( c == QLatin1Char( '<' ) )
+          is_in_tag = true;
+
+        if( is_in_tag )
+        {
+          parsed_text.append( c );
+
+          if( c == QLatin1Char( '>' ) )
+            is_in_tag = false;
+
+          continue;
+        }
+
+        if( c == QLatin1Char( '&' ) )
+        {
+          QChar c_tmp;
+          // Search forward until either a semicolon, tag, or space is found
+          for( int j=(i+1); j < p_txt->size(); j++ )
+          {
+            c_tmp = p_txt->at( j );
+            if( c_tmp == QLatin1Char( '<' ) || c_tmp == QLatin1Char( '>' )
+                || c_tmp == QLatin1Char( ';' ) || c_tmp.isSpace() )
+            {
+              if( c_tmp == QLatin1Char( ';' ) )
+              {
+                code_text = p_txt->mid( i, j-i+1 );
+                qDebug() << "Code html found:" << code_text << "... skip it";
+              }
+              break;
+            }
+          }
+        }
+
+        if( i >= open_cmd_index && i < (open_cmd_index+open_cmd_size) )
+        {
+          // skip open command
+          if( i == open_cmd_index )
+          {
+            parsed_text.append( " " );
+          }
+        }
+        else if( i >= (open_cmd_index+open_cmd_size) && i < close_cmd_index )
+        {
+          if( code_text.size() > 0 )
+          {
+            parsed_text.append( tmi->parseString( code_text ) );
+            i += code_text.size() - 1;
+            code_text = "";
+          }
+          else
+            parsed_text.append( tmi->parseString( QString( c ) ) );
+        }
+        else if( i >= close_cmd_index && i < (close_cmd_index+close_cmd_size) )
+        {
+          // skip close command
+          if( i == close_cmd_index )
+            parsed_text.append( " " );
+        }
+        else
+          parsed_text.append( c );
+      }
+
+      if( parsed_text.contains( tmi->openCommand() ) )
+        parseTextWithPlugin( &parsed_text, tmi );
+    }
+  }
+
+  if( !parsed_text.isEmpty() )
+    *p_txt = parsed_text;
+
+  if( space_added_at_begin )
+    p_txt->remove( 0, 1 );
+  if( space_added_at_end )
+    p_txt->chop( 1 );
+
+  return true;
+}

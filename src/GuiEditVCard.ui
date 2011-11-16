@@ -318,7 +318,7 @@
        </property>
        <property name="icon">
         <iconset resource="beebeep.qrc">
-         <normaloff>:/images/remove.png</normaloff>:/images/remove.png</iconset>
+         <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
        </property>
        <property name="iconSize">
         <size>

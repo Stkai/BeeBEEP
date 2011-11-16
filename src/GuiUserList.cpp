@@ -53,10 +53,11 @@ QSize GuiUserList::sizeHint() const
   return QSize( 140, 300 );
 }
 
-void GuiUserList::updateUsers()
+void GuiUserList::updateUsers( bool is_connected )
 {
   clear();
   setUser( Settings::instance().localUser() );
+  setDefaultChatConnected( is_connected );
   QList<User>::const_iterator it = UserManager::instance().userList().toList().begin();
   while( it != UserManager::instance().userList().toList().end() )
   {
@@ -182,4 +183,12 @@ bool GuiUserList::nextUserWithUnreadMessages()
     ++it;
   }
   return false;
+}
+
+void GuiUserList::setDefaultChatConnected( bool yes )
+{
+   GuiUserItem* item = itemFromChatId( ID_DEFAULT_CHAT );
+   if( !item )
+     return;
+   item->setIcon( 0, QIcon( (yes ? ":/images/network-connected" : ":/images/network-disconnected" ) ) );
 }

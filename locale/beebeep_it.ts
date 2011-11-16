@@ -1337,7 +1337,7 @@ il file %2 (%3)?</translation>
     <name>NumberTextMarker</name>
     <message>
         <source>Number Text Marker</source>
-        <translation>Cifratura di Stringhe</translation>
+        <translation>Cifratura Stringhe</translation>
     </message>
     <message>
         <source>If you want to encode your message with numbers write a #text to encode# .</source>
@@ -1728,6 +1728,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>is not connected. Unable to remove %1 from the contact list</source>
         <translation>non è connesso. Impossibile rimuovere %1 dalla lista dei contatti</translation>
+    </message>
+    <message>
+        <source>connected to the server with user %1</source>
+        <translation>connessione riuscita con l&apos;utenza %1</translation>
+    </message>
+    <message>
+        <source>disconnected from the server</source>
+        <translation>disconnessione dal server effettuata</translation>
     </message>
 </context>
 </TS>

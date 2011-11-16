@@ -79,9 +79,7 @@ bool GuiUserItem::updateItem()
   s += " ";
   setText( 0, s );
 
-  if( u.isLocal() )
-    setIcon( 0, QIcon( ":/images/connect.png" ) );
-  else
+  if( !u.isLocal() )
     setIcon( 0, GetUserIcon( 0, u.service(), user_status ) );
 
   if( !m_defaultForegroundColor.isValid() )

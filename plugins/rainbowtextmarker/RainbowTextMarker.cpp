@@ -30,9 +30,6 @@
 
 #undef COLOR_GRADIENT_DEBUG
 
-const QString open_cmd = " ~";
-const QString close_cmd = "~ ";
-
 
 QString RainbowTextMarker::name() const
 {
@@ -41,7 +38,7 @@ QString RainbowTextMarker::name() const
 
 QString RainbowTextMarker::version() const
 {
-  return "0.9b";
+  return "0.6.1";
 }
 
 QString RainbowTextMarker::author() const
@@ -153,128 +150,28 @@ namespace
 } // end of namespace
 
 
-bool RainbowTextMarker::parseText( QString* p_txt )
+QString RainbowTextMarker::openCommand() const
 {
-  qDebug() << "Plugin" << name() << "starts to parse the text";
+  return QLatin1String( " ~" );
+}
 
-  bool space_added_at_begin = false;
-  bool space_added_at_end = false;
+QString RainbowTextMarker::closeCommand() const
+{
+  return QLatin1String( "~ " );
+}
 
-  if( p_txt->startsWith( open_cmd.trimmed() ) )
-  {
-    p_txt->prepend( QLatin1Char( ' ' ) );
-    space_added_at_begin = true;
-  }
+void RainbowTextMarker::initParser( const QString& str_to_parse )
+{
+  // Get the length and scale. For rainbows, the scale must be such that one cycle comes out to almost 2pi.
+  m_rainbowIndex = 0;
+  m_scale = 3.14 * (2.0-0.21) / qMax( 1, str_to_parse.size() );
+}
 
-  if( p_txt->endsWith( close_cmd.trimmed() ) )
-  {
-    p_txt->append( QLatin1Char( ' ' ) );
-    space_added_at_end = true;
-  }
-
-  QString parsed_text = "";
-  int index = p_txt->indexOf( open_cmd, 0, Qt::CaseInsensitive );
-
-  if( index >= 0 && p_txt->size() > index )
-  {
-    int last_index = p_txt->indexOf( close_cmd, index+1, Qt::CaseInsensitive );
-    if( last_index > 0 )
-    {
-      qDebug() << name() << "rainbow found. Create HTML tags";
-
-      bool is_in_tag = false;
-      QString code_text = "";
-      QChar c;
-
-      // Get the length and scale. For rainbows, the scale must be such that one cycle comes out to almost 2pi.
-      qreal k;
-      int rainbow_index = 0;
-      qreal scale = 3.14 * (2.0-0.21) / qMax( 1, (last_index-index-open_cmd.size()) );
-
-      for( int i = 0; i < p_txt->size(); i++ )
-      {
-        c = p_txt->at( i );
-        if( c == QLatin1Char( '<' ) )
-          is_in_tag = true;
-
-        if( is_in_tag )
-        {
-          parsed_text.append( c );
-
-          if( c == QLatin1Char( '>' ) )
-            is_in_tag = false;
-
-          continue;
-        }
-
-        if( c == QLatin1Char( '&' ) )
-        {
-          QChar c_tmp;
-          // Search forward until either a semicolon, tag, or space is found
-          for( int j=(i+1); j < p_txt->size(); j++ )
-          {
-            c_tmp = p_txt->at( j );
-            if( c_tmp == QLatin1Char( '<' ) || c_tmp == QLatin1Char( '>' )
-                || c_tmp == QLatin1Char( ';' ) || c_tmp.isSpace() )
-            {
-              if( c_tmp == QLatin1Char( ';' ) )
-              {
-                code_text = p_txt->mid( i, j-i+1 );
-                qDebug() << "Code text found" << code_text << "... skip it";
-              }
-              break;
-            }
-          }
-        }
-
-        if( i >= index && i < (index+open_cmd.size()) )
-        {
-          // skip open command
-          if( i == index )
-          {
-            rainbow_index = 1;
-            parsed_text.append( " " );
-          }
-        }
-        else if( i >= (index+open_cmd.size()) && i < last_index )
-        {
-          k = scale * rainbow_index;
-          QString str_to_append = QString( "<font color=""%1"">" ).arg( GetRainbowColor( k, false ).name() );
-          if( code_text.size() > 0 )
-          {
-            str_to_append += code_text;
-            i += code_text.size() - 1;
-            code_text = "";
-          }
-          else
-            str_to_append.append( c );
-          str_to_append.append( "</font>" );
-          parsed_text.append( str_to_append );
-          rainbow_index++;
-        }
-        else if( i >= last_index && i < (last_index+close_cmd.size()) )
-        {
-          // skip close command
-          if( i == last_index )
-            parsed_text.append( " " );
-        }
-        else
-          parsed_text.append( c );
-      }
-
-      if( parsed_text.contains( open_cmd ) )
-        parseText( &parsed_text );
-    }
-  }
-
-  if( !parsed_text.isEmpty() )
-    *p_txt = parsed_text;
-
-  if( space_added_at_begin )
-    p_txt->remove( 0, 1 );
-  if( space_added_at_end )
-    p_txt->chop( 1 );
-  return true;
+QString RainbowTextMarker::parseString( const QString& str )
+{
+  m_rainbowIndex++;
+  qreal k = m_scale * m_rainbowIndex;
+  return QString( "<font color=""%1"">%2</font>" ).arg( GetRainbowColor( k, false ).name(), str );
 }
 
 RainbowTextMarker::RainbowTextMarker()

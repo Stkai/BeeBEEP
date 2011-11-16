@@ -176,6 +176,8 @@ void GuiMain::initGuiItems()
   mp_menuStatus->setEnabled( enable );
   mp_actSendFile->setEnabled( enable );
   mp_actSearch->setEnabled( enable );
+
+  mp_userList->setDefaultChatConnected( enable );
 }
 
 void GuiMain::showAbout()
@@ -474,7 +476,7 @@ void GuiMain::emoticonSelected()
 void GuiMain::refreshUserList()
 {
   qDebug() << "Refresh users";
-  mp_userList->updateUsers();
+  mp_userList->updateUsers( mp_core->isConnected() );
 }
 
 void GuiMain::refreshChat()
