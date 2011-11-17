@@ -51,11 +51,18 @@ public:
 
   void sendFile( const QString& bare_jid, const FileInfo& );
 
+  inline void setClientUser( const User& );
+  inline const User& clientUser() const;
+  inline bool isLocalUser( const QString& bare_jid ) const;
+
+  void sendVCard( const QXmppVCardIq& );
+
 signals:
   void rosterReceived();
   void rosterChanged( const QString& );
   void presenceChanged( const QString&, const QString& );
   void vCardReceived( const QXmppVCardIq& );
+  void clientVCardReceived();
 
 protected slots:
   void checkFileTransferRequest( QXmppTransferJob* );
@@ -83,5 +90,8 @@ inline const QString& XmppClient::iconPath() const { return m_iconPath; }
 inline void XmppClient::setIconPath( const QString& new_value ) { m_iconPath = new_value; }
 inline bool XmppClient::isActive() const { return m_connectionState != XmppClient::Offline; }
 inline void XmppClient::setConnectionState( XmppClient::ConnectionState new_value ) { m_connectionState = new_value; }
+inline void XmppClient::setClientUser( const User& new_value ) { m_clientUser = new_value; }
+inline const User& XmppClient::clientUser() const { return m_clientUser; }
+inline bool XmppClient::isLocalUser( const QString& bare_jid ) const { return m_clientUser.bareJid() == bare_jid; }
 
 #endif // BEEBEEP_XMPPCLIENT_H

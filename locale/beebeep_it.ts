@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>%1 Chat with all users.</source>
-        <translation>%1 Parla con tutti.</translation>
+        <translation type="obsolete">%1 Parla con tutti.</translation>
     </message>
     <message>
         <source>%1 Chat with %2.</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>You have changed your profile.</source>
-        <translation>Hai cambiato il tuo profilo.</translation>
+        <translation type="obsolete">Hai cambiato il tuo profilo.</translation>
     </message>
     <message>
         <source>%1 has changed the profile.</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>%1 has updated the profile.</source>
-        <translation>%1 ha aggiornato il suo profilo.</translation>
+        <translation type="obsolete">%1 ha aggiornato il suo profilo.</translation>
     </message>
     <message>
         <source>%1 Unable to send the file: user is not connected.</source>
@@ -170,6 +170,22 @@
     <message>
         <source>%1 is connected to %2 network.</source>
         <translation>%1 entra nella tua rete %2.</translation>
+    </message>
+    <message>
+        <source>The %1&apos;s profile has been received.</source>
+        <translation>E&apos; stato ricevuto il profilo di %1.</translation>
+    </message>
+    <message>
+        <source>Happy Birthday to you!</source>
+        <translation>Buon Compleanno!</translation>
+    </message>
+    <message>
+        <source>Happy Birthday to %1!</source>
+        <translation>Buon Compleanno a %1!</translation>
+    </message>
+    <message>
+        <source>%1 Chat with all local users.</source>
+        <translation>%1 Parla con tutti gli utenti locali.</translation>
     </message>
 </context>
 <context>
@@ -257,7 +273,7 @@
     </message>
     <message>
         <source>All users</source>
-        <translation>Tutti</translation>
+        <translation type="obsolete">Tutti</translation>
     </message>
     <message>
         <source>Nobody</source>
@@ -265,7 +281,19 @@
     </message>
     <message>
         <source>%1 Secure Mode</source>
-        <translation>Connessione Sicura di %1</translation>
+        <translation>Modalità Sicura %1</translation>
+    </message>
+    <message>
+        <source>All Lan Users</source>
+        <translation>Utenti Locali</translation>
+    </message>
+    <message>
+        <source>%1 Local Secure Mode</source>
+        <translation type="obsolete">Connessione Locale Sicura di %1</translation>
+    </message>
+    <message>
+        <source>XMPP Secure Mode</source>
+        <translation>Modalità Sicura XMPP</translation>
     </message>
 </context>
 <context>
@@ -1326,11 +1354,15 @@ il file %2 (%3)?</translation>
     <name>JabberService</name>
     <message>
         <source>Jabber</source>
-        <translation>Jabber</translation>
+        <translation type="obsolete">Jabber</translation>
     </message>
     <message>
         <source>You can connect to the Jabber.org server.</source>
         <translation>Puoi connetterti al server di Jabber.org.</translation>
+    </message>
+    <message>
+        <source>Jabber.org</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1348,7 +1380,7 @@ il file %2 (%3)?</translation>
     <name>QObject</name>
     <message>
         <source>* All *</source>
-        <translation>* Tutti *</translation>
+        <translation type="obsolete">* Tutti *</translation>
     </message>
     <message>
         <source>Open chat with all users</source>
@@ -1364,7 +1396,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Me</source>
-        <translation>Io</translation>
+        <translation type="obsolete">Io</translation>
     </message>
     <message>
         <source>Open chat with all local users</source>
@@ -1373,6 +1405,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Nobody</source>
         <translation>Nessuno</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation>Tu</translation>
+    </message>
+    <message>
+        <source>All Lan Users</source>
+        <translation>Utenti Locali</translation>
     </message>
 </context>
 <context>
@@ -1687,7 +1727,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1: error occurred (%2)</source>
-        <translation>%1: si è verificato un errore (%2)</translation>
+        <translation type="obsolete">%1: si è verificato un errore (%2)</translation>
     </message>
     <message>
         <source>adding %1 to the contact list</source>
@@ -1736,6 +1776,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>disconnected from the server</source>
         <translation>disconnessione dal server effettuata</translation>
+    </message>
+    <message>
+        <source>error occurred (%1)</source>
+        <translation>si è verificato un errore (%1)</translation>
     </message>
 </context>
 </TS>

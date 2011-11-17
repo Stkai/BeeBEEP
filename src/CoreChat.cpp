@@ -39,7 +39,7 @@ void Core::createDefaultChat()
   Chat c;
   c.setId( ID_DEFAULT_CHAT );
   c.addUser( ID_LOCAL_USER );
-  QString sHtmlMsg = tr( "%1 Chat with all users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
+  QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
@@ -59,7 +59,7 @@ void Core::createPrivateChat( const User& u )
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 {
-  if( !isConnected() )
+  if( !isConnected( true ) )
   {
     dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat );
     return 0;
@@ -112,7 +112,10 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       }
 
       Connection* c = connection( u.id() );
-      if( c && c->sendMessage( m ) )
+      if( !c )
+        continue;
+
+      if( c->sendMessage( m ) )
         messages_sent += 1;
       else
         dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( u.path() ), DispatchToChat );
@@ -130,7 +133,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 
 void Core::sendWritingMessage( VNumber chat_id )
 {
-  if( !isConnected() )
+  if( !isConnected( true ) )
     return;
 
   Chat from_chat = ChatManager::instance().chat( chat_id );
@@ -142,8 +145,8 @@ void Core::sendWritingMessage( VNumber chat_id )
 
     if( !u.isOnLan() )
     {
-      //if( u.isConnected() )  // FIXME!!!
-
+      sendXmppUserComposing( u );
+      continue;
     }
 
     Connection* c = connection( u.id() );

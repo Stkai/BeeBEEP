@@ -29,7 +29,7 @@
 
 QString JabberService::name() const
 {
-  return tr( "Jabber" );
+  return tr( "Jabber.org" );
 }
 
 QString JabberService::version() const

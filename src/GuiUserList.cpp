@@ -110,28 +110,27 @@ void GuiUserList::setUser( const User& u )
   bool user_item_created = false;
   if( !item )
   {
-    if( u.isConnected() )
-    {
-      item = new GuiUserItem( this );
-      item->setUserId( u.id() );
-      user_item_created = true;
-    }
-    else
+    if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
       return;
-  }
 
-  if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
+    item = new GuiUserItem( this );
+    item->setUserId( u.id() );
+    user_item_created = true;
+  }
+  else
   {
-    removeUser( u );
-    return;
+    if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
+    {
+      removeUser( u );
+      return;
+    }
   }
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   item->setChatId( c.id() );
   item->setUnreadMessages( c.unreadMessages() );
   item->updateItem();
-  if( !user_item_created )
-    sortUsers();
+  sortUsers();
 }
 
 void GuiUserList::removeUser( const User& u )

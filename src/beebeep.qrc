@@ -62,5 +62,11 @@
         <file>images/network-connected.png</file>
         <file>images/network-disconnected.png</file>
         <file>images/secure.png</file>
+        <file>images/birthday.png</file>
+        <file>images/menu-user-away.png</file>
+        <file>images/menu-user-busy.png</file>
+        <file>images/menu-user-offline.png</file>
+        <file>images/menu-user-online.png</file>
+        <file>images/xmpp.png</file>
     </qresource>
 </RCC>

@@ -38,7 +38,7 @@ void Core::setLocalUserStatus( int new_status )
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
   showUserStatusChanged( u );
-  if( isConnected() )
+  if( isConnected( true ) )
     sendLocalUserStatus();
 }
 
@@ -50,7 +50,7 @@ void Core::setLocalUserStatusDescription( const QString& new_status_description 
   u.setStatusDescription( new_status_description );
   Settings::instance().setLocalUser( u );
   showUserStatusChanged( u );
-  if( isConnected() )
+  if( isConnected( true ) )
     sendLocalUserStatus();
 }
 
@@ -59,7 +59,7 @@ void Core::showUserStatusChanged( const User& u )
   // Before signal is emitted, so chat is created in gui ... FIXME ??? ...
   emit userChanged( u );
 
-  if( !isConnected() )
+  if( !isConnected( true ) )
     return;
 
   QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.service(), u.status() ), "*S*" ) + QString( " " );
@@ -86,11 +86,25 @@ void Core::showUserNameChanged( const User& u, const QString& old_user_name )
 
 void Core::showUserVCardChanged( const User& u )
 {
-  QString sHtmlMsg = Bee::iconToHtml( ":/images/profile.png", "*V*" ) + QString( " " );
-  if( u.isLocal() )
-    sHtmlMsg += tr( "You have changed your profile." );
-  else
-    sHtmlMsg += tr( "%1 has updated the profile." ).arg( u.name() );
+  QString sHtmlMsg = "";
+  if( !u.isLocal() )
+  {
+    sHtmlMsg += QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/profile.png", "*V*" ),
+                                        tr( "The %1's profile has been received." ).arg( u.name() ) );
+    if( !u.isOnLan() )
+      sHtmlMsg += QString( " (%1)" ).arg( u.service() );
+  }
+
+  if( u.isBirthDay() )
+  {
+    if( !sHtmlMsg.isEmpty() )
+      sHtmlMsg += QString( "<br>" );
+    sHtmlMsg += QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
+                                        (u.isLocal() ? tr( "Happy Birthday to you!" ) : tr( "Happy Birthday to %1!" ).arg( u.name() ) ) );
+  }
+
+  if( sHtmlMsg.isEmpty() )
+    return;
 
   dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );
@@ -136,6 +150,7 @@ void Core::setLocalUserVCard( const VCard& vc )
       c->sendData( vcard_message );
   }
 
+  sendLocalVCardToXmppServer();
   showUserVCardChanged( u );
 }
 

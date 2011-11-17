@@ -47,7 +47,7 @@ bool GuiChatItem::updateItem()
 
   if( chatId() == ID_DEFAULT_CHAT )
   {
-    chat_name = QObject::tr( "* All *" );
+    chat_name = QObject::tr( "All Lan Users" );
     tool_tip = QObject::tr( "Open chat with all local users" );
     setData( 0, ChatName, " " );
   }

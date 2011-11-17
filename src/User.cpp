@@ -60,3 +60,11 @@ User& User::operator=( const User& u )
   }
   return *this;
 }
+
+bool User::isBirthDay() const
+{
+  if( m_vCard.birthday().isNull() )
+    return false;
+  QDate current_date = QDateTime::currentDateTime().date();
+  return current_date.month() == m_vCard.birthday().month() && current_date.day() == m_vCard.birthday().day();
+}

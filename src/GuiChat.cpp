@@ -217,7 +217,7 @@ QString FormatMessage( const User& u, const ChatMessage& cm )
   QString sHtmlMessage = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
             .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
             .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
-            .arg( u.isLocal() ? QObject::tr( "Me" ) : u.name() )
+            .arg( u.isLocal() ? QObject::tr( "You" ) : u.name() )
             .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
             .arg( text_formatted );
   return sHtmlMessage;
@@ -249,7 +249,7 @@ void GuiChat::setChatUsers()
   QString chat_users;
   if( m_chatId == ID_DEFAULT_CHAT )
   {
-    chat_users = tr( "All users" );
+    chat_users = tr( "All Lan Users" );
   }
   else
   {
@@ -276,8 +276,8 @@ bool GuiChat::setChatId( VNumber chat_id )
   }
   else
   {
-    mp_lPixSecure->setPixmap( QPixmap() );
-    mp_lPixSecure->setToolTip( "" );
+    mp_lPixSecure->setPixmap( QPixmap( ":/images/xmpp.png" ) );
+    mp_lPixSecure->setToolTip( tr( "XMPP Secure Mode" ) );
   }
 
   setChatUsers();

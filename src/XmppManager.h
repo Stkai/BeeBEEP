@@ -48,6 +48,7 @@ public:
   bool connectToServer( const QString& service, const QString& user_name, const QString& passwd );
   void disconnectFromServer();
   void disconnectFromServer( const QString& service );
+  bool isConnected() const;
 
   void sendMessage( const User&, const Message& );
   void subscribeUser( const QString& service, const QString& bare_jid, bool );
@@ -55,6 +56,9 @@ public:
   void requestVCard( const QString& service, const QString& bare_jid );
   void sendLocalUserPresence();
   bool sendFile( const User&, const FileInfo& );
+
+  void sendComposingMessage( const User& );
+  void sendLocalUserVCard();
 
 signals:
   void message( const QString& service, const QString& bare_jid, const Message& );
@@ -75,12 +79,13 @@ protected slots:
   void messageReceived( const QXmppMessage& );
   void presenceReceived( const QXmppPresence& );
   void vCardReceived( const QXmppVCardIq& );
+  void clientVCardReceived();
 
 protected:
-  void makeSystemMessage( XmppClient*, const QString& );
+  void makeSystemMessage( XmppClient*, const QString& bare_jid, const QString& txt );
   User::Status statusFromPresence( QXmppPresence::Status::Type );
-  void parseChatMessage( const QString& service, const QString& bare_jid, const QXmppMessage& );
-  void parseErrorMessage( const QString& service, const QString& bare_jid, const QXmppMessage& );
+  void parseChatMessage( XmppClient*, const QString& bare_jid, const QXmppMessage& );
+  void parseErrorMessage( XmppClient*, const QString& bare_jid, const QXmppMessage& );
   void checkUserChanged( XmppClient*, const QString& );
   QString errorConditionToString( int ) const;
 

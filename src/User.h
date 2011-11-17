@@ -64,6 +64,7 @@ public:
   inline const QString& service() const;
 
   inline bool isOnLan() const;
+  bool isBirthDay() const;
 
 private:
   VNumber m_id;

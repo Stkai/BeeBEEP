@@ -40,7 +40,7 @@ class Core : public QObject
 public:
   explicit Core( QObject* parent = 0 );
 
-  inline bool isConnected() const;
+  bool isConnected( bool check_also_network_service ) const;
   bool start();
   void stop();
 
@@ -64,7 +64,6 @@ public:
   /* CoreXmpp */
   void setXmppUserSubscription( const QString& service, const QString& user_path, bool accepted );
   bool removeXmppUser( const User& );
-  void sendLocalUserStatusToXmppServer();
   bool connectToXmppServer( const NetworkAccount& );
   void disconnectFromXmppServer( const QString& service = "" ); // Empty service = All services
   bool isXmppServerConnected( const QString& ) const;
@@ -110,6 +109,7 @@ protected slots:
   void sendXmppChatMessage( const User&, const Message& );
   void checkXmppUserVCard( const QString& service, const QString& bare_jid );
   void setXmppVCard( const QString& service, const QString& bare_jid, const VCard& );
+  void sendXmppUserComposing( const User& );
 
 protected:
   /* CoreConnection */
@@ -144,6 +144,10 @@ protected:
   void dispatchToChat( const ChatMessage&, VNumber chat_id );
   void dispatchToService( const ChatMessage&, const QString& service_name );
 
+  /* CoreXmpp */
+  void sendLocalUserStatusToXmppServer();
+  void sendLocalVCardToXmppServer();
+
 private:
   QList<Connection*> m_connections;
   Listener* mp_listener;
@@ -153,8 +157,5 @@ private:
 
 };
 
-
-// Inline Functions
-inline bool Core::isConnected() const { return mp_listener->isListening(); }
 
 #endif // BEEBEEP_CLIENT_H

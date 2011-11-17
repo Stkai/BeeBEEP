@@ -126,12 +126,7 @@ void Core::checkXmppUserVCard( const QString& service, const QString& bare_jid )
 {
   User u = UserManager::instance().userList().find( service, bare_jid );
   if( u.isValid() )
-  {
-    if( u.vCard().hasOnlyNickName() )
-      mp_xmppManager->requestVCard( service, bare_jid );
-    else
-      qDebug() << "User" << u.path() << "has already a vCard. Update not needed";
-  }
+    mp_xmppManager->requestVCard( service, bare_jid );
 }
 
 void Core::setXmppVCard( const QString& service, const QString& bare_jid, const VCard& vc )
@@ -143,4 +138,17 @@ void Core::setXmppVCard( const QString& service, const QString& bare_jid, const 
     UserManager::instance().setUser( u );
     showUserVCardChanged( u );
   }
+}
+
+void Core::sendXmppUserComposing( const User& u )
+{
+  if( !u.isConnected() )
+    return;
+  mp_xmppManager->sendComposingMessage( u );
+}
+
+void Core::sendLocalVCardToXmppServer()
+{
+  if( mp_xmppManager->isConnected() )
+    mp_xmppManager->sendLocalUserVCard();
 }

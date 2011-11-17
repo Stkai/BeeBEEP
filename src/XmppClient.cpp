@@ -41,6 +41,7 @@ XmppClient::XmppClient( QObject* parent )
   connect( &(rosterManager()), SIGNAL( rosterChanged( const QString& ) ), this, SIGNAL( rosterChanged( const QString& ) ) );
   connect( &(rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SIGNAL( presenceChanged( const QString&, const QString& ) ) );
   connect( &(vCardManager()), SIGNAL( vCardReceived( const QXmppVCardIq& ) ), this, SIGNAL( vCardReceived( const QXmppVCardIq& ) ) );
+  connect( &(vCardManager()), SIGNAL( clientVCardReceived() ), this, SIGNAL( clientVCardReceived() ) );
 }
 
 void XmppClient::setupManagers()
@@ -106,4 +107,29 @@ void XmppClient::checkFileTransferProgress( qint64 bytes_transferred, qint64 tot
   qDebug() << "XMPP> transfer file" << job->fileName() << "to" << job->jid() << "in progress:" << bytes_transferred << "of" << total_bytes << "bytes";
 }
 
+void XmppClient::sendVCard( const QXmppVCardIq& vciq )
+{
+  if( !isConnected() )
+    return;
+
+  QByteArray photo_hash = Settings::instance().localUser().vCard().photoHash();
+
+  vCardManager().setClientVCard( vciq );
+  QXmppPresence presence = clientPresence();
+  if( vCardManager().isClientVCardReceived() )
+  {
+    if( photo_hash.isEmpty() )
+      presence.setVCardUpdateType( QXmppPresence::VCardUpdateNoPhoto );
+    else
+      presence.setVCardUpdateType( QXmppPresence::VCardUpdateValidPhoto );
+  }
+  else
+  {
+    presence.setVCardUpdateType( QXmppPresence::VCardUpdateNone );
+  }
+
+  presence.setPhotoHash( photo_hash );
+  sendPacket( vciq );
+  setClientPresence( presence );
+}
 

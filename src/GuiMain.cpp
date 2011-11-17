@@ -86,6 +86,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   refreshTitle();
   updateStatusIcon();
+  initGuiItems();
 }
 
 void GuiMain::refreshTitle()
@@ -93,14 +94,14 @@ void GuiMain::refreshTitle()
   setWindowTitle( QString( "%1 - %2 (%3)" ).arg(
                     Settings::instance().programName(),
                     Settings::instance().localUser().name(),
-                    (mp_core->isConnected() ?
+                    (mp_core->isConnected( true ) ?
                        Bee::userStatusToString( Settings::instance().localUser().status() ) :
                        tr( "offline" ) ) ) );
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  if( !mp_core->isConnected() ||
+  if( !mp_core->isConnected( true ) ||
       QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::Yes )
   {
@@ -108,7 +109,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
 #endif
-    if( mp_core->isConnected() )
+    if( mp_core->isConnected( true ) )
       mp_core->stop();
     e->accept();
   }
@@ -125,7 +126,7 @@ void GuiMain::showNextChat()
 
 void GuiMain::startStopCore()
 {
-  if( mp_core->isConnected() )
+  if( mp_core->isConnected( false ) )
     stopCore();
   else
     startCore();
@@ -155,7 +156,8 @@ void GuiMain::stopCore()
 
 void GuiMain::initGuiItems()
 {
-  bool enable = mp_core->isConnected();
+  bool enable = mp_core->isConnected( false );
+  bool enable_verbose = mp_core->isConnected( true );
 
   refreshTitle();
   showChat( ID_DEFAULT_CHAT );
@@ -173,9 +175,9 @@ void GuiMain::initGuiItems()
     mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
   }
 
-  mp_menuStatus->setEnabled( enable );
-  mp_actSendFile->setEnabled( enable );
-  mp_actSearch->setEnabled( enable );
+  mp_menuStatus->setEnabled( enable_verbose );
+  mp_actSendFile->setEnabled( enable_verbose );
+  mp_actSearch->setEnabled( enable_verbose );
 
   mp_userList->setDefaultChatConnected( enable );
 }
@@ -363,7 +365,7 @@ void GuiMain::createMenus()
   mp_menuStatus->setIcon( QIcon( ":/images/user-status.png" ) );
   for( int i = User::Online; i < User::NumStatus; i++ )
   {
-    act = mp_menuStatus->addAction( Bee::userStatusIcon( "", i ), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
+    act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( i ) ), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
     act->setData( i );
     act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( i ) ) );
     act->setIconVisibleInMenu( true );
@@ -476,7 +478,7 @@ void GuiMain::emoticonSelected()
 void GuiMain::refreshUserList()
 {
   qDebug() << "Refresh users";
-  mp_userList->updateUsers( mp_core->isConnected() );
+  mp_userList->updateUsers( mp_core->isConnected( false ) );
 }
 
 void GuiMain::refreshChat()
@@ -650,7 +652,7 @@ void GuiMain::saveChat()
 
 void GuiMain::searchUsers()
 {
-  if( !mp_core->isConnected() )
+  if( !mp_core->isConnected( true ) )
     return;
 
   GuiSearchUser gsu( this );
@@ -693,7 +695,7 @@ void GuiMain::statusSelected()
 
 void GuiMain::updateStatusIcon()
 {
-  mp_menuStatus->setIcon( Bee::userStatusIcon( Settings::instance().localUser().service(), Settings::instance().localUser().status() ) );
+  mp_menuStatus->setIcon( QIcon( Bee::menuUserStatusIconFileName( Settings::instance().localUser().status() ) ) );
   QString tip = tr( "You are %1%2" ).arg( Bee::userStatusToString( Settings::instance().localUser().status() ) )
       .arg( (Settings::instance().localUser().statusDescription().isEmpty() ? QString( "" ) : QString( ": %1" ).arg( Settings::instance().localUser().statusDescription() ) ) );
   QAction* act = mp_menuStatus->menuAction();

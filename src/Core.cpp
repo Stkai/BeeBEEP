@@ -93,6 +93,9 @@ bool Core::start()
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
 
+  if( Settings::instance().showTipsOfTheDay() )
+    showTipOfTheDay();
+
   if( Settings::instance().localUser().status() == User::Offline )
   {
     User u = Settings::instance().localUser();
@@ -101,9 +104,7 @@ bool Core::start()
   }
 
   showUserStatusChanged( Settings::instance().localUser() );
-
-  if( Settings::instance().showTipsOfTheDay() )
-    showTipOfTheDay();
+  showUserVCardChanged( Settings::instance().localUser() );
 
   QList<NetworkAccount>::const_iterator it = Settings::instance().networkAccounts().begin();
   while( it != Settings::instance().networkAccounts().end() )
@@ -142,3 +143,13 @@ void Core::addBroadcastAddress( const QHostAddress& host_address )
   }
 }
 
+bool Core::isConnected( bool check_also_network_service ) const
+{
+  if( mp_listener->isListening() )
+    return true;
+
+  if( check_also_network_service )
+    return mp_xmppManager->isConnected();
+  else
+    return false;
+}
