@@ -185,14 +185,14 @@ void GuiMain::initGuiItems()
 void GuiMain::showAbout()
 {
   QMessageBox::about( this, Settings::instance().programName(),
-                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br /><br />%7" )
+                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br />%7" )
                       .arg( Settings::instance().programName() )
                       .arg( tr( "Secure Network Chat" ) )
                       .arg( tr( "Version" ) )
                       .arg( Settings::instance().version( true ) )
                       .arg( tr( "developed by Marco Mastroddi" ) )
                       .arg( tr( "e-mail: marco.mastroddi@gmail.com") )
-                      .arg( QString( "XMPP: QXmpp 0.3.91 (Manjeet Dahiya)") )
+                      .arg( PluginManager::instance().services().count() > 0 ? QString( "<br />XMPP: QXmpp 0.3.91 (Manjeet Dahiya)" ) : "" )
                       );
 
 }

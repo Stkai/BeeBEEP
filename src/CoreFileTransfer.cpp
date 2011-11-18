@@ -120,6 +120,9 @@ bool Core::sendFile( const User& u, const QString& file_path )
         dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send the file: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
         return false;
       }
+      // fi was generated before... and it has not the listener data
+      fi.setHostAddress( mp_fileTransfer->serverAddress() );
+      fi.setHostPort( mp_fileTransfer->serverPort() );
     }
 
     Message m = Protocol::instance().fileInfoToMessage( fi );

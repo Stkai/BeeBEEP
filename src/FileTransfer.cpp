@@ -30,7 +30,7 @@
 FileTransfer::FileTransfer( QObject *parent )
   : QTcpServer( parent ), m_id( ID_START ), m_files(), m_peers()
 {
-  connect( this, SIGNAL(newPeerConnected(FileTransferPeer*,int)), this, SLOT(setupPeer(FileTransferPeer*,int)));
+  connect( this, SIGNAL( newPeerConnected( FileTransferPeer* , int ) ), this, SLOT( setupPeer( FileTransferPeer*, int ) ) );
 }
 
 bool FileTransfer::startListener()
