@@ -154,10 +154,7 @@ QString FormatHtmlText( const QString& text )
         if( last_semicolon_index >= 0 )
           text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
 
-        // preserve heart emoticon
-        if( (i+1) < text.size() && text.at( i+1 ) != QLatin1Char( '3' ) )
-          last_semicolon_index = text_formatted.size();
-
+        last_semicolon_index = text_formatted.size();
         text_formatted += QLatin1Char( '<' );
       }
       else

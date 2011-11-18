@@ -28,13 +28,18 @@ EmoticonManager* EmoticonManager::mp_instance = NULL;
 
 
 EmoticonManager::EmoticonManager()
- : m_emoticons()
+  : m_emoticons(), m_maxTextSize( 2 )
 {
   addEmoticon( ":)", "smile" );
+  addEmoticon( ":-)", "smile" );
   addEmoticon( ":P", "tongue" );
+  addEmoticon( ":-P", "tongue" );
   addEmoticon( ":'", "cry" );
+  addEmoticon( ":'(", "cry" );
   addEmoticon( ":D", "laugh" );
+  addEmoticon( ":-D", "laugh" );
   addEmoticon( ":*", "kiss" );
+  addEmoticon( ":-*", "kiss" );
   addEmoticon( ":z", "sleep" );
   addEmoticon( ":o", "surprise" );
   addEmoticon( ":|", "pouty" );
@@ -43,18 +48,66 @@ EmoticonManager::EmoticonManager()
   addEmoticon( ":$", "bandit" );
   addEmoticon( ":!", "wizard" );
   addEmoticon( ";)", "wink" );
+  addEmoticon( ";-)", "wink" );
   addEmoticon( "B)", "cool" );
+  addEmoticon( "B-)", "cool" );
   addEmoticon( "<3", "heart" );
+  addEmoticon( "&lt;3", "heart" );  // for html
+  addEmoticon( "</3", "heart-broken" );
+  addEmoticon( "&lt;/3", "heart-broken" ); // for html
   addEmoticon( "=)", "sideways" );
-  addEmoticon( "})", "devil" );
-  addEmoticon( "o)", "angel" );
+  addEmoticon( "}:)", "devil" );
+  addEmoticon( "o:)", "angel" );
   addEmoticon( "x(", "sick" );
+  addEmoticon( "x-(", "sick" );
   addEmoticon( "X|", "pinched" );
+  addEmoticon( "X-|", "pinched" );
 }
 
 void EmoticonManager::addEmoticon( const QString& e_text, const QString& e_name )
 {
   m_emoticons.insert( e_text.at( 0 ), Emoticon( e_text, e_name ) );
+  if( e_text.size() > m_maxTextSize )
+    m_maxTextSize = e_text.size();
+}
+
+static bool EmoticonForName( const Emoticon& e1, const Emoticon& e2 )
+{
+  return e1.name() < e2.name();
+}
+
+QList<Emoticon> EmoticonManager::emoticons( bool remove_duplicates ) const
+{
+  QList<Emoticon> emoticon_list;
+  bool emoticon_to_add = false;
+  QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
+  while( it != m_emoticons.end() )
+  {
+    if( !remove_duplicates )
+      emoticon_list << *it;
+    else
+    {
+      emoticon_to_add = true;
+      QList<Emoticon>::iterator it2 = emoticon_list.begin();
+      while( it2 != emoticon_list.end() )
+      {
+        if( (*it2).name() == (*it).name() )
+        {
+          emoticon_to_add = false;
+          if( (*it2).textToMatch().size() > (*it).textToMatch().size() )
+            *it2 = *it;
+        }
+        ++it2;
+      }
+      if( emoticon_to_add )
+        emoticon_list << *it;
+    }
+    ++it;
+  }
+
+  qSort( emoticon_list.begin(), emoticon_list.end(), EmoticonForName );
+
+  return emoticon_list;
 }
 
 Emoticon EmoticonManager::emoticon( const QString& e_text ) const
@@ -66,7 +119,7 @@ Emoticon EmoticonManager::emoticon( const QString& e_text ) const
     QList<Emoticon>::const_iterator it = emoticon_list.begin();
     while( it != emoticon_list.end() )
     {
-      if( (*it).textToMatch() == e_text )
+      if( (*it).textToMatch().toLower() == e_text.toLower() )
         return *it;
       ++it;
     }
@@ -84,15 +137,32 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
   {
     c = msg[ pos ];
 
-    if( text_to_match.size() > 0 )
+    if( c.isSpace() )
+    {
+      if( text_to_match.size() > 0 )
+      {
+        s += text_to_match;
+        s += c;
+        text_to_match = "";
+      }
+    }
+    else if( text_to_match.size() > 0 )
     {
       text_to_match += c;
       Emoticon e = emoticon( text_to_match );
       if( e.isValid() )
+      {
         s += e.toHtml();
+        text_to_match = "";
+      }
       else
-        s += text_to_match;
-      text_to_match = "";
+      {
+        if( text_to_match.size() >= m_maxTextSize )
+        {
+          s += text_to_match;
+          text_to_match = "";
+        }
+      }
     }
     else if( m_emoticons.contains( c ) )
       text_to_match = c;
@@ -103,11 +173,5 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
   if( text_to_match.size() > 0 )
     s += text_to_match;
 
-  if( s.contains( QLatin1String( "&lt;3" ) ) )
-  {
-    s.replace( QLatin1String( "&lt;3" ), QLatin1String( "<3" ) ); // hearth emoticon
-    return parseEmoticons( s );
-  }
-  else
-    return s;
+  return s;
 }

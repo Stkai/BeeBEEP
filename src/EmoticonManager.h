@@ -35,7 +35,8 @@ class EmoticonManager
 public:
   QString parseEmoticons( const QString& ) const;
   Emoticon emoticon( const QString& ) const;
-  inline const QMultiHash<QChar, Emoticon>& emoticons() const;
+
+  QList<Emoticon> emoticons( bool remove_duplicates ) const;
 
   static EmoticonManager& instance()
   {
@@ -60,13 +61,9 @@ protected:
 
 private:
   QMultiHash<QChar, Emoticon> m_emoticons;
+  int m_maxTextSize;
 
 };
-
-
-// Inline Functions
-
-inline const QMultiHash<QChar, Emoticon>& EmoticonManager::emoticons() const { return m_emoticons; }
 
 
 #endif // BEEBEEP_EMOTICONMANAGER_H

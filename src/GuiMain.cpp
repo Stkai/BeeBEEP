@@ -349,8 +349,10 @@ void GuiMain::createMenus()
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
   mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
   mp_menuEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
-  QMultiHash<QChar, Emoticon>::const_iterator it = EmoticonManager::instance().emoticons().begin();
-  while( it != EmoticonManager::instance().emoticons().end() )
+
+  QList<Emoticon> emoticon_list = EmoticonManager::instance().emoticons( true );
+  QList<Emoticon>::const_iterator it = emoticon_list.begin();
+  while( it != emoticon_list.end() )
   {
     act = mp_menuEmoticons->addAction( QIcon( (*it).pixmap() ), (*it).name(), this, SLOT( emoticonSelected() ) );
     act->setData( (*it).textToMatch() );
