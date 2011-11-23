@@ -36,7 +36,7 @@ GuiNetworkLogin::GuiNetworkLogin( QWidget* parent )
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
-void GuiNetworkLogin::setNetworkAccount( const NetworkAccount& na, const QString& network_service )
+void GuiNetworkLogin::setNetworkAccount( const NetworkAccount& na, const QString& network_service, bool is_connected )
 {
   int i = 0;
   int current_index = 0;
@@ -71,6 +71,11 @@ void GuiNetworkLogin::setNetworkAccount( const NetworkAccount& na, const QString
     mp_lePassword->setFocus();
   else
     mp_pbLogin->setFocus();
+
+  if( is_connected )
+    mp_pbLogin->setText( tr( "Disconnect" ) );
+  else
+    mp_pbLogin->setText( tr( "Connect" ) );
 }
 
 void GuiNetworkLogin::doLogin()

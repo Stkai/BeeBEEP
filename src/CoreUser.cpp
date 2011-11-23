@@ -56,7 +56,6 @@ void Core::setLocalUserStatusDescription( const QString& new_status_description 
 
 void Core::showUserStatusChanged( const User& u )
 {
-  // Before signal is emitted, so chat is created in gui ... FIXME ??? ...
   emit userChanged( u );
 
   if( !isConnected( true ) )

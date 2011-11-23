@@ -37,17 +37,19 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
   m_changed = false;
 
   QStringList labels;
-  labels << "" << tr( "Plugin" ) << tr( "Version" ) << tr( "Author" );
+  labels << "" << "" << tr( "Plugin" ) << tr( "Version" ) << tr( "Author" );
   mp_twPlugins->setHeaderLabels( labels );
-  mp_twPlugins->setRootIsDecorated( false );
+  mp_twPlugins->setRootIsDecorated( true );
   mp_twPlugins->setSortingEnabled( false );
-  mp_twPlugins->setColumnWidth( 0, 24 );
+  mp_twPlugins->setColumnWidth( 0, 18 );
+  mp_twPlugins->setColumnWidth( 1, 18 );
 
   QHeaderView* hv = mp_twPlugins->header();
   hv->setResizeMode( 0, QHeaderView::Fixed );
-  hv->setResizeMode( 1, QHeaderView::Stretch );
-  hv->setResizeMode( 2, QHeaderView::ResizeToContents );
-  hv->setResizeMode( 3, QHeaderView::Stretch );
+  hv->setResizeMode( 1, QHeaderView::Fixed );
+  hv->setResizeMode( 2, QHeaderView::Stretch );
+  hv->setResizeMode( 3, QHeaderView::ResizeToContents );
+  hv->setResizeMode( 4, QHeaderView::Stretch );
 
   connect( mp_twPlugins, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( pluginSelected( QTreeWidgetItem*, int ) ) );
   connect( mp_twPlugins, SIGNAL( customContextMenuRequested ( const QPoint& ) ), this, SLOT( showContextMenu( const QPoint& ) ) );
@@ -71,6 +73,9 @@ void GuiPluginManager::pluginSelected( QTreeWidgetItem* item, int )
 
 void GuiPluginManager::showContextMenu( QTreeWidgetItem* item, const QPoint& pos )
 {
+  if( item->data( 0, Qt::UserRole+1 ).toInt() <= 0 )
+    return;
+
   bool enable = isPluginEnabled( item );
   QIcon menu_icon = enable ? QIcon( ":/images/red-ball.png" ) : QIcon( ":/images/green-ball.png" );
   QString menu_text = enable ? tr( "Disable %1" ).arg( item->text( 1 ) ) : tr( "Enable %1" ).arg( item->text( 1 ) );
@@ -83,8 +88,8 @@ void GuiPluginManager::showContextMenu( QTreeWidgetItem* item, const QPoint& pos
 void GuiPluginManager::updateItem( QTreeWidgetItem* item )
 {
   bool enable = isPluginEnabled( item );
-  item->setIcon( 0, (enable ? QIcon( ":/images/green-ball.png" ) : QIcon( ":/images/red-ball.png" ) ) );
-  item->setToolTip( 0, (enable ? tr( "%1 is enabled" ).arg( item->text( 1 ) ) : tr( "%1 is disabled" ).arg( item->text( 1 ) ) ) );
+  item->setIcon( 1, (enable ? QIcon( ":/images/green-ball.png" ) : QIcon( ":/images/red-ball.png" ) ) );
+  item->setToolTip( 1, (enable ? tr( "%1 is enabled" ).arg( item->text( 1 ) ) : tr( "%1 is disabled" ).arg( item->text( 1 ) ) ) );
 }
 
 void GuiPluginManager::enableAll()
@@ -125,25 +130,44 @@ void GuiPluginManager::updatePlugins()
 {
   mp_twPlugins->clear();
   QTreeWidgetItem* item;
-  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
+
+  if( PluginManager::instance().textMarkers().size() > 0 )
   {
-    item = new QTreeWidgetItem( mp_twPlugins );
-    setPluginEnabled( item, text_marker->isEnabled() );
-    item->setIcon( 1, text_marker->icon().isNull() ? QIcon( ":/images/plugin.png" ) : text_marker->icon() );
-    item->setText( 1, text_marker->name() );
-    item->setText( 2, text_marker->version() );
-    item->setText( 3, text_marker->author() );
-    updateItem( item );
+    QTreeWidgetItem* text_marker_root_item = new QTreeWidgetItem( mp_twPlugins );
+    text_marker_root_item->setText( 2, tr( "Text Markers") );
+    text_marker_root_item->setData( 0, Qt::UserRole+1, 0 );
+
+    foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
+    {
+      item = new QTreeWidgetItem( text_marker_root_item );
+      setPluginEnabled( item, text_marker->isEnabled() );
+      item->setIcon( 2, text_marker->icon().isNull() ? QIcon( ":/images/plugin.png" ) : text_marker->icon() );
+      item->setText( 2, text_marker->name() );
+      item->setText( 3, text_marker->version() );
+      item->setText( 4, text_marker->author() );
+      item->setData( 0, Qt::UserRole+1, 1 );
+      updateItem( item );
+    }
   }
 
-  foreach( ServiceInterface* service, PluginManager::instance().services() )
+  if( PluginManager::instance().services().size() > 0 )
   {
-    item = new QTreeWidgetItem( mp_twPlugins );
-    setPluginEnabled( item, service->isEnabled() );
-    item->setIcon( 1, service->icon().isNull() ? QIcon( ":/images/plugin.png" ) : service->icon() );
-    item->setText( 1, service->name() );
-    item->setText( 2, service->version() );
-    item->setText( 3, service->author() );
-    updateItem( item );
+    QTreeWidgetItem* service_root_item = new QTreeWidgetItem( mp_twPlugins );
+    service_root_item->setText( 2, tr( "Network Services") );
+    service_root_item->setData( 0, Qt::UserRole+1, 0 );
+
+    foreach( ServiceInterface* service, PluginManager::instance().services() )
+    {
+      item = new QTreeWidgetItem( service_root_item );
+      setPluginEnabled( item, service->isEnabled() );
+      item->setIcon( 2, service->icon().isNull() ? QIcon( ":/images/plugin.png" ) : service->icon() );
+      item->setText( 2, service->name() );
+      item->setText( 3, service->version() );
+      item->setText( 4, service->author() );
+      item->setData( 0, Qt::UserRole+1, 2 );
+      updateItem( item );
+    }
   }
+
+  mp_twPlugins->expandAll();
 }

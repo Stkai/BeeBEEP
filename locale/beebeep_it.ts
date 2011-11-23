@@ -1073,6 +1073,14 @@ il file %2 (%3)?</translation>
         <source>Plugin Manager - %1</source>
         <translation>Gestione dei Plugin - %1</translation>
     </message>
+    <message>
+        <source>Text Markers</source>
+        <translation>Formattazione del Testo</translation>
+    </message>
+    <message>
+        <source>Network Services</source>
+        <translation>Servizi di Rete</translation>
+    </message>
 </context>
 <context>
     <name>GuiSearchUser</name>

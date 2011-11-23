@@ -36,7 +36,7 @@ class GuiNetworkLogin : public QDialog, private Ui::GuiNetworkLogin
 public:
   explicit GuiNetworkLogin( QWidget *parent );
 
-  void setNetworkAccount( const NetworkAccount&, const QString& network_service );
+  void setNetworkAccount( const NetworkAccount&, const QString& network_service, bool is_connected );
   inline const NetworkAccount& account() const;
 
 protected slots:

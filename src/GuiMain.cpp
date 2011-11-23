@@ -907,6 +907,9 @@ void GuiMain::updadePluginMenu()
     act->setEnabled( text_marker->isEnabled() );
   }
 
+  if( PluginManager::instance().textMarkers().size() > 0 && PluginManager::instance().services().size() > 0 )
+    mp_menuPlugins->addSeparator();
+
   foreach( ServiceInterface* service, PluginManager::instance().services() )
   {
     act = mp_menuPlugins->addAction( service->name(), this, SLOT( showPluginHelp() ) );

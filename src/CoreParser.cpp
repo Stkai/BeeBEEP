@@ -103,7 +103,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
       qWarning() << "Unable to change the username of the user" << u.path() << "because message is invalid";
   }
   else
-    qWarning() << "Invalid flag found in user message (in Connection)";
+    qWarning() << "Invalid flag found in user message (CoreParser)";
 }
 
 void Core::parseFileMessage( const User& u, const Message& m )
@@ -138,5 +138,8 @@ void Core::parseFileMessage( const User& u, const Message& m )
 void Core::parseChatMessage( const User& u, const Message& m )
 {
   qDebug() << "Chat message received from user" << u.path();
-  dispatchChatMessageReceived( u.id(), m );
+  if( m.hasFlag( Message::Private ) || m.flags() == 0 )
+    dispatchChatMessageReceived( u.id(), m );
+  else
+    qWarning() << "Invalid flag found in chat message (CoreParser)";
 }
