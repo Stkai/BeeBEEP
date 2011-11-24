@@ -1001,28 +1001,33 @@ void GuiMain::showNetworkAccount()
     return;
 
   QString xmpp_service = act->data().toString();
-  if( mp_core->isXmppServerConnected( xmpp_service ) )
-  {
-    if( QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "You are connected to %1. Do you want to disconnect?").arg( xmpp_service ),
-                               tr( "Yes"), tr( "No" ), QString::null, 1, 1 ) == 0 )
-    {
-      mp_core->disconnectFromXmppServer( xmpp_service );
-    }
-    return;
-  }
+  bool is_connected =  mp_core->isXmppServerConnected( xmpp_service );
 
   GuiNetworkLogin gnl( this );
   gnl.setModal( true );
-  gnl.setNetworkAccount( Settings::instance().networkAccount( xmpp_service ), xmpp_service );
+  gnl.setNetworkAccount( Settings::instance().networkAccount( xmpp_service ), xmpp_service, is_connected );
   gnl.show();
   gnl.setFixedSize( gnl.size() );
   int result = gnl.exec();
+
   if( result == QDialog::Accepted )
   {
-    Settings::instance().setNetworkAccount( gnl.account() );
-    if( !mp_core->connectToXmppServer( gnl.account() ) )
-      QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to connect to %1. Plugin is not present or is not enabled." ).arg( gnl.account().service() ) );
+    if( is_connected )
+    {
+      if( QMessageBox::question( this, Settings::instance().programName(),
+                                 tr( "You are connected to %1. Do you want to disconnect?").arg( xmpp_service ),
+                                 tr( "Yes"), tr( "No" ), QString::null, 1, 1 ) == 0 )
+      {
+        mp_core->disconnectFromXmppServer( xmpp_service );
+      }
+    }
+    else
+    {
+      Settings::instance().setNetworkAccount( gnl.account() );
+      if( !mp_core->connectToXmppServer( gnl.account() ) )
+        QMessageBox::information( this, Settings::instance().programName(),
+                                  tr( "Unable to connect to %1. Plugin is not present or is not enabled." ).arg( gnl.account().service() ) );
+    }
   }
 }
 

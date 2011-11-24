@@ -33,7 +33,15 @@ GuiNetworkLogin::GuiNetworkLogin( QWidget* parent )
   setWindowTitle( tr( "Login - %1").arg( Settings::instance().programName() ) );
 
   connect( mp_pbLogin, SIGNAL( clicked() ), this, SLOT( doLogin() ) );
-  connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_pbClose, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_pbSave, SIGNAL( clicked() ) , this, SLOT( doSave() ) );
+
+  connect( mp_comboService, SIGNAL( currentIndexChanged( int ) ), this, SLOT( somethingChanged() ) );
+  connect( mp_leUser, SIGNAL( textEdited( const QString& ) ), this, SLOT( somethingChanged() ) );
+  connect( mp_lePassword, SIGNAL( textEdited( const QString& ) ), this, SLOT( somethingChanged() ) );
+  connect( mp_cbRememberMe, SIGNAL( stateChanged( int ) ), this, SLOT( somethingChanged() ) );
+  connect( mp_cbRememberPassword, SIGNAL( stateChanged( int ) ), this, SLOT( somethingChanged() ) );
+  connect( mp_cbAutomaticConnection, SIGNAL( stateChanged( int ) ), this, SLOT( somethingChanged() ) );
 }
 
 void GuiNetworkLogin::setNetworkAccount( const NetworkAccount& na, const QString& network_service, bool is_connected )
@@ -76,24 +84,26 @@ void GuiNetworkLogin::setNetworkAccount( const NetworkAccount& na, const QString
     mp_pbLogin->setText( tr( "Disconnect" ) );
   else
     mp_pbLogin->setText( tr( "Connect" ) );
+
+  mp_pbSave->setEnabled( false );
 }
 
-void GuiNetworkLogin::doLogin()
+bool GuiNetworkLogin::loadDataFromForm( bool perform_check )
 {
   QString user_name = mp_leUser->text().trimmed();
-  if( user_name.isEmpty() )
+  if( perform_check && user_name.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert the username (JabberId)") );
     mp_leUser->setFocus();
-    return;
+    return false;
   }
 
   QString user_password = mp_lePassword->text().trimmed();
-  if( user_password.isEmpty() )
+  if( perform_check && user_password.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert the password" ) );
     mp_lePassword->setFocus();
-    return;
+    return false;
   }
 
   m_account.setService( mp_comboService->currentText() );
@@ -103,5 +113,26 @@ void GuiNetworkLogin::doLogin()
   m_account.setSavePassword( mp_cbRememberPassword->isChecked() );
   m_account.setAutoConnect( mp_cbAutomaticConnection->isChecked() );
 
+  return true;
+}
+
+void GuiNetworkLogin::doLogin()
+{
+  if( !loadDataFromForm( true ) )
+    return;
   accept();
 }
+
+void GuiNetworkLogin::somethingChanged()
+{
+  mp_pbSave->setEnabled( true );
+}
+
+void GuiNetworkLogin::doSave()
+{
+  if( !loadDataFromForm( false ) )
+    return;
+  Settings::instance().setNetworkAccount( m_account );
+  mp_pbSave->setEnabled( false );
+}
+

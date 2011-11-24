@@ -41,6 +41,11 @@ public:
 
 protected slots:
   void doLogin();
+  void doSave();
+  void somethingChanged();
+
+protected:
+  bool loadDataFromForm( bool perform_check );
 
 private:
   NetworkAccount m_account;
