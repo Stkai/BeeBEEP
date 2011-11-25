@@ -197,6 +197,19 @@ void GuiMain::showAbout()
 
 }
 
+void GuiMain::showLicense()
+{
+  QString license_txt = tr( "BeeBEEP is free software: you can redistribute it and/or modify<br>"
+  "it under the terms of the GNU General Public License as published<br>"
+  "by the Free Software Foundation, either version 3 of the License<br>"
+  "or (at your option) any later version.<br><br>"
+  "BeeBEEP is distributed in the hope that it will be useful,<br>"
+  "but WITHOUT ANY WARRANTY; without even the implied warranty<br>"
+  "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br>"
+  "See the GNU General Public License for more details." );
+  QMessageBox::about( this, Settings::instance().programName(), license_txt );
+}
+
 void GuiMain::createActions()
 {
   mp_actStartStopCore = new QAction( QIcon( ":/images/connect.png"), tr( "&Connect"), this );
@@ -356,7 +369,7 @@ void GuiMain::createMenus()
   {
     act = mp_menuEmoticons->addAction( QIcon( (*it).pixmap() ), (*it).name(), this, SLOT( emoticonSelected() ) );
     act->setData( (*it).textToMatch() );
-    act->setStatusTip( QString( " %1   < %2 >" ).arg( (*it).textToMatch() ).arg( (*it).name() ) );
+    act->setStatusTip( QString( "Insert [%1] emoticon %2" ).arg( (*it).name(), (*it).textToMatch() ) );
     act->setIconVisibleInMenu( true );
     ++it;
   }
@@ -382,6 +395,8 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Show me the tip of the day" ) );
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( mp_actAbout );
+  act = mp_menuInfo->addAction( QIcon( ":/images/license.png" ), tr( "Show %1's license..." ).arg( Settings::instance().programName() ), this, SLOT( showLicense() ) );
+  act->setStatusTip( tr( "Show the informations about %1's license" ).arg( Settings::instance().programName() ) );
   act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
 

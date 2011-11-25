@@ -865,6 +865,18 @@ il file %2 (%3)?</translation>
         <source>Unable to connect to %1. Plugin is not present or is not enabled.</source>
         <translation>Impossibile connettersi a %1. Il plugin non è presente o non è abilitato.</translation>
     </message>
+    <message>
+        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Show %1&apos;s license...</source>
+        <translation>Licenza di %1...</translation>
+    </message>
+    <message>
+        <source>Show the informations about %1&apos;s license</source>
+        <translation>Mostra le informazioni sulla licenza di %1</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -996,7 +1008,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation type="obsolete">Annulla</translation>
     </message>
     <message>
         <source>Login - %1</source>
@@ -1013,6 +1025,22 @@ il file %2 (%3)?</translation>
     <message>
         <source>Account</source>
         <translation>Account</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salva</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Chiudi</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Disconnetti</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation>Connetti</translation>
     </message>
 </context>
 <context>

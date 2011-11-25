@@ -49,6 +49,7 @@ public slots:
 
 private slots:
   void showAbout();
+  void showLicense();
   void checkUser( const User& );
   void showWritingUser( const User& );
   void showChatMessage( VNumber, const ChatMessage& );

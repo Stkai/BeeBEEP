@@ -9,7 +9,7 @@
         <file>emoticons/cry.png</file>
         <file>emoticons/kiss.png</file>
         <file>emoticons/heart.png</file>
-		<file>emoticons/heart-broken.png</file>
+        <file>emoticons/heart-broken.png</file>
         <file>emoticons/sideways.png</file>
         <file>emoticons/devil.png</file>
         <file>emoticons/sleep.png</file>
@@ -69,5 +69,6 @@
         <file>images/menu-user-offline.png</file>
         <file>images/menu-user-online.png</file>
         <file>images/xmpp.png</file>
+        <file>images/license.png</file>
     </qresource>
 </RCC>

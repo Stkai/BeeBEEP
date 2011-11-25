@@ -2,6 +2,11 @@ BEEBEEP (Secure Network Chat)
 
 BeeBEEP 0.6.2
 - Jabber XMPP Support
+- GTalk plugin
+- Facebook plugin
+- Jabber.org plugin
+- Number Encoder Text Marker plugin
+- List of chats
 
 BeeBEEP 0.5.2
 - File Transfer improved
