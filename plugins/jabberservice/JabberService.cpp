@@ -114,7 +114,7 @@ int JabberService::sASLAuthMechanism() const
 
 bool JabberService::fileTransferIsEnabled() const
 {
-  return true;
+  return false;
 }
 
 QString JabberService::userStatusOfflineIconPath() const

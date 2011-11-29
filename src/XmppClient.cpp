@@ -46,7 +46,7 @@ XmppClient::XmppClient( QObject* parent )
 
 void XmppClient::setupManagers()
 {
-  mp_transferManager->setSupportedMethods( QXmppTransferJob::InBandMethod );
+  mp_transferManager->setSupportedMethods( QXmppTransferJob::SocksMethod );
   addExtension( mp_transferManager );
   connect( mp_transferManager, SIGNAL( fileReceived( QXmppTransferJob* ) ), this, SLOT( checkFileTransferRequest( QXmppTransferJob* ) ) );
 }
@@ -92,7 +92,7 @@ void XmppClient::checkFileTransferFinished()
     qWarning() << "Unable to cast qobject in QXmppTransferJob in XmppClient::checkFileTransferFinished";
     return;
   }
-  qDebug() << "XMPP> transfer file" << job->fileName() << "to" << job->jid() << "completed";
+  qDebug() << "XMPP> transfer file" << job->fileName() << "to" << job->jid() << "finished";
 }
 
 void XmppClient::checkFileTransferProgress( qint64 bytes_transferred, qint64 total_bytes )
