@@ -5,4 +5,5 @@ SUBDIRS = rainbowtextmarker \
 			numbertextmarker \
 			facebookservice \
 			gtalkservice \
-			jabberservice
+			jabberservice \
+			windowsliveservice

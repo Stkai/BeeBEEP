@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/plugins">
+        <file>windowslive.png</file>
+        <file>windowslive-away.png</file>
+        <file>windowslive-busy.png</file>
+        <file>windowslive-offline.png</file>
+        <file>windowslive-online.png</file>
+    </qresource>
+</RCC>
