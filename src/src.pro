@@ -136,3 +136,6 @@ else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/libqxmpp.a
 
 
 
+
+
+

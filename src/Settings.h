@@ -148,6 +148,8 @@ public:
 protected:
   Settings();
 
+  void loadBroadcastAddresses();
+
 private:
   User m_localUser;
   int m_broadcastPort;

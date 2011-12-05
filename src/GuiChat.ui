@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>368</width>
-    <height>261</height>
+    <width>371</width>
+    <height>287</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,20 +20,11 @@
    <string>Chat</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="leftMargin">
+   <property name="margin">
     <number>1</number>
-   </property>
-   <property name="topMargin">
-    <number>1</number>
-   </property>
-   <property name="rightMargin">
-    <number>1</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
    </property>
    <property name="spacing">
-    <number>1</number>
+    <number>2</number>
    </property>
    <item row="0" column="0" colspan="5">
     <widget class="QTextBrowser" name="mp_teChat">

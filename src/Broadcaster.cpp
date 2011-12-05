@@ -137,17 +137,29 @@ void Broadcaster::updateAddresses()
   qDebug() << "Broadcaster updates the addresses";
   m_broadcastAddresses.clear();
   m_ipAddresses.clear();
+  QHostAddress broadcast_address;
+
   foreach( QNetworkInterface interface, QNetworkInterface::allInterfaces() )
   {
     foreach( QNetworkAddressEntry entry, interface.addressEntries() )
     {
-      QHostAddress broadcastAddress = entry.broadcast();
-      if( broadcastAddress != QHostAddress::Null && entry.ip() != QHostAddress::LocalHost )
+      broadcast_address = entry.broadcast();
+      if( broadcast_address != QHostAddress::Null && entry.ip() != QHostAddress::LocalHost )
       {
-        m_broadcastAddresses << broadcastAddress;
+        m_broadcastAddresses << broadcast_address;
         m_ipAddresses << entry.ip();
-        qDebug() << "Broadcaster adds" << broadcastAddress.toString() << "and" << entry.ip().toString();
+        qDebug() << "Broadcaster adds" << broadcast_address.toString() << "and" << entry.ip().toString();
       }
+    }
+  }
+
+  foreach( QString address_string, Settings::instance().broadcastAddresses() )
+  {
+    broadcast_address = QHostAddress( address_string );
+    if( !m_broadcastAddresses.contains( broadcast_address ) )
+    {
+      qDebug() << "Broadcaster adds" << address_string;
+      m_broadcastAddresses << QHostAddress( address_string );
     }
   }
 }

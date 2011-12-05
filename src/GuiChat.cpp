@@ -263,6 +263,7 @@ bool GuiChat::setChatId( VNumber chat_id )
   if( !c.isValid() )
     return false;
   m_chatId = c.id();
+
   m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
 
   bool is_secure = c.isDefault() || (m_users.toList().size() >= 1 && m_users.toList().last().isOnLan() && c.isPrivateForUser( m_users.toList().last().id() ));

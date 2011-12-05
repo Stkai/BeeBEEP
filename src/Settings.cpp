@@ -106,6 +106,51 @@ NetworkAccount Settings::networkAccount( const QString& account_service ) const
   return NetworkAccount();
 }
 
+void Settings::loadBroadcastAddresses()
+{
+  QFile file( "beehosts.ini" );
+  if( !file.open( QIODevice::ReadOnly ) )
+  {
+    qDebug() << "File hosts" << file.fileName() << "not found";
+    return;
+  }
+
+  qDebug() << "Reading file hosts" << file.fileName();
+  QString address_string;
+  QString line_read;
+  char c;
+
+  while( !file.atEnd() )
+  {
+    line_read = file.readLine();
+    if( line_read.size() > 0 )
+    {
+      address_string = line_read.simplified();
+
+      if( address_string.size() > 0 )
+      {
+        c = address_string.at( 0 ).toLatin1();
+        if( c == '#' || c == '/' || c == '*' )
+          continue;
+
+        if( QHostAddress( address_string ).isNull() )
+        {
+          qWarning() << "Invalid broadcast address found:" << address_string;
+          continue;
+        }
+
+        if( m_broadcastAddresses.contains( address_string ) )
+        {
+          qDebug() << "Broadcast address is already in list";
+          continue;
+        }
+
+        qDebug() << "Adding broadcast address:" << address_string;
+        m_broadcastAddresses << address_string;
+      }
+    }
+  }
+}
 
 namespace
 {
@@ -215,6 +260,7 @@ void Settings::load()
   m_networkProxy.setPassword( Protocol::simpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
   m_broadcastAddresses = sets.value( "BroadcastAddresses", QStringList() ).toStringList();
   sets.endGroup();
+  loadBroadcastAddresses();
 
   qDebug() << "Loading network accounts";
   sets.beginGroup( "NetworkAccount" );
