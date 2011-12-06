@@ -94,7 +94,7 @@ bool WindowsLiveService::useSASLAuthentication()
 
 bool WindowsLiveService::ignoreSslErrors() const
 {
-  return false;
+  return true;
 }
 
 int WindowsLiveService::streamSecurityMode() const

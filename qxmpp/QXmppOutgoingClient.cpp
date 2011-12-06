@@ -311,7 +311,6 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
             }
         }
 
-        qDebug() << "HANDLE AUTH"; // FIXME!!!
         // handle authentication
         const bool nonSaslAvailable = features.nonSaslAuthMode() != QXmppStreamFeatures::Disabled;
         const bool saslAvailable = !features.authMechanisms().isEmpty();
@@ -339,7 +338,6 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
                 d->saslMechanism = configuration().sASLAuthMechanism();
             }
 
-            qDebug() << "SASL MECHANISM:" << d->saslMechanism; // FIXME
             // send SASL Authentication request
             switch(d->saslMechanism)
             {
@@ -363,7 +361,7 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
                 sendData("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='X-FACEBOOK-PLATFORM'/>");
                 break;
             case QXmppConfiguration::SASLXMessengerOAuth2:
-                sendData("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='X-MESSENGER-OAUTH2'/>0000000044075B9A</auth>");
+                sendData("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='X-MESSENGER-OAUTH2'/>");
                 break;
             }
         }
@@ -395,23 +393,7 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
         if(nodeRecv.tagName() == "proceed")
         {
             debug("Starting encryption");
-            // FIXME!!!
-            //QSslConfiguration ssl_conf = socket()->sslConfiguration();
-            //ssl_conf.setPrivateKey( QSslKey( "XPMsFMI5MeoSWK0G3Yk46WVT1IsGBN-g", QSsl::Dsa ) );
-            //socket()->setSslConfiguration( ssl_conf );
-            QList<QSslCertificate> ssl_certs;
-            ssl_certs.append( QSslCertificate::fromPath( "ms_cert1.pem", QSsl::Pem ) );
-            ssl_certs.append( QSslCertificate::fromPath( "ms_cert2.pem", QSsl::Pem ) );
-
-            if( ssl_certs.size() > 0 )
-            {
-              qDebug() << "MS CERT IN PATH";
-              QSslConfiguration ssl_conf = socket()->sslConfiguration();
-              ssl_conf.setCaCertificates( ssl_certs );
-              ssl_conf.setPrivateKey( QSslKey( "XPMsFMI5MeoSWK0G3Yk46WVT1IsGBN-g", QSsl::Rsa ) );
-              socket()->setSslConfiguration( ssl_conf );
-            }
-
+            socket()->setProtocol( QSsl::AnyProtocol );
             socket()->startClientEncryption();
             return;
         }
@@ -726,7 +708,6 @@ void QXmppOutgoingClient::sendAuthDigestMD5ResponseStep2(const QString &challeng
 
 void QXmppOutgoingClient::sendAuthXFacebookResponse(const QString& challenge)
 {
-  qDebug() << "FACEBOOK RESPONSE"; // FIXME!!!
     // parse request
     QUrl request;
     request.setEncodedQuery(QByteArray::fromBase64(challenge.toAscii()));
@@ -752,9 +733,7 @@ void QXmppOutgoingClient::sendAuthXFacebookResponse(const QString& challenge)
 void QXmppOutgoingClient::sendAuthXLiveMessengerResponse( const QString& challenge )
 {
   qDebug() << "XLIVE RESPONSE!!!!!"; // FIXME!!!
-
-  // Lo fa su
-  //sendData( "<auth mechanism=""X-MESSENGER-OAUTH2""" xmlns="urn:ietf:params:xml:ns:xmpp-sasl">[OAUTH2 ACCESS TOKEN HERE]</auth>
+  sendData( "<auth mechanism=""X-MESSENGER-OAUTH2"" xmlns=""urn:ietf:params:xml:ns:xmpp-sasl"">0000000044075B9A</auth>" );
 }
 
 void QXmppOutgoingClient::sendNonSASLAuth(bool plainText)
