@@ -99,7 +99,7 @@ bool FacebookService::ignoreSslErrors() const
 
 int FacebookService::streamSecurityMode() const
 {
-  return 0;
+  return 2; // TLSRequired
 }
 
 int FacebookService::nonSASLAuthMechanism() const
@@ -109,7 +109,7 @@ int FacebookService::nonSASLAuthMechanism() const
 
 int FacebookService::sASLAuthMechanism() const
 {
-  return 1;
+  return 1; // Md5Digest
 }
 
 bool FacebookService::fileTransferIsEnabled() const

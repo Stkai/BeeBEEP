@@ -149,6 +149,8 @@ void QXmppStreamFeatures::parse(const QDomElement &element)
                 m_authMechanisms << QXmppConfiguration::SASLAnonymous;
             else if (subElement.text() == QLatin1String("X-FACEBOOK-PLATFORM"))
                 m_authMechanisms << QXmppConfiguration::SASLXFacebookPlatform;
+            else if (subElement.text() == QLatin1String("X-MESSENGER-OAUTH2"))
+                m_authMechanisms << QXmppConfiguration::SASLXMessengerOAuth2;
             subElement = subElement.nextSiblingElement("mechanism");
         }
     }
@@ -211,6 +213,9 @@ void QXmppStreamFeatures::toXml(QXmlStreamWriter *writer) const
                 break;
             case QXmppConfiguration::SASLXFacebookPlatform:
                 writer->writeCharacters("X-FACEBOOK-PLATFORM");
+                break;
+            case QXmppConfiguration::SASLXMessengerOAuth2:
+                writer->writeCharacters("X-MESSENGER-OAUTH2");
                 break;
             }
             writer->writeEndElement();

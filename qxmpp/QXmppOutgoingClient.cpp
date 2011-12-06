@@ -53,6 +53,9 @@
 #include <QHostAddress>
 #include <QXmlStreamWriter>
 #include <QTimer>
+#include <QSslConfiguration>
+#include <QSslKey>
+
 
 class QXmppOutgoingClientPrivate
 {
@@ -307,6 +310,7 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
             }
         }
 
+        qDebug() << "HANDLE AUTH"; // FIXME!!!
         // handle authentication
         const bool nonSaslAvailable = features.nonSaslAuthMode() != QXmppStreamFeatures::Disabled;
         const bool saslAvailable = !features.authMechanisms().isEmpty();
@@ -334,6 +338,7 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
                 d->saslMechanism = configuration().sASLAuthMechanism();
             }
 
+            qDebug() << "SASL MECHANISM:" << d->saslMechanism; // FIXME
             // send SASL Authentication request
             switch(d->saslMechanism)
             {
@@ -355,6 +360,9 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
                 break;
             case QXmppConfiguration::SASLXFacebookPlatform:
                 sendData("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='X-FACEBOOK-PLATFORM'/>");
+                break;
+            case QXmppConfiguration::SASLXMessengerOAuth2:
+                sendData("<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='X-MESSENGER-OAUTH2'/>0000000044075B9A</auth>");
                 break;
             }
         }
@@ -386,6 +394,10 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
         if(nodeRecv.tagName() == "proceed")
         {
             debug("Starting encryption");
+            // FIXME!!!
+            //QSslConfiguration ssl_conf = socket()->sslConfiguration();
+            //ssl_conf.setPrivateKey( QSslKey( "XPMsFMI5MeoSWK0G3Yk46WVT1IsGBN-g", QSsl::Dsa ) );
+            //socket()->setSslConfiguration( ssl_conf );
             socket()->startClientEncryption();
             return;
         }
@@ -419,6 +431,9 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
                 break;
             case QXmppConfiguration::SASLXFacebookPlatform:
                 sendAuthXFacebookResponse(nodeRecv.text());
+                break;
+            case QXmppConfiguration::SASLXMessengerOAuth2:
+                sendAuthXLiveMessengerResponse( nodeRecv.text() );
                 break;
             default:
                 warning("Unexpected SASL challenge");
@@ -697,6 +712,7 @@ void QXmppOutgoingClient::sendAuthDigestMD5ResponseStep2(const QString &challeng
 
 void QXmppOutgoingClient::sendAuthXFacebookResponse(const QString& challenge)
 {
+  qDebug() << "FACEBOOK RESPONSE"; // FIXME!!!
     // parse request
     QUrl request;
     request.setEncodedQuery(QByteArray::fromBase64(challenge.toAscii()));
@@ -717,6 +733,14 @@ void QXmppOutgoingClient::sendAuthXFacebookResponse(const QString& challenge)
 
     sendData("<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>"
              + response.encodedQuery().toBase64() + "</response>");
+}
+
+void QXmppOutgoingClient::sendAuthXLiveMessengerResponse( const QString& challenge )
+{
+  qDebug() << "XLIVE RESPONSE!!!!!"; // FIXME!!!
+
+  // Lo fa su
+  //sendData( "<auth mechanism=""X-MESSENGER-OAUTH2""" xmlns="urn:ietf:params:xml:ns:xmpp-sasl">[OAUTH2 ACCESS TOKEN HERE]</auth>
 }
 
 void QXmppOutgoingClient::sendNonSASLAuth(bool plainText)

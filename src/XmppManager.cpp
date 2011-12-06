@@ -765,6 +765,11 @@ void XmppManager::loadClients()
       mp_client->configuration().setDomain( si->domain() );
       mp_client->configuration().setHost( si->hostAddress() );
       mp_client->configuration().setPort( si->hostPort() );
+      mp_client->configuration().setUseSASLAuthentication( si->useSASLAuthentication() );
+      mp_client->configuration().setIgnoreSslErrors( si->ignoreSslErrors() );
+      mp_client->configuration().setStreamSecurityMode( (QXmppConfiguration::StreamSecurityMode)si->streamSecurityMode() );
+      mp_client->configuration().setNonSASLAuthMechanism( (QXmppConfiguration::NonSASLAuthMechanism)si->nonSASLAuthMechanism() );
+      mp_client->configuration().setSASLAuthMechanism( (QXmppConfiguration::SASLAuthMechanism)si->sASLAuthMechanism() );
       qDebug() << "XMPP> Service" << mp_client->service() << "created";
     }
   }

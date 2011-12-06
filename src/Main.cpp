@@ -38,6 +38,7 @@
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
+#include "QXmppLogger.h"
 
 
 bool SetTranslator( QTranslator* translator, const QString& prog_name, const QString& locale_folder, const QString& lang )
@@ -92,6 +93,9 @@ int main( int argc, char *argv[] )
 
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
+
+  /* Xmpp Logger */
+  QXmppLogger::getLogger()->setLoggingType( QXmppLogger::FileLogging );
 
   /* Show Main Window */
   GuiMain mw;

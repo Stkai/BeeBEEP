@@ -84,7 +84,7 @@ int WindowsLiveService::hostPort() const
 
 QString WindowsLiveService::domain() const
 {
-  return QLatin1String( "live.com" );
+  return QLatin1String( "messenger.live.com" );
 }
 
 bool WindowsLiveService::useSASLAuthentication()
@@ -94,12 +94,12 @@ bool WindowsLiveService::useSASLAuthentication()
 
 bool WindowsLiveService::ignoreSslErrors() const
 {
-  return true;
+  return false;
 }
 
 int WindowsLiveService::streamSecurityMode() const
 {
-  return 0;
+  return 2; // TLSRequired
 }
 
 int WindowsLiveService::nonSASLAuthMechanism() const
@@ -109,7 +109,7 @@ int WindowsLiveService::nonSASLAuthMechanism() const
 
 int WindowsLiveService::sASLAuthMechanism() const
 {
-  return 1;
+  return 4; // SASLXMessengerOAuth2
 }
 
 bool WindowsLiveService::fileTransferIsEnabled() const

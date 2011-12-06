@@ -99,7 +99,7 @@ bool GTalkService::ignoreSslErrors() const
 
 int GTalkService::streamSecurityMode() const
 {
-  return 0;
+  return 2; // TLSRequired
 }
 
 int GTalkService::nonSASLAuthMechanism() const
@@ -109,7 +109,7 @@ int GTalkService::nonSASLAuthMechanism() const
 
 int GTalkService::sASLAuthMechanism() const
 {
-  return 1;
+  return 0; // SASLPlain
 }
 
 bool GTalkService::fileTransferIsEnabled() const

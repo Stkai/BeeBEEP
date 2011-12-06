@@ -73,6 +73,7 @@ public:
         SASLDigestMD5,         ///< Digest MD5 (default)
         SASLAnonymous,         ///< Anonymous
         SASLXFacebookPlatform, ///< Facebook Platform
+        SASLXMessengerOAuth2   ///< MSN Platform
     };
 
     /// An enumeration for stream compression methods.

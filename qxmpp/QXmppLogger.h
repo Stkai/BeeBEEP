@@ -68,7 +68,7 @@ public:
         WarningMessage = 4,     ///< Warning message
         ReceivedMessage = 8,    ///< Message received from server
         SentMessage = 16,       ///< Message sent to server
-        AnyMessage = 31,        ///< Any message type
+        AnyMessage = 31         ///< Any message type
     };
     Q_DECLARE_FLAGS(MessageTypes, MessageType)
 

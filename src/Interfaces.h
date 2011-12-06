@@ -77,6 +77,7 @@ public:
   virtual int streamSecurityMode() const = 0;
   virtual int nonSASLAuthMechanism() const = 0;
   virtual int sASLAuthMechanism() const = 0;
+
   virtual bool fileTransferIsEnabled() const = 0;
 
   virtual QString userStatusOfflineIconPath() const = 0;
