@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #undef LOGFILE_ENABLED
+#define QXMPP_LOGFILE
 
 #include <QApplication>
 #ifdef Q_OS_SYMBIAN
@@ -31,14 +32,16 @@
 #include "ColorManager.h"
 #include "GuiMain.h"
 #if defined( LOGFILE_ENABLED )
-#include "Log.h"
+  #include "Log.h"
 #endif
 #include "PluginManager.h"
 #include "UserManager.h"
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
-#include "QXmppLogger.h"
+#if defined( QXMPP_LOGFILE )
+  #include "QXmppLogger.h"
+#endif
 
 
 bool SetTranslator( QTranslator* translator, const QString& prog_name, const QString& locale_folder, const QString& lang )
@@ -95,7 +98,9 @@ int main( int argc, char *argv[] )
   PluginManager::instance().loadPlugins();
 
   /* Xmpp Logger */
+#if defined( QXMPP_LOGFILE )
   QXmppLogger::getLogger()->setLoggingType( QXmppLogger::FileLogging );
+#endif
 
   /* Show Main Window */
   GuiMain mw;

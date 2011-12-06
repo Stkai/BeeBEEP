@@ -53,9 +53,10 @@
 #include <QHostAddress>
 #include <QXmlStreamWriter>
 #include <QTimer>
+// FIXME!!!! togliere include
 #include <QSslConfiguration>
 #include <QSslKey>
-
+#include <QFile>
 
 class QXmppOutgoingClientPrivate
 {
@@ -398,6 +399,19 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
             //QSslConfiguration ssl_conf = socket()->sslConfiguration();
             //ssl_conf.setPrivateKey( QSslKey( "XPMsFMI5MeoSWK0G3Yk46WVT1IsGBN-g", QSsl::Dsa ) );
             //socket()->setSslConfiguration( ssl_conf );
+            QList<QSslCertificate> ssl_certs;
+            ssl_certs.append( QSslCertificate::fromPath( "ms_cert1.pem", QSsl::Pem ) );
+            ssl_certs.append( QSslCertificate::fromPath( "ms_cert2.pem", QSsl::Pem ) );
+
+            if( ssl_certs.size() > 0 )
+            {
+              qDebug() << "MS CERT IN PATH";
+              QSslConfiguration ssl_conf = socket()->sslConfiguration();
+              ssl_conf.setCaCertificates( ssl_certs );
+              ssl_conf.setPrivateKey( QSslKey( "XPMsFMI5MeoSWK0G3Yk46WVT1IsGBN-g", QSsl::Rsa ) );
+              socket()->setSslConfiguration( ssl_conf );
+            }
+
             socket()->startClientEncryption();
             return;
         }
