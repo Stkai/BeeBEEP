@@ -393,7 +393,7 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
         if(nodeRecv.tagName() == "proceed")
         {
             debug("Starting encryption");
-            socket()->setProtocol( QSsl::AnyProtocol );
+            socket()->setProtocol( QSsl::AnyProtocol );  // FIXME: xmpp.messenger.live.com accpts TLS 1.0 only
             socket()->startClientEncryption();
             return;
         }
@@ -429,7 +429,7 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
                 sendAuthXFacebookResponse(nodeRecv.text());
                 break;
             case QXmppConfiguration::SASLXMessengerOAuth2:
-                sendAuthXLiveMessengerResponse( nodeRecv.text() );
+                sendAuthXLiveMessengerResponse(nodeRecv.text());
                 break;
             default:
                 warning("Unexpected SASL challenge");
@@ -733,7 +733,21 @@ void QXmppOutgoingClient::sendAuthXFacebookResponse(const QString& challenge)
 void QXmppOutgoingClient::sendAuthXLiveMessengerResponse( const QString& challenge )
 {
   qDebug() << "XLIVE RESPONSE!!!!!"; // FIXME!!!
-  sendData( "<auth mechanism=""X-MESSENGER-OAUTH2"" xmlns=""urn:ietf:params:xml:ns:xmpp-sasl"">0000000044075B9A</auth>" );
+
+  // wl.messenger
+  //https://consent.live.com/Connect.aspx?wrap_client_id=0000000044075B9A&wrap_callback=&wrap_scope=wl.messenger
+
+  //Client ID:      0000000044075B9A
+  //Client secret:  XPMsFMI5MeoSWK0G3Yk46WVT1IsGBN-g
+
+  QUrl auth_token;
+  auth_token.addQueryItem( "wrap_client_id", "" );
+  auth_token.addQueryItem( "wrap_client_secret", "" );
+  auth_token.addQueryItem( "wrap_callback", "" );
+  auth_token.addQueryItem( "wrap_verification_code", "" );
+  auth_token.addQueryItem( "idtype", "" );
+
+  sendData( QString( "<auth mechanism='X-MESSENGER-OAUTH2' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>%1</auth>" ).arg( QString( auth_token.encodedQuery().toBase64() ) ).toLatin1() );
 }
 
 void QXmppOutgoingClient::sendNonSASLAuth(bool plainText)
