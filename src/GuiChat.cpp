@@ -244,6 +244,15 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
   return s;
 }
 
+void GuiChat::updateUser( const User& u )
+{
+  if( m_users.find( u.id() ).isValid() )
+  {
+    m_users.set( u );
+    setChatUsers();
+  }
+}
+
 void GuiChat::setChatUsers()
 {
   QString chat_users;

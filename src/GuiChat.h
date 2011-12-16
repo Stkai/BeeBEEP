@@ -43,6 +43,7 @@ public:
   bool setChatId( VNumber );
   inline VNumber chatId() const;
   inline QString toHtml() const;
+  void updateUser( const User& );
 
 signals:
   void newMessage( VNumber, const QString& );

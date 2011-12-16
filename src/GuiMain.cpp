@@ -489,6 +489,7 @@ void GuiMain::checkUser( const User& u )
 
   qDebug() << "User" << u.path() << "has updated his info. Check it";
   mp_userList->setUser( u );
+  mp_defaultChat->updateUser( u );
 }
 
 void GuiMain::emoticonSelected()
