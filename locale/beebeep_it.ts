@@ -877,6 +877,14 @@ il file %2 (%3)?</translation>
         <source>Show the informations about %1&apos;s license</source>
         <translation>Mostra le informazioni sulla licenza di %1</translation>
     </message>
+    <message>
+        <source>Show emoticons</source>
+        <translation>Mostra le faccine con delle immagini</translation>
+    </message>
+    <message>
+        <source>If enabled the emoticons will be recognized and showed as images</source>
+        <translation>Se abilitata le faccine saranno riconosciute e mostrate come immagini</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1582,6 +1590,17 @@ il file %2 (%3)?</translation>
     </message>
 </context>
 <context>
+    <name>TwitterService</name>
+    <message>
+        <source>Twitter</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>You can connect to the Twitter server.</source>
+        <translation>Puoi connetterti al server di Twitter.</translation>
+    </message>
+</context>
+<context>
     <name>Ui</name>
     <message>
         <source>%1 - Plugin Manager</source>
@@ -1621,6 +1640,17 @@ il file %2 (%3)?</translation>
     <message>
         <source>status error</source>
         <translation>errore di stato</translation>
+    </message>
+</context>
+<context>
+    <name>WindowsLiveService</name>
+    <message>
+        <source>WindowsLive</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>You can connect to the Windows Live Messenger.</source>
+        <translation>Puoi connetterti a Windows Live Messenger.</translation>
     </message>
 </context>
 <context>

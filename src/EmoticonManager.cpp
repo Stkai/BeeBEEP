@@ -132,6 +132,7 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
   QString s = "";
   QString text_to_match = "";
   QChar c;
+  bool parse_emoticons = true;
 
   for( int pos = 0; pos < msg.size(); pos++ )
   {
@@ -142,9 +143,10 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
       if( text_to_match.size() > 0 )
       {
         s += text_to_match;
-        s += c;
         text_to_match = "";
       }
+      s += c;
+      parse_emoticons = true;
     }
     else if( text_to_match.size() > 0 )
     {
@@ -154,6 +156,7 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
       {
         s += e.toHtml();
         text_to_match = "";
+        parse_emoticons = true;
       }
       else
       {
@@ -161,13 +164,25 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
         {
           s += text_to_match;
           text_to_match = "";
+          parse_emoticons = false;
         }
       }
     }
     else if( m_emoticons.contains( c ) )
-      text_to_match = c;
+    {
+      if( parse_emoticons )
+      {
+        text_to_match = c;
+        parse_emoticons = false;
+      }
+      else
+        s += c;
+    }
     else
+    {
       s += c;
+      parse_emoticons = false;
+    }
   }
 
   if( text_to_match.size() > 0 )

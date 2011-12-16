@@ -24,6 +24,7 @@
 #include <QtPlugin>
 #include <QtDebug>
 #include <QtCore/qmath.h>
+#include <QTextDocument>
 #include "RainbowTextMarker.h"
 #include "Version.h"
 
@@ -164,7 +165,10 @@ void RainbowTextMarker::initParser( const QString& str_to_parse )
 {
   // Get the length and scale. For rainbows, the scale must be such that one cycle comes out to almost 2pi.
   m_rainbowIndex = 0;
-  m_scale = 3.14 * (2.0-0.21) / qMax( 1, str_to_parse.size() );
+  QTextDocument text_doc;
+  text_doc.setHtml( str_to_parse );
+  QString plain_text = text_doc.toPlainText();
+  m_scale = 3.14 * (2.0-0.21) / qMax( 1, plain_text.size() );
 }
 
 QString RainbowTextMarker::parseString( const QString& str )

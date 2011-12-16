@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #undef LOGFILE_ENABLED
-#define QXMPP_LOGFILE
+#undef QXMPP_LOGFILE
 
 #include <QApplication>
 #ifdef Q_OS_SYMBIAN

@@ -46,7 +46,7 @@ XmppClient::XmppClient( QObject* parent )
 
 void XmppClient::setupManagers()
 {
-  mp_transferManager->setSupportedMethods( QXmppTransferJob::SocksMethod );
+  mp_transferManager->setSupportedMethods( QXmppTransferJob::InBandMethod | QXmppTransferJob::SocksMethod );
   addExtension( mp_transferManager );
   connect( mp_transferManager, SIGNAL( fileReceived( QXmppTransferJob* ) ), this, SLOT( checkFileTransferRequest( QXmppTransferJob* ) ) );
 }

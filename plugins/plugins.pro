@@ -6,4 +6,5 @@ SUBDIRS = rainbowtextmarker \
 			facebookservice \
 			gtalkservice \
 			jabberservice \
-			windowsliveservice
+			windowsliveservice \
+			twitterservice

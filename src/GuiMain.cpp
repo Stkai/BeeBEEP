@@ -342,6 +342,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatUseClickableLinks() );
   act->setData( 9 );
 
+  act = mp_menuSettings->addAction( tr( "Show emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the emoticons will be recognized and showed as images" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showEmoticons() );
+  act->setData( 10 );
+
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
@@ -586,6 +592,10 @@ void GuiMain::settingsChanged()
     break;
   case 9:
     Settings::instance().setChatUseClickableLinks( act->isChecked() );
+    refresh_chat = true;
+    break;
+  case 10:
+    Settings::instance().setShowEmoticons( act->isChecked() );
     refresh_chat = true;
     break;
   case 99:

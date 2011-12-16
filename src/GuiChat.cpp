@@ -189,8 +189,6 @@ QString FormatHtmlText( const QString& text )
   if( last_semicolon_index >= 0 )
     text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
 
-  PluginManager::instance().parseText( &text_formatted, false );
-
   text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
@@ -198,7 +196,12 @@ QString FormatHtmlText( const QString& text )
   if( Settings::instance().chatUseClickableLinks() )
     text_formatted = Linkify( text_formatted );
 
-  return EmoticonManager::instance().parseEmoticons( text_formatted );
+  if( Settings::instance().showEmoticons() )
+    text_formatted = EmoticonManager::instance().parseEmoticons( text_formatted );
+
+  PluginManager::instance().parseText( &text_formatted, false );
+
+  return text_formatted;
 }
 
 QString FormatMessage( const User& u, const ChatMessage& cm )

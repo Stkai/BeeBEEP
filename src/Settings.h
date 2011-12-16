@@ -79,6 +79,8 @@ public:
   inline void setShowOnlyOnlineUsers( bool );
   inline bool showUserColor() const;
   inline void setShowUserColor( bool );
+  inline bool showEmoticons() const;
+  inline void setShowEmoticons( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
@@ -175,6 +177,7 @@ private:
   QString m_chatSaveDirectory;
   bool m_showOnlyOnlineUsers;
   bool m_showUserColor;
+  bool m_showEmoticons;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -241,6 +244,8 @@ inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDir
 inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
 inline bool Settings::showOnlyOnlineUsers() const { return m_showOnlyOnlineUsers; }
 inline void Settings::setShowOnlyOnlineUsers( bool new_value ) { m_showOnlyOnlineUsers = new_value; }
+inline bool Settings::showEmoticons() const { return m_showEmoticons; }
+inline void Settings::setShowEmoticons( bool new_value ) { m_showEmoticons = new_value; }
 inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeometry = new_value; }
 inline const QByteArray& Settings::guiGeometry() const { return m_guiGeometry; }
 inline void Settings::setGuiState( const QByteArray& new_value ) { m_guiState = new_value; }

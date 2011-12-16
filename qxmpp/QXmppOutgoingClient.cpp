@@ -737,12 +737,17 @@ void QXmppOutgoingClient::sendAuthXLiveMessengerResponse( const QString& challen
   // wl.messenger
   //https://consent.live.com/Connect.aspx?wrap_client_id=0000000044075B9A&wrap_callback=&wrap_scope=wl.messenger
 
-  //Client ID:      0000000044075B9A
-  //Client secret:  XPMsFMI5MeoSWK0G3Yk46WVT1IsGBN-g
+  //Client ID:      000000004807681A
+  //Client secret:  OKzqleu5S96ypI3BBMMFMga3a1wW0rcQ
+  // https://oauth.live.com/authorize?client_id=0000000044075B9A&redirect_uri=https://oauth.live.com/desktop&response_type=code&scope=wl.messenger
 
+  // EwAgAq1DBAAUlbRWyAJjK5w968Ru3Cyt/6GvwXwAAQZe+Fz32f4pKTiGGFB1KDFlhlErLSoxhoa3r+XMblvHbVlesdw/6GZ2+wjSdx7UD6+4qH1Cw3pTxE9p7d6d1qF67uLMlmt827uoB5CP9oK6QYDdJPRN1
+
+  //  https://oauth.live.com/token?grant_type=cfda5592-7246-4e0a-8fdd-0cb2c09ba436
+  //  https://oauth.live.com/token?grant_type=cfda5592%2D7246%2D4e0a%2D8fdd%2D0cb2c09ba436
   QUrl auth_token;
-  auth_token.addQueryItem( "wrap_client_id", "" );
-  auth_token.addQueryItem( "wrap_client_secret", "" );
+  auth_token.addQueryItem( "wrap_client_id", "000000004807681A" );
+  auth_token.addQueryItem( "wrap_client_secret", "OKzqleu5S96ypI3BBMMFMga3a1wW0rcQ" );
   auth_token.addQueryItem( "wrap_callback", "" );
   auth_token.addQueryItem( "wrap_verification_code", "" );
   auth_token.addQueryItem( "idtype", "" );
