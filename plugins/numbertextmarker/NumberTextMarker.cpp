@@ -35,7 +35,7 @@ QString NumberTextMarker::name() const
 
 QString NumberTextMarker::version() const
 {
-  return "0.6.1";
+  return "0.6.2";
 }
 
 QString NumberTextMarker::author() const
@@ -71,7 +71,7 @@ QString NumberTextMarker::coreVersion() const
 bool NumberTextMarker::parseBeforeSending() const
 {
   return true;
-} 
+}
 
 namespace
 {
