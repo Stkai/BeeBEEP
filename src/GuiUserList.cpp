@@ -107,7 +107,6 @@ void GuiUserList::setUnreadMessages( VNumber chat_id, int n )
 void GuiUserList::setUser( const User& u )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
-  bool user_item_created = false;
   if( !item )
   {
     if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
@@ -115,7 +114,6 @@ void GuiUserList::setUser( const User& u )
 
     item = new GuiUserItem( this );
     item->setUserId( u.id() );
-    user_item_created = true;
   }
   else
   {
