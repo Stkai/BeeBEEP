@@ -39,6 +39,8 @@ public:
   bool addAddress( const QHostAddress& );
   inline void clearAddressAdded();
 
+  bool sendBroadcastMessage();
+
 signals:
   void newPeerFound( const QHostAddress&, int );
 

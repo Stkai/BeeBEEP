@@ -59,6 +59,11 @@ void Broadcaster::stopBroadcasting()
   m_broadcastSocket.abort();
 }
 
+bool Broadcaster::sendBroadcastMessage()
+{
+  sendBroadcastDatagram();
+}
+
 bool Broadcaster::isLocalHostAddress( const QHostAddress& address )
 {
   foreach( QHostAddress localAddress, m_ipAddresses )
@@ -92,6 +97,9 @@ void Broadcaster::sendBroadcastDatagram()
     else
       ++it;
   }
+
+  if( !addresses_are_valid )
+    updateAddresses();
 }
 
 void Broadcaster::readBroadcastDatagram()
@@ -156,7 +164,7 @@ void Broadcaster::updateAddresses()
   foreach( QString address_string, Settings::instance().broadcastAddresses() )
   {
     broadcast_address = QHostAddress( address_string );
-    if( !m_broadcastAddresses.contains( broadcast_address ) )
+    if( !broadcast_address.isNull() && !m_broadcastAddresses.contains( broadcast_address ) )
     {
       qDebug() << "Broadcaster adds" << address_string;
       m_broadcastAddresses << QHostAddress( address_string );

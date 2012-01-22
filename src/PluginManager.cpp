@@ -61,7 +61,10 @@ void PluginManager::addPlugin( const QString& file_path )
     if( text_marker_plugin )
     {
       qDebug() << text_marker_plugin->name() << "is a text marker plugin";
-      m_textMarkers.append( text_marker_plugin );
+      if( !textMarker( text_marker_plugin->name() ) )
+        m_textMarkers.append( text_marker_plugin );
+      else
+        qDebug() << text_marker_plugin->name() << "already load... skip it";
       return;
     }
     else
@@ -71,7 +74,10 @@ void PluginManager::addPlugin( const QString& file_path )
     if( service_plugin )
     {
       qDebug() << service_plugin->name() << "is a service plugin";
-      m_services.append( service_plugin );
+      if( !service( service_plugin->name() ) )
+        m_services.append( service_plugin );
+      else
+        qDebug() << service_plugin->name() << "already load... skip it";
       return;
     }
     else
@@ -119,6 +125,16 @@ void PluginManager::sortPlugins()
 {
   qSort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
   qSort( m_services.begin(), m_services.end(), ServiceForName );
+}
+
+TextMarkerInterface* PluginManager::textMarker( const QString& text_marker_name ) const
+{
+  foreach( TextMarkerInterface* tmi, m_textMarkers )
+  {
+    if( tmi->name() == text_marker_name )
+      return tmi;
+  }
+  return 0;
 }
 
 ServiceInterface* PluginManager::service( const QString& service_name ) const

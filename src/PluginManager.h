@@ -42,7 +42,9 @@ public:
   void setPluginEnabled( const QString& plugin_name, bool );
   void setPluginsEnabled( bool );
 
+  TextMarkerInterface* textMarker( const QString& ) const;
   ServiceInterface* service( const QString& ) const;
+
 
   bool parseText( QString*, bool before_sending ) const;
 
