@@ -33,6 +33,23 @@ PluginManager::PluginManager()
 {
 }
 
+void PluginManager::clearPlugins()
+{
+  if( m_textMarkers.size() > 0 )
+  {
+    qDebug() << "Unload" << m_textMarkers.size() << "text marker plugins";
+    qDeleteAll( m_textMarkers.begin(), m_textMarkers.end() );
+    m_textMarkers.clear();
+  }
+
+  if( m_services.size() > 0 )
+  {
+    qDebug() << "Unload" << m_services.size() << "service plugins";
+    qDeleteAll( m_services.begin(), m_services.end() );
+    m_services.clear();
+  }
+}
+
 void PluginManager::loadPlugins()
 {
   qDebug() << "Loading plugins from path:" << Settings::instance().pluginPath();

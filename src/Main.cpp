@@ -132,6 +132,7 @@ int main( int argc, char *argv[] )
   UserManager::close();
   ColorManager::close();
   Protocol::close();
+  PluginManager::close();
   Settings::instance().save();
   Settings::close();
 

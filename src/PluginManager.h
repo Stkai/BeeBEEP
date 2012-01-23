@@ -59,6 +59,7 @@ public:
   {
     if( mp_instance )
     {
+      mp_instance->clearPlugins();
       delete mp_instance;
       mp_instance = NULL;
     }
@@ -69,6 +70,7 @@ protected:
 
   void addPlugin( const QString& );
   void sortPlugins();
+  void clearPlugins();
 
   bool parseTextWithPlugin( QString*, TextMarkerInterface* ) const;
 
