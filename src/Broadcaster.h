@@ -56,7 +56,6 @@ private:
   QList<QHostAddress> m_broadcastAddresses;
   QList<QHostAddress> m_ipAddresses;
   QUdpSocket m_broadcastSocket;
-  QTimer m_broadcastTimer;
   QByteArray m_broadcastData;
 
   QList<QHostAddress> m_broadcastAddressesAdded;

@@ -83,9 +83,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
 
   showChat( ID_DEFAULT_CHAT );
-
-  refreshTitle();
-  updateStatusIcon();
   initGuiItems();
 }
 
@@ -175,11 +172,11 @@ void GuiMain::initGuiItems()
     mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
   }
 
-  mp_menuStatus->setEnabled( enable_verbose );
   mp_actSendFile->setEnabled( enable_verbose );
   mp_actSearch->setEnabled( enable_verbose );
-
   mp_userList->setDefaultChatConnected( enable );
+
+  updateStatusIcon();
 }
 
 void GuiMain::showAbout()
@@ -216,8 +213,8 @@ void GuiMain::createActions()
   mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
   connect( mp_actStartStopCore, SIGNAL( triggered() ), this, SLOT( startStopCore() ) );
 
-  mp_actSearch = new QAction( QIcon( ":/images/search.png"), tr( "Search &users..."), this );
-  mp_actSearch->setStatusTip( tr( "Search the users outside the %1 local network").arg( Settings::instance().programName() ) );
+  mp_actSearch = new QAction( QIcon( ":/images/search.png"), tr( "Add or search &user..."), this );
+  mp_actSearch->setStatusTip( tr( "Add or search an user in the %1 network" ).arg( Settings::instance().programName() ) );
   mp_actSearch->setEnabled( false );
   connect( mp_actSearch, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
@@ -394,6 +391,11 @@ void GuiMain::createMenus()
 
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Add a status description..." ), this, SLOT( changeStatusDescription() ) );
+  mp_menuStatus->addSeparator();
+  act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( User::Offline ) ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
+  act->setData( User::Offline );
+  act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( User::Offline ) ) );
+  act->setIconVisibleInMenu( true );
 
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("&?" ), this );
@@ -696,6 +698,7 @@ void GuiMain::searchUsers()
   {
     foreach( QString s, gsu.addresses() )
       mp_core->addBroadcastAddress( QHostAddress( s ) );
+    sendBroadcastMessage();
   }
 
   if( !gsu.userId().isEmpty() )
@@ -717,14 +720,34 @@ void GuiMain::statusSelected()
     return;
 
   int user_status = act->data().toInt();
+
+  if( user_status == User::Offline && mp_core->isConnected( true ) )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
+                               QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+      stopCore();
+    return;
+  }
+
   mp_core->setLocalUserStatus( user_status );
-  updateStatusIcon();
+
+  if( !mp_core->isConnected( false ) )
+    startCore();
+  else
+    updateStatusIcon();
 }
 
 void GuiMain::updateStatusIcon()
 {
-  mp_menuStatus->setIcon( QIcon( Bee::menuUserStatusIconFileName( Settings::instance().localUser().status() ) ) );
-  QString tip = tr( "You are %1%2" ).arg( Bee::userStatusToString( Settings::instance().localUser().status() ) )
+  int status_type;
+  if( !mp_core->isConnected( true ) )
+    status_type = User::Offline;
+  else
+    status_type = Settings::instance().localUser().status();
+
+  mp_menuStatus->setIcon( QIcon( Bee::menuUserStatusIconFileName( status_type ) ) );
+  QString tip = tr( "You are %1%2" ).arg( Bee::userStatusToString( status_type ) )
       .arg( (Settings::instance().localUser().statusDescription().isEmpty() ? QString( "" ) : QString( ": %1" ).arg( Settings::instance().localUser().statusDescription() ) ) );
   QAction* act = mp_menuStatus->menuAction();
   act->setToolTip( tip );
@@ -1103,4 +1126,9 @@ void GuiMain::serviceConnected( const QString& )
 void GuiMain::serviceDisconnected( const QString& )
 {
   updateAccountMenu();
+}
+
+void GuiMain::sendBroadcastMessage()
+{
+  mp_core->sendBroadcastMessage();
 }

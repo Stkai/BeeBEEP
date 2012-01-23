@@ -80,6 +80,7 @@ private slots:
   void showChat( VNumber );
   void serviceConnected( const QString& );
   void serviceDisconnected( const QString& );
+  void sendBroadcastMessage();
 
 protected:
   void closeEvent( QCloseEvent* );

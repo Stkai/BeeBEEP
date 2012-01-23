@@ -32,9 +32,6 @@ Broadcaster::Broadcaster( QObject *parent )
   updateAddresses();
 
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
-
-  m_broadcastTimer.setInterval( Settings::instance().broadcastInterval() );
-  connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
 }
 
 bool Broadcaster::startBroadcasting()
@@ -47,7 +44,6 @@ bool Broadcaster::startBroadcasting()
   qDebug() << "Broadcaster generates broadcast message data";
   m_broadcastData = Protocol::instance().broadcastMessage();
   qDebug() << "Broadcaster starts broadcasting with listener port" << Settings::instance().localUser().hostPort();
-  m_broadcastTimer.start();
   QTimer::singleShot( 1000, this, SLOT( sendBroadcastDatagram() ) ); // first broadcast now!
   return true;
 }
@@ -55,13 +51,39 @@ bool Broadcaster::startBroadcasting()
 void Broadcaster::stopBroadcasting()
 {
   qDebug() << "Broadcaster stops broadcasting";
-  m_broadcastTimer.stop();
   m_broadcastSocket.abort();
 }
 
 bool Broadcaster::sendBroadcastMessage()
 {
-  sendBroadcastDatagram();
+  int addresses_contacted = 0;
+  bool addresses_are_valid = true;
+  foreach( QHostAddress host_address, m_broadcastAddresses )
+  {
+    if( !sendDatagramToHost( host_address ) )
+      addresses_are_valid = false;
+    else
+      addresses_contacted++;
+  }
+
+  QList<QHostAddress>::iterator it = m_broadcastAddressesAdded.begin();
+  while( it != m_broadcastAddressesAdded.end() )
+  {
+    if( !sendDatagramToHost( *it ) )
+    {
+      it = m_broadcastAddressesAdded.erase( it );
+    }
+    else
+    {
+      addresses_contacted++;
+      ++it;
+    }
+  }
+
+  if( !addresses_are_valid )
+    updateAddresses();
+
+  return addresses_contacted > 0;
 }
 
 bool Broadcaster::isLocalHostAddress( const QHostAddress& address )
@@ -82,24 +104,7 @@ bool Broadcaster::sendDatagramToHost( const QHostAddress& host_address )
 
 void Broadcaster::sendBroadcastDatagram()
 {
-  bool addresses_are_valid = true;
-  foreach( QHostAddress host_address, m_broadcastAddresses )
-  {
-    if( !sendDatagramToHost( host_address ) )
-      addresses_are_valid = false;
-  }
-
-  QList<QHostAddress>::iterator it = m_broadcastAddressesAdded.begin();
-  while( it != m_broadcastAddressesAdded.end() )
-  {
-    if( !sendDatagramToHost( *it ) )
-      it = m_broadcastAddressesAdded.erase( it );
-    else
-      ++it;
-  }
-
-  if( !addresses_are_valid )
-    updateAddresses();
+  sendBroadcastMessage();
 }
 
 void Broadcaster::readBroadcastDatagram()

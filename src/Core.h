@@ -45,6 +45,7 @@ public:
   void stop();
 
   void addBroadcastAddress( const QHostAddress& );
+  void sendBroadcastMessage();
 
   /* CoreUser */
   void setLocalUserStatus( int );

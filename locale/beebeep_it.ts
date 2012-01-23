@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>%1 Looking for the available users in the network address %2...</source>
-        <translation>%1 Hai iniziato a cercare nuovi utenti all&apos;indirizzo di rete %2...</translation>
+        <translation type="obsolete">%1 Hai iniziato a cercare nuovi utenti all&apos;indirizzo di rete %2...</translation>
     </message>
     <message>
         <source>%1 %2 &lt;a href=&apos;%3&apos;&gt;%4&lt;/a&gt;.</source>
@@ -186,6 +186,18 @@
     <message>
         <source>%1 Chat with all local users.</source>
         <translation>%1 Parla con tutti gli utenti locali.</translation>
+    </message>
+    <message>
+        <source>%1 Looking for the available users in %2...</source>
+        <translation>%1 Ricerca utenti disponibili in %2 in corso...</translation>
+    </message>
+    <message>
+        <source>%1 Broadcasting to the %2 Network...</source>
+        <translation>%1 Ricerca in corso di altri %2 connessi alla rete...</translation>
+    </message>
+    <message>
+        <source>%1 You are not connected to %2 Network.</source>
+        <translation>%1 %2 non e&apos; conensso alla rete.</translation>
     </message>
 </context>
 <context>
@@ -410,11 +422,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Search &amp;users...</source>
-        <translation>Cerca &amp;utenti...</translation>
+        <translation type="obsolete">Cerca &amp;utenti...</translation>
     </message>
     <message>
         <source>Search the users outside the %1 local network</source>
-        <translation>Cerca nuovi utenti fuori dalla rete locale di %1</translation>
+        <translation type="obsolete">Cerca nuovi utenti fuori dalla rete locale di %1</translation>
     </message>
     <message>
         <source>&amp;Save chat...</source>
@@ -884,6 +896,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>If enabled the emoticons will be recognized and showed as images</source>
         <translation>Se abilitata le faccine saranno riconosciute e mostrate come immagini</translation>
+    </message>
+    <message>
+        <source>Add or search &amp;user...</source>
+        <translation>Aggiungi o cerca &amp;utenti...</translation>
+    </message>
+    <message>
+        <source>Add or search an user in the %1 network</source>
+        <translation>Aggiungi o cerca utenti nella rete di %1</translation>
+    </message>
+    <message>
+        <source>Do you want to disconnect from %1 network?</source>
+        <translation>Vuoi disconnetterti dalla rete di %1?</translation>
     </message>
 </context>
 <context>

@@ -70,5 +70,6 @@
         <file>images/menu-user-online.png</file>
         <file>images/xmpp.png</file>
         <file>images/license.png</file>
+        <file>images/broadcast.png</file>
     </qresource>
 </RCC>

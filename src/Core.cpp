@@ -137,10 +137,25 @@ void Core::addBroadcastAddress( const QHostAddress& host_address )
 {
   if( mp_broadcaster->addAddress( host_address ) )
   {
-    QString sHtmlMsg = tr( "%1 Looking for the available users in the network address %2..." )
+    QString sHtmlMsg = tr( "%1 Looking for the available users in %2..." )
           .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
     dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
   }
+}
+
+void Core::sendBroadcastMessage()
+{
+  if( isConnected( false ) )
+  {
+    mp_broadcaster->sendBroadcastMessage();
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                         tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
+                                                                          Settings::instance().programName() ), DispatchToChat );
+  }
+  else
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                         tr( "%1 You are not connected to %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
+                                                                             Settings::instance().programName() ), DispatchToChat );
 }
 
 bool Core::isConnected( bool check_also_network_service ) const
