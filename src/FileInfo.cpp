@@ -25,12 +25,12 @@
 
 
 FileInfo::FileInfo()
-  : m_transferType( FileInfo::Upload ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( ID_INVALID )
+  : m_transferType( FileInfo::Upload ), m_name( "" ), m_path( "" ), m_suffix( ""), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( ID_INVALID )
 {
 }
 
 FileInfo::FileInfo( VNumber id, FileInfo::TransferType tt )
-  : m_transferType( tt ), m_name( "" ), m_path( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( id )
+  : m_transferType( tt ), m_name( "" ), m_path( "" ), m_suffix( "" ), m_size( 0 ), m_hostAddress(), m_hostPort( 0 ), m_password( "" ), m_id( id )
 {
 }
 
@@ -41,6 +41,7 @@ FileInfo& FileInfo::operator=( const FileInfo& fi )
     m_transferType = fi.m_transferType;
     m_name = fi.m_name;
     m_path = fi.m_path;
+    m_suffix = fi.m_suffix;
     m_size = fi.m_size;
     m_hostAddress = fi.m_hostAddress;
     m_hostPort = fi.m_hostPort;

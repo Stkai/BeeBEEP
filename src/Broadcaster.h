@@ -60,6 +60,8 @@ private:
 
   QList<QHostAddress> m_broadcastAddressesAdded;
 
+  QTimer m_broadcastTimer;
+
 };
 
 

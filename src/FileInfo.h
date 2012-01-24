@@ -47,6 +47,8 @@ public:
   inline void setName( const QString& );
   inline const QString& path() const;
   inline void setPath( const QString& );
+  inline const QString& suffix() const;
+  inline void setSuffix( const QString& );
   inline FileSizeType size() const;
   inline void setSize( FileSizeType );
   inline const QHostAddress& hostAddress() const;
@@ -62,6 +64,7 @@ private:
   TransferType m_transferType;
   QString m_name;
   QString m_path;
+  QString m_suffix;
   FileSizeType m_size;
   QHostAddress m_hostAddress;
   int m_hostPort;
@@ -82,6 +85,8 @@ inline const QString& FileInfo::name() const { return m_name; }
 inline void FileInfo::setName( const QString& new_value ) { m_name = new_value; }
 inline const QString& FileInfo::path() const { return m_path; }
 inline void FileInfo::setPath( const QString& new_value ) { m_path = new_value; }
+inline const QString& FileInfo::suffix() const { return m_suffix; }
+inline void FileInfo::setSuffix( const QString& new_value ) { m_suffix = new_value; }
 inline FileSizeType FileInfo::size() const { return m_size; }
 inline void FileInfo::setSize( FileSizeType new_value ) { m_size = new_value; }
 inline const QHostAddress& FileInfo::hostAddress() const { return m_hostAddress; }

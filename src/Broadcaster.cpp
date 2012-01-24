@@ -31,7 +31,10 @@ Broadcaster::Broadcaster( QObject *parent )
 {
   updateAddresses();
 
+  m_broadcastTimer.setSingleShot( false );
+
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
+  connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
 }
 
 bool Broadcaster::startBroadcasting()
@@ -45,12 +48,21 @@ bool Broadcaster::startBroadcasting()
   m_broadcastData = Protocol::instance().broadcastMessage();
   qDebug() << "Broadcaster starts broadcasting with listener port" << Settings::instance().localUser().hostPort();
   QTimer::singleShot( 1000, this, SLOT( sendBroadcastDatagram() ) ); // first broadcast now!
+
+  if( Settings::instance().broadcastInterval() > 0 )
+  {
+    m_broadcastTimer.setInterval( Settings::instance().broadcastInterval() < 5000 ? 5000 : Settings::instance().broadcastInterval() );
+    m_broadcastTimer.start();
+  }
+
   return true;
 }
 
 void Broadcaster::stopBroadcasting()
 {
   qDebug() << "Broadcaster stops broadcasting";
+  if( m_broadcastTimer.isActive() )
+    m_broadcastTimer.stop();
   m_broadcastSocket.abort();
 }
 

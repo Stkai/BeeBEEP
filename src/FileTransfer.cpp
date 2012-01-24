@@ -106,6 +106,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi )
   file_info = FileInfo( newFileId(), FileInfo::Upload );
   file_info.setName( fi.fileName() );
   file_info.setPath( fi.absoluteFilePath() );
+  file_info.setSuffix( fi.suffix() );
   file_info.setSize( fi.size() );
   file_info.setHostAddress( serverAddress() );
   file_info.setHostPort( serverPort() );

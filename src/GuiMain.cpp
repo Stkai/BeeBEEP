@@ -844,6 +844,7 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
     FileInfo file_info = fi;
     file_info.setName( qfile_info.fileName() );
     file_info.setPath( qfile_info.absoluteFilePath() );
+    file_info.setSuffix( qfile_info.suffix() );
     mp_core->downloadFile( u, file_info );
   }
   else

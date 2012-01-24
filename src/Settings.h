@@ -44,6 +44,7 @@ public:
   void setLocalUserHost( const QHostAddress&, int );
 
   inline int broadcastPort() const;
+  inline int broadcastInterval() const;
   inline int pingInterval() const;
   inline int pongTimeout() const;
   inline int writingTimeout() const;
@@ -154,6 +155,7 @@ protected:
 private:
   User m_localUser;
   int m_broadcastPort;
+  int m_broadcastInterval;
   int m_pingInterval;
   int m_pongTimeout;
   int m_writingTimeout;
@@ -210,6 +212,7 @@ private:
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline int Settings::broadcastPort() const { return m_broadcastPort; }
+inline int Settings::broadcastInterval() const { return m_broadcastInterval; }
 inline int Settings::pingInterval() const { return m_pingInterval; }
 inline int Settings::pongTimeout() const { return m_pongTimeout; }
 inline int Settings::writingTimeout() const { return m_writingTimeout; }

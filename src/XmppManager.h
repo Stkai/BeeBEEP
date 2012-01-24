@@ -101,8 +101,4 @@ private:
 inline const QList<XmppClient*>& XmppManager::clientList() const { return m_clients; }
 
 
-//inline QString XmppManager::service() const { return m_service.isEmpty() ? "Jabber" : m_service; }
-//inline QString XmppManager::iconPath() const { return m_service == "GTalk" ? ":/images/gtalk.png" : ":/images/jabber.png"; }
-
-
 #endif // BEEBEEP_XMPPMANAGER_H
