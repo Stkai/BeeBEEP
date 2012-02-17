@@ -43,6 +43,7 @@ public:
   bool isWorking() const;
 
   FileInfo addFile( const QFileInfo& );
+  void removeFile( const QFileInfo& );
 
   void downloadFile( const FileInfo& );
   bool cancelTransfer( VNumber peer_id );

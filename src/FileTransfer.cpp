@@ -99,6 +99,19 @@ FileInfo FileTransfer::fileInfo( const QString& file_absolute_path ) const
   return FileInfo();
 }
 
+void FileTransfer::removeFile( const QFileInfo& fi )
+{
+  QString file_path = fi.absoluteFilePath();
+  QList<FileInfo>::iterator it = m_files.begin();
+  while( it != m_files.end() )
+  {
+    if( (*it).path() == file_path )
+      it = m_files.erase( it );
+    else
+      ++it;
+  }
+}
+
 FileInfo FileTransfer::addFile( const QFileInfo& fi )
 {
   FileInfo file_info = fileInfo( fi.absoluteFilePath() );

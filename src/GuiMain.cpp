@@ -132,7 +132,7 @@ void GuiMain::startStopCore()
 
 void GuiMain::startCore()
 {
-  if( 1 || Settings::instance().firstTime() )
+  if( Settings::instance().firstTime() )
   {
     showWizard();
     Settings::instance().setFirstTime( false );
