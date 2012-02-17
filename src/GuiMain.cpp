@@ -37,6 +37,7 @@
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "GuiVCard.h"
+#include "GuiWizard.h"
 #include "PluginManager.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -131,6 +132,12 @@ void GuiMain::startStopCore()
 
 void GuiMain::startCore()
 {
+  if( 1 || Settings::instance().firstTime() )
+  {
+    showWizard();
+    Settings::instance().setFirstTime( false );
+  }
+
   bool ok = false;
   QString pwd = QInputDialog::getText( this,
                                        Settings::instance().programName(),
@@ -1132,4 +1139,15 @@ void GuiMain::serviceDisconnected( const QString& )
 void GuiMain::sendBroadcastMessage()
 {
   mp_core->sendBroadcastMessage();
+}
+
+void GuiMain::showWizard()
+{
+  GuiWizard gw( this );
+  gw.setModal( true );
+  gw.loadSettings();
+  gw.show();
+  gw.setFixedSize( gw.size() );
+  if( gw.exec() == QDialog::Accepted )
+    refreshTitle();
 }

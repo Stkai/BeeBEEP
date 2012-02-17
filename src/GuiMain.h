@@ -81,6 +81,7 @@ private slots:
   void serviceConnected( const QString& );
   void serviceDisconnected( const QString& );
   void sendBroadcastMessage();
+  void showWizard();
 
 protected:
   void closeEvent( QCloseEvent* );

@@ -43,8 +43,7 @@ public:
   bool isWorking() const;
 
   FileInfo addFile( const QFileInfo& );
-  FileInfo fileInfo( VNumber ) const;
-  FileInfo fileInfo( const QString& file_absolute_path ) const;
+
   void downloadFile( const FileInfo& );
   bool cancelTransfer( VNumber peer_id );
 
@@ -64,6 +63,9 @@ protected:
   void incomingConnection( int );
   inline VNumber newFileId();
   void resetServerFiles();
+
+  FileInfo fileInfo( VNumber ) const;
+  FileInfo fileInfo( const QString& file_absolute_path ) const;
 
 protected slots:
   void checkAuthentication();

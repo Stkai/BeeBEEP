@@ -35,6 +35,9 @@ class Settings
   static Settings* mp_instance;
 
 public:
+  inline bool firstTime() const;
+  inline void setFirstTime( bool );
+
   QString version( bool ) const;
   int protoVersion() const;
   QString programName() const;
@@ -205,6 +208,8 @@ private:
 
   QStringList m_broadcastAddresses;
 
+  bool m_firstTime;
+
 };
 
 
@@ -277,6 +282,8 @@ inline void Settings::setNetworkProxy( const QNetworkProxy& new_value ) { m_netw
 inline const QList<NetworkAccount>& Settings::networkAccounts() const { return m_networkAccounts; }
 inline const QStringList& Settings::broadcastAddresses() const { return m_broadcastAddresses; }
 inline void Settings::setBroadcastAddresses( const QStringList& new_value ) { m_broadcastAddresses = new_value; }
+inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }
+inline bool Settings::firstTime() const { return m_firstTime; }
 
 
 

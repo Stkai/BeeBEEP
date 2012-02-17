@@ -23,6 +23,7 @@
 
 #include "FileTransfer.h"
 #include "FileTransferPeer.h"
+#include "Random.h"
 #include "Settings.h"
 #include "Protocol.h"
 
@@ -110,7 +111,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi )
   file_info.setSize( fi.size() );
   file_info.setHostAddress( serverAddress() );
   file_info.setHostPort( serverPort() );
-  QString password_key = QString( "%1%2%3" ).arg( file_info.id() ).arg( file_info.path() ).arg( QDateTime::currentDateTime().toString() );
+  QString password_key = QString( "%1%2%3%4" ).arg( file_info.id() ).arg( file_info.path() ).arg( QDateTime::currentDateTime().toString() ).arg( Random::number( 111111, 999999 ) );
   file_info.setPassword( Settings::instance().hash( password_key ) );
   m_files.append( file_info );
   return file_info;

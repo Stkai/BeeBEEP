@@ -172,6 +172,8 @@ void Settings::load()
   qDebug() << "Creating local user and loading settings";
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
 
+  m_firstTime = sets.allKeys().isEmpty();
+
   sets.beginGroup( "Chat" );
   m_chatFont.fromString( sets.value( "Font", QApplication::font().toString() ).toString() );
   m_chatFontColor = sets.value( "FontColor", QColor( Qt::black ).name() ).toString();
@@ -218,7 +220,7 @@ void Settings::load()
   if( m_language.size() > 2 )
     m_language.resize( 2 );
   m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
-  m_downloadDirectory = sets.value( "DownloadDirectory",QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+  m_downloadDirectory = sets.value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_logPath = sets.value( "LogPath", "." ).toString();
   m_pluginPath = sets.value( "PluginPath", "." ).toString();
   m_localePath = sets.value( "LocalePath", "." ).toString();
