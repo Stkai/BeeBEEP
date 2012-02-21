@@ -23,8 +23,10 @@
 
 #include "BeeUtils.h"
 #include "Protocol.h"
-#include "Settings.h"
+#include "Random.h"
 #include "Rijndael.h"
+#include "Settings.h"
+
 
 
 Protocol* Protocol::mp_instance = NULL;
@@ -407,6 +409,18 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
     qWarning() << "FILEINFO message contains more data. Skip it";
 
   return fi;
+}
+
+FileInfo Protocol::fileInfo( const QFileInfo& fi )
+{
+  FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
+  file_info.setName( fi.fileName() );
+  file_info.setPath( fi.absoluteFilePath() );
+  file_info.setSuffix( fi.suffix() );
+  file_info.setSize( fi.size() );
+  QString password_key = QString( "%1%2%3%4" ).arg( file_info.id() ).arg( file_info.path() ).arg( QDateTime::currentDateTime().toString() ).arg( Random::number( 111111, 999999 ) );
+  file_info.setPassword( Settings::instance().hash( password_key ) );
+  return file_info;
 }
 
 ChatMessageData Protocol::dataFromChatMessage( const Message& m )

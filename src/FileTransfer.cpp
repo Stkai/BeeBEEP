@@ -29,7 +29,7 @@
 
 
 FileTransfer::FileTransfer( QObject *parent )
-  : QTcpServer( parent ), m_id( ID_START ), m_files(), m_peers()
+  : QTcpServer( parent ), m_files(), m_peers()
 {
   connect( this, SIGNAL( newPeerConnected( FileTransferPeer* , int ) ), this, SLOT( setupPeer( FileTransferPeer*, int ) ) );
 }
@@ -117,15 +117,9 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi )
   FileInfo file_info = fileInfo( fi.absoluteFilePath() );
   if( file_info.isValid() )
     return file_info;
-  file_info = FileInfo( newFileId(), FileInfo::Upload );
-  file_info.setName( fi.fileName() );
-  file_info.setPath( fi.absoluteFilePath() );
-  file_info.setSuffix( fi.suffix() );
-  file_info.setSize( fi.size() );
+  file_info = Protocol::instance().fileInfo( fi );
   file_info.setHostAddress( serverAddress() );
   file_info.setHostPort( serverPort() );
-  QString password_key = QString( "%1%2%3%4" ).arg( file_info.id() ).arg( file_info.path() ).arg( QDateTime::currentDateTime().toString() ).arg( Random::number( 111111, 999999 ) );
-  file_info.setPassword( Settings::instance().hash( password_key ) );
   m_files.append( file_info );
   return file_info;
 }
@@ -134,7 +128,7 @@ void FileTransfer::incomingConnection( int socket_descriptor )
 {
   FileTransferPeer *upload_peer = new FileTransferPeer( this );
   upload_peer->setTransferType( FileTransferPeer::Upload );
-  upload_peer->setId( newFileId() );
+  upload_peer->setId( Protocol::instance().newId() );
   m_peers.append( upload_peer );
   emit newPeerConnected( upload_peer, socket_descriptor );
 }
@@ -218,7 +212,7 @@ void FileTransfer::downloadFile( const FileInfo& fi )
   qDebug() << "Downloading file" << fi.name();
   FileTransferPeer *download_peer = new FileTransferPeer( this );
   download_peer->setTransferType( FileTransferPeer::Download );
-  download_peer->setId( newFileId() );
+  download_peer->setId( Protocol::instance().newId() );
   download_peer->setFileInfo( fi );
   m_peers.append( download_peer );
   emit newPeerConnected( download_peer, 0 );

@@ -30,6 +30,7 @@
 #endif
 #include "ChatManager.h"
 #include "ColorManager.h"
+#include "FileShare.h"
 #include "GuiMain.h"
 #if defined( LOGFILE_ENABLED )
   #include "Log.h"
@@ -94,6 +95,9 @@ int main( int argc, char *argv[] )
   /* Init Chat Manager */
   (void)ChatManager::instance();
 
+  /* Init File Sharing */
+  (void)FileShare::instance();
+
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
@@ -128,6 +132,7 @@ int main( int argc, char *argv[] )
   int iRet = app.exec();
 
   /* CleanUp */
+  FileShare::close();
   ChatManager::close();
   UserManager::close();
   ColorManager::close();

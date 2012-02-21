@@ -55,7 +55,8 @@ SOURCES += Listener.cpp \
     GuiChatList.cpp \
     NetworkAccount.cpp \
     GuiSearchUser.cpp \
-    GuiWizard.cpp
+    GuiWizard.cpp \
+    FileShare.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -107,7 +108,8 @@ HEADERS += sym_iap_util.h \
     GuiChatList.h \
     NetworkAccount.h \
     GuiSearchUser.h \
-    GuiWizard.h
+    GuiWizard.h \
+    FileShare.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
@@ -130,6 +132,8 @@ DEPENDPATH += $$PWD/../qxmpp
 win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/release/libqxmpp.a
 else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/debug/libqxmpp.a
 else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/libqxmpp.a
+
+
 
 
 

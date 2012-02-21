@@ -51,6 +51,7 @@ public:
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
+  FileInfo fileInfo( const QFileInfo& );
   ChatMessageData dataFromChatMessage( const Message& );
   int protoVersion( const Message& ) const;
 

@@ -62,7 +62,6 @@ signals:
 
 protected:
   void incomingConnection( int );
-  inline VNumber newFileId();
   void resetServerFiles();
 
   FileInfo fileInfo( VNumber ) const;
@@ -75,7 +74,6 @@ protected slots:
   void setupPeer( FileTransferPeer*, int );
 
 private:
-  VNumber m_id;
   QList<FileInfo> m_files;
   QList<FileTransferPeer*> m_peers;
 
@@ -85,7 +83,6 @@ private:
 // Inline Functions
 inline bool FileTransfer::isWorking() const { return isListening(); }
 inline void FileTransfer::clearFiles() { m_files.clear(); }
-inline VNumber FileTransfer::newFileId() { return ++m_id; }
 
 
 #endif // BEEBEEP_FILETRANSFERSERVER_H
