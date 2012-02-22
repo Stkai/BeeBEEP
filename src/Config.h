@@ -54,6 +54,7 @@ typedef quint64 FileSizeType;
 #define ID_HELLO_MESSAGE   15
 #define ID_USER_MESSAGE    16
 #define ID_VCARD_MESSAGE   17
+#define ID_SHARE_MESSAGE   18
 
 
 #endif // BEEBEEP_CONFIG_H

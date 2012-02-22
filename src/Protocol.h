@@ -63,6 +63,9 @@ public:
   QByteArray localVCardMessage() const;
   bool changeVCardFromMessage( User*, const Message& ) const;
 
+  QByteArray localFileShareMessage( const QList<FileInfo>&, int server_port ) const;
+  QList<FileInfo> messageToFileShare( const Message&, const QHostAddress& ) const;
+
   User createUser( const Message&, const QHostAddress& );
   Chat createChat( const QList<VNumber>& user_list );
 

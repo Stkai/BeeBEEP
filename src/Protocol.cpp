@@ -55,6 +55,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::System: return "BEE-SYST";
   case Message::User:   return "BEE-USER";
   case Message::File:   return "BEE-FILE";
+  case Message::Share:  return "BEE-FSHR";
   default:              return "BEE-BOOH";
   }
 }
@@ -77,6 +78,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::System;
   else if( msg_type == "BEE-FILE" )
     return Message::File;
+  else if( msg_type == "BEE-FSHR" )
+    return Message::Share;
   else
     return Message::Undefined;
 }
@@ -106,7 +109,7 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
   QStringList sl = message_data.split( PROTOCOL_FIELD_SEPARATOR, QString::KeepEmptyParts );
   if( sl.size() < 7 )
   {
-    qWarning() << "Invalid message fields:" << message_data;
+    qWarning() << "Invalid number of fields in message:" << message_data;
     return m;
   }
   m.setType( messageType( sl.first() ) );
@@ -116,9 +119,8 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
     return m;
   }
   sl.removeFirst();
-  bool ok = false;
-  int msg_id = sl.first().toInt( &ok );
-  if( !ok )
+  VNumber msg_id = Bee::qVariantToVNumber( sl.first() );
+  if( msg_id == ID_INVALID )
   {
     qWarning() << "Invalid message id:" << message_data;
     m.setType( Message::Undefined );
@@ -126,6 +128,7 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
   }
   m.setId( msg_id );
   sl.removeFirst();
+  bool ok = false;
   int msg_size = sl.first().toInt( &ok );
   if( !ok )
   {
@@ -422,6 +425,74 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi )
   file_info.setPassword( Settings::instance().hash( password_key ) );
   return file_info;
 }
+
+QByteArray Protocol::localFileShareMessage( const QList<FileInfo>& file_info_list, int server_port ) const
+{
+  QStringList msg_list;
+  QList<FileInfo>::const_iterator it = file_info_list.begin();
+  while( it != file_info_list.end() )
+  {
+    QStringList sl;
+    sl << (*it).name();
+    sl << (*it).suffix();
+    sl << QString::number( (*it).size() );
+    sl << QString::number( (*it).id() );
+    sl << QString::fromUtf8( (*it).password() );
+
+    msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
+
+    ++it;
+  }
+
+  Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
+  m.setData( QString::number( server_port ) );
+
+  return fromMessage( m );
+}
+
+QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddress& server_address ) const
+{
+  QList<FileInfo> file_info_list;
+  if( m.type() != Message::Share )
+    return file_info_list;
+
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
+  if( sl.size() <= 0 )
+    return file_info_list;
+
+  int server_port = sl.at( 0 ).toInt();
+  /* Skip other data */
+  if( sl.size() > 1 )
+    qWarning() << "FILESHARE message contains more data. Skip it";
+
+  sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
+
+  QStringList::const_iterator it = sl.begin();
+  while( it != sl.end() )
+  {
+    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR, QString::SkipEmptyParts );
+
+    if( sl_tmp.size() >= 5 )
+    {
+      FileInfo fi;
+      fi.setTransferType( FileInfo::Download );
+      fi.setHostAddress( server_address );
+      fi.setHostPort( server_port );
+      fi.setName( sl_tmp.at( 0 ) );
+      fi.setSuffix( sl_tmp.at( 1 ) );
+      fi.setSize( Bee::qVariantToVNumber( sl_tmp.at( 2 ) ) );
+      fi.setId( Bee::qVariantToVNumber( sl_tmp.at( 3 ) ) );
+      fi.setPassword( sl_tmp.at( 4 ).toUtf8() );
+
+      file_info_list.append( fi );
+    }
+
+    ++it;
+  }
+
+  return file_info_list;
+}
+
 
 ChatMessageData Protocol::dataFromChatMessage( const Message& m )
 {
