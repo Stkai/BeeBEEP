@@ -82,9 +82,14 @@ private slots:
   void serviceDisconnected( const QString& );
   void sendBroadcastMessage();
   void showWizard();
+  void hideToTrayIcon();
+  void showFromTrayIcon();
+  void forceExit();
+  void trayIconClicked( QSystemTrayIcon::ActivationReason );
 
 protected:
   void closeEvent( QCloseEvent* );
+  void changeEvent( QEvent* );
 
 private:
   void createActions();
@@ -117,6 +122,7 @@ private:
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;
   QMenu *mp_menuAccounts;
+  QMenu *mp_menuTray;
 
   QToolBar *mp_barMain;
 
@@ -135,6 +141,8 @@ private:
   QAction* mp_actViewChats;
 
   QDockWidget* mp_dockUserList;
+
+  QSystemTrayIcon* mp_trayIcon;
 
 };
 

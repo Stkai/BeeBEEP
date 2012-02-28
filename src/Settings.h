@@ -53,6 +53,7 @@ public:
   inline int writingTimeout() const;
   inline int fileTransferConfirmTimeout() const;
   inline int fileTransferBufferSize() const;
+  inline int trayMessageTimeout() const;
 
   inline const QString& logPath() const;
   inline void setLogPath( const QString& );
@@ -131,6 +132,10 @@ public:
   inline const QStringList& broadcastAddresses() const;
   inline void setBroadcastAddresses( const QStringList& );
 
+  inline bool minimizeInTray() const;
+  inline void setMinimizeInTray( bool );
+
+
   void load();
   void save();
 
@@ -164,6 +169,7 @@ private:
   int m_writingTimeout;
   int m_fileTransferConfirmTimeout;
   int m_fileTransferBufferSize;
+  int m_trayMessageTimeout;
 
   QString m_logPath;
   QString m_pluginPath;
@@ -210,6 +216,8 @@ private:
 
   bool m_firstTime;
 
+  bool m_minimizeInTray;
+
 };
 
 
@@ -223,6 +231,7 @@ inline int Settings::pongTimeout() const { return m_pongTimeout; }
 inline int Settings::writingTimeout() const { return m_writingTimeout; }
 inline int Settings::fileTransferConfirmTimeout() const { return m_fileTransferConfirmTimeout; }
 inline int Settings::fileTransferBufferSize() const { return m_fileTransferBufferSize; }
+inline int Settings::trayMessageTimeout() const  { return m_trayMessageTimeout; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline const QString& Settings::pluginPath() const { return m_pluginPath; }
@@ -284,7 +293,8 @@ inline const QStringList& Settings::broadcastAddresses() const { return m_broadc
 inline void Settings::setBroadcastAddresses( const QStringList& new_value ) { m_broadcastAddresses = new_value; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }
 inline bool Settings::firstTime() const { return m_firstTime; }
-
+inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }
+inline void Settings::setMinimizeInTray( bool new_value ) { m_minimizeInTray = new_value; }
 
 
 #endif // BEEBEEP_SETTINGS_H

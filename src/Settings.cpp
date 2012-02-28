@@ -224,6 +224,7 @@ void Settings::load()
   m_logPath = sets.value( "LogPath", "." ).toString();
   m_pluginPath = sets.value( "PluginPath", "." ).toString();
   m_localePath = sets.value( "LocalePath", "." ).toString();
+  m_minimizeInTray = sets.value( "MinimizeInTray", true ).toBool();
   sets.endGroup();
 
   sets.beginGroup( "Tools" );
@@ -248,6 +249,7 @@ void Settings::load()
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
+  m_trayMessageTimeout = qMax( sets.value( "SystemTrayMessageTimeout", 5000 ).toInt(), 0 );
   sets.endGroup();
 
   sets.beginGroup( "Network");
@@ -346,6 +348,7 @@ void Settings::save()
   sets.setValue( "LogPath", m_logPath );
   sets.setValue( "PluginPath", m_pluginPath );
   sets.setValue( "LocalePath", m_localePath );
+  sets.setValue( "MinimizeInTray", m_minimizeInTray );
   sets.endGroup();
   sets.beginGroup( "Tools" );
   sets.setValue( "DebugMode", m_debugMode );
@@ -361,6 +364,7 @@ void Settings::save()
   sets.setValue( "WritingTimeout", m_writingTimeout );
   sets.setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets.setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
+  sets.setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
   sets.endGroup();
   sets.beginGroup( "Network");
   sets.setValue( "ProxyType", (int)m_networkProxy.type() );

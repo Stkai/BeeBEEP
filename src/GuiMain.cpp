@@ -56,6 +56,8 @@ GuiMain::GuiMain( QWidget *parent )
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
 
+  mp_trayIcon = new QSystemTrayIcon( QIcon( ":/images/beebeep.png"), this );
+
   createActions();
   createDockWindows();
   createMenus();
@@ -83,6 +85,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
 
+  connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
+
   showChat( ID_DEFAULT_CHAT );
   initGuiItems();
 }
@@ -97,22 +101,45 @@ void GuiMain::refreshTitle()
                        tr( "offline" ) ) ) );
 }
 
+void GuiMain::forceExit()
+{
+  if( mp_core->isConnected( true ) )
+    mp_core->stop();
+  close();
+}
+
+void GuiMain::changeEvent( QEvent* e )
+{
+  if( e->type() == QEvent::WindowStateChange )
+  {
+    if( isMinimized() && Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
+      QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+  }
+}
+
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  if( !mp_core->isConnected( true ) ||
-      QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
-                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::Yes )
+  if( mp_core->isConnected( true ) )
   {
+    if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
+                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::No )
+    {
+      e->ignore();
+      return;
+    }
+
+    mp_core->stop();
+  }
+
 #ifndef Q_OS_SYMBIAN
+  if( isVisible() )
+  {
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
-#endif
-    if( mp_core->isConnected( true ) )
-      mp_core->stop();
-    e->accept();
   }
-  else
-    e->ignore();
+#endif
+
+  e->accept();
 }
 
 void GuiMain::showNextChat()
@@ -233,7 +260,7 @@ void GuiMain::createActions()
   mp_actQuit = new QAction( QIcon( ":/images/quit.png" ), tr( "&Quit" ), this );
   mp_actQuit->setShortcuts( QKeySequence::Quit );
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
-  connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( close() ) );
+  connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( forceExit() ) );
 
   mp_actVCard = new QAction( QIcon( ":/images/profile.png"), tr( "Profile..." ), this );
   mp_actVCard->setStatusTip( tr( "Change your profile data" ) );
@@ -368,6 +395,15 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().automaticFileName() );
   act->setData( 7 );
 
+  if( QSystemTrayIcon::isSystemTrayAvailable() )
+  {
+    act = mp_menuSettings->addAction( tr( "Minimize to tray icon" ), this, SLOT( settingsChanged() ) );
+    act->setStatusTip( tr( "If enabled when the minimize button is clicked the window minimized to the system tray icon" ) );
+    act->setCheckable( true );
+    act->setChecked( Settings::instance().minimizeInTray() );
+    act->setData( 11 );
+  }
+
   /* Emoticons Menu for ToolBar */
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
   mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
@@ -418,6 +454,12 @@ void GuiMain::createMenus()
   /* Plugins Menu */
   mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
   updadePluginMenu();
+
+  /* System Tray Menu */
+  mp_menuTray = new QMenu( tr( "%1 System Tray").arg( Settings::instance().programName() ), this );
+  act = mp_menuTray->addAction( QIcon( ":/images/beebeep.png" ), tr( "Open" ), this, SLOT( showFromTrayIcon() ) );
+  mp_menuTray->addSeparator();
+  mp_menuTray->insertAction( 0, mp_actQuit );
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -439,6 +481,8 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
+
+  mp_trayIcon->setContextMenu( mp_menuTray );
 }
 
 void GuiMain::createStatusBar()
@@ -607,6 +651,9 @@ void GuiMain::settingsChanged()
   case 10:
     Settings::instance().setShowEmoticons( act->isChecked() );
     refresh_chat = true;
+    break;
+  case 11:
+    Settings::instance().setMinimizeInTray( act->isChecked() );
     break;
   case 99:
     break;
@@ -1151,3 +1198,37 @@ void GuiMain::showWizard()
   if( gw.exec() == QDialog::Accepted )
     refreshTitle();
 }
+
+void GuiMain::hideToTrayIcon()
+{
+  mp_trayIcon->show();
+
+  if( Settings::instance().trayMessageTimeout() > 0 )
+    mp_trayIcon->showMessage( Settings::instance().programName(),
+                            tr( "%1 will keep running in the background mode. To terminate the program, "
+                               "choose Quit in the context menu of the system tray icon." )
+                              .arg( Settings::instance().programName() ),
+                            QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );
+  hide();
+}
+
+void GuiMain::showFromTrayIcon()
+{
+  showNormal(); // the window last state is minimized
+  mp_trayIcon->hide();
+}
+
+void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason reason )
+{
+  switch( reason )
+  {
+    case QSystemTrayIcon::Trigger:
+    case QSystemTrayIcon::DoubleClick:
+    case QSystemTrayIcon::MiddleClick:
+      mp_menuTray->exec( QCursor::pos() );
+      break;
+    default:
+           ;
+  }
+}
+
