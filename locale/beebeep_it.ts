@@ -909,6 +909,26 @@ il file %2 (%3)?</translation>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Vuoi disconnetterti dalla rete di %1?</translation>
     </message>
+    <message>
+        <source>Minimize to tray icon</source>
+        <translation>Minimizza ad icona di sistema</translation>
+    </message>
+    <message>
+        <source>If enabled when the minimize button is clicked the window minimized to the system tray icon</source>
+        <translation>Se abilitata quando il pulsante minimizza viene premuto la finestra sarà minimizzata tra le icone di sistema</translation>
+    </message>
+    <message>
+        <source>%1 System Tray</source>
+        <translation>Icona di Sistema di %1</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Apri</translation>
+    </message>
+    <message>
+        <source>%1 will keep running in the background mode. To terminate the program, choose Quit in the context menu of the system tray icon.</source>
+        <translation>%1 continuerà ad essere attivo anche se nascosto. Per chiudere il programma scegliere Esci dal menu dell&apos;icona di sistema.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1416,6 +1436,36 @@ il file %2 (%3)?</translation>
     <message>
         <source>Remove from the contact list</source>
         <translation>Elimina dalla lista dei contatti</translation>
+    </message>
+</context>
+<context>
+    <name>GuiWizard</name>
+    <message>
+        <source>Welcome to &lt;b&gt;%1 Network&lt;/b&gt;.</source>
+        <translation>Benvenuti nella &lt;b&gt;Rete di %1&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Your nickname can not be empty.</source>
+        <translation>Il campo del soprannome non può essere vuoto.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiWizardDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Welcome</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Your nickname is:</source>
+        <translation>Il tuo soprannome è:</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
