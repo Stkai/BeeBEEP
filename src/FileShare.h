@@ -37,7 +37,7 @@ public:
   inline const QMultiMap<VNumber, FileInfo>& network() const;
 
   void addPath( const QString& );
-
+  bool hasFilePath( const QString& );
 
   static FileShare& instance()
   {

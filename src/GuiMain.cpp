@@ -387,8 +387,6 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().beepOnNewMessageArrived() );
   act->setData( 4 );
 
-  mp_menuSettings->addSeparator();
-
   act = mp_menuSettings->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
   act->setCheckable( true );

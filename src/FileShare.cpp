@@ -56,7 +56,22 @@ void FileShare::addPath( const QString& file_path )
 
 void FileShare::addFileInfo( const QFileInfo& fi )
 {
+  if( hasFilePath( fi.absoluteFilePath() ) )
+  {
+    qDebug() << "FileShare:" << fi.absoluteFilePath() << "is already in share list";
+    return;
+  }
   FileInfo file_info = Protocol::instance().fileInfo( fi );
   qDebug() << "FileShare: adding file" << file_info.path();
   m_local.append( file_info );
+}
+
+bool FileShare::hasFilePath( const QString& file_path )
+{
+  foreach( FileInfo fi, m_local )
+  {
+    if( fi.path() == file_path )
+      return true;
+  }
+  return false;
 }
