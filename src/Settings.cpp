@@ -267,6 +267,11 @@ void Settings::load()
   sets.endGroup();
   loadBroadcastAddresses();
 
+  sets.beginGroup( "FileShare" );
+  m_fileShare = sets.value( "Active", false ).toBool();
+  m_localShare = sets.value( "ShareList", QStringList() ).toStringList();
+  sets.endGroup();
+
   qDebug() << "Loading network accounts";
   sets.beginGroup( "NetworkAccount" );
   int account_number = sets.value( "Accounts", 0 ).toInt();
@@ -374,6 +379,10 @@ void Settings::save()
   sets.setValue( "ProxyUser", m_networkProxy.user() );
   sets.setValue( "ProxyPassword", Protocol::simpleEncrypt( m_networkProxy.password() ) );
   sets.setValue( "BroadcastAddresses", m_broadcastAddresses );
+  sets.endGroup();
+  sets.beginGroup( "FileShare" );
+  sets.setValue( "Active", m_fileShare );
+  sets.setValue( "ShareList", m_localShare );
   sets.endGroup();
 
   if( m_networkAccounts.size() > 0 )

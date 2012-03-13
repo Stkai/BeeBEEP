@@ -21,12 +21,20 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUISHARELOCAL_H
+#define BEEBEEP_GUISHARELOCAL_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.6.4";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 167;
+#include "ui_GuiShareLocal.h"
+#include "Config.h"
 
-#endif // BEEBEEP_VERSION_H
+
+class GuiShareLocal : public QWidget, private Ui::GuiShareLocalWidget
+{
+  Q_OBJECT
+
+public:
+  explicit GuiShareLocal( QWidget *parent = 0 );
+
+};
+
+#endif // BEEBEEP_GUISHARELOCAL_H

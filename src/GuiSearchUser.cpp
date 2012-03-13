@@ -25,7 +25,6 @@
 #include "GuiSearchUser.h"
 #include "PluginManager.h"
 #include "Settings.h"
-#include "ui_GuiSearchUser.h"
 
 
 GuiSearchUser::GuiSearchUser( QWidget *parent )

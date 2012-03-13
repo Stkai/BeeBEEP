@@ -56,7 +56,8 @@ SOURCES += Listener.cpp \
     NetworkAccount.cpp \
     GuiSearchUser.cpp \
     GuiWizard.cpp \
-    FileShare.cpp
+    FileShare.cpp \
+    GuiShareLocal.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -109,7 +110,8 @@ HEADERS += sym_iap_util.h \
     NetworkAccount.h \
     GuiSearchUser.h \
     GuiWizard.h \
-    FileShare.h
+    FileShare.h \
+    GuiShareLocal.h
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
@@ -117,7 +119,8 @@ FORMS += GuiChat.ui \
     GuiNetwork.ui \
     GuiNetworkLogin.ui \
     GuiSearchUser.ui \
-    GuiWizard.ui
+    GuiWizard.ui \
+    GuiShareLocal.ui
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 
@@ -132,6 +135,15 @@ DEPENDPATH += $$PWD/../qxmpp
 win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/release/libqxmpp.a
 else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/debug/libqxmpp.a
 else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/libqxmpp.a
+
+
+
+
+
+
+
+
+
 
 
 

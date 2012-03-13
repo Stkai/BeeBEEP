@@ -135,6 +135,11 @@ public:
   inline bool minimizeInTray() const;
   inline void setMinimizeInTray( bool );
 
+  inline const QStringList& localShare() const;
+  inline void setLocalShare( const QStringList& );
+  inline bool fileShare() const;
+  inline void setFileShare( bool );
+
 
   void load();
   void save();
@@ -218,6 +223,9 @@ private:
 
   bool m_minimizeInTray;
 
+  QStringList m_localShare;
+  bool m_fileShare;
+
 };
 
 
@@ -295,6 +303,9 @@ inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; 
 inline bool Settings::firstTime() const { return m_firstTime; }
 inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }
 inline void Settings::setMinimizeInTray( bool new_value ) { m_minimizeInTray = new_value; }
-
+inline const QStringList& Settings::localShare() const { return m_localShare; }
+inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
+inline bool Settings::fileShare() const { return m_fileShare; }
+inline void Settings::setFileShare( bool new_value ) { m_fileShare = new_value; }
 
 #endif // BEEBEEP_SETTINGS_H
