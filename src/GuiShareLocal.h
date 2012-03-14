@@ -35,6 +35,16 @@ class GuiShareLocal : public QWidget, private Ui::GuiShareLocalWidget
 public:
   explicit GuiShareLocal( QWidget *parent = 0 );
 
+  void loadSettings();
+
+protected slots:
+  void addPath();
+  void removePath();
+
+protected:
+  void updateShareList();
+
+
 };
 
 #endif // BEEBEEP_GUISHARELOCAL_H

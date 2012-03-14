@@ -22,10 +22,40 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiShareLocal.h"
+#include "Settings.h"
 
 
 GuiShareLocal::GuiShareLocal( QWidget *parent )
   : QWidget(parent)
 {
   setupUi( this );
+
+  connect( mp_pbAdd, SIGNAL( clicked() ), this, SLOT( addPath() ) );
+  connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removePath() ) );
+}
+
+void GuiShareLocal::loadSettings()
+{
+  mp_twMyShares->clear();
+  foreach( QString share_path, Settings::instance().localShare() )
+  {
+    new QTreeWidgetItem( mp_twMyShares, share_path );
+  }
+
+  updateShareList();
+}
+
+void GuiShareLocal::addPath()
+{
+
+}
+
+void GuiShareLocal::removePath()
+{
+
+}
+
+void GuiShareLocal::updateShareList()
+{
+  mp_twLocalShares->clear();
 }
