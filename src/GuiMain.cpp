@@ -33,6 +33,7 @@
 #include "GuiNetworkLogin.h"
 #include "GuiPluginManager.h"
 #include "GuiSearchUser.h"
+#include "GuiShareLocal.h"
 #include "GuiTransferFile.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
@@ -479,6 +480,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
+  mp_barMain->addAction( mp_actViewShareLocal );
 
   mp_trayIcon->setContextMenu( mp_menuTray );
 }
@@ -523,6 +525,18 @@ void GuiMain::createDockWindows()
   mp_actViewChats->setText( tr( "Show the chat list" ) );
   mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
   mp_actViewChats->setData( 99 );
+  dock_widget->hide();
+
+  dock_widget = new QDockWidget( tr( "My Shares" ), this );
+  dock_widget->setObjectName( "GuiShareLocalDock" );
+  mp_shareLocal = new GuiShareLocal( this );
+  dock_widget->setWidget( mp_shareLocal );
+  addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
+  mp_actViewShareLocal = dock_widget->toggleViewAction();
+  mp_actViewShareLocal->setIcon( QIcon( ":/images/boh.png" ) );
+  mp_actViewShareLocal->setText( tr( "Show my shared files" ) );
+  mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
+  mp_actViewShareLocal->setData( 99 );
   dock_widget->hide();
 
 }
@@ -1230,3 +1244,7 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason reason )
   }
 }
 
+void GuiMain::setupSettings()
+{
+  mp_shareLocal->loadSettings();
+}

@@ -38,10 +38,12 @@ public:
   void loadSettings();
 
 protected slots:
-  void addPath();
+  void addFilePath();
+  void addFolderPath();
   void removePath();
 
 protected:
+  void updateMyShares();
   void updateShareList();
 
 

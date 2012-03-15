@@ -71,5 +71,7 @@
         <file>images/xmpp.png</file>
         <file>images/license.png</file>
         <file>images/broadcast.png</file>
+        <file>images/file-add.png</file>
+        <file>images/folder-add.png</file>
     </qresource>
 </RCC>

@@ -6,22 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>154</width>
-    <height>436</height>
+    <width>136</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
-    <number>2</number>
-   </property>
-   <property name="spacing">
-    <number>2</number>
-   </property>
-   <item row="0" column="0">
-    <widget class="QPushButton" name="mp_pbAdd">
+   <item row="0" column="0" colspan="4">
+    <widget class="QTreeWidget" name="mp_twMyShares">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>160</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>120</width>
+       <height>0</height>
+      </size>
+     </property>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="mp_pbAddFile">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -33,14 +48,34 @@
      </property>
      <property name="icon">
       <iconset resource="beebeep.qrc">
-       <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
+       <normaloff>:/images/file-add.png</normaloff>:/images/file-add.png</iconset>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="1" column="1">
+    <widget class="QPushButton" name="mp_pbAddFolder">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="beebeep.qrc">
+       <normaloff>:/images/folder-add.png</normaloff>:/images/folder-add.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
     <widget class="QPushButton" name="mp_pbRemove">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -55,12 +90,18 @@
       <iconset resource="beebeep.qrc">
        <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
      </property>
+     <property name="iconSize">
+      <size>
+       <width>16</width>
+       <height>16</height>
+      </size>
+     </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="2">
+   <item row="1" column="3">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -73,23 +114,14 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="0" colspan="3">
-    <widget class="QTreeWidget" name="mp_twMyShares">
-     <property name="maximumSize">
+   <item row="2" column="0" colspan="4">
+    <widget class="QTreeWidget" name="mp_twLocalShares">
+     <property name="baseSize">
       <size>
-       <width>16777215</width>
-       <height>160</height>
+       <width>120</width>
+       <height>0</height>
       </size>
      </property>
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="3">
-    <widget class="QTreeWidget" name="mp_twLocalShares">
      <column>
       <property name="text">
        <string notr="true">1</string>
@@ -100,7 +132,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>mp_pbAdd</tabstop>
+  <tabstop>mp_pbAddFile</tabstop>
   <tabstop>mp_pbRemove</tabstop>
   <tabstop>mp_twMyShares</tabstop>
   <tabstop>mp_twLocalShares</tabstop>

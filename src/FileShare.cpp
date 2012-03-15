@@ -43,6 +43,7 @@ void FileShare::addPath( const QString& file_path )
   else if( file_info.isDir() )
   {
     foreach( QString fp, file_info.dir().entryList() )
+      if( fp.size() > 3 )
       addPath( fp );
   }
   else if( file_info.isFile() )

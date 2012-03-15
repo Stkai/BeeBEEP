@@ -125,6 +125,9 @@ int main( int argc, char *argv[] )
   mw.show();
 #endif
 
+  // Setup GUI settings
+  QTimer::singleShot( 100, &mw, SLOT( setupSettings() ) );
+
   // Starting connection to BeeBEEP Network
   QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
 

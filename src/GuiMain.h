@@ -32,6 +32,7 @@ class ChatMessage;
 class FileInfo;
 class GuiChat;
 class GuiChatList;
+class GuiShareLocal;
 class GuiTransferFile;
 class GuiUserList;
 class User;
@@ -46,6 +47,7 @@ public:
 
 public slots:
   void startStopCore();
+  void setupSettings();
 
 private slots:
   void showAbout();
@@ -113,6 +115,7 @@ private:
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
+  GuiShareLocal* mp_shareLocal;
   Core *mp_core;
 
   QMenu *mp_menuMain;
@@ -139,6 +142,7 @@ private:
   QAction* mp_actSendFile;
   QAction* mp_actViewFileTransfer;
   QAction* mp_actViewChats;
+  QAction* mp_actViewShareLocal;
 
   QDockWidget* mp_dockUserList;
 
