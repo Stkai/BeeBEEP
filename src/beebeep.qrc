@@ -73,5 +73,9 @@
         <file>images/broadcast.png</file>
         <file>images/file-add.png</file>
         <file>images/folder-add.png</file>
+        <file>images/file-audio.png</file>
+        <file>images/file-other.png</file>
+        <file>images/file-video.png</file>
+        <file>images/file-image.png</file>
     </qresource>
 </RCC>

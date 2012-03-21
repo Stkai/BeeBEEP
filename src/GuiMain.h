@@ -47,7 +47,7 @@ public:
 
 public slots:
   void startStopCore();
-  void setupSettings();
+  void buildLocalShares();
 
 private slots:
   void showAbout();

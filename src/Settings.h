@@ -139,6 +139,7 @@ public:
   inline void setLocalShare( const QStringList& );
   inline bool fileShare() const;
   inline void setFileShare( bool );
+  inline int maxFileShared() const;
 
 
   void load();
@@ -225,6 +226,7 @@ private:
 
   QStringList m_localShare;
   bool m_fileShare;
+  int m_maxFileShared;
 
 };
 
@@ -307,5 +309,7 @@ inline const QStringList& Settings::localShare() const { return m_localShare; }
 inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
 inline bool Settings::fileShare() const { return m_fileShare; }
 inline void Settings::setFileShare( bool new_value ) { m_fileShare = new_value; }
+inline int Settings::maxFileShared() const { return m_maxFileShared; }
+
 
 #endif // BEEBEEP_SETTINGS_H

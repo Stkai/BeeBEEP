@@ -530,10 +530,11 @@ void GuiMain::createDockWindows()
   dock_widget = new QDockWidget( tr( "My Shares" ), this );
   dock_widget->setObjectName( "GuiShareLocalDock" );
   mp_shareLocal = new GuiShareLocal( this );
+  connect( mp_shareLocal, SIGNAL( buildShareListRequest() ), this, SLOT( buildLocalShares() ) );
   dock_widget->setWidget( mp_shareLocal );
   addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
   mp_actViewShareLocal = dock_widget->toggleViewAction();
-  mp_actViewShareLocal->setIcon( QIcon( ":/images/boh.png" ) );
+  mp_actViewShareLocal->setIcon( QIcon( ":/images/upload.png" ) );
   mp_actViewShareLocal->setText( tr( "Show my shared files" ) );
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareLocal->setData( 99 );
@@ -1244,7 +1245,8 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason reason )
   }
 }
 
-void GuiMain::setupSettings()
+void GuiMain::buildLocalShares()
 {
+  mp_core->buildLocalShare();
   mp_shareLocal->loadSettings();
 }

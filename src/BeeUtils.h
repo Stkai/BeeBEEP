@@ -38,6 +38,7 @@ namespace Bee
   QString bytesToString( FileSizeType, int precision = 1 );
   QString timerToString( int msec );
   QString uniqueFilePath( const QString& );
+  QString fileSuffixIconFileName( const QString& );
 
 }
 

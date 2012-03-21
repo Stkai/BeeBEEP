@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiShareLocal.h"
 #include "FileShare.h"
 #include "Settings.h"
@@ -30,6 +31,26 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   : QWidget(parent)
 {
   setupUi( this );
+
+  mp_twMyShares->setRootIsDecorated( false );
+  mp_twMyShares->setSortingEnabled( true );
+
+  mp_twLocalShares->setRootIsDecorated( false );
+  mp_twLocalShares->setSelectionMode( QAbstractItemView::NoSelection );
+
+  mp_twMyShares->setHeaderLabel( tr( "Share" ) );
+  QStringList labels;
+  labels << tr( "Filename" ) << tr( "Size" ) << tr( "Path" );
+  mp_twLocalShares->setHeaderLabels( labels );
+  mp_twLocalShares->setAlternatingRowColors( true );
+  mp_twLocalShares->setSortingEnabled( true );
+
+  QHeaderView* header_view = mp_twLocalShares->header();
+  header_view->setResizeMode( QHeaderView::ResizeToContents );
+  header_view->setSortIndicator( 0, Qt::AscendingOrder );
+
+  header_view = mp_twMyShares->header();
+  header_view->setSortIndicator( 0, Qt::AscendingOrder );
 
   connect( mp_pbAddFile, SIGNAL( clicked() ), this, SLOT( addFilePath() ) );
   connect( mp_pbAddFolder, SIGNAL( clicked() ), this, SLOT( addFolderPath() ) );
@@ -44,16 +65,13 @@ void GuiShareLocal::loadSettings()
 
 void GuiShareLocal::addFilePath()
 {
-  QStringList files = QFileDialog::getOpenFileNames( this, tr( "Select one or more files to share" ),
+  QString file_path = QFileDialog::getOpenFileName( this, tr( "Select a file to share" ),
                                                      Settings::instance().lastDirectorySelected(),
                                                      "", 0, QFileDialog::DontResolveSymlinks );
-  if( files.isEmpty() )
+  if( file_path.isEmpty() )
     return;
 
-  foreach( QString file_path, files )
-    FileShare::instance().addPath( file_path );
-
-  loadSettings();
+  addSharePath( file_path );
 }
 
 void GuiShareLocal::addFolderPath()
@@ -64,14 +82,28 @@ void GuiShareLocal::addFolderPath()
   if( folder_path.isEmpty() )
     return;
 
-  FileShare::instance().addPath( folder_path );
-
-  loadSettings();
+  addSharePath( folder_path );
 }
 
 void GuiShareLocal::removePath()
 {
+  if( Settings::instance().localShare().isEmpty() )
+    return;
 
+  QList<QTreeWidgetItem*> item_list = mp_twMyShares->selectedItems();
+  if( item_list.isEmpty() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select a share path" ) );
+    mp_twMyShares->setFocus();
+    return;
+  }
+
+  QString share_selected = item_list.first()->text( 0 );
+  QStringList local_share = Settings::instance().localShare();
+  if( !local_share.removeOne( share_selected ) )
+    return;
+  Settings::instance().setLocalShare( local_share );
+  emit( buildShareListRequest() );
 }
 
 void GuiShareLocal::updateMyShares()
@@ -91,7 +123,21 @@ void GuiShareLocal::updateShareList()
   QTreeWidgetItem *item;
   foreach( FileInfo fi, FileShare::instance().local() )
   {
-    item = new QTreeWidgetItem( mp_twMyShares );
-    item->setText( 0, fi.path() );
+    item = new QTreeWidgetItem( mp_twLocalShares );
+    item->setText( 0, fi.name() );
+    item->setIcon( 0, QIcon( Bee::fileSuffixIconFileName( fi.suffix() ) ) );
+    item->setText( 1, Bee::bytesToString( fi.size() ) );
+    item->setText( 2, fi.path() );
+  }
+}
+
+void GuiShareLocal::addSharePath( const QString& share_path )
+{
+  if( FileShare::instance().addPath( share_path ) > 0 )
+  {
+    QStringList local_share = Settings::instance().localShare();
+    local_share << share_path;
+    Settings::instance().setLocalShare( local_share );
+    loadSettings();
   }
 }

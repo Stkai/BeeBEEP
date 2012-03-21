@@ -37,10 +37,16 @@ public:
 
   void loadSettings();
 
+signals:
+  void buildShareListRequest();
+
 protected slots:
   void addFilePath();
   void addFolderPath();
   void removePath();
+
+protected:
+  void addSharePath( const QString& );
 
 protected:
   void updateMyShares();

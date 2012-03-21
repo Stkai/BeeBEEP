@@ -23,6 +23,7 @@
 
 #include "FileShare.h"
 #include "Protocol.h"
+#include "Settings.h"
 
 
 FileShare* FileShare::mp_instance = NULL;
@@ -32,46 +33,64 @@ FileShare::FileShare()
 {
 }
 
-void FileShare::addPath( const QString& file_path )
+int FileShare::addPath( const QString& share_path )
 {
-  QFileInfo file_info( file_path );
+  int num_files = 0;
+
+  if( m_local.size() >= Settings::instance().maxFileShared() )
+  {
+    qDebug() << "FileShare: max file shared reached" << m_local.size();
+    return num_files;
+  }
+
+  QFileInfo file_info( share_path );
   if( file_info.isSymLink() )
   {
-    qDebug() << "FileShare: skip symbolic link" << file_path;
-    return;
+    qDebug() << "FileShare: skip symbolic link" << share_path;
+    return num_files;
   }
   else if( file_info.isDir() )
   {
-    foreach( QString fp, file_info.dir().entryList() )
-      if( fp.size() > 3 )
-      addPath( fp );
+    if( share_path.endsWith( "." ) )
+    {
+      qDebug() << "FileShare: skip dir" << share_path;
+      return num_files;
+    }
+
+    QDir dir_path( share_path );
+
+    foreach( QString fp, dir_path.entryList() )
+      num_files += addPath( QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
   }
   else if( file_info.isFile() )
   {
-    addFileInfo( file_path );
+    if( addFileInfo( share_path ) )
+      num_files++;
   }
   else
-    qDebug() << "FileShare: invalid file type from path" << file_path;
+    qDebug() << "FileShare: invalid file type from path" << share_path;
 
+  return num_files;
 }
 
-void FileShare::addFileInfo( const QFileInfo& fi )
+bool FileShare::addFileInfo( const QFileInfo& fi )
 {
-  if( hasFilePath( fi.absoluteFilePath() ) )
+  if( hasPath( fi.absoluteFilePath() ) )
   {
     qDebug() << "FileShare:" << fi.absoluteFilePath() << "is already in share list";
-    return;
+    return false;
   }
   FileInfo file_info = Protocol::instance().fileInfo( fi );
   qDebug() << "FileShare: adding file" << file_info.path();
   m_local.append( file_info );
+  return true;
 }
 
-bool FileShare::hasFilePath( const QString& file_path )
+bool FileShare::hasPath( const QString& share_path )
 {
   foreach( FileInfo fi, m_local )
   {
-    if( fi.path() == file_path )
+    if( fi.path() == share_path )
       return true;
   }
   return false;

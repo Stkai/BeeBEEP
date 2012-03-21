@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "Core.h"
 #include "Broadcaster.h"
+#include "FileShare.h"
 #include "Settings.h"
 #include "Protocol.h"
 #include "XmppManager.h"
@@ -167,4 +168,11 @@ bool Core::isConnected( bool check_also_network_service ) const
     return mp_xmppManager->isConnected();
   else
     return false;
+}
+
+void Core::buildLocalShare()
+{
+  FileShare::instance().clearLocal();
+  foreach( QString share_path, Settings::instance().localShare() )
+    FileShare::instance().addPath( share_path );
 }

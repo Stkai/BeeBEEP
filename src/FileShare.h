@@ -36,8 +36,9 @@ public:
   inline const QList<FileInfo>& local() const;
   inline const QMultiMap<VNumber, FileInfo>& network() const;
 
-  void addPath( const QString& );
-  bool hasFilePath( const QString& );
+  int addPath( const QString& );
+  bool hasPath( const QString& );
+  inline void clearLocal();
 
   static FileShare& instance()
   {
@@ -58,7 +59,7 @@ public:
 protected:
   FileShare();
 
-  void addFileInfo( const QFileInfo& );
+  bool addFileInfo( const QFileInfo& );
 
 private:
   QList<FileInfo> m_local;
@@ -70,5 +71,6 @@ private:
 // Inline Functions
 inline const QList<FileInfo>& FileShare::local() const { return m_local; }
 inline const QMultiMap<VNumber, FileInfo>& FileShare::network() const { return m_network; }
+inline void FileShare::clearLocal() { m_local.clear(); }
 
 #endif // BEEBEEP_FILESHARE_H

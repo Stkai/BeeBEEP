@@ -137,3 +137,17 @@ QString Bee::uniqueFilePath( const QString& file_path )
   return fi.absoluteFilePath();
 }
 
+QString Bee::fileSuffixIconFileName( const QString& suffix )
+{
+  if( suffix == "mp3" || suffix == "wma" || suffix == "flac" )
+    return QString( ":/images/file-audio.png" );
+
+  if( suffix == "mp4" || suffix == "avi" || suffix == "mkv" || suffix == "wmv" )
+    return QString( ":/images/file-video.png" );
+
+  if( suffix == "jpg" || suffix == "jpeg" || suffix == "gif" || suffix == "bmp" || suffix == "png" )
+    return QString( ":/images/file-image.png" );
+
+  return QString( ":/images/file-other.png" );
+}
+

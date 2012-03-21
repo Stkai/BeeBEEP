@@ -40,6 +40,7 @@ class Core : public QObject
 public:
   explicit Core( QObject* parent = 0 );
 
+  void buildLocalShare();
   bool isConnected( bool check_also_network_service ) const;
   bool start();
   void stop();
