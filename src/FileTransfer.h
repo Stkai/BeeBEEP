@@ -59,6 +59,7 @@ signals:
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
   void userConnected( VNumber peer_id, const QHostAddress& peer_address, const Message& hello_message );
   void newPeerConnected( FileTransferPeer*, int );
+  void listening();
 
 protected:
   void incomingConnection( int );

@@ -79,27 +79,32 @@ QString Bee::bytesToString( FileSizeType bytes, int precision )
 {
   QString suffix;
   double result = 0;
+  int prec = 1;
   if( bytes > 1000000000 )
   {
     suffix = "Gb";
     result = bytes / 1000000000.0;
+    prec = 3;
   }
   else if( bytes > 1000000 )
   {
     suffix = "Mb";
     result = bytes / 1000000.0;
+    prec = result >= 10 ? 0 : 1;
   }
   else if( bytes > 1000 )
   {
     suffix = "kb";
     result = bytes / 1000.0;
+    prec = result >= 10 ? 0 : 1;
   }
   else
   {
-    suffix = "bytes";
+    suffix = "b";
     result = bytes;
+    prec = 0;
   }
-  return QString( "%1 %2").arg( result, 0, 'f', precision ).arg( suffix );
+  return QString( "%1 %2").arg( result, 0, 'f', prec > 0 ? (precision >= 0 ? precision : prec) : 0 ).arg( suffix );
 }
 
 QString Bee::timerToString( int time_elapsed )

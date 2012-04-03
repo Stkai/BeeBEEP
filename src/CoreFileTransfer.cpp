@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "Connection.h"
 #include "Core.h"
+#include "FileShare.h"
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -174,4 +175,18 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
     c->sendMessage( m );
 
   dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
+}
+
+void Core::fileTransferServerListening()
+{
+  Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
+
+  if( !Settings::instance().fileShare() )
+    return;
+
+  const QByteArray& local_share_message = Protocol::instance().localFileShareMessage();
+  foreach( Connection* c, m_connections )
+  {
+    c->sendData( local_share_message );
+  }
 }

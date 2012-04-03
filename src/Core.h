@@ -104,6 +104,7 @@ protected slots:
   void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType );
   void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
+  void fileTransferServerListening();
 
   /* CoreXmpp */
   void parseXmppMessage( const QString& service, const QString& bare_jid, const Message& );

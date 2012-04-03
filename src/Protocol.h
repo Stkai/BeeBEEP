@@ -63,7 +63,8 @@ public:
   QByteArray localVCardMessage() const;
   bool changeVCardFromMessage( User*, const Message& ) const;
 
-  QByteArray localFileShareMessage( const QList<FileInfo>&, int server_port ) const;
+  void createLocalFileShareMessage( const QList<FileInfo>&, int server_port );
+  inline const QByteArray& localFileShareMessage() const;
   QList<FileInfo> messageToFileShare( const Message&, const QHostAddress& ) const;
 
   User createUser( const Message&, const QHostAddress& );
@@ -104,6 +105,7 @@ protected:
 private:
   VNumber m_id;
   QByteArray m_writingMessage;
+  QByteArray m_localFileShareMessage;
 
 };
 
@@ -114,5 +116,6 @@ inline int Protocol::messageMinimumSize() const { return 10; }
 inline const QByteArray& Protocol::writingMessage() const { return m_writingMessage; }
 inline Message Protocol::chatMessage( const QString& msg_txt ) { return Message( Message::Chat, newId(), msg_txt ); }
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
+inline const QByteArray& Protocol::localFileShareMessage() const { return m_localFileShareMessage; }
 
 #endif // BEEBEEP_PROTOCOL_H

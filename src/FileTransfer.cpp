@@ -51,6 +51,7 @@ bool FileTransfer::startListener()
 
   qDebug() << "FileTransfer listen" << serverAddress() << serverPort();
   resetServerFiles();
+  emit listening();
   return true;
 }
 

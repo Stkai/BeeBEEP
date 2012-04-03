@@ -426,7 +426,7 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi )
   return file_info;
 }
 
-QByteArray Protocol::localFileShareMessage( const QList<FileInfo>& file_info_list, int server_port ) const
+void Protocol::createLocalFileShareMessage( const QList<FileInfo>& file_info_list, int server_port )
 {
   QStringList msg_list;
   QList<FileInfo>::const_iterator it = file_info_list.begin();
@@ -447,7 +447,7 @@ QByteArray Protocol::localFileShareMessage( const QList<FileInfo>& file_info_lis
   Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
   m.setData( QString::number( server_port ) );
 
-  return fromMessage( m );
+  m_localFileShareMessage = fromMessage( m );
 }
 
 QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddress& server_address ) const

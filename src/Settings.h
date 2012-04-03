@@ -141,7 +141,6 @@ public:
   inline void setFileShare( bool );
   inline int maxFileShared() const;
 
-
   void load();
   void save();
 

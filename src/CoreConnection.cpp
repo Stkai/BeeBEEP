@@ -201,4 +201,10 @@ void Core::checkUserAuthentication( const Message& m )
       c->sendData( Protocol::instance().localVCardMessage() );
     }
   }
+
+  if( Settings::instance().fileShare() && mp_fileTransfer->isWorking() )
+  {
+    qDebug() << "Sending my file share list to" << u.path();
+    c->sendData( Protocol::instance().localFileShareMessage() )
+  }
 }
