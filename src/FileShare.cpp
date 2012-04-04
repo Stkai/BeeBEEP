@@ -95,3 +95,17 @@ bool FileShare::hasPath( const QString& share_path )
   }
   return false;
 }
+
+void FileShare::addToNetwork( VNumber user_id, const QList<FileInfo>& file_info_list )
+{
+  removeFromNetwork( user_id );
+  foreach( FileInfo fi, file_info_list )
+  {
+    m_network.insert( user_id, fi );
+  }
+}
+
+void FileShare::removeFromNetwork( VNumber user_id )
+{
+  m_network.remove( user_id );
+}

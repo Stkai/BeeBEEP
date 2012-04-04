@@ -32,7 +32,7 @@ class Message
 public:
   // For Backward Compatibility do not change the order
   enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, User, File, Share, NumTypes };
-  enum Flag { Private, UserWriting, UserStatus, UserName, UserVCard, Refused, NumFlags };
+  enum Flag { Private, UserWriting, UserStatus, UserName, UserVCard, Refused, List, NumFlags };
 
   Message();
   Message( const Message& );

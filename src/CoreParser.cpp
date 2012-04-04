@@ -25,6 +25,7 @@
 #include "Connection.h"
 #include "Core.h"
 #include "FileInfo.h"
+#include "FileShare.h"
 #include "Protocol.h"
 #include "UserManager.h"
 
@@ -53,6 +54,9 @@ void Core::parseMessage( const User& u, const Message& m )
     break;
  case Message::File:
     parseFileMessage( u, m );
+    break;
+ case Message::Share:
+    parseFileShareMessage( u, m );
     break;
   default:
     qWarning() << "Core cannot parse the message with type" << m.type();
@@ -142,4 +146,18 @@ void Core::parseChatMessage( const User& u, const Message& m )
     dispatchChatMessageReceived( u.id(), m );
   else
     qWarning() << "Invalid flag found in chat message (CoreParser)";
+}
+
+void Core::parseFileShareMessage( const User& u, const Message& m )
+{
+  if( m.hasFlag( Message::List ) )
+  {
+     QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.hostAddress() );
+     if( !file_info_list.isEmpty() )
+     {
+       FileShare::instance().network();
+     }
+  }
+  else
+    qWarning() << "Invalid flag found in file share message (CoreParser)";
 }

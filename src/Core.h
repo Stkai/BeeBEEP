@@ -125,6 +125,7 @@ protected:
   void parseUserMessage( const User&, const Message& );
   void parseChatMessage( const User&, const Message& );
   void parseFileMessage( const User&, const Message& );
+  void parseFileShareMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserStatusChanged( const User& );

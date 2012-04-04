@@ -40,6 +40,9 @@ public:
   bool hasPath( const QString& );
   inline void clearLocal();
 
+  void addToNetwork( VNumber, const QList<FileInfo>& );
+  void removeFromNetwork( VNumber );
+
   static FileShare& instance()
   {
     if( !mp_instance )

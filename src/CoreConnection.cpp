@@ -205,6 +205,6 @@ void Core::checkUserAuthentication( const Message& m )
   if( Settings::instance().fileShare() && mp_fileTransfer->isWorking() )
   {
     qDebug() << "Sending my file share list to" << u.path();
-    c->sendData( Protocol::instance().localFileShareMessage() )
+    c->sendData( Protocol::instance().localFileShareMessage() );
   }
 }
