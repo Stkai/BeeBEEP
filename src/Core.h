@@ -87,6 +87,7 @@ signals:
   void xmppUserSubscriptionRequest( const QString&, const QString& );
   void serviceConnected( const QString& );
   void serviceDisconnected( const QString& );
+  void fileShareAvailable( const User& );
 
 protected slots:
   /* CoreConnection */

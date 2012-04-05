@@ -35,7 +35,7 @@ const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 
 
 Protocol::Protocol()
-  : m_id( ID_START ), m_writingMessage()
+  : m_id( ID_START ), m_writingMessage(), m_localFileShareMessage( "" )
 {
   Message writing_message( Message::User, ID_WRITING_MESSAGE, "*" );
   writing_message.addFlag( Message::Private );

@@ -155,7 +155,8 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
      QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.hostAddress() );
      if( !file_info_list.isEmpty() )
      {
-       FileShare::instance().network();
+       FileShare::instance().addToNetwork( u.id(), file_info_list );
+       emit fileShareAvailable( u );
      }
   }
   else

@@ -26,6 +26,7 @@
 #include "ColorManager.h"
 #include "Connection.h"
 #include "Core.h"
+#include "FileShare.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -139,6 +140,9 @@ void Core::closeConnection( Connection *c )
   Chat default_chat = ChatManager::instance().defaultChat( false );
   if( default_chat.removeUser( u.id() ) )
     ChatManager::instance().setChat( default_chat );
+
+  FileShare::instance().removeFromNetwork( c->userId() );
+
   c->deleteLater();
 }
 
@@ -202,7 +206,7 @@ void Core::checkUserAuthentication( const Message& m )
     }
   }
 
-  if( Settings::instance().fileShare() && mp_fileTransfer->isWorking() )
+  if( Settings::instance().fileShare() && mp_fileTransfer->isWorking() && !Protocol::instance().localFileShareMessage().isEmpty() )
   {
     qDebug() << "Sending my file share list to" << u.path();
     c->sendData( Protocol::instance().localFileShareMessage() );
