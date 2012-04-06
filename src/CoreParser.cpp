@@ -155,9 +155,13 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
      QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.hostAddress() );
      if( !file_info_list.isEmpty() )
      {
+       qDebug() << "Received list of file shared from" << u.path();
        FileShare::instance().addToNetwork( u.id(), file_info_list );
        emit fileShareAvailable( u );
      }
+
+     QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
+     dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has shared some files." ).arg( icon_html, u.name() ), DispatchToAllChatsWithUser );
   }
   else
     qWarning() << "Invalid flag found in file share message (CoreParser)";

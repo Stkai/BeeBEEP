@@ -47,7 +47,6 @@ public:
 
 public slots:
   void startStopCore();
-  void buildLocalShares();
 
 private slots:
   void showAbout();
@@ -88,6 +87,7 @@ private slots:
   void showFromTrayIcon();
   void forceExit();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
+  void buildLocalShares();
 
 protected:
   void closeEvent( QCloseEvent* );

@@ -32,6 +32,27 @@
 #include "UserManager.h"
 
 
+bool Core::startFileTransferServer()
+{
+  qDebug() << "Starting File Transfer Server";
+  if( !mp_fileTransfer->startListener() )
+  {
+    QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
+    return false;
+  }
+
+  buildLocalShare();
+  Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
+
+  return true;
+}
+
+void Core::stopFileTransferServer()
+{
+  mp_fileTransfer->stopListener();
+}
+
 void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& peer_address, const Message& m  )
 {
   User user_to_check = Protocol::instance().createUser( m, peer_address );
@@ -116,12 +137,8 @@ bool Core::sendFile( const User& u, const QString& file_path )
 
     if( !mp_fileTransfer->isWorking() )
     {
-      if( !mp_fileTransfer->startListener() )
-      {
-        dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to send the file: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
+      if( !startFileTransferServer() )
         return false;
-      }
-      // fi was generated before... and it has not the listener data
       fi.setHostAddress( mp_fileTransfer->serverAddress() );
       fi.setHostPort( mp_fileTransfer->serverPort() );
     }

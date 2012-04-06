@@ -446,6 +446,7 @@ void Protocol::createLocalFileShareMessage( const QList<FileInfo>& file_info_lis
 
   Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
   m.setData( QString::number( server_port ) );
+  m.addFlag( Message::List );
 
   m_localFileShareMessage = fromMessage( m );
 }

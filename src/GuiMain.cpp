@@ -212,6 +212,7 @@ void GuiMain::initGuiItems()
   mp_userList->setDefaultChatConnected( enable );
 
   updateStatusIcon();
+  mp_shareLocal->loadSettings();
 }
 
 void GuiMain::showAbout()

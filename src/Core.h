@@ -62,6 +62,8 @@ public:
   bool sendFile( const User&, const QString& file_path );
   void downloadFile( const User&, const FileInfo& );
   void refuseToDownloadFile( const User&, const FileInfo& );
+  bool startFileTransferServer();
+  void stopFileTransferServer();
 
   /* CoreXmpp */
   void setXmppUserSubscription( const QString& service, const QString& user_path, bool accepted );

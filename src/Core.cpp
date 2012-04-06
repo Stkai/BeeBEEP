@@ -95,6 +95,9 @@ bool Core::start()
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
 
+  if( Settings::instance().fileShare() )
+    startFileTransferServer();
+
   if( Settings::instance().showTipsOfTheDay() )
     showTipOfTheDay();
 
@@ -122,7 +125,7 @@ void Core::stop()
 {
   mp_xmppManager->disconnectFromServer();
   mp_broadcaster->stopBroadcasting();
-  mp_fileTransfer->stopListener();
+  stopFileTransferServer();
   mp_listener->close();
 
   foreach( Connection* c, m_connections )
