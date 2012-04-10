@@ -21,43 +21,30 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUITRANSFERFILE_H
-#define BEEBEEP_GUITRANSFERFILE_H
+#ifndef BEEBEEP_GUISHARENETWORK_H
+#define BEEBEEP_GUISHARENETWORK_H
 
-
+#include "ui_GuiShareNetwork.h"
 #include "Config.h"
-class FileInfo;
-class FileTransfer;
+
 class User;
 
 
-class GuiTransferFile : public QTreeWidget
+class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
 {
   Q_OBJECT
 
 public:
-  enum ColumnType { ColumnCancel, ColumnFile, ColumnUser, ColumnProgress, ColumnSort };
-  enum FileDataType { PeerId = Qt::UserRole+2, FileId, FilePath, TransferInProgress, TransferCompleted };
+  enum ColumnType { ColumnFile, ColumnSize, ColumnUser };
 
-  GuiTransferFile( QWidget* parent = 0 );
+  explicit GuiShareNetwork( QWidget *parent = 0 );
 
 public slots:
-  void setProgress( VNumber, const User&, const FileInfo&, FileSizeType );
-  void setMessage( VNumber, const User&, const FileInfo&, const QString& );
+  void loadShares( const User& );
 
-signals:
-  void transferCancelled( VNumber );
-  void stringToShow( const QString&, int );
-
-protected:
-  QTreeWidgetItem* findItem( VNumber );
-  void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType );
-  void showIcon( QTreeWidgetItem* );
-
-private slots:
+protected slots:
   void checkItemClicked( QTreeWidgetItem*, int );
 
 };
 
-
-#endif // BEEBEEP_GUITRANSFERFILE_H
+#endif // BEEBEEP_GUISHARENETWORK_H

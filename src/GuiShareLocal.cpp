@@ -52,6 +52,10 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   header_view = mp_twMyShares->header();
   header_view->setSortIndicator( 0, Qt::AscendingOrder );
 
+  mp_pbAddFile->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_pbAddFolder->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_pbRemove->setIconSize( Settings::instance().mainBarIconSize() );
+
   connect( mp_pbAddFile, SIGNAL( clicked() ), this, SLOT( addFilePath() ) );
   connect( mp_pbAddFolder, SIGNAL( clicked() ), this, SLOT( addFolderPath() ) );
   connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removePath() ) );
@@ -99,11 +103,8 @@ void GuiShareLocal::removePath()
   }
 
   QString share_selected = item_list.first()->text( 0 );
-  QStringList local_share = Settings::instance().localShare();
-  if( !local_share.removeOne( share_selected ) )
-    return;
-  Settings::instance().setLocalShare( local_share );
-  emit( buildShareListRequest() );
+
+  emit sharePathRemoved( share_selected );
 }
 
 void GuiShareLocal::updateMyShares()
@@ -133,11 +134,5 @@ void GuiShareLocal::updateShareList()
 
 void GuiShareLocal::addSharePath( const QString& share_path )
 {
-  if( FileShare::instance().addPath( share_path ) > 0 )
-  {
-    QStringList local_share = Settings::instance().localShare();
-    local_share << share_path;
-    Settings::instance().setLocalShare( local_share );
-    loadSettings();
-  }
+  emit sharePathAdded( share_path );
 }

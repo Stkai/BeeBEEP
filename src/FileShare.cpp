@@ -35,6 +35,16 @@ FileShare::FileShare()
 
 int FileShare::addPath( const QString& share_path )
 {
+  return addPathToList( share_path, share_path );
+}
+
+int FileShare::removePath( const QString& share_path )
+{
+  return m_local.remove( share_path );
+}
+
+int FileShare::addPathToList( const QString& share_key, const QString& share_path )
+{
   int num_files = 0;
 
   if( m_local.size() >= Settings::instance().maxFileShared() )
@@ -60,11 +70,11 @@ int FileShare::addPath( const QString& share_path )
     QDir dir_path( share_path );
 
     foreach( QString fp, dir_path.entryList() )
-      num_files += addPath( QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
+      num_files += addPathToList( share_key, QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
   }
   else if( file_info.isFile() )
   {
-    if( addFileInfo( share_path ) )
+    if( addFileInfo( share_key, share_path ) )
       num_files++;
   }
   else
@@ -73,7 +83,7 @@ int FileShare::addPath( const QString& share_path )
   return num_files;
 }
 
-bool FileShare::addFileInfo( const QFileInfo& fi )
+bool FileShare::addFileInfo( const QString& share_key, const QFileInfo& fi )
 {
   if( hasPath( fi.absoluteFilePath() ) )
   {
@@ -82,7 +92,7 @@ bool FileShare::addFileInfo( const QFileInfo& fi )
   }
   FileInfo file_info = Protocol::instance().fileInfo( fi );
   qDebug() << "FileShare: adding file" << file_info.path();
-  m_local.append( file_info );
+  m_local.insert( share_key, file_info );
   return true;
 }
 
@@ -96,16 +106,19 @@ bool FileShare::hasPath( const QString& share_path )
   return false;
 }
 
-void FileShare::addToNetwork( VNumber user_id, const QList<FileInfo>& file_info_list )
+int FileShare::addToNetwork( VNumber user_id, const QList<FileInfo>& file_info_list )
 {
   removeFromNetwork( user_id );
+  int num_files = 0;
   foreach( FileInfo fi, file_info_list )
   {
     m_network.insert( user_id, fi );
+    num_files++;
   }
+  return num_files;
 }
 
-void FileShare::removeFromNetwork( VNumber user_id )
+int FileShare::removeFromNetwork( VNumber user_id )
 {
-  m_network.remove( user_id );
+  return m_network.remove( user_id );
 }

@@ -38,7 +38,8 @@ public:
   void loadSettings();
 
 signals:
-  void buildShareListRequest();
+  void sharePathAdded( const QString& );
+  void sharePathRemoved( const QString& );
 
 protected slots:
   void addFilePath();

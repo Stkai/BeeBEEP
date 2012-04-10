@@ -33,6 +33,7 @@ class FileInfo;
 class GuiChat;
 class GuiChatList;
 class GuiShareLocal;
+class GuiShareNetwork;
 class GuiTransferFile;
 class GuiUserList;
 class User;
@@ -87,7 +88,12 @@ private slots:
   void showFromTrayIcon();
   void forceExit();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
-  void buildLocalShares();
+  void raiseChatView();
+  void raiseLocalShareView();
+  void raiseNetworkShareView();
+  void raiseFileTransferView();
+  void addToShare( const QString& );
+  void removeFromShare( const QString& );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -99,6 +105,7 @@ private:
   void createToolAndMenuBars();
   void createStatusBar();
   void createDockWindows();
+  void createStackedWidgets();
   void refreshUserList();
   void refreshChat();
   void refreshTitle();
@@ -111,11 +118,13 @@ private:
   void sendFile( const User& );
 
 private:
+  QStackedWidget* mp_stackedWidget;
   GuiChat* mp_defaultChat;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
   GuiShareLocal* mp_shareLocal;
+  GuiShareNetwork* mp_shareNetwork;
   Core *mp_core;
 
   QMenu *mp_menuMain;
@@ -125,6 +134,7 @@ private:
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;
   QMenu *mp_menuAccounts;
+  QMenu *mp_menuView;
   QMenu *mp_menuTray;
 
   QToolBar *mp_barMain;
@@ -143,6 +153,8 @@ private:
   QAction* mp_actViewFileTransfer;
   QAction* mp_actViewChats;
   QAction* mp_actViewShareLocal;
+  QAction* mp_actViewShareNetwork;
+  QAction* mp_actViewDefaultChat;
 
   QDockWidget* mp_dockUserList;
 

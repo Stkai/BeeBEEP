@@ -47,21 +47,11 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
 
-  hv->hide();
-
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
-}
-
-QSize GuiTransferFile::sizeHint() const
-{
-  return QSize( 500, 80 );
 }
 
 void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
-  QHeaderView* hv = header();
-  if( hv->isHidden() )
-    hv->show();
   qDebug() << "GuiTransferFile setProgress::" << bytes << "of" << fi.size() << "bytes";
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )

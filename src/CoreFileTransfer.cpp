@@ -42,9 +42,6 @@ bool Core::startFileTransferServer()
     return false;
   }
 
-  buildLocalShare();
-  Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
-
   return true;
 }
 
@@ -196,14 +193,65 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
 
 void Core::fileTransferServerListening()
 {
-  Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
+  createLocalShareMessage();
+  sendLocalShareToAll();
+}
 
+void Core::sendLocalShareToAll()
+{
   if( !Settings::instance().fileShare() )
     return;
 
   const QByteArray& local_share_message = Protocol::instance().localFileShareMessage();
+
+  if( local_share_message.isEmpty() )
+    return;
+
   foreach( Connection* c, m_connections )
-  {
     c->sendData( local_share_message );
-  }
+}
+
+int Core::addPathToShare( const QString& share_path )
+{
+  int num_files = FileShare::instance().addPath( share_path );
+
+  QStringList local_share = Settings::instance().localShare();
+  local_share << share_path;
+  Settings::instance().setLocalShare( local_share );
+
+  createLocalShareMessage();
+  sendLocalShareToAll();
+
+  return num_files;
+}
+
+int Core::removePathFromShare( const QString& share_path )
+{
+  QStringList local_share = Settings::instance().localShare();
+  if( local_share.removeOne( share_path ) )
+    Settings::instance().setLocalShare( local_share );
+
+  int num_files = FileShare::instance().removePath( share_path );
+
+  if( num_files <= 0 )
+    return 0;
+
+  createLocalShareMessage();
+  sendLocalShareToAll();
+
+  return num_files;
+}
+
+void Core::createLocalShareMessage()
+{
+  if( mp_fileTransfer->isWorking() )
+    Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
+  else
+    Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), -1 );
+}
+
+void Core::buildLocalShareList()
+{
+  foreach( QString share_path, Settings::instance().localShare() )
+    FileShare::instance().addPath( share_path );
 }

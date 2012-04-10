@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "Connection.h"
 #include "Core.h"
 #include "Broadcaster.h"
 #include "FileShare.h"
@@ -64,6 +65,8 @@ Core::Core( QObject* parent )
 bool Core::start()
 {
   qDebug() << "Starting" << Settings::instance().programName() << "core";
+  buildLocalShareList();
+
   if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
   {
     qDebug() << "Unable to bind" << Settings::instance().localUser().hostPort() << "port. Try to bind the first available";
@@ -174,9 +177,3 @@ bool Core::isConnected( bool check_also_network_service ) const
     return false;
 }
 
-void Core::buildLocalShare()
-{
-  FileShare::instance().clearLocal();
-  foreach( QString share_path, Settings::instance().localShare() )
-    FileShare::instance().addPath( share_path );
-}

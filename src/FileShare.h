@@ -33,15 +33,15 @@ class FileShare
   static FileShare* mp_instance;
 
 public:
-  inline const QList<FileInfo>& local() const;
+  inline const QMultiMap<QString, FileInfo>& local() const;
   inline const QMultiMap<VNumber, FileInfo>& network() const;
 
   int addPath( const QString& );
-  bool hasPath( const QString& );
+  int removePath( const QString& );
   inline void clearLocal();
 
-  void addToNetwork( VNumber, const QList<FileInfo>& );
-  void removeFromNetwork( VNumber );
+  int addToNetwork( VNumber, const QList<FileInfo>& );
+  int removeFromNetwork( VNumber );
 
   static FileShare& instance()
   {
@@ -62,17 +62,19 @@ public:
 protected:
   FileShare();
 
-  bool addFileInfo( const QFileInfo& );
+  bool hasPath( const QString& );
+  int addPathToList( const QString&, const QString& );
+  bool addFileInfo( const QString&, const QFileInfo& );
 
 private:
-  QList<FileInfo> m_local;
+  QMultiMap<QString, FileInfo> m_local;
   QMultiMap<VNumber, FileInfo> m_network;
 
 };
 
 
 // Inline Functions
-inline const QList<FileInfo>& FileShare::local() const { return m_local; }
+inline const QMultiMap<QString, FileInfo>& FileShare::local() const { return m_local; }
 inline const QMultiMap<VNumber, FileInfo>& FileShare::network() const { return m_network; }
 inline void FileShare::clearLocal() { m_local.clear(); }
 

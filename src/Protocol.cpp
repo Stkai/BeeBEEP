@@ -426,22 +426,25 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi )
   return file_info;
 }
 
-void Protocol::createLocalFileShareMessage( const QList<FileInfo>& file_info_list, int server_port )
+void Protocol::createLocalFileShareMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
 {
+  if( file_info_list.isEmpty() || server_port <= 0 )
+  {
+    m_localFileShareMessage = "";
+    return;
+  }
+
   QStringList msg_list;
-  QList<FileInfo>::const_iterator it = file_info_list.begin();
-  while( it != file_info_list.end() )
+  foreach( FileInfo fi, file_info_list )
   {
     QStringList sl;
-    sl << (*it).name();
-    sl << (*it).suffix();
-    sl << QString::number( (*it).size() );
-    sl << QString::number( (*it).id() );
-    sl << QString::fromUtf8( (*it).password() );
+    sl << fi.name();
+    sl << fi.suffix();
+    sl << QString::number( fi.size() );
+    sl << QString::number( fi.id() );
+    sl << QString::fromUtf8( fi.password() );
 
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
-
-    ++it;
   }
 
   Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );

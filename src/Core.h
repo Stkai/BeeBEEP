@@ -40,7 +40,6 @@ class Core : public QObject
 public:
   explicit Core( QObject* parent = 0 );
 
-  void buildLocalShare();
   bool isConnected( bool check_also_network_service ) const;
   bool start();
   void stop();
@@ -64,6 +63,8 @@ public:
   void refuseToDownloadFile( const User&, const FileInfo& );
   bool startFileTransferServer();
   void stopFileTransferServer();
+  int addPathToShare( const QString& );
+  int removePathFromShare( const QString& );
 
   /* CoreXmpp */
   void setXmppUserSubscription( const QString& service, const QString& user_path, bool accepted );
@@ -118,6 +119,9 @@ protected slots:
   void sendXmppUserComposing( const User& );
 
 protected:
+  void buildLocalShareList();
+  void createLocalShareMessage();
+
   /* CoreConnection */
   Connection* connection( VNumber );
   bool hasConnection( const QHostAddress&, int ) const;
@@ -154,6 +158,9 @@ protected:
   /* CoreXmpp */
   void sendLocalUserStatusToXmppServer();
   void sendLocalVCardToXmppServer();
+
+  /* CoreFileTransfer */
+  void sendLocalShareToAll();
 
 private:
   QList<Connection*> m_connections;
