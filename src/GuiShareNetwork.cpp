@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiShareNetwork.h"
 #include "FileShare.h"
+#include "UserManager.h"
 
 
 GuiShareNetwork::GuiShareNetwork( QWidget *parent )
@@ -39,19 +40,34 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   mp_twShares->sortItems( ColumnFile, Qt::AscendingOrder );
 
   mp_twShares->setAlternatingRowColors( true );
+  mp_twShares->setRootIsDecorated( false );
 
   QHeaderView* hv = mp_twShares->header();
   hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnSize, QHeaderView::ResizeToContents );
 
-  connect( mp_twShares, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
+  for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
+    mp_comboFileType->insertItem( i, QIcon( Bee::fileTypeIconFileName( (Bee::FileType)i ) ), Bee::fileTypeToString( (Bee::FileType)i ), i );
+
+  mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/green-ball.png" ), tr( "All" ), Bee::NumFileType );
+  mp_comboFileType->setCurrentIndex( Bee::NumFileType );
+
+  connect( mp_pbSearch, SIGNAL( clicked() ), this, SLOT( search() ) );
+  connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
 }
 
 void GuiShareNetwork::loadShares( const User& u )
 {
   foreach( FileInfo fi, FileShare::instance().network().values( u.id() ) )
   {
+    if( !fi.isValid() )
+      continue;
+
+    if( !filterPassThrough( fi ) )
+      continue;
+
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twShares );
+    item->setIcon( ColumnFile, QIcon( Bee::fileTypeIconFileName( Bee::fileTypeFromSuffix( fi.suffix() ) ) ) );
     item->setText( ColumnFile, fi.name() );
     item->setData( ColumnFile, Qt::UserRole + 1, u.id() );
     item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
@@ -59,7 +75,32 @@ void GuiShareNetwork::loadShares( const User& u )
   }
 }
 
-void GuiShareNetwork::checkItemClicked( QTreeWidgetItem*, int )
+void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem*, int )
 {
 
+}
+
+void GuiShareNetwork::search()
+{
+  mp_twShares->clear();
+
+  foreach( User u, UserManager::instance().userList().toList() )
+  {
+    if( u.isConnected() && u.isOnLan() )
+      loadShares( u );
+  }
+
+  emit fileShareListRequested();
+}
+
+bool GuiShareNetwork::filterPassThrough( const FileInfo& fi )
+{
+  QString filter_name = mp_leSearch->text().simplified().toLower();
+  if( !filter_name.isEmpty() && !fi.name().contains( filter_name, Qt::CaseInsensitive ) )
+    return false;
+
+  if( mp_comboFileType->currentIndex() == (int)Bee::NumFileType )
+    return true;
+  else
+    return (int)Bee::fileTypeFromSuffix( fi.suffix() ) == mp_comboFileType->currentIndex();
 }

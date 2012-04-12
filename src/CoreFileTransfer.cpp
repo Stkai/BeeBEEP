@@ -48,6 +48,7 @@ bool Core::startFileTransferServer()
 void Core::stopFileTransferServer()
 {
   mp_fileTransfer->stopListener();
+  createLocalShareMessage();
 }
 
 void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& peer_address, const Message& m  )
@@ -194,21 +195,49 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
 void Core::fileTransferServerListening()
 {
   createLocalShareMessage();
-  sendLocalShareToAll();
 }
 
-void Core::sendLocalShareToAll()
+void Core::sendFileShareRequestToAll()
+{
+  QList<FileInfo> file_info_list;
+  file_info_list.append( FileInfo() );
+
+  const QByteArray& file_share_request_message = Protocol::instance().fileShareRequestMessage();
+
+  foreach( Connection* c, m_connections )
+  {
+    if( !FileShare::instance().network().contains( c->userId() ) )
+    {
+      if( c->sendData( file_share_request_message ) )
+        FileShare::instance().addToNetwork( c->userId(), file_info_list );
+    }
+  }
+}
+
+void Core::sendFileShareListTo( VNumber user_id )
+{
+  Connection* c = connection( user_id );
+  if( c )
+    c->sendData( Protocol::instance().fileShareListMessage() );
+  else
+    qWarning() << user_id << "is not a valid user id. Unable to send share list message";
+}
+
+void Core::sendFileShareListToAll()
 {
   if( !Settings::instance().fileShare() )
     return;
 
-  const QByteArray& local_share_message = Protocol::instance().localFileShareMessage();
+  const QByteArray& share_list_message = Protocol::instance().fileShareListMessage();
 
-  if( local_share_message.isEmpty() )
+  if( share_list_message.isEmpty() )
     return;
 
   foreach( Connection* c, m_connections )
-    c->sendData( local_share_message );
+  {
+    if( FileShare::instance().network().contains( c->userId() ) )
+      c->sendData( share_list_message );
+  }
 }
 
 int Core::addPathToShare( const QString& share_path )
@@ -220,7 +249,7 @@ int Core::addPathToShare( const QString& share_path )
   Settings::instance().setLocalShare( local_share );
 
   createLocalShareMessage();
-  sendLocalShareToAll();
+  sendFileShareListToAll();
 
   return num_files;
 }
@@ -237,7 +266,7 @@ int Core::removePathFromShare( const QString& share_path )
     return 0;
 
   createLocalShareMessage();
-  sendLocalShareToAll();
+  sendFileShareListToAll();
 
   return num_files;
 }
@@ -245,13 +274,18 @@ int Core::removePathFromShare( const QString& share_path )
 void Core::createLocalShareMessage()
 {
   if( mp_fileTransfer->isWorking() )
-    Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
+    Protocol::instance().createFileShareListMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
   else
-    Protocol::instance().createLocalFileShareMessage( FileShare::instance().local(), -1 );
+    Protocol::instance().createFileShareListMessage( FileShare::instance().local(), -1 );
 }
 
 void Core::buildLocalShareList()
 {
   foreach( QString share_path, Settings::instance().localShare() )
     FileShare::instance().addPath( share_path );
+}
+
+void Core::downloadFileShared( VNumber )
+{
+
 }

@@ -35,12 +35,16 @@ const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 
 
 Protocol::Protocol()
-  : m_id( ID_START ), m_writingMessage(), m_localFileShareMessage( "" )
+  : m_id( ID_START ), m_writingMessage(), m_fileShareListMessage( "" ), m_fileShareRequestMessage( "" )
 {
   Message writing_message( Message::User, ID_WRITING_MESSAGE, "*" );
   writing_message.addFlag( Message::Private );
   writing_message.addFlag( Message::UserWriting );
   m_writingMessage = fromMessage( writing_message );
+
+  Message file_share_request_message( Message::Share, ID_SHARE_MESSAGE, "" );
+  file_share_request_message.addFlag( Message::Request );
+  m_fileShareRequestMessage = fromMessage( file_share_request_message );
 }
 
 QString Protocol::messageHeader( Message::Type mt ) const
@@ -426,11 +430,11 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi )
   return file_info;
 }
 
-void Protocol::createLocalFileShareMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
+void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
 {
   if( file_info_list.isEmpty() || server_port <= 0 )
   {
-    m_localFileShareMessage = "";
+    m_fileShareListMessage = "";
     return;
   }
 
@@ -451,7 +455,7 @@ void Protocol::createLocalFileShareMessage( const QMultiMap<QString, FileInfo>& 
   m.setData( QString::number( server_port ) );
   m.addFlag( Message::List );
 
-  m_localFileShareMessage = fromMessage( m );
+  m_fileShareListMessage = fromMessage( m );
 }
 
 QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddress& server_address ) const

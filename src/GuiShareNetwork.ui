@@ -14,7 +14,41 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Panel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="margin">
+       <number>2</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="mp_leSearch"/>
+      </item>
+      <item>
+       <widget class="QComboBox" name="mp_comboFileType"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mp_pbSearch">
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
     <widget class="QTreeWidget" name="mp_twShares">
      <property name="sortingEnabled">
       <bool>true</bool>
@@ -44,6 +78,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>mp_leSearch</tabstop>
+  <tabstop>mp_comboFileType</tabstop>
+  <tabstop>mp_pbSearch</tabstop>
+  <tabstop>mp_twShares</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

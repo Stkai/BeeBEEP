@@ -27,7 +27,9 @@
 #include "ui_GuiShareNetwork.h"
 #include "Config.h"
 
+class FileInfo;
 class User;
+
 
 
 class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
@@ -39,11 +41,19 @@ public:
 
   explicit GuiShareNetwork( QWidget *parent = 0 );
 
+signals:
+  void fileShareListRequested();
+  void downloadFile( VNumber );
+
 public slots:
   void loadShares( const User& );
+  void search();
 
 protected slots:
-  void checkItemClicked( QTreeWidgetItem*, int );
+  void checkItemDoubleClicked( QTreeWidgetItem*, int );
+
+protected:
+  bool filterPassThrough( const FileInfo& );
 
 };
 

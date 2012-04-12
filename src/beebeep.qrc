@@ -78,5 +78,6 @@
         <file>images/file-video.png</file>
         <file>images/file-image.png</file>
         <file>images/chat-view.png</file>
+        <file>images/file-document.png</file>
     </qresource>
 </RCC>

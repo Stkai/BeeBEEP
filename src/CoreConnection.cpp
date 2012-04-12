@@ -142,6 +142,8 @@ void Core::closeConnection( Connection *c )
     ChatManager::instance().setChat( default_chat );
 
   FileShare::instance().removeFromNetwork( c->userId() );
+  if( u.isValid() )
+    emit fileShareAvailable( u );
 
   c->deleteLater();
 }
@@ -204,11 +206,5 @@ void Core::checkUserAuthentication( const Message& m )
       qDebug() << "Sending my VCard to" << u.path();
       c->sendData( Protocol::instance().localVCardMessage() );
     }
-  }
-
-  if( Settings::instance().fileShare() && mp_fileTransfer->isWorking() && !Protocol::instance().localFileShareMessage().isEmpty() )
-  {
-    qDebug() << "Sending my file share list to" << u.path();
-    c->sendData( Protocol::instance().localFileShareMessage() );
   }
 }

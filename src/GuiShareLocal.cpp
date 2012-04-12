@@ -126,7 +126,7 @@ void GuiShareLocal::updateShareList()
   {
     item = new QTreeWidgetItem( mp_twLocalShares );
     item->setText( 0, fi.name() );
-    item->setIcon( 0, QIcon( Bee::fileSuffixIconFileName( fi.suffix() ) ) );
+    item->setIcon( 0, QIcon( Bee::fileTypeIconFileName( Bee::fileTypeFromSuffix( fi.suffix() ) ) ) );
     item->setText( 1, Bee::bytesToString( fi.size() ) );
     item->setText( 2, fi.path() );
   }

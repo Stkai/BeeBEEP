@@ -90,6 +90,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
 
+  connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
+
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
@@ -413,6 +415,12 @@ void GuiMain::createMenus()
     act->setData( 11 );
   }
 
+  act = mp_menuSettings->addAction( tr( "Enable file sharing" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can share files with the other users" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().fileShare() );
+  act->setData( 12 );
+
   /* Emoticons Menu for ToolBar */
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
   mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
@@ -546,7 +554,6 @@ void GuiMain::createStackedWidgets()
   mp_stackedWidget->addWidget( mp_fileTransfer );
 
   mp_shareLocal = new GuiShareLocal( this );
-  connect( mp_shareLocal, SIGNAL( buildShareListRequest() ), this, SLOT( buildLocalShares() ) );
   mp_stackedWidget->addWidget( mp_shareLocal );
 
   mp_shareNetwork = new GuiShareNetwork( this );
@@ -678,6 +685,9 @@ void GuiMain::settingsChanged()
     break;
   case 11:
     Settings::instance().setMinimizeInTray( act->isChecked() );
+    break;
+  case 12:
+    Settings::instance().setFileShare( act->isChecked() );
     break;
   case 99:
     break;

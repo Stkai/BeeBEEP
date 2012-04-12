@@ -27,6 +27,7 @@
 #include "FileInfo.h"
 #include "FileShare.h"
 #include "Protocol.h"
+#include "Settings.h"
 #include "UserManager.h"
 
 
@@ -162,6 +163,11 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 
      QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has shared some files." ).arg( icon_html, u.name() ), DispatchToAllChatsWithUser );
+  }
+  else if( m.hasFlag( Message::Request ) )
+  {
+    if( Settings::instance().fileShare() && !Protocol::instance().fileShareListMessage().isEmpty() )
+      sendFileShareListTo( u.id() );
   }
   else
     qWarning() << "Invalid flag found in file share message (CoreParser)";

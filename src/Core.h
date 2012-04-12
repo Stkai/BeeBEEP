@@ -78,7 +78,9 @@ public slots:
   void sendWritingMessage( VNumber );
 
   /* CoreFileTransfer */
+  void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
+  void downloadFileShared( VNumber );
 
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );
@@ -160,7 +162,9 @@ protected:
   void sendLocalVCardToXmppServer();
 
   /* CoreFileTransfer */
-  void sendLocalShareToAll();
+  void sendFileShareListTo( VNumber user_id );
+  void sendFileShareListToAll();
+
 
 private:
   QList<Connection*> m_connections;

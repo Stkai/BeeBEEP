@@ -142,17 +142,58 @@ QString Bee::uniqueFilePath( const QString& file_path )
   return fi.absoluteFilePath();
 }
 
-QString Bee::fileSuffixIconFileName( const QString& suffix )
+Bee::FileType Bee::fileTypeFromSuffix( const QString& suffix_tmp )
 {
+  QString suffix = suffix_tmp.toLower();
+
   if( suffix == "mp3" || suffix == "wma" || suffix == "flac" )
-    return QString( ":/images/file-audio.png" );
+    return Bee::FileAudio;
 
   if( suffix == "mp4" || suffix == "avi" || suffix == "mkv" || suffix == "wmv" )
-    return QString( ":/images/file-video.png" );
+    return Bee::FileVideo;
 
   if( suffix == "jpg" || suffix == "jpeg" || suffix == "gif" || suffix == "bmp" || suffix == "png" )
-    return QString( ":/images/file-image.png" );
+    return Bee::FileImage;
 
-  return QString( ":/images/file-other.png" );
+  if( suffix.startsWith( "doc" ) || suffix.startsWith( "xls" ) ||suffix.startsWith( "pdf" )
+      || suffix.startsWith( "ppt" ) || suffix.startsWith( "rtf" ) || suffix.startsWith( "txt" ) )
+    return Bee::FileDocument;
+
+  return Bee::FileOther;
 }
+
+QString Bee::fileTypeIconFileName( Bee::FileType ft )
+{
+  switch( ft )
+  {
+  case FileAudio:
+    return QString( ":/images/file-audio.png" );
+  case FileVideo:
+    return QString( ":/images/file-video.png" );
+  case FileImage:
+    return QString( ":/images/file-image.png" );
+  case FileDocument:
+    return QString( ":/images/file-document.png" );
+  default:
+    return QString( ":/images/file-other.png" );
+  };
+}
+
+static const char* FileTypeToString[] =
+{
+  QT_TRANSLATE_NOOP( "File", "Audio" ),
+  QT_TRANSLATE_NOOP( "File", "Video" ),
+  QT_TRANSLATE_NOOP( "File", "Image" ),
+  QT_TRANSLATE_NOOP( "File", "Document" ),
+  QT_TRANSLATE_NOOP( "File", "Other" ),
+};
+
+QString Bee::fileTypeToString( Bee::FileType ft )
+{
+  if( ft < 0 || ft > Bee::NumFileType )
+    ft = Bee::FileOther;
+  return qApp->translate( "File", FileTypeToString[ ft ] );
+}
+
+
 
