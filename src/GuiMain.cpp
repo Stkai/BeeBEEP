@@ -91,6 +91,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
 
   connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
+  connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), mp_core, SLOT( downloadSharedFile( VNumber,VNumber ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );

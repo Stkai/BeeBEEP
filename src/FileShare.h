@@ -39,6 +39,7 @@ public:
   int addPath( const QString& );
   int removePath( const QString& );
   inline void clearLocal();
+  FileInfo fileInfo( VNumber user_id, VNumber file_info_id ) const;
 
   int addToNetwork( VNumber, const QList<FileInfo>& );
   int removeFromNetwork( VNumber );

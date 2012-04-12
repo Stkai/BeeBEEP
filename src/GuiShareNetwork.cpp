@@ -69,15 +69,20 @@ void GuiShareNetwork::loadShares( const User& u )
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twShares );
     item->setIcon( ColumnFile, QIcon( Bee::fileTypeIconFileName( Bee::fileTypeFromSuffix( fi.suffix() ) ) ) );
     item->setText( ColumnFile, fi.name() );
-    item->setData( ColumnFile, Qt::UserRole + 1, u.id() );
+    item->setData( ColumnFile, UserId, u.id() );
+    item->setData( ColumnFile, FileId, fi.id() );
     item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
     item->setText( ColumnUser, u.name() );
   }
 }
 
-void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem*, int )
+void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 {
+  if( !item )
+    return;
 
+  VNumber user_id = item->data( ColumnFile, UserId );
+  VNumber file_id = item->data( ColumnFile, FileId );
 }
 
 void GuiShareNetwork::search()

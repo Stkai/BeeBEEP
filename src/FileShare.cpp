@@ -122,3 +122,14 @@ int FileShare::removeFromNetwork( VNumber user_id )
 {
   return m_network.remove( user_id );
 }
+
+FileInfo FileShare::fileInfo( VNumber user_id, VNumber file_info_id ) const
+{
+  QList<FileInfo> file_info_list = m_network.values( user_id );
+  foreach( FileInfo fi, file_info_list )
+  {
+    if( fi.id() == file_info_id )
+      return fi;
+  }
+  return FileInfo();
+}

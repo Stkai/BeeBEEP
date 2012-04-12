@@ -80,7 +80,7 @@ public slots:
   /* CoreFileTransfer */
   void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
-  void downloadFileShared( VNumber );
+  void downloadSharedFile( VNumber, VNumber );
 
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );

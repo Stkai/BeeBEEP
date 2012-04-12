@@ -38,12 +38,13 @@ class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
 
 public:
   enum ColumnType { ColumnFile, ColumnSize, ColumnUser };
+  enum DataType { UserId = Qt::UserRole + 1, FileId };
 
   explicit GuiShareNetwork( QWidget *parent = 0 );
 
 signals:
   void fileShareListRequested();
-  void downloadFile( VNumber );
+  void downloadSharedFile( VNumber, VNumber );
 
 public slots:
   void loadShares( const User& );
