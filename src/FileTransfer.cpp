@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "FileShare.h"
 #include "FileTransfer.h"
 #include "FileTransferPeer.h"
 #include "Random.h"
@@ -193,9 +194,15 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
   FileInfo file_info = fileInfo( file_id );
   if( !file_info.isValid() )
   {
-    qWarning() << "FileTransfer received a request of a file not in list";
-    upload_peer->cancelTransfer();
-    return;
+    // Now check file sharing
+    file_info = FileShare::instance().localFileInfo( file_id );
+
+    if( !file_info.isValid() )
+    {
+      qWarning() << "FileTransfer received a request of a file not in list";
+      upload_peer->cancelTransfer();
+      return;
+    }
   }
 
   if( file_info.password() != file_password )

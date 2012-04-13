@@ -284,12 +284,3 @@ void Core::buildLocalShareList()
   foreach( QString share_path, Settings::instance().localShare() )
     FileShare::instance().addPath( share_path );
 }
-
-void Core::downloadSharedFile( VNumber user_id, VNumber file_id )
-{
-  FileInfo file_info = FileShare::instance().fileInfo( user_id, file_id );
-  if( !file_info.isValid() )
-    return;
-
-  mp_fileTransfer->downloadFile( file_info );
-}

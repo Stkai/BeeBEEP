@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiShareNetwork.h"
 #include "FileShare.h"
+#include "Settings.h"
 #include "UserManager.h"
 
 
@@ -81,8 +82,10 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
-  VNumber user_id = item->data( ColumnFile, UserId );
-  VNumber file_id = item->data( ColumnFile, FileId );
+  VNumber user_id = Bee::qVariantToVNumber( item->data( ColumnFile, UserId ) );
+  VNumber file_id = Bee::qVariantToVNumber( item->data( ColumnFile, FileId ) );
+
+  emit downloadSharedFile( user_id, file_id );
 }
 
 void GuiShareNetwork::search()

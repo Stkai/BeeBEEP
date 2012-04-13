@@ -80,7 +80,7 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
   {
     if( !m_file.open( QIODevice::WriteOnly ) )
     {
-      setError( tr( "Unable to open file") );
+      setError( tr( "Unable to open file" ) );
       return;
     }
   }

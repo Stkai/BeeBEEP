@@ -25,7 +25,7 @@
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "EmoticonManager.h"
-#include "FileInfo.h"
+#include "FileShare.h"
 #include "GuiChat.h"
 #include "GuiChatList.h"
 #include "GuiEditVCard.h"
@@ -91,7 +91,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
 
   connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
-  connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), mp_core, SLOT( downloadSharedFile( VNumber,VNumber ) ) );
+  connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
@@ -904,10 +904,10 @@ void GuiMain::sendFile( const User& u )
   mp_core->sendFile( u, file_path );
 }
 
-void GuiMain::downloadFile( const User& u, const FileInfo& fi )
+bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
 {
-  QString msg = tr( "Do you want to download from %1\n%2 (%3)?" ).arg( u.name() )
-                                                                 .arg( fi.name() ).arg( Bee::bytesToString( fi.size() ) );
+  QString msg = tr( "Do you want to download ""%1"" (%2) from the user %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
+
   if( QMessageBox::information( this, Settings::instance().programName(), msg, tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
     // Accepted
@@ -926,7 +926,7 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
                             tr( "%1 already exists. Please select a new filename." ).arg( qfile_info.fileName() ),
                             qfile_info.absoluteFilePath() );
         if( file_name.isNull() || file_name.isEmpty() )
-          return;
+          return false;
       }
       qfile_info = QFileInfo( file_name );
     }
@@ -935,9 +935,29 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
     file_info.setPath( qfile_info.absoluteFilePath() );
     file_info.setSuffix( qfile_info.suffix() );
     mp_core->downloadFile( u, file_info );
+    return true;
   }
   else
+    return false;
+}
+
+void GuiMain::downloadFile( const User& u, const FileInfo& fi )
+{
+  if( !askToDownloadFile( u, fi ) )
     mp_core->refuseToDownloadFile( u, fi );
+}
+
+void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
+{
+  FileInfo file_info = FileShare::instance().networkFileInfo( user_id, file_id );
+  if( !file_info.isValid() )
+    return;
+
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+    return;
+
+  askToDownloadFile( u, file_info );
 }
 
 void GuiMain::selectDownloadDirectory()

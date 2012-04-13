@@ -68,6 +68,7 @@ private slots:
   void changeStatusDescription();
   void sendFile();
   void downloadFile( const User&, const FileInfo& );
+  void downloadSharedFile( VNumber, VNumber );
   void selectDownloadDirectory();
   void changeVCard();
   void showUserMenu( VNumber );
@@ -116,6 +117,7 @@ private:
   void updateStatusIcon();
   void updateAccountMenu();
   void sendFile( const User& );
+  bool askToDownloadFile( const User&, const FileInfo& );
 
 private:
   QStackedWidget* mp_stackedWidget;
