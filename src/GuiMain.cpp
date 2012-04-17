@@ -56,7 +56,6 @@ GuiMain::GuiMain( QWidget *parent )
   mp_stackedWidget = new QStackedWidget( this );
   createStackedWidgets();
   setCentralWidget( mp_stackedWidget );
-  raiseChatView();
 
   mp_barMain = addToolBar( tr( "Show the ToolBar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
@@ -102,6 +101,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   showChat( ID_DEFAULT_CHAT );
   initGuiItems();
+  raiseChatView();
 }
 
 void GuiMain::refreshTitle()
@@ -462,8 +462,6 @@ void GuiMain::createMenus()
   mp_menuView = new QMenu( tr( "&View" ), this );
   mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( raiseChatView() ) );
   mp_actViewDefaultChat->setStatusTip( tr( "Show the chat view" ) );
-  mp_actViewFileTransfer = mp_menuView->addAction( QIcon( ":/images/file-transfer.png" ), tr( "Show the file transfers" ), this, SLOT( raiseFileTransferView() ) );
-  mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
@@ -511,6 +509,11 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
+  mp_barMain->addAction( mp_actViewFileTransfer );
+  mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actViewDefaultChat );
+  mp_barMain->addAction( mp_actViewShareLocal );
+  mp_barMain->addAction( mp_actViewShareNetwork );
 
   mp_trayIcon->setContextMenu( mp_menuTray );
 }
@@ -544,15 +547,24 @@ void GuiMain::createDockWindows()
   mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
   mp_actViewChats->setData( 99 );
   dock_widget->hide();
+
+  dock_widget = new QDockWidget( tr( "File Transfers" ), this );
+  dock_widget->setObjectName( "GuiFileTransferDock" );
+  mp_fileTransfer = new GuiTransferFile( this );
+  dock_widget->setWidget( mp_fileTransfer );
+  addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
+  mp_actViewFileTransfer = dock_widget->toggleViewAction();
+  mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
+  mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
+  mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
+  mp_actViewFileTransfer->setData( 99 );
+  dock_widget->hide();
 }
 
 void GuiMain::createStackedWidgets()
 {
   mp_defaultChat = new GuiChat( this );
   mp_stackedWidget->addWidget( mp_defaultChat );
-
-  mp_fileTransfer = new GuiTransferFile( this );
-  mp_stackedWidget->addWidget( mp_fileTransfer );
 
   mp_shareLocal = new GuiShareLocal( this );
   mp_stackedWidget->addWidget( mp_shareLocal );
@@ -1303,19 +1315,23 @@ void GuiMain::removeFromShare( const QString& share_path )
 void GuiMain::raiseChatView()
 {
   mp_stackedWidget->setCurrentWidget( mp_defaultChat );
+  mp_actViewDefaultChat->setEnabled( false );
+  mp_actViewShareLocal->setEnabled( true );
+  mp_actViewShareNetwork->setEnabled( true );
 }
 
 void GuiMain::raiseLocalShareView()
 {
   mp_stackedWidget->setCurrentWidget( mp_shareLocal );
-}
-
-void GuiMain::raiseFileTransferView()
-{
-  mp_stackedWidget->setCurrentWidget( mp_fileTransfer );
+  mp_actViewDefaultChat->setEnabled( true );
+  mp_actViewShareLocal->setEnabled( false );
+  mp_actViewShareNetwork->setEnabled( true );
 }
 
 void GuiMain::raiseNetworkShareView()
 {
   mp_stackedWidget->setCurrentWidget( mp_shareNetwork );
+  mp_actViewDefaultChat->setEnabled( true );
+  mp_actViewShareLocal->setEnabled( false );
+  mp_actViewShareNetwork->setEnabled( true );
 }

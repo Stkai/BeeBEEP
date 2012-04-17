@@ -92,7 +92,6 @@ private slots:
   void raiseChatView();
   void raiseLocalShareView();
   void raiseNetworkShareView();
-  void raiseFileTransferView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
 
