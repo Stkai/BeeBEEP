@@ -1332,6 +1332,6 @@ void GuiMain::raiseNetworkShareView()
 {
   mp_stackedWidget->setCurrentWidget( mp_shareNetwork );
   mp_actViewDefaultChat->setEnabled( true );
-  mp_actViewShareLocal->setEnabled( false );
-  mp_actViewShareNetwork->setEnabled( true );
+  mp_actViewShareLocal->setEnabled( true );
+  mp_actViewShareNetwork->setEnabled( false );
 }

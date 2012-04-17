@@ -143,3 +143,12 @@ FileInfo FileShare::localFileInfo( VNumber file_info_id ) const
   }
   return FileInfo();
 }
+
+bool FileShare::userHasFileShareList( VNumber user_id ) const
+{
+  QList<FileInfo> file_info_list = m_network.values( user_id );
+  if( !file_info_list.isEmpty() && file_info_list.first().isValid() )
+    return true;
+  else
+    return false;
+}

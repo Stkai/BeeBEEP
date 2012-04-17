@@ -157,12 +157,21 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
      if( !file_info_list.isEmpty() )
      {
        qDebug() << "Received list of file shared from" << u.path();
+
+       QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
+       QString msg;
+
+       if( FileShare::instance().userHasFileShareList( u.id() ) )
+         msg = tr( "%1 %2 has updated the list of the file shared." );
+       else
+         msg = tr( "%1 %2 has shared some files." );
+
+       dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), msg.arg( icon_html, u.name() ), DispatchToAllChatsWithUser );
+
        FileShare::instance().addToNetwork( u.id(), file_info_list );
+
        emit fileShareAvailable( u );
      }
-
-     QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-     dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has shared some files." ).arg( icon_html, u.name() ), DispatchToAllChatsWithUser );
   }
   else if( m.hasFlag( Message::Request ) )
   {

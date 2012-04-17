@@ -44,6 +44,7 @@ public:
 
   int addToNetwork( VNumber, const QList<FileInfo>& );
   int removeFromNetwork( VNumber );
+  bool userHasFileShareList( VNumber ) const;
 
   static FileShare& instance()
   {

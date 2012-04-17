@@ -234,10 +234,7 @@ void Core::sendFileShareListToAll()
     return;
 
   foreach( Connection* c, m_connections )
-  {
-    if( FileShare::instance().network().contains( c->userId() ) )
-      c->sendData( share_list_message );
-  }
+    c->sendData( share_list_message );
 }
 
 int Core::addPathToShare( const QString& share_path )
