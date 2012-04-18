@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>%1 Unable to send the file: bind address/port failed.</source>
-        <translation>%1 Impossibile inviare il file: non è stato possibile creare una porta di comunicazione.</translation>
+        <translation type="obsolete">%1 Impossibile inviare il file: non è stato possibile creare una porta di comunicazione.</translation>
     </message>
     <message>
         <source>%1 Unable to send the file %2 to %3.</source>
@@ -199,6 +199,18 @@
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 %2 non e&apos; conensso alla rete.</translation>
     </message>
+    <message>
+        <source>%1 Unable to start file transfer server: bind address/port failed.</source>
+        <translation>%1 Impossibile avviare il server per il trasferimento dei file: la porta tcp è già in uso.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has updated the list of the file shared.</source>
+        <translation>%1 %2 ha aggiornato la sua lista di file condivisi.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has shared some files.</source>
+        <translation>%1 %2 ha condiviso alcuni file.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -209,6 +221,29 @@
     <message>
         <source>You can connect to the Facebook chat.</source>
         <translation>Puoi connetterti alla chat di Facebook.</translation>
+    </message>
+</context>
+<context>
+    <name>File</name>
+    <message>
+        <source>Audio</source>
+        <translation>Audio</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation>Video</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation>Immagini</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation>Documenti</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Altri</translation>
     </message>
 </context>
 <context>
@@ -727,7 +762,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Do you want to download from %1
 %2 (%3)?</source>
-        <translation>Vuoi scaricare da %1
+        <translation type="obsolete">Vuoi scaricare da %1
 il file %2 (%3)?</translation>
     </message>
     <message>
@@ -928,6 +963,46 @@ il file %2 (%3)?</translation>
     <message>
         <source>%1 will keep running in the background mode. To terminate the program, choose Quit in the context menu of the system tray icon.</source>
         <translation>%1 continuerà ad essere attivo anche se nascosto. Per chiudere il programma scegliere Esci dal menu dell&apos;icona di sistema.</translation>
+    </message>
+    <message>
+        <source>Enable file sharing</source>
+        <translation>Abilita la condivisione dei file</translation>
+    </message>
+    <message>
+        <source>If enabled you can share files with the other users</source>
+        <translation>Se abilitata puoi condividere i tuoi file con gli altri utenti</translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation>&amp;Visualizza</translation>
+    </message>
+    <message>
+        <source>Show the chat</source>
+        <translation>Mostra la finestra delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Show the chat view</source>
+        <translation>Mostra la finestra delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Show my shared files</source>
+        <translation>Mostra i miei file condivisi</translation>
+    </message>
+    <message>
+        <source>Show the list of the files which I have shared</source>
+        <translation>Mostra la lista dei file che hai condiviso con gli altri utenti</translation>
+    </message>
+    <message>
+        <source>Show the network shared files</source>
+        <translation>Mostra i file condivisi presenti sulla rete</translation>
+    </message>
+    <message>
+        <source>Show the list of the network shared files</source>
+        <translation>Mostra la lista dei file condivisi dagli altri utenti sulla rete</translation>
+    </message>
+    <message>
+        <source>Do you want to download %1 (%2) from the user %3?</source>
+        <translation>Vuoi scaricare il file %1 (%2) dall&apos;utente %3?</translation>
     </message>
 </context>
 <context>
@@ -1209,6 +1284,90 @@ il file %2 (%3)?</translation>
 %1 is removed from the list.</source>
         <translation>Hai inserito un indirizzo IP non valido:
 %1 verrà rimosso dalla lista.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareLocal</name>
+    <message>
+        <source>Share</source>
+        <translation>Condivisione</translation>
+    </message>
+    <message>
+        <source>Filename</source>
+        <translation>Nome del file</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Dimensione</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation>Percorso</translation>
+    </message>
+    <message>
+        <source>Select a file to share</source>
+        <translation>Seleziona un file da condividere</translation>
+    </message>
+    <message>
+        <source>Select a folder to share</source>
+        <translation>Seleziona una cartella da condividere</translation>
+    </message>
+    <message>
+        <source>Please select a share path</source>
+        <translation>Seleziona un percorso da mettere in condivisione</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareLocalWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareNetwork</name>
+    <message>
+        <source>File</source>
+        <translation>Nome del file</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Dimensione</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation>Utente</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation>Tutti</translation>
+    </message>
+    <message>
+        <source>All Users</source>
+        <translation>Tutti</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareNetworkWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation>Filtro</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
+    <message>
+        <source>File Type</source>
+        <translation>Tipo di file</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation>Utente</translation>
     </message>
 </context>
 <context>

@@ -50,11 +50,17 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
     mp_comboFileType->insertItem( i, QIcon( Bee::fileTypeIconFileName( (Bee::FileType)i ) ), Bee::fileTypeToString( (Bee::FileType)i ), i );
 
-  mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/green-ball.png" ), tr( "All" ), Bee::NumFileType );
+  mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/green-ball.png" ), tr( "All Files" ), Bee::NumFileType );
   mp_comboFileType->setCurrentIndex( Bee::NumFileType );
+
+  mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
+  mp_comboUsers->setCurrentIndex( 0 );
 
   connect( mp_pbSearch, SIGNAL( clicked() ), this, SLOT( search() ) );
   connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_comboFileType, SIGNAL( currentIndexChanged( int ) ), this, SLOT( search() ), Qt::QueuedConnection );
+  connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( search() ), Qt::QueuedConnection );
+  connect( mp_leSearch, SIGNAL( textChanged( QString ) ), this, SLOT( enableSearchButton() ) );
 }
 
 void GuiShareNetwork::loadShares( const User& u )
@@ -64,7 +70,10 @@ void GuiShareNetwork::loadShares( const User& u )
     if( !fi.isValid() )
       continue;
 
-    if( !filterPassThrough( fi ) )
+    if( mp_comboUsers->findData( u.id() ) == -1 )
+      mp_comboUsers->addItem( u.name(), u.id() );
+
+    if( !filterPassThrough( u, fi ) )
       continue;
 
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twShares );
@@ -90,25 +99,41 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 
 void GuiShareNetwork::search()
 {
+  mp_pbSearch->setEnabled( false );
   mp_twShares->clear();
+  m_filterUserId = mp_comboUsers->currentIndex() <= 0 ? 0 : Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
 
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isConnected() && u.isOnLan() )
       loadShares( u );
+    else
+    {
+      int user_id_index_to_remove = mp_comboUsers->findData( u.id() );
+      if( user_id_index_to_remove > 0 && user_id_index_to_remove != mp_comboUsers->currentIndex() )
+        mp_comboUsers->removeItem( user_id_index_to_remove );
+    }
   }
 
   emit fileShareListRequested();
 }
 
-bool GuiShareNetwork::filterPassThrough( const FileInfo& fi )
+bool GuiShareNetwork::filterPassThrough( const User& u, const FileInfo& fi )
 {
   QString filter_name = mp_leSearch->text().simplified().toLower();
   if( !filter_name.isEmpty() && !fi.name().contains( filter_name, Qt::CaseInsensitive ) )
+    return false;
+
+  if( m_filterUserId > 0 && u.id() != m_filterUserId )
     return false;
 
   if( mp_comboFileType->currentIndex() == (int)Bee::NumFileType )
     return true;
   else
     return (int)Bee::fileTypeFromSuffix( fi.suffix() ) == mp_comboFileType->currentIndex();
+}
+
+void GuiShareNetwork::enableSearchButton()
+{
+  mp_pbSearch->setEnabled( true );
 }

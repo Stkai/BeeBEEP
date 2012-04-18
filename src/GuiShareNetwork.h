@@ -52,9 +52,13 @@ public slots:
 
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
+  void enableSearchButton();
 
 protected:
-  bool filterPassThrough( const FileInfo& );
+  bool filterPassThrough( const User&, const FileInfo& );
+
+private:
+  VNumber m_filterUserId;
 
 };
 
