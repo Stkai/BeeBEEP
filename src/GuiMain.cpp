@@ -81,16 +81,20 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
-
+  connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( fileTransferCompleted( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( setFileTransferCompleted( VNumber, VNumber, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_defaultChat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
   connect( mp_defaultChat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
   connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
+  connect( mp_defaultChat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
 
   connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
   connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
+  connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
@@ -460,6 +464,10 @@ void GuiMain::createMenus()
 
   /* View Menu */
   mp_menuView = new QMenu( tr( "&View" ), this );
+  mp_menuView->addAction( mp_actViewUsers );
+  mp_menuView->addAction( mp_actViewChats );
+  mp_menuView->addAction( mp_actViewFileTransfer );
+  mp_menuView->addSeparator();
   mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( raiseChatView() ) );
   mp_actViewDefaultChat->setStatusTip( tr( "Show the chat view" ) );
   mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
@@ -486,8 +494,10 @@ void GuiMain::createMenus()
   /* System Tray Menu */
   mp_menuTray = new QMenu( tr( "%1 System Tray").arg( Settings::instance().programName() ), this );
   act = mp_menuTray->addAction( QIcon( ":/images/beebeep.png" ), tr( "Open" ), this, SLOT( showFromTrayIcon() ) );
+  mp_menuTray->setDefaultAction( act );
   mp_menuTray->addSeparator();
   mp_menuTray->insertAction( 0, mp_actQuit );
+
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -1334,4 +1344,21 @@ void GuiMain::raiseNetworkShareView()
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( true );
   mp_actViewShareNetwork->setEnabled( false );
+}
+
+void GuiMain::openUrl( const QUrl& file_url )
+{
+  QString file_path = file_url.toLocalFile();
+  if( !file_path.isEmpty() )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "Do you really want to open the file %1?" ).arg( file_path ),
+                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
+    return;
+  }
+
+  qDebug() << "Open url:" << file_url.toString();
+  if( !QDesktopServices::openUrl( file_url ) )
+    QMessageBox::information( this, Settings::instance().programName(),
+                              tr( "Unable to open %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
 }

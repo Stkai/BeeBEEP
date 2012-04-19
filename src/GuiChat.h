@@ -49,6 +49,7 @@ signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );
   void nextChat();
+  void openUrl( const QUrl& );
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );

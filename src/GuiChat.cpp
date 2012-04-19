@@ -109,9 +109,7 @@ void GuiChat::checkWriting()
 
 void GuiChat::checkAnchorClicked( const QUrl& url )
 {
-  qDebug() << "Open url:" << url.toString();
-  if( !QDesktopServices::openUrl( url ) )
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1").arg( url.toString( QUrl::RemoveScheme ) ), tr( "Ok" ) );
+  emit openUrl( url );
 }
 
 

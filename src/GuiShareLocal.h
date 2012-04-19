@@ -48,8 +48,6 @@ protected slots:
 
 protected:
   void addSharePath( const QString& );
-
-protected:
   void updateMyShares();
   void updateShareList();
 

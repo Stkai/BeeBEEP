@@ -82,7 +82,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     qDebug() << "FileTransfer in progress";
     item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
     item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
-    showProgress( item, fi, bytes );
+    showProgress( item, u.id(), fi, bytes );
   }
 
   showIcon( item );
@@ -127,7 +127,7 @@ QTreeWidgetItem* GuiTransferFile::findItem( VNumber peer_id )
   return 0;
 }
 
-void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, FileSizeType bytes )
+void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, const FileInfo& fi, FileSizeType bytes )
 {
   if( fi.size() == 0 )
   {
@@ -138,6 +138,7 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
     item->setText( ColumnProgress, tr( "Transfer completed" ) );
+    emit fileTransferCompleted( user_id, fi.id(), fi.path() );
     return;
   }
 
@@ -146,9 +147,12 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
                                       QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
   item->setText( ColumnProgress, file_transfer_progress );
 
+  if( fi.isDownload() )
+    emit fileTransferProgress( user_id, fi.id(), file_transfer_progress );
+
   file_transfer_progress.prepend( QString( "[%1] " ).arg( fi.name() ) );
   if( !isVisible() )
-    emit stringToShow( file_transfer_progress, 1000 );
+    emit stringToShow( file_transfer_progress, 3000 );
   qDebug() << file_transfer_progress;
 }
 
@@ -169,6 +173,9 @@ void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo
   item->setData( ColumnFile, TransferInProgress, false );
   item->setText( ColumnProgress, msg );
   showIcon( item );
+
+  if( fi.isDownload() )
+    emit fileTransferProgress( u.id(), fi.id(), msg );
 }
 
 void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )
@@ -188,6 +195,14 @@ void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )
       VNumber peer_id = Bee::qVariantToVNumber( item->data( ColumnFile, PeerId ) );
       item->setData( ColumnFile, TransferInProgress, false );
       emit transferCancelled( peer_id );
+      return;
     }
+  }
+
+  if( item->data( ColumnFile, TransferCompleted ).toBool() )
+  {
+    QUrl url = QUrl::fromLocalFile( item->data( ColumnFile, FilePath ).toString() );
+    emit openFileCompleted( url );
+    return;
   }
 }

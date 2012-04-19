@@ -37,18 +37,21 @@ class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
   Q_OBJECT
 
 public:
-  enum ColumnType { ColumnFile, ColumnSize, ColumnUser };
-  enum DataType { UserId = Qt::UserRole + 1, FileId };
+  enum ColumnType { ColumnFile, ColumnSize, ColumnUser, ColumnStatus };
+  enum DataType { UserId = Qt::UserRole + 1, FileId, FilePath };
 
   explicit GuiShareNetwork( QWidget *parent = 0 );
 
 signals:
   void fileShareListRequested();
   void downloadSharedFile( VNumber, VNumber );
+  void openFileCompleted( const QUrl& );
 
 public slots:
   void loadShares( const User& );
   void search();
+  void showMessage( VNumber, VNumber, const QString& );
+  void setFileTransferCompleted( VNumber, VNumber, const QString& );
 
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
@@ -56,6 +59,7 @@ protected slots:
 
 protected:
   bool filterPassThrough( const User&, const FileInfo& );
+  QTreeWidgetItem* findItem( VNumber, VNumber );
 
 private:
   VNumber m_filterUserId;

@@ -312,11 +312,11 @@
     </message>
     <message>
         <source>Unable to open %1</source>
-        <translation>Impossibile aprire %1</translation>
+        <translation type="obsolete">Impossibile aprire %1</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>All users</source>
@@ -1004,6 +1004,18 @@ il file %2 (%3)?</translation>
         <source>Do you want to download %1 (%2) from the user %3?</source>
         <translation>Vuoi scaricare il file %1 (%2) dall&apos;utente %3?</translation>
     </message>
+    <message>
+        <source>Do you really want to open the file %1?</source>
+        <translation>Vuoi aprire il file %1?</translation>
+    </message>
+    <message>
+        <source>Unable to open %1</source>
+        <translation>Impossibile aprire %1</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1345,6 +1357,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>All Users</source>
         <translation>Tutti</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Stato</translation>
     </message>
 </context>
 <context>

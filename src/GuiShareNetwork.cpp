@@ -35,7 +35,7 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
 
   setObjectName( "GuiShareNetwork" );
   QStringList labels;
-  labels << tr( "File" ) << tr( "Size" ) << tr( "User" );
+  labels << tr( "File" ) << tr( "Size" ) << tr( "User" ) << tr( "Status" );
   mp_twShares->setHeaderLabels( labels );
 
   mp_twShares->sortItems( ColumnFile, Qt::AscendingOrder );
@@ -46,11 +46,12 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   QHeaderView* hv = mp_twShares->header();
   hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnSize, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
 
   for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
     mp_comboFileType->insertItem( i, QIcon( Bee::fileTypeIconFileName( (Bee::FileType)i ) ), Bee::fileTypeToString( (Bee::FileType)i ), i );
 
-  mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/green-ball.png" ), tr( "All Files" ), Bee::NumFileType );
+  mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/star.png" ), tr( "All Files" ), Bee::NumFileType );
   mp_comboFileType->setCurrentIndex( Bee::NumFileType );
 
   mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
@@ -81,6 +82,7 @@ void GuiShareNetwork::loadShares( const User& u )
     item->setText( ColumnFile, fi.name() );
     item->setData( ColumnFile, UserId, u.id() );
     item->setData( ColumnFile, FileId, fi.id() );
+    item->setData( ColumnFile, FilePath, QString( "" ) );
     item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
     item->setText( ColumnUser, u.name() );
   }
@@ -90,6 +92,13 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 {
   if( !item )
     return;
+
+  QString file_path = item->data( ColumnFile, FilePath ).toString();
+  if( !file_path.isEmpty() )
+  {
+    emit openFileCompleted( QUrl::fromLocalFile( file_path ) );
+    return;
+  }
 
   VNumber user_id = Bee::qVariantToVNumber( item->data( ColumnFile, UserId ) );
   VNumber file_id = Bee::qVariantToVNumber( item->data( ColumnFile, FileId ) );
@@ -136,4 +145,37 @@ bool GuiShareNetwork::filterPassThrough( const User& u, const FileInfo& fi )
 void GuiShareNetwork::enableSearchButton()
 {
   mp_pbSearch->setEnabled( true );
+}
+
+QTreeWidgetItem* GuiShareNetwork::findItem( VNumber user_id, VNumber file_info_id )
+{
+  QTreeWidgetItemIterator it( mp_twShares );
+  while( *it )
+  {
+    if( Bee::qVariantToVNumber( (*it)->data( ColumnFile, UserId ) ) == user_id
+        && Bee::qVariantToVNumber( (*it)->data( ColumnFile, FileId ) ) == file_info_id )
+      return *it;
+    ++it;
+  }
+  return 0;
+}
+
+void GuiShareNetwork::showMessage( VNumber user_id, VNumber file_info_id, const QString& msg )
+{
+  QTreeWidgetItem* item = findItem( user_id, file_info_id );
+  if( !item )
+    return;
+
+  item->setText( ColumnStatus, msg );
+}
+
+void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_info_id, const QString& file_path )
+{
+  QTreeWidgetItem* item = findItem( user_id, file_info_id );
+  if( !item )
+    return;
+
+  item->setData( ColumnFile, FilePath, file_path );
+  for( int i = 0; i < mp_twShares->columnCount(); i++ )
+    item->setBackgroundColor( i, Qt::green );
 }

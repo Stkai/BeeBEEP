@@ -48,10 +48,13 @@ public slots:
 signals:
   void transferCancelled( VNumber );
   void stringToShow( const QString&, int );
+  void fileTransferProgress( VNumber, VNumber, const QString& );
+  void fileTransferCompleted( VNumber, VNumber, const QString& );
+  void openFileCompleted( const QUrl& );
 
 protected:
   QTreeWidgetItem* findItem( VNumber );
-  void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType );
+  void showProgress( QTreeWidgetItem*, VNumber, const FileInfo&, FileSizeType );
   void showIcon( QTreeWidgetItem* );
 
 private slots:

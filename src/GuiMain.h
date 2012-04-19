@@ -94,6 +94,7 @@ private slots:
   void raiseNetworkShareView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
+  void openUrl( const QUrl& );
 
 protected:
   void closeEvent( QCloseEvent* );
