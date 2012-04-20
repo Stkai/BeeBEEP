@@ -92,6 +92,7 @@ private slots:
   void raiseChatView();
   void raiseLocalShareView();
   void raiseNetworkShareView();
+  void raisePluginView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
@@ -107,6 +108,7 @@ private:
   void createStatusBar();
   void createDockWindows();
   void createStackedWidgets();
+  void createPluginWindows();
   void refreshUserList();
   void refreshChat();
   void refreshTitle();

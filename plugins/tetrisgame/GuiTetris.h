@@ -35,6 +35,7 @@ class GuiTetris : public QWidget, private Ui::GuiTetris
 public:
   explicit GuiTetris( QWidget *parent = 0 );
 
+
 };
 
 #endif // BEEBEEP_GUITETRIS_H

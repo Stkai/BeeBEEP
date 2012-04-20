@@ -67,6 +67,7 @@ GuiMain::GuiMain( QWidget *parent )
   createDockWindows();
   createMenus();
   createToolAndMenuBars();
+  createPluginWindows();
   createStatusBar();
 
   connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
@@ -581,6 +582,23 @@ void GuiMain::createStackedWidgets()
 
   mp_shareNetwork = new GuiShareNetwork( this );
   mp_stackedWidget->addWidget( mp_shareNetwork );
+}
+
+void GuiMain::createPluginWindows()
+{
+  QAction* act;
+  int plugin_index;
+
+  if( PluginManager::instance().games().size() > 0 )
+    mp_menuView->addSeparator();
+
+  foreach( GameInterface* gi, PluginManager::instance().games() )
+  {
+    act = mp_menuView->addAction( gi->icon(), gi->name(), this, SLOT( raisePluginView() ) );
+    act->setStatusTip( gi->help() );
+    plugin_index = mp_stackedWidget->addWidget( gi->mainWindow() );
+    act->setData( plugin_index );
+  }
 }
 
 void GuiMain::checkUser( const User& u )
@@ -1360,6 +1378,24 @@ void GuiMain::raiseNetworkShareView()
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( true );
   mp_actViewShareNetwork->setEnabled( false );
+}
+
+void GuiMain::raisePluginView()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+
+  int widget_index = act->data().toInt();
+  if( widget_index == mp_stackedWidget->currentIndex() )
+    return;
+
+  mp_stackedWidget->setCurrentIndex( widget_index );
+
+  // FIXME!!!
+  mp_actViewDefaultChat->setEnabled( true );
+  mp_actViewShareLocal->setEnabled( true );
+  mp_actViewShareNetwork->setEnabled( true );
 }
 
 void GuiMain::openUrl( const QUrl& file_url )
