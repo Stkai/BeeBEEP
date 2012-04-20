@@ -36,6 +36,7 @@ class PluginManager
 public:
   inline const QList<TextMarkerInterface*>& textMarkers() const;
   inline const QList<ServiceInterface*>& services() const;
+  inline const QList<GameInterface*>& games() const;
   inline int count() const;
 
   void loadPlugins();
@@ -44,6 +45,7 @@ public:
 
   TextMarkerInterface* textMarker( const QString& ) const;
   ServiceInterface* service( const QString& ) const;
+  GameInterface* game( const QString& ) const;
 
 
   bool parseText( QString*, bool before_sending ) const;
@@ -78,6 +80,7 @@ protected:
 private:
   QList<TextMarkerInterface*> m_textMarkers;
   QList<ServiceInterface*> m_services;
+  QList<GameInterface*> m_games;
 
 };
 
@@ -85,6 +88,7 @@ private:
 // Inline Functions
 inline const QList<TextMarkerInterface*>& PluginManager::textMarkers() const { return m_textMarkers; }
 inline const QList<ServiceInterface*>& PluginManager::services() const { return m_services; }
-inline int PluginManager::count() const { return m_textMarkers.size() + m_services.size(); }
+inline const QList<GameInterface*>& PluginManager::games() const { return m_games; }
+inline int PluginManager::count() const { return m_textMarkers.size() + m_services.size() + m_games.size(); }
 
 #endif // BEEBEEP_PLUGINMANAGER_H

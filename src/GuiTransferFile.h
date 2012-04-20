@@ -59,6 +59,7 @@ protected:
 
 private slots:
   void checkItemClicked( QTreeWidgetItem*, int );
+  void checkItemDoubleClicked( QTreeWidgetItem*, int );
 
 };
 

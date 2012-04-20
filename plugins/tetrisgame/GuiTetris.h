@@ -21,12 +21,20 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUITETRIS_H
+#define BEEBEEP_GUITETRIS_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.8.2";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 184;
+#include <QWidget>
+#include "ui_GuiTetris.h"
 
-#endif // BEEBEEP_VERSION_H
+
+class GuiTetris : public QWidget, private Ui::GuiTetris
+{
+  Q_OBJECT
+
+public:
+  explicit GuiTetris( QWidget *parent = 0 );
+
+};
+
+#endif // BEEBEEP_GUITETRIS_H

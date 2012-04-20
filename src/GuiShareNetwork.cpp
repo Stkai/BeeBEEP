@@ -177,5 +177,5 @@ void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_in
 
   item->setData( ColumnFile, FilePath, file_path );
   for( int i = 0; i < mp_twShares->columnCount(); i++ )
-    item->setBackgroundColor( i, Qt::green );
+    item->setBackgroundColor( i, QColor( "#91D606" ) );
 }

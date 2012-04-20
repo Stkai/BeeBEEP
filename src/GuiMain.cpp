@@ -1076,7 +1076,9 @@ void GuiMain::updadePluginMenu()
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
-  mp_menuPlugins->addSeparator();
+
+  if( PluginManager::instance().textMarkers().size() )
+    mp_menuPlugins->addSeparator();
 
   foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
   {
@@ -1089,7 +1091,7 @@ void GuiMain::updadePluginMenu()
     act->setEnabled( text_marker->isEnabled() );
   }
 
-  if( PluginManager::instance().textMarkers().size() > 0 && PluginManager::instance().services().size() > 0 )
+  if( PluginManager::instance().services().size() > 0 )
     mp_menuPlugins->addSeparator();
 
   foreach( ServiceInterface* service, PluginManager::instance().services() )
@@ -1114,6 +1116,20 @@ void GuiMain::updadePluginMenu()
       account_act->setIcon( Bee::userStatusIcon(  si->name(), User::Online ) );
     else
       account_act->setIcon( si->icon() );
+  }
+
+  if( PluginManager::instance().games().size() > 0 )
+    mp_menuPlugins->addSeparator();
+
+  foreach( GameInterface* game, PluginManager::instance().games() )
+  {
+    act = mp_menuPlugins->addAction( game->name(), this, SLOT( showPluginHelp() ) );
+
+    act->setData( help_data_format
+                  .arg( Bee::iconToHtml( (game->icon().isNull() ? ":/images/plugin.png" : game->iconFileName()), "*P*" ),
+                        game->name(), help_data_ts, game->author(), game->help() ) );
+    act->setIcon( game->icon() );
+    act->setEnabled( game->isEnabled() );
   }
 }
 

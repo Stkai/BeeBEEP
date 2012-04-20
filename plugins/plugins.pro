@@ -7,4 +7,5 @@ SUBDIRS = rainbowtextmarker \
 			gtalkservice \
 			jabberservice \
 			windowsliveservice \
-			twitterservice
+			twitterservice \
+			tetrisgame

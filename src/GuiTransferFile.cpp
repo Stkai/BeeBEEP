@@ -49,6 +49,7 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   hv->hide();
 
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
 }
 
 void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
@@ -197,6 +198,15 @@ void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )
       emit transferCancelled( peer_id );
       return;
     }
+  }
+}
+
+void GuiTransferFile::checkItemDoubleClicked( QTreeWidgetItem* item, int )
+{
+  if( !item )
+  {
+    qWarning() << "GuiTransferFile::checkItemDoubleClicked has the item invalid";
+    return;
   }
 
   if( item->data( ColumnFile, TransferCompleted ).toBool() )

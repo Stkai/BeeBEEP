@@ -269,7 +269,7 @@ void Settings::load()
 
   sets.beginGroup( "FileShare" );
   m_fileShare = sets.value( "Active", false ).toBool();
-  m_maxFileShared = qMax( 0, sets.value( "MaxFileShared", 300 ).toInt() );
+  m_maxFileShared = qMax( 0, sets.value( "MaxFileShared", 999 ).toInt() );
   m_localShare = sets.value( "ShareList", QStringList() ).toStringList();
   sets.endGroup();
 

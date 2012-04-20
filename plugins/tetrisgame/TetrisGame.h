@@ -21,12 +21,38 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEE_TETRISGAME_H
+#define BEE_TETRISGAME_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.8.2";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 184;
+#include "tetrisgame_global.h"
+#include "Interfaces.h"
+#include <QObject>
 
-#endif // BEEBEEP_VERSION_H
+class GuiTetris;
+
+
+class BEETETRISGAMESHARED_EXPORT TetrisGame : public QObject, public GameInterface
+{
+  Q_OBJECT
+  Q_INTERFACES( GameInterface )
+
+public:
+  TetrisGame();  
+  
+  QString name() const;
+  QString version() const;
+  QString help() const;
+  QString author() const;
+  QIcon icon() const;
+  QString iconFileName() const;
+  int priority() const;
+  QString coreVersion() const;
+
+  QWidget* mainWindow() const;
+
+private:
+  GuiTetris* mp_tetris;
+	
+};
+
+#endif // BEE_TETRISGAME_H

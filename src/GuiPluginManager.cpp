@@ -153,7 +153,7 @@ void GuiPluginManager::updatePlugins()
   if( PluginManager::instance().services().size() > 0 )
   {
     QTreeWidgetItem* service_root_item = new QTreeWidgetItem( mp_twPlugins );
-    service_root_item->setText( 2, tr( "Network Services") );
+    service_root_item->setText( 2, tr( "Network Services" ) );
     service_root_item->setData( 0, Qt::UserRole+1, 0 );
 
     foreach( ServiceInterface* service, PluginManager::instance().services() )
@@ -164,6 +164,25 @@ void GuiPluginManager::updatePlugins()
       item->setText( 2, service->name() );
       item->setText( 3, service->version() );
       item->setText( 4, service->author() );
+      item->setData( 0, Qt::UserRole+1, 2 );
+      updateItem( item );
+    }
+  }
+
+  if( PluginManager::instance().games().size() > 0 )
+  {
+    QTreeWidgetItem* game_root_item = new QTreeWidgetItem( mp_twPlugins );
+    game_root_item->setText( 2, tr( "Games" ) );
+    game_root_item->setData( 0, Qt::UserRole+1, 0 );
+
+    foreach( GameInterface* game, PluginManager::instance().games() )
+    {
+      item = new QTreeWidgetItem( game_root_item );
+      setPluginEnabled( item, game->isEnabled() );
+      item->setIcon( 2, game->icon().isNull() ? QIcon( ":/images/plugin.png" ) : game->icon() );
+      item->setText( 2, game->name() );
+      item->setText( 3, game->version() );
+      item->setText( 4, game->author() );
       item->setData( 0, Qt::UserRole+1, 2 );
       updateItem( item );
     }

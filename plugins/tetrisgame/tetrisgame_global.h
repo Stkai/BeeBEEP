@@ -21,12 +21,15 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEE_TETRISGAME_GLOBAL_H
+#define BEE_TETRISGAME_GLOBAL_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_VERSION = "0.8.2";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 184;
+#include <QtCore/qglobal.h>
 
-#endif // BEEBEEP_VERSION_H
+#if defined(BEE_TETRISGAME_LIBRARY)
+#  define BEETETRISGAMESHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define BEETETRISGAMESHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // BEE_TETRISGAME_GLOBAL_H

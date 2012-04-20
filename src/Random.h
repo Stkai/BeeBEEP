@@ -25,11 +25,12 @@
 #define BEEBEEP_RANDOM_H
 
 #include <QDateTime>
+#include <stdlib.h>
 
 namespace Random
 {
   inline int __double2int( double d ) { int i = static_cast<int>(d); return d-i >= 0.5 ? ++i : i; } // never negative in random
-  inline void init() { qsrand( QDateTime::currentDateTime().toTime_t() ); } 
+  inline void init() { qsrand( QTime( 0, 0, 0 ).secsTo( QTime::currentTime() ) ); }
   inline int number( int from, int to ) { return from >= to ? to : __double2int((qrand()/(1.0 + RAND_MAX))*( to - from )) + from; }
   inline int roll( int dices, int faces ) { int result = 0; for( int i = 0; i < dices; i++ ) result += number( 1, faces ); return result; }
   inline int d100() { return number( 1, 100 ); }

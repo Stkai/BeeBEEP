@@ -1,5 +1,9 @@
 BEEBEEP (Secure Network Chat)
 
+BeeBBEP 0.8.2
+- File Sharing on local area network
+- Minimize on System Tray option
+
 BeeBEEP 0.6.2
 - Jabber XMPP Support
 - Number Encoder Text Marker plugin 
