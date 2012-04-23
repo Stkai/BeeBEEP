@@ -26,6 +26,7 @@
 
 #include <QWidget>
 #include "ui_GuiTetris.h"
+class TetrisBoard;
 
 
 class GuiTetris : public QWidget, private Ui::GuiTetris
@@ -35,7 +36,13 @@ class GuiTetris : public QWidget, private Ui::GuiTetris
 public:
   explicit GuiTetris( QWidget *parent = 0 );
 
+  inline TetrisBoard* board();
 
 };
+
+
+// Inline Functions
+inline TetrisBoard* GuiTetris::board() { return mp_board; }
+
 
 #endif // BEEBEEP_GUITETRIS_H

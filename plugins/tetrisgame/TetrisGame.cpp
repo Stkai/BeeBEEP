@@ -83,3 +83,16 @@ TetrisGame::TetrisGame()
 }
 
 Q_EXPORT_PLUGIN2( beetetris, TetrisGame )
+
+TetrisGame::~TetrisGame()
+{
+  delete mp_tetris;
+}
+
+void TetrisGame::pause()
+{
+  mp_tetris->board()->pause();
+}
+
+
+

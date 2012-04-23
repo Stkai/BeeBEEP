@@ -47,7 +47,7 @@ public:
   ServiceInterface* service( const QString& ) const;
   GameInterface* game( const QString& ) const;
 
-
+  void setGamePauseOn();
   bool parseText( QString*, bool before_sending ) const;
 
   static PluginManager& instance()

@@ -92,6 +92,8 @@ class GameInterface : public PluginInterface
 public:
   virtual QWidget* mainWindow() const = 0;
 
+  virtual void pause() = 0;
+
 };
 
 // Inline Functions

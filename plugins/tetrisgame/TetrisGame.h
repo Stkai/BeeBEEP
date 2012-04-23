@@ -37,7 +37,8 @@ class BEETETRISGAMESHARED_EXPORT TetrisGame : public QObject, public GameInterfa
   Q_INTERFACES( GameInterface )
 
 public:
-  TetrisGame();  
+  TetrisGame();
+  ~TetrisGame();
   
   QString name() const;
   QString version() const;
@@ -49,6 +50,7 @@ public:
   QString coreVersion() const;
 
   QWidget* mainWindow() const;
+  void pause();
 
 private:
   GuiTetris* mp_tetris;
