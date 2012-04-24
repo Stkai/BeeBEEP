@@ -30,7 +30,6 @@ GuiTetris::GuiTetris( QWidget *parent )
   setupUi( this );
 
   mp_board->setNextPieceLabel( mp_labelNewPiece );
-  mp_board->setBackgroundRole( QColor( "000" ) );
 
   connect( mp_pbStart, SIGNAL(clicked()), mp_board, SLOT(start()) );
   connect( mp_pbPause, SIGNAL(clicked()), mp_board, SLOT(pause()) );

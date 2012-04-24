@@ -120,6 +120,7 @@ private:
   void updateAccountMenu();
   void sendFile( const User& );
   bool askToDownloadFile( const User&, const FileInfo& );
+  void setGameInPauseMode();
 
 private:
   QStackedWidget* mp_stackedWidget;

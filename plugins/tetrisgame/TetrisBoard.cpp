@@ -29,8 +29,11 @@
 TetrisBoard::TetrisBoard( QWidget *parent )
  : QFrame( parent )
 {
-  setFrameStyle( QFrame::Panel | QFrame::Sunken );
+  setFrameStyle( QFrame::StyledPanel );
   setFocusPolicy( Qt::StrongFocus );
+
+  setStyleSheet( "background-image: url(:/plugins/tetris-background.png);"
+                 "background-repeat: repeat-y;" );
 
   m_isStarted = false;
   m_isPaused = false;

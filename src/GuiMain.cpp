@@ -1358,6 +1358,7 @@ void GuiMain::removeFromShare( const QString& share_path )
 
 void GuiMain::raiseChatView()
 {
+  setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_defaultChat );
   mp_actViewDefaultChat->setEnabled( false );
   mp_actViewShareLocal->setEnabled( true );
@@ -1366,6 +1367,7 @@ void GuiMain::raiseChatView()
 
 void GuiMain::raiseLocalShareView()
 {
+  setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_shareLocal );
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( false );
@@ -1374,10 +1376,12 @@ void GuiMain::raiseLocalShareView()
 
 void GuiMain::raiseNetworkShareView()
 {
+  setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_shareNetwork );
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( true );
   mp_actViewShareNetwork->setEnabled( false );
+
 }
 
 void GuiMain::raisePluginView()
@@ -1396,6 +1400,11 @@ void GuiMain::raisePluginView()
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( true );
   mp_actViewShareNetwork->setEnabled( true );
+}
+
+void GuiMain::setGameInPauseMode()
+{
+  PluginManager::instance().setGamePauseOn();
 }
 
 void GuiMain::openUrl( const QUrl& file_url )
