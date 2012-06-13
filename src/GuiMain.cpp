@@ -1170,8 +1170,11 @@ void GuiMain::updateAccountMenu()
 void GuiMain::showPluginHelp()
 {
   QAction* act = qobject_cast<QAction*>(sender());
-  if( act )
-    mp_defaultChat->appendMessage( act->data().toString() );
+  if( !act )
+    return;
+
+  mp_defaultChat->appendMessage( act->data().toString() );
+  raiseChatView();
 }
 
 void GuiMain::showPluginManager()

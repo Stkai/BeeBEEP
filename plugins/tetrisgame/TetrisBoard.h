@@ -50,6 +50,9 @@ signals:
   void scoreChanged( int );
   void levelChanged( int );
   void linesRemovedChanged( int );
+  void started();
+  void paused();
+  void gameOver();
 
 protected:
   void paintEvent( QPaintEvent* );
@@ -71,6 +74,7 @@ private:
   void removeFullLines();
   void newPiece();
   void showNextPiece();
+  void setGameOver();
 
   bool tryMove( const TetrisPiece&, int, int );
   void drawSquare( QPainter&, int, int, TetrisPiece::Shape );
@@ -79,6 +83,7 @@ private:
   QPointer<QLabel> mp_nextPieceLabel;
   bool m_isStarted;
   bool m_isPaused;
+  bool m_isGameOver;
   bool m_isWaitingAfterLine;
   TetrisPiece m_curPiece;
   TetrisPiece m_nextPiece;

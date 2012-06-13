@@ -35,7 +35,7 @@ QString TetrisGame::name() const
 
 QString TetrisGame::version() const
 {
-  return "0.2.1";
+  return "0.6.1";
 }
 
 QString TetrisGame::author() const
@@ -45,7 +45,7 @@ QString TetrisGame::author() const
 
 QString TetrisGame::help() const
 {
-  return tr( "You can play Tetris." );
+  return tr( "Use <b>Left</b> and <b>Right Arrow</b> to move the pieces on the board. <b>Up</b> and <b>Down Arrow</b> to rotate left and right. <b>Space</b> to drop down the piece. <b>D</b> to drop the piece only one line. <b>P</b> to pause the game." );
 }
 
 QIcon TetrisGame::icon() const

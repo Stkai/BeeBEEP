@@ -37,6 +37,7 @@ TetrisBoard::TetrisBoard( QWidget *parent )
 
   m_isStarted = false;
   m_isPaused = false;
+  m_isGameOver = false;
 
   clearBoard();
 
@@ -49,6 +50,7 @@ void TetrisBoard::start()
     return;
 
   m_isStarted = true;
+  m_isGameOver = false;
   m_isWaitingAfterLine = false;
   m_numLinesRemoved = 0;
   m_numPiecesDropped = 0;
@@ -64,6 +66,8 @@ void TetrisBoard::start()
   newPiece();
 
   m_timer.start( timeoutTime(), this );
+
+  emit( started() );
 }
 
 void TetrisBoard::pause()
@@ -79,18 +83,32 @@ void TetrisBoard::pause()
     m_timer.start( timeoutTime(), this );
 
   update();
+
+  emit( paused() );
+}
+
+void TetrisBoard::setGameOver()
+{
+  m_isGameOver = true;
+  mp_nextPieceLabel->setPixmap( QPixmap() );
+  update();
+  emit( gameOver() );
 }
 
 void TetrisBoard::paintEvent( QPaintEvent *event )
 {
-  QFrame::paintEvent(event);
+  QFrame::paintEvent( event );
 
   QPainter painter(this);
   QRect rect = contentsRect();
 
-  if ( m_isPaused )
+  if( m_isPaused || m_isGameOver )
   {
-    painter.drawText(rect, Qt::AlignCenter, tr( "Pause" ) );
+    QFont font = painter.font();
+    font.setBold( true );
+    font.setPointSize( font.pointSize() + 6 );
+    painter.setFont( font );
+    painter.drawText( rect, Qt::AlignCenter, m_isPaused ? tr( "Pause" ) : tr( "Game Over" ) );
     return;
   }
 
@@ -102,7 +120,7 @@ void TetrisBoard::paintEvent( QPaintEvent *event )
     {
       TetrisPiece::Shape shape = shapeAt( j, BoardHeight - i - 1 );
       if( shape != TetrisPiece::NoShape )
-        drawSquare( painter, rect.left() + j * squareWidth(), board_top + i * squareHeight(), shape);
+        drawSquare( painter, rect.left() + j * squareWidth(), board_top + i * squareHeight(), shape );
     }
   }
 
@@ -120,9 +138,18 @@ void TetrisBoard::paintEvent( QPaintEvent *event )
 
 void TetrisBoard::keyPressEvent( QKeyEvent *event )
 {
-  if( !m_isStarted || m_isPaused || m_curPiece.shape() == TetrisPiece::NoShape )
+  if( !m_isStarted || m_isGameOver || m_curPiece.shape() == TetrisPiece::NoShape )
   {
-	QFrame::keyPressEvent(event);
+    QFrame::keyPressEvent( event );
+    return;
+  }
+
+  if( m_isPaused )
+  {
+    if( event->key() == Qt::Key_P )
+      pause();
+    else
+      QFrame::keyPressEvent( event );
     return;
   }
 
@@ -146,6 +173,9 @@ void TetrisBoard::keyPressEvent( QKeyEvent *event )
   case Qt::Key_D:
 	oneLineDown();
 	break;
+  case Qt::Key_P:
+    pause();
+    break;
   default:
     QFrame::keyPressEvent( event );
   }
@@ -285,6 +315,7 @@ void TetrisBoard::newPiece()
     m_curPiece.setShape( TetrisPiece::NoShape );
     m_timer.stop();
     m_isStarted = false;
+    setGameOver();
   }
 }
 

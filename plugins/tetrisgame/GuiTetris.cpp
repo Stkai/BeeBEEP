@@ -31,7 +31,46 @@ GuiTetris::GuiTetris( QWidget *parent )
 
   mp_board->setNextPieceLabel( mp_labelNewPiece );
 
-  connect( mp_pbStart, SIGNAL(clicked()), mp_board, SLOT(start()) );
-  connect( mp_pbPause, SIGNAL(clicked()), mp_board, SLOT(pause()) );
+  connect( mp_pbStart, SIGNAL( clicked() ), mp_board, SLOT( start() ) );
+  connect( mp_pbPause, SIGNAL( clicked() ), mp_board, SLOT( pause() ) );
+  connect( mp_board, SIGNAL( levelChanged( int ) ), this, SLOT( updateLevel( int ) ) );
+  connect( mp_board, SIGNAL( scoreChanged( int ) ), this, SLOT( updateScore( int ) ) );
+  connect( mp_board, SIGNAL( linesRemovedChanged( int ) ), this, SLOT( updateLines( int ) ) );
+  connect( mp_board, SIGNAL( started() ), this, SLOT( gameStarted() ) );
+  connect( mp_board, SIGNAL( paused() ), this, SLOT( gamePaused() ) );
+  connect( mp_board, SIGNAL( gameOver() ), this, SLOT( gameOver() ) );
+
+  mp_pbPause->setEnabled( false );
 }
 
+void GuiTetris::updateScore( int new_value )
+{
+  mp_lcdScore->display( new_value );
+}
+
+void GuiTetris::updateLevel( int new_value )
+{
+  mp_lcdLevel->display( new_value );
+}
+
+void GuiTetris::updateLines( int new_value )
+{
+  mp_lcdLines->display( new_value );
+}
+
+void GuiTetris::gameStarted()
+{
+  mp_pbStart->setEnabled( false );
+  mp_pbPause->setEnabled( true );
+}
+
+void GuiTetris::gamePaused()
+{
+
+}
+
+void GuiTetris::gameOver()
+{
+  mp_pbStart->setEnabled( true );
+  mp_pbPause->setEnabled( false );
+}

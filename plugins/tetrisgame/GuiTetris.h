@@ -38,6 +38,14 @@ public:
 
   inline TetrisBoard* board();
 
+protected slots:
+  void updateScore( int );
+  void updateLevel( int );
+  void updateLines( int );
+  void gameStarted();
+  void gamePaused();
+  void gameOver();
+
 };
 
 
