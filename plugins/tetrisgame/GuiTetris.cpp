@@ -41,6 +41,9 @@ GuiTetris::GuiTetris( QWidget *parent )
   connect( mp_board, SIGNAL( gameOver() ), this, SLOT( gameOver() ) );
 
   mp_pbPause->setEnabled( false );
+
+  //setStyleSheet( "background-image: url(:/plugins/tetris-panel-background.png);"
+  //               "background-repeat: repeat-xy;" );
 }
 
 void GuiTetris::updateScore( int new_value )

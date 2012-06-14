@@ -94,5 +94,10 @@ void TetrisGame::pause()
   mp_tetris->board()->pause();
 }
 
+bool TetrisGame::isPaused() const
+{
+  return mp_tetris->board()->isPaused();
+}
+
 
 

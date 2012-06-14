@@ -1248,6 +1248,10 @@ il file %2 (%3)?</translation>
         <source>Network Services</source>
         <translation>Servizi di Rete</translation>
     </message>
+    <message>
+        <source>Games</source>
+        <translation>Giochi</translation>
+    </message>
 </context>
 <context>
     <name>GuiSearchUser</name>
@@ -1384,6 +1388,37 @@ il file %2 (%3)?</translation>
     <message>
         <source>User</source>
         <translation>Utente</translation>
+    </message>
+</context>
+<context>
+    <name>GuiTetris</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Next Piece</source>
+        <translation>Prossimo Pezzo</translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation>Punteggio</translation>
+    </message>
+    <message>
+        <source>Lines</source>
+        <translation>Linee</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Livello</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Nuova Partita</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Pausa</translation>
     </message>
 </context>
 <context>
@@ -1725,6 +1760,28 @@ il file %2 (%3)?</translation>
     <message>
         <source>Rainbow Text Marker</source>
         <translation>Testo Arcobaleno</translation>
+    </message>
+</context>
+<context>
+    <name>TetrisBoard</name>
+    <message>
+        <source>Pause</source>
+        <translation>Pausa</translation>
+    </message>
+    <message>
+        <source>Game Over</source>
+        <translation>Game Over</translation>
+    </message>
+</context>
+<context>
+    <name>TetrisGame</name>
+    <message>
+        <source>Tetris</source>
+        <translation>Tetris</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right Arrow&lt;/b&gt; to move the pieces on the board. &lt;b&gt;Up&lt;/b&gt; and &lt;b&gt;Down Arrow&lt;/b&gt; to rotate left and right. &lt;b&gt;Space&lt;/b&gt; to drop down the piece. &lt;b&gt;D&lt;/b&gt; to drop the piece only one line. &lt;b&gt;P&lt;/b&gt; to pause the game.</source>
+        <translation>Usa le frecce &lt;b&gt;Sinistra&lt;/b&gt; e &lt;b&gt;Destra&lt;/b&gt; per muovere i pezzi nello schermo. Le frecce &lt;b&gt;Su&lt;/b&gt; e &lt;b&gt;Giù&lt;/b&gt; per ruotare il pezzo a sinistra e destra rispettivamente. &lt;b&gt;Barra spaziatrice&lt;/b&gt; per far cadere il pezzo. Premi il tasto &lt;b&gt;D&lt;/b&gt; per scendere di una linea e &lt;b&gt;P&lt;/b&gt; per mettere in pausa il gioco.</translation>
     </message>
 </context>
 <context>

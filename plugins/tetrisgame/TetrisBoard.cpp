@@ -136,7 +136,7 @@ void TetrisBoard::paintEvent( QPaintEvent *event )
   }
 }
 
-void TetrisBoard::keyPressEvent( QKeyEvent *event )
+void TetrisBoard::keyPressEvent( QKeyEvent* event )
 {
   if( !m_isStarted || m_isGameOver || m_curPiece.shape() == TetrisPiece::NoShape )
   {
@@ -181,7 +181,7 @@ void TetrisBoard::keyPressEvent( QKeyEvent *event )
   }
 }
 
-void TetrisBoard::timerEvent( QTimerEvent *event )
+void TetrisBoard::timerEvent( QTimerEvent* event )
 {
   if( event->timerId() == m_timer.timerId() )
   {
@@ -197,6 +197,13 @@ void TetrisBoard::timerEvent( QTimerEvent *event )
   else
     QFrame::timerEvent(event);
 
+}
+
+void TetrisBoard::focusOutEvent( QFocusEvent* event )
+{
+  if( !isPaused() )
+    pause();
+  QWidget::focusOutEvent( event );
 }
 
 void TetrisBoard::clearBoard()

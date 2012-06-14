@@ -51,6 +51,7 @@ public:
 
   QWidget* mainWindow() const;
   void pause();
+  bool isPaused() const;
 
 private:
   GuiTetris* mp_tetris;

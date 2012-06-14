@@ -130,8 +130,12 @@ void GuiMain::changeEvent( QEvent* e )
 {
   if( e->type() == QEvent::WindowStateChange )
   {
-    if( isMinimized() && Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
-      QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+    if( isMinimized() )
+    {
+      setGameInPauseMode();
+      if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
+        QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+    }
   }
 }
 
@@ -1396,6 +1400,8 @@ void GuiMain::raisePluginView()
   int widget_index = act->data().toInt();
   if( widget_index == mp_stackedWidget->currentIndex() )
     return;
+
+  setGameInPauseMode();
 
   mp_stackedWidget->setCurrentIndex( widget_index );
 

@@ -93,6 +93,7 @@ public:
   virtual QWidget* mainWindow() const = 0;
 
   virtual void pause() = 0;
+  virtual bool isPaused() const = 0;
 
 };
 

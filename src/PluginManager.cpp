@@ -213,7 +213,10 @@ GameInterface* PluginManager::game( const QString& game_name ) const
 void PluginManager::setGamePauseOn()
 {
   foreach( GameInterface* g, m_games )
-    g->pause();
+  {
+    if( !g->isPaused() )
+      g->pause();
+  }
 }
 
 bool PluginManager::parseText( QString* p_txt, bool before_sending ) const

@@ -41,6 +41,7 @@ public:
   inline void setNextPieceLabel( QLabel* );
   inline QSize sizeHint() const;
   inline QSize minimumSizeHint() const;
+  inline bool isPaused() const;
 
 public slots:
   void start();
@@ -58,6 +59,7 @@ protected:
   void paintEvent( QPaintEvent* );
   void keyPressEvent( QKeyEvent* );
   void timerEvent( QTimerEvent* );
+  void focusOutEvent( QFocusEvent* );
 
 private:
   enum { BoardWidth = 10, BoardHeight = 22 };
@@ -107,6 +109,7 @@ inline TetrisPiece::Shape& TetrisBoard::shapeAt( int x, int y ) { return m_board
 inline int TetrisBoard::timeoutTime() const { return 1000 / (1 + m_level); }
 inline int TetrisBoard::squareWidth() const { return contentsRect().width() / BoardWidth; }
 inline int TetrisBoard::squareHeight() const { return contentsRect().height() / BoardHeight; }
+inline bool TetrisBoard::isPaused() const { return m_isPaused; }
 
 #endif // BEE_TETRISBOARD_H
 
