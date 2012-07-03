@@ -480,7 +480,6 @@ void GuiMain::createMenus()
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareNetwork->setStatusTip( tr( "Show the list of the network shared files" ) );
 
-
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("&?" ), this );
   act = mp_menuInfo->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), this, SLOT( showTipOfTheDay() ) );
