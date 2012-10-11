@@ -109,7 +109,7 @@ int WindowsLiveService::nonSASLAuthMechanism() const
 
 QString WindowsLiveService::sASLAuthMechanism() const
 {
-  return QLatin1String( "" );
+  return QLatin1String( "X-MESSENGER-OAUTH2" );
 }
 
 bool WindowsLiveService::fileTransferIsEnabled() const
