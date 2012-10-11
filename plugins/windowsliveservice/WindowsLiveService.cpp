@@ -107,9 +107,9 @@ int WindowsLiveService::nonSASLAuthMechanism() const
   return 1;
 }
 
-int WindowsLiveService::sASLAuthMechanism() const
+QString WindowsLiveService::sASLAuthMechanism() const
 {
-  return 4; // SASLXMessengerOAuth2
+  return QLatin1String( "" );
 }
 
 bool WindowsLiveService::fileTransferIsEnabled() const

@@ -25,6 +25,7 @@
 #include "FileInfo.h"
 #include "Settings.h"
 #include "QXmppRosterManager.h"
+#include "QXmppVCardIq.h"
 #include "QXmppVCardManager.h"
 
 

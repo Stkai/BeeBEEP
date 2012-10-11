@@ -127,17 +127,10 @@ FORMS += GuiChat.ui \
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../qxmpp/release/ -lqxmpp
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../qxmpp/debug/ -lqxmpp
-else:symbian: LIBS += -lqxmpp
-else:unix: LIBS += -L$$OUT_PWD/../qxmpp/ -lqxmpp
-
-INCLUDEPATH += $$PWD/../qxmpp
-DEPENDPATH += $$PWD/../qxmpp
-
-win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/release/libqxmpp.a
-else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/debug/libqxmpp.a
-else:unix:!symbian: PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/libqxmpp.a
+LIBS += -L$$OUT_PWD/../qxmpp -lqxmpp0
+INCLUDEPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
+DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
+PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/qxmpp0.dll
 
 
 

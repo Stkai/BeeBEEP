@@ -107,9 +107,9 @@ int TwitterService::nonSASLAuthMechanism() const
   return 1;
 }
 
-int TwitterService::sASLAuthMechanism() const
+QString TwitterService::sASLAuthMechanism() const
 {
-  return 0; // SASLPlain
+  return QLatin1String( "" );
 }
 
 bool TwitterService::fileTransferIsEnabled() const

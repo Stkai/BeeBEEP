@@ -107,9 +107,9 @@ int JabberService::nonSASLAuthMechanism() const
   return 1;
 }
 
-int JabberService::sASLAuthMechanism() const
+QString JabberService::sASLAuthMechanism() const
 {
-  return 1;
+  return QLatin1String( "" );
 }
 
 bool JabberService::fileTransferIsEnabled() const

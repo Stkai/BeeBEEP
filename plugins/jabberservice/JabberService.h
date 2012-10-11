@@ -54,7 +54,7 @@ public:
   bool ignoreSslErrors() const;
   int streamSecurityMode() const;
   int nonSASLAuthMechanism() const;
-  int sASLAuthMechanism() const;
+  QString sASLAuthMechanism() const;
 
   bool fileTransferIsEnabled() const;
 

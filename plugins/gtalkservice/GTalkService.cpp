@@ -107,9 +107,9 @@ int GTalkService::nonSASLAuthMechanism() const
   return 1;
 }
 
-int GTalkService::sASLAuthMechanism() const
+QString GTalkService::sASLAuthMechanism() const
 {
-  return 0; // SASLPlain
+  return QLatin1String( "MD5-DIGEST" );
 }
 
 bool GTalkService::fileTransferIsEnabled() const

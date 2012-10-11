@@ -30,7 +30,6 @@
 #include "QXmppClient.h"
 #include "QXmppMessage.h"
 #include "QXmppPresence.h"
-#include "QXmppReconnectionManager.h"
 #include "QXmppRosterManager.h"
 #include "QXmppUtils.h"
 #include "QXmppVCardIq.h"
@@ -307,9 +306,16 @@ void XmppManager::presenceChanged( const QString& bare_jid, const QString& jid_r
   qDebug() << "XMPP> presence received for" << bare_jid;
 
   QXmppPresence presence = mp_client->rosterManager().getPresence( bare_jid, jid_resource );
-  User::Status status = statusFromPresence( presence.status().type() );
-  QString status_desc = presence.status().statusText();
+  User::Status status;
 
+  if( presence.type() == QXmppPresence::Available )
+    status = statusFromPresence( presence.availableStatusType() );
+  else if( presence.type() == QXmppPresence::Unavailable )
+    status = User::Offline;
+  else
+    return;
+
+  QString status_desc = presence.statusText();
 
   if( mp_client->isLocalUser( bare_jid ) )
   {
@@ -372,7 +378,7 @@ void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )
     return;
   }
 
-  QString bare_jid = jidToBareJid( xmpp_msg.from() );
+  QString bare_jid = QXmppUtils::jidToBareJid( xmpp_msg.from() );
   qDebug() << "XMPP> message received from" << bare_jid;
   dumpMessage( xmpp_msg );
 
@@ -400,19 +406,17 @@ void XmppManager::makeSystemMessage( XmppClient* mp_client, const QString& bare_
   emit message( mp_client->service(), bare_jid, m );
 }
 
-User::Status XmppManager::statusFromPresence( QXmppPresence::Status::Type xmpp_presence_status_type )
+User::Status XmppManager::statusFromPresence( QXmppPresence::AvailableStatusType xmpp_presence_status_type )
 {
   switch( xmpp_presence_status_type )
   {
-  case QXmppPresence::Status::Offline:
-    return User::Offline;
-  case QXmppPresence::Status::Online:
-  case QXmppPresence::Status::Chat:
+  case QXmppPresence::Online:
+  case QXmppPresence::Chat:
     return User::Online;
-  case QXmppPresence::Status::Away:
-  case QXmppPresence::Status::XA:
+  case QXmppPresence::Away:
+  case QXmppPresence::XA:
     return User::Away;
-  case QXmppPresence::Status::DND:
+  case QXmppPresence::DND:
     return User::Busy;
   default:
     qWarning() << "XMPP> unable to convert presence status" << xmpp_presence_status_type << "to user status";
@@ -584,7 +588,7 @@ void XmppManager::sendLocalUserPresence()
 {
   const User& u = Settings::instance().localUser();
   QXmppPresence::Type presence_type;
-  QXmppPresence::Status::Type presence_status_type;
+  QXmppPresence::AvailableStatusType presence_status_type;
 
   if( u.isConnected() )
     presence_type = QXmppPresence::Available;
@@ -594,13 +598,13 @@ void XmppManager::sendLocalUserPresence()
   switch( u.status() )
   {
   case User::Busy:
-    presence_status_type = QXmppPresence::Status::DND;
+    presence_status_type = QXmppPresence::DND;
     break;
   case User::Away:
-    presence_status_type = QXmppPresence::Status::Away;
+    presence_status_type = QXmppPresence::Away;
     break;
   default:
-    presence_status_type = QXmppPresence::Status::Online;
+    presence_status_type = QXmppPresence::Online;
   }
 
   foreach( XmppClient* mp_client, m_clients )
@@ -609,8 +613,8 @@ void XmppManager::sendLocalUserPresence()
     {
       QXmppPresence presence = mp_client->clientPresence();
       presence.setType( presence_type );
-      presence.status().setType( presence_status_type );
-      presence.status().setStatusText( u.statusDescription() );
+      presence.setAvailableStatusType( presence_status_type );
+      presence.setStatusText( u.statusDescription() );
       mp_client->setClientPresence( presence );
     }
   }
@@ -625,7 +629,7 @@ void XmppManager::presenceReceived( const QXmppPresence& presence )
     return;
   }
 
-  QString bare_jid = jidToBareJid( presence.from() );
+  QString bare_jid = QXmppUtils::jidToBareJid( presence.from() );
   if( mp_client->isLocalUser( bare_jid ) )
   {
     qDebug() << "XMPP> presence from local user received... skip it";
@@ -677,7 +681,7 @@ void XmppManager::vCardReceived( const QXmppVCardIq& vciq )
     return;
   }
 
-  QString bare_jid = jidToBareJid( vciq.from() );
+  QString bare_jid = QXmppUtils::jidToBareJid( vciq.from() );
 
   qDebug() << "XMPP> vCard received from user" << bare_jid;
   qDebug() << "XMPP> vCard nickname" << vciq.nickName();
@@ -769,7 +773,7 @@ void XmppManager::loadClients()
       mp_client->configuration().setIgnoreSslErrors( si->ignoreSslErrors() );
       mp_client->configuration().setStreamSecurityMode( (QXmppConfiguration::StreamSecurityMode)si->streamSecurityMode() );
       mp_client->configuration().setNonSASLAuthMechanism( (QXmppConfiguration::NonSASLAuthMechanism)si->nonSASLAuthMechanism() );
-      mp_client->configuration().setSASLAuthMechanism( (QXmppConfiguration::SASLAuthMechanism)si->sASLAuthMechanism() );
+      mp_client->configuration().setSaslAuthMechanism( si->sASLAuthMechanism() );
       qDebug() << "XMPP> Service" << mp_client->service() << "created";
     }
   }

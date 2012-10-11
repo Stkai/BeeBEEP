@@ -83,7 +83,7 @@ protected slots:
 
 protected:
   void makeSystemMessage( XmppClient*, const QString& bare_jid, const QString& txt );
-  User::Status statusFromPresence( QXmppPresence::Status::Type );
+  User::Status statusFromPresence( QXmppPresence::AvailableStatusType );
   void parseChatMessage( XmppClient*, const QString& bare_jid, const QXmppMessage& );
   void parseErrorMessage( XmppClient*, const QString& bare_jid, const QXmppMessage& );
   void checkUserChanged( XmppClient*, const QString& );

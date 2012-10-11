@@ -76,7 +76,7 @@ public:
   virtual bool ignoreSslErrors() const = 0;
   virtual int streamSecurityMode() const = 0;
   virtual int nonSASLAuthMechanism() const = 0;
-  virtual int sASLAuthMechanism() const = 0;
+  virtual QString sASLAuthMechanism() const = 0;
 
   virtual bool fileTransferIsEnabled() const = 0;
 
