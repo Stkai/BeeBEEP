@@ -109,7 +109,8 @@ int FacebookService::nonSASLAuthMechanism() const
 
 QString FacebookService::sASLAuthMechanism() const
 {
-  return QLatin1String( "X-FACEBOOK-PLATFORM" );
+  //return QLatin1String( "X-FACEBOOK-PLATFORM" );
+  return QLatin1String( "DIGEST-MD5" );
 }
 
 bool FacebookService::fileTransferIsEnabled() const

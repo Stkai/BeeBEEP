@@ -4,7 +4,7 @@ TARGET = beebeep
 TEMPLATE = app
 TRANSLATIONS = locale/beebeep_it.ts
 SOURCES += Listener.cpp \
-	FileTransferPeer.cpp \
+    FileTransferPeer.cpp \
     Connection.cpp \
     GuiChat.cpp \
     Message.cpp \
@@ -35,7 +35,7 @@ SOURCES += Listener.cpp \
     CoreChat.cpp \
     CoreDispatcher.cpp \
     CoreFileTransfer.cpp \
-    UserList.cpp \  
+    UserList.cpp \
     Broadcaster.cpp \
     VCard.cpp \
     GuiVCard.cpp \
@@ -90,12 +90,12 @@ HEADERS += sym_iap_util.h \
     GuiTransferFile.h \
     ColorManager.h \
     Core.h \
-    UserList.h \  
+    UserList.h \
     Broadcaster.h \
     VCard.h \
     GuiVCard.h \
     GuiEditVCard.h \
-    GuiUserItem.h \  
+    GuiUserItem.h \
     Interfaces.h \
     PluginManager.h \
     GuiPluginManager.h \
@@ -127,10 +127,10 @@ FORMS += GuiChat.ui \
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 
-LIBS += -L$$OUT_PWD/../qxmpp -lqxmpp0
+LIBS += -L$$DESTDIR -lqxmpp
+
 INCLUDEPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
 DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
-PRE_TARGETDEPS += $$OUT_PWD/../qxmpp/qxmpp0.dll
 
 
 

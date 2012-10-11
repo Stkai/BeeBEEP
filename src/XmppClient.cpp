@@ -39,7 +39,6 @@ XmppClient::XmppClient( QObject* parent )
   mp_transferManager = new QXmppTransferManager;
 
   connect( &(rosterManager()), SIGNAL( rosterReceived() ), this, SIGNAL( rosterReceived() ) );
-  connect( &(rosterManager()), SIGNAL( rosterChanged( const QString& ) ), this, SIGNAL( rosterChanged( const QString& ) ) );
   connect( &(rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SIGNAL( presenceChanged( const QString&, const QString& ) ) );
   connect( &(vCardManager()), SIGNAL( vCardReceived( const QXmppVCardIq& ) ), this, SIGNAL( vCardReceived( const QXmppVCardIq& ) ) );
   connect( &(vCardManager()), SIGNAL( clientVCardReceived() ), this, SIGNAL( clientVCardReceived() ) );
