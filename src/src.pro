@@ -127,7 +127,8 @@ FORMS += GuiChat.ui \
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 
-LIBS += -L$$DESTDIR -lqxmpp
+win32: LIBS += -L$$DESTDIR -lqxmpp0
+linux: LIBS += -L$$DESTDIR -lqxmpp
 
 INCLUDEPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
 DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
