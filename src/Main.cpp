@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#undef LOGFILE_ENABLED
 #undef QXMPP_LOGFILE
 
 #include <QApplication>
@@ -32,16 +31,16 @@
 #include "ColorManager.h"
 #include "FileShare.h"
 #include "GuiMain.h"
-#if defined( LOGFILE_ENABLED )
-  #include "Log.h"
-#endif
+#include "Log.h"
 #include "PluginManager.h"
 #include "UserManager.h"
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
-#if defined( QXMPP_LOGFILE )
+#ifdef USE_QXMPP
+#ifdef QXMPP_LOGFILE
   #include "QXmppLogger.h"
+#endif
 #endif
 
 
@@ -73,10 +72,14 @@ int main( int argc, char *argv[] )
   /* Load Settings */
   Settings::instance().load();
 
-#if defined( LOGFILE_ENABLED )
+#ifdef BEEBEEP_RELEASE
   /* Starting Logs */
-  Log::boot( Settings::instance().logPath() );
+  Log::boot();
   qInstallMsgHandler( Log::MessageHandler );
+#endif
+
+#ifdef USE_QXMPP
+  qDebug() << "Running QXmpp Version";
 #endif
 
   /* Apply system language */
@@ -102,8 +105,10 @@ int main( int argc, char *argv[] )
   PluginManager::instance().loadPlugins();
 
   /* Xmpp Logger */
-#if defined( QXMPP_LOGFILE )
+#ifdef USE_QXMPP
+#ifdef QXMPP_LOGFILE
   QXmppLogger::getLogger()->setLoggingType( QXmppLogger::FileLogging );
+#endif
 #endif
 
   /* Show Main Window */
@@ -141,7 +146,7 @@ int main( int argc, char *argv[] )
   Settings::instance().save();
   Settings::close();
 
-#if defined( LOGFILE_ENABLED )
+#ifdef BEEBEEP_RELEASE
   Log::close();
 #endif
   /* Exit */

@@ -95,6 +95,7 @@ void PluginManager::addPlugin( const QString& file_path )
     else
       qDebug() << file_path << "is not a text marker plugin";
 
+ #ifdef USE_QXMPP
     ServiceInterface* service_plugin = qobject_cast<ServiceInterface*>( plugin );
     if( service_plugin )
     {
@@ -107,6 +108,7 @@ void PluginManager::addPlugin( const QString& file_path )
     }
     else
       qDebug() << file_path << "is not a service plugin";
+#endif
 
     GameInterface* game_plugin = qobject_cast<GameInterface*>( plugin );
     if( game_plugin )

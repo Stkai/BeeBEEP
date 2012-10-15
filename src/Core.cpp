@@ -43,9 +43,11 @@ Core::Core( QObject* parent )
   qDebug() << "Broadcaster created";
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
+#ifdef USE_QXMPP
   mp_xmppManager = new XmppManager( this );
   qDebug() << "XmppManager created";
   mp_xmppManager->loadClients();
+#endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
@@ -53,6 +55,7 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
+#ifdef USE_QXMPP
   connect( mp_xmppManager, SIGNAL( message( const QString&, const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const QString&, const Message& ) ) );
   connect( mp_xmppManager, SIGNAL( userChangedInRoster( const User& ) ), this, SLOT( checkXmppUser( const User& ) ) );
   connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString&, const QString& ) ), this, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ) );
@@ -60,6 +63,7 @@ Core::Core( QObject* parent )
   connect( mp_xmppManager, SIGNAL( vCardReceived( const QString&, const QString&, const VCard& ) ), this, SLOT( setXmppVCard( const QString&, const QString&, const VCard& ) ) );
   connect( mp_xmppManager, SIGNAL( serviceConnected( const QString& ) ), this, SIGNAL( serviceConnected( const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( serviceDisconnected( const QString& ) ), this, SIGNAL( serviceDisconnected( const QString& ) ) );
+#endif
 }
 
 bool Core::start()
@@ -126,7 +130,9 @@ bool Core::start()
 
 void Core::stop()
 {
+#ifdef USE_QXMPP
   mp_xmppManager->disconnectFromServer();
+#endif
   mp_broadcaster->stopBroadcasting();
   stopFileTransferServer();
   mp_listener->close();
@@ -171,9 +177,11 @@ bool Core::isConnected( bool check_also_network_service ) const
   if( mp_listener->isListening() )
     return true;
 
+#ifdef USE_QXMPP
   if( check_also_network_service )
     return mp_xmppManager->isConnected();
   else
+#endif
     return false;
 }
 

@@ -1,4 +1,6 @@
 
+DEFINES += USE_QXMPP
+
 DESTDIR = $$PWD/test
 
 Debug {
@@ -6,5 +8,9 @@ Debug {
 }
 
 Release {
-  DEFINES += QT_NO_WARNING_OUTPUT QT_NO_DEBUG_OUTPUT
+  DEFINES += BEEBEEP_RELEASE
+}
+
+contains(DEFINES, USE_QXMPP) {
+   message(Building QXmpp version...)
 }

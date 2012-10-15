@@ -33,25 +33,33 @@
 
 bool Core::isXmppServerConnected( const QString& xmpp_service ) const
 {
+#ifdef USE_QXMPP
   XmppClient* xmpp_client = mp_xmppManager->client( xmpp_service );
   return xmpp_client && xmpp_client->isActive();
+#else
+  return false;
+#endif
 }
 
 bool Core::connectToXmppServer( const NetworkAccount& na )
 {
+#ifdef USE_QXMPP
   ServiceInterface* s = PluginManager::instance().service( na.service() );
   if( s && s->isEnabled() )
     return mp_xmppManager->connectToServer( na.service(), na.user(), na.password() );
   else
+#endif
     return false;
 }
 
 void Core::disconnectFromXmppServer( const QString& service )
 {
+#ifdef USE_QXMPP
   if( service.isEmpty() )
     mp_xmppManager->disconnectFromServer();
   else
     mp_xmppManager->disconnectFromServer( service );
+#endif
 }
 
 void Core::parseXmppMessage( const QString& service, const QString& bare_jid, const Message& m )
@@ -98,35 +106,45 @@ void Core::checkXmppUser( const User& user_to_check )
 
 void Core::sendXmppChatMessage( const User& u, const Message& msg )
 {
+#ifdef USE_QXMPP
   mp_xmppManager->sendMessage( u, msg );
+#endif
 }
 
 void Core::setXmppUserSubscription( const QString& service, const QString& bare_jid, bool accepted )
 {
+#ifdef USE_QXMPP
   mp_xmppManager->subscribeUser( service, bare_jid, accepted );
+#endif
 }
 
 bool Core::removeXmppUser( const User& u )
 {
+#ifdef USE_QXMPP
   if( UserManager::instance().removeUser( u ) )
   {
     mp_xmppManager->removeUser( u );
     return true;
   }
   else
+#endif
     return false;
 }
 
 void Core::sendLocalUserStatusToXmppServer()
 {
+#ifdef USE_QXMPP
   mp_xmppManager->sendLocalUserPresence();
+#endif
 }
 
 void Core::checkXmppUserVCard( const QString& service, const QString& bare_jid )
 {
+#ifdef USE_QXMPP
   User u = UserManager::instance().userList().find( service, bare_jid );
   if( u.isValid() )
     mp_xmppManager->requestVCard( service, bare_jid );
+#endif
 }
 
 void Core::setXmppVCard( const QString& service, const QString& bare_jid, const VCard& vc )
@@ -144,11 +162,15 @@ void Core::sendXmppUserComposing( const User& u )
 {
   if( !u.isConnected() )
     return;
+#ifdef USE_QXMPP
   mp_xmppManager->sendComposingMessage( u );
+#endif
 }
 
 void Core::sendLocalVCardToXmppServer()
 {
+#ifdef USE_QXMPP
   if( mp_xmppManager->isConnected() )
     mp_xmppManager->sendLocalUserVCard();
+#endif
 }

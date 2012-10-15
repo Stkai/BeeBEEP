@@ -100,6 +100,8 @@ public:
 
   inline bool debugMode() const;
   inline void setDebugMode( bool );
+  inline bool logToFile() const;
+  inline void setLogToFile( bool );
 
   inline const QString& language() const;
   inline void setLanguage( const QString& );
@@ -201,6 +203,7 @@ private:
   QString m_hash;
 
   bool m_debugMode;
+  bool m_logToFile;
 
   QString m_language;
 
@@ -278,6 +281,8 @@ inline const QByteArray& Settings::password() const { return m_password; }
 inline QString Settings::defaultPassword() const { return "*"; }
 inline bool Settings::debugMode() const { return m_debugMode; }
 inline void Settings::setDebugMode( bool new_value ) { m_debugMode = new_value; }
+inline bool Settings::logToFile() const { return m_logToFile; }
+inline void Settings::setLogToFile( bool new_value ) { m_logToFile = new_value; }
 inline const QString& Settings::language() const { return m_language; }
 inline void Settings::setLanguage( const QString& new_value ) { m_language = new_value; }
 inline const QString& Settings::lastDirectorySelected() const { return m_lastDirectorySelected; }

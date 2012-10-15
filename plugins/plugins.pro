@@ -1,11 +1,17 @@
+include(../beebeep.pri)
 
 TEMPLATE = subdirs
 
-SUBDIRS = rainbowtextmarker \
+contains(DEFINES, USE_QXMPP) {
+  SUBDIRS += facebookservice \
+            gtalkservice \
+            jabberservice \
+            windowsliveservice \
+            twitterservice
+}
+
+SUBDIRS += rainbowtextmarker \
 			numbertextmarker \
-			facebookservice \
-			gtalkservice \
-			jabberservice \
-			windowsliveservice \
-			twitterservice \
 			tetrisgame
+
+

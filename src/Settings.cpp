@@ -229,10 +229,11 @@ void Settings::load()
 
   sets.beginGroup( "Tools" );
 #if defined( BEEBEEP_DEBUG )
-  m_debugMode = sets.value( "DebugMode", true ).toBool();
+  m_debugMode = true;
 #else
   m_debugMode = sets.value( "DebugMode", false ).toBool();
 #endif
+  m_logToFile = sets.value( "LogToFile", false ).toBool();
   m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
   m_automaticFileName = sets.value( "AutomaticFileName", true ).toBool();
   sets.endGroup();
@@ -357,7 +358,12 @@ void Settings::save()
   sets.setValue( "MinimizeInTray", m_minimizeInTray );
   sets.endGroup();
   sets.beginGroup( "Tools" );
+#if defined( BEEBEEP_DEBUG )
+  sets.setValue( "DebugMode", false );
+#else
   sets.setValue( "DebugMode", m_debugMode );
+#endif
+  sets.setValue( "LogToFile", m_logToFile );
   sets.setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets.setValue( "AutomaticFileName", m_automaticFileName );
   sets.endGroup();

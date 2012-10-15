@@ -21,6 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#ifdef USE_QXMPP
+
 #include "XmppClient.h"
 #include "FileInfo.h"
 #include "Settings.h"
@@ -133,3 +135,4 @@ void XmppClient::sendVCard( const QXmppVCardIq& vciq )
   setClientPresence( presence );
 }
 
+#endif // USE_QXMPP

@@ -166,9 +166,6 @@ void GuiMessageEdit::checkWriting()
 {
   if( !toPlainText().isEmpty() )
   {
-#if defined( BEEBEEP_DEBUG )
-    qDebug() << "You are writing";
-#endif
     emit writing();
   }
 }

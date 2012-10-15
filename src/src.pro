@@ -1,8 +1,8 @@
 include(../beebeep.pri)
+
 QT += network xml
 TARGET = beebeep
 TEMPLATE = app
-TRANSLATIONS = locale/beebeep_it.ts
 SOURCES += Listener.cpp \
     FileTransferPeer.cpp \
     Connection.cpp \
@@ -44,11 +44,9 @@ SOURCES += Listener.cpp \
     PluginManager.cpp \
     GuiPluginManager.cpp \
     ChatMessageData.cpp \
-    XmppManager.cpp \
     CoreXmpp.cpp \
     GuiNetwork.cpp \
     GuiNetworkLogin.cpp \
-    XmppClient.cpp \
     UserManager.cpp \
     ChatManager.cpp \
     GuiChatItem.cpp \
@@ -100,10 +98,8 @@ HEADERS += sym_iap_util.h \
     PluginManager.h \
     GuiPluginManager.h \
     ChatMessageData.h \
-    XmppManager.h \
     GuiNetwork.h \
     GuiNetworkLogin.h \
-    XmppClient.h \
     UserManager.h \
     ChatManager.h \
     GuiChatItem.h \
@@ -114,6 +110,7 @@ HEADERS += sym_iap_util.h \
     FileShare.h \
     GuiShareLocal.h \
     GuiShareNetwork.h
+
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
@@ -127,11 +124,17 @@ FORMS += GuiChat.ui \
 RESOURCES += beebeep.qrc
 RC_FILE = beebeep.rc
 
-win32: LIBS += -L$$DESTDIR -lqxmpp0
-linux: LIBS += -L$$DESTDIR -lqxmpp
+contains(DEFINES, USE_QXMPP) {
 
-INCLUDEPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
-DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
+  HEADERS += XmppClient.h  XmppManager.h
+  SOURCES += XmppClient.cpp  XmppManager.cpp
+
+  win32: LIBS += -L$$DESTDIR -lqxmpp0
+  linux: LIBS += -L$$DESTDIR -lqxmpp
+
+  INCLUDEPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
+  DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
+}
 
 
 

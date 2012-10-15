@@ -146,6 +146,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
   }
   else
   {
+#ifdef USE_QXMPP
     if( !u.isConnected() )
     {
       dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
@@ -158,6 +159,10 @@ bool Core::sendFile( const User& u, const QString& file_path )
                              .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser );
       return false;
     }
+#else
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not found." ).arg( icon_html ), DispatchToAllChatsWithUser );
+    return false;
+#endif // USE_QXMPP
   }
 
   dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file %2 to %3." )

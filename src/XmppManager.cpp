@@ -21,6 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#ifdef USE_QXMPP
+
 #include "BeeUtils.h"
 #include "PluginManager.h"
 #include "Protocol.h"
@@ -845,3 +847,5 @@ void XmppManager::sendLocalUserVCard()
   foreach( XmppClient* mp_client, m_clients )
     mp_client->sendVCard( vciq );
 }
+
+#endif // USE_QXMPP

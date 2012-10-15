@@ -29,7 +29,7 @@
 #include <QDateTime>
 #include <QtDebug>
 #include <QFile>
-
+#include "Settings.h"
 
 namespace Log
 {
@@ -38,11 +38,14 @@ namespace Log
   QFile *LogFile = NULL;
   const QString LogFileName = "beebeep.log";
 
-  void boot( const QString& log_dir )
+  void boot()
   {
+    if( !Settings::instance().logToFile() )
+      return;
+
     if( !LogStream )
     {
-      QString log_path = QString( "%1/%2" ).arg( log_dir, LogFileName );
+      QString log_path = QString( "%1/%2" ).arg( Settings::instance().logPath(), LogFileName );
       LogFile = new QFile( log_path, 0 );
       if( LogFile->open( QIODevice::WriteOnly ) )
 	    LogStream = new QTextStream( LogFile );
@@ -99,13 +102,22 @@ namespace Log
       break;
     }
 
+    if( sHeader.size() < 3 && !Settings::instance().debugMode() )
+      return;
+
+    QString sTmp = QString( "%1%2%3" ).arg( QDateTime::currentDateTime().toString( "dd/MM/yyyy hh:mm:ss" ) )
+                                          .arg( sHeader )
+                                          .arg( sMessage );
     if( LogStream )
-      (*LogStream) << QDateTime::currentDateTime().toString( "dd/MM/yyyy hh:mm:ss" ) 
-                   << sHeader 
-			       << sMessage.remove( "\"" ) // FIXME: QT does something strange with peer_address toString
-			       << endl << flush;
+    {
+      (*LogStream) << sTmp << endl;
+    }
     else
-      fprintf( stderr, msg );
+    {
+      sTmp += QLatin1Char( '\n' );
+      fprintf( stderr, sTmp.toLatin1() );
+      fflush( stderr );
+    }
   }
 }
 

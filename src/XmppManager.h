@@ -24,6 +24,8 @@
 #ifndef BEEBEEP_XMPPMANAGER_H
 #define BEEBEEP_XMPPMANAGER_H
 
+#ifdef USE_QXMPP
+
 #include "Config.h"
 #include "Message.h"
 #include "XmppClient.h"
@@ -100,5 +102,7 @@ private:
 // Inline Functions
 inline const QList<XmppClient*>& XmppManager::clientList() const { return m_clients; }
 
+
+#endif // USE_QXMPP
 
 #endif // BEEBEEP_XMPPMANAGER_H

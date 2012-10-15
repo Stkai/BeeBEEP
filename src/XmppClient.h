@@ -24,6 +24,8 @@
 #ifndef BEEBEEP_XMPPCLIENT_H
 #define BEEBEEP_XMPPCLIENT_H
 
+#ifdef USE_QXMPP
+
 #include "Config.h"
 #include "QXmppClient.h"
 #include "QXmppTransferManager.h"
@@ -93,5 +95,8 @@ inline void XmppClient::setConnectionState( XmppClient::ConnectionState new_valu
 inline void XmppClient::setClientUser( const User& new_value ) { m_clientUser = new_value; }
 inline const User& XmppClient::clientUser() const { return m_clientUser; }
 inline bool XmppClient::isLocalUser( const QString& bare_jid ) const { return m_clientUser.bareJid() == bare_jid; }
+
+
+#endif // USE_QXMPP
 
 #endif // BEEBEEP_XMPPCLIENT_H
