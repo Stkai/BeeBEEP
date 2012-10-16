@@ -82,37 +82,6 @@ int FacebookService::hostPort() const
   return 5222;
 }
 
-QString FacebookService::domain() const
-{
-  return QLatin1String( "chat.facebook.com" );
-}
-
-bool FacebookService::useSASLAuthentication()
-{
-  return true;
-}
-
-bool FacebookService::ignoreSslErrors() const
-{
-  return true;
-}
-
-int FacebookService::streamSecurityMode() const
-{
-  return 2; // TLSRequired
-}
-
-int FacebookService::nonSASLAuthMechanism() const
-{
-  return 1;
-}
-
-QString FacebookService::sASLAuthMechanism() const
-{
-  //return QLatin1String( "X-FACEBOOK-PLATFORM" );
-  return QLatin1String( "DIGEST-MD5" );
-}
-
 bool FacebookService::fileTransferIsEnabled() const
 {
   return false;

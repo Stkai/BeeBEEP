@@ -82,36 +82,6 @@ int GTalkService::hostPort() const
   return 5222;
 }
 
-QString GTalkService::domain() const
-{
-  return QLatin1String( "google.com" );
-}
-
-bool GTalkService::useSASLAuthentication()
-{
-  return true;
-}
-
-bool GTalkService::ignoreSslErrors() const
-{
-  return true;
-}
-
-int GTalkService::streamSecurityMode() const
-{
-  return 2; // TLSRequired
-}
-
-int GTalkService::nonSASLAuthMechanism() const
-{
-  return 1;
-}
-
-QString GTalkService::sASLAuthMechanism() const
-{
-  return QLatin1String( "DIGEST-MD5" );
-}
-
 bool GTalkService::fileTransferIsEnabled() const
 {
   return false;

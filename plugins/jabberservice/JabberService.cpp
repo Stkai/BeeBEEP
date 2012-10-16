@@ -82,36 +82,6 @@ int JabberService::hostPort() const
   return 5222;
 }
 
-QString JabberService::domain() const
-{
-  return QLatin1String( "jabber.org" );
-}
-
-bool JabberService::useSASLAuthentication()
-{
-  return true;
-}
-
-bool JabberService::ignoreSslErrors() const
-{
-  return true;
-}
-
-int JabberService::streamSecurityMode() const
-{
-  return 0;
-}
-
-int JabberService::nonSASLAuthMechanism() const
-{
-  return 1;
-}
-
-QString JabberService::sASLAuthMechanism() const
-{
-  return QLatin1String( "" );
-}
-
 bool JabberService::fileTransferIsEnabled() const
 {
   return false;

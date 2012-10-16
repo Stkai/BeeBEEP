@@ -82,36 +82,6 @@ int TwitterService::hostPort() const
   return 5222;
 }
 
-QString TwitterService::domain() const
-{
-  return QLatin1String( "twitter" );
-}
-
-bool TwitterService::useSASLAuthentication()
-{
-  return true;
-}
-
-bool TwitterService::ignoreSslErrors() const
-{
-  return true;
-}
-
-int TwitterService::streamSecurityMode() const
-{
-  return 0; // TLS if available
-}
-
-int TwitterService::nonSASLAuthMechanism() const
-{
-  return 1;
-}
-
-QString TwitterService::sASLAuthMechanism() const
-{
-  return QLatin1String( "" );
-}
-
 bool TwitterService::fileTransferIsEnabled() const
 {
   return false;

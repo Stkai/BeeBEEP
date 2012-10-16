@@ -39,7 +39,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="mp_lJid">
         <property name="text">
-         <string>User</string>
+         <string>JID</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

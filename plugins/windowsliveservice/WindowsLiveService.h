@@ -49,12 +49,6 @@ public:
   QString protocol() const;
   QString hostAddress() const;
   int hostPort() const;
-  QString domain() const;
-  bool useSASLAuthentication();
-  bool ignoreSslErrors() const;
-  int streamSecurityMode() const;
-  int nonSASLAuthMechanism() const;
-  QString sASLAuthMechanism() const;
 
   bool fileTransferIsEnabled() const;
 

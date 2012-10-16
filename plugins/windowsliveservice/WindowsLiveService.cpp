@@ -82,36 +82,6 @@ int WindowsLiveService::hostPort() const
   return 5222;
 }
 
-QString WindowsLiveService::domain() const
-{
-  return QLatin1String( "messenger.live.com" );
-}
-
-bool WindowsLiveService::useSASLAuthentication()
-{
-  return true;
-}
-
-bool WindowsLiveService::ignoreSslErrors() const
-{
-  return true;
-}
-
-int WindowsLiveService::streamSecurityMode() const
-{
-  return 2; // TLSRequired
-}
-
-int WindowsLiveService::nonSASLAuthMechanism() const
-{
-  return 1;
-}
-
-QString WindowsLiveService::sASLAuthMechanism() const
-{
-  return QLatin1String( "X-MESSENGER-OAUTH2" );
-}
-
 bool WindowsLiveService::fileTransferIsEnabled() const
 {
   return false;
