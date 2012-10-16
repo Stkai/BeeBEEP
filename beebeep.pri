@@ -11,6 +11,3 @@ Release {
   DEFINES += BEEBEEP_RELEASE
 }
 
-contains(DEFINES, USE_QXMPP) {
-   message(Building QXmpp version...)
-}

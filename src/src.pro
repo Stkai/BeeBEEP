@@ -126,11 +126,13 @@ RC_FILE = beebeep.rc
 
 contains(DEFINES, USE_QXMPP) {
 
+  message(Building BeeBEEP with Xmpp support...)
+
   HEADERS += XmppClient.h  XmppManager.h
   SOURCES += XmppClient.cpp  XmppManager.cpp
 
   win32: LIBS += -L$$DESTDIR -lqxmpp0
-  linux: LIBS += -L$$DESTDIR -lqxmpp
+  unix: LIBS += -L$$DESTDIR -lqxmpp
 
   INCLUDEPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
   DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server

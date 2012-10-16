@@ -48,19 +48,19 @@ namespace Log
       QString log_path = QString( "%1/%2" ).arg( Settings::instance().logPath(), LogFileName );
       LogFile = new QFile( log_path, 0 );
       if( LogFile->open( QIODevice::WriteOnly ) )
-	    LogStream = new QTextStream( LogFile );
-	  else
-	  {
-	    qWarning() << "Unable to open" << log_path;
-		delete LogFile;
-		LogFile = NULL;
+        LogStream = new QTextStream( LogFile );
+      else
+      {
+        qWarning() << "Unable to open" << log_path;
+        delete LogFile;
+        LogFile = NULL;
         LogStream = NULL;
-	  }
+      }
     }
   }
 
   void close()
-  {  
+  {
     if( LogStream )
     {
       qDebug() << "Log closed";
@@ -68,7 +68,7 @@ namespace Log
       delete LogStream;
       LogStream = NULL;
     }
-	
+
     if( LogFile )
     {
       LogFile->flush();
@@ -85,7 +85,7 @@ namespace Log
 
     if( sMessage.isNull() || sMessage.isEmpty() )
       return;
-  
+
     switch( type )
     {
     case QtWarningMsg:
@@ -96,7 +96,7 @@ namespace Log
       break;
     case QtFatalMsg:
       abort();
-	  break;
+      break;
     default:
       sHeader = " ";
       break;
@@ -106,8 +106,9 @@ namespace Log
       return;
 
     QString sTmp = QString( "%1%2%3" ).arg( QDateTime::currentDateTime().toString( "dd/MM/yyyy hh:mm:ss" ) )
-                                          .arg( sHeader )
-                                          .arg( sMessage );
+                                      .arg( sHeader )
+                                      .arg( sMessage );
+
     if( LogStream )
     {
       (*LogStream) << sTmp << endl;
@@ -115,7 +116,7 @@ namespace Log
     else
     {
       sTmp += QLatin1Char( '\n' );
-      fprintf( stderr, sTmp.toLatin1() );
+      fprintf( stderr, sTmp.toLatin1().data() );
       fflush( stderr );
     }
   }

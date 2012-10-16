@@ -1,6 +1,10 @@
 BEEBEEP (Secure Network Chat)
 
-BeeBBEP 0.8.2
+BeeBEEP 0.9.2
+- Improved XMPP support
+
+
+BeeBEEP 0.8.2
 - File Sharing on local area network
 - Minimize on System Tray option
 
