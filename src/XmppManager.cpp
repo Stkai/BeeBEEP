@@ -65,6 +65,13 @@ XmppClient* XmppManager::createClient( const QString& client_service, const QStr
   mp_client->setupManagers();
   mp_client->setService( client_service );
   mp_client->setIconPath( client_icon_path );
+  if( Settings::instance().logToFile() )
+  {
+    QString log_path = QString( "%1/%2" ).arg( Settings::instance().logPath(), "beebeep-xmpp.log" );
+    mp_client->logger()->setLoggingType( QXmppLogger::FileLogging );
+    mp_client->logger()->setMessageTypes( QXmppLogger::AnyMessage );
+    mp_client->logger()->setLogFilePath( log_path );
+  }
 
   connect( mp_client, SIGNAL( error( QXmppClient::Error ) ), this, SLOT( errorOccurred( QXmppClient::Error ) ) );
   connect( mp_client, SIGNAL( connected() ), this, SLOT( serverConnected() ) );
