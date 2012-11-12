@@ -58,6 +58,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_swChat->addWidget( mp_view );
 
+  gridLayout->setContentsMargins(1, 1, 1, 1); // FIXME!!!!
 
   if( Settings::instance().chatUseTextView() )
     mp_swChat->setCurrentWidget( mp_pageChatText );
