@@ -220,15 +220,16 @@ void GuiChatGraphicsItem::calculateBoxWidth()
 
 void GuiChatGraphicsItem::setChatMessage( const ChatMessage& cm )
 {
-  if( cm.isFromLocalUser() )
-  {
-    m_name = "Me";
-    m_color = QColor( 211, 211, 211 );
-  }
-  else if( cm.isSystem() )
+  if( cm.isSystem() )
   {
     m_name = "Bee";
     m_color = QColor( 255, 165, 0 );
+        m_color = QColor( 255, 222, 173 );
+  }
+  else if( cm.isFromLocalUser() )
+  {
+    m_name = "Me";
+    m_color = QColor( 211, 211, 211 );
   }
   else
   {
@@ -236,6 +237,10 @@ void GuiChatGraphicsItem::setChatMessage( const ChatMessage& cm )
     m_name = u.name();
     m_color = QColor( 255, 222, 173 );
   }
+
+  qDebug() << "Box for:" << cm.message().text();
+
+  setText( cm.message().text() );
 }
 
 QRectF GuiChatGraphicsItem::boundingRect() const

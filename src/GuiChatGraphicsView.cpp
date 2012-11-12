@@ -28,10 +28,10 @@
 
 GuiChatGraphicsView::GuiChatGraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
-    setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFrameStyle(QFrame::NoFrame);
+  setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  setFrameStyle(QFrame::NoFrame);
 }
 
 void GuiChatGraphicsView::setChatGraphicsScene( GuiChatGraphicsScene* scene )
