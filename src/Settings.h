@@ -77,6 +77,8 @@ public:
   inline bool chatUseHtmlTags() const;
   inline void setChatUseClickableLinks( bool );
   inline bool chatUseClickableLinks() const;
+  inline void setChatUseTextView( bool );
+  inline bool chatUseTextView() const;
   inline const QString& chatSaveDirectory() const;
   inline void setChatSaveDirectory( const QString& );
   inline bool showOnlyOnlineUsers() const;
@@ -190,10 +192,12 @@ private:
   bool m_chatShowMessageTimestamp;
   bool m_chatUseHtmlTags;
   bool m_chatUseClickableLinks;
+  bool m_chatUseTextView;
   QString m_chatSaveDirectory;
   bool m_showOnlyOnlineUsers;
   bool m_showUserColor;
   bool m_showEmoticons;
+
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -266,6 +270,8 @@ inline void Settings::setChatUseHtmlTags( bool new_value ) { m_chatUseHtmlTags =
 inline bool Settings::chatUseHtmlTags() const { return m_chatUseHtmlTags; }
 inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClickableLinks = new_value; }
 inline bool Settings::chatUseClickableLinks() const { return m_chatUseClickableLinks; }
+inline void Settings::setChatUseTextView( bool new_value ) { m_chatUseTextView = new_value; }
+inline bool Settings::chatUseTextView() const { return m_chatUseTextView; }
 inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDirectory; }
 inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
 inline bool Settings::showOnlyOnlineUsers() const { return m_showOnlyOnlineUsers; }
