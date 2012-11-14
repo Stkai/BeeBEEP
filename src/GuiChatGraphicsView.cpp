@@ -32,6 +32,7 @@ GuiChatGraphicsView::GuiChatGraphicsView(QWidget* parent) : QGraphicsView(parent
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setFrameStyle(QFrame::NoFrame);
+  setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 }
 
 void GuiChatGraphicsView::setChatGraphicsScene( GuiChatGraphicsScene* scene )
@@ -45,6 +46,7 @@ void GuiChatGraphicsView::addChatMessage( const ChatMessage& chat_message )
   if( mp_scene )
     mp_scene->addChatMessage( chat_message );
 
+/*
   QRectF rect = scene()->sceneRect();
   rect.adjust(-4, -4, 4, 4);
   setSceneRect(rect);
@@ -52,6 +54,7 @@ void GuiChatGraphicsView::addChatMessage( const ChatMessage& chat_message )
   rect.setTop(sceneRect().height() - 20);
   rect.setWidth(20);
   ensureVisible(rect, 50, 50);
+  */
 }
 
 void GuiChatGraphicsView::resizeEvent(QResizeEvent *event)

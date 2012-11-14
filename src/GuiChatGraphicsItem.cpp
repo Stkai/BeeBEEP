@@ -139,7 +139,7 @@ void GuiChatGraphicsItem::paint( QPainter *p, const QStyleOptionGraphicsItem*, Q
   text_doc.setTextWidth( boxTextWidth() );
   text_doc.setDefaultFont( font );
 
-  p->setPen(Qt::white);
+  p->setPen( Qt::darkGreen );
   p->setFont( font );
 
   int text_height = (int) text_doc.size().height();
@@ -246,7 +246,7 @@ void GuiChatGraphicsItem::setChatMessage( const ChatMessage& cm )
 QRectF GuiChatGraphicsItem::boundingRect() const
 {
   QRectF rect = QGraphicsPathItem::boundingRect();
-  rect.setLeft( -boxStartLength() );
+  rect.setLeft( -m_boxStartLength );
 
   int time_width;
   if( m_timeStampWidth > m_boxStartLength )

@@ -29,12 +29,24 @@
 
 
 GuiChatGraphicsScene::GuiChatGraphicsScene( QObject* parent )
- : QGraphicsScene( parent ), m_verticalPosForNewMessage( 0 ), m_verticalSpacing( 5 )
+ : QGraphicsScene( parent ), m_verticalPosForNewMessage( 0 ), m_verticalSpacing( 2 )
 {
 }
 
 void GuiChatGraphicsScene::addChatMessage(const ChatMessage& chat_message )
 {
+  if( chat_message.message().text().simplified().isEmpty() )
+  {
+    qDebug() << "GuiChatGraphicsScene: Skip empty message";
+    return;
+  }
+
+  QGraphicsTextItem* i = addText( chat_message.message().text() );
+  i->setHtml( chat_message.message().text() );
+  i->setPos( 0, m_verticalPosForNewMessage );
+
+
+#if 0
   GuiChatGraphicsItem* item = new GuiChatGraphicsItem();
   m_items.append(item);
   item->setChatMessage( chat_message );
@@ -44,6 +56,10 @@ void GuiChatGraphicsScene::addChatMessage(const ChatMessage& chat_message )
   int height = item->boundingRect().height();
   m_verticalPosForNewMessage = m_verticalPosForNewMessage + height + m_verticalSpacing;
   addItem(item);
+#endif
+
+int height = i->boundingRect().height();
+  m_verticalPosForNewMessage = m_verticalPosForNewMessage + height + m_verticalSpacing;
 
   QRectF rect = sceneRect();
   rect.setHeight(m_verticalPosForNewMessage);

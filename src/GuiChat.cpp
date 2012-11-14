@@ -52,7 +52,7 @@ GuiChat::GuiChat( QWidget *parent )
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
-  mp_view = new GuiChatGraphicsView( this) ;
+  mp_view = new GuiChatGraphicsView( this ) ;
   mp_scene = new GuiChatGraphicsScene( this );
   mp_view->setChatGraphicsScene( mp_scene );
 

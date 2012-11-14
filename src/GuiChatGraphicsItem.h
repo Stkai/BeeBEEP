@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-
 #ifndef BEEBEEP_GUICHATGRAPHICSITEM_H
 #define BEEBEEP_GUICHATGRAPHICSITEM_H
 
@@ -79,3 +78,4 @@ inline int GuiChatGraphicsItem::boxStartLength() const { return m_boxStartLength
 inline void GuiChatGraphicsItem::setViewWidth( int w ) { m_boxMaxWidth = w - m_boxStartLength - 25; } // 25 for scrollbar
 
 #endif // BEEBEEP_GUICHATGRAPHICSITEM_H
+

@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-
 #ifndef BEEBEEP_GUICHATGRAPHICSSCENE_H
 #define BEEBEEP_GUICHATGRAPHICSSCENE_H
 
@@ -56,3 +55,4 @@ inline void GuiChatGraphicsScene::setBoxStartLength( int value ) { m_boxStartLen
 
 
 #endif // BEEBEEP_GUICHATGRAPHICSSCENE_H
+
