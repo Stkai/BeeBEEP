@@ -56,10 +56,7 @@ SOURCES += Listener.cpp \
     GuiWizard.cpp \
     FileShare.cpp \
     GuiShareLocal.cpp \
-    GuiShareNetwork.cpp \
-    GuiChatGraphicsView.cpp \
-    GuiChatGraphicsScene.cpp \
-    GuiChatGraphicsItem.cpp
+    GuiShareNetwork.cpp 
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -112,10 +109,7 @@ HEADERS += sym_iap_util.h \
     GuiWizard.h \
     FileShare.h \
     GuiShareLocal.h \
-    GuiShareNetwork.h \
-    GuiChatGraphicsView.h \
-    GuiChatGraphicsScene.h \
-    GuiChatGraphicsItem.h
+    GuiShareNetwork.h 
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \
