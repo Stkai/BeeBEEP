@@ -27,8 +27,6 @@
 #include "ui_GuiChat.h"
 #include "UserList.h"
 class ChatMessage;
-class GuiChatGraphicsView;
-class GuiChatGraphicsScene;
 
 
 class GuiChat : public QWidget, private Ui::GuiChatWidget
@@ -68,8 +66,6 @@ private:
   VNumber m_chatId;
   UserList m_users;
 
-  GuiChatGraphicsView* mp_view;
-  GuiChatGraphicsScene* mp_scene;
 };
 
 

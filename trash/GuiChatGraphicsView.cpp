@@ -17,51 +17,53 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiChat.h 113 2011-09-26 18:01:56Z mastroddi $
+// $Id: GuiChatGraphicsView.cpp 205 2012-11-14 18:57:19Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "GuiChatGraphicsScene.h"
 #include "GuiChatGraphicsView.h"
+#include "GuiChatGraphicsScene.h"
+#include <QResizeEvent>
 
 
-GuiChatGraphicsView::GuiChatGraphicsView( QWidget* parent )
-  : QGraphicsView( parent )
+GuiChatGraphicsView::GuiChatGraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
-  setAlignment( Qt::AlignHCenter | Qt::AlignTop );
-  setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
-  setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-  setFrameStyle( QFrame::NoFrame );
+  setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  setFrameStyle(QFrame::NoFrame);
+  setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 }
 
 void GuiChatGraphicsView::setChatGraphicsScene( GuiChatGraphicsScene* scene )
 {
-  m_scene = scene;
-  setScene( m_scene );
+  mp_scene = scene;
+  setScene( mp_scene );
 }
 
-void GuiChatGraphicsView::addMessage( const ChatMessage& cm )
+void GuiChatGraphicsView::addChatMessage( const ChatMessage& chat_message )
 {
-  if( m_scene )
-    m_scene->addMessage( cm );
+  if( mp_scene )
+    mp_scene->addChatMessage( chat_message );
 
+/*
   QRectF rect = scene()->sceneRect();
   rect.adjust(-4, -4, 4, 4);
-  setSceneRect( rect );
-
+  setSceneRect(rect);
   rect = sceneRect();
-  rect.setTop( sceneRect().height() - 20 );
-  rect.setWidth( 20 );
-  ensureVisible( rect, 50, 50 );
+  rect.setTop(sceneRect().height() - 20);
+  rect.setWidth(20);
+  ensureVisible(rect, 50, 50);
+  */
 }
 
 void GuiChatGraphicsView::resizeEvent(QResizeEvent *event)
 {
-// pass this to scene
-  m_scene->setWidthResize( event->size().width(), event->oldSize().width() );
-  QGraphicsView::resizeEvent( event );
+//  pass this to scene
+    mp_scene->setWidthResize(event->size().width(), event->oldSize().width());
+    QGraphicsView::resizeEvent(event);
 
-  QRectF rect = scene()->sceneRect();
-  rect.adjust(-4, -4, 4, 4);
-  setSceneRect( rect );
+    QRectF rect = scene()->sceneRect();
+    rect.adjust(-4, -4, 4, 4);
+    setSceneRect(rect);
 }

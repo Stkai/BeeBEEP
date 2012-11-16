@@ -17,15 +17,14 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiChat.h 113 2011-09-26 18:01:56Z mastroddi $
+// $Id: GuiChatGraphicsView.h 205 2012-11-14 18:57:19Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
-
 
 #ifndef BEEBEEP_GUICHATGRAPHICSVIEW_H
 #define BEEBEEP_GUICHATGRAPHICSVIEW_H
 
-#include "Config.h"
+#include <QGraphicsView>
 class ChatMessage;
 class GuiChatGraphicsScene;
 
@@ -33,16 +32,16 @@ class GuiChatGraphicsScene;
 class GuiChatGraphicsView : public QGraphicsView
 {
 public:
-  GuiChatGraphicsView( QWidget* );
+  GuiChatGraphicsView(QWidget* parent = 0);
 
   void setChatGraphicsScene( GuiChatGraphicsScene* );
-  void addMessage( const ChatMessage& );
+  void addChatMessage( const ChatMessage& );
 
 protected:
   void resizeEvent( QResizeEvent* );
 
 private:
-  GuiChatGraphicsScene* m_scene;
+  GuiChatGraphicsScene* mp_scene;
 
 };
 

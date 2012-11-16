@@ -31,9 +31,6 @@
 #include "Settings.h"
 #include "UserManager.h"
 
-#include "GuiChatGraphicsScene.h"
-#include "GuiChatGraphicsView.h"
-
 
 GuiChat::GuiChat( QWidget *parent )
  : QWidget( parent )
@@ -51,19 +48,6 @@ GuiChat::GuiChat( QWidget *parent )
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
-
-  mp_view = new GuiChatGraphicsView( this ) ;
-  mp_scene = new GuiChatGraphicsScene( this );
-  mp_view->setChatGraphicsScene( mp_scene );
-
-  mp_swChat->addWidget( mp_view );
-
-  gridLayout->setContentsMargins(1, 1, 1, 1); // FIXME!!!!
-
-  if( Settings::instance().chatUseTextView() )
-    mp_swChat->setCurrentWidget( mp_pageChatText );
-  else
-    mp_swChat->setCurrentWidget( mp_view );
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -346,8 +330,6 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   }
 
   appendMessage( chatMessageToText( cm ) );
-
-  mp_scene->addChatMessage( cm );
 
   if( read_all_messages )
     setLastMessageTimestamp( cm.message().timestamp() );

@@ -17,49 +17,43 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiChat.h 113 2011-09-26 18:01:56Z mastroddi $
+// $Id: GuiChatGraphicsItem.h 205 2012-11-14 18:57:19Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
-
 
 #ifndef BEEBEEP_GUICHATGRAPHICSITEM_H
 #define BEEBEEP_GUICHATGRAPHICSITEM_H
 
-#include "Config.h"
+#include <QGraphicsPathItem>
 class ChatMessage;
 
 
 class GuiChatGraphicsItem : public QGraphicsPathItem
 {
 public:
-  enum Alignment { BoxOnLeft = 0, BoxOnRight };
-
-  GuiChatGraphicsItem( QGraphicsItem * parent = 0 );
+  GuiChatGraphicsItem(QGraphicsItem * parent = 0);
 
   void setChatMessage( const ChatMessage& );
-  void setMaxWidth(int );
 
-  inline int maxWidth() const;
+  void setBoxMaxWidth( int );
+  inline int boxMaxWidth() const;
   inline void setViewWidth( int );
-  inline void setBoxStartLength( int );
   inline int boxStartLength() const;
+  inline void setBoxStartLength( int );
 
-  QRectF boundingRect() const;
+  virtual QRectF boundingRect() const;
 
 protected:
   void paint( QPainter*, const QStyleOptionGraphicsItem*, QWidget* );
-  QPainterPath createPath();
-  int textWidth() const;
-  void calculateWidth();
+  void createPath();
+  inline int boxTextWidth() const;
+  void calculateBoxWidth();
+  void setText( const QString& );
 
 private:
-  // max width of bubble including the spike
-  int m_maxWidth;
-  // actual width
-  int m_width;
-
-  // height of bubble
-  int m_height;
+  int m_boxMaxWidth;
+  int m_boxWidth;
+  int m_boxHeight;
   int m_spikeWidth;
   int m_spikeHeight;
   int m_cornerRadius;
@@ -67,22 +61,21 @@ private:
   int m_boxStartLength;
   int m_timeStampWidth;
 
-  int m_length;
-  Alignment m_alignment;
-
   QColor m_color;
-
-  QString m_name;
   QString m_text;
+  QString m_name;
   QString m_timeStamp;
+  int m_length;
 
 };
 
+
 // Inline Functions
-inline int GuiChatGraphicsItem::textWidth() const { return m_maxWidth - m_spikeWidth - m_cornerRadius * 2; }
-inline int GuiChatGraphicsItem::maxWidth() const { return m_maxWidth; }
-inline void GuiChatGraphicsItem::setBoxStartLength( int new_value ) { m_boxStartLength = new_value; }
+inline int GuiChatGraphicsItem::boxMaxWidth() const { return m_boxMaxWidth; }
+inline int GuiChatGraphicsItem::boxTextWidth() const { return m_boxMaxWidth - m_spikeWidth - m_cornerRadius*2; }
+inline void GuiChatGraphicsItem::setBoxStartLength( int value ) { m_boxStartLength = value; }
 inline int GuiChatGraphicsItem::boxStartLength() const { return m_boxStartLength; }
-inline void GuiChatGraphicsItem::setViewWidth( int new_value ) { setMaxWidth( new_value - m_boxStartLength - 25 ); } // 25 for scrollbar
+inline void GuiChatGraphicsItem::setViewWidth( int w ) { m_boxMaxWidth = w - m_boxStartLength - 25; } // 25 for scrollbar
 
 #endif // BEEBEEP_GUICHATGRAPHICSITEM_H
+

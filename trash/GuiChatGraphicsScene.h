@@ -17,15 +17,15 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiChat.h 113 2011-09-26 18:01:56Z mastroddi $
+// $Id: GuiChatGraphicsScene.h 205 2012-11-14 18:57:19Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
-
 
 #ifndef BEEBEEP_GUICHATGRAPHICSSCENE_H
 #define BEEBEEP_GUICHATGRAPHICSSCENE_H
 
-#include "Config.h"
+#include <QGraphicsScene>
+#include <QList>
 class ChatMessage;
 class GuiChatGraphicsItem;
 
@@ -33,26 +33,26 @@ class GuiChatGraphicsItem;
 class GuiChatGraphicsScene : public QGraphicsScene
 {
 public:
-  GuiChatGraphicsScene( QObject* );
+  GuiChatGraphicsScene( QObject* parent = 0 );
 
-  void addMessage( const ChatMessage& );
+  void addChatMessage( const ChatMessage& );
+
   void setWidthResize( int new_width, int old_width );
   void verticalReposition();
-
   inline void setBoxStartLength( int );
 
 private:
   int m_verticalPosForNewMessage;
   int m_verticalSpacing;
   int m_boxStartLength;
-
   QList<GuiChatGraphicsItem*> m_items;
 
 };
 
 
 // Inline Functions
-void GuiChatGraphicsScene::setBoxStartLength( int new_value ) { m_boxStartLength = new_value; }
+inline void GuiChatGraphicsScene::setBoxStartLength( int value ) { m_boxStartLength = value; }
 
 
 #endif // BEEBEEP_GUICHATGRAPHICSSCENE_H
+

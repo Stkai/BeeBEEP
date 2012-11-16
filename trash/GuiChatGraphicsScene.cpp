@@ -17,40 +17,49 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiChat.h 113 2011-09-26 18:01:56Z mastroddi $
+// $Id: GuiChatGraphicsScene.cpp 205 2012-11-14 18:57:19Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "GuiChatGraphicsItem.h"
+#include "ChatMessage.h"
+#include "UserManager.h"
 #include "GuiChatGraphicsScene.h"
+#include "GuiChatGraphicsItem.h"
 #include "GuiChatGraphicsView.h"
 
 
 GuiChatGraphicsScene::GuiChatGraphicsScene( QObject* parent )
-  : QGraphicsScene( parent ), m_verticalPosForNewMessage( 0 ), m_verticalSpacing( 5 ),
-    m_boxStartLength( 2 ), m_items()
+ : QGraphicsScene( parent ), m_verticalPosForNewMessage( 0 ), m_verticalSpacing( 2 )
 {
 }
 
-void GuiChatGraphicsScene::addMessage( const ChatMessage& cm )
+void GuiChatGraphicsScene::addChatMessage(const ChatMessage& chat_message )
 {
+  if( chat_message.message().text().simplified().isEmpty() )
+  {
+    qDebug() << "GuiChatGraphicsScene: Skip empty message";
+    return;
+  }
+
   GuiChatGraphicsItem* item = new GuiChatGraphicsItem();
-  m_items.append( item );
+  m_items.append(item);
+  item->setChatMessage( chat_message );
   item->setBoxStartLength( m_boxStartLength );
   item->setViewWidth( 350 );
-  item->setChatMessage( cm );
   item->setPos( 0, m_verticalPosForNewMessage );
   int height = item->boundingRect().height();
   m_verticalPosForNewMessage = m_verticalPosForNewMessage + height + m_verticalSpacing;
   addItem(item);
 
   QRectF rect = sceneRect();
-  rect.setHeight( m_verticalPosForNewMessage) ;
-  setSceneRect( rect );
+  rect.setHeight(m_verticalPosForNewMessage);
+  setSceneRect(rect);
 }
 
 void GuiChatGraphicsScene::setWidthResize(int newWidth, int oldWidth)
 {
+    Q_UNUSED(newWidth);
+    Q_UNUSED(oldWidth);
 //    verticalReposition();
 }
 
@@ -72,9 +81,8 @@ void GuiChatGraphicsScene::verticalReposition()
     if(item)
     {
         rect.setHeight(m_verticalPosForNewMessage);
-        rect.setWidth(item->maxWidth() + item->boxStartLength() - 4);
+        rect.setWidth(item->boxMaxWidth() + item->boxStartLength() - 4);
         setSceneRect(rect);
     }
 }
-
 

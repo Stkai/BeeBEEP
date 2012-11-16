@@ -186,7 +186,6 @@ void Settings::load()
   m_chatUseClickableLinks = sets.value( "UseClickableLinks", true ).toBool();
   m_chatMessageHistorySize = sets.value( "MessageHistorySize", 10 ).toInt();
   m_showEmoticons = sets.value( "ShowEmoticons", true ).toBool();
-  m_chatUseTextView = sets.value( "UseTextView", true ).toBool();
   sets.endGroup();
 
   sets.beginGroup( "User" );
@@ -330,7 +329,6 @@ void Settings::save()
   sets.setValue( "UseClickableLinks", m_chatUseClickableLinks );
   sets.setValue( "MessageHistorySize", m_chatMessageHistorySize );
   sets.setValue( "ShowEmoticons", m_showEmoticons );
-  sets.setValue( "UseTextView", m_chatUseTextView );
   sets.endGroup();
   sets.beginGroup( "User" );
   sets.setValue( "LocalColor", m_localUser.color() );
