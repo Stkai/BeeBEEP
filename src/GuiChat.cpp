@@ -49,6 +49,8 @@ GuiChat::GuiChat( QWidget *parent )
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
+  m_lastMessageUserId = 0;
+
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
@@ -202,7 +204,7 @@ QString FormatHtmlText( const QString& text )
   return text_formatted;
 }
 
-QString FormatMessage( const User& u, const ChatMessage& cm )
+QString FormatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id )
 {
   QString text_formatted = FormatHtmlText( cm.message().text() );
   ChatMessageData cm_data = Protocol::instance().dataFromChatMessage( cm.message() );
@@ -212,13 +214,17 @@ QString FormatMessage( const User& u, const ChatMessage& cm )
     text_formatted.append( QString( "</font>" ) );
   }
 
-  QString sHtmlMessage = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
-            .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
-            .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
-            .arg( u.isLocal() ? QObject::tr( "You" ) : u.name() )
-            .arg( Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
-            .arg( text_formatted );
-  return sHtmlMessage;
+  bool append_message_to_previous = last_user_id > 0 && last_user_id == u.id();
+  QString user_name = append_message_to_previous ? QString( "&nbsp;&nbsp;&nbsp;" ) : u.isLocal() ? QObject::tr( "You" ) : u.name();
+
+  QString html_message = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
+      .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
+      .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
+      .arg( user_name )
+      .arg( append_message_to_previous ? "&nbsp;" : Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
+      .arg( text_formatted );
+
+  return html_message;
 }
 
 QString FormatSystemMessage( const ChatMessage& cm )
@@ -234,10 +240,17 @@ QString FormatSystemMessage( const ChatMessage& cm )
 QString GuiChat::chatMessageToText( const ChatMessage& cm )
 {
   QString s;
+
   if( cm.isSystem() )
+  {
     s = FormatSystemMessage( cm );
+    m_lastMessageUserId = 0;
+  }
   else
-    s = FormatMessage( m_users.find( cm.userId() ), cm );
+  {
+    s = FormatMessage( m_users.find( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0 );
+    m_lastMessageUserId = cm.userId();
+  }
   s += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
   return s;
 }

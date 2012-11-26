@@ -402,6 +402,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showEmoticons() );
   act->setData( 10 );
 
+  act = mp_menuSettings->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the messages will be showed grouped by user" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showMessagesGroupByUser() );
+  act->setData( 13 );
+
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
@@ -732,6 +738,10 @@ void GuiMain::settingsChanged()
     break;
   case 12:
     Settings::instance().setFileShare( act->isChecked() );
+    break;
+  case 13:
+    Settings::instance().setShowMessagesGroupByUser( act->isChecked() );
+    refresh_chat = true;
     break;
   case 99:
     break;

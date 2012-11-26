@@ -85,6 +85,8 @@ public:
   inline void setShowUserColor( bool );
   inline bool showEmoticons() const;
   inline void setShowEmoticons( bool );
+  inline bool showMessagesGroupByUser() const;
+  inline void setShowMessagesGroupByUser( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
@@ -194,7 +196,7 @@ private:
   bool m_showOnlyOnlineUsers;
   bool m_showUserColor;
   bool m_showEmoticons;
-
+  bool m_showMessagesGroupByUser;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -296,6 +298,8 @@ inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
 inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
 inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new_value; }
 inline bool Settings::showUserColor() const { return m_showUserColor; }
+inline bool Settings::showMessagesGroupByUser() const { return m_showMessagesGroupByUser; }
+inline void Settings::setShowMessagesGroupByUser( bool new_value ) { m_showMessagesGroupByUser = new_value; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::useNetworkProxy() const { return m_networkProxy.type() != QNetworkProxy::NoProxy; }

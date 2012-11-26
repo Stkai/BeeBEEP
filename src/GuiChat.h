@@ -65,6 +65,7 @@ private slots:
 private:
   VNumber m_chatId;
   UserList m_users;
+  VNumber m_lastMessageUserId;
 
 };
 
