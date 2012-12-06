@@ -115,7 +115,6 @@ protected slots:
   void parseXmppMessage( const QString& service, const QString& bare_jid, const Message& );
   void checkXmppUser( const User& );
   void sendXmppChatMessage( const User&, const Message& );
-  void checkXmppUserVCard( const QString& service, const QString& bare_jid );
   void setXmppVCard( const QString& service, const QString& bare_jid, const VCard& );
   void sendXmppUserComposing( const User& );
 

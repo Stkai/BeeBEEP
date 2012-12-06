@@ -138,20 +138,13 @@ void Core::sendLocalUserStatusToXmppServer()
 #endif
 }
 
-void Core::checkXmppUserVCard( const QString& service, const QString& bare_jid )
-{
-#ifdef USE_QXMPP
-  User u = UserManager::instance().userList().find( service, bare_jid );
-  if( u.isValid() )
-    mp_xmppManager->requestVCard( service, bare_jid );
-#endif
-}
-
 void Core::setXmppVCard( const QString& service, const QString& bare_jid, const VCard& vc )
 {
   User u = UserManager::instance().userList().find( service, bare_jid );
   if( u.isValid() )
   {
+    if( u.vCard() == vc )
+      return;
     u.setVCard( vc );
     UserManager::instance().setUser( u );
     showUserVCardChanged( u );

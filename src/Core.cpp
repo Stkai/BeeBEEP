@@ -59,7 +59,6 @@ Core::Core( QObject* parent )
   connect( mp_xmppManager, SIGNAL( message( const QString&, const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const QString&, const Message& ) ) );
   connect( mp_xmppManager, SIGNAL( userChangedInRoster( const User& ) ), this, SLOT( checkXmppUser( const User& ) ) );
   connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString&, const QString& ) ), this, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ) );
-  connect( mp_xmppManager, SIGNAL( vCardAvailable( const QString&, const QString& ) ), this, SLOT( checkXmppUserVCard( const QString&, const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( vCardReceived( const QString&, const QString&, const VCard& ) ), this, SLOT( setXmppVCard( const QString&, const QString&, const VCard& ) ) );
   connect( mp_xmppManager, SIGNAL( serviceConnected( const QString& ) ), this, SIGNAL( serviceConnected( const QString& ) ) );
   connect( mp_xmppManager, SIGNAL( serviceDisconnected( const QString& ) ), this, SIGNAL( serviceDisconnected( const QString& ) ) );

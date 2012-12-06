@@ -273,7 +273,11 @@ void XmppManager::rosterReceived()
   foreach( QString bare_jid, bare_jid_list )
     checkUserChanged( mp_client, bare_jid );
 
-  requestVCard( mp_client->service(), "" );
+  if( !mp_client->vCardManager().isClientVCardReceived() )
+  {
+    qDebug() << "XMPP> client vCard requested from" << mp_client->service();
+    mp_client->vCardManager().requestClientVCard();
+  }
 }
 
 void XmppManager::rosterChanged( const QString& bare_jid )
@@ -348,34 +352,27 @@ void XmppManager::presenceChanged( const QString& bare_jid, const QString& jid_r
     case QXmppPresence::VCardUpdateNotReady:
       break;
     case QXmppPresence::VCardUpdateNone:
+      break;
     case QXmppPresence::VCardUpdateNoPhoto:
     case QXmppPresence::VCardUpdateValidPhoto:
-      qDebug() << "XMPP> vCard is available for user" << bare_jid;
-      emit vCardAvailable( mp_client->service(), bare_jid );
+      {
+        qDebug() << "XMPP> vCard is available for user" << bare_jid;
+        if( mp_client->isLocalUser( bare_jid ) )
+        {
+          if( !mp_client->vCardManager().isClientVCardReceived() )
+          {
+            qDebug() << "XMPP> client vCard requested from" << mp_client->service();
+            mp_client->vCardManager().requestClientVCard();
+          }
+        }
+        else
+          mp_client->vCardManager().requestVCard( bare_jid );
+      }
       break;
     default:
       qDebug() << "XMPP> vCardUpdateType unknown in presence message";
     }
   }
-}
-
-void XmppManager::requestVCard( const QString& service, const QString& bare_jid )
-{
-  XmppClient* mp_client = client( service );
-  if( !mp_client )
-    return;
-  qDebug() << "XMPP> requesting vCard for user" << bare_jid;
-
-  if( bare_jid.isEmpty() || mp_client->isLocalUser( bare_jid ) )
-  {
-    if( !mp_client->vCardManager().isClientVCardReceived() )
-    {
-      qDebug() << "XMPP> client vCard requested from" << service;
-      mp_client->vCardManager().requestClientVCard();
-    }
-  }
-  else
-    mp_client->vCardManager().requestVCard( bare_jid );
 }
 
 void XmppManager::messageReceived( const QXmppMessage& xmpp_msg )

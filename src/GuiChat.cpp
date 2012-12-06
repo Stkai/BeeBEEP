@@ -215,9 +215,9 @@ QString FormatMessage( const User& u, const ChatMessage& cm, VNumber last_user_i
   }
 
   bool append_message_to_previous = last_user_id > 0 && last_user_id == u.id();
-  QString user_name = append_message_to_previous ? QString( "&nbsp;&nbsp;&nbsp;" ) : u.isLocal() ? QObject::tr( "You" ) : u.name();
+  QString user_name = append_message_to_previous ? QString( "&nbsp;&nbsp;" ) : u.isLocal() ? QObject::tr( "You" ) : u.name();
 
-  QString html_message = QString( "%1<font color=%2><b>%3</b>%4%5</font>" )
+  QString html_message = QString( "%1<font color=%2><b>%3</b>%4</font>%5" )
       .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.message().timestamp().toString( "(hh:mm:ss)" ) ) : "" )
       .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
       .arg( user_name )

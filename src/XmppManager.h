@@ -55,7 +55,6 @@ public:
   void sendMessage( const User&, const Message& );
   void subscribeUser( const QString& service, const QString& bare_jid, bool );
   void removeUser( const User& );
-  void requestVCard( const QString& service, const QString& bare_jid );
   void sendLocalUserPresence();
   bool sendFile( const User&, const FileInfo& );
 
@@ -67,7 +66,6 @@ signals:
   void userChangedInRoster( const User& );
   void userSubscriptionRequest( const QString& service, const QString& bare_jid );
   void vCardReceived( const QString& service, const QString& bare_jid, const VCard& );
-  void vCardAvailable( const QString& service, const QString& bare_jid );
   void serviceConnected( const QString& );
   void serviceDisconnected( const QString& );
 
