@@ -104,19 +104,45 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
 
-  showChat( ID_DEFAULT_CHAT );
   initGuiItems();
   raiseChatView();
 }
 
-void GuiMain::refreshTitle()
+void GuiMain::refreshTitle( const User& )
 {
-  setWindowTitle( QString( "%1 - %2 (%3)" ).arg(
-                    Settings::instance().programName(),
-                    Settings::instance().localUser().name(),
-                    (mp_core->isConnected( true ) ?
-                       Bee::userStatusToString( Settings::instance().localUser().status() ) :
-                       tr( "offline" ) ) ) );
+  QString window_title;
+
+  window_title = QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName(),
+                     Settings::instance().localUser().name(),
+                     mp_core->isConnected( true ) ?
+                     Bee::userStatusToString( Settings::instance().localUser().status() ) : tr( "offline" ) );
+
+#if 0
+  if( !mp_core->isConnected( true ) )
+  {
+    window_title = QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName(),
+                     Settings::instance().localUser().name(), tr( "offline" ) );
+  }
+  else
+  {
+    Chat c = ChatManager::instance().privateChatForUser( u.id() );
+    if( c.id() == mp_defaultChat->chatId() && !isVisible() )
+    {
+      window_title = QString( "%1%2 (%3) - %4" ).arg(
+                     c.unreadMessages() > 0 ? QString( "(%1) " ).arg( c.unreadMessages() ) : "",
+                     u.name(),
+                     Bee::userStatusToString( u.status() ),
+                     Settings::instance().programName() );
+    }
+    else
+      window_title = QString( "%1 - %2 (%3)" ).arg(
+                       Settings::instance().programName(),
+                       Settings::instance().localUser().name(),
+                       Bee::userStatusToString( Settings::instance().localUser().status() ) );
+  }
+#endif
+
+  setWindowTitle( window_title );
 }
 
 void GuiMain::forceExit()
@@ -212,7 +238,6 @@ void GuiMain::initGuiItems()
   bool enable = mp_core->isConnected( false );
   bool enable_verbose = mp_core->isConnected( true );
 
-  refreshTitle();
   showChat( ID_DEFAULT_CHAT );
 
   if( enable )
@@ -234,6 +259,8 @@ void GuiMain::initGuiItems()
 
   updateStatusIcon();
   mp_shareLocal->loadSettings();
+
+  refreshTitle( Settings::instance().localUser() );
 }
 
 void GuiMain::showAbout()
@@ -618,8 +645,7 @@ void GuiMain::checkUser( const User& u )
     return;
   }
 
-  if( u.isLocal() )
-    refreshTitle();
+  refreshTitle( u );
 
   qDebug() << "User" << u.path() << "has updated his info. Check it";
   mp_userList->setUser( u );
@@ -767,17 +793,20 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
   {
-    QApplication::alert( this, 2000 );
-    if( Settings::instance().beepOnNewMessageArrived() && !(isVisible() && is_current_chat) )
+    if( !(isVisible() && is_current_chat) )
     {
-      qDebug() << "New message arrived in background: play BEEP sound";
-      if( QSound::isAvailable() )
+      QApplication::alert( this );
+      if( Settings::instance().beepOnNewMessageArrived() )
       {
-        QSound beep_sound( "beep.wav" );
-        beep_sound.play();
+        qDebug() << "New message arrived in background: play BEEP sound";
+        if( QSound::isAvailable() )
+        {
+          QSound beep_sound( "beep.wav" );
+          beep_sound.play();
+        }
+        else
+          QApplication::beep();
       }
-      else
-        QApplication::beep();
     }
   }
 
@@ -794,6 +823,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     {
       mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
       mp_chatList->updateChat( chat_id );
+      refreshTitle( UserManager::instance().userList().find( cm.userId() ) );
     }
   }
 }
@@ -903,7 +933,6 @@ void GuiMain::changeStatusDescription()
   if( !ok || status_description.isNull() )
     return;
   mp_core->setLocalUserStatusDescription( status_description );
-  refreshTitle();
 }
 
 void GuiMain::sendFile()
@@ -1324,7 +1353,7 @@ void GuiMain::showWizard()
   gw.show();
   gw.setFixedSize( gw.size() );
   if( gw.exec() == QDialog::Accepted )
-    refreshTitle();
+    refreshTitle( Settings::instance().localUser() );
 }
 
 void GuiMain::hideToTrayIcon()

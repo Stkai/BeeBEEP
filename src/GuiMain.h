@@ -111,7 +111,7 @@ private:
   void createPluginWindows();
   void refreshUserList();
   void refreshChat();
-  void refreshTitle();
+  void refreshTitle( const User& );
   void startCore();
   void stopCore();
   void initGuiItems();

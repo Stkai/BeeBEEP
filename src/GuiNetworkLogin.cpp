@@ -67,8 +67,16 @@ void GuiNetworkLogin::setNetworkAccount( const NetworkAccount& na, const QString
   if( current_index > 0 )
     mp_comboService->setCurrentIndex( current_index );
 
-  mp_leUser->setText( na.user() );
-  mp_lePassword->setText( na.password() );
+  if( na.saveUser() )
+    mp_leUser->setText( na.user() );
+  else
+    mp_leUser->setText( "" );
+
+  if( na.savePassword() )
+    mp_lePassword->setText( na.password() );
+  else
+    mp_lePassword->setText( "" );
+
   mp_cbRememberMe->setChecked( na.saveUser() );
   mp_cbRememberPassword->setChecked( na.savePassword() );
   mp_cbAutomaticConnection->setChecked( na.autoConnect() );
