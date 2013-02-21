@@ -87,6 +87,8 @@ public:
   inline void setShowEmoticons( bool );
   inline bool showMessagesGroupByUser() const;
   inline void setShowMessagesGroupByUser( bool );
+  inline bool stayOnTop() const;
+  inline void setStayOnTop( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
@@ -197,6 +199,7 @@ private:
   bool m_showUserColor;
   bool m_showEmoticons;
   bool m_showMessagesGroupByUser;
+  bool m_stayOnTop;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -300,6 +303,8 @@ inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new
 inline bool Settings::showUserColor() const { return m_showUserColor; }
 inline bool Settings::showMessagesGroupByUser() const { return m_showMessagesGroupByUser; }
 inline void Settings::setShowMessagesGroupByUser( bool new_value ) { m_showMessagesGroupByUser = new_value; }
+inline bool Settings::stayOnTop() const { return m_stayOnTop; }
+inline void Settings::setStayOnTop( bool new_value ) { m_stayOnTop = new_value; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::useNetworkProxy() const { return m_networkProxy.type() != QNetworkProxy::NoProxy; }

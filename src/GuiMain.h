@@ -45,6 +45,7 @@ class GuiMain : public QMainWindow
 
 public:
   GuiMain( QWidget* parent = 0 );
+  void checkWindowFlagsAndShow();
 
 public slots:
   void startStopCore();

@@ -127,7 +127,7 @@ int main( int argc, char *argv[] )
   else
     mw.resize( QSize( 640, 420 ) );
 
-  mw.show();
+  mw.checkWindowFlagsAndShow();
 #endif
 
   // Starting connection to BeeBEEP Network

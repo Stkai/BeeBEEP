@@ -226,6 +226,7 @@ void Settings::load()
   m_pluginPath = sets.value( "PluginPath", "." ).toString();
   m_localePath = sets.value( "LocalePath", "." ).toString();
   m_minimizeInTray = sets.value( "MinimizeInTray", true ).toBool();
+  m_stayOnTop = sets.value( "StayOnTop" ).toBool();
   sets.endGroup();
 
   sets.beginGroup( "Tools" );
@@ -358,6 +359,7 @@ void Settings::save()
   sets.setValue( "PluginPath", m_pluginPath );
   sets.setValue( "LocalePath", m_localePath );
   sets.setValue( "MinimizeInTray", m_minimizeInTray );
+  sets.setValue( "StayOnTop", m_stayOnTop );
   sets.endGroup();
   sets.beginGroup( "Tools" );
 #if defined( BEEBEEP_DEBUG )

@@ -108,6 +108,20 @@ GuiMain::GuiMain( QWidget *parent )
   raiseChatView();
 }
 
+void GuiMain::checkWindowFlagsAndShow()
+{
+  if( Settings::instance().stayOnTop() )
+  {
+    setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
+  }
+  else
+  {
+    setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);
+  }
+
+  show();
+}
+
 void GuiMain::refreshTitle( const User& )
 {
   QString window_title;
@@ -458,6 +472,12 @@ void GuiMain::createMenus()
     act->setData( 11 );
   }
 
+  act = mp_menuSettings->addAction( tr( "Stay on top" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled %1 stays on top of the other windows" ).arg( Settings::instance().programName() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().stayOnTop() );
+  act->setData( 14 );
+
   act = mp_menuSettings->addAction( tr( "Enable file sharing" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled you can share files with the other users" ) );
   act->setCheckable( true );
@@ -768,6 +788,10 @@ void GuiMain::settingsChanged()
   case 13:
     Settings::instance().setShowMessagesGroupByUser( act->isChecked() );
     refresh_chat = true;
+    break;
+  case 14:
+    Settings::instance().setStayOnTop( act->isChecked() );
+    checkWindowFlagsAndShow();
     break;
   case 99:
     break;
