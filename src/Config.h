@@ -27,6 +27,8 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtNetwork>
+#include <QtWidgets>
+#include <QtMultimedia>
 
 // Type definition
 typedef quint64 VNumber;

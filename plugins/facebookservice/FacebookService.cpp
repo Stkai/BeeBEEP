@@ -114,4 +114,4 @@ FacebookService::FacebookService()
   qDebug() << "Facebook service plugin loaded";
 }
 
-Q_EXPORT_PLUGIN2( beefacebook, FacebookService )
+Q_EXPORT_PLUGIN2( beefacebook, FacebookService );

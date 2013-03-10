@@ -44,9 +44,9 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   mp_twShares->setRootIsDecorated( false );
 
   QHeaderView* hv = mp_twShares->header();
-  hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
-  hv->setResizeMode( ColumnSize, QHeaderView::ResizeToContents );
-  hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
+  hv->setSectionResizeMode( ColumnFile, QHeaderView::ResizeToContents );
+  hv->setSectionResizeMode( ColumnSize, QHeaderView::ResizeToContents );
+  hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
 
   for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
     mp_comboFileType->insertItem( i, QIcon( Bee::fileTypeIconFileName( (Bee::FileType)i ) ), Bee::fileTypeToString( (Bee::FileType)i ), i );

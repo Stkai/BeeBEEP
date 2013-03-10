@@ -46,7 +46,7 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   mp_twLocalShares->setSortingEnabled( true );
 
   QHeaderView* header_view = mp_twLocalShares->header();
-  header_view->setResizeMode( QHeaderView::ResizeToContents );
+  header_view->setSectionResizeMode( QHeaderView::ResizeToContents );
   header_view->setSortIndicator( 0, Qt::AscendingOrder );
 
   header_view = mp_twMyShares->header();

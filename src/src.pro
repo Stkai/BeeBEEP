@@ -1,6 +1,6 @@
 include(../beebeep.pri)
 
-QT += network xml
+QT += network xml widgets multimedia
 TARGET = beebeep
 TEMPLATE = app
 SOURCES += Listener.cpp \

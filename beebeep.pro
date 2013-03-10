@@ -10,4 +10,6 @@ SUBDIRS += src plugins
 
 CONFIG += ordered
 
+macx:CONFIG -= app_bundle
+
 TRANSLATIONS += locale/beebeep_it.ts

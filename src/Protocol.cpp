@@ -269,7 +269,7 @@ QPixmap Protocol::stringToPixmap( const QString& s ) const
   QPixmap pix;
   if( s.isEmpty() )
     return pix;
-  QByteArray byte_array = QByteArray::fromBase64( s.toAscii() );
+  QByteArray byte_array = QByteArray::fromBase64( s.toLatin1() );
   pix.loadFromData( byte_array, "PNG" );
   return pix;
 }
@@ -661,7 +661,7 @@ QString Protocol::simpleEncrypt( const QString& plain_text )
   char key = 'k';
   QString encrypted_text = "";
   for( int i = 0; i < plain_text.size(); i++ )
-    encrypted_text += plain_text.at( i ).toAscii() ^ (int(key) + i) % 255;
+    encrypted_text += plain_text.at( i ).toLatin1() ^ (int(key) + i) % 255;
   return encrypted_text;
 }
 
@@ -672,7 +672,7 @@ QString Protocol::simpleDecrypt( const QString& encrypted_text )
   char key = 'k';
   QString plain_text = "";
   for( int i = 0; i < encrypted_text.size(); i++ )
-    plain_text += encrypted_text.at( i ).toAscii() ^ (int(key) + i) % 255;
+    plain_text += encrypted_text.at( i ).toLatin1() ^ (int(key) + i) % 255;
   return plain_text;
 }
 

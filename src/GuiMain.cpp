@@ -823,7 +823,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       if( Settings::instance().beepOnNewMessageArrived() )
       {
         qDebug() << "New message arrived in background: play BEEP sound";
-        if( QSound::isAvailable() )
+        if( QFile::exists( "beep.wav" ) )
         {
           QSound beep_sound( "beep.wav" );
           beep_sound.play();
