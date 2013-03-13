@@ -82,8 +82,6 @@ TetrisGame::TetrisGame()
   mp_tetris = new GuiTetris();
 }
 
-Q_EXPORT_PLUGIN2( beetetris, TetrisGame )
-
 TetrisGame::~TetrisGame()
 {
   delete mp_tetris;
@@ -99,5 +97,5 @@ bool TetrisGame::isPaused() const
   return mp_tetris->board()->isPaused();
 }
 
-
+Q_PLUGIN_METADATA(IID "beebeep.plugin.GameInterface/2.0")
 

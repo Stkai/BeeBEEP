@@ -33,6 +33,7 @@ class BEEFACEBOOKSERVICESHARED_EXPORT FacebookService : public QObject, public S
 {
   Q_OBJECT
   Q_INTERFACES( ServiceInterface )
+  Q_PLUGIN_METADATA(IID "beebeep.plugin.ServiceInterface/2.0")
 
 public:
   FacebookService();

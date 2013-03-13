@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_GUITETRIS_H
 #define BEEBEEP_GUITETRIS_H
 
-#include <QWidget>
+#include <QtWidgets>
 #include "ui_GuiTetris.h"
 class TetrisBoard;
 

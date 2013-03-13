@@ -114,4 +114,4 @@ GTalkService::GTalkService()
   qDebug() << "GTalk service plugin loaded";
 }
 
-Q_EXPORT_PLUGIN2( beegtalk, GTalkService )
+Q_PLUGIN_METADATA(IID "beebeep.plugin.ServiceInterface/2.0")

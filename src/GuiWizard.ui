@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
-    <height>119</height>
+    <width>338</width>
+    <height>134</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
+   <item row="0" column="0" colspan="2">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0" rowspan="2">
       <widget class="QLabel" name="mp_lPix">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -44,52 +44,22 @@
        </property>
       </widget>
      </item>
-     <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>13</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="1" colspan="2">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+     <item row="0" column="1">
       <widget class="QLabel" name="mp_lWelcome">
        <property name="text">
         <string>Welcome</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignJustify|Qt::AlignTop</set>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="mp_lName">
-       <property name="text">
-        <string>Your nickname is:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
+     <item row="1" column="1">
       <widget class="QLineEdit" name="mp_leName"/>
      </item>
     </layout>
    </item>
-   <item row="1" column="0" colspan="2">
+   <item row="1" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -102,7 +72,7 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="1">
     <widget class="QPushButton" name="mp_pbOk">
      <property name="text">
       <string>Ok</string>
@@ -111,6 +81,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>mp_leName</tabstop>
+  <tabstop>mp_pbOk</tabstop>
+ </tabstops>
  <resources>
   <include location="beebeep.qrc"/>
  </resources>

@@ -114,4 +114,4 @@ JabberService::JabberService()
   qDebug() << "Jabber service plugin loaded";
 }
 
-Q_EXPORT_PLUGIN2( beejabber, JabberService )
+Q_PLUGIN_METADATA(IID "beebeep.plugin.ServiceInterface/2.0")

@@ -35,6 +35,7 @@ class BEETETRISGAMESHARED_EXPORT TetrisGame : public QObject, public GameInterfa
 {
   Q_OBJECT
   Q_INTERFACES( GameInterface )
+  Q_PLUGIN_METADATA(IID "beebeep.plugin.GameInterface/2.0")
 
 public:
   TetrisGame();

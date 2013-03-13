@@ -33,6 +33,7 @@ class BEEJABBERSERVICESHARED_EXPORT JabberService : public QObject, public Servi
 {
   Q_OBJECT
   Q_INTERFACES( ServiceInterface )
+  Q_PLUGIN_METADATA(IID "beebeep.plugin.ServiceInterface/2.0")
 
 public:
   JabberService();

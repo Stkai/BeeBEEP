@@ -114,4 +114,4 @@ TwitterService::TwitterService()
   qDebug() << "Twitter service plugin loaded";
 }
 
-Q_EXPORT_PLUGIN2( beetwitter, TwitterService )
+Q_PLUGIN_METADATA(IID "beebeep.plugin.ServiceInterface/2.0")

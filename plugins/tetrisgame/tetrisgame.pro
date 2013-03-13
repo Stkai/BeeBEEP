@@ -2,6 +2,7 @@ include(../plugins.pri)
 
 TARGET = beetetris
 TEMPLATE = lib
+QT += widgets
 
 DEFINES += BEE_TETRISGAME_LIBRARY
 

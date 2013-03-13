@@ -133,4 +133,4 @@ NumberTextMarker::NumberTextMarker()
   qDebug() << "NumberTextMarker plugin loaded";
 }
 
-Q_EXPORT_PLUGIN2( numbertextmarker, NumberTextMarker )
+Q_PLUGIN_METADATA(IID "beebeep.plugin.TextMarkerInterface/2.0")

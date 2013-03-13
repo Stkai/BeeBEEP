@@ -33,6 +33,7 @@ class BEEWINDOWSLIVESERVICESHARED_EXPORT WindowsLiveService : public QObject, pu
 {
   Q_OBJECT
   Q_INTERFACES( ServiceInterface )
+  Q_PLUGIN_METADATA(IID "beebeep.plugin.ServiceInterface/2.0")
 
 public:
   WindowsLiveService();

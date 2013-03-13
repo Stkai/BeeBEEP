@@ -185,4 +185,4 @@ RainbowTextMarker::RainbowTextMarker()
   qDebug() << "RainbowTextMarker plugin loaded";
 }
 
-Q_EXPORT_PLUGIN2( rainbowtextmarker, RainbowTextMarker )
+Q_PLUGIN_METADATA(IID "beebeep.plugin.TextMarkerInterface/2.0")

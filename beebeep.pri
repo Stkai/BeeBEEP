@@ -1,7 +1,8 @@
 
 DEFINES += USE_QXMPP
 
-DESTDIR = $$PWD/test
+win32:DESTDIR = $$PWD/test
+unix:DESTDIR = $$PWD/test
 
 Debug {
   DEFINES += BEEBEEP_DEBUG

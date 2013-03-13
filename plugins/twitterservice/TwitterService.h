@@ -33,6 +33,7 @@ class BEETWITTERSERVICESHARED_EXPORT TwitterService : public QObject, public Ser
 {
   Q_OBJECT
   Q_INTERFACES( ServiceInterface )
+  Q_PLUGIN_METADATA(IID "beebeep.plugin.ServiceInterface/2.0")
 
 public:
   TwitterService();
