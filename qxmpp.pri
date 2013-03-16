@@ -2,7 +2,7 @@
 # Edited for BeeBEEP
 
 QT += network xml
-QXMPP_VERSION = 0.7.4
+QXMPP_VERSION = 0.7.5
 QXMPP_INCLUDEPATH = $$PWD/qxmpp/base $$PWD/qxmpp/client $$PWD/qxmpp/server
 QXMPP_LIBRARY_NAME = qxmpp
 QXMPP_LIBRARY_TYPE = lib
