@@ -831,6 +831,10 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
         else
           QApplication::beep();
       }
+
+      if( mp_trayIcon->isVisible() )
+        mp_trayIcon->setIcon( QIcon( ":/images/beebeep-message.png" ) );
+
     }
   }
 
@@ -839,6 +843,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_defaultChat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
     mp_userList->setUnreadMessages( chat_id, 0 );
+
   }
   else
   {
@@ -1383,6 +1388,7 @@ void GuiMain::showWizard()
 void GuiMain::hideToTrayIcon()
 {
   mp_trayIcon->show();
+  mp_trayIcon->setIcon( QIcon( ":/images/beebeep-message.png" ) );
 
   if( Settings::instance().trayMessageTimeout() > 0 )
     mp_trayIcon->showMessage( Settings::instance().programName(),
@@ -1397,6 +1403,7 @@ void GuiMain::showFromTrayIcon()
 {
   showNormal(); // the window last state is minimized
   mp_trayIcon->hide();
+  mp_trayIcon->setIcon( QIcon( ":/images/beebeep.png" ) );
 }
 
 void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason reason )

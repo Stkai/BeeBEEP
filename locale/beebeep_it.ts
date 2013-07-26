@@ -1699,7 +1699,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Your nickname is:</source>
-        <translation>Il tuo soprannome è:</translation>
+        <translation type="obsolete">Il tuo soprannome è:</translation>
     </message>
     <message>
         <source>Ok</source>

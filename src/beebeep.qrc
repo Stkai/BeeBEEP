@@ -80,5 +80,6 @@
         <file>images/chat-view.png</file>
         <file>images/file-document.png</file>
         <file>images/star.png</file>
+        <file>images/beebeep-message.png</file>
     </qresource>
 </RCC>
