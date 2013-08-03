@@ -169,11 +169,12 @@ void GuiMain::forceExit()
 
 void GuiMain::changeEvent( QEvent* e )
 {
+  QMainWindow::changeEvent( e );
+
   if( e->type() == QEvent::WindowStateChange )
   {
     if( isMinimized() )
     {
-      qDebug() << "systray funziona";
       setGameInPauseMode();
       if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
         QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
