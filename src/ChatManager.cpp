@@ -90,3 +90,15 @@ void ChatManager::setChat( const Chat& c )
   }
   m_chats.append( c );
 }
+
+int ChatManager::unreadMessages() const
+{
+  int unread_messages = 0;
+  QList<Chat>::const_iterator it = m_chats.begin();
+  while( it != m_chats.end() )
+  {
+    unread_messages += (*it).unreadMessages();
+    ++it;
+  }
+  return unread_messages;
+}

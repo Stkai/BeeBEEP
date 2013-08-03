@@ -34,6 +34,7 @@ class GuiChat;
 class GuiChatList;
 class GuiShareLocal;
 class GuiShareNetwork;
+class GuiSystemTray;
 class GuiTransferFile;
 class GuiUserList;
 class User;
@@ -164,7 +165,7 @@ private:
 
   QDockWidget* mp_dockUserList;
 
-  QSystemTrayIcon* mp_trayIcon;
+  GuiSystemTray* mp_trayIcon;
 
 };
 

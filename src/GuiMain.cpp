@@ -35,6 +35,7 @@
 #include "GuiSearchUser.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
+#include "GuiSystemTray.h"
 #include "GuiTransferFile.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
@@ -61,7 +62,7 @@ GuiMain::GuiMain( QWidget *parent )
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
 
-  mp_trayIcon = new QSystemTrayIcon( QIcon( ":/images/beebeep.png"), this );
+  mp_trayIcon = new GuiSystemTray( this );
 
   createActions();
   createDockWindows();
@@ -172,6 +173,7 @@ void GuiMain::changeEvent( QEvent* e )
   {
     if( isMinimized() )
     {
+      qDebug() << "systray funziona";
       setGameInPauseMode();
       if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
         QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
@@ -832,9 +834,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
           QApplication::beep();
       }
 
-      if( mp_trayIcon->isVisible() )
-        mp_trayIcon->setIcon( QIcon( ":/images/beebeep-message.png" ) );
-
+      mp_trayIcon->addUnreadMessage( 1 );
     }
   }
 
@@ -843,7 +843,6 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_defaultChat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
     mp_userList->setUnreadMessages( chat_id, 0 );
-
   }
   else
   {
@@ -1387,9 +1386,8 @@ void GuiMain::showWizard()
 
 void GuiMain::hideToTrayIcon()
 {
+  mp_trayIcon->setUnreadMessages( ChatManager::instance().unreadMessages() );
   mp_trayIcon->show();
-  mp_trayIcon->setIcon( QIcon( ":/images/beebeep-message.png" ) );
-
   if( Settings::instance().trayMessageTimeout() > 0 )
     mp_trayIcon->showMessage( Settings::instance().programName(),
                             tr( "%1 will keep running in the background mode. To terminate the program, "
@@ -1403,7 +1401,6 @@ void GuiMain::showFromTrayIcon()
 {
   showNormal(); // the window last state is minimized
   mp_trayIcon->hide();
-  mp_trayIcon->setIcon( QIcon( ":/images/beebeep.png" ) );
 }
 
 void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason reason )
@@ -1411,9 +1408,11 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason reason )
   switch( reason )
   {
     case QSystemTrayIcon::Trigger:
-    case QSystemTrayIcon::DoubleClick:
     case QSystemTrayIcon::MiddleClick:
       mp_menuTray->exec( QCursor::pos() );
+      break;
+    case QSystemTrayIcon::DoubleClick:
+      showFromTrayIcon();
       break;
     default:
            ;

@@ -42,6 +42,8 @@ public:
   void setChat( const Chat& );
   inline const QList<Chat>& chatList() const;
 
+  int unreadMessages() const;
+
   static ChatManager& instance()
   {
     if( !mp_instance )
