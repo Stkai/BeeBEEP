@@ -78,6 +78,54 @@ namespace Log
     }
   }
 
+#if QT_VERSION >= 0x050000
+  void MessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &msg )
+  {
+    if( msg.isNull() || msg.isEmpty() )
+      return;
+
+    QString sHeader = "";
+
+    switch( type )
+    {
+    case QtWarningMsg:
+      sHeader = " [WARN] ";
+      break;
+    case QtCriticalMsg:
+      sHeader = " [CRIT] ";
+      break;
+    case QtFatalMsg:
+      abort();
+      break;
+    default:
+      sHeader = " ";
+      break;
+    }
+
+    if( sHeader.size() < 3 && !Settings::instance().debugMode() )
+      return;
+
+
+    QString sTmp = QString( "%1%2%3 (%4:%5, %6)" )
+                     .arg( QDateTime::currentDateTime().toString( "dd/MM/yyyy hh:mm:ss" ) )
+                     .arg( sHeader )
+                     .arg( msg )
+                     .arg( context.file )
+                     .arg( context.line )
+                     .arg( context.function );
+
+    if( LogStream )
+    {
+      (*LogStream) << sTmp << endl;
+    }
+    else
+    {
+      sTmp += QLatin1Char( '\n' );
+      fprintf( stderr, sTmp.toLatin1().data() );
+      fflush( stderr );
+    }
+  }
+#else
   void MessageHandler( QtMsgType type, const char *msg )
   {
     QString sHeader = "";
@@ -120,6 +168,7 @@ namespace Log
       fflush( stderr );
     }
   }
+#endif
 }
 
 #if 0

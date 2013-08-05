@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiTransferFile.h 184 2012-04-20 14:39:23Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

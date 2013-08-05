@@ -34,8 +34,9 @@ class RAINBOWTEXTMARKERSHARED_EXPORT RainbowTextMarker : public QObject, public 
 {
   Q_OBJECT
   Q_INTERFACES( TextMarkerInterface )
+#if QT_VERSION >= 0x050000
   Q_PLUGIN_METADATA(IID "beebeep.plugin.TextMarkerInterface/2.0")
-
+#endif
 public:
   RainbowTextMarker();
 

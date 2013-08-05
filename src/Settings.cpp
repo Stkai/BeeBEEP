@@ -220,8 +220,13 @@ void Settings::load()
   m_language = sets.value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
+#if QT_VERSION >= 0x050000
   m_lastDirectorySelected = sets.value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString();
   m_downloadDirectory = sets.value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString();
+#else
+  m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+  m_downloadDirectory = sets.value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+#endif
   m_logPath = sets.value( "LogPath", "." ).toString();
   m_pluginPath = sets.value( "PluginPath", "." ).toString();
   m_localePath = sets.value( "LocalePath", "." ).toString();
@@ -252,7 +257,7 @@ void Settings::load()
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
-  m_trayMessageTimeout = qMax( sets.value( "SystemTrayMessageTimeout", 5000 ).toInt(), 0 );
+  m_trayMessageTimeout = qMax( sets.value( "SystemTrayMessageTimeout", 3000 ).toInt(), 0 );
   sets.endGroup();
 
   sets.beginGroup( "Network");

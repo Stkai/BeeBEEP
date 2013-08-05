@@ -97,5 +97,10 @@ bool TetrisGame::isPaused() const
   return mp_tetris->board()->isPaused();
 }
 
+#if QT_VERSION >= 0x050000
 Q_PLUGIN_METADATA(IID "beebeep.plugin.GameInterface/2.0")
+#else
+Q_EXPORT_PLUGIN2( beetetris, TetrisGame )
+#endif
+
 

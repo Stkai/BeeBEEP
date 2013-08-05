@@ -14,7 +14,16 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <property name="spacing">
@@ -45,10 +54,19 @@
       <number>0</number>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <property name="horizontalSpacing">
+      <property name="leftMargin">
        <number>0</number>
       </property>
-      <property name="margin">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <property name="horizontalSpacing">
        <number>0</number>
       </property>
       <item row="0" column="0" rowspan="10">
@@ -70,7 +88,16 @@
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -133,7 +160,7 @@
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">
@@ -156,7 +183,7 @@
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">
@@ -179,7 +206,7 @@
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">

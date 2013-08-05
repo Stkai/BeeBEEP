@@ -17,11 +17,12 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiTransferFile.cpp 213 2013-03-10 21:41:40Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiSystemTray.h"
+#include "Settings.h"
 
 
 GuiSystemTray::GuiSystemTray( QObject *parent )
@@ -56,14 +57,20 @@ void GuiSystemTray::setMessageIcon()
   if( m_iconStatus != GuiSystemTray::Message )
   {
     setIcon( QIcon( ":/images/beebeep-message.png" ) );
-    m_iconStatus = GuiSystemTray::Default;
+    m_iconStatus = GuiSystemTray::Message;
   }
 }
 
 void GuiSystemTray::showIcon()
 {
   if( m_unreadMessages > 0 )
+  {
     setMessageIcon();
+    if( Settings::instance().trayMessageTimeout() > 0 )
+      showMessage( Settings::instance().programName(),
+        m_unreadMessages == 1 ? tr( "1 new message" ) : tr( "%1 new messages" ).arg( m_unreadMessages ),
+        QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );
+  }
   else
     setDefaultIcon();
 }

@@ -140,6 +140,8 @@ contains(DEFINES, USE_QXMPP) {
   DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
 }
 
+OTHER_FILES +=
+
 
 
 

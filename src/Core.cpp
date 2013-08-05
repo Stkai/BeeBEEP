@@ -171,7 +171,11 @@ void Core::sendBroadcastMessage()
                                                                              Settings::instance().programName() ), DispatchToChat );
 }
 
+#ifdef USE_QXMPP
 bool Core::isConnected( bool check_also_network_service ) const
+#else
+bool Core::isConnected( bool ) const
+#endif
 {
   if( mp_listener->isListening() )
     return true;

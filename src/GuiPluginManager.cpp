@@ -45,11 +45,19 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
   mp_twPlugins->setColumnWidth( 1, 18 );
 
   QHeaderView* hv = mp_twPlugins->header();
+#if QT_VERSION >= 0x050000
   hv->setSectionResizeMode( 0, QHeaderView::Fixed );
   hv->setSectionResizeMode( 1, QHeaderView::Fixed );
   hv->setSectionResizeMode( 2, QHeaderView::Stretch );
   hv->setSectionResizeMode( 3, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( 4, QHeaderView::Stretch );
+#else
+  hv->setResizeMode( 0, QHeaderView::Fixed );
+  hv->setResizeMode( 1, QHeaderView::Fixed );
+  hv->setResizeMode( 2, QHeaderView::Stretch );
+  hv->setResizeMode( 3, QHeaderView::ResizeToContents );
+  hv->setResizeMode( 4, QHeaderView::Stretch );
+#endif
 
   connect( mp_twPlugins, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( pluginSelected( QTreeWidgetItem*, int ) ) );
   connect( mp_twPlugins, SIGNAL( customContextMenuRequested ( const QPoint& ) ), this, SLOT( showContextMenu( const QPoint& ) ) );

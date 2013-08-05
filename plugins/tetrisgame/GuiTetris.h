@@ -24,7 +24,9 @@
 #ifndef BEEBEEP_GUITETRIS_H
 #define BEEBEEP_GUITETRIS_H
 
+#if QT_VERSION >= 0x050000
 #include <QtWidgets>
+#endif
 #include "ui_GuiTetris.h"
 class TetrisBoard;
 

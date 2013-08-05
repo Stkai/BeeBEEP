@@ -104,6 +104,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
+  connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
 
   initGuiItems();
   raiseChatView();
@@ -172,20 +173,20 @@ void GuiMain::changeEvent( QEvent* e )
   QMainWindow::changeEvent( e );
 
   if( e->type() == QEvent::WindowStateChange )
-  {
-    if( isMinimized() )
-    {
-      setGameInPauseMode();
-      if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
-        QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
-    }
-  }
+    setGameInPauseMode();
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
   if( mp_core->isConnected( true ) )
   {
+    if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
+    {
+      QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+      e->ignore();
+      return;
+    }
+
     if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::No )
     {
@@ -468,8 +469,8 @@ void GuiMain::createMenus()
 
   if( QSystemTrayIcon::isSystemTrayAvailable() )
   {
-    act = mp_menuSettings->addAction( tr( "Minimize to tray icon" ), this, SLOT( settingsChanged() ) );
-    act->setStatusTip( tr( "If enabled when the minimize button is clicked the window minimized to the system tray icon" ) );
+    act = mp_menuSettings->addAction( tr( "Close to tray icon" ), this, SLOT( settingsChanged() ) );
+    act->setStatusTip( tr( "If enabled when the close button is clicked the window minimized to the system tray icon" ) );
     act->setCheckable( true );
     act->setChecked( Settings::instance().minimizeInTray() );
     act->setData( 11 );
@@ -551,13 +552,6 @@ void GuiMain::createMenus()
   mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
   updadePluginMenu();
 
-  /* System Tray Menu */
-  mp_menuTray = new QMenu( tr( "%1 System Tray").arg( Settings::instance().programName() ), this );
-  act = mp_menuTray->addAction( QIcon( ":/images/beebeep.png" ), tr( "Open" ), this, SLOT( showFromTrayIcon() ) );
-  mp_menuTray->setDefaultAction( act );
-  mp_menuTray->addSeparator();
-  mp_menuTray->insertAction( 0, mp_actQuit );
-
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -584,8 +578,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
-
-  mp_trayIcon->setContextMenu( mp_menuTray );
 }
 
 void GuiMain::createStatusBar()
@@ -1391,8 +1383,7 @@ void GuiMain::hideToTrayIcon()
   mp_trayIcon->show();
   if( Settings::instance().trayMessageTimeout() > 0 )
     mp_trayIcon->showMessage( Settings::instance().programName(),
-                            tr( "%1 will keep running in the background mode. To terminate the program, "
-                               "choose Quit in the context menu of the system tray icon." )
+                            tr( "%1 will keep running in the background mode" )
                               .arg( Settings::instance().programName() ),
                             QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );
   hide();
@@ -1404,20 +1395,14 @@ void GuiMain::showFromTrayIcon()
   mp_trayIcon->hide();
 }
 
-void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason reason )
+void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason )
 {
-  switch( reason )
-  {
-    case QSystemTrayIcon::Trigger:
-    case QSystemTrayIcon::MiddleClick:
-      mp_menuTray->exec( QCursor::pos() );
-      break;
-    case QSystemTrayIcon::DoubleClick:
-      showFromTrayIcon();
-      break;
-    default:
-           ;
-  }
+  QTimer::singleShot( 0, this, SLOT( showFromTrayIcon() ) );
+}
+
+void GuiMain::trayMessageClicked()
+{
+  QTimer::singleShot( 0, this, SLOT( showFromTrayIcon() ) );
 }
 
 void GuiMain::addToShare( const QString& share_path )

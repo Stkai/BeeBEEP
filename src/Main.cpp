@@ -75,7 +75,11 @@ int main( int argc, char *argv[] )
 #ifdef BEEBEEP_RELEASE
   /* Starting Logs */
   Log::boot();
+#if QT_VERSION >= 0x050000
+  qInstallMessageHandler( Log::MessageHandler );
+#else
   qInstallMsgHandler( Log::MessageHandler );
+#endif
 #endif
 
 #ifdef USE_QXMPP

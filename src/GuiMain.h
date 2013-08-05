@@ -91,6 +91,7 @@ private slots:
   void showFromTrayIcon();
   void forceExit();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
+  void trayMessageClicked();
   void raiseChatView();
   void raiseLocalShareView();
   void raiseNetworkShareView();
@@ -142,7 +143,6 @@ private:
   QMenu *mp_menuPlugins;
   QMenu *mp_menuAccounts;
   QMenu *mp_menuView;
-  QMenu *mp_menuTray;
 
   QToolBar *mp_barMain;
 

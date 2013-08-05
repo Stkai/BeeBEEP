@@ -41,11 +41,19 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   sortItems( ColumnSort, Qt::DescendingOrder );
 
   QHeaderView* hv = header();
+#if QT_VERSION >= 0x050000
   hv->setSectionResizeMode( ColumnCancel, QHeaderView::Fixed );
   setColumnWidth( ColumnCancel, 24 );
   hv->setSectionResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnProgress, QHeaderView::Stretch );
+#else
+  hv->setResizeMode( ColumnCancel, QHeaderView::Fixed );
+  setColumnWidth( ColumnCancel, 24 );
+  hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
+#endif
   hv->hide();
 
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );

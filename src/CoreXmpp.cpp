@@ -31,7 +31,11 @@
 #include "PluginManager.h"
 
 
+#ifdef USE_QXMPP
 bool Core::isXmppServerConnected( const QString& xmpp_service ) const
+#else
+bool Core::isXmppServerConnected( const QString& ) const
+#endif
 {
 #ifdef USE_QXMPP
   XmppClient* xmpp_client = mp_xmppManager->client( xmpp_service );
@@ -41,7 +45,11 @@ bool Core::isXmppServerConnected( const QString& xmpp_service ) const
 #endif
 }
 
+#ifdef USE_QXMPP
 bool Core::connectToXmppServer( const NetworkAccount& na )
+#else
+bool Core::connectToXmppServer( const NetworkAccount& )
+#endif
 {
 #ifdef USE_QXMPP
   ServiceInterface* s = PluginManager::instance().service( na.service() );
@@ -52,7 +60,11 @@ bool Core::connectToXmppServer( const NetworkAccount& na )
     return false;
 }
 
+#ifdef USE_QXMPP
 void Core::disconnectFromXmppServer( const QString& service )
+#else
+void Core::disconnectFromXmppServer( const QString& )
+#endif
 {
 #ifdef USE_QXMPP
   if( service.isEmpty() )
@@ -104,21 +116,33 @@ void Core::checkXmppUser( const User& user_to_check )
   emit userChanged( u );
 }
 
+#ifdef USE_QXMPP
 void Core::sendXmppChatMessage( const User& u, const Message& msg )
+#else
+void Core::sendXmppChatMessage( const User&, const Message& )
+#endif
 {
 #ifdef USE_QXMPP
   mp_xmppManager->sendMessage( u, msg );
 #endif
 }
 
+#ifdef USE_QXMPP
 void Core::setXmppUserSubscription( const QString& service, const QString& bare_jid, bool accepted )
+#else
+void Core::setXmppUserSubscription( const QString&, const QString&, bool )
+#endif
 {
 #ifdef USE_QXMPP
   mp_xmppManager->subscribeUser( service, bare_jid, accepted );
 #endif
 }
 
+#ifdef USE_QXMPP
 bool Core::removeXmppUser( const User& u )
+#else
+bool Core::removeXmppUser( const User& )
+#endif
 {
 #ifdef USE_QXMPP
   if( UserManager::instance().removeUser( u ) )

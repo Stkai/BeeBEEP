@@ -950,23 +950,23 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Minimize to tray icon</source>
-        <translation>Minimizza ad icona di sistema</translation>
+        <translation type="obsolete">Minimizza ad icona di sistema</translation>
     </message>
     <message>
         <source>If enabled when the minimize button is clicked the window minimized to the system tray icon</source>
-        <translation>Se abilitata quando il pulsante minimizza viene premuto la finestra sarà minimizzata tra le icone di sistema</translation>
+        <translation type="obsolete">Se abilitata quando il pulsante minimizza viene premuto la finestra sarà minimizzata tra le icone di sistema</translation>
     </message>
     <message>
         <source>%1 System Tray</source>
-        <translation>Icona di Sistema di %1</translation>
+        <translation type="obsolete">Icona di Sistema di %1</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Apri</translation>
+        <translation type="obsolete">Apri</translation>
     </message>
     <message>
         <source>%1 will keep running in the background mode. To terminate the program, choose Quit in the context menu of the system tray icon.</source>
-        <translation>%1 continuerà ad essere attivo anche se nascosto. Per chiudere il programma scegliere Esci dal menu dell&apos;icona di sistema.</translation>
+        <translation type="obsolete">%1 continuerà ad essere attivo anche se nascosto. Per chiudere il programma scegliere Esci dal menu dell&apos;icona di sistema.</translation>
     </message>
     <message>
         <source>Enable file sharing</source>
@@ -1035,6 +1035,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>If enabled %1 stays on top of the other windows</source>
         <translation>Se abilitata %1 starà sempre in primo piano</translation>
+    </message>
+    <message>
+        <source>Close to tray icon</source>
+        <translation>Chiudi ad icona di sistema</translation>
+    </message>
+    <message>
+        <source>If enabled when the close button is clicked the window minimized to the system tray icon</source>
+        <translation>Se abilitata quando il pulsante chiudi viene premuto la finestra sarà minimizzata tra le icone di sistema</translation>
+    </message>
+    <message>
+        <source>%1 will keep running in the background mode</source>
+        <translation>%1 continuerà ad essere attivo in modalità nascosta</translation>
     </message>
 </context>
 <context>
@@ -1416,6 +1428,17 @@ il file %2 (%3)?</translation>
     <message>
         <source>User</source>
         <translation>Utente</translation>
+    </message>
+</context>
+<context>
+    <name>GuiSystemTray</name>
+    <message>
+        <source>1 new message</source>
+        <translation>1 nuovo messaggio</translation>
+    </message>
+    <message>
+        <source>%1 new messages</source>
+        <translation>%1 nuovi messaggi</translation>
     </message>
 </context>
 <context>
