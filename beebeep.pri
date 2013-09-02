@@ -1,5 +1,5 @@
 
-DEFINES -= USE_QXMPP
+DEFINES += USE_QXMPP
 
 win32:DESTDIR = $$PWD/test
 unix:DESTDIR = $$PWD/test
