@@ -76,6 +76,20 @@ Chat ChatManager::chat( VNumber chat_id ) const
   return Chat();
 }
 
+Chat ChatManager::groupChat( const QString& chat_id ) const
+{
+  QList<Chat>::const_iterator it = m_chats.begin();
+  while( it != m_chats.end() )
+  {
+    if( chat_id == (*it).privateId() )
+      return *it;
+    ++it;
+  }
+  qDebug() << "Unable to find chat with private id" << chat_id;
+  return Chat();
+}
+
+
 void ChatManager::setChat( const Chat& c )
 {
   QList<Chat>::iterator it = m_chats.begin();

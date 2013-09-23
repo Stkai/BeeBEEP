@@ -38,6 +38,7 @@ public:
   Chat chat( VNumber ) const;
   Chat chat( VNumber chat_id, bool read_all_messages );
   Chat privateChatForUser( VNumber user_id ) const;
+  Chat groupChat( const QString& ) const;
 
   void setChat( const Chat& );
   inline const QList<Chat>& chatList() const;

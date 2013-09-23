@@ -30,7 +30,7 @@
 #if QT_VERSION >= 0x050000
   #include <QtWidgets>
 #else
-  typedef int qintptr
+  typedef int qintptr;
 #endif
 #include <QtMultimedia>
 

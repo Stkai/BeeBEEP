@@ -26,6 +26,7 @@
 #include "Random.h"
 #include "Rijndael.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 
@@ -377,6 +378,19 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
     c.addUser( user_id );
   c.addUser( ID_LOCAL_USER );
   return c;
+}
+
+Message Protocol::groupChatRequestMessage( const Chat& c )
+{
+  Message m( Message::Chat, newId(), "" );
+  m.addFlag( Message::Group );
+  m.addFlag( Message::Request );
+  UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
+  ul.remove( Settings::instance().localUser() );
+  QStringList sl = ul.toStringList( false, false );
+  m.setData( c.privateId() );
+  m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
+  return m;
 }
 
 Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
