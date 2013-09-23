@@ -30,7 +30,7 @@ Listener::Listener( QObject *parent )
 {
 }
 
-void Listener::incomingConnection( int socketDescriptor )
+void Listener::incomingConnection( qintptr socketDescriptor )
 {
   Connection *connection = new Connection( this );
   connection->setSocketDescriptor( socketDescriptor );

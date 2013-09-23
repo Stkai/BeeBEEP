@@ -53,6 +53,7 @@ public:
   FileInfo fileInfoFromMessage( const Message& );
   FileInfo fileInfo( const QFileInfo& );
   ChatMessageData dataFromChatMessage( const Message& );
+  QString chatMessageDataToString( const ChatMessageData& );
   int protoVersion( const Message& ) const;
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
@@ -72,6 +73,7 @@ public:
   Chat createChat( const QList<VNumber>& user_list );
 
   inline VNumber newId();
+  QString newMd5Id() const;
 
   QByteArray encryptByteArray( const QByteArray& ) const;
   QByteArray decryptByteArray( const QByteArray& ) const;

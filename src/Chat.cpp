@@ -25,7 +25,8 @@
 
 
 Chat::Chat()
-  : m_id( ID_INVALID ), m_usersId(), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 )
+  : m_id( ID_INVALID ), m_usersId(), m_messages(), m_lastMessageTimestamp(),
+    m_unreadMessages( 0 ), m_privateId( "" )
 {
 }
 
@@ -43,6 +44,7 @@ Chat& Chat::operator=( const Chat& c )
     m_messages = c.m_messages;
     m_lastMessageTimestamp = c.m_lastMessageTimestamp;
     m_unreadMessages = c.m_unreadMessages;
+    m_privateId = c.m_privateId;
   }
   return *this;
 }

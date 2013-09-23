@@ -121,7 +121,7 @@ namespace Log
     else
     {
       sTmp += QLatin1Char( '\n' );
-      fprintf( stderr, sTmp.toLatin1().data() );
+      fprintf( stderr, sTmp.toLatin1().constData() );
       fflush( stderr );
     }
   }

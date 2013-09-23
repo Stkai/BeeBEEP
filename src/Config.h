@@ -28,7 +28,9 @@
 #include <QtGui>
 #include <QtNetwork>
 #if QT_VERSION >= 0x050000
-    #include <QtWidgets>
+  #include <QtWidgets>
+#else
+  typedef int qintptr
 #endif
 #include <QtMultimedia>
 

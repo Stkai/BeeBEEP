@@ -52,6 +52,9 @@ public:
   inline const QList<ChatMessage> messages() const;
   inline void addMessage( const ChatMessage& );
 
+  inline QString privateId() const;
+  inline void setPrivateId( const QString& );
+
   bool isEmpty() const;
   bool isDefault() const;
 
@@ -61,6 +64,7 @@ private:
   QList<ChatMessage> m_messages;
   QDateTime m_lastMessageTimestamp;
   int m_unreadMessages;
+  QString m_privateId;
 
 };
 
@@ -82,6 +86,7 @@ inline void Chat::addUnreadMessage() { m_unreadMessages++; }
 inline void Chat::readAllMessages() { m_unreadMessages = 0; }
 inline const QList<ChatMessage> Chat::messages() const { return m_messages; }
 inline void Chat::addMessage( const ChatMessage& cm ) { m_messages.append( cm ); }
-
+inline QString Chat::privateId() const { return m_privateId; }
+inline void Chat::setPrivateId( const QString& new_value ) { m_privateId = new_value; }
 
 #endif // BEEBEEP_CHAT_H

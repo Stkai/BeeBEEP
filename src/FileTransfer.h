@@ -62,7 +62,7 @@ signals:
   void listening();
 
 protected:
-  void incomingConnection( int );
+  void incomingConnection( qintptr );
   void resetServerFiles();
 
   FileInfo fileInfo( VNumber ) const;

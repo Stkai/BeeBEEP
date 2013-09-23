@@ -25,7 +25,7 @@
 
 
 ChatMessageData::ChatMessageData()
-  : m_textColor()
+    : m_textColor(), m_groupId()
 {
 
 }
@@ -40,6 +40,7 @@ ChatMessageData& ChatMessageData::operator=( const ChatMessageData& cmd )
   if( this != &cmd )
   {
     m_textColor = cmd.m_textColor;
+    m_groupId = cmd.m_groupId;
   }
 
   return *this;

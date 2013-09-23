@@ -126,7 +126,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi )
   return file_info;
 }
 
-void FileTransfer::incomingConnection( int socket_descriptor )
+void FileTransfer::incomingConnection( qintptr socket_descriptor )
 {
   FileTransferPeer *upload_peer = new FileTransferPeer( this );
   upload_peer->setTransferType( FileTransferPeer::Upload );

@@ -68,6 +68,13 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   if( msg.isEmpty() )
     return 0;
 
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat Id in Core::sendChatMessage";
+    return 0;
+  }
+
   Message m;
   QString msg_to_send = msg;
 
@@ -79,7 +86,10 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 
   PluginManager::instance().parseText( &msg_to_send, true );
   m = Protocol::instance().chatMessage( msg_to_send );
-  m.setData( Settings::instance().chatFontColor() );
+  ChatMessageData cmd;
+  cmd.setTextColor( Settings::instance().chatFontColor() );
+  cmd.setGroupId( c.privateId() );
+  m.setData( Protocol::instance().chatMessageDataToString( cmd ) );
 
   int messages_sent = 0;
 

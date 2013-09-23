@@ -39,7 +39,7 @@ signals:
   void newConnection( Connection* );
 
 protected:
-  void incomingConnection( int );
+  void incomingConnection( qintptr );
 
 };
 

@@ -371,6 +371,8 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
 {
   Chat c;
   c.setId( newId() );
+  if( user_list.size() > 1 )
+    c.setPrivateId( newMd5Id() );
   foreach( VNumber user_id, user_list )
     c.addUser( user_id );
   c.addUser( ID_LOCAL_USER );
@@ -511,13 +513,47 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
   if( sl.size() <= 0 )
     return cmd;
 
-  QColor c( sl.at( 0 ) );
+  QColor c( sl.first() );
   if( c.isValid() )
     cmd.setTextColor( c );
   else
     qWarning() << "Invalid text color in Chat Message Data:" << m.data();
 
+  sl.removeFirst();
+  if( sl.size() <= 0 )
+    return cmd;
+  else
+    cmd.setGroupId( sl.first() );
+
   return cmd;
+}
+
+QString Protocol::chatMessageDataToString( const ChatMessageData& cmd )
+{
+  QStringList sl;
+  if( cmd.textColor().isValid() )
+    sl << cmd.textColor().name();
+  else
+    sl << "";
+  if( cmd.groupId().size() > 0 )
+    sl << cmd.groupId();
+  else
+    sl << "";
+
+  return sl.join( DATA_FIELD_SEPARATOR );
+}
+
+QString Protocol::newMd5Id() const
+{
+  QStringList sl;
+  sl << Settings::instance().localUser().name();
+  sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz");
+  sl << QString::number( Random::d100() );
+
+  QCryptographicHash ch( QCryptographicHash::Md5 );
+  ch.addData( sl.join( "=" ).toLatin1() );
+
+  return QString::fromLatin1( ch.result() );
 }
 
 /* Encryption */
