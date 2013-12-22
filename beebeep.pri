@@ -1,8 +1,9 @@
 
-DEFINES += USE_QXMPP
+DEFINES -= USE_QXMPP
 
-win32:DESTDIR = $$PWD/test
-unix:DESTDIR = $$PWD/test
+DESTDIR = $$PWD/test
+
+macx: CONFIG += app_bundle
 
 Debug {
   DEFINES += BEEBEEP_DEBUG

@@ -123,8 +123,11 @@ FORMS += GuiChat.ui \
     GuiWizard.ui \
     GuiShareLocal.ui \
     GuiShareNetwork.ui
+
 RESOURCES += beebeep.qrc
-RC_FILE = beebeep.rc
+win32: RC_FILE = beebeep.rc
+
+ICON = beebeep.icns
 
 contains(DEFINES, USE_QXMPP) {
 
