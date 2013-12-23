@@ -3,8 +3,9 @@ BEEBEEP (Secure Network Chat)
 BeeBEEP 0.9.2
 - Minimize on System Tray is now Close on System Tray
 - Always on top window option
-- Improved XMPP support
+- Select file audio option
 - Game plugin interface
+- MacOSX version
 
 BeeBEEP 0.8.2
 - File Sharing on local area network
