@@ -90,7 +90,7 @@ public:
         };
 
         Status(QXmppPresence::Status::Type type = QXmppPresence::Status::Online,
-            const QString statusText = "", int priority = 0);
+            const QString& statusText = "", int priority = 0);
 
         QXmppPresence::Status::Type type() const;
         void setType(QXmppPresence::Status::Type);

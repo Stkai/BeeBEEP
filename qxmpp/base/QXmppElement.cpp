@@ -117,10 +117,13 @@ QXmppElement::~QXmppElement()
 
 QXmppElement &QXmppElement::operator=(const QXmppElement &other)
 {
-    other.d->counter.ref();
-    if (!d->counter.deref())
+    if( this != &other )
+    {
+      other.d->counter.ref();
+      if (!d->counter.deref())
         delete d;
-    d = other.d;
+      d = other.d;
+    }
     return *this;
 }
 

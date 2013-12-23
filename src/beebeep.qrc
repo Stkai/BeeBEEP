@@ -81,5 +81,7 @@
         <file>images/file-document.png</file>
         <file>images/star.png</file>
         <file>images/beebeep-message.png</file>
+        <file>images/file-beep.png</file>
+        <file>images/play.png</file>
     </qresource>
 </RCC>

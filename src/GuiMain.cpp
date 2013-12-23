@@ -392,6 +392,13 @@ void GuiMain::createMenus()
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
   act->setStatusTip( tr( "Select the download folder" ) );
   mp_menuMain->addSeparator();
+
+  act = mp_menuMain->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
+  act->setStatusTip( tr( "Select the file to play on new message arrived" ) );
+  act = mp_menuMain->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
+  act->setStatusTip( tr( "Test the file to play on new message arrived" ) );
+
+  mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actQuit );
 
   /* Settings Menu */
@@ -460,6 +467,7 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().beepOnNewMessageArrived() );
   act->setData( 4 );
+  mp_actBeepOnNewMessage = act;
 
   act = mp_menuSettings->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
@@ -818,9 +826,9 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       if( Settings::instance().beepOnNewMessageArrived() )
       {
         qDebug() << "New message arrived in background: play BEEP sound";
-        if( QFile::exists( "beep.wav" ) )
+        if( QFile::exists( Settings::instance().beepFilePath() ) )
         {
-          QSound beep_sound( "beep.wav" );
+          QSound beep_sound( Settings::instance().beepFilePath() );
           beep_sound.play();
         }
         else
@@ -1000,6 +1008,8 @@ void GuiMain::sendFile( const User& u )
                                                     Settings::instance().lastDirectorySelected() );
   if( file_path.isEmpty() || file_path.isNull() )
     return;
+
+  Settings::instance().setLastDirectorySelectedFromFile( file_path );
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( c.isValid() )
@@ -1485,4 +1495,35 @@ void GuiMain::openUrl( const QUrl& file_url )
   if( !QDesktopServices::openUrl( file_url ) )
     QMessageBox::information( this, Settings::instance().programName(),
                               tr( "Unable to open %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
+}
+
+void GuiMain::selectBeepFile()
+{
+  QString file_path = QFileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().beepFilePath(), tr( "Sound files (*.wav)" ) );
+  if( file_path.isNull() || file_path.isEmpty() )
+    return;
+
+  Settings::instance().setBeepFilePath( file_path );
+
+  if( !Settings::instance().beepOnNewMessageArrived() )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(), tr( "Sound is not enabled on a new message. Do you want to enable it?" ), tr( "Yes" ), tr( "No" ) ) == 0 )
+    {
+      Settings::instance().setBeepOnNewMessageArrived( true );
+      mp_actBeepOnNewMessage->setChecked( true );
+    }
+  }
+}
+
+void GuiMain::testBeepFile()
+{
+  QFileInfo file_info( Settings::instance().beepFilePath() );
+  if( !file_info.exists() )
+  {
+     QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound file %1 not found." ).arg( Settings::instance().beepFilePath() ) );
+     return;
+  }
+
+  QSound beep_sound( Settings::instance().beepFilePath() );
+  beep_sound.play();
 }

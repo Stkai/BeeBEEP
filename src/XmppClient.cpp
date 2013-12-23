@@ -40,6 +40,8 @@ XmppClient::XmppClient( QObject* parent )
 
   mp_transferManager = new QXmppTransferManager;
 
+  configuration().setFacebookAppId( "614083538656038" );
+
   connect( &(rosterManager()), SIGNAL( rosterReceived() ), this, SIGNAL( rosterReceived() ) );
   connect( &(rosterManager()), SIGNAL( presenceChanged( const QString&, const QString& ) ), this, SIGNAL( presenceChanged( const QString&, const QString& ) ) );
   connect( &(vCardManager()), SIGNAL( vCardReceived( const QXmppVCardIq& ) ), this, SIGNAL( vCardReceived( const QXmppVCardIq& ) ) );

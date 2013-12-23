@@ -53,6 +53,11 @@ QString Settings::programName() const
   return QString( BEEBEEP_NAME );
 }
 
+QString Settings::organizationName() const
+{
+  return QString( BEEBEEP_ORGANIZATION );
+}
+
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;
@@ -170,8 +175,12 @@ namespace
 void Settings::load()
 {
   qDebug() << "Creating local user and loading settings";
-  QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
 
+#if defined( Q_OS_MAC )
+  QSettings sets( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
+#else
+  QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
+#endif
   m_firstTime = sets.allKeys().isEmpty();
 
   sets.beginGroup( "Chat" );
@@ -232,6 +241,7 @@ void Settings::load()
   m_localePath = sets.value( "LocalePath", "." ).toString();
   m_minimizeInTray = sets.value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets.value( "StayOnTop" ).toBool();
+  m_beepFilePath = sets.value( "BeepFilePath", "beep.wav" ).toString();
   sets.endGroup();
 
   sets.beginGroup( "Tools" );
@@ -276,8 +286,8 @@ void Settings::load()
   loadBroadcastAddresses();
 
   sets.beginGroup( "FileShare" );
-  m_fileShare = sets.value( "Active", false ).toBool();
-  m_maxFileShared = qMax( 0, sets.value( "MaxFileShared", 999 ).toInt() );
+  m_fileShare = sets.value( "Active", true ).toBool();
+  m_maxFileShared = qMax( 0, sets.value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
   m_localShare = sets.value( "ShareList", QStringList() ).toStringList();
   sets.endGroup();
 
@@ -319,7 +329,11 @@ void Settings::load()
 void Settings::save()
 {
   qDebug() << "Saving settings";
+#if defined( Q_OS_MAC )
+  QSettings sets( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
+#else
   QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
+#endif
   sets.beginGroup( "Version" );
   sets.setValue( "Program", version( true ) );
   sets.setValue( "Proto", protoVersion() );
@@ -365,6 +379,7 @@ void Settings::save()
   sets.setValue( "LocalePath", m_localePath );
   sets.setValue( "MinimizeInTray", m_minimizeInTray );
   sets.setValue( "StayOnTop", m_stayOnTop );
+  sets.setValue( "BeepFilePath", m_beepFilePath );
   sets.endGroup();
   sets.beginGroup( "Tools" );
 #if defined( BEEBEEP_DEBUG )
@@ -419,4 +434,10 @@ void Settings::save()
 
   sets.sync();
   qDebug() << "Settings saved";
+}
+
+void Settings::setLastDirectorySelectedFromFile( const QString& file_path )
+{
+  QFileInfo file_info( file_path );
+  setLastDirectorySelected( file_info.absoluteDir().absolutePath() );
 }

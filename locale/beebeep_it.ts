@@ -1048,6 +1048,34 @@ il file %2 (%3)?</translation>
         <source>%1 will keep running in the background mode</source>
         <translation>%1 continuerà ad essere attivo in modalità nascosta</translation>
     </message>
+    <message>
+        <source>Select beep file...</source>
+        <translation>Seleziona un suono per il beep...</translation>
+    </message>
+    <message>
+        <source>Select the file to play on new message arrived</source>
+        <translation>Seleziona un file da suonare quando arriva un nuovo messaggio</translation>
+    </message>
+    <message>
+        <source>Play beep</source>
+        <translation>Prova il beep</translation>
+    </message>
+    <message>
+        <source>Test the file to play on new message arrived</source>
+        <translation>Prova il flle da suonare all&apos;arrivo di un nuovo messaggio</translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav)</source>
+        <translation>Suoni (*.wav)</translation>
+    </message>
+    <message>
+        <source>Sound is not enabled on a new message. Do you want to enable it?</source>
+        <translation>Il suono non è abilitato all&apos;arrivo di un nuovo messaggio. Vuoi attivarlo?</translation>
+    </message>
+    <message>
+        <source>Sound file %1 not found.</source>
+        <translation>Il file sonoro %1 non è stato trovato.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

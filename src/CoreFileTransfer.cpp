@@ -121,7 +121,6 @@ bool Core::sendFile( const User& u, const QString& file_path )
      return false;
   }
 
-  Settings::instance().setLastDirectorySelected( file.absoluteDir().absolutePath() );
   FileInfo fi = mp_fileTransfer->addFile( file );
 
   if( u.isOnLan() )

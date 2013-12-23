@@ -82,6 +82,8 @@ void GuiEditVCard::changePhoto()
   if( photo_path.isNull() || photo_path.isEmpty() )
     return;
 
+  Settings::instance().setLastDirectorySelectedFromFile( photo_path );
+
   QImage img;
   QImageReader img_reader( photo_path );
   img_reader.setAutoDetectImageFormat( true );

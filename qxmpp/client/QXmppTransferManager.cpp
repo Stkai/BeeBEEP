@@ -719,6 +719,8 @@ void QXmppTransferOutgoingJob::_q_sendData()
         d->done += length;
         emit progress(d->done, fileSize());
     }
+    if( length == 0)
+      delete [] buffer;
 }
 /// \endcond
 

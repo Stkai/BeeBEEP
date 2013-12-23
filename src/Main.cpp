@@ -21,7 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#undef QXMPP_LOGFILE
+#define QXMPP_LOGFILE
 
 #include <QApplication>
 #ifdef Q_OS_SYMBIAN
@@ -71,6 +71,10 @@ int main( int argc, char *argv[] )
 
   /* Load Settings */
   Settings::instance().load();
+
+  app.setApplicationName( Settings::instance().programName() );
+  app.setOrganizationName( Settings::instance().organizationName() );
+  app.setApplicationVersion( Settings::instance().version( false ) );
 
 #ifdef BEEBEEP_RELEASE
   /* Starting Logs */

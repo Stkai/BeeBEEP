@@ -79,6 +79,8 @@ void GuiShareLocal::addFilePath()
   if( file_path.isEmpty() )
     return;
 
+  Settings::instance().setLastDirectorySelectedFromFile( file_path );
+
   addSharePath( file_path );
 }
 
@@ -90,6 +92,7 @@ void GuiShareLocal::addFolderPath()
   if( folder_path.isEmpty() )
     return;
 
+  Settings::instance().setLastDirectorySelected( folder_path );
   addSharePath( folder_path );
 }
 

@@ -41,6 +41,7 @@ public:
   QString version( bool ) const;
   int protoVersion() const;
   QString programName() const;
+  QString organizationName() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
@@ -112,12 +113,15 @@ public:
 
   inline const QString& lastDirectorySelected() const;
   inline void setLastDirectorySelected( const QString& );
+  void setLastDirectorySelectedFromFile( const QString & );
 
   inline const QString& downloadDirectory() const;
   inline void setDownloadDirectory( const QString& );
 
   inline bool beepOnNewMessageArrived() const;
   inline void setBeepOnNewMessageArrived( bool );
+  inline const QString& beepFilePath() const;
+  inline void setBeepFilePath( const QString& );
 
   inline bool showTipsOfTheDay() const;
   inline void setShowTipsOfTheDay( bool );
@@ -217,6 +221,7 @@ private:
   QString m_downloadDirectory;
 
   bool m_beepOnNewMessageArrived;
+  QString m_beepFilePath;
 
   bool m_showTipsOfTheDay;
   bool m_automaticFileName;
@@ -297,6 +302,8 @@ inline const QString& Settings::downloadDirectory() const { return m_downloadDir
 inline void Settings::setDownloadDirectory( const QString& new_value ) { m_downloadDirectory = new_value; }
 inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessageArrived; }
 inline void Settings::setBeepOnNewMessageArrived( bool new_value ) { m_beepOnNewMessageArrived = new_value; }
+inline const QString& Settings::beepFilePath() const { return m_beepFilePath; }
+inline void Settings::setBeepFilePath( const QString& new_value ) { m_beepFilePath = new_value; }
 inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
 inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
 inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new_value; }

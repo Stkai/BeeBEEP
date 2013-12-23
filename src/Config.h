@@ -62,5 +62,8 @@ typedef quint64 FileSizeType;
 #define ID_VCARD_MESSAGE   17
 #define ID_SHARE_MESSAGE   18
 
+// FILE_SHARING
+#define MAX_NUM_FILE_SHARED 32700
+
 
 #endif // BEEBEEP_CONFIG_H

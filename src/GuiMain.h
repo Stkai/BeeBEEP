@@ -99,6 +99,8 @@ private slots:
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
+  void selectBeepFile();
+  void testBeepFile();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -162,6 +164,7 @@ private:
   QAction* mp_actViewShareLocal;
   QAction* mp_actViewShareNetwork;
   QAction* mp_actViewDefaultChat;
+  QAction* mp_actBeepOnNewMessage;
 
   QDockWidget* mp_dockUserList;
 
