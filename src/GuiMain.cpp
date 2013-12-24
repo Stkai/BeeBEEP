@@ -586,6 +586,10 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
+#if defined( Q_OS_MAC )
+  mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actAbout );
+#endif
 }
 
 void GuiMain::createStatusBar()
@@ -1517,8 +1521,7 @@ void GuiMain::selectBeepFile()
 
 void GuiMain::testBeepFile()
 {
-  QFileInfo file_info( Settings::instance().beepFilePath() );
-  if( !file_info.exists() )
+  if( !QFile::exists( Settings::instance().beepFilePath() ) )
   {
      QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound file %1 not found." ).arg( Settings::instance().beepFilePath() ) );
      return;
