@@ -28,7 +28,21 @@
 
 void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 {
-  Chat c = m.hasFlag( Message::Private ) ? ChatManager::instance().privateChatForUser( from_user_id ) : ChatManager::instance().defaultChat( false );
+  Chat c;
+  ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
+  if( m.hasFlag( Message::Private ) )
+    c = ChatManager::instance().privateChatForUser( from_user_id );
+  else if( m.hasFlag( Message::Group ) )
+    c = ChatManager::instance().groupChat( cmd.groupId() );
+  else
+    c = ChatManager::instance().defaultChat( false );
+
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid message received from" << from_user_id;
+    return;
+  }
+
   qDebug() << "Message dispatched to chat" << c.id();
   ChatMessage cm( from_user_id, m );
   c.addMessage( cm );

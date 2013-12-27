@@ -44,6 +44,9 @@ protected slots:
   void enableAll();
   void disableAll();
   void togglePlugin();
+  void openFolder();
+  void loadPlugin();
+  void enableSave();
 
 protected:
   inline bool isPluginEnabled( QTreeWidgetItem* ) const;

@@ -85,7 +85,7 @@ Chat ChatManager::groupChat( const QString& chat_id ) const
       return *it;
     ++it;
   }
-  qDebug() << "Unable to find chat with private id" << chat_id;
+  qDebug() << "Unable to find group chat with private id" << chat_id;
   return Chat();
 }
 

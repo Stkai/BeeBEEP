@@ -56,6 +56,7 @@ public:
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
   void showTipOfTheDay();
+  VNumber createOrEditGroupChat( const Chat& );
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );

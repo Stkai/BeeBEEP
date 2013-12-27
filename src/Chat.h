@@ -41,6 +41,7 @@ public:
   inline void setId( VNumber );
   inline const QList<VNumber>& usersId() const;
   bool addUser( VNumber );
+  int addUsers( const QList<VNumber>& );
   inline bool hasUser( VNumber ) const;
   inline bool removeUser( VNumber );
   inline bool isPrivateForUser( VNumber ) const;
@@ -52,11 +53,12 @@ public:
   inline const QList<ChatMessage> messages() const;
   inline void addMessage( const ChatMessage& );
 
-  inline QString privateId() const;
+  inline const QString& privateId() const;
   inline void setPrivateId( const QString& );
 
   bool isEmpty() const;
   bool isDefault() const;
+  inline bool isGroup() const;
 
 private:
   VNumber m_id;
@@ -86,7 +88,8 @@ inline void Chat::addUnreadMessage() { m_unreadMessages++; }
 inline void Chat::readAllMessages() { m_unreadMessages = 0; }
 inline const QList<ChatMessage> Chat::messages() const { return m_messages; }
 inline void Chat::addMessage( const ChatMessage& cm ) { m_messages.append( cm ); }
-inline QString Chat::privateId() const { return m_privateId; }
+inline const QString& Chat::privateId() const { return m_privateId; }
 inline void Chat::setPrivateId( const QString& new_value ) { m_privateId = new_value; }
+inline bool Chat::isGroup() const { return !m_privateId.isEmpty(); }
 
 #endif // BEEBEEP_CHAT_H

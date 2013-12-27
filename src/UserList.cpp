@@ -42,6 +42,20 @@ UserList& UserList::operator=( const UserList& ul )
   return *this;
 }
 
+bool UserList::has( VNumber user_id ) const
+{
+  if( user_id == ID_LOCAL_USER )
+    return true;
+  QList<User>::const_iterator it = m_users.begin();
+  while( it != m_users.end() )
+  {
+    if( user_id == (*it).id() )
+      return true;
+    ++it;
+  }
+  return false;
+}
+
 User UserList::find( VNumber user_id ) const
 {
   if( user_id == ID_LOCAL_USER )

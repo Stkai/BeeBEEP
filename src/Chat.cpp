@@ -57,6 +57,17 @@ bool Chat::addUser( VNumber user_id )
   return true;
 }
 
+int Chat::addUsers( const QList<VNumber>& user_list )
+{
+  int num = 0;
+  foreach( VNumber user_id, user_list )
+  {
+    if( addUser( user_id ) )
+      num++;
+  }
+  return num;
+}
+
 bool Chat::isEmpty() const
 {
   foreach( ChatMessage cm, m_messages )

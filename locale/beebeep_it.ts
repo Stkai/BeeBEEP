@@ -215,6 +215,10 @@
         <source>%1 Unable to send the file: user is not found.</source>
         <translation>%1 Impossibile inviare il file: l&apos;utente non è stato trovato.</translation>
     </message>
+    <message>
+        <source>Unable to send the group chat request message to %1.</source>
+        <translation>Impossibile recapitare il messaggio di richiesta creazione gruppo a %1.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -376,6 +380,45 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Droid Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateGroupChat</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Please add or remove member in the group chat:</source>
+        <translation>Aggiungi o rimuovi membri di questa chat di gruppo:</translation>
+    </message>
+    <message>
+        <source>Users</source>
+        <translation>Utenti</translation>
+    </message>
+    <message>
+        <source>Edit Group - %1</source>
+        <translation>Modifica Gruppo - %1</translation>
+    </message>
+    <message>
+        <source>Create Group - %1</source>
+        <translation>Crea Gruppo - %1</translation>
+    </message>
+    <message>
+        <source>Please select two or more member of the group chat.</source>
+        <translation>Seleziona due o più membri per formare un gruppo.</translation>
     </message>
 </context>
 <context>
@@ -1076,6 +1119,14 @@ il file %2 (%3)?</translation>
         <source>Sound file %1 not found.</source>
         <translation>Il file sonoro %1 non è stato trovato.</translation>
     </message>
+    <message>
+        <source>Create/edit group chat...</source>
+        <translation>Crea/modifica gruppo...</translation>
+    </message>
+    <message>
+        <source>Create or edit a group chat</source>
+        <translation>Crea o modifica una chat di gruppo</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1319,6 +1370,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Games</source>
         <translation>Giochi</translation>
+    </message>
+    <message>
+        <source>%1 - Select the plugin folder</source>
+        <translation>%1 - Seleziona la cartella dei plugin</translation>
+    </message>
+    <message>
+        <source>Folder %1 not found.</source>
+        <translation>La cartella %1 non è stata trovata.</translation>
     </message>
 </context>
 <context>

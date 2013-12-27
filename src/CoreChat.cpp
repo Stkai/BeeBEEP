@@ -88,7 +88,12 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   m = Protocol::instance().chatMessage( msg_to_send );
   ChatMessageData cmd;
   cmd.setTextColor( Settings::instance().chatFontColor() );
-  cmd.setGroupId( c.privateId() );
+  if( c.isGroup() )
+  {
+    m.addFlag( Message::Group );
+    cmd.setGroupId( c.privateId() );
+  }
+
   m.setData( Protocol::instance().chatMessageDataToString( cmd ) );
 
   int messages_sent = 0;
@@ -106,9 +111,10 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   }
   else
   {
-    m.addFlag( Message::Private );
-    Chat from_chat = ChatManager::instance().chat( chat_id );
-    UserList user_list = UserManager::instance().userList().fromUsersId( from_chat.usersId() );
+    if( !c.isGroup() )
+      m.addFlag( Message::Private );
+
+    UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
     foreach( User u, user_list.toList() )
     {
       if( u.isLocal() )
@@ -188,3 +194,46 @@ bool Core::chatHasService( const Chat& c, const QString& service_name )
     return true;
 }
 
+VNumber Core::createOrEditGroupChat( const Chat& c )
+{
+  Message group_message;
+  UserList user_list;
+  VNumber chat_id;
+
+  if( c.isGroup() )
+  {
+    user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
+    ChatManager::instance().setChat( c );
+    group_message = Protocol::instance().groupChatRequestMessage( c );
+    chat_id = c.id();
+  }
+  else
+  {
+    Chat group_chat = Protocol::instance().createChat( c.usersId() );
+    user_list = UserManager::instance().userList().fromUsersId( group_chat.usersId() );
+    ChatManager::instance().setChat( group_chat );
+    group_message = Protocol::instance().groupChatRequestMessage( group_chat );
+    chat_id = group_chat.id();
+  }
+
+  foreach( User u, user_list.toList() )
+  {
+    if( u.isLocal() )
+      continue;
+
+    if( !u.isOnLan() )
+    {
+      // FIXME!!!
+      continue;
+    }
+
+    Connection* c = connection( u.id() );
+    if( !c )
+      continue;
+
+    if( !c->sendMessage( group_message ) )
+      dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Unable to send the group chat request message to %1." ).arg( u.path() ), DispatchToChat );
+  }
+
+  return chat_id;
+}

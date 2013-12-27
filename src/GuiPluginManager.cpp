@@ -59,11 +59,17 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
   hv->setResizeMode( 4, QHeaderView::Stretch );
 #endif
 
+  mp_leFolder->setText( Settings::instance().pluginPath() );
+  mp_pbLoad->setEnabled( false );
+
   connect( mp_twPlugins, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( pluginSelected( QTreeWidgetItem*, int ) ) );
   connect( mp_twPlugins, SIGNAL( customContextMenuRequested ( const QPoint& ) ), this, SLOT( showContextMenu( const QPoint& ) ) );
   connect( mp_pbEnableAll, SIGNAL( clicked() ), this, SLOT( enableAll() ) );
   connect( mp_pbDisableAll, SIGNAL( clicked() ), this, SLOT( disableAll() ) );
   connect( mp_pbClose, SIGNAL( clicked() ), this, SLOT( close() ) );
+  connect( mp_pbFolder, SIGNAL( clicked() ), this, SLOT( openFolder() ) );
+  connect( mp_pbLoad, SIGNAL( clicked() ), this, SLOT( loadPlugin() ) );
+  connect( mp_leFolder, SIGNAL( textChanged( QString ) ), this, SLOT( enableSave() ) );
 }
 
 void GuiPluginManager::showContextMenu( const QPoint& pos )
@@ -197,4 +203,38 @@ void GuiPluginManager::updatePlugins()
   }
 
   mp_twPlugins->expandAll();
+}
+
+void GuiPluginManager::openFolder()
+{
+  QString plugin_path = QFileDialog::getExistingDirectory( this, tr( "%1 - Select the plugin folder" )
+                                                                 .arg( Settings::instance().programName() ),
+                                                                 Settings::instance().pluginPath() );
+  if( plugin_path.isNull() )
+    return;
+
+  mp_leFolder->setText( plugin_path );
+  enableSave();
+}
+
+void GuiPluginManager::loadPlugin()
+{
+  QString dir_path = mp_leFolder->text().simplified();
+  QDir dp( dir_path );
+  if( !dp.exists() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "Folder %1 not found." ).arg( dir_path ) );
+    return;
+  }
+
+  Settings::instance().setPluginPath( dir_path );
+  PluginManager::instance().loadPlugins();
+  updatePlugins();
+  m_changed = true;
+  mp_pbLoad->setEnabled( false );
+}
+
+void GuiPluginManager::enableSave()
+{
+  mp_pbLoad->setEnabled( true );
 }

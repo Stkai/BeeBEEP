@@ -83,5 +83,6 @@
         <file>images/beebeep-message.png</file>
         <file>images/file-beep.png</file>
         <file>images/play.png</file>
+        <file>images/group-add.png</file>
     </qresource>
 </RCC>

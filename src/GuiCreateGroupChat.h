@@ -21,41 +21,33 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_USERLIST_H
-#define BEEBEEP_USERLIST_H
+#ifndef BEEBEEP_GUICREATEGROUPCHAT_H
+#define BEEBEEP_GUICREATEGROUPCHAT_H
 
-#include "Config.h"
-#include "User.h"
+#include "ui_GuiCreateGroupChat.h"
+#include "Chat.h"
 
 
-class UserList
+class GuiCreateGroupChat : public QDialog, private Ui::GuiCreateGroupChat
 {
+    Q_OBJECT
+    
 public:
-  UserList();
-  UserList( const UserList& );
-  UserList& operator=( const UserList& );
+  explicit GuiCreateGroupChat( QWidget *parent = 0 );
 
-  bool has( VNumber ) const;
-  User find( VNumber ) const;
-  User find( const QString& user_path ) const;
-  User find( const QString& service, const QString& bare_jid ) const;
+  void setGroupChat( const Chat& );
+  inline const QList<VNumber>& groupUsersId() const;
 
-    void set( const User& );
-  void set( const UserList& );
-  bool remove( const User& );
-
-  QStringList toStringList( bool only_user_name, bool only_connected ) const;
-  UserList fromUsersId( const QList<VNumber>& ) const;
-  UserList serviceUserList( const QString& ) const;
-  inline const QList<User>& toList() const;
+protected slots:
+  void updateGroupChat();
 
 private:
-  QList<User> m_users;
+  QList<VNumber> m_groupUsersId;
 
 };
 
 
 // Inline Functions
-inline const QList<User>& UserList::toList() const { return m_users; }
+inline const QList<VNumber>& GuiCreateGroupChat::groupUsersId() const { return m_groupUsersId; }
 
-#endif // BEEBEEP_USERLIST_H
+#endif // BEEBEEP_GUICREATEGROUPCHAT_H

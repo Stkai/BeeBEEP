@@ -28,6 +28,7 @@
 #include "FileShare.h"
 #include "GuiChat.h"
 #include "GuiChatList.h"
+#include "GuiCreateGroupChat.h"
 #include "GuiEditVCard.h"
 #include "GuiNetwork.h"
 #include "GuiNetworkLogin.h"
@@ -274,6 +275,7 @@ void GuiMain::initGuiItems()
   mp_actSendFile->setEnabled( enable_verbose );
   mp_actSearch->setEnabled( enable_verbose );
   mp_userList->setDefaultChatConnected( enable );
+  mp_actGroupAdd->setEnabled( enable_verbose );
 
   updateStatusIcon();
   mp_shareLocal->loadSettings();
@@ -346,6 +348,10 @@ void GuiMain::createActions()
   mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
   connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
 
+  mp_actGroupAdd = new QAction( QIcon( ":/images/group-add.png"), tr( "Create/edit group chat..." ), this );
+  mp_actGroupAdd->setStatusTip( tr( "Create or edit a group chat" ) );
+  connect( mp_actGroupAdd, SIGNAL( triggered() ), this, SLOT( addUserToGroup() ) );
+
   mp_actToolBar = mp_barMain->toggleViewAction();
   mp_actToolBar->setStatusTip( tr( "Show the main tool bar with settings and emoticons" ) );
   mp_actToolBar->setData( 99 );
@@ -389,6 +395,9 @@ void GuiMain::createMenus()
   }
 
   mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actGroupAdd );
+  mp_menuMain->addSeparator();
+
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
   act->setStatusTip( tr( "Select the download folder" ) );
   mp_menuMain->addSeparator();
@@ -578,6 +587,8 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actFont );
   mp_barMain->addAction( mp_actFontColor );
   mp_barMain->addAction( mp_menuEmoticons->menuAction() );
+  mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actGroupAdd );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
@@ -832,8 +843,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
         qDebug() << "New message arrived in background: play BEEP sound";
         if( QFile::exists( Settings::instance().beepFilePath() ) )
         {
-          QSound beep_sound( Settings::instance().beepFilePath() );
-          beep_sound.play();
+          playBeep();
         }
         else
           QApplication::beep();
@@ -1527,6 +1537,35 @@ void GuiMain::testBeepFile()
      return;
   }
 
+  playBeep();
+}
+
+void GuiMain::playBeep()
+{
   QSound beep_sound( Settings::instance().beepFilePath() );
   beep_sound.play();
+}
+
+void GuiMain::addUserToGroup()
+{
+  GuiCreateGroupChat gcgc( this );
+
+  Chat group_chat_tmp = ChatManager::instance().chat( mp_defaultChat->chatId() );
+  if( !group_chat_tmp.isGroup() )
+    group_chat_tmp = Chat();
+
+  gcgc.setGroupChat( group_chat_tmp );
+  gcgc.setModal( true );
+  gcgc.show();
+  gcgc.setFixedSize( gcgc.size() );
+  if( gcgc.exec() == QDialog::Accepted )
+  {
+    VNumber chat_id = 0;
+    if( group_chat_tmp.addUsers( gcgc.groupUsersId() ) > 0 )
+    {
+      chat_id = mp_core->createOrEditGroupChat( group_chat_tmp );
+      if( chat_id > 0 )
+        mp_chatList->updateChat( chat_id );
+    }
+  }
 }
