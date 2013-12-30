@@ -25,8 +25,8 @@
 
 
 Chat::Chat()
-  : m_id( ID_INVALID ), m_usersId(), m_messages(), m_lastMessageTimestamp(),
-    m_unreadMessages( 0 ), m_privateId( "" )
+  : m_id( ID_INVALID ), m_name( "" ), m_usersId(), m_messages(),
+    m_lastMessageTimestamp(), m_unreadMessages( 0 ), m_privateId( "" )
 {
 }
 
@@ -40,6 +40,7 @@ Chat& Chat::operator=( const Chat& c )
   if( this != &c )
   {
     m_id = c.m_id;
+    m_name = c.m_name;
     m_usersId = c.m_usersId;
     m_messages = c.m_messages;
     m_lastMessageTimestamp = c.m_lastMessageTimestamp;

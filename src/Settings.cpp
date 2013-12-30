@@ -239,8 +239,8 @@ void Settings::load()
   m_logPath = sets.value( "LogPath", "." ).toString();
   m_pluginPath = sets.value( "PluginPath", "." ).toString();
   m_localePath = sets.value( "LocalePath", "." ).toString();
-  m_minimizeInTray = sets.value( "MinimizeInTray", true ).toBool();
-  m_stayOnTop = sets.value( "StayOnTop" ).toBool();
+  m_minimizeInTray = sets.value( "MinimizeInTray", false ).toBool();
+  m_stayOnTop = sets.value( "StayOnTop", false ).toBool();
   m_beepFilePath = sets.value( "BeepFilePath", "beep.wav" ).toString();
   sets.endGroup();
 

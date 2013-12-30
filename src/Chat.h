@@ -39,6 +39,8 @@ public:
   inline bool isValid() const;
   inline VNumber id() const;
   inline void setId( VNumber );
+  inline const QString& name() const;
+  inline void setName( const QString& );
   inline const QList<VNumber>& usersId() const;
   bool addUser( VNumber );
   int addUsers( const QList<VNumber>& );
@@ -62,6 +64,7 @@ public:
 
 private:
   VNumber m_id;
+  QString m_name;
   QList<VNumber> m_usersId;
   QList<ChatMessage> m_messages;
   QDateTime m_lastMessageTimestamp;
@@ -77,6 +80,8 @@ inline bool Chat::isValid() const { return m_id != ID_INVALID; }
 inline bool Chat::isDefault() const { return m_id == ID_DEFAULT_CHAT; }
 inline VNumber Chat::id() const { return m_id; }
 inline void Chat::setId( VNumber new_value ) { m_id = new_value; }
+inline const QString& Chat::name() const { return m_name; }
+inline void Chat::setName( const QString& new_value ) { m_name = new_value; }
 inline const QList<VNumber>& Chat::usersId() const { return m_usersId; }
 inline bool Chat::hasUser( VNumber user_id ) const { return m_usersId.contains( user_id ); }
 inline bool Chat::removeUser( VNumber user_id ) { return m_usersId.removeOne( user_id ); }

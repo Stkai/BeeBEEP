@@ -210,6 +210,7 @@ VNumber Core::createOrEditGroupChat( const Chat& c )
   else
   {
     Chat group_chat = Protocol::instance().createChat( c.usersId() );
+    group_chat.setName( c.name() );
     user_list = UserManager::instance().userList().fromUsersId( group_chat.usersId() );
     ChatManager::instance().setChat( group_chat );
     group_message = Protocol::instance().groupChatRequestMessage( group_chat );

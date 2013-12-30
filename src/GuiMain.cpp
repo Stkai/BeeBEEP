@@ -1140,6 +1140,7 @@ void GuiMain::changeVCard()
 
     qDebug() << "vCard changed";
     mp_core->setLocalUserVCard( gvc.vCard() );
+    refreshTitle( Settings::instance().localUser() );
   }
 }
 
@@ -1561,6 +1562,8 @@ void GuiMain::addUserToGroup()
   if( gcgc.exec() == QDialog::Accepted )
   {
     VNumber chat_id = 0;
+    group_chat_tmp.setName( gcgc.groupName() );
+
     if( group_chat_tmp.addUsers( gcgc.groupUsersId() ) > 0 )
     {
       chat_id = mp_core->createOrEditGroupChat( group_chat_tmp );

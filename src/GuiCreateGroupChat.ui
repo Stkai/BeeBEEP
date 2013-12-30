@@ -14,14 +14,24 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="3">
-    <widget class="QLabel" name="mp_labelText">
+   <item row="0" column="0">
+    <widget class="QLabel" name="mp_labelName">
      <property name="text">
       <string>TextLabel</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0" colspan="3">
+    <widget class="QLineEdit" name="mp_leName"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="mp_labelText">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3">
     <widget class="QTreeWidget" name="mp_twUsers">
      <property name="columnCount">
       <number>1</number>
@@ -33,7 +43,7 @@
      </column>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="4" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -46,14 +56,14 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="1">
+   <item row="4" column="1">
     <widget class="QPushButton" name="mp_pbOk">
      <property name="text">
       <string>Ok</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
+   <item row="4" column="2">
     <widget class="QPushButton" name="mp_pbCancel">
      <property name="text">
       <string>Cancel</string>
@@ -62,6 +72,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>mp_leName</tabstop>
+  <tabstop>mp_twUsers</tabstop>
+  <tabstop>mp_pbOk</tabstop>
+  <tabstop>mp_pbCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

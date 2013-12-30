@@ -33,6 +33,8 @@ GuiCreateGroupChat::GuiCreateGroupChat( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiCreateGroupChat" );
 
+  mp_labelName->setText( tr( "Group name" ) );
+
   mp_labelText->setText( tr( "Please add or remove member in the group chat:" ) );
 
   QStringList labels;
@@ -54,6 +56,7 @@ void GuiCreateGroupChat::setGroupChat( const Chat& c )
 
   if( c.isValid() )
   {
+    mp_leName->setText( c.name() );
     m_groupUsersId = c.usersId();
     setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
   }
@@ -65,7 +68,7 @@ void GuiCreateGroupChat::setGroupChat( const Chat& c )
     item = new QTreeWidgetItem( mp_twUsers );
     item->setIcon( 0, Bee::userStatusIcon( u.service(), u.status() ) );
     item->setText( 0, u.name() );
-    item->setData( 0, 0, u.id() );
+    item->setData( 0, Qt::UserRole+1, u.id() );
 
     if( !m_groupUsersId.isEmpty() && m_groupUsersId.contains( u.id() ) )
     {
@@ -84,10 +87,11 @@ void GuiCreateGroupChat::updateGroupChat()
     return;
   }
 
+  m_groupName = mp_leName->text().simplified();
   VNumber user_id = 0;
   foreach( QTreeWidgetItem* item, item_list )
   {
-    user_id = Bee::qVariantToVNumber( item->data( 0, 0 ) );
+    user_id = Bee::qVariantToVNumber( item->data( 0, Qt::UserRole+1 ) );
     if( !m_groupUsersId.contains( user_id ) )
       m_groupUsersId.append( user_id );
   }

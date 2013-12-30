@@ -116,3 +116,13 @@ int ChatManager::unreadMessages() const
   }
   return unread_messages;
 }
+
+bool ChatManager::hasName( const QString& chat_name ) const
+{
+  foreach( Chat c, m_chats )
+  {
+    if( c.name() == chat_name )
+      return true;
+  }
+  return false;
+}

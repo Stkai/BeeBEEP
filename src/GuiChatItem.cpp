@@ -59,7 +59,7 @@ bool GuiChatItem::updateItem()
 
     UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
     QStringList sl = user_list.toStringList( true, false );
-    chat_name = sl.size() == 0 ? QObject::tr( "Nobody" ) : sl.join( ", " );
+    chat_name = c.name().isEmpty() ? (sl.size() == 0 ? QObject::tr( "Nobody" ) : sl.join( ", " )) : c.name();
 
     tool_tip = QObject::tr( "Open chat with %1" ).arg( chat_name );
 

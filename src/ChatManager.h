@@ -43,6 +43,7 @@ public:
   void setChat( const Chat& );
   inline const QList<Chat>& chatList() const;
 
+  bool hasName( const QString& ) const;
   int unreadMessages() const;
 
   static ChatManager& instance()

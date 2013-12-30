@@ -58,12 +58,8 @@ void GuiUserList::updateUsers( bool is_connected )
   clear();
   setUser( Settings::instance().localUser() );
   setDefaultChatConnected( is_connected );
-  QList<User>::const_iterator it = UserManager::instance().userList().toList().begin();
-  while( it != UserManager::instance().userList().toList().end() )
-  {
-    setUser( *it );
-    ++it;
-  }
+  foreach( User u, UserManager::instance().userList().toList() )
+    setUser( u );
 }
 
 GuiUserItem* GuiUserList::itemFromUserId( VNumber user_id )

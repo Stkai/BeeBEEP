@@ -37,17 +37,20 @@ public:
 
   void setGroupChat( const Chat& );
   inline const QList<VNumber>& groupUsersId() const;
+  inline const QString& groupName() const;
 
 protected slots:
   void updateGroupChat();
 
 private:
   QList<VNumber> m_groupUsersId;
+  QString m_groupName;
 
 };
 
 
 // Inline Functions
 inline const QList<VNumber>& GuiCreateGroupChat::groupUsersId() const { return m_groupUsersId; }
+inline const QString& GuiCreateGroupChat::groupName() const { return m_groupName; }
 
 #endif // BEEBEEP_GUICREATEGROUPCHAT_H
