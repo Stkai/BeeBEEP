@@ -93,6 +93,7 @@ signals:
   void serviceConnected( const QString& );
   void serviceDisconnected( const QString& );
   void fileShareAvailable( const User& );
+  void updateChat( VNumber );
 
 protected slots:
   /* CoreConnection */
@@ -134,6 +135,7 @@ protected:
   void parseChatMessage( const User&, const Message& );
   void parseFileMessage( const User&, const Message& );
   void parseFileShareMessage( const User&, const Message& );
+  void parseGroupChatMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserStatusChanged( const User& );
@@ -144,8 +146,12 @@ protected:
   /* CoreChat */
   void createDefaultChat();
   void createPrivateChat( const User& );
+  void createGroupChat( const QString& chat_name, const UserList& );
+  void editGroupChat( const Chat&, const UserList& );
   QString chatMessageToText( const UserList&, const ChatMessage& );
   bool chatHasService( const Chat&, const QString& );
+  bool sendMessageToLocalNetwork( const User& to_user, const Message& );
+  void sendGroupChatMessage( const Chat&, const UserList& );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToService };

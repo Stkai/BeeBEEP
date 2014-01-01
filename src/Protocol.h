@@ -49,6 +49,7 @@ public:
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
   Message groupChatRequestMessage( const Chat& );
+  QStringList userPathsFromGroupRequestMessage( const Message& ) const;
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );

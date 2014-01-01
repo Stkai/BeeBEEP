@@ -142,6 +142,14 @@ UserList UserList::fromUsersId( const QList<VNumber>& users_id ) const
   return ul;
 }
 
+QList<VNumber> UserList::toUsersId() const
+{
+  QList<VNumber> users_id;
+  foreach( User u, m_users )
+    users_id.append( u.id() );
+  return users_id;
+}
+
 UserList UserList::serviceUserList( const QString& service ) const
 {
   UserList ul;

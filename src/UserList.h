@@ -40,12 +40,13 @@ public:
   User find( const QString& user_path ) const;
   User find( const QString& service, const QString& bare_jid ) const;
 
-    void set( const User& );
+  void set( const User& );
   void set( const UserList& );
   bool remove( const User& );
 
   QStringList toStringList( bool only_user_name, bool only_connected ) const;
   UserList fromUsersId( const QList<VNumber>& ) const;
+  QList<VNumber> toUsersId() const;
   UserList serviceUserList( const QString& ) const;
   inline const QList<User>& toList() const;
 

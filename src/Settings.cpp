@@ -71,6 +71,18 @@ void Settings::setPassword( const QString& new_value )
   m_hash = QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
+QHostAddress Settings::localHostAddress() const
+{
+  QNetworkInterface *if_net = new QNetworkInterface();
+  QList<QHostAddress> address_list = if_net->allAddresses();
+  foreach( QHostAddress host_address, address_list )
+  {
+    if( !host_address.isLoopback() )
+      return host_address;
+  }
+  return QHostAddress( "127.0.0.1" );
+}
+
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
   if( host_address.toString() == QString( "0.0.0.0" ) )

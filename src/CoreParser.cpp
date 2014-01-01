@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
 #include "FileInfo.h"
@@ -143,10 +144,46 @@ void Core::parseFileMessage( const User& u, const Message& m )
 void Core::parseChatMessage( const User& u, const Message& m )
 {
   qDebug() << "Chat message received from user" << u.path();
+  if( m.hasFlag( Message::Group ) )
+    parseGroupChatMessage( u, m );
   if( m.hasFlag( Message::Private ) || m.flags() == 0 )
     dispatchChatMessageReceived( u.id(), m );
   else
     qWarning() << "Invalid flag found in chat message (CoreParser)";
+}
+
+void Core::parseGroupChatMessage( const User& u, const Message& m )
+{
+  qDebug() <<"Parsing group chat message";
+
+  if( !m.hasFlag( Message::Request ) )
+  {
+    dispatchChatMessageReceived( u.id(), m );
+    return;
+  }
+
+  ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
+  QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage( m );
+  UserList ul;
+  foreach( QString user_path, user_paths )
+  {
+    User u = UserManager::instance().userList().find( user_path );
+    if( u.isValid() && u.isLocal() )
+      ul.set( u );
+    else
+      qWarning() << "User" << user_path << "not found in network";
+  }
+
+  if( ul.toList().size() < 2 )
+    return;
+
+  Chat c = ChatManager::instance().groupChat( cmd.groupId() );
+  if( !c.isValid() )
+    c = Protocol::instance().createChat( ul.toUsersId() );
+
+
+  emit updateChat( c.id() );
+
 }
 
 void Core::parseFileShareMessage( const User& u, const Message& m )

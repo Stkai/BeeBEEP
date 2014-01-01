@@ -386,11 +386,19 @@ Message Protocol::groupChatRequestMessage( const Chat& c )
   m.addFlag( Message::Group );
   m.addFlag( Message::Request );
   UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
-  ul.remove( Settings::instance().localUser() );
+  ul.set( Settings::instance().localUser() );
   QStringList sl = ul.toStringList( false, false );
   m.setData( c.privateId() );
   m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
+  ChatMessageData cmd;
+  cmd.setGroupId( c.privateId() );
+  m.setData( chatMessageDataToString( cmd ) );
   return m;
+}
+
+QStringList Protocol::userPathsFromGroupRequestMessage( const Message& m ) const
+{
+  return m.text().split( PROTOCOL_FIELD_SEPARATOR );
 }
 
 Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )

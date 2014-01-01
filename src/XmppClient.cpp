@@ -38,6 +38,7 @@ XmppClient::XmppClient( QObject* parent )
 {
   setService( "Jabber" );
 
+  configuration().setFacebookAppId( "614083538656038" );
   mp_transferManager = new QXmppTransferManager;
 
   configuration().setFacebookAppId( "614083538656038" );

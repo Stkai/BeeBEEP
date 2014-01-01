@@ -44,6 +44,7 @@ GuiCreateGroupChat::GuiCreateGroupChat( QWidget *parent )
   mp_twUsers->sortItems( 0, Qt::AscendingOrder );
   mp_twUsers->setAlternatingRowColors( true );
   mp_twUsers->setRootIsDecorated( false );
+  mp_twUsers->setSelectionMode( QAbstractItemView::MultiSelection );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( updateGroupChat() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
