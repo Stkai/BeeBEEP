@@ -75,16 +75,23 @@ QHostAddress Settings::localHostAddress() const
 {
   QNetworkInterface *if_net = new QNetworkInterface();
   QList<QHostAddress> address_list = if_net->allAddresses();
+  QHostAddress address_ipv6;
   foreach( QHostAddress host_address, address_list )
   {
+    qDebug() << "Local ip address found" << host_address.toString();
 #if QT_VERSION >= 0x050000
     if( !host_address.isLoopback() )
 #else
     if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
 #endif
-      return host_address;
+    {
+      if( host_address.toString().contains( ":" ) )
+        address_ipv6 = host_address;
+      else
+        return host_address;
+    }
   }
-  return QHostAddress( "127.0.0.1" );
+  return address_ipv6.isNull() ? QHostAddress( "127.0.0.1" ) : address_ipv6;
 }
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
@@ -339,7 +346,7 @@ void Settings::load()
     m_localUser.setName( sName );
   m_localUser.setBareJid( sName.toLower() );
 
-  qDebug() << "Local user:" << m_localUser.path();
+  qDebug() << "Load local user:" << m_localUser.path();
 }
 
 void Settings::save()
