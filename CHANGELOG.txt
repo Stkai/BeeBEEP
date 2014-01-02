@@ -1,5 +1,8 @@
 BEEBEEP (Secure Network Chat)
 
+BeeBEEP 0.9.4
+- Group chat
+
 BeeBEEP 0.9.2
 - Minimize on System Tray is now Close on System Tray
 - Always on top window option

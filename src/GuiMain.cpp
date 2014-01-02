@@ -638,7 +638,6 @@ void GuiMain::createDockWindows()
   mp_actViewChats->setText( tr( "Show the chat list" ) );
   mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
   mp_actViewChats->setData( 99 );
-  dock_widget->hide();
 
   dock_widget = new QDockWidget( tr( "File Transfers" ), this );
   dock_widget->setObjectName( "GuiFileTransferDock" );
