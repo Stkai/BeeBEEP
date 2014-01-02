@@ -77,7 +77,11 @@ QHostAddress Settings::localHostAddress() const
   QList<QHostAddress> address_list = if_net->allAddresses();
   foreach( QHostAddress host_address, address_list )
   {
+#if QT_VERSION >= 0x050000
     if( !host_address.isLoopback() )
+#else
+    if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
+#endif
       return host_address;
   }
   return QHostAddress( "127.0.0.1" );

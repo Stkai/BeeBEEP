@@ -59,53 +59,89 @@ void Core::createPrivateChat( const User& u )
   emit updateChat( c.id() );
 }
 
-void Core::createGroupChat( const UserList& user_list )
+VNumber Core::createGroupChat( const QString& chat_name, const QList<VNumber>& users_id, const QString& chat_private_id, bool broadcast_message )
 {
+  qDebug() << "Creating group chat named" << chat_name;
+  UserList ul = UserManager::instance().userList().fromUsersId( users_id );
+  QString sHtmlMsg;
+
+  Chat c = Protocol::instance().createChat( users_id );
+
+  if( chat_private_id.isEmpty() )
+  {
+    sHtmlMsg = tr( "%1 You have created the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), chat_name );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
+  }
+  else
+  {
+    c.setPrivateId( chat_private_id );
+    sHtmlMsg = tr( "%1 Welcome to the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), chat_name );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
+  }
+
   QStringList user_string_list;
-  foreach( User u, user_list.toList() )
-    user_string_list << u.path();
-  Debug() << "Creating group chat room for" << user_string_list.join( ", " );
+  foreach( User u, ul.toList() )
+  {
+    if( !u.isLocal() )
+      user_string_list << u.path();
+  }
 
-  Chat c = Protocol::instance().createChat( user_list.toUsersId() );
+  sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_string_list.join( ", " ) );
+  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
 
-  QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), user_string_list.join( ", " ) );
-  ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
-  c.addMessage( cm );
   ChatManager::instance().setChat( c );
   emit updateChat( c.id() );
 
-  sendGroupChatMessage( c, user_list );
+  if( broadcast_message )
+    sendGroupChatRequestMessage( c, ul );
+
+  return c.id();
 }
 
-void Core::editGroupChat( const Chat& c, const UserList& user_list )
+void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>& users_id, bool broadcast_message )
 {
-  Chat group_chat = c;
-  group_chat.addUsers( user_list.toUsersId() );
-  QStringList user_add_string_list;
+  qDebug() << "Changing group chat named" << chat_name;
+  UserList ul = UserManager::instance().userList().fromUsersId( users_id );
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Unable to change group with id" << chat_id << ". Chat not found";
+    return;
+  }
+
+  QStringList user_added_string_list;
   QStringList user_string_list;
   QString sHtmlMsg;
 
-  foreach( User u, user_list.toList() )
+  if( c.name() != chat_name )
+  {
+    sHtmlMsg = tr( "%1 The group has a new name: %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*G*" ), chat_name );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
+    c.setName( chat_name );
+  }
+
+  foreach( User u, ul.toList() )
   {
     if( !c.usersId().contains( u.id() ) )
-      user_add_string_list << u.path();
+      user_added_string_list << u.path();
     user_string_list << u.path();
   }
 
-  if( !user_add_string_list.isEmpty() )
+  if( !user_added_string_list.isEmpty() )
   {
-    sHtmlMsg = tr( "%1 Adding in group: %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), user_add_string_list.join( ", " ) );
-    group_chat.addMessage( ChatMessage( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
+    sHtmlMsg = tr( "%1 Adding in group: %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_added_string_list.join( ", " ) );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
   }
 
-  sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), user_string_list.join( ", " ) );
-  group_chat.addMessage( ChatMessage( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
+  sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/user-list.png", "*G*" ), user_string_list.join( ", " ) );
+  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
 
-  ChatManager::instance().setChat( group_chat );
+  ChatManager::instance().setChat( c );
 
-  emit updateChat( group_chat.id() );
+  emit updateChat( c.id() );
 
-  sendGroupChatMessage( group_chat, user_list );
+  if( broadcast_message )
+    sendGroupChatRequestMessage( c, ul );
 }
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )
@@ -240,7 +276,7 @@ bool Core::chatHasService( const Chat& c, const QString& service_name )
     return true;
 }
 
-void Core::sendGroupChatMessage( const Chat& group_chat, const UserList& user_list )
+void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& user_list )
 {
   Message group_message = Protocol::instance().groupChatRequestMessage( group_chat );
 
@@ -255,12 +291,8 @@ void Core::sendGroupChatMessage( const Chat& group_chat, const UserList& user_li
       continue;
     }
 
-    Connection* c = connection( u.id() );
-    if( !c )
-      continue;
-
     if( !sendMessageToLocalNetwork( u, group_message ) )
-      dispatchSystemMessage( "", group_chat.id(), ID_LOCAL_USER, tr( "Unable to send the group chat request message to %1." ).arg( u.path() ), DispatchToChat );
+      dispatchSystemMessage( "", group_chat.id(), ID_LOCAL_USER, tr( "%1 cannot be invited to the group." ).arg( u.path() ), DispatchToChat );
   }
 }
 

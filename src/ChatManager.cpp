@@ -126,3 +126,9 @@ bool ChatManager::hasName( const QString& chat_name ) const
   }
   return false;
 }
+
+bool ChatManager::isGroupChat( VNumber chat_id ) const
+{
+  Chat c = chat( chat_id );
+  return c.isGroup();
+}

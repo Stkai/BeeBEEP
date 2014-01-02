@@ -84,5 +84,6 @@
         <file>images/file-beep.png</file>
         <file>images/play.png</file>
         <file>images/group-add.png</file>
+        <file>images/chat-create.png</file>
     </qresource>
 </RCC>

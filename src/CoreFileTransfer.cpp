@@ -54,7 +54,8 @@ void Core::stopFileTransferServer()
 void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& peer_address, const Message& m  )
 {
   User user_to_check = Protocol::instance().createUser( m, peer_address );
-  User user_connected = UserManager::instance().userList().find( user_to_check.path() );
+
+  User user_connected = user_to_check.isValid() ? UserManager::instance().userList().find( user_to_check.path() ) : User();
   if( user_connected.isValid() )
     qDebug() << "Found a connected user to validate file transfer:" << user_connected.path();
   else

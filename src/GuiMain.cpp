@@ -275,6 +275,7 @@ void GuiMain::initGuiItems()
   mp_actSendFile->setEnabled( enable_verbose );
   mp_actSearch->setEnabled( enable_verbose );
   mp_userList->setDefaultChatConnected( enable );
+  mp_actCreateGroup->setEnabled( enable_verbose );
   mp_actGroupAdd->setEnabled( enable_verbose );
 
   updateStatusIcon();
@@ -348,8 +349,12 @@ void GuiMain::createActions()
   mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
   connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
 
-  mp_actGroupAdd = new QAction( QIcon( ":/images/group-add.png"), tr( "Create/edit group chat..." ), this );
-  mp_actGroupAdd->setStatusTip( tr( "Create or edit a group chat" ) );
+  mp_actCreateGroup = new QAction( QIcon( ":/images/chat-create.png"), tr( "Create group chat..." ), this );
+  mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
+  connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SLOT( createGroup() ) );
+
+  mp_actGroupAdd = new QAction( QIcon( ":/images/group-add.png"), tr( "Edit group chat..." ), this );
+  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add users" ) );
   connect( mp_actGroupAdd, SIGNAL( triggered() ), this, SLOT( addUserToGroup() ) );
 
   mp_actToolBar = mp_barMain->toggleViewAction();
@@ -395,6 +400,7 @@ void GuiMain::createMenus()
   }
 
   mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actCreateGroup );
   mp_menuMain->addAction( mp_actGroupAdd );
   mp_menuMain->addSeparator();
 
@@ -581,14 +587,15 @@ void GuiMain::createToolAndMenuBars()
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actCreateGroup );
+  mp_barMain->addAction( mp_actGroupAdd );
+  mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actSendFile );
   mp_barMain->addAction( mp_actSaveChat );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actFont );
   mp_barMain->addAction( mp_actFontColor );
   mp_barMain->addAction( mp_menuEmoticons->menuAction() );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actGroupAdd );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
@@ -1112,6 +1119,7 @@ void GuiMain::showChat( VNumber chat_id )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
+    mp_actGroupAdd->setEnabled( mp_core->isConnected( false ) && ChatManager::instance().isGroupChat( chat_id ) );
     raiseChatView();
   }
 }
@@ -1547,28 +1555,32 @@ void GuiMain::playBeep()
   beep_sound.play();
 }
 
-void GuiMain::addUserToGroup()
+void GuiMain::createGroup()
 {
   GuiCreateGroupChat gcgc( this );
+  gcgc.setModal( true );
+  gcgc.show();
+  gcgc.setFixedSize( gcgc.size() );
+  if( gcgc.exec() == QDialog::Accepted )
+    mp_core->createGroupChat( gcgc.groupName(), gcgc.groupUsersId(), "", true );
+}
 
+void GuiMain::addUserToGroup()
+{
   Chat group_chat_tmp = ChatManager::instance().chat( mp_defaultChat->chatId() );
   if( !group_chat_tmp.isGroup() )
-    group_chat_tmp = Chat();
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Impossibile to add users in this chat. Please select a group one." ) );
+    return;
+  }
 
+  GuiCreateGroupChat gcgc( this );
   gcgc.setGroupChat( group_chat_tmp );
   gcgc.setModal( true );
   gcgc.show();
   gcgc.setFixedSize( gcgc.size() );
   if( gcgc.exec() == QDialog::Accepted )
-  {
-    VNumber chat_id = 0;
-    group_chat_tmp.setName( gcgc.groupName() );
-
-    if( group_chat_tmp.addUsers( gcgc.groupUsersId() ) > 0 )
-    {
-      chat_id = mp_core->createOrEditGroupChat( group_chat_tmp );
-      if( chat_id > 0 )
-        mp_chatList->updateChat( chat_id );
-    }
-  }
+    mp_core->changeGroupChat( group_chat_tmp.id(), gcgc.groupName(), gcgc.groupUsersId(), true );
 }
+
+

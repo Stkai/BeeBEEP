@@ -103,6 +103,7 @@ private slots:
   void testBeepFile();
   void playBeep();
   void addUserToGroup();
+  void createGroup();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -168,6 +169,7 @@ private:
   QAction* mp_actViewDefaultChat;
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actGroupAdd;
+  QAction* mp_actCreateGroup;
 
   QDockWidget* mp_dockUserList;
 

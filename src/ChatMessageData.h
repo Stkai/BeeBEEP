@@ -38,10 +38,13 @@ public:
   inline void setTextColor( const QColor& );
   inline const QString& groupId() const;
   inline void setGroupId( const QString& );
+  inline const QString& groupName() const;
+  inline void setGroupName( const QString& );
 
 private:
   QColor m_textColor;
   QString m_groupId;
+  QString m_groupName;
 
 };
 
@@ -51,5 +54,7 @@ inline const QColor& ChatMessageData::textColor() const { return m_textColor; }
 inline void ChatMessageData::setTextColor( const QColor& new_value ) { m_textColor = new_value; }
 inline const QString& ChatMessageData::groupId() const { return m_groupId; }
 inline void ChatMessageData::setGroupId( const QString& new_value ) { m_groupId = new_value; }
+inline const QString& ChatMessageData::groupName() const { return m_groupName; }
+inline void ChatMessageData::setGroupName( const QString& new_value) { m_groupName = new_value; }
 
 #endif // BEEBEEP_CHATMESSAGEDATA_H

@@ -165,25 +165,47 @@ void Core::parseGroupChatMessage( const User& u, const Message& m )
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
   QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage( m );
   UserList ul;
+  QList<VNumber> users_id;
   foreach( QString user_path, user_paths )
   {
     User u = UserManager::instance().userList().find( user_path );
-    if( u.isValid() && u.isLocal() )
+    if( u.isValid() )
+    {
       ul.set( u );
+      users_id.append( u.id() );
+    }
     else
-      qWarning() << "User" << user_path << "not found in network";
+    {
+      qWarning() << "User" << user_path << "not found in list";
+      u = Protocol::instance().createTemporaryUser( user_path );
+      if( u.isValid() )
+      {
+        qDebug() << "Connecting to user" << user_path;
+        UserManager::instance().setUser( u );
+        ul.set( u );
+        newPeerFound( u.hostAddress(), u.hostPort() );
+        users_id.append( u.id() );
+      }
+    }
   }
 
   if( ul.toList().size() < 2 )
+  {
+    qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 An error occurred when %2 tries to add you to the group: %3." )
+                         .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.path(), cmd.groupName() ), DispatchToAllChatsWithUser );
     return;
+  }
 
-  Chat c = ChatManager::instance().groupChat( cmd.groupId() );
-  if( !c.isValid() )
-    c = Protocol::instance().createChat( ul.toUsersId() );
-
-
-  emit updateChat( c.id() );
-
+  Chat group_chat = ChatManager::instance().groupChat( cmd.groupId() );
+  if( !group_chat.isValid() )
+  {
+    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 adds you to the group: %3." )
+                         .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.path(), cmd.groupName() ), DispatchToAllChatsWithUser );
+    createGroupChat( cmd.groupName(), users_id, cmd.groupId(), false );
+  }
+  else
+    changeGroupChat( group_chat.id(), cmd.groupName(), users_id, false );
 }
 
 void Core::parseFileShareMessage( const User& u, const Message& m )

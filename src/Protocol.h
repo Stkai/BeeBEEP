@@ -72,6 +72,7 @@ public:
   inline const QByteArray& fileShareRequestMessage() const;
 
   User createUser( const Message&, const QHostAddress& );
+  User createTemporaryUser( const QString& user_path );
   Chat createChat( const QList<VNumber>& user_list );
 
   inline VNumber newId();

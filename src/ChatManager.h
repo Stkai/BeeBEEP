@@ -45,6 +45,7 @@ public:
 
   bool hasName( const QString& ) const;
   int unreadMessages() const;
+  bool isGroupChat( VNumber ) const;
 
   static ChatManager& instance()
   {

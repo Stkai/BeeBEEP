@@ -33,9 +33,11 @@ GuiCreateGroupChat::GuiCreateGroupChat( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiCreateGroupChat" );
 
+  setWindowTitle( tr( "Create Group - %1" ).arg( Settings::instance().programName() ) );
+
   mp_labelName->setText( tr( "Group name" ) );
 
-  mp_labelText->setText( tr( "Please add or remove member in the group chat:" ) );
+  mp_labelText->setText( tr( "Please add member in the group chat:" ) );
 
   QStringList labels;
   labels << tr( "Users" );
@@ -48,22 +50,15 @@ GuiCreateGroupChat::GuiCreateGroupChat( QWidget *parent )
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( updateGroupChat() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-
 }
 
 void GuiCreateGroupChat::setGroupChat( const Chat& c )
 {
+  mp_leName->setText( c.name() );
+  m_groupUsersId = c.usersId();
+  setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
+
   QTreeWidgetItem* item;
-
-  if( c.isValid() )
-  {
-    mp_leName->setText( c.name() );
-    m_groupUsersId = c.usersId();
-    setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
-  }
-  else
-    setWindowTitle( tr( "Create Group - %1" ).arg( Settings::instance().programName() ) );
-
   foreach( User u, UserManager::instance().userList().toList() )
   {
     item = new QTreeWidgetItem( mp_twUsers );

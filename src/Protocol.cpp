@@ -368,6 +368,49 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   return u;
 }
 
+User Protocol::createTemporaryUser( const QString& user_path )
+{
+  User u;
+  QStringList sl = user_path.split( "@" );
+  if( sl.size() > 2 )
+  {
+    sl.removeLast();
+    u.setName( sl.join( "@" ) );
+  }
+  else if( sl.size() == 2 )
+    u.setName( sl.first() );
+  else
+    return User();
+
+  QString host_port = user_path;
+  host_port.remove( 0, u.name().size() + 1 ); // remove name and @
+
+  bool ok = false;
+  sl = host_port.split( ":" );
+  if( sl.size() > 2 ) // ipv6 address
+  {
+    u.setHostPort( sl.last().toInt( &ok ) );
+    if( !ok )
+      return User();
+    sl.removeLast();
+    u.setHostAddress( QHostAddress( sl.join( ":" ) ) );
+  }
+  else if( sl.size() == 2 )
+  {
+    u.setHostAddress( QHostAddress( sl.first() ) );
+    u.setHostPort( sl.last().toInt( &ok ));
+    if( !ok )
+      return User();
+  }
+  else
+    return User();
+
+  u.setStatus( User::Offline );
+  u.setBareJid( u.name() );
+  u.setId( newId() );
+  return u;
+}
+
 Chat Protocol::createChat( const QList<VNumber>& user_list )
 {
   Chat c;
@@ -392,6 +435,7 @@ Message Protocol::groupChatRequestMessage( const Chat& c )
   m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
   ChatMessageData cmd;
   cmd.setGroupId( c.privateId() );
+  cmd.setGroupName( c.name() );
   m.setData( chatMessageDataToString( cmd ) );
   return m;
 }
@@ -535,11 +579,17 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
   if( sl.size() <= 0 )
     return cmd;
 
-  QColor c( sl.first() );
-  if( c.isValid() )
-    cmd.setTextColor( c );
-  else
-    qWarning() << "Invalid text color in Chat Message Data:" << m.data();
+  if( !sl.first().isEmpty() )
+  {
+    QColor c( sl.first() );
+    if( !c.isValid() )
+    {
+      qWarning() << "Invalid text color in Chat Message Data:" << m.data();
+      cmd.setTextColor( QColor( Qt::black ) );
+    }
+    else
+      cmd.setTextColor( c );
+  }
 
   sl.removeFirst();
   if( sl.size() <= 0 )
@@ -547,28 +597,30 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
   else
     cmd.setGroupId( sl.first() );
 
+  sl.removeFirst();
+  if( sl.size() <= 0 )
+    return cmd;
+  else
+    cmd.setGroupName( sl.first() );
+
   return cmd;
 }
 
 QString Protocol::chatMessageDataToString( const ChatMessageData& cmd )
 {
   QStringList sl;
-  if( cmd.textColor().isValid() )
-    sl << cmd.textColor().name();
-  else
-    sl << "";
-  if( cmd.groupId().size() > 0 )
-    sl << cmd.groupId();
-  else
-    sl << "";
-
+  sl << (cmd.textColor().isValid() ? cmd.textColor().name() : "");
+  sl << (cmd.groupId().size() > 0 ? cmd.groupId() : "");
+  sl << (cmd.groupName().size() > 0 ? cmd.groupName() : "");
   return sl.join( DATA_FIELD_SEPARATOR );
 }
 
 QString Protocol::newMd5Id() const
 {
   QStringList sl;
+  sl << QString::number( Random::d100() );
   sl << Settings::instance().localUser().name();
+  sl << QString::number( Random::d100() );
   sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz");
   sl << QString::number( Random::d100() );
 
