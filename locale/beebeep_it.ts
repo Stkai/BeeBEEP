@@ -217,7 +217,35 @@
     </message>
     <message>
         <source>Unable to send the group chat request message to %1.</source>
-        <translation>Impossibile recapitare il messaggio di richiesta creazione gruppo a %1.</translation>
+        <translation type="obsolete">Impossibile recapitare il messaggio di richiesta creazione gruppo a %1.</translation>
+    </message>
+    <message>
+        <source>%1 You have created the group %2.</source>
+        <translation>%1 Hai creato il gruppo %2.</translation>
+    </message>
+    <message>
+        <source>%1 Welcome to the group %2.</source>
+        <translation>%1 Benvenuti nel gruppo %2.</translation>
+    </message>
+    <message>
+        <source>%1 The group has a new name: %2.</source>
+        <translation>%1 Il gruppo ha un nuovo nome: %2.</translation>
+    </message>
+    <message>
+        <source>%1 Adding in group: %2.</source>
+        <translation>%1 Aggiunti al gruppo: %2.</translation>
+    </message>
+    <message>
+        <source>%1 cannot be invited to the group.</source>
+        <translation>%1 non può essere invitato nel gruppo.</translation>
+    </message>
+    <message>
+        <source>%1 An error occurred when %2 tries to add you to the group: %3.</source>
+        <translation>%1 Si è verificato un errore quando %2 ha provato ad aggiungerti al gruppo: %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 adds you to the group: %3.</source>
+        <translation>%1 %2 ti ha aggiunto al gruppo: %3.</translation>
     </message>
 </context>
 <context>
@@ -402,7 +430,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Please add or remove member in the group chat:</source>
-        <translation>Aggiungi o rimuovi membri di questa chat di gruppo:</translation>
+        <translation type="obsolete">Aggiungi o rimuovi membri di questa chat di gruppo:</translation>
     </message>
     <message>
         <source>Users</source>
@@ -419,6 +447,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Please select two or more member of the group chat.</source>
         <translation>Seleziona due o più membri per formare un gruppo.</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation>Nome del gruppo</translation>
+    </message>
+    <message>
+        <source>Please add member in the group chat:</source>
+        <translation>Aggiungi dei membri alla chat di gruppo:</translation>
     </message>
 </context>
 <context>
@@ -1121,11 +1157,31 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Create/edit group chat...</source>
-        <translation>Crea/modifica gruppo...</translation>
+        <translation type="obsolete">Crea/modifica gruppo...</translation>
     </message>
     <message>
         <source>Create or edit a group chat</source>
-        <translation>Crea o modifica una chat di gruppo</translation>
+        <translation type="obsolete">Crea o modifica una chat di gruppo</translation>
+    </message>
+    <message>
+        <source>Create group chat...</source>
+        <translation>Crea una chat di gruppo...</translation>
+    </message>
+    <message>
+        <source>Create a group chat with two or more users</source>
+        <translation>Crea una chat di gruppo con due o più persone</translation>
+    </message>
+    <message>
+        <source>Edit group chat...</source>
+        <translation>Modifica la chat di gruppo...</translation>
+    </message>
+    <message>
+        <source>Change the name of the group or add users</source>
+        <translation>Cambia il nome del gruppo e aggiungi altri utenti</translation>
+    </message>
+    <message>
+        <source>Impossibile to add users in this chat. Please select a group one.</source>
+        <translation>Impossibile aggiungee utenti a questa conversazione. Seleziona prima una chat di gruppo.</translation>
     </message>
 </context>
 <context>
@@ -1729,6 +1785,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Email</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>User ID</source>
+        <translation>ID Utente</translation>
     </message>
 </context>
 <context>

@@ -31,8 +31,8 @@ class Message
 {
 public:
   // For Backward Compatibility do not change the order
-  enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, User, File, Share, NumTypes };
-  enum Flag { Private, UserWriting, UserStatus, UserName, UserVCard, Refused, List, Request, Group, NumFlags };
+  enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, User, File, Share, Group, NumTypes };
+  enum Flag { Private, UserWriting, UserStatus, UserName, UserVCard, Refused, List, Request, GroupChat, NumFlags };
 
   Message();
   Message( const Message& );

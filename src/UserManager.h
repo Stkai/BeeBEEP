@@ -33,7 +33,7 @@ class UserManager
   static UserManager* mp_instance;
 
 public:
-  inline void setUser( const User& );
+  void setUser( const User& );
   inline bool removeUser( const User& );
   inline const UserList& userList() const;
 
@@ -63,7 +63,6 @@ private:
 
 
 // Inline Function
-inline void UserManager::setUser( const User& u ) { m_users.set( u ); }
 inline bool UserManager::removeUser( const User& u ) { return m_users.remove( u ); }
 inline const UserList& UserManager::userList() const { return m_users; }
 

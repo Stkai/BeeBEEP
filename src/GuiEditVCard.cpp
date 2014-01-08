@@ -32,6 +32,8 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   setObjectName( "GuiEditVCard" );
   setWindowTitle( tr( "Profile - %1" ).arg( Settings::instance().programName() ) );
 
+  mp_lePath->setDisabled( true );
+
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_pbChangePhoto, SIGNAL( clicked() ), this, SLOT( changePhoto() ) );
@@ -49,9 +51,11 @@ void GuiEditVCard::setUserColor( const QString& new_value )
   mp_lNickname->setPalette( palette );
 }
 
-void GuiEditVCard::setVCard( const VCard& vc )
+void GuiEditVCard::setUser( const User& u )
 {
-  m_vCard = vc;
+  m_vCard = u.vCard();
+  setUserColor( u.color() );
+  mp_lePath->setText( u.path() );
   loadVCard();
 }
 

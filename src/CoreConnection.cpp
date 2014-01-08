@@ -59,7 +59,7 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
   //if( !hasConnection( sender_ip, -1 ) ) // Check it: before the sender port is not checked and it was passed -1
-  if( hasConnection( sender_ip, sender_port ) )
+  if( !hasConnection( sender_ip, sender_port ) )
   {
     Connection *c = new Connection( this );
     setNewConnection( c );
@@ -167,12 +167,14 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
+  bool user_reconnect = false;
   User user_found = UserManager::instance().userList().find( u.path() );
   if( user_found.isValid() )
   {
     u.setId( user_found.id() );
     u.setColor( user_found.color() );
     qDebug() << "User" << u.path() << "reconnected";
+    user_reconnect = true;
   }
   else
   {
@@ -208,4 +210,8 @@ void Core::checkUserAuthentication( const Message& m )
       c->sendData( Protocol::instance().localVCardMessage() );
     }
   }
+
+  //if( user_reconnect )
+    //checkGroupChatAfterUserReconnect( u );
+
 }

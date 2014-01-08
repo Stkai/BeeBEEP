@@ -103,11 +103,6 @@ User UserList::find( const QString& service, const QString& bare_jid ) const
 
 void UserList::set( const User& u )
 {
-  if( u.id() == ID_LOCAL_USER )
-  {
-    Settings::instance().setLocalUser( u );
-    return;
-  }
   QList<User>::iterator it = m_users.begin();
   while( it != m_users.end() )
   {

@@ -61,6 +61,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::User:   return "BEE-USER";
   case Message::File:   return "BEE-FILE";
   case Message::Share:  return "BEE-FSHR";
+  case Message::Group:  return "BEE-GROU";
   default:              return "BEE-BOOH";
   }
 }
@@ -85,6 +86,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::File;
   else if( msg_type == "BEE-FSHR" )
     return Message::Share;
+  else if( msg_type == "BEE-GROU" )
+    return Message::Group;
   else
     return Message::Undefined;
 }
@@ -419,20 +422,18 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
     c.setPrivateId( newMd5Id() );
   foreach( VNumber user_id, user_list )
     c.addUser( user_id );
-  c.addUser( ID_LOCAL_USER );
   return c;
 }
 
 Message Protocol::groupChatRequestMessage( const Chat& c )
 {
-  Message m( Message::Chat, newId(), "" );
-  m.addFlag( Message::Group );
+  Message m( Message::Group, newId(), "" );
   m.addFlag( Message::Request );
   UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
-  ul.set( Settings::instance().localUser() );
   QStringList sl = ul.toStringList( false, false );
-  m.setData( c.privateId() );
+  sl << Settings::instance().localUser().path();
   m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
+  qDebug() << "Users:" << m.text();
   ChatMessageData cmd;
   cmd.setGroupId( c.privateId() );
   cmd.setGroupName( c.name() );
@@ -624,10 +625,10 @@ QString Protocol::newMd5Id() const
   sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz");
   sl << QString::number( Random::d100() );
 
-  QCryptographicHash ch( QCryptographicHash::Md5 );
-  ch.addData( sl.join( "=" ).toLatin1() );
+  QCryptographicHash ch( QCryptographicHash::Sha1 );
+  ch.addData( sl.join( "=" ).toUtf8() );
 
-  return QString::fromLatin1( ch.result() );
+  return QString::fromLatin1( ch.result().toHex() );
 }
 
 /* Encryption */

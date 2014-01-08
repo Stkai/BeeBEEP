@@ -129,6 +129,19 @@ bool ChatManager::hasName( const QString& chat_name ) const
 
 bool ChatManager::isGroupChat( VNumber chat_id ) const
 {
+  if( chat_id == ID_DEFAULT_CHAT )
+    return false;
   Chat c = chat( chat_id );
   return c.isGroup();
+}
+
+QList<Chat> ChatManager::groupChatForUser( VNumber user_id ) const
+{
+  QList<Chat> chat_list;
+  foreach( Chat c, m_chats )
+  {
+    if( c.isGroup() && c.usersId().contains( user_id ) )
+      chat_list.append( c );
+  }
+  return chat_list;
 }

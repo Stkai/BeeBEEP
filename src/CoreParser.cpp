@@ -54,10 +54,13 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::Chat:
     parseChatMessage( u, m );
     break;
- case Message::File:
+  case Message::Group:
+    parseGroupMessage( u, m );
+    break;
+  case Message::File:
     parseFileMessage( u, m );
     break;
- case Message::Share:
+  case Message::Share:
     parseFileShareMessage( u, m );
     break;
   default:
@@ -144,68 +147,69 @@ void Core::parseFileMessage( const User& u, const Message& m )
 void Core::parseChatMessage( const User& u, const Message& m )
 {
   qDebug() << "Chat message received from user" << u.path();
-  if( m.hasFlag( Message::Group ) )
-    parseGroupChatMessage( u, m );
-  if( m.hasFlag( Message::Private ) || m.flags() == 0 )
+  if( m.hasFlag( Message::Private ) || m.flags() == 0 || m.hasFlag( Message::GroupChat ) )
     dispatchChatMessageReceived( u.id(), m );
   else
     qWarning() << "Invalid flag found in chat message (CoreParser)";
 }
 
-void Core::parseGroupChatMessage( const User& u, const Message& m )
+void Core::parseGroupMessage( const User& u, const Message& m )
 {
-  qDebug() <<"Parsing group chat message";
-
-  if( !m.hasFlag( Message::Request ) )
-  {
-    dispatchChatMessageReceived( u.id(), m );
-    return;
-  }
-
+  qDebug() << "Group message:" << Protocol::instance().fromMessage( m );
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
-  QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage( m );
-  UserList ul;
-  QList<VNumber> users_id;
-  foreach( QString user_path, user_paths )
+  qDebug() << "Group name:" << cmd.groupName();
+  qDebug() << "Group id:" << cmd.groupId();
+  Chat group_chat = ChatManager::instance().groupChat( cmd.groupId() );
+
+  if( m.hasFlag( Message::Request ) )
   {
-    User u = UserManager::instance().userList().find( user_path );
-    if( u.isValid() )
+    QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage( m );
+    UserList ul;
+    foreach( QString user_path, user_paths )
     {
-      ul.set( u );
-      users_id.append( u.id() );
-    }
-    else
-    {
-      qWarning() << "User" << user_path << "not found in list";
-      u = Protocol::instance().createTemporaryUser( user_path );
-      if( u.isValid() )
+      User user_tmp = UserManager::instance().userList().find( user_path );
+      if( user_tmp.isValid() )
       {
-        qDebug() << "Connecting to user" << user_path;
-        UserManager::instance().setUser( u );
-        ul.set( u );
-        newPeerFound( u.hostAddress(), u.hostPort() );
-        users_id.append( u.id() );
+        if( !user_tmp.isLocal() )
+          ul.set( user_tmp );
+      }
+      else
+      {
+        qWarning() << "User" << user_path << "not found in list";
+        user_tmp = Protocol::instance().createTemporaryUser( user_path );
+        if( user_tmp.isValid() )
+        {
+          qDebug() << "Connecting to user" << user_path;
+          UserManager::instance().setUser( user_tmp );
+          ul.set( user_tmp );
+          newPeerFound( user_tmp.hostAddress(), user_tmp.hostPort() );
+        }
       }
     }
-  }
 
-  if( ul.toList().size() < 2 )
-  {
-    qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 An error occurred when %2 tries to add you to the group: %3." )
-                         .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.path(), cmd.groupName() ), DispatchToAllChatsWithUser );
-    return;
-  }
+    if( !group_chat.isValid() )
+    {
+      if( ul.toList().size() < 2 )
+      {
+        qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
+        dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 An error occurred when %2 tries to add you to the group: %3." )
+                           .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.path(), cmd.groupName() ), DispatchToAllChatsWithUser );
+        return;
+      }
 
-  Chat group_chat = ChatManager::instance().groupChat( cmd.groupId() );
-  if( !group_chat.isValid() )
-  {
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 adds you to the group: %3." )
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 adds you to the group: %3." )
                          .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.path(), cmd.groupName() ), DispatchToAllChatsWithUser );
-    createGroupChat( cmd.groupName(), users_id, cmd.groupId(), false );
+      createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
+    }
+    else
+      changeGroupChat( group_chat.id(), cmd.groupName(), ul.toUsersId(), false );
+  }
+  else if( m.hasFlag( Message::Refused ) )
+  {
+
   }
   else
-    changeGroupChat( group_chat.id(), cmd.groupName(), users_id, false );
+    qWarning() << "Invalid flag found in group message (CoreParser)";
 }
 
 void Core::parseFileShareMessage( const User& u, const Message& m )

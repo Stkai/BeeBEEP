@@ -47,6 +47,8 @@ public:
   int unreadMessages() const;
   bool isGroupChat( VNumber ) const;
 
+  QList<Chat> groupChatForUser( VNumber ) const;
+
   static ChatManager& instance()
   {
     if( !mp_instance )

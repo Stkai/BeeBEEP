@@ -841,7 +841,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
   {
-    if( !(isVisible() && is_current_chat) )
+    if( !isVisible() )
     {
       QApplication::alert( this );
       if( Settings::instance().beepOnNewMessageArrived() )
@@ -1127,8 +1127,7 @@ void GuiMain::changeVCard()
 {
   GuiEditVCard gvc( this );
   gvc.setModal( true );
-  gvc.setVCard( Settings::instance().localUser().vCard() );
-  gvc.setUserColor( Settings::instance().localUser().color() );
+  gvc.setUser( Settings::instance().localUser() );
   gvc.show();
   gvc.setFixedSize( gvc.size() );
   if( gvc.exec() == QDialog::Accepted )
@@ -1557,11 +1556,15 @@ void GuiMain::playBeep()
 void GuiMain::createGroup()
 {
   GuiCreateGroupChat gcgc( this );
+  gcgc.setGroupChat( Chat() );
   gcgc.setModal( true );
   gcgc.show();
   gcgc.setFixedSize( gcgc.size() );
   if( gcgc.exec() == QDialog::Accepted )
-    mp_core->createGroupChat( gcgc.groupName(), gcgc.groupUsersId(), "", true );
+  {
+    VNumber chat_id = mp_core->createGroupChat( gcgc.groupName(), gcgc.groupUsersId(), "", true );
+    mp_chatList->updateChat( chat_id );
+  }
 }
 
 void GuiMain::addUserToGroup()
@@ -1579,7 +1582,10 @@ void GuiMain::addUserToGroup()
   gcgc.show();
   gcgc.setFixedSize( gcgc.size() );
   if( gcgc.exec() == QDialog::Accepted )
+  {
     mp_core->changeGroupChat( group_chat_tmp.id(), gcgc.groupName(), gcgc.groupUsersId(), true );
+    mp_chatList->updateChat( group_chat_tmp.id() );
+  }
 }
 
 

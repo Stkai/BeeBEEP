@@ -136,7 +136,7 @@ protected:
   void parseChatMessage( const User&, const Message& );
   void parseFileMessage( const User&, const Message& );
   void parseFileShareMessage( const User&, const Message& );
-  void parseGroupChatMessage( const User&, const Message& );
+  void parseGroupMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserStatusChanged( const User& );
@@ -151,6 +151,7 @@ protected:
   bool chatHasService( const Chat&, const QString& );
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
   void sendGroupChatRequestMessage( const Chat&, const UserList& );
+  void checkGroupChatAfterUserReconnect( const User& );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToService };

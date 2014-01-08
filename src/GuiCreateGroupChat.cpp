@@ -54,9 +54,12 @@ GuiCreateGroupChat::GuiCreateGroupChat( QWidget *parent )
 
 void GuiCreateGroupChat::setGroupChat( const Chat& c )
 {
-  mp_leName->setText( c.name() );
-  m_groupUsersId = c.usersId();
-  setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
+  if( c.isValid() )
+  {
+    mp_leName->setText( c.name() );
+    m_groupUsersId = c.usersId();
+    setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
+  }
 
   QTreeWidgetItem* item;
   foreach( User u, UserManager::instance().userList().toList() )
@@ -69,7 +72,7 @@ void GuiCreateGroupChat::setGroupChat( const Chat& c )
     if( !m_groupUsersId.isEmpty() && m_groupUsersId.contains( u.id() ) )
     {
       item->setSelected( true );
-      item->setDisabled( true );
+      //item->setDisabled( true );
     }
   }
 }

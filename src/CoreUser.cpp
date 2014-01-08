@@ -124,7 +124,7 @@ bool Core::setUserColor( VNumber user_id, const QString& user_color )
     return false;
   u.setColor( user_color );
   UserManager::instance().setUser( u );
-  userChanged( u );
+  emit userChanged( u );
   return true;
 }
 

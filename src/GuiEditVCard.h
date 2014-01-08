@@ -35,13 +35,14 @@ class GuiEditVCard : public QDialog, private Ui::GuiVCardDialog
 public:
   GuiEditVCard( QWidget* parent = 0 );
 
-  void setVCard( const VCard& );
+  void setUser( const User& );
+
   inline const VCard& vCard() const;
-  void setUserColor( const QString& );
   inline const QString& userColor() const;
 
 protected:
   void loadVCard();
+  void setUserColor( const QString& );
   bool checkLineEdit( QLineEdit*, const QString& );
 
 private slots:

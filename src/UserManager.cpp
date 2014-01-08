@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "UserManager.h"
+#include "Settings.h"
 
 UserManager* UserManager::mp_instance = NULL;
 
@@ -31,3 +32,10 @@ UserManager::UserManager()
 {
 }
 
+void UserManager::setUser( const User& u )
+{
+  if( u.id() == ID_LOCAL_USER )
+    Settings::instance().setLocalUser( u );
+  else
+    m_users.set( u );
+}
