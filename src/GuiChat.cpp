@@ -273,7 +273,17 @@ void GuiChat::setChatUsers()
   }
   else
   {
-    QStringList sl = m_users.toStringList( true, false );
+    QStringList sl;
+    foreach( User u, m_users.toList() )
+    {
+      if( !u.isLocal() )
+      {
+        if( u.isConnected() )
+          sl.append( u.name() );
+        else
+          sl.append( QString( "[%1]" ).arg( u.name() ) );
+      }
+    }
     chat_users = sl.size() == 0 ? tr( "Nobody" ) : sl.join( ", " );
   }
   mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( chat_users ) );

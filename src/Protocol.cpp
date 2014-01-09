@@ -422,6 +422,7 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
     c.setPrivateId( newMd5Id() );
   foreach( VNumber user_id, user_list )
     c.addUser( user_id );
+  c.addUser( ID_LOCAL_USER );
   return c;
 }
 

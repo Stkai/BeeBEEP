@@ -264,6 +264,7 @@ void Settings::load()
   m_localePath = sets.value( "LocalePath", "." ).toString();
   m_minimizeInTray = sets.value( "MinimizeInTray", false ).toBool();
   m_stayOnTop = sets.value( "StayOnTop", false ).toBool();
+  m_raiseOnNewMessageArrived = sets.value( "RaiseOnNewMessageArrived", false ).toBool();
   m_beepFilePath = sets.value( "BeepFilePath", "beep.wav" ).toString();
   sets.endGroup();
 
@@ -403,6 +404,7 @@ void Settings::save()
   sets.setValue( "MinimizeInTray", m_minimizeInTray );
   sets.setValue( "StayOnTop", m_stayOnTop );
   sets.setValue( "BeepFilePath", m_beepFilePath );
+  sets.setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
   sets.endGroup();
   sets.beginGroup( "Tools" );
 #if defined( BEEBEEP_DEBUG )
@@ -463,4 +465,32 @@ void Settings::setLastDirectorySelectedFromFile( const QString& file_path )
 {
   QFileInfo file_info( file_path );
   setLastDirectorySelected( file_info.absoluteDir().absolutePath() );
+}
+
+void Settings::addStartOnSystemBoot()
+{
+#ifdef Q_OS_WIN
+  QString program_path = qApp->applicationFilePath().replace( "/", "\\" );
+  QSettings sets( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
+  sets.setValue( programName(), program_path );
+#endif
+}
+
+void Settings::removeStartOnSystemBoot()
+{
+#ifdef Q_OS_WIN
+  QSettings sets( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
+  sets.remove( programName() );
+#endif
+}
+
+bool Settings::hasStartOnSystemBoot() const
+{
+#ifdef Q_OS_WIN
+  QString program_path = qApp->applicationFilePath().replace( "/", "\\" );
+  QSettings sets( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
+  return sets.value( programName(), "" ).toString() == program_path;
+#else
+  return false;
+#endif
 }

@@ -68,18 +68,26 @@ void GuiCreateGroupChat::setGroupChat( const Chat& c )
     item->setIcon( 0, Bee::userStatusIcon( u.service(), u.status() ) );
     item->setText( 0, u.name() );
     item->setData( 0, Qt::UserRole+1, u.id() );
+    item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+    item->setCheckState( 0, Qt::Checked );
 
     if( !m_groupUsersId.isEmpty() && m_groupUsersId.contains( u.id() ) )
-    {
-      item->setSelected( true );
-      //item->setDisabled( true );
-    }
+      item->setCheckState( 0, Qt::Checked );
+    else
+      item->setCheckState( 0, Qt::Unchecked );
   }
 }
 
 void GuiCreateGroupChat::updateGroupChat()
 {
-  QList<QTreeWidgetItem*> item_list = mp_twUsers->selectedItems();
+  QList<QTreeWidgetItem*> item_list;
+  QTreeWidgetItemIterator it( mp_twUsers, QTreeWidgetItemIterator::Checked );
+  while( *it )
+  {
+    item_list.append( *it );
+    ++it;
+  }
+
   if( item_list.size() < 2 )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Please select two or more member of the group chat." ) );

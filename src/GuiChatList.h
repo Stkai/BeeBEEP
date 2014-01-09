@@ -36,11 +36,13 @@ public:
 
   virtual QSize sizeHint() const;
 
-  void updateChat( VNumber chat_id );
   void updateChats();
 
 signals:
   void chatSelected( VNumber chat_id );
+
+public slots:
+  void updateChat( VNumber chat_id );
 
 protected slots:
   void chatDoubleClicked( QTreeWidgetItem*, int );

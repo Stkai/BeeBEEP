@@ -211,7 +211,7 @@ void Core::checkUserAuthentication( const Message& m )
     }
   }
 
-  //if( user_reconnect )
-    //checkGroupChatAfterUserReconnect( u );
+  if( user_reconnect )
+    checkGroupChatAfterUserReconnect( u );
 
 }

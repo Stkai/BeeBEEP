@@ -91,6 +91,8 @@ public:
   inline void setShowMessagesGroupByUser( bool );
   inline bool stayOnTop() const;
   inline void setStayOnTop( bool );
+  inline bool raiseOnNewMessageArrived() const;
+  inline void setRaiseOnNewMessageArrived( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
@@ -152,6 +154,10 @@ public:
   inline void setFileShare( bool );
   inline int maxFileShared() const;
 
+  void addStartOnSystemBoot();
+  void removeStartOnSystemBoot();
+  bool hasStartOnSystemBoot() const;
+
   void load();
   void save();
 
@@ -205,6 +211,7 @@ private:
   bool m_showEmoticons;
   bool m_showMessagesGroupByUser;
   bool m_stayOnTop;
+  bool m_raiseOnNewMessageArrived;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -313,6 +320,8 @@ inline bool Settings::showMessagesGroupByUser() const { return m_showMessagesGro
 inline void Settings::setShowMessagesGroupByUser( bool new_value ) { m_showMessagesGroupByUser = new_value; }
 inline bool Settings::stayOnTop() const { return m_stayOnTop; }
 inline void Settings::setStayOnTop( bool new_value ) { m_stayOnTop = new_value; }
+inline bool Settings::raiseOnNewMessageArrived() const { return m_raiseOnNewMessageArrived; }
+inline void Settings::setRaiseOnNewMessageArrived( bool new_value ) { m_raiseOnNewMessageArrived = new_value; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::useNetworkProxy() const { return m_networkProxy.type() != QNetworkProxy::NoProxy; }

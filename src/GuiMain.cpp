@@ -45,6 +45,9 @@
 #include "PluginManager.h"
 #include "Settings.h"
 #include "UserManager.h"
+#ifdef Q_OS_WIN
+  #include "windows.h"
+#endif
 
 
 GuiMain::GuiMain( QWidget *parent )
@@ -82,6 +85,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
+  connect( mp_core, SIGNAL( updateChat( VNumber ) ), mp_chatList, SLOT( updateChat( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -276,7 +280,7 @@ void GuiMain::initGuiItems()
   mp_actSearch->setEnabled( enable_verbose );
   mp_userList->setDefaultChatConnected( enable );
   mp_actCreateGroup->setEnabled( enable_verbose );
-  mp_actGroupAdd->setEnabled( enable_verbose );
+  mp_actGroupAdd->setEnabled( false );
 
   updateStatusIcon();
   mp_shareLocal->loadSettings();
@@ -483,6 +487,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().beepOnNewMessageArrived() );
   act->setData( 4 );
   mp_actBeepOnNewMessage = act;
+
+  act = mp_menuSettings->addAction( tr( "Raise on new message arrived" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled when a new message is arrived %1 is shown on top of all other windows" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
+  act->setData( 15 );
 
   act = mp_menuSettings->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
@@ -817,6 +827,9 @@ void GuiMain::settingsChanged()
     Settings::instance().setStayOnTop( act->isChecked() );
     checkWindowFlagsAndShow();
     break;
+  case 15:
+    Settings::instance().setRaiseOnNewMessageArrived( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -835,28 +848,44 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
   qDebug() << num_messages << "messages sent";
 }
 
+void GuiMain::showAlert()
+{
+  if( !isActiveWindow() || isMinimized() )
+  {
+    qDebug() << "BeeBEEP alert called";
+
+    if( Settings::instance().beepOnNewMessageArrived() )
+    {
+      qDebug() << "New message arrived in background: play BEEP sound";
+      if( QFile::exists( Settings::instance().beepFilePath() ) )
+        playBeep();
+      else
+        QApplication::beep();
+    }
+
+    if( mp_trayIcon->isVisible() )
+    {
+      mp_trayIcon->addUnreadMessage( 1 );
+    }
+    else
+    {
+      if( Settings::instance().raiseOnNewMessageArrived() && !Settings::instance().stayOnTop() )
+      {
+        raiseOnTop();
+        return;
+      }
+      QApplication::alert( this );
+    }
+  }
+}
+
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
   bool is_current_chat = chat_id == mp_defaultChat->chatId();
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
   {
-    if( !isVisible() )
-    {
-      QApplication::alert( this );
-      if( Settings::instance().beepOnNewMessageArrived() )
-      {
-        qDebug() << "New message arrived in background: play BEEP sound";
-        if( QFile::exists( Settings::instance().beepFilePath() ) )
-        {
-          playBeep();
-        }
-        else
-          QApplication::beep();
-      }
-
-      mp_trayIcon->addUnreadMessage( 1 );
-    }
+    showAlert();
   }
 
   if( is_current_chat )
@@ -1561,10 +1590,8 @@ void GuiMain::createGroup()
   gcgc.show();
   gcgc.setFixedSize( gcgc.size() );
   if( gcgc.exec() == QDialog::Accepted )
-  {
-    VNumber chat_id = mp_core->createGroupChat( gcgc.groupName(), gcgc.groupUsersId(), "", true );
-    mp_chatList->updateChat( chat_id );
-  }
+    mp_core->createGroupChat( gcgc.groupName(), gcgc.groupUsersId(), "", true );
+
 }
 
 void GuiMain::addUserToGroup()
@@ -1588,4 +1615,16 @@ void GuiMain::addUserToGroup()
   }
 }
 
+void GuiMain::raiseOnTop()
+{
+#ifdef Q_OS_WIN
+  SetWindowPos( winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  SetWindowPos( winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  SetActiveWindow( winId() );
+#else
+  qApp->setActiveWindow( this );
+  // FIXME!!!
+#endif
+
+}
 

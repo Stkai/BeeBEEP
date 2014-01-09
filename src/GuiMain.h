@@ -105,9 +105,12 @@ private slots:
   void addUserToGroup();
   void createGroup();
 
+
 protected:
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
+  void showAlert();
+  void raiseOnTop();
 
 private:
   void createActions();

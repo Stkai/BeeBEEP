@@ -52,7 +52,7 @@ void Core::createPrivateChat( const User& u )
   QList<VNumber> user_list;
   user_list.append( u.id() );
   Chat c = Protocol::instance().createChat( user_list );
-  QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.path() );
+  QString sHtmlMsg = tr( "%1 Chat with %2 (%3)." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name(), u.path() );
   ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
@@ -72,7 +72,7 @@ void Core::checkGroupChatAfterUserReconnect( const User& u )
   }
 }
 
-VNumber Core::createGroupChat( const QString& chat_name, const QList<VNumber>& users_id, const QString& chat_private_id, bool broadcast_message )
+void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& users_id, const QString& chat_private_id, bool broadcast_message )
 {
   qDebug() << "Creating group chat named" << chat_name;
   UserList ul = UserManager::instance().userList().fromUsersId( users_id );
@@ -95,7 +95,10 @@ VNumber Core::createGroupChat( const QString& chat_name, const QList<VNumber>& u
 
   QStringList user_string_list;
   foreach( User u, ul.toList() )
-    user_string_list << u.path();
+  {
+    if( !u.isLocal() )
+      user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.path() ) );
+  }
 
   sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_string_list.join( ", " ) );
   c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
@@ -104,10 +107,8 @@ VNumber Core::createGroupChat( const QString& chat_name, const QList<VNumber>& u
 
   if( broadcast_message )
     sendGroupChatRequestMessage( c, ul );
-  else
-    emit updateChat( c.id() );
 
-  return c.id();
+  emit updateChat( c.id() );
 }
 
 void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>& users_id, bool broadcast_message )
@@ -136,9 +137,12 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
 
   foreach( User u, ul.toList() )
   {
-    if( !c.usersId().contains( u.id() ) )
-      user_added_string_list << u.path();
-    user_string_list << u.path();
+    if( !u.isLocal() )
+    {
+      if( !c.usersId().contains( u.id() ) )
+        user_added_string_list << u.path();
+      user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.path() ) );
+    }
   }
 
   if( !user_added_string_list.isEmpty() )
@@ -158,7 +162,10 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
   if( broadcast_message )
     sendGroupChatRequestMessage( c, ul );
   else
-    emit updateChat( c.id() );
+  {
+    if( chat_changed )
+      emit updateChat( c.id() );
+  }
 }
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )

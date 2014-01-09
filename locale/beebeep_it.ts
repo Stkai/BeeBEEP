@@ -247,6 +247,10 @@
         <source>%1 %2 adds you to the group: %3.</source>
         <translation>%1 %2 ti ha aggiunto al gruppo: %3.</translation>
     </message>
+    <message>
+        <source>%1 Chat with %2 (%3).</source>
+        <translation>%1 Parla con %2 (%3).</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1182,6 +1186,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Impossibile to add users in this chat. Please select a group one.</source>
         <translation>Impossibile aggiungee utenti a questa conversazione. Seleziona prima una chat di gruppo.</translation>
+    </message>
+    <message>
+        <source>Raise on new message arrived</source>
+        <translation>Porta in primo piano all&apos;arrivo di un nuovo messaggio</translation>
+    </message>
+    <message>
+        <source>If enabled when a new message is arrived %1 is shown on top of all other windows</source>
+        <translation>Se abilitata %1 sarà mostrato in primo piano all&apos;arrivo di ogni nuovo messaggio</translation>
     </message>
 </context>
 <context>
