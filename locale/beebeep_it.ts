@@ -1195,6 +1195,22 @@ il file %2 (%3)?</translation>
         <source>If enabled when a new message is arrived %1 is shown on top of all other windows</source>
         <translation>Se abilitata %1 sarà mostrato in primo piano all&apos;arrivo di ogni nuovo messaggio</translation>
     </message>
+    <message>
+        <source>Load %1 on Windows startup</source>
+        <translation>Carica %1 alla partenza di Windows</translation>
+    </message>
+    <message>
+        <source>If enabled you can automatically load %1 at system startup</source>
+        <translation>Se abilitata %1 sarà lanciato automaticamente alla partenza di Windows</translation>
+    </message>
+    <message>
+        <source>Now %1 will start on windows boot.</source>
+        <translation>%1 sarà avviato alla partenza di Windows.</translation>
+    </message>
+    <message>
+        <source>%1 will not start on windows boot.</source>
+        <translation>%1 non sarà più avviato automaticamente alla partenza di Windows.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

@@ -1,7 +1,9 @@
 BEEBEEP (Secure Network Chat)
 
-BeeBEEP 0.9.4
+BeeBEEP 0.9.3
 - Group chat
+- Put window on top when a new message arrive option
+- Automatic start on windows boot option
 
 BeeBEEP 0.9.2
 - Minimize on System Tray is now Close on System Tray

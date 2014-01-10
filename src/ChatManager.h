@@ -49,6 +49,9 @@ public:
 
   QList<Chat> groupChatForUser( VNumber ) const;
 
+  bool saveChats( const QString& );
+  bool loadChats( const QString& );
+
   static ChatManager& instance()
   {
     if( !mp_instance )

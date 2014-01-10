@@ -105,7 +105,6 @@ private slots:
   void addUserToGroup();
   void createGroup();
 
-
 protected:
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
@@ -132,6 +131,7 @@ private:
   void sendFile( const User& );
   bool askToDownloadFile( const User&, const FileInfo& );
   void setGameInPauseMode();
+  void checkAutoStartOnBoot( bool );
 
 private:
   QStackedWidget* mp_stackedWidget;

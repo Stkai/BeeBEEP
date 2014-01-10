@@ -521,6 +521,14 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().fileShare() );
   act->setData( 12 );
 
+#ifdef Q_OS_WIN
+  act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can automatically load %1 at system startup" ).arg( Settings::instance().programName() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().hasStartOnSystemBoot() );
+  act->setData( 16 );
+#endif
+
   /* Emoticons Menu for ToolBar */
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
   mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
@@ -829,6 +837,9 @@ void GuiMain::settingsChanged()
     break;
   case 15:
     Settings::instance().setRaiseOnNewMessageArrived( act->isChecked() );
+    break;
+  case 16:
+    checkAutoStartOnBoot( act->isChecked() );
     break;
   case 99:
     break;
@@ -1625,6 +1636,19 @@ void GuiMain::raiseOnTop()
   qApp->setActiveWindow( this );
   // FIXME!!!
 #endif
+}
 
+void GuiMain::checkAutoStartOnBoot( bool add_service )
+{
+  if( add_service )
+  {
+    Settings::instance().addStartOnSystemBoot();
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Now %1 will start on windows boot." ).arg( Settings::instance().programName() ) );
+  }
+  else
+  {
+    Settings::instance().removeStartOnSystemBoot();
+    QMessageBox::information( this, Settings::instance().programName(), tr( "%1 will not start on windows boot." ).arg( Settings::instance().programName() ) );
+  }
 }
 

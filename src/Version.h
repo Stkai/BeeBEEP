@@ -26,9 +26,9 @@
 
 const char* BEEBEEP_NAME = "BeeBEEP";
 const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_VERSION = "0.9.4";
+const char* BEEBEEP_VERSION = "0.9.3";
 const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 236;
+const int BEEBEEP_BUILD = 237;
 
 #endif // BEEBEEP_VERSION_H
 
