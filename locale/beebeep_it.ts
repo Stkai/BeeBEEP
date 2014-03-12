@@ -333,6 +333,45 @@
     </message>
 </context>
 <context>
+    <name>GuiAskPassword</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Please enter the chat password (spaces are removed)</source>
+        <translation>Per favore inserisci la password di rete (gli spazi saranno rimossi)</translation>
+    </message>
+    <message>
+        <source>Remember password (not recommended)</source>
+        <translation>Ricorda la password (non consigliato)</translation>
+    </message>
+    <message>
+        <source>Use default chat password</source>
+        <translation>Usa la password di rete automatica</translation>
+    </message>
+    <message>
+        <source>Show this dialog at connection startup</source>
+        <translation>Mostra questa finestra ad ogni connessione</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Chat Password - %1</source>
+        <translation>Password di rete - %1</translation>
+    </message>
+    <message>
+        <source>Password is empty. Please enter a valid one (spaces are removed).</source>
+        <translation>La password è vuota. Per favore inseriscine una valida (gli spazi saranno rimossi).</translation>
+    </message>
+</context>
+<context>
     <name>GuiChat</name>
     <message>
         <source>Copy to clipboard</source>
@@ -508,7 +547,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Please insert the chat password (or just press Enter)</source>
-        <translation>Inserisci la password per il collegamento (o premi solamente Invio)</translation>
+        <translation type="obsolete">Inserisci la password per il collegamento (o premi solamente Invio)</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>
