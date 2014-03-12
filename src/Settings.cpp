@@ -67,6 +67,7 @@ QByteArray Settings::hash( const QString& string_to_hash ) const
 
 void Settings::setPassword( const QString& new_value )
 {
+  m_passwordBeforeHash = new_value;
   m_password = QCryptographicHash::hash( QString( (new_value.isEmpty() || new_value == defaultPassword()) ? "*6475*" : new_value ).toUtf8(), QCryptographicHash::Sha1 ).toHex();
   m_hash = QString::fromUtf8( hash( m_localUser.name() ) );
 }
@@ -280,6 +281,17 @@ void Settings::load()
   sets.endGroup();
 
   sets.beginGroup( "Misc" );
+  m_useDefaultPassword = sets.value( "UseDefaultPassword", false ).toBool();
+  m_askPasswordAtStartup = sets.value( "AskPasswordAtStartup", true ).toBool();
+  m_savePassword = sets.value( "SavePassword", false ).toBool();
+  if( m_savePassword )
+  {
+    m_passwordBeforeHash = sets.value( "PasswordEncrypted", "" ).toString();
+    if( !m_passwordBeforeHash.isEmpty() )
+      m_passwordBeforeHash = Protocol::simpleDecrypt( m_passwordBeforeHash );
+  }
+  else
+    m_passwordBeforeHash = "";
   m_broadcastPort = sets.value( "BroadcastPort", 36475 ).toInt();
   m_broadcastInterval = sets.value( "BroadcastInterval", 0 ).toInt();
   m_localUser.setHostPort( sets.value( "ListenerPort", 6475 ).toInt() );
@@ -417,6 +429,19 @@ void Settings::save()
   sets.setValue( "AutomaticFileName", m_automaticFileName );
   sets.endGroup();
   sets.beginGroup( "Misc" );
+  sets.setValue( "UseDefaultPassword", m_useDefaultPassword );
+  sets.setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
+  if( m_savePassword )
+  {
+    sets.setValue( "SavePassword", true );
+    sets.setValue( "PasswordEncrypted", Protocol::simpleEncrypt( m_passwordBeforeHash ) );
+  }
+  else
+  {
+    sets.remove( "SavePassword" );
+    sets.remove( "PasswordEncrypted" );
+  }
+
   sets.setValue( "BroadcastPort", m_broadcastPort );
   sets.setValue( "BroadcastInterval", m_broadcastInterval );
   sets.setValue( "ListenerPort", m_localUser.hostPort() );
@@ -459,6 +484,23 @@ void Settings::save()
 
   sets.sync();
   qDebug() << "Settings saved";
+}
+
+bool Settings::askPassword() const
+{
+  if( askPasswordAtStartup() )
+    return true;
+
+  if( useDefaultPassword() )
+    return false;
+
+  if( !savePassword() )
+    return true;
+
+  if( m_passwordBeforeHash.isEmpty() )
+    return true;
+
+  return false;
 }
 
 void Settings::setLastDirectorySelectedFromFile( const QString& file_path )

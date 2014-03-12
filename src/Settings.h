@@ -105,6 +105,14 @@ public:
   void setPassword( const QString& );
   inline const QByteArray& password() const;
   inline QString defaultPassword() const;
+  inline void setUseDefaultPassword( bool );
+  inline bool useDefaultPassword() const;
+  inline void setSavePassword( bool );
+  inline bool savePassword() const;
+  inline const QString& passwordBeforeHash() const;
+  inline void setAskPasswordAtStartup( bool );
+  inline bool askPasswordAtStartup() const;
+  bool askPassword() const;
 
   inline bool debugMode() const;
   inline void setDebugMode( bool );
@@ -217,8 +225,12 @@ private:
   QByteArray m_guiState;
   QSize m_mainBarIconSize;
 
+  QString m_passwordBeforeHash;
   QByteArray m_password;
   QString m_hash;
+  bool m_useDefaultPassword;
+  bool m_savePassword;
+  bool m_askPasswordAtStartup;
 
   bool m_debugMode;
   bool m_logToFile;
@@ -298,6 +310,13 @@ inline const QByteArray& Settings::guiState() const { return m_guiState; }
 inline const QString& Settings::hash() const { return m_hash; }
 inline const QByteArray& Settings::password() const { return m_password; }
 inline QString Settings::defaultPassword() const { return "*"; }
+inline void Settings::setUseDefaultPassword( bool new_value ) { m_useDefaultPassword = new_value; }
+inline bool Settings::useDefaultPassword() const { return m_useDefaultPassword; }
+inline void Settings::setSavePassword( bool new_value ) { m_savePassword = new_value; }
+inline bool Settings::savePassword() const { return m_savePassword; }
+inline const QString& Settings::passwordBeforeHash() const { return m_passwordBeforeHash; }
+inline void Settings::setAskPasswordAtStartup( bool new_value ) { m_askPasswordAtStartup = new_value; }
+inline bool Settings::askPasswordAtStartup() const { return m_askPasswordAtStartup; }
 inline bool Settings::debugMode() const { return m_debugMode; }
 inline void Settings::setDebugMode( bool new_value ) { m_debugMode = new_value; }
 inline bool Settings::logToFile() const { return m_logToFile; }

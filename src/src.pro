@@ -58,7 +58,8 @@ SOURCES += Listener.cpp \
     GuiShareLocal.cpp \
     GuiShareNetwork.cpp \ 
     GuiSystemTray.cpp \
-    GuiCreateGroupChat.cpp
+    GuiCreateGroupChat.cpp \
+    GuiAskPassword.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -113,7 +114,8 @@ HEADERS += sym_iap_util.h \
     GuiShareLocal.h \
     GuiShareNetwork.h \ 
     GuiSystemTray.h \
-    GuiCreateGroupChat.h
+    GuiCreateGroupChat.h \
+    GuiAskPassword.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \
@@ -125,7 +127,8 @@ FORMS += GuiChat.ui \
     GuiWizard.ui \
     GuiShareLocal.ui \
     GuiShareNetwork.ui \
-    GuiCreateGroupChat.ui
+    GuiCreateGroupChat.ui \
+    GuiAskPassword.ui
 
 RESOURCES += beebeep.qrc
 win32: RC_FILE = beebeep.rc

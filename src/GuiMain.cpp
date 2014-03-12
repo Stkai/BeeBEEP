@@ -26,6 +26,7 @@
 #include "ChatManager.h"
 #include "EmoticonManager.h"
 #include "FileShare.h"
+#include "GuiAskPassword.h"
 #include "GuiChat.h"
 #include "GuiChatList.h"
 #include "GuiCreateGroupChat.h"
@@ -236,16 +237,17 @@ void GuiMain::startCore()
     Settings::instance().setFirstTime( false );
   }
 
-  bool ok = false;
-  QString pwd = QInputDialog::getText( this,
-                                       Settings::instance().programName(),
-                                       tr( "Please insert the chat password (or just press Enter)"),
-                                       QLineEdit::Password,
-                                       Settings::instance().defaultPassword(),
-                                       &ok );
-  if( !ok )
-    return;
-  Settings::instance().setPassword( pwd );
+  if( Settings::instance().askPassword() )
+  {
+    GuiAskPassword gap( this );
+    gap.setModal( true );
+    gap.loadData();
+    gap.show();
+    gap.setFixedSize( gap.size() );
+    if( gap.exec() == QDialog::Rejected )
+      return;
+  }
+
   mp_core->start();
   initGuiItems();
 }

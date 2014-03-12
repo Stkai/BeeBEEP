@@ -21,14 +21,28 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUIASKPASSWORD_H
+#define BEEBEEP_GUIASKPASSWORD_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_VERSION = "0.9.4";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 238;
+#include "ui_GuiAskPassword.h"
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiAskPassword : public QDialog, private Ui::GuiAskPassword
+{
+  Q_OBJECT
+
+public:
+  GuiAskPassword( QWidget* parent = 0 );
+
+  void loadData();
+
+private slots:
+  void somethingChanged();
+  void okPressed();
+
+private:
+  QButtonGroup m_bgPasswordType;
+
+};
+
+#endif // BEEBEEP_GUIASKPASSWORD_H
