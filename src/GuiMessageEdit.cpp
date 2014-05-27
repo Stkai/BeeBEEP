@@ -107,7 +107,7 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     return;
   }
 
-  if( e->key() == Qt::Key_Return )
+  if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter )
   {
     if( mods & Qt::ControlModifier || mods & Qt::ShiftModifier )
     {
