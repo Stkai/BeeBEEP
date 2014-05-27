@@ -166,6 +166,7 @@ public:
   void removeStartOnSystemBoot();
   bool hasStartOnSystemBoot() const;
 
+  void loadPreConf();
   void load();
   void save();
 
@@ -191,6 +192,10 @@ protected:
   void loadBroadcastAddresses();
 
 private:
+  // PreConf
+  bool m_useSettingsFileIni;
+
+  // Ini
   User m_localUser;
   int m_broadcastPort;
   int m_broadcastInterval;

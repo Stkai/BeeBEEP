@@ -70,6 +70,7 @@ int main( int argc, char *argv[] )
   Random::init();
 
   /* Load Settings */
+  Settings::instance().loadPreConf();
   Settings::instance().load();
 
   app.setApplicationName( Settings::instance().programName() );

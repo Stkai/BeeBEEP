@@ -29,11 +29,14 @@
 Settings* Settings::mp_instance = NULL;
 const QString SETTINGS_FILE_NAME = "beebeep.ini";
 const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
+const QString PRECONF_FILE_NAME = "beebeep.rc";
+const QSettings::Format PRECONF_FILE_FORMAT = QSettings::IniFormat;
 
 
 Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
+  m_useSettingsFileIni = true;
   m_localUser.setStatus( User::Online );
   setPassword( defaultPassword() );
 }
@@ -196,140 +199,166 @@ namespace
   }
 }
 
+void Settings::loadPreConf()
+{
+  QSettings sets( PRECONF_FILE_NAME, PRECONF_FILE_FORMAT );
+  if( sets.allKeys().isEmpty() )
+  {
+    qDebug() << "Creating pre-configuration file";
+    sets.beginGroup( "BeeBEEP" );
+
+#if defined( Q_OS_MAC )
+    sets.setValue( "UseConfigurationFileIni", false );
+#else
+    sets.setValue( "UseConfigurationFileIni", true );
+#endif
+    sets.endGroup();
+    sets.sync();
+    qDebug() << "Pre-configuration file created";
+  }
+  else
+  {
+    sets.beginGroup( "BeeBEEP" );
+    m_useSettingsFileIni = sets.value( "UseConfigurationFileIni", true ).toBool();
+    sets.endGroup();
+  }
+}
+
 void Settings::load()
 {
   qDebug() << "Creating local user and loading settings";
+  QSettings *sets;
 
-#if defined( Q_OS_MAC )
-  QSettings sets( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
-#else
-  QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
-#endif
-  m_firstTime = sets.allKeys().isEmpty();
+  if( m_useSettingsFileIni )
+    sets = new QSettings( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
+  else
+    sets = new QSettings( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
 
-  sets.beginGroup( "Chat" );
-  m_chatFont.fromString( sets.value( "Font", QApplication::font().toString() ).toString() );
-  m_chatFontColor = sets.value( "FontColor", QColor( Qt::black ).name() ).toString();
-  m_chatCompact = sets.value( "CompactMessage", true ).toBool();
-  m_chatAddNewLineToMessage = sets.value( "AddNewLineAfterMessage", false ).toBool();
-  m_chatShowMessageTimestamp = sets.value( "ShowMessageTimestamp", false ).toBool();
-  m_chatSaveDirectory = sets.value( "SaveDirectory", "." ).toString();
-  m_beepOnNewMessageArrived = sets.value( "BeepOnNewMessageArrived", true ).toBool();
-  m_chatUseHtmlTags = sets.value( "UseHtmlTags", false ).toBool();
-  m_chatUseClickableLinks = sets.value( "UseClickableLinks", true ).toBool();
-  m_chatMessageHistorySize = sets.value( "MessageHistorySize", 10 ).toInt();
-  m_showEmoticons = sets.value( "ShowEmoticons", true ).toBool();
-  m_showMessagesGroupByUser = sets.value( "ShowMessagesGroupByUsers", true ).toBool();
-  sets.endGroup();
+  m_firstTime = sets->allKeys().isEmpty();
 
-  sets.beginGroup( "User" );
-  m_localUser.setName( sets.value( "LocalName", "" ).toString() ); // For Backward compatibility (FIXME!!!)
-  m_localUser.setColor( sets.value( "LocalColor", "#000000" ).toString() );
-  m_localUser.setStatus( sets.value( "LocalLastStatus", m_localUser.status() ).toInt() );
-  m_localUser.setStatusDescription( sets.value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_showOnlyOnlineUsers = sets.value( "ShowOnlyOnlineUsers", true ).toBool();
-  m_showUserColor = sets.value( "ShowUserNameColor", true ).toBool();
-  sets.endGroup();
+  sets->beginGroup( "Chat" );
+  m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
+  m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
+  m_chatCompact = sets->value( "CompactMessage", true ).toBool();
+  m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
+  m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
+  m_chatSaveDirectory = sets->value( "SaveDirectory", "." ).toString();
+  m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
+  m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
+  m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
+  m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
+  m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
+  m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
+  sets->endGroup();
 
-  sets.beginGroup( "VCard" );
+  sets->beginGroup( "User" );
+  m_localUser.setName( sets->value( "LocalName", "" ).toString() ); // For Backward compatibility (FIXME!!!)
+  m_localUser.setColor( sets->value( "LocalColor", "#000000" ).toString() );
+  m_localUser.setStatus( sets->value( "LocalLastStatus", m_localUser.status() ).toInt() );
+  m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
+  m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
+  m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
+  sets->endGroup();
+
+  sets->beginGroup( "VCard" );
   VCard vc;
-  vc.setNickName( sets.value( "NickName", m_localUser.name() ).toString() );
-  vc.setFirstName( sets.value( "FirstName", "" ).toString() );
-  vc.setLastName( sets.value( "LastName", "" ).toString() );
-  QDate dt = sets.value( "Birthday", QDate() ).toDate();
+  vc.setNickName( sets->value( "NickName", m_localUser.name() ).toString() );
+  vc.setFirstName( sets->value( "FirstName", "" ).toString() );
+  vc.setLastName( sets->value( "LastName", "" ).toString() );
+  QDate dt = sets->value( "Birthday", QDate() ).toDate();
   if( dt.isValid() )
     vc.setBirthday( dt );
-  vc.setEmail( sets.value( "Email", "" ).toString() );
-  QPixmap pix = sets.value( "Photo", QPixmap() ).value<QPixmap>();
+  vc.setEmail( sets->value( "Email", "" ).toString() );
+  QPixmap pix = sets->value( "Photo", QPixmap() ).value<QPixmap>();
   if( !pix.isNull() )
     vc.setPhoto( pix );
   m_localUser.setVCard( vc );
-  sets.endGroup();
+  sets->endGroup();
 
-  sets.beginGroup( "Gui" );
-  m_guiGeometry = sets.value( "MainWindowGeometry", "" ).toByteArray();
-  m_guiState = sets.value( "MainWindowState", "" ).toByteArray();
-  m_mainBarIconSize = sets.value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
-  m_language = sets.value( "Language", QLocale::system().name() ).toString();
+  sets->beginGroup( "Gui" );
+  m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
+  m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
+  m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
+  m_language = sets->value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
 #if QT_VERSION >= 0x050000
-  m_lastDirectorySelected = sets.value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString();
-  m_downloadDirectory = sets.value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString();
+  m_lastDirectorySelected = sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString();
+  m_downloadDirectory = sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString();
 #else
-  m_lastDirectorySelected = sets.value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
-  m_downloadDirectory = sets.value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+  m_lastDirectorySelected = sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+  m_downloadDirectory = sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
 #endif
-  m_logPath = sets.value( "LogPath", "." ).toString();
-  m_pluginPath = sets.value( "PluginPath", "." ).toString();
-  m_localePath = sets.value( "LocalePath", "." ).toString();
-  m_minimizeInTray = sets.value( "MinimizeInTray", false ).toBool();
-  m_stayOnTop = sets.value( "StayOnTop", false ).toBool();
-  m_raiseOnNewMessageArrived = sets.value( "RaiseOnNewMessageArrived", false ).toBool();
-  m_beepFilePath = sets.value( "BeepFilePath", "beep.wav" ).toString();
-  sets.endGroup();
+  m_logPath = sets->value( "LogPath", "." ).toString();
+  m_pluginPath = sets->value( "PluginPath", "." ).toString();
+  m_localePath = sets->value( "LocalePath", "." ).toString();
+  m_minimizeInTray = sets->value( "MinimizeInTray", false ).toBool();
+  m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
+  m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
+  m_beepFilePath = sets->value( "BeepFilePath", "beep.wav" ).toString();
+  sets->endGroup();
 
-  sets.beginGroup( "Tools" );
+  sets->beginGroup( "Tools" );
 #if defined( BEEBEEP_DEBUG )
   m_debugMode = true;
 #else
-  m_debugMode = sets.value( "DebugMode", false ).toBool();
+  m_debugMode = sets->value( "DebugMode", false ).toBool();
 #endif
-  m_logToFile = sets.value( "LogToFile", false ).toBool();
-  m_showTipsOfTheDay = sets.value( "ShowTipsOfTheDay", true ).toBool();
-  m_automaticFileName = sets.value( "AutomaticFileName", true ).toBool();
-  sets.endGroup();
+  m_logToFile = sets->value( "LogToFile", false ).toBool();
+  m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
+  m_automaticFileName = sets->value( "AutomaticFileName", true ).toBool();
+  sets->endGroup();
 
-  sets.beginGroup( "Misc" );
-  m_useDefaultPassword = sets.value( "UseDefaultPassword", false ).toBool();
-  m_askPasswordAtStartup = sets.value( "AskPasswordAtStartup", true ).toBool();
-  m_savePassword = sets.value( "SavePassword", false ).toBool();
+  sets->beginGroup( "Misc" );
+  m_useDefaultPassword = sets->value( "UseDefaultPassword", false ).toBool();
+  m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
+  m_savePassword = sets->value( "SavePassword", false ).toBool();
   if( m_savePassword )
   {
-    m_passwordBeforeHash = sets.value( "PasswordEncrypted", "" ).toString();
+    m_passwordBeforeHash = sets->value( "PasswordEncrypted", "" ).toString();
     if( !m_passwordBeforeHash.isEmpty() )
       m_passwordBeforeHash = Protocol::simpleDecrypt( m_passwordBeforeHash );
   }
   else
     m_passwordBeforeHash = "";
-  m_broadcastPort = sets.value( "BroadcastPort", 36475 ).toInt();
-  m_broadcastInterval = sets.value( "BroadcastInterval", 0 ).toInt();
-  m_localUser.setHostPort( sets.value( "ListenerPort", 6475 ).toInt() );
-  m_pingInterval = qMax( sets.value( "PingInterval", 31000 ).toInt(), 1000 );
-  m_pongTimeout = qMax( sets.value( "PongTimeout", 98000 ).toInt(), 1000 );
-  m_writingTimeout = qMax( sets.value( "WritingTimeout", 3000 ).toInt(), 1000 );
-  m_fileTransferConfirmTimeout = qMax( sets.value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
-  m_fileTransferBufferSize = qMax( sets.value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
+  m_broadcastPort = sets->value( "BroadcastPort", 36475 ).toInt();
+  m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
+  m_localUser.setHostPort( sets->value( "ListenerPort", 6475 ).toInt() );
+  m_pingInterval = qMax( sets->value( "PingInterval", 31000 ).toInt(), 1000 );
+  m_pongTimeout = qMax( sets->value( "PongTimeout", 98000 ).toInt(), 1000 );
+  m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 1000 );
+  m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
+  m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
-  m_trayMessageTimeout = qMax( sets.value( "SystemTrayMessageTimeout", 3000 ).toInt(), 0 );
-  sets.endGroup();
+  m_trayMessageTimeout = qMax( sets->value( "SystemTrayMessageTimeout", 3000 ).toInt(), 0 );
+  sets->endGroup();
 
-  sets.beginGroup( "Network");
-  m_networkProxy.setType( (QNetworkProxy::ProxyType)sets.value( "ProxyType", QNetworkProxy::DefaultProxy ).toInt() );
-  QString proxy_address = sets.value( "ProxyAddress", "" ).toString();
+  sets->beginGroup( "Network");
+  m_networkProxy.setType( (QNetworkProxy::ProxyType)sets->value( "ProxyType", QNetworkProxy::DefaultProxy ).toInt() );
+  QString proxy_address = sets->value( "ProxyAddress", "" ).toString();
   if( proxy_address.isEmpty() )
     m_networkProxy.setType( QNetworkProxy::DefaultProxy );
   else
     m_networkProxy.setHostName( proxy_address );
-  m_networkProxy.setPort( sets.value( "ProxyPort", 0 ).toInt() );
-  m_networkProxyUseAuthentication = sets.value( "ProxyUseAuthentication", false ).toBool();
-  m_networkProxy.setUser( sets.value( "ProxyUser", "" ).toString() );
-  m_networkProxy.setPassword( Protocol::simpleDecrypt( sets.value( "ProxyPassword", "" ).toString() ) );
-  m_broadcastAddresses = sets.value( "BroadcastAddresses", QStringList() ).toStringList();
-  sets.endGroup();
+  m_networkProxy.setPort( sets->value( "ProxyPort", 0 ).toInt() );
+  m_networkProxyUseAuthentication = sets->value( "ProxyUseAuthentication", false ).toBool();
+  m_networkProxy.setUser( sets->value( "ProxyUser", "" ).toString() );
+  m_networkProxy.setPassword( Protocol::simpleDecrypt( sets->value( "ProxyPassword", "" ).toString() ) );
+  m_broadcastAddresses = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
+  sets->endGroup();
   loadBroadcastAddresses();
 
-  sets.beginGroup( "FileShare" );
-  m_fileShare = sets.value( "Active", true ).toBool();
-  m_maxFileShared = qMax( 0, sets.value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
-  m_localShare = sets.value( "ShareList", QStringList() ).toStringList();
-  sets.endGroup();
+  sets->beginGroup( "FileShare" );
+  m_fileShare = sets->value( "Active", true ).toBool();
+  m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
+  m_localShare = sets->value( "ShareList", QStringList() ).toStringList();
+  sets->endGroup();
 
   qDebug() << "Loading network accounts";
-  sets.beginGroup( "NetworkAccount" );
-  int account_number = sets.value( "Accounts", 0 ).toInt();
+  sets->beginGroup( "NetworkAccount" );
+  int account_number = sets->value( "Accounts", 0 ).toInt();
   qDebug() << account_number << "accounts found";
   if( account_number > 0 )
   {
@@ -337,7 +366,7 @@ void Settings::load()
     QString account_data = "";
     while( account_index <= account_number )
     {
-      account_data = sets.value( QString( "Account%1" ).arg( account_index ), QString( "" ) ).toString();
+      account_data = sets->value( QString( "Account%1" ).arg( account_index ), QString( "" ) ).toString();
       if( account_data.size() > 0 )
       {
         NetworkAccount na;
@@ -352,7 +381,7 @@ void Settings::load()
       account_index++;
     }
   }
-  sets.endGroup();
+  sets->endGroup();
 
   QString sName = GetUserNameFromSystemEnvinroment();
   if( m_localUser.name().isEmpty() )
@@ -360,130 +389,136 @@ void Settings::load()
   m_localUser.setBareJid( sName.toLower() );
 
   qDebug() << "Load local user:" << m_localUser.path();
+
+  sets->deleteLater();
 }
 
 void Settings::save()
 {
   qDebug() << "Saving settings";
-#if defined( Q_OS_MAC )
-  QSettings sets( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
-#else
-  QSettings sets( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
-#endif
-  sets.beginGroup( "Version" );
-  sets.setValue( "Program", version( true ) );
-  sets.setValue( "Proto", protoVersion() );
-  sets.endGroup();
-  sets.beginGroup( "Chat" );
-  sets.setValue( "Font", m_chatFont.toString() );
-  sets.setValue( "FontColor", m_chatFontColor );
-  sets.setValue( "CompactMessage", m_chatCompact );
-  sets.setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
-  sets.setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
-  sets.setValue( "SaveDirectory", m_chatSaveDirectory );
-  sets.setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
-  sets.setValue( "UseHtmlTags", m_chatUseHtmlTags );
-  sets.setValue( "UseClickableLinks", m_chatUseClickableLinks );
-  sets.setValue( "MessageHistorySize", m_chatMessageHistorySize );
-  sets.setValue( "ShowEmoticons", m_showEmoticons );
-  sets.setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
-  sets.endGroup();
-  sets.beginGroup( "User" );
-  sets.setValue( "LocalColor", m_localUser.color() );
-  sets.setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
-  sets.setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
-  sets.setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
-  sets.setValue( "ShowUserNameColor", m_showUserColor );
-  sets.endGroup();
-  sets.beginGroup( "VCard" );
-  sets.setValue( "NickName", m_localUser.vCard().nickName() );
-  sets.setValue( "FirstName", m_localUser.vCard().firstName() );
-  sets.setValue( "LastName", m_localUser.vCard().lastName() );
-  sets.setValue( "Birthday", m_localUser.vCard().birthday() );
-  sets.setValue( "Email", m_localUser.vCard().email() );
-  sets.setValue( "Photo", m_localUser.vCard().photo() );
-  sets.endGroup();
-  sets.beginGroup( "Gui" );
-  sets.setValue( "MainWindowGeometry", m_guiGeometry );
-  sets.setValue( "MainWindowState", m_guiState );
-  sets.setValue( "MainBarIconSize", m_mainBarIconSize );
-  sets.setValue( "Language", m_language );
-  sets.setValue( "LastDirectorySelected", m_lastDirectorySelected );
-  sets.setValue( "DownloadDirectory", m_downloadDirectory );
-  sets.setValue( "LogPath", m_logPath );
-  sets.setValue( "PluginPath", m_pluginPath );
-  sets.setValue( "LocalePath", m_localePath );
-  sets.setValue( "MinimizeInTray", m_minimizeInTray );
-  sets.setValue( "StayOnTop", m_stayOnTop );
-  sets.setValue( "BeepFilePath", m_beepFilePath );
-  sets.setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
-  sets.endGroup();
-  sets.beginGroup( "Tools" );
+
+  QSettings *sets;
+
+  if( m_useSettingsFileIni )
+    sets = new QSettings( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
+  else
+    sets = new QSettings( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
+
+  sets->beginGroup( "Version" );
+  sets->setValue( "Program", version( true ) );
+  sets->setValue( "Proto", protoVersion() );
+  sets->endGroup();
+  sets->beginGroup( "Chat" );
+  sets->setValue( "Font", m_chatFont.toString() );
+  sets->setValue( "FontColor", m_chatFontColor );
+  sets->setValue( "CompactMessage", m_chatCompact );
+  sets->setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
+  sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
+  sets->setValue( "SaveDirectory", m_chatSaveDirectory );
+  sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
+  sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );
+  sets->setValue( "UseClickableLinks", m_chatUseClickableLinks );
+  sets->setValue( "MessageHistorySize", m_chatMessageHistorySize );
+  sets->setValue( "ShowEmoticons", m_showEmoticons );
+  sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
+  sets->endGroup();
+  sets->beginGroup( "User" );
+  sets->setValue( "LocalColor", m_localUser.color() );
+  sets->setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
+  sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
+  sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
+  sets->setValue( "ShowUserNameColor", m_showUserColor );
+  sets->endGroup();
+  sets->beginGroup( "VCard" );
+  sets->setValue( "NickName", m_localUser.vCard().nickName() );
+  sets->setValue( "FirstName", m_localUser.vCard().firstName() );
+  sets->setValue( "LastName", m_localUser.vCard().lastName() );
+  sets->setValue( "Birthday", m_localUser.vCard().birthday() );
+  sets->setValue( "Email", m_localUser.vCard().email() );
+  sets->setValue( "Photo", m_localUser.vCard().photo() );
+  sets->endGroup();
+  sets->beginGroup( "Gui" );
+  sets->setValue( "MainWindowGeometry", m_guiGeometry );
+  sets->setValue( "MainWindowState", m_guiState );
+  sets->setValue( "MainBarIconSize", m_mainBarIconSize );
+  sets->setValue( "Language", m_language );
+  sets->setValue( "LastDirectorySelected", m_lastDirectorySelected );
+  sets->setValue( "DownloadDirectory", m_downloadDirectory );
+  sets->setValue( "LogPath", m_logPath );
+  sets->setValue( "PluginPath", m_pluginPath );
+  sets->setValue( "LocalePath", m_localePath );
+  sets->setValue( "MinimizeInTray", m_minimizeInTray );
+  sets->setValue( "StayOnTop", m_stayOnTop );
+  sets->setValue( "BeepFilePath", m_beepFilePath );
+  sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
+  sets->endGroup();
+  sets->beginGroup( "Tools" );
 #if defined( BEEBEEP_DEBUG )
-  sets.setValue( "DebugMode", false );
+  sets->setValue( "DebugMode", false );
 #else
-  sets.setValue( "DebugMode", m_debugMode );
+  sets->setValue( "DebugMode", m_debugMode );
 #endif
-  sets.setValue( "LogToFile", m_logToFile );
-  sets.setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
-  sets.setValue( "AutomaticFileName", m_automaticFileName );
-  sets.endGroup();
-  sets.beginGroup( "Misc" );
-  sets.setValue( "UseDefaultPassword", m_useDefaultPassword );
-  sets.setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
+  sets->setValue( "LogToFile", m_logToFile );
+  sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
+  sets->setValue( "AutomaticFileName", m_automaticFileName );
+  sets->endGroup();
+  sets->beginGroup( "Misc" );
+  sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
+  sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
   if( m_savePassword )
   {
-    sets.setValue( "SavePassword", true );
-    sets.setValue( "PasswordEncrypted", Protocol::simpleEncrypt( m_passwordBeforeHash ) );
+    sets->setValue( "SavePassword", true );
+    sets->setValue( "PasswordEncrypted", Protocol::simpleEncrypt( m_passwordBeforeHash ) );
   }
   else
   {
-    sets.remove( "SavePassword" );
-    sets.remove( "PasswordEncrypted" );
+    sets->remove( "SavePassword" );
+    sets->remove( "PasswordEncrypted" );
   }
 
-  sets.setValue( "BroadcastPort", m_broadcastPort );
-  sets.setValue( "BroadcastInterval", m_broadcastInterval );
-  sets.setValue( "ListenerPort", m_localUser.hostPort() );
-  sets.setValue( "PingInterval", m_pingInterval );
-  sets.setValue( "PongTimeout", m_pongTimeout );
-  sets.setValue( "WritingTimeout", m_writingTimeout );
-  sets.setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
-  sets.setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
-  sets.setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
-  sets.endGroup();
-  sets.beginGroup( "Network");
-  sets.setValue( "ProxyType", (int)m_networkProxy.type() );
-  sets.setValue( "ProxyAddress", m_networkProxy.hostName() );
-  sets.setValue( "ProxyPort", m_networkProxy.port() );
-  sets.setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
-  sets.setValue( "ProxyUser", m_networkProxy.user() );
-  sets.setValue( "ProxyPassword", Protocol::simpleEncrypt( m_networkProxy.password() ) );
-  sets.setValue( "BroadcastAddresses", m_broadcastAddresses );
-  sets.endGroup();
-  sets.beginGroup( "FileShare" );
-  sets.setValue( "Active", m_fileShare );
-  sets.setValue( "MaxFileShared", m_maxFileShared );
-  sets.setValue( "ShareList", m_localShare );
-  sets.endGroup();
+  sets->setValue( "BroadcastPort", m_broadcastPort );
+  sets->setValue( "BroadcastInterval", m_broadcastInterval );
+  sets->setValue( "ListenerPort", m_localUser.hostPort() );
+  sets->setValue( "PingInterval", m_pingInterval );
+  sets->setValue( "PongTimeout", m_pongTimeout );
+  sets->setValue( "WritingTimeout", m_writingTimeout );
+  sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
+  sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
+  sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
+  sets->endGroup();
+  sets->beginGroup( "Network");
+  sets->setValue( "ProxyType", (int)m_networkProxy.type() );
+  sets->setValue( "ProxyAddress", m_networkProxy.hostName() );
+  sets->setValue( "ProxyPort", m_networkProxy.port() );
+  sets->setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
+  sets->setValue( "ProxyUser", m_networkProxy.user() );
+  sets->setValue( "ProxyPassword", Protocol::simpleEncrypt( m_networkProxy.password() ) );
+  sets->setValue( "BroadcastAddresses", m_broadcastAddresses );
+  sets->endGroup();
+  sets->beginGroup( "FileShare" );
+  sets->setValue( "Active", m_fileShare );
+  sets->setValue( "MaxFileShared", m_maxFileShared );
+  sets->setValue( "ShareList", m_localShare );
+  sets->endGroup();
 
   if( m_networkAccounts.size() > 0 )
   {
-    sets.beginGroup( "NetworkAccount" );
-    sets.setValue( "Accounts", m_networkAccounts.size() );
+    sets->beginGroup( "NetworkAccount" );
+    sets->setValue( "Accounts", m_networkAccounts.size() );
     int account_index = 1;
     QList<NetworkAccount>::const_iterator it = m_networkAccounts.begin();
     while( it != m_networkAccounts.end() )
     {
-      sets.setValue( QString( "Account%1" ).arg( account_index ), (*it).toString() );
+      sets->setValue( QString( "Account%1" ).arg( account_index ), (*it).toString() );
       ++it;
       account_index++;
     }
-    sets.endGroup();
+    sets->endGroup();
   }
 
-  sets.sync();
+  sets->sync();
   qDebug() << "Settings saved";
+  sets->deleteLater();
 }
 
 bool Settings::askPassword() const
@@ -515,6 +550,7 @@ void Settings::addStartOnSystemBoot()
   QString program_path = qApp->applicationFilePath().replace( "/", "\\" );
   QSettings sets( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
   sets.setValue( programName(), program_path );
+  sets.sync();
 #endif
 }
 
@@ -523,6 +559,7 @@ void Settings::removeStartOnSystemBoot()
 #ifdef Q_OS_WIN
   QSettings sets( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
   sets.remove( programName() );
+  sets.sync();
 #endif
 }
 
