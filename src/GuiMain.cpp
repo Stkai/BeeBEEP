@@ -239,17 +239,25 @@ void GuiMain::startCore()
 
   if( Settings::instance().askPassword() )
   {
-    GuiAskPassword gap( this );
-    gap.setModal( true );
-    gap.loadData();
-    gap.show();
-    gap.setFixedSize( gap.size() );
-    if( gap.exec() == QDialog::Rejected )
+    if( !promptConnectionPassword() )
       return;
   }
 
   mp_core->start();
   initGuiItems();
+}
+
+bool GuiMain::promptConnectionPassword()
+{
+  GuiAskPassword gap( this );
+  gap.setModal( true );
+  gap.loadData();
+  gap.show();
+  gap.setFixedSize( gap.size() );
+  if( gap.exec() == QDialog::Rejected )
+    return false;
+  mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
+  return true;
 }
 
 void GuiMain::stopCore()
@@ -522,6 +530,12 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().fileShare() );
   act->setData( 12 );
+
+  mp_actPromptPassword = mp_menuSettings->addAction( tr( "Prompts for network password on startup" ), this, SLOT( settingsChanged() ) );
+  mp_actPromptPassword->setStatusTip( tr( "If enabled the password dialog will be showed on connection startup" ) );
+  mp_actPromptPassword->setCheckable( true );
+  mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
+  mp_actPromptPassword->setData( 17 );
 
 #ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
@@ -842,6 +856,22 @@ void GuiMain::settingsChanged()
     break;
   case 16:
     checkAutoStartOnBoot( act->isChecked() );
+    break;
+  case 17:
+    {
+      if( !act->isChecked() )
+      {
+        Settings::instance().setAskPasswordAtStartup( false );
+        if( Settings::instance().askPassword() )
+        {
+          QMessageBox::information( this, Settings::instance().programName(), tr( "Please save the network password in the next dialog." ) );
+          promptConnectionPassword();
+          return;
+        }
+      }
+      else
+        Settings::instance().setAskPasswordAtStartup( true );
+    }
     break;
   case 99:
     break;

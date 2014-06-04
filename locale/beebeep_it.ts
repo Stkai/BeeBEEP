@@ -1250,6 +1250,18 @@ il file %2 (%3)?</translation>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 non sarà più avviato automaticamente alla partenza di Windows.</translation>
     </message>
+    <message>
+        <source>Prompts for network password on startup</source>
+        <translation>Richiedi la password ad ogni connessione</translation>
+    </message>
+    <message>
+        <source>If enabled the password dialog will be showed on connection startup</source>
+        <translation>Se abilitata verrà mostrata la finestra per inserire la password ad ogni connessione</translation>
+    </message>
+    <message>
+        <source>Please save the network password in the next dialog.</source>
+        <translation>Inserisci e memorizza la password di rete nella prossima finestra.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

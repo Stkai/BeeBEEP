@@ -110,6 +110,7 @@ protected:
   void changeEvent( QEvent* );
   void showAlert();
   void raiseOnTop();
+  bool promptConnectionPassword();
 
 private:
   void createActions();
@@ -173,6 +174,7 @@ private:
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actGroupAdd;
   QAction* mp_actCreateGroup;
+  QAction* mp_actPromptPassword;
 
   QDockWidget* mp_dockUserList;
 
