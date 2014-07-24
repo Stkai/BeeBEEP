@@ -1661,9 +1661,9 @@ void GuiMain::addUserToGroup()
 void GuiMain::raiseOnTop()
 {
 #ifdef Q_OS_WIN
-  SetWindowPos( winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
-  SetWindowPos( winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
-  SetActiveWindow( winId() );
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  SetActiveWindow( (HWND)winId() );
 #else
   qApp->setActiveWindow( this );
   // FIXME!!!
