@@ -296,6 +296,7 @@ void Settings::load()
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
   m_beepFilePath = sets->value( "BeepFilePath", "beep.wav" ).toString();
+  m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -451,6 +452,7 @@ void Settings::save()
   sets->setValue( "StayOnTop", m_stayOnTop );
   sets->setValue( "BeepFilePath", m_beepFilePath );
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
+  sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );
   sets->endGroup();
   sets->beginGroup( "Tools" );
 #if defined( BEEBEEP_DEBUG )

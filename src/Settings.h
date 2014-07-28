@@ -155,6 +155,8 @@ public:
 
   inline bool minimizeInTray() const;
   inline void setMinimizeInTray( bool );
+  inline bool loadOnTrayAtStartup() const;
+  inline void setLoadOnTrayAtStartup( bool );
 
   inline const QStringList& localShare() const;
   inline void setLocalShare( const QStringList& );
@@ -261,6 +263,7 @@ private:
   bool m_firstTime;
 
   bool m_minimizeInTray;
+  bool m_loadOnTrayAtStartup;
 
   QStringList m_localShare;
   bool m_fileShare;
@@ -360,6 +363,8 @@ inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; 
 inline bool Settings::firstTime() const { return m_firstTime; }
 inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }
 inline void Settings::setMinimizeInTray( bool new_value ) { m_minimizeInTray = new_value; }
+inline bool Settings::loadOnTrayAtStartup() const { return m_loadOnTrayAtStartup; }
+inline void Settings::setLoadOnTrayAtStartup( bool new_value ) { m_loadOnTrayAtStartup = new_value; }
 inline const QStringList& Settings::localShare() const { return m_localShare; }
 inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
 inline bool Settings::fileShare() const { return m_fileShare; }

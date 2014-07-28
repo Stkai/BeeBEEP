@@ -137,6 +137,9 @@ int main( int argc, char *argv[] )
     mw.resize( QSize( 640, 420 ) );
 
   mw.checkWindowFlagsAndShow();
+
+  if( Settings::instance().loadOnTrayAtStartup() && QSystemTrayIcon::isSystemTrayAvailable() )
+    QTimer::singleShot( 100, &mw, SLOT( hideToTrayIcon() ) );
 #endif
 
   // Starting connection to BeeBEEP Network

@@ -50,6 +50,7 @@ public:
 
 public slots:
   void startStopCore();
+  void hideToTrayIcon();
 
 private slots:
   void showAbout();
@@ -87,7 +88,6 @@ private slots:
   void serviceDisconnected( const QString& );
   void sendBroadcastMessage();
   void showWizard();
-  void hideToTrayIcon();
   void showFromTrayIcon();
   void forceExit();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
