@@ -251,6 +251,10 @@
         <source>%1 Chat with %2 (%3).</source>
         <translation>%1 Parla con %2 (%3).</translation>
     </message>
+    <message>
+        <source>%1 is unable to add a new user from %2 (invalid protocol or password).</source>
+        <translation>%1 non può aggiungere un nuovo utente da %2 (protocollo o password non validi).</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>

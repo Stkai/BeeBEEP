@@ -1,8 +1,11 @@
 BEEBEEP (Secure Network Chat)
 
+BeeBEEP 0.9.5
+- option: load minimized at startup 
+
 BeeBEEP 0.9.4
 - Use default password without prompt at startup
-- RC file created to let the user choose Native or INI configuration file.
+- RC file created to let the user choose Native or INI configuration file
 
 BeeBEEP 0.9.3
 - Group chat

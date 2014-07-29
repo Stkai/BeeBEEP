@@ -158,10 +158,17 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
+  QString sHtmlMsg;
   User u = Protocol::instance().createUser( m, c->peerAddress() );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to create a new user from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
+    if( Settings::instance().debugMode() )
+    {
+      sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*C*" ) );
+      sHtmlMsg += tr( "%1 is unable to add a new user from %2 (invalid protocol or password)." ).arg( Settings::instance().programName(), c->peerAddress().toString() );
+      dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+    }
+    qWarning() << "Unable to create a new user from the message arrived from (invalid protocol or password):" << c->peerAddress().toString() << c->peerPort();
     c->abort();
     c->deleteLater();
     return;
@@ -193,7 +200,7 @@ void Core::checkUserAuthentication( const Message& m )
 
   UserManager::instance().setUser( u );
 
-  QString sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
+  sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
   sHtmlMsg += tr( "%1 is connected to %2 network." ).arg( u.name(), Settings::instance().programName() );
   dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 
