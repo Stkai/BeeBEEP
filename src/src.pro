@@ -1,6 +1,8 @@
 include(../beebeep.pri)
 
-QT += network xml widgets multimedia
+QT += network xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
+
 TARGET = beebeep
 TEMPLATE = app
 SOURCES += Listener.cpp \
@@ -56,7 +58,7 @@ SOURCES += Listener.cpp \
     GuiWizard.cpp \
     FileShare.cpp \
     GuiShareLocal.cpp \
-    GuiShareNetwork.cpp \ 
+    GuiShareNetwork.cpp \
     GuiSystemTray.cpp \
     GuiCreateGroupChat.cpp \
     GuiAskPassword.cpp
@@ -112,7 +114,7 @@ HEADERS += sym_iap_util.h \
     GuiWizard.h \
     FileShare.h \
     GuiShareLocal.h \
-    GuiShareNetwork.h \ 
+    GuiShareNetwork.h \
     GuiSystemTray.h \
     GuiCreateGroupChat.h \
     GuiAskPassword.h
