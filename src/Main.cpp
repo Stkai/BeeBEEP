@@ -155,6 +155,7 @@ int main( int argc, char *argv[] )
   ColorManager::close();
   Protocol::close();
   PluginManager::close();
+  Settings::instance().loadPreConf();
   Settings::instance().save();
   Settings::close();
 

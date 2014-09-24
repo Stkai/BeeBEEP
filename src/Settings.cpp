@@ -76,25 +76,37 @@ void Settings::setPassword( const QString& new_value )
 }
 
 QHostAddress Settings::localHostAddress() const
-{
-  QNetworkInterface *if_net = new QNetworkInterface();
-  QList<QHostAddress> address_list = if_net->allAddresses();
+{ 
+  QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
   QHostAddress address_ipv6;
-  foreach( QHostAddress host_address, address_list )
+  QList<QHostAddress> address_list;
+
+  foreach( QNetworkInterface if_net, interface_list )
   {
-    qDebug() << "Local ip address found" << host_address.toString();
-#if QT_VERSION >= 0x050000
-    if( !host_address.isLoopback() )
-#else
-    if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
-#endif
+    if( (if_net.flags() & QNetworkInterface::IsUp) &&
+         (if_net.flags() & QNetworkInterface::IsRunning) &&
+         (if_net.flags() & ~QNetworkInterface::IsLoopBack) )
     {
-      if( host_address.toString().contains( ":" ) )
-        address_ipv6 = host_address;
-      else
-        return host_address;
+       address_list = if_net.allAddresses();
+       foreach( QHostAddress host_address, address_list )
+       {
+         qDebug() << "Host address found:" << host_address.toString();
+         if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
+         {
+           if( host_address.toString().contains( ":" ) )
+           {
+             address_ipv6 = host_address;
+           }
+           else
+           {
+             qDebug() << "Host address selected:" << host_address.toString();
+             return host_address;
+           }
+         }
+       }
     }
   }
+
   return address_ipv6.isNull() ? QHostAddress( "127.0.0.1" ) : address_ipv6;
 }
 
@@ -574,4 +586,11 @@ bool Settings::hasStartOnSystemBoot() const
 #else
   return false;
 #endif
+}
+
+void Settings::clearNativeSettings()
+{
+  QSettings sets( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
+  if( !sets.allKeys().isEmpty() )
+    sets.clear();
 }

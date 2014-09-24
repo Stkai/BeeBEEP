@@ -169,6 +169,7 @@ public:
   bool hasStartOnSystemBoot() const;
 
   void loadPreConf();
+  void clearNativeSettings();
   void load();
   void save();
 
