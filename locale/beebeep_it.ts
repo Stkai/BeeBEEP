@@ -528,6 +528,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>GuiLogWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>GuiMain</name>
     <message>
         <source>Show the ToolBar</source>
@@ -1265,6 +1272,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Please save the network password in the next dialog.</source>
         <translation>Inserisci e memorizza la password di rete nella prossima finestra.</translation>
+    </message>
+    <message>
+        <source>Show the %1 log</source>
+        <translation>Mostra il log di %1</translation>
+    </message>
+    <message>
+        <source>Show the application log to see if an error occurred</source>
+        <translation>Mostra i log dell&apos;applicazione per vedere se ci sono stati errori</translation>
     </message>
 </context>
 <context>

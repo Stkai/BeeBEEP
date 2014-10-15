@@ -68,6 +68,7 @@ bool Log::bootFileStream()
     return false;
   }
 
+  qDebug() << "Logging to file" << log_path;
   return true;
 }
 

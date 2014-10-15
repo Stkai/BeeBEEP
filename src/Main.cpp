@@ -154,8 +154,9 @@ int main( int argc, char *argv[] )
   PluginManager::close();
   Settings::instance().loadPreConf();
   Settings::instance().save();
-  Settings::close();
+  Log::instance().closeFileStream();
   Log::instance().close();
+  Settings::close();
 
   /* Exit */
   return iRet;
