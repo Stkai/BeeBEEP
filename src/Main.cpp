@@ -69,6 +69,9 @@ int main( int argc, char *argv[] )
   /* Randomize */
   Random::init();
 
+  /* Enable internal logs */
+  Log::installMessageHandler();
+
   /* Load Settings */
   Settings::instance().loadPreConf();
   Settings::instance().load();
@@ -77,15 +80,9 @@ int main( int argc, char *argv[] )
   app.setOrganizationName( Settings::instance().organizationName() );
   app.setApplicationVersion( Settings::instance().version( false ) );
 
-#ifdef BEEBEEP_RELEASE
-  /* Starting Logs */
-  Log::boot();
-#if QT_VERSION >= 0x050000
-  qInstallMessageHandler( Log::MessageHandler );
-#else
-  qInstallMsgHandler( Log::MessageHandler );
-#endif
-#endif
+  /* Starting File Logs */
+  if( Settings::instance().logToFile() )
+    Log::instance().bootFileStream();
 
 #ifdef USE_QXMPP
   qDebug() << "Running QXmpp Version";
@@ -158,10 +155,8 @@ int main( int argc, char *argv[] )
   Settings::instance().loadPreConf();
   Settings::instance().save();
   Settings::close();
+  Log::instance().close();
 
-#ifdef BEEBEEP_RELEASE
-  Log::close();
-#endif
   /* Exit */
   return iRet;
 }

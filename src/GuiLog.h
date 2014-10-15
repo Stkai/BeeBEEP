@@ -21,14 +21,23 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUILOG_H
+#define BEEBEEP_GUILOG_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_VERSION = "0.9.5";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 248;
+#include "Config.h"
+#include "ui_GuiLog.h"
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiLog : public QWidget, private Ui::GuiLogWidget
+{
+  Q_OBJECT
+
+public:
+  explicit GuiLog( QWidget *parent = 0 );
+
+public slots:
+  void refreshLog();
+
+};
+
+#endif // BEEBEEP_GUILOG_H

@@ -31,6 +31,7 @@
 #include "GuiChatList.h"
 #include "GuiCreateGroupChat.h"
 #include "GuiEditVCard.h"
+#include "GuiLog.h"
 #include "GuiNetwork.h"
 #include "GuiNetworkLogin.h"
 #include "GuiPluginManager.h"
@@ -593,6 +594,8 @@ void GuiMain::createMenus()
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareNetwork->setStatusTip( tr( "Show the list of the network shared files" ) );
+  mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
+  mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
 
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("&?" ), this );
@@ -638,6 +641,8 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
+  mp_barMain->addAction( mp_actViewLog );
+
 #if defined( Q_OS_MAC )
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actAbout );
@@ -696,6 +701,9 @@ void GuiMain::createStackedWidgets()
 
   mp_shareNetwork = new GuiShareNetwork( this );
   mp_stackedWidget->addWidget( mp_shareNetwork );
+
+  mp_logView = new GuiLog( this );
+  mp_stackedWidget->addWidget( mp_logView );
 }
 
 void GuiMain::createPluginWindows()
@@ -1527,6 +1535,7 @@ void GuiMain::raiseChatView()
   mp_actViewDefaultChat->setEnabled( false );
   mp_actViewShareLocal->setEnabled( true );
   mp_actViewShareNetwork->setEnabled( true );
+  mp_actViewLog->setEnabled( true );
 }
 
 void GuiMain::raiseLocalShareView()
@@ -1536,6 +1545,7 @@ void GuiMain::raiseLocalShareView()
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( false );
   mp_actViewShareNetwork->setEnabled( true );
+  mp_actViewLog->setEnabled( true );
 }
 
 void GuiMain::raiseNetworkShareView()
@@ -1545,6 +1555,7 @@ void GuiMain::raiseNetworkShareView()
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( true );
   mp_actViewShareNetwork->setEnabled( false );
+  mp_actViewLog->setEnabled( true );
 
 }
 
@@ -1566,6 +1577,18 @@ void GuiMain::raisePluginView()
   mp_actViewDefaultChat->setEnabled( true );
   mp_actViewShareLocal->setEnabled( true );
   mp_actViewShareNetwork->setEnabled( true );
+  mp_actViewLog->setEnabled( true );
+}
+
+void GuiMain::raiseLogView()
+{
+  setGameInPauseMode();
+  mp_logView->refreshLog();
+  mp_stackedWidget->setCurrentWidget( mp_logView );
+  mp_actViewDefaultChat->setEnabled( true );
+  mp_actViewShareLocal->setEnabled( true );
+  mp_actViewShareNetwork->setEnabled( true );
+  mp_actViewLog->setEnabled( false );
 }
 
 void GuiMain::setGameInPauseMode()

@@ -21,14 +21,26 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#include "GuiLog.h"
+#include "Log.h"
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_VERSION = "0.9.5";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 248;
+GuiLog::GuiLog( QWidget* parent )
+  : QWidget( parent )
+{
+  setupUi( this );
+  setObjectName( "GuiLog" );
+}
 
-#endif // BEEBEEP_VERSION_H
+void GuiLog::refreshLog()
+{
+  foreach( QString log_txt, Log::instance().toList() )
+  {
+    mp_teLog->appendPlainText( log_txt );
+  }
 
+  QScrollBar *bar = mp_teLog->verticalScrollBar();
+  if( bar )
+    bar->setValue( bar->maximum() );
+
+  Log::instance().clear();
+}

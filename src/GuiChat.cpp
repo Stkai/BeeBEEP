@@ -318,7 +318,8 @@ bool GuiChat::setChatId( VNumber chat_id )
   mp_teChat->setHtml( html_text );
 
   QScrollBar *bar = mp_teChat->verticalScrollBar();
-  bar->setValue( bar->maximum() );
+  if( bar )
+    bar->setValue( bar->maximum() );
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   mp_teMessage->setFocus();
   qDebug() << "Chat" << chat_id << "showed";

@@ -32,6 +32,7 @@ class ChatMessage;
 class FileInfo;
 class GuiChat;
 class GuiChatList;
+class GuiLog;
 class GuiShareLocal;
 class GuiShareNetwork;
 class GuiSystemTray;
@@ -96,6 +97,7 @@ private slots:
   void raiseLocalShareView();
   void raiseNetworkShareView();
   void raisePluginView();
+  void raiseLogView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
@@ -142,6 +144,7 @@ private:
   GuiChatList* mp_chatList;
   GuiShareLocal* mp_shareLocal;
   GuiShareNetwork* mp_shareNetwork;
+  GuiLog* mp_logView;
   Core *mp_core;
 
   QMenu *mp_menuMain;
@@ -171,6 +174,7 @@ private:
   QAction* mp_actViewShareLocal;
   QAction* mp_actViewShareNetwork;
   QAction* mp_actViewDefaultChat;
+  QAction* mp_actViewLog;
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actGroupAdd;
   QAction* mp_actCreateGroup;

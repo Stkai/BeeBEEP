@@ -25,175 +25,59 @@
 #ifndef BEEBEEP_LOG_H
 #define BEEBEEP_LOG_H
 
-#include <QTextStream>
-#include <QDateTime>
-#include <QtDebug>
 #include <QFile>
-#include "Settings.h"
+#include <QStringList>
+#include <QTextStream>
 
-namespace Log
+
+class Log
 {
+public:
+  static void installMessageHandler();
 
-  QTextStream *LogStream = NULL;
-  QFile *LogFile = NULL;
-  const QString LogFileName = "beebeep.log";
+  void rebootFileStream( bool force_reboot );
+  bool bootFileStream();
+  void closeFileStream();
 
-  void boot()
+  void add( const QString& );
+  inline void clear();
+  inline const QStringList& toList() const;
+
+  QString filePathFromSettings() const;
+
+  static Log& instance()
   {
-    if( !Settings::instance().logToFile() )
-      return;
+    if( !mp_instance )
+      mp_instance = new Log();
+    return *mp_instance;
+  }
 
-    if( !LogStream )
+  static void close()
+  {
+    if( mp_instance )
     {
-      QString log_path = QString( "%1/%2" ).arg( Settings::instance().logPath(), LogFileName );
-      LogFile = new QFile( log_path, 0 );
-      if( LogFile->open( QIODevice::WriteOnly ) )
-        LogStream = new QTextStream( LogFile );
-      else
-      {
-        qWarning() << "Unable to open" << log_path;
-        delete LogFile;
-        LogFile = NULL;
-        LogStream = NULL;
-      }
+      delete mp_instance;
+      mp_instance = NULL;
     }
   }
 
-  void close()
-  {
-    if( LogStream )
-    {
-      qDebug() << "Log closed";
-      LogStream->flush();
-      delete LogStream;
-      LogStream = NULL;
-    }
+protected:
+  Log();
+  ~Log();
 
-    if( LogFile )
-    {
-      LogFile->flush();
-      LogFile->close();
-      delete LogFile;
-      LogFile = NULL;
-    }
-  }
+private:
+  static Log* mp_instance;
 
-#if QT_VERSION >= 0x050000
-  void MessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &msg )
-  {
-    if( msg.isNull() || msg.isEmpty() )
-      return;
+  QFile m_logFile;
+  QTextStream m_logStream;
+  QStringList m_logList;
 
-    QString sHeader = "";
-
-    switch( type )
-    {
-    case QtWarningMsg:
-      sHeader = " [WARN] ";
-      break;
-    case QtCriticalMsg:
-      sHeader = " [CRIT] ";
-      break;
-    case QtFatalMsg:
-      abort();
-      break;
-    default:
-      sHeader = " ";
-      break;
-    }
-
-    if( sHeader.size() < 3 && !Settings::instance().debugMode() )
-      return;
+};
 
 
-    QString sTmp = QString( "%1%2%3 (%4:%5, %6)" )
-                     .arg( QDateTime::currentDateTime().toString( "dd/MM/yyyy hh:mm:ss" ) )
-                     .arg( sHeader )
-                     .arg( msg )
-                     .arg( context.file )
-                     .arg( context.line )
-                     .arg( context.function );
+// Inline Functions
+inline void Log::clear() { m_logList.clear(); }
+inline const QStringList& Log::toList() const { return m_logList; }
 
-    if( LogStream )
-    {
-      (*LogStream) << sTmp << endl;
-    }
-    else
-    {
-      sTmp += QLatin1Char( '\n' );
-      fprintf( stderr, sTmp.toLatin1().constData() );
-      fflush( stderr );
-    }
-  }
-#else
-  void MessageHandler( QtMsgType type, const char *msg )
-  {
-    QString sHeader = "";
-    QString sMessage = msg;
-
-    if( sMessage.isNull() || sMessage.isEmpty() )
-      return;
-
-    switch( type )
-    {
-    case QtWarningMsg:
-      sHeader = " [WARN] ";
-      break;
-    case QtCriticalMsg:
-      sHeader = " [CRIT] ";
-      break;
-    case QtFatalMsg:
-      abort();
-      break;
-    default:
-      sHeader = " ";
-      break;
-    }
-
-    if( sHeader.size() < 3 && !Settings::instance().debugMode() )
-      return;
-
-    QString sTmp = QString( "%1%2%3" ).arg( QDateTime::currentDateTime().toString( "dd/MM/yyyy hh:mm:ss" ) )
-                                      .arg( sHeader )
-                                      .arg( sMessage );
-
-    if( LogStream )
-    {
-      (*LogStream) << sTmp << endl;
-    }
-    else
-    {
-      sTmp += QLatin1Char( '\n' );
-      fprintf( stderr, sTmp.toLatin1().data() );
-      fflush( stderr );
-    }
-  }
-#endif
-}
-
-#if 0
-void make_test()
-{
-  QByteArray ba16( "1234567890987654" );
-  QByteArray ba32( "12345678909876541234567890987654" );
-  QByteArray ba39( "abcdefghilmnopgrstuvwyz31234567890hgfdt" );
-  QByteArray enc_ba;
-  QByteArray dec_ba;
-
-  QList<QByteArray> blist;
-  blist << ba16 << ba32 << ba39;
-
-  foreach( QByteArray ba, blist )
-  {
-    qDebug() << "Encrypt:" << ba;
-    enc_ba = Protocol::instance().encryptByteArray( ba );
-    qDebug() << "Encrypted:" << enc_ba;
-    dec_ba = Protocol::instance().decryptByteArray( enc_ba );
-    qDebug() << "Decrypted:" << dec_ba;
-    if( dec_ba == ba )
-      qDebug() << "OK";
-  }
-}
-#endif
 
 #endif // BEEBEEP_LOG_H

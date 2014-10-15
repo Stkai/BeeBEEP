@@ -85,5 +85,6 @@
         <file>images/play.png</file>
         <file>images/group-add.png</file>
         <file>images/chat-create.png</file>
+        <file>images/log.png</file>
     </qresource>
 </RCC>
