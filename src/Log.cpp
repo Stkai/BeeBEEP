@@ -27,6 +27,16 @@
 
 Log* Log::mp_instance = NULL;
 
+LogNode& LogNode::operator=( const LogNode& ln )
+{
+  if( this != &ln )
+  {
+    m_type = ln.m_type;
+    m_text = ln.m_text;
+    m_note = ln.m_note;
+  }
+  return *this;
+}
 
 Log::Log()
  : m_logFile(), m_logStream()
@@ -69,6 +79,9 @@ bool Log::bootFileStream()
   }
 
   qDebug() << "Logging to file" << log_path;
+
+  dumpLogToFile();
+
   return true;
 }
 
@@ -83,92 +96,100 @@ void Log::closeFileStream()
   }
 }
 
-void Log::add( const QString& log_txt )
+QString Log::messageTypeToString( QtMsgType mt ) const
 {
-  m_logList << log_txt;
+  switch( mt )
+  {
+  case QtWarningMsg: return QString( "[WARNING]" );
+  case QtCriticalMsg: return QString( "[CRITIC]" );
+  case QtFatalMsg: return QString( "[FATAL]" );
+  default:
+    return QString( "" );
+  }
+}
+
+bool Log::dumpLogToFile()
+{
+  if( !m_logFile.isOpen() )
+  {
+    qWarning() << "Unable to dump log to the file" << filePathFromSettings();
+    return false;
+  }
+
+  if( m_logList.isEmpty() )
+    return false;
+
+  foreach( LogNode ln, m_logList )
+  {
+    m_logStream << (QString)logNodeToString( ln );
+    m_logStream << endl;
+  }
+
+  return true;
+}
+
+QString Log::logNodeToString( const LogNode& ln ) const
+{
+  QString sHeader = messageTypeToString( ln.type() );
+  return QString( "%1%2%3%4" ).arg( QDateTime::currentDateTime().toString( "hh:mm:ss" ) )
+                                      .arg( sHeader.isEmpty() ? " " : QString( " %1 " ).arg( sHeader ) )
+                                      .arg( ln.text() )
+                                      .arg( ln.note().isEmpty() ? "" : QString( " (%1)" ).arg( ln.note() ) );
+}
+
+void Log::add( QtMsgType mt, const QString& log_txt, const QString& log_note )
+{
+  if( log_txt.isNull() || log_txt.isEmpty() )
+    return;
+
+  LogNode ln( mt, log_txt, log_note );
+
+  QString sTmp = logNodeToString( ln );
+
   if( m_logFile.isOpen() )
-    m_logStream << log_txt << endl;
+    m_logStream << sTmp << endl;
 
 #ifdef BEEBEEP_DEBUG
   fprintf( stderr, log_txt.toLatin1().constData() );
   fprintf( stderr, "%c", '\n' );
   fflush( stderr );
 #endif
+
+  if( mt == QtFatalMsg )
+  {
+    closeFileStream();
+    abort();
+  }
+
+  m_logList.append( ln );
 }
 
 #if QT_VERSION >= 0x050000
-  void LogMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &msg )
-  {
-    if( msg.isNull() || msg.isEmpty() )
-      return;
+void LogMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &msg )
+{
+  if( msg.isNull() || msg.isEmpty() )
+    return;
 
-    QString sHeader = "";
-
-    switch( type )
-    {
-    case QtWarningMsg:
-      sHeader = " [WARN] ";
-      break;
-    case QtCriticalMsg:
-      sHeader = " [CRIT] ";
-      break;
-    case QtFatalMsg:
-      abort();
-      break;
-    default:
-      sHeader = " ";
-      break;
-    }
-
-    if( sHeader.size() < 3 && !Settings::instance().debugMode() )
-      return;
-
-    QString sTmp = QString( "%1%2%3 (%4:%5, %6)" )
-                     .arg( QDateTime::currentDateTime().toString( "hh:mm:ss" ) )
-                     .arg( sHeader )
-                     .arg( msg )
+  QString sNote = QString( "(%1:%2, %3)" )
                      .arg( context.file )
                      .arg( context.line )
                      .arg( context.function );
 
-    Log::instance().add( sTmp );
+  Log::instance().add( type, msg, sNote );
+}
 
-  }
 #else
-  void LogMessageHandler( QtMsgType type, const char *msg )
-  {
-    QString sHeader = "";
-    QString sMessage = msg;
 
-    if( sMessage.isNull() || sMessage.isEmpty() )
-      return;
+void LogMessageHandler( QtMsgType type, const char *msg )
+{
+  QString sMessage = msg;
 
-    switch( type )
-    {
-    case QtWarningMsg:
-      sHeader = " [WARN] ";
-      break;
-    case QtCriticalMsg:
-      sHeader = " [CRIT] ";
-      break;
-    case QtFatalMsg:
-      abort();
-      break;
-    default:
-      sHeader = " ";
-      break;
-    }
+  if( sMessage.isNull() || sMessage.isEmpty() )
+    return;
 
-    if( sHeader.size() < 3 && !Settings::instance().debugMode() )
-      return;
+  Log::instance().add( type, sMessage, "" );
+}
 
-    QString sTmp = QString( "%1%2%3" ).arg( QDateTime::currentDateTime().toString( "hh:mm:ss" ) )
-                                      .arg( sHeader )
-                                      .arg( sMessage );
-
-    Log::instance().add( sTmp );
-
-  }
 #endif
 
 void Log::installMessageHandler()
@@ -178,6 +199,5 @@ void Log::installMessageHandler()
 #else
   qInstallMsgHandler( LogMessageHandler );
 #endif
-
 }
 

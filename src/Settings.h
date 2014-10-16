@@ -114,8 +114,6 @@ public:
   inline bool askPasswordAtStartup() const;
   bool askPassword() const;
 
-  inline bool debugMode() const;
-  inline void setDebugMode( bool );
   inline bool logToFile() const;
   inline void setLogToFile( bool );
 
@@ -240,7 +238,6 @@ private:
   bool m_savePassword;
   bool m_askPasswordAtStartup;
 
-  bool m_debugMode;
   bool m_logToFile;
 
   QString m_language;
@@ -326,8 +323,6 @@ inline bool Settings::savePassword() const { return m_savePassword; }
 inline const QString& Settings::passwordBeforeHash() const { return m_passwordBeforeHash; }
 inline void Settings::setAskPasswordAtStartup( bool new_value ) { m_askPasswordAtStartup = new_value; }
 inline bool Settings::askPasswordAtStartup() const { return m_askPasswordAtStartup; }
-inline bool Settings::debugMode() const { return m_debugMode; }
-inline void Settings::setDebugMode( bool new_value ) { m_debugMode = new_value; }
 inline bool Settings::logToFile() const { return m_logToFile; }
 inline void Settings::setLogToFile( bool new_value ) { m_logToFile = new_value; }
 inline const QString& Settings::language() const { return m_language; }

@@ -162,12 +162,6 @@ void Core::checkUserAuthentication( const Message& m )
   User u = Protocol::instance().createUser( m, c->peerAddress() );
   if( !u.isValid() )
   {
-    if( Settings::instance().debugMode() )
-    {
-      sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*C*" ) );
-      sHtmlMsg += tr( "%1 is unable to add a new user from %2 (invalid protocol or password)." ).arg( Settings::instance().programName(), c->peerAddress().toString() );
-      dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
-    }
     qWarning() << "Unable to create a new user from the message arrived from (invalid protocol or password):" << c->peerAddress().toString() << c->peerPort();
     c->abort();
     c->deleteLater();

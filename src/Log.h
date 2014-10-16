@@ -30,19 +30,41 @@
 #include <QTextStream>
 
 
+class LogNode
+{
+public:
+  LogNode( QtMsgType mt = QtDebugMsg, const QString& txt = "", const QString& nt = "" )
+    : m_type( mt ), m_text( txt ), m_note( nt ) {}
+  LogNode( const LogNode& ln ) { (void)operator=( ln ); }
+
+  LogNode& operator=( const LogNode& );
+
+  inline QtMsgType type() const { return m_type; }
+  inline const QString& text() const { return m_text; }
+  inline const QString& note() const { return m_note; }
+
+private:
+  QtMsgType m_type;
+  QString m_text;
+  QString m_note;
+
+};
+
 class Log
 {
 public:
   static void installMessageHandler();
 
   void rebootFileStream( bool force_reboot );
-  bool bootFileStream();
+  bool bootFileStream(); // after load Settings
   void closeFileStream();
 
-  void add( const QString& );
+  void add( QtMsgType, const QString& log_txt, const QString& log_note );
   inline void clear();
-  inline const QStringList& toList() const;
+  inline const QList<LogNode>& toList() const;
 
+  QString messageTypeToString( QtMsgType ) const;
+  QString logNodeToString( const LogNode& ) const;
   QString filePathFromSettings() const;
 
   static Log& instance()
@@ -65,19 +87,21 @@ protected:
   Log();
   ~Log();
 
+  bool dumpLogToFile();
+
 private:
   static Log* mp_instance;
 
   QFile m_logFile;
   QTextStream m_logStream;
-  QStringList m_logList;
+  QList<LogNode> m_logList;
 
 };
 
 
 // Inline Functions
 inline void Log::clear() { m_logList.clear(); }
-inline const QStringList& Log::toList() const { return m_logList; }
+inline const QList<LogNode>& Log::toList() const { return m_logList; }
 
 
 #endif // BEEBEEP_LOG_H

@@ -33,9 +33,9 @@ GuiLog::GuiLog( QWidget* parent )
 
 void GuiLog::refreshLog()
 {
-  foreach( QString log_txt, Log::instance().toList() )
+  foreach( LogNode ln, Log::instance().toList() )
   {
-    mp_teLog->appendPlainText( log_txt );
+    mp_teLog->appendPlainText( Log::instance().logNodeToString( ln ) );
   }
 
   QScrollBar *bar = mp_teLog->verticalScrollBar();
