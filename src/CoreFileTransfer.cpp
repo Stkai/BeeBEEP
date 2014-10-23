@@ -34,7 +34,6 @@
 
 bool Core::startFileTransferServer()
 {
-  qDebug() << "Starting File Transfer Server";
   if( !mp_fileTransfer->startListener() )
   {
     QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );

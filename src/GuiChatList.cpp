@@ -80,7 +80,6 @@ void GuiChatList::updateChat( VNumber chat_id )
   GuiChatItem* item = itemFromChatId( chat_id );
   if( !item )
   {
-    qDebug() << "Create new chat item in GuiChatList";
     item = new GuiChatItem( this );
     item->setChatId( chat_id );
   }

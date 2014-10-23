@@ -37,20 +37,20 @@ FileTransfer::FileTransfer( QObject *parent )
 
 bool FileTransfer::startListener()
 {
-  qDebug() << "Starting FileTransfer listener";
+  qDebug() << "Starting File Transfer listener";
   if( isListening() )
   {
-    qDebug() << "FileTransfer is already listening";
+    qDebug() << "File Transfer server is already listening";
     return true;
   }
 
   if( !listen( QHostAddress::Any ) )
   {
-    qDebug() << "FileTransfer cannot bind an address or a port";
+    qDebug() << "File Transfer server cannot bind an address or a port";
     return false;
   }
 
-  qDebug() << "FileTransfer listen" << serverAddress() << serverPort();
+  qDebug() << "File Transfer server listen" << serverAddress() << serverPort();
   resetServerFiles();
   emit listening();
   return true;
@@ -60,14 +60,14 @@ void FileTransfer::stopListener()
 {
   if( isListening() )
   {
-    qDebug() << "FileTransfer listener closed";
+    qDebug() << "File Transfer listener closed";
     close();
   }
 }
 
 void FileTransfer::resetServerFiles()
 {
-  qDebug() << "FileTransfer reset files to" << serverAddress() << serverPort();
+  qDebug() << "File Transfer reset files to" << serverAddress() << serverPort();
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )
   {
@@ -159,7 +159,7 @@ void FileTransfer::checkAuthentication()
 
 void FileTransfer::validateUser( VNumber FileTransferPeer_id, VNumber user_id )
 {
-  qDebug() << "FileTransfer validate user for FileTransferPeer" << FileTransferPeer_id;
+  qDebug() << "File Transfer server validate user for FileTransferPeer" << FileTransferPeer_id;
   QList<FileTransferPeer*>::iterator it = m_peers.begin();
   while( it != m_peers.end() )
   {
@@ -187,7 +187,7 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
   FileTransferPeer *upload_peer = qobject_cast<FileTransferPeer*>( sender() );
   if( !upload_peer )
   {
-    qWarning() << "FileTransfer received a signal from invalid FileTransferUpload instance";
+    qWarning() << "File Transfer server received a signal from invalid FileTransferUpload instance";
     return;
   }
 
@@ -199,7 +199,7 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
 
     if( !file_info.isValid() )
     {
-      qWarning() << "FileTransfer received a request of a file not in list";
+      qWarning() << "File Transfer server received a request of a file not in list";
       upload_peer->cancelTransfer();
       return;
     }
@@ -207,7 +207,7 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
 
   if( file_info.password() != file_password )
   {
-    qWarning() << "FileTransfer received a request for the file" << file_info.name() << "but with the wrong password";
+    qWarning() << "File Transfer server received a request for the file" << file_info.name() << "but with the wrong password";
     upload_peer->cancelTransfer();
     return;
   }

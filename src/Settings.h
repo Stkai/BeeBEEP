@@ -101,7 +101,8 @@ public:
   inline const QByteArray& guiState() const;
 
   QByteArray hash( const QString& ) const;
-  inline const QString& hash() const;
+  QString currentHash() const;
+
   void setPassword( const QString& );
   inline const QByteArray& password() const;
   inline QString defaultPassword() const;
@@ -233,7 +234,6 @@ private:
 
   QString m_passwordBeforeHash;
   QByteArray m_password;
-  QString m_hash;
   bool m_useDefaultPassword;
   bool m_savePassword;
   bool m_askPasswordAtStartup;
@@ -313,7 +313,6 @@ inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeome
 inline const QByteArray& Settings::guiGeometry() const { return m_guiGeometry; }
 inline void Settings::setGuiState( const QByteArray& new_value ) { m_guiState = new_value; }
 inline const QByteArray& Settings::guiState() const { return m_guiState; }
-inline const QString& Settings::hash() const { return m_hash; }
 inline const QByteArray& Settings::password() const { return m_password; }
 inline QString Settings::defaultPassword() const { return "*"; }
 inline void Settings::setUseDefaultPassword( bool new_value ) { m_useDefaultPassword = new_value; }

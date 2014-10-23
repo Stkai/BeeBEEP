@@ -479,13 +479,13 @@ void GuiMain::createMenus()
   act->setData( 9 );
 
   act = mp_menuSettings->addAction( tr( "Show emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the emoticons will be recognized and showed as images" ) );
+  act->setStatusTip( tr( "If enabled the emoticons will be recognized and shown as images" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showEmoticons() );
   act->setData( 10 );
 
   act = mp_menuSettings->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the messages will be showed grouped by user" ) );
+  act->setStatusTip( tr( "If enabled the messages will be shown grouped by user" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showMessagesGroupByUser() );
   act->setData( 13 );
@@ -533,7 +533,7 @@ void GuiMain::createMenus()
   act->setData( 12 );
 
   mp_actPromptPassword = mp_menuSettings->addAction( tr( "Prompts for network password on startup" ), this, SLOT( settingsChanged() ) );
-  mp_actPromptPassword->setStatusTip( tr( "If enabled the password dialog will be showed on connection startup" ) );
+  mp_actPromptPassword->setStatusTip( tr( "If enabled the password dialog will be shown on connection startup" ) );
   mp_actPromptPassword->setCheckable( true );
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
@@ -1187,7 +1187,7 @@ void GuiMain::selectDownloadDirectory()
 
 void GuiMain::showTipOfTheDay()
 {
-  // Tip of the day is showed only in default chat
+  // Tip of the day is shown only in default chat
   showChat( ID_DEFAULT_CHAT );
   mp_core->showTipOfTheDay();
 }

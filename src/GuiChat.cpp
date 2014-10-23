@@ -322,7 +322,6 @@ bool GuiChat::setChatId( VNumber chat_id )
     bar->setValue( bar->maximum() );
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   mp_teMessage->setFocus();
-  qDebug() << "Chat" << chat_id << "showed";
   return true;
 }
 
@@ -330,7 +329,7 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
   if( m_chatId != chat_id )
   {
-    qWarning() << "Trying to append chat message of chat id" << chat_id << "in chat showed with id" << m_chatId << "... skip it";
+    qWarning() << "Trying to append chat message of chat id" << chat_id << "in chat shown with id" << m_chatId << "... skip it";
     return;
   }
 
@@ -342,12 +341,12 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   User u = m_users.find( cm.userId() );
   if( !u.isValid() )
   {
-    qDebug() << "User" << cm.userId() << "is not present in chat showed" << m_chatId << "... force update";
+    qDebug() << "User" << cm.userId() << "is not present in chat shown" << m_chatId << "... force update";
     m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
     u = m_users.find( cm.userId() );
     if( !u.isValid() )
     {
-      qWarning() << "User" << cm.userId() << "is not present in chat" << m_chatId << "... message is not showed";
+      qWarning() << "User" << cm.userId() << "is not present in chat" << m_chatId << "... message is not shown";
       return;
     }
     setChatUsers();

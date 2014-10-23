@@ -212,7 +212,7 @@ QByteArray Protocol::helloMessage() const
   data_list << Settings::instance().localUser().statusDescription();
   data_list << Settings::instance().localUser().bareJid();
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
-  m.setData( Settings::instance().hash() );
+  m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
 }
 

@@ -117,7 +117,7 @@ bool Core::start()
 
   showUserStatusChanged( Settings::instance().localUser() );
   showUserVCardChanged( Settings::instance().localUser() );
-
+#ifdef USE_QXMPP
   QList<NetworkAccount>::const_iterator it = Settings::instance().networkAccounts().begin();
   while( it != Settings::instance().networkAccounts().end() )
   {
@@ -125,7 +125,7 @@ bool Core::start()
       connectToXmppServer( *it );
     ++it;
   }
-
+#endif
   qDebug() << "Local user path:" << Settings::instance().localUser().path();
 
   return true;

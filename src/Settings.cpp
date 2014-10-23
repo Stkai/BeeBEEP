@@ -72,7 +72,11 @@ void Settings::setPassword( const QString& new_value )
 {
   m_passwordBeforeHash = new_value;
   m_password = QCryptographicHash::hash( QString( (new_value.isEmpty() || new_value == defaultPassword()) ? "*6475*" : new_value ).toUtf8(), QCryptographicHash::Sha1 ).toHex();
-  m_hash = QString::fromUtf8( hash( m_localUser.name() ) );
+}
+
+QString Settings::currentHash() const
+{
+  return QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
 QHostAddress Settings::localHostAddress() const

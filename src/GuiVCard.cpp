@@ -102,7 +102,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else
     mp_pbRemove->show();
 
-  qDebug() << "VCard showed for the user" << u.path();
+  qDebug() << "VCard shown for the user" << u.path();
 }
 
 void GuiVCard::showPrivateChat()
