@@ -67,10 +67,20 @@ bool GuiSessionManager::save()
 
 void GuiSessionManager::saveChats( QDataStream* stream )
 {
+  if( !Settings::instance().chatAutoSave() || Settings::instance().chatMaxLineSaved() <= 0 )
+  {
+    (*stream) << 0;
+    return;
+  }
+
   int num_of_chats = ChatManager::instance().constChatList().count();
  (*stream) << num_of_chats;
 
+  if( num_of_chats <= 0 )
+    return;
+
   QString chat_footer = QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Saved in" ) ).arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleShortDate ) );
+  QStringList chat_lines;
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
@@ -81,6 +91,16 @@ void GuiSessionManager::saveChats( QDataStream* stream )
     html_text.append( chat_footer );
     if( chatHasStoredText( c.name() ) )
       html_text.prepend( chatStoredText( c.name() ) );
+
+    chat_lines = html_text.split( "<br />", QString::SkipEmptyParts );
+    if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
+    {
+      qDebug() << "Chat exceeds line size limit with" << chat_lines.size();
+      while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
+        chat_lines.removeFirst();
+      html_text = chat_lines.join( "<br />" );
+    }
+
     (*stream) << html_text;
   }
 }
@@ -114,19 +134,19 @@ void GuiSessionManager::loadChats( QDataStream* stream )
   int num_of_chats = 0;
   (*stream) >> num_of_chats;
 
-  // Save chats
-
   if( num_of_chats <= 0 )
     return;
 
   QString chat_name;
   QString chat_text;
+
   for( int i = 0; i < num_of_chats; i++ )
   {
     (*stream) >> chat_name;
     (*stream) >> chat_text;
 
     qDebug() << "Loading chat" << chat_name;
+
     m_chatMap.insert( chat_name, chat_text );
   }
 }
