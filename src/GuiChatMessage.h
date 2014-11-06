@@ -21,14 +21,28 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUICHATMESSAGE_H
+#define BEEBEEP_GUICHATMESSAGE_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_VERSION = "0.9.5";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_BUILD = 252;
+#include "Config.h"
+class Chat;
+class ChatMessage;
+class User;
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiChatMessage
+{
+public:
+  static QString chatToHtml( const Chat& );
+  static QString formatMessage( const User&, const ChatMessage&, VNumber last_user_id );
+  static QString formatSystemMessage( const ChatMessage& );
+
+protected:
+  static QString linkify( QString );
+  static QString formatHtmlText( const QString& );
+
+
+
+};
+
+#endif // BEEBEEP_GUICHATMESSAGE_H

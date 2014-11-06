@@ -258,7 +258,6 @@ void Settings::load()
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
   m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
-  m_chatSaveDirectory = sets->value( "SaveDirectory", "." ).toString();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
@@ -313,6 +312,9 @@ void Settings::load()
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
   m_beepFilePath = sets->value( "BeepFilePath", "beep.wav" ).toString();
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
+  m_chatSaveDirectory = sets->value( "ChatSaveDirectory", "." ).toString();
+  m_chatAutoSave = sets->value( "ChatAutoSave", false ).toBool();
+  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -426,7 +428,6 @@ void Settings::save()
   sets->setValue( "CompactMessage", m_chatCompact );
   sets->setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
-  sets->setValue( "SaveDirectory", m_chatSaveDirectory );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );
   sets->setValue( "UseClickableLinks", m_chatUseClickableLinks );
@@ -464,6 +465,9 @@ void Settings::save()
   sets->setValue( "BeepFilePath", m_beepFilePath );
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
   sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );
+  sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
+  sets->setValue( "ChatAutoSave", m_chatAutoSave );
+  sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

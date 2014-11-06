@@ -95,7 +95,7 @@ void PluginManager::addPlugin( const QString& file_path )
     else
       qDebug() << file_path << "is not a text marker plugin";
 
- #ifdef USE_QXMPP
+#ifdef USE_QXMPP
     ServiceInterface* service_plugin = qobject_cast<ServiceInterface*>( plugin );
     if( service_plugin )
     {
@@ -223,7 +223,9 @@ void PluginManager::setGamePauseOn()
 
 bool PluginManager::parseText( QString* p_txt, bool before_sending ) const
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Plugins parsing text:" << p_txt->toLatin1();
+#endif
   if( p_txt->size() <= 0 )
   {
     *p_txt = "";
@@ -240,19 +242,23 @@ bool PluginManager::parseText( QString* p_txt, bool before_sending ) const
 
     if( !parseTextWithPlugin( p_txt, text_marker ) )
     {
-      qDebug() << text_marker->name() << "has break text marker plugins loop";
+#ifdef BEEBEEP_DEBUG
+      qWarning() << text_marker->name() << "has break text marker plugins loop";
+#endif
       return false;
     }
   }
-
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Plugins has parsed:" << p_txt->toLatin1();
+#endif
   return true;
 }
 
 bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tmi ) const
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Plugin" << tmi->name() << "starts to parse the text";
-
+#endif
   bool space_added_at_begin = false;
   bool space_added_at_end = false;
 
@@ -278,7 +284,9 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
     int close_cmd_index = p_txt->indexOf( tmi->closeCommand(), open_cmd_index+open_cmd_size, Qt::CaseInsensitive );
     if( close_cmd_index > open_cmd_index )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << tmi->name() << "has found open/close command";
+#endif
 
       tmi->initParser( p_txt->mid( open_cmd_index+open_cmd_size, close_cmd_index-open_cmd_index-open_cmd_size ) );
 
@@ -315,7 +323,9 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
               if( c_tmp == QLatin1Char( ';' ) )
               {
                 code_text = p_txt->mid( i, j-i+1 );
+#ifdef BEEBEEP_DEBUG
                 qDebug() << "Code html found:" << code_text << "... skip it";
+#endif
               }
               break;
             }

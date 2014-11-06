@@ -53,8 +53,8 @@ signals:
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
-  QString chatMessageToText( const ChatMessage& );
   void setChatUsers();
+  QString chatMessageToText( const ChatMessage& );
 
 private slots:
   void sendMessage();

@@ -253,7 +253,7 @@
     </message>
     <message>
         <source>%1 is unable to add a new user from %2 (invalid protocol or password).</source>
-        <translation>%1 non può aggiungere un nuovo utente da %2 (protocollo o password non validi).</translation>
+        <translation type="obsolete">%1 non può aggiungere un nuovo utente da %2 (protocollo o password non validi).</translation>
     </message>
 </context>
 <context>
@@ -1067,7 +1067,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and showed as images</source>
-        <translation>Se abilitata le faccine saranno riconosciute e mostrate come immagini</translation>
+        <translation type="obsolete">Se abilitata le faccine saranno riconosciute e mostrate come immagini</translation>
     </message>
     <message>
         <source>Add or search &amp;user...</source>
@@ -1159,7 +1159,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the messages will be showed grouped by user</source>
-        <translation>Se abilitata i messaggi saranno raggruppati per utente</translation>
+        <translation type="obsolete">Se abilitata i messaggi saranno raggruppati per utente</translation>
     </message>
     <message>
         <source>Stay on top</source>
@@ -1267,7 +1267,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the password dialog will be showed on connection startup</source>
-        <translation>Se abilitata verrà mostrata la finestra per inserire la password ad ogni connessione</translation>
+        <translation type="obsolete">Se abilitata verrà mostrata la finestra per inserire la password ad ogni connessione</translation>
     </message>
     <message>
         <source>Please save the network password in the next dialog.</source>
@@ -1280,6 +1280,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show the application log to see if an error occurred</source>
         <translation>Mostra i log dell&apos;applicazione per vedere se ci sono stati errori</translation>
+    </message>
+    <message>
+        <source>If enabled the emoticons will be recognized and shown as images</source>
+        <translation>Se abilitata le faccine saranno riconosciute e visualizzate come immagini</translation>
+    </message>
+    <message>
+        <source>If enabled the messages will be shown grouped by user</source>
+        <translation>Se abilitata i messaggi verranno visualizzati raggruppati per utente</translation>
+    </message>
+    <message>
+        <source>If enabled the password dialog will be shown on connection startup</source>
+        <translation>Se abilitata verrà mostrato all&apos;avvio la finestra con la richiesta della password</translation>
     </message>
 </context>
 <context>
@@ -2115,6 +2127,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>All Lan Users</source>
         <translation>Utenti Locali</translation>
+    </message>
+    <message>
+        <source>Saved in</source>
+        <translation>Salvato in data</translation>
+    </message>
+    <message>
+        <source>Started in</source>
+        <translation>Iniziata in data</translation>
     </message>
 </context>
 <context>

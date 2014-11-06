@@ -43,6 +43,7 @@
 #endif
 #endif
 
+#include "GuiSessionManager.h"
 
 bool SetTranslator( QTranslator* translator, const QString& prog_name, const QString& locale_folder, const QString& lang )
 {
@@ -144,8 +145,13 @@ int main( int argc, char *argv[] )
   // Starting connection to BeeBEEP Network
   QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
 
+  GuiSessionManager::instance().load();
+
   /* Event Loop */
   int iRet = app.exec();
+
+  GuiSessionManager::instance().save();
+  GuiSessionManager::instance().close();
 
   /* CleanUp */
   FileShare::close();

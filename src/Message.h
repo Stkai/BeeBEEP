@@ -85,4 +85,4 @@ inline const QDateTime& Message::timestamp() const { return m_timestamp; }
 inline const QString& Message::text() const { return m_text; }
 inline bool Message::hasFlag( Flag f ) const { return m_flags != 0 && m_flags & (1 << f); }
 
-#endif // MESSAGE_H
+#endif // BEEBEEP_MESSAGE_H

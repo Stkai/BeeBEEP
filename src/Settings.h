@@ -79,8 +79,6 @@ public:
   inline bool chatUseHtmlTags() const;
   inline void setChatUseClickableLinks( bool );
   inline bool chatUseClickableLinks() const;
-  inline const QString& chatSaveDirectory() const;
-  inline void setChatSaveDirectory( const QString& );
   inline bool showOnlyOnlineUsers() const;
   inline void setShowOnlyOnlineUsers( bool );
   inline bool showUserColor() const;
@@ -163,6 +161,13 @@ public:
   inline void setFileShare( bool );
   inline int maxFileShared() const;
 
+  inline const QString& chatSaveDirectory() const;
+  inline void setChatSaveDirectory( const QString& );
+  inline bool chatAutoSave() const;
+  inline void setChatAutoSave( bool );
+  inline int chatMaxLineSaved() const;
+  inline void setChatMaxLineSaved( int );
+
   void addStartOnSystemBoot();
   void removeStartOnSystemBoot();
   bool hasStartOnSystemBoot() const;
@@ -220,7 +225,6 @@ private:
   bool m_chatShowMessageTimestamp;
   bool m_chatUseHtmlTags;
   bool m_chatUseClickableLinks;
-  QString m_chatSaveDirectory;
   bool m_showOnlyOnlineUsers;
   bool m_showUserColor;
   bool m_showEmoticons;
@@ -267,6 +271,10 @@ private:
   bool m_fileShare;
   int m_maxFileShared;
 
+  QString m_chatSaveDirectory;
+  bool m_chatAutoSave;
+  int m_chatMaxLineSaved;
+
 };
 
 
@@ -303,8 +311,6 @@ inline void Settings::setChatUseHtmlTags( bool new_value ) { m_chatUseHtmlTags =
 inline bool Settings::chatUseHtmlTags() const { return m_chatUseHtmlTags; }
 inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClickableLinks = new_value; }
 inline bool Settings::chatUseClickableLinks() const { return m_chatUseClickableLinks; }
-inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDirectory; }
-inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
 inline bool Settings::showOnlyOnlineUsers() const { return m_showOnlyOnlineUsers; }
 inline void Settings::setShowOnlyOnlineUsers( bool new_value ) { m_showOnlyOnlineUsers = new_value; }
 inline bool Settings::showEmoticons() const { return m_showEmoticons; }
@@ -365,6 +371,12 @@ inline void Settings::setLocalShare( const QStringList& new_value ) { m_localSha
 inline bool Settings::fileShare() const { return m_fileShare; }
 inline void Settings::setFileShare( bool new_value ) { m_fileShare = new_value; }
 inline int Settings::maxFileShared() const { return m_maxFileShared; }
+inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDirectory; }
+inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
+inline bool Settings::chatAutoSave() const { return m_chatAutoSave; }
+inline void Settings::setChatAutoSave( bool new_value ) { m_chatAutoSave = new_value; }
+inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved; }
+inline void Settings::setChatMaxLineSaved( int new_value ) { m_chatMaxLineSaved = new_value; }
 
 
 #endif // BEEBEEP_SETTINGS_H

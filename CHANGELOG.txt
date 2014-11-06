@@ -3,6 +3,7 @@ BEEBEEP (Secure Network Chat)
 BeeBEEP 0.9.5
 - Option: load minimized at startup 
 - View: log window
+- Autosave chat
 
 BeeBEEP 0.9.4
 - Use default password without prompt at startup

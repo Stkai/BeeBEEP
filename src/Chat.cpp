@@ -78,3 +78,12 @@ bool Chat::isEmpty() const
   }
   return true;
 }
+
+QDateTime Chat::dateTimeStarted() const
+{
+  if( m_messages.isEmpty() )
+    return QDateTime::currentDateTime();
+  else
+    return m_messages.first().message().timestamp();
+}
+

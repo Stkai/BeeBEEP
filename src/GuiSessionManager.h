@@ -21,38 +21,29 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_CHATMANAGER_H
-#define BEEBEEP_CHATMANAGER_H
+#ifndef BEEBEEP_GUISESSIONMANAGER_H
+#define BEEBEEP_GUISESSIONMANAGER_H
 
-#include "Chat.h"
+#include "Config.h"
 
 
-class ChatManager
+class GuiSessionManager
 {
 // Singleton Object
-  static ChatManager* mp_instance;
-  friend class Core;
+  static GuiSessionManager* mp_instance;
+  QMap<QString,QString> m_chatMap;
 
 public:
-  inline Chat defaultChat( bool read_all_messages  );
-  Chat chat( VNumber ) const;
-  Chat chat( VNumber chat_id, bool read_all_messages );
-  Chat privateChatForUser( VNumber user_id ) const;
-  Chat groupChat( const QString& ) const;
+  bool load();
+  bool save();
+  
+  QString chatStoredText( const QString& );
+  inline bool chatHasStoredText( const QString& ) const;
 
-  void setChat( const Chat& );
-  inline const QList<Chat>& constChatList() const;
-
-  bool hasName( const QString& ) const;
-  int unreadMessages() const;
-  bool isGroupChat( VNumber ) const;
-
-  QList<Chat> groupChatForUser( VNumber ) const;
-
-  static ChatManager& instance()
+  static GuiSessionManager& instance()
   {
     if( !mp_instance )
-      mp_instance = new ChatManager();
+      mp_instance = new GuiSessionManager();
     return *mp_instance;
   }
 
@@ -66,20 +57,15 @@ public:
   }
 
 protected:
-  ChatManager();
+  GuiSessionManager();
 
-  inline QList<Chat>& chatList();
-
-private:
-  QList<Chat> m_chats;
+  void saveChats( QDataStream* );
+  void loadChats( QDataStream* );
 
 };
 
 
-// Inline Function
-inline Chat ChatManager::defaultChat( bool read_all_messages ) { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
-inline const QList<Chat>& ChatManager::constChatList() const { return m_chats; }
-inline QList<Chat>& ChatManager::chatList() { return m_chats; }
+// Inline Functions
+inline bool GuiSessionManager::chatHasStoredText( const QString& chat_name ) const { return m_chatMap.contains( chat_name ); }
 
-
-#endif // BEEBEEP_CHATMANAGER_H
+#endif // BEEBEEP_GUISESSIONMANAGER_H

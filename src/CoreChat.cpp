@@ -38,6 +38,7 @@ void Core::createDefaultChat()
   qDebug() << "Creating default chat";
   Chat c;
   c.setId( ID_DEFAULT_CHAT );
+  c.setName( "*** BeeBEEP Default Chat ***" );
   c.addUser( ID_LOCAL_USER );
   QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );

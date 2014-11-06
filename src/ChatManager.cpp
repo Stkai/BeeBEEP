@@ -146,12 +146,3 @@ QList<Chat> ChatManager::groupChatForUser( VNumber user_id ) const
   return chat_list;
 }
 
-bool ChatManager::saveChats( const QString& )
-{
-  return false;
-}
-
-bool ChatManager::loadChats( const QString& )
-{
-  return false;
-}
