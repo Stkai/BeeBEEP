@@ -134,7 +134,7 @@ int main( int argc, char *argv[] )
       mw.restoreState( Settings::instance().guiState() );
   }
   else
-    mw.resize( QSize( 640, 420 ) );
+    mw.resize( QSize( 700, 420 ) );
 
   mw.checkWindowFlagsAndShow();
 
@@ -142,14 +142,16 @@ int main( int argc, char *argv[] )
     QTimer::singleShot( 100, &mw, SLOT( hideToTrayIcon() ) );
 #endif
 
-  // Starting connection to BeeBEEP Network
+  /* Starting connection to BeeBEEP Network */
   QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
 
+  /* Load saved session */
   GuiSessionManager::instance().load();
 
   /* Event Loop */
   int iRet = app.exec();
 
+  /* Save session */
   GuiSessionManager::instance().save();
   GuiSessionManager::instance().close();
 

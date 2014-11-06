@@ -490,6 +490,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showMessagesGroupByUser() );
   act->setData( 13 );
 
+  act = mp_menuSettings->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the messages are saved when the program is closed" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatAutoSave() );
+  act->setData( 18 );
+
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
@@ -880,6 +886,9 @@ void GuiMain::settingsChanged()
       else
         Settings::instance().setAskPasswordAtStartup( true );
     }
+    break;
+  case 18:
+    Settings::instance().setChatAutoSave( act->isChecked() );
     break;
   case 99:
     break;

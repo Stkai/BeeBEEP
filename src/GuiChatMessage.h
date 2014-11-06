@@ -33,7 +33,7 @@ class User;
 class GuiChatMessage
 {
 public:
-  static QString chatToHtml( const Chat& );
+  static QString chatToHtml( const Chat&, bool skip_system_message );
   static QString formatMessage( const User&, const ChatMessage&, VNumber last_user_id );
   static QString formatSystemMessage( const ChatMessage& );
 

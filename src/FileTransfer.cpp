@@ -50,7 +50,7 @@ bool FileTransfer::startListener()
     return false;
   }
 
-  qDebug() << "File Transfer server listen" << serverAddress() << serverPort();
+  qDebug() << "File Transfer server listen" << serverAddress().toString() << serverPort();
   resetServerFiles();
   emit listening();
   return true;
@@ -67,7 +67,7 @@ void FileTransfer::stopListener()
 
 void FileTransfer::resetServerFiles()
 {
-  qDebug() << "File Transfer reset files to" << serverAddress() << serverPort();
+  qDebug() << "File Transfer reset files to" << serverAddress().toString() << serverPort();
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )
   {

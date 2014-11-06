@@ -150,7 +150,7 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm )
   return html_message;
 }
 
-QString GuiChatMessage::chatToHtml( const Chat& c )
+QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
 {
   UserList chat_users = UserManager::instance().userList().fromUsersId( c.usersId() );
   QString html_text = "";
@@ -160,6 +160,9 @@ QString GuiChatMessage::chatToHtml( const Chat& c )
   {
     if( cm.isSystem() )
     {
+      if( skip_system_message )
+        continue;
+
       html_text += formatSystemMessage( cm );
       last_message_user_id = 0;
     }

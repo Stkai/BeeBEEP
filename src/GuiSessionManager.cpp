@@ -86,11 +86,22 @@ void GuiSessionManager::saveChats( QDataStream* stream )
   {
     qDebug() << "Saving chat" << c.name();
     (*stream) << (QString)c.name();
-    QString html_text = GuiChatMessage::chatToHtml( c );
-    html_text.prepend( QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Started in" ) ).arg( c.dateTimeStarted().toString( Qt::SystemLocaleShortDate ) ) );
-    html_text.append( chat_footer );
+    QString html_text = GuiChatMessage::chatToHtml( c, true );
+
+    if( !html_text.simplified().isEmpty() )
+    {
+      html_text.prepend( QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Started in" ) ).arg( c.dateTimeStarted().toString( Qt::SystemLocaleShortDate ) ) );
+      html_text.append( chat_footer );
+    }
+
     if( chatHasStoredText( c.name() ) )
       html_text.prepend( chatStoredText( c.name() ) );
+
+    if( html_text.simplified().isEmpty() )
+    {
+      (*stream) << QString( "" );
+      continue;
+    }
 
     chat_lines = html_text.split( "<br />", QString::SkipEmptyParts );
     if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
@@ -112,7 +123,7 @@ bool GuiSessionManager::load()
 
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qWarning() << "Unable to open file" << file.fileName() << ": loading session aborted";
+    qDebug() << "Unable to open file" << file.fileName() << ": loading session aborted";
     return false;
   }
 
@@ -147,7 +158,10 @@ void GuiSessionManager::loadChats( QDataStream* stream )
 
     qDebug() << "Loading chat" << chat_name;
 
-    m_chatMap.insert( chat_name, chat_text );
+    if( chat_text.simplified().isEmpty() )
+      qDebug() << "The chat" << chat_name << "saved is empty";
+    else
+      m_chatMap.insert( chat_name, chat_text );
   }
 }
 
