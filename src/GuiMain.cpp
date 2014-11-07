@@ -436,67 +436,11 @@ void GuiMain::createMenus()
   mp_menuSettings->addAction( mp_actToolBar );
   mp_menuSettings->addSeparator();
 
-  act = mp_menuSettings->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatCompact() );
-  act->setData( 1 );
-
-  act = mp_menuSettings->addAction( tr( "Add a blank line between the messages" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the messages in the chat window are separated by a blank line" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatAddNewLineToMessage() );
-  act->setData( 2 );
-
-  act = mp_menuSettings->addAction( tr( "Show the messages' timestamp" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the message shows its timestamp in the chat window" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatShowMessageTimestamp() );
-  act->setData( 3 );
-
-  act = mp_menuSettings->addAction( tr( "Show the user's colors" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserColor() );
-  act->setData( 5 );
-
   act = mp_menuSettings->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showOnlyOnlineUsers() );
   act->setData( 6 );
-
-  act = mp_menuSettings->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled HTML tags are not removed from the message" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatUseHtmlTags() );
-  act->setData( 8 );
-
-  act = mp_menuSettings->addAction( tr( "Use clickable links" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the links in the message are recognized and made clickable" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatUseClickableLinks() );
-  act->setData( 9 );
-
-  act = mp_menuSettings->addAction( tr( "Show emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the emoticons will be recognized and shown as images" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showEmoticons() );
-  act->setData( 10 );
-
-  act = mp_menuSettings->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the messages will be shown grouped by user" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showMessagesGroupByUser() );
-  act->setData( 13 );
-
-  act = mp_menuSettings->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the messages are saved when the program is closed" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatAutoSave() );
-  act->setData( 18 );
-
-  mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
@@ -551,6 +495,63 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().hasStartOnSystemBoot() );
   act->setData( 16 );
 #endif
+
+  /* Chat Menu */
+  mp_menuChat = new QMenu( tr( "&Chat" ), this );
+
+  act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatCompact() );
+  act->setData( 1 );
+
+  act = mp_menuChat->addAction( tr( "Add a blank line between the messages" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the messages in the chat window are separated by a blank line" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatAddNewLineToMessage() );
+  act->setData( 2 );
+
+  act = mp_menuChat->addAction( tr( "Show the messages' timestamp" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the message shows its timestamp in the chat window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatShowMessageTimestamp() );
+  act->setData( 3 );
+
+  act = mp_menuChat->addAction( tr( "Show the user's colors" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserColor() );
+  act->setData( 5 );
+
+  act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled HTML tags are not removed from the message" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseHtmlTags() );
+  act->setData( 8 );
+
+  act = mp_menuChat->addAction( tr( "Use clickable links" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the links in the message are recognized and made clickable" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseClickableLinks() );
+  act->setData( 9 );
+
+  act = mp_menuChat->addAction( tr( "Show emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the emoticons will be recognized and shown as images" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showEmoticons() );
+  act->setData( 10 );
+
+  act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the messages will be shown grouped by user" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showMessagesGroupByUser() );
+  act->setData( 13 );
+
+  act = mp_menuChat->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the messages are saved when the program is closed" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatAutoSave() );
+  act->setData( 18 );
 
   /* Emoticons Menu for ToolBar */
   mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
@@ -624,6 +625,7 @@ void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
   menuBar()->addMenu( mp_menuSettings );
+  menuBar()->addMenu( mp_menuChat );
   menuBar()->addMenu( mp_menuView );
   menuBar()->addMenu( mp_menuPlugins );
   menuBar()->addMenu( mp_menuInfo );

@@ -1293,6 +1293,18 @@ il file %2 (%3)?</translation>
         <source>If enabled the password dialog will be shown on connection startup</source>
         <translation>Se abilitata verrà mostrato all&apos;avvio la finestra con la richiesta della password</translation>
     </message>
+    <message>
+        <source>Save messages</source>
+        <translation>Salva i messaggi</translation>
+    </message>
+    <message>
+        <source>If enabled the messages are saved when the program is closed</source>
+        <translation>Se abilitata i messaggi saranno salvati al termine del programma</translation>
+    </message>
+    <message>
+        <source>&amp;Chat</source>
+        <translation type="unfinished">&amp;Chat</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

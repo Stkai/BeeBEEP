@@ -150,6 +150,7 @@ private:
   QMenu *mp_menuMain;
   QMenu *mp_menuInfo;
   QMenu *mp_menuSettings;
+  QMenu *mp_menuChat;
   QMenu *mp_menuEmoticons;
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;

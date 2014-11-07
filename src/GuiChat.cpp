@@ -193,6 +193,8 @@ bool GuiChat::setChatId( VNumber chat_id )
   setChatUsers();
 
   QString html_text = GuiSessionManager::instance().chatHasStoredText( c.name() ) ? GuiSessionManager::instance().chatStoredText( c.name() ) : "";
+  if( !html_text.isEmpty() )
+    html_text.append( "<br />" );
 
   foreach( ChatMessage cm, c.messages() )
     html_text += chatMessageToText( cm );

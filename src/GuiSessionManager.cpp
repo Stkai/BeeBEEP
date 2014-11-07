@@ -110,6 +110,7 @@ void GuiSessionManager::saveChats( QDataStream* stream )
       while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
         chat_lines.removeFirst();
       html_text = chat_lines.join( "<br />" );
+      html_text.append( "<br />" ); // SkipEmptyParts remove the last one too
     }
 
     (*stream) << html_text;
