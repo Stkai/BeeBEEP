@@ -50,6 +50,7 @@ bool GuiSessionManager::save()
   }
 
   QDataStream stream( &file );
+  stream.setVersion( DATASTREAM_VERSION );
 
   QStringList file_header;
   file_header << Settings::instance().programName();
@@ -129,6 +130,7 @@ bool GuiSessionManager::load()
   }
 
   QDataStream stream( &file );
+  stream.setVersion( DATASTREAM_VERSION );
 
   QStringList file_header;
 
@@ -158,6 +160,12 @@ void GuiSessionManager::loadChats( QDataStream* stream )
     (*stream) >> chat_text;
 
     qDebug() << "Loading chat" << chat_name;
+
+    if( stream->status() != QDataStream::Ok )
+    {
+      qWarning() << "Error reading datastream, abort loading chat";
+      return;
+    }
 
     if( chat_text.simplified().isEmpty() )
       qDebug() << "The chat" << chat_name << "saved is empty";

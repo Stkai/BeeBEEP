@@ -193,6 +193,7 @@ void Core::checkUserAuthentication( const Message& m )
   addConnectionReadyForUse( c );
 
   UserManager::instance().setUser( u );
+  qDebug() << "User" << u.path() << "added with id" << u.id();
 
   sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
   sHtmlMsg += tr( "%1 is connected to %2 network." ).arg( u.name(), Settings::instance().programName() );

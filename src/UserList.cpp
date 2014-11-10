@@ -115,7 +115,6 @@ void UserList::set( const User& u )
     ++it;
   }
   m_users.append( u );
-  qDebug() << "User" << u.path() << "added to user list with id" << u.id();
 }
 
 QStringList UserList::toStringList( bool only_user_name, bool only_connected ) const
