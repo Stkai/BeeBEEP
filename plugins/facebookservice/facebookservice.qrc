@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/plugins">
-        <file>facebook.png</file>
-        <file>facebook-away.png</file>
-        <file>facebook-busy.png</file>
-        <file>facebook-offline.png</file>
-        <file>facebook-online.png</file>
-    </qresource>
-</RCC>

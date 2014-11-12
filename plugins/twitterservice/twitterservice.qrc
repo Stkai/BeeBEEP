@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/plugins">
-        <file>twitter.png</file>
-        <file>twitter-away.png</file>
-        <file>twitter-busy.png</file>
-        <file>twitter-offline.png</file>
-        <file>twitter-online.png</file>
-    </qresource>
-</RCC>

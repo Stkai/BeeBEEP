@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/plugins">
-        <file>jabber.png</file>
-        <file>jabber-away.png</file>
-        <file>jabber-busy.png</file>
-        <file>jabber-offline.png</file>
-        <file>jabber-online.png</file>
-    </qresource>
-</RCC>
