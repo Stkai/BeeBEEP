@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>%1 Unable to send the file %2 to %3.</source>
-        <translation>%1 Impossibile inviare il file %2 a %3.</translation>
+        <translation type="obsolete">%1 Impossibile inviare il file %2 a %3.</translation>
     </message>
     <message>
         <source>%1 You send the file %2 to %3.</source>
@@ -213,7 +213,7 @@
     </message>
     <message>
         <source>%1 Unable to send the file: user is not found.</source>
-        <translation>%1 Impossibile inviare il file: l&apos;utente non è stato trovato.</translation>
+        <translation type="obsolete">%1 Impossibile inviare il file: l&apos;utente non è stato trovato.</translation>
     </message>
     <message>
         <source>Unable to send the group chat request message to %1.</source>
@@ -260,11 +260,11 @@
     <name>FacebookService</name>
     <message>
         <source>Facebook</source>
-        <translation>Facebook</translation>
+        <translation type="obsolete">Facebook</translation>
     </message>
     <message>
         <source>You can connect to the Facebook chat.</source>
-        <translation>Puoi connetterti alla chat di Facebook.</translation>
+        <translation type="obsolete">Puoi connetterti alla chat di Facebook.</translation>
     </message>
 </context>
 <context>
@@ -329,11 +329,11 @@
     <name>GTalkService</name>
     <message>
         <source>GTalk</source>
-        <translation>GTalk</translation>
+        <translation type="obsolete">GTalk</translation>
     </message>
     <message>
         <source>You can connect to the Google chat.</source>
-        <translation>Puoi connetterti alla chat di Google.</translation>
+        <translation type="obsolete">Puoi connetterti alla chat di Google.</translation>
     </message>
 </context>
 <context>
@@ -423,7 +423,7 @@
     </message>
     <message>
         <source>XMPP Secure Mode</source>
-        <translation>Modalità Sicura XMPP</translation>
+        <translation type="obsolete">Modalità Sicura XMPP</translation>
     </message>
 </context>
 <context>
@@ -976,19 +976,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Network settings...</source>
-        <translation>Opzioni di rete...</translation>
+        <translation type="obsolete">Opzioni di rete...</translation>
     </message>
     <message>
         <source>Show the network settings dialog</source>
-        <translation>Mostra la finestra per impostare le opzioni di rete</translation>
+        <translation type="obsolete">Mostra la finestra per impostare le opzioni di rete</translation>
     </message>
     <message>
         <source>Network account</source>
-        <translation>Account di rete</translation>
+        <translation type="obsolete">Account di rete</translation>
     </message>
     <message>
         <source>Show the %1 login</source>
-        <translation>Mostra la finestra di connessione a %1</translation>
+        <translation type="obsolete">Mostra la finestra di connessione a %1</translation>
     </message>
     <message>
         <source>Show only the online users</source>
@@ -1023,15 +1023,15 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 (%2) wants to add you to the contact list. Do you accept?</source>
-        <translation>%1 (%2) vuole aggiungerti alla sua lista di contatti. Accetti?</translation>
+        <translation type="obsolete">%1 (%2) vuole aggiungerti alla sua lista di contatti. Accetti?</translation>
     </message>
     <message>
         <source>Do you really want to remove %1 from the contact list?</source>
-        <translation>Vuoi realmente eliminare %1 dalla tua lista dei contatti?</translation>
+        <translation type="obsolete">Vuoi realmente eliminare %1 dalla tua lista dei contatti?</translation>
     </message>
     <message>
         <source>Unable to remove %1 from the contact list.</source>
-        <translation>Impossibile eliminare %1 dalla lista dei contatti.</translation>
+        <translation type="obsolete">Impossibile eliminare %1 dalla lista dei contatti.</translation>
     </message>
     <message>
         <source>Do you want to disconnect from %1 server?</source>
@@ -1043,11 +1043,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>You are connected to %1. Do you want to disconnect?</source>
-        <translation>Vuoi disconnetterti da %1?</translation>
+        <translation type="obsolete">Vuoi disconnetterti da %1?</translation>
     </message>
     <message>
         <source>Unable to connect to %1. Plugin is not present or is not enabled.</source>
-        <translation>Impossibile connettersi a %1. Il plugin non è presente o non è abilitato.</translation>
+        <translation type="obsolete">Impossibile connettersi a %1. Il plugin non è presente o non è abilitato.</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
@@ -1303,7 +1303,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>&amp;Chat</source>
-        <translation type="unfinished">&amp;Chat</translation>
+        <translation>&amp;Chat</translation>
     </message>
 </context>
 <context>
@@ -1336,76 +1336,68 @@ il file %2 (%3)?</translation>
 <context>
     <name>GuiNetwork</name>
     <message>
-        <source>Dialog</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Proxy Configuration</source>
-        <translation>Configurazione del proxy</translation>
+        <translation type="obsolete">Configurazione del proxy</translation>
     </message>
     <message>
         <source>Proxy</source>
-        <translation>Proxy</translation>
+        <translation type="obsolete">Proxy</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Nessuno</translation>
+        <translation type="obsolete">Nessuno</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatico</translation>
+        <translation type="obsolete">Automatico</translation>
     </message>
     <message>
         <source>Manually</source>
-        <translation>Manuale</translation>
+        <translation type="obsolete">Manuale</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation>Indirizzo</translation>
+        <translation type="obsolete">Indirizzo</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Porta</translation>
+        <translation type="obsolete">Porta</translation>
     </message>
     <message>
         <source>Use authentication</source>
-        <translation>Usa autenticazione</translation>
+        <translation type="obsolete">Usa autenticazione</translation>
     </message>
     <message>
         <source>User</source>
-        <translation>Utente</translation>
+        <translation type="obsolete">Utente</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Password</translation>
+        <translation type="obsolete">Password</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation type="obsolete">Annulla</translation>
     </message>
     <message>
         <source>Network Manager - %1</source>
-        <translation>Opzioni di rete - %1</translation>
+        <translation type="obsolete">Opzioni di rete - %1</translation>
     </message>
     <message>
         <source>Please insert the network proxy hostname or address.</source>
-        <translation>Inserisci l&apos;indirizzo o il nome del server proxy.</translation>
+        <translation type="obsolete">Inserisci l&apos;indirizzo o il nome del server proxy.</translation>
     </message>
     <message>
         <source>Please insert the user for the proxy authorization.</source>
-        <translation>Inserisci l&apos;utente per l&apos;autenticazione sul server proxy.</translation>
+        <translation type="obsolete">Inserisci l&apos;utente per l&apos;autenticazione sul server proxy.</translation>
     </message>
 </context>
 <context>
     <name>GuiNetworkLogin</name>
-    <message>
-        <source>Dialog</source>
-        <translation></translation>
-    </message>
     <message>
         <source>User</source>
         <translation type="obsolete">Utente</translation>
@@ -1416,23 +1408,23 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Password</translation>
+        <translation type="obsolete">Password</translation>
     </message>
     <message>
         <source>Remember user</source>
-        <translation>Ricorda il nome utente</translation>
+        <translation type="obsolete">Ricorda il nome utente</translation>
     </message>
     <message>
         <source>Remember password</source>
-        <translation>Ricorda la password</translation>
+        <translation type="obsolete">Ricorda la password</translation>
     </message>
     <message>
         <source>Automatic connection</source>
-        <translation>Connessione automatica all&apos;avvio</translation>
+        <translation type="obsolete">Connessione automatica all&apos;avvio</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Accedi</translation>
+        <translation type="obsolete">Accedi</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1440,35 +1432,35 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Login - %1</source>
-        <translation>Accesso alla rete - %1</translation>
+        <translation type="obsolete">Accesso alla rete - %1</translation>
     </message>
     <message>
         <source>Please insert the username (JabberId)</source>
-        <translation>Inserisci il nome utente (JabberId)</translation>
+        <translation type="obsolete">Inserisci il nome utente (JabberId)</translation>
     </message>
     <message>
         <source>Please insert the password</source>
-        <translation>Inserisci la password</translation>
+        <translation type="obsolete">Inserisci la password</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation>Account</translation>
+        <translation type="obsolete">Account</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Salva</translation>
+        <translation type="obsolete">Salva</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Chiudi</translation>
+        <translation type="obsolete">Chiudi</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation>Disconnetti</translation>
+        <translation type="obsolete">Disconnetti</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation>Connetti</translation>
+        <translation type="obsolete">Connetti</translation>
     </message>
     <message>
         <source>User JID</source>
@@ -1476,7 +1468,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>JID</source>
-        <translation>JID</translation>
+        <translation type="obsolete">JID</translation>
     </message>
 </context>
 <context>
@@ -1543,7 +1535,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Network Services</source>
-        <translation>Servizi di Rete</translation>
+        <translation type="obsolete">Servizi di Rete</translation>
     </message>
     <message>
         <source>Games</source>
@@ -1578,11 +1570,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Add or search User</source>
-        <translation>Aggiungi o cerca un utente</translation>
+        <translation type="obsolete">Aggiungi o cerca un utente</translation>
     </message>
     <message>
         <source>Please insert the ID of the user (ex: test@gmail.com)</source>
-        <translation>Inserire l&apos;identificativo dell&apos;utente che vuoi aggiungere (es: test@gmail.com)</translation>
+        <translation type="obsolete">Inserire l&apos;identificativo dell&apos;utente che vuoi aggiungere (es: test@gmail.com)</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -1965,7 +1957,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Remove from the contact list</source>
-        <translation>Elimina dalla lista dei contatti</translation>
+        <translation type="obsolete">Elimina dalla lista dei contatti</translation>
     </message>
 </context>
 <context>
@@ -2006,11 +1998,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>You can connect to the Jabber.org server.</source>
-        <translation>Puoi connetterti al server di Jabber.org.</translation>
-    </message>
-    <message>
-        <source>Jabber.org</source>
-        <translation></translation>
+        <translation type="obsolete">Puoi connetterti al server di Jabber.org.</translation>
     </message>
 </context>
 <context>
@@ -2028,78 +2016,7 @@ il file %2 (%3)?</translation>
     <name>QDnsLookup</name>
     <message>
         <source>Operation cancelled</source>
-        <translation>Operazione annullata</translation>
-    </message>
-</context>
-<context>
-    <name>QDnsLookupRunnable</name>
-    <message>
-        <source>Invalid domain name</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Resolver functions not found</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Resolver initialization failed</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Server could not process query</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Server failure</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Non existent domain</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Server refused to answer</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid reply received</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Could not expand domain name</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid IPv4 address record</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid IPv6 address record</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid canonical name record</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid name server record</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid pointer record</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid mail exchange record</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid service record</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Invalid text record</source>
-        <translation></translation>
+        <translation type="obsolete">Operazione annullata</translation>
     </message>
 </context>
 <context>
@@ -2304,12 +2221,8 @@ il file %2 (%3)?</translation>
 <context>
     <name>TwitterService</name>
     <message>
-        <source>Twitter</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>You can connect to the Twitter server.</source>
-        <translation>Puoi connetterti al server di Twitter.</translation>
+        <translation type="obsolete">Puoi connetterti al server di Twitter.</translation>
     </message>
 </context>
 <context>
@@ -2357,35 +2270,19 @@ il file %2 (%3)?</translation>
 <context>
     <name>WindowsLiveService</name>
     <message>
-        <source>WindowsLive</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>You can connect to the Windows Live Messenger.</source>
-        <translation>Puoi connetterti a Windows Live Messenger.</translation>
+        <translation type="obsolete">Puoi connetterti a Windows Live Messenger.</translation>
     </message>
 </context>
 <context>
     <name>XmppManager</name>
     <message>
-        <source>socket</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>keep alive</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>xmpp stream</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>unknown</source>
-        <translation>sconosciuto</translation>
+        <translation type="obsolete">sconosciuto</translation>
     </message>
     <message>
         <source>connection error (%1)</source>
-        <translation>errore di connessione (%1)</translation>
+        <translation type="obsolete">errore di connessione (%1)</translation>
     </message>
     <message>
         <source>Error occurred (#%1)</source>
@@ -2393,115 +2290,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>already connected to the server</source>
-        <translation>già connesso al server</translation>
+        <translation type="obsolete">già connesso al server</translation>
     </message>
     <message>
         <source>connection in progress to the server. Please wait</source>
-        <translation>la connessione al server è in corso. Attendere prego</translation>
+        <translation type="obsolete">la connessione al server è in corso. Attendere prego</translation>
     </message>
     <message>
         <source>Username is empty. Unable to connect to the server</source>
-        <translation>Il nome utente non è stato inserito. Impossibile effettuare la connessione</translation>
+        <translation type="obsolete">Il nome utente non è stato inserito. Impossibile effettuare la connessione</translation>
     </message>
     <message>
         <source>Password is empty. Unable to connect to the server</source>
-        <translation>La password non è stata inserita. Impossibile effettuare la connessione</translation>
+        <translation type="obsolete">La password non è stata inserita. Impossibile effettuare la connessione</translation>
     </message>
     <message>
         <source>connection in progress..</source>
-        <translation>connessione in corso..</translation>
+        <translation type="obsolete">connessione in corso..</translation>
     </message>
     <message>
         <source>invalid user or password</source>
-        <translation>utente o password non validi</translation>
-    </message>
-    <message>
-        <source>bad request</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>conflict</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>feature not implemented</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>forbidden</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>gone</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>internal server error</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>item not found</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>jid malformed</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>not acceptable</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>not allowed</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>not authorized</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>payment required</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>recipient unavailable</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>redirect</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>registration required</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>remote server not found</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>remote server timeout</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>resource constraint</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>service unavailable</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>subscription required</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>undefined condition</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>unexpected request</source>
-        <translation></translation>
+        <translation type="obsolete">utente o password non validi</translation>
     </message>
     <message>
         <source>%1: error occurred (%2)</source>
@@ -2509,27 +2318,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>adding %1 to the contact list</source>
-        <translation>%1 verrà aggiunto alla lista dei contatti</translation>
+        <translation type="obsolete">%1 verrà aggiunto alla lista dei contatti</translation>
     </message>
     <message>
         <source>%1&apos;s request is rejected</source>
-        <translation>la richiesta di %1 è stata rifiutata</translation>
+        <translation type="obsolete">la richiesta di %1 è stata rifiutata</translation>
     </message>
     <message>
         <source>removing %1 from the contact list</source>
-        <translation>%1 verrà eliminato dalla lista dei contatti</translation>
+        <translation type="obsolete">%1 verrà eliminato dalla lista dei contatti</translation>
     </message>
     <message>
         <source>%1 wants to subscribe to your contact list</source>
-        <translation>%1 vorrebbe far parte della tua lista dei contatti</translation>
+        <translation type="obsolete">%1 vorrebbe far parte della tua lista dei contatti</translation>
     </message>
     <message>
         <source>%1 has accepted your subscription</source>
-        <translation>%1 ha accettato la tua richiesta</translation>
+        <translation type="obsolete">%1 ha accettato la tua richiesta</translation>
     </message>
     <message>
         <source>%1 has reject your subscription</source>
-        <translation>%1 ha rifiutato la tua richiesta</translation>
+        <translation type="obsolete">%1 ha rifiutato la tua richiesta</translation>
     </message>
     <message>
         <source>unable to send the message. You are not connected to the server</source>
@@ -2537,27 +2346,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>is not connected. Unable to send the message</source>
-        <translation>non è connesso. Impossibile inviare il messaggio</translation>
+        <translation type="obsolete">non è connesso. Impossibile inviare il messaggio</translation>
     </message>
     <message>
         <source>is not connected. Unable to add %1 to the contact list</source>
-        <translation>non è connesso. Impossibile aggiungere %1 alla lista dei contatti</translation>
+        <translation type="obsolete">non è connesso. Impossibile aggiungere %1 alla lista dei contatti</translation>
     </message>
     <message>
         <source>is not connected. Unable to remove %1 from the contact list</source>
-        <translation>non è connesso. Impossibile rimuovere %1 dalla lista dei contatti</translation>
+        <translation type="obsolete">non è connesso. Impossibile rimuovere %1 dalla lista dei contatti</translation>
     </message>
     <message>
         <source>connected to the server with user %1</source>
-        <translation>connessione riuscita con l&apos;utenza %1</translation>
+        <translation type="obsolete">connessione riuscita con l&apos;utenza %1</translation>
     </message>
     <message>
         <source>disconnected from the server</source>
-        <translation>disconnessione dal server effettuata</translation>
+        <translation type="obsolete">disconnessione dal server effettuata</translation>
     </message>
     <message>
         <source>error occurred (%1)</source>
-        <translation>si è verificato un errore (%1)</translation>
+        <translation type="obsolete">si è verificato un errore (%1)</translation>
     </message>
 </context>
 </TS>

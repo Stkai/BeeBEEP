@@ -80,13 +80,7 @@ private slots:
   void sendFile( VNumber );
   void showPluginHelp();
   void showPluginManager();
-  void showNetworkManager();
-  void showNetworkAccount();
-  void showUserSubscriptionRequest( const QString&, const QString& );
-  void removeUser( VNumber );
   void showChat( VNumber );
-  void serviceConnected( const QString& );
-  void serviceDisconnected( const QString& );
   void sendBroadcastMessage();
   void showWizard();
   void showFromTrayIcon();
@@ -130,7 +124,6 @@ private:
   void initGuiItems();
   void updadePluginMenu();
   void updateStatusIcon();
-  void updateAccountMenu();
   void sendFile( const User& );
   bool askToDownloadFile( const User&, const FileInfo& );
   void setGameInPauseMode();
@@ -154,7 +147,6 @@ private:
   QMenu *mp_menuEmoticons;
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;
-  QMenu *mp_menuAccounts;
   QMenu *mp_menuView;
 
   QToolBar *mp_barMain;

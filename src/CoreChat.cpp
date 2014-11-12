@@ -171,9 +171,9 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 {
-  if( !isConnected( true ) )
+  if( !isConnected() )
   {
-    dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat );
     return 0;
   }
 
@@ -215,7 +215,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     foreach( Connection *c, m_connections )
     {
       if( !c->sendMessage( m ) )
-        dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
+        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
                                .arg( UserManager::instance().userList().find( c->userId() ).path() ), DispatchToChat );
       else
         messages_sent += 1;
@@ -232,19 +232,12 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       if( u.isLocal() )
         continue;
 
-      if( !u.isOnLan() )
-      {
-        sendXmppChatMessage( u, m );
-        messages_sent += 1;
-        continue;
-      }
-
       if( sendMessageToLocalNetwork( u, m ) )
         messages_sent += 1;
       else
       {
         if( !c.isGroup() )
-          dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( u.path() ), DispatchToChat );
+          dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( u.path() ), DispatchToChat );
       }
     }
   }
@@ -253,14 +246,14 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   dispatchToChat( cm, chat_id );
 
   if( messages_sent == 0 )
-    dispatchSystemMessage( "", chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat );
 
   return messages_sent;
 }
 
 void Core::sendWritingMessage( VNumber chat_id )
 {
-  if( !isConnected( true ) )
+  if( !isConnected() )
     return;
 
   Chat from_chat = ChatManager::instance().chat( chat_id );
@@ -269,12 +262,6 @@ void Core::sendWritingMessage( VNumber chat_id )
   {
     if( u.isLocal() )
       continue;
-
-    if( !u.isOnLan() )
-    {
-      sendXmppUserComposing( u );
-      continue;
-    }
 
     Connection* c = connection( u.id() );
     if( !c )
@@ -288,20 +275,7 @@ void Core::showTipOfTheDay()
 {
   QString tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),
                                                    qApp->translate( "Tips", BeeBeepTips[ Random::number( 0, (BeeBeepTipsSize-1) ) ] ) );
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
-}
-
-bool Core::chatHasService( const Chat& c, const QString& service_name )
-{
-  if( !c.isValid() )
-    return false;
-  if( c.isDefault() )
-    return true;
-  UserList chat_users = UserManager::instance().userList().fromUsersId( c.usersId() );
-  if( chat_users.serviceUserList( service_name ).toList().isEmpty() )
-    return false;
-  else
-    return true;
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
 }
 
 void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& user_list )
@@ -315,14 +289,8 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
     if( u.isLocal() )
       continue;
 
-    if( !u.isOnLan() )
-    {
-      // FIXME!!!
-      continue;
-    }
-
     if( !sendMessageToLocalNetwork( u, group_message ) )
-      dispatchSystemMessage( "", group_chat.id(), ID_LOCAL_USER, tr( "%1 cannot be invited to the group." ).arg( u.path() ), DispatchToChat );
+      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 cannot be invited to the group." ).arg( u.path() ), DispatchToChat );
   }
 }
 

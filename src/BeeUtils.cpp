@@ -27,20 +27,18 @@
 
 
 
-QString Bee::userStatusIconFileName( const QString& service_name, int user_status )
+QString Bee::userStatusIconFileName( int user_status )
 {
-  ServiceInterface* si = PluginManager::instance().service( service_name );
-
   switch( user_status )
   {
   case User::Offline:
-    return si ? si->userStatusOfflineIconPath() : QString( ":/images/user-offline.png" );
+    return QString( ":/images/user-offline.png" );
   case User::Away:
-    return si ? si->userStatusAwayIconPath() : QString( ":/images/user-away.png" );
+    return QString( ":/images/user-away.png" );
   case User::Busy:
-    return si ? si->userStatusBusyIconPath() : QString( ":/images/user-busy.png" );
+    return QString( ":/images/user-busy.png" );
   default:
-    return si ? si->userStatusOnlineIconPath() : QString( ":/images/user-online.png" );
+    return QString( ":/images/user-online.png" );
   }
 }
 

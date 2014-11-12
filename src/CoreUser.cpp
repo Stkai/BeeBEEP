@@ -38,7 +38,7 @@ void Core::setLocalUserStatus( int new_status )
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
   showUserStatusChanged( u );
-  if( isConnected( true ) )
+  if( isConnected() )
     sendLocalUserStatus();
 }
 
@@ -50,7 +50,7 @@ void Core::setLocalUserStatusDescription( const QString& new_status_description 
   u.setStatusDescription( new_status_description );
   Settings::instance().setLocalUser( u );
   showUserStatusChanged( u );
-  if( isConnected( true ) )
+  if( isConnected() )
     sendLocalUserStatus();
 }
 
@@ -58,17 +58,17 @@ void Core::showUserStatusChanged( const User& u )
 {
   emit userChanged( u );
 
-  if( !isConnected( true ) )
+  if( !isConnected() )
     return;
 
-  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.service(), u.status() ), "*S*" ) + QString( " " );
+  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
   if( u.isLocal() )
     sHtmlMsg += tr( "You are" );
   else
     sHtmlMsg += tr( "%1 is" ).arg( u.name() );
    sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }
 
 void Core::showUserNameChanged( const User& u, const QString& old_user_name )
@@ -79,7 +79,7 @@ void Core::showUserNameChanged( const User& u, const QString& old_user_name )
   else
     sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( old_user_name, u.name() );
 
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );
 }
 
@@ -89,9 +89,7 @@ void Core::showUserVCardChanged( const User& u )
   if( !u.isLocal() )
   {
     sHtmlMsg += QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/profile.png", "*V*" ),
-                                        tr( "The %1's profile has been received." ).arg( u.name() ) );
-    if( !u.isOnLan() )
-      sHtmlMsg += QString( " (%1)" ).arg( u.service() );
+                                        tr( "The %1's profile has been received." ).arg( u.name() ) );    
   }
 
   if( u.isBirthDay() )
@@ -105,7 +103,7 @@ void Core::showUserVCardChanged( const User& u )
   if( sHtmlMsg.isEmpty() )
     return;
 
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
   emit userChanged( u );
 }
 
@@ -114,7 +112,6 @@ void Core::sendLocalUserStatus()
   QByteArray user_status_message = Protocol::instance().localUserStatusMessage();
   foreach( Connection *c, m_connections )
     c->sendData( user_status_message );
-  sendLocalUserStatusToXmppServer();
 }
 
 bool Core::setUserColor( VNumber user_id, const QString& user_color )
@@ -149,7 +146,6 @@ void Core::setLocalUserVCard( const VCard& vc )
       c->sendData( vcard_message );
   }
 
-  sendLocalVCardToXmppServer();
   showUserVCardChanged( u );
 }
 

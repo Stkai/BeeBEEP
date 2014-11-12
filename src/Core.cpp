@@ -28,7 +28,6 @@
 #include "FileShare.h"
 #include "Settings.h"
 #include "Protocol.h"
-#include "XmppManager.h"
 
 
 Core::Core( QObject* parent )
@@ -43,11 +42,6 @@ Core::Core( QObject* parent )
   qDebug() << "Broadcaster created";
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
-#ifdef USE_QXMPP
-  mp_xmppManager = new XmppManager( this );
-  qDebug() << "XmppManager created";
-  mp_xmppManager->loadClients();
-#endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
@@ -55,14 +49,6 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
-#ifdef USE_QXMPP
-  connect( mp_xmppManager, SIGNAL( message( const QString&, const QString&, const Message& ) ), this, SLOT( parseXmppMessage( const QString&, const QString&, const Message& ) ) );
-  connect( mp_xmppManager, SIGNAL( userChangedInRoster( const User& ) ), this, SLOT( checkXmppUser( const User& ) ) );
-  connect( mp_xmppManager, SIGNAL( userSubscriptionRequest( const QString&, const QString& ) ), this, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ) );
-  connect( mp_xmppManager, SIGNAL( vCardReceived( const QString&, const QString&, const VCard& ) ), this, SLOT( setXmppVCard( const QString&, const QString&, const VCard& ) ) );
-  connect( mp_xmppManager, SIGNAL( serviceConnected( const QString& ) ), this, SIGNAL( serviceConnected( const QString& ) ) );
-  connect( mp_xmppManager, SIGNAL( serviceDisconnected( const QString& ) ), this, SIGNAL( serviceDisconnected( const QString& ) ) );
-#endif
 }
 
 bool Core::start()
@@ -75,7 +61,7 @@ bool Core::start()
     qDebug() << "Unable to bind" << Settings::instance().localUser().hostPort() << "port. Try to bind the first available";
     if( !mp_listener->listen( QHostAddress::Any ) )
     {
-      dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
                                      Settings::instance().programName() ), DispatchToChat );
@@ -89,7 +75,7 @@ bool Core::start()
 
   if( !mp_broadcaster->startBroadcasting() )
   {
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
                              .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
                                    Settings::instance().programName() ), DispatchToChat );
@@ -97,7 +83,7 @@ bool Core::start()
     return false;
   }
 
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
@@ -117,15 +103,7 @@ bool Core::start()
 
   showUserStatusChanged( Settings::instance().localUser() );
   showUserVCardChanged( Settings::instance().localUser() );
-#ifdef USE_QXMPP
-  QList<NetworkAccount>::const_iterator it = Settings::instance().networkAccounts().begin();
-  while( it != Settings::instance().networkAccounts().end() )
-  {
-    if( (*it).autoConnect() )
-      connectToXmppServer( *it );
-    ++it;
-  }
-#endif
+
   qDebug() << "Local user path:" << Settings::instance().localUser().path();
 
   return true;
@@ -133,9 +111,6 @@ bool Core::start()
 
 void Core::stop()
 {
-#ifdef USE_QXMPP
-  mp_xmppManager->disconnectFromServer();
-#endif
   mp_broadcaster->stopBroadcasting();
   stopFileTransferServer();
   mp_listener->close();
@@ -145,7 +120,7 @@ void Core::stop()
 
   m_connections.clear();
 
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
                                                                               Settings::instance().programName() ), DispatchToAllChatsWithUser );
 }
@@ -156,39 +131,27 @@ void Core::addBroadcastAddress( const QHostAddress& host_address )
   {
     QString sHtmlMsg = tr( "%1 Looking for the available users in %2..." )
           .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
   }
 }
 
 void Core::sendBroadcastMessage()
 {
-  if( isConnected( false ) )
+  if( isConnected() )
   {
     mp_broadcaster->sendBroadcastMessage();
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
                                                                           Settings::instance().programName() ), DispatchToChat );
   }
   else
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER,
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are not connected to %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
                                                                              Settings::instance().programName() ), DispatchToChat );
 }
 
-#ifdef USE_QXMPP
-bool Core::isConnected( bool check_also_network_service ) const
-#else
-bool Core::isConnected( bool ) const
-#endif
+bool Core::isConnected() const
 {
-  if( mp_listener->isListening() )
-    return true;
-
-#ifdef USE_QXMPP
-  if( check_also_network_service )
-    return mp_xmppManager->isConnected();
-  else
-#endif
-    return false;
+  return mp_listener->isListening();
 }
 

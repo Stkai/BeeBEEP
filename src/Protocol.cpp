@@ -210,7 +210,7 @@ QByteArray Protocol::helloMessage() const
   data_list << Settings::instance().localUser().name();
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
-  data_list << Settings::instance().localUser().bareJid();
+  data_list << Settings::instance().localUser().name(); // for compatibility con il bare_jid 0.9.4 and before
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -350,11 +350,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
   QString user_status_description = sl.at( 3 );
 
-  QString user_bare_jid = "";
-  if( sl.size() > 4 )
-    user_bare_jid = sl.at( 4 );
-  else
-    user_bare_jid = user_name;
+  // sl.at(4) is bare_jid valid since 0.9.4
 
   /* Skip other data */
   if( sl.size() > 5 )
@@ -367,7 +363,6 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setHostPort( listener_port );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
-  u.setBareJid( user_bare_jid );
   return u;
 }
 
@@ -409,7 +404,6 @@ User Protocol::createTemporaryUser( const QString& user_path )
     return User();
 
   u.setStatus( User::Offline );
-  u.setBareJid( u.name() );
   u.setId( newId() );
   return u;
 }

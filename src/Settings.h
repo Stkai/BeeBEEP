@@ -25,7 +25,6 @@
 #define BEEBEEP_SETTINGS_H
 
 #include "Config.h"
-#include "NetworkAccount.h"
 #include "User.h"
 
 
@@ -137,16 +136,6 @@ public:
   inline bool automaticFileName() const;
   inline void setAutomaticFileName( bool );
 
-  inline bool useNetworkProxy() const;
-  inline bool networkProxyUseAuthentication() const;
-  inline void setNetworkProxyUseAuthentication( bool );
-  inline const QNetworkProxy& networkProxy() const;
-  inline void setNetworkProxy( const QNetworkProxy& );
-
-  inline const QList<NetworkAccount>& networkAccounts() const;
-  void setNetworkAccount( const NetworkAccount& );
-  NetworkAccount networkAccount( const QString& ) const;
-
   inline const QStringList& broadcastAddresses() const;
   inline void setBroadcastAddresses( const QStringList& );
 
@@ -255,11 +244,6 @@ private:
   bool m_showTipsOfTheDay;
   bool m_automaticFileName;
 
-  QNetworkProxy m_networkProxy;
-  bool m_networkProxyUseAuthentication;
-
-  QList<NetworkAccount> m_networkAccounts;
-
   QStringList m_broadcastAddresses;
 
   bool m_firstTime;
@@ -352,12 +336,6 @@ inline bool Settings::raiseOnNewMessageArrived() const { return m_raiseOnNewMess
 inline void Settings::setRaiseOnNewMessageArrived( bool new_value ) { m_raiseOnNewMessageArrived = new_value; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
-inline bool Settings::useNetworkProxy() const { return m_networkProxy.type() != QNetworkProxy::NoProxy; }
-inline bool Settings::networkProxyUseAuthentication() const { return m_networkProxyUseAuthentication; }
-inline void Settings::setNetworkProxyUseAuthentication( bool new_value ) { m_networkProxyUseAuthentication = new_value; }
-inline const QNetworkProxy& Settings::networkProxy() const { return m_networkProxy; }
-inline void Settings::setNetworkProxy( const QNetworkProxy& new_value ) { m_networkProxy = new_value; }
-inline const QList<NetworkAccount>& Settings::networkAccounts() const { return m_networkAccounts; }
 inline const QStringList& Settings::broadcastAddresses() const { return m_broadcastAddresses; }
 inline void Settings::setBroadcastAddresses( const QStringList& new_value ) { m_broadcastAddresses = new_value; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }

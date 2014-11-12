@@ -37,13 +37,8 @@
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
-#ifdef USE_QXMPP
-#ifdef QXMPP_LOGFILE
-  #include "QXmppLogger.h"
-#endif
-#endif
-
 #include "GuiSessionManager.h"
+
 
 bool SetTranslator( QTranslator* translator, const QString& prog_name, const QString& locale_folder, const QString& lang )
 {
@@ -87,10 +82,6 @@ int main( int argc, char *argv[] )
   if( Settings::instance().logToFile() )
     Log::instance().bootFileStream();
 
-#ifdef USE_QXMPP
-  qDebug() << "Running QXmpp Version";
-#endif
-
   /* Apply system language */
   QTranslator translator;
   SetTranslator( &translator, Settings::instance().programName(), Settings::instance().localePath(), Settings::instance().language() );
@@ -112,13 +103,6 @@ int main( int argc, char *argv[] )
 
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
-
-  /* Xmpp Logger */
-#ifdef USE_QXMPP
-#ifdef QXMPP_LOGFILE
-  QXmppLogger::getLogger()->setLoggingType( QXmppLogger::FileLogging );
-#endif
-#endif
 
   /* Show Main Window */
   GuiMain mw;

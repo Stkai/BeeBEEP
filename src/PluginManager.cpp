@@ -29,7 +29,7 @@ PluginManager* PluginManager::mp_instance = NULL;
 
 
 PluginManager::PluginManager()
-  : m_textMarkers(), m_services()
+  : m_textMarkers(), m_games()
 {
 }
 
@@ -40,13 +40,6 @@ void PluginManager::clearPlugins()
     qDebug() << "Unload" << m_textMarkers.size() << "text marker plugins";
     qDeleteAll( m_textMarkers.begin(), m_textMarkers.end() );
     m_textMarkers.clear();
-  }
-
-  if( m_services.size() > 0 )
-  {
-    qDebug() << "Unload" << m_services.size() << "service plugins";
-    qDeleteAll( m_services.begin(), m_services.end() );
-    m_services.clear();
   }
 
   if( m_games.size() > 0 )
@@ -71,7 +64,6 @@ void PluginManager::loadPlugins()
     addPlugin( plugin_dir.absoluteFilePath( file_name ) );
 
   qDebug() << m_textMarkers.size() << "text marker plugins found";
-  qDebug() << m_services.size() << "service plugins found";
   qDebug() << m_games.size() << "game plugins found";
   sortPlugins();
 }
@@ -94,21 +86,6 @@ void PluginManager::addPlugin( const QString& file_path )
     }
     else
       qDebug() << file_path << "is not a text marker plugin";
-
-#ifdef USE_QXMPP
-    ServiceInterface* service_plugin = qobject_cast<ServiceInterface*>( plugin );
-    if( service_plugin )
-    {
-      qDebug() << service_plugin->name() << "is a service plugin";
-      if( !service( service_plugin->name() ) )
-        m_services.append( service_plugin );
-      else
-        qDebug() << service_plugin->name() << "already load... skip it";
-      return;
-    }
-    else
-      qDebug() << file_path << "is not a service plugin";
-#endif
 
     GameInterface* game_plugin = qobject_cast<GameInterface*>( plugin );
     if( game_plugin )
@@ -135,12 +112,6 @@ void PluginManager::setPluginEnabled( const QString& plugin_name, bool enabled )
       tm->setEnabled( enabled );
   }
 
-  foreach( ServiceInterface* s, m_services )
-  {
-    if( s->name() == plugin_name )
-      s->setEnabled( enabled );
-  }
-
   foreach( GameInterface* g, m_games )
   {
     if( g->name() == plugin_name )
@@ -153,9 +124,6 @@ void PluginManager::setPluginsEnabled( bool enabled )
   foreach( TextMarkerInterface* tm, m_textMarkers )
     tm->setEnabled( enabled );
 
-  foreach( ServiceInterface* s, m_services )
-    s->setEnabled( enabled );
-
   foreach( GameInterface* g, m_games )
     g->setEnabled( enabled );
 }
@@ -163,11 +131,6 @@ void PluginManager::setPluginsEnabled( bool enabled )
 static bool TextMarkerForPriority( TextMarkerInterface* tm1, TextMarkerInterface* tm2 )
 {
   return tm1->priority() < tm2->priority();
-}
-
-static bool ServiceForName( ServiceInterface* s1, ServiceInterface* s2 )
-{
-  return s1->name() < s2->name();
 }
 
 static bool GameForName( GameInterface* g1, GameInterface* g2 )
@@ -178,7 +141,6 @@ static bool GameForName( GameInterface* g1, GameInterface* g2 )
 void PluginManager::sortPlugins()
 {
   qSort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
-  qSort( m_services.begin(), m_services.end(), ServiceForName );
   qSort( m_games.begin(), m_games.end(), GameForName );
 }
 
@@ -188,16 +150,6 @@ TextMarkerInterface* PluginManager::textMarker( const QString& text_marker_name 
   {
     if( tmi->name() == text_marker_name )
       return tmi;
-  }
-  return 0;
-}
-
-ServiceInterface* PluginManager::service( const QString& service_name ) const
-{
-  foreach( ServiceInterface* si, m_services )
-  {
-    if( si->name() == service_name )
-      return si;
   }
   return 0;
 }

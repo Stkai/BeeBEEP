@@ -39,18 +39,13 @@ GuiVCard::GuiVCard( QWidget *parent )
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
   connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeColor() ) );
-  connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removeUser() ) );
 }
 
 void GuiVCard::setVCard( const User& u, VNumber chat_id )
 {
   m_userId = u.id();
   m_chatId = chat_id;
-
-  if( u.isOnLan())
-    mp_lPath->setText( u.path() );
-  else
-    mp_lPath->setText( QString( "<b>%1</b>: %2" ).arg( u.service(), u.bareJid() ) );
+  mp_lPath->setText( u.path() );
 
   QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.vCard().nickName());
 
@@ -74,35 +69,21 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else
     mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png").pixmap( 96, 96 ) );
 
-  mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.service(), u.status() ), Bee::userStatusToString( u.status() ) ) );
+  mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) ) );
 
   if( u.isLocal() )
     mp_pbChat->setToolTip( tr( "Chat with all" ) );
   else
     mp_pbChat->setToolTip( tr( "Open chat" ) );
 
-  if( u.isOnLan() )
-  {
-    if( !u.isLocal() )
-      mp_pbFile->show();
-    else
-      mp_pbFile->hide();
-  }
+  if( u.isLocal() )
+    mp_pbFile->hide();
   else
-  {
-    ServiceInterface* si = PluginManager::instance().service( u.service() );
-    if( si && si->fileTransferIsEnabled() && u.isConnected() )
-      mp_pbFile->show();
-    else
-      mp_pbFile->hide();
-  }
+    mp_pbFile->show();
 
-  if( u.isOnLan() )
-    mp_pbRemove->hide();
-  else
-    mp_pbRemove->show();
-
+#ifdef BEEBEEP_DEBUG
   qDebug() << "VCard shown for the user" << u.path();
+#endif
 }
 
 void GuiVCard::showPrivateChat()
@@ -123,12 +104,5 @@ void GuiVCard::changeColor()
 {
   hide();
   emit changeUserColor( m_userId );
-  close();
-}
-
-void GuiVCard::removeUser()
-{
-  hide();
-  emit removeUser( m_userId );
   close();
 }

@@ -123,37 +123,6 @@ void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port
   m_localUser.setHostPort( host_port );
 }
 
-void Settings::setNetworkAccount( const NetworkAccount& na )
-{
-  if( !na.isValid() )
-    return;
-  QList<NetworkAccount>::iterator it = m_networkAccounts.begin();
-  while( it != m_networkAccounts.end() )
-  {
-    if( (*it).service() == na.service() )
-    {
-      (*it) = na;
-      qDebug() << "New network account saved for service" << na.service();
-      return;
-    }
-    ++it;
-  }
-  qDebug() << "New network account added for service" << na.service();
-  m_networkAccounts.append( na );
-}
-
-NetworkAccount Settings::networkAccount( const QString& account_service ) const
-{
-  QList<NetworkAccount>::const_iterator it = m_networkAccounts.begin();
-  while( it != m_networkAccounts.end() )
-  {
-    if( (*it).service() == account_service )
-      return *it;
-    ++it;
-  }
-  return NetworkAccount();
-}
-
 void Settings::loadBroadcastAddresses()
 {
   QFile file( "beehosts.ini" );
@@ -350,16 +319,6 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Network");
-  m_networkProxy.setType( (QNetworkProxy::ProxyType)sets->value( "ProxyType", QNetworkProxy::DefaultProxy ).toInt() );
-  QString proxy_address = sets->value( "ProxyAddress", "" ).toString();
-  if( proxy_address.isEmpty() )
-    m_networkProxy.setType( QNetworkProxy::DefaultProxy );
-  else
-    m_networkProxy.setHostName( proxy_address );
-  m_networkProxy.setPort( sets->value( "ProxyPort", 0 ).toInt() );
-  m_networkProxyUseAuthentication = sets->value( "ProxyUseAuthentication", false ).toBool();
-  m_networkProxy.setUser( sets->value( "ProxyUser", "" ).toString() );
-  m_networkProxy.setPassword( Protocol::simpleDecrypt( sets->value( "ProxyPassword", "" ).toString() ) );
   m_broadcastAddresses = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
   sets->endGroup();
   loadBroadcastAddresses();
@@ -370,37 +329,9 @@ void Settings::load()
   m_localShare = sets->value( "ShareList", QStringList() ).toStringList();
   sets->endGroup();
 
-  qDebug() << "Loading network accounts";
-  sets->beginGroup( "NetworkAccount" );
-  int account_number = sets->value( "Accounts", 0 ).toInt();
-  qDebug() << account_number << "accounts found";
-  if( account_number > 0 )
-  {
-    int account_index = 1;
-    QString account_data = "";
-    while( account_index <= account_number )
-    {
-      account_data = sets->value( QString( "Account%1" ).arg( account_index ), QString( "" ) ).toString();
-      if( account_data.size() > 0 )
-      {
-        NetworkAccount na;
-        if( na.fromString( account_data ) )
-        {
-          setNetworkAccount( na );
-          qDebug() << "Account loaded for service" << na.service();
-        }
-        else
-          qWarning() << "Error occurred when loading account data";
-      }
-      account_index++;
-    }
-  }
-  sets->endGroup();
-
   QString sName = GetUserNameFromSystemEnvinroment();
   if( m_localUser.name().isEmpty() )
     m_localUser.setName( sName );
-  m_localUser.setBareJid( sName.toLower() );
 
   qDebug() << "Load local user:" << m_localUser.path();
 
@@ -499,12 +430,6 @@ void Settings::save()
   sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
-  sets->setValue( "ProxyType", (int)m_networkProxy.type() );
-  sets->setValue( "ProxyAddress", m_networkProxy.hostName() );
-  sets->setValue( "ProxyPort", m_networkProxy.port() );
-  sets->setValue( "ProxyUseAuthentication", m_networkProxyUseAuthentication );
-  sets->setValue( "ProxyUser", m_networkProxy.user() );
-  sets->setValue( "ProxyPassword", Protocol::simpleEncrypt( m_networkProxy.password() ) );
   sets->setValue( "BroadcastAddresses", m_broadcastAddresses );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
@@ -512,21 +437,6 @@ void Settings::save()
   sets->setValue( "MaxFileShared", m_maxFileShared );
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();
-
-  if( m_networkAccounts.size() > 0 )
-  {
-    sets->beginGroup( "NetworkAccount" );
-    sets->setValue( "Accounts", m_networkAccounts.size() );
-    int account_index = 1;
-    QList<NetworkAccount>::const_iterator it = m_networkAccounts.begin();
-    while( it != m_networkAccounts.end() )
-    {
-      sets->setValue( QString( "Account%1" ).arg( account_index ), (*it).toString() );
-      ++it;
-      account_index++;
-    }
-    sets->endGroup();
-  }
 
   sets->sync();
   qDebug() << "Settings saved";

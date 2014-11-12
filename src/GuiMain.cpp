@@ -32,8 +32,6 @@
 #include "GuiCreateGroupChat.h"
 #include "GuiEditVCard.h"
 #include "GuiLog.h"
-#include "GuiNetwork.h"
-#include "GuiNetworkLogin.h"
 #include "GuiPluginManager.h"
 #include "GuiSearchUser.h"
 #include "GuiShareLocal.h"
@@ -81,10 +79,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
-  connect( mp_core, SIGNAL( xmppUserSubscriptionRequest( const QString&, const QString& ) ), this, SLOT( showUserSubscriptionRequest( const QString&, const QString& ) ) );
-  connect( mp_core, SIGNAL( serviceConnected( const QString& ) ), this, SLOT( serviceConnected( const QString& ) ) );
-  connect( mp_core, SIGNAL( serviceDisconnected( const QString& ) ), this, SLOT( serviceDisconnected( const QString& ) ) );
-  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), mp_chatList, SLOT( updateChat( VNumber ) ) );
@@ -137,40 +132,15 @@ void GuiMain::refreshTitle( const User& )
 
   window_title = QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName(),
                      Settings::instance().localUser().name(),
-                     mp_core->isConnected( true ) ?
+                     mp_core->isConnected() ?
                      Bee::userStatusToString( Settings::instance().localUser().status() ) : tr( "offline" ) );
-
-#if 0
-  if( !mp_core->isConnected( true ) )
-  {
-    window_title = QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName(),
-                     Settings::instance().localUser().name(), tr( "offline" ) );
-  }
-  else
-  {
-    Chat c = ChatManager::instance().privateChatForUser( u.id() );
-    if( c.id() == mp_defaultChat->chatId() && !isVisible() )
-    {
-      window_title = QString( "%1%2 (%3) - %4" ).arg(
-                     c.unreadMessages() > 0 ? QString( "(%1) " ).arg( c.unreadMessages() ) : "",
-                     u.name(),
-                     Bee::userStatusToString( u.status() ),
-                     Settings::instance().programName() );
-    }
-    else
-      window_title = QString( "%1 - %2 (%3)" ).arg(
-                       Settings::instance().programName(),
-                       Settings::instance().localUser().name(),
-                       Bee::userStatusToString( Settings::instance().localUser().status() ) );
-  }
-#endif
 
   setWindowTitle( window_title );
 }
 
 void GuiMain::forceExit()
 {
-  if( mp_core->isConnected( true ) )
+  if( mp_core->isConnected() )
     mp_core->stop();
   close();
 }
@@ -185,7 +155,7 @@ void GuiMain::changeEvent( QEvent* e )
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  if( mp_core->isConnected( true ) )
+  if( mp_core->isConnected() )
   {
     if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
     {
@@ -224,7 +194,7 @@ void GuiMain::showNextChat()
 
 void GuiMain::startStopCore()
 {
-  if( mp_core->isConnected( false ) )
+  if( mp_core->isConnected() )
     stopCore();
   else
     startCore();
@@ -269,8 +239,7 @@ void GuiMain::stopCore()
 
 void GuiMain::initGuiItems()
 {
-  bool enable = mp_core->isConnected( false );
-  bool enable_verbose = mp_core->isConnected( true );
+  bool enable = mp_core->isConnected();
 
   showChat( ID_DEFAULT_CHAT );
 
@@ -287,10 +256,10 @@ void GuiMain::initGuiItems()
     mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
   }
 
-  mp_actSendFile->setEnabled( enable_verbose );
-  mp_actSearch->setEnabled( enable_verbose );
+  mp_actSendFile->setEnabled( enable );
+  mp_actSearch->setEnabled( enable );
   mp_userList->setDefaultChatConnected( enable );
-  mp_actCreateGroup->setEnabled( enable_verbose );
+  mp_actCreateGroup->setEnabled( enable );
   mp_actGroupAdd->setEnabled( false );
 
   updateStatusIcon();
@@ -302,14 +271,13 @@ void GuiMain::initGuiItems()
 void GuiMain::showAbout()
 {
   QMessageBox::about( this, Settings::instance().programName(),
-                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br />%7" )
+                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br />" )
                       .arg( Settings::instance().programName() )
                       .arg( tr( "Secure Network Chat" ) )
                       .arg( tr( "Version" ) )
                       .arg( Settings::instance().version( true ) )
                       .arg( tr( "developed by Marco Mastroddi" ) )
                       .arg( tr( "e-mail: marco.mastroddi@gmail.com") )
-                      .arg( PluginManager::instance().services().count() > 0 ? QString( "<br />XMPP: QXmpp 0.3.91 (Manjeet Dahiya)" ) : "" )
                       );
 
 }
@@ -391,28 +359,6 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addAction( mp_actSearch );
-
-  mp_menuAccounts = new QMenu( tr( "Network account" ), mp_menuMain );
-  mp_menuAccounts->setIcon( QIcon( ":/images/network-account.png" ) );
-
-  if( PluginManager::instance().services().size() > 0 )
-  {
-    mp_menuMain->addSeparator();
-    QList<ServiceInterface*>::const_iterator it = PluginManager::instance().services().begin();
-    while( it != PluginManager::instance().services().end() )
-    {
-      act = mp_menuAccounts->addAction( (*it)->icon(), (*it)->name(), this, SLOT( showNetworkAccount() ) );
-      act->setStatusTip( tr( "Show the %1 login" ).arg( (*it)->name() ) );
-      act->setData( (*it)->name() );
-      ++it;
-    }
-
-    mp_menuMain->addMenu( mp_menuAccounts );
-
-    act = mp_menuMain->addAction( QIcon( ":/images/network-settings.png" ), tr( "Network settings..."), this, SLOT( showNetworkManager() ) );
-    act->setStatusTip( tr( "Show the network settings dialog" ) );
-    updateAccountMenu();
-  }
 
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actCreateGroup );
@@ -756,7 +702,7 @@ void GuiMain::emoticonSelected()
 void GuiMain::refreshUserList()
 {
   qDebug() << "Refresh users";
-  mp_userList->updateUsers( mp_core->isConnected( false ) );
+  mp_userList->updateUsers( mp_core->isConnected() );
 }
 
 void GuiMain::refreshChat()
@@ -994,7 +940,7 @@ void GuiMain::saveChat()
 
 void GuiMain::searchUsers()
 {
-  if( !mp_core->isConnected( true ) )
+  if( !mp_core->isConnected() )
     return;
 
   GuiSearchUser gsu( this );
@@ -1012,11 +958,6 @@ void GuiMain::searchUsers()
       mp_core->addBroadcastAddress( QHostAddress( s ) );
     sendBroadcastMessage();
   }
-
-  if( !gsu.userId().isEmpty() )
-  {
-    mp_core->setXmppUserSubscription( gsu.service(), gsu.userId(), true );
-  }
 }
 
 void GuiMain::showWritingUser( const User& u )
@@ -1033,7 +974,7 @@ void GuiMain::statusSelected()
 
   int user_status = act->data().toInt();
 
-  if( user_status == User::Offline && mp_core->isConnected( true ) )
+  if( user_status == User::Offline && mp_core->isConnected() )
   {
     if( QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
@@ -1044,7 +985,7 @@ void GuiMain::statusSelected()
 
   mp_core->setLocalUserStatus( user_status );
 
-  if( !mp_core->isConnected( false ) )
+  if( !mp_core->isConnected() )
     startCore();
   else
     updateStatusIcon();
@@ -1053,7 +994,7 @@ void GuiMain::statusSelected()
 void GuiMain::updateStatusIcon()
 {
   int status_type;
-  if( !mp_core->isConnected( true ) )
+  if( !mp_core->isConnected() )
     status_type = User::Offline;
   else
     status_type = Settings::instance().localUser().status();
@@ -1078,12 +1019,7 @@ void GuiMain::changeStatusDescription()
 void GuiMain::sendFile()
 {
   bool ok = false;
-  QStringList user_string_list = UserManager::instance().userList().serviceUserList( "Lan" ).toStringList( false, true );
-  foreach( ServiceInterface* si, PluginManager::instance().services() )
-  {
-    if( si->fileTransferIsEnabled() )
-      user_string_list.append( UserManager::instance().userList().serviceUserList( si->name() ).toStringList( false, true ) );
-  }
+  QStringList user_string_list = UserManager::instance().userList().toStringList( false, true );
 
   if( user_string_list.isEmpty() )
   {
@@ -1209,7 +1145,7 @@ void GuiMain::showChat( VNumber chat_id )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
-    mp_actGroupAdd->setEnabled( mp_core->isConnected( false ) && ChatManager::instance().isGroupChat( chat_id ) );
+    mp_actGroupAdd->setEnabled( mp_core->isConnected() && ChatManager::instance().isGroupChat( chat_id ) );
     raiseChatView();
   }
 }
@@ -1251,7 +1187,6 @@ void GuiMain::showUserMenu( VNumber user_id )
   connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
-  connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUser( VNumber ) ) );
   gvc->setVCard( u, ChatManager::instance().privateChatForUser( user_id ).id() );
 
   if( dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
@@ -1294,33 +1229,6 @@ void GuiMain::updadePluginMenu()
     act->setEnabled( text_marker->isEnabled() );
   }
 
-  if( PluginManager::instance().services().size() > 0 )
-    mp_menuPlugins->addSeparator();
-
-  foreach( ServiceInterface* service, PluginManager::instance().services() )
-  {
-    act = mp_menuPlugins->addAction( service->name(), this, SLOT( showPluginHelp() ) );
-
-    act->setData( help_data_format
-                  .arg( Bee::iconToHtml( (service->icon().isNull() ? ":/images/plugin.png" : service->iconFileName()), "*P*" ),
-                        service->name(), help_data_ts, service->author(), service->help() ) );
-    act->setIcon( service->icon() );
-    act->setEnabled( service->isEnabled() );
-  }
-
-  QList<QAction*> account_list = mp_menuAccounts->actions();
-  foreach( QAction* account_act, account_list )
-  {
-    ServiceInterface* si = PluginManager::instance().service( account_act->data().toString() );
-    if( !si )
-      continue;
-
-    if( mp_core->isXmppServerConnected( si->name() ) )
-      account_act->setIcon( Bee::userStatusIcon(  si->name(), User::Online ) );
-    else
-      account_act->setIcon( si->icon() );
-  }
-
   if( PluginManager::instance().games().size() > 0 )
     mp_menuPlugins->addSeparator();
 
@@ -1333,22 +1241,6 @@ void GuiMain::updadePluginMenu()
                         game->name(), help_data_ts, game->author(), game->help() ) );
     act->setIcon( game->icon() );
     act->setEnabled( game->isEnabled() );
-  }
-}
-
-void GuiMain::updateAccountMenu()
-{
-  QList<QAction*> account_list = mp_menuAccounts->actions();
-  foreach( QAction* account_act, account_list )
-  {
-    ServiceInterface* si = PluginManager::instance().service( account_act->data().toString() );
-    if( !si )
-      continue;
-
-    if( mp_core->isXmppServerConnected( si->name() ) )
-      account_act->setIcon( Bee::userStatusIcon(  si->name(), User::Online ) );
-    else
-      account_act->setIcon( si->icon() );
   }
 }
 
@@ -1371,116 +1263,7 @@ void GuiMain::showPluginManager()
   gpm.show();
   gpm.exec();
   if( gpm.isChanged() )
-  {
     updadePluginMenu();
-    QList<ServiceInterface*> service_list = PluginManager::instance().services();
-    if( service_list.isEmpty() )
-      return;
-    foreach( ServiceInterface* si, service_list )
-    {
-      if( !si->isEnabled() )
-      {
-        if( mp_core->isXmppServerConnected( si->name() ) )
-          mp_core->disconnectFromXmppServer( si->name() );
-      }
-    }
-    updateAccountMenu();
-  }
-}
-
-void GuiMain::showNetworkManager()
-{
-  GuiNetwork gn( this );
-  gn.setModal( true );
-  gn.loadSettings();
-  gn.show();
-  gn.setFixedSize( gn.size() );
-  gn.exec();
-}
-
-void GuiMain::showNetworkAccount()
-{
-  QAction* act = qobject_cast<QAction*>( sender() );
-  if( !act )
-    return;
-
-  QString xmpp_service = act->data().toString();
-  bool is_connected =  mp_core->isXmppServerConnected( xmpp_service );
-
-  GuiNetworkLogin gnl( this );
-  gnl.setModal( true );
-  gnl.setNetworkAccount( Settings::instance().networkAccount( xmpp_service ), xmpp_service, is_connected );
-  gnl.show();
-  gnl.setFixedSize( gnl.size() );
-  int result = gnl.exec();
-
-  if( result == QDialog::Accepted )
-  {
-    if( is_connected )
-    {
-      if( QMessageBox::question( this, Settings::instance().programName(),
-                                 tr( "You are connected to %1. Do you want to disconnect?").arg( xmpp_service ),
-                                 tr( "Yes"), tr( "No" ), QString::null, 1, 1 ) == 0 )
-      {
-        mp_core->disconnectFromXmppServer( xmpp_service );
-      }
-    }
-    else
-    {
-      Settings::instance().setNetworkAccount( gnl.account() );
-      if( !mp_core->connectToXmppServer( gnl.account() ) )
-        QMessageBox::information( this, Settings::instance().programName(),
-                                  tr( "Unable to connect to %1. Plugin is not present or is not enabled." ).arg( gnl.account().service() ) );
-    }
-  }
-}
-
-void GuiMain::showUserSubscriptionRequest( const QString& service, const QString& bare_jid )
-{
-  switch( QMessageBox::question( this, Settings::instance().programName(),
-                                 tr( "%1 (%2) wants to add you to the contact list. Do you accept?" ).arg( bare_jid, service ),
-                                 tr( "Yes"), tr( "No"), QString(), 1, 1 ) )
-  {
-  case 0:
-    mp_core->setXmppUserSubscription( service, bare_jid, true );
-    break;
-  case 1:
-    mp_core->setXmppUserSubscription( service, bare_jid, false );
-    break;
-  }
-}
-
-void GuiMain::removeUser( VNumber user_id )
-{
-  User u = UserManager::instance().userList().find( user_id );
-  if( !u.isValid() )
-    return;
-  if( u.isOnLan() )
-    return;
-  int res = QMessageBox::question( this, Settings::instance().programName(),
-                                 tr( "Do you really want to remove %1 from the contact list?" ).arg( u.path() ),
-                                 tr( "Yes"), tr( "No"), QString(), 1, 1 );
-  if( res == 0 )
-  {
-    // remove the user
-    if( mp_core->removeXmppUser( u ) )
-    {
-      mp_userList->removeUser( u );
-    }
-    else
-      QMessageBox::warning( this, Settings::instance().programName(),
-                            tr( "Unable to remove %1 from the contact list." ).arg( u.path() ) );
-  }
-}
-
-void GuiMain::serviceConnected( const QString& )
-{
-  updateAccountMenu();
-}
-
-void GuiMain::serviceDisconnected( const QString& )
-{
-  updateAccountMenu();
 }
 
 void GuiMain::sendBroadcastMessage()

@@ -53,7 +53,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   emit chatMessage( c.id(), cm );
 }
 
-void Core::dispatchSystemMessage( const QString& service_name, VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt )
+void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt )
 {
   qDebug() << "Dispatch system message to chat" << chat_id << "from user" << from_user_id << "with type" << (int)dt;
   Message m = Protocol::instance().systemMessage( msg );
@@ -70,32 +70,9 @@ void Core::dispatchSystemMessage( const QString& service_name, VNumber chat_id, 
   case DispatchToChat:
     dispatchToChat( cm, chat_id );
     break;
-  case DispatchToService:
-    dispatchToService( cm, service_name );
-    break;
   default:
     qWarning() << "Invalid dispatch type found while dispatching a system message";
     dispatchToChat( cm, ID_DEFAULT_CHAT );
-  }
-}
-
-void Core::dispatchToService( const ChatMessage& cm, const QString& service_name )
-{
-  if( service_name.isEmpty() )
-  {
-    dispatchToAllChats( cm );
-    return;
-  }
-
-  QList<Chat>::iterator it = ChatManager::instance().chatList().begin();
-  while( it != ChatManager::instance().chatList().end() )
-  {
-    if( chatHasService( *it, service_name ) )
-    {
-      (*it).addMessage( cm );
-      emit chatMessage( (*it).id(), cm );
-    }
-    ++it;
   }
 }
 

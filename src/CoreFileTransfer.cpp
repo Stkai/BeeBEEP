@@ -28,7 +28,6 @@
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
-#include "XmppManager.h"
 #include "UserManager.h"
 
 
@@ -37,7 +36,7 @@ bool Core::startFileTransferServer()
   if( !mp_fileTransfer->startListener() )
   {
     QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
     return false;
   }
 
@@ -65,7 +64,7 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
 void Core::downloadFile( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
                          .arg( icon_html, fi.name(), u.path() ),
                          DispatchToAllChatsWithUser );
   mp_fileTransfer->downloadFile( fi );
@@ -81,7 +80,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   }
 
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
                          fi.isDownload() ? tr( "from") : tr( "to" ), u.path(), msg ),
                          DispatchToAllChatsWithUser );
 
@@ -91,7 +90,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     if( peer->isTransferCompleted() && fi.isDownload() )
     {
       QString s_open = tr( "Open" );
-      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 <a href='%3'>%4</a>." )
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 <a href='%3'>%4</a>." )
                              .arg( icon_html, s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() ),
                              DispatchToAllChatsWithUser );
     }
@@ -117,54 +116,31 @@ bool Core::sendFile( const User& u, const QString& file_path )
   QFileInfo file( file_path );
   if( !file.exists() )
   {
-     dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ), DispatchToAllChatsWithUser );
+     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ), DispatchToAllChatsWithUser );
      return false;
   }
 
   FileInfo fi = mp_fileTransfer->addFile( file );
 
-  if( u.isOnLan() )
+  Connection* c = connection( u.id() );
+  if( !c )
   {
-    Connection* c = connection( u.id() );
-    if( !c )
-    {
-      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
-      return false;
-    }
-
-    if( !mp_fileTransfer->isWorking() )
-    {
-      if( !startFileTransferServer() )
-        return false;
-      fi.setHostAddress( mp_fileTransfer->serverAddress() );
-      fi.setHostPort( mp_fileTransfer->serverPort() );
-    }
-
-    Message m = Protocol::instance().fileInfoToMessage( fi );
-    c->sendMessage( m );
-  }
-  else
-  {
-#ifdef USE_QXMPP
-    if( !u.isConnected() )
-    {
-      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
-      return false;
-    }
-
-    if( !mp_xmppManager->sendFile( u, fi ) )
-    {
-      dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file %2 to %3." )
-                             .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser );
-      return false;
-    }
-#else
-    dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not found." ).arg( icon_html ), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
     return false;
-#endif // USE_QXMPP
   }
 
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file %2 to %3." )
+  if( !mp_fileTransfer->isWorking() )
+  {
+    if( !startFileTransferServer() )
+      return false;
+    fi.setHostAddress( mp_fileTransfer->serverAddress() );
+    fi.setHostPort( mp_fileTransfer->serverPort() );
+  }
+
+  Message m = Protocol::instance().fileInfoToMessage( fi );
+  c->sendMessage( m );
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file %2 to %3." )
                        .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser );
   return true;
 }
@@ -193,7 +169,7 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
   if( c->protoVersion() > 1 )
     c->sendMessage( m );
 
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
 }
 
 void Core::fileTransferServerListening()

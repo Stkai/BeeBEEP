@@ -28,9 +28,7 @@
 #include "Listener.h"
 #include "FileTransfer.h"
 class Broadcaster;
-class NetworkAccount;
 class UserList;
-class XmppManager;
 
 
 class Core : public QObject
@@ -40,7 +38,7 @@ class Core : public QObject
 public:
   explicit Core( QObject* parent = 0 );
 
-  bool isConnected( bool check_also_network_service ) const;
+  bool isConnected() const;
   bool start();
   void stop();
 
@@ -68,13 +66,6 @@ public:
   int addPathToShare( const QString& );
   int removePathFromShare( const QString& );
 
-  /* CoreXmpp */
-  void setXmppUserSubscription( const QString& service, const QString& user_path, bool accepted );
-  bool removeXmppUser( const User& );
-  bool connectToXmppServer( const NetworkAccount& );
-  void disconnectFromXmppServer( const QString& service = "" ); // Empty service = All services
-  bool isXmppServerConnected( const QString& ) const;
-
 public slots:
   /* CoreChat */
   void sendWritingMessage( VNumber );
@@ -90,9 +81,6 @@ signals:
   void userChanged( const User& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
-  void xmppUserSubscriptionRequest( const QString&, const QString& );
-  void serviceConnected( const QString& );
-  void serviceDisconnected( const QString& );
   void fileShareAvailable( const User& );
   void updateChat( VNumber );
 
@@ -113,13 +101,6 @@ protected slots:
   void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
   void fileTransferServerListening();
-
-  /* CoreXmpp */
-  void parseXmppMessage( const QString& service, const QString& bare_jid, const Message& );
-  void checkXmppUser( const User& );
-  void sendXmppChatMessage( const User&, const Message& );
-  void setXmppVCard( const QString& service, const QString& bare_jid, const VCard& );
-  void sendXmppUserComposing( const User& );
 
 protected:
   void buildLocalShareList();
@@ -148,23 +129,17 @@ protected:
   void createDefaultChat();
   void createPrivateChat( const User& );
   QString chatMessageToText( const UserList&, const ChatMessage& );
-  bool chatHasService( const Chat&, const QString& );
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
   void sendGroupChatRequestMessage( const Chat&, const UserList& );
   void checkGroupChatAfterUserReconnect( const User& );
 
   /* CoreDispatcher */
-  enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToService };
-  void dispatchSystemMessage( const QString& service_name, VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType );
+  enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat };
+  void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType );
   void dispatchChatMessageReceived( VNumber from_user_id, const Message& m );
   void dispatchToAllChats( const ChatMessage& );
   void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );
   void dispatchToChat( const ChatMessage&, VNumber chat_id );
-  void dispatchToService( const ChatMessage&, const QString& service_name );
-
-  /* CoreXmpp */
-  void sendLocalUserStatusToXmppServer();
-  void sendLocalVCardToXmppServer();
 
   /* CoreFileTransfer */
   void sendFileShareListTo( VNumber user_id );
@@ -176,9 +151,7 @@ private:
   Listener* mp_listener;
   Broadcaster* mp_broadcaster;
   FileTransfer* mp_fileTransfer;
-  XmppManager* mp_xmppManager;
 
 };
-
 
 #endif // BEEBEEP_CLIENT_H

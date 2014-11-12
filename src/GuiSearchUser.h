@@ -38,8 +38,6 @@ public:
   void loadSettings();
 
   inline const QStringList& addresses() const;
-  QString service() const;
-  QString userId() const;
 
 protected slots:
   void checkAndSearch();

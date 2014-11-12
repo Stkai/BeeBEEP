@@ -119,7 +119,7 @@ void GuiShareNetwork::search()
 
   foreach( User u, UserManager::instance().userList().toList() )
   {
-    if( u.isConnected() && u.isOnLan() )
+    if( u.isConnected() )
       loadShares( u );
     else
     {

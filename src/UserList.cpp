@@ -67,7 +67,9 @@ User UserList::find( VNumber user_id ) const
       return *it;
     ++it;
   }
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Unable to find user with id" << user_id;
+#endif
   return User();
 }
 
@@ -82,22 +84,9 @@ User UserList::find( const QString& user_path ) const
       return *it;
     ++it;
   }
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Unable to find user with path" << user_path;
-  return User();
-}
-
-User UserList::find( const QString& service, const QString& bare_jid ) const
-{
-  if( bare_jid == Settings::instance().localUser().bareJid() )
-    return Settings::instance().localUser();
-  QList<User>::const_iterator it = m_users.begin();
-  while( it != m_users.end() )
-  {
-    if( service == (*it).service() && bare_jid == (*it).bareJid() )
-      return *it;
-    ++it;
-  }
-  qDebug() << "Unable to find user with service" << service << "and bare_jid" << bare_jid;
+#endif
   return User();
 }
 
@@ -109,7 +98,9 @@ void UserList::set( const User& u )
     if( (*it).id() == u.id() )
     {
       (*it) = u;
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User" << u.id() << "modified";
+#endif
       return;
     }
     ++it;
@@ -144,27 +135,20 @@ QList<VNumber> UserList::toUsersId() const
   return users_id;
 }
 
-UserList UserList::serviceUserList( const QString& service ) const
-{
-  UserList ul;
-  foreach( User u, m_users )
-  {
-    if( u.service() == service )
-      ul.set( u );
-  }
-  return ul;
-}
-
 bool UserList::remove( const User& u )
 {
   if( m_users.removeOne( u ) )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "User" << u.path() << "is removed from list";
+#endif
     return true;
   }
   else
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to remove user with path" << u.path();
+#endif
     return false;
   }
 }

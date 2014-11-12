@@ -44,6 +44,9 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenLinks( false );
   mp_lPix->setPixmap( QPixmap( ":/images/chat.png" ) );
 
+  mp_lPixSecure->setPixmap( QPixmap( ":/images/secure.png" ) );
+  mp_lPixSecure->setToolTip( tr( "%1 Secure Mode" ).arg( Settings::instance().programName() ) );
+
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
@@ -165,30 +168,15 @@ void GuiChat::setChatUsers()
 
 bool GuiChat::setChatId( VNumber chat_id )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Setting chat" << chat_id << "in default chat window";
+#endif
   Chat c = ChatManager::instance().chat( chat_id, true );
   if( !c.isValid() )
     return false;
   m_chatId = c.id();
 
   m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
-
-#ifdef USE_QXMPP
-  bool is_secure = c.isDefault() || (m_users.toList().size() >= 1 && m_users.toList().last().isOnLan() && c.isPrivateForUser( m_users.toList().last().id() ));
-#else
-  bool is_secure = true;
-#endif
-
-  if( is_secure )
-  {
-    mp_lPixSecure->setPixmap( QPixmap( ":/images/secure.png" ) );
-    mp_lPixSecure->setToolTip( tr( "%1 Secure Mode" ).arg( Settings::instance().programName() ) );
-  }
-  else
-  {
-    mp_lPixSecure->setPixmap( QPixmap( ":/images/xmpp.png" ) );
-    mp_lPixSecure->setToolTip( tr( "XMPP Secure Mode" ) );
-  }
 
   setChatUsers();
 

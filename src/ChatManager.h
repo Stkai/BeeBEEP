@@ -81,5 +81,4 @@ inline Chat ChatManager::defaultChat( bool read_all_messages ) { return chat( ID
 inline const QList<Chat>& ChatManager::constChatList() const { return m_chats; }
 inline QList<Chat>& ChatManager::chatList() { return m_chats; }
 
-
 #endif // BEEBEEP_CHATMANAGER_H

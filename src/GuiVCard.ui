@@ -17,7 +17,16 @@
    <string>Widget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <property name="spacing">
@@ -346,20 +355,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="mp_pbRemove">
-       <property name="toolTip">
-        <string>Remove from the contact list</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="beebeep.qrc">
-         <normaloff>:/images/user-delete.png</normaloff>:/images/user-delete.png</iconset>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
@@ -368,7 +363,6 @@
   <tabstop>mp_pbChat</tabstop>
   <tabstop>mp_pbFile</tabstop>
   <tabstop>mp_pbColor</tabstop>
-  <tabstop>mp_pbRemove</tabstop>
  </tabstops>
  <resources>
   <include location="beebeep.qrc"/>

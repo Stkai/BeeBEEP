@@ -46,14 +46,10 @@ SOURCES += Listener.cpp \
     PluginManager.cpp \
     GuiPluginManager.cpp \
     ChatMessageData.cpp \
-    CoreXmpp.cpp \
-    GuiNetwork.cpp \
-    GuiNetworkLogin.cpp \
     UserManager.cpp \
     ChatManager.cpp \
     GuiChatItem.cpp \
     GuiChatList.cpp \
-    NetworkAccount.cpp \
     GuiSearchUser.cpp \
     GuiWizard.cpp \
     FileShare.cpp \
@@ -107,13 +103,10 @@ HEADERS += sym_iap_util.h \
     PluginManager.h \
     GuiPluginManager.h \
     ChatMessageData.h \
-    GuiNetwork.h \
-    GuiNetworkLogin.h \
     UserManager.h \
     ChatManager.h \
     GuiChatItem.h \
     GuiChatList.h \
-    NetworkAccount.h \
     GuiSearchUser.h \
     GuiWizard.h \
     FileShare.h \
@@ -130,8 +123,6 @@ FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
     GuiPluginManager.ui \
-    GuiNetwork.ui \
-    GuiNetworkLogin.ui \
     GuiSearchUser.ui \
     GuiWizard.ui \
     GuiShareLocal.ui \
@@ -144,23 +135,6 @@ RESOURCES += beebeep.qrc
 win32: RC_FILE = beebeep.rc
 
 ICON = beebeep.icns
-
-contains(DEFINES, USE_QXMPP) {
-
-  message(Building BeeBEEP with Xmpp support...)
-
-  HEADERS += XmppClient.h  XmppManager.h
-  SOURCES += XmppClient.cpp  XmppManager.cpp
-
-  win32: LIBS += -L$$DESTDIR -lqxmpp0
-  unix: LIBS += -L$$DESTDIR -lqxmpp
-
-  INCLUDEPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
-  DEPENDPATH += $$PWD/../qxmpp/base $$PWD/../qxmpp/client $$PWD/../qxmpp/server
-}
-
-OTHER_FILES +=
-
 
 
 

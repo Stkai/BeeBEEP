@@ -65,7 +65,7 @@ void GuiCreateGroupChat::setGroupChat( const Chat& c )
   foreach( User u, UserManager::instance().userList().toList() )
   {
     item = new QTreeWidgetItem( mp_twUsers );
-    item->setIcon( 0, Bee::userStatusIcon( u.service(), u.status() ) );
+    item->setIcon( 0, Bee::userStatusIcon( u.status() ) );
     item->setText( 0, u.name() );
     item->setData( 0, Qt::UserRole+1, u.id() );
     item->setFlags( item->flags() | Qt::ItemIsUserCheckable );

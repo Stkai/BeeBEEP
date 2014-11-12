@@ -197,7 +197,7 @@ void Core::checkUserAuthentication( const Message& m )
 
   sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
   sHtmlMsg += tr( "%1 is connected to %2 network." ).arg( u.name(), Settings::instance().programName() );
-  dispatchSystemMessage( "", ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 
   if( !u.statusDescription().isEmpty() || u.status() > User::Online )
     showUserStatusChanged( u );

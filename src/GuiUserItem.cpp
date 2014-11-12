@@ -45,9 +45,9 @@ bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
   return user_item_name < other_name;
 }
 
-static QIcon GetUserIcon( int unread_messages, const QString& user_service, int user_status )
+static QIcon GetUserIcon( int unread_messages, int user_status )
 {
-  return unread_messages > 0 ? QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_service, user_status );
+  return unread_messages > 0 ? QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_status );
 }
 
 bool GuiUserItem::updateItem()
@@ -69,7 +69,7 @@ bool GuiUserItem::updateItem()
   if( !user_status )
     unread_messages = 0;
 
-  QString s = u.isLocal() ? QObject::tr( "All Lan Users" ) : (u.isOnLan() ? (user_status != User::Offline ? u.name() : u.path()) : u.name());
+  QString s = u.isLocal() ? QObject::tr( "All Lan Users" ) : (user_status != User::Offline ? u.name() : u.path());
 
   int user_priority = 1;
 
@@ -80,7 +80,7 @@ bool GuiUserItem::updateItem()
   setText( 0, s );
 
   if( !u.isLocal() )
-    setIcon( 0, GetUserIcon( 0, u.service(), user_status ) );
+    setIcon( 0, GetUserIcon( 0, user_status ) );
 
   if( !m_defaultForegroundColor.isValid() )
     m_defaultForegroundColor = foreground( 0 ).color();
@@ -102,7 +102,7 @@ bool GuiUserItem::updateItem()
   {
     status_tip = QObject::tr( "Open chat with %1" ).arg( u.name() );
     tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
-    user_priority += u.isOnLan() ? 1000 : 10000;
+    user_priority = 1000;
     user_priority += u.isConnected() ? (100*user_status) : 100000;
   }
 

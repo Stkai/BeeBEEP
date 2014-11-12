@@ -54,14 +54,12 @@ private:
 
 
 // Inline Functions
-
 inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID && m_message.isValid(); }
 inline bool ChatMessage::isSystem() const { return m_message.type() == Message::System; }
 inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
 inline VNumber ChatMessage::userId() const { return m_userId; }
 inline const Message& ChatMessage::message() const { return m_message; }
 inline void ChatMessage::setMessage( const Message& new_value ) { m_message = new_value; }
-
 
 #endif // BEEBEEP_CHATMESSAGE_H
 

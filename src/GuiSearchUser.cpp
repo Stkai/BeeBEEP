@@ -39,19 +39,6 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
-QString GuiSearchUser::service() const
-{
-  if( mp_comboService->count() > 0 )
-    return mp_comboService->currentText();
-  else
-    return QLatin1String( "" );
-}
-
-QString GuiSearchUser::userId() const
-{
-  return mp_leUser->text().simplified();
-}
-
 void GuiSearchUser::loadSettings()
 {
   m_addresses = Settings::instance().broadcastAddresses();
@@ -64,20 +51,6 @@ void GuiSearchUser::loadSettings()
   {
     mp_textBroadcast->setPlainText( "" );
     mp_cbSaveAddresses->setChecked( false );
-  }
-
-  if( mp_comboService->count() )
-    mp_comboService->clear();
-  foreach( ServiceInterface* si, PluginManager::instance().services() )
-  {
-    if( si->isEnabled() )
-      mp_comboService->addItem( si->icon(), si->name(), si->name() );
-  }
-
-  if( mp_comboService->count() == 0 )
-  {
-    mp_boxAddUser->hide();
-    resize( width(), height() - (mp_boxAddUser->height() + contentsMargins().top() + contentsMargins().bottom()) );
   }
 }
 
