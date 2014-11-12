@@ -348,6 +348,7 @@ void Settings::save()
   sets->beginGroup( "Version" );
   sets->setValue( "Program", version( true ) );
   sets->setValue( "Proto", protoVersion() );
+  sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->endGroup();
   sets->beginGroup( "Chat" );
   sets->setValue( "Font", m_chatFont.toString() );
