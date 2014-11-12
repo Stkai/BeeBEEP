@@ -97,12 +97,14 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #endif
   if( write( data_block ) == data_block.size() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket sends" << data_block.size() << "bytes to" << peerAddress().toString() << peerPort();
+#endif
     return true;
   }
   else
   {
-    qDebug() << "ConnectionSocket has an I/O error";
+    qWarning() << "ConnectionSocket has an I/O error";
     return false;
   }
 }

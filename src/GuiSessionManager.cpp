@@ -24,6 +24,7 @@
 #include "ChatManager.h"
 #include "GuiChatMessage.h"
 #include "GuiSessionManager.h"
+#include "Protocol.h"
 #include "Settings.h"
 
 GuiSessionManager* GuiSessionManager::mp_instance = NULL;
@@ -82,11 +83,14 @@ void GuiSessionManager::saveChats( QDataStream* stream )
 
   QString chat_footer = QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Saved in" ) ).arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleShortDate ) );
   QStringList chat_lines;
+  QString chat_name_encrypted;
+  QString chat_text_encrypted;
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
     qDebug() << "Saving chat" << c.name();
-    (*stream) << (QString)c.name();
+    chat_name_encrypted = Protocol::instance().simpleEncryptDecrypt( c.name() );
+    (*stream) << chat_name_encrypted;
     QString html_text = GuiChatMessage::chatToHtml( c, true );
 
     if( !html_text.simplified().isEmpty() )
@@ -114,7 +118,8 @@ void GuiSessionManager::saveChats( QDataStream* stream )
       html_text.append( "<br />" ); // SkipEmptyParts remove the last one too
     }
 
-    (*stream) << html_text;
+    chat_text_encrypted = Protocol::instance().simpleEncryptDecrypt( html_text );
+    (*stream) << chat_text_encrypted;
   }
 }
 
@@ -151,15 +156,15 @@ void GuiSessionManager::loadChats( QDataStream* stream )
   if( num_of_chats <= 0 )
     return;
 
+  QString chat_name_encrypted;
+  QString chat_text_encrypted;
   QString chat_name;
   QString chat_text;
 
   for( int i = 0; i < num_of_chats; i++ )
   {
-    (*stream) >> chat_name;
-    (*stream) >> chat_text;
-
-    qDebug() << "Loading chat" << chat_name;
+    (*stream) >> chat_name_encrypted;
+    (*stream) >> chat_text_encrypted;
 
     if( stream->status() != QDataStream::Ok )
     {
@@ -167,11 +172,14 @@ void GuiSessionManager::loadChats( QDataStream* stream )
       return;
     }
 
+    chat_name = Protocol::instance().simpleEncryptDecrypt( chat_name_encrypted );
+    chat_text = Protocol::instance().simpleEncryptDecrypt( chat_text_encrypted );
+
+    qDebug() << "Loading chat" << chat_name;
+
     if( chat_text.simplified().isEmpty() )
       qDebug() << "The chat" << chat_name << "saved is empty";
     else
       m_chatMap.insert( chat_name, chat_text );
   }
 }
-
-

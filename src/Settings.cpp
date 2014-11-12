@@ -297,11 +297,7 @@ void Settings::load()
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
   m_savePassword = sets->value( "SavePassword", false ).toBool();
   if( m_savePassword )
-  {
-    m_passwordBeforeHash = sets->value( "PasswordEncrypted", "" ).toString();
-    if( !m_passwordBeforeHash.isEmpty() )
-      m_passwordBeforeHash = Protocol::simpleDecrypt( m_passwordBeforeHash );
-  }
+    m_passwordBeforeHash = Protocol::instance().simpleEncryptDecrypt( sets->value( "EncPwd", "" ).toString() );
   else
     m_passwordBeforeHash = "";
   m_broadcastPort = sets->value( "BroadcastPort", 36475 ).toInt();
@@ -410,13 +406,14 @@ void Settings::save()
   sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
   if( m_savePassword )
   {
+
     sets->setValue( "SavePassword", true );
-    sets->setValue( "PasswordEncrypted", Protocol::simpleEncrypt( m_passwordBeforeHash ) );
+    sets->setValue( "EncPwd", Protocol::instance().simpleEncryptDecrypt( m_passwordBeforeHash ) );
   }
   else
   {
     sets->remove( "SavePassword" );
-    sets->remove( "PasswordEncrypted" );
+    sets->remove( "EncPwd" );
   }
 
   sets->setValue( "BroadcastPort", m_broadcastPort );
