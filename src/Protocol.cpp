@@ -210,7 +210,7 @@ QByteArray Protocol::helloMessage() const
   data_list << Settings::instance().localUser().name();
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
-  data_list << Settings::instance().localUser().name(); // for compatibility con il bare_jid 0.9.4 and before
+  data_list << Settings::instance().localUser().accountName();
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -325,7 +325,8 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
   if( sl.size() < 4 )
   {
-    qWarning() << "HELLO message has not 4 field data but" << sl.size();
+    qWarning() << "HELLO message has not 4 (at least) field data but" << sl.size();
+    qWarning() << "Skip this HELLO:" << sl.join( DATA_FIELD_SEPARATOR );
     return User();
   }
 
@@ -350,7 +351,9 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
   QString user_status_description = sl.at( 3 );
 
-  // sl.at(4) is bare_jid valid since 0.9.4
+  QString user_account_name = "";
+  if( sl.size() > 4 )
+    user_account_name = sl.at( 4 );
 
   /* Skip other data */
   if( sl.size() > 5 )
@@ -363,6 +366,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setHostPort( listener_port );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
+  u.setAccountName( user_account_name );
   return u;
 }
 

@@ -326,10 +326,12 @@ void Settings::load()
   sets->endGroup();
 
   QString sName = GetUserNameFromSystemEnvinroment();
+  m_localUser.setAccountName( sName );
   if( m_localUser.name().isEmpty() )
     m_localUser.setName( sName );
 
-  qDebug() << "Load local user:" << m_localUser.path();
+  qDebug() << "Local user:" << m_localUser.path();
+  qDebug() << "Account name:" << m_localUser.accountName();
 
   sets->deleteLater();
 }

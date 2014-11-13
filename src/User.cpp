@@ -26,13 +26,13 @@
 
 User::User()
   : m_id( ID_INVALID ), m_vCard(), m_hostAddress(), m_hostPort( 0 ),
-    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" )
+    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" )
 {
 }
 
 User::User( VNumber new_id )
   : m_id( new_id ), m_vCard(), m_hostAddress( "127.0.0.1" ), m_hostPort( 6475 ),
-    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" )
+    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" )
 {
   setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
 }
@@ -53,6 +53,7 @@ User& User::operator=( const User& u )
     m_status = u.m_status;
     m_statusDescription = u.m_statusDescription;
     m_color = u.m_color;
+    m_accountName = u.m_accountName;
   }
   return *this;
 }

@@ -45,9 +45,9 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
 {
   m_userId = u.id();
   m_chatId = chat_id;
-  mp_lPath->setText( u.path() );
+  mp_lPath->setText( u.accountPath() );
 
-  QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.vCard().nickName());
+  QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.name() );
 
   if( !u.isLocal() )
     name_txt = QString( "<font color=""%1"">%2</font>" ).arg( u.color(), name_txt );
