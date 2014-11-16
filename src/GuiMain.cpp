@@ -396,7 +396,7 @@ void GuiMain::createMenus()
   mp_actBeepOnNewMessage = act;
 
   act = mp_menuSettings->addAction( tr( "Raise on new message arrived" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled when a new message is arrived %1 is shown on top of all other windows" ) );
+  act->setStatusTip( tr( "If enabled when a new message is arrived %1 is shown on top of all other windows" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
   act->setData( 15 );
@@ -856,15 +856,18 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
   qDebug() << num_messages << "messages sent";
 }
 
-void GuiMain::showAlert()
+bool GuiMain::showAlert()
 {
   if( !isActiveWindow() || isMinimized() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "BeeBEEP alert called";
-
+#endif
     if( Settings::instance().beepOnNewMessageArrived() )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "New message arrived in background: play BEEP sound";
+#endif
       if( QFile::exists( Settings::instance().beepFilePath() ) )
         playBeep();
       else
@@ -873,18 +876,23 @@ void GuiMain::showAlert()
 
     if( mp_trayIcon->isVisible() )
     {
-      mp_trayIcon->addUnreadMessage( 1 );
+      if( Settings::instance().raiseOnNewMessageArrived() )
+        showFromTrayIcon();
+      else
+        mp_trayIcon->addUnreadMessage( 1 );
     }
     else
     {
       if( Settings::instance().raiseOnNewMessageArrived() && !Settings::instance().stayOnTop() )
-      {
         raiseOnTop();
-        return;
-      }
-      QApplication::alert( this );
+      else
+        QApplication::alert( this );
     }
+
+    return true;
   }
+  else
+    return false;
 }
 
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
@@ -910,6 +918,9 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
       mp_chatList->updateChat( chat_id );
       refreshTitle( UserManager::instance().userList().find( cm.userId() ) );
+
+      if( Settings::instance().raiseOnNewMessageArrived() )
+        showChat( chat_id );
     }
   }
 }

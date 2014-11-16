@@ -104,7 +104,7 @@ private slots:
 protected:
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
-  void showAlert();
+  bool showAlert();
   void raiseOnTop();
   bool promptConnectionPassword();
 
