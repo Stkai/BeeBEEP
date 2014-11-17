@@ -155,16 +155,24 @@ void Core::parseChatMessage( const User& u, const Message& m )
 
 void Core::parseGroupMessage( const User& u, const Message& m )
 {
-  qDebug() << "Group message:" << Protocol::instance().fromMessage( m );
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Group message:" << Protocol::instance().fromMessage( m );
   qDebug() << "Group name:" << cmd.groupName();
   qDebug() << "Group id:" << cmd.groupId();
+
+#endif
+
   Chat group_chat = ChatManager::instance().groupChat( cmd.groupId() );
 
   if( m.hasFlag( Message::Request ) )
   {
     QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage( m );
     UserList ul;
+    ul.set( u ); // User from request
+    ul.set( Settings::instance().localUser() );
+
     foreach( QString user_path, user_paths )
     {
       User user_tmp = UserManager::instance().userList().find( user_path );
@@ -175,11 +183,11 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
       else
       {
-        qWarning() << "User" << user_path << "not found in list";
+        qWarning() << "User" << user_path << "is request for group chat and it is not found in list";
         user_tmp = Protocol::instance().createTemporaryUser( user_path );
         if( user_tmp.isValid() )
         {
-          qDebug() << "Connecting to user" << user_path;
+          qDebug() << "Connecting to the new user" << user_path;
           UserManager::instance().setUser( user_tmp );
           ul.set( user_tmp );
           newPeerFound( user_tmp.hostAddress(), user_tmp.hostPort() );

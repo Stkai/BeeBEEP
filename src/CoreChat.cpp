@@ -280,14 +280,19 @@ void Core::showTipOfTheDay()
 
 void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& user_list )
 {
-  Message group_message = Protocol::instance().groupChatRequestMessage( group_chat );
-  qDebug() << "Group message request:" << Protocol::instance().fromMessage( group_message );
-  qDebug() << "Send group chat request to:" << group_message.text();
+  Message group_message;
 
   foreach( User u, user_list.toList() )
   {
     if( u.isLocal() )
       continue;
+
+    group_message = Protocol::instance().groupChatRequestMessage( group_chat, u );
+
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Group message request:" << Protocol::instance().fromMessage( group_message );
+    qDebug() << "Send group chat request to:" << group_message.text();
+#endif
 
     if( !sendMessageToLocalNetwork( u, group_message ) )
       dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 cannot be invited to the group." ).arg( u.path() ), DispatchToChat );

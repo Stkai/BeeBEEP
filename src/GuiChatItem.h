@@ -32,7 +32,7 @@ class GuiChatItem : public QTreeWidgetItem
 {
 
 public:
-  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName };
+  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup };
 
   GuiChatItem( QTreeWidget* );
 
@@ -40,6 +40,8 @@ public:
 
   inline void setChatId( VNumber );
   inline VNumber chatId() const;
+  inline void setIsGroup( bool );
+  inline bool isGroup() const;
 
   bool updateItem();
 
@@ -49,6 +51,9 @@ public:
 // Inline Functions
 inline void GuiChatItem::setChatId( VNumber chat_id ) { setData( 0, ChatId, chat_id ); }
 inline VNumber GuiChatItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
+inline void GuiChatItem::setIsGroup( bool new_value ) { setData( 0, ChatIsGroup, new_value ); }
+inline bool GuiChatItem::isGroup() const { return data( 0, ChatIsGroup ).toBool(); }
+
 
 
 #endif // BEEBEEP_GUICHATITEM_H

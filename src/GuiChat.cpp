@@ -147,6 +147,9 @@ void GuiChat::setChatUsers()
   if( m_chatId == ID_DEFAULT_CHAT )
   {
     chat_users = tr( "All Lan Users" );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << m_users.toStringList( false, false).join( "," );
+#endif
   }
   else
   {

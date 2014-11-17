@@ -424,15 +424,27 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
   return c;
 }
 
-Message Protocol::groupChatRequestMessage( const Chat& c )
+Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
 {
   Message m( Message::Group, newId(), "" );
   m.addFlag( Message::Request );
   UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
+#ifdef BEEBEEP_DEBUG
+  if( ul.remove( Settings::instance().localUser() ) )
+    qDebug() << "Local user removed";
+  if( ul.remove( to_user ) )
+    qDebug() << "To user removed";
+#else
+  ul.remove( Settings::instance().localUser() );
+  ul.remove( to_user );
+#endif
+
   QStringList sl = ul.toStringList( false, false );
-  sl << Settings::instance().localUser().path();
+
   m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
-  qDebug() << "Users:" << m.text();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Users in group:" << m.text();
+#endif
   ChatMessageData cmd;
   cmd.setGroupId( c.privateId() );
   cmd.setGroupName( c.name() );

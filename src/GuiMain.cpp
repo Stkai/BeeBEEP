@@ -853,7 +853,9 @@ void GuiMain::settingsChanged()
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
   int num_messages = mp_core->sendChatMessage( chat_id, msg );
+#ifdef BEEBEEP_DEBUG
   qDebug() << num_messages << "messages sent";
+#endif
 }
 
 bool GuiMain::showAlert()
@@ -898,10 +900,11 @@ bool GuiMain::showAlert()
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
   bool is_current_chat = chat_id == mp_defaultChat->chatId();
+  bool show_alert = false;
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
   {
-    showAlert();
+    show_alert = showAlert();
   }
 
   if( is_current_chat )
@@ -909,6 +912,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_defaultChat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
     mp_userList->setUnreadMessages( chat_id, 0 );
+    mp_chatList->updateChat( chat_id );
   }
   else
   {
@@ -919,7 +923,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       mp_chatList->updateChat( chat_id );
       refreshTitle( UserManager::instance().userList().find( cm.userId() ) );
 
-      if( Settings::instance().raiseOnNewMessageArrived() )
+      if( show_alert && Settings::instance().raiseOnNewMessageArrived() )
         showChat( chat_id );
     }
   }
@@ -1493,6 +1497,7 @@ void GuiMain::raiseOnTop()
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetActiveWindow( (HWND)winId() );
 #else
+  raise();
   qApp->setActiveWindow( this );
   // FIXME!!!
 #endif

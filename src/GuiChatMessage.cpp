@@ -152,9 +152,14 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm )
 
 QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
 {
-  UserList chat_users = UserManager::instance().userList().fromUsersId( c.usersId() );
+  UserList chat_users;
   QString html_text = "";
   VNumber last_message_user_id = 0;
+
+  if( c.isDefault() )
+    chat_users = UserManager::instance().userList();
+  else
+    chat_users = UserManager::instance().userList().fromUsersId( c.usersId() );
 
   foreach( ChatMessage cm, c.messages() )
   {

@@ -35,6 +35,19 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
 {
   QString user_item_name = data( 0, GuiChatItem::ChatName ).toString().toLower();
   QString other_name = item.data( 0, GuiChatItem::ChatName ).toString().toLower();
+
+  if( chatId() == ID_DEFAULT_CHAT )
+    return false;
+
+  if( Bee::qVariantToVNumber( item.data( 0, GuiChatItem::ChatId ) ) == ID_DEFAULT_CHAT )
+    return true;
+
+  if( isGroup() && !item.data( 0, GuiChatItem::ChatIsGroup ).toBool() )
+    return false;
+
+  if( !isGroup() && item.data( 0, GuiChatItem::ChatIsGroup ).toBool() )
+    return true;
+
   return user_item_name > other_name; // correct order
 }
 
@@ -73,6 +86,8 @@ bool GuiChatItem::updateItem()
       chat_name.prepend( QString( "(%1) " ).arg( c.unreadMessages() ) );
 
     setData( 0, ChatName, chat_name );
+
+    setIsGroup( c.isGroup() );
   }
 
   chat_name += " ";
