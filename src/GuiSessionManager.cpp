@@ -75,20 +75,20 @@ void GuiSessionManager::saveChats( QDataStream* stream )
     return;
   }
 
-  int num_of_chats = ChatManager::instance().constChatList().count();
+  qint32 num_of_chats = ChatManager::instance().constChatList().count();
+  quint64 file_pos = stream->device()->pos();
  (*stream) << num_of_chats;
-
-  if( num_of_chats <= 0 )
-    return;
 
   QString chat_footer = QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Saved in" ) ).arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleShortDate ) );
   QStringList chat_lines;
   QString chat_name_encrypted;
   QString chat_text_encrypted;
+  qint32 chat_counter = 0;
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
     qDebug() << "Saving chat" << c.name();
+    chat_counter++;
     chat_name_encrypted = Protocol::instance().simpleEncryptDecrypt( c.name() );
     (*stream) << chat_name_encrypted;
     QString html_text = GuiChatMessage::chatToHtml( c, true );
@@ -100,7 +100,10 @@ void GuiSessionManager::saveChats( QDataStream* stream )
     }
 
     if( chatHasStoredText( c.name() ) )
+    {
       html_text.prepend( chatStoredText( c.name() ) );
+      removeStoredText( c.name() );
+    }
 
     if( html_text.simplified().isEmpty() )
     {
@@ -120,6 +123,24 @@ void GuiSessionManager::saveChats( QDataStream* stream )
 
     chat_text_encrypted = Protocol::instance().simpleEncryptDecrypt( html_text );
     (*stream) << chat_text_encrypted;
+  }
+
+  QMap<QString, QString>::const_iterator it = m_chatMap.constBegin();
+  while( it != m_chatMap.constEnd() )
+  {
+    qDebug() << "Saving stored chat" << it.key();
+    chat_counter++;
+    chat_name_encrypted = Protocol::instance().simpleEncryptDecrypt( it.key() );
+    (*stream) << chat_name_encrypted;
+    chat_text_encrypted = Protocol::instance().simpleEncryptDecrypt( it.value() );
+    (*stream) << chat_text_encrypted;
+    ++it;
+  }
+
+  if( chat_counter != num_of_chats )
+  {
+    stream->device()->seek( file_pos );
+    (*stream) << chat_counter;
   }
 }
 

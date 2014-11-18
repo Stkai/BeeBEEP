@@ -39,6 +39,7 @@ public:
   
   QString chatStoredText( const QString& );
   inline bool chatHasStoredText( const QString& ) const;
+  inline void removeStoredText( const QString& );
 
   static GuiSessionManager& instance()
   {
@@ -67,5 +68,6 @@ protected:
 
 // Inline Functions
 inline bool GuiSessionManager::chatHasStoredText( const QString& chat_name ) const { return m_chatMap.contains( chat_name ); }
+inline void GuiSessionManager::removeStoredText( const QString& chat_name ) { m_chatMap.remove( chat_name ); }
 
 #endif // BEEBEEP_GUISESSIONMANAGER_H

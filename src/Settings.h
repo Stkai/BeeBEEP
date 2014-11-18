@@ -47,6 +47,7 @@ public:
   void setLocalUserHost( const QHostAddress&, int );
 
   QHostAddress localHostAddress() const;
+
   inline int broadcastPort() const;
   inline int broadcastInterval() const;
   inline int pingInterval() const;
@@ -245,6 +246,8 @@ private:
   bool m_automaticFileName;
 
   QStringList m_broadcastAddresses;
+  QHostAddress m_localHostAddressForced;
+  QString m_localSubnetForced;
 
   bool m_firstTime;
 

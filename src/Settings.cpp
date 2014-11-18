@@ -82,9 +82,11 @@ QString Settings::currentHash() const
 QHostAddress Settings::localHostAddress() const
 { 
   QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
-  QHostAddress address_ipv6;
+  QList<QHostAddress> address_ipv6_list;
+  QList<QHostAddress> address_ipv4_list;
   QList<QHostAddress> address_list;
 
+  // Collect the list
   foreach( QNetworkInterface if_net, interface_list )
   {
     if( (if_net.flags() & QNetworkInterface::IsUp) &&
@@ -94,24 +96,90 @@ QHostAddress Settings::localHostAddress() const
        address_list = if_net.allAddresses();
        foreach( QHostAddress host_address, address_list )
        {
-         qDebug() << "Host address found:" << host_address.toString();
+         qDebug() << "Check host address:" << host_address.toString();
          if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
          {
            if( host_address.toString().contains( ":" ) )
-           {
-             address_ipv6 = host_address;
-           }
+             address_ipv6_list.append( host_address );
            else
-           {
-             qDebug() << "Host address selected:" << host_address.toString();
-             return host_address;
-           }
+             address_ipv4_list.append( host_address );
          }
        }
     }
   }
 
-  return address_ipv6.isNull() ? QHostAddress( "127.0.0.1" ) : address_ipv6;
+  // check forced ip
+  if( !m_localHostAddressForced.isNull() )
+  {
+    if( !address_ipv4_list.isEmpty() )
+    {
+      foreach( QHostAddress host_address, address_ipv4_list )
+      {
+        if( host_address == m_localHostAddressForced )
+        {
+          qDebug() << "Local host address IPV4 selected:" << host_address.toString() << "(forced IP found)";
+          return host_address;
+        }
+      }
+    }
+
+    if( !address_ipv6_list.isEmpty() )
+    {
+      foreach( QHostAddress host_address, address_ipv6_list )
+      {
+        if( host_address == m_localHostAddressForced )
+        {
+          qDebug() << "Local host address IPV6 selected:" << host_address.toString() << "(forced IP found)";
+          return host_address;
+        }
+      }
+    }
+  }
+
+  // check forced subnet
+  if( !m_localSubnetForced.isEmpty() )
+  {
+    QPair<QHostAddress, int> subnet_forced = QHostAddress::parseSubnet( m_localSubnetForced );
+
+    if( !address_ipv4_list.isEmpty() )
+    {
+      foreach( QHostAddress host_address, address_ipv4_list )
+      {
+        if( host_address.isInSubnet( subnet_forced ) )
+        {
+          qDebug() << "Local host address IPV4 selected:" << host_address.toString() << "(forced SUBNET found)";
+          return host_address;
+        }
+      }
+    }
+
+    if( !address_ipv6_list.isEmpty() )
+    {
+      foreach( QHostAddress host_address, address_ipv6_list )
+      {
+        if( host_address.isInSubnet( subnet_forced ) )
+        {
+          qDebug() << "Local host address IPV6 selected:" << host_address.toString() << "(forced SUBNET found)";
+          return host_address;
+        }
+      }
+    }
+  }
+
+  if( !address_ipv4_list.isEmpty() )
+  {
+    qDebug() << "Local host address IPV4 selected:" << address_ipv4_list.first().toString();
+    return address_ipv4_list.first();
+  }
+
+  if( !address_ipv6_list.isEmpty() )
+  {
+    qDebug() << "Local host address IPV6 selected:" << address_ipv6_list.first().toString();
+    return address_ipv6_list.first();
+  }
+
+  qDebug() << "Local host address not found";
+  return QHostAddress( "127.0.0.1" );
 }
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
@@ -316,6 +384,10 @@ void Settings::load()
 
   sets->beginGroup( "Network");
   m_broadcastAddresses = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
+  QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
+  if( !local_host_address.isEmpty() )
+    m_localHostAddressForced = QHostAddress( local_host_address );
+  m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
   sets->endGroup();
   loadBroadcastAddresses();
 
@@ -431,6 +503,11 @@ void Settings::save()
   sets->endGroup();
   sets->beginGroup( "Network");
   sets->setValue( "BroadcastAddresses", m_broadcastAddresses );
+  if( !m_localHostAddressForced.isNull() )
+    sets->setValue( "LocalHostAddressForced", m_localHostAddressForced.toString() );
+  else
+    sets->setValue( "LocalHostAddressForced", QString( "" ) );
+  sets->setValue( "LocalSubnetForced", m_localSubnetForced );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "Active", m_fileShare );
