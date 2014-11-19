@@ -503,6 +503,10 @@ p, li { white-space: pre-wrap; }
         <source>Please add member in the group chat:</source>
         <translation>Aggiungi dei membri alla chat di gruppo:</translation>
     </message>
+    <message>
+        <source>Please select different group name.</source>
+        <translation>Seleziona un differente nome del gruppo.</translation>
+    </message>
 </context>
 <context>
     <name>GuiEditVCard</name>
@@ -1304,6 +1308,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>&amp;Chat</source>
         <translation>&amp;Chat</translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation>Storia</translation>
+    </message>
+    <message>
+        <source>Show the saved chat list</source>
+        <translation>Mostra la lista delle conversazioni salvate</translation>
+    </message>
+    <message>
+        <source>Show the list of the saved chats</source>
+        <translation>Mostra la lista delle conversazioni salvate</translation>
     </message>
 </context>
 <context>

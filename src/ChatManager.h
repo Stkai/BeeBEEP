@@ -49,6 +49,15 @@ public:
 
   QList<Chat> groupChatForUser( VNumber ) const;
 
+  inline QString chatSavedText( const QString& ) const;
+  inline bool chatHasSavedText( const QString& ) const;
+  inline void removeSavedTextFromChat( const QString& );
+  inline void setSavedTextToChat( const QString&, const QString& );
+  inline void setLoadHistoryCompleted( bool );
+  inline bool isLoadHistoryCompleted() const;
+  inline const QMap<QString, QString>& constHistoryMap() const;
+
+
   static ChatManager& instance()
   {
     if( !mp_instance )
@@ -72,6 +81,8 @@ protected:
 
 private:
   QList<Chat> m_chats;
+  QMap<QString, QString> m_history;
+  bool m_isLoadHistoryCompleted;
 
 };
 
@@ -80,5 +91,12 @@ private:
 inline Chat ChatManager::defaultChat( bool read_all_messages ) { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
 inline const QList<Chat>& ChatManager::constChatList() const { return m_chats; }
 inline QList<Chat>& ChatManager::chatList() { return m_chats; }
+inline QString ChatManager::chatSavedText( const QString& chat_name ) const { return m_history.value( chat_name ); }
+inline bool ChatManager::chatHasSavedText( const QString& chat_name ) const { return m_history.contains( chat_name ); }
+inline void ChatManager::removeSavedTextFromChat( const QString& chat_name ) { m_history.remove( chat_name ); }
+inline void ChatManager::setSavedTextToChat( const QString& chat_name, const QString& chat_text ) { m_history.insert( chat_name, chat_text ); }
+inline void ChatManager::setLoadHistoryCompleted( bool new_value ) { m_isLoadHistoryCompleted = new_value; }
+inline bool ChatManager::isLoadHistoryCompleted() const { return m_isLoadHistoryCompleted; }
+inline const QMap<QString, QString>& ChatManager::constHistoryMap() const { return m_history; }
 
 #endif // BEEBEEP_CHATMANAGER_H

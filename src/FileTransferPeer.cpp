@@ -144,7 +144,9 @@ void FileTransferPeer::sendTransferData()
 
 void FileTransferPeer::checkAuthenticationRequested( const Message& m )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Store authentication message (fixed a signal bug)";
+#endif
   m_messageAuth = m;
   emit authenticationRequested();
 }

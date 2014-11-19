@@ -27,17 +27,11 @@
 #include "Protocol.h"
 #include "Settings.h"
 
-GuiSessionManager* GuiSessionManager::mp_instance = NULL;
 
-
-GuiSessionManager::GuiSessionManager()
- : m_chatMap()
+GuiSessionManager::GuiSessionManager( QObject* parent )
+ : QObject( parent )
 {
-}
-
-QString GuiSessionManager::chatStoredText( const QString& chat_name )
-{
-  return m_chatMap.value( chat_name );
+  setObjectName( "GuiSessionManager" );
 }
 
 bool GuiSessionManager::save()
@@ -99,10 +93,10 @@ void GuiSessionManager::saveChats( QDataStream* stream )
       html_text.append( chat_footer );
     }
 
-    if( chatHasStoredText( c.name() ) )
+    if( ChatManager::instance().chatHasSavedText( c.name() ) )
     {
-      html_text.prepend( chatStoredText( c.name() ) );
-      removeStoredText( c.name() );
+      html_text.prepend( ChatManager::instance().chatSavedText( c.name() ) );
+      ChatManager::instance().removeSavedTextFromChat( c.name() );
     }
 
     if( html_text.simplified().isEmpty() )
@@ -114,7 +108,7 @@ void GuiSessionManager::saveChats( QDataStream* stream )
     chat_lines = html_text.split( "<br />", QString::SkipEmptyParts );
     if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
     {
-      qDebug() << "Chat exceeds line size limit with" << chat_lines.size();
+      qWarning() << "Chat exceeds line size limit with" << chat_lines.size();
       while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
         chat_lines.removeFirst();
       html_text = chat_lines.join( "<br />" );
@@ -125,8 +119,8 @@ void GuiSessionManager::saveChats( QDataStream* stream )
     (*stream) << chat_text_encrypted;
   }
 
-  QMap<QString, QString>::const_iterator it = m_chatMap.constBegin();
-  while( it != m_chatMap.constEnd() )
+  QMap<QString, QString>::const_iterator it = ChatManager::instance().constHistoryMap().constBegin();
+  while( it !=  ChatManager::instance().constHistoryMap().constEnd() )
   {
     qDebug() << "Saving stored chat" << it.key();
     chat_counter++;
@@ -151,7 +145,7 @@ bool GuiSessionManager::load()
 
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qDebug() << "Unable to open file" << file.fileName() << ": loading session aborted";
+    qWarning() << "Unable to open file" << file.fileName() << ": loading session aborted";
     return false;
   }
 
@@ -165,6 +159,8 @@ bool GuiSessionManager::load()
   loadChats( &stream );
 
   file.close();
+
+  emit( loadComplete() );
 
   return true;
 }
@@ -201,6 +197,8 @@ void GuiSessionManager::loadChats( QDataStream* stream )
     if( chat_text.simplified().isEmpty() )
       qDebug() << "The chat" << chat_name << "saved is empty";
     else
-      m_chatMap.insert( chat_name, chat_text );
+      ChatManager::instance().setSavedTextToChat( chat_name, chat_text );
   }
+
+  ChatManager::instance().setLoadHistoryCompleted( true );
 }

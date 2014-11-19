@@ -37,7 +37,6 @@
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
-#include "GuiSessionManager.h"
 
 
 bool SetTranslator( QTranslator* translator, const QString& prog_name, const QString& locale_folder, const QString& lang )
@@ -130,14 +129,13 @@ int main( int argc, char *argv[] )
   QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
 
   /* Load saved session */
-  GuiSessionManager::instance().load();
+  mw.loadSession();
 
   /* Event Loop */
   int iRet = app.exec();
 
   /* Save session */
-  GuiSessionManager::instance().save();
-  GuiSessionManager::instance().close();
+  mw.saveSession();
 
   /* CleanUp */
   FileShare::close();

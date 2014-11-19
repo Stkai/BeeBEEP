@@ -341,7 +341,10 @@ void Settings::load()
   m_lastDirectorySelected = sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_downloadDirectory = sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
 #endif
-  m_logPath = sets->value( "LogPath", "." ).toString();
+  if( m_useSettingsFileIni )
+    m_logPath = sets->value( "LogPath", "." ).toString();
+  else
+    m_logPath = sets->value( "LogPath", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_pluginPath = sets->value( "PluginPath", "." ).toString();
   m_localePath = sets->value( "LocalePath", "." ).toString();
   m_minimizeInTray = sets->value( "MinimizeInTray", false ).toBool();
@@ -349,7 +352,10 @@ void Settings::load()
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
   m_beepFilePath = sets->value( "BeepFilePath", "beep.wav" ).toString();
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
-  m_chatSaveDirectory = sets->value( "ChatSaveDirectory", "." ).toString();
+  if( m_useSettingsFileIni )
+    m_chatSaveDirectory = sets->value( "ChatSaveDirectory", "." ).toString();
+  else
+    m_chatSaveDirectory = sets->value( "ChatSaveDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_chatAutoSave = sets->value( "ChatAutoSave", false ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   sets->endGroup();

@@ -25,7 +25,6 @@
 #include "ChatMessage.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
-#include "GuiSessionManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -148,7 +147,7 @@ void GuiChat::setChatUsers()
   {
     chat_users = tr( "All Lan Users" );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << m_users.toStringList( false, false).join( "," );
+    qDebug() << "Chat users:" << m_users.toStringList( false, false).join( "," );
 #endif
   }
   else
@@ -183,9 +182,14 @@ bool GuiChat::setChatId( VNumber chat_id )
 
   setChatUsers();
 
-  QString html_text = GuiSessionManager::instance().chatHasStoredText( c.name() ) ? GuiSessionManager::instance().chatStoredText( c.name() ) : "";
-  if( !html_text.isEmpty() )
-    html_text.append( "<br />" );
+  QString html_text = "";
+
+  if( ChatManager::instance().isLoadHistoryCompleted() )
+  {
+    html_text += ChatManager::instance().chatHasSavedText( c.name() ) ? ChatManager::instance().chatSavedText( c.name() ) : "";
+    if( !html_text.isEmpty() )
+      html_text.append( "<br />" );
+  }
 
   foreach( ChatMessage cm, c.messages() )
     html_text += chatMessageToText( cm );

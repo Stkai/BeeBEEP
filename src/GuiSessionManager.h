@@ -27,47 +27,26 @@
 #include "Config.h"
 
 
-class GuiSessionManager
+class GuiSessionManager : public QObject
 {
-// Singleton Object
-  static GuiSessionManager* mp_instance;
-  QMap<QString,QString> m_chatMap;
+  Q_OBJECT
 
 public:
+  GuiSessionManager( QObject* parent );
+
+signals:
+  void loadComplete();
+  void saveComplete();
+
+public slots:
   bool load();
   bool save();
   
-  QString chatStoredText( const QString& );
-  inline bool chatHasStoredText( const QString& ) const;
-  inline void removeStoredText( const QString& );
-
-  static GuiSessionManager& instance()
-  {
-    if( !mp_instance )
-      mp_instance = new GuiSessionManager();
-    return *mp_instance;
-  }
-
-  static void close()
-  {
-    if( mp_instance )
-    {
-      delete mp_instance;
-      mp_instance = NULL;
-    }
-  }
-
 protected:
-  GuiSessionManager();
-
   void saveChats( QDataStream* );
   void loadChats( QDataStream* );
 
+
 };
-
-
-// Inline Functions
-inline bool GuiSessionManager::chatHasStoredText( const QString& chat_name ) const { return m_chatMap.contains( chat_name ); }
-inline void GuiSessionManager::removeStoredText( const QString& chat_name ) { m_chatMap.remove( chat_name ); }
 
 #endif // BEEBEEP_GUISESSIONMANAGER_H

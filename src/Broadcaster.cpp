@@ -133,13 +133,13 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     if( datagram.size() <= Protocol::instance().messageMinimumSize() )
     {
-      qDebug() << "Broadcaster has received an invalid data size:" << datagram;
+      qWarning() << "Broadcaster has received an invalid data size:" << datagram;
       continue;
     }
     Message m = Protocol::instance().toMessage( datagram );
     if( !m.isValid() || m.type() != Message::Beep )
     {
-      qDebug() << "Broadcaster has received an invalid data:" << datagram;
+      qWarning() << "Broadcaster has received an invalid data:" << datagram;
       continue;
     }
     bool ok = false;

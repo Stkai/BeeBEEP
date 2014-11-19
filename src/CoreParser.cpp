@@ -34,7 +34,9 @@
 
 void Core::parseMessage( VNumber user_id, const Message& m )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Parsing message received from user" << user_id;
+#endif
   User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
   {
@@ -73,7 +75,9 @@ void Core::parseUserMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::UserWriting ) )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "User" << u.path() << "is writing";
+#endif
     emit userIsWriting( u );
     return;
   }
@@ -82,7 +86,9 @@ void Core::parseUserMessage( const User& u, const Message& m )
     User user_with_new_status = u;
     if( Protocol::instance().changeUserStatusFromMessage( &user_with_new_status, m ) )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User" << user_with_new_status.path() << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
+#endif
       UserManager::instance().setUser( user_with_new_status );
       showUserStatusChanged( user_with_new_status );
     }
@@ -92,7 +98,9 @@ void Core::parseUserMessage( const User& u, const Message& m )
     User user_with_new_vcard = u;
     if( Protocol::instance().changeVCardFromMessage( &user_with_new_vcard, m ) )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User" << user_with_new_vcard.path() << "has new vCard";
+#endif
       UserManager::instance().setUser( user_with_new_vcard );
       showUserVCardChanged( user_with_new_vcard );
     }
@@ -104,7 +112,9 @@ void Core::parseUserMessage( const User& u, const Message& m )
     User user_with_new_name = u;
     if( Protocol::instance().changeUserNameFromMessage( &user_with_new_name, m ) )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User" << u.path() << "changes his name to" << user_with_new_name.name();
+#endif
       UserManager::instance().setUser( user_with_new_name );
       showUserNameChanged( user_with_new_name, u.name() );
     }
@@ -146,7 +156,9 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
 void Core::parseChatMessage( const User& u, const Message& m )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Chat message received from user" << u.path();
+#endif
   if( m.hasFlag( Message::Private ) || m.flags() == 0 || m.hasFlag( Message::GroupChat ) )
     dispatchChatMessageReceived( u.id(), m );
   else
@@ -161,10 +173,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
   qDebug() << "Group message:" << Protocol::instance().fromMessage( m );
   qDebug() << "Group name:" << cmd.groupName();
   qDebug() << "Group id:" << cmd.groupId();
-
 #endif
-
-  Chat group_chat = ChatManager::instance().groupChat( cmd.groupId() );
 
   if( m.hasFlag( Message::Request ) )
   {
@@ -194,6 +203,8 @@ void Core::parseGroupMessage( const User& u, const Message& m )
         }
       }
     }
+
+    Chat group_chat = ChatManager::instance().groupChat( cmd.groupId() );
 
     if( !group_chat.isValid() )
     {

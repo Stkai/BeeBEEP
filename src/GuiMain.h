@@ -33,6 +33,8 @@ class FileInfo;
 class GuiChat;
 class GuiChatList;
 class GuiLog;
+class GuiSavedChatList;
+class GuiSessionManager;
 class GuiShareLocal;
 class GuiShareNetwork;
 class GuiSystemTray;
@@ -48,6 +50,8 @@ class GuiMain : public QMainWindow
 public:
   GuiMain( QWidget* parent = 0 );
   void checkWindowFlagsAndShow();
+  void loadSession();
+  void saveSession();
 
 public slots:
   void startStopCore();
@@ -100,6 +104,8 @@ private slots:
   void playBeep();
   void addUserToGroup();
   void createGroup();
+  void loadSessionCompleted();
+  void showSavedChatSelected( const QString& );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -135,6 +141,7 @@ private:
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
+  GuiSavedChatList* mp_savedChatList;
   GuiShareLocal* mp_shareLocal;
   GuiShareNetwork* mp_shareNetwork;
   GuiLog* mp_logView;
@@ -164,6 +171,7 @@ private:
   QAction* mp_actSendFile;
   QAction* mp_actViewFileTransfer;
   QAction* mp_actViewChats;
+  QAction* mp_actViewSavedChats;
   QAction* mp_actViewShareLocal;
   QAction* mp_actViewShareNetwork;
   QAction* mp_actViewDefaultChat;
@@ -176,6 +184,8 @@ private:
   QDockWidget* mp_dockUserList;
 
   GuiSystemTray* mp_trayIcon;
+
+  GuiSessionManager* mp_sessionManager;
 
 };
 

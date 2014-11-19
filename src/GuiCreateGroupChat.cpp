@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "ChatManager.h"
 #include "GuiCreateGroupChat.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -94,7 +95,15 @@ void GuiCreateGroupChat::updateGroupChat()
     return;
   }
 
+  if( ChatManager::instance().hasName( mp_leName->text().simplified() ) )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select different group name." ) );
+    mp_leName->setFocus();
+    return;
+  }
+
   m_groupName = mp_leName->text().simplified();
+
   VNumber user_id = 0;
   foreach( QTreeWidgetItem* item, item_list )
   {

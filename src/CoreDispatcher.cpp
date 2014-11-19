@@ -43,19 +43,25 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
     return;
   }
 
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Message dispatched to chat" << c.id();
+#endif
   ChatMessage cm( from_user_id, m );
   c.addMessage( cm );
   c.addUnreadMessage();
   c.setLastMessageTimestamp( m.timestamp() );
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Chat" << c.id() << "has" << c.unreadMessages() << "unread messages";
+#endif
   ChatManager::instance().setChat( c );
   emit chatMessage( c.id(), cm );
 }
 
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Dispatch system message to chat" << chat_id << "from user" << from_user_id << "with type" << (int)dt;
+#endif
   Message m = Protocol::instance().systemMessage( msg );
   ChatMessage cm( from_user_id, m );
 

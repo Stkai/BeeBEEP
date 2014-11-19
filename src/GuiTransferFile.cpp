@@ -62,8 +62,9 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 
 void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "GuiTransferFile setProgress::" << bytes << "of" << fi.size() << "bytes";
-
+#endif
   QHeaderView* hv = header();
     if( hv->isHidden() )
       hv->show();
@@ -88,7 +89,9 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
 
   if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "FileTransfer in progress";
+#endif
     item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
     item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
     showProgress( item, u.id(), fi, bytes );
@@ -162,13 +165,18 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, cons
   file_transfer_progress.prepend( QString( "[%1] " ).arg( fi.name() ) );
   if( !isVisible() )
     emit stringToShow( file_transfer_progress, 3000 );
+#ifdef BEEBEEP_DEBUG
   qDebug() << file_transfer_progress;
+#endif
+
 }
 
 void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
 {
   qApp->processEvents();
+#ifdef BEEBEEP_DEBUG
   qDebug() << "GuiTransferFile setMessage:" << msg;
+#endif
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
     setProgress( peer_id, u, fi, 0 );

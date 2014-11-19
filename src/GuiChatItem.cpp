@@ -27,7 +27,7 @@
 
 
 GuiChatItem::GuiChatItem( QTreeWidget* parent )
-  : QTreeWidgetItem( parent )
+ : QTreeWidgetItem( parent )
 {
 }
 

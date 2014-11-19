@@ -82,5 +82,7 @@
         <file>images/group-add.png</file>
         <file>images/chat-create.png</file>
         <file>images/log.png</file>
+        <file>images/saved-chat-list.png</file>
+        <file>images/saved-chat.png</file>
     </qresource>
 </RCC>

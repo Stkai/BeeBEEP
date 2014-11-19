@@ -43,7 +43,9 @@ void FileTransferPeer::sendDownloadData()
 
 void FileTransferPeer::sendDownloadRequest()
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Sending REQUEST:" << m_fileInfo.password();
+#endif
   if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
     m_state = FileTransferPeer::Transferring;
   else
@@ -52,7 +54,9 @@ void FileTransferPeer::sendDownloadRequest()
 
 void FileTransferPeer::sendDownloadDataConfirmation()
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Sending download corfirmation for" << m_bytesTransferred << "bytes";
+#endif
   if( !m_socket.sendData( QByteArray::number( m_bytesTransferred ) ) )
     cancelTransfer();
 }

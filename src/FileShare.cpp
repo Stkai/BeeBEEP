@@ -87,11 +87,15 @@ bool FileShare::addFileInfo( const QString& share_key, const QFileInfo& fi )
 {
   if( hasPath( fi.absoluteFilePath() ) )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "FileShare:" << fi.absoluteFilePath() << "is already in share list";
+#endif
     return false;
   }
   FileInfo file_info = Protocol::instance().fileInfo( fi );
+#ifdef BEEBEEP_DEBUG
   qDebug() << "FileShare: adding file" << file_info.path();
+#endif
   m_local.insert( share_key, file_info );
   return true;
 }

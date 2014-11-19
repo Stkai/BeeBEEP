@@ -667,7 +667,9 @@ namespace
 
     if( !tmp.isEmpty() )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "Not encrypted string:" << tmp;
+#endif
       array_list.append( tmp );
     }
 

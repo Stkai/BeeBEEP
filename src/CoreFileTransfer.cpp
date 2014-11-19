@@ -57,7 +57,7 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
   if( user_connected.isValid() )
     qDebug() << "Found a connected user to validate file transfer:" << user_connected.path();
   else
-    qDebug() << user_to_check.path() << "is not authorized to file transfer";
+    qWarning() << user_to_check.path() << "is not authorized to file transfer";
   mp_fileTransfer->validateUser( peer_id, user_connected.id() );
 }
 

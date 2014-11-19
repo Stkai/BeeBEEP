@@ -39,7 +39,9 @@ QString GuiChatMessage::linkify( QString text )
   text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
   text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
   text.remove( 0, 1 ); // remove the space added
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Linkify:" << text;
+#endif
   return text;
 }
 

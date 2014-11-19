@@ -33,7 +33,9 @@
 #include "GuiEditVCard.h"
 #include "GuiLog.h"
 #include "GuiPluginManager.h"
+#include "GuiSavedChatList.h"
 #include "GuiSearchUser.h"
+#include "GuiSessionManager.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
 #include "GuiSystemTray.h"
@@ -67,6 +69,8 @@ GuiMain::GuiMain( QWidget *parent )
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
 
   mp_trayIcon = new GuiSystemTray( this );
+
+  mp_sessionManager = new GuiSessionManager( this );
 
   createActions();
   createDockWindows();
@@ -107,6 +111,10 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
+
+  connect( mp_sessionManager, SIGNAL( loadComplete() ), this, SLOT( loadSessionCompleted() ) );
+
+  connect( mp_savedChatList, SIGNAL( savedChatSelected( const QString& ) ), this, SLOT( showSavedChatSelected( const QString& ) ) );
 
   initGuiItems();
   raiseChatView();
@@ -187,7 +195,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
 void GuiMain::showNextChat()
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Show next chat in list with unread messages";
+#endif
   if( !mp_userList->nextUserWithUnreadMessages() )
     statusBar()->showMessage( tr( "No new message available" ) );
 }
@@ -539,6 +549,7 @@ void GuiMain::createMenus()
   mp_menuView = new QMenu( tr( "&View" ), this );
   mp_menuView->addAction( mp_actViewUsers );
   mp_menuView->addAction( mp_actViewChats );
+  mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
   mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( raiseChatView() ) );
@@ -590,6 +601,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
+  mp_barMain->addAction( mp_actViewSavedChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewDefaultChat );
@@ -631,6 +643,17 @@ void GuiMain::createDockWindows()
   mp_actViewChats->setText( tr( "Show the chat list" ) );
   mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
   mp_actViewChats->setData( 99 );
+
+  dock_widget = new QDockWidget( tr( "History" ), this );
+  dock_widget->setObjectName( "GuiSavedChatListDock" );
+  mp_savedChatList = new GuiSavedChatList( this );
+  dock_widget->setWidget( mp_savedChatList );
+  addDockWidget( Qt::RightDockWidgetArea, dock_widget );
+  mp_actViewSavedChats = dock_widget->toggleViewAction();
+  mp_actViewSavedChats->setIcon( QIcon( ":/images/saved-chat-list.png" ) );
+  mp_actViewSavedChats->setText( tr( "Show the saved chat list" ) );
+  mp_actViewSavedChats->setStatusTip( tr( "Show the list of the saved chats" ) );
+  mp_actViewSavedChats->setData( 99 );
 
   dock_widget = new QDockWidget( tr( "File Transfers" ), this );
   dock_widget->setObjectName( "GuiFileTransferDock" );
@@ -681,13 +704,15 @@ void GuiMain::checkUser( const User& u )
 {
   if( !u.isValid() )
   {
-    qDebug() << "Invalid user found in GuiMain::checkUser( const User& u )";
+    qWarning() << "Invalid user found in GuiMain::checkUser( const User& u )";
     return;
   }
 
   refreshTitle( u );
 
+#ifdef BEEBEEP_DEBUG
   qDebug() << "User" << u.path() << "has updated his info. Check it";
+#endif
   mp_userList->setUser( u );
   mp_defaultChat->updateUser( u );
 }
@@ -701,13 +726,17 @@ void GuiMain::emoticonSelected()
 
 void GuiMain::refreshUserList()
 {
-  qDebug() << "Refresh users";
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Refresh users in GuiUserList";
+#endif
   mp_userList->updateUsers( mp_core->isConnected() );
 }
 
 void GuiMain::refreshChat()
 {
-  qDebug() << "Refresh chat";
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Refresh GuiChat";
+#endif
   if( !mp_defaultChat->setChatId( mp_defaultChat->chatId() ) )
     qWarning() << "Chat" << mp_defaultChat->chatId() << "not found. Unable to refresh it";
 }
@@ -1515,5 +1544,26 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
     Settings::instance().removeStartOnSystemBoot();
     QMessageBox::information( this, Settings::instance().programName(), tr( "%1 will not start on windows boot." ).arg( Settings::instance().programName() ) );
   }
+}
+
+void GuiMain::loadSession()
+{
+  QTimer::singleShot( 100, mp_sessionManager, SLOT( load() ) );
+}
+
+void GuiMain::saveSession()
+{
+  mp_sessionManager->save();
+}
+
+void GuiMain::loadSessionCompleted()
+{
+  // Load saved chats in list
+  mp_savedChatList->updateSavedChats();
+}
+
+void GuiMain::showSavedChatSelected( const QString& chat_name )
+{
+  qDebug() << "Saved chat selected:" << chat_name;
 }
 

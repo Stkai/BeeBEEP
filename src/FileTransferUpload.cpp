@@ -78,7 +78,9 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 {
   if( byte_array.toInt() == m_bytesTransferred )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent confirmed";
+#endif
     m_totalBytesTransferred += m_bytesTransferred;
     showProgress();
     if( m_totalBytesTransferred == m_fileInfo.size() )
@@ -115,7 +117,9 @@ void FileTransferPeer::sendUploadData()
   if( m_socket.sendData( byte_array ) )
   {
     m_bytesTransferred = byte_array.size();
+#ifdef BEEBEEP_DEBUG
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent";
+#endif
   }
   else
   {

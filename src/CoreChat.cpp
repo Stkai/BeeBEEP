@@ -35,10 +35,12 @@
 
 void Core::createDefaultChat()
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Creating default chat";
+#endif
   Chat c;
   c.setId( ID_DEFAULT_CHAT );
-  c.setName( "*** BeeBEEP Default Chat ***" );
+  c.setName( Settings::instance().defaultChatName() );
   c.addUser( ID_LOCAL_USER );
   QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
@@ -49,10 +51,13 @@ void Core::createDefaultChat()
 
 void Core::createPrivateChat( const User& u )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Creating private chat room for user" << u.path();
+#endif
   QList<VNumber> user_list;
   user_list.append( u.id() );
   Chat c = Protocol::instance().createChat( user_list );
+  c.setName( u.path() );
   QString sHtmlMsg = tr( "%1 Chat with %2 (%3)." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name(), u.path() );
   ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
@@ -304,7 +309,7 @@ bool Core::sendMessageToLocalNetwork( const User& to_user, const Message& m )
   Connection* c = connection( to_user.id() );
   if( !c )
   {
-    qDebug() << "Unable to find connection socket for user" << to_user.id();
+    qWarning() << "Unable to find connection socket for user" << to_user.id();
     return false;
   }
 

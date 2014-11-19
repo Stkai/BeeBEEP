@@ -21,37 +21,29 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUICHATITEM_H
-#define BEEBEEP_GUICHATITEM_H
+#ifndef BEEBEEP_GUISAVEDCHATLIST_H
+#define BEEBEEP_GUISAVEDCHATLIST_H
 
-#include "Config.h"
-#include "BeeUtils.h"
+#include "GuiSavedChatItem.h"
 
 
-class GuiChatItem : public QTreeWidgetItem
+class GuiSavedChatList : public QTreeWidget
 {
+  Q_OBJECT
 
 public:
-  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup };
+  GuiSavedChatList( QWidget* parent = 0 );
+  virtual QSize sizeHint() const;
 
-  GuiChatItem( QTreeWidget* );
+  void updateSavedChats();
 
-  bool operator<( const QTreeWidgetItem& ) const;
+signals:
+  void savedChatSelected( const QString& );
 
-  inline void setChatId( VNumber );
-  inline VNumber chatId() const;
-  inline void setIsGroup( bool );
-  inline bool isGroup() const;
-
-  bool updateItem();
+protected slots:
+  void savedChatDoubleClicked( QTreeWidgetItem*, int );
 
 };
 
 
-// Inline Functions
-inline void GuiChatItem::setChatId( VNumber chat_id ) { setData( 0, ChatId, chat_id ); }
-inline VNumber GuiChatItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
-inline void GuiChatItem::setIsGroup( bool new_value ) { setData( 0, ChatIsGroup, new_value ); }
-inline bool GuiChatItem::isGroup() const { return data( 0, ChatIsGroup ).toBool(); }
-
-#endif // BEEBEEP_GUICHATITEM_H
+#endif // BEEBEEP_GUISAVEDCHATLIST_H

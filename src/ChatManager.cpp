@@ -27,7 +27,7 @@ ChatManager* ChatManager::mp_instance = NULL;
 
 
 ChatManager::ChatManager()
-  : m_chats()
+  : m_chats(), m_history(), m_isLoadHistoryCompleted( false )
 {
 }
 
@@ -44,7 +44,7 @@ Chat ChatManager::chat( VNumber chat_id, bool read_all_messages )
     }
     ++it;
   }
-  qDebug() << "Unable to find chat with id" << chat_id;
+  qWarning() << "Unable to find chat with id" << chat_id;
   return Chat();
 }
 
@@ -59,7 +59,7 @@ Chat ChatManager::privateChatForUser( VNumber user_id ) const
       return *it;
     ++it;
   }
-  qDebug() << "Unable to find private chat for user id" << user_id;
+  qWarning() << "Unable to find private chat for user id" << user_id;
   return Chat();
 }
 
@@ -72,7 +72,7 @@ Chat ChatManager::chat( VNumber chat_id ) const
       return *it;
     ++it;
   }
-  qDebug() << "Unable to find chat with id" << chat_id;
+  qWarning() << "Unable to find chat with id" << chat_id;
   return Chat();
 }
 
@@ -85,7 +85,7 @@ Chat ChatManager::groupChat( const QString& chat_id ) const
       return *it;
     ++it;
   }
-  qDebug() << "Unable to find group chat with private id" << chat_id;
+  qWarning() << "Unable to find group chat with private id" << chat_id;
   return Chat();
 }
 

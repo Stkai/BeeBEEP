@@ -137,7 +137,9 @@ void FileTransfer::incomingConnection( qintptr socket_descriptor )
 
 void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descriptor )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Setup peer" << transfer_peer->id() << "with socket descriptor" << socket_descriptor;
+#endif
   if( !transfer_peer->isDownload() )
   {
     connect( transfer_peer, SIGNAL( fileUploadRequest( VNumber, const QByteArray& ) ), this, SLOT( checkUploadRequest( VNumber, const QByteArray& ) ) );

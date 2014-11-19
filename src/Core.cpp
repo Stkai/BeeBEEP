@@ -31,7 +31,7 @@
 
 
 Core::Core( QObject* parent )
-  : QObject( parent ), m_connections()
+ : QObject( parent ), m_connections()
 {
   qDebug() << "Core created";
   createDefaultChat();

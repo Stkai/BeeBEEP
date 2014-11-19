@@ -61,7 +61,9 @@ SOURCES += Listener.cpp \
     GuiLog.cpp \
     Log.cpp \
     GuiSessionManager.cpp \
-    GuiChatMessage.cpp
+    GuiChatMessage.cpp \
+    GuiSavedChatList.cpp \
+    GuiSavedChatItem.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -117,7 +119,9 @@ HEADERS += sym_iap_util.h \
     GuiAskPassword.h \
     GuiLog.h \
     GuiSessionManager.h \
-    GuiChatMessage.h
+    GuiChatMessage.h \
+    GuiSavedChatList.h \
+    GuiSavedChatItem.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \

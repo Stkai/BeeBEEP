@@ -132,7 +132,9 @@ void GuiUserList::removeUser( const User& u )
   GuiUserItem* item = itemFromUserId( u.id() );
   if( item )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Delete user item from GuiUserList";
+#endif
     QTreeWidgetItem* root_item = invisibleRootItem();
     if( root_item )
     {
