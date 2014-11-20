@@ -21,38 +21,24 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISAVEDCHATLIST_H
-#define BEEBEEP_GUISAVEDCHATLIST_H
-
-#include "GuiSavedChatItem.h"
+#include "GuiSavedChat.h"
+#include "ChatManager.h"
 
 
-class GuiSavedChatList : public QTreeWidget
+GuiSavedChat::GuiSavedChat( QWidget* parent )
+ : QWidget( parent )
 {
-  Q_OBJECT
+  setupUi( this );
+  setObjectName( "GuiSavedChat" );
+}
 
-public:
-  GuiSavedChatList( QWidget* parent = 0 );
-  virtual QSize sizeHint() const;
+void GuiSavedChat::showSavedChat( const QString& chat_name )
+{
+  QString html_text = QString( "%1: <b>%2<b> <br />" ).arg( tr( "Saved chat" ) ).arg( chat_name );
+  if( !ChatManager::instance().chatHasSavedText( chat_name ) )
+    html_text += QString( "<br />*** %1 ***<br />" ).arg( tr( "Empty" ) );
+  else
+    html_text += QString( "<br />%1<br /><br /><br />" ).arg( ChatManager::instance().chatSavedText( chat_name ) );
 
-  void updateSavedChats();
-
-signals:
-  void savedChatSelected( const QString& );
-  void savedChatRemoved( const QString& );
-
-protected slots:
-  void savedChatDoubleClicked( QTreeWidgetItem*, int );
-  void showSavedChatMenu( const QPoint& );
-  void showSavedChatSelected();
-  void removeSavedChatSelected();
-
-private:
-  QString m_savedChatSelected;
-  QMenu* mp_menu;
-
-
-};
-
-
-#endif // BEEBEEP_GUISAVEDCHATLIST_H
+  mp_teSavedChat->setText( html_text );
+}

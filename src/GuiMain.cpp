@@ -33,6 +33,7 @@
 #include "GuiEditVCard.h"
 #include "GuiLog.h"
 #include "GuiPluginManager.h"
+#include "GuiSavedChat.h"
 #include "GuiSavedChatList.h"
 #include "GuiSearchUser.h"
 #include "GuiSessionManager.h"
@@ -83,7 +84,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
-   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), mp_chatList, SLOT( updateChat( VNumber ) ) );
@@ -115,6 +116,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_sessionManager, SIGNAL( loadComplete() ), this, SLOT( loadSessionCompleted() ) );
 
   connect( mp_savedChatList, SIGNAL( savedChatSelected( const QString& ) ), this, SLOT( showSavedChatSelected( const QString& ) ) );
+  connect( mp_savedChatList, SIGNAL( savedChatRemoved( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
 
   initGuiItems();
   raiseChatView();
@@ -681,6 +683,10 @@ void GuiMain::createStackedWidgets()
 
   mp_logView = new GuiLog( this );
   mp_stackedWidget->addWidget( mp_logView );
+
+  mp_savedChat = new GuiSavedChat( this );
+  mp_stackedWidget->addWidget( mp_savedChat );
+
 }
 
 void GuiMain::createPluginWindows()
@@ -881,9 +887,11 @@ void GuiMain::settingsChanged()
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
-  int num_messages = mp_core->sendChatMessage( chat_id, msg );
 #ifdef BEEBEEP_DEBUG
+  int num_messages = mp_core->sendChatMessage( chat_id, msg );
   qDebug() << num_messages << "messages sent";
+#else
+  mp_core->sendChatMessage( chat_id, msg );
 #endif
 }
 
@@ -928,7 +936,7 @@ bool GuiMain::showAlert()
 
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
-  bool is_current_chat = chat_id == mp_defaultChat->chatId();
+  bool is_current_chat = (chat_id == mp_defaultChat->chatId()) && mp_defaultChat == mp_stackedWidget->currentWidget();
   bool show_alert = false;
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
@@ -1370,31 +1378,21 @@ void GuiMain::raiseChatView()
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_defaultChat );
-  mp_actViewDefaultChat->setEnabled( false );
-  mp_actViewShareLocal->setEnabled( true );
-  mp_actViewShareNetwork->setEnabled( true );
-  mp_actViewLog->setEnabled( true );
+  checkViewActions();
 }
 
 void GuiMain::raiseLocalShareView()
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_shareLocal );
-  mp_actViewDefaultChat->setEnabled( true );
-  mp_actViewShareLocal->setEnabled( false );
-  mp_actViewShareNetwork->setEnabled( true );
-  mp_actViewLog->setEnabled( true );
+  checkViewActions();
 }
 
 void GuiMain::raiseNetworkShareView()
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_shareNetwork );
-  mp_actViewDefaultChat->setEnabled( true );
-  mp_actViewShareLocal->setEnabled( true );
-  mp_actViewShareNetwork->setEnabled( false );
-  mp_actViewLog->setEnabled( true );
-
+  checkViewActions();
 }
 
 void GuiMain::raisePluginView()
@@ -1408,14 +1406,8 @@ void GuiMain::raisePluginView()
     return;
 
   setGameInPauseMode();
-
   mp_stackedWidget->setCurrentIndex( widget_index );
-
-  // FIXME!!!
-  mp_actViewDefaultChat->setEnabled( true );
-  mp_actViewShareLocal->setEnabled( true );
-  mp_actViewShareNetwork->setEnabled( true );
-  mp_actViewLog->setEnabled( true );
+  checkViewActions();
 }
 
 void GuiMain::raiseLogView()
@@ -1423,10 +1415,15 @@ void GuiMain::raiseLogView()
   setGameInPauseMode();
   mp_logView->refreshLog();
   mp_stackedWidget->setCurrentWidget( mp_logView );
-  mp_actViewDefaultChat->setEnabled( true );
-  mp_actViewShareLocal->setEnabled( true );
-  mp_actViewShareNetwork->setEnabled( true );
-  mp_actViewLog->setEnabled( false );
+  checkViewActions();
+}
+
+void GuiMain::checkViewActions()
+{
+  mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_defaultChat );
+  mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
+  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork );
+  mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
 }
 
 void GuiMain::setGameInPauseMode()
@@ -1521,6 +1518,9 @@ void GuiMain::addUserToGroup()
 
 void GuiMain::raiseOnTop()
 {
+  if( isMinimized() )
+    showNormal();
+
 #ifdef Q_OS_WIN
   SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
@@ -1528,8 +1528,8 @@ void GuiMain::raiseOnTop()
 #else
   raise();
   qApp->setActiveWindow( this );
-  // FIXME!!!
 #endif
+
 }
 
 void GuiMain::checkAutoStartOnBoot( bool add_service )
@@ -1564,6 +1564,21 @@ void GuiMain::loadSessionCompleted()
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )
 {
-  qDebug() << "Saved chat selected:" << chat_name;
+  if( chat_name.isEmpty() )
+    return;
+
+  mp_savedChat->showSavedChat( chat_name );
+
+  setGameInPauseMode();
+  mp_stackedWidget->setCurrentWidget( mp_savedChat );
+  checkViewActions();
 }
 
+void GuiMain::removeSavedChat( const QString& chat_name )
+{
+  if( chat_name.isEmpty() )
+    return;
+  qDebug() << "Delete saved chat:" << chat_name;
+  ChatManager::instance().removeSavedTextFromChat( chat_name );
+  mp_savedChatList->updateSavedChats();
+}

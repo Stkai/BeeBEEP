@@ -27,7 +27,7 @@
 
 
 GuiSavedChatList::GuiSavedChatList( QWidget* parent )
-  : QTreeWidget( parent )
+  : QTreeWidget( parent ), m_savedChatSelected( "" )
 {
   setObjectName( "GuiSavedChatList" );
 
@@ -36,7 +36,18 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   setRootIsDecorated( false );
   setSortingEnabled( true );
 
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  setMouseTracking( true );
+
+  mp_menu = new QMenu( this );
+
+  QAction* act = mp_menu->addAction( QIcon( ":/images/saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
+  mp_menu->setDefaultAction( act );
+  mp_menu->addSeparator();
+  mp_menu->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
+
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
 }
 
 QSize GuiSavedChatList::sizeHint() const
@@ -50,11 +61,39 @@ void GuiSavedChatList::savedChatDoubleClicked( QTreeWidgetItem* item, int )
     return;
 
   GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
-  emit savedChatSelected( saved_chat_item->chatName() );
+  m_savedChatSelected = saved_chat_item->chatName();
+  showSavedChatSelected();
+}
+
+void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
+{
+  QTreeWidgetItem* item = itemAt( p );
+  if( !item )
+    return;
+
+  GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
+  m_savedChatSelected = saved_chat_item->chatName();
+
+  mp_menu->exec( QCursor::pos() );
+}
+
+void GuiSavedChatList::showSavedChatSelected()
+{
+  emit savedChatSelected( m_savedChatSelected );
+}
+
+void GuiSavedChatList::removeSavedChatSelected()
+{
+  if( QMessageBox::warning( this, Settings::instance().programName(), tr( "Do you really want to delete this saved chat?" ), tr( "Yes" ), tr( "No"), QString(), 1, 1 ) == 1 )
+    return;
+  emit savedChatRemoved( m_savedChatSelected );
 }
 
 void GuiSavedChatList::updateSavedChats()
 {
+  if( topLevelItemCount() > 0 )
+    clear();
+
   if( ChatManager::instance().constHistoryMap().isEmpty() )
     return;
 
@@ -62,13 +101,10 @@ void GuiSavedChatList::updateSavedChats()
   QMap<QString, QString>::const_iterator it = ChatManager::instance().constHistoryMap().constBegin();
   while( it !=  ChatManager::instance().constHistoryMap().constEnd() )
   {
-    if( it.key() != Settings::instance().defaultChatName() )
-    {
-      item = new GuiSavedChatItem( this );
-      item->setChatName( it.key() );
-      item->setIcon( 0, QIcon( ":/images/saved-chat.png" ) );
-      item->setText( 0, it.key() );
-    }
+    item = new GuiSavedChatItem( this );
+    item->setChatName( it.key() );
+    item->setIcon( 0, QIcon( ":/images/saved-chat.png" ) );
+    item->setText( 0, it.key() );
     ++it;
   }
 }

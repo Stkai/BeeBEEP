@@ -284,7 +284,7 @@ inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath =
 inline const QString& Settings::localePath() const { return m_localePath; }
 inline void Settings::setLocalePath( const QString& new_value ) { m_localePath = new_value; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
-inline QString Settings::defaultChatName() const { return QString( "*** BeeBEEP Default Chat ***" ); }
+inline QString Settings::defaultChatName() const { return QString( "* BeeBEEP Chat *" ); }
 inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistorySize; }
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }

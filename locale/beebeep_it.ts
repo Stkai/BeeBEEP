@@ -1567,6 +1567,47 @@ il file %2 (%3)?</translation>
     </message>
 </context>
 <context>
+    <name>GuiSavedChat</name>
+    <message>
+        <source>Saved chat</source>
+        <translation>Conversazione salvata</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation>Vuota</translation>
+    </message>
+</context>
+<context>
+    <name>GuiSavedChatList</name>
+    <message>
+        <source>Show</source>
+        <translation>Mostra</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Cancella</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete this saved chat?</source>
+        <translation>Vuoi veramente cancellare questa conversazione?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+</context>
+<context>
+    <name>GuiSavedChatWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>GuiSearchUser</name>
     <message>
         <source>Dialog</source>
@@ -2075,7 +2116,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Saved in</source>
-        <translation>Salvato in data</translation>
+        <translation>Salvata in data</translation>
     </message>
     <message>
         <source>Started in</source>

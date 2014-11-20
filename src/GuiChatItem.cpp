@@ -78,7 +78,10 @@ bool GuiChatItem::updateItem()
         sl.append( u.name() );
     }
 
-    chat_name = c.name().isEmpty() ? (sl.size() == 0 ? QObject::tr( "Nobody" ) : sl.join( ", " )) : c.name();
+    if( c.isGroup() )
+      chat_name = c.name().isEmpty() ? (sl.size() == 0 ? QObject::tr( "Nobody" ) : sl.join( ", " )) : c.name();
+    else
+      chat_name = sl.size() == 0 ? QObject::tr( "Nobody" ) : sl.join( ", " );
 
     tool_tip = QObject::tr( "Open chat with %1" ).arg( chat_name );
 

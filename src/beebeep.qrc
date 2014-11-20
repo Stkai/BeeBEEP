@@ -84,5 +84,6 @@
         <file>images/log.png</file>
         <file>images/saved-chat-list.png</file>
         <file>images/saved-chat.png</file>
+        <file>images/remove-saved-chat.png</file>
     </qresource>
 </RCC>

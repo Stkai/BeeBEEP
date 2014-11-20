@@ -33,6 +33,7 @@ class FileInfo;
 class GuiChat;
 class GuiChatList;
 class GuiLog;
+class GuiSavedChat;
 class GuiSavedChatList;
 class GuiSessionManager;
 class GuiShareLocal;
@@ -106,6 +107,7 @@ private slots:
   void createGroup();
   void loadSessionCompleted();
   void showSavedChatSelected( const QString& );
+  void removeSavedChat( const QString& );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -134,6 +136,7 @@ private:
   bool askToDownloadFile( const User&, const FileInfo& );
   void setGameInPauseMode();
   void checkAutoStartOnBoot( bool );
+  void checkViewActions();
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -145,6 +148,7 @@ private:
   GuiShareLocal* mp_shareLocal;
   GuiShareNetwork* mp_shareNetwork;
   GuiLog* mp_logView;
+  GuiSavedChat* mp_savedChat;
   Core *mp_core;
 
   QMenu *mp_menuMain;

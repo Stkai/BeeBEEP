@@ -96,3 +96,5 @@ void GuiChatList::chatDoubleClicked( QTreeWidgetItem* item, int )
   emit chatSelected( user_item->chatId() );
 }
 
+
+

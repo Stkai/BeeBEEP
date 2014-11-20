@@ -404,7 +404,7 @@ void Settings::load()
   sets->endGroup();
 
   QString sName = GetUserNameFromSystemEnvinroment();
-  m_localUser.setAccountName( sName );
+  m_localUser.setAccountName( sName.toLower() );
   if( m_localUser.name().isEmpty() )
     m_localUser.setName( sName );
 
