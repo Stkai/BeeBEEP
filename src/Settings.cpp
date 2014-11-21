@@ -304,7 +304,7 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "User" );
-  m_localUser.setName( sets->value( "LocalName", "" ).toString() ); // For Backward compatibility (FIXME!!!)
+  m_localUser.setName( sets->value( "LocalName", "" ).toString() ); // For Backward compatibility, if empty the name is set after
   m_localUser.setColor( sets->value( "LocalColor", "#000000" ).toString() );
   m_localUser.setStatus( sets->value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
@@ -352,6 +352,7 @@ void Settings::load()
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
   m_beepFilePath = sets->value( "BeepFilePath", "beep.wav" ).toString();
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
+  m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   if( m_useSettingsFileIni )
     m_chatSaveDirectory = sets->value( "ChatSaveDirectory", "." ).toString();
   else
@@ -385,7 +386,7 @@ void Settings::load()
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
-  m_trayMessageTimeout = qMax( sets->value( "SystemTrayMessageTimeout", 3000 ).toInt(), 0 );
+  m_trayMessageTimeout = qMax( sets->value( "SystemTrayMessageTimeout", 2000 ).toInt(), 100 );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -402,6 +403,22 @@ void Settings::load()
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
   m_localShare = sets->value( "ShareList", QStringList() ).toStringList();
   sets->endGroup();
+
+  sets->beginGroup( "Plugin" );
+  QStringList key_list = sets->value( "List", QStringList() ).toStringList();
+  if( !key_list.isEmpty() )
+  {
+    QStringList plugin_settings_tmp;
+    QStringList::const_iterator it = key_list.constBegin();
+    while( it != key_list.constEnd() )
+    {
+      plugin_settings_tmp = sets->value( *it, QStringList() ).toStringList();
+      if( !plugin_settings_tmp.isEmpty() )
+        setPluginSettings( *it, plugin_settings_tmp );
+      ++it;
+    }
+    sets->endGroup();
+  }
 
   QString sName = GetUserNameFromSystemEnvinroment();
   m_localUser.setAccountName( sName.toLower() );
@@ -473,6 +490,7 @@ void Settings::save()
   sets->setValue( "BeepFilePath", m_beepFilePath );
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
   sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );
+  sets->setValue( "ShowNotificationOnTray", m_showNotificationOnTray );
   sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
@@ -520,6 +538,20 @@ void Settings::save()
   sets->setValue( "MaxFileShared", m_maxFileShared );
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();
+
+  if( !m_pluginSettings.isEmpty() )
+  {
+    sets->beginGroup( "Plugin" );
+    QStringList key_list( m_pluginSettings.keys() );
+    sets->setValue( "List", key_list );
+    QMap<QString, QStringList>::const_iterator it = m_pluginSettings.constBegin();
+    while( it !=  m_pluginSettings.constEnd() )
+    {
+      sets->setValue( it.key(), it.value() );
+      ++it;
+    }
+    sets->endGroup();
+  }
 
   sets->sync();
   qDebug() << "Settings saved";

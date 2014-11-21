@@ -2,8 +2,11 @@ BEEBEEP (Secure Network Chat)
 
 BeeBEEP 0.9.5
 - Load minimized at startup option
-- Log window added
+- A new window to see application log
 - Save chat messages on exit option
+- BeeTetris plugin added, just for fun
+- Disable notification in tray option
+- Improved group chat
 
 BeeBEEP 0.9.4
 - Use default password without prompt at startup
@@ -26,7 +29,6 @@ BeeBEEP 0.8.2
 - Minimize on System Tray option
 
 BeeBEEP 0.6.2
-- Jabber XMPP Support
 - Number Encoder Text Marker plugin 
 - File BeeHost.ini to reach custom networks
 

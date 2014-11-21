@@ -426,6 +426,12 @@ void GuiMain::createMenus()
     act->setCheckable( true );
     act->setChecked( Settings::instance().minimizeInTray() );
     act->setData( 11 );
+
+    act = mp_menuSettings->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
+    act->setStatusTip( tr( "If enabled tray icon shows some notification about status and message" ) );
+    act->setCheckable( true );
+    act->setChecked( Settings::instance().showNotificationOnTray()  );
+    act->setData( 19 );
   }
 
   act = mp_menuSettings->addAction( tr( "Stay on top" ), this, SLOT( settingsChanged() ) );
@@ -872,6 +878,9 @@ void GuiMain::settingsChanged()
     break;
   case 18:
     Settings::instance().setChatAutoSave( act->isChecked() );
+    break;
+  case 19:
+    Settings::instance().setShowNotificationOnTray( act->isChecked() );
     break;
   case 99:
     break;
@@ -1338,7 +1347,7 @@ void GuiMain::hideToTrayIcon()
 {
   mp_trayIcon->setUnreadMessages( ChatManager::instance().unreadMessages() );
   mp_trayIcon->show();
-  if( Settings::instance().trayMessageTimeout() > 0 )
+  if( Settings::instance().showNotificationOnTray() )
     mp_trayIcon->showMessage( Settings::instance().programName(),
                             tr( "%1 will keep running in the background mode" )
                               .arg( Settings::instance().programName() ),

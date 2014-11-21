@@ -88,6 +88,8 @@ public:
 
   virtual void pause() = 0;
   virtual bool isPaused() const = 0;
+  virtual void setSettings( QStringList ) = 0;
+  virtual QStringList settings() const = 0;
 
 };
 

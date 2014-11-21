@@ -1321,6 +1321,14 @@ il file %2 (%3)?</translation>
         <source>Show the list of the saved chats</source>
         <translation>Mostra la lista delle conversazioni salvate</translation>
     </message>
+    <message>
+        <source>Enable tray icon notification</source>
+        <translation>Abilita le nofiche all&apos;icona di sistema </translation>
+    </message>
+    <message>
+        <source>If enabled tray icon shows some notification about status and message</source>
+        <translation>Se abilitata l&apos;icona di sistema mostrerà notifiche sullo stato e sui messaggi</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1785,6 +1793,14 @@ il file %2 (%3)?</translation>
         <source>Pause</source>
         <translation>Pausa</translation>
     </message>
+    <message>
+        <source>Record</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Continua</translation>
+    </message>
 </context>
 <context>
     <name>GuiTransferFile</name>
@@ -2157,11 +2173,15 @@ il file %2 (%3)?</translation>
     <name>TetrisGame</name>
     <message>
         <source>Tetris</source>
-        <translation>Tetris</translation>
+        <translation type="obsolete">Tetris</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right Arrow&lt;/b&gt; to move the pieces on the board. &lt;b&gt;Up&lt;/b&gt; and &lt;b&gt;Down Arrow&lt;/b&gt; to rotate left and right. &lt;b&gt;Space&lt;/b&gt; to drop down the piece. &lt;b&gt;D&lt;/b&gt; to drop the piece only one line. &lt;b&gt;P&lt;/b&gt; to pause the game.</source>
         <translation>Usa le frecce &lt;b&gt;Sinistra&lt;/b&gt; e &lt;b&gt;Destra&lt;/b&gt; per muovere i pezzi nello schermo. Le frecce &lt;b&gt;Su&lt;/b&gt; e &lt;b&gt;Giù&lt;/b&gt; per ruotare il pezzo a sinistra e destra rispettivamente. &lt;b&gt;Barra spaziatrice&lt;/b&gt; per far cadere il pezzo. Premi il tasto &lt;b&gt;D&lt;/b&gt; per scendere di una linea e &lt;b&gt;P&lt;/b&gt; per mettere in pausa il gioco.</translation>
+    </message>
+    <message>
+        <source>BeeTetris</source>
+        <translation></translation>
     </message>
 </context>
 <context>

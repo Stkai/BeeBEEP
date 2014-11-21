@@ -40,6 +40,9 @@ public:
 
   inline TetrisBoard* board();
 
+  inline int record() const;
+  void setNewRecord( int );
+
 protected slots:
   void updateScore( int );
   void updateLevel( int );
@@ -48,11 +51,15 @@ protected slots:
   void gamePaused();
   void gameOver();
 
+private:
+  int m_record;
+
 };
 
 
 // Inline Functions
 inline TetrisBoard* GuiTetris::board() { return mp_board; }
+inline int GuiTetris::record() const { return m_record; }
 
 
 #endif // BEEBEEP_GUITETRIS_H

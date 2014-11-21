@@ -145,6 +145,8 @@ public:
   inline void setMinimizeInTray( bool );
   inline bool loadOnTrayAtStartup() const;
   inline void setLoadOnTrayAtStartup( bool );
+  inline bool showNotificationOnTray() const;
+  inline void setShowNotificationOnTray( bool );
 
   inline const QStringList& localShare() const;
   inline void setLocalShare( const QStringList& );
@@ -158,6 +160,10 @@ public:
   inline void setChatAutoSave( bool );
   inline int chatMaxLineSaved() const;
   inline void setChatMaxLineSaved( int );
+
+  inline QStringList pluginSettings( const QString& ) const;
+  inline void setPluginSettings( const QString&, const QStringList& );
+  inline bool pluginHasSettings( const QString& ) const;
 
   void addStartOnSystemBoot();
   void removeStartOnSystemBoot();
@@ -254,6 +260,7 @@ private:
 
   bool m_minimizeInTray;
   bool m_loadOnTrayAtStartup;
+  bool m_showNotificationOnTray;
 
   QStringList m_localShare;
   bool m_fileShare;
@@ -262,6 +269,8 @@ private:
   QString m_chatSaveDirectory;
   bool m_chatAutoSave;
   int m_chatMaxLineSaved;
+
+  QMap<QString, QStringList> m_pluginSettings;
 
 };
 
@@ -349,6 +358,8 @@ inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }
 inline void Settings::setMinimizeInTray( bool new_value ) { m_minimizeInTray = new_value; }
 inline bool Settings::loadOnTrayAtStartup() const { return m_loadOnTrayAtStartup; }
 inline void Settings::setLoadOnTrayAtStartup( bool new_value ) { m_loadOnTrayAtStartup = new_value; }
+inline bool Settings::showNotificationOnTray() const { return m_showNotificationOnTray; }
+inline void Settings::setShowNotificationOnTray( bool new_value ) { m_showNotificationOnTray = new_value; }
 inline const QStringList& Settings::localShare() const { return m_localShare; }
 inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
 inline bool Settings::fileShare() const { return m_fileShare; }
@@ -360,6 +371,8 @@ inline bool Settings::chatAutoSave() const { return m_chatAutoSave; }
 inline void Settings::setChatAutoSave( bool new_value ) { m_chatAutoSave = new_value; }
 inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved; }
 inline void Settings::setChatMaxLineSaved( int new_value ) { m_chatMaxLineSaved = new_value; }
-
+inline QStringList Settings::pluginSettings( const QString& plugin_name ) const { return m_pluginSettings.value( plugin_name ); }
+inline void Settings::setPluginSettings( const QString& plugin_name, const QStringList& plugin_settings ) { m_pluginSettings.insert( plugin_name, plugin_settings ); }
+inline bool Settings::pluginHasSettings( const QString& plugin_name ) const { return m_pluginSettings.contains( plugin_name ); }
 
 #endif // BEEBEEP_SETTINGS_H

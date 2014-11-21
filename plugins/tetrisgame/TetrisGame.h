@@ -55,6 +55,10 @@ public:
   void pause();
   bool isPaused() const;
 
+  void setSettings( QStringList );
+  QStringList settings() const;
+
+
 private:
   GuiTetris* mp_tetris;
 	

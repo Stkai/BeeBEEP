@@ -66,7 +66,7 @@ void GuiSystemTray::showIcon()
   if( m_unreadMessages > 0 )
   {
     setMessageIcon();
-    if( Settings::instance().trayMessageTimeout() > 0 )
+    if( Settings::instance().showNotificationOnTray() && Settings::instance().trayMessageTimeout() > 0 )
       showMessage( Settings::instance().programName(),
         m_unreadMessages == 1 ? tr( "1 new message" ) : tr( "%1 new messages" ).arg( m_unreadMessages ),
         QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );

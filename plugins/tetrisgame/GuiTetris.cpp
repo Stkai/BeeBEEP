@@ -25,7 +25,7 @@
 
 
 GuiTetris::GuiTetris( QWidget *parent )
-  : QWidget( parent )
+  : QWidget( parent ), m_record( 0 )
 {
   setupUi( this );
 
@@ -49,6 +49,15 @@ GuiTetris::GuiTetris( QWidget *parent )
 void GuiTetris::updateScore( int new_value )
 {
   mp_lcdScore->display( new_value );
+
+  if( new_value > m_record )
+    setNewRecord( new_value );
+}
+
+void GuiTetris::setNewRecord( int new_value )
+{
+  m_record = new_value;
+  mp_lcdRecord->display( m_record );
 }
 
 void GuiTetris::updateLevel( int new_value )
@@ -69,7 +78,10 @@ void GuiTetris::gameStarted()
 
 void GuiTetris::gamePaused()
 {
-
+  if( mp_board->isPaused() )
+    mp_pbPause->setText( tr( "Continue" ) );
+  else
+    mp_pbPause->setText( tr( "Pause" ) );
 }
 
 void GuiTetris::gameOver()

@@ -45,6 +45,8 @@ void PluginManager::clearPlugins()
   if( m_games.size() > 0 )
   {
     qDebug() << "Unload" << m_games.size() << "game plugins";
+    foreach( GameInterface* g, m_games )
+      Settings::instance().setPluginSettings( g->name(), g->settings() );
     qDeleteAll( m_games.begin(), m_games.end() );
     m_games.clear();
   }
@@ -92,7 +94,14 @@ void PluginManager::addPlugin( const QString& file_path )
     {
       qDebug() << game_plugin->name() << "is a game plugin";
       if( !game( game_plugin->name() ) )
+      {
+        if( Settings::instance().pluginHasSettings( game_plugin->name() ) )
+        {
+          qDebug() << "Load" << game_plugin->name() << "settings";
+          game_plugin->setSettings( Settings::instance().pluginSettings( game_plugin->name() ) );
+        }
         m_games.append( game_plugin );
+      }
       else
         qDebug() << game_plugin->name() << "already load... skip it";
       return;

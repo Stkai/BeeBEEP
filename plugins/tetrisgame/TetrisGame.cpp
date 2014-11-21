@@ -30,12 +30,12 @@
 
 QString TetrisGame::name() const
 {
-  return tr( "Tetris" );
+  return tr( "BeeTetris" );
 }
 
 QString TetrisGame::version() const
 {
-  return "0.6.1";
+  return "0.6.4";
 }
 
 QString TetrisGame::author() const
@@ -78,7 +78,7 @@ TetrisGame::TetrisGame()
   : QObject()
 {
   setEnabled( true );
-  qDebug() << "Tetris game plugin loaded";
+  qDebug() << name() <<  "game plugin loaded";
   mp_tetris = new GuiTetris();
 }
 
@@ -95,6 +95,32 @@ void TetrisGame::pause()
 bool TetrisGame::isPaused() const
 {
   return mp_tetris->board()->isPaused();
+}
+
+void TetrisGame::setSettings( QStringList settings_list )
+{
+  if( settings_list.size() < 2 )
+    return;
+
+  bool ok = false;
+  int record_version = settings_list.first().toInt( &ok );
+  if( !ok )
+    return;
+  if( record_version > 1 )
+    return;
+  settings_list.removeFirst();
+  int record_tmp = settings_list.first().toInt( &ok );
+  if( !ok )
+    return;
+  mp_tetris->setNewRecord( record_tmp );
+}
+
+QStringList TetrisGame::settings() const
+{
+  QStringList settings_list;
+  settings_list << QString::number( 1 ); // version of record
+  settings_list << QString::number( mp_tetris->record() );
+  return settings_list;
 }
 
 #if QT_VERSION >= 0x050000
