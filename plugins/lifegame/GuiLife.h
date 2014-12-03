@@ -21,16 +21,45 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUILIFE_H
+#define BEEBEEP_GUILIFE_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files/";
-const char* BEEBEEP_VERSION = "0.9.6";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_SETTINGS_VERSION = 2;
-const int BEEBEEP_BUILD = 271;
+#if QT_VERSION >= 0x050000
+#include <QtWidgets>
+#endif
+#include "ui_GuiLife.h"
+class LifeBoard;
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiLife : public QWidget, private Ui::GuiLife
+{
+  Q_OBJECT
+
+public:
+  explicit GuiLife( QWidget *parent = 0 );
+
+  inline LifeBoard* board();
+
+  inline int record() const;
+  void setNewRecord( int );
+
+protected slots:
+  void updateScore( int );
+  void updateLevel( int );
+  void updateLines( int );
+  void gameStarted();
+  void gamePaused();
+  void gameOver();
+
+private:
+  int m_record;
+
+};
+
+
+// Inline Functions
+inline LifeBoard* GuiLife::board() { return mp_life; }
+inline int GuiLife::record() const { return m_record; }
+
+
+#endif // BEEBEEP_GUILIFE_H

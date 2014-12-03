@@ -41,6 +41,7 @@ public:
   int protoVersion() const;
   QString programName() const;
   QString organizationName() const;
+  QString downloadWebSite() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );

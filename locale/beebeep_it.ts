@@ -1329,6 +1329,14 @@ il file %2 (%3)?</translation>
         <source>If enabled tray icon shows some notification about status and message</source>
         <translation>Se abilitata l&apos;icona di sistema mostrerà notifiche sullo stato e sui messaggi</translation>
     </message>
+    <message>
+        <source>Check for new version...</source>
+        <translation>Controlla gli aggiornamenti...</translation>
+    </message>
+    <message>
+        <source>Open %1 website and check if a new version exists</source>
+        <translation>Apri il sito di %1 e controlla se esistono degli aggiornamenti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

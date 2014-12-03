@@ -21,16 +21,47 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEE_LIFEGAME_H
+#define BEE_LIFEGAME_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files/";
-const char* BEEBEEP_VERSION = "0.9.6";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_SETTINGS_VERSION = 2;
-const int BEEBEEP_BUILD = 271;
+#include "lifegame_global.h"
+#include "Interfaces.h"
+#include <QObject>
 
-#endif // BEEBEEP_VERSION_H
+class GuiLife;
 
+
+class BEELIFEGAMESHARED_EXPORT LifeGame : public QObject, public GameInterface
+{
+  Q_OBJECT
+  Q_INTERFACES( GameInterface )
+#if QT_VERSION >= 0x050000
+  Q_PLUGIN_METADATA(IID "beebeep.plugin.GameInterface/2.0")
+#endif
+public:
+  LifeGame();
+  ~LifeGame();
+  
+  QString name() const;
+  QString version() const;
+  QString help() const;
+  QString author() const;
+  QIcon icon() const;
+  QString iconFileName() const;
+  int priority() const;
+  QString coreVersion() const;
+
+  QWidget* mainWindow() const;
+  void pause();
+  bool isPaused() const;
+
+  void setSettings( QStringList );
+  QStringList settings() const;
+
+
+private:
+  GuiLife* mp_life;
+	
+};
+
+#endif // BEE_LIFEGAME_H

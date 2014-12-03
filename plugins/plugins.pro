@@ -4,6 +4,7 @@ TEMPLATE = subdirs
 
 SUBDIRS += rainbowtextmarker \
 			numbertextmarker \
-			tetrisgame
+			tetrisgame \
+			lifegame
 
 

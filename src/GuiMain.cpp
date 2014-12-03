@@ -579,6 +579,9 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Show the informations about %1's license" ).arg( Settings::instance().programName() ) );
   act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
+  mp_menuInfo->addSeparator();
+  act = mp_menuInfo->addAction( QIcon( ":/images/update.png" ), tr( "Check for new version..." ), this, SLOT( checkNewVersion() ) );
+  act->setStatusTip( tr( "Open %1 website and check if a new version exists" ).arg( Settings::instance().programName() ) );
 
   /* Plugins Menu */
   mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
@@ -1590,4 +1593,13 @@ void GuiMain::removeSavedChat( const QString& chat_name )
   qDebug() << "Delete saved chat:" << chat_name;
   ChatManager::instance().removeSavedTextFromChat( chat_name );
   mp_savedChatList->updateSavedChats();
+}
+
+void GuiMain::checkNewVersion()
+{
+  QUrl new_version_url( Settings::instance().downloadWebSite() );
+
+  if( !QDesktopServices::openUrl( new_version_url ) )
+    QMessageBox::information( this, Settings::instance().programName(),
+      tr( "Unable to open %1" ).arg( Settings::instance().downloadWebSite() ), tr( "Ok" ) );
 }

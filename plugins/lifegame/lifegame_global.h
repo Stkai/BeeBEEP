@@ -21,16 +21,15 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEE_LIFEGAME_GLOBAL_H
+#define BEE_LIFEGAME_GLOBAL_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files/";
-const char* BEEBEEP_VERSION = "0.9.6";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_SETTINGS_VERSION = 2;
-const int BEEBEEP_BUILD = 271;
+#include <QtCore/qglobal.h>
 
-#endif // BEEBEEP_VERSION_H
+#if defined(BEE_LIFEGAME_LIBRARY)
+#  define BEELIFEGAMESHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define BEELIFEGAMESHARED_EXPORT Q_DECL_IMPORT
+#endif
 
+#endif // BEE_LIFEGAME_GLOBAL_H

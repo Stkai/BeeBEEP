@@ -2,6 +2,5 @@
     <qresource prefix="/plugins">
         <file>tetris.png</file>
         <file>tetris-background.png</file>
-        <file>tetris-panel-background.png</file>
     </qresource>
 </RCC>
