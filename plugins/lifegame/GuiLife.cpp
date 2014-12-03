@@ -25,62 +25,20 @@
 
 
 GuiLife::GuiLife( QWidget *parent )
-  : QWidget( parent ), m_record( 0 )
+  : QWidget( parent )
 {
   setupUi( this );
 
-  connect( mp_pbStart, SIGNAL( clicked() ), mp_life, SLOT( start() ) );
-  connect( mp_pbPause, SIGNAL( clicked() ), mp_life, SLOT( pause() ) );
-  connect( mp_life, SIGNAL( levelChanged( int ) ), this, SLOT( updateLevel( int ) ) );
-  connect( mp_life, SIGNAL( scoreChanged( int ) ), this, SLOT( updateScore( int ) ) );
-  connect( mp_life, SIGNAL( linesRemovedChanged( int ) ), this, SLOT( updateLines( int ) ) );
   connect( mp_life, SIGNAL( started() ), this, SLOT( gameStarted() ) );
   connect( mp_life, SIGNAL( paused() ), this, SLOT( gamePaused() ) );
-  connect( mp_life, SIGNAL( gameOver() ), this, SLOT( gameOver() ) );
-
-  mp_pbPause->setEnabled( false );
-}
-
-void GuiLife::updateScore( int new_value )
-{
-  mp_lcdScore->display( new_value );
-
-  if( new_value > m_record )
-    setNewRecord( new_value );
-}
-
-void GuiLife::setNewRecord( int new_value )
-{
-  m_record = new_value;
-  mp_lcdRecord->display( m_record );
-}
-
-void GuiLife::updateLevel( int new_value )
-{
-  mp_lcdLevel->display( new_value );
-}
-
-void GuiLife::updateLines( int new_value )
-{
-  mp_lcdLines->display( new_value );
 }
 
 void GuiLife::gameStarted()
 {
-  mp_pbStart->setEnabled( false );
-  mp_pbPause->setEnabled( true );
+
 }
 
 void GuiLife::gamePaused()
 {
-  if( mp_life->isPaused() )
-    mp_pbPause->setText( tr( "Continue" ) );
-  else
-    mp_pbPause->setText( tr( "Pause" ) );
-}
 
-void GuiLife::gameOver()
-{
-  mp_pbStart->setEnabled( true );
-  mp_pbPause->setEnabled( false );
 }

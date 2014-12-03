@@ -31,46 +31,12 @@ LifeBoard::LifeBoard( QWidget *parent )
 {
   setFrameStyle( QFrame::StyledPanel );
   setFocusPolicy( Qt::StrongFocus );
+  setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 
-  setStyleSheet( "background-image: url(:/plugins/life-background.png);"
-                 "background-repeat: repeat-y;" );
-
-  m_isStarted = false;
   m_isPaused = false;
 
   clearBoard();
-
-}
-
-void LifeBoard::start()
-{
-  if( m_isPaused )
-    return;
-
-  m_isStarted = true;
-
-  clearBoard();
-
-  m_timer.start( 500, this );
-
-  emit( started() );
-}
-
-void LifeBoard::pause()
-{
-  if( !m_isStarted )
-    return;
-
-  m_isPaused = !m_isPaused;
-
-  if( m_isPaused )
-    m_timer.stop();
-  else
-    m_timer.start( 500, this );
-
-  update();
-
-  emit( paused() );
+  bigBang();
 }
 
 void LifeBoard::paintEvent( QPaintEvent *event )
@@ -96,26 +62,94 @@ void LifeBoard::paintEvent( QPaintEvent *event )
   {
     for( int j = 0; j < BoardWidth; j++ )
     {
-      drawSquare( painter, rect.left() + j * squareWidth(), board_top + i * squareHeight(), (j % 2 == 0) );
+      drawSquare( painter, rect.left() + j * squareWidth(), board_top + i * squareHeight(), m_board[ i ][ j ] );
     }
   }
 }
 
-void LifeBoard::timerEvent( QTimerEvent* event )
-{
-  if( event->timerId() == m_timer.timerId() )
-  {
-
-  }
-  else
-    QFrame::timerEvent(event);
-
-}
-
 void LifeBoard::clearBoard()
 {
+  for( int i = 0; i < BoardHeight; i++ )
+    for( int j = 0; j < BoardWidth; j++ )
+      m_board[ i ][ j ] = false;
+}
+
+void LifeBoard::bigBang()
+{
+  for( int i = 0; i < BoardHeight; i++ )
+    for( int j = 0; j < BoardWidth; j++ )
+      m_board[ i ][ j ] = ((i+j) % 2 == 0);
+}
+
+void LifeBoard::evolve()
+{
+  if( isPaused() )
+    return;
+
+  int num_neighbors = 0;
+  bool board_tmp [BoardWidth][BoardHeight];
+
+  for( int i = 0; i < BoardWidth; i++ )
+  {
+    for( int j = 0; j < BoardHeight ; j++ )
+    {
+      if( (i+1) < BoardHeight && m_board[i + 1][j] == true )
+      {
+        num_neighbors++;
+      }
+      if( (i-1) >= 0 && m_board[i - 1][j] == true )
+      {
+        num_neighbors++;
+      }
+      if( (j+1) < BoardWidth && m_board[i][j+1] == true )
+      {
+        num_neighbors++;
+      }
+      if( (j-1) >= 0 && m_board[i][j-1] == true )
+      {
+        num_neighbors++;
+      }
+      if( (i+1) < BoardHeight && (j+1) < BoardWidth && m_board[i+1][j+1] == true )
+      {
+        num_neighbors++;
+      }
+      if( (i+1) < BoardHeight && (j-1) >= 0 && m_board[i+1][j-1] == true )
+      {
+        num_neighbors++;
+      }
+      if ( (i-1) >= 0 && (j+1) < BoardWidth && m_board[i-1][j+1] == true )
+      {
+          num_neighbors++;
+      }
+      if ( (i-1) >= 0 && (j-1) >= 0 && m_board[i-1][j-1] == true )
+      {
+          num_neighbors++;
+      }
+
+      if (num_neighbors < 2 || num_neighbors > 3)
+      {
+          board_tmp[i][j] = false;
+      }
+      else if (num_neighbors == 2)
+      {
+          board_tmp[i][j] = m_board[i][j];
+      }
+      else if (num_neighbors == 3)
+      {
+          board_tmp[i][j] = true;
+      }
+
+      num_neighbors = 0;
+
+    }
+  }
+
+  for( int i = 0 ; i < BoardWidth ; i++ )
+    for (int j = 0 ; j < BoardHeight ; j++ )
+      m_board[i][j] = board_tmp[i][j];
 
 }
+
 
 void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living )
 {
@@ -129,5 +163,49 @@ void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living )
   painter.setPen( color.dark() );
   painter.drawLine( x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1 );
   painter.drawLine( x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1 );
+}
+
+void LifeBoard::keyPressEvent( QKeyEvent* event )
+{
+  if( event->key() == Qt::Key_Space )
+    startOrPause();
+  else
+    QFrame::keyPressEvent( event );
+}
+
+void LifeBoard::pause()
+{
+  if( isPaused() )
+    return;
+
+  startOrPause();
+}
+
+void LifeBoard::startOrPause()
+{
+  m_isPaused = !m_isPaused;
+
+  if( isPaused() )
+  {
+    m_timer.stop();
+    update();
+    emit( paused() );
+  }
+  else
+  {
+    m_timer.start( 500, this );
+    update();
+  }
+}
+
+void LifeBoard::timerEvent( QTimerEvent* event )
+{
+  if( event->timerId() == m_timer.timerId() )
+  {
+    evolve();
+    update();
+  }
+  else
+    QFrame::timerEvent(event);
 }
 

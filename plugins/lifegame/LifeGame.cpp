@@ -124,14 +124,14 @@ void LifeGame::setSettings( QStringList settings_list )
   int record_tmp = settings_list.first().toInt( &ok );
   if( !ok )
     return;
-  mp_life->setNewRecord( record_tmp );
+
 }
 
 QStringList LifeGame::settings() const
 {
   QStringList settings_list;
   settings_list << QString::number( 1 ); // version of record
-  settings_list << QString::number( mp_life->record() );
+  settings_list << QString::number( 20 );
   return settings_list;
 }
 

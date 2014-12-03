@@ -37,36 +37,35 @@ class LifeBoard : public QFrame
 public:
   LifeBoard( QWidget *parent = 0 );
 
-  bool isPaused() const;
-
-public slots:
-  void start();
+  inline bool isPaused() const;
   void pause();
 
 signals:
-  void started();
   void paused();
 
 protected:
   void paintEvent( QPaintEvent* );
   void timerEvent( QTimerEvent* );
+  void keyPressEvent( QKeyEvent* );
+
+  void startOrPause();
+  void clearBoard();
+  void evolve();
+  void bigBang();
 
 private:
-  enum { BoardWidth = 10, BoardHeight = 10 };
+  enum { BoardWidth = 80, BoardHeight = 50 };
 
   inline int squareWidth() const;
   inline int squareHeight() const;
   inline QSize sizeHint() const;
   inline QSize minimumSizeHint() const;
-
-  void clearBoard();
- 
- 
+  inline int stepTimeout() const;
+  
   void drawSquare( QPainter&, int, int, bool );
 
   QBasicTimer m_timer;
 
-  bool m_isStarted;
   bool m_isPaused;
 
   bool m_board[ BoardWidth ][ BoardHeight ];
@@ -79,6 +78,7 @@ inline QSize LifeBoard::sizeHint() const { return QSize( BoardWidth * 15 + frame
 inline QSize LifeBoard::minimumSizeHint() const { return QSize( BoardWidth * 5 + frameWidth() * 2, BoardHeight * 5 + frameWidth() * 2 ); }
 inline int LifeBoard::squareWidth() const { return contentsRect().width() / BoardWidth; }
 inline int LifeBoard::squareHeight() const { return contentsRect().height() / BoardHeight; }
+inline int LifeBoard::stepTimeout() const { return 500; }
 inline bool LifeBoard::isPaused() const { return m_isPaused; }
 
 #endif // BEE_LIFEBOARD_H

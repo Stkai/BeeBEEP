@@ -40,26 +40,16 @@ public:
 
   inline LifeBoard* board();
 
-  inline int record() const;
-  void setNewRecord( int );
-
 protected slots:
-  void updateScore( int );
-  void updateLevel( int );
-  void updateLines( int );
   void gameStarted();
   void gamePaused();
-  void gameOver();
 
-private:
-  int m_record;
 
 };
 
 
 // Inline Functions
 inline LifeBoard* GuiLife::board() { return mp_life; }
-inline int GuiLife::record() const { return m_record; }
 
 
 #endif // BEEBEEP_GUILIFE_H
