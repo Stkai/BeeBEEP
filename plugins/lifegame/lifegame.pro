@@ -13,7 +13,8 @@ SOURCES += LifeGame.cpp \
 HEADERS += LifeGame.h\
         lifegame_global.h \
     GuiLife.h \
-    LifeBoard.h
+    LifeBoard.h \
+    ../../src/Random.h
 
 symbian {
     MMP_RULES += EXPORTUNFROZEN

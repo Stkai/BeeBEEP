@@ -41,8 +41,10 @@ public:
   inline LifeBoard* board();
 
 protected slots:
-  void gameStarted();
   void gamePaused();
+  void gameRunning();
+  void updateCounter();
+  void restart();
 
 
 };

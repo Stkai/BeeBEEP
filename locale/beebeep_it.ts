@@ -532,6 +532,49 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>GuiLife</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeeLife</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press space bar to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused (press space bar to continue)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bees: %1 (%2% - %3) Generation: %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to restart?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">No</translation>
+    </message>
+</context>
+<context>
     <name>GuiLogWidget</name>
     <message>
         <source>Form</source>
@@ -1809,6 +1852,10 @@ il file %2 (%3)?</translation>
         <source>Continue</source>
         <translation>Continua</translation>
     </message>
+    <message>
+        <source>BeeTetris</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiTransferFile</name>
@@ -2080,6 +2127,17 @@ il file %2 (%3)?</translation>
     <message>
         <source>You can connect to the Jabber.org server.</source>
         <translation type="obsolete">Puoi connetterti al server di Jabber.org.</translation>
+    </message>
+</context>
+<context>
+    <name>LifeGame</name>
+    <message>
+        <source>BeeLife</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;The Game of Life&lt;/b&gt;, also known simply as Life, is a cellular automaton devised by the British mathematician &lt;b&gt;John Horton Conway&lt;/b&gt; in 1970. The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:&lt;ul&gt;&lt;li&gt;Any live cell with less than two live neighbours dies, as if caused by under-population.&lt;/li&gt;&lt;li&gt;Any live cell with two or three live neighbours lives on to the next generation.&lt;/li&gt;&lt;li&gt;Any live cell with more than three live neighbours dies, as if by overcrowding.&lt;/li&gt;&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.&lt;/li&gt;&lt;/ul&gt;The rules continue to be applied repeatedly to create further generations.&lt;br /&gt;For more info please visit &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -35,7 +35,7 @@ QString LifeGame::name() const
 
 QString LifeGame::version() const
 {
-  return "0.1.2";
+  return "0.2.2";
 }
 
 QString LifeGame::author() const
@@ -45,7 +45,7 @@ QString LifeGame::author() const
 
 QString LifeGame::help() const
 {
-  return tr( "<b>The Game of Life</b>, also known simply as Life, is a cellular automaton devised by the British mathematician <b>John Horton Conway</b> in 1970."
+  return tr( "<b>The Game of Life</b>, also known simply as Life, is a cellular automaton devised by the British mathematician <b>John Horton Conway</b> in 1970. "
   "The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, "
   "alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. "
   "At each step in time, the following transitions occur:"
@@ -111,27 +111,30 @@ bool LifeGame::isPaused() const
 
 void LifeGame::setSettings( QStringList settings_list )
 {
-  if( settings_list.size() < 2 )
+  if( settings_list.size() < 3 )
     return;
 
   bool ok = false;
-  int record_version = settings_list.first().toInt( &ok );
+  int settings_version = settings_list.first().toInt( &ok );
   if( !ok )
     return;
-  if( record_version > 1 )
+  if( settings_version > 1 )
     return;
   settings_list.removeFirst();
-  int record_tmp = settings_list.first().toInt( &ok );
+  int steps_tmp = settings_list.first().toInt( &ok );
   if( !ok )
     return;
-
+  settings_list.removeFirst();
+  QString status = settings_list.first();
+  mp_life->board()->setStatus( steps_tmp, status );
 }
 
 QStringList LifeGame::settings() const
 {
   QStringList settings_list;
-  settings_list << QString::number( 1 ); // version of record
-  settings_list << QString::number( 20 );
+  settings_list << QString::number( 1 ); // version of settings
+  settings_list << QString::number( mp_life->board()->steps() );
+  settings_list.append( mp_life->board()->status() );
   return settings_list;
 }
 

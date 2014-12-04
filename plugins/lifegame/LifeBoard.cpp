@@ -24,6 +24,7 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include "LifeBoard.h"
+#include "Random.h"
 
 
 LifeBoard::LifeBoard( QWidget *parent )
@@ -33,9 +34,9 @@ LifeBoard::LifeBoard( QWidget *parent )
   setFocusPolicy( Qt::StrongFocus );
   setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 
-  m_isPaused = false;
+  m_isPaused = true;
+  Random::init();
 
-  clearBoard();
   bigBang();
 }
 
@@ -45,16 +46,6 @@ void LifeBoard::paintEvent( QPaintEvent *event )
 
   QPainter painter(this);
   QRect rect = contentsRect();
-
-  if( m_isPaused )
-  {
-    QFont font = painter.font();
-    font.setBold( true );
-    font.setPointSize( font.pointSize() + 6 );
-    painter.setFont( font );
-    painter.drawText( rect, Qt::AlignCenter, tr( "Pause" ) );
-    return;
-  }
 
   int board_top = rect.bottom() - BoardHeight * squareHeight();
 
@@ -72,13 +63,23 @@ void LifeBoard::clearBoard()
   for( int i = 0; i < BoardHeight; i++ )
     for( int j = 0; j < BoardWidth; j++ )
       m_board[ i ][ j ] = false;
+  m_count = 0;
+  m_steps = 0;
 }
 
 void LifeBoard::bigBang()
 {
+  m_count = 0;
+  m_steps = 0;
   for( int i = 0; i < BoardHeight; i++ )
+  {
     for( int j = 0; j < BoardWidth; j++ )
-      m_board[ i ][ j ] = ((i+j) % 2 == 0);
+    {
+      m_board[ i ][ j ] = Random::d100() < 40;
+      if( m_board[ i ][ j ] )
+        m_count++;
+    }
+  }
 }
 
 void LifeBoard::evolve()
@@ -87,73 +88,41 @@ void LifeBoard::evolve()
     return;
 
   int num_neighbors = 0;
+  m_count = 0;
+  m_steps++;
   bool board_tmp [BoardWidth][BoardHeight];
 
-  for( int i = 0; i < BoardWidth; i++ )
+  for( int x = 0; x < BoardWidth; x++ )
   {
-    for( int j = 0; j < BoardHeight ; j++ )
+    for( int y = 0; y < BoardHeight ; y++ )
     {
-      if( (i+1) < BoardHeight && m_board[i + 1][j] == true )
+      for( int x1 = x - 1; x1 <= x + 1; x1++ )
       {
-        num_neighbors++;
-      }
-      if( (i-1) >= 0 && m_board[i - 1][j] == true )
-      {
-        num_neighbors++;
-      }
-      if( (j+1) < BoardWidth && m_board[i][j+1] == true )
-      {
-        num_neighbors++;
-      }
-      if( (j-1) >= 0 && m_board[i][j-1] == true )
-      {
-        num_neighbors++;
-      }
-      if( (i+1) < BoardHeight && (j+1) < BoardWidth && m_board[i+1][j+1] == true )
-      {
-        num_neighbors++;
-      }
-      if( (i+1) < BoardHeight && (j-1) >= 0 && m_board[i+1][j-1] == true )
-      {
-        num_neighbors++;
-      }
-      if ( (i-1) >= 0 && (j+1) < BoardWidth && m_board[i-1][j+1] == true )
-      {
-          num_neighbors++;
-      }
-      if ( (i-1) >= 0 && (j-1) >= 0 && m_board[i-1][j-1] == true )
-      {
-          num_neighbors++;
+        for( int y1 = y - 1; y1 <= y + 1; y1++ )
+        {
+          if( m_board[ (x1 + BoardWidth) % BoardWidth ][ (y1 + BoardHeight) % BoardHeight ] )
+            num_neighbors++;
+        }
       }
 
-      if (num_neighbors < 2 || num_neighbors > 3)
-      {
-          board_tmp[i][j] = false;
-      }
-      else if (num_neighbors == 2)
-      {
-          board_tmp[i][j] = m_board[i][j];
-      }
-      else if (num_neighbors == 3)
-      {
-          board_tmp[i][j] = true;
-      }
+      if( m_board[ x ][ y ] )
+        num_neighbors--;
 
+      board_tmp[ x ][ y ] = (num_neighbors == 3 || (num_neighbors == 2 && m_board[ x ][ y ] ) );
+      if( board_tmp[ x ][ y ] )
+        m_count++;
       num_neighbors = 0;
-
     }
   }
 
   for( int i = 0 ; i < BoardWidth ; i++ )
     for (int j = 0 ; j < BoardHeight ; j++ )
       m_board[i][j] = board_tmp[i][j];
-
 }
-
 
 void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living )
 {
-  QColor color = is_living ? QColor( Qt::darkYellow ) : QColor( Qt::black );
+  QColor color = is_living ? QColor( Qt::yellow ) : QColor( Qt::darkGray );
   painter.fillRect( x + 1, y + 1, squareWidth() - 2, squareHeight() - 2, color );
 
   painter.setPen( color.light() );
@@ -181,6 +150,13 @@ void LifeBoard::pause()
   startOrPause();
 }
 
+void LifeBoard::restart()
+{
+  pause();
+  bigBang();
+  emit( evolved() );
+}
+
 void LifeBoard::startOrPause()
 {
   m_isPaused = !m_isPaused;
@@ -195,6 +171,7 @@ void LifeBoard::startOrPause()
   {
     m_timer.start( 500, this );
     update();
+    emit( running() );
   }
 }
 
@@ -204,8 +181,49 @@ void LifeBoard::timerEvent( QTimerEvent* event )
   {
     evolve();
     update();
+    emit( evolved() );
   }
   else
     QFrame::timerEvent(event);
 }
 
+QString LifeBoard::status() const
+{
+  QString status_string = "";
+
+  for( int i = 0 ; i < BoardWidth ; i++ )
+  {
+    for (int j = 0 ; j < BoardHeight ; j++ )
+    {
+      if( m_board[i][j] )
+        status_string.append( "1" );
+      else
+        status_string.append( "0" );
+    }
+  }
+  return status_string;
+}
+
+void LifeBoard::setStatus( int status_steps, const QString& status_string )
+{
+  clearBoard();
+
+  if( status_string.size() <= 0 )
+    return;
+
+  m_steps = status_steps;
+  int status_string_index = 0;
+
+  for( int i = 0 ; i < BoardWidth ; i++ )
+  {
+    for (int j = 0 ; j < BoardHeight ; j++ )
+    {
+      m_board[ i ][ j ] = (status_string_index < status_string.size() && status_string.at( status_string_index ) == '1' );
+      if( m_board[ i ][ j ] )
+        m_count++;
+      status_string_index++;
+    }
+  }
+
+  emit( evolved() );
+}
