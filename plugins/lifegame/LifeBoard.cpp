@@ -23,6 +23,7 @@
 
 #include <QKeyEvent>
 #include <QPainter>
+#include <QtDebug>
 #include "LifeBoard.h"
 #include "Random.h"
 
@@ -53,31 +54,80 @@ void LifeBoard::paintEvent( QPaintEvent *event )
   {
     for( int j = 0; j < BoardWidth; j++ )
     {
-      drawSquare( painter, rect.left() + j * squareWidth(), board_top + i * squareHeight(), m_board[ i ][ j ] );
+      drawSquare( painter, rect.left() + j * squareWidth(), board_top + i * squareHeight(),
+        m_board[ i ][ j ], m_visited[ i ][ j ] );
     }
   }
 }
 
-void LifeBoard::clearBoard()
+int LifeBoard::visitedCount() const
 {
-  for( int i = 0; i < BoardHeight; i++ )
-    for( int j = 0; j < BoardWidth; j++ )
-      m_board[ i ][ j ] = false;
-  m_count = 0;
-  m_steps = 0;
-}
-
-void LifeBoard::bigBang()
-{
-  m_count = 0;
-  m_steps = 0;
+  int visited_count = 0;
   for( int i = 0; i < BoardHeight; i++ )
   {
     for( int j = 0; j < BoardWidth; j++ )
     {
-      m_board[ i ][ j ] = Random::d100() < 40;
+      if( m_visited[ i ][ j ] )
+        visited_count++;
+    }
+  }
+  return visited_count > 0 ? visited_count : 1;
+}
+
+int LifeBoard::diedCount() const
+{
+  int died_count = 0;
+  for( int i = 0; i < BoardHeight; i++ )
+  {
+    for( int j = 0; j < BoardWidth; j++ )
+    {
+      if( m_visited[ i ][ j ] && !m_board[ i ][ j ])
+        died_count++;
+    }
+  }
+  return died_count;
+}
+
+int LifeBoard::aliveCount() const
+{
+  int alive_count = 0;
+  for( int i = 0; i < BoardHeight; i++ )
+  {
+    for( int j = 0; j < BoardWidth; j++ )
+    {
       if( m_board[ i ][ j ] )
-        m_count++;
+        alive_count++;
+    }
+  }
+  return alive_count;
+}
+
+void LifeBoard::clearBoard()
+{
+  m_steps = 0;
+  m_evolutionCycle = 0;
+
+  for( int i = 0; i < BoardHeight; i++ )
+  {
+    for( int j = 0; j < BoardWidth; j++ )
+    {
+      m_board[ i ][ j ] = false;
+      m_visited[ i ][ j ] = false;
+    }
+  }
+}
+
+void LifeBoard::bigBang()
+{
+  m_steps = 0;
+  m_evolutionCycle = 0;
+
+  for( int i = 0; i < BoardHeight; i++ )
+  {
+    for( int j = 0; j < BoardWidth; j++ )
+    {
+      m_board[ i ][ j ] = Random::d100() < 15;
+      m_visited[ i ][ j ] = m_board[ i ][ j ];
     }
   }
 }
@@ -88,7 +138,8 @@ void LifeBoard::evolve()
     return;
 
   int num_neighbors = 0;
-  m_count = 0;
+  int prev_count = aliveCount();
+
   m_steps++;
   bool board_tmp [BoardWidth][BoardHeight];
 
@@ -109,8 +160,10 @@ void LifeBoard::evolve()
         num_neighbors--;
 
       board_tmp[ x ][ y ] = (num_neighbors == 3 || (num_neighbors == 2 && m_board[ x ][ y ] ) );
+
       if( board_tmp[ x ][ y ] )
-        m_count++;
+        m_visited[ x ][ y ] = true;
+
       num_neighbors = 0;
     }
   }
@@ -118,11 +171,16 @@ void LifeBoard::evolve()
   for( int i = 0 ; i < BoardWidth ; i++ )
     for (int j = 0 ; j < BoardHeight ; j++ )
       m_board[i][j] = board_tmp[i][j];
+
+  if( prev_count == aliveCount() )
+    m_evolutionCycle++;
+  else
+    m_evolutionCycle = 0;
 }
 
-void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living )
+void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living, bool is_visited )
 {
-  QColor color = is_living ? QColor( Qt::yellow ) : QColor( Qt::darkGray );
+  QColor color = is_living ? QColor( Qt::yellow ) : ( is_visited ? QColor( Qt::darkGray ) : QColor( Qt::black ) );
   painter.fillRect( x + 1, y + 1, squareWidth() - 2, squareHeight() - 2, color );
 
   painter.setPen( color.light() );
@@ -169,7 +227,7 @@ void LifeBoard::startOrPause()
   }
   else
   {
-    m_timer.start( 500, this );
+    m_timer.start( stepTimeout(), this );
     update();
     emit( running() );
   }
@@ -181,7 +239,15 @@ void LifeBoard::timerEvent( QTimerEvent* event )
   {
     evolve();
     update();
-    emit( evolved() );
+    if( m_evolutionCycle > 36 )
+    {
+      m_isPaused = true;
+      m_timer.stop();
+      m_evolutionCycle = 0;
+      emit( completed() );
+    }
+    else
+      emit( evolved() );
   }
   else
     QFrame::timerEvent(event);
@@ -195,8 +261,10 @@ QString LifeBoard::status() const
   {
     for (int j = 0 ; j < BoardHeight ; j++ )
     {
-      if( m_board[i][j] )
+      if( m_board[ i ][ j ] )
         status_string.append( "1" );
+      else if( m_visited[ i ][ j ] )
+        status_string.append( "2" );
       else
         status_string.append( "0" );
     }
@@ -213,14 +281,26 @@ void LifeBoard::setStatus( int status_steps, const QString& status_string )
 
   m_steps = status_steps;
   int status_string_index = 0;
+  QChar c;
 
   for( int i = 0 ; i < BoardWidth ; i++ )
   {
     for (int j = 0 ; j < BoardHeight ; j++ )
     {
-      m_board[ i ][ j ] = (status_string_index < status_string.size() && status_string.at( status_string_index ) == '1' );
-      if( m_board[ i ][ j ] )
-        m_count++;
+      if( status_string_index < status_string.size() )
+      {
+        c = status_string.at( status_string_index );
+
+        if( c == QChar( '1' ) )
+        {
+          m_board[ i ][ j ] = true;
+          m_visited[ i ][ j ] = true;
+        }
+        else if( c == QChar( '2' ) )
+        {
+          m_visited[ i ][ j ] = true;
+        }
+      }
       status_string_index++;
     }
   }

@@ -34,6 +34,7 @@ GuiLife::GuiLife( QWidget *parent )
   connect( mp_life, SIGNAL( paused() ), this, SLOT( gamePaused() ) );
   connect( mp_life, SIGNAL( running() ), this, SLOT( gameRunning() ) );
   connect( mp_life, SIGNAL( evolved() ), this, SLOT( updateCounter() ) );
+  connect( mp_life, SIGNAL( completed() ), this, SLOT( gameCompleted() ) );
 
   updateCounter();
 }
@@ -52,18 +53,24 @@ void GuiLife::gameRunning()
 
 void GuiLife::updateCounter()
 {
-  mp_labelCount->setText( tr( "Bees: %1 (%2% - %3) Generation: %4" )
-    .arg( mp_life->count(), 4, 10, QLatin1Char( ' ' ) )
-    .arg( mp_life->percentage(), 5, 'g', 3, QLatin1Char( ' ' ) )
-    .arg( (int)(LifeBoard::BoardWidth*LifeBoard::BoardHeight) )
+  mp_labelCount->setText( tr( "Bees Alive: %1 - Bees Died: %2 - Spaces: %3 - Hive Generation: %4" )
+    .arg( mp_life->aliveCount(), 4, 10, QLatin1Char( ' ' ) )
+    .arg( mp_life->diedCount(), 4, 10, QLatin1Char( ' ' ) )
+    .arg( mp_life->visitedCount(), 4, 10, QLatin1Char( ' ' ) )
     .arg( mp_life->steps() ) );
 }
 
 void GuiLife::restart()
 {
   if( QMessageBox::question( this, tr( "BeeLife" ),
-    tr( "Do you really want to restart?" ), tr( "Yes" ), tr( "No"), QString(), 1, 1 ) == 0 )
+    tr( "Do you really want to restart?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
     mp_life->restart();
   }
+}
+
+void GuiLife::gameCompleted()
+{
+  mp_labelPause->setText( tr( "??? Evolution Completed ??? ... (or press space bar to continue)" ) );
+  mp_labelPause->show();
 }

@@ -45,6 +45,7 @@ protected slots:
   void gameRunning();
   void updateCounter();
   void restart();
+  void gameCompleted();
 
 
 };
