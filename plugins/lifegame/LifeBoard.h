@@ -35,7 +35,7 @@ class LifeBoard : public QFrame
   Q_OBJECT
 
 public:
-  enum { BoardWidth = 80, BoardHeight = 40 };
+  enum { BoardWidth = 120, BoardHeight = 60 };
 
   LifeBoard( QWidget *parent = 0 );
 

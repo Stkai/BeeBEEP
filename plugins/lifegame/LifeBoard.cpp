@@ -140,8 +140,9 @@ void LifeBoard::evolve()
   int num_neighbors = 0;
   int prev_count = aliveCount();
 
-  m_steps++;
   bool board_tmp [BoardWidth][BoardHeight];
+  int coord_x = 0;
+  int coord_y = 0;
 
   for( int x = 0; x < BoardWidth; x++ )
   {
@@ -151,7 +152,21 @@ void LifeBoard::evolve()
       {
         for( int y1 = y - 1; y1 <= y + 1; y1++ )
         {
-          if( m_board[ (x1 + BoardWidth) % BoardWidth ][ (y1 + BoardHeight) % BoardHeight ] )
+          if( x1 < 0 )
+            coord_x = BoardWidth - 1;
+          else if( x1 >= BoardWidth )
+            coord_x = 0;
+          else
+            coord_x = x1;
+
+          if( y1 < 0 )
+            coord_y = BoardHeight - 1;
+          else if( y1 >= BoardHeight )
+            coord_y = 0;
+          else
+            coord_y = y1;
+
+          if( m_board[ coord_x ][ coord_y ] )
             num_neighbors++;
         }
       }
@@ -176,6 +191,8 @@ void LifeBoard::evolve()
     m_evolutionCycle++;
   else
     m_evolutionCycle = 0;
+
+  m_steps++;
 }
 
 void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living, bool is_visited )
