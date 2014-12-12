@@ -535,43 +535,47 @@ p, li { white-space: pre-wrap; }
     <name>GuiLife</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>BeeLife</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Riavvia</translation>
     </message>
     <message>
         <source>Press space bar to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi spazio per iniziare</translation>
     </message>
     <message>
         <source>Paused (press space bar to continue)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bees: %1 (%2% - %3) Generation: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa (premi spazio per continuare)</translation>
     </message>
     <message>
         <source>Do you really want to restart?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi riavviare il gioco?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Si</translation>
+        <translation>Si</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">No</translation>
+        <translation>No</translation>
+    </message>
+    <message>
+        <source>Bees Alive: %1 - Bees Died: %2 - Spaces: %3 - Hive Generation: %4</source>
+        <translation>Api Vive: %1 - Api Morte: %2 - Spazi: %3 - Generazione: %4</translation>
+    </message>
+    <message>
+        <source>??? Evolution Completed ??? ... (or press space bar to continue)</source>
+        <translation>??? Evoluzione Completata ??? ... (o premi spazio per continuare)</translation>
     </message>
 </context>
 <context>
@@ -1380,6 +1384,18 @@ il file %2 (%3)?</translation>
         <source>Open %1 website and check if a new version exists</source>
         <translation>Apri il sito di %1 e controlla se esistono degli aggiornamenti</translation>
     </message>
+    <message>
+        <source>Play %1</source>
+        <translation>Gioca a %1</translation>
+    </message>
+    <message>
+        <source>is a game developed by</source>
+        <translation>è un gioco sviluppato da</translation>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation>Informazioni su %1</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1854,7 +1870,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>BeeTetris</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2133,7 +2149,7 @@ il file %2 (%3)?</translation>
     <name>LifeGame</name>
     <message>
         <source>BeeLife</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;b&gt;The Game of Life&lt;/b&gt;, also known simply as Life, is a cellular automaton devised by the British mathematician &lt;b&gt;John Horton Conway&lt;/b&gt; in 1970. The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:&lt;ul&gt;&lt;li&gt;Any live cell with less than two live neighbours dies, as if caused by under-population.&lt;/li&gt;&lt;li&gt;Any live cell with two or three live neighbours lives on to the next generation.&lt;/li&gt;&lt;li&gt;Any live cell with more than three live neighbours dies, as if by overcrowding.&lt;/li&gt;&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.&lt;/li&gt;&lt;/ul&gt;The rules continue to be applied repeatedly to create further generations.&lt;br /&gt;For more info please visit &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</source>

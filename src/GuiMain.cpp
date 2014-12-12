@@ -78,6 +78,7 @@ GuiMain::GuiMain( QWidget *parent )
   createMenus();
   createToolAndMenuBars();
   createPluginWindows();
+  updadePluginMenu();
   createStatusBar();
 
   connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
@@ -391,8 +392,6 @@ void GuiMain::createMenus()
 
   /* Settings Menu */
   mp_menuSettings = new QMenu( tr( "&Settings" ), this );
-  mp_menuSettings->addAction( mp_actToolBar );
-  mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
@@ -555,6 +554,8 @@ void GuiMain::createMenus()
 
   /* View Menu */
   mp_menuView = new QMenu( tr( "&View" ), this );
+  mp_menuView->addAction( mp_actToolBar );
+  mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewUsers );
   mp_menuView->addAction( mp_actViewChats );
   mp_menuView->addAction( mp_actViewSavedChats );
@@ -569,6 +570,9 @@ void GuiMain::createMenus()
   mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
   mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
 
+  /* Plugins Menu */
+  mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
+
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("&?" ), this );
   act = mp_menuInfo->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), this, SLOT( showTipOfTheDay() ) );
@@ -582,11 +586,6 @@ void GuiMain::createMenus()
   mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( QIcon( ":/images/update.png" ), tr( "Check for new version..." ), this, SLOT( checkNewVersion() ) );
   act->setStatusTip( tr( "Open %1 website and check if a new version exists" ).arg( Settings::instance().programName() ) );
-
-  /* Plugins Menu */
-  mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
-  updadePluginMenu();
-
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -597,6 +596,18 @@ void GuiMain::createToolAndMenuBars()
   menuBar()->addMenu( mp_menuView );
   menuBar()->addMenu( mp_menuPlugins );
   menuBar()->addMenu( mp_menuInfo );
+
+  QLabel *label_version = new QLabel( this );
+  label_version->setTextFormat( Qt::RichText );
+  label_version->setAlignment( Qt::AlignCenter );
+  label_version->setText( QString( "&nbsp;<b>v %2</b>&nbsp;" )
+#ifdef BEEBEEP_DEBUG
+                            .arg( Settings::instance().version( true ) ) );
+#else
+                            .arg( Settings::instance().version( false ) ) );
+#endif
+  menuBar()->setCornerWidget( label_version );
+
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
@@ -695,23 +706,42 @@ void GuiMain::createStackedWidgets()
 
   mp_savedChat = new GuiSavedChat( this );
   mp_stackedWidget->addWidget( mp_savedChat );
+}
 
+QMenu* GuiMain::gameMenu( GameInterface* gi )
+{
+  if( m_mapGameMenu.contains( gi->name() ) )
+    return m_mapGameMenu.value( gi->name() );
+
+  QMenu *menu_game = new QMenu( gi->name(), this );
+  menu_game->setIcon( gi->icon() );
+
+  QAction* act = menu_game->addAction( QIcon( ":/images/play.png" ), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
+  act->setData( mp_stackedWidget->addWidget( gi->mainWindow() ) );
+  menu_game->setDefaultAction( act );
+
+  QString help_data_ts = tr( "is a game developed by" );
+  QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
+
+  act = menu_game->addAction( QIcon( ":/images/info.png" ), tr( "About %1" ).arg( gi->name() ), this, SLOT( showPluginHelp() ) );
+  act->setData( help_data_format
+                .arg( Bee::iconToHtml( (gi->icon().isNull() ? ":/images/plugin.png" : gi->iconFileName()), "*P*" ),
+                      gi->name(), help_data_ts, gi->author(), gi->help() ) );
+
+
+  m_mapGameMenu.insert( gi->name(), menu_game );
+
+  return menu_game;
 }
 
 void GuiMain::createPluginWindows()
 {
-  QAction* act;
-  int plugin_index;
-
-  if( PluginManager::instance().games().size() > 0 )
-    mp_menuView->addSeparator();
+  if( PluginManager::instance().games().size() <= 0 )
+    return;
 
   foreach( GameInterface* gi, PluginManager::instance().games() )
   {
-    act = mp_menuView->addAction( gi->icon(), gi->name(), this, SLOT( raisePluginView() ) );
-    act->setStatusTip( gi->help() );
-    plugin_index = mp_stackedWidget->addWidget( gi->mainWindow() );
-    act->setData( plugin_index );
+    gameMenu( gi );
   }
 }
 
@@ -1270,6 +1300,7 @@ void GuiMain::updadePluginMenu()
 {
   mp_menuPlugins->clear();
   QAction* act;
+
   act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
   act->setStatusTip( tr( "Open the plugin manager dialog and manage the installed plugins" ) );
 
@@ -1279,33 +1310,36 @@ void GuiMain::updadePluginMenu()
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
 
-  if( PluginManager::instance().textMarkers().size() )
+  if( PluginManager::instance().textMarkers().size() > 0 )
+  {
     mp_menuPlugins->addSeparator();
 
-  foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
-  {
-    act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showPluginHelp() ) );
+    foreach( TextMarkerInterface* text_marker, PluginManager::instance().textMarkers() )
+    {
+      act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showPluginHelp() ) );
 
-    act->setData( help_data_format
+      act->setData( help_data_format
                   .arg( Bee::iconToHtml( (text_marker->icon().isNull() ? ":/images/plugin.png" : text_marker->iconFileName()), "*P*" ),
                         text_marker->name(), help_data_ts, text_marker->author(), text_marker->help() ) );
-    act->setIcon( text_marker->icon() );
-    act->setEnabled( text_marker->isEnabled() );
+      act->setIcon( text_marker->icon() );
+      act->setEnabled( text_marker->isEnabled() );
+    }
   }
 
   if( PluginManager::instance().games().size() > 0 )
-    mp_menuPlugins->addSeparator();
-
-  foreach( GameInterface* game, PluginManager::instance().games() )
   {
-    act = mp_menuPlugins->addAction( game->name(), this, SLOT( showPluginHelp() ) );
+    mp_menuPlugins->addSeparator();
+    QMenu* game_menu;
 
-    act->setData( help_data_format
-                  .arg( Bee::iconToHtml( (game->icon().isNull() ? ":/images/plugin.png" : game->iconFileName()), "*P*" ),
-                        game->name(), help_data_ts, game->author(), game->help() ) );
-    act->setIcon( game->icon() );
-    act->setEnabled( game->isEnabled() );
+    foreach( GameInterface* gi, PluginManager::instance().games() )
+    {
+      game_menu = gameMenu( gi );
+      game_menu->setEnabled( gi->isEnabled() );
+      gi->mainWindow()->setEnabled( gi->isEnabled() );
+      mp_menuPlugins->addMenu( game_menu );
+    }
   }
+
 }
 
 void GuiMain::showPluginHelp()

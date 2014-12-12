@@ -30,6 +30,7 @@ class Core;
 class Chat;
 class ChatMessage;
 class FileInfo;
+class GameInterface;
 class GuiChat;
 class GuiChatList;
 class GuiLog;
@@ -138,6 +139,7 @@ private:
   void setGameInPauseMode();
   void checkAutoStartOnBoot( bool );
   void checkViewActions();
+  QMenu* gameMenu( GameInterface* );
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -191,6 +193,8 @@ private:
   GuiSystemTray* mp_trayIcon;
 
   GuiSessionManager* mp_sessionManager;
+
+  QMap<QString, QMenu*> m_mapGameMenu;
 
 };
 

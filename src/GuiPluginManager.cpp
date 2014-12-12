@@ -134,7 +134,7 @@ void GuiPluginManager::togglePlugin()
     return;
 
   bool enabled = isPluginEnabled( item );
-  PluginManager::instance().setPluginEnabled( item->text( 1 ), !enabled );
+  PluginManager::instance().setPluginEnabled( item->text( 2 ), !enabled );
   setPluginEnabled( item, !enabled );
   updateItem( item );
   m_changed = true;
