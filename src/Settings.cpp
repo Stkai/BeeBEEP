@@ -85,7 +85,7 @@ QString Settings::currentHash() const
 }
 
 QHostAddress Settings::localHostAddress() const
-{ 
+{
   QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
   QList<QHostAddress> address_ipv6_list;
   QList<QHostAddress> address_ipv4_list;
@@ -315,6 +315,7 @@ void Settings::load()
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
+  m_autoUserAway = sets->value( "AutoAwayStatus", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -392,6 +393,7 @@ void Settings::load()
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
   m_trayMessageTimeout = qMax( sets->value( "SystemTrayMessageTimeout", 2000 ).toInt(), 100 );
+  m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -471,6 +473,7 @@ void Settings::save()
   sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserNameColor", m_showUserColor );
+  sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->endGroup();
   sets->beginGroup( "VCard" );
   sets->setValue( "NickName", m_localUser.vCard().nickName() );
@@ -529,6 +532,7 @@ void Settings::save()
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
+  sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
   sets->endGroup();
   sets->beginGroup( "Network");
   sets->setValue( "BroadcastAddresses", m_broadcastAddresses );

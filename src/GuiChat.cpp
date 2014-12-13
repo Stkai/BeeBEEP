@@ -57,11 +57,8 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
 
-#ifdef Q_OS_SYMBIAN
-  connect( mp_buttonSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
-#else
+  // connect( mp_buttonSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
   mp_buttonSend->hide();
-#endif
 }
 
 void GuiChat::customContextMenu( const QPoint& p )

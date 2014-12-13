@@ -57,6 +57,7 @@ public:
   inline int fileTransferConfirmTimeout() const;
   inline int fileTransferBufferSize() const;
   inline int trayMessageTimeout() const;
+  inline int userAwayTimeout() const;
 
   inline const QString& logPath() const;
   inline void setLogPath( const QString& );
@@ -162,6 +163,9 @@ public:
   inline int chatMaxLineSaved() const;
   inline void setChatMaxLineSaved( int );
 
+  inline bool autoUserAway() const;
+  inline void setAutoUserAway( bool );
+
   inline QStringList pluginSettings( const QString& ) const;
   inline void setPluginSettings( const QString&, const QStringList& );
   inline bool pluginHasSettings( const QString& ) const;
@@ -210,6 +214,7 @@ private:
   int m_fileTransferConfirmTimeout;
   int m_fileTransferBufferSize;
   int m_trayMessageTimeout;
+  int m_userAwayTimeout;
 
   QString m_logPath;
   QString m_pluginPath;
@@ -271,6 +276,8 @@ private:
   bool m_chatAutoSave;
   int m_chatMaxLineSaved;
 
+  bool m_autoUserAway;
+
   QMap<QString, QStringList> m_pluginSettings;
 
 };
@@ -287,6 +294,7 @@ inline int Settings::writingTimeout() const { return m_writingTimeout; }
 inline int Settings::fileTransferConfirmTimeout() const { return m_fileTransferConfirmTimeout; }
 inline int Settings::fileTransferBufferSize() const { return m_fileTransferBufferSize; }
 inline int Settings::trayMessageTimeout() const  { return m_trayMessageTimeout; }
+inline int Settings::userAwayTimeout() const { return m_userAwayTimeout; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline const QString& Settings::pluginPath() const { return m_pluginPath; }
@@ -372,6 +380,8 @@ inline bool Settings::chatAutoSave() const { return m_chatAutoSave; }
 inline void Settings::setChatAutoSave( bool new_value ) { m_chatAutoSave = new_value; }
 inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved; }
 inline void Settings::setChatMaxLineSaved( int new_value ) { m_chatMaxLineSaved = new_value; }
+inline bool Settings::autoUserAway() const { return m_autoUserAway; }
+inline void Settings::setAutoUserAway( bool new_value ) { m_autoUserAway = new_value; }
 inline QStringList Settings::pluginSettings( const QString& plugin_name ) const { return m_pluginSettings.value( plugin_name ); }
 inline void Settings::setPluginSettings( const QString& plugin_name, const QStringList& plugin_settings ) { m_pluginSettings.insert( plugin_name, plugin_settings ); }
 inline bool Settings::pluginHasSettings( const QString& plugin_name ) const { return m_pluginSettings.contains( plugin_name ); }

@@ -21,12 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#define QXMPP_LOGFILE
-
-#include <QApplication>
-#ifdef Q_OS_SYMBIAN
-#include "sym_iap_util.h"
-#endif
+#include "BeeApplication.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
 #include "FileShare.h"
@@ -55,10 +50,7 @@ bool SetTranslator( QTranslator* translator, const QString& prog_name, const QSt
 
 int main( int argc, char *argv[] )
 {
-#ifdef Q_OS_SYMBIAN
-  qt_SetDefaultIap();
-#endif
-  QApplication app( argc, argv );
+  BeeApplication bee_app( argc, argv );
   Q_INIT_RESOURCE( beebeep );
 
   /* Randomize */
@@ -73,9 +65,9 @@ int main( int argc, char *argv[] )
   Settings::instance().loadPreConf();
   Settings::instance().load();
 
-  app.setApplicationName( Settings::instance().programName() );
-  app.setOrganizationName( Settings::instance().organizationName() );
-  app.setApplicationVersion( Settings::instance().version( false ) );
+  bee_app.setApplicationName( Settings::instance().programName() );
+  bee_app.setOrganizationName( Settings::instance().organizationName() );
+  bee_app.setApplicationVersion( Settings::instance().version( false ) );
 
   /* Starting File Logs */
   if( Settings::instance().logToFile() )
@@ -105,9 +97,8 @@ int main( int argc, char *argv[] )
 
   /* Show Main Window */
   GuiMain mw;
-#ifdef Q_OS_SYMBIAN
-  mw.showMaximized();
-#else
+  QObject::connect( &bee_app, SIGNAL( checkIdleRequest() ), &mw, SLOT( checkIdle() ) );
+
   QByteArray ba = Settings::instance().guiGeometry();
   if( !ba.isEmpty() )
   {
@@ -123,7 +114,6 @@ int main( int argc, char *argv[] )
 
   if( Settings::instance().loadOnTrayAtStartup() && QSystemTrayIcon::isSystemTrayAvailable() )
     QTimer::singleShot( 100, &mw, SLOT( hideToTrayIcon() ) );
-#endif
 
   /* Starting connection to BeeBEEP Network */
   QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
@@ -131,13 +121,17 @@ int main( int argc, char *argv[] )
   /* Load saved session */
   mw.loadSession();
 
+  if( Settings::instance().autoUserAway() )
+    bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
+
   /* Event Loop */
-  int iRet = app.exec();
+  int iRet = bee_app.exec();
 
   /* Save session */
   mw.saveSession();
 
   /* CleanUp */
+  bee_app.cleanUp();
   FileShare::close();
   ChatManager::close();
   UserManager::close();

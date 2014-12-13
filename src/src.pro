@@ -64,7 +64,8 @@ SOURCES += Listener.cpp \
     GuiChatMessage.cpp \
     GuiSavedChatList.cpp \
     GuiSavedChatItem.cpp \
-    GuiSavedChat.cpp
+    GuiSavedChat.cpp \
+    BeeApplication.cpp
 HEADERS += sym_iap_util.h \
     Listener.h \
     Connection.h \
@@ -123,7 +124,8 @@ HEADERS += sym_iap_util.h \
     GuiChatMessage.h \
     GuiSavedChatList.h \
     GuiSavedChatItem.h \
-    GuiSavedChat.h
+    GuiSavedChat.h \
+    BeeApplication.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \

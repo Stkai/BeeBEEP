@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Core.h"
+#include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "EmoticonManager.h"
@@ -185,13 +186,11 @@ void GuiMain::closeEvent( QCloseEvent* e )
     mp_core->stop();
   }
 
-#ifndef Q_OS_SYMBIAN
   if( isVisible() )
   {
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
   }
-#endif
 
   e->accept();
 }
@@ -450,6 +449,12 @@ void GuiMain::createMenus()
   mp_actPromptPassword->setCheckable( true );
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
+
+  act = mp_menuSettings->addAction( tr( "Set away status when idle" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled %1 set your status to away after an idle of %2 minutes" ).arg( Settings::instance().programName() ).arg( Settings::instance().userAwayTimeout() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().autoUserAway() );
+  act->setData( 20 );
 
 #ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
@@ -914,6 +919,16 @@ void GuiMain::settingsChanged()
     break;
   case 19:
     Settings::instance().setShowNotificationOnTray( act->isChecked() );
+    break;
+  case 20:
+    {
+      Settings::instance().setAutoUserAway( act->isChecked() );
+      if( act->isChecked() )
+      {
+        BeeApplication* bee_app = static_cast<BeeApplication*>( QApplication::instance() );
+        bee_app->setIdleTimeout( Settings::instance().userAwayTimeout() );
+      }
+    }
     break;
   case 99:
     break;
@@ -1636,4 +1651,13 @@ void GuiMain::checkNewVersion()
   if( !QDesktopServices::openUrl( new_version_url ) )
     QMessageBox::information( this, Settings::instance().programName(),
       tr( "Unable to open %1" ).arg( Settings::instance().downloadWebSite() ), tr( "Ok" ) );
+}
+
+void GuiMain::checkIdle()
+{
+  if( !Settings::instance().autoUserAway() )
+    return;
+
+  mp_core->setLocalUserStatus( User::Away );
+  updateStatusIcon();
 }
