@@ -74,7 +74,8 @@ SOURCES += Listener.cpp \
     GuiSavedChatList.cpp \
     GuiSavedChatItem.cpp \
     GuiSavedChat.cpp \
-    BeeApplication.cpp
+    BeeApplication.cpp \
+    GuiScreenShot.cpp
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -134,7 +135,8 @@ HEADERS += \
     GuiSavedChatList.h \
     GuiSavedChatItem.h \
     GuiSavedChat.h \
-    BeeApplication.h
+    BeeApplication.h \
+    GuiScreenShot.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \
@@ -147,7 +149,8 @@ FORMS += GuiChat.ui \
     GuiCreateGroupChat.ui \
     GuiAskPassword.ui \
     GuiLog.ui \
-    GuiSavedChat.ui
+    GuiSavedChat.ui \
+    GuiScreenShot.ui
 
 RESOURCES += beebeep.qrc
 win32: RC_FILE = beebeep.rc

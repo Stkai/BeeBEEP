@@ -170,6 +170,9 @@ public:
   inline void setPluginSettings( const QString&, const QStringList& );
   inline bool pluginHasSettings( const QString& ) const;
 
+  void addTemporaryFilePath( const QString& );
+  void clearTemporaryFile();
+
   void addStartOnSystemBoot();
   void removeStartOnSystemBoot();
   bool hasStartOnSystemBoot() const;
@@ -279,6 +282,8 @@ private:
   bool m_autoUserAway;
 
   QMap<QString, QStringList> m_pluginSettings;
+
+  QStringList m_tempFilePathList;
 
 };
 

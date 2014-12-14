@@ -26,7 +26,6 @@
 #include "User.h"
 
 
-
 QString Bee::userStatusIconFileName( int user_status )
 {
   switch( user_status )
@@ -135,6 +134,12 @@ QString Bee::uniqueFilePath( const QString& file_path )
     new_file_name = QString( "%1 (%2)%3%4" ).arg( file_base_name ).arg( counter ).arg( (file_suffix.isEmpty() ? "" : ".") ).arg( file_suffix );
     fi.setFile( dir_path, new_file_name );
     counter++;
+
+    if( counter > 98 )
+    {
+      qWarning() << "Unable to find a unique file name from path" << file_path << "(so overwrite the last one)";
+      break;
+    }
   }
 
   return fi.absoluteFilePath();
@@ -193,5 +198,11 @@ QString Bee::fileTypeToString( Bee::FileType ft )
   return qApp->translate( "File", FileTypeToString[ ft ] );
 }
 
+QString Bee::dateTimeStringSuffix( const QDateTime& dt )
+{
+  QString s = dt.toString( "yyyy mm dd-hhmmss" );
+  s.remove( QChar( ' ' ) );
+  return s;
+}
 
 

@@ -36,6 +36,7 @@
 #include "GuiPluginManager.h"
 #include "GuiSavedChat.h"
 #include "GuiSavedChatList.h"
+#include "GuiScreenShot.h"
 #include "GuiSearchUser.h"
 #include "GuiSessionManager.h"
 #include "GuiShareLocal.h"
@@ -121,6 +122,10 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_savedChatList, SIGNAL( savedChatSelected( const QString& ) ), this, SLOT( showSavedChatSelected( const QString& ) ) );
   connect( mp_savedChatList, SIGNAL( savedChatRemoved( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
+
+  connect( mp_screenShot, SIGNAL( hideRequest() ), this, SLOT( hide() ) );
+  connect( mp_screenShot, SIGNAL( showRequest() ), this, SLOT( show() ) );
+  connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
 
   initGuiItems();
   raiseChatView();
@@ -574,8 +579,6 @@ void GuiMain::createMenus()
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareNetwork->setStatusTip( tr( "Show the list of the network shared files" ) );
-  mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
-  mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
 
   /* Plugins Menu */
   mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
@@ -636,7 +639,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
-  mp_barMain->addAction( mp_actViewLog );
 
 #if defined( Q_OS_MAC )
   mp_barMain->addSeparator();
@@ -713,6 +715,9 @@ void GuiMain::createStackedWidgets()
 
   mp_savedChat = new GuiSavedChat( this );
   mp_stackedWidget->addWidget( mp_savedChat );
+
+  mp_screenShot = new GuiScreenShot( this );
+  mp_stackedWidget->addWidget( mp_screenShot );
 }
 
 QMenu* GuiMain::gameMenu( GameInterface* gi )
@@ -1129,50 +1134,69 @@ void GuiMain::changeStatusDescription()
 
 void GuiMain::sendFile()
 {
-  bool ok = false;
-  QStringList user_string_list = UserManager::instance().userList().toStringList( false, true );
-
-  if( user_string_list.isEmpty() )
-  {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "There is no user connected." ) );
-    return;
-  }
-
-  QString user_path = QInputDialog::getItem( this, Settings::instance().programName(),
-                                             tr( "Please select the user to whom you would like to send a file."),
-                                             user_string_list, 0, false, &ok );
-  if( !ok )
-    return;
-
-  User u = UserManager::instance().userList().find( user_path );
-  sendFile( u );
+  sendFile( User(), QString() );
 }
 
 void GuiMain::sendFile( VNumber user_id )
 {
   User u = UserManager::instance().userList().find( user_id );
-  sendFile( u );
+  sendFile( u, QString() );
 }
 
-void GuiMain::sendFile( const User& u )
+bool GuiMain::sendFile( const User& u, const QString& file_path )
 {
+  User user_selected;
+  QString file_path_selected;
+
   if( !u.isValid() )
   {
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
-    return;
+    QStringList user_string_list = UserManager::instance().userList().toStringList( false, true );
+    if( user_string_list.isEmpty() )
+    {
+      QMessageBox::information( this, Settings::instance().programName(), tr( "There is no user connected." ) );
+      return false;
+    }
+
+    bool ok = false;
+    QString user_path = QInputDialog::getItem( this, Settings::instance().programName(),
+                                        tr( "Please select the user to whom you would like to send a file."),
+                                        user_string_list, 0, false, &ok );
+    if( !ok )
+      return false;
+
+    user_selected = UserManager::instance().userList().find( user_path );
+
+    if( !user_selected.isValid() )
+    {
+      QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
+      return false;
+    }
   }
+  else
+    user_selected = u;
 
-  QString file_path = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), u.name() ),
+  if( file_path.isNull() || file_path.isEmpty() || !QFile::exists( file_path ) )
+  {
+    file_path_selected = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), u.name() ),
                                                     Settings::instance().lastDirectorySelected() );
-  if( file_path.isEmpty() || file_path.isNull() )
-    return;
+    if( file_path.isEmpty() || file_path.isNull() )
+      return false;
 
-  Settings::instance().setLastDirectorySelectedFromFile( file_path );
+    Settings::instance().setLastDirectorySelectedFromFile( file_path );
+  }
+  else
+    file_path_selected = file_path;
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( c.isValid() )
     showChat( c.id() );
-  mp_core->sendFile( u, file_path );
+
+  return mp_core->sendFile( user_selected, file_path_selected );
+}
+
+void GuiMain::sendFile( const QString& file_path )
+{
+  sendFile( User(), file_path );
 }
 
 bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
@@ -1357,6 +1381,12 @@ void GuiMain::updadePluginMenu()
     }
   }
 
+  /* Static Plugins */
+  mp_menuPlugins->addSeparator();
+  act = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
+  act->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
+  act = mp_menuPlugins->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
+  act->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
 }
 
 void GuiMain::showPluginHelp()
@@ -1481,12 +1511,18 @@ void GuiMain::raiseLogView()
   checkViewActions();
 }
 
+void GuiMain::raiseScreenShotView()
+{
+  setGameInPauseMode();
+  mp_stackedWidget->setCurrentWidget( mp_screenShot );
+  checkViewActions();
+}
+
 void GuiMain::checkViewActions()
 {
   mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_defaultChat );
   mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork );
-  mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
 }
 
 void GuiMain::setGameInPauseMode()

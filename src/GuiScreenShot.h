@@ -17,20 +17,48 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: GuiLog.h 249 2014-10-15 18:04:33Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUISCREENSHOT_H
+#define BEEBEEP_GUISCREENSHOT_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files/";
-const char* BEEBEEP_VERSION = "0.9.6";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_SETTINGS_VERSION = 2;
-const int BEEBEEP_BUILD = 278;
+#include "Config.h"
+#include "ui_GuiScreenShot.h"
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiScreenShot : public QWidget, private Ui::GuiScreenShotWidget
+{
+  Q_OBJECT
+
+public:
+  explicit GuiScreenShot( QWidget *parent = 0 );
+
+  inline const QPixmap& screenShot() const;
+
+signals:
+  void hideRequest();
+  void showRequest();
+  void screenShotToSend( const QString& );
+
+public slots:
+  void doScreenShot();
+  void captureScreen();
+  void doSave();
+  void doSend();
+
+protected:
+  void resizeEvent( QResizeEvent* );
+  void updateScreenShot();
+
+private:
+  QPixmap m_screenShot;
+
+};
+
+
+// Inline Functions
+inline const QPixmap& GuiScreenShot::screenShot() const { return m_screenShot; }
+
+#endif // BEEBEEP_GUISCREENSHOT_H

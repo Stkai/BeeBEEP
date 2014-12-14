@@ -96,7 +96,7 @@ int main( int argc, char *argv[] )
   PluginManager::instance().loadPlugins();
 
   /* Show Main Window */
-  GuiMain mw();
+  GuiMain mw;
   QObject::connect( &bee_app, SIGNAL( checkIdleRequest() ), &mw, SLOT( checkIdle() ) );
   QObject::connect( &bee_app, SIGNAL( exitingFromIdle() ), &mw, SLOT( exitFromIdle() ) );
 
@@ -133,6 +133,7 @@ int main( int argc, char *argv[] )
 
   /* CleanUp */
   bee_app.cleanUp();
+  Settings::instance().clearTemporaryFile();
   FileShare::close();
   ChatManager::close();
   UserManager::close();

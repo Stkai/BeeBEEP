@@ -1,5 +1,10 @@
 BEEBEEP (Secure Network Chat)
 
+BeeBEEP 0.9.6
+- Auto set Away status when idle option
+- Make screenshot plugin
+- Conway's Game of Life plugin (just for fun)
+
 BeeBEEP 0.9.5
 - Load minimized at startup option
 - A new window to see application log

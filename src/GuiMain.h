@@ -36,6 +36,7 @@ class GuiChatList;
 class GuiLog;
 class GuiSavedChat;
 class GuiSavedChatList;
+class GuiScreenShot;
 class GuiSessionManager;
 class GuiShareLocal;
 class GuiShareNetwork;
@@ -79,13 +80,14 @@ private slots:
   void statusSelected();
   void changeStatusDescription();
   void sendFile();
+  void sendFile( VNumber );
+  void sendFile( const QString& );
   void downloadFile( const User&, const FileInfo& );
   void downloadSharedFile( VNumber, VNumber );
   void selectDownloadDirectory();
   void changeVCard();
   void showUserMenu( VNumber );
   void changeUserColor( VNumber );
-  void sendFile( VNumber );
   void showPluginHelp();
   void showPluginManager();
   void showChat( VNumber );
@@ -100,6 +102,7 @@ private slots:
   void raiseNetworkShareView();
   void raisePluginView();
   void raiseLogView();
+  void raiseScreenShotView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
@@ -142,6 +145,7 @@ private:
   void checkAutoStartOnBoot( bool );
   void checkViewActions();
   QMenu* gameMenu( GameInterface* );
+  bool sendFile( const User&, const QString& );
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -154,6 +158,7 @@ private:
   GuiShareNetwork* mp_shareNetwork;
   GuiLog* mp_logView;
   GuiSavedChat* mp_savedChat;
+  GuiScreenShot* mp_screenShot;
   Core *mp_core;
 
   QMenu *mp_menuMain;
@@ -184,7 +189,6 @@ private:
   QAction* mp_actViewShareLocal;
   QAction* mp_actViewShareNetwork;
   QAction* mp_actViewDefaultChat;
-  QAction* mp_actViewLog;
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actGroupAdd;
   QAction* mp_actCreateGroup;

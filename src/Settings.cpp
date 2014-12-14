@@ -590,6 +590,32 @@ void Settings::setLastDirectorySelectedFromFile( const QString& file_path )
   setLastDirectorySelected( file_info.absoluteDir().absolutePath() );
 }
 
+void Settings::addTemporaryFilePath( const QString& file_path )
+{
+  if( !m_tempFilePathList.contains( file_path ) )
+  {
+    m_tempFilePathList.append( file_path );
+    qDebug() << "Temporary file added:" << file_path;
+  }
+}
+
+void Settings::clearTemporaryFile()
+{
+  if( m_tempFilePathList.isEmpty() )
+    return;
+
+  foreach( QString file_path, m_tempFilePathList )
+  {
+    if( QFile::exists( file_path ) )
+    {
+      if( !QFile::remove( file_path ) )
+        qWarning() << "Unable to remove temporary file:" << file_path;
+    }
+  }
+
+  m_tempFilePathList.clear();
+}
+
 void Settings::addStartOnSystemBoot()
 {
 #ifdef Q_OS_WIN

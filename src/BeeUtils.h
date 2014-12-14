@@ -43,6 +43,7 @@ namespace Bee
   QString fileTypeIconFileName( FileType );
   FileType fileTypeFromSuffix( const QString& );
   QString fileTypeToString( FileType );
+  QString dateTimeStringSuffix( const QDateTime& );
 
 }
 
