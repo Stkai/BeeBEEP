@@ -59,6 +59,7 @@ public slots:
   void startStopCore();
   void hideToTrayIcon();
   void checkIdle();
+  void exitFromIdle();
 
 private slots:
   void showAbout();
@@ -196,6 +197,8 @@ private:
   GuiSessionManager* mp_sessionManager;
 
   QMap<QString, QMenu*> m_mapGameMenu;
+
+  int m_lastUserStatus;
 
 };
 

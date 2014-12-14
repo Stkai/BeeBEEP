@@ -150,8 +150,7 @@ void Log::add( QtMsgType mt, const QString& log_txt, const QString& log_note )
     m_logStream << sTmp << endl;
 
 #ifdef BEEBEEP_DEBUG
-  fprintf( stderr, log_txt.toLatin1().constData() );
-  fprintf( stderr, "%c", '\n' );
+  fprintf( stderr, "%s\n", log_txt.toLatin1().constData() );
   fflush( stderr );
 #endif
 

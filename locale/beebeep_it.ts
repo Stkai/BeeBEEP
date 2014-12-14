@@ -1396,6 +1396,14 @@ il file %2 (%3)?</translation>
         <source>About %1</source>
         <translation>Informazioni su %1</translation>
     </message>
+    <message>
+        <source>Set away status when idle</source>
+        <translation>Cambia lo stato in assente automaticamente</translation>
+    </message>
+    <message>
+        <source>If enabled %1 set your status to away after an idle of %2 minutes</source>
+        <translation>Se abilitata %1 metterà automaticamente il tuo stato ad assente quando sarai assente da almeno %2 minuti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2153,7 +2161,12 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>&lt;b&gt;The Game of Life&lt;/b&gt;, also known simply as Life, is a cellular automaton devised by the British mathematician &lt;b&gt;John Horton Conway&lt;/b&gt; in 1970. The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:&lt;ul&gt;&lt;li&gt;Any live cell with less than two live neighbours dies, as if caused by under-population.&lt;/li&gt;&lt;li&gt;Any live cell with two or three live neighbours lives on to the next generation.&lt;/li&gt;&lt;li&gt;Any live cell with more than three live neighbours dies, as if by overcrowding.&lt;/li&gt;&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.&lt;/li&gt;&lt;/ul&gt;The rules continue to be applied repeatedly to create further generations.&lt;br /&gt;For more info please visit &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il &lt;b&gt;Gioco della vita&lt;/b&gt; (Game of Life in inglese) è un automa cellulare sviluppato dal matematico inglese &lt;b&gt;John Conway&lt;/b&gt; sul finire degli anni sessanta. Si tratta in realtà di un gioco senza giocatori, intendendo che la sua evoluzione è determinata dal suo stato iniziale, senza necessità di alcun input da parte di giocatori umani. Si svolge su una griglia di caselle quadrate (celle) che si estende all&apos;infinito in tutte le direzioni; questa griglia è detta mondo. Ogni cella ha 8 vicini, che sono le celle ad essa adiacenti, includendo quelle in senso diagonale. Ogni cella può trovarsi in due stati: viva o morta (o accesa e spenta, on e off). Lo stato della griglia evolve in intervalli di tempo discreti. Gli stati di tutte le celle in un dato istante sono usati per calcolare lo stato delle celle all&apos;istante successivo. Tutte le celle del mondo vengono quindi aggiornate simultaneamente nel passaggio da un istante a quello successivo: passa così una generazione.&lt;br /&gt;
+Le transizioni di stato dipendono unicamente dal numero di vicini vivi:&lt;ul&gt;
+&lt;li&gt;Una cella morta con esattamente 3 vicini vivi nasce, diventando viva.&lt;/li&gt;
+&lt;li&gt;Una cella viva con 2 o 3 vicini vivi sopravvive; altrimenti muore (per isolamento o sovraffollamento)&lt;/li&gt;
+&lt;/ul&gt;
+Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wikipedia.org/wiki/Gioco_della_vita&gt;Il Gioco della Vita&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -2419,7 +2432,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>away</source>
-        <translation>lontano dal pc</translation>
+        <translation>assente</translation>
     </message>
     <message>
         <source>status error</source>

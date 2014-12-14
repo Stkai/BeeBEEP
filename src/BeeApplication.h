@@ -41,6 +41,7 @@ public:
 
 signals:
   void checkIdleRequest();
+  void exitingFromIdle();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
@@ -52,6 +53,7 @@ private:
   int m_idleTimeout;
   QDateTime m_lastEventDateTime;
   QTimer m_timer;
+  bool m_isInIdle;
 
 };
 

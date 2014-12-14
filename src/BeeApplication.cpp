@@ -31,6 +31,11 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_idleTimeout = 0;
   m_timer.setObjectName( "BeeMainTimer" );
   m_timer.setInterval( 10000 );
+  m_isInIdle = false;
+#ifdef Q_OS_LINUX
+  if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
+    setAttribute( Qt::AA_DontShowIconsInMenus, false );
+#endif
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkIdle() ) );
 }
 
@@ -45,7 +50,14 @@ void BeeApplication::setIdleTimeout( int new_value )
 bool BeeApplication::notify( QObject* receiver, QEvent* event )
 {
   if( event->type() == QEvent::MouseMove || event->type() == QEvent::KeyPress )
+  {
     m_lastEventDateTime = QDateTime::currentDateTime();
+    if( m_isInIdle )
+    {
+      emit( exitingFromIdle() );
+      m_isInIdle = false;
+    }
+  }
 
   return QApplication::notify( receiver, event );
 }
@@ -53,7 +65,13 @@ bool BeeApplication::notify( QObject* receiver, QEvent* event )
 void BeeApplication::checkIdle()
 {
   if( m_lastEventDateTime.secsTo( QDateTime::currentDateTime() ) > m_idleTimeout )
-    emit( checkIdleRequest() );
+  {
+    if( !m_isInIdle )
+    {
+      m_isInIdle = true;
+      emit( checkIdleRequest() );
+    }
+  }
 }
 
 void BeeApplication::cleanUp()

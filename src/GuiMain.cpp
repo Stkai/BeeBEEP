@@ -74,6 +74,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   mp_sessionManager = new GuiSessionManager( this );
 
+  m_lastUserStatus = User::Online;
+
   createActions();
   createDockWindows();
   createMenus();
@@ -1655,9 +1657,28 @@ void GuiMain::checkNewVersion()
 
 void GuiMain::checkIdle()
 {
+  if( !mp_core->isConnected() )
+    return;
+
   if( !Settings::instance().autoUserAway() )
     return;
 
+  m_lastUserStatus = Settings::instance().localUser().status();
   mp_core->setLocalUserStatus( User::Away );
+  updateStatusIcon();
+}
+
+void GuiMain::exitFromIdle()
+{
+  if( !mp_core->isConnected() )
+    return;
+
+  if( !Settings::instance().autoUserAway() )
+    return;
+
+  if( Settings::instance().localUser().status() != User::Away )
+    return;
+
+  mp_core->setLocalUserStatus( m_lastUserStatus );
   updateStatusIcon();
 }

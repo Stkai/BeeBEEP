@@ -67,5 +67,4 @@ typedef quint64 FileSizeType;
 // FILE_SHARING
 #define MAX_NUM_FILE_SHARED 32700
 
-
 #endif // BEEBEEP_CONFIG_H

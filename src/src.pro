@@ -3,6 +3,15 @@ include(../beebeep.pri)
 QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
+CONFIG(debug,debug|release) {
+  message( Build BeeBEEP in Debug Mode )
+  DEFINES += BEEBEEP_DEBUG
+} else {
+  message( Build BeeBEEP in Release Mode )
+}
+
+message(Qt version: $$[QT_VERSION])
+
 TARGET = beebeep
 TEMPLATE = app
 SOURCES += Listener.cpp \
@@ -66,7 +75,7 @@ SOURCES += Listener.cpp \
     GuiSavedChatItem.cpp \
     GuiSavedChat.cpp \
     BeeApplication.cpp
-HEADERS += sym_iap_util.h \
+HEADERS += \
     Listener.h \
     Connection.h \
     Config.h \
