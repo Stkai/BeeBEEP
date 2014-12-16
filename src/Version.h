@@ -30,7 +30,7 @@ const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/
 const char* BEEBEEP_VERSION = "0.9.6";
 const int BEEBEEP_PROTO_VERSION = 53;
 const int BEEBEEP_SETTINGS_VERSION = 2;
-const int BEEBEEP_BUILD = 278;
+const int BEEBEEP_BUILD = 279;
 
 #endif // BEEBEEP_VERSION_H
 

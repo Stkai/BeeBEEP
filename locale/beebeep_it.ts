@@ -1404,6 +1404,14 @@ il file %2 (%3)?</translation>
         <source>If enabled %1 set your status to away after an idle of %2 minutes</source>
         <translation>Se abilitata %1 metterà automaticamente il tuo stato ad assente quando sarai assente da almeno %2 minuti</translation>
     </message>
+    <message>
+        <source>Make a screenshot</source>
+        <translation>Fai una foto allo schermo</translation>
+    </message>
+    <message>
+        <source>Show the utility to capture a screenshot</source>
+        <translation>Mostra l&apos;interfaccia per fare una foto allo schermo</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1688,6 +1696,80 @@ il file %2 (%3)?</translation>
     <message>
         <source>Form</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>GuiScreenShot</name>
+    <message>
+        <source>No screenshot available</source>
+        <translation>Nessuna immagine disponibile</translation>
+    </message>
+    <message>
+        <source>/beesshot-%1.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation>Salva con nome</translation>
+    </message>
+    <message>
+        <source>%1 Files (*.%2)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>/beesshottmp-%1.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Unable to save temporary file: %1</source>
+        <translation>Impossibile salvare il file temporaneo: %1</translation>
+    </message>
+</context>
+<context>
+    <name>GuiScreenShotWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>No Screenshot Available</source>
+        <translation>Nessuna immagine disponibile</translation>
+    </message>
+    <message>
+        <source>Delay screenshot</source>
+        <translation>Ritardo dello scatto</translation>
+    </message>
+    <message>
+        <source>Delay</source>
+        <translation>Ritardo</translation>
+    </message>
+    <message>
+        <source> s</source>
+        <translation>s</translation>
+    </message>
+    <message>
+        <source>Hide this window before capture screenshot</source>
+        <translation>Nascondi questa finestra prima di fare la foto dello schermo</translation>
+    </message>
+    <message>
+        <source>Hide this window</source>
+        <translation>Nascondi questa finestra</translation>
+    </message>
+    <message>
+        <source>Capture screenshot</source>
+        <translation>Fai una foto allo schermo</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Invia</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salva</translation>
+    </message>
+    <message>
+        <source>Delete screenshot</source>
+        <translation>Cancella l&apos;immagine</translation>
     </message>
 </context>
 <context>

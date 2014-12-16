@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/plugins">
         <file>life.png</file>
+        <file>life-clear.png</file>
+        <file>life-restart.png</file>
     </qresource>
 </RCC>

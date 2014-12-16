@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiLog.cpp 251 2014-10-16 15:26:36Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -35,6 +35,7 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
   connect( mp_pbShot, SIGNAL( clicked() ), this, SLOT( doScreenShot() ) );
   connect( mp_pbSave, SIGNAL( clicked() ), this, SLOT( doSave() ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( doSend() ) );
+  connect( mp_pbDelete, SIGNAL( clicked() ), this, SLOT( doDelete() ) );
 
   updateScreenShot();
 }
@@ -57,12 +58,14 @@ void GuiScreenShot::updateScreenShot()
     mp_labelScreenShot->setText( tr( "No screenshot available" ) );
     mp_pbSave->setEnabled( false );
     mp_pbSend->setEnabled( false );
+    mp_pbDelete->setEnabled( false );
   }
   else
   {
     mp_labelScreenShot->setPixmap( m_screenShot.scaled( mp_labelScreenShot->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
     mp_pbSave->setEnabled( true );
     mp_pbSend->setEnabled( true );
+    mp_pbDelete->setEnabled( true );
   }
 }
 
@@ -75,7 +78,7 @@ void GuiScreenShot::doScreenShot()
 
   int delay_time = mp_sbDelay->value();
   if( delay_time < 1 )
-    delay_time = 100;
+    delay_time = 300;
   else
     delay_time *= 1000;
 
@@ -130,5 +133,11 @@ void GuiScreenShot::doSend()
 
   Settings::instance().addTemporaryFilePath( file_path );
   emit( screenShotToSend( file_path ) );
+}
+
+void GuiScreenShot::doDelete()
+{
+  m_screenShot = QPixmap();
+  updateScreenShot();
 }
 

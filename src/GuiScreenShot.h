@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiLog.h 249 2014-10-15 18:04:33Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -42,11 +42,12 @@ signals:
   void showRequest();
   void screenShotToSend( const QString& );
 
-public slots:
+protected slots:
   void doScreenShot();
   void captureScreen();
   void doSave();
   void doSend();
+  void doDelete();
 
 protected:
   void resizeEvent( QResizeEvent* );

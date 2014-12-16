@@ -31,12 +31,14 @@
 LifeBoard::LifeBoard( QWidget *parent )
  : QFrame( parent )
 {
-  setFrameStyle( QFrame::StyledPanel );
+  setFrameStyle( QFrame::NoFrame );
   setFocusPolicy( Qt::StrongFocus );
   setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 
   m_isPaused = true;
   Random::init();
+
+  m_stepTimeout = 150;
 
   bigBang();
 }
@@ -45,17 +47,29 @@ void LifeBoard::paintEvent( QPaintEvent *event )
 {
   QFrame::paintEvent( event );
 
-  QPainter painter(this);
+  QPainter painter( this );
   QRect rect = contentsRect();
-
   int board_top = rect.bottom() - BoardHeight * squareHeight();
 
-  for( int i = 0; i < BoardHeight; i++ )
+  if( event->rect().isValid() && event->rect().width() <= squareWidth() )
   {
-    for( int j = 0; j < BoardWidth; j++ )
+    int x = 0;
+    int y = 0;
+    if( findCell( &x, &y, QPoint( event->rect().x(), event->rect().y() ) ) )
     {
-      drawSquare( painter, rect.left() + j * squareWidth(), board_top + i * squareHeight(),
-        m_board[ i ][ j ], m_visited[ i ][ j ] );
+      drawSquare( painter, rect.left() + x * squareWidth(), board_top + y * squareHeight(), m_board[ x ][ y ], m_visited[ x ][ y ] );
+      return;
+    }
+  }
+
+  QRect square_rect;
+  for( int i = 0; i < BoardWidth; i++ )
+  {
+    for( int j = 0; j < BoardHeight; j++ )
+    {
+      square_rect = drawSquare( painter, rect.left() + i * squareWidth(), board_top + j * squareHeight(),
+                                m_board[ i ][ j ], m_visited[ i ][ j ] );
+      m_rectSpace[ i ][ j ] = square_rect;
     }
   }
 }
@@ -63,9 +77,9 @@ void LifeBoard::paintEvent( QPaintEvent *event )
 int LifeBoard::visitedCount() const
 {
   int visited_count = 0;
-  for( int i = 0; i < BoardHeight; i++ )
+  for( int i = 0; i < BoardWidth; i++ )
   {
-    for( int j = 0; j < BoardWidth; j++ )
+    for( int j = 0; j < BoardHeight; j++ )
     {
       if( m_visited[ i ][ j ] )
         visited_count++;
@@ -77,9 +91,9 @@ int LifeBoard::visitedCount() const
 int LifeBoard::diedCount() const
 {
   int died_count = 0;
-  for( int i = 0; i < BoardHeight; i++ )
+  for( int i = 0; i < BoardWidth; i++ )
   {
-    for( int j = 0; j < BoardWidth; j++ )
+    for( int j = 0; j < BoardHeight; j++ )
     {
       if( m_visited[ i ][ j ] && !m_board[ i ][ j ])
         died_count++;
@@ -91,9 +105,9 @@ int LifeBoard::diedCount() const
 int LifeBoard::aliveCount() const
 {
   int alive_count = 0;
-  for( int i = 0; i < BoardHeight; i++ )
+  for( int i = 0; i < BoardWidth; i++ )
   {
-    for( int j = 0; j < BoardWidth; j++ )
+    for( int j = 0; j < BoardHeight; j++ )
     {
       if( m_board[ i ][ j ] )
         alive_count++;
@@ -107,12 +121,13 @@ void LifeBoard::clearBoard()
   m_steps = 0;
   m_evolutionCycle = 0;
 
-  for( int i = 0; i < BoardHeight; i++ )
+  for( int i = 0; i < BoardWidth; i++ )
   {
-    for( int j = 0; j < BoardWidth; j++ )
+    for( int j = 0; j < BoardHeight; j++ )
     {
       m_board[ i ][ j ] = false;
       m_visited[ i ][ j ] = false;
+      m_rectSpace[ i ][ j ] = QRect();
     }
   }
 }
@@ -122,12 +137,13 @@ void LifeBoard::bigBang()
   m_steps = 0;
   m_evolutionCycle = 0;
 
-  for( int i = 0; i < BoardHeight; i++ )
+  for( int i = 0; i < BoardWidth; i++ )
   {
-    for( int j = 0; j < BoardWidth; j++ )
+    for( int j = 0; j < BoardHeight; j++ )
     {
       m_board[ i ][ j ] = Random::d100() < 15;
       m_visited[ i ][ j ] = m_board[ i ][ j ];
+      m_rectSpace[ i ][ j ] = QRect();
     }
   }
 }
@@ -195,7 +211,7 @@ void LifeBoard::evolve()
   m_steps++;
 }
 
-void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living, bool is_visited )
+QRect LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living, bool is_visited )
 {
   QColor color = is_living ? QColor( Qt::yellow ) : ( is_visited ? QColor( Qt::darkGray ) : QColor( Qt::black ) );
   painter.fillRect( x + 1, y + 1, squareWidth() - 2, squareHeight() - 2, color );
@@ -207,6 +223,27 @@ void LifeBoard::drawSquare( QPainter& painter, int x, int y, bool is_living, boo
   painter.setPen( color.dark() );
   painter.drawLine( x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1 );
   painter.drawLine( x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1 );
+
+  return QRect( x , y , squareWidth(), squareHeight() );
+}
+
+bool LifeBoard::findCell( int* x, int* y, const QPoint& pt )
+{
+  QRect square_rect;
+  for( int i = 0; i < BoardWidth; i++ )
+  {
+    for( int j = 0; j < BoardHeight; j++ )
+    {
+      square_rect = m_rectSpace[ i ][ j ];
+      if( !square_rect.isNull() && square_rect.contains( pt ) )
+      {
+        *x = i;
+        *y = j;
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 void LifeBoard::keyPressEvent( QKeyEvent* event )
@@ -215,6 +252,38 @@ void LifeBoard::keyPressEvent( QKeyEvent* event )
     startOrPause();
   else
     QFrame::keyPressEvent( event );
+}
+
+void LifeBoard::mouseReleaseEvent( QMouseEvent* event )
+{
+  if( event->button() == Qt::LeftButton || event->button() == Qt::RightButton )
+  {
+    QPoint pt = event->pos();
+    int x = 0;
+    int y = 0;
+    if( findCell( &x, &y, pt ) )
+    {
+      if( event->button() == Qt::LeftButton )
+      {
+        m_board[ x ][ y ] = !(m_board[ x ][ y ] );
+        if( m_board[ x ][ y ] )
+          m_visited[ x ][ y ] = true;
+      }
+      else
+      {
+        m_board[ x ][ y ] = false;
+        m_visited[ x ][ y ] = false;
+      }
+
+      event->accept();
+
+      update( m_rectSpace[ x ][ y ] );
+
+      return;
+    }
+  }
+
+  QWidget::mouseReleaseEvent( event );
 }
 
 void LifeBoard::pause()
@@ -229,6 +298,13 @@ void LifeBoard::restart()
 {
   pause();
   bigBang();
+  emit( evolved() );
+}
+
+void LifeBoard::clear()
+{
+  pause();
+  clearBoard();
   emit( evolved() );
 }
 
@@ -256,7 +332,7 @@ void LifeBoard::timerEvent( QTimerEvent* event )
   {
     evolve();
     update();
-    if( m_evolutionCycle > 36 )
+    if( m_evolutionCycle > 5 || aliveCount() == 0 )
     {
       m_isPaused = true;
       m_timer.stop();

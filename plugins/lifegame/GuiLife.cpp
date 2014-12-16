@@ -31,10 +31,13 @@ GuiLife::GuiLife( QWidget *parent )
   setupUi( this );
 
   connect( mp_pbRestart, SIGNAL( clicked() ), this, SLOT( restart() ) );
+  connect( mp_pbClear, SIGNAL( clicked() ), this, SLOT( clear() ) );
+  connect( mp_sliderSpeed, SIGNAL( valueChanged( int ) ), this, SLOT( setNewSpeed( int ) ) );
   connect( mp_life, SIGNAL( paused() ), this, SLOT( gamePaused() ) );
   connect( mp_life, SIGNAL( running() ), this, SLOT( gameRunning() ) );
   connect( mp_life, SIGNAL( evolved() ), this, SLOT( updateCounter() ) );
   connect( mp_life, SIGNAL( completed() ), this, SLOT( gameCompleted() ) );
+
 
   updateCounter();
 }
@@ -43,17 +46,24 @@ void GuiLife::gamePaused()
 {
   mp_labelPause->setText( tr( "Paused (press space bar to continue)" ) );
   mp_labelPause->show();
+
+  mp_sliderSpeed->setEnabled( true );
+  mp_labelFast->setEnabled( true );
+  mp_labelSlow->setEnabled( true );
 }
 
 void GuiLife::gameRunning()
 {
   mp_labelPause->setText( "" );
   mp_labelPause->hide();
+  mp_sliderSpeed->setEnabled( false );
+  mp_labelFast->setEnabled( false );
+  mp_labelSlow->setEnabled( false );
 }
 
 void GuiLife::updateCounter()
 {
-  mp_labelCount->setText( tr( "Bees Alive: %1 - Bees Died: %2 - Spaces: %3 - Hive Generation: %4" )
+  mp_labelCount->setText( tr( "Alive: %1 - Died: %2 - Spaces: %3 - Step: %4" )
     .arg( mp_life->aliveCount(), 4, 10, QLatin1Char( ' ' ) )
     .arg( mp_life->diedCount(), 4, 10, QLatin1Char( ' ' ) )
     .arg( mp_life->visitedCount(), 4, 10, QLatin1Char( ' ' ) )
@@ -63,9 +73,18 @@ void GuiLife::updateCounter()
 void GuiLife::restart()
 {
   if( QMessageBox::question( this, tr( "BeeLife" ),
-    tr( "Do you really want to restart?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+    tr( "Do you really want to randomize and restart?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
     mp_life->restart();
+  }
+}
+
+void GuiLife::clear()
+{
+  if( QMessageBox::question( this, tr( "BeeLife" ),
+    tr( "Do you really want to clear all?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+  {
+    mp_life->clear();
   }
 }
 
@@ -73,4 +92,9 @@ void GuiLife::gameCompleted()
 {
   mp_labelPause->setText( tr( "??? Evolution Completed ??? ... (or press space bar to continue)" ) );
   mp_labelPause->show();
+}
+
+void GuiLife::setNewSpeed( int new_value )
+{
+  mp_life->setStepTimeout( new_value );
 }

@@ -31,7 +31,7 @@
 class LifeBoard;
 
 
-class GuiLife : public QWidget, private Ui::GuiLife
+class GuiLife : public QWidget, private Ui::GuiLifeWidget
 {
   Q_OBJECT
 
@@ -45,7 +45,9 @@ protected slots:
   void gameRunning();
   void updateCounter();
   void restart();
+  void clear();
   void gameCompleted();
+  void setNewSpeed( int );
 
 
 };

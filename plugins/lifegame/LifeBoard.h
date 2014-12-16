@@ -35,7 +35,7 @@ class LifeBoard : public QFrame
   Q_OBJECT
 
 public:
-  enum { BoardWidth = 120, BoardHeight = 60 };
+  enum { BoardWidth = 100, BoardHeight = 50 };
 
   LifeBoard( QWidget *parent = 0 );
 
@@ -45,10 +45,15 @@ public:
   int diedCount() const;
   int visitedCount() const;
   void pause();
+  void clear();
   void restart();
+
+  inline void setStepTimeout( int );
 
   QString status() const;
   void setStatus( int, const QString& );
+
+
 
 signals:
   void paused();
@@ -60,6 +65,7 @@ protected:
   void paintEvent( QPaintEvent* );
   void timerEvent( QTimerEvent* );
   void keyPressEvent( QKeyEvent* );
+  void mouseReleaseEvent( QMouseEvent* );
 
   void startOrPause();
   void clearBoard();
@@ -73,7 +79,9 @@ private:
   inline QSize minimumSizeHint() const;
   inline int stepTimeout() const;
 
-  void drawSquare( QPainter&, int, int, bool, bool );
+  QRect drawSquare( QPainter&, int, int, bool, bool );
+
+  bool findCell( int* x, int* y, const QPoint& );
 
   QBasicTimer m_timer;
 
@@ -83,6 +91,11 @@ private:
   bool m_visited[ BoardWidth ][ BoardHeight ];
   int m_steps;
   int m_evolutionCycle;
+
+  int m_stepTimeout;
+
+  QRect m_rectSpace[ BoardWidth ][ BoardHeight ];
+
 };
 
 
@@ -91,7 +104,8 @@ inline QSize LifeBoard::sizeHint() const { return QSize( BoardWidth * 12 + frame
 inline QSize LifeBoard::minimumSizeHint() const { return QSize( BoardWidth * 4 + frameWidth() * 2, BoardHeight * 4 + frameWidth() * 2 ); }
 inline int LifeBoard::squareWidth() const { return frameGeometry().width() / BoardWidth; }
 inline int LifeBoard::squareHeight() const { return frameGeometry().height() / BoardHeight; }
-inline int LifeBoard::stepTimeout() const { return 150; }
+inline int LifeBoard::stepTimeout() const { return m_stepTimeout; }
+inline void LifeBoard::setStepTimeout( int new_value ) { m_stepTimeout = new_value; }
 inline bool LifeBoard::isPaused() const { return m_isPaused; }
 inline int LifeBoard::steps() const { return m_steps; }
 

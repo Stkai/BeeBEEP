@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: GuiChatList.cpp 268 2014-11-20 18:42:24Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
