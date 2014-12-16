@@ -534,24 +534,16 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>GuiLife</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>BeeLife</source>
         <translation></translation>
     </message>
     <message>
-        <source>#</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Restart</source>
-        <translation>Riavvia</translation>
+        <translation type="obsolete">Riavvia</translation>
     </message>
     <message>
         <source>Press space bar to start</source>
-        <translation>Premi spazio per iniziare</translation>
+        <translation type="obsolete">Premi spazio per iniziare</translation>
     </message>
     <message>
         <source>Paused (press space bar to continue)</source>
@@ -559,7 +551,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Do you really want to restart?</source>
-        <translation>Vuoi riavviare il gioco?</translation>
+        <translation type="obsolete">Vuoi riavviare il gioco?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -571,11 +563,58 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bees Alive: %1 - Bees Died: %2 - Spaces: %3 - Hive Generation: %4</source>
-        <translation>Api Vive: %1 - Api Morte: %2 - Spazi: %3 - Generazione: %4</translation>
+        <translation type="obsolete">Api Vive: %1 - Api Morte: %2 - Spazi: %3 - Generazione: %4</translation>
     </message>
     <message>
         <source>??? Evolution Completed ??? ... (or press space bar to continue)</source>
         <translation>??? Evoluzione Completata ??? ... (o premi spazio per continuare)</translation>
+    </message>
+    <message>
+        <source>Alive: %1 - Died: %2 - Spaces: %3 - Step: %4</source>
+        <translation>Vive: %1 - Morte: %2 - Spazi: %3 - Passi: %4</translation>
+    </message>
+    <message>
+        <source>Do you really want to randomize and restart?</source>
+        <translation>Vuoi creare una situazione iniziale a caso e ripartire?</translation>
+    </message>
+    <message>
+        <source>Do you really want to clear all?</source>
+        <translation>Vuoi cancellare tutto?</translation>
+    </message>
+</context>
+<context>
+    <name>GuiLifeWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>#</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Press space bar to start</source>
+        <translation>Premi spazio per iniziare</translation>
+    </message>
+    <message>
+        <source>BeeLife</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation>Riavvia</translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>Cancella</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>Veloce</translation>
+    </message>
+    <message>
+        <source>Slow</source>
+        <translation>Lento</translation>
     </message>
 </context>
 <context>

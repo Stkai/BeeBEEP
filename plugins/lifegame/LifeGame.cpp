@@ -35,7 +35,7 @@ QString LifeGame::name() const
 
 QString LifeGame::version() const
 {
-  return "0.2.2";
+  return "0.6.4";
 }
 
 QString LifeGame::author() const
@@ -111,7 +111,7 @@ bool LifeGame::isPaused() const
 
 void LifeGame::setSettings( QStringList settings_list )
 {
-  if( settings_list.size() < 3 )
+  if( settings_list.size() < 4 )
     return;
 
   bool ok = false;
@@ -120,13 +120,21 @@ void LifeGame::setSettings( QStringList settings_list )
     return;
   if( settings_version > 1 )
     return;
+
   settings_list.removeFirst();
   int steps_tmp = settings_list.first().toInt( &ok );
   if( !ok )
     return;
+
   settings_list.removeFirst();
   QString status = settings_list.first();
   mp_life->board()->setStatus( steps_tmp, status );
+
+  settings_list.removeFirst();
+  int step_timeout = settings_list.first().toInt( &ok );
+  if( !ok )
+    return;
+  mp_life->setStepTimeout( step_timeout );
 }
 
 QStringList LifeGame::settings() const
@@ -134,7 +142,8 @@ QStringList LifeGame::settings() const
   QStringList settings_list;
   settings_list << QString::number( 1 ); // version of settings
   settings_list << QString::number( mp_life->board()->steps() );
-  settings_list.append( mp_life->board()->status() );
+  settings_list << ( mp_life->board()->status() );
+  settings_list << QString::number( mp_life->board()->stepTimeout() );
   return settings_list;
 }
 

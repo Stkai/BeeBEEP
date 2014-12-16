@@ -35,7 +35,7 @@ class LifeBoard : public QFrame
   Q_OBJECT
 
 public:
-  enum { BoardWidth = 100, BoardHeight = 50 };
+  enum { BoardWidth = 40, BoardHeight = 40 };
 
   LifeBoard( QWidget *parent = 0 );
 
@@ -49,11 +49,10 @@ public:
   void restart();
 
   inline void setStepTimeout( int );
+  inline int stepTimeout() const;
 
   QString status() const;
   void setStatus( int, const QString& );
-
-
 
 signals:
   void paused();
@@ -77,7 +76,6 @@ private:
   inline int squareHeight() const;
   inline QSize sizeHint() const;
   inline QSize minimumSizeHint() const;
-  inline int stepTimeout() const;
 
   QRect drawSquare( QPainter&, int, int, bool, bool );
 

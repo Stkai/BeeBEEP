@@ -38,7 +38,7 @@ LifeBoard::LifeBoard( QWidget *parent )
   m_isPaused = true;
   Random::init();
 
-  m_stepTimeout = 150;
+  m_stepTimeout = 200;
 
   bigBang();
 }
@@ -49,7 +49,9 @@ void LifeBoard::paintEvent( QPaintEvent *event )
 
   QPainter painter( this );
   QRect rect = contentsRect();
-  int board_top = rect.bottom() - BoardHeight * squareHeight();
+
+  int board_top_x = rect.left() + 1; // border considered
+  int board_top_y = rect.top() + 1;
 
   if( event->rect().isValid() && event->rect().width() <= squareWidth() )
   {
@@ -57,7 +59,7 @@ void LifeBoard::paintEvent( QPaintEvent *event )
     int y = 0;
     if( findCell( &x, &y, QPoint( event->rect().x(), event->rect().y() ) ) )
     {
-      drawSquare( painter, rect.left() + x * squareWidth(), board_top + y * squareHeight(), m_board[ x ][ y ], m_visited[ x ][ y ] );
+      drawSquare( painter, board_top_x + x * squareWidth(), board_top_y + y * squareHeight(), m_board[ x ][ y ], m_visited[ x ][ y ] );
       return;
     }
   }
@@ -67,7 +69,7 @@ void LifeBoard::paintEvent( QPaintEvent *event )
   {
     for( int j = 0; j < BoardHeight; j++ )
     {
-      square_rect = drawSquare( painter, rect.left() + i * squareWidth(), board_top + j * squareHeight(),
+      square_rect = drawSquare( painter, board_top_x + i * squareWidth(), board_top_y + j * squareHeight(),
                                 m_board[ i ][ j ], m_visited[ i ][ j ] );
       m_rectSpace[ i ][ j ] = square_rect;
     }
@@ -276,9 +278,8 @@ void LifeBoard::mouseReleaseEvent( QMouseEvent* event )
       }
 
       event->accept();
-
       update( m_rectSpace[ x ][ y ] );
-
+      emit( evolved() );
       return;
     }
   }
@@ -373,6 +374,7 @@ void LifeBoard::setStatus( int status_steps, const QString& status_string )
     return;
 
   m_steps = status_steps;
+
   int status_string_index = 0;
   QChar c;
 

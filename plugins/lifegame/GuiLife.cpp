@@ -38,27 +38,28 @@ GuiLife::GuiLife( QWidget *parent )
   connect( mp_life, SIGNAL( evolved() ), this, SLOT( updateCounter() ) );
   connect( mp_life, SIGNAL( completed() ), this, SLOT( gameCompleted() ) );
 
-
   updateCounter();
+}
+
+void GuiLife::enableControls( bool enable )
+{
+  mp_sliderSpeed->setEnabled( enable );
+  mp_labelFast->setEnabled( enable );
+  mp_labelSlow->setEnabled( enable );
 }
 
 void GuiLife::gamePaused()
 {
   mp_labelPause->setText( tr( "Paused (press space bar to continue)" ) );
   mp_labelPause->show();
-
-  mp_sliderSpeed->setEnabled( true );
-  mp_labelFast->setEnabled( true );
-  mp_labelSlow->setEnabled( true );
+  enableControls( true );
 }
 
 void GuiLife::gameRunning()
 {
   mp_labelPause->setText( "" );
   mp_labelPause->hide();
-  mp_sliderSpeed->setEnabled( false );
-  mp_labelFast->setEnabled( false );
-  mp_labelSlow->setEnabled( false );
+  enableControls( false );
 }
 
 void GuiLife::updateCounter()
@@ -92,9 +93,16 @@ void GuiLife::gameCompleted()
 {
   mp_labelPause->setText( tr( "??? Evolution Completed ??? ... (or press space bar to continue)" ) );
   mp_labelPause->show();
+  enableControls( true );
 }
 
 void GuiLife::setNewSpeed( int new_value )
 {
+  mp_life->setStepTimeout( new_value );
+}
+
+void GuiLife::setStepTimeout( int new_value )
+{
+  mp_sliderSpeed->setValue( new_value );
   mp_life->setStepTimeout( new_value );
 }

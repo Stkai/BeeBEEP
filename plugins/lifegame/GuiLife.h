@@ -40,6 +40,12 @@ public:
 
   inline LifeBoard* board();
 
+  void setStepTimeout( int );
+
+
+protected:
+  void enableControls( bool );
+
 protected slots:
   void gamePaused();
   void gameRunning();
