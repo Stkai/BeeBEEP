@@ -1451,6 +1451,14 @@ il file %2 (%3)?</translation>
         <source>Show the utility to capture a screenshot</source>
         <translation>Mostra l&apos;interfaccia per fare una foto allo schermo</translation>
     </message>
+    <message>
+        <source>Open %1 official website...</source>
+        <translation>Apri il sito ufficiale di %1...</translation>
+    </message>
+    <message>
+        <source>Explore %1 official website</source>
+        <translation>Esplosa il sito ufficiale di %1</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

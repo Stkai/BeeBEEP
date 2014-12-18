@@ -26,7 +26,8 @@
 
 const char* BEEBEEP_NAME = "BeeBEEP";
 const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files/";
+const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
+const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files";
 const char* BEEBEEP_VERSION = "0.9.6";
 const int BEEBEEP_PROTO_VERSION = 53;
 const int BEEBEEP_SETTINGS_VERSION = 2;

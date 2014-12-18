@@ -42,6 +42,7 @@ public:
   QString programName() const;
   QString organizationName() const;
   QString downloadWebSite() const;
+  QString officialWebSite() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );

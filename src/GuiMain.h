@@ -115,6 +115,7 @@ private slots:
   void showSavedChatSelected( const QString& );
   void removeSavedChat( const QString& );
   void checkNewVersion();
+  void openWebSite();
 
 protected:
   void closeEvent( QCloseEvent* );

@@ -594,6 +594,8 @@ void GuiMain::createMenus()
   act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
   mp_menuInfo->addSeparator();
+  act = mp_menuInfo->addAction( QIcon( ":/images/beebeep.png" ), tr( "Open %1 official website..." ).arg( Settings::instance().programName() ), this, SLOT( openWebSite() ) );
+  act->setStatusTip( tr( "Explore %1 official website" ).arg( Settings::instance().programName() ) );
   act = mp_menuInfo->addAction( QIcon( ":/images/update.png" ), tr( "Check for new version..." ), this, SLOT( checkNewVersion() ) );
   act->setStatusTip( tr( "Open %1 website and check if a new version exists" ).arg( Settings::instance().programName() ) );
 }
@@ -617,7 +619,6 @@ void GuiMain::createToolAndMenuBars()
                             .arg( Settings::instance().version( false ) ) );
 #endif
   menuBar()->setCornerWidget( label_version );
-
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
@@ -1689,6 +1690,15 @@ void GuiMain::checkNewVersion()
   if( !QDesktopServices::openUrl( new_version_url ) )
     QMessageBox::information( this, Settings::instance().programName(),
       tr( "Unable to open %1" ).arg( Settings::instance().downloadWebSite() ), tr( "Ok" ) );
+}
+
+void GuiMain::openWebSite()
+{
+  QUrl new_version_url( Settings::instance().officialWebSite() );
+
+  if( !QDesktopServices::openUrl( new_version_url ) )
+    QMessageBox::information( this, Settings::instance().programName(),
+      tr( "Unable to open %1" ).arg( Settings::instance().officialWebSite() ), tr( "Ok" ) );
 }
 
 void GuiMain::checkIdle()
