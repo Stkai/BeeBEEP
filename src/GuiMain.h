@@ -116,6 +116,7 @@ private slots:
   void removeSavedChat( const QString& );
   void checkNewVersion();
   void openWebSite();
+  void openDownloadPluginPage();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -147,6 +148,7 @@ private:
   void checkViewActions();
   QMenu* gameMenu( GameInterface* );
   bool sendFile( const User&, const QString& );
+  bool openWebUrl( const QString& );
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -172,6 +174,7 @@ private:
   QMenu *mp_menuView;
 
   QToolBar *mp_barMain;
+  QToolBar *mp_barPlugins;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actSaveChat;
@@ -181,6 +184,7 @@ private:
   QAction* mp_actFont;
   QAction* mp_actFontColor;
   QAction* mp_actToolBar;
+  QAction* mp_actPluginBar;
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
   QAction* mp_actSendFile;

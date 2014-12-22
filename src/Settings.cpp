@@ -71,6 +71,11 @@ QString Settings::officialWebSite() const
   return QString( BEEBEEP_WEBSITE );
 }
 
+QString Settings::pluginWebSite() const
+{
+  return QString( BEEBEEP_PLUGIN_WEBSITE );
+}
+
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;

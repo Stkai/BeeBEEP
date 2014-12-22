@@ -628,7 +628,7 @@ p, li { white-space: pre-wrap; }
     <name>GuiMain</name>
     <message>
         <source>Show the ToolBar</source>
-        <translation>Mostra la barra degli strumenti</translation>
+        <translation type="obsolete">Mostra la barra degli strumenti</translation>
     </message>
     <message>
         <source>offline</source>
@@ -1458,6 +1458,26 @@ il file %2 (%3)?</translation>
     <message>
         <source>Explore %1 official website</source>
         <translation>Esplosa il sito ufficiale di %1</translation>
+    </message>
+    <message>
+        <source>Show the main tool bar</source>
+        <translation>Mostra la barra degli strumenti</translation>
+    </message>
+    <message>
+        <source>Show the bar of plugins</source>
+        <translation>Mostra la barra dei plugin</translation>
+    </message>
+    <message>
+        <source>Show the tool bar with plugin shortcuts</source>
+        <translation>Mostra la barra con i collegamenti ai plugin</translation>
+    </message>
+    <message>
+        <source>Download plugins...</source>
+        <translation>Scarica i plugin...</translation>
+    </message>
+    <message>
+        <source>Open %1 website and download your preferred plugin</source>
+        <translation>April sito ufficiale di %1 e scarica i tuoi plugin preferiti</translation>
     </message>
 </context>
 <context>

@@ -35,7 +35,7 @@ QString TetrisGame::name() const
 
 QString TetrisGame::version() const
 {
-  return "0.6.4";
+  return "0.9.5";
 }
 
 QString TetrisGame::author() const

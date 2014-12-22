@@ -67,9 +67,13 @@ GuiMain::GuiMain( QWidget *parent )
   createStackedWidgets();
   setCentralWidget( mp_stackedWidget );
 
-  mp_barMain = addToolBar( tr( "Show the ToolBar" ) );
+  mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
+
+  mp_barPlugins = addToolBar( tr( "Show the bar of plugins" ) );
+  mp_barPlugins->setObjectName( "GuiPluginToolBar" );
+  mp_barPlugins->setIconSize( Settings::instance().mainBarIconSize() );
 
   mp_trayIcon = new GuiSystemTray( this );
 
@@ -363,6 +367,10 @@ void GuiMain::createActions()
   mp_actToolBar->setStatusTip( tr( "Show the main tool bar with settings and emoticons" ) );
   mp_actToolBar->setData( 99 );
 
+  mp_actPluginBar = mp_barPlugins->toggleViewAction();
+  mp_actPluginBar->setStatusTip( tr( "Show the tool bar with plugin shortcuts" ) );
+  mp_actPluginBar->setData( 99 );
+
   mp_actAbout = new QAction( QIcon( ":/images/info.png" ), tr( "&About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setStatusTip( tr( "Show the informations about %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
@@ -567,6 +575,7 @@ void GuiMain::createMenus()
   /* View Menu */
   mp_menuView = new QMenu( tr( "&View" ), this );
   mp_menuView->addAction( mp_actToolBar );
+  mp_menuView->addAction( mp_actPluginBar );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewUsers );
   mp_menuView->addAction( mp_actViewChats );
@@ -598,6 +607,8 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Explore %1 official website" ).arg( Settings::instance().programName() ) );
   act = mp_menuInfo->addAction( QIcon( ":/images/update.png" ), tr( "Check for new version..." ), this, SLOT( checkNewVersion() ) );
   act->setStatusTip( tr( "Open %1 website and check if a new version exists" ).arg( Settings::instance().programName() ) );
+  act = mp_menuInfo->addAction( QIcon( ":/images/plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
+  act->setStatusTip( tr( "Open %1 website and download your preferred plugin" ).arg( Settings::instance().programName() ) );
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -645,6 +656,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actAbout );
 #endif
+
 }
 
 void GuiMain::createStatusBar()
@@ -740,7 +752,6 @@ QMenu* GuiMain::gameMenu( GameInterface* gi )
   act->setData( help_data_format
                 .arg( Bee::iconToHtml( (gi->icon().isNull() ? ":/images/plugin.png" : gi->iconFileName()), "*P*" ),
                       gi->name(), help_data_ts, gi->author(), gi->help() ) );
-
 
   m_mapGameMenu.insert( gi->name(), menu_game );
 
@@ -1341,10 +1352,13 @@ void GuiMain::showUserMenu( VNumber user_id )
 void GuiMain::updadePluginMenu()
 {
   mp_menuPlugins->clear();
+  mp_barPlugins->clear();
   QAction* act;
 
   act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
   act->setStatusTip( tr( "Open the plugin manager dialog and manage the installed plugins" ) );
+
+  mp_barPlugins->addAction( act );
 
   if( PluginManager::instance().count() <= 0 )
     return;
@@ -1371,7 +1385,9 @@ void GuiMain::updadePluginMenu()
   if( PluginManager::instance().games().size() > 0 )
   {
     mp_menuPlugins->addSeparator();
+    mp_barPlugins->addSeparator();
     QMenu* game_menu;
+    int game_widget_id;
 
     foreach( GameInterface* gi, PluginManager::instance().games() )
     {
@@ -1379,15 +1395,22 @@ void GuiMain::updadePluginMenu()
       game_menu->setEnabled( gi->isEnabled() );
       gi->mainWindow()->setEnabled( gi->isEnabled() );
       mp_menuPlugins->addMenu( game_menu );
+
+      act = mp_barPlugins->addAction( gi->icon(), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
+      game_widget_id = mp_stackedWidget->indexOf( gi->mainWindow() ); // ensured by gameMenu function
+      act->setData( game_widget_id );
     }
   }
 
   /* Static Plugins */
   mp_menuPlugins->addSeparator();
+  mp_barPlugins->addSeparator();
   act = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
   act->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
+  mp_barPlugins->addAction( act );
   act = mp_menuPlugins->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
   act->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
+  mp_barPlugins->addAction( act );
 }
 
 void GuiMain::showPluginHelp()
@@ -1683,22 +1706,32 @@ void GuiMain::removeSavedChat( const QString& chat_name )
   mp_savedChatList->updateSavedChats();
 }
 
+bool GuiMain::openWebUrl( const QString& web_url )
+{
+  QUrl url( web_url );
+
+  if( !QDesktopServices::openUrl( url ) )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1" ).arg( web_url ), tr( "Ok" ) );
+    return false;
+  }
+  else
+    return true;
+}
+
 void GuiMain::checkNewVersion()
 {
-  QUrl new_version_url( Settings::instance().downloadWebSite() );
-
-  if( !QDesktopServices::openUrl( new_version_url ) )
-    QMessageBox::information( this, Settings::instance().programName(),
-      tr( "Unable to open %1" ).arg( Settings::instance().downloadWebSite() ), tr( "Ok" ) );
+  openWebUrl( Settings::instance().downloadWebSite() );
 }
 
 void GuiMain::openWebSite()
 {
-  QUrl new_version_url( Settings::instance().officialWebSite() );
+  openWebUrl( Settings::instance().officialWebSite() );
+}
 
-  if( !QDesktopServices::openUrl( new_version_url ) )
-    QMessageBox::information( this, Settings::instance().programName(),
-      tr( "Unable to open %1" ).arg( Settings::instance().officialWebSite() ), tr( "Ok" ) );
+void GuiMain::openDownloadPluginPage()
+{
+  openWebUrl( Settings::instance().pluginWebSite() );
 }
 
 void GuiMain::checkIdle()

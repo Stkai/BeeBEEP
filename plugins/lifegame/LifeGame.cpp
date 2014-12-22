@@ -35,7 +35,7 @@ QString LifeGame::name() const
 
 QString LifeGame::version() const
 {
-  return "0.6.4";
+  return "0.9.6";
 }
 
 QString LifeGame::author() const

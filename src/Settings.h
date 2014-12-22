@@ -43,6 +43,7 @@ public:
   QString organizationName() const;
   QString downloadWebSite() const;
   QString officialWebSite() const;
+  QString pluginWebSite() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
