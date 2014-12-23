@@ -1721,7 +1721,7 @@ bool GuiMain::openWebUrl( const QString& web_url )
 
 void GuiMain::checkNewVersion()
 {
-  openWebUrl( Settings::instance().downloadWebSite() );
+  openWebUrl( Settings::instance().checkVersionWebSite() );
 }
 
 void GuiMain::openWebSite()

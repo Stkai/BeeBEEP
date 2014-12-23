@@ -76,6 +76,11 @@ QString Settings::pluginWebSite() const
   return QString( BEEBEEP_PLUGIN_WEBSITE );
 }
 
+QString Settings::checkVersionWebSite() const
+{
+  return QString( "%1?beebeep-version=%2" ).arg( QString( BEEBEEP_CHECK_VERSION_WEBSITE ) ).arg( QString( BEEBEEP_VERSION ) );
+}
+
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;

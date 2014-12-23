@@ -44,6 +44,7 @@ public:
   QString downloadWebSite() const;
   QString officialWebSite() const;
   QString pluginWebSite() const;
+  QString checkVersionWebSite() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
