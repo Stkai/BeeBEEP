@@ -95,9 +95,9 @@ int main( int argc, char *argv[] )
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
-  /* Show Main Window */
+  /* Init Main Window */
   GuiMain mw;
-  QObject::connect( &bee_app, SIGNAL( checkIdleRequest() ), &mw, SLOT( checkIdle() ) );
+  QObject::connect( &bee_app, SIGNAL( enteringInIdle() ), &mw, SLOT( setInIdle() ) );
   QObject::connect( &bee_app, SIGNAL( exitingFromIdle() ), &mw, SLOT( exitFromIdle() ) );
 
   QByteArray ba = Settings::instance().guiGeometry();

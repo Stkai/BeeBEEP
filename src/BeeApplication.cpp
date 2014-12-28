@@ -22,7 +22,10 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeApplication.h"
-
+#include <QDebug>
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
 
 BeeApplication::BeeApplication( int& argc, char** argv  )
   : QApplication( argc, argv )
@@ -36,8 +39,10 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
     setAttribute( Qt::AA_DontShowIconsInMenus, false );
 #endif
+
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkIdle() ) );
 }
+
 
 void BeeApplication::setIdleTimeout( int new_value )
 {
@@ -47,16 +52,31 @@ void BeeApplication::setIdleTimeout( int new_value )
   m_timer.start();
 }
 
+void BeeApplication::setIdle()
+{
+  if( m_isInIdle )
+    return;
+
+  m_isInIdle = true;
+  emit( enteringInIdle() );
+}
+
+void BeeApplication::removeIdle()
+{
+  if( !m_isInIdle )
+    return;
+
+  m_isInIdle = false;
+  emit( exitingFromIdle() );
+}
+
 bool BeeApplication::notify( QObject* receiver, QEvent* event )
 {
   if( event->type() == QEvent::MouseMove || event->type() == QEvent::KeyPress )
   {
     m_lastEventDateTime = QDateTime::currentDateTime();
     if( m_isInIdle )
-    {
-      emit( exitingFromIdle() );
-      m_isInIdle = false;
-    }
+      removeIdle();
   }
 
   return QApplication::notify( receiver, event );
@@ -64,14 +84,10 @@ bool BeeApplication::notify( QObject* receiver, QEvent* event )
 
 void BeeApplication::checkIdle()
 {
-  if( m_lastEventDateTime.secsTo( QDateTime::currentDateTime() ) > m_idleTimeout )
-  {
-    if( !m_isInIdle )
-    {
-      m_isInIdle = true;
-      emit( checkIdleRequest() );
-    }
-  }
+  if( isScreenSaverRunning() || idleTimeFromSystem() > m_idleTimeout )
+    setIdle();
+  else
+    removeIdle();
 }
 
 void BeeApplication::cleanUp()
@@ -79,5 +95,32 @@ void BeeApplication::cleanUp()
   if( m_timer.isActive() )
     m_timer.stop();
 }
+
+bool BeeApplication::isScreenSaverRunning()
+{
+#ifdef Q_OS_WIN
+   BOOL is_running = FALSE;
+   SystemParametersInfo( SPI_GETSCREENSAVERRUNNING, 0, &is_running, 0 );
+   return (bool)is_running;
+#endif
+   return false;
+}
+
+int BeeApplication::idleTimeFromSystem()
+{
+  int idle_time = -1;
+#ifdef Q_OS_WIN
+  LASTINPUTINFO idle_info;
+  idle_info.cbSize = sizeof( LASTINPUTINFO );
+  if( ::GetLastInputInfo( &idle_info ) )
+    idle_time = ::GetTickCount() - idle_info.dwTime;
+  idle_time = qMax( 0, idle_time / 1000 );
+#else
+  idle_time = qMax( 0, m_lastEventDateTime.secsTo( QDateTime::currentDateTime() ) );
+#endif
+
+  return idle_time;
+}
+
 
 

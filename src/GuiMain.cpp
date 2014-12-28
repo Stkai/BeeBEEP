@@ -1734,7 +1734,7 @@ void GuiMain::openDownloadPluginPage()
   openWebUrl( Settings::instance().pluginWebSite() );
 }
 
-void GuiMain::checkIdle()
+void GuiMain::setInIdle()
 {
   if( !mp_core->isConnected() )
     return;

@@ -39,23 +39,33 @@ public:
   void setIdleTimeout( int ); // in minutes
   void cleanUp();
 
+  bool isScreenSaverRunning();
+  inline bool isSystemSleeping() const;
+
 signals:
-  void checkIdleRequest();
+  void enteringInIdle();
   void exitingFromIdle();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
+  int idleTimeFromSystem();
 
 protected slots:
   void checkIdle();
+  void setIdle();
+  void removeIdle();
 
 private:
   int m_idleTimeout;
   QDateTime m_lastEventDateTime;
   QTimer m_timer;
   bool m_isInIdle;
+  bool m_isSystemSleeping;
 
 };
 
+
+// Inline Functions
+inline bool BeeApplication::isSystemSleeping() const { return m_isSystemSleeping; }
 
 #endif // BEEBEEP_APPLICATION_H
