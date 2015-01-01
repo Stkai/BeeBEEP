@@ -57,6 +57,7 @@ public:
   inline bool isLoadHistoryCompleted() const;
   inline const QMap<QString, QString>& constHistoryMap() const;
 
+  void changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path );
 
   static ChatManager& instance()
   {

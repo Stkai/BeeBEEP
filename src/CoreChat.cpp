@@ -58,7 +58,7 @@ void Core::createPrivateChat( const User& u )
   user_list.append( u.id() );
   Chat c = Protocol::instance().createChat( user_list );
   c.setName( u.path() );
-  QString sHtmlMsg = tr( "%1 Chat with %2 (%3)." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name(), u.path() );
+  QString sHtmlMsg = tr( "%1 Chat with %2 (%3)." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name(), u.accountPath() );
   ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
@@ -103,7 +103,7 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
   foreach( User u, ul.toList() )
   {
     if( !u.isLocal() )
-      user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.path() ) );
+      user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.accountPath() ) );
   }
 
   sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_string_list.join( ", " ) );
@@ -146,8 +146,8 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
     if( !u.isLocal() )
     {
       if( !c.usersId().contains( u.id() ) )
-        user_added_string_list << u.path();
-      user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.path() ) );
+        user_added_string_list << QString( "%1 (%2)" ).arg( u.name(), u.accountPath() );
+      user_string_list.append( u.name() );
     }
   }
 

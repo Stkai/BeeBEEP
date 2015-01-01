@@ -116,6 +116,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
       qDebug() << "User" << u.path() << "changes his name to" << user_with_new_name.name();
 #endif
       UserManager::instance().setUser( user_with_new_name );
+      ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), user_with_new_name.path() );
       showUserNameChanged( user_with_new_name, u.name() );
     }
     else

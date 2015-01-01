@@ -146,3 +146,25 @@ QList<Chat> ChatManager::groupChatForUser( VNumber user_id ) const
   return chat_list;
 }
 
+void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path )
+{
+  Chat c = privateChatForUser( user_id );
+  if( !c.isValid() )
+    return;
+
+  QString old_chat_name = c.name();
+  c.setName( user_new_path );
+  setChat( c );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "The chat with name" << old_chat_name << "is changed to" << c.name();
+#endif
+
+  if( !chatHasSavedText( c.name() ) && chatHasSavedText( old_chat_name ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Copy the chat history with name" << old_chat_name << "to" << c.name();
+#endif
+    QString chat_text_old = m_history.take( old_chat_name );
+    setSavedTextToChat( c.name(), chat_text_old );
+  }
+}
