@@ -28,6 +28,11 @@
 #include <QDateTime>
 #include <QTimer>
 
+#ifdef Q_OS_UNIX
+struct xcb_connection_t;
+struct xcb_screen_t;
+#endif
+
 
 class BeeApplication : public QApplication
 {
@@ -62,6 +67,10 @@ private:
   bool m_isInIdle;
   bool m_isSystemSleeping;
 
+#ifdef Q_OS_UNIX
+  xcb_connection_t* mp_xcbConnection;
+  xcb_screen_t* mp_xcbScreen;
+#endif
 };
 
 

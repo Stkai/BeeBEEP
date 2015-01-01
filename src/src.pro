@@ -12,6 +12,8 @@ CONFIG(debug,debug|release) {
 
 message(Qt version: $$[QT_VERSION])
 
+unix: LIBS= -lxcb -lxcb-screensaver
+
 TARGET = beebeep
 TEMPLATE = app
 SOURCES += Listener.cpp \

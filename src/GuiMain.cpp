@@ -1742,6 +1742,9 @@ void GuiMain::setInIdle()
   if( !Settings::instance().autoUserAway() )
     return;
 
+  if( Settings::instance().localUser().status() == User::Away )
+    return;
+
   m_lastUserStatus = Settings::instance().localUser().status();
   mp_core->setLocalUserStatus( User::Away );
   updateStatusIcon();
