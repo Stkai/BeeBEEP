@@ -65,3 +65,17 @@ bool User::isBirthDay() const
   QDate current_date = QDateTime::currentDateTime().date();
   return current_date.month() == m_vCard.birthday().month() && current_date.day() == m_vCard.birthday().day();
 }
+
+QString User::nameFromPath( const QString& user_path )
+{
+  QStringList sl = user_path.split( "@" );
+  if( sl.size() > 2 )
+  {
+    sl.removeLast();
+    return sl.join( "@" );
+  }
+  else if( sl.size() == 2 )
+    return sl.first();
+  else
+    return QString();
+}

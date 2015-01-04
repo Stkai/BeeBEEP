@@ -49,12 +49,15 @@ public:
 
   QList<Chat> groupChatForUser( VNumber ) const;
 
+  void checkSavedChats(); // after a load completed
+  void autoLinkSavedChatWithSameNickname( const Chat& );
   inline QString chatSavedText( const QString& ) const;
   inline bool chatHasSavedText( const QString& ) const;
   inline void removeSavedTextFromChat( const QString& );
   inline void setSavedTextToChat( const QString&, const QString& );
   inline void setLoadHistoryCompleted( bool );
   inline bool isLoadHistoryCompleted() const;
+  void updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name );
   inline const QMap<QString, QString>& constHistoryMap() const;
 
   void changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path );
@@ -77,6 +80,8 @@ public:
 
 protected:
   ChatManager();
+
+  QString findPrivateChatSavedTextWithSameNickname( const QString& ) const;
 
   inline QList<Chat>& chatList();
 

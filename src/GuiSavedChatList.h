@@ -40,17 +40,19 @@ public:
 signals:
   void savedChatSelected( const QString& );
   void savedChatRemoved( const QString& );
+  void savedChatLinkRequest( const QString& );
 
 protected slots:
   void savedChatDoubleClicked( QTreeWidgetItem*, int );
   void showSavedChatMenu( const QPoint& );
   void showSavedChatSelected();
   void removeSavedChatSelected();
+  void linkSavedChatSelected();
 
 private:
   QString m_savedChatSelected;
   QMenu* mp_menu;
-
+  QAction* mp_actLink;
 
 };
 

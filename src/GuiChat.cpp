@@ -181,12 +181,11 @@ bool GuiChat::setChatId( VNumber chat_id )
 
   QString html_text = "";
 
-  if( ChatManager::instance().isLoadHistoryCompleted() )
-  {
-    html_text += ChatManager::instance().chatHasSavedText( c.name() ) ? ChatManager::instance().chatSavedText( c.name() ) : "";
-    if( !html_text.isEmpty() )
-      html_text.append( "<br />" );
-  }
+  if( ChatManager::instance().isLoadHistoryCompleted() && ChatManager::instance().chatHasSavedText( c.name() ) )
+    html_text += ChatManager::instance().chatSavedText( c.name() );
+
+  if( !html_text.isEmpty() )
+    html_text.append( "<br />" );
 
   foreach( ChatMessage cm, c.messages() )
     html_text += chatMessageToText( cm );

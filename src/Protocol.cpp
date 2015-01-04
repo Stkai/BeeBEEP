@@ -373,22 +373,17 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 User Protocol::createTemporaryUser( const QString& user_path )
 {
   User u;
-  QStringList sl = user_path.split( "@" );
-  if( sl.size() > 2 )
-  {
-    sl.removeLast();
-    u.setName( sl.join( "@" ) );
-  }
-  else if( sl.size() == 2 )
-    u.setName( sl.first() );
-  else
+  QString user_name = User::nameFromPath( user_path );
+  if( user_name.isNull() || user_name.isEmpty() )
     return User();
+  else
+    u.setName( user_name );
 
   QString host_port = user_path;
   host_port.remove( 0, u.name().size() + 1 ); // remove name and @
 
   bool ok = false;
-  sl = host_port.split( ":" );
+  QStringList sl = host_port.split( ":" );
   if( sl.size() > 2 ) // ipv6 address
   {
     u.setHostPort( sl.last().toInt( &ok ) );

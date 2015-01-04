@@ -113,14 +113,14 @@ int main( int argc, char *argv[] )
 
   mw.checkWindowFlagsAndShow();
 
+  /* Load saved session */
+  mw.loadSession();
+
   if( Settings::instance().loadOnTrayAtStartup() && QSystemTrayIcon::isSystemTrayAvailable() )
     QTimer::singleShot( 100, &mw, SLOT( hideToTrayIcon() ) );
 
   /* Starting connection to BeeBEEP Network */
   QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
-
-  /* Load saved session */
-  mw.loadSession();
 
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );

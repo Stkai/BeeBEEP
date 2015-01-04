@@ -22,6 +22,8 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "ChatManager.h"
+#include "User.h"
+#include "Settings.h"
 
 ChatManager* ChatManager::mp_instance = NULL;
 
@@ -119,6 +121,9 @@ int ChatManager::unreadMessages() const
 
 bool ChatManager::hasName( const QString& chat_name ) const
 {
+  if( Settings::instance().defaultChatName() == chat_name )
+    return true;
+
   foreach( Chat c, m_chats )
   {
     if( c.name() == chat_name )
@@ -146,6 +151,26 @@ QList<Chat> ChatManager::groupChatForUser( VNumber user_id ) const
   return chat_list;
 }
 
+QString ChatManager::findPrivateChatSavedTextWithSameNickname( const QString& chat_name ) const
+{
+  QString chat_user_nick = User::nameFromPath( chat_name );
+
+  foreach( QString key_name, m_history )
+  {
+    if( chat_user_nick == User::nameFromPath( key_name ) )
+      return key_name;
+  }
+
+  return QString();
+}
+
+void ChatManager::updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name )
+{
+  qDebug() << "Copy the chat history with name" << old_chat_name << "to" << new_chat_name;
+  QString chat_text_old = m_history.take( old_chat_name );
+  setSavedTextToChat( new_chat_name, chat_text_old );
+}
+
 void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path )
 {
   Chat c = privateChatForUser( user_id );
@@ -160,11 +185,24 @@ void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, co
 #endif
 
   if( !chatHasSavedText( c.name() ) && chatHasSavedText( old_chat_name ) )
+    updateChatSavedText( old_chat_name, c.name() );
+}
+
+void ChatManager::autoLinkSavedChatWithSameNickname( const Chat& c )
+{
+  if( !chatHasSavedText( c.name() ) )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Copy the chat history with name" << old_chat_name << "to" << c.name();
-#endif
-    QString chat_text_old = m_history.take( old_chat_name );
-    setSavedTextToChat( c.name(), chat_text_old );
+    QString chat_same_nickname = ChatManager::instance().findPrivateChatSavedTextWithSameNickname( c.name() );
+    if( !chat_same_nickname.isNull() && !chat_same_nickname.isEmpty() )
+      ChatManager::instance().updateChatSavedText( chat_same_nickname, c.name() );
+  }
+}
+
+void ChatManager::checkSavedChats()
+{
+  if( Settings::instance().autoLinkSavedChatWithSameNickname() )
+  {
+    foreach( Chat c, m_chats )
+      autoLinkSavedChatWithSameNickname( c );
   }
 }

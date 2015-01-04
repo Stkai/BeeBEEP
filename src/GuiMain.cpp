@@ -126,6 +126,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_savedChatList, SIGNAL( savedChatSelected( const QString& ) ), this, SLOT( showSavedChatSelected( const QString& ) ) );
   connect( mp_savedChatList, SIGNAL( savedChatRemoved( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
+  connect( mp_savedChatList, SIGNAL( savedChatLinkRequest( const QString& ) ), this, SLOT( linkSavedChat( const QString& ) ) );
 
   connect( mp_screenShot, SIGNAL( hideRequest() ), this, SLOT( hide() ) );
   connect( mp_screenShot, SIGNAL( showRequest() ), this, SLOT( show() ) );
@@ -1682,6 +1683,7 @@ void GuiMain::saveSession()
 void GuiMain::loadSessionCompleted()
 {
   // Load saved chats in list
+  ChatManager::instance().checkSavedChats();
   mp_savedChatList->updateSavedChats();
 }
 
@@ -1704,6 +1706,11 @@ void GuiMain::removeSavedChat( const QString& chat_name )
   qDebug() << "Delete saved chat:" << chat_name;
   ChatManager::instance().removeSavedTextFromChat( chat_name );
   mp_savedChatList->updateSavedChats();
+}
+
+void GuiMain::linkSavedChat( const QString& chat_name )
+{
+  // fixme
 }
 
 bool GuiMain::openWebUrl( const QString& web_url )

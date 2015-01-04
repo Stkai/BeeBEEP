@@ -114,6 +114,7 @@ private slots:
   void loadSessionCompleted();
   void showSavedChatSelected( const QString& );
   void removeSavedChat( const QString& );
+  void linkSavedChat( const QString& );
   void checkNewVersion();
   void openWebSite();
   void openDownloadPluginPage();

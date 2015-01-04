@@ -47,6 +47,7 @@ public:
   inline bool hasUser( VNumber ) const;
   inline bool removeUser( VNumber );
   inline bool isPrivateForUser( VNumber ) const;
+  inline bool isPrivate() const;
   inline const QDateTime& lastMessageTimestamp() const;
   inline void setLastMessageTimestamp( const QDateTime& );
   inline int unreadMessages() const;
@@ -88,6 +89,7 @@ inline const QList<VNumber>& Chat::usersId() const { return m_usersId; }
 inline bool Chat::hasUser( VNumber user_id ) const { return m_usersId.contains( user_id ); }
 inline bool Chat::removeUser( VNumber user_id ) { return m_usersId.removeOne( user_id ); }
 inline bool Chat::isPrivateForUser( VNumber user_id ) const { return m_id != ID_DEFAULT_CHAT && m_usersId.size() == 2 && hasUser( user_id ); }
+inline bool Chat::isPrivate() const { return m_id != ID_DEFAULT_CHAT && m_usersId.size() == 2 && hasUser( ID_LOCAL_USER ); }
 inline const QDateTime& Chat::lastMessageTimestamp() const { return m_lastMessageTimestamp; }
 inline void Chat::setLastMessageTimestamp( const QDateTime& new_value ) { m_lastMessageTimestamp = new_value; }
 inline int Chat::unreadMessages() const { return m_unreadMessages; }

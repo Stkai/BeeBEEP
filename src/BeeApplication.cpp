@@ -30,6 +30,7 @@
 #endif
 
 #ifdef Q_OS_UNIX
+// for check user inactivity time
 #include <xcb/xcb.h>
 #include <xcb/screensaver.h>
 // package libxcb-screensaver0-dev
@@ -47,9 +48,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_isInIdle = false;
 
 #ifdef Q_OS_UNIX
-  mp_xcbConnection = xcb_connect( 0, 0 );
-  mp_xcbScreen = xcb_setup_roots_iterator( xcb_get_setup( mp_xcbConnection ) ).data;
-
+  m_xcbConnectHasError = true;
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
     setAttribute( Qt::AA_DontShowIconsInMenus, false );
 #endif
@@ -62,6 +61,14 @@ void BeeApplication::setIdleTimeout( int new_value )
   m_idleTimeout = new_value * 60;
   if( m_timer.isActive() )
     return;
+#ifdef Q_OS_UNIX
+  mp_xcbConnection = xcb_connect( 0, 0 );
+  m_xcbConnectHasError = xcb_connection_has_error( mp_xcbConnection ) > 0;
+  if( m_xcbConnectHasError )
+    qWarning() << "XCB: unable to connect to current DISPLAY. Impossible to get idle time";
+  else
+    mp_xcbScreen = xcb_setup_roots_iterator( xcb_get_setup( mp_xcbConnection ) ).data;
+#endif
   m_timer.start();
 }
 
@@ -106,12 +113,14 @@ void BeeApplication::checkIdle()
 void BeeApplication::cleanUp()
 {
   if( m_timer.isActive() )
+  {
     m_timer.stop();
-
 #ifdef Q_OS_UNIX
-  // mp_xcbScreen not need to free
-  free( mp_xcbConnection );
+ // mp_xcbScreen not need to free
+ // disconnect from display and free memory
+    xcb_disconnect( mp_xcbConnection );
 #endif
+  }
 }
 
 bool BeeApplication::isScreenSaverRunning()
@@ -125,14 +134,19 @@ bool BeeApplication::isScreenSaverRunning()
 #endif
 
 #ifdef Q_OS_UNIX
-  xcb_screensaver_query_info_cookie_t xcbCookie;
-  xcb_screensaver_query_info_reply_t* xcbInfo;
+  if( !m_xcbConnectHasError )
+  {
+    xcb_screensaver_query_info_cookie_t xcbCookie;
+    xcb_screensaver_query_info_reply_t* xcbInfo;
 
-  xcbCookie = xcb_screensaver_query_info( mp_xcbConnection, mp_xcbScreen->root );
-  xcbInfo = xcb_screensaver_query_info_reply( mp_xcbConnection, xcbCookie, 0 );
-
-  screen_saver_is_running = xcbInfo->state == XCB_SCREENSAVER_STATE_ON || xcbInfo->state == XCB_SCREENSAVER_STATE_CYCLE;
-  free( xcbInfo );
+    xcbCookie = xcb_screensaver_query_info( mp_xcbConnection, mp_xcbScreen->root );
+    xcbInfo = xcb_screensaver_query_info_reply( mp_xcbConnection, xcbCookie, 0 );
+    if( xcbInfo )
+    {
+      screen_saver_is_running = xcbInfo->state == XCB_SCREENSAVER_STATE_ON || xcbInfo->state == XCB_SCREENSAVER_STATE_CYCLE;
+      free( xcbInfo );
+    }
+  }
 #endif
 
   return screen_saver_is_running;
@@ -153,15 +167,19 @@ int BeeApplication::idleTimeFromSystem()
 #endif
 
 #ifdef Q_OS_UNIX
-  xcb_screensaver_query_info_cookie_t xcbCookie;
-  xcb_screensaver_query_info_reply_t* xcbInfo;
+  if( !m_xcbConnectHasError )
+  {
+    xcb_screensaver_query_info_cookie_t xcbCookie;
+    xcb_screensaver_query_info_reply_t* xcbInfo;
 
-  xcbCookie = xcb_screensaver_query_info( mp_xcbConnection, mp_xcbScreen->root);
-  xcbInfo = xcb_screensaver_query_info_reply( mp_xcbConnection, xcbCookie, 0 );
-
-  idle_time = qMax( 0, (int)xcbInfo->ms_since_user_input / 1000 );
-  free ( xcbInfo );
-
+    xcbCookie = xcb_screensaver_query_info( mp_xcbConnection, mp_xcbScreen->root);
+    xcbInfo = xcb_screensaver_query_info_reply( mp_xcbConnection, xcbCookie, 0 );
+    if( xcbInfo )
+    {
+      idle_time = qMax( 0, (int)xcbInfo->ms_since_user_input / 1000 );
+      free ( xcbInfo );
+    }
+  }
 #endif
 
   if( idle_time < 0 )

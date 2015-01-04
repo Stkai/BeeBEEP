@@ -63,8 +63,9 @@ public:
   inline QString path() const;
   inline QString accountPath() const;
 
-
   bool isBirthDay() const;
+
+  static QString nameFromPath( const QString& );
 
 private:
   VNumber m_id;
