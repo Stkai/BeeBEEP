@@ -76,7 +76,7 @@ void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
   GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
   m_savedChatSelected = saved_chat_item->chatName();
 
-  //mp_actLink->setEnabled( !ChatManager::instance().hasName( m_savedChatSelected ) );
+  mp_actLink->setEnabled( !ChatManager::instance().hasName( m_savedChatSelected ) );
 
   mp_menu->exec( QCursor::pos() );
 }

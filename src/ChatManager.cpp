@@ -164,10 +164,15 @@ QString ChatManager::findPrivateChatSavedTextWithSameNickname( const QString& ch
   return QString();
 }
 
-void ChatManager::updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name )
+void ChatManager::updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name, bool add_to_new )
 {
   qDebug() << "Copy the chat history with name" << old_chat_name << "to" << new_chat_name;
   QString chat_text_old = m_history.take( old_chat_name );
+  if( add_to_new && chatHasSavedText( new_chat_name ) )
+  {
+    chat_text_old.append( "<br />" );
+    chat_text_old.append( chatSavedText( new_chat_name ) );
+  }
   setSavedTextToChat( new_chat_name, chat_text_old );
 }
 
@@ -185,7 +190,7 @@ void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, co
 #endif
 
   if( !chatHasSavedText( c.name() ) && chatHasSavedText( old_chat_name ) )
-    updateChatSavedText( old_chat_name, c.name() );
+    updateChatSavedText( old_chat_name, c.name(), false );
 }
 
 void ChatManager::autoLinkSavedChatWithSameNickname( const Chat& c )
@@ -194,7 +199,7 @@ void ChatManager::autoLinkSavedChatWithSameNickname( const Chat& c )
   {
     QString chat_same_nickname = ChatManager::instance().findPrivateChatSavedTextWithSameNickname( c.name() );
     if( !chat_same_nickname.isNull() && !chat_same_nickname.isEmpty() )
-      ChatManager::instance().updateChatSavedText( chat_same_nickname, c.name() );
+      ChatManager::instance().updateChatSavedText( chat_same_nickname, c.name(), false );
   }
 }
 
@@ -205,4 +210,17 @@ void ChatManager::checkSavedChats()
     foreach( Chat c, m_chats )
       autoLinkSavedChatWithSameNickname( c );
   }
+}
+
+QStringList ChatManager::chatNamesToStringList( bool add_default_chat ) const
+{
+  QStringList sl;
+
+  foreach( Chat c, m_chats )
+  {
+    if( c.isDefault() && !add_default_chat )
+      continue;
+    sl << c.name();
+  }
+  return sl;
 }

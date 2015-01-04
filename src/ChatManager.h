@@ -42,6 +42,7 @@ public:
 
   void setChat( const Chat& );
   inline const QList<Chat>& constChatList() const;
+  QStringList chatNamesToStringList( bool add_default_chat ) const;
 
   bool hasName( const QString& ) const;
   int unreadMessages() const;
@@ -57,7 +58,7 @@ public:
   inline void setSavedTextToChat( const QString&, const QString& );
   inline void setLoadHistoryCompleted( bool );
   inline bool isLoadHistoryCompleted() const;
-  void updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name );
+  void updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name, bool add_to_new );
   inline const QMap<QString, QString>& constHistoryMap() const;
 
   void changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path );

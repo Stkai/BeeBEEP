@@ -1711,6 +1711,36 @@ void GuiMain::removeSavedChat( const QString& chat_name )
 void GuiMain::linkSavedChat( const QString& chat_name )
 {
   // fixme
+  bool ok = false;
+  QStringList chat_names_string_list = ChatManager::instance().chatNamesToStringList( true );
+
+  // remove chat_name == chat_name_selected case
+  QString chat_name_selected = QInputDialog::getItem( this, Settings::instance().programName(),
+                                        tr( "Please select a chat you would like to link the saved text."),
+                                        chat_names_string_list, 0, false, &ok );
+  if( !ok )
+    return;
+
+  bool add_to_existing_saved_text = false;
+  if( ChatManager::instance().chatHasSavedText( chat_name_selected ) )
+  {
+     switch( QMessageBox::question( this, Settings::instance().programName(),
+               tr( "The chat '%1' selected has already a saved text.<br />"
+                   "What do you want to do with the selected saved text?" ).arg( chat_name_selected ),
+                   tr( "Overwrite" ), tr( "Add in the head" ), tr( "Cancel" ), 2, 2 ) )
+     {
+     case 0:
+       break;
+     case 1:
+       add_to_existing_saved_text = true;
+       break;
+     default:
+       return;
+     }
+
+  }
+
+  ChatManager::instance().updateChatSavedText( chat_name, chat_name_selected, add_to_existing_saved_text );
 }
 
 bool GuiMain::openWebUrl( const QString& web_url )
