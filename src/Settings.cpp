@@ -321,7 +321,7 @@ void Settings::load()
   m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
   m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
   m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
-  m_autoLinkSavedChatWithSameNickname = sets->value( "AutoLinkSavedChatWithSameNickname", true ).toBool();
+  m_autoLinkSavedChatByNickname = sets->value( "AutoLinkSavedChatByNickname", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -482,7 +482,7 @@ void Settings::save()
   sets->setValue( "MessageHistorySize", m_chatMessageHistorySize );
   sets->setValue( "ShowEmoticons", m_showEmoticons );
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
-  sets->setValue( "AutoLinkSavedChatWithSameNickname", m_autoLinkSavedChatWithSameNickname );
+  sets->setValue( "AutoLinkSavedChatByNickname", m_autoLinkSavedChatByNickname );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );

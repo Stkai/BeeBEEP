@@ -51,7 +51,7 @@ public:
   QList<Chat> groupChatForUser( VNumber ) const;
 
   void checkSavedChats(); // after a load completed
-  void autoLinkSavedChatWithSameNickname( const Chat& );
+  void autoLinkSavedChatByNickname( const Chat& );
   inline QString chatSavedText( const QString& ) const;
   inline bool chatHasSavedText( const QString& ) const;
   inline void removeSavedTextFromChat( const QString& );

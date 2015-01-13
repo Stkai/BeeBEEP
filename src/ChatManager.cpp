@@ -193,7 +193,7 @@ void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, co
     updateChatSavedText( old_chat_name, c.name(), false );
 }
 
-void ChatManager::autoLinkSavedChatWithSameNickname( const Chat& c )
+void ChatManager::autoLinkSavedChatByNickname( const Chat& c )
 {
   if( !chatHasSavedText( c.name() ) )
   {
@@ -205,10 +205,10 @@ void ChatManager::autoLinkSavedChatWithSameNickname( const Chat& c )
 
 void ChatManager::checkSavedChats()
 {
-  if( Settings::instance().autoLinkSavedChatWithSameNickname() )
+  if( Settings::instance().autoLinkSavedChatByNickname() )
   {
     foreach( Chat c, m_chats )
-      autoLinkSavedChatWithSameNickname( c );
+      autoLinkSavedChatByNickname( c );
   }
 }
 

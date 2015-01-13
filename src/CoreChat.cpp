@@ -63,8 +63,8 @@ void Core::createPrivateChat( const User& u )
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
 
-  if( Settings::instance().autoLinkSavedChatWithSameNickname() && ChatManager::instance().isLoadHistoryCompleted() )
-    ChatManager::instance().autoLinkSavedChatWithSameNickname( c );
+  if( Settings::instance().autoLinkSavedChatByNickname() && ChatManager::instance().isLoadHistoryCompleted() )
+    ChatManager::instance().autoLinkSavedChatByNickname( c );
 
   emit updateChat( c.id() );
 }

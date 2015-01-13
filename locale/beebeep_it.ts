@@ -1479,6 +1479,26 @@ il file %2 (%3)?</translation>
         <source>Open %1 website and download your preferred plugin</source>
         <translation>April sito ufficiale di %1 e scarica i tuoi plugin preferiti</translation>
     </message>
+    <message>
+        <source>Please select a chat you would like to link the saved text.</source>
+        <translation>Seleziona una conversazione a cui vuoi associare il testo salvato.</translation>
+    </message>
+    <message>
+        <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
+        <translation>La conversazione &apos;%1&apos; selezionata ha già una storia salvata. &lt;br /&gt;Cosa vuoi fare con la storia selezionata?</translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation>Sovrascrivi</translation>
+    </message>
+    <message>
+        <source>Add in the head</source>
+        <translation>Aggiungi in cima</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -1756,6 +1776,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>No</source>
         <translation>No</translation>
+    </message>
+    <message>
+        <source>Link to chat</source>
+        <translation>Associa alla conversazione</translation>
     </message>
 </context>
 <context>
