@@ -48,6 +48,7 @@ public:
   inline bool removeUser( VNumber );
   inline bool isPrivateForUser( VNumber ) const;
   inline bool isPrivate() const;
+  VNumber privateUserId() const;
   inline const QDateTime& lastMessageTimestamp() const;
   inline void setLastMessageTimestamp( const QDateTime& );
   inline int unreadMessages() const;

@@ -87,3 +87,13 @@ QDateTime Chat::dateTimeStarted() const
     return m_messages.first().message().timestamp();
 }
 
+VNumber Chat::privateUserId() const
+{
+  foreach( VNumber user_id, m_usersId )
+  {
+    if( user_id != ID_LOCAL_USER )
+      return user_id;
+  }
+  return ID_INVALID;
+}
+

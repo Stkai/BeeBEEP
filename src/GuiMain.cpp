@@ -1147,6 +1147,16 @@ void GuiMain::changeStatusDescription()
 
 void GuiMain::sendFile()
 {
+  if( mp_defaultChat == mp_stackedWidget->currentWidget() )
+  {
+    Chat c = ChatManager::instance().chat( mp_defaultChat->chatId() );
+    if( c.isValid() && c.isPrivate() )
+    {
+      sendFile( c.privateUserId() );
+      return;
+    }
+  }
+
   sendFile( User(), QString() );
 }
 
@@ -1192,10 +1202,10 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
   {
     file_path_selected = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), u.name() ),
                                                     Settings::instance().lastDirectorySelected() );
-    if( file_path.isEmpty() || file_path.isNull() )
+    if( file_path_selected.isEmpty() || file_path_selected.isNull() )
       return false;
 
-    Settings::instance().setLastDirectorySelectedFromFile( file_path );
+    Settings::instance().setLastDirectorySelectedFromFile( file_path_selected );
   }
   else
     file_path_selected = file_path;
