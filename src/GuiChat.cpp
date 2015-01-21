@@ -155,14 +155,14 @@ void GuiChat::setChatUsers()
       if( !u.isLocal() )
       {
         if( u.isConnected() )
-          sl.append( u.name() );
+          sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
         else
-          sl.append( QString( "[%1]" ).arg( u.name() ) );
+          sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
       }
     }
     chat_users = sl.size() == 0 ? tr( "Nobody" ) : sl.join( ", " );
   }
-  mp_lTitle->setText( tr( "To" ) + QString( ": <b>%1</b>" ).arg( chat_users ) );
+  mp_lTitle->setText( tr( "To" ) + QString( ": %1" ).arg( chat_users ) );
 }
 
 bool GuiChat::setChatId( VNumber chat_id )
@@ -215,7 +215,9 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   User u = m_users.find( cm.userId() );
   if( !u.isValid() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "User" << cm.userId() << "is not present in chat shown" << m_chatId << "... force update";
+#endif
     m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
     u = m_users.find( cm.userId() );
     if( !u.isValid() )

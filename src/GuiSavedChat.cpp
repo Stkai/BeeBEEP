@@ -41,4 +41,7 @@ void GuiSavedChat::showSavedChat( const QString& chat_name )
     html_text += QString( "<br />%1<br /><br /><br />" ).arg( ChatManager::instance().chatSavedText( chat_name ) );
 
   mp_teSavedChat->setText( html_text );
+
+  QScrollBar *bar = mp_teSavedChat->verticalScrollBar();
+  bar->setValue( bar->maximum() );
 }

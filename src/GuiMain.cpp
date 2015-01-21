@@ -583,7 +583,7 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
-  mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( raiseChatView() ) );
+  mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( showCurrentChat() ) );
   mp_actViewDefaultChat->setStatusTip( tr( "Show the chat view" ) );
   mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
@@ -777,8 +777,6 @@ void GuiMain::checkUser( const User& u )
     qWarning() << "Invalid user found in GuiMain::checkUser( const User& u )";
     return;
   }
-
-  refreshTitle( u );
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "User" << u.path() << "has updated his info. Check it";
@@ -1013,15 +1011,12 @@ bool GuiMain::showAlert()
 
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
-  bool is_current_chat = (chat_id == mp_defaultChat->chatId()) && mp_defaultChat == mp_stackedWidget->currentWidget();
   bool show_alert = false;
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
-  {
-    show_alert = showAlert();
-  }
+    show_alert = showAlert();  
 
-  if( is_current_chat )
+  if( chat_id == mp_defaultChat->chatId() && mp_defaultChat == mp_stackedWidget->currentWidget() )
   {
     mp_defaultChat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
@@ -1031,15 +1026,11 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   else
   {
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
-    if( chat_hidden.isValid() )
-    {
-      mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
-      mp_chatList->updateChat( chat_id );
-      refreshTitle( UserManager::instance().userList().find( cm.userId() ) );
+    mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
+    mp_chatList->updateChat( chat_id );
 
-      if( show_alert && Settings::instance().raiseOnNewMessageArrived() )
-        showChat( chat_id );
-    }
+    if( show_alert && Settings::instance().raiseOnNewMessageArrived() )
+      showChat( chat_id );
   }
 }
 
@@ -1295,6 +1286,12 @@ void GuiMain::showTipOfTheDay()
   // Tip of the day is shown only in default chat
   showChat( ID_DEFAULT_CHAT );
   mp_core->showTipOfTheDay();
+}
+
+void GuiMain::showCurrentChat()
+{
+  VNumber chat_id = mp_defaultChat->chatId();
+  showChat( chat_id );
 }
 
 void GuiMain::showChat( VNumber chat_id )

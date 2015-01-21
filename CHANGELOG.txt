@@ -4,6 +4,7 @@ BeeBEEP 0.9.6
 - Auto set Away status when idle option
 - Make screenshot plugin
 - Conway's Game of Life plugin (just for fun)
+- Link saved chat using only nickname option
 
 BeeBEEP 0.9.5
 - Load minimized at startup option

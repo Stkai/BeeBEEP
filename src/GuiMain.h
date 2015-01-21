@@ -90,6 +90,7 @@ private slots:
   void changeUserColor( VNumber );
   void showPluginHelp();
   void showPluginManager();
+  void showCurrentChat();
   void showChat( VNumber );
   void sendBroadcastMessage();
   void showWizard();

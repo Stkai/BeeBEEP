@@ -31,6 +31,9 @@
      <property name="acceptDrops">
       <bool>false</bool>
      </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
      <property name="undoRedoEnabled">
       <bool>false</bool>
      </property>

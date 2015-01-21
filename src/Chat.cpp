@@ -73,7 +73,7 @@ bool Chat::isEmpty() const
 {
   foreach( ChatMessage cm, m_messages )
   {
-    if( !cm.isSystem() && !cm.isFromLocalUser() )
+    if( !cm.isSystem() )
       return false;
   }
   return true;

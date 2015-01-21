@@ -425,6 +425,10 @@
         <source>XMPP Secure Mode</source>
         <translation type="obsolete">Modalità Sicura XMPP</translation>
     </message>
+    <message>
+        <source>offline</source>
+        <translation>non in linea</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatWidget</name>
