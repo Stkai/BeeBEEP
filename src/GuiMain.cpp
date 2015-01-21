@@ -297,7 +297,7 @@ void GuiMain::showAbout()
   QMessageBox::about( this, Settings::instance().programName(),
                       QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br />" )
                       .arg( Settings::instance().programName() )
-                      .arg( tr( "Secure Network Chat" ) )
+                      .arg( tr( "p2p Lan Messenger" ) )
                       .arg( tr( "Version" ) )
                       .arg( Settings::instance().version( true ) )
                       .arg( tr( "developed by Marco Mastroddi" ) )
@@ -1748,6 +1748,7 @@ void GuiMain::linkSavedChat( const QString& chat_name )
   }
 
   ChatManager::instance().updateChatSavedText( chat_name, chat_name_selected, add_to_existing_saved_text );
+  mp_savedChatList->updateSavedChats();
 }
 
 bool GuiMain::openWebUrl( const QString& web_url )

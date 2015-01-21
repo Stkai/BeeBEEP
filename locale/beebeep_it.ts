@@ -720,7 +720,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Secure Network Chat</source>
-        <translation>Secure Network Chat</translation>
+        <translation type="obsolete">Secure Network Chat</translation>
     </message>
     <message>
         <source>Version</source>
@@ -1502,6 +1502,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Cancel</source>
         <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>p2p Lan Messenger</source>
+        <translation></translation>
     </message>
 </context>
 <context>

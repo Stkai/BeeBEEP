@@ -646,7 +646,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="300"/>
-        <source>Secure Network Chat</source>
+        <source>p2p Lan Messenger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1389,13 +1389,13 @@ Please check the file or the directories write permissions.</source>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1579"/>
-        <location filename="../src/GuiMain.cpp" line="1759"/>
+        <location filename="../src/GuiMain.cpp" line="1760"/>
         <source>Unable to open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1579"/>
-        <location filename="../src/GuiMain.cpp" line="1759"/>
+        <location filename="../src/GuiMain.cpp" line="1760"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2106,22 +2106,22 @@ Please check the file or the directories write permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.ui" line="354"/>
+        <location filename="../src/GuiVCard.ui" line="370"/>
         <source>S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.ui" line="377"/>
+        <location filename="../src/GuiVCard.ui" line="393"/>
         <source>Open chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.ui" line="397"/>
+        <location filename="../src/GuiVCard.ui" line="413"/>
         <source>Send a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.ui" line="411"/>
+        <location filename="../src/GuiVCard.ui" line="427"/>
         <source>Change the nickname color</source>
         <translation type="unfinished"></translation>
     </message>

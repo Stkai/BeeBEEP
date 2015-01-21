@@ -109,7 +109,7 @@ int main( int argc, char *argv[] )
       mw.restoreState( Settings::instance().guiState() );
   }
   else
-    mw.resize( QSize( 700, 420 ) );
+    mw.resize( QSize( 740, 420 ) );
 
   mw.checkWindowFlagsAndShow();
 

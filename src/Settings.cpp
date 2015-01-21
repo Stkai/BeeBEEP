@@ -216,7 +216,7 @@ void Settings::loadBroadcastAddresses()
   QFile file( "beehosts.ini" );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qDebug() << "File hosts" << file.fileName() << "not found";
+    qWarning() << "File hosts" << file.fileName() << "not found";
     return;
   }
 
@@ -267,7 +267,7 @@ namespace
     if( sTmp.isNull() )
       sTmp = pe.value( "USER" );
     if( sTmp.isNull() )
-      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "ss" ) );
+      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "zzz" ) );
     return sTmp;
   }
 }
