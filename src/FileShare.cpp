@@ -49,21 +49,25 @@ int FileShare::addPathToList( const QString& share_key, const QString& share_pat
 
   if( m_local.size() >= Settings::instance().maxFileShared() )
   {
-    qDebug() << "FileShare: max file shared reached" << m_local.size();
+    qWarning() << "FileShare: max file shared reached" << m_local.size();
     return num_files;
   }
 
   QFileInfo file_info( share_path );
   if( file_info.isSymLink() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "FileShare: skip symbolic link" << share_path;
+#endif
     return num_files;
   }
   else if( file_info.isDir() )
   {
     if( share_path.endsWith( "." ) )
-    {
+    {        
+#ifdef BEEBEEP_DEBUG
       qDebug() << "FileShare: skip dir" << share_path;
+#endif
       return num_files;
     }
 
@@ -78,7 +82,7 @@ int FileShare::addPathToList( const QString& share_key, const QString& share_pat
       num_files++;
   }
   else
-    qDebug() << "FileShare: invalid file type from path" << share_path;
+    qWarning() << "FileShare: invalid file type from path" << share_path;
 
   return num_files;
 }

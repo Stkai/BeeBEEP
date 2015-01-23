@@ -1504,7 +1504,7 @@ il file %2 (%3)?</translation>
         <translation>Annulla</translation>
     </message>
     <message>
-        <source>p2p Lan Messenger</source>
+        <source>Secure Lan Messenger</source>
         <translation></translation>
     </message>
 </context>

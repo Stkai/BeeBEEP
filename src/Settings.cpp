@@ -78,7 +78,14 @@ QString Settings::pluginWebSite() const
 
 QString Settings::checkVersionWebSite() const
 {
-  return QString( "%1?beebeep-version=%2" ).arg( QString( BEEBEEP_CHECK_VERSION_WEBSITE ) ).arg( QString( BEEBEEP_VERSION ) );
+  QString os_type = "windows";
+#ifdef Q_OS_LINUX
+  os_type = "linux";
+#endif
+#ifdef Q_OS_MAC
+  os_type = "macosx";
+#endif
+  return QString( "%1?beebeep-version=%2&beebeep-os=%3" ).arg( QString( BEEBEEP_CHECK_VERSION_WEBSITE ) ).arg( QString( BEEBEEP_VERSION ) ).arg( os_type );
 }
 
 QByteArray Settings::hash( const QString& string_to_hash ) const

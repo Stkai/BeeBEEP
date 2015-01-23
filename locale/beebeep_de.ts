@@ -646,7 +646,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="300"/>
-        <source>p2p Lan Messenger</source>
+        <source>Secure Lan Messenger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

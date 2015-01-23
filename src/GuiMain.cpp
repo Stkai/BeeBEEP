@@ -297,7 +297,7 @@ void GuiMain::showAbout()
   QMessageBox::about( this, Settings::instance().programName(),
                       QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br />" )
                       .arg( Settings::instance().programName() )
-                      .arg( tr( "p2p Lan Messenger" ) )
+                      .arg( tr( "Secure Lan Messenger" ) )
                       .arg( tr( "Version" ) )
                       .arg( Settings::instance().version( true ) )
                       .arg( tr( "developed by Marco Mastroddi" ) )
