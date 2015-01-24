@@ -155,6 +155,7 @@ public:
 
   inline const QStringList& localShare() const;
   inline void setLocalShare( const QStringList& );
+  inline bool hasLocalSharePath( const QString& ) const;
   inline bool fileShare() const;
   inline void setFileShare( bool );
   inline int maxFileShared() const;
@@ -382,6 +383,7 @@ inline bool Settings::showNotificationOnTray() const { return m_showNotification
 inline void Settings::setShowNotificationOnTray( bool new_value ) { m_showNotificationOnTray = new_value; }
 inline const QStringList& Settings::localShare() const { return m_localShare; }
 inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
+inline bool Settings::hasLocalSharePath( const QString& share_path ) const { return m_localShare.contains( share_path ); }
 inline bool Settings::fileShare() const { return m_fileShare; }
 inline void Settings::setFileShare( bool new_value ) { m_fileShare = new_value; }
 inline int Settings::maxFileShared() const { return m_maxFileShared; }

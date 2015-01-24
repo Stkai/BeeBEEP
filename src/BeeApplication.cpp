@@ -24,6 +24,7 @@
 #include "BeeApplication.h"
 #include <QDebug>
 #include <QEvent>
+#include <QThread>
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -47,6 +48,9 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_timer.setInterval( 10000 );
   m_isInIdle = false;
 
+  mp_backgroundThread = new QThread();
+  mp_backgroundThread->setPriority( QThread::LowPriority );
+
 #ifdef Q_OS_UNIX
   m_xcbConnectHasError = true;
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
@@ -54,6 +58,12 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 #endif
 
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkIdle() ) );
+}
+
+void BeeApplication::init()
+{
+  qDebug() << "Starting background thread";
+  mp_backgroundThread->start();
 }
 
 void BeeApplication::setIdleTimeout( int new_value )
@@ -121,6 +131,12 @@ void BeeApplication::cleanUp()
     xcb_disconnect( mp_xcbConnection );
 #endif
   }
+
+  if( mp_backgroundThread->isRunning() )
+    mp_backgroundThread->wait( 2000 );
+
+  mp_backgroundThread->quit();
+  mp_backgroundThread->deleteLater();
 }
 
 bool BeeApplication::isScreenSaverRunning()

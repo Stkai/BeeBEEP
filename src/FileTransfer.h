@@ -40,7 +40,6 @@ public:
 
   bool startListener();
   void stopListener();
-  bool isWorking() const;
 
   FileInfo addFile( const QFileInfo& );
   void removeFile( const QFileInfo& );
@@ -82,7 +81,6 @@ private:
 
 
 // Inline Functions
-inline bool FileTransfer::isWorking() const { return isListening(); }
 inline void FileTransfer::clearFiles() { m_files.clear(); }
 
 

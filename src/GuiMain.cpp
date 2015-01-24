@@ -97,6 +97,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), mp_chatList, SLOT( updateChat( VNumber ) ) );
+  connect( mp_core, SIGNAL( localShareListAvailable() ), this, SLOT( updateLocalShareList() ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -1014,7 +1015,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   bool show_alert = false;
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
-    show_alert = showAlert();  
+    show_alert = showAlert();
 
   if( chat_id == mp_defaultChat->chatId() && mp_defaultChat == mp_stackedWidget->currentWidget() )
   {
@@ -1489,8 +1490,12 @@ void GuiMain::trayMessageClicked()
 
 void GuiMain::addToShare( const QString& share_path )
 {
-  if( mp_core->addPathToShare( share_path ) > 0 )
-    mp_shareLocal->loadSettings();
+  mp_core->addPathToShare( share_path );
+}
+
+void GuiMain::updateLocalShareList()
+{
+  mp_shareLocal->loadSettings();
 }
 
 void GuiMain::removeFromShare( const QString& share_path )
@@ -1680,6 +1685,7 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 void GuiMain::loadSession()
 {
   QTimer::singleShot( 100, mp_sessionManager, SLOT( load() ) );
+  QTimer::singleShot( 200, mp_core, SLOT( buildLocalShareList() ) );
 }
 
 void GuiMain::saveSession()

@@ -54,7 +54,6 @@ Core::Core( QObject* parent )
 bool Core::start()
 {
   qDebug() << "Starting" << Settings::instance().programName() << "core";
-  buildLocalShareList();
 
   if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
   {

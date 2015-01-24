@@ -104,7 +104,7 @@ void GuiShareLocal::removePath()
   QList<QTreeWidgetItem*> item_list = mp_twMyShares->selectedItems();
   if( item_list.isEmpty() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select a share path" ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select a shared path." ) );
     mp_twMyShares->setFocus();
     return;
   }
@@ -141,5 +141,11 @@ void GuiShareLocal::updateShareList()
 
 void GuiShareLocal::addSharePath( const QString& share_path )
 {
+  if( Settings::instance().hasLocalSharePath( share_path ) )
+  {
+    QMessageBox::information( this, Settings::instance().programName(),
+      tr( "%1 is already shared." ).arg( share_path ) );
+    return;
+  }
   emit sharePathAdded( share_path );
 }

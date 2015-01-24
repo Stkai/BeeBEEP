@@ -63,7 +63,7 @@ public:
   void refuseToDownloadFile( const User&, const FileInfo& );
   bool startFileTransferServer();
   void stopFileTransferServer();
-  int addPathToShare( const QString& );
+  void addPathToShare( const QString& );
   int removePathFromShare( const QString& );
 
 public slots:
@@ -71,6 +71,7 @@ public slots:
   void sendWritingMessage( VNumber );
 
   /* CoreFileTransfer */
+  void buildLocalShareList();
   void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
 
@@ -83,6 +84,7 @@ signals:
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
   void fileShareAvailable( const User& );
   void updateChat( VNumber );
+  void localShareListAvailable();
 
 protected slots:
   /* CoreConnection */
@@ -101,9 +103,9 @@ protected slots:
   void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
   void fileTransferServerListening();
+  void addListToLocalShare();
 
 protected:
-  void buildLocalShareList();
   void createLocalShareMessage();
 
   /* CoreConnection */

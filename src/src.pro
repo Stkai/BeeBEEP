@@ -77,7 +77,8 @@ SOURCES += Listener.cpp \
     GuiSavedChatItem.cpp \
     GuiSavedChat.cpp \
     BeeApplication.cpp \
-    GuiScreenShot.cpp
+    GuiScreenShot.cpp \
+    BuildFileShareList.cpp
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -138,7 +139,8 @@ HEADERS += \
     GuiSavedChatItem.h \
     GuiSavedChat.h \
     BeeApplication.h \
-    GuiScreenShot.h
+    GuiScreenShot.h \
+    BuildFileShareList.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \

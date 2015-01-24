@@ -33,75 +33,9 @@ FileShare::FileShare()
 {
 }
 
-int FileShare::addPath( const QString& share_path )
-{
-  return addPathToList( share_path, share_path );
-}
-
 int FileShare::removePath( const QString& share_path )
 {
   return m_local.remove( share_path );
-}
-
-int FileShare::addPathToList( const QString& share_key, const QString& share_path )
-{
-  int num_files = 0;
-
-  if( m_local.size() >= Settings::instance().maxFileShared() )
-  {
-    qWarning() << "FileShare: max file shared reached" << m_local.size();
-    return num_files;
-  }
-
-  QFileInfo file_info( share_path );
-  if( file_info.isSymLink() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "FileShare: skip symbolic link" << share_path;
-#endif
-    return num_files;
-  }
-  else if( file_info.isDir() )
-  {
-    if( share_path.endsWith( "." ) )
-    {        
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "FileShare: skip dir" << share_path;
-#endif
-      return num_files;
-    }
-
-    QDir dir_path( share_path );
-
-    foreach( QString fp, dir_path.entryList() )
-      num_files += addPathToList( share_key, QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
-  }
-  else if( file_info.isFile() )
-  {
-    if( addFileInfo( share_key, share_path ) )
-      num_files++;
-  }
-  else
-    qWarning() << "FileShare: invalid file type from path" << share_path;
-
-  return num_files;
-}
-
-bool FileShare::addFileInfo( const QString& share_key, const QFileInfo& fi )
-{
-  if( hasPath( fi.absoluteFilePath() ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "FileShare:" << fi.absoluteFilePath() << "is already in share list";
-#endif
-    return false;
-  }
-  FileInfo file_info = Protocol::instance().fileInfo( fi );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "FileShare: adding file" << file_info.path();
-#endif
-  m_local.insert( share_key, file_info );
-  return true;
 }
 
 bool FileShare::hasPath( const QString& share_path )
