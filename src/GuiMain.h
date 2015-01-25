@@ -105,7 +105,6 @@ private slots:
   void raiseLogView();
   void raiseScreenShotView();
   void addToShare( const QString& );
-  void updateLocalShareList();
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
   void selectBeepFile();

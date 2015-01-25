@@ -63,7 +63,7 @@ public:
   void refuseToDownloadFile( const User&, const FileInfo& );
   bool startFileTransferServer();
   void stopFileTransferServer();
-  void addPathToShare( const QString& );
+  void addPathToShare( const QString&, bool );
   int removePathFromShare( const QString& );
 
 public slots:
@@ -85,6 +85,7 @@ signals:
   void fileShareAvailable( const User& );
   void updateChat( VNumber );
   void localShareListAvailable();
+  void updateStatus( const QString&, int );
 
 protected slots:
   /* CoreConnection */

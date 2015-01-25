@@ -29,6 +29,7 @@ BuildFileShareList::BuildFileShareList( QObject *parent )
   : QObject( parent )
 {
   setObjectName( "BuildFileShareList" );
+  m_broadcastList = false;
 }
 
 void BuildFileShareList::buildList()
@@ -54,18 +55,14 @@ void BuildFileShareList::addPathToList( const QString& share_key, const QString&
   QFileInfo file_info( share_path );
   if( file_info.isSymLink() )
   {
-#ifdef BEEBEEP_DEBUG
-    //qDebug() << "FileShare: skip symbolic link" << share_path;
-#endif
+    // skip symbolic link
     return;
   }
   else if( file_info.isDir() )
   {
     if( share_path.endsWith( "." ) )
     {
-#ifdef BEEBEEP_DEBUG
-      //qDebug() << "FileShare: skip dir" << share_path;
-#endif
+      // skip folder . and folder ..
       return;
     }
 
@@ -81,9 +78,6 @@ void BuildFileShareList::addPathToList( const QString& share_key, const QString&
   else if( file_info.isFile() )
   {
     FileInfo fi = Protocol::instance().fileInfo( file_info );
-#ifdef BEEBEEP_DEBUG
-    //qDebug() << "FileShare: adding file" << fi.path();
-#endif
     m_shareList.insert( share_key, fi );
   }
   else

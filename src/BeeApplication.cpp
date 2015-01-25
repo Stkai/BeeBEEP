@@ -48,8 +48,8 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_timer.setInterval( 10000 );
   m_isInIdle = false;
 
-  mp_backgroundThread = new QThread();
-  mp_backgroundThread->setPriority( QThread::LowPriority );
+  mp_jobThread = new QThread();
+  mp_jobThread->setPriority( QThread::LowPriority );
 
 #ifdef Q_OS_UNIX
   m_xcbConnectHasError = true;
@@ -63,7 +63,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 void BeeApplication::init()
 {
   qDebug() << "Starting background thread";
-  mp_backgroundThread->start();
+  mp_jobThread->start();
 }
 
 void BeeApplication::setIdleTimeout( int new_value )
@@ -132,11 +132,11 @@ void BeeApplication::cleanUp()
 #endif
   }
 
-  if( mp_backgroundThread->isRunning() )
-    mp_backgroundThread->wait( 2000 );
+  if( mp_jobThread->isRunning() )
+    mp_jobThread->wait( 2000 );
 
-  mp_backgroundThread->quit();
-  mp_backgroundThread->deleteLater();
+  mp_jobThread->quit();
+  mp_jobThread->deleteLater();
 }
 
 bool BeeApplication::isScreenSaverRunning()

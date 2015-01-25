@@ -210,6 +210,9 @@ void Core::sendFileShareListToAll()
   if( !Settings::instance().fileShare() )
     return;
 
+  if( !isConnected() )
+    return;
+
   if( !mp_fileTransfer->isListening() )
     return;
 
@@ -222,15 +225,19 @@ void Core::sendFileShareListToAll()
     c->sendData( share_list_message );
 }
 
-void Core::addPathToShare( const QString& share_path )
+void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 {
+  QString share_status = tr( "Adding to file sharing" ) + QString( " %1 ..." ).arg( share_path );
+  emit updateStatus( share_status, 1000 );
+
   BuildFileShareList *bfsl = new BuildFileShareList;
   bfsl->setPath( share_path );
+  bfsl->setBroadcastList( broadcast_list );
+  connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addListToLocalShare() ) );
   BeeApplication* bee_app = (BeeApplication*)qApp;
-  bfsl->moveToThread( bee_app->backgroundThread() );
-  connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addListToLocalShare() ), Qt::QueuedConnection );
-
-  QTimer::singleShot( 100, bfsl, SLOT( buildList() ) );
+  bfsl->moveToThread( bee_app->jobThread() );
+  QMetaObject::invokeMethod( bfsl, "buildList", Qt::QueuedConnection );
+  QTimer::singleShot( 300, bfsl, SLOT( stopBuilding() ) );
 }
 
 void Core::addListToLocalShare()
@@ -242,18 +249,16 @@ void Core::addListToLocalShare()
     return;
   }
 
-  if( !Settings::instance().localShare().contains( bfsl->path() ) )
-  {
-    QStringList local_share = Settings::instance().localShare();
-    local_share << bfsl->path();
-    Settings::instance().setLocalShare( local_share );
-  }
+  QString share_status = QString( "%1 is added to file sharing with %2 files" ).arg( bfsl->path() ).arg( bfsl->shareList().size() );
+  qDebug() << share_status;
+  emit updateStatus( share_status, 3000 );
 
   if( bfsl->shareList().size() > 0 )
   {
     FileShare::instance().addToLocal( bfsl->shareList() );
     createLocalShareMessage();
-    sendFileShareListToAll();
+    if( bfsl->broadcastList() )
+      sendFileShareListToAll();
   }
   emit localShareListAvailable();
   bfsl->deleteLater();
@@ -261,11 +266,11 @@ void Core::addListToLocalShare()
 
 int Core::removePathFromShare( const QString& share_path )
 {
-  QStringList local_share = Settings::instance().localShare();
-  if( local_share.removeOne( share_path ) )
-    Settings::instance().setLocalShare( local_share );
-
   int num_files = FileShare::instance().removePath( share_path );
+
+  QString share_status = QString( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
+  qDebug() << share_status;
+  emit updateStatus( share_status, 3000 );
 
   if( num_files <= 0 )
     return 0;
@@ -287,5 +292,5 @@ void Core::createLocalShareMessage()
 void Core::buildLocalShareList()
 {
   foreach( QString share_path, Settings::instance().localShare() )
-    addPathToShare( share_path );
+    addPathToShare( share_path, false );
 }

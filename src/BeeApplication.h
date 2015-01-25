@@ -45,7 +45,7 @@ public:
   void setIdleTimeout( int ); // in minutes
   void cleanUp();
 
-  inline QThread* backgroundThread();
+  inline QThread* jobThread();
 
 signals:
   void enteringInIdle();
@@ -66,7 +66,7 @@ private:
   QDateTime m_lastEventDateTime;
   QTimer m_timer;
   bool m_isInIdle;
-  QThread* mp_backgroundThread;
+  QThread* mp_jobThread;
 
 #ifdef Q_OS_UNIX
   xcb_connection_t* mp_xcbConnection;
@@ -78,6 +78,6 @@ private:
 
 
 // Inline Functions
-inline QThread* BeeApplication::backgroundThread() { return mp_backgroundThread; }
+inline QThread* BeeApplication::jobThread() { return mp_jobThread; }
 
 #endif // BEEBEEP_APPLICATION_H

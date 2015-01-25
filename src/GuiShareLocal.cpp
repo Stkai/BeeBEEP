@@ -65,12 +65,6 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removePath() ) );
 }
 
-void GuiShareLocal::loadSettings()
-{
-  updateMyShares();
-  updateShareList();
-}
-
 void GuiShareLocal::addFilePath()
 {
   QString file_path = QFileDialog::getOpenFileName( this, tr( "Select a file to share" ),
@@ -111,10 +105,16 @@ void GuiShareLocal::removePath()
 
   QString share_selected = item_list.first()->text( 0 );
 
+  QStringList local_share = Settings::instance().localShare();
+  if( local_share.removeOne( share_selected ) )
+    Settings::instance().setLocalShare( local_share );
+
+  updatePaths();
+
   emit sharePathRemoved( share_selected );
 }
 
-void GuiShareLocal::updateMyShares()
+void GuiShareLocal::updatePaths()
 {
   mp_twMyShares->clear();
   QTreeWidgetItem *item;
@@ -125,7 +125,7 @@ void GuiShareLocal::updateMyShares()
   }
 }
 
-void GuiShareLocal::updateShareList()
+void GuiShareLocal::updateFileSharedList()
 {
   mp_twLocalShares->clear();
   QTreeWidgetItem *item;
@@ -147,5 +147,12 @@ void GuiShareLocal::addSharePath( const QString& share_path )
       tr( "%1 is already shared." ).arg( share_path ) );
     return;
   }
+
+  QStringList local_share = Settings::instance().localShare();
+  local_share << share_path;
+  Settings::instance().setLocalShare( local_share );
+
+  updatePaths();
+
   emit sharePathAdded( share_path );
 }

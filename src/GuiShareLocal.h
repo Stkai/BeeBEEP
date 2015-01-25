@@ -35,11 +35,14 @@ class GuiShareLocal : public QWidget, private Ui::GuiShareLocalWidget
 public:
   explicit GuiShareLocal( QWidget *parent = 0 );
 
-  void loadSettings();
+  void updatePaths();
 
 signals:
   void sharePathAdded( const QString& );
   void sharePathRemoved( const QString& );
+
+public slots:
+  void updateFileSharedList();
 
 protected slots:
   void addFilePath();
@@ -48,9 +51,6 @@ protected slots:
 
 protected:
   void addSharePath( const QString& );
-  void updateMyShares();
-  void updateShareList();
-
 
 };
 

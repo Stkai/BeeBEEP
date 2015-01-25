@@ -97,7 +97,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), mp_chatList, SLOT( updateChat( VNumber ) ) );
-  connect( mp_core, SIGNAL( localShareListAvailable() ), this, SLOT( updateLocalShareList() ) );
+  connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
+  connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -288,7 +289,6 @@ void GuiMain::initGuiItems()
   mp_actGroupAdd->setEnabled( false );
 
   updateStatusIcon();
-  mp_shareLocal->loadSettings();
 
   refreshTitle( Settings::instance().localUser() );
 }
@@ -1490,18 +1490,13 @@ void GuiMain::trayMessageClicked()
 
 void GuiMain::addToShare( const QString& share_path )
 {
-  mp_core->addPathToShare( share_path );
-}
-
-void GuiMain::updateLocalShareList()
-{
-  mp_shareLocal->loadSettings();
+  mp_core->addPathToShare( share_path, true );
 }
 
 void GuiMain::removeFromShare( const QString& share_path )
 {
   if( mp_core->removePathFromShare( share_path ) > 0 )
-    mp_shareLocal->loadSettings();
+    mp_shareLocal->updateFileSharedList();
 }
 
 void GuiMain::raiseChatView()
@@ -1684,8 +1679,9 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 
 void GuiMain::loadSession()
 {
-  QTimer::singleShot( 100, mp_sessionManager, SLOT( load() ) );
-  QTimer::singleShot( 200, mp_core, SLOT( buildLocalShareList() ) );
+  QTimer::singleShot( 200, mp_sessionManager, SLOT( load() ) );
+  mp_shareLocal->updatePaths();
+  QTimer::singleShot( 400, mp_core, SLOT( buildLocalShareList() ) );
 }
 
 void GuiMain::saveSession()
