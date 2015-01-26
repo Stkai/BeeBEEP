@@ -128,10 +128,6 @@
         <translation type="obsolete">%1 Hai iniziato a cercare nuovi utenti all&apos;indirizzo di rete %2...</translation>
     </message>
     <message>
-        <source>%1 %2 &lt;a href=&apos;%3&apos;&gt;%4&lt;/a&gt;.</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>You are already connected to the network account.</source>
         <translation type="obsolete">La connessione al servizio di rete è già attiva.</translation>
     </message>
@@ -254,6 +250,10 @@
     <message>
         <source>%1 is unable to add a new user from %2 (invalid protocol or password).</source>
         <translation type="obsolete">%1 non può aggiungere un nuovo utente da %2 (protocollo o password non validi).</translation>
+    </message>
+    <message>
+        <source>Adding to file sharing</source>
+        <translation>Aggiungo ai file condivisi</translation>
     </message>
 </context>
 <context>
@@ -1948,7 +1948,15 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Please select a share path</source>
-        <translation>Seleziona un percorso da mettere in condivisione</translation>
+        <translation type="obsolete">Seleziona un percorso da mettere in condivisione</translation>
+    </message>
+    <message>
+        <source>Please select a shared path.</source>
+        <translation>Seleziona un elemento cha hai condiviso.</translation>
+    </message>
+    <message>
+        <source>%1 is already shared.</source>
+        <translation>%1 è già un elemento condiviso.</translation>
     </message>
 </context>
 <context>

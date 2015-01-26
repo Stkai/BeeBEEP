@@ -36,6 +36,8 @@ public:
   explicit GuiShareLocal( QWidget *parent = 0 );
 
   void updatePaths();
+  inline bool isFirstTimeShow() const;
+  inline void setIsFirstTimeShow( bool );
 
 signals:
   void sharePathAdded( const QString& );
@@ -48,10 +50,20 @@ protected slots:
   void addFilePath();
   void addFolderPath();
   void removePath();
+  void loadFileInfoInList();
 
 protected:
   void addSharePath( const QString& );
+  void setActionsEnabled( bool );
+
+private:
+  bool m_isFirstTimeShow;
 
 };
+
+
+// Inline Functions
+inline bool GuiShareLocal::isFirstTimeShow() const { return m_isFirstTimeShow; }
+inline void GuiShareLocal::setIsFirstTimeShow( bool new_value ) { m_isFirstTimeShow = new_value; }
 
 #endif // BEEBEEP_GUISHARELOCAL_H

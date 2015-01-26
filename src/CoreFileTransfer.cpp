@@ -92,7 +92,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     if( peer->isTransferCompleted() && fi.isDownload() )
     {
       QString s_open = tr( "Open" );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 <a href='%3'>%4</a>." )
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 <a href='%3'>%4</a>." )
                              .arg( icon_html, s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() ),
                              DispatchToAllChatsWithUser );
     }
@@ -237,7 +237,6 @@ void Core::addPathToShare( const QString& share_path, bool broadcast_list )
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bfsl->moveToThread( bee_app->jobThread() );
   QMetaObject::invokeMethod( bfsl, "buildList", Qt::QueuedConnection );
-  QTimer::singleShot( 300, bfsl, SLOT( stopBuilding() ) );
 }
 
 void Core::addListToLocalShare()
@@ -249,9 +248,13 @@ void Core::addListToLocalShare()
     return;
   }
 
-  QString share_status = QString( "%1 is added to file sharing with %2 files" ).arg( bfsl->path() ).arg( bfsl->shareList().size() );
+  QString share_status = QString( "%1 is added to file sharing with %2 files (elapsed time: %3)" )
+                           .arg( bfsl->path() )
+                           .arg( bfsl->shareList().size() )
+                           .arg( Bee::elapsedTimeToString( bfsl->elapsedTime() ) );
   qDebug() << share_status;
   emit updateStatus( share_status, 3000 );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ), DispatchToChat );
 
   if( bfsl->shareList().size() > 0 )
   {
@@ -260,7 +263,10 @@ void Core::addListToLocalShare()
     if( bfsl->broadcastList() )
       sendFileShareListToAll();
   }
-  emit localShareListAvailable();
+
+  if( bfsl->broadcastList() )
+    emit localShareListAvailable();
+
   bfsl->deleteLater();
 }
 

@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "GuiFileInfoItem.h"
 #include "GuiShareLocal.h"
 #include "FileShare.h"
 #include "Settings.h"
@@ -31,6 +32,8 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   : QWidget(parent)
 {
   setupUi( this );
+
+  m_isFirstTimeShow = true;
 
   mp_twMyShares->setRootIsDecorated( false );
   mp_twMyShares->setSortingEnabled( true );
@@ -63,6 +66,13 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   connect( mp_pbAddFile, SIGNAL( clicked() ), this, SLOT( addFilePath() ) );
   connect( mp_pbAddFolder, SIGNAL( clicked() ), this, SLOT( addFolderPath() ) );
   connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removePath() ) );
+}
+
+void GuiShareLocal::setActionsEnabled( bool enable )
+{
+  mp_pbAddFile->setEnabled( enable );
+  mp_pbAddFolder->setEnabled( enable );
+  mp_pbRemove->setEnabled( enable );
 }
 
 void GuiShareLocal::addFilePath()
@@ -127,16 +137,26 @@ void GuiShareLocal::updatePaths()
 
 void GuiShareLocal::updateFileSharedList()
 {
+  setActionsEnabled( false );
+  mp_twLocalShares->setCursor( Qt::WaitCursor );
   mp_twLocalShares->clear();
-  QTreeWidgetItem *item;
+  QTimer::singleShot( 600, this, SLOT( loadFileInfoInList() ) );
+}
+
+void GuiShareLocal::loadFileInfoInList()
+{
+  GuiFileInfoItem *item;
   foreach( FileInfo fi, FileShare::instance().local() )
   {
-    item = new QTreeWidgetItem( mp_twLocalShares );
+    item = new GuiFileInfoItem( mp_twLocalShares, 1, Qt::UserRole + 1 );
     item->setText( 0, fi.name() );
     item->setIcon( 0, QIcon( Bee::fileTypeIconFileName( Bee::fileTypeFromSuffix( fi.suffix() ) ) ) );
     item->setText( 1, Bee::bytesToString( fi.size() ) );
+    item->setData( 1, Qt::UserRole + 1, fi.size() );
     item->setText( 2, fi.path() );
   }
+  setActionsEnabled( true );
+  mp_twLocalShares->setCursor( Qt::ArrowCursor );
 }
 
 void GuiShareLocal::addSharePath( const QString& share_path )

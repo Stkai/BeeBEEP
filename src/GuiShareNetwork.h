@@ -26,10 +26,8 @@
 
 #include "ui_GuiShareNetwork.h"
 #include "Config.h"
-
 class FileInfo;
 class User;
-
 
 
 class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
@@ -38,7 +36,7 @@ class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
 
 public:
   enum ColumnType { ColumnFile, ColumnSize, ColumnUser, ColumnStatus };
-  enum DataType { UserId = Qt::UserRole + 1, FileId, FilePath };
+  enum DataType { UserId = Qt::UserRole + 1, FileId, FilePath, FileSize };
 
   explicit GuiShareNetwork( QWidget *parent = 0 );
 
@@ -56,6 +54,7 @@ public slots:
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
   void enableSearchButton();
+  void delaySearch();
 
 protected:
   bool filterPassThrough( const User&, const FileInfo& );

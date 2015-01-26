@@ -104,7 +104,7 @@ QString Bee::bytesToString( FileSizeType bytes, int precision )
   return QString( "%1 %2").arg( result, 0, 'f', prec > 0 ? (precision >= 0 ? precision : prec) : 0 ).arg( suffix );
 }
 
-QString Bee::timerToString( int time_elapsed )
+QString Bee::elapsedTimeToString( int time_elapsed )
 {
   QTime t( 0, 0 );
   t = t.addMSecs( time_elapsed );

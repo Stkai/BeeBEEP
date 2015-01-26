@@ -21,41 +21,19 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISAVEDCHATLIST_H
-#define BEEBEEP_GUISAVEDCHATLIST_H
-
-#include "GuiSavedChatItem.h"
+#include "GuiFileInfoItem.h"
 
 
-class GuiSavedChatList : public QTreeWidget
+GuiFileInfoItem::GuiFileInfoItem( QTreeWidget* parent, int size_in_column, int size_role )
+ : QTreeWidgetItem( parent ), m_sizeInColumn( size_in_column ), m_sizeRole( size_role )
 {
-  Q_OBJECT
+}
 
-public:
-  GuiSavedChatList( QWidget* parent = 0 );
-  virtual QSize sizeHint() const;
+bool GuiFileInfoItem::operator<( const QTreeWidgetItem& item ) const
+{
+  if( m_sizeInColumn == treeWidget()->sortColumn() )
+    return data( m_sizeInColumn, m_sizeRole ).toLongLong() > item.data( m_sizeInColumn, m_sizeRole ).toLongLong();
 
-signals:
-  void savedChatSelected( const QString& );
-  void savedChatRemoved( const QString& );
-  void savedChatLinkRequest( const QString& );
+  return QTreeWidgetItem::operator<( item );
+}
 
-public slots:
-  void updateSavedChats();
-
-protected slots:
-  void savedChatDoubleClicked( QTreeWidgetItem*, int );
-  void showSavedChatMenu( const QPoint& );
-  void showSavedChatSelected();
-  void removeSavedChatSelected();
-  void linkSavedChatSelected();
-
-private:
-  QString m_savedChatSelected;
-  QMenu* mp_menu;
-  QAction* mp_actLink;
-
-};
-
-
-#endif // BEEBEEP_GUISAVEDCHATLIST_H

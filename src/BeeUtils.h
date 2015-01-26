@@ -38,7 +38,7 @@ namespace Bee
   inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
   inline VNumber qVariantToVNumber( const QVariant& );
   QString bytesToString( FileSizeType, int precision = -1 );
-  QString timerToString( int msec );
+  QString elapsedTimeToString( int msec );
   QString uniqueFilePath( const QString& );
   QString fileTypeIconFileName( FileType );
   FileType fileTypeFromSuffix( const QString& );

@@ -123,7 +123,7 @@ int main( int argc, char *argv[] )
     QTimer::singleShot( 100, &mw, SLOT( hideToTrayIcon() ) );
 
   /* Starting connection to BeeBEEP Network */
-  QTimer::singleShot( 300, &mw, SLOT( startStopCore() ) );
+  QTimer::singleShot( 500, &mw, SLOT( startStopCore() ) );
 
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );

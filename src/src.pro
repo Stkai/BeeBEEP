@@ -71,14 +71,16 @@ SOURCES += Listener.cpp \
     GuiAskPassword.cpp \
     GuiLog.cpp \
     Log.cpp \
-    GuiSessionManager.cpp \
     GuiChatMessage.cpp \
     GuiSavedChatList.cpp \
     GuiSavedChatItem.cpp \
     GuiSavedChat.cpp \
     BeeApplication.cpp \
     GuiScreenShot.cpp \
-    BuildFileShareList.cpp
+    BuildFileShareList.cpp \
+    BuildSavedChatList.cpp \
+    SaveChatList.cpp \
+    GuiFileInfoItem.cpp
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -133,14 +135,16 @@ HEADERS += \
     GuiCreateGroupChat.h \
     GuiAskPassword.h \
     GuiLog.h \
-    GuiSessionManager.h \
     GuiChatMessage.h \
     GuiSavedChatList.h \
     GuiSavedChatItem.h \
     GuiSavedChat.h \
     BeeApplication.h \
     GuiScreenShot.h \
-    BuildFileShareList.h
+    BuildFileShareList.h \
+    BuildSavedChatList.h \
+    SaveChatList.h \
+    GuiFileInfoItem.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \

@@ -102,7 +102,7 @@ void FileTransferPeer::setTransferCompleted()
 {
   qDebug() << m_fileInfo.name() << "transfer completed";
   m_state = FileTransferPeer::Completed;
-  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timerToString( m_time.elapsed() ) ) );
+  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
   closeAll();
 }
 

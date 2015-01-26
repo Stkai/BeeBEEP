@@ -133,7 +133,7 @@ void BeeApplication::cleanUp()
   }
 
   if( mp_jobThread->isRunning() )
-    mp_jobThread->wait( 2000 );
+    mp_jobThread->wait( 1000 );
 
   mp_jobThread->quit();
   mp_jobThread->deleteLater();

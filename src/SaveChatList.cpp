@@ -23,25 +23,25 @@
 
 #include "ChatManager.h"
 #include "GuiChatMessage.h"
-#include "GuiSessionManager.h"
+#include "SaveChatList.h"
 #include "Protocol.h"
 #include "Settings.h"
 
 
-GuiSessionManager::GuiSessionManager( QObject* parent )
+SaveChatList::SaveChatList( QObject* parent )
  : QObject( parent )
 {
-  setObjectName( "GuiSessionManager" );
+  setObjectName( "SaveChatList" );
 }
 
-bool GuiSessionManager::save()
+void SaveChatList::save()
 {
   QString file_name = QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" );
   QFile file( file_name );
   if( !file.open( QIODevice::WriteOnly ) )
   {
-    qWarning() << "Unable to open file" << file.fileName() << ": saving session aborted";
-    return false;
+    qWarning() << "Unable to open file" << file.fileName() << ": saving chat messages aborted";
+    return;
   }
 
   QDataStream stream( &file );
@@ -57,11 +57,9 @@ bool GuiSessionManager::save()
   saveChats( &stream );
 
   file.close();
-
-  return true;
 }
 
-void GuiSessionManager::saveChats( QDataStream* stream )
+void SaveChatList::saveChats( QDataStream* stream )
 {
   if( !Settings::instance().chatAutoSave() || Settings::instance().chatMaxLineSaved() <= 0 )
   {
@@ -138,67 +136,3 @@ void GuiSessionManager::saveChats( QDataStream* stream )
   }
 }
 
-bool GuiSessionManager::load()
-{
-  QString file_name = QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" );
-  QFile file( file_name );
-
-  if( !file.open( QIODevice::ReadOnly ) )
-  {
-    qWarning() << "Unable to open file" << file.fileName() << ": loading session aborted";
-    return false;
-  }
-
-  QDataStream stream( &file );
-  stream.setVersion( DATASTREAM_VERSION );
-
-  QStringList file_header;
-
-  stream >> file_header;
-
-  loadChats( &stream );
-
-  file.close();
-
-  emit( loadComplete() );
-
-  return true;
-}
-
-void GuiSessionManager::loadChats( QDataStream* stream )
-{
-  int num_of_chats = 0;
-  (*stream) >> num_of_chats;
-
-  if( num_of_chats <= 0 )
-    return;
-
-  QString chat_name_encrypted;
-  QString chat_text_encrypted;
-  QString chat_name;
-  QString chat_text;
-
-  for( int i = 0; i < num_of_chats; i++ )
-  {
-    (*stream) >> chat_name_encrypted;
-    (*stream) >> chat_text_encrypted;
-
-    if( stream->status() != QDataStream::Ok )
-    {
-      qWarning() << "Error reading datastream, abort loading chat";
-      return;
-    }
-
-    chat_name = Protocol::instance().simpleEncryptDecrypt( chat_name_encrypted );
-    chat_text = Protocol::instance().simpleEncryptDecrypt( chat_text_encrypted );
-
-    qDebug() << "Loading chat" << chat_name;
-
-    if( chat_text.simplified().isEmpty() )
-      qDebug() << "The chat" << chat_name << "saved is empty";
-    else
-      ChatManager::instance().setSavedTextToChat( chat_name, chat_text );
-  }
-
-  ChatManager::instance().setLoadHistoryCompleted( true );
-}

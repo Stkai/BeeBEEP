@@ -69,6 +69,7 @@ public:
 public slots:
   /* CoreChat */
   void sendWritingMessage( VNumber );
+  void buildSavedChatList();
 
   /* CoreFileTransfer */
   void buildLocalShareList();
@@ -85,6 +86,7 @@ signals:
   void fileShareAvailable( const User& );
   void updateChat( VNumber );
   void localShareListAvailable();
+  void savedChatListAvailable();
   void updateStatus( const QString&, int );
 
 protected slots:
@@ -105,6 +107,9 @@ protected slots:
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
   void fileTransferServerListening();
   void addListToLocalShare();
+
+  /* CoreChat */
+  void addListToSavedChats();
 
 protected:
   void createLocalShareMessage();

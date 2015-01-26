@@ -21,41 +21,25 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISAVEDCHATLIST_H
-#define BEEBEEP_GUISAVEDCHATLIST_H
+#ifndef BEEBEEP_GUISAVECHATLIST_H
+#define BEEBEEP_GUISAVECHATLIST_H
 
-#include "GuiSavedChatItem.h"
+#include "Config.h"
 
 
-class GuiSavedChatList : public QTreeWidget
+class SaveChatList : public QObject
 {
   Q_OBJECT
 
 public:
-  GuiSavedChatList( QWidget* parent = 0 );
-  virtual QSize sizeHint() const;
-
-signals:
-  void savedChatSelected( const QString& );
-  void savedChatRemoved( const QString& );
-  void savedChatLinkRequest( const QString& );
+  explicit SaveChatList( QObject* parent = 0 );
 
 public slots:
-  void updateSavedChats();
-
-protected slots:
-  void savedChatDoubleClicked( QTreeWidgetItem*, int );
-  void showSavedChatMenu( const QPoint& );
-  void showSavedChatSelected();
-  void removeSavedChatSelected();
-  void linkSavedChatSelected();
-
-private:
-  QString m_savedChatSelected;
-  QMenu* mp_menu;
-  QAction* mp_actLink;
+  void save();
+  
+protected:
+  void saveChats( QDataStream* );
 
 };
 
-
-#endif // BEEBEEP_GUISAVEDCHATLIST_H
+#endif // BEEBEEP_GUISAVECHATLIST_H

@@ -21,32 +21,24 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISESSIONMANAGER_H
-#define BEEBEEP_GUISESSIONMANAGER_H
+#ifndef BEEBEEP_GUIFILEINFOITEM_H
+#define BEEBEEP_GUIFILEINFOITEM_H
 
 #include "Config.h"
 
 
-class GuiSessionManager : public QObject
+class GuiFileInfoItem : public QTreeWidgetItem
 {
-  Q_OBJECT
-
 public:
-  GuiSessionManager( QObject* parent );
+  GuiFileInfoItem( QTreeWidget*, int size_in_column, int size_role );
 
-signals:
-  void loadComplete();
-  void saveComplete();
+  bool operator<( const QTreeWidgetItem& ) const;
 
-public slots:
-  bool load();
-  bool save();
-  
-protected:
-  void saveChats( QDataStream* );
-  void loadChats( QDataStream* );
-
+private:
+  int m_sizeInColumn;
+  int m_sizeRole;
 
 };
 
-#endif // BEEBEEP_GUISESSIONMANAGER_H
+
+#endif // BEEBEEP_GUIFILEINFOITEM_H

@@ -38,7 +38,6 @@
 #include "GuiSavedChatList.h"
 #include "GuiScreenShot.h"
 #include "GuiSearchUser.h"
-#include "GuiSessionManager.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
 #include "GuiSystemTray.h"
@@ -48,6 +47,7 @@
 #include "GuiVCard.h"
 #include "GuiWizard.h"
 #include "PluginManager.h"
+#include "SaveChatList.h"
 #include "Settings.h"
 #include "UserManager.h"
 #ifdef Q_OS_WIN
@@ -77,8 +77,6 @@ GuiMain::GuiMain( QWidget *parent )
 
   mp_trayIcon = new GuiSystemTray( this );
 
-  mp_sessionManager = new GuiSessionManager( this );
-
   m_lastUserStatus = User::Online;
 
   createActions();
@@ -98,6 +96,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), mp_chatList, SLOT( updateChat( VNumber ) ) );
   connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
+  connect( mp_core, SIGNAL( savedChatListAvailable() ), mp_savedChatList, SLOT( updateSavedChats() ) );
   connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
@@ -123,8 +122,6 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
-
-  connect( mp_sessionManager, SIGNAL( loadComplete() ), this, SLOT( loadSessionCompleted() ) );
 
   connect( mp_savedChatList, SIGNAL( savedChatSelected( const QString& ) ), this, SLOT( showSavedChatSelected( const QString& ) ) );
   connect( mp_savedChatList, SIGNAL( savedChatRemoved( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
@@ -1510,6 +1507,11 @@ void GuiMain::raiseLocalShareView()
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_shareLocal );
+  if( mp_shareLocal->isFirstTimeShow() )
+  {
+    mp_shareLocal->updateFileSharedList();
+    mp_shareLocal->setIsFirstTimeShow( false );
+  }
   checkViewActions();
 }
 
@@ -1679,21 +1681,15 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 
 void GuiMain::loadSession()
 {
-  QTimer::singleShot( 200, mp_sessionManager, SLOT( load() ) );
+  QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   mp_shareLocal->updatePaths();
   QTimer::singleShot( 400, mp_core, SLOT( buildLocalShareList() ) );
 }
 
 void GuiMain::saveSession()
 {
-  mp_sessionManager->save();
-}
-
-void GuiMain::loadSessionCompleted()
-{
-  // Load saved chats in list
-  ChatManager::instance().checkSavedChats();
-  mp_savedChatList->updateSavedChats();
+  SaveChatList scl;
+  scl.save();
 }
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )

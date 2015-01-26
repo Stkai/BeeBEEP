@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "GuiFileInfoItem.h"
 #include "GuiShareNetwork.h"
 #include "FileShare.h"
 #include "Settings.h"
@@ -71,6 +72,7 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
 
 void GuiShareNetwork::loadShares( const User& u )
 {
+  GuiFileInfoItem *item;
   foreach( FileInfo fi, FileShare::instance().network().values( u.id() ) )
   {
     if( !fi.isValid() )
@@ -82,13 +84,14 @@ void GuiShareNetwork::loadShares( const User& u )
     if( !filterPassThrough( u, fi ) )
       continue;
 
-    QTreeWidgetItem* item = new QTreeWidgetItem( mp_twShares );
+    item = new GuiFileInfoItem( mp_twShares, ColumnSize, FileSize );
     item->setIcon( ColumnFile, QIcon( Bee::fileTypeIconFileName( Bee::fileTypeFromSuffix( fi.suffix() ) ) ) );
     item->setText( ColumnFile, fi.name() );
     item->setData( ColumnFile, UserId, u.id() );
     item->setData( ColumnFile, FileId, fi.id() );
     item->setData( ColumnFile, FilePath, QString( "" ) );
     item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
+    item->setData( ColumnSize, FileSize, fi.size() );
     item->setText( ColumnUser, u.name() );
   }
 }
@@ -115,8 +118,14 @@ void GuiShareNetwork::search()
 {
   mp_pbSearch->setEnabled( false );
   mp_twShares->clear();
+  mp_twShares->setCursor( Qt::WaitCursor );
   m_filterUserId = mp_comboUsers->currentIndex() <= 0 ? 0 : Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
 
+  QTimer::singleShot( 500, this, SLOT( delaySearch() ) );
+}
+
+void GuiShareNetwork::delaySearch()
+{
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isConnected() )
@@ -129,6 +138,7 @@ void GuiShareNetwork::search()
     }
   }
 
+  mp_twShares->setCursor( Qt::ArrowCursor );
   emit fileShareListRequested();
 }
 
@@ -144,7 +154,7 @@ bool GuiShareNetwork::filterPassThrough( const User& u, const FileInfo& fi )
   if( mp_comboFileType->currentIndex() == (int)Bee::NumFileType )
     return true;
   else
-    return (int)Bee::fileTypeFromSuffix( fi.suffix() ) == mp_comboFileType->currentIndex();
+    return mp_comboFileType->currentIndex() == (int)Bee::fileTypeFromSuffix( fi.suffix() );
 }
 
 void GuiShareNetwork::enableSearchButton()

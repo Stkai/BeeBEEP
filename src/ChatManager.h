@@ -50,13 +50,11 @@ public:
 
   QList<Chat> groupChatForUser( VNumber ) const;
 
-  void checkSavedChats(); // after a load completed
+  void addSavedChats( const QMap<QString, QString>& );
   void autoLinkSavedChatByNickname( const Chat& );
   inline QString chatSavedText( const QString& ) const;
   inline bool chatHasSavedText( const QString& ) const;
   inline void removeSavedTextFromChat( const QString& );
-  inline void setSavedTextToChat( const QString&, const QString& );
-  inline void setLoadHistoryCompleted( bool );
   inline bool isLoadHistoryCompleted() const;
   void updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name, bool add_to_new );
   inline const QMap<QString, QString>& constHistoryMap() const;
@@ -101,8 +99,6 @@ inline QList<Chat>& ChatManager::chatList() { return m_chats; }
 inline QString ChatManager::chatSavedText( const QString& chat_name ) const { return m_history.value( chat_name ); }
 inline bool ChatManager::chatHasSavedText( const QString& chat_name ) const { return m_history.contains( chat_name ); }
 inline void ChatManager::removeSavedTextFromChat( const QString& chat_name ) { m_history.remove( chat_name ); }
-inline void ChatManager::setSavedTextToChat( const QString& chat_name, const QString& chat_text ) { m_history.insert( chat_name, chat_text ); }
-inline void ChatManager::setLoadHistoryCompleted( bool new_value ) { m_isLoadHistoryCompleted = new_value; }
 inline bool ChatManager::isLoadHistoryCompleted() const { return m_isLoadHistoryCompleted; }
 inline const QMap<QString, QString>& ChatManager::constHistoryMap() const { return m_history; }
 

@@ -37,7 +37,6 @@ class GuiLog;
 class GuiSavedChat;
 class GuiSavedChatList;
 class GuiScreenShot;
-class GuiSessionManager;
 class GuiShareLocal;
 class GuiShareNetwork;
 class GuiSystemTray;
@@ -112,7 +111,6 @@ private slots:
   void playBeep();
   void addUserToGroup();
   void createGroup();
-  void loadSessionCompleted();
   void showSavedChatSelected( const QString& );
   void removeSavedChat( const QString& );
   void linkSavedChat( const QString& );
@@ -204,8 +202,6 @@ private:
   QDockWidget* mp_dockUserList;
 
   GuiSystemTray* mp_trayIcon;
-
-  GuiSessionManager* mp_sessionManager;
 
   QMap<QString, QMenu*> m_mapGameMenu;
 

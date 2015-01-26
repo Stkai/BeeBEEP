@@ -173,7 +173,8 @@ void ChatManager::updateChatSavedText( const QString& old_chat_name, const QStri
     chat_text_old.append( "<br />" );
     chat_text_old.append( chatSavedText( new_chat_name ) );
   }
-  setSavedTextToChat( new_chat_name, chat_text_old );
+
+  m_history.insert( new_chat_name, chat_text_old );
 }
 
 void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path )
@@ -203,8 +204,10 @@ void ChatManager::autoLinkSavedChatByNickname( const Chat& c )
   }
 }
 
-void ChatManager::checkSavedChats()
+void ChatManager::addSavedChats( const QMap<QString, QString>& saved_chats )
 {
+  m_history = saved_chats;
+  m_isLoadHistoryCompleted = true;
   if( Settings::instance().autoLinkSavedChatByNickname() )
   {
     foreach( Chat c, m_chats )

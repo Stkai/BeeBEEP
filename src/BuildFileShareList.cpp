@@ -30,28 +30,20 @@ BuildFileShareList::BuildFileShareList( QObject *parent )
 {
   setObjectName( "BuildFileShareList" );
   m_broadcastList = false;
+  m_elapsedTime = 0;
 }
 
 void BuildFileShareList::buildList()
 {
-  m_stopBuilding = false;
+  QTime elapsed_time;
+  elapsed_time.start();
   addPathToList( m_path, m_path );
-  if( m_stopBuilding )
-    qDebug() << "Building list of shared files cancelled by user";
-  else
-    emit listCompleted();
-}
-
-void BuildFileShareList::stopBuilding()
-{
-  m_stopBuilding = true;
+  m_elapsedTime = elapsed_time.elapsed();
+  emit listCompleted();
 }
 
 void BuildFileShareList::addPathToList( const QString& share_key, const QString& share_path )
 {
-  if( m_stopBuilding )
-    return;
-
   QFileInfo file_info( share_path );
   if( file_info.isSymLink() )
   {
@@ -69,11 +61,8 @@ void BuildFileShareList::addPathToList( const QString& share_key, const QString&
     QDir dir_path( share_path );
 
     foreach( QString fp, dir_path.entryList() )
-    {
-      if( m_stopBuilding )
-        break;
       addPathToList( share_key, QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
-    }
+
   }
   else if( file_info.isFile() )
   {

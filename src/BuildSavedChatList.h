@@ -21,41 +21,40 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISAVEDCHATLIST_H
-#define BEEBEEP_GUISAVEDCHATLIST_H
+#ifndef BEEBEEP_BUILDSAVEDCHATLIST_H
+#define BEEBEEP_BUILDSAVEDCHATLIST_H
 
-#include "GuiSavedChatItem.h"
+#include "Config.h"
 
 
-class GuiSavedChatList : public QTreeWidget
+class BuildSavedChatList : public QObject
 {
   Q_OBJECT
 
 public:
-  GuiSavedChatList( QWidget* parent = 0 );
-  virtual QSize sizeHint() const;
+  explicit BuildSavedChatList( QObject* parent = 0 );
+
+  inline const QMap<QString, QString> savedChats() const;
+  inline int elapsedTime() const;
 
 signals:
-  void savedChatSelected( const QString& );
-  void savedChatRemoved( const QString& );
-  void savedChatLinkRequest( const QString& );
+  void listCompleted();
 
 public slots:
-  void updateSavedChats();
+  void buildList();
 
-protected slots:
-  void savedChatDoubleClicked( QTreeWidgetItem*, int );
-  void showSavedChatMenu( const QPoint& );
-  void showSavedChatSelected();
-  void removeSavedChatSelected();
-  void linkSavedChatSelected();
+protected:
+  void loadSavedChats( QDataStream* );
 
 private:
-  QString m_savedChatSelected;
-  QMenu* mp_menu;
-  QAction* mp_actLink;
+  QMap<QString, QString> m_savedChats;
+  int m_elapsedTime;
 
 };
 
 
-#endif // BEEBEEP_GUISAVEDCHATLIST_H
+// Inline Functions
+inline const QMap<QString, QString> BuildSavedChatList::savedChats() const { return m_savedChats; }
+inline int BuildSavedChatList::elapsedTime() const { return m_elapsedTime; }
+
+#endif // BEEBEEP_BUILDSAVEDCHATLIST_H

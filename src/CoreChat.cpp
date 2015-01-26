@@ -21,7 +21,9 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeApplication.h"
 #include "BeeUtils.h"
+#include "BuildSavedChatList.h"
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
@@ -318,4 +320,39 @@ bool Core::sendMessageToLocalNetwork( const User& to_user, const Message& m )
   }
 
   return c->sendMessage( m );
+}
+
+void Core::buildSavedChatList()
+{
+  BuildSavedChatList *bscl = new BuildSavedChatList;
+  connect( bscl, SIGNAL( listCompleted() ), this, SLOT( addListToSavedChats() ) );
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bscl->moveToThread( bee_app->jobThread() );
+  QMetaObject::invokeMethod( bscl, "buildList", Qt::QueuedConnection );
+}
+
+void Core::addListToSavedChats()
+{
+  BuildSavedChatList *bscl = qobject_cast<BuildSavedChatList*>( sender() );
+  if( !bscl )
+  {
+    qWarning() << "Core received a signal from invalid BuildSavedChatList instance";
+    return;
+  }
+
+  QString loading_status = QString( "%1 saved chat is added to history (elapsed time: %2)" )
+                             .arg( bscl->savedChats().size() )
+                             .arg( Bee::elapsedTimeToString( bscl->elapsedTime() ) );
+  qDebug() << loading_status;
+
+  if( bscl->savedChats().size() > 1 )
+  {
+    emit updateStatus( loading_status, 3000 );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/saved-chat.png", "*H*" ), loading_status ), DispatchToChat );
+  }
+
+  ChatManager::instance().addSavedChats( bscl->savedChats() );
+
+  bscl->deleteLater();
+  emit savedChatListAvailable();
 }
