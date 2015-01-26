@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "GuiIconProvider.h"
 #include "GuiFileInfoItem.h"
 #include "GuiShareNetwork.h"
 #include "FileShare.h"
@@ -55,7 +56,7 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
 #endif
   for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
-    mp_comboFileType->insertItem( i, QIcon( Bee::fileTypeIconFileName( (Bee::FileType)i ) ), Bee::fileTypeToString( (Bee::FileType)i ), i );
+    mp_comboFileType->insertItem( i, GuiIconProvider::instance().iconFromFileType( i ), Bee::fileTypeToString( (Bee::FileType)i ), i );
 
   mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/star.png" ), tr( "All Files" ), Bee::NumFileType );
   mp_comboFileType->setCurrentIndex( Bee::NumFileType );
@@ -85,7 +86,7 @@ void GuiShareNetwork::loadShares( const User& u )
       continue;
 
     item = new GuiFileInfoItem( mp_twShares, ColumnSize, FileSize );
-    item->setIcon( ColumnFile, QIcon( Bee::fileTypeIconFileName( Bee::fileTypeFromSuffix( fi.suffix() ) ) ) );
+    item->setIcon( ColumnFile, GuiIconProvider::instance().findIcon( fi ) );
     item->setText( ColumnFile, fi.name() );
     item->setData( ColumnFile, UserId, u.id() );
     item->setData( ColumnFile, FileId, fi.id() );

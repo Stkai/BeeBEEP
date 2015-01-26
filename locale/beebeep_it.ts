@@ -289,6 +289,10 @@
         <source>Other</source>
         <translation>Altri</translation>
     </message>
+    <message>
+        <source>Executable</source>
+        <translation>Eseguibili</translation>
+    </message>
 </context>
 <context>
     <name>FileTransferPeer</name>

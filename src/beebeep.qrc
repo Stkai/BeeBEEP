@@ -88,5 +88,6 @@
         <file>images/update.png</file>
         <file>images/screenshot.png</file>
         <file>images/send.png</file>
+        <file>images/file-exe.png</file>
     </qresource>
 </RCC>

@@ -21,19 +21,50 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUIICONPROVIDER_H
+#define BEEBEEP_GUIICONPROVIDER_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
-const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files";
-const char* BEEBEEP_PLUGIN_WEBSITE = "http://beebeep.sourceforge.net/download.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "http://beebeep.sourceforge.net/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.7";
-const int BEEBEEP_PROTO_VERSION = 53;
-const int BEEBEEP_SETTINGS_VERSION = 2;
-const int BEEBEEP_BUILD = 298;
+#include "Config.h"
+class FileInfo;
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiIconProvider
+{
+// Singleton Object
+  static GuiIconProvider* mp_instance;
+
+public:
+  QIcon findIcon( const FileInfo& );
+  QIcon iconFromFileType( int file_type );
+  inline int cacheSize() const;
+  void clearCache();
+
+  static GuiIconProvider& instance()
+  {
+    if( !mp_instance )
+      mp_instance = new GuiIconProvider();
+    return *mp_instance;
+  }
+
+  static void close()
+  {
+    if( mp_instance )
+    {
+      delete mp_instance;
+      mp_instance = NULL;
+    }
+  }
+
+protected:
+  GuiIconProvider();
+
+private:
+  QMap<QString, QIcon> m_cache;
+  QFileIconProvider m_provider;
+
+};
+
+// Inline Functions
+inline int GuiIconProvider::cacheSize() const { return m_cache.size(); }
+
+#endif // BEEBEEP_GUIICONPROVIDER_H

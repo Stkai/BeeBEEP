@@ -25,6 +25,7 @@
 #include "ChatManager.h"
 #include "ColorManager.h"
 #include "FileShare.h"
+#include "GuiIconProvider.h"
 #include "GuiMain.h"
 #include "Log.h"
 #include "PluginManager.h"
@@ -92,6 +93,9 @@ int main( int argc, char *argv[] )
   /* Init File Sharing */
   (void)FileShare::instance();
 
+  /* Init Icon Provider */
+  (void)GuiIconProvider::instance();
+
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
@@ -131,12 +135,16 @@ int main( int argc, char *argv[] )
   /* Event Loop */
   int iRet = bee_app.exec();
 
+  /* Check Icon Provider */
+  qDebug() << "IconProvider has load in cache" << GuiIconProvider::instance().cacheSize() << "icons";
+
   /* Save session */
   mw.saveSession();
 
   /* CleanUp */
   bee_app.cleanUp();
   Settings::instance().clearTemporaryFile();
+  GuiIconProvider::close();
   FileShare::close();
   ChatManager::close();
   UserManager::close();

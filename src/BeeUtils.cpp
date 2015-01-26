@@ -145,41 +145,27 @@ QString Bee::uniqueFilePath( const QString& file_path )
   return fi.absoluteFilePath();
 }
 
-Bee::FileType Bee::fileTypeFromSuffix( const QString& suffix_tmp )
+Bee::FileType Bee::fileTypeFromSuffix( const QString& suffix )
 {
-  QString suffix = suffix_tmp.toLower();
+  QString sx = suffix.toLower();
 
-  if( suffix == "mp3" || suffix == "wma" || suffix == "flac" )
+  if( sx == "exe" || sx == "bat" || sx == "inf" )
+    return Bee::FileExe;
+
+  if( sx == "mp3" || sx == "wma" || sx == "flac" || sx == "aiff" || sx == "aac" || sx == "m4a" || sx == "m4p" || sx == "ogg" || sx == "oga" || sx == "ra" || sx == "rm" )
     return Bee::FileAudio;
 
-  if( suffix == "mp4" || suffix == "avi" || suffix == "mkv" || suffix == "wmv" )
+  if( sx ==  "mpeg" || sx ==  "mpg" || sx == "mp4" || sx == "avi" || sx == "mkv" || sx == "wmv" || sx == "flv" || sx ==  "mov" || sx ==  "3gp" || sx ==  "mpe" )
     return Bee::FileVideo;
 
-  if( suffix == "jpg" || suffix == "jpeg" || suffix == "gif" || suffix == "bmp" || suffix == "png" )
+  if( sx == "jpg" || sx == "jpeg" || sx == "gif" || sx == "bmp" || sx == "png" || sx == "tiff" || sx == "tif" || sx == "psd" )
     return Bee::FileImage;
 
-  if( suffix.startsWith( "doc" ) || suffix.startsWith( "xls" ) ||suffix.startsWith( "pdf" )
-      || suffix.startsWith( "ppt" ) || suffix.startsWith( "rtf" ) || suffix.startsWith( "txt" ) )
+  if( sx ==  "pdf" || sx.startsWith( "doc" ) || sx.startsWith( "xls" ) || suffix.startsWith( "ppt" ) || suffix.startsWith( "pps" )
+    || sx ==  "rtf" || sx ==  "txt" || sx ==  "odt" || sx ==  "odp" || sx ==  "ods" || sx ==  "csv" || sx ==  "log" || sx ==  "mobi" || sx ==  "epub" )
     return Bee::FileDocument;
 
   return Bee::FileOther;
-}
-
-QString Bee::fileTypeIconFileName( Bee::FileType ft )
-{
-  switch( ft )
-  {
-  case FileAudio:
-    return QString( ":/images/file-audio.png" );
-  case FileVideo:
-    return QString( ":/images/file-video.png" );
-  case FileImage:
-    return QString( ":/images/file-image.png" );
-  case FileDocument:
-    return QString( ":/images/file-document.png" );
-  default:
-    return QString( ":/images/file-other.png" );
-  };
 }
 
 static const char* FileTypeToString[] =
@@ -189,6 +175,7 @@ static const char* FileTypeToString[] =
   QT_TRANSLATE_NOOP( "File", "Image" ),
   QT_TRANSLATE_NOOP( "File", "Document" ),
   QT_TRANSLATE_NOOP( "File", "Other" ),
+  QT_TRANSLATE_NOOP( "File", "Executable" ),
 };
 
 QString Bee::fileTypeToString( Bee::FileType ft )

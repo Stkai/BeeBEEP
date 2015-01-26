@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "GuiIconProvider.h"
 #include "GuiFileInfoItem.h"
 #include "GuiShareLocal.h"
 #include "FileShare.h"
@@ -150,7 +151,7 @@ void GuiShareLocal::loadFileInfoInList()
   {
     item = new GuiFileInfoItem( mp_twLocalShares, 1, Qt::UserRole + 1 );
     item->setText( 0, fi.name() );
-    item->setIcon( 0, QIcon( Bee::fileTypeIconFileName( Bee::fileTypeFromSuffix( fi.suffix() ) ) ) );
+    item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
     item->setText( 1, Bee::bytesToString( fi.size() ) );
     item->setData( 1, Qt::UserRole + 1, fi.size() );
     item->setText( 2, fi.path() );

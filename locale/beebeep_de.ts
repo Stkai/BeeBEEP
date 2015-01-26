@@ -219,27 +219,32 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="187"/>
+        <location filename="../src/BeeUtils.cpp" line="173"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="188"/>
+        <location filename="../src/BeeUtils.cpp" line="174"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="189"/>
+        <location filename="../src/BeeUtils.cpp" line="175"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="190"/>
+        <location filename="../src/BeeUtils.cpp" line="176"/>
         <source>Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="191"/>
+        <location filename="../src/BeeUtils.cpp" line="178"/>
+        <source>Executable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BeeUtils.cpp" line="177"/>
         <source>Other</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1773,42 +1778,42 @@ Please check the file or the directories write permissions.</source>
 <context>
     <name>GuiShareLocal</name>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="44"/>
+        <location filename="../src/GuiShareLocal.cpp" line="45"/>
         <source>Share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="46"/>
+        <location filename="../src/GuiShareLocal.cpp" line="47"/>
         <source>Filename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="46"/>
+        <location filename="../src/GuiShareLocal.cpp" line="47"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="46"/>
+        <location filename="../src/GuiShareLocal.cpp" line="47"/>
         <source>Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="80"/>
+        <location filename="../src/GuiShareLocal.cpp" line="81"/>
         <source>Select a file to share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="93"/>
+        <location filename="../src/GuiShareLocal.cpp" line="94"/>
         <source>Select a folder to share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="111"/>
+        <location filename="../src/GuiShareLocal.cpp" line="112"/>
         <source>Please select a shared path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="167"/>
+        <location filename="../src/GuiShareLocal.cpp" line="168"/>
         <source>%1 is already shared.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1824,32 +1829,32 @@ Please check the file or the directories write permissions.</source>
 <context>
     <name>GuiShareNetwork</name>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="39"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="39"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="39"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
         <source>User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="39"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="60"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="61"/>
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="63"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="64"/>
         <source>All Users</source>
         <translation type="unfinished"></translation>
     </message>
