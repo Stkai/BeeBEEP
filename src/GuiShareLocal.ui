@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>536</width>
-    <height>403</height>
+    <width>452</width>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,19 +15,22 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>1</number>
    </property>
-   <property name="spacing">
-    <number>0</number>
+   <property name="horizontalSpacing">
+    <number>1</number>
+   </property>
+   <property name="verticalSpacing">
+    <number>3</number>
    </property>
    <item row="0" column="0">
     <widget class="QTreeWidget" name="mp_twMyShares">
@@ -50,12 +53,18 @@
      </column>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="1" column="0">
     <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>160</height>
+       <height>50</height>
       </size>
      </property>
      <property name="frameShape">
@@ -64,20 +73,33 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <property name="leftMargin">
-       <number>3</number>
-      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="topMargin">
-       <number>9</number>
-      </property>
-      <property name="rightMargin">
        <number>3</number>
       </property>
       <property name="bottomMargin">
        <number>3</number>
       </property>
-      <item row="0" column="0">
+      <item>
+       <widget class="QLabel" name="mp_labelShareStats">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QToolButton" name="mp_pbAddFile">
         <property name="minimumSize">
          <size>
@@ -106,7 +128,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item>
        <widget class="QToolButton" name="mp_pbAddFolder">
         <property name="text">
          <string/>
@@ -126,27 +148,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QToolButton" name="mp_pbRemove">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="beebeep.qrc">
-          <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="autoRaise">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
+      <item>
        <widget class="QToolButton" name="mp_pbUpdate">
         <property name="text">
          <string/>
@@ -166,14 +168,34 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <spacer name="verticalSpacer">
+      <item>
+       <widget class="QToolButton" name="mp_pbRemove">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="beebeep.qrc">
+          <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
         <property name="orientation">
-         <enum>Qt::Vertical</enum>
+         <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>20</width>
+          <width>173</width>
           <height>20</height>
          </size>
         </property>
@@ -182,7 +204,7 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
+   <item row="2" column="0">
     <widget class="QTreeWidget" name="mp_twLocalShares">
      <property name="baseSize">
       <size>

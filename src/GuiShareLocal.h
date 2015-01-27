@@ -57,6 +57,8 @@ protected slots:
 protected:
   void addSharePath( const QString& );
   void setActionsEnabled( bool );
+  void showStats( int, FileSizeType );
+  bool isFileSharingEnabled();
 
 };
 

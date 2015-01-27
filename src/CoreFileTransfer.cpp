@@ -249,6 +249,7 @@ void Core::addListToLocalShare()
   if( !bfsl )
   {
     qWarning() << "Core received a signal from invalid BuildFileShareList instance";
+    emit localShareListAvailable();
     return;
   }
 
@@ -267,8 +268,6 @@ void Core::addListToLocalShare()
   {
     FileShare::instance().addToLocal( bfsl->shareList() );
     createLocalShareMessage();
-    if( bfsl->broadcastList() && m_shareListToBuild == 0 )
-      sendFileShareListToAll();
   }
 
   if( m_shareListToBuild == 0 )
@@ -276,13 +275,16 @@ void Core::addListToLocalShare()
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Building local share list completed";
 #endif
+    if( bfsl->broadcastList() )
+      sendFileShareListToAll();
+
     emit localShareListAvailable();
   }
 
   bfsl->deleteLater();
 }
 
-int Core::removePathFromShare( const QString& share_path )
+void Core::removePathFromShare( const QString& share_path )
 {
   int num_files = FileShare::instance().removePath( share_path );
 
@@ -290,13 +292,13 @@ int Core::removePathFromShare( const QString& share_path )
   qDebug() << share_status;
   emit updateStatus( share_status, 3000 );
 
-  if( num_files <= 0 )
-    return 0;
+  if( num_files > 0 )
+  {
+    createLocalShareMessage();
+    sendFileShareListToAll();
+  }
 
-  createLocalShareMessage();
-  sendFileShareListToAll();
-
-  return num_files;
+  emit localShareListAvailable();
 }
 
 void Core::createLocalShareMessage()
@@ -309,7 +311,17 @@ void Core::createLocalShareMessage()
 
 void Core::buildLocalShareList()
 {
-  m_shareListToBuild = Settings::instance().localShare().size();
-  foreach( QString share_path, Settings::instance().localShare() )
-    addPathToShare( share_path, false );
+  if( Settings::instance().fileShare() )
+  {
+    m_shareListToBuild = Settings::instance().localShare().size();
+    foreach( QString share_path, Settings::instance().localShare() )
+      addPathToShare( share_path, false );
+  }
+  else
+  {
+    if( !FileShare::instance().local().isEmpty() )
+      FileShare::instance().clearLocal();
+    // force update with empty list;
+    emit localShareListAvailable();
+  }
 }

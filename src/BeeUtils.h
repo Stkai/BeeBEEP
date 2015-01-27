@@ -29,7 +29,7 @@
 
 namespace Bee
 {
-  enum FileType { FileAudio, FileVideo, FileImage, FileDocument, FileOther, FileExe, NumFileType };
+  enum FileType { FileAudio, FileVideo, FileImage, FileDocument, FileOther, FileExe, FileBundle, NumFileType };
 
   inline QIcon userStatusIcon( int );
   QString userStatusIconFileName( int );
@@ -41,6 +41,12 @@ namespace Bee
   QString elapsedTimeToString( int msec );
   QString uniqueFilePath( const QString& );
   FileType fileTypeFromSuffix( const QString& );
+  bool isFileTypeAudio( const QString& );
+  bool isFileTypeVideo( const QString& );
+  bool isFileTypeImage( const QString& );
+  bool isFileTypeDocument( const QString& );
+  bool isFileTypeExe( const QString& );
+  bool isFileTypeBundle( const QString& );
   QString fileTypeToString( FileType );
   QString dateTimeStringSuffix( const QDateTime& );
 

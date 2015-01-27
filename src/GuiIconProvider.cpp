@@ -40,7 +40,8 @@ void GuiIconProvider::clearCache()
   if( !m_cache.isEmpty() )
     m_cache.clear();
   m_cache.insert( "exe", iconFromFileType( Bee::FileExe ) );
-  m_cache.insert( "", iconFromFileType( Bee::FileOther ) );
+  m_cache.insert( "app", iconFromFileType( Bee::FileBundle ) );
+  m_cache.insert( "dmg", iconFromFileType( Bee::FileBundle ) );
 }
 
 QIcon GuiIconProvider::iconFromFileType( int file_type )
@@ -64,7 +65,6 @@ QIcon GuiIconProvider::iconFromFileType( int file_type )
 
 QIcon GuiIconProvider::findIcon( const FileInfo& file_info )
 {
-  // fixme for MacOSX
   if( m_cache.contains( file_info.suffix() ) )
     return m_cache.value( file_info.suffix() );
 
@@ -74,9 +74,15 @@ QIcon GuiIconProvider::findIcon( const FileInfo& file_info )
     QIcon icon_value = m_provider.icon( fi );
     if( !icon_value.isNull() )
     {
-      m_cache.insert( file_info.suffix(), icon_value );
+      if( fi.suffix().size() > 0 )
+        m_cache.insert( fi.suffix(), icon_value );
       return icon_value;
     }
+
+    if( fi.isBundle() )
+      return iconFromFileType( Bee::FileBundle );
+    if( fi.isExecutable() )
+      return iconFromFileType( Bee::FileExe );
   }
 
   return iconFromFileType( Bee::fileTypeFromSuffix( file_info.suffix() ) );

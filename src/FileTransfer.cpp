@@ -193,6 +193,13 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
     return;
   }
 
+  if( !Settings::instance().fileShare() )
+  {
+    qWarning() << "File Transfer is disabled. Transfer file id" << file_id << "cancelled";
+    upload_peer->cancelTransfer();
+    return;
+  }
+
   FileInfo file_info = fileInfo( file_id );
   if( !file_info.isValid() )
   {

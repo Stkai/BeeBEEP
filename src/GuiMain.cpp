@@ -901,6 +901,7 @@ void GuiMain::settingsChanged()
     break;
   case 12:
     Settings::instance().setFileShare( act->isChecked() );
+    QTimer::singleShot( 200, mp_core, SLOT( buildLocalShareList() ) );
     break;
   case 13:
     Settings::instance().setShowMessagesGroupByUser( act->isChecked() );
@@ -1494,8 +1495,7 @@ void GuiMain::addToShare( const QString& share_path )
 
 void GuiMain::removeFromShare( const QString& share_path )
 {
-  if( mp_core->removePathFromShare( share_path ) > 0 )
-    mp_shareLocal->updateFileSharedList();
+  mp_core->removePathFromShare( share_path );
 }
 
 void GuiMain::raiseChatView()

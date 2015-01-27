@@ -201,11 +201,11 @@
     </message>
     <message>
         <source>%1 %2 has updated the list of the file shared.</source>
-        <translation>%1 %2 ha aggiornato la sua lista di file condivisi.</translation>
+        <translation type="obsolete">%1 %2 ha aggiornato la sua lista di file condivisi.</translation>
     </message>
     <message>
         <source>%1 %2 has shared some files.</source>
-        <translation>%1 %2 ha condiviso alcuni file.</translation>
+        <translation type="obsolete">%1 %2 ha condiviso alcuni file.</translation>
     </message>
     <message>
         <source>%1 Unable to send the file: user is not found.</source>
@@ -255,6 +255,14 @@
         <source>Adding to file sharing</source>
         <translation>Aggiungo ai file condivisi</translation>
     </message>
+    <message>
+        <source>%1 %2 has not file shared.</source>
+        <translation>%1 %2 non ha file condivisi.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has shared %3 files.</source>
+        <translation>%1 %2 ha condiviso %3 file.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -292,6 +300,10 @@
     <message>
         <source>Executable</source>
         <translation>Eseguibili</translation>
+    </message>
+    <message>
+        <source>MacOSX</source>
+        <translation>MacOSX</translation>
     </message>
 </context>
 <context>
@@ -1962,11 +1974,23 @@ il file %2 (%3)?</translation>
         <source>%1 is already shared.</source>
         <translation>%1 è già un elemento condiviso.</translation>
     </message>
+    <message>
+        <source>Shared files</source>
+        <translation>File condivisi</translation>
+    </message>
+    <message>
+        <source>File sharing is disabled. Open the option menu to enable it.</source>
+        <translation>La condivisione dei file è disabilitata. Apri il menu delle opzioni per abilitarla.</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
     <message>
         <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
         <translation></translation>
     </message>
 </context>

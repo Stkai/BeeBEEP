@@ -64,7 +64,7 @@ public:
   bool startFileTransferServer();
   void stopFileTransferServer();
   void addPathToShare( const QString&, bool );
-  int removePathFromShare( const QString& );
+  void removePathFromShare( const QString& );
 
 public slots:
   /* CoreChat */

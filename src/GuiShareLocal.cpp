@@ -61,12 +61,22 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   mp_pbAddFile->setIconSize( Settings::instance().mainBarIconSize() );
   mp_pbAddFolder->setIconSize( Settings::instance().mainBarIconSize() );
   mp_pbRemove->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_pbUpdate->setIconSize( Settings::instance().mainBarIconSize() );
 
+  showStats( 0, 0 );
   connect( mp_pbAddFile, SIGNAL( clicked() ), this, SLOT( addFilePath() ) );
   connect( mp_pbAddFolder, SIGNAL( clicked() ), this, SLOT( addFolderPath() ) );
   connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removePath() ) );
   connect( mp_pbUpdate, SIGNAL( clicked() ), this, SLOT( updateList() ) );
   connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+}
+
+void GuiShareLocal::showStats( int file_count, FileSizeType total_file_size )
+{
+  if( Settings::instance().fileShare() )
+    mp_labelShareStats->setText( QString( "%1: <b>%2</b> (%3)" ).arg( tr( "Shared files" ) ).arg( file_count ).arg( Bee::bytesToString( total_file_size ) ) );
+  else
+    mp_labelShareStats->setText( QString( "<b>%1</b>" ).arg( "File sharing is disabled" ) );
 }
 
 void GuiShareLocal::setActionsEnabled( bool enable )
@@ -75,6 +85,10 @@ void GuiShareLocal::setActionsEnabled( bool enable )
   mp_pbAddFolder->setEnabled( enable );
   mp_pbRemove->setEnabled( enable );
   mp_pbUpdate->setEnabled( enable );
+  if( enable )
+    setCursor( Qt::ArrowCursor );
+  else
+    setCursor( Qt::WaitCursor );
 }
 
 void GuiShareLocal::addFilePath()
@@ -99,6 +113,7 @@ void GuiShareLocal::addFolderPath()
     return;
 
   Settings::instance().setLastDirectorySelected( folder_path );
+
   addSharePath( folder_path );
 }
 
@@ -115,7 +130,7 @@ void GuiShareLocal::removePath()
     return;
   }
 
-  setCursor( Qt::WaitCursor );
+  setActionsEnabled( false );
 
   QString share_selected = item_list.first()->text( 0 );
 
@@ -143,16 +158,19 @@ void GuiShareLocal::updateFileSharedList()
 {
   setActionsEnabled( false );
   mp_twLocalShares->clear();
-  QTimer::singleShot( 600, this, SLOT( loadFileInfoInList() ) );
+  QTimer::singleShot( 200, this, SLOT( loadFileInfoInList() ) );
 }
 
 void GuiShareLocal::loadFileInfoInList()
 {
   GuiFileInfoItem *item;
   int file_count = 0;
+  FileSizeType total_file_size = 0;
+
   foreach( FileInfo fi, FileShare::instance().local() )
   {
     file_count++;
+    total_file_size += fi.size();
     item = new GuiFileInfoItem( mp_twLocalShares, 1, Qt::UserRole + 1 );
     item->setText( 0, fi.name() );
     item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
@@ -161,10 +179,9 @@ void GuiShareLocal::loadFileInfoInList()
     item->setData( 1, Qt::UserRole + 1, fi.size() );
     item->setText( 2, fi.path() );
   }
-  setActionsEnabled( true );
-  setCursor( Qt::ArrowCursor );
 
-  qDebug() << "Processed" << file_count << "files of" << FileShare::instance().local().size() << "shared";
+  setActionsEnabled( true );
+  showStats( file_count, total_file_size );
 }
 
 void GuiShareLocal::addSharePath( const QString& share_path )
@@ -176,13 +193,16 @@ void GuiShareLocal::addSharePath( const QString& share_path )
     return;
   }
 
-  setCursor( Qt::WaitCursor );
-
   QStringList local_share = Settings::instance().localShare();
   local_share << share_path;
   Settings::instance().setLocalShare( local_share );
 
   updatePaths();
+
+  if( !isFileSharingEnabled() )
+    return;
+
+  setActionsEnabled( false );
 
   emit sharePathAdded( share_path );
 }
@@ -194,15 +214,22 @@ void GuiShareLocal::openItemDoubleClicked( QTreeWidgetItem* item, int )
 
   QString file_path = item->data( 0, Qt::UserRole + 1 ).toString();
   if( !file_path.isEmpty() )
-  {
     emit openUrlRequest( QUrl::fromLocalFile( file_path ) );
-    return;
-  }
 }
 
 void GuiShareLocal::updateList()
 {
-  mp_pbUpdate->setEnabled( false );
-  setCursor( Qt::WaitCursor );
+  if( !isFileSharingEnabled() )
+    return;
+  setActionsEnabled( false );
   emit updateListRequest();
+}
+
+bool GuiShareLocal::isFileSharingEnabled()
+{
+  if( Settings::instance().fileShare() )
+    return true;
+
+  QMessageBox::information( this, Settings::instance().programName(), tr( "File sharing is disabled. Open the option menu to enable it." ) );
+  return false;
 }

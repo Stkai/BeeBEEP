@@ -145,25 +145,62 @@ QString Bee::uniqueFilePath( const QString& file_path )
   return fi.absoluteFilePath();
 }
 
-Bee::FileType Bee::fileTypeFromSuffix( const QString& suffix )
+bool Bee::isFileTypeAudio( const QString& file_suffix )
 {
-  QString sx = suffix.toLower();
+  QString sx = file_suffix.toLower();
+  return sx == "mp3" || sx == "wma" || sx == "flac" || sx == "aiff" || sx == "aac" || sx == "m4a" || sx == "m4p" || sx == "ogg" || sx == "oga" || sx == "ra" || sx == "rm";
+}
 
-  if( sx == "exe" || sx == "bat" || sx == "inf" )
-    return Bee::FileExe;
+bool Bee::isFileTypeVideo( const QString& file_suffix )
+{
+  QString sx = file_suffix.toLower();
+  return sx ==  "mpeg" || sx ==  "mpg" || sx == "mp4" || sx == "avi" || sx == "mkv" || sx == "wmv" || sx == "flv" || sx ==  "mov" || sx ==  "3gp" || sx ==  "mpe";
+}
 
-  if( sx == "mp3" || sx == "wma" || sx == "flac" || sx == "aiff" || sx == "aac" || sx == "m4a" || sx == "m4p" || sx == "ogg" || sx == "oga" || sx == "ra" || sx == "rm" )
-    return Bee::FileAudio;
+bool Bee::isFileTypeImage( const QString& file_suffix )
+{
+  QString sx = file_suffix.toLower();
+  return sx == "jpg" || sx == "jpeg" || sx == "gif" || sx == "bmp" || sx == "png" || sx == "tiff" || sx == "tif" || sx == "psd";
+}
 
-  if( sx ==  "mpeg" || sx ==  "mpg" || sx == "mp4" || sx == "avi" || sx == "mkv" || sx == "wmv" || sx == "flv" || sx ==  "mov" || sx ==  "3gp" || sx ==  "mpe" )
-    return Bee::FileVideo;
+bool Bee::isFileTypeDocument( const QString& file_suffix )
+{
+  QString sx = file_suffix.toLower();
+  return sx ==  "pdf" || sx.startsWith( "doc" ) || sx.startsWith( "xls" ) || sx.startsWith( "ppt" ) || sx.startsWith( "pps" )
+    || sx ==  "rtf" || sx ==  "txt" || sx ==  "odt" || sx ==  "odp" || sx ==  "ods" || sx ==  "csv" || sx ==  "log" || sx ==  "mobi" || sx ==  "epub";
+}
 
-  if( sx == "jpg" || sx == "jpeg" || sx == "gif" || sx == "bmp" || sx == "png" || sx == "tiff" || sx == "tif" || sx == "psd" )
+bool Bee::isFileTypeExe( const QString& file_suffix )
+{
+  QString sx = file_suffix.toLower();
+  return sx == "exe" || sx == "bat" || sx == "inf" || sx == "sh";
+}
+
+bool Bee::isFileTypeBundle( const QString& file_suffix )
+{
+  QString sx = file_suffix.toLower();
+  return sx == "app" || sx == "dmg";
+}
+
+Bee::FileType Bee::fileTypeFromSuffix( const QString& file_suffix )
+{
+  if( isFileTypeDocument( file_suffix ) )
+    return Bee::FileDocument;
+
+  if( isFileTypeImage( file_suffix ) )
     return Bee::FileImage;
 
-  if( sx ==  "pdf" || sx.startsWith( "doc" ) || sx.startsWith( "xls" ) || suffix.startsWith( "ppt" ) || suffix.startsWith( "pps" )
-    || sx ==  "rtf" || sx ==  "txt" || sx ==  "odt" || sx ==  "odp" || sx ==  "ods" || sx ==  "csv" || sx ==  "log" || sx ==  "mobi" || sx ==  "epub" )
-    return Bee::FileDocument;
+  if( isFileTypeAudio( file_suffix ) )
+    return Bee::FileAudio;
+
+  if( isFileTypeVideo( file_suffix ) )
+    return Bee::FileVideo;
+
+  if( isFileTypeExe( file_suffix ) )
+    return Bee::FileExe;
+
+  if( isFileTypeBundle( file_suffix ) )
+    return Bee::FileBundle;
 
   return Bee::FileOther;
 }
@@ -176,6 +213,7 @@ static const char* FileTypeToString[] =
   QT_TRANSLATE_NOOP( "File", "Document" ),
   QT_TRANSLATE_NOOP( "File", "Other" ),
   QT_TRANSLATE_NOOP( "File", "Executable" ),
+  QT_TRANSLATE_NOOP( "File", "MacOSX" )
 };
 
 QString Bee::fileTypeToString( Bee::FileType ft )
@@ -191,5 +229,3 @@ QString Bee::dateTimeStringSuffix( const QDateTime& dt )
   s.remove( QChar( ' ' ) );
   return s;
 }
-
-

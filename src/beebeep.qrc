@@ -89,5 +89,6 @@
         <file>images/screenshot.png</file>
         <file>images/send.png</file>
         <file>images/file-exe.png</file>
+        <file>images/file-bundle.png</file>
     </qresource>
 </RCC>

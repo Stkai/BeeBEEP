@@ -236,25 +236,27 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::List ) )
   {
-     QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.hostAddress() );
-     if( !file_info_list.isEmpty() )
-     {
-       qDebug() << "Received list of file shared from" << u.path();
+    QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
+    QString msg;
 
-       QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-       QString msg;
+    QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.hostAddress() );
 
-       if( FileShare::instance().userHasFileShareList( u.id() ) )
-         msg = tr( "%1 %2 has updated the list of the file shared." );
-       else
-         msg = tr( "%1 %2 has shared some files." );
+    if( file_info_list.isEmpty() )
+    {
+      msg = tr( "%1 %2 has not file shared." );
+      qDebug() << u.path() << "has not file shared";
+    }
+    else
+    {
+      msg = tr( "%1 %2 has shared %3 files." ).arg( file_info_list.size() );
+      qDebug() << u.path() << "has shared" << file_info_list.size() << "files";
+    }
 
-       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg.arg( icon_html, u.name() ), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg.arg( icon_html, u.name() ), DispatchToAllChatsWithUser );
 
-       FileShare::instance().addToNetwork( u.id(), file_info_list );
+    FileShare::instance().addToNetwork( u.id(), file_info_list );
 
-       emit fileShareAvailable( u );
-     }
+    emit fileShareAvailable( u );
   }
   else if( m.hasFlag( Message::Request ) )
   {
