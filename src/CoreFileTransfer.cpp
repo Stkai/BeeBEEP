@@ -227,8 +227,12 @@ void Core::sendFileShareListToAll()
 
 void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 {
-  QString share_status = tr( "Adding to file sharing" ) + QString( " %1 ..." ).arg( share_path );
-  emit updateStatus( share_status, 1000 );
+  if( FileShare::instance().local().contains( share_path ) )
+    FileShare::instance().removePath( share_path );
+
+  QString share_status = tr( "Adding to file sharing" ) + QString( " %1" ).arg( share_path );
+  qDebug() << qPrintable( share_status );
+  emit updateStatus( share_status + QString( " ..." ), 1000 );
 
   BuildFileShareList *bfsl = new BuildFileShareList;
   bfsl->setPath( share_path );
@@ -248,11 +252,14 @@ void Core::addListToLocalShare()
     return;
   }
 
+  if( m_shareListToBuild > 0 )
+    m_shareListToBuild--;
+
   QString share_status = QString( "%1 is added to file sharing with %2 files (elapsed time: %3)" )
                            .arg( bfsl->path() )
                            .arg( bfsl->shareList().size() )
                            .arg( Bee::elapsedTimeToString( bfsl->elapsedTime() ) );
-  qDebug() << share_status;
+  qDebug() << qPrintable( share_status );
   emit updateStatus( share_status, 3000 );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ), DispatchToChat );
 
@@ -260,12 +267,17 @@ void Core::addListToLocalShare()
   {
     FileShare::instance().addToLocal( bfsl->shareList() );
     createLocalShareMessage();
-    if( bfsl->broadcastList() )
+    if( bfsl->broadcastList() && m_shareListToBuild == 0 )
       sendFileShareListToAll();
   }
 
-  if( bfsl->broadcastList() )
+  if( m_shareListToBuild == 0 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Building local share list completed";
+#endif
     emit localShareListAvailable();
+  }
 
   bfsl->deleteLater();
 }
@@ -297,6 +309,7 @@ void Core::createLocalShareMessage()
 
 void Core::buildLocalShareList()
 {
+  m_shareListToBuild = Settings::instance().localShare().size();
   foreach( QString share_path, Settings::instance().localShare() )
     addPathToShare( share_path, false );
 }

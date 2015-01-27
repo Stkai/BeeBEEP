@@ -34,8 +34,6 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 {
   setupUi( this );
 
-  m_isFirstTimeShow = true;
-
   mp_twMyShares->setRootIsDecorated( false );
   mp_twMyShares->setSortingEnabled( true );
 
@@ -67,6 +65,8 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   connect( mp_pbAddFile, SIGNAL( clicked() ), this, SLOT( addFilePath() ) );
   connect( mp_pbAddFolder, SIGNAL( clicked() ), this, SLOT( addFolderPath() ) );
   connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removePath() ) );
+  connect( mp_pbUpdate, SIGNAL( clicked() ), this, SLOT( updateList() ) );
+  connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
 }
 
 void GuiShareLocal::setActionsEnabled( bool enable )
@@ -74,6 +74,7 @@ void GuiShareLocal::setActionsEnabled( bool enable )
   mp_pbAddFile->setEnabled( enable );
   mp_pbAddFolder->setEnabled( enable );
   mp_pbRemove->setEnabled( enable );
+  mp_pbUpdate->setEnabled( enable );
 }
 
 void GuiShareLocal::addFilePath()
@@ -114,6 +115,8 @@ void GuiShareLocal::removePath()
     return;
   }
 
+  setCursor( Qt::WaitCursor );
+
   QString share_selected = item_list.first()->text( 0 );
 
   QStringList local_share = Settings::instance().localShare();
@@ -139,7 +142,6 @@ void GuiShareLocal::updatePaths()
 void GuiShareLocal::updateFileSharedList()
 {
   setActionsEnabled( false );
-  mp_twLocalShares->setCursor( Qt::WaitCursor );
   mp_twLocalShares->clear();
   QTimer::singleShot( 600, this, SLOT( loadFileInfoInList() ) );
 }
@@ -147,17 +149,22 @@ void GuiShareLocal::updateFileSharedList()
 void GuiShareLocal::loadFileInfoInList()
 {
   GuiFileInfoItem *item;
+  int file_count = 0;
   foreach( FileInfo fi, FileShare::instance().local() )
   {
+    file_count++;
     item = new GuiFileInfoItem( mp_twLocalShares, 1, Qt::UserRole + 1 );
     item->setText( 0, fi.name() );
     item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
+    item->setData( 0, Qt::UserRole + 1, fi.path() );
     item->setText( 1, Bee::bytesToString( fi.size() ) );
     item->setData( 1, Qt::UserRole + 1, fi.size() );
     item->setText( 2, fi.path() );
   }
   setActionsEnabled( true );
-  mp_twLocalShares->setCursor( Qt::ArrowCursor );
+  setCursor( Qt::ArrowCursor );
+
+  qDebug() << "Processed" << file_count << "files of" << FileShare::instance().local().size() << "shared";
 }
 
 void GuiShareLocal::addSharePath( const QString& share_path )
@@ -169,6 +176,8 @@ void GuiShareLocal::addSharePath( const QString& share_path )
     return;
   }
 
+  setCursor( Qt::WaitCursor );
+
   QStringList local_share = Settings::instance().localShare();
   local_share << share_path;
   Settings::instance().setLocalShare( local_share );
@@ -176,4 +185,24 @@ void GuiShareLocal::addSharePath( const QString& share_path )
   updatePaths();
 
   emit sharePathAdded( share_path );
+}
+
+void GuiShareLocal::openItemDoubleClicked( QTreeWidgetItem* item, int )
+{
+  if( !item )
+    return;
+
+  QString file_path = item->data( 0, Qt::UserRole + 1 ).toString();
+  if( !file_path.isEmpty() )
+  {
+    emit openUrlRequest( QUrl::fromLocalFile( file_path ) );
+    return;
+  }
+}
+
+void GuiShareLocal::updateList()
+{
+  mp_pbUpdate->setEnabled( false );
+  setCursor( Qt::WaitCursor );
+  emit updateListRequest();
 }

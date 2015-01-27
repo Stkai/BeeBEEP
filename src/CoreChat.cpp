@@ -343,7 +343,7 @@ void Core::addListToSavedChats()
   QString loading_status = QString( "%1 saved chat is added to history (elapsed time: %2)" )
                              .arg( bscl->savedChats().size() )
                              .arg( Bee::elapsedTimeToString( bscl->elapsedTime() ) );
-  qDebug() << loading_status;
+  qDebug() << qPrintable( loading_status );
 
   if( bscl->savedChats().size() > 1 )
   {

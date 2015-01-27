@@ -42,6 +42,7 @@ Core::Core( QObject* parent )
   qDebug() << "Broadcaster created";
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
+  m_shareListToBuild = 0;
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );

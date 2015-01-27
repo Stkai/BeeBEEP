@@ -38,16 +38,6 @@ int FileShare::removePath( const QString& share_path )
   return m_local.remove( share_path );
 }
 
-bool FileShare::hasPath( const QString& share_path )
-{
-  foreach( FileInfo fi, m_local )
-  {
-    if( fi.path() == share_path )
-      return true;
-  }
-  return false;
-}
-
 int FileShare::addToNetwork( VNumber user_id, const QList<FileInfo>& file_info_list )
 {
   removeFromNetwork( user_id );

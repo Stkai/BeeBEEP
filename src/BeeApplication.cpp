@@ -49,7 +49,6 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_isInIdle = false;
 
   mp_jobThread = new QThread();
-  mp_jobThread->setPriority( QThread::LowPriority );
 
 #ifdef Q_OS_UNIX
   m_xcbConnectHasError = true;
@@ -64,6 +63,7 @@ void BeeApplication::init()
 {
   qDebug() << "Starting background thread";
   mp_jobThread->start();
+  mp_jobThread->setPriority( QThread::LowPriority );
 }
 
 void BeeApplication::setIdleTimeout( int new_value )

@@ -110,6 +110,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
+  connect( mp_shareLocal, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_shareLocal, SIGNAL( updateListRequest() ), mp_core, SLOT( buildLocalShareList() ) );
 
   connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
   connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
@@ -1507,11 +1509,6 @@ void GuiMain::raiseLocalShareView()
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_shareLocal );
-  if( mp_shareLocal->isFirstTimeShow() )
-  {
-    mp_shareLocal->updateFileSharedList();
-    mp_shareLocal->setIsFirstTimeShow( false );
-  }
   checkViewActions();
 }
 

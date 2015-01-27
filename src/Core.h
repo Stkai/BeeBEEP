@@ -159,6 +159,7 @@ private:
   Listener* mp_listener;
   Broadcaster* mp_broadcaster;
   FileTransfer* mp_fileTransfer;
+  int m_shareListToBuild;
 
 };
 
