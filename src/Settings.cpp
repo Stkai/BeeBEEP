@@ -316,6 +316,10 @@ void Settings::load()
 
   m_firstTime = sets->allKeys().isEmpty();
 
+  sets->beginGroup( "Version" );
+  m_dataStreamVersion = sets->value( "DataStream", (int)DATASTREAM_VERSION_1 ).toInt();
+  sets->endGroup();
+
   sets->beginGroup( "Chat" );
   m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
   m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
@@ -339,6 +343,14 @@ void Settings::load()
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
   m_autoUserAway = sets->value( "AutoAwayStatus", false ).toBool();
+  m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
+  m_useDefaultPassword = sets->value( "UseDefaultPassword", false ).toBool();
+  m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
+  m_savePassword = sets->value( "SavePassword", false ).toBool();
+  if( m_savePassword )
+    m_passwordBeforeHash = Protocol::instance().simpleEncryptDecrypt( sets->value( "EncPwd", "" ).toString() );
+  else
+    m_passwordBeforeHash = "";
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -397,13 +409,6 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
-  m_useDefaultPassword = sets->value( "UseDefaultPassword", false ).toBool();
-  m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
-  m_savePassword = sets->value( "SavePassword", false ).toBool();
-  if( m_savePassword )
-    m_passwordBeforeHash = Protocol::instance().simpleEncryptDecrypt( sets->value( "EncPwd", "" ).toString() );
-  else
-    m_passwordBeforeHash = "";
   m_broadcastPort = sets->value( "BroadcastPort", 36475 ).toInt();
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", 6475 ).toInt() );
@@ -416,7 +421,6 @@ void Settings::load()
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
   m_trayMessageTimeout = qMax( sets->value( "SystemTrayMessageTimeout", 2000 ).toInt(), 100 );
-  m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -476,6 +480,7 @@ void Settings::save()
   sets->setValue( "Program", version( true ) );
   sets->setValue( "Proto", protoVersion() );
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
+  sets->setValue( "DataStream", (int)dataStreamVersion( false ) );
   sets->endGroup();
   sets->beginGroup( "Chat" );
   sets->setValue( "Font", m_chatFont.toString() );
@@ -498,6 +503,19 @@ void Settings::save()
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserNameColor", m_showUserColor );
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
+  sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
+  sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
+  sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
+  if( m_savePassword )
+  {
+    sets->setValue( "SavePassword", true );
+    sets->setValue( "EncPwd", Protocol::instance().simpleEncryptDecrypt( m_passwordBeforeHash ) );
+  }
+  else
+  {
+    sets->remove( "SavePassword" );
+    sets->remove( "EncPwd" );
+  }
   sets->endGroup();
   sets->beginGroup( "VCard" );
   sets->setValue( "NickName", m_localUser.vCard().nickName() );
@@ -533,20 +551,6 @@ void Settings::save()
   sets->setValue( "AutomaticFileName", m_automaticFileName );
   sets->endGroup();
   sets->beginGroup( "Misc" );
-  sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
-  sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
-  if( m_savePassword )
-  {
-
-    sets->setValue( "SavePassword", true );
-    sets->setValue( "EncPwd", Protocol::instance().simpleEncryptDecrypt( m_passwordBeforeHash ) );
-  }
-  else
-  {
-    sets->remove( "SavePassword" );
-    sets->remove( "EncPwd" );
-  }
-
   sets->setValue( "BroadcastPort", m_broadcastPort );
   sets->setValue( "BroadcastInterval", m_broadcastInterval );
   sets->setValue( "ListenerPort", m_localUser.hostPort() );
@@ -556,7 +560,6 @@ void Settings::save()
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
-  sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
   sets->endGroup();
   sets->beginGroup( "Network");
   sets->setValue( "BroadcastAddresses", m_broadcastAddresses );

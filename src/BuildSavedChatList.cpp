@@ -46,7 +46,7 @@ void BuildSavedChatList::buildList()
   }
 
   QDataStream stream( &file );
-  stream.setVersion( DATASTREAM_VERSION );
+  stream.setVersion( Settings::instance().dataStreamVersion( true ) );
 
   QStringList file_header;
 

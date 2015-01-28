@@ -41,10 +41,17 @@ typedef quint64 VNumber;
 typedef quint64 FileSizeType;
 
 // General
-#define DATASTREAM_VERSION QDataStream::Qt_4_0
+#define DATASTREAM_VERSION_1 QDataStream::Qt_4_0
+#define DATASTREAM_VERSION_2 QDataStream::Qt_4_8
+#define LAST_DATASTREAM_VERSION DATASTREAM_VERSION_2
 
 // Connection I/O
-#define DATA_BLOCK_SIZE quint16
+#define DATA_BLOCK_SIZE_16 quint16
+// set the limit to 65535 - sizeof( quint16 ) ... or a value near it
+const DATA_BLOCK_SIZE_16 DATA_BLOCK_SIZE_16_LIMIT = 65519;
+#define DATA_BLOCK_SIZE_32 quint32
+//Due to compiler warning (ISO C90) the value 4294967295 of quint32 is not possibile... use qint32 - sizeof( qint32 )
+const qint32 DATA_BLOCK_SIZE_32_LIMIT = 2147483615;
 #define ENCRYPTED_DATA_BLOCK_SIZE 16
 #define ENCRYPTION_KEYBITS 256
 #define MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT 20

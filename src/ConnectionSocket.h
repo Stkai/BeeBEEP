@@ -52,13 +52,14 @@ protected slots:
 
 protected:
   void checkHelloMessage( const QByteArray& );
+  QByteArray serializeData( const QByteArray& );
 
 private:
-  DATA_BLOCK_SIZE m_blockSize;
+  // max block size contains lowers
+  DATA_BLOCK_SIZE_32 m_blockSize;
   bool m_isHelloSent;
   VNumber m_userId;
   int m_protoVersion;
-
   int m_preventLoop;
 
 };

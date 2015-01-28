@@ -243,16 +243,16 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 
     if( file_info_list.isEmpty() )
     {
-      msg = tr( "%1 %2 has not file shared." );
+      msg = tr( "%1 %2 has not file shared." ).arg( icon_html ).arg( u.name() );
       qDebug() << u.path() << "has not file shared";
     }
     else
     {
-      msg = tr( "%1 %2 has shared %3 files." ).arg( file_info_list.size() );
+      msg = tr( "%1 %2 has shared %3 files." ).arg( icon_html ).arg( u.name() ).arg( file_info_list.size() );
       qDebug() << u.path() << "has shared" << file_info_list.size() << "files";
     }
 
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg.arg( icon_html, u.name() ), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg, DispatchToAllChatsWithUser );
 
     FileShare::instance().addToNetwork( u.id(), file_info_list );
 

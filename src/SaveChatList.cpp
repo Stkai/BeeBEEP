@@ -45,7 +45,7 @@ void SaveChatList::save()
   }
 
   QDataStream stream( &file );
-  stream.setVersion( DATASTREAM_VERSION );
+  stream.setVersion( Settings::instance().dataStreamVersion( false ) );
 
   QStringList file_header;
   file_header << Settings::instance().programName();

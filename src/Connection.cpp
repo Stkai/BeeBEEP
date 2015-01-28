@@ -28,7 +28,6 @@
 #undef CONNECTION_PING_PONG_DEBUG
 
 
-
 Connection::Connection( QObject *parent )
   : ConnectionSocket( parent )
 {
@@ -90,6 +89,7 @@ void Connection::sendPing()
 {
   if( m_pongTime.elapsed() > Settings::instance().pongTimeout() )
   {
+    qDebug() << "Pong timeout for connection from"  << peerAddress().toString() << peerPort();
     abort();
     return;
   }

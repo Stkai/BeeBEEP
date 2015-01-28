@@ -39,6 +39,7 @@ public:
 
   QString version( bool ) const;
   int protoVersion() const;
+  inline int dataStreamVersion( bool in_load_event ) const;
   QString programName() const;
   QString organizationName() const;
   QString downloadWebSite() const;
@@ -292,6 +293,8 @@ private:
 
   QStringList m_tempFilePathList;
 
+  int m_dataStreamVersion;
+
 };
 
 
@@ -400,5 +403,6 @@ inline void Settings::setAutoLinkSavedChatByNickname( bool new_value ) { m_autoL
 inline QStringList Settings::pluginSettings( const QString& plugin_name ) const { return m_pluginSettings.value( plugin_name ); }
 inline void Settings::setPluginSettings( const QString& plugin_name, const QStringList& plugin_settings ) { m_pluginSettings.insert( plugin_name, plugin_settings ); }
 inline bool Settings::pluginHasSettings( const QString& plugin_name ) const { return m_pluginSettings.contains( plugin_name ); }
+inline int Settings::dataStreamVersion( bool in_load_event ) const { return in_load_event ? m_dataStreamVersion : LAST_DATASTREAM_VERSION; }
 
 #endif // BEEBEEP_SETTINGS_H

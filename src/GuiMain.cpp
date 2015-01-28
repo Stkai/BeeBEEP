@@ -1259,15 +1259,13 @@ void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 
 void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
 {
-  FileInfo file_info = FileShare::instance().networkFileInfo( user_id, file_id );
-  if( !file_info.isValid() )
-    return;
-
   User u = UserManager::instance().userList().find( user_id );
-  if( !u.isValid() )
-    return;
+  FileInfo file_info = FileShare::instance().networkFileInfo( user_id, file_id );
 
-  askToDownloadFile( u, file_info );
+  if( u.isValid() && file_info.isValid() )
+    askToDownloadFile( u, file_info );
+  else
+    QMessageBox::information( this, Settings::instance().programName(), tr( "File is not available for download. User is offline." ) );
 }
 
 void GuiMain::selectDownloadDirectory()
@@ -1761,7 +1759,10 @@ bool GuiMain::openWebUrl( const QString& web_url )
 
 void GuiMain::checkNewVersion()
 {
-  openWebUrl( Settings::instance().checkVersionWebSite() );
+  QString url_and_arguments = Settings::instance().checkVersionWebSite();
+  foreach( GameInterface* gi, PluginManager::instance().games() )
+    url_and_arguments.append( QString( "&%1=%2").arg( gi->name().toLower() ).arg( gi->version() ) );
+  openWebUrl( url_and_arguments );
 }
 
 void GuiMain::openWebSite()

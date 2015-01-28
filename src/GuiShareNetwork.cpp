@@ -120,13 +120,14 @@ void GuiShareNetwork::search()
   mp_pbSearch->setEnabled( false );
   mp_twShares->clear();
   mp_twShares->setCursor( Qt::WaitCursor );
-  m_filterUserId = mp_comboUsers->currentIndex() <= 0 ? 0 : Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
 
   QTimer::singleShot( 500, this, SLOT( delaySearch() ) );
 }
 
 void GuiShareNetwork::delaySearch()
 {
+  m_filterUserId = mp_comboUsers->currentIndex() <= 0 ? 0 : Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
+
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isConnected() )

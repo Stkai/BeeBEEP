@@ -216,13 +216,13 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   if( !u.isValid() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "User" << cm.userId() << "is not present in chat shown" << m_chatId << "... force update";
+    qDebug() << "User" << cm.userId() << "is not present in current chat" << m_chatId << "... force update";
 #endif
     m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
     u = m_users.find( cm.userId() );
     if( !u.isValid() )
     {
-      qWarning() << "User" << cm.userId() << "is not present in chat" << m_chatId << "... message is not shown";
+      qWarning() << "User" << cm.userId() << "is not present in current chat" << m_chatId << "... message is not shown";
       return;
     }
     setChatUsers();
