@@ -30,10 +30,10 @@ const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
 const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files";
 const char* BEEBEEP_PLUGIN_WEBSITE = "http://beebeep.sourceforge.net/download.php";
 const char* BEEBEEP_CHECK_VERSION_WEBSITE = "http://beebeep.sourceforge.net/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.8";
-const int BEEBEEP_PROTO_VERSION = 100;
+const char* BEEBEEP_VERSION = "0.9.7";
+const int BEEBEEP_PROTO_VERSION = 62;
 const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 300;
+const int BEEBEEP_BUILD = 301;
 
 #endif // BEEBEEP_VERSION_H
 

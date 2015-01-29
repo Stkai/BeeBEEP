@@ -6,19 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>430</width>
-    <height>298</height>
+    <width>444</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <property name="spacing">
-    <number>0</number>
+    <number>1</number>
    </property>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
@@ -29,18 +38,6 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="leftMargin">
-       <number>6</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>6</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
       <item>
        <widget class="QLabel" name="mp_lFilter">
         <property name="text">
@@ -52,14 +49,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="mp_leSearch"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="mp_pbSearch">
-        <property name="text">
-         <string>Search</string>
-        </property>
-       </widget>
+       <widget class="QLineEdit" name="mp_leFilter"/>
       </item>
       <item>
        <widget class="QLabel" name="mp_lFileType">
@@ -91,6 +81,38 @@
           <width>100</width>
           <height>0</height>
          </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mp_pbApplyFilter">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="beebeep.qrc">
+          <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -130,15 +152,77 @@
      </column>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="mp_pbScan">
+        <property name="text">
+         <string>Scan network</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>155</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="mp_labelStatus">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>154</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mp_pbReload">
+        <property name="text">
+         <string>Reload list</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>mp_leSearch</tabstop>
-  <tabstop>mp_pbSearch</tabstop>
+  <tabstop>mp_leFilter</tabstop>
   <tabstop>mp_comboFileType</tabstop>
   <tabstop>mp_comboUsers</tabstop>
+  <tabstop>mp_pbApplyFilter</tabstop>
   <tabstop>mp_twShares</tabstop>
+  <tabstop>mp_pbScan</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="beebeep.qrc"/>
+ </resources>
  <connections/>
 </ui>

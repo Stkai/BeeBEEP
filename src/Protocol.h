@@ -44,7 +44,7 @@ public:
   QByteArray pingMessage() const;
   QByteArray pongMessage() const;
   QByteArray broadcastMessage() const;
-  QByteArray helloMessage() const;
+  QByteArray helloMessage( const QString& cipher_key_tmp ) const;
   inline const QByteArray& writingMessage() const;
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
@@ -57,6 +57,9 @@ public:
   ChatMessageData dataFromChatMessage( const Message& );
   QString chatMessageDataToString( const ChatMessageData& );
   int protoVersion( const Message& ) const;
+  QString publicKey( const Message& ) const;
+  QByteArray createCipherKey( const QString&, const QString& ) const;
+  QByteArray bytesArrivedConfirmation( int ) const;
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
   QByteArray localUserStatusMessage() const;
@@ -78,8 +81,8 @@ public:
   inline VNumber newId();
   QString newMd5Id() const;
 
-  QByteArray encryptByteArray( const QByteArray& ) const;
-  QByteArray decryptByteArray( const QByteArray& ) const;
+  QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const;
+  QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key ) const;
 
   static QString simpleEncryptDecrypt( const QString& );
 
@@ -106,6 +109,8 @@ protected:
 
   QString pixmapToString( const QPixmap& ) const;
   QPixmap stringToPixmap( const QString& ) const;
+
+  QList<QByteArray> splitByteArray( const QByteArray&, int ) const;
 
 private:
   VNumber m_id;

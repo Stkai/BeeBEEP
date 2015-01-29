@@ -59,6 +59,8 @@ public:
   inline const VCard& vCard() const;
   inline void setAccountName( const QString& );
   inline const QString& accountName() const;
+  inline void setVersion( const QString& );
+  inline const QString& version() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -76,6 +78,7 @@ private:
   QString m_statusDescription;
   QString m_color;
   QString m_accountName;
+  QString m_version;
 
 };
 
@@ -103,6 +106,8 @@ inline void  User::setVCard( const VCard& new_value ) { m_vCard = new_value; }
 inline const VCard& User::vCard() const { return m_vCard; }
 inline void User::setAccountName( const QString& new_value ) { m_accountName = new_value; }
 inline const QString& User::accountName() const { return m_accountName; }
+inline void User::setVersion( const QString& new_value ) { m_version = new_value; }
+inline const QString& User::version() const { return m_version; }
 inline QString User::path() const { return QString( "%1@%2:%3" ).arg( name().toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 inline QString User::accountPath() const { return QString( "%1@%2:%3" ).arg( m_accountName, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 

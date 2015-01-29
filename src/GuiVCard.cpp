@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiVCard.h"
 #include "PluginManager.h"
+#include "Settings.h"
 #include "User.h"
 
 
@@ -69,7 +70,20 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else
     mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png").pixmap( 96, 96 ) );
 
-  mp_lStatus->setText( QString( "<img src='%1' width=16 height=16 border=0 /> %2" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) ) );
+  QString user_version = "";
+  if( u.version().isEmpty() )
+    user_version = tr( "use old version" ).arg( u.version() );
+  else if( u.version() < Settings::instance().version( false ) )
+    user_version = tr( "use old %1" ).arg( u.version() );
+  else if( u.version() > Settings::instance().version( false ) )
+    user_version = tr( "use new %1" ).arg( u.version() );
+
+  QString user_status = QString( "<img src='%1' width=16 height=16 border=0 /> <b>%2</b>" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) );
+
+  if( user_version.isEmpty() )
+    mp_lStatus->setText( user_status );
+  else
+    mp_lStatus->setText( QString( "%1&nbsp;&nbsp;&nbsp;(%2)" ).arg( user_status ).arg( user_version ) );
 
   if( u.isLocal() )
     mp_pbChat->setToolTip( tr( "Chat with all" ) );

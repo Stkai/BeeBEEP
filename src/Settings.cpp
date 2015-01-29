@@ -38,6 +38,7 @@ Settings::Settings()
 {
   m_useSettingsFileIni = true;
   m_localUser.setStatus( User::Online );
+  m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
 }
 

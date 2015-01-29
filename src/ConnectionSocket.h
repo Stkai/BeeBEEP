@@ -48,11 +48,14 @@ signals:
 
 protected slots:
   void readBlock();
-  void sendHello();
+  void sendQuestionHello();
 
 protected:
+  void sendAnswerHello();
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
+  const QByteArray& cipherKey() const;
+  bool createCipherKey( const QString& );
 
 private:
   // max block size contains lowers
@@ -61,6 +64,9 @@ private:
   VNumber m_userId;
   int m_protoVersion;
   int m_preventLoop;
+  QByteArray m_cipherKey;
+  QString m_publicKey1;
+  QString m_publicKey2;
 
 };
 

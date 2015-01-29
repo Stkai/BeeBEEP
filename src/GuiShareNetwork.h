@@ -27,6 +27,7 @@
 #include "ui_GuiShareNetwork.h"
 #include "Config.h"
 class FileInfo;
+class GuiFileInfoItem;
 class User;
 
 
@@ -47,21 +48,23 @@ signals:
 
 public slots:
   void loadShares( const User& );
-  void search();
   void showMessage( VNumber, VNumber, const QString& );
   void setFileTransferCompleted( VNumber, VNumber, const QString& );
 
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
-  void enableSearchButton();
-  void delaySearch();
+  void enableScanButton();
+  void enableUpdateButton();
+  void enableReloadButton();
+  void scanNetwork();
+  void applyFilter();
+  void reloadList();
+  void updateList();
 
 protected:
   bool filterPassThrough( const User&, const FileInfo& );
-  QTreeWidgetItem* findItem( VNumber, VNumber );
+  GuiFileInfoItem* findItem( VNumber, VNumber );
 
-private:
-  VNumber m_filterUserId;
 
 };
 

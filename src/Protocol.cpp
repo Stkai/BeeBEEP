@@ -203,7 +203,13 @@ int Protocol::protoVersion( const Message& m ) const
   return m.id() <= ID_HELLO_MESSAGE ? 1 : m.id();
 }
 
-QByteArray Protocol::helloMessage() const
+QString Protocol::publicKey( const Message& m ) const
+{
+  QStringList data_list = m.text().split( DATA_FIELD_SEPARATOR );
+  return data_list.size() >= 6 ? data_list.at( 5 ) : QString();
+}
+
+QByteArray Protocol::helloMessage( const QString& public_key ) const
 {
   QStringList data_list;
   data_list << QString::number( Settings::instance().localUser().hostPort() );
@@ -211,6 +217,8 @@ QByteArray Protocol::helloMessage() const
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
   data_list << Settings::instance().localUser().accountName();
+  data_list << public_key;
+  data_list << Settings::instance().version( false );
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -355,8 +363,14 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( sl.size() > 4 )
     user_account_name = sl.at( 4 );
 
+  // skip public_key at 5
+
+  QString user_version = "";
+  if( sl.size() > 6 )
+    user_version = sl.at( 6 );
+
   /* Skip other data */
-  if( sl.size() > 5 )
+  if( sl.size() > 7 )
     qWarning() << "HELLO message contains more data. Skip it";
 
   /* Create User */
@@ -367,6 +381,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
   u.setAccountName( user_account_name );
+  u.setVersion( user_version );
   return u;
 }
 
@@ -637,60 +652,77 @@ QString Protocol::newMd5Id() const
   return QString::fromLatin1( ch.result().toHex() );
 }
 
-/* Encryption */
-
-namespace
+QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
 {
-  QList<QByteArray> SplitByteArray( const QByteArray& byte_array, int num_chars )
-  {
-    QList<QByteArray> array_list;
-
-    if( byte_array.isEmpty() || byte_array.isNull() )
-      return array_list;
-
-    QByteArray tmp;
-
-    for( int i = 0; i < byte_array.size(); i++ )
-    {
-      tmp += byte_array.at( i );
-      if( tmp.size() == num_chars )
-      {
-        array_list.append( tmp );
-        tmp = "";
-      }
-    }
-
-    if( !tmp.isEmpty() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Not encrypted string:" << tmp;
-#endif
-      array_list.append( tmp );
-    }
-
-    return array_list;
-  }
+  QByteArray byte_array = QByteArray::number( num_bytes );
+  while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )
+    byte_array.prepend( '0' );
+  return byte_array;
 }
 
-QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
+/* Encryption */
+QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2 ) const
+{
+  QString public_key = public_key_1 + public_key_2;
+  QCryptographicHash ch( QCryptographicHash::Sha1 );
+  ch.addData( public_key.toUtf8() );
+  return ch.result().toHex();
+}
+
+QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int num_chars ) const
+{
+  QList<QByteArray> array_list;
+
+  if( byte_array.isEmpty() )
+    return array_list;
+
+  QByteArray tmp = "";
+
+  for( int i = 0; i < byte_array.size(); i++ )
+  {
+    tmp += byte_array.at( i );
+    if( tmp.size() == num_chars )
+    {
+      array_list.append( tmp );
+      tmp = "";
+    }
+  }
+
+  if( !tmp.isEmpty() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Protocol splits byte array in" << array_list.size() << "parts but some chars remains out:" << tmp;
+#endif
+    array_list.append( tmp );
+  }
+
+  return array_list;
+}
+
+QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const
 {
   unsigned long rk[ RKLENGTH(ENCRYPTION_KEYBITS) ];
   unsigned char key[ KEYLENGTH(ENCRYPTION_KEYBITS) ];
   unsigned int i;
   int nrounds;
 
-  if( byte_array.isNull() || byte_array.isEmpty() )
+  if( text_to_encrypt.isEmpty() )
     return QByteArray();
 
-  QByteArray password = Settings::instance().password();
+  if( cipher_key.isEmpty() )
+  {
+    qWarning() << "Unable to encrypt data with an empty cipher key";
+    return text_to_encrypt;
+  }
+
   for( i = 0; i < sizeof( key ); i++ )
   {
-    key[ i ] = (unsigned int)password.size() < i ? static_cast<unsigned char>( password[ i ] ) : 0;
+    key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
   }
 
   nrounds = rijndaelSetupEncrypt( rk, key, ENCRYPTION_KEYBITS );
 
-  QList<QByteArray> byte_array_list = SplitByteArray( byte_array, ENCRYPTED_DATA_BLOCK_SIZE );
+  QList<QByteArray> byte_array_list = splitByteArray( text_to_encrypt, ENCRYPTED_DATA_BLOCK_SIZE );
 
   unsigned char plaintext[ ENCRYPTED_DATA_BLOCK_SIZE ];
   unsigned char ciphertext[ ENCRYPTED_DATA_BLOCK_SIZE ];
@@ -723,25 +755,30 @@ QByteArray Protocol::encryptByteArray( const QByteArray& byte_array ) const
   return encrypted_byte_array;
 }
 
-QByteArray Protocol::decryptByteArray( const QByteArray& byte_array_encrypted ) const
+QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key ) const
 {
   unsigned long rk[RKLENGTH(ENCRYPTION_KEYBITS)];
   unsigned char key[KEYLENGTH(ENCRYPTION_KEYBITS)];
   unsigned int i;
   int nrounds;
 
-  if( byte_array_encrypted.isNull() || byte_array_encrypted.isEmpty() )
+  if( text_to_decrypt.isEmpty() )
     return QByteArray();
 
-  QByteArray password = Settings::instance().password();
+  if( cipher_key.isEmpty() )
+  {
+    qWarning() << "Unable to decrypt data with an empty cipher key";
+    return text_to_decrypt;
+  }
+
   for( i = 0; i < sizeof( key ); i++ )
   {
-    key[ i ] = (unsigned int)password.size() < i ? static_cast<unsigned char>( password[ i ] ) : 0;
+    key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
   }
 
   nrounds = rijndaelSetupDecrypt( rk, key, ENCRYPTION_KEYBITS );
 
-  QList<QByteArray> byte_array_list = SplitByteArray( byte_array_encrypted, ENCRYPTED_DATA_BLOCK_SIZE );
+  QList<QByteArray> byte_array_list = splitByteArray( text_to_decrypt, ENCRYPTED_DATA_BLOCK_SIZE );
 
   unsigned char plaintext[ ENCRYPTED_DATA_BLOCK_SIZE ];
   unsigned char ciphertext[ ENCRYPTED_DATA_BLOCK_SIZE ];

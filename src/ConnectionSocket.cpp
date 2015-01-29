@@ -27,27 +27,59 @@
 
 
 #undef CONNECTION_SOCKET_IO_DEBUG
+const int SECURE_LEVEL_2_PROTO_VERSION = 60;
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
-  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ), m_preventLoop( 0 )
+  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ), m_preventLoop( 0 ),
+    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" )
 {
-  connect( this, SIGNAL( connected() ), this, SLOT( sendHello() ) );
+  connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
+}
+
+const QByteArray& ConnectionSocket::cipherKey() const
+{
+  return m_cipherKey.isEmpty() ? Settings::instance().password() : m_cipherKey;
+}
+
+bool ConnectionSocket::createCipherKey( const QString& public_key )
+{
+  if( m_publicKey1.isEmpty() )
+  {
+    m_publicKey1 = public_key;
+  }
+  else if( m_publicKey2.isEmpty() )
+  {
+    m_publicKey2 = public_key;
+  }
+  else
+  {
+    qWarning() << "Encryption handshake error. Too many public key arrived";
+    return false;
+  }
+
+  if( m_publicKey1.isEmpty() || m_publicKey2.isEmpty() )
+    return false;
+
+  m_cipherKey = Protocol::instance().createCipherKey( m_publicKey1, m_publicKey2 );
+  m_publicKey1 = "";
+  m_publicKey2 = "";
+  return true;
 }
 
 void ConnectionSocket::readBlock()
 {
   QDataStream data_stream( this );
 
-  if( m_protoVersion >= 100 )
+  if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     data_stream.setVersion( DATASTREAM_VERSION_2 );
   else
     data_stream.setVersion( DATASTREAM_VERSION_1 );
 
   if( m_blockSize == 0 )
   {
-    if( m_protoVersion >= 100 )
+    if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
       if( bytesAvailable() < (int)sizeof(DATA_BLOCK_SIZE_32))
         return;
@@ -77,7 +109,7 @@ void ConnectionSocket::readBlock()
 
   m_blockSize = 0;
 
-  QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read );
+  QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey() );
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG )
   qDebug() << "ConnectionSocket read from" << peerAddress().toString() << peerPort() << "the byte array:" << decrypted_byte_array;
@@ -102,7 +134,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
   QByteArray data_block;
   QDataStream data_stream( &data_block, QIODevice::WriteOnly );
 
-  if( m_protoVersion >= 100 )
+  if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
   {
     data_stream.setVersion( DATASTREAM_VERSION_2 );
     data_stream << (DATA_BLOCK_SIZE_32)0;
@@ -148,7 +180,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   qDebug() << "ConnectionSocket sends to" << peerAddress().toString() << peerPort() << "the following data:" << byte_array;
 #endif
 
-  QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array );
+  QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey() );
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
 
@@ -166,15 +198,28 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   }
 }
 
-void ConnectionSocket::sendHello()
+void ConnectionSocket::sendQuestionHello()
 {
-  if( sendData( Protocol::instance().helloMessage() ) )
+  m_publicKey1 = Protocol::instance().newMd5Id();
+  if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
   {
-    qDebug() << "ConnectionSocket has sent HELLO to" << peerAddress().toString() << peerPort();
+    qDebug() << "ConnectionSocket has sent question HELLO to" << peerAddress().toString() << peerPort();
     m_isHelloSent = true;
   }
   else
-    qWarning() << "ConnectionSocket is unable to send HELLO to" << peerAddress().toString() << peerPort();
+    qWarning() << "ConnectionSocket is unable to send question HELLO to" << peerAddress().toString() << peerPort();
+}
+
+void ConnectionSocket::sendAnswerHello()
+{
+  m_publicKey2 = Protocol::instance().newMd5Id();
+  if( sendData( Protocol::instance().helloMessage( m_publicKey2 ) ) )
+  {
+    qDebug() << "ConnectionSocket has sent answer HELLO to" << peerAddress().toString() << peerPort();
+    m_isHelloSent = true;
+  }
+  else
+    qWarning() << "ConnectionSocket is unable to send answer HELLO to" << peerAddress().toString() << peerPort();
 }
 
 void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
@@ -195,7 +240,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   }
 
   if( !m_isHelloSent )
-    sendHello();
+    sendAnswerHello();
 
   // After sending HELLO to ensure low protocol version compatibility
   m_protoVersion = Protocol::instance().protoVersion( m );
@@ -211,6 +256,20 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     }
     else
       qWarning() << "Old protocol version" << m_protoVersion << "is used with" << peerAddress().toString() << peerPort();
+  }
+
+  if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
+  {
+    QString public_key = Protocol::instance().publicKey( m );
+    if( !public_key.isEmpty() )
+    {
+      if( createCipherKey( public_key ) )
+        qDebug() << "Encryption level 2 is activated with" << peerAddress().toString() << peerPort();
+      else
+        qWarning() << "You have not shared a public key for encryption";
+    }
+    else
+      qWarning() << "Remote host" << peerAddress().toString() << peerPort() << "has not shared a public key for encryption";
   }
 
   qDebug() << "ConnectionSocket request an authentication for" << peerAddress().toString() << peerPort();

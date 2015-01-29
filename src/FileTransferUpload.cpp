@@ -76,7 +76,7 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
 
 void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 {
-  if( byte_array.toInt() == m_bytesTransferred )
+  if( byte_array.simplified().toInt() == m_bytesTransferred )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent confirmed";

@@ -57,7 +57,7 @@ void FileTransferPeer::sendDownloadDataConfirmation()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Sending download corfirmation for" << m_bytesTransferred << "bytes";
 #endif
-  if( !m_socket.sendData( QByteArray::number( m_bytesTransferred ) ) )
+  if( !m_socket.sendData( Protocol::instance().bytesArrivedConfirmation( m_bytesTransferred ) ) )
     cancelTransfer();
 }
 
