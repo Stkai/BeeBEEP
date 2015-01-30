@@ -29,6 +29,24 @@ GuiLog::GuiLog( QWidget* parent )
 {
   setupUi( this );
   setObjectName( "GuiLog" );
+
+  m_timer.setInterval( 1000 );
+  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( refreshLog() ) );
+}
+
+void GuiLog::startCheckingLog()
+{
+  if( !m_timer.isActive() )
+  {
+    refreshLog();
+    m_timer.start();
+  }
+}
+
+void GuiLog::stopCheckingLog()
+{
+  if( m_timer.isActive() )
+    m_timer.stop();
 }
 
 void GuiLog::refreshLog()

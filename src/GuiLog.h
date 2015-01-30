@@ -34,9 +34,14 @@ class GuiLog : public QWidget, private Ui::GuiLogWidget
 
 public:
   explicit GuiLog( QWidget *parent = 0 );
+  void startCheckingLog();
+  void stopCheckingLog();
 
-public slots:
+protected slots:
   void refreshLog();
+
+private:
+  QTimer m_timer;
 
 };
 

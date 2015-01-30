@@ -47,64 +47,122 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
 
   QHeaderView* hv = mp_twShares->header();
 #if QT_VERSION >= 0x050000
-  hv->setSectionResizeMode( ColumnFile, QHeaderView::ResizeToContents );
+  hv->setSectionResizeMode( ColumnFile, QHeaderView::Stretch );
   hv->setSectionResizeMode( ColumnSize, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
+  hv->setSectionResizeMode( ColumnStatus, QHeaderView::ResizeToContents );
 #else
-  hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnFile, QHeaderView::Stretch );
   hv->setResizeMode( ColumnSize, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnStatus, QHeaderView::ResizeToContents );
 #endif
+
+  connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+}
+
+void GuiShareNetwork::setupToolBar( QToolBar* bar )
+{
+  QLabel *label;
+
+  /* scan button */
+  mp_actScan = bar->addAction( QIcon( ":/images/network-scan.png" ), tr( "Scan network" ), this, SLOT( scanNetwork() ) );
+  mp_actScan->setStatusTip( tr( "Search shared files in your network" ) );
+
+  /* Reload button */
+  mp_actReload = bar->addAction( QIcon( ":/images/update.png" ), tr( "Reload list" ), this, SLOT( reloadList() ) );
+  mp_actReload->setStatusTip( tr( "Clear and reload list" ) );
+  mp_actReload->setEnabled( false );
+
+  /* filter by keywords */
+  label = new QLabel( bar );
+  label->setObjectName( "GuiLabelFilter" );
+  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  label->setText( QString( "   " ) + tr( "Filter" ) + QString( " " ) );
+  bar->addWidget( label );
+  mp_leFilter = new QLineEdit( bar );
+  mp_leFilter->setObjectName( "GuiLineEditFilter" );
+  mp_leFilter->setMaximumWidth( 200 );
+  bar->addWidget( mp_leFilter );
+  connect( mp_leFilter, SIGNAL( textChanged( QString ) ), this, SLOT( enableFilterButton() ) );
+  connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( applyFilter() ) );
+  mp_actFilter = bar->addAction( QIcon( ":/images/filter.png" ), tr( "Apply Filter" ), this, SLOT( applyFilter() ) );
+  mp_actFilter->setStatusTip( tr( "Filter the files in list using some keywords" ) );
+  mp_actFilter->setEnabled( false );
+
+  /* filter by file type */
+  label = new QLabel( bar );
+  label->setObjectName( "GuiLabelFilterFileType" );
+  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  label->setText( QString( "   " ) + tr( "File Type" ) + QString( " " ) );
+  bar->addWidget( label );
+  mp_comboFileType = new QComboBox( bar );
+  mp_comboFileType->setObjectName( "GuiComboBoxFilterFileType" );
   for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
     mp_comboFileType->insertItem( i, GuiIconProvider::instance().iconFromFileType( i ), Bee::fileTypeToString( (Bee::FileType)i ), i );
-
   mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/star.png" ), tr( "All Files" ), Bee::NumFileType );
   mp_comboFileType->setCurrentIndex( Bee::NumFileType );
+  bar->addWidget( mp_comboFileType );
+  connect( mp_comboFileType, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
 
+  /* filter by user */
+  label = new QLabel( bar );
+  label->setObjectName( "GuiLabelFilterUser" );
+  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  label->setText( QString( "   " ) + tr( "User" ) + QString( " " ) );
+  label->setMinimumWidth( 40 );
+  bar->addWidget( label );
+  mp_comboUsers = new QComboBox( bar );
+  mp_comboUsers->setObjectName( "GuiComboBoxFilterUser" );
+  mp_comboUsers->setMinimumSize( QSize( 100, 0 ) );
   mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
   mp_comboUsers->setCurrentIndex( 0 );
-
-  connect( mp_pbScan, SIGNAL( clicked() ), this, SLOT( scanNetwork() ) );
-  connect( mp_pbApplyFilter, SIGNAL( clicked() ), this, SLOT( applyFilter() ) );
-  connect( mp_pbReload, SIGNAL( clicked() ), this, SLOT( reloadList() ) );
-  connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
-  connect( mp_leFilter, SIGNAL( textChanged( QString ) ), this, SLOT( enableUpdateButton() ) );
-  connect( mp_comboFileType, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
+  bar->addWidget( mp_comboUsers );
   connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
+
+}
+
+void GuiShareNetwork::initShares()
+{
+  if( FileShare::instance().network().isEmpty() )
+    QTimer::singleShot( 200, this, SLOT( scanNetwork() ) );
+  if( countVisibleItems() > 0 )
+    mp_leFilter->setFocus();
 }
 
 void GuiShareNetwork::enableScanButton()
 {
-  mp_pbScan->setEnabled( true );
+  mp_actScan->setEnabled( true );
 }
 
-void GuiShareNetwork::enableUpdateButton()
+void GuiShareNetwork::enableFilterButton()
 {
-  mp_pbApplyFilter->setEnabled( true );
+  mp_actFilter->setEnabled( true );
 }
 
 void GuiShareNetwork::enableReloadButton()
 {
-  mp_pbReload->setEnabled( true );
+  mp_actReload->setEnabled( true );
 }
 
 void GuiShareNetwork::scanNetwork()
 {
-  mp_pbScan->setDisabled( true );
+  mp_actScan->setDisabled( true );
+  mp_actReload->setEnabled( true );
   QTimer::singleShot( 10000, this, SLOT( enableScanButton() ) );
+  showStatus( tr( "%1 is searching shared files in your network" ).arg( Settings::instance().programName() ) );
   emit fileShareListRequested();
 }
 
 void GuiShareNetwork::applyFilter()
 {
-  mp_pbApplyFilter->setDisabled( true );
-  QTimer::singleShot( 5000, this, SLOT( enableUpdateButton() ) );
+  mp_actFilter->setDisabled( true );
   QTimer::singleShot( 200, this, SLOT( updateList() ) );
 }
 
 void GuiShareNetwork::reloadList()
 {
-  mp_pbReload->setDisabled( true );
+  mp_actReload->setDisabled( true );
   mp_twShares->clear();
   QTimer::singleShot( 10000, this, SLOT( enableReloadButton() ) );
   QTimer::singleShot( 200, this, SLOT( updateList() ) );
@@ -113,6 +171,7 @@ void GuiShareNetwork::reloadList()
 void GuiShareNetwork::loadShares( const User& u )
 {
   int file_shared = 0;
+  FileSizeType share_size = 0;
 
   if( u.isConnected() )
   {
@@ -136,6 +195,7 @@ void GuiShareNetwork::loadShares( const User& u )
         item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
         item->setData( ColumnSize, FileSize, fi.size() );
         item->setText( ColumnUser, u.name() );
+        item->setToolTip( ColumnFile, fi.name() );
       }
 
       if( filterPassThrough( u, fi ) )
@@ -144,6 +204,7 @@ void GuiShareNetwork::loadShares( const User& u )
         item->setHidden( true );
 
       file_shared++;
+      share_size += fi.size();
     }
   }
   else
@@ -169,8 +230,7 @@ void GuiShareNetwork::loadShares( const User& u )
       mp_comboUsers->removeItem( user_id_index_to_remove );
   }
 
-  QString status_msg = tr( "%1 file shared in your list (%2 in your network)" ).arg( mp_twShares->topLevelItemCount() ).arg( FileShare::instance().network().size() );
-  mp_labelStatus->setText( status_msg );
+  showStatus( tr( "%1 has shared %2 files (%3)" ).arg( u.name() ).arg( file_shared ).arg( Bee::bytesToString( share_size ) ) );
 }
 
 void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
@@ -199,13 +259,24 @@ void GuiShareNetwork::updateList()
    loadShares( u );
 
   setCursor( Qt::ArrowCursor );
+  showStatus( "" );
 }
 
 bool GuiShareNetwork::filterPassThrough( const User& u, const FileInfo& fi )
 {
   QString filter_name = mp_leFilter->text().simplified();
-  if( !filter_name.isEmpty() && !fi.name().contains( filter_name, Qt::CaseInsensitive ) )
-    return false;
+  if( filter_name == QString( "*" ) || filter_name == QString( "*.*" ) )
+    filter_name = "";
+
+  if( !filter_name.isEmpty() )
+  {
+    QStringList filter_name_list = filter_name.split( QString( " " ), QString::SkipEmptyParts );
+    foreach( QString filter_name_item, filter_name_list )
+    {
+      if( !fi.name().contains( filter_name_item, Qt::CaseInsensitive ) )
+        return false;
+    }
+  }
 
   VNumber filter_user_id = mp_comboUsers->currentIndex() <= 0 ? 0 : Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
   if( filter_user_id > 0 && u.id() != filter_user_id )
@@ -237,7 +308,6 @@ void GuiShareNetwork::showMessage( VNumber user_id, VNumber file_info_id, const 
     return;
 
   item->setText( ColumnStatus, msg );
-  mp_labelStatus->setText( msg );
 }
 
 void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_info_id, const QString& file_path )
@@ -249,4 +319,38 @@ void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_in
   item->setData( ColumnFile, FilePath, file_path );
   for( int i = 0; i < mp_twShares->columnCount(); i++ )
     item->setBackgroundColor( i, QColor( "#91D606" ) );
+}
+
+int GuiShareNetwork::countVisibleItems() const
+{
+  int counter = 0;
+  QTreeWidgetItemIterator it( mp_twShares );
+  while( *it )
+  {
+    if( !(*it)->isHidden() )
+      counter++;
+    ++it;
+  }
+  return counter;
+}
+
+void GuiShareNetwork::showStatus( const QString& status_text )
+{
+  if( status_text.isEmpty() )
+  {
+    int share_size = FileShare::instance().network().size();
+    int num_items_visible = countVisibleItems();
+
+    QString status_msg;
+    if( share_size != num_items_visible )
+      status_msg = tr( "%1 files are shown in list (%2 are available in your network)" ).arg( num_items_visible ).arg( share_size );
+    else
+      status_msg = tr( "%1 files shared in your network" ).arg( share_size );
+
+    emit updateStatus( status_msg, 0 );
+  }
+  else
+  {
+    emit updateStatus( status_text, 0 );
+  }
 }

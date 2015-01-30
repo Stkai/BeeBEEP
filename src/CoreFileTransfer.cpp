@@ -198,9 +198,6 @@ void Core::sendFileShareRequestToAll()
 
 void Core::sendFileShareListTo( VNumber user_id )
 {
-    // fixme
-  qDebug() << "Sending share message to user" << user_id;
-  qDebug() << qPrintable( Protocol::instance().fileShareListMessage() );
   Connection* c = connection( user_id );
   if( c )
     c->sendData( Protocol::instance().fileShareListMessage() );
@@ -224,9 +221,6 @@ void Core::sendFileShareListToAll()
   if( share_list_message.isEmpty() )
     return;
 
-  // fixme
-  qDebug() << "Sending share message to all";
-  qDebug() << qPrintable( share_list_message );
   foreach( Connection* c, m_connections )
     c->sendData( share_list_message );
 }

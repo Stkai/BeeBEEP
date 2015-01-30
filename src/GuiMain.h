@@ -60,6 +60,7 @@ public slots:
   void hideToTrayIcon();
   void setInIdle();
   void exitFromIdle();
+  void showMessage( const QString&, int );
 
 private slots:
   void showAbout();
@@ -175,6 +176,7 @@ private:
 
   QToolBar *mp_barMain;
   QToolBar *mp_barPlugins;
+  QToolBar *mp_barShareNetwork;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actSaveChat;

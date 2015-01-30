@@ -97,9 +97,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), mp_chatList, SLOT( updateChat( VNumber ) ) );
   connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), mp_savedChatList, SLOT( updateSavedChats() ) );
-  connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
+  connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
-  connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
+  connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferCompleted( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( setFileTransferCompleted( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -116,6 +116,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
   connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
   connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
@@ -141,13 +142,14 @@ void GuiMain::checkWindowFlagsAndShow()
 {
   if( Settings::instance().stayOnTop() )
   {
-    setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
+    setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint );
   }
   else
   {
-    setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);
+    setWindowFlags( windowFlags() & ~Qt::WindowStaysOnTopHint );
   }
 
+  checkViewActions();
   show();
 }
 
@@ -205,6 +207,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
     Settings::instance().setGuiState( saveState() );
   }
 
+  // maybe timer is active
+  mp_logView->stopCheckingLog();
+
   e->accept();
 }
 
@@ -214,7 +219,7 @@ void GuiMain::showNextChat()
   qDebug() << "Show next chat in list with unread messages";
 #endif
   if( !mp_userList->nextUserWithUnreadMessages() )
-    statusBar()->showMessage( tr( "No new message available" ) );
+    showMessage( tr( "No new message available" ), 0 );
 }
 
 void GuiMain::startStopCore()
@@ -281,15 +286,42 @@ void GuiMain::initGuiItems()
     mp_actStartStopCore->setStatusTip( tr( "Connect to %1 network").arg( Settings::instance().programName() ) );
   }
 
-  mp_actSendFile->setEnabled( enable );
   mp_actSearch->setEnabled( enable );
   mp_userList->setDefaultChatConnected( enable );
   mp_actCreateGroup->setEnabled( enable );
-  mp_actGroupAdd->setEnabled( false );
 
   updateStatusIcon();
 
   refreshTitle( Settings::instance().localUser() );
+}
+
+void GuiMain::checkViewActions()
+{
+  mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_defaultChat );
+  mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
+  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork );
+
+  mp_actFont->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
+  mp_actFontColor->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
+  mp_actSendFile->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat && mp_core->isConnected() );
+  mp_actSaveChat->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
+  mp_menuEmoticons->menuAction()->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
+
+  if( mp_stackedWidget->currentWidget() == mp_defaultChat )
+    mp_actGroupAdd->setEnabled( mp_core->isConnected() && ChatManager::instance().isGroupChat( mp_defaultChat->chatId() ) );
+  else
+    mp_actGroupAdd->setEnabled( false );
+
+  if( mp_stackedWidget->currentWidget() == mp_shareNetwork )
+    mp_barShareNetwork->show();
+  else
+    mp_barShareNetwork->hide();
+
+  if( mp_stackedWidget->currentWidget() != mp_logView )
+    mp_logView->stopCheckingLog();
+  else
+    mp_logView->startCheckingLog();
+
 }
 
 void GuiMain::showAbout()
@@ -723,6 +755,12 @@ void GuiMain::createStackedWidgets()
 
   mp_shareNetwork = new GuiShareNetwork( this );
   mp_stackedWidget->addWidget( mp_shareNetwork );
+  mp_barShareNetwork = new QToolBar( tr( "Show the bar of file sharing" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barShareNetwork );
+  mp_barShareNetwork->setObjectName( "GuiShareNetworkToolBar" );
+  mp_barShareNetwork->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barShareNetwork->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_shareNetwork->setupToolBar( mp_barShareNetwork );
 
   mp_logView = new GuiLog( this );
   mp_stackedWidget->addWidget( mp_logView );
@@ -1030,8 +1068,22 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
     mp_chatList->updateChat( chat_id );
 
-    if( show_alert && Settings::instance().raiseOnNewMessageArrived() )
-      showChat( chat_id );
+    if( show_alert )
+    {
+      if( Settings::instance().raiseOnNewMessageArrived() )
+      {
+        statusBar()->clearMessage();
+        showChat( chat_id );
+      }
+      else
+      {
+        User u = UserManager::instance().userList().find( cm.userId() );
+        if( u.isValid() )
+          showMessage( tr( "New message from %1" ).arg( u.name() ), 0 );
+        else
+          showMessage( tr( "New message arrived" ), 0 );
+      }
+    }
   }
 }
 
@@ -1084,7 +1136,7 @@ void GuiMain::searchUsers()
 void GuiMain::showWritingUser( const User& u )
 {
   QString msg = tr( "%1 is writing..." ).arg( u.name() );
-  statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
+  showMessage( msg, Settings::instance().writingTimeout() );
 }
 
 void GuiMain::statusSelected()
@@ -1299,7 +1351,6 @@ void GuiMain::showChat( VNumber chat_id )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
-    mp_actGroupAdd->setEnabled( mp_core->isConnected() && ChatManager::instance().isGroupChat( chat_id ) );
     raiseChatView();
   }
 }
@@ -1365,10 +1416,21 @@ void GuiMain::updadePluginMenu()
   act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
   act->setStatusTip( tr( "Open the plugin manager dialog and manage the installed plugins" ) );
 
-  mp_barPlugins->addAction( act );
-
   if( PluginManager::instance().count() <= 0 )
+  {
+    mp_barPlugins->addAction( act );
+    mp_barPlugins->addSeparator();
     return;
+  }
+
+  /* Static Plugins */
+  mp_menuPlugins->addSeparator();
+  act = mp_menuPlugins->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
+  act->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
+  mp_barPlugins->addAction( act );
+  act = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
+  act->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
+  mp_barPlugins->addAction( act );
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
@@ -1408,16 +1470,6 @@ void GuiMain::updadePluginMenu()
       act->setData( game_widget_id );
     }
   }
-
-  /* Static Plugins */
-  mp_menuPlugins->addSeparator();
-  mp_barPlugins->addSeparator();
-  act = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
-  act->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
-  mp_barPlugins->addAction( act );
-  act = mp_menuPlugins->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
-  act->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
-  mp_barPlugins->addAction( act );
 }
 
 void GuiMain::showPluginHelp()
@@ -1514,6 +1566,7 @@ void GuiMain::raiseNetworkShareView()
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_shareNetwork );
+  mp_shareNetwork->initShares();
   checkViewActions();
 }
 
@@ -1535,7 +1588,6 @@ void GuiMain::raisePluginView()
 void GuiMain::raiseLogView()
 {
   setGameInPauseMode();
-  mp_logView->refreshLog();
   mp_stackedWidget->setCurrentWidget( mp_logView );
   checkViewActions();
 }
@@ -1545,13 +1597,6 @@ void GuiMain::raiseScreenShotView()
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_screenShot );
   checkViewActions();
-}
-
-void GuiMain::checkViewActions()
-{
-  mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_defaultChat );
-  mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
-  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork );
 }
 
 void GuiMain::setGameInPauseMode()
@@ -1678,7 +1723,7 @@ void GuiMain::loadSession()
 {
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   mp_shareLocal->updatePaths();
-  QTimer::singleShot( 400, mp_core, SLOT( buildLocalShareList() ) );
+  QTimer::singleShot( 2000, mp_core, SLOT( buildLocalShareList() ) );
 }
 
 void GuiMain::saveSession()
@@ -1804,4 +1849,9 @@ void GuiMain::exitFromIdle()
 
   mp_core->setLocalUserStatus( m_lastUserStatus );
   updateStatusIcon();
+}
+
+void GuiMain::showMessage( const QString& status_msg, int time_out )
+{
+  statusBar()->showMessage( status_msg, time_out );
 }

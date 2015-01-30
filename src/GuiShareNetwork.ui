@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>444</width>
-    <height>332</height>
+    <width>483</width>
+    <height>310</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,99 +27,9 @@
     <number>0</number>
    </property>
    <property name="spacing">
-    <number>1</number>
+    <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QFrame" name="frame">
-     <property name="frameShape">
-      <enum>QFrame::Panel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="mp_lFilter">
-        <property name="text">
-         <string>Filter</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="mp_leFilter"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="mp_lFileType">
-        <property name="text">
-         <string>File Type</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="mp_comboFileType"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="mp_lUser">
-        <property name="text">
-         <string>User</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="mp_comboUsers">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="mp_pbApplyFilter">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="beebeep.qrc">
-          <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0">
     <widget class="QTreeWidget" name="mp_twShares">
      <property name="sortingEnabled">
       <bool>true</bool>
@@ -130,6 +40,9 @@
      <property name="columnCount">
       <number>4</number>
      </property>
+     <attribute name="headerStretchLastSection">
+      <bool>false</bool>
+     </attribute>
      <column>
       <property name="text">
        <string notr="true">1</string>
@@ -152,77 +65,11 @@
      </column>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QFrame" name="frame_2">
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QPushButton" name="mp_pbScan">
-        <property name="text">
-         <string>Scan network</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>155</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="mp_labelStatus">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>154</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="mp_pbReload">
-        <property name="text">
-         <string>Reload list</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>mp_leFilter</tabstop>
-  <tabstop>mp_comboFileType</tabstop>
-  <tabstop>mp_comboUsers</tabstop>
-  <tabstop>mp_pbApplyFilter</tabstop>
   <tabstop>mp_twShares</tabstop>
-  <tabstop>mp_pbScan</tabstop>
  </tabstops>
- <resources>
-  <include location="beebeep.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -49,9 +49,13 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 
   QHeaderView* header_view = mp_twLocalShares->header();
 #if QT_VERSION >= 0x050000
-  header_view->setSectionResizeMode( QHeaderView::ResizeToContents );
+  header_view->setSectionResizeMode( 0, QHeaderView::Stretch );
+  header_view->setSectionResizeMode( 1, QHeaderView::ResizeToContents );
+  header_view->setSectionResizeMode( 2, QHeaderView::Stretch );
 #else
-  header_view->setResizeMode( QHeaderView::ResizeToContents );
+  header_view->setResizeMode( 0, QHeaderView::Stretch );
+  header_view->setResizeMode( 1, QHeaderView::ResizeToContents );
+  header_view->setResizeMode( 2, QHeaderView::Stretch );
 #endif
   header_view->setSortIndicator( 0, Qt::AscendingOrder );
 
@@ -175,9 +179,11 @@ void GuiShareLocal::loadFileInfoInList()
     item->setText( 0, fi.name() );
     item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
     item->setData( 0, Qt::UserRole + 1, fi.path() );
+    item->setToolTip( 0, fi.name() );
     item->setText( 1, Bee::bytesToString( fi.size() ) );
     item->setData( 1, Qt::UserRole + 1, fi.size() );
     item->setText( 2, fi.path() );
+    item->setToolTip( 2, fi.path() );
   }
 
   setActionsEnabled( true );

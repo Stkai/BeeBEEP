@@ -40,11 +40,14 @@ public:
   enum DataType { UserId = Qt::UserRole + 1, FileId, FilePath, FileSize };
 
   explicit GuiShareNetwork( QWidget *parent = 0 );
+  void setupToolBar( QToolBar* );
+  void initShares();
 
 signals:
   void fileShareListRequested();
   void downloadSharedFile( VNumber, VNumber );
   void openFileCompleted( const QUrl& );
+  void updateStatus( const QString&, int );
 
 public slots:
   void loadShares( const User& );
@@ -54,7 +57,7 @@ public slots:
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
   void enableScanButton();
-  void enableUpdateButton();
+  void enableFilterButton();
   void enableReloadButton();
   void scanNetwork();
   void applyFilter();
@@ -64,7 +67,16 @@ protected slots:
 protected:
   bool filterPassThrough( const User&, const FileInfo& );
   GuiFileInfoItem* findItem( VNumber, VNumber );
+  void showStatus( const QString& );
+  int countVisibleItems() const;
 
+private:
+  QLineEdit* mp_leFilter;
+  QComboBox* mp_comboUsers;
+  QComboBox* mp_comboFileType;
+  QAction* mp_actScan;
+  QAction* mp_actReload;
+  QAction* mp_actFilter;
 
 };
 

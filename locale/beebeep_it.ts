@@ -1523,6 +1523,22 @@ il file %2 (%3)?</translation>
         <source>Secure Lan Messenger</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Show the bar of file sharing</source>
+        <translation>Mostra del barra della condivisione dei file</translation>
+    </message>
+    <message>
+        <source>New message from %1</source>
+        <translation>Nuovo messaggio da %1</translation>
+    </message>
+    <message>
+        <source>New message arrived</source>
+        <translation>Nuovo messaggio arrivato</translation>
+    </message>
+    <message>
+        <source>File is not available for download. User is offline.</source>
+        <translation>Il file non è disponibile per il download. L&apos;utente non è più connesso.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2020,6 +2036,54 @@ il file %2 (%3)?</translation>
         <source>Status</source>
         <translation>Stato</translation>
     </message>
+    <message>
+        <source>Scan network</source>
+        <translation>Cerca nella rete</translation>
+    </message>
+    <message>
+        <source>Search shared files in your network</source>
+        <translation>Cerca i file condivi all&apos;interno della tua rete</translation>
+    </message>
+    <message>
+        <source>Reload list</source>
+        <translation>Ricarica la lista</translation>
+    </message>
+    <message>
+        <source>Clear and reload list</source>
+        <translation>Svuota e ricarica la lista</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation>Filtro</translation>
+    </message>
+    <message>
+        <source>Apply Filter</source>
+        <translation>Applica il filtro</translation>
+    </message>
+    <message>
+        <source>Filter the files in list using some keywords</source>
+        <translation>Filtra i file condivisi usando alcune parole chiavi</translation>
+    </message>
+    <message>
+        <source>File Type</source>
+        <translation>Tipo di file</translation>
+    </message>
+    <message>
+        <source>%1 is searching shared files in your network</source>
+        <translation>%1 sta cercando file condivisi nella tua rete</translation>
+    </message>
+    <message>
+        <source>%1 has shared %2 files (%3)</source>
+        <translation>%1 ha condiviso %2 file (%3)</translation>
+    </message>
+    <message>
+        <source>%1 files are shown in list (%2 are available in your network)</source>
+        <translation>%1 file visibili in lista (%2 disponibili nella tua rete)</translation>
+    </message>
+    <message>
+        <source>%1 files shared in your network</source>
+        <translation>%1 file condivisi nella tua rete</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareNetworkWidget</name>
@@ -2029,19 +2093,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation>Filtro</translation>
+        <translation type="obsolete">Filtro</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Cerca</translation>
+        <translation type="obsolete">Cerca</translation>
     </message>
     <message>
         <source>File Type</source>
-        <translation>Tipo di file</translation>
+        <translation type="obsolete">Tipo di file</translation>
     </message>
     <message>
         <source>User</source>
-        <translation>Utente</translation>
+        <translation type="obsolete">Utente</translation>
     </message>
 </context>
 <context>
@@ -2197,6 +2261,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>Open chat</source>
         <translation>Apri la conversazione</translation>
+    </message>
+    <message>
+        <source>use old version</source>
+        <translation>usa una vecchia versione</translation>
+    </message>
+    <message>
+        <source>use old %1</source>
+        <translation>una la vecchia %1</translation>
+    </message>
+    <message>
+        <source>use new %1</source>
+        <translation>usa la nuova %1</translation>
     </message>
 </context>
 <context>

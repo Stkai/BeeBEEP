@@ -173,7 +173,7 @@ bool Bee::isFileTypeDocument( const QString& file_suffix )
 bool Bee::isFileTypeExe( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();
-  return sx == "exe" || sx == "bat" || sx == "inf" || sx == "sh";
+  return sx == "exe" || sx == "bat" || sx == "inf" || sx == "com" || sx == "sh" || sx == "cab" || sx == "cmd" || sx == "bin";
 }
 
 bool Bee::isFileTypeBundle( const QString& file_suffix )
