@@ -72,6 +72,25 @@ void PluginManager::loadPlugins()
 
 void PluginManager::addPlugin( const QString& file_path )
 {
+  if( file_path.endsWith( "." ) )
+    return;
+
+  QFileInfo file_info( file_path );
+  if( file_info.isSymLink() )
+    return;
+
+#if defined( Q_OS_WIN )
+  if( file_info.suffix() != "dll" )
+    return;
+#elif defined( Q_OS_LINUX )
+  if( !file_info.completeSuffix().contains( "so" ) )
+    return;
+#else
+  if( file_info.suffix() == "rc" || file_info.suffix() == "dat" || file_info.suffix() == "wav"
+    || file_info.suffix() == "ini" || file_info.suffix() == "qm" )
+    return;
+#endif
+
   QPluginLoader plugin_loader( file_path );
   QObject* plugin = plugin_loader.instance();
   if( plugin )

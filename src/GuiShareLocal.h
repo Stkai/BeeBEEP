@@ -36,6 +36,7 @@ public:
   explicit GuiShareLocal( QWidget *parent = 0 );
 
   void updatePaths();
+  void setupToolBar( QToolBar* );
 
 signals:
   void sharePathAdded( const QString& );
@@ -59,6 +60,13 @@ protected:
   void setActionsEnabled( bool );
   void showStats( int, FileSizeType );
   bool isFileSharingEnabled();
+
+private:
+  QLabel* mp_labelShareStats;
+  QAction* mp_actAddFile;
+  QAction* mp_actAddFolder;
+  QAction* mp_actRemove;
+  QAction* mp_actUpdate;
 
 };
 

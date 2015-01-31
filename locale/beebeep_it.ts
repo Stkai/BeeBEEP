@@ -253,23 +253,31 @@
     </message>
     <message>
         <source>Adding to file sharing</source>
-        <translation>Aggiungo ai file condivisi</translation>
+        <translation>Aggiungo ai file condivisi in rete</translation>
     </message>
     <message>
         <source>%1 %2 has not file shared.</source>
-        <translation>%1 %2 non ha file condivisi.</translation>
+        <translation>%1 %2 non ha file condivisi in rete.</translation>
     </message>
     <message>
         <source>%1 %2 has shared %3 files.</source>
-        <translation>%1 %2 ha condiviso %3 file.</translation>
+        <translation>%1 %2 ha condiviso in rete %3 file.</translation>
     </message>
     <message>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 è stata condivisa in rete con %2 file, %3 (elaborazione: %4)</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 è stata rimossa dalla condivisione in rete con %2 file</translation>
+    </message>
+    <message>
+        <source>%1 is added to file sharing (%2)</source>
+        <translation>%1 è stato rimosso dalla condivisione in rete (%2)</translation>
+    </message>
+    <message>
+        <source>%1 is removed from file sharing</source>
+        <translation>%1 è stato rimosso dalla condivisione in rete</translation>
     </message>
 </context>
 <context>
@@ -1533,7 +1541,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of file sharing</source>
-        <translation>Mostra del barra della condivisione dei file</translation>
+        <translation type="obsolete">Mostra del barra della condivisione dei file</translation>
     </message>
     <message>
         <source>New message from %1</source>
@@ -1546,6 +1554,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>File is not available for download. User is offline.</source>
         <translation>Il file non è disponibile per il download. L&apos;utente non è più connesso.</translation>
+    </message>
+    <message>
+        <source>Show the bar of local file sharing</source>
+        <translation>Mostra la barra dei tuoi file condivisi</translation>
+    </message>
+    <message>
+        <source>Show the bar of network file sharing</source>
+        <translation>Mostra la barra di tutti i file condivisi in rete</translation>
     </message>
 </context>
 <context>
@@ -1964,7 +1980,7 @@ il file %2 (%3)?</translation>
     <name>GuiShareLocal</name>
     <message>
         <source>Share</source>
-        <translation>Condivisione</translation>
+        <translation type="obsolete">Condivisione</translation>
     </message>
     <message>
         <source>Filename</source>
@@ -2006,6 +2022,46 @@ il file %2 (%3)?</translation>
         <source>File sharing is disabled. Open the option menu to enable it.</source>
         <translation>La condivisione dei file è disabilitata. Apri il menu delle opzioni per abilitarla.</translation>
     </message>
+    <message>
+        <source>File</source>
+        <translation>File</translation>
+    </message>
+    <message>
+        <source>Share a file</source>
+        <translation>Condividi un file</translation>
+    </message>
+    <message>
+        <source>Add a file to your local share</source>
+        <translation>Aggiungi un file alla tua condivisione in rete</translation>
+    </message>
+    <message>
+        <source>Share a folder</source>
+        <translation>Condividi una cartella</translation>
+    </message>
+    <message>
+        <source>Add a folder to your local share</source>
+        <translation>Aggiungi una cartella alla tua condivisione in rete</translation>
+    </message>
+    <message>
+        <source>Load shared files</source>
+        <translation>Carica i file condivisi</translation>
+    </message>
+    <message>
+        <source>Remove shared files from the selected path</source>
+        <translation>Rimuovi i file condivi dal percorso selezionato</translation>
+    </message>
+    <message>
+        <source>Remove shared path</source>
+        <translation>Rimuovi il percorso condiviso</translation>
+    </message>
+    <message>
+        <source>Remove shared path from the list</source>
+        <translation>Rimuovi il percorso selezionato dalla condivisione in rete</translation>
+    </message>
+    <message>
+        <source>File sharing is disabled</source>
+        <translation>La condivisione dei file è disabilitata</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
@@ -2014,7 +2070,7 @@ il file %2 (%3)?</translation>
         <translation></translation>
     </message>
     <message>
-        <source>TextLabel</source>
+        <source>2</source>
         <translation></translation>
     </message>
 </context>

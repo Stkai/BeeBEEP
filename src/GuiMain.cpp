@@ -288,7 +288,6 @@ void GuiMain::initGuiItems()
 
   mp_actSearch->setEnabled( enable );
   mp_userList->setDefaultChatConnected( enable );
-  mp_actCreateGroup->setEnabled( enable );
 
   updateStatusIcon();
 
@@ -307,6 +306,8 @@ void GuiMain::checkViewActions()
   mp_actSaveChat->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
   mp_menuEmoticons->menuAction()->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
 
+  mp_actCreateGroup->setEnabled( mp_core->isConnected() && mp_core->connectedUsers() > 1 );
+
   if( mp_stackedWidget->currentWidget() == mp_defaultChat )
     mp_actGroupAdd->setEnabled( mp_core->isConnected() && ChatManager::instance().isGroupChat( mp_defaultChat->chatId() ) );
   else
@@ -316,6 +317,11 @@ void GuiMain::checkViewActions()
     mp_barShareNetwork->show();
   else
     mp_barShareNetwork->hide();
+
+  if( mp_stackedWidget->currentWidget() == mp_shareLocal )
+    mp_barShareLocal->show();
+  else
+    mp_barShareLocal->hide();
 
   if( mp_stackedWidget->currentWidget() != mp_logView )
     mp_logView->stopCheckingLog();
@@ -752,10 +758,16 @@ void GuiMain::createStackedWidgets()
 
   mp_shareLocal = new GuiShareLocal( this );
   mp_stackedWidget->addWidget( mp_shareLocal );
+  mp_barShareLocal= new QToolBar( tr( "Show the bar of local file sharing" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barShareLocal );
+  mp_barShareLocal->setObjectName( "GuiShareLocalToolBar" );
+  mp_barShareLocal->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barShareLocal->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_shareLocal->setupToolBar( mp_barShareLocal );
 
   mp_shareNetwork = new GuiShareNetwork( this );
   mp_stackedWidget->addWidget( mp_shareNetwork );
-  mp_barShareNetwork = new QToolBar( tr( "Show the bar of file sharing" ), this );
+  mp_barShareNetwork = new QToolBar( tr( "Show the bar of network file sharing" ), this );
   addToolBar( Qt::BottomToolBarArea, mp_barShareNetwork );
   mp_barShareNetwork->setObjectName( "GuiShareNetworkToolBar" );
   mp_barShareNetwork->setIconSize( Settings::instance().mainBarIconSize() );

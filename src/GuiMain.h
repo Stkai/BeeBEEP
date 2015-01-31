@@ -177,6 +177,7 @@ private:
   QToolBar *mp_barMain;
   QToolBar *mp_barPlugins;
   QToolBar *mp_barShareNetwork;
+  QToolBar *mp_barShareLocal;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actSaveChat;

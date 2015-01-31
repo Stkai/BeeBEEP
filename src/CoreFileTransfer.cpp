@@ -253,7 +253,12 @@ void Core::addListToLocalShare()
   if( m_shareListToBuild > 0 )
     m_shareListToBuild--;
 
-  QString share_status = tr( "%1 is added to file sharing with %2 files, %3 (elapsed time: %4)" )
+  QString share_status;
+
+  if( bfsl->shareList().size() < 2 )
+    share_status = tr( "%1 is added to file sharing (%2)" ).arg( bfsl->path(), Bee::bytesToString( bfsl->shareSize() ) );
+  else
+    share_status = tr( "%1 is added to file sharing with %2 files, %3 (elapsed time: %4)" )
                            .arg( bfsl->path() )
                            .arg( bfsl->shareList().size() )
                            .arg( Bee::bytesToString( bfsl->shareSize() ) )
@@ -282,7 +287,13 @@ void Core::removePathFromShare( const QString& share_path )
 {
   int num_files = FileShare::instance().removePath( share_path );
 
-  QString share_status = tr( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
+  QString share_status;
+
+  if( num_files < 2 )
+    share_status = tr( "%1 is removed from file sharing" ).arg( share_path );
+  else
+    share_status = tr( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
+
   emit updateStatus( share_status, 0 );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ), DispatchToChat );
 

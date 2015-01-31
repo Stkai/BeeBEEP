@@ -36,18 +36,33 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 
   mp_twMyShares->setRootIsDecorated( false );
   mp_twMyShares->setSortingEnabled( true );
-
   mp_twLocalShares->setRootIsDecorated( false );
   mp_twLocalShares->setSelectionMode( QAbstractItemView::NoSelection );
 
-  mp_twMyShares->setHeaderLabel( tr( "Share" ) );
   QStringList labels;
+  labels << tr( "File" ) << tr( "Size" ) << tr( "Path" );
+  mp_twMyShares->setHeaderLabels( labels );
+  mp_twMyShares->setAlternatingRowColors( true );
+  mp_twMyShares->setSortingEnabled( true );
+  labels.clear();
   labels << tr( "Filename" ) << tr( "Size" ) << tr( "Path" );
   mp_twLocalShares->setHeaderLabels( labels );
   mp_twLocalShares->setAlternatingRowColors( true );
   mp_twLocalShares->setSortingEnabled( true );
 
-  QHeaderView* header_view = mp_twLocalShares->header();
+  QHeaderView* header_view = mp_twMyShares->header();
+#if QT_VERSION >= 0x050000
+  header_view->setSectionResizeMode( 0, QHeaderView::ResizeToContents );
+  header_view->setSectionResizeMode( 1, QHeaderView::ResizeToContents );
+  header_view->setSectionResizeMode( 2, QHeaderView::Stretch );
+#else
+  header_view->setResizeMode( 0, QHeaderView::ResizeToContents );
+  header_view->setResizeMode( 1, QHeaderView::ResizeToContents );
+  header_view->setResizeMode( 2, QHeaderView::Stretch );
+#endif
+  header_view->setSortIndicator( 2, Qt::AscendingOrder );
+
+  header_view = mp_twLocalShares->header();
 #if QT_VERSION >= 0x050000
   header_view->setSectionResizeMode( 0, QHeaderView::Stretch );
   header_view->setSectionResizeMode( 1, QHeaderView::ResizeToContents );
@@ -59,20 +74,30 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 #endif
   header_view->setSortIndicator( 0, Qt::AscendingOrder );
 
-  header_view = mp_twMyShares->header();
-  header_view->setSortIndicator( 0, Qt::AscendingOrder );
+  connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+}
 
-  mp_pbAddFile->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_pbAddFolder->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_pbRemove->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_pbUpdate->setIconSize( Settings::instance().mainBarIconSize() );
+void GuiShareLocal::setupToolBar( QToolBar* bar )
+{
+  mp_actAddFile = bar->addAction( QIcon( ":/images/file-add.png" ), tr( "Share a file" ), this, SLOT( addFilePath() ) );
+  mp_actAddFile->setStatusTip( tr( "Add a file to your local share" ) );
+
+  mp_actAddFolder = bar->addAction( QIcon( ":/images/folder-add.png" ), tr( "Share a folder" ), this, SLOT( addFolderPath() ) );
+  mp_actAddFolder->setStatusTip( tr( "Add a folder to your local share" ) );
+
+  mp_actUpdate = bar->addAction( QIcon( ":/images/update.png" ), tr( "Load shared files" ), this, SLOT( updateList() ) );
+  mp_actUpdate->setStatusTip( tr( "Remove shared files from the selected path" ) );
+
+  mp_actRemove = bar->addAction( QIcon( ":/images/disconnect.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
+  mp_actRemove->setStatusTip( tr( "Remove shared path from the list" ) );
+
+  mp_labelShareStats = new QLabel( bar );
+  mp_labelShareStats->setObjectName( "GuiLabelLocalShareStats" );
+  mp_labelShareStats->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+  mp_labelShareStats->setMinimumWidth( 300 );
+  bar->addWidget( mp_labelShareStats );
 
   showStats( 0, 0 );
-  connect( mp_pbAddFile, SIGNAL( clicked() ), this, SLOT( addFilePath() ) );
-  connect( mp_pbAddFolder, SIGNAL( clicked() ), this, SLOT( addFolderPath() ) );
-  connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removePath() ) );
-  connect( mp_pbUpdate, SIGNAL( clicked() ), this, SLOT( updateList() ) );
-  connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
 }
 
 void GuiShareLocal::showStats( int file_count, FileSizeType total_file_size )
@@ -80,15 +105,15 @@ void GuiShareLocal::showStats( int file_count, FileSizeType total_file_size )
   if( Settings::instance().fileShare() )
     mp_labelShareStats->setText( QString( "%1: <b>%2</b> (%3)" ).arg( tr( "Shared files" ) ).arg( file_count ).arg( Bee::bytesToString( total_file_size ) ) );
   else
-    mp_labelShareStats->setText( QString( "<b>%1</b>" ).arg( "File sharing is disabled" ) );
+    mp_labelShareStats->setText( QString( "<b>%1</b>" ).arg( tr( "File sharing is disabled" ) ) );
 }
 
 void GuiShareLocal::setActionsEnabled( bool enable )
 {
-  mp_pbAddFile->setEnabled( enable );
-  mp_pbAddFolder->setEnabled( enable );
-  mp_pbRemove->setEnabled( enable );
-  mp_pbUpdate->setEnabled( enable );
+  mp_actAddFile->setEnabled( enable );
+  mp_actAddFolder->setEnabled( enable );
+  mp_actRemove->setEnabled( enable );
+  mp_actUpdate->setEnabled( enable );
   if( enable )
     setCursor( Qt::ArrowCursor );
   else
@@ -154,7 +179,9 @@ void GuiShareLocal::updatePaths()
   foreach( QString share_path, Settings::instance().localShare() )
   {
     item = new QTreeWidgetItem( mp_twMyShares );
-    item->setText( 0, share_path );
+    item->setText( 0, QString::number( FileShare::instance().local().count( share_path ) ) );
+    item->setText( 1, Bee::bytesToString( FileShare::instance().localSize( share_path ) ) );
+    item->setText( 2, share_path );
   }
 }
 
@@ -162,6 +189,7 @@ void GuiShareLocal::updateFileSharedList()
 {
   setActionsEnabled( false );
   mp_twLocalShares->clear();
+  updatePaths();
   QTimer::singleShot( 200, this, SLOT( loadFileInfoInList() ) );
 }
 

@@ -46,6 +46,7 @@ public:
   void sendBroadcastMessage();
 
   /* CoreUser */
+  inline int connectedUsers() const;
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
   bool setUserColor( VNumber, const QString& );
@@ -153,7 +154,6 @@ protected:
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();
 
-
 private:
   QList<Connection*> m_connections;
   Listener* mp_listener;
@@ -162,5 +162,8 @@ private:
   int m_shareListToBuild;
 
 };
+
+// Inline Functions
+inline int Core::connectedUsers() const { return m_connections.size(); }
 
 #endif // BEEBEEP_CLIENT_H
