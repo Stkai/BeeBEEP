@@ -26,23 +26,27 @@
 
 
 BuildFileShareList::BuildFileShareList( QObject *parent )
-  : QObject( parent )
+  : QObject( parent ), m_path( "" ), m_broadcastList( false ), m_shareList(),
+    m_shareSize( 0 ), m_elapsedTime( 0 )
 {
   setObjectName( "BuildFileShareList" );
-  m_broadcastList = false;
-  m_elapsedTime = 0;
 }
 
 void BuildFileShareList::buildList()
 {
+  if( m_path.isEmpty() )
+    return;
+  if( !m_shareList.isEmpty() )
+    m_shareList.clear();
+  m_shareSize = 0;
   QTime elapsed_time;
   elapsed_time.start();
-  addPathToList( m_path, m_path );
+  addPathToList( m_path );
   m_elapsedTime = elapsed_time.elapsed();
   emit listCompleted();
 }
 
-void BuildFileShareList::addPathToList( const QString& share_key, const QString& share_path )
+void BuildFileShareList::addPathToList( const QString& share_path )
 {
   QFileInfo file_info( share_path );
   if( file_info.isSymLink() )
@@ -59,15 +63,17 @@ void BuildFileShareList::addPathToList( const QString& share_key, const QString&
     }
 
     QDir dir_path( share_path );
-
-    foreach( QString fp, dir_path.entryList() )
-      addPathToList( share_key, QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
-
+    if( dir_path.exists() && dir_path.isReadable() )
+    {
+      foreach( QString fp, dir_path.entryList() )
+        addPathToList( QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
+    }
   }
   else if( file_info.isFile() )
   {
     FileInfo fi = Protocol::instance().fileInfo( file_info );
-    m_shareList.insert( share_key, fi );
+    m_shareList.append( fi );
+    m_shareSize += fi.size();
   }
   else
     qWarning() << "Unable to share path" << share_path;

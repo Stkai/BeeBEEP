@@ -67,11 +67,11 @@ void FileTransfer::stopListener()
 
 void FileTransfer::resetServerFiles()
 {
-  qDebug() << "File Transfer reset files to" << serverAddress().toString() << serverPort();
+  qDebug() << "File Transfer reset files to" << Settings::instance().localUser().hostAddress().toString() << serverPort();
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )
   {
-    (*it).setHostAddress( serverAddress() );
+    (*it).setHostAddress( Settings::instance().localUser().hostAddress() );
     (*it).setHostPort( serverPort() );
     ++it;
   }
@@ -120,7 +120,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi )
   if( file_info.isValid() )
     return file_info;
   file_info = Protocol::instance().fileInfo( fi );
-  file_info.setHostAddress( serverAddress() );
+  file_info.setHostAddress( Settings::instance().localUser().hostAddress() );
   file_info.setHostPort( serverPort() );
   m_files.append( file_info );
   return file_info;

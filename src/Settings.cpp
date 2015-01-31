@@ -107,7 +107,7 @@ QString Settings::currentHash() const
   return QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
-QHostAddress Settings::localHostAddress() const
+QHostAddress Settings::searchLocalHostAddress() const
 {
   QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
   QList<QHostAddress> address_ipv6_list;
@@ -436,7 +436,14 @@ void Settings::load()
   sets->beginGroup( "FileShare" );
   m_fileShare = sets->value( "Active", true ).toBool();
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
-  m_localShare = sets->value( "ShareList", QStringList() ).toStringList();
+  QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
+  if( !local_share.isEmpty() )
+  {
+    foreach( QString share_path, local_share )
+      m_localShare.append( QDir::toNativeSeparators( share_path ) );
+  }
+  else
+    m_localShare = local_share;
   sets->endGroup();
 
   sets->beginGroup( "Plugin" );

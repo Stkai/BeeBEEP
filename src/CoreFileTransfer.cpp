@@ -227,9 +227,6 @@ void Core::sendFileShareListToAll()
 
 void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 {
-  if( FileShare::instance().local().contains( share_path ) )
-    FileShare::instance().removePath( share_path );
-
   QString share_status = tr( "Adding to file sharing" ) + QString( " %1" ).arg( share_path );
   qDebug() << qPrintable( share_status );
   emit updateStatus( share_status + QString( " ..." ), 1000 );
@@ -256,19 +253,16 @@ void Core::addListToLocalShare()
   if( m_shareListToBuild > 0 )
     m_shareListToBuild--;
 
-  QString share_status = QString( "%1 is added to file sharing with %2 files (elapsed time: %3)" )
+  QString share_status = tr( "%1 is added to file sharing with %2 files, %3 (elapsed time: %4)" )
                            .arg( bfsl->path() )
                            .arg( bfsl->shareList().size() )
+                           .arg( Bee::bytesToString( bfsl->shareSize() ) )
                            .arg( Bee::elapsedTimeToString( bfsl->elapsedTime() ) );
-  qDebug() << qPrintable( share_status );
-  emit updateStatus( share_status, 3000 );
+  emit updateStatus( share_status, 0 );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ), DispatchToChat );
 
-  if( bfsl->shareList().size() > 0 )
-  {
-    FileShare::instance().addToLocal( bfsl->shareList() );
-    createLocalShareMessage();
-  }
+  FileShare::instance().addToLocal( bfsl->path(), bfsl->shareList(), bfsl->shareSize() );
+  createLocalShareMessage();
 
   if( m_shareListToBuild == 0 )
   {
@@ -288,9 +282,9 @@ void Core::removePathFromShare( const QString& share_path )
 {
   int num_files = FileShare::instance().removePath( share_path );
 
-  QString share_status = QString( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
-  qDebug() << share_status;
-  emit updateStatus( share_status, 3000 );
+  QString share_status = tr( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
+  emit updateStatus( share_status, 0 );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ), DispatchToChat );
 
   if( num_files > 0 )
   {

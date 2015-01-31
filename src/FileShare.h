@@ -36,8 +36,8 @@ public:
   inline const QMultiMap<QString, FileInfo>& local() const;
   inline const QMultiMap<VNumber, FileInfo>& network() const;
 
-  inline void addToLocal( const QMultiMap<QString, FileInfo>& );
-  inline void clearLocal();
+  void addToLocal( const QString&, const QList<FileInfo>&, FileSizeType );
+  void clearLocal();
   int removePath( const QString& );
   FileInfo networkFileInfo( VNumber user_id, VNumber file_info_id ) const;
   FileInfo localFileInfo( VNumber file_info_id ) const;
@@ -67,6 +67,7 @@ protected:
 
 private:
   QMultiMap<QString, FileInfo> m_local;
+  QMap<QString, FileSizeType> m_localSize;
   QMultiMap<VNumber, FileInfo> m_network;
 
 };
@@ -75,7 +76,5 @@ private:
 // Inline Functions
 inline const QMultiMap<QString, FileInfo>& FileShare::local() const { return m_local; }
 inline const QMultiMap<VNumber, FileInfo>& FileShare::network() const { return m_network; }
-inline void FileShare::clearLocal() { m_local.clear(); }
-inline void FileShare::addToLocal( const QMultiMap<QString, FileInfo>& shares_to_add ) { m_local += shares_to_add; }
 
 #endif // BEEBEEP_FILESHARE_H

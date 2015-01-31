@@ -117,6 +117,7 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_comboUsers->setMinimumSize( QSize( 100, 0 ) );
   mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
   mp_comboUsers->setCurrentIndex( 0 );
+  mp_comboUsers->setEnabled( false );
   bar->addWidget( mp_comboUsers );
   connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
 
@@ -230,6 +231,7 @@ void GuiShareNetwork::loadShares( const User& u )
       mp_comboUsers->removeItem( user_id_index_to_remove );
   }
 
+  mp_comboUsers->setEnabled( mp_comboUsers->count() > 1 );
   showStatus( tr( "%1 has shared %2 files (%3)" ).arg( u.name() ).arg( file_shared ).arg( Bee::bytesToString( share_size ) ) );
 }
 

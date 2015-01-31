@@ -38,6 +38,23 @@ int FileShare::removePath( const QString& share_path )
   return m_local.remove( share_path );
 }
 
+void FileShare::clearLocal()
+{
+  m_local.clear();
+  m_localSize.clear();
+}
+
+void FileShare::addToLocal( const QString& share_path, const QList<FileInfo>& share_list, FileSizeType share_size )
+{
+  m_localSize.insert( share_path, share_size );
+  if( m_local.contains( share_path ) )
+    m_local.remove( share_path );
+  if( share_list.isEmpty() )
+    return;
+  foreach( FileInfo fi, share_list )
+    m_local.insert( share_path, fi );
+}
+
 int FileShare::addToNetwork( VNumber user_id, const QList<FileInfo>& file_info_list )
 {
   removeFromNetwork( user_id );

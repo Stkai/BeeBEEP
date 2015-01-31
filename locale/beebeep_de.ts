@@ -146,8 +146,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="233"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="230"/>
         <source>Adding to file sharing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreFileTransfer.cpp" line="256"/>
+        <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreFileTransfer.cpp" line="285"/>
+        <source>%1 is removed from file sharing with %2 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1940,22 +1950,22 @@ Please check the file or the directories write permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="153"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="154"/>
         <source>%1 is searching shared files in your network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="233"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="235"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="346"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="348"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="348"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="350"/>
         <source>%1 files shared in your network</source>
         <translation type="unfinished"></translation>
     </message>

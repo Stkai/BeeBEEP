@@ -39,7 +39,8 @@ public:
   inline const QString& path() const;
   inline void setBroadcastList( bool );
   inline bool broadcastList() const;
-  inline const QMultiMap<QString, FileInfo>& shareList() const;
+  inline const QList<FileInfo>& shareList() const;
+  inline FileSizeType shareSize() const;
   inline int elapsedTime() const;
 
 signals:
@@ -49,12 +50,13 @@ public slots:
   void buildList();
 
 protected:
-  void addPathToList( const QString&, const QString& );
+  void addPathToList( const QString& );
 
 private:
   QString m_path;
   bool m_broadcastList;
-  QMultiMap<QString, FileInfo> m_shareList;
+  QList<FileInfo> m_shareList;
+  FileSizeType m_shareSize;
   int m_elapsedTime;
 
 };
@@ -65,7 +67,8 @@ inline void BuildFileShareList::setPath( const QString& new_value ) { m_path = n
 inline const QString& BuildFileShareList::path() const { return m_path; }
 inline void BuildFileShareList::setBroadcastList( bool new_value ) { m_broadcastList = new_value; }
 inline bool BuildFileShareList::broadcastList() const { return m_broadcastList; }
-inline const QMultiMap<QString, FileInfo>& BuildFileShareList::shareList() const { return m_shareList; }
+inline const QList<FileInfo>& BuildFileShareList::shareList() const { return m_shareList; }
+inline FileSizeType BuildFileShareList::shareSize() const { return m_shareSize; }
 inline int BuildFileShareList::elapsedTime() const { return m_elapsedTime; }
 
 #endif // BEEBEEP_BUILDFILESHARELIST_H

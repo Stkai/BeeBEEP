@@ -263,6 +263,14 @@
         <source>%1 %2 has shared %3 files.</source>
         <translation>%1 %2 ha condiviso %3 file.</translation>
     </message>
+    <message>
+        <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is removed from file sharing with %2 files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
