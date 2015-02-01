@@ -62,11 +62,6 @@ QString Settings::organizationName() const
   return QString( BEEBEEP_ORGANIZATION );
 }
 
-QString Settings::downloadWebSite() const
-{
-  return QString( BEEBEEP_DOWNLOAD_WEBSITE );
-}
-
 QString Settings::officialWebSite() const
 {
   return QString( BEEBEEP_WEBSITE );
@@ -74,7 +69,7 @@ QString Settings::officialWebSite() const
 
 QString Settings::pluginWebSite() const
 {
-  return QString( BEEBEEP_PLUGIN_WEBSITE );
+  return officialWebSite() + QString( BEEBEEP_PLUGIN_WEBSITE );
 }
 
 QString Settings::checkVersionWebSite() const
@@ -86,7 +81,7 @@ QString Settings::checkVersionWebSite() const
 #ifdef Q_OS_MAC
   os_type = "macosx";
 #endif
-  return QString( "%1?beebeep-version=%2&beebeep-os=%3" ).arg( QString( BEEBEEP_CHECK_VERSION_WEBSITE ) ).arg( QString( BEEBEEP_VERSION ) ).arg( os_type );
+  return officialWebSite() + QString( "%1?beebeep-version=%2&beebeep-os=%3" ).arg( QString( BEEBEEP_CHECK_VERSION_WEBSITE ) ).arg( QString( BEEBEEP_VERSION ) ).arg( os_type );
 }
 
 QByteArray Settings::hash( const QString& string_to_hash ) const
@@ -275,7 +270,7 @@ namespace
     if( sTmp.isNull() )
       sTmp = pe.value( "USER" );
     if( sTmp.isNull() )
-      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "zzz" ) );
+      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "hmszzz" ) );
     return sTmp;
   }
 }
@@ -462,7 +457,7 @@ void Settings::load()
     sets->endGroup();
   }
 
-  QString sName = GetUserNameFromSystemEnvinroment();
+  QString sName = GetUserNameFromSystemEnvinroment().simplified();
   m_localUser.setAccountName( sName.toLower() );
   if( m_localUser.name().isEmpty() )
     m_localUser.setName( sName );

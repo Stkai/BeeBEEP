@@ -229,3 +229,33 @@ QString Bee::dateTimeStringSuffix( const QDateTime& dt )
   s.remove( QChar( ' ' ) );
   return s;
 }
+
+QString Bee::capitalizeFirstLetter( const QString& txt, bool all_chars_after_space )
+{
+  if( txt.isEmpty() )
+    return txt;
+  QString tmp = txt.toLower();
+  QString capitalized = "";
+  bool apply_title_case = true;
+  QChar c;
+  for( int i = 0; i < tmp.size(); i++ )
+  {
+    c = tmp.at( i );
+
+    if( c.isSpace() )
+    {
+      capitalized += c;
+      if( all_chars_after_space )
+        apply_title_case = true;
+    }
+    else if( apply_title_case )
+    {
+      capitalized += c.toTitleCase();
+      apply_title_case = false;
+    }
+    else
+      capitalized += c;
+  }
+
+  return capitalized;
+}

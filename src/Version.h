@@ -26,14 +26,17 @@
 
 const char* BEEBEEP_NAME = "BeeBEEP";
 const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
+#ifdef BEEBEEP_DEBUG
+const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
+#else
 const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
-const char* BEEBEEP_DOWNLOAD_WEBSITE = "http://sourceforge.net/projects/beebeep/files";
-const char* BEEBEEP_PLUGIN_WEBSITE = "http://beebeep.sourceforge.net/download.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "http://beebeep.sourceforge.net/checkversion.php";
+#endif
+const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
+const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
 const char* BEEBEEP_VERSION = "0.9.7";
 const int BEEBEEP_PROTO_VERSION = 62;
 const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 304;
+const int BEEBEEP_BUILD = 305;
 
 #endif // BEEBEEP_VERSION_H
 

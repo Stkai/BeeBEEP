@@ -42,7 +42,6 @@ public:
   inline int dataStreamVersion( bool in_load_event ) const;
   QString programName() const;
   QString organizationName() const;
-  QString downloadWebSite() const;
   QString officialWebSite() const;
   QString pluginWebSite() const;
   QString checkVersionWebSite() const;

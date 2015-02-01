@@ -34,7 +34,6 @@
 #include "Random.h"
 #include "Settings.h"
 
-
 bool SetTranslator( QTranslator* translator, const QString& prog_name, const QString& locale_folder, const QString& lang )
 {
   QString new_locale = QString( "%1/%2_%3.qm").arg( locale_folder, prog_name.toLower(), lang );

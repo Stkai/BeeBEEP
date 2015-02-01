@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>338</width>
-    <height>134</height>
+    <width>320</width>
+    <height>133</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" rowspan="2">
+     <item row="0" column="0" rowspan="3">
       <widget class="QLabel" name="mp_lPix">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -55,6 +55,9 @@
       </widget>
      </item>
      <item row="1" column="1">
+      <widget class="QLabel" name="mp_lAccount"/>
+     </item>
+     <item row="2" column="1">
       <widget class="QLineEdit" name="mp_leName"/>
      </item>
     </layout>

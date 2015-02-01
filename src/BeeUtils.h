@@ -49,6 +49,7 @@ namespace Bee
   bool isFileTypeBundle( const QString& );
   QString fileTypeToString( FileType );
   QString dateTimeStringSuffix( const QDateTime& );
+  QString capitalizeFirstLetter( const QString&, bool all_chars_after_space );
 
 }
 

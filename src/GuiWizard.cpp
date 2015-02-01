@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiWizard.h"
 #include "Settings.h"
 
@@ -38,7 +39,16 @@ GuiWizard::GuiWizard( QWidget *parent )
 
 void GuiWizard::loadSettings()
 {
-  mp_leName->setText( Settings::instance().localUser().name() );
+  mp_lAccount->setText( QString( "%1: %2" ).arg( tr( "Your system account is" ) ).arg( Settings::instance().localUser().accountName() ) );
+  if( Settings::instance().localUser().name() == Settings::instance().localUser().accountName() )
+  {
+    QString display_name = Settings::instance().localUser().name();
+    display_name.replace( QChar( '.' ), QChar( ' ' ) );
+    display_name.replace( QChar( '_' ), QChar( ' ' ) );
+    mp_leName->setText( Bee::capitalizeFirstLetter( display_name, true ) );
+  }
+  else
+    mp_leName->setText( Settings::instance().localUser().name() );
 }
 
 void GuiWizard::checkSettings()
