@@ -70,12 +70,8 @@ private slots:
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
   void showTipOfTheDay();
-  void selectFontColor();
-  void selectFont();
   void searchUsers();
   void settingsChanged();
-  void emoticonSelected();
-  void saveChat();
   void showNextChat();
   void statusSelected();
   void changeStatusDescription();
@@ -135,7 +131,6 @@ private:
   void createStackedWidgets();
   void createPluginWindows();
   void refreshUserList();
-  void refreshChat();
   void refreshTitle( const User& );
   void startCore();
   void stopCore();
@@ -153,7 +148,7 @@ private:
 
 private:
   QStackedWidget* mp_stackedWidget;
-  GuiChat* mp_defaultChat;
+  GuiChat* mp_chat;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
@@ -169,37 +164,35 @@ private:
   QMenu *mp_menuInfo;
   QMenu *mp_menuSettings;
   QMenu *mp_menuChat;
-  QMenu *mp_menuEmoticons;
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;
   QMenu *mp_menuView;
 
   QToolBar *mp_barMain;
+  QToolBar *mp_barChat;
   QToolBar *mp_barPlugins;
   QToolBar *mp_barShareNetwork;
   QToolBar *mp_barShareLocal;
+  QToolBar *mp_barScreenShot;
 
   QAction* mp_actStartStopCore;
-  QAction* mp_actSaveChat;
   QAction* mp_actSearch;
   QAction* mp_actQuit;
   QAction* mp_actVCard;
-  QAction* mp_actFont;
-  QAction* mp_actFontColor;
   QAction* mp_actToolBar;
+  QAction* mp_actChatBar;
   QAction* mp_actPluginBar;
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
-  QAction* mp_actSendFile;
   QAction* mp_actViewFileTransfer;
   QAction* mp_actViewChats;
   QAction* mp_actViewSavedChats;
   QAction* mp_actViewShareLocal;
   QAction* mp_actViewShareNetwork;
   QAction* mp_actViewDefaultChat;
+  QAction* mp_actViewScreenShot;
+  QAction* mp_actViewLog;
   QAction* mp_actBeepOnNewMessage;
-  QAction* mp_actGroupAdd;
-  QAction* mp_actCreateGroup;
   QAction* mp_actPromptPassword;
 
   QDockWidget* mp_dockUserList;

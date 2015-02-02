@@ -23,6 +23,7 @@
 
 #include "ChatManager.h"
 #include "ChatMessage.h"
+#include "EmoticonManager.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
 #include "Settings.h"
@@ -50,15 +51,58 @@ GuiChat::GuiChat( QWidget *parent )
   setChatFontColor( Settings::instance().chatFontColor() );
 
   m_lastMessageUserId = 0;
+  m_lastEmoticonSelected = ":)";
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
+}
 
-  // connect( mp_buttonSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
-  mp_buttonSend->hide();
+void GuiChat::setupToolBar( QToolBar* bar )
+{
+  QAction* act;
+
+  mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
+  mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
+  mp_menuEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
+
+  QList<Emoticon> emoticon_list = EmoticonManager::instance().emoticons( true );
+  QList<Emoticon>::const_iterator it = emoticon_list.begin();
+  while( it != emoticon_list.end() )
+  {
+    act = mp_menuEmoticons->addAction( QIcon( (*it).pixmap() ), (*it).name(), this, SLOT( emoticonSelected() ) );
+    act->setData( (*it).textToMatch() );
+    act->setStatusTip( QString( "Insert [%1] emoticon %2" ).arg( (*it).name(), (*it).textToMatch() ) );
+    act->setIconVisibleInMenu( true );
+    ++it;
+  }
+  mp_actEmoticons = mp_menuEmoticons->menuAction();
+  connect( mp_actEmoticons, SIGNAL( triggered() ), this, SLOT( lastEmoticonSelected() ) );
+
+  bar->addAction( mp_actEmoticons );
+  act = bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
+  act->setStatusTip( tr( "Select your favourite chat font style" ) );
+  act = bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
+  act->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
+  bar->addSeparator();
+  mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SIGNAL( sendFileRequest() ) );
+  mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
+  act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
+  act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
+  bar->addSeparator();
+  mp_actCreateGroup = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupRequest() ) );
+  mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
+  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Edit group chat" ), this, SIGNAL( editGroupRequest() ) );
+  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
+}
+
+void GuiChat::updateAction( bool is_connected, int connected_users )
+{
+  mp_actSendFile->setEnabled( is_connected && connected_users > 0 );
+  mp_actCreateGroup->setEnabled( is_connected && connected_users > 1 );
+  mp_actGroupAdd->setEnabled( is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
 }
 
 void GuiChat::customContextMenu( const QPoint& p )
@@ -68,12 +112,6 @@ void GuiChat::customContextMenu( const QPoint& p )
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ) );
   custom_context_menu.exec( mapToGlobal( p ) );
-}
-
-void GuiChat::setChatFont( const QFont& f )
-{
-  mp_teChat->setFont( f );
-  mp_teMessage->setFont( f );
 }
 
 void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
@@ -87,18 +125,6 @@ void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
 void GuiChat::sendMessage()
 {
   emit newMessage( m_chatId, mp_teMessage->message() );
-}
-
-void GuiChat::addToMyMessage( const QString& msg_to_add )
-{
-  if( msg_to_add.isEmpty() )
-    return;
-  mp_teMessage->insertPlainText( msg_to_add );
-}
-
-void GuiChat::setChatFontColor( const QString& color_name )
-{
-  mp_teMessage->setTextColor( QColor( color_name ) );
 }
 
 void GuiChat::checkWriting()
@@ -228,17 +254,86 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
     setChatUsers();
   }
 
-  appendMessage( chatMessageToText( cm ) );
+  QTextCursor cursor( mp_teChat->textCursor() );
+  cursor.movePosition( QTextCursor::End );
+  cursor.insertHtml( chatMessageToText( cm ) );
+  QScrollBar *bar = mp_teChat->verticalScrollBar();
+  bar->setValue( bar->maximum() );
 
   if( read_all_messages )
     setLastMessageTimestamp( cm.message().timestamp() );
 }
 
-void GuiChat::appendMessage( const QString& msg )
+void GuiChat::setChatFont( const QFont& f )
 {
-  QTextCursor cursor( mp_teChat->textCursor() );
-  cursor.movePosition( QTextCursor::End );
-  cursor.insertHtml( msg );
-  QScrollBar *bar = mp_teChat->verticalScrollBar();
-  bar->setValue( bar->maximum() );
+  mp_teChat->setFont( f );
+  mp_teMessage->setFont( f );
 }
+
+void GuiChat::selectFont()
+{
+  bool ok = false;
+  QFont f = QFontDialog::getFont( &ok, Settings::instance().chatFont(), this );
+  if( ok )
+  {
+    Settings::instance().setChatFont( f );
+    setChatFont( f );
+  }
+}
+
+void GuiChat::setChatFontColor( const QString& color_name )
+{
+  mp_teMessage->setTextColor( QColor( color_name ) );
+}
+
+void GuiChat::selectFontColor()
+{
+  QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
+  if( c.isValid() )
+  {
+    Settings::instance().setChatFontColor( c.name() );
+    setChatFontColor( c.name() );
+  }
+}
+
+void GuiChat::lastEmoticonSelected()
+{
+  mp_teMessage->insertPlainText( m_lastEmoticonSelected );
+}
+
+void GuiChat::emoticonSelected()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( act )
+  {
+    m_lastEmoticonSelected = act->data().toString();
+    mp_teMessage->insertPlainText( m_lastEmoticonSelected );
+    mp_actEmoticons->setIcon( EmoticonManager::instance().emoticon( m_lastEmoticonSelected ).pixmap() );
+  }
+}
+
+void GuiChat::saveChat()
+{
+  QString file_name = QFileDialog::getSaveFileName( this,
+                        tr( "Please select a file to save the messages of the chat." ),
+                        Settings::instance().chatSaveDirectory(), "HTML Chat Files (*.htm)" );
+  if( file_name.isNull() || file_name.isEmpty() )
+    return;
+  QFileInfo file_info( file_name );
+  Settings::instance().setChatSaveDirectory( file_info.absolutePath() );
+
+  QFile file( file_name );
+  if( !file.open( QFile::WriteOnly ) )
+  {
+    QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
+      tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
+    return;
+  }
+
+  file.write( mp_teChat->toHtml().toLatin1() );
+  file.close();
+  QMessageBox::information( this, QString( "%1 - %2" ).arg( Settings::instance().programName(), tr( "Information" ) ),
+    tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
+}
+
+

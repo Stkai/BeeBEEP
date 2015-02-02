@@ -35,6 +35,8 @@ class GuiScreenShot : public QWidget, private Ui::GuiScreenShotWidget
 public:
   explicit GuiScreenShot( QWidget *parent = 0 );
 
+  void setupToolBar( QToolBar* );
+
   inline const QPixmap& screenShot() const;
 
 signals:
@@ -55,6 +57,12 @@ protected:
 
 private:
   QPixmap m_screenShot;
+  QSpinBox* mp_sbDelay;
+  QCheckBox* mp_cbHide;
+  QAction* mp_actShot;
+  QAction* mp_actSave;
+  QAction* mp_actSend;
+  QAction* mp_actDelete;
 
 };
 

@@ -31,11 +31,44 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
 {
   setupUi( this );
   setObjectName( "GuiScreenShot" );
+}
 
-  connect( mp_pbShot, SIGNAL( clicked() ), this, SLOT( doScreenShot() ) );
-  connect( mp_pbSave, SIGNAL( clicked() ), this, SLOT( doSave() ) );
-  connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( doSend() ) );
-  connect( mp_pbDelete, SIGNAL( clicked() ), this, SLOT( doDelete() ) );
+void GuiScreenShot::setupToolBar( QToolBar* bar )
+{
+  QLabel* mp_labelDelay = new QLabel( this );
+  mp_labelDelay->setObjectName( "mp_labelDelay" );
+  mp_labelDelay->setAlignment( Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  mp_labelDelay->setText( QString( "  " ) + tr( "Delay" ) + QString( "  " ) );
+  mp_labelDelay->setToolTip( tr( "Delay screenshot for selected seconds" ) );
+  bar->addWidget( mp_labelDelay );
+
+  mp_sbDelay = new QSpinBox( this );
+  mp_sbDelay->setObjectName( "mp_sbDelay" );
+  mp_sbDelay->setMinimum( 0 );
+  mp_sbDelay->setMaximum( 15 );
+  mp_sbDelay->setValue( 0 );
+  mp_sbDelay->setSuffix( QString( " " ) + tr( "s" ) + QString( " " ) );
+  bar->addWidget( mp_sbDelay );
+
+  bar->addSeparator();
+
+  mp_cbHide = new QCheckBox( this );
+  mp_cbHide->setObjectName( "mp_cbHide" );
+  mp_cbHide->setChecked(true);
+  mp_cbHide->setText( tr( "Hide this window" ) + QString( "    " ) );
+  mp_cbHide->setToolTip( tr( "Hide this window before capture screenshot" ) );
+  bar->addWidget( mp_cbHide );
+
+  bar->addSeparator();
+
+  mp_actShot = bar->addAction( QIcon( ":/images/screenshot.png" ), tr( "Capture" ), this, SLOT( doScreenShot() ) );
+  mp_actShot->setStatusTip( tr( "Capture a screenshot of your desktop" ) );
+  mp_actSend = bar->addAction( QIcon( ":/images/send.png" ), tr( "Send" ), this, SLOT( doSend() ) );
+  mp_actSend->setStatusTip( tr( "Send the captured screenshot to an user" ) );
+  mp_actSave = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save" ), this, SLOT( doSave() ) );
+  mp_actSave->setStatusTip( tr( "Save the captured screenshot as file" ) );
+  mp_actDelete = bar->addAction( QIcon( ":/images/disconnect.png" ), tr( "Delete" ), this, SLOT( doDelete() ) );
+  mp_actDelete->setStatusTip( tr( "Delete the captured screenshot" ) );
 
   updateScreenShot();
 }
@@ -56,16 +89,16 @@ void GuiScreenShot::updateScreenShot()
   if( m_screenShot.isNull() )
   {
     mp_labelScreenShot->setText( tr( "No screenshot available" ) );
-    mp_pbSave->setEnabled( false );
-    mp_pbSend->setEnabled( false );
-    mp_pbDelete->setEnabled( false );
+    mp_actSave->setEnabled( false );
+    mp_actSend->setEnabled( false );
+    mp_actDelete->setEnabled( false );
   }
   else
   {
     mp_labelScreenShot->setPixmap( m_screenShot.scaled( mp_labelScreenShot->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
-    mp_pbSave->setEnabled( true );
-    mp_pbSend->setEnabled( true );
-    mp_pbDelete->setEnabled( true );
+    mp_actSave->setEnabled( true );
+    mp_actSend->setEnabled( true );
+    mp_actDelete->setEnabled( true );
   }
 }
 
@@ -74,7 +107,7 @@ void GuiScreenShot::doScreenShot()
   if( mp_cbHide->isChecked() )
     emit( hideRequest() );
 
-  mp_pbShot->setDisabled( true );
+  mp_actShot->setDisabled( true );
 
   int delay_time = mp_sbDelay->value();
   if( delay_time < 1 )
@@ -93,7 +126,7 @@ void GuiScreenShot::captureScreen()
 
   emit( showRequest() );
 
-  mp_pbShot->setEnabled( true );
+  mp_actShot->setEnabled( true );
 }
 
 void GuiScreenShot::doSave()

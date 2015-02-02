@@ -114,17 +114,6 @@ void Core::sendLocalUserStatus()
     c->sendData( user_status_message );
 }
 
-bool Core::setUserColor( VNumber user_id, const QString& user_color )
-{
-  User u = UserManager::instance().userList().find( user_id );
-  if( !u.isValid() )
-    return false;
-  u.setColor( user_color );
-  UserManager::instance().setUser( u );
-  emit userChanged( u );
-  return true;
-}
-
 void Core::setLocalUserVCard( const VCard& vc )
 {
   User u = Settings::instance().localUser();

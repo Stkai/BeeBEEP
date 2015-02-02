@@ -35,44 +35,62 @@ class GuiChat : public QWidget, private Ui::GuiChatWidget
 
 public:
   GuiChat( QWidget* parent = 0 );
-  void addToMyMessage( const QString& ); // For emoticons
-  void appendMessage( const QString& );
+
+  void setupToolBar( QToolBar* );
+  void updateAction( bool is_connected, int connected_users );
+
   void appendChatMessage( VNumber, const ChatMessage& );
-  void setChatFont( const QFont& );
-  void setChatFontColor( const QString& );
   bool setChatId( VNumber );
   inline VNumber chatId() const;
-  inline QString toHtml() const;
   void updateUser( const User& );
+
+  inline bool reloadChat();
 
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );
   void nextChat();
   void openUrl( const QUrl& );
+  void sendFileRequest();
+  void createGroupRequest();
+  void editGroupRequest();
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
   void setChatUsers();
   QString chatMessageToText( const ChatMessage& );
+  void setChatFont( const QFont& );
+  void setChatFontColor( const QString& );
 
 private slots:
   void sendMessage();
   void checkWriting();
   void customContextMenu( const QPoint& );
   void checkAnchorClicked( const QUrl& );
+  void selectFontColor();
+  void selectFont();
+  void emoticonSelected();
+  void saveChat();
+  void lastEmoticonSelected();
+
 
 private:
   VNumber m_chatId;
   UserList m_users;
   VNumber m_lastMessageUserId;
+  QString m_lastEmoticonSelected;
+
+  QMenu *mp_menuEmoticons;
+  QAction* mp_actEmoticons; 
+  QAction* mp_actSendFile;
+  QAction* mp_actGroupAdd;
+  QAction* mp_actCreateGroup;
 
 };
 
 
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
-inline QString GuiChat::toHtml() const { return mp_teChat->toHtml(); }
-
+inline bool GuiChat::reloadChat() { return setChatId( m_chatId ); }
 
 #endif // BEEBEEP_GUICHAT_H

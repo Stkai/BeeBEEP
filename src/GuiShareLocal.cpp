@@ -79,6 +79,12 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 
 void GuiShareLocal::setupToolBar( QToolBar* bar )
 {
+  mp_labelShareStats = new QLabel( bar );
+  mp_labelShareStats->setObjectName( "GuiLabelLocalShareStats" );
+  mp_labelShareStats->setAlignment( Qt::AlignLeft | Qt::AlignVCenter );
+  bar->addWidget( mp_labelShareStats );
+  bar->addSeparator();
+
   mp_actAddFile = bar->addAction( QIcon( ":/images/file-add.png" ), tr( "Share a file" ), this, SLOT( addFilePath() ) );
   mp_actAddFile->setStatusTip( tr( "Add a file to your local share" ) );
 
@@ -91,21 +97,15 @@ void GuiShareLocal::setupToolBar( QToolBar* bar )
   mp_actRemove = bar->addAction( QIcon( ":/images/disconnect.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
   mp_actRemove->setStatusTip( tr( "Remove shared path from the list" ) );
 
-  mp_labelShareStats = new QLabel( bar );
-  mp_labelShareStats->setObjectName( "GuiLabelLocalShareStats" );
-  mp_labelShareStats->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-  mp_labelShareStats->setMinimumWidth( 300 );
-  bar->addWidget( mp_labelShareStats );
-
   showStats( 0, 0 );
 }
 
 void GuiShareLocal::showStats( int file_count, FileSizeType total_file_size )
 {
   if( Settings::instance().fileShare() )
-    mp_labelShareStats->setText( QString( "%1: <b>%2</b> (%3)" ).arg( tr( "Shared files" ) ).arg( file_count ).arg( Bee::bytesToString( total_file_size ) ) );
+    mp_labelShareStats->setText( QString( "%1: <b>%2</b> (%3)  " ).arg( tr( "Shared files" ) ).arg( file_count ).arg( Bee::bytesToString( total_file_size ) ) );
   else
-    mp_labelShareStats->setText( QString( "<b>%1</b>" ).arg( tr( "File sharing is disabled" ) ) );
+    mp_labelShareStats->setText( QString( "<b>%1</b>  " ).arg( tr( "File sharing is disabled" ) ) );
 }
 
 void GuiShareLocal::setActionsEnabled( bool enable )

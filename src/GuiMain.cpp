@@ -25,7 +25,6 @@
 #include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
-#include "EmoticonManager.h"
 #include "FileShare.h"
 #include "GuiAskPassword.h"
 #include "GuiChat.h"
@@ -103,10 +102,12 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferCompleted( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( setFileTransferCompleted( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_defaultChat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
-  connect( mp_defaultChat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
-  connect( mp_defaultChat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
-  connect( mp_defaultChat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_chat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
+  connect( mp_chat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
+  connect( mp_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
+  connect( mp_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_chat, SIGNAL( sendFileRequest() ), this, SLOT( sendFile() ) );
+  connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -296,22 +297,22 @@ void GuiMain::initGuiItems()
 
 void GuiMain::checkViewActions()
 {
-  mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_defaultChat );
+  bool is_connected = mp_core->isConnected();
+  int connected_users = mp_core->connectedUsers();
+
+  mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_chat );
   mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
-  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork );
+  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
+  mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
+  mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
 
-  mp_actFont->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
-  mp_actFontColor->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
-  mp_actSendFile->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat && mp_core->isConnected() );
-  mp_actSaveChat->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
-  mp_menuEmoticons->menuAction()->setEnabled( mp_stackedWidget->currentWidget() == mp_defaultChat );
-
-  mp_actCreateGroup->setEnabled( mp_core->isConnected() && mp_core->connectedUsers() > 1 );
-
-  if( mp_stackedWidget->currentWidget() == mp_defaultChat )
-    mp_actGroupAdd->setEnabled( mp_core->isConnected() && ChatManager::instance().isGroupChat( mp_defaultChat->chatId() ) );
+  if( mp_stackedWidget->currentWidget() == mp_chat )
+  {
+    mp_chat->updateAction( is_connected, connected_users );
+    mp_barChat->show();
+  }
   else
-    mp_actGroupAdd->setEnabled( false );
+    mp_barChat->hide();
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork )
     mp_barShareNetwork->show();
@@ -328,6 +329,10 @@ void GuiMain::checkViewActions()
   else
     mp_logView->startCheckingLog();
 
+  if( mp_stackedWidget->currentWidget() == mp_screenShot )
+    mp_barScreenShot->show();
+  else
+    mp_barScreenShot->hide();
 }
 
 void GuiMain::showAbout()
@@ -368,11 +373,6 @@ void GuiMain::createActions()
   mp_actSearch->setEnabled( false );
   connect( mp_actSearch, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
-  mp_actSaveChat = new QAction( QIcon( ":/images/save-as.png" ), tr( "&Save chat..." ), this );
-  mp_actSaveChat->setShortcuts( QKeySequence::Quit );
-  mp_actSaveChat->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
-  connect( mp_actSaveChat, SIGNAL( triggered() ), this, SLOT( saveChat() ) );
-
   mp_actQuit = new QAction( QIcon( ":/images/quit.png" ), tr( "&Quit" ), this );
   mp_actQuit->setShortcuts( QKeySequence::Quit );
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
@@ -382,28 +382,8 @@ void GuiMain::createActions()
   mp_actVCard->setStatusTip( tr( "Change your profile data" ) );
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
 
-  mp_actFont = new QAction( QIcon( ":/images/font.png"), tr( "Chat font style..." ), this );
-  mp_actFont->setStatusTip( tr( "Select your favourite chat font style" ) );
-  connect( mp_actFont, SIGNAL( triggered() ), this, SLOT( selectFont() ) );
-
-  mp_actFontColor = new QAction( QIcon( ":/images/font-color.png"), tr( "My message font color..." ), this );
-  mp_actFontColor->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
-  connect( mp_actFontColor, SIGNAL( triggered() ), this, SLOT( selectFontColor() ) );
-
-  mp_actSendFile = new QAction( QIcon( ":/images/send-file.png"), tr( "Send a file..." ), this );
-  mp_actSendFile->setStatusTip( tr( "Send a file to a user" ) );
-  connect( mp_actSendFile, SIGNAL( triggered() ), this, SLOT( sendFile() ) );
-
-  mp_actCreateGroup = new QAction( QIcon( ":/images/chat-create.png"), tr( "Create group chat..." ), this );
-  mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
-  connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SLOT( createGroup() ) );
-
-  mp_actGroupAdd = new QAction( QIcon( ":/images/group-add.png"), tr( "Edit group chat..." ), this );
-  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add users" ) );
-  connect( mp_actGroupAdd, SIGNAL( triggered() ), this, SLOT( addUserToGroup() ) );
-
   mp_actToolBar = mp_barMain->toggleViewAction();
-  mp_actToolBar->setStatusTip( tr( "Show the main tool bar with settings and emoticons" ) );
+  mp_actToolBar->setStatusTip( tr( "Show the main tool bar with settings" ) );
   mp_actToolBar->setData( 99 );
 
   mp_actPluginBar = mp_barPlugins->toggleViewAction();
@@ -426,9 +406,6 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addAction( mp_actSearch );
 
-  mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actCreateGroup );
-  mp_menuMain->addAction( mp_actGroupAdd );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
@@ -575,22 +552,6 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatAutoSave() );
   act->setData( 18 );
 
-  /* Emoticons Menu for ToolBar */
-  mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
-  mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
-  mp_menuEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
-
-  QList<Emoticon> emoticon_list = EmoticonManager::instance().emoticons( true );
-  QList<Emoticon>::const_iterator it = emoticon_list.begin();
-  while( it != emoticon_list.end() )
-  {
-    act = mp_menuEmoticons->addAction( QIcon( (*it).pixmap() ), (*it).name(), this, SLOT( emoticonSelected() ) );
-    act->setData( (*it).textToMatch() );
-    act->setStatusTip( QString( "Insert [%1] emoticon %2" ).arg( (*it).name(), (*it).textToMatch() ) );
-    act->setIconVisibleInMenu( true );
-    ++it;
-  }
-
   /* Status Menu */
   mp_menuStatus = new QMenu( tr( "Status" ), this );
   mp_menuStatus->setStatusTip( tr( "Select your status" ) );
@@ -672,16 +633,6 @@ void GuiMain::createToolAndMenuBars()
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actCreateGroup );
-  mp_barMain->addAction( mp_actGroupAdd );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actSendFile );
-  mp_barMain->addAction( mp_actSaveChat );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actFont );
-  mp_barMain->addAction( mp_actFontColor );
-  mp_barMain->addAction( mp_menuEmoticons->menuAction() );
-  mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
   mp_barMain->addAction( mp_actViewSavedChats );
@@ -695,7 +646,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actAbout );
 #endif
-
 }
 
 void GuiMain::createStatusBar()
@@ -753,8 +703,14 @@ void GuiMain::createDockWindows()
 
 void GuiMain::createStackedWidgets()
 {
-  mp_defaultChat = new GuiChat( this );
-  mp_stackedWidget->addWidget( mp_defaultChat );
+  mp_chat = new GuiChat( this );
+  mp_stackedWidget->addWidget( mp_chat );
+  mp_barChat = new QToolBar( tr( "Show the chat tool bar" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barChat );
+  mp_barChat->setObjectName( "GuiChatToolBar" );
+  mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barChat->setAllowedAreas( Qt::AllToolBarAreas );
+  mp_chat->setupToolBar( mp_barChat );
 
   mp_shareLocal = new GuiShareLocal( this );
   mp_stackedWidget->addWidget( mp_shareLocal );
@@ -782,6 +738,12 @@ void GuiMain::createStackedWidgets()
 
   mp_screenShot = new GuiScreenShot( this );
   mp_stackedWidget->addWidget( mp_screenShot );
+  mp_barScreenShot = new QToolBar( tr( "Show the bar of screenshot plugin" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barScreenShot );
+  mp_barScreenShot->setObjectName( "GuiScreenShotToolBar" );
+  mp_barScreenShot->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barScreenShot->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_screenShot->setupToolBar( mp_barScreenShot );
 }
 
 QMenu* GuiMain::gameMenu( GameInterface* gi )
@@ -832,14 +794,10 @@ void GuiMain::checkUser( const User& u )
   qDebug() << "User" << u.path() << "has updated his info. Check it";
 #endif
   mp_userList->setUser( u );
-  mp_defaultChat->updateUser( u );
-}
-
-void GuiMain::emoticonSelected()
-{
-  QAction* act = qobject_cast<QAction*>( sender() );
-  if( act )
-    mp_defaultChat->addToMyMessage( QString( "%1" ).arg( act->data().toString() ) );
+  mp_chat->updateUser( u );
+  if( mp_stackedWidget->currentWidget() == mp_chat )
+    mp_chat->reloadChat();
+  checkViewActions();
 }
 
 void GuiMain::refreshUserList()
@@ -848,52 +806,6 @@ void GuiMain::refreshUserList()
   qDebug() << "Refresh users in GuiUserList";
 #endif
   mp_userList->updateUsers( mp_core->isConnected() );
-}
-
-void GuiMain::refreshChat()
-{
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Refresh GuiChat";
-#endif
-  if( !mp_defaultChat->setChatId( mp_defaultChat->chatId() ) )
-    qWarning() << "Chat" << mp_defaultChat->chatId() << "not found. Unable to refresh it";
-}
-
-void GuiMain::selectFont()
-{
-  bool ok = false;
-  QFont f = QFontDialog::getFont( &ok, Settings::instance().chatFont(), this );
-  if( ok )
-  {
-    Settings::instance().setChatFont( f );
-    mp_defaultChat->setChatFont( f );
-  }
-}
-
-void GuiMain::selectFontColor()
-{
-  QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
-  if( c.isValid() )
-  {
-    Settings::instance().setChatFontColor( c.name() );
-    mp_defaultChat->setChatFontColor( c.name() );
-  }
-}
-
-void GuiMain::changeUserColor( VNumber user_id )
-{
-  User u = UserManager::instance().userList().find( user_id );
-  if( !u.isValid() )
-  {
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
-    return;
-  }
-  QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
-  if( c.isValid() )
-  {
-    if( mp_core->setUserColor( user_id, c.name() ) )
-      refreshChat();
-  }
 }
 
 void GuiMain::settingsChanged()
@@ -1008,7 +920,7 @@ void GuiMain::settingsChanged()
   if( refresh_users )
     refreshUserList();
   if( refresh_chat )
-    refreshChat();
+    mp_chat->reloadChat();
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
@@ -1067,9 +979,9 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   if( !cm.isSystem() && !cm.isFromLocalUser() )
     show_alert = showAlert();
 
-  if( chat_id == mp_defaultChat->chatId() && mp_defaultChat == mp_stackedWidget->currentWidget() )
+  if( chat_id == mp_chat->chatId() && mp_chat == mp_stackedWidget->currentWidget() )
   {
-    mp_defaultChat->appendChatMessage( chat_id, cm );
+    mp_chat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
@@ -1097,30 +1009,6 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       }
     }
   }
-}
-
-void GuiMain::saveChat()
-{
-  QString file_name = QFileDialog::getSaveFileName( this,
-                        tr( "Please select a file to save the messages of the chat." ),
-                        Settings::instance().chatSaveDirectory(), "HTML Chat Files (*.htm)" );
-  if( file_name.isNull() || file_name.isEmpty() )
-    return;
-  QFileInfo file_info( file_name );
-  Settings::instance().setChatSaveDirectory( file_info.absolutePath() );
-
-  QFile file( file_name );
-  if( !file.open( QFile::WriteOnly ) )
-  {
-    QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
-      tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
-    return;
-  }
-
-  file.write( mp_defaultChat->toHtml().toLatin1() );
-  file.close();
-  QMessageBox::information( this, QString( "%1 - %2" ).arg( Settings::instance().programName(), tr( "Information" ) ),
-    tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
 }
 
 void GuiMain::searchUsers()
@@ -1203,9 +1091,9 @@ void GuiMain::changeStatusDescription()
 
 void GuiMain::sendFile()
 {
-  if( mp_defaultChat == mp_stackedWidget->currentWidget() )
+  if( mp_chat == mp_stackedWidget->currentWidget() )
   {
-    Chat c = ChatManager::instance().chat( mp_defaultChat->chatId() );
+    Chat c = ChatManager::instance().chat( mp_chat->chatId() );
     if( c.isValid() && c.isPrivate() )
     {
       sendFile( c.privateUserId() );
@@ -1353,13 +1241,12 @@ void GuiMain::showTipOfTheDay()
 
 void GuiMain::showCurrentChat()
 {
-  VNumber chat_id = mp_defaultChat->chatId();
-  showChat( chat_id );
+  showChat( mp_chat->chatId() );
 }
 
 void GuiMain::showChat( VNumber chat_id )
 {
-  if( mp_defaultChat->setChatId( chat_id ) )
+  if( mp_chat->setChatId( chat_id ) )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
@@ -1378,17 +1265,25 @@ void GuiMain::changeVCard()
   {
     if( gvc.userColor() != Settings::instance().localUser().color() )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "Local user color changed";
-      mp_core->setUserColor( Settings::instance().localUser().id(), gvc.userColor() );
+#endif
+      User u = Settings::instance().localUser();
+      u.setColor( gvc.userColor() );
+      Settings::instance().setLocalUser( u );
     }
 
     if( gvc.vCard() == Settings::instance().localUser().vCard() )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "Ok pressed but vCard is not changed";
+#endif
       return;
     }
 
+#ifdef BEEBEEP_DEBUG
     qDebug() << "vCard changed";
+#endif
     mp_core->setLocalUserVCard( gvc.vCard() );
     refreshTitle( Settings::instance().localUser() );
   }
@@ -1437,12 +1332,12 @@ void GuiMain::updadePluginMenu()
 
   /* Static Plugins */
   mp_menuPlugins->addSeparator();
-  act = mp_menuPlugins->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
-  act->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
-  mp_barPlugins->addAction( act );
-  act = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
-  act->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
-  mp_barPlugins->addAction( act );
+  mp_actViewLog = mp_menuPlugins->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
+  mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
+  mp_barPlugins->addAction( mp_actViewLog );
+  mp_actViewScreenShot = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
+  mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
+  mp_barPlugins->addAction( mp_actViewScreenShot );
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
@@ -1490,8 +1385,7 @@ void GuiMain::showPluginHelp()
   if( !act )
     return;
 
-  mp_defaultChat->appendMessage( act->data().toString() );
-  raiseChatView();
+  QMessageBox::information( this, act->text(), act->data().toString() );
 }
 
 void GuiMain::showPluginManager()
@@ -1563,7 +1457,7 @@ void GuiMain::removeFromShare( const QString& share_path )
 void GuiMain::raiseChatView()
 {
   setGameInPauseMode();
-  mp_stackedWidget->setCurrentWidget( mp_defaultChat );
+  mp_stackedWidget->setCurrentWidget( mp_chat );
   checkViewActions();
 }
 
@@ -1682,7 +1576,7 @@ void GuiMain::createGroup()
 
 void GuiMain::addUserToGroup()
 {
-  Chat group_chat_tmp = ChatManager::instance().chat( mp_defaultChat->chatId() );
+  Chat group_chat_tmp = ChatManager::instance().chat( mp_chat->chatId() );
   if( !group_chat_tmp.isGroup() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Impossibile to add users in this chat. Please select a group one." ) );
@@ -1866,4 +1760,22 @@ void GuiMain::exitFromIdle()
 void GuiMain::showMessage( const QString& status_msg, int time_out )
 {
   statusBar()->showMessage( status_msg, time_out );
+}
+
+void GuiMain::changeUserColor( VNumber user_id )
+{
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
+    return;
+  }
+
+  QColor c = QColorDialog::getColor( QColor( u.color() ), this );
+  if( c.isValid() )
+  {
+    u.setColor( c.name() );
+    UserManager::instance().setUser( u );
+    mp_chat->reloadChat();
+  }
 }

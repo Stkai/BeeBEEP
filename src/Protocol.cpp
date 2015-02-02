@@ -298,6 +298,7 @@ QByteArray Protocol::localVCardMessage() const
   data_list << vc.lastName();
   data_list << vc.birthday().toString( Qt::ISODate );
   data_list << vc.email();
+  data_list << Settings::instance().localUser().color();
   m.setData( data_list.join( DATA_FIELD_SEPARATOR ) );
 
   return fromMessage( m );
@@ -315,13 +316,19 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
   vc.setLastName( sl.at( 2 ) );
   vc.setBirthday( QDate::fromString( sl.at( 3 ), Qt::ISODate ) );
   vc.setEmail( sl.at( 4 ) );
+  vc.setPhoto( stringToPixmap( m.text() ) );
+  u->setVCard( vc );
 
-  if( sl.size() > 5 )
+  if( sl.size() >= 6 )
+  {
+    QString user_color = sl.at( 5 );
+    if( QColor::isValidColor( user_color ) )
+      u->setColor( user_color );
+  }
+
+  if( sl.size() > 7 )
     qWarning() << "VCARD message contains more data. Skip it";
 
-  vc.setPhoto( stringToPixmap( m.text() ) );
-
-  u->setVCard( vc );
   return true;
 }
 

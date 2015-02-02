@@ -49,7 +49,6 @@ public:
   inline int connectedUsers() const;
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
-  bool setUserColor( VNumber, const QString& );
   void setLocalUserVCard( const VCard& );
 
   /* CoreChat */
