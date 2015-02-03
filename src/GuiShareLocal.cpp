@@ -207,11 +207,11 @@ void GuiShareLocal::loadFileInfoInList()
     item->setText( 0, fi.name() );
     item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
     item->setData( 0, Qt::UserRole + 1, fi.path() );
-    item->setToolTip( 0, fi.name() );
+    item->setToolTip( 0, tr( "Double click to open %1" ).arg( fi.name() ) );
     item->setText( 1, Bee::bytesToString( fi.size() ) );
     item->setData( 1, Qt::UserRole + 1, fi.size() );
     item->setText( 2, fi.path() );
-    item->setToolTip( 2, fi.path() );
+    item->setToolTip( 2, tr( "Double click to open %1" ).arg( fi.name() ) );
   }
 
   setActionsEnabled( true );

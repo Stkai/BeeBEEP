@@ -1168,9 +1168,18 @@ void GuiMain::sendFile( const QString& file_path )
 
 bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
 {
-  QString msg = tr( "Do you want to download ""%1"" (%2) from the user %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
+  int msg_result = 1;
 
-  if( QMessageBox::information( this, Settings::instance().programName(), msg, tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+  if( Settings::instance().confirmOnDownloadFile() )
+  {
+    QString msg = tr( "Do you want to download ""%1"" (%2) from the user %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
+    msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
+  }
+
+  if( msg_result == 2 )
+    Settings::instance().setConfirmOnDownloadFile( false );
+
+  if( msg_result > 0 )
   {
     // Accepted
     QFileInfo qfile_info( Settings::instance().downloadDirectory(), fi.name() );

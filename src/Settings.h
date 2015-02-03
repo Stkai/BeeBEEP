@@ -172,6 +172,9 @@ public:
   inline bool autoLinkSavedChatByNickname() const;
   inline void setAutoLinkSavedChatByNickname( bool );
 
+  inline bool confirmOnDownloadFile() const;
+  inline void setConfirmOnDownloadFile( bool );
+
   inline QStringList pluginSettings( const QString& ) const;
   inline void setPluginSettings( const QString&, const QStringList& );
   inline bool pluginHasSettings( const QString& ) const;
@@ -294,6 +297,8 @@ private:
 
   int m_dataStreamVersion;
 
+  bool m_confirmOnDownloadFile;
+
 };
 
 
@@ -403,5 +408,7 @@ inline QStringList Settings::pluginSettings( const QString& plugin_name ) const 
 inline void Settings::setPluginSettings( const QString& plugin_name, const QStringList& plugin_settings ) { m_pluginSettings.insert( plugin_name, plugin_settings ); }
 inline bool Settings::pluginHasSettings( const QString& plugin_name ) const { return m_pluginSettings.contains( plugin_name ); }
 inline int Settings::dataStreamVersion( bool in_load_event ) const { return in_load_event ? m_dataStreamVersion : LAST_DATASTREAM_VERSION; }
+inline bool Settings::confirmOnDownloadFile() const { return m_confirmOnDownloadFile; }
+inline void Settings::setConfirmOnDownloadFile( bool new_value ) { m_confirmOnDownloadFile = new_value; }
 
 #endif // BEEBEEP_SETTINGS_H

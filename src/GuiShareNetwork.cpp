@@ -196,7 +196,7 @@ void GuiShareNetwork::loadShares( const User& u )
         item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
         item->setData( ColumnSize, FileSize, fi.size() );
         item->setText( ColumnUser, u.name() );
-        item->setToolTip( ColumnFile, fi.name() );
+        item->setToolTip( ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
       }
 
       if( filterPassThrough( u, fi ) )
@@ -319,6 +319,7 @@ void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_in
     return;
 
   item->setData( ColumnFile, FilePath, file_path );
+  item->setToolTip( ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
   for( int i = 0; i < mp_twShares->columnCount(); i++ )
     item->setBackgroundColor( i, QColor( "#91D606" ) );
 }

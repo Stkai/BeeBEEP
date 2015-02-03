@@ -41,6 +41,7 @@ public:
   inline void setUserId( VNumber );
 
   inline int protoVersion() const;
+  int fileTransferBufferSize() const;
 
 signals:
   void dataReceived( const QByteArray& );

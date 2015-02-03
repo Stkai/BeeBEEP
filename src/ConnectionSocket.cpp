@@ -275,3 +275,8 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   qDebug() << "ConnectionSocket request an authentication for" << peerAddress().toString() << peerPort();
   emit authenticationRequested( m );
 }
+
+int ConnectionSocket::fileTransferBufferSize() const
+{
+  return m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( (int)65456, Settings::instance().fileTransferBufferSize() );
+}

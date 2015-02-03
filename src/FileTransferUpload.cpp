@@ -112,7 +112,7 @@ void FileTransferPeer::sendUploadData()
   if( m_file.atEnd() )
     return;
 
-  QByteArray byte_array = m_file.read( Settings::instance().fileTransferBufferSize() );
+  QByteArray byte_array = m_file.read( m_socket.fileTransferBufferSize() );
 
   if( m_socket.sendData( byte_array ) )
   {

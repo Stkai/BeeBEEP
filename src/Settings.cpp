@@ -37,6 +37,7 @@ Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
   m_useSettingsFileIni = true;
+  m_confirmOnDownloadFile = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
@@ -338,7 +339,7 @@ void Settings::load()
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
-  m_autoUserAway = sets->value( "AutoAwayStatus", false ).toBool();
+  m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   m_useDefaultPassword = sets->value( "UseDefaultPassword", false ).toBool();
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
