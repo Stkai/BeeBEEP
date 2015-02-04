@@ -45,6 +45,7 @@ public:
   bool addUser( VNumber );
   int addUsers( const QList<VNumber>& );
   inline bool hasUser( VNumber ) const;
+  bool hasUsers( const QList<VNumber>& );
   inline bool removeUser( VNumber );
   inline bool isPrivateForUser( VNumber ) const;
   inline bool isPrivate() const;

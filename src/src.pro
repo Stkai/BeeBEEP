@@ -81,7 +81,8 @@ SOURCES += Listener.cpp \
     BuildSavedChatList.cpp \
     SaveChatList.cpp \
     GuiFileInfoItem.cpp \
-    GuiIconProvider.cpp
+    GuiIconProvider.cpp \
+    Group.cpp
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -146,7 +147,8 @@ HEADERS += \
     BuildSavedChatList.h \
     SaveChatList.h \
     GuiFileInfoItem.h \
-    GuiIconProvider.h
+    GuiIconProvider.h \
+    Group.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \

@@ -138,3 +138,8 @@ void Core::setLocalUserVCard( const VCard& vc )
   showUserVCardChanged( u );
 }
 
+void Core::createGroup( const QString& group_name, const QList<VNumber>& user_list )
+{
+  Group g = Protocol::instance().createGroup( group_name, user_list );
+  UserManager::instance().setGroup( g );
+}

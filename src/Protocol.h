@@ -26,6 +26,7 @@
 
 #include "Chat.h"
 #include "FileInfo.h"
+#include "Group.h"
 #include "Message.h"
 #include "ChatMessageData.h"
 #include "User.h"
@@ -77,6 +78,7 @@ public:
   User createUser( const Message&, const QHostAddress& );
   User createTemporaryUser( const QString& user_path );
   Chat createChat( const QList<VNumber>& user_list );
+  Group createGroup( const QString& group_name, const QList<VNumber>& user_list );
 
   inline VNumber newId();
   QString newMd5Id() const;

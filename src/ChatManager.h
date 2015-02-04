@@ -49,6 +49,7 @@ public:
   bool isGroupChat( VNumber ) const;
 
   QList<Chat> groupChatForUser( VNumber ) const;
+  Chat groupChatForUsers( const QList<VNumber>& ) const;
 
   void addSavedChats( const QMap<QString, QString>& );
   void autoLinkSavedChatByNickname( const Chat& );

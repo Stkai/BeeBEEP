@@ -455,8 +455,8 @@ void Settings::load()
         setPluginSettings( *it, plugin_settings_tmp );
       ++it;
     }
-    sets->endGroup();
   }
+  sets->endGroup();
 
   QString sName = GetUserNameFromSystemEnvinroment().simplified();
   m_localUser.setAccountName( sName.toLower() );

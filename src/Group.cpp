@@ -21,28 +21,46 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "UserManager.h"
-#include "Settings.h"
-
-UserManager* UserManager::mp_instance = NULL;
+#include "Group.h"
 
 
-UserManager::UserManager()
-  : m_users()
+Group::Group()
+  : m_id( ID_INVALID ), m_name( "" ), m_usersId(), m_privateId( "" )
 {
 }
 
-void UserManager::setUser( const User& u )
+Group::Group( const Group& g )
 {
-  if( u.id() == ID_LOCAL_USER )
-    Settings::instance().setLocalUser( u );
-  else
-    m_users.set( u );
+  (void)operator=( g );
 }
 
-void UserManager::setGroup( const Group& g )
+Group& Group::operator=( const Group& g )
 {
-  if( m_groups.contains( g ) )
-    m_groups.removeOne( g );
-  m_groups.append( g );
+  if( this != &g )
+  {
+    m_id = g.m_id;
+    m_name = g.m_name;
+    m_usersId = g.m_usersId;
+    m_privateId = g.privateId();
+  }
+  return *this;
+}
+
+bool Group::addUser( VNumber user_id )
+{
+  if( hasUser( user_id ) )
+    return false;
+  m_usersId.append( user_id );
+  return true;
+}
+
+int Group::addUsers( const QList<VNumber>& user_list )
+{
+  int num = 0;
+  foreach( VNumber user_id, user_list )
+  {
+    if( addUser( user_id ) )
+      num++;
+  }
+  return num;
 }

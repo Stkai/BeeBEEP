@@ -227,3 +227,13 @@ QStringList ChatManager::chatNamesToStringList( bool add_default_chat ) const
   }
   return sl;
 }
+
+Chat ChatManager::groupChatForUsers( const QList<VNumber>& user_list ) const
+{
+  foreach( Chat c, m_chats )
+  {
+    if( c.isGroup() && c.hasUsers( user_list ) )
+      return c;
+  }
+  return Chat();
+}

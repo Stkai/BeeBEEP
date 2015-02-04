@@ -441,6 +441,18 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
   return c;
 }
 
+Group Protocol::createGroup( const QString& group_name, const QList<VNumber>& user_list )
+{
+  Group g;
+  g.setId( newId() );
+  foreach( VNumber user_id, user_list )
+    g.addUser( user_id );
+  g.addUser( ID_LOCAL_USER );
+  g.setName( group_name );
+  g.setPrivateId( newMd5Id() );
+  return g;
+}
+
 Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
 {
   Message m( Message::Group, newId(), "" );
@@ -650,7 +662,7 @@ QString Protocol::newMd5Id() const
   sl << QString::number( Random::d100() );
   sl << Settings::instance().localUser().name();
   sl << QString::number( Random::d100() );
-  sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz");
+  sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" );
   sl << QString::number( Random::d100() );
 
   QCryptographicHash ch( QCryptographicHash::Sha1 );

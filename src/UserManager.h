@@ -25,6 +25,7 @@
 #define BEEBEEP_USERMANAGER_H
 
 #include "UserList.h"
+#include "Group.h"
 
 
 class UserManager
@@ -36,6 +37,9 @@ public:
   void setUser( const User& );
   inline bool removeUser( const User& );
   inline const UserList& userList() const;
+
+  inline const QList<Group>& groups() const;
+  void setGroup( const Group& );
 
   static UserManager& instance()
   {
@@ -58,6 +62,7 @@ protected:
 
 private:
   UserList m_users;
+  QList<Group> m_groups;
 
 };
 
@@ -65,5 +70,6 @@ private:
 // Inline Function
 inline bool UserManager::removeUser( const User& u ) { return m_users.remove( u ); }
 inline const UserList& UserManager::userList() const { return m_users; }
+inline const QList<Group>& UserManager::groups() const { return m_groups; }
 
 #endif // BEEBEEP_USERMANAGER_H

@@ -97,3 +97,14 @@ VNumber Chat::privateUserId() const
   return ID_INVALID;
 }
 
+bool Chat::hasUsers( const QList<VNumber>& user_list )
+{
+  if( m_usersId.size() != user_list.size() )
+    return false;
+  foreach( VNumber user_id, m_usersId )
+  {
+    if( !user_list.contains( user_id ) )
+      return false;
+  }
+  return true;
+}
