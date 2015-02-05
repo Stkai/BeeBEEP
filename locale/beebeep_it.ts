@@ -461,12 +461,113 @@
         <source>offline</source>
         <translation>non in linea</translation>
     </message>
+    <message>
+        <source>Emoticons</source>
+        <translation>Faccine</translation>
+    </message>
+    <message>
+        <source>Add your preferred emoticon to the message</source>
+        <translation>Aggiungi la tua faccina preferita al messaggio</translation>
+    </message>
+    <message>
+        <source>Change font style</source>
+        <translation>Cambia il carattere</translation>
+    </message>
+    <message>
+        <source>Select your favourite chat font style</source>
+        <translation>Seleziona il carattere in cui vuoi che vengano visualizzati i messaggi</translation>
+    </message>
+    <message>
+        <source>Change font color</source>
+        <translation>Cambia il colore del carattere</translation>
+    </message>
+    <message>
+        <source>Select your favourite font color for the chat messages</source>
+        <translation>Seleziona il colore del carattere per i tuoi messaggi</translation>
+    </message>
+    <message>
+        <source>Send file</source>
+        <translation>Invia un file</translation>
+    </message>
+    <message>
+        <source>Send a file to a user or a group</source>
+        <translation>Invia un file ad un utente o ad un gruppo</translation>
+    </message>
+    <message>
+        <source>Save chat</source>
+        <translation>Salva la conversazione</translation>
+    </message>
+    <message>
+        <source>Save the messages of the current chat to a file</source>
+        <translation>Salva i messaggi della conversazione corrente in un file</translation>
+    </message>
+    <message>
+        <source>Create group chat</source>
+        <translation>Crea una conversazione di gruppo</translation>
+    </message>
+    <message>
+        <source>Create a group chat with two or more users</source>
+        <translation>Crea una conversazione con due o più persone</translation>
+    </message>
+    <message>
+        <source>Edit group chat</source>
+        <translation>Modifica il gruppo</translation>
+    </message>
+    <message>
+        <source>Change the name of the group or add and remove users</source>
+        <translation>Cambia il nome del gruppo o aggiungi o rimuovi i membri</translation>
+    </message>
+    <message>
+        <source>Clear messages</source>
+        <translation>Cancella i messaggi</translation>
+    </message>
+    <message>
+        <source>Clear all the messages of the chat</source>
+        <translation>Cancella tutti i messaggi della conversazione</translation>
+    </message>
+    <message>
+        <source>Please select a file to save the messages of the chat.</source>
+        <translation>Seleziona un file dove salvare la conversazione in corso.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Attenzione</translation>
+    </message>
+    <message>
+        <source>%1: unable to save the messages.
+Please check the file or the directories write permissions.</source>
+        <translation>%1: impossibile salvare i messaggi.
+Controlla i permessi di scrittura nella cartella selezionata.</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Informazione</translation>
+    </message>
+    <message>
+        <source>%1: save completed.</source>
+        <translation>%1: salvataggio completato.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiChatList</name>
+    <message>
+        <source>Show</source>
+        <translation>Mostra</translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>Cancella</translation>
+    </message>
+    <message>
+        <source>Clear all chat messages</source>
+        <translation>Cancella tutti i messaggi della conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatWidget</name>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation type="obsolete">Invia</translation>
     </message>
     <message>
         <source>Chat</source>
@@ -488,8 +589,8 @@
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Droid Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
 </context>
@@ -728,11 +829,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Save chat...</source>
-        <translation>&amp;Salva la conversazione...</translation>
+        <translation type="obsolete">&amp;Salva la conversazione...</translation>
     </message>
     <message>
         <source>Save the messages of the current chat to a file</source>
-        <translation>Salva i messaggi della conversazione corrente in un file</translation>
+        <translation type="obsolete">Salva i messaggi della conversazione corrente in un file</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -772,27 +873,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chat font style...</source>
-        <translation>Cambia il carattere...</translation>
+        <translation type="obsolete">Cambia il carattere...</translation>
     </message>
     <message>
         <source>Select your favourite chat font style</source>
-        <translation>Seleziona il carattere in cui vuoi che vengano visualizzati i messaggi</translation>
+        <translation type="obsolete">Seleziona il carattere in cui vuoi che vengano visualizzati i messaggi</translation>
     </message>
     <message>
         <source>My message font color...</source>
-        <translation>Cambia il colore del carattere...</translation>
+        <translation type="obsolete">Cambia il colore del carattere...</translation>
     </message>
     <message>
         <source>Select your favourite font color for the chat messages</source>
-        <translation>Seleziona il colore del carattere per i tuoi messaggi</translation>
+        <translation type="obsolete">Seleziona il colore del carattere per i tuoi messaggi</translation>
     </message>
     <message>
         <source>Send a file...</source>
-        <translation>Invia un file...</translation>
+        <translation type="obsolete">Invia un file...</translation>
     </message>
     <message>
         <source>Send a file to a user</source>
-        <translation>Invia un file ad un utente</translation>
+        <translation type="obsolete">Invia un file ad un utente</translation>
     </message>
     <message>
         <source>Show the MenuBar</source>
@@ -804,7 +905,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show the main tool bar with settings and emoticons</source>
-        <translation>Mostra la barra degli strumenti con le opzioni e le faccine</translation>
+        <translation type="obsolete">Mostra la barra degli strumenti con le opzioni e le faccine</translation>
     </message>
     <message>
         <source>&amp;About %1...</source>
@@ -892,11 +993,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Emoticons</source>
-        <translation>Faccine</translation>
+        <translation type="obsolete">Faccine</translation>
     </message>
     <message>
         <source>Add your preferred emoticon to the message</source>
-        <translation>Aggiungi la tua faccina preferita al messaggio</translation>
+        <translation type="obsolete">Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
     <message>
         <source>Status</source>
@@ -968,25 +1069,25 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation>Seleziona un file dove salvare la conversazione in corso.</translation>
+        <translation type="obsolete">Seleziona un file dove salvare la conversazione in corso.</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Attenzione</translation>
+        <translation type="obsolete">Attenzione</translation>
     </message>
     <message>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
-        <translation>%1: impossibile salvare i messaggi.
+        <translation type="obsolete">%1: impossibile salvare i messaggi.
 Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informazione</translation>
+        <translation type="obsolete">Informazione</translation>
     </message>
     <message>
         <source>%1: save completed.</source>
-        <translation>%1: salvataggio completato.</translation>
+        <translation type="obsolete">%1: salvataggio completato.</translation>
     </message>
     <message>
         <source>Please insert the Host Address or Broadcast Address to contact
@@ -1345,19 +1446,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Create group chat...</source>
-        <translation>Crea una chat di gruppo...</translation>
+        <translation type="obsolete">Crea una chat di gruppo...</translation>
     </message>
     <message>
         <source>Create a group chat with two or more users</source>
-        <translation>Crea una chat di gruppo con due o più persone</translation>
+        <translation type="obsolete">Crea una chat di gruppo con due o più persone</translation>
     </message>
     <message>
         <source>Edit group chat...</source>
-        <translation>Modifica la chat di gruppo...</translation>
+        <translation type="obsolete">Modifica la chat di gruppo...</translation>
     </message>
     <message>
         <source>Change the name of the group or add users</source>
-        <translation>Cambia il nome del gruppo e aggiungi altri utenti</translation>
+        <translation type="obsolete">Cambia il nome del gruppo e aggiungi altri utenti</translation>
     </message>
     <message>
         <source>Impossibile to add users in this chat. Please select a group one.</source>
@@ -1562,6 +1663,34 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show the bar of network file sharing</source>
         <translation>Mostra la barra di tutti i file condivisi in rete</translation>
+    </message>
+    <message>
+        <source>Show the main tool bar with settings</source>
+        <translation>Mostra la barra principale con le opzioni</translation>
+    </message>
+    <message>
+        <source>Show the chat tool bar</source>
+        <translation>Mostra la barra della conversazione</translation>
+    </message>
+    <message>
+        <source>Show the bar of screenshot plugin</source>
+        <translation>Mostra la barra del cattura schermo</translation>
+    </message>
+    <message>
+        <source>Yes, and don&apos;t ask anymore</source>
+        <translation>Si e non chiedermelo più</translation>
+    </message>
+    <message>
+        <source>Chat with %1 is empty.</source>
+        <translation>La conversazione con %1 è vuota.</translation>
+    </message>
+    <message>
+        <source>Do you really want to clear messages with %1?</source>
+        <translation>Vuoi cancellare i messaggi con %1?</translation>
+    </message>
+    <message>
+        <source>Yes and delete history</source>
+        <translation>Si e cancella la storia</translation>
     </message>
 </context>
 <context>
@@ -1879,6 +2008,58 @@ il file %2 (%3)?</translation>
         <source>Unable to save temporary file: %1</source>
         <translation>Impossibile salvare il file temporaneo: %1</translation>
     </message>
+    <message>
+        <source>Delay</source>
+        <translation>Ritardo</translation>
+    </message>
+    <message>
+        <source>Delay screenshot for selected seconds</source>
+        <translation>Ritarda la cattura dello schermo dei secondi selezionati</translation>
+    </message>
+    <message>
+        <source>s</source>
+        <translation>s</translation>
+    </message>
+    <message>
+        <source>Hide this window</source>
+        <translation>Nascondi questa finestra</translation>
+    </message>
+    <message>
+        <source>Hide this window before capture screenshot</source>
+        <translation>Nascondi questa finestra prima di fare la foto dello schermo</translation>
+    </message>
+    <message>
+        <source>Capture</source>
+        <translation>Cattura</translation>
+    </message>
+    <message>
+        <source>Capture a screenshot of your desktop</source>
+        <translation>Cattura una foto dello schermo</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Invia</translation>
+    </message>
+    <message>
+        <source>Send the captured screenshot to an user</source>
+        <translation>Invia la foto del tuo schermo ad un utente</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salva</translation>
+    </message>
+    <message>
+        <source>Save the captured screenshot as file</source>
+        <translation>Salva la foto del tuo schermo come un file</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Cancella</translation>
+    </message>
+    <message>
+        <source>Delete the captured screenshot</source>
+        <translation>Cancella la foto catturata dal tuo schermo</translation>
+    </message>
 </context>
 <context>
     <name>GuiScreenShotWidget</name>
@@ -1892,39 +2073,39 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Delay screenshot</source>
-        <translation>Ritardo dello scatto</translation>
+        <translation type="obsolete">Ritardo dello scatto</translation>
     </message>
     <message>
         <source>Delay</source>
-        <translation>Ritardo</translation>
+        <translation type="obsolete">Ritardo</translation>
     </message>
     <message>
         <source> s</source>
-        <translation>s</translation>
+        <translation type="obsolete">s</translation>
     </message>
     <message>
         <source>Hide this window before capture screenshot</source>
-        <translation>Nascondi questa finestra prima di fare la foto dello schermo</translation>
+        <translation type="obsolete">Nascondi questa finestra prima di fare la foto dello schermo</translation>
     </message>
     <message>
         <source>Hide this window</source>
-        <translation>Nascondi questa finestra</translation>
+        <translation type="obsolete">Nascondi questa finestra</translation>
     </message>
     <message>
         <source>Capture screenshot</source>
-        <translation>Fai una foto allo schermo</translation>
+        <translation type="obsolete">Fai una foto allo schermo</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation type="obsolete">Invia</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Salva</translation>
+        <translation type="obsolete">Salva</translation>
     </message>
     <message>
         <source>Delete screenshot</source>
-        <translation>Cancella l&apos;immagine</translation>
+        <translation type="obsolete">Cancella l&apos;immagine</translation>
     </message>
 </context>
 <context>
@@ -2062,6 +2243,10 @@ il file %2 (%3)?</translation>
         <source>File sharing is disabled</source>
         <translation>La condivisione dei file è disabilitata</translation>
     </message>
+    <message>
+        <source>Double click to open %1</source>
+        <translation>Doppio click per aprire %1</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
@@ -2147,6 +2332,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>%1 files shared in your network</source>
         <translation>%1 file condivisi nella tua rete</translation>
+    </message>
+    <message>
+        <source>Double click to download %1</source>
+        <translation>Doppio click per scaricare %1</translation>
+    </message>
+    <message>
+        <source>Double click to open %1</source>
+        <translation>Doppio click per aprire %1</translation>
     </message>
 </context>
 <context>
@@ -2478,6 +2671,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Your nickname can not be empty.</source>
         <translation>Il campo del soprannome non può essere vuoto.</translation>
+    </message>
+    <message>
+        <source>Your system account is</source>
+        <translation>Il tuo account di sistema è</translation>
     </message>
 </context>
 <context>

@@ -79,6 +79,8 @@ void SaveChatList::saveChats( QDataStream* stream )
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
+    if( c.isEmpty() )
+      continue;
     qDebug() << "Saving chat" << c.name();
     chat_counter++;
     chat_name_encrypted = Protocol::instance().simpleEncryptDecrypt( c.name() );

@@ -36,19 +36,27 @@ public:
 
   virtual QSize sizeHint() const;
 
-  void updateChats();
+  void reloadChatList();
 
 signals:
   void chatSelected( VNumber chat_id );
+  void chatToClear( VNumber chat_id );
 
 public slots:
   void updateChat( VNumber chat_id );
 
 protected slots:
   void chatDoubleClicked( QTreeWidgetItem*, int );
+  void showChatMenu( const QPoint& );
+  void openChatSelected();
+  void clearChatSelected();
 
 private:
   GuiChatItem* itemFromChatId( VNumber );
+
+  QMenu* mp_menu;
+  VNumber m_chatSelected;
+  QAction* mp_actClear;
 
 };
 

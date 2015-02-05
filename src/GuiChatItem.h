@@ -26,6 +26,7 @@
 
 #include "Config.h"
 #include "BeeUtils.h"
+class Chat;
 
 
 class GuiChatItem : public QTreeWidgetItem
@@ -43,7 +44,7 @@ public:
   inline void setIsGroup( bool );
   inline bool isGroup() const;
 
-  bool updateItem();
+  bool updateItem( const Chat& );
 
 };
 

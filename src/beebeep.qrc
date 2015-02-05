@@ -92,5 +92,6 @@
         <file>images/file-bundle.png</file>
         <file>images/filter.png</file>
         <file>images/network-scan.png</file>
+        <file>images/clear.png</file>
     </qresource>
 </RCC>

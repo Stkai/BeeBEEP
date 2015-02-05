@@ -96,6 +96,9 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
   mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Edit group chat" ), this, SIGNAL( editGroupRequest() ) );
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
+  bar->addSeparator();
+  mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
+  mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
 }
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
@@ -200,6 +203,9 @@ bool GuiChat::setChatId( VNumber chat_id )
   if( !c.isValid() )
     return false;
   m_chatId = c.id();
+  m_chatName = c.name();
+
+  mp_actClear->setDisabled( c.isEmpty() );
 
   m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
 
@@ -237,6 +243,8 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   Chat c = ChatManager::instance().chat( m_chatId, read_all_messages );
   if( !c.isValid() )
     return;
+
+  mp_actClear->setDisabled( c.isEmpty() );
 
   User u = m_users.find( cm.userId() );
   if( !u.isValid() )
@@ -336,4 +344,8 @@ void GuiChat::saveChat()
     tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
 }
 
+void GuiChat::clearChat()
+{
+  emit chatToClear( m_chatId );
+}
 

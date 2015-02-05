@@ -114,6 +114,7 @@ private slots:
   void checkNewVersion();
   void openWebSite();
   void openDownloadPluginPage();
+  void clearChat( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );

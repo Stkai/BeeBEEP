@@ -23,6 +23,7 @@
 
 #include "GuiChatList.h"
 #include "ChatManager.h"
+#include "Settings.h"
 
 
 GuiChatList::GuiChatList( QWidget* parent )
@@ -35,7 +36,19 @@ GuiChatList::GuiChatList( QWidget* parent )
   setRootIsDecorated( false );
   setSortingEnabled( true );
 
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  setMouseTracking( true );
+
+  mp_menu = new QMenu( this );
+
+  QAction* act = mp_menu->addAction( QIcon( ":/images/chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
+  mp_menu->setDefaultAction( act );
+  mp_menu->addSeparator();
+  mp_actClear = mp_menu->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
+  mp_actClear->setToolTip( tr( "Clear all chat messages" ) );
+
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
 }
 
 QSize GuiChatList::sizeHint() const
@@ -43,15 +56,13 @@ QSize GuiChatList::sizeHint() const
   return QSize( 140, 300 );
 }
 
-void GuiChatList::updateChats()
+void GuiChatList::reloadChatList()
 {
-  GuiChatItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
+  clearSelection();
+  clear();
+  foreach( Chat c, ChatManager::instance().constChatList() )
   {
-    item = (GuiChatItem*)(*it);
-    item->updateItem();
-    ++it;
+    updateChat( c.id() );
   }
 }
 
@@ -84,7 +95,7 @@ void GuiChatList::updateChat( VNumber chat_id )
     item->setChatId( chat_id );
   }
 
-  item->updateItem();
+  item->updateItem( c );
 }
 
 void GuiChatList::chatDoubleClicked( QTreeWidgetItem* item, int )
@@ -94,6 +105,34 @@ void GuiChatList::chatDoubleClicked( QTreeWidgetItem* item, int )
 
   GuiChatItem* user_item = (GuiChatItem*)item;
   emit chatSelected( user_item->chatId() );
+}
+
+void GuiChatList::showChatMenu( const QPoint& p )
+{
+  QTreeWidgetItem* item = itemAt( p );
+  if( !item )
+    return;
+
+  GuiChatItem* chat_item = (GuiChatItem*)item;
+  m_chatSelected = chat_item->chatId();
+
+  Chat c = ChatManager::instance().chat( m_chatSelected );
+  if( !c.isValid() )
+    return;
+
+  mp_actClear->setDisabled( c.isEmpty() );
+
+  mp_menu->exec( QCursor::pos() );
+}
+
+void GuiChatList::openChatSelected()
+{
+  emit chatSelected( m_chatSelected );
+}
+
+void GuiChatList::clearChatSelected()
+{
+  emit chatToClear( m_chatSelected );
 }
 
 

@@ -57,6 +57,7 @@ public:
   void showTipOfTheDay();
   void createGroupChat( const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
   void changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>&, bool broadcast_message );
+  void clearMessagesInChat( VNumber );
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );

@@ -237,3 +237,4 @@ Chat ChatManager::groupChatForUsers( const QList<VNumber>& user_list ) const
   }
   return Chat();
 }
+

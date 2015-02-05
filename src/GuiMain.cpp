@@ -108,6 +108,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_chat, SIGNAL( sendFileRequest() ), this, SLOT( sendFile() ) );
   connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
+  connect( mp_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -123,6 +124,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
+  connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
@@ -1666,6 +1668,9 @@ void GuiMain::removeSavedChat( const QString& chat_name )
   qDebug() << "Delete saved chat:" << chat_name;
   ChatManager::instance().removeSavedTextFromChat( chat_name );
   mp_savedChatList->updateSavedChats();
+
+  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatName() == chat_name )
+    mp_chat->reloadChat();
 }
 
 void GuiMain::linkSavedChat( const QString& chat_name )
@@ -1787,4 +1792,41 @@ void GuiMain::changeUserColor( VNumber user_id )
     UserManager::instance().setUser( u );
     mp_chat->reloadChat();
   }
+}
+
+void GuiMain::clearChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return;
+  QString chat_name = c.isDefault() ? QObject::tr( "All Lan Users" ).toLower() : c.name();
+  if( c.isEmpty() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
+    return;
+  }
+
+  QString question_txt = tr( "Do you really want to clear messages with %1?" ).arg( chat_name );
+  QString button_2_text;
+  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+    button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
+
+  switch( QMessageBox::warning( this, Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
+  {
+  case 0:
+    mp_core->clearMessagesInChat( chat_id );
+    break;
+  case 2:
+    mp_core->clearMessagesInChat( chat_id );
+    ChatManager::instance().removeSavedTextFromChat( c.name() );
+    break;
+  default:
+    return;
+  }
+
+  mp_userList->setUnreadMessages( chat_id, 0 );
+  mp_chatList->reloadChatList();
+  mp_savedChatList->updateSavedChats();
+  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
+    showChat( ID_DEFAULT_CHAT );
 }

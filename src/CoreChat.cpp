@@ -356,3 +356,13 @@ void Core::addListToSavedChats()
   bscl->deleteLater();
   emit savedChatListAvailable();
 }
+
+void Core::clearMessagesInChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( c.isValid() )
+  {
+    c.clearMessages();
+    ChatManager::instance().setChat( c );
+  }
+}

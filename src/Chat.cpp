@@ -108,3 +108,23 @@ bool Chat::hasUsers( const QList<VNumber>& user_list )
   }
   return true;
 }
+
+void Chat::clearMessages()
+{
+  ChatMessage cm_intro;
+  if( isGroup() )
+  {
+    cm_intro = m_messages.first();
+    m_messages.removeFirst();
+    ChatMessage cm_intro_group = m_messages.first();
+    m_messages.clear();
+    addMessage( cm_intro );
+    addMessage( cm_intro_group );
+  }
+  else
+  {
+    cm_intro = m_messages.first();
+    m_messages.clear();
+    addMessage( cm_intro );
+  }
+}

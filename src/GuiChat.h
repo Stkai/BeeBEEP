@@ -45,6 +45,7 @@ public:
   void updateUser( const User& );
 
   inline bool reloadChat();
+  inline const QString& chatName() const;
 
 signals:
   void newMessage( VNumber, const QString& );
@@ -54,6 +55,7 @@ signals:
   void sendFileRequest();
   void createGroupRequest();
   void editGroupRequest();
+  void chatToClear( VNumber );
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
@@ -72,10 +74,11 @@ private slots:
   void emoticonSelected();
   void saveChat();
   void lastEmoticonSelected();
-
+  void clearChat();
 
 private:
   VNumber m_chatId;
+  QString m_chatName;
   UserList m_users;
   VNumber m_lastMessageUserId;
   QString m_lastEmoticonSelected;
@@ -85,12 +88,14 @@ private:
   QAction* mp_actSendFile;
   QAction* mp_actGroupAdd;
   QAction* mp_actCreateGroup;
+  QAction* mp_actClear;
 
 };
 
 
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
+inline const QString& GuiChat::chatName() const { return m_chatName; }
 inline bool GuiChat::reloadChat() { return setChatId( m_chatId ); }
 
 #endif // BEEBEEP_GUICHAT_H

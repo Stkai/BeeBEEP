@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiChatItem.h"
-#include "ChatManager.h"
+#include "Chat.h"
 #include "UserManager.h"
 
 
@@ -51,7 +51,7 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
   return user_item_name > other_name; // correct order
 }
 
-bool GuiChatItem::updateItem()
+bool GuiChatItem::updateItem( const Chat& c )
 {
   setIcon( 0, QIcon( ":/images/chat.png" ) );
 
@@ -66,10 +66,6 @@ bool GuiChatItem::updateItem()
   }
   else
   {
-    Chat c = ChatManager::instance().chat( chatId() );
-    if( !c.isValid() )
-      return false;
-
     UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
     QStringList sl;
     foreach( User u, user_list.toList() )

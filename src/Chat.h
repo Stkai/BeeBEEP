@@ -57,7 +57,7 @@ public:
   inline void readAllMessages();
   inline const QList<ChatMessage> messages() const;
   inline void addMessage( const ChatMessage& );
-
+  void clearMessages();
   inline const QString& privateId() const;
   inline void setPrivateId( const QString& );
 
