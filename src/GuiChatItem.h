@@ -24,7 +24,6 @@
 #ifndef BEEBEEP_GUICHATITEM_H
 #define BEEBEEP_GUICHATITEM_H
 
-#include "Config.h"
 #include "BeeUtils.h"
 class Chat;
 

@@ -97,7 +97,7 @@ void GuiUserList::setUnreadMessages( VNumber chat_id, int n )
     return;
 
   item->setUnreadMessages( n );
-  item->updateItem();
+  item->updateUser();
 }
 
 void GuiUserList::setUser( const User& u )
@@ -123,7 +123,7 @@ void GuiUserList::setUser( const User& u )
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   item->setChatId( c.id() );
   item->setUnreadMessages( c.unreadMessages() );
-  item->updateItem();
+  item->updateUser( u );
   sortUsers();
 }
 

@@ -21,22 +21,32 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUIGROUPLIST_H
+#define BEEBEEP_GUIGROUPLIST_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-#ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
-#else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
-#endif
-const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.7";
-const int BEEBEEP_PROTO_VERSION = 62;
-const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 310;
+#include "GuiGroupItem.h"
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiGroupList : public QTreeWidget
+{
+  Q_OBJECT
+
+public:
+  GuiGroupList( QWidget* parent = 0 );
+
+  virtual QSize sizeHint() const;
+
+signals:
+  void chatSelected( VNumber chat_id );
+
+protected slots:
+  void showGroupMenu( const QPoint& );
+  void checkItemDoubleClicked( QTreeWidgetItem*, int );
+
+private:
+  GuiGroupItem* itemFromId( VNumber );
+
+};
+
+
+#endif // BEEBEEP_GUIGROUPLIST_H

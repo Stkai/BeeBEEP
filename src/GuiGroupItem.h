@@ -21,46 +21,46 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIUSERITEM_H
-#define BEEBEEP_GUIUSERITEM_H
+#ifndef BEEBEEP_GUIGROUPITEM_H
+#define BEEBEEP_GUIGROUPITEM_H
 
 #include "BeeUtils.h"
+class Group;
 class User;
 
 
-class GuiUserItem : public QTreeWidgetItem
+class GuiGroupItem : public QTreeWidgetItem
 {
 
 public:
-  enum UserDataType { UserId = Qt::UserRole+2, ChatId, UnreadMessages, UserName, Priority };
+  enum ItemDataType { ItemId = Qt::UserRole+1, ChatId, ObjectId };
+  enum ObjectTypeId { ObjectInvalid = 0, ObjectUser, ObjectGroup };
 
-  GuiUserItem( QTreeWidget* );
-  GuiUserItem( QTreeWidgetItem* );
+  GuiGroupItem( QTreeWidget* );
+  GuiGroupItem( QTreeWidgetItem* );
 
   bool operator<( const QTreeWidgetItem& ) const;
 
-  inline void setUserId( VNumber );
-  inline VNumber userId() const;
+  inline void setItemId( VNumber );
+  inline VNumber itemId() const;
   inline void setChatId( VNumber );
   inline VNumber chatId() const;
-  inline void setUnreadMessages( int );
-  inline int unreadMessages() const;
+  inline void setObjectType( ObjectTypeId );
+  inline int ObjectType() const;
 
-  bool updateUser();
+  bool updateGroup( const Group& );
   bool updateUser( const User& );
-
-private:
-  QColor m_defaultForegroundColor;
 
 };
 
 
 // Inline Functions
-inline void GuiUserItem::setUserId( VNumber user_id ) { setData( 0, UserId, user_id ); }
-inline VNumber GuiUserItem::userId() const { return Bee::qVariantToVNumber( data( 0, UserId ) ); }
-inline void GuiUserItem::setChatId( VNumber chat_id ) { setData( 0, ChatId, chat_id ); }
-inline VNumber GuiUserItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
-inline void GuiUserItem::setUnreadMessages( int unread_messages ) { setData( 0, UnreadMessages, unread_messages ); }
-inline int GuiUserItem::unreadMessages() const { return data( 0, UnreadMessages ).toInt(); }
+inline void GuiGroupItem::setItemId( VNumber new_value  ) { setData( 0, ItemId, new_value ); }
+inline VNumber GuiGroupItem::itemId() const { return Bee::qVariantToVNumber( data( 0, ItemId ) ); }
+inline void GuiGroupItem::setChatId( VNumber new_value  ) { setData( 0, ChatId, new_value ); }
+inline VNumber GuiGroupItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
+inline void GuiGroupItem::setObjectType( ObjectTypeId new_value  ) { setData( 0, ObjectId, (int)new_value ); }
+inline int GuiGroupItem::ObjectType() const { return data( 0, ObjectId ).toInt(); }
 
-#endif // BEEBEEP_GUIUSERITEM_H
+
+#endif // BEEBEEP_GUIGROUPITEM_H

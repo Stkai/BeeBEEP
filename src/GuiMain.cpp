@@ -380,7 +380,7 @@ void GuiMain::createActions()
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( forceExit() ) );
 
-  mp_actVCard = new QAction( QIcon( ":/images/profile.png"), tr( "Profile..." ), this );
+  mp_actVCard = new QAction( QIcon( ":/images/profile-edit.png"), tr( "Profile..." ), this );
   mp_actVCard->setStatusTip( tr( "Change your profile data" ) );
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
 

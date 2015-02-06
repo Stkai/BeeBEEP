@@ -32,6 +32,11 @@ GuiUserItem::GuiUserItem( QTreeWidget* parent )
 {
 }
 
+GuiUserItem::GuiUserItem( QTreeWidgetItem* parent )
+  : QTreeWidgetItem( parent ), m_defaultForegroundColor()
+{
+}
+
 bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
 {
   int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
@@ -50,9 +55,16 @@ static QIcon GetUserIcon( int unread_messages, int user_status )
   return unread_messages > 0 ? QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_status );
 }
 
-bool GuiUserItem::updateItem()
+bool GuiUserItem::updateUser()
 {
-  User u = UserManager::instance().userList().find( userId() );
+  return updateUser( UserManager::instance().userList().find( userId() ) );
+}
+
+bool GuiUserItem::updateUser( const User& u )
+{
+  if( u.id() != userId() )
+    return false;
+
   if( !u.isValid() )
   {
     setData( 0, GuiUserItem::Priority, 10000000 );

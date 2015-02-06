@@ -93,5 +93,9 @@
         <file>images/filter.png</file>
         <file>images/network-scan.png</file>
         <file>images/clear.png</file>
+        <file>images/group.png</file>
+        <file>images/profile-edit.png</file>
+        <file>images/group-remove.png</file>
+        <file>images/user.png</file>
     </qresource>
 </RCC>
