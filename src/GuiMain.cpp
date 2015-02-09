@@ -31,6 +31,7 @@
 #include "GuiChatList.h"
 #include "GuiCreateGroupChat.h"
 #include "GuiEditVCard.h"
+#include "GuiGroupList.h"
 #include "GuiLog.h"
 #include "GuiPluginManager.h"
 #include "GuiSavedChat.h"
@@ -107,7 +108,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( mp_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_chat, SIGNAL( sendFileRequest() ), this, SLOT( sendFile() ) );
-  connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
+  connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroupChat() ) );
+  connect( mp_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
   connect( mp_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
@@ -122,6 +124,16 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
+
+  void openChatForGroupRequest( VNumber group_id );
+  void createGroupRequest();
+  void editGroupRequest( VNumber );
+  void showVCardRequest( VNumber );
+
+  connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
+  connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
+  connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroup( VNumber ) ) );
+  connect( mp_groupList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
@@ -580,6 +592,7 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actPluginBar );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewUsers );
+  mp_menuView->addAction( mp_actViewGroups );
   mp_menuView->addAction( mp_actViewChats );
   mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
@@ -636,6 +649,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
+  mp_barMain->addAction( mp_actViewGroups );
   mp_barMain->addAction( mp_actViewChats );
   mp_barMain->addAction( mp_actViewSavedChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
@@ -664,9 +678,20 @@ void GuiMain::createDockWindows()
   addDockWidget( Qt::RightDockWidgetArea, mp_dockUserList );
   mp_actViewUsers = mp_dockUserList->toggleViewAction();
   mp_actViewUsers->setIcon( QIcon( ":/images/user-list.png" ) );
-  mp_actViewUsers->setText( tr( "Show online users and active chats" ) );
-  mp_actViewUsers->setStatusTip( tr( "Show the list of the connected users and the active chats" ) );
+  mp_actViewUsers->setText( tr( "Show online users" ) );
+  mp_actViewUsers->setStatusTip( tr( "Show the list of the connected users" ) );
   mp_actViewUsers->setData( 99 );
+
+  mp_dockGroupList = new QDockWidget( tr( "Groups" ), this );
+  mp_dockGroupList->setObjectName( "GuiGroupListDock" );
+  mp_groupList = new GuiGroupList( mp_dockGroupList );
+  mp_dockGroupList->setWidget( mp_groupList );
+  addDockWidget( Qt::RightDockWidgetArea, mp_dockGroupList );
+  mp_actViewGroups = mp_dockGroupList->toggleViewAction();
+  mp_actViewGroups->setIcon( QIcon( ":/images/group.png" ) );
+  mp_actViewGroups->setText( tr( "Show your groups" ) );
+  mp_actViewGroups->setStatusTip( tr( "Show the list of your groups" ) );
+  mp_actViewGroups->setData( 99 );
 
   QDockWidget* dock_widget = new QDockWidget( tr( "Chats" ), this );
   dock_widget->setObjectName( "GuiChatListDock" );
@@ -1257,6 +1282,9 @@ void GuiMain::showCurrentChat()
 
 void GuiMain::showChat( VNumber chat_id )
 {
+  if( chat_id == ID_INVALID )
+    return;
+
   if( mp_chat->setChatId( chat_id ) )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
@@ -1573,7 +1601,7 @@ void GuiMain::playBeep()
   beep_sound.play();
 }
 
-void GuiMain::createGroup()
+void GuiMain::createGroupChat()
 {
   GuiCreateGroupChat gcgc( this );
   gcgc.setGroupChat( Chat() );
@@ -1585,12 +1613,25 @@ void GuiMain::createGroup()
 
 }
 
-void GuiMain::addUserToGroup()
+void GuiMain::createGroup()
+{
+
+}
+
+void GuiMain::editGroup( VNumber group_id )
+{
+  Group g = UserManager::instance().group( group_id );
+  if( !g.isValid() )
+    return;
+
+}
+
+void GuiMain::addUserToGroupChat()
 {
   Chat group_chat_tmp = ChatManager::instance().chat( mp_chat->chatId() );
   if( !group_chat_tmp.isGroup() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Impossibile to add users in this chat. Please select a group one." ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to add users in this chat. Please select a group one." ) );
     return;
   }
 

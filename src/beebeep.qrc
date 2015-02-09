@@ -97,5 +97,6 @@
         <file>images/profile-edit.png</file>
         <file>images/group-remove.png</file>
         <file>images/user.png</file>
+        <file>images/group-edit.png</file>
     </qresource>
 </RCC>

@@ -33,6 +33,7 @@ class FileInfo;
 class GameInterface;
 class GuiChat;
 class GuiChatList;
+class GuiGroupList;
 class GuiLog;
 class GuiSavedChat;
 class GuiSavedChatList;
@@ -106,8 +107,10 @@ private slots:
   void selectBeepFile();
   void testBeepFile();
   void playBeep();
-  void addUserToGroup();
+  void addUserToGroupChat();
+  void createGroupChat();
   void createGroup();
+  void editGroup( VNumber );
   void showSavedChatSelected( const QString& );
   void removeSavedChat( const QString& );
   void linkSavedChat( const QString& );
@@ -154,6 +157,7 @@ private:
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
   GuiSavedChatList* mp_savedChatList;
+  GuiGroupList* mp_groupList;
   GuiShareLocal* mp_shareLocal;
   GuiShareNetwork* mp_shareNetwork;
   GuiLog* mp_logView;
@@ -188,6 +192,7 @@ private:
   QAction* mp_actViewFileTransfer;
   QAction* mp_actViewChats;
   QAction* mp_actViewSavedChats;
+  QAction* mp_actViewGroups;
   QAction* mp_actViewShareLocal;
   QAction* mp_actViewShareNetwork;
   QAction* mp_actViewDefaultChat;
@@ -197,6 +202,7 @@ private:
   QAction* mp_actPromptPassword;
 
   QDockWidget* mp_dockUserList;
+  QDockWidget* mp_dockGroupList;
 
   GuiSystemTray* mp_trayIcon;
 

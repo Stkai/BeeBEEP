@@ -25,7 +25,8 @@
 #define BEEBEEP_GUICREATEGROUPCHAT_H
 
 #include "ui_GuiCreateGroupChat.h"
-#include "Chat.h"
+#include "Config.h"
+class Chat;
 
 
 class GuiCreateGroupChat : public QDialog, private Ui::GuiCreateGroupChat

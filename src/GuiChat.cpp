@@ -94,7 +94,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   bar->addSeparator();
   mp_actCreateGroup = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupRequest() ) );
   mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
-  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Edit group chat" ), this, SIGNAL( editGroupRequest() ) );
+  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group chat" ), this, SIGNAL( editGroupRequest() ) );
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   bar->addSeparator();
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );

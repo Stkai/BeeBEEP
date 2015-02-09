@@ -46,3 +46,17 @@ void UserManager::setGroup( const Group& g )
     m_groups.removeOne( g );
   m_groups.append( g );
 }
+
+Group UserManager::group( VNumber group_id ) const
+{
+  foreach( Group g, m_groups )
+  {
+    if( g.id() == group_id )
+      return g;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find group with id" << group_id;
+#endif
+  return Group();
+}

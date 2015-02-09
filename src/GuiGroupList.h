@@ -36,15 +36,29 @@ public:
 
   virtual QSize sizeHint() const;
 
+  void loadGroups();
+  void updateGroup( VNumber );
+
 signals:
-  void chatSelected( VNumber chat_id );
+  void openChatForGroupRequest( VNumber group_id );
+  void createGroupRequest();
+  void editGroupRequest( VNumber );
+  void showVCardRequest( VNumber );
 
 protected slots:
   void showGroupMenu( const QPoint& );
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
+  void openGroupChatSelected();
+  void editGroupSelected();
 
 private:
   GuiGroupItem* itemFromId( VNumber );
+
+  QAction* mp_actCreateGroup;
+  QAction* mp_actEditGroup;
+  QAction* mp_actOpenChat;
+
+  VNumber m_selectedGroupId;
 
 };
 

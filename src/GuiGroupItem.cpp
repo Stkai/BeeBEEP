@@ -22,7 +22,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiGroupItem.h"
-#include "GuiUserItem.h"
 #include "Group.h"
 #include "UserManager.h"
 
@@ -43,7 +42,17 @@ GuiGroupItem::GuiGroupItem( QTreeWidgetItem* parent )
   setObjectType( ObjectInvalid );
 }
 
-bool GuiGroupItem::operator<( const QTreeWidgetItem& item ) const
+void GuiGroupItem::init( VNumber item_id, VNumber chat_id, bool is_group )
+{
+  setItemId( item_id );
+  setChatId( chat_id );
+  if( is_group )
+    setObjectType( ObjectGroup );
+  else
+    setObjectType( ObjectUser );
+}
+
+bool GuiGroupItem::operator<( const GuiGroupItem& item ) const
 {
   QString user_item_name = text( 0 ).toLower();
   QString other_name = item.text( 0 ).toLower();
@@ -53,7 +62,10 @@ bool GuiGroupItem::operator<( const QTreeWidgetItem& item ) const
 
 bool GuiGroupItem::updateGroup( const Group& g )
 {
-  setItemId( g.id() );
+  if( itemId() != g.id() )
+    return false;
+  if( !isGroup() )
+    return false;
 
   setIcon( 0, QIcon( ":/images/group.png" ) );
   setText( 0, g.name() );
@@ -63,13 +75,10 @@ bool GuiGroupItem::updateGroup( const Group& g )
   UserList user_list = UserManager::instance().userList().fromUsersId( g.usersId() );
   foreach( User u, user_list.toList() )
   {
-    GuiUserItem* user_item = new GuiUserItem( this );
-    user_item->setUserId( u.id() );
+    GuiGroupItem* user_item = new GuiGroupItem( this );
+    user_item->init( u.id(), chatId(), false );
     user_item->updateUser( u );
-    user_item->setUnreadMessages( 0 );
-    user_item->setToolTip( 0, "" );
-    user_item->setStatusTip( 0, "" );
-    user_item->setUnreadMessages( 0 );
+    addChild( user_item );
   }
 
   return true;
@@ -77,6 +86,14 @@ bool GuiGroupItem::updateGroup( const Group& g )
 
 bool GuiGroupItem::updateUser( const User& u )
 {
-  QTreeWidgetItemIterator it( this );
+  if( itemId() != u.id() )
+    return false;
+  if( isGroup() )
+    return false;
 
+  setIcon( 0, Bee::userStatusIcon( u.status() ) );
+  setText( 0, u.name() );
+  setToolTip( 0, u.path() );
+
+  return true;
 }

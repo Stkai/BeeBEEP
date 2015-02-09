@@ -40,6 +40,7 @@ public:
 
   inline const QList<Group>& groups() const;
   void setGroup( const Group& );
+  Group group( VNumber ) const;
 
   static UserManager& instance()
   {
