@@ -125,11 +125,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
-  void openChatForGroupRequest( VNumber group_id );
-  void createGroupRequest();
-  void editGroupRequest( VNumber );
-  void showVCardRequest( VNumber );
-
   connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroup( VNumber ) ) );

@@ -39,7 +39,7 @@ QString RainbowTextMarker::name() const
 
 QString RainbowTextMarker::version() const
 {
-  return "0.6.2";
+  return "0.9.7";
 }
 
 QString RainbowTextMarker::author() const
@@ -161,6 +161,16 @@ QString RainbowTextMarker::closeCommand() const
   return QLatin1String( "~ " );
 }
 
+QString RainbowTextMarker::openString() const
+{
+  return QLatin1String( " " );
+}
+
+QString RainbowTextMarker::closeString() const
+{
+  return QLatin1String( " " );
+}
+
 void RainbowTextMarker::initParser( const QString& str_to_parse )
 {
   // Get the length and scale. For rainbows, the scale must be such that one cycle comes out to almost 2pi.
@@ -173,6 +183,9 @@ void RainbowTextMarker::initParser( const QString& str_to_parse )
 
 QString RainbowTextMarker::parseString( const QString& str )
 {
+  if( str.size() == 1 && str.at( 0 ).isSpace() )
+    return str;
+  
   m_rainbowIndex++;
   qreal k = m_scale * m_rainbowIndex;
   return QString( "<font color=""%1"">%2</font>" ).arg( GetRainbowColor( k, false ).name(), str );

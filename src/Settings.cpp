@@ -37,6 +37,8 @@ Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
   m_useSettingsFileIni = true;
+  m_trustNickname = true;
+  m_trustSystemAccount = false;
   m_confirmOnDownloadFile = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
@@ -288,7 +290,11 @@ void Settings::loadPreConf()
     sets.setValue( "UseConfigurationFileIni", false );
 #else
     sets.setValue( "UseConfigurationFileIni", true );
-#endif
+#endif   
+    sets.endGroup();
+    sets.beginGroup( "Groups" );
+    sets.setValue( "TrustNickname", true );
+    sets.setValue( "TrustSystemAccount", false );
     sets.endGroup();
     sets.sync();
     qDebug() << "Pre-configuration file created";
@@ -297,6 +303,10 @@ void Settings::loadPreConf()
   {
     sets.beginGroup( "BeeBEEP" );
     m_useSettingsFileIni = sets.value( "UseConfigurationFileIni", true ).toBool();
+    sets.endGroup();
+    sets.beginGroup( "Groups" );
+    m_trustNickname = sets.value( "TrustNickname", true ).toBool();
+    m_trustSystemAccount = sets.value( "TrustSystemAccount", false ).toBool();
     sets.endGroup();
   }
 }

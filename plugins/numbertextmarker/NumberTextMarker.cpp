@@ -35,7 +35,7 @@ QString NumberTextMarker::name() const
 
 QString NumberTextMarker::version() const
 {
-  return "0.6.2";
+  return "0.9.7";
 }
 
 QString NumberTextMarker::author() const
@@ -111,6 +111,16 @@ QString NumberTextMarker::openCommand() const
 QString NumberTextMarker::closeCommand() const
 {
   return QLatin1String( "# " );
+}
+
+QString NumberTextMarker::openString() const
+{
+  return QLatin1String( " " );
+}
+
+QString NumberTextMarker::closeString() const
+{
+  return QLatin1String( " " );
 }
 
 void NumberTextMarker::initParser( const QString& )

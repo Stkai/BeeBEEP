@@ -60,6 +60,8 @@ public:
 
   virtual QString openCommand() const = 0;
   virtual QString closeCommand() const = 0;
+  virtual QString openString() const = 0;
+  virtual QString closeString() const = 0;
   virtual void initParser( const QString& ) = 0; // pass the string between open and close command
   virtual QString parseString( const QString& ) = 0; // FALSE break the loop
 
@@ -102,7 +104,7 @@ Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/2.
 Q_DECLARE_INTERFACE( ServiceInterface, "beebeep.plugin.ServiceInterface/2.0" )
 Q_DECLARE_INTERFACE( GameInterface, "beebeep.plugin.GameInterface/2.0" )
 #else
-Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/1.0" )
+Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/1.5" )
 Q_DECLARE_INTERFACE( ServiceInterface, "beebeep.plugin.ServiceInterface/1.0" )
 Q_DECLARE_INTERFACE( GameInterface, "beebeep.plugin.GameInterface/1.0" )
 #endif

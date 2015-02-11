@@ -21,22 +21,15 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef REGULARBOLDTEXTMAKER_GLOBAL_H
+#define REGULARBOLDTEXTMAKER_GLOBAL_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-#ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
+#include <QtCore/qglobal.h>
+
+#if defined(REGULARBOLDTEXTMARKER_LIBRARY)
+#  define REGULARBOLDTEXTMARKERSHARED_EXPORT Q_DECL_EXPORT
 #else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
+#  define REGULARBOLDTEXTMARKERSHARED_EXPORT Q_DECL_IMPORT
 #endif
-const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.7";
-const int BEEBEEP_PROTO_VERSION = 62;
-const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 312;
 
-#endif // BEEBEEP_VERSION_H
-
+#endif // REGULARBOLDTEXTMAKER_GLOBAL_H

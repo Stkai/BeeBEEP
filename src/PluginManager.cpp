@@ -317,7 +317,7 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
           // skip open command
           if( i == open_cmd_index )
           {
-            parsed_text.append( " " );
+            parsed_text.append( tmi->openString() );
           }
         }
         else if( i >= (open_cmd_index+open_cmd_size) && i < close_cmd_index )
@@ -335,7 +335,7 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
         {
           // skip close command
           if( i == close_cmd_index )
-            parsed_text.append( " " );
+            parsed_text.append( tmi->closeString() );
         }
         else
           parsed_text.append( c );

@@ -53,6 +53,8 @@ public:
 
   QString openCommand() const;
   QString closeCommand() const;
+  QString openString() const;
+  QString closeString() const;
   void initParser( const QString& );
   QString parseString( const QString& );
 

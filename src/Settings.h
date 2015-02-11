@@ -37,6 +37,9 @@ public:
   inline bool firstTime() const;
   inline void setFirstTime( bool );
 
+  inline bool trustNickname() const;
+  inline bool trustSystemAccount() const;
+
   QString version( bool ) const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
@@ -215,6 +218,8 @@ protected:
 private:
   // PreConf
   bool m_useSettingsFileIni;
+  bool m_trustNickname;
+  bool m_trustSystemAccount;
 
   // Ini
   User m_localUser;
@@ -305,6 +310,8 @@ private:
 // Inline Functions
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
+inline bool Settings::trustNickname() const { return m_trustNickname; }
+inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
 inline int Settings::broadcastPort() const { return m_broadcastPort; }
 inline int Settings::broadcastInterval() const { return m_broadcastInterval; }
 inline int Settings::pingInterval() const { return m_pingInterval; }

@@ -17,20 +17,20 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id: RainbowTextMarker.h 101 2011-09-19 11:59:48Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef NUMBERTEXTMARKER_H
-#define NUMBERTEXTMARKER_H
+#ifndef REGULARBOLDTEXTMARKER_H
+#define REGULARBOLDTEXTMARKER_H
 
-#include "numbertextmarker_global.h"
+#include "regularboldtextmarker_global.h"
 #include "Interfaces.h"
 #include <QObject>
 #include <QStringList>
 
 
-class NUMBERTEXTMARKERSHARED_EXPORT NumberTextMarker : public QObject, public TextMarkerInterface
+class REGULARBOLDTEXTMARKERSHARED_EXPORT RegularBoldTextMarker : public QObject, public TextMarkerInterface
 {
   Q_OBJECT
   Q_INTERFACES( TextMarkerInterface )
@@ -38,7 +38,7 @@ class NUMBERTEXTMARKERSHARED_EXPORT NumberTextMarker : public QObject, public Te
   Q_PLUGIN_METADATA(IID "beebeep.plugin.TextMarkerInterface/2.0")
 #endif
 public:
-  NumberTextMarker();
+  RegularBoldTextMarker();
 
   QString name() const;
   QString version() const;
@@ -57,6 +57,10 @@ public:
   void initParser( const QString& );
   QString parseString( const QString& );
 
+private:
+  bool m_isBoldActive;
+  bool m_lastCharIsSpace;
+
 };
 
-#endif // RAINBOWTEXTMARKER_H
+#endif // REGULARBOLDTEXTMARKER_H
