@@ -75,10 +75,13 @@ bool GuiGroupItem::updateGroup( const Group& g )
   UserList user_list = UserManager::instance().userList().fromUsersId( g.usersId() );
   foreach( User u, user_list.toList() )
   {
-    GuiGroupItem* user_item = new GuiGroupItem( this );
-    user_item->init( u.id(), chatId(), false );
-    user_item->updateUser( u );
-    addChild( user_item );
+    if( !u.isLocal() )
+    {
+      GuiGroupItem* user_item = new GuiGroupItem( this );
+      user_item->init( u.id(), chatId(), false );
+      user_item->updateUser( u );
+      addChild( user_item );
+    }
   }
 
   return true;

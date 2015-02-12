@@ -41,7 +41,7 @@ Group& Group::operator=( const Group& g )
     m_id = g.m_id;
     m_name = g.m_name;
     m_usersId = g.m_usersId;
-    m_privateId = g.privateId();
+    m_privateId = g.m_privateId;
   }
   return *this;
 }
@@ -54,13 +54,10 @@ bool Group::addUser( VNumber user_id )
   return true;
 }
 
-int Group::addUsers( const QList<VNumber>& user_list )
+void Group::setUsers( const QList<VNumber>& group_members )
 {
-  int num = 0;
-  foreach( VNumber user_id, user_list )
-  {
-    if( addUser( user_id ) )
-      num++;
-  }
-  return num;
+  m_usersId.clear();
+  addUser( ID_LOCAL_USER );
+  foreach( VNumber member_id, group_members )
+    addUser( member_id );
 }

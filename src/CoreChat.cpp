@@ -125,8 +125,9 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
 
 void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>& users_id, bool broadcast_message )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Changing group chat named" << chat_name;
-  UserList ul = UserManager::instance().userList().fromUsersId( users_id );
+#endif
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
   {
@@ -134,7 +135,11 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
     return;
   }
 
+  UserList group_new_members = UserManager::instance().userList().fromUsersId( users_id );
+  UserList group_old_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+
   QStringList user_added_string_list;
+  QStringList user_removed_string_list;
   QStringList user_string_list;
   QString sHtmlMsg;
   bool chat_changed = false;
@@ -143,41 +148,60 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
   {
     sHtmlMsg = tr( "%1 The group has a new name: %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*G*" ), chat_name );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
-    c.setName( chat_name );
     chat_changed = true;
+    c.setName( chat_name );
   }
 
-  foreach( User u, ul.toList() )
+  foreach( User u, group_new_members.toList() )
   {
     if( !u.isLocal() )
     {
-      if( !c.usersId().contains( u.id() ) )
+      if( c.addUser( u.id() ) )
         user_added_string_list << QString( "%1 (%2)" ).arg( u.name(), u.accountPath() );
       user_string_list.append( u.name() );
     }
   }
 
-  if( !user_added_string_list.isEmpty() )
+  foreach( User u, group_old_members.toList() )
   {
-    sHtmlMsg = tr( "%1 Adding in group: %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_added_string_list.join( ", " ) );
-    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
+    if( !u.isLocal() )
+    {
+      if( !group_new_members.has( u.id() ) )
+      {
+        user_removed_string_list << QString( "%1 (%2)" ).arg( u.name(), u.accountPath() );
+        c.removeUser( u.id() );
+      }
+    }
+  }
 
-    sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/user-list.png", "*G*" ), user_string_list.join( ", " ) );
+  if( user_removed_string_list.size() > 0 )
+  {
+    sHtmlMsg = tr( "%1 Members removed from the group: %2." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), user_removed_string_list.join( ", " ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
-
     chat_changed = true;
   }
 
+  if( user_added_string_list.size() > 0 )
+  {
+    sHtmlMsg = tr( "%1 Members added to the group: %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_added_string_list.join( ", " ) );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
+    chat_changed = true;
+  }
+
+  if( user_removed_string_list.size() > 0 || user_added_string_list.size() > 0 )
+  {
+    sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/user-list.png", "*G*" ), user_string_list.join( ", " ) );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
+  }
+
   if( chat_changed )
+  {
     ChatManager::instance().setChat( c );
+    emit updateChat( c.id() );
+  }
 
   if( broadcast_message )
-    sendGroupChatRequestMessage( c, ul );
-  else
-  {
-    if( chat_changed )
-      emit updateChat( c.id() );
-  }
+    sendGroupChatRequestMessage( c, group_new_members );
 }
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )
@@ -310,6 +334,20 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
   }
 }
 
+void Core::sendGroupChatRefuseMessage( const Chat& group_chat, const UserList& user_list )
+{
+  Message group_refuse_message = Protocol::instance().groupChatRefuseMessage( group_chat );
+
+  foreach( User u, user_list.toList() )
+  {
+    if( u.isLocal() )
+      continue;
+
+    if( !sendMessageToLocalNetwork( u, group_refuse_message ) )
+      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 cannot be informed that you have left the group." ).arg( u.name() ), DispatchToChat );
+  }
+}
+
 bool Core::sendMessageToLocalNetwork( const User& to_user, const Message& m )
 {
   Connection* c = connection( to_user.id() );
@@ -365,4 +403,39 @@ void Core::clearMessagesInChat( VNumber chat_id )
     c.clearMessages();
     ChatManager::instance().setChat( c );
   }
+}
+
+bool Core::removeUserFromChat( const User& u, VNumber chat_id )
+{
+  if( chat_id == ID_DEFAULT_CHAT )
+    return false;
+
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return false;
+  if( !c.isGroup() )
+    return false;
+  Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
+  if( g.isValid() )
+    return false;
+
+  QString sHtmlMsg;
+
+  if( u.isLocal() )
+    sHtmlMsg = tr( "%1 You have left group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) );
+  else
+    sHtmlMsg = tr( "%1 %2 has left group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name() );
+
+  c.removeUser( u.id() );
+  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
+  ChatManager::instance().setChat( c );
+  emit updateChat( c.id() );
+
+  if( u.isLocal() )
+  {
+    UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+    sendGroupChatRefuseMessage( c, group_members );
+  }
+
+  return true;
 }

@@ -45,9 +45,9 @@ public:
 
   inline const QList<VNumber>& usersId() const;
   bool addUser( VNumber );
-  int addUsers( const QList<VNumber>& );
   inline bool hasUser( VNumber ) const;
   inline bool removeUser( VNumber );
+  void setUsers( const QList<VNumber>& );
 
   inline const QString& privateId() const;
   inline void setPrivateId( const QString& );

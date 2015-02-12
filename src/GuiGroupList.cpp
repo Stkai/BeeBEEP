@@ -117,7 +117,10 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   if( !item )
   {
     QMenu menu;
-    menu.addAction( mp_actCreateGroup );
+    if( UserManager::instance().userList().toList().size() < 2 )
+      menu.addAction( QIcon( ":/images/group-remove.png" ), tr( "Waiting for two or more connected user" ) );
+    else
+      menu.addAction( mp_actCreateGroup );
     menu.exec( QCursor::pos() );
     return;
   }

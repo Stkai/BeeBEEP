@@ -41,6 +41,9 @@ public:
   inline const QList<Group>& groups() const;
   void setGroup( const Group& );
   Group group( VNumber ) const;
+  bool hasGroupName( const QString& ) const;
+  Group findGroupByPrivateId( const QString& ) const;
+  bool removeGroup( VNumber );
 
   static UserManager& instance()
   {

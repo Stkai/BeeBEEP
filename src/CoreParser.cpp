@@ -205,7 +205,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
     }
 
-    Chat group_chat = ChatManager::instance().groupChat( cmd.groupId() );
+    Chat group_chat = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
 
     if( !group_chat.isValid() )
     {
@@ -226,7 +226,9 @@ void Core::parseGroupMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Refused ) )
   {
-
+    Chat group_chat = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
+    if( group_chat.isValid() )
+      removeUserFromChat( u, group_chat.id() );
   }
   else
     qWarning() << "Invalid flag found in group message (CoreParser)";

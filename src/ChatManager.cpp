@@ -78,7 +78,7 @@ Chat ChatManager::chat( VNumber chat_id ) const
   return Chat();
 }
 
-Chat ChatManager::groupChat( const QString& chat_id ) const
+Chat ChatManager::findGroupChatByPrivateId( const QString& chat_id ) const
 {
   QList<Chat>::const_iterator it = m_chats.begin();
   while( it != m_chats.end() )

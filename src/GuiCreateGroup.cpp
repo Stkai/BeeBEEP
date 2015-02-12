@@ -17,28 +17,25 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: GuiCreateGroupChat.cpp 267 2014-11-19 18:56:34Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
 #include "ChatManager.h"
-#include "GuiCreateGroupChat.h"
+#include "GuiCreateGroup.h"
 #include "Settings.h"
 #include "UserManager.h"
 
 
-GuiCreateGroupChat::GuiCreateGroupChat( QWidget *parent )
-  : QDialog( parent ), m_groupUsersId()
+GuiCreateGroup::GuiCreateGroup( QWidget *parent )
+  : QDialog( parent ), m_selectedName( "" ), m_selectedUsersId()
 {
   setupUi( this );
-  setObjectName( "GuiCreateGroupChat" );
-
-  setWindowTitle( tr( "Create Group - %1" ).arg( Settings::instance().programName() ) );
+  setObjectName( "GuiCreateGroup" );
 
   mp_labelName->setText( tr( "Group name" ) );
-
-  mp_labelText->setText( tr( "Please add member in the group chat:" ) );
+  mp_labelText->setText( tr( "Please add member in the group:" ) );
 
   QStringList labels;
   labels << tr( "Users" );
@@ -49,18 +46,31 @@ GuiCreateGroupChat::GuiCreateGroupChat( QWidget *parent )
   mp_twUsers->setRootIsDecorated( false );
   mp_twUsers->setSelectionMode( QAbstractItemView::MultiSelection );
 
-  connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( updateGroupChat() ) );
+  connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndClose() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
-void GuiCreateGroupChat::setGroupChat( const Chat& c )
+void GuiCreateGroup::init( const QString& group_name, const QList<VNumber>& group_members )
 {
-  if( c.isValid() )
+  m_selectedName = group_name;
+  m_selectedUsersId = group_members;
+}
+
+void GuiCreateGroup::loadData()
+{
+  if( m_selectedName.isEmpty() )
   {
-    mp_leName->setText( c.name() );
-    m_groupUsersId = c.usersId();
+    mp_leName->setText( "" );
+    setWindowTitle( tr( "Create Group - %1" ).arg( Settings::instance().programName() ) );
+  }
+  else
+  {
+    mp_leName->setText( m_selectedName );
     setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
   }
+
+  if( mp_twUsers->topLevelItemCount() > 0 )
+    mp_twUsers->clear();
 
   QTreeWidgetItem* item;
   foreach( User u, UserManager::instance().userList().toList() )
@@ -72,14 +82,14 @@ void GuiCreateGroupChat::setGroupChat( const Chat& c )
     item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
     item->setCheckState( 0, Qt::Checked );
 
-    if( !m_groupUsersId.isEmpty() && m_groupUsersId.contains( u.id() ) )
+    if( m_selectedUsersId.contains( u.id() ) )
       item->setCheckState( 0, Qt::Checked );
     else
       item->setCheckState( 0, Qt::Unchecked );
   }
 }
 
-void GuiCreateGroupChat::updateGroupChat()
+void GuiCreateGroup::checkAndClose()
 {
   QList<QTreeWidgetItem*> item_list;
   QTreeWidgetItemIterator it( mp_twUsers, QTreeWidgetItemIterator::Checked );
@@ -91,28 +101,41 @@ void GuiCreateGroupChat::updateGroupChat()
 
   if( item_list.size() < 2 )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select two or more member of the group chat." ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select two or more member for the group." ) );
     return;
   }
 
-  if( ChatManager::instance().hasName( mp_leName->text().simplified() ) )
+  QString group_name_tmp = mp_leName->text().simplified();
+
+  if( group_name_tmp.isEmpty() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select different group name." ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert a group name." ) );
     mp_leName->setFocus();
     return;
   }
 
-  m_groupName = mp_leName->text().simplified();
+  if( group_name_tmp != m_selectedName )
+  {
+    if( UserManager::instance().hasGroupName( group_name_tmp ) || ChatManager::instance().hasName( group_name_tmp ) )
+    {
+      QMessageBox::information( this, Settings::instance().programName(), tr( "%1 already exists as group name or chat name.\nPlease select a different name." ).arg( group_name_tmp ) );
+      mp_leName->setFocus();
+      return;
+    }
+  }
+
+  m_selectedName = group_name_tmp;
+
+  if( m_selectedUsersId.size() > 0 )
+    m_selectedUsersId.clear();
 
   VNumber user_id = 0;
   foreach( QTreeWidgetItem* item, item_list )
   {
     user_id = Bee::qVariantToVNumber( item->data( 0, Qt::UserRole+1 ) );
-    if( !m_groupUsersId.contains( user_id ) )
-      m_groupUsersId.append( user_id );
+    if( !m_selectedUsersId.contains( user_id ) )
+      m_selectedUsersId.append( user_id );
   }
 
   accept();
 }
-
-

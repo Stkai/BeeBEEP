@@ -118,6 +118,10 @@ private slots:
   void openWebSite();
   void openDownloadPluginPage();
   void clearChat( VNumber );
+  void checkGroup( VNumber );
+  void checkChat( VNumber );
+  void leaveGroupChat( VNumber );
+  void removeGroup( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );

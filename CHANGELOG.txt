@@ -2,8 +2,10 @@ BEEBEEP (Secure Network Chat)
 
 BeeBEEP 0.9.7
 - Clear chat messages option 
-- Encryption security level 2 added
+- Encryption security level 2 
 - Removed the limit on the number of files can be shared
+- Groups
+- Regular-Bold Text Marker plugin
 
 BeeBEEP 0.9.6
 - Auto set Away status when idle option

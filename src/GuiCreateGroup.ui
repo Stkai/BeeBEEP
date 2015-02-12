@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GuiCreateGroupChat</class>
- <widget class="QDialog" name="GuiCreateGroupChat">
+ <class>GuiCreateGroup</class>
+ <widget class="QDialog" name="GuiCreateGroup">
   <property name="geometry">
    <rect>
     <x>0</x>

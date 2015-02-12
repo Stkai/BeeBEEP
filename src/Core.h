@@ -51,6 +51,8 @@ public:
   void setLocalUserStatusDescription( const QString& );
   void setLocalUserVCard( const VCard& );
   void createGroup( const QString&, const QList<VNumber>& );
+  void changeGroup( VNumber, const QString&, const QList<VNumber>& );
+  void removeGroup( VNumber );
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
@@ -58,6 +60,7 @@ public:
   void createGroupChat( const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
   void changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>&, bool broadcast_message );
   void clearMessagesInChat( VNumber );
+  bool removeUserFromChat( const User&, VNumber );
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );
@@ -90,6 +93,7 @@ signals:
   void localShareListAvailable();
   void savedChatListAvailable();
   void updateStatus( const QString&, int );
+  void updateGroup( VNumber );
 
 protected slots:
   /* CoreConnection */
@@ -141,6 +145,7 @@ protected:
   QString chatMessageToText( const UserList&, const ChatMessage& );
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
   void sendGroupChatRequestMessage( const Chat&, const UserList& );
+  void sendGroupChatRefuseMessage( const Chat&, const UserList& );
   void checkGroupChatAfterUserReconnect( const User& );
 
   /* CoreDispatcher */

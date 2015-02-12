@@ -50,6 +50,7 @@ public:
   inline Message systemMessage( const QString& ) const;
   inline Message chatMessage( const QString& );
   Message groupChatRequestMessage( const Chat&, const User& to_user );
+  Message groupChatRefuseMessage( const Chat& );
   QStringList userPathsFromGroupRequestMessage( const Message& ) const;
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );

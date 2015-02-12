@@ -60,3 +60,37 @@ Group UserManager::group( VNumber group_id ) const
 #endif
   return Group();
 }
+
+bool UserManager::hasGroupName( const QString& group_name ) const
+{
+  foreach( Group g, m_groups )
+  {
+    if( g.name() == group_name )
+      return true;
+  }
+  return false;
+}
+
+Group UserManager::findGroupByPrivateId( const QString& group_private_id ) const
+{
+  foreach( Group g, m_groups )
+  {
+    if( g.privateId() == group_private_id )
+      return g;
+  }
+  return Group();
+}
+
+bool UserManager::removeGroup( VNumber group_id )
+{
+  Group g = group( group_id );
+  if( g.isValid() && m_groups.removeOne( g ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << g.name() << "is removed from group list";
+#endif
+    return true;
+  }
+  else
+    return false;
+}

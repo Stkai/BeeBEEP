@@ -43,7 +43,6 @@ public:
   inline void setName( const QString& );
   inline const QList<VNumber>& usersId() const;
   bool addUser( VNumber );
-  int addUsers( const QList<VNumber>& );
   inline bool hasUser( VNumber ) const;
   bool hasUsers( const QList<VNumber>& );
   inline bool removeUser( VNumber );

@@ -56,6 +56,7 @@ signals:
   void createGroupRequest();
   void editGroupRequest();
   void chatToClear( VNumber );
+  void leaveThisChat( VNumber );
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
@@ -75,6 +76,7 @@ private slots:
   void saveChat();
   void lastEmoticonSelected();
   void clearChat();
+  void leaveThisGroup();
 
 private:
   VNumber m_chatId;
@@ -84,11 +86,14 @@ private:
   QString m_lastEmoticonSelected;
 
   QMenu *mp_menuEmoticons;
-  QAction* mp_actEmoticons; 
+  QAction* mp_actEmoticons;
   QAction* mp_actSendFile;
   QAction* mp_actGroupAdd;
-  QAction* mp_actCreateGroup;
   QAction* mp_actClear;
+  QAction* mp_actLeave;
+  QAction* mp_actCreateGroup;
+
+  bool m_localUserIsMember;
 
 };
 

@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
 #include "Broadcaster.h"
@@ -89,7 +90,7 @@ void Core::showUserVCardChanged( const User& u )
   if( !u.isLocal() )
   {
     sHtmlMsg += QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/profile.png", "*V*" ),
-                                        tr( "The %1's profile has been received." ).arg( u.name() ) );    
+                                        tr( "The %1's profile has been received." ).arg( u.name() ) );
   }
 
   if( u.isBirthDay() )
@@ -138,8 +139,42 @@ void Core::setLocalUserVCard( const VCard& vc )
   showUserVCardChanged( u );
 }
 
-void Core::createGroup( const QString& group_name, const QList<VNumber>& user_list )
+void Core::createGroup( const QString& group_name, const QList<VNumber>& group_members )
 {
-  Group g = Protocol::instance().createGroup( group_name, user_list );
+  Group g = Protocol::instance().createGroup( group_name, group_members );
   UserManager::instance().setGroup( g );
+
+  createGroupChat( g.name(), g.usersId(), g.privateId(), true );
+
+  emit updateGroup( g.id() );
+}
+
+void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& group_members )
+{
+  Group g = UserManager::instance().group( group_id );
+  if( !g.isValid() )
+    return;
+
+  g.setName( group_name );
+  g.setUsers( group_members );
+  UserManager::instance().setGroup( g );
+
+  emit updateGroup( g.id() );
+
+  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  if( !c.isValid() )
+  {
+    qWarning() << "Chat not found for group" << g.name();
+    return;
+  }
+
+  changeGroupChat( c.id(), group_name, group_members, true );
+}
+
+void Core::removeGroup( VNumber group_id )
+{
+  if( UserManager::instance().removeGroup( group_id ) )
+  {
+    emit updateGroup( group_id );
+  }
 }

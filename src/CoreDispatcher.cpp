@@ -33,7 +33,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   if( m.hasFlag( Message::Private ) )
     c = ChatManager::instance().privateChatForUser( from_user_id );
   else if( m.hasFlag( Message::GroupChat ) )
-    c = ChatManager::instance().groupChat( cmd.groupId() );
+    c = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
   else
     c = ChatManager::instance().defaultChat( false );
 

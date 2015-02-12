@@ -17,41 +17,43 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// $Id$
+// $Id: GuiCreateGroupChat.h 311 2015-02-09 17:36:50Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUICREATEGROUPCHAT_H
-#define BEEBEEP_GUICREATEGROUPCHAT_H
+#ifndef BEEBEEP_GUICREATEGROUP_H
+#define BEEBEEP_GUICREATEGROUP_H
 
-#include "ui_GuiCreateGroupChat.h"
+#include "ui_GuiCreateGroup.h"
 #include "Config.h"
-class Chat;
 
 
-class GuiCreateGroupChat : public QDialog, private Ui::GuiCreateGroupChat
+class GuiCreateGroup : public QDialog, private Ui::GuiCreateGroup
 {
-    Q_OBJECT
-    
-public:
-  explicit GuiCreateGroupChat( QWidget *parent = 0 );
+  Q_OBJECT
 
-  void setGroupChat( const Chat& );
-  inline const QList<VNumber>& groupUsersId() const;
-  inline const QString& groupName() const;
+public:
+  explicit GuiCreateGroup( QWidget *parent = 0 );
+
+  void init( const QString&, const QList<VNumber>& );
+  void loadData();
+
+  inline const QString& selectedName() const;
+  inline const QList<VNumber>& selectedUsersId() const;
 
 protected slots:
-  void updateGroupChat();
+  void checkAndClose();
 
 private:
-  QList<VNumber> m_groupUsersId;
-  QString m_groupName;
+  QString m_selectedName;
+  QList<VNumber> m_selectedUsersId;
 
 };
 
 
 // Inline Functions
-inline const QList<VNumber>& GuiCreateGroupChat::groupUsersId() const { return m_groupUsersId; }
-inline const QString& GuiCreateGroupChat::groupName() const { return m_groupName; }
+inline const QString& GuiCreateGroup::selectedName() const { return m_selectedName; }
+inline const QList<VNumber>& GuiCreateGroup::selectedUsersId() const { return m_selectedUsersId; }
 
-#endif // BEEBEEP_GUICREATEGROUPCHAT_H
+
+#endif // BEEBEEP_GUICREATEGROUP_H

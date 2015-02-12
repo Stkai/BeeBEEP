@@ -445,12 +445,21 @@ Group Protocol::createGroup( const QString& group_name, const QList<VNumber>& us
 {
   Group g;
   g.setId( newId() );
-  foreach( VNumber user_id, user_list )
-    g.addUser( user_id );
-  g.addUser( ID_LOCAL_USER );
   g.setName( group_name );
+  g.setUsers( user_list );
   g.setPrivateId( newMd5Id() );
   return g;
+}
+
+Message Protocol::groupChatRefuseMessage( const Chat& c )
+{
+  Message m( Message::Group, newId(), "" );
+  m.addFlag( Message::Refused );
+  ChatMessageData cmd;
+  cmd.setGroupId( c.privateId() );
+  cmd.setGroupName( c.name() );
+  m.setData( chatMessageDataToString( cmd ) );
+  return m;
 }
 
 Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )

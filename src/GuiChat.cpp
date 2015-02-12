@@ -52,6 +52,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   m_lastMessageUserId = 0;
   m_lastEmoticonSelected = ":)";
+  m_localUserIsMember = true;
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -92,20 +93,23 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
   bar->addSeparator();
-  mp_actCreateGroup = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupRequest() ) );
-  mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
   mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group chat" ), this, SIGNAL( editGroupRequest() ) );
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
-  bar->addSeparator();
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
   mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
+  mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
+  mp_actLeave->setStatusTip( tr( "Leave the group" ) );
+  bar->addSeparator();
+  mp_actCreateGroup = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupRequest() ) );
+  mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
 }
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
 {
-  mp_actSendFile->setEnabled( is_connected && connected_users > 0 );
+  mp_actSendFile->setEnabled( m_localUserIsMember && is_connected && connected_users > 0 );
   mp_actCreateGroup->setEnabled( is_connected && connected_users > 1 );
-  mp_actGroupAdd->setEnabled( is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
+  mp_actGroupAdd->setEnabled( m_localUserIsMember && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
+  mp_actLeave->setEnabled( m_localUserIsMember && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
 }
 
 void GuiChat::customContextMenu( const QPoint& p )
@@ -169,9 +173,12 @@ void GuiChat::updateUser( const User& u )
 void GuiChat::setChatUsers()
 {
   QString chat_users;
+  m_localUserIsMember = false;
+
   if( m_chatId == ID_DEFAULT_CHAT )
   {
     chat_users = tr( "All Lan Users" );
+    m_localUserIsMember = true;
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Chat users:" << m_users.toStringList( false, false).join( "," );
 #endif
@@ -181,7 +188,11 @@ void GuiChat::setChatUsers()
     QStringList sl;
     foreach( User u, m_users.toList() )
     {
-      if( !u.isLocal() )
+      if( u.isLocal() )
+      {
+        m_localUserIsMember = true;
+      }
+      else
       {
         if( u.isConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
@@ -192,6 +203,8 @@ void GuiChat::setChatUsers()
     chat_users = sl.size() == 0 ? tr( "Nobody" ) : sl.join( ", " );
   }
   mp_lTitle->setText( tr( "To" ) + QString( ": %1" ).arg( chat_users ) );
+
+  mp_teMessage->setEnabled( m_localUserIsMember );
 }
 
 bool GuiChat::setChatId( VNumber chat_id )
@@ -349,3 +362,7 @@ void GuiChat::clearChat()
   emit chatToClear( m_chatId );
 }
 
+void GuiChat::leaveThisGroup()
+{
+  emit leaveThisChat( m_chatId );
+}
