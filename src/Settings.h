@@ -40,6 +40,8 @@ public:
   inline bool trustNickname() const;
   inline bool trustSystemAccount() const;
 
+  inline const QDate& installationDate() const;
+
   QString version( bool ) const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
@@ -48,6 +50,7 @@ public:
   QString officialWebSite() const;
   QString pluginWebSite() const;
   QString checkVersionWebSite() const;
+  QString donationWebSite() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
@@ -280,6 +283,7 @@ private:
   QString m_localSubnetForced;
 
   bool m_firstTime;
+  QDate m_installationDate;
 
   bool m_minimizeInTray;
   bool m_loadOnTrayAtStartup;
@@ -417,5 +421,6 @@ inline bool Settings::pluginHasSettings( const QString& plugin_name ) const { re
 inline int Settings::dataStreamVersion( bool in_load_event ) const { return in_load_event ? m_dataStreamVersion : LAST_DATASTREAM_VERSION; }
 inline bool Settings::confirmOnDownloadFile() const { return m_confirmOnDownloadFile; }
 inline void Settings::setConfirmOnDownloadFile( bool new_value ) { m_confirmOnDownloadFile = new_value; }
+inline const QDate& Settings::installationDate() const { return m_installationDate; }
 
 #endif // BEEBEEP_SETTINGS_H

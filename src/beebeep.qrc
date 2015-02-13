@@ -98,5 +98,6 @@
         <file>images/group-remove.png</file>
         <file>images/user.png</file>
         <file>images/group-edit.png</file>
+        <file>images/donate.png</file>
     </qresource>
 </RCC>

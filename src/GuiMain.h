@@ -117,6 +117,7 @@ private slots:
   void checkNewVersion();
   void openWebSite();
   void openDownloadPluginPage();
+  void openDonationPage();
   void clearChat( VNumber );
   void checkGroup( VNumber );
   void checkChat( VNumber );

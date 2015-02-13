@@ -75,6 +75,11 @@ QString Settings::pluginWebSite() const
   return officialWebSite() + QString( BEEBEEP_PLUGIN_WEBSITE );
 }
 
+QString Settings::donationWebSite() const
+{
+  return officialWebSite() + QString( BEEBEEP_DONATE_WEBSITE );
+}
+
 QString Settings::checkVersionWebSite() const
 {
   QString os_type = "windows";
@@ -290,7 +295,7 @@ void Settings::loadPreConf()
     sets.setValue( "UseConfigurationFileIni", false );
 #else
     sets.setValue( "UseConfigurationFileIni", true );
-#endif   
+#endif
     sets.endGroup();
     sets.beginGroup( "Groups" );
     sets.setValue( "TrustNickname", true );
@@ -325,6 +330,9 @@ void Settings::load()
 
   sets->beginGroup( "Version" );
   m_dataStreamVersion = sets->value( "DataStream", (int)DATASTREAM_VERSION_1 ).toInt();
+  m_installationDate = sets->value( "BeeBANG", QDate() ).toDate();
+  if( m_installationDate.isNull() )
+    m_installationDate = QDate::currentDate();
   sets->endGroup();
 
   sets->beginGroup( "Chat" );
@@ -495,6 +503,7 @@ void Settings::save()
   sets->setValue( "Proto", protoVersion() );
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->setValue( "DataStream", (int)dataStreamVersion( false ) );
+  sets->setValue( "BeeBANG", m_installationDate );
   sets->endGroup();
   sets->beginGroup( "Chat" );
   sets->setValue( "Font", m_chatFont.toString() );

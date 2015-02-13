@@ -621,6 +621,10 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Open %1 website and check if a new version exists" ).arg( Settings::instance().programName() ) );
   act = mp_menuInfo->addAction( QIcon( ":/images/plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
   act->setStatusTip( tr( "Open %1 website and download your preferred plugin" ).arg( Settings::instance().programName() ) );
+  mp_menuInfo->addSeparator();
+  act = mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Please donate for %1 :-)" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
+  act->setStatusTip( tr( "I'm so grateful and pleased about that" ) );
+
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -635,12 +639,13 @@ void GuiMain::createToolAndMenuBars()
   QLabel *label_version = new QLabel( this );
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignCenter );
-  label_version->setText( QString( "&nbsp;<b>v %2</b>&nbsp;" )
+  QString label_version_text = QString( "&nbsp;<b>v %2</b>&nbsp;" )
 #ifdef BEEBEEP_DEBUG
-                            .arg( Settings::instance().version( true ) ) );
+                            .arg( Settings::instance().version( true ) );
 #else
-                            .arg( Settings::instance().version( false ) ) );
+                            .arg( Settings::instance().version( false ) );
 #endif
+  label_version->setText( label_version_text );
   menuBar()->setCornerWidget( label_version );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
@@ -1797,6 +1802,11 @@ void GuiMain::openWebSite()
 void GuiMain::openDownloadPluginPage()
 {
   openWebUrl( Settings::instance().pluginWebSite() );
+}
+
+void GuiMain::openDonationPage()
+{
+  openWebUrl( Settings::instance().donationWebSite() );
 }
 
 void GuiMain::setInIdle()
