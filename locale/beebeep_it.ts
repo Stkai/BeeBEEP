@@ -229,7 +229,7 @@
     </message>
     <message>
         <source>%1 Adding in group: %2.</source>
-        <translation>%1 Aggiunti al gruppo: %2.</translation>
+        <translation type="obsolete">%1 Aggiunti al gruppo: %2.</translation>
     </message>
     <message>
         <source>%1 cannot be invited to the group.</source>
@@ -278,6 +278,26 @@
     <message>
         <source>%1 is removed from file sharing</source>
         <translation>%1 è stato rimosso dalla condivisione in rete</translation>
+    </message>
+    <message>
+        <source>%1 Members removed from the group: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Members added to the group: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 cannot be informed that you have left the group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 You have left group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 has left group.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -547,6 +567,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>%1: save completed.</source>
         <translation>%1: salvataggio completato.</translation>
     </message>
+    <message>
+        <source>Leave the group</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -595,22 +619,66 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>GuiCreateGroupChat</name>
+    <name>GuiCreateGroup</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="unfinished">Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation type="unfinished">Annulla</translation>
+    </message>
+    <message>
+        <source>Group name</source>
+        <translation type="unfinished">Nome del gruppo</translation>
+    </message>
+    <message>
+        <source>Please add member in the group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Users</source>
+        <translation type="unfinished">Utenti</translation>
+    </message>
+    <message>
+        <source>Create Group - %1</source>
+        <translation type="unfinished">Crea Gruppo - %1</translation>
+    </message>
+    <message>
+        <source>Edit Group - %1</source>
+        <translation type="unfinished">Modifica Gruppo - %1</translation>
+    </message>
+    <message>
+        <source>Please select two or more member for the group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please insert a group name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 already exists as group name or chat name.
+Please select a different name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateGroupChat</name>
+    <message>
+        <source>Ok</source>
+        <translation type="obsolete">Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Annulla</translation>
     </message>
     <message>
         <source>Please add or remove member in the group chat:</source>
@@ -618,31 +686,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Users</source>
-        <translation>Utenti</translation>
+        <translation type="obsolete">Utenti</translation>
     </message>
     <message>
         <source>Edit Group - %1</source>
-        <translation>Modifica Gruppo - %1</translation>
+        <translation type="obsolete">Modifica Gruppo - %1</translation>
     </message>
     <message>
         <source>Create Group - %1</source>
-        <translation>Crea Gruppo - %1</translation>
+        <translation type="obsolete">Crea Gruppo - %1</translation>
     </message>
     <message>
         <source>Please select two or more member of the group chat.</source>
-        <translation>Seleziona due o più membri per formare un gruppo.</translation>
+        <translation type="obsolete">Seleziona due o più membri per formare un gruppo.</translation>
     </message>
     <message>
         <source>Group name</source>
-        <translation>Nome del gruppo</translation>
+        <translation type="obsolete">Nome del gruppo</translation>
     </message>
     <message>
         <source>Please add member in the group chat:</source>
-        <translation>Aggiungi dei membri alla chat di gruppo:</translation>
+        <translation type="obsolete">Aggiungi dei membri alla chat di gruppo:</translation>
     </message>
     <message>
         <source>Please select different group name.</source>
-        <translation>Seleziona un differente nome del gruppo.</translation>
+        <translation type="obsolete">Seleziona un differente nome del gruppo.</translation>
     </message>
 </context>
 <context>
@@ -666,6 +734,25 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Profile - %1</source>
         <translation>Profilo - %1</translation>
+    </message>
+</context>
+<context>
+    <name>GuiGroupList</name>
+    <message>
+        <source>Create group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open chat</source>
+        <translation type="unfinished">Apri la conversazione</translation>
+    </message>
+    <message>
+        <source>Waiting for two or more connected user</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1045,11 +1132,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show online users and active chats</source>
-        <translation>Mostra gli utenti connessi</translation>
+        <translation type="obsolete">Mostra gli utenti connessi</translation>
     </message>
     <message>
         <source>Show the list of the connected users and the active chats</source>
-        <translation>Mostra la liste degli utenti connessi e le relative conversazioni attive</translation>
+        <translation type="obsolete">Mostra la liste degli utenti connessi e le relative conversazioni attive</translation>
     </message>
     <message>
         <source>File Transfers</source>
@@ -1462,7 +1549,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Impossibile to add users in this chat. Please select a group one.</source>
-        <translation>Impossibile aggiungee utenti a questa conversazione. Seleziona prima una chat di gruppo.</translation>
+        <translation type="obsolete">Impossibile aggiungee utenti a questa conversazione. Seleziona prima una chat di gruppo.</translation>
     </message>
     <message>
         <source>Raise on new message arrived</source>
@@ -1691,6 +1778,50 @@ il file %2 (%3)?</translation>
     <message>
         <source>Yes and delete history</source>
         <translation>Si e cancella la storia</translation>
+    </message>
+    <message>
+        <source>Please donate for %1 :-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I&apos;m so grateful and pleased about that</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show online users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the list of the connected users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show your groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the list of your groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to add users in this chat. Please select a group one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is a your group. You can not leave the chat.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete this group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot leave this chat.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2808,6 +2939,17 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
 </context>
 <context>
+    <name>RegularBoldTextMarker</name>
+    <message>
+        <source>Regular Bold Text Marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to format your message with words in regular and bold font write a [text to format] .</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TetrisBoard</name>
     <message>
         <source>Pause</source>
@@ -2942,6 +3084,66 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
         <translation>Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL FrecciaGiù.</translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin) </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

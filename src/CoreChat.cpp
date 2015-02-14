@@ -306,6 +306,17 @@ void Core::sendWritingMessage( VNumber chat_id )
   }
 }
 
+void Core::showAllTipOfTheDay()
+{
+  QString tip_of_the_day;
+  for( int i = 0; i < BeeBeepTipsSize; i++ )
+  {
+    tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),
+                                                   qApp->translate( "Tips", BeeBeepTips[ i ] ) );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
+  }
+}
+
 void Core::showTipOfTheDay()
 {
   QString tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),

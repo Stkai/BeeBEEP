@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_TIPS_H
 #define BEEBEEP_TIPS_H
 
-const int BeeBeepTipsSize = 26;
+const int BeeBeepTipsSize = 41;
 
 static const char* BeeBeepTips[ BeeBeepTipsSize ] =
 {
@@ -60,7 +60,26 @@ static const char* BeeBeepTips[ BeeBeepTipsSize ] =
   QT_TRANSLATE_NOOP( "Tips", "<i>Okay, Houston, we've had a problem here.</i> (John L. Swigert)" ),
   QT_TRANSLATE_NOOP( "Tips", "<i>Second star to the right, and straight on till morning.</i> (Peter Pan)" ),
   /* 25 */
-  QT_TRANSLATE_NOOP( "Tips", "You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys." )
+  QT_TRANSLATE_NOOP( "Tips", "You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys." ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Necessity is the last and strongest weapon.</i> (Titus Livius)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Old-aged people are not wise, they are simply careful.</i> (Ernest Hemingway)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>A journey of a thousand miles begins with a single step.</i> (Confucius)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Life without the courage for death is slavery.</i> (Lucius Annaeus Seneca)" ),
+  /* 30 */
+  QT_TRANSLATE_NOOP( "Tips", "<i>I can calculate the motion of heavenly bodies, but not the madness of people.</i> (Isaac Newton)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Wonder is the beginning of wisdom.</i> (Socrates)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>No wise man ever wished to be younger.</i> (Jonathan Swift)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>The only man who never makes a mistake is the man who never does anything.</i> (Theodore Roosevelt)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Attitude is a little thing that makes a big difference.</i> (Winston Churchill)" ),
+  /* 35 */
+  QT_TRANSLATE_NOOP( "Tips", "<i>We become what we think.</i> (Buddha)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Difficulties are things that show a person what they are.</i> (Epictetus)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>Who will guard the guards themselves?</i> (Decimus Junius Juvenal)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>A home without books is a body without soul.</i> (Marcus Tullius Cicero)" ),
+  QT_TRANSLATE_NOOP( "Tips", "<i>We can not stop wishing our wishes.</i> (Arthur Schopenhauer)" ),
+  /* 40 */
+  QT_TRANSLATE_NOOP( "Tips", "<i>Patience is also a form of action.</i> (Auguste Rodin) " )
+
 };
 
 #endif // BEEBEEP_TIPS_H
