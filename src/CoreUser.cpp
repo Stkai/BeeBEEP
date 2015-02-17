@@ -142,12 +142,16 @@ void Core::setLocalUserVCard( const VCard& vc )
 void Core::createGroup( const QString& group_name, const QList<VNumber>& group_members )
 {
   Group g = Protocol::instance().createGroup( group_name, group_members );
+  addGroup( g );
+}
+
+void Core::addGroup( const Group& g )
+{
   UserManager::instance().setGroup( g );
-
   createGroupChat( g.name(), g.usersId(), g.privateId(), true );
-
   emit updateGroup( g.id() );
 }
+
 
 void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& group_members )
 {
@@ -177,4 +181,32 @@ void Core::removeGroup( VNumber group_id )
   {
     emit updateGroup( group_id );
   }
+}
+
+void Core::loadGroups()
+{
+  QStringList group_list = Settings::instance().groupList();
+  if( group_list.isEmpty() )
+    return;
+
+  Group g;
+  foreach( QString group_data, group_list )
+  {
+    g = Protocol::instance().loadGroup( group_data );
+    if( g.isValid() )
+      addGroup( g );
+  }
+}
+
+void Core::saveGroups()
+{
+  QStringList group_save_data;
+  if( !UserManager::instance().groups().isEmpty() )
+  {
+    foreach( Group g, UserManager::instance().groups() )
+    {
+      group_save_data.append( Protocol::instance().saveGroup( g ) );
+    }
+  }
+  Settings::instance().setGroupList( group_save_data );
 }

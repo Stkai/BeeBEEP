@@ -40,7 +40,7 @@ public:
   inline bool trustNickname() const;
   inline bool trustSystemAccount() const;
 
-  inline const QDate& installationDate() const;
+  inline const QDate& settingsCreationDate() const;
 
   QString version( bool ) const;
   int protoVersion() const;
@@ -192,6 +192,9 @@ public:
   void removeStartOnSystemBoot();
   bool hasStartOnSystemBoot() const;
 
+  inline void setGroupList( const QStringList& );
+  inline const QStringList& groupList() const;
+
   void loadPreConf();
   void clearNativeSettings();
   void load();
@@ -283,7 +286,7 @@ private:
   QString m_localSubnetForced;
 
   bool m_firstTime;
-  QDate m_installationDate;
+  QDate m_settingsCreationDate;
 
   bool m_minimizeInTray;
   bool m_loadOnTrayAtStartup;
@@ -307,6 +310,8 @@ private:
   int m_dataStreamVersion;
 
   bool m_confirmOnDownloadFile;
+
+  QStringList m_groupList;
 
 };
 
@@ -421,6 +426,8 @@ inline bool Settings::pluginHasSettings( const QString& plugin_name ) const { re
 inline int Settings::dataStreamVersion( bool in_load_event ) const { return in_load_event ? m_dataStreamVersion : LAST_DATASTREAM_VERSION; }
 inline bool Settings::confirmOnDownloadFile() const { return m_confirmOnDownloadFile; }
 inline void Settings::setConfirmOnDownloadFile( bool new_value ) { m_confirmOnDownloadFile = new_value; }
-inline const QDate& Settings::installationDate() const { return m_installationDate; }
+inline const QDate& Settings::settingsCreationDate() const { return m_settingsCreationDate; }
+inline void Settings::setGroupList( const QStringList& new_value ) { m_groupList = new_value; }
+inline const QStringList& Settings::groupList() const { return m_groupList; }
 
 #endif // BEEBEEP_SETTINGS_H

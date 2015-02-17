@@ -1160,7 +1160,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
     if( !ok )
       return false;
 
-    user_selected = UserManager::instance().userList().find( user_path );
+    user_selected = UserManager::instance().findUserByPath( user_path );
 
     if( !user_selected.isValid() )
     {
@@ -1705,10 +1705,12 @@ void GuiMain::loadSession()
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   mp_shareLocal->updatePaths();
   QTimer::singleShot( 2000, mp_core, SLOT( buildLocalShareList() ) );
+  mp_core->loadGroups();
 }
 
 void GuiMain::saveSession()
 {
+  mp_core->saveGroups();
   SaveChatList scl;
   scl.save();
 }

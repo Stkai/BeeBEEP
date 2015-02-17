@@ -28,6 +28,7 @@
 #include "Listener.h"
 #include "FileTransfer.h"
 class Broadcaster;
+class Group;
 class UserList;
 
 
@@ -53,6 +54,9 @@ public:
   void createGroup( const QString&, const QList<VNumber>& );
   void changeGroup( VNumber, const QString&, const QList<VNumber>& );
   void removeGroup( VNumber );
+
+  void loadGroups();
+  void saveGroups();
 
   /* CoreChat */
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
@@ -139,6 +143,7 @@ protected:
   void showUserNameChanged( const User&, const QString& );
   void showUserVCardChanged( const User& );
   void sendLocalUserStatus();
+  void addGroup( const Group& );
 
   /* CoreChat */
   void createDefaultChat();

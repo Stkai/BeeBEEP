@@ -185,7 +185,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
     foreach( QString user_path, user_paths )
     {
-      User user_tmp = UserManager::instance().userList().find( user_path );
+      User user_tmp = UserManager::instance().findUserByPath( user_path );
       if( user_tmp.isValid() )
       {
         if( !user_tmp.isLocal() )
@@ -194,7 +194,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       else
       {
         qWarning() << "User" << user_path << "is request for group chat and it is not found in list";
-        user_tmp = Protocol::instance().createTemporaryUser( user_path );
+        user_tmp = Protocol::instance().createTemporaryUser( user_path, "" );
         if( user_tmp.isValid() )
         {
           qDebug() << "Connecting to the new user" << user_path;

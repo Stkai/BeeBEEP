@@ -171,7 +171,10 @@ void Core::checkUserAuthentication( const Message& m )
   }
 
   bool user_reconnect = false;
-  User user_found = UserManager::instance().userList().find( u.path() );
+  User user_found = UserManager::instance().findUserByPath( u.path() );
+  if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
+    user_found = UserManager::instance().findUserByAccountName( u.accountName() );
+
   if( user_found.isValid() )
   {
     u.setId( user_found.id() );

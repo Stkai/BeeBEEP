@@ -73,23 +73,6 @@ User UserList::find( VNumber user_id ) const
   return User();
 }
 
-User UserList::find( const QString& user_path ) const
-{
-  if( user_path == Settings::instance().localUser().path() )
-    return Settings::instance().localUser();
-  QList<User>::const_iterator it = m_users.begin();
-  while( it != m_users.end() )
-  {
-    if( user_path == (*it).path() )
-      return *it;
-    ++it;
-  }
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with path" << user_path;
-#endif
-  return User();
-}
-
 void UserList::set( const User& u )
 {
   QList<User>::iterator it = m_users.begin();

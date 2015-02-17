@@ -37,7 +37,6 @@ public:
 
   bool has( VNumber ) const;
   User find( VNumber ) const;
-  User find( const QString& user_path ) const;
 
   void set( const User& );
   void set( const UserList& );

@@ -37,6 +37,8 @@ public:
   void setUser( const User& );
   inline bool removeUser( const User& );
   inline const UserList& userList() const;
+  User findUserByPath( const QString& ) const;
+  User findUserByAccountName( const QString& ) const;
 
   inline const QList<Group>& groups() const;
   void setGroup( const Group& );
@@ -44,6 +46,9 @@ public:
   bool hasGroupName( const QString& ) const;
   Group findGroupByPrivateId( const QString& ) const;
   bool removeGroup( VNumber );
+
+  QStringList saveGroups();
+  int loadGroups( const QStringList& );
 
   static UserManager& instance()
   {

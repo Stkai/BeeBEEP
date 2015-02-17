@@ -330,9 +330,9 @@ void Settings::load()
 
   sets->beginGroup( "Version" );
   m_dataStreamVersion = sets->value( "DataStream", (int)DATASTREAM_VERSION_1 ).toInt();
-  m_installationDate = sets->value( "BeeBANG", QDate() ).toDate();
-  if( m_installationDate.isNull() )
-    m_installationDate = QDate::currentDate();
+  m_settingsCreationDate = sets->value( "BeeBang", QDate() ).toDate();
+  if( m_settingsCreationDate.isNull() )
+    m_settingsCreationDate = QDate::currentDate();
   sets->endGroup();
 
   sets->beginGroup( "Chat" );
@@ -460,6 +460,10 @@ void Settings::load()
     m_localShare = local_share;
   sets->endGroup();
 
+  sets->beginGroup( "Group" );
+  m_groupList = sets->value( "List", QStringList() ).toStringList();
+  sets->endGroup();
+
   sets->beginGroup( "Plugin" );
   QStringList key_list = sets->value( "List", QStringList() ).toStringList();
   if( !key_list.isEmpty() )
@@ -503,7 +507,7 @@ void Settings::save()
   sets->setValue( "Proto", protoVersion() );
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->setValue( "DataStream", (int)dataStreamVersion( false ) );
-  sets->setValue( "BeeBANG", m_installationDate );
+  sets->setValue( "BeeBang", m_settingsCreationDate );
   sets->endGroup();
   sets->beginGroup( "Chat" );
   sets->setValue( "Font", m_chatFont.toString() );
@@ -597,6 +601,13 @@ void Settings::save()
   sets->setValue( "MaxFileShared", m_maxFileShared );
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();
+
+  if( !m_groupList.isEmpty() )
+  {
+    sets->beginGroup( "Group" );
+    sets->setValue( "List", m_groupList );
+    sets->endGroup();
+  }
 
   if( !m_pluginSettings.isEmpty() )
   {

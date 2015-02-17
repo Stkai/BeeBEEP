@@ -80,3 +80,12 @@ QString User::nameFromPath( const QString& user_path )
   else
     return QString();
 }
+
+QString User::hostAddressAndPortFromPath( const QString& user_path )
+{
+  QStringList sl = user_path.split( "@" );
+  if( sl.size() < 2 )
+    return QString();
+  else
+    return sl.last();
+}

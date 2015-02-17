@@ -94,3 +94,68 @@ bool UserManager::removeGroup( VNumber group_id )
   else
     return false;
 }
+
+User UserManager::findUserByPath( const QString& user_path ) const
+{
+  if( user_path == Settings::instance().localUser().path() )
+    return Settings::instance().localUser();
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.path() == user_path )
+      return u;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find user with path" << user_path;
+#endif
+
+  QString host_and_port = User::hostAddressAndPortFromPath( user_path );
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.hostAddressAndPort() == host_and_port )
+      return u;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find user with host and port" << host_and_port;
+#endif
+
+  if( Settings::instance().trustNickname() )
+  {
+    QString user_nickname = User::nameFromPath( user_path );
+
+    foreach( User u, m_users.toList() )
+    {
+      if( u.name() == user_nickname )
+        return u;
+    }
+
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Unable to find user with name" << user_nickname;
+#endif
+
+  }
+
+  return User();
+}
+
+User UserManager::findUserByAccountName( const QString& user_account_name ) const
+{
+  if( user_account_name == Settings::instance().localUser().accountName() )
+    return Settings::instance().localUser();
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.accountName() == user_account_name )
+      return u;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find user with account name" << user_account_name;
+#endif
+
+  return User();
+}
+

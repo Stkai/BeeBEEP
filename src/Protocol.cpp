@@ -392,7 +392,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   return u;
 }
 
-User Protocol::createTemporaryUser( const QString& user_path )
+User Protocol::createTemporaryUser( const QString& user_path, const QString& account_name )
 {
   User u;
   QString user_name = User::nameFromPath( user_path );
@@ -426,6 +426,10 @@ User Protocol::createTemporaryUser( const QString& user_path )
 
   u.setStatus( User::Offline );
   u.setId( newId() );
+
+  if( !account_name.isEmpty() )
+    u.setAccountName( account_name );
+
   return u;
 }
 
@@ -449,6 +453,80 @@ Group Protocol::createGroup( const QString& group_name, const QList<VNumber>& us
   g.setUsers( user_list );
   g.setPrivateId( newMd5Id() );
   return g;
+}
+
+QString Protocol::saveGroup( const Group& g ) const
+{
+  QStringList sl;
+  sl << g.name();
+  sl << g.privateId();
+
+  UserList ul = UserManager::instance().userList().fromUsersId( g.usersId() );
+  ul.remove( Settings::instance().localUser() );
+  sl << QString::number( ul.toList().size() );
+
+  foreach( User u, ul.toList() )
+  {
+    sl << u.path();
+    sl << u.accountName();
+  }
+
+  return sl.join( DATA_FIELD_SEPARATOR );
+}
+
+Group Protocol::loadGroup( const QString& group_data_saved )
+{
+  QStringList sl = group_data_saved.split( DATA_FIELD_SEPARATOR );
+  if( sl.size() < 5 )
+    return Group();
+
+  Group g;
+  g.setId( newId() );
+  g.setName( sl.first() );
+  sl.removeFirst();
+  g.setPrivateId( sl.first() );
+  sl.removeFirst();
+  bool ok = false;
+  int members = sl.first().toInt( &ok );
+  if( !ok )
+    return Group();
+  sl.removeFirst();
+
+  UserList member_list;
+  QString user_path;
+  QString user_account_name;
+  User user_found;
+
+  member_list.set( Settings::instance().localUser() );
+
+  for( int i = 0; i < members; i++ )
+  {
+    if( sl.size() >= 2 )
+    {
+      user_path = sl.first();
+      sl.removeFirst();
+      user_account_name = sl.first();
+      sl.removeFirst();
+      user_found = UserManager::instance().findUserByPath( user_path );
+      if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
+        user_found = UserManager::instance().findUserByAccountName( user_account_name );
+
+      if( !user_found.isValid() )
+        user_found = createTemporaryUser( user_path, user_account_name );
+
+      if( user_found.isValid() )
+        UserManager::instance().setUser( user_found );
+      else
+        return Group();
+
+      member_list.set( user_found );
+    }
+  }
+
+  g.setUsers( member_list.toUsersId() );
+
+  return g;
+
 }
 
 Message Protocol::groupChatRefuseMessage( const Chat& c )
