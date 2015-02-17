@@ -52,7 +52,6 @@ GuiChat::GuiChat( QWidget *parent )
 
   m_lastMessageUserId = 0;
   m_lastEmoticonSelected = ":)";
-  m_localUserIsMember = true;
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -106,10 +105,11 @@ void GuiChat::setupToolBar( QToolBar* bar )
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
 {
-  mp_actSendFile->setEnabled( m_localUserIsMember && is_connected && connected_users > 0 );
+  bool local_user_is_member = isActiveUser( Settings::instance().localUser() );
+  mp_actSendFile->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
   mp_actCreateGroup->setEnabled( is_connected && connected_users > 1 );
-  mp_actGroupAdd->setEnabled( m_localUserIsMember && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
-  mp_actLeave->setEnabled( m_localUserIsMember && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
+  mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
+  mp_actLeave->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
 }
 
 void GuiChat::customContextMenu( const QPoint& p )
@@ -155,56 +155,78 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
   }
   else
   {
-    s = GuiChatMessage::formatMessage( m_users.find( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0 );
+    s = GuiChatMessage::formatMessage( findUser( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0 );
     m_lastMessageUserId = cm.userId();
   }
   return s;
 }
 
+User GuiChat::findUser( VNumber user_id )
+{
+  User u = m_chatUsers.find( user_id );
+  if( u.isValid() )
+    return u;
+
+  u = UserManager::instance().userList().find( user_id );
+  if( u.isValid() )
+    m_chatUsers.set( u );
+
+  return u;
+}
+
 void GuiChat::updateUser( const User& u )
 {
-  if( m_users.find( u.id() ).isValid() )
+  if( m_chatUsers.find( u.id() ).isValid() )
   {
-    m_users.set( u );
+    m_chatUsers.set( u );
     setChatUsers();
   }
+}
+
+bool GuiChat::isActiveUser( const User& u ) const
+{
+  Chat c = ChatManager::instance().chat( m_chatId );
+  return c.isValid() && c.usersId().contains( u.id() );
 }
 
 void GuiChat::setChatUsers()
 {
   QString chat_users;
-  m_localUserIsMember = false;
 
   if( m_chatId == ID_DEFAULT_CHAT )
   {
     chat_users = tr( "All Lan Users" );
-    m_localUserIsMember = true;
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Chat users:" << m_users.toStringList( false, false).join( "," );
+    qDebug() << "Chat all users:" << m_chatUsers.toStringList( false, false ).join( "," );
 #endif
   }
   else
   {
     QStringList sl;
-    foreach( User u, m_users.toList() )
+    foreach( User u, m_chatUsers.toList() )
     {
       if( u.isLocal() )
       {
-        m_localUserIsMember = true;
+        if( !isActiveUser( u ) )
+          sl.append( tr( "(You have left)" ) );
+        else
+          sl.append( QString( "<b>%1</b>" ).arg( tr( "You" ) ) );
       }
       else
       {
-        if( u.isConnected() )
+        if( !isActiveUser( u ) )
+          sl.append( QString( "(%1 has left)" ).arg( u.name() ) );
+        else if( u.isConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
         else
           sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
       }
     }
-    chat_users = sl.size() == 0 ? tr( "Nobody" ) : sl.join( ", " );
+    chat_users = sl.size() == 0 ? tr( "Nobody" ) : (sl.size() == 2 ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ));
   }
-  mp_lTitle->setText( tr( "To" ) + QString( ": %1" ).arg( chat_users ) );
 
-  mp_teMessage->setEnabled( m_localUserIsMember );
+  mp_lTitle->setText( tr( "To" ) + QString( ": %1" ).arg( chat_users ) );
+  mp_teMessage->setEnabled( isActiveUser( Settings::instance().localUser() ) );
 }
 
 bool GuiChat::setChatId( VNumber chat_id )
@@ -220,9 +242,7 @@ bool GuiChat::setChatId( VNumber chat_id )
 
   mp_actClear->setDisabled( c.isEmpty() );
 
-  m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
-
-  setChatUsers();
+  m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
 
   QString html_text = "";
 
@@ -239,7 +259,10 @@ bool GuiChat::setChatId( VNumber chat_id )
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   if( bar )
     bar->setValue( bar->maximum() );
+
   setLastMessageTimestamp( c.lastMessageTimestamp() );
+  setChatUsers();
+
   mp_teMessage->setFocus();
   return true;
 }
@@ -259,14 +282,14 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   mp_actClear->setDisabled( c.isEmpty() );
 
-  User u = m_users.find( cm.userId() );
+  User u = m_chatUsers.find( cm.userId() );
   if( !u.isValid() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "User" << cm.userId() << "is not present in current chat" << m_chatId << "... force update";
 #endif
-    m_users = UserManager::instance().userList().fromUsersId( c.usersId() );
-    u = m_users.find( cm.userId() );
+    m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
+    u = m_chatUsers.find( cm.userId() );
     if( !u.isValid() )
     {
       qWarning() << "User" << cm.userId() << "is not present in current chat" << m_chatId << "... message is not shown";

@@ -292,11 +292,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 You have left group.</source>
+        <source>%1 You have left the group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 %2 has left group.</source>
+        <source>%1 %2 has left the group.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -571,6 +571,18 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Leave the group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>(You have left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation type="unfinished">Tu</translation>
+    </message>
+    <message>
+        <source>and</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -752,6 +764,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Waiting for two or more connected user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1821,6 +1837,10 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>You cannot leave this chat.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

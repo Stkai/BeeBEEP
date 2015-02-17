@@ -75,6 +75,7 @@ User UserList::find( VNumber user_id ) const
 
 void UserList::set( const User& u )
 {
+  bool user_found = false;
   QList<User>::iterator it = m_users.begin();
   while( it != m_users.end() )
   {
@@ -84,11 +85,15 @@ void UserList::set( const User& u )
 #ifdef BEEBEEP_DEBUG
       qDebug() << "User" << u.id() << "modified";
 #endif
-      return;
+      user_found = true;
+      break;
     }
     ++it;
   }
-  m_users.append( u );
+  if( !user_found )
+    m_users.append( u );
+
+  qSort( m_users );
 }
 
 QStringList UserList::toStringList( bool only_user_name, bool only_connected ) const

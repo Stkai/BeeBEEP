@@ -89,3 +89,12 @@ QString User::hostAddressAndPortFromPath( const QString& user_path )
   else
     return sl.last();
 }
+
+bool User::operator<( const User& u ) const
+{
+  if( u.isLocal() )
+    return false;
+  if( isLocal() )
+    return true;
+  return u.name() < name();
+}

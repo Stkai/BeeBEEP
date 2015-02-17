@@ -72,7 +72,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
 
   QString user_version = "";
   if( u.version().isEmpty() )
-    user_version = tr( "use old version" ).arg( u.version() );
+    user_version = tr( "use old version" );
   else if( u.version() < Settings::instance().version( false ) )
     user_version = tr( "use old %1" ).arg( u.version() );
   else if( u.version() > Settings::instance().version( false ) )

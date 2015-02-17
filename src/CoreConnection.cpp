@@ -186,13 +186,15 @@ void Core::checkUserAuthentication( const Message& m )
   {
     u.setColor( ColorManager::instance().unselectedQString() );
     qDebug() << "New user connected:" << u.path() << "with color" << u.color();
-    createPrivateChat( u );
   }
 
   qDebug() << "Adding user" << u.path() << "to default chat";
   Chat default_chat = ChatManager::instance().defaultChat( false );
   if( default_chat.addUser( u.id() ) )
     ChatManager::instance().setChat( default_chat );
+
+  if( !ChatManager::instance().privateChatForUser( u.id() ).isValid() )
+    createPrivateChat( u );
 
   c->setReadyForUse( u.id() );
   addConnectionReadyForUse( c );

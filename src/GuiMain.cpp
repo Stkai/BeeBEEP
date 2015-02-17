@@ -131,6 +131,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroup( VNumber ) ) );
   connect( mp_groupList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
+  connect( mp_groupList, SIGNAL( removeGroupRequest( VNumber ) ), this, SLOT( removeGroup( VNumber ) ) );
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
@@ -824,6 +825,7 @@ void GuiMain::checkUser( const User& u )
 #endif
   mp_userList->setUser( u );
   mp_chat->updateUser( u );
+  mp_groupList->updateUser( u );
   if( mp_stackedWidget->currentWidget() == mp_chat )
     mp_chat->reloadChat();
   checkViewActions();
@@ -1285,7 +1287,10 @@ void GuiMain::showCurrentChat()
 void GuiMain::showChat( VNumber chat_id )
 {
   if( chat_id == ID_INVALID )
+  {
+    qWarning() << "Unable to show an invalid chat";
     return;
+  }
 
   if( mp_chat->setChatId( chat_id ) )
   {
@@ -1914,8 +1919,16 @@ void GuiMain::checkGroup( VNumber group_id )
 void GuiMain::checkChat( VNumber chat_id )
 {
   mp_chatList->updateChat( chat_id );
+  mp_savedChatList->updateSavedChats();
+
   if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-    mp_chat->reloadChat();
+  {
+    Chat c = ChatManager::instance().chat( chat_id );
+    if( c.isValid() )
+      mp_chat->reloadChat();
+    else
+      showChat( ID_DEFAULT_CHAT );
+  }
 }
 
 void GuiMain::leaveGroupChat( VNumber chat_id )
@@ -1936,9 +1949,20 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
 
   if( !mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
     QMessageBox::warning( this, Settings::instance().programName(), tr( "You cannot leave this chat." ) );
+  else
+    mp_chat->updateUser( Settings::instance().localUser() );
 }
 
 void GuiMain::removeGroup( VNumber group_id )
 {
-  mp_core->removeGroup( group_id );
+  Group g = UserManager::instance().group( group_id );
+  if( g.isValid() )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "Do you really want to delete group '%1'?" ).arg( g.name() ),
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
+    {
+      mp_core->removeGroup( group_id );
+    }
+  }
 }

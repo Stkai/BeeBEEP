@@ -38,18 +38,21 @@ public:
 
   void loadGroups();
   void updateGroup( VNumber );
+  void updateUser( const User& );
 
 signals:
   void openChatForGroupRequest( VNumber group_id );
   void createGroupRequest();
   void editGroupRequest( VNumber );
   void showVCardRequest( VNumber );
+  void removeGroupRequest( VNumber );
 
 protected slots:
   void showGroupMenu( const QPoint& );
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
   void openGroupChatSelected();
   void editGroupSelected();
+  void removeGroupSelected();
 
 private:
   GuiGroupItem* itemFromId( VNumber );
@@ -57,8 +60,10 @@ private:
   QAction* mp_actCreateGroup;
   QAction* mp_actEditGroup;
   QAction* mp_actOpenChat;
+  QAction* mp_actRemoveGroup;
 
   VNumber m_selectedGroupId;
+  VNumber m_selectedChatId;
 
 };
 

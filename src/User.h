@@ -71,6 +71,8 @@ public:
   static QString nameFromPath( const QString& );
   static QString hostAddressAndPortFromPath( const QString& );
 
+  bool operator<( const User& ) const;
+
 private:
   VNumber m_id;
   VCard m_vCard;

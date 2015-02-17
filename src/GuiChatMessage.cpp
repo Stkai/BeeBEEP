@@ -163,6 +163,8 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
   else
     chat_users = UserManager::instance().userList().fromUsersId( c.usersId() );
 
+  User u;
+
   foreach( ChatMessage cm, c.messages() )
   {
     if( cm.isSystem() )
@@ -175,7 +177,14 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
     }
     else
     {
-      html_text += formatMessage( chat_users.find( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? last_message_user_id : 0 );
+      u = chat_users.find( cm.userId() );
+      if( !u.isValid() )
+      {
+        u = UserManager::instance().userList().find( cm.userId() );
+        chat_users.set( u );
+      }
+
+      html_text += formatMessage( u, cm, Settings::instance().showMessagesGroupByUser() ? last_message_user_id : 0 );
       last_message_user_id = cm.userId();
     }
   }

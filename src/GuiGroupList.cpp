@@ -33,7 +33,7 @@ GuiGroupList::GuiGroupList( QWidget* parent )
 
   setColumnCount( 1 );
   header()->hide();
-  setRootIsDecorated( false );
+  setRootIsDecorated( true );
   setSortingEnabled( true );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
@@ -49,6 +49,10 @@ GuiGroupList::GuiGroupList( QWidget* parent )
 
   mp_actOpenChat = new QAction( QIcon( ":/images/chat.png" ), tr( "Open chat" ), this );
   connect( mp_actOpenChat, SIGNAL( triggered() ), this, SLOT( openGroupChatSelected() ) );
+
+  mp_actRemoveGroup = new QAction( QIcon( ":/images/group-remove.png" ), tr( "Delete group" ), this );
+  connect( mp_actRemoveGroup, SIGNAL( triggered() ), this, SLOT( removeGroupSelected() ) );
+
 
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
@@ -67,7 +71,7 @@ void GuiGroupList::loadGroups()
   foreach( Group g, UserManager::instance().groups() )
   {
     GuiGroupItem* group_item = new GuiGroupItem( this );
-    group_item->init( g.id(), 0, true );
+    group_item->init( g.id(), ChatManager::instance().findGroupChatByPrivateId( g.privateId() ).id(), true );
     group_item->updateGroup( g );
   }
 }
@@ -78,11 +82,13 @@ void GuiGroupList::updateGroup( VNumber group_id )
   if( !g.isValid() )
     return;
 
+  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+
   GuiGroupItem* group_item = itemFromId( group_id );
   if( !group_item )
   {
     group_item = new GuiGroupItem( this );
-    group_item->init( g.id(), ID_INVALID, true );
+    group_item->init( g.id(), c.id(), true );
   }
   group_item->updateGroup( g );
 }
@@ -108,7 +114,7 @@ void GuiGroupList::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 
   GuiGroupItem* group_item = (GuiGroupItem*)item;
   if( group_item->isGroup() )
-    emit openChatForGroupRequest( group_item->itemId() );
+    emit openChatForGroupRequest( group_item->chatId() );
 }
 
 void GuiGroupList::showGroupMenu( const QPoint& p )
@@ -130,11 +136,14 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   if( group_item->isGroup() )
   {
     m_selectedGroupId = group_item->itemId();
+    m_selectedChatId = group_item->chatId();
     QMenu menu;
     menu.addAction( mp_actOpenChat );
     menu.setDefaultAction( mp_actOpenChat );
     menu.addSeparator();
     menu.addAction( mp_actEditGroup );
+    menu.addSeparator();
+    menu.addAction( mp_actRemoveGroup );
     menu.exec( QCursor::pos() );
   }
   else
@@ -145,10 +154,10 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
 
 void GuiGroupList::openGroupChatSelected()
 {
-  if( m_selectedGroupId != ID_INVALID )
+  if( m_selectedChatId != ID_INVALID )
   {
-    emit openChatForGroupRequest( m_selectedGroupId );
-    m_selectedGroupId = ID_INVALID;
+    emit openChatForGroupRequest( m_selectedChatId );
+    m_selectedChatId = ID_INVALID;
   }
 }
 
@@ -158,5 +167,27 @@ void GuiGroupList::editGroupSelected()
   {
     emit editGroupRequest( m_selectedGroupId );
     m_selectedGroupId = ID_INVALID;
+  }
+}
+
+void GuiGroupList::removeGroupSelected()
+{
+  if( m_selectedGroupId != ID_INVALID )
+  {
+    emit removeGroupRequest( m_selectedGroupId );
+    m_selectedGroupId = ID_INVALID;
+  }
+}
+
+void GuiGroupList::updateUser( const User& u )
+{
+  GuiGroupItem* item;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    item = (GuiGroupItem*)(*it);
+    if( item->itemId() == u.id() )
+      item->updateUser( u );
+    ++it;
   }
 }

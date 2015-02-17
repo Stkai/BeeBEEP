@@ -64,6 +64,8 @@ protected:
   QString chatMessageToText( const ChatMessage& );
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
+  User findUser( VNumber );
+  bool isActiveUser( const User& ) const;
 
 private slots:
   void sendMessage();
@@ -81,7 +83,7 @@ private slots:
 private:
   VNumber m_chatId;
   QString m_chatName;
-  UserList m_users;
+  UserList m_chatUsers;
   VNumber m_lastMessageUserId;
   QString m_lastEmoticonSelected;
 
@@ -92,8 +94,6 @@ private:
   QAction* mp_actClear;
   QAction* mp_actLeave;
   QAction* mp_actCreateGroup;
-
-  bool m_localUserIsMember;
 
 };
 

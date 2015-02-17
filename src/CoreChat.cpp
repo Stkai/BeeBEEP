@@ -149,6 +149,8 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
     sHtmlMsg = tr( "%1 The group has a new name: %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*G*" ), chat_name );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );
     chat_changed = true;
+    if( ChatManager::instance().chatHasSavedText( c.name() ) )
+      ChatManager::instance().updateChatSavedText( c.name(), chat_name, false );
     c.setName( chat_name );
   }
 
@@ -336,7 +338,6 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
     group_message = Protocol::instance().groupChatRequestMessage( group_chat, u );
 
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Group message request:" << Protocol::instance().fromMessage( group_message );
     qDebug() << "Send group chat request to:" << group_message.text();
 #endif
 
@@ -433,9 +434,9 @@ bool Core::removeUserFromChat( const User& u, VNumber chat_id )
   QString sHtmlMsg;
 
   if( u.isLocal() )
-    sHtmlMsg = tr( "%1 You have left group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) );
+    sHtmlMsg = tr( "%1 You have left the group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) );
   else
-    sHtmlMsg = tr( "%1 %2 has left group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name() );
+    sHtmlMsg = tr( "%1 %2 has left the group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name() );
 
   c.removeUser( u.id() );
   c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) ) );

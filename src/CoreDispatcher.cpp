@@ -43,6 +43,20 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
     return;
   }
 
+  if( !c.usersId().contains( from_user_id ) )
+  {
+    qWarning() << "User" << from_user_id << "is not present in the chat" << c.id() << c.name() << "... drop message:";
+    qWarning() << m.text();
+    return;
+  }
+
+  if( !c.usersId().contains( ID_LOCAL_USER ) )
+  {
+    qWarning() << "You are not in the chat" << c.id() << c.name() << "... drop message:";
+    qWarning() << m.text();
+    return;
+  }
+
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Message dispatched to chat" << c.id();
 #endif
