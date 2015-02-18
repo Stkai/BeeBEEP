@@ -115,7 +115,6 @@ void Core::setConnectionClosed()
 
 void Core::closeConnection( Connection *c )
 {
-  qDebug() << "Removing connection pointer from connection list";
   int number_of_connection_pointers = m_connections.removeAll( c );
   if( number_of_connection_pointers <= 0 )
   {
@@ -148,6 +147,7 @@ void Core::closeConnection( Connection *c )
   if( u.isValid() )
     emit fileShareAvailable( u );
 
+  c->disconnect();
   c->deleteLater();
 }
 
@@ -164,7 +164,7 @@ void Core::checkUserAuthentication( const Message& m )
   User u = Protocol::instance().createUser( m, c->peerAddress() );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to create a new user from the message arrived from (invalid protocol or password):" << c->peerAddress().toString() << c->peerPort();
+    qWarning() << "Unable to create a new user (invalid protocol or password) from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
     c->abort();
     c->deleteLater();
     return;

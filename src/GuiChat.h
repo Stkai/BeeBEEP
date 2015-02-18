@@ -54,6 +54,7 @@ signals:
   void openUrl( const QUrl& );
   void sendFileRequest();
   void createGroupRequest();
+  void createGroupChatRequest();
   void editGroupRequest();
   void chatToClear( VNumber );
   void leaveThisChat( VNumber );
@@ -94,6 +95,7 @@ private:
   QAction* mp_actClear;
   QAction* mp_actLeave;
   QAction* mp_actCreateGroup;
+  QAction* mp_actCreateGroupChat;
 
 };
 

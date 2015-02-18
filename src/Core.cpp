@@ -113,6 +113,7 @@ void Core::stop()
 {
   mp_broadcaster->stopBroadcasting();
   stopFileTransferServer();
+
   mp_listener->close();
 
   foreach( Connection* c, m_connections )

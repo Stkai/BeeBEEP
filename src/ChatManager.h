@@ -43,6 +43,7 @@ public:
   void setChat( const Chat& );
   inline const QList<Chat>& constChatList() const;
   QStringList chatNamesToStringList( bool add_default_chat ) const;
+  inline bool removeChat( const Chat& );
 
   bool hasName( const QString& ) const;
   int unreadMessages() const;
@@ -102,5 +103,6 @@ inline bool ChatManager::chatHasSavedText( const QString& chat_name ) const { re
 inline void ChatManager::removeSavedTextFromChat( const QString& chat_name ) { m_history.remove( chat_name ); }
 inline bool ChatManager::isLoadHistoryCompleted() const { return m_isLoadHistoryCompleted; }
 inline const QMap<QString, QString>& ChatManager::constHistoryMap() const { return m_history; }
+inline bool ChatManager::removeChat( const Chat& c ) { return m_chats.removeOne( c ); }
 
 #endif // BEEBEEP_CHATMANAGER_H

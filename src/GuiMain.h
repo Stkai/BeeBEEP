@@ -123,6 +123,7 @@ private slots:
   void checkChat( VNumber );
   void leaveGroupChat( VNumber );
   void removeGroup( VNumber );
+  void removeChat( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );

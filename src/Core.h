@@ -66,6 +66,7 @@ public:
   void changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>&, bool broadcast_message );
   void clearMessagesInChat( VNumber );
   bool removeUserFromChat( const User&, VNumber );
+  bool removeChat( VNumber );
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );

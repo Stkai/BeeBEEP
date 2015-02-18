@@ -109,7 +109,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( mp_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_chat, SIGNAL( sendFileRequest() ), this, SLOT( sendFile() ) );
-  connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroupChat() ) );
+  connect( mp_chat, SIGNAL( createGroupChatRequest() ), this, SLOT( createGroupChat() ) );
+  connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
   connect( mp_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( mp_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
@@ -135,6 +136,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
+  connect( mp_chatList, SIGNAL( chatToRemove( VNumber ) ), this, SLOT( removeChat( VNumber ) ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
@@ -1611,7 +1613,7 @@ void GuiMain::playBeep()
 void GuiMain::createGroup()
 {
   GuiCreateGroup gcg( this );
-  gcg.loadData();
+  gcg.loadData( true );
   gcg.setModal( true );
   gcg.show();
   gcg.setFixedSize( gcg.size() );
@@ -1629,7 +1631,7 @@ void GuiMain::editGroup( VNumber group_id )
 
   GuiCreateGroup gcg( this );
   gcg.init( g.name(), g.usersId() );
-  gcg.loadData();
+  gcg.loadData( true );
   gcg.setModal( true );
   gcg.show();
   gcg.setFixedSize( gcg.size() );
@@ -1642,7 +1644,7 @@ void GuiMain::editGroup( VNumber group_id )
 void GuiMain::createGroupChat()
 {
   GuiCreateGroup gcg( this );
-  gcg.loadData();
+  gcg.loadData( false );
   gcg.setModal( true );
   gcg.show();
   gcg.setFixedSize( gcg.size() );
@@ -1661,7 +1663,7 @@ void GuiMain::addUserToGroupChat()
 
   GuiCreateGroup gcg( this );
   gcg.init( group_chat_tmp.name(), group_chat_tmp.usersId() );
-  gcg.loadData();
+  gcg.loadData( false );
   gcg.setModal( true );
   gcg.show();
   gcg.setFixedSize( gcg.size() );
@@ -1936,21 +1938,28 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return;
+  if( !c.hasUser( ID_LOCAL_USER ) )
+    return;
+
   Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
   if( g.isValid() )
   {
     if( QMessageBox::warning( this, Settings::instance().programName(),
-                              tr( "%1 is a your group. You can not leave the chat." ),
+                              tr( "%1 is a your group. You can not leave the chat." ).arg( g.name() ),
                               tr( "Delete this group" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
         return;
 
     mp_core->removeGroup( g.id() );
   }
 
-  if( !mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "You cannot leave this chat." ) );
-  else
+  if( mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
+  {
     mp_chat->updateUser( Settings::instance().localUser() );
+    mp_chatList->reloadChatList();
+    checkViewActions();
+  }
+  else
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "You cannot leave this chat." ) );
 }
 
 void GuiMain::removeGroup( VNumber group_id )
@@ -1965,4 +1974,21 @@ void GuiMain::removeGroup( VNumber group_id )
       mp_core->removeGroup( group_id );
     }
   }
+}
+
+void GuiMain::removeChat( VNumber chat_id )
+{
+  if( mp_core->removeChat( chat_id ) )
+  {
+    mp_chatList->reloadChatList();
+    if( mp_chat->chatId() == chat_id )
+    {
+      if( mp_stackedWidget->currentWidget() == mp_chat )
+        showChat( ID_DEFAULT_CHAT );
+      else
+        mp_chat->setChatId( ID_DEFAULT_CHAT );
+    }
+  }
+  else
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to delete this chat." ) );
 }

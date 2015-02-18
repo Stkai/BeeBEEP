@@ -41,6 +41,7 @@ public:
 signals:
   void chatSelected( VNumber chat_id );
   void chatToClear( VNumber chat_id );
+  void chatToRemove( VNumber chat_id );
 
 public slots:
   void updateChat( VNumber chat_id );
@@ -50,6 +51,7 @@ protected slots:
   void showChatMenu( const QPoint& );
   void openChatSelected();
   void clearChatSelected();
+  void removeChatSelected();
 
 private:
   GuiChatItem* itemFromChatId( VNumber );

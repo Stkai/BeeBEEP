@@ -24,6 +24,7 @@
 #include "ChatManager.h"
 #include "Core.h"
 #include "Protocol.h"
+#include "UserManager.h"
 
 
 void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
@@ -31,9 +32,23 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   Chat c;
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
   if( m.hasFlag( Message::Private ) )
+  {
     c = ChatManager::instance().privateChatForUser( from_user_id );
+  }
   else if( m.hasFlag( Message::GroupChat ) )
+  {
     c = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
+    if( !c.isValid() )
+    {
+      Group g = UserManager::instance().findGroupByPrivateId( cmd.groupId() );
+      if( g.isValid() )
+      {
+        qDebug() << "New message arrived for your group" << g.name() << "but chat does not exists";
+        createGroupChat( g.name(), g.usersId(), g.privateId(), false );
+        c = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
+      }
+    }
+  }
   else
     c = ChatManager::instance().defaultChat( false );
 

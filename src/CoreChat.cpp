@@ -34,6 +34,8 @@
 #include "Tips.h"
 #include "UserManager.h"
 
+#include "GuiChatMessage.h"
+
 
 void Core::createDefaultChat()
 {
@@ -450,4 +452,30 @@ bool Core::removeUserFromChat( const User& u, VNumber chat_id )
   }
 
   return true;
+}
+
+bool Core::removeChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return false;
+  if( c.isDefault() )
+    return false;
+
+  if( c.isPrivate() )
+  {
+    c.clearMessages();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Private chat with" << c.name() << "cleared";
+#endif
+    ChatManager::instance().setChat( c );
+    return true;
+  }
+
+  if( c.isGroup() && ChatManager::instance().removeChat( c ) )
+  {
+    qDebug() << "Chat deleted:" << c.name();
+    return true;
+  }
+  return false;
 }

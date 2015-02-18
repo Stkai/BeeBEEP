@@ -99,8 +99,10 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
   bar->addSeparator();
-  mp_actCreateGroup = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupRequest() ) );
-  mp_actCreateGroup->setStatusTip( tr( "Create a group chat with two or more users" ) );
+  mp_actCreateGroupChat = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupChatRequest() ) );
+  mp_actCreateGroupChat->setStatusTip( tr( "Create a group chat with two or more users" ) );
+  mp_actCreateGroup = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this, SIGNAL( createGroupRequest() ) );
+  mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
 }
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
@@ -108,6 +110,7 @@ void GuiChat::updateAction( bool is_connected, int connected_users )
   bool local_user_is_member = isActiveUser( Settings::instance().localUser() );
   mp_actSendFile->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
   mp_actCreateGroup->setEnabled( is_connected && connected_users > 1 );
+  mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
 }
@@ -124,7 +127,7 @@ void GuiChat::customContextMenu( const QPoint& p )
 void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
 {
   if( dt.isValid() && !Settings::instance().chatShowMessageTimestamp() )
-    mp_lTimestamp->setText( QString( " " ) + tr( "(Last message %1)" ).arg( dt.toString( "hh:mm" )));
+    mp_lTimestamp->setText( QString( "  " ) + tr( "Last message %1" ).arg( dt.toString( "hh:mm" )) + QString( "  " ) );
   else
     mp_lTimestamp->setText( "" );
 }

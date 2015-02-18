@@ -36,7 +36,7 @@ public:
   explicit GuiCreateGroup( QWidget *parent = 0 );
 
   void init( const QString&, const QList<VNumber>& );
-  void loadData();
+  void loadData( bool is_group );
 
   inline const QString& selectedName() const;
   inline const QList<VNumber>& selectedUsersId() const;

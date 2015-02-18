@@ -281,23 +281,23 @@
     </message>
     <message>
         <source>%1 Members removed from the group: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Membri rimossi dal gruppo: %2.</translation>
     </message>
     <message>
         <source>%1 Members added to the group: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Membri aggiunti al gruppo: %2.</translation>
     </message>
     <message>
         <source>%1 cannot be informed that you have left the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>A %1 non può essere notificato che hai lasciato il gruppo.</translation>
     </message>
     <message>
         <source>%1 You have left the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Hai lasciato il gruppo.</translation>
     </message>
     <message>
         <source>%1 %2 has left the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 ha lasciato il gruppo.</translation>
     </message>
 </context>
 <context>
@@ -439,7 +439,7 @@
     </message>
     <message>
         <source>(Last message %1)</source>
-        <translation>(Ultimo messaggio %1)</translation>
+        <translation type="obsolete">(Ultimo messaggio %1)</translation>
     </message>
     <message>
         <source>To</source>
@@ -569,19 +569,31 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation type="unfinished"></translation>
+        <translation>Lascia il gruppo</translation>
     </message>
     <message>
         <source>(You have left)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Hai lasciato)</translation>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished">Tu</translation>
+        <translation>Tu</translation>
     </message>
     <message>
         <source>and</source>
-        <translation type="unfinished"></translation>
+        <translation>e</translation>
+    </message>
+    <message>
+        <source>Last message %1</source>
+        <translation>Ultimo messaggio alle %1</translation>
+    </message>
+    <message>
+        <source>Create group</source>
+        <translation>Crea gruppo</translation>
+    </message>
+    <message>
+        <source>Create a group with two or more users</source>
+        <translation>Crea un gruppo con due o più membri</translation>
     </message>
 </context>
 <context>
@@ -634,52 +646,61 @@ p, li { white-space: pre-wrap; }
     <name>GuiCreateGroup</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Group name</source>
-        <translation type="unfinished">Nome del gruppo</translation>
+        <translation>Nome del gruppo</translation>
     </message>
     <message>
         <source>Please add member in the group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi membri al gruppo:</translation>
     </message>
     <message>
         <source>Users</source>
-        <translation type="unfinished">Utenti</translation>
+        <translation>Utenti</translation>
     </message>
     <message>
         <source>Create Group - %1</source>
-        <translation type="unfinished">Crea Gruppo - %1</translation>
+        <translation>Crea Gruppo - %1</translation>
     </message>
     <message>
         <source>Edit Group - %1</source>
-        <translation type="unfinished">Modifica Gruppo - %1</translation>
+        <translation>Modifica Gruppo - %1</translation>
     </message>
     <message>
         <source>Please select two or more member for the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona due o più membri per il gruppo.</translation>
     </message>
     <message>
         <source>Please insert a group name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci il nome del gruppo.</translation>
     </message>
     <message>
         <source>%1 already exists as group name or chat name.
 Please select a different name.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 esiste già come nome del gruppo o di conversazione.
+Inserisci un nome differente.</translation>
+    </message>
+    <message>
+        <source>Create Chat - %1</source>
+        <translation>Crea una conversazione - %1</translation>
+    </message>
+    <message>
+        <source>Edit Chat - %1</source>
+        <translation>Modifica una conversazione - %1</translation>
     </message>
 </context>
 <context>
@@ -752,23 +773,23 @@ Please select a different name.</source>
     <name>GuiGroupList</name>
     <message>
         <source>Create group</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea gruppo</translation>
     </message>
     <message>
         <source>Edit group</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica gruppo</translation>
     </message>
     <message>
         <source>Open chat</source>
-        <translation type="unfinished">Apri la conversazione</translation>
+        <translation>Apri la conversazione</translation>
     </message>
     <message>
         <source>Waiting for two or more connected user</source>
-        <translation type="unfinished"></translation>
+        <translation>Aspetta per due o più utenti connessi</translation>
     </message>
     <message>
         <source>Delete group</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella gruppo</translation>
     </message>
 </context>
 <context>
@@ -1797,51 +1818,51 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Please donate for %1 :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Per favore dona qualcosa per %1 :-)</translation>
     </message>
     <message>
         <source>I&apos;m so grateful and pleased about that</source>
-        <translation type="unfinished"></translation>
+        <translation>Grazieeeee! Lo apprezzo molto</translation>
     </message>
     <message>
         <source>Show online users</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra utenti connessi</translation>
     </message>
     <message>
         <source>Show the list of the connected users</source>
-        <translation type="unfinished"></translation>
+        <translation>Moastra la lista degli utenti connessi</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppi</translation>
     </message>
     <message>
         <source>Show your groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra i tuoi gruppi</translation>
     </message>
     <message>
         <source>Show the list of your groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la lista dei tuoi gruppi</translation>
     </message>
     <message>
         <source>Unable to add users in this chat. Please select a group one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aggiungere utenti a questa conversazione. Selezionane una di gruppo.</translation>
     </message>
     <message>
         <source>%1 is a your group. You can not leave the chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 è un gruppo creato da te, non puoi lasciare la conversazione.</translation>
     </message>
     <message>
         <source>Delete this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella questo gruppo</translation>
     </message>
     <message>
         <source>You cannot leave this chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non puoi lasciare questa conversazione.</translation>
     </message>
     <message>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi veramente cancellare il gruppo &apos;%1&apos;?</translation>
     </message>
 </context>
 <context>
@@ -2962,11 +2983,11 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <name>RegularBoldTextMarker</name>
     <message>
         <source>Regular Bold Text Marker</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>If you want to format your message with words in regular and bold font write a [text to format] .</source>
-        <translation type="unfinished"></translation>
+        <translation>Se vuoi formattare il tuo messaggio con parole normali e in grassetto scrivi [testo da formattare] .</translation>
     </message>
 </context>
 <context>

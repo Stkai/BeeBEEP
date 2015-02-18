@@ -56,17 +56,23 @@ void GuiCreateGroup::init( const QString& group_name, const QList<VNumber>& grou
   m_selectedUsersId = group_members;
 }
 
-void GuiCreateGroup::loadData()
+void GuiCreateGroup::loadData( bool is_group )
 {
   if( m_selectedName.isEmpty() )
   {
     mp_leName->setText( "" );
-    setWindowTitle( tr( "Create Group - %1" ).arg( Settings::instance().programName() ) );
+    if( is_group )
+      setWindowTitle( tr( "Create Group - %1" ).arg( Settings::instance().programName() ) );
+    else
+      setWindowTitle( tr( "Create Chat - %1" ).arg( Settings::instance().programName() ) );
   }
   else
   {
     mp_leName->setText( m_selectedName );
-    setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
+    if( is_group )
+      setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
+    else
+      setWindowTitle( tr( "Edit Chat - %1" ).arg( Settings::instance().programName() ) );
   }
 
   if( mp_twUsers->topLevelItemCount() > 0 )
