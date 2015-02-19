@@ -86,6 +86,11 @@ void Core::checkGroupChatAfterUserReconnect( const User& u )
   }
 }
 
+void Core::createGroupChat( const Group& g, bool broadcast_message )
+{
+  createGroupChat( g.name(), g.usersId(), g.privateId(), broadcast_message );
+}
+
 void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& users_id, const QString& chat_private_id, bool broadcast_message )
 {
   qDebug() << "Creating group chat named" << chat_name;
@@ -119,7 +124,7 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
 
   ChatManager::instance().setChat( c );
 
-  if( broadcast_message )
+  if( broadcast_message && isConnected() )
     sendGroupChatRequestMessage( c, ul );
 
   emit updateChat( c.id() );
@@ -204,7 +209,7 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
     emit updateChat( c.id() );
   }
 
-  if( broadcast_message )
+  if( broadcast_message && isConnected() )
     sendGroupChatRequestMessage( c, group_new_members );
 }
 
@@ -344,7 +349,8 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
 #endif
 
     if( !sendMessageToLocalNetwork( u, group_message ) )
-      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 cannot be invited to the group." ).arg( u.path() ), DispatchToChat );
+      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 can not be invited to the group." )
+                             .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) ).arg( u.name() ), DispatchToChat );
   }
 }
 
@@ -358,7 +364,8 @@ void Core::sendGroupChatRefuseMessage( const Chat& group_chat, const UserList& u
       continue;
 
     if( !sendMessageToLocalNetwork( u, group_refuse_message ) )
-      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 cannot be informed that you have left the group." ).arg( u.name() ), DispatchToChat );
+      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 cannot be informed that you have left the group." )
+                             .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) ).arg( u.name() ), DispatchToChat );
   }
 }
 

@@ -33,7 +33,7 @@ class GuiGroupItem : public QTreeWidgetItem
 {
 
 public:
-  enum ItemDataType { ItemId = Qt::UserRole+1, ChatId, ObjectId };
+  enum ItemDataType { ItemId = Qt::UserRole+1, ObjectId };
   enum ObjectTypeId { ObjectInvalid = 0, ObjectUser, ObjectGroup };
 
   GuiGroupItem( QTreeWidget* );
@@ -41,12 +41,10 @@ public:
 
   bool operator<( const GuiGroupItem& ) const;
 
-  void init( VNumber item_id, VNumber chat_id, bool is_group );
+  void init( VNumber item_id, bool is_group );
 
   inline void setItemId( VNumber );
   inline VNumber itemId() const;
-  inline void setChatId( VNumber );
-  inline VNumber chatId() const;
   inline bool isGroup() const;
 
   bool updateGroup( const Group& );
@@ -62,11 +60,8 @@ private:
 // Inline Functions
 inline void GuiGroupItem::setItemId( VNumber new_value  ) { setData( 0, ItemId, new_value ); }
 inline VNumber GuiGroupItem::itemId() const { return Bee::qVariantToVNumber( data( 0, ItemId ) ); }
-inline void GuiGroupItem::setChatId( VNumber new_value  ) { setData( 0, ChatId, new_value ); }
-inline VNumber GuiGroupItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
 inline void GuiGroupItem::setObjectType( ObjectTypeId new_value  ) { setData( 0, ObjectId, (int)new_value ); }
 inline int GuiGroupItem::objectType() const { return data( 0, ObjectId ).toInt(); }
 inline bool GuiGroupItem::isGroup() const { return objectType() == ObjectGroup; }
-
 
 #endif // BEEBEEP_GUIGROUPITEM_H

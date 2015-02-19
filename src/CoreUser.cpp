@@ -148,10 +148,8 @@ void Core::createGroup( const QString& group_name, const QList<VNumber>& group_m
 void Core::addGroup( const Group& g )
 {
   UserManager::instance().setGroup( g );
-  createGroupChat( g.name(), g.usersId(), g.privateId(), true );
   emit updateGroup( g.id() );
 }
-
 
 void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& group_members )
 {

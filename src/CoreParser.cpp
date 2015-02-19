@@ -212,13 +212,13 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       if( ul.toList().size() < 2 )
       {
         qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 An error occurred when %2 tries to add you to the group: %3." )
-                           .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.path(), cmd.groupName() ), DispatchToChat );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 An error occurred when %2 tries to add you to the group chat: %3." )
+                           .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ), DispatchToChat );
         return;
       }
 
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 adds you to the group: %3." )
-                         .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.path(), cmd.groupName() ), DispatchToChat );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 adds you to the group chat: %3." )
+                         .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ), DispatchToChat );
       createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
     }
     else

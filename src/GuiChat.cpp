@@ -199,9 +199,6 @@ void GuiChat::setChatUsers()
   if( m_chatId == ID_DEFAULT_CHAT )
   {
     chat_users = tr( "All Lan Users" );
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Chat all users:" << m_chatUsers.toStringList( false, false ).join( "," );
-#endif
   }
   else
   {
@@ -228,18 +225,22 @@ void GuiChat::setChatUsers()
     chat_users = sl.size() == 0 ? tr( "Nobody" ) : (sl.size() == 2 ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ));
   }
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Chat members:" << m_chatUsers.toStringList( false, false ).join( ", " );
+#endif
   mp_lTitle->setText( tr( "To" ) + QString( ": %1" ).arg( chat_users ) );
   mp_teMessage->setEnabled( isActiveUser( Settings::instance().localUser() ) );
 }
 
 bool GuiChat::setChatId( VNumber chat_id )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Setting chat" << chat_id << "in default chat window";
-#endif
   Chat c = ChatManager::instance().chat( chat_id, true );
   if( !c.isValid() )
     return false;
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Setting chat" << chat_id << "in default chat window";
+#endif
   m_chatId = c.id();
   m_chatName = c.name();
 

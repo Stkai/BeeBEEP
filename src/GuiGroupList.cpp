@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ChatManager.h"
 #include "GuiGroupList.h"
 #include "UserManager.h"
 
@@ -71,7 +70,7 @@ void GuiGroupList::loadGroups()
   foreach( Group g, UserManager::instance().groups() )
   {
     GuiGroupItem* group_item = new GuiGroupItem( this );
-    group_item->init( g.id(), ChatManager::instance().findGroupChatByPrivateId( g.privateId() ).id(), true );
+    group_item->init( g.id(), true );
     group_item->updateGroup( g );
   }
 }
@@ -82,13 +81,11 @@ void GuiGroupList::updateGroup( VNumber group_id )
   if( !g.isValid() )
     return;
 
-  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
-
   GuiGroupItem* group_item = itemFromId( group_id );
   if( !group_item )
   {
     group_item = new GuiGroupItem( this );
-    group_item->init( g.id(), c.id(), true );
+    group_item->init( g.id(), true );
   }
   group_item->updateGroup( g );
 }
@@ -114,7 +111,7 @@ void GuiGroupList::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 
   GuiGroupItem* group_item = (GuiGroupItem*)item;
   if( group_item->isGroup() )
-    emit openChatForGroupRequest( group_item->chatId() );
+    emit openChatForGroupRequest( group_item->itemId() );
 }
 
 void GuiGroupList::showGroupMenu( const QPoint& p )
@@ -136,7 +133,6 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   if( group_item->isGroup() )
   {
     m_selectedGroupId = group_item->itemId();
-    m_selectedChatId = group_item->chatId();
     QMenu menu;
     menu.addAction( mp_actOpenChat );
     menu.setDefaultAction( mp_actOpenChat );
@@ -154,10 +150,10 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
 
 void GuiGroupList::openGroupChatSelected()
 {
-  if( m_selectedChatId != ID_INVALID )
+  if( m_selectedGroupId != ID_INVALID )
   {
-    emit openChatForGroupRequest( m_selectedChatId );
-    m_selectedChatId = ID_INVALID;
+    emit openChatForGroupRequest( m_selectedGroupId );
+    m_selectedGroupId = ID_INVALID;
   }
 }
 

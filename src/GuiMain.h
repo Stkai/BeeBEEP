@@ -124,6 +124,7 @@ private slots:
   void leaveGroupChat( VNumber );
   void removeGroup( VNumber );
   void removeChat( VNumber );
+  void showChatForGroup( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );

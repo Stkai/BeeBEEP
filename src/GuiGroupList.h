@@ -63,7 +63,6 @@ private:
   QAction* mp_actRemoveGroup;
 
   VNumber m_selectedGroupId;
-  VNumber m_selectedChatId;
 
 };
 

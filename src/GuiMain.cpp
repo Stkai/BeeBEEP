@@ -128,7 +128,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
 
-  connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
+  connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChatForGroup( VNumber ) ) );
   connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroup( VNumber ) ) );
   connect( mp_groupList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
@@ -1294,6 +1294,14 @@ void GuiMain::showChat( VNumber chat_id )
     return;
   }
 
+  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Chat" << chat_id << "is already shown... skip";
+#endif
+    return;
+  }
+
   if( mp_chat->setChatId( chat_id ) )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
@@ -1991,4 +1999,18 @@ void GuiMain::removeChat( VNumber chat_id )
   }
   else
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to delete this chat." ) );
+}
+
+void GuiMain::showChatForGroup( VNumber group_id )
+{
+  Group g = UserManager::instance().group( group_id );
+  if( !g.isValid() )
+    return;
+
+  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  if( !c.isValid() )
+    mp_core->createGroupChat( g, true );
+
+  c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  showChat( c.id() );
 }

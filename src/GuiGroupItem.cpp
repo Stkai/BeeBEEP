@@ -30,7 +30,6 @@ GuiGroupItem::GuiGroupItem( QTreeWidget* parent )
  : QTreeWidgetItem( parent )
 {
   setItemId( ID_INVALID );
-  setChatId( ID_INVALID );
   setObjectType( ObjectInvalid );
 }
 
@@ -38,14 +37,12 @@ GuiGroupItem::GuiGroupItem( QTreeWidgetItem* parent )
  : QTreeWidgetItem( parent )
 {
   setItemId( ID_INVALID );
-  setChatId( ID_INVALID );
   setObjectType( ObjectInvalid );
 }
 
-void GuiGroupItem::init( VNumber item_id, VNumber chat_id, bool is_group )
+void GuiGroupItem::init( VNumber item_id, bool is_group )
 {
   setItemId( item_id );
-  setChatId( chat_id );
   if( is_group )
     setObjectType( ObjectGroup );
   else
@@ -78,7 +75,7 @@ bool GuiGroupItem::updateGroup( const Group& g )
     if( !u.isLocal() )
     {
       GuiGroupItem* user_item = new GuiGroupItem( this );
-      user_item->init( u.id(), chatId(), false );
+      user_item->init( u.id(), false );
       user_item->updateUser( u );
       addChild( user_item );
     }
