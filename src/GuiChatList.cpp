@@ -107,6 +107,7 @@ void GuiChatList::chatDoubleClicked( QTreeWidgetItem* item, int )
 
   GuiChatItem* user_item = (GuiChatItem*)item;
   emit chatSelected( user_item->chatId() );
+  clearSelection();
 }
 
 void GuiChatList::showChatMenu( const QPoint& p )
@@ -125,6 +126,8 @@ void GuiChatList::showChatMenu( const QPoint& p )
   mp_actClear->setDisabled( c.isEmpty() );
 
   mp_menu->exec( QCursor::pos() );
+
+  clearSelection();
 }
 
 void GuiChatList::openChatSelected()

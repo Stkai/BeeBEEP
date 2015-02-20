@@ -39,6 +39,7 @@ public:
   void loadGroups();
   void updateGroup( VNumber );
   void updateUser( const User& );
+  void updateChat( VNumber );
 
 signals:
   void openChatForGroupRequest( VNumber group_id );

@@ -88,6 +88,7 @@ void GuiGroupList::updateGroup( VNumber group_id )
     group_item->init( g.id(), true );
   }
   group_item->updateGroup( g );
+  sortItems( 0, Qt::AscendingOrder );
 }
 
 GuiGroupItem* GuiGroupList::itemFromId( VNumber item_id )
@@ -112,6 +113,7 @@ void GuiGroupList::checkItemDoubleClicked( QTreeWidgetItem* item, int )
   GuiGroupItem* group_item = (GuiGroupItem*)item;
   if( group_item->isGroup() )
     emit openChatForGroupRequest( group_item->itemId() );
+  clearSelection();
 }
 
 void GuiGroupList::showGroupMenu( const QPoint& p )
@@ -146,6 +148,7 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   {
     emit showVCardRequest( group_item->itemId() );
   }
+  clearSelection();
 }
 
 void GuiGroupList::openGroupChatSelected()
@@ -184,6 +187,23 @@ void GuiGroupList::updateUser( const User& u )
     item = (GuiGroupItem*)(*it);
     if( item->itemId() == u.id() )
       item->updateUser( u );
+    ++it;
+  }
+  sortItems( 0, Qt::AscendingOrder );
+}
+
+void GuiGroupList::updateChat( VNumber chat_id )
+{
+  GuiGroupItem* item;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    item = (GuiGroupItem*)(*it);
+    if( item->updateChat( chat_id ) )
+    {
+      sortItems( 0, Qt::AscendingOrder );
+      return;
+    }
     ++it;
   }
 }

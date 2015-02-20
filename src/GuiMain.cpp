@@ -352,13 +352,14 @@ void GuiMain::checkViewActions()
 void GuiMain::showAbout()
 {
   QMessageBox::about( this, Settings::instance().programName(),
-                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5<br />%6<br />" )
+                      QString( "<b>%1</b> - %2<br /><br />%3 %4<br />%5 %6<br />%7<br />" )
                       .arg( Settings::instance().programName() )
                       .arg( tr( "Secure Lan Messenger" ) )
                       .arg( tr( "Version" ) )
                       .arg( Settings::instance().version( true ) )
-                      .arg( tr( "developed by Marco Mastroddi" ) )
-                      .arg( tr( "e-mail: marco.mastroddi@gmail.com") )
+                      .arg( tr( "developed by" ) )
+                      .arg( QString( "<a href='http://it.linkedin.com/pub/marco-mastroddi/20/5a7/191'>Marco Mastroddi</a>" ) )
+                      .arg( QString( "e-mail: marco.mastroddi@gmail.com" ) )
                       );
 
 }
@@ -940,6 +941,13 @@ void GuiMain::settingsChanged()
       if( act->isChecked() )
       {
         BeeApplication* bee_app = static_cast<BeeApplication*>( QApplication::instance() );
+        bool ok = false;
+        int away_timeout = QInputDialog::getInt( this, Settings::instance().programName(),
+                              tr( "How many minutes of idle %1 can wait before changing status to away?" ).arg( Settings::instance().programName() ),
+                              Settings::instance().userAwayTimeout(), 1, 30, 1, &ok );
+        if( ok && away_timeout > 0 )
+          Settings::instance().setUserAwayTimeout( away_timeout );
+
         bee_app->setIdleTimeout( Settings::instance().userAwayTimeout() );
       }
     }
@@ -1012,18 +1020,19 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   if( !cm.isSystem() && !cm.isFromLocalUser() )
     show_alert = showAlert();
 
+  mp_chatList->updateChat( chat_id );
+  mp_groupList->updateChat( chat_id );
+
   if( chat_id == mp_chat->chatId() && mp_chat == mp_stackedWidget->currentWidget() )
   {
     mp_chat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
     mp_userList->setUnreadMessages( chat_id, 0 );
-    mp_chatList->updateChat( chat_id );
   }
   else
   {
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
-    mp_chatList->updateChat( chat_id );
 
     if( show_alert )
     {
@@ -1306,6 +1315,7 @@ void GuiMain::showChat( VNumber chat_id )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
+    mp_groupList->updateChat( chat_id );
     raiseChatView();
   }
 }

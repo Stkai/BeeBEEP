@@ -66,7 +66,9 @@ public:
   inline int fileTransferConfirmTimeout() const;
   inline int fileTransferBufferSize() const;
   inline int trayMessageTimeout() const;
+
   inline int userAwayTimeout() const;
+  inline void setUserAwayTimeout( int );
 
   inline const QString& logPath() const;
   inline void setLogPath( const QString& );
@@ -330,6 +332,7 @@ inline int Settings::fileTransferConfirmTimeout() const { return m_fileTransferC
 inline int Settings::fileTransferBufferSize() const { return m_fileTransferBufferSize; }
 inline int Settings::trayMessageTimeout() const  { return m_trayMessageTimeout; }
 inline int Settings::userAwayTimeout() const { return m_userAwayTimeout; }
+inline void Settings::setUserAwayTimeout( int new_value ) { m_userAwayTimeout = new_value; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline const QString& Settings::pluginPath() const { return m_pluginPath; }

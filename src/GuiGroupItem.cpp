@@ -24,6 +24,7 @@
 #include "GuiGroupItem.h"
 #include "Group.h"
 #include "UserManager.h"
+#include "ChatManager.h"
 
 
 GuiGroupItem::GuiGroupItem( QTreeWidget* parent )
@@ -57,6 +58,14 @@ bool GuiGroupItem::operator<( const GuiGroupItem& item ) const
   return user_item_name > other_name; // correct order
 }
 
+void GuiGroupItem::setGroupName( const QString& group_name, int unread_messages )
+{
+  if( unread_messages > 0 )
+    setText( 0, QString( "(%1) %2" ).arg( unread_messages ).arg( group_name ) );
+  else
+    setText( 0, group_name );
+}
+
 bool GuiGroupItem::updateGroup( const Group& g )
 {
   if( itemId() != g.id() )
@@ -65,7 +74,11 @@ bool GuiGroupItem::updateGroup( const Group& g )
     return false;
 
   setIcon( 0, QIcon( ":/images/group.png" ) );
-  setText( 0, g.name() );
+  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  if( c.isValid() )
+    setGroupName( g.name(), c.unreadMessages() );
+  else
+    setGroupName( g.name(), 0 );
 
   takeChildren();
 
@@ -96,4 +109,25 @@ bool GuiGroupItem::updateUser( const User& u )
   setToolTip( 0, u.path() );
 
   return true;
+}
+
+bool GuiGroupItem::updateChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return false;
+  if( !c.isGroup() )
+    return false;
+
+  Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
+  if( !g.isValid() )
+    return false;
+
+  if( g.id() == itemId() )
+  {
+    setGroupName( g.name(), c.unreadMessages() );
+    return true;
+  }
+  else
+    return false;
 }

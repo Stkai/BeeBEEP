@@ -49,10 +49,12 @@ public:
 
   bool updateGroup( const Group& );
   bool updateUser( const User& );
+  bool updateChat( VNumber );
 
 private:
   inline void setObjectType( ObjectTypeId );
   inline int objectType() const;
+  void setGroupName( const QString&, int );
 
 };
 

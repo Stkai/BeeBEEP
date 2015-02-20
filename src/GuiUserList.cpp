@@ -152,6 +152,7 @@ void GuiUserList::showUserMenu( const QPoint& p )
 
   GuiUserItem* user_item = (GuiUserItem*)item;
   emit menuToShow( user_item->userId() );
+  clearSelection();
 }
 
 void GuiUserList::userDoubleClicked( QTreeWidgetItem* item, int )
@@ -161,6 +162,7 @@ void GuiUserList::userDoubleClicked( QTreeWidgetItem* item, int )
 
   GuiUserItem* user_item = (GuiUserItem*)item;
   emit chatSelected( user_item->chatId() );
+  clearSelection();
 }
 
 bool GuiUserList::nextUserWithUnreadMessages()
