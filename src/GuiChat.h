@@ -52,7 +52,7 @@ signals:
   void writing( VNumber );
   void nextChat();
   void openUrl( const QUrl& );
-  void sendFileRequest();
+  void sendFileFromChatRequest( VNumber, const QString& );
   void createGroupRequest();
   void createGroupChatRequest();
   void editGroupRequest();
@@ -67,6 +67,8 @@ protected:
   void setChatFontColor( const QString& );
   User findUser( VNumber );
   bool isActiveUser( const User& ) const;
+  void dragEnterEvent( QDragEnterEvent* );
+  void dropEvent( QDropEvent* );
 
 private slots:
   void sendMessage();
@@ -80,6 +82,7 @@ private slots:
   void lastEmoticonSelected();
   void clearChat();
   void leaveThisGroup();
+  void sendFile();
 
 private:
   VNumber m_chatId;

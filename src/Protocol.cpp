@@ -569,6 +569,14 @@ Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
   Message m( Message::File, newId(), fi.name() );
   m.addFlag( Message::Refused );
   m.addFlag( Message::Private );
+  /* for backward compatibility 0.9.6 */
+  QStringList sl;
+  sl << QString::number( fi.hostPort() );
+  sl << QString::number( fi.size() );
+  sl << QString::number( fi.id() );
+  sl << QString( "*" );
+  m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
+  /* end of patch */
   return m;
 }
 
@@ -591,7 +599,7 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   fi.setName( m.text() );
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 4 )
-    return FileInfo( 0, FileInfo::Download );
+    return fi;
   fi.setHostPort( sl.at( 0 ).toInt() );
   fi.setSize( Bee::qVariantToVNumber( sl.at( 1 ) ) );
   fi.setId( Bee::qVariantToVNumber( sl.at( 2 ) ) );

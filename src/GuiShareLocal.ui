@@ -46,6 +46,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
      <property name="columnCount">
       <number>3</number>
      </property>

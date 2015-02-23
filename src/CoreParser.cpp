@@ -129,16 +129,19 @@ void Core::parseUserMessage( const User& u, const Message& m )
 void Core::parseFileMessage( const User& u, const Message& m )
 {
   FileInfo fi = Protocol::instance().fileInfoFromMessage( m );
-  if( !fi.isValid() )
-  {
-    qWarning() << "Invalid FileInfo received from user" << u.id() << ": [" << m.data() << "]:" << m.text();
-    return;
-  }
 
+  // check message first
   if( m.hasFlag( Message::Refused ) )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has refused to download %3." )
-                           .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.path(), fi.name() ), DispatchToAllChatsWithUser );
+                           .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), fi.name() ), DispatchToAllChatsWithUser );
+    return;
+  }
+
+  // check file is valid
+  if( !fi.isValid() )
+  {
+    qWarning() << "Invalid FileInfo received from user" << u.id() << ": [" << m.data() << "]:" << m.text();
     return;
   }
 
@@ -151,7 +154,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   fi.setHostAddress( c->peerAddress() );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is sending to you the file: %3." )
-                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.path(), fi.name() ), DispatchToAllChatsWithUser );
+                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), fi.name() ), DispatchToAllChatsWithUser );
   emit fileDownloadRequest( u, fi );
 }
 

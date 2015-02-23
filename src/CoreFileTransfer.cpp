@@ -113,13 +113,22 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
 
 bool Core::sendFile( const User& u, const QString& file_path )
 {
+  if( u.isLocal() )
+    return false;
+
   QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
 
   QFileInfo file( file_path );
   if( !file.exists() )
   {
-     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ), DispatchToAllChatsWithUser );
-     return false;
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ), DispatchToAllChatsWithUser );
+    return false;
+  }
+
+  if( file.isDir() )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is a folder. You can share it." ).arg( icon_html, file.fileName() ), DispatchToAllChatsWithUser );
+    return false;
   }
 
   FileInfo fi = mp_fileTransfer->addFile( file );
@@ -127,7 +136,8 @@ bool Core::sendFile( const User& u, const QString& file_path )
   Connection* c = connection( u.id() );
   if( !c )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send the file: user is not connected." ).arg( icon_html ), DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2: %3 is not connected." )
+                           .arg( icon_html ).arg( fi.name() ).arg( u.name() ), DispatchToAllChatsWithUser );
     return false;
   }
 
@@ -142,7 +152,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
   Message m = Protocol::instance().fileInfoToMessage( fi );
   c->sendMessage( m );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You send the file %2 to %3." )
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." )
                        .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser );
   return true;
 }

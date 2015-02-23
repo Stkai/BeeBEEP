@@ -108,7 +108,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
   connect( mp_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( mp_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_chat, SIGNAL( sendFileRequest() ), this, SLOT( sendFile() ) );
+  connect( mp_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
   connect( mp_chat, SIGNAL( createGroupChatRequest() ), this, SLOT( createGroupChat() ) );
   connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
@@ -1131,19 +1131,15 @@ void GuiMain::changeStatusDescription()
   mp_core->setLocalUserStatusDescription( status_description );
 }
 
-void GuiMain::sendFile()
+void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
 {
-  if( mp_chat == mp_stackedWidget->currentWidget() )
-  {
-    Chat c = ChatManager::instance().chat( mp_chat->chatId() );
-    if( c.isValid() && c.isPrivate() )
-    {
-      sendFile( c.privateUserId() );
-      return;
-    }
-  }
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return;
 
-  sendFile( User(), QString() );
+  UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+  foreach( User u, chat_members.toList() )
+    sendFile( u, file_path );
 }
 
 void GuiMain::sendFile( VNumber user_id )

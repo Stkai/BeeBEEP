@@ -34,8 +34,12 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 {
   setupUi( this );
 
+  setAcceptDrops( true );
+
+  mp_twMyShares->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twMyShares->setRootIsDecorated( false );
   mp_twMyShares->setSortingEnabled( true );
+
   mp_twLocalShares->setRootIsDecorated( false );
   mp_twLocalShares->setSelectionMode( QAbstractItemView::NoSelection );
 
@@ -75,6 +79,7 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   header_view->setSortIndicator( 0, Qt::AscendingOrder );
 
   connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openShareMenu( const QPoint& ) ) );
 }
 
 void GuiShareLocal::setupToolBar( QToolBar* bar )
@@ -161,7 +166,7 @@ void GuiShareLocal::removePath()
 
   setActionsEnabled( false );
 
-  QString share_selected = item_list.first()->text( 0 );
+  QString share_selected = item_list.first()->text( 2 );
 
   QStringList local_share = Settings::instance().localShare();
   if( local_share.removeOne( share_selected ) )
@@ -266,4 +271,43 @@ bool GuiShareLocal::isFileSharingEnabled()
 
   QMessageBox::information( this, Settings::instance().programName(), tr( "File sharing is disabled. Open the option menu to enable it." ) );
   return false;
+}
+
+void GuiShareLocal::dragEnterEvent( QDragEnterEvent *event )
+{
+  if( event->mimeData()->hasUrls() )
+    event->acceptProposedAction();
+}
+
+void GuiShareLocal::dropEvent( QDropEvent *event )
+{
+  if( event->mimeData()->hasUrls() )
+  {
+    foreach( QUrl url, event->mimeData()->urls() )
+    {
+      if( url.isLocalFile() )
+        addSharePath( QDir::toNativeSeparators( url.toLocalFile() ) );
+    }
+  }
+}
+
+void GuiShareLocal::openShareMenu( const QPoint& p )
+{
+  QTreeWidgetItem* item = mp_twMyShares->itemAt( p );
+
+  QMenu menu;
+
+  if( item )
+  {
+    if( !item->isSelected() )
+      item->setSelected( true );
+    menu.addAction( mp_actRemove );
+  }
+  else
+  {
+    menu.addAction( mp_actAddFile );
+    menu.addAction( mp_actAddFolder );
+  }
+
+  menu.exec( QCursor::pos() );
 }

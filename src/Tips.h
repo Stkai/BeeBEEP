@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_TIPS_H
 #define BEEBEEP_TIPS_H
 
-const int BeeBeepTipsSize = 41;
+const int BeeBeepTipsSize = 42;
 
 static const char* BeeBeepTips[ BeeBeepTipsSize ] =
 {
@@ -78,7 +78,8 @@ static const char* BeeBeepTips[ BeeBeepTipsSize ] =
   QT_TRANSLATE_NOOP( "Tips", "<i>A home without books is a body without soul.</i> (Marcus Tullius Cicero)" ),
   QT_TRANSLATE_NOOP( "Tips", "<i>We can not stop wishing our wishes.</i> (Arthur Schopenhauer)" ),
   /* 40 */
-  QT_TRANSLATE_NOOP( "Tips", "<i>Patience is also a form of action.</i> (Auguste Rodin) " )
+  QT_TRANSLATE_NOOP( "Tips", "<i>Patience is also a form of action.</i> (Auguste Rodin) " ),
+  QT_TRANSLATE_NOOP( "Tips", "You can drop files to active chat and send them to members." )
 
 };
 

@@ -76,7 +76,7 @@ private slots:
   void showNextChat();
   void statusSelected();
   void changeStatusDescription();
-  void sendFile();
+  void sendFileFromChat( VNumber, const QString& );
   void sendFile( VNumber );
   void sendFile( const QString& );
   void downloadFile( const User&, const FileInfo& );

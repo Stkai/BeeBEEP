@@ -54,12 +54,15 @@ protected slots:
   void loadFileInfoInList();
   void updateList();
   void openItemDoubleClicked( QTreeWidgetItem*, int );
+  void openShareMenu( const QPoint& );
 
 protected:
   void addSharePath( const QString& );
   void setActionsEnabled( bool );
   void showStats( int, FileSizeType );
   bool isFileSharingEnabled();
+  void dragEnterEvent( QDragEnterEvent* );
+  void dropEvent( QDropEvent* );
 
 private:
   QLabel* mp_labelShareStats;

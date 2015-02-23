@@ -6,6 +6,7 @@ BeeBEEP 0.9.7
 - Removed the limit on the number of files can be shared
 - Groups
 - Regular-Bold Text Marker plugin
+- (Drag and) drop files in chat or in local shares
 
 BeeBEEP 0.9.6
 - Auto set Away status when idle option

@@ -35,6 +35,9 @@ GuiChat::GuiChat( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiChat" );
+
+  setAcceptDrops( true );
+
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
   mp_teChat->setObjectName( "GuiChatViewer" );
   mp_teChat->setFocusPolicy( Qt::NoFocus );
@@ -87,7 +90,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act = bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
   act->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
   bar->addSeparator();
-  mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SIGNAL( sendFileRequest() ) );
+  mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
@@ -393,4 +396,35 @@ void GuiChat::clearChat()
 void GuiChat::leaveThisGroup()
 {
   emit leaveThisChat( m_chatId );
+}
+
+void GuiChat::sendFile()
+{
+  emit sendFileFromChatRequest( m_chatId, QString( "" ) );
+}
+
+void GuiChat::dragEnterEvent( QDragEnterEvent *event )
+{
+  if( event->mimeData()->hasUrls() )
+    event->acceptProposedAction();
+}
+
+void GuiChat::dropEvent( QDropEvent *event )
+{
+  if( event->mimeData()->hasUrls() )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "Do you really want to send %1 %2 to all?" ).arg( event->mimeData()->urls().size() )
+                               .arg( event->mimeData()->urls().size() == 1 ? tr( "file" ) : tr( "files" ) ),
+                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+    {
+       return;
+    }
+
+    foreach( QUrl url, event->mimeData()->urls() )
+    {
+      if( url.isLocalFile() )
+        emit sendFileFromChatRequest( m_chatId, url.toLocalFile() );
+    }
+  }
 }
