@@ -46,6 +46,7 @@ public:
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const Message& );
+  void abortRequest();
 
 protected slots:
   void readBlock();

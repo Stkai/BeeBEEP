@@ -113,7 +113,7 @@ inline const QString& User::accountName() const { return m_accountName; }
 inline void User::setVersion( const QString& new_value ) { m_version = new_value; }
 inline const QString& User::version() const { return m_version; }
 inline QString User::path() const { return QString( "%1@%2:%3" ).arg( name().toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
-inline QString User::accountPath() const { return QString( "%1@%2:%3" ).arg( m_accountName, m_hostAddress.toString(), QString::number( m_hostPort ) ); }
+inline QString User::accountPath() const { return QString( "%1@%2:%3" ).arg( m_accountName.toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 inline QString User::hostAddressAndPort() const { return QString( "%1:%2" ).arg( m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 
 #endif // BEEBEEP_USER_H

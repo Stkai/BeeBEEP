@@ -74,6 +74,7 @@ void Core::setNewConnection( Connection *c )
 #endif
   connect( c, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( setConnectionError( QAbstractSocket::SocketError ) ) );
   connect( c, SIGNAL( disconnected() ), this, SLOT( setConnectionClosed() ) );
+  connect( c, SIGNAL( abortRequest() ), this, SLOT( setConnectionClosed() ) );
   connect( c, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkUserAuthentication( const Message& ) ) );
 }
 
@@ -105,10 +106,7 @@ void Core::setConnectionClosed()
 {
   Connection* c = qobject_cast<Connection*>( sender() );
   if( c )
-  {
-    qDebug() << "Setting connection from" << c->peerAddress().toString() << c->peerPort() << "closed";
     closeConnection( c );
-  }
   else
     qWarning() << "Connection closed but the object caller is invalid";
 }
@@ -117,13 +115,9 @@ void Core::closeConnection( Connection *c )
 {
   int number_of_connection_pointers = m_connections.removeAll( c );
   if( number_of_connection_pointers <= 0 )
-  {
     qDebug() << "Connection pointer is not present (or already removed from list)";
-    return;
-  }
-
-  if( number_of_connection_pointers != 1 )
-    qWarning() << number_of_connection_pointers << "pointers of a single connection found in connection list";
+  else if( number_of_connection_pointers != 1 )
+    qDebug() << number_of_connection_pointers << "pointers of a single connection found in connection list";
   else
     qDebug() << "Connection pointer removed from connection list";
 
@@ -135,20 +129,22 @@ void Core::closeConnection( Connection *c )
     u.setStatus( User::Offline );
     UserManager::instance().setUser( u );
     showUserStatusChanged( u );
+
+    Chat default_chat = ChatManager::instance().defaultChat( false );
+    if( default_chat.removeUser( u.id() ) )
+      ChatManager::instance().setChat( default_chat );
+
+    FileShare::instance().removeFromNetwork( c->userId() );
+    if( u.isValid() )
+      emit fileShareAvailable( u );
   }
   else
     qWarning() << "User" << c->userId() << "not found while closing connection";
 
-  Chat default_chat = ChatManager::instance().defaultChat( false );
-  if( default_chat.removeUser( u.id() ) )
-    ChatManager::instance().setChat( default_chat );
-
-  FileShare::instance().removeFromNetwork( c->userId() );
-  if( u.isValid() )
-    emit fileShareAvailable( u );
-
   c->disconnect();
-  c->deleteLater();
+  c->closeConnection();
+  //do not delete the object. Can cause crash. See c->readblock( ... )
+  //c->deleteLater();
 }
 
 void Core::checkUserAuthentication( const Message& m )
@@ -165,21 +161,28 @@ void Core::checkUserAuthentication( const Message& m )
   if( !u.isValid() )
   {
     qWarning() << "Unable to create a new user (invalid protocol or password) from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
-    c->abort();
-    c->deleteLater();
+    closeConnection( c );
     return;
   }
 
   bool user_reconnect = false;
+  bool user_path_changed = false;
+
   User user_found = UserManager::instance().findUserByPath( u.path() );
   if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
     user_found = UserManager::instance().findUserByAccountName( u.accountName() );
 
   if( user_found.isValid() )
   {
+    if( u.path() != user_found.path() )
+    {
+      user_path_changed = true;
+      qDebug() << "On connection old user found" << user_found.path() << "and associated to" << u.path();
+    }
+    else
+      qDebug() << "User" << u.path() << "reconnected";
     u.setId( user_found.id() );
     u.setColor( user_found.color() );
-    qDebug() << "User" << u.path() << "reconnected";
     user_reconnect = true;
   }
   else
@@ -201,6 +204,8 @@ void Core::checkUserAuthentication( const Message& m )
 
   UserManager::instance().setUser( u );
   qDebug() << "User" << u.path() << "added with id" << u.id();
+  if( user_path_changed )
+    ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 
   sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
   sHtmlMsg += tr( "%1 is connected to %2 network." ).arg( u.name(), Settings::instance().programName() );

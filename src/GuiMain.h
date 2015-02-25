@@ -156,6 +156,7 @@ private:
   QMenu* gameMenu( GameInterface* );
   bool sendFile( const User&, const QString& );
   bool openWebUrl( const QString& );
+  QString checkFilePath( const QString& );
 
 private:
   QStackedWidget* mp_stackedWidget;

@@ -102,6 +102,8 @@ void Core::parseUserMessage( const User& u, const Message& m )
       qDebug() << "User" << user_with_new_vcard.path() << "has new vCard";
 #endif
       UserManager::instance().setUser( user_with_new_vcard );
+      if( user_with_new_vcard.path() != u.path() )
+        ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), user_with_new_vcard.path() );
       showUserVCardChanged( user_with_new_vcard );
     }
     else

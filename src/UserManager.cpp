@@ -125,17 +125,14 @@ User UserManager::findUserByPath( const QString& user_path ) const
   if( Settings::instance().trustNickname() )
   {
     QString user_nickname = User::nameFromPath( user_path );
-
     foreach( User u, m_users.toList() )
     {
       if( u.name() == user_nickname )
         return u;
     }
-
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to find user with name" << user_nickname;
 #endif
-
   }
 
   return User();
@@ -143,12 +140,12 @@ User UserManager::findUserByPath( const QString& user_path ) const
 
 User UserManager::findUserByAccountName( const QString& user_account_name ) const
 {
-  if( user_account_name == Settings::instance().localUser().accountName() )
+  if( user_account_name.toLower() == Settings::instance().localUser().accountName().toLower() )
     return Settings::instance().localUser();
 
   foreach( User u, m_users.toList() )
   {
-    if( u.accountName() == user_account_name )
+    if( u.accountName().toLower() == user_account_name.toLower() )
       return u;
   }
 

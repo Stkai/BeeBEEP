@@ -63,7 +63,7 @@ void Broadcaster::stopBroadcasting()
   qDebug() << "Broadcaster stops broadcasting";
   if( m_broadcastTimer.isActive() )
     m_broadcastTimer.stop();
-  m_broadcastSocket.abort();
+  m_broadcastSocket.close();
 }
 
 bool Broadcaster::sendBroadcastMessage()

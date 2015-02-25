@@ -47,7 +47,7 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_actClear = mp_menu->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
   mp_actClear->setToolTip( tr( "Clear all chat messages" ) );
   mp_menu->addSeparator();
-  act = mp_menu->addAction( QIcon( ":/images/disconnect.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
+  mp_actDelete = mp_menu->addAction( QIcon( ":/images/disconnect.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
 
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
@@ -63,9 +63,7 @@ void GuiChatList::reloadChatList()
   clearSelection();
   clear();
   foreach( Chat c, ChatManager::instance().constChatList() )
-  {
     updateChat( c.id() );
-  }
 }
 
 GuiChatItem* GuiChatList::itemFromChatId( VNumber chat_id )
@@ -124,6 +122,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
     return;
 
   mp_actClear->setDisabled( c.isEmpty() );
+  mp_actDelete->setDisabled( c.isDefault() );
 
   mp_menu->exec( QCursor::pos() );
 

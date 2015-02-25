@@ -1137,21 +1137,45 @@ void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
   if( !c.isValid() )
     return;
 
+  QString file_path_selected = checkFilePath( file_path );
+  if( file_path_selected.isEmpty() )
+    return;
+
   UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
   foreach( User u, chat_members.toList() )
-    sendFile( u, file_path );
+    sendFile( u, file_path_selected );
 }
 
 void GuiMain::sendFile( VNumber user_id )
 {
   User u = UserManager::instance().userList().find( user_id );
-  sendFile( u, QString() );
+  QString file_path_selected = checkFilePath( "" );
+  if( file_path_selected.isEmpty() )
+    return;
+  sendFile( u, file_path_selected );
+}
+
+QString GuiMain::checkFilePath( const QString& file_path )
+{
+  QString file_path_selected = file_path;
+  if( file_path.isNull() || file_path.isEmpty() || !QFile::exists( file_path ) )
+  {
+    file_path_selected = QFileDialog::getOpenFileName( this, tr( "%1 - Select a file" ).arg( Settings::instance().programName() ),
+                                                       Settings::instance().lastDirectorySelected() );
+    if( file_path_selected.isEmpty() || file_path_selected.isNull() )
+      return file_path_selected;
+
+      Settings::instance().setLastDirectorySelectedFromFile( file_path_selected );
+  }
+  else
+    file_path_selected = file_path;
+
+  return file_path_selected;
 }
 
 bool GuiMain::sendFile( const User& u, const QString& file_path )
 {
   User user_selected;
-  QString file_path_selected;
 
   if( !u.isValid() )
   {
@@ -1176,27 +1200,15 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
       QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
       return false;
     }
+
+    Chat c = ChatManager::instance().privateChatForUser( user_selected.id() );
+    if( c.isValid() )
+      showChat( c.id() );
   }
   else
     user_selected = u;
 
-  if( file_path.isNull() || file_path.isEmpty() || !QFile::exists( file_path ) )
-  {
-    file_path_selected = QFileDialog::getOpenFileName( this, tr( "%1 - Send a file to %2" ).arg( Settings::instance().programName(), u.name() ),
-                                                    Settings::instance().lastDirectorySelected() );
-    if( file_path_selected.isEmpty() || file_path_selected.isNull() )
-      return false;
-
-    Settings::instance().setLastDirectorySelectedFromFile( file_path_selected );
-  }
-  else
-    file_path_selected = file_path;
-
-  Chat c = ChatManager::instance().privateChatForUser( u.id() );
-  if( c.isValid() )
-    showChat( c.id() );
-
-  return mp_core->sendFile( user_selected, file_path_selected );
+  return mp_core->sendFile( user_selected, file_path );
 }
 
 void GuiMain::sendFile( const QString& file_path )

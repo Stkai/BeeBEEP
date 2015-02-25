@@ -70,12 +70,18 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
 
 void ConnectionSocket::readBlock()
 {
+  // QByteArray
+  // If the byte array is null: 0xFFFFFFFF (quint32)
+  // Otherwise: the array size (quint32) followed by the array bytes, i.e. size bytes
+
   QDataStream data_stream( this );
 
   if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     data_stream.setVersion( DATASTREAM_VERSION_2 );
   else
     data_stream.setVersion( DATASTREAM_VERSION_1 );
+
+
 
   if( m_blockSize == 0 )
   {
@@ -85,7 +91,7 @@ void ConnectionSocket::readBlock()
         return;
       DATA_BLOCK_SIZE_32 block_size_32;
       data_stream >> block_size_32;
-      m_blockSize = block_size_32;
+      m_blockSize = block_size_32 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format
     }
     else
     {
@@ -93,7 +99,7 @@ void ConnectionSocket::readBlock()
         return;
       DATA_BLOCK_SIZE_16 block_size_16;
       data_stream >> block_size_16;
-      m_blockSize = block_size_16;
+      m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format
     }
   }
 
@@ -106,6 +112,10 @@ void ConnectionSocket::readBlock()
 
   QByteArray byte_array_read;
   data_stream >> byte_array_read;
+
+  if( byte_array_read.size() != (int)m_blockSize )
+    qWarning() << "ConnectionSocket read an invalid block size from" << peerAddress().toString() << peerPort() << ":"
+               << byte_array_read.size() << "bytes read and" << m_blockSize << "bytes aspected";
 
   m_blockSize = 0;
 
@@ -228,14 +238,14 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   if( !m.isValid() )
   {
     qWarning() << "ConnectionSocket has received an invalid HELLO from" << peerAddress().toString() << peerPort();
-    abort();
+    emit abortRequest();
     return;
   }
 
   if( m.type() != Message::Hello )
   {
     qWarning() << "ConnectionSocket is waiting for HELLO, but another message type" << m.type() << "is arrived from" << peerAddress().toString() << peerPort();
-    abort();
+    emit abortRequest();
     return;
   }
 

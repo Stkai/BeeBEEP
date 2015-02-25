@@ -67,7 +67,7 @@ void Core::downloadFile( const User& u, const FileInfo& fi )
 {
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
-                         .arg( icon_html, fi.name(), u.path() ),
+                         .arg( icon_html, fi.name(), u.name() ),
                          DispatchToAllChatsWithUser );
   mp_fileTransfer->downloadFile( fi );
 }
@@ -83,7 +83,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
-                         fi.isDownload() ? tr( "from") : tr( "to" ), u.path(), msg ),
+                         fi.isDownload() ? tr( "from") : tr( "to" ), u.name(), msg ),
                          DispatchToAllChatsWithUser );
 
   FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
@@ -181,7 +181,7 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
   if( c->protoVersion() > 1 )
     c->sendMessage( m );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.path() ), DispatchToAllChatsWithUser );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser );
 }
 
 void Core::fileTransferServerListening()

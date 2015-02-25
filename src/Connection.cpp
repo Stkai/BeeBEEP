@@ -33,7 +33,6 @@ Connection::Connection( QObject *parent )
 {
   m_pingTimer.setInterval( Settings::instance().pingInterval() );
   connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( parseData( const QByteArray& ) ) );
-  connect( this, SIGNAL( disconnected() ), &m_pingTimer, SLOT( stop() ) );
   connect( &m_pingTimer, SIGNAL( timeout() ), this, SLOT( sendPing() ) );
 }
 
@@ -90,7 +89,7 @@ void Connection::sendPing()
   if( m_pongTime.elapsed() > Settings::instance().pongTimeout() )
   {
     qDebug() << "Pong timeout for connection from"  << peerAddress().toString() << peerPort();
-    abort();
+    emit abortRequest();
     return;
   }
 
@@ -110,3 +109,11 @@ void Connection::sendPong()
     qWarning() << "Unable to send PONG to" << peerAddress().toString() << peerPort();
 }
 
+void Connection::closeConnection()
+{
+#if defined( BEEBEEP_DEBUG )
+  qDebug() << "Close connection to" << peerAddress().toString() << peerPort();
+#endif
+  m_pingTimer.stop();
+  abort();
+}

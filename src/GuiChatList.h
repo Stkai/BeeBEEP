@@ -59,6 +59,7 @@ private:
   QMenu* mp_menu;
   VNumber m_chatSelected;
   QAction* mp_actClear;
+  QAction* mp_actDelete;
 
 };
 

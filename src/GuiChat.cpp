@@ -414,7 +414,7 @@ void GuiChat::dropEvent( QDropEvent *event )
   if( event->mimeData()->hasUrls() )
   {
     if( QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "Do you really want to send %1 %2 to all?" ).arg( event->mimeData()->urls().size() )
+                               tr( "Do you really want to send %1 %2 to the members of this chat?" ).arg( event->mimeData()->urls().size() )
                                .arg( event->mimeData()->urls().size() == 1 ? tr( "file" ) : tr( "files" ) ),
                                tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
     {
