@@ -148,7 +148,7 @@ QString Bee::uniqueFilePath( const QString& file_path )
 bool Bee::isFileTypeAudio( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();
-  return sx == "mp3" || sx == "wma" || sx == "flac" || sx == "aiff" || sx == "aac" || sx == "m4a" || sx == "m4p" || sx == "ogg" || sx == "oga" || sx == "ra" || sx == "rm";
+  return sx == "mp3" || sx == "wav" || sx == "wma" || sx == "flac" || sx == "aiff" || sx == "aac" || sx == "m4a" || sx == "m4p" || sx == "ogg" || sx == "oga" || sx == "ra" || sx == "rm";
 }
 
 bool Bee::isFileTypeVideo( const QString& file_suffix )
@@ -160,7 +160,8 @@ bool Bee::isFileTypeVideo( const QString& file_suffix )
 bool Bee::isFileTypeImage( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();
-  return sx == "jpg" || sx == "jpeg" || sx == "gif" || sx == "bmp" || sx == "png" || sx == "tiff" || sx == "tif" || sx == "psd";
+  return sx == "jpg" || sx == "jpeg" || sx == "gif" || sx == "bmp" || sx == "png" || sx == "tiff" || sx == "tif" || sx == "psd" || sx == "nef" || sx == "cr2"
+         || sx == "dng" || sx == "dcr" || sx == "3fr" || sx == "raf" || sx == "orf" || sx == "pef" || sx == "arw";
 }
 
 bool Bee::isFileTypeDocument( const QString& file_suffix )

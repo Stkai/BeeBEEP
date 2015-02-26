@@ -93,7 +93,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
-  connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), mp_shareNetwork, SLOT( loadShares( const User& ) ) );
+  connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), this, SLOT( checkChat( VNumber ) ) );
   connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), mp_savedChatList, SLOT( updateSavedChats() ) );
@@ -2032,3 +2032,11 @@ void GuiMain::showChatForGroup( VNumber group_id )
   c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
   showChat( c.id() );
 }
+
+void GuiMain::showSharesForUser( const User& u )
+{
+  mp_shareNetwork->showSharesForUser( u );
+  QString share_message = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( FileShare::instance().fileSharedFromUser( u.id() ).size() );
+  showMessage( share_message, 0 );
+}
+

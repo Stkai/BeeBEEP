@@ -85,6 +85,7 @@ public:
 
   inline VNumber newId();
   QString newMd5Id() const;
+  QString fileHash( const QFileInfo& ) const;
 
   QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const;
   QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key ) const;

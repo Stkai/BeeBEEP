@@ -42,6 +42,7 @@ public:
   explicit GuiShareNetwork( QWidget *parent = 0 );
   void setupToolBar( QToolBar* );
   void initShares();
+  void showSharesForUser( const User& );
 
 signals:
   void fileShareListRequested();
@@ -50,25 +51,24 @@ signals:
   void updateStatus( const QString&, int );
 
 public slots:
-  void loadShares( const User& );
   void showMessage( VNumber, VNumber, const QString& );
   void setFileTransferCompleted( VNumber, VNumber, const QString& );
 
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
-  void enableScanButton();
   void enableFilterButton();
-  void enableReloadButton();
+  void enableScanButton();
   void scanNetwork();
   void applyFilter();
   void reloadList();
   void updateList();
 
 protected:
-  bool filterPassThrough( const User&, const FileInfo& );
+  bool filterPassThrough( VNumber, const FileInfo& );
   GuiFileInfoItem* findItem( VNumber, VNumber );
   void showStatus( const QString& );
-  int countVisibleItems() const;
+  void loadShares( const User& );
+  void showFileTransferCompleted( GuiFileInfoItem*, const QString& );
 
 private:
   QLineEdit* mp_leFilter;

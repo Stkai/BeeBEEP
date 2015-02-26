@@ -44,11 +44,18 @@ bool Connection::sendMessage( const Message& m )
     qWarning() << "Connection has received an invalid message to send";
     return false;
   }
+
+  if( message_data.size() > 524288 )
+    qWarning() << "Outgoing message to" << peerAddress().toString() << peerPort() << "is TOO BIG:" << message_data.size() << "bytes";
+
   return sendData( message_data );
 }
 
 void Connection::parseData( const QByteArray& message_data )
 {
+  if( message_data.size() > 524288 )
+    qWarning() << "Incoming message from" << peerAddress().toString() << peerPort() << "is TOO BIG:" << message_data.size() << "bytes";
+
   Message m = Protocol::instance().toMessage( message_data );
   if( !m.isValid() )
   {

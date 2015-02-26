@@ -191,18 +191,11 @@ void Core::fileTransferServerListening()
 
 void Core::sendFileShareRequestToAll()
 {
-  QList<FileInfo> file_info_list;
-  file_info_list.append( FileInfo() );
-
   const QByteArray& file_share_request_message = Protocol::instance().fileShareRequestMessage();
-
   foreach( Connection* c, m_connections )
   {
-    if( !FileShare::instance().network().contains( c->userId() ) )
-    {
-      if( c->sendData( file_share_request_message ) )
-        FileShare::instance().addToNetwork( c->userId(), file_info_list );
-    }
+    if( !FileShare::instance().userHasFileShareList( c->userId() ) )
+      c->sendData( file_share_request_message );
   }
 }
 

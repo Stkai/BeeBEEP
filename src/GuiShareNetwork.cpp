@@ -127,13 +127,7 @@ void GuiShareNetwork::initShares()
 {
   if( FileShare::instance().network().isEmpty() )
     QTimer::singleShot( 200, this, SLOT( scanNetwork() ) );
-  if( countVisibleItems() > 0 )
-    mp_leFilter->setFocus();
-}
-
-void GuiShareNetwork::enableScanButton()
-{
-  mp_actScan->setEnabled( true );
+  mp_leFilter->setFocus();
 }
 
 void GuiShareNetwork::enableFilterButton()
@@ -141,18 +135,19 @@ void GuiShareNetwork::enableFilterButton()
   mp_actFilter->setEnabled( true );
 }
 
-void GuiShareNetwork::enableReloadButton()
+void GuiShareNetwork::enableScanButton()
 {
-  mp_actReload->setEnabled( true );
+  mp_actScan->setEnabled( true );
 }
 
 void GuiShareNetwork::scanNetwork()
 {
+  mp_twShares->clear();
   mp_actScan->setDisabled( true );
   mp_actReload->setEnabled( true );
-  QTimer::singleShot( 10000, this, SLOT( enableScanButton() ) );
   showStatus( tr( "%1 is searching shared files in your network" ).arg( Settings::instance().programName() ) );
   emit fileShareListRequested();
+  QTimer::singleShot( 30000, this, SLOT( enableScanButton() ) );
 }
 
 void GuiShareNetwork::applyFilter()
@@ -164,14 +159,13 @@ void GuiShareNetwork::applyFilter()
 void GuiShareNetwork::reloadList()
 {
   mp_actReload->setDisabled( true );
-  mp_twShares->clear();
-  QTimer::singleShot( 10000, this, SLOT( enableReloadButton() ) );
   QTimer::singleShot( 200, this, SLOT( updateList() ) );
 }
 
 void GuiShareNetwork::loadShares( const User& u )
 {
   int file_shared = 0;
+  int file_shared_visible = 0;
   FileSizeType share_size = 0;
 
   if( u.isConnected() )
@@ -180,42 +174,26 @@ void GuiShareNetwork::loadShares( const User& u )
 
     foreach( FileInfo fi, FileShare::instance().network().values( u.id() ) )
     {
-      if( !fi.isValid() )
-        continue;
-
-      item = findItem( u.id(), fi.id() );
-
-      if( !item )
+      if( fi.isValid() )
       {
-        item = new GuiFileInfoItem( mp_twShares, ColumnSize, FileSize );
-        item->setIcon( ColumnFile, GuiIconProvider::instance().findIcon( fi ) );
-        item->setText( ColumnFile, fi.name() );
-        item->setData( ColumnFile, UserId, u.id() );
-        item->setData( ColumnFile, FileId, fi.id() );
-        item->setData( ColumnFile, FilePath, QString( "" ) );
-        item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
-        item->setData( ColumnSize, FileSize, fi.size() );
-        item->setText( ColumnUser, u.name() );
-        item->setToolTip( ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
+        if( filterPassThrough( u.id(), fi ) )
+        {
+          item = new GuiFileInfoItem( mp_twShares, ColumnSize, FileSize );
+          item->setIcon( ColumnFile, GuiIconProvider::instance().findIcon( fi ) );
+          item->setText( ColumnFile, fi.name() );
+          item->setData( ColumnFile, UserId, u.id() );
+          item->setData( ColumnFile, FileId, fi.id() );
+          item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
+          item->setData( ColumnSize, FileSize, fi.size() );
+          item->setText( ColumnUser, u.name() );
+          item->setData( ColumnFile, FilePath, QString( "" ) );
+          item->setToolTip( ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
+          file_shared_visible++;
+        }
+
+        file_shared++;
+        share_size += fi.size();
       }
-
-      if( filterPassThrough( u, fi ) )
-        item->setHidden( false );
-      else
-        item->setHidden( true );
-
-      file_shared++;
-      share_size += fi.size();
-    }
-  }
-  else
-  {
-    QTreeWidgetItemIterator it( mp_twShares );
-    while( *it )
-    {
-      if( Bee::qVariantToVNumber( (*it)->data( ColumnFile, UserId ) ) == u.id() )
-        (*it)->setHidden( true );
-      ++it;
     }
   }
 
@@ -227,8 +205,12 @@ void GuiShareNetwork::loadShares( const User& u )
   else
   {
     int user_id_index_to_remove = mp_comboUsers->findData( u.id() );
-    if( user_id_index_to_remove > 0 && user_id_index_to_remove != mp_comboUsers->currentIndex() )
+    if( user_id_index_to_remove > 0 )
+    {
+      if( user_id_index_to_remove == mp_comboUsers->currentIndex() )
+        mp_comboUsers->setCurrentIndex( 0 );
       mp_comboUsers->removeItem( user_id_index_to_remove );
+    }
   }
 
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 1 );
@@ -256,15 +238,17 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 void GuiShareNetwork::updateList()
 {
   setCursor( Qt::WaitCursor );
+  if( mp_twShares->topLevelItemCount() > 0 )
+    mp_twShares->clear();
 
   foreach( User u, UserManager::instance().userList().toList() )
-   loadShares( u );
+    loadShares( u );
 
   setCursor( Qt::ArrowCursor );
   showStatus( "" );
 }
 
-bool GuiShareNetwork::filterPassThrough( const User& u, const FileInfo& fi )
+bool GuiShareNetwork::filterPassThrough( VNumber user_id, const FileInfo& fi )
 {
   QString filter_name = mp_leFilter->text().simplified();
   if( filter_name == QString( "*" ) || filter_name == QString( "*.*" ) )
@@ -281,7 +265,7 @@ bool GuiShareNetwork::filterPassThrough( const User& u, const FileInfo& fi )
   }
 
   VNumber filter_user_id = mp_comboUsers->currentIndex() <= 0 ? 0 : Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
-  if( filter_user_id > 0 && u.id() != filter_user_id )
+  if( filter_user_id > 0 && user_id != filter_user_id )
     return false;
 
   if( mp_comboFileType->currentIndex() == (int)Bee::NumFileType )
@@ -318,23 +302,15 @@ void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_in
   if( !item )
     return;
 
+  showFileTransferCompleted( item, file_path );
+}
+
+void GuiShareNetwork::showFileTransferCompleted( GuiFileInfoItem* item, const QString& file_path )
+{
   item->setData( ColumnFile, FilePath, file_path );
   item->setToolTip( ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
   for( int i = 0; i < mp_twShares->columnCount(); i++ )
     item->setBackgroundColor( i, QColor( "#91D606" ) );
-}
-
-int GuiShareNetwork::countVisibleItems() const
-{
-  int counter = 0;
-  QTreeWidgetItemIterator it( mp_twShares );
-  while( *it )
-  {
-    if( !(*it)->isHidden() )
-      counter++;
-    ++it;
-  }
-  return counter;
 }
 
 void GuiShareNetwork::showStatus( const QString& status_text )
@@ -342,7 +318,7 @@ void GuiShareNetwork::showStatus( const QString& status_text )
   if( status_text.isEmpty() )
   {
     int share_size = FileShare::instance().network().size();
-    int num_items_visible = countVisibleItems();
+    int num_items_visible = mp_twShares->topLevelItemCount();
 
     QString status_msg;
     if( share_size != num_items_visible )
@@ -356,4 +332,14 @@ void GuiShareNetwork::showStatus( const QString& status_text )
   {
     emit updateStatus( status_text, 0 );
   }
+}
+
+void GuiShareNetwork::showSharesForUser( const User& u )
+{
+  if( FileShare::instance().network().count( u.id() ) > 0 && mp_twShares->topLevelItemCount() == 0 )
+    QTimer::singleShot( 200, this, SLOT( updateList() ) );
+  else
+    mp_actReload->setEnabled( true);
+
+  showStatus( "" );
 }

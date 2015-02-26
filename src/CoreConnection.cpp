@@ -58,13 +58,17 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
 
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
-  //if( !hasConnection( sender_ip, -1 ) ) // Check it: before the sender port is not checked and it was passed -1
-  if( !hasConnection( sender_ip, sender_port ) )
+  if( hasConnection( sender_ip, sender_port ) )
   {
-    Connection *c = new Connection( this );
-    setNewConnection( c );
-    c->connectToHost( sender_ip, sender_port );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Connection from" << sender_ip.toString() << sender_ip << "is already open";
+#endif
+    return;
   }
+
+  Connection *c = new Connection( this );
+  setNewConnection( c );
+  c->connectToHost( sender_ip, sender_port );
 }
 
 void Core::setNewConnection( Connection *c )
@@ -80,12 +84,9 @@ void Core::setNewConnection( Connection *c )
 
 void Core::addConnectionReadyForUse( Connection* c )
 {
-  if( hasConnection( c->peerAddress(), c->peerPort() ) )
-  {
-    qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "is, already, ready for use";
-    return;
-  }
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "is ready for use";
+#endif
   connect( c, SIGNAL( newMessage( VNumber, const Message& ) ), this, SLOT( parseMessage( VNumber, const Message& ) ) );
   m_connections.append( c );
 }
@@ -121,7 +122,6 @@ void Core::closeConnection( Connection *c )
   else
     qDebug() << "Connection pointer removed from connection list";
 
-  qDebug() << "Closing connection for user" << c->userId();
   User u = UserManager::instance().userList().find( c->userId() );
   if( u.isValid() )
   {

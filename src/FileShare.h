@@ -46,6 +46,7 @@ public:
   int addToNetwork( VNumber, const QList<FileInfo>& );
   int removeFromNetwork( VNumber );
   bool userHasFileShareList( VNumber ) const;
+  inline QList<FileInfo> fileSharedFromUser( VNumber ) const;
 
   static FileShare& instance()
   {
@@ -78,5 +79,6 @@ private:
 inline const QMultiMap<QString, FileInfo>& FileShare::local() const { return m_local; }
 inline const QMultiMap<VNumber, FileInfo>& FileShare::network() const { return m_network; }
 inline FileSizeType FileShare::localSize( const QString& share_path ) const { return m_localSize.contains( share_path ) ? m_localSize.value( share_path ) : 0; }
+inline QList<FileInfo> FileShare::fileSharedFromUser( VNumber user_id ) const { return m_network.values( user_id ); }
 
 #endif // BEEBEEP_FILESHARE_H

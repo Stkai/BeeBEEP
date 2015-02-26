@@ -607,7 +607,7 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   fi.setPassword( password.toUtf8() );
 
   /* Skip other data */
-  if( sl.size() > 4 )
+  if( sl.size() > 4  )
     qWarning() << "FILEINFO message contains more data. Skip it";
 
   return fi;
@@ -678,6 +678,7 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
     if( sl_tmp.size() >= 5 )
     {
       FileInfo fi;
+
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
       fi.setHostPort( server_port );
@@ -746,7 +747,7 @@ QString Protocol::newMd5Id() const
 {
   QStringList sl;
   sl << QString::number( Random::d100() );
-  sl << Settings::instance().localUser().name();
+  sl << Settings::instance().localUser().path();
   sl << QString::number( Random::d100() );
   sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" );
   sl << QString::number( Random::d100() );

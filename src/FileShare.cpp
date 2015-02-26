@@ -29,7 +29,7 @@
 FileShare* FileShare::mp_instance = NULL;
 
 FileShare::FileShare()
-  : m_local(), m_network()
+  : m_local(), m_localSize(), m_network()
 {
 }
 
@@ -44,8 +44,9 @@ void FileShare::clearLocal()
   m_localSize.clear();
 }
 
-void FileShare::addToLocal( const QString& share_path, const QList<FileInfo>& share_list, FileSizeType share_size )
+void FileShare::addToLocal( const QString& sp, const QList<FileInfo>& share_list, FileSizeType share_size )
 {
+  QString share_path = QDir::toNativeSeparators( sp );
   m_localSize.insert( share_path, share_size );
   if( m_local.contains( share_path ) )
     m_local.remove( share_path );
@@ -90,6 +91,7 @@ FileInfo FileShare::localFileInfo( VNumber file_info_id ) const
     if( fi.id() == file_info_id )
       return fi;
   }
+
   return FileInfo();
 }
 
@@ -101,3 +103,4 @@ bool FileShare::userHasFileShareList( VNumber user_id ) const
   else
     return false;
 }
+

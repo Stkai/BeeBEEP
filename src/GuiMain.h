@@ -125,6 +125,7 @@ private slots:
   void removeGroup( VNumber );
   void removeChat( VNumber );
   void showChatForGroup( VNumber );
+  void showSharesForUser( const User& );
 
 protected:
   void closeEvent( QCloseEvent* );
