@@ -59,6 +59,8 @@ public:
   inline void setPassword( const QByteArray& );
   inline VNumber id() const;
   inline void setId( VNumber );
+  inline const QString& fileHash() const;
+  inline void setFileHash( const QString& );
 
 private:
   TransferType m_transferType;
@@ -70,6 +72,7 @@ private:
   int m_hostPort;
   QByteArray m_password;
   VNumber m_id;
+  QString m_fileHash;
 
 };
 
@@ -97,5 +100,7 @@ inline const QByteArray& FileInfo::password() const { return m_password; }
 inline void FileInfo::setPassword( const QByteArray& new_value ) { m_password = new_value; }
 inline VNumber FileInfo::id() const { return m_id; }
 inline void FileInfo::setId( VNumber new_value ) { m_id = new_value; }
+inline const QString& FileInfo::fileHash() const { return m_fileHash; }
+inline void FileInfo::setFileHash( const QString& new_value ) { m_fileHash = new_value; }
 
 #endif // BEEBEEP_FILEINFO_H

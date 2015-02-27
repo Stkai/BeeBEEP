@@ -29,7 +29,7 @@
 FileShare* FileShare::mp_instance = NULL;
 
 FileShare::FileShare()
-  : m_local(), m_localSize(), m_network()
+  : m_local(), m_localSize(), m_network(), m_downloadedFiles()
 {
 }
 
@@ -103,4 +103,30 @@ bool FileShare::userHasFileShareList( VNumber user_id ) const
   else
     return false;
 }
+
+void FileShare::addDownloadedFile( const FileInfo& file_info )
+{
+  QList<FileInfo>::iterator it = m_downloadedFiles.begin();
+  while( it != m_downloadedFiles.end() )
+  {
+    if( it->fileHash() == file_info.fileHash() )
+    {
+      *it = file_info;
+      return;
+    }
+    ++it;
+  }
+  m_downloadedFiles.append( file_info );
+}
+
+FileInfo FileShare::downloadedFile( const QString& file_info_hash ) const
+{
+  foreach( FileInfo fi, m_downloadedFiles )
+  {
+    if( fi.fileHash() == file_info_hash )
+      return fi;
+  }
+  return FileInfo();
+}
+
 

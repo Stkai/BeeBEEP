@@ -47,6 +47,9 @@ public:
   int removeFromNetwork( VNumber );
   bool userHasFileShareList( VNumber ) const;
   inline QList<FileInfo> fileSharedFromUser( VNumber ) const;
+  void addDownloadedFile( const FileInfo& );
+  FileInfo downloadedFile( const QString& ) const;
+  inline bool isFileDownloaded( const QString& ) const;
 
   static FileShare& instance()
   {
@@ -71,6 +74,7 @@ private:
   QMultiMap<QString, FileInfo> m_local;
   QMap<QString, FileSizeType> m_localSize;
   QMultiMap<VNumber, FileInfo> m_network;
+  QList<FileInfo> m_downloadedFiles;
 
 };
 
@@ -80,5 +84,6 @@ inline const QMultiMap<QString, FileInfo>& FileShare::local() const { return m_l
 inline const QMultiMap<VNumber, FileInfo>& FileShare::network() const { return m_network; }
 inline FileSizeType FileShare::localSize( const QString& share_path ) const { return m_localSize.contains( share_path ) ? m_localSize.value( share_path ) : 0; }
 inline QList<FileInfo> FileShare::fileSharedFromUser( VNumber user_id ) const { return m_network.values( user_id ); }
+inline bool FileShare::isFileDownloaded( const QString& file_info_hash ) const { return downloadedFile( file_info_hash ).isValid(); }
 
 #endif // BEEBEEP_FILESHARE_H

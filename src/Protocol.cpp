@@ -120,14 +120,14 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
     qWarning() << "Invalid number of fields in message:" << message_data;
     return m;
   }
-  m.setType( messageType( sl.first() ) );
+  m.setType( messageType( sl.takeFirst() ) );
   if( !m.isValid() )
   {
     qWarning() << "Invalid message type:" << message_data;
     return m;
   }
-  sl.removeFirst();
-  VNumber msg_id = Bee::qVariantToVNumber( sl.first() );
+
+  VNumber msg_id = Bee::qVariantToVNumber( sl.takeFirst() );
   if( msg_id == ID_INVALID )
   {
     qWarning() << "Invalid message id:" << message_data;
@@ -135,17 +135,17 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
     return m;
   }
   m.setId( msg_id );
-  sl.removeFirst();
+
   bool ok = false;
-  int msg_size = sl.first().toInt( &ok );
+  int msg_size = sl.takeFirst().toInt( &ok );
   if( !ok )
   {
     qWarning() << "Invalid message size:" << message_data;
     m.setType( Message::Undefined );
     return m;
   }
-  sl.removeFirst();
-  int msg_flags = sl.first().toInt( &ok );
+
+  int msg_flags = sl.takeFirst().toInt( &ok );
   if( !ok )
   {
     qWarning() << "Invalid message flags:" << message_data;
@@ -153,17 +153,17 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
     return m;
   }
   m.setFlags( msg_flags );
-  sl.removeFirst();
-  m.setData( sl.first() );
-  sl.removeFirst();
-  m.setTimestamp( QDateTime::fromString( sl.first(), Qt::ISODate ) );
+
+  m.setData( sl.takeFirst() );
+
+  m.setTimestamp( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
   if( !m.timestamp().isValid() )
   {
     qWarning() << "Invalid message timestamp:" << message_data;
     m.setType( Message::Undefined );
     return m;
   }
-  sl.removeFirst();
+
 
   QString msg_txt;
   if( sl.size() > 1 )
@@ -482,15 +482,12 @@ Group Protocol::loadGroup( const QString& group_data_saved )
 
   Group g;
   g.setId( newId() );
-  g.setName( sl.first() );
-  sl.removeFirst();
-  g.setPrivateId( sl.first() );
-  sl.removeFirst();
+  g.setName( sl.takeFirst() );
+  g.setPrivateId( sl.takeFirst() );
   bool ok = false;
-  int members = sl.first().toInt( &ok );
+  int members = sl.takeFirst().toInt( &ok );
   if( !ok )
     return Group();
-  sl.removeFirst();
 
   UserList member_list;
   QString user_path;
@@ -503,10 +500,8 @@ Group Protocol::loadGroup( const QString& group_data_saved )
   {
     if( sl.size() >= 2 )
     {
-      user_path = sl.first();
-      sl.removeFirst();
-      user_account_name = sl.first();
-      sl.removeFirst();
+      user_path = sl.takeFirst();
+      user_account_name = sl.takeFirst();
       user_found = UserManager::instance().findUserByPath( user_path );
       if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
         user_found = UserManager::instance().findUserByAccountName( user_account_name );
@@ -588,6 +583,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   sl << QString::number( fi.size() );
   sl << QString::number( fi.id() );
   sl << QString::fromUtf8( fi.password() );
+  sl << fi.fileHash();
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   return m;
@@ -600,14 +596,18 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 4 )
     return fi;
-  fi.setHostPort( sl.at( 0 ).toInt() );
-  fi.setSize( Bee::qVariantToVNumber( sl.at( 1 ) ) );
-  fi.setId( Bee::qVariantToVNumber( sl.at( 2 ) ) );
-  QString password = sl.at( 3 );
+  fi.setHostPort( sl.takeFirst().toInt() );
+  fi.setSize( Bee::qVariantToVNumber( sl.takeFirst() ) );
+  fi.setId( Bee::qVariantToVNumber( sl.takeFirst() ) );
+  QString password = sl.takeFirst();
   fi.setPassword( password.toUtf8() );
+  if( !sl.isEmpty() )
+    fi.setFileHash( sl.takeFirst() );
+  else
+    fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
 
   /* Skip other data */
-  if( sl.size() > 4  )
+  if( !sl.isEmpty()  )
     qWarning() << "FILEINFO message contains more data. Skip it";
 
   return fi;
@@ -622,6 +622,7 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi )
   file_info.setSize( fi.size() );
   QString password_key = QString( "%1%2%3%4" ).arg( file_info.id() ).arg( file_info.path() ).arg( QDateTime::currentDateTime().toString() ).arg( Random::number( 111111, 999999 ) );
   file_info.setPassword( Settings::instance().hash( password_key ) );
+  file_info.setFileHash( fileInfoHash( fi ) );
   return file_info;
 }
 
@@ -642,6 +643,7 @@ void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& f
     sl << QString::number( fi.size() );
     sl << QString::number( fi.id() );
     sl << QString::fromUtf8( fi.password() );
+    sl << fi.fileHash();
 
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
   }
@@ -660,12 +662,12 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
     return file_info_list;
 
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
-  if( sl.size() <= 0 )
+  if( sl.isEmpty() )
     return file_info_list;
 
-  int server_port = sl.at( 0 ).toInt();
+  int server_port = sl.takeFirst().toInt();
   /* Skip other data */
-  if( sl.size() > 1 )
+  if( !sl.isEmpty() )
     qWarning() << "FILESHARE message contains more data. Skip it";
 
   sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
@@ -682,11 +684,15 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
       fi.setHostPort( server_port );
-      fi.setName( sl_tmp.at( 0 ) );
-      fi.setSuffix( sl_tmp.at( 1 ) );
-      fi.setSize( Bee::qVariantToVNumber( sl_tmp.at( 2 ) ) );
-      fi.setId( Bee::qVariantToVNumber( sl_tmp.at( 3 ) ) );
-      fi.setPassword( sl_tmp.at( 4 ).toUtf8() );
+      fi.setName( sl_tmp.takeFirst() );
+      fi.setSuffix( sl_tmp.takeFirst() );
+      fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
+      fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
+      fi.setPassword( sl_tmp.takeFirst().toUtf8() );
+      if( !sl_tmp.isEmpty() )
+        fi.setFileHash( sl_tmp.takeFirst() );
+      else
+        fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
 
       file_info_list.append( fi );
     }
@@ -704,7 +710,7 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
   if( m.data().size() <= 0 )
     return cmd;
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
-  if( sl.size() <= 0 )
+  if( sl.isEmpty() )
     return cmd;
 
   if( !sl.first().isEmpty() )
@@ -720,16 +726,15 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
   }
 
   sl.removeFirst();
-  if( sl.size() <= 0 )
+  if( sl.isEmpty() )
     return cmd;
   else
-    cmd.setGroupId( sl.first() );
+    cmd.setGroupId( sl.takeFirst() );
 
-  sl.removeFirst();
-  if( sl.size() <= 0 )
+  if( sl.isEmpty() )
     return cmd;
   else
-    cmd.setGroupName( sl.first() );
+    cmd.setGroupName( sl.takeFirst() );
 
   return cmd;
 }
@@ -743,6 +748,30 @@ QString Protocol::chatMessageDataToString( const ChatMessageData& cmd )
   return sl.join( DATA_FIELD_SEPARATOR );
 }
 
+QString Protocol::fileInfoHash( const QFileInfo& file_info ) const
+{
+  QStringList sl;
+  sl << file_info.fileName();
+  sl << QString::number( file_info.size() );
+  sl << file_info.lastModified().toString( "dd.MM.yyyy-hh:mm:ss" );
+
+  QCryptographicHash ch( QCryptographicHash::Sha1 );
+  ch.addData( sl.join( "-" ).toUtf8() );
+  return QString::fromLatin1( ch.result().toHex() );
+}
+
+QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_info_name, FileSizeType file_info_size ) const
+{
+  QStringList sl;
+  sl << QString::number( file_info_id );
+  sl << file_info_name;
+  sl << QString::number( file_info_size );
+
+  QCryptographicHash ch( QCryptographicHash::Sha1 );
+  ch.addData( sl.join( "-" ).toUtf8() );
+  return QString::fromLatin1( ch.result().toHex() );
+}
+
 QString Protocol::newMd5Id() const
 {
   QStringList sl;
@@ -754,7 +783,6 @@ QString Protocol::newMd5Id() const
 
   QCryptographicHash ch( QCryptographicHash::Sha1 );
   ch.addData( sl.join( "=" ).toUtf8() );
-
   return QString::fromLatin1( ch.result().toHex() );
 }
 

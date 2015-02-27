@@ -153,7 +153,10 @@ void GuiShareNetwork::scanNetwork()
 void GuiShareNetwork::applyFilter()
 {
   mp_actFilter->setDisabled( true );
-  QTimer::singleShot( 200, this, SLOT( updateList() ) );
+  if( mp_actReload->isEnabled() )
+    reloadList();
+  else
+    QTimer::singleShot( 200, this, SLOT( updateList() ) );
 }
 
 void GuiShareNetwork::reloadList()
@@ -171,6 +174,7 @@ void GuiShareNetwork::loadShares( const User& u )
   if( u.isConnected() )
   {
     GuiFileInfoItem *item;
+    FileInfo file_info_downloaded;
 
     foreach( FileInfo fi, FileShare::instance().network().values( u.id() ) )
     {
@@ -186,8 +190,16 @@ void GuiShareNetwork::loadShares( const User& u )
           item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
           item->setData( ColumnSize, FileSize, fi.size() );
           item->setText( ColumnUser, u.name() );
-          item->setData( ColumnFile, FilePath, QString( "" ) );
-          item->setToolTip( ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
+          file_info_downloaded = FileShare::instance().downloadedFile( fi.fileHash() );
+          if( file_info_downloaded.isValid() )
+          {
+            showFileTransferCompleted( item, file_info_downloaded.path() );
+          }
+          else
+          {
+            item->setData( ColumnFile, FilePath, QString( "" ) );
+            item->setToolTip( ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
+          }
           file_shared_visible++;
         }
 
@@ -309,6 +321,8 @@ void GuiShareNetwork::showFileTransferCompleted( GuiFileInfoItem* item, const QS
 {
   item->setData( ColumnFile, FilePath, file_path );
   item->setToolTip( ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
+  if( item->text( ColumnStatus ).isEmpty() )
+    item->setText( ColumnStatus, tr( "Transfer completed" ) );
   for( int i = 0; i < mp_twShares->columnCount(); i++ )
     item->setBackgroundColor( i, QColor( "#91D606" ) );
 }
@@ -339,7 +353,7 @@ void GuiShareNetwork::showSharesForUser( const User& u )
   if( FileShare::instance().network().count( u.id() ) > 0 && mp_twShares->topLevelItemCount() == 0 )
     QTimer::singleShot( 200, this, SLOT( updateList() ) );
   else
-    mp_actReload->setEnabled( true);
+    mp_actReload->setEnabled( true );
 
   showStatus( "" );
 }

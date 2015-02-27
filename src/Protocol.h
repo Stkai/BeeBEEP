@@ -56,6 +56,8 @@ public:
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
   FileInfo fileInfo( const QFileInfo& );
+  QString fileInfoHash( const QFileInfo& ) const;
+  QString fileInfoHashTmp( VNumber, const QString&, FileSizeType ) const;
   ChatMessageData dataFromChatMessage( const Message& );
   QString chatMessageDataToString( const ChatMessageData& );
   int protoVersion( const Message& ) const;

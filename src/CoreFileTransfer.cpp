@@ -91,6 +91,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   {
     if( peer->isTransferCompleted() && fi.isDownload() )
     {
+      FileShare::instance().addDownloadedFile( fi );
       QString s_open = tr( "Open" );
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 <a href='%3'>%4</a>." )
                              .arg( icon_html, s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() ),

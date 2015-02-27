@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>%1 Unable to send the file: user is not connected.</source>
-        <translation>%1 Impossibile inviare il file: l&apos;utente non è connesso.</translation>
+        <translation type="obsolete">%1 Impossibile inviare il file: l&apos;utente non è connesso.</translation>
     </message>
     <message>
         <source>%1 Unable to send the file: bind address/port failed.</source>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>%1 You send the file %2 to %3.</source>
-        <translation>%1 Stai inviando il file %2 a %3.</translation>
+        <translation type="obsolete">%1 Stai inviando il file %2 a %3.</translation>
     </message>
     <message>
         <source>%1 is connected to %2 network.</source>
@@ -233,15 +233,15 @@
     </message>
     <message>
         <source>%1 cannot be invited to the group.</source>
-        <translation>%1 non può essere invitato nel gruppo.</translation>
+        <translation type="obsolete">%1 non può essere invitato nel gruppo.</translation>
     </message>
     <message>
         <source>%1 An error occurred when %2 tries to add you to the group: %3.</source>
-        <translation>%1 Si è verificato un errore quando %2 ha provato ad aggiungerti al gruppo: %3.</translation>
+        <translation type="obsolete">%1 Si è verificato un errore quando %2 ha provato ad aggiungerti al gruppo: %3.</translation>
     </message>
     <message>
         <source>%1 %2 adds you to the group: %3.</source>
-        <translation>%1 %2 ti ha aggiunto al gruppo: %3.</translation>
+        <translation type="obsolete">%1 %2 ti ha aggiunto al gruppo: %3.</translation>
     </message>
     <message>
         <source>%1 Chat with %2 (%3).</source>
@@ -289,7 +289,7 @@
     </message>
     <message>
         <source>%1 cannot be informed that you have left the group.</source>
-        <translation>A %1 non può essere notificato che hai lasciato il gruppo.</translation>
+        <translation type="obsolete">A %1 non può essere notificato che hai lasciato il gruppo.</translation>
     </message>
     <message>
         <source>%1 You have left the group.</source>
@@ -298,6 +298,34 @@
     <message>
         <source>%1 %2 has left the group.</source>
         <translation>%1 %2 ha lasciato il gruppo.</translation>
+    </message>
+    <message>
+        <source>%1 %2 can not be invited to the group.</source>
+        <translation>%1 %2 non può essere aggiunto al gruppo.</translation>
+    </message>
+    <message>
+        <source>%1 %2 cannot be informed that you have left the group.</source>
+        <translation>%1 A %2 non può essere notificato che hai lasciato il gruppo.</translation>
+    </message>
+    <message>
+        <source>%1 %2 is a folder. You can share it.</source>
+        <translation>%1 %2 è una cartella. Puoi condividerla se vuoi.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send %2: %3 is not connected.</source>
+        <translation>%1 Impossibile inviare %2: %3 non è in linea.</translation>
+    </message>
+    <message>
+        <source>%1 You send %2 to %3.</source>
+        <translation>%1 Stai inviando %2 a %3.</translation>
+    </message>
+    <message>
+        <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
+        <translation>%1 Si è verificato un errore quando %2 ha provato ad aggiungerti alla conversazione di gruppo: %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 adds you to the group chat: %3.</source>
+        <translation>%1 %2 ti ha aggiunto alla conversazione di gruppo: %3.</translation>
     </message>
 </context>
 <context>
@@ -595,6 +623,26 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Create a group with two or more users</source>
         <translation>Crea un gruppo con due o più membri</translation>
     </message>
+    <message>
+        <source>Do you really want to send %1 %2 to the members of this chat?</source>
+        <translation>Sei sicuro di voler inviare %1 %2 ai membri di questa conversazione?</translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>files</source>
+        <translation>file</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -609,6 +657,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Clear all chat messages</source>
         <translation>Cancella tutti i messaggi della conversazione</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Cancella</translation>
     </message>
 </context>
 <context>
@@ -985,7 +1037,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>developed by Marco Mastroddi</source>
-        <translation>sviluppato da Marco Mastroddi</translation>
+        <translation type="obsolete">sviluppato da Marco Mastroddi</translation>
     </message>
     <message>
         <source>Profile...</source>
@@ -1245,7 +1297,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>%1 - Send a file to %2</source>
-        <translation>%1 - Invia un file a %2</translation>
+        <translation type="obsolete">%1 - Invia un file a %2</translation>
     </message>
     <message>
         <source>Do you want to download from %1
@@ -1272,10 +1324,6 @@ il file %2 (%3)?</translation>
     <message>
         <source>%1 - Profile</source>
         <translation type="obsolete">%1 - Profilo</translation>
-    </message>
-    <message>
-        <source>e-mail: marco.mastroddi@gmail.com</source>
-        <translation></translation>
     </message>
     <message>
         <source>Use HTML tags</source>
@@ -1863,6 +1911,26 @@ il file %2 (%3)?</translation>
     <message>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Vuoi veramente cancellare il gruppo &apos;%1&apos;?</translation>
+    </message>
+    <message>
+        <source>developed by</source>
+        <translation>sviluppato da</translation>
+    </message>
+    <message>
+        <source>How many minutes of idle %1 can wait before changing status to away?</source>
+        <translation>Quanti minuti di inattività deve aspettare %1 prima di cambiare lo stato in assente?</translation>
+    </message>
+    <message>
+        <source>%1 - Select a file</source>
+        <translation>%1 - Seleziona un file</translation>
+    </message>
+    <message>
+        <source>Unable to delete this chat.</source>
+        <translation>Impossibile cancellare questa conversazione.</translation>
+    </message>
+    <message>
+        <source>%1 has shared %2 files</source>
+        <translation>%1 ha condiviso %2 file</translation>
     </message>
 </context>
 <context>
@@ -2513,6 +2581,10 @@ il file %2 (%3)?</translation>
         <source>Double click to open %1</source>
         <translation>Doppio click per aprire %1</translation>
     </message>
+    <message>
+        <source>Transfer completed</source>
+        <translation>Trasferimento completato</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareNetworkWidget</name>
@@ -3124,7 +3196,7 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation>Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL FrecciaGiù.</translation>
+        <translation>Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL+FrecciaGiù.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
@@ -3185,6 +3257,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin) </source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can drop files to active chat and send them to members.</source>
+        <translation>Puoi trascinare i file sulla conversazione attiva per inviarli a tutti i membri.</translation>
     </message>
 </context>
 <context>
