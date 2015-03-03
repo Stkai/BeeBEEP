@@ -316,15 +316,22 @@ void Settings::loadPreConf()
   }
 }
 
-void Settings::load()
+QSettings* Settings::objectSettings() const
 {
-  qDebug() << "Creating local user and loading settings";
   QSettings *sets;
 
   if( m_useSettingsFileIni )
     sets = new QSettings( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
   else
     sets = new QSettings( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
+
+  return sets;
+}
+
+void Settings::load()
+{
+  qDebug() << "Creating local user and loading settings";
+  QSettings *sets = objectSettings();
 
   m_firstTime = sets->allKeys().isEmpty();
 
@@ -495,12 +502,7 @@ void Settings::save()
 {
   qDebug() << "Saving settings";
 
-  QSettings *sets;
-
-  if( m_useSettingsFileIni )
-    sets = new QSettings( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
-  else
-    sets = new QSettings( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
+  QSettings *sets = objectSettings();
 
   sets->beginGroup( "Version" );
   sets->setValue( "Program", version( true ) );

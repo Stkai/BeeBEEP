@@ -34,6 +34,8 @@ class Settings
   static Settings* mp_instance;
 
 public:
+  QSettings* objectSettings() const;
+
   inline bool firstTime() const;
   inline void setFirstTime( bool );
 

@@ -1932,6 +1932,18 @@ il file %2 (%3)?</translation>
         <source>%1 has shared %2 files</source>
         <translation>%1 ha condiviso %2 file</translation>
     </message>
+    <message>
+        <source>Settings can not be saved. Do you want to continue?</source>
+        <translation type="obsolete">Le preferenze non possono essere salvate. Vuoi continuare?</translation>
+    </message>
+    <message>
+        <source>Settings can not be saved in path:</source>
+        <translation>Le preferenze non possono essere salvate nel percorso seguente:</translation>
+    </message>
+    <message>
+        <source>Do you want to close anyway?</source>
+        <translation>Vuoi chiudere ugualmente il programma?</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

@@ -207,13 +207,26 @@ void GuiMain::closeEvent( QCloseEvent* e )
     }
 
     if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
-                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::No )
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
     {
       e->ignore();
       return;
     }
 
     mp_core->stop();
+  }
+
+  QSettings* sets = Settings::instance().objectSettings();
+  sets->deleteLater();
+  if( !sets->isWritable() )
+  {
+    if( QMessageBox::warning( this, Settings::instance().programName(), tr( "Settings can not be saved in path:" )
+                              + QString( "<br>%1<br>" ).arg( sets->fileName() ) +  tr( "Do you want to close anyway?" ),
+                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+    {
+      e->ignore();
+      return;
+    }
   }
 
   if( isVisible() )
