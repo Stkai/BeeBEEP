@@ -115,12 +115,20 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_comboUsers = new QComboBox( bar );
   mp_comboUsers->setObjectName( "GuiComboBoxFilterUser" );
   mp_comboUsers->setMinimumSize( QSize( 100, 0 ) );
-  mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
-  mp_comboUsers->setCurrentIndex( 0 );
-  mp_comboUsers->setEnabled( false );
+  resetComboUsers();
   bar->addWidget( mp_comboUsers );
   connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
 
+}
+
+void GuiShareNetwork::resetComboUsers()
+{
+  if( mp_comboUsers->count() > 0 )
+    mp_comboUsers->clear();
+
+  mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
+  mp_comboUsers->setCurrentIndex( 0 );
+  mp_comboUsers->setEnabled( false );
 }
 
 void GuiShareNetwork::initShares()
@@ -142,6 +150,7 @@ void GuiShareNetwork::enableScanButton()
 
 void GuiShareNetwork::scanNetwork()
 {
+  resetComboUsers();
   mp_twShares->clear();
   mp_actScan->setDisabled( true );
   mp_actReload->setEnabled( true );
@@ -351,9 +360,16 @@ void GuiShareNetwork::showStatus( const QString& status_text )
 void GuiShareNetwork::showSharesForUser( const User& u )
 {
   if( FileShare::instance().network().count( u.id() ) > 0 && mp_twShares->topLevelItemCount() == 0 )
+  {
     QTimer::singleShot( 200, this, SLOT( updateList() ) );
+  }
   else
-    mp_actReload->setEnabled( true );
+  {
+    if( mp_comboUsers->findData( u.id() ) == -1 )
+      loadShares( u );
+    else
+      mp_actReload->setEnabled( true );
+  }
 
   showStatus( "" );
 }

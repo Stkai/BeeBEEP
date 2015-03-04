@@ -325,6 +325,9 @@ QSettings* Settings::objectSettings() const
   else
     sets = new QSettings( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
 
+  if( !sets->isWritable() )
+    qWarning() << sets->fileName() << "is not a writable path. Settings cannot be saved.";
+
   return sets;
 }
 
@@ -334,7 +337,6 @@ void Settings::load()
   QSettings *sets = objectSettings();
 
   m_firstTime = sets->allKeys().isEmpty();
-
   sets->beginGroup( "Version" );
   m_dataStreamVersion = sets->value( "DataStream", (int)DATASTREAM_VERSION_1 ).toInt();
   m_settingsCreationDate = sets->value( "BeeBang", QDate() ).toDate();
@@ -503,6 +505,7 @@ void Settings::save()
   qDebug() << "Saving settings";
 
   QSettings *sets = objectSettings();
+
 
   sets->beginGroup( "Version" );
   sets->setValue( "Program", version( true ) );

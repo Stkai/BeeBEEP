@@ -1938,11 +1938,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Settings can not be saved in path:</source>
-        <translation>Le preferenze non possono essere salvate nel percorso seguente:</translation>
+        <translation type="obsolete">Le preferenze non possono essere salvate nel percorso seguente:</translation>
     </message>
     <message>
         <source>Do you want to close anyway?</source>
         <translation>Vuoi chiudere ugualmente il programma?</translation>
+    </message>
+    <message>
+        <source>Settings can not be saved.</source>
+        <translation>Le preferenze non possono essere salvate.</translation>
+    </message>
+    <message>
+        <source>is not writable</source>
+        <translation>non è un percorso scrivibile</translation>
     </message>
 </context>
 <context>

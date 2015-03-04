@@ -69,6 +69,7 @@ protected:
   void showStatus( const QString& );
   void loadShares( const User& );
   void showFileTransferCompleted( GuiFileInfoItem*, const QString& );
+  void resetComboUsers();
 
 private:
   QLineEdit* mp_leFilter;

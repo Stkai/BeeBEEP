@@ -220,8 +220,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
   sets->deleteLater();
   if( !sets->isWritable() )
   {
-    if( QMessageBox::warning( this, Settings::instance().programName(), tr( "Settings can not be saved in path:" )
-                              + QString( "<br>%1<br>" ).arg( sets->fileName() ) +  tr( "Do you want to close anyway?" ),
+    if( QMessageBox::warning( this, Settings::instance().programName(), tr( "Settings can not be saved." )
+                              + QString( "<br>%2 %3.<br>" ).arg( sets->fileName() ).arg( tr( "is not writable" ) ) +  tr( "Do you want to close anyway?" ),
                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
     {
       e->ignore();
@@ -837,7 +837,7 @@ void GuiMain::checkUser( const User& u )
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "User" << u.path() << "has updated his info. Check it";
+  qDebug() << "User" << u.path() << "has updated his info";
 #endif
   mp_userList->setUser( u );
   mp_chat->updateUser( u );

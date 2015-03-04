@@ -79,7 +79,8 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   header_view->setSortIndicator( 0, Qt::AscendingOrder );
 
   connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
-  connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openShareMenu( const QPoint& ) ) );
+  connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMySharesMenu( const QPoint& ) ) );
+
 }
 
 void GuiShareLocal::setupToolBar( QToolBar* bar )
@@ -291,7 +292,7 @@ void GuiShareLocal::dropEvent( QDropEvent *event )
   }
 }
 
-void GuiShareLocal::openShareMenu( const QPoint& p )
+void GuiShareLocal::openMySharesMenu( const QPoint& p )
 {
   QTreeWidgetItem* item = mp_twMyShares->itemAt( p );
 

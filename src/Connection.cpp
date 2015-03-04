@@ -46,7 +46,7 @@ bool Connection::sendMessage( const Message& m )
   }
 
   if( message_data.size() > 524288 )
-    qWarning() << "Outgoing message to" << peerAddress().toString() << peerPort() << "is TOO BIG:" << message_data.size() << "bytes";
+    qWarning() << "Outgoing message to" << peerAddress().toString() << peerPort() << "is VERY VERY BIG:" << message_data.size() << "bytes";
 
   return sendData( message_data );
 }
@@ -54,7 +54,7 @@ bool Connection::sendMessage( const Message& m )
 void Connection::parseData( const QByteArray& message_data )
 {
   if( message_data.size() > 524288 )
-    qWarning() << "Incoming message from" << peerAddress().toString() << peerPort() << "is TOO BIG:" << message_data.size() << "bytes";
+    qWarning() << "Incoming message from" << peerAddress().toString() << peerPort() << "is VERY VERY BIG:" << message_data.size() << "bytes";
 
   Message m = Protocol::instance().toMessage( message_data );
   if( !m.isValid() )

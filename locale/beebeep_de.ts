@@ -897,6 +897,16 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="223"/>
+        <source>Settings can not be saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="224"/>
+        <source>is not writable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="250"/>
         <source>No new message available</source>
         <translation type="unfinished"></translation>
@@ -1326,11 +1336,6 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="584"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="223"/>
-        <source>Settings can not be saved in path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2127,83 +2132,83 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="93"/>
+        <location filename="../src/GuiShareLocal.cpp" line="94"/>
         <source>Share a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="94"/>
+        <location filename="../src/GuiShareLocal.cpp" line="95"/>
         <source>Add a file to your local share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="96"/>
+        <location filename="../src/GuiShareLocal.cpp" line="97"/>
         <source>Share a folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="97"/>
+        <location filename="../src/GuiShareLocal.cpp" line="98"/>
         <source>Add a folder to your local share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="99"/>
+        <location filename="../src/GuiShareLocal.cpp" line="100"/>
         <source>Load shared files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="100"/>
+        <location filename="../src/GuiShareLocal.cpp" line="101"/>
         <source>Remove shared files from the selected path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="102"/>
+        <location filename="../src/GuiShareLocal.cpp" line="103"/>
         <source>Remove shared path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="103"/>
+        <location filename="../src/GuiShareLocal.cpp" line="104"/>
         <source>Remove shared path from the list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="111"/>
+        <location filename="../src/GuiShareLocal.cpp" line="112"/>
         <source>Shared files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="113"/>
+        <location filename="../src/GuiShareLocal.cpp" line="114"/>
         <source>File sharing is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="130"/>
+        <location filename="../src/GuiShareLocal.cpp" line="131"/>
         <source>Select a file to share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="143"/>
+        <location filename="../src/GuiShareLocal.cpp" line="144"/>
         <source>Select a folder to share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="162"/>
+        <location filename="../src/GuiShareLocal.cpp" line="163"/>
         <source>Please select a shared path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="215"/>
-        <location filename="../src/GuiShareLocal.cpp" line="219"/>
+        <location filename="../src/GuiShareLocal.cpp" line="216"/>
+        <location filename="../src/GuiShareLocal.cpp" line="220"/>
         <source>Double click to open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="231"/>
+        <location filename="../src/GuiShareLocal.cpp" line="232"/>
         <source>%1 is already shared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="272"/>
+        <location filename="../src/GuiShareLocal.cpp" line="273"/>
         <source>File sharing is disabled. Open the option menu to enable it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2290,42 +2295,42 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="118"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="129"/>
         <source>All Users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="148"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="157"/>
         <source>%1 is searching shared files in your network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="201"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="210"/>
         <source>Double click to download %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="229"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="238"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="323"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="332"/>
         <source>Double click to open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="325"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="334"/>
         <source>Transfer completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="339"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="348"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="341"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="350"/>
         <source>%1 files shared in your network</source>
         <translation type="unfinished"></translation>
     </message>
