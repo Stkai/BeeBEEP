@@ -220,9 +220,13 @@ void GuiMain::closeEvent( QCloseEvent* e )
   sets->deleteLater();
   if( !sets->isWritable() )
   {
-    if( QMessageBox::warning( this, Settings::instance().programName(), tr( "Settings can not be saved." )
-                              + QString( "<br>%2 %3.<br>" ).arg( sets->fileName() ).arg( tr( "is not writable" ) ) +  tr( "Do you want to close anyway?" ),
-                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+    if( QMessageBox::warning( this, Settings::instance().programName(),
+                              QString( "%1<br />%2<br />%3<br />%4<br />%5" ).arg( tr( "<b>Settings can not be saved</b>. Path:" ) )
+                                                                     .arg( sets->fileName() )
+                                                                     .arg( tr( "<b>is not writable</b> by user:" ) )
+                                                                     .arg( Settings::instance().localUser().accountPath() )
+                                                                     .arg( tr( "Do you want to close anyway?" ) ),
+                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
     {
       e->ignore();
       return;
@@ -623,8 +627,10 @@ void GuiMain::createMenus()
 
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("&?" ), this );
-  act = mp_menuInfo->addAction( QIcon( ":/images/tip.png" ), tr( "Tips of the day" ), this, SLOT( showTipOfTheDay() ) );
+  act = mp_menuInfo->addAction( QIcon( ":/images/tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
   act->setStatusTip( tr( "Show me the tip of the day" ) );
+  act = mp_menuInfo->addAction( QIcon( ":/images/fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
+  act->setStatusTip( tr( "Show me the fact of the day" ) );
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( mp_actAbout );
   act = mp_menuInfo->addAction( QIcon( ":/images/license.png" ), tr( "Show %1's license..." ).arg( Settings::instance().programName() ), this, SLOT( showLicense() ) );
@@ -1309,6 +1315,13 @@ void GuiMain::showTipOfTheDay()
   // Tip of the day is shown only in default chat
   showChat( ID_DEFAULT_CHAT );
   mp_core->showTipOfTheDay();
+}
+
+void GuiMain::showFactOfTheDay()
+{
+  // Fact of the day is shown only in default chat
+  showChat( ID_DEFAULT_CHAT );
+  mp_core->showFactOfTheDay();
 }
 
 void GuiMain::showCurrentChat()

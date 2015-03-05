@@ -628,8 +628,11 @@ void Settings::save()
     sets->endGroup();
   }
 
-  sets->sync();
-  qDebug() << "Settings saved";
+  if( sets->isWritable() )
+  {
+    sets->sync();
+    qDebug() << "Settings saved";
+  }
   sets->deleteLater();
 }
 

@@ -377,15 +377,14 @@ void GuiChat::saveChat()
   QFile file( file_name );
   if( !file.open( QFile::WriteOnly ) )
   {
-    QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
+    QMessageBox::warning( this, Settings::instance().programName(),
       tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
     return;
   }
 
   file.write( mp_teChat->toHtml().toLatin1() );
   file.close();
-  QMessageBox::information( this, QString( "%1 - %2" ).arg( Settings::instance().programName(), tr( "Information" ) ),
-    tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
+  QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
 }
 
 void GuiChat::clearChat()

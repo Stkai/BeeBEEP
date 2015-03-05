@@ -56,9 +56,5 @@ void GuiLog::refreshLog()
     mp_teLog->appendPlainText( Log::instance().logNodeToString( ln ) );
   }
 
-  QScrollBar *bar = mp_teLog->verticalScrollBar();
-  if( bar )
-    bar->setValue( bar->maximum() );
-
   Log::instance().clear();
 }

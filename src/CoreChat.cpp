@@ -39,9 +39,7 @@
 
 void Core::createDefaultChat()
 {
-#ifdef BEEBEEP_DEBUG
   qDebug() << "Creating default chat";
-#endif
   Chat c;
   c.setId( ID_DEFAULT_CHAT );
   c.setName( Settings::instance().defaultChatName() );
@@ -55,14 +53,12 @@ void Core::createDefaultChat()
 
 void Core::createPrivateChat( const User& u )
 {
-#ifdef BEEBEEP_DEBUG
   qDebug() << "Creating private chat room for user" << u.path();
-#endif
   QList<VNumber> user_list;
   user_list.append( u.id() );
   Chat c = Protocol::instance().createChat( user_list );
   c.setName( u.path() );
-  QString sHtmlMsg = tr( "%1 Chat with %2 (%3)." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name(), u.accountPath() );
+  QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name() );
   ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
@@ -315,15 +311,11 @@ void Core::sendWritingMessage( VNumber chat_id )
   }
 }
 
-void Core::showAllTipOfTheDay()
+void Core::showFactOfTheDay()
 {
-  QString tip_of_the_day;
-  for( int i = 0; i < BeeBeepTipsSize; i++ )
-  {
-    tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),
-                                                   qApp->translate( "Tips", BeeBeepTips[ i ] ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat );
-  }
+  QString fact_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/fact.png", "*T*" ),
+                                                   qApp->translate( "Tips", BeeBeepFacts[ Random::number( 0, (BeeBeepFactsSize-1) ) ] ) );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, fact_of_the_day, DispatchToChat );
 }
 
 void Core::showTipOfTheDay()

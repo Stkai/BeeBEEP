@@ -196,7 +196,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 
   if( write( data_serialized ) == data_serialized.size() )
   {
-#ifdef BEEBEEP_DEBUG
+#ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << peerAddress().toString() << peerPort();
 #endif
     return true;

@@ -71,6 +71,7 @@ private slots:
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
   void showTipOfTheDay();
+  void showFactOfTheDay();
   void searchUsers();
   void settingsChanged();
   void showNextChat();

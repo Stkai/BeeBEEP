@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>%1 is connected to %2 network.</source>
-        <translation>%1 entra nella tua rete %2.</translation>
+        <translation type="obsolete">%1 entra nella tua rete %2.</translation>
     </message>
     <message>
         <source>The %1&apos;s profile has been received.</source>
@@ -245,7 +245,7 @@
     </message>
     <message>
         <source>%1 Chat with %2 (%3).</source>
-        <translation>%1 Parla con %2 (%3).</translation>
+        <translation type="obsolete">%1 Parla con %2 (%3).</translation>
     </message>
     <message>
         <source>%1 is unable to add a new user from %2 (invalid protocol or password).</source>
@@ -326,6 +326,10 @@
     <message>
         <source>%1 %2 adds you to the group chat: %3.</source>
         <translation>%1 %2 ti ha aggiunto alla conversazione di gruppo: %3.</translation>
+    </message>
+    <message>
+        <source>%1 (%2) is connected to %3 network.</source>
+        <translation>%1 (%2) entra nella tua rete %3.</translation>
     </message>
 </context>
 <context>
@@ -579,7 +583,7 @@
     </message>
     <message>
         <source>Warning</source>
-        <translation>Attenzione</translation>
+        <translation type="obsolete">Attenzione</translation>
     </message>
     <message>
         <source>%1: unable to save the messages.
@@ -589,7 +593,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informazione</translation>
+        <translation type="obsolete">Informazione</translation>
     </message>
     <message>
         <source>%1: save completed.</source>
@@ -1197,7 +1201,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Tips of the day</source>
-        <translation>Suggerimenti</translation>
+        <translation type="obsolete">Suggerimenti</translation>
     </message>
     <message>
         <source>Show me the tip of the day</source>
@@ -1946,11 +1950,31 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Settings can not be saved.</source>
-        <translation>Le preferenze non possono essere salvate.</translation>
+        <translation type="obsolete">Le preferenze non possono essere salvate.</translation>
     </message>
     <message>
         <source>is not writable</source>
-        <translation>non è un percorso scrivibile</translation>
+        <translation type="obsolete">non è un percorso scrivibile</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
+        <translation>&lt;b&gt;Le preferenze non possono essere salvate&lt;/b&gt;. Il percorso:</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
+        <translation>&lt;b&gt;non è scrivibile&lt;/b&gt; dall&apos;utente:</translation>
+    </message>
+    <message>
+        <source>Tip of the day</source>
+        <translation>Suggerimenti</translation>
+    </message>
+    <message>
+        <source>Fact of the day</source>
+        <translation>Perle di saggezza</translation>
+    </message>
+    <message>
+        <source>Show me the fact of the day</source>
+        <translation>Mostrami la perla di saggezza quotidiana</translation>
     </message>
 </context>
 <context>
@@ -3188,7 +3212,7 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>&lt;i&gt;A man`s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation>&lt;i&gt;Il carattere di un uomo è il suo destino.&lt;/i&gt; (Eraclito)</translation>
+        <translation type="obsolete">&lt;i&gt;Il carattere di un uomo è il suo destino.&lt;/i&gt; (Eraclito)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
@@ -3275,12 +3299,16 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin) </source>
+        <source>You can drop files to active chat and send them to members.</source>
+        <translation>Puoi trascinare i file sulla conversazione attiva per inviarli a tutti i membri.</translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can drop files to active chat and send them to members.</source>
-        <translation>Puoi trascinare i file sulla conversazione attiva per inviarli a tutti i membri.</translation>
+        <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

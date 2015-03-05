@@ -191,10 +191,13 @@ void Core::checkUserAuthentication( const Message& m )
     qDebug() << "New user connected:" << u.path() << "with color" << u.color();
   }
 
-  qDebug() << "Adding user" << u.path() << "to default chat";
+
   Chat default_chat = ChatManager::instance().defaultChat( false );
   if( default_chat.addUser( u.id() ) )
+  {
+    qDebug() << "Adding user" << u.path() << "to default chat";
     ChatManager::instance().setChat( default_chat );
+  }
 
   if( !ChatManager::instance().privateChatForUser( u.id() ).isValid() )
     createPrivateChat( u );
@@ -208,7 +211,7 @@ void Core::checkUserAuthentication( const Message& m )
     ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 
   sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
-  sHtmlMsg += tr( "%1 is connected to %2 network." ).arg( u.name(), Settings::instance().programName() );
+  sHtmlMsg += tr( "%1 (%2) is connected to %3 network." ).arg( u.name(), u.accountPath(), Settings::instance().programName() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 
   if( !u.statusDescription().isEmpty() || u.status() > User::Online )

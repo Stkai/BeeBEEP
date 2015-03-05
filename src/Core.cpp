@@ -92,7 +92,10 @@ bool Core::start()
     startFileTransferServer();
 
   if( Settings::instance().showTipsOfTheDay() )
+  {
     showTipOfTheDay();
+    showFactOfTheDay();
+  }
 
   if( Settings::instance().localUser().status() == User::Offline )
   {

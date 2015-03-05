@@ -99,5 +99,6 @@
         <file>images/user.png</file>
         <file>images/group-edit.png</file>
         <file>images/donate.png</file>
+        <file>images/fact.png</file>
     </qresource>
 </RCC>
