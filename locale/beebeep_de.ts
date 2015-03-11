@@ -341,32 +341,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAskPassword.ui" line="32"/>
-        <source>Please enter the chat password (spaces are removed)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiAskPassword.ui" line="65"/>
+        <location filename="../src/GuiAskPassword.ui" line="147"/>
         <source>Remember password (not recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAskPassword.ui" line="85"/>
+        <location filename="../src/GuiAskPassword.ui" line="62"/>
         <source>Use default chat password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAskPassword.ui" line="92"/>
-        <source>Show this dialog at connection startup</source>
+        <location filename="../src/GuiAskPassword.ui" line="69"/>
+        <source>Please enter the chat password (spaces are removed) *</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiAskPassword.ui" line="118"/>
+        <source>* Password must be the same for all client you want to reach</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAskPassword.ui" line="154"/>
+        <source>Show this dialog at connection startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAskPassword.ui" line="30"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAskPassword.ui" line="125"/>
+        <location filename="../src/GuiAskPassword.ui" line="23"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -376,7 +381,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAskPassword.cpp" line="94"/>
+        <location filename="../src/GuiAskPassword.cpp" line="96"/>
         <source>Password is empty. Please enter a valid one (spaces are removed).</source>
         <translation type="unfinished"></translation>
     </message>

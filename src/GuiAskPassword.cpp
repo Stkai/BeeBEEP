@@ -76,11 +76,13 @@ void GuiAskPassword::somethingChanged()
     mp_lePassword->setEnabled( false );
     mp_cbSavePassword->setEnabled( false );
     mp_cbSavePassword->setChecked( false );
+    mp_labelPasswordNote->setEnabled( false );
   }
   else
   {
     mp_lePassword->setEnabled( true );
     mp_cbSavePassword->setEnabled( true );
+    mp_labelPasswordNote->setEnabled( true );
     mp_lePassword->setFocus();
   }
 }

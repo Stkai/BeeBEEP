@@ -1,0 +1,101 @@
+// 
+// BeeBEEP Help
+//
+// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+//
+// $Id$
+//
+
+[Version]
+Program= beebeep version major.minor.relese and build (b) and protocol (p) 
+Proto= protocol version 
+Settings= settings version
+DataStream= serialized data stream  version
+BeeBang= installation date or beebeep first launch date
+
+[Chat]
+Font= font used in chat
+FontColor= font color used in chat 
+CompactMessage= messages are displayed without a blank line from eachother
+AddNewLineAfterMessage= add a blank line after a message displayed
+ShowMessageTimestamp= show message timestamp in the chat 
+BeepOnNewMessageArrived= sound a beep when new message arrived (only if sound works)
+UseHtmlTags= if enabled beebeep doesn't parse tags html. Useful if you have to copy and paste in chat some html code
+UseClickableLinks= enable link in chat message. So link clicked where opened by OS
+MessageHistorySize= how many of your messages are stored by beebeep. The message can be recalled by CTRL+UP o CTRL+DOWN arrow
+ShowEmoticons= show emoticon images in chat
+ShowMessagesGroupByUsers= show messaged grouped by user or repeat user for every message
+AutoLinkSavedChatByNickname= link the saved chat when nickname are equal
+
+[User]
+LocalColor= your nickname color in chat 
+LocalLastStatus= your status (0 = Offline, 1 = Online, 2 = Busy, 3 = Away)
+LocalLastStatusDescription= your status description
+ShowOnlyOnlineUsers= show only online users in user list
+ShowUserNameColor= show nickname colored
+AutoAwayStatus= set your status away when pc is in idle
+UserAwayTimeout= how many minutes your pc must be in idle to set your status in away
+UseDefaultPassword= use default beebeep password
+AskPasswordAtStartup= show password dialog at connection to beebeep network
+
+[VCard]
+NickName= your nickname
+FirstName= your first name
+LastName= your last name 
+Birthday= your birthday
+Email= your email
+Photo= your photo
+
+[Gui]
+MainBarIconSize= Icon size of the tool bar
+Language= language used 
+LastDirectorySelected=
+DownloadDirectory=
+LogPath=.
+PluginPath=.
+LocalePath=.
+MinimizeInTray=false
+StayOnTop=false
+BeepFilePath=E:/SOURCES/beebeep/test/beep.wav
+RaiseOnNewMessageArrived=false
+LoadOnTrayAtStartup=false
+ShowNotificationOnTray=true
+ChatSaveDirectory=E:/SOURCES/beebeep/test
+ChatAutoSave=true
+ChatMaxLineSaved=3000
+MainWindowGeometry= (do not use)
+MainWindowState= (do not use)
+
+[Tools]
+LogToFile=false
+ShowTipsOfTheDay=true
+AutomaticFileName=true
+
+[Misc]
+BroadcastPort=36475
+BroadcastInterval=0
+ListenerPort=58785
+PingInterval=31000
+PongTimeout=98000
+WritingTimeout=3000
+FileTransferConfirmTimeout=30000
+FileTransferBufferSize=65456
+SystemTrayMessageTimeout=2000
+
+[Network]
+BroadcastAddresses=@Invalid()
+LocalHostAddressForced=
+LocalSubnetForced=
+
+[FileShare]
+Active=true
+MaxFileShared=32700
+ShareList=C:\\Users\\marco.mastroddi\\Documents, C:\\Users\\marco.mastroddi\\Pictures
+
+[Plugin]
+List=BeeLife, BeeTetris
+BeeTetris=1, 771
+BeeLife=1, 1443, 2222222222222222222222221222122222222222222222222222222222221211122212222122222222222222222222222222212222112222211222222222222222222222222221221212222221122222222222222222222222221122211212222222222222222222222222222221221221112222112222222222222222222222222212122221212211222222222222222222222222221211222222221222222222222222222222222222222122222222222222222222222222222222222222211122112222222222222222222222222222222222212121222222222222222222222222222222222221121122222222222222222222222222222222222212122222222222222222222222222222222222222122222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222212222222222222222222222212222222222222211222222221112222222222212122222222222221212222222222222222222221221222222222222222222222222222222222222211222222222222222222222222222221222222222222222222222222222222222222222122222222222222222222222222222222222222212222222222222222222222222222222222222222222122222222222222222222222222222221112221122222222222222222222222222222222222222222222222222222212222222222222222222222222222222222222212122222222112222222222112222222222222221212222222211222222222211222222222222222212222222222222222222222222222222222222222222222222222222112222222222222222222222222222222222222122122222222222222222222222222222222222212221222211222222222222222222222222222222122222212122222222222222222222222222222221222222122222222222222222222222222222222222222222222222222222221122222222222222222222222222222222222222112222222222222222211222222222222222222222222222222222222212222222, 200
+
+[Group]
+List=Gruppo di prova 4\x2028\x63\x65\x64\x31\x33\x32\x63\x30\x65\x63\x35\x33\x61\x38\x64\x66\x33\x36\x62\x31\x36\x63\x36\x64\x63\x37\x35\x39\x62\x31\x33\x31\x64\x34\x31\x33\x36\x30\x65\x66\x2028\x33\x2028khelben 0.9.6@10.184.9.30:50737\x2028marco.mastroddi\x2028test 0.9.6@10.184.9.28:4825\x2028\x61\x64ministrator\x2028\x62\x65\x65test 0.9.7@10.184.9.28:6475\x2028\x61\x64ministrator, ZZ Gruppo\x2028\x34\x63\x35\x62\x65\x34\x37\x36\x32\x36\x34\x66\x36\x33\x36\x37\x34\x33\x35\x31\x61\x34\x35\x34\x39\x62\x65\x61\x65\x33\x61\x61\x35\x37\x61\x38\x61\x61\x33\x64\x2028\x32\x2028test 0.9.6@10.184.9.28:4825\x2028\x61\x64ministrator\x2028\x62\x65\x65test 0.9.7@10.184.9.28:6475\x2028\x61\x64ministrator

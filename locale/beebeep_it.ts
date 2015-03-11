@@ -428,7 +428,7 @@
     </message>
     <message>
         <source>Please enter the chat password (spaces are removed)</source>
-        <translation>Per favore inserisci la password di rete (gli spazi saranno rimossi)</translation>
+        <translation type="obsolete">Per favore inserisci la password di rete (gli spazi saranno rimossi)</translation>
     </message>
     <message>
         <source>Remember password (not recommended)</source>
@@ -457,6 +457,14 @@
     <message>
         <source>Password is empty. Please enter a valid one (spaces are removed).</source>
         <translation>La password è vuota. Per favore inseriscine una valida (gli spazi saranno rimossi).</translation>
+    </message>
+    <message>
+        <source>Please enter the chat password (spaces are removed) *</source>
+        <translation>Per favore inserisci la password di rete (gli spazi saranno rimossi) *</translation>
+    </message>
+    <message>
+        <source>* Password must be the same for all client you want to reach</source>
+        <translation>* La password deve essere la stessa per tutti i client connessi</translation>
     </message>
 </context>
 <context>

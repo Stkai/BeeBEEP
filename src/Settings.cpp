@@ -506,7 +506,6 @@ void Settings::save()
 
   QSettings *sets = objectSettings();
 
-
   sets->beginGroup( "Version" );
   sets->setValue( "Program", version( true ) );
   sets->setValue( "Proto", protoVersion() );
