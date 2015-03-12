@@ -700,6 +700,7 @@ void GuiMain::createDockWindows()
   mp_dockUserList->setObjectName( "GuiUserListDock" );
   mp_userList = new GuiUserList( mp_dockUserList );
   mp_dockUserList->setWidget( mp_userList );
+  mp_dockUserList->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::RightDockWidgetArea, mp_dockUserList );
   mp_actViewUsers = mp_dockUserList->toggleViewAction();
   mp_actViewUsers->setIcon( QIcon( ":/images/user-list.png" ) );
@@ -711,6 +712,7 @@ void GuiMain::createDockWindows()
   mp_dockGroupList->setObjectName( "GuiGroupListDock" );
   mp_groupList = new GuiGroupList( mp_dockGroupList );
   mp_dockGroupList->setWidget( mp_groupList );
+  mp_dockGroupList->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::RightDockWidgetArea, mp_dockGroupList );
   mp_actViewGroups = mp_dockGroupList->toggleViewAction();
   mp_actViewGroups->setIcon( QIcon( ":/images/group.png" ) );
@@ -722,6 +724,7 @@ void GuiMain::createDockWindows()
   dock_widget->setObjectName( "GuiChatListDock" );
   mp_chatList = new GuiChatList( this );
   dock_widget->setWidget( mp_chatList );
+  dock_widget->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::RightDockWidgetArea, dock_widget );
   mp_actViewChats = dock_widget->toggleViewAction();
   mp_actViewChats->setIcon( QIcon( ":/images/chat-list.png" ) );
@@ -733,6 +736,7 @@ void GuiMain::createDockWindows()
   dock_widget->setObjectName( "GuiSavedChatListDock" );
   mp_savedChatList = new GuiSavedChatList( this );
   dock_widget->setWidget( mp_savedChatList );
+  dock_widget->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::RightDockWidgetArea, dock_widget );
   mp_actViewSavedChats = dock_widget->toggleViewAction();
   mp_actViewSavedChats->setIcon( QIcon( ":/images/saved-chat-list.png" ) );
@@ -744,6 +748,7 @@ void GuiMain::createDockWindows()
   dock_widget->setObjectName( "GuiFileTransferDock" );
   mp_fileTransfer = new GuiTransferFile( this );
   dock_widget->setWidget( mp_fileTransfer );
+  dock_widget->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
   mp_actViewFileTransfer = dock_widget->toggleViewAction();
   mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
