@@ -164,6 +164,8 @@ void Core::checkUserAuthentication( const Message& m )
     closeConnection( c );
     return;
   }
+  else
+    qDebug() << u.path() << ": authentication completed";
 
   bool user_reconnect = false;
   bool user_path_changed = false;

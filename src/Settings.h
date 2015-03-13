@@ -53,6 +53,7 @@ public:
   QString pluginWebSite() const;
   QString checkVersionWebSite() const;
   QString donationWebSite() const;
+  QString helpWebSite() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );

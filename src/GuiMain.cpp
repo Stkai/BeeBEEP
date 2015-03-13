@@ -422,7 +422,7 @@ void GuiMain::createActions()
   mp_actPluginBar->setStatusTip( tr( "Show the tool bar with plugin shortcuts" ) );
   mp_actPluginBar->setData( 99 );
 
-  mp_actAbout = new QAction( QIcon( ":/images/info.png" ), tr( "&About %1..." ).arg( Settings::instance().programName() ), this );
+  mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "&About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setStatusTip( tr( "Show the informations about %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
 }
@@ -644,9 +644,11 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Open %1 website and check if a new version exists" ).arg( Settings::instance().programName() ) );
   act = mp_menuInfo->addAction( QIcon( ":/images/plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
   act->setStatusTip( tr( "Open %1 website and download your preferred plugin" ).arg( Settings::instance().programName() ) );
+  act = mp_menuInfo->addAction( QIcon( ":/images/info.png" ), tr( "Help online..." ), this, SLOT( openHelpPage() ) );
+  act->setStatusTip( tr( "Open %1 website to have online support" ).arg( Settings::instance().programName() ) );
   mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Please donate for %1 :-)" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
-  act->setStatusTip( tr( "I'm so grateful and pleased about that" ) );
+  act->setStatusTip( tr( "I'm so grateful and pleased about that" ) + QString( " :-)" ) );
 
 }
 
@@ -1873,6 +1875,11 @@ void GuiMain::openDownloadPluginPage()
 void GuiMain::openDonationPage()
 {
   openWebUrl( Settings::instance().donationWebSite() );
+}
+
+void GuiMain::openHelpPage()
+{
+  openWebUrl( Settings::instance().helpWebSite() );
 }
 
 void GuiMain::setInIdle()

@@ -39,7 +39,7 @@ void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
     break;
   default:
     // discard data
-    qWarning() << "Upload Peer discard data:" << byte_array;
+    qWarning() << name() << "discards data:" << byte_array;
   }
 }
 
@@ -48,7 +48,7 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
   Message m = Protocol::instance().toMessage( byte_array );
   if( !m.isValid() )
   {
-    qDebug() << "Invalid file request received:" << byte_array;
+    qWarning() << name() << "receives an invalid file request:" << byte_array;
     cancelTransfer();
     return;
   }
@@ -56,20 +56,19 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
   FileInfo file_info = Protocol::instance().fileInfoFromMessage( m );
   if( !file_info.isValid() )
   {
-    qDebug() << "Invalid file info in message:" << byte_array;
-
+    qWarning() << name() << "receives an invalid file info:" << byte_array;
     cancelTransfer();
     return;
   }
 
-  qDebug() << "File request received:" << file_info.id() << file_info.password();
+  qDebug() << name() << "receives a file request:" << file_info.id() << file_info.password();
   emit fileUploadRequest( file_info.id(), file_info.password() );
 }
 
 void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setFileInfo( fi );
-  qDebug() << "Uploading" << fi.path();
+  qDebug() << name() << "starts uploading" << fi.path();
   m_state = FileTransferPeer::Transferring;
   sendUploadData();
 }
@@ -79,7 +78,7 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
   if( byte_array.simplified().toInt() == m_bytesTransferred )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent confirmed";
+    qDebug() << name() << "receives corfirmation for" << m_bytesTransferred << "bytes";
 #endif
     m_totalBytesTransferred += m_bytesTransferred;
     showProgress();
@@ -96,7 +95,7 @@ void FileTransferPeer::sendUploadData()
 {
   if( m_state != FileTransferPeer::Transferring )
   {
-    qWarning() << m_fileInfo.name() << ": try to send data, but it id in state" << m_state;
+    qWarning() << name() << "tries to send data, but it was in state" << m_state << "... skipped";
     return;
   }
 
@@ -117,9 +116,6 @@ void FileTransferPeer::sendUploadData()
   if( m_socket.sendData( byte_array ) )
   {
     m_bytesTransferred = byte_array.size();
-#ifdef BEEBEEP_DEBUG
-    qDebug() << m_fileInfo.name() << ":" << m_bytesTransferred << "bytes sent";
-#endif
   }
   else
   {

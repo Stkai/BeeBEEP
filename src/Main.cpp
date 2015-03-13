@@ -59,9 +59,9 @@ int main( int argc, char *argv[] )
   /* Enable internal logs */
   Log::installMessageHandler();
 
-  qDebug() << "Starting BeeBEEP";
-
-  /* Load Settings */
+    /* Load Settings */
+  (void)Settings::instance();
+  qDebug() << "Starting BeeBEEP" << Settings::instance().version( true );
   Settings::instance().loadPreConf();
   Settings::instance().load();
 

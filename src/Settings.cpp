@@ -80,6 +80,11 @@ QString Settings::donationWebSite() const
   return officialWebSite() + QString( BEEBEEP_DONATE_WEBSITE );
 }
 
+QString Settings::helpWebSite() const
+{
+  return officialWebSite() + QString( BEEBEEP_HELP_WEBSITE );
+}
+
 QString Settings::checkVersionWebSite() const
 {
   QString os_type = "windows";

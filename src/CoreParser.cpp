@@ -246,8 +246,15 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
 void Core::parseFileShareMessage( const User& u, const Message& m )
 {
+  if( !Settings::instance().fileShare() )
+  {
+    qDebug() << "File sharing is disabled. Ignoring message from user" << u.path();
+    return;
+  }
+
   if( m.hasFlag( Message::List ) )
   {
+
     QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
     QString msg;
 
@@ -272,7 +279,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Request ) )
   {
-    if( Settings::instance().fileShare() && !Protocol::instance().fileShareListMessage().isEmpty() )
+    if( !Protocol::instance().fileShareListMessage().isEmpty() )
       sendFileShareListTo( u.id() );
   }
   else

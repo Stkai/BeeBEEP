@@ -32,7 +32,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ), m_messageAuth()
 {
   setObjectName( "FileTransferPeer ");
-  qDebug() << "FileTransferPeer created for transfer file";
+  qDebug() << "Peer created for transfer file";
 
   m_time = QTime::currentTime();
 
@@ -44,7 +44,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
 void FileTransferPeer::cancelTransfer()
 {
   m_socket.abort();
-  qDebug() << "FileTransferPeer" << m_id << "aborted connection due cancel transfer request";
+  qDebug() << name() << "cancels the transfer";
   m_state = FileTransferPeer::Cancelled;
   emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
   closeAll();
@@ -52,16 +52,16 @@ void FileTransferPeer::cancelTransfer()
 
 void FileTransferPeer::closeAll()
 {
-  qDebug() << "Making cleanup of peer" << m_id;
+  qDebug() << name() << "cleans up";
   if( m_socket.isOpen() )
   {
-    qDebug() << "Closing socket with descriptor" << m_socket.socketDescriptor();
+    qDebug() << name() << "close socket with descriptor" << m_socket.socketDescriptor();
     m_socket.flush();
     m_socket.close();
   }
   if( m_file.isOpen() )
   {
-    qDebug() << "Closing file" << m_file.fileName();
+    qDebug() << name() << "close file" << m_file.fileName();
     m_file.flush();
     m_file.close();
   }
@@ -72,12 +72,11 @@ void FileTransferPeer::setFileInfo( const FileInfo& fi )
 {
   m_fileInfo = fi;
   m_file.setFileName( m_fileInfo.path() );
-  qDebug() << "Init the file" << m_file.fileName();
+  qDebug() << name() << "init the file" << m_fileInfo.path();
 }
 
 void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
 {
-  qDebug() << "Setup connection with socket" << socket_descriptor;
   m_state = FileTransferPeer::Request;
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;
@@ -86,13 +85,13 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
 
   if( socket_descriptor )
   {
+    qDebug() << name() << "set socket descriptor" << socket_descriptor;
     m_socket.setSocketDescriptor( socket_descriptor );
-    qDebug() << "Using socket descriptor" << socket_descriptor;
   }
   else
   {
+    qDebug() << name() << "is connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
     m_socket.connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
-    qDebug() << "Connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
   }
 
   QTimer::singleShot( Settings::instance().fileTransferConfirmTimeout(), this, SLOT( connectionTimeout() ) );
@@ -100,7 +99,7 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
 
 void FileTransferPeer::setTransferCompleted()
 {
-  qDebug() << m_fileInfo.name() << "transfer completed";
+  qDebug() << name() << "has completed the transfer of file" << m_fileInfo.name();
   m_state = FileTransferPeer::Completed;
   emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
   closeAll();
@@ -116,7 +115,7 @@ void FileTransferPeer::socketError( QAbstractSocket::SocketError )
 void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
-  qWarning() << m_fileInfo.name() << "transfer error:" << str_err;
+  qWarning() << name() << "found an error when transfer file" << m_fileInfo.name() << ":" << str_err;
   emit message( id(), userId(), m_fileInfo, str_err );
   closeAll();
 }
@@ -144,9 +143,6 @@ void FileTransferPeer::sendTransferData()
 
 void FileTransferPeer::checkAuthenticationRequested( const Message& m )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Store authentication message (fixed a signal bug)";
-#endif
   m_messageAuth = m;
   emit authenticationRequested();
 }
@@ -154,7 +150,6 @@ void FileTransferPeer::checkAuthenticationRequested( const Message& m )
 void FileTransferPeer::setUserAuthorized( VNumber user_id )
 {
   m_socket.setUserId( user_id );
-  sendTransferData();
 }
 
 void FileTransferPeer::connectionTimeout()

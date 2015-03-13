@@ -57,9 +57,9 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
 
   User user_connected = user_to_check.isValid() ? UserManager::instance().findUserByPath( user_to_check.path() ) : User();
   if( user_connected.isValid() )
-    qDebug() << "Found a connected user to validate file transfer:" << user_connected.path();
+    qDebug() << "Found a connected user" << user_connected.id() << user_connected.path() << "to continue file transfer" << peer_id;
   else
-    qWarning() << user_to_check.path() << "is not authorized to file transfer";
+    qWarning() << user_to_check.path() << "is not authorized for file transfer" << peer_id;
   mp_fileTransfer->validateUser( peer_id, user_connected.id() );
 }
 
@@ -150,6 +150,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
     fi.setHostPort( mp_fileTransfer->serverPort() );
   }
 
+  qDebug() << "File Transfer: sending" << fi.path() << "to" << u.path();
   Message m = Protocol::instance().fileInfoToMessage( fi );
   c->sendMessage( m );
 

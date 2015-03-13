@@ -39,6 +39,8 @@ public:
 
   explicit FileTransferPeer( QObject *parent = 0 );
 
+  inline QString name() const;
+
   inline void setTransferType( TransferType );
   inline bool isDownload() const;
   inline void setId( VNumber );
@@ -104,6 +106,7 @@ protected:
 
 
 // Inline Functions
+inline QString FileTransferPeer::name() const { return QString( "%1 Peer #%2" ).arg( isDownload() ? "Download" : "Upload " ).arg( m_id ); }
 inline void FileTransferPeer::setTransferType( FileTransferPeer::TransferType new_value ) { m_transferType = new_value; }
 inline bool FileTransferPeer::isDownload() const { return m_transferType == FileTransferPeer::Download; }
 inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }

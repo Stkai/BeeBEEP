@@ -138,7 +138,7 @@ void FileTransfer::incomingConnection( qintptr socket_descriptor )
 void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descriptor )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Setup peer" << transfer_peer->id() << "with socket descriptor" << socket_descriptor;
+  qDebug() << transfer_peer->name() << "setups connections signal/slots";
 #endif
   if( !transfer_peer->isDownload() )
   {
@@ -154,14 +154,20 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
 
 void FileTransfer::checkAuthentication()
 {
-  qDebug() << "Checking authentication message";
   FileTransferPeer* mp_peer = (FileTransferPeer*)sender();
+  if( !mp_peer )
+  {
+    qWarning() << "Sender Peer not found in check authentication";
+    return;
+  }
+
+  qDebug() << mp_peer->name() << "checks authentication message";
   emit userConnected( mp_peer->id(), mp_peer->peerAddress(), mp_peer->messageAuth() );
 }
 
 void FileTransfer::validateUser( VNumber FileTransferPeer_id, VNumber user_id )
 {
-  qDebug() << "File Transfer server validate user for FileTransferPeer" << FileTransferPeer_id;
+  qDebug() << "File Transfer server validate user" << user_id << "for peer" << FileTransferPeer_id;
   QList<FileTransferPeer*>::iterator it = m_peers.begin();
   while( it != m_peers.end() )
   {
@@ -169,12 +175,12 @@ void FileTransfer::validateUser( VNumber FileTransferPeer_id, VNumber user_id )
     {
       if( user_id == ID_INVALID )
       {
-        qDebug() << "FileTransferPeer not authorized";
+        qWarning() << (*it)->name() << "has not authorized the user";
         (*it)->cancelTransfer();
       }
       else
       {
-        qDebug() << "FileTransferPeer authorized with user id" << user_id;
+        qDebug() << (*it)->name() << "has authorized user" << user_id;
         (*it)->setUserAuthorized( user_id );
       }
       return;
@@ -185,17 +191,19 @@ void FileTransfer::validateUser( VNumber FileTransferPeer_id, VNumber user_id )
 
 void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_password )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Checking upload request:" << file_id << file_password;
+#endif
   FileTransferPeer *upload_peer = qobject_cast<FileTransferPeer*>( sender() );
   if( !upload_peer )
   {
-    qWarning() << "File Transfer server received a signal from invalid FileTransferUpload instance";
+    qWarning() << "File Transfer server received a signal from invalid upload peer";
     return;
   }
 
   if( !Settings::instance().fileShare() )
   {
-    qWarning() << "File Transfer is disabled. Transfer file id" << file_id << "cancelled";
+    qWarning() << "File Transfer is disabled";
     upload_peer->cancelTransfer();
     return;
   }
@@ -226,7 +234,7 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
 
 void FileTransfer::downloadFile( const FileInfo& fi )
 {
-  qDebug() << "Downloading file" << fi.name();
+  qDebug() << "Download request of the file" << fi.path();
   FileTransferPeer *download_peer = new FileTransferPeer( this );
   download_peer->setTransferType( FileTransferPeer::Download );
   download_peer->setId( Protocol::instance().newId() );
@@ -244,7 +252,7 @@ FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
       return *it;
     ++it;
   }
-  qWarning() << "FileTransferPeer" << peer_id << "not found";
+  qWarning() << "File Transfer server has not found the peer" << peer_id;
   return 0;
 }
 
@@ -252,7 +260,7 @@ void FileTransfer::peerDestroyed()
 {
   if( !sender() )
   {
-    qWarning() << "Unable to find peer sender of signal destroyed(). List become invalid";
+    qWarning() << "File Transfer is unable to find peer sender of signal destroyed(). List become invalid";
     return;
   }
 
@@ -265,11 +273,11 @@ bool FileTransfer::cancelTransfer( VNumber peer_id )
   FileTransferPeer* transfer_peer = peer( peer_id );
   if( transfer_peer )
   {
-    qDebug() << "Cancel transfer in progress of peeer" << transfer_peer->id();
+    qDebug() << "File Transfer server requests to cancel transfer in progress of" << transfer_peer->name();
     transfer_peer->cancelTransfer();
     return true;
   }
-  qDebug() << "Unable to cancel transfer in progress. Peer not found";
+  qWarning() << "File Transfer server cannot cancel the file transfer because it has not found the peer" << peer_id;
   return false;
 }
 

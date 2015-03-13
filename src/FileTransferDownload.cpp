@@ -43,9 +43,7 @@ void FileTransferPeer::sendDownloadData()
 
 void FileTransferPeer::sendDownloadRequest()
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Sending REQUEST:" << m_fileInfo.password();
-#endif
+  qDebug() << name() << "sending file request:" << m_fileInfo.id() << m_fileInfo.password();
   if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
     m_state = FileTransferPeer::Transferring;
   else
@@ -55,7 +53,7 @@ void FileTransferPeer::sendDownloadRequest()
 void FileTransferPeer::sendDownloadDataConfirmation()
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Sending download corfirmation for" << m_bytesTransferred << "bytes";
+  qDebug() << name() << "sending corfirmation for" << m_bytesTransferred << "bytes";
 #endif
   if( !m_socket.sendData( Protocol::instance().bytesArrivedConfirmation( m_bytesTransferred ) ) )
     cancelTransfer();
@@ -73,7 +71,7 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 
   if( m_state != FileTransferPeer::Transferring )
   {
-    qWarning() << "FileTransferDownload tries to check data with invalid state" << m_state;
+    qWarning() << name() << "tries to check data with invalid state" << m_state;
     return;
   }
 
