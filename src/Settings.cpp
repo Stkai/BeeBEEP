@@ -453,7 +453,7 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Network");
-  m_broadcastAddresses = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
+   m_broadcastAddresses = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
@@ -462,7 +462,7 @@ void Settings::load()
   loadBroadcastAddresses();
 
   sets->beginGroup( "FileShare" );
-  m_fileShare = sets->value( "Active", true ).toBool();
+  m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
   QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
   if( !local_share.isEmpty() )
@@ -606,7 +606,7 @@ void Settings::save()
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
-  sets->setValue( "Active", m_fileShare );
+  sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
   sets->setValue( "MaxFileShared", m_maxFileShared );
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();

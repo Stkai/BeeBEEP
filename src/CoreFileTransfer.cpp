@@ -39,6 +39,7 @@ bool Core::startFileTransferServer()
   {
     QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ), DispatchToAllChatsWithUser );
+    qWarning() << "Unable to start file transfer server: bind address/port failed";
     return false;
   }
 
@@ -65,10 +66,18 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
 
 void Core::downloadFile( const User& u, const FileInfo& fi )
 {
+  if( !mp_fileTransfer->isListening() )
+  {
+    if( !startFileTransferServer() )
+      return;
+  }
+
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
                          .arg( icon_html, fi.name(), u.name() ),
                          DispatchToAllChatsWithUser );
+
+  qDebug() << "Downloading file" << fi.path() << "from user" << u.path();
   mp_fileTransfer->downloadFile( fi );
 }
 
@@ -119,6 +128,12 @@ bool Core::sendFile( const User& u, const QString& file_path )
 
   QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
 
+  if( !Settings::instance().fileTransferIsEnabled() )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2. File transfer is disabled." ).arg( icon_html, file_path ), DispatchToAllChatsWithUser );
+    return false;
+  }
+
   QFileInfo file( file_path );
   if( !file.exists() )
   {
@@ -131,6 +146,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is a folder. You can share it." ).arg( icon_html, file.fileName() ), DispatchToAllChatsWithUser );
     return false;
   }
+
 
   FileInfo fi = mp_fileTransfer->addFile( file );
 
@@ -212,7 +228,7 @@ void Core::sendFileShareListTo( VNumber user_id )
 
 void Core::sendFileShareListToAll()
 {
-  if( !Settings::instance().fileShare() )
+  if( !Settings::instance().fileTransferIsEnabled() )
     return;
 
   if( !isConnected() )
@@ -272,13 +288,14 @@ void Core::addListToLocalShare()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ), DispatchToChat );
 
   FileShare::instance().addToLocal( bfsl->path(), bfsl->shareList(), bfsl->shareSize() );
-  createLocalShareMessage();
 
   if( m_shareListToBuild == 0 )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Building local share list completed";
 #endif
+    createLocalShareMessage();
+
     if( bfsl->broadcastList() )
       sendFileShareListToAll();
 
@@ -321,17 +338,9 @@ void Core::createLocalShareMessage()
 
 void Core::buildLocalShareList()
 {
-  if( Settings::instance().fileShare() )
-  {
-    m_shareListToBuild = Settings::instance().localShare().size();
-    foreach( QString share_path, Settings::instance().localShare() )
-      addPathToShare( share_path, false );
-  }
-  else
-  {
-    if( !FileShare::instance().local().isEmpty() )
-      FileShare::instance().clearLocal();
-    // force update with empty list;
-    emit localShareListAvailable();
-  }
+  m_shareListToBuild = Settings::instance().localShare().size();
+  if( !FileShare::instance().local().isEmpty() )
+    FileShare::instance().clearLocal();
+  foreach( QString share_path, Settings::instance().localShare() )
+    addPathToShare( share_path, false );
 }

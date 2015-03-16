@@ -201,7 +201,7 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
     return;
   }
 
-  if( !Settings::instance().fileShare() )
+  if( !Settings::instance().fileTransferIsEnabled() )
   {
     qWarning() << "File Transfer is disabled";
     upload_peer->cancelTransfer();
@@ -234,7 +234,6 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
 
 void FileTransfer::downloadFile( const FileInfo& fi )
 {
-  qDebug() << "Download request of the file" << fi.path();
   FileTransferPeer *download_peer = new FileTransferPeer( this );
   download_peer->setTransferType( FileTransferPeer::Download );
   download_peer->setId( Protocol::instance().newId() );

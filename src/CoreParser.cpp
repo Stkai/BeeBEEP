@@ -147,6 +147,12 @@ void Core::parseFileMessage( const User& u, const Message& m )
     return;
   }
 
+  if( !Settings::instance().fileTransferIsEnabled() )
+  {
+    refuseToDownloadFile( u, fi );
+    return;
+  }
+
   Connection* c = connection( u.id() );
   if( !c )
   {
@@ -246,12 +252,6 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
 void Core::parseFileShareMessage( const User& u, const Message& m )
 {
-  if( !Settings::instance().fileShare() )
-  {
-    qDebug() << "File sharing is disabled. Ignoring message from user" << u.path();
-    return;
-  }
-
   if( m.hasFlag( Message::List ) )
   {
 
@@ -279,6 +279,12 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Request ) )
   {
+    if( !Settings::instance().fileTransferIsEnabled() )
+    {
+      qDebug() << "File transfer is disabled. Ignoring request from user" << u.path();
+      return;
+    }
+
     if( !Protocol::instance().fileShareListMessage().isEmpty() )
       sendFileShareListTo( u.id() );
   }

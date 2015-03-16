@@ -501,10 +501,10 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
 
-  act = mp_menuSettings->addAction( tr( "Enable file sharing" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled you can share files with the other users" ) );
+  act = mp_menuSettings->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can transfer files with the other users" ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().fileShare() );
+  act->setChecked( Settings::instance().fileTransferIsEnabled() );
   act->setData( 12 );
 
   mp_actPromptPassword = mp_menuSettings->addAction( tr( "Prompts for network password on startup" ), this, SLOT( settingsChanged() ) );
@@ -922,8 +922,7 @@ void GuiMain::settingsChanged()
     Settings::instance().setMinimizeInTray( act->isChecked() );
     break;
   case 12:
-    Settings::instance().setFileShare( act->isChecked() );
-    QTimer::singleShot( 200, mp_core, SLOT( buildLocalShareList() ) );
+    Settings::instance().setFileTransferIsEnabled( act->isChecked() );
     break;
   case 13:
     Settings::instance().setShowMessagesGroupByUser( act->isChecked() );
@@ -1244,6 +1243,12 @@ void GuiMain::sendFile( const QString& file_path )
 
 bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
 {
+  if( !Settings::instance().fileTransferIsEnabled() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( fi.name() ) );
+    return false;
+  }
+
   int msg_result = 1;
 
   if( Settings::instance().confirmOnDownloadFile() )

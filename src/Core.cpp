@@ -88,7 +88,7 @@ bool Core::start()
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser );
 
-  if( Settings::instance().fileShare() )
+  if( Settings::instance().fileTransferIsEnabled() )
     startFileTransferServer();
 
   if( Settings::instance().showTipsOfTheDay() )
