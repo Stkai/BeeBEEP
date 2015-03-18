@@ -21,25 +21,35 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUILANGUAGE_H
+#define BEEBEEP_GUILANGUAGE_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-#ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
-#else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
-#endif
-const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
-const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
-const char* BEEBEEP_HELP_WEBSITE = "/help.php";
-const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.8";
-const int BEEBEEP_PROTO_VERSION = 62;
-const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 332;
+#include "ui_GuiLanguage.h"
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiLanguage : public QDialog, private Ui::GuiLanguageDialog
+{
+  Q_OBJECT
+
+public:
+  explicit GuiLanguage( QWidget *parent = 0 );
+
+  void loadLanguages();
+  inline const QString& languageSelected() const;
+  inline const QString& folderSelected() const;
+
+protected slots:
+  void selectLanguage();
+  void selectFolder();
+
+private:
+  QString m_languageSelected;
+  QString m_folderSelected;
+
+};
+
+// Inline Functions
+inline const QString& GuiLanguage::languageSelected() const { return m_languageSelected; }
+inline const QString& GuiLanguage::folderSelected() const { return m_folderSelected; }
+
+#endif // BEEBEEP_GUILANGUAGE_H

@@ -85,6 +85,11 @@ QString Settings::helpWebSite() const
   return officialWebSite() + QString( BEEBEEP_HELP_WEBSITE );
 }
 
+QString Settings::languageWebSite() const
+{
+  return officialWebSite() + QString( BEEBEEP_LANGUAGE_WEBSITE );
+}
+
 QString Settings::checkVersionWebSite() const
 {
   QString os_type = "windows";
@@ -95,6 +100,11 @@ QString Settings::checkVersionWebSite() const
   os_type = "macosx";
 #endif
   return officialWebSite() + QString( "%1?beebeep-version=%2&beebeep-os=%3" ).arg( QString( BEEBEEP_CHECK_VERSION_WEBSITE ) ).arg( QString( BEEBEEP_VERSION ) ).arg( os_type );
+}
+
+QString Settings::languageFilePath( const QString& language_folder, const QString& language_selected ) const
+{
+  return QString( "%1/%2_%3.qm" ).arg( language_folder, Settings::instance().programName().toLower(), language_selected );
 }
 
 QByteArray Settings::hash( const QString& string_to_hash ) const
@@ -416,7 +426,7 @@ void Settings::load()
   else
     m_logPath = sets->value( "LogPath", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_pluginPath = sets->value( "PluginPath", "." ).toString();
-  m_localePath = sets->value( "LocalePath", "." ).toString();
+  m_languagePath = sets->value( "LanguagePath", "." ).toString();
   m_minimizeInTray = sets->value( "MinimizeInTray", false ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
@@ -570,7 +580,7 @@ void Settings::save()
   sets->setValue( "DownloadDirectory", m_downloadDirectory );
   sets->setValue( "LogPath", m_logPath );
   sets->setValue( "PluginPath", m_pluginPath );
-  sets->setValue( "LocalePath", m_localePath );
+  sets->setValue( "LanguagePath", m_languagePath );
   sets->setValue( "MinimizeInTray", m_minimizeInTray );
   sets->setValue( "StayOnTop", m_stayOnTop );
   sets->setValue( "BeepFilePath", m_beepFilePath );
@@ -725,3 +735,4 @@ void Settings::clearNativeSettings()
   if( !sets.allKeys().isEmpty() )
     sets.clear();
 }
+

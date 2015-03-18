@@ -68,7 +68,6 @@ private:
 
 
 // Inline Functions
-
 inline bool Message::isValid() const { return m_type != Message::Undefined; }
 inline VNumber Message::id() const { return m_id; }
 inline void Message::setId( VNumber new_value ) { m_id = new_value; }

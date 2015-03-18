@@ -54,6 +54,7 @@ public:
   QString checkVersionWebSite() const;
   QString donationWebSite() const;
   QString helpWebSite() const;
+  QString languageWebSite() const;
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
@@ -77,8 +78,9 @@ public:
   inline void setLogPath( const QString& );
   inline const QString& pluginPath() const;
   inline void setPluginPath( const QString& );
-  inline const QString& localePath() const;
-  inline void setLocalePath( const QString& );
+  inline const QString& languagePath() const;
+  inline void setLanguagePath( const QString& );
+  QString languageFilePath( const QString&, const QString& ) const;
 
   inline QString defaultChatName() const;
   inline int chatMessageHistorySize() const;
@@ -246,7 +248,7 @@ private:
 
   QString m_logPath;
   QString m_pluginPath;
-  QString m_localePath;
+  QString m_languagePath;
 
   int m_chatMessageHistorySize;
   QString m_chatFontColor;
@@ -340,8 +342,8 @@ inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline const QString& Settings::pluginPath() const { return m_pluginPath; }
 inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath = new_value; }
-inline const QString& Settings::localePath() const { return m_localePath; }
-inline void Settings::setLocalePath( const QString& new_value ) { m_localePath = new_value; }
+inline const QString& Settings::languagePath() const { return m_languagePath; }
+inline void Settings::setLanguagePath( const QString& new_value ) { m_languagePath = new_value; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
 inline QString Settings::defaultChatName() const { return QString( "* BeeBEEP Chat *" ); }
 inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistorySize; }

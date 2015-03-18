@@ -34,16 +34,16 @@
 #include "Random.h"
 #include "Settings.h"
 
-bool SetTranslator( QTranslator* translator, const QString& prog_name, const QString& locale_folder, const QString& lang )
+bool SetTranslator( QTranslator* translator, QString language_folder, QString lang )
 {
-  QString new_locale = QString( "%1/%2_%3.qm").arg( locale_folder, prog_name.toLower(), lang );
-  if( !translator->load( new_locale ) )
+  QString language_file_path = Settings::instance().languageFilePath( language_folder, lang );
+  if( !translator->load( language_file_path ) )
   {
-    qDebug() << new_locale << "file not found";
+    qDebug() << language_file_path << "file not found. Language" << lang << "will not be installed";
     return false;
   }
   else
-    qDebug() << "Language file" << new_locale << "found. Installed";
+    qDebug() << "Language file" << language_file_path << "found and" << lang << "installed";
   qApp->installTranslator( translator );
   return true;
 }
@@ -75,7 +75,7 @@ int main( int argc, char *argv[] )
 
   /* Apply system language */
   QTranslator translator;
-  SetTranslator( &translator, Settings::instance().programName(), Settings::instance().localePath(), Settings::instance().language() );
+  SetTranslator( &translator, Settings::instance().languagePath(), Settings::instance().language() );
 
   /* Init Protocol */
   (void)Protocol::instance();

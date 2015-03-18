@@ -32,6 +32,7 @@
 #include "GuiCreateGroup.h"
 #include "GuiEditVCard.h"
 #include "GuiGroupList.h"
+#include "GuiLanguage.h"
 #include "GuiLog.h"
 #include "GuiPluginManager.h"
 #include "GuiSavedChat.h"
@@ -437,9 +438,10 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addAction( mp_actSearch );
-
   mp_menuMain->addSeparator();
 
+  act = mp_menuMain->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
+  act->setStatusTip( tr( "Select your language" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
   act->setStatusTip( tr( "Select the download folder" ) );
   mp_menuMain->addSeparator();
@@ -448,8 +450,8 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Select the file to play on new message arrived" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
   act->setStatusTip( tr( "Test the file to play on new message arrived" ) );
-
   mp_menuMain->addSeparator();
+
   mp_menuMain->addAction( mp_actQuit );
 
   /* Settings Menu */
@@ -2081,5 +2083,26 @@ void GuiMain::showSharesForUser( const User& u )
   mp_shareNetwork->showSharesForUser( u );
   QString share_message = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( FileShare::instance().fileSharedFromUser( u.id() ).size() );
   showMessage( share_message, 0 );
+}
+
+void GuiMain::selectLanguage()
+{
+  GuiLanguage gl( this );
+  gl.setModal( true );
+  gl.loadLanguages();
+  gl.show();
+  gl.setFixedSize( gl.size() );
+  if( gl.exec() == QDialog::Rejected )
+    return;
+
+  QString old_language_path = Settings::instance().languageFilePath( Settings::instance().languagePath(), Settings::instance().language() );
+  QString new_language_path = Settings::instance().languageFilePath( gl.folderSelected(), gl.languageSelected() );
+
+  if( old_language_path != new_language_path )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "New language '%1' is selected.<br />You must restart %2 to apply these changes." ) );
+    Settings::instance().setLanguage( gl.languageSelected() );
+    Settings::instance().setLanguagePath( gl.folderSelected() );
+  }
 }
 
