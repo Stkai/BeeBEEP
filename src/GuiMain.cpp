@@ -441,7 +441,7 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
-  act->setStatusTip( tr( "Select your language" ) );
+  act->setStatusTip( tr( "Select your preferred language" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
   act->setStatusTip( tr( "Select the download folder" ) );
   mp_menuMain->addSeparator();
@@ -2100,7 +2100,16 @@ void GuiMain::selectLanguage()
 
   if( old_language_path != new_language_path )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "New language '%1' is selected.<br />You must restart %2 to apply these changes." ) );
+    QString language_message;
+    if( gl.languageSelected().isEmpty() )
+      language_message = tr( "Default language is restored." );
+    else
+      language_message = tr( "New language '%1' is selected." ).arg( gl.languageSelected() );
+
+    QMessageBox::information( this, Settings::instance().programName(),
+                              QString( "%1<br />%2" ).arg( language_message ).arg( tr( "You must restart %1 to apply these changes." )
+                                                                                    .arg( Settings::instance().programName() ) ) );
+
     Settings::instance().setLanguage( gl.languageSelected() );
     Settings::instance().setLanguagePath( gl.folderSelected() );
   }

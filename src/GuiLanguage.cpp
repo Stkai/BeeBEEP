@@ -48,6 +48,8 @@ GuiLanguage::GuiLanguage( QWidget *parent )
   connect( mp_pbSelect, SIGNAL( clicked() ), this, SLOT( selectLanguage() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_pbSelectFolder, SIGNAL( clicked() ), this, SLOT( selectFolder() ) );
+  connect( mp_pbDefault, SIGNAL( clicked() ), this, SLOT( restoreDefault() ) );
+  connect( mp_twLanguage, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
 }
 
 void GuiLanguage::loadLanguages()
@@ -74,9 +76,8 @@ void GuiLanguage::loadLanguages()
       lang = sl.at( 1 );
     item = new QTreeWidgetItem( mp_twLanguage );
     item->setText( 0, lang );
-    item->setText( 1, language_file.completeBaseName() );
-    item->setStatusTip( 0, language_file.absoluteFilePath() );
-    item->setStatusTip( 1, language_file.absoluteFilePath() );
+    item->setText( 1, language_file.fileName() );
+    item->setToolTip( 1, language_file.absoluteFilePath() );
   }
 }
 
@@ -114,4 +115,19 @@ void GuiLanguage::selectLanguage()
   m_languageSelected = language_selected;
 
   accept();
+}
+
+void GuiLanguage::restoreDefault()
+{
+  m_folderSelected = ".";
+  m_languageSelected = "";
+  accept();
+}
+
+void GuiLanguage::checkItemClicked( QTreeWidgetItem* item, int )
+{
+  if( !item )
+    return;
+
+  mp_leLanguage->setText( item->text( 0 ) );
 }

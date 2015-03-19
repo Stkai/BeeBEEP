@@ -47,6 +47,15 @@ void Core::createDefaultChat()
   QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
+
+  if( u.isBirthDay() )
+  {
+    if( !sHtmlMsg.isEmpty() )
+      sHtmlMsg += QString( "<br>" );
+    sHtmlMsg += QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
+                                        (u.isLocal() ? tr( "Happy Birthday to you!" ) : tr( "Happy Birthday to %1!" ).arg( u.name() ) ) );
+  }
+
   ChatManager::instance().setChat( c );
   emit updateChat( c.id() );
 }

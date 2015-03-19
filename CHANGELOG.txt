@@ -1,4 +1,7 @@
-BEEBEEP (Secure Network Chat)
+BEEBEEP (Secure Lan Messanger)
+
+BeeBEEP 0.9.8
+- Language interface added 
 
 BeeBEEP 0.9.7
 - Clear chat messages option 

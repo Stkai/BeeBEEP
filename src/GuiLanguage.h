@@ -41,6 +41,8 @@ public:
 protected slots:
   void selectLanguage();
   void selectFolder();
+  void restoreDefault();
+  void checkItemClicked( QTreeWidgetItem*, int );
 
 private:
   QString m_languageSelected;
