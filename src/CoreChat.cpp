@@ -48,12 +48,11 @@ void Core::createDefaultChat()
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
 
-  if( u.isBirthDay() )
+  if( Settings::instance().localUser().isBirthDay() )
   {
-    if( !sHtmlMsg.isEmpty() )
-      sHtmlMsg += QString( "<br>" );
-    sHtmlMsg += QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
-                                        (u.isLocal() ? tr( "Happy Birthday to you!" ) : tr( "Happy Birthday to %1!" ).arg( u.name() ) ) );
+    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ), tr( "Happy Birthday to you!"  ) );
+    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
+    c.addMessage( cm );
   }
 
   ChatManager::instance().setChat( c );

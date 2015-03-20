@@ -6,5 +6,5 @@ SUBDIRS += src plugins
 
 CONFIG += ordered
 
-TRANSLATIONS += locale/beebeep_it.ts locale/beebeep_de.ts locale/beebeep_ru.ts
+TRANSLATIONS += locale/beebeep_xx.ts locale/beebeep_it.ts locale/beebeep_de.ts locale/beebeep_ru.ts
 

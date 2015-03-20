@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.0">
 <context>
     <name>Core</name>
     <message>
@@ -44,13 +44,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="110"/>
-        <source>%1 You have created the group %2.</source>
+        <location filename="../src/CoreChat.cpp" line="56"/>
+        <location filename="../src/CoreUser.cpp" line="101"/>
+        <source>Happy Birthday to you!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="116"/>
-        <source>%1 Welcome to the group %2.</source>
+        <location filename="../src/CoreChat.cpp" line="56"/>
+        <location filename="../src/CoreUser.cpp" line="101"/>
+        <source>Happy Birthday to %1!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -58,6 +60,16 @@
         <location filename="../src/CoreChat.cpp" line="127"/>
         <location filename="../src/CoreChat.cpp" line="207"/>
         <source>%1 Chat with %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreChat.cpp" line="110"/>
+        <source>%1 You have created the group %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreChat.cpp" line="116"/>
+        <source>%1 Welcome to the group %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -73,6 +85,22 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="200"/>
         <source>%1 Members added to the group: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreChat.cpp" line="225"/>
+        <source>Unable to send the message: you are not connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreChat.cpp" line="267"/>
+        <location filename="../src/CoreChat.cpp" line="289"/>
+        <source>Unable to send the message to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreChat.cpp" line="298"/>
+        <source>Nobody has received the message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -96,19 +124,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="225"/>
-        <source>Unable to send the message: you are not connected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/CoreChat.cpp" line="267"/>
-        <location filename="../src/CoreChat.cpp" line="289"/>
-        <source>Unable to send the message to %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/CoreChat.cpp" line="298"/>
-        <source>Nobody has received the message.</source>
+        <location filename="../src/CoreConnection.cpp" line="216"/>
+        <source>%1 (%2) is connected to %3 network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -246,23 +263,6 @@
         <source>The %1&apos;s profile has been received.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../src/CoreChat.cpp" line="56"/>
-        <location filename="../src/CoreUser.cpp" line="101"/>
-        <source>Happy Birthday to you!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/CoreChat.cpp" line="56"/>
-        <location filename="../src/CoreUser.cpp" line="101"/>
-        <source>Happy Birthday to %1!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/CoreConnection.cpp" line="216"/>
-        <source>%1 (%2) is connected to %3 network.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>File</name>
@@ -287,6 +287,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/BeeUtils.cpp" line="215"/>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/BeeUtils.cpp" line="216"/>
         <source>Executable</source>
         <translation type="unfinished"></translation>
@@ -294,11 +299,6 @@
     <message>
         <location filename="../src/BeeUtils.cpp" line="217"/>
         <source>MacOSX</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/BeeUtils.cpp" line="215"/>
-        <source>Other</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -348,8 +348,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAskPassword.ui" line="147"/>
-        <source>Remember password (not recommended)</source>
+        <location filename="../src/GuiAskPassword.ui" line="23"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAskPassword.ui" line="30"/>
+        <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -368,18 +373,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiAskPassword.ui" line="147"/>
+        <source>Remember password (not recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiAskPassword.ui" line="154"/>
         <source>Show this dialog at connection startup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiAskPassword.ui" line="30"/>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiAskPassword.ui" line="23"/>
-        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -461,11 +461,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="134"/>
-        <source>Last message %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/GuiChat.cpp" line="100"/>
         <source>Edit group chat</source>
         <translation type="unfinished"></translation>
@@ -486,12 +481,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="107"/>
-        <location filename="../src/GuiChat.cpp" line="108"/>
-        <source>Leave the group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/GuiChat.cpp" line="105"/>
         <source>Create group</source>
         <translation type="unfinished"></translation>
@@ -502,6 +491,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiChat.cpp" line="107"/>
+        <location filename="../src/GuiChat.cpp" line="108"/>
+        <source>Leave the group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiChat.cpp" line="125"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
@@ -509,6 +504,11 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="127"/>
         <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiChat.cpp" line="134"/>
+        <source>Last message %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -961,6 +961,43 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="211"/>
+        <location filename="../src/GuiMain.cpp" line="230"/>
+        <location filename="../src/GuiMain.cpp" line="1259"/>
+        <location filename="../src/GuiMain.cpp" line="1634"/>
+        <location filename="../src/GuiMain.cpp" line="1654"/>
+        <location filename="../src/GuiMain.cpp" line="1963"/>
+        <location filename="../src/GuiMain.cpp" line="2043"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="211"/>
+        <location filename="../src/GuiMain.cpp" line="230"/>
+        <location filename="../src/GuiMain.cpp" line="1259"/>
+        <location filename="../src/GuiMain.cpp" line="1634"/>
+        <location filename="../src/GuiMain.cpp" line="1654"/>
+        <location filename="../src/GuiMain.cpp" line="1963"/>
+        <location filename="../src/GuiMain.cpp" line="2043"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="225"/>
+        <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="227"/>
+        <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="229"/>
+        <source>Do you want to close anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="255"/>
         <source>No new message available</source>
         <translation type="unfinished"></translation>
@@ -995,6 +1032,11 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="376"/>
         <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="378"/>
+        <source>developed by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1033,6 +1075,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="419"/>
+        <source>Show the main tool bar with settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="423"/>
         <source>Show the tool bar with plugin shortcuts</source>
         <translation type="unfinished"></translation>
@@ -1050,6 +1097,16 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="436"/>
         <source>&amp;Main</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="443"/>
+        <source>Select language...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="444"/>
+        <source>Select your preferred language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1155,6 +1212,16 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="501"/>
         <source>If enabled %1 stays on top of the other windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="506"/>
+        <source>Enable file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="507"/>
+        <source>If enabled you can transfer files with the other users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1283,163 +1350,8 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="632"/>
-        <source>Tip of the day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="634"/>
-        <source>Fact of the day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="635"/>
-        <source>Show me the fact of the day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="652"/>
-        <source>Please donate for %1 :-)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="653"/>
-        <source>I&apos;m so grateful and pleased about that</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="711"/>
-        <source>Show online users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="712"/>
-        <source>Show the list of the connected users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="715"/>
-        <source>Groups</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="723"/>
-        <source>Show your groups</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="724"/>
-        <source>Show the list of your groups</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="973"/>
-        <source>How many minutes of idle %1 can wait before changing status to away?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1190"/>
-        <source>%1 - Select a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1250"/>
-        <source>File transfer is disabled. You cannot download %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1726"/>
-        <source>Unable to add users in this chat. Please select a group one.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1954"/>
-        <source>Chat with %1 is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1958"/>
-        <source>Do you really want to clear messages with %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1961"/>
-        <source>Yes and delete history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2019"/>
-        <source>%1 is a your group. You can not leave the chat.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2020"/>
-        <source>Delete this group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2033"/>
-        <source>You cannot leave this chat.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2042"/>
-        <source>Do you really want to delete group &apos;%1&apos;?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2064"/>
-        <source>Unable to delete this chat.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2084"/>
-        <source>%1 has shared %2 files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/GuiMain.cpp" line="590"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="225"/>
-        <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="227"/>
-        <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="229"/>
-        <source>Do you want to close anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="378"/>
-        <source>developed by</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="443"/>
-        <source>Select language...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="444"/>
-        <source>Select your preferred language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="506"/>
-        <source>Enable file transfer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="507"/>
-        <source>If enabled you can transfer files with the other users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1504,8 +1416,23 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="632"/>
+        <source>Tip of the day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="633"/>
         <source>Show me the tip of the day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="634"/>
+        <source>Fact of the day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="635"/>
+        <source>Show me the fact of the day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1569,6 +1496,16 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="652"/>
+        <source>Please donate for %1 :-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="653"/>
+        <source>I&apos;m so grateful and pleased about that</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="698"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
@@ -1576,6 +1513,31 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="703"/>
         <source>Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="711"/>
+        <source>Show online users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="712"/>
+        <source>Show the list of the connected users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="715"/>
+        <source>Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="723"/>
+        <source>Show your groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="724"/>
+        <source>Show the list of your groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1629,6 +1591,16 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="778"/>
+        <source>Show the bar of local file sharing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="787"/>
+        <source>Show the bar of network file sharing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="802"/>
         <source>Show the bar of screenshot plugin</source>
         <translation type="unfinished"></translation>
@@ -1650,29 +1622,13 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1227"/>
-        <location filename="../src/GuiMain.cpp" line="1933"/>
-        <source>User not found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2105"/>
-        <source>Default language is restored.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2107"/>
-        <source>New language &apos;%1&apos; is selected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="2110"/>
-        <source>You must restart %1 to apply these changes.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/GuiMain.cpp" line="950"/>
         <source>Please save the network password in the next dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="973"/>
+        <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1706,6 +1662,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="1190"/>
+        <source>%1 - Select a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="1212"/>
         <source>There is no user connected.</source>
         <translation type="unfinished"></translation>
@@ -1716,30 +1677,24 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="1227"/>
+        <location filename="../src/GuiMain.cpp" line="1933"/>
+        <source>User not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="1250"/>
+        <source>File transfer is disabled. You cannot download %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="1258"/>
         <source>Do you want to download %1 (%2) from the user %3?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="211"/>
-        <location filename="../src/GuiMain.cpp" line="230"/>
         <location filename="../src/GuiMain.cpp" line="1259"/>
-        <location filename="../src/GuiMain.cpp" line="1634"/>
-        <location filename="../src/GuiMain.cpp" line="1654"/>
-        <location filename="../src/GuiMain.cpp" line="1963"/>
-        <location filename="../src/GuiMain.cpp" line="2043"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="211"/>
-        <location filename="../src/GuiMain.cpp" line="230"/>
-        <location filename="../src/GuiMain.cpp" line="1259"/>
-        <location filename="../src/GuiMain.cpp" line="1634"/>
-        <location filename="../src/GuiMain.cpp" line="1654"/>
-        <location filename="../src/GuiMain.cpp" line="1963"/>
-        <location filename="../src/GuiMain.cpp" line="2043"/>
-        <source>No</source>
+        <source>Yes, and don&apos;t ask anymore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1768,8 +1723,13 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1456"/>
-        <source>is a plugin developed by</source>
+        <location filename="../src/GuiMain.cpp" line="1449"/>
+        <source>Show the %1 log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="1450"/>
+        <source>Show the application log to see if an error occurred</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1783,33 +1743,8 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1449"/>
-        <source>Show the %1 log</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="419"/>
-        <source>Show the main tool bar with settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="778"/>
-        <source>Show the bar of local file sharing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="787"/>
-        <source>Show the bar of network file sharing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1259"/>
-        <source>Yes, and don&apos;t ask anymore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiMain.cpp" line="1450"/>
-        <source>Show the application log to see if an error occurred</source>
+        <location filename="../src/GuiMain.cpp" line="1456"/>
+        <source>is a plugin developed by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1850,6 +1785,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiMain.cpp" line="1726"/>
+        <source>Unable to add users in this chat. Please select a group one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/GuiMain.cpp" line="1767"/>
         <source>Now %1 will start on windows boot.</source>
         <translation type="unfinished"></translation>
@@ -1883,6 +1823,66 @@ Please select a different name.</source>
         <location filename="../src/GuiMain.cpp" line="1834"/>
         <location filename="../src/GuiMain.cpp" line="2020"/>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="1954"/>
+        <source>Chat with %1 is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="1958"/>
+        <source>Do you really want to clear messages with %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="1961"/>
+        <source>Yes and delete history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2019"/>
+        <source>%1 is a your group. You can not leave the chat.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2020"/>
+        <source>Delete this group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2033"/>
+        <source>You cannot leave this chat.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2042"/>
+        <source>Do you really want to delete group &apos;%1&apos;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2064"/>
+        <source>Unable to delete this chat.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2084"/>
+        <source>%1 has shared %2 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2105"/>
+        <source>Default language is restored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2107"/>
+        <source>New language &apos;%1&apos; is selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiMain.cpp" line="2110"/>
+        <source>You must restart %1 to apply these changes.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2224,8 +2224,8 @@ Please select a different name.</source>
 <context>
     <name>GuiShareLocal</name>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="52"/>
-        <source>Filename</source>
+        <location filename="../src/GuiShareLocal.cpp" line="47"/>
+        <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2241,8 +2241,8 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="47"/>
-        <source>File</source>
+        <location filename="../src/GuiShareLocal.cpp" line="52"/>
+        <source>Filename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2296,11 +2296,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="273"/>
-        <source>File transfer is disabled. Open the option menu to enable it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/GuiShareLocal.cpp" line="131"/>
         <source>Select a file to share</source>
         <translation type="unfinished"></translation>
@@ -2324,6 +2319,11 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="232"/>
         <source>%1 is already shared.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareLocal.cpp" line="273"/>
+        <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2816,6 +2816,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/GuiUserItem.cpp" line="116"/>
+        <source>%1 is %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/SaveChatList.cpp" line="74"/>
         <source>Saved in</source>
         <translation type="unfinished"></translation>
@@ -2823,11 +2828,6 @@ Please select a different name.</source>
     <message>
         <location filename="../src/SaveChatList.cpp" line="92"/>
         <source>Started in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiUserItem.cpp" line="116"/>
-        <source>%1 is %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2906,6 +2906,16 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Tips.h" line="35"/>
+        <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Tips.h" line="37"/>
+        <source>You can drop files to active chat and send them to members.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Tips.h" line="45"/>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
         <translation type="unfinished"></translation>
@@ -2981,8 +2991,8 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="91"/>
-        <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
+        <location filename="../src/Tips.h" line="63"/>
+        <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3008,16 +3018,6 @@ Please select a different name.</source>
     <message>
         <location filename="../src/Tips.h" line="73"/>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Tips.h" line="35"/>
-        <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Tips.h" line="63"/>
-        <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3091,8 +3091,8 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="37"/>
-        <source>You can drop files to active chat and send them to members.</source>
+        <location filename="../src/Tips.h" line="91"/>
+        <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

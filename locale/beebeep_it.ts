@@ -331,6 +331,10 @@
         <source>%1 (%2) is connected to %3 network.</source>
         <translation>%1 (%2) entra nella tua rete %3.</translation>
     </message>
+    <message>
+        <source>%1 Unable to send %2. File transfer is disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -854,6 +858,60 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Delete group</source>
         <translation>Cancella gruppo</translation>
+    </message>
+</context>
+<context>
+    <name>GuiLanguage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a language folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language &apos;%1&apos;&apos; not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiLanguageDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Percorso</translation>
+    </message>
+    <message>
+        <source>Select language folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore to default language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annulla</translation>
     </message>
 </context>
 <context>
@@ -1514,11 +1572,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Enable file sharing</source>
-        <translation>Abilita la condivisione dei file</translation>
+        <translation type="obsolete">Abilita la condivisione dei file</translation>
     </message>
     <message>
         <source>If enabled you can share files with the other users</source>
-        <translation>Se abilitata puoi condividere i tuoi file con gli altri utenti</translation>
+        <translation type="obsolete">Se abilitata puoi condividere i tuoi file con gli altri utenti</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -1983,6 +2041,46 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show me the fact of the day</source>
         <translation>Mostrami la perla di saggezza quotidiana</translation>
+    </message>
+    <message>
+        <source>Select language...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select your preferred language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If enabled you can transfer files with the other users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help online...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open %1 website to have online support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File transfer is disabled. You cannot download %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default language is restored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New language &apos;%1&apos; is selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must restart %1 to apply these changes.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2493,7 +2591,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>File sharing is disabled. Open the option menu to enable it.</source>
-        <translation>La condivisione dei file è disabilitata. Apri il menu delle opzioni per abilitarla.</translation>
+        <translation type="obsolete">La condivisione dei file è disabilitata. Apri il menu delle opzioni per abilitarla.</translation>
     </message>
     <message>
         <source>File</source>
@@ -2533,11 +2631,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>File sharing is disabled</source>
-        <translation>La condivisione dei file è disabilitata</translation>
+        <translation type="obsolete">La condivisione dei file è disabilitata</translation>
     </message>
     <message>
         <source>Double click to open %1</source>
         <translation>Doppio click per aprire %1</translation>
+    </message>
+    <message>
+        <source>File transfer is disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File transfer is disabled. Open the option menu to enable it.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
