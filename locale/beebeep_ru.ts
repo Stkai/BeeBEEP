@@ -44,70 +44,70 @@
         <translation>%1 общается со всеми локальными пользователями.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="110"/>
+        <location filename="../src/CoreChat.cpp" line="109"/>
         <source>%1 You have created the group %2.</source>
         <translation>%1 вы создали группу %2.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="116"/>
+        <location filename="../src/CoreChat.cpp" line="115"/>
         <source>%1 Welcome to the group %2.</source>
         <translation>%1 добро пожаловать в группу %2.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="70"/>
-        <location filename="../src/CoreChat.cpp" line="127"/>
-        <location filename="../src/CoreChat.cpp" line="207"/>
+        <location filename="../src/CoreChat.cpp" line="69"/>
+        <location filename="../src/CoreChat.cpp" line="126"/>
+        <location filename="../src/CoreChat.cpp" line="206"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 общается с %2.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="161"/>
+        <location filename="../src/CoreChat.cpp" line="160"/>
         <source>%1 The group has a new name: %2.</source>
         <translation>%1 группа переименована: %2.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="193"/>
+        <location filename="../src/CoreChat.cpp" line="192"/>
         <source>%1 Members removed from the group: %2.</source>
         <translation>%1 члены удалены из группы: %2.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="200"/>
+        <location filename="../src/CoreChat.cpp" line="199"/>
         <source>%1 Members added to the group: %2.</source>
         <translation>%1 члены добавлены в группу: %2.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="353"/>
+        <location filename="../src/CoreChat.cpp" line="352"/>
         <source>%1 %2 can not be invited to the group.</source>
         <translation>%1 %2 не может быть приглашен в группу.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="368"/>
+        <location filename="../src/CoreChat.cpp" line="367"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 не может быть проинформирован, что вы ушли из группы.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="447"/>
+        <location filename="../src/CoreChat.cpp" line="446"/>
         <source>%1 You have left the group.</source>
         <translation>%1 вы покинули группу.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="449"/>
+        <location filename="../src/CoreChat.cpp" line="448"/>
         <source>%1 %2 has left the group.</source>
         <translation>%1 %2 покинул группу.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="225"/>
+        <location filename="../src/CoreChat.cpp" line="224"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Не удается отослать сообщение: вы не подключены.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="267"/>
-        <location filename="../src/CoreChat.cpp" line="289"/>
+        <location filename="../src/CoreChat.cpp" line="266"/>
+        <location filename="../src/CoreChat.cpp" line="288"/>
         <source>Unable to send the message to %1.</source>
         <translation>Не удается отослать сообщение для %1.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="298"/>
+        <location filename="../src/CoreChat.cpp" line="297"/>
         <source>Nobody has received the message.</source>
         <translation>Никто не получил сообщение.</translation>
     </message>
@@ -247,13 +247,12 @@
         <translation>Профиль %1 получен.</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="56"/>
+        <location filename="../src/CoreChat.cpp" line="53"/>
         <location filename="../src/CoreUser.cpp" line="101"/>
         <source>Happy Birthday to you!</source>
         <translation>С днем рождения!</translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="56"/>
         <location filename="../src/CoreUser.cpp" line="101"/>
         <source>Happy Birthday to %1!</source>
         <translation>С днем рождения %1!</translation>
@@ -364,8 +363,12 @@
     </message>
     <message>
         <location filename="../src/GuiAskPassword.ui" line="118"/>
+        <source>* Password must be the same for all user you want to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>* Password must be the same for all client you want to reach</source>
-        <translation>* Пароль должен быть одинаковым для всех клиентов, до которых вы хотите попасть</translation>
+        <translation type="obsolete">* Пароль должен быть одинаковым для всех клиентов, до которых вы хотите попасть</translation>
     </message>
     <message>
         <location filename="../src/GuiAskPassword.ui" line="154"/>

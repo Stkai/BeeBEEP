@@ -44,70 +44,70 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="110"/>
+        <location filename="../src/CoreChat.cpp" line="109"/>
         <source>%1 You have created the group %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="116"/>
+        <location filename="../src/CoreChat.cpp" line="115"/>
         <source>%1 Welcome to the group %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="70"/>
-        <location filename="../src/CoreChat.cpp" line="127"/>
-        <location filename="../src/CoreChat.cpp" line="207"/>
+        <location filename="../src/CoreChat.cpp" line="69"/>
+        <location filename="../src/CoreChat.cpp" line="126"/>
+        <location filename="../src/CoreChat.cpp" line="206"/>
         <source>%1 Chat with %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="161"/>
+        <location filename="../src/CoreChat.cpp" line="160"/>
         <source>%1 The group has a new name: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="193"/>
+        <location filename="../src/CoreChat.cpp" line="192"/>
         <source>%1 Members removed from the group: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="200"/>
+        <location filename="../src/CoreChat.cpp" line="199"/>
         <source>%1 Members added to the group: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="353"/>
+        <location filename="../src/CoreChat.cpp" line="352"/>
         <source>%1 %2 can not be invited to the group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="368"/>
+        <location filename="../src/CoreChat.cpp" line="367"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="447"/>
+        <location filename="../src/CoreChat.cpp" line="446"/>
         <source>%1 You have left the group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="449"/>
+        <location filename="../src/CoreChat.cpp" line="448"/>
         <source>%1 %2 has left the group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="225"/>
+        <location filename="../src/CoreChat.cpp" line="224"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="267"/>
-        <location filename="../src/CoreChat.cpp" line="289"/>
+        <location filename="../src/CoreChat.cpp" line="266"/>
+        <location filename="../src/CoreChat.cpp" line="288"/>
         <source>Unable to send the message to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="298"/>
+        <location filename="../src/CoreChat.cpp" line="297"/>
         <source>Nobody has received the message.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -247,13 +247,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="56"/>
+        <location filename="../src/CoreChat.cpp" line="53"/>
         <location filename="../src/CoreUser.cpp" line="101"/>
         <source>Happy Birthday to you!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreChat.cpp" line="56"/>
         <location filename="../src/CoreUser.cpp" line="101"/>
         <source>Happy Birthday to %1!</source>
         <translation type="unfinished"></translation>
@@ -364,7 +363,7 @@
     </message>
     <message>
         <location filename="../src/GuiAskPassword.ui" line="118"/>
-        <source>* Password must be the same for all client you want to reach</source>
+        <source>* Password must be the same for all user you want to connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

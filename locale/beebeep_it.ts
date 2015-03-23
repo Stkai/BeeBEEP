@@ -468,7 +468,11 @@
     </message>
     <message>
         <source>* Password must be the same for all client you want to reach</source>
-        <translation>* La password deve essere la stessa per tutti i client connessi</translation>
+        <translation type="obsolete">* La password deve essere la stessa per tutti i client connessi</translation>
+    </message>
+    <message>
+        <source>* Password must be the same for all user you want to connect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
