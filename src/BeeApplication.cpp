@@ -30,7 +30,7 @@
 #include <windows.h>
 #endif
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUXs
 // for check user inactivity time
 #include <xcb/xcb.h>
 #include <xcb/screensaver.h>
@@ -50,7 +50,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   mp_jobThread = new QThread();
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
     setAttribute( Qt::AA_DontShowIconsInMenus, false );
@@ -71,7 +71,7 @@ void BeeApplication::setIdleTimeout( int new_value )
   m_idleTimeout = new_value * 60;
   if( m_timer.isActive() )
     return;
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
   mp_xcbConnection = xcb_connect( 0, 0 );
   m_xcbConnectHasError = xcb_connection_has_error( mp_xcbConnection ) > 0;
   if( m_xcbConnectHasError )
@@ -125,7 +125,7 @@ void BeeApplication::cleanUp()
   if( m_timer.isActive() )
   {
     m_timer.stop();
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
  // mp_xcbScreen not need to free
  // disconnect from display and free memory
     xcb_disconnect( mp_xcbConnection );
@@ -149,7 +149,7 @@ bool BeeApplication::isScreenSaverRunning()
   screen_saver_is_running = (bool)is_running;
 #endif
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
   if( !m_xcbConnectHasError )
   {
     xcb_screensaver_query_info_cookie_t xcbCookie;
@@ -182,7 +182,7 @@ int BeeApplication::idleTimeFromSystem()
   }
 #endif
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
   if( !m_xcbConnectHasError )
   {
     xcb_screensaver_query_info_cookie_t xcbCookie;

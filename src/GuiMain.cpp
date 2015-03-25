@@ -151,7 +151,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
 
   initGuiItems();
-  raiseChatView();
 }
 
 void GuiMain::checkWindowFlagsAndShow()
