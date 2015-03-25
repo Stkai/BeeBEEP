@@ -30,7 +30,7 @@
 #include <windows.h>
 #endif
 
-#ifdef Q_OS_LINUXs
+#ifdef Q_OS_LINUX
 // for check user inactivity time
 #include <xcb/xcb.h>
 #include <xcb/screensaver.h>

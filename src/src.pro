@@ -12,7 +12,9 @@ CONFIG(debug,debug|release) {
 
 message(Qt version: $$[QT_VERSION])
 
-linux: LIBS= -lxcb -lxcb-screensaver
+unix:!macx {
+  LIBS= -lxcb -lxcb-screensaver
+}
 
 TARGET = beebeep
 TEMPLATE = app
