@@ -686,10 +686,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
 
-#if defined( Q_OS_MAC )
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actAbout );
-#endif
 }
 
 void GuiMain::createStatusBar()
@@ -1435,12 +1431,10 @@ void GuiMain::updadePluginMenu()
 
   act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
   act->setStatusTip( tr( "Open the plugin manager dialog and manage the installed plugins" ) );
-
   if( PluginManager::instance().count() <= 0 )
   {
     mp_barPlugins->addAction( act );
     mp_barPlugins->addSeparator();
-    return;
   }
 
   /* Static Plugins */
@@ -1451,6 +1445,12 @@ void GuiMain::updadePluginMenu()
   mp_actViewScreenShot = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
   mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
   mp_barPlugins->addAction( mp_actViewScreenShot );
+
+  if( PluginManager::instance().count() <= 0 )
+  {
+    // mp_actViewLog and mp_actViewScreenshot must be created
+    return;
+  }
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
