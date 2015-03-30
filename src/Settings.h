@@ -43,6 +43,12 @@ public:
   inline bool trustSystemAccount() const;
 
   inline const QDate& settingsCreationDate() const;
+  bool createDefaultFolder();
+  inline const QString& defaultFolder() const;
+  QString defaultHostsFilePath( bool current_dir ) const;
+  QString defaultRcFilePath( bool current_dir ) const;
+  QString defaultSettingsFilePath() const;
+  QString defaultBeepFilePath() const;
 
   QString version( bool ) const;
   int protoVersion() const;
@@ -234,6 +240,8 @@ private:
   bool m_trustNickname;
   bool m_trustSystemAccount;
 
+  QString m_defaultFolder;
+
   // Ini
   User m_localUser;
   int m_broadcastPort;
@@ -324,6 +332,7 @@ private:
 
 
 // Inline Functions
+inline const QString& Settings::defaultFolder() const { return m_defaultFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline bool Settings::trustNickname() const { return m_trustNickname; }

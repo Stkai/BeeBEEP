@@ -62,6 +62,7 @@ int main( int argc, char *argv[] )
     /* Load Settings */
   (void)Settings::instance();
   qDebug() << "Starting BeeBEEP" << Settings::instance().version( true );
+  Settings::instance().createDefaultFolder();
   Settings::instance().loadPreConf();
   Settings::instance().load();
 

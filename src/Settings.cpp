@@ -27,10 +27,6 @@
 
 
 Settings* Settings::mp_instance = NULL;
-const QString SETTINGS_FILE_NAME = "beebeep.ini";
-const QSettings::Format SETTINGS_FILE_FORMAT = QSettings::IniFormat;
-const QString PRECONF_FILE_NAME = "beebeep.rc";
-const QSettings::Format PRECONF_FILE_FORMAT = QSettings::IniFormat;
 
 
 Settings::Settings()
@@ -43,6 +39,7 @@ Settings::Settings()
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
+  m_defaultFolder = ".";
 }
 
 QString Settings::version( bool complete ) const
@@ -239,11 +236,16 @@ void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port
 
 void Settings::loadBroadcastAddresses()
 {
-  QFile file( "beehosts.ini" );
+  QFile file( defaultHostsFilePath( false ) );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qWarning() << "File hosts" << file.fileName() << "not found";
-    return;
+    qWarning() << "File hosts" << file.fileName() << "not found. Check the default one";
+    file.setFileName( defaultHostsFilePath( true ) );
+    if( !file.open( QIODevice::ReadOnly ) )
+    {
+      qWarning() << "Default file host not found";
+      return;
+    }
   }
 
   qDebug() << "Reading file hosts" << file.fileName();
@@ -300,35 +302,43 @@ namespace
 
 void Settings::loadPreConf()
 {
-  QSettings sets( PRECONF_FILE_NAME, PRECONF_FILE_FORMAT );
-  if( sets.allKeys().isEmpty() )
+  QSettings* sets = new QSettings( defaultRcFilePath( true ), QSettings::IniFormat );
+  if( sets->allKeys().isEmpty() )
   {
     qDebug() << "Creating pre-configuration file";
-    sets.beginGroup( "BeeBEEP" );
+    if( !sets->isWritable() )
+    {
+      sets->deleteLater();
+      sets = new QSettings( defaultRcFilePath( false ), QSettings::IniFormat );
+    }
 
+    sets->beginGroup( "BeeBEEP" );
 #if defined( Q_OS_MAC )
-    sets.setValue( "UseConfigurationFileIni", false );
+    sets->setValue( "UseConfigurationFileIni", false );
 #else
-    sets.setValue( "UseConfigurationFileIni", true );
+    sets->setValue( "UseConfigurationFileIni", true );
 #endif
-    sets.endGroup();
-    sets.beginGroup( "Groups" );
-    sets.setValue( "TrustNickname", true );
-    sets.setValue( "TrustSystemAccount", false );
-    sets.endGroup();
-    sets.sync();
-    qDebug() << "Pre-configuration file created";
+    sets->endGroup();
+    sets->beginGroup( "Groups" );
+    sets->setValue( "TrustNickname", true );
+    sets->setValue( "TrustSystemAccount", false );
+    sets->endGroup();
+    sets->sync();
+    qDebug() << "Pre-configuration file created in" << sets->fileName();
   }
   else
   {
-    sets.beginGroup( "BeeBEEP" );
-    m_useSettingsFileIni = sets.value( "UseConfigurationFileIni", true ).toBool();
-    sets.endGroup();
-    sets.beginGroup( "Groups" );
-    m_trustNickname = sets.value( "TrustNickname", true ).toBool();
-    m_trustSystemAccount = sets.value( "TrustSystemAccount", false ).toBool();
-    sets.endGroup();
+    sets->beginGroup( "BeeBEEP" );
+    m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", true ).toBool();
+    sets->endGroup();
+    sets->beginGroup( "Groups" );
+    m_trustNickname = sets->value( "TrustNickname", true ).toBool();
+    m_trustSystemAccount = sets->value( "TrustSystemAccount", false ).toBool();
+    sets->endGroup();
   }
+
+  qDebug() << "Read initial settings from" << sets->fileName();
+  sets->deleteLater();
 }
 
 QSettings* Settings::objectSettings() const
@@ -336,7 +346,7 @@ QSettings* Settings::objectSettings() const
   QSettings *sets;
 
   if( m_useSettingsFileIni )
-    sets = new QSettings( SETTINGS_FILE_NAME, SETTINGS_FILE_FORMAT );
+    sets = new QSettings( defaultSettingsFilePath(), QSettings::IniFormat );
   else
     sets = new QSettings( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
 
@@ -421,22 +431,16 @@ void Settings::load()
   m_lastDirectorySelected = sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
   m_downloadDirectory = sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
 #endif
-  if( m_useSettingsFileIni )
-    m_logPath = sets->value( "LogPath", "." ).toString();
-  else
-    m_logPath = sets->value( "LogPath", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
-  m_pluginPath = sets->value( "PluginPath", "." ).toString();
-  m_languagePath = sets->value( "LanguagePath", "." ).toString();
+  m_logPath = sets->value( "LogPath", defaultFolder() ).toString();
+  m_pluginPath = sets->value( "PluginPath", defaultFolder() ).toString();
+  m_languagePath = sets->value( "LanguagePath", defaultFolder() ).toString();
   m_minimizeInTray = sets->value( "MinimizeInTray", false ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
-  m_beepFilePath = sets->value( "BeepFilePath", "beep.wav" ).toString();
+  m_beepFilePath = sets->value( "BeepFilePath", defaultBeepFilePath() ).toString();
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
-  if( m_useSettingsFileIni )
-    m_chatSaveDirectory = sets->value( "ChatSaveDirectory", "." ).toString();
-  else
-    m_chatSaveDirectory = sets->value( "ChatSaveDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+  m_chatSaveDirectory = sets->value( "ChatSaveDirectory", defaultFolder() ).toString();
   m_chatAutoSave = sets->value( "ChatAutoSave", false ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   sets->endGroup();
@@ -736,3 +740,77 @@ void Settings::clearNativeSettings()
     sets.clear();
 }
 
+bool Settings::createDefaultFolder()
+{
+  QString default_folder;
+
+  if( m_useSettingsFileIni )
+  {
+    default_folder = ".";
+    QFileInfo current_folder( default_folder );
+    if( current_folder.isWritable() )
+    {
+      m_defaultFolder = default_folder;
+      return true;
+    }
+    else
+      qWarning() << "Current" << Settings::instance().programName() << " folder is not writeable";
+  }
+
+  QString data_folder = QLatin1String( "beebeep-data" );
+  QString root_folder;
+
+#if QT_VERSION >= 0x050000
+  root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
+#else
+  root_folder = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation );
+#endif
+  default_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder, data_folder ) );
+
+  QDir folder( default_folder );
+  if( !folder.exists() )
+  {
+    qWarning() << "Default folder root not found:" << folder.absolutePath();
+    folder.cdUp();
+    if( !folder.mkdir( data_folder ) )
+    {
+      qWarning() << "Unable to create folder" << data_folder << "in" << folder.absolutePath() ;
+      m_defaultFolder = root_folder;
+      return false;
+    }
+
+    qDebug() << "Folder" << data_folder << "created in" << root_folder;
+  }
+
+  QFileInfo folder_info( default_folder );
+  if( !folder_info.isWritable() )
+  {
+    qWarning() << "Default folder" << folder_info.absoluteFilePath() << "is not writeable";
+    m_defaultFolder = root_folder;
+    return false;
+  }
+
+  qDebug() << "Default folder:" << default_folder;
+  m_defaultFolder = default_folder;
+  return true;
+}
+
+QString Settings::defaultHostsFilePath( bool current_dir ) const
+{
+  return current_dir ? QLatin1String( "beehosts.ini" ) : QDir::toNativeSeparators( QString( "%1/%2" ).arg( defaultFolder() ).arg( QLatin1String( "beehosts.ini" ) ) );
+}
+
+QString Settings::defaultRcFilePath( bool current_dir ) const
+{
+  return current_dir ? QLatin1String( "beebeep.rc" ) : QDir::toNativeSeparators( QString( "%1/%2" ).arg( defaultFolder() ).arg( QLatin1String( "beebeep.rc" ) ) );
+}
+
+QString Settings::defaultSettingsFilePath() const
+{
+  return QDir::toNativeSeparators( QString( "%1/%2" ).arg( defaultFolder() ).arg( QLatin1String( "beebeep.ini" ) ) );
+}
+
+QString Settings::defaultBeepFilePath() const
+{
+ return QDir::toNativeSeparators( QString( "%1/%2" ).arg( defaultFolder() ).arg( QLatin1String( "beep.wav" ) ) );
+}

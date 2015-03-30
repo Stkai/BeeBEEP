@@ -105,8 +105,6 @@ void PluginManager::addPlugin( const QString& file_path )
         qDebug() << text_marker_plugin->name() << "already load... skip it";
       return;
     }
-    else
-      qDebug() << file_path << "is not a text marker plugin";
 
     GameInterface* game_plugin = qobject_cast<GameInterface*>( plugin );
     if( game_plugin )
@@ -121,12 +119,10 @@ void PluginManager::addPlugin( const QString& file_path )
         }
         m_games.append( game_plugin );
       }
-      else
-        qDebug() << game_plugin->name() << "already load... skip it";
       return;
     }
-    else
-      qDebug() << file_path << "is not a game plugin";
+
+    qDebug() << file_path << "is an invalid plugin";
   }
   else
     qDebug() << file_path << "is not a plugin";
