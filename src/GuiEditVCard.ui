@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>242</height>
+    <width>459</width>
+    <height>343</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0" colspan="4">
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="mp_lPath">
@@ -255,7 +255,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>55</width>
+          <width>171</width>
           <height>20</height>
          </size>
         </property>
@@ -273,6 +273,23 @@
       </item>
       <item row="4" column="1" colspan="2">
        <widget class="QLineEdit" name="mp_leEmail">
+        <property name="maxLength">
+         <number>80</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="mp_lPhone">
+        <property name="text">
+         <string>Phone</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" colspan="2">
+       <widget class="QLineEdit" name="mp_lePhone">
         <property name="maxLength">
          <number>80</number>
         </property>
@@ -404,7 +421,7 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0">
+   <item row="3" column="0" rowspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -417,7 +434,37 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item row="4" column="1" colspan="3">
+    <widget class="QGroupBox" name="mp_gbInfo">
+     <property name="title">
+      <string>Other informations</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QPlainTextEdit" name="mp_teInfo"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -430,14 +477,14 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="2">
+   <item row="5" column="2">
     <widget class="QPushButton" name="mp_pbOk">
      <property name="text">
       <string>Ok</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="3">
+   <item row="5" column="3">
     <widget class="QPushButton" name="mp_pbCancel">
      <property name="text">
       <string>Cancel</string>
@@ -447,17 +494,19 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>mp_lePath</tabstop>
   <tabstop>mp_leNickname</tabstop>
   <tabstop>mp_leFirstName</tabstop>
   <tabstop>mp_leLastName</tabstop>
   <tabstop>mp_deBirthday</tabstop>
   <tabstop>mp_leEmail</tabstop>
+  <tabstop>mp_lePhone</tabstop>
   <tabstop>mp_pbChangePhoto</tabstop>
   <tabstop>mp_pbRemovePhoto</tabstop>
   <tabstop>mp_pbColor</tabstop>
+  <tabstop>mp_teInfo</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
-  <tabstop>mp_lePath</tabstop>
  </tabstops>
  <resources>
   <include location="beebeep.qrc"/>

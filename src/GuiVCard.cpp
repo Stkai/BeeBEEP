@@ -70,6 +70,16 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else
     mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png").pixmap( 96, 96 ) );
 
+  if( !u.vCard().info().isEmpty() )
+    mp_lPhoto->setToolTip( u.vCard().info() );
+  else
+    mp_lPhoto->setToolTip( u.name() );
+
+  if( !u.vCard().phoneNumber().isEmpty() )
+    mp_lPhone->setText( u.vCard().phoneNumber() );
+  else
+    mp_lPhone->setText( "" );
+
   QString user_version = "";
   if( u.version().isEmpty() )
     user_version = tr( "use old version" );

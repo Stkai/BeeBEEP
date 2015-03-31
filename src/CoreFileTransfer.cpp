@@ -248,8 +248,9 @@ void Core::sendFileShareListToAll()
 
 void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 {
+  qDebug() << "Adding to file sharing" << share_path;
+
   QString share_status = tr( "Adding to file sharing" ) + QString( " %1" ).arg( share_path );
-  qDebug() << qPrintable( share_status );
   emit updateStatus( share_status + QString( " ..." ), 1000 );
 
   BuildFileShareList *bfsl = new BuildFileShareList;

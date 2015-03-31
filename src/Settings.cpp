@@ -414,6 +414,8 @@ void Settings::load()
   QPixmap pix = sets->value( "Photo", QPixmap() ).value<QPixmap>();
   if( !pix.isNull() )
     vc.setPhoto( pix );
+  vc.setPhoneNumber( sets->value( "Phone", "" ).toString() );
+  vc.setInfo( sets->value( "Info", "" ).toString() );
   m_localUser.setVCard( vc );
   sets->endGroup();
 
@@ -574,6 +576,8 @@ void Settings::save()
   sets->setValue( "Birthday", m_localUser.vCard().birthday() );
   sets->setValue( "Email", m_localUser.vCard().email() );
   sets->setValue( "Photo", m_localUser.vCard().photo() );
+  sets->setValue( "Phone", m_localUser.vCard().phoneNumber() );
+  sets->setValue( "Info", m_localUser.vCard().info() );
   sets->endGroup();
   sets->beginGroup( "Gui" );
   sets->setValue( "MainWindowGeometry", m_guiGeometry );

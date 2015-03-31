@@ -54,6 +54,10 @@ public:
   inline const QPixmap& photo() const;
   void setPhoto( const QPixmap& );
   inline const QByteArray& photoHash() const;
+  inline const QString& phoneNumber() const;
+  inline void setPhoneNumber( const QString& );
+  inline const QString& info() const;
+  inline void setInfo( const QString& );
 
 private:
   QString m_nickName;
@@ -64,6 +68,8 @@ private:
   QString m_email;
   QByteArray m_photoHash;
   QPixmap m_photo;
+  QString m_phoneNumber;
+  QString m_info;
 
 };
 
@@ -84,14 +90,22 @@ inline void VCard::setEmail( const QString& new_value ) { m_email = new_value; }
 inline const QPixmap& VCard::photo() const { return m_photo; }
 inline const QByteArray& VCard::photoHash() const { return m_photoHash; }
 inline bool VCard::hasFullName() const { return fullName().size() > 1; }
-inline bool VCard::hasOnlyNickName() const { return m_firstName.isEmpty() && m_lastName.isEmpty() && m_fullName.isEmpty() && !m_birthday.isValid() && m_email.isEmpty() && m_photoHash.isEmpty(); }
+inline bool VCard::hasOnlyNickName() const
+{
+  return m_firstName.isEmpty() && m_lastName.isEmpty() && m_fullName.isEmpty() && !m_birthday.isValid()
+          && m_email.isEmpty() && m_photoHash.isEmpty() && m_phoneNumber.isEmpty() && m_info.isEmpty();
+}
 inline bool VCard::operator==( const VCard& vc ) const
 {
   return m_nickName == vc.m_nickName && m_firstName == vc.m_firstName
       && m_lastName == vc.m_lastName && m_fullName == vc.m_fullName
       && m_birthday == vc.m_birthday && m_email == vc.m_email
-      && m_photoHash == vc.m_photoHash;
+      && m_photoHash == vc.m_photoHash && m_phoneNumber == vc.m_phoneNumber
+      && m_info == vc.m_info;
 }
-
+inline const QString& VCard::phoneNumber() const { return m_phoneNumber; }
+inline void VCard::setPhoneNumber( const QString& new_value ) { m_phoneNumber = new_value; }
+inline const QString& VCard::info() const { return m_info; }
+inline void VCard::setInfo( const QString& new_value ) { m_info = new_value; }
 
 #endif // BEEBEEP_VCARD_H

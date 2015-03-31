@@ -333,7 +333,7 @@
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Impossibile inviare %2. Il trasferimento dei file è disabilitato.</translation>
     </message>
 </context>
 <context>
@@ -472,7 +472,7 @@
     </message>
     <message>
         <source>* Password must be the same for all user you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>* La password deve essere la stessa per tutti gli utenti connessi</translation>
     </message>
 </context>
 <context>
@@ -868,54 +868,54 @@ Inserisci un nome differente.</translation>
     <name>GuiLanguage</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingua</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>File</translation>
     </message>
     <message>
         <source>Select a language folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona una cartella per le traduzioni</translation>
     </message>
     <message>
         <source>Language &apos;%1&apos;&apos; not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>La traduzione &apos;%1&apos; non è stata trovata.</translation>
     </message>
 </context>
 <context>
     <name>GuiLanguageDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingua</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Percorso</translation>
+        <translation>Percorso</translation>
     </message>
     <message>
         <source>Select language folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona una cartella per le traduzioni</translation>
     </message>
     <message>
         <source>Restore to default language</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina la lingua predefinita</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
 </context>
 <context>
@@ -2048,43 +2048,43 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Select language...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona una lingua...</translation>
     </message>
     <message>
         <source>Select your preferred language</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona la traduzione che vuoi che il programma usi</translation>
     </message>
     <message>
         <source>Enable file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Abilita il trasferimento dei file</translation>
     </message>
     <message>
         <source>If enabled you can transfer files with the other users</source>
-        <translation type="unfinished"></translation>
+        <translation>Se abilitata puoi inviare e ricevere file dagli altri utenti connessi</translation>
     </message>
     <message>
         <source>Help online...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aiuto online...</translation>
     </message>
     <message>
         <source>Open %1 website to have online support</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri il sito ufficiale di %1 per avere supporto in linea</translation>
     </message>
     <message>
         <source>File transfer is disabled. You cannot download %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il trasferimento dei file è disabilitato. Non puoi scaricare %1.</translation>
     </message>
     <message>
         <source>Default language is restored.</source>
-        <translation type="unfinished"></translation>
+        <translation>La lingua predefinita è stata ripristinata.</translation>
     </message>
     <message>
         <source>New language &apos;%1&apos; is selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>La nuova traduzione &apos;%1&apos; è stata selezionata.</translation>
     </message>
     <message>
         <source>You must restart %1 to apply these changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Devi chiudere e riaprire %1 per applicare i cambiamenti.</translation>
     </message>
 </context>
 <context>
@@ -2643,11 +2643,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>File transfer is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Il trasferimento dei file è disabilitato</translation>
     </message>
     <message>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il trasferimento dei file è disabilitato. Apri il menu delle opzioni per abilitarlo.</translation>
     </message>
 </context>
 <context>
@@ -3012,6 +3012,14 @@ il file %2 (%3)?</translation>
         <source>User ID</source>
         <translation>ID Utente</translation>
     </message>
+    <message>
+        <source>Phone</source>
+        <translation>Telefono</translation>
+    </message>
+    <message>
+        <source>Other informations</source>
+        <translation>Altre informazioni</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -3066,6 +3074,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Remove from the contact list</source>
         <translation type="obsolete">Elimina dalla lista dei contatti</translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation>Telefono</translation>
     </message>
 </context>
 <context>
@@ -3362,59 +3374,59 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>You can drop files to active chat and send them to members.</source>
@@ -3422,11 +3434,11 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

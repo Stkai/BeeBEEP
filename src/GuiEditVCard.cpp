@@ -69,12 +69,17 @@ void GuiEditVCard::loadVCard()
     mp_deBirthday->setDate( m_vCard.birthday() );
   else
     mp_deBirthday->setDate( QDate( 1900, 1, 1 ) );
+
   mp_leEmail->setText( m_vCard.email() );
 
   if( m_vCard.photo().isNull() )
     mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png" ).pixmap( 96, 96 ) );
   else
     mp_lPhoto->setPixmap( m_vCard.photo() );
+
+  mp_lePhone->setText( m_vCard.phoneNumber() );
+
+  mp_teInfo->setPlainText( m_vCard.info() );
 
   mp_leNickname->setFocus();
 }
@@ -137,7 +142,11 @@ void GuiEditVCard::checkData()
   m_vCard.setLastName( mp_leLastName->text().simplified() );
   if( mp_deBirthday->date() != QDate( 1900, 1, 1 ) )
     m_vCard.setBirthday( mp_deBirthday->date() );
+  else
+    m_vCard.setBirthday( QDate() );
   m_vCard.setEmail( mp_leEmail->text().simplified() );
+  m_vCard.setPhoneNumber( mp_lePhone->text().simplified() );
+  m_vCard.setInfo( mp_teInfo->toPlainText().trimmed() );
 
   accept();
 }

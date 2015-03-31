@@ -45,6 +45,8 @@ LastName= your last name
 Birthday= your birthday
 Email= your email
 Photo= your photo
+Phone= your phone numbers
+Info= other informations about you
 
 [Gui]
 MainBarIconSize= Icon size of the tool bar

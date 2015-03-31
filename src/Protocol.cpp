@@ -299,6 +299,8 @@ QByteArray Protocol::localVCardMessage() const
   data_list << vc.birthday().toString( Qt::ISODate );
   data_list << vc.email();
   data_list << Settings::instance().localUser().color();
+  data_list << vc.phoneNumber();
+  data_list << vc.info();
   m.setData( data_list.join( DATA_FIELD_SEPARATOR ) );
 
   return fromMessage( m );
@@ -326,7 +328,13 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
       u->setColor( user_color );
   }
 
-  if( sl.size() > 7 )
+  if( sl.size() >= 7 )
+    vc.setPhoneNumber( sl.at( 6 ) );
+
+  if( sl.size() >= 8 )
+    vc.setInfo( sl.at( 7 ) );
+
+  if( sl.size() > 8 )
     qWarning() << "VCARD message contains more data. Skip it";
 
   return true;

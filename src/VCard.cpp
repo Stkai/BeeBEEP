@@ -27,7 +27,7 @@
 VCard::VCard()
   : m_nickName( "" ), m_firstName( "" ), m_lastName( "" ),
     m_fullName( "" ), m_birthday(), m_email( "" ), m_photoHash( "" ),
-    m_photo()
+    m_photo(), m_phoneNumber( "" ), m_info( "" )
 {}
 
 VCard::VCard( const VCard& vc )
@@ -47,6 +47,8 @@ VCard& VCard::operator=( const VCard& vc )
     m_email = vc.m_email;
     m_photoHash = vc.m_photoHash;
     m_photo = vc.m_photo;
+    m_phoneNumber = vc.m_phoneNumber;
+    m_info = vc.m_info;
   }
   return *this;
 }
