@@ -102,5 +102,6 @@
         <file>images/fact.png</file>
         <file>images/folder.png</file>
         <file>images/language.png</file>
+        <file>emoticons/angry.png</file>
     </qresource>
 </RCC>

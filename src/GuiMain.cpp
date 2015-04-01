@@ -383,13 +383,13 @@ void GuiMain::showAbout()
 
 void GuiMain::showLicense()
 {
-  QString license_txt = tr( "BeeBEEP is free software: you can redistribute it and/or modify<br>"
-  "it under the terms of the GNU General Public License as published<br>"
-  "by the Free Software Foundation, either version 3 of the License<br>"
-  "or (at your option) any later version.<br><br>"
-  "BeeBEEP is distributed in the hope that it will be useful,<br>"
-  "but WITHOUT ANY WARRANTY; without even the implied warranty<br>"
-  "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br>"
+  QString license_txt = tr( "BeeBEEP is free software: you can redistribute it and/or modify<br />"
+  "it under the terms of the GNU General Public License as published<br />"
+  "by the Free Software Foundation, either version 3 of the License<br />"
+  "or (at your option) any later version.<br /><br />"
+  "BeeBEEP is distributed in the hope that it will be useful,<br />"
+  "but WITHOUT ANY WARRANTY; without even the implied warranty<br />"
+  "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br />"
   "See the GNU General Public License for more details." );
   QMessageBox::about( this, Settings::instance().programName(), license_txt );
 }

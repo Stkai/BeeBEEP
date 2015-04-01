@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>459</width>
-    <height>343</height>
+    <width>455</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="0" colspan="2">
+   <item row="0" column="0" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="mp_lPath">
@@ -501,10 +501,10 @@
   <tabstop>mp_deBirthday</tabstop>
   <tabstop>mp_leEmail</tabstop>
   <tabstop>mp_lePhone</tabstop>
+  <tabstop>mp_teInfo</tabstop>
   <tabstop>mp_pbChangePhoto</tabstop>
   <tabstop>mp_pbRemovePhoto</tabstop>
   <tabstop>mp_pbColor</tabstop>
-  <tabstop>mp_teInfo</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>

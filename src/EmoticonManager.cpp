@@ -38,6 +38,7 @@ EmoticonManager::EmoticonManager()
   addEmoticon( ":'(", "cry" );
   addEmoticon( ":D", "laugh" );
   addEmoticon( ":-D", "laugh" );
+  addEmoticon( ":@", "angry" );
   addEmoticon( ":*", "kiss" );
   addEmoticon( ":-*", "kiss" );
   addEmoticon( ":z", "sleep" );

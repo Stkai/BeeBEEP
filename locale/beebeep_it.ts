@@ -335,6 +335,14 @@
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Impossibile inviare %2. Il trasferimento dei file è disabilitato.</translation>
     </message>
+    <message>
+        <source>You share this information</source>
+        <translation>Tu condividi questa informazione</translation>
+    </message>
+    <message>
+        <source>%1 shares this information</source>
+        <translation>%1 condivide questa informazione</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1523,10 +1531,6 @@ il file %2 (%3)?</translation>
         <translation type="obsolete">Impossibile connettersi a %1. Il plugin non è presente o non è abilitato.</translation>
     </message>
     <message>
-        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Show %1&apos;s license...</source>
         <translation>Licenza di %1...</translation>
     </message>
@@ -2085,6 +2089,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Devi chiudere e riaprire %1 per applicare i cambiamenti.</translation>
+    </message>
+    <message>
+        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
+        <translation></translation>
     </message>
 </context>
 <context>

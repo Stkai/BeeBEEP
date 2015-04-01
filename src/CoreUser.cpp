@@ -96,9 +96,19 @@ void Core::showUserVCardChanged( const User& u )
   if( u.isBirthDay() )
   {
     if( !sHtmlMsg.isEmpty() )
-      sHtmlMsg += QString( "<br>" );
+      sHtmlMsg += QString( "<br />" );
+
     sHtmlMsg += QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
                                         (u.isLocal() ? tr( "Happy Birthday to you!" ) : tr( "Happy Birthday to %1!" ).arg( u.name() ) ) );
+  }
+
+  if( !u.vCard().info().isEmpty() )
+  {
+    if( !sHtmlMsg.isEmpty() )
+      sHtmlMsg += QString( "<br />" );
+    sHtmlMsg += QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/info.png", "*I*" ),
+                                    (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( u.name() )) );
+    sHtmlMsg += QString( ":<br />%1" ).arg( u.vCard().info() );
   }
 
   if( sHtmlMsg.isEmpty() )

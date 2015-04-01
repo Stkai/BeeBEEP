@@ -45,12 +45,12 @@
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="53"/>
-        <location filename="../src/CoreUser.cpp" line="101"/>
+        <location filename="../src/CoreUser.cpp" line="102"/>
         <source>Happy Birthday to you!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreUser.cpp" line="101"/>
+        <location filename="../src/CoreUser.cpp" line="102"/>
         <source>Happy Birthday to %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -260,6 +260,16 @@
     <message>
         <location filename="../src/CoreUser.cpp" line="93"/>
         <source>The %1&apos;s profile has been received.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreUser.cpp" line="110"/>
+        <source>You share this information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/CoreUser.cpp" line="110"/>
+        <source>%1 shares this information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1040,7 +1050,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="386"/>
-        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
+        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
