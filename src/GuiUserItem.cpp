@@ -102,18 +102,20 @@ bool GuiUserItem::updateUser( const User& u )
   else
     setForeground( 0, QBrush( m_defaultForegroundColor ) );
 
-  QString status_tip;
   QString tool_tip;
 
   if( u.isLocal() )
   {
-    status_tip = QObject::tr( "Open chat with all local users" );
-    tool_tip = status_tip;
+    tool_tip = QObject::tr( "Double click to open chat with all local users" );
   }
   else
   {
-    status_tip = QObject::tr( "Open chat with %1" ).arg( u.name() );
     tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
+    if( u.isConnected() )
+    {
+      tool_tip += QString( ".\n" );
+      tool_tip += QObject::tr( "Double click to send a private message." );
+    }
     user_priority = 1000;
     user_priority += u.isConnected() ? (100*user_status) : 100000;
   }
@@ -122,6 +124,5 @@ bool GuiUserItem::updateUser( const User& u )
   user_priority = qMax( 0, user_priority );
   setData( 0, GuiUserItem::Priority, user_priority );
   setToolTip( 0, tool_tip );
-  setStatusTip( 0, status_tip );
   return true;
 }

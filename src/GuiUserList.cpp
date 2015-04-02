@@ -33,7 +33,6 @@ GuiUserList::GuiUserList( QWidget* parent )
   setObjectName( "GuiUserList" );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
-
   header()->hide();
   setRootIsDecorated( false );
   setSortingEnabled( true );

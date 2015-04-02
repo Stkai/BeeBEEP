@@ -2935,15 +2935,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>use old version</source>
-        <translation>usa una vecchia versione</translation>
+        <translation type="obsolete">usa una vecchia versione</translation>
     </message>
     <message>
         <source>use old %1</source>
-        <translation>una la vecchia %1</translation>
+        <translation type="obsolete">una la vecchia %1</translation>
     </message>
     <message>
         <source>use new %1</source>
-        <translation>usa la nuova %1</translation>
+        <translation type="obsolete">usa la nuova %1</translation>
+    </message>
+    <message>
+        <source>old unknown</source>
+        <translation>vecchia</translation>
+    </message>
+    <message>
+        <source>old %1</source>
+        <translation>vecchia %1</translation>
+    </message>
+    <message>
+        <source>new %1</source>
+        <translation>nuova %1</translation>
     </message>
 </context>
 <context>
@@ -3212,6 +3224,22 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Started in</source>
         <translation>Iniziata in data</translation>
+    </message>
+    <message>
+        <source>Double click to send message to group: %1</source>
+        <translation>Doppio click per inviare un messaggio al gruppo: %1</translation>
+    </message>
+    <message>
+        <source>Double click to view chat history: %1</source>
+        <translation>Doppio click per vedere i messaggi salvati: %1</translation>
+    </message>
+    <message>
+        <source>Double click to send a private message.</source>
+        <translation>Doppio click per inviare un messaggio privato.</translation>
+    </message>
+    <message>
+        <source>Double click to open chat with all local users</source>
+        <translation>Doppio click per aprire una conversazione con tutti gli utenti connessi</translation>
     </message>
 </context>
 <context>

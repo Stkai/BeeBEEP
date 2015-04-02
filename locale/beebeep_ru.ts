@@ -2624,19 +2624,31 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>День рождения: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="85"/>
         <source>use old version</source>
-        <translation>использовать старую версию</translation>
+        <translation type="obsolete">использовать старую версию</translation>
+    </message>
+    <message>
+        <source>use old %1</source>
+        <translation type="obsolete">использовать старый %1</translation>
+    </message>
+    <message>
+        <source>use new %1</source>
+        <translation type="obsolete">использовать новый %1</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiVCard.cpp" line="85"/>
+        <source>old unknown</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.cpp" line="87"/>
-        <source>use old %1</source>
-        <translation>использовать старый %1</translation>
+        <source>old %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.cpp" line="89"/>
-        <source>use new %1</source>
-        <translation>использовать новый %1</translation>
+        <source>new %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.cpp" line="99"/>
@@ -2848,7 +2860,6 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <location filename="../src/GuiChatItem.cpp" line="64"/>
-        <location filename="../src/GuiUserItem.cpp" line="110"/>
         <source>Open chat with all local users</source>
         <translation>Открыть чат со всеми локальными пользователями</translation>
     </message>
@@ -2860,7 +2871,6 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <location filename="../src/GuiChatItem.cpp" line="82"/>
-        <location filename="../src/GuiUserItem.cpp" line="115"/>
         <source>Open chat with %1</source>
         <translation>Открыть чат с %1</translation>
     </message>
@@ -2880,9 +2890,29 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Начато в</translation>
     </message>
     <message>
-        <location filename="../src/GuiUserItem.cpp" line="116"/>
+        <location filename="../src/GuiUserItem.cpp" line="109"/>
+        <source>Double click to open chat with all local users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiUserItem.cpp" line="113"/>
         <source>%1 is %2</source>
         <translation>%1 - %2</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiUserItem.cpp" line="117"/>
+        <source>Double click to send a private message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiGroupItem.cpp" line="67"/>
+        <source>Double click to send message to group: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSavedChatList.cpp" line="120"/>
+        <source>Double click to view chat history: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
