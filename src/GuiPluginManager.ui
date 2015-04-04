@@ -51,7 +51,7 @@
      </property>
      <property name="icon">
       <iconset resource="beebeep.qrc">
-       <normaloff>:/images/folder-add.png</normaloff>:/images/folder-add.png</iconset>
+       <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -80,7 +80,7 @@
      </property>
      <property name="icon">
       <iconset resource="beebeep.qrc">
-       <normaloff>:/images/save-as.png</normaloff>:/images/save-as.png</iconset>
+       <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
      </property>
      <property name="flat">
       <bool>true</bool>
