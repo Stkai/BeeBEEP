@@ -212,6 +212,7 @@ public:
   void clearNativeSettings();
   void load();
   void save();
+  inline const QDateTime& lastSave() const;
 
   static Settings& instance()
   {
@@ -241,6 +242,7 @@ private:
   bool m_trustSystemAccount;
 
   QString m_defaultFolder;
+  QDateTime m_lastSave;
 
   // Ini
   User m_localUser;
@@ -446,5 +448,6 @@ inline void Settings::setConfirmOnDownloadFile( bool new_value ) { m_confirmOnDo
 inline const QDate& Settings::settingsCreationDate() const { return m_settingsCreationDate; }
 inline void Settings::setGroupList( const QStringList& new_value ) { m_groupList = new_value; }
 inline const QStringList& Settings::groupList() const { return m_groupList; }
+inline const QDateTime& Settings::lastSave() const { return m_lastSave; }
 
 #endif // BEEBEEP_SETTINGS_H

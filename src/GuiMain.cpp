@@ -873,8 +873,9 @@ void GuiMain::settingsChanged()
 
   bool refresh_users = false;
   bool refresh_chat = false;
+  int settings_data_id = act->data().toInt();
 
-  switch( act->data().toInt() )
+  switch( settings_data_id )
   {
   case 1:
     Settings::instance().setChatCompact( act->isChecked() );
@@ -984,6 +985,8 @@ void GuiMain::settingsChanged()
     refreshUserList();
   if( refresh_chat )
     mp_chat->reloadChat();
+  if( settings_data_id > 0 && settings_data_id < 99 )
+    Settings::instance().save();
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
@@ -1395,6 +1398,7 @@ void GuiMain::changeVCard()
 #endif
     mp_core->setLocalUserVCard( gvc.vCard() );
     refreshTitle( Settings::instance().localUser() );
+    Settings::instance().save();
   }
 }
 

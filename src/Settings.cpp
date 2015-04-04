@@ -40,6 +40,7 @@ Settings::Settings()
   m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
   m_defaultFolder = ".";
+  m_lastSave = QDateTime::currentDateTime();
 }
 
 QString Settings::version( bool complete ) const
@@ -306,18 +307,11 @@ void Settings::loadPreConf()
   if( sets->allKeys().isEmpty() )
   {
     qDebug() << "Creating pre-configuration file";
-    if( !sets->isWritable() )
-    {
-      sets->deleteLater();
-      sets = new QSettings( defaultRcFilePath( false ), QSettings::IniFormat );
-    }
+    sets->deleteLater();
+    sets = new QSettings( defaultRcFilePath( false ), QSettings::IniFormat );
 
     sets->beginGroup( "BeeBEEP" );
-#if defined( Q_OS_MAC )
-    sets->setValue( "UseConfigurationFileIni", false );
-#else
     sets->setValue( "UseConfigurationFileIni", true );
-#endif
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", true );
@@ -518,13 +512,14 @@ void Settings::load()
   qDebug() << "Local user:" << m_localUser.path();
   qDebug() << "Account name:" << m_localUser.accountName();
 
+  m_lastSave = QDateTime::currentDateTime();
+
   sets->deleteLater();
 }
 
 void Settings::save()
 {
   qDebug() << "Saving settings";
-
   QSettings *sets = objectSettings();
 
   sets->beginGroup( "Version" );
@@ -653,7 +648,8 @@ void Settings::save()
   if( sets->isWritable() )
   {
     sets->sync();
-    qDebug() << "Settings saved";
+    qDebug() << "Settings saved" << sets->fileName();
+    m_lastSave = QDateTime::currentDateTime();
   }
   sets->deleteLater();
 }
@@ -746,20 +742,17 @@ void Settings::clearNativeSettings()
 
 bool Settings::createDefaultFolder()
 {
-  QString default_folder;
+  QString default_folder = QApplication::applicationDirPath();
 
-  if( m_useSettingsFileIni )
+  QFileInfo current_folder( default_folder );
+  if( current_folder.isWritable() )
   {
-    default_folder = ".";
-    QFileInfo current_folder( default_folder );
-    if( current_folder.isWritable() )
-    {
-      m_defaultFolder = default_folder;
-      return true;
-    }
-    else
-      qWarning() << "Current" << Settings::instance().programName() << " folder is not writeable";
+    m_defaultFolder = default_folder;
+    qDebug() << "Current folder" << current_folder.absolutePath() << "is writeable";
+    return true;
   }
+  else
+    qWarning() << "Current" << Settings::instance().programName() << "folder is not writeable";
 
   QString data_folder = QLatin1String( "beebeep-data" );
   QString root_folder;
