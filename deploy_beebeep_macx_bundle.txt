@@ -22,6 +22,7 @@ echo "Done"
 #create folders
 printf "Create folders ... "
 mkdir beebeep.app/Contents/Frameworks
+mkdir beebeep.app/Contents/PlugIns
 echo "Done"
 
 #copy Info.plist
@@ -41,8 +42,9 @@ echo "Done"
 
 #copy beep.wav
 printf "Copy beep.wav ... "
-cp beebeep-code/misc/beep.wav beebeep.app/Contents/Resources/.
-echo "Done"
+#cp beebeep-code/misc/beep.wav beebeep.app/Contents/Resources/.
+#echo "Done"
+echo "Disabled on MacOSX"
 
 #copy beehosts.ini
 printf "Copy beehosts.ini ... "
@@ -56,9 +58,9 @@ echo "Done"
 
 #copy plugins
 printf "Copy BeeBEEP plugins ... "
-cp beebeep-code-release/plugins/rainbowtextmarker/librainbowtextmarker.1.0.0.dylib beebeep.app/Contents/Resources/.
-cp beebeep-code-release/plugins/numbertextmarker/libnumbertextmarker.1.0.0.dylib  beebeep.app/Contents/Resources/.
-cp beebeep-code-release/plugins/regularboldtextmarker/libregularboldtextmarker.1.0.0.dylib  beebeep.app/Contents/Resources/.
+cp beebeep-code-release/plugins/rainbowtextmarker/librainbowtextmarker.1.0.0.dylib beebeep.app/Contents/PlugIns/.
+cp beebeep-code-release/plugins/numbertextmarker/libnumbertextmarker.1.0.0.dylib beebeep.app/Contents/PlugIns/.
+cp beebeep-code-release/plugins/regularboldtextmarker/libregularboldtextmarker.1.0.0.dylib beebeep.app/Contents/PlugIns/.
 echo "Done"
 
 #copy beebeep exe

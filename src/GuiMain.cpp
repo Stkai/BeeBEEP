@@ -1011,10 +1011,7 @@ bool GuiMain::showAlert()
 #ifdef BEEBEEP_DEBUG
       qDebug() << "New message arrived in background: play BEEP sound";
 #endif
-      if( QFile::exists( Settings::instance().beepFilePath() ) )
-        playBeep();
-      else
-        QApplication::beep();
+      playBeep();
     }
 
     if( mp_trayIcon->isVisible() )
@@ -1679,8 +1676,10 @@ void GuiMain::testBeepFile()
 
 void GuiMain::playBeep()
 {
-  QSound beep_sound( Settings::instance().beepFilePath() );
-  beep_sound.play();
+  if( QFile::exists( Settings::instance().beepFilePath() ) )
+    QSound::play( Settings::instance().beepFilePath() );
+  else
+    QApplication::beep();
 }
 
 void GuiMain::createGroup()

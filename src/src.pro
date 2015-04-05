@@ -16,6 +16,11 @@ unix:!macx {
   LIBS= -lxcb -lxcb-screensaver
 }
 
+macx: {
+  QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
+  LIBS += -framework ApplicationServices
+}
+
 TARGET = beebeep
 TEMPLATE = app
 SOURCES += Listener.cpp \

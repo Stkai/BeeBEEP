@@ -49,6 +49,7 @@ public:
   QString defaultRcFilePath( bool current_dir ) const;
   QString defaultSettingsFilePath() const;
   QString defaultBeepFilePath() const;
+  QString defaultPluginFolderPath() const;
 
   QString version( bool ) const;
   int protoVersion() const;

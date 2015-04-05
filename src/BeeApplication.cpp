@@ -38,6 +38,10 @@
 // package libx11-xcb-dev
 #endif
 
+#ifdef Q_OS_MAC
+#include <ApplicationServices/ApplicationServices.h>
+#endif
+
 
 BeeApplication::BeeApplication( int& argc, char** argv  )
   : QApplication( argc, argv )
@@ -196,6 +200,11 @@ int BeeApplication::idleTimeFromSystem()
       free ( xcbInfo );
     }
   }
+#endif
+
+#ifdef Q_OS_MAC
+  CFTimeInterval macx_idle_secs = CGEventSourceSecondsSinceLastEventType( kCGEventSourceStateHIDSystemState, kCGAnyInputEventType );
+  idle_time = static_cast<int>( qMax( 0.0, macx_idle_secs ) );
 #endif
 
   if( idle_time < 0 )

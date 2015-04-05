@@ -428,7 +428,7 @@ void Settings::load()
   m_downloadDirectory = sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
 #endif
   m_logPath = sets->value( "LogPath", defaultFolder() ).toString();
-  m_pluginPath = sets->value( "PluginPath", defaultFolder() ).toString();
+  m_pluginPath = sets->value( "PluginPath", defaultPluginFolderPath() ).toString();
   m_languagePath = sets->value( "LanguagePath", defaultFolder() ).toString();
   m_minimizeInTray = sets->value( "MinimizeInTray", false ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
@@ -817,4 +817,23 @@ QString Settings::defaultSettingsFilePath() const
 QString Settings::defaultBeepFilePath() const
 {
  return QDir::toNativeSeparators( QString( "%1/%2" ).arg( defaultFolder() ).arg( QLatin1String( "beep.wav" ) ) );
+}
+
+QString Settings::defaultPluginFolderPath() const
+{
+#ifdef Q_OS_MAC
+  QString macx_plugins_path = defaultFolder();
+  if( macx_plugins_path.endsWith( "Contents/Resources", Qt::CaseInsensitive ) )
+  {
+     QDir macx_plugins_dir( macx_plugins_path );
+     if( macx_plugins_dir.cdUp() )
+     {
+       if( macx_plugins_dir.cd( "PlugIns" ) )
+         macx_plugins_path = macx_plugins_dir.absolutePath();
+     }
+  }
+  return macx_plugins_path;
+#else
+  return defaultFolder();
+#endif
 }

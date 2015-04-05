@@ -85,6 +85,9 @@ void PluginManager::addPlugin( const QString& file_path )
 #elif defined( Q_OS_LINUX )
   if( !file_info.completeSuffix().contains( "so" ) )
     return;
+#elif defined( Q_OS_MAC )
+  if( !file_info.completeSuffix().contains( "dylib" ) )
+    return;
 #else
   if( file_info.suffix() == "rc" || file_info.suffix() == "dat" || file_info.suffix() == "wav"
     || file_info.suffix() == "ini" || file_info.suffix() == "qm" )
