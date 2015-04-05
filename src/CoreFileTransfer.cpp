@@ -147,7 +147,6 @@ bool Core::sendFile( const User& u, const QString& file_path )
     return false;
   }
 
-
   FileInfo fi = mp_fileTransfer->addFile( file );
 
   Connection* c = connection( u.id() );

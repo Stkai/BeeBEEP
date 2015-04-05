@@ -122,7 +122,8 @@ void FileTransferPeer::setError( const QString& str_err )
 
 void FileTransferPeer::showProgress()
 {
-  emit progress( id(), userId(), m_fileInfo, m_totalBytesTransferred );
+  if( m_totalBytesTransferred > 0 )
+    emit progress( id(), userId(), m_fileInfo, m_totalBytesTransferred );
 }
 
 void FileTransferPeer::checkTransferData( const QByteArray& byte_array )
@@ -150,6 +151,8 @@ void FileTransferPeer::checkAuthenticationRequested( const Message& m )
 void FileTransferPeer::setUserAuthorized( VNumber user_id )
 {
   m_socket.setUserId( user_id );
+  if( isDownload() )
+    sendDownloadData();
 }
 
 void FileTransferPeer::connectionTimeout()

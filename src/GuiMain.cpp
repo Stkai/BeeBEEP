@@ -1263,6 +1263,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
   if( msg_result > 0 )
   {
     // Accepted
+    qDebug() << "You accept to download" << fi.name() << "from" << u.path();
     QFileInfo qfile_info( Settings::instance().downloadDirectory(), fi.name() );
     if( qfile_info.exists() )
     {
@@ -1290,7 +1291,10 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
     return true;
   }
   else
+  {
+    qDebug() << "You refuse to download" << fi.name() << "from" << u.path();
     return false;
+  }
 }
 
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )

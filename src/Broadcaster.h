@@ -37,8 +37,6 @@ public:
   void stopBroadcasting();
   bool isLocalHostAddress( const QHostAddress& );
   bool addAddress( const QHostAddress& );
-  inline void clearAddressAdded();
-
   bool sendBroadcastMessage();
 
 signals:
@@ -63,9 +61,5 @@ private:
   QTimer m_broadcastTimer;
 
 };
-
-
-// Inline functions
-inline void Broadcaster::clearAddressAdded() { m_broadcastAddresses.clear(); }
 
 #endif // BEEBEEP_BROADCASTER_H
