@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id$
 //
@@ -27,18 +27,10 @@
 
 void FileTransferPeer::sendDownloadData()
 {
-  switch( m_state )
-  {
-  case FileTransferPeer::Request:
-    sendDownloadRequest();
-    break;
-  case FileTransferPeer::Transferring:
+  if( m_state == FileTransferPeer::Transferring )
     sendDownloadDataConfirmation();
-    break;
-  default:
-    // do_nothing
-    break;
-  }
+  else
+    qWarning() << name() << "tries to send download data but it is in invalid state";
 }
 
 void FileTransferPeer::sendDownloadRequest()

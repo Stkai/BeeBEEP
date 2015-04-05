@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id$
 //
@@ -39,7 +39,7 @@ const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
 const char* BEEBEEP_VERSION = "0.9.8";
 const int BEEBEEP_PROTO_VERSION = 62;
 const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 345;
+const int BEEBEEP_BUILD = 346;
 
 #endif // BEEBEEP_VERSION_H
 

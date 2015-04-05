@@ -1,0 +1,74 @@
+#!/bin/bash
+echo "Making BeeBEEP Bundle..."
+
+# delete previous bundle folder
+printf "Delete beebeep.app folder ... "
+rm -rf beebeep.app
+echo "Done"
+
+#copy beebeep.app from release
+printf "Copy beebeep.app ... "
+cp -R beebeep-code-release/src/beebeep.app .
+echo "Done"
+
+#clean up
+printf "Clean up folders and files ... "
+rm -f beebeep.app/Contents/Resources/beebeep.ini
+rm -f beebeep.app/Contents/Resources/beebeep.dat
+rm -f beebeep.app/Contents/Resources/beebeep.rc
+rm -f beebeep.app/Contents/Resources/qt.conf
+echo "Done"
+
+#create folders
+printf "Create folders ... "
+mkdir beebeep.app/Contents/Frameworks
+echo "Done"
+
+#copy Info.plist
+printf "Copy Info.plist ... "
+cp beebeep-code/misc/Info.plist beebeep.app/Contents/.
+echo "Done"
+
+#copy PkgInfo
+printf "Copy PkgInfo ... "
+cp beebeep-code-release/src/beebeep.app/Contents/PkgInfo beebeep.app/Contents/.
+echo "Done"
+
+#copy beebeep.icns
+printf "Copy beebeep.icns ... "
+cp beebeep-code-release/src/beebeep.app/Contents/Resources/beebeep.icns beebeep.app/Contents/Resources/.
+echo "Done"
+
+#copy beep.wav
+printf "Copy beep.wav ... "
+cp beebeep-code/misc/beep.wav beebeep.app/Contents/Resources/.
+echo "Done"
+
+#copy beehosts.ini
+printf "Copy beehosts.ini ... "
+cp beebeep-code/misc/beehosts.ini beebeep.app/Contents/Resources/.
+echo "Done"
+
+#copy locale
+printf "Copy translations ... "
+cp beebeep-code/locale/*.qm beebeep.app/Contents/Resources/.
+echo "Done"
+
+#copy plugins
+printf "Copy BeeBEEP plugins ... "
+cp beebeep-code-release/plugins/rainbowtextmarker/librainbowtextmarker.1.0.0.dylib beebeep.app/Contents/Resources/.
+cp beebeep-code-release/plugins/numbertextmarker/libnumbertextmarker.1.0.0.dylib  beebeep.app/Contents/Resources/.
+cp beebeep-code-release/plugins/regularboldtextmarker/libregularboldtextmarker.1.0.0.dylib  beebeep.app/Contents/Resources/.
+echo "Done"
+
+#copy beebeep exe
+printf "Copy BeeBEEP exe ... "
+cp beebeep-code-release/src/beebeep.app/Contents/MacOS/beebeep beebeep.app/Contents/MacOS/.
+echo "Done"
+
+#mac deploy frameworks
+printf "MacOS X deploy and create DMG file ... "
+macdeployqt-4.8 beebeep.app -dmg
+echo "Done"
+
+echo "BeeBEEP to Bundle - Process completed."

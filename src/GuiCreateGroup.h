@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id: GuiCreateGroupChat.h 311 2015-02-09 17:36:50Z mastroddi $
 //

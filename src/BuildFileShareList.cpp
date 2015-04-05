@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id: Broadcaster.cpp 267 2014-11-19 18:56:34Z mastroddi $
 //

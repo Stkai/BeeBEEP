@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id: RainbowTextMarker.h 101 2011-09-19 11:59:48Z mastroddi $
 //

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id$
 //
@@ -59,6 +59,7 @@ void FileTransferPeer::closeAll()
     m_socket.flush();
     m_socket.close();
   }
+
   if( m_file.isOpen() )
   {
     qDebug() << name() << "close file" << m_file.fileName();
@@ -152,7 +153,7 @@ void FileTransferPeer::setUserAuthorized( VNumber user_id )
 {
   m_socket.setUserId( user_id );
   if( isDownload() )
-    sendDownloadData();
+    sendDownloadRequest();
 }
 
 void FileTransferPeer::connectionTimeout()

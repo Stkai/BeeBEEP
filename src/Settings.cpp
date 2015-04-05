@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id$
 //
@@ -743,16 +743,23 @@ void Settings::clearNativeSettings()
 bool Settings::createDefaultFolder()
 {
   QString default_folder = QApplication::applicationDirPath();
+#ifdef Q_OS_MAC
+  QDir macos_dir( default_folder );
+  macos_dir.cdUp();
+  macos_dir.cd( "Resources" );
+  default_folder = macos_dir.absolutePath();
+#endif
+  qDebug() << "Check folder" << default_folder;
 
   QFileInfo current_folder( default_folder );
   if( current_folder.isWritable() )
   {
     m_defaultFolder = default_folder;
-    qDebug() << "Current folder" << current_folder.absolutePath() << "is writeable";
+    qDebug() << "Current folder" << current_folder.absoluteFilePath() << "is writeable";
     return true;
   }
   else
-    qWarning() << "Current" << Settings::instance().programName() << "folder is not writeable";
+    qWarning() << "Current folder" << current_folder.absoluteFilePath() << "folder is not writeable";
 
   QString data_folder = QLatin1String( "beebeep-data" );
   QString root_folder;

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // $Id$
 //
@@ -80,8 +80,6 @@ void ConnectionSocket::readBlock()
     data_stream.setVersion( DATASTREAM_VERSION_2 );
   else
     data_stream.setVersion( DATASTREAM_VERSION_1 );
-
-
 
   if( m_blockSize == 0 )
   {
