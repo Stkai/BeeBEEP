@@ -61,6 +61,7 @@ GuiMain::GuiMain( QWidget *parent )
 {
   setObjectName( "GuiMainWindow" );
   mp_core = new Core( this );
+  mp_sound = 0;
 
   setWindowIcon( QIcon( ":/images/beebeep.png") );
 
@@ -1652,6 +1653,15 @@ void GuiMain::selectBeepFile()
     return;
 
   Settings::instance().setBeepFilePath( file_path );
+  qDebug() << "New sound file selected:" << file_path;
+  if( mp_sound )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Delete previous sound object";
+#endif
+    mp_sound->deleteLater();
+    mp_sound = 0;
+  }
 
   if( !Settings::instance().beepOnNewMessageArrived() )
   {
@@ -1665,10 +1675,20 @@ void GuiMain::selectBeepFile()
 
 void GuiMain::testBeepFile()
 {
+  if( !QSound::isAvailable() )
+  {
+    qWarning() << "QSound is not available";
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound module is not working. The default BEEP will be used." ) );
+    return;
+  }
+
   if( !QFile::exists( Settings::instance().beepFilePath() ) )
   {
-     QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound file %1 not found." ).arg( Settings::instance().beepFilePath() ) );
-     return;
+    QString warn_text = QString( "%1\n%2. %3." ).arg( Settings::instance().beepFilePath() )
+                                                  .arg( tr( "Sound file not found" ) )
+                                                  .arg( tr( "The default BEEP will be used" ) );
+    QMessageBox::warning( this, Settings::instance().programName(), warn_text );
+    return;
   }
 
   playBeep();
@@ -1676,8 +1696,14 @@ void GuiMain::testBeepFile()
 
 void GuiMain::playBeep()
 {
+  if( !mp_sound )
+  {
+    qDebug() << "Create sound object from" << Settings::instance().beepFilePath();
+    mp_sound = new QSound( Settings::instance().beepFilePath(), this );
+  }
+
   if( QFile::exists( Settings::instance().beepFilePath() ) )
-    QSound::play( Settings::instance().beepFilePath() );
+    mp_sound->play();
   else
     QApplication::beep();
 }

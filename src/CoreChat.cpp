@@ -48,9 +48,17 @@ void Core::createDefaultChat()
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
   c.addMessage( cm );
 
+  if( QDate::currentDate().month() == 4 && QDate::currentDate().day() == 6 )
+  {
+    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
+                                                 tr( "Happy birthday to Marco!" ) );
+    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
+    c.addMessage( cm );
+  }
+
   if( Settings::instance().localUser().isBirthDay() )
   {
-    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ), tr( "Happy Birthday to you!"  ) );
+    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ), tr( "Happy Birthday to you!" ) );
     ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
     c.addMessage( cm );
   }

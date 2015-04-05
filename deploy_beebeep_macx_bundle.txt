@@ -42,9 +42,8 @@ echo "Done"
 
 #copy beep.wav
 printf "Copy beep.wav ... "
-#cp beebeep-code/misc/beep.wav beebeep.app/Contents/Resources/.
-#echo "Done"
-echo "Disabled on MacOSX"
+cp beebeep-code/misc/beep.wav beebeep.app/Contents/Resources/.
+echo "Done"
 
 #copy beehosts.ini
 printf "Copy beehosts.ini ... "

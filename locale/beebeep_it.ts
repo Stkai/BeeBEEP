@@ -343,6 +343,10 @@
         <source>%1 shares this information</source>
         <translation>%1 condivide questa informazione</translation>
     </message>
+    <message>
+        <source>Happy birthday to Marco!</source>
+        <translation>Buon compleanno Marco!</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1684,7 +1688,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Sound file %1 not found.</source>
-        <translation>Il file sonoro %1 non è stato trovato.</translation>
+        <translation type="obsolete">Il file sonoro %1 non è stato trovato.</translation>
     </message>
     <message>
         <source>Create/edit group chat...</source>
@@ -2093,6 +2097,22 @@ il file %2 (%3)?</translation>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Sound file not found</source>
+        <translation>Il file sonoro non è stato trovato</translation>
+    </message>
+    <message>
+        <source>The default BEEP will be used.</source>
+        <translation type="obsolete">Il BEEP di sistema sarà usato.</translation>
+    </message>
+    <message>
+        <source>The default BEEP will be used</source>
+        <translation>Verrà usato il BEEP di sistema</translation>
+    </message>
+    <message>
+        <source>Sound module is not working. The default BEEP will be used.</source>
+        <translation>Il modulo sonoro non funziona. Verrà usato il BEEP di sistema.</translation>
     </message>
 </context>
 <context>

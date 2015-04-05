@@ -222,6 +222,8 @@ private:
 
   int m_lastUserStatus;
 
+  QSound* mp_sound;
+
 };
 
 #endif // BEEBEEP_GUIMAIN_H
