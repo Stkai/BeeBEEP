@@ -338,9 +338,12 @@ void Core::createLocalShareMessage()
 
 void Core::buildLocalShareList()
 {
+  bool is_connected = isConnected();
   m_shareListToBuild = Settings::instance().localShare().size();
   if( !FileShare::instance().local().isEmpty() )
     FileShare::instance().clearLocal();
+  if( Settings::instance().localShare().isEmpty() )
+    return;
   foreach( QString share_path, Settings::instance().localShare() )
-    addPathToShare( share_path, false );
+    addPathToShare( share_path, is_connected );
 }

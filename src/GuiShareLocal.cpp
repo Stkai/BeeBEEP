@@ -104,6 +104,7 @@ void GuiShareLocal::setupToolBar( QToolBar* bar )
   mp_actRemove->setStatusTip( tr( "Remove shared path from the list" ) );
 
   showStats( 0, 0 );
+  setActionsEnabled( true );
 }
 
 void GuiShareLocal::showStats( int file_count, FileSizeType total_file_size )
@@ -118,8 +119,8 @@ void GuiShareLocal::setActionsEnabled( bool enable )
 {
   mp_actAddFile->setEnabled( enable );
   mp_actAddFolder->setEnabled( enable );
-  mp_actRemove->setEnabled( enable );
-  mp_actUpdate->setEnabled( enable );
+  mp_actRemove->setEnabled( enable && mp_twMyShares->topLevelItemCount() > 0 );
+  mp_actUpdate->setEnabled( enable && mp_twMyShares->topLevelItemCount() > 0 );
   if( enable )
     setCursor( Qt::ArrowCursor );
   else
@@ -181,6 +182,8 @@ void GuiShareLocal::removePath()
 void GuiShareLocal::updatePaths()
 {
   mp_twMyShares->clear();
+  if( Settings::instance().localShare().isEmpty() )
+    return;
   QTreeWidgetItem *item;
   foreach( QString share_path, Settings::instance().localShare() )
   {
@@ -205,21 +208,23 @@ void GuiShareLocal::loadFileInfoInList()
   int file_count = 0;
   FileSizeType total_file_size = 0;
 
-  foreach( FileInfo fi, FileShare::instance().local() )
+  if( !FileShare::instance().local().isEmpty() )
   {
-    file_count++;
-    total_file_size += fi.size();
-    item = new GuiFileInfoItem( mp_twLocalShares, 1, Qt::UserRole + 1 );
-    item->setText( 0, fi.name() );
-    item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
-    item->setData( 0, Qt::UserRole + 1, fi.path() );
-    item->setToolTip( 0, tr( "Double click to open %1" ).arg( fi.name() ) );
-    item->setText( 1, Bee::bytesToString( fi.size() ) );
-    item->setData( 1, Qt::UserRole + 1, fi.size() );
-    item->setText( 2, fi.path() );
-    item->setToolTip( 2, tr( "Double click to open %1" ).arg( fi.name() ) );
+    foreach( FileInfo fi, FileShare::instance().local() )
+    {
+      file_count++;
+      total_file_size += fi.size();
+      item = new GuiFileInfoItem( mp_twLocalShares, 1, Qt::UserRole + 1 );
+      item->setText( 0, fi.name() );
+      item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
+      item->setData( 0, Qt::UserRole + 1, fi.path() );
+      item->setToolTip( 0, tr( "Double click to open %1" ).arg( fi.name() ) );
+      item->setText( 1, Bee::bytesToString( fi.size() ) );
+      item->setData( 1, Qt::UserRole + 1, fi.size() );
+      item->setText( 2, fi.path() );
+      item->setToolTip( 2, tr( "Double click to open %1" ).arg( fi.name() ) );
+    }
   }
-
   setActionsEnabled( true );
   showStats( file_count, total_file_size );
 }

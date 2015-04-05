@@ -2114,6 +2114,10 @@ il file %2 (%3)?</translation>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation>Il modulo sonoro non funziona. Verrà usato il BEEP di sistema.</translation>
     </message>
+    <message>
+        <source>Try to refresh the list of shared files.</source>
+        <translation>Prova a ricaricare la lista dei file condivisi.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

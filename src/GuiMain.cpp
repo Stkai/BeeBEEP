@@ -1309,7 +1309,9 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
   if( u.isValid() && file_info.isValid() )
     askToDownloadFile( u, file_info );
   else
-    QMessageBox::information( this, Settings::instance().programName(), tr( "File is not available for download. User is offline." ) );
+    QMessageBox::information( this, Settings::instance().programName(),
+                              QString( "%1\n%2" ).arg( tr( "File is not available for download. User is offline." )
+                                                 .arg( tr( "Try to refresh the list of shared files." ) ) ) );
 }
 
 void GuiMain::selectDownloadDirectory()
