@@ -33,23 +33,6 @@ ChatManager::ChatManager()
 {
 }
 
-Chat ChatManager::chat( VNumber chat_id, bool read_all_messages )
-{
-  QList<Chat>::iterator it = m_chats.begin();
-  while( it != m_chats.end() )
-  {
-    if( chat_id == (*it).id() )
-    {
-      if( read_all_messages )
-        (*it).readAllMessages();
-      return *it;
-    }
-    ++it;
-  }
-  qWarning() << "Unable to find chat with id" << chat_id;
-  return Chat();
-}
-
 Chat ChatManager::privateChatForUser( VNumber user_id ) const
 {
   if( user_id == ID_LOCAL_USER )

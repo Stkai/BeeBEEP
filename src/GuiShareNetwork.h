@@ -53,6 +53,7 @@ signals:
 public slots:
   void showMessage( VNumber, VNumber, const QString& );
   void setFileTransferCompleted( VNumber, VNumber, const QString& );
+  void reloadList();
 
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
@@ -60,7 +61,6 @@ protected slots:
   void enableScanButton();
   void scanNetwork();
   void applyFilter();
-  void reloadList();
   void updateList();
 
 protected:

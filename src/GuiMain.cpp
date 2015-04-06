@@ -1043,9 +1043,6 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   if( !cm.isSystem() && !cm.isFromLocalUser() )
     show_alert = showAlert();
 
-  mp_chatList->updateChat( chat_id );
-  mp_groupList->updateChat( chat_id );
-
   if( chat_id == mp_chat->chatId() && mp_chat == mp_stackedWidget->currentWidget() )
   {
     mp_chat->appendChatMessage( chat_id, cm );
@@ -1074,6 +1071,9 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       }
     }
   }
+
+  mp_chatList->updateChat( chat_id );
+  mp_groupList->updateChat( chat_id );
 }
 
 void GuiMain::searchUsers()
@@ -1181,7 +1181,7 @@ void GuiMain::sendFile( VNumber user_id )
 QString GuiMain::checkFilePath( const QString& file_path )
 {
   QString file_path_selected = file_path;
-  if( file_path.isNull() || file_path.isEmpty() || !QFile::exists( file_path ) )
+  if( file_path.isEmpty() || !QFile::exists( file_path ) )
   {
     file_path_selected = QFileDialog::getOpenFileName( this, tr( "%1 - Select a file" ).arg( Settings::instance().programName() ),
                                                        Settings::instance().lastDirectorySelected() );
@@ -1251,7 +1251,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
 
   if( Settings::instance().confirmOnDownloadFile() )
   {
-    QString msg = tr( "Do you want to download ""%1"" (%2) from the user %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
+    QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
     msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
   }
 
@@ -1307,11 +1307,21 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
   FileInfo file_info = FileShare::instance().networkFileInfo( user_id, file_id );
 
   if( u.isValid() && file_info.isValid() )
+  {
     askToDownloadFile( u, file_info );
-  else
-    QMessageBox::information( this, Settings::instance().programName(),
-                              QString( "%1\n%2" ).arg( tr( "File is not available for download. User is offline." )
-                                                 .arg( tr( "Try to refresh the list of shared files." ) ) ) );
+    return;
+  }
+
+  QString info_msg = tr( "File is not available for download." );
+  if( !u.isConnected() )
+    info_msg += QLatin1String( "\n" ) + tr( "%1 is not connected." ).arg( u.name() );
+  info_msg += QLatin1String( "\n" ) + tr( "Please reload the list of shared files." );
+
+  if( QMessageBox::information( this, Settings::instance().programName(), info_msg,
+                              tr( "Reload file list" ), tr( "Cancel" ), QString::null, 1, 1 ) == 0 )
+  {
+    mp_shareNetwork->reloadList();
+  }
 }
 
 void GuiMain::selectDownloadDirectory()
@@ -2012,7 +2022,12 @@ void GuiMain::clearChat( VNumber chat_id )
   mp_chatList->reloadChatList();
   mp_savedChatList->updateSavedChats();
   if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-    showChat( ID_DEFAULT_CHAT );
+  {
+    if( chat_id == ID_DEFAULT_CHAT )
+      mp_chat->reloadChat();
+    else
+      showChat( ID_DEFAULT_CHAT );
+  }
 }
 
 void GuiMain::checkGroup( VNumber group_id )

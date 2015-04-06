@@ -55,9 +55,20 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
   mp_cbHide = new QCheckBox( this );
   mp_cbHide->setObjectName( "mp_cbHide" );
   mp_cbHide->setChecked(true);
-  mp_cbHide->setText( tr( "Hide this window" ) + QString( "    " ) );
+  mp_cbHide->setText( tr( "Hide this window" ) + QString( "   " ) );
   mp_cbHide->setToolTip( tr( "Hide this window before capture screenshot" ) );
   bar->addWidget( mp_cbHide );
+
+  mp_cbRetina = new QCheckBox( this );
+  mp_cbRetina->setObjectName( "mp_cbRetina" );
+#ifdef Q_OS_MAC
+  mp_cbRetina->setChecked( true );
+#else
+  mp_cbRetina->setChecked( false );
+#endif
+  mp_cbRetina->setText( tr( "Enable high dpi" ) + QString( "   " ) );
+  mp_cbRetina->setToolTip( tr( "Enable high dpi support to manage, for example, Apple Retina display" ) );
+  bar->addWidget( mp_cbRetina );
 
   bar->addSeparator();
 
@@ -121,7 +132,16 @@ void GuiScreenShot::doScreenShot()
 void GuiScreenShot::captureScreen()
 {
   m_screenShot = QPixmap(); // clear image for low memory situations on embedded devices.
-  m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId() );
+
+  if( mp_cbRetina->isChecked() )
+    m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0, QApplication::desktop()->width() * 2, QApplication::desktop()->height() * 2  );
+  else
+    m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId() );
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Screenshot width" << m_screenShot.width() << "height" << m_screenShot.height();
+#endif
+
   updateScreenShot();
 
   emit( showRequest() );

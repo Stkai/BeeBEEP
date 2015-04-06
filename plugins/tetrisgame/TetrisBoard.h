@@ -106,7 +106,7 @@ inline void TetrisBoard::setNextPieceLabel( QLabel *label ) { mp_nextPieceLabel 
 inline QSize TetrisBoard::sizeHint() const { return QSize( BoardWidth * 15 + frameWidth() * 2, BoardHeight * 15 + frameWidth() * 2 ); }
 inline QSize TetrisBoard::minimumSizeHint() const { return QSize( BoardWidth * 5 + frameWidth() * 2, BoardHeight * 5 + frameWidth() * 2 ); }
 inline TetrisPiece::Shape& TetrisBoard::shapeAt( int x, int y ) { return m_board[ (y * BoardWidth) + x ]; }
-inline int TetrisBoard::timeoutTime() const { return 1000 / (1 + m_level); }
+inline int TetrisBoard::timeoutTime() const { return 1500 / (1 + m_level); }
 inline int TetrisBoard::squareWidth() const { return contentsRect().width() / BoardWidth; }
 inline int TetrisBoard::squareHeight() const { return contentsRect().height() / BoardHeight; }
 inline bool TetrisBoard::isPaused() const { return m_isPaused; }

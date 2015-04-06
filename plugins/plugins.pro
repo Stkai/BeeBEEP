@@ -3,9 +3,7 @@ include(../beebeep.pri)
 TEMPLATE = subdirs
 
 SUBDIRS += rainbowtextmarker \
-			numbertextmarker \
-			tetrisgame \
-			lifegame \
-			regularboldtextmarker
-
-
+            numbertextmarker \
+            tetrisgame \
+            lifegame \
+            regularboldtextmarker

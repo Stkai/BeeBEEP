@@ -50,8 +50,9 @@ void Core::createDefaultChat()
 
   if( QDate::currentDate().month() == 4 && QDate::currentDate().day() == 6 )
   {
+    int my_age = QDate::currentDate().year() - 1975;
     sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
-                                                 tr( "Happy birthday to Marco!" ) );
+                                                 tr( "Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!" ).arg( my_age ) );
     ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ) );
     c.addMessage( cm );
   }

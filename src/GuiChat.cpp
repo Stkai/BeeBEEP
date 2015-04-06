@@ -238,9 +238,14 @@ void GuiChat::setChatUsers()
 
 bool GuiChat::setChatId( VNumber chat_id )
 {
-  Chat c = ChatManager::instance().chat( chat_id, true );
+  Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return false;
+  if( c.unreadMessages() )
+  {
+    c.readAllMessages();
+    ChatManager::instance().setChat( c );
+  }
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Setting chat" << chat_id << "in default chat window";
@@ -283,10 +288,15 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
     return;
   }
 
-  bool read_all_messages = !cm.isFromLocalUser() && !cm.isSystem();
-  Chat c = ChatManager::instance().chat( m_chatId, read_all_messages );
+  Chat c = ChatManager::instance().chat( m_chatId );
   if( !c.isValid() )
     return;
+  bool read_all_messages = !cm.isFromLocalUser() && !cm.isSystem();
+  if( read_all_messages )
+  {
+    c.readAllMessages();
+    ChatManager::instance().setChat( c );
+  }
 
   mp_actClear->setDisabled( c.isEmpty() );
 
@@ -423,7 +433,20 @@ void GuiChat::dropEvent( QDropEvent *event )
     foreach( QUrl url, event->mimeData()->urls() )
     {
       if( url.isLocalFile() )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Drag and drop: send file" << url.toLocalFile() << "to chat" << m_chatId;
+#endif
+
+        if( !QFile::exists( url.toLocalFile() ) )
+        {
+          QMessageBox::information( this, Settings::instance().programName(),
+                                    tr( "Qt library for this OS doesn't support Drag and Drop for files. You have to select again the file to send." ) );
+          qWarning() << "Drag and drop has invalid file path" << url.toLocalFile();
+        }
+
         emit sendFileFromChatRequest( m_chatId, url.toLocalFile() );
+      }
     }
   }
 }

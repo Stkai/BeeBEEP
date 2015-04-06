@@ -59,6 +59,7 @@ private:
   QPixmap m_screenShot;
   QSpinBox* mp_sbDelay;
   QCheckBox* mp_cbHide;
+  QCheckBox* mp_cbRetina;
   QAction* mp_actShot;
   QAction* mp_actSave;
   QAction* mp_actSend;

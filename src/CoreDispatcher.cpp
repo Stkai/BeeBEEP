@@ -50,7 +50,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
     }
   }
   else
-    c = ChatManager::instance().defaultChat( false );
+    c = ChatManager::instance().defaultChat();
 
   if( !c.isValid() )
   {

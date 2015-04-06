@@ -34,9 +34,8 @@ class ChatManager
   friend class Core;
 
 public:
-  inline Chat defaultChat( bool read_all_messages  );
+  inline Chat defaultChat() const;
   Chat chat( VNumber ) const;
-  Chat chat( VNumber chat_id, bool read_all_messages );
   Chat privateChatForUser( VNumber user_id ) const;
   Chat findGroupChatByPrivateId( const QString& ) const;
 
@@ -95,7 +94,7 @@ private:
 
 
 // Inline Function
-inline Chat ChatManager::defaultChat( bool read_all_messages ) { return chat( ID_DEFAULT_CHAT, read_all_messages ); }
+inline Chat ChatManager::defaultChat() const { return chat( ID_DEFAULT_CHAT ); }
 inline const QList<Chat>& ChatManager::constChatList() const { return m_chats; }
 inline QList<Chat>& ChatManager::chatList() { return m_chats; }
 inline QString ChatManager::chatSavedText( const QString& chat_name ) const { return m_history.value( chat_name ); }

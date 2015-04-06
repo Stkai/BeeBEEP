@@ -1,7 +1,11 @@
 BEEBEEP (Secure Lan Messanger)
 
 BeeBEEP 0.9.8
-- Language interface added 
+- Language interface added
+- More info in profile
+- MacOSX version
+- eComStation and OS/2 version
+- High dpi support for screenshot plugin 
 
 BeeBEEP 0.9.7
 - Clear chat messages option 

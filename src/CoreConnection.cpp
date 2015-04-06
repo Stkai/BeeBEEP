@@ -130,7 +130,7 @@ void Core::closeConnection( Connection *c )
     UserManager::instance().setUser( u );
     showUserStatusChanged( u );
 
-    Chat default_chat = ChatManager::instance().defaultChat( false );
+    Chat default_chat = ChatManager::instance().defaultChat();
     if( default_chat.removeUser( u.id() ) )
       ChatManager::instance().setChat( default_chat );
 
@@ -194,7 +194,7 @@ void Core::checkUserAuthentication( const Message& m )
   }
 
 
-  Chat default_chat = ChatManager::instance().defaultChat( false );
+  Chat default_chat = ChatManager::instance().defaultChat();
   if( default_chat.addUser( u.id() ) )
   {
     qDebug() << "Adding user" << u.path() << "to default chat";

@@ -345,7 +345,11 @@
     </message>
     <message>
         <source>Happy birthday to Marco!</source>
-        <translation>Buon compleanno Marco!</translation>
+        <translation type="obsolete">Buon compleanno Marco!</translation>
+    </message>
+    <message>
+        <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
+        <translation>Buon compleanno Marco Mastroddi: %1 anni oggi! Auguri!!!</translation>
     </message>
 </context>
 <context>
@@ -674,6 +678,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>No</source>
         <translation>No</translation>
+    </message>
+    <message>
+        <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
+        <translation>Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
     </message>
 </context>
 <context>
@@ -1620,7 +1628,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Do you want to download %1 (%2) from the user %3?</source>
-        <translation>Vuoi scaricare il file %1 (%2) dall&apos;utente %3?</translation>
+        <translation type="obsolete">Vuoi scaricare il file %1 (%2) dall&apos;utente %3?</translation>
     </message>
     <message>
         <source>Do you really want to open the file %1?</source>
@@ -1908,7 +1916,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>File is not available for download. User is offline.</source>
-        <translation>Il file non è disponibile per il download. L&apos;utente non è più connesso.</translation>
+        <translation type="obsolete">Il file non è disponibile per il download. L&apos;utente non è più connesso.</translation>
     </message>
     <message>
         <source>Show the bar of local file sharing</source>
@@ -2116,7 +2124,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Try to refresh the list of shared files.</source>
-        <translation>Prova a ricaricare la lista dei file condivisi.</translation>
+        <translation type="obsolete">Prova a ricaricare la lista dei file condivisi.</translation>
+    </message>
+    <message>
+        <source>File is not available for download.</source>
+        <translation>Il file non è disponibile per essere scaricato.</translation>
+    </message>
+    <message>
+        <source>%1 is not connected.</source>
+        <translation>%1 non è in linea.</translation>
+    </message>
+    <message>
+        <source>Please reload the list of shared files.</source>
+        <translation>Ricarica la lista dei file condivisi.</translation>
+    </message>
+    <message>
+        <source>Reload file list</source>
+        <translation>Ricarica la lista</translation>
+    </message>
+    <message>
+        <source>Do you want to download %1 (%2) from %3?</source>
+        <translation>Vuoi scaricare %1 (%2) da %3?</translation>
     </message>
 </context>
 <context>
@@ -2485,6 +2513,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Delete the captured screenshot</source>
         <translation>Cancella la foto catturata dal tuo schermo</translation>
+    </message>
+    <message>
+        <source>Enable high dpi</source>
+        <translation>Abilita alta definizione</translation>
+    </message>
+    <message>
+        <source>Enable high dpi support to manage, for example, Apple Retina display</source>
+        <translation>Abilita l&apos;alta definizione per gestire, per esempio, gli schermi Retina di Apple</translation>
     </message>
 </context>
 <context>

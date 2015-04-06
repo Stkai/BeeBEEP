@@ -19,10 +19,13 @@ unix:!macx {
 macx: {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
   LIBS += -framework ApplicationServices
+  TARGET = BeeBEEP
+} else {
+  TARGET = beebeep
 }
 
-TARGET = beebeep
 TEMPLATE = app
+
 SOURCES += Listener.cpp \
     FileTransferPeer.cpp \
     Connection.cpp \

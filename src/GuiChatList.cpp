@@ -82,7 +82,7 @@ GuiChatItem* GuiChatList::itemFromChatId( VNumber chat_id )
 
 void GuiChatList::updateChat( VNumber chat_id )
 {
-  Chat c = ChatManager::instance().chat( chat_id, false );
+  Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return;
   if( c.isEmpty() && !c.isGroup() && !c.isDefault() )
