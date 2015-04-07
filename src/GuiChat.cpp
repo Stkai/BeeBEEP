@@ -40,7 +40,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
   mp_teChat->setObjectName( "GuiChatViewer" );
-  mp_teChat->setFocusPolicy( Qt::NoFocus );
+  mp_teChat->setFocusPolicy( Qt::ClickFocus );
   mp_teChat->setReadOnly( true );
   mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_teChat->setOpenExternalLinks( false );
@@ -122,9 +122,9 @@ void GuiChat::updateAction( bool is_connected, int connected_users )
 void GuiChat::customContextMenu( const QPoint& p )
 {
   QMenu custom_context_menu;
-  custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ) );
+  custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   custom_context_menu.addSeparator();
-  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ) );
+  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
@@ -268,16 +268,22 @@ bool GuiChat::setChatId( VNumber chat_id )
   foreach( ChatMessage cm, c.messages() )
     html_text += chatMessageToText( cm );
   mp_teChat->setHtml( html_text );
+  mp_teChat->ensureCursorVisible();
 
-  QScrollBar *bar = mp_teChat->verticalScrollBar();
-  if( bar )
-    bar->setValue( bar->maximum() );
+  ensureLastMessageVisible();
 
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
 
   mp_teMessage->setFocus();
   return true;
+}
+
+void GuiChat::ensureLastMessageVisible()
+{
+  QScrollBar *bar = mp_teChat->verticalScrollBar();
+  if( bar )
+    bar->setValue( bar->maximum() );
 }
 
 void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
@@ -319,8 +325,8 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   QTextCursor cursor( mp_teChat->textCursor() );
   cursor.movePosition( QTextCursor::End );
   cursor.insertHtml( chatMessageToText( cm ) );
-  QScrollBar *bar = mp_teChat->verticalScrollBar();
-  bar->setValue( bar->maximum() );
+
+  ensureLastMessageVisible();
 
   if( read_all_messages )
     setLastMessageTimestamp( cm.message().timestamp() );

@@ -46,6 +46,7 @@ public:
 
   inline bool reloadChat();
   inline const QString& chatName() const;
+  void ensureLastMessageVisible();
 
 signals:
   void newMessage( VNumber, const QString& );

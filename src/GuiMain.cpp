@@ -1377,6 +1377,7 @@ void GuiMain::showChat( VNumber chat_id )
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
     raiseChatView();
+    mp_chat->ensureLastMessageVisible();
   }
 }
 
