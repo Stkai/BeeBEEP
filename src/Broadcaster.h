@@ -49,6 +49,7 @@ private slots:
 protected:
   bool sendDatagramToHost( const QHostAddress& );
   void updateAddresses();
+  bool addAddressToList( const QHostAddress& );
 
 private:
   QList<QHostAddress> m_broadcastAddresses;

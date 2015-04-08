@@ -167,10 +167,24 @@ void Core::checkUserAuthentication( const Message& m )
   else
     qDebug() << u.path() << ": authentication completed";
 
+  User user_found;
+
+  if( !u.sessionId().isEmpty() )
+  {
+    user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
+    if( user_found.isValid() && user_found.isConnected() )
+    {
+      qWarning() << u.path() << "is already connected with path" << user_found.path();
+      closeConnection( c );
+      return;
+    }
+  }
+
   bool user_reconnect = false;
   bool user_path_changed = false;
 
-  User user_found = UserManager::instance().findUserByPath( u.path() );
+  if( !user_found.isValid() )
+    user_found = UserManager::instance().findUserByPath( u.path() );
   if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
     user_found = UserManager::instance().findUserByAccountName( u.accountName() );
 
@@ -192,7 +206,6 @@ void Core::checkUserAuthentication( const Message& m )
     u.setColor( ColorManager::instance().unselectedQString() );
     qDebug() << "New user connected:" << u.path() << "with color" << u.color();
   }
-
 
   Chat default_chat = ChatManager::instance().defaultChat();
   if( default_chat.addUser( u.id() ) )

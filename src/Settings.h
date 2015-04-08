@@ -36,6 +36,10 @@ class Settings
 public:
   QSettings* objectSettings() const;
 
+  QString operatingSystem( bool use_long_name ) const;
+  void createLocalUser();
+  void createSessionId();
+
   inline bool firstTime() const;
   inline void setFirstTime( bool );
 
@@ -165,6 +169,9 @@ public:
 
   inline const QStringList& broadcastAddresses() const;
   inline void setBroadcastAddresses( const QStringList& );
+  inline const QHostAddress& localHostAddressForced() const;
+  inline const QString& localSubnetForced() const;
+  inline bool broadcastOnlyToHostsIni() const;
 
   inline bool minimizeInTray() const;
   inline void setMinimizeInTray( bool );
@@ -302,6 +309,7 @@ private:
   QStringList m_broadcastAddresses;
   QHostAddress m_localHostAddressForced;
   QString m_localSubnetForced;
+  bool m_broadcastOnlyToHostsIni;
 
   bool m_firstTime;
   QDate m_settingsCreationDate;
@@ -416,6 +424,9 @@ inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline const QStringList& Settings::broadcastAddresses() const { return m_broadcastAddresses; }
 inline void Settings::setBroadcastAddresses( const QStringList& new_value ) { m_broadcastAddresses = new_value; }
+inline const QHostAddress& Settings::localHostAddressForced() const { return m_localHostAddressForced; }
+inline const QString& Settings::localSubnetForced() const { return m_localSubnetForced; }
+inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }
 inline bool Settings::firstTime() const { return m_firstTime; }
 inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }

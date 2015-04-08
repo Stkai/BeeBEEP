@@ -43,6 +43,40 @@ Settings::Settings()
   m_lastSave = QDateTime::currentDateTime();
 }
 
+namespace
+{
+  QString GetUserNameFromSystemEnvinroment()
+  {
+    qDebug() << "Checking local user system environment";
+    QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
+    QString sTmp = pe.value( "USERNAME" );
+    if( sTmp.isNull() )
+      sTmp = pe.value( "USER" );
+    if( sTmp.isNull() )
+      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "hmszzz" ) );
+    return sTmp;
+  }
+}
+
+void Settings::createLocalUser()
+{
+  QString sName = GetUserNameFromSystemEnvinroment().simplified();
+  m_localUser.setAccountName( sName.toLower() );
+  if( m_localUser.name().isEmpty() )
+    m_localUser.setName( sName );
+  qDebug() << "User name:" << m_localUser.name();
+  qDebug() << "System Account:" << m_localUser.accountName();
+}
+
+void Settings::createSessionId()
+{
+  QString session_parameters = QString( "%1%2%3" ).arg( m_localUser.path() ).arg( version( true ) ).arg( QDateTime::currentDateTime().toString() );
+  QByteArray id_generated = QCryptographicHash::hash( session_parameters.toUtf8(), QCryptographicHash::Sha1 );
+  QString session_id = QString::fromUtf8( id_generated.toHex() );
+  qDebug() << "Session ID created:" << session_id;
+  m_localUser.setSessionId( session_id );
+}
+
 QString Settings::version( bool complete ) const
 {
   return complete ? QString( "%1 (b%2p%3)" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION ) : QString( BEEBEEP_VERSION );
@@ -88,15 +122,32 @@ QString Settings::languageWebSite() const
   return officialWebSite() + QString( BEEBEEP_LANGUAGE_WEBSITE );
 }
 
-QString Settings::checkVersionWebSite() const
+QString Settings::operatingSystem( bool use_long_name ) const
 {
-  QString os_type = "windows";
+  QString os_name_long = "Unknown OS";
+  QString os_name_short = "unknown";
+#ifdef Q_OS_WIN
+  os_name_long = "MS Windows";
+  os_name_short = "Windows";
+#endif
 #ifdef Q_OS_LINUX
-  os_type = "linux";
+  os_name_long = "Linux";
+  os_name_short = "Linux";
 #endif
 #ifdef Q_OS_MAC
-  os_type = "macosx";
+  os_name_long = "MacOS X";
+  os_name_short = "MacOSX";
 #endif
+#ifdef Q_OS_OS2
+  os_name_long = "OS/2";
+  os_name_short = "OS2";
+#endif
+  return use_long_name ? os_name_long : os_name_short;
+}
+
+QString Settings::checkVersionWebSite() const
+{
+  QString os_type = operatingSystem( false ).toLower();
   return officialWebSite() + QString( "%1?beebeep-version=%2&beebeep-os=%3" ).arg( QString( BEEBEEP_CHECK_VERSION_WEBSITE ) ).arg( QString( BEEBEEP_VERSION ) ).arg( os_type );
 }
 
@@ -286,21 +337,6 @@ void Settings::loadBroadcastAddresses()
   }
 }
 
-namespace
-{
-  QString GetUserNameFromSystemEnvinroment()
-  {
-    qDebug() << "Checking local user system environment";
-    QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
-    QString sTmp = pe.value( "USERNAME" );
-    if( sTmp.isNull() )
-      sTmp = pe.value( "USER" );
-    if( sTmp.isNull() )
-      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "hmszzz" ) );
-    return sTmp;
-  }
-}
-
 void Settings::loadPreConf()
 {
   QSettings* sets = new QSettings( defaultRcFilePath( true ), QSettings::IniFormat );
@@ -468,6 +504,7 @@ void Settings::load()
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
+  m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
   sets->endGroup();
   loadBroadcastAddresses();
 
@@ -504,16 +541,7 @@ void Settings::load()
   }
   sets->endGroup();
 
-  QString sName = GetUserNameFromSystemEnvinroment().simplified();
-  m_localUser.setAccountName( sName.toLower() );
-  if( m_localUser.name().isEmpty() )
-    m_localUser.setName( sName );
-
-  qDebug() << "Local user:" << m_localUser.path();
-  qDebug() << "Account name:" << m_localUser.accountName();
-
   m_lastSave = QDateTime::currentDateTime();
-
   sets->deleteLater();
 }
 
@@ -617,6 +645,7 @@ void Settings::save()
   else
     sets->setValue( "LocalHostAddressForced", QString( "" ) );
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
+  sets->setValue( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );

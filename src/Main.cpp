@@ -61,11 +61,12 @@ int main( int argc, char *argv[] )
 
     /* Load Settings */
   (void)Settings::instance();
-  qDebug() << "Starting BeeBEEP" << Settings::instance().version( true );
+  qDebug() << "Starting BeeBEEP" << Settings::instance().version( true ) << "for" << Settings::instance().operatingSystem( true );
   if( !Settings::instance().createDefaultFolder() )
     qDebug() << "Default folder cannot be created. Check" << Settings::instance().defaultFolder();
   Settings::instance().loadPreConf();
   Settings::instance().load();
+  Settings::instance().createLocalUser();
 
   bee_app.setApplicationName( Settings::instance().programName() );
   bee_app.setOrganizationName( Settings::instance().organizationName() );

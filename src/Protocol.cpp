@@ -219,6 +219,7 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   data_list << Settings::instance().localUser().accountName();
   data_list << public_key;
   data_list << Settings::instance().version( false );
+  data_list << Settings::instance().localUser().sessionId();
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -384,8 +385,12 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( sl.size() > 6 )
     user_version = sl.at( 6 );
 
-  /* Skip other data */
+  QString user_session_id = "";
   if( sl.size() > 7 )
+    user_session_id = sl.at( 7 );
+
+  /* Skip other data */
+  if( sl.size() > 8 )
     qWarning() << "HELLO message contains more data. Skip it";
 
   /* Create User */
@@ -397,6 +402,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setStatusDescription( user_status_description );
   u.setAccountName( user_account_name );
   u.setVersion( user_version );
+  u.setSessionId( user_session_id );
   return u;
 }
 

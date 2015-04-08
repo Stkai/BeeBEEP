@@ -98,11 +98,11 @@ bool Broadcaster::sendBroadcastMessage()
   return addresses_contacted > 0;
 }
 
-bool Broadcaster::isLocalHostAddress( const QHostAddress& address )
+bool Broadcaster::isLocalHostAddress( const QHostAddress& address_to_check )
 {
-  foreach( QHostAddress localAddress, m_ipAddresses )
+  foreach( QHostAddress local_address, m_ipAddresses )
   {
-    if( address == localAddress )
+    if( address_to_check == local_address )
       return true;
   }
   return false;
@@ -164,6 +164,13 @@ void Broadcaster::updateAddresses()
   m_ipAddresses.clear();
   QHostAddress broadcast_address;
 
+  foreach( QString address_string, Settings::instance().broadcastAddresses() )
+  {
+    broadcast_address = QHostAddress( address_string );
+    if( !broadcast_address.isNull() )
+      addAddressToList( broadcast_address );
+  }
+
   foreach( QNetworkInterface interface, QNetworkInterface::allInterfaces() )
   {
     foreach( QNetworkAddressEntry entry, interface.addressEntries() )
@@ -171,22 +178,27 @@ void Broadcaster::updateAddresses()
       broadcast_address = entry.broadcast();
       if( broadcast_address != QHostAddress::Null && entry.ip() != QHostAddress::LocalHost )
       {
-        m_broadcastAddresses << broadcast_address;
+        if( entry.ip() == Settings::instance().localUser().hostAddress() )
+          addAddressToList( broadcast_address );
+        else if( !Settings::instance().broadcastOnlyToHostsIni() )
+          addAddressToList( broadcast_address );
+        else
+          qDebug() << "Broadcaster skips" << broadcast_address.toString();
         m_ipAddresses << entry.ip();
-        qDebug() << "Broadcaster adds" << broadcast_address.toString() << "and" << entry.ip().toString();
+        qDebug() << "Broadcaster adds" << entry.ip().toString() << "to local IP list";
       }
     }
   }
+}
 
-  foreach( QString address_string, Settings::instance().broadcastAddresses() )
-  {
-    broadcast_address = QHostAddress( address_string );
-    if( !broadcast_address.isNull() && !m_broadcastAddresses.contains( broadcast_address ) )
-    {
-      qDebug() << "Broadcaster adds" << address_string;
-      m_broadcastAddresses << QHostAddress( address_string );
-    }
-  }
+bool Broadcaster::addAddressToList( const QHostAddress& host_address )
+{
+  if( m_broadcastAddresses.contains( host_address ) )
+    return false;
+
+  m_broadcastAddresses << host_address;
+  qDebug() << "Broadcaster adds" << host_address.toString() << "to host address list";
+  return true;
 }
 
 bool Broadcaster::addAddress( const QHostAddress& host_address )

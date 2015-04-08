@@ -72,6 +72,8 @@ bool Core::start()
   qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
 
   Settings::instance().setLocalUserHost( Settings::instance().searchLocalHostAddress(), mp_listener->serverPort() );
+  if( Settings::instance().localUser().sessionId().isEmpty() )
+    Settings::instance().createSessionId();
 
   if( !mp_broadcaster->startBroadcasting() )
   {

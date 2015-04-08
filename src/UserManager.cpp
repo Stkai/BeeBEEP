@@ -156,3 +156,20 @@ User UserManager::findUserByAccountName( const QString& user_account_name ) cons
   return User();
 }
 
+User UserManager::findUserBySessionId( const QString& user_session_id ) const
+{
+  if( user_session_id == Settings::instance().localUser().sessionId() )
+    return Settings::instance().localUser();
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.sessionId() == user_session_id )
+      return u;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find user with session id" << user_session_id;
+#endif
+
+  return User();
+}

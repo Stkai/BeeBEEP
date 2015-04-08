@@ -61,6 +61,8 @@ public:
   inline const QString& accountName() const;
   inline void setVersion( const QString& );
   inline const QString& version() const;
+  inline void setSessionId( const QString& );
+  inline const QString& sessionId() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -83,6 +85,7 @@ private:
   QString m_color;
   QString m_accountName;
   QString m_version;
+  QString m_sessionId;
 
 };
 
@@ -112,6 +115,8 @@ inline void User::setAccountName( const QString& new_value ) { m_accountName = n
 inline const QString& User::accountName() const { return m_accountName; }
 inline void User::setVersion( const QString& new_value ) { m_version = new_value; }
 inline const QString& User::version() const { return m_version; }
+inline void User::setSessionId( const QString& new_value ) { m_sessionId = new_value; }
+inline const QString& User::sessionId() const { return m_sessionId; }
 inline QString User::path() const { return QString( "%1@%2:%3" ).arg( name().toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 inline QString User::accountPath() const { return QString( "%1@%2:%3" ).arg( m_accountName.toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 inline QString User::hostAddressAndPort() const { return QString( "%1:%2" ).arg( m_hostAddress.toString(), QString::number( m_hostPort ) ); }

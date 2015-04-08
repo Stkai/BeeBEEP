@@ -39,6 +39,7 @@ public:
   inline const UserList& userList() const;
   User findUserByPath( const QString& ) const;
   User findUserByAccountName( const QString& ) const;
+  User findUserBySessionId( const QString& ) const;
 
   inline const QList<Group>& groups() const;
   void setGroup( const Group& );
