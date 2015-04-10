@@ -277,6 +277,30 @@ QHostAddress Settings::searchLocalHostAddress() const
   return QHostAddress( "127.0.0.1" );
 }
 
+QHostAddress Settings::baseBroadcastAddress() const
+{
+  QHostAddress local_user_address = m_localUser.hostAddress();
+  if( local_user_address.isNull() )
+    return QHostAddress();
+
+  if( local_user_address.toString() == QString( "127.0.0.1" ) )
+    return QHostAddress();
+
+  if( local_user_address.toString().contains( ":" ) )
+    return QHostAddress();
+
+  QStringList sl_host = local_user_address.toString().split( "." );
+  if( sl_host.size() != 4 )
+  {
+    qWarning() << "Invalid IP address for local user found:" << local_user_address.toString();
+    return QHostAddress();
+  }
+
+  sl_host.removeLast();
+  sl_host.append( "255" );
+  return QHostAddress( sl_host.join( "." ) );
+}
+
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
   if( host_address.toString() == QString( "0.0.0.0" ) )

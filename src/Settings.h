@@ -72,6 +72,7 @@ public:
   void setLocalUserHost( const QHostAddress&, int );
 
   QHostAddress searchLocalHostAddress() const;
+  QHostAddress baseBroadcastAddress() const;
 
   inline int broadcastPort() const;
   inline int broadcastInterval() const;

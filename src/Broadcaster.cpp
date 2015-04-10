@@ -29,8 +29,6 @@
 Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_broadcastData()
 {
-  updateAddresses();
-
   m_broadcastTimer.setSingleShot( false );
 
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
@@ -44,6 +42,7 @@ bool Broadcaster::startBroadcasting()
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().broadcastPort();
     return false;
   }
+  updateAddresses();
   qDebug() << "Broadcaster generates broadcast message data";
   m_broadcastData = Protocol::instance().broadcastMessage();
   qDebug() << "Broadcaster starts broadcasting with listener port" << Settings::instance().localUser().hostPort();
@@ -189,6 +188,15 @@ void Broadcaster::updateAddresses()
       }
     }
   }
+
+  broadcast_address = Settings::instance().baseBroadcastAddress();
+  if( broadcast_address.isNull() )
+  {
+    qDebug() << "Base broadcast network address is null";
+    return;
+  }
+  else
+    addAddressToList( broadcast_address );
 }
 
 bool Broadcaster::addAddressToList( const QHostAddress& host_address )
