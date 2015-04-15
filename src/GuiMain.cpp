@@ -263,6 +263,12 @@ void GuiMain::startStopCore()
     startCore();
 }
 
+void GuiMain::quitCore()
+{
+  if( mp_core->isConnected() )
+    stopCore();
+}
+
 void GuiMain::startCore()
 {
   if( Settings::instance().firstTime() )

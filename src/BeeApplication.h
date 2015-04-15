@@ -47,6 +47,8 @@ public:
 
   inline QThread* jobThread();
 
+  static void quitAfterSignal( int );
+
 signals:
   void enteringInIdle();
   void exitingFromIdle();

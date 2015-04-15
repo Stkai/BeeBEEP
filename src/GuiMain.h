@@ -58,6 +58,7 @@ public:
 
 public slots:
   void startStopCore();
+  void quitCore();
   void hideToTrayIcon();
   void setInIdle();
   void exitFromIdle();

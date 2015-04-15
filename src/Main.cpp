@@ -34,6 +34,8 @@
 #include "Random.h"
 #include "Settings.h"
 
+#include <csignal>
+
 bool SetTranslator( QTranslator* translator, QString language_folder, QString lang )
 {
   QString language_file_path = Settings::instance().languageFilePath( language_folder, lang );
@@ -108,6 +110,7 @@ int main( int argc, char *argv[] )
   GuiMain mw;
   QObject::connect( &bee_app, SIGNAL( enteringInIdle() ), &mw, SLOT( setInIdle() ) );
   QObject::connect( &bee_app, SIGNAL( exitingFromIdle() ), &mw, SLOT( exitFromIdle() ) );
+  QObject::connect( &bee_app, SIGNAL( aboutToExit() ), &mw, SLOT( quitCore() ) );
 
   QByteArray ba = Settings::instance().guiGeometry();
   if( !ba.isEmpty() )
@@ -142,6 +145,8 @@ int main( int argc, char *argv[] )
 
   /* Save session */
   mw.saveSession();
+  Settings::instance().loadPreConf();
+  Settings::instance().save();
 
   /* CleanUp */
   bee_app.cleanUp();
@@ -153,8 +158,6 @@ int main( int argc, char *argv[] )
   ColorManager::close();
   Protocol::close();
   PluginManager::close();
-  Settings::instance().loadPreConf();
-  Settings::instance().save();
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();

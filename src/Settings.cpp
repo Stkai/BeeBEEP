@@ -372,6 +372,7 @@ void Settings::loadPreConf()
 
     sets->beginGroup( "BeeBEEP" );
     sets->setValue( "UseConfigurationFileIni", true );
+    sets->setValue( "BroadcastOnlyToHostsIni", false );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", true );
@@ -384,6 +385,7 @@ void Settings::loadPreConf()
   {
     sets->beginGroup( "BeeBEEP" );
     m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", true ).toBool();
+    m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
     sets->endGroup();
     sets->beginGroup( "Groups" );
     m_trustNickname = sets->value( "TrustNickname", true ).toBool();
@@ -669,7 +671,6 @@ void Settings::save()
   else
     sets->setValue( "LocalHostAddressForced", QString( "" ) );
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
-  sets->setValue( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );

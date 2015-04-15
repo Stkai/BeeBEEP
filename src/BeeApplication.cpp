@@ -61,6 +61,16 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 #endif
 
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkIdle() ) );
+
+  signal( SIGINT, &quitAfterSignal );
+  signal( SIGTERM, &quitAfterSignal );
+  signal( SIGBREAK, &quitAfterSignal ) ;
+}
+
+void BeeApplication::quitAfterSignal( int sig )
+{
+  qWarning() << "Signal" << sig << "received. Quit and close.";
+  qApp->quit();
 }
 
 void BeeApplication::init()
