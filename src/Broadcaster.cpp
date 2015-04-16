@@ -30,6 +30,7 @@ Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_broadcastData()
 {
   m_broadcastTimer.setSingleShot( false );
+  m_datagramSent = 0;
 
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
@@ -94,6 +95,12 @@ bool Broadcaster::sendBroadcastMessage()
   if( !addresses_are_valid )
     updateAddresses();
 
+  if( addresses_contacted > 0 )
+  {
+    m_datagramSent++;
+    QTimer::singleShot( Settings::instance().broadcastLoopbackInterval(), this, SLOT( checkLoopback() ) );
+  }
+
   return addresses_contacted > 0;
 }
 
@@ -144,10 +151,17 @@ void Broadcaster::readBroadcastDatagram()
     bool ok = false;
     int sender_listener_port = m.text().toInt( &ok );
     if( !ok )
+    {
+      qWarning() << "Broadcaster has received an invalid listener port" << datagram;
       continue;
+    }
 
     if( isLocalHostAddress( sender_ip ) && sender_listener_port == Settings::instance().localUser().hostPort() )
+    {
+      m_datagramSent--;
+      qDebug() << "Broadcaster skip datagram received from himself:" << m_datagramSent << "pendings";
       continue;
+    }
 
     emit newPeerFound( sender_ip, sender_listener_port );
   }
@@ -215,4 +229,14 @@ bool Broadcaster::addAddress( const QHostAddress& host_address )
     return false;
   m_broadcastAddressesAdded.append( host_address );
   return true;
+}
+
+void Broadcaster::checkLoopback()
+{
+  if( m_datagramSent > 0 )
+  {
+    m_datagramSent--;
+    qWarning() << "Broadcaster UDP port" <<  Settings::instance().broadcastPort() << "is blocked by firewall." << m_datagramSent << "datagram pendings";
+    emit udpPortBlocked();
+  }
 }

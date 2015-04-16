@@ -103,6 +103,8 @@ signals:
   void updateGroup( VNumber );
 
 protected slots:
+  void showBroadcasterUdpError();
+
   /* CoreConnection */
   void setNewConnection( Connection* );
   void newPeerFound( const QHostAddress&, int );

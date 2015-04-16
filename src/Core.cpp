@@ -45,6 +45,7 @@ Core::Core( QObject* parent )
   m_shareListToBuild = 0;
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
+  connect( mp_broadcaster, SIGNAL( udpPortBlocked() ), this, SLOT( showBroadcasterUdpError() ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( setNewConnection( Connection* ) ) );
   connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( fileTransferServerListening() ) );
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
@@ -154,6 +155,20 @@ void Core::sendBroadcastMessage()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are not connected to %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
                                                                              Settings::instance().programName() ), DispatchToChat );
+}
+
+void Core::showBroadcasterUdpError()
+{
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                         tr( "%1 %2 has found a filter on UDP port %3. Please check your firewall settings." )
+                         .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
+                         .arg( Settings::instance().programName() )
+                         .arg( Settings::instance().broadcastPort() ),
+                         DispatchToChat );
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                          tr( "%1 You cannot reach %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
+                            Settings::instance().programName() ), DispatchToChat );
 }
 
 bool Core::isConnected() const

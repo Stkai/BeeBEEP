@@ -76,6 +76,7 @@ public:
 
   inline int broadcastPort() const;
   inline int broadcastInterval() const;
+  inline int broadcastLoopbackInterval() const;
   inline int pingInterval() const;
   inline int pongTimeout() const;
   inline int writingTimeout() const;
@@ -257,6 +258,7 @@ private:
   User m_localUser;
   int m_broadcastPort;
   int m_broadcastInterval;
+  int m_broadcastLoopbackInterval;
   int m_pingInterval;
   int m_pongTimeout;
   int m_writingTimeout;
@@ -351,6 +353,7 @@ inline bool Settings::trustNickname() const { return m_trustNickname; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
 inline int Settings::broadcastPort() const { return m_broadcastPort; }
 inline int Settings::broadcastInterval() const { return m_broadcastInterval; }
+inline int Settings::broadcastLoopbackInterval() const { return m_broadcastLoopbackInterval; }
 inline int Settings::pingInterval() const { return m_pingInterval; }
 inline int Settings::pongTimeout() const { return m_pongTimeout; }
 inline int Settings::writingTimeout() const { return m_writingTimeout; }

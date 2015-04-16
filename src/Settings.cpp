@@ -70,7 +70,8 @@ void Settings::createLocalUser()
 
 void Settings::createSessionId()
 {
-  QString session_parameters = QString( "%1%2%3" ).arg( m_localUser.path() ).arg( version( true ) ).arg( QDateTime::currentDateTime().toString() );
+  QString session_parameters = QString( "%1%2%3%4" ).arg( m_localUser.accountName() ).arg( m_localUser.path() )
+          .arg( version( true ) ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QByteArray id_generated = QCryptographicHash::hash( session_parameters.toUtf8(), QCryptographicHash::Sha1 );
   QString session_id = QString::fromUtf8( id_generated.toHex() );
   qDebug() << "Session ID created:" << session_id;
@@ -512,6 +513,7 @@ void Settings::load()
   sets->beginGroup( "Misc" );
   m_broadcastPort = sets->value( "BroadcastPort", 36475 ).toInt();
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
+  m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", 6475 ).toInt() );
   m_pingInterval = qMax( sets->value( "PingInterval", 31000 ).toInt(), 1000 );
   m_pongTimeout = qMax( sets->value( "PongTimeout", 98000 ).toInt(), 1000 );
@@ -656,6 +658,7 @@ void Settings::save()
   sets->beginGroup( "Misc" );
   sets->setValue( "BroadcastPort", m_broadcastPort );
   sets->setValue( "BroadcastInterval", m_broadcastInterval );
+  sets->setValue( "BroadcastLoopbackInterval", m_broadcastLoopbackInterval );
   sets->setValue( "ListenerPort", m_localUser.hostPort() );
   sets->setValue( "PingInterval", m_pingInterval );
   sets->setValue( "PongTimeout", m_pongTimeout );

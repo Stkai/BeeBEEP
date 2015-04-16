@@ -41,10 +41,12 @@ public:
 
 signals:
   void newPeerFound( const QHostAddress&, int );
+  void udpPortBlocked();
 
 private slots:
   void sendBroadcastDatagram();
   void readBroadcastDatagram();
+  void checkLoopback();
 
 protected:
   bool sendDatagramToHost( const QHostAddress& );
@@ -60,6 +62,8 @@ private:
   QList<QHostAddress> m_broadcastAddressesAdded;
 
   QTimer m_broadcastTimer;
+
+  int m_datagramSent;
 
 };
 

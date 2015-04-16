@@ -351,6 +351,14 @@
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>Buon compleanno Marco Mastroddi: %1 anni oggi! Auguri!!!</translation>
     </message>
+    <message>
+        <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
+        <translation>%1 %2 ha trovato un filtro sulla porta UDP %3. Controlla le impostazioni del tuo firewall.</translation>
+    </message>
+    <message>
+        <source>%1 You cannot reach %2 Network.</source>
+        <translation>%1 Non puoi raggiungere la rete %2.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -2145,6 +2153,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Vuoi scaricare %1 (%2) da %3?</translation>
+    </message>
+    <message>
+        <source>for</source>
+        <translation>per</translation>
     </message>
 </context>
 <context>
