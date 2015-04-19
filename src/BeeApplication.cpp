@@ -64,7 +64,9 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   signal( SIGINT, &quitAfterSignal );
   signal( SIGTERM, &quitAfterSignal );
+#ifndef Q_OS_MAC
   signal( SIGBREAK, &quitAfterSignal ) ;
+#endif
 }
 
 void BeeApplication::quitAfterSignal( int sig )
