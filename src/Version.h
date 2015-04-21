@@ -36,10 +36,10 @@ const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
 const char* BEEBEEP_HELP_WEBSITE = "/help.php";
 const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
 const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.8e";
+const char* BEEBEEP_VERSION = "0.9.8g";
 const int BEEBEEP_PROTO_VERSION = 62;
 const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 356;
+const int BEEBEEP_BUILD = 357;
 
 #endif // BEEBEEP_VERSION_H
 
