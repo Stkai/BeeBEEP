@@ -118,9 +118,7 @@ void Connection::sendPong()
 
 void Connection::closeConnection()
 {
-#if defined( BEEBEEP_DEBUG )
-  qDebug() << "Close connection to" << peerAddress().toString() << peerPort();
-#endif
+  qDebug() << "Connection to" << peerAddress().toString() << peerPort() << "closed";
   m_pingTimer.stop();
   abort();
 }

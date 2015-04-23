@@ -68,7 +68,7 @@ User UserList::find( VNumber user_id ) const
     ++it;
   }
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with id" << user_id;
+  qDebug() << "Unable to find user with id" << user_id << "in UserList";
 #endif
   return User();
 }
@@ -83,7 +83,7 @@ void UserList::set( const User& u )
     {
       (*it) = u;
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "User" << u.id() << "modified";
+      qDebug() << "User" << u.id() << "is modified in UserList";
 #endif
       user_found = true;
       break;
@@ -91,7 +91,12 @@ void UserList::set( const User& u )
     ++it;
   }
   if( !user_found )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "User" << u.id() << "is added to UserList";
+#endif
     m_users.append( u );
+  }
 
   qSort( m_users );
 }
@@ -128,14 +133,14 @@ bool UserList::remove( const User& u )
   if( m_users.removeOne( u ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "User" << u.path() << "is removed from list";
+    qDebug() << "User" << u.path() << "is removed from UserList";
 #endif
     return true;
   }
   else
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Unable to remove user with path" << u.path();
+    qDebug() << "Unable to remove user with path" << u.path() << "from UserList";
 #endif
     return false;
   }

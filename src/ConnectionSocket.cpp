@@ -106,7 +106,7 @@ void ConnectionSocket::readBlock()
 #endif
 
   if( bytesAvailable() < m_blockSize )
-      return;
+    return;
 
   QByteArray byte_array_read;
   data_stream >> byte_array_read;

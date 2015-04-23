@@ -365,13 +365,19 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
   {
-    qWarning() << "HELLO message use invalid password. Cannot authenticate the user.";
+    qWarning() << "HELLO message has sn invalid password";
     return User();
   }
 
   int user_status = sl.at( 2 ).toInt( &ok );
   if( !ok )
     user_status = User::Online;
+
+  if( user_status == User::Offline )
+  {
+    qWarning() << "HELLO message has an user in offline status but it will be changed";
+    user_status = User::Online;
+  }
 
   QString user_status_description = sl.at( 3 );
 

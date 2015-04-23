@@ -96,7 +96,10 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   Connection* c = qobject_cast<Connection*>( sender() );
   if( c )
   {
-    qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has an error:" << c->errorString() << "-" << (int)se;
+    if( c->userId() != ID_INVALID )
+      qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has an error:" << c->errorString() << "-" << (int)se;
+    else
+      qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has refused password:" << c->errorString() << "-" << (int)se;
     closeConnection( c );
   }
   else
@@ -115,31 +118,37 @@ void Core::setConnectionClosed()
 void Core::closeConnection( Connection *c )
 {
   int number_of_connection_pointers = m_connections.removeAll( c );
+
+#ifdef BEEBEEP_DEBUG
   if( number_of_connection_pointers <= 0 )
     qDebug() << "Connection pointer is not present (or already removed from list)";
   else if( number_of_connection_pointers != 1 )
     qDebug() << number_of_connection_pointers << "pointers of a single connection found in connection list";
   else
     qDebug() << "Connection pointer removed from connection list";
+#endif
 
-  User u = UserManager::instance().userList().find( c->userId() );
-  if( u.isValid() )
+  if( c->userId() != ID_INVALID )
   {
-    qDebug() << "User" << u.path() << "goes offline";
-    u.setStatus( User::Offline );
-    UserManager::instance().setUser( u );
-    showUserStatusChanged( u );
-
-    Chat default_chat = ChatManager::instance().defaultChat();
-    if( default_chat.removeUser( u.id() ) )
-      ChatManager::instance().setChat( default_chat );
-
-    FileShare::instance().removeFromNetwork( c->userId() );
+    User u = UserManager::instance().userList().find( c->userId() );
     if( u.isValid() )
-      emit fileShareAvailable( u );
+    {
+      qDebug() << "User" << u.path() << "goes offline";
+      u.setStatus( User::Offline );
+      UserManager::instance().setUser( u );
+      showUserStatusChanged( u );
+
+      Chat default_chat = ChatManager::instance().defaultChat();
+      if( default_chat.removeUser( u.id() ) )
+        ChatManager::instance().setChat( default_chat );
+
+      FileShare::instance().removeFromNetwork( c->userId() );
+      if( u.isValid() )
+        emit fileShareAvailable( u );
+    }
+    else
+      qWarning() << "User" << c->userId() << "not found while closing connection";
   }
-  else
-    qWarning() << "User" << c->userId() << "not found while closing connection";
 
   c->disconnect();
   c->closeConnection();
@@ -165,24 +174,12 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
   else
-    qDebug() << u.path() << ": authentication completed";
-
-  User user_found;
-
-  if( !u.sessionId().isEmpty() )
-  {
-    user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
-    if( user_found.isValid() && user_found.isConnected() )
-    {
-      qWarning() << u.path() << "is already connected with path" << user_found.path();
-      closeConnection( c );
-      return;
-    }
-  }
+    qDebug() << u.path() << "has completed the authentication";
 
   bool user_reconnect = false;
   bool user_path_changed = false;
 
+  User user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
   if( !user_found.isValid() )
     user_found = UserManager::instance().findUserByPath( u.path() );
   if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
@@ -190,6 +187,13 @@ void Core::checkUserAuthentication( const Message& m )
 
   if( user_found.isValid() )
   {
+    if( user_found.isConnected() )
+    {
+      qWarning() << u.path() << "is already connected with path" << user_found.path();
+      closeConnection( c );
+      return;
+    }
+
     if( u.path() != user_found.path() )
     {
       user_path_changed = true;
@@ -197,6 +201,7 @@ void Core::checkUserAuthentication( const Message& m )
     }
     else
       qDebug() << "User" << u.path() << "reconnected";
+
     u.setId( user_found.id() );
     u.setColor( user_found.color() );
     user_reconnect = true;
@@ -245,5 +250,4 @@ void Core::checkUserAuthentication( const Message& m )
 
   if( user_reconnect )
     checkGroupChatAfterUserReconnect( u );
-
 }

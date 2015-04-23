@@ -73,6 +73,9 @@ bool UserManager::hasGroupName( const QString& group_name ) const
 
 Group UserManager::findGroupByPrivateId( const QString& group_private_id ) const
 {
+  if( group_private_id.isEmpty() )
+    return Group();
+
   foreach( Group g, m_groups )
   {
     if( g.privateId() == group_private_id )
@@ -97,6 +100,9 @@ bool UserManager::removeGroup( VNumber group_id )
 
 User UserManager::findUserByPath( const QString& user_path ) const
 {
+  if( user_path.isEmpty() )
+    return User();
+
   if( user_path == Settings::instance().localUser().path() )
     return Settings::instance().localUser();
 
@@ -140,6 +146,9 @@ User UserManager::findUserByPath( const QString& user_path ) const
 
 User UserManager::findUserByAccountName( const QString& user_account_name ) const
 {
+  if( user_account_name.isEmpty() )
+    return User();
+
   if( user_account_name.toLower() == Settings::instance().localUser().accountName().toLower() )
     return Settings::instance().localUser();
 
@@ -158,6 +167,9 @@ User UserManager::findUserByAccountName( const QString& user_account_name ) cons
 
 User UserManager::findUserBySessionId( const QString& user_session_id ) const
 {
+  if( user_session_id.isEmpty() )
+    return User();
+
   if( user_session_id == Settings::instance().localUser().sessionId() )
     return Settings::instance().localUser();
 
