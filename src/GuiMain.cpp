@@ -1696,7 +1696,11 @@ void GuiMain::selectBeepFile()
 
 void GuiMain::testBeepFile()
 {
+#if QT_VERSION >= 0x050000
+  if( !QAudioDeviceInfo::availableDevices( QAudio::AudioOutput ).isEmpty() )
+#else
   if( !QSound::isAvailable() )
+#endif
   {
     qWarning() << "QSound is not available";
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound module is not working. The default BEEP will be used." ) );

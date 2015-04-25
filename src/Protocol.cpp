@@ -972,11 +972,13 @@ QString Protocol::simpleEncryptDecrypt( const QString& text_passed )
   char key = 'k';
   QString text_returned = "";
 
+#if QT_VERSION >= 0x050000
+  foreach( QChar c, text_passed )
+    text_returned += c.toLatin1() ^ key;
+#else
   foreach( QChar c, text_passed )
     text_returned += c.toAscii() ^ key;
-
+#endif
   return text_returned;
 }
-
-
 

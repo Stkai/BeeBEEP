@@ -220,7 +220,10 @@ int BeeApplication::idleTimeFromSystem()
 #endif
 
   if( idle_time < 0 )
-    idle_time = qMax( 0, m_lastEventDateTime.secsTo( QDateTime::currentDateTime() ) );
+  {
+    quint64 unsigned_idle_time = m_lastEventDateTime.secsTo( QDateTime::currentDateTime() );
+    idle_time = static_cast<int>( qMax( (quint64)0, unsigned_idle_time ) );
+  }
 
   return idle_time;
 }

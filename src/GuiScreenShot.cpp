@@ -166,7 +166,7 @@ void GuiScreenShot::doSave()
   if( file_path.isNull() || file_path.isEmpty() )
     return;
 
-  m_screenShot.save( file_path, screenshot_format.toAscii() );
+  m_screenShot.save( file_path, screenshot_format.toLatin1() );
 }
 
 void GuiScreenShot::doSend()
@@ -177,7 +177,7 @@ void GuiScreenShot::doSend()
                                     + screenshot_format;
   QString file_path = Bee::uniqueFilePath( screenshot_initial_path );
 
-  if( !m_screenShot.save( file_path, screenshot_format.toAscii() ) )
+  if( !m_screenShot.save( file_path, screenshot_format.toLatin1() ) )
   {
     QMessageBox::warning( this, Settings::instance().programName(),
       tr( "Unable to save temporary file: %1" ).arg( file_path ) );
