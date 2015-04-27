@@ -1,8 +1,10 @@
 BEEBEEP (Secure Lan Messanger)
 
-BeeBEEP 0.9.9
+BeeBEEP 1.0.2
 - Improved subnet selection when there are many network cards installed
 - HotKeys CTRL+A and CTRL+C (CMD+ for mac users) enabled in chat window read-only section
+- Show avatar in list of users option
+- Status menu icon shows your information when clicked (menu is accessible by the usual way, the drop down arrow)
 
 BeeBEEP 0.9.8
 - Language interface added

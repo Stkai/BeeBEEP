@@ -61,10 +61,6 @@
         <file>images/network-disconnected.png</file>
         <file>images/secure.png</file>
         <file>images/birthday.png</file>
-        <file>images/menu-user-away.png</file>
-        <file>images/menu-user-busy.png</file>
-        <file>images/menu-user-offline.png</file>
-        <file>images/menu-user-online.png</file>
         <file>images/license.png</file>
         <file>images/broadcast.png</file>
         <file>images/file-add.png</file>
@@ -103,5 +99,11 @@
         <file>images/folder.png</file>
         <file>images/language.png</file>
         <file>emoticons/angry.png</file>
+        <file>images/default-chat-offline.png</file>
+        <file>images/default-chat-online.png</file>
+        <file>images/menu-user-away.png</file>
+        <file>images/menu-user-busy.png</file>
+        <file>images/menu-user-offline.png</file>
+        <file>images/menu-user-online.png</file>
     </qresource>
 </RCC>

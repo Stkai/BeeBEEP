@@ -2158,6 +2158,14 @@ il file %2 (%3)?</translation>
         <source>for</source>
         <translation>per</translation>
     </message>
+    <message>
+        <source>Show a picture of the users in list</source>
+        <translation>Mostra l&apos;immagine degli utenti in lista</translation>
+    </message>
+    <message>
+        <source>If enabled you can see a picture of the users in the list (if they have)</source>
+        <translation>Se abilitata puoi vedere un&apos;immagine degli utenti in lista (se l&apos;hanno pubblicata)</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3307,11 +3315,15 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Double click to send a private message.</source>
-        <translation>Doppio click per inviare un messaggio privato.</translation>
+        <translation type="obsolete">Doppio click per inviare un messaggio privato.</translation>
     </message>
     <message>
         <source>Double click to open chat with all local users</source>
         <translation>Doppio click per aprire una conversazione con tutti gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>Double click to send a private message</source>
+        <translation>Doppio click per inviare un messaggio privato</translation>
     </message>
 </context>
 <context>

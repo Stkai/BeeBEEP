@@ -320,7 +320,6 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
   vc.setBirthday( QDate::fromString( sl.at( 3 ), Qt::ISODate ) );
   vc.setEmail( sl.at( 4 ) );
   vc.setPhoto( stringToPixmap( m.text() ) );
-  u->setVCard( vc );
 
   if( sl.size() >= 6 )
   {
@@ -337,6 +336,8 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
 
   if( sl.size() > 8 )
     qWarning() << "VCARD message contains more data. Skip it";
+
+  u->setVCard( vc );
 
   return true;
 }

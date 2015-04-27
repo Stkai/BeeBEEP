@@ -149,7 +149,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_32_LIMIT )
     {
-      qWarning() << "Unable to send a message wich is exceeded the limit of 32bit block data... truncated to max size";
+      qWarning() << "Unable to send a message to" << peerAddress() << peerPort() << "because exceeded the limit of 32bit block data... truncated to max size";
       QByteArray bytes_to_send_truncated = bytes_to_send;
       bytes_to_send_truncated.truncate( DATA_BLOCK_SIZE_32_LIMIT );
       data_stream << bytes_to_send_truncated;
@@ -167,7 +167,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_16_LIMIT )
     {
-      qWarning() << "Unable to send a message wich is exceeded the limit of 16bit block data... truncated to max size";
+      qWarning() << "Unable to send a message to" << peerAddress() << peerPort() << "because exceeded the limit of 16bit block data... truncated to max size";
       QByteArray bytes_to_send_truncated = bytes_to_send;
       bytes_to_send_truncated.truncate( DATA_BLOCK_SIZE_16_LIMIT );
       data_stream << bytes_to_send_truncated;

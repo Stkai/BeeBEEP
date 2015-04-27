@@ -115,6 +115,8 @@ public:
   inline void setShowOnlyOnlineUsers( bool );
   inline bool showUserColor() const;
   inline void setShowUserColor( bool );
+  inline bool showUserPhoto() const;
+  inline void setShowUserPhoto( bool );
   inline bool showEmoticons() const;
   inline void setShowEmoticons( bool );
   inline bool showMessagesGroupByUser() const;
@@ -285,6 +287,7 @@ private:
   bool m_showMessagesGroupByUser;
   bool m_stayOnTop;
   bool m_raiseOnNewMessageArrived;
+  bool m_showUserPhoto;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -387,6 +390,8 @@ inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClic
 inline bool Settings::chatUseClickableLinks() const { return m_chatUseClickableLinks; }
 inline bool Settings::showOnlyOnlineUsers() const { return m_showOnlyOnlineUsers; }
 inline void Settings::setShowOnlyOnlineUsers( bool new_value ) { m_showOnlyOnlineUsers = new_value; }
+inline bool Settings::showUserPhoto() const { return m_showUserPhoto; }
+inline void Settings::setShowUserPhoto( bool new_value ) { m_showUserPhoto = new_value; }
 inline bool Settings::showEmoticons() const { return m_showEmoticons; }
 inline void Settings::setShowEmoticons( bool new_value ) { m_showEmoticons = new_value; }
 inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeometry = new_value; }

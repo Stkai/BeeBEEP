@@ -57,6 +57,7 @@ private:
   GuiUserItem* itemFromUserId( VNumber );
   GuiUserItem* itemFromChatId( VNumber );
   void sortUsers();
+  void resetList();
 
   QColor m_defaultForegroundColor;
 

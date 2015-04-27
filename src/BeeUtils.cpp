@@ -72,6 +72,23 @@ QString Bee::userStatusToString( int user_status )
   return qApp->translate( "User", UserStatusToString[ user_status ] );
 }
 
+QColor Bee::userStatusColor( int user_status )
+{
+  switch( user_status )
+  {
+  case User::Online:
+    return QColor( Qt::green );
+  case User::Away:
+    return QColor( Qt::yellow );
+  case User::Busy:
+    return QColor( Qt::red );
+  case User::Offline:
+    return QColor( Qt::gray );
+  default:
+    return QColor( Qt::black );
+  }
+}
+
 QString Bee::bytesToString( FileSizeType bytes, int precision )
 {
   QString suffix;
@@ -259,4 +276,15 @@ QString Bee::capitalizeFirstLetter( const QString& txt, bool all_chars_after_spa
   }
 
   return capitalized;
+}
+
+QColor Bee::invertColor( const QColor& c )
+{
+  int r, g, b;
+  c.getRgb( &r, &g, &b );
+  int i_r = 255 - r;
+  int i_g = 255 - g;
+  int i_b = 255 - b;
+
+  return QColor( i_r, i_g, i_b );
 }

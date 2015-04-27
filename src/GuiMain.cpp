@@ -471,6 +471,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showOnlyOnlineUsers() );
   act->setData( 6 );
 
+  act = mp_menuSettings->addAction( tr( "Show a picture of the users in list" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can see a picture of the users in the list (if they have)" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserPhoto() );
+  act->setData( 21 );
+
   act = mp_menuSettings->addAction( tr( "Beep on new message arrived" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
   act->setCheckable( true );
@@ -613,6 +619,9 @@ void GuiMain::createMenus()
   act->setData( User::Offline );
   act->setStatusTip( tr( "Your status will be %1" ).arg( Bee::userStatusToString( User::Offline ) ) );
   act->setIconVisibleInMenu( true );
+
+  act = mp_menuStatus->menuAction();
+  connect( act, SIGNAL( triggered() ), this, SLOT( showLocalUserVCard() ) );
 
   /* View Menu */
   mp_menuView = new QMenu( tr( "&View" ), this );
@@ -983,6 +992,10 @@ void GuiMain::settingsChanged()
         bee_app->setIdleTimeout( Settings::instance().userAwayTimeout() );
       }
     }
+    break;
+  case 21:
+    Settings::instance().setShowUserPhoto( act->isChecked() );
+    refresh_users = true;
     break;
   case 99:
     break;
@@ -1425,19 +1438,29 @@ void GuiMain::changeVCard()
   }
 }
 
+void GuiMain::showLocalUserVCard()
+{
+  showVCard( Settings::instance().localUser(), false );
+}
+
 void GuiMain::showUserMenu( VNumber user_id )
 {
   User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
     return;
 
+  showVCard( u, true );
+}
+
+void GuiMain::showVCard( const User& u, bool ensure_visible )
+{
   GuiVCard* gvc = new GuiVCard( this );
   connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
-  gvc->setVCard( u, ChatManager::instance().privateChatForUser( user_id ).id() );
+  gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id() );
 
-  if( dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
+  if( ensure_visible && dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
   {
     // Ensure vCard visible
     QPoint pos = QCursor::pos();

@@ -32,6 +32,7 @@ namespace Bee
   enum FileType { FileAudio, FileVideo, FileImage, FileDocument, FileOther, FileExe, FileBundle, NumFileType };
 
   inline QIcon userStatusIcon( int );
+  QColor userStatusColor( int );
   QString userStatusIconFileName( int );
   QString menuUserStatusIconFileName( int );
   QString userStatusToString( int );
@@ -50,6 +51,7 @@ namespace Bee
   QString fileTypeToString( FileType );
   QString dateTimeStringSuffix( const QDateTime& );
   QString capitalizeFirstLetter( const QString&, bool all_chars_after_space );
+  QColor invertColor( const QColor& );
 
 }
 

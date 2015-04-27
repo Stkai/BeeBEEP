@@ -130,6 +130,7 @@ private slots:
   void showChatForGroup( VNumber );
   void showSharesForUser( const User& );
   void selectLanguage();
+  void showLocalUserVCard();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -162,6 +163,7 @@ private:
   bool sendFile( const User&, const QString& );
   bool openWebUrl( const QString& );
   QString checkFilePath( const QString& );
+  void showVCard( const User&, bool ensure_visible );
 
 private:
   QStackedWidget* mp_stackedWidget;

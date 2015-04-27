@@ -52,6 +52,8 @@ public:
 private:
   QColor m_defaultForegroundColor;
 
+  QIcon selectUserIcon( int, bool ) const;
+
 };
 
 

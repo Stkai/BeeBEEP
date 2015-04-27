@@ -33,9 +33,12 @@ GuiUserList::GuiUserList( QWidget* parent )
   setObjectName( "GuiUserList" );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
-  header()->hide();
   setRootIsDecorated( false );
   setSortingEnabled( true );
+  setColumnCount( 1 );
+
+  setHeaderHidden( true );
+  resetList();
 
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( userDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
@@ -51,9 +54,19 @@ QSize GuiUserList::sizeHint() const
   return QSize( 140, 300 );
 }
 
+void GuiUserList::resetList()
+{
+  if( topLevelItemCount() > 0 )
+    clear();
+  if( Settings::instance().showUserPhoto() )
+    setIconSize( QSize( 32, 32 ) );
+  else
+    setIconSize( QSize( 16, 16 ) );
+}
+
 void GuiUserList::updateUsers( bool is_connected )
 {
-  clear();
+  resetList();
   setUser( Settings::instance().localUser() );
   setDefaultChatConnected( is_connected );
   foreach( User u, UserManager::instance().userList().toList() )
@@ -182,8 +195,8 @@ bool GuiUserList::nextUserWithUnreadMessages()
 
 void GuiUserList::setDefaultChatConnected( bool yes )
 {
-   GuiUserItem* item = itemFromChatId( ID_DEFAULT_CHAT );
-   if( !item )
-     return;
-   item->setIcon( 0, QIcon( (yes ? ":/images/network-connected" : ":/images/network-disconnected" ) ) );
+  GuiUserItem* item = itemFromChatId( ID_DEFAULT_CHAT );
+  if( !item )
+    return;
+  item->setIcon( 0, QIcon( (yes ? ":/images/default-chat-online" : ":/images/default-chat-offline" ) ) );
 }

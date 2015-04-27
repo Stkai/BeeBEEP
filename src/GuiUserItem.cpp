@@ -50,9 +50,9 @@ bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
   return user_item_name < other_name;
 }
 
-static QIcon GetUserIcon( int unread_messages, int user_status )
+QIcon GuiUserItem::selectUserIcon( int user_status, bool use_big_icon ) const
 {
-  return unread_messages > 0 ? QIcon( ":/images/chat.png" ) : Bee::userStatusIcon( user_status );
+  return use_big_icon > 0 ? QIcon( Bee::menuUserStatusIconFileName( user_status ) ) : Bee::userStatusIcon( user_status );
 }
 
 bool GuiUserItem::updateUser()
@@ -92,7 +92,18 @@ bool GuiUserItem::updateUser( const User& u )
   setText( 0, s );
 
   if( !u.isLocal() )
-    setIcon( 0, GetUserIcon( 0, user_status ) );
+  {
+    if( Settings::instance().showUserPhoto() && !u.vCard().photo().isNull() )
+    {
+      QPixmap pix( 32, 32 );
+      pix.fill( Bee::userStatusColor( u.status() ) );
+      QPainter p( &pix );
+      p.drawPixmap( 1, 1, 30, 30, u.vCard().photo() );
+      setIcon( 0, pix );
+    }
+    else
+      setIcon( 0, selectUserIcon( user_status, Settings::instance().showUserPhoto() ) );
+  }
 
   if( !m_defaultForegroundColor.isValid() )
     m_defaultForegroundColor = foreground( 0 ).color();
@@ -113,8 +124,19 @@ bool GuiUserItem::updateUser( const User& u )
     tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
     if( u.isConnected() )
     {
-      tool_tip += QString( ".\n" );
-      tool_tip += QObject::tr( "Double click to send a private message." );
+      if( u.statusDescription().isEmpty() )
+        tool_tip += QString( ".\n" );
+      else
+        tool_tip += QString( ": %1\n" ).arg( u.statusDescription() );
+
+      if( !u.vCard().info().isEmpty() )
+      {
+        tool_tip += QString( "~~~\n" );
+        tool_tip += u.vCard().info();
+        tool_tip += QString( "\n~~~\n" );
+      }
+
+      tool_tip += QString( "(%1)" ).arg( QObject::tr( "Double click to send a private message" ) );
     }
     user_priority = 1000;
     user_priority += u.isConnected() ? (100*user_status) : 100000;
@@ -124,5 +146,6 @@ bool GuiUserItem::updateUser( const User& u )
   user_priority = qMax( 0, user_priority );
   setData( 0, GuiUserItem::Priority, user_priority );
   setToolTip( 0, tool_tip );
+
   return true;
 }
