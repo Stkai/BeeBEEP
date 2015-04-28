@@ -37,21 +37,9 @@ public:
 
   void loadSettings();
 
-  inline const QStringList& addresses() const;
-
 protected slots:
   void checkAndSearch();
 
-private:
-  QStringList m_addresses;
-
 };
-
-
-// Inline Functions
-inline const QStringList& GuiSearchUser::addresses() const
-{
-  return m_addresses;
-}
 
 #endif // BEEBEEP_GUISEARCHUSER_H

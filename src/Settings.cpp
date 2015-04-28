@@ -346,8 +346,11 @@ void Settings::createDefaultFileHosts()
     qWarning() << "Unable to create the default file host ini:" << file_host_ini.fileName();
 }
 
-void Settings::loadBroadcastAddresses()
+void Settings::loadBroadcastAddressesFromFileHosts()
 {
+  if( !m_broadcastAddressesInFileHosts.isEmpty() )
+    m_broadcastAddressesInFileHosts.clear();
+
   QFile file( defaultHostsFilePath( false ) );
   if( !file.open( QIODevice::ReadOnly ) )
   {
@@ -386,14 +389,14 @@ void Settings::loadBroadcastAddresses()
           continue;
         }
 
-        if( m_broadcastAddresses.contains( address_string ) )
+        if( m_broadcastAddressesInFileHosts.contains( address_string ) )
         {
           qDebug() << "Broadcast address is already in list";
           continue;
         }
 
         qDebug() << "Adding broadcast address:" << address_string;
-        m_broadcastAddresses << address_string;
+        m_broadcastAddressesInFileHosts << address_string;
         hosts_found++;
       }
     }
@@ -569,14 +572,15 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Network");
-   m_broadcastAddresses = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
+  m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
+  m_saveBroadcastAddressesInSettings = !m_broadcastAddressesInSettings.isEmpty();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
   sets->endGroup();
-  loadBroadcastAddresses();
+  loadBroadcastAddressesFromFileHosts();
 
   sets->beginGroup( "FileShare" );
   m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
@@ -711,7 +715,10 @@ void Settings::save()
   sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
-  sets->setValue( "BroadcastAddresses", m_broadcastAddresses );
+  if( m_saveBroadcastAddressesInSettings )
+    sets->setValue( "BroadcastAddresses", m_broadcastAddressesInSettings );
+  else
+    sets->setValue( "BroadcastAddresses", QStringList() );
   if( !m_localHostAddressForced.isNull() )
     sets->setValue( "LocalHostAddressForced", m_localHostAddressForced.toString() );
   else

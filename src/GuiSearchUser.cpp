@@ -41,17 +41,13 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 
 void GuiSearchUser::loadSettings()
 {
-  m_addresses = Settings::instance().broadcastAddresses();
-  if( m_addresses.size() > 0 )
-  {
-    mp_textBroadcast->setPlainText( m_addresses.join( ", " ) );
-    mp_cbSaveAddresses->setChecked( true );
-  }
+  QStringList sl_addresses = Settings::instance().broadcastAddressesInSettings();
+  if( sl_addresses.size() > 0 )
+    mp_textBroadcast->setPlainText( sl_addresses.join( ", " ) );
   else
-  {
     mp_textBroadcast->setPlainText( "" );
-    mp_cbSaveAddresses->setChecked( false );
-  }
+
+  mp_cbSaveAddresses->setChecked( Settings::instance().saveBroadcastAddressesInSettings() );
 }
 
 void GuiSearchUser::checkAndSearch()
@@ -61,9 +57,7 @@ void GuiSearchUser::checkAndSearch()
   if( address_string.size() > 0 )
     address_list = address_string.split( ",", QString::SkipEmptyParts );
 
-  m_addresses.clear();
-
-  if( address_list.size() > 0 )
+  if( !address_list.isEmpty() )
   {
     foreach( QString s, address_list )
     {
@@ -77,14 +71,11 @@ void GuiSearchUser::checkAndSearch()
         mp_textBroadcast->setFocus();
         return;
       }
-      m_addresses.append( host_address.toString() );
     }
   }
 
-  if( mp_cbSaveAddresses->isChecked() )
-    Settings::instance().setBroadcastAddresses( m_addresses );
-  else
-    Settings::instance().setBroadcastAddresses( QStringList() );
+  Settings::instance().setBroadcastAddressesInSettings( address_list );
+  Settings::instance().setSaveBroadcastAddressesInSettings( mp_cbSaveAddresses->isChecked() );
 
   accept();
 }

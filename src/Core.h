@@ -43,7 +43,7 @@ public:
   bool start();
   void stop();
 
-  void addBroadcastAddress( const QHostAddress& );
+  bool updateBroadcastAddresses();
   void sendBroadcastMessage();
 
   /* CoreUser */

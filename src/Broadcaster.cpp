@@ -30,7 +30,7 @@ Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_broadcastData()
 {
   m_broadcastTimer.setSingleShot( false );
-  m_datagramSent = 0;
+  m_datagramSentToBaseBroadcastAddress = 0;
 
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
@@ -43,6 +43,7 @@ bool Broadcaster::startBroadcasting()
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().broadcastPort();
     return false;
   }
+  m_baseBroadcastAddress = Settings::instance().baseBroadcastAddress();
   updateAddresses();
   qDebug() << "Broadcaster generates broadcast message data";
   m_broadcastData = Protocol::instance().broadcastMessage();
@@ -61,29 +62,22 @@ bool Broadcaster::startBroadcasting()
 void Broadcaster::stopBroadcasting()
 {
   qDebug() << "Broadcaster stops broadcasting";
+  m_datagramSentToBaseBroadcastAddress = 0;
   if( m_broadcastTimer.isActive() )
     m_broadcastTimer.stop();
   m_broadcastSocket.close();
 }
 
-bool Broadcaster::sendBroadcastMessage()
+void Broadcaster::sendBroadcastDatagram()
 {
   int addresses_contacted = 0;
-  bool addresses_are_valid = true;
-  foreach( QHostAddress host_address, m_broadcastAddresses )
-  {
-    if( !sendDatagramToHost( host_address ) )
-      addresses_are_valid = false;
-    else
-      addresses_contacted++;
-  }
 
-  QList<QHostAddress>::iterator it = m_broadcastAddressesAdded.begin();
-  while( it != m_broadcastAddressesAdded.end() )
+  QList<QHostAddress>::iterator it = m_broadcastAddresses.begin();
+  while( it != m_broadcastAddresses.end() )
   {
     if( !sendDatagramToHost( *it ) )
     {
-      it = m_broadcastAddressesAdded.erase( it );
+      it = m_broadcastAddresses.erase( it );
     }
     else
     {
@@ -92,16 +86,15 @@ bool Broadcaster::sendBroadcastMessage()
     }
   }
 
-  if( !addresses_are_valid )
-    updateAddresses();
-
-  if( addresses_contacted > 0 )
+  if( !m_baseBroadcastAddress.isNull() && sendDatagramToHost( m_baseBroadcastAddress ) )
   {
-    m_datagramSent++;
+    qDebug() << "Broadcaster has contacted default network:" << m_baseBroadcastAddress.toString();
+    addresses_contacted++;
+    m_datagramSentToBaseBroadcastAddress++;
     QTimer::singleShot( Settings::instance().broadcastLoopbackInterval(), this, SLOT( checkLoopback() ) );
   }
 
-  return addresses_contacted > 0;
+  qDebug() << "Broadcaster has contacted" << addresses_contacted << "networks";
 }
 
 bool Broadcaster::isLocalHostAddress( const QHostAddress& address_to_check )
@@ -116,13 +109,20 @@ bool Broadcaster::isLocalHostAddress( const QHostAddress& address_to_check )
 
 bool Broadcaster::sendDatagramToHost( const QHostAddress& host_address )
 {
-  qDebug() << "Broadcaster casts to network:" << host_address.toString();
-  return m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().broadcastPort() ) > 0;
-}
-
-void Broadcaster::sendBroadcastDatagram()
-{
-  sendBroadcastMessage();
+  if( m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().broadcastPort() ) > 0 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster has sent datagram to network:" << host_address.toString();
+#endif
+    return true;
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster does not reach the network:" << host_address.toString();
+#endif
+    return false;
+  }
 }
 
 void Broadcaster::readBroadcastDatagram()
@@ -158,8 +158,8 @@ void Broadcaster::readBroadcastDatagram()
 
     if( isLocalHostAddress( sender_ip ) && sender_listener_port == Settings::instance().localUser().hostPort() )
     {
-      m_datagramSent--;
-      qDebug() << "Broadcaster skip datagram received from himself:" << m_datagramSent << "pendings";
+      m_datagramSentToBaseBroadcastAddress--;
+      qDebug() << "Broadcaster skip datagram received from himself:" << m_datagramSentToBaseBroadcastAddress << "pendings";
       continue;
     }
 
@@ -170,47 +170,53 @@ void Broadcaster::readBroadcastDatagram()
     qDebug() << "Broadcaster read" << num_datagram_read << "datagrams";
 }
 
-void Broadcaster::updateAddresses()
+int Broadcaster::updateAddresses()
 {
   qDebug() << "Broadcaster updates the addresses";
   m_broadcastAddresses.clear();
   m_ipAddresses.clear();
-  QHostAddress broadcast_address;
+  QHostAddress ha_broadcast;
 
-  foreach( QString address_string, Settings::instance().broadcastAddresses() )
+  if( !Settings::instance().broadcastAddressesInFileHosts().isEmpty() )
   {
-    broadcast_address = QHostAddress( address_string );
-    if( !broadcast_address.isNull() )
-      addAddressToList( broadcast_address );
+    foreach( QString s_address, Settings::instance().broadcastAddressesInFileHosts() )
+    {
+      ha_broadcast = QHostAddress( s_address );
+      if( !ha_broadcast.isNull() )
+        addAddressToList( ha_broadcast );
+    }
+  }
+
+  if( !Settings::instance().broadcastOnlyToHostsIni() && !Settings::instance().broadcastAddressesInSettings().isEmpty() )
+  {
+    foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
+    {
+      ha_broadcast = QHostAddress( s_address );
+      if( !ha_broadcast.isNull() )
+        addAddressToList( ha_broadcast );
+    }
   }
 
   foreach( QNetworkInterface interface, QNetworkInterface::allInterfaces() )
   {
     foreach( QNetworkAddressEntry entry, interface.addressEntries() )
     {
-      broadcast_address = entry.broadcast();
-      if( broadcast_address != QHostAddress::Null && entry.ip() != QHostAddress::LocalHost )
+      ha_broadcast = entry.broadcast();
+      if( ha_broadcast != QHostAddress::Null && entry.ip() != QHostAddress::LocalHost )
       {
         if( entry.ip() == Settings::instance().localUser().hostAddress() )
-          addAddressToList( broadcast_address );
+          addAddressToList( ha_broadcast );
         else if( !Settings::instance().broadcastOnlyToHostsIni() )
-          addAddressToList( broadcast_address );
+          addAddressToList( ha_broadcast );
         else
-          qDebug() << "Broadcaster skips" << broadcast_address.toString();
+          qDebug() << "Broadcaster skips" << ha_broadcast.toString();
         m_ipAddresses << entry.ip();
         qDebug() << "Broadcaster adds" << entry.ip().toString() << "to local IP list";
       }
     }
   }
 
-  broadcast_address = Settings::instance().baseBroadcastAddress();
-  if( broadcast_address.isNull() )
-  {
-    qDebug() << "Base broadcast network address is null";
-    return;
-  }
-  else
-    addAddressToList( broadcast_address );
+  return m_broadcastAddresses.size();
 }
 
 bool Broadcaster::addAddressToList( const QHostAddress& host_address )
@@ -218,25 +224,88 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
   if( m_broadcastAddresses.contains( host_address ) )
     return false;
 
-  m_broadcastAddresses << host_address;
-  qDebug() << "Broadcaster adds" << host_address.toString() << "to host address list";
-  return true;
-}
-
-bool Broadcaster::addAddress( const QHostAddress& host_address )
-{
-  if( m_broadcastAddressesAdded.contains( host_address ) )
+  QList<QHostAddress> host_address_list = parseHostAddress( host_address );
+  if( host_address_list.isEmpty() )
     return false;
-  m_broadcastAddressesAdded.append( host_address );
+
+  foreach( QHostAddress ha, host_address_list )
+    m_broadcastAddresses << ha;
+
+  qDebug() << "Broadcaster adds network" << host_address.toString() << "with" << host_address_list.size() << "addresses";
+
   return true;
 }
 
 void Broadcaster::checkLoopback()
 {
-  if( m_datagramSent > 0 )
+  if( m_datagramSentToBaseBroadcastAddress > 0 )
   {
-    m_datagramSent--;
-    qWarning() << "Broadcaster UDP port" <<  Settings::instance().broadcastPort() << "is blocked by firewall." << m_datagramSent << "datagram pendings";
+    m_datagramSentToBaseBroadcastAddress--;
+    qWarning() << "Broadcaster UDP port" <<  Settings::instance().broadcastPort() << "is blocked by firewall." << m_datagramSentToBaseBroadcastAddress << "datagram pendings";
     emit udpPortBlocked();
   }
+}
+
+QList<QHostAddress> Broadcaster::parseHostAddress( const QHostAddress& host_address ) const
+{
+  QList<QHostAddress> ha_list;
+  QString ha_string = host_address.toString();
+
+  if( host_address == m_baseBroadcastAddress )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster skips base address:" << ha_string;
+#endif
+    return ha_list;
+  }
+
+  if( ha_string.contains( ":" ) )
+  {
+    ha_list << host_address;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster has found IPV6 address:" << ha_string;
+#endif
+    return ha_list;
+  }
+
+  if( !ha_string.contains( QLatin1String( "255" ) ) )
+  {
+    ha_list << host_address;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster has found IPV4 address:" << ha_string;
+#endif
+    return ha_list;
+  }
+
+  if( ha_string.count( QLatin1String( "255" ) ) > 1 )
+  {
+    ha_list << host_address;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster has found IPV4 subnet too big and skipped:" << ha_string;
+#endif
+    return ha_list;
+  }
+
+  QStringList ha_string_list = ha_string.split( "." );
+  if( ha_string_list.size() != 4 )
+  {
+    qWarning() << "Broadcaster has found an invalid IPV4 address:" << ha_string;
+    return ha_list;
+  }
+
+  if( ha_string_list.last() == QLatin1String( "255" ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster has found IPV4 subnet and has parsed it:" << ha_string;
+#endif
+    ha_string_list.removeLast();
+    ha_string = ha_string_list.join( "." );
+    QString s_tmp;
+    for( int i = 1; i < 255; i++ )
+    {
+      s_tmp = QString( "%1.%2" ).arg( ha_string ).arg( i );
+      ha_list << QHostAddress( s_tmp );
+    }
+  }
+  return ha_list;
 }

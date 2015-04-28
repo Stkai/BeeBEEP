@@ -35,35 +35,35 @@ public:
   explicit Broadcaster( QObject* );
   bool startBroadcasting();
   void stopBroadcasting();
-  bool isLocalHostAddress( const QHostAddress& );
-  bool addAddress( const QHostAddress& );
-  bool sendBroadcastMessage();
+  int updateAddresses();
+
+public slots:
+  void sendBroadcastDatagram();
 
 signals:
   void newPeerFound( const QHostAddress&, int );
   void udpPortBlocked();
 
 private slots:
-  void sendBroadcastDatagram();
   void readBroadcastDatagram();
   void checkLoopback();
 
 protected:
   bool sendDatagramToHost( const QHostAddress& );
-  void updateAddresses();
   bool addAddressToList( const QHostAddress& );
+  bool isLocalHostAddress( const QHostAddress& );
+  QList<QHostAddress> parseHostAddress( const QHostAddress& ) const;
 
 private:
+  QHostAddress m_baseBroadcastAddress;
   QList<QHostAddress> m_broadcastAddresses;
   QList<QHostAddress> m_ipAddresses;
   QUdpSocket m_broadcastSocket;
   QByteArray m_broadcastData;
 
-  QList<QHostAddress> m_broadcastAddressesAdded;
-
   QTimer m_broadcastTimer;
 
-  int m_datagramSent;
+  int m_datagramSentToBaseBroadcastAddress;
 
 };
 

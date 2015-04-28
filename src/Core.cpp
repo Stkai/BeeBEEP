@@ -132,21 +132,24 @@ void Core::stop()
                                                                               Settings::instance().programName() ), DispatchToAllChatsWithUser );
 }
 
-void Core::addBroadcastAddress( const QHostAddress& host_address )
+bool Core::updateBroadcastAddresses()
 {
-  if( mp_broadcaster->addAddress( host_address ) )
+  if( mp_broadcaster->updateAddresses() > 0 )
   {
     QString sHtmlMsg = tr( "%1 Looking for the available users in %2..." )
-          .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), host_address.toString() );
+                .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), Settings::instance().broadcastAddressesInSettings().join( ", " ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+    return true;
   }
+  else
+    return false;
 }
 
 void Core::sendBroadcastMessage()
 {
   if( isConnected() )
   {
-    mp_broadcaster->sendBroadcastMessage();
+    mp_broadcaster->sendBroadcastDatagram();
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
                                                                           Settings::instance().programName() ), DispatchToChat );

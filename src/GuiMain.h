@@ -91,7 +91,6 @@ private slots:
   void showPluginManager();
   void showCurrentChat();
   void showChat( VNumber );
-  void sendBroadcastMessage();
   void showWizard();
   void showFromTrayIcon();
   void forceExit();

@@ -1111,12 +1111,8 @@ void GuiMain::searchUsers()
 
   showChat( ID_DEFAULT_CHAT );
 
-  if( !gsu.addresses().isEmpty() )
-  {
-    foreach( QString s, gsu.addresses() )
-      mp_core->addBroadcastAddress( QHostAddress( s ) );
-    sendBroadcastMessage();
-  }
+  if( mp_core->updateBroadcastAddresses() )
+    mp_core->sendBroadcastMessage();
 }
 
 void GuiMain::showWritingUser( const User& u )
@@ -1561,11 +1557,6 @@ void GuiMain::showPluginManager()
   gpm.exec();
   if( gpm.isChanged() )
     updadePluginMenu();
-}
-
-void GuiMain::sendBroadcastMessage()
-{
-  mp_core->sendBroadcastMessage();
 }
 
 void GuiMain::showWizard()
