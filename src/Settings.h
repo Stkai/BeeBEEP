@@ -48,6 +48,7 @@ public:
 
   inline const QDate& settingsCreationDate() const;
   bool createDefaultFolder();
+  void createDefaultFileHosts();
   inline const QString& defaultFolder() const;
   QString defaultHostsFilePath( bool current_dir ) const;
   QString defaultRcFilePath( bool current_dir ) const;

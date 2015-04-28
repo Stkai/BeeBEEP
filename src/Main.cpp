@@ -38,6 +38,12 @@
 
 bool SetTranslator( QTranslator* translator, QString language_folder, QString lang )
 {
+  if( lang.isEmpty() )
+  {
+    qDebug() << "Language option is empty and default language is installed";
+    return false;
+  }
+
   QString language_file_path = Settings::instance().languageFilePath( language_folder, lang );
   if( !translator->load( language_file_path ) )
   {

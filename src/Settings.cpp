@@ -311,6 +311,41 @@ void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port
   m_localUser.setHostPort( host_port );
 }
 
+void Settings::createDefaultFileHosts()
+{
+  QStringList sl;
+
+  sl << "# This is a sample HOSTS file used by BeeBEEP.";
+  sl << "#";
+  sl << "# This file contains the IP addresses (something like 10.0.0.123)";
+  sl << "# or subnet (10.0.0.255 means that BeeBEEP tries to connect every";
+  sl << "# client from the IP 10.0.0.1 to IP 10.0.0.254).";
+  sl << "# Each entry should be kept on an individual line.";
+  sl << "#";
+  sl << "# Additionally, comments (such as these) may be inserted";
+  sl << "# on individual line denoted by a '#', '*' or '/' symbol.";
+  sl << "#";
+  sl << "# For example:";
+  sl << "#";
+  sl << "# 10.184.9.132";
+  sl << "# 192.168.2.17";
+  sl << "# 10.184.5.255";
+  sl << "# 10.0.255.255";
+  sl << " ";
+
+  QFile file_host_ini( defaultHostsFilePath( true ) );
+  if( file_host_ini.open( QIODevice::WriteOnly ) )
+  {
+    QTextStream ts( &file_host_ini );
+    foreach( QString line, sl )
+      ts << line << endl;
+    file_host_ini.close();
+    qDebug() << "Default file host ini created:" << file_host_ini.fileName();
+  }
+  else
+    qWarning() << "Unable to create the default file host ini:" << file_host_ini.fileName();
+}
+
 void Settings::loadBroadcastAddresses()
 {
   QFile file( defaultHostsFilePath( false ) );
@@ -321,6 +356,7 @@ void Settings::loadBroadcastAddresses()
     if( !file.open( QIODevice::ReadOnly ) )
     {
       qWarning() << "Default file host not found";
+      createDefaultFileHosts();
       return;
     }
   }
@@ -329,6 +365,7 @@ void Settings::loadBroadcastAddresses()
   QString address_string;
   QString line_read;
   char c;
+  int hosts_found = 0;
 
   while( !file.atEnd() )
   {
@@ -357,9 +394,13 @@ void Settings::loadBroadcastAddresses()
 
         qDebug() << "Adding broadcast address:" << address_string;
         m_broadcastAddresses << address_string;
+        hosts_found++;
       }
     }
   }
+
+  qDebug() << file.fileName() << "read:" << hosts_found << "host addresses found";
+  file.close();
 }
 
 void Settings::loadPreConf()
@@ -707,7 +748,7 @@ void Settings::save()
   if( sets->isWritable() )
   {
     sets->sync();
-    qDebug() << "Settings saved" << sets->fileName();
+    qDebug() << "Settings saved in" << sets->fileName();
     m_lastSave = QDateTime::currentDateTime();
   }
   sets->deleteLater();

@@ -6,6 +6,24 @@
 // $Id$
 //
 
+/***************************/
+/***  FILE: beebeep.rc   ***/
+/***************************/
+
+[BeeBEEP]
+UseConfigurationFileIni= the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
+BroadcastOnlyToHostsIni= if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
+
+[Groups]
+TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect
+TrustSystemAccount= if true BeeBEEP trusts before system account to recognize a user. Useful if your are in active directory domain or similar
+
+
+/***************************/
+/***  FILE: beebeep.ini  ***/
+/***************************/
+
+
 [Version]
 Program= beebeep version major.minor.relese and build (b) and protocol (p) 
 Proto= protocol version 
