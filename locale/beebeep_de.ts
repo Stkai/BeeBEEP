@@ -288,7 +288,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="234"/>
+        <location filename="../src/CoreConnection.cpp" line="238"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2280,32 +2280,37 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="40"/>
-        <source>Addresses in beehosts.ini (read only)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiSearchUser.ui" line="70"/>
-        <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
+        <source>UDP Port (in beebeep.rc)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="63"/>
-        <source>Split subnet to IPV4 addresses</source>
+        <source>Addresses in beehosts.ini (read only)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="86"/>
+        <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="109"/>
+        <source>Split subnet to IPV4 addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="132"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="116"/>
+        <location filename="../src/GuiSearchUser.ui" line="139"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="35"/>
-        <source>Search Users</source>
+        <source>Configure network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2314,17 +2319,17 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="53"/>
+        <location filename="../src/GuiSearchUser.cpp" line="55"/>
         <source>File is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="80"/>
+        <location filename="../src/GuiSearchUser.cpp" line="82"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="81"/>
+        <location filename="../src/GuiSearchUser.cpp" line="83"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation type="unfinished"></translation>

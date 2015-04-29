@@ -32,7 +32,7 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiSearchUser" );
-  setWindowTitle( tr( "Search Users") );
+  setWindowTitle( tr( "Configure network" ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -45,6 +45,8 @@ void GuiSearchUser::loadSettings()
     mp_leBaseAddress->setText( tr( "Unknown address" ) );
   else
     mp_leBaseAddress->setText( base_host_addresses.toString() );
+
+  mp_leUdpPort->setText( QString::number( Settings::instance().broadcastPort() ) );
 
   QStringList sl_addresses = Settings::instance().broadcastAddressesInFileHosts();
   if( sl_addresses.size() > 0 )

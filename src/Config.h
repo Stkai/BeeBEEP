@@ -45,6 +45,9 @@ typedef quint64 FileSizeType;
 #define DATASTREAM_VERSION_2 QDataStream::Qt_4_8
 #define LAST_DATASTREAM_VERSION DATASTREAM_VERSION_2
 
+// Broadcast
+const int DEFAULT_BROADCAST_PORT = 36475;
+
 // Connection I/O
 #define DATA_BLOCK_SIZE_16 quint16
 // set the limit to 65535 - sizeof( quint16 ) ... or a value near it

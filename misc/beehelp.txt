@@ -13,6 +13,7 @@
 [BeeBEEP]
 UseConfigurationFileIni= the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
 BroadcastOnlyToHostsIni= if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
+BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect
@@ -92,7 +93,6 @@ ShowTipsOfTheDay=true
 AutomaticFileName=true
 
 [Misc]
-BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0)
 ListenerPort= is the TCP port of IO communication between beebeeps (default is 6475)
 PingInterval=31000

@@ -47,7 +47,7 @@ bool Broadcaster::startBroadcasting()
   updateAddresses();
   qDebug() << "Broadcaster generates broadcast message data";
   m_broadcastData = Protocol::instance().broadcastMessage();
-  qDebug() << "Broadcaster starts broadcasting with listener port" << Settings::instance().localUser().hostPort();
+  qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().hostPort() << "and udp port" << Settings::instance().broadcastPort();
   QTimer::singleShot( 1000, this, SLOT( sendBroadcastDatagram() ) ); // first broadcast now!
 
   if( Settings::instance().broadcastInterval() > 0 )

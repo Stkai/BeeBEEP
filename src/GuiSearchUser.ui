@@ -34,7 +34,30 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="1" column="1">
+       <widget class="QLabel" name="mp_lUdpPort">
+        <property name="text">
+         <string>UDP Port (in beebeep.rc)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="mp_leUdpPort">
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="maxLength">
+         <number>32772</number>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
        <widget class="QLabel" name="mp_lHostIni">
         <property name="text">
          <string>Addresses in beehosts.ini (read only)</string>
@@ -44,7 +67,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="3" column="0" colspan="3">
        <widget class="QPlainTextEdit" name="mp_teAddressesInHosts">
         <property name="maximumSize">
          <size>
@@ -57,14 +80,7 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
-       <widget class="QCheckBox" name="mp_cbParseAddresses">
-        <property name="text">
-         <string>Split subnet to IPV4 addresses</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
+      <item row="4" column="0" colspan="3">
        <widget class="QLabel" name="mp_lBroadcast">
         <property name="text">
          <string>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
@@ -77,13 +93,20 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
+      <item row="5" column="0" colspan="3">
        <widget class="QPlainTextEdit" name="mp_teAddressesInSettings">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
           <height>75</height>
          </size>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="2">
+       <widget class="QCheckBox" name="mp_cbParseAddresses">
+        <property name="text">
+         <string>Split subnet to IPV4 addresses</string>
         </property>
        </widget>
       </item>
@@ -121,6 +144,7 @@
  </widget>
  <tabstops>
   <tabstop>mp_leBaseAddress</tabstop>
+  <tabstop>mp_leUdpPort</tabstop>
   <tabstop>mp_teAddressesInHosts</tabstop>
   <tabstop>mp_teAddressesInSettings</tabstop>
   <tabstop>mp_cbParseAddresses</tabstop>

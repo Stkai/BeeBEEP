@@ -126,7 +126,11 @@ void Core::closeConnection( Connection *c )
     qDebug() << number_of_connection_pointers << "pointers of a single connection found in connection list";
   else
     qDebug() << "Connection pointer removed from connection list";
+#else
+   if( number_of_connection_pointers > 1 )
+     qWarning() << number_of_connection_pointers << "similar connection found in list and removed";
 #endif
+
 
   if( c->userId() != ID_INVALID )
   {

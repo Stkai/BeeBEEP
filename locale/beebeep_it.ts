@@ -2702,7 +2702,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Search Users</source>
-        <translation>Cerca Utenti</translation>
+        <translation type="obsolete">Cerca Utenti</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -2737,6 +2737,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>File is empty</source>
         <translation>Il file è vuoto</translation>
+    </message>
+    <message>
+        <source>UDP Port (in beebeep.rc)</source>
+        <translation>Porta UDP (in beebeep.rc)</translation>
+    </message>
+    <message>
+        <source>Configure network</source>
+        <translation>Configura rete</translation>
     </message>
 </context>
 <context>

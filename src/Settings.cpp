@@ -35,6 +35,7 @@ Settings::Settings()
   m_useSettingsFileIni = true;
   m_trustNickname = true;
   m_trustSystemAccount = false;
+  m_broadcastPort = DEFAULT_BROADCAST_PORT;
   m_confirmOnDownloadFile = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
@@ -453,6 +454,7 @@ void Settings::loadPreConf()
     sets->beginGroup( "BeeBEEP" );
     sets->setValue( "UseConfigurationFileIni", true );
     sets->setValue( "BroadcastOnlyToHostsIni", false );
+    sets->setValue( "BroadcastPort", DEFAULT_BROADCAST_PORT );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", true );
@@ -466,6 +468,7 @@ void Settings::loadPreConf()
     sets->beginGroup( "BeeBEEP" );
     m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", true ).toBool();
     m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
+    m_broadcastPort = sets->value( "BroadcastPort", DEFAULT_BROADCAST_PORT ).toInt();
     sets->endGroup();
     sets->beginGroup( "Groups" );
     m_trustNickname = sets->value( "TrustNickname", true ).toBool();
@@ -591,7 +594,6 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
-  m_broadcastPort = sets->value( "BroadcastPort", 36475 ).toInt();
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
   m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", 6475 ).toInt() );
@@ -739,7 +741,6 @@ void Settings::save()
   sets->setValue( "AutomaticFileName", m_automaticFileName );
   sets->endGroup();
   sets->beginGroup( "Misc" );
-  sets->setValue( "BroadcastPort", m_broadcastPort );
   sets->setValue( "BroadcastInterval", m_broadcastInterval );
   sets->setValue( "BroadcastLoopbackInterval", m_broadcastLoopbackInterval );
   sets->setValue( "ListenerPort", m_localUser.hostPort() );

@@ -288,7 +288,7 @@
         <translation>С днем рождения %1!</translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="234"/>
+        <location filename="../src/CoreConnection.cpp" line="238"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation>%1 (%2) подключен к сети %3.</translation>
     </message>
@@ -2377,26 +2377,31 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="40"/>
-        <source>Addresses in beehosts.ini (read only)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiSearchUser.ui" line="70"/>
-        <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
+        <source>UDP Port (in beebeep.rc)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="63"/>
-        <source>Split subnet to IPV4 addresses</source>
+        <source>Addresses in beehosts.ini (read only)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="86"/>
+        <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="109"/>
+        <source>Split subnet to IPV4 addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="132"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="116"/>
+        <location filename="../src/GuiSearchUser.ui" line="139"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -2413,9 +2418,13 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Сохранить адреса</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="35"/>
         <source>Search Users</source>
-        <translation>Искать пользователей</translation>
+        <translation type="obsolete">Искать пользователей</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.cpp" line="35"/>
+        <source>Configure network</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="45"/>
@@ -2423,17 +2432,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="53"/>
+        <location filename="../src/GuiSearchUser.cpp" line="55"/>
         <source>File is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="80"/>
+        <location filename="../src/GuiSearchUser.cpp" line="82"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="81"/>
+        <location filename="../src/GuiSearchUser.cpp" line="83"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Вы вставили неправильный адресс узла:
