@@ -106,6 +106,8 @@ SystemTrayMessageTimeout=2000
 BroadcastAddresses= (do not use)
 LocalHostAddressForced= if BeeBEEP doesn't recognize your IP address automatically, you can set here your IP (useful if you have a lot of network configured)
 LocalSubnetForced= if BeeBEEP doesn't recognize your subnet address automatically, you can set here your subnet (useful if you have a lot of network configured)
+ParseBroadcastAddresses= if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254
+AddExternalSubnetAutomatically= if true BeeBEEP automatically add external user's subnet when they reach you
 
 [FileShare]
 Active=true

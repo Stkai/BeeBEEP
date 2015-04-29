@@ -359,6 +359,10 @@
         <source>%1 You cannot reach %2 Network.</source>
         <translation>%1 Non puoi raggiungere la rete %2.</translation>
     </message>
+    <message>
+        <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
+        <translation>proviene da una rete esterna (la sua sottorete è stata aggiunta alla tua lista).</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1067,7 +1071,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>
-        <translation>&amp;Disconnetti</translation>
+        <translation type="obsolete">&amp;Disconnetti</translation>
     </message>
     <message>
         <source>Disconnect from %1 network</source>
@@ -1075,7 +1079,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>&amp;Connect</source>
-        <translation>&amp;Connetti</translation>
+        <translation type="obsolete">&amp;Connetti</translation>
     </message>
     <message>
         <source>Connect to %1 network</source>
@@ -1115,7 +1119,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Esci</translation>
+        <translation type="obsolete">&amp;Esci</translation>
     </message>
     <message>
         <source>Close the chat and quit %1</source>
@@ -1187,7 +1191,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>&amp;About %1...</source>
-        <translation>&amp;Informazioni su %1...</translation>
+        <translation type="obsolete">&amp;Informazioni su %1...</translation>
     </message>
     <message>
         <source>Show the informations about %1</source>
@@ -1195,7 +1199,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>&amp;Main</source>
-        <translation>&amp;Generale</translation>
+        <translation type="obsolete">&amp;Generale</translation>
     </message>
     <message>
         <source>Select download folder...</source>
@@ -1211,7 +1215,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation>&amp;Opzioni</translation>
+        <translation type="obsolete">&amp;Opzioni</translation>
     </message>
     <message>
         <source>Show only the nicknames</source>
@@ -1247,7 +1251,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the user&apos;s colors</source>
-        <translation>Mostra i colori degli utenti</translation>
+        <translation type="obsolete">Mostra i colori degli utenti</translation>
     </message>
     <message>
         <source>If enabled the user&apos;s nickname in chat and in list is colored</source>
@@ -1255,7 +1259,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Beep on new message arrived</source>
-        <translation>Abilita suoni di notifica</translation>
+        <translation type="obsolete">Abilita suoni di notifica</translation>
     </message>
     <message>
         <source>If enabled when a new message is arrived a sound is emitted</source>
@@ -1295,7 +1299,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>&amp;?</source>
-        <translation>&amp;?</translation>
+        <translation type="obsolete">&amp;?</translation>
     </message>
     <message>
         <source>Tips of the day</source>
@@ -1568,11 +1572,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Add or search &amp;user...</source>
-        <translation>Aggiungi o cerca &amp;utenti...</translation>
+        <translation type="obsolete">Aggiungi o cerca &amp;utenti...</translation>
     </message>
     <message>
         <source>Add or search an user in the %1 network</source>
-        <translation>Aggiungi o cerca utenti nella rete di %1</translation>
+        <translation type="obsolete">Aggiungi o cerca utenti nella rete di %1</translation>
     </message>
     <message>
         <source>Do you want to disconnect from %1 network?</source>
@@ -1608,7 +1612,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Visualizza</translation>
+        <translation type="obsolete">&amp;Visualizza</translation>
     </message>
     <message>
         <source>Show the chat</source>
@@ -1660,7 +1664,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Stay on top</source>
-        <translation>Mostra sempre in primo piano</translation>
+        <translation type="obsolete">Mostra sempre in primo piano</translation>
     </message>
     <message>
         <source>If enabled %1 stays on top of the other windows</source>
@@ -1736,7 +1740,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Raise on new message arrived</source>
-        <translation>Porta in primo piano all&apos;arrivo di un nuovo messaggio</translation>
+        <translation type="obsolete">Porta in primo piano all&apos;arrivo di un nuovo messaggio</translation>
     </message>
     <message>
         <source>If enabled when a new message is arrived %1 is shown on top of all other windows</source>
@@ -1800,7 +1804,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>&amp;Chat</source>
-        <translation>&amp;Chat</translation>
+        <translation type="obsolete">&amp;Chat</translation>
     </message>
     <message>
         <source>History</source>
@@ -1844,7 +1848,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Set away status when idle</source>
-        <translation>Cambia lo stato in assente automaticamente</translation>
+        <translation type="obsolete">Cambia lo stato in assente automaticamente</translation>
     </message>
     <message>
         <source>If enabled %1 set your status to away after an idle of %2 minutes</source>
@@ -2160,11 +2164,87 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show a picture of the users in list</source>
-        <translation>Mostra l&apos;immagine degli utenti in lista</translation>
+        <translation type="obsolete">Mostra l&apos;immagine degli utenti in lista</translation>
     </message>
     <message>
         <source>If enabled you can see a picture of the users in the list (if they have)</source>
         <translation>Se abilitata puoi vedere un&apos;immagine degli utenti in lista (se l&apos;hanno pubblicata)</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Disconnetti</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation>Connetti</translation>
+    </message>
+    <message>
+        <source>Configure network...</source>
+        <translation>Configura la rete...</translation>
+    </message>
+    <message>
+        <source>Configure %1 network to search a user who is not in your local subnet</source>
+        <translation>Configura la impostazioni di %1 per cercare gli utenti che non sono nella tua sottorete</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Esci</translation>
+    </message>
+    <message>
+        <source>About %1...</source>
+        <translation>Informazioni su %1...</translation>
+    </message>
+    <message>
+        <source>Main</source>
+        <translation>Generale</translation>
+    </message>
+    <message>
+        <source>Broadcast to network</source>
+        <translation>Cerca nella rete</translation>
+    </message>
+    <message>
+        <source>Broadcast a message in your network to find available users</source>
+        <translation>Manda un messaggio nella tua rete per individuare altri utenti connessi</translation>
+    </message>
+    <message>
+        <source>Show colored nickname</source>
+        <translation>Mostra i nickname colorati</translation>
+    </message>
+    <message>
+        <source>Show the user&apos;s picture</source>
+        <translation>Mostra la foto dell&apos;utente</translation>
+    </message>
+    <message>
+        <source>Set Away status automatically</source>
+        <translation>Cambia lo stato in Assente automaticamente</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>Sistema</translation>
+    </message>
+    <message>
+        <source>Enable BEEP alert on new message</source>
+        <translation>Abilita il BEEP sonoro all&apos;arrivo di un messaggio</translation>
+    </message>
+    <message>
+        <source>Raise on top on new message</source>
+        <translation>Porta in primo piano all&apos;arrivo di un messaggio</translation>
+    </message>
+    <message>
+        <source>Always stay on top</source>
+        <translation>Mostra sempre in primo piano</translation>
+    </message>
+    <message>
+        <source>Chat</source>
+        <translation>Chat</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Vista</translation>
+    </message>
+    <message>
+        <source>?</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2597,16 +2677,12 @@ il file %2 (%3)?</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Broadcast</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Please enter the IP addresses (separed by comma) where the lan users are available.</source>
-        <translation>Inserire gli indirizzi IP, o una sottorete, (separati da una virgola) dove vuoi cercare utenti disponibili.</translation>
+        <translation type="obsolete">Inserire gli indirizzi IP, o una sottorete, (separati da una virgola) dove vuoi cercare utenti disponibili.</translation>
     </message>
     <message>
         <source>Save addresses</source>
-        <translation>Memorizza gli indirizzi IP</translation>
+        <translation type="obsolete">Memorizza gli indirizzi IP</translation>
     </message>
     <message>
         <source>Add or search User</source>
@@ -2637,6 +2713,30 @@ il file %2 (%3)?</translation>
 %1 is removed from the list.</source>
         <translation>Hai inserito un indirizzo IP non valido:
 %1 verrà rimosso dalla lista.</translation>
+    </message>
+    <message>
+        <source>Local subnet address (read only)</source>
+        <translation>Sottorete locale (sola lettura)</translation>
+    </message>
+    <message>
+        <source>Addresses in beehosts.ini (read only)</source>
+        <translation>Indirizzi IP in beehosts.ini (sola lettura)</translation>
+    </message>
+    <message>
+        <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
+        <translation>Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+    </message>
+    <message>
+        <source>Split subnet to IPV4 addresses</source>
+        <translation>Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
+    </message>
+    <message>
+        <source>Unknown address</source>
+        <translation>Indirizzo IP sconosciuto</translation>
+    </message>
+    <message>
+        <source>File is empty</source>
+        <translation>Il file è vuoto</translation>
     </message>
 </context>
 <context>
@@ -3027,7 +3127,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>old unknown</source>
-        <translation>vecchia</translation>
+        <translation type="obsolete">vecchia</translation>
     </message>
     <message>
         <source>old %1</source>
@@ -3036,6 +3136,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>new %1</source>
         <translation>nuova %1</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>sconosciuto</translation>
     </message>
 </context>
 <context>

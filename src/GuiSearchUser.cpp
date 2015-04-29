@@ -36,7 +36,6 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-  connect( mp_teAddressesInSettings, SIGNAL( textChanged() ), this, SLOT( addressesChanged() ) );
 }
 
 void GuiSearchUser::loadSettings()
@@ -59,7 +58,6 @@ void GuiSearchUser::loadSettings()
   else
     mp_teAddressesInSettings->setPlainText( "" );
 
-  mp_cbSaveAddresses->setChecked( Settings::instance().saveBroadcastAddressesInSettings() );
   mp_cbParseAddresses->setChecked( Settings::instance().parseBroadcastAddresses() );
 
   mp_teAddressesInSettings->setFocus();
@@ -87,28 +85,14 @@ void GuiSearchUser::checkAndSearch()
         return;
       }
     }
-  }
 
-  Settings::instance().setBroadcastAddressesInSettings( address_list );
-  Settings::instance().setSaveBroadcastAddressesInSettings( mp_cbSaveAddresses->isChecked() );
+    Settings::instance().setBroadcastAddressesInSettings( address_list );
+  }
+  else
+    Settings::instance().setBroadcastAddressesInSettings( QStringList() );
+
   Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
 
   accept();
 }
 
-void GuiSearchUser::addressesChanged()
-{
-  static bool first_changed = false;
-  if( mp_teAddressesInSettings->toPlainText().simplified().isEmpty() )
-  {
-    first_changed = false;
-    mp_cbSaveAddresses->setChecked( false );
-    return;
-  }
-
-  if( first_changed )
-    return;
-
-  first_changed = true;
-  mp_cbSaveAddresses->setChecked( true );
-}

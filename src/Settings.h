@@ -174,14 +174,15 @@ public:
 
   inline const QStringList& broadcastAddressesInFileHosts() const;
   inline const QStringList& broadcastAddressesInSettings() const;
-  void setBroadcastAddressesInSettings( const QStringList& );
-  inline bool saveBroadcastAddressesInSettings() const;
-  inline void setSaveBroadcastAddressesInSettings( bool );
+  int setBroadcastAddressesInSettings( const QStringList& );
   inline const QHostAddress& localHostAddressForced() const;
   inline const QString& localSubnetForced() const;
   inline bool broadcastOnlyToHostsIni() const;
   inline bool parseBroadcastAddresses() const;
   inline void setParseBroadcastAddresses( bool );
+  inline bool addExternalSubnetAutomatically() const;
+  inline void setAddExternalSubnetAutomatically( bool );
+  bool addSubnetToBroadcastAddress( const QHostAddress& );
 
   inline bool minimizeInTray() const;
   inline void setMinimizeInTray( bool );
@@ -252,6 +253,8 @@ protected:
   Settings();
 
   void loadBroadcastAddressesFromFileHosts();
+  QHostAddress subnetFromHostAddress( const QHostAddress& ) const;
+  bool addBroadcastAddressInSettings( const QString& );
 
 private:
   // PreConf
@@ -320,11 +323,11 @@ private:
 
   QStringList m_broadcastAddressesInFileHosts;
   QStringList m_broadcastAddressesInSettings;
-  bool m_saveBroadcastAddressesInSettings;
   QHostAddress m_localHostAddressForced;
   QString m_localSubnetForced;
   bool m_broadcastOnlyToHostsIni;
   bool m_parseBroadcastAddresses;
+  bool m_addExternalSubnetAutomatically;
 
   bool m_firstTime;
   QDate m_settingsCreationDate;
@@ -442,13 +445,13 @@ inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline const QStringList& Settings::broadcastAddressesInFileHosts() const { return m_broadcastAddressesInFileHosts; }
 inline const QStringList& Settings::broadcastAddressesInSettings() const { return m_broadcastAddressesInSettings; }
-inline bool Settings::saveBroadcastAddressesInSettings() const { return m_saveBroadcastAddressesInSettings; }
-inline void Settings::setSaveBroadcastAddressesInSettings( bool new_value ) { m_saveBroadcastAddressesInSettings = new_value; }
 inline bool Settings::parseBroadcastAddresses() const { return m_parseBroadcastAddresses; }
 inline void Settings::setParseBroadcastAddresses( bool new_value ) { m_parseBroadcastAddresses = new_value; }
 inline const QHostAddress& Settings::localHostAddressForced() const { return m_localHostAddressForced; }
 inline const QString& Settings::localSubnetForced() const { return m_localSubnetForced; }
 inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }
+inline bool Settings::addExternalSubnetAutomatically() const { return m_addExternalSubnetAutomatically; }
+inline void Settings::setAddExternalSubnetAutomatically( bool new_value ) { m_addExternalSubnetAutomatically = new_value; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }
 inline bool Settings::firstTime() const { return m_firstTime; }
 inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }

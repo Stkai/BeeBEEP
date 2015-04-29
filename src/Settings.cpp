@@ -175,17 +175,29 @@ QString Settings::currentHash() const
   return QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
-void Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
+bool Settings::addBroadcastAddressInSettings( const QString& host_address )
 {
+  if( m_broadcastAddressesInSettings.contains( host_address ) )
+    return false;
+
+  m_broadcastAddressesInSettings.append( host_address );
+  return true;
+}
+
+int Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
+{
+  int num_addresses = 0;
   m_broadcastAddressesInSettings.clear();
   if( address_list.isEmpty() )
-    return;
+    return num_addresses;
 
   foreach( QString sa, address_list )
   {
-    if( !m_broadcastAddressesInSettings.contains( sa ) )
-      m_broadcastAddressesInSettings.append( sa );
+    if( addBroadcastAddressInSettings( sa ) )
+      num_addresses++;
   }
+
+  return num_addresses;
 }
 
 QHostAddress Settings::searchLocalHostAddress() const
@@ -291,28 +303,38 @@ QHostAddress Settings::searchLocalHostAddress() const
   return QHostAddress( "127.0.0.1" );
 }
 
+QHostAddress Settings::subnetFromHostAddress( const QHostAddress& host_address ) const
+{
+  if( host_address.isNull() )
+    return QHostAddress();
+
+  QString s_host_address = host_address.toString();
+
+  if( s_host_address == QLatin1String( "127.0.0.1" ) )
+    return QHostAddress();
+
+  if( s_host_address.contains( QLatin1String( ":" ) ) )
+    return QHostAddress();
+
+  QStringList sl_host_address = s_host_address.split( "." );
+  if( sl_host_address.size() != 4 )
+    return QHostAddress();
+
+  if( s_host_address.contains( QLatin1String( "255" ) ) )
+    return host_address;
+
+  sl_host_address.removeLast();
+  sl_host_address.append( QLatin1String( "255" ) );
+  return QHostAddress( sl_host_address.join( "." ) );
+}
+
 QHostAddress Settings::baseBroadcastAddress() const
 {
-  QHostAddress local_user_address = m_localUser.hostAddress();
-  if( local_user_address.isNull() )
-    return QHostAddress();
+  QHostAddress local_user_subnet = subnetFromHostAddress( m_localUser.hostAddress() );
+  if( local_user_subnet.isNull() )
+    qWarning() << "Invalid IP address for local user found:" << m_localUser.hostAddress().toString();
 
-  if( local_user_address.toString() == QString( "127.0.0.1" ) )
-    return QHostAddress();
-
-  if( local_user_address.toString().contains( ":" ) )
-    return QHostAddress();
-
-  QStringList sl_host = local_user_address.toString().split( "." );
-  if( sl_host.size() != 4 )
-  {
-    qWarning() << "Invalid IP address for local user found:" << local_user_address.toString();
-    return QHostAddress();
-  }
-
-  sl_host.removeLast();
-  sl_host.append( "255" );
-  return QHostAddress( sl_host.join( "." ) );
+  return local_user_subnet;
 }
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
@@ -558,7 +580,7 @@ void Settings::load()
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_chatSaveDirectory = sets->value( "ChatSaveDirectory", defaultFolder() ).toString();
-  m_chatAutoSave = sets->value( "ChatAutoSave", false ).toBool();
+  m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   sets->endGroup();
 
@@ -586,13 +608,13 @@ void Settings::load()
 
   sets->beginGroup( "Network");
   m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
-  m_saveBroadcastAddressesInSettings = !m_broadcastAddressesInSettings.isEmpty();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
   m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", true ).toBool();
+  m_addExternalSubnetAutomatically = sets->value( "AddExternalSubnetAutomatically", true ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -729,16 +751,14 @@ void Settings::save()
   sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
-  if( m_saveBroadcastAddressesInSettings )
-    sets->setValue( "BroadcastAddresses", m_broadcastAddressesInSettings );
-  else
-    sets->setValue( "BroadcastAddresses", QStringList() );
+  sets->setValue( "BroadcastAddresses", m_broadcastAddressesInSettings );
   if( !m_localHostAddressForced.isNull() )
     sets->setValue( "LocalHostAddressForced", m_localHostAddressForced.toString() );
   else
     sets->setValue( "LocalHostAddressForced", QString( "" ) );
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
   sets->setValue( "ParseBroadcastAddresses", m_parseBroadcastAddresses );
+  sets->setValue( "AddExternalSubnetAutomatically", m_addExternalSubnetAutomatically );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
@@ -958,4 +978,13 @@ QString Settings::defaultPluginFolderPath() const
 #else
   return defaultFolder();
 #endif
+}
+
+bool Settings::addSubnetToBroadcastAddress( const QHostAddress& ha )
+{
+  QHostAddress ext_subnet = subnetFromHostAddress( ha );
+  if( ext_subnet.isNull() )
+    return false;
+  else
+    return addBroadcastAddressInSettings( ext_subnet.toString() );
 }

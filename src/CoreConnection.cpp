@@ -250,4 +250,6 @@ void Core::checkUserAuthentication( const Message& m )
 
   if( user_reconnect )
     checkGroupChatAfterUserReconnect( u );
+
+  checkUserHostAddress( u );
 }

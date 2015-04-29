@@ -181,8 +181,9 @@ private:
 
   QMenu *mp_menuMain;
   QMenu *mp_menuInfo;
-  QMenu *mp_menuSettings;
+  QMenu *mp_menuUsers;
   QMenu *mp_menuChat;
+  QMenu *mp_menuSystem;
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;
   QMenu *mp_menuView;
@@ -195,7 +196,8 @@ private:
   QToolBar *mp_barScreenShot;
 
   QAction* mp_actStartStopCore;
-  QAction* mp_actSearch;
+  QAction* mp_actConfigureNetwork;
+  QAction* mp_actBroadcast;
   QAction* mp_actQuit;
   QAction* mp_actVCard;
   QAction* mp_actToolBar;

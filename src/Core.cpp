@@ -179,3 +179,20 @@ bool Core::isConnected() const
   return mp_listener->isListening();
 }
 
+void Core::checkUserHostAddress( const User& u )
+{
+  if( !Settings::instance().addExternalSubnetAutomatically() )
+    return;
+
+  if( Settings::instance().addSubnetToBroadcastAddress( u.hostAddress() ) )
+  {
+    QString sHtmlMsg = QString( "%1 %2 %3" )
+                           .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
+                           .arg( u.path() )
+                           .arg( tr( "is connected from external network (the new subnet is added to your broadcast address list)." ) );
+
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+    if( mp_broadcaster->updateAddresses() > 0 )
+      QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
+  }
+}

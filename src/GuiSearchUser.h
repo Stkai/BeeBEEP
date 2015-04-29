@@ -39,7 +39,6 @@ public:
 
 protected slots:
   void checkAndSearch();
-  void addressesChanged();
 
 };
 

@@ -44,7 +44,6 @@ public:
   void stop();
 
   bool updateBroadcastAddresses();
-  void sendBroadcastMessage();
 
   /* CoreUser */
   inline int connectedUsers() const;
@@ -79,6 +78,8 @@ public:
   void removePathFromShare( const QString& );
 
 public slots:
+  void sendBroadcastMessage();
+
   /* CoreChat */
   void sendWritingMessage( VNumber );
   void buildSavedChatList();
@@ -128,6 +129,7 @@ protected slots:
 
 protected:
   void createLocalShareMessage();
+  void checkUserHostAddress( const User& );
 
   /* CoreConnection */
   Connection* connection( VNumber );

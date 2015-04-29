@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>537</width>
-    <height>390</height>
+    <width>440</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,14 +16,14 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0" colspan="3">
     <widget class="QGroupBox" name="mp_boxBroadcast">
-     <property name="title">
-      <string>Broadcast addresses</string>
-     </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="mp_lBase">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Local subnet address&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Local subnet address (read only)</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
@@ -37,21 +37,40 @@
       <item row="2" column="0">
        <widget class="QLabel" name="mp_lHostIni">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Addresses in beehosts.ini (read only)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Addresses in beehosts.ini (read only)</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
        <widget class="QPlainTextEdit" name="mp_teAddressesInHosts">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>75</height>
+         </size>
+        </property>
         <property name="readOnly">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="mp_cbParseAddresses">
+        <property name="text">
+         <string>Split subnet to IPV4 addresses</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="mp_lBroadcast">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -59,19 +78,12 @@
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QPlainTextEdit" name="mp_teAddressesInSettings"/>
-      </item>
-      <item row="6" column="0">
-       <widget class="QCheckBox" name="mp_cbSaveAddresses">
-        <property name="text">
-         <string>Save addresses</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QCheckBox" name="mp_cbParseAddresses">
-        <property name="text">
-         <string>Split subnet to IPV4 addresses</string>
+       <widget class="QPlainTextEdit" name="mp_teAddressesInSettings">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>75</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -111,7 +123,6 @@
   <tabstop>mp_leBaseAddress</tabstop>
   <tabstop>mp_teAddressesInHosts</tabstop>
   <tabstop>mp_teAddressesInSettings</tabstop>
-  <tabstop>mp_cbSaveAddresses</tabstop>
   <tabstop>mp_cbParseAddresses</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
