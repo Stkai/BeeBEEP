@@ -277,6 +277,15 @@ QList<QHostAddress> Broadcaster::parseHostAddress( const QHostAddress& host_addr
     return ha_list;
   }
 
+  if( !Settings::instance().parseBroadcastAddresses() )
+  {
+    ha_list << host_address;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster has found IPV4 subnet skipped:" << ha_string;
+#endif
+    return ha_list;
+  }
+
   if( ha_string.count( QLatin1String( "255" ) ) > 1 )
   {
     ha_list << host_address;

@@ -31,6 +31,7 @@
 #endif
 
 #ifdef Q_OS_LINUX
+#include <signal.h>
 // for check user inactivity time
 #include <xcb/xcb.h>
 #include <xcb/screensaver.h>
@@ -64,9 +65,6 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   signal( SIGINT, &quitAfterSignal );
   signal( SIGTERM, &quitAfterSignal );
-#ifndef Q_OS_MAC
-  signal( SIGBREAK, &quitAfterSignal ) ;
-#endif
 }
 
 void BeeApplication::quitAfterSignal( int sig )

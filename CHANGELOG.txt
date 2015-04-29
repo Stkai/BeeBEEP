@@ -20,6 +20,7 @@ BeeBEEP 0.9.7
 - Groups
 - Regular-Bold Text Marker plugin
 - (Drag and) drop files in chat or in local shares
+- Linux version
 
 BeeBEEP 0.9.6
 - Auto set Away status when idle option
@@ -49,7 +50,6 @@ BeeBEEP 0.9.2
 - Always on top window option
 - Select file audio option
 - Game plugin interface
-- MacOSX version
 
 BeeBEEP 0.8.2
 - File Sharing on local area network

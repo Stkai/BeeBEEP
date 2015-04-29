@@ -33,26 +33,41 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiSearchUser" );
   setWindowTitle( tr( "Search Users") );
-  mp_textBroadcast->setReadOnly( false );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_teAddressesInSettings, SIGNAL( textChanged() ), this, SLOT( addressesChanged() ) );
 }
 
 void GuiSearchUser::loadSettings()
 {
-  QStringList sl_addresses = Settings::instance().broadcastAddressesInSettings();
-  if( sl_addresses.size() > 0 )
-    mp_textBroadcast->setPlainText( sl_addresses.join( ", " ) );
+  QHostAddress base_host_addresses = Settings::instance().baseBroadcastAddress();
+  if( base_host_addresses.isNull() )
+    mp_leBaseAddress->setText( tr( "Unknown address" ) );
   else
-    mp_textBroadcast->setPlainText( "" );
+    mp_leBaseAddress->setText( base_host_addresses.toString() );
+
+  QStringList sl_addresses = Settings::instance().broadcastAddressesInFileHosts();
+  if( sl_addresses.size() > 0 )
+    mp_teAddressesInHosts->setPlainText( sl_addresses.join( ", " ) );
+  else
+    mp_teAddressesInHosts->setPlainText( tr( "File is empty" ) );
+
+  sl_addresses = Settings::instance().broadcastAddressesInSettings();
+  if( sl_addresses.size() > 0 )
+    mp_teAddressesInSettings->setPlainText( sl_addresses.join( ", " ) );
+  else
+    mp_teAddressesInSettings->setPlainText( "" );
 
   mp_cbSaveAddresses->setChecked( Settings::instance().saveBroadcastAddressesInSettings() );
+  mp_cbParseAddresses->setChecked( Settings::instance().parseBroadcastAddresses() );
+
+  mp_teAddressesInSettings->setFocus();
 }
 
 void GuiSearchUser::checkAndSearch()
 {
-  QString address_string = mp_textBroadcast->toPlainText().simplified();
+  QString address_string = mp_teAddressesInSettings->toPlainText().simplified();
   QStringList address_list;
   if( address_string.size() > 0 )
     address_list = address_string.split( ",", QString::SkipEmptyParts );
@@ -67,8 +82,8 @@ void GuiSearchUser::checkAndSearch()
         QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
                               tr( "You have inserted an invalid host address:\n%1 is removed from the list." ).arg( s.simplified() ), QMessageBox::Ok );
         address_list.removeOne( s );
-        mp_textBroadcast->setText( address_list.join( ", " ) );
-        mp_textBroadcast->setFocus();
+        mp_teAddressesInSettings->setPlainText( address_list.join( ", " ) );
+        mp_teAddressesInSettings->setFocus();
         return;
       }
     }
@@ -76,6 +91,24 @@ void GuiSearchUser::checkAndSearch()
 
   Settings::instance().setBroadcastAddressesInSettings( address_list );
   Settings::instance().setSaveBroadcastAddressesInSettings( mp_cbSaveAddresses->isChecked() );
+  Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
 
   accept();
+}
+
+void GuiSearchUser::addressesChanged()
+{
+  static bool first_changed = false;
+  if( mp_teAddressesInSettings->toPlainText().simplified().isEmpty() )
+  {
+    first_changed = false;
+    mp_cbSaveAddresses->setChecked( false );
+    return;
+  }
+
+  if( first_changed )
+    return;
+
+  first_changed = true;
+  mp_cbSaveAddresses->setChecked( true );
 }

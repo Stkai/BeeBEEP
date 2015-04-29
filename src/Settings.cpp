@@ -175,6 +175,19 @@ QString Settings::currentHash() const
   return QString::fromUtf8( hash( m_localUser.name() ) );
 }
 
+void Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
+{
+  m_broadcastAddressesInSettings.clear();
+  if( address_list.isEmpty() )
+    return;
+
+  foreach( QString sa, address_list )
+  {
+    if( !m_broadcastAddressesInSettings.contains( sa ) )
+      m_broadcastAddressesInSettings.append( sa );
+  }
+}
+
 QHostAddress Settings::searchLocalHostAddress() const
 {
   QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
@@ -579,6 +592,7 @@ void Settings::load()
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
+  m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", true ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -724,6 +738,7 @@ void Settings::save()
   else
     sets->setValue( "LocalHostAddressForced", QString( "" ) );
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
+  sets->setValue( "ParseBroadcastAddresses", m_parseBroadcastAddresses );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
