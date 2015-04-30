@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>%1 Looking for the available users in %2...</source>
-        <translation>%1 Ricerca utenti disponibili in %2 in corso...</translation>
+        <translation type="obsolete">%1 Ricerca utenti disponibili in %2 in corso...</translation>
     </message>
     <message>
         <source>%1 Broadcasting to the %2 Network...</source>
@@ -363,6 +363,10 @@
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>proviene da una rete esterna (la sua sottorete è stata aggiunta alla tua lista).</translation>
     </message>
+    <message>
+        <source>%1 %2 will search users in these IP addresses: %3</source>
+        <translation>%1 %2 cercherà gli utenti connessi a questi indirizzi IP: %3</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -468,7 +472,7 @@
     </message>
     <message>
         <source>Use default chat password</source>
-        <translation>Usa la password di rete automatica</translation>
+        <translation type="obsolete">Usa la password di rete automatica</translation>
     </message>
     <message>
         <source>Show this dialog at connection startup</source>
@@ -492,7 +496,7 @@
     </message>
     <message>
         <source>Please enter the chat password (spaces are removed) *</source>
-        <translation>Per favore inserisci la password di rete (gli spazi saranno rimossi) *</translation>
+        <translation type="obsolete">Per favore inserisci la password di rete (gli spazi saranno rimossi) *</translation>
     </message>
     <message>
         <source>* Password must be the same for all client you want to reach</source>
@@ -501,6 +505,14 @@
     <message>
         <source>* Password must be the same for all user you want to connect</source>
         <translation>* La password deve essere la stessa per tutti gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>Use standard session (encrypted but authentication is not required)</source>
+        <translation>Usa la sessione standard (criptata ma nessuna autenticazione richiesta)</translation>
+    </message>
+    <message>
+        <source>Use authentication password (spaces are removed) *</source>
+        <translation type="unfinished">Usa la password di autenticazione (gli spazi saranno rimossi) *</translation>
     </message>
 </context>
 <context>
@@ -1147,11 +1159,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Profile...</source>
-        <translation>Profilo...</translation>
+        <translation type="obsolete">Profilo...</translation>
     </message>
     <message>
         <source>Change your profile data</source>
-        <translation>Cambia i dati del tuo profilo</translation>
+        <translation type="obsolete">Cambia i dati del tuo profilo</translation>
     </message>
     <message>
         <source>Chat font style...</source>
@@ -1852,7 +1864,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled %1 set your status to away after an idle of %2 minutes</source>
-        <translation>Se abilitata %1 metterà automaticamente il tuo stato ad assente quando sarai assente da almeno %2 minuti</translation>
+        <translation type="obsolete">Se abilitata %1 metterà automaticamente il tuo stato ad assente quando sarai assente da almeno %2 minuti</translation>
     </message>
     <message>
         <source>Make a screenshot</source>
@@ -2216,7 +2228,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Set Away status automatically</source>
-        <translation>Cambia lo stato in Assente automaticamente</translation>
+        <translation type="obsolete">Cambia lo stato in Assente automaticamente</translation>
     </message>
     <message>
         <source>System</source>
@@ -2245,6 +2257,22 @@ il file %2 (%3)?</translation>
     <message>
         <source>?</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Set status to away automatically</source>
+        <translation>Cambia il tuo stato in assente automaticamente</translation>
+    </message>
+    <message>
+        <source>If enabled %1 change your status to away after an idle of %2 minutes</source>
+        <translation>%1 cambierà il tuo stato in assente automaticamente quando non userai il computer per %2 minuti</translation>
+    </message>
+    <message>
+        <source>Edit your profile...</source>
+        <translation>Modifica il tuo profilo...</translation>
+    </message>
+    <message>
+        <source>Change your profile information like your picture or your email or phone number</source>
+        <translation>Completa le informazioni del tuo profilo con la tua email il tuo numero di telefono o la tua immagine</translation>
     </message>
 </context>
 <context>

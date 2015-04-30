@@ -136,8 +136,9 @@ bool Core::updateBroadcastAddresses()
 {
   if( mp_broadcaster->updateAddresses() > 0 )
   {
-    QString sHtmlMsg = tr( "%1 Looking for the available users in %2..." )
-                .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), Settings::instance().broadcastAddressesInSettings().join( ", " ) );
+    QString sHtmlMsg = tr( "%1 %2 will search users in these IP addresses: %3" )
+                .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), Settings::instance().programName(),
+                      Settings::instance().broadcastAddressesInSettings().join( ", " ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
     return true;
   }
@@ -192,7 +193,6 @@ void Core::checkUserHostAddress( const User& u )
                            .arg( tr( "is connected from external network (the new subnet is added to your broadcast address list)." ) );
 
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
-    if( mp_broadcaster->updateAddresses() > 0 )
-      QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
+    updateBroadcastAddresses();
   }
 }

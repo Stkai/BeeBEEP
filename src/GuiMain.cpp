@@ -417,8 +417,8 @@ void GuiMain::createActions()
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( forceExit() ) );
 
-  mp_actVCard = new QAction( QIcon( ":/images/profile-edit.png"), tr( "Profile..." ), this );
-  mp_actVCard->setStatusTip( tr( "Change your profile data" ) );
+  mp_actVCard = new QAction( QIcon( ":/images/profile-edit.png"), tr( "Edit your profile..." ), this );
+  mp_actVCard->setStatusTip( tr( "Change your profile information like your picture or your email or phone number" ) );
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
 
   mp_actToolBar = mp_barMain->toggleViewAction();
@@ -443,6 +443,7 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actStartStopCore );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
+  mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actConfigureNetwork );
   mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), mp_core, SLOT( sendBroadcastMessage() ) );
   mp_actBroadcast->setStatusTip( tr( "Broadcast a message in your network to find available users" ) );
@@ -485,8 +486,8 @@ void GuiMain::createMenus()
 
   mp_menuUsers->addSeparator();
 
-  act = mp_menuUsers->addAction( tr( "Set Away status automatically" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled %1 set your status to away after an idle of %2 minutes" ).arg( Settings::instance().programName() ).arg( Settings::instance().userAwayTimeout() ) );
+  act = mp_menuUsers->addAction( tr( "Set status to away automatically" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled %1 change your status to away after an idle of %2 minutes" ).arg( Settings::instance().programName() ).arg( Settings::instance().userAwayTimeout() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().autoUserAway() );
   act->setData( 20 );
