@@ -39,6 +39,9 @@ public:
   QString operatingSystem( bool use_long_name ) const;
   void createLocalUser();
   void createSessionId();
+  bool createDefaultFolder();
+  bool createDefaultRcFile();
+  bool createDefaultHostsFile();
 
   inline bool firstTime() const;
   inline void setFirstTime( bool );
@@ -47,8 +50,6 @@ public:
   inline bool trustSystemAccount() const;
 
   inline const QDate& settingsCreationDate() const;
-  bool createDefaultFolder();
-  void createDefaultFileHosts();
   inline const QString& defaultFolder() const;
   QString defaultHostsFilePath( bool current_dir ) const;
   QString defaultRcFilePath( bool current_dir ) const;
@@ -227,7 +228,7 @@ public:
   inline void setGroupList( const QStringList& );
   inline const QStringList& groupList() const;
 
-  void loadPreConf();
+  void loadRcFile();
   void clearNativeSettings();
   void load();
   void save();

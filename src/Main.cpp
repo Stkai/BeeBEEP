@@ -72,7 +72,7 @@ int main( int argc, char *argv[] )
   qDebug() << "Starting BeeBEEP" << Settings::instance().version( true ) << "for" << Settings::instance().operatingSystem( true );
   if( !Settings::instance().createDefaultFolder() )
     qDebug() << "Default folder cannot be created. Check" << Settings::instance().defaultFolder();
-  Settings::instance().loadPreConf();
+  Settings::instance().loadRcFile();
   Settings::instance().load();
   Settings::instance().createLocalUser();
 
@@ -151,8 +151,12 @@ int main( int argc, char *argv[] )
 
   /* Save session */
   mw.saveSession();
-  Settings::instance().loadPreConf();
+  Settings::instance().loadRcFile();
   Settings::instance().save();
+#ifdef BEEBEEP_DEBUG
+  Settings::instance().createDefaultRcFile();
+  Settings::instance().createDefaultHostsFile();
+#endif
 
   /* CleanUp */
   bee_app.cleanUp();

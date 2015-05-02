@@ -32,10 +32,14 @@ Settings* Settings::mp_instance = NULL;
 Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
+  /* Default RC start */
   m_useSettingsFileIni = true;
+  m_broadcastOnlyToHostsIni = false;
+  m_broadcastPort = DEFAULT_BROADCAST_PORT;
   m_trustNickname = true;
   m_trustSystemAccount = false;
-  m_broadcastPort = DEFAULT_BROADCAST_PORT;
+  /* Default RC end */
+
   m_confirmOnDownloadFile = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
@@ -77,6 +81,84 @@ void Settings::createSessionId()
   QString session_id = QString::fromUtf8( id_generated.toHex() );
   qDebug() << "Session ID created:" << session_id;
   m_localUser.setSessionId( session_id );
+}
+
+bool Settings::createDefaultRcFile()
+{
+  QFileInfo rc_file_info = defaultRcFilePath( false );
+  if( rc_file_info.exists() )
+  {
+    qDebug() << "RC default configuration file exists in" << rc_file_info.absoluteFilePath();
+    return false;
+  }
+
+  QSettings* sets = new QSettings( rc_file_info.absoluteFilePath(), QSettings::IniFormat );
+  bool rc_file_created = false;
+  if( sets->isWritable() )
+  {
+    sets->beginGroup( "BeeBEEP" );
+    sets->setValue( "UseConfigurationFileIni", m_useSettingsFileIni );
+    sets->setValue( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni );
+    sets->setValue( "BroadcastPort", m_broadcastPort );
+    sets->endGroup();
+    sets->beginGroup( "Groups" );
+    sets->setValue( "TrustNickname", m_trustNickname );
+    sets->setValue( "TrustSystemAccount", m_trustSystemAccount );
+    sets->endGroup();
+    sets->sync();
+    qDebug() << "RC default configuration file created in" << sets->fileName();
+    rc_file_created = true;
+  }
+  else
+    qWarning() << "Unable to create RC default configuration file in" << sets->fileName();
+
+  sets->deleteLater();
+  return rc_file_created;
+}
+
+bool Settings::createDefaultHostsFile()
+{
+  QStringList sl;
+
+  sl << "# This is a sample HOSTS file used by BeeBEEP.";
+  sl << "#";
+  sl << "# This file contains the IP addresses (something like 10.0.0.123)";
+  sl << "# or subnet (10.0.0.255 means that BeeBEEP tries to connect every";
+  sl << "# client from the IP 10.0.0.1 to IP 10.0.0.254).";
+  sl << "# Each entry should be kept on an individual line.";
+  sl << "#";
+  sl << "# Additionally, comments (such as these) may be inserted";
+  sl << "# on individual line denoted by a '#', '*' or '/' symbol.";
+  sl << "#";
+  sl << "# For example:";
+  sl << "#";
+  sl << "# 10.184.9.132";
+  sl << "# 192.168.2.17";
+  sl << "# 10.184.5.255";
+  sl << "# 10.2.4.255";
+  sl << " ";
+
+  QFile file_host_ini( defaultHostsFilePath( false ) );
+  if( file_host_ini.exists() )
+  {
+    qDebug() << "HOSTS default configuration file exists in" << file_host_ini.fileName();
+    return false;
+  }
+
+  if( file_host_ini.open( QIODevice::WriteOnly ) )
+  {
+    QTextStream ts( &file_host_ini );
+    foreach( QString line, sl )
+      ts << line << endl;
+    file_host_ini.close();
+    qDebug() << "HOSTS default configuration file created in" << file_host_ini.fileName();
+    return true;
+  }
+  else
+  {
+    qWarning() << "Unable to create the HOSTS default configuration file in" << file_host_ini.fileName();
+    return false;
+  }
 }
 
 QString Settings::version( bool complete ) const
@@ -347,60 +429,24 @@ void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port
   m_localUser.setHostPort( host_port );
 }
 
-void Settings::createDefaultFileHosts()
-{
-  QStringList sl;
-
-  sl << "# This is a sample HOSTS file used by BeeBEEP.";
-  sl << "#";
-  sl << "# This file contains the IP addresses (something like 10.0.0.123)";
-  sl << "# or subnet (10.0.0.255 means that BeeBEEP tries to connect every";
-  sl << "# client from the IP 10.0.0.1 to IP 10.0.0.254).";
-  sl << "# Each entry should be kept on an individual line.";
-  sl << "#";
-  sl << "# Additionally, comments (such as these) may be inserted";
-  sl << "# on individual line denoted by a '#', '*' or '/' symbol.";
-  sl << "#";
-  sl << "# For example:";
-  sl << "#";
-  sl << "# 10.184.9.132";
-  sl << "# 192.168.2.17";
-  sl << "# 10.184.5.255";
-  sl << "# 10.0.255.255";
-  sl << " ";
-
-  QFile file_host_ini( defaultHostsFilePath( true ) );
-  if( file_host_ini.open( QIODevice::WriteOnly ) )
-  {
-    QTextStream ts( &file_host_ini );
-    foreach( QString line, sl )
-      ts << line << endl;
-    file_host_ini.close();
-    qDebug() << "Default file host ini created:" << file_host_ini.fileName();
-  }
-  else
-    qWarning() << "Unable to create the default file host ini:" << file_host_ini.fileName();
-}
-
 void Settings::loadBroadcastAddressesFromFileHosts()
 {
   if( !m_broadcastAddressesInFileHosts.isEmpty() )
     m_broadcastAddressesInFileHosts.clear();
 
-  QFile file( defaultHostsFilePath( false ) );
+  QFile file( defaultHostsFilePath( true ) );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qWarning() << "File hosts" << file.fileName() << "not found. Check the default one";
-    file.setFileName( defaultHostsFilePath( true ) );
+    qDebug() << "File HOSTS not found in current folder:" << file.fileName();
+    file.setFileName( defaultHostsFilePath( false ) );
     if( !file.open( QIODevice::ReadOnly ) )
     {
-      qWarning() << "Default file host not found";
-      createDefaultFileHosts();
+      qDebug() << "File HOSTS not found in custom folder:" << file.fileName();
       return;
     }
   }
 
-  qDebug() << "Reading file hosts" << file.fileName();
+  qDebug() << "Reading HOSTS from file" << file.fileName();
   QString address_string;
   QString line_read;
   char c;
@@ -438,45 +484,38 @@ void Settings::loadBroadcastAddressesFromFileHosts()
     }
   }
 
-  qDebug() << file.fileName() << "read:" << hosts_found << "host addresses found";
+  qDebug() << "HOSTS file read:" << hosts_found << "IP addresses found";
   file.close();
 }
 
-void Settings::loadPreConf()
+void Settings::loadRcFile()
 {
-  QSettings* sets = new QSettings( defaultRcFilePath( true ), QSettings::IniFormat );
-  if( sets->allKeys().isEmpty() )
+  QFileInfo rc_file_info( defaultRcFilePath( true ) );
+  qDebug() << "Check for RC file in current path:" << rc_file_info.absoluteFilePath();
+  if( !rc_file_info.exists() || !rc_file_info.isReadable() )
   {
-    qDebug() << "Creating pre-configuration file";
-    sets->deleteLater();
-    sets = new QSettings( defaultRcFilePath( false ), QSettings::IniFormat );
+    rc_file_info = QFileInfo( defaultRcFilePath( false ) );
+    qDebug() << "Check for RC file in custom path:" << rc_file_info.absoluteFilePath();
 
-    sets->beginGroup( "BeeBEEP" );
-    sets->setValue( "UseConfigurationFileIni", true );
-    sets->setValue( "BroadcastOnlyToHostsIni", false );
-    sets->setValue( "BroadcastPort", DEFAULT_BROADCAST_PORT );
-    sets->endGroup();
-    sets->beginGroup( "Groups" );
-    sets->setValue( "TrustNickname", true );
-    sets->setValue( "TrustSystemAccount", false );
-    sets->endGroup();
-    sets->sync();
-    qDebug() << "Pre-configuration file created in" << sets->fileName();
-  }
-  else
-  {
-    sets->beginGroup( "BeeBEEP" );
-    m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", true ).toBool();
-    m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
-    m_broadcastPort = sets->value( "BroadcastPort", DEFAULT_BROADCAST_PORT ).toInt();
-    sets->endGroup();
-    sets->beginGroup( "Groups" );
-    m_trustNickname = sets->value( "TrustNickname", true ).toBool();
-    m_trustSystemAccount = sets->value( "TrustSystemAccount", false ).toBool();
-    sets->endGroup();
+    if( !rc_file_info.exists() || !rc_file_info.isReadable() )
+    {
+      qDebug() << "RC file not found:" << programName() << "uses default RC configuration";
+      return;
+    }
   }
 
-  qDebug() << "Read initial settings from" << sets->fileName();
+  QSettings* sets = new QSettings( rc_file_info.absoluteFilePath(), QSettings::IniFormat );
+  sets->beginGroup( "BeeBEEP" );
+  m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
+  m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni ).toBool();
+  m_broadcastPort = sets->value( "BroadcastPort", m_broadcastPort ).toInt();
+  sets->endGroup();
+  sets->beginGroup( "Groups" );
+  m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
+  m_trustSystemAccount = sets->value( "TrustSystemAccount", m_trustSystemAccount ).toBool();
+  sets->endGroup();
+
+  qDebug() << "RC configuration file read";
   sets->deleteLater();
 }
 

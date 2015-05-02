@@ -1,0 +1,8 @@
+[BeeBEEP]
+BroadcastOnlyToHostsIni=false
+BroadcastPort=36475
+UseConfigurationFileIni=true
+
+[Groups]
+TrustNickname=true
+TrustSystemAccount=false
