@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>319</width>
-    <height>219</height>
+    <width>449</width>
+    <height>247</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>60</width>
+       <width>80</width>
        <height>16777215</height>
       </size>
      </property>
@@ -55,7 +55,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="3" colspan="4">
+   <item row="0" column="3" colspan="3">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -85,36 +85,40 @@
     </widget>
    </item>
    <item row="1" column="1" colspan="5">
-    <widget class="QLineEdit" name="mp_lePath">
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="mp_lePath">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mp_pbSelectFolder">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="statusTip">
+        <string>Select language folder</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="beebeep.qrc">
+         <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="1" column="6">
-    <widget class="QPushButton" name="mp_pbSelectFolder">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="statusTip">
-      <string>Select language folder</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="beebeep.qrc">
-       <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="7">
+   <item row="2" column="0" colspan="6">
     <widget class="QTreeWidget" name="mp_twLanguage">
      <property name="rootIsDecorated">
       <bool>true</bool>
@@ -164,7 +168,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="5" colspan="2">
+   <item row="3" column="5">
     <widget class="QPushButton" name="mp_pbCancel">
      <property name="text">
       <string>Cancel</string>

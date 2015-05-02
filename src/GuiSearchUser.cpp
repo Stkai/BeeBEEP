@@ -42,9 +42,9 @@ void GuiSearchUser::loadSettings()
 {
   QHostAddress base_host_addresses = Settings::instance().baseBroadcastAddress();
   if( base_host_addresses.isNull() )
-    mp_leBaseAddress->setText( tr( "Unknown address" ) );
+    mp_leSubnet->setText( tr( "Unknown address" ) );
   else
-    mp_leBaseAddress->setText( base_host_addresses.toString() );
+    mp_leSubnet->setText( base_host_addresses.toString() );
 
   mp_leUdpPort->setText( QString::number( Settings::instance().broadcastPort() ) );
 

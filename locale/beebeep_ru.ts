@@ -868,27 +868,27 @@ Please select a different name.</source>
         <translation type="unfinished">Путь</translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.ui" line="103"/>
+        <location filename="../src/GuiLanguage.ui" line="105"/>
         <source>Select language folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.ui" line="140"/>
+        <location filename="../src/GuiLanguage.ui" line="144"/>
         <source>Restore to default language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.ui" line="143"/>
+        <location filename="../src/GuiLanguage.ui" line="147"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.ui" line="163"/>
+        <location filename="../src/GuiLanguage.ui" line="167"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.ui" line="170"/>
+        <location filename="../src/GuiLanguage.ui" line="174"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
@@ -1511,57 +1511,57 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1746"/>
+        <location filename="../src/GuiMain.cpp" line="1751"/>
         <source>The default BEEP will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1815"/>
+        <location filename="../src/GuiMain.cpp" line="1820"/>
         <source>Unable to add users in this chat. Please select a group one.</source>
         <translation>Не удается добавить пользователей в этот чат. Пожалуйста выберите группу.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2043"/>
+        <location filename="../src/GuiMain.cpp" line="2048"/>
         <source>Chat with %1 is empty.</source>
         <translation>Чат с %1 пустой.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2047"/>
+        <location filename="../src/GuiMain.cpp" line="2052"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Вы действительно хотите очистить сообщения %1?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2050"/>
+        <location filename="../src/GuiMain.cpp" line="2055"/>
         <source>Yes and delete history</source>
         <translation>Да и удалить историю</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2113"/>
+        <location filename="../src/GuiMain.cpp" line="2118"/>
         <source>%1 is a your group. You can not leave the chat.</source>
         <translation>%1 - это ваша группа. Вы не можете покинуть чат.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2114"/>
+        <location filename="../src/GuiMain.cpp" line="2119"/>
         <source>Delete this group</source>
         <translation>Удалить эту группу</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2127"/>
+        <location filename="../src/GuiMain.cpp" line="2132"/>
         <source>You cannot leave this chat.</source>
         <translation>Вы не можете покинуть этот чат.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2136"/>
+        <location filename="../src/GuiMain.cpp" line="2141"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Вы действительно хотите удалить группу &apos;%1&apos;?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2158"/>
+        <location filename="../src/GuiMain.cpp" line="2163"/>
         <source>Unable to delete this chat.</source>
         <translation>Не удается удалить этот чат.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2178"/>
+        <location filename="../src/GuiMain.cpp" line="2183"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 открыл общий доступ к %2 файлам</translation>
     </message>
@@ -1843,7 +1843,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1256"/>
-        <location filename="../src/GuiMain.cpp" line="2022"/>
+        <location filename="../src/GuiMain.cpp" line="2027"/>
         <source>User not found.</source>
         <translation>Пользователь не найден.</translation>
     </message>
@@ -1853,27 +1853,27 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1738"/>
+        <location filename="../src/GuiMain.cpp" line="1743"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1745"/>
+        <location filename="../src/GuiMain.cpp" line="1750"/>
         <source>Sound file not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2199"/>
+        <location filename="../src/GuiMain.cpp" line="2204"/>
         <source>Default language is restored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2201"/>
+        <location filename="../src/GuiMain.cpp" line="2206"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2204"/>
+        <location filename="../src/GuiMain.cpp" line="2209"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1932,8 +1932,8 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <location filename="../src/GuiMain.cpp" line="1288"/>
         <location filename="../src/GuiMain.cpp" line="1692"/>
         <location filename="../src/GuiMain.cpp" line="1721"/>
-        <location filename="../src/GuiMain.cpp" line="2052"/>
-        <location filename="../src/GuiMain.cpp" line="2137"/>
+        <location filename="../src/GuiMain.cpp" line="2057"/>
+        <location filename="../src/GuiMain.cpp" line="2142"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
@@ -1943,8 +1943,8 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <location filename="../src/GuiMain.cpp" line="1288"/>
         <location filename="../src/GuiMain.cpp" line="1692"/>
         <location filename="../src/GuiMain.cpp" line="1721"/>
-        <location filename="../src/GuiMain.cpp" line="2052"/>
-        <location filename="../src/GuiMain.cpp" line="2137"/>
+        <location filename="../src/GuiMain.cpp" line="2057"/>
+        <location filename="../src/GuiMain.cpp" line="2142"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
@@ -2029,13 +2029,13 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1699"/>
-        <location filename="../src/GuiMain.cpp" line="1946"/>
+        <location filename="../src/GuiMain.cpp" line="1951"/>
         <source>Unable to open %1</source>
         <translation>Не удается открыть %1</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1699"/>
-        <location filename="../src/GuiMain.cpp" line="1946"/>
+        <location filename="../src/GuiMain.cpp" line="1951"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -2054,39 +2054,39 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Звуковой файл %1 не найден.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1856"/>
+        <location filename="../src/GuiMain.cpp" line="1861"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Теперь %1 будет запускаться при загрузке Windows.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1861"/>
+        <location filename="../src/GuiMain.cpp" line="1866"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 не будет запускаться при загрузке Windows.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1912"/>
+        <location filename="../src/GuiMain.cpp" line="1917"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Пожалуйста, выберите чат, с которым вы хотите связать сохраненный текст.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1921"/>
+        <location filename="../src/GuiMain.cpp" line="1926"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>Выбранный чат &apos;%1&apos; уже содержит сохраненный текст.&lt;br /&gt;Что вы хотите сделать с выбранным сохраненным текстом?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1923"/>
+        <location filename="../src/GuiMain.cpp" line="1928"/>
         <source>Overwrite</source>
         <translation>Перезаписать</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="1923"/>
+        <location filename="../src/GuiMain.cpp" line="1928"/>
         <source>Add in the head</source>
         <translation>Добавить в заголовок</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1354"/>
-        <location filename="../src/GuiMain.cpp" line="1923"/>
-        <location filename="../src/GuiMain.cpp" line="2114"/>
+        <location filename="../src/GuiMain.cpp" line="1928"/>
+        <location filename="../src/GuiMain.cpp" line="2119"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -2395,23 +2395,23 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="23"/>
-        <source>Local subnet address (read only)</source>
+        <location filename="../src/GuiSearchUser.ui" line="33"/>
+        <source>Local subnet address *</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="40"/>
-        <source>UDP Port (in beebeep.rc)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiSearchUser.ui" line="63"/>
-        <source>Addresses in beehosts.ini (read only)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiSearchUser.ui" line="86"/>
+        <location filename="../src/GuiSearchUser.ui" line="43"/>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="66"/>
+        <source>Addresses in beehosts.ini *</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="89"/>
+        <source>UDP Port in beebeep.rc *</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2420,12 +2420,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="132"/>
+        <location filename="../src/GuiSearchUser.ui" line="119"/>
+        <source>* (read only section)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="139"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="139"/>
+        <location filename="../src/GuiSearchUser.ui" line="146"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -3074,7 +3079,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <name>QObject</name>
     <message>
         <location filename="../src/GuiChatItem.cpp" line="63"/>
-        <location filename="../src/GuiMain.cpp" line="2040"/>
+        <location filename="../src/GuiMain.cpp" line="2045"/>
         <location filename="../src/GuiUserItem.cpp" line="84"/>
         <source>All Lan Users</source>
         <translation>Все пользователи сети</translation>

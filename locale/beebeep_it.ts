@@ -512,7 +512,7 @@
     </message>
     <message>
         <source>Use authentication password (spaces are removed) *</source>
-        <translation type="unfinished">Usa la password di autenticazione (gli spazi saranno rimossi) *</translation>
+        <translation>Usa la password di autenticazione (gli spazi saranno rimossi) *</translation>
     </message>
 </context>
 <context>
@@ -2744,11 +2744,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Local subnet address (read only)</source>
-        <translation>Sottorete locale (sola lettura)</translation>
+        <translation type="obsolete">Sottorete locale (sola lettura)</translation>
     </message>
     <message>
         <source>Addresses in beehosts.ini (read only)</source>
-        <translation>Indirizzi IP in beehosts.ini (sola lettura)</translation>
+        <translation type="obsolete">Indirizzi IP in beehosts.ini (sola lettura)</translation>
     </message>
     <message>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
@@ -2768,11 +2768,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>UDP Port (in beebeep.rc)</source>
-        <translation>Porta UDP (in beebeep.rc)</translation>
+        <translation type="obsolete">Porta UDP (in beebeep.rc)</translation>
     </message>
     <message>
         <source>Configure network</source>
         <translation>Configura rete</translation>
+    </message>
+    <message>
+        <source>Local subnet address *</source>
+        <translation>Sottorete locale *</translation>
+    </message>
+    <message>
+        <source>Addresses in beehosts.ini *</source>
+        <translation>Indirizzi IP in beehosts.ini *</translation>
+    </message>
+    <message>
+        <source>UDP Port in beebeep.rc *</source>
+        <translation>Porta UDP in beebeep.rc *</translation>
+    </message>
+    <message>
+        <source>* (read only section)</source>
+        <translation>* (sezione non modificabile da qui)</translation>
     </message>
 </context>
 <context>
