@@ -163,6 +163,7 @@ private:
   bool openWebUrl( const QString& );
   QString checkFilePath( const QString& );
   void showVCard( const User&, bool ensure_visible );
+  bool isAudioDeviceAvailable() const;
 
 private:
   QStackedWidget* mp_stackedWidget;

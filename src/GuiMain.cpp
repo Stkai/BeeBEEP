@@ -1726,15 +1726,20 @@ void GuiMain::selectBeepFile()
   }
 }
 
-void GuiMain::testBeepFile()
+bool GuiMain::isAudioDeviceAvailable() const
 {
 #if QT_VERSION >= 0x050000
-  if( !QAudioDeviceInfo::availableDevices( QAudio::AudioOutput ).isEmpty() )
+  return !QAudioDeviceInfo::availableDevices( QAudio::AudioOutput ).isEmpty();
 #else
-  if( !QSound::isAvailable() )
+  return !QSound::isAvailable();
 #endif
+}
+
+void GuiMain::testBeepFile()
+{
+  if( !isAudioDeviceAvailable() )
   {
-    qWarning() << "QSound is not available";
+    qWarning() << "Sound device is not available";
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound module is not working. The default BEEP will be used." ) );
     return;
   }
@@ -1759,7 +1764,7 @@ void GuiMain::playBeep()
     mp_sound = new QSound( Settings::instance().beepFilePath(), this );
   }
 
-  if( QFile::exists( Settings::instance().beepFilePath() ) )
+  if( isAudioDeviceAvailable() && QFile::exists( Settings::instance().beepFilePath() ))
     mp_sound->play();
   else
     QApplication::beep();

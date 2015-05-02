@@ -7,6 +7,9 @@ echo "Source folder:" $SOURCE_DIR
 BUNDLE_APP=BeeBEEP.app
 echo "Bundle folder:" $BUNDLE_APP
 
+MACDEPLOY_APP=./Qt/5.4/clang_64/bin/macdeployqt
+echo "Mac Deploy App:" $MACDEPLOY_APP
+
 # delete previous bundle folder
 printf "Delete previous bundle folder ... "
 rm -rf $BUNDLE_APP
@@ -63,7 +66,7 @@ echo "Done"
 
 #mac deploy frameworks
 printf "MacOS X deploy and create DMG file ... "
-macdeployqt-4.8 $BUNDLE_APP -dmg
+$MACDEPLOY_APP $BUNDLE_APP -dmg
 echo "Done"
 
 echo "BeeBEEP to Bundle - Process completed."
