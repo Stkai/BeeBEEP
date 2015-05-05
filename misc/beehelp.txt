@@ -14,6 +14,7 @@
 UseConfigurationFileIni= the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
 BroadcastOnlyToHostsIni= if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
 BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
+SaveDataInDocumentsFolder= force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect

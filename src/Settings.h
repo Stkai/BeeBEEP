@@ -39,7 +39,8 @@ public:
   QString operatingSystem( bool use_long_name ) const;
   void createLocalUser();
   void createSessionId();
-  bool createDefaultFolder();
+  void setResourceFolder();
+  bool setDataFolder();
   bool createDefaultRcFile();
   bool createDefaultHostsFile();
 
@@ -50,12 +51,13 @@ public:
   inline bool trustSystemAccount() const;
 
   inline const QDate& settingsCreationDate() const;
-  inline const QString& defaultFolder() const;
-  QString defaultHostsFilePath( bool current_dir ) const;
-  QString defaultRcFilePath( bool current_dir ) const;
+  inline const QString& dataFolder() const;
+  inline const QString& resourceFolder() const;
+  QString defaultHostsFilePath( bool use_resource_folder ) const;
+  QString defaultRcFilePath( bool use_resource_folder ) const;
   QString defaultSettingsFilePath() const;
-  QString defaultBeepFilePath() const;
-  QString defaultPluginFolderPath() const;
+  QString defaultBeepFilePath( bool use_resource_folder ) const;
+  QString defaultPluginFolderPath( bool use_resource_folder ) const;
 
   QString version( bool ) const;
   int protoVersion() const;
@@ -258,17 +260,22 @@ protected:
   bool addBroadcastAddressInSettings( const QString& );
 
 private:
-  // PreConf
+  QString m_resourceFolder;
+  QString m_dataFolder;
+
+  // RC
   bool m_useSettingsFileIni;
   bool m_trustNickname;
   bool m_trustSystemAccount;
-
-  QString m_defaultFolder;
-  QDateTime m_lastSave;
+  bool m_broadcastOnlyToHostsIni;
+  int m_broadcastPort;
+  bool m_saveDataInDocumentsFolder;
 
   // Ini
+  bool m_firstTime;
+  QDate m_settingsCreationDate;
+
   User m_localUser;
-  int m_broadcastPort;
   int m_broadcastInterval;
   int m_broadcastLoopbackInterval;
   int m_pingInterval;
@@ -279,9 +286,13 @@ private:
   int m_trayMessageTimeout;
   int m_userAwayTimeout;
 
+  QDateTime m_lastSave;
+  bool m_logToFile;
   QString m_logPath;
   QString m_pluginPath;
   QString m_languagePath;
+  QString m_lastDirectorySelected;
+  QString m_downloadDirectory;
 
   int m_chatMessageHistorySize;
   QString m_chatFontColor;
@@ -298,6 +309,8 @@ private:
   bool m_stayOnTop;
   bool m_raiseOnNewMessageArrived;
   bool m_showUserPhoto;
+  bool m_showTipsOfTheDay;
+  bool m_automaticFileName;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -309,29 +322,16 @@ private:
   bool m_savePassword;
   bool m_askPasswordAtStartup;
 
-  bool m_logToFile;
-
   QString m_language;
-
-  QString m_lastDirectorySelected;
-  QString m_downloadDirectory;
-
   bool m_beepOnNewMessageArrived;
   QString m_beepFilePath;
-
-  bool m_showTipsOfTheDay;
-  bool m_automaticFileName;
 
   QStringList m_broadcastAddressesInFileHosts;
   QStringList m_broadcastAddressesInSettings;
   QHostAddress m_localHostAddressForced;
   QString m_localSubnetForced;
-  bool m_broadcastOnlyToHostsIni;
   bool m_parseBroadcastAddresses;
   bool m_addExternalSubnetAutomatically;
-
-  bool m_firstTime;
-  QDate m_settingsCreationDate;
 
   bool m_minimizeInTray;
   bool m_loadOnTrayAtStartup;
@@ -362,7 +362,8 @@ private:
 
 
 // Inline Functions
-inline const QString& Settings::defaultFolder() const { return m_defaultFolder; }
+inline const QString& Settings::resourceFolder() const { return m_resourceFolder; }
+inline const QString& Settings::dataFolder() const { return m_dataFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline bool Settings::trustNickname() const { return m_trustNickname; }

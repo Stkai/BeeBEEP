@@ -1603,7 +1603,8 @@ void GuiMain::hideToTrayIcon()
 void GuiMain::showFromTrayIcon()
 {
   showNormal(); // the window last state is minimized
-  mp_trayIcon->hide();
+  if( isVisible() )
+    mp_trayIcon->hide();
 }
 
 void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason )

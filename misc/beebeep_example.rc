@@ -2,6 +2,7 @@
 BroadcastOnlyToHostsIni=false
 BroadcastPort=36475
 UseConfigurationFileIni=true
+SaveDataInDocumentsFolder=false
 
 [Groups]
 TrustNickname=true

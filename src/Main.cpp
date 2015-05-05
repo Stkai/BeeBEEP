@@ -70,8 +70,8 @@ int main( int argc, char *argv[] )
     /* Load Settings */
   (void)Settings::instance();
   qDebug() << "Starting BeeBEEP" << Settings::instance().version( true ) << "for" << Settings::instance().operatingSystem( true );
-  if( !Settings::instance().createDefaultFolder() )
-    qDebug() << "Default folder cannot be created. Check" << Settings::instance().defaultFolder();
+  Settings::instance().setResourceFolder();
+  Settings::instance().setDataFolder();
   Settings::instance().loadRcFile();
   Settings::instance().load();
   Settings::instance().createLocalUser();
