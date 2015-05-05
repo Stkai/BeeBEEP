@@ -185,9 +185,12 @@ void Core::checkUserAuthentication( const Message& m )
 
   User user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
   if( !user_found.isValid() )
-    user_found = UserManager::instance().findUserByPath( u.path() );
-  if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
-    user_found = UserManager::instance().findUserByAccountName( u.accountName() );
+  {
+    if( Settings::instance().trustSystemAccount() )
+      user_found = UserManager::instance().findUserByAccountName( u.accountName() );
+    else
+      user_found = UserManager::instance().findUserByPath( u.path() );
+  }
 
   if( user_found.isValid() )
   {

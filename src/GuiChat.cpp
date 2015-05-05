@@ -52,6 +52,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
+  showSendMessageIcon( Settings::instance().chatShowSendMessageIcon() );
 
   m_lastMessageUserId = 0;
   m_lastEmoticonSelected = ":)";
@@ -61,6 +62,7 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
+  connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
 }
 
 void GuiChat::setupToolBar( QToolBar* bar )
@@ -109,6 +111,14 @@ void GuiChat::setupToolBar( QToolBar* bar )
 
 }
 
+void GuiChat::showSendMessageIcon( bool yes )
+{
+  if( yes )
+    mp_pbSend->show();
+  else
+    mp_pbSend->hide();
+}
+
 void GuiChat::updateAction( bool is_connected, int connected_users )
 {
   bool local_user_is_member = isActiveUser( Settings::instance().localUser() );
@@ -139,6 +149,9 @@ void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
 void GuiChat::sendMessage()
 {
   emit newMessage( m_chatId, mp_teMessage->message() );
+  mp_teMessage->clearMessage();
+  if( !mp_teMessage->hasFocus() )
+    mp_teMessage->setFocus();
 }
 
 void GuiChat::checkWriting()

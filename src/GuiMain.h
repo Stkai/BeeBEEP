@@ -63,6 +63,7 @@ public slots:
   void setInIdle();
   void exitFromIdle();
   void showMessage( const QString&, int );
+  void showUp();
 
 private slots:
   void showAbout();
@@ -135,8 +136,8 @@ protected:
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
   bool showAlert();
-  void raiseOnTop();
   bool promptConnectionPassword();
+  void raiseOnTop();
 
 private:
   void createActions();

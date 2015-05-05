@@ -36,8 +36,18 @@ SaveChatList::SaveChatList( QObject* parent )
 
 void SaveChatList::save()
 {
-  QString file_name = QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" );
+  QString file_name = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" ) );
   QFile file( file_name );
+  if( !Settings::instance().chatAutoSave() )
+  {
+    if( file.exists() )
+    {
+      qDebug() << "Saved chat file removed:" << file_name;
+      file.remove();
+    }
+    return;
+  }
+
   if( !file.open( QIODevice::WriteOnly ) )
   {
     qWarning() << "Unable to open file" << file.fileName() << ": saving chat messages aborted";
@@ -61,7 +71,7 @@ void SaveChatList::save()
 
 void SaveChatList::saveChats( QDataStream* stream )
 {
-  if( !Settings::instance().chatAutoSave() || Settings::instance().chatMaxLineSaved() <= 0 )
+  if( Settings::instance().chatMaxLineSaved() <= 0 )
   {
     (*stream) << 0;
     return;

@@ -39,6 +39,7 @@ public:
 private slots:
   void somethingChanged();
   void okPressed();
+  void connectionTypeChanged( int );
 
 private:
   QButtonGroup m_bgPasswordType;

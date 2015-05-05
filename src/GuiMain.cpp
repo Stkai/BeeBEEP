@@ -504,6 +504,12 @@ void GuiMain::createMenus()
 
   mp_menuChat->addSeparator();
 
+  act =  mp_menuChat->addAction( tr( "Show send message icon" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the icon of send message is shown in chat window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatShowSendMessageIcon() );
+  act->setData( 22 );
+
   act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
   act->setCheckable( true );
@@ -1012,6 +1018,10 @@ void GuiMain::settingsChanged()
   case 21:
     Settings::instance().setShowUserPhoto( act->isChecked() );
     refresh_users = true;
+    break;
+  case 22:
+    Settings::instance().setChatShowSendMessageIcon( act->isChecked() );
+    mp_chat->showSendMessageIcon( Settings::instance().chatShowSendMessageIcon() );
     break;
   case 99:
     break;
@@ -1732,7 +1742,7 @@ bool GuiMain::isAudioDeviceAvailable() const
 #if QT_VERSION >= 0x050000
   return !QAudioDeviceInfo::availableDevices( QAudio::AudioOutput ).isEmpty();
 #else
-  return !QSound::isAvailable();
+  return QSound::isAvailable();
 #endif
 }
 
@@ -1842,6 +1852,8 @@ void GuiMain::raiseOnTop()
 {
   if( isMinimized() )
     showNormal();
+  else
+    show();
 
 #ifdef Q_OS_WIN
   SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
@@ -2215,4 +2227,10 @@ void GuiMain::selectLanguage()
   }
 }
 
-
+void GuiMain::showUp()
+{
+  if( mp_trayIcon->isVisible() )
+    showFromTrayIcon();
+  else
+    raiseOnTop();
+}

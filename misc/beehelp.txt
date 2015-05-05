@@ -46,6 +46,7 @@ MessageHistorySize= how many of your messages are stored by beebeep. The message
 ShowEmoticons= show emoticon images in chat
 ShowMessagesGroupByUsers= show messaged grouped by user or repeat user for every message
 AutoLinkSavedChatByNickname= link the saved chat when nickname are equal
+ShowSendMessageIcon= show the icon for sending message
 
 [User]
 LocalColor= your nickname color in chat 

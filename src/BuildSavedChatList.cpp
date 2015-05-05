@@ -36,7 +36,7 @@ void BuildSavedChatList::buildList()
 {
   QTime elapsed_time;
   elapsed_time.start();
-  QString file_name = QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" );
+  QString file_name = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" ) );
   QFile file( file_name );
 
   if( !file.open( QIODevice::ReadOnly ) )

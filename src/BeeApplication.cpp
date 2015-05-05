@@ -25,6 +25,8 @@
 #include <QDebug>
 #include <QEvent>
 #include <QThread>
+#include <QRegExp>
+#include <QLocalSocket>
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -52,6 +54,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_timer.setObjectName( "BeeMainTimer" );
   m_timer.setInterval( 10000 );
   m_isInIdle = false;
+  mp_localServer = 0;
 
   mp_jobThread = new QThread();
 
@@ -65,6 +68,21 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   signal( SIGINT, &quitAfterSignal );
   signal( SIGTERM, &quitAfterSignal );
+}
+
+BeeApplication::~BeeApplication()
+{
+  if( mp_localServer )
+    mp_localServer->close();
+}
+
+void BeeApplication::slotConnectionEstablished()
+{
+  qDebug() << "New instance is called by user. Show the main window";
+  QLocalSocket* local_socket = mp_localServer->nextPendingConnection();
+  local_socket->close();
+  local_socket->deleteLater();
+  emit showUp();
 }
 
 void BeeApplication::quitAfterSignal( int sig )
@@ -226,5 +244,26 @@ int BeeApplication::idleTimeFromSystem()
   return idle_time;
 }
 
+bool BeeApplication::otherInstanceExists()
+{
+  QString server_name = QString( "MarcoMastroddiSW" ) + QApplication::applicationFilePath();
+  server_name.replace( QRegExp("[^\\w\\-. ]"), "" );
 
+  // Attempt to connect to the LocalServer
+  QLocalSocket local_socket;
+  local_socket.connectToServer( server_name );
+  if( local_socket.waitForConnected( 2000 ) )
+  {
+    local_socket.close();
+    return true;
+  }
+
+  // If the connection is insuccessful, this is the main process
+  // So we create a Local Server
+  mp_localServer = new QLocalServer();
+  mp_localServer->removeServer( server_name );
+  mp_localServer->listen( server_name );
+  QObject::connect( mp_localServer, SIGNAL( newConnection() ), this, SLOT( slotConnectionEstablished() ) );
+  return false;
+}
 

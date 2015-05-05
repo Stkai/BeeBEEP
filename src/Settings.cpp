@@ -295,6 +295,12 @@ QString Settings::currentHash() const
 
 bool Settings::addBroadcastAddressInSettings( const QString& host_address )
 {
+  if( m_broadcastAddressesInFileHosts.contains( host_address ) )
+    return false;
+
+  if( host_address == baseBroadcastAddress().toString() )
+    return false;
+
   if( m_broadcastAddressesInSettings.contains( host_address ) )
     return false;
 
@@ -564,6 +570,7 @@ void Settings::load()
   m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
   m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
   m_autoLinkSavedChatByNickname = sets->value( "AutoLinkSavedChatByNickname", true ).toBool();
+  m_chatShowSendMessageIcon = sets->value( "ShowSendMessageIcon", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -619,7 +626,7 @@ void Settings::load()
   m_logPath = sets->value( "LogPath", dataFolder() ).toString();
   m_pluginPath = sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString();
   m_languagePath = sets->value( "LanguagePath", resourceFolder() ).toString();
-  m_minimizeInTray = sets->value( "MinimizeInTray", false ).toBool();
+  m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
   m_beepFilePath = sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString();
@@ -725,6 +732,7 @@ void Settings::save()
   sets->setValue( "ShowEmoticons", m_showEmoticons );
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
   sets->setValue( "AutoLinkSavedChatByNickname", m_autoLinkSavedChatByNickname );
+  sets->setValue( "ShowSendMessageIcon", m_chatShowSendMessageIcon );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );

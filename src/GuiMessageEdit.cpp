@@ -125,7 +125,6 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
         emit returnPressed();
       }
       e->accept();
-      clearMessage();
       return;
     }
   }

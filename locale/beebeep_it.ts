@@ -665,7 +665,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>You</source>
-        <translation>Tu</translation>
+        <translation>Te</translation>
     </message>
     <message>
         <source>and</source>
@@ -756,6 +756,10 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Click to send message or just hit enter</source>
+        <translation>Premi qui o premi invio per spedire il messaggio</translation>
     </message>
 </context>
 <context>
@@ -2274,6 +2278,14 @@ il file %2 (%3)?</translation>
         <source>Change your profile information like your picture or your email or phone number</source>
         <translation>Completa le informazioni del tuo profilo con la tua email il tuo numero di telefono o la tua immagine</translation>
     </message>
+    <message>
+        <source>Show send message icon</source>
+        <translation>Mostra l&apos;icona per inviare messaggi</translation>
+    </message>
+    <message>
+        <source>If enabled the icon of send message is shown in chat window</source>
+        <translation>Se abilitata l&apos;icona per inviare i messaggi sarà visibile nella finestra delle conversazioni</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3706,7 +3718,7 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation>Puoi trascinare i file sulla conversazione attiva per inviarli a tutti i membri.</translation>
+        <translation>Puoi trascinare un file nella conversazione attiva per inviarlo a tutti i membri.</translation>
     </message>
     <message>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>

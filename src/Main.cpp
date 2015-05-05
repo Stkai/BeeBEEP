@@ -59,6 +59,9 @@ bool SetTranslator( QTranslator* translator, QString language_folder, QString la
 int main( int argc, char *argv[] )
 {
   BeeApplication bee_app( argc, argv );
+  if( bee_app.otherInstanceExists() )
+    return 0;
+
   Q_INIT_RESOURCE( beebeep );
 
   /* Randomize */
@@ -71,8 +74,8 @@ int main( int argc, char *argv[] )
   (void)Settings::instance();
   qDebug() << "Starting BeeBEEP" << Settings::instance().version( true ) << "for" << Settings::instance().operatingSystem( true );
   Settings::instance().setResourceFolder();
-  Settings::instance().setDataFolder();
   Settings::instance().loadRcFile();
+  Settings::instance().setDataFolder();
   Settings::instance().load();
   Settings::instance().createLocalUser();
 
@@ -117,6 +120,7 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( enteringInIdle() ), &mw, SLOT( setInIdle() ) );
   QObject::connect( &bee_app, SIGNAL( exitingFromIdle() ), &mw, SLOT( exitFromIdle() ) );
   QObject::connect( &bee_app, SIGNAL( aboutToQuit() ), &mw, SLOT( quitCore() ) );
+  QObject::connect( &bee_app, SIGNAL( showUp() ), &mw, SLOT( showUp() ) );
 
   QByteArray ba = Settings::instance().guiGeometry();
   if( !ba.isEmpty() )

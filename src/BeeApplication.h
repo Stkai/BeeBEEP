@@ -27,6 +27,7 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QTimer>
+#include <QLocalServer>
 
 #ifdef Q_OS_UNIX
 struct xcb_connection_t;
@@ -40,6 +41,9 @@ class BeeApplication : public QApplication
 
 public:
   BeeApplication( int& argc, char** argv );
+  ~BeeApplication();
+
+  bool otherInstanceExists();
 
   void init();
   void setIdleTimeout( int ); // in minutes
@@ -52,6 +56,7 @@ public:
 signals:
   void enteringInIdle();
   void exitingFromIdle();
+  void showUp();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
@@ -62,6 +67,7 @@ protected slots:
   void checkIdle();
   void setIdle();
   void removeIdle();
+  void slotConnectionEstablished();
 
 private:
   int m_idleTimeout;
@@ -69,6 +75,7 @@ private:
   QTimer m_timer;
   bool m_isInIdle;
   QThread* mp_jobThread;
+  QLocalServer* mp_localServer;
 
 #ifdef Q_OS_UNIX
   xcb_connection_t* mp_xcbConnection;

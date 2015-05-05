@@ -48,6 +48,8 @@ public:
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
 
+  void showSendMessageIcon( bool );
+
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );

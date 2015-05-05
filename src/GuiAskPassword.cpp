@@ -38,7 +38,7 @@ GuiAskPassword::GuiAskPassword( QWidget* parent )
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( okPressed() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-  connect( &m_bgPasswordType, SIGNAL( buttonClicked( int ) ), this, SLOT( somethingChanged() ) );
+  connect( &m_bgPasswordType, SIGNAL( buttonClicked( int ) ), this, SLOT( connectionTypeChanged( int ) ) );
   connect( mp_lePassword, SIGNAL( returnPressed() ), this, SLOT( okPressed() ) );
 }
 
@@ -66,6 +66,13 @@ void GuiAskPassword::loadData()
   }
 
   mp_cbAutoStart->setChecked( Settings::instance().askPasswordAtStartup() );
+  somethingChanged();
+}
+
+void GuiAskPassword::connectionTypeChanged( int )
+{
+  if( mp_rbUseDefaultPassword->isChecked() )
+    mp_cbAutoStart->setChecked( false );
   somethingChanged();
 }
 
