@@ -2256,7 +2256,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vista</translation>
+        <translation>Visualizza</translation>
     </message>
     <message>
         <source>?</source>

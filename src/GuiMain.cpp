@@ -759,31 +759,31 @@ void GuiMain::createDockWindows()
   mp_actViewGroups->setStatusTip( tr( "Show the list of your groups" ) );
   mp_actViewGroups->setData( 99 );
 
-  QDockWidget* dock_widget = new QDockWidget( tr( "Chats" ), this );
-  dock_widget->setObjectName( "GuiChatListDock" );
+  mp_dockChatList = new QDockWidget( tr( "Chats" ), this );
+  mp_dockChatList->setObjectName( "GuiChatListDock" );
   mp_chatList = new GuiChatList( this );
-  dock_widget->setWidget( mp_chatList );
-  dock_widget->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, dock_widget );
-  mp_actViewChats = dock_widget->toggleViewAction();
+  mp_dockChatList->setWidget( mp_chatList );
+  mp_dockChatList->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::RightDockWidgetArea, mp_dockChatList );
+  mp_actViewChats = mp_dockChatList->toggleViewAction();
   mp_actViewChats->setIcon( QIcon( ":/images/chat-list.png" ) );
   mp_actViewChats->setText( tr( "Show the chat list" ) );
   mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
   mp_actViewChats->setData( 99 );
 
-  dock_widget = new QDockWidget( tr( "History" ), this );
-  dock_widget->setObjectName( "GuiSavedChatListDock" );
+  mp_dockSavedChatList = new QDockWidget( tr( "History" ), this );
+  mp_dockSavedChatList->setObjectName( "GuiSavedChatListDock" );
   mp_savedChatList = new GuiSavedChatList( this );
-  dock_widget->setWidget( mp_savedChatList );
-  dock_widget->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, dock_widget );
-  mp_actViewSavedChats = dock_widget->toggleViewAction();
+  mp_dockSavedChatList->setWidget( mp_savedChatList );
+  mp_dockSavedChatList->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::RightDockWidgetArea, mp_dockSavedChatList );
+  mp_actViewSavedChats = mp_dockSavedChatList->toggleViewAction();
   mp_actViewSavedChats->setIcon( QIcon( ":/images/saved-chat-list.png" ) );
   mp_actViewSavedChats->setText( tr( "Show the saved chat list" ) );
   mp_actViewSavedChats->setStatusTip( tr( "Show the list of the saved chats" ) );
   mp_actViewSavedChats->setData( 99 );
 
-  dock_widget = new QDockWidget( tr( "File Transfers" ), this );
+  QDockWidget* dock_widget = new QDockWidget( tr( "File Transfers" ), this );
   dock_widget->setObjectName( "GuiFileTransferDock" );
   mp_fileTransfer = new GuiTransferFile( this );
   dock_widget->setWidget( mp_fileTransfer );
@@ -794,7 +794,15 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
-  dock_widget->hide();
+
+  if( Settings::instance().firstTime() )
+  {
+    mp_dockGroupList->hide();
+    mp_dockSavedChatList->hide();
+    mp_dockChatList->hide();
+    dock_widget->hide();
+  }
+
 }
 
 void GuiMain::createStackedWidgets()

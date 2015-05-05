@@ -583,7 +583,7 @@ void Settings::load()
   m_showUserPhoto = sets->value( "ShowUserPhoto", false ).toBool();
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
-  m_useDefaultPassword = sets->value( "UseDefaultPassword", false ).toBool();
+  m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
   m_savePassword = sets->value( "SavePassword", false ).toBool();
   if( m_savePassword )

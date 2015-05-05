@@ -221,6 +221,8 @@ private:
 
   QDockWidget* mp_dockUserList;
   QDockWidget* mp_dockGroupList;
+  QDockWidget* mp_dockSavedChatList;
+  QDockWidget* mp_dockChatList;
 
   GuiSystemTray* mp_trayIcon;
 
