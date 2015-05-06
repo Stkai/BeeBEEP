@@ -819,8 +819,7 @@ QPixmap Protocol::createUserPhoto( const User& u )
 {
   QPixmap pix( 96, 96 );
   pix.fill( QColor( u.color() ) );
-  QPainter p( &pix );
-  p.setFont( QFont( "monospace", 72 ) );
+
   QStringList sl_name = u.name().split( " ", QString::SkipEmptyParts );
   QString text_to_write;
   if( sl_name.size() == 0 )
@@ -841,7 +840,23 @@ QPixmap Protocol::createUserPhoto( const User& u )
     text_to_write += sl_name.first().at( 0 ).toLower() ;
   }
 
-  p.drawText( QRect( 2, 8, 92, 80 ), text_to_write );
+  QFont f( QFont( "monospace", 96 ) );
+  QFontMetrics fm( f );
+  while( fm.width( text_to_write ) > 92 )
+  {
+    f.setPointSize( f.pointSize() - 2 );
+    fm = QFontMetrics( f );
+    if( f.pointSize() < 14 )
+      break;
+  }
+
+  int border_y = (96 - fm.height()) / 2;
+  int border_x = (96 - fm.width( text_to_write )) / 2;
+  qDebug() << "Creating default photo with font point size" << f.pointSize() << "and borders" << border_x << border_y;
+
+  QPainter p( &pix );
+  p.setFont( f );
+  p.drawText( QRect( border_x, border_y, 96 - border_x, 96 - border_y ), text_to_write );
   return pix;
 }
 
