@@ -22,7 +22,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BuildSavedChatList.h"
-#include "Protocol.h"
 #include "Settings.h"
 
 
@@ -85,8 +84,8 @@ void BuildSavedChatList::loadSavedChats( QDataStream* stream )
       return;
     }
 
-    chat_name = Protocol::instance().simpleEncryptDecrypt( chat_name_encrypted );
-    chat_text = Protocol::instance().simpleEncryptDecrypt( chat_text_encrypted );
+    chat_name = Settings::instance().simpleEncryptDecrypt( chat_name_encrypted );
+    chat_text = Settings::instance().simpleEncryptDecrypt( chat_text_encrypted );
 
     qDebug() << "Loading chat" << chat_name;
 

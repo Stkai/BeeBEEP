@@ -219,13 +219,6 @@ void Core::checkUserAuthentication( const Message& m )
     qDebug() << "New user connected:" << u.path() << "with color" << u.color();
   }
 
-  if( u.vCard().photo().isNull() )
-  {
-    VCard vc = u.vCard();
-    vc.setPhoto( Protocol::instance().createUserPhoto( u ) );
-    u.setVCard( vc );
-  }
-
   Chat default_chat = ChatManager::instance().defaultChat();
   if( default_chat.addUser( u.id() ) )
   {

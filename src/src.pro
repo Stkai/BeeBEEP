@@ -95,7 +95,8 @@ SOURCES += Listener.cpp \
     GuiGroupItem.cpp \
     GuiGroupList.cpp \
     GuiCreateGroup.cpp \
-    GuiLanguage.cpp
+    GuiLanguage.cpp \
+    Avatar.cpp
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -164,7 +165,8 @@ HEADERS += \
     GuiGroupItem.h \
     GuiGroupList.h \
     GuiCreateGroup.h \
-    GuiLanguage.h
+    GuiLanguage.h \
+    Avatar.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \

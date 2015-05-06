@@ -815,51 +815,6 @@ QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
   return byte_array;
 }
 
-QPixmap Protocol::createUserPhoto( const User& u )
-{
-  QPixmap pix( 96, 96 );
-  pix.fill( QColor( u.color() ) );
-
-  QStringList sl_name = u.name().split( " ", QString::SkipEmptyParts );
-  QString text_to_write;
-  if( sl_name.size() == 0 )
-  {
-    text_to_write = QString( "B%1" ).arg( Random::number( 1, 9 ) );
-  }
-  else if( sl_name.size() == 1 )
-  {
-    text_to_write = sl_name.first();
-
-    if( text_to_write.size() > 2 )
-      text_to_write.truncate( 2 );
-  }
-  else
-  {
-    text_to_write = sl_name.first().at( 0 ).toUpper();
-    sl_name.removeFirst();
-    text_to_write += sl_name.first().at( 0 ).toLower() ;
-  }
-
-  QFont f( QFont( "monospace", 96 ) );
-  QFontMetrics fm( f );
-  while( fm.width( text_to_write ) > 92 )
-  {
-    f.setPointSize( f.pointSize() - 2 );
-    fm = QFontMetrics( f );
-    if( f.pointSize() < 14 )
-      break;
-  }
-
-  int border_y = (96 - fm.height()) / 2;
-  int border_x = (96 - fm.width( text_to_write )) / 2;
-  qDebug() << "Creating default photo with font point size" << f.pointSize() << "and borders" << border_x << border_y;
-
-  QPainter p( &pix );
-  p.setFont( f );
-  p.drawText( QRect( border_x, border_y, 96 - border_x, 96 - border_y ), text_to_write );
-  return pix;
-}
-
 
 /* Encryption */
 QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2 ) const
@@ -1010,22 +965,3 @@ QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const 
 
   return decrypted_byte_array;
 }
-
-QString Protocol::simpleEncryptDecrypt( const QString& text_passed )
-{
-  if( text_passed.size() <= 0 )
-    return "";
-
-  char key = 'k';
-  QString text_returned = "";
-
-#if QT_VERSION >= 0x050000
-  foreach( QChar c, text_passed )
-    text_returned += c.toLatin1() ^ key;
-#else
-  foreach( QChar c, text_passed )
-    text_returned += c.toAscii() ^ key;
-#endif
-  return text_returned;
-}
-

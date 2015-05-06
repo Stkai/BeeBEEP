@@ -3,6 +3,7 @@ BEEBEEP (Secure Lan Messanger)
 BeeBEEP 1.0.0
 - Only an instance of BeeBEEP can started a time (to launch another one please copy the executable in other folder)
 - Send message button can be showed (or hided)
+- Creating default avatar for users
 
 BeeBEEP 0.9.9
 - Improved subnet selection when there are many network cards installed

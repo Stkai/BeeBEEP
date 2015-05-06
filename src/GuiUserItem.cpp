@@ -25,6 +25,7 @@
 #include "Settings.h"
 #include "PluginManager.h"
 #include "UserManager.h"
+#include "Avatar.h"
 
 
 GuiUserItem::GuiUserItem( QTreeWidget* parent )
@@ -93,16 +94,33 @@ bool GuiUserItem::updateUser( const User& u )
 
   if( !u.isLocal() )
   {
-    if( Settings::instance().showUserPhoto() && !u.vCard().photo().isNull() )
+    if( Settings::instance().showUserPhoto() )
     {
-      QPixmap pix( 32, 32 );
+      QPixmap user_avatar;
+      QSize icon_size = Settings::instance().avatarIconSize();
+
+      if( u.vCard().photo().isNull() )
+      {
+        Avatar av;
+        av.setName( u.name() );
+        av.setColor( u.color() );
+        av.setSize( icon_size );
+        if( av.create() )
+          user_avatar = av.pixmap();
+        else
+          user_avatar = selectUserIcon( user_status, true ).pixmap( icon_size );
+      }
+      else
+        user_avatar = u.vCard().photo();
+
+      QPixmap pix( icon_size );
       pix.fill( Bee::userStatusColor( u.status() ) );
       QPainter p( &pix );
-      p.drawPixmap( 1, 1, 30, 30, u.vCard().photo() );
+      p.drawPixmap( 1, 1, icon_size.width() - 2, icon_size.height() - 2, user_avatar );
       setIcon( 0, pix );
     }
     else
-      setIcon( 0, selectUserIcon( user_status, Settings::instance().showUserPhoto() ) );
+      setIcon( 0, selectUserIcon( user_status, false ) );
   }
 
   if( !m_defaultForegroundColor.isValid() )

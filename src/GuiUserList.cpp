@@ -59,7 +59,7 @@ void GuiUserList::resetList()
   if( topLevelItemCount() > 0 )
     clear();
   if( Settings::instance().showUserPhoto() )
-    setIconSize( QSize( 32, 32 ) );
+    setIconSize( Settings::instance().avatarIconSize() );
   else
     setIconSize( QSize( 16, 16 ) );
 }

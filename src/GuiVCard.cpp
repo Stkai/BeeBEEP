@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiVCard.h"
 #include "PluginManager.h"
+#include "Avatar.h"
 #include "Settings.h"
 #include "User.h"
 
@@ -64,7 +65,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   if( !u.vCard().photo().isNull() )
     mp_lPhoto->setPixmap( u.vCard().photo() );
   else
-    mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png").pixmap( 96, 96 ) );
+    mp_lPhoto->setPixmap( Avatar::create( u.name(), u.color(), QSize( 96, 96 ) ) );
 
   if( !u.vCard().info().isEmpty() )
     mp_lPhoto->setToolTip( u.vCard().info() );

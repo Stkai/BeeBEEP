@@ -23,6 +23,7 @@
 
 #include "GuiEditVCard.h"
 #include "Settings.h"
+#include "Avatar.h"
 
 
 GuiEditVCard::GuiEditVCard( QWidget *parent )
@@ -44,11 +45,14 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
 void GuiEditVCard::setUserColor( const QString& new_value )
 {
   m_userColor = new_value;
+  QColor c( m_userColor );
   QPalette palette = mp_leNickname->palette();
-  palette.setColor( QPalette::Text, QColor( m_userColor ) );
+  palette.setColor( QPalette::Text, c );
   mp_leNickname->setPalette( palette );
-  palette.setColor( QPalette::Foreground, QColor( m_userColor ) );
+  palette.setColor( QPalette::Foreground, c );
   mp_lNickname->setPalette( palette );
+  if( m_vCard.photo().isNull() && mp_leNickname->text().trimmed() > 0 )
+    mp_lPhoto->setPixmap( Avatar::create( mp_leNickname->text(), m_userColor, QSize( 96, 96 ) ) );
 }
 
 void GuiEditVCard::setUser( const User& u )
@@ -73,7 +77,7 @@ void GuiEditVCard::loadVCard()
   mp_leEmail->setText( m_vCard.email() );
 
   if( m_vCard.photo().isNull() )
-    mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png" ).pixmap( 96, 96 ) );
+    mp_lPhoto->setPixmap( Avatar::create( m_vCard.nickName(), m_userColor, QSize( 96, 96 ) ) );
   else
     mp_lPhoto->setPixmap( m_vCard.photo() );
 
@@ -102,14 +106,18 @@ void GuiEditVCard::changePhoto()
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to load image %1." ).arg( photo_path ), QMessageBox::Ok );
     return;
   }
+
   QPixmap pix = QPixmap::fromImage( img );
-  mp_lPhoto->setPixmap( pix );
-  m_vCard.setPhoto( pix );
+  if( !pix.isNull() )
+  {
+    mp_lPhoto->setPixmap( pix );
+    m_vCard.setPhoto( pix );
+  }
 }
 
 void GuiEditVCard::removePhoto()
 {
-  mp_lPhoto->setPixmap( QIcon( ":/images/beebeep.png" ).pixmap( 96, 96 ) );
+  mp_lPhoto->setPixmap( Avatar::create( m_vCard.nickName(), m_userColor, QSize( 96, 96 ) ) );
   m_vCard.setPhoto( QPixmap() );
 }
 

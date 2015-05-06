@@ -22,7 +22,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Settings.h"
-#include "Protocol.h"
 #include "Version.h"
 
 
@@ -587,7 +586,7 @@ void Settings::load()
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
   m_savePassword = sets->value( "SavePassword", false ).toBool();
   if( m_savePassword )
-    m_passwordBeforeHash = Protocol::instance().simpleEncryptDecrypt( sets->value( "EncPwd", "" ).toString() );
+    m_passwordBeforeHash = simpleEncryptDecrypt( sets->value( "EncPwd", "" ).toString() );
   else
     m_passwordBeforeHash = "";
   sets->endGroup();
@@ -613,6 +612,7 @@ void Settings::load()
   m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
   m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
   m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
+  m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
@@ -748,7 +748,7 @@ void Settings::save()
   if( m_savePassword )
   {
     sets->setValue( "SavePassword", true );
-    sets->setValue( "EncPwd", Protocol::instance().simpleEncryptDecrypt( m_passwordBeforeHash ) );
+    sets->setValue( "EncPwd", simpleEncryptDecrypt( m_passwordBeforeHash ) );
   }
   else
   {
@@ -770,6 +770,7 @@ void Settings::save()
   sets->setValue( "MainWindowGeometry", m_guiGeometry );
   sets->setValue( "MainWindowState", m_guiState );
   sets->setValue( "MainBarIconSize", m_mainBarIconSize );
+  sets->setValue( "AvatarIconSize", m_avatarIconSize );
   sets->setValue( "Language", m_language );
   sets->setValue( "LastDirectorySelected", m_lastDirectorySelected );
   sets->setValue( "DownloadDirectory", m_downloadDirectory );
@@ -1048,3 +1049,22 @@ bool Settings::addSubnetToBroadcastAddress( const QHostAddress& ha )
   else
     return addBroadcastAddressInSettings( ext_subnet.toString() );
 }
+
+QString Settings::simpleEncryptDecrypt( const QString& text_passed )
+{
+  if( text_passed.size() <= 0 )
+    return "";
+
+  char key = 'k';
+  QString text_returned = "";
+
+#if QT_VERSION >= 0x050000
+  foreach( QChar c, text_passed )
+    text_returned += c.toLatin1() ^ key;
+#else
+  foreach( QChar c, text_passed )
+    text_returned += c.toAscii() ^ key;
+#endif
+  return text_returned;
+}
+

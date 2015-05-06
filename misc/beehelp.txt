@@ -71,6 +71,7 @@ Info= other informations about you
 
 [Gui]
 MainBarIconSize= Icon size of the tool bar
+AvatarIconSize= Icon size of the avatar in user list
 Language= language used 
 LastDirectorySelected=
 DownloadDirectory=

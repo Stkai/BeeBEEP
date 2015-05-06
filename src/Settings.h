@@ -133,6 +133,7 @@ public:
   inline void setRaiseOnNewMessageArrived( bool );
 
   inline const QSize& mainBarIconSize() const;
+  inline const QSize& avatarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
   inline const QByteArray& guiGeometry() const;
   inline void setGuiState( const QByteArray& );
@@ -238,6 +239,8 @@ public:
   void save();
   inline const QDateTime& lastSave() const;
 
+  QString simpleEncryptDecrypt( const QString& );
+
   static Settings& instance()
   {
     if( !mp_instance )
@@ -318,6 +321,7 @@ private:
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
   QSize m_mainBarIconSize;
+  QSize m_avatarIconSize;
 
   QString m_passwordBeforeHash;
   QByteArray m_password;
@@ -389,6 +393,7 @@ inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath =
 inline const QString& Settings::languagePath() const { return m_languagePath; }
 inline void Settings::setLanguagePath( const QString& new_value ) { m_languagePath = new_value; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
+inline const QSize& Settings::avatarIconSize() const { return m_avatarIconSize; }
 inline QString Settings::defaultChatName() const { return QString( "* BeeBEEP Chat *" ); }
 inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistorySize; }
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
