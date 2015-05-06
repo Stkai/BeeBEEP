@@ -22,10 +22,11 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Avatar.h"
+#include "BeeUtils.h"
 
 
 Avatar::Avatar()
-  : m_name(), m_color(), m_size( 96, 96 ), m_pixmap()
+  : m_name(), m_color(), m_size(), m_pixmap()
 {}
 
 Avatar::Avatar( const Avatar& av )
@@ -55,7 +56,7 @@ bool Avatar::create()
     return false;
   }
 
-  if( !m_color.isValid() || m_color == QColor( 0, 0, 0 ) )
+  if( !m_color.isValid() )
     m_color = QColor( Qt::gray );
 
   if( m_size.isNull() || m_size.isEmpty() )
@@ -126,6 +127,8 @@ bool Avatar::create()
   pix.fill( m_color );
   QPainter p( &pix );
   p.setFont( f );
+  QPen pen( Bee::invertColor( m_color ) );
+  p.setPen( pen );
   p.drawText( QRect( border_x, border_y, m_size.width() - border_x, m_size.height() - border_y ), text_to_write );
 
   m_pixmap = pix;

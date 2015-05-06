@@ -1452,6 +1452,7 @@ void GuiMain::changeVCard()
       User u = Settings::instance().localUser();
       u.setColor( gvc.userColor() );
       Settings::instance().setLocalUser( u );
+      mp_userList->setUser( u );
     }
 
     if( gvc.vCard() == Settings::instance().localUser().vCard() )
@@ -2056,6 +2057,7 @@ void GuiMain::changeUserColor( VNumber user_id )
     u.setColor( c.name() );
     UserManager::instance().setUser( u );
     mp_chat->reloadChat();
+    mp_userList->setUser( u );
   }
 }
 

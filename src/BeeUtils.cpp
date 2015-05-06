@@ -286,5 +286,12 @@ QColor Bee::invertColor( const QColor& c )
   int i_g = 255 - g;
   int i_b = 255 - b;
 
-  return QColor( i_r, i_g, i_b );
+  int s_r = r - i_r;
+  int s_g = r - i_g;
+  int s_b = r - i_b;
+
+  if( qAbs( s_r ) < 30 && qAbs( s_g ) < 30 && qAbs( s_b ) < 30 ) // gray on grar
+    return QColor( 0, 0, 0 );
+  else
+    return QColor( i_r, i_g, i_b );
 }
