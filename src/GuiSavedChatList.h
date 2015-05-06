@@ -44,7 +44,7 @@ public slots:
   void updateSavedChats();
 
 protected slots:
-  void savedChatDoubleClicked( QTreeWidgetItem*, int );
+  void savedChatClicked( QTreeWidgetItem*, int );
   void showSavedChatMenu( const QPoint& );
   void showSavedChatSelected();
   void removeSavedChatSelected();

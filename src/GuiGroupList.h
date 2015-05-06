@@ -50,7 +50,7 @@ signals:
 
 protected slots:
   void showGroupMenu( const QPoint& );
-  void checkItemDoubleClicked( QTreeWidgetItem*, int );
+  void checkItemClicked( QTreeWidgetItem*, int );
   void openGroupChatSelected();
   void editGroupSelected();
   void removeGroupSelected();

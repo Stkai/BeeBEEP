@@ -48,7 +48,7 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   mp_menu->addSeparator();
   mp_menu->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
 
-  connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
 }
 
@@ -57,7 +57,7 @@ QSize GuiSavedChatList::sizeHint() const
   return QSize( 140, 300 );
 }
 
-void GuiSavedChatList::savedChatDoubleClicked( QTreeWidgetItem* item, int )
+void GuiSavedChatList::savedChatClicked( QTreeWidgetItem* item, int )
 {
   if( !item )
     return;

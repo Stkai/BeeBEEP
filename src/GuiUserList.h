@@ -50,7 +50,7 @@ signals:
   void menuToShow( VNumber user_id );
 
 protected slots:
-  void userDoubleClicked( QTreeWidgetItem*, int );
+  void userItemClicked( QTreeWidgetItem*, int );
   void showUserMenu( const QPoint& );
 
 private:

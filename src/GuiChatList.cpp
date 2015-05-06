@@ -49,7 +49,7 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_menu->addSeparator();
   mp_actDelete = mp_menu->addAction( QIcon( ":/images/disconnect.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
 
-  connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
 }
 
@@ -98,7 +98,7 @@ void GuiChatList::updateChat( VNumber chat_id )
   item->updateItem( c );
 }
 
-void GuiChatList::chatDoubleClicked( QTreeWidgetItem* item, int )
+void GuiChatList::chatClicked( QTreeWidgetItem* item, int )
 {
   if( !item )
     return;

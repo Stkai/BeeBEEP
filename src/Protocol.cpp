@@ -815,6 +815,37 @@ QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
   return byte_array;
 }
 
+QPixmap Protocol::createUserPhoto( const User& u )
+{
+  QPixmap pix( 96, 96 );
+  pix.fill( QColor( u.color() ) );
+  QPainter p( &pix );
+  p.setFont( QFont( "monospace", 72 ) );
+  QStringList sl_name = u.name().split( " ", QString::SkipEmptyParts );
+  QString text_to_write;
+  if( sl_name.size() == 0 )
+  {
+    text_to_write = QString( "B%1" ).arg( Random::number( 1, 9 ) );
+  }
+  else if( sl_name.size() == 1 )
+  {
+    text_to_write = sl_name.first();
+
+    if( text_to_write.size() > 2 )
+      text_to_write.truncate( 2 );
+  }
+  else
+  {
+    text_to_write = sl_name.first().at( 0 ).toUpper();
+    sl_name.removeFirst();
+    text_to_write += sl_name.first().at( 0 ).toLower() ;
+  }
+
+  p.drawText( QRect( 2, 8, 92, 80 ), text_to_write );
+  return pix;
+}
+
+
 /* Encryption */
 QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2 ) const
 {

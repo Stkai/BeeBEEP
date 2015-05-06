@@ -150,8 +150,7 @@ void GuiChat::sendMessage()
 {
   emit newMessage( m_chatId, mp_teMessage->message() );
   mp_teMessage->clearMessage();
-  if( !mp_teMessage->hasFocus() )
-    mp_teMessage->setFocus();
+  ensureFocusInChat();
 }
 
 void GuiChat::checkWriting()
@@ -288,8 +287,14 @@ bool GuiChat::setChatId( VNumber chat_id )
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
 
-  mp_teMessage->setFocus();
+  ensureFocusInChat();
   return true;
+}
+
+void GuiChat::ensureFocusInChat()
+{
+  if( !mp_teMessage->hasFocus() )
+    mp_teMessage->setFocus();
 }
 
 void GuiChat::ensureLastMessageVisible()

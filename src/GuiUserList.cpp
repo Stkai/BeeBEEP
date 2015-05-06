@@ -40,7 +40,7 @@ GuiUserList::GuiUserList( QWidget* parent )
   setHeaderHidden( true );
   resetList();
 
-  connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( userDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
 }
 
@@ -166,7 +166,7 @@ void GuiUserList::showUserMenu( const QPoint& p )
   clearSelection();
 }
 
-void GuiUserList::userDoubleClicked( QTreeWidgetItem* item, int )
+void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
 {
   if( !item )
     return;

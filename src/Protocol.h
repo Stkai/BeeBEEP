@@ -80,6 +80,7 @@ public:
 
   User createUser( const Message&, const QHostAddress& );
   User createTemporaryUser( const QString& user_path, const QString& account_name );
+  QPixmap createUserPhoto( const User& );
   Chat createChat( const QList<VNumber>& user_list );
   Group createGroup( const QString& group_name, const QList<VNumber>& user_list );
   QString saveGroup( const Group& ) const;

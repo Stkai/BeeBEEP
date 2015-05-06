@@ -47,7 +47,7 @@ public slots:
   void updateChat( VNumber chat_id );
 
 protected slots:
-  void chatDoubleClicked( QTreeWidgetItem*, int );
+  void chatClicked( QTreeWidgetItem*, int );
   void showChatMenu( const QPoint& );
   void openChatSelected();
   void clearChatSelected();

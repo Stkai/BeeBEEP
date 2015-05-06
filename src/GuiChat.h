@@ -47,6 +47,7 @@ public:
   inline bool reloadChat();
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
+  void ensureFocusInChat();
 
   void showSendMessageIcon( bool );
 

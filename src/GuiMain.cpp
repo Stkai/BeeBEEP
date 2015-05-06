@@ -1421,6 +1421,7 @@ void GuiMain::showChat( VNumber chat_id )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Chat" << chat_id << "is already shown... skip";
 #endif
+    mp_chat->ensureFocusInChat();
     return;
   }
 

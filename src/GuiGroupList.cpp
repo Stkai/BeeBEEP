@@ -53,7 +53,7 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   connect( mp_actRemoveGroup, SIGNAL( triggered() ), this, SLOT( removeGroupSelected() ) );
 
 
-  connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
 }
 
@@ -105,7 +105,7 @@ GuiGroupItem* GuiGroupList::itemFromId( VNumber item_id )
   return 0;
 }
 
-void GuiGroupList::checkItemDoubleClicked( QTreeWidgetItem* item, int )
+void GuiGroupList::checkItemClicked( QTreeWidgetItem* item, int )
 {
   if( !item )
     return;
