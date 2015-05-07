@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ChatMessage.h"
 #include "EmoticonManager.h"
@@ -244,7 +245,9 @@ void GuiChat::setChatUsers()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Chat members:" << m_chatUsers.toStringList( false, false ).join( ", " );
 #endif
-  mp_lTitle->setText( tr( "To" ) + QString( ": %1" ).arg( chat_users ) );
+
+  QString text_to_write = tr( "To" ) + QString( ": %1" ).arg( chat_users );
+  mp_lTitle->setText( Bee::chopTextForWidget( mp_lTitle, text_to_write ) );
   mp_teMessage->setEnabled( isActiveUser( Settings::instance().localUser() ) );
 }
 

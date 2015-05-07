@@ -52,6 +52,8 @@ namespace Bee
   QString dateTimeStringSuffix( const QDateTime& );
   QString capitalizeFirstLetter( const QString&, bool all_chars_after_space );
   QColor invertColor( const QColor& );
+  QString chopTextForWidget( QWidget*, const QString& );
+  QString removeHtmlTag( const QString& );
 
 }
 

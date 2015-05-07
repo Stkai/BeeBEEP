@@ -569,7 +569,6 @@ void Settings::load()
   m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
   m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
   m_autoLinkSavedChatByNickname = sets->value( "AutoLinkSavedChatByNickname", true ).toBool();
-  m_chatShowSendMessageIcon = sets->value( "ShowSendMessageIcon", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -635,6 +634,7 @@ void Settings::load()
   m_chatSaveDirectory = sets->value( "ChatSaveDirectory", dataFolder() ).toString();
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
+  m_chatShowSendMessageIcon = sets->value( "ShowSendMessageIcon", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -732,7 +732,6 @@ void Settings::save()
   sets->setValue( "ShowEmoticons", m_showEmoticons );
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
   sets->setValue( "AutoLinkSavedChatByNickname", m_autoLinkSavedChatByNickname );
-  sets->setValue( "ShowSendMessageIcon", m_chatShowSendMessageIcon );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );
@@ -786,6 +785,7 @@ void Settings::save()
   sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
+  sets->setValue( "ShowSendMessageIcon", m_chatShowSendMessageIcon );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

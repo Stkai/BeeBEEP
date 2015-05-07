@@ -295,3 +295,40 @@ QColor Bee::invertColor( const QColor& c )
   else
     return QColor( i_r, i_g, i_b );
 }
+
+QString Bee::chopTextForWidget( QWidget* w, const QString& text )
+{
+  if( text.isEmpty() )
+    return text;
+
+  QFontMetrics fm = w->fontMetrics();
+  int max_width = w->width() - fm.width( QString( "..." ) ) - 6;
+  if( max_width < 10 )
+    return text.at( 0 );
+
+  QString text_to_chop = text;
+  QString plain_text = removeHtmlTag( text_to_chop );
+  if( fm.width( plain_text ) > max_width )
+  {
+    text_to_chop.chop( 1 );
+    plain_text = removeHtmlTag( text_to_chop );
+    while( plain_text.size() > 1 && fm.width( plain_text ) > max_width )
+      text_to_chop.chop( 1 );
+    text_to_chop.append( "..." );
+  }
+
+  return text_to_chop;
+}
+
+QString Bee::removeHtmlTag( const QString& s )
+{
+  /* Faster than
+   * QTextDocument doc;
+   * doc.setHtml( htmlString );
+   * return doc.toPlainText();
+   */
+
+  QString plain_text = s;
+  plain_text.remove( QRegExp( "<[^>]*>" ) );
+  return plain_text;
+}
