@@ -32,7 +32,7 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiSearchUser" );
-  setWindowTitle( tr( "Configure network" ) );
+  setWindowTitle( tr( "Search for users" ) + QString( " - %1" ).arg( Settings::instance().programName() ));
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

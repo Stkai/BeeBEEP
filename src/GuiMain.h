@@ -138,6 +138,7 @@ protected:
   bool showAlert();
   bool promptConnectionPassword();
   void raiseOnTop();
+  void checkChatToolbar();
 
 private:
   void createActions();

@@ -31,7 +31,7 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiEditVCard" );
-  setWindowTitle( tr( "Profile - %1" ).arg( Settings::instance().programName() ) );
+  setWindowTitle( tr( "Edit your profile" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
 
   mp_lePath->setDisabled( true );
 

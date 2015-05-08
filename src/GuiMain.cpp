@@ -347,7 +347,7 @@ void GuiMain::checkViewActions()
   if( mp_stackedWidget->currentWidget() == mp_chat )
   {
     mp_chat->updateAction( is_connected, connected_users );
-    mp_barChat->show();
+    checkChatToolbar();
   }
   else
     mp_barChat->hide();
@@ -408,7 +408,7 @@ void GuiMain::createActions()
   mp_actStartStopCore = new QAction( this );
   connect( mp_actStartStopCore, SIGNAL( triggered() ), this, SLOT( startStopCore() ) );
 
-  mp_actConfigureNetwork = new QAction( QIcon( ":/images/search.png"), tr( "Configure network..."), this );
+  mp_actConfigureNetwork = new QAction( QIcon( ":/images/search.png"), tr( "Search for users..."), this );
   mp_actConfigureNetwork->setStatusTip( tr( "Configure %1 network to search a user who is not in your local subnet" ).arg( Settings::instance().programName() ) );
   connect( mp_actConfigureNetwork, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
@@ -496,6 +496,12 @@ void GuiMain::createMenus()
   /* Chat Menu */
   mp_menuChat = new QMenu( tr( "Chat" ), this );
 
+  act =  mp_menuChat->addAction( tr( "Show send message icon" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the icon of send message is shown in chat window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatShowSendMessageIcon() );
+  act->setData( 22 );
+
   act = mp_menuChat->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the messages are saved when the program is closed" ) );
   act->setCheckable( true );
@@ -503,12 +509,6 @@ void GuiMain::createMenus()
   act->setData( 18 );
 
   mp_menuChat->addSeparator();
-
-  act =  mp_menuChat->addAction( tr( "Show send message icon" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the icon of send message is shown in chat window" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatShowSendMessageIcon() );
-  act->setData( 22 );
 
   act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
@@ -743,7 +743,7 @@ void GuiMain::createDockWindows()
   addDockWidget( Qt::RightDockWidgetArea, mp_dockUserList );
   mp_actViewUsers = mp_dockUserList->toggleViewAction();
   mp_actViewUsers->setIcon( QIcon( ":/images/user-list.png" ) );
-  mp_actViewUsers->setText( tr( "Show online users" ) );
+  mp_actViewUsers->setText( tr( "Show the user panel" ) );
   mp_actViewUsers->setStatusTip( tr( "Show the list of the connected users" ) );
   mp_actViewUsers->setData( 99 );
 
@@ -755,7 +755,7 @@ void GuiMain::createDockWindows()
   addDockWidget( Qt::RightDockWidgetArea, mp_dockGroupList );
   mp_actViewGroups = mp_dockGroupList->toggleViewAction();
   mp_actViewGroups->setIcon( QIcon( ":/images/group.png" ) );
-  mp_actViewGroups->setText( tr( "Show your groups" ) );
+  mp_actViewGroups->setText( tr( "Show the group panel" ) );
   mp_actViewGroups->setStatusTip( tr( "Show the list of your groups" ) );
   mp_actViewGroups->setData( 99 );
 
@@ -767,7 +767,7 @@ void GuiMain::createDockWindows()
   addDockWidget( Qt::RightDockWidgetArea, mp_dockChatList );
   mp_actViewChats = mp_dockChatList->toggleViewAction();
   mp_actViewChats->setIcon( QIcon( ":/images/chat-list.png" ) );
-  mp_actViewChats->setText( tr( "Show the chat list" ) );
+  mp_actViewChats->setText( tr( "Show the chat panel" ) );
   mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
   mp_actViewChats->setData( 99 );
 
@@ -779,7 +779,7 @@ void GuiMain::createDockWindows()
   addDockWidget( Qt::RightDockWidgetArea, mp_dockSavedChatList );
   mp_actViewSavedChats = mp_dockSavedChatList->toggleViewAction();
   mp_actViewSavedChats->setIcon( QIcon( ":/images/saved-chat-list.png" ) );
-  mp_actViewSavedChats->setText( tr( "Show the saved chat list" ) );
+  mp_actViewSavedChats->setText( tr( "Show the history panel" ) );
   mp_actViewSavedChats->setStatusTip( tr( "Show the list of the saved chats" ) );
   mp_actViewSavedChats->setData( 99 );
 
@@ -791,7 +791,7 @@ void GuiMain::createDockWindows()
   addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
   mp_actViewFileTransfer = dock_widget->toggleViewAction();
   mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
-  mp_actViewFileTransfer->setText( tr( "Show the file transfers" ) );
+  mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
 
@@ -809,12 +809,15 @@ void GuiMain::createStackedWidgets()
 {
   mp_chat = new GuiChat( this );
   mp_stackedWidget->addWidget( mp_chat );
-  mp_barChat = new QToolBar( tr( "Show the chat tool bar" ), this );
+  mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
   addToolBar( Qt::BottomToolBarArea, mp_barChat );
   mp_barChat->setObjectName( "GuiChatToolBar" );
   mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barChat->setAllowedAreas( Qt::AllToolBarAreas );
   mp_chat->setupToolBar( mp_barChat );
+  QAction* act = mp_barChat->toggleViewAction();
+  act->setData( 23 );
+  connect( act, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
 
   mp_shareLocal = new GuiShareLocal( this );
   mp_stackedWidget->addWidget( mp_shareLocal );
@@ -824,6 +827,8 @@ void GuiMain::createStackedWidgets()
   mp_barShareLocal->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barShareLocal->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
   mp_shareLocal->setupToolBar( mp_barShareLocal );
+  act = mp_barShareLocal->toggleViewAction();
+  act->setEnabled( false );
 
   mp_shareNetwork = new GuiShareNetwork( this );
   mp_stackedWidget->addWidget( mp_shareNetwork );
@@ -833,6 +838,9 @@ void GuiMain::createStackedWidgets()
   mp_barShareNetwork->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barShareNetwork->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
   mp_shareNetwork->setupToolBar( mp_barShareNetwork );
+  act = mp_barShareNetwork->toggleViewAction();
+  act->setEnabled( false );
+
 
   mp_logView = new GuiLog( this );
   mp_stackedWidget->addWidget( mp_logView );
@@ -848,6 +856,8 @@ void GuiMain::createStackedWidgets()
   mp_barScreenShot->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barScreenShot->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
   mp_screenShot->setupToolBar( mp_barScreenShot );
+  act = mp_barScreenShot->toggleViewAction();
+  act->setEnabled( false );
 }
 
 QMenu* GuiMain::gameMenu( GameInterface* gi )
@@ -1030,6 +1040,12 @@ void GuiMain::settingsChanged()
   case 22:
     Settings::instance().setChatShowSendMessageIcon( act->isChecked() );
     mp_chat->showSendMessageIcon( Settings::instance().chatShowSendMessageIcon() );
+    break;
+  case 23:
+    {
+      Settings::instance().setShowChatToolbar( act->isChecked() );
+      checkChatToolbar();
+    }
     break;
   case 99:
     break;
@@ -2244,4 +2260,17 @@ void GuiMain::showUp()
     showFromTrayIcon();
   else
     raiseOnTop();
+}
+
+void GuiMain::checkChatToolbar()
+{
+  if( mp_stackedWidget->currentWidget() != mp_chat )
+  {
+    if( mp_barChat->isVisible() )
+      mp_barChat->hide();
+  }
+  else
+  {
+    mp_barChat->setVisible( Settings::instance().showChatToolbar() );
+  }
 }

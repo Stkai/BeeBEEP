@@ -886,7 +886,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Profile - %1</source>
-        <translation>Profilo - %1</translation>
+        <translation type="obsolete">Profilo - %1</translation>
+    </message>
+    <message>
+        <source>Edit your profile</source>
+        <translation>Modifica il tuo profilo</translation>
     </message>
 </context>
 <context>
@@ -929,6 +933,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>La traduzione &apos;%1&apos; non è stata trovata.</translation>
+    </message>
+    <message>
+        <source>Select language</source>
+        <translation>Seleziona una lingua</translation>
     </message>
 </context>
 <context>
@@ -1355,7 +1363,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the file transfers</source>
-        <translation>Mostra i trasferimenti dei file</translation>
+        <translation type="obsolete">Mostra i trasferimenti dei file</translation>
     </message>
     <message>
         <source>Show the list of the file transfers</source>
@@ -1525,7 +1533,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the chat list</source>
-        <translation>Mostra la lista delle conversazioni</translation>
+        <translation type="obsolete">Mostra la lista delle conversazioni</translation>
     </message>
     <message>
         <source>Show the list of the chats</source>
@@ -1828,7 +1836,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the saved chat list</source>
-        <translation>Mostra la lista delle conversazioni salvate</translation>
+        <translation type="obsolete">Mostra la lista delle conversazioni salvate</translation>
     </message>
     <message>
         <source>Show the list of the saved chats</source>
@@ -1960,7 +1968,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the chat tool bar</source>
-        <translation>Mostra la barra della conversazione</translation>
+        <translation type="obsolete">Mostra la barra della conversazione</translation>
     </message>
     <message>
         <source>Show the bar of screenshot plugin</source>
@@ -1992,7 +2000,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show online users</source>
-        <translation>Mostra utenti connessi</translation>
+        <translation type="obsolete">Mostra utenti connessi</translation>
     </message>
     <message>
         <source>Show the list of the connected users</source>
@@ -2004,7 +2012,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show your groups</source>
-        <translation>Mostra i tuoi gruppi</translation>
+        <translation type="obsolete">Mostra i tuoi gruppi</translation>
     </message>
     <message>
         <source>Show the list of your groups</source>
@@ -2196,7 +2204,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Configure network...</source>
-        <translation>Configura la rete...</translation>
+        <translation type="obsolete">Configura la rete...</translation>
     </message>
     <message>
         <source>Configure %1 network to search a user who is not in your local subnet</source>
@@ -2285,6 +2293,46 @@ il file %2 (%3)?</translation>
     <message>
         <source>If enabled the icon of send message is shown in chat window</source>
         <translation>Se abilitata l&apos;icona per inviare i messaggi sarà visibile nella finestra delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Search for users...</source>
+        <translation>Cerca utenti...</translation>
+    </message>
+    <message>
+        <source>Show the chat toolbar</source>
+        <translation type="obsolete">Mostra la barra della conversazione</translation>
+    </message>
+    <message>
+        <source>Show the chat toolbar with emoticons, font and colors</source>
+        <translation>Mostra la barra della conversazione con le faccine, i font ed i colori</translation>
+    </message>
+    <message>
+        <source>Show the user panel</source>
+        <translation>Mostra il pannello degli utenti</translation>
+    </message>
+    <message>
+        <source>Show the group panel</source>
+        <translation>Mostra il pannello dei gruppi</translation>
+    </message>
+    <message>
+        <source>Show the chat panel</source>
+        <translation>Mostra il pannello delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Show the history panel</source>
+        <translation>Mostra il pannello della storia</translation>
+    </message>
+    <message>
+        <source>Show the file transfer panel</source>
+        <translation>Mostra il pannello del trasferimento dei file</translation>
+    </message>
+    <message>
+        <source>Show the bar of chat</source>
+        <translation>Mostra la barra delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Show the toolbar</source>
+        <translation>Mostra la barra degli strumenti</translation>
     </message>
 </context>
 <context>
@@ -2784,7 +2832,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Configure network</source>
-        <translation>Configura rete</translation>
+        <translation type="obsolete">Configura rete</translation>
     </message>
     <message>
         <source>Local subnet address *</source>
@@ -2801,6 +2849,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>* (read only section)</source>
         <translation>* (sezione non modificabile da qui)</translation>
+    </message>
+    <message>
+        <source>(the same for all clients)</source>
+        <translation>(la stessa per tutti i client)</translation>
+    </message>
+    <message>
+        <source>(search users here by default)</source>
+        <translation>(cerca utenti automaticamente in questa)</translation>
+    </message>
+    <message>
+        <source>Search for users</source>
+        <translation>Cerca utenti</translation>
     </message>
 </context>
 <context>

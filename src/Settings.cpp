@@ -635,6 +635,7 @@ void Settings::load()
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   m_chatShowSendMessageIcon = sets->value( "ShowSendMessageIcon", true ).toBool();
+  m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -786,6 +787,7 @@ void Settings::save()
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   sets->setValue( "ShowSendMessageIcon", m_chatShowSendMessageIcon );
+  sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
@@ -955,7 +957,7 @@ bool Settings::setDataFolder()
 
   QFileInfo data_file_info( m_dataFolder );
 
-  if( data_file_info.isWritable() && !m_saveDataInDocumentsFolder )
+  if( m_useSettingsFileIni && data_file_info.isWritable() && !m_saveDataInDocumentsFolder )
   {
     qDebug() << "Data folder:" << m_dataFolder;
     return true;
@@ -965,9 +967,15 @@ bool Settings::setDataFolder()
   QString root_folder;
 
 #if QT_VERSION >= 0x050000
-  root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
+  if( m_saveDataInDocumentsFolder )
+    root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
+  else
+    root_folder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
 #else
-  root_folder = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation );
+  if( m_saveDataInDocumentsFolder )
+    root_folder = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation );
+  else
+    root_folder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
 #endif
 
   m_dataFolder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder, data_folder ) );
