@@ -23,6 +23,7 @@
 
 #include "Config.h"
 #include "GuiAddUser.h"
+#include "Protocol.h"
 #include "Settings.h"
 
 
@@ -49,13 +50,30 @@ void GuiAddUser::loadUsers()
 {
   if( mp_twUsers->topLevelItemCount() > 0 )
     mp_twUsers->clear();
+  if( !m_users.isEmpty() )
+    m_users.clear();
 
+  UserRecord ur;
+  foreach( QString user_path, Settings::instance().userPathList() )
+  {
+     ur = Protocol::instance().loadUserRecord( user_path );
+     if( ur.isValid() )
+       addUserToList( ur );
+  }
 
   mp_lePort->setText( QString::number( DEFAULT_LISTENER_PORT ) );
+  mp_leIpAddress->setText( "" );
+  mp_leComment->setText( "" );
+  mp_leIpAddress->setFocus();
 }
 
 void GuiAddUser::saveUsers()
 {
+  QStringList sl;
+  foreach( UserRecord ur, m_users )
+    sl.append( Protocol::instance().saveUserRecord( ur ) );
+
+  Settings::instance().setUserPathList( sl );
   accept();
 }
 
@@ -69,7 +87,7 @@ void GuiAddUser::addUser()
     return;
   }
 
-  bool ok;
+  bool ok = false;
   int address_port = mp_lePort->text().simplified().toInt( &ok, 10 );
 
   if( !ok || address_port < 1 || address_port > 65535 )
@@ -89,7 +107,12 @@ void GuiAddUser::addUser()
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "These IP address and port are already inserted in list." ) );
     mp_leIpAddress->setFocus();
+    return;
   }
+
+  mp_leIpAddress->setText( "" );
+  mp_lePort->setText( QString::number( DEFAULT_LISTENER_PORT ) );
+  mp_leIpAddress->setFocus();
 }
 
 bool GuiAddUser::addUserToList( const UserRecord& ur )

@@ -28,6 +28,7 @@
 #include "FileShare.h"
 #include "Settings.h"
 #include "Protocol.h"
+#include "UserManager.h"
 
 
 Core::Core( QObject* parent )
@@ -195,4 +196,38 @@ void Core::checkUserHostAddress( const User& u )
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
     updateBroadcastAddresses();
   }
+}
+
+void Core::sendHelloToHostsInSettings()
+{
+  if( Settings::instance().userPathList().isEmpty() )
+    return;
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                         tr( "%1 Contacting %2 host addresses..." )
+                         .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
+                         .arg( Settings::instance().userPathList().size() ),
+                         DispatchToChat );
+
+  UserRecord ur;
+  User u;
+  int user_contacted = 0;
+  foreach( QString user_path, Settings::instance().userPathList() )
+  {
+    ur = Protocol::instance().loadUserRecord( user_path );
+    if( ur.isValid() )
+    {
+      u = UserManager::instance().findUserByHostAddressAndPort( ur.hostAddress(), ur.hostPort() );
+      if( !u.isValid() || !u.isConnected() )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Contacting manually added host" << ur.hostAddress().toString() << ur.hostPort();
+#endif
+        newPeerFound( ur.hostAddress(), ur.hostPort() );
+        user_contacted++;
+      }
+    }
+  }
+
+  qDebug() << user_contacted << "host address manually added contacted";
 }

@@ -32,7 +32,11 @@ Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
   /* Default RC start */
+#ifdef Q_OS_MAC
+  m_useSettingsFileIni = false;
+#else
   m_useSettingsFileIni = true;
+#endif
   m_broadcastOnlyToHostsIni = false;
   m_broadcastPort = DEFAULT_BROADCAST_PORT;
   m_saveDataInDocumentsFolder = false;
@@ -668,6 +672,7 @@ void Settings::load()
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
   m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", true ).toBool();
   m_addExternalSubnetAutomatically = sets->value( "AddExternalSubnetAutomatically", true ).toBool();
+  m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -814,6 +819,7 @@ void Settings::save()
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
   sets->setValue( "ParseBroadcastAddresses", m_parseBroadcastAddresses );
   sets->setValue( "AddExternalSubnetAutomatically", m_addExternalSubnetAutomatically );
+  sets->setValue( "UserPathList", m_userPathList );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );

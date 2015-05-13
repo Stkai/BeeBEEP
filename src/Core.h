@@ -79,6 +79,7 @@ public:
 
 public slots:
   void sendBroadcastMessage();
+  void sendHelloToHostsInSettings();
 
   /* CoreChat */
   void sendWritingMessage( VNumber );

@@ -30,6 +30,7 @@
 #include "Message.h"
 #include "ChatMessageData.h"
 #include "User.h"
+#include "UserRecord.h"
 
 
 class Protocol
@@ -84,6 +85,9 @@ public:
   Group createGroup( const QString& group_name, const QList<VNumber>& user_list );
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
+
+  QString saveUserRecord( const UserRecord& ) const;
+  UserRecord loadUserRecord( const QString& ) const;
 
   inline VNumber newId();
   QString newMd5Id() const;

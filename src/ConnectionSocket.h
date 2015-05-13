@@ -43,6 +43,8 @@ public:
   inline int protoVersion() const;
   int fileTransferBufferSize() const;
 
+  inline bool isConnected() const;
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const Message& );
@@ -77,5 +79,6 @@ private:
 inline VNumber ConnectionSocket::userId() const { return m_userId; }
 inline void ConnectionSocket::setUserId( VNumber new_value ) { m_userId = new_value; }
 inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
+inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::HostLookupState && state() <= QAbstractSocket::ConnectedState; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

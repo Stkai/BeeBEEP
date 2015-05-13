@@ -185,3 +185,21 @@ User UserManager::findUserBySessionId( const QString& user_session_id ) const
 
   return User();
 }
+
+User UserManager::findUserByHostAddressAndPort( const QHostAddress& host_address, int host_port )
+{
+  if( host_address.isNull() )
+    return User();
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.hostAddress() == host_address && u.hostPort() == host_port )
+      return u;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find user with IP address" << host_address.toString() << "and port" << host_port;
+#endif
+
+  return User();
+}

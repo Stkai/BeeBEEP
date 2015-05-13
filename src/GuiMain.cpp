@@ -2287,6 +2287,6 @@ void GuiMain::showAddUser()
   gad.setFixedSize( gad.size() );
   if( gad.exec() == QDialog::Accepted )
   {
-    // do something
+    mp_core->sendHelloToHostsInSettings();
   }
 }

@@ -50,7 +50,10 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
   while( it != m_connections.end() )
   {
     if( (sender_port == -1 || (*it)->peerPort() == sender_port) && (*it)->peerAddress() == sender_ip )
-      return true;
+    {
+      if( (*it)->isConnected() )
+        return true;
+    }
     ++it;
   }
   return false;

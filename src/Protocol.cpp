@@ -454,6 +454,38 @@ User Protocol::createTemporaryUser( const QString& user_path, const QString& acc
   return u;
 }
 
+QString Protocol::saveUserRecord( const UserRecord& ur ) const
+{
+  QStringList sl;
+  sl << ur.hostAddress().toString();
+  sl << QString::number( ur.hostPort() );
+  sl << ur.comment();
+  return sl.join( DATA_FIELD_SEPARATOR );
+}
+
+UserRecord Protocol::loadUserRecord( const QString& s ) const
+{
+  QStringList sl = s.split( DATA_FIELD_SEPARATOR );
+  if( sl.size() < 3 )
+    return UserRecord();
+
+  UserRecord ur;
+  ur.setHostAddress( QHostAddress( sl.takeFirst() ) );
+  if( ur.hostAddress().isNull() )
+    return UserRecord();
+
+  bool ok = false;
+  int host_port = sl.takeFirst().toInt( &ok, 10 );
+  if( !ok || host_port < 1 || host_port > 65535 )
+    return UserRecord();
+  else
+    ur.setHostPort( host_port );
+
+  ur.setComment( sl.takeFirst() );
+
+  return ur;
+}
+
 Chat Protocol::createChat( const QList<VNumber>& user_list )
 {
   Chat c;

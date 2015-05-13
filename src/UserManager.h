@@ -40,6 +40,7 @@ public:
   User findUserByPath( const QString& ) const;
   User findUserByAccountName( const QString& ) const;
   User findUserBySessionId( const QString& ) const;
+  User findUserByHostAddressAndPort( const QHostAddress&, int );
 
   inline const QList<Group>& groups() const;
   void setGroup( const Group& );
