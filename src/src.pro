@@ -96,7 +96,9 @@ SOURCES += Listener.cpp \
     GuiGroupList.cpp \
     GuiCreateGroup.cpp \
     GuiLanguage.cpp \
-    Avatar.cpp
+    Avatar.cpp \
+    GuiAddUser.cpp \
+    UserRecord.cpp
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -166,7 +168,9 @@ HEADERS += \
     GuiGroupList.h \
     GuiCreateGroup.h \
     GuiLanguage.h \
-    Avatar.h
+    Avatar.h \
+    GuiAddUser.h \
+    UserRecord.h
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \
@@ -181,7 +185,8 @@ FORMS += GuiChat.ui \
     GuiSavedChat.ui \
     GuiScreenShot.ui \
     GuiCreateGroup.ui \
-    GuiLanguage.ui
+    GuiLanguage.ui \
+    GuiAddUser.ui
 
 RESOURCES += beebeep.qrc
 win32: RC_FILE = beebeep.rc

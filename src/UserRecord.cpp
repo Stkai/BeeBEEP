@@ -21,25 +21,36 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#include "UserRecord.h"
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-#ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
-#else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
-#endif
-const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
-const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
-const char* BEEBEEP_HELP_WEBSITE = "/help.php";
-const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.9d";
-const int BEEBEEP_PROTO_VERSION = 62;
-const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 380;
 
-#endif // BEEBEEP_VERSION_H
+UserRecord::UserRecord()
+  : m_hostAddress(), m_hostPort( DEFAULT_LISTENER_PORT ), m_comment( "" )
+{
+}
 
+UserRecord::UserRecord( const UserRecord& ur )
+{
+  (void)operator=( ur );
+}
+
+UserRecord& UserRecord::operator=( const UserRecord& ur )
+{
+  if( this != &ur )
+  {
+    m_hostAddress = ur.m_hostAddress;
+    m_hostPort = ur.m_hostPort;
+    m_comment = ur.m_comment;
+  }
+  return *this;
+}
+
+bool UserRecord::operator<( const UserRecord& u ) const
+{
+  if( u.m_hostAddress.isNull() )
+    return false;
+  else if( m_hostAddress.isNull() )
+    return true;
+  else
+    return m_hostAddress.toString() < u.m_hostAddress.toString();
+}

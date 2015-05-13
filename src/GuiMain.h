@@ -131,6 +131,7 @@ private slots:
   void showSharesForUser( const User& );
   void selectLanguage();
   void showLocalUserVCard();
+  void showAddUser();
 
 protected:
   void closeEvent( QCloseEvent* );

@@ -647,7 +647,7 @@ void Settings::load()
   sets->beginGroup( "Misc" );
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
   m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
-  m_localUser.setHostPort( sets->value( "ListenerPort", 6475 ).toInt() );
+  m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
   m_pingInterval = qMax( sets->value( "PingInterval", 31000 ).toInt(), 1000 );
   m_pongTimeout = qMax( sets->value( "PongTimeout", 98000 ).toInt(), 1000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 1000 );

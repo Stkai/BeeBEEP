@@ -21,25 +21,37 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUIADDUDER_H
+#define BEEBEEP_GUIADDUDER_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-#ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
-#else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
-#endif
-const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
-const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
-const char* BEEBEEP_HELP_WEBSITE = "/help.php";
-const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.9d";
-const int BEEBEEP_PROTO_VERSION = 62;
-const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 380;
+#include "ui_GuiAddUser.h"
+#include "UserRecord.h"
 
-#endif // BEEBEEP_VERSION_H
 
+class GuiAddUser : public QDialog, private Ui::GuiAddUserDialog
+{
+  Q_OBJECT
+
+public:
+  explicit GuiAddUser( QWidget *parent = 0 );
+
+  void loadUsers();
+
+  inline const QList<UserRecord>& usersToAdd() const;
+
+protected slots:
+  void addUser();
+  void saveUsers();
+
+protected:
+  bool addUserToList( const UserRecord& );
+
+private:
+  QList<UserRecord> m_users;
+
+};
+
+// Inline Functions
+inline const QList<UserRecord>& GuiAddUser::usersToAdd() const { return m_users; }
+
+#endif // BEEBEEP_GUIADDUDER_H

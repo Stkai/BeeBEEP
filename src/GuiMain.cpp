@@ -26,6 +26,7 @@
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "FileShare.h"
+#include "GuiAddUser.h"
 #include "GuiAskPassword.h"
 #include "GuiChat.h"
 #include "GuiChatList.h"
@@ -447,6 +448,8 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actConfigureNetwork );
   mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), mp_core, SLOT( sendBroadcastMessage() ) );
   mp_actBroadcast->setStatusTip( tr( "Broadcast a message in your network to find available users" ) );
+  act = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Manually add users..."), this, SLOT( showAddUser() ) );
+  act->setStatusTip( tr( "Add manually ip address and port of the user you want to connect" ) );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
@@ -2272,5 +2275,18 @@ void GuiMain::checkChatToolbar()
   else
   {
     mp_barChat->setVisible( Settings::instance().showChatToolbar() );
+  }
+}
+
+void GuiMain::showAddUser()
+{
+  GuiAddUser gad( this );
+  gad.loadUsers();
+  gad.setModal( true );
+  gad.show();
+  gad.setFixedSize( gad.size() );
+  if( gad.exec() == QDialog::Accepted )
+  {
+    // do something
   }
 }

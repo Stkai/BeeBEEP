@@ -46,6 +46,12 @@
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="mp_lWelcome">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Welcome</string>
        </property>
@@ -55,7 +61,14 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="mp_lAccount"/>
+      <widget class="QLabel" name="mp_lAccount">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
      <item row="2" column="1">
       <widget class="QLineEdit" name="mp_leName"/>

@@ -32,7 +32,7 @@ User::User()
 }
 
 User::User( VNumber new_id )
-  : m_id( new_id ), m_vCard(), m_hostAddress( "127.0.0.1" ), m_hostPort( 6475 ),
+  : m_id( new_id ), m_vCard(), m_hostAddress( "127.0.0.1" ), m_hostPort( DEFAULT_LISTENER_PORT ),
     m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
     m_version( "" ), m_sessionId( "" )
 {

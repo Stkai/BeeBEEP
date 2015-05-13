@@ -19,6 +19,12 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="mp_lUdpPort">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>UDP Port in beebeep.rc *</string>
         </property>
@@ -39,6 +45,12 @@
       </item>
       <item row="0" column="2">
        <widget class="QLabel" name="mp_lHelpUdp">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>(the same for all clients)</string>
         </property>
@@ -46,6 +58,12 @@
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="mp_lBase">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Local subnet address *</string>
         </property>
@@ -66,6 +84,12 @@
       </item>
       <item row="1" column="2">
        <widget class="QLabel" name="mp_lHelpSubnet">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>(search users here by default)</string>
         </property>
@@ -96,6 +120,12 @@
       </item>
       <item row="4" column="0" colspan="3">
        <widget class="QLabel" name="mp_lBroadcast">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
         </property>

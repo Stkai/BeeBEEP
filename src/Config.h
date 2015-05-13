@@ -47,6 +47,7 @@ typedef quint64 FileSizeType;
 
 // Broadcast
 const int DEFAULT_BROADCAST_PORT = 36475;
+const int DEFAULT_LISTENER_PORT = 6475;
 
 // Connection I/O
 #define DATA_BLOCK_SIZE_16 quint16
