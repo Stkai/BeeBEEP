@@ -35,7 +35,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   setWindowTitle( tr( "Add user" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   mp_twUsers->setColumnCount( 2 );
   QStringList labels;
-  labels << tr( "IP Address and port" ) << tr( "Comment" );
+  labels << tr( "Address" ) << tr( "Comment" );
   mp_twUsers->setHeaderLabels( labels );
   mp_twUsers->setAlternatingRowColors( true );
   mp_twUsers->setSortingEnabled( true );

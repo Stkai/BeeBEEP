@@ -136,6 +136,9 @@
      <property name="columnCount">
       <number>2</number>
      </property>
+     <attribute name="headerMinimumSectionSize">
+      <number>50</number>
+     </attribute>
      <attribute name="headerStretchLastSection">
       <bool>true</bool>
      </attribute>

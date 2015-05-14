@@ -367,6 +367,10 @@
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 cercherà gli utenti connessi a questi indirizzi IP: %3</translation>
     </message>
+    <message>
+        <source>%1 Contacting %2 host addresses...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -454,6 +458,64 @@
     <message>
         <source>You can connect to the Google chat.</source>
         <translation type="obsolete">Puoi connetterti alla chat di Google.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiAddUser</name>
+    <message>
+        <source>Add user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please insert a valid IP address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please insert a valid port or use the default one %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>These IP address and port are already inserted in list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Indirizzo</translation>
+    </message>
+</context>
+<context>
+    <name>GuiAddUserDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add an IP address and port of the user you want to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished">Porta</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annulla</translation>
     </message>
 </context>
 <context>
@@ -1704,7 +1766,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 will keep running in the background mode</source>
-        <translation>%1 continuerà ad essere attivo in modalità nascosta</translation>
+        <translation type="obsolete">%1 continuerà ad essere attivo in modalità nascosta</translation>
     </message>
     <message>
         <source>Select beep file...</source>
@@ -2304,7 +2366,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the chat toolbar with emoticons, font and colors</source>
-        <translation>Mostra la barra della conversazione con le faccine, i font ed i colori</translation>
+        <translation type="obsolete">Mostra la barra della conversazione con le faccine, i font ed i colori</translation>
     </message>
     <message>
         <source>Show the user panel</source>
@@ -2332,7 +2394,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the toolbar</source>
-        <translation>Mostra la barra degli strumenti</translation>
+        <translation type="obsolete">Mostra la barra degli strumenti</translation>
+    </message>
+    <message>
+        <source>Add manually ip address and port of the user you want to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is running in the background mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add user manually...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

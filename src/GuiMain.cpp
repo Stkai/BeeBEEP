@@ -448,7 +448,7 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actConfigureNetwork );
   mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), mp_core, SLOT( sendBroadcastMessage() ) );
   mp_actBroadcast->setStatusTip( tr( "Broadcast a message in your network to find available users" ) );
-  act = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Manually add users..."), this, SLOT( showAddUser() ) );
+  act = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add user manually..."), this, SLOT( showAddUser() ) );
   act->setStatusTip( tr( "Add manually ip address and port of the user you want to connect" ) );
   mp_menuMain->addSeparator();
 
@@ -1633,7 +1633,7 @@ void GuiMain::hideToTrayIcon()
   mp_trayIcon->show();
   if( Settings::instance().showNotificationOnTray() )
     mp_trayIcon->showMessage( Settings::instance().programName(),
-                            tr( "%1 will keep running in the background mode" )
+                            tr( "%1 is running in the background mode" )
                               .arg( Settings::instance().programName() ),
                             QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );
   hide();
