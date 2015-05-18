@@ -10,6 +10,13 @@ CONFIG(debug,debug|release) {
   message( Build BeeBEEP in Release Mode )
 }
 
+win32: {
+  DEFINES += BEEBEEP_USE_BONJOUR
+  INCLUDEPATH += $$PWD/../bonjour
+  DEPENDPATH += $$PWD/../bonjour
+  LIBS += -L$$PWD/../bonjour/ -ldnss
+}
+
 message(Qt version: $$[QT_VERSION])
 
 unix:!macx {
@@ -99,6 +106,14 @@ SOURCES += Listener.cpp \
     Avatar.cpp \
     GuiAddUser.cpp \
     UserRecord.cpp
+
+win32: {
+  SOURCES += BonjourBrowser.cpp \
+    BonjourRecord.cpp \
+    BonjourRegister.cpp \
+    BonjourResolver.cpp
+}
+
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -172,6 +187,14 @@ HEADERS += \
     GuiAddUser.h \
     UserRecord.h
 
+win32: {
+  HEADERS += BonjourBrowser.h \
+    BonjourRecord.h \
+    BonjourRegister.h \
+    BonjourResolver.h
+}
+
+
 FORMS += GuiChat.ui \
     GuiVCard.ui \
     GuiEditVCard.ui \
@@ -192,31 +215,5 @@ RESOURCES += beebeep.qrc
 win32: RC_FILE = beebeep.rc
 
 ICON = beebeep.icns
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -443,13 +443,10 @@ void GuiMain::createMenus()
   mp_menuMain = new QMenu( tr( "Main" ), this );
   mp_menuMain->addAction( mp_actStartStopCore );
   mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actVCard );
-  mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actConfigureNetwork );
   mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), mp_core, SLOT( sendBroadcastMessage() ) );
   mp_actBroadcast->setStatusTip( tr( "Broadcast a message in your network to find available users" ) );
-  act = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add user manually..."), this, SLOT( showAddUser() ) );
-  act->setStatusTip( tr( "Add manually ip address and port of the user you want to connect" ) );
+  mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
@@ -468,6 +465,11 @@ void GuiMain::createMenus()
 
   /* Users Menu */
   mp_menuUsers = new QMenu( tr( "Users" ), this );
+
+  mp_menuUsers->addAction( mp_actConfigureNetwork );
+  act = mp_menuUsers->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
+  act->setStatusTip( tr( "Add the IP address and the port of the users you want to connect" ) );
+  mp_menuUsers->addSeparator();
 
   act = mp_menuUsers->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );

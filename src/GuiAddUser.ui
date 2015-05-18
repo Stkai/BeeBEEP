@@ -103,6 +103,9 @@
    </item>
    <item row="1" column="2" rowspan="2">
     <widget class="QPushButton" name="mp_pbAdd">
+     <property name="toolTip">
+      <string>Click here to add</string>
+     </property>
      <property name="text">
       <string/>
      </property>

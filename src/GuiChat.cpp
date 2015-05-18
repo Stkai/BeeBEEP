@@ -109,7 +109,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
-
 }
 
 void GuiChat::showSendMessageIcon( bool yes )

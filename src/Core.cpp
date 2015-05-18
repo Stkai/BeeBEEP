@@ -86,6 +86,11 @@ bool Core::start()
     mp_listener->close();
     return false;
   }
+  else
+  {
+    qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().hostPort() << "and udp port" << Settings::instance().broadcastPort();
+    QTimer::singleShot( 1000, this, SLOT( sendBroadcastMessage() ) );
+  }
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
@@ -151,10 +156,11 @@ void Core::sendBroadcastMessage()
 {
   if( isConnected() )
   {
-    mp_broadcaster->sendBroadcastDatagram();
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
-                                                                          Settings::instance().programName() ), DispatchToChat );
+                           tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
+                                                                            Settings::instance().programName() ), DispatchToChat );
+    mp_broadcaster->sendBroadcastDatagram();
+    sendHelloToHostsInSettings();
   }
   else
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -227,6 +233,8 @@ void Core::sendHelloToHostsInSettings()
         user_contacted++;
       }
     }
+    else
+      qWarning() << "Invalid host address found in settings:" << user_path;
   }
 
   qDebug() << user_contacted << "host address manually added contacted";

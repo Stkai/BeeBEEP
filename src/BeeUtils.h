@@ -54,6 +54,7 @@ namespace Bee
   QColor invertColor( const QColor& );
   QString chopTextForWidget( QWidget*, const QString& );
   QString removeHtmlTag( const QString& );
+  inline int toLittleEndianFromBig( int );
 
 }
 
@@ -62,5 +63,6 @@ namespace Bee
 inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
 inline QString Bee::iconToHtml( const QString& icon_path, const QString& icon_alt ) { return QString( "<img src='%1' width=16 height=16 border=0 alt=' %2 ' /> " ).arg( icon_path ).arg( icon_alt ); }
 inline VNumber Bee::qVariantToVNumber( const QVariant& v ) { return v.toULongLong(); }
+inline int Bee::toLittleEndianFromBig( int big_endian_int ) { return (int) (0 | ((big_endian_int & 0x00ff) << 8) | ((big_endian_int & 0xff00) >> 8)); }
 
 #endif // BEEBEEP_GUIUTILS_H
