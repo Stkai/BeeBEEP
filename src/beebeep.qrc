@@ -106,5 +106,6 @@
         <file>images/menu-user-offline.png</file>
         <file>images/menu-user-online.png</file>
         <file>images/user-add.png</file>
+        <file>images/bonjour.png</file>
     </qresource>
 </RCC>

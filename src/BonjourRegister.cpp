@@ -86,7 +86,7 @@ void BonjourRegister::socketIsReadyRead()
   }
 }
 
-void BonjourRegister::BonjourRegisterService( DNSServiceRef, DNSServiceFlags flags,
+void BonjourRegister::BonjourRegisterService( DNSServiceRef, DNSServiceFlags,
                                               DNSServiceErrorType error_code, const char *service_name,
                                               const char *registered_type, const char *reply_domain,
                                               void *register_service_ref )

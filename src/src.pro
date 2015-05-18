@@ -14,7 +14,7 @@ win32: {
   DEFINES += BEEBEEP_USE_BONJOUR
   INCLUDEPATH += $$PWD/../bonjour
   DEPENDPATH += $$PWD/../bonjour
-  LIBS += -L$$PWD/../bonjour/ -ldnss
+  LIBS += -L$$PWD/../bonjour/ -ldnssd
 }
 
 message(Qt version: $$[QT_VERSION])
