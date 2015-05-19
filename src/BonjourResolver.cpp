@@ -25,76 +25,36 @@
 
 
 BonjourResolver::BonjourResolver( QObject* parent )
- : QObject( parent ), mp_dnss( 0 ), mp_socket( 0 ), m_servicePort( -1 )
+ : BonjourObject( parent ), m_servicePort( -1 ), m_lookUpHostId( -1 )
 {
+  setObjectName( "BonjourResolver" );
 }
 
-BonjourResolver::~BonjourResolver()
+void BonjourResolver::cleanUp()
 {
-  cleanupAfterResolve();
-}
-
-void BonjourResolver::cleanupAfterResolve()
-{
-  if( mp_dnss )
-  {
-    DNSServiceRefDeallocate( mp_dnss );
-    mp_dnss = 0;
-    delete mp_socket;
-    m_servicePort = -1;
-  }
+  qDebug() << "IT WORKS";
+  if( m_lookUpHostId != -1 )
+    QHostInfo::abortHostLookup( m_lookUpHostId );
+  BonjourObject::cleanUp();
 }
 
 void BonjourResolver::resolve( const BonjourRecord& bonjour_record )
 {
   if( mp_dnss )
   {
-    qWarning() << "Bonjour resolver already has a resolve in process";
+    qWarning() << objectName() << "already has a resolve in process. Skip this one:" << m_record.name();
     return;
   }
 
+  m_record = bonjour_record;
   DNSServiceErrorType error_code = DNSServiceResolve(&mp_dnss, 0, 0,
                                                 bonjour_record.serviceName().toUtf8().constData(),
                                                 bonjour_record.registeredType().toUtf8().constData(),
                                                 bonjour_record.replyDomain().toUtf8().constData(),
                                                 (DNSServiceResolveReply)BonjourResolveReply, this );
 
-  int error_code_int = (int)error_code;
-
-  if( error_code != kDNSServiceErr_NoError )
-  {
-    qWarning() << "Bonjour resolver service has an error:" << error_code_int;
-    emit error( error_code_int );
-  }
-  else
-  {
-    int socket_descriptor = DNSServiceRefSockFD( mp_dnss );
-    if( socket_descriptor < 0 )
-    {
-      qWarning() << "Bonjour resolver has an invalid socket descriptor:" << socket_descriptor;
-      error_code_int = (int)kDNSServiceErr_Invalid;
-      emit error( error_code_int );
-    }
-    else
-    {
-      mp_socket = new QSocketNotifier( socket_descriptor, QSocketNotifier::Read, this );
-      connect( mp_socket, SIGNAL( activated( int ) ), this, SLOT( socketIsReadyRead() ) );
-    }
-  }
+  checkErrorAndReadSocket( error_code );
 }
-
-void BonjourResolver::socketIsReadyRead()
-{
-  DNSServiceErrorType error_code = DNSServiceProcessResult( mp_dnss );
-  int error_code_int = (int)error_code;
-
-  if( error_code != kDNSServiceErr_NoError )
-  {
-    qWarning() << "Bonjour resolver has an error in process result:" << error_code_int;
-    emit error( error_code_int );
-  }
-}
-
 
 void BonjourResolver::BonjourResolveReply( DNSServiceRef, DNSServiceFlags,
                                     quint32, DNSServiceErrorType error_code,
@@ -112,11 +72,18 @@ void BonjourResolver::BonjourResolveReply( DNSServiceRef, DNSServiceFlags,
 
   service_resolver->setServicePort( service_port );
 
-  QHostInfo::lookupHost( QString::fromUtf8( host_target ), service_resolver, SLOT( completeConnection( const QHostInfo& ) ) );
+  int lookup_id = QHostInfo::lookupHost( QString::fromUtf8( host_target ), service_resolver, SLOT( lookedUp( const QHostInfo& ) ) );
+  service_resolver->setLookUpHostId( lookup_id );
 }
 
-void BonjourResolver::completeConnection( const QHostInfo& host_info )
+void BonjourResolver::lookedUp( const QHostInfo& host_info )
 {
+  m_lookUpHostId = -1;
+
+  if( host_info.error() != QHostInfo::NoError )
+  {
+    qWarning() << objectName() << "can not resolve" << m_record.name();
+  }
+
   emit resolved( host_info, m_servicePort );
-  QMetaObject::invokeMethod( this, "cleanupAfterResolve", Qt::QueuedConnection );
 }

@@ -24,29 +24,23 @@
 #ifndef BEEBEEP_BONJOURRESOLVER_H
 #define BEEBEEP_BONJOURRESOLVER_H
 
-#include "Config.h"
-#include "BonjourRecord.h"
-#include "dns_sd.h"
+#include "BonjourObject.h"
 
 
-class BonjourResolver : public QObject
+class BonjourResolver : public BonjourObject
 {
   Q_OBJECT
 
 public:
   BonjourResolver( QObject *parent );
-  ~BonjourResolver();
 
   void resolve( const BonjourRecord& );
 
 signals:
   void resolved( const QHostInfo&, int );
-  void error( int );
 
 private slots:
-  void socketIsReadyRead();
-  void cleanupAfterResolve();
-  void completeConnection( const QHostInfo& );
+  void lookedUp( const QHostInfo& );
 
 protected:
   static void DNSSD_API BonjourResolveReply(DNSServiceRef sdRef, DNSServiceFlags flags,
@@ -55,17 +49,19 @@ protected:
                                   quint16 txtLen, const char *txtRecord, void *context);
 
   inline void setServicePort( int );
+  inline void setLookUpHostId( int );
+  void cleanUp();
 
 private:
-  DNSServiceRef mp_dnss;
-  QSocketNotifier* mp_socket;
+  BonjourRecord m_record;
   int m_servicePort;
+  int m_lookUpHostId;
 
 };
 
 
 // Inline Functions
 inline void BonjourResolver::setServicePort( int new_value ) { m_servicePort = new_value; }
-
+inline void BonjourResolver::setLookUpHostId( int new_value ) { m_lookUpHostId = new_value; }
 
 #endif // BEEBEEP_BONJOURRESOLVER_H

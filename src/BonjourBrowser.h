@@ -24,51 +24,29 @@
 #ifndef BEEBEEP_BONJOURBROWSER_H
 #define BEEBEEP_BONJOURBROWSER_H
 
-#include "Config.h"
-#include "BonjourRecord.h"
-#include "dns_sd.h"
+#include "BonjourObject.h"
 
 
-class BonjourBrowser : public QObject
+class BonjourBrowser : public BonjourObject
 {
   Q_OBJECT
 
 public:
   BonjourBrowser( QObject *parent = 0 );
-  ~BonjourBrowser();
 
-  void browseForServiceType( const QString& );
-
-  inline const QList<BonjourRecord>& records() const;
-  inline const QString& serviceType() const;
+  void browseForService( const QString& );
+  void stop();
 
 signals:
-  void recordsChanged();
-  void error( int );
-
-private slots:
-  void socketIsReadyRead();
+  void newRecordFound( const BonjourRecord& );
+  void recordToRemove( const BonjourRecord& );
 
 protected:
   static void DNSSD_API BonjourBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32,
                                  DNSServiceErrorType error_code, const char *service_name,
                                  const char *registered_type, const char *reply_domain, void *browser_service_ref );
 
-  bool addRecord( const BonjourRecord& );
-  inline bool removeRecord( const BonjourRecord& );
-
-private:
-  DNSServiceRef mp_dnss;
-  QSocketNotifier *mp_socket;
-  QList<BonjourRecord> m_records;
-  QString m_serviceType;
 
 };
-
-// Inline Functions
-inline const QList<BonjourRecord>& BonjourBrowser::records() const { return m_records; }
-inline bool BonjourBrowser::removeRecord( const BonjourRecord& br ) { return m_records.removeOne( br ); }
-inline const QString& BonjourBrowser::serviceType() const { return m_serviceType; }
-
 
 #endif // BEEBEEP_BONJOURBROWSER_H

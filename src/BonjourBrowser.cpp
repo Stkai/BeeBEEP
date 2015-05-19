@@ -25,66 +25,27 @@
 
 
 BonjourBrowser::BonjourBrowser( QObject *parent )
- : QObject( parent ), mp_dnss( 0 ), mp_socket( 0 ), m_records(), m_serviceType( "" )
+ : BonjourObject( parent )
 {
+  setObjectName( "BonjourBrowser" );
 }
 
-BonjourBrowser::~BonjourBrowser()
+void BonjourBrowser::stop()
+{
+  cleanUp();
+}
+
+void BonjourBrowser::browseForService( const QString& service_name )
 {
   if( mp_dnss )
   {
-    DNSServiceRefDeallocate( mp_dnss );
-    mp_dnss = 0;
+    qWarning() << objectName() << "is already browsing the service:" << m_record.serviceName();
+    return;
   }
-}
 
-void BonjourBrowser::browseForServiceType( const QString& service_type )
-{
-  m_serviceType = service_type;
-  DNSServiceErrorType error_code = DNSServiceBrowse( &mp_dnss, 0, 0, service_type.toUtf8().constData(), 0, BonjourBrowseReply, this );
-  int error_code_int = (int)error_code;
-
-  if( error_code != kDNSServiceErr_NoError )
-  {
-    qWarning() << "Bonjour browse service has an error:" << error_code_int;
-    emit error( error_code_int );
-  }
-  else
-  {
-    int socket_descriptor = DNSServiceRefSockFD( mp_dnss );
-    if( socket_descriptor < 0 )
-    {
-      qWarning() << "Bonjour browser has an invalid socket descriptor:" << socket_descriptor;
-      error_code_int = (int)kDNSServiceErr_Invalid;
-      emit error( error_code_int );
-    }
-    else
-    {
-      mp_socket = new QSocketNotifier( socket_descriptor, QSocketNotifier::Read, this );
-      connect( mp_socket, SIGNAL( activated( int ) ), this, SLOT( socketIsReadyRead() ) );
-    }
-  }
-}
-
-void BonjourBrowser::socketIsReadyRead()
-{
-  DNSServiceErrorType error_code = DNSServiceProcessResult( mp_dnss );
-  int error_code_int = (int)error_code;
-
-  if( error_code != kDNSServiceErr_NoError )
-  {
-    qWarning() << "Bonjour browser has an error in process result:" << error_code_int;
-    emit error( error_code_int );
-  }
-}
-
-bool BonjourBrowser::addRecord( const BonjourRecord& bonjour_record )
-{
-  if( m_records.contains( bonjour_record ) )
-    return false;
-
-  m_records.append( bonjour_record );
-  return true;
+  m_record.setServiceName( service_name );
+  DNSServiceErrorType error_code = DNSServiceBrowse( &mp_dnss, 0, 0, service_name.toUtf8().constData(), 0, BonjourBrowseReply, this );
+  checkErrorAndReadSocket( error_code );
 }
 
 void BonjourBrowser::BonjourBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32,
@@ -101,12 +62,13 @@ void BonjourBrowser::BonjourBrowseReply( DNSServiceRef, DNSServiceFlags flags, q
   else
   {
     BonjourRecord bonjour_record( service_name, registered_type, reply_domain );
-    if( flags & kDNSServiceFlagsAdd )
-      service_browser->addRecord( bonjour_record );
-    else
-      service_browser->removeRecord( bonjour_record );
 
-    if( !(flags & kDNSServiceFlagsMoreComing) )
-      emit service_browser->recordsChanged();
+    if( flags & kDNSServiceFlagsAdd )
+      emit service_browser->newRecordFound( bonjour_record );
+    else
+      emit service_browser->recordToRemove( bonjour_record );
+
+    //if( !(flags & kDNSServiceFlagsMoreComing) )
+    //No more is coming
   }
 }

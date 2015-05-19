@@ -25,65 +25,35 @@
 
 
 BonjourRegister::BonjourRegister( QObject *parent )
- : QObject( parent ), mp_dnss( 0 ), mp_socket( 0 ), m_registeredService()
+ : BonjourObject( parent )
 {
+  setObjectName( "BonjourRegister" );
 }
 
-BonjourRegister::~BonjourRegister()
+void BonjourRegister::unregisterService()
+{
+  cleanUp();
+}
+
+bool BonjourRegister::registerService( const BonjourRecord& bonjour_record, int service_port )
 {
   if( mp_dnss )
   {
-    DNSServiceRefDeallocate( mp_dnss );
-    mp_dnss = 0;
-  }
-}
-
-void BonjourRegister::registerService( const BonjourRecord& bonjour_record, int service_port )
-{
-  if( mp_dnss )
-  {
-    qWarning() << "Bonjour has already registered a service like this:" << bonjour_record.serviceName();
-    return;
+    qWarning() << objectName() << "has already registered a service:" << m_record.name();
+    return false;
   }
 
   DNSServiceErrorType error_code = DNSServiceRegister( &mp_dnss, 0, 0, bonjour_record.serviceName().toUtf8().constData(),
                                                  bonjour_record.registeredType().toUtf8().constData(),
                                                  bonjour_record.replyDomain().isEmpty() ? 0 : bonjour_record.replyDomain().toUtf8().constData(),
                                                  0, service_port, 0, 0, BonjourRegisterService, this );
-  int error_code_int = (int)error_code;
-
-  if( error_code != kDNSServiceErr_NoError )
+  if( !checkErrorAndReadSocket( error_code ) )
   {
-    qWarning() << "Bonjour register service has an error:" << error_code_int;
-    emit error( error_code_int );
+    qWarning() << objectName() << "can not register" << bonjour_record.name() << "on port" << service_port;
+    return false;
   }
   else
-  {
-    int socket_descriptor = DNSServiceRefSockFD( mp_dnss );
-    if( socket_descriptor < 0 )
-    {
-      qWarning() << "Bonjour register has an invalid socket descriptor:" << socket_descriptor;
-      error_code_int = (int)kDNSServiceErr_Invalid;
-      emit error( error_code_int );
-    }
-    else
-    {
-      mp_socket = new QSocketNotifier( socket_descriptor, QSocketNotifier::Read, this );
-      connect( mp_socket, SIGNAL( activated( int ) ), this, SLOT( socketIsReadyRead() ) );
-    }
-  }
-}
-
-void BonjourRegister::socketIsReadyRead()
-{
-  DNSServiceErrorType error_code = DNSServiceProcessResult( mp_dnss );
-  int error_code_int = (int)error_code;
-
-  if( error_code != kDNSServiceErr_NoError )
-  {
-    qWarning() << "Bonjour register has an error in process result:" << error_code_int;
-    emit error( error_code_int );
-  }
+    return true;
 }
 
 void BonjourRegister::BonjourRegisterService( DNSServiceRef, DNSServiceFlags,
@@ -99,7 +69,7 @@ void BonjourRegister::BonjourRegisterService( DNSServiceRef, DNSServiceFlags,
   }
   else
   {
-    service_register->setRegisteredService( BonjourRecord( service_name, registered_type, reply_domain ) );
+    service_register->setRecord( BonjourRecord( service_name, registered_type, reply_domain ) );
     emit service_register->serviceRegistered();
   }
 }

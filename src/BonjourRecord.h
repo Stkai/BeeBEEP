@@ -45,6 +45,8 @@ public:
   inline const QString& replyDomain() const;
   inline void setReplyDomain( const QString& );
 
+  inline QString name() const;
+
 private:
   QString m_serviceName;
   QString m_registeredType;
@@ -61,5 +63,6 @@ inline const QString& BonjourRecord::registeredType() const { return m_registere
 inline void BonjourRecord::setRegisteredType( const QString& new_value ) { m_registeredType = new_value; }
 inline const QString& BonjourRecord::replyDomain() const { return m_replyDomain; }
 inline void BonjourRecord::setReplyDomain( const QString& new_value ) { m_replyDomain = new_value; }
+inline QString BonjourRecord::name() const { return QString( "%1|%2|%3" ).arg( m_serviceName, m_registeredType, m_replyDomain ); }
 
 #endif // BEEBEEP_BONJOURRECORD_H
