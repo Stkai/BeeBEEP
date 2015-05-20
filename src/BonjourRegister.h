@@ -36,6 +36,7 @@ public:
 
   bool registerService( const BonjourRecord&, int );
   void unregisterService();
+  inline int servicePort() const;
 
 signals:
   void serviceRegistered();
@@ -46,6 +47,13 @@ protected:
                                                 const char *registered_type, const char *reply_domain,
                                                 void *register_service_ref );
 
+private:
+  int m_servicePort;
+
 };
+
+
+// Inline Functions
+inline int BonjourRegister::servicePort() const { return m_servicePort; }
 
 #endif // BEEBEEP_BONJOURREGISTER_H

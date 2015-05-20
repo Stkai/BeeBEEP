@@ -30,6 +30,10 @@
 class Broadcaster;
 class Group;
 class UserList;
+class UserRecord;
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+class BonjourManager;
+#endif
 
 
 class Core : public QObject
@@ -113,6 +117,7 @@ protected slots:
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();
   void checkUserAuthentication( const Message& );
+  void checkUserRecord( const UserRecord& );
 
   /* CoreParser */
   void parseMessage( VNumber, const Message& );
@@ -179,6 +184,9 @@ private:
   Broadcaster* mp_broadcaster;
   FileTransfer* mp_fileTransfer;
   int m_shareListToBuild;
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  BonjourManager* mp_bonjour;
+#endif
 
 };
 

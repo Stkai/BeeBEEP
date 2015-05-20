@@ -29,6 +29,9 @@
 #include "Settings.h"
 #include "Protocol.h"
 #include "UserManager.h"
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  #include "BonjourManager.h"
+#endif
 
 
 Core::Core( QObject* parent )
@@ -44,6 +47,11 @@ Core::Core( QObject* parent )
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
   m_shareListToBuild = 0;
+
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  mp_bonjour = new BonjourManager( this );
+  connect( mp_bonjour, SIGNAL( newUserFound( const UserRecord& ) ), this, SLOT( checkUserRecord( const UserRecord& ) ) );
+#endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_broadcaster, SIGNAL( udpPortBlocked() ), this, SLOT( showBroadcasterUdpError() ) );
@@ -92,6 +100,10 @@ bool Core::start()
     QTimer::singleShot( 1000, this, SLOT( sendBroadcastMessage() ) );
   }
 
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  mp_bonjour->start( Settings::instance().programName(), Settings::instance().dnsRecord(), Settings::instance().localUser().hostAddress().toString(), mp_listener->serverPort() );
+#endif
+
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
@@ -124,6 +136,9 @@ bool Core::start()
 void Core::stop()
 {
   mp_broadcaster->stopBroadcasting();
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  mp_bonjour->stop();
+#endif
   stopFileTransferServer();
 
   mp_listener->close();
@@ -226,10 +241,10 @@ void Core::sendHelloToHostsInSettings()
       u = UserManager::instance().findUserByHostAddressAndPort( ur.hostAddress(), ur.hostPort() );
       if( !u.isValid() || !u.isConnected() )
       {
-#ifdef BEEBEEP_DEBUG
+    #ifdef BEEBEEP_DEBUG
         qDebug() << "Contacting manually added host" << ur.hostAddress().toString() << ur.hostPort();
-#endif
-        newPeerFound( ur.hostAddress(), ur.hostPort() );
+    #endif
+        checkUserRecord( ur );
         user_contacted++;
       }
     }
@@ -237,5 +252,5 @@ void Core::sendHelloToHostsInSettings()
       qWarning() << "Invalid host address found in settings:" << user_path;
   }
 
-  qDebug() << user_contacted << "host address manually added contacted";
+  qDebug() << user_contacted << "hosts manually added contacted";
 }

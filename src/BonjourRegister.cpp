@@ -25,13 +25,14 @@
 
 
 BonjourRegister::BonjourRegister( QObject *parent )
- : BonjourObject( parent )
+ : BonjourObject( parent ), m_servicePort( 0 )
 {
   setObjectName( "BonjourRegister" );
 }
 
 void BonjourRegister::unregisterService()
 {
+  m_servicePort = 0;
   cleanUp();
 }
 
@@ -39,21 +40,25 @@ bool BonjourRegister::registerService( const BonjourRecord& bonjour_record, int 
 {
   if( mp_dnss )
   {
-    qWarning() << objectName() << "has already registered a service:" << m_record.name();
+    qWarning() << objectName() << "has already registered a service" << m_record.name() << "on port" << m_servicePort;
     return false;
   }
 
   DNSServiceErrorType error_code = DNSServiceRegister( &mp_dnss, 0, 0, bonjour_record.serviceName().toUtf8().constData(),
                                                  bonjour_record.registeredType().toUtf8().constData(),
                                                  bonjour_record.replyDomain().isEmpty() ? 0 : bonjour_record.replyDomain().toUtf8().constData(),
-                                                 0, service_port, 0, 0, BonjourRegisterService, this );
+                                                 0, service_port, 0, 0, (DNSServiceRegisterReply)BonjourRegisterService, this );
   if( !checkErrorAndReadSocket( error_code ) )
   {
     qWarning() << objectName() << "can not register" << bonjour_record.name() << "on port" << service_port;
     return false;
   }
   else
+  {
+    m_servicePort = service_port;
+    qDebug() << objectName() << "tries to register" << bonjour_record.name() << "on port" << service_port;
     return true;
+  }
 }
 
 void BonjourRegister::BonjourRegisterService( DNSServiceRef, DNSServiceFlags,

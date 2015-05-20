@@ -11,7 +11,7 @@ CONFIG(debug,debug|release) {
 }
 
 win32: {
-  DEFINES += BEEBEEP_USE_BONJOUR
+  DEFINES += BEEBEEP_USE_MULTICAST_DNS
   INCLUDEPATH += $$PWD/../bonjour
   DEPENDPATH += $$PWD/../bonjour
   LIBS += -L$$PWD/../bonjour/ -ldnssd
@@ -110,7 +110,7 @@ SOURCES += Listener.cpp \
 win32: {
   SOURCES += BonjourBrowser.cpp \
     BonjourManager.cpp \
-	BonjourObject.cpp \
+    BonjourObject.cpp \
     BonjourRecord.cpp \
     BonjourRegister.cpp \
     BonjourResolver.cpp
@@ -192,7 +192,7 @@ HEADERS += \
 win32: {
   HEADERS += BonjourBrowser.h \
     BonjourManager.h \
-	BonjourObject.h \
+    BonjourObject.h \
     BonjourRecord.h \
     BonjourRegister.h \
     BonjourResolver.h

@@ -44,6 +44,7 @@ void BonjourManager::start( const QString& service_base_name, const QString& ser
   BonjourRecord br;
   br.setServiceName( QString( "%1 %2:%3" ).arg( service_base_name ).arg( listener_address ).arg( listener_port ) );
   br.setRegisteredType( service_type );
+  qDebug() << "Multicast DNS service started with" << br.name();
   mp_register->registerService( br, listener_port );
 }
 
@@ -53,11 +54,12 @@ void BonjourManager::stop()
   mp_browser->stop();
   m_bonjourRecords.clear();
   m_userRecords.clear();
+  qDebug() << "Multicast DNS service closed";
 }
 
 void BonjourManager::serviceIsRegistered()
 {
-  qDebug() << "Bonjour has registered service" << mp_register->record().name();
+  qDebug() << "Bonjour has registered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
   mp_browser->browseForService( mp_register->record().registeredType() );
 }
 
@@ -67,7 +69,7 @@ void BonjourManager::addBonjourRecord( const BonjourRecord& bonjour_record )
     return;
 
  #ifdef BEEBEEP_DEBUG
-   qDebug() << "Bonjour adds new record:" << bonjour_record.name();
+   qDebug() << "Bonjour adds new record" << bonjour_record.name();
  #endif
    m_bonjourRecords.append( bonjour_record );
    BonjourResolver* resolver = new BonjourResolver( this );
@@ -78,7 +80,7 @@ void BonjourManager::addBonjourRecord( const BonjourRecord& bonjour_record )
 void BonjourManager::removeBonjourRecord( const BonjourRecord& bonjour_record )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Bonjour removes record:" << bonjour_record.name();
+  qDebug() << "Bonjour removes record" << bonjour_record.name();
 #endif
   m_bonjourRecords.removeOne( bonjour_record );
 }
@@ -88,6 +90,9 @@ void BonjourManager::addUserRecord( const UserRecord& ur )
   if( m_userRecords.contains( ur ) )
     return;
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Bonjour add new user record" << ur.hostAddressAndPort();
+#endif
   m_userRecords.append( ur );
   emit newUserFound( ur );
 }
@@ -102,10 +107,28 @@ void BonjourManager::serviceResolved( const QHostInfo& host_info, int host_port 
   }
 
   const QList<QHostAddress>& host_addresses = host_info.addresses();
-  if( !host_addresses.isEmpty() )
+
+  QHostAddress ipv4_address;
+  QHostAddress ipv6_address;
+
+  foreach( QHostAddress ha, host_addresses )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Bonjour has resolved host" << host_info.hostName() << "with this address" << ha.toString();
+#endif
+    if( ha.toString().contains( ":" ) )
+      ipv6_address = ha;
+    else
+      ipv4_address = ha;
+  }
+
+  if( !ipv4_address.isNull() || !ipv6_address.isNull() )
   {
     UserRecord ur;
-    ur.setHostAddress( host_addresses.first() );
+    if( !ipv4_address.isNull() )
+      ur.setHostAddress( ipv4_address );
+    else
+      ur.setHostAddress( ipv6_address );
     ur.setHostPort( host_port );
     ur.setComment( QString( "Bonjour[%1]" ).arg( resolver->record().name() ) );
     addUserRecord( ur );

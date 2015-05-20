@@ -71,6 +71,10 @@ public:
   QString helpWebSite() const;
   QString languageWebSite() const;
 
+  QString dnsRecord() const;
+  inline bool useMulticastDns() const;
+  inline void setUseMulticastDns( bool );
+
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
   void setLocalUserHost( const QHostAddress&, int );
@@ -345,6 +349,7 @@ private:
   QString m_localSubnetForced;
   bool m_parseBroadcastAddresses;
   bool m_addExternalSubnetAutomatically;
+  bool m_useMulticastDns;
 
   bool m_minimizeInTray;
   bool m_loadOnTrayAtStartup;
@@ -473,6 +478,8 @@ inline const QString& Settings::localSubnetForced() const { return m_localSubnet
 inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }
 inline bool Settings::addExternalSubnetAutomatically() const { return m_addExternalSubnetAutomatically; }
 inline void Settings::setAddExternalSubnetAutomatically( bool new_value ) { m_addExternalSubnetAutomatically = new_value; }
+inline bool Settings::useMulticastDns() const { return m_useMulticastDns; }
+inline void Settings::setUseMulticastDns( bool new_value ) { m_useMulticastDns = new_value; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }
 inline bool Settings::firstTime() const { return m_firstTime; }
 inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }

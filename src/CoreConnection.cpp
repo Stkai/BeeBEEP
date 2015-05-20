@@ -59,6 +59,20 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
   return false;
 }
 
+void Core::checkUserRecord( const UserRecord& ur )
+{
+  if( ur.hostAddress() == Settings::instance().localUser().hostAddress() &&
+      ur.hostPort() == Settings::instance().localUser().hostPort() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skip local user record" << ur.hostAddressAndPort();
+#endif
+    return;
+  }
+
+  newPeerFound( ur.hostAddress(), ur.hostPort() );
+}
+
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
   if( hasConnection( sender_ip, sender_port ) )

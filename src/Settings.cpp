@@ -51,6 +51,12 @@ Settings::Settings()
   m_resourceFolder = ".";
   m_dataFolder = ".";
   m_lastSave = QDateTime::currentDateTime();
+
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  m_useMulticastDns = true;
+#else
+  m_useMulticastDns = false;
+#endif
 }
 
 namespace
@@ -276,6 +282,11 @@ QString Settings::checkVersionWebSite() const
 QString Settings::languageFilePath( const QString& language_folder, const QString& language_selected ) const
 {
   return QString( "%1/%2_%3.qm" ).arg( language_folder, Settings::instance().programName().toLower(), language_selected );
+}
+
+QString Settings::dnsRecord() const
+{
+  return QString( BEEBEEP_DNS_RECORD );
 }
 
 QByteArray Settings::hash( const QString& string_to_hash ) const
@@ -664,6 +675,7 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Network");
+  m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
   m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
@@ -811,6 +823,7 @@ void Settings::save()
   sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
+  sets->setValue( "UseMulticastDns", m_useMulticastDns );
   sets->setValue( "BroadcastAddresses", m_broadcastAddressesInSettings );
   if( !m_localHostAddressForced.isNull() )
     sets->setValue( "LocalHostAddressForced", m_localHostAddressForced.toString() );
