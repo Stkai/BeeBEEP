@@ -220,4 +220,3 @@ win32: RC_FILE = beebeep.rc
 
 ICON = beebeep.icns
 
-

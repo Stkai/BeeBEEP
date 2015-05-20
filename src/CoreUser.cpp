@@ -62,6 +62,9 @@ void Core::showUserStatusChanged( const User& u )
   if( !isConnected() )
     return;
 
+  if( !Settings::instance().showUserStatusNotification() && !u.isLocal() )
+    return;
+
   QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
   if( u.isLocal() )
     sHtmlMsg += tr( "You are" );
@@ -75,23 +78,29 @@ void Core::showUserStatusChanged( const User& u )
 void Core::showUserNameChanged( const User& u, const QString& old_user_name )
 {
   QString sHtmlMsg = Bee::iconToHtml( ":/images/profile.png", "*N*" ) + QString( " " );
+
   if( u.isLocal() )
     sHtmlMsg += tr( "You have changed your nickname from %1 to %2." ).arg( old_user_name, u.name() );
   else
     sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( old_user_name, u.name() );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+
   emit userChanged( u );
 }
 
 void Core::showUserVCardChanged( const User& u )
 {
   QString sHtmlMsg = "";
-  if( !u.isLocal() )
+
+  if( Settings::instance().showUserStatusNotification() )
   {
-    sHtmlMsg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/profile.png", "*V*" ),
+    if( !u.isLocal() )
+    {
+      sHtmlMsg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/profile.png", "*V*" ),
                                         tr( "The %1's profile has been received." ).arg( u.name() ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+    }
   }
 
   if( u.isBirthDay() )
@@ -103,7 +112,6 @@ void Core::showUserVCardChanged( const User& u )
 
   if( !u.vCard().info().isEmpty() )
   {
-
     sHtmlMsg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/info.png", "*I*" ),
                                     (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( u.name() )) );
     sHtmlMsg += QString( ":<br />%1" ).arg( u.vCard().info() );

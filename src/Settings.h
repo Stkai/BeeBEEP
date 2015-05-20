@@ -137,6 +137,8 @@ public:
   inline void setRaiseOnNewMessageArrived( bool );
   inline bool showChatToolbar() const;
   inline void setShowChatToolbar( bool );
+  inline bool showUserStatusNotification() const;
+  inline void setShowUserStatusNotification( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline const QSize& avatarIconSize() const;
@@ -327,6 +329,7 @@ private:
   bool m_showTipsOfTheDay;
   bool m_automaticFileName;
   bool m_showChatToolbar;
+  bool m_showUserStatusNotification;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -469,6 +472,8 @@ inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::showChatToolbar() const { return m_showChatToolbar; }
 inline void Settings::setShowChatToolbar( bool new_value ) { m_showChatToolbar = new_value; }
+inline bool Settings::showUserStatusNotification() const { return m_showUserStatusNotification; }
+inline void Settings::setShowUserStatusNotification( bool new_value ) { m_showUserStatusNotification = new_value; }
 inline const QStringList& Settings::broadcastAddressesInFileHosts() const { return m_broadcastAddressesInFileHosts; }
 inline const QStringList& Settings::broadcastAddressesInSettings() const { return m_broadcastAddressesInSettings; }
 inline bool Settings::parseBroadcastAddresses() const { return m_parseBroadcastAddresses; }

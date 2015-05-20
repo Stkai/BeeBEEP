@@ -469,6 +469,7 @@ void GuiMain::createMenus()
   mp_menuUsers->addAction( mp_actConfigureNetwork );
   act = mp_menuUsers->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
   act->setStatusTip( tr( "Add the IP address and the port of the users you want to connect" ) );
+
   mp_menuUsers->addSeparator();
 
   act = mp_menuUsers->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
@@ -488,6 +489,12 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserPhoto() );
   act->setData( 21 );
+
+  act = mp_menuUsers->addAction( tr( "Show status notification" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can see any change of the user status in chat" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserStatusNotification() );
+  act->setData( 24 );
 
   mp_menuUsers->addSeparator();
 
@@ -1047,10 +1054,11 @@ void GuiMain::settingsChanged()
     mp_chat->showSendMessageIcon( Settings::instance().chatShowSendMessageIcon() );
     break;
   case 23:
-    {
-      Settings::instance().setShowChatToolbar( act->isChecked() );
-      checkChatToolbar();
-    }
+    Settings::instance().setShowChatToolbar( act->isChecked() );
+    checkChatToolbar();
+    break;
+  case 24:
+    Settings::instance().setShowUserStatusNotification( act->isChecked() );
     break;
   case 99:
     break;
