@@ -1,8 +1,12 @@
 [BeeBEEP]
 BroadcastOnlyToHostsIni=false
-BroadcastPort=36475
+DefaultBroadcastPort=36475
+DefaultListenerPort=6475
+DefaultFileTransferPort=6476
 UseConfigurationFileIni=true
 SaveDataInDocumentsFolder=false
+SaveDataInUserApplicationFolder=false
+AllowMultipleInstances=false
 
 [Groups]
 TrustNickname=true

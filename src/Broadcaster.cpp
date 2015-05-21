@@ -38,9 +38,9 @@ Broadcaster::Broadcaster( QObject *parent )
 
 bool Broadcaster::startBroadcasting()
 {
-  if( !m_broadcastSocket.bind( QHostAddress::Any, Settings::instance().broadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
+  if( !m_broadcastSocket.bind( QHostAddress::Any, Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
   {
-    qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().broadcastPort();
+    qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;
   }
   m_baseBroadcastAddress = Settings::instance().baseBroadcastAddress();
@@ -107,7 +107,7 @@ bool Broadcaster::isLocalHostAddress( const QHostAddress& address_to_check )
 
 bool Broadcaster::sendDatagramToHost( const QHostAddress& host_address )
 {
-  if( m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().broadcastPort() ) > 0 )
+  if( m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().defaultBroadcastPort() ) > 0 )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Broadcaster has sent datagram to network:" << host_address.toString();
@@ -239,7 +239,7 @@ void Broadcaster::checkLoopback()
   if( m_datagramSentToBaseBroadcastAddress > 0 )
   {
     m_datagramSentToBaseBroadcastAddress--;
-    qWarning() << "Broadcaster UDP port" <<  Settings::instance().broadcastPort() << "is blocked by firewall." << m_datagramSentToBaseBroadcastAddress << "datagram pendings";
+    qWarning() << "Broadcaster UDP port" <<  Settings::instance().defaultBroadcastPort() << "is blocked by firewall." << m_datagramSentToBaseBroadcastAddress << "datagram pendings";
     emit udpPortBlocked();
   }
 }

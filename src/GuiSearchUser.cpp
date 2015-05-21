@@ -46,7 +46,7 @@ void GuiSearchUser::loadSettings()
   else
     mp_leSubnet->setText( base_host_addresses.toString() );
 
-  mp_leUdpPort->setText( QString::number( Settings::instance().broadcastPort() ) );
+  mp_leUdpPort->setText( QString::number( Settings::instance().defaultBroadcastPort() ) );
 
   QStringList sl_addresses = Settings::instance().broadcastAddressesInFileHosts();
   if( sl_addresses.size() > 0 )

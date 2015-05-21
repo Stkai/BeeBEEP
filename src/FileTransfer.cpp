@@ -44,10 +44,14 @@ bool FileTransfer::startListener()
     return true;
   }
 
-  if( !listen( QHostAddress::Any ) )
+  if( !listen( QHostAddress::Any, Settings::instance().defaultFileTransferPort() ) )
   {
-    qDebug() << "File Transfer server cannot bind an address or a port";
-    return false;
+    qWarning() << "Unablet to bind default file transfer port" << Settings::instance().defaultFileTransferPort();
+    if( !listen( QHostAddress::Any ) )
+    {
+      qWarning() << "Unable to bind a valid file transfer port";
+      return false;
+    }
   }
 
   qDebug() << "File Transfer server listen" << serverAddress().toString() << serverPort();

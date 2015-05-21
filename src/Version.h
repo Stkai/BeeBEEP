@@ -26,6 +26,7 @@
 
 const char* BEEBEEP_NAME = "BeeBEEP";
 const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
+const char* BEEBEEP_ORGANIZATION_DOMAIN = "beebeep.net";
 const char* BEEBEEP_DNS_RECORD = "_beebeep._tcp";
 #ifdef BEEBEEP_DEBUG
 const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
@@ -37,10 +38,10 @@ const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
 const char* BEEBEEP_HELP_WEBSITE = "/help.php";
 const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
 const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "0.9.9f";
+const char* BEEBEEP_VERSION = "0.9.9g";
 const int BEEBEEP_PROTO_VERSION = 62;
 const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 387;
+const int BEEBEEP_BUILD = 388;
 
 #endif // BEEBEEP_VERSION_H
 

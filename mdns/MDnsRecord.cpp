@@ -21,26 +21,26 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BonjourRecord.h"
+#include "MDnsRecord.h"
 
 
-BonjourRecord::BonjourRecord()
+MDnsRecord::MDnsRecord()
   : m_serviceName( "" ), m_registeredType( "" ), m_replyDomain( "" )
 {}
 
-BonjourRecord::BonjourRecord( const BonjourRecord& br )
+MDnsRecord::MDnsRecord( const MDnsRecord& br )
 {
   (void)operator=( br );
 }
 
-BonjourRecord::BonjourRecord(const char *service_name, const char *registered_type, const char *reply_domain )
+MDnsRecord::MDnsRecord(const char *service_name, const char *registered_type, const char *reply_domain )
 {
   m_serviceName = QString::fromUtf8( service_name );
   m_registeredType = QString::fromUtf8( registered_type );
   m_replyDomain = QString::fromUtf8( reply_domain );
 }
 
-BonjourRecord& BonjourRecord::operator=( const BonjourRecord& br )
+MDnsRecord& MDnsRecord::operator=( const MDnsRecord& br )
 {
   if( this != &br )
   {

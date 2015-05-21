@@ -70,7 +70,7 @@ void Core::showUserStatusChanged( const User& u )
     sHtmlMsg += tr( "You are" );
   else
     sHtmlMsg += tr( "%1 is" ).arg( u.name() );
-   sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
+  sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
 }

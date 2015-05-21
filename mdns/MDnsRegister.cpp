@@ -21,22 +21,22 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BonjourRegister.h"
+#include "MDnsRegister.h"
 
 
-BonjourRegister::BonjourRegister( QObject *parent )
- : BonjourObject( parent ), m_servicePort( 0 )
+MDnsRegister::MDnsRegister( QObject *parent )
+ : MDnsObject( parent ), m_servicePort( 0 )
 {
-  setObjectName( "BonjourRegister" );
+  setObjectName( "MDnsRegister" );
 }
 
-void BonjourRegister::unregisterService()
+void MDnsRegister::unregisterService()
 {
   m_servicePort = 0;
   cleanUp();
 }
 
-bool BonjourRegister::registerService( const BonjourRecord& bonjour_record, int service_port )
+bool MDnsRegister::registerService( const MDnsRecord& bonjour_record, int service_port )
 {
   if( mp_dnss )
   {
@@ -47,7 +47,7 @@ bool BonjourRegister::registerService( const BonjourRecord& bonjour_record, int 
   DNSServiceErrorType error_code = DNSServiceRegister( &mp_dnss, 0, 0, bonjour_record.serviceName().toUtf8().constData(),
                                                  bonjour_record.registeredType().toUtf8().constData(),
                                                  bonjour_record.replyDomain().isEmpty() ? 0 : bonjour_record.replyDomain().toUtf8().constData(),
-                                                 0, service_port, 0, 0, (DNSServiceRegisterReply)BonjourRegisterService, this );
+                                                 0, service_port, 0, 0, (DNSServiceRegisterReply)MDnsRegisterService, this );
   if( !checkErrorAndReadSocket( error_code ) )
   {
     qWarning() << objectName() << "can not register" << bonjour_record.name() << "on port" << service_port;
@@ -61,12 +61,12 @@ bool BonjourRegister::registerService( const BonjourRecord& bonjour_record, int 
   }
 }
 
-void BonjourRegister::BonjourRegisterService( DNSServiceRef, DNSServiceFlags,
+void MDnsRegister::MDnsRegisterService( DNSServiceRef, DNSServiceFlags,
                                               DNSServiceErrorType error_code, const char *service_name,
                                               const char *registered_type, const char *reply_domain,
                                               void *register_service_ref )
 {
-  BonjourRegister *service_register = static_cast<BonjourRegister*>( register_service_ref );
+  MDnsRegister *service_register = static_cast<MDnsRegister*>( register_service_ref );
   if( error_code != kDNSServiceErr_NoError )
   {
     int error_code_int = (int)error_code;
@@ -74,7 +74,7 @@ void BonjourRegister::BonjourRegisterService( DNSServiceRef, DNSServiceFlags,
   }
   else
   {
-    service_register->setRecord( BonjourRecord( service_name, registered_type, reply_domain ) );
+    service_register->setRecord( MDnsRecord( service_name, registered_type, reply_domain ) );
     emit service_register->serviceRegistered();
   }
 }

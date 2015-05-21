@@ -21,21 +21,21 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BonjourBrowser.h"
+#include "MDnsBrowser.h"
 
 
-BonjourBrowser::BonjourBrowser( QObject *parent )
- : BonjourObject( parent )
+MDnsBrowser::MDnsBrowser( QObject *parent )
+ : MDnsObject( parent )
 {
-  setObjectName( "BonjourBrowser" );
+  setObjectName( "MDnsBrowser" );
 }
 
-void BonjourBrowser::stop()
+void MDnsBrowser::stop()
 {
   cleanUp();
 }
 
-void BonjourBrowser::browseForService( const QString& service_name )
+void MDnsBrowser::browseForService( const QString& service_name )
 {
   if( mp_dnss )
   {
@@ -44,16 +44,16 @@ void BonjourBrowser::browseForService( const QString& service_name )
   }
 
   m_record.setServiceName( service_name );
-  DNSServiceErrorType error_code = DNSServiceBrowse( &mp_dnss, 0, 0, service_name.toUtf8().constData(), 0, BonjourBrowseReply, this );
+  DNSServiceErrorType error_code = DNSServiceBrowse( &mp_dnss, 0, 0, service_name.toUtf8().constData(), 0, MDnsBrowseReply, this );
   checkErrorAndReadSocket( error_code );
 }
 
-void BonjourBrowser::BonjourBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32,
+void MDnsBrowser::MDnsBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32,
                                          DNSServiceErrorType error_code, const char *service_name,
                                          const char *registered_type, const char *reply_domain,
                                          void *browser_service_ref )
 {
-  BonjourBrowser *service_browser = static_cast<BonjourBrowser*>( browser_service_ref );
+  MDnsBrowser *service_browser = static_cast<MDnsBrowser*>( browser_service_ref );
   if( error_code != kDNSServiceErr_NoError )
   {
     int error_code_int = (int)error_code;
@@ -61,7 +61,7 @@ void BonjourBrowser::BonjourBrowseReply( DNSServiceRef, DNSServiceFlags flags, q
   }
   else
   {
-    BonjourRecord bonjour_record( service_name, registered_type, reply_domain );
+    MDnsRecord bonjour_record( service_name, registered_type, reply_domain );
 
     if( flags & kDNSServiceFlagsAdd )
       emit service_browser->newRecordFound( bonjour_record );

@@ -14,7 +14,11 @@
 UseConfigurationFileIni= the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
 BroadcastOnlyToHostsIni= if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
 BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
+DefaultListenerPort= is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475)
+DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the connected users (default 6476)
 SaveDataInDocumentsFolder= force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data
+SaveDataInUserApplicationFolder= force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data)
+AllowMultipleInstances= enable the option to launch multiple instance of BeeBEEP
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect

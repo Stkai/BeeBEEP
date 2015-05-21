@@ -517,6 +517,10 @@
         <source>Cancel</source>
         <translation type="unfinished">Annulla</translation>
     </message>
+    <message>
+        <source>Click here to add</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiAskPassword</name>
@@ -2397,15 +2401,23 @@ il file %2 (%3)?</translation>
         <translation type="obsolete">Mostra la barra degli strumenti</translation>
     </message>
     <message>
-        <source>Add manually ip address and port of the user you want to connect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 is running in the background mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add user manually...</source>
+        <source>Add users manually...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add the IP address and the port of the users you want to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show status notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If enabled you can see any change of the user status in chat</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

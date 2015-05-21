@@ -51,6 +51,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   : QApplication( argc, argv )
 {
   setObjectName( "BeeApplication" );
+
   m_idleTimeout = 0;
   m_timer.setObjectName( "BeeMainTimer" );
   m_timer.setInterval( 10000 );
@@ -74,16 +75,10 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 BeeApplication::~BeeApplication()
 {
   if( mp_localServer )
+  {
     mp_localServer->close();
-}
-
-void BeeApplication::slotConnectionEstablished()
-{
-  qDebug() << "New instance is called by user. Show the main window";
-  QLocalSocket* local_socket = mp_localServer->nextPendingConnection();
-  local_socket->close();
-  local_socket->deleteLater();
-  emit showUp();
+    delete mp_localServer;
+  }
 }
 
 void BeeApplication::quitAfterSignal( int sig )
@@ -245,26 +240,44 @@ int BeeApplication::idleTimeFromSystem()
   return idle_time;
 }
 
+void BeeApplication::slotConnectionEstablished()
+{
+  qDebug() << "New instance is called by user. Show the main window";
+  QLocalSocket* local_socket = mp_localServer->nextPendingConnection();
+  local_socket->close();
+  local_socket->deleteLater();
+  emit showUp();
+}
+
+QString BeeApplication::localServerName() const
+{
+  QString server_name = QString( "%1_%2_%3" ).arg( organizationDomain(), organizationName(), applicationName() );
+  server_name.replace( QRegExp("[^\\w\\-. ]"), "" );
+  return server_name;
+}
+
+void BeeApplication::preventMultipleInstances()
+{
+  if( mp_localServer )
+    return;
+  mp_localServer = new QLocalServer();
+  QString server_name = localServerName();
+  mp_localServer->removeServer( server_name );
+  mp_localServer->listen( server_name );
+  QObject::connect( mp_localServer, SIGNAL( newConnection() ), this, SLOT( slotConnectionEstablished() ) );
+}
+
 bool BeeApplication::otherInstanceExists()
 {
-  QString server_name = QString( "MarcoMastroddiSW" ) + QApplication::applicationFilePath();
-  server_name.replace( QRegExp("[^\\w\\-. ]"), "" );
-
   // Attempt to connect to the LocalServer
   QLocalSocket local_socket;
-  local_socket.connectToServer( server_name );
+  local_socket.connectToServer( localServerName() );
   if( local_socket.waitForConnected( 2000 ) )
   {
     local_socket.close();
     return true;
   }
 
-  // If the connection is insuccessful, this is the main process
-  // So we create a Local Server
-  mp_localServer = new QLocalServer();
-  mp_localServer->removeServer( server_name );
-  mp_localServer->listen( server_name );
-  QObject::connect( mp_localServer, SIGNAL( newConnection() ), this, SLOT( slotConnectionEstablished() ) );
   return false;
 }
 

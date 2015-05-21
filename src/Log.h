@@ -55,8 +55,8 @@ class Log
 public:
   static void installMessageHandler();
 
-  void rebootFileStream( bool force_reboot );
-  bool bootFileStream(); // after load Settings
+  void rebootFileStream( const QString& log_path, bool force_reboot );
+  bool bootFileStream( const QString& log_path ); // after load Settings
   void closeFileStream();
 
   void add( QtMsgType, const QString& log_txt, const QString& log_note );
@@ -65,7 +65,6 @@ public:
 
   QString messageTypeToString( QtMsgType ) const;
   QString logNodeToString( const LogNode& ) const;
-  QString filePathFromSettings() const;
 
   static Log& instance()
   {

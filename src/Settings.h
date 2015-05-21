@@ -47,6 +47,7 @@ public:
   inline bool firstTime() const;
   inline void setFirstTime( bool );
 
+  inline bool allowMultipleInstances() const;
   inline bool trustNickname() const;
   inline bool trustSystemAccount() const;
 
@@ -64,6 +65,7 @@ public:
   inline int dataStreamVersion( bool in_load_event ) const;
   QString programName() const;
   QString organizationName() const;
+  QString organizationDomain() const;
   QString officialWebSite() const;
   QString pluginWebSite() const;
   QString checkVersionWebSite() const;
@@ -82,7 +84,9 @@ public:
   QHostAddress searchLocalHostAddress() const;
   QHostAddress baseBroadcastAddress() const;
 
-  inline int broadcastPort() const;
+  inline int defaultBroadcastPort() const;
+  inline int defaultListenerPort() const;
+  inline int defaultFileTransferPort() const;
   inline int broadcastInterval() const;
   inline int broadcastLoopbackInterval() const;
   inline int pingInterval() const;
@@ -97,6 +101,7 @@ public:
 
   inline const QString& logPath() const;
   inline void setLogPath( const QString& );
+  inline QString logFilePath() const;
   inline const QString& pluginPath() const;
   inline void setPluginPath( const QString& );
   inline const QString& languagePath() const;
@@ -284,8 +289,12 @@ private:
   bool m_trustNickname;
   bool m_trustSystemAccount;
   bool m_broadcastOnlyToHostsIni;
-  int m_broadcastPort;
+  int m_defaultBroadcastPort;
+  int m_defaultListenerPort;
+  int m_defaultFileTransferPort;
   bool m_saveDataInDocumentsFolder;
+  bool m_saveDataInUserApplicationFolder;
+  bool m_allowMultipleInstances;
 
   // Ini
   bool m_firstTime;
@@ -388,9 +397,12 @@ inline const QString& Settings::resourceFolder() const { return m_resourceFolder
 inline const QString& Settings::dataFolder() const { return m_dataFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
+inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
 inline bool Settings::trustNickname() const { return m_trustNickname; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
-inline int Settings::broadcastPort() const { return m_broadcastPort; }
+inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }
+inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
+inline int Settings::defaultFileTransferPort() const { return m_defaultFileTransferPort; }
 inline int Settings::broadcastInterval() const { return m_broadcastInterval; }
 inline int Settings::broadcastLoopbackInterval() const { return m_broadcastLoopbackInterval; }
 inline int Settings::pingInterval() const { return m_pingInterval; }
@@ -403,6 +415,7 @@ inline int Settings::userAwayTimeout() const { return m_userAwayTimeout; }
 inline void Settings::setUserAwayTimeout( int new_value ) { m_userAwayTimeout = new_value; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
+inline QString Settings::logFilePath() const { return QDir::toNativeSeparators( QString( "%1/%2.log" ).arg( m_logPath, programName() ) ); }
 inline const QString& Settings::pluginPath() const { return m_pluginPath; }
 inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath = new_value; }
 inline const QString& Settings::languagePath() const { return m_languagePath; }

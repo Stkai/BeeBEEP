@@ -21,20 +21,20 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOURRESOLVER_H
-#define BEEBEEP_BONJOURRESOLVER_H
+#ifndef BEEBEEP_MDNSRESOLVER_H
+#define BEEBEEP_MDNSRESOLVER_H
 
-#include "BonjourObject.h"
+#include "MDnsObject.h"
 
 
-class BonjourResolver : public BonjourObject
+class MDnsResolver : public MDnsObject
 {
   Q_OBJECT
 
 public:
-  BonjourResolver( QObject *parent );
+  MDnsResolver( QObject *parent );
 
-  void resolve( const BonjourRecord& );
+  void resolve( const MDnsRecord& );
 
 signals:
   void resolved( const QHostInfo&, int );
@@ -43,7 +43,7 @@ private slots:
   void lookedUp( const QHostInfo& );
 
 protected:
-  static void DNSSD_API BonjourResolveReply(DNSServiceRef sdRef, DNSServiceFlags flags,
+  static void DNSSD_API MDnsResolveReply(DNSServiceRef sdRef, DNSServiceFlags flags,
                                   quint32 interfaceIndex, DNSServiceErrorType errorCode,
                                   const char *fullName, const char *hosttarget, quint16 port,
                                   quint16 txtLen, const char *txtRecord, void *context);
@@ -53,7 +53,7 @@ protected:
   void cleanUp();
 
 private:
-  BonjourRecord m_record;
+  MDnsRecord m_record;
   int m_servicePort;
   int m_lookUpHostId;
 
@@ -61,7 +61,7 @@ private:
 
 
 // Inline Functions
-inline void BonjourResolver::setServicePort( int new_value ) { m_servicePort = new_value; }
-inline void BonjourResolver::setLookUpHostId( int new_value ) { m_lookUpHostId = new_value; }
+inline void MDnsResolver::setServicePort( int new_value ) { m_servicePort = new_value; }
+inline void MDnsResolver::setLookUpHostId( int new_value ) { m_lookUpHostId = new_value; }
 
-#endif // BEEBEEP_BONJOURRESOLVER_H
+#endif // BEEBEEP_MDNSRESOLVER_H

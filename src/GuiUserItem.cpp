@@ -53,7 +53,7 @@ bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
 
 QIcon GuiUserItem::selectUserIcon( int user_status, bool use_big_icon ) const
 {
-  return use_big_icon > 0 ? QIcon( Bee::menuUserStatusIconFileName( user_status ) ) : Bee::userStatusIcon( user_status );
+  return use_big_icon ? QIcon( Bee::menuUserStatusIconFileName( user_status ) ) : Bee::userStatusIcon( user_status );
 }
 
 bool GuiUserItem::updateUser()

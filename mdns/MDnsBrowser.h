@@ -21,44 +21,32 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOUROBJECT_H
-#define BEEBEEP_BONJOUROBJECT_H
+#ifndef BEEBEEP_BONJOURBROWSER_H
+#define BEEBEEP_BONJOURBROWSER_H
 
-#include "Config.h"
-#include "BonjourRecord.h"
-#include "dns_sd.h"
+#include "MDnsObject.h"
 
 
-class BonjourObject : public QObject
+class MDnsBrowser : public MDnsObject
 {
   Q_OBJECT
 
 public:
-  BonjourObject( QObject* parent = 0 );
-  ~BonjourObject();
+  MDnsBrowser( QObject *parent = 0 );
 
-  inline const BonjourRecord& record() const;
-  inline void setRecord( const BonjourRecord& );
+  void browseForService( const QString& );
+  void stop();
 
 signals:
-  void error( int );
+  void newRecordFound( const MDnsRecord& );
+  void recordToRemove( const MDnsRecord& );
 
 protected:
-  virtual void cleanUp();
-  virtual bool checkErrorAndReadSocket( DNSServiceErrorType error_code );
+  static void DNSSD_API MDnsBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32,
+                                 DNSServiceErrorType error_code, const char *service_name,
+                                 const char *registered_type, const char *reply_domain, void *browser_service_ref );
 
-protected slots:
-  void socketIsReadyRead();
-
-protected:
- DNSServiceRef mp_dnss;
- QSocketNotifier* mp_socket;
- BonjourRecord m_record;
 
 };
 
-// Inline Functions
-inline const BonjourRecord& BonjourObject::record() const { return m_record; }
-inline void BonjourObject::setRecord( const BonjourRecord& new_value ) { m_record = new_value; }
-
-#endif // BEEBEEP_BONJOUROBJECT_H
+#endif // BEEBEEP_BONJOURBROWSER_H

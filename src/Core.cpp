@@ -66,16 +66,23 @@ bool Core::start()
 {
   qDebug() << "Starting" << Settings::instance().programName() << "core";
 
-  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
+  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().defaultListenerPort() ) )
   {
-    qDebug() << "Unable to bind" << Settings::instance().localUser().hostPort() << "port. Try to bind the first available";
-    if( !mp_listener->listen( QHostAddress::Any ) )
+    qWarning() << "Unable to bind default listener port" << Settings::instance().defaultListenerPort();
+
+    if( Settings::instance().localUser().hostPort() != Settings::instance().defaultListenerPort()
+            && !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() )  )
     {
-      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+      qDebug() << "Unable to bind last used listener port" << Settings::instance().localUser().hostPort();
+      if( !mp_listener->listen( QHostAddress::Any ) )
+      {
+        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
                                      Settings::instance().programName() ), DispatchToChat );
-      return false;
+        qWarning() << "Unable to bind a valid listener port";
+        return false;
+      }
     }
   }
 
@@ -96,7 +103,7 @@ bool Core::start()
   }
   else
   {
-    qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().hostPort() << "and udp port" << Settings::instance().broadcastPort();
+    qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
     QTimer::singleShot( 1000, this, SLOT( sendBroadcastMessage() ) );
   }
 
@@ -189,7 +196,7 @@ void Core::showBroadcasterUdpError()
                          tr( "%1 %2 has found a filter on UDP port %3. Please check your firewall settings." )
                          .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
                          .arg( Settings::instance().programName() )
-                         .arg( Settings::instance().broadcastPort() ),
+                         .arg( Settings::instance().defaultBroadcastPort() ),
                          DispatchToChat );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,

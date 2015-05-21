@@ -21,32 +21,39 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOURBROWSER_H
-#define BEEBEEP_BONJOURBROWSER_H
+#ifndef BEEBEEP_BONJOURREGISTER_H
+#define BEEBEEP_BONJOURREGISTER_H
 
-#include "BonjourObject.h"
+#include "MDnsObject.h"
 
 
-class BonjourBrowser : public BonjourObject
+class MDnsRegister : public MDnsObject
 {
   Q_OBJECT
 
 public:
-  BonjourBrowser( QObject *parent = 0 );
+  MDnsRegister( QObject *parent = 0 );
 
-  void browseForService( const QString& );
-  void stop();
+  bool registerService( const MDnsRecord&, int );
+  void unregisterService();
+  inline int servicePort() const;
 
 signals:
-  void newRecordFound( const BonjourRecord& );
-  void recordToRemove( const BonjourRecord& );
+  void serviceRegistered();
 
 protected:
-  static void DNSSD_API BonjourBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32,
-                                 DNSServiceErrorType error_code, const char *service_name,
-                                 const char *registered_type, const char *reply_domain, void *browser_service_ref );
+  static void DNSSD_API MDnsRegisterService( DNSServiceRef, DNSServiceFlags flags,
+                                                DNSServiceErrorType error_code, const char *service_name,
+                                                const char *registered_type, const char *reply_domain,
+                                                void *register_service_ref );
 
+private:
+  int m_servicePort;
 
 };
 
-#endif // BEEBEEP_BONJOURBROWSER_H
+
+// Inline Functions
+inline int MDnsRegister::servicePort() const { return m_servicePort; }
+
+#endif // BEEBEEP_BONJOURREGISTER_H

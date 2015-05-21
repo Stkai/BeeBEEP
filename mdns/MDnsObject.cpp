@@ -21,21 +21,21 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BonjourObject.h"
+#include "MDnsObject.h"
 
 
-BonjourObject::BonjourObject( QObject* parent )
+MDnsObject::MDnsObject( QObject* parent )
  : QObject( parent ), mp_dnss( 0 ), mp_socket( 0 ), m_record()
 {
-  setObjectName( "BonjourObject" );
+  setObjectName( "MDnsObject" );
 }
 
-BonjourObject::~BonjourObject()
+MDnsObject::~MDnsObject()
 {
   cleanUp();
 }
 
-void BonjourObject::cleanUp()
+void MDnsObject::cleanUp()
 {
   if( mp_dnss )
   {
@@ -52,7 +52,7 @@ void BonjourObject::cleanUp()
 }
 
 
-void BonjourObject::socketIsReadyRead()
+void MDnsObject::socketIsReadyRead()
 {
   DNSServiceErrorType error_code = DNSServiceProcessResult( mp_dnss );
   int error_code_int = (int)error_code;
@@ -65,7 +65,7 @@ void BonjourObject::socketIsReadyRead()
   }
 }
 
-bool BonjourObject::checkErrorAndReadSocket( DNSServiceErrorType error_code )
+bool MDnsObject::checkErrorAndReadSocket( DNSServiceErrorType error_code )
 {
   int error_code_int = (int)error_code;
 

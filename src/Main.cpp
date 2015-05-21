@@ -59,19 +59,27 @@ bool SetTranslator( QTranslator* translator, QString language_folder, QString la
 int main( int argc, char *argv[] )
 {
   BeeApplication bee_app( argc, argv );
+  (void)Settings::instance();
+  bee_app.setApplicationName( Settings::instance().programName() );
+  bee_app.setOrganizationName( Settings::instance().organizationName() );
+  bee_app.setOrganizationDomain( Settings::instance().organizationDomain() );
+  bee_app.setApplicationVersion( Settings::instance().version( false ) );
+
   if( bee_app.otherInstanceExists() )
+  {
+    Settings::close();
     return 0;
+  }
 
   Q_INIT_RESOURCE( beebeep );
-
-  /* Randomize */
-  Random::init();
 
   /* Enable internal logs */
   Log::installMessageHandler();
 
-    /* Load Settings */
-  (void)Settings::instance();
+  /* Randomize */
+  Random::init();
+
+  /* Load Settings */
   qDebug() << "Starting BeeBEEP" << Settings::instance().version( true ) << "for" << Settings::instance().operatingSystem( true );
   Settings::instance().setResourceFolder();
   Settings::instance().loadRcFile();
@@ -79,13 +87,12 @@ int main( int argc, char *argv[] )
   Settings::instance().load();
   Settings::instance().createLocalUser();
 
-  bee_app.setApplicationName( Settings::instance().programName() );
-  bee_app.setOrganizationName( Settings::instance().organizationName() );
-  bee_app.setApplicationVersion( Settings::instance().version( false ) );
+  if( !Settings::instance().allowMultipleInstances() )
+    bee_app.preventMultipleInstances();
 
   /* Starting File Logs */
   if( Settings::instance().logToFile() )
-    Log::instance().bootFileStream();
+    Log::instance().bootFileStream( Settings::instance().logFilePath() );
 
   /* Apply system language */
   QTranslator translator;

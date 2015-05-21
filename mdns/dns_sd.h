@@ -32,23 +32,23 @@
  * @discussion  This section describes the functions, callbacks, and data structures
  *              that make up the DNS Service Discovery API.
  *
- *              The DNS Service Discovery API is part of Bonjour, Apple's implementation
+ *              The DNS Service Discovery API is part of MDns, Apple's implementation
  *              of zero-configuration networking (ZEROCONF).
  *
- *              Bonjour allows you to register a network service, such as a
+ *              MDns allows you to register a network service, such as a
  *              printer or file server, so that it can be found by name or browsed
- *              for by service type and domain. Using Bonjour, applications can
+ *              for by service type and domain. Using MDns, applications can
  *              discover what services are available on the network, along with
  *              all the information -- such as name, IP address, and port --
  *              necessary to access a particular service.
  *
- *              In effect, Bonjour combines the functions of a local DNS server and
- *              AppleTalk. Bonjour allows applications to provide user-friendly printer
+ *              In effect, MDns combines the functions of a local DNS server and
+ *              AppleTalk. MDns allows applications to provide user-friendly printer
  *              and server browsing, among other things, over standard IP networks.
  *              This behavior is a result of combining protocols such as multicast and
  *              DNS to add new functionality to the network (such as multicast DNS).
  *
- *              Bonjour gives applications easy access to services over local IP
+ *              MDns gives applications easy access to services over local IP
  *              networks without requiring the service or the application to support
  *              an AppleTalk or a Netbeui stack, and without requiring a DNS server
  *              for the local network.
@@ -629,7 +629,7 @@ DNSServiceErrorType DNSSD_API DNSServiceGetProperty
  * uint32_t version;
  * uint32_t size = sizeof(version);
  * DNSServiceErrorType err = DNSServiceGetProperty(kDNSServiceProperty_DaemonVersion, &version, &size);
- * if (!err) printf("Bonjour version is %d.%d\n", version / 10000, version / 100 % 100);
+ * if (!err) printf("MDns version is %d.%d\n", version / 10000, version / 100 % 100);
  */
 
 #define kDNSServiceProperty_DaemonVersion "DaemonVersion"

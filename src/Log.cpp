@@ -22,8 +22,17 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Log.h"
-#include "Settings.h"
+#include <QApplication>
+#include <QDateTime>
+#include <QDir>
+#include <QFileInfo>
 #include <QtDebug>
+#if QT_VERSION >= 0x050000
+  #include <QStandardPaths>
+#else
+  #include <QDesktopServices>
+#endif
+
 
 Log* Log::mp_instance = NULL;
 
@@ -49,27 +58,21 @@ Log::~Log()
   closeFileStream();
 }
 
-QString Log::filePathFromSettings() const
-{
-  return QString( "%1/%2.log" ).arg( Settings::instance().logPath(), Settings::instance().programName().toLower() );
-}
-
-void Log::rebootFileStream( bool force_reboot )
+void Log::rebootFileStream( const QString& log_path, bool force_reboot )
 {
   if( m_logFile.isOpen() )
   {
-    if( !force_reboot && m_logFile.fileName() == filePathFromSettings() )
+    if( !force_reboot && m_logFile.fileName() == log_path )
       return;
 
     closeFileStream();
   }
 
-  bootFileStream();
+  bootFileStream( log_path );
 }
 
-bool Log::bootFileStream()
+bool Log::bootFileStream( const QString& log_path )
 {
-  QString log_path = filePathFromSettings();
   m_logFile.setFileName( log_path );
 
   if( !m_logFile.open( QIODevice::WriteOnly ) )
@@ -112,7 +115,7 @@ bool Log::dumpLogToFile()
 {
   if( !m_logFile.isOpen() )
   {
-    qWarning() << "Unable to dump log to the file" << filePathFromSettings();
+    qWarning() << "Unable to dump log to the file because it is not opened";
     return false;
   }
 

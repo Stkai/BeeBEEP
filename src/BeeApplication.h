@@ -44,6 +44,7 @@ public:
   ~BeeApplication();
 
   bool otherInstanceExists();
+  void preventMultipleInstances();
 
   void init();
   void setIdleTimeout( int ); // in minutes
@@ -62,6 +63,7 @@ protected:
   bool notify( QObject* receiver, QEvent* event );
   int idleTimeFromSystem();
   bool isScreenSaverRunning();
+  QString localServerName() const;
 
 protected slots:
   void checkIdle();

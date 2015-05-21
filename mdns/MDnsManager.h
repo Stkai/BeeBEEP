@@ -25,17 +25,17 @@
 #define BEEBEEP_BONJOURMANAGER_H
 
 #include "UserRecord.h"
-#include "BonjourRecord.h"
-class BonjourRegister;
-class BonjourBrowser;
+#include "MDnsRecord.h"
+class MDnsRegister;
+class MDnsBrowser;
 
 
-class BonjourManager : public QObject
+class MDnsManager : public QObject
 {
   Q_OBJECT
 
 public:
-  BonjourManager( QObject* parent = 0 );
+  MDnsManager( QObject* parent = 0 );
 
   inline const QList<UserRecord>& userRecords() const;
 
@@ -47,24 +47,24 @@ signals:
 
 protected slots:
   void serviceIsRegistered();
-  void addBonjourRecord( const BonjourRecord& );
-  void removeBonjourRecord( const BonjourRecord& );
+  void addMDnsRecord( const MDnsRecord& );
+  void removeMDnsRecord( const MDnsRecord& );
   void serviceResolved( const QHostInfo&, int );
 
 protected:
   void addUserRecord( const UserRecord& );
 
 private:
-  BonjourRegister* mp_register;
-  BonjourBrowser* mp_browser;
+  MDnsRegister* mp_register;
+  MDnsBrowser* mp_browser;
   QString m_serviceName;
-  QList<BonjourRecord> m_bonjourRecords;
+  QList<MDnsRecord> m_bonjourRecords;
   QList<UserRecord> m_userRecords;
 
 
 };
 
 // Inline Functions
-inline const QList<UserRecord>& BonjourManager::userRecords() const { return m_userRecords; }
+inline const QList<UserRecord>& MDnsManager::userRecords() const { return m_userRecords; }
 
 #endif // BEEBEEP_BONJOURMANAGER_H

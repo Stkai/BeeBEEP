@@ -27,15 +27,15 @@
 #include "Config.h"
 
 
-class BonjourRecord
+class MDnsRecord
 {
 public:
-  BonjourRecord();
-  BonjourRecord( const BonjourRecord& );
-  BonjourRecord( const char *service_name, const char *registered_type, const char *reply_domain );
+  MDnsRecord();
+  MDnsRecord( const MDnsRecord& );
+  MDnsRecord( const char *service_name, const char *registered_type, const char *reply_domain );
 
-  BonjourRecord& operator=( const BonjourRecord& );
-  inline bool operator==( const BonjourRecord& ) const;
+  MDnsRecord& operator=( const MDnsRecord& );
+  inline bool operator==( const MDnsRecord& ) const;
 
   inline bool isValid() const;
   inline const QString& serviceName() const;
@@ -55,14 +55,14 @@ private:
 };
 
 // Inline Functions
-inline bool BonjourRecord::isValid() const { return !m_serviceName.isEmpty() && !m_registeredType.isEmpty() && !m_replyDomain.isEmpty(); }
-inline bool BonjourRecord::operator==( const BonjourRecord &br ) const { return m_serviceName == br.m_serviceName && m_registeredType == br.m_registeredType && m_replyDomain == br.m_replyDomain; }
-inline const QString& BonjourRecord::serviceName() const { return m_serviceName; }
-inline void BonjourRecord::setServiceName( const QString& new_value ) { m_serviceName = new_value; }
-inline const QString& BonjourRecord::registeredType() const { return m_registeredType; }
-inline void BonjourRecord::setRegisteredType( const QString& new_value ) { m_registeredType = new_value; }
-inline const QString& BonjourRecord::replyDomain() const { return m_replyDomain; }
-inline void BonjourRecord::setReplyDomain( const QString& new_value ) { m_replyDomain = new_value; }
-inline QString BonjourRecord::name() const { return QString( "%1|%2|%3" ).arg( m_serviceName, m_registeredType, m_replyDomain ); }
+inline bool MDnsRecord::isValid() const { return !m_serviceName.isEmpty() && !m_registeredType.isEmpty() && !m_replyDomain.isEmpty(); }
+inline bool MDnsRecord::operator==( const MDnsRecord &br ) const { return m_serviceName == br.m_serviceName && m_registeredType == br.m_registeredType && m_replyDomain == br.m_replyDomain; }
+inline const QString& MDnsRecord::serviceName() const { return m_serviceName; }
+inline void MDnsRecord::setServiceName( const QString& new_value ) { m_serviceName = new_value; }
+inline const QString& MDnsRecord::registeredType() const { return m_registeredType; }
+inline void MDnsRecord::setRegisteredType( const QString& new_value ) { m_registeredType = new_value; }
+inline const QString& MDnsRecord::replyDomain() const { return m_replyDomain; }
+inline void MDnsRecord::setReplyDomain( const QString& new_value ) { m_replyDomain = new_value; }
+inline QString MDnsRecord::name() const { return QString( "%1|%2|%3" ).arg( m_serviceName, m_registeredType, m_replyDomain ); }
 
 #endif // BEEBEEP_BONJOURRECORD_H

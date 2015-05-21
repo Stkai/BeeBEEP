@@ -38,8 +38,12 @@ Settings::Settings()
   m_useSettingsFileIni = true;
 #endif
   m_broadcastOnlyToHostsIni = false;
-  m_broadcastPort = DEFAULT_BROADCAST_PORT;
+  m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
+  m_defaultListenerPort = DEFAULT_LISTENER_PORT;
+  m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
   m_saveDataInDocumentsFolder = false;
+  m_saveDataInUserApplicationFolder = false;
+  m_allowMultipleInstances = false;
   m_trustNickname = true;
   m_trustSystemAccount = false;
   /* Default RC end */
@@ -110,8 +114,12 @@ bool Settings::createDefaultRcFile()
     sets->beginGroup( "BeeBEEP" );
     sets->setValue( "UseConfigurationFileIni", m_useSettingsFileIni );
     sets->setValue( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni );
-    sets->setValue( "BroadcastPort", m_broadcastPort );
+    sets->setValue( "BroadcastPort", m_defaultBroadcastPort );
+    sets->setValue( "DefaultListenerPort", m_defaultListenerPort );
+    sets->setValue( "DefaultFileTransferPort", m_defaultFileTransferPort );
     sets->setValue( "SaveDataInDocumentsFolder", m_saveDataInDocumentsFolder );
+    sets->setValue( "SaveDataInUserApplicationFolder", m_saveDataInUserApplicationFolder );
+    sets->setValue( "AllowMultipleInstances", m_allowMultipleInstances );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -148,8 +156,12 @@ void Settings::loadRcFile()
   sets->beginGroup( "BeeBEEP" );
   m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni ).toBool();
-  m_broadcastPort = sets->value( "BroadcastPort", m_broadcastPort ).toInt();
+  m_defaultBroadcastPort = sets->value( "BroadcastPort", m_defaultBroadcastPort ).toInt();
+  m_defaultListenerPort = sets->value( "DefaultListenerPort", m_defaultListenerPort ).toInt();
+  m_defaultFileTransferPort = sets->value( "DefaultFileTransferPort", m_defaultFileTransferPort ).toInt();
   m_saveDataInDocumentsFolder = sets->value( "SaveDataInDocumentsFolder", m_saveDataInDocumentsFolder ).toBool();
+  m_saveDataInUserApplicationFolder = sets->value( "SaveDataInUserApplicationFolder", m_saveDataInUserApplicationFolder ).toBool();
+  m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -223,6 +235,11 @@ QString Settings::programName() const
 QString Settings::organizationName() const
 {
   return QString( BEEBEEP_ORGANIZATION );
+}
+
+QString Settings::organizationDomain() const
+{
+  return QString( BEEBEEP_ORGANIZATION_DOMAIN );
 }
 
 QString Settings::officialWebSite() const
@@ -593,7 +610,7 @@ void Settings::load()
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
-  m_showUserPhoto = sets->value( "ShowUserPhoto", false ).toBool();
+  m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showUserStatusNotification = sets->value( "ShowUserStatusNotification", true ).toBool();
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
@@ -978,7 +995,7 @@ bool Settings::setDataFolder()
 
   QFileInfo data_file_info( m_dataFolder );
 
-  if( m_useSettingsFileIni && data_file_info.isWritable() && !m_saveDataInDocumentsFolder )
+  if( data_file_info.isWritable() && !m_saveDataInDocumentsFolder && !m_saveDataInUserApplicationFolder )
   {
     qDebug() << "Data folder:" << m_dataFolder;
     return true;
@@ -988,12 +1005,16 @@ bool Settings::setDataFolder()
   QString root_folder;
 
 #if QT_VERSION >= 0x050000
-  if( m_saveDataInDocumentsFolder )
+  if( m_saveDataInUserApplicationFolder )
+    root_folder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
+  else if( m_saveDataInDocumentsFolder )
     root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
   else
     root_folder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
 #else
-  if( m_saveDataInDocumentsFolder )
+  if( m_saveDataInUserApplicationFolder )
+    root_folder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
+  else if( m_saveDataInDocumentsFolder )
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation );
   else
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
@@ -1004,7 +1025,7 @@ bool Settings::setDataFolder()
   QDir folder( m_dataFolder );
   if( !folder.exists() )
   {
-    qWarning() << "Data folder not found:" << folder.absolutePath();
+    qWarning() << "Data folder not found in" << folder.absolutePath();
     folder.cdUp();
     if( !folder.mkdir( data_folder ) )
     {
@@ -1013,7 +1034,7 @@ bool Settings::setDataFolder()
       return false;
     }
 
-    qDebug() << "Data folder created:" << m_dataFolder;
+    qDebug() << "Data folder created in" << m_dataFolder;
   }
 
   QFileInfo folder_info( m_dataFolder );
@@ -1024,7 +1045,7 @@ bool Settings::setDataFolder()
     return false;
   }
 
-  qDebug() << "Data folder:" << m_dataFolder;
+  qDebug() << "Data folder is" << m_dataFolder;
   return true;
 }
 

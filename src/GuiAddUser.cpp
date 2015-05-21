@@ -56,9 +56,9 @@ void GuiAddUser::loadUsers()
   UserRecord ur;
   foreach( QString user_path, Settings::instance().userPathList() )
   {
-     ur = Protocol::instance().loadUserRecord( user_path );
-     if( ur.isValid() )
-       addUserToList( ur );
+    ur = Protocol::instance().loadUserRecord( user_path );
+    if( ur.isValid() )
+      addUserToList( ur );
   }
 
   mp_lePort->setText( QString::number( DEFAULT_LISTENER_PORT ) );

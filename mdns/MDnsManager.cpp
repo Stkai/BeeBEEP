@@ -21,34 +21,34 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BonjourManager.h"
-#include "BonjourBrowser.h"
-#include "BonjourRegister.h"
-#include "BonjourResolver.h"
+#include "MDnsManager.h"
+#include "MDnsBrowser.h"
+#include "MDnsRegister.h"
+#include "MDnsResolver.h"
 
 
-BonjourManager::BonjourManager( QObject* parent )
+MDnsManager::MDnsManager( QObject* parent )
  : QObject( parent ), m_bonjourRecords(), m_userRecords()
 {
-  mp_register = new BonjourRegister( this );
-  mp_browser = new BonjourBrowser( this );
+  mp_register = new MDnsRegister( this );
+  mp_browser = new MDnsBrowser( this );
 
   connect( mp_register, SIGNAL( serviceRegistered() ), this, SLOT( serviceIsRegistered() ) );
-  connect( mp_browser, SIGNAL( newRecordFound( const BonjourRecord& ) ), this, SLOT( addBonjourRecord( const BonjourRecord& ) ) );
-  connect( mp_browser, SIGNAL( recordToRemove( const BonjourRecord& ) ), this, SLOT( removeBonjourRecord( const BonjourRecord& ) ) );
+  connect( mp_browser, SIGNAL( newRecordFound( const MDnsRecord& ) ), this, SLOT( addMDnsRecord( const MDnsRecord& ) ) );
+  connect( mp_browser, SIGNAL( recordToRemove( const MDnsRecord& ) ), this, SLOT( removeMDnsRecord( const MDnsRecord& ) ) );
 
 }
 
-void BonjourManager::start( const QString& service_base_name, const QString& service_type, const QString& listener_address, int listener_port  )
+void MDnsManager::start( const QString& service_base_name, const QString& service_type, const QString& listener_address, int listener_port  )
 {
-  BonjourRecord br;
+  MDnsRecord br;
   br.setServiceName( QString( "%1 %2:%3" ).arg( service_base_name ).arg( listener_address ).arg( listener_port ) );
   br.setRegisteredType( service_type );
   qDebug() << "Multicast DNS service started with" << br.name();
   mp_register->registerService( br, listener_port );
 }
 
-void BonjourManager::stop()
+void MDnsManager::stop()
 {
   mp_register->unregisterService();
   mp_browser->stop();
@@ -57,52 +57,52 @@ void BonjourManager::stop()
   qDebug() << "Multicast DNS service closed";
 }
 
-void BonjourManager::serviceIsRegistered()
+void MDnsManager::serviceIsRegistered()
 {
-  qDebug() << "Bonjour has registered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
+  qDebug() << "MDns has registered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
   mp_browser->browseForService( mp_register->record().registeredType() );
 }
 
-void BonjourManager::addBonjourRecord( const BonjourRecord& bonjour_record )
+void MDnsManager::addMDnsRecord( const MDnsRecord& bonjour_record )
 {
   if( m_bonjourRecords.contains( bonjour_record ) )
     return;
 
  #ifdef BEEBEEP_DEBUG
-   qDebug() << "Bonjour adds new record" << bonjour_record.name();
+   qDebug() << "MDns adds new record" << bonjour_record.name();
  #endif
    m_bonjourRecords.append( bonjour_record );
-   BonjourResolver* resolver = new BonjourResolver( this );
+   MDnsResolver* resolver = new MDnsResolver( this );
    connect( resolver, SIGNAL( resolved( const QHostInfo&, int ) ), this, SLOT( serviceResolved(const QHostInfo&, int ) ) );
    resolver->resolve( bonjour_record );
 }
 
-void BonjourManager::removeBonjourRecord( const BonjourRecord& bonjour_record )
+void MDnsManager::removeMDnsRecord( const MDnsRecord& bonjour_record )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Bonjour removes record" << bonjour_record.name();
+  qDebug() << "MDns removes record" << bonjour_record.name();
 #endif
   m_bonjourRecords.removeOne( bonjour_record );
 }
 
-void BonjourManager::addUserRecord( const UserRecord& ur )
+void MDnsManager::addUserRecord( const UserRecord& ur )
 {
   if( m_userRecords.contains( ur ) )
     return;
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Bonjour add new user record" << ur.hostAddressAndPort();
+  qDebug() << "MDns add new user record" << ur.hostAddressAndPort();
 #endif
   m_userRecords.append( ur );
   emit newUserFound( ur );
 }
 
-void BonjourManager::serviceResolved( const QHostInfo& host_info, int host_port )
+void MDnsManager::serviceResolved( const QHostInfo& host_info, int host_port )
 {
-  BonjourResolver *resolver = qobject_cast<BonjourResolver*>( sender() );
+  MDnsResolver *resolver = qobject_cast<MDnsResolver*>( sender() );
   if( !resolver )
   {
-    qWarning() << "Bonjour received a signal from invalid BonjourResolver instance";
+    qWarning() << "MDns received a signal from invalid MDnsResolver instance";
     return;
   }
 
@@ -114,7 +114,7 @@ void BonjourManager::serviceResolved( const QHostInfo& host_info, int host_port 
   foreach( QHostAddress ha, host_addresses )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Bonjour has resolved host" << host_info.hostName() << "with this address" << ha.toString();
+    qDebug() << "MDns has resolved host" << host_info.hostName() << "with this address" << ha.toString();
 #endif
     if( ha.toString().contains( ":" ) )
       ipv6_address = ha;
@@ -130,7 +130,7 @@ void BonjourManager::serviceResolved( const QHostInfo& host_info, int host_port 
     else
       ur.setHostAddress( ipv6_address );
     ur.setHostPort( host_port );
-    ur.setComment( QString( "Bonjour[%1]" ).arg( resolver->record().name() ) );
+    ur.setComment( QString( "MDns[%1]" ).arg( resolver->record().name() ) );
     addUserRecord( ur );
   }
 

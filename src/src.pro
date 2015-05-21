@@ -10,18 +10,13 @@ CONFIG(debug,debug|release) {
   message( Build BeeBEEP in Release Mode )
 }
 
-win32: {
-  DEFINES += BEEBEEP_USE_MULTICAST_DNS
-  INCLUDEPATH += $$PWD/../bonjour
-  DEPENDPATH += $$PWD/../bonjour
-  LIBS += -L$$PWD/../bonjour/ -ldnssd
-}
-
 message(Qt version: $$[QT_VERSION])
 
 unix:!macx {
   LIBS= -lxcb -lxcb-screensaver
 }
+
+win32: LIBS += -luser32
 
 macx: {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
@@ -107,15 +102,6 @@ SOURCES += Listener.cpp \
     GuiAddUser.cpp \
     UserRecord.cpp
 
-win32: {
-  SOURCES += BonjourBrowser.cpp \
-    BonjourManager.cpp \
-    BonjourObject.cpp \
-    BonjourRecord.cpp \
-    BonjourRegister.cpp \
-    BonjourResolver.cpp
-}
-
 HEADERS += \
     Listener.h \
     Connection.h \
@@ -188,16 +174,6 @@ HEADERS += \
     Avatar.h \
     GuiAddUser.h \
     UserRecord.h
-
-win32: {
-  HEADERS += BonjourBrowser.h \
-    BonjourManager.h \
-    BonjourObject.h \
-    BonjourRecord.h \
-    BonjourRegister.h \
-    BonjourResolver.h
-}
-
 
 FORMS += GuiChat.ui \
     GuiVCard.ui \
