@@ -55,6 +55,7 @@ namespace Bee
   QString chopTextForWidget( QWidget*, const QString& );
   QString removeHtmlTag( const QString& );
   inline int toLittleEndianFromBig( int );
+  QString chatMessageTypeToString( int );
 
 }
 

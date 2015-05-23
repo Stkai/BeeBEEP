@@ -75,7 +75,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Message dispatched to chat" << c.id();
 #endif
-  ChatMessage cm( from_user_id, m );
+  ChatMessage cm( from_user_id, m, ChatMessage::Chat );
   c.addMessage( cm );
   c.addUnreadMessage();
   c.setLastMessageTimestamp( m.timestamp() );
@@ -86,13 +86,13 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   emit chatMessage( c.id(), cm );
 }
 
-void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt )
+void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt )
 {
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Dispatch system message to chat" << chat_id << "from user" << from_user_id << "with type" << (int)dt;
 #endif
   Message m = Protocol::instance().systemMessage( msg );
-  ChatMessage cm( from_user_id, m );
+  ChatMessage cm( from_user_id, m, cmt );
 
   switch( dt )
   {

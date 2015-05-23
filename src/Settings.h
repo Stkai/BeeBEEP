@@ -126,6 +126,8 @@ public:
   inline bool chatUseClickableLinks() const;
   inline void setChatShowSendMessageIcon( bool );
   inline bool chatShowSendMessageIcon() const;
+  inline void setChatMessageFilter( const QBitArray& );
+  inline const QBitArray& chatMessageFilter() const;
   inline bool showOnlyOnlineUsers() const;
   inline void setShowOnlyOnlineUsers( bool );
   inline bool showUserColor() const;
@@ -142,8 +144,6 @@ public:
   inline void setRaiseOnNewMessageArrived( bool );
   inline bool showChatToolbar() const;
   inline void setShowChatToolbar( bool );
-  inline bool showUserStatusNotification() const;
-  inline void setShowUserStatusNotification( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline const QSize& avatarIconSize() const;
@@ -328,6 +328,7 @@ private:
   bool m_chatUseHtmlTags;
   bool m_chatUseClickableLinks;
   bool m_chatShowSendMessageIcon;
+  QBitArray m_chatMessageFilter;
   bool m_showOnlyOnlineUsers;
   bool m_showUserColor;
   bool m_showEmoticons;
@@ -338,7 +339,6 @@ private:
   bool m_showTipsOfTheDay;
   bool m_automaticFileName;
   bool m_showChatToolbar;
-  bool m_showUserStatusNotification;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -440,6 +440,8 @@ inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClic
 inline bool Settings::chatUseClickableLinks() const { return m_chatUseClickableLinks; }
 inline void Settings::setChatShowSendMessageIcon( bool new_value ) { m_chatShowSendMessageIcon = new_value; }
 inline bool Settings::chatShowSendMessageIcon() const { return m_chatShowSendMessageIcon; }
+inline void Settings::setChatMessageFilter( const QBitArray& new_value ) { m_chatMessageFilter = new_value; }
+inline const QBitArray&  Settings::chatMessageFilter() const { return m_chatMessageFilter; }
 inline bool Settings::showOnlyOnlineUsers() const { return m_showOnlyOnlineUsers; }
 inline void Settings::setShowOnlyOnlineUsers( bool new_value ) { m_showOnlyOnlineUsers = new_value; }
 inline bool Settings::showUserPhoto() const { return m_showUserPhoto; }
@@ -485,8 +487,6 @@ inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::showChatToolbar() const { return m_showChatToolbar; }
 inline void Settings::setShowChatToolbar( bool new_value ) { m_showChatToolbar = new_value; }
-inline bool Settings::showUserStatusNotification() const { return m_showUserStatusNotification; }
-inline void Settings::setShowUserStatusNotification( bool new_value ) { m_showUserStatusNotification = new_value; }
 inline const QStringList& Settings::broadcastAddressesInFileHosts() const { return m_broadcastAddressesInFileHosts; }
 inline const QStringList& Settings::broadcastAddressesInSettings() const { return m_broadcastAddressesInSettings; }
 inline bool Settings::parseBroadcastAddresses() const { return m_parseBroadcastAddresses; }

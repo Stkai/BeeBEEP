@@ -67,6 +67,7 @@ protected:
   void setLastMessageTimestamp( const QDateTime& );
   void setChatUsers();
   QString chatMessageToText( const ChatMessage& );
+  bool messageCanBeShowed( const ChatMessage& );
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
   User findUser( VNumber );
@@ -78,6 +79,8 @@ private slots:
   void sendMessage();
   void checkWriting();
   void customContextMenu( const QPoint& );
+  void showChatMessageFilterMenu();
+  void changeChatMessageFilter();
   void checkAnchorClicked( const QUrl& );
   void selectFontColor();
   void selectFont();
@@ -95,6 +98,7 @@ private:
   VNumber m_lastMessageUserId;
   QString m_lastEmoticonSelected;
 
+  QMenu *mp_menuChat;
   QMenu *mp_menuEmoticons;
   QAction* mp_actEmoticons;
   QAction* mp_actSendFile;

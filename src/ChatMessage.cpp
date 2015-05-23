@@ -25,7 +25,7 @@
 
 
 ChatMessage::ChatMessage()
-  : m_userId( 0 ), m_message()
+  : m_userId( 0 ), m_message(), m_type( ChatMessage::Undefined )
 {
 }
 
@@ -34,8 +34,8 @@ ChatMessage::ChatMessage( const ChatMessage& cm )
   (void)operator=( cm );
 }
 
-ChatMessage::ChatMessage( VNumber user_id, const Message& m )
-  : m_userId( user_id ), m_message( m )
+ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt )
+  : m_userId( user_id ), m_message( m ), m_type( cmt )
 {
 }
 
@@ -45,6 +45,7 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
   {
     m_userId = cm.m_userId;
     m_message = cm.m_message;
+    m_type = cm.m_type;
   }
   return *this;
 }

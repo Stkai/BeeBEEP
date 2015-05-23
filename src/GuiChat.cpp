@@ -92,6 +92,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act->setStatusTip( tr( "Select your favourite chat font style" ) );
   act = bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
   act->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
+  act = bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
+  act->setStatusTip( tr( "Select the message types which will be showed in chat" ) );
   bar->addSeparator();
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
@@ -138,6 +140,38 @@ void GuiChat::customContextMenu( const QPoint& p )
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
+bool GuiChat::messageCanBeShowed( const ChatMessage& cm )
+{
+  return !Settings::instance().chatMessageFilter().testBit( (int)cm.type() );
+}
+
+void GuiChat::showChatMessageFilterMenu()
+{
+  QMenu filter_menu;
+  QAction* act;
+  for( int i = ChatMessage::System; i < ChatMessage::NumTypes; i++ )
+  {
+    act = filter_menu.addAction( Bee::chatMessageTypeToString( i ), this, SLOT( changeChatMessageFilter() ) );
+    act->setCheckable( true );
+    act->setChecked( !Settings::instance().chatMessageFilter().testBit( i ) );
+    act->setData( i );
+  }
+
+  filter_menu.exec( QCursor::pos() );
+}
+
+void GuiChat::changeChatMessageFilter()
+{
+  QAction* act = qobject_cast<QAction*>(sender());
+  if( !act )
+    return;
+
+  QBitArray filter_array = Settings::instance().chatMessageFilter();
+  filter_array.setBit( act->data().toInt(), !act->isChecked() );
+  Settings::instance().setChatMessageFilter( filter_array );
+  reloadChat();
+}
+
 void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
 {
   if( dt.isValid() && !Settings::instance().chatShowMessageTimestamp() )
@@ -165,7 +199,10 @@ void GuiChat::checkAnchorClicked( const QUrl& url )
 
 QString GuiChat::chatMessageToText( const ChatMessage& cm )
 {
-  QString s;
+  QString s = "";
+
+  if( !messageCanBeShowed( cm ) )
+    return s;
 
   if( cm.isSystem() )
   {
@@ -342,11 +379,15 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
     setChatUsers();
   }
 
-  QTextCursor cursor( mp_teChat->textCursor() );
-  cursor.movePosition( QTextCursor::End );
-  cursor.insertHtml( chatMessageToText( cm ) );
+  QString text_message = chatMessageToText( cm );
 
-  ensureLastMessageVisible();
+  if( !text_message.isEmpty() )
+  {
+    QTextCursor cursor( mp_teChat->textCursor() );
+    cursor.movePosition( QTextCursor::End );
+    cursor.insertHtml( text_message );
+    ensureLastMessageVisible();
+  }
 
   if( read_all_messages )
     setLastMessageTimestamp( cm.message().timestamp() );

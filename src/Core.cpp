@@ -79,7 +79,7 @@ bool Core::start()
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
-                                     Settings::instance().programName() ), DispatchToChat );
+                                     Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
         qWarning() << "Unable to bind a valid listener port";
         return false;
       }
@@ -97,7 +97,7 @@ bool Core::start()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
                              .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
-                                   Settings::instance().programName() ), DispatchToChat );
+                                   Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
     mp_listener->close();
     return false;
   }
@@ -114,7 +114,7 @@ bool Core::start()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
-                               Settings::instance().programName() ), DispatchToAllChatsWithUser );
+                               Settings::instance().programName() ), DispatchToAllChatsWithUser, ChatMessage::Connection );
 
   if( Settings::instance().fileTransferIsEnabled() )
     startFileTransferServer();
@@ -156,8 +156,10 @@ void Core::stop()
   m_connections.clear();
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are disconnected from %2 Network.").arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
-                                                                              Settings::instance().programName() ), DispatchToAllChatsWithUser );
+                         tr( "%1 You are disconnected from %2 Network.")
+                           .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
+                           Settings::instance().programName() ), DispatchToAllChatsWithUser,
+                           ChatMessage::Connection );
 }
 
 bool Core::updateBroadcastAddresses()
@@ -167,7 +169,7 @@ bool Core::updateBroadcastAddresses()
     QString sHtmlMsg = tr( "%1 %2 will search users in these IP addresses: %3" )
                 .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), Settings::instance().programName(),
                       Settings::instance().broadcastAddressesInSettings().join( ", " ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::Connection );
     return true;
   }
   else
@@ -180,14 +182,14 @@ void Core::sendBroadcastMessage()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
-                                                                            Settings::instance().programName() ), DispatchToChat );
+                                                                            Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
     mp_broadcaster->sendBroadcastDatagram();
     sendHelloToHostsInSettings();
   }
   else
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are not connected to %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
-                                                                             Settings::instance().programName() ), DispatchToChat );
+                                                                             Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 }
 
 void Core::showBroadcasterUdpError()
@@ -197,11 +199,11 @@ void Core::showBroadcasterUdpError()
                          .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
                          .arg( Settings::instance().programName() )
                          .arg( Settings::instance().defaultBroadcastPort() ),
-                         DispatchToChat );
+                         DispatchToChat, ChatMessage::Connection );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                           tr( "%1 You cannot reach %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
-                            Settings::instance().programName() ), DispatchToChat );
+                            Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 }
 
 bool Core::isConnected() const
@@ -221,7 +223,7 @@ void Core::checkUserHostAddress( const User& u )
                            .arg( u.path() )
                            .arg( tr( "is connected from external network (the new subnet is added to your broadcast address list)." ) );
 
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::Connection );
     updateBroadcastAddresses();
   }
 }
@@ -232,10 +234,10 @@ void Core::sendHelloToHostsInSettings()
     return;
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 Contacting %2 host addresses..." )
+                         tr( "%1 Contacting %2 host addresses previously saved..." )
                          .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
                          .arg( Settings::instance().userPathList().size() ),
-                         DispatchToChat );
+                         DispatchToChat, ChatMessage::Connection );
 
   UserRecord ur;
   User u;

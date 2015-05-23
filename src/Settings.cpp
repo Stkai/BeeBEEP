@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Settings.h"
+#include "ChatMessage.h"
 #include "Version.h"
 
 
@@ -601,6 +602,9 @@ void Settings::load()
   m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
   m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
   m_autoLinkSavedChatByNickname = sets->value( "AutoLinkSavedChatByNickname", true ).toBool();
+  m_chatMessageFilter = sets->value( "MessageFilter", QBitArray() ).toBitArray();
+  if( m_chatMessageFilter.size() < (int)ChatMessage::NumTypes )
+    m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -611,7 +615,6 @@ void Settings::load()
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
-  m_showUserStatusNotification = sets->value( "ShowUserStatusNotification", true ).toBool();
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
@@ -768,6 +771,7 @@ void Settings::save()
   sets->setValue( "ShowEmoticons", m_showEmoticons );
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
   sets->setValue( "AutoLinkSavedChatByNickname", m_autoLinkSavedChatByNickname );
+  sets->setValue( "MessageFilter", m_chatMessageFilter );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );
@@ -776,7 +780,6 @@ void Settings::save()
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserNameColor", m_showUserColor );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
-  sets->setValue( "ShowUserStatusNotification", m_showUserStatusNotification );
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
   sets->setValue( "UseDefaultPassword", m_useDefaultPassword );

@@ -32,9 +32,11 @@ class User;
 class ChatMessage
 {
 public:
+  enum Type { Undefined, System, Chat, Connection, UserStatus, UserInfo, FileTransfer, Other, NumTypes };
+
   ChatMessage();
   ChatMessage( const ChatMessage& );
-  ChatMessage( VNumber user_id, const Message& );
+  ChatMessage( VNumber user_id, const Message&, ChatMessage::Type );
 
   ChatMessage& operator=( const ChatMessage& );
 
@@ -45,10 +47,12 @@ public:
   inline VNumber userId() const;
   inline const Message& message() const;
   inline void setMessage( const Message& );
+  inline ChatMessage::Type type() const;
 
 private:
   VNumber m_userId;
   Message m_message;
+  Type m_type;
 
 };
 
@@ -60,6 +64,7 @@ inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_U
 inline VNumber ChatMessage::userId() const { return m_userId; }
 inline const Message& ChatMessage::message() const { return m_message; }
 inline void ChatMessage::setMessage( const Message& new_value ) { m_message = new_value; }
+inline ChatMessage::Type ChatMessage::type() const { return m_type; }
 
 #endif // BEEBEEP_CHATMESSAGE_H
 

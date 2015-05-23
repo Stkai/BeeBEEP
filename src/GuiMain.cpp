@@ -386,7 +386,7 @@ void GuiMain::showAbout()
                       .arg( Settings::instance().operatingSystem( true ) )
                       .arg( tr( "developed by" ) )
                       .arg( QString( "<a href='http://it.linkedin.com/pub/marco-mastroddi/20/5a7/191'>Marco Mastroddi</a>" ) )
-                      .arg( QString( "e-mail: marco.mastroddi@gmail.com" ) )
+                      .arg( QString( "e-mail: marco.mastroddi@gmail.com<br />web: <a href='http://www.beebeep.net'>www.beebeep.net</a>" ) )
                       );
 
 }
@@ -490,12 +490,6 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showUserPhoto() );
   act->setData( 21 );
 
-  act = mp_menuUsers->addAction( tr( "Show status notification" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled you can see any change of the user status in chat" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserStatusNotification() );
-  act->setData( 24 );
-
   mp_menuUsers->addSeparator();
 
   act = mp_menuUsers->addAction( tr( "Set status to away automatically" ), this, SLOT( settingsChanged() ) );
@@ -565,7 +559,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseClickableLinks() );
   act->setData( 9 );
-
 
   /* System Menu */
   mp_menuSystem = new QMenu( tr( "System" ), this );
@@ -1056,9 +1049,6 @@ void GuiMain::settingsChanged()
   case 23:
     Settings::instance().setShowChatToolbar( act->isChecked() );
     checkChatToolbar();
-    break;
-  case 24:
-    Settings::instance().setShowUserStatusNotification( act->isChecked() );
     break;
   case 99:
     break;

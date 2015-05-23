@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "ChatMessage.h"
 #include "PluginManager.h"
 #include "User.h"
 
@@ -239,6 +240,25 @@ QString Bee::fileTypeToString( Bee::FileType ft )
   if( ft < 0 || ft > Bee::NumFileType )
     ft = Bee::FileOther;
   return qApp->translate( "File", FileTypeToString[ ft ] );
+}
+
+static const char* ChatMessageTypeToString[] =
+{
+  QT_TRANSLATE_NOOP( "ChatMessage", "Undefined" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "System" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "Chat" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "Connection" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "User Status" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "User Information" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "File Transfer" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "Other" )
+};
+
+QString Bee::chatMessageTypeToString( int cmt )
+{
+  if( cmt < 0 || cmt > ChatMessage::NumTypes )
+    cmt = ChatMessage::Undefined;
+  return qApp->translate( "ChatMessage", ChatMessageTypeToString[ cmt ] );
 }
 
 QString Bee::dateTimeStringSuffix( const QDateTime& dt )

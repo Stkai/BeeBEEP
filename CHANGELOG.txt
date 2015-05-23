@@ -1,9 +1,11 @@
 BEEBEEP (Secure Lan Messanger)
 
 BeeBEEP 1.0.0
-- Only an instance of BeeBEEP can started a time (to launch another one please copy the executable in other folder)
+- Only an instance of BeeBEEP can started a time (can be changed in beebeep.rc file)
 - Send message button can be showed (or hided)
-- Creating default avatar for users
+- Default avatar created for the users
+- Message filter in chat
+- Default Listener, File Transfer and Broadcast port can be set in beebeep.rc file
 
 BeeBEEP 0.9.9
 - Improved subnet selection when there are many network cards installed

@@ -136,7 +136,8 @@ void Core::parseFileMessage( const User& u, const Message& m )
   if( m.hasFlag( Message::Refused ) )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has refused to download %3." )
-                           .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), fi.name() ), DispatchToAllChatsWithUser );
+                           .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), fi.name() ),
+                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
     return;
   }
 
@@ -162,7 +163,8 @@ void Core::parseFileMessage( const User& u, const Message& m )
   fi.setHostAddress( c->peerAddress() );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is sending to you the file: %3." )
-                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), fi.name() ), DispatchToAllChatsWithUser );
+                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), fi.name() ),
+                         DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
   emit fileDownloadRequest( u, fi );
 }
 
@@ -224,12 +226,14 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       {
         qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
         dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 An error occurred when %2 tries to add you to the group chat: %3." )
-                           .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ), DispatchToChat );
+                           .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ),
+                               DispatchToChat, ChatMessage::Other );
         return;
       }
 
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 adds you to the group chat: %3." )
-                         .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ), DispatchToChat );
+                         .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ),
+                             DispatchToChat, ChatMessage::Other );
       createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
     }
     else
@@ -271,7 +275,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
       qDebug() << u.path() << "has shared" << file_info_list.size() << "files";
     }
 
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg, DispatchToAllChatsWithUser );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
 
     FileShare::instance().addToNetwork( u.id(), file_info_list );
 

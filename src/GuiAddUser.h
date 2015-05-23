@@ -42,9 +42,13 @@ public:
 protected slots:
   void addUser();
   void saveUsers();
+  void openCustomMenu( const QPoint& );
+  void removeUserPath();
 
 protected:
-  bool addUserToList( const UserRecord& );
+  void addUserToList( const UserRecord& );
+  bool removeUserPathFromList( const QString& );
+  void loadUserPathInList();
 
 private:
   QList<UserRecord> m_users;
