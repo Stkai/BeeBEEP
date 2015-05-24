@@ -132,6 +132,7 @@ private slots:
   void selectLanguage();
   void showLocalUserVCard();
   void showAddUser();
+  void showChatSettingsMenu();
 
 protected:
   void closeEvent( QCloseEvent* );

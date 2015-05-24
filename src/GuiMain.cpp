@@ -117,6 +117,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
   connect( mp_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( mp_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
+  connect( mp_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -701,7 +702,7 @@ void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
   menuBar()->addMenu( mp_menuUsers );
-  menuBar()->addMenu( mp_menuChat );
+  //menuBar()->addMenu( mp_menuChat );
   menuBar()->addMenu( mp_menuSystem );
   menuBar()->addMenu( mp_menuView );
   menuBar()->addMenu( mp_menuPlugins );
@@ -2289,4 +2290,9 @@ void GuiMain::showAddUser()
   {
     mp_core->sendHelloToHostsInSettings();
   }
+}
+
+void GuiMain::showChatSettingsMenu()
+{
+  mp_menuChat->exec( QCursor::pos() );
 }

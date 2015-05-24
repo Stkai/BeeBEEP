@@ -62,12 +62,14 @@ signals:
   void editGroupRequest();
   void chatToClear( VNumber );
   void leaveThisChat( VNumber );
+  void showChatMenuRequest();
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
   void setChatUsers();
   QString chatMessageToText( const ChatMessage& );
   bool messageCanBeShowed( const ChatMessage& );
+  bool historyCanBeShowed();
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
   User findUser( VNumber );

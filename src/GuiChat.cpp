@@ -94,6 +94,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
   act = bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
   act->setStatusTip( tr( "Select the message types which will be showed in chat" ) );
+  act = bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
+  act->setStatusTip( tr( "Click to show the settings menu of the chat" ) );
   bar->addSeparator();
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
@@ -143,6 +145,11 @@ void GuiChat::customContextMenu( const QPoint& p )
 bool GuiChat::messageCanBeShowed( const ChatMessage& cm )
 {
   return !Settings::instance().chatMessageFilter().testBit( (int)cm.type() );
+}
+
+bool GuiChat::historyCanBeShowed()
+{
+  return !Settings::instance().chatMessageFilter().testBit( (int)ChatMessage::History );
 }
 
 void GuiChat::showChatMessageFilterMenu()
@@ -310,8 +317,12 @@ bool GuiChat::setChatId( VNumber chat_id )
 
   QString html_text = "";
 
-  if( ChatManager::instance().isLoadHistoryCompleted() && ChatManager::instance().chatHasSavedText( c.name() ) )
+  if( ChatManager::instance().isLoadHistoryCompleted()
+        && ChatManager::instance().chatHasSavedText( c.name() )
+        && historyCanBeShowed() )
+  {
     html_text += ChatManager::instance().chatSavedText( c.name() );
+  }
 
   if( !html_text.isEmpty() )
     html_text.append( "<br />" );
