@@ -1648,9 +1648,12 @@ void GuiMain::hideToTrayIcon()
   hide();
 }
 
-void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason )
+void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 {
-
+#ifndef Q_OS_MAC
+  if( ar != QSystemTrayIcon::Context )
+    QTimer::singleShot( 0, this, SLOT( showUp() ) );
+#endif
 }
 
 void GuiMain::trayMessageClicked()

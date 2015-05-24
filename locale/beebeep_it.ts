@@ -2,6 +2,45 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="it_IT">
 <context>
+    <name>ChatMessage</name>
+    <message>
+        <source>Undefined</source>
+        <translation>Indefinito</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>Sistema</translation>
+    </message>
+    <message>
+        <source>Chat</source>
+        <translation>Chat</translation>
+    </message>
+    <message>
+        <source>Connection</source>
+        <translation>Connessione</translation>
+    </message>
+    <message>
+        <source>User Status</source>
+        <translation>Stato Utente</translation>
+    </message>
+    <message>
+        <source>User Information</source>
+        <translation>Informazioni Utente</translation>
+    </message>
+    <message>
+        <source>File Transfer</source>
+        <translation>Trasferimento file</translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation>Storia</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Altri</translation>
+    </message>
+</context>
+<context>
     <name>Core</name>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
@@ -368,8 +407,8 @@
         <translation>%1 %2 cercherà gli utenti connessi a questi indirizzi IP: %3</translation>
     </message>
     <message>
-        <source>%1 Contacting %2 host addresses...</source>
-        <translation type="unfinished"></translation>
+        <source>%1 Contacting %2 host addresses previously saved...</source>
+        <translation>%1 Connessione a %2 IP precedentemente salvati...</translation>
     </message>
 </context>
 <context>
@@ -464,62 +503,74 @@
     <name>GuiAddUser</name>
     <message>
         <source>Add user</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi utente</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Commento</translation>
     </message>
     <message>
         <source>Please insert a valid IP address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci un indirizzo IP valido.</translation>
     </message>
     <message>
         <source>Please insert a valid port or use the default one %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci una porta valida o usa quella predefinita %1.</translation>
     </message>
     <message>
         <source>These IP address and port are already inserted in list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa combinazione di indirizzo IP e porta è già stata inserita in lista.</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished">Indirizzo</translation>
+        <translation>Indirizzo</translation>
+    </message>
+    <message>
+        <source>Remove user path</source>
+        <translation>Rimuovi l&apos;indirizzo utente</translation>
+    </message>
+    <message>
+        <source>Please select an user path in the list.</source>
+        <translation>Seleziona un indirizzo utente nella lista.</translation>
     </message>
 </context>
 <context>
     <name>GuiAddUserDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Add an IP address and port of the user you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungo un indirizzo IP e la porta dell&apos;utente a cui ti vuoi connettere</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Indirizzo IP</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished">Porta</translation>
+        <translation>Porta</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Commento</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
-        <source>Click here to add</source>
-        <translation type="unfinished"></translation>
+        <source>Add</source>
+        <translation>Aggiungi</translation>
+    </message>
+    <message>
+        <source>Click here to add user path</source>
+        <translation>Premi qui per aggiungere un indirizzo utente</translation>
     </message>
 </context>
 <context>
@@ -772,6 +823,22 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
+    </message>
+    <message>
+        <source>Filter message</source>
+        <translation>Filtro messaggi</translation>
+    </message>
+    <message>
+        <source>Select the message types which will be showed in chat</source>
+        <translation>Seleziona la tipologia di messaggi che vuoi che sia mostrata nella conversazione</translation>
+    </message>
+    <message>
+        <source>Chat settings</source>
+        <translation>Preferenze di conversazione</translation>
+    </message>
+    <message>
+        <source>Click to show the settings menu of the chat</source>
+        <translation>Premi qui per mostrare il menu delle preferenze delle conversazioni</translation>
     </message>
 </context>
 <context>
@@ -1401,7 +1468,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>About &amp;Qt...</source>
-        <translation>Informazioni su &amp;Qt...</translation>
+        <translation type="obsolete">Informazioni su &amp;Qt...</translation>
     </message>
     <message>
         <source>Show the informations about Qt library</source>
@@ -2310,7 +2377,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Sistema</translation>
+        <translation type="obsolete">Sistema</translation>
     </message>
     <message>
         <source>Enable BEEP alert on new message</source>
@@ -2401,24 +2468,36 @@ il file %2 (%3)?</translation>
         <translation type="obsolete">Mostra la barra degli strumenti</translation>
     </message>
     <message>
-        <source>%1 is running in the background mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Add users manually...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi utenti manualmente...</translation>
     </message>
     <message>
         <source>Add the IP address and the port of the users you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi l&apos;indirizzo IP e la porta degli utenti a cui vuoi connetterti</translation>
     </message>
     <message>
-        <source>Show status notification</source>
-        <translation type="unfinished"></translation>
+        <source>Settings</source>
+        <translation>Preferenze</translation>
     </message>
     <message>
-        <source>If enabled you can see any change of the user status in chat</source>
-        <translation type="unfinished"></translation>
+        <source>Load on system tray at startup</source>
+        <translation>Mostra solo icona di sitema alla partenza</translation>
+    </message>
+    <message>
+        <source>If enabled %1 will be start hided in system tray</source>
+        <translation>Se abilitata %1 partirà nascosto nell&apos;icona di sistema</translation>
+    </message>
+    <message>
+        <source>Qt Library...</source>
+        <translation>Librerie Qt...</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>Mostra</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Chiudi</translation>
     </message>
 </context>
 <context>
@@ -3173,11 +3252,11 @@ il file %2 (%3)?</translation>
     <name>GuiSystemTray</name>
     <message>
         <source>1 new message</source>
-        <translation>1 nuovo messaggio</translation>
+        <translation type="obsolete">1 nuovo messaggio</translation>
     </message>
     <message>
         <source>%1 new messages</source>
-        <translation>%1 nuovi messaggi</translation>
+        <translation type="obsolete">%1 nuovi messaggi</translation>
     </message>
 </context>
 <context>

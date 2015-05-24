@@ -14,11 +14,11 @@
 UseConfigurationFileIni= the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
 BroadcastOnlyToHostsIni= if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
 BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
-DefaultListenerPort= is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475)
-DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the connected users (default 6476)
+DefaultListenerPort= is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475) [1.0.0]
+DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the connected users (default 6476) [1.0.0]
 SaveDataInDocumentsFolder= force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data
-SaveDataInUserApplicationFolder= force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data)
-AllowMultipleInstances= enable the option to launch multiple instance of BeeBEEP
+SaveDataInUserApplicationFolder= force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) [1.0.0]
+AllowMultipleInstances= enable the option to launch multiple instance of BeeBEEP [1.0.0]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect
@@ -101,7 +101,7 @@ AutomaticFileName=true
 
 [Misc]
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0)
-ListenerPort= is the TCP port of IO communication between beebeeps (default is 6475)
+ListenerPort= is the last TCP port of chat communication between beebeeps (default is 6475)
 PingInterval=31000
 PongTimeout=98000
 WritingTimeout=3000
@@ -110,7 +110,7 @@ FileTransferBufferSize=65456
 SystemTrayMessageTimeout=2000
 
 [Network]
-BroadcastAddresses= (do not use)
+BroadcastAddresses= (do not edit manually)
 LocalHostAddressForced= if BeeBEEP doesn't recognize your IP address automatically, you can set here your IP (useful if you have a lot of network configured)
 LocalSubnetForced= if BeeBEEP doesn't recognize your subnet address automatically, you can set here your subnet (useful if you have a lot of network configured)
 ParseBroadcastAddresses= if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254
