@@ -26,21 +26,27 @@
 
 
 GuiSystemTray::GuiSystemTray( QObject *parent )
-  : QSystemTrayIcon( parent ), m_iconStatus( -1 ), m_unreadMessages( 0 )
+  : QSystemTrayIcon( parent ), m_iconStatus( -1 ), m_chatId( ID_DEFAULT_CHAT )
 {
   setDefaultIcon();
 }
 
-void GuiSystemTray::addUnreadMessage( int ur)
+void GuiSystemTray::showNewMessageArrived( VNumber chat_id, const QString& msg )
 {
-  m_unreadMessages += ur;
-  showIcon();
+  m_chatId = chat_id;
+
+  setMessageIcon();
+  if( Settings::instance().showNotificationOnTray() && Settings::instance().trayMessageTimeout() > 0 )
+    showMessage( Settings::instance().programName(), msg, QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );
 }
 
-void GuiSystemTray::setUnreadMessages( int ur )
+void GuiSystemTray::setUnreadMessages( VNumber chat_id, int ur )
 {
-  m_unreadMessages = ur;
-  showIcon();
+  m_chatId = chat_id;
+  if( ur > 0 )
+    setMessageIcon();
+  else
+    setDefaultIcon();
 }
 
 void GuiSystemTray::setDefaultIcon()
@@ -61,16 +67,3 @@ void GuiSystemTray::setMessageIcon()
   }
 }
 
-void GuiSystemTray::showIcon()
-{
-  if( m_unreadMessages > 0 )
-  {
-    setMessageIcon();
-    if( Settings::instance().showNotificationOnTray() && Settings::instance().trayMessageTimeout() > 0 )
-      showMessage( Settings::instance().programName(),
-        m_unreadMessages == 1 ? tr( "1 new message" ) : tr( "%1 new messages" ).arg( m_unreadMessages ),
-        QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );
-  }
-  else
-    setDefaultIcon();
-}

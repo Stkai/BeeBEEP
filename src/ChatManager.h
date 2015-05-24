@@ -38,6 +38,7 @@ public:
   Chat chat( VNumber ) const;
   Chat privateChatForUser( VNumber user_id ) const;
   Chat findGroupChatByPrivateId( const QString& ) const;
+  Chat firstChatWithUnreadMessages() const;
 
   void setChat( const Chat& );
   inline const QList<Chat>& constChatList() const;

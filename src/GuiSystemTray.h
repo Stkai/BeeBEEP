@@ -21,11 +21,11 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-
 #ifndef BEEBEEP_GUISYSTEMTRAY_H
 #define BEEBEEP_GUISYSTEMTRAY_H
 
-#include <QSystemTrayIcon>
+#include "Config.h"
+
 
 class GuiSystemTray : public QSystemTrayIcon
 {
@@ -35,20 +35,23 @@ public:
   enum IconStatus { Default, Message };
 
   explicit GuiSystemTray( QObject *parent = 0 );
-  void addUnreadMessage( int );
-  void setUnreadMessages( int );
+
+  void showNewMessageArrived( VNumber, const QString& );
+  void setUnreadMessages( VNumber, int );
+  inline VNumber chatId() const;
 
 public slots:
   void setDefaultIcon();
   void setMessageIcon();
 
-protected:
-  virtual void showIcon();
-
 private:
   int m_iconStatus;
-  int m_unreadMessages;
+  VNumber m_chatId;
 
 };
+
+
+// Inline Functions
+inline VNumber GuiSystemTray::chatId() const { return m_chatId; }
 
 #endif // BEEBEEP_GUISYSTEMTRAY_H

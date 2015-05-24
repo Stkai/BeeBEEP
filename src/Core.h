@@ -32,7 +32,7 @@ class Group;
 class UserList;
 class UserRecord;
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-class BonjourManager;
+class MdnsManager;
 #endif
 
 
@@ -185,7 +185,7 @@ private:
   FileTransfer* mp_fileTransfer;
   int m_shareListToBuild;
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  BonjourManager* mp_bonjour;
+  MDnsManager* mp_mDns;
 #endif
 
 };

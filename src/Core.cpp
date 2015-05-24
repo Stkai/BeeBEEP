@@ -30,7 +30,7 @@
 #include "Protocol.h"
 #include "UserManager.h"
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  #include "BonjourManager.h"
+  #include "MDnsManager.h"
 #endif
 
 
@@ -49,8 +49,8 @@ Core::Core( QObject* parent )
   m_shareListToBuild = 0;
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_bonjour = new BonjourManager( this );
-  connect( mp_bonjour, SIGNAL( newUserFound( const UserRecord& ) ), this, SLOT( checkUserRecord( const UserRecord& ) ) );
+  mp_mDns = new MDnsManager( this );
+  connect( mp_mDns, SIGNAL( newUserFound( const UserRecord& ) ), this, SLOT( checkUserRecord( const UserRecord& ) ) );
 #endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
@@ -108,7 +108,7 @@ bool Core::start()
   }
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_bonjour->start( Settings::instance().programName(), Settings::instance().dnsRecord(), Settings::instance().localUser().hostAddress().toString(), mp_listener->serverPort() );
+  mp_mDns->start( Settings::instance().programName(), Settings::instance().dnsRecord(), Settings::instance().localUser().hostAddress().toString(), mp_listener->serverPort() );
 #endif
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -144,7 +144,7 @@ void Core::stop()
 {
   mp_broadcaster->stopBroadcasting();
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_bonjour->stop();
+  mp_mDns->stop();
 #endif
   stopFileTransferServer();
 

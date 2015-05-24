@@ -102,6 +102,26 @@ int ChatManager::unreadMessages() const
   return unread_messages;
 }
 
+Chat ChatManager::firstChatWithUnreadMessages() const
+{
+  bool default_chat_has_unread_messages = false;
+  foreach( Chat c, m_chats )
+  {
+    if( c.unreadMessages() > 0 )
+    {
+      if( c.isDefault() )
+        default_chat_has_unread_messages = true;
+      else
+        return c;
+    }
+  }
+
+  if( default_chat_has_unread_messages )
+    return chat( ID_DEFAULT_CHAT );
+  else
+    return Chat();
+}
+
 bool ChatManager::hasName( const QString& chat_name ) const
 {
   if( Settings::instance().defaultChatName() == chat_name )

@@ -242,6 +242,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
     Settings::instance().setGuiState( saveState() );
   }
 
+  mp_trayIcon->hide();
+
   // maybe timer is active
   mp_logView->stopCheckingLog();
 
@@ -253,7 +255,10 @@ void GuiMain::showNextChat()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Show next chat in list with unread messages";
 #endif
-  if( !mp_userList->nextUserWithUnreadMessages() )
+  Chat c = ChatManager::instance().firstChatWithUnreadMessages();
+  if( c.isValid() )
+    showChat( c.id() );
+  else
     showMessage( tr( "No new message available" ), 0 );
 }
 
@@ -446,6 +451,9 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
   mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), mp_core, SLOT( sendBroadcastMessage() ) );
   mp_actBroadcast->setStatusTip( tr( "Broadcast a message in your network to find available users" ) );
+  mp_menuMain->addAction( mp_actConfigureNetwork );
+  act = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
+  act->setStatusTip( tr( "Add the IP address and the port of the users you want to connect" ) );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addSeparator();
@@ -465,39 +473,9 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actQuit );
 
   /* Users Menu */
-  mp_menuUsers = new QMenu( tr( "Users" ), this );
 
-  mp_menuUsers->addAction( mp_actConfigureNetwork );
-  act = mp_menuUsers->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
-  act->setStatusTip( tr( "Add the IP address and the port of the users you want to connect" ) );
 
-  mp_menuUsers->addSeparator();
 
-  act = mp_menuUsers->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserColor() );
-  act->setData( 5 );
-
-  act = mp_menuUsers->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
-  act->setData( 6 );
-
-  act = mp_menuUsers->addAction( tr( "Show the user's picture" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled you can see a picture of the users in the list (if they have)" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserPhoto() );
-  act->setData( 21 );
-
-  mp_menuUsers->addSeparator();
-
-  act = mp_menuUsers->addAction( tr( "Set status to away automatically" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled %1 change your status to away after an idle of %2 minutes" ).arg( Settings::instance().programName() ).arg( Settings::instance().userAwayTimeout() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().autoUserAway() );
-  act->setData( 20 );
 
 
   /* Chat Menu */
@@ -562,41 +540,67 @@ void GuiMain::createMenus()
   act->setData( 9 );
 
   /* System Menu */
-  mp_menuSystem = new QMenu( tr( "System" ), this );
+  mp_menuSettings = new QMenu( tr( "Settings" ), this );
 
-  mp_actPromptPassword = mp_menuSystem->addAction( tr( "Prompts for network password on startup" ), this, SLOT( settingsChanged() ) );
+  mp_actPromptPassword = mp_menuSettings->addAction( tr( "Prompts for network password on startup" ), this, SLOT( settingsChanged() ) );
   mp_actPromptPassword->setStatusTip( tr( "If enabled the password dialog will be shown on connection startup" ) );
   mp_actPromptPassword->setCheckable( true );
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
 
-  act = mp_menuSystem->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled you can transfer files with the other users" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().fileTransferIsEnabled() );
   act->setData( 12 );
 
-  act = mp_menuSystem->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().automaticFileName() );
   act->setData( 7 );
 
-  mp_menuSystem->addSeparator();
+  mp_menuSettings->addSeparator();
 
-  mp_actBeepOnNewMessage = mp_menuSystem->addAction( tr( "Enable BEEP alert on new message" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Set status to away automatically" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled %1 change your status to away after an idle of %2 minutes" ).arg( Settings::instance().programName() ).arg( Settings::instance().userAwayTimeout() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().autoUserAway() );
+  act->setData( 20 );
+
+  act = mp_menuSettings->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserColor() );
+  act->setData( 5 );
+
+  act = mp_menuSettings->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
+  act->setData( 6 );
+
+  act = mp_menuSettings->addAction( tr( "Show the user's picture" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can see a picture of the users in the list (if they have)" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserPhoto() );
+  act->setData( 21 );
+
+  mp_menuSettings->addSeparator();
+
+  mp_actBeepOnNewMessage = mp_menuSettings->addAction( tr( "Enable BEEP alert on new message" ), this, SLOT( settingsChanged() ) );
   mp_actBeepOnNewMessage->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
   mp_actBeepOnNewMessage->setCheckable( true );
   mp_actBeepOnNewMessage->setChecked( Settings::instance().beepOnNewMessageArrived() );
   mp_actBeepOnNewMessage->setData( 4 );
 
-  act = mp_menuSystem->addAction( tr( "Raise on top on new message" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Raise on top on new message" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled when a new message is arrived %1 is shown on top of all other windows" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
   act->setData( 15 );
 
-  act = mp_menuSystem->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled %1 stays on top of the other windows" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().stayOnTop() );
@@ -604,15 +608,21 @@ void GuiMain::createMenus()
 
   if( QSystemTrayIcon::isSystemTrayAvailable() )
   {
-    mp_menuSystem->addSeparator();
+    mp_menuSettings->addSeparator();
 
-    act = mp_menuSystem->addAction( tr( "Close to tray icon" ), this, SLOT( settingsChanged() ) );
+    act = mp_menuSettings->addAction( tr( "Load on system tray at startup" ), this, SLOT( settingsChanged() ) );
+    act->setStatusTip( tr( "If enabled %1 will be start hided in system tray" ).arg( Settings::instance().programName() ) );
+    act->setCheckable( true );
+    act->setChecked( Settings::instance().loadOnTrayAtStartup() );
+    act->setData( 24 );
+
+    act = mp_menuSettings->addAction( tr( "Close to tray icon" ), this, SLOT( settingsChanged() ) );
     act->setStatusTip( tr( "If enabled when the close button is clicked the window minimized to the system tray icon" ) );
     act->setCheckable( true );
     act->setChecked( Settings::instance().minimizeInTray() );
     act->setData( 11 );
 
-    act = mp_menuSystem->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
+    act = mp_menuSettings->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
     act->setStatusTip( tr( "If enabled tray icon shows some notification about status and message" ) );
     act->setCheckable( true );
     act->setChecked( Settings::instance().showNotificationOnTray()  );
@@ -620,7 +630,7 @@ void GuiMain::createMenus()
   }
 
 #ifdef Q_OS_WIN
-  act = mp_menuSystem->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled you can automatically load %1 at system startup" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().hasStartOnSystemBoot() );
@@ -681,7 +691,7 @@ void GuiMain::createMenus()
   mp_menuInfo->addAction( mp_actAbout );
   act = mp_menuInfo->addAction( QIcon( ":/images/license.png" ), tr( "Show %1's license..." ).arg( Settings::instance().programName() ), this, SLOT( showLicense() ) );
   act->setStatusTip( tr( "Show the informations about %1's license" ).arg( Settings::instance().programName() ) );
-  act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "About &Qt..." ), qApp, SLOT( aboutQt() ) );
+  act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "Qt Library..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
   mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( QIcon( ":/images/beebeep.png" ), tr( "Open %1 official website..." ).arg( Settings::instance().programName() ), this, SLOT( openWebSite() ) );
@@ -696,14 +706,20 @@ void GuiMain::createMenus()
   act = mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Please donate for %1 :-)" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
   act->setStatusTip( tr( "I'm so grateful and pleased about that" ) + QString( " :-)" ) );
 
+  /* Tray icon menu */
+  mp_menuTrayIcon = new QMenu( this );
+  act = mp_menuTrayIcon->addAction( QIcon( ":/images/beebeep.png" ), tr( "Show" ), this, SLOT( showUp() ) );
+  mp_menuTrayIcon->setDefaultAction( act );
+  mp_menuTrayIcon->addSeparator();
+  mp_menuTrayIcon->addAction( QIcon( ":/images/disconnect.png" ), tr( "Close" ), this, SLOT( forceExit() ) );
+  mp_trayIcon->setContextMenu( mp_menuTrayIcon );
+
 }
 
 void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
-  menuBar()->addMenu( mp_menuUsers );
-  //menuBar()->addMenu( mp_menuChat );
-  menuBar()->addMenu( mp_menuSystem );
+  menuBar()->addMenu( mp_menuSettings );
   menuBar()->addMenu( mp_menuView );
   menuBar()->addMenu( mp_menuPlugins );
   menuBar()->addMenu( mp_menuInfo );
@@ -1051,6 +1067,9 @@ void GuiMain::settingsChanged()
     Settings::instance().setShowChatToolbar( act->isChecked() );
     checkChatToolbar();
     break;
+  case 24:
+    Settings::instance().setLoadOnTrayAtStartup( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1090,20 +1109,10 @@ bool GuiMain::showAlert()
       playBeep();
     }
 
-    if( mp_trayIcon->isVisible() )
-    {
-      if( Settings::instance().raiseOnNewMessageArrived() )
-        showFromTrayIcon();
-      else
-        mp_trayIcon->addUnreadMessage( 1 );
-    }
+    if( Settings::instance().raiseOnNewMessageArrived() && !Settings::instance().stayOnTop() )
+      raiseOnTop();
     else
-    {
-      if( Settings::instance().raiseOnNewMessageArrived() && !Settings::instance().stayOnTop() )
-        raiseOnTop();
-      else
-        QApplication::alert( this );
-    }
+      QApplication::alert( this );
 
     return true;
   }
@@ -1135,20 +1144,21 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       {
         statusBar()->clearMessage();
         showChat( chat_id );
+        mp_trayIcon->setDefaultIcon();
       }
       else
       {
         User u = UserManager::instance().userList().find( cm.userId() );
-        if( u.isValid() )
-          showMessage( tr( "New message from %1" ).arg( u.name() ), 0 );
-        else
-          showMessage( tr( "New message arrived" ), 0 );
+        QString msg = u.isValid() ? tr( "New message from %1" ).arg( u.name() ) : tr( "New message arrived" );
+        mp_trayIcon->showNewMessageArrived( chat_id, msg );
       }
     }
   }
 
   mp_chatList->updateChat( chat_id );
   mp_groupList->updateChat( chat_id );
+  if( !show_alert )
+    mp_trayIcon->setDefaultIcon();
 }
 
 void GuiMain::searchUsers()
@@ -1630,31 +1640,23 @@ void GuiMain::showWizard()
 
 void GuiMain::hideToTrayIcon()
 {
-  mp_trayIcon->setUnreadMessages( ChatManager::instance().unreadMessages() );
-  mp_trayIcon->show();
-  if( Settings::instance().showNotificationOnTray() )
-    mp_trayIcon->showMessage( Settings::instance().programName(),
-                            tr( "%1 is running in the background mode" )
-                              .arg( Settings::instance().programName() ),
-                            QSystemTrayIcon::Information, Settings::instance().trayMessageTimeout() );
+  Chat c = ChatManager::instance().firstChatWithUnreadMessages();
+  if( c.isValid() )
+    mp_trayIcon->setUnreadMessages( c.id(), c.unreadMessages() );
+  else
+    mp_trayIcon->setUnreadMessages( mp_chat->chatId(), 0 );
   hide();
-}
-
-void GuiMain::showFromTrayIcon()
-{
-  showNormal(); // the window last state is minimized
-  if( isVisible() )
-    mp_trayIcon->hide();
 }
 
 void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason )
 {
-  QTimer::singleShot( 0, this, SLOT( showFromTrayIcon() ) );
+
 }
 
 void GuiMain::trayMessageClicked()
 {
-  QTimer::singleShot( 0, this, SLOT( showFromTrayIcon() ) );
+  showChat( mp_trayIcon->chatId() );
+  QTimer::singleShot( 0, this, SLOT( showUp() ) );
 }
 
 void GuiMain::addToShare( const QString& share_path )
@@ -1893,7 +1895,6 @@ void GuiMain::raiseOnTop()
   raise();
   qApp->setActiveWindow( this );
 #endif
-
 }
 
 void GuiMain::checkAutoStartOnBoot( bool add_service )
@@ -1916,6 +1917,8 @@ void GuiMain::loadSession()
   mp_shareLocal->updatePaths();
   QTimer::singleShot( 2000, mp_core, SLOT( buildLocalShareList() ) );
   mp_core->loadGroups();
+  if( !mp_trayIcon->isVisible() )
+    mp_trayIcon->show();
 }
 
 void GuiMain::saveSession()
@@ -2260,10 +2263,9 @@ void GuiMain::selectLanguage()
 
 void GuiMain::showUp()
 {
-  if( mp_trayIcon->isVisible() )
-    showFromTrayIcon();
-  else
-    raiseOnTop();
+  if( !isVisible() )
+    showNormal();
+  raiseOnTop();
 }
 
 void GuiMain::checkChatToolbar()

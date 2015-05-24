@@ -176,23 +176,6 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
   clearSelection();
 }
 
-bool GuiUserList::nextUserWithUnreadMessages()
-{
-  GuiUserItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
-  {
-    item = (GuiUserItem*)(*it);
-    if( item->unreadMessages() > 0 )
-    {
-      emit chatSelected( item->chatId() );
-      return true;
-    }
-    ++it;
-  }
-  return false;
-}
-
 void GuiUserList::setDefaultChatConnected( bool yes )
 {
   GuiUserItem* item = itemFromChatId( ID_DEFAULT_CHAT );

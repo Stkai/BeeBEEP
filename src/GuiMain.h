@@ -93,7 +93,6 @@ private slots:
   void showCurrentChat();
   void showChat( VNumber );
   void showWizard();
-  void showFromTrayIcon();
   void forceExit();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
   void trayMessageClicked();
@@ -186,12 +185,12 @@ private:
 
   QMenu *mp_menuMain;
   QMenu *mp_menuInfo;
-  QMenu *mp_menuUsers;
   QMenu *mp_menuChat;
-  QMenu *mp_menuSystem;
+  QMenu *mp_menuSettings;
   QMenu *mp_menuStatus;
   QMenu *mp_menuPlugins;
   QMenu *mp_menuView;
+  QMenu *mp_menuTrayIcon;
 
   QToolBar *mp_barMain;
   QToolBar *mp_barChat;

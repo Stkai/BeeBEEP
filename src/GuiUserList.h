@@ -41,7 +41,6 @@ public:
   void removeUser( const User& );
   void setUnreadMessages( VNumber private_chat_id, int );
   void updateUsers( bool );
-  bool nextUserWithUnreadMessages();
 
   void setDefaultChatConnected( bool );
 
