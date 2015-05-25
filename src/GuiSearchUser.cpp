@@ -61,6 +61,7 @@ void GuiSearchUser::loadSettings()
     mp_teAddressesInSettings->setPlainText( "" );
 
   mp_cbParseAddresses->setChecked( Settings::instance().parseBroadcastAddresses() );
+  mp_cbAutoAddSubnet->setChecked( Settings::instance().addExternalSubnetAutomatically() );
 
   mp_teAddressesInSettings->setFocus();
 }
@@ -94,6 +95,7 @@ void GuiSearchUser::checkAndSearch()
     Settings::instance().setBroadcastAddressesInSettings( QStringList() );
 
   Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
+  Settings::instance().setAddExternalSubnetAutomatically( mp_cbAutoAddSubnet->isChecked() );
 
   accept();
 }

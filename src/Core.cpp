@@ -263,3 +263,11 @@ void Core::sendHelloToHostsInSettings()
 
   qDebug() << user_contacted << "hosts manually added contacted";
 }
+
+int Core::fileTransferPort() const
+{
+  if( mp_fileTransfer->isListening() )
+    return mp_fileTransfer->serverPort();
+  else
+    Settings::instance().defaultFileTransferPort();
+}

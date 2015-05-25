@@ -227,13 +227,19 @@ void Core::checkUserAuthentication( const Message& m )
       qDebug() << "User" << u.path() << "reconnected";
 
     u.setId( user_found.id() );
-    u.setColor( user_found.color() );
     user_reconnect = true;
   }
   else
   {
-    u.setColor( ColorManager::instance().unselectedQString() );
-    qDebug() << "New user connected:" << u.path() << "with color" << u.color();
+    qDebug() << "New user is connected from" << u.path() << "with color" << u.color();
+  }
+
+  if( u.color() == QString( "#000000" ) || !QColor::isValidColor( u.color() ) )
+  {
+    if( user_reconnect )
+      u.setColor( user_found.color() );
+    else
+      u.setColor( ColorManager::instance().unselectedQString() );
   }
 
   Chat default_chat = ChatManager::instance().defaultChat();

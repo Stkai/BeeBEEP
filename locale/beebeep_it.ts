@@ -2421,11 +2421,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show send message icon</source>
-        <translation>Mostra l&apos;icona per inviare messaggi</translation>
+        <translation type="obsolete">Mostra l&apos;icona per inviare messaggi</translation>
     </message>
     <message>
         <source>If enabled the icon of send message is shown in chat window</source>
-        <translation>Se abilitata l&apos;icona per inviare i messaggi sarà visibile nella finestra delle conversazioni</translation>
+        <translation type="obsolete">Se abilitata l&apos;icona per inviare i messaggi sarà visibile nella finestra delle conversazioni</translation>
     </message>
     <message>
         <source>Search for users...</source>
@@ -2498,6 +2498,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Close</source>
         <translation>Chiudi</translation>
+    </message>
+    <message>
+        <source>Used Ports</source>
+        <translation>Porte usate</translation>
+    </message>
+    <message>
+        <source>disabled</source>
+        <translation>disabilitato</translation>
     </message>
 </context>
 <context>
@@ -3026,6 +3034,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Search for users</source>
         <translation>Cerca utenti</translation>
+    </message>
+    <message>
+        <source>Automatically add external subnet</source>
+        <translation>Aggiungi automaticamente le sottorete esterne</translation>
     </message>
 </context>
 <context>

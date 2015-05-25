@@ -59,7 +59,7 @@ void Core::showUserStatusChanged( const User& u )
 {
   emit userChanged( u );
 
-  if( !isConnected() && !u.isLocal() )
+  if( !isConnected() )
     return;
 
   QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
@@ -126,12 +126,45 @@ void Core::sendLocalUserStatus()
     c->sendData( user_status_message );
 }
 
-void Core::setLocalUserVCard( const VCard& vc )
+bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
 {
   User u = Settings::instance().localUser();
-  bool nick_name_changed = u.vCard().nickName() != vc.nickName();
-  u.setVCard( vc );
+  bool nick_name_changed = false;
+  bool color_changed = false;
+  bool vc_changed = true;
+
+  if( u.vCard().nickName() != vc.nickName() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Local user nickname is changed";
+#endif
+    nick_name_changed = true;
+  }
+
+  if( u.color() != user_color )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Local user color is changed";
+#endif
+    u.setColor( user_color );
+    color_changed = true;
+  }
+
+  if( u.vCard() == vc )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Local user vCard is changed";
+#endif
+    vc_changed = false;
+  }
+  else
+    u.setVCard( vc );
+
+  if( !nick_name_changed && !color_changed && !vc_changed )
+    return false;
+
   Settings::instance().setLocalUser( u );
+  Settings::instance().save();
 
   QByteArray vcard_message = Protocol::instance().localVCardMessage();
   QByteArray nick_message = Protocol::instance().localUserNameMessage();
@@ -148,6 +181,7 @@ void Core::setLocalUserVCard( const VCard& vc )
   }
 
   showUserVCardChanged( u );
+  return true;
 }
 
 void Core::createGroup( const QString& group_name, const QList<VNumber>& group_members )

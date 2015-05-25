@@ -220,6 +220,7 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   data_list << public_key;
   data_list << Settings::instance().version( false );
   data_list << Settings::instance().localUser().sessionId();
+  data_list << Settings::instance().localUser().color();
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -396,6 +397,10 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( sl.size() > 7 )
     user_session_id = sl.at( 7 );
 
+  QString user_color = "#000000";
+  if( sl.size() > 8 )
+    user_color = sl.at( 8 );
+
   /* Skip other data */
   if( sl.size() > 8 )
     qWarning() << "HELLO message contains more data. Skip it";
@@ -410,6 +415,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setAccountName( user_account_name );
   u.setVersion( user_version );
   u.setSessionId( user_session_id );
+  u.setColor( user_color );
   return u;
 }
 

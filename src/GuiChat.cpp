@@ -53,7 +53,6 @@ GuiChat::GuiChat( QWidget *parent )
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
-  showSendMessageIcon( Settings::instance().chatShowSendMessageIcon() );
 
   m_lastMessageUserId = 0;
   m_lastEmoticonSelected = ":)";
@@ -113,14 +112,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
-}
-
-void GuiChat::showSendMessageIcon( bool yes )
-{
-  if( yes )
-    mp_pbSend->show();
-  else
-    mp_pbSend->hide();
 }
 
 void GuiChat::updateAction( bool is_connected, int connected_users )

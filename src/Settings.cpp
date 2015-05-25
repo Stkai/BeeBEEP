@@ -667,10 +667,10 @@ void Settings::load()
   m_beepFilePath = sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString();
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
+  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 2000 ).toInt(), 100 );
   m_chatSaveDirectory = sets->value( "ChatSaveDirectory", dataFolder() ).toString();
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
-  m_chatShowSendMessageIcon = sets->value( "ShowSendMessageIcon", true ).toBool();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   sets->endGroup();
 
@@ -692,7 +692,6 @@ void Settings::load()
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
-  m_trayMessageTimeout = qMax( sets->value( "SystemTrayMessageTimeout", 2000 ).toInt(), 100 );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -822,10 +821,10 @@ void Settings::save()
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
   sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );
   sets->setValue( "ShowNotificationOnTray", m_showNotificationOnTray );
+  sets->setValue( "ShowNotificationOnTrayTimeout", m_trayMessageTimeout );
   sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
-  sets->setValue( "ShowSendMessageIcon", m_chatShowSendMessageIcon );
   sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->endGroup();
   sets->beginGroup( "Tools" );
@@ -842,7 +841,6 @@ void Settings::save()
   sets->setValue( "WritingTimeout", m_writingTimeout );
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
-  sets->setValue( "SystemTrayMessageTimeout", m_trayMessageTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
   sets->setValue( "UseMulticastDns", m_useMulticastDns );

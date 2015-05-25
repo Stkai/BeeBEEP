@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>499</width>
-    <height>369</height>
+    <width>465</width>
+    <height>351</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -160,6 +160,13 @@
         </property>
        </widget>
       </item>
+      <item row="7" column="0" colspan="2">
+       <widget class="QCheckBox" name="mp_cbAutoAddSubnet">
+        <property name="text">
+         <string>Automatically add external subnet</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -205,6 +212,7 @@
   <tabstop>mp_teAddressesInHosts</tabstop>
   <tabstop>mp_teAddressesInSettings</tabstop>
   <tabstop>mp_cbParseAddresses</tabstop>
+  <tabstop>mp_cbAutoAddSubnet</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>

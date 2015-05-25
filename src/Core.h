@@ -48,12 +48,13 @@ public:
   void stop();
 
   bool updateBroadcastAddresses();
+  int fileTransferPort() const;
 
   /* CoreUser */
   inline int connectedUsers() const;
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
-  void setLocalUserVCard( const VCard& );
+  bool setLocalUserVCard( const QString&, const VCard& );
   void createGroup( const QString&, const QList<VNumber>& );
   void changeGroup( VNumber, const QString&, const QList<VNumber>& );
   void removeGroup( VNumber );

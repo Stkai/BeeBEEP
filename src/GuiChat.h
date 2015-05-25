@@ -49,8 +49,6 @@ public:
   void ensureLastMessageVisible();
   void ensureFocusInChat();
 
-  void showSendMessageIcon( bool );
-
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );

@@ -167,6 +167,7 @@ private:
   QString checkFilePath( const QString& );
   void showVCard( const User&, bool ensure_visible );
   bool isAudioDeviceAvailable() const;
+  void showDefaultServerPortInMenu();
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -220,6 +221,10 @@ private:
   QAction* mp_actViewLog;
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actPromptPassword;
+
+  QAction* mp_actPortBroadcast;
+  QAction* mp_actPortListener;
+  QAction* mp_actPortFileTransfer;
 
   QDockWidget* mp_dockUserList;
   QDockWidget* mp_dockGroupList;

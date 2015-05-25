@@ -378,6 +378,8 @@ void GuiMain::checkViewActions()
     mp_barScreenShot->show();
   else
     mp_barScreenShot->hide();
+
+  showDefaultServerPortInMenu();
 }
 
 void GuiMain::showAbout()
@@ -449,13 +451,14 @@ void GuiMain::createMenus()
   mp_menuMain = new QMenu( tr( "Main" ), this );
   mp_menuMain->addAction( mp_actStartStopCore );
   mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actVCard );
+  mp_menuMain->addSeparator();
+
   mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), mp_core, SLOT( sendBroadcastMessage() ) );
   mp_actBroadcast->setStatusTip( tr( "Broadcast a message in your network to find available users" ) );
   mp_menuMain->addAction( mp_actConfigureNetwork );
   act = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
   act->setStatusTip( tr( "Add the IP address and the port of the users you want to connect" ) );
-  mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
@@ -472,20 +475,8 @@ void GuiMain::createMenus()
 
   mp_menuMain->addAction( mp_actQuit );
 
-  /* Users Menu */
-
-
-
-
-
   /* Chat Menu */
   mp_menuChat = new QMenu( tr( "Chat" ), this );
-
-  act =  mp_menuChat->addAction( tr( "Show send message icon" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the icon of send message is shown in chat window" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatShowSendMessageIcon() );
-  act->setData( 22 );
 
   act = mp_menuChat->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the messages are saved when the program is closed" ) );
@@ -711,9 +702,15 @@ void GuiMain::createMenus()
   act = mp_menuTrayIcon->addAction( QIcon( ":/images/beebeep.png" ), tr( "Show" ), this, SLOT( showUp() ) );
   mp_menuTrayIcon->setDefaultAction( act );
   mp_menuTrayIcon->addSeparator();
+  mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
+  mp_menuTrayIcon->addSeparator();
+  mp_menuTrayIcon->addAction( tr( "Used Ports") );
+  mp_actPortBroadcast = mp_menuTrayIcon->addAction( QString( "UDP" ) );
+  mp_actPortListener = mp_menuTrayIcon->addAction( QString( "TCP 1" ) );
+  mp_actPortFileTransfer = mp_menuTrayIcon->addAction( QString( "TCP 2" ) );
+  mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( QIcon( ":/images/disconnect.png" ), tr( "Close" ), this, SLOT( forceExit() ) );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
-
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -1059,10 +1056,6 @@ void GuiMain::settingsChanged()
     Settings::instance().setShowUserPhoto( act->isChecked() );
     refresh_users = true;
     break;
-  case 22:
-    Settings::instance().setChatShowSendMessageIcon( act->isChecked() );
-    mp_chat->showSendMessageIcon( Settings::instance().chatShowSendMessageIcon() );
-    break;
   case 23:
     Settings::instance().setShowChatToolbar( act->isChecked() );
     checkChatToolbar();
@@ -1132,6 +1125,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_chat->appendChatMessage( chat_id, cm );
     statusBar()->clearMessage();
     mp_userList->setUnreadMessages( chat_id, 0 );
+    mp_trayIcon->setDefaultIcon();
   }
   else
   {
@@ -1474,31 +1468,8 @@ void GuiMain::changeVCard()
   gvc.setFixedSize( gvc.size() );
   if( gvc.exec() == QDialog::Accepted )
   {
-    if( gvc.userColor() != Settings::instance().localUser().color() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Local user color changed";
-#endif
-      User u = Settings::instance().localUser();
-      u.setColor( gvc.userColor() );
-      Settings::instance().setLocalUser( u );
-      mp_userList->setUser( u );
-    }
-
-    if( gvc.vCard() == Settings::instance().localUser().vCard() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Ok pressed but vCard is not changed";
-#endif
-      return;
-    }
-
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "vCard changed";
-#endif
-    mp_core->setLocalUserVCard( gvc.vCard() );
-    refreshTitle( Settings::instance().localUser() );
-    Settings::instance().save();
+    if( mp_core->setLocalUserVCard( gvc.userColor(), gvc.vCard() ) )
+      refreshTitle( Settings::instance().localUser() );
   }
 }
 
@@ -1650,15 +1621,53 @@ void GuiMain::hideToTrayIcon()
 
 void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 {
-#ifndef Q_OS_MAC
-  if( ar != QSystemTrayIcon::Context )
-    QTimer::singleShot( 0, this, SLOT( showUp() ) );
+  if( ar == QSystemTrayIcon::Context )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "TrayIcon is activated with context click and menu is showed";
 #endif
+    return;
+  }
+
+  if( ar == QSystemTrayIcon::Trigger )
+  {
+    if( mp_menuTrayIcon->isVisible() )
+    {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "TrayIcon is activated with trigger click and menu will be hided";
+#endif
+      mp_menuTrayIcon->hide();
+      return;
+    }
+
+    if( !isActiveWindow() || isMinimized() )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "TrayIcon is activated with trigger click and main window will be showed";
+#endif
+      mp_trayIcon->setDefaultIcon();
+      QTimer::singleShot( 0, this, SLOT( showUp() ) );
+    }
+    else
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "TrayIcon is activated with trigger click and menu will be showed";
+#endif
+      mp_menuTrayIcon->popup( QCursor::pos() );
+    }
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "TrayIcon is activated with unknown click";
+#endif
+  }
 }
 
 void GuiMain::trayMessageClicked()
 {
   showChat( mp_trayIcon->chatId() );
+  mp_trayIcon->setDefaultIcon();
   QTimer::singleShot( 0, this, SLOT( showUp() ) );
 }
 
@@ -1677,6 +1686,7 @@ void GuiMain::raiseChatView()
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( mp_chat );
   checkViewActions();
+  mp_chat->ensureFocusInChat();
 }
 
 void GuiMain::raiseLocalShareView()
@@ -2300,4 +2310,24 @@ void GuiMain::showAddUser()
 void GuiMain::showChatSettingsMenu()
 {
   mp_menuChat->exec( QCursor::pos() );
+}
+
+void GuiMain::showDefaultServerPortInMenu()
+{
+  QString broadcast_port = tr( "offline" );
+  QString listener_port = tr( "offline" );
+  QString file_transfer_port = tr( "offline" );
+  if( mp_core->isConnected() )
+  {
+    broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
+    listener_port = QString::number( Settings::instance().localUser().hostPort() );
+    if( Settings::instance().fileTransferIsEnabled() )
+      file_transfer_port = QString::number( mp_core->fileTransferPort() );
+    else
+      file_transfer_port = tr( "disabled" );
+  }
+
+  mp_actPortBroadcast->setText( QString( "udp1: %1" ).arg( broadcast_port ) );
+  mp_actPortListener->setText( QString( "tcp1: %1" ).arg( listener_port ) );
+  mp_actPortFileTransfer->setText( QString( "tcp2: %1" ).arg( file_transfer_port ) );
 }
