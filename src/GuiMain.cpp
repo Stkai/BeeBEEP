@@ -200,6 +200,8 @@ void GuiMain::changeEvent( QEvent* e )
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
+  setGameInPauseMode();
+
   if( mp_core->isConnected() )
   {
     if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
