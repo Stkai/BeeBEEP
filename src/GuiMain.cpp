@@ -599,30 +599,8 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
 
-  if( QSystemTrayIcon::isSystemTrayAvailable() )
-  {
-    mp_menuSettings->addSeparator();
-
-    act = mp_menuSettings->addAction( tr( "Load on system tray at startup" ), this, SLOT( settingsChanged() ) );
-    act->setStatusTip( tr( "If enabled %1 will be start hided in system tray" ).arg( Settings::instance().programName() ) );
-    act->setCheckable( true );
-    act->setChecked( Settings::instance().loadOnTrayAtStartup() );
-    act->setData( 24 );
-
-    act = mp_menuSettings->addAction( tr( "Close to tray icon" ), this, SLOT( settingsChanged() ) );
-    act->setStatusTip( tr( "If enabled when the close button is clicked the window minimized to the system tray icon" ) );
-    act->setCheckable( true );
-    act->setChecked( Settings::instance().minimizeInTray() );
-    act->setData( 11 );
-
-    act = mp_menuSettings->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
-    act->setStatusTip( tr( "If enabled tray icon shows some notification about status and message" ) );
-    act->setCheckable( true );
-    act->setChecked( Settings::instance().showNotificationOnTray()  );
-    act->setData( 19 );
-  }
-
 #ifdef Q_OS_WIN
+  mp_menuSettings->addSeparator();
   act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled you can automatically load %1 at system startup" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
@@ -705,6 +683,26 @@ void GuiMain::createMenus()
   mp_menuTrayIcon->setDefaultAction( act );
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
+  mp_menuTrayIcon->addSeparator();
+
+  act = mp_menuTrayIcon->addAction( tr( "Load on system tray at startup" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled %1 will be start hided in system tray" ).arg( Settings::instance().programName() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().loadOnTrayAtStartup() );
+  act->setData( 24 );
+
+  act = mp_menuTrayIcon->addAction( tr( "Close to tray icon" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled when the close button is clicked the window minimized to the system tray icon" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().minimizeInTray() );
+  act->setData( 11 );
+
+  act = mp_menuTrayIcon->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled tray icon shows some notification about status and message" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showNotificationOnTray()  );
+  act->setData( 19 );
+
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( tr( "Used Ports") );
   mp_actPortBroadcast = mp_menuTrayIcon->addAction( QString( "UDP" ) );
@@ -1897,7 +1895,7 @@ void GuiMain::addUserToGroupChat()
 
 void GuiMain::raiseOnTop()
 {
-  if( isMinimized() )
+  if( isMinimized() || !isVisible() )
     showNormal();
   else
     show();
@@ -1910,6 +1908,9 @@ void GuiMain::raiseOnTop()
   raise();
   qApp->setActiveWindow( this );
 #endif
+
+  if( mp_stackedWidget->currentWidget() == mp_chat )
+    mp_chat->ensureFocusInChat();
 }
 
 void GuiMain::checkAutoStartOnBoot( bool add_service )
@@ -2278,8 +2279,6 @@ void GuiMain::selectLanguage()
 
 void GuiMain::showUp()
 {
-  if( !isVisible() )
-    showNormal();
   raiseOnTop();
 }
 

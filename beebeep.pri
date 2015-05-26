@@ -5,4 +5,3 @@ macx: {
 }
 
 DESTDIR = $$PWD/test
-
