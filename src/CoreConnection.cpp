@@ -231,7 +231,7 @@ void Core::checkUserAuthentication( const Message& m )
   }
   else
   {
-    qDebug() << "New user is connected from" << u.path() << "with color" << u.color();
+    qDebug() << "New user is connected from" << u.path();
   }
 
   if( u.color() == QString( "#000000" ) || !QColor::isValidColor( u.color() ) )
@@ -256,7 +256,7 @@ void Core::checkUserAuthentication( const Message& m )
   addConnectionReadyForUse( c );
 
   UserManager::instance().setUser( u );
-  qDebug() << "User" << u.path() << "added with id" << u.id();
+  qDebug() << "User" << u.path() << "added with id" << u.id() << "and color" << u.color();
   if( user_path_changed )
     ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 

@@ -22,8 +22,3 @@ RESOURCES += \
 
 FORMS += \
     GuiTetris.ui
-
-
-
-
-

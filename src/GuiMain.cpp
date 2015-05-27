@@ -684,6 +684,7 @@ void GuiMain::createMenus()
   mp_menuTrayIcon = new QMenu( this );
   act = mp_menuTrayIcon->addAction( QIcon( ":/images/beebeep.png" ), tr( "Show" ), this, SLOT( showUp() ) );
   mp_menuTrayIcon->setDefaultAction( act );
+
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
   mp_menuTrayIcon->addSeparator();
@@ -708,11 +709,11 @@ void GuiMain::createMenus()
 
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( tr( "Used Ports") );
-  mp_actPortBroadcast = mp_menuTrayIcon->addAction( QString( "UDP" ) );
-  mp_actPortListener = mp_menuTrayIcon->addAction( QString( "TCP 1" ) );
-  mp_actPortFileTransfer = mp_menuTrayIcon->addAction( QString( "TCP 2" ) );
+  mp_actPortBroadcast = mp_menuTrayIcon->addAction( QString( "udp1" ) );
+  mp_actPortListener = mp_menuTrayIcon->addAction( QString( "tcp1" ) );
+  mp_actPortFileTransfer = mp_menuTrayIcon->addAction( QString( "tcp2" ) );
   mp_menuTrayIcon->addSeparator();
-  mp_menuTrayIcon->addAction( QIcon( ":/images/disconnect.png" ), tr( "Close" ), this, SLOT( forceExit() ) );
+  mp_menuTrayIcon->addAction( mp_actQuit );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
 }
 
@@ -1220,6 +1221,7 @@ void GuiMain::updateStatusIcon()
       .arg( (Settings::instance().localUser().statusDescription().isEmpty() ? QString( "" ) : QString( ": %1" ).arg( Settings::instance().localUser().statusDescription() ) ) );
   QAction* act = mp_menuStatus->menuAction();
   act->setToolTip( tip );
+  act->setText( Bee::capitalizeFirstLetter( Bee::userStatusToString( status_type ), true ) );
 }
 
 void GuiMain::changeStatusDescription()
@@ -1624,6 +1626,17 @@ void GuiMain::hideToTrayIcon()
 
 void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 {
+#ifdef Q_OS_MACX
+
+  // In Mac that is the expected behavior, there is no distinction
+  // between left and right buttons for the systray icons.
+  // They will always show the context menu, that's the Mac behavior.
+  Q_UNUSED( ar );
+
+#else
+
+  // Other OS
+
   if( ar == QSystemTrayIcon::Context )
   {
 #ifdef BEEBEEP_DEBUG
@@ -1665,6 +1678,7 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
     qDebug() << "TrayIcon is activated with unknown click";
 #endif
   }
+#endif
 }
 
 void GuiMain::trayMessageClicked()

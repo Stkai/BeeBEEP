@@ -68,11 +68,9 @@ void Core::showUserStatusChanged( const User& u )
   else
     sHtmlMsg += tr( "%1 is" ).arg( u.name() );
 
-  if( u.status() != User::Offline )
-    sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
+  sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
-  else
-    sHtmlMsg += QString( "." );
+
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );
 }
 

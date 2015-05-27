@@ -96,11 +96,11 @@ int main( int argc, char *argv[] )
   QTranslator translator;
   SetTranslator( &translator, Settings::instance().languagePath(), Settings::instance().language() );
 
-  /* Init Protocol */
-  (void)Protocol::instance();
-
   /* Init Color Manager */
   (void)ColorManager::instance();
+
+  /* Init Protocol */
+  (void)Protocol::instance();
 
   /* Init User Manager */
   (void)UserManager::instance();
@@ -163,8 +163,8 @@ int main( int argc, char *argv[] )
   Settings::instance().loadRcFile();
   Settings::instance().save();
 #ifdef BEEBEEP_DEBUG
-  Settings::instance().createDefaultRcFile();
-  Settings::instance().createDefaultHostsFile();
+  //Settings::instance().createDefaultRcFile();
+  //Settings::instance().createDefaultHostsFile();
 #endif
 
   /* CleanUp */
@@ -174,9 +174,9 @@ int main( int argc, char *argv[] )
   FileShare::close();
   ChatManager::close();
   UserManager::close();
-  ColorManager::close();
   Protocol::close();
   PluginManager::close();
+  ColorManager::close();
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();

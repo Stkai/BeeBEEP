@@ -21,8 +21,3 @@ RESOURCES += \
 
 FORMS += \
     GuiLife.ui
-
-
-
-
-

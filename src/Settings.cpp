@@ -33,17 +33,17 @@ Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
   /* Default RC start */
-#ifdef Q_OS_MAC
-  m_useSettingsFileIni = false;
-#else
   m_useSettingsFileIni = true;
-#endif
   m_broadcastOnlyToHostsIni = false;
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
   m_saveDataInDocumentsFolder = false;
+#ifdef Q_OS_MAC
+  m_saveDataInUserApplicationFolder = true;
+#else
   m_saveDataInUserApplicationFolder = false;
+#endif
   m_allowMultipleInstances = false;
   m_trustNickname = true;
   m_trustSystemAccount = false;
@@ -54,7 +54,12 @@ Settings::Settings()
   m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
   m_resourceFolder = ".";
-  m_dataFolder = ".";
+#if QT_VERSION >= 0x050000
+  m_dataFolder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
+#else
+  m_dataFolder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
+#endif
+
   m_lastSave = QDateTime::currentDateTime();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -1021,14 +1026,16 @@ bool Settings::setDataFolder()
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
 #endif
 
-  m_dataFolder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder, data_folder ) );
+  if( m_saveDataInDocumentsFolder )
+    m_dataFolder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder, data_folder ) );
+  else
+    m_dataFolder = QDir::toNativeSeparators( root_folder );
 
   QDir folder( m_dataFolder );
   if( !folder.exists() )
   {
     qWarning() << "Data folder not found in" << folder.absolutePath();
-    folder.cdUp();
-    if( !folder.mkdir( data_folder ) )
+    if( !folder.mkpath( data_folder ) )
     {
       qWarning() << "Unable to create folder" << data_folder << "in" << folder.absolutePath() ;
       m_dataFolder = root_folder;

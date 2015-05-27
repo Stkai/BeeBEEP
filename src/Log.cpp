@@ -171,16 +171,15 @@ void LogMessageHandler( QtMsgType type, const QMessageLogContext &context, const
 {
   if( msg.isNull() || msg.isEmpty() )
     return;
-#ifdef BEEBEEP_DEBUG
-  QString sNote = QString( "(%1:%2, %3)" )
+
+  /*QString sNote = QString( "%1:%2, %3" )
                      .arg( context.file )
                      .arg( context.line )
                      .arg( context.function );
-  Log::instance().add( type, msg, sNote );
-#else
+  Log::instance().add( type, msg, sNote );*/
+
   Q_UNUSED( context );
   Log::instance().add( type, msg, "" );
-#endif
 
 }
 

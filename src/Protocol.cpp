@@ -29,7 +29,6 @@
 #include "UserManager.h"
 
 
-
 Protocol* Protocol::mp_instance = NULL;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
 const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
@@ -325,7 +324,7 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
   if( sl.size() >= 6 )
   {
     QString user_color = sl.at( 5 );
-    if( QColor::isValidColor( user_color ) )
+    if( user_color != QString( "#000000" ) && QColor::isValidColor( user_color ) )
       u->setColor( user_color );
   }
 
@@ -397,7 +396,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( sl.size() > 7 )
     user_session_id = sl.at( 7 );
 
-  QString user_color = "#000000";
+  QString user_color( "#000000" );
   if( sl.size() > 8 )
     user_color = sl.at( 8 );
 
