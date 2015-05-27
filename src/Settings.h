@@ -81,10 +81,6 @@ public:
   inline void setLocalUser( const User& );
   void setLocalUserHost( const QHostAddress&, int );
 
-  QHostAddress searchLocalHostAddress() const;
-  QHostAddress baseBroadcastAddress() const;
-  bool hostAddressIsLinkLocal( const QHostAddress& ) const;
-
   inline int defaultBroadcastPort() const;
   inline int defaultListenerPort() const;
   inline int defaultFileTransferPort() const;

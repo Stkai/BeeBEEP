@@ -28,6 +28,7 @@
 #include "GuiIconProvider.h"
 #include "GuiMain.h"
 #include "Log.h"
+#include "NetworkManager.h"
 #include "PluginManager.h"
 #include "UserManager.h"
 #include "Protocol.h"
@@ -95,6 +96,9 @@ int main( int argc, char *argv[] )
   /* Apply system language */
   QTranslator translator;
   SetTranslator( &translator, Settings::instance().languagePath(), Settings::instance().language() );
+
+  /* Init Network Manager */
+  (void)NetworkManager::instance();
 
   /* Init Color Manager */
   (void)ColorManager::instance();
@@ -176,6 +180,7 @@ int main( int argc, char *argv[] )
   UserManager::close();
   Protocol::close();
   PluginManager::close();
+  NetworkManager::close();
   ColorManager::close();
   Log::instance().closeFileStream();
   Log::instance().close();

@@ -27,6 +27,7 @@
 #include "Broadcaster.h"
 #include "FileShare.h"
 #include "Settings.h"
+#include "NetworkManager.h"
 #include "Protocol.h"
 #include "UserManager.h"
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -87,8 +88,9 @@ bool Core::start()
   }
 
   qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
+  NetworkManager::instance().searchLocalHostAddress();
 
-  Settings::instance().setLocalUserHost( Settings::instance().searchLocalHostAddress(), mp_listener->serverPort() );
+  Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), mp_listener->serverPort() );
   if( Settings::instance().localUser().sessionId().isEmpty() )
     Settings::instance().createSessionId();
 
@@ -216,7 +218,8 @@ void Core::checkUserHostAddress( const User& u )
   if( !Settings::instance().addExternalSubnetAutomatically() )
     return;
 
-  if( Settings::instance().addSubnetToBroadcastAddress( u.hostAddress() ) )
+  QHostAddress user_host_address = NetworkManager::instance().subnetFromHostAddress( u.hostAddress() );
+  if( Settings::instance().addSubnetToBroadcastAddress( user_host_address ) )
   {
     QString sHtmlMsg = QString( "%1 %2 %3" )
                            .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )

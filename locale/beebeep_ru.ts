@@ -6,47 +6,47 @@
     <message>
         <location filename="../src/BeeUtils.cpp" line="247"/>
         <source>Undefined</source>
-        <translation type="unfinished"></translation>
+        <translation>Не определено</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="248"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Система</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="249"/>
         <source>Chat</source>
-        <translation type="unfinished">Чат</translation>
+        <translation>Чат</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="250"/>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Соединение</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="251"/>
         <source>User Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус пользователя</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="252"/>
         <source>User Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о пользователе</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="253"/>
         <source>File Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файла</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="254"/>
         <source>History</source>
-        <translation type="unfinished">История</translation>
+        <translation>История</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="255"/>
         <source>Other</source>
-        <translation type="unfinished">Другой</translation>
+        <translation>Другой</translation>
     </message>
 </context>
 <context>
@@ -78,7 +78,7 @@
     <message>
         <location filename="../src/Core.cpp" line="169"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 будет искать пользователей в этих IP-адресах: %3</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="184"/>
@@ -93,22 +93,22 @@
     <message>
         <location filename="../src/Core.cpp" line="198"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 нашел фильтр UDP порта %3. Пожалуйста, проверьте настройки вашего брандмауэра.</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="205"/>
         <source>%1 You cannot reach %2 Network.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Вы не можете связаться с сетью %2.</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="224"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
-        <translation type="unfinished"></translation>
+        <translation>присоединен от внешней сети (новая подсеть добавлена к вашему списку широковещательных адресов).</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="237"/>
         <source>%1 Contacting %2 host addresses previously saved...</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Контактный адрес %2 узла предварительно сохранен...</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="47"/>
@@ -118,7 +118,7 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="55"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>С днем рождения Marco Mastroddi: %1 лет исполнилось сегодня! Ваше здоровье!!!</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="118"/>
@@ -216,7 +216,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="135"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Не удается отправить %2. Передача файлов выключена.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="143"/>
@@ -261,7 +261,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="323"/>
         <source>%1 is removed from file sharing</source>
-        <translation>%1 исклчен из общего доступа</translation>
+        <translation>%1 исключен из общего доступа</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="325"/>
@@ -326,12 +326,12 @@
     <message>
         <location filename="../src/CoreUser.cpp" line="114"/>
         <source>You share this information</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы делитесь этой информацией</translation>
     </message>
     <message>
         <location filename="../src/CoreUser.cpp" line="114"/>
         <source>%1 shares this information</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 делится этой информацией</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="62"/>
@@ -431,42 +431,42 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="35"/>
         <source>Add user</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить пользователя</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="38"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Комментарий</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="38"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="95"/>
         <source>Please insert a valid IP address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, вставьте действительный IP-адрес</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="105"/>
         <source>Please insert a valid port or use the default one %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, вставьте действительный порт или используйте по умолчанию %1.</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="118"/>
         <source>These IP address and port are already inserted in list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эти IP-адреса и порты уже вставлены в список.</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="151"/>
         <source>Remove user path</source>
-        <translation type="unfinished"></translation>
+        <translation>Убрать путь пользователя.</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="174"/>
         <source>Please select an user path in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, выберите путь пользователя в списке.</translation>
     </message>
 </context>
 <context>
@@ -474,47 +474,47 @@
     <message>
         <location filename="../src/GuiAddUser.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished">Заполнение карты</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="35"/>
         <source>Add an IP address and port of the user you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавьте IP-адрес и порт пользователя, с которым вы хотите соединиться</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="48"/>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-адрес</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="73"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="107"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="110"/>
         <source>Click here to add user path</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите здесь для добавления пути пользователя</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="121"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Комментарий</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="169"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="176"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -527,12 +527,12 @@
     <message>
         <location filename="../src/GuiAskPassword.ui" line="62"/>
         <source>Use standard session (encrypted but authentication is not required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать стандартную сессию (зашифровано, но аутентификация не требуется)</translation>
     </message>
     <message>
         <location filename="../src/GuiAskPassword.ui" line="69"/>
         <source>Use authentication password (spaces are removed) *</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать пароль аутентификации (пробелы будут удалены)</translation>
     </message>
     <message>
         <location filename="../src/GuiAskPassword.ui" line="153"/>
@@ -550,7 +550,7 @@
     <message>
         <location filename="../src/GuiAskPassword.ui" line="124"/>
         <source>* Password must be the same for all user you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>* Пароль должен быть один и тот же для всех пользователей, с которыми вы хотите соединиться</translation>
     </message>
     <message>
         <source>* Password must be the same for all client you want to reach</source>
@@ -559,7 +559,7 @@
     <message>
         <location filename="../src/GuiAskPassword.ui" line="160"/>
         <source>Show this dialog at connection startup</source>
-        <translation>Показывать этот диалог при начале соединения </translation>
+        <translation>Показывать этот диалог при начале соединения</translation>
     </message>
     <message>
         <location filename="../src/GuiAskPassword.ui" line="30"/>
@@ -688,22 +688,22 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="94"/>
         <source>Filter message</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр сообщений</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="95"/>
         <source>Select the message types which will be showed in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите тип сообщений, которые будут показаны в чате</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="96"/>
         <source>Chat settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки чата</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="97"/>
         <source>Click to show the settings menu of the chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите для отображения меню настроек чата</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="112"/>
@@ -800,7 +800,7 @@ Please check the file or the directories write permissions.</source>
     <message>
         <location filename="../src/GuiChat.cpp" line="513"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="unfinished"></translation>
+        <translation>Библиотека Qt для этой ОС не поддерживает перетаскивание для файлов. Вы должны выбрать снова файл для отправки.</translation>
     </message>
 </context>
 <context>
@@ -861,7 +861,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/GuiChat.ui" line="189"/>
         <source>Click to send message or just hit enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите для отправки сообщения или просто нажмите Enter</translation>
     </message>
 </context>
 <context>
@@ -880,7 +880,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/GuiCreateGroup.ui" line="74"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiCreateGroup.ui" line="81"/>
@@ -949,7 +949,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiEditVCard.cpp" line="34"/>
         <source>Edit your profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать ваш профиль</translation>
     </message>
     <message>
         <location filename="../src/GuiEditVCard.cpp" line="93"/>
@@ -1005,27 +1005,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="33"/>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор языка</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="36"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="36"/>
         <source>File</source>
-        <translation type="unfinished">Файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="86"/>
         <source>Select a language folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите папку языка</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="102"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык &apos;%1&apos;&apos; не найден.</translation>
     </message>
 </context>
 <context>
@@ -1033,42 +1033,42 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiLanguage.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished">Заполнение карты</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.ui" line="29"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.ui" line="80"/>
         <source>Path</source>
-        <translation type="unfinished">Путь</translation>
+        <translation>Путь</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.ui" line="111"/>
         <source>Select language folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите папку языка</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.ui" line="150"/>
         <source>Restore to default language</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить язык по умолчанию</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.ui" line="153"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.ui" line="173"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.ui" line="180"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -1504,72 +1504,72 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="327"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Разъединить</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="333"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Соединить</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="423"/>
         <source>Configure %1 network to search a user who is not in your local subnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить сеть %1 для поиска пользователя, который не в вашей локальной подсети</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="426"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="431"/>
         <source>Edit your profile...</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать ваш профиль...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="432"/>
         <source>Change your profile information like your picture or your email or phone number</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить информацию о вашем профиле такую как ваше фото или ваш электронный адрес или номер телефона</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="443"/>
         <source>About %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе %1...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="453"/>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Главная</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="459"/>
         <source>Broadcast to network</source>
-        <translation type="unfinished"></translation>
+        <translation>Разослать в сеть</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="460"/>
         <source>Broadcast a message in your network to find available users</source>
-        <translation type="unfinished"></translation>
+        <translation>Разослать сообщение в вашей сети для поиска доступных пользователей</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="536"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="564"/>
         <source>Show colored nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать окрашенный псевдоним</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="576"/>
         <source>Show the user&apos;s picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать фото пользователя</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="481"/>
         <source>Chat</source>
-        <translation type="unfinished">Чат</translation>
+        <translation>Чат</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="484"/>
@@ -1579,47 +1579,47 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="462"/>
         <source>Add users manually...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить пользователей вручную...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="463"/>
         <source>Add the IP address and the port of the users you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить IP-адрес и порт пользователей, с которыми вы хотите соединиться</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="584"/>
         <source>Enable BEEP alert on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить звуковой сигнал на новое сообщение</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="590"/>
         <source>Raise on top on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать на переднем плане новое сообщение</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="596"/>
         <source>Always stay on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда поверх остальных</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="606"/>
         <source>Load on system tray at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Загружать в область уведомлений при старте</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="607"/>
         <source>If enabled %1 will be start hided in system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Если включено - %1 будет запускаться скрытым в области  уведомлений</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="657"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Вид</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="678"/>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="679"/>
@@ -1639,7 +1639,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="687"/>
         <source>Qt Library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Библиотека Qt...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="699"/>
@@ -1677,22 +1677,22 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="791"/>
         <source>Show the chat panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель чата</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="803"/>
         <source>Show the history panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель истории</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="815"/>
         <source>Show the file transfer panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель передачи файлов</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="833"/>
         <source>Show the bar of chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать полосу чата</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1048"/>
@@ -1707,32 +1707,32 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="1323"/>
         <source>File transfer is disabled. You cannot download %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файлов выключена. Вы не можете загрузить %1.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1392"/>
         <source>File is not available for download.</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл не доступен для загрузки.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1394"/>
         <source>%1 is not connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 не подключен.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1395"/>
         <source>Please reload the list of shared files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, перезагрузите список общедоступных файлов.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1398"/>
         <source>Reload file list</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезагрузить список файлов</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1809"/>
         <source>The default BEEP will be used</source>
-        <translation type="unfinished"></translation>
+        <translation>Будет использован звуковой сигнал по умолчанию</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1878"/>
@@ -1787,7 +1787,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="2329"/>
         <source>disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>выключен</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="634"/>
@@ -1812,7 +1812,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="395"/>
         <source>for</source>
-        <translation type="unfinished"></translation>
+        <translation>для</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="397"/>
@@ -1822,37 +1822,37 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="406"/>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="422"/>
         <source>Search for users...</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск для пользователей...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="466"/>
         <source>Select language...</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать язык...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="467"/>
         <source>Select your preferred language</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите ваше предпочтительный язык</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="577"/>
         <source>If enabled you can see a picture of the users in the list (if they have)</source>
-        <translation type="unfinished"></translation>
+        <translation>Если включено - вы будете видеть фото пользователей в списке (если они его имеют)</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="544"/>
         <source>Enable file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить передачу файлов</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="545"/>
         <source>If enabled you can transfer files with the other users</source>
-        <translation type="unfinished"></translation>
+        <translation>Если включено - вы можете обмениваться файлами с другими пользователями</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="635"/>
@@ -1926,7 +1926,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="686"/>
         <source>Show the informations about %1&apos;s license</source>
-        <translation>Покзать информацию о лицензии %1</translation>
+        <translation>Показать информацию о лицензии %1</translation>
     </message>
     <message>
         <source>About &amp;Qt...</source>
@@ -1970,27 +1970,27 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="696"/>
         <source>Help online...</source>
-        <translation type="unfinished"></translation>
+        <translation>Справка в сети...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="697"/>
         <source>Open %1 website to have online support</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть вебсайт %1 для получения онлайн поддержки</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="704"/>
         <source>Show</source>
-        <translation type="unfinished">Показать</translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="709"/>
         <source>Used Ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Использованы порты</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="714"/>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="754"/>
@@ -2005,12 +2005,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="558"/>
         <source>Set status to away automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Устанавливать статус вышел автоматически</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="559"/>
         <source>If enabled %1 change your status to away after an idle of %2 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Если включено - %1 изменяет ваш статус на вышел после простоя в течение %2 минут</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="783"/>
@@ -2088,32 +2088,32 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="1331"/>
         <source>Do you want to download %1 (%2) from %3?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите загрузить %1 (%2) из %3?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1801"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Звуковой модуль не работает. Будет использован звуковой сигнал по умолчанию.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1808"/>
         <source>Sound file not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Звуковой файл не найден</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2266"/>
         <source>Default language is restored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык по умолчанию восстановлен</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2268"/>
         <source>New language &apos;%1&apos; is selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый язык &apos;%1&apos; выбран.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2271"/>
         <source>You must restart %1 to apply these changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы должны перезапустить %1 для применения изменений.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1025"/>
@@ -2233,17 +2233,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="436"/>
         <source>Show the main tool bar with settings</source>
-        <translation>Покзать главную панель с настройками</translation>
+        <translation>Показать главную панель с настройками</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="767"/>
         <source>Show the user panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель пользователя</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="779"/>
         <source>Show the group panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель группы</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="845"/>
@@ -2284,7 +2284,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <location filename="../src/GuiMain.cpp" line="1757"/>
         <location filename="../src/GuiMain.cpp" line="2012"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1762"/>
@@ -2464,7 +2464,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiSavedChat.cpp" line="37"/>
         <source>Saved chat</source>
-        <translation>Сохраненый чат</translation>
+        <translation>Сохраненный чат</translation>
     </message>
     <message>
         <location filename="../src/GuiSavedChat.cpp" line="39"/>
@@ -2543,12 +2543,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiScreenShot.cpp" line="69"/>
         <source>Enable high dpi</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить высокое разрешение</translation>
     </message>
     <message>
         <location filename="../src/GuiScreenShot.cpp" line="70"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить поддержку высокого разрешения для управления, например, монитором Apple Retina</translation>
     </message>
     <message>
         <location filename="../src/GuiScreenShot.cpp" line="75"/>
@@ -2644,52 +2644,52 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiSearchUser.ui" line="77"/>
         <source>Local subnet address *</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес локальной подсети *</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="142"/>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите IP-адреса или подсеть вашей области сети, разделенные запятой (например: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="113"/>
         <source>Addresses in beehosts.ini *</source>
-        <translation type="unfinished"></translation>
+        <translation>Адреса в beehosts.ini *</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="35"/>
         <source>UDP Port in beebeep.rc *</source>
-        <translation type="unfinished"></translation>
+        <translation>UDP-порт в beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="64"/>
         <source>(the same for all clients)</source>
-        <translation type="unfinished"></translation>
+        <translation>(одинаковый для всех клиентов)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="106"/>
         <source>(search users here by default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(искать пользователей здесь по умолчанию)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="165"/>
         <source>Split subnet to IPV4 addresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделить подсеть в IPV4-адресах</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="172"/>
         <source>Automatically add external subnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически добавлять внешнюю подсеть</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="182"/>
         <source>* (read only section)</source>
-        <translation type="unfinished"></translation>
+        <translation>* (раздел только для чтения)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="202"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="209"/>
@@ -2715,17 +2715,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="35"/>
         <source>Search for users</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск для всех пользователей</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="45"/>
         <source>Unknown address</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный адрес</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="55"/>
         <source>File is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл пуст</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="83"/>
@@ -2812,12 +2812,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="115"/>
         <source>File transfer is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файлов выключена</translation>
     </message>
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="278"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файлов выключена. Откройте меню настроек для включения.</translation>
     </message>
     <message>
         <source>File sharing is disabled</source>
@@ -3124,17 +3124,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiVCard.cpp" line="82"/>
         <source>unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>неизвестный</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.cpp" line="84"/>
         <source>old %1</source>
-        <translation type="unfinished"></translation>
+        <translation>старый %1</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.cpp" line="86"/>
         <source>new %1</source>
-        <translation type="unfinished"></translation>
+        <translation>новый %1</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.cpp" line="96"/>
@@ -3187,7 +3187,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiEditVCard.ui" line="284"/>
         <source>Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Телефон</translation>
     </message>
     <message>
         <location filename="../src/GuiEditVCard.ui" line="349"/>
@@ -3207,12 +3207,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiEditVCard.ui" line="440"/>
         <source>Other informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочая информация</translation>
     </message>
     <message>
         <location filename="../src/GuiEditVCard.ui" line="483"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/GuiEditVCard.ui" line="490"/>
@@ -3230,27 +3230,27 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiVCard.ui" line="294"/>
         <source>User Path</source>
-        <translation></translation>
+        <translation>Путь пользователя</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.ui" line="310"/>
         <source>User Name</source>
-        <translation></translation>
+        <translation>Имя пользователя</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.ui" line="326"/>
         <source>Birthday</source>
-        <translation></translation>
+        <translation>День рождения</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.ui" line="342"/>
         <source>Email</source>
-        <translation></translation>
+        <translation>Эл. почта</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.ui" line="358"/>
         <source>Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Телефон</translation>
     </message>
     <message>
         <location filename="../src/GuiVCard.ui" line="408"/>
@@ -3301,12 +3301,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiWizard.ui" line="56"/>
         <source>Welcome</source>
-        <translation></translation>
+        <translation>Добро пожаловать</translation>
     </message>
     <message>
         <location filename="../src/GuiWizard.ui" line="94"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3378,7 +3378,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiUserItem.cpp" line="138"/>
         <source>Double click to open chat with all local users</source>
-        <translation type="unfinished"></translation>
+        <translation>Двойной щелчок для открытия чата со всеми локальными пользователями</translation>
     </message>
     <message>
         <location filename="../src/GuiUserItem.cpp" line="142"/>
@@ -3388,17 +3388,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiUserItem.cpp" line="157"/>
         <source>Double click to send a private message</source>
-        <translation type="unfinished"></translation>
+        <translation>Двойной щелчок для отправки приватного сообщения</translation>
     </message>
     <message>
         <location filename="../src/GuiGroupItem.cpp" line="67"/>
         <source>Double click to send message to group: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Двойной щелчок для отправки сообщения группе: %1</translation>
     </message>
     <message>
         <location filename="../src/GuiSavedChatList.cpp" line="120"/>
         <source>Double click to view chat history: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Двойной щелчок для просмотра истории чата: %1</translation>
     </message>
 </context>
 <context>

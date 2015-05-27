@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Broadcaster.h"
+#include "NetworkManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -43,7 +44,7 @@ bool Broadcaster::startBroadcasting()
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;
   }
-  m_baseBroadcastAddress = Settings::instance().baseBroadcastAddress();
+  m_baseBroadcastAddress = NetworkManager::instance().localBroadcastAddress();
   updateAddresses();
   qDebug() << "Broadcaster generates broadcast message data";
   m_broadcastData = Protocol::instance().broadcastMessage();

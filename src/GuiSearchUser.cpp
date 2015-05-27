@@ -23,6 +23,7 @@
 
 #include "Config.h"
 #include "GuiSearchUser.h"
+#include "NetworkManager.h"
 #include "PluginManager.h"
 #include "Settings.h"
 
@@ -40,7 +41,7 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 
 void GuiSearchUser::loadSettings()
 {
-  QHostAddress base_host_addresses = Settings::instance().baseBroadcastAddress();
+  QHostAddress base_host_addresses = NetworkManager::instance().localBroadcastAddress();
   if( base_host_addresses.isNull() )
     mp_leSubnet->setText( tr( "Unknown address" ) );
   else

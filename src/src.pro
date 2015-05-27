@@ -86,6 +86,7 @@ HEADERS += Avatar.h \
   Listener.h \
   Log.h \
   Message.h \
+  NetworkManager.h \
   PluginManager.h \
   Protocol.h \
   Random.h \
@@ -99,6 +100,7 @@ HEADERS += Avatar.h \
   UserRecord.h \
   VCard.h \
   Version.h
+
 
 SOURCES += Avatar.cpp \
   BeeApplication.cpp \
@@ -163,6 +165,7 @@ SOURCES += Avatar.cpp \
   Log.cpp \
   Main.cpp \
   Message.cpp \
+  NetworkManager.cpp \
   PluginManager.cpp \
   Protocol.cpp \
   Rijndael.cpp \
@@ -173,6 +176,7 @@ SOURCES += Avatar.cpp \
   UserManager.cpp \
   UserRecord.cpp \
   VCard.cpp
+
 
 FORMS += GuiAddUser.ui \
   GuiAskPassword.ui \

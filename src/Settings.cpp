@@ -335,9 +335,6 @@ bool Settings::addBroadcastAddressInSettings( const QString& host_address )
   if( m_broadcastAddressesInFileHosts.contains( host_address ) )
     return false;
 
-  if( host_address == baseBroadcastAddress().toString() )
-    return false;
-
   if( m_broadcastAddressesInSettings.contains( host_address ) )
     return false;
 
@@ -361,176 +358,7 @@ int Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
   return num_addresses;
 }
 
-bool Settings::hostAddressIsLinkLocal( const QHostAddress& host_address ) const
-{
-  if( host_address.toString().contains( ":" ) )
-  {
-    QPair<QHostAddress, int> ipv6_range_link_local = QHostAddress::parseSubnet( "fe80::/10" );
-    return host_address.isInSubnet( ipv6_range_link_local );
-  }
-  else
-  {
-    QPair<QHostAddress, int> ipv4_range_link_local = QHostAddress::parseSubnet( "169.254.0.0/16" );
-    if( host_address.isInSubnet( ipv4_range_link_local ) )
-    {
-      QPair<QHostAddress, int> ipv4_pre_link_local = QHostAddress::parseSubnet( "169.254.1.0/24" );
-      QPair<QHostAddress, int> ipv4_post_link_local = QHostAddress::parseSubnet( "169.254.255.0/24" );
-      if( !host_address.isInSubnet( ipv4_pre_link_local ) && !host_address.isInSubnet( ipv4_post_link_local ) )
-        return true;
-    }
-    return false;
-  }
-}
 
-QHostAddress Settings::searchLocalHostAddress() const
-{
-  QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
-  QList<QHostAddress> address_ipv6_list;
-  QList<QHostAddress> address_ipv4_list;
-  QList<QHostAddress> address_list;
-
-  // Collect the list
-  int interface_id = 0;
-  foreach( QNetworkInterface if_net, interface_list )
-  {
-    if( (if_net.flags() & QNetworkInterface::IsUp) &&
-         (if_net.flags() & QNetworkInterface::IsRunning) &&
-         (if_net.flags() & ~QNetworkInterface::IsLoopBack) )
-    {
-       address_list = if_net.allAddresses();
-       interface_id++;
-       foreach( QHostAddress host_address, address_list )
-       {
-         if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
-         {
-           if( hostAddressIsLinkLocal( host_address ) )
-           {
-             qDebug() << "In network interface" << interface_id << "skips link local:" << host_address.toString();
-           }
-           else if( host_address.toString().contains( ":" ) )
-           {
-             qDebug() << "In network interface" << interface_id << "adds ipv6:" << host_address.toString();
-             address_ipv6_list.append( host_address );
-           }
-           else
-           {
-             qDebug() << "In network interface" << interface_id << "adds ipv4:" << host_address.toString();
-             address_ipv4_list.append( host_address );
-           }
-         }
-         else
-           qDebug() << "In network interface" << interface_id << "skips local:" << host_address.toString();
-       }
-    }
-  }
-
-  // check forced ip
-  if( !m_localHostAddressForced.isNull() )
-  {
-    if( !address_ipv4_list.isEmpty() )
-    {
-      foreach( QHostAddress host_address, address_ipv4_list )
-      {
-        if( host_address == m_localHostAddressForced )
-        {
-          qDebug() << "Local host address IPV4 selected:" << host_address.toString() << "(forced IP found)";
-          return host_address;
-        }
-      }
-    }
-
-    if( !address_ipv6_list.isEmpty() )
-    {
-      foreach( QHostAddress host_address, address_ipv6_list )
-      {
-        if( host_address == m_localHostAddressForced )
-        {
-          qDebug() << "Local host address IPV6 selected:" << host_address.toString() << "(forced IP found)";
-          return host_address;
-        }
-      }
-    }
-  }
-
-  // check forced subnet
-  if( !m_localSubnetForced.isEmpty() )
-  {
-    QPair<QHostAddress, int> subnet_forced = QHostAddress::parseSubnet( m_localSubnetForced );
-
-    if( !address_ipv4_list.isEmpty() )
-    {
-      foreach( QHostAddress host_address, address_ipv4_list )
-      {
-        if( host_address.isInSubnet( subnet_forced ) )
-        {
-          qDebug() << "Local host address IPV4 selected:" << host_address.toString() << "(forced SUBNET found)";
-          return host_address;
-        }
-      }
-    }
-
-    if( !address_ipv6_list.isEmpty() )
-    {
-      foreach( QHostAddress host_address, address_ipv6_list )
-      {
-        if( host_address.isInSubnet( subnet_forced ) )
-        {
-          qDebug() << "Local host address IPV6 selected:" << host_address.toString() << "(forced SUBNET found)";
-          return host_address;
-        }
-      }
-    }
-  }
-
-  if( !address_ipv4_list.isEmpty() )
-  {
-    qDebug() << "Local host address IPV4 selected:" << address_ipv4_list.first().toString();
-    return address_ipv4_list.first();
-  }
-
-  if( !address_ipv6_list.isEmpty() )
-  {
-    qDebug() << "Local host address IPV6 selected:" << address_ipv6_list.first().toString();
-    return address_ipv6_list.first();
-  }
-
-  qDebug() << "Local host address not found";
-  return QHostAddress( "127.0.0.1" );
-}
-
-QHostAddress Settings::subnetFromHostAddress( const QHostAddress& host_address ) const
-{
-  if( host_address.isNull() )
-    return QHostAddress();
-
-  QString s_host_address = host_address.toString();
-
-  if( s_host_address == QLatin1String( "127.0.0.1" ) )
-    return QHostAddress();
-
-  if( s_host_address.contains( QLatin1String( ":" ) ) )
-    return QHostAddress();
-
-  QStringList sl_host_address = s_host_address.split( "." );
-  if( sl_host_address.size() != 4 )
-    return QHostAddress();
-
-  if( s_host_address.contains( QLatin1String( "255" ) ) )
-    return host_address;
-
-  sl_host_address.removeLast();
-  sl_host_address.append( QLatin1String( "255" ) );
-  return QHostAddress( sl_host_address.join( "." ) );
-}
-
-QHostAddress Settings::baseBroadcastAddress() const
-{
-  QHostAddress local_user_subnet = subnetFromHostAddress( m_localUser.hostAddress() );
-  if( local_user_subnet.isNull() )
-    qWarning() << "Invalid IP address for local user found:" << m_localUser.hostAddress().toString();
-
-  return local_user_subnet;
-}
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
@@ -1133,9 +961,8 @@ QString Settings::defaultPluginFolderPath( bool use_resource_folder ) const
 #endif
 }
 
-bool Settings::addSubnetToBroadcastAddress( const QHostAddress& ha )
+bool Settings::addSubnetToBroadcastAddress( const QHostAddress& ext_subnet )
 {
-  QHostAddress ext_subnet = subnetFromHostAddress( ha );
   if( ext_subnet.isNull() )
     return false;
   else
