@@ -361,6 +361,27 @@ int Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
   return num_addresses;
 }
 
+bool Settings::hostAddressIsLinkLocal( const QHostAddress& host_address ) const
+{
+  if( host_address.toString().contains( ":" ) )
+  {
+    QPair<QHostAddress, int> ipv6_range_link_local = QHostAddress::parseSubnet( "fe80::/10" );
+    return host_address.isInSubnet( ipv6_range_link_local );
+  }
+  else
+  {
+    QPair<QHostAddress, int> ipv4_range_link_local = QHostAddress::parseSubnet( "169.254.0.0/16" );
+    if( host_address.isInSubnet( ipv4_range_link_local ) )
+    {
+      QPair<QHostAddress, int> ipv4_pre_link_local = QHostAddress::parseSubnet( "169.254.1.0/24" );
+      QPair<QHostAddress, int> ipv4_post_link_local = QHostAddress::parseSubnet( "169.254.255.0/24" );
+      if( !host_address.isInSubnet( ipv4_pre_link_local ) && !host_address.isInSubnet( ipv4_post_link_local ) )
+        return true;
+    }
+    return false;
+  }
+}
+
 QHostAddress Settings::searchLocalHostAddress() const
 {
   QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
@@ -369,6 +390,7 @@ QHostAddress Settings::searchLocalHostAddress() const
   QList<QHostAddress> address_list;
 
   // Collect the list
+  int interface_id = 0;
   foreach( QNetworkInterface if_net, interface_list )
   {
     if( (if_net.flags() & QNetworkInterface::IsUp) &&
@@ -376,16 +398,28 @@ QHostAddress Settings::searchLocalHostAddress() const
          (if_net.flags() & ~QNetworkInterface::IsLoopBack) )
     {
        address_list = if_net.allAddresses();
+       interface_id++;
        foreach( QHostAddress host_address, address_list )
        {
-         qDebug() << "Check host address:" << host_address.toString();
          if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
          {
-           if( host_address.toString().contains( ":" ) )
+           if( hostAddressIsLinkLocal( host_address ) )
+           {
+             qDebug() << "In network interface" << interface_id << "skips link local:" << host_address.toString();
+           }
+           else if( host_address.toString().contains( ":" ) )
+           {
+             qDebug() << "In network interface" << interface_id << "adds ipv6:" << host_address.toString();
              address_ipv6_list.append( host_address );
+           }
            else
+           {
+             qDebug() << "In network interface" << interface_id << "adds ipv4:" << host_address.toString();
              address_ipv4_list.append( host_address );
+           }
          }
+         else
+           qDebug() << "In network interface" << interface_id << "skips local:" << host_address.toString();
        }
     }
   }
