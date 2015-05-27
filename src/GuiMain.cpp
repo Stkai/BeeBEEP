@@ -249,6 +249,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
   // maybe timer is active
   mp_logView->stopCheckingLog();
 
+  // quit now on last window closed
+  qApp->setQuitOnLastWindowClosed( true );
+
   e->accept();
 }
 

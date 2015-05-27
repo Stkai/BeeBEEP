@@ -34,8 +34,6 @@
 #include "Random.h"
 #include "Settings.h"
 
-#include <csignal>
-
 bool SetTranslator( QTranslator* translator, QString language_folder, QString lang )
 {
   if( lang.isEmpty() )

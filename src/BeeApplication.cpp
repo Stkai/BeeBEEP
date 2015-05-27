@@ -28,13 +28,13 @@
 #include <QRegExp>
 #include <QLocalSocket>
 
+#include <csignal>
+
 #ifdef Q_OS_WIN
 #include <windows.h>
-#include <signal.h>
 #endif
 
 #ifdef Q_OS_LINUX
-#include <signal.h>
 // for check user inactivity time
 #include <xcb/xcb.h>
 #include <xcb/screensaver.h>
@@ -51,6 +51,11 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   : QApplication( argc, argv )
 {
   setObjectName( "BeeApplication" );
+
+  // when beebeep starts closed to tray last window is "ask password".
+  // After auth "ask password" is closed and then the app quit
+  // set it to true in QMainWindow closeEvent
+  setQuitOnLastWindowClosed( false );
 
   m_idleTimeout = 0;
   m_timer.setObjectName( "BeeMainTimer" );
@@ -70,6 +75,8 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   signal( SIGINT, &quitAfterSignal );
   signal( SIGTERM, &quitAfterSignal );
+  signal( SIGABRT, &quitAfterSignal );
+
 }
 
 BeeApplication::~BeeApplication()
