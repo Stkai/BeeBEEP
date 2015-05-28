@@ -201,7 +201,7 @@ int Broadcaster::updateAddresses()
     foreach( QNetworkAddressEntry entry, interface.addressEntries() )
     {
       ha_broadcast = entry.broadcast();
-      if( ha_broadcast != QHostAddress::Null && entry.ip() != QHostAddress::LocalHost )
+      if( !ha_broadcast.isNull() && !NetworkManager::instance().isLoopback( entry.ip() ) )
       {
         if( entry.ip() == Settings::instance().localUser().hostAddress() )
           addAddressToList( ha_broadcast );

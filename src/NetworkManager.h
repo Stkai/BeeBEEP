@@ -41,6 +41,7 @@ public:
   inline bool isIpv4Address( const QHostAddress& ) const;
   inline bool isIpv6Address( const QHostAddress& ) const;
   bool isLinkLocal( const QHostAddress& ) const;
+  bool isLoopback( const QHostAddress& ) const;
   QHostAddress subnetFromHostAddress( const QHostAddress& ) const;
 
   static NetworkManager& instance()

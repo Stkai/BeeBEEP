@@ -250,13 +250,13 @@ QHostAddress NetworkManager::subnetFromHostAddress( const QHostAddress& host_add
   if( !isIpv4Address( host_address ) )
     return QHostAddress();
 
-  if( host_address.isLoopback() )
+  if( isLoopback( host_address ) )
+    return QHostAddress();
+
+  if( isLinkLocal( host_address) )
     return QHostAddress();
 
   QString s_host_address = host_address.toString();
-
-  if( s_host_address == QLatin1String( "127.0.0.1" ) )
-    return QHostAddress();
 
   QStringList sl_host_address = s_host_address.split( "." );
   if( sl_host_address.size() != 4 )
@@ -289,4 +289,13 @@ bool NetworkManager::isLinkLocal( const QHostAddress& host_address ) const
     }
     return false;
   }
+}
+
+bool NetworkManager::isLoopback( const QHostAddress& host_address ) const
+{
+#if QT_VERSION >= 0x050000
+  return host_address.isLoopback();
+#else
+  return host_address == QHostAddress::LocalHost || host_address == QHostAddress::LocalHostIPv6;
+#endif
 }
