@@ -101,7 +101,7 @@ AutomaticFileName=true
 
 [Misc]
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0)
-ListenerPort= is the last TCP port of chat communication between beebeeps (default is 6475)
+ListenerPort= is the last TCP port of chat communication between beebeep (default is 6475)
 PingInterval=31000
 PongTimeout=98000
 WritingTimeout=3000

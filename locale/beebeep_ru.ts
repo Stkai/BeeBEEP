@@ -446,7 +446,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="95"/>
         <source>Please insert a valid IP address.</source>
-        <translation>Пожалуйста, вставьте действительный IP-адрес</translation>
+        <translation>Пожалуйста, вставьте действительный IP-адрес.</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="105"/>
@@ -461,7 +461,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="151"/>
         <source>Remove user path</source>
-        <translation>Убрать путь пользователя.</translation>
+        <translation>Убрать путь пользователя</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="174"/>
@@ -2103,7 +2103,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <message>
         <location filename="../src/GuiMain.cpp" line="2266"/>
         <source>Default language is restored.</source>
-        <translation>Язык по умолчанию восстановлен</translation>
+        <translation>Язык по умолчанию восстановлен.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2268"/>

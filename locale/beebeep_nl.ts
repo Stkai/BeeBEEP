@@ -1225,7 +1225,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="561"/>
         <source>Prompts for network password on startup</source>
-        <translation type="unfinished">Vraag netwerkwachtwoord bij opstarten</translation>
+        <translation>Vraag netwerkwachtwoord bij opstarten</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="562"/>
@@ -1577,7 +1577,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="587"/>
         <source>Raise on top on new message</source>
-        <translation type="unfinished">Breng programma op voorgrond bij nieuw bericht</translation>
+        <translation>Breng programma op voorgrond bij nieuw bericht</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="593"/>

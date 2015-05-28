@@ -7,7 +7,7 @@ BeeBEEP 1.0.0
 - Message filter in chat
 - Default Listener, File Transfer and Broadcast port can be set in beebeep.rc file
 - Chat settings menu is moved to chat toolbar
-- System tray icon is now always visible (context menu is added)
+- System tray icon is now always visible (context menu with settings is added)
 
 BeeBEEP 0.9.9
 - Improved subnet selection when there are many network cards installed
