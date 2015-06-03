@@ -1106,7 +1106,7 @@ bool GuiMain::showAlert()
       playBeep();
     }
 
-    if( Settings::instance().raiseOnNewMessageArrived() && !Settings::instance().stayOnTop() )
+    if( Settings::instance().raiseOnNewMessageArrived() )
       raiseOnTop();
     else
       QApplication::alert( this );
@@ -1921,6 +1921,7 @@ void GuiMain::raiseOnTop()
   SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetActiveWindow( (HWND)winId() );
+  SetFocus( (HWND)winId() );
 #else
   raise();
   qApp->setActiveWindow( this );

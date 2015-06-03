@@ -311,10 +311,19 @@ QColor Bee::invertColor( const QColor& c )
   int s_g = r - i_g;
   int s_b = r - i_b;
 
-  if( qAbs( s_r ) < 30 && qAbs( s_g ) < 30 && qAbs( s_b ) < 30 ) // gray on grar
+  if( qAbs( s_r ) < 30 && qAbs( s_g ) < 30 && qAbs( s_b ) < 30 ) // gray on gray
     return QColor( 0, 0, 0 );
   else
     return QColor( i_r, i_g, i_b );
+}
+
+bool Bee::isColorNear( const QColor& c1, const QColor& c2 )
+{
+  int r_diff = c1.red() - c2.red();
+  int g_diff = c1.green() - c2.green();
+  int b_diff = c1.blue() - c2.blue();
+
+  return qAbs( r_diff ) < 30 && qAbs( g_diff ) < 30 && qAbs( b_diff ) < 30;
 }
 
 QString Bee::chopTextForWidget( QWidget* w, const QString& text )

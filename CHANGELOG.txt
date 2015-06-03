@@ -1,5 +1,10 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 1.0.1 (bug fixes release)
+- Fixed notification bug with "always on top" option active
+- More "image format type" added for profile picture
+- Fixed font tonality in avatar creation
+
 BeeBEEP 1.0.0
 - Only an instance of BeeBEEP can started a time (can be changed in beebeep.rc file)
 - Send message button

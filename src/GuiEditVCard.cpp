@@ -90,8 +90,17 @@ void GuiEditVCard::loadVCard()
 
 void GuiEditVCard::changePhoto()
 {
+  QList<QByteArray> supported_formats = QImageReader::supportedImageFormats();
+  QString supported_formats_string = "";
+
+  foreach( QByteArray sf, supported_formats )
+  {
+    supported_formats_string += QString( " *." );
+    supported_formats_string.append( sf );
+  }
+
   QString photo_path = QFileDialog::getOpenFileName( this, tr( "%1 - Select your profile photo" ).arg( Settings::instance().programName() ),
-                                                     Settings::instance().lastDirectorySelected(), tr( "Images (*.png *.xpm *.jpg *.jpeg)" ) );
+                                                     Settings::instance().lastDirectorySelected(), tr( "Images" ) + QString( " (%1)" ).arg( supported_formats_string.simplified() ) );
   if( photo_path.isNull() || photo_path.isEmpty() )
     return;
 
@@ -104,6 +113,7 @@ void GuiEditVCard::changePhoto()
   if( !img_reader.read( &img ) )
   {
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to load image %1." ).arg( photo_path ), QMessageBox::Ok );
+    qWarning() << "Can not load profile picture. Format supported:" << supported_formats_string;
     return;
   }
 

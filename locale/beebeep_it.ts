@@ -2497,7 +2497,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Chiudi</translation>
+        <translation type="obsolete">Chiudi</translation>
     </message>
     <message>
         <source>Used Ports</source>

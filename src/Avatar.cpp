@@ -100,8 +100,9 @@ bool Avatar::create()
   }
 
   QFont f( QFont( "monospace", qMin( 128, m_size.height() ) ) );
+  f.setBold( true );
   QFontMetrics fm( f );
-  int w_max_size = m_size.width() - 4;
+  int w_max_size = m_size.width() - qMax( 2, (int)(m_size.width() / 6) );
 
   while( fm.width( text_to_write ) > w_max_size )
   {
@@ -127,7 +128,9 @@ bool Avatar::create()
   pix.fill( m_color );
   QPainter p( &pix );
   p.setFont( f );
-  QPen pen( Bee::invertColor( m_color ) );
+
+  QColor pen_color = Bee::isColorNear( m_color, Qt::white ) ? Bee::invertColor( m_color ) : Qt::white;
+  QPen pen( pen_color );
   p.setPen( pen );
   p.drawText( QRect( border_x, border_y, m_size.width() - border_x, m_size.height() - border_y ), text_to_write );
 
