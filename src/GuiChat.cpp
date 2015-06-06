@@ -296,6 +296,11 @@ bool GuiChat::setChatId( VNumber chat_id )
     ChatManager::instance().setChat( c );
   }
 
+ /* if( c.isDefault() )
+    mp_teChat->setStyleSheet( "background-color: rgb(30, 30, 30)" );
+  else
+    mp_teChat->setStyleSheet( "background-color: rgb(255, 255, 255)" );*/
+
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Setting chat" << chat_id << "in default chat window";
 #endif

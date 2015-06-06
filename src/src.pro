@@ -197,5 +197,5 @@ FORMS += GuiAddUser.ui \
 RESOURCES += beebeep.qrc
 win32: RC_FILE = beebeep.rc
 
-ICON = beebeep.icns
+macx: ICON = beebeep.icns
 
