@@ -37,6 +37,8 @@ GuiUserList::GuiUserList( QWidget* parent )
   setSortingEnabled( true );
   setColumnCount( 1 );
 
+  m_chatOpened = ID_INVALID;
+
   setHeaderHidden( true );
   resetList();
 
@@ -114,6 +116,7 @@ void GuiUserList::setUnreadMessages( VNumber chat_id, int n )
 void GuiUserList::setUser( const User& u )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
+  bool item_is_created = false;
   if( !item )
   {
     if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
@@ -121,6 +124,7 @@ void GuiUserList::setUser( const User& u )
 
     item = new GuiUserItem( this );
     item->setUserId( u.id() );
+    item_is_created = true;
   }
   else
   {
@@ -135,6 +139,9 @@ void GuiUserList::setUser( const User& u )
   item->setChatId( c.id() );
   item->setUnreadMessages( c.unreadMessages() );
   item->updateUser( u );
+
+  if( item_is_created )
+    item->setChatOpened( c.id() == m_chatOpened );
   sortUsers();
 }
 
@@ -182,4 +189,18 @@ void GuiUserList::setDefaultChatConnected( bool yes )
   if( !item )
     return;
   item->setIcon( 0, QIcon( (yes ? ":/images/default-chat-online" : ":/images/default-chat-offline" ) ) );
+}
+
+void GuiUserList::setChatOpened( VNumber chat_id )
+{
+  m_chatOpened = chat_id;
+
+  GuiUserItem* item;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    item = (GuiUserItem*)(*it);
+    item->setChatOpened( item->chatId() == chat_id );
+    ++it;
+  }
 }

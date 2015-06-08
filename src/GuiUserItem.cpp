@@ -29,12 +29,12 @@
 
 
 GuiUserItem::GuiUserItem( QTreeWidget* parent )
-  : QTreeWidgetItem( parent ), m_defaultForegroundColor()
+  : QTreeWidgetItem( parent )
 {
 }
 
 GuiUserItem::GuiUserItem( QTreeWidgetItem* parent )
-  : QTreeWidgetItem( parent ), m_defaultForegroundColor()
+  : QTreeWidgetItem( parent )
 {
 }
 
@@ -103,7 +103,10 @@ bool GuiUserItem::updateUser( const User& u )
       {
         Avatar av;
         av.setName( u.name() );
-        av.setColor( u.color() );
+        if( u.isConnected() )
+          av.setColor( u.color() );
+        else
+          av.setColor( QColor( Qt::gray ).name() );
         av.setSize( icon_size );
         if( av.create() )
           user_avatar = av.pixmap();
@@ -111,7 +114,11 @@ bool GuiUserItem::updateUser( const User& u )
           user_avatar = selectUserIcon( user_status, true ).pixmap( icon_size );
       }
       else
+      {
         user_avatar = u.vCard().photo();
+        if( !u.isConnected() )
+          user_avatar = Bee::convertToGrayScale( user_avatar );
+      }
 
       QPixmap pix( icon_size );
       pix.fill( Bee::userStatusColor( u.status() ) );
@@ -121,15 +128,8 @@ bool GuiUserItem::updateUser( const User& u )
     }
     else
       setIcon( 0, selectUserIcon( user_status, false ) );
+
   }
-
-  if( !m_defaultForegroundColor.isValid() )
-    m_defaultForegroundColor = foreground( 0 ).color();
-
-  if( user_status == User::Offline )
-    setForeground( 0, QBrush( QColor( "#808080" ) ) );
-  else
-    setForeground( 0, QBrush( m_defaultForegroundColor ) );
 
   QString tool_tip;
 
@@ -166,4 +166,18 @@ bool GuiUserItem::updateUser( const User& u )
   setToolTip( 0, tool_tip );
 
   return true;
+}
+
+void GuiUserItem::setChatOpened( bool chat_is_opened )
+{
+  if( chat_is_opened )
+  {
+    setBackground( 0, Bee::defaultHighlightBrush() );
+    setTextColor( 0, Bee::defaultHighlightedText().color() );
+  }
+  else
+  {
+    setBackground( 0, Bee::defaultBackgroundBrush() );
+    setTextColor( 0, Bee::defaultTextBrush().color() );
+  }
 }

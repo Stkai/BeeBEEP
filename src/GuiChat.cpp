@@ -122,6 +122,8 @@ void GuiChat::updateAction( bool is_connected, int connected_users )
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
+  mp_teMessage->setEnabled( is_connected );
+  mp_pbSend->setEnabled( is_connected );
 }
 
 void GuiChat::customContextMenu( const QPoint& p )
@@ -204,7 +206,7 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
 
   if( cm.isSystem() )
   {
-    s = GuiChatMessage::formatSystemMessage( cm );
+    s = GuiChatMessage::formatSystemMessage( cm, false );
     m_lastMessageUserId = 0;
   }
   else
@@ -249,7 +251,7 @@ void GuiChat::setChatUsers()
 
   if( m_chatId == ID_DEFAULT_CHAT )
   {
-    chat_users = tr( "All Lan Users" );
+    chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
   }
   else
   {

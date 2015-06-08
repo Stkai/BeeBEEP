@@ -362,3 +362,45 @@ QString Bee::removeHtmlTag( const QString& s )
   plain_text.remove( QRegExp( "<[^>]*>" ) );
   return plain_text;
 }
+
+QBrush Bee::defaultTextBrush()
+{
+  return qApp->palette().text();
+}
+
+QBrush Bee::defaultBackgroundBrush()
+{
+  return qApp->palette().base();
+}
+
+QBrush Bee::defaultHighlightedText()
+{
+  return qApp->palette().highlightedText();
+}
+
+QBrush Bee::defaultHighlightBrush()
+{
+  return qApp->palette().highlight();
+}
+
+QPixmap Bee::convertToGrayScale( const QPixmap& pix )
+{
+  QImage img = pix.toImage();
+  if( img.isNull() )
+    return QPixmap();
+
+  int pixels = img.width() * img.height();
+  if( pixels*(int)sizeof(QRgb) <= img.byteCount() )
+  {
+    QRgb *data = (QRgb *)img.bits();
+    for (int i = 0; i < pixels; i++)
+    {
+      int val = qGray(data[i]);
+      data[i] = qRgba(val, val, val, qAlpha(data[i]));
+    }
+  }
+
+  QPixmap ret_pix;
+  ret_pix.convertFromImage( img, Qt::MonoOnly );
+  return ret_pix;
+}

@@ -39,6 +39,9 @@ GuiChatList::GuiChatList( QWidget* parent )
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
 
+  m_chatOpened = ID_INVALID;
+  m_chatSelected = ID_INVALID;
+
   mp_menu = new QMenu( this );
 
   QAction* act = mp_menu->addAction( QIcon( ":/images/chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
@@ -93,6 +96,7 @@ void GuiChatList::updateChat( VNumber chat_id )
   {
     item = new GuiChatItem( this );
     item->setChatId( chat_id );
+    item->setChatOpened( chat_id == m_chatOpened );
   }
 
   item->updateItem( c );
@@ -144,3 +148,16 @@ void GuiChatList::removeChatSelected()
   emit chatToRemove( m_chatSelected );
 }
 
+void GuiChatList::setChatOpened( VNumber chat_id )
+{
+  m_chatOpened = chat_id;
+
+  GuiChatItem* item;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    item = (GuiChatItem*)(*it);
+    item->setChatOpened( item->chatId() == chat_id );
+    ++it;
+  }
+}

@@ -44,6 +44,8 @@ public:
 
   void setDefaultChatConnected( bool );
 
+  void setChatOpened( VNumber );
+
 signals:
   void chatSelected( VNumber chat_id );
   void menuToShow( VNumber user_id );
@@ -58,7 +60,7 @@ private:
   void sortUsers();
   void resetList();
 
-  QColor m_defaultForegroundColor;
+  VNumber m_chatOpened;
 
 };
 

@@ -35,6 +35,7 @@ class GuiChat;
 class GuiChatList;
 class GuiGroupList;
 class GuiLog;
+class GuiHome;
 class GuiSavedChat;
 class GuiSavedChatList;
 class GuiScreenShot;
@@ -102,6 +103,7 @@ private slots:
   void raisePluginView();
   void raiseLogView();
   void raiseScreenShotView();
+  void raiseHomeView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
@@ -140,6 +142,7 @@ protected:
   bool promptConnectionPassword();
   void raiseOnTop();
   void checkChatToolbar();
+  void raiseView( QWidget* );
 
 private:
   void createActions();
@@ -182,6 +185,7 @@ private:
   GuiLog* mp_logView;
   GuiSavedChat* mp_savedChat;
   GuiScreenShot* mp_screenShot;
+  GuiHome* mp_home;
   Core *mp_core;
 
   QMenu *mp_menuMain;

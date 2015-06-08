@@ -21,28 +21,33 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUICHATMESSAGE_H
-#define BEEBEEP_GUICHATMESSAGE_H
+#ifndef BEEBEEP_GUIHOME_H
+#define BEEBEEP_GUIHOME_H
 
 #include "Config.h"
-class Chat;
+#include "ui_GuiHome.h"
 class ChatMessage;
-class User;
 
 
-class GuiChatMessage
+class GuiHome : public QWidget, private Ui::GuiHomeWidget
 {
+  Q_OBJECT
+
 public:
-  static QString chatToHtml( const Chat&, bool skip_system_message );
-  static QString formatMessage( const User&, const ChatMessage&, VNumber last_user_id );
-  static QString formatSystemMessage( const ChatMessage&, bool force_timestamp );
+  explicit GuiHome( QWidget *parent = 0 );
 
-protected:
-  static QString linkify( QString );
-  static QString formatHtmlText( const QString& );
+  void addSystemMessage( const ChatMessage& );
 
+signals:
+  void openDefaultChatRequest();
 
+public slots:
+  void openDefaultChat();
+
+private:
+  bool messageCanBeShowed( const ChatMessage& );
 
 };
 
-#endif // BEEBEEP_GUICHATMESSAGE_H
+
+#endif // BEEBEEP_GUIHOME_H

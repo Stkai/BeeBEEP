@@ -40,6 +40,7 @@ public:
   void updateGroup( VNumber );
   void updateUser( const User& );
   void updateChat( VNumber );
+  void setChatOpened( VNumber );
 
 signals:
   void openChatForGroupRequest( VNumber group_id );
@@ -64,6 +65,7 @@ private:
   QAction* mp_actRemoveGroup;
 
   VNumber m_selectedGroupId;
+  VNumber m_groupChatOpened;
 
 };
 

@@ -143,10 +143,10 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   return html_message;
 }
 
-QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm )
+QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, bool force_timestamp )
 {
   QString html_message = QString( "<font color=#808080>%1 %2</font>" )
-            .arg( Settings::instance().chatShowMessageTimestamp() ? cm.message().timestamp().toString( "(hh:mm:ss) " ) : "" )
+            .arg( force_timestamp || Settings::instance().chatShowMessageTimestamp() ? cm.message().timestamp().toString( "(hh:mm:ss) " ) : "" )
             .arg( cm.message().text() );
   html_message += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
   return html_message;
@@ -172,7 +172,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
       if( skip_system_message )
         continue;
 
-      html_text += formatSystemMessage( cm );
+      html_text += formatSystemMessage( cm, false );
       last_message_user_id = 0;
     }
     else

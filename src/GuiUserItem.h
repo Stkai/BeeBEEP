@@ -49,9 +49,9 @@ public:
   bool updateUser();
   bool updateUser( const User& );
 
-private:
-  QColor m_defaultForegroundColor;
+  void setChatOpened( bool );
 
+private:
   QIcon selectUserIcon( int, bool ) const;
 
 };

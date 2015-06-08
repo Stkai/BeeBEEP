@@ -132,3 +132,11 @@ bool GuiGroupItem::updateChat( VNumber chat_id )
   else
     return false;
 }
+
+void GuiGroupItem::setChatOpened( bool chat_is_opened )
+{
+  if( chat_is_opened )
+    setBackground( 0, Bee::defaultHighlightBrush() );
+  else
+    setBackground( 0, Bee::defaultBackgroundBrush() );
+}

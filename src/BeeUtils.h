@@ -57,6 +57,11 @@ namespace Bee
   QString removeHtmlTag( const QString& );
   inline int toLittleEndianFromBig( int );
   QString chatMessageTypeToString( int );
+  QBrush defaultTextBrush();
+  QBrush defaultBackgroundBrush();
+  QBrush defaultHighlightedText();
+  QBrush defaultHighlightBrush();
+  QPixmap convertToGrayScale( const QPixmap& );
 
 }
 

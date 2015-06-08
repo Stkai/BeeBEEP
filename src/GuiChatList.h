@@ -37,6 +37,7 @@ public:
   virtual QSize sizeHint() const;
 
   void reloadChatList();
+  void setChatOpened( VNumber );
 
 signals:
   void chatSelected( VNumber chat_id );
@@ -60,6 +61,8 @@ private:
   VNumber m_chatSelected;
   QAction* mp_actClear;
   QAction* mp_actDelete;
+
+  VNumber m_chatOpened;
 
 };
 

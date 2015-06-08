@@ -95,3 +95,11 @@ bool GuiChatItem::updateItem( const Chat& c )
   setStatusTip( 0, tool_tip );
   return true;
 }
+
+void GuiChatItem::setChatOpened( bool chat_is_opened )
+{
+  if( chat_is_opened )
+    setBackground( 0, Bee::defaultHighlightBrush() );
+  else
+    setBackground( 0, Bee::defaultBackgroundBrush() );
+}

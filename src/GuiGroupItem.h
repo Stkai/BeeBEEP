@@ -51,6 +51,8 @@ public:
   bool updateUser( const User& );
   bool updateChat( VNumber );
 
+  void setChatOpened( bool );
+
 private:
   inline void setObjectType( ObjectTypeId );
   inline int objectType() const;

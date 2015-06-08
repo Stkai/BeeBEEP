@@ -33,6 +33,7 @@
 #include "GuiCreateGroup.h"
 #include "GuiEditVCard.h"
 #include "GuiGroupList.h"
+#include "GuiHome.h"
 #include "GuiLanguage.h"
 #include "GuiLog.h"
 #include "GuiPluginManager.h"
@@ -322,7 +323,8 @@ void GuiMain::initGuiItems()
 {
   bool enable = mp_core->isConnected();
 
-  showChat( ID_DEFAULT_CHAT );
+  //showChat( ID_DEFAULT_CHAT );
+  raiseHomeView();
 
   if( enable )
   {
@@ -864,7 +866,6 @@ void GuiMain::createStackedWidgets()
   act = mp_barShareNetwork->toggleViewAction();
   act->setEnabled( false );
 
-
   mp_logView = new GuiLog( this );
   mp_stackedWidget->addWidget( mp_logView );
 
@@ -881,6 +882,9 @@ void GuiMain::createStackedWidgets()
   mp_screenShot->setupToolBar( mp_barScreenShot );
   act = mp_barScreenShot->toggleViewAction();
   act->setEnabled( false );
+
+  mp_home = new GuiHome( this );
+  mp_stackedWidget->addWidget( mp_home );
 }
 
 QMenu* GuiMain::gameMenu( GameInterface* gi )
@@ -1120,6 +1124,9 @@ bool GuiMain::showAlert()
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
   bool show_alert = false;
+
+  if( chat_id == ID_DEFAULT_CHAT && cm.isSystem() )
+    mp_home->addSystemMessage( cm );
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
     show_alert = showAlert();
@@ -1698,27 +1705,36 @@ void GuiMain::removeFromShare( const QString& share_path )
   mp_core->removePathFromShare( share_path );
 }
 
-void GuiMain::raiseChatView()
+void GuiMain::raiseView( QWidget* w )
 {
   setGameInPauseMode();
-  mp_stackedWidget->setCurrentWidget( mp_chat );
+  mp_stackedWidget->setCurrentWidget( w );
   checkViewActions();
+}
+
+void GuiMain::raiseHomeView()
+{
+  raiseView( mp_home );
+}
+
+void GuiMain::raiseChatView()
+{
+  raiseView( mp_chat );
   mp_chat->ensureFocusInChat();
+  mp_userList->setChatOpened( mp_chat->chatId() );
+  mp_chatList->setChatOpened( mp_chat->chatId() );
+  mp_groupList->setChatOpened( mp_chat->chatId() );
 }
 
 void GuiMain::raiseLocalShareView()
 {
-  setGameInPauseMode();
-  mp_stackedWidget->setCurrentWidget( mp_shareLocal );
-  checkViewActions();
+  raiseView( mp_shareLocal );
 }
 
 void GuiMain::raiseNetworkShareView()
 {
-  setGameInPauseMode();
-  mp_stackedWidget->setCurrentWidget( mp_shareNetwork );
   mp_shareNetwork->initShares();
-  checkViewActions();
+  raiseView( mp_shareNetwork );
 }
 
 void GuiMain::raisePluginView()
@@ -1731,23 +1747,21 @@ void GuiMain::raisePluginView()
   if( widget_index == mp_stackedWidget->currentIndex() )
     return;
 
-  setGameInPauseMode();
-  mp_stackedWidget->setCurrentIndex( widget_index );
-  checkViewActions();
+  QWidget* plugin_widget = mp_stackedWidget->widget( widget_index );
+  if( !plugin_widget )
+    return;
+
+  raiseView( plugin_widget );
 }
 
 void GuiMain::raiseLogView()
 {
-  setGameInPauseMode();
-  mp_stackedWidget->setCurrentWidget( mp_logView );
-  checkViewActions();
+  raiseView( mp_logView );
 }
 
 void GuiMain::raiseScreenShotView()
 {
-  setGameInPauseMode();
-  mp_stackedWidget->setCurrentWidget( mp_screenShot );
-  checkViewActions();
+  raiseView( mp_screenShot );
 }
 
 void GuiMain::setGameInPauseMode()
