@@ -244,6 +244,9 @@ public:
   inline void setUserPathList( const QStringList& );
   inline const QStringList& userPathList() const;
 
+  inline void setShowHomeAsDefaultPage( bool );
+  inline bool showHomeAsDefaultPage() const;
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -382,6 +385,8 @@ private:
 
   QStringList m_groupList;
   QStringList m_userPathList;
+
+  bool m_showHomeAsDefaultPage;
 
 };
 
@@ -526,5 +531,7 @@ inline const QStringList& Settings::groupList() const { return m_groupList; }
 inline const QDateTime& Settings::lastSave() const { return m_lastSave; }
 inline void Settings::setUserPathList( const QStringList& new_value ) { m_userPathList = new_value; }
 inline const QStringList& Settings::userPathList() const { return m_userPathList; }
+inline void Settings::setShowHomeAsDefaultPage( bool new_value ) { m_showHomeAsDefaultPage = new_value; }
+inline bool Settings::showHomeAsDefaultPage() const { return m_showHomeAsDefaultPage; }
 
 #endif // BEEBEEP_SETTINGS_H

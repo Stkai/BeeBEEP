@@ -1,5 +1,9 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 1.0.2 
+- Show homepage with BeeBEEP activities at startup (can be disabled by option)
+- Display chat members as selected user in user panel
+
 BeeBEEP 1.0.1 (bug fixes release)
 - Fixed notification bug with "always on top" option active
 - More "image format type" added for profile picture

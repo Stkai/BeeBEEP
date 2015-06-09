@@ -539,6 +539,7 @@ void Settings::load()
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
+  m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -693,6 +694,7 @@ void Settings::save()
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   sets->setValue( "ShowChatToolbar", m_showChatToolbar );
+  sets->setValue( "ShowHomeAsDefaultPage", m_showHomeAsDefaultPage );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

@@ -41,8 +41,9 @@ public:
 signals:
   void openDefaultChatRequest();
 
-public slots:
+protected slots:
   void openDefaultChat();
+  void toggleShowHomeAtStartUp( bool );
 
 private:
   bool messageCanBeShowed( const ChatMessage& );

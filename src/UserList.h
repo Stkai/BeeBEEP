@@ -47,6 +47,8 @@ public:
   QList<VNumber> toUsersId() const;
   inline const QList<User>& toList() const;
 
+  void sort();
+
 private:
   QList<User> m_users;
 

@@ -197,7 +197,6 @@ void Core::checkUserAuthentication( const Message& m )
   else
     qDebug() << u.path() << "has completed the authentication";
 
-  bool user_reconnect = false;
   bool user_path_changed = false;
 
   User user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
@@ -227,7 +226,6 @@ void Core::checkUserAuthentication( const Message& m )
       qDebug() << "User" << u.path() << "reconnected";
 
     u.setId( user_found.id() );
-    user_reconnect = true;
   }
   else
   {
@@ -236,7 +234,7 @@ void Core::checkUserAuthentication( const Message& m )
 
   if( u.color() == QString( "#000000" ) || !QColor::isValidColor( u.color() ) )
   {
-    if( user_reconnect )
+    if( user_found.isValid() && user_found.color() != QString( "#000000" ) )
       u.setColor( user_found.color() );
     else
       u.setColor( ColorManager::instance().unselectedQString() );
@@ -278,7 +276,7 @@ void Core::checkUserAuthentication( const Message& m )
     }
   }
 
-  if( user_reconnect )
+  if( user_found.isValid() )
     checkGroupChatAfterUserReconnect( u );
 
   checkUserHostAddress( u );

@@ -33,9 +33,16 @@ GuiHome::GuiHome( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiHome" );
 
-  mp_teSystem->setStyleSheet( "background-color: rgb( 245, 245, 245 )" );
+  //mp_teSystem->setStyleSheet( "background-color: rgb( 250, 250, 250 )" );
 
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Network Activity" ) ) );
+  mp_lTitle->setText( QString( "<b>%1 %2</b>" ).arg( Settings::instance().programName(), tr( "Activity" ) ) );
+
+  mp_lNote->setText( QString( "<b>%1...</b>" ).arg( tr( "Select a user you want to chat with or" ) ) );
+
+  mp_cbShowHomeAtStartup->setChecked( Settings::instance().showHomeAsDefaultPage() );
+
+  connect( mp_pbOpenDefaultChat, SIGNAL( clicked() ), this, SLOT( openDefaultChat() ) );
+  connect( mp_cbShowHomeAtStartup, SIGNAL( toggled( bool ) ), this, SLOT( toggleShowHomeAtStartUp( bool ) ) );
 }
 
 bool GuiHome::messageCanBeShowed( const ChatMessage& cm )
@@ -46,6 +53,7 @@ bool GuiHome::messageCanBeShowed( const ChatMessage& cm )
   case ChatMessage::Connection:
   case ChatMessage::UserStatus:
   case ChatMessage::FileTransfer:
+  case ChatMessage::Other:
     return true;
   default:
     return false;
@@ -75,3 +83,7 @@ void GuiHome::openDefaultChat()
   emit openDefaultChatRequest();
 }
 
+void GuiHome::toggleShowHomeAtStartUp( bool checked )
+{
+  Settings::instance().setShowHomeAsDefaultPage( checked );
+}

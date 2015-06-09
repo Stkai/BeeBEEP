@@ -1007,7 +1007,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Images (*.png *.xpm *.jpg *.jpeg)</source>
-        <translation>Immagini (*.png *.xpm *.jpg *.jpeg)</translation>
+        <translation type="obsolete">Immagini (*.png *.xpm *.jpg *.jpeg)</translation>
     </message>
     <message>
         <source>Unable to load image %1.</source>
@@ -1024,6 +1024,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Edit your profile</source>
         <translation>Modifica il tuo profilo</translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1047,6 +1051,32 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Delete group</source>
         <translation>Cancella gruppo</translation>
+    </message>
+</context>
+<context>
+    <name>GuiHome</name>
+    <message>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a user you want to chat with or</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiHomeWidget</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show this page at startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chat with all users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2506,6 +2536,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>disabled</source>
         <translation>disabilitato</translation>
+    </message>
+    <message>
+        <source>Show %1 home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the homepage with %1 activity</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

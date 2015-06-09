@@ -154,6 +154,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_screenShot, SIGNAL( showRequest() ), this, SLOT( show() ) );
   connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
 
+  connect( mp_home, SIGNAL( openDefaultChatRequest() ), this, SLOT( showDefaultChat() ) );
+
   initGuiItems();
 }
 
@@ -323,8 +325,10 @@ void GuiMain::initGuiItems()
 {
   bool enable = mp_core->isConnected();
 
-  //showChat( ID_DEFAULT_CHAT );
-  raiseHomeView();
+  if( Settings::instance().showHomeAsDefaultPage() )
+    raiseHomeView();
+  else
+    showDefaultChat();
 
   if( enable )
   {
@@ -647,6 +651,8 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
+  act = mp_menuView->addAction( QIcon( ":/images/beebeep.png" ), tr( "Show %1 home" ).arg( Settings::instance().programName() ), this, SLOT( raiseHomeView() ) );
+  act->setStatusTip( tr( "Show the homepage with %1 activity" ).arg( Settings::instance().programName() ) );
   mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( showCurrentChat() ) );
   mp_actViewDefaultChat->setStatusTip( tr( "Show the chat view" ) );
   mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
@@ -1439,7 +1445,15 @@ void GuiMain::showFactOfTheDay()
 
 void GuiMain::showCurrentChat()
 {
-  showChat( mp_chat->chatId() );
+  if( mp_chat->chatId() != ID_INVALID )
+    showChat( mp_chat->chatId() );
+  else
+    showChat( ID_DEFAULT_CHAT );
+}
+
+void GuiMain::showDefaultChat()
+{
+  showChat( ID_DEFAULT_CHAT );
 }
 
 void GuiMain::showChat( VNumber chat_id )
@@ -1705,36 +1719,37 @@ void GuiMain::removeFromShare( const QString& share_path )
   mp_core->removePathFromShare( share_path );
 }
 
-void GuiMain::raiseView( QWidget* w )
+void GuiMain::raiseView( QWidget* w, VNumber chat_id, const QString& chat_name )
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( w );
   checkViewActions();
+  mp_userList->setChatOpened( chat_id );
+  mp_chatList->setChatOpened( chat_id );
+  mp_groupList->setChatOpened( chat_id );
+  mp_savedChatList->setSavedChatOpened( chat_name );
 }
 
 void GuiMain::raiseHomeView()
 {
-  raiseView( mp_home );
+  raiseView( mp_home, ID_INVALID, "" );
 }
 
 void GuiMain::raiseChatView()
 {
-  raiseView( mp_chat );
+  raiseView( mp_chat, mp_chat->chatId(), mp_chat->chatName() );
   mp_chat->ensureFocusInChat();
-  mp_userList->setChatOpened( mp_chat->chatId() );
-  mp_chatList->setChatOpened( mp_chat->chatId() );
-  mp_groupList->setChatOpened( mp_chat->chatId() );
 }
 
 void GuiMain::raiseLocalShareView()
 {
-  raiseView( mp_shareLocal );
+  raiseView( mp_shareLocal, ID_INVALID, "" );
 }
 
 void GuiMain::raiseNetworkShareView()
 {
   mp_shareNetwork->initShares();
-  raiseView( mp_shareNetwork );
+  raiseView( mp_shareNetwork, ID_INVALID, "" );
 }
 
 void GuiMain::raisePluginView()
@@ -1751,17 +1766,17 @@ void GuiMain::raisePluginView()
   if( !plugin_widget )
     return;
 
-  raiseView( plugin_widget );
+  raiseView( plugin_widget, ID_INVALID, "" );
 }
 
 void GuiMain::raiseLogView()
 {
-  raiseView( mp_logView );
+  raiseView( mp_logView, ID_INVALID, "" );
 }
 
 void GuiMain::raiseScreenShotView()
 {
-  raiseView( mp_screenShot );
+  raiseView( mp_screenShot, ID_INVALID, "" );
 }
 
 void GuiMain::setGameInPauseMode()
@@ -1983,9 +1998,7 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
 
   mp_savedChat->showSavedChat( chat_name );
 
-  setGameInPauseMode();
-  mp_stackedWidget->setCurrentWidget( mp_savedChat );
-  checkViewActions();
+  raiseView( mp_savedChat, ID_INVALID, chat_name );
 }
 
 void GuiMain::removeSavedChat( const QString& chat_name )

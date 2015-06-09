@@ -35,6 +35,8 @@ public:
   GuiSavedChatList( QWidget* parent = 0 );
   virtual QSize sizeHint() const;
 
+  void setSavedChatOpened( const QString& );
+
 signals:
   void savedChatSelected( const QString& );
   void savedChatRemoved( const QString& );

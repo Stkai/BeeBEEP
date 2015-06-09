@@ -216,12 +216,15 @@ void GuiGroupList::setChatOpened( VNumber chat_id )
 {
   m_groupChatOpened = ID_INVALID;
 
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( c.isValid() && c.isGroup() )
+  if( chat_id != ID_INVALID )
   {
-    Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
-    if( g.isValid() )
-      m_groupChatOpened = g.id();
+    Chat c = ChatManager::instance().chat( chat_id );
+    if( c.isValid() && c.isGroup() )
+    {
+      Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
+      if( g.isValid() )
+        m_groupChatOpened = g.id();
+    }
   }
 
   GuiGroupItem* item;

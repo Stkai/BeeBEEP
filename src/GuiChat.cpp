@@ -54,6 +54,7 @@ GuiChat::GuiChat( QWidget *parent )
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
+  m_chatId = ID_INVALID;
   m_lastMessageUserId = 0;
   m_lastEmoticonSelected = ":)";
 
@@ -256,14 +257,15 @@ void GuiChat::setChatUsers()
   else
   {
     QStringList sl;
+    m_chatUsers.sort();
     foreach( User u, m_chatUsers.toList() )
     {
       if( u.isLocal() )
       {
         if( !isActiveUser( u ) )
-          sl.append( tr( "(You have left)" ) );
+          sl.append( tr( "(You have left)" ).toLower() );
         else
-          sl.append( QString( "<b>%1</b>" ).arg( tr( "You" ) ) );
+          sl.append( QString( "<b>%1</b>" ).arg( tr( "You" ) ).toLower() );
       }
       else
       {
@@ -297,11 +299,6 @@ bool GuiChat::setChatId( VNumber chat_id )
     c.readAllMessages();
     ChatManager::instance().setChat( c );
   }
-
- /* if( c.isDefault() )
-    mp_teChat->setStyleSheet( "background-color: rgb(30, 30, 30)" );
-  else
-    mp_teChat->setStyleSheet( "background-color: rgb(255, 255, 255)" );*/
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Setting chat" << chat_id << "in default chat window";

@@ -93,6 +93,7 @@ ChatAutoSave=true
 ChatMaxLineSaved=3000
 MainWindowGeometry= (do not use)
 MainWindowState= (do not use)
+ShowHomeAsDefaultPage= Show home page at start up (force user to click on available users to chat with them)
 
 [Tools]
 LogToFile=false

@@ -121,3 +121,20 @@ void GuiSavedChatList::updateSavedChats()
     ++it;
   }
 }
+
+void GuiSavedChatList::setSavedChatOpened( const QString& saved_chat_opened )
+{
+  GuiSavedChatItem* item;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    item = (GuiSavedChatItem*)(*it);
+    if( saved_chat_opened.isEmpty() )
+      item->setSavedChatOpened( false );
+    else if( item->chatName() == saved_chat_opened )
+      item->setSavedChatOpened( true );
+    else
+      item->setSavedChatOpened( false );
+    ++it;
+  }
+}

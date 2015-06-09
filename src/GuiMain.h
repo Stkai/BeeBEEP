@@ -92,6 +92,7 @@ private slots:
   void showPluginHelp();
   void showPluginManager();
   void showCurrentChat();
+  void showDefaultChat();
   void showChat( VNumber );
   void showWizard();
   void forceExit();
@@ -142,7 +143,7 @@ protected:
   bool promptConnectionPassword();
   void raiseOnTop();
   void checkChatToolbar();
-  void raiseView( QWidget* );
+  void raiseView( QWidget*, VNumber, const QString& );
 
 private:
   void createActions();

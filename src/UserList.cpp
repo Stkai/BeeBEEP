@@ -151,3 +151,8 @@ void UserList::set( const UserList& ul )
   foreach( User u, ul.toList() )
     set( u );
 }
+
+void UserList::sort()
+{
+  qSort( m_users );
+}

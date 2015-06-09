@@ -95,9 +95,16 @@ QString User::hostAddressAndPortFromPath( const QString& user_path )
 
 bool User::operator<( const User& u ) const
 {
-  if( u.isLocal() )
-    return false;
   if( isLocal() )
+    return false;
+  if( u.isLocal() )
     return true;
-  return u.name() < name();
+
+  if( u.isConnected() && !isConnected() )
+    return false;
+
+  if( !u.isConnected() && isConnected() )
+    return true;
+
+  return name() < u.name();
 }

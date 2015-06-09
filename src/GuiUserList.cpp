@@ -141,7 +141,7 @@ void GuiUserList::setUser( const User& u )
   item->updateUser( u );
 
   if( item_is_created )
-    item->setChatOpened( c.id() == m_chatOpened );
+    item->setChatOpened( m_chatOpened );
   sortUsers();
 }
 
@@ -195,12 +195,24 @@ void GuiUserList::setChatOpened( VNumber chat_id )
 {
   m_chatOpened = chat_id;
 
+  if( chat_id == ID_INVALID )
+    return;
+
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return;
+
   GuiUserItem* item;
   QTreeWidgetItemIterator it( this );
   while( *it )
   {
     item = (GuiUserItem*)(*it);
-    item->setChatOpened( item->chatId() == chat_id );
+    if( c.isPrivate() || c.isDefault() )
+      item->setChatOpened( item->chatId() == chat_id );
+    else if( item->chatId() == ID_DEFAULT_CHAT )
+      item->setChatOpened( false );
+    else
+      item->setChatOpened( c.hasUser( item->userId() ) );
     ++it;
   }
 }
