@@ -25,6 +25,7 @@
 #include "ChatManager.h"
 #include "ColorManager.h"
 #include "FileShare.h"
+#include "GuiConfig.h"
 #include "GuiIconProvider.h"
 #include "GuiMain.h"
 #include "Log.h"
@@ -140,7 +141,16 @@ int main( int argc, char *argv[] )
       mw.restoreState( Settings::instance().guiState() );
   }
   else
-    mw.resize( QSize( 760, 540 ) );
+  {
+    QDesktopWidget* desktop_widget = bee_app.desktop();
+    QRect desktop_size = desktop_widget->availableGeometry();
+    int app_w = qMin( (int)(desktop_size.width()-100), BEE_MAIN_WINDOW_BASE_SIZE_WIDTH );
+    int app_h = qMin( (int)(desktop_size.height()-80), BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT );
+    mw.resize( QSize( app_w, app_h ) );
+    int m_w = qMax( 0, (int)((desktop_size.width() - app_w) / 2) );
+    int m_h = qMax( 0, (int)((desktop_size.height() - app_h) / 2) );
+    mw.move( m_w, m_h );
+  }
 
   mw.checkWindowFlagsAndShow();
 

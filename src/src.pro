@@ -100,7 +100,8 @@ HEADERS += Avatar.h \
   UserManager.h \
   UserRecord.h \
   VCard.h \
-  Version.h
+  Version.h \
+    GuiConfig.h
 
 SOURCES += Avatar.cpp \
   BeeApplication.cpp \

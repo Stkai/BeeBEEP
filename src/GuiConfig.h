@@ -17,31 +17,17 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: Config.h 388 2015-05-21 18:24:15Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_GUICONFIG_H
+#define BEEBEEP_GUICONFIG_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_ORGANIZATION_DOMAIN = "beebeep.net";
-const char* BEEBEEP_DNS_RECORD = "_beebeep._tcp";
-#ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
-#else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
-#endif
-const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
-const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
-const char* BEEBEEP_HELP_WEBSITE = "/help.php";
-const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "1.0.1";
-const int BEEBEEP_PROTO_VERSION = 62;
-const int BEEBEEP_SETTINGS_VERSION = 3;
-const int BEEBEEP_BUILD = 406;
+const int BEE_MAIN_WINDOW_BASE_SIZE_WIDTH = 800;
+const int BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT = 600;
+const int BEE_DOCK_WIDGET_SIZE_HINT_WIDTH = 180;
+const int BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT = 300;
 
-#endif // BEEBEEP_VERSION_H
 
+#endif // BEEBEEP_GUICONFIG_H

@@ -23,6 +23,7 @@
 
 #include "ChatManager.h"
 #include "GuiUserList.h"
+#include "GuiConfig.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -53,7 +54,7 @@ void GuiUserList::sortUsers()
 
 QSize GuiUserList::sizeHint() const
 {
-  return QSize( 140, 300 );
+  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
 }
 
 void GuiUserList::resetList()

@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiChatList.h"
+#include "GuiConfig.h"
 #include "ChatManager.h"
 #include "Settings.h"
 
@@ -58,7 +59,7 @@ GuiChatList::GuiChatList( QWidget* parent )
 
 QSize GuiChatList::sizeHint() const
 {
-  return QSize( 140, 300 );
+  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
 }
 
 void GuiChatList::reloadChatList()
