@@ -63,11 +63,14 @@ signals:
 protected:
   void incomingConnection( qintptr );
   void resetServerFiles();
+  int activeDownloads() const;
 
   FileInfo fileInfo( VNumber ) const;
   FileInfo fileInfo( const QString& file_absolute_path ) const;
+  FileTransferPeer* nextDownloadInQueue() const;
 
 protected slots:
+  void startNewDownload();
   void checkAuthentication();
   void checkUploadRequest( VNumber, const QByteArray& );
   void peerDestroyed();

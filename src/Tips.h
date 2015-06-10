@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_TIPS_H
 #define BEEBEEP_TIPS_H
 
-const int BeeBeepTipsSize = 6;
+const int BeeBeepTipsSize = 7;
 
 static const char* BeeBeepTips[ BeeBeepTipsSize ] =
 {
@@ -34,7 +34,8 @@ static const char* BeeBeepTips[ BeeBeepTipsSize ] =
   QT_TRANSLATE_NOOP( "Tips", "If you want an <u>underlined text</u> write a _underlined text_." ),
   QT_TRANSLATE_NOOP( "Tips", "You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys." ),
   /* 5 */
-  QT_TRANSLATE_NOOP( "Tips", "You can drop files to active chat and send them to members." )
+  QT_TRANSLATE_NOOP( "Tips", "You can drop files to active chat and send them to members." ),
+  QT_TRANSLATE_NOOP( "Tips", "You can select multiple files from network shares and download them simultaneously with a right click." )
 
 };
 

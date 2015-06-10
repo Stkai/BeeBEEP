@@ -540,12 +540,11 @@ void Settings::load()
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", true ).toBool();
+  m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
   m_logToFile = sets->value( "LogToFile", false ).toBool();
-  m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
-  m_automaticFileName = sets->value( "AutomaticFileName", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -555,11 +554,10 @@ void Settings::load()
   m_pingInterval = qMax( sets->value( "PingInterval", 31000 ).toInt(), 1000 );
   m_pongTimeout = qMax( sets->value( "PongTimeout", 98000 ).toInt(), 1000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 1000 );
-  m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
-  m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
+
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -578,7 +576,11 @@ void Settings::load()
 
   sets->beginGroup( "FileShare" );
   m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
+  m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 5 ).toInt();
+  m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
+  m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
+  m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
   QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
   if( !local_share.isEmpty() )
   {
@@ -617,6 +619,8 @@ void Settings::save()
 {
   qDebug() << "Saving settings";
   QSettings *sets = objectSettings();
+
+  sets->clear();
 
   sets->beginGroup( "Version" );
   sets->setValue( "Program", version( true ) );
@@ -695,11 +699,10 @@ void Settings::save()
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->setValue( "ShowHomeAsDefaultPage", m_showHomeAsDefaultPage );
+  sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
-  sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
-  sets->setValue( "AutomaticFileName", m_automaticFileName );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "BroadcastInterval", m_broadcastInterval );
@@ -708,8 +711,6 @@ void Settings::save()
   sets->setValue( "PingInterval", m_pingInterval );
   sets->setValue( "PongTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
-  sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
-  sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->endGroup();
   sets->beginGroup( "Network");
   sets->setValue( "UseMulticastDns", m_useMulticastDns );
@@ -725,7 +726,11 @@ void Settings::save()
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
+  sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
   sets->setValue( "MaxFileShared", m_maxFileShared );
+  sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
+  sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
+  sets->setValue( "MaxSimultaneousDownloads", m_maxSimultaneousDownloads );
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();
 

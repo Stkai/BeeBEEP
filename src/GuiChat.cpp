@@ -54,7 +54,7 @@ GuiChat::GuiChat( QWidget *parent )
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
-  m_chatId = ID_INVALID;
+  m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = 0;
   m_lastEmoticonSelected = ":)";
 

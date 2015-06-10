@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: Broadcaster.cpp 267 2014-11-19 18:56:34Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -26,10 +26,34 @@
 
 
 BuildFileShareList::BuildFileShareList( QObject *parent )
-  : QObject( parent ), m_path( "" ), m_broadcastList( false ), m_shareList(),
-    m_shareSize( 0 ), m_elapsedTime( 0 )
+  : QObject( parent ), m_path( "" ), m_folder( "" ), m_broadcastList( false ),
+    m_shareList(), m_shareSize( 0 ), m_elapsedTime( 0 )
 {
   setObjectName( "BuildFileShareList" );
+}
+
+void BuildFileShareList::setPath( const QString& path_to_share )
+{
+  QFileInfo path_info( path_to_share );
+  if( !path_info.exists() )
+  {
+    qWarning() << "Path" << path_to_share << "not exists and cannot be shared";
+    m_path = "";
+    return;
+  }
+  if( !path_info.isReadable() )
+  {
+    qWarning() << "Path" << path_to_share << "is not readable and cannot be shared";
+    m_path = "";
+    return;
+  }
+
+  m_path = path_to_share;
+
+  if( path_info.isDir() )
+    m_folder = path_info.fileName();
+  else
+    m_folder = "";
 }
 
 void BuildFileShareList::buildList()
@@ -72,6 +96,8 @@ void BuildFileShareList::addPathToList( const QString& share_path )
   else if( file_info.isFile() )
   {
     FileInfo fi = Protocol::instance().fileInfo( file_info );
+    if( !m_folder.isEmpty() )
+      fi.setFolder( m_folder );
     m_shareList.append( fi );
     m_shareSize += fi.size();
   }

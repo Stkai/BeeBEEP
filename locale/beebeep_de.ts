@@ -789,22 +789,22 @@ Please check the file or the directories write permissions.</source>
 <context>
     <name>GuiChatList</name>
     <message>
-        <location filename="../src/GuiChatList.cpp" line="47"/>
+        <location filename="../src/GuiChatList.cpp" line="48"/>
         <source>Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChatList.cpp" line="50"/>
+        <location filename="../src/GuiChatList.cpp" line="51"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChatList.cpp" line="51"/>
+        <location filename="../src/GuiChatList.cpp" line="52"/>
         <source>Clear all chat messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChatList.cpp" line="53"/>
+        <location filename="../src/GuiChatList.cpp" line="54"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -953,27 +953,27 @@ Please select a different name.</source>
 <context>
     <name>GuiGroupList</name>
     <message>
-        <location filename="../src/GuiGroupList.cpp" line="45"/>
+        <location filename="../src/GuiGroupList.cpp" line="46"/>
         <source>Create group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiGroupList.cpp" line="48"/>
+        <location filename="../src/GuiGroupList.cpp" line="49"/>
         <source>Edit group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiGroupList.cpp" line="51"/>
+        <location filename="../src/GuiGroupList.cpp" line="52"/>
         <source>Open chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiGroupList.cpp" line="54"/>
+        <location filename="../src/GuiGroupList.cpp" line="55"/>
         <source>Delete group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiGroupList.cpp" line="130"/>
+        <location filename="../src/GuiGroupList.cpp" line="131"/>
         <source>Waiting for two or more connected user</source>
         <translation type="unfinished"></translation>
     </message>
@@ -982,7 +982,7 @@ Please select a different name.</source>
     <name>GuiHome</name>
     <message>
         <location filename="../src/GuiHome.cpp" line="38"/>
-        <source>Activity</source>
+        <source>%1 Activities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2354,32 +2354,32 @@ Please select a different name.</source>
 <context>
     <name>GuiSavedChatList</name>
     <message>
-        <location filename="../src/GuiSavedChatList.cpp" line="44"/>
+        <location filename="../src/GuiSavedChatList.cpp" line="45"/>
         <source>Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSavedChatList.cpp" line="47"/>
+        <location filename="../src/GuiSavedChatList.cpp" line="48"/>
         <source>Link to chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSavedChatList.cpp" line="49"/>
+        <location filename="../src/GuiSavedChatList.cpp" line="50"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSavedChatList.cpp" line="94"/>
+        <location filename="../src/GuiSavedChatList.cpp" line="95"/>
         <source>Do you really want to delete this saved chat?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSavedChatList.cpp" line="94"/>
+        <location filename="../src/GuiSavedChatList.cpp" line="95"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSavedChatList.cpp" line="94"/>
+        <location filename="../src/GuiSavedChatList.cpp" line="95"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2724,109 +2724,144 @@ Please select a different name.</source>
 <context>
     <name>GuiShareNetwork</name>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="41"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="41"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
-        <location filename="../src/GuiShareNetwork.cpp" line="112"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="41"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="118"/>
         <source>User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="40"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="41"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="69"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="41"/>
+        <source>Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareNetwork.cpp" line="75"/>
         <source>Scan network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="70"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="76"/>
         <source>Search shared files in your network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="73"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="79"/>
         <source>Reload list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="74"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="80"/>
         <source>Clear and reload list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="81"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="87"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="89"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="95"/>
         <source>Apply Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="90"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="96"/>
         <source>Filter the files in list using some keywords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="97"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="103"/>
         <source>File Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="103"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="109"/>
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="129"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="130"/>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareNetwork.cpp" line="131"/>
+        <source>Download single or multiple files simultaneously</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareNetwork.cpp" line="139"/>
         <source>All Users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="157"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="167"/>
         <source>%1 is searching shared files in your network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="210"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="221"/>
         <source>Double click to download %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="238"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="249"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="332"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="348"/>
         <source>Double click to open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="334"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="350"/>
         <source>Transfer completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="348"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="364"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="350"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="366"/>
         <source>%1 files shared in your network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareNetwork.cpp" line="399"/>
+        <source>Download single file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareNetwork.cpp" line="399"/>
+        <source>Download %1 selected files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareNetwork.cpp" line="403"/>
+        <source>Clear selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareNetwork.cpp" line="412"/>
+        <source>Please select one or more files to download.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3227,7 +3262,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSavedChatList.cpp" line="120"/>
+        <location filename="../src/GuiSavedChatList.cpp" line="121"/>
         <source>Double click to view chat history: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3307,107 +3342,112 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="45"/>
-        <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
+        <location filename="../src/Tips.h" line="38"/>
+        <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="46"/>
-        <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
+        <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="47"/>
-        <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
+        <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="48"/>
-        <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
+        <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="49"/>
+        <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Tips.h" line="50"/>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="51"/>
+        <location filename="../src/Tips.h" line="52"/>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="52"/>
+        <location filename="../src/Tips.h" line="53"/>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="53"/>
+        <location filename="../src/Tips.h" line="54"/>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="54"/>
+        <location filename="../src/Tips.h" line="55"/>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="55"/>
+        <location filename="../src/Tips.h" line="56"/>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="57"/>
+        <location filename="../src/Tips.h" line="58"/>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="58"/>
+        <location filename="../src/Tips.h" line="59"/>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="59"/>
+        <location filename="../src/Tips.h" line="60"/>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="60"/>
+        <location filename="../src/Tips.h" line="61"/>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="61"/>
+        <location filename="../src/Tips.h" line="62"/>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="91"/>
+        <location filename="../src/Tips.h" line="92"/>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="64"/>
+        <location filename="../src/Tips.h" line="65"/>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="65"/>
+        <location filename="../src/Tips.h" line="66"/>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="66"/>
+        <location filename="../src/Tips.h" line="67"/>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="71"/>
+        <location filename="../src/Tips.h" line="72"/>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="73"/>
+        <location filename="../src/Tips.h" line="74"/>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3417,77 +3457,77 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="63"/>
+        <location filename="../src/Tips.h" line="64"/>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="74"/>
+        <location filename="../src/Tips.h" line="75"/>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="75"/>
+        <location filename="../src/Tips.h" line="76"/>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="76"/>
+        <location filename="../src/Tips.h" line="77"/>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="77"/>
+        <location filename="../src/Tips.h" line="78"/>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="79"/>
+        <location filename="../src/Tips.h" line="80"/>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="80"/>
+        <location filename="../src/Tips.h" line="81"/>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="81"/>
+        <location filename="../src/Tips.h" line="82"/>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="82"/>
+        <location filename="../src/Tips.h" line="83"/>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="83"/>
+        <location filename="../src/Tips.h" line="84"/>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="85"/>
+        <location filename="../src/Tips.h" line="86"/>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="86"/>
+        <location filename="../src/Tips.h" line="87"/>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="87"/>
+        <location filename="../src/Tips.h" line="88"/>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="88"/>
+        <location filename="../src/Tips.h" line="89"/>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Tips.h" line="89"/>
+        <location filename="../src/Tips.h" line="90"/>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
         <translation type="unfinished"></translation>
     </message>

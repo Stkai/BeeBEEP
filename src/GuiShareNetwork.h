@@ -36,7 +36,7 @@ class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
   Q_OBJECT
 
 public:
-  enum ColumnType { ColumnFile, ColumnSize, ColumnUser, ColumnStatus };
+  enum ColumnType { ColumnFile, ColumnSize, ColumnFolder, ColumnUser, ColumnStatus };
   enum DataType { UserId = Qt::UserRole + 1, FileId, FilePath, FileSize };
 
   explicit GuiShareNetwork( QWidget *parent = 0 );
@@ -62,6 +62,8 @@ protected slots:
   void scanNetwork();
   void applyFilter();
   void updateList();
+  void openDownloadMenu( const QPoint& );
+  void downloadSelected();
 
 protected:
   bool filterPassThrough( VNumber, const FileInfo& );
@@ -70,6 +72,7 @@ protected:
   void loadShares( const User& );
   void showFileTransferCompleted( GuiFileInfoItem*, const QString& );
   void resetComboUsers();
+  void downloadSelectedItem( QTreeWidgetItem* );
 
 private:
   QLineEdit* mp_leFilter;
@@ -78,6 +81,7 @@ private:
   QAction* mp_actScan;
   QAction* mp_actReload;
   QAction* mp_actFilter;
+  QAction* mp_actDownload;
 
 };
 

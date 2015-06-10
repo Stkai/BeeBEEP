@@ -36,29 +36,35 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   setupUi( this );
 
   setObjectName( "GuiShareNetwork" );
+  mp_twShares->setColumnCount( 5 );
   QStringList labels;
-  labels << tr( "File" ) << tr( "Size" ) << tr( "User" ) << tr( "Status" );
+  labels << tr( "File" ) << tr( "Size" ) << tr( "Folder" ) << tr( "User" ) << tr( "Status" );
   mp_twShares->setHeaderLabels( labels );
 
   mp_twShares->sortItems( ColumnFile, Qt::AscendingOrder );
 
   mp_twShares->setAlternatingRowColors( true );
   mp_twShares->setRootIsDecorated( false );
+  mp_twShares->setContextMenuPolicy( Qt::CustomContextMenu );
+  mp_twShares->setSelectionMode( QAbstractItemView::ExtendedSelection );
 
   QHeaderView* hv = mp_twShares->header();
 #if QT_VERSION >= 0x050000
   hv->setSectionResizeMode( ColumnFile, QHeaderView::Stretch );
   hv->setSectionResizeMode( ColumnSize, QHeaderView::ResizeToContents );
+  hv->setSectionResizeMode( ColumnFolder, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnStatus, QHeaderView::ResizeToContents );
 #else
   hv->setResizeMode( ColumnFile, QHeaderView::Stretch );
   hv->setResizeMode( ColumnSize, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnFolder, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnStatus, QHeaderView::ResizeToContents );
 #endif
 
   connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_twShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openDownloadMenu( const QPoint& ) ) );
 }
 
 void GuiShareNetwork::setupToolBar( QToolBar* bar )
@@ -82,7 +88,7 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   bar->addWidget( label );
   mp_leFilter = new QLineEdit( bar );
   mp_leFilter->setObjectName( "GuiLineEditFilter" );
-  mp_leFilter->setMaximumWidth( 200 );
+  mp_leFilter->setMaximumWidth( 140 );
   bar->addWidget( mp_leFilter );
   connect( mp_leFilter, SIGNAL( textChanged( QString ) ), this, SLOT( enableFilterButton() ) );
   connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( applyFilter() ) );
@@ -119,6 +125,10 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   bar->addWidget( mp_comboUsers );
   connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
 
+  /* Download button */
+  bar->addSeparator();
+  mp_actDownload = bar->addAction( QIcon( ":/images/download-box.png" ), tr( "Download" ), this, SLOT( downloadSelected() ) );
+  mp_actDownload->setStatusTip( tr( "Download single or multiple files simultaneously" ) );
 }
 
 void GuiShareNetwork::resetComboUsers()
@@ -198,6 +208,7 @@ void GuiShareNetwork::loadShares( const User& u )
           item->setData( ColumnFile, FileId, fi.id() );
           item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
           item->setData( ColumnSize, FileSize, fi.size() );
+          item->setText( ColumnFolder, fi.folder() );
           item->setText( ColumnUser, u.name() );
           file_info_downloaded = FileShare::instance().downloadedFile( fi.fileHash() );
           if( file_info_downloaded.isValid() )
@@ -250,6 +261,11 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
     return;
   }
 
+  downloadSelectedItem( item );
+}
+
+void GuiShareNetwork::downloadSelectedItem( QTreeWidgetItem* item )
+{
   VNumber user_id = Bee::qVariantToVNumber( item->data( ColumnFile, UserId ) );
   VNumber file_id = Bee::qVariantToVNumber( item->data( ColumnFile, FileId ) );
 
@@ -372,4 +388,33 @@ void GuiShareNetwork::showSharesForUser( const User& u )
   }
 
   showStatus( "" );
+}
+
+void GuiShareNetwork::openDownloadMenu( const QPoint& )
+{
+  QList<QTreeWidgetItem*> selected_items = mp_twShares->selectedItems();
+  if( selected_items.isEmpty() )
+    return;
+
+  QString action_text = selected_items.size() == 1 ? tr( "Download single file" ) : tr( "Download %1 selected files" ).arg(  selected_items.size() );
+  QMenu menu;
+  menu.addAction( QIcon( ":/images/download.png" ), action_text, this, SLOT( downloadSelected() ) );
+  menu.addSeparator();
+  menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), mp_twShares, SLOT( clearSelection() ) );
+  menu.exec( QCursor::pos() );
+}
+
+void GuiShareNetwork::downloadSelected()
+{
+  QList<QTreeWidgetItem*> selected_items = mp_twShares->selectedItems();
+  if( selected_items.isEmpty() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select one or more files to download." ) );
+    return;
+  }
+
+  foreach( QTreeWidgetItem* item, selected_items )
+    downloadSelectedItem( item );
+
+  mp_twShares->clearSelection();
 }

@@ -108,5 +108,7 @@
         <file>images/user-add.png</file>
         <file>images/mdns.png</file>
         <file>images/settings.png</file>
+        <file>images/home.png</file>
+        <file>images/download-box.png</file>
     </qresource>
 </RCC>

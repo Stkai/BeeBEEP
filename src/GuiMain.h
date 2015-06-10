@@ -224,6 +224,7 @@ private:
   QAction* mp_actViewDefaultChat;
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
+  QAction* mp_actViewHome;
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actPromptPassword;
 

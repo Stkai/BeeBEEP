@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: Config.h 388 2015-05-21 18:24:15Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

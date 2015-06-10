@@ -48,9 +48,7 @@ HEADERS += Avatar.h \
   FileInfo.h \
   FileShare.h \
   FileTransfer.h \
-  FileTransferDownload.h \
   FileTransferPeer.h \
-  FileTransferUpload.h \
   Group.h \
   GuiAddUser.h \
   GuiAskPassword.h \

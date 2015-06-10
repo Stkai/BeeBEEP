@@ -356,6 +356,7 @@ void GuiMain::checkViewActions()
   bool is_connected = mp_core->isConnected();
   int connected_users = mp_core->connectedUsers();
 
+  mp_actViewHome->setEnabled( mp_stackedWidget->currentWidget() != mp_home );
   mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_chat );
   mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
@@ -651,8 +652,8 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
-  act = mp_menuView->addAction( QIcon( ":/images/beebeep.png" ), tr( "Show %1 home" ).arg( Settings::instance().programName() ), this, SLOT( raiseHomeView() ) );
-  act->setStatusTip( tr( "Show the homepage with %1 activity" ).arg( Settings::instance().programName() ) );
+  mp_actViewHome = mp_menuView->addAction( QIcon( ":/images/home.png" ), tr( "Show %1 home" ).arg( Settings::instance().programName() ), this, SLOT( raiseHomeView() ) );
+  mp_actViewHome->setStatusTip( tr( "Show the homepage with %1 activity" ).arg( Settings::instance().programName() ) );
   mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( showCurrentChat() ) );
   mp_actViewDefaultChat->setStatusTip( tr( "Show the chat view" ) );
   mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
@@ -753,6 +754,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewSavedChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actViewHome );
   mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
@@ -1431,15 +1433,13 @@ void GuiMain::selectDownloadDirectory()
 
 void GuiMain::showTipOfTheDay()
 {
-  // Tip of the day is shown only in default chat
-  showChat( ID_DEFAULT_CHAT );
+  raiseHomeView();
   mp_core->showTipOfTheDay();
 }
 
 void GuiMain::showFactOfTheDay()
 {
-  // Fact of the day is shown only in default chat
-  showChat( ID_DEFAULT_CHAT );
+  raiseHomeView();
   mp_core->showFactOfTheDay();
 }
 
@@ -2015,11 +2015,10 @@ void GuiMain::removeSavedChat( const QString& chat_name )
 
 void GuiMain::linkSavedChat( const QString& chat_name )
 {
-  // fixme
   bool ok = false;
   QStringList chat_names_string_list = ChatManager::instance().chatNamesToStringList( true );
+  chat_names_string_list.removeOne( chat_name );
 
-  // remove chat_name == chat_name_selected case
   QString chat_name_selected = QInputDialog::getItem( this, Settings::instance().programName(),
                                         tr( "Please select a chat you would like to link the saved text."),
                                         chat_names_string_list, 0, false, &ok );

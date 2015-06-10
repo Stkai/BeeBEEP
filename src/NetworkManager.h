@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: UserManager.h 381 2015-05-13 23:00:49Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

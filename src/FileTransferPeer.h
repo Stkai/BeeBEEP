@@ -35,11 +35,14 @@ class FileTransferPeer : public QObject
 
 public:
   enum TransferType { Download, Upload };
-  enum TransferState { Unknown, Request, Transferring, Completed, Error, Cancelled };
+  enum TransferState { Unknown, Queue, Request, Transferring, Completed, Error, Cancelled };
 
   explicit FileTransferPeer( QObject *parent = 0 );
 
   inline QString name() const;
+
+  inline void setInQueue();
+  inline bool isInQueue() const;
 
   inline void setTransferType( TransferType );
   inline bool isDownload() const;
@@ -53,6 +56,7 @@ public:
   inline const Message& messageAuth() const; // Read below...
   inline QHostAddress peerAddress() const;
 
+  inline bool isActive() const;
   inline bool isTransferCompleted() const;
   void setUserAuthorized( VNumber );
   void startUpload( const FileInfo& );
@@ -107,6 +111,8 @@ protected:
 
 // Inline Functions
 inline QString FileTransferPeer::name() const { return QString( "%1 Peer #%2" ).arg( isDownload() ? "Download" : "Upload " ).arg( m_id ); }
+inline void FileTransferPeer::setInQueue() { m_state = FileTransferPeer::Queue; }
+inline bool FileTransferPeer::isInQueue() const { return m_state == FileTransferPeer::Queue; }
 inline void FileTransferPeer::setTransferType( FileTransferPeer::TransferType new_value ) { m_transferType = new_value; }
 inline bool FileTransferPeer::isDownload() const { return m_transferType == FileTransferPeer::Download; }
 inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }
@@ -115,6 +121,7 @@ inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
 inline const Message& FileTransferPeer::messageAuth() const { return m_messageAuth; }
 inline QHostAddress FileTransferPeer::peerAddress() const { return m_socket.peerAddress(); }
+inline bool FileTransferPeer::isActive() const { return m_socket.isConnected(); }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

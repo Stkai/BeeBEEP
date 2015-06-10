@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: GuiCreateGroupChat.h 311 2015-02-09 17:36:50Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

@@ -94,11 +94,10 @@ ChatMaxLineSaved=3000
 MainWindowGeometry= (do not use)
 MainWindowState= (do not use)
 ShowHomeAsDefaultPage= Show home page at start up (force user to click on available users to chat with them)
+ShowTipsOfTheDay=true
 
 [Tools]
 LogToFile=false
-ShowTipsOfTheDay=true
-AutomaticFileName=true
 
 [Misc]
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0)
@@ -106,8 +105,6 @@ ListenerPort= is the last TCP port of chat communication between beebeep (defaul
 PingInterval=31000
 PongTimeout=98000
 WritingTimeout=3000
-FileTransferConfirmTimeout=30000
-FileTransferBufferSize=65456
 SystemTrayMessageTimeout=2000
 
 [Network]
@@ -119,5 +116,9 @@ AddExternalSubnetAutomatically= if true BeeBEEP automatically add external user'
 
 [FileShare]
 Active=true
+SetAutomaticFileName= on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it
+MaxSimultaneousDownloads= is the max number of simultaneous downloads in file transfer
 MaxFileShared=32700
+FileTransferConfirmTimeout=30000
+FileTransferBufferSize=65456
 ShareList=

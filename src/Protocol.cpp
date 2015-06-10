@@ -702,6 +702,7 @@ void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& f
     sl << QString::number( fi.id() );
     sl << QString::fromUtf8( fi.password() );
     sl << fi.fileHash();
+    sl << fi.folder();
 
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
   }
@@ -751,6 +752,9 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
         fi.setFileHash( sl_tmp.takeFirst() );
       else
         fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
+
+      if( !sl_tmp.isEmpty() )
+        fi.setFolder( sl_tmp.takeFirst() );
 
       file_info_list.append( fi );
     }

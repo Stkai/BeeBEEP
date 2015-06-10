@@ -33,9 +33,7 @@ GuiHome::GuiHome( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiHome" );
 
-  //mp_teSystem->setStyleSheet( "background-color: rgb( 250, 250, 250 )" );
-
-  mp_lTitle->setText( QString( "<b>%1 %2</b>" ).arg( Settings::instance().programName(), tr( "Activity" ) ) );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "%1 Activities" ).arg( Settings::instance().programName() ) ) );
 
   mp_lNote->setText( QString( "<b>%1...</b>" ).arg( tr( "Select a user you want to chat with or" ) ) );
 

@@ -1027,7 +1027,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagini</translation>
     </message>
 </context>
 <context>
@@ -1057,26 +1057,30 @@ Inserisci un nome differente.</translation>
     <name>GuiHome</name>
     <message>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Attività</translation>
     </message>
     <message>
         <source>Select a user you want to chat with or</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona un utente con cui vuoi parlare oppure</translation>
+    </message>
+    <message>
+        <source>%1 Activities</source>
+        <translation>Attività di %1</translation>
     </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Show this page at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra questa pagina alla partenza</translation>
     </message>
     <message>
         <source>chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>parla con tutti</translation>
     </message>
 </context>
 <context>
@@ -2539,11 +2543,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show %1 home</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la pagina iniziale di %1</translation>
     </message>
     <message>
         <source>Show the homepage with %1 activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la pagina iniziale con le attività di %1</translation>
     </message>
 </context>
 <context>
@@ -3274,6 +3278,34 @@ il file %2 (%3)?</translation>
         <source>Transfer completed</source>
         <translation>Trasferimento completato</translation>
     </message>
+    <message>
+        <source>Folder</source>
+        <translation>Cartella</translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation>Scarica</translation>
+    </message>
+    <message>
+        <source>Download single or multiple files simultaneously</source>
+        <translation>Scarica uno o più file simultaneamente</translation>
+    </message>
+    <message>
+        <source>Download single file</source>
+        <translation>Scarica un file</translation>
+    </message>
+    <message>
+        <source>Download %1 selected files</source>
+        <translation>Scarica %1 file selezionati</translation>
+    </message>
+    <message>
+        <source>Clear selection</source>
+        <translation>Deseleziona tutto</translation>
+    </message>
+    <message>
+        <source>Please select one or more files to download.</source>
+        <translation>Seleziona uno o più file da scaricare.</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareNetworkWidget</name>
@@ -4002,6 +4034,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
+        <translation>Puoi selezionare uno o più file dalla condivisione di rete e scaricarli tutti insieme usando il pulsante destro.</translation>
     </message>
 </context>
 <context>

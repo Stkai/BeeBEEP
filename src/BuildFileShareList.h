@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: Broadcaster.h 159 2012-01-24 19:18:37Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -35,7 +35,7 @@ class BuildFileShareList : public QObject
 public:
   explicit BuildFileShareList( QObject* parent = 0 );
 
-  inline void setPath( const QString& );
+  void setPath( const QString& );
   inline const QString& path() const;
   inline void setBroadcastList( bool );
   inline bool broadcastList() const;
@@ -54,6 +54,7 @@ protected:
 
 private:
   QString m_path;
+  QString m_folder;
   bool m_broadcastList;
   QList<FileInfo> m_shareList;
   FileSizeType m_shareSize;
@@ -63,7 +64,6 @@ private:
 
 
 // Inline Functions
-inline void BuildFileShareList::setPath( const QString& new_value ) { m_path = new_value; }
 inline const QString& BuildFileShareList::path() const { return m_path; }
 inline void BuildFileShareList::setBroadcastList( bool new_value ) { m_broadcastList = new_value; }
 inline bool BuildFileShareList::broadcastList() const { return m_broadcastList; }

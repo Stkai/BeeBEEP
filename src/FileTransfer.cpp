@@ -243,7 +243,17 @@ void FileTransfer::downloadFile( const FileInfo& fi )
   download_peer->setId( Protocol::instance().newId() );
   download_peer->setFileInfo( fi );
   m_peers.append( download_peer );
-  emit newPeerConnected( download_peer, 0 );
+  if( activeDownloads() < Settings::instance().maxSimultaneousDownloads() )
+  {
+    emit newPeerConnected( download_peer, 0 );
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << download_peer->name() << "is scheduled for download";
+#endif
+    download_peer->setInQueue();
+  }
 }
 
 FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
@@ -269,6 +279,8 @@ void FileTransfer::peerDestroyed()
 
   if( m_peers.removeOne( (FileTransferPeer*)sender() ) )
     qDebug() << "Removing peer from list." << m_peers.size() << "peers remained";
+
+  QTimer::singleShot( 0, this, SLOT( startNewDownload() ) );
 }
 
 bool FileTransfer::cancelTransfer( VNumber peer_id )
@@ -284,3 +296,39 @@ bool FileTransfer::cancelTransfer( VNumber peer_id )
   return false;
 }
 
+int FileTransfer::activeDownloads() const
+{
+  int active_downloads = 0;
+  foreach( FileTransferPeer* transfer_peer, m_peers )
+  {
+    if( transfer_peer->isDownload() && transfer_peer->isActive() )
+      active_downloads++;
+  }
+  return active_downloads;
+}
+
+FileTransferPeer* FileTransfer::nextDownloadInQueue() const
+{
+  foreach( FileTransferPeer* transfer_peer, m_peers )
+  {
+    if( transfer_peer->isDownload() && transfer_peer->isInQueue() )
+      return transfer_peer;
+  }
+  return 0;
+}
+
+void FileTransfer::startNewDownload()
+{
+  if( activeDownloads() >= Settings::instance().maxSimultaneousDownloads() )
+    return;
+
+  FileTransferPeer* download_peer = nextDownloadInQueue();
+  if( !download_peer )
+    return;
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << download_peer->name() << "is removed from queue and started";
+#endif
+
+  emit newPeerConnected( download_peer, 0 );
+}
