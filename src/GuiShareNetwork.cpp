@@ -23,7 +23,7 @@
 
 #include "BeeUtils.h"
 #include "GuiIconProvider.h"
-#include "GuiFileInfoItem.h"
+#include "GuiFileInfoList.h"
 #include "GuiShareNetwork.h"
 #include "FileShare.h"
 #include "Settings.h"
@@ -31,37 +31,13 @@
 
 
 GuiShareNetwork::GuiShareNetwork( QWidget *parent )
-  : QWidget(parent)
+  : QWidget( parent ), m_fileInfoList()
 {
   setupUi( this );
 
   setObjectName( "GuiShareNetwork" );
-  mp_twShares->setColumnCount( 5 );
-  QStringList labels;
-  labels << tr( "File" ) << tr( "Size" ) << tr( "Folder" ) << tr( "User" ) << tr( "Status" );
-  mp_twShares->setHeaderLabels( labels );
 
-  mp_twShares->sortItems( ColumnFile, Qt::AscendingOrder );
-
-  mp_twShares->setAlternatingRowColors( true );
-  mp_twShares->setRootIsDecorated( false );
-  mp_twShares->setContextMenuPolicy( Qt::CustomContextMenu );
-  mp_twShares->setSelectionMode( QAbstractItemView::ExtendedSelection );
-
-  QHeaderView* hv = mp_twShares->header();
-#if QT_VERSION >= 0x050000
-  hv->setSectionResizeMode( ColumnFile, QHeaderView::Stretch );
-  hv->setSectionResizeMode( ColumnSize, QHeaderView::ResizeToContents );
-  hv->setSectionResizeMode( ColumnFolder, QHeaderView::ResizeToContents );
-  hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
-  hv->setSectionResizeMode( ColumnStatus, QHeaderView::ResizeToContents );
-#else
-  hv->setResizeMode( ColumnFile, QHeaderView::Stretch );
-  hv->setResizeMode( ColumnSize, QHeaderView::ResizeToContents );
-  hv->setResizeMode( ColumnFolder, QHeaderView::ResizeToContents );
-  hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
-  hv->setResizeMode( ColumnStatus, QHeaderView::ResizeToContents );
-#endif
+  m_fileInfoList.initTree( mp_twShares );
 
   connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_twShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openDownloadMenu( const QPoint& ) ) );
@@ -201,15 +177,10 @@ void GuiShareNetwork::loadShares( const User& u )
       {
         if( filterPassThrough( u.id(), fi ) )
         {
-          item = new GuiFileInfoItem( mp_twShares, ColumnSize, FileSize );
-          item->setIcon( ColumnFile, GuiIconProvider::instance().findIcon( fi ) );
-          item->setText( ColumnFile, fi.name() );
-          item->setData( ColumnFile, UserId, u.id() );
-          item->setData( ColumnFile, FileId, fi.id() );
-          item->setText( ColumnSize, Bee::bytesToString( fi.size() ) );
-          item->setData( ColumnSize, FileSize, fi.size() );
-          item->setText( ColumnFolder, fi.folder() );
-          item->setText( ColumnUser, u.name() );
+          item = m_fileInfoList.fileItem( u.id(), fi.id() );
+          if( !item )
+            item = m_fileInfoList.createFileItem( u, fi );
+
           file_info_downloaded = FileShare::instance().downloadedFile( fi.fileHash() );
           if( file_info_downloaded.isValid() )
           {
@@ -217,8 +188,8 @@ void GuiShareNetwork::loadShares( const User& u )
           }
           else
           {
-            item->setData( ColumnFile, FilePath, QString( "" ) );
-            item->setToolTip( ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
+            item->setFilePath( "" );
+            item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
           }
           file_shared_visible++;
         }
@@ -254,21 +225,24 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
-  QString file_path = item->data( ColumnFile, FilePath ).toString();
-  if( !file_path.isEmpty() )
-  {
-    emit openFileCompleted( QUrl::fromLocalFile( file_path ) );
-    return;
-  }
+  GuiFileInfoItem* file_info_item = (GuiFileInfoItem*)item;
 
-  downloadSelectedItem( item );
+  if( !file_info_item->isObjectFile() )
+    return;
+
+  if( !file_info_item->filePath().isEmpty() )
+    emit openFileCompleted( QUrl::fromLocalFile( file_info_item->filePath() ) );
+  else
+    downloadSelectedItem( item );
 }
 
 void GuiShareNetwork::downloadSelectedItem( QTreeWidgetItem* item )
 {
-  VNumber user_id = Bee::qVariantToVNumber( item->data( ColumnFile, UserId ) );
-  VNumber file_id = Bee::qVariantToVNumber( item->data( ColumnFile, FileId ) );
-
+  GuiFileInfoItem* file_info_item = (GuiFileInfoItem*)item;
+  if( !file_info_item->isObjectFile() )
+    return;
+  VNumber user_id = file_info_item->userId();
+  VNumber file_id = file_info_item->fileInfoId();
   emit downloadSharedFile( user_id, file_id );
 }
 
@@ -281,6 +255,7 @@ void GuiShareNetwork::updateList()
   foreach( User u, UserManager::instance().userList().toList() )
     loadShares( u );
 
+  mp_twShares->expandAll();
   setCursor( Qt::ArrowCursor );
   showStatus( "" );
 }
@@ -311,31 +286,18 @@ bool GuiShareNetwork::filterPassThrough( VNumber user_id, const FileInfo& fi )
     return mp_comboFileType->currentIndex() == (int)Bee::fileTypeFromSuffix( fi.suffix() );
 }
 
-GuiFileInfoItem* GuiShareNetwork::findItem( VNumber user_id, VNumber file_info_id )
-{
-  QTreeWidgetItemIterator it( mp_twShares );
-  while( *it )
-  {
-    if( Bee::qVariantToVNumber( (*it)->data( ColumnFile, UserId ) ) == user_id
-        && Bee::qVariantToVNumber( (*it)->data( ColumnFile, FileId ) ) == file_info_id )
-      return (GuiFileInfoItem*)(*it);
-    ++it;
-  }
-  return 0;
-}
-
 void GuiShareNetwork::showMessage( VNumber user_id, VNumber file_info_id, const QString& msg )
 {
-  GuiFileInfoItem* item = findItem( user_id, file_info_id );
+  GuiFileInfoItem* item = m_fileInfoList.fileItem( user_id, file_info_id );
   if( !item )
     return;
 
-  item->setText( ColumnStatus, msg );
+  item->setText( GuiFileInfoItem::ColumnStatus, msg );
 }
 
 void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_info_id, const QString& file_path )
 {
-  GuiFileInfoItem* item = findItem( user_id, file_info_id );
+  GuiFileInfoItem* item = m_fileInfoList.fileItem( user_id, file_info_id );
   if( !item )
     return;
 
@@ -344,10 +306,10 @@ void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_in
 
 void GuiShareNetwork::showFileTransferCompleted( GuiFileInfoItem* item, const QString& file_path )
 {
-  item->setData( ColumnFile, FilePath, file_path );
-  item->setToolTip( ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
-  if( item->text( ColumnStatus ).isEmpty() )
-    item->setText( ColumnStatus, tr( "Transfer completed" ) );
+  item->setFilePath( file_path );
+  item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
+  if( item->text( GuiFileInfoItem::ColumnStatus ).isEmpty() )
+    item->setText( GuiFileInfoItem::ColumnStatus, tr( "Transfer completed" ) );
   for( int i = 0; i < mp_twShares->columnCount(); i++ )
     item->setBackgroundColor( i, QColor( "#91D606" ) );
 }

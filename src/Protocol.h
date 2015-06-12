@@ -89,8 +89,9 @@ public:
   QString saveUserRecord( const UserRecord& ) const;
   UserRecord loadUserRecord( const QString& ) const;
 
+  inline VNumber currentId() const;
   inline VNumber newId();
-  QString newMd5Id() const;
+  QString newMd5Id();
   QString fileHash( const QFileInfo& ) const;
 
   QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const;
@@ -132,6 +133,7 @@ private:
 
 
 // Inline Functions
+inline VNumber Protocol::currentId() const { return m_id; }
 inline VNumber Protocol::newId() { return ++m_id; }
 inline int Protocol::messageMinimumSize() const { return 10; }
 inline const QByteArray& Protocol::writingMessage() const { return m_writingMessage; }

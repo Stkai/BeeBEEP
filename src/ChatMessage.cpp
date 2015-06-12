@@ -25,7 +25,7 @@
 
 
 ChatMessage::ChatMessage()
-  : m_userId( 0 ), m_message(), m_type( ChatMessage::Undefined )
+  : m_userId( 0 ), m_message(), m_type( ChatMessage::Other )
 {
 }
 

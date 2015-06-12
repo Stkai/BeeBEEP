@@ -43,24 +43,9 @@ GuiHome::GuiHome( QWidget* parent )
   connect( mp_cbShowHomeAtStartup, SIGNAL( toggled( bool ) ), this, SLOT( toggleShowHomeAtStartUp( bool ) ) );
 }
 
-bool GuiHome::messageCanBeShowed( const ChatMessage& cm )
-{
-  switch( cm.type() )
-  {
-  case ChatMessage::System:
-  case ChatMessage::Connection:
-  case ChatMessage::UserStatus:
-  case ChatMessage::FileTransfer:
-  case ChatMessage::Other:
-    return true;
-  default:
-    return false;
-  }
-}
-
 void GuiHome::addSystemMessage( const ChatMessage& cm )
 {
-  if( !messageCanBeShowed( cm ) )
+  if( !GuiChatMessage::messageCanBeShowedInActivity( cm ) )
     return;
 
   QString sys_message = GuiChatMessage::formatSystemMessage( cm, true );

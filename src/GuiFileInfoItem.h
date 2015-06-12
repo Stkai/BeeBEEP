@@ -25,20 +25,57 @@
 #define BEEBEEP_GUIFILEINFOITEM_H
 
 #include "Config.h"
+class FileInfo;
 
 
 class GuiFileInfoItem : public QTreeWidgetItem
 {
 public:
-  GuiFileInfoItem( QTreeWidget*, int size_in_column, int size_role );
+  enum ObjectType { ObjectInvalid, ObjectUser, ObjectFolder, ObjectFile, ObjectNumTypes };
+  enum ColumnType { ColumnFile, ColumnSize, ColumnStatus };
+
+  GuiFileInfoItem( QTreeWidget* );
+  GuiFileInfoItem( QTreeWidgetItem* );
 
   bool operator<( const QTreeWidgetItem& ) const;
 
+  void initUser( VNumber user_id, const QString& );
+  void initFolder( VNumber user_id, const QString& );
+  void initFile( VNumber user_id, const FileInfo& );
+
+  inline bool isValid() const;
+  inline bool isObjectUser() const;
+  inline bool isObjectFolder() const;
+  inline bool isObjectFile() const;
+
+  inline VNumber userId() const;
+  inline VNumber fileInfoId() const;
+  inline FileSizeType fileSize() const;
+  inline const QString& folder() const;
+  inline const QString& filePath() const;
+  inline void setFilePath( const QString& );
+
 private:
-  int m_sizeInColumn;
-  int m_sizeRole;
+  ObjectType m_type;
+  VNumber m_userId;
+  VNumber m_fileInfoId;
+  FileSizeType m_fileSize;
+  QString m_folder;
+  QString m_filePath;
 
 };
 
+
+// Inline functions
+inline bool GuiFileInfoItem::isValid() const { return m_type == ObjectInvalid; }
+inline bool GuiFileInfoItem::isObjectUser() const { return m_type == ObjectUser; }
+inline bool GuiFileInfoItem::isObjectFolder() const { return m_type == ObjectFolder; }
+inline bool GuiFileInfoItem::isObjectFile() const { return m_type == ObjectFile; }
+inline VNumber GuiFileInfoItem::userId() const { return m_userId; }
+inline VNumber GuiFileInfoItem::fileInfoId() const { return m_fileInfoId; }
+inline FileSizeType GuiFileInfoItem::fileSize() const { return m_fileSize; }
+inline const QString& GuiFileInfoItem::folder() const { return m_folder; }
+inline const QString& GuiFileInfoItem::filePath() const { return m_filePath; }
+inline void GuiFileInfoItem::setFilePath( const QString& new_value ) { m_filePath = new_value; }
 
 #endif // BEEBEEP_GUIFILEINFOITEM_H

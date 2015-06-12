@@ -51,6 +51,8 @@ ShowEmoticons= show emoticon images in chat
 ShowMessagesGroupByUsers= show messaged grouped by user or repeat user for every message
 AutoLinkSavedChatByNickname= link the saved chat when nickname are equal
 ShowSendMessageIcon= show the icon for sending message
+ShowOnlyMessagesInDefaultChat = if enabled it will be showed only chat message, user info and history in the default chat (other messages in activity window)
+MessageFilter= filter messages in chat window by its type (do not edit here)
 
 [User]
 LocalColor= your nickname color in chat 

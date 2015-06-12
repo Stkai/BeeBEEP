@@ -26,34 +26,17 @@
 
 
 BuildFileShareList::BuildFileShareList( QObject *parent )
-  : QObject( parent ), m_path( "" ), m_folder( "" ), m_broadcastList( false ),
-    m_shareList(), m_shareSize( 0 ), m_elapsedTime( 0 )
+  : QObject( parent ), m_path( "" ), m_shareFolder( "" ), m_shareBaseFolder( "" ),
+    m_broadcastList( false ), m_shareList(), m_shareSize( 0 ), m_elapsedTime( 0 )
 {
   setObjectName( "BuildFileShareList" );
 }
 
 void BuildFileShareList::setPath( const QString& path_to_share )
 {
-  QFileInfo path_info( path_to_share );
-  if( !path_info.exists() )
-  {
-    qWarning() << "Path" << path_to_share << "not exists and cannot be shared";
-    m_path = "";
-    return;
-  }
-  if( !path_info.isReadable() )
-  {
-    qWarning() << "Path" << path_to_share << "is not readable and cannot be shared";
-    m_path = "";
-    return;
-  }
-
   m_path = path_to_share;
-
-  if( path_info.isDir() )
-    m_folder = path_info.fileName();
-  else
-    m_folder = "";
+  m_shareFolder = "";
+  m_shareBaseFolder = "";
 }
 
 void BuildFileShareList::buildList()
@@ -65,43 +48,91 @@ void BuildFileShareList::buildList()
   m_shareSize = 0;
   QTime elapsed_time;
   elapsed_time.start();
-  addPathToList( m_path );
+  m_shareSize = addPathToList( m_path );
   m_elapsedTime = elapsed_time.elapsed();
+  qSort( m_shareList );
+#ifdef BEEBEEP_DEBUG
+  foreach( FileInfo fi, m_shareList )
+    qDebug() << "Shared:" << fi.path() << "Folder:" << fi.shareFolder();
+#endif
   emit listCompleted();
 }
 
-void BuildFileShareList::addPathToList( const QString& share_path )
+FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
 {
-  QFileInfo file_info( share_path );
-  if( file_info.isSymLink() )
+  QFileInfo path_info( share_path );
+
+  if( !path_info.exists() )
   {
-    // skip symbolic link
-    return;
+    qWarning() << "Path" << share_path << "not exists and cannot be shared";
+    return 0;
   }
-  else if( file_info.isDir() )
+
+  if( !path_info.isReadable() )
+  {
+    qWarning() << "Path" << share_path << "is not readable and cannot be shared";
+    return 0;
+  }
+
+  if( path_info.isSymLink() )
+  {
+    qDebug() << "Path" << share_path << "is a symbolic link and cannot be shared";
+    return 0;
+  }
+
+  if( path_info.isHidden() )
+  {
+    qDebug() << "Path" << share_path << "is hidden and cannot be shared";
+    return 0;
+  }
+
+  if( path_info.isDir() )
   {
     if( share_path.endsWith( "." ) )
     {
       // skip folder . and folder ..
-      return;
+      return 0;
+    }
+
+    FileSizeType path_size = 0;
+
+    QString previous_folder = m_shareFolder;
+    if( share_path != m_path )
+    {
+      m_shareFolder = share_path;
+      if( m_shareFolder.startsWith( m_path ) )
+      {
+        m_shareFolder.remove( 0, m_path.size() );
+        m_shareFolder.prepend( m_shareBaseFolder );
+      }
+    }
+    else
+    {
+      m_shareFolder = path_info.fileName();
+      m_shareBaseFolder = m_shareFolder;
     }
 
     QDir dir_path( share_path );
-    if( dir_path.exists() && dir_path.isReadable() )
+    foreach( QString fp, dir_path.entryList() )
     {
-      foreach( QString fp, dir_path.entryList() )
-        addPathToList( QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
+      path_size += addPathToList( QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
     }
+
+    m_shareFolder = previous_folder;
+    return path_size;
   }
-  else if( file_info.isFile() )
+  else if( path_info.isFile() )
   {
-    FileInfo fi = Protocol::instance().fileInfo( file_info );
-    if( !m_folder.isEmpty() )
-      fi.setFolder( m_folder );
+    FileInfo fi = Protocol::instance().fileInfo( path_info );
+    if( !m_shareFolder.isEmpty() )
+      fi.setShareFolder( m_shareFolder );
     m_shareList.append( fi );
-    m_shareSize += fi.size();
+    return fi.size();
   }
   else
-    qWarning() << "Unable to share path" << share_path;
+  {
+    qWarning() << "Path" << share_path << "is niether a file nor a folder (what is it?) and cannot be shared";
+    return 0;
+  }
 }
 

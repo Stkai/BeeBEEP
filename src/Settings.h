@@ -139,6 +139,8 @@ public:
   inline void setRaiseOnNewMessageArrived( bool );
   inline bool showChatToolbar() const;
   inline void setShowChatToolbar( bool );
+  inline bool showOnlyMessagesInDefaultChat() const;
+  inline void setShowOnlyMessagesInDefaultChat( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline const QSize& avatarIconSize() const;
@@ -337,6 +339,7 @@ private:
   bool m_showTipsOfTheDay;
   bool m_automaticFileName;
   bool m_showChatToolbar;
+  bool m_showOnlyMessagesInDefaultChat;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -447,6 +450,8 @@ inline bool Settings::showUserPhoto() const { return m_showUserPhoto; }
 inline void Settings::setShowUserPhoto( bool new_value ) { m_showUserPhoto = new_value; }
 inline bool Settings::showEmoticons() const { return m_showEmoticons; }
 inline void Settings::setShowEmoticons( bool new_value ) { m_showEmoticons = new_value; }
+inline bool Settings::showOnlyMessagesInDefaultChat() const { return m_showOnlyMessagesInDefaultChat; }
+inline void Settings::setShowOnlyMessagesInDefaultChat( bool new_value ) { m_showOnlyMessagesInDefaultChat = new_value; }
 inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeometry = new_value; }
 inline const QByteArray& Settings::guiGeometry() const { return m_guiGeometry; }
 inline void Settings::setGuiState( const QByteArray& new_value ) { m_guiState = new_value; }

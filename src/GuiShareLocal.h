@@ -26,6 +26,7 @@
 
 #include "ui_GuiShareLocal.h"
 #include "Config.h"
+#include "GuiFileInfoList.h"
 
 
 class GuiShareLocal : public QWidget, private Ui::GuiShareLocalWidget
@@ -71,6 +72,7 @@ private:
   QAction* mp_actRemove;
   QAction* mp_actUpdate;
 
+  GuiFileInfoList m_fileInfoList;
 };
 
 

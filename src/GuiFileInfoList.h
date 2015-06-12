@@ -17,34 +17,37 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: GuiFileInfoItem.h 346 2015-04-05 16:12:37Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUICHATMESSAGE_H
-#define BEEBEEP_GUICHATMESSAGE_H
+#ifndef BEEBEEP_GUIFILEINFOLIST_H
+#define BEEBEEP_GUIFILEINFOLIST_H
 
 #include "Config.h"
-class Chat;
-class ChatMessage;
+#include "GuiFileInfoItem.h"
 class User;
 
 
-class GuiChatMessage
+class GuiFileInfoList
 {
 public:
-  static QString chatToHtml( const Chat&, bool skip_system_message );
-  static QString formatMessage( const User&, const ChatMessage&, VNumber last_user_id );
-  static QString formatSystemMessage( const ChatMessage&, bool force_timestamp );
-  static bool messageCanBeShowedInActivity( const ChatMessage& );
-  static bool messageCanBeShowedInDefaultChat( const ChatMessage& );
+  GuiFileInfoList();
 
-protected:
-  static QString linkify( QString );
-  static QString formatHtmlText( const QString& );
+  void initTree( QTreeWidget* );
 
+  GuiFileInfoItem* userItem( VNumber );
+  GuiFileInfoItem* createUserItem( const User& );
+  GuiFileInfoItem* folderItem( VNumber, const QString& );
+  GuiFileInfoItem* createFolderItem( const User&, const QString& );
+  GuiFileInfoItem* fileItem( VNumber, VNumber );
+  GuiFileInfoItem* createFileItem( const User&, const FileInfo& );
 
+private:
+  QTreeWidget* mp_tree;
 
 };
 
-#endif // BEEBEEP_GUICHATMESSAGE_H
+
+
+#endif // BEEBEEP_GUIFILEINFOLIST_H

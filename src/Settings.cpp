@@ -472,6 +472,7 @@ void Settings::load()
   m_chatMessageFilter = sets->value( "MessageFilter", QBitArray() ).toBitArray();
   if( m_chatMessageFilter.size() < (int)ChatMessage::NumTypes )
     m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
+  m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -643,6 +644,7 @@ void Settings::save()
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
   sets->setValue( "AutoLinkSavedChatByNickname", m_autoLinkSavedChatByNickname );
   sets->setValue( "MessageFilter", m_chatMessageFilter );
+  sets->setValue( "ShowOnlyMessagesInDefaultChat", m_showOnlyMessagesInDefaultChat );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );

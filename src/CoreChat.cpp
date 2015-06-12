@@ -45,7 +45,7 @@ void Core::createDefaultChat()
   c.setName( Settings::instance().defaultChatName() );
   c.addUser( ID_LOCAL_USER );
   QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
-  ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System );
+  ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header );
   c.addMessage( cm );
 
   if( QDate::currentDate().month() == 4 && QDate::currentDate().day() == 6 )
@@ -76,7 +76,7 @@ void Core::createPrivateChat( const User& u )
   Chat c = Protocol::instance().createChat( user_list );
   c.setName( u.path() );
   QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name() );
-  ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System );
+  ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header );
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
 
@@ -116,13 +116,13 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
   if( chat_private_id.isEmpty() )
   {
     sHtmlMsg = tr( "%1 You have created the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), chat_name );
-    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
   }
   else
   {
     c.setPrivateId( chat_private_id );
     sHtmlMsg = tr( "%1 Welcome to the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), chat_name );
-    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
   }
 
   QStringList user_string_list;
@@ -133,7 +133,7 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
   }
 
   sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_string_list.join( ", " ) );
-  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
 
   ChatManager::instance().setChat( c );
 

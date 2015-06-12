@@ -244,7 +244,7 @@ QString Bee::fileTypeToString( Bee::FileType ft )
 
 static const char* ChatMessageTypeToString[] =
 {
-  QT_TRANSLATE_NOOP( "ChatMessage", "Undefined" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "Header" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "System" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "Chat" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "Connection" ),
@@ -258,7 +258,7 @@ static const char* ChatMessageTypeToString[] =
 QString Bee::chatMessageTypeToString( int cmt )
 {
   if( cmt < 0 || cmt > ChatMessage::NumTypes )
-    cmt = ChatMessage::Undefined;
+    cmt = ChatMessage::Other;
   return qApp->translate( "ChatMessage", ChatMessageTypeToString[ cmt ] );
 }
 

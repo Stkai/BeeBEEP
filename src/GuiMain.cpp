@@ -1407,8 +1407,9 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
     return;
   }
 
+  qWarning() << "Unable to download shared file" << file_id << "from user" << user_id;
   QString info_msg = tr( "File is not available for download." );
-  if( !u.isConnected() )
+  if( u.isValid() && !u.isConnected() )
     info_msg += QLatin1String( "\n" ) + tr( "%1 is not connected." ).arg( u.name() );
   info_msg += QLatin1String( "\n" ) + tr( "Please reload the list of shared files." );
 

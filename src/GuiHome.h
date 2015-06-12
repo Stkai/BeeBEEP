@@ -45,9 +45,6 @@ protected slots:
   void openDefaultChat();
   void toggleShowHomeAtStartUp( bool );
 
-private:
-  bool messageCanBeShowed( const ChatMessage& );
-
 };
 
 

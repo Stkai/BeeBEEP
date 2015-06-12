@@ -38,6 +38,7 @@ public:
 
   FileInfo& operator=( const FileInfo& );
   inline bool operator==( const FileInfo& );
+  bool operator<( const FileInfo& ) const;
 
   inline bool isValid() const;
   inline bool isDownload() const;
@@ -51,8 +52,10 @@ public:
   inline void setSuffix( const QString& );
   inline FileSizeType size() const;
   inline void setSize( FileSizeType );
-  inline const QString& folder() const;
-  inline void setFolder( const QString& );
+  inline const QString& shareFolder() const;
+  inline void setShareFolder( const QString& );
+  inline bool isFolder() const;
+  inline void setIsFolder( bool );
   inline const QHostAddress& hostAddress() const;
   inline void setHostAddress( const QHostAddress& );
   inline int hostPort() const;
@@ -70,7 +73,8 @@ private:
   QString m_path;
   QString m_suffix;
   FileSizeType m_size;
-  QString m_folder;
+  QString m_shareFolder;
+  bool m_isFolder;
   QHostAddress m_hostAddress;
   int m_hostPort;
   QByteArray m_password;
@@ -95,8 +99,10 @@ inline const QString& FileInfo::suffix() const { return m_suffix; }
 inline void FileInfo::setSuffix( const QString& new_value ) { m_suffix = new_value; }
 inline FileSizeType FileInfo::size() const { return m_size; }
 inline void FileInfo::setSize( FileSizeType new_value ) { m_size = new_value; }
-inline const QString& FileInfo::folder() const { return m_folder; }
-inline void FileInfo::setFolder( const QString& new_value ) { m_folder = new_value; }
+inline const QString& FileInfo::shareFolder() const { return m_shareFolder; }
+inline void FileInfo::setShareFolder( const QString& new_value ) { m_shareFolder = new_value; }
+inline bool FileInfo::isFolder() const { return m_isFolder; }
+inline void FileInfo::setIsFolder( bool new_value ) { m_isFolder = new_value; }
 inline const QHostAddress& FileInfo::hostAddress() const { return m_hostAddress; }
 inline void FileInfo::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
 inline int FileInfo::hostPort() const { return m_hostPort; }

@@ -37,6 +37,7 @@ public:
 
   User& operator=( const User& );
   inline bool operator==( const User& ) const;
+  bool operator<( const User& ) const;
 
   inline bool isValid() const;
   inline bool isLocal() const;
@@ -72,8 +73,6 @@ public:
 
   static QString nameFromPath( const QString& );
   static QString hostAddressAndPortFromPath( const QString& );
-
-  bool operator<( const User& ) const;
 
 private:
   VNumber m_id;

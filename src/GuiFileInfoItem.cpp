@@ -22,18 +22,64 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiFileInfoItem.h"
+#include "BeeUtils.h"
+#include "FileInfo.h"
+#include "GuiIconProvider.h"
 
 
-GuiFileInfoItem::GuiFileInfoItem( QTreeWidget* parent, int size_in_column, int size_role )
- : QTreeWidgetItem( parent ), m_sizeInColumn( size_in_column ), m_sizeRole( size_role )
+GuiFileInfoItem::GuiFileInfoItem( QTreeWidget *parent )
+ : QTreeWidgetItem( parent ), m_type( ObjectInvalid ), m_userId( ID_INVALID ),
+   m_fileInfoId( ID_INVALID ), m_fileSize( 0 ), m_folder( "" ), m_filePath( "" )
+{
+}
+
+GuiFileInfoItem::GuiFileInfoItem( QTreeWidgetItem *parent )
+ : QTreeWidgetItem( parent ), m_type( ObjectInvalid ), m_userId( ID_INVALID ),
+   m_fileInfoId( ID_INVALID ), m_fileSize( 0 ), m_folder( "" ), m_filePath( "" )
 {
 }
 
 bool GuiFileInfoItem::operator<( const QTreeWidgetItem& item ) const
 {
-  if( m_sizeInColumn == treeWidget()->sortColumn() )
-    return data( m_sizeInColumn, m_sizeRole ).toLongLong() > item.data( m_sizeInColumn, m_sizeRole ).toLongLong();
+  if( treeWidget()->sortColumn() == (int)ColumnSize )
+  {
+    const GuiFileInfoItem& fi_item = (GuiFileInfoItem&)item;
+    return m_fileSize < fi_item.fileSize();
+  }
 
   return QTreeWidgetItem::operator<( item );
 }
 
+void GuiFileInfoItem::initUser( VNumber user_id, const QString& user_name )
+{
+  m_type = ObjectUser;
+  m_userId = user_id;
+  setIcon( ColumnFile, QIcon( ":/images/user.png" ) );
+  setText( ColumnFile, user_name );
+  setText( ColumnSize, "" );
+  setText( ColumnStatus, "" );
+}
+
+void GuiFileInfoItem::initFolder( VNumber user_id, const QString& folder_name )
+{
+  m_type = ObjectFolder;
+  m_userId = user_id;
+  m_folder = folder_name;
+  setIcon( ColumnFile, QIcon( ":/images/folder.png" ) );
+  setText( ColumnFile, folder_name );
+  setText( ColumnSize, "" );
+  setText( ColumnStatus, "" );
+}
+
+void GuiFileInfoItem::initFile( VNumber user_id, const FileInfo& file_info )
+{
+  m_type = ObjectFile;
+  m_userId = user_id;
+  m_fileInfoId = file_info.id();
+  m_fileSize = file_info.size();
+  m_folder = file_info.shareFolder();
+  setIcon( ColumnFile, GuiIconProvider::instance().findIcon( file_info ) );
+  setText( ColumnFile, file_info.name() );
+  setText( ColumnSize, Bee::bytesToString( file_info.size() ) );
+  setText( ColumnStatus, "" );
+}

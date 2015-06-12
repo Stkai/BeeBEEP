@@ -25,9 +25,7 @@
 #define BEEBEEP_GUISHARENETWORK_H
 
 #include "ui_GuiShareNetwork.h"
-#include "Config.h"
-class FileInfo;
-class GuiFileInfoItem;
+#include "GuiFileInfoList.h"
 class User;
 
 
@@ -36,9 +34,6 @@ class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
   Q_OBJECT
 
 public:
-  enum ColumnType { ColumnFile, ColumnSize, ColumnFolder, ColumnUser, ColumnStatus };
-  enum DataType { UserId = Qt::UserRole + 1, FileId, FilePath, FileSize };
-
   explicit GuiShareNetwork( QWidget *parent = 0 );
   void setupToolBar( QToolBar* );
   void initShares();
@@ -67,7 +62,6 @@ protected slots:
 
 protected:
   bool filterPassThrough( VNumber, const FileInfo& );
-  GuiFileInfoItem* findItem( VNumber, VNumber );
   void showStatus( const QString& );
   void loadShares( const User& );
   void showFileTransferCompleted( GuiFileInfoItem*, const QString& );
@@ -82,6 +76,8 @@ private:
   QAction* mp_actReload;
   QAction* mp_actFilter;
   QAction* mp_actDownload;
+
+  GuiFileInfoList m_fileInfoList;
 
 };
 

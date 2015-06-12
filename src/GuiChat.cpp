@@ -138,7 +138,10 @@ void GuiChat::customContextMenu( const QPoint& p )
 
 bool GuiChat::messageCanBeShowed( const ChatMessage& cm )
 {
-  return !Settings::instance().chatMessageFilter().testBit( (int)cm.type() );
+  if( m_chatId == ID_DEFAULT_CHAT && Settings::instance().showOnlyMessagesInDefaultChat() )
+    return GuiChatMessage::messageCanBeShowedInDefaultChat( cm ) && !Settings::instance().chatMessageFilter().testBit( (int)cm.type() );
+  else
+    return !Settings::instance().chatMessageFilter().testBit( (int)cm.type() );
 }
 
 bool GuiChat::historyCanBeShowed()
@@ -150,6 +153,13 @@ void GuiChat::showChatMessageFilterMenu()
 {
   QMenu filter_menu;
   QAction* act;
+
+  act = filter_menu.addAction( tr( "Show only messages in default chat" ), this, SLOT( changeChatMessageFilter() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showOnlyMessagesInDefaultChat() );
+  act->setData( (int)ChatMessage::NumTypes );
+  filter_menu.addSeparator();
+
   for( int i = ChatMessage::System; i < ChatMessage::NumTypes; i++ )
   {
     act = filter_menu.addAction( Bee::chatMessageTypeToString( i ), this, SLOT( changeChatMessageFilter() ) );
@@ -166,6 +176,14 @@ void GuiChat::changeChatMessageFilter()
   QAction* act = qobject_cast<QAction*>(sender());
   if( !act )
     return;
+
+  if( act->data().toInt() == (int)ChatMessage::NumTypes )
+  {
+    Settings::instance().setShowOnlyMessagesInDefaultChat( act->isChecked() );
+    if( m_chatId == ID_DEFAULT_CHAT )
+      reloadChat();
+    return;
+  }
 
   QBitArray filter_array = Settings::instance().chatMessageFilter();
   filter_array.setBit( act->data().toInt(), !act->isChecked() );

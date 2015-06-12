@@ -192,4 +192,33 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
   return html_text;
 }
 
+bool GuiChatMessage::messageCanBeShowedInActivity( const ChatMessage& cm )
+{
+  switch( cm.type() )
+  {
+  case ChatMessage::Header:
+  case ChatMessage::System:
+  case ChatMessage::Chat:
+  case ChatMessage::UserInfo:
+  case ChatMessage::History:
+    return false;
+  default:
+    return true;
+  }
+}
 
+bool GuiChatMessage::messageCanBeShowedInDefaultChat( const ChatMessage& cm )
+{
+  switch( cm.type() )
+  {
+  case ChatMessage::Header:
+  case ChatMessage::System:
+  case ChatMessage::Chat:
+  case ChatMessage::UserStatus:
+  case ChatMessage::UserInfo:
+  case ChatMessage::History:
+    return true;
+  default:
+    return false;
+  }
+}

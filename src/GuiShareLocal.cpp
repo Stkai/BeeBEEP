@@ -22,15 +22,13 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
-#include "GuiIconProvider.h"
-#include "GuiFileInfoItem.h"
 #include "GuiShareLocal.h"
 #include "FileShare.h"
 #include "Settings.h"
 
 
 GuiShareLocal::GuiShareLocal( QWidget *parent )
-  : QWidget(parent)
+  : QWidget(parent), m_fileInfoList()
 {
   setupUi( this );
 
@@ -39,20 +37,12 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   mp_twMyShares->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twMyShares->setRootIsDecorated( false );
   mp_twMyShares->setSortingEnabled( true );
-
-  mp_twLocalShares->setRootIsDecorated( false );
-  mp_twLocalShares->setSelectionMode( QAbstractItemView::NoSelection );
+  mp_twMyShares->setAlternatingRowColors( true );
+  mp_twMyShares->setSortingEnabled( true );
 
   QStringList labels;
   labels << tr( "File" ) << tr( "Size" ) << tr( "Path" );
   mp_twMyShares->setHeaderLabels( labels );
-  mp_twMyShares->setAlternatingRowColors( true );
-  mp_twMyShares->setSortingEnabled( true );
-  labels.clear();
-  labels << tr( "Filename" ) << tr( "Size" ) << tr( "Path" );
-  mp_twLocalShares->setHeaderLabels( labels );
-  mp_twLocalShares->setAlternatingRowColors( true );
-  mp_twLocalShares->setSortingEnabled( true );
 
   QHeaderView* header_view = mp_twMyShares->header();
 #if QT_VERSION >= 0x050000
@@ -66,17 +56,9 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 #endif
   header_view->setSortIndicator( 2, Qt::AscendingOrder );
 
-  header_view = mp_twLocalShares->header();
-#if QT_VERSION >= 0x050000
-  header_view->setSectionResizeMode( 0, QHeaderView::Stretch );
-  header_view->setSectionResizeMode( 1, QHeaderView::ResizeToContents );
-  header_view->setSectionResizeMode( 2, QHeaderView::Stretch );
-#else
-  header_view->setResizeMode( 0, QHeaderView::Stretch );
-  header_view->setResizeMode( 1, QHeaderView::ResizeToContents );
-  header_view->setResizeMode( 2, QHeaderView::Stretch );
-#endif
-  header_view->setSortIndicator( 0, Qt::AscendingOrder );
+  m_fileInfoList.initTree( mp_twLocalShares );
+  mp_twLocalShares->setSelectionMode( QAbstractItemView::NoSelection );
+  mp_twLocalShares->setColumnHidden( GuiFileInfoItem::ColumnStatus, true );
 
   connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMySharesMenu( const QPoint& ) ) );
@@ -204,9 +186,9 @@ void GuiShareLocal::updateFileSharedList()
 
 void GuiShareLocal::loadFileInfoInList()
 {
-  GuiFileInfoItem *item;
   int file_count = 0;
   FileSizeType total_file_size = 0;
+  GuiFileInfoItem* item;
 
   if( !FileShare::instance().local().isEmpty() )
   {
@@ -214,15 +196,8 @@ void GuiShareLocal::loadFileInfoInList()
     {
       file_count++;
       total_file_size += fi.size();
-      item = new GuiFileInfoItem( mp_twLocalShares, 1, Qt::UserRole + 1 );
-      item->setText( 0, fi.name() );
-      item->setIcon( 0, GuiIconProvider::instance().findIcon( fi ) );
-      item->setData( 0, Qt::UserRole + 1, fi.path() );
-      item->setToolTip( 0, tr( "Double click to open %1" ).arg( fi.name() ) );
-      item->setText( 1, Bee::bytesToString( fi.size() ) );
-      item->setData( 1, Qt::UserRole + 1, fi.size() );
-      item->setText( 2, fi.path() );
-      item->setToolTip( 2, tr( "Double click to open %1" ).arg( fi.name() ) );
+      item = m_fileInfoList.createFileItem( Settings::instance().localUser(), fi );
+      item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( fi.name() ) );
     }
   }
   setActionsEnabled( true );

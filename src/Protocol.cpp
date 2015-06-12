@@ -676,9 +676,22 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi )
   FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
   file_info.setName( fi.fileName() );
   file_info.setPath( fi.absoluteFilePath() );
-  file_info.setSuffix( fi.suffix() );
-  file_info.setSize( fi.size() );
-  QString password_key = QString( "%1%2%3%4" ).arg( file_info.id() ).arg( file_info.path() ).arg( QDateTime::currentDateTime().toString() ).arg( Random::number( 111111, 999999 ) );
+  file_info.setShareFolder( fi.absoluteDir().dirName() );
+
+  if( fi.isFile() )
+  {
+    file_info.setSuffix( fi.suffix() );
+    file_info.setSize( fi.size() );
+  }
+  else
+    file_info.setIsFolder( true );
+
+  QString password_key = QString( "%1%2%3%4%5" )
+                            .arg( Random::number( 111111, 999999 ) )
+                            .arg( file_info.id() )
+                            .arg( Random::number( 111111, 999999 ) )
+                            .arg( file_info.path() )
+                            .arg( Random::number( 111111, 999999 ) );
   file_info.setPassword( Settings::instance().hash( password_key ) );
   file_info.setFileHash( fileInfoHash( fi ) );
   return file_info;
@@ -702,7 +715,7 @@ void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& f
     sl << QString::number( fi.id() );
     sl << QString::fromUtf8( fi.password() );
     sl << fi.fileHash();
-    sl << fi.folder();
+    sl << fi.shareFolder();
 
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
   }
@@ -754,7 +767,7 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
         fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
 
       if( !sl_tmp.isEmpty() )
-        fi.setFolder( sl_tmp.takeFirst() );
+        fi.setShareFolder( sl_tmp.takeFirst() );
 
       file_info_list.append( fi );
     }
@@ -834,9 +847,10 @@ QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_inf
   return QString::fromLatin1( ch.result().toHex() );
 }
 
-QString Protocol::newMd5Id() const
+QString Protocol::newMd5Id()
 {
   QStringList sl;
+  sl << QString::number( newId() );
   sl << QString::number( Random::d100() );
   sl << Settings::instance().localUser().path();
   sl << QString::number( Random::d100() );

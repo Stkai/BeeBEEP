@@ -50,11 +50,12 @@ public slots:
   void buildList();
 
 protected:
-  void addPathToList( const QString& );
+  FileSizeType addPathToList( const QString& );
 
 private:
   QString m_path;
-  QString m_folder;
+  QString m_shareFolder;
+  QString m_shareBaseFolder;
   bool m_broadcastList;
   QList<FileInfo> m_shareList;
   FileSizeType m_shareSize;

@@ -32,7 +32,7 @@ class User;
 class ChatMessage
 {
 public:
-  enum Type { Undefined, System, Chat, Connection, UserStatus, UserInfo, FileTransfer, History, Other, NumTypes };
+  enum Type { Header, System, Chat, Connection, UserStatus, UserInfo, FileTransfer, History, Other, NumTypes };
 
   ChatMessage();
   ChatMessage( const ChatMessage& );

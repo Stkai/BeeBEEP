@@ -99,7 +99,8 @@ HEADERS += Avatar.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-    GuiConfig.h
+    GuiConfig.h \
+    GuiFileInfoList.h
 
 SOURCES += Avatar.cpp \
   BeeApplication.cpp \
@@ -175,7 +176,8 @@ SOURCES += Avatar.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp
+  VCard.cpp \
+    GuiFileInfoList.cpp
 
 FORMS += GuiAddUser.ui \
   GuiAskPassword.ui \
