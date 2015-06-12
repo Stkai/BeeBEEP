@@ -84,6 +84,18 @@ FileInfo FileShare::networkFileInfo( VNumber user_id, VNumber file_info_id ) con
   return FileInfo();
 }
 
+QList<FileInfo> FileShare::networkFolder( VNumber user_id, const QString& folder_name ) const
+{
+  QList<FileInfo> folder_file_info;
+  QList<FileInfo> file_info_list = m_network.values( user_id );
+  foreach( FileInfo fi, file_info_list )
+  {
+    if( fi.shareFolder() == folder_name )
+      folder_file_info.append( fi );
+  }
+  return folder_file_info;
+}
+
 FileInfo FileShare::localFileInfo( VNumber file_info_id ) const
 {
   foreach( FileInfo fi, m_local )

@@ -28,13 +28,13 @@
 
 
 FileTransferPeer::FileTransferPeer( QObject *parent )
-  : QObject( parent ), m_transferType( FileTransferPeer::Upload ), m_id( ID_INVALID ), m_fileInfo( 0, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
-    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ), m_messageAuth()
+  : QObject( parent ), m_transferType( FileTransferPeer::Upload ), m_id( ID_INVALID ),
+    m_fileInfo( 0, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
+    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ), m_messageAuth(),
+    m_time( QTime::currentTime() ), m_socketDescriptor( 0 )
 {
   setObjectName( "FileTransferPeer ");
   qDebug() << "Peer created for transfer file";
-
-  m_time = QTime::currentTime();
 
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
   connect( &m_socket, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthenticationRequested( const Message& ) ) );
@@ -76,7 +76,7 @@ void FileTransferPeer::setFileInfo( const FileInfo& fi )
   qDebug() << name() << "init the file" << m_fileInfo.path();
 }
 
-void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
+void FileTransferPeer::startConnection()
 {
   m_state = FileTransferPeer::Request;
   m_bytesTransferred = 0;
@@ -84,10 +84,10 @@ void FileTransferPeer::setConnectionDescriptor( int socket_descriptor )
 
   m_time.start();
 
-  if( socket_descriptor )
+  if( m_socketDescriptor )
   {
-    qDebug() << name() << "set socket descriptor" << socket_descriptor;
-    m_socket.setSocketDescriptor( socket_descriptor );
+    qDebug() << name() << "set socket descriptor" << m_socketDescriptor;
+    m_socket.setSocketDescriptor( m_socketDescriptor );
   }
   else
   {

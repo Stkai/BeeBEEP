@@ -57,8 +57,10 @@ HEADERS += Avatar.h \
   GuiChatList.h \
   GuiChatMessage.h \
   GuiCreateGroup.h \
+  GuiConfig.h \
   GuiEditVCard.h \
   GuiFileInfoItem.h \
+  GuiFileInfoList.h \
   GuiGroupItem.h \
   GuiGroupList.h \
   GuiHome.h \
@@ -98,9 +100,7 @@ HEADERS += Avatar.h \
   UserManager.h \
   UserRecord.h \
   VCard.h \
-  Version.h \
-    GuiConfig.h \
-    GuiFileInfoList.h
+  Version.h
 
 SOURCES += Avatar.cpp \
   BeeApplication.cpp \
@@ -140,6 +140,7 @@ SOURCES += Avatar.cpp \
   GuiCreateGroup.cpp \
   GuiEditVCard.cpp \
   GuiFileInfoItem.cpp \
+  GuiFileInfoList.cpp \
   GuiGroupItem.cpp \
   GuiGroupList.cpp \
   GuiHome.cpp \
@@ -176,8 +177,7 @@ SOURCES += Avatar.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp \
-    GuiFileInfoList.cpp
+  VCard.cpp
 
 FORMS += GuiAddUser.ui \
   GuiAskPassword.ui \

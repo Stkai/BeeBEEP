@@ -83,10 +83,12 @@ private:
 
 };
 
+typedef QPair<VNumber, FileInfo> SharedFileInfo;
 
 // Inline Functions
 inline FileInfo::FileInfo( const FileInfo& fi ) { (void)operator=( fi ); }
 inline bool FileInfo::operator==( const FileInfo& fi ) { return m_id == fi.m_id; }
+inline bool operator==( const FileInfo& fi1, const FileInfo& fi2 ) { return fi1.id() == fi2.id(); }
 inline bool FileInfo::isValid() const { return m_id != ID_INVALID && m_name.size() > 0; }
 inline bool FileInfo::isDownload() const { return m_transferType == FileInfo::Download; }
 inline FileInfo::TransferType FileInfo::transferType() const { return m_transferType; }

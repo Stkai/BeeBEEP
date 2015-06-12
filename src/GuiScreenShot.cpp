@@ -31,6 +31,7 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
 {
   setupUi( this );
   setObjectName( "GuiScreenShot" );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Make a Screenshot" ) ) );
 }
 
 void GuiScreenShot::setupToolBar( QToolBar* bar )

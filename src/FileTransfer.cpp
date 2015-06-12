@@ -154,6 +154,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
   transfer_peer->setConnectionDescriptor( socket_descriptor );
+  transfer_peer->startConnection();
 }
 
 void FileTransfer::checkAuthentication()
@@ -280,7 +281,8 @@ void FileTransfer::peerDestroyed()
   if( m_peers.removeOne( (FileTransferPeer*)sender() ) )
     qDebug() << "Removing peer from list." << m_peers.size() << "peers remained";
 
-  QTimer::singleShot( 0, this, SLOT( startNewDownload() ) );
+  if( isListening() )
+    QTimer::singleShot( 100, this, SLOT( startNewDownload() ) );
 }
 
 bool FileTransfer::cancelTransfer( VNumber peer_id )
@@ -329,6 +331,7 @@ void FileTransfer::startNewDownload()
 #ifdef BEEBEEP_DEBUG
   qDebug() << download_peer->name() << "is removed from queue and started";
 #endif
+  download_peer->removeFromQueue();
 
   emit newPeerConnected( download_peer, 0 );
 }

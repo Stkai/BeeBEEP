@@ -127,6 +127,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
   connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
+  connect( mp_shareNetwork, SIGNAL( downloadSharedFiles( const QList<SharedFileInfo>& ) ), this, SLOT( downloadSharedFiles( const QList<SharedFileInfo>& ) ) );
   connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
@@ -1334,7 +1335,7 @@ void GuiMain::sendFile( const QString& file_path )
   sendFile( User(), file_path );
 }
 
-bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
+bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QString& download_path, bool make_questions )
 {
   if( !Settings::instance().fileTransferIsEnabled() )
   {
@@ -1342,9 +1343,9 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
     return false;
   }
 
-  int msg_result = 1;
+  int msg_result = make_questions ? 0 : 1;
 
-  if( Settings::instance().confirmOnDownloadFile() )
+  if( make_questions && Settings::instance().confirmOnDownloadFile() )
   {
     QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
     msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
@@ -1357,11 +1358,12 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
   {
     // Accepted
     qDebug() << "You accept to download" << fi.name() << "from" << u.path();
-    QFileInfo qfile_info( Settings::instance().downloadDirectory(), fi.name() );
+
+    QFileInfo qfile_info( download_path, fi.name() );
     if( qfile_info.exists() )
     {
       QString file_name;
-      if( Settings::instance().automaticFileName() )
+      if( Settings::instance().automaticFileName() || !make_questions )
       {
         file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath() );
         qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save with" << file_name;
@@ -1380,8 +1382,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
     file_info.setName( qfile_info.fileName() );
     file_info.setPath( qfile_info.absoluteFilePath() );
     file_info.setSuffix( qfile_info.suffix() );
-    mp_core->downloadFile( u, file_info );
-    return true;
+    return mp_core->downloadFile( u, file_info );
   }
   else
   {
@@ -1390,10 +1391,28 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi )
   }
 }
 
+
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
-  if( !askToDownloadFile( u, fi ) )
+  if( !askToDownloadFile( u, fi, Settings::instance().downloadDirectory(), true ) )
     mp_core->refuseToDownloadFile( u, fi );
+}
+
+void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_list )
+{
+  if( share_file_info_list.isEmpty() )
+    return;
+
+  QString download_folder;
+  User u;
+
+  foreach( SharedFileInfo sfi, share_file_info_list )
+  {
+    download_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), sfi.second.shareFolder() ) );
+    u = UserManager::instance().userList().find( sfi.first );
+    if( !askToDownloadFile( u, sfi.second, download_folder, false ) )
+      return;
+  }
 }
 
 void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
@@ -1401,9 +1420,9 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
   User u = UserManager::instance().userList().find( user_id );
   FileInfo file_info = FileShare::instance().networkFileInfo( user_id, file_id );
 
-  if( u.isValid() && file_info.isValid() )
+  if( u.isConnected() && file_info.isValid() )
   {
-    askToDownloadFile( u, file_info );
+    askToDownloadFile( u, file_info, Settings::instance().downloadDirectory(), true );
     return;
   }
 

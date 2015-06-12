@@ -33,7 +33,7 @@ GuiHome::GuiHome( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiHome" );
 
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "%1 Activities" ).arg( Settings::instance().programName() ) ) );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Home" ) ) );
 
   mp_lNote->setText( QString( "<b>%1...</b>" ).arg( tr( "Select a user you want to chat with or" ) ) );
 

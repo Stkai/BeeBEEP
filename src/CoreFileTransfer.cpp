@@ -66,21 +66,37 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
   mp_fileTransfer->validateUser( peer_id, user_connected.id() );
 }
 
-void Core::downloadFile( const User& u, const FileInfo& fi )
+bool Core::downloadFile( const User& u, const FileInfo& fi )
 {
   if( !mp_fileTransfer->isListening() )
   {
     if( !startFileTransferServer() )
-      return;
+      return false;
   }
 
-  QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
+  QString icon_html;
+  QFileInfo file_info( fi.path() );
+  QDir folder_path = file_info.absoluteDir();
+  if( !folder_path.exists() )
+  {
+    if( !folder_path.mkpath( folder_path.dirName() ) )
+    {
+      icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: folder %4 cannot be created." )
+                             .arg( icon_html, fi.name(), u.name(), folder_path.dirName() ),
+                             DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+      return false;
+    }
+  }
+
+  icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
                          .arg( icon_html, fi.name(), u.name() ),
                          DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
 
   qDebug() << "Downloading file" << fi.path() << "from user" << u.path();
   mp_fileTransfer->downloadFile( fi );
+  return true;
 }
 
 void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const FileInfo& fi, const QString& msg )

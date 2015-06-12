@@ -26,10 +26,35 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="spacing">
+   <property name="horizontalSpacing">
     <number>0</number>
    </property>
+   <property name="verticalSpacing">
+    <number>1</number>
+   </property>
    <item row="0" column="0">
+    <widget class="QLabel" name="mp_lTitle">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
     <widget class="QTreeWidget" name="mp_twShares">
      <property name="sortingEnabled">
       <bool>true</bool>
@@ -38,7 +63,7 @@
       <bool>true</bool>
      </property>
      <property name="columnCount">
-      <number>4</number>
+      <number>3</number>
      </property>
      <attribute name="headerStretchLastSection">
       <bool>false</bool>
@@ -56,11 +81,6 @@
      <column>
       <property name="text">
        <string notr="true">3</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string notr="true">4</string>
       </property>
      </column>
     </widget>

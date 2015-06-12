@@ -22,11 +22,12 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiFileInfoList.h"
-#include "FileInfo.h"
+#include "FileShare.h"
 #include "User.h"
 
 
 GuiFileInfoList::GuiFileInfoList()
+ : QObject( 0 ), mp_tree( 0 ), m_selectedFileInfoList()
 {
 }
 
@@ -36,7 +37,7 @@ void GuiFileInfoList::initTree( QTreeWidget* tree_widget )
   mp_tree->setColumnCount( 3 );
 
   QStringList labels;
-  labels << QObject::tr( "File" ) << QObject::tr( "Size" ) << QObject::tr( "Status" );
+  labels << tr( "File" ) << tr( "Size" ) << tr( "Status" );
   mp_tree->setHeaderLabels( labels );
 
   mp_tree->sortItems( GuiFileInfoItem::ColumnFile, Qt::AscendingOrder );
@@ -57,6 +58,19 @@ void GuiFileInfoList::initTree( QTreeWidget* tree_widget )
   hv->setResizeMode( GuiFileInfoItem::ColumnStatus, QHeaderView::ResizeToContents );
 #endif
 
+}
+
+void GuiFileInfoList::clearTree()
+{
+  if( mp_tree->topLevelItemCount() > 0 )
+    mp_tree->clear();
+  m_selectedFileInfoList.clear();
+}
+
+void GuiFileInfoList::clearTreeSelection()
+{
+  mp_tree->clearSelection();
+  m_selectedFileInfoList.clear();
 }
 
 GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
@@ -145,4 +159,72 @@ GuiFileInfoItem* GuiFileInfoList::createFileItem( const User& u, const FileInfo&
   GuiFileInfoItem* item = new GuiFileInfoItem( parent_item );
   item->initFile( u.id(), file_info );
   return item;
+}
+
+void GuiFileInfoList::addFileInfoToList( VNumber user_id, const FileInfo& fi )
+{
+  SharedFileInfo sfi( user_id, fi );
+  if( !m_selectedFileInfoList.contains( sfi ) )
+    m_selectedFileInfoList.append( sfi );
+}
+
+void GuiFileInfoList::addFileInfoListToList( VNumber user_id, const QList<FileInfo>& file_info_list )
+{
+  foreach( FileInfo fi, file_info_list )
+    addFileInfoToList( user_id, fi );
+}
+
+void GuiFileInfoList::addItemToFileInfoList( GuiFileInfoItem* fi_item )
+{
+  if( !fi_item->isObjectFile() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Unable to add a not file item in list:" << fi_item->text( GuiFileInfoItem::ColumnFile );
+#endif
+    return;
+  }
+
+  FileInfo fi = FileShare::instance().networkFileInfo( fi_item->userId(), fi_item->fileInfoId() );
+  if( !fi.isValid() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Unable to add an invalid file info in list:" << fi_item->text( GuiFileInfoItem::ColumnFile );
+#endif
+    return;
+  }
+
+  addFileInfoToList( fi_item->userId(), fi );
+}
+
+void GuiFileInfoList::parseItem( QTreeWidgetItem* tw_item )
+{
+  GuiFileInfoItem* item = (GuiFileInfoItem*)(tw_item);
+
+  if( item->isObjectFile() )
+  {
+    addItemToFileInfoList( item );
+  }
+  else if( item->isObjectFolder() && item->childCount() > 0  )
+  {
+    QList<FileInfo> folder_file_info_list = FileShare::instance().networkFolder( item->userId(), item->folder() );
+    addFileInfoListToList( item->userId(), folder_file_info_list );
+  }
+  else if( item->isObjectUser() )
+  {
+    QList<FileInfo> user_file_info_list = FileShare::instance().fileSharedFromUser( item->userId() );
+    addFileInfoListToList( item->userId(), user_file_info_list );
+  }
+}
+
+int GuiFileInfoList::parseSelectedItems()
+{
+  m_selectedFileInfoList.clear();
+  QList<QTreeWidgetItem*> selected_items = mp_tree->selectedItems();
+  if( selected_items.isEmpty() )
+    return 0;
+
+  foreach( QTreeWidgetItem* item, selected_items )
+    parseItem( item );
+
+  return m_selectedFileInfoList.size();
 }

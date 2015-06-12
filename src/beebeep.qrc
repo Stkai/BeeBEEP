@@ -110,5 +110,6 @@
         <file>images/settings.png</file>
         <file>images/home.png</file>
         <file>images/download-box.png</file>
+        <file>images/remove.png</file>
     </qresource>
 </RCC>

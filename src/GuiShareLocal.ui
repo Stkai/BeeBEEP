@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>452</width>
-    <height>356</height>
+    <height>404</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,9 +30,31 @@
     <number>0</number>
    </property>
    <property name="verticalSpacing">
-    <number>4</number>
+    <number>1</number>
    </property>
    <item row="0" column="0">
+    <widget class="QLabel" name="mp_lTitle">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
     <widget class="QTreeWidget" name="mp_twMyShares">
      <property name="maximumSize">
       <size>
@@ -53,7 +75,7 @@
       <number>3</number>
      </property>
      <attribute name="headerStretchLastSection">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <column>
       <property name="text">
@@ -72,7 +94,7 @@
      </column>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <widget class="QTreeWidget" name="mp_twLocalShares">
      <property name="baseSize">
       <size>

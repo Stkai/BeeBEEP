@@ -40,6 +40,7 @@ public:
   void clearLocal();
   int removePath( const QString& );
   FileInfo networkFileInfo( VNumber user_id, VNumber file_info_id ) const;
+  QList<FileInfo> networkFolder( VNumber user_id, const QString& ) const;
   FileInfo localFileInfo( VNumber file_info_id ) const;
   inline FileSizeType localSize( const QString& ) const;
 

@@ -36,6 +36,7 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   setupUi( this );
 
   setObjectName( "GuiShareNetwork" );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Folder and Files shared in your network" ) ) );
 
   m_fileInfoList.initTree( mp_twShares );
 
@@ -137,7 +138,7 @@ void GuiShareNetwork::enableScanButton()
 void GuiShareNetwork::scanNetwork()
 {
   resetComboUsers();
-  mp_twShares->clear();
+  m_fileInfoList.clearTree();
   mp_actScan->setDisabled( true );
   mp_actReload->setEnabled( true );
   showStatus( tr( "%1 is searching shared files in your network" ).arg( Settings::instance().programName() ) );
@@ -233,24 +234,13 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
   if( !file_info_item->filePath().isEmpty() )
     emit openFileCompleted( QUrl::fromLocalFile( file_info_item->filePath() ) );
   else
-    downloadSelectedItem( item );
-}
-
-void GuiShareNetwork::downloadSelectedItem( QTreeWidgetItem* item )
-{
-  GuiFileInfoItem* file_info_item = (GuiFileInfoItem*)item;
-  if( !file_info_item->isObjectFile() )
-    return;
-  VNumber user_id = file_info_item->userId();
-  VNumber file_id = file_info_item->fileInfoId();
-  emit downloadSharedFile( user_id, file_id );
+    emit downloadSharedFile( file_info_item->userId(), file_info_item->fileInfoId() );
 }
 
 void GuiShareNetwork::updateList()
 {
   setCursor( Qt::WaitCursor );
-  if( mp_twShares->topLevelItemCount() > 0 )
-    mp_twShares->clear();
+  m_fileInfoList.clearTree();
 
   foreach( User u, UserManager::instance().userList().toList() )
     loadShares( u );
@@ -354,29 +344,38 @@ void GuiShareNetwork::showSharesForUser( const User& u )
 
 void GuiShareNetwork::openDownloadMenu( const QPoint& )
 {
-  QList<QTreeWidgetItem*> selected_items = mp_twShares->selectedItems();
-  if( selected_items.isEmpty() )
-    return;
-
-  QString action_text = selected_items.size() == 1 ? tr( "Download single file" ) : tr( "Download %1 selected files" ).arg(  selected_items.size() );
+  int selected_items = m_fileInfoList.parseSelectedItems();
   QMenu menu;
-  menu.addAction( QIcon( ":/images/download.png" ), action_text, this, SLOT( downloadSelected() ) );
-  menu.addSeparator();
-  menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), mp_twShares, SLOT( clearSelection() ) );
+
+  if( selected_items )
+  {
+    QString action_text = selected_items == 1 ? tr( "Download single file" ) : tr( "Download %1 selected files" ).arg( selected_items );
+    menu.addAction( QIcon( ":/images/download.png" ), action_text, this, SLOT( downloadSelected() ) );
+    menu.addSeparator();
+    menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
+    menu.addSeparator();
+  }
+
+  menu.addAction( QIcon( ":/images/add.png" ), tr( "Expand all items" ), mp_twShares, SLOT( expandAll() ) );
+  menu.addAction( QIcon( ":/images/remove.png" ), tr( "Collapse all items" ), mp_twShares, SLOT( collapseAll() ) );
   menu.exec( QCursor::pos() );
 }
 
 void GuiShareNetwork::downloadSelected()
 {
-  QList<QTreeWidgetItem*> selected_items = mp_twShares->selectedItems();
-  if( selected_items.isEmpty() )
+  if( m_fileInfoList.selectedFileInfoList().isEmpty() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select one or more files to download." ) );
-    return;
+    int selected_items = m_fileInfoList.parseSelectedItems();
+    if( selected_items <= 0 )
+    {
+      QMessageBox::information( this, Settings::instance().programName(), tr( "Please select one or more files to download." ) );
+      return;
+    }
   }
 
-  foreach( QTreeWidgetItem* item, selected_items )
-    downloadSelectedItem( item );
-
-  mp_twShares->clearSelection();
+  QList<SharedFileInfo> selected_items = m_fileInfoList.selectedFileInfoList();
+  if( selected_items.size() == 1 )
+    emit downloadSharedFile( selected_items.first().first, selected_items.first().second.id() );
+  else
+    emit downloadSharedFiles( selected_items );
 }

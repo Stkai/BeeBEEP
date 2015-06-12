@@ -42,6 +42,7 @@ public:
 signals:
   void fileShareListRequested();
   void downloadSharedFile( VNumber, VNumber );
+  void downloadSharedFiles( const QList<SharedFileInfo>& );
   void openFileCompleted( const QUrl& );
   void updateStatus( const QString&, int );
 

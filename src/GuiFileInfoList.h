@@ -26,11 +26,14 @@
 
 #include "Config.h"
 #include "GuiFileInfoItem.h"
+#include "FileInfo.h"
 class User;
 
 
-class GuiFileInfoList
+class GuiFileInfoList : public QObject
 {
+  Q_OBJECT
+
 public:
   GuiFileInfoList();
 
@@ -43,11 +46,28 @@ public:
   GuiFileInfoItem* fileItem( VNumber, VNumber );
   GuiFileInfoItem* createFileItem( const User&, const FileInfo& );
 
+  int parseSelectedItems();
+  inline const QList<SharedFileInfo>& selectedFileInfoList() const;
+
+  void clearTree();
+
+public slots:
+  void clearTreeSelection();
+
+protected:
+  void addFileInfoToList( VNumber, const FileInfo& );
+  void addFileInfoListToList( VNumber, const QList<FileInfo>& );
+  void addItemToFileInfoList( GuiFileInfoItem* );
+  void parseItem( QTreeWidgetItem* );
+  FileInfo fileInfoFromNetwork( GuiFileInfoItem* );
+
 private:
   QTreeWidget* mp_tree;
+  QList<SharedFileInfo> m_selectedFileInfoList;
 
 };
 
-
+// Inline Functions
+inline const QList<SharedFileInfo>& GuiFileInfoList::selectedFileInfoList() const { return m_selectedFileInfoList; }
 
 #endif // BEEBEEP_GUIFILEINFOLIST_H

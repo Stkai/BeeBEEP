@@ -35,7 +35,7 @@ class FileTransferPeer : public QObject
 
 public:
   enum TransferType { Download, Upload };
-  enum TransferState { Unknown, Queue, Request, Transferring, Completed, Error, Cancelled };
+  enum TransferState { Unknown, Queue, Starting, Request, Transferring, Completed, Error, Cancelled };
 
   explicit FileTransferPeer( QObject *parent = 0 );
 
@@ -43,13 +43,14 @@ public:
 
   inline void setInQueue();
   inline bool isInQueue() const;
+  inline void removeFromQueue();
 
   inline void setTransferType( TransferType );
   inline bool isDownload() const;
   inline void setId( VNumber );
   inline VNumber id() const;
   inline VNumber userId() const;
-  void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
+  inline void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
   void setFileInfo( const FileInfo& );
   inline const FileInfo& fileInfo() const;
 
@@ -67,6 +68,9 @@ signals:
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
   void fileUploadRequest( VNumber, const QByteArray& );
   void authenticationRequested();
+
+public slots:
+  void startConnection();
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );
@@ -105,14 +109,17 @@ protected:
   Message m_messageAuth; // This class for a ? reason does not emit an authentication signal with arguments
                          // so i have to store message so the parent class can access it
   QTime m_time;
+  int m_socketDescriptor;
 
 };
 
 
 // Inline Functions
 inline QString FileTransferPeer::name() const { return QString( "%1 Peer #%2" ).arg( isDownload() ? "Download" : "Upload " ).arg( m_id ); }
+inline void FileTransferPeer::setConnectionDescriptor( int new_value ) { m_socketDescriptor = new_value; }
 inline void FileTransferPeer::setInQueue() { m_state = FileTransferPeer::Queue; }
 inline bool FileTransferPeer::isInQueue() const { return m_state == FileTransferPeer::Queue; }
+inline void FileTransferPeer::removeFromQueue() { m_state = FileTransferPeer::Starting; }
 inline void FileTransferPeer::setTransferType( FileTransferPeer::TransferType new_value ) { m_transferType = new_value; }
 inline bool FileTransferPeer::isDownload() const { return m_transferType == FileTransferPeer::Download; }
 inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }

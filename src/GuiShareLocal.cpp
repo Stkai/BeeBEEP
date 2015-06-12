@@ -31,8 +31,9 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   : QWidget(parent), m_fileInfoList()
 {
   setupUi( this );
-
   setAcceptDrops( true );
+
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Share your folder or files" ) ) );
 
   mp_twMyShares->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twMyShares->setRootIsDecorated( false );

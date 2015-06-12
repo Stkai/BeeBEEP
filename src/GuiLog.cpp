@@ -29,6 +29,7 @@ GuiLog::GuiLog( QWidget* parent )
 {
   setupUi( this );
   setObjectName( "GuiLog" );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "System Log" ) ) );
 
   m_timer.setInterval( 1000 );
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( refreshLog() ) );

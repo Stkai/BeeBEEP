@@ -26,10 +26,10 @@
 
 
 #include "Config.h"
+#include "FileInfo.h"
 class Core;
 class Chat;
 class ChatMessage;
-class FileInfo;
 class GameInterface;
 class GuiChat;
 class GuiChatList;
@@ -85,6 +85,7 @@ private slots:
   void sendFile( const QString& );
   void downloadFile( const User&, const FileInfo& );
   void downloadSharedFile( VNumber, VNumber );
+  void downloadSharedFiles( const QList<SharedFileInfo>& );
   void selectDownloadDirectory();
   void changeVCard();
   void showUserMenu( VNumber );
@@ -161,7 +162,7 @@ private:
   void updadePluginMenu();
   void updateStatusIcon();
   void sendFile( const User& );
-  bool askToDownloadFile( const User&, const FileInfo& );
+  bool askToDownloadFile( const User&, const FileInfo&, const QString&, bool );
   void setGameInPauseMode();
   void checkAutoStartOnBoot( bool );
   void checkViewActions();
