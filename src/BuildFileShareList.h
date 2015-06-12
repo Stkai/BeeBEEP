@@ -55,7 +55,6 @@ protected:
 private:
   QString m_path;
   QString m_shareFolder;
-  QString m_shareBaseFolder;
   bool m_broadcastList;
   QList<FileInfo> m_shareList;
   FileSizeType m_shareSize;

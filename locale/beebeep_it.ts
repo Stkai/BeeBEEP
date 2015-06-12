@@ -5,7 +5,7 @@
     <name>ChatMessage</name>
     <message>
         <source>Undefined</source>
-        <translation>Indefinito</translation>
+        <translation type="obsolete">Indefinito</translation>
     </message>
     <message>
         <source>System</source>
@@ -38,6 +38,10 @@
     <message>
         <source>Other</source>
         <translation>Altri</translation>
+    </message>
+    <message>
+        <source>Header</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -839,6 +843,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Click to show the settings menu of the chat</source>
         <translation>Premi qui per mostrare il menu delle preferenze delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Show only messages in default chat</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3090,7 +3098,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation>Nome del file</translation>
+        <translation type="obsolete">Nome del file</translation>
     </message>
     <message>
         <source>Size</source>
@@ -3196,11 +3204,11 @@ il file %2 (%3)?</translation>
     <name>GuiShareNetwork</name>
     <message>
         <source>File</source>
-        <translation>Nome del file</translation>
+        <translation type="obsolete">Nome del file</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Dimensione</translation>
+        <translation type="obsolete">Dimensione</translation>
     </message>
     <message>
         <source>User</source>
@@ -3216,7 +3224,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Stato</translation>
+        <translation type="obsolete">Stato</translation>
     </message>
     <message>
         <source>Scan network</source>
@@ -3280,7 +3288,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation>Cartella</translation>
+        <translation type="obsolete">Cartella</translation>
     </message>
     <message>
         <source>Download</source>
@@ -3799,6 +3807,18 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Double click to send a private message</source>
         <translation>Doppio click per inviare un messaggio privato</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Dimensione</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Stato</translation>
     </message>
 </context>
 <context>

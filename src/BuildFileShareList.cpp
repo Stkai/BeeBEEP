@@ -26,8 +26,9 @@
 
 
 BuildFileShareList::BuildFileShareList( QObject *parent )
-  : QObject( parent ), m_path( "" ), m_shareFolder( "" ), m_shareBaseFolder( "" ),
-    m_broadcastList( false ), m_shareList(), m_shareSize( 0 ), m_elapsedTime( 0 )
+  : QObject( parent ), m_path( "" ), m_shareFolder( "" ),
+    m_broadcastList( false ), m_shareList(), m_shareSize( 0 ),
+    m_elapsedTime( 0 )
 {
   setObjectName( "BuildFileShareList" );
 }
@@ -36,7 +37,6 @@ void BuildFileShareList::setPath( const QString& path_to_share )
 {
   m_path = path_to_share;
   m_shareFolder = "";
-  m_shareBaseFolder = "";
 }
 
 void BuildFileShareList::buildList()
@@ -96,21 +96,8 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
 
     FileSizeType path_size = 0;
 
-    QString previous_folder = m_shareFolder;
-    if( share_path != m_path )
-    {
-      m_shareFolder = share_path;
-      if( m_shareFolder.startsWith( m_path ) )
-      {
-        m_shareFolder.remove( 0, m_path.size() );
-        m_shareFolder.prepend( m_shareBaseFolder );
-      }
-    }
-    else
-    {
+    if( share_path == m_path )
       m_shareFolder = path_info.fileName();
-      m_shareBaseFolder = m_shareFolder;
-    }
 
     QDir dir_path( share_path );
     foreach( QString fp, dir_path.entryList() )
@@ -118,7 +105,6 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
       path_size += addPathToList( QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
     }
 
-    m_shareFolder = previous_folder;
     return path_size;
   }
   else if( path_info.isFile() )
