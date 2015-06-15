@@ -578,6 +578,7 @@ void Settings::load()
   sets->beginGroup( "FileShare" );
   m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
   m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
+  m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 200 ).toInt();
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
@@ -733,6 +734,7 @@ void Settings::save()
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->setValue( "MaxSimultaneousDownloads", m_maxSimultaneousDownloads );
+  sets->setValue( "MaxQueuedDownloads", m_maxQueuedDownloads );
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();
 

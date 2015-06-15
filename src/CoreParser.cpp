@@ -184,9 +184,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Group message:" << Protocol::instance().fromMessage( m );
-  qDebug() << "Group name:" << cmd.groupName();
-  qDebug() << "Group id:" << cmd.groupId();
+  qDebug() << "Message for group" << cmd.groupId() << cmd.groupName();
 #endif
 
   if( m.hasFlag( Message::Request ) )

@@ -27,7 +27,7 @@
 
 
 GuiFileInfoList::GuiFileInfoList()
- : QObject( 0 ), mp_tree( 0 ), m_selectedFileInfoList()
+ : QObject( 0 ), mp_tree( 0 ), m_selectedFileInfoList(), m_lastFolderItem( 0 ), m_lastUserItem( 0 )
 {
 }
 
@@ -37,7 +37,7 @@ void GuiFileInfoList::initTree( QTreeWidget* tree_widget )
   mp_tree->setColumnCount( 3 );
 
   QStringList labels;
-  labels << tr( "File" ) << tr( "Size" ) << tr( "Status" );
+  labels << tr( "Shared folders and files" ) << tr( "Size" ) << tr( "Status" );
   mp_tree->setHeaderLabels( labels );
 
   mp_tree->sortItems( GuiFileInfoItem::ColumnFile, Qt::AscendingOrder );
@@ -65,6 +65,8 @@ void GuiFileInfoList::clearTree()
   if( mp_tree->topLevelItemCount() > 0 )
     mp_tree->clear();
   m_selectedFileInfoList.clear();
+  m_lastFolderItem = 0;
+  m_lastUserItem = 0;
 }
 
 void GuiFileInfoList::clearTreeSelection()
@@ -75,13 +77,19 @@ void GuiFileInfoList::clearTreeSelection()
 
 GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
 {
+  if( m_lastUserItem && m_lastUserItem->userId() == user_id )
+    return m_lastUserItem;
+
   GuiFileInfoItem* item;
   QTreeWidgetItemIterator it( mp_tree );
   while( *it )
   {
     item = (GuiFileInfoItem*)(*it);
     if( item->isObjectUser() && item->userId() == user_id )
+    {
+      m_lastUserItem = 0;
       return item;
+    }
     ++it;
   }
   return 0;
@@ -96,13 +104,19 @@ GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
 
 GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& folder_name )
 {
+  if( m_lastFolderItem && m_lastFolderItem->userId() == user_id && m_lastFolderItem->folder() == folder_name )
+    return m_lastFolderItem;
+
   GuiFileInfoItem* item;
   QTreeWidgetItemIterator it( mp_tree );
   while( *it )
   {
     item = (GuiFileInfoItem*)(*it);
     if( item->isObjectFolder() && item->userId() == user_id && item->folder() == folder_name )
+    {
+      m_lastFolderItem = item;
       return item;
+    }
     ++it;
   }
   return 0;

@@ -120,6 +120,7 @@ AddExternalSubnetAutomatically= if true BeeBEEP automatically add external user'
 Active=true
 SetAutomaticFileName= on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it
 MaxSimultaneousDownloads= is the max number of simultaneous downloads in file transfer
+MaxQueuedDownloads = is the max number of downloads can be selected in file sharing at once
 MaxFileShared=32700
 FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456

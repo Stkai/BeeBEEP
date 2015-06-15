@@ -229,6 +229,7 @@ public:
   inline bool confirmOnDownloadFile() const;
   inline void setConfirmOnDownloadFile( bool );
   inline int maxSimultaneousDownloads() const;
+  inline int maxQueuedDownloads() const;
 
   inline QStringList pluginSettings( const QString& ) const;
   inline void setPluginSettings( const QString&, const QStringList& );
@@ -387,6 +388,7 @@ private:
 
   bool m_confirmOnDownloadFile;
   int m_maxSimultaneousDownloads;
+  int m_maxQueuedDownloads;
 
   QStringList m_groupList;
   QStringList m_userPathList;
@@ -533,6 +535,7 @@ inline int Settings::dataStreamVersion( bool in_load_event ) const { return in_l
 inline bool Settings::confirmOnDownloadFile() const { return m_confirmOnDownloadFile; }
 inline void Settings::setConfirmOnDownloadFile( bool new_value ) { m_confirmOnDownloadFile = new_value; }
 inline int Settings::maxSimultaneousDownloads() const { return m_maxSimultaneousDownloads; }
+inline int Settings::maxQueuedDownloads() const { return m_maxQueuedDownloads; }
 inline const QDate& Settings::settingsCreationDate() const { return m_settingsCreationDate; }
 inline void Settings::setGroupList( const QStringList& new_value ) { m_groupList = new_value; }
 inline const QStringList& Settings::groupList() const { return m_groupList; }

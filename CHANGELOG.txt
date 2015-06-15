@@ -4,7 +4,7 @@ BeeBEEP 1.0.2
 - Show homepage with BeeBEEP activities at startup (can be disabled by option)
 - Display chat members in chat window and as selected users in user panel
 - Added "Max simultaneous downloads" option in beebeep.ini configuration file
-- Enabled multiple downloads from file sharing window
+- Enabled multiple files and folder download from file sharing window
 
 BeeBEEP 1.0.1
 - Fixed notification bug with "always on top" option active

@@ -32,7 +32,6 @@
 FileTransfer::FileTransfer( QObject *parent )
   : QTcpServer( parent ), m_files(), m_peers()
 {
-  connect( this, SIGNAL( newPeerConnected( FileTransferPeer* , int ) ), this, SLOT( setupPeer( FileTransferPeer*, int ) ) );
 }
 
 bool FileTransfer::startListener()
@@ -136,13 +135,21 @@ void FileTransfer::incomingConnection( qintptr socket_descriptor )
   upload_peer->setTransferType( FileTransferPeer::Upload );
   upload_peer->setId( Protocol::instance().newId() );
   m_peers.append( upload_peer );
-  emit newPeerConnected( upload_peer, socket_descriptor );
+  setupPeer( upload_peer, socket_descriptor );
 }
 
 void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descriptor )
 {
+  if( transfer_peer->isInQueue() )
+  {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << transfer_peer->name() << "setups connections signal/slots";
+    qDebug() << transfer_peer->name() << "is removed from queue";
+#endif
+    transfer_peer->removeFromQueue();
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << transfer_peer->name() << "starts its connection. Active downloads:" << activeDownloads();
 #endif
   if( !transfer_peer->isDownload() )
   {
@@ -153,8 +160,13 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
+
   transfer_peer->setConnectionDescriptor( socket_descriptor );
-  transfer_peer->startConnection();
+  int delay = Random::number( 1, 3 ) * 1000;
+#ifdef BEEBEEP_DEBUG
+  qDebug() << transfer_peer->name() << "starts in" << delay << "ms";
+#endif
+  QTimer::singleShot( delay, transfer_peer, SLOT( startConnection() ) );
 }
 
 void FileTransfer::checkAuthentication()
@@ -243,18 +255,14 @@ void FileTransfer::downloadFile( const FileInfo& fi )
   download_peer->setTransferType( FileTransferPeer::Download );
   download_peer->setId( Protocol::instance().newId() );
   download_peer->setFileInfo( fi );
+  download_peer->setInQueue();
   m_peers.append( download_peer );
-  if( activeDownloads() < Settings::instance().maxSimultaneousDownloads() )
-  {
-    emit newPeerConnected( download_peer, 0 );
-  }
-  else
-  {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << download_peer->name() << "is scheduled for download";
+  qDebug() << download_peer->name() << "is scheduled for download";
 #endif
-    download_peer->setInQueue();
-  }
+
+  if( activeDownloads() < Settings::instance().maxSimultaneousDownloads() )
+    setupPeer( download_peer, 0 );
 }
 
 FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
@@ -282,7 +290,7 @@ void FileTransfer::peerDestroyed()
     qDebug() << "Removing peer from list." << m_peers.size() << "peers remained";
 
   if( isListening() )
-    QTimer::singleShot( 100, this, SLOT( startNewDownload() ) );
+    startNewDownload();
 }
 
 bool FileTransfer::cancelTransfer( VNumber peer_id )
@@ -331,7 +339,6 @@ void FileTransfer::startNewDownload()
 #ifdef BEEBEEP_DEBUG
   qDebug() << download_peer->name() << "is removed from queue and started";
 #endif
-  download_peer->removeFromQueue();
 
-  emit newPeerConnected( download_peer, 0 );
+  setupPeer( download_peer, 0 );
 }

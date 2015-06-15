@@ -355,14 +355,14 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
     return User();
   }
 
-  int listener_port = sl.at( 0 ).toInt( &ok );
+  int listener_port = sl.takeFirst().toInt( &ok );
   if( !ok )
   {
     qWarning() << "HELLO has an invalid Listener port";
     return User();
   }
 
-  QString user_name = sl.at( 1 );
+  QString user_name = sl.takeFirst();
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
   {
@@ -370,7 +370,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
     return User();
   }
 
-  int user_status = sl.at( 2 ).toInt( &ok );
+  int user_status = sl.takeFirst().toInt( &ok );
   if( !ok )
     user_status = User::Online;
 
@@ -380,28 +380,30 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
     user_status = User::Online;
   }
 
-  QString user_status_description = sl.at( 3 );
+  QString user_status_description = sl.takeFirst();
 
   QString user_account_name = "";
-  if( sl.size() > 4 )
-    user_account_name = sl.at( 4 );
+  if( !sl.isEmpty() )
+    user_account_name = sl.takeFirst();
 
   // skip public_key at 5
+  if( !sl.isEmpty() )
+    sl.takeFirst();
 
   QString user_version = "";
-  if( sl.size() > 6 )
-    user_version = sl.at( 6 );
+  if( !sl.isEmpty() )
+    user_version = sl.takeFirst();
 
   QString user_session_id = "";
-  if( sl.size() > 7 )
-    user_session_id = sl.at( 7 );
+  if( !sl.isEmpty() )
+    user_session_id = sl.takeFirst();
 
   QString user_color( "#000000" );
-  if( sl.size() > 8 )
-    user_color = sl.at( 8 );
+  if( !sl.isEmpty() )
+    user_color = sl.takeFirst();
 
   /* Skip other data */
-  if( sl.size() > 8 )
+  if( !sl.isEmpty() )
     qWarning() << "HELLO message contains more data. Skip it";
 
   /* Create User */

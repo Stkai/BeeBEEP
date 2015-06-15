@@ -1405,6 +1405,23 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
 
   QString download_folder;
   User u;
+  int files_to_download = 0;
+
+  if( share_file_info_list.size() > Settings::instance().maxQueuedDownloads() )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "You cannot download all these files at once. Do you want to download the first %2 files of the list?" )
+                               .arg( Settings::instance().maxQueuedDownloads() ).arg( Settings::instance().maxQueuedDownloads() ),
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+      return;
+  }
+  else if( share_file_info_list.size() > 100 )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                           tr( "Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?" ).arg( share_file_info_list.size() ),
+                           tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+      return;
+  }
 
   foreach( SharedFileInfo sfi, share_file_info_list )
   {
@@ -1412,7 +1429,15 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
     u = UserManager::instance().userList().find( sfi.first );
     if( !askToDownloadFile( u, sfi.second, download_folder, false ) )
       return;
+
+    files_to_download++;
+    showMessage( tr( "%1 is scheduled for download (%2 remains)" ).arg( sfi.second.name() ).arg( (int)(share_file_info_list.size() - files_to_download) ), 0 );
+
+    if( files_to_download > Settings::instance().maxQueuedDownloads() )
+      break;
   }
+
+  showMessage( tr( "%1 files are scheduled for download" ).arg( files_to_download ), 5 );
 }
 
 void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )

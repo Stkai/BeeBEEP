@@ -128,7 +128,7 @@ inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
 inline const Message& FileTransferPeer::messageAuth() const { return m_messageAuth; }
 inline QHostAddress FileTransferPeer::peerAddress() const { return m_socket.peerAddress(); }
-inline bool FileTransferPeer::isActive() const { return m_socket.isConnected(); }
+inline bool FileTransferPeer::isActive() const { return m_state == FileTransferPeer::Starting || m_state == FileTransferPeer::Request || m_socket.isConnected(); }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

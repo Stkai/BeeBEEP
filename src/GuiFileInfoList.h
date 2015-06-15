@@ -64,6 +64,8 @@ protected:
 private:
   QTreeWidget* mp_tree;
   QList<SharedFileInfo> m_selectedFileInfoList;
+  GuiFileInfoItem* m_lastFolderItem;
+  GuiFileInfoItem* m_lastUserItem;
 
 };
 
