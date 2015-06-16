@@ -60,6 +60,8 @@ protected:
 private slots:
   void checkItemClicked( QTreeWidgetItem*, int );
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
+  void removeAllCompleted();
+  void openMenu( const QPoint& );
 
 };
 

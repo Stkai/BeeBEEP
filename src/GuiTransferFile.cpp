@@ -39,6 +39,7 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   setSortingEnabled( false );
   setColumnHidden( ColumnSort, true );
   sortItems( ColumnSort, Qt::DescendingOrder );
+  setContextMenuPolicy( Qt::CustomContextMenu );
 
   QHeaderView* hv = header();
 #if QT_VERSION >= 0x050000
@@ -58,6 +59,7 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMenu( const QPoint& ) ) );
 }
 
 void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
@@ -231,4 +233,16 @@ void GuiTransferFile::checkItemDoubleClicked( QTreeWidgetItem* item, int )
     emit openFileCompleted( url );
     return;
   }
+}
+
+void GuiTransferFile::openMenu( const QPoint& )
+{
+  QMenu menu;
+  menu.addAction( QIcon( ":/images/remove.png" ), tr( "Remove all completed transfer" ), this, SLOT( removeAllCompleted() ) );
+  menu.exec( QCursor::pos() );
+}
+
+void GuiTransferFile::removeAllCompleted()
+{
+  clear();
 }

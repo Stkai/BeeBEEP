@@ -260,6 +260,9 @@ void GuiShareNetwork::updateList()
 
   foreach( User u, UserManager::instance().userList().toList() )
     loadShares( u, true );
+
+  if( m_visibleItems < 100 )
+    mp_twShares->expandAll();
 }
 
 bool GuiShareNetwork::filterPassThrough( VNumber user_id, const FileInfo& fi )
@@ -361,6 +364,8 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& )
   if( selected_items )
   {
     QString action_text = selected_items == 1 ? tr( "Download single file" ) : tr( "Download %1 selected files" ).arg( selected_items );
+    if( selected_items >= Settings::instance().maxQueuedDownloads() )
+      action_text += QString( " (%1 %2)" ).arg( Settings::instance().maxQueuedDownloads() ).arg( tr( "MAX" ) );
     menu.addAction( QIcon( ":/images/download.png" ), action_text, this, SLOT( downloadSelected() ) );
     menu.addSeparator();
     menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
