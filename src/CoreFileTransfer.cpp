@@ -40,7 +40,7 @@ bool Core::startFileTransferServer()
     QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                           DispatchToChat, ChatMessage::FileTransfer );
     qWarning() << "Unable to start file transfer server: bind address/port failed";
     return false;
   }
@@ -66,7 +66,7 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
   mp_fileTransfer->validateUser( peer_id, user_connected.id() );
 }
 
-bool Core::downloadFile( const User& u, const FileInfo& fi )
+bool Core::downloadFile( const User& u, const FileInfo& fi, bool show_message )
 {
   if( !mp_fileTransfer->isListening() )
   {
@@ -81,18 +81,25 @@ bool Core::downloadFile( const User& u, const FileInfo& fi )
   {
     if( !folder_path.mkpath( folder_path.dirName() ) )
     {
-      icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: folder %4 cannot be created." )
+      if( show_message )
+      {
+        icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: folder %4 cannot be created." )
                              .arg( icon_html, fi.name(), u.name(), folder_path.dirName() ),
-                             DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                             DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+      }
+      qWarning() << "Unable to download" << fi.name() << "because folder" << folder_path.dirName() << "can not be created";
       return false;
     }
   }
 
-  icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
+  if( show_message )
+  {
+    icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
                          .arg( icon_html, fi.name(), u.name() ),
-                         DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                         DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+  }
 
   qDebug() << "Downloading file" << fi.path() << "from user" << u.path();
   mp_fileTransfer->downloadFile( fi );
@@ -109,9 +116,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   }
 
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(),
-                         fi.isDownload() ? tr( "from") : tr( "to" ), u.name(), msg ),
-                         DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+  QString sys_msg = QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), u.name(), msg );
 
   FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
   if( peer )
@@ -120,11 +125,12 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     {
       FileShare::instance().addDownloadedFile( fi );
       QString s_open = tr( "Open" );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), QString( "%1 %2 <a href='%3'>%4</a>." )
-                             .arg( icon_html, s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() ),
-                             DispatchToAllChatsWithUser, ChatMessage::FileTransfer);
+      sys_msg += QString( " %1 <a href='%2'>%3</a>." ).arg( s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() );
     }
   }
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+
   emit fileTransferMessage( peer_id, u, fi, msg );
 }
 
@@ -149,7 +155,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
   if( !Settings::instance().fileTransferIsEnabled() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2. File transfer is disabled." ).arg( icon_html, file_path ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                           DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return false;
   }
 
@@ -157,14 +163,14 @@ bool Core::sendFile( const User& u, const QString& file_path )
   if( !file.exists() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                           DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return false;
   }
 
   if( file.isDir() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is a folder. You can share it." ).arg( icon_html, file.fileName() ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                           DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return false;
   }
 
@@ -175,7 +181,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2: %3 is not connected." )
                            .arg( icon_html ).arg( fi.name() ).arg( u.name() ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                           DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return false;
   }
 
@@ -192,7 +198,7 @@ bool Core::sendFile( const User& u, const QString& file_path )
   c->sendMessage( m );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." )
-                       .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                       .arg( icon_html, fi.name(), u.name() ), DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
   return true;
 }
 
@@ -221,7 +227,7 @@ void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
     c->sendMessage( m );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." ).arg( icon_html, fi.name(), u.name() ),
-                         DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                         DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
 }
 
 void Core::fileTransferServerListening()

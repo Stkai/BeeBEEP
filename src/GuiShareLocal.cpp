@@ -33,7 +33,7 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   setupUi( this );
   setAcceptDrops( true );
 
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Share your folder or files" ) ) );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Share your folders or files" ) ) );
 
   mp_twMyShares->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twMyShares->setRootIsDecorated( false );

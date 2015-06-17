@@ -105,6 +105,9 @@ void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const Q
   case DispatchToChat:
     dispatchToChat( cm, chat_id );
     break;
+  case DispatchToDefaultAndPrivateChat:
+    dispatchToDefaultAndPrivateChat( cm, from_user_id );
+    break;
   default:
     qWarning() << "Invalid dispatch type found while dispatching a system message";
     dispatchToChat( cm, ID_DEFAULT_CHAT );
@@ -149,4 +152,12 @@ void Core::dispatchToChat( const ChatMessage& cm, VNumber chat_id )
     }
     ++it;
   }
+}
+
+void Core::dispatchToDefaultAndPrivateChat( const ChatMessage& cm, VNumber user_id )
+{
+  emit chatMessage( ID_DEFAULT_CHAT, cm );
+  Chat c = ChatManager::instance().privateChatForUser( user_id );
+  if( c.isValid() )
+    emit chatMessage( c.id(), cm );
 }

@@ -250,6 +250,15 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
   mp_trayIcon->hide();
 
+  if( mp_dockGroupList->isFloating() && mp_dockGroupList->isVisible() )
+    mp_dockGroupList->hide();
+  if( mp_dockSavedChatList->isFloating() && mp_dockSavedChatList->isVisible() )
+    mp_dockSavedChatList->hide();
+  if( mp_dockChatList->isFloating() && mp_dockChatList->isVisible() )
+    mp_dockChatList->hide();
+  if( mp_dockFileTransfers->isFloating() && mp_dockFileTransfers->isVisible() )
+    mp_dockFileTransfers->hide();
+
   // maybe timer is active
   mp_logView->stopCheckingLog();
 
@@ -817,13 +826,13 @@ void GuiMain::createDockWindows()
   mp_actViewSavedChats->setStatusTip( tr( "Show the list of the saved chats" ) );
   mp_actViewSavedChats->setData( 99 );
 
-  QDockWidget* dock_widget = new QDockWidget( tr( "File Transfers" ), this );
-  dock_widget->setObjectName( "GuiFileTransferDock" );
+  mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
+  mp_dockFileTransfers->setObjectName( "GuiFileTransferDock" );
   mp_fileTransfer = new GuiTransferFile( this );
-  dock_widget->setWidget( mp_fileTransfer );
-  dock_widget->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::BottomDockWidgetArea, dock_widget );
-  mp_actViewFileTransfer = dock_widget->toggleViewAction();
+  mp_dockFileTransfers->setWidget( mp_fileTransfer );
+  mp_dockFileTransfers->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::BottomDockWidgetArea, mp_dockFileTransfers );
+  mp_actViewFileTransfer = mp_dockFileTransfers->toggleViewAction();
   mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
@@ -834,7 +843,7 @@ void GuiMain::createDockWindows()
     mp_dockGroupList->hide();
     mp_dockSavedChatList->hide();
     mp_dockChatList->hide();
-    dock_widget->hide();
+    mp_dockFileTransfers->hide();
   }
 
 }
@@ -1382,7 +1391,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     file_info.setName( qfile_info.fileName() );
     file_info.setPath( qfile_info.absoluteFilePath() );
     file_info.setSuffix( qfile_info.suffix() );
-    return mp_core->downloadFile( u, file_info );
+    return mp_core->downloadFile( u, file_info, make_questions );
   }
   else
   {
@@ -1410,8 +1419,8 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
   if( share_file_info_list.size() > Settings::instance().maxQueuedDownloads() )
   {
     if( QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "You cannot download all these files at once. Do you want to download the first %2 files of the list?" )
-                               .arg( Settings::instance().maxQueuedDownloads() ).arg( Settings::instance().maxQueuedDownloads() ),
+                               tr( "You cannot download all these files at once. Do you want to download the first %1 files of the list?" )
+                               .arg( Settings::instance().maxQueuedDownloads() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
       return;
   }
@@ -1431,7 +1440,6 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
       return;
 
     files_to_download++;
-    showMessage( tr( "%1 is scheduled for download (%2 remains)" ).arg( sfi.second.name() ).arg( (int)(share_file_info_list.size() - files_to_download) ), 0 );
 
     if( files_to_download > Settings::instance().maxQueuedDownloads() )
       break;

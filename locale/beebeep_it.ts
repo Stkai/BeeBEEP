@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Intestazione</translation>
     </message>
 </context>
 <context>
@@ -413,6 +413,10 @@
     <message>
         <source>%1 Contacting %2 host addresses previously saved...</source>
         <translation>%1 Connessione a %2 IP precedentemente salvati...</translation>
+    </message>
+    <message>
+        <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
+        <translation>%1 Impossibile scaricare %2 da %3: la cartella %4 non può essere creata.</translation>
     </message>
 </context>
 <context>
@@ -846,7 +850,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Show only messages in default chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra solo i messaggi nella conversazione con tutti</translation>
     </message>
 </context>
 <context>
@@ -1039,6 +1043,21 @@ Inserisci un nome differente.</translation>
     </message>
 </context>
 <context>
+    <name>GuiFileInfoList</name>
+    <message>
+        <source>Shared folders and files</source>
+        <translation>Cartelle e file condivisi</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Dimensione</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Stato</translation>
+    </message>
+</context>
+<context>
     <name>GuiGroupList</name>
     <message>
         <source>Create group</source>
@@ -1073,7 +1092,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>%1 Activities</source>
-        <translation>Attività di %1</translation>
+        <translation type="obsolete">Attività di %1</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Home</translation>
     </message>
 </context>
 <context>
@@ -1233,6 +1256,13 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Slow</source>
         <translation>Lento</translation>
+    </message>
+</context>
+<context>
+    <name>GuiLog</name>
+    <message>
+        <source>System Log</source>
+        <translation>Log di sistema</translation>
     </message>
 </context>
 <context>
@@ -2557,6 +2587,18 @@ il file %2 (%3)?</translation>
         <source>Show the homepage with %1 activity</source>
         <translation>Mostra la pagina iniziale con le attività di %1</translation>
     </message>
+    <message>
+        <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
+        <translation>Non puoi scaricare tutti questi file in una volta sola. Vuoi scaricare i primi %1 della lista?</translation>
+    </message>
+    <message>
+        <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
+        <translation>Scaricare %1 file è un lavoro dispendioso. Potrebbero volerci molti minuti. Vuoi continuare?</translation>
+    </message>
+    <message>
+        <source>%1 files are scheduled for download</source>
+        <translation>%1 file sono stati messi in coda per essere scaricati</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2933,6 +2975,10 @@ il file %2 (%3)?</translation>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>Abilita l&apos;alta definizione per gestire, per esempio, gli schermi Retina di Apple</translation>
     </message>
+    <message>
+        <source>Make a Screenshot</source>
+        <translation>Fai una foto dello schermo</translation>
+    </message>
 </context>
 <context>
     <name>GuiScreenShotWidget</name>
@@ -3188,6 +3234,10 @@ il file %2 (%3)?</translation>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>Il trasferimento dei file è disabilitato. Apri il menu delle opzioni per abilitarlo.</translation>
     </message>
+    <message>
+        <source>Share your folders or files</source>
+        <translation>Condividi le tue cartelle o file</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
@@ -3314,6 +3364,22 @@ il file %2 (%3)?</translation>
         <source>Please select one or more files to download.</source>
         <translation>Seleziona uno o più file da scaricare.</translation>
     </message>
+    <message>
+        <source>Folder and Files shared in your network</source>
+        <translation>Cartelle e file condivisi nella tua rete</translation>
+    </message>
+    <message>
+        <source>MAX</source>
+        <translation>MAX</translation>
+    </message>
+    <message>
+        <source>Expand all items</source>
+        <translation>Mostra tutti gli elementi</translation>
+    </message>
+    <message>
+        <source>Collapse all items</source>
+        <translation>Raggruppa tutti gli elementi</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareNetworkWidget</name>
@@ -3433,6 +3499,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Do you really want to cancel the transfer of %1?</source>
         <translation>Vuoi realmente interrompere il trasferimento di %1?</translation>
+    </message>
+    <message>
+        <source>Remove all transfers</source>
+        <translation>Cancella tutti i trasferimenti</translation>
     </message>
 </context>
 <context>
@@ -3809,16 +3879,12 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
         <translation>Doppio click per inviare un messaggio privato</translation>
     </message>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Size</source>
-        <translation type="unfinished">Dimensione</translation>
+        <translation type="obsolete">Dimensione</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Stato</translation>
+        <translation type="obsolete">Stato</translation>
     </message>
 </context>
 <context>

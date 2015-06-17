@@ -85,7 +85,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, TransferCompleted, false );
     item->setText( ColumnUser, u.name() );
     item->setIcon( ColumnCancel, QIcon( ":/images/disconnect.png") );
-    item->setText( ColumnSort, QString( "0%1").arg( peer_id ) );
+    item->setText( ColumnSort, QString( "C0%1").arg( peer_id ) );
     sortItems( ColumnSort, Qt::DescendingOrder );
   }
 
@@ -109,24 +109,31 @@ void GuiTransferFile::showIcon( QTreeWidgetItem* item )
 
   QIcon icon;
   QString status_tip;
+  QString sort_string = item->text( ColumnSort );
+  if( sort_string.size() > 0 && sort_string.at( 0 ).isLetter() )
+    sort_string.remove( 0, 1 );
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
     icon = QIcon( ":/images/green-ball.png" );
     status_tip = tr( "Completed" );
+    sort_string.prepend( 'A' );
   }
   else if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {
     icon = QIcon( ":/images/disconnect.png" );
     status_tip = tr( "Cancel Transfer" );
+    sort_string.prepend( 'C' );
   }
   else
   {
     icon = QIcon( ":/images/red-ball.png" );
     status_tip = tr( "Not Completed" );
+    sort_string.prepend( 'B' );
   }
 
   item->setToolTip( ColumnCancel, status_tip );
   item->setIcon( ColumnCancel, icon );
+  item->setText( ColumnSort, sort_string );
 }
 
 QTreeWidgetItem* GuiTransferFile::findItem( VNumber peer_id )
@@ -237,9 +244,12 @@ void GuiTransferFile::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 
 void GuiTransferFile::openMenu( const QPoint& )
 {
-  QMenu menu;
-  menu.addAction( QIcon( ":/images/remove.png" ), tr( "Remove all completed transfer" ), this, SLOT( removeAllCompleted() ) );
-  menu.exec( QCursor::pos() );
+  if( topLevelItemCount() > 0 )
+  {
+    QMenu menu;
+    menu.addAction( QIcon( ":/images/remove.png" ), tr( "Remove all transfers" ), this, SLOT( removeAllCompleted() ) );
+    menu.exec( QCursor::pos() );
+  }
 }
 
 void GuiTransferFile::removeAllCompleted()

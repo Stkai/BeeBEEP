@@ -67,6 +67,7 @@ protected:
   FileInfo fileInfo( VNumber ) const;
   FileInfo fileInfo( const QString& file_absolute_path ) const;
   FileTransferPeer* nextDownloadInQueue() const;
+  int downloadsInQueue() const;
 
 protected slots:
   void startNewDownload();

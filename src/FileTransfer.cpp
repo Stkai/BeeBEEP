@@ -56,6 +56,10 @@ bool FileTransfer::startListener()
   qDebug() << "File Transfer server listen" << serverAddress().toString() << serverPort();
   resetServerFiles();
   emit listening();
+
+  if( downloadsInQueue() > 0  )
+    qDebug() << "File Transfer has" << downloadsInQueue() << "files in queue";
+
   return true;
 }
 
@@ -162,7 +166,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor );
-  int delay = Random::number( 1, 3 ) * 1000;
+  int delay = Random::number( 1, 9 ) * 100;
 #ifdef BEEBEEP_DEBUG
   qDebug() << transfer_peer->name() << "starts in" << delay << "ms";
 #endif
@@ -289,7 +293,7 @@ void FileTransfer::peerDestroyed()
   if( m_peers.removeOne( (FileTransferPeer*)sender() ) )
     qDebug() << "Removing peer from list." << m_peers.size() << "peers remained";
 
-  if( isListening() )
+  if( isListening() && downloadsInQueue() > 0 )
     startNewDownload();
 }
 
@@ -315,6 +319,17 @@ int FileTransfer::activeDownloads() const
       active_downloads++;
   }
   return active_downloads;
+}
+
+int FileTransfer::downloadsInQueue() const
+{
+  int downloads_in_queue = 0;
+  foreach( FileTransferPeer* transfer_peer, m_peers )
+  {
+    if( transfer_peer->isDownload() && transfer_peer->isInQueue() )
+      downloads_in_queue++;
+  }
+  return downloads_in_queue;
 }
 
 FileTransferPeer* FileTransfer::nextDownloadInQueue() const

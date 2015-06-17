@@ -66,6 +66,7 @@ void FileTransferPeer::closeAll()
     m_file.flush();
     m_file.close();
   }
+
   deleteLater();
 }
 
@@ -78,6 +79,12 @@ void FileTransferPeer::setFileInfo( const FileInfo& fi )
 
 void FileTransferPeer::startConnection()
 {
+  if( m_state >= FileTransferPeer::Request )
+  {
+    qDebug() << name() << "is already started and it is in state" << m_state;
+    return;
+  }
+
   m_state = FileTransferPeer::Request;
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;

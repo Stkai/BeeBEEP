@@ -75,7 +75,7 @@ public:
 
   /* CoreFileTransfer */
   bool sendFile( const User&, const QString& file_path );
-  bool downloadFile( const User&, const FileInfo& );
+  bool downloadFile( const User&, const FileInfo&, bool show_message );
   void refuseToDownloadFile( const User&, const FileInfo& );
   bool startFileTransferServer();
   void stopFileTransferServer();
@@ -168,12 +168,13 @@ protected:
   void checkGroupChatAfterUserReconnect( const User& );
 
   /* CoreDispatcher */
-  enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat };
+  enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };
   void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType, ChatMessage::Type );
   void dispatchChatMessageReceived( VNumber from_user_id, const Message& m );
   void dispatchToAllChats( const ChatMessage& );
   void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );
   void dispatchToChat( const ChatMessage&, VNumber chat_id );
+  void dispatchToDefaultAndPrivateChat( const ChatMessage&, VNumber user_id );
 
   /* CoreFileTransfer */
   void sendFileShareListTo( VNumber user_id );

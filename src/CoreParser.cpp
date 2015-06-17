@@ -137,7 +137,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has refused to download %3." )
                            .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), fi.name() ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+                           DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return;
   }
 
@@ -273,7 +273,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
       qDebug() << u.path() << "has shared" << file_info_list.size() << "files";
     }
 
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg, DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
 
     FileShare::instance().addToNetwork( u.id(), file_info_list );
 
