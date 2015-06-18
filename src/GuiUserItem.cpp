@@ -68,14 +68,14 @@ bool GuiUserItem::updateUser( const User& u )
 
   if( !u.isValid() )
   {
-    setData( 0, GuiUserItem::Priority, 10000000 );
+    setData( 0, GuiUserItem::Priority, 100000000 );
     return false;
   }
 
   setData( 0, UserName, u.name() );
 
   bool ok = false;
-  int unread_messages = data( 0, UnreadMessages ).toInt( &ok );
+  int unread_messages = unreadMessages();
   if( !ok )
     unread_messages = 0;
   int user_status = u.status();
@@ -157,11 +157,13 @@ bool GuiUserItem::updateUser( const User& u )
       tool_tip += QString( "(%1)" ).arg( QObject::tr( "Double click to send a private message" ) );
     }
     user_priority = 1000;
-    user_priority += u.isConnected() ? (100*user_status) : 100000;
+    user_priority += u.isConnected() ? (1000*user_status) : 1000000;
   }
 
+
   user_priority -= (unread_messages > 99 ? 99 : unread_messages);
-  user_priority = qMax( 0, user_priority );
+  user_priority -= qMin( (int)messages(), 899 );
+  user_priority = qMax( 1, user_priority );
   setData( 0, GuiUserItem::Priority, user_priority );
   setToolTip( 0, tool_tip );
 

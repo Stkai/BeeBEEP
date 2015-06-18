@@ -1160,6 +1160,8 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   {
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
+    int chat_messages = chat_hidden.chatMessages() + ChatManager::instance().savedChatSize( chat_hidden.name() );
+    mp_userList->setMessages( chat_id, chat_messages );
 
     if( show_alert )
     {

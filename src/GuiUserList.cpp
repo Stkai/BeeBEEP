@@ -104,14 +104,26 @@ GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
   return 0;
 }
 
-void GuiUserList::setUnreadMessages( VNumber chat_id, int n )
+void GuiUserList::setUnreadMessages( VNumber private_chat_id, int n )
 {
-  GuiUserItem* item = itemFromChatId( chat_id );
+  GuiUserItem* item = itemFromChatId( private_chat_id );
   if( !item )
     return;
 
   item->setUnreadMessages( n );
   item->updateUser();
+  sortUsers();
+}
+
+void GuiUserList::setMessages( VNumber private_chat_id, int n )
+{
+  GuiUserItem* item = itemFromChatId( private_chat_id );
+  if( !item )
+    return;
+
+  item->setMessages( n );
+  item->updateUser();
+  sortUsers();
 }
 
 void GuiUserList::setUser( const User& u )

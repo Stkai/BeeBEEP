@@ -32,7 +32,7 @@ class GuiUserItem : public QTreeWidgetItem
 {
 
 public:
-  enum UserDataType { UserId = Qt::UserRole+2, ChatId, UnreadMessages, UserName, Priority };
+  enum UserDataType { UserId = Qt::UserRole+2, ChatId, Messages, UnreadMessages, UserName, Priority };
 
   GuiUserItem( QTreeWidget* );
   GuiUserItem( QTreeWidgetItem* );
@@ -43,6 +43,8 @@ public:
   inline VNumber userId() const;
   inline void setChatId( VNumber );
   inline VNumber chatId() const;
+  inline void setMessages( int );
+  inline int messages() const;
   inline void setUnreadMessages( int );
   inline int unreadMessages() const;
 
@@ -62,6 +64,8 @@ inline void GuiUserItem::setUserId( VNumber user_id ) { setData( 0, UserId, user
 inline VNumber GuiUserItem::userId() const { return Bee::qVariantToVNumber( data( 0, UserId ) ); }
 inline void GuiUserItem::setChatId( VNumber chat_id ) { setData( 0, ChatId, chat_id ); }
 inline VNumber GuiUserItem::chatId() const { return Bee::qVariantToVNumber( data( 0, ChatId ) ); }
+inline void GuiUserItem::setMessages( int num_messages ) { setData( 0, Messages, num_messages ); }
+inline int GuiUserItem::messages() const { return data( 0, Messages ).toInt(); }
 inline void GuiUserItem::setUnreadMessages( int unread_messages ) { setData( 0, UnreadMessages, unread_messages ); }
 inline int GuiUserItem::unreadMessages() const { return data( 0, UnreadMessages ).toInt(); }
 

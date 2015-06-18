@@ -241,3 +241,12 @@ Chat ChatManager::groupChatForUsers( const QList<VNumber>& user_list ) const
   return Chat();
 }
 
+int ChatManager::savedChatSize( const QString& chat_name ) const
+{
+  if( chatHasSavedText( chat_name ) )
+  {
+    return chatSavedText( chat_name ).split( "<br />", QString::SkipEmptyParts ).size();
+  }
+  else
+    return 0;
+}

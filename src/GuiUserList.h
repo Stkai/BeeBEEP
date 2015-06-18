@@ -40,6 +40,7 @@ public:
   void setUser( const User& );
   void removeUser( const User& );
   void setUnreadMessages( VNumber private_chat_id, int );
+  void setMessages( VNumber private_chat_id, int );
   void updateUsers( bool );
 
   void setDefaultChatConnected( bool );

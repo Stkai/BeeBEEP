@@ -60,6 +60,7 @@ public:
   inline bool isLoadHistoryCompleted() const;
   void updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name, bool add_to_new );
   inline const QMap<QString, QString>& constHistoryMap() const;
+  int savedChatSize( const QString& ) const;
 
   void changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path );
 

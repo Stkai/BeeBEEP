@@ -52,6 +52,7 @@ public:
   inline const QDateTime& lastMessageTimestamp() const;
   inline void setLastMessageTimestamp( const QDateTime& );
   inline int unreadMessages() const;
+  int chatMessages() const;
   inline void addUnreadMessage();
   inline void readAllMessages();
   inline const QList<ChatMessage> messages() const;

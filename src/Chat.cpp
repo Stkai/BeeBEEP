@@ -120,3 +120,14 @@ void Chat::clearMessages()
     addMessage( cm_intro );
   }
 }
+
+int Chat::chatMessages() const
+{
+  int chat_messages = 0;
+  foreach( ChatMessage cm, m_messages )
+  {
+    if( cm.type() == ChatMessage::Chat )
+      chat_messages++;
+  }
+  return chat_messages;
+}
