@@ -354,7 +354,7 @@ void GuiMain::initGuiItems()
   }
 
   mp_actBroadcast->setEnabled( enable );
-  mp_userList->setDefaultChatConnected( enable );
+  mp_userList->updateUsers( enable );
 
   updateStatusIcon();
 
@@ -587,18 +587,6 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showUserColor() );
   act->setData( 5 );
 
-  act = mp_menuSettings->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
-  act->setData( 6 );
-
-  act = mp_menuSettings->addAction( tr( "Show the user's picture" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled you can see a picture of the users in the list (if they have)" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserPhoto() );
-  act->setData( 21 );
-
   mp_menuSettings->addSeparator();
 
   mp_actBeepOnNewMessage = mp_menuSettings->addAction( tr( "Enable BEEP alert on new message" ), this, SLOT( settingsChanged() ) );
@@ -627,6 +615,22 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().hasStartOnSystemBoot() );
   act->setData( 16 );
 #endif
+
+  /* User List Menu */
+  mp_menuUserList = new QMenu( tr( "Options" ), this );
+  act = mp_menuUserList->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
+  act->setData( 6 );
+
+  act = mp_menuUserList->addAction( tr( "Show the user's picture" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can see a picture of the users in the list (if they have)" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserPhoto() );
+  act->setData( 21 );
+
+  mp_userList->setMenuSettings( mp_menuUserList );
 
   /* Status Menu */
   mp_menuStatus = new QMenu( tr( "Status" ), this );
@@ -734,6 +738,7 @@ void GuiMain::createMenus()
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actQuit );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
+
 }
 
 void GuiMain::createToolAndMenuBars()

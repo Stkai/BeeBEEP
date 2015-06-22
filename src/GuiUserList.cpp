@@ -29,27 +29,35 @@
 
 
 GuiUserList::GuiUserList( QWidget* parent )
-  : QTreeWidget( parent )
+  : QWidget( parent )
 {
-  setObjectName( "GuiUserList" );
+  setupUi( this );
 
-  setContextMenuPolicy( Qt::CustomContextMenu );
-  setRootIsDecorated( false );
-  setSortingEnabled( true );
-  setColumnCount( 1 );
+  setObjectName( "GuiUserList" );
+  mp_menu = 0;
+
+  mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu );
+  mp_twUsers->setRootIsDecorated( false );
+  mp_twUsers->setSortingEnabled( true );
+  mp_twUsers->setColumnCount( 1 );
 
   m_chatOpened = ID_INVALID;
+  m_coreIsConnected = false;
+  m_filter = "";
 
-  setHeaderHidden( true );
+  mp_twUsers->setHeaderHidden( true );
   resetList();
 
-  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ) );
-  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
+  connect( mp_twUsers, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_twUsers, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
+  connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
+  connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
+  connect( mp_pbSettings, SIGNAL( clicked() ), this, SLOT( showMenuSettings() ) );
 }
 
 void GuiUserList::sortUsers()
 {
-  sortItems( 0, Qt::AscendingOrder );
+  mp_twUsers->sortItems( 0, Qt::AscendingOrder );
 }
 
 QSize GuiUserList::sizeHint() const
@@ -59,27 +67,32 @@ QSize GuiUserList::sizeHint() const
 
 void GuiUserList::resetList()
 {
-  if( topLevelItemCount() > 0 )
-    clear();
+  if( mp_twUsers->topLevelItemCount() > 0 )
+    mp_twUsers->clear();
   if( Settings::instance().showUserPhoto() )
-    setIconSize( Settings::instance().avatarIconSize() );
+    mp_twUsers->setIconSize( Settings::instance().avatarIconSize() );
   else
-    setIconSize( QSize( 16, 16 ) );
+    mp_twUsers->setIconSize( QSize( 16, 16 ) );
 }
 
 void GuiUserList::updateUsers( bool is_connected )
 {
+  m_coreIsConnected = is_connected;
   resetList();
   setUser( Settings::instance().localUser() );
   setDefaultChatConnected( is_connected );
   foreach( User u, UserManager::instance().userList().toList() )
-    setUser( u );
+  {
+    if( m_filter.isEmpty() || u.name().startsWith( m_filter, Qt::CaseInsensitive ) )
+      setUser( u );
+  }
+  setChatOpened( m_chatOpened );
 }
 
 GuiUserItem* GuiUserList::itemFromUserId( VNumber user_id )
 {
   GuiUserItem* item;
-  QTreeWidgetItemIterator it( this );
+  QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
     item = (GuiUserItem*)(*it);
@@ -93,7 +106,7 @@ GuiUserItem* GuiUserList::itemFromUserId( VNumber user_id )
 GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
 {
   GuiUserItem* item;
-  QTreeWidgetItemIterator it( this );
+  QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
     item = (GuiUserItem*)(*it);
@@ -135,7 +148,7 @@ void GuiUserList::setUser( const User& u )
     if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
       return;
 
-    item = new GuiUserItem( this );
+    item = new GuiUserItem( mp_twUsers );
     item->setUserId( u.id() );
     item_is_created = true;
   }
@@ -166,7 +179,7 @@ void GuiUserList::removeUser( const User& u )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Delete user item from GuiUserList";
 #endif
-    QTreeWidgetItem* root_item = invisibleRootItem();
+    QTreeWidgetItem* root_item = mp_twUsers->invisibleRootItem();
     if( root_item )
     {
       root_item->removeChild( (QTreeWidgetItem*)item );
@@ -177,13 +190,13 @@ void GuiUserList::removeUser( const User& u )
 
 void GuiUserList::showUserMenu( const QPoint& p )
 {
-  QTreeWidgetItem* item = itemAt( p );
+  QTreeWidgetItem* item = mp_twUsers->itemAt( p );
   if( !item )
     return;
 
   GuiUserItem* user_item = (GuiUserItem*)item;
   emit menuToShow( user_item->userId() );
-  clearSelection();
+  mp_twUsers->clearSelection();
 }
 
 void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
@@ -193,7 +206,7 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
 
   GuiUserItem* user_item = (GuiUserItem*)item;
   emit chatSelected( user_item->chatId() );
-  clearSelection();
+  mp_twUsers->clearSelection();
 }
 
 void GuiUserList::setDefaultChatConnected( bool yes )
@@ -216,7 +229,7 @@ void GuiUserList::setChatOpened( VNumber chat_id )
     return;
 
   GuiUserItem* item;
-  QTreeWidgetItemIterator it( this );
+  QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
     item = (GuiUserItem*)(*it);
@@ -228,4 +241,24 @@ void GuiUserList::setChatOpened( VNumber chat_id )
       item->setChatOpened( c.hasUser( item->userId() ) );
     ++it;
   }
+}
+
+void GuiUserList::filterText( const QString& txt )
+{
+  QString new_filter = txt.trimmed().toLower();
+  if( m_filter == new_filter )
+    return;
+
+  m_filter = new_filter;
+  updateUsers( m_coreIsConnected );
+}
+
+void GuiUserList::clearFilter()
+{
+  mp_leFilter->setText( "" );
+}
+
+void GuiUserList::showMenuSettings()
+{
+  mp_menu->exec( QCursor::pos() );
 }

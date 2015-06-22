@@ -198,6 +198,7 @@ private:
   QMenu *mp_menuPlugins;
   QMenu *mp_menuView;
   QMenu *mp_menuTrayIcon;
+  QMenu *mp_menuUserList;
 
   QToolBar *mp_barMain;
   QToolBar *mp_barChat;

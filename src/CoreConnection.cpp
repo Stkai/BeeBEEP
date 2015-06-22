@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Avatar.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ColorManager.h"

@@ -58,8 +58,6 @@ MessageFilter= filter messages in chat window by its type (do not edit here)
 LocalColor= your nickname color in chat 
 LocalLastStatus= your status (0 = Offline, 1 = Online, 2 = Busy, 3 = Away)
 LocalLastStatusDescription= your status description
-ShowOnlyOnlineUsers= show only online users in user list
-ShowUserNameColor= show nickname colored
 AutoAwayStatus= set your status away when pc is in idle
 UserAwayTimeout= how many minutes your pc must be in idle to set your status in away
 UseDefaultPassword= use default beebeep password
@@ -97,6 +95,8 @@ MainWindowGeometry= (do not use)
 MainWindowState= (do not use)
 ShowHomeAsDefaultPage= Show home page at start up (force user to click on available users to chat with them)
 ShowTipsOfTheDay=true
+ShowOnlyOnlineUsers= show only online users in user list
+ShowUserNameColor= show nickname colored
 
 [Tools]
 LogToFile=false

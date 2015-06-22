@@ -445,7 +445,7 @@ inline bool Settings::chatUseHtmlTags() const { return m_chatUseHtmlTags; }
 inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClickableLinks = new_value; }
 inline bool Settings::chatUseClickableLinks() const { return m_chatUseClickableLinks; }
 inline void Settings::setChatMessageFilter( const QBitArray& new_value ) { m_chatMessageFilter = new_value; }
-inline const QBitArray&  Settings::chatMessageFilter() const { return m_chatMessageFilter; }
+inline const QBitArray& Settings::chatMessageFilter() const { return m_chatMessageFilter; }
 inline bool Settings::showOnlyOnlineUsers() const { return m_showOnlyOnlineUsers; }
 inline void Settings::setShowOnlyOnlineUsers( bool new_value ) { m_showOnlyOnlineUsers = new_value; }
 inline bool Settings::showUserPhoto() const { return m_showUserPhoto; }

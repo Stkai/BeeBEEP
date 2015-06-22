@@ -25,10 +25,11 @@
 #define BEEBEEP_GUIUSERLIST_H
 
 #include "GuiUserItem.h"
+#include "ui_GuiUserList.h"
 class User;
 
 
-class GuiUserList : public QTreeWidget
+class GuiUserList : public QWidget, private Ui::GuiUserListWidget
 {
   Q_OBJECT
 
@@ -43,9 +44,8 @@ public:
   void setMessages( VNumber private_chat_id, int );
   void updateUsers( bool );
 
-  void setDefaultChatConnected( bool );
-
   void setChatOpened( VNumber );
+  inline void setMenuSettings( QMenu* );
 
 signals:
   void chatSelected( VNumber chat_id );
@@ -54,16 +54,27 @@ signals:
 protected slots:
   void userItemClicked( QTreeWidgetItem*, int );
   void showUserMenu( const QPoint& );
+  void filterText( const QString& );
+  void clearFilter();
+  void showMenuSettings();
 
 private:
   GuiUserItem* itemFromUserId( VNumber );
   GuiUserItem* itemFromChatId( VNumber );
   void sortUsers();
   void resetList();
+  void setDefaultChatConnected( bool );
 
   VNumber m_chatOpened;
+  QString m_filter;
+  bool m_coreIsConnected;
+
+  QMenu *mp_menu;
 
 };
 
+
+// Inline Functions
+inline void GuiUserList::setMenuSettings( QMenu* new_value ) { mp_menu = new_value; }
 
 #endif // BEEBEEP_GUIUSERLIST_H

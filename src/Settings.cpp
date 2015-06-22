@@ -480,9 +480,6 @@ void Settings::load()
   m_localUser.setColor( sets->value( "LocalColor", "#000000" ).toString() );
   m_localUser.setStatus( sets->value( "LocalLastStatus", m_localUser.status() ).toInt() );
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
-  m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
-  m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
@@ -542,6 +539,9 @@ void Settings::load()
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", true ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
+  m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
+  m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
+  m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -651,9 +651,6 @@ void Settings::save()
   sets->setValue( "LocalColor", m_localUser.color() );
   sets->setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
   sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
-  sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
-  sets->setValue( "ShowUserNameColor", m_showUserColor );
-  sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
   sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
@@ -703,6 +700,9 @@ void Settings::save()
   sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->setValue( "ShowHomeAsDefaultPage", m_showHomeAsDefaultPage );
   sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
+  sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
+  sets->setValue( "ShowUserNameColor", m_showUserColor );
+  sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

@@ -194,8 +194,10 @@ FORMS += GuiAddUser.ui \
   GuiSearchUser.ui \
   GuiShareLocal.ui \
   GuiShareNetwork.ui \
+  GuiUserList.ui \
   GuiVCard.ui \
   GuiWizard.ui
+
 
 RESOURCES += beebeep.qrc
 win32: RC_FILE = beebeep.rc
