@@ -83,3 +83,19 @@ void GuiFileInfoItem::initFile( VNumber user_id, const FileInfo& file_info )
   setText( ColumnSize, Bee::bytesToString( file_info.size() ) );
   setText( ColumnStatus, "" );
 }
+
+int GuiFileInfoItem::removeChildren()
+{
+  int children_removed = 0;
+
+  QList<QTreeWidgetItem*> children_list = takeChildren();
+
+  if( children_list.isEmpty() )
+    return children_removed;
+  else
+    children_removed = children_list.size();
+
+  qDeleteAll( children_list );
+
+  return children_removed;
+}

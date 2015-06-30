@@ -58,14 +58,10 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_actReload->setEnabled( false );
 
   /* filter by keywords */
-  label = new QLabel( bar );
-  label->setObjectName( "GuiLabelFilter" );
-  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-  label->setText( QString( "   " ) + tr( "Filter" ) + QString( " " ) );
-  bar->addWidget( label );
   mp_leFilter = new QLineEdit( bar );
   mp_leFilter->setObjectName( "GuiLineEditFilter" );
   mp_leFilter->setMaximumWidth( 140 );
+  mp_leFilter->setPlaceholderText( tr( "Search files" ) );
   bar->addWidget( mp_leFilter );
   connect( mp_leFilter, SIGNAL( textChanged( QString ) ), this, SLOT( enableFilterButton() ) );
   connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( applyFilter() ) );
@@ -162,8 +158,11 @@ void GuiShareNetwork::reloadList()
   QTimer::singleShot( 200, this, SLOT( updateList() ) );
 }
 
-void GuiShareNetwork::loadShares( const User& u, bool force_create )
+void GuiShareNetwork::loadShares( const User& u )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Load shares for user" << u.path();
+#endif
   setCursor( Qt::WaitCursor );
   qApp->processEvents();
 
@@ -172,9 +171,12 @@ void GuiShareNetwork::loadShares( const User& u, bool force_create )
   QTime timer;
   timer.start();
 
+  GuiFileInfoItem *item = m_fileInfoList.userItem( u.id() );
+  if( item )
+    item->removeChildren();
+
   if( u.isConnected() )
   {
-    GuiFileInfoItem *item;
     FileInfo file_info_downloaded;
 
     foreach( FileInfo fi, FileShare::instance().network().values( u.id() ) )
@@ -183,11 +185,7 @@ void GuiShareNetwork::loadShares( const User& u, bool force_create )
       {
         if( filterPassThrough( u.id(), fi ) )
         {
-          if( force_create )
-            item = 0;
-          else
-            item = m_fileInfoList.fileItem( u.id(), fi.id() );
-
+          item = m_fileInfoList.fileItem( u.id(), fi.id() );
           if( !item )
             item = m_fileInfoList.createFileItem( u, fi );
 
@@ -259,7 +257,7 @@ void GuiShareNetwork::updateList()
   m_visibleItems = 0;
 
   foreach( User u, UserManager::instance().userList().toList() )
-    loadShares( u, true );
+    loadShares( u );
 
   if( m_visibleItems < 100 )
     mp_twShares->expandAll();
@@ -341,19 +339,10 @@ void GuiShareNetwork::showStatus( const QString& status_text )
 
 void GuiShareNetwork::showSharesForUser( const User& u )
 {
-  if( FileShare::instance().network().count( u.id() ) > 0 && mp_twShares->topLevelItemCount() == 0 )
-  {
-    QTimer::singleShot( 200, this, SLOT( updateList() ) );
-  }
+  if( mp_comboUsers->findData( u.id() ) == -1 )
+    loadShares( u );
   else
-  {
-    if( mp_comboUsers->findData( u.id() ) == -1 )
-      loadShares( u, false );
-    else
-      mp_actReload->setEnabled( true );
-  }
-
-  showStatus( "" );
+    mp_actReload->setEnabled( true );
 }
 
 void GuiShareNetwork::openDownloadMenu( const QPoint& )

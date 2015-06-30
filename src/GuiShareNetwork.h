@@ -64,7 +64,7 @@ protected slots:
 protected:
   bool filterPassThrough( VNumber, const FileInfo& );
   void showStatus( const QString& );
-  void loadShares( const User&, bool );
+  void loadShares( const User& );
   void showFileTransferCompleted( GuiFileInfoItem*, const QString& );
   void resetComboUsers();
   void downloadSelectedItem( QTreeWidgetItem* );

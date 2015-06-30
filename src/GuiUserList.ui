@@ -32,40 +32,6 @@
    <property name="verticalSpacing">
     <number>0</number>
    </property>
-   <item row="0" column="0">
-    <widget class="QLabel" name="mp_lSearch">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>Filter</string>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="beebeep.qrc">:/images/filter.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="1">
     <widget class="QLineEdit" name="mp_leFilter"/>
    </item>

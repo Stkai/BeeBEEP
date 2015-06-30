@@ -1194,6 +1194,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 void GuiMain::searchUsers()
 {
   GuiSearchUser gsu( this );
+  gsu.setModal( true );
   gsu.loadSettings();
   gsu.show();
   gsu.setFixedSize( gsu.size() );

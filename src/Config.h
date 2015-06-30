@@ -37,8 +37,8 @@
 
 
 // Type definition
-#define VNumber quint64
-#define FileSizeType quint64
+typedef quint64 VNumber;
+typedef quint64 FileSizeType;
 
 // General
 #define DATASTREAM_VERSION_1 QDataStream::Qt_4_0

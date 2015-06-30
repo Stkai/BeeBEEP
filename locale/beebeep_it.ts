@@ -2599,6 +2599,10 @@ il file %2 (%3)?</translation>
         <source>%1 files are scheduled for download</source>
         <translation>%1 file sono stati messi in coda per essere scaricati</translation>
     </message>
+    <message>
+        <source>Options</source>
+        <translation>Opzioni</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3546,6 +3550,17 @@ il file %2 (%3)?</translation>
     <message>
         <source>Change the user color...</source>
         <translation type="obsolete">Cambia il colore dell&apos;utente...</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
+</context>
+<context>
+    <name>GuiUserListWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
     </message>
 </context>
 <context>

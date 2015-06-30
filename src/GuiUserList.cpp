@@ -45,6 +45,8 @@ GuiUserList::GuiUserList( QWidget* parent )
   m_coreIsConnected = false;
   m_filter = "";
 
+  mp_leFilter->setPlaceholderText( tr( "Search" ) );
+
   mp_twUsers->setHeaderHidden( true );
   resetList();
 

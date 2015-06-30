@@ -97,6 +97,9 @@ GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
 
 GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "GuiFileInfoList::createUserItem for user" << u.id() << u.name();
+#endif
   GuiFileInfoItem* item = new GuiFileInfoItem( mp_tree );
   item->initUser( u.id(), u.name() );
   return item;
@@ -124,6 +127,9 @@ GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& fo
 
 GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString& folder_name )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "GuiFileInfoList::createFolderItem for user" << u.id() << folder_name;
+#endif
   GuiFileInfoItem* item;
   if( u.isLocal() )
   {
@@ -136,6 +142,7 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
       parent_item = createUserItem( u );
     item = new GuiFileInfoItem( parent_item );
   }
+
   item->initFolder( u.id(), folder_name );
   return item;
 }
@@ -170,8 +177,13 @@ GuiFileInfoItem* GuiFileInfoList::createFileItem( const User& u, const FileInfo&
       parent_item = createFolderItem( u, file_info.shareFolder() );
   }
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "GuiFileInfoList::createFileItem for user" << u.id() << "in folder" << parent_item->folder() << "with id" << file_info.id();
+#endif
   GuiFileInfoItem* item = new GuiFileInfoItem( parent_item );
   item->initFile( u.id(), file_info );
+
+
   return item;
 }
 

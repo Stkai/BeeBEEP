@@ -55,6 +55,8 @@ public:
   inline const QString& filePath() const;
   inline void setFilePath( const QString& );
 
+  int removeChildren();
+
 private:
   ObjectType m_type;
   VNumber m_userId;
