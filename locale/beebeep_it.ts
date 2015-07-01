@@ -3298,7 +3298,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation>Filtro</translation>
+        <translation type="obsolete">Filtro</translation>
     </message>
     <message>
         <source>Apply Filter</source>
@@ -3383,6 +3383,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Collapse all items</source>
         <translation>Raggruppa tutti gli elementi</translation>
+    </message>
+    <message>
+        <source>Search files</source>
+        <translation type="obsolete">Cerca file</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
     </message>
 </context>
 <context>

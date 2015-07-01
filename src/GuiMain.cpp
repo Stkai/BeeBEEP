@@ -957,7 +957,7 @@ void GuiMain::checkUser( const User& u )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "User" << u.path() << "has updated his info";
 #endif
-  mp_userList->setUser( u );
+  mp_userList->setUser( u, true );
   mp_chat->updateUser( u );
   mp_groupList->updateUser( u );
   if( mp_stackedWidget->currentWidget() == mp_chat )
@@ -2201,7 +2201,7 @@ void GuiMain::changeUserColor( VNumber user_id )
     u.setColor( c.name() );
     UserManager::instance().setUser( u );
     mp_chat->reloadChat();
-    mp_userList->setUser( u );
+    mp_userList->setUser( u, false );
   }
 }
 

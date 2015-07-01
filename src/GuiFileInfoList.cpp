@@ -254,3 +254,18 @@ int GuiFileInfoList::parseSelectedItems()
 
   return m_selectedFileInfoList.size();
 }
+
+int GuiFileInfoList::countFileItems()
+{
+  int count_file_items = 0;
+  GuiFileInfoItem* item;
+  QTreeWidgetItemIterator it( mp_tree );
+  while( *it )
+  {
+    item = (GuiFileInfoItem*)(*it);
+    if( item->isObjectFile() )
+      count_file_items++;
+    ++it;
+  }
+  return count_file_items;
+}

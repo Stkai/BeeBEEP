@@ -256,7 +256,6 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::List ) )
   {
-
     QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
     QString msg;
 

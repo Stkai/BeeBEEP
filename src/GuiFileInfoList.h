@@ -50,6 +50,7 @@ public:
   inline const QList<SharedFileInfo>& selectedFileInfoList() const;
 
   void clearTree();
+  int countFileItems();
 
 public slots:
   void clearTreeSelection();

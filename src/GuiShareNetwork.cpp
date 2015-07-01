@@ -31,7 +31,7 @@
 
 
 GuiShareNetwork::GuiShareNetwork( QWidget *parent )
-  : QWidget( parent ), m_fileInfoList(), m_visibleItems( 0 )
+  : QWidget( parent ), m_fileInfoList()
 {
   setupUi( this );
 
@@ -61,7 +61,7 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_leFilter = new QLineEdit( bar );
   mp_leFilter->setObjectName( "GuiLineEditFilter" );
   mp_leFilter->setMaximumWidth( 140 );
-  mp_leFilter->setPlaceholderText( tr( "Search files" ) );
+  mp_leFilter->setPlaceholderText( tr( "Search" ) );
   bar->addWidget( mp_leFilter );
   connect( mp_leFilter, SIGNAL( textChanged( QString ) ), this, SLOT( enableFilterButton() ) );
   connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( applyFilter() ) );
@@ -106,12 +106,14 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
 
 void GuiShareNetwork::resetComboUsers()
 {
+  mp_comboUsers->blockSignals( true );
   if( mp_comboUsers->count() > 0 )
     mp_comboUsers->clear();
 
   mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
   mp_comboUsers->setCurrentIndex( 0 );
   mp_comboUsers->setEnabled( false );
+  mp_comboUsers->blockSignals( false );
 }
 
 void GuiShareNetwork::initShares()
@@ -123,20 +125,21 @@ void GuiShareNetwork::initShares()
 
 void GuiShareNetwork::enableFilterButton()
 {
-  mp_actFilter->setEnabled( true );
+  if( !mp_actFilter->isEnabled() )
+    mp_actFilter->setEnabled( true );
 }
 
 void GuiShareNetwork::enableScanButton()
 {
-  mp_actScan->setEnabled( true );
+  if( !mp_actScan->isEnabled() )
+    mp_actScan->setEnabled( true );
 }
 
 void GuiShareNetwork::scanNetwork()
 {
   resetComboUsers();
   m_fileInfoList.clearTree();
-  m_visibleItems = 0;
-  mp_actScan->setDisabled( true );
+  mp_actScan->setEnabled( false );
   mp_actReload->setEnabled( true );
   showStatus( tr( "%1 is searching shared files in your network" ).arg( Settings::instance().programName() ) );
   emit fileShareListRequested();
@@ -145,7 +148,7 @@ void GuiShareNetwork::scanNetwork()
 
 void GuiShareNetwork::applyFilter()
 {
-  mp_actFilter->setDisabled( true );
+  mp_actFilter->setEnabled( false );
   if( mp_actReload->isEnabled() )
     reloadList();
   else
@@ -154,17 +157,14 @@ void GuiShareNetwork::applyFilter()
 
 void GuiShareNetwork::reloadList()
 {
-  mp_actReload->setDisabled( true );
+  mp_actReload->setEnabled( false );
   QTimer::singleShot( 200, this, SLOT( updateList() ) );
 }
 
 void GuiShareNetwork::loadShares( const User& u )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Load shares for user" << u.path();
-#endif
   setCursor( Qt::WaitCursor );
-  qApp->processEvents();
+  QApplication::processEvents();
 
   int file_shared = 0;
   FileSizeType share_size = 0;
@@ -199,7 +199,6 @@ void GuiShareNetwork::loadShares( const User& u )
             item->setFilePath( "" );
             item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
           }
-          m_visibleItems++;
         }
 
         file_shared++;
@@ -214,6 +213,7 @@ void GuiShareNetwork::loadShares( const User& u )
     }
   }
 
+  mp_comboUsers->blockSignals( true );
   if( file_shared > 0 )
   {
     if( mp_comboUsers->findData( u.id() ) == -1 )
@@ -231,7 +231,13 @@ void GuiShareNetwork::loadShares( const User& u )
   }
 
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 1 );
-  showStatus( tr( "%1 has shared %2 files (%3)" ).arg( u.name() ).arg( file_shared ).arg( Bee::bytesToString( share_size ) ) );
+  mp_comboUsers->blockSignals( false );
+
+  QString status_msg = tr( "%1 has shared %2 files (%3)" ).arg( u.name() ).arg( file_shared ).arg( Bee::bytesToString( share_size ) );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( status_msg );
+#endif
+  showStatus( status_msg );
   setCursor( Qt::ArrowCursor );
 }
 
@@ -254,12 +260,9 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 void GuiShareNetwork::updateList()
 {
   m_fileInfoList.clearTree();
-  m_visibleItems = 0;
-
   foreach( User u, UserManager::instance().userList().toList() )
     loadShares( u );
-
-  if( m_visibleItems < 100 )
+  if( m_fileInfoList.countFileItems() < 100 )
     mp_twShares->expandAll();
 }
 
@@ -322,10 +325,11 @@ void GuiShareNetwork::showStatus( const QString& status_text )
   if( status_text.isEmpty() )
   {
     int share_size = FileShare::instance().network().size();
+    int file_items = m_fileInfoList.countFileItems();
 
     QString status_msg;
-    if( share_size != m_visibleItems )
-      status_msg = tr( "%1 files are shown in list (%2 are available in your network)" ).arg( m_visibleItems ).arg( share_size );
+    if( share_size != file_items )
+      status_msg = tr( "%1 files are shown in list (%2 are available in your network)" ).arg( file_items ).arg( share_size );
     else
       status_msg = tr( "%1 files shared in your network" ).arg( share_size );
 
@@ -340,7 +344,11 @@ void GuiShareNetwork::showStatus( const QString& status_text )
 void GuiShareNetwork::showSharesForUser( const User& u )
 {
   if( mp_comboUsers->findData( u.id() ) == -1 )
+  {
     loadShares( u );
+    if( m_fileInfoList.countFileItems() < 100 )
+      mp_twShares->expandAll();
+  }
   else
     mp_actReload->setEnabled( true );
 }

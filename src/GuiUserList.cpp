@@ -81,14 +81,15 @@ void GuiUserList::updateUsers( bool is_connected )
 {
   m_coreIsConnected = is_connected;
   resetList();
-  setUser( Settings::instance().localUser() );
+  setUser( Settings::instance().localUser(), false );
   setDefaultChatConnected( is_connected );
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( m_filter.isEmpty() || u.name().startsWith( m_filter, Qt::CaseInsensitive ) )
-      setUser( u );
+      setUser( u, false );
   }
   setChatOpened( m_chatOpened );
+  sortUsers();
 }
 
 GuiUserItem* GuiUserList::itemFromUserId( VNumber user_id )
@@ -141,7 +142,7 @@ void GuiUserList::setMessages( VNumber private_chat_id, int n )
   sortUsers();
 }
 
-void GuiUserList::setUser( const User& u )
+void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
   bool item_is_created = false;
@@ -168,9 +169,13 @@ void GuiUserList::setUser( const User& u )
   item->setUnreadMessages( c.unreadMessages() );
   item->updateUser( u );
 
-  if( item_is_created )
-    item->setChatOpened( m_chatOpened );
-  sortUsers();
+  if( sort_and_check_opened )
+  {
+    if( item_is_created )
+      setChatOpened( m_chatOpened );
+
+    sortUsers();
+  }
 }
 
 void GuiUserList::removeUser( const User& u )

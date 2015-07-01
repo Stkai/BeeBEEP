@@ -79,7 +79,6 @@ private:
   QAction* mp_actDownload;
 
   GuiFileInfoList m_fileInfoList;
-  int m_visibleItems;
 
 };
 
