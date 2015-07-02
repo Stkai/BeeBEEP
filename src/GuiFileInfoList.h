@@ -50,7 +50,8 @@ public:
   inline const QList<SharedFileInfo>& selectedFileInfoList() const;
 
   void clearTree();
-  int countFileItems();
+  int countFileItems() const;
+  inline bool isEmpty() const;
 
 public slots:
   void clearTreeSelection();
@@ -72,5 +73,6 @@ private:
 
 // Inline Functions
 inline const QList<SharedFileInfo>& GuiFileInfoList::selectedFileInfoList() const { return m_selectedFileInfoList; }
+inline bool GuiFileInfoList::isEmpty() const { return mp_tree->topLevelItemCount() == 0; }
 
 #endif // BEEBEEP_GUIFILEINFOLIST_H

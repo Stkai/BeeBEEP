@@ -3298,15 +3298,15 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="obsolete">Filtro</translation>
+        <translation>Filtro</translation>
     </message>
     <message>
         <source>Apply Filter</source>
-        <translation>Applica il filtro</translation>
+        <translation type="obsolete">Applica il filtro</translation>
     </message>
     <message>
         <source>Filter the files in list using some keywords</source>
-        <translation>Filtra i file condivisi usando alcune parole chiavi</translation>
+        <translation type="obsolete">Filtra i file condivisi usando alcune parole chiavi</translation>
     </message>
     <message>
         <source>File Type</source>

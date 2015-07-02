@@ -53,7 +53,7 @@ public slots:
 
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
-  void enableFilterButton();
+  void filterByText( const QString& );
   void enableScanButton();
   void scanNetwork();
   void applyFilter();
@@ -75,7 +75,6 @@ private:
   QComboBox* mp_comboFileType;
   QAction* mp_actScan;
   QAction* mp_actReload;
-  QAction* mp_actFilter;
   QAction* mp_actDownload;
 
   GuiFileInfoList m_fileInfoList;

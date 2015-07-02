@@ -255,7 +255,7 @@ int GuiFileInfoList::parseSelectedItems()
   return m_selectedFileInfoList.size();
 }
 
-int GuiFileInfoList::countFileItems()
+int GuiFileInfoList::countFileItems() const
 {
   int count_file_items = 0;
   GuiFileInfoItem* item;

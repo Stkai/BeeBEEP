@@ -57,17 +57,22 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_actReload->setStatusTip( tr( "Clear and reload list" ) );
   mp_actReload->setEnabled( false );
 
+  /* Download button */
+  mp_actDownload = bar->addAction( QIcon( ":/images/download-box.png" ), tr( "Download" ), this, SLOT( downloadSelected() ) );
+  mp_actDownload->setStatusTip( tr( "Download single or multiple files simultaneously" ) );
+
   /* filter by keywords */
+  label = new QLabel( bar );
+  label->setObjectName( "GuiLabelFilterText" );
+  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  label->setText( QString( "   " ) + tr( "Filter" ) + QString( " " ) );
+  bar->addWidget( label );
   mp_leFilter = new QLineEdit( bar );
   mp_leFilter->setObjectName( "GuiLineEditFilter" );
   mp_leFilter->setMaximumWidth( 140 );
   mp_leFilter->setPlaceholderText( tr( "Search" ) );
   bar->addWidget( mp_leFilter );
-  connect( mp_leFilter, SIGNAL( textChanged( QString ) ), this, SLOT( enableFilterButton() ) );
-  connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( applyFilter() ) );
-  mp_actFilter = bar->addAction( QIcon( ":/images/filter.png" ), tr( "Apply Filter" ), this, SLOT( applyFilter() ) );
-  mp_actFilter->setStatusTip( tr( "Filter the files in list using some keywords" ) );
-  mp_actFilter->setEnabled( false );
+  connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterByText( const QString& ) ) );
 
   /* filter by file type */
   label = new QLabel( bar );
@@ -98,10 +103,6 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   bar->addWidget( mp_comboUsers );
   connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
 
-  /* Download button */
-  bar->addSeparator();
-  mp_actDownload = bar->addAction( QIcon( ":/images/download-box.png" ), tr( "Download" ), this, SLOT( downloadSelected() ) );
-  mp_actDownload->setStatusTip( tr( "Download single or multiple files simultaneously" ) );
 }
 
 void GuiShareNetwork::resetComboUsers()
@@ -123,12 +124,6 @@ void GuiShareNetwork::initShares()
   mp_leFilter->setFocus();
 }
 
-void GuiShareNetwork::enableFilterButton()
-{
-  if( !mp_actFilter->isEnabled() )
-    mp_actFilter->setEnabled( true );
-}
-
 void GuiShareNetwork::enableScanButton()
 {
   if( !mp_actScan->isEnabled() )
@@ -148,17 +143,16 @@ void GuiShareNetwork::scanNetwork()
 
 void GuiShareNetwork::applyFilter()
 {
-  mp_actFilter->setEnabled( false );
   if( mp_actReload->isEnabled() )
     reloadList();
   else
-    QTimer::singleShot( 200, this, SLOT( updateList() ) );
+    updateList();
 }
 
 void GuiShareNetwork::reloadList()
 {
   mp_actReload->setEnabled( false );
-  QTimer::singleShot( 200, this, SLOT( updateList() ) );
+  updateList();
 }
 
 void GuiShareNetwork::loadShares( const User& u )
@@ -232,6 +226,7 @@ void GuiShareNetwork::loadShares( const User& u )
 
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 1 );
   mp_comboUsers->blockSignals( false );
+  mp_actDownload->setEnabled( !m_fileInfoList.isEmpty() );
 
   QString status_msg = tr( "%1 has shared %2 files (%3)" ).arg( u.name() ).arg( file_shared ).arg( Bee::bytesToString( share_size ) );
 #ifdef BEEBEEP_DEBUG
@@ -262,6 +257,7 @@ void GuiShareNetwork::updateList()
   m_fileInfoList.clearTree();
   foreach( User u, UserManager::instance().userList().toList() )
     loadShares( u );
+
   if( m_fileInfoList.countFileItems() < 100 )
     mp_twShares->expandAll();
 }
@@ -391,4 +387,9 @@ void GuiShareNetwork::downloadSelected()
     emit downloadSharedFile( selected_items.first().first, selected_items.first().second.id() );
   else
     emit downloadSharedFiles( selected_items );
+}
+
+void GuiShareNetwork::filterByText( const QString& )
+{
+  updateList();
 }
