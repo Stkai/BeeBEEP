@@ -35,8 +35,9 @@
   typedef int qintptr;
 #endif
 
-
-// Type definition
+// Type definition: define doesn't always work in signal slot mechanish
+//#define VNumber quint64
+//#define FileSizeType quint64
 typedef quint64 VNumber;
 typedef quint64 FileSizeType;
 

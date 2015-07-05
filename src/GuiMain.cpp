@@ -1344,7 +1344,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
   else
     user_selected = u;
 
-  return mp_core->sendFile( user_selected, file_path );
+  return mp_core->sendFile( user_selected.id(), file_path );
 }
 
 void GuiMain::sendFile( const QString& file_path )
@@ -1399,7 +1399,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     file_info.setName( qfile_info.fileName() );
     file_info.setPath( qfile_info.absoluteFilePath() );
     file_info.setSuffix( qfile_info.suffix() );
-    return mp_core->downloadFile( u, file_info, make_questions );
+    return mp_core->downloadFile( u.id(), file_info, make_questions );
   }
   else
   {
@@ -1412,7 +1412,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
   if( !askToDownloadFile( u, fi, Settings::instance().downloadDirectory(), true ) )
-    mp_core->refuseToDownloadFile( u, fi );
+    mp_core->refuseToDownloadFile( u.id(), fi );
 }
 
 void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_list )

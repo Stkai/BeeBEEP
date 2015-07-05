@@ -66,7 +66,7 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
   mp_fileTransfer->validateUser( peer_id, user_connected.id() );
 }
 
-bool Core::downloadFile( const User& u, const FileInfo& fi, bool show_message )
+bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message )
 {
   if( !mp_fileTransfer->isListening() )
   {
@@ -74,7 +74,24 @@ bool Core::downloadFile( const User& u, const FileInfo& fi, bool show_message )
       return false;
   }
 
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to find user" << user_id << "to download file" << fi.name();
+    return false;
+  }
+
   QString icon_html;
+
+  if( !u.isConnected() )
+  {
+    icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: user is offline." ).arg( icon_html, fi.name(), u.name() ),
+                             DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+    qWarning() << "Unable to download" << fi.name() << "from" << u.path() << "because user is offline";
+    return false;
+  }
+
   QFileInfo file_info( fi.path() );
   QDir folder_path = file_info.absoluteDir();
   if( !folder_path.exists() )
@@ -145,12 +162,33 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
   emit fileTransferProgress( peer_id, u, fi, bytes );
 }
 
-bool Core::sendFile( const User& u, const QString& file_path )
+bool Core::sendFile( VNumber user_id, const QString& file_path )
 {
-  if( u.isLocal() )
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to find user" << user_id << "to send file" << file_path;
     return false;
+  }
 
-  QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+  if( u.isLocal() )
+  {
+    qWarning() << "Unable to send file to local user";
+    return false;
+  }
+
+  QString icon_html;
+
+  if( !u.isConnected() )
+  {
+    icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, u.name() ),
+                             DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+    qWarning() << "Unable to send" << file_path << "to" << u.path() << "because user is offline";
+    return false;
+  }
+
+  icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
 
   if( !Settings::instance().fileTransferIsEnabled() )
   {
@@ -208,8 +246,16 @@ void Core::cancelFileTransfer( VNumber peer_id )
   mp_fileTransfer->cancelTransfer( peer_id );
 }
 
-void Core::refuseToDownloadFile( const User& u, const FileInfo& fi )
+void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
 {
+  User u = UserManager::instance().userList().find( user_id );
+
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to find user" << user_id << "to refuse file" << fi.name();
+    return;
+  }
+
   qDebug() << "Download refused:" << fi.name() << "from" << u.path();
 
   QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );

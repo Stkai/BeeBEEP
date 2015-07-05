@@ -150,7 +150,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
   if( !Settings::instance().fileTransferIsEnabled() )
   {
-    refuseToDownloadFile( u, fi );
+    refuseToDownloadFile( u.id(), fi );
     return;
   }
 

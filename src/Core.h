@@ -74,9 +74,9 @@ public:
   bool removeChat( VNumber );
 
   /* CoreFileTransfer */
-  bool sendFile( const User&, const QString& file_path );
-  bool downloadFile( const User&, const FileInfo&, bool show_message );
-  void refuseToDownloadFile( const User&, const FileInfo& );
+  bool sendFile( VNumber, const QString& file_path );
+  bool downloadFile( VNumber, const FileInfo&, bool show_message );
+  void refuseToDownloadFile( VNumber, const FileInfo& );
   bool startFileTransferServer();
   void stopFileTransferServer();
   void addPathToShare( const QString&, bool );
