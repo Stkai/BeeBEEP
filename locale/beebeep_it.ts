@@ -418,6 +418,14 @@
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
         <translation>%1 Impossibile scaricare %2 da %3: la cartella %4 non può essere creata.</translation>
     </message>
+    <message>
+        <source>%1 Unable to download %2 from %3: user is offline.</source>
+        <translation>%1 Impossibile scaricare %2 da %3: l&apos;utente non è in linea.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: user is offline.</source>
+        <translation>%1 Impossibile inviare %2 a %3: l&apos;utente non è in linea.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -851,6 +859,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Show only messages in default chat</source>
         <translation>Mostra solo i messaggi nella conversazione con tutti</translation>
+    </message>
+    <message>
+        <source>Members</source>
+        <translation>Membri</translation>
+    </message>
+    <message>
+        <source>Show the members of the chat</source>
+        <translation>Mostra i membri della conversazione</translation>
     </message>
 </context>
 <context>
@@ -2602,6 +2618,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Options</source>
         <translation>Opzioni</translation>
+    </message>
+    <message>
+        <source>Show the user&apos;s vCard on right click</source>
+        <translation>Mostra il profilo degli utenti con il pulsante destro</translation>
+    </message>
+    <message>
+        <source>If enabled you can see the user&apos;s vCard when right click on it</source>
+        <translation>Se abilitata potrai vedere il profilo degli utenti premento il tasto destro del mouse</translation>
     </message>
 </context>
 <context>

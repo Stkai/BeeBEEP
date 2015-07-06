@@ -46,7 +46,7 @@ signals:
   void openChatForGroupRequest( VNumber group_id );
   void createGroupRequest();
   void editGroupRequest( VNumber );
-  void showVCardRequest( VNumber );
+  void showVCardRequest( VNumber, bool );
   void removeGroupRequest( VNumber );
 
 protected slots:

@@ -31,6 +31,8 @@ GuiLog::GuiLog( QWidget* parent )
   setObjectName( "GuiLog" );
   mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "System Log" ) ) );
 
+  mp_teLog->setPlainText( QString( " \n" ) );
+
   m_timer.setInterval( 1000 );
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( refreshLog() ) );
 }
@@ -52,10 +54,18 @@ void GuiLog::stopCheckingLog()
 
 void GuiLog::refreshLog()
 {
+  QString plain_text = "";
   foreach( LogNode ln, Log::instance().toList() )
   {
-    mp_teLog->appendPlainText( Log::instance().logNodeToString( ln ) );
+    plain_text += Log::instance().logNodeToString( ln );
+    plain_text += QLatin1String( "\n" );
   }
 
-  Log::instance().clear();
+  if( !plain_text.isEmpty() )
+  {
+    QTextCursor cursor( mp_teLog->textCursor() );
+    cursor.movePosition( QTextCursor::End );
+    cursor.insertText( plain_text );
+    Log::instance().clear();
+  }
 }

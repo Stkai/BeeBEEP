@@ -88,7 +88,7 @@ private slots:
   void downloadSharedFiles( const QList<SharedFileInfo>& );
   void selectDownloadDirectory();
   void changeVCard();
-  void showUserMenu( VNumber );
+  void showVCard( VNumber, bool );
   void changeUserColor( VNumber );
   void showPluginHelp();
   void showPluginManager();

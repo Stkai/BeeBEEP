@@ -542,6 +542,7 @@ void Settings::load()
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
+  m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -703,6 +704,7 @@ void Settings::save()
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserNameColor", m_showUserColor );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
+  sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

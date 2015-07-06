@@ -119,6 +119,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( mp_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
   connect( mp_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
+  connect( mp_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -132,12 +133,12 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
-  connect( mp_userList, SIGNAL( menuToShow( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
+  connect( mp_userList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
 
   connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChatForGroup( VNumber ) ) );
   connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroup( VNumber ) ) );
-  connect( mp_groupList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showUserMenu( VNumber ) ) );
+  connect( mp_groupList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
   connect( mp_groupList, SIGNAL( removeGroupRequest( VNumber ) ), this, SLOT( removeGroup( VNumber ) ) );
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
@@ -630,6 +631,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showUserPhoto() );
   act->setData( 21 );
 
+  act = mp_menuUserList->addAction( tr( "Show the user's vCard on right click" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can see the user's vCard when right click on it" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showVCardOnRightClick() );
+  act->setData( 25 );
+
   mp_userList->setMenuSettings( mp_menuUserList );
 
   /* Status Menu */
@@ -1094,6 +1101,9 @@ void GuiMain::settingsChanged()
   case 24:
     Settings::instance().setLoadOnTrayAtStartup( act->isChecked() );
     break;
+  case 25:
+    Settings::instance().setShowVCardOnRightClick( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1543,6 +1553,7 @@ void GuiMain::showChat( VNumber chat_id )
     mp_groupList->updateChat( chat_id );
     raiseChatView();
     mp_chat->ensureLastMessageVisible();
+    mp_chat->ensureFocusInChat();
   }
 }
 
@@ -1565,13 +1576,13 @@ void GuiMain::showLocalUserVCard()
   showVCard( Settings::instance().localUser(), false );
 }
 
-void GuiMain::showUserMenu( VNumber user_id )
+void GuiMain::showVCard( VNumber user_id, bool ensure_visible )
 {
   User u = UserManager::instance().userList().find( user_id );
   if( !u.isValid() )
     return;
 
-  showVCard( u, true );
+  showVCard( u, ensure_visible );
 }
 
 void GuiMain::showVCard( const User& u, bool ensure_visible )
@@ -1590,7 +1601,10 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
     gvc->move( pos );
   }
   else
+  {
+
     gvc->move( QCursor::pos() );
+  }
   gvc->show();
   gvc->setFixedSize( gvc->size() );
 }

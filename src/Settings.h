@@ -141,6 +141,8 @@ public:
   inline void setShowChatToolbar( bool );
   inline bool showOnlyMessagesInDefaultChat() const;
   inline void setShowOnlyMessagesInDefaultChat( bool );
+  inline bool showVCardOnRightClick() const;
+  inline void setShowVCardOnRightClick( bool );
 
   inline const QSize& mainBarIconSize() const;
   inline const QSize& avatarIconSize() const;
@@ -341,6 +343,7 @@ private:
   bool m_automaticFileName;
   bool m_showChatToolbar;
   bool m_showOnlyMessagesInDefaultChat;
+  bool m_showVCardOnRightClick;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -483,6 +486,8 @@ inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
 inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
 inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new_value; }
 inline bool Settings::showUserColor() const { return m_showUserColor; }
+inline bool Settings::showVCardOnRightClick() const { return m_showVCardOnRightClick; }
+inline void Settings::setShowVCardOnRightClick( bool new_value ) { m_showVCardOnRightClick = new_value; }
 inline bool Settings::showMessagesGroupByUser() const { return m_showMessagesGroupByUser; }
 inline void Settings::setShowMessagesGroupByUser( bool new_value ) { m_showMessagesGroupByUser = new_value; }
 inline bool Settings::stayOnTop() const { return m_stayOnTop; }

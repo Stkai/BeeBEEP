@@ -48,8 +48,8 @@ public:
   inline void setMenuSettings( QMenu* );
 
 signals:
-  void chatSelected( VNumber chat_id );
-  void menuToShow( VNumber user_id );
+  void chatSelected( VNumber );
+  void showVCardRequest( VNumber, bool );
 
 protected slots:
   void userItemClicked( QTreeWidgetItem*, int );
@@ -70,6 +70,8 @@ private:
   bool m_coreIsConnected;
 
   QMenu *mp_menu;
+
+  bool m_blockShowChatRequest;
 
 };
 

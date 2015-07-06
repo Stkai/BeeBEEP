@@ -172,14 +172,19 @@ bool GuiUserItem::updateUser( const User& u )
 
 void GuiUserItem::setChatOpened( bool chat_is_opened )
 {
+  QFont f = font( 0 );
   if( chat_is_opened )
   {
     setBackground( 0, Bee::defaultHighlightBrush() );
     setTextColor( 0, Bee::defaultHighlightedText().color() );
+    f.setBold( true );
+    setFont( 0, f );
   }
   else
   {
     setBackground( 0, Bee::defaultBackgroundBrush() );
     setTextColor( 0, Bee::defaultTextBrush().color() );
+    f.setBold( false );
+    setFont( 0, f );
   }
 }

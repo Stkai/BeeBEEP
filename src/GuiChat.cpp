@@ -86,7 +86,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
   }
   mp_actEmoticons = mp_menuEmoticons->menuAction();
   connect( mp_actEmoticons, SIGNAL( triggered() ), this, SLOT( lastEmoticonSelected() ) );
-
   bar->addAction( mp_actEmoticons );
   act = bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
   act->setStatusTip( tr( "Select your favourite chat font style" ) );
@@ -97,11 +96,20 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act = bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
   act->setStatusTip( tr( "Click to show the settings menu of the chat" ) );
   bar->addSeparator();
+
+  mp_menuMembers = new QMenu( tr( "Members" ), this );
+  mp_menuMembers->setStatusTip( tr( "Show the members of the chat" ) );
+  mp_menuMembers->setIcon( QIcon( ":/images/group.png" ) );
+  connect( mp_menuMembers->menuAction(), SIGNAL( triggered() ), this, SLOT( showMembersMenu() ) );
+  bar->addAction( mp_menuMembers->menuAction() );
+  bar->addSeparator();
+
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
   bar->addSeparator();
+
   mp_actCreateGroupChat = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupChatRequest() ) );
   mp_actCreateGroupChat->setStatusTip( tr( "Create a group chat with two or more users" ) );
   mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group chat" ), this, SIGNAL( editGroupRequest() ) );
@@ -109,6 +117,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
   mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
   bar->addSeparator();
+
   mp_actCreateGroup = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this, SIGNAL( createGroupRequest() ) );
   mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
@@ -271,13 +280,28 @@ void GuiChat::setChatUsers()
   if( m_chatId == ID_DEFAULT_CHAT )
   {
     chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
+    mp_menuMembers->setEnabled( false );
   }
   else
   {
+    mp_menuMembers->setEnabled( true );
+    mp_menuMembers->clear();
+    QAction* act;
     QStringList sl;
     m_chatUsers.sort();
     foreach( User u, m_chatUsers.toList() )
     {
+      act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), u.isLocal() ? tr( "You" ) : u.name() );
+      act->setData( u.id() );
+      act->setIconVisibleInMenu( true );
+      if( u.isConnected() && isActiveUser( u ) )
+      {
+        act->setEnabled( true  );
+        connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
+      }
+      else
+        act->setEnabled( false );
+
       if( u.isLocal() )
       {
         if( !isActiveUser( u ) )
@@ -303,7 +327,7 @@ void GuiChat::setChatUsers()
 #endif
 
   QString text_to_write = tr( "To" ) + QString( ": %1" ).arg( chat_users );
-  mp_lTitle->setText( Bee::chopTextForWidget( mp_lTitle, text_to_write ) );
+  mp_lTitle->setText( text_to_write  );
   mp_teMessage->setEnabled( isActiveUser( Settings::instance().localUser() ) );
 }
 
@@ -345,12 +369,9 @@ bool GuiChat::setChatId( VNumber chat_id )
   mp_teChat->setHtml( html_text );
   mp_teChat->ensureCursorVisible();
 
-  ensureLastMessageVisible();
-
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
 
-  ensureFocusInChat();
   return true;
 }
 
@@ -540,4 +561,18 @@ void GuiChat::dropEvent( QDropEvent *event )
       }
     }
   }
+}
+
+void GuiChat::showUserVCard()
+{
+  QAction *act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+  VNumber user_id = Bee::qVariantToVNumber( act->data() );
+  emit showVCardRequest( user_id, false );
+}
+
+void GuiChat::showMembersMenu()
+{
+  mp_menuMembers->exec( QCursor::pos() );
 }

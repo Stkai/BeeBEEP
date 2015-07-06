@@ -151,7 +151,7 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   }
   else
   {
-    emit showVCardRequest( group_item->itemId() );
+    emit showVCardRequest( group_item->itemId(), true );
   }
   clearSelection();
 }

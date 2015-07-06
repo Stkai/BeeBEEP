@@ -49,14 +49,15 @@ GuiUserList::GuiUserList( QWidget* parent )
   m_chatOpened = ID_INVALID;
   m_coreIsConnected = false;
   m_filter = "";
+  m_blockShowChatRequest = false;
 
   mp_leFilter->setPlaceholderText( tr( "Search" ) );
 
   mp_twUsers->setHeaderHidden( true );
   resetList();
 
-  connect( mp_twUsers, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_twUsers, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
+  connect( mp_twUsers, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
   connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
   connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
   connect( mp_pbSettings, SIGNAL( clicked() ), this, SLOT( showMenuSettings() ) );
@@ -206,9 +207,12 @@ void GuiUserList::showUserMenu( const QPoint& p )
   if( !item )
     return;
 
+  if( !Settings::instance().showVCardOnRightClick() )
+    return;
+
+  m_blockShowChatRequest = true;
   GuiUserItem* user_item = (GuiUserItem*)item;
-  emit menuToShow( user_item->userId() );
-  mp_twUsers->clearSelection();
+  emit showVCardRequest( user_item->userId(), true );
 }
 
 void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
@@ -216,9 +220,14 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
+  if( m_blockShowChatRequest )
+  {
+    m_blockShowChatRequest = false;
+    return;
+  }
+
   GuiUserItem* user_item = (GuiUserItem*)item;
   emit chatSelected( user_item->chatId() );
-  mp_twUsers->clearSelection();
 }
 
 void GuiUserList::setDefaultChatConnected( bool yes )

@@ -61,6 +61,7 @@ signals:
   void chatToClear( VNumber );
   void leaveThisChat( VNumber );
   void showChatMenuRequest();
+  void showVCardRequest( VNumber, bool );
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
@@ -90,6 +91,8 @@ private slots:
   void clearChat();
   void leaveThisGroup();
   void sendFile();
+  void showUserVCard();
+  void showMembersMenu();
 
 private:
   VNumber m_chatId;
@@ -107,6 +110,8 @@ private:
   QAction* mp_actLeave;
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
+
+  QMenu *mp_menuMembers;
 
 };
 
