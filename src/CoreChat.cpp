@@ -399,7 +399,7 @@ void Core::buildSavedChatList()
   BuildSavedChatList *bscl = new BuildSavedChatList;
   connect( bscl, SIGNAL( listCompleted() ), this, SLOT( addListToSavedChats() ) );
   BeeApplication* bee_app = (BeeApplication*)qApp;
-  bscl->moveToThread( bee_app->jobThread() );
+  bee_app->addJob( bscl );
   QMetaObject::invokeMethod( bscl, "buildList", Qt::QueuedConnection );
 }
 
@@ -425,6 +425,9 @@ void Core::addListToSavedChats()
   }
 
   ChatManager::instance().addSavedChats( bscl->savedChats() );
+
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->removeJob( bscl );
 
   bscl->deleteLater();
   emit savedChatListAvailable();

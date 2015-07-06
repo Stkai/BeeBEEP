@@ -97,6 +97,8 @@ ShowHomeAsDefaultPage= Show home page at start up (force user to click on availa
 ShowTipsOfTheDay=true
 ShowOnlyOnlineUsers= show only online users in user list
 ShowUserNameColor= show nickname colored
+ShowUserPhoto= show user photo or avatar in user list
+ShowVCardOnRightClick= show vCard when you right click on a user in list
 
 [Tools]
 LogToFile=false

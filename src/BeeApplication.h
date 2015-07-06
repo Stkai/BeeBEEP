@@ -50,7 +50,8 @@ public:
   void setIdleTimeout( int ); // in minutes
   void cleanUp();
 
-  inline QThread* jobThread();
+  void addJob( QObject* );
+  void removeJob( QObject* );
 
   static void quitAfterSignal( int );
 
@@ -78,6 +79,7 @@ private:
   bool m_isInIdle;
   QThread* mp_jobThread;
   QLocalServer* mp_localServer;
+  int m_jobsInProgress;
 
 #ifdef Q_OS_UNIX
   xcb_connection_t* mp_xcbConnection;
@@ -86,9 +88,5 @@ private:
 #endif
 
 };
-
-
-// Inline Functions
-inline QThread* BeeApplication::jobThread() { return mp_jobThread; }
 
 #endif // BEEBEEP_APPLICATION_H

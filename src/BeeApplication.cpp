@@ -167,8 +167,13 @@ void BeeApplication::cleanUp()
 #endif
   }
 
-  if( mp_jobThread->isRunning() )
-    mp_jobThread->wait( 1000 );
+  if( mp_jobThread->isRunning() && m_jobsInProgress > 0 )
+  {
+    qDebug() << m_jobsInProgress << "jobs in progress. Wait 2 seconds before quit";
+    mp_jobThread->wait( 2000 );
+  }
+  else
+    qDebug() << "No jobs in progress. Quit job thread";
 
   mp_jobThread->quit();
   mp_jobThread->deleteLater();
@@ -288,3 +293,15 @@ bool BeeApplication::otherInstanceExists()
   return false;
 }
 
+void BeeApplication::addJob( QObject* obj )
+{
+  obj->moveToThread( mp_jobThread );
+  m_jobsInProgress++;
+  qDebug() << obj->objectName() << "moved to job thread." << m_jobsInProgress << "jobs in progress";
+}
+
+void BeeApplication::removeJob( QObject* obj )
+{
+  m_jobsInProgress--;
+  qDebug() << obj->objectName() << "removed from job thread." << m_jobsInProgress << "jobs in progress";
+}

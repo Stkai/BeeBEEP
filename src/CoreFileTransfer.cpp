@@ -332,7 +332,7 @@ void Core::addPathToShare( const QString& share_path, bool broadcast_list )
   bfsl->setBroadcastList( broadcast_list );
   connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addListToLocalShare() ) );
   BeeApplication* bee_app = (BeeApplication*)qApp;
-  bfsl->moveToThread( bee_app->jobThread() );
+  bee_app->addJob( bfsl );
   QMetaObject::invokeMethod( bfsl, "buildList", Qt::QueuedConnection );
 }
 
@@ -364,6 +364,9 @@ void Core::addListToLocalShare()
                          DispatchToChat, ChatMessage::FileTransfer );
 
   FileShare::instance().addToLocal( bfsl->path(), bfsl->shareList(), bfsl->shareSize() );
+
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->removeJob( bfsl );
 
   if( m_shareListToBuild == 0 )
   {
