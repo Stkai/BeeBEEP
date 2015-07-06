@@ -157,6 +157,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
 
   connect( mp_home, SIGNAL( openDefaultChatRequest() ), this, SLOT( showDefaultChat() ) );
+  connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   initGuiItems();
 }

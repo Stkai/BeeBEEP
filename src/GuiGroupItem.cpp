@@ -64,7 +64,7 @@ void GuiGroupItem::setGroupName( const QString& group_name, int unread_messages 
     setText( 0, QString( "(%1) %2" ).arg( unread_messages ).arg( group_name ) );
   else
     setText( 0, group_name );
-  setToolTip( 0, QObject::tr( "Double click to send message to group: %1" ).arg( group_name ) );
+  setToolTip( 0, QObject::tr( "Click to send message to group: %1" ).arg( group_name ) );
 }
 
 bool GuiGroupItem::updateGroup( const Group& g )

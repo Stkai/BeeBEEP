@@ -198,7 +198,7 @@ void GuiShareLocal::loadFileInfoInList()
       file_count++;
       total_file_size += fi.size();
       item = m_fileInfoList.createFileItem( Settings::instance().localUser(), fi );
-      item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( fi.name() ) );
+      item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Click to open %1" ).arg( fi.name() ) );
     }
   }
   setActionsEnabled( true );

@@ -118,7 +118,7 @@ void GuiSavedChatList::updateSavedChats()
     item->setChatName( it.key() );
     item->setIcon( 0, QIcon( ":/images/saved-chat.png" ) );
     item->setText( 0, it.key() );
-    item->setToolTip( 0, QObject::tr( "Double click to view chat history: %1" ).arg( it.key() ) );
+    item->setToolTip( 0, QObject::tr( "Click to view chat history: %1" ).arg( it.key() ) );
     ++it;
   }
 }

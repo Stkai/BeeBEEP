@@ -1114,6 +1114,14 @@ Inserisci un nome differente.</translation>
         <source>Home</source>
         <translation>Home</translation>
     </message>
+    <message>
+        <source>Copy to clipboard</source>
+        <translation>Copia in memoria</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Seleziona tutto</translation>
+    </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
@@ -3252,7 +3260,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Double click to open %1</source>
-        <translation>Doppio click per aprire %1</translation>
+        <translation type="obsolete">Doppio click per aprire %1</translation>
     </message>
     <message>
         <source>File transfer is disabled</source>
@@ -3265,6 +3273,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Share your folders or files</source>
         <translation>Condividi le tue cartelle o file</translation>
+    </message>
+    <message>
+        <source>Click to open %1</source>
+        <translation>Click per aprire %1</translation>
     </message>
 </context>
 <context>
@@ -3907,11 +3919,11 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Double click to send message to group: %1</source>
-        <translation>Doppio click per inviare un messaggio al gruppo: %1</translation>
+        <translation type="obsolete">Doppio click per inviare un messaggio al gruppo: %1</translation>
     </message>
     <message>
         <source>Double click to view chat history: %1</source>
-        <translation>Doppio click per vedere i messaggi salvati: %1</translation>
+        <translation type="obsolete">Doppio click per vedere i messaggi salvati: %1</translation>
     </message>
     <message>
         <source>Double click to send a private message.</source>
@@ -3919,11 +3931,11 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Double click to open chat with all local users</source>
-        <translation>Doppio click per aprire una conversazione con tutti gli utenti connessi</translation>
+        <translation type="obsolete">Doppio click per aprire una conversazione con tutti gli utenti connessi</translation>
     </message>
     <message>
         <source>Double click to send a private message</source>
-        <translation>Doppio click per inviare un messaggio privato</translation>
+        <translation type="obsolete">Doppio click per inviare un messaggio privato</translation>
     </message>
     <message>
         <source>Size</source>
@@ -3932,6 +3944,22 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Status</source>
         <translation type="obsolete">Stato</translation>
+    </message>
+    <message>
+        <source>Click to send message to group: %1</source>
+        <translation>Click per inviare un messaggio al gruppo: %1</translation>
+    </message>
+    <message>
+        <source>Click to view chat history: %1</source>
+        <translation>Click per vedere i messaggi salvati: %1</translation>
+    </message>
+    <message>
+        <source>Click to open chat with all local users</source>
+        <translation>Click per aprire una conversazione con tutti gli utenti connessi </translation>
+    </message>
+    <message>
+        <source>Click to send a private message</source>
+        <translation>Click per inviare un messaggio privato</translation>
     </message>
 </context>
 <context>

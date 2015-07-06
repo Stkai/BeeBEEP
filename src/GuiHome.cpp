@@ -35,12 +35,21 @@ GuiHome::GuiHome( QWidget* parent )
 
   mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Home" ) ) );
 
+  mp_teSystem->setObjectName( "GuiSystemViewer" );
+  mp_teSystem->setFocusPolicy( Qt::ClickFocus );
+  mp_teSystem->setReadOnly( true );
+  mp_teSystem->setContextMenuPolicy( Qt::CustomContextMenu );
+  mp_teSystem->setOpenExternalLinks( false );
+  mp_teSystem->setOpenLinks( false );
+
   mp_lNote->setText( QString( "<b>%1...</b>" ).arg( tr( "Select a user you want to chat with or" ) ) );
 
   mp_cbShowHomeAtStartup->setChecked( Settings::instance().showHomeAsDefaultPage() );
 
   connect( mp_pbOpenDefaultChat, SIGNAL( clicked() ), this, SLOT( openDefaultChat() ) );
   connect( mp_cbShowHomeAtStartup, SIGNAL( toggled( bool ) ), this, SLOT( toggleShowHomeAtStartUp( bool ) ) );
+  connect( mp_teSystem, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
+  connect( mp_teSystem, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
 }
 
 void GuiHome::addSystemMessage( const ChatMessage& cm )
@@ -69,4 +78,18 @@ void GuiHome::openDefaultChat()
 void GuiHome::toggleShowHomeAtStartUp( bool checked )
 {
   Settings::instance().setShowHomeAsDefaultPage( checked );
+}
+
+void GuiHome::checkAnchorClicked( const QUrl& url )
+{
+  emit openUrlRequest( url );
+}
+
+void GuiHome::customContextMenu( const QPoint& p )
+{
+  QMenu custom_context_menu;
+  custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
+  custom_context_menu.addSeparator();
+  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
+  custom_context_menu.exec( mapToGlobal( p ) );
 }

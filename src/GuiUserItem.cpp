@@ -135,7 +135,7 @@ bool GuiUserItem::updateUser( const User& u )
 
   if( u.isLocal() )
   {
-    tool_tip = QObject::tr( "Double click to open chat with all local users" );
+    tool_tip = QObject::tr( "Click to open chat with all local users" );
   }
   else
   {
@@ -154,12 +154,11 @@ bool GuiUserItem::updateUser( const User& u )
         tool_tip += QString( "\n~~~\n" );
       }
 
-      tool_tip += QString( "(%1)" ).arg( QObject::tr( "Double click to send a private message" ) );
+      tool_tip += QString( "(%1)" ).arg( QObject::tr( "Click to send a private message" ) );
     }
     user_priority = 1000;
     user_priority += u.isConnected() ? (1000*user_status) : 1000000;
   }
-
 
   user_priority -= (unread_messages > 99 ? 99 : unread_messages);
   user_priority -= qMin( (int)messages(), 899 );

@@ -40,10 +40,13 @@ public:
 
 signals:
   void openDefaultChatRequest();
+  void openUrlRequest( const QUrl& );
 
 protected slots:
   void openDefaultChat();
   void toggleShowHomeAtStartUp( bool );
+  void checkAnchorClicked( const QUrl& );
+  void customContextMenu( const QPoint& );
 
 };
 
