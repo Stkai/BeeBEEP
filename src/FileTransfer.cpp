@@ -45,7 +45,7 @@ bool FileTransfer::startListener()
 
   if( !listen( QHostAddress::Any, Settings::instance().defaultFileTransferPort() ) )
   {
-    qWarning() << "Unablet to bind default file transfer port" << Settings::instance().defaultFileTransferPort();
+    qWarning() << "Unable to bind default file transfer port" << Settings::instance().defaultFileTransferPort();
     if( !listen( QHostAddress::Any ) )
     {
       qWarning() << "Unable to bind a valid file transfer port";

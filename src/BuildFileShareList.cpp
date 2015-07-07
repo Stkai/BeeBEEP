@@ -68,6 +68,12 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
     return 0;
   }
 
+  if( path_info.isDir() && share_path.endsWith( "." ) )
+  {
+    // skip folder . and folder ..
+    return 0;
+  }
+
   if( !path_info.isReadable() )
   {
     qWarning() << "Path" << share_path << "is not readable and cannot be shared";
@@ -88,12 +94,6 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
 
   if( path_info.isDir() )
   {
-    if( share_path.endsWith( "." ) )
-    {
-      // skip folder . and folder ..
-      return 0;
-    }
-
     FileSizeType path_size = 0;
 
     if( share_path == m_path )

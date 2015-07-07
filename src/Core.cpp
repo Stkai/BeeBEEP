@@ -71,8 +71,7 @@ bool Core::start()
   {
     qWarning() << "Unable to bind default listener port" << Settings::instance().defaultListenerPort();
 
-    if( Settings::instance().localUser().hostPort() != Settings::instance().defaultListenerPort()
-            && !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() )  )
+    if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() )  )
     {
       qDebug() << "Unable to bind last used listener port" << Settings::instance().localUser().hostPort();
       if( !mp_listener->listen( QHostAddress::Any ) )
