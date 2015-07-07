@@ -64,6 +64,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   mp_localServer = 0;
 
   mp_jobThread = new QThread();
+  m_jobsInProgress = 0;
 
 #ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;

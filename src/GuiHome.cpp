@@ -42,6 +42,7 @@ GuiHome::GuiHome( QWidget* parent )
   mp_teSystem->setOpenExternalLinks( false );
   mp_teSystem->setOpenLinks( false );
 
+  mp_lNote->setWordWrap( true );
   mp_lNote->setText( QString( "<b>%1...</b>" ).arg( tr( "Select a user you want to chat with or" ) ) );
 
   mp_cbShowHomeAtStartup->setChecked( Settings::instance().showHomeAsDefaultPage() );

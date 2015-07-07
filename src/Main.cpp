@@ -133,7 +133,7 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( showUp() ), &mw, SLOT( showUp() ) );
 
   QByteArray ba = Settings::instance().guiGeometry();
-  if( !ba.isEmpty() )
+  if( !Settings::instance().resetGeometryAtStartup() && !ba.isEmpty() )
   {
     mw.restoreGeometry( Settings::instance().guiGeometry() );
     ba = Settings::instance().guiState();

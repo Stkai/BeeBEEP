@@ -39,6 +39,7 @@ Settings::Settings()
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
   m_saveDataInDocumentsFolder = false;
+  m_resetGeometryAtStartup = false;
 #ifdef Q_OS_MAC
   m_saveDataInUserApplicationFolder = true;
 #else
@@ -543,6 +544,7 @@ void Settings::load()
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
+  m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -705,6 +707,7 @@ void Settings::save()
   sets->setValue( "ShowUserNameColor", m_showUserColor );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
+  sets->setValue( "ResetGeometryAtStartup", m_resetGeometryAtStartup );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

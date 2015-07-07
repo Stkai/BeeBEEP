@@ -2635,6 +2635,14 @@ il file %2 (%3)?</translation>
         <source>If enabled you can see the user&apos;s vCard when right click on it</source>
         <translation>Se abilitata potrai vedere il profilo degli utenti premento il tasto destro del mouse</translation>
     </message>
+    <message>
+        <source>Reset window geometry at startup</source>
+        <translation>Reimposta le dimensioni della finestra l&apos;avvio</translation>
+    </message>
+    <message>
+        <source>If enabled the window geometry will be reset to default value at next startup</source>
+        <translation>Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

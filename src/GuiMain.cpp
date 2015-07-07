@@ -575,6 +575,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().automaticFileName() );
   act->setData( 7 );
 
+  act = mp_menuSettings->addAction( tr( "Reset window geometry at startup" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the window geometry will be reset to default value at next startup" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().resetGeometryAtStartup() );
+  act->setData( 26 );
+
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Set status to away automatically" ), this, SLOT( settingsChanged() ) );
@@ -851,7 +857,7 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
 
-  if( Settings::instance().firstTime() )
+  if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() )
   {
     mp_dockGroupList->hide();
     mp_dockSavedChatList->hide();
@@ -1104,6 +1110,9 @@ void GuiMain::settingsChanged()
     break;
   case 25:
     Settings::instance().setShowVCardOnRightClick( act->isChecked() );
+    break;
+  case 26:
+    Settings::instance().setResetGeometryAtStartup( act->isChecked() );
     break;
   case 99:
     break;

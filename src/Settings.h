@@ -252,6 +252,8 @@ public:
 
   inline void setShowHomeAsDefaultPage( bool );
   inline bool showHomeAsDefaultPage() const;
+  inline void setResetGeometryAtStartup( bool );
+  inline bool resetGeometryAtStartup() const;
 
   void loadRcFile();
   void clearNativeSettings();
@@ -397,6 +399,7 @@ private:
   QStringList m_userPathList;
 
   bool m_showHomeAsDefaultPage;
+  bool m_resetGeometryAtStartup;
 
 };
 
@@ -549,5 +552,7 @@ inline void Settings::setUserPathList( const QStringList& new_value ) { m_userPa
 inline const QStringList& Settings::userPathList() const { return m_userPathList; }
 inline void Settings::setShowHomeAsDefaultPage( bool new_value ) { m_showHomeAsDefaultPage = new_value; }
 inline bool Settings::showHomeAsDefaultPage() const { return m_showHomeAsDefaultPage; }
+inline void Settings::setResetGeometryAtStartup( bool new_value ) { m_resetGeometryAtStartup = new_value; }
+inline bool Settings::resetGeometryAtStartup() const { return m_resetGeometryAtStartup; }
 
 #endif // BEEBEEP_SETTINGS_H
