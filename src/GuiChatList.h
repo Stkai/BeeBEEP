@@ -63,6 +63,7 @@ private:
   QAction* mp_actDelete;
 
   VNumber m_chatOpened;
+  bool m_blockShowChatRequest;
 
 };
 

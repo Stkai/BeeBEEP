@@ -56,6 +56,7 @@ private:
   QString m_savedChatSelected;
   QMenu* mp_menu;
   QAction* mp_actLink;
+  bool m_blockShowChatRequest;
 
 };
 

@@ -204,16 +204,24 @@ void Core::checkUserAuthentication( const Message& m )
   if( !user_found.isValid() )
   {
     if( Settings::instance().trustSystemAccount() )
+    {
       user_found = UserManager::instance().findUserByAccountName( u.accountName() );
+      if( user_found.isValid() )
+        qDebug() << "User found in list with account name:" << u.accountName();
+    }
     else
+    {
       user_found = UserManager::instance().findUserByPath( u.path() );
+      if( user_found.isValid() )
+        qDebug() << "User found in list with path:" << u.path();
+    }
   }
 
   if( user_found.isValid() )
   {
     if( user_found.isConnected() )
     {
-      qWarning() << u.path() << "is already connected with path" << user_found.path();
+      qWarning() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
       closeConnection( c );
       return;
     }
@@ -272,7 +280,9 @@ void Core::checkUserAuthentication( const Message& m )
   {
     if( c->protoVersion() > 1 )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "Sending my VCard to" << u.path();
+#endif
       c->sendData( Protocol::instance().localVCardMessage() );
     }
   }

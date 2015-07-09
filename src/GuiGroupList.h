@@ -66,6 +66,7 @@ private:
 
   VNumber m_selectedGroupId;
   VNumber m_groupChatOpened;
+  bool m_blockShowChatRequest;
 
 };
 

@@ -562,9 +562,10 @@ Group Protocol::loadGroup( const QString& group_data_saved )
     {
       user_path = sl.takeFirst();
       user_account_name = sl.takeFirst();
-      user_found = UserManager::instance().findUserByPath( user_path );
-      if( !user_found.isValid() && Settings::instance().trustSystemAccount() )
+      if( Settings::instance().trustSystemAccount() )
         user_found = UserManager::instance().findUserByAccountName( user_account_name );
+      else
+        user_found = UserManager::instance().findUserByPath( user_path );
 
       if( !user_found.isValid() )
         user_found = createTemporaryUser( user_path, user_account_name );

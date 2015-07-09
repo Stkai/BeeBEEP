@@ -42,6 +42,7 @@ GuiChatList::GuiChatList( QWidget* parent )
 
   m_chatOpened = ID_INVALID;
   m_chatSelected = ID_INVALID;
+  m_blockShowChatRequest = false;
 
   mp_menu = new QMenu( this );
 
@@ -53,8 +54,8 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_menu->addSeparator();
   mp_actDelete = mp_menu->addAction( QIcon( ":/images/disconnect.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
 
-  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
+  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
 }
 
 QSize GuiChatList::sizeHint() const
@@ -108,9 +109,14 @@ void GuiChatList::chatClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
+  if( m_blockShowChatRequest )
+  {
+    m_blockShowChatRequest = false;
+    return;
+  }
+
   GuiChatItem* user_item = (GuiChatItem*)item;
   emit chatSelected( user_item->chatId() );
-  clearSelection();
 }
 
 void GuiChatList::showChatMenu( const QPoint& p )
@@ -126,12 +132,15 @@ void GuiChatList::showChatMenu( const QPoint& p )
   if( !c.isValid() )
     return;
 
+  m_blockShowChatRequest = true;
+
   mp_actClear->setDisabled( c.isEmpty() );
   mp_actDelete->setDisabled( c.isDefault() );
 
   mp_menu->exec( QCursor::pos() );
 
   clearSelection();
+  setChatOpened( m_chatOpened );
 }
 
 void GuiChatList::openChatSelected()

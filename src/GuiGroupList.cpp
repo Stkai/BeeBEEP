@@ -42,6 +42,7 @@ GuiGroupList::GuiGroupList( QWidget* parent )
 
   m_selectedGroupId = ID_INVALID;
   m_groupChatOpened = ID_INVALID;
+  m_blockShowChatRequest = false;
 
   mp_actCreateGroup = new QAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this );
   connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SIGNAL( createGroupRequest() ) );
@@ -56,8 +57,8 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   connect( mp_actRemoveGroup, SIGNAL( triggered() ), this, SLOT( removeGroupSelected() ) );
 
 
-  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
+  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
 }
 
 QSize GuiGroupList::sizeHint() const
@@ -115,10 +116,15 @@ void GuiGroupList::checkItemClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
+  if( m_blockShowChatRequest )
+  {
+    m_blockShowChatRequest = false;
+    return;
+  }
+
   GuiGroupItem* group_item = (GuiGroupItem*)item;
   if( group_item->isGroup() )
     emit openChatForGroupRequest( group_item->itemId() );
-  clearSelection();
 }
 
 void GuiGroupList::showGroupMenu( const QPoint& p )
@@ -134,6 +140,8 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
     menu.exec( QCursor::pos() );
     return;
   }
+
+  m_blockShowChatRequest = true;
 
   GuiGroupItem* group_item = (GuiGroupItem*)item;
 
@@ -153,6 +161,7 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   {
     emit showVCardRequest( group_item->itemId(), true );
   }
+
   clearSelection();
 }
 
