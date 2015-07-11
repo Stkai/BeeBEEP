@@ -49,6 +49,8 @@ public:
   void ensureLastMessageVisible();
   void ensureFocusInChat();
 
+  inline QSplitter* chatSplitter() const;
+
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );
@@ -112,6 +114,7 @@ private:
   QAction* mp_actCreateGroupChat;
 
   QMenu *mp_menuMembers;
+  QSplitter* mp_splitter;
 
 };
 
@@ -120,5 +123,6 @@ private:
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline const QString& GuiChat::chatName() const { return m_chatName; }
 inline bool GuiChat::reloadChat() { return setChatId( m_chatId ); }
+inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
 
 #endif // BEEBEEP_GUICHAT_H

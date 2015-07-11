@@ -36,8 +36,24 @@ GuiChat::GuiChat( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiChat" );
-
   setAcceptDrops( true );
+
+  QGridLayout* grid_layout = new QGridLayout( this );
+  grid_layout->setSpacing(0);
+  grid_layout->setObjectName( QString::fromUtf8("grid_layout") );
+  grid_layout->setContentsMargins(0, 0, 0, 0);
+
+  mp_splitter = new QSplitter( this );
+  mp_splitter->setOrientation( Qt::Vertical );
+  mp_splitter->setChildrenCollapsible( false );
+  mp_splitter->addWidget( mp_teChat );
+  mp_splitter->addWidget( mp_frameMessage );
+
+  grid_layout->addWidget(mp_splitter, 0, 0, 1, 1);
+  QList<int> widget_sizes;
+  widget_sizes.append( 200 );
+  widget_sizes.append( 80 );
+  mp_splitter->setSizes( widget_sizes );
 
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
   mp_teChat->setObjectName( "GuiChatViewer" );
@@ -367,7 +383,7 @@ bool GuiChat::setChatId( VNumber chat_id )
   foreach( ChatMessage cm, c.messages() )
     html_text += chatMessageToText( cm );
   mp_teChat->setHtml( html_text );
-  mp_teChat->ensureCursorVisible();
+  ensureLastMessageVisible();
 
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
@@ -386,6 +402,8 @@ void GuiChat::ensureLastMessageVisible()
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   if( bar )
     bar->setValue( bar->maximum() );
+  else
+    mp_teChat->ensureCursorVisible();
 }
 
 void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )

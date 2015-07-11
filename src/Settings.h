@@ -150,6 +150,8 @@ public:
   inline const QByteArray& guiGeometry() const;
   inline void setGuiState( const QByteArray& );
   inline const QByteArray& guiState() const;
+  inline void setChatSplitterState( const QByteArray& );
+  inline const QByteArray& chatSplitterState() const;
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
@@ -351,6 +353,7 @@ private:
   QByteArray m_guiState;
   QSize m_mainBarIconSize;
   QSize m_avatarIconSize;
+  QByteArray m_chatSplitterState;
 
   QString m_passwordBeforeHash;
   QByteArray m_password;
@@ -554,5 +557,7 @@ inline void Settings::setShowHomeAsDefaultPage( bool new_value ) { m_showHomeAsD
 inline bool Settings::showHomeAsDefaultPage() const { return m_showHomeAsDefaultPage; }
 inline void Settings::setResetGeometryAtStartup( bool new_value ) { m_resetGeometryAtStartup = new_value; }
 inline bool Settings::resetGeometryAtStartup() const { return m_resetGeometryAtStartup; }
+inline void Settings::setChatSplitterState( const QByteArray& new_value ) { m_chatSplitterState = new_value; }
+inline const QByteArray& Settings::chatSplitterState() const { return m_chatSplitterState; }
 
 #endif // BEEBEEP_SETTINGS_H

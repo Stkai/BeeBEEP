@@ -175,6 +175,23 @@ void GuiMain::checkWindowFlagsAndShow()
 
   checkViewActions();
   show();
+
+  QSplitter* chat_splitter = mp_chat->chatSplitter();
+  if( Settings::instance().resetGeometryAtStartup() || Settings::instance().chatSplitterState().isEmpty() )
+  {
+    int central_widget_height = centralWidget()->size().height();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Central widget height is" << central_widget_height << "then chat view height will be" << (int)(central_widget_height-80);
+#endif
+    QList<int> splitter_size_list;
+    splitter_size_list.append( central_widget_height - 80);
+    splitter_size_list.append( 80 );
+    chat_splitter->setSizes( splitter_size_list );
+  }
+  else
+  {
+    chat_splitter->restoreState( Settings::instance().chatSplitterState() );
+  }
 }
 
 void GuiMain::refreshTitle( const User& )
@@ -248,6 +265,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
   {
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
+    Settings::instance().setChatSplitterState( mp_chat->chatSplitter()->saveState() );
   }
 
   mp_trayIcon->hide();

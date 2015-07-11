@@ -512,6 +512,7 @@ void Settings::load()
   sets->beginGroup( "Gui" );
   m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
   m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
+  m_chatSplitterState = sets->value( "ChatSplitterState", "" ).toByteArray();
   m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
   m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
@@ -682,6 +683,7 @@ void Settings::save()
   sets->beginGroup( "Gui" );
   sets->setValue( "MainWindowGeometry", m_guiGeometry );
   sets->setValue( "MainWindowState", m_guiState );
+  sets->setValue( "ChatSplitterState", m_chatSplitterState );
   sets->setValue( "MainBarIconSize", m_mainBarIconSize );
   sets->setValue( "AvatarIconSize", m_avatarIconSize );
   sets->setValue( "Language", m_language );
