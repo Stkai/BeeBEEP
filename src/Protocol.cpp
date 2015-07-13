@@ -700,6 +700,68 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi )
   return file_info;
 }
 
+bool Protocol::fileCanBeShared( const QFileInfo& file_info )
+{
+  if( !file_info.exists() )
+  {
+    qWarning() << "Path" << file_info.absoluteFilePath() << "not exists and cannot be shared";
+    return false;
+  }
+
+  if( file_info.isDir() && file_info.fileName().endsWith( "." ) )
+  {
+    // skip folder . and folder ..
+    return false;
+  }
+
+  if( !file_info.isReadable() )
+  {
+    qWarning() << "Path" << file_info.absoluteFilePath() << "is not readable and cannot be shared";
+    return false;
+  }
+
+  if( file_info.isSymLink() )
+  {
+    qDebug() << "Path" << file_info.absoluteFilePath() << "is a symbolic link and cannot be shared";
+    return false;
+  }
+
+  if( file_info.isHidden() )
+  {
+    qDebug() << "Path" << file_info.absoluteFilePath() << "is hidden and cannot be shared";
+    return false;
+  }
+
+  return true;
+}
+
+int Protocol::countFilesCanBeSharedInPath( const QString& file_path )
+{
+  qDebug() << "Check file path:" << file_path;
+  int num_files = 0;
+  QFileInfo file_info( file_path );
+  if( fileCanBeShared( file_info ) )
+  {
+    if( file_info.isDir() )
+    {
+      QDir dir( file_path );
+      QStringList dir_entries = dir.entryList();
+      foreach( QString dir_entry, dir_entries )
+      {
+        if( num_files > Settings::instance().maxQueuedDownloads() )
+          break;
+        dir_entry = QDir::toNativeSeparators( QString( "%1/%2" ).arg( dir.absolutePath() ).arg( dir_entry ) );
+        num_files += countFilesCanBeSharedInPath( dir_entry );
+      }
+    }
+    else
+      num_files = 1;
+  }
+
+  qDebug() << "File counted:" << num_files;
+  return num_files;
+}
+
 void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
 {
   if( file_info_list.isEmpty() || server_port <= 0 )

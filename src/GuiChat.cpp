@@ -27,6 +27,7 @@
 #include "EmoticonManager.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
+#include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -552,9 +553,22 @@ void GuiChat::dropEvent( QDropEvent *event )
 {
   if( event->mimeData()->hasUrls() )
   {
+    int num_files = 0;
+    foreach( QUrl url, event->mimeData()->urls() )
+    {
+      if( url.isLocalFile() )
+      {
+        num_files += Protocol::instance().countFilesCanBeSharedInPath( url.toLocalFile() );
+        if( num_files > Settings::instance().maxQueuedDownloads() )
+          break;
+      }
+    }
+
+    num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
+
     if( QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "Do you really want to send %1 %2 to the members of this chat?" ).arg( event->mimeData()->urls().size() )
-                               .arg( event->mimeData()->urls().size() == 1 ? tr( "file" ) : tr( "files" ) ),
+                               tr( "Do you really want to send %1 %2 to the members of this chat?" ).arg( num_files )
+                               .arg( num_files == 1 ? tr( "file" ) : tr( "files" ) ),
                                tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
     {
        return;
@@ -573,6 +587,7 @@ void GuiChat::dropEvent( QDropEvent *event )
           QMessageBox::information( this, Settings::instance().programName(),
                                     tr( "Qt library for this OS doesn't support Drag and Drop for files. You have to select again the file to send." ) );
           qWarning() << "Drag and drop has invalid file path" << url.toLocalFile();
+          return;
         }
 
         emit sendFileFromChatRequest( m_chatId, url.toLocalFile() );

@@ -62,35 +62,8 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
 {
   QFileInfo path_info( share_path );
 
-  if( !path_info.exists() )
-  {
-    qWarning() << "Path" << share_path << "not exists and cannot be shared";
+  if( !Protocol::instance().fileCanBeShared( path_info ) )
     return 0;
-  }
-
-  if( path_info.isDir() && share_path.endsWith( "." ) )
-  {
-    // skip folder . and folder ..
-    return 0;
-  }
-
-  if( !path_info.isReadable() )
-  {
-    qWarning() << "Path" << share_path << "is not readable and cannot be shared";
-    return 0;
-  }
-
-  if( path_info.isSymLink() )
-  {
-    qDebug() << "Path" << share_path << "is a symbolic link and cannot be shared";
-    return 0;
-  }
-
-  if( path_info.isHidden() )
-  {
-    qDebug() << "Path" << share_path << "is hidden and cannot be shared";
-    return 0;
-  }
 
   if( path_info.isDir() )
   {

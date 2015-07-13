@@ -74,6 +74,8 @@ public:
   QByteArray localVCardMessage() const;
   bool changeVCardFromMessage( User*, const Message& ) const;
 
+  static bool fileCanBeShared( const QFileInfo& );
+  int countFilesCanBeSharedInPath( const QString& );
   void createFileShareListMessage( const QMultiMap<QString, FileInfo>&, int server_port );
   inline const QByteArray& fileShareListMessage() const;
   QList<FileInfo> messageToFileShare( const Message&, const QHostAddress& ) const;
