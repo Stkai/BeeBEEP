@@ -197,6 +197,12 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
     return false;
   }
 
+  if( !mp_fileTransfer->isListening() )
+  {
+    if( !startFileTransferServer() )
+      return false;
+  }
+
   QFileInfo file( file_path );
   if( !file.exists() )
   {
@@ -212,7 +218,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
     return false;
   }
 
-  FileInfo fi = mp_fileTransfer->addFile( file );
+  FileInfo fi = mp_fileTransfer->addFile( file, "" );
 
   Connection* c = connection( u.id() );
   if( !c )
@@ -221,14 +227,6 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
                            .arg( icon_html ).arg( fi.name() ).arg( u.name() ),
                            DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return false;
-  }
-
-  if( !mp_fileTransfer->isListening() )
-  {
-    if( !startFileTransferServer() )
-      return false;
-    fi.setHostAddress( mp_fileTransfer->serverAddress() );
-    fi.setHostPort( mp_fileTransfer->serverPort() );
   }
 
   qDebug() << "File Transfer: sending" << fi.path() << "to" << u.path();

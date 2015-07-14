@@ -121,12 +121,12 @@ void FileTransfer::removeFile( const QFileInfo& fi )
   }
 }
 
-FileInfo FileTransfer::addFile( const QFileInfo& fi )
+FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder )
 {
   FileInfo file_info = fileInfo( fi.absoluteFilePath() );
   if( file_info.isValid() )
     return file_info;
-  file_info = Protocol::instance().fileInfo( fi );
+  file_info = Protocol::instance().fileInfo( fi, share_folder );
   file_info.setHostAddress( Settings::instance().localUser().hostAddress() );
   file_info.setHostPort( serverPort() );
   m_files.append( file_info );

@@ -1446,7 +1446,6 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
   }
 }
 
-
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
   if( !askToDownloadFile( u, fi, Settings::instance().downloadDirectory(), true ) )

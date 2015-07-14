@@ -645,6 +645,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   sl << QString::number( fi.id() );
   sl << QString::fromUtf8( fi.password() );
   sl << fi.fileHash();
+  sl << fi.shareFolder();
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   return m;
@@ -667,6 +668,9 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   else
     fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
 
+  if( !sl.isEmpty() )
+    fi.setShareFolder( sl.takeFirst() );
+
   /* Skip other data */
   if( !sl.isEmpty()  )
     qWarning() << "FILEINFO message contains more data. Skip it";
@@ -674,12 +678,12 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   return fi;
 }
 
-FileInfo Protocol::fileInfo( const QFileInfo& fi )
+FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder )
 {
   FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
   file_info.setName( fi.fileName() );
   file_info.setPath( fi.absoluteFilePath() );
-  file_info.setShareFolder( fi.absoluteDir().dirName() );
+  file_info.setShareFolder( share_folder );
 
   if( fi.isFile() )
   {

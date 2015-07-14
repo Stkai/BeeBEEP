@@ -41,7 +41,7 @@ public:
   bool startListener();
   void stopListener();
 
-  FileInfo addFile( const QFileInfo& );
+  FileInfo addFile( const QFileInfo&, const QString& );
   void removeFile( const QFileInfo& );
 
   void downloadFile( const FileInfo& );

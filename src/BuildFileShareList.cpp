@@ -82,9 +82,7 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
   }
   else if( path_info.isFile() )
   {
-    FileInfo fi = Protocol::instance().fileInfo( path_info );
-    if( !m_shareFolder.isEmpty() )
-      fi.setShareFolder( m_shareFolder );
+    FileInfo fi = Protocol::instance().fileInfo( path_info, m_shareFolder );
     m_shareList.append( fi );
     return fi.size();
   }
