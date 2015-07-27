@@ -72,6 +72,11 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
     setAttribute( Qt::AA_DontShowIconsInMenus, false );
 #endif
 
+#if QT_VERSION >= 0x050000
+  if( !testAttribute( Qt::AA_UseHighDpiPixmaps ) )
+    setAttribute( Qt::AA_UseHighDpiPixmaps, true );
+#endif
+
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkIdle() ) );
 
   signal( SIGINT, &quitAfterSignal );

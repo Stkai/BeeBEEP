@@ -519,23 +519,23 @@ void Settings::load()
   if( m_language.size() > 2 )
     m_language.resize( 2 );
 #if QT_VERSION >= 0x050000
-  m_lastDirectorySelected = sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString();
-  m_downloadDirectory = sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString();
+  m_lastDirectorySelected = QDir::toNativeSeparators( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() ) );
+  m_downloadDirectory = QDir::toNativeSeparators( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
 #else
-  m_lastDirectorySelected = sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
-  m_downloadDirectory = sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString();
+  m_lastDirectorySelected = QDir::toNativeSeparators( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
+  m_downloadDirectory = QDir::toNativeSeparators( sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
 #endif
-  m_logPath = sets->value( "LogPath", dataFolder() ).toString();
-  m_pluginPath = sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString();
-  m_languagePath = sets->value( "LanguagePath", resourceFolder() ).toString();
+  m_logPath = QDir::toNativeSeparators( sets->value( "LogPath", dataFolder() ).toString() );
+  m_pluginPath = QDir::toNativeSeparators( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() );
+  m_languagePath = QDir::toNativeSeparators( sets->value( "LanguagePath", resourceFolder() ).toString() );
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
-  m_beepFilePath = sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString();
+  m_beepFilePath = QDir::toNativeSeparators( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 2000 ).toInt(), 100 );
-  m_chatSaveDirectory = sets->value( "ChatSaveDirectory", dataFolder() ).toString();
+  m_chatSaveDirectory = QDir::toNativeSeparators( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
