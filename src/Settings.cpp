@@ -546,6 +546,8 @@ void Settings::load()
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
+  m_chatLinesToShow = sets->value( "ChatLinesToShow", 80 ).toInt();
+  m_chatMaxLinesToShow = sets->value( "ChatMaxLinesToShow", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -710,6 +712,8 @@ void Settings::save()
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
   sets->setValue( "ResetGeometryAtStartup", m_resetGeometryAtStartup );
+  sets->setValue( "ChatLinesToShow", m_chatLinesToShow );
+  sets->setValue( "ChatMaxLinesToShow", m_chatMaxLinesToShow );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

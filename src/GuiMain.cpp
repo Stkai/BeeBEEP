@@ -66,6 +66,8 @@ GuiMain::GuiMain( QWidget *parent )
   mp_sound = 0;
 
   setWindowIcon( QIcon( ":/images/beebeep.png") );
+  // Create a status bar before the actions and the menu
+  (void) statusBar();
 
   mp_stackedWidget = new QStackedWidget( this );
   createStackedWidgets();
@@ -89,7 +91,6 @@ GuiMain::GuiMain( QWidget *parent )
   createToolAndMenuBars();
   createPluginWindows();
   updadePluginMenu();
-  createStatusBar();
 
   connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
@@ -160,6 +161,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   initGuiItems();
+  statusBar()->showMessage( tr( "Ready" ) );
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -558,6 +560,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showMessagesGroupByUser() );
   act->setData( 13 );
 
+  act = mp_menuChat->addAction( tr( "Show only last %1 messages" ).arg( Settings::instance().chatLinesToShow() ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled only the last %1 messages will be shown in chat" ).arg( Settings::instance().chatLinesToShow() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatMaxLinesToShow() );
+  act->setData( 27 );
+
   mp_menuChat->addSeparator();
 
   act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
@@ -808,11 +816,6 @@ void GuiMain::createToolAndMenuBars()
 
 }
 
-void GuiMain::createStatusBar()
-{
-  statusBar()->showMessage( tr( "Ready" ) );
-}
-
 void GuiMain::createDockWindows()
 {
   mp_dockUserList = new QDockWidget( tr( "Users" ), this );
@@ -877,12 +880,15 @@ void GuiMain::createDockWindows()
 
   if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() )
   {
+    /*tabifyDockWidget( mp_dockUserList, mp_dockGroupList );
+    tabifyDockWidget( mp_dockGroupList, mp_dockChatList );
+    tabifyDockWidget( mp_dockChatList, mp_dockSavedChatList );
+    mp_dockUserList->raise();*/
     mp_dockGroupList->hide();
-    mp_dockSavedChatList->hide();
     mp_dockChatList->hide();
+    mp_dockSavedChatList->hide();
     mp_dockFileTransfers->hide();
   }
-
 }
 
 void GuiMain::createStackedWidgets()
@@ -1132,6 +1138,10 @@ void GuiMain::settingsChanged()
   case 26:
     Settings::instance().setResetGeometryAtStartup( act->isChecked() );
     break;
+  case 27:
+    Settings::instance().setChatMaxLinesToShow( act->isChecked() );
+    refresh_chat = true;
+    break;
   case 99:
     break;
   default:
@@ -1158,7 +1168,7 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 
 bool GuiMain::showAlert()
 {
-  if( !isActiveWindow() || isMinimized() )
+  if( isMinimized() || !isActiveWindow() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "BeeBEEP alert called";
@@ -1398,9 +1408,9 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     return false;
   }
 
-  int msg_result = make_questions ? 0 : 1;
+  int msg_result = !make_questions ? 1 : (Settings::instance().confirmOnDownloadFile() ? 0 : 1);
 
-  if( make_questions && Settings::instance().confirmOnDownloadFile() )
+  if( msg_result == 0 )
   {
     QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
     msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );

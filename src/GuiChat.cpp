@@ -381,8 +381,26 @@ bool GuiChat::setChatId( VNumber chat_id )
   if( !html_text.isEmpty() )
     html_text.append( "<br />" );
 
+  int num_lines = c.messages().size();
+  bool max_lines_message_written = false;
+
   foreach( ChatMessage cm, c.messages() )
-    html_text += chatMessageToText( cm );
+  {
+    num_lines--;
+
+    if( Settings::instance().chatMaxLinesToShow() && num_lines > Settings::instance().chatLinesToShow() )
+    {
+      if( !max_lines_message_written )
+      {
+        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=gray><i>... %1 ...</i></font><br /><br />" ).arg( tr( "last %1 messages" ).arg( Settings::instance().chatLinesToShow() ) );
+        max_lines_message_written = true;
+      }
+      continue;
+    }
+    else
+      html_text += chatMessageToText( cm );
+  }
+
   mp_teChat->setHtml( html_text );
   ensureLastMessageVisible();
 

@@ -196,4 +196,3 @@ void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.exec( event->globalPos() );
 }
-

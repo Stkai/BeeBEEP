@@ -150,7 +150,6 @@ private:
   void createActions();
   void createMenus();
   void createToolAndMenuBars();
-  void createStatusBar();
   void createDockWindows();
   void createStackedWidgets();
   void createPluginWindows();

@@ -143,7 +143,10 @@ public:
   inline void setShowOnlyMessagesInDefaultChat( bool );
   inline bool showVCardOnRightClick() const;
   inline void setShowVCardOnRightClick( bool );
-
+  inline bool chatMaxLinesToShow() const;
+  inline void setChatMaxLinesToShow( bool );
+  inline int chatLinesToShow() const;
+  inline void setChatLinesToShow( int );
   inline const QSize& mainBarIconSize() const;
   inline const QSize& avatarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
@@ -348,6 +351,8 @@ private:
   bool m_showChatToolbar;
   bool m_showOnlyMessagesInDefaultChat;
   bool m_showVCardOnRightClick;
+  bool m_chatMaxLinesToShow;
+  int m_chatLinesToShow;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -559,5 +564,9 @@ inline void Settings::setResetGeometryAtStartup( bool new_value ) { m_resetGeome
 inline bool Settings::resetGeometryAtStartup() const { return m_resetGeometryAtStartup; }
 inline void Settings::setChatSplitterState( const QByteArray& new_value ) { m_chatSplitterState = new_value; }
 inline const QByteArray& Settings::chatSplitterState() const { return m_chatSplitterState; }
+inline int Settings::chatLinesToShow() const { return m_chatLinesToShow; }
+inline void Settings::setChatLinesToShow( int new_value ) { m_chatLinesToShow = new_value; }
+inline bool Settings::chatMaxLinesToShow() const { return m_chatMaxLinesToShow; }
+inline void Settings::setChatMaxLinesToShow( bool new_value ) { m_chatMaxLinesToShow = new_value; }
 
 #endif // BEEBEEP_SETTINGS_H
