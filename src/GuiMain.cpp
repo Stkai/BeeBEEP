@@ -1020,6 +1020,7 @@ void GuiMain::settingsChanged()
   bool refresh_users = false;
   bool refresh_chat = false;
   int settings_data_id = act->data().toInt();
+  bool ok = false;
 
   switch( settings_data_id )
   {
@@ -1110,7 +1111,6 @@ void GuiMain::settingsChanged()
       if( act->isChecked() )
       {
         BeeApplication* bee_app = static_cast<BeeApplication*>( QApplication::instance() );
-        bool ok = false;
         int away_timeout = QInputDialog::getInt( this, Settings::instance().programName(),
                               tr( "How many minutes of idle %1 can wait before changing status to away?" ).arg( Settings::instance().programName() ),
                               Settings::instance().userAwayTimeout(), 1, 30, 1, &ok );
@@ -1139,8 +1139,19 @@ void GuiMain::settingsChanged()
     Settings::instance().setResetGeometryAtStartup( act->isChecked() );
     break;
   case 27:
-    Settings::instance().setChatMaxLinesToShow( act->isChecked() );
-    refresh_chat = true;
+    {
+      Settings::instance().setChatMaxLinesToShow( act->isChecked() );
+      if( act->isChecked() )
+      {
+        int num_messages = QInputDialog::getInteger( this, Settings::instance().programName(),
+                                                     tr( "Please select the maximum number of messages to be showed" ),
+                                                     Settings::instance().chatLinesToShow(),
+                                                     10, 1000, 5, &ok );
+        if( ok )
+          Settings::instance().setChatLinesToShow( num_messages );
+      }
+      refresh_chat = true;
+    }
     break;
   case 99:
     break;

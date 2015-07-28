@@ -868,6 +868,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Show the members of the chat</source>
         <translation>Mostra i membri della conversazione</translation>
     </message>
+    <message>
+        <source>last %1 messages</source>
+        <translation>ultimi %1 messaggi</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -911,16 +915,16 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <translation></translation>
     </message>
     <message>
+        <source>Click to send message or just hit enter</source>
+        <translation>Premi qui o premi invio per spedire il messaggio</translation>
+    </message>
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Droid Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Click to send message or just hit enter</source>
-        <translation>Premi qui o premi invio per spedire il messaggio</translation>
     </message>
 </context>
 <context>
@@ -2642,6 +2646,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>If enabled the window geometry will be reset to default value at next startup</source>
         <translation>Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
+    </message>
+    <message>
+        <source>Show only last %1 messages</source>
+        <translation>Mostra solo gli ultimi %1 messaggi</translation>
+    </message>
+    <message>
+        <source>If enabled only the last %1 messages will be shown in chat</source>
+        <translation>Se alibilitata nella conversazione saranno mostrati solo gli ultimi %1 messaggi</translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of messages to be showed</source>
+        <translation>Seleziona il massimo numero di messaggi da mostrare</translation>
     </message>
 </context>
 <context>

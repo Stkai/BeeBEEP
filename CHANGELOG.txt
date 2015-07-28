@@ -1,5 +1,10 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 1.0.3
+- Message box can be resized
+- Show only last [num] messages (increase the usability)
+- Reset windows geometry to default at startup option
+
 BeeBEEP 1.0.2 
 - Show homepage with activities at startup (can be disabled by option)
 - Display chat members in chat window and as selected users in user panel
