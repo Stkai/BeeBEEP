@@ -13,6 +13,7 @@ CONFIG(debug,debug|release) {
 message(Qt version: $$[QT_VERSION])
 
 unix:!macx {
+  lessThan(QT_MAJOR_VERSION, 5): QT += phonon
   LIBS= -lxcb -lxcb-screensaver
 }
 

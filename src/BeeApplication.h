@@ -32,6 +32,10 @@
 #ifdef Q_OS_UNIX
 struct xcb_connection_t;
 struct xcb_screen_t;
+  #if QT_VERSION < 0x050000
+    #include <Phonon/MediaObject>
+    //#include <Phonon/BackendCapabilities>
+  #endif
 #endif
 
 
@@ -52,6 +56,10 @@ public:
 
   void addJob( QObject* );
   void removeJob( QObject* );
+
+  static bool isAudioDeviceAvailable();
+  void playBeep();
+  void clearBeep();
 
   static void quitAfterSignal( int );
 
@@ -85,6 +93,11 @@ private:
   xcb_connection_t* mp_xcbConnection;
   xcb_screen_t* mp_xcbScreen;
   bool m_xcbConnectHasError;
+  #if QT_VERSION >= 0x050000
+    QSound* mp_sound;
+  #else
+    Phonon::MediaObject *mp_sound;
+  #endif
 #endif
 
 };

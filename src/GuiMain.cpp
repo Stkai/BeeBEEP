@@ -63,7 +63,6 @@ GuiMain::GuiMain( QWidget *parent )
 {
   setObjectName( "GuiMainWindow" );
   mp_core = new Core( this );
-  mp_sound = 0;
 
   setWindowIcon( QIcon( ":/images/beebeep.png") );
   // Create a status bar before the actions and the menu
@@ -1110,7 +1109,7 @@ void GuiMain::settingsChanged()
       Settings::instance().setAutoUserAway( act->isChecked() );
       if( act->isChecked() )
       {
-        BeeApplication* bee_app = static_cast<BeeApplication*>( QApplication::instance() );
+        BeeApplication* bee_app = (BeeApplication*)qApp;
         int away_timeout = QInputDialog::getInt( this, Settings::instance().programName(),
                               tr( "How many minutes of idle %1 can wait before changing status to away?" ).arg( Settings::instance().programName() ),
                               Settings::instance().userAwayTimeout(), 1, 30, 1, &ok );
@@ -1932,14 +1931,9 @@ void GuiMain::selectBeepFile()
 
   Settings::instance().setBeepFilePath( file_path );
   qDebug() << "New sound file selected:" << file_path;
-  if( mp_sound )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Delete previous sound object";
-#endif
-    mp_sound->deleteLater();
-    mp_sound = 0;
-  }
+
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->clearBeep();
 
   if( !Settings::instance().beepOnNewMessageArrived() )
   {
@@ -1951,31 +1945,19 @@ void GuiMain::selectBeepFile()
   }
 }
 
-bool GuiMain::isAudioDeviceAvailable() const
-{
-#if QT_VERSION >= 0x050000
-  return !QAudioDeviceInfo::availableDevices( QAudio::AudioOutput ).isEmpty();
-#else
-  return QSound::isAvailable();
-#endif
-}
-
 void GuiMain::testBeepFile()
 {
-  if( !isAudioDeviceAvailable() )
+  if( !BeeApplication::isAudioDeviceAvailable() )
   {
     qWarning() << "Sound device is not available";
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound module is not working. The default BEEP will be used." ) );
-    return;
   }
-
-  if( !QFile::exists( Settings::instance().beepFilePath() ) )
+  else if( !QFile::exists( Settings::instance().beepFilePath() ) )
   {
     QString warn_text = QString( "%1\n%2. %3." ).arg( Settings::instance().beepFilePath() )
                                                   .arg( tr( "Sound file not found" ) )
                                                   .arg( tr( "The default BEEP will be used" ) );
     QMessageBox::warning( this, Settings::instance().programName(), warn_text );
-    return;
   }
 
   playBeep();
@@ -1983,16 +1965,8 @@ void GuiMain::testBeepFile()
 
 void GuiMain::playBeep()
 {
-  if( !mp_sound )
-  {
-    qDebug() << "Create sound object from" << Settings::instance().beepFilePath();
-    mp_sound = new QSound( Settings::instance().beepFilePath(), this );
-  }
-
-  if( isAudioDeviceAvailable() && QFile::exists( Settings::instance().beepFilePath() ))
-    mp_sound->play();
-  else
-    QApplication::beep();
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->playBeep();
 }
 
 void GuiMain::createGroup()
