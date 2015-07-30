@@ -134,7 +134,7 @@ ColorManager::ColorManager()
   m_colors << "#000000";
 
   clearSelectedColors();
-  qDebug() << m_colors.size() << "colors: load completed";
+  qDebug() << "ColorManager loads" << m_colors.size() << "colors";
 }
 
 

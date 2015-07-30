@@ -203,7 +203,7 @@ void PluginManager::setGamePauseOn()
 bool PluginManager::parseText( QString* p_txt, bool before_sending ) const
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Plugins parsing text:" << p_txt->toLatin1();
+  qDebug() << "Plugins parsing text:" << qPrintable( *p_txt );
 #endif
   if( p_txt->size() <= 0 )
   {
@@ -228,7 +228,7 @@ bool PluginManager::parseText( QString* p_txt, bool before_sending ) const
     }
   }
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Plugins has parsed:" << p_txt->toLatin1();
+  qDebug() << "Plugins has parsed:" << qPrintable( *p_txt );
 #endif
   return true;
 }

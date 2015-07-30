@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "AudioManager.h"
 #include "BeeApplication.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
@@ -119,6 +120,12 @@ int main( int argc, char *argv[] )
   /* Init Icon Provider */
   (void)GuiIconProvider::instance();
 
+  /* Init Audio Manager */
+  if( AudioManager::instance().isAudioDeviceAvailable() )
+    qDebug() << "Sound manager is enabled";
+  else
+    qWarning() << "Sound manager seems to be not available for your system";
+
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
@@ -192,6 +199,7 @@ int main( int argc, char *argv[] )
   PluginManager::close();
   NetworkManager::close();
   ColorManager::close();
+  AudioManager::close();
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();

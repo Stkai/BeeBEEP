@@ -541,7 +541,9 @@ void GuiChat::saveChat()
     return;
   }
 
-  file.write( mp_teChat->toHtml().toLatin1() );
+  QTextStream text_stream( &file );
+  text_stream << mp_teChat->toHtml();
+  text_stream << endl;
   file.close();
   QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
 }

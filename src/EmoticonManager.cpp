@@ -32,17 +32,22 @@ EmoticonManager::EmoticonManager()
 {
   addEmoticon( ":)", "smile" );
   addEmoticon( ":-)", "smile" );
-  addEmoticon( ":P", "tongue" );
-  addEmoticon( ":-P", "tongue" );
+  addEmoticon( ":p", "tongue" );
+  addEmoticon( ":-p", "tongue" );
+  addEmoticon( ":P", "big-tongue" );
+  addEmoticon( ":-P", "big-tongue" );
   addEmoticon( ":'", "cry" );
-  addEmoticon( ":'(", "cry" );
+  addEmoticon( ":'(", "big-cry" );
   addEmoticon( ":D", "laugh" );
   addEmoticon( ":-D", "laugh" );
   addEmoticon( ":@", "angry" );
-  addEmoticon( ":*", "kiss" );
-  addEmoticon( ":-*", "kiss" );
+  addEmoticon( ":@@", "big-angry" );
+  addEmoticon( ":x", "kiss" );
+  addEmoticon( ":*", "big-kiss" );
+  addEmoticon( ":-*", "big-kiss" );
   addEmoticon( ":z", "sleep" );
   addEmoticon( ":o", "surprise" );
+  addEmoticon( ":O", "big-surprise" );
   addEmoticon( ":|", "pouty" );
   addEmoticon( ":L", "love" );
   addEmoticon( ":w", "whistle" );
@@ -50,6 +55,10 @@ EmoticonManager::EmoticonManager()
   addEmoticon( ":!", "wizard" );
   addEmoticon( ";)", "wink" );
   addEmoticon( ";-)", "wink" );
+  addEmoticon( ":(", "disappointed" );
+  addEmoticon( ":-(", "disappointed" );
+  addEmoticon( ":T", "slurp" );
+  addEmoticon( ":§", "bazinga" );
   addEmoticon( "B)", "cool" );
   addEmoticon( "B-)", "cool" );
   addEmoticon( "<3", "heart" );
@@ -63,6 +72,14 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "x-(", "sick" );
   addEmoticon( "X|", "pinched" );
   addEmoticon( "X-|", "pinched" );
+  addEmoticon( "^_^", "happy" );
+  addEmoticon( "o.O", "confused" );
+
+#ifdef BEEBEEP_USE_EMOJI
+  loadEmojis();
+#endif
+
+  qDebug() << "Emoticon manager loads" << emoticons( true ).size() << "images with" << m_emoticons.size() << "keys";
 }
 
 void EmoticonManager::addEmoticon( const QString& e_text, const QString& e_name )
@@ -191,3 +208,37 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
 
   return s;
 }
+
+#ifdef BEEBEEP_USE_EMOJI
+void EmoticonManager::loadEmojis()
+{
+  QFile emoji_list_file( "emoji_list.txt" );
+  if( !emoji_list_file.open( QFile::ReadOnly ) )
+    return;
+
+  QString emoji_data = emoji_list_file.readAll();
+
+  QStringList emoji_data_list = emoji_data.split( "\n", QString::SkipEmptyParts );
+  QStringList emoji_parts;
+  QString emoji_key;
+  QString emoji_file;
+  foreach( QString emoji_line, emoji_data_list )
+  {
+    emoji_parts = emoji_line.split( "\t", QString::SkipEmptyParts );
+    if( emoji_parts.count() < 2 )
+      continue;
+
+    emoji_file = emoji_parts.at( 0 ).trimmed();
+    emoji_file.remove( ".png" );
+    emoji_key = emoji_parts.at( 1 ).trimmed();
+
+    Emoticon emoji( emoji_key, emoji_file );
+    m_emojis.insert( emoji_key.at( 0 ), emoji );
+
+    qDebug() << "Load Emoji: char" << qPrintable( emoji_key ) << "and file" << emoji_file;
+  }
+
+  emoji_list_file.close();
+}
+#endif
+

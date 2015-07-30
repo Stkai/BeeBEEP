@@ -4,6 +4,7 @@ BeeBEEP 1.0.3
 - Message box can be resized
 - Show only last [num] messages (increase the usability)
 - Reset windows geometry to default at startup option
+- More emoticons added
 
 BeeBEEP 1.0.2 
 - Show homepage with activities at startup (can be disabled by option)

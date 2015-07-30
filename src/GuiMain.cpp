@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "AudioManager.h"
 #include "Core.h"
 #include "BeeApplication.h"
 #include "BeeUtils.h"
@@ -1932,8 +1933,7 @@ void GuiMain::selectBeepFile()
   Settings::instance().setBeepFilePath( file_path );
   qDebug() << "New sound file selected:" << file_path;
 
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->clearBeep();
+  AudioManager::instance().clearBeep();
 
   if( !Settings::instance().beepOnNewMessageArrived() )
   {
@@ -1947,7 +1947,7 @@ void GuiMain::selectBeepFile()
 
 void GuiMain::testBeepFile()
 {
-  if( !BeeApplication::isAudioDeviceAvailable() )
+  if( !AudioManager::instance().isAudioDeviceAvailable() )
   {
     qWarning() << "Sound device is not available";
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound module is not working. The default BEEP will be used." ) );
@@ -1965,8 +1965,7 @@ void GuiMain::testBeepFile()
 
 void GuiMain::playBeep()
 {
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->playBeep();
+  AudioManager::instance().playBeep();
 }
 
 void GuiMain::createGroup()
@@ -2002,6 +2001,22 @@ void GuiMain::editGroup( VNumber group_id )
 
 void GuiMain::createGroupChat()
 {
+  switch( QMessageBox::question( this, Settings::instance().programName(),
+                 tr( "Group chat will be deleted when all members goes offline." ) +
+                 tr( "If you want a persistent chat please consider to make a Group instead." ) +
+                 tr( "Do you wish to continue or create group?" ),
+                 tr( "Continue" ), tr( "Create Group" ), tr( "Cancel" ), 0, 2 ) )
+  {
+  case 0:
+    // do nothing
+    break;
+  case 1:
+    createGroup();
+    return;
+  default:
+    return;
+  }
+
   GuiCreateGroup gcg( this );
   gcg.loadData( false );
   gcg.setModal( true );

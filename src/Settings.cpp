@@ -1004,7 +1004,7 @@ QString Settings::simpleEncryptDecrypt( const QString& text_passed )
     text_returned += c.toLatin1() ^ key;
 #else
   foreach( QChar c, text_passed )
-    text_returned += c.toAscii() ^ key;
+    text_returned += c.unicode() ^ key;
 #endif
   return text_returned;
 }

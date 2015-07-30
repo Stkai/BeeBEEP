@@ -29,7 +29,8 @@ macx: {
 
 TEMPLATE = app
 
-HEADERS += Avatar.h \
+HEADERS += AudioManager.h \
+  Avatar.h \
   BeeApplication.h \
   BeeUtils.h \
   Broadcaster.h \
@@ -102,9 +103,10 @@ HEADERS += Avatar.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-    Job.h
+  Job.h
 
-SOURCES += Avatar.cpp \
+SOURCES += AudioManager.cpp \
+  Avatar.cpp \
   BeeApplication.cpp \
   BeeUtils.cpp \
   Broadcaster.cpp \

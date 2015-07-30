@@ -46,9 +46,6 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
-// fixme!!! useful for audio... must be created a new AudioManager
-#include "Settings.h"
-
 
 BeeApplication::BeeApplication( int& argc, char** argv  )
   : QApplication( argc, argv )
@@ -68,8 +65,6 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   mp_jobThread = new QThread();
   m_jobsInProgress = 0;
-
-  mp_sound = 0;
 
 #ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;
@@ -177,8 +172,6 @@ void BeeApplication::cleanUp()
     xcb_disconnect( mp_xcbConnection );
 #endif
   }
-
-  clearBeep();
 
   if( mp_jobThread->isRunning() && m_jobsInProgress > 0 )
   {
@@ -317,49 +310,4 @@ void BeeApplication::removeJob( QObject* obj )
 {
   m_jobsInProgress--;
   qDebug() << obj->objectName() << "removed from job thread." << m_jobsInProgress << "jobs in progress";
-}
-
-bool BeeApplication::isAudioDeviceAvailable()
-{
-#if QT_VERSION >= 0x050000
-  return !QAudioDeviceInfo::availableDevices( QAudio::AudioOutput ).isEmpty();
-#else
-  #ifdef Q_OS_UNIX
-    return true; // doesn't work -> !Phonon::BackendCapabilities::availableAudioOutputDevices().isEmpty();
-  #else
-    return QSound::isAvailable();
-  #endif
-#endif
-}
-
-void BeeApplication::clearBeep()
-{
-  if( mp_sound )
-  {
-    mp_sound->deleteLater();
-    mp_sound = 0;
-  }
-}
-
-void BeeApplication::playBeep()
-{
-  if( !mp_sound )
-  {
-    if( QFile::exists( Settings::instance().beepFilePath() ) && isAudioDeviceAvailable() )
-    {
-#if defined Q_OS_UNIX && QT_VERSION < 0x050000
-      qDebug() << "Create PHONON sound object from" << Settings::instance().beepFilePath();
-      Phonon::MediaSource media_source( Settings::instance().beepFilePath() );
-      mp_sound = Phonon::createPlayer( Phonon::MusicCategory, media_source );
-#else
-      qDebug() << "Create sound object from" << Settings::instance().beepFilePath();
-      mp_sound = new QSound( Settings::instance().beepFilePath(), this );
-#endif
-    }
-  }
-
-  if( mp_sound )
-    mp_sound->play();
-  else
-    beep();
 }

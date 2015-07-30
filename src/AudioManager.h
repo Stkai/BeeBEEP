@@ -17,31 +17,55 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: NetworkManager.h 407 2015-06-10 16:51:41Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_VERSION_H
-#define BEEBEEP_VERSION_H
+#ifndef BEEBEEP_AUDIOMANAGER_H
+#define BEEBEEP_AUDIOMANAGER_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_ORGANIZATION_DOMAIN = "beebeep.net";
-const char* BEEBEEP_DNS_RECORD = "_beebeep._tcp";
-#ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
-#else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
+#include "Config.h"
+#if defined( Q_OS_UNIX ) && QT_VERSION < 0x050000
+  #include <Phonon/MediaObject>
 #endif
-const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
-const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
-const char* BEEBEEP_HELP_WEBSITE = "/help.php";
-const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
-const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
-const char* BEEBEEP_VERSION = "1.0.2e";
-const int BEEBEEP_PROTO_VERSION = 62;
-const int BEEBEEP_SETTINGS_VERSION = 4;
-const int BEEBEEP_BUILD = 434;
 
-#endif // BEEBEEP_VERSION_H
 
+class AudioManager
+{
+// Singleton Object
+  static AudioManager* mp_instance;
+
+public:
+  bool isAudioDeviceAvailable();
+  void playBeep();
+  void clearBeep();
+
+  static AudioManager& instance()
+  {
+    if( !mp_instance )
+      mp_instance = new AudioManager();
+    return *mp_instance;
+  }
+
+  static void close()
+  {
+    if( mp_instance )
+    {
+      mp_instance->clearBeep();
+      delete mp_instance;
+      mp_instance = NULL;
+    }
+  }
+
+protected:
+  AudioManager();
+
+private:
+#if defined( Q_OS_UNIX ) && QT_VERSION < 0x050000
+  Phonon::MediaObject *mp_sound;
+#else
+  QSound* mp_sound;
+#endif
+};
+
+#endif // BEEBEEP_AUDIOMANAGER_H
