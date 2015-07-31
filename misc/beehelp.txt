@@ -99,6 +99,10 @@ ShowOnlyOnlineUsers= show only online users in user list
 ShowUserNameColor= show nickname colored
 ShowUserPhoto= show user photo or avatar in user list
 ShowVCardOnRightClick= show vCard when you right click on a user in list
+ResetGeometryAtStartup= reset geometry at startup (useful if some widget has an inusual geometry)
+ChatLinesToShow= number of lines to show in chat (working if the option below is enabled)
+ChatMaxLinesToShow= force chat to show only X messages (increase usability)
+ShowEmoticonMenu= show the emoticon menu when the chat window is raised
 
 [Tools]
 LogToFile=false

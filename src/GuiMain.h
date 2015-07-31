@@ -136,6 +136,7 @@ private slots:
   void showLocalUserVCard();
   void showAddUser();
   void showChatSettingsMenu();
+  void emoticonMenuVisibilityChanged( bool );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -238,6 +239,7 @@ private:
   QDockWidget* mp_dockSavedChatList;
   QDockWidget* mp_dockChatList;
   QDockWidget* mp_dockFileTransfers;
+  QDockWidget* mp_dockEmoticons;
 
   GuiSystemTray* mp_trayIcon;
 

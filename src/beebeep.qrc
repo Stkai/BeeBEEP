@@ -20,8 +20,6 @@
         <file>emoticons/pouty.png</file>
         <file>emoticons/surprise.png</file>
         <file>emoticons/bazinga.png</file>
-        <file>emoticons/big-angry.png</file>
-        <file>emoticons/big-cry.png</file>
         <file>emoticons/big-kiss.png</file>
         <file>emoticons/big-surprise.png</file>
         <file>emoticons/big-tongue.png</file>
@@ -121,5 +119,5 @@
         <file>images/home.png</file>
         <file>images/download-box.png</file>
         <file>images/remove.png</file>
-     </qresource>
+    </qresource>
 </RCC>

@@ -73,7 +73,6 @@ GuiChat::GuiChat( QWidget *parent )
 
   m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = 0;
-  m_lastEmoticonSelected = ":)";
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -87,23 +86,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
 {
   QAction* act;
 
-  mp_menuEmoticons = new QMenu( tr( "Emoticons" ), this );
-  mp_menuEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
-  mp_menuEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
-
-  QList<Emoticon> emoticon_list = EmoticonManager::instance().emoticons( true );
-  QList<Emoticon>::const_iterator it = emoticon_list.begin();
-  while( it != emoticon_list.end() )
-  {
-    act = mp_menuEmoticons->addAction( QIcon( (*it).pixmap() ), (*it).name(), this, SLOT( emoticonSelected() ) );
-    act->setData( (*it).textToMatch() );
-    act->setStatusTip( QString( "Insert [%1] emoticon %2" ).arg( (*it).name(), (*it).textToMatch() ) );
-    act->setIconVisibleInMenu( true );
-    ++it;
-  }
-  mp_actEmoticons = mp_menuEmoticons->menuAction();
-  connect( mp_actEmoticons, SIGNAL( triggered() ), this, SLOT( lastEmoticonSelected() ) );
-  bar->addAction( mp_actEmoticons );
   act = bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
   act->setStatusTip( tr( "Select your favourite chat font style" ) );
   act = bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
@@ -507,20 +489,10 @@ void GuiChat::selectFontColor()
   }
 }
 
-void GuiChat::lastEmoticonSelected()
+void GuiChat::addEmoticon( const Emoticon& e )
 {
-  mp_teMessage->insertPlainText( m_lastEmoticonSelected );
-}
-
-void GuiChat::emoticonSelected()
-{
-  QAction* act = qobject_cast<QAction*>( sender() );
-  if( act )
-  {
-    m_lastEmoticonSelected = act->data().toString();
-    mp_teMessage->insertPlainText( m_lastEmoticonSelected );
-    mp_actEmoticons->setIcon( EmoticonManager::instance().emoticon( m_lastEmoticonSelected ).pixmap() );
-  }
+  mp_teMessage->insertPlainText( QString( " " ) + e.textToMatch() );
+  ensureFocusInChat();
 }
 
 void GuiChat::saveChat()

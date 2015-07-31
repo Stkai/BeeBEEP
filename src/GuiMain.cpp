@@ -26,6 +26,7 @@
 #include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
+#include "EmoticonManager.h"
 #include "FileShare.h"
 #include "GuiAddUser.h"
 #include "GuiAskPassword.h"
@@ -33,6 +34,7 @@
 #include "GuiChatList.h"
 #include "GuiCreateGroup.h"
 #include "GuiEditVCard.h"
+#include "GuiEmoticons.h"
 #include "GuiGroupList.h"
 #include "GuiHome.h"
 #include "GuiLanguage.h"
@@ -225,8 +227,6 @@ void GuiMain::changeEvent( QEvent* e )
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  setGameInPauseMode();
-
   if( mp_core->isConnected() )
   {
     if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
@@ -245,6 +245,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
     mp_core->stop();
   }
+  raiseHomeView();
 
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
@@ -280,6 +281,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
     mp_dockChatList->hide();
   if( mp_dockFileTransfers->isFloating() && mp_dockFileTransfers->isVisible() )
     mp_dockFileTransfers->hide();
+  if( mp_dockEmoticons->isFloating() && mp_dockEmoticons->isVisible() )
+    mp_dockEmoticons->hide();
 
   // maybe timer is active
   mp_logView->stopCheckingLog();
@@ -399,9 +402,13 @@ void GuiMain::checkViewActions()
   {
     mp_chat->updateAction( is_connected, connected_users );
     checkChatToolbar();
+    mp_dockEmoticons->setVisible( Settings::instance().showEmoticonMenu() );
   }
   else
+  {
     mp_barChat->hide();
+    mp_dockEmoticons->hide();
+  }
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork )
     mp_barShareNetwork->show();
@@ -878,16 +885,41 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
 
+  mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
+  mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
+
+  GuiEmoticons* mp_emoticonsWidget = new GuiEmoticons( this );
+  mp_emoticonsWidget->initEmoticons();
+  connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
+  mp_dockEmoticons->setWidget( mp_emoticonsWidget );
+
+  mp_dockEmoticons->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::BottomDockWidgetArea, mp_dockEmoticons );
+  QAction* mp_actViewEmoticons = mp_dockEmoticons->toggleViewAction();
+  mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
+  mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
+  mp_actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
+  mp_actViewEmoticons->setData( 28 );
+  connect( mp_dockEmoticons, SIGNAL( visibilityChanged( bool ) ), this, SLOT( emoticonMenuVisibilityChanged( bool ) ) );
+  connect( mp_actViewEmoticons, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
+  mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
+
   if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() )
   {
-    /*tabifyDockWidget( mp_dockUserList, mp_dockGroupList );
-    tabifyDockWidget( mp_dockGroupList, mp_dockChatList );
-    tabifyDockWidget( mp_dockChatList, mp_dockSavedChatList );
-    mp_dockUserList->raise();*/
     mp_dockGroupList->hide();
     mp_dockChatList->hide();
     mp_dockSavedChatList->hide();
     mp_dockFileTransfers->hide();
+    mp_dockEmoticons->hide();
+  }
+}
+
+void GuiMain::emoticonMenuVisibilityChanged( bool is_visible )
+{
+  if( mp_stackedWidget->currentWidget() == mp_chat )
+  {
+    if( !is_visible )
+      Settings::instance().setShowEmoticonMenu( false );
   }
 }
 
@@ -1022,6 +1054,10 @@ void GuiMain::settingsChanged()
   int settings_data_id = act->data().toInt();
   bool ok = false;
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Settings changed for action id" << settings_data_id << "to" << (bool)(act->isChecked());
+#endif
+
   switch( settings_data_id )
   {
   case 1:
@@ -1152,6 +1188,9 @@ void GuiMain::settingsChanged()
       }
       refresh_chat = true;
     }
+    break;
+  case 28:
+    Settings::instance().setShowEmoticonMenu( act->isChecked() );
     break;
   case 99:
     break;
@@ -1600,8 +1639,6 @@ void GuiMain::showChat( VNumber chat_id )
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
     raiseChatView();
-    mp_chat->ensureLastMessageVisible();
-    mp_chat->ensureFocusInChat();
   }
 }
 
@@ -1861,6 +1898,7 @@ void GuiMain::raiseHomeView()
 void GuiMain::raiseChatView()
 {
   raiseView( mp_chat, mp_chat->chatId(), mp_chat->chatName() );
+  mp_chat->ensureLastMessageVisible();
   mp_chat->ensureFocusInChat();
 }
 

@@ -27,6 +27,7 @@
 #include "ui_GuiChat.h"
 #include "UserList.h"
 class ChatMessage;
+class Emoticon;
 
 
 class GuiChat : public QWidget, private Ui::GuiChatWidget
@@ -65,6 +66,9 @@ signals:
   void showChatMenuRequest();
   void showVCardRequest( VNumber, bool );
 
+public slots:
+  void addEmoticon( const Emoticon& );
+
 protected:
   void setLastMessageTimestamp( const QDateTime& );
   void setChatUsers();
@@ -87,9 +91,7 @@ private slots:
   void checkAnchorClicked( const QUrl& );
   void selectFontColor();
   void selectFont();
-  void emoticonSelected();
   void saveChat();
-  void lastEmoticonSelected();
   void clearChat();
   void leaveThisGroup();
   void sendFile();
@@ -101,11 +103,8 @@ private:
   QString m_chatName;
   UserList m_chatUsers;
   VNumber m_lastMessageUserId;
-  QString m_lastEmoticonSelected;
 
   QMenu *mp_menuChat;
-  QMenu *mp_menuEmoticons;
-  QAction* mp_actEmoticons;
   QAction* mp_actSendFile;
   QAction* mp_actGroupAdd;
   QAction* mp_actClear;

@@ -326,36 +326,6 @@ bool Bee::isColorNear( const QColor& c1, const QColor& c2 )
   return qAbs( r_diff ) < 30 && qAbs( g_diff ) < 30 && qAbs( b_diff ) < 30;
 }
 
-QString Bee::chopTextForWidget( QWidget* w, const QString& text )
-{
-  // Fixme: clean chopped html tags
-  if( text.isEmpty() )
-    return text;
-
-  QFontMetrics fm = w->fontMetrics();
-
-  int  max_width = w->frameGeometry().width() - fm.width( QString( "..." ) ) - 6;
-
-  if( max_width < 10 )
-    return QString( "..." );
-
-  QString text_to_chop = text;
-  QString plain_text = removeHtmlTag( text_to_chop );
-  bool text_is_chopped = false;
-
-  while( plain_text.size() > 1 && fm.width( plain_text ) > max_width )
-  {
-    text_to_chop.chop( 1 );
-    plain_text = removeHtmlTag( text_to_chop );
-    text_is_chopped = true;
-  }
-
-  if( text_is_chopped )
-    text_to_chop.append( "..." );
-
-  return text_to_chop;
-}
-
 QString Bee::removeHtmlTag( const QString& s )
 {
   /* Faster than

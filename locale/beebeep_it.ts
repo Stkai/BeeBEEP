@@ -704,11 +704,11 @@
     </message>
     <message>
         <source>Emoticons</source>
-        <translation>Faccine</translation>
+        <translation type="obsolete">Faccine</translation>
     </message>
     <message>
         <source>Add your preferred emoticon to the message</source>
-        <translation>Aggiungi la tua faccina preferita al messaggio</translation>
+        <translation type="obsolete">Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
     <message>
         <source>Change font style</source>
@@ -1532,11 +1532,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Emoticons</source>
-        <translation type="obsolete">Faccine</translation>
+        <translation>Faccine</translation>
     </message>
     <message>
         <source>Add your preferred emoticon to the message</source>
-        <translation type="obsolete">Aggiungi la tua faccina preferita al messaggio</translation>
+        <translation>Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
     <message>
         <source>Status</source>
@@ -2658,6 +2658,34 @@ il file %2 (%3)?</translation>
     <message>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Seleziona il massimo numero di messaggi da mostrare</translation>
+    </message>
+    <message>
+        <source>Smiley</source>
+        <translation>Smiley</translation>
+    </message>
+    <message>
+        <source>Show the emoticon panel</source>
+        <translation>Mostra il pannello delle faccine</translation>
+    </message>
+    <message>
+        <source>Group chat will be deleted when all members goes offline.</source>
+        <translation>La conversazione di gruppo sarà cancellata non appena tutti i membri saranno disconnessi.</translation>
+    </message>
+    <message>
+        <source>If you want a persistent chat please consider to make a Group instead.</source>
+        <translation>Se vuoi una conversazione persistente considera invece di creare un gruppo.</translation>
+    </message>
+    <message>
+        <source>Do you wish to continue or create group?</source>
+        <translation>Vuoi continuare o creare un gruppo?</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Continua</translation>
+    </message>
+    <message>
+        <source>Create Group</source>
+        <translation>Create Gruppo</translation>
     </message>
 </context>
 <context>

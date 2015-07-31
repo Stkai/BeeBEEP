@@ -37,11 +37,10 @@ EmoticonManager::EmoticonManager()
   addEmoticon( ":P", "big-tongue" );
   addEmoticon( ":-P", "big-tongue" );
   addEmoticon( ":'", "cry" );
-  addEmoticon( ":'(", "big-cry" );
+  addEmoticon( ":'(", "cry" );
   addEmoticon( ":D", "laugh" );
   addEmoticon( ":-D", "laugh" );
   addEmoticon( ":@", "angry" );
-  addEmoticon( ":@@", "big-angry" );
   addEmoticon( ":x", "kiss" );
   addEmoticon( ":*", "big-kiss" );
   addEmoticon( ":-*", "big-kiss" );

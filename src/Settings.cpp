@@ -548,6 +548,7 @@ void Settings::load()
   m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
   m_chatLinesToShow = sets->value( "ChatLinesToShow", 80 ).toInt();
   m_chatMaxLinesToShow = sets->value( "ChatMaxLinesToShow", false ).toBool();
+  m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -714,6 +715,7 @@ void Settings::save()
   sets->setValue( "ResetGeometryAtStartup", m_resetGeometryAtStartup );
   sets->setValue( "ChatLinesToShow", m_chatLinesToShow );
   sets->setValue( "ChatMaxLinesToShow", m_chatMaxLinesToShow );
+  sets->setValue( "ShowEmoticonMenu", m_showEmoticonMenu );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
@@ -1004,7 +1006,7 @@ QString Settings::simpleEncryptDecrypt( const QString& text_passed )
     text_returned += c.toLatin1() ^ key;
 #else
   foreach( QChar c, text_passed )
-    text_returned += c.unicode() ^ key;
+    text_returned += c.toLatin1() ^ key;
 #endif
   return text_returned;
 }
