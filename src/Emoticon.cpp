@@ -25,12 +25,12 @@
 
 
 Emoticon::Emoticon()
- : m_textToMatch( "" ), m_name( "" )
+ : m_textToMatch( "" ), m_name( "" ), m_group( Emoticon::Unknown )
 {
 }
 
-Emoticon::Emoticon( const QString& text_to_match, const QString& emoticon_name )
- : m_textToMatch( text_to_match ), m_name( emoticon_name )
+Emoticon::Emoticon( const QString& text_to_match, const QString& emoticon_name, int emoticon_group )
+ : m_textToMatch( text_to_match ), m_name( emoticon_name ), m_group( emoticon_group )
 {
 }
 
@@ -45,6 +45,7 @@ Emoticon& Emoticon::operator=( const Emoticon& e )
   {
     m_textToMatch = e.m_textToMatch;
     m_name = e.m_name;
+    m_group = e.m_group;
   }
   return *this;
 }

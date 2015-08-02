@@ -30,8 +30,10 @@
 class Emoticon
 {
 public:
+  enum Group { Unknown, Recent, Smiley, Objects, Nature, Places, Symbols, NumGroups };
+
   Emoticon();
-  Emoticon( const QString&, const QString& );
+  Emoticon( const QString&, const QString&, int emoticon_group = Emoticon::Unknown );
   Emoticon( const Emoticon& );
 
   Emoticon& operator=( const Emoticon& );
@@ -41,6 +43,8 @@ public:
 
   inline const QString& textToMatch() const;
   inline const QString& name() const;
+  inline void setGroup( int );
+  inline int group() const;
 
   inline QString toHtml( const QString& theme = "" ) const;
   inline QPixmap pixmap( const QString& theme = "" ) const;
@@ -48,6 +52,7 @@ public:
 private:
   QString m_textToMatch;
   QString m_name;
+  int m_group;
 
 };
 
@@ -58,6 +63,8 @@ inline bool Emoticon::operator==( const Emoticon& e ) const { return m_textToMat
 inline bool Emoticon::isValid() const { return m_textToMatch.size() > 0 && m_name.size() > 0; }
 inline const QString& Emoticon::textToMatch() const { return m_textToMatch; }
 inline const QString& Emoticon::name() const { return m_name; }
+inline void Emoticon::setGroup( int new_value ) { m_group = new_value; }
+inline int Emoticon::group() const { return m_group; }
 inline QString Emoticon::toHtml( const QString& theme ) const { return QString( "<img src=':/%1/%2.png'>").arg( theme.isEmpty() ? "emoticons" : theme ).arg( m_name ); }
 inline QPixmap Emoticon::pixmap( const QString& theme ) const { return QPixmap( QString( ":/%1/%2.png").arg( theme.isEmpty() ? "emoticons" : theme ).arg( m_name ) ); }
 

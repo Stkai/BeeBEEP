@@ -58,15 +58,15 @@ public:
 protected:
   EmoticonManager();
 
-  void addEmoticon( const QString&, const QString& );
+  void addEmoticon( const QString&, const QString&, int emoticon_group = Emoticon::Unknown );
 
 private:
   QMultiHash<QChar, Emoticon> m_emoticons;
   int m_maxTextSize;
 
 #ifdef BEEBEEP_USE_EMOJI
-  QHash<QString, Emoticon> m_emojis;
-  void loadEmojis();
+  QMultiHash<QChar, Emoticon> m_emojis;
+  void createEmojiFile();
 #endif
 
 };
