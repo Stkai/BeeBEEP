@@ -93,7 +93,7 @@ void SaveChatList::saveChats( QDataStream* stream )
       continue;
     qDebug() << "Saving chat" << c.name();
     chat_counter++;
-    chat_name_encrypted = Settings::instance().simpleEncryptDecrypt( c.name() );
+    chat_name_encrypted = Settings::instance().simpleEncrypt( c.name() );
     (*stream) << chat_name_encrypted;
     QString html_text = GuiChatMessage::chatToHtml( c, true );
 
@@ -125,7 +125,7 @@ void SaveChatList::saveChats( QDataStream* stream )
       html_text.append( "<br />" ); // SkipEmptyParts remove the last one too
     }
 
-    chat_text_encrypted = Settings::instance().simpleEncryptDecrypt( html_text );
+    chat_text_encrypted = Settings::instance().simpleEncrypt( html_text );
     (*stream) << chat_text_encrypted;
   }
 
@@ -134,9 +134,9 @@ void SaveChatList::saveChats( QDataStream* stream )
   {
     qDebug() << "Saving stored chat" << it.key();
     chat_counter++;
-    chat_name_encrypted = Settings::instance().simpleEncryptDecrypt( it.key() );
+    chat_name_encrypted = Settings::instance().simpleEncrypt( it.key() );
     (*stream) << chat_name_encrypted;
-    chat_text_encrypted = Settings::instance().simpleEncryptDecrypt( it.value() );
+    chat_text_encrypted = Settings::instance().simpleEncrypt( it.value() );
     (*stream) << chat_text_encrypted;
     ++it;
   }

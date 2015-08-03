@@ -30,7 +30,7 @@
 class Emoticon
 {
 public:
-  enum Group { Unknown, Recent, Smiley, Objects, Nature, Places, Symbols, NumGroups };
+  enum Group { Unknown, People, Objects, Nature, Places, Symbols, NumGroups };
 
   Emoticon();
   Emoticon( const QString&, const QString&, int emoticon_group = Emoticon::Unknown );
@@ -45,9 +45,13 @@ public:
   inline const QString& name() const;
   inline void setGroup( int );
   inline int group() const;
+  inline bool isInGroup() const;
 
-  inline QString toHtml( const QString& theme = "" ) const;
-  inline QPixmap pixmap( const QString& theme = "" ) const;
+  inline QString toHtml( int icon_size = 24 ) const;
+  inline QPixmap pixmap() const;
+
+  static QString groupFolder( int );
+  static QIcon groupIcon( int );
 
 private:
   QString m_textToMatch;
@@ -65,8 +69,9 @@ inline const QString& Emoticon::textToMatch() const { return m_textToMatch; }
 inline const QString& Emoticon::name() const { return m_name; }
 inline void Emoticon::setGroup( int new_value ) { m_group = new_value; }
 inline int Emoticon::group() const { return m_group; }
-inline QString Emoticon::toHtml( const QString& theme ) const { return QString( "<img src=':/%1/%2.png'>").arg( theme.isEmpty() ? "emoticons" : theme ).arg( m_name ); }
-inline QPixmap Emoticon::pixmap( const QString& theme ) const { return QPixmap( QString( ":/%1/%2.png").arg( theme.isEmpty() ? "emoticons" : theme ).arg( m_name ) ); }
+inline bool Emoticon::isInGroup() const { return m_group > Emoticon::Unknown && m_group < Emoticon::NumGroups; }
+inline QString Emoticon::toHtml( int icon_size ) const { return QString( "<img src=':/%1/%2.png'%3>").arg( groupFolder( m_group ) ).arg( m_name ).arg( icon_size == 24 ? QString( "" ) : QString( " height=%1" ).arg( icon_size ) ); }
+inline QPixmap Emoticon::pixmap() const { return QPixmap( QString( ":/%1/%2.png").arg( groupFolder( m_group ) ).arg( m_name ) ); }
 
 
 #endif // BEEBEEP_EMOTICON_H

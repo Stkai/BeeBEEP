@@ -25,7 +25,7 @@
 #define BEEBEEP_GUIMESSAGEEDIT_H
 
 #include "Config.h"
-
+class Emoticon;
 
 class GuiMessageEdit : public QTextEdit
 {
@@ -33,6 +33,8 @@ class GuiMessageEdit : public QTextEdit
 
 public:
   GuiMessageEdit( QWidget* parent );
+
+  void addEmoticon( const Emoticon& );
 
   QString message() const;
   void clearMessage();

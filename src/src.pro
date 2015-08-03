@@ -204,7 +204,8 @@ FORMS += GuiAddUser.ui \
   GuiWizard.ui
 
 
-RESOURCES += beebeep.qrc
+RESOURCES += beebeep.qrc \
+    emojis.qrc
 win32: RC_FILE = beebeep.rc
 
 macx: ICON = beebeep.icns

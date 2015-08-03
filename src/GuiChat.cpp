@@ -394,7 +394,7 @@ bool GuiChat::setChatId( VNumber chat_id )
 
 void GuiChat::ensureFocusInChat()
 {
-  if( !mp_teMessage->hasFocus() )
+  //if( !mp_teMessage->hasFocus() )
     mp_teMessage->setFocus();
 }
 
@@ -491,7 +491,7 @@ void GuiChat::selectFontColor()
 
 void GuiChat::addEmoticon( const Emoticon& e )
 {
-  mp_teMessage->insertPlainText( QString( " " ) + e.textToMatch() );
+  mp_teMessage->addEmoticon( e );
   ensureFocusInChat();
 }
 

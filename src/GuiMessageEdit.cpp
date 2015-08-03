@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Emoticon.h"
 #include "GuiMessageEdit.h"
 #include "Settings.h"
 
@@ -47,10 +48,39 @@ QString GuiMessageEdit::message() const
   return text.trimmed().isEmpty() ? QLatin1String( "" ) : text;
 }
 
+void GuiMessageEdit::addEmoticon( const Emoticon& e )
+{
+  if( e.isInGroup() )
+  {
+      /*
+    setTextColor( palette().base().color() );
+    setFontPointSize( 1 );
+    QTextCursor tc = textCursor();
+    tc.beginEditBlock();
+    tc.insertHtml( e.toHtml( 16 ));
+    //tc.insertText( QString( " " ) + e.textToMatch() );
+    tc.endEditBlock();
+
+    setTextColor( QColor( Settings::instance().chatFontColor() ) );
+    setFontPointSize( Settings::instance().chatFont().pointSize() );
+
+ */
+    insertHtml( e.toHtml( 16 ) );
+    setTextColor( palette().base().color() );
+    setFontPointSize( 1 );
+    insertPlainText( QString( " " ) + e.textToMatch() );
+    setTextColor( QColor( Settings::instance().chatFontColor() ) );
+    setFontPointSize( Settings::instance().chatFont().pointSize() );
+  }
+  else
+    insertPlainText( QString( " " ) + e.textToMatch() );
+}
+
 void GuiMessageEdit::clearMessage()
 {
   clear();
   setTextColor( QColor( Settings::instance().chatFontColor() ) );
+  setFontPointSize( Settings::instance().chatFont().pointSize() );
 }
 
 void GuiMessageEdit::addMessageToHistory()
@@ -97,7 +127,7 @@ void GuiMessageEdit::setMessageFromHistory()
 
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 {
-  bool reset_font_color = false;
+  bool reset_font = false;
   Qt::KeyboardModifiers mods = e->modifiers();
 
   if( e->key() == Qt::Key_Tab && (mods & Qt::ControlModifier || mods & Qt::ShiftModifier) ) // switch between chats
@@ -145,15 +175,20 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
   }
 
   if( e->key() == Qt::Key_Backspace || e->key() == Qt::Key_Delete || e->key() == Qt::Key_Cancel )
-    reset_font_color = true;
+  {
+    reset_font = true;
+  }
 
   QTextEdit::keyPressEvent( e );
 
   m_lastMessage = "";
 
-  // Fixed: when the text is fully cancelled the message box loose the color... patched with the line below
-  if( reset_font_color )
+  // Fixed: when the text is fully cancelled the message box loose the color and the size... patched with the line below
+  if( reset_font )
+  {
     setTextColor( QColor( Settings::instance().chatFontColor() ) );
+    setFontPointSize( Settings::instance().chatFont().pointSize() );
+  }
 
   if( !mp_timer->isActive() )
   {

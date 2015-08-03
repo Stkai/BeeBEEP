@@ -29,9 +29,6 @@ EmoticonManager* EmoticonManager::mp_instance = NULL;
 
 EmoticonManager::EmoticonManager()
   : m_emoticons(), m_maxTextSize( 2 )
-#ifdef BEEBEEP_USE_EMOJI
-  , m_emojis()
-#endif
 {
   addEmoticon( ":)", "smile" );
   addEmoticon( ":-)", "smile" );
@@ -77,18 +74,31 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "^_^", "happy" );
   addEmoticon( "o.O", "confused" );
 
-#ifdef BEEBEEP_USE_EMOJI
-#ifdef BEEBEEP_DEBUG
-  createEmojiFile();
-#endif
+  //createEmojiFile();
+
+  addEmoticon( "🙅", "1f645", Emoticon::People );
+  addEmoticon( "🙆", "1f646", Emoticon::People );
+  addEmoticon( "🙇", "1f647", Emoticon::People );
+  addEmoticon( "🙈", "1f648", Emoticon::People );
+  addEmoticon( "🙉", "1f649", Emoticon::People );
+  addEmoticon( "🙊", "1f64a", Emoticon::People );
+  addEmoticon( "🙋", "1f64b", Emoticon::People );
+  addEmoticon( "🙌", "1f64c", Emoticon::People );
+  addEmoticon( "🙍", "1f64d", Emoticon::People );
+  addEmoticon( "🙎", "1f64e", Emoticon::People );
+  addEmoticon( "🙏", "1f64f", Emoticon::People );
   addEmoticon( "✂", "2702", Emoticon::Objects );
   addEmoticon( "✅", "2705", Emoticon::Symbols );
   addEmoticon( "✈", "2708", Emoticon::Places );
   addEmoticon( "✉", "2709", Emoticon::Objects );
+  addEmoticon( "✊", "270a", Emoticon::People );
+  addEmoticon( "✋", "270b", Emoticon::People );
+  addEmoticon( "✌", "270c", Emoticon::People );
   addEmoticon( "✏", "270f", Emoticon::Objects );
   addEmoticon( "✒", "2712", Emoticon::Objects );
   addEmoticon( "✔", "2714", Emoticon::Symbols );
   addEmoticon( "✖", "2716", Emoticon::Symbols );
+  addEmoticon( "✨", "2728", Emoticon::People );
   addEmoticon( "✳", "2733", Emoticon::Symbols );
   addEmoticon( "✴", "2734", Emoticon::Symbols );
   addEmoticon( "❄", "2744", Emoticon::Nature );
@@ -110,6 +120,7 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "⛔", "26d4", Emoticon::Symbols );
   addEmoticon( "🚬", "1f6ac", Emoticon::Objects );
   addEmoticon( "🚭", "1f6ad", Emoticon::Symbols );
+  addEmoticon( "🚶", "1f6b6", Emoticon::People );
   addEmoticon( "🚹", "1f6b9", Emoticon::Symbols );
   addEmoticon( "🚺", "1f6ba", Emoticon::Symbols );
   addEmoticon( "🚻", "1f6bb", Emoticon::Symbols );
@@ -135,6 +146,7 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "☎", "260e", Emoticon::Objects );
   addEmoticon( "☔", "2614", Emoticon::Nature );
   addEmoticon( "☕", "2615", Emoticon::Objects );
+  addEmoticon( "☝", "261d", Emoticon::People );
   addEmoticon( "♈", "2648", Emoticon::Symbols );
   addEmoticon( "♉", "2649", Emoticon::Symbols );
   addEmoticon( "♊", "264a", Emoticon::Symbols );
@@ -345,10 +357,12 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "🎷", "1f3b7", Emoticon::Objects );
   addEmoticon( "🎸", "1f3b8", Emoticon::Objects );
   addEmoticon( "🎼", "1f3bc", Emoticon::Objects );
+  addEmoticon( "🎽", "1f3bd", Emoticon::People );
   addEmoticon( "🎾", "1f3be", Emoticon::Objects );
   addEmoticon( "🎿", "1f3bf", Emoticon::Objects );
   addEmoticon( "🏁", "1f3c1", Emoticon::Objects );
   addEmoticon( "🏂", "1f3c2", Emoticon::Objects );
+  addEmoticon( "🏃", "1f3c3", Emoticon::People );
   addEmoticon( "🏄", "1f3c4", Emoticon::Objects );
   addEmoticon( "🏆", "1f3c6", Emoticon::Objects );
   addEmoticon( "🏈", "1f3c8", Emoticon::Objects );
@@ -412,18 +426,109 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "🐼", "1f43c", Emoticon::Nature );
   addEmoticon( "🐽", "1f43d", Emoticon::Nature );
   addEmoticon( "🐾", "1f43e", Emoticon::Nature );
+  addEmoticon( "👀", "1f440", Emoticon::People );
+  addEmoticon( "👂", "1f442", Emoticon::People );
+  addEmoticon( "👃", "1f443", Emoticon::People );
+  addEmoticon( "👄", "1f444", Emoticon::People );
+  addEmoticon( "👅", "1f445", Emoticon::People );
+  addEmoticon( "👆", "1f446", Emoticon::People );
+  addEmoticon( "👇", "1f447", Emoticon::People );
+  addEmoticon( "👈", "1f448", Emoticon::People );
+  addEmoticon( "👉", "1f449", Emoticon::People );
+  addEmoticon( "👊", "1f44a", Emoticon::People );
+  addEmoticon( "👋", "1f44b", Emoticon::People );
+  addEmoticon( "👌", "1f44c", Emoticon::People );
+  addEmoticon( "👍", "1f44d", Emoticon::People );
+  addEmoticon( "👎", "1f44e", Emoticon::People );
+  addEmoticon( "👏", "1f44f", Emoticon::People );
+  addEmoticon( "👐", "1f450", Emoticon::People );
+  addEmoticon( "👑", "1f451", Emoticon::People );
+  addEmoticon( "👒", "1f452", Emoticon::People );
+  addEmoticon( "👓", "1f453", Emoticon::People );
+  addEmoticon( "👔", "1f454", Emoticon::People );
+  addEmoticon( "👕", "1f455", Emoticon::People );
+  addEmoticon( "👖", "1f456", Emoticon::People );
+  addEmoticon( "👗", "1f457", Emoticon::People );
+  addEmoticon( "👘", "1f458", Emoticon::People );
+  addEmoticon( "👙", "1f459", Emoticon::People );
+  addEmoticon( "👚", "1f45a", Emoticon::People );
+  addEmoticon( "👛", "1f45b", Emoticon::People );
+  addEmoticon( "👜", "1f45c", Emoticon::People );
+  addEmoticon( "👝", "1f45d", Emoticon::People );
+  addEmoticon( "👞", "1f45e", Emoticon::People );
+  addEmoticon( "👟", "1f45f", Emoticon::People );
+  addEmoticon( "👠", "1f460", Emoticon::People );
+  addEmoticon( "👡", "1f461", Emoticon::People );
+  addEmoticon( "👢", "1f462", Emoticon::People );
+  addEmoticon( "👣", "1f463", Emoticon::People );
+  addEmoticon( "👤", "1f464", Emoticon::People );
+  addEmoticon( "👦", "1f466", Emoticon::People );
+  addEmoticon( "👧", "1f467", Emoticon::People );
+  addEmoticon( "👨", "1f468", Emoticon::People );
+  addEmoticon( "👩", "1f469", Emoticon::People );
+  addEmoticon( "👪", "1f46a", Emoticon::People );
+  addEmoticon( "👫", "1f46b", Emoticon::People );
+  addEmoticon( "👯", "1f46f", Emoticon::People );
+  addEmoticon( "👰", "1f470", Emoticon::People );
+  addEmoticon( "👱", "1f471", Emoticon::People );
+  addEmoticon( "👲", "1f472", Emoticon::People );
+  addEmoticon( "👳", "1f473", Emoticon::People );
+  addEmoticon( "👴", "1f474", Emoticon::People );
+  addEmoticon( "👵", "1f475", Emoticon::People );
+  addEmoticon( "👶", "1f476", Emoticon::People );
+  addEmoticon( "👷", "1f477", Emoticon::People );
+  addEmoticon( "👸", "1f478", Emoticon::People );
+  addEmoticon( "👹", "1f479", Emoticon::People );
+  addEmoticon( "👺", "1f47a", Emoticon::People );
   addEmoticon( "👻", "1f47b", Emoticon::Objects );
+  addEmoticon( "👼", "1f47c", Emoticon::People );
+  addEmoticon( "👽", "1f47d", Emoticon::People );
   addEmoticon( "👾", "1f47e", Emoticon::Objects );
+  addEmoticon( "👿", "1f47f", Emoticon::People );
+  addEmoticon( "💀", "1f480", Emoticon::People );
+  addEmoticon( "💁", "1f481", Emoticon::People );
+  addEmoticon( "💂", "1f482", Emoticon::People );
+  addEmoticon( "💃", "1f483", Emoticon::People );
+  addEmoticon( "💄", "1f484", Emoticon::People );
+  addEmoticon( "💅", "1f485", Emoticon::People );
+  addEmoticon( "💆", "1f486", Emoticon::People );
+  addEmoticon( "💇", "1f487", Emoticon::People );
   addEmoticon( "💈", "1f488", Emoticon::Places );
   addEmoticon( "💉", "1f489", Emoticon::Objects );
   addEmoticon( "💊", "1f48a", Emoticon::Objects );
+  addEmoticon( "💋", "1f48b", Emoticon::People );
+  addEmoticon( "💌", "1f48c", Emoticon::People );
+  addEmoticon( "💍", "1f48d", Emoticon::People );
+  addEmoticon( "💎", "1f48e", Emoticon::People );
+  addEmoticon( "💏", "1f48f", Emoticon::People );
   addEmoticon( "💐", "1f490", Emoticon::Nature );
+  addEmoticon( "💑", "1f491", Emoticon::People );
   addEmoticon( "💒", "1f492", Emoticon::Places );
+  addEmoticon( "💓", "1f493", Emoticon::People );
+  addEmoticon( "💕", "1f495", Emoticon::People );
+  addEmoticon( "💖", "1f496", Emoticon::People );
+  addEmoticon( "💗", "1f497", Emoticon::People );
+  addEmoticon( "💘", "1f498", Emoticon::People );
+  addEmoticon( "💙", "1f499", Emoticon::People );
+  addEmoticon( "💚", "1f49a", Emoticon::People );
+  addEmoticon( "💛", "1f49b", Emoticon::People );
+  addEmoticon( "💜", "1f49c", Emoticon::People );
+  addEmoticon( "💝", "1f49d", Emoticon::People );
+  addEmoticon( "💞", "1f49e", Emoticon::People );
   addEmoticon( "💟", "1f49f", Emoticon::Symbols );
   addEmoticon( "💠", "1f4a0", Emoticon::Symbols );
   addEmoticon( "💡", "1f4a1", Emoticon::Objects );
   addEmoticon( "💢", "1f4a2", Emoticon::Symbols );
   addEmoticon( "💣", "1f4a3", Emoticon::Objects );
+  addEmoticon( "💤", "1f4a4", Emoticon::People );
+  addEmoticon( "💥", "1f4a5", Emoticon::People );
+  addEmoticon( "💦", "1f4a6", Emoticon::People );
+  addEmoticon( "💧", "1f4a7", Emoticon::People );
+  addEmoticon( "💨", "1f4a8", Emoticon::People );
+  addEmoticon( "💩", "1f4a9", Emoticon::People );
+  addEmoticon( "💪", "1f4aa", Emoticon::People );
+  addEmoticon( "💫", "1f4ab", Emoticon::People );
+  addEmoticon( "💬", "1f4ac", Emoticon::People );
   addEmoticon( "💮", "1f4ae", Emoticon::Symbols );
   addEmoticon( "💯", "1f4af", Emoticon::Symbols );
   addEmoticon( "💰", "1f4b0", Emoticon::Objects );
@@ -522,6 +627,7 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "🔢", "1f522", Emoticon::Symbols );
   addEmoticon( "🔣", "1f523", Emoticon::Symbols );
   addEmoticon( "🔤", "1f524", Emoticon::Symbols );
+  addEmoticon( "🔥", "1f525", Emoticon::People );
   addEmoticon( "🔦", "1f526", Emoticon::Objects );
   addEmoticon( "🔧", "1f527", Emoticon::Objects );
   addEmoticon( "🔨", "1f528", Emoticon::Objects );
@@ -578,6 +684,10 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "🐕", "1f415", Emoticon::Nature );
   addEmoticon( "🐖", "1f416", Emoticon::Nature );
   addEmoticon( "🐪", "1f42a", Emoticon::Nature );
+  addEmoticon( "👥", "1f465", Emoticon::People );
+  addEmoticon( "👬", "1f46c", Emoticon::People );
+  addEmoticon( "👭", "1f46d", Emoticon::People );
+  addEmoticon( "💭", "1f4ad", Emoticon::People );
   addEmoticon( "💶", "1f4b6", Emoticon::Objects );
   addEmoticon( "💷", "1f4b7", Emoticon::Objects );
   addEmoticon( "📬", "1f4ec", Emoticon::Objects );
@@ -603,6 +713,7 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "🌕", "1f315", Emoticon::Nature );
   addEmoticon( "🌙", "1f319", Emoticon::Nature );
   addEmoticon( "🌛", "1f31b", Emoticon::Nature );
+  addEmoticon( "🌟", "1f31f", Emoticon::People );
   addEmoticon( "🌜", "1f31c", Emoticon::Nature );
   addEmoticon( "🌝", "1f31d", Emoticon::Nature );
   addEmoticon( "🌏", "1f30f", Emoticon::Nature );
@@ -618,7 +729,6 @@ EmoticonManager::EmoticonManager()
   addEmoticon( "🇮🇹", "1f1ee-1f1f9", Emoticon::Objects );
   addEmoticon( "🇺🇸", "1f1fa-1f1f8", Emoticon::Objects );
   addEmoticon( "🇷🇺", "1f1f7-1f1fa", Emoticon::Objects );
-#endif
 
   qDebug() << "Emoticon manager loads" << emoticons( true ).size() << "images with" << m_emoticons.size() << "keys";
 }
@@ -642,30 +752,46 @@ QList<Emoticon> EmoticonManager::emoticons( bool remove_duplicates ) const
   QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
   while( it != m_emoticons.end() )
   {
-    if( !remove_duplicates )
-      emoticon_list << *it;
-    else
+    if( !it.value().isInGroup() )
     {
-      emoticon_to_add = true;
-      QList<Emoticon>::iterator it2 = emoticon_list.begin();
-      while( it2 != emoticon_list.end() )
-      {
-        if( (*it2).name() == (*it).name() )
-        {
-          emoticon_to_add = false;
-          if( (*it2).textToMatch().size() > (*it).textToMatch().size() )
-            *it2 = *it;
-        }
-        ++it2;
-      }
-      if( emoticon_to_add )
+      if( !remove_duplicates )
         emoticon_list << *it;
+      else
+      {
+        emoticon_to_add = true;
+        QList<Emoticon>::iterator it2 = emoticon_list.begin();
+        while( it2 != emoticon_list.end() )
+        {
+          if( (*it2).name() == (*it).name() )
+          {
+            emoticon_to_add = false;
+            if( (*it2).textToMatch().size() > (*it).textToMatch().size() )
+              *it2 = *it;
+          }
+          ++it2;
+        }
+        if( emoticon_to_add )
+          emoticon_list << *it;
+      }
     }
     ++it;
   }
 
   qSort( emoticon_list.begin(), emoticon_list.end(), EmoticonForName );
 
+  return emoticon_list;
+}
+
+QList<Emoticon> EmoticonManager::emoticonsByGroup( int group_id ) const
+{
+  QList<Emoticon> emoticon_list;
+  QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
+  while( it != m_emoticons.end() )
+  {
+    if( it.value().group() == group_id )
+      emoticon_list << *it;
+    ++it;
+  }
   return emoticon_list;
 }
 
@@ -750,10 +876,9 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
   return s;
 }
 
-#ifdef BEEBEEP_USE_EMOJI
 void EmoticonManager::createEmojiFile()
 {
-  QFile emoji_list_file( "emoji_list.txt" );
+  QFile emoji_list_file( "../misc/emoji_list.txt" );
   if( !emoji_list_file.open( QFile::ReadOnly | QFile::Text ) )
     return;
 
@@ -787,8 +912,7 @@ void EmoticonManager::createEmojiFile()
 
   QStringList emoji_folders;
   emoji_folders << "";
-  emoji_folders << "";
-  emoji_folders << "../src/emojis/smiley/";
+  emoji_folders << "../src/emojis/people/";
   emoji_folders << "../src/emojis/objects/";
   emoji_folders << "../src/emojis/nature/";
   emoji_folders << "../src/emojis/places/";
@@ -796,8 +920,7 @@ void EmoticonManager::createEmojiFile()
 
   QStringList emoji_group_names;
   emoji_group_names << "";
-  emoji_group_names << "";
-  emoji_group_names << "Smiley";
+  emoji_group_names << "People";
   emoji_group_names << "Objects";
   emoji_group_names << "Nature";
   emoji_group_names << "Places";
@@ -807,7 +930,7 @@ void EmoticonManager::createEmojiFile()
   QString emoji_file_name;
   while( emoji_it != emoji_list.end() )
   {
-    for( int i = Emoticon::Smiley; i < Emoticon::NumGroups; i++ )
+    for( int i = Emoticon::People; i < Emoticon::NumGroups; i++ )
     {
       emoji_file_name = emoji_folders.at( i ) + emoji_it->name() + ".png";
       if( QFile::exists( emoji_file_name ) )
@@ -822,7 +945,7 @@ void EmoticonManager::createEmojiFile()
   int emoji_not_in_group = 0;
   foreach( Emoticon e, emoji_list )
   {
-    if( e.group() < Emoticon::Smiley )
+    if( !e.isInGroup() )
       emoji_not_in_group++;
   }
 
@@ -843,12 +966,9 @@ void EmoticonManager::createEmojiFile()
 
   foreach( Emoticon e, emoji_list )
   {
-    if( e.group() > Emoticon::Recent )
-      //text_stream_out << " " << e.name() << "\t" << e.group() << "\t" << e.textToMatch() << "\n";
+    if( e.isInGroup() )
       text_stream_out << "  addEmoticon( \"" << e.textToMatch() << "\", \"" << e.name() << "\", Emoticon::" << emoji_group_names.at( e.group() ) << " ); \n";
   }
 
   file_to_save.close();
 }
-#endif
-

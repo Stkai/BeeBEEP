@@ -25,8 +25,6 @@
 #define BEEBEEP_EMOTICONMANAGER_H
 
 #include "Emoticon.h"
-#undef BEEBEEP_USE_EMOJI
-
 
 class EmoticonManager
 {
@@ -38,6 +36,7 @@ public:
   Emoticon emoticon( const QString& ) const;
 
   QList<Emoticon> emoticons( bool remove_duplicates ) const;
+  QList<Emoticon> emoticonsByGroup( int ) const;
 
   static EmoticonManager& instance()
   {
@@ -64,10 +63,7 @@ private:
   QMultiHash<QChar, Emoticon> m_emoticons;
   int m_maxTextSize;
 
-#ifdef BEEBEEP_USE_EMOJI
-  QMultiHash<QChar, Emoticon> m_emojis;
   void createEmojiFile();
-#endif
 
 };
 

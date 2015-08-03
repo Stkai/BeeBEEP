@@ -32,6 +32,8 @@ Settings* Settings::mp_instance = NULL;
 Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
+  m_settingsVersion = BEEBEEP_SETTINGS_VERSION;
+
   /* Default RC start */
   m_useSettingsFileIni = true;
   m_broadcastOnlyToHostsIni = false;
@@ -451,6 +453,7 @@ void Settings::load()
 
   m_firstTime = sets->allKeys().isEmpty();
   sets->beginGroup( "Version" );
+  m_settingsVersion = sets->value( "Settings", BEEBEEP_SETTINGS_VERSION ).toInt();
   m_dataStreamVersion = sets->value( "DataStream", (int)DATASTREAM_VERSION_1 ).toInt();
   m_settingsCreationDate = sets->value( "BeeBang", QDate() ).toDate();
   if( m_settingsCreationDate.isNull() )
@@ -487,7 +490,7 @@ void Settings::load()
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
   m_savePassword = sets->value( "SavePassword", false ).toBool();
   if( m_savePassword )
-    m_passwordBeforeHash = simpleEncryptDecrypt( sets->value( "EncPwd", "" ).toString() );
+    m_passwordBeforeHash = simpleDecrypt( sets->value( "EncPwd", "" ).toString() );
   else
     m_passwordBeforeHash = "";
   sets->endGroup();
@@ -665,7 +668,7 @@ void Settings::save()
   if( m_savePassword )
   {
     sets->setValue( "SavePassword", true );
-    sets->setValue( "EncPwd", simpleEncryptDecrypt( m_passwordBeforeHash ) );
+    sets->setValue( "EncPwd", simpleEncrypt( m_passwordBeforeHash ) );
   }
   else
   {
@@ -993,21 +996,40 @@ bool Settings::addSubnetToBroadcastAddress( const QHostAddress& ext_subnet )
     return addBroadcastAddressInSettings( ext_subnet.toString() );
 }
 
-QString Settings::simpleEncryptDecrypt( const QString& text_passed )
+QString Settings::simpleEncrypt( const QString& text_to_encrypt )
 {
-  if( text_passed.size() <= 0 )
-    return "";
+  if( text_to_encrypt.size() <= 0 )
+    return QLatin1String( "" );
 
-  char key = 'k';
-  QString text_returned = "";
+  QByteArray byte_array_encrypted = text_to_encrypt.toUtf8().toBase64();
 
-#if QT_VERSION >= 0x050000
-  foreach( QChar c, text_passed )
-    text_returned += c.toLatin1() ^ key;
-#else
-  foreach( QChar c, text_passed )
-    text_returned += c.toLatin1() ^ key;
+#ifdef BEEBEEP_DEBUG
+  //qDebug() << "Before simple encrypt:\n" << qPrintable( text_to_encrypt );
+  //qDebug() << "After simple encrypt:\n" << qPrintable( QString::fromLatin1( byte_array_encrypted ) );
 #endif
-  return text_returned;
+  return QString::fromLatin1( byte_array_encrypted );
+}
+
+QString Settings::simpleDecrypt( const QString& text_to_decrypt )
+{
+  if( text_to_decrypt.size() <= 0 )
+    return QLatin1String( "" );
+
+  QString text_decrypted = "";
+
+  if( m_settingsVersion < 5 )
+  {
+    // Old Decryption
+    char key = 'k';
+    foreach( QChar c, text_to_decrypt )
+      text_decrypted += c.toLatin1() ^ key;
+  }
+  else
+  {
+    QByteArray byte_array_to_decrypt = text_to_decrypt.toLatin1();
+    text_decrypted = QString::fromUtf8( QByteArray::fromBase64( byte_array_to_decrypt ) );
+  }
+
+  return text_decrypted;
 }
 

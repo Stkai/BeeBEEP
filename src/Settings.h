@@ -268,7 +268,8 @@ public:
   void save();
   inline const QDateTime& lastSave() const;
 
-  QString simpleEncryptDecrypt( const QString& );
+  QString simpleEncrypt( const QString& );
+  QString simpleDecrypt( const QString& );
 
   static Settings& instance()
   {
@@ -312,6 +313,7 @@ private:
   // Ini
   bool m_firstTime;
   QDate m_settingsCreationDate;
+  int m_settingsVersion;
 
   User m_localUser;
   int m_broadcastInterval;

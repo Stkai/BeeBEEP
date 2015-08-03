@@ -282,7 +282,7 @@ QPixmap Protocol::stringToPixmap( const QString& s ) const
   QPixmap pix;
   if( s.isEmpty() )
     return pix;
-  QByteArray byte_array = QByteArray::fromBase64( s.toLatin1() );
+  QByteArray byte_array = QByteArray::fromBase64( s.toLatin1() ); // base64 uses latin1 chars
   pix.loadFromData( byte_array, "PNG" );
   return pix;
 }

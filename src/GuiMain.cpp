@@ -894,7 +894,7 @@ void GuiMain::createDockWindows()
   mp_dockEmoticons->setWidget( mp_emoticonsWidget );
 
   mp_dockEmoticons->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::BottomDockWidgetArea, mp_dockEmoticons );
+  addDockWidget( Qt::LeftDockWidgetArea, mp_dockEmoticons );
   QAction* mp_actViewEmoticons = mp_dockEmoticons->toggleViewAction();
   mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
   mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );

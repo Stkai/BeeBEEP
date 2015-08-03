@@ -49,3 +49,41 @@ Emoticon& Emoticon::operator=( const Emoticon& e )
   }
   return *this;
 }
+
+QString Emoticon::groupFolder( int group_id )
+{
+  switch( group_id )
+  {
+  case People:
+    return QLatin1String( "emojis/people" );
+  case Objects:
+    return QLatin1String( "emojis/objects" );
+  case Nature:
+    return QLatin1String( "emojis/nature" );
+  case Places:
+    return QLatin1String( "emojis/places" );
+  case Symbols:
+    return QLatin1String( "emojis/symbols" );
+  default:
+    return QLatin1String( "emoticons" );
+  }
+}
+
+QIcon Emoticon::groupIcon( int group_id )
+{
+  switch( group_id )
+  {
+  case People:
+    return QIcon( ":/emojis/people/1f465.png" );
+  case Objects:
+    return QIcon( ":/emojis/objects/1f514.png" );
+  case Nature:
+    return QIcon( ":/emojis/nature/1f338.png" );
+  case Places:
+    return QIcon( ":/emojis/places/1f698.png" );
+  case Symbols:
+    return QIcon( ":/emojis/symbols/1f523.png" );
+  default:
+    return QIcon( ":/images/emoticon.png" );
+  }
+}

@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="89"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Onmogelijk %2 te downloaden van %3: gebruiker is offline.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="104"/>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="185"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Onmogelijk %2 te verzenden naar %3:gebruiker is offline.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="195"/>
@@ -639,12 +639,12 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="99"/>
         <source>Members</source>
-        <translation type="unfinished"></translation>
+        <translation>Leden</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="100"/>
         <source>Show the members of the chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de leden van de chat</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="106"/>
@@ -771,7 +771,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="377"/>
         <source>last %1 messages</source>
-        <translation type="unfinished"></translation>
+        <translation>laatste %1 berichten</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="501"/>
@@ -874,7 +874,7 @@ Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Droid Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1067,12 +1067,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiHome.cpp" line="92"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Naar klembord kopiëren</translation>
+        <translation>Naar klembord kopiëren</translation>
     </message>
     <message>
         <location filename="../src/GuiHome.cpp" line="94"/>
         <source>Select All</source>
-        <translation type="unfinished">Alles selecteren</translation>
+        <translation>Alles selecteren</translation>
     </message>
 </context>
 <context>
@@ -1453,12 +1453,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="570"/>
         <source>Show only last %1 messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon alleen laatste %1 berichten</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="571"/>
         <source>If enabled only the last %1 messages will be shown in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien ingeschakeld worden alleen de laatste %1 berichten getoond in de chat</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="591"/>
@@ -1468,12 +1468,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="611"/>
         <source>Reset window geometry at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel venster geometrie bij het opstarten</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="612"/>
         <source>If enabled the window geometry will be reset to default value at next startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien ingeschakeld wordt de venster geometrie teruggezet naar de standaardwaarde bij de volgende startup</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="661"/>
@@ -1498,62 +1498,62 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="674"/>
         <source>Show the user&apos;s vCard on right click</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de vCards gebruikers met rechtermuis klik</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="675"/>
         <source>If enabled you can see the user&apos;s vCard when right click on it</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien ingeschakeld kun je de vCard gebruikers zien met rechtermuis klik</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="888"/>
         <source>Emoticons</source>
-        <translation type="unfinished">Emoticons</translation>
+        <translation>Emoticons</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="895"/>
         <source>Smiley</source>
-        <translation type="unfinished"></translation>
+        <translation>Smiley</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="904"/>
         <source>Show the emoticon panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de emoticon-paneel</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="905"/>
         <source>Add your preferred emoticon to the message</source>
-        <translation type="unfinished">Voeg uw favoriete emoticon toe aan het bericht</translation>
+        <translation>Voeg uw favoriete emoticon toe aan het bericht</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1187"/>
         <source>Please select the maximum number of messages to be showed</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer het maximale aantal berichten  dat word getoond</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2047"/>
         <source>Group chat will be deleted when all members goes offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groep-chat word verwijderd wanneer alle leden offline gaan.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2048"/>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als je een blijfende chat wilt, iverweeg een groep aan te maken.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2049"/>
         <source>Do you wish to continue or create group?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je doorgaan of een groep aanmaken?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2050"/>
         <source>Continue</source>
-        <translation type="unfinished">Doorgaan</translation>
+        <translation>Doorgaan</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2050"/>
         <source>Create Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groep aanmaken</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2526"/>
@@ -2951,7 +2951,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="201"/>
         <source>Click to open %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om %1 te openen</translation>
     </message>
     <message>
         <source>Double click to open %1</source>
@@ -3548,7 +3548,7 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/GuiUserItem.cpp" line="136"/>
         <source>Click to open chat with all local users</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om chat te openen met alle lokale gebruikers</translation>
     </message>
     <message>
         <location filename="../src/GuiUserItem.cpp" line="140"/>
@@ -3558,7 +3558,7 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/GuiUserItem.cpp" line="155"/>
         <source>Click to send a private message</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om privé-bericht te verzenden</translation>
     </message>
     <message>
         <source>Double click to send a private message</source>
@@ -3585,12 +3585,12 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/GuiGroupItem.cpp" line="67"/>
         <source>Click to send message to group: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om bericht naar groep te zenden: %1</translation>
     </message>
     <message>
         <location filename="../src/GuiSavedChatList.cpp" line="129"/>
         <source>Click to view chat history: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om chatgeschiedenis te tonen: %1</translation>
     </message>
 </context>
 <context>
