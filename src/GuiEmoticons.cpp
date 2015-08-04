@@ -40,9 +40,8 @@ QSize GuiEmoticons::sizeHint() const
 
 void GuiEmoticons::initEmoticons()
 {
-  QList<Emoticon> emoticon_list = EmoticonManager::instance().emoticons( true );
-  emoticon_list.append( EmoticonManager::instance().emoticonsByGroup( Emoticon::People ) );
-  addEmoticonTab( emoticon_list, QIcon( ":images/emoticon.png"), tr( "Smiley" ) );
+  QList<Emoticon> emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::People );
+  addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::People ), tr( "Smiley" ) );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Objects );
   addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::Objects ), tr( "Objects" ) );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Nature );

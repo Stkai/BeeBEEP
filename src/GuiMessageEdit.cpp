@@ -21,108 +21,128 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
+#include "GuiConfig.h"
 #include "Emoticon.h"
 #include "GuiMessageEdit.h"
+#include "HistoryManager.h"
 #include "Settings.h"
 
 
 GuiMessageEdit::GuiMessageEdit( QWidget* parent )
-  : QTextEdit( parent )
+  : QTextEdit( parent ), m_emoticonsAdded()
 {
   setObjectName( "GuiMessageEdit" );
   mp_timer = new QTimer( this );
   mp_timer->setSingleShot( true );
   m_undoAvailable = false;
   m_redoAvailable = false;
-  m_historyIndex = 0;
-  m_history.append( "" );
-  m_lastMessage = "";
+  m_currentMessage = "";
+  m_messageChanged = true;
+
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
   connect( this, SIGNAL( undoAvailable( bool) ), this, SLOT( setUndoAvailable( bool ) ) );
   connect( this, SIGNAL( redoAvailable( bool ) ), this, SLOT( setRedoAvailable( bool ) ) );
 }
 
-QString GuiMessageEdit::message() const
+void GuiMessageEdit::createMessageToSend()
 {
-  QString text = toPlainText();
-  return text.trimmed().isEmpty() ? QLatin1String( "" ) : text;
+  QString text;
+
+  if( !m_emoticonsAdded.isEmpty() )
+  {
+    QString html_text = toHtml();
+    foreach( Emoticon e, m_emoticonsAdded )
+      html_text.replace( e.toHtml( BEE_EMOTICON_SIZE_IN_EDIT_MESSAGE ), e.textToMatch() );
+    text = Bee::removeHtmlTag( html_text );
+  }
+  else
+    text = toPlainText();
+
+  m_currentMessage = text.trimmed().isEmpty() ? QLatin1String( "" ) : text;
+  m_messageChanged = false;
+}
+
+QString GuiMessageEdit::message()
+{
+  if( m_messageChanged )
+    createMessageToSend();
+
+  return m_currentMessage;
 }
 
 void GuiMessageEdit::addEmoticon( const Emoticon& e )
 {
+  if( !isEnabled() )
+    return;
+
   if( e.isInGroup() )
   {
-      /*
-    setTextColor( palette().base().color() );
-    setFontPointSize( 1 );
-    QTextCursor tc = textCursor();
-    tc.beginEditBlock();
-    tc.insertHtml( e.toHtml( 16 ));
-    //tc.insertText( QString( " " ) + e.textToMatch() );
-    tc.endEditBlock();
-
-    setTextColor( QColor( Settings::instance().chatFontColor() ) );
-    setFontPointSize( Settings::instance().chatFont().pointSize() );
-
- */
-    insertHtml( e.toHtml( 16 ) );
-    setTextColor( palette().base().color() );
-    setFontPointSize( 1 );
-    insertPlainText( QString( " " ) + e.textToMatch() );
-    setTextColor( QColor( Settings::instance().chatFontColor() ) );
-    setFontPointSize( Settings::instance().chatFont().pointSize() );
+    insertHtml( QString( "&nbsp;" ) + e.toHtml( BEE_EMOTICON_SIZE_IN_EDIT_MESSAGE ) + QString( "&nbsp;" ) );
+    if( !m_emoticonsAdded.contains( e ) )
+      m_emoticonsAdded.append( e );
   }
   else
     insertPlainText( QString( " " ) + e.textToMatch() );
+
+  m_messageChanged = true;
 }
 
 void GuiMessageEdit::clearMessage()
 {
+  m_messageChanged = true;
   clear();
+  m_emoticonsAdded.clear();
   setTextColor( QColor( Settings::instance().chatFontColor() ) );
   setFontPointSize( Settings::instance().chatFont().pointSize() );
 }
 
 void GuiMessageEdit::addMessageToHistory()
 {
-  m_lastMessage = "";
-  QString message_to_add = message();
-  m_history.removeOne( message_to_add ); // no duplicates
-  m_history.append( message_to_add );
-  if( historySize() > Settings::instance().chatMessageHistorySize() )
-    m_history.removeFirst();
-  m_historyIndex = m_history.size(); // +1 from historySize
+  HistoryMessage hm;
+  hm.setMessage( message() );
+  hm.setEmoticons( m_emoticonsAdded );
+  HistoryManager::instance().addMessage( hm );
 }
 
 bool GuiMessageEdit::nextMessageFromHistory()
 {
-  if( m_historyIndex > historySize() )
+  if( !HistoryManager::instance().moveHistoryUp() )
     return false;
-  m_historyIndex++;
   setMessageFromHistory();
   return true;
 }
 
 bool GuiMessageEdit::prevMessageFromHistory()
 {
-  if( m_historyIndex < 0 )
+  if( !HistoryManager::instance().moveHistoryDown() )
     return false;
-  m_historyIndex--;
   setMessageFromHistory();
   return true;
 }
 
 void GuiMessageEdit::setMessageFromHistory()
 {
-  if( m_lastMessage.isEmpty() && !message().isEmpty() )
-    m_lastMessage = message();
+  QString current_message = message();
 
-  QString txt;
-  if( m_historyIndex < 0 || m_historyIndex > historySize() )
-    txt = m_lastMessage;
-  else
-    txt = m_history.at( m_historyIndex );
-  setText( txt );
+  if( !HistoryManager::instance().hasTemporaryMessage() && !current_message.isEmpty() )
+  {
+    HistoryMessage hm;
+    hm.setMessage( current_message );
+    hm.setEmoticons( m_emoticonsAdded );
+    HistoryManager::instance().setTemporaryMessage( hm );
+  }
+
+  HistoryMessage message_from_history = HistoryManager::instance().message();
+
+  QString message_txt = message_from_history.message();
+  m_emoticonsAdded = message_from_history.emoticons();
+
+  foreach( Emoticon e, m_emoticonsAdded )
+    message_txt.replace( e.textToMatch(), e.toHtml( BEE_EMOTICON_SIZE_IN_EDIT_MESSAGE ) );
+
+  setText( message_txt );
+  m_messageChanged = true;
 }
 
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
@@ -136,6 +156,8 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     emit tabPressed();
     return;
   }
+
+  m_messageChanged = true;
 
   if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter )
   {
@@ -181,9 +203,9 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 
   QTextEdit::keyPressEvent( e );
 
-  m_lastMessage = "";
+  HistoryManager::instance().clearTemporaryMessage();
 
-  // Fixed: when the text is fully cancelled the message box loose the color and the size... patched with the line below
+  // Fixed: when the text is fully cancelled the message box looses the color and the size... patched with the line below
   if( reset_font )
   {
     setTextColor( QColor( Settings::instance().chatFontColor() ) );
@@ -231,3 +253,4 @@ void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.exec( event->globalPos() );
 }
+

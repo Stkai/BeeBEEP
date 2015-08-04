@@ -328,15 +328,9 @@ bool Bee::isColorNear( const QColor& c1, const QColor& c2 )
 
 QString Bee::removeHtmlTag( const QString& s )
 {
-  /* Faster than
-   * QTextDocument doc;
-   * doc.setHtml( htmlString );
-   * return doc.toPlainText();
-   */
-
-  QString plain_text = s;
-  plain_text.remove( QRegExp( "<[^>]*>" ) );
-  return plain_text;
+  QTextDocument text_document;
+  text_document.setHtml( s );
+  return text_document.toPlainText();
 }
 
 QBrush Bee::defaultTextBrush()

@@ -27,6 +27,7 @@
 #include "Config.h"
 class Emoticon;
 
+
 class GuiMessageEdit : public QTextEdit
 {
   Q_OBJECT
@@ -36,7 +37,7 @@ public:
 
   void addEmoticon( const Emoticon& );
 
-  QString message() const;
+  QString message();
   void clearMessage();
 
 signals:
@@ -52,6 +53,7 @@ protected:
   bool prevMessageFromHistory();
   inline int historySize() const;
   void setMessageFromHistory();
+  void createMessageToSend();
 
 private slots:
   void checkWriting();
@@ -62,15 +64,12 @@ private:
   QTimer* mp_timer;
   bool m_undoAvailable;
   bool m_redoAvailable;
-
-  QStringList m_history;
-  int m_historyIndex;
-  QString m_lastMessage;
+  QList<Emoticon> m_emoticonsAdded;
+  QString m_currentMessage;
+  bool m_messageChanged;
 
 };
 
 
-//Inline Functions
-inline int GuiMessageEdit::historySize() const { return m_history.size()-1;}
 
 #endif // BEEBEEP_GUIMESSAGEEDIT_H

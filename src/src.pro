@@ -104,7 +104,9 @@ HEADERS += AudioManager.h \
   VCard.h \
   Version.h \
   Job.h \
-    GuiEmoticons.h
+    GuiEmoticons.h \
+    HistoryMessage.h \
+    HistoryManager.h
 
 SOURCES += AudioManager.cpp \
   Avatar.cpp \
@@ -183,7 +185,10 @@ SOURCES += AudioManager.cpp \
   UserManager.cpp \
   UserRecord.cpp \
   VCard.cpp \
-    GuiEmoticons.cpp
+    GuiEmoticons.cpp \
+    Emojis.cpp \
+    HistoryMessage.cpp \
+    HistoryManager.cpp
 
 FORMS += GuiAddUser.ui \
   GuiAskPassword.ui \

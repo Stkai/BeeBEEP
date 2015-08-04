@@ -1063,6 +1063,29 @@ Inserisci un nome differente.</translation>
     </message>
 </context>
 <context>
+    <name>GuiEmoticons</name>
+    <message>
+        <source>Smiley</source>
+        <translation>Faccine</translation>
+    </message>
+    <message>
+        <source>Objects</source>
+        <translation>Oggetti</translation>
+    </message>
+    <message>
+        <source>Nature</source>
+        <translation>Natura</translation>
+    </message>
+    <message>
+        <source>Places</source>
+        <translation>Posti</translation>
+    </message>
+    <message>
+        <source>Symbols</source>
+        <translation>Simboli</translation>
+    </message>
+</context>
+<context>
     <name>GuiFileInfoList</name>
     <message>
         <source>Shared folders and files</source>
@@ -2661,7 +2684,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Smiley</source>
-        <translation>Smiley</translation>
+        <translation type="obsolete">Smiley</translation>
     </message>
     <message>
         <source>Show the emoticon panel</source>

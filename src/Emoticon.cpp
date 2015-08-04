@@ -25,12 +25,12 @@
 
 
 Emoticon::Emoticon()
- : m_textToMatch( "" ), m_name( "" ), m_group( Emoticon::Unknown )
+ : m_textToMatch( "" ), m_name( "" ), m_group( Emoticon::Unknown ), m_sortOrder( -1 )
 {
 }
 
-Emoticon::Emoticon( const QString& text_to_match, const QString& emoticon_name, int emoticon_group )
- : m_textToMatch( text_to_match ), m_name( emoticon_name ), m_group( emoticon_group )
+Emoticon::Emoticon( const QString& text_to_match, const QString& emoticon_name, int emoticon_group, int sort_order )
+ : m_textToMatch( text_to_match ), m_name( emoticon_name ), m_group( emoticon_group ), m_sortOrder( sort_order )
 {
 }
 
@@ -46,6 +46,7 @@ Emoticon& Emoticon::operator=( const Emoticon& e )
     m_textToMatch = e.m_textToMatch;
     m_name = e.m_name;
     m_group = e.m_group;
+    m_sortOrder = e.m_sortOrder;
   }
   return *this;
 }
@@ -54,6 +55,8 @@ QString Emoticon::groupFolder( int group_id )
 {
   switch( group_id )
   {
+  case Text:
+    return QLatin1String( "emojis/people" );
   case People:
     return QLatin1String( "emojis/people" );
   case Objects:

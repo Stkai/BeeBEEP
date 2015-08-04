@@ -318,7 +318,11 @@ void GuiChat::setChatUsers()
           sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
       }
     }
-    chat_users = sl.size() == 0 ? tr( "Nobody" ) : (sl.size() == 2 ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ));
+
+    if( sl.size() > 2 )
+      chat_users = QString( "<b>%1</b>" ).arg( m_chatName );
+    else
+      chat_users = sl.size() == 0 ? tr( "Nobody" ) : (sl.size() == 2 ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ));
   }
 
 #ifdef BEEBEEP_DEBUG

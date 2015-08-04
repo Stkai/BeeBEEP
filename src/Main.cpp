@@ -29,6 +29,7 @@
 #include "GuiConfig.h"
 #include "GuiIconProvider.h"
 #include "GuiMain.h"
+#include "HistoryManager.h"
 #include "Log.h"
 #include "NetworkManager.h"
 #include "PluginManager.h"
@@ -114,6 +115,9 @@ int main( int argc, char *argv[] )
   /* Init Chat Manager */
   (void)ChatManager::instance();
 
+  /* Init History Manager */
+  (void)HistoryManager::instance();
+
   /* Init File Sharing */
   (void)FileShare::instance();
 
@@ -193,6 +197,7 @@ int main( int argc, char *argv[] )
   Settings::instance().clearTemporaryFile();
   GuiIconProvider::close();
   FileShare::close();
+  HistoryManager::close();
   ChatManager::close();
   UserManager::close();
   Protocol::close();

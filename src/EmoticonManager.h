@@ -57,13 +57,15 @@ public:
 protected:
   EmoticonManager();
 
-  void addEmoticon( const QString&, const QString&, int emoticon_group = Emoticon::Unknown );
+  void createEmojiFiles();
+
+  void addEmoticon( const QString&, const QString&, int emoticon_group = Emoticon::Unknown, int sort_order = -1 );
+  void addTextEmoticon();
+  void addEmojis();
 
 private:
   QMultiHash<QChar, Emoticon> m_emoticons;
   int m_maxTextSize;
-
-  void createEmojiFile();
 
 };
 
