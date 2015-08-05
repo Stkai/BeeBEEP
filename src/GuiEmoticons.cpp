@@ -41,7 +41,13 @@ QSize GuiEmoticons::sizeHint() const
 
 void GuiEmoticons::initEmoticons()
 {
-  QList<Emoticon> emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::People );
+  QList<Emoticon> emoticon_list;
+  /*
+  for( int i = 0; i < 30; i++ )
+    emoticon_list << Emoticon();
+  addEmoticonTab( emoticon_list, QIcon( ":/images/recent.png"), tr( "Recent" ) );
+  */
+  emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::People );
   addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::People ), tr( "Smiley" ) );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Objects );
   addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::Objects ), tr( "Objects" ) );
@@ -53,7 +59,7 @@ void GuiEmoticons::initEmoticons()
   addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::Symbols ), tr( "Symbols" ) );
 }
 
-void GuiEmoticons::addEmoticonTab( const QList<Emoticon>& emoticon_list, const QIcon& group_icon, const QString& group_name )
+int GuiEmoticons::addEmoticonTab( const QList<Emoticon>& emoticon_list, const QIcon& group_icon, const QString& group_name )
 {
   GuiEmoticonWidget* emoticon_widget = new GuiEmoticonWidget( this );
   QScrollArea* scroll_area = new QScrollArea( this );
@@ -83,6 +89,7 @@ void GuiEmoticons::addEmoticonTab( const QList<Emoticon>& emoticon_list, const Q
   scroll_area->setWidget( emoticon_widget );
   int tab_id = addTab( scroll_area, group_icon, "" );
   setTabToolTip( tab_id, group_name );
+  return tab_id;
 }
 
 void GuiEmoticons::emoticonClicked()
@@ -93,12 +100,18 @@ void GuiEmoticons::emoticonClicked()
 
   QString emoticon_code = emoticon_object->objectName();
   emoticon_code.remove( "GuiEmoticonCode" );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Emoticon clicked is" << emoticon_code;
-#endif
+
+  if( emoticon_code.isEmpty() )
+    return;
+
   Emoticon e = EmoticonManager::instance().emoticon( emoticon_code );
   if( e.isValid() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Emoticon clicked is" << qPrintable( e.textToMatch() ) << e.name();
+#endif
     emit( emoticonSelected( e ) );
+  }
 }
 
 

@@ -119,5 +119,6 @@
         <file>images/home.png</file>
         <file>images/download-box.png</file>
         <file>images/remove.png</file>
+        <file>images/recent.png</file>
     </qresource>
 </RCC>

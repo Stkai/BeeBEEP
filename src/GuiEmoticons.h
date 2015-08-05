@@ -43,7 +43,7 @@ private slots:
 
 protected:
   QSize sizeHint() const;
-  void addEmoticonTab( const QList<Emoticon>&, const QIcon&, const QString& );
+  int addEmoticonTab( const QList<Emoticon>&, const QIcon&, const QString& );
 
 };
 

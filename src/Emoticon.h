@@ -72,7 +72,7 @@ inline const QString& Emoticon::textToMatch() const { return m_textToMatch; }
 inline const QString& Emoticon::name() const { return m_name; }
 inline void Emoticon::setGroup( int new_value ) { m_group = new_value; }
 inline int Emoticon::group() const { return m_group; }
-inline bool Emoticon::isInGroup() const { return m_group > Emoticon::Unknown && m_group < Emoticon::NumGroups; }
+inline bool Emoticon::isInGroup() const { return m_group > Emoticon::Text && m_group < Emoticon::NumGroups; }
 inline int Emoticon::sortOrder() const { return m_sortOrder; }
 inline QString Emoticon::fileName() const { return QString( ":/%1/%2.png" ).arg( groupFolder( m_group ) ).arg( m_name ); }
 inline QString Emoticon::toHtml( int icon_size ) const { return QString( "<img src=\"%1\"%2 />").arg( fileName() ).arg( QString( " height=\"%1\"" ).arg( icon_size ) ); }

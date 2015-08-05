@@ -37,7 +37,13 @@ EmoticonManager::EmoticonManager()
   addTextEmoticon();
   addEmojis();
 
-  //qDebug() << "Emoticon manager loads" << emoticons( true ).size() << "images with" << m_emoticons.size() << "keys";
+  // error in parsing !?!?
+  Emoticon e1( "😠", "1f620", 0, 0 ); // angry yellow
+  Emoticon e2( "👠", "1f460", 0, 0 );  // red woman shoes
+  m_emoticons.remove( e1.textToMatch().at( 0 ), e1 );
+  m_emoticons.remove( e2.textToMatch().at( 0 ), e2 );
+
+  qDebug() << "Emoticon manager loads" << m_emoticons.size() << "emojis";
 }
 
 void EmoticonManager::addTextEmoticon()
@@ -158,7 +164,7 @@ QList<Emoticon> EmoticonManager::textEmoticons( bool remove_names_duplicated ) c
   QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
   while( it != m_emoticons.end() )
   {
-    if( it.value().group() == Emoticon::Text )
+    if( !it.value().isInGroup() )
     {
       if( !remove_names_duplicated )
         emoticon_list << *it;
@@ -222,6 +228,10 @@ Emoticon EmoticonManager::emoticon( const QString& e_text ) const
 
 QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size ) const
 {
+  // not working
+  // Emoticon clicked is Ã°ÂÂÂ  "1f620"
+  // Emoticon clicked is Ã°ÂÂÂ  "1f460"
+
   QString s = "";
   QString text_to_match = "";
   QChar c;
@@ -430,7 +440,7 @@ void EmoticonManager::createEmojiFiles()
                      "//////////////////////////////////////////////////////////////////////\n"
                      "\n";
 
-  text_stream_out << "#include \"EmoticonManager.h\"\n\n";
+  text_stream_out << "#include \"EmoticonManager.h\"\n\n\n";
   text_stream_out << "void EmoticonManager::addEmojis()\n{\n";
 
   foreach( Emoticon e, emoji_list )
