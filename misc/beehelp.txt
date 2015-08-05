@@ -103,6 +103,9 @@ ResetGeometryAtStartup= reset geometry at startup (useful if some widget has an 
 ChatLinesToShow= number of lines to show in chat (working if the option below is enabled)
 ChatMaxLinesToShow= force chat to show only X messages (increase usability)
 ShowEmoticonMenu= show the emoticon menu when the chat window is raised
+EmoticonSizeInEdit= emoticon size in message edit window (default: 18)
+EmoticonSizeInChat= emoticon size in chat windows (default: 24)
+EmoticonSizeInMenu= emoticon size in menu (default: 24)
 
 [Tools]
 LogToFile=false

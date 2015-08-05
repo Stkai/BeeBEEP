@@ -52,6 +52,9 @@ Settings::Settings()
   m_trustSystemAccount = false;
   /* Default RC end */
 
+  m_emoticonSizeInEdit = 18;
+  m_emoticonSizeInChat = 24;
+  m_emoticonSizeInMenu = 24;
   m_confirmOnDownloadFile = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
@@ -552,6 +555,9 @@ void Settings::load()
   m_chatLinesToShow = sets->value( "ChatLinesToShow", 80 ).toInt();
   m_chatMaxLinesToShow = sets->value( "ChatMaxLinesToShow", false ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
+  m_emoticonSizeInEdit = sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt();
+  m_emoticonSizeInChat = sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt();
+  m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -719,6 +725,9 @@ void Settings::save()
   sets->setValue( "ChatLinesToShow", m_chatLinesToShow );
   sets->setValue( "ChatMaxLinesToShow", m_chatMaxLinesToShow );
   sets->setValue( "ShowEmoticonMenu", m_showEmoticonMenu );
+  sets->setValue( "EmoticonSizeInEdit", m_emoticonSizeInEdit );
+  sets->setValue( "EmoticonSizeInChat", m_emoticonSizeInChat );
+  sets->setValue( "EmoticonSizeInMenu", m_emoticonSizeInMenu );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

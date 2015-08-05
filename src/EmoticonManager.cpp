@@ -151,16 +151,16 @@ static bool SortEmoticon( const Emoticon& e1, const Emoticon& e2 )
     return e1.sortOrder() < e2.sortOrder();
 }
 
-QList<Emoticon> EmoticonManager::emoticons( bool remove_duplicates ) const
+QList<Emoticon> EmoticonManager::emoticons( bool remove_names_duplicated ) const
 {
   QList<Emoticon> emoticon_list;
   bool emoticon_to_add = false;
   QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
   while( it != m_emoticons.end() )
   {
-    if( !it.value().isInGroup() )
+    if( it.value().isInGroup() )
     {
-      if( !remove_duplicates )
+      if( !remove_names_duplicated )
         emoticon_list << *it;
       else
       {
@@ -171,8 +171,7 @@ QList<Emoticon> EmoticonManager::emoticons( bool remove_duplicates ) const
           if( (*it2).name() == (*it).name() )
           {
             emoticon_to_add = false;
-            if( (*it2).textToMatch().size() > (*it).textToMatch().size() )
-              *it2 = *it;
+            break;
           }
           ++it2;
         }
@@ -221,7 +220,7 @@ Emoticon EmoticonManager::emoticon( const QString& e_text ) const
   return Emoticon();
 }
 
-QString EmoticonManager::parseEmoticons( const QString& msg ) const
+QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size ) const
 {
   QString s = "";
   QString text_to_match = "";
@@ -248,7 +247,7 @@ QString EmoticonManager::parseEmoticons( const QString& msg ) const
       Emoticon e = emoticon( text_to_match );
       if( e.isValid() )
       {
-        s += e.toHtml();
+        s += e.toHtml( emoticon_size );
         text_to_match = "";
         parse_emoticons = true;
       }
@@ -319,7 +318,7 @@ void EmoticonManager::createEmojiFiles()
   }
 
   emoji_list_file.close();
-  qDebug() << emoji_list.size() << "emojis load";
+  qDebug() << emoji_list.size() << "emojis load from list";
 
   QStringList emoji_group_names;
   emoji_group_names << "";
@@ -346,14 +345,53 @@ void EmoticonManager::createEmojiFiles()
     ++emoji_it;
   }
 
+  int emoji_in_group = 0;
   int emoji_not_in_group = 0;
+  int emoji_in_twitter = 0;
+  qDebug() << "Checking missed emoji in twitter folder";
   foreach( Emoticon e, emoji_list )
   {
     if( !e.isInGroup() )
+    {
       emoji_not_in_group++;
+      emoji_file_name = QString( "../src/emojis/twitter/%1.png" ).arg( e.name() );
+      if( QFile::exists( emoji_file_name ) )
+      {
+        qDebug() << qPrintable( QString( "cp twitter/%1.png ." ).arg( e.name() ) );
+        emoji_in_twitter++;
+      }
+    }
+    else
+      emoji_in_group++;
   }
 
+  qDebug() << "Emoji in group:" << emoji_in_group;
   qDebug() << "Emoji not in group:" << emoji_not_in_group;
+  qDebug() << "Emoji missed in twitter:" << emoji_in_twitter;
+
+  for( int i = Emoticon::People; i < Emoticon::NumGroups; i++ )
+  {
+    QString emoji_folder_name = QString( "../src/emojis/" ) + emoji_group_names.at( i ).toLower();
+    QDir emoji_folder( emoji_folder_name );
+    QStringList file_list = emoji_folder.entryList();
+    foreach( QString s, file_list )
+    {
+      if( !s.contains( ".png" ) )
+        continue;
+
+      bool emoji_exists = false;
+      foreach( Emoticon e, emoji_list )
+      {
+        if( QString( "%1.png" ).arg( e.name() ) == s )
+        {
+          emoji_exists = true;
+          break;
+        }
+      }
+      if( !emoji_exists )
+        qDebug() << "Emoji not in text list:" << qPrintable( QString( "%1/%2" ).arg( emoji_folder_name ).arg( s ) );
+    }
+  }
 
   QFile file_to_save( "../src/Emojis.cpp" );
   if( file_to_save.exists() )

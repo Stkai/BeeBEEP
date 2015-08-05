@@ -24,6 +24,7 @@
 #include "EmoticonManager.h"
 #include "GuiConfig.h"
 #include "GuiEmoticons.h"
+#include "Settings.h"
 
 
 GuiEmoticons::GuiEmoticons( QWidget* parent )
@@ -62,14 +63,15 @@ void GuiEmoticons::addEmoticonTab( const QList<Emoticon>& emoticon_list, const Q
 
   QList<QPushButton*> button_list;
   QPushButton* emoticon_button = 0;
+  int emoticon_button_size = Settings::instance().emoticonSizeInMenu() + 2;
 
   foreach( Emoticon e, emoticon_list )
   {
     emoticon_button = new QPushButton( emoticon_widget );
-    emoticon_button->setIconSize( QSize( 24, 24 ) );
+    emoticon_button->setIconSize( QSize( Settings::instance().emoticonSizeInMenu(), Settings::instance().emoticonSizeInMenu() ) );
     emoticon_button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-    emoticon_button->setFixedSize( QSize( 26, 26 ) );
-    emoticon_button->setIcon( e.pixmap() );
+    emoticon_button->setFixedSize( QSize( emoticon_button_size, emoticon_button_size ) );
+    emoticon_button->setIcon( e.icon() );
     emoticon_button->setStyleSheet( "QPushButton:hover{ background-color: #ffcf04; }");
     emoticon_button->setObjectName( QString( "GuiEmoticonCode%1" ).arg( e.textToMatch() ) );
     connect( emoticon_button, SIGNAL( clicked() ), this, SLOT( emoticonClicked() ) );
@@ -134,9 +136,10 @@ void GuiEmoticonWidget::clearLayout()
 
 void GuiEmoticonWidget::paintEmoticonButtons( int box_width )
 {
+  int emoticon_button_size = Settings::instance().emoticonSizeInMenu() + 2;
   int x = 0;
   int y = 0;
-  int max_icons_per_row = qMax( 2, static_cast<int>((box_width-2) / 26) ) - 1;
+  int max_icons_per_row = qMax( 2, static_cast<int>((box_width-2) / emoticon_button_size) ) - 1;
 
   foreach( QWidget* w, m_buttons )
   {
@@ -150,6 +153,6 @@ void GuiEmoticonWidget::paintEmoticonButtons( int box_width )
   }
 
   // tells to scroll area the size of the widget
-  setMinimumSize( QSize( (max_icons_per_row+1) * 26 + 1, (y+1) * 26 + 1) );
+  setMinimumSize( QSize( (max_icons_per_row+1) * emoticon_button_size + 1, (y+1) * emoticon_button_size + 1) );
 }
 

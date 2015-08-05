@@ -22,8 +22,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
-#include "GuiConfig.h"
-#include "Emoticon.h"
 #include "GuiMessageEdit.h"
 #include "HistoryManager.h"
 #include "Settings.h"
@@ -53,7 +51,7 @@ void GuiMessageEdit::createMessageToSend()
   {
     QString html_text = toHtml();
     foreach( Emoticon e, m_emoticonsAdded )
-      html_text.replace( e.toHtml( BEE_EMOTICON_SIZE_IN_EDIT_MESSAGE ), e.textToMatch() );
+      html_text.replace( e.toHtml( Settings::instance().emoticonSizeInEdit() ), e.textToMatch() );
     text = Bee::removeHtmlTag( html_text );
   }
   else
@@ -78,7 +76,7 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
 
   if( e.isInGroup() )
   {
-    insertHtml( QString( "&nbsp;" ) + e.toHtml( BEE_EMOTICON_SIZE_IN_EDIT_MESSAGE ) + QString( "&nbsp;" ) );
+    insertHtml( QString( "&nbsp;" ) + e.toHtml( Settings::instance().emoticonSizeInEdit() ) + QString( "&nbsp;" ) );
     if( !m_emoticonsAdded.contains( e ) )
       m_emoticonsAdded.append( e );
   }
@@ -139,7 +137,7 @@ void GuiMessageEdit::setMessageFromHistory()
   m_emoticonsAdded = message_from_history.emoticons();
 
   foreach( Emoticon e, m_emoticonsAdded )
-    message_txt.replace( e.textToMatch(), e.toHtml( BEE_EMOTICON_SIZE_IN_EDIT_MESSAGE ) );
+    message_txt.replace( e.textToMatch(), e.toHtml( Settings::instance().emoticonSizeInEdit() ) );
 
   setText( message_txt );
   m_messageChanged = true;

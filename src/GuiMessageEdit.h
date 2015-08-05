@@ -25,7 +25,7 @@
 #define BEEBEEP_GUIMESSAGEEDIT_H
 
 #include "Config.h"
-class Emoticon;
+#include "Emoticon.h"
 
 
 class GuiMessageEdit : public QTextEdit

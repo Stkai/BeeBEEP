@@ -105,6 +105,10 @@ public:
   inline void setLanguagePath( const QString& );
   QString languageFilePath( const QString&, const QString& ) const;
 
+  inline int emoticonSizeInEdit() const;
+  inline int emoticonSizeInChat() const;
+  inline int emoticonSizeInMenu() const;
+
   inline QString defaultChatName() const;
   inline int chatMessageHistorySize() const;
   inline const QString& chatFontColor() const;
@@ -364,6 +368,9 @@ private:
   QSize m_mainBarIconSize;
   QSize m_avatarIconSize;
   QByteArray m_chatSplitterState;
+  int m_emoticonSizeInEdit;
+  int m_emoticonSizeInChat;
+  int m_emoticonSizeInMenu;
 
   QString m_passwordBeforeHash;
   QByteArray m_password;
@@ -575,5 +582,8 @@ inline int Settings::chatLinesToShow() const { return m_chatLinesToShow; }
 inline void Settings::setChatLinesToShow( int new_value ) { m_chatLinesToShow = new_value; }
 inline bool Settings::chatMaxLinesToShow() const { return m_chatMaxLinesToShow; }
 inline void Settings::setChatMaxLinesToShow( bool new_value ) { m_chatMaxLinesToShow = new_value; }
+inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
+inline int Settings::emoticonSizeInChat() const { return m_emoticonSizeInChat; }
+inline int Settings::emoticonSizeInMenu() const { return m_emoticonSizeInMenu; }
 
 #endif // BEEBEEP_SETTINGS_H

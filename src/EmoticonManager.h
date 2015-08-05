@@ -32,10 +32,10 @@ class EmoticonManager
   static EmoticonManager* mp_instance;
 
 public:
-  QString parseEmoticons( const QString& ) const;
+  QString parseEmoticons( const QString&, int ) const;
   Emoticon emoticon( const QString& ) const;
 
-  QList<Emoticon> emoticons( bool remove_duplicates ) const;
+  QList<Emoticon> emoticons( bool remove_names_duplicated ) const;
   QList<Emoticon> emoticonsByGroup( int ) const;
 
   static EmoticonManager& instance()
