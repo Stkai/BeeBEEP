@@ -37,7 +37,7 @@ EmoticonManager::EmoticonManager()
   addTextEmoticon();
   addEmojis();
 
-  qDebug() << "Emoticon manager loads" << emoticons( true ).size() << "images with" << m_emoticons.size() << "keys";
+  //qDebug() << "Emoticon manager loads" << emoticons( true ).size() << "images with" << m_emoticons.size() << "keys";
 }
 
 void EmoticonManager::addTextEmoticon()
@@ -151,14 +151,14 @@ static bool SortEmoticon( const Emoticon& e1, const Emoticon& e2 )
     return e1.sortOrder() < e2.sortOrder();
 }
 
-QList<Emoticon> EmoticonManager::emoticons( bool remove_names_duplicated ) const
+QList<Emoticon> EmoticonManager::textEmoticons( bool remove_names_duplicated ) const
 {
   QList<Emoticon> emoticon_list;
   bool emoticon_to_add = false;
   QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
   while( it != m_emoticons.end() )
   {
-    if( it.value().isInGroup() )
+    if( it.value().group() == Emoticon::Text )
     {
       if( !remove_names_duplicated )
         emoticon_list << *it;

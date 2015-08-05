@@ -63,6 +63,7 @@ private:
   QGridLayout* mp_layout;
   QList<QPushButton*> m_buttons;
   bool m_hasPainted;
+
 };
 
 
