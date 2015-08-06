@@ -50,6 +50,8 @@ Settings::Settings()
   m_allowMultipleInstances = false;
   m_trustNickname = true;
   m_trustSystemAccount = false;
+  m_dataFolderInRC = "";
+  m_addAccountNameToDataFolder = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -75,24 +77,23 @@ Settings::Settings()
 #endif
 }
 
-namespace
+QString Settings::accountNameFromSystemEnvinroment() const
 {
-  QString GetUserNameFromSystemEnvinroment()
-  {
-    qDebug() << "Checking local user system environment";
-    QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
-    QString sTmp = pe.value( "USERNAME" );
-    if( sTmp.isNull() )
-      sTmp = pe.value( "USER" );
-    if( sTmp.isNull() )
-      sTmp = QString( "Bee%1" ).arg( QTime::currentTime().toString( "hmszzz" ) );
-    return sTmp;
-  }
+  QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
+  QString account_name = pe.value( "USERNAME", "" );
+  if( account_name.isEmpty() )
+    account_name = pe.value( "USER", "" );
+  return account_name.simplified();
 }
 
 void Settings::createLocalUser()
 {
-  QString sName = GetUserNameFromSystemEnvinroment().simplified();
+  QString sName = accountNameFromSystemEnvinroment();
+  if( sName.isEmpty() )
+  {
+    qWarning() << "USERNAME and USER variabile not found in system environment";
+    sName = QString( "Bee%1" ).arg( QTime::currentTime().toString( "hmszzz" ) );
+  }
   m_localUser.setAccountName( sName.toLower() );
   if( m_localUser.name().isEmpty() )
     m_localUser.setName( sName );
@@ -174,6 +175,8 @@ void Settings::loadRcFile()
   m_saveDataInDocumentsFolder = sets->value( "SaveDataInDocumentsFolder", m_saveDataInDocumentsFolder ).toBool();
   m_saveDataInUserApplicationFolder = sets->value( "SaveDataInUserApplicationFolder", m_saveDataInUserApplicationFolder ).toBool();
   m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
+  m_dataFolderInRC = sets->value( "DataFolderPath", m_dataFolderInRC ).toString();
+  m_addAccountNameToDataFolder = sets->value( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -534,6 +537,7 @@ void Settings::load()
   m_logPath = QDir::toNativeSeparators( sets->value( "LogPath", dataFolder() ).toString() );
   m_pluginPath = QDir::toNativeSeparators( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() );
   m_languagePath = QDir::toNativeSeparators( sets->value( "LanguagePath", resourceFolder() ).toString() );
+  m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
@@ -599,6 +603,7 @@ void Settings::load()
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
+  m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", true ).toBool();
   QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
   if( !local_share.isEmpty() )
   {
@@ -704,6 +709,7 @@ void Settings::save()
   sets->setValue( "LogPath", m_logPath );
   sets->setValue( "PluginPath", m_pluginPath );
   sets->setValue( "LanguagePath", m_languagePath );
+  sets->setValue( "KeyEscapeMinimizeInTray", m_keyEscapeMinimizeInTray );
   sets->setValue( "MinimizeInTray", m_minimizeInTray );
   sets->setValue( "StayOnTop", m_stayOnTop );
   sets->setValue( "BeepFilePath", m_beepFilePath );
@@ -760,6 +766,7 @@ void Settings::save()
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->setValue( "MaxSimultaneousDownloads", m_maxSimultaneousDownloads );
   sets->setValue( "MaxQueuedDownloads", m_maxQueuedDownloads );
+  sets->setValue( "ConfirmOnDownloadFile", m_confirmOnDownloadFile );
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();
 
@@ -899,24 +906,28 @@ bool Settings::setDataFolder()
 
   QFileInfo data_file_info( m_dataFolder );
 
-  if( data_file_info.isWritable() && !m_saveDataInDocumentsFolder && !m_saveDataInUserApplicationFolder )
+  if( data_file_info.isWritable() && !m_saveDataInDocumentsFolder && !m_saveDataInUserApplicationFolder && m_dataFolderInRC.isEmpty() )
   {
     qDebug() << "Data folder:" << m_dataFolder;
     return true;
   }
 
-  QString data_folder = QLatin1String( "beebeep-data" );
+  QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
   QString root_folder;
 
 #if QT_VERSION >= 0x050000
-  if( m_saveDataInUserApplicationFolder )
+  if( !m_dataFolderInRC.isEmpty() )
+    root_folder = m_dataFolderInRC;
+  else if( m_saveDataInUserApplicationFolder )
     root_folder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
   else if( m_saveDataInDocumentsFolder )
     root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
   else
     root_folder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
 #else
-  if( m_saveDataInUserApplicationFolder )
+  if( !m_dataFolderInRC.isEmpty() )
+    root_folder = m_dataFolderInRC;
+  else if( m_saveDataInUserApplicationFolder )
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
   else if( m_saveDataInDocumentsFolder )
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation );
@@ -924,7 +935,7 @@ bool Settings::setDataFolder()
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
 #endif
 
-  if( m_saveDataInDocumentsFolder )
+  if( m_addAccountNameToDataFolder || m_saveDataInDocumentsFolder )
     m_dataFolder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder, data_folder ) );
   else
     m_dataFolder = QDir::toNativeSeparators( root_folder );
@@ -935,19 +946,17 @@ bool Settings::setDataFolder()
     qWarning() << "Data folder not found in" << folder.absolutePath();
     if( !folder.mkpath( data_folder ) )
     {
-      qWarning() << "Unable to create folder" << data_folder << "in" << folder.absolutePath() ;
+      qWarning() << "Unable to create data folder" << data_folder << "in" << folder.absolutePath() ;
       m_dataFolder = root_folder;
-      return false;
     }
-
-    qDebug() << "Data folder created in" << m_dataFolder;
+    else
+      qDebug() << "Data folder created in" << m_dataFolder;
   }
 
   QFileInfo folder_info( m_dataFolder );
   if( !folder_info.isWritable() )
   {
     qWarning() << "Data folder" << folder_info.absoluteFilePath() << "is not writeable";
-    m_dataFolder = root_folder;
     return false;
   }
 

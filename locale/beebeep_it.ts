@@ -412,7 +412,7 @@
     </message>
     <message>
         <source>%1 Contacting %2 host addresses previously saved...</source>
-        <translation>%1 Connessione a %2 IP precedentemente salvati...</translation>
+        <translation type="obsolete">%1 Connessione a %2 IP precedentemente salvati...</translation>
     </message>
     <message>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
@@ -425,6 +425,14 @@
     <message>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Impossibile inviare %2 a %3: l&apos;utente non è in linea.</translation>
+    </message>
+    <message>
+        <source>%1 Checking %2 more addresses...</source>
+        <translation>%1 Controllo ancora %2 indirizzi...</translation>
+    </message>
+    <message>
+        <source>%1 Contacting %2 ...</source>
+        <translation>%1 Sto contattando %2 ...</translation>
     </message>
 </context>
 <context>
@@ -1952,11 +1960,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Close to tray icon</source>
-        <translation>Chiudi ad icona di sistema</translation>
+        <translation type="obsolete">Chiudi ad icona di sistema</translation>
     </message>
     <message>
         <source>If enabled when the close button is clicked the window minimized to the system tray icon</source>
-        <translation>Se abilitata quando il pulsante chiudi viene premuto la finestra sarà minimizzata tra le icone di sistema</translation>
+        <translation type="obsolete">Se abilitata quando il pulsante chiudi viene premuto la finestra sarà minimizzata tra le icone di sistema</translation>
     </message>
     <message>
         <source>%1 will keep running in the background mode</source>
@@ -2709,6 +2717,30 @@ il file %2 (%3)?</translation>
     <message>
         <source>Create Group</source>
         <translation>Create Gruppo</translation>
+    </message>
+    <message>
+        <source>Close button minimize to tray icon</source>
+        <translation>Il pulsante chiudi minimizzerà tutto ad icona di sistema</translation>
+    </message>
+    <message>
+        <source>If enabled when the close button is clicked the window will be minimized to the system tray icon</source>
+        <translation>Se abilitata quando il pulsante chiudi sarà premuto la finestra verrà minimizzata ad icona di sistema</translation>
+    </message>
+    <message>
+        <source>Escape key minimize to tray icon</source>
+        <translation>Il tasto ESC minimizzerà tutto ad icona di sistema</translation>
+    </message>
+    <message>
+        <source>If enabled when the escape button is clicked the window will be minimized to the system tray icon</source>
+        <translation>Se abilitata quando premerai il tasto ESC la finestra sarà minimizzata ad icona di sistema</translation>
+    </message>
+    <message>
+        <source>Prompt before downloading file</source>
+        <translation>Chiedi sempre prima di scaricare un file</translation>
+    </message>
+    <message>
+        <source>If enabled you have to confirm the action before downloading a file</source>
+        <translation>Se abilitata dovrai sempre confermare di voler scaricare un file</translation>
     </message>
 </context>
 <context>

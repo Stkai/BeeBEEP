@@ -398,15 +398,17 @@ bool GuiChat::setChatId( VNumber chat_id )
 
 void GuiChat::ensureFocusInChat()
 {
-  //if( !mp_teMessage->hasFocus() )
-    mp_teMessage->setFocus();
+  mp_teMessage->setFocus();
 }
 
 void GuiChat::ensureLastMessageVisible()
 {
   QScrollBar *bar = mp_teChat->verticalScrollBar();
   if( bar )
-    bar->setValue( bar->maximum() );
+  {
+    if( !bar->isSliderDown() )
+      bar->setValue( bar->maximum() );
+  }
   else
     mp_teChat->ensureCursorVisible();
 }

@@ -42,6 +42,7 @@ EmoticonManager::EmoticonManager()
   Emoticon e2( "👠", "1f460", 0, 0 );  // red woman shoes
   m_emoticons.remove( e1.textToMatch().at( 0 ), e1 );
   m_emoticons.remove( e2.textToMatch().at( 0 ), e2 );
+  // no flags
 
   qDebug() << "Emoticon manager loads" << m_emoticons.size() << "emojis";
 }

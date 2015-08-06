@@ -61,6 +61,7 @@ HEADERS += AudioManager.h \
   GuiCreateGroup.h \
   GuiConfig.h \
   GuiEditVCard.h \
+  GuiEmoticons.h \
   GuiFileInfoItem.h \
   GuiFileInfoList.h \
   GuiGroupItem.h \
@@ -85,6 +86,8 @@ HEADERS += AudioManager.h \
   GuiUserList.h \
   GuiVCard.h \
   GuiWizard.h \
+  HistoryManager.h \
+  HistoryMessage.h \
   Interfaces.h \
   Listener.h \
   Log.h \
@@ -103,10 +106,8 @@ HEADERS += AudioManager.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-  Job.h \
-    GuiEmoticons.h \
-    HistoryMessage.h \
-    HistoryManager.h
+  Job.h
+
 
 SOURCES += AudioManager.cpp \
   Avatar.cpp \
@@ -129,6 +130,7 @@ SOURCES += AudioManager.cpp \
   CoreFileTransfer.cpp \
   CoreParser.cpp \
   CoreUser.cpp \
+  Emojis.cpp \
   Emoticon.cpp \
   EmoticonManager.cpp \
   FileInfo.cpp \
@@ -146,6 +148,7 @@ SOURCES += AudioManager.cpp \
   GuiChatMessage.cpp \
   GuiCreateGroup.cpp \
   GuiEditVCard.cpp \
+  GuiEmoticons.cpp \
   GuiFileInfoItem.cpp \
   GuiFileInfoList.cpp \
   GuiGroupItem.cpp \
@@ -170,6 +173,8 @@ SOURCES += AudioManager.cpp \
   GuiUserList.cpp \
   GuiVCard.cpp \
   GuiWizard.cpp \
+  HistoryManager.cpp \
+  HistoryMessage.cpp \
   Listener.cpp \
   Log.cpp \
   Main.cpp \
@@ -184,11 +189,8 @@ SOURCES += AudioManager.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp \
-    GuiEmoticons.cpp \
-    Emojis.cpp \
-    HistoryMessage.cpp \
-    HistoryManager.cpp
+  VCard.cpp
+
 
 FORMS += GuiAddUser.ui \
   GuiAskPassword.ui \

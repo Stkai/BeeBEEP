@@ -19,6 +19,8 @@ DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the con
 SaveDataInDocumentsFolder= force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data
 SaveDataInUserApplicationFolder= force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) [1.0.0]
 AllowMultipleInstances= enable the option to launch multiple instance of BeeBEEP [1.0.0]
+DataFolderPath= you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder [1.0.3]
+AddAccountNameToDataFolder = you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath [1.0.3]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect
@@ -82,7 +84,8 @@ DownloadDirectory=
 LogPath=.
 PluginPath=.
 LocalePath=.
-MinimizeInTray=false
+KeyEscapeMinimizeInTray= Escape key will minimize BeeBEEP into the system tray
+MinimizeInTray= Close button will minimize BeeBEEP into the system tray
 StayOnTop=false
 BeepFilePath=beep.wav
 RaiseOnNewMessageArrived=false
@@ -133,4 +136,5 @@ MaxQueuedDownloads = is the max number of downloads can be selected in file shar
 MaxFileShared=32700
 FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456
+ConfirmOnDownloadFile= if it is true always prompt before downloading a file
 ShareList=

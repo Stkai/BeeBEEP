@@ -861,6 +861,7 @@ void EmoticonManager::addEmojis()
   addEmoticon( "🌍", "1f30d", Emoticon::Nature, 833 );
   addEmoticon( "🌎", "1f30e", Emoticon::Nature, 834 );
   addEmoticon( "🌐", "1f310", Emoticon::Nature, 835 );
+  /*
   addEmoticon( "🇩🇪", "1f1e9-1f1ea", Emoticon::Places, 836 );
   addEmoticon( "🇬🇧", "1f1ec-1f1e7", Emoticon::Places, 837 );
   addEmoticon( "🇨🇳", "1f1e8-1f1f3", Emoticon::Places, 838 );
@@ -871,6 +872,7 @@ void EmoticonManager::addEmojis()
   addEmoticon( "🇮🇹", "1f1ee-1f1f9", Emoticon::Places, 843 );
   addEmoticon( "🇺🇸", "1f1fa-1f1f8", Emoticon::Places, 844 );
   addEmoticon( "🇷🇺", "1f1f7-1f1fa", Emoticon::Places, 845 );
+  */
 
 }
 

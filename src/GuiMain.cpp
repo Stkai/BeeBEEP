@@ -217,6 +217,18 @@ void GuiMain::forceExit()
   close();
 }
 
+void GuiMain::keyPressEvent( QKeyEvent* e )
+{
+  if( e->key() == Qt::Key_Escape && Settings::instance().keyEscapeMinimizeInTray() )
+  {
+    QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+    e->accept();
+    return;
+  }
+
+  QMainWindow::keyPressEvent( e );
+}
+
 void GuiMain::changeEvent( QEvent* e )
 {
   QMainWindow::changeEvent( e );
@@ -608,6 +620,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().automaticFileName() );
   act->setData( 7 );
 
+  mp_actConfirmDownload = mp_menuSettings->addAction( tr( "Prompt before downloading file" ), this, SLOT( settingsChanged() ) );
+  mp_actConfirmDownload->setStatusTip( tr( "If enabled you have to confirm the action before downloading a file" ) );
+  mp_actConfirmDownload->setCheckable( true );
+  mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
+  mp_actConfirmDownload->setData( 30 );
+
   act = mp_menuSettings->addAction( tr( "Reset window geometry at startup" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the window geometry will be reset to default value at next startup" ) );
   act->setCheckable( true );
@@ -765,11 +783,17 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().loadOnTrayAtStartup() );
   act->setData( 24 );
 
-  act = mp_menuTrayIcon->addAction( tr( "Close to tray icon" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled when the close button is clicked the window minimized to the system tray icon" ) );
+  act = mp_menuTrayIcon->addAction( tr( "Close button minimize to tray icon" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled when the close button is clicked the window will be minimized to the system tray icon" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().minimizeInTray() );
   act->setData( 11 );
+
+  act = mp_menuTrayIcon->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled when the escape button is clicked the window will be minimized to the system tray icon" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
+  act->setData( 29 );
 
   act = mp_menuTrayIcon->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled tray icon shows some notification about status and message" ) );
@@ -1192,6 +1216,12 @@ void GuiMain::settingsChanged()
   case 28:
     Settings::instance().setShowEmoticonMenu( act->isChecked() );
     break;
+  case 29:
+    Settings::instance().setKeyEscapeMinimizeInTray( act->isChecked() );
+    break;
+  case 30:
+    Settings::instance().setConfirmOnDownloadFile( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1302,7 +1332,7 @@ void GuiMain::searchUsers()
   if( !mp_core->isConnected() )
     return;
 
-  showChat( ID_DEFAULT_CHAT );
+  raiseHomeView();
 
   if( mp_core->updateBroadcastAddresses() )
     mp_core->sendBroadcastMessage();
@@ -1467,7 +1497,10 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
   }
 
   if( msg_result == 2 )
+  {
     Settings::instance().setConfirmOnDownloadFile( false );
+    mp_actConfirmDownload->setChecked( false );
+  }
 
   if( msg_result > 0 )
   {
@@ -1633,6 +1666,7 @@ void GuiMain::showChat( VNumber chat_id )
     return;
   }
 
+  QApplication::setOverrideCursor( Qt::WaitCursor );
   if( mp_chat->setChatId( chat_id ) )
   {
     mp_userList->setUnreadMessages( chat_id, 0 );
@@ -1640,6 +1674,8 @@ void GuiMain::showChat( VNumber chat_id )
     mp_groupList->updateChat( chat_id );
     raiseChatView();
   }
+  QApplication::restoreOverrideCursor();
+
 }
 
 void GuiMain::changeVCard()

@@ -236,7 +236,7 @@ void Core::sendHelloToHostsInSettings()
     return;
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 Contacting %2 host addresses previously saved..." )
+                         tr( "%1 Checking %2 more addresses..." )
                          .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
                          .arg( Settings::instance().userPathList().size() ),
                          DispatchToChat, ChatMessage::Connection );
@@ -255,6 +255,11 @@ void Core::sendHelloToHostsInSettings()
     #ifdef BEEBEEP_DEBUG
         qDebug() << "Contacting manually added host" << ur.hostAddress().toString() << ur.hostPort();
     #endif
+        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                               tr( "%1 Contacting %2 ..." )
+                               .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
+                               .arg( ur.hostAddressAndPort() ),
+                               DispatchToChat, ChatMessage::Connection );
         checkUserRecord( ur );
         user_contacted++;
       }

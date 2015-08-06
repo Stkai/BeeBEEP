@@ -37,6 +37,7 @@ public:
   QSettings* objectSettings() const;
 
   QString operatingSystem( bool use_long_name ) const;
+  QString accountNameFromSystemEnvinroment() const;
   void createLocalUser();
   void createSessionId();
   void setResourceFolder();
@@ -213,6 +214,8 @@ public:
   inline void setAddExternalSubnetAutomatically( bool );
   bool addSubnetToBroadcastAddress( const QHostAddress& );
 
+  inline bool keyEscapeMinimizeInTray() const;
+  inline void setKeyEscapeMinimizeInTray( bool );
   inline bool minimizeInTray() const;
   inline void setMinimizeInTray( bool );
   inline bool loadOnTrayAtStartup() const;
@@ -313,6 +316,8 @@ private:
   bool m_saveDataInDocumentsFolder;
   bool m_saveDataInUserApplicationFolder;
   bool m_allowMultipleInstances;
+  QString m_dataFolderInRC;
+  bool m_addAccountNameToDataFolder;
 
   // Ini
   bool m_firstTime;
@@ -390,6 +395,7 @@ private:
   bool m_addExternalSubnetAutomatically;
   bool m_useMulticastDns;
 
+  bool m_keyEscapeMinimizeInTray;
   bool m_minimizeInTray;
   bool m_loadOnTrayAtStartup;
   bool m_showNotificationOnTray;
@@ -536,6 +542,8 @@ inline bool Settings::useMulticastDns() const { return m_useMulticastDns; }
 inline void Settings::setUseMulticastDns( bool new_value ) { m_useMulticastDns = new_value; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }
 inline bool Settings::firstTime() const { return m_firstTime; }
+inline bool Settings::keyEscapeMinimizeInTray() const { return m_keyEscapeMinimizeInTray; }
+inline void Settings::setKeyEscapeMinimizeInTray( bool new_value ) { m_keyEscapeMinimizeInTray = new_value; }
 inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }
 inline void Settings::setMinimizeInTray( bool new_value ) { m_minimizeInTray = new_value; }
 inline bool Settings::loadOnTrayAtStartup() const { return m_loadOnTrayAtStartup; }

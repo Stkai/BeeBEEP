@@ -157,7 +157,8 @@ void Broadcaster::readBroadcastDatagram()
 
     if( isLocalHostAddress( sender_ip ) && sender_listener_port == Settings::instance().localUser().hostPort() )
     {
-      m_datagramSentToBaseBroadcastAddress--;
+      if( m_datagramSentToBaseBroadcastAddress > 0 )
+        m_datagramSentToBaseBroadcastAddress--;
       qDebug() << "Broadcaster skip datagram received from himself:" << m_datagramSentToBaseBroadcastAddress << "pendings";
       continue;
     }
@@ -171,7 +172,9 @@ void Broadcaster::readBroadcastDatagram()
 
 int Broadcaster::updateAddresses()
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Broadcaster updates the addresses";
+#endif
   m_broadcastAddresses.clear();
   m_ipAddresses.clear();
   QHostAddress ha_broadcast;

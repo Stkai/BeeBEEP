@@ -139,6 +139,7 @@ private slots:
   void emoticonMenuVisibilityChanged( bool );
 
 protected:
+  void keyPressEvent( QKeyEvent* );
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
   bool showAlert();
@@ -229,6 +230,7 @@ private:
   QAction* mp_actViewHome;
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actPromptPassword;
+  QAction* mp_actConfirmDownload;
 
   QAction* mp_actPortBroadcast;
   QAction* mp_actPortListener;
