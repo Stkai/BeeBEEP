@@ -41,52 +41,78 @@ QSize GuiEmoticons::sizeHint() const
 
 void GuiEmoticons::initEmoticons()
 {
-  QList<Emoticon> emoticon_list;
-  /*
-  for( int i = 0; i < 30; i++ )
+  mp_recent = new GuiEmoticonWidget( this );
+  QList<Emoticon> emoticon_list = EmoticonManager::instance().recentEmoticons();
+  while( emoticon_list.size() < Settings::instance().emoticonInRecentMenu() )
     emoticon_list << Emoticon();
-  addEmoticonTab( emoticon_list, QIcon( ":/images/recent.png"), tr( "Recent" ) );
-  */
+  m_recentTabIndex = addEmoticonTab( mp_recent, emoticon_list, QIcon( ":/images/recent.png"), tr( "Recent" ) );
+
+  GuiEmoticonWidget* emoticon_widget = new GuiEmoticonWidget( this );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::People );
-  addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::People ), tr( "Smiley" ) );
+  int smiley_index = addEmoticonTab( emoticon_widget, emoticon_list, Emoticon::groupIcon( Emoticon::People ), tr( "Smiley" ) );
+
+  emoticon_widget = new GuiEmoticonWidget( this );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Objects );
-  addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::Objects ), tr( "Objects" ) );
+  addEmoticonTab( emoticon_widget, emoticon_list, Emoticon::groupIcon( Emoticon::Objects ), tr( "Objects" ) );
+
+  emoticon_widget = new GuiEmoticonWidget( this );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Nature );
-  addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::Nature ), tr( "Nature" ) );
+  addEmoticonTab( emoticon_widget, emoticon_list, Emoticon::groupIcon( Emoticon::Nature ), tr( "Nature" ) );
+
+  emoticon_widget = new GuiEmoticonWidget( this );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Places );
-  addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::Places ), tr( "Places" ) );
+  addEmoticonTab( emoticon_widget, emoticon_list, Emoticon::groupIcon( Emoticon::Places ), tr( "Places" ) );
+
+  emoticon_widget = new GuiEmoticonWidget( this );
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Symbols );
-  addEmoticonTab( emoticon_list, Emoticon::groupIcon( Emoticon::Symbols ), tr( "Symbols" ) );
+  addEmoticonTab( emoticon_widget, emoticon_list, Emoticon::groupIcon( Emoticon::Symbols ), tr( "Symbols" ) );
+
+  setCurrentIndex( smiley_index );
 }
 
-int GuiEmoticons::addEmoticonTab( const QList<Emoticon>& emoticon_list, const QIcon& group_icon, const QString& group_name )
+void GuiEmoticons::setEmoticonToButton( const Emoticon& e, QPushButton* pb )
 {
-  GuiEmoticonWidget* emoticon_widget = new GuiEmoticonWidget( this );
-  QScrollArea* scroll_area = new QScrollArea( this );
-  scroll_area->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
-  scroll_area->setBackgroundRole( QPalette::Light );
-  scroll_area->setWidgetResizable( true );
+  pb->setIcon( e.icon() );
+  QString object_name = QString( "GuiEmoticonCode" ) + e.textToMatch();
+  pb->setObjectName( object_name );
+}
+
+Emoticon GuiEmoticons::emoticonFromObject( QObject* emoticon_object )
+{
+  QString emoticon_code = emoticon_object->objectName();
+  emoticon_code.remove( "GuiEmoticonCode" );
+  return emoticon_code.isEmpty() ? Emoticon() : EmoticonManager::instance().emoticon( emoticon_code );
+}
+
+int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, const QList<Emoticon>& emoticon_list, const QIcon& group_icon, const QString& group_name )
+{
+  int emoticon_size = Settings::instance().emoticonSizeInMenu();
+  emoticon_widget->setEmoticonSize( emoticon_size );
 
   QList<QPushButton*> button_list;
   QPushButton* emoticon_button = 0;
-  int emoticon_button_size = Settings::instance().emoticonSizeInMenu() + 2;
 
   foreach( Emoticon e, emoticon_list )
   {
     emoticon_button = new QPushButton( emoticon_widget );
-    emoticon_button->setIconSize( QSize( Settings::instance().emoticonSizeInMenu(), Settings::instance().emoticonSizeInMenu() ) );
+    emoticon_button->setIconSize( emoticon_widget->emoticonSize() );
     emoticon_button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-    emoticon_button->setFixedSize( QSize( emoticon_button_size, emoticon_button_size ) );
-    emoticon_button->setIcon( e.icon() );
+    emoticon_button->setFixedSize( emoticon_widget->emoticonButtonSize() );
     emoticon_button->setStyleSheet( "QPushButton:hover{ background-color: #ffcf04; }");
-    emoticon_button->setObjectName( QString( "GuiEmoticonCode%1" ).arg( e.textToMatch() ) );
+    setEmoticonToButton( e, emoticon_button );
     connect( emoticon_button, SIGNAL( clicked() ), this, SLOT( emoticonClicked() ) );
     button_list.append( emoticon_button );
   }
 
   emoticon_widget->setEmoticonButtons( button_list );
   emoticon_widget->setObjectName( emoticon_widget->objectName() + group_name );
+
+  QScrollArea* scroll_area = new QScrollArea( this );
+  scroll_area->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  scroll_area->setBackgroundRole( QPalette::Light );
+  scroll_area->setWidgetResizable( true );
   scroll_area->setWidget( emoticon_widget );
+
   int tab_id = addTab( scroll_area, group_icon, "" );
   setTabToolTip( tab_id, group_name );
   return tab_id;
@@ -98,20 +124,34 @@ void GuiEmoticons::emoticonClicked()
   if( !emoticon_object )
     return;
 
-  QString emoticon_code = emoticon_object->objectName();
-  emoticon_code.remove( "GuiEmoticonCode" );
-
-  if( emoticon_code.isEmpty() )
-    return;
-
-  Emoticon e = EmoticonManager::instance().emoticon( emoticon_code );
+  Emoticon e = emoticonFromObject( emoticon_object );
   if( e.isValid() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Emoticon clicked is" << qPrintable( e.textToMatch() ) << e.name();
 #endif
+    if( currentIndex() != m_recentTabIndex )
+    {
+      if( EmoticonManager::instance().addToRecentEmoticons( e ) )
+        setRecentEmoticons( EmoticonManager::instance().recentEmoticons() );
+    }
+
     emit( emoticonSelected( e ) );
   }
+}
+
+void GuiEmoticons::setRecentEmoticons( const QList<Emoticon>& emoticon_list )
+{
+  QList<QPushButton*> recent_button_list = mp_recent->emoticonButtons();
+  QPushButton* emoticon_button;
+  Emoticon e;
+  for( int i = 0; i < recent_button_list.size(); i++ )
+  {
+    emoticon_button = recent_button_list.at( i );
+    Emoticon e = emoticon_list.value( i );
+    setEmoticonToButton( e, emoticon_button );
+  }
+  mp_recent->setEmoticonButtons( recent_button_list );
 }
 
 
@@ -131,6 +171,7 @@ GuiEmoticonWidget::GuiEmoticonWidget( QWidget* parent )
   mp_layout->setContentsMargins( 1, 1, 1, 1 );
 
   m_hasPainted = false;
+  m_emoticonSize = Settings::instance().emoticonSizeInMenu();
 }
 
 void GuiEmoticonWidget::resizeEvent( QResizeEvent* e )
@@ -149,7 +190,10 @@ void GuiEmoticonWidget::clearLayout()
 
 void GuiEmoticonWidget::paintEmoticonButtons( int box_width )
 {
-  int emoticon_button_size = Settings::instance().emoticonSizeInMenu() + 2;
+  if( m_buttons.isEmpty() )
+    return;
+
+  int emoticon_button_size = emoticonButtonSize().width();
   int x = 0;
   int y = 0;
   int max_icons_per_row = qMax( 2, static_cast<int>((box_width-2) / emoticon_button_size) ) - 1;
@@ -166,6 +210,5 @@ void GuiEmoticonWidget::paintEmoticonButtons( int box_width )
   }
 
   // tells to scroll area the size of the widget
-  setMinimumSize( QSize( (max_icons_per_row+1) * emoticon_button_size + 1, (y+1) * emoticon_button_size + 1) );
+  setMinimumSize( QSize( (max_icons_per_row+1) * emoticonButtonSize().width() + 1, (y+1) * emoticonButtonSize().height() + 1 ) );
 }
-

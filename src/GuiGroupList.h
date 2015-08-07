@@ -55,6 +55,8 @@ protected slots:
   void openGroupChatSelected();
   void editGroupSelected();
   void removeGroupSelected();
+  void enableGroupNotification();
+  void disableGroupNotification();
 
 private:
   GuiGroupItem* itemFromId( VNumber );
@@ -63,6 +65,8 @@ private:
   QAction* mp_actEditGroup;
   QAction* mp_actOpenChat;
   QAction* mp_actRemoveGroup;
+  QAction* mp_actEnableGroupNotification;
+  QAction* mp_actDisableGroupNotification;
 
   VNumber m_selectedGroupId;
   VNumber m_groupChatOpened;

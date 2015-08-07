@@ -57,6 +57,7 @@ Settings::Settings()
   m_emoticonSizeInEdit = 18;
   m_emoticonSizeInChat = 24;
   m_emoticonSizeInMenu = 24;
+  m_emoticonInRecentMenu = 30;
   m_confirmOnDownloadFile = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
@@ -562,6 +563,8 @@ void Settings::load()
   m_emoticonSizeInEdit = sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt();
   m_emoticonSizeInChat = sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt();
   m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
+  m_emoticonInRecentMenu = sets->value( "EmoticonInRecentMenu", m_emoticonInRecentMenu ).toInt();
+  m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -615,6 +618,7 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Group" );
+  m_groupSilenced = sets->value( "Silenced", QStringList() ).toStringList();
   m_groupList = sets->value( "List", QStringList() ).toStringList();
   sets->endGroup();
 
@@ -734,6 +738,8 @@ void Settings::save()
   sets->setValue( "EmoticonSizeInEdit", m_emoticonSizeInEdit );
   sets->setValue( "EmoticonSizeInChat", m_emoticonSizeInChat );
   sets->setValue( "EmoticonSizeInMenu", m_emoticonSizeInMenu );
+  sets->setValue( "EmoticonInRecentMenu", m_emoticonInRecentMenu );
+  sets->setValue( "RecentEmoticons", m_recentEmoticons );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
@@ -773,6 +779,7 @@ void Settings::save()
   if( !m_groupList.isEmpty() )
   {
     sets->beginGroup( "Group" );
+    sets->setValue( "Silenced", m_groupSilenced );
     sets->setValue( "List", m_groupList );
     sets->endGroup();
   }
@@ -847,6 +854,20 @@ void Settings::clearTemporaryFile()
   }
 
   m_tempFilePathList.clear();
+}
+
+void Settings::setNotificationEnabledForGroup( const QString& group_id, bool enable_notification )
+{
+  if( group_id.isEmpty() )
+    return;
+
+  if( enable_notification )
+  {
+    if( !m_groupSilenced.contains( group_id ) )
+      m_groupSilenced.append( group_id );
+  }
+  else
+    m_groupSilenced.removeOne( group_id );
 }
 
 void Settings::addStartOnSystemBoot()

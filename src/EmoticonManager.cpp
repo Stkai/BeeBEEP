@@ -28,7 +28,7 @@ EmoticonManager* EmoticonManager::mp_instance = NULL;
 
 
 EmoticonManager::EmoticonManager()
-  : m_emoticons(), m_maxTextSize( 2 )
+  : m_emoticons(), m_maxTextSize( 2 ), m_recentEmoticons()
 {
 #ifdef BEEBEEP_DEBUG
   //createEmojiFiles();
@@ -293,6 +293,44 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
     s += text_to_match;
 
   return s;
+}
+
+int EmoticonManager::loadRecentEmoticons( const QStringList& sl, int max_size )
+{
+  m_recentEmoticonsMaxSize = qMax( 6, max_size );
+  int emoticons_load = 0;
+  m_recentEmoticons.clear();
+  Emoticon e;
+  foreach( QString s, sl )
+  {
+    e = emoticon( s );
+    if( e.isValid() )
+    {
+      m_recentEmoticons.append( e );
+      emoticons_load++;
+      if( m_recentEmoticons.size() == m_recentEmoticonsMaxSize )
+        break;
+    }
+  }
+  return emoticons_load;
+}
+
+QStringList EmoticonManager::saveRencentEmoticons() const
+{
+  QStringList sl;
+  foreach( Emoticon e, m_recentEmoticons )
+    sl.append( e.textToMatch() );
+  return sl;
+}
+
+bool EmoticonManager::addToRecentEmoticons( const Emoticon& e )
+{
+  if( m_recentEmoticons.contains( e ) )
+    return false;
+  m_recentEmoticons.prepend( e );
+  if( m_recentEmoticons.size() > m_recentEmoticonsMaxSize )
+    m_recentEmoticons.removeLast();
+  return true;
 }
 
 void EmoticonManager::createEmojiFiles()

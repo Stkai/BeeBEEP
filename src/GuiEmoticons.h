@@ -26,6 +26,8 @@
 
 #include "Config.h"
 #include "Emoticon.h"
+class GuiEmoticonWidget;
+
 
 class GuiEmoticons : public QTabWidget
 {
@@ -43,7 +45,14 @@ private slots:
 
 protected:
   QSize sizeHint() const;
-  int addEmoticonTab( const QList<Emoticon>&, const QIcon&, const QString& );
+  int addEmoticonTab( GuiEmoticonWidget*, const QList<Emoticon>&, const QIcon&, const QString& );
+  void setRecentEmoticons( const QList<Emoticon>& );
+  void setEmoticonToButton( const Emoticon&, QPushButton* );
+  Emoticon emoticonFromObject( QObject* );
+
+private:
+  GuiEmoticonWidget* mp_recent;
+  int m_recentTabIndex;
 
 };
 
@@ -52,7 +61,11 @@ class GuiEmoticonWidget : public QWidget
 public:
   explicit GuiEmoticonWidget( QWidget *parent = 0 );
 
+  inline void setEmoticonSize( int );
+  inline QSize emoticonSize() const;
+  inline QSize emoticonButtonSize() const;
   inline void setEmoticonButtons( const QList<QPushButton*>& );
+  inline const QList<QPushButton*>& emoticonButtons() const;
 
 protected:
   void paintEmoticonButtons( int );
@@ -63,11 +76,16 @@ private:
   QGridLayout* mp_layout;
   QList<QPushButton*> m_buttons;
   bool m_hasPainted;
+  int m_emoticonSize;
 
 };
 
 
 // Inline Functions
+inline void GuiEmoticonWidget::setEmoticonSize( int new_value ) { m_emoticonSize = new_value; }
+inline QSize GuiEmoticonWidget::emoticonSize() const { return QSize( m_emoticonSize, m_emoticonSize ); }
+inline QSize GuiEmoticonWidget::emoticonButtonSize() const { return QSize( m_emoticonSize + 2, m_emoticonSize + 2 ); }
 inline void GuiEmoticonWidget::setEmoticonButtons( const QList<QPushButton*>& new_value ) { m_buttons = new_value; }
+inline const QList<QPushButton*>& GuiEmoticonWidget::emoticonButtons() const { return m_buttons; }
 
 #endif // BEEBEEP_GUIEMOTICONS_H

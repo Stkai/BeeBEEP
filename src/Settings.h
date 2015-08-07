@@ -109,6 +109,9 @@ public:
   inline int emoticonSizeInEdit() const;
   inline int emoticonSizeInChat() const;
   inline int emoticonSizeInMenu() const;
+  inline int emoticonInRecentMenu() const;
+  inline void setRecentEmoticons( const QStringList& );
+  inline const QStringList& recentEmoticons() const;
 
   inline QString defaultChatName() const;
   inline int chatMessageHistorySize() const;
@@ -162,6 +165,8 @@ public:
   inline const QByteArray& chatSplitterState() const;
   inline void setShowEmoticonMenu( bool );
   inline bool showEmoticonMenu() const;
+  inline bool isNotificationDisabledForGroup( const QString& ) const;
+  void setNotificationEnabledForGroup( const QString&, bool );
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
@@ -376,6 +381,8 @@ private:
   int m_emoticonSizeInEdit;
   int m_emoticonSizeInChat;
   int m_emoticonSizeInMenu;
+  int m_emoticonInRecentMenu;
+  QStringList m_recentEmoticons;
 
   QString m_passwordBeforeHash;
   QByteArray m_password;
@@ -423,6 +430,7 @@ private:
 
   QStringList m_groupList;
   QStringList m_userPathList;
+  QStringList m_groupSilenced;
 
   bool m_showHomeAsDefaultPage;
   bool m_resetGeometryAtStartup;
@@ -593,5 +601,9 @@ inline void Settings::setChatMaxLinesToShow( bool new_value ) { m_chatMaxLinesTo
 inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
 inline int Settings::emoticonSizeInChat() const { return m_emoticonSizeInChat; }
 inline int Settings::emoticonSizeInMenu() const { return m_emoticonSizeInMenu; }
+inline int Settings::emoticonInRecentMenu() const { return m_emoticonInRecentMenu; }
+inline void Settings::setRecentEmoticons( const QStringList& new_value ) { m_recentEmoticons = new_value; }
+inline const QStringList& Settings::recentEmoticons() const { return m_recentEmoticons; }
+inline bool Settings::isNotificationDisabledForGroup( const QString& group_id ) const { return group_id.isEmpty() ? false : m_groupSilenced.contains( group_id ); }
 
 #endif // BEEBEEP_SETTINGS_H

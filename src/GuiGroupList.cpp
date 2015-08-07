@@ -24,6 +24,7 @@
 #include "GuiGroupList.h"
 #include "GuiConfig.h"
 #include "ChatManager.h"
+#include "Settings.h"
 #include "UserManager.h"
 
 
@@ -53,9 +54,14 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   mp_actOpenChat = new QAction( QIcon( ":/images/chat.png" ), tr( "Open chat" ), this );
   connect( mp_actOpenChat, SIGNAL( triggered() ), this, SLOT( openGroupChatSelected() ) );
 
+  mp_actEnableGroupNotification = new QAction( QIcon( ":/images/notification-disabled.png" ), tr( "Enable notifications" ), this );
+  connect( mp_actEnableGroupNotification, SIGNAL( triggered() ), this, SLOT( enableGroupNotification() ) );
+
+  mp_actDisableGroupNotification = new QAction( QIcon( ":/images/notification-enabled.png" ), tr( "Disable notifications" ), this );
+  connect( mp_actDisableGroupNotification, SIGNAL( triggered() ), this, SLOT( enableGroupNotification() ) );
+
   mp_actRemoveGroup = new QAction( QIcon( ":/images/group-remove.png" ), tr( "Delete group" ), this );
   connect( mp_actRemoveGroup, SIGNAL( triggered() ), this, SLOT( removeGroupSelected() ) );
-
 
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
@@ -154,6 +160,12 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
     menu.addSeparator();
     menu.addAction( mp_actEditGroup );
     menu.addSeparator();
+    Group g = UserManager::instance().group( m_selectedGroupId );
+    if( Settings::instance().isNotificationDisabledForGroup( g.privateId() ) )
+      menu.addAction( mp_actEnableGroupNotification );
+    else
+      menu.addAction( mp_actDisableGroupNotification );
+    menu.addSeparator();
     menu.addAction( mp_actRemoveGroup );
     menu.exec( QCursor::pos() );
   }
@@ -244,5 +256,25 @@ void GuiGroupList::setChatOpened( VNumber chat_id )
     item = (GuiGroupItem*)(*it);
     item->setChatOpened( item->itemId() == m_groupChatOpened );
     ++it;
+  }
+}
+
+void GuiGroupList::enableGroupNotification()
+{
+  if( m_selectedGroupId != ID_INVALID )
+  {
+    Group g = UserManager::instance().group( m_selectedGroupId );
+    Settings::instance().setNotificationEnabledForGroup( g.privateId(), true );
+    m_selectedGroupId = ID_INVALID;
+  }
+}
+
+void GuiGroupList::disableGroupNotification()
+{
+  if( m_selectedGroupId != ID_INVALID )
+  {
+    Group g = UserManager::instance().group( m_selectedGroupId );
+    Settings::instance().setNotificationEnabledForGroup( g.privateId(), false );
+    m_selectedGroupId = ID_INVALID;
   }
 }

@@ -24,7 +24,6 @@
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ChatMessage.h"
-#include "EmoticonManager.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
 #include "Protocol.h"

@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_TIPS_H
 #define BEEBEEP_TIPS_H
 
-const int BeeBeepTipsSize = 7;
+const int BeeBeepTipsSize = 8;
 
 static const char* BeeBeepTips[ BeeBeepTipsSize ] =
 {
@@ -35,7 +35,8 @@ static const char* BeeBeepTips[ BeeBeepTipsSize ] =
   QT_TRANSLATE_NOOP( "Tips", "You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys." ),
   /* 5 */
   QT_TRANSLATE_NOOP( "Tips", "You can drop files to active chat and send them to members." ),
-  QT_TRANSLATE_NOOP( "Tips", "You can select multiple files from network shares and download them simultaneously with a right click." )
+  QT_TRANSLATE_NOOP( "Tips", "You can select multiple files from network shares and download them simultaneously with a right click." ),
+  QT_TRANSLATE_NOOP( "Tips", "You can disable message notification from a group right clicking on its name on the list." )
 
 };
 

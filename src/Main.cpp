@@ -25,6 +25,7 @@
 #include "BeeApplication.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
+#include "EmoticonManager.h"
 #include "FileShare.h"
 #include "GuiConfig.h"
 #include "GuiIconProvider.h"
@@ -115,6 +116,9 @@ int main( int argc, char *argv[] )
   /* Init Chat Manager */
   (void)ChatManager::instance();
 
+  /* Init Emoticon Manager */
+  EmoticonManager::instance().loadRecentEmoticons( Settings::instance().recentEmoticons(), Settings::instance().emoticonInRecentMenu() );
+
   /* Init History Manager */
   (void)HistoryManager::instance();
 
@@ -185,6 +189,7 @@ int main( int argc, char *argv[] )
 
   /* Save session */
   mw.saveSession();
+  Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
   Settings::instance().loadRcFile();
   Settings::instance().save();
 #ifdef BEEBEEP_DEBUG

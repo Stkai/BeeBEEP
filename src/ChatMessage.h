@@ -26,7 +26,6 @@
 
 #include "Config.h"
 #include "Message.h"
-class User;
 
 
 class ChatMessage

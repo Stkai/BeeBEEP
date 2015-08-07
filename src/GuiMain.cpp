@@ -26,7 +26,6 @@
 #include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
-#include "EmoticonManager.h"
 #include "FileShare.h"
 #include "GuiAddUser.h"
 #include "GuiAskPassword.h"
@@ -1246,8 +1245,17 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 #endif
 }
 
-bool GuiMain::showAlert()
+bool GuiMain::showAlert( VNumber chat_id )
 {
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( c.isValid() && c.isGroup() && !Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Notification disabled for group:" << c.privateId() << c.name();
+#endif
+    return false;
+  }
+
   if( isMinimized() || !isActiveWindow() )
   {
 #ifdef BEEBEEP_DEBUG
@@ -1280,7 +1288,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_home->addSystemMessage( cm );
 
   if( !cm.isSystem() && !cm.isFromLocalUser() )
-    show_alert = showAlert();
+    show_alert = showAlert( chat_id );
 
   if( chat_id == mp_chat->chatId() && mp_chat == mp_stackedWidget->currentWidget() )
   {

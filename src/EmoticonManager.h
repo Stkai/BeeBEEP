@@ -37,6 +37,11 @@ public:
 
   QList<Emoticon> textEmoticons( bool remove_names_duplicated ) const;
   QList<Emoticon> emoticonsByGroup( int ) const;
+  bool addToRecentEmoticons( const Emoticon& );
+  inline const QList<Emoticon>& recentEmoticons() const;
+
+  int loadRecentEmoticons( const QStringList&, int );
+  QStringList saveRencentEmoticons() const;
 
   static EmoticonManager& instance()
   {
@@ -66,8 +71,12 @@ protected:
 private:
   QMultiHash<QChar, Emoticon> m_emoticons;
   int m_maxTextSize;
+  QList<Emoticon> m_recentEmoticons;
+  int m_recentEmoticonsMaxSize;
 
 };
 
+// Inline Functions
+inline const QList<Emoticon>& EmoticonManager::recentEmoticons() const { return m_recentEmoticons; }
 
 #endif // BEEBEEP_EMOTICONMANAGER_H

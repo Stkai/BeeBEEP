@@ -1092,6 +1092,10 @@ Inserisci un nome differente.</translation>
         <source>Symbols</source>
         <translation>Simboli</translation>
     </message>
+    <message>
+        <source>Recent</source>
+        <translation>Recenti</translation>
+    </message>
 </context>
 <context>
     <name>GuiFileInfoList</name>
@@ -1129,6 +1133,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Delete group</source>
         <translation>Cancella gruppo</translation>
+    </message>
+    <message>
+        <source>Enable notifications</source>
+        <translation>Abilita notifiche</translation>
+    </message>
+    <message>
+        <source>Disable notifications</source>
+        <translation>Disabilita notifiche</translation>
     </message>
 </context>
 <context>
@@ -4306,6 +4318,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
         <translation>Puoi selezionare uno o più file dalla condivisione di rete e scaricarli tutti insieme usando il pulsante destro.</translation>
+    </message>
+    <message>
+        <source>You can disable message notification from a group right clicking on its name on the list.</source>
+        <translation>Puoi disabilitare le notifiche di un gruppo premendo il tasto destro sul nome del gruppo nella lista.</translation>
     </message>
 </context>
 <context>

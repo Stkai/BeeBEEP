@@ -120,5 +120,7 @@
         <file>images/download-box.png</file>
         <file>images/remove.png</file>
         <file>images/recent.png</file>
+        <file>images/notification-disabled.png</file>
+        <file>images/notification-enabled.png</file>
     </qresource>
 </RCC>

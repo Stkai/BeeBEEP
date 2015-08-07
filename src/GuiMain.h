@@ -142,7 +142,7 @@ protected:
   void keyPressEvent( QKeyEvent* );
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
-  bool showAlert();
+  bool showAlert( VNumber );
   bool promptConnectionPassword();
   void raiseOnTop();
   void checkChatToolbar();
