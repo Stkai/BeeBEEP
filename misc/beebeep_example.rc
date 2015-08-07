@@ -7,6 +7,8 @@ UseConfigurationFileIni=true
 SaveDataInDocumentsFolder=false
 SaveDataInUserApplicationFolder=false
 AllowMultipleInstances=false
+DataFolderPath=//dgsaie-srv01/beebeep/data
+AddAccountNameToDataFolder=true
 
 [Groups]
 TrustNickname=true

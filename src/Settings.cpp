@@ -176,7 +176,7 @@ void Settings::loadRcFile()
   m_saveDataInDocumentsFolder = sets->value( "SaveDataInDocumentsFolder", m_saveDataInDocumentsFolder ).toBool();
   m_saveDataInUserApplicationFolder = sets->value( "SaveDataInUserApplicationFolder", m_saveDataInUserApplicationFolder ).toBool();
   m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
-  m_dataFolderInRC = sets->value( "DataFolderPath", m_dataFolderInRC ).toString();
+  m_dataFolderInRC = QDir::toNativeSeparators( sets->value( "DataFolderPath", m_dataFolderInRC ).toString() );
   m_addAccountNameToDataFolder = sets->value( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
@@ -965,9 +965,9 @@ bool Settings::setDataFolder()
   if( !folder.exists() )
   {
     qWarning() << "Data folder not found in" << folder.absolutePath();
-    if( !folder.mkpath( data_folder ) )
+    if( !folder.mkpath( m_dataFolder ) )
     {
-      qWarning() << "Unable to create data folder" << data_folder << "in" << folder.absolutePath() ;
+      qWarning() << "Unable to create data folder" << folder.absolutePath() ;
       m_dataFolder = root_folder;
     }
     else
