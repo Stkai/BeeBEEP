@@ -63,8 +63,12 @@ Settings::Settings()
   m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
   m_resourceFolder = ".";
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050400
   m_dataFolder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
+#elif QT_VERSION >= 0x050000
+  m_dataFolder = QDir::toNativeSeparators( QString( "%1/%2" )
+                   .arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) )
+                   .arg( programName() ) );
 #else
   m_dataFolder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
 #endif
@@ -936,7 +940,7 @@ bool Settings::setDataFolder()
   QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
   QString root_folder;
 
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050400
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;
   else if( m_saveDataInUserApplicationFolder )
@@ -945,6 +949,15 @@ bool Settings::setDataFolder()
     root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
   else
     root_folder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
+#elif QT_VERSION >= 0x050000
+  if( !m_dataFolderInRC.isEmpty() )
+    root_folder = m_dataFolderInRC;
+  else if( m_saveDataInUserApplicationFolder )
+    root_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
+  else if( m_saveDataInDocumentsFolder )
+    root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
+  else
+    root_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
 #else
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;

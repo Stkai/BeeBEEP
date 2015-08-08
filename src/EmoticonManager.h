@@ -68,8 +68,11 @@ protected:
   void addTextEmoticon();
   void addEmojis();
 
+  inline bool isOneCharEmoticon( const QChar& ) const;
+
 private:
   QMultiHash<QChar, Emoticon> m_emoticons;
+  QList<QChar> m_oneCharEmoticons;
   int m_maxTextSize;
   QList<Emoticon> m_recentEmoticons;
   int m_recentEmoticonsMaxSize;
@@ -78,5 +81,6 @@ private:
 
 // Inline Functions
 inline const QList<Emoticon>& EmoticonManager::recentEmoticons() const { return m_recentEmoticons; }
+inline bool EmoticonManager::isOneCharEmoticon( const QChar& c ) const { return m_oneCharEmoticons.contains( c ); }
 
 #endif // BEEBEEP_EMOTICONMANAGER_H

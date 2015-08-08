@@ -157,14 +157,20 @@ void EmoticonManager::addTextEmoticon()
 
 void EmoticonManager::addEmoticon( const QString& e_text, const QString& e_name, int emoticon_group, int sort_order )
 {
+  int emoticon_key_size = e_text.size();
+  QChar key_char = e_text.at( 0 );
+
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Add emoticon" << e_name << "with key" << e_text << "and key size" << e_text.size();
-  if( e_text.size() < 2 )
-    return;
+  qDebug() << "Add emoticon" << e_name << "with key" << e_text << "and key size" << emoticon_key_size << key_char;
 #endif
-  m_emoticons.insert( e_text.at( 0 ), Emoticon( e_text, e_name, emoticon_group, sort_order ) );
-  if( e_text.size() > m_maxTextSize )
-    m_maxTextSize = e_text.size();
+
+  m_emoticons.insert( key_char, Emoticon( e_text, e_name, emoticon_group, sort_order ) );
+
+  if( emoticon_key_size == 1 && !m_oneCharEmoticons.contains( key_char ) )
+    m_oneCharEmoticons.append( key_char );
+
+  if( emoticon_key_size > m_maxTextSize )
+    m_maxTextSize = emoticon_key_size;
 }
 
 static bool SortEmoticon( const Emoticon& e1, const Emoticon& e2 )
@@ -229,15 +235,14 @@ QList<Emoticon> EmoticonManager::emoticonsByGroup( int group_id ) const
 
 Emoticon EmoticonManager::emoticon( const QString& e_text ) const
 {
-  if( e_text.size() > 1 )
+  if( !e_text.isEmpty() )
   {
-    QChar c = e_text.at( 0 );
-    QList<Emoticon> emoticon_list = m_emoticons.values( c );
-    QList<Emoticon>::const_iterator it = emoticon_list.begin();
-    while( it != emoticon_list.end() )
+    QChar emoticon_key = e_text.at( 0 );
+    QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.find( emoticon_key );
+    while( it != m_emoticons.end() && it.key() == emoticon_key )
     {
-      if( (*it).textToMatch() == e_text )
-        return *it;
+      if( it.value().textToMatch() == e_text )
+        return it.value();
       ++it;
     }
   }
@@ -291,7 +296,17 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
     }
     else if( m_emoticons.contains( c ) )
     {
-      if( parse_emoticons )
+      if( isOneCharEmoticon( c ) )
+      {
+        Emoticon e = emoticon( c );
+        if( e.isValid() )
+        {
+          s += e.toHtml( emoticon_size );
+          text_to_match = "";
+          parse_emoticons = true;
+        }
+      }
+      else if( parse_emoticons )
       {
         text_to_match = c;
         parse_emoticons = false;
