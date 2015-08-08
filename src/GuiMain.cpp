@@ -930,7 +930,6 @@ void GuiMain::createDockWindows()
   if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() )
   {
     mp_dockGroupList->hide();
-    mp_dockChatList->hide();
     mp_dockSavedChatList->hide();
     mp_dockFileTransfers->hide();
     mp_dockEmoticons->hide();
@@ -1202,7 +1201,11 @@ void GuiMain::settingsChanged()
       Settings::instance().setChatMaxLinesToShow( act->isChecked() );
       if( act->isChecked() )
       {
+#if QT_VERSION >= 0x050000
+        int num_messages = QInputDialog::getInt( this, Settings::instance().programName(),
+#else
         int num_messages = QInputDialog::getInteger( this, Settings::instance().programName(),
+#endif
                                                      tr( "Please select the maximum number of messages to be showed" ),
                                                      Settings::instance().chatLinesToShow(),
                                                      10, 1000, 5, &ok );
@@ -1248,7 +1251,7 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 bool GuiMain::showAlert( VNumber chat_id )
 {
   Chat c = ChatManager::instance().chat( chat_id );
-  if( c.isValid() && c.isGroup() && !Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
+  if( c.isValid() && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Notification disabled for group:" << c.privateId() << c.name();

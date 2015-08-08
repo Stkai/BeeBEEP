@@ -236,20 +236,20 @@ bool PluginManager::parseText( QString* p_txt, bool before_sending ) const
 bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tmi ) const
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Plugin" << tmi->name() << "starts to parse the text";
+  qDebug() << "Plugin" << tmi->name() << "starts to parse the text:" << qPrintable( *p_txt );
 #endif
   bool space_added_at_begin = false;
   bool space_added_at_end = false;
 
   if( p_txt->startsWith( tmi->openCommand().trimmed() ) )
   {
-    p_txt->prepend( QLatin1Char( ' ' ) );
+    p_txt->prepend( QChar( ' ' ) );
     space_added_at_begin = true;
   }
 
   if( p_txt->endsWith( tmi->closeCommand().trimmed() ) )
   {
-    p_txt->append( QLatin1Char( ' ' ) );
+    p_txt->append( QChar( ' ' ) );
     space_added_at_end = true;
   }
 
@@ -276,30 +276,30 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
       for( int i = 0; i < p_txt->size(); i++ )
       {
         c = p_txt->at( i );
-        if( c == QLatin1Char( '<' ) )
+        if( c == QChar( '<' ) )
           is_in_tag = true;
 
         if( is_in_tag )
         {
           parsed_text.append( c );
 
-          if( c == QLatin1Char( '>' ) )
+          if( c == QChar( '>' ) )
             is_in_tag = false;
 
           continue;
         }
 
-        if( c == QLatin1Char( '&' ) )
+        if( c == QChar( '&' ) )
         {
           QChar c_tmp;
           // Search forward until either a semicolon, tag, or space is found
           for( int j=(i+1); j < p_txt->size(); j++ )
           {
             c_tmp = p_txt->at( j );
-            if( c_tmp == QLatin1Char( '<' ) || c_tmp == QLatin1Char( '>' )
-                || c_tmp == QLatin1Char( ';' ) || c_tmp.isSpace() )
+            if( c_tmp == QChar( '<' ) || c_tmp == QChar( '>' )
+                || c_tmp == QChar( ';' ) || c_tmp.isSpace() )
             {
-              if( c_tmp == QLatin1Char( ';' ) )
+              if( c_tmp == QChar( ';' ) )
               {
                 code_text = p_txt->mid( i, j-i+1 );
 #ifdef BEEBEEP_DEBUG

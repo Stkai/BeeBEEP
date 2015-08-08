@@ -60,7 +60,10 @@ QString GuiChatMessage::formatHtmlText( const QString& text )
         text_formatted += QLatin1Char( ' ' );
     }
     else if( text.at( i ) == QLatin1Char( '\n' ) )
-      text_formatted += QLatin1String( "<br /> " ); // space added to match url after a \n
+    {
+      // space added to match url after a \n
+      text_formatted += QLatin1String( "<br /> " );
+    }
     else if( text.at( i ) == QLatin1Char( '<' ) )
     {
       if( Settings::instance().chatUseHtmlTags() )
@@ -140,6 +143,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
       .arg( text_formatted );
 
   html_message += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
+
   return html_message;
 }
 

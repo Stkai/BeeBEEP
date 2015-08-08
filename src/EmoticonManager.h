@@ -70,6 +70,7 @@ protected:
 
 private:
   QMultiHash<QChar, Emoticon> m_emoticons;
+  QList<QChar> m_uniqueKeys;
   int m_maxTextSize;
   QList<Emoticon> m_recentEmoticons;
   int m_recentEmoticonsMaxSize;

@@ -32,6 +32,7 @@ GuiEmoticons::GuiEmoticons( QWidget* parent )
 {
   setObjectName( "GuiEmoticons" );
   setTabPosition( QTabWidget::South );
+  setUsesScrollButtons( true );
 }
 
 QSize GuiEmoticons::sizeHint() const

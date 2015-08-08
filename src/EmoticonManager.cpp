@@ -44,6 +44,18 @@ EmoticonManager::EmoticonManager()
   m_emoticons.remove( e2.textToMatch().at( 0 ), e2 );
   // no flags
 
+#ifdef BEEBEEP_DEBUG
+  QString s_debug = "";
+  QList<QChar> char_list = m_emoticons.keys();
+  foreach( QChar c, char_list )
+  {
+    s_debug.append( c );
+    s_debug.append( "," );
+  }
+  s_debug.append( "END" );
+  qDebug() << "Emoticon manageger has" << char_list.size() << "keys:" << qPrintable( s_debug );
+#endif
+
   qDebug() << "Emoticon manager loads" << m_emoticons.size() << "emojis";
 }
 
@@ -232,6 +244,9 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
   // not working
   // Emoticon clicked is Ã°ÂÂÂ  "1f620"
   // Emoticon clicked is Ã°ÂÂÂ  "1f460"
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Parsing emoticons:" << qPrintable( msg );
+#endif
 
   QString s = "";
   QString text_to_match = "";
@@ -258,6 +273,9 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
       Emoticon e = emoticon( text_to_match );
       if( e.isValid() )
       {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Emoticon parsed:" << qPrintable( text_to_match ) << e.name();
+#endif
         s += e.toHtml( emoticon_size );
         text_to_match = "";
         parse_emoticons = true;
@@ -278,6 +296,10 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
       {
         text_to_match = c;
         parse_emoticons = false;
+      }
+      else
+      {
+
       }
       else
         s += c;

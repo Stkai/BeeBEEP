@@ -360,7 +360,7 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
 #endif
 
     if( !sendMessageToLocalNetwork( u, group_message ) )
-      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 can not be invited to the group." )
+      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 can not join to the group." )
                              .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) ).arg( u.name() ),
                              DispatchToChat, ChatMessage::Other );
   }

@@ -23,6 +23,19 @@
 
 #include "EmoticonManager.h"
 
+/*
+ * #ifdef BEEBEEP_DEBUG
+  QString s_debug = "";
+  QList<QChar> char_list = m_emoticons.keys();
+  foreach( QChar c, char_list )
+  {
+    s_debug.append( c );
+    s_debug.append( "," );
+  }
+  s_debug.append( "END" );
+  qDebug() << "Emoticon manageger has" << char_list.size() << "keys:" << qPrintable( s_debug );
+#endif
+*/
 
 void EmoticonManager::addEmojis()
 {

@@ -529,7 +529,7 @@ void Settings::load()
   if( m_language.size() > 2 )
     m_language.resize( 2 );
 #if QT_VERSION >= 0x050000
-  m_lastDirectorySelected = QDir::toNativeSeparators( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() ) );
+  m_lastDirectorySelected = QDir::toNativeSeparators( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() );
   m_downloadDirectory = QDir::toNativeSeparators( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
 #else
   m_lastDirectorySelected = QDir::toNativeSeparators( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
