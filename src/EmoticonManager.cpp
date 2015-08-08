@@ -28,7 +28,8 @@ EmoticonManager* EmoticonManager::mp_instance = NULL;
 
 
 EmoticonManager::EmoticonManager()
-  : m_emoticons(), m_maxTextSize( 2 ), m_recentEmoticons()
+ : m_emoticons(), m_oneCharEmoticons(), m_uniqueKeys(),
+   m_maxTextSize( 2 ), m_recentEmoticons()
 {
 #ifdef BEEBEEP_DEBUG
   //createEmojiFiles();
@@ -36,24 +37,26 @@ EmoticonManager::EmoticonManager()
 
   addTextEmoticon();
   addEmojis();
+  m_uniqueKeys = m_emoticons.uniqueKeys();
 
   // error in parsing !?!?
-  Emoticon e1( "😠", "1f620", 0, 0 ); // angry yellow
-  Emoticon e2( "👠", "1f460", 0, 0 );  // red woman shoes
-  m_emoticons.remove( e1.textToMatch().at( 0 ), e1 );
-  m_emoticons.remove( e2.textToMatch().at( 0 ), e2 );
+  //Emoticon e1( "😠", "1f620", 0, 0 ); // angry yellow
+  //Emoticon e2( "👠", "1f460", 0, 0 );  // red woman shoes
+  //m_emoticons.remove( e1.textToMatch().at( 0 ), e1 );
+  //m_emoticons.remove( e2.textToMatch().at( 0 ), e2 );
   // no flags
 
 #ifdef BEEBEEP_DEBUG
   QString s_debug = "";
-  QList<QChar> char_list = m_emoticons.uniqueKeys();
-  qSort( char_list );
-  foreach( QChar c, char_list )
+
+  qSort( m_uniqueKeys );
+  foreach( QChar c, m_uniqueKeys )
   {
     s_debug.append( c );
     s_debug.append( " " );
   }
-  qDebug() << "Emoticon manageger has" << char_list.size() << "keys:" << qPrintable( s_debug );
+  qDebug() << "Emoticon manager has" << m_uniqueKeys.size() << "unique keys:" << qPrintable( s_debug );
+  qDebug() << "Emoticon manager has" << m_oneCharEmoticons.size() << "single char emoticons";
 #endif
 
   qDebug() << "Emoticon manager loads" << m_emoticons.size() << "emojis";
@@ -294,7 +297,7 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
         }
       }
     }
-    else if( m_emoticons.contains( c ) )
+    else if( m_uniqueKeys.contains( c ) )
     {
       if( isOneCharEmoticon( c ) )
       {
