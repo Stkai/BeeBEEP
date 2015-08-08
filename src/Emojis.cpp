@@ -715,6 +715,7 @@ void EmoticonManager::addEmojis()
   addEmoticon( "🔜", "1f51c", Emoticon::Symbols, 687 );
   addEmoticon( "🔝", "1f51d", Emoticon::Symbols, 688 );
   addEmoticon( "🔞", "1f51e", Emoticon::Symbols, 689 );
+  /*
   addEmoticon( "⃣", "0023-20e3", Emoticon::Symbols, 690 );
   addEmoticon( "0⃣", "0030-20e3", Emoticon::Symbols, 691 );
   addEmoticon( "1⃣", "0031-20e3", Emoticon::Symbols, 692 );
@@ -726,6 +727,7 @@ void EmoticonManager::addEmojis()
   addEmoticon( "7⃣", "0037-20e3", Emoticon::Symbols, 698 );
   addEmoticon( "8⃣", "0038-20e3", Emoticon::Symbols, 699 );
   addEmoticon( "9⃣", "0039-20e3", Emoticon::Symbols, 700 );
+  */
   addEmoticon( "🔟", "1f51f", Emoticon::Symbols, 701 );
   addEmoticon( "🔠", "1f520", Emoticon::Symbols, 702 );
   addEmoticon( "🔡", "1f521", Emoticon::Symbols, 703 );

@@ -47,12 +47,12 @@ EmoticonManager::EmoticonManager()
 #ifdef BEEBEEP_DEBUG
   QString s_debug = "";
   QList<QChar> char_list = m_emoticons.uniqueKeys();
+  qSort( char_list );
   foreach( QChar c, char_list )
   {
     s_debug.append( c );
-    s_debug.append( "," );
+    s_debug.append( " " );
   }
-  s_debug.append( "END" );
   qDebug() << "Emoticon manageger has" << char_list.size() << "keys:" << qPrintable( s_debug );
 #endif
 
@@ -157,6 +157,11 @@ void EmoticonManager::addTextEmoticon()
 
 void EmoticonManager::addEmoticon( const QString& e_text, const QString& e_name, int emoticon_group, int sort_order )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Add emoticon" << e_name << "with key" << e_text << "and key size" << e_text.size();
+  if( e_text.size() < 2 )
+    return;
+#endif
   m_emoticons.insert( e_text.at( 0 ), Emoticon( e_text, e_name, emoticon_group, sort_order ) );
   if( e_text.size() > m_maxTextSize )
     m_maxTextSize = e_text.size();
