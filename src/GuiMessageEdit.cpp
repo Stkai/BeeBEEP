@@ -76,7 +76,7 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
 
   if( e.isInGroup() )
   {
-    insertHtml( QString( "&nbsp;" ) + e.toHtml( Settings::instance().emoticonSizeInEdit() ) + QString( "&nbsp;" ) );
+    insertHtml( QString( "&nbsp;" ) + e.toHtml( Settings::instance().emoticonSizeInEdit() ) );
     if( !m_emoticonsAdded.contains( e ) )
       m_emoticonsAdded.append( e );
   }

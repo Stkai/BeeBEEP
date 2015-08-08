@@ -566,8 +566,8 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
 
-  act = mp_menuChat->addAction( tr( "Show emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the emoticons will be recognized and shown as images" ) );
+  act = mp_menuChat->addAction( tr( "Show ASCII emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the ASCII emoticons will be recognized and shown as images" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showEmoticons() );
   act->setData( 10 );
