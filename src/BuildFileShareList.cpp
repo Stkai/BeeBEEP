@@ -70,7 +70,14 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
     FileSizeType path_size = 0;
 
     if( share_path == m_path )
+    {
       m_shareFolder = path_info.fileName();
+      if( m_shareFolder.isEmpty() )
+        m_shareFolder = path_info.dir().dirName();
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Share folder found:" << m_shareFolder;
+#endif
+    }
 
     QDir dir_path( share_path );
     foreach( QString fp, dir_path.entryList() )

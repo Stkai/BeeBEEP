@@ -482,22 +482,21 @@ void Core::addFolderToFileTransfer()
 
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->removeJob( bfsl );
+  QString folder_name = bfsl->shareFolder();
+  QList<FileInfo> file_info_list = bfsl->shareList();
   bfsl->deleteLater();
 
-  User u = UserManager::instance().userList().find( bfsl->userId() );
-  QString folder_name = bfsl->shareFolder();
-  QString sys_header = tr( "%1 Unable to send folder %2" ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*F*" ) )
-                                                          .arg( folder_name ) + QString( ": " );
-
-  Connection* c = connection( u.id() );
-  if( !c )
+  if( folder_name.isEmpty() )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_header + tr( "%1 is not connected." ).arg( u.name() ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+    qWarning() << "Unable to send folder. Internal error. Folder is empty";
     return;
   }
 
-  if( bfsl->shareList().isEmpty() )
+  User u = UserManager::instance().userList().find( bfsl->userId() );
+  QString sys_header = tr( "%1 Unable to send folder %2" ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*F*" ) )
+                                                          .arg( folder_name ) + QString( ": " );
+
+  if( file_info_list.isEmpty() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_header + tr( "the folder is empty." ),
                            DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
@@ -511,10 +510,18 @@ void Core::addFolderToFileTransfer()
     return;
   }
 
+  Connection* c = connection( u.id() );
+  if( !c )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_header + tr( "%1 is not connected." ).arg( u.name() ),
+                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+    return;
+  }
+
   qDebug() << "File Transfer: sending folder" << folder_name << "to" << u.path();
 
   QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
-  Message m = Protocol::instance().createFolderMessage( folder_name, bfsl->shareList(), mp_fileTransfer->serverPort() );
+  Message m = Protocol::instance().createFolderMessage( folder_name, file_info_list, mp_fileTransfer->serverPort() );
 
   if( !m.isValid() )
   {

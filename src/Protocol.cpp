@@ -61,6 +61,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::File:   return "BEE-FILE";
   case Message::Share:  return "BEE-FSHR";
   case Message::Group:  return "BEE-GROU";
+  case Message::Folder: return "BEE-FOLD";
   default:              return "BEE-BOOH";
   }
 }
@@ -87,6 +88,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Share;
   else if( msg_type == "BEE-GROU" )
     return Message::Group;
+  else if( msg_type == "BEE-FOLD" )
+    return Message::Folder;
   else
     return Message::Undefined;
 }
@@ -777,19 +780,17 @@ int Protocol::countFilesCanBeSharedInPath( const QString& file_path )
 Message Protocol::createFolderMessage( const QString& folder_name, const QList<FileInfo>& file_info_list, int server_port )
 {
   QStringList msg_list;
-  QList<FileInfo>::const_iterator it = file_info_list.begin();
-  while( it != file_info_list.end() )
+  foreach( FileInfo fi, file_info_list )
   {
     QStringList sl;
-    sl << it->name();
-    sl << it->suffix();
-    sl << QString::number( it->size() );
-    sl << QString::number( it->id() );
-    sl << QString::fromUtf8( it->password() );
-    sl << it->fileHash();
-    sl << it->shareFolder();
+    sl << fi.name();
+    sl << fi.suffix();
+    sl << QString::number( fi.size() );
+    sl << QString::number( fi.id() );
+    sl << QString::fromUtf8( fi.password() );
+    sl << fi.fileHash();
+    sl << fi.shareFolder();
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
-    ++it;
   }
 
   Message m( Message::Folder, newId(), msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
