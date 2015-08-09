@@ -87,33 +87,34 @@ FileInfo FileShare::networkFileInfo( VNumber user_id, VNumber file_info_id ) con
 QList<FileInfo> FileShare::networkFolder( VNumber user_id, const QString& folder_name ) const
 {
   QList<FileInfo> folder_file_info;
-  QList<FileInfo> file_info_list = m_network.values( user_id );
-  foreach( FileInfo fi, file_info_list )
+  QMultiMap<VNumber, FileInfo>::const_iterator it = m_network.find( user_id );
+  while( it != m_network.end() && it.key() == user_id )
   {
-    if( fi.shareFolder() == folder_name )
-      folder_file_info.append( fi );
+    if( it.value().shareFolder() == folder_name )
+      folder_file_info.append( it.value() );
+
+     ++it;
   }
+
   return folder_file_info;
 }
 
 FileInfo FileShare::localFileInfo( VNumber file_info_id ) const
 {
-  foreach( FileInfo fi, m_local )
+  QMultiMap<VNumber, FileInfo>::const_iterator it = m_network.begin();
+  while( it != m_network.end() )
   {
-    if( fi.id() == file_info_id )
-      return fi;
+    if( it.value().id() == file_info_id )
+      return it.value();
+    ++it;
   }
-
   return FileInfo();
 }
 
 bool FileShare::userHasFileShareList( VNumber user_id ) const
 {
-  QList<FileInfo> file_info_list = m_network.values( user_id );
-  if( !file_info_list.isEmpty() && file_info_list.first().isValid() )
-    return true;
-  else
-    return false;
+  QMultiMap<VNumber, FileInfo>::const_iterator it = m_network.find( user_id );
+  return it != m_network.end() && it.value().isValid();
 }
 
 void FileShare::addDownloadedFile( const FileInfo& file_info )
@@ -140,5 +141,3 @@ FileInfo FileShare::downloadedFile( const QString& file_info_hash ) const
   }
   return FileInfo();
 }
-
-

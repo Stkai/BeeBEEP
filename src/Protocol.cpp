@@ -636,6 +636,14 @@ Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
   return m;
 }
 
+Message Protocol::folderRefusedToMessage( const QString& folder_name )
+{
+  Message m( Message::Folder, newId(), folder_name );
+  m.addFlag( Message::Refused );
+  m.addFlag( Message::Private );
+  return m;
+}
+
 Message Protocol::fileInfoToMessage( const FileInfo& fi )
 {
   Message m( Message::File, newId(), fi.name() );
@@ -766,6 +774,85 @@ int Protocol::countFilesCanBeSharedInPath( const QString& file_path )
   return num_files;
 }
 
+Message Protocol::createFolderMessage( const QString& folder_name, const QList<FileInfo>& file_info_list, int server_port )
+{
+  QStringList msg_list;
+  QList<FileInfo>::const_iterator it = file_info_list.begin();
+  while( it != file_info_list.end() )
+  {
+    QStringList sl;
+    sl << it->name();
+    sl << it->suffix();
+    sl << QString::number( it->size() );
+    sl << QString::number( it->id() );
+    sl << QString::fromUtf8( it->password() );
+    sl << it->fileHash();
+    sl << it->shareFolder();
+    msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
+    ++it;
+  }
+
+  Message m( Message::Folder, newId(), msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
+  msg_list.clear();
+  msg_list << QString::number( server_port );
+  msg_list << folder_name;
+  m.setData( msg_list.join( DATA_FIELD_SEPARATOR ) );
+  m.addFlag( Message::Request );
+  m.addFlag( Message::Private );
+
+  return m;
+}
+
+QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHostAddress& server_address, QString* pFolderName ) const
+{
+  QList<FileInfo> file_info_list;
+  if( m.type() != Message::Share )
+    return file_info_list;
+
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
+  if( sl.isEmpty() )
+    return file_info_list;
+
+  int server_port = sl.takeFirst().toInt();
+  QString folder_name = sl.takeFirst();
+  if( pFolderName )
+    *pFolderName = folder_name;
+
+  /* Skip other data */
+  if( !sl.isEmpty() )
+    qWarning() << "Folder message contains more data. Skip it";
+
+  sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
+
+  QStringList::const_iterator it = sl.begin();
+  while( it != sl.end() )
+  {
+    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR, QString::SkipEmptyParts );
+
+    if( sl_tmp.size() >= 7 )
+    {
+      FileInfo fi;
+
+      fi.setTransferType( FileInfo::Download );
+      fi.setHostAddress( server_address );
+      fi.setHostPort( server_port );
+      fi.setName( sl_tmp.takeFirst() );
+      fi.setSuffix( sl_tmp.takeFirst() );
+      fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
+      fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
+      fi.setPassword( sl_tmp.takeFirst().toUtf8() );
+      fi.setFileHash( sl_tmp.takeFirst() );
+      fi.setShareFolder( sl_tmp.takeFirst() );
+
+      file_info_list.append( fi );
+    }
+
+    ++it;
+  }
+
+  return file_info_list;
+}
+
 void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
 {
   if( file_info_list.isEmpty() || server_port <= 0 )
@@ -775,18 +862,19 @@ void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& f
   }
 
   QStringList msg_list;
-  foreach( FileInfo fi, file_info_list )
+  QMultiMap<QString, FileInfo>::const_iterator it = file_info_list.begin();
+  while( it != file_info_list.end() )
   {
     QStringList sl;
-    sl << fi.name();
-    sl << fi.suffix();
-    sl << QString::number( fi.size() );
-    sl << QString::number( fi.id() );
-    sl << QString::fromUtf8( fi.password() );
-    sl << fi.fileHash();
-    sl << fi.shareFolder();
-
+    sl << it.value().name();
+    sl << it.value().suffix();
+    sl << QString::number( it.value().size() );
+    sl << QString::number( it.value().id() );
+    sl << QString::fromUtf8( it.value().password() );
+    sl << it.value().fileHash();
+    sl << it.value().shareFolder();
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
+    ++it;
   }
 
   Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
@@ -846,7 +934,6 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
 
   return file_info_list;
 }
-
 
 ChatMessageData Protocol::dataFromChatMessage( const Message& m )
 {

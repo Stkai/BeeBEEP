@@ -37,11 +37,14 @@ public:
 
   void setPath( const QString& );
   inline const QString& path() const;
+  inline const QString& shareFolder() const;
   inline void setBroadcastList( bool );
   inline bool broadcastList() const;
   inline const QList<FileInfo>& shareList() const;
   inline FileSizeType shareSize() const;
   inline int elapsedTime() const;
+  inline void setUserId( VNumber );
+  inline VNumber userId() const;
 
 signals:
   void listCompleted();
@@ -59,16 +62,20 @@ private:
   QList<FileInfo> m_shareList;
   FileSizeType m_shareSize;
   int m_elapsedTime;
+  VNumber m_userId;
 
 };
 
 
 // Inline Functions
 inline const QString& BuildFileShareList::path() const { return m_path; }
+inline const QString& BuildFileShareList::shareFolder() const { return m_shareFolder; }
 inline void BuildFileShareList::setBroadcastList( bool new_value ) { m_broadcastList = new_value; }
 inline bool BuildFileShareList::broadcastList() const { return m_broadcastList; }
 inline const QList<FileInfo>& BuildFileShareList::shareList() const { return m_shareList; }
 inline FileSizeType BuildFileShareList::shareSize() const { return m_shareSize; }
 inline int BuildFileShareList::elapsedTime() const { return m_elapsedTime; }
+inline void BuildFileShareList::setUserId( VNumber new_value ) { m_userId = new_value; }
+inline VNumber BuildFileShareList::userId() const { return m_userId; }
 
 #endif // BEEBEEP_BUILDFILESHARELIST_H

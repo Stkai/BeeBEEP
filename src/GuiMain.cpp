@@ -95,6 +95,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
+  connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
@@ -1618,6 +1619,56 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
                               tr( "Reload file list" ), tr( "Cancel" ), QString::null, 1, 1 ) == 0 )
   {
     mp_shareNetwork->reloadList();
+  }
+}
+
+void GuiMain::downloadFolder( const User& u, const QString& folder_name, const QList<FileInfo>& file_info_list )
+{
+  if( !Settings::instance().fileTransferIsEnabled() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( folder_name ) );
+    return;
+  }
+
+  int msg_result = Settings::instance().confirmOnDownloadFile() ? 0 : 1;
+
+  if( msg_result == 0 )
+  {
+    QString msg = tr( "Do you want to download folder %1 (%2 files) from %3?" ).arg( folder_name ).arg( file_info_list.size() ).arg( u.name() );
+    msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
+  }
+
+  if( msg_result == 2 )
+  {
+    Settings::instance().setConfirmOnDownloadFile( false );
+    mp_actConfirmDownload->setChecked( false );
+  }
+
+  if( msg_result > 0 )
+  {
+    // Accepted
+    qDebug() << "You accept to download folder" << folder_name << "from" << u.path();
+    QString download_folder;
+    int files_to_download = 0;
+    foreach( FileInfo fi, file_info_list )
+    {
+      download_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), fi.shareFolder() ) );
+      if( !askToDownloadFile( u, fi, download_folder, false ) )
+        return;
+
+      files_to_download++;
+
+      if( files_to_download > Settings::instance().maxQueuedDownloads() )
+      {
+        qWarning() << "Unable to download all the" << file_info_list.size() << "files because max queued reached" << Settings::instance().maxQueuedDownloads();
+        break;
+      }
+    }
+  }
+  else
+  {
+    qDebug() << "You refuse to download folder" << folder_name << "from" << u.path();
+    mp_core->refuseToDownloadFolder( u.id(), folder_name );
   }
 }
 

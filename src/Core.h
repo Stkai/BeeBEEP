@@ -77,6 +77,7 @@ public:
   bool sendFile( VNumber, const QString& file_path );
   bool downloadFile( VNumber, const FileInfo&, bool show_message );
   void refuseToDownloadFile( VNumber, const FileInfo& );
+  void refuseToDownloadFolder( VNumber, const QString& );
   bool startFileTransferServer();
   void stopFileTransferServer();
   void addPathToShare( const QString&, bool );
@@ -98,6 +99,7 @@ public slots:
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );
   void fileDownloadRequest( const User&, const FileInfo& );
+  void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
   void userIsWriting( const User& );
   void userChanged( const User& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
@@ -130,6 +132,7 @@ protected slots:
   void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
   void fileTransferServerListening();
   void addListToLocalShare();
+  void addFolderToFileTransfer();
 
   /* CoreChat */
   void addListToSavedChats();
@@ -150,6 +153,7 @@ protected:
   void parseFileMessage( const User&, const Message& );
   void parseFileShareMessage( const User&, const Message& );
   void parseGroupMessage( const User&, const Message& );
+  void parseFolderMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserStatusChanged( const User& );
@@ -179,6 +183,7 @@ protected:
   /* CoreFileTransfer */
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();
+  bool sendFolder( const User&, const QFileInfo& );
 
 private:
   QList<Connection*> m_connections;

@@ -28,7 +28,7 @@
 BuildFileShareList::BuildFileShareList( QObject *parent )
   : QObject( parent ), m_path( "" ), m_shareFolder( "" ),
     m_broadcastList( false ), m_shareList(), m_shareSize( 0 ),
-    m_elapsedTime( 0 )
+    m_elapsedTime( 0 ), m_userId( ID_LOCAL_USER )
 {
   setObjectName( "BuildFileShareList" );
 }

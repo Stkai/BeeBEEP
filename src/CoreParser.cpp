@@ -62,6 +62,9 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::File:
     parseFileMessage( u, m );
     break;
+  case Message::Folder:
+    parseFolderMessage( u, m );
+    break;
   case Message::Share:
     parseFileShareMessage( u, m );
     break;
@@ -291,4 +294,28 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
   }
   else
     qWarning() << "Invalid flag found in file share message (CoreParser)";
+}
+
+void Core::parseFolderMessage( const User& u, const Message& m )
+{
+  if( m.hasFlag( Message::Refused ) )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has refused to download folder %3." )
+                             .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), m.text() ),
+                             DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+    return;
+  }
+  else if( m.hasFlag( Message::Request ) )
+  {
+    QString folder_name = tr( "unknown folder" );
+    QList<FileInfo> file_info_list = Protocol::instance().messageFolderToInfoList( m, u.hostAddress(), &folder_name );
+    if( file_info_list.isEmpty() )
+    {
+      qDebug() << "Invalid file info list found in folder message (CoreParser)";
+      return;
+    }
+    emit folderDownloadRequest( u, folder_name, file_info_list );
+  }
+  else
+    qWarning() << "Invalid flag found in folder message (CoreParser)";
 }

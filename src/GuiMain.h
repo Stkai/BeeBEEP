@@ -83,6 +83,7 @@ private slots:
   void sendFileFromChat( VNumber, const QString& );
   void sendFile( VNumber );
   void sendFile( const QString& );
+  void downloadFolder( const User&, const QString&, const QList<FileInfo>& );
   void downloadFile( const User&, const FileInfo& );
   void downloadSharedFile( VNumber, VNumber );
   void downloadSharedFiles( const QList<SharedFileInfo>& );

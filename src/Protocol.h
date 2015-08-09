@@ -65,6 +65,9 @@ public:
   QString publicKey( const Message& ) const;
   QByteArray createCipherKey( const QString&, const QString& ) const;
   QByteArray bytesArrivedConfirmation( int ) const;
+  Message createFolderMessage( const QString&, const QList<FileInfo>&, int server_port );
+  QList<FileInfo> messageFolderToInfoList( const Message&, const QHostAddress&, QString* pFolderName = 0 ) const;
+  Message folderRefusedToMessage( const QString& );
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
   QByteArray localUserStatusMessage() const;
