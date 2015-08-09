@@ -752,7 +752,9 @@ bool Protocol::fileCanBeShared( const QFileInfo& file_info )
 
 int Protocol::countFilesCanBeSharedInPath( const QString& file_path )
 {
-  qDebug() << "Check file path:" << file_path;
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Protocol checks file path:" << file_path;
+#endif
   int num_files = 0;
   QFileInfo file_info( file_path );
   if( fileCanBeShared( file_info ) )
@@ -772,8 +774,9 @@ int Protocol::countFilesCanBeSharedInPath( const QString& file_path )
     else
       num_files = 1;
   }
-
-  qDebug() << "File counted:" << num_files;
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Protocol counts" << num_files << "files which can be shared";
+#endif
   return num_files;
 }
 
@@ -807,7 +810,7 @@ Message Protocol::createFolderMessage( const QString& folder_name, const QList<F
 QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHostAddress& server_address, QString* pFolderName ) const
 {
   QList<FileInfo> file_info_list;
-  if( m.type() != Message::Share )
+  if( m.type() != Message::Folder )
     return file_info_list;
 
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
