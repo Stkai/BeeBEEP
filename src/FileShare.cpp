@@ -51,7 +51,13 @@ void FileShare::addToLocal( const QString& sp, const QList<FileInfo>& share_list
   if( m_local.contains( share_path ) )
     m_local.remove( share_path );
   if( share_list.isEmpty() )
+  {
+    qWarning() << "Fileshare can not add empty file list for path" << share_path;
     return;
+  }
+  else
+    qDebug() << "FileShare shares" << share_list.size() << "files for path" << share_path;
+
   foreach( FileInfo fi, share_list )
     m_local.insert( share_path, fi );
 }
@@ -101,8 +107,8 @@ QList<FileInfo> FileShare::networkFolder( VNumber user_id, const QString& folder
 
 FileInfo FileShare::localFileInfo( VNumber file_info_id ) const
 {
-  QMultiMap<VNumber, FileInfo>::const_iterator it = m_network.begin();
-  while( it != m_network.end() )
+  QMultiMap<QString, FileInfo>::const_iterator it = m_local.begin();
+  while( it != m_local.end() )
   {
     if( it.value().id() == file_info_id )
       return it.value();

@@ -42,6 +42,7 @@ public:
   void stopListener();
 
   FileInfo addFile( const QFileInfo&, const QString& );
+  void addFileInfoList( const QList<FileInfo>& );
   void removeFile( const QFileInfo& );
 
   void downloadFile( const FileInfo& );

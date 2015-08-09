@@ -53,7 +53,7 @@ void BuildFileShareList::buildList()
   qSort( m_shareList );
 #ifdef BEEBEEP_DEBUG
   foreach( FileInfo fi, m_shareList )
-    qDebug() << "Shared:" << fi.path() << "Folder:" << fi.shareFolder();
+    qDebug() << "File shared" << fi.id() << "with path" << fi.path() << "and folder" << fi.shareFolder();
 #endif
   emit listCompleted();
 }

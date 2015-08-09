@@ -133,6 +133,15 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
   return file_info;
 }
 
+void FileTransfer::addFileInfoList( const QList<FileInfo>& file_info_list )
+{
+  foreach( FileInfo fi, file_info_list )
+  {
+    if( !fileInfo( fi.id() ).isValid() )
+      m_files.append( fi );
+  }
+}
+
 void FileTransfer::incomingConnection( qintptr socket_descriptor )
 {
   FileTransferPeer *upload_peer = new FileTransferPeer( this );

@@ -194,7 +194,6 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
 
   if( !u.isConnected() )
   {
-
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, u.name() ),
                              DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
     qWarning() << "Unable to send" << file_path << "to" << u.path() << "because user is offline";
@@ -519,6 +518,8 @@ void Core::addFolderToFileTransfer()
   }
 
   qDebug() << "File Transfer: sending folder" << folder_name << "to" << u.path();
+
+  mp_fileTransfer->addFileInfoList( file_info_list );
 
   QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
   Message m = Protocol::instance().createFolderMessage( folder_name, file_info_list, mp_fileTransfer->serverPort() );
