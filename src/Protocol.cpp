@@ -812,7 +812,10 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
 
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.isEmpty() )
+  {
+    qWarning() << "Folder message received has invalid data";
     return file_info_list;
+  }
 
   int server_port = sl.takeFirst().toInt();
   QString folder_name = sl.takeFirst();

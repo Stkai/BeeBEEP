@@ -1785,7 +1785,6 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   }
   else
   {
-
     gvc->move( QCursor::pos() );
   }
   gvc->show();

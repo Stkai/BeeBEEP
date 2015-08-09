@@ -311,7 +311,7 @@ void Core::parseFolderMessage( const User& u, const Message& m )
     QList<FileInfo> file_info_list = Protocol::instance().messageFolderToInfoList( m, u.hostAddress(), &folder_name );
     if( file_info_list.isEmpty() )
     {
-      qDebug() << "Invalid file info list found in folder message (CoreParser)";
+      qWarning() << "Invalid file info list found in folder message (CoreParser)";
       return;
     }
     emit folderDownloadRequest( u, folder_name, file_info_list );
