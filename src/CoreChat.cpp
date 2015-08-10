@@ -27,14 +27,13 @@
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
+#include "MessageManager.h"
 #include "Protocol.h"
 #include "PluginManager.h"
 #include "Random.h"
 #include "Settings.h"
 #include "Tips.h"
 #include "UserManager.h"
-
-#include "GuiChatMessage.h"
 
 
 void Core::createDefaultChat()
@@ -262,18 +261,26 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     m.addFlag( Message::GroupChat );
     cmd.setGroupId( c.privateId() );
   }
+  else
+  {
+    if( chat_id != ID_DEFAULT_CHAT )
+      m.addFlag( Message::Private );
+  }
 
   m.setData( Protocol::instance().chatMessageDataToString( cmd ) );
 
   int messages_sent = 0;
 
+  ChatMessage cm( ID_LOCAL_USER, m, ChatMessage::Chat );
+  dispatchToChat( cm, chat_id );
+
   if( chat_id == ID_DEFAULT_CHAT )
   {
-    foreach( Connection *c, m_connections )
+    foreach( Connection *conn, m_connections )
     {
-      if( !c->sendMessage( m ) )
+      if( !conn->sendMessage( m ) )
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
-                               .arg( UserManager::instance().userList().find( c->userId() ).path() ),
+                               .arg( UserManager::instance().userList().find( conn->userId() ).path() ),
                                DispatchToChat, ChatMessage::System );
       else
         messages_sent += 1;
@@ -281,9 +288,6 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   }
   else
   {
-    if( !c.isGroup() )
-      m.addFlag( Message::Private );
-
     UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
     foreach( User u, user_list.toList() )
     {
@@ -291,20 +295,19 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
         continue;
 
       if( sendMessageToLocalNetwork( u, m ) )
+      {
         messages_sent += 1;
+      }
       else
       {
-        if( !c.isGroup() )
-          dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message to %1." ).arg( u.path() ),
+        MessageManager::instance().addMessageToSend( u.id(), chat_id, m );
+        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( u.name() ),
                                  DispatchToChat, ChatMessage::System );
       }
     }
   }
 
-  ChatMessage cm( ID_LOCAL_USER, m, ChatMessage::Chat );
-  dispatchToChat( cm, chat_id );
-
-  if( messages_sent == 0 )
+  if( chat_id == ID_DEFAULT_CHAT && messages_sent == 0 )
     dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::System );
 
   return messages_sent;
@@ -503,3 +506,29 @@ bool Core::removeChat( VNumber chat_id )
   }
   return false;
 }
+
+void Core::checkOfflineMessagesForUser( const User& u )
+{
+  QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSend( u.id() );
+  if( message_list.isEmpty() )
+    return;
+
+  Connection* c = connection( u.id() );
+  if( !c )
+    return;
+
+  QList<VNumber> chat_list;
+  qDebug() << message_list.size() << "offline messages sent to" << u.path();
+  foreach( MessageRecord mr, message_list )
+  {
+    if( !chat_list.contains( mr.chatId() ) )
+      chat_list.append( mr.chatId() );
+    c->sendMessage( mr.message() );
+  }
+
+  foreach( VNumber ci, chat_list )
+  {
+    dispatchSystemMessage( ci, u.id(), tr( "Offline messages sent to %2." ).arg( u.name() ), DispatchToChat, ChatMessage::System );
+  }
+}
+

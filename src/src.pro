@@ -92,6 +92,7 @@ HEADERS += AudioManager.h \
   Listener.h \
   Log.h \
   Message.h \
+  MessageManager.h \
   NetworkManager.h \
   PluginManager.h \
   Protocol.h \
@@ -106,7 +107,8 @@ HEADERS += AudioManager.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-  Job.h
+  Job.h \
+    MessageRecord.h
 
 
 SOURCES += AudioManager.cpp \
@@ -179,6 +181,7 @@ SOURCES += AudioManager.cpp \
   Log.cpp \
   Main.cpp \
   Message.cpp \
+  MessageManager.cpp \
   NetworkManager.cpp \
   PluginManager.cpp \
   Protocol.cpp \
@@ -189,7 +192,8 @@ SOURCES += AudioManager.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp
+  VCard.cpp \
+    MessageRecord.cpp
 
 
 FORMS += GuiAddUser.ui \

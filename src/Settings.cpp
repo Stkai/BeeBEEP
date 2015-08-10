@@ -44,8 +44,10 @@ Settings::Settings()
   m_resetGeometryAtStartup = false;
 #ifdef Q_OS_MAC
   m_saveDataInUserApplicationFolder = true;
+  m_useNativeEmoticons = true;
 #else
   m_saveDataInUserApplicationFolder = false;
+  m_useNativeEmoticons = false;
 #endif
   m_allowMultipleInstances = false;
   m_trustNickname = true;
@@ -569,6 +571,7 @@ void Settings::load()
   m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
   m_emoticonInRecentMenu = sets->value( "EmoticonInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
+  m_useNativeEmoticons = sets->value( "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -744,6 +747,7 @@ void Settings::save()
   sets->setValue( "EmoticonSizeInMenu", m_emoticonSizeInMenu );
   sets->setValue( "EmoticonInRecentMenu", m_emoticonInRecentMenu );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
+  sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
@@ -1055,10 +1059,6 @@ QString Settings::simpleEncrypt( const QString& text_to_encrypt )
 
   QByteArray byte_array_encrypted = text_to_encrypt.toUtf8().toBase64();
 
-#ifdef BEEBEEP_DEBUG
-  //qDebug() << "Before simple encrypt:\n" << qPrintable( text_to_encrypt );
-  //qDebug() << "After simple encrypt:\n" << qPrintable( QString::fromLatin1( byte_array_encrypted ) );
-#endif
   return QString::fromLatin1( byte_array_encrypted );
 }
 

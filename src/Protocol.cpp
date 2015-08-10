@@ -585,7 +585,6 @@ Group Protocol::loadGroup( const QString& group_data_saved )
   g.setUsers( member_list.toUsersId() );
 
   return g;
-
 }
 
 Message Protocol::groupChatRefuseMessage( const Chat& c )

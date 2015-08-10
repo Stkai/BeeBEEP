@@ -517,9 +517,10 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addSeparator();
 
-  mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), mp_core, SLOT( sendBroadcastMessage() ) );
+  mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), this, SLOT( sendBroadcastMessage() ) );
   mp_actBroadcast->setStatusTip( tr( "Broadcast a message in your network to find available users" ) );
   mp_menuMain->addAction( mp_actConfigureNetwork );
+
   act = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
   act->setStatusTip( tr( "Add the IP address and the port of the users you want to connect" ) );
   mp_menuMain->addSeparator();
@@ -561,17 +562,23 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatAddNewLineToMessage() );
   act->setData( 2 );
 
-  act = mp_menuChat->addAction( tr( "Show the messages' timestamp" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChat->addAction( tr( "Show the timestamp" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the message shows its timestamp in the chat window" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
 
-  act = mp_menuChat->addAction( tr( "Show ASCII emoticons" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChat->addAction( tr( "Parse Unicode and ASCII emoticons" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the ASCII emoticons will be recognized and shown as images" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showEmoticons() );
   act->setData( 10 );
+
+  act = mp_menuChat->addAction( tr( "Use native emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the emoticons will be parsed by your system font" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useNativeEmoticons() );
+  act->setData( 31 );
 
   act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the messages will be shown grouped by user" ) );
@@ -832,6 +839,7 @@ void GuiMain::createToolAndMenuBars()
   label_version->setText( label_version_text );
   menuBar()->setCornerWidget( label_version );
 
+  mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
@@ -1225,6 +1233,9 @@ void GuiMain::settingsChanged()
   case 30:
     Settings::instance().setConfirmOnDownloadFile( act->isChecked() );
     break;
+  case 31:
+    Settings::instance().setUseNativeEmoticons( act->isChecked() );
+    refresh_chat = true;
   case 99:
     break;
   default:
@@ -2047,10 +2058,16 @@ void GuiMain::openUrl( const QUrl& file_url )
   QString file_path = file_url.toLocalFile();
   if( !file_path.isEmpty() )
   {
-    if( QMessageBox::question( this, Settings::instance().programName(),
+    QFileInfo fi( file_path );
+#ifdef Q_OS_MAC
+    bool is_exe_file = fi.isBundle();
+#else
+    bool is_exe_file = fi.isExecutable();
+#endif
+    if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you really want to open the file %1?" ).arg( file_path ),
                                tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
-    return;
+      return;
   }
 
   qDebug() << "Open url:" << file_url.toString();
@@ -2622,4 +2639,16 @@ void GuiMain::showDefaultServerPortInMenu()
   mp_actPortBroadcast->setText( QString( "udp1: %1" ).arg( broadcast_port ) );
   mp_actPortListener->setText( QString( "tcp1: %1" ).arg( listener_port ) );
   mp_actPortFileTransfer->setText( QString( "tcp2: %1" ).arg( file_transfer_port ) );
+}
+
+void GuiMain::sendBroadcastMessage()
+{
+  mp_actBroadcast->setDisabled( true );
+  mp_core->sendBroadcastMessage();
+  QTimer::singleShot( 10000, this, SLOT( enableBroadcastAction() ) );
+}
+
+void GuiMain::enableBroadcastAction()
+{
+  mp_actBroadcast->setEnabled( true );
 }

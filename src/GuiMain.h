@@ -138,6 +138,8 @@ private slots:
   void showAddUser();
   void showChatSettingsMenu();
   void emoticonMenuVisibilityChanged( bool );
+  void sendBroadcastMessage();
+  void enableBroadcastAction();
 
 protected:
   void keyPressEvent( QKeyEvent* );

@@ -17,36 +17,48 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: NetworkManager.h 407 2015-06-10 16:51:41Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ChatMessage.h"
+#ifndef BEEBEEP_MESSAGEMANAGER_H
+#define BEEBEEP_MESSAGEMANAGER_H
+
+#include "Config.h"
+#include "MessageRecord.h"
 
 
-ChatMessage::ChatMessage()
-  : m_userId( ID_INVALID ), m_message(), m_type( ChatMessage::Other )
+class MessageManager
 {
-}
+// Singleton Object
+  static MessageManager* mp_instance;
 
-ChatMessage::ChatMessage( const ChatMessage& cm )
-{
-  (void)operator=( cm );
-}
+public:
+  void addMessageToSend( VNumber to_user_id, VNumber chat_id, const Message& );
+  QList<MessageRecord> takeMessagesToSend( VNumber user_id );
 
-ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt )
-  : m_userId( user_id ), m_message( m ), m_type( cmt )
-{
-}
-
-ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
-{
-  if( this != &cm )
+  static MessageManager& instance()
   {
-    m_userId = cm.m_userId;
-    m_message = cm.m_message;
-    m_type = cm.m_type;
+    if( !mp_instance )
+      mp_instance = new MessageManager();
+    return *mp_instance;
   }
-  return *this;
-}
 
+  static void close()
+  {
+    if( mp_instance )
+    {
+      delete mp_instance;
+      mp_instance = NULL;
+    }
+  }
+
+protected:
+  MessageManager();
+
+private:
+  QList<MessageRecord> m_messagesToSend;
+
+};
+
+#endif // BEEBEEP_MESSAGEMANAGER_H

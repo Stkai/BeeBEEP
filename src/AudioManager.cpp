@@ -27,7 +27,6 @@
 
 AudioManager* AudioManager::mp_instance = NULL;
 
-
 AudioManager::AudioManager()
   : mp_sound( 0 )
 {
@@ -78,5 +77,3 @@ void AudioManager::playBeep()
   else
     QApplication::beep();
 }
-
-

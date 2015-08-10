@@ -167,6 +167,8 @@ public:
   inline bool showEmoticonMenu() const;
   inline bool isNotificationDisabledForGroup( const QString& ) const;
   void setNotificationEnabledForGroup( const QString&, bool );
+  inline void setUseNativeEmoticons( bool );
+  inline bool useNativeEmoticons() const;
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
@@ -372,6 +374,7 @@ private:
   bool m_chatMaxLinesToShow;
   int m_chatLinesToShow;
   bool m_showEmoticonMenu;
+  bool m_useNativeEmoticons;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -605,5 +608,7 @@ inline int Settings::emoticonInRecentMenu() const { return m_emoticonInRecentMen
 inline void Settings::setRecentEmoticons( const QStringList& new_value ) { m_recentEmoticons = new_value; }
 inline const QStringList& Settings::recentEmoticons() const { return m_recentEmoticons; }
 inline bool Settings::isNotificationDisabledForGroup( const QString& group_id ) const { return group_id.isEmpty() ? false : m_groupSilenced.contains( group_id ); }
+inline void Settings::setUseNativeEmoticons( bool new_value ) { m_useNativeEmoticons = new_value; }
+inline bool Settings::useNativeEmoticons() const { return m_useNativeEmoticons; }
 
 #endif // BEEBEEP_SETTINGS_H

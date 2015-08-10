@@ -39,13 +39,6 @@ EmoticonManager::EmoticonManager()
   addEmojis();
   m_uniqueKeys = m_emoticons.uniqueKeys();
 
-  // error in parsing !?!?
-  //Emoticon e1( "😠", "1f620", 0, 0 ); // angry yellow
-  //Emoticon e2( "👠", "1f460", 0, 0 );  // red woman shoes
-  //m_emoticons.remove( e1.textToMatch().at( 0 ), e1 );
-  //m_emoticons.remove( e2.textToMatch().at( 0 ), e2 );
-  // no flags
-
 #ifdef BEEBEEP_DEBUG
   QString s_debug = "";
 
@@ -252,12 +245,24 @@ Emoticon EmoticonManager::emoticon( const QString& e_text ) const
   return Emoticon();
 }
 
-QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size ) const
+Emoticon EmoticonManager::textEmoticon( const QString& e_text ) const
 {
-  // not working
-  // Emoticon clicked is Ã°ÂÂÂ  "1f620"
-  // Emoticon clicked is Ã°ÂÂÂ  "1f460"
+  if( !e_text.isEmpty() )
+  {
+    QChar emoticon_key = e_text.at( 0 );
+    QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.find( emoticon_key );
+    while( it != m_emoticons.end() && it.key() == emoticon_key )
+    {
+      if( !it.value().isInGroup() && it.value().textToMatch() == e_text )
+        return it.value();
+      ++it;
+    }
+  }
+  return Emoticon();
+}
 
+QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size, bool use_native_emoticons ) const
+{
   QString s = "";
   QString text_to_match = "";
   QChar c;
@@ -280,7 +285,9 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
     else if( text_to_match.size() > 0 )
     {
       text_to_match += c;
-      Emoticon e = emoticon( text_to_match );
+
+      Emoticon e = use_native_emoticons ? textEmoticon( text_to_match ) : emoticon( text_to_match );
+
       if( e.isValid() )
       {
         s += e.toHtml( emoticon_size );
@@ -297,7 +304,7 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size )
         }
       }
     }
-    else if( m_uniqueKeys.contains( c ) )
+    else if( !use_native_emoticons && m_uniqueKeys.contains( c ) )
     {
       if( isOneCharEmoticon( c ) )
       {

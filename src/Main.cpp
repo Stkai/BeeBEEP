@@ -32,6 +32,7 @@
 #include "GuiMain.h"
 #include "HistoryManager.h"
 #include "Log.h"
+#include "MessageManager.h"
 #include "NetworkManager.h"
 #include "PluginManager.h"
 #include "UserManager.h"
@@ -112,6 +113,9 @@ int main( int argc, char *argv[] )
 
   /* Init User Manager */
   (void)UserManager::instance();
+
+  /* Init Message Manager */
+  (void)MessageManager::instance();
 
   /* Init Chat Manager */
   (void)ChatManager::instance();
@@ -204,6 +208,7 @@ int main( int argc, char *argv[] )
   FileShare::close();
   HistoryManager::close();
   ChatManager::close();
+  MessageManager::close();
   UserManager::close();
   Protocol::close();
   PluginManager::close();

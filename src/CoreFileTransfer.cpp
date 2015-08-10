@@ -96,16 +96,16 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
   QDir folder_path = file_info.absoluteDir();
   if( !folder_path.exists() )
   {
-    if( !folder_path.mkpath( folder_path.dirName() ) )
+    if( !folder_path.mkpath( "." ) )
     {
       if( show_message )
       {
         icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
         dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: folder %4 cannot be created." )
-                             .arg( icon_html, fi.name(), u.name(), folder_path.dirName() ),
+                             .arg( icon_html, fi.name(), u.name(), folder_path.absolutePath() ),
                              DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
       }
-      qWarning() << "Unable to download" << fi.name() << "because folder" << folder_path.dirName() << "can not be created";
+      qWarning() << "Unable to download" << fi.name() << "because folder" << folder_path.absolutePath() << "can not be created";
       return false;
     }
   }
@@ -143,6 +143,8 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       FileShare::instance().addDownloadedFile( fi );
       QString s_open = tr( "Open" );
       sys_msg += QString( " %1 <a href='%2'>%3</a>." ).arg( s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() );
+      QFileInfo file_info( fi.path() );
+      sys_msg += QString( " %1 <a href='%2'>%3</a>." ).arg( s_open, QUrl::fromLocalFile( file_info.absoluteDir().absolutePath() ).toString(), tr( "folder" ) );
     }
   }
 

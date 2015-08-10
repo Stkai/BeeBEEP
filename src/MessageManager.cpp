@@ -17,36 +17,39 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: AudioManager.cpp 435 2015-07-31 17:34:50Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ChatMessage.h"
+#include "MessageManager.h"
 
 
-ChatMessage::ChatMessage()
-  : m_userId( ID_INVALID ), m_message(), m_type( ChatMessage::Other )
+MessageManager* MessageManager::mp_instance = NULL;
+
+MessageManager::MessageManager()
+  : m_messagesToSend()
 {
 }
 
-ChatMessage::ChatMessage( const ChatMessage& cm )
+void MessageManager::addMessageToSend( VNumber to_user_id, VNumber chat_id, const Message& m )
 {
-  (void)operator=( cm );
+  MessageRecord mr( to_user_id, chat_id, m );
+  m_messagesToSend.append( mr );
 }
 
-ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt )
-  : m_userId( user_id ), m_message( m ), m_type( cmt )
+QList<MessageRecord> MessageManager::takeMessagesToSend( VNumber user_id )
 {
-}
-
-ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
-{
-  if( this != &cm )
+  QList<MessageRecord> message_list;
+  QList<MessageRecord>::iterator it = m_messagesToSend.begin();
+  while( it != m_messagesToSend.end() )
   {
-    m_userId = cm.m_userId;
-    m_message = cm.m_message;
-    m_type = cm.m_type;
+    if( (*it).toUserId() == user_id )
+    {
+      message_list.append( *it );
+      it = m_messagesToSend.erase( it );
+    }
+    else
+      ++it;
   }
-  return *this;
+  return message_list;
 }
-

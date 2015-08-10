@@ -17,35 +17,35 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: ChatMessage.cpp 408 2015-06-12 00:06:47Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ChatMessage.h"
+#include "MessageRecord.h"
 
 
-ChatMessage::ChatMessage()
-  : m_userId( ID_INVALID ), m_message(), m_type( ChatMessage::Other )
+MessageRecord::MessageRecord()
+ : m_toUserId( ID_INVALID ), m_chatId( ID_INVALID ), m_message()
 {
 }
 
-ChatMessage::ChatMessage( const ChatMessage& cm )
+MessageRecord::MessageRecord( const MessageRecord& mr )
 {
-  (void)operator=( cm );
+  (void)operator=( mr );
 }
 
-ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt )
-  : m_userId( user_id ), m_message( m ), m_type( cmt )
+MessageRecord::MessageRecord( VNumber to_user_id, VNumber chat_id, const Message& m )
+  : m_toUserId( to_user_id ), m_chatId( chat_id ), m_message( m )
 {
 }
 
-ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
+MessageRecord& MessageRecord::operator=( const MessageRecord& mr )
 {
-  if( this != &cm )
+  if( this != &mr )
   {
-    m_userId = cm.m_userId;
-    m_message = cm.m_message;
-    m_type = cm.m_type;
+    m_toUserId = mr.m_toUserId;
+    m_chatId = mr.m_chatId;
+    m_message = mr.m_message;
   }
   return *this;
 }

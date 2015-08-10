@@ -146,6 +146,7 @@ protected:
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
   void addConnectionReadyForUse( Connection* );
+  void checkOfflineMessagesForUser( const User& );
 
   /* CoreParser */
   void parseUserMessage( const User&, const Message& );

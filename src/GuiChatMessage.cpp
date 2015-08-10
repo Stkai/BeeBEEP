@@ -114,7 +114,8 @@ QString GuiChatMessage::formatHtmlText( const QString& text )
     text_formatted = linkify( text_formatted );
 
   if( Settings::instance().showEmoticons() )
-    text_formatted = EmoticonManager::instance().parseEmoticons( text_formatted, Settings::instance().emoticonSizeInChat() );
+    text_formatted = EmoticonManager::instance().parseEmoticons( text_formatted, Settings::instance().emoticonSizeInChat(),
+                                                                 Settings::instance().useNativeEmoticons() );
 
   PluginManager::instance().parseText( &text_formatted, false );
 

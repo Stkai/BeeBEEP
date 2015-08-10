@@ -291,4 +291,5 @@ void Core::checkUserAuthentication( const Message& m )
     checkGroupChatAfterUserReconnect( u );
 
   checkUserHostAddress( u );
+  checkOfflineMessagesForUser( u );
 }
