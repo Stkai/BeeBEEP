@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: ChatMessage.cpp 408 2015-06-12 00:06:47Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

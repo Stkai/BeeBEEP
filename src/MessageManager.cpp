@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: AudioManager.cpp 435 2015-07-31 17:34:50Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
