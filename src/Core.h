@@ -59,10 +59,11 @@ public:
   void changeGroup( VNumber, const QString&, const QList<VNumber>& );
   void removeGroup( VNumber );
 
-  void loadGroups();
-  void saveGroups();
+  void loadUsersAndGroups();
+  void saveUsersAndGroups();
 
   /* CoreChat */
+  void createPrivateChat( const User& );
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
   void showTipOfTheDay();
   void showFactOfTheDay();
@@ -165,7 +166,6 @@ protected:
 
   /* CoreChat */
   void createDefaultChat();
-  void createPrivateChat( const User& );
   QString chatMessageToText( const UserList&, const ChatMessage& );
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
   void sendGroupChatRequestMessage( const Chat&, const UserList& );

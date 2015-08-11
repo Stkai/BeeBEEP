@@ -140,6 +140,7 @@ private slots:
   void emoticonMenuVisibilityChanged( bool );
   void sendBroadcastMessage();
   void enableBroadcastAction();
+  void checkUserSelected( VNumber );
 
 protected:
   void keyPressEvent( QKeyEvent* );

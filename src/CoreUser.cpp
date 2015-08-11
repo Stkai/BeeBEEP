@@ -224,30 +224,52 @@ void Core::removeGroup( VNumber group_id )
   }
 }
 
-void Core::loadGroups()
+void Core::loadUsersAndGroups()
 {
-  QStringList group_list = Settings::instance().groupList();
-  if( group_list.isEmpty() )
-    return;
-
-  Group g;
-  foreach( QString group_data, group_list )
+  if( !Settings::instance().userList().isEmpty() )
   {
-    g = Protocol::instance().loadGroup( group_data );
-    if( g.isValid() )
-      addGroup( g );
+    User u;
+    foreach( QString user_data, Settings::instance().userList() )
+    {
+      u = Protocol::instance().loadUser( user_data );
+      if( u.isValid() )
+        UserManager::instance().setUser( u );
+    }
+  }
+
+  if( !Settings::instance().groupList().isEmpty() )
+  {
+    Group g;
+    foreach( QString group_data, Settings::instance().groupList() )
+    {
+      g = Protocol::instance().loadGroup( group_data );
+      if( g.isValid() )
+        addGroup( g );
+    }
   }
 }
 
-void Core::saveGroups()
+void Core::saveUsersAndGroups()
 {
-  QStringList group_save_data;
+  QStringList save_data;
+
+  if( Settings::instance().saveUserList() )
+  {
+    foreach( User u, UserManager::instance().userList().toList() )
+    {
+      if( !u.isLocal() )
+        save_data.append( Protocol::instance().saveUser( u ) );
+    }
+    Settings::instance().setUserList( save_data );
+    save_data.clear();
+  }
+
   if( !UserManager::instance().groups().isEmpty() )
   {
     foreach( Group g, UserManager::instance().groups() )
     {
-      group_save_data.append( Protocol::instance().saveGroup( g ) );
+      save_data.append( Protocol::instance().saveGroup( g ) );
     }
   }
-  Settings::instance().setGroupList( group_save_data );
+  Settings::instance().setGroupList( save_data );
 }

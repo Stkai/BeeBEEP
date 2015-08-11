@@ -48,6 +48,7 @@ public:
   inline void setMenuSettings( QMenu* );
 
 signals:
+  void userSelected( VNumber );
   void chatSelected( VNumber );
   void showVCardRequest( VNumber, bool );
 

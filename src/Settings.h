@@ -271,6 +271,11 @@ public:
   inline void setUserPathList( const QStringList& );
   inline const QStringList& userPathList() const;
 
+  inline void setSaveUserList( bool );
+  inline bool saveUserList() const;
+  inline void setUserList( const QStringList& );
+  inline const QStringList& userList() const;
+
   inline void setShowHomeAsDefaultPage( bool );
   inline bool showHomeAsDefaultPage() const;
   inline void setResetGeometryAtStartup( bool );
@@ -435,6 +440,9 @@ private:
   QStringList m_userPathList;
   QStringList m_groupSilenced;
 
+  bool m_saveUserList;
+  QStringList m_userList;
+
   bool m_showHomeAsDefaultPage;
   bool m_resetGeometryAtStartup;
 
@@ -591,6 +599,10 @@ inline const QStringList& Settings::groupList() const { return m_groupList; }
 inline const QDateTime& Settings::lastSave() const { return m_lastSave; }
 inline void Settings::setUserPathList( const QStringList& new_value ) { m_userPathList = new_value; }
 inline const QStringList& Settings::userPathList() const { return m_userPathList; }
+inline void Settings::setSaveUserList( bool new_value ) { m_saveUserList = new_value; }
+inline bool Settings::saveUserList() const { return m_saveUserList; }
+inline void Settings::setUserList( const QStringList& new_value ) { m_userList = new_value; }
+inline const QStringList& Settings::userList() const { return m_userList; }
 inline void Settings::setShowHomeAsDefaultPage( bool new_value ) { m_showHomeAsDefaultPage = new_value; }
 inline bool Settings::showHomeAsDefaultPage() const { return m_showHomeAsDefaultPage; }
 inline void Settings::setResetGeometryAtStartup( bool new_value ) { m_resetGeometryAtStartup = new_value; }

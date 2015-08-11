@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -344,7 +344,7 @@
     </message>
     <message>
         <source>%1 %2 can not be invited to the group.</source>
-        <translation>%1 %2 non può essere aggiunto al gruppo.</translation>
+        <translation type="vanished">%1 %2 non può essere aggiunto al gruppo.</translation>
     </message>
     <message>
         <source>%1 %2 cannot be informed that you have left the group.</source>
@@ -433,6 +433,62 @@
     <message>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 Sto contattando %2 ...</translation>
+    </message>
+    <message>
+        <source>The message will be delivered to %1.</source>
+        <translation>Il messaggio sarà recapitato a %1.</translation>
+    </message>
+    <message>
+        <source>%1 %2 can not join to the group.</source>
+        <translation>%1 %2 non può far parte del gruppo.</translation>
+    </message>
+    <message>
+        <source>Offline messages sent to %2.</source>
+        <translation>I messaggi non inviati sono stati spediti ora a %2.</translation>
+    </message>
+    <message>
+        <source>folder</source>
+        <translation>cartella</translation>
+    </message>
+    <message>
+        <source>%1 You have refused to download folder %2 from %3.</source>
+        <translation>%1 Hai rifiutato di scaricare la cartella %2 da %3.</translation>
+    </message>
+    <message>
+        <source>%1 You are about to send %2 to %3. Checking folder...</source>
+        <translation>%1 Stai inviando %2 a %3. Controllo della cartella in corso...</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send folder %2</source>
+        <translation>%1 Impossibile inviare la cartella %2</translation>
+    </message>
+    <message>
+        <source>the folder is empty.</source>
+        <translation>la cartella è vuota.</translation>
+    </message>
+    <message>
+        <source>file transfer is not working.</source>
+        <translation>il trasferimento dei file non è attivo.</translation>
+    </message>
+    <message>
+        <source>%1 is not connected.</source>
+        <translation>%1 non è in linea.</translation>
+    </message>
+    <message>
+        <source>internal error.</source>
+        <translation>errore interno.</translation>
+    </message>
+    <message>
+        <source>%1 You send folder %2 to %3.</source>
+        <translation>%1 Stai inviando la cartella %2 a %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has refused to download folder %3.</source>
+        <translation>%1 %2 ha rifiutato di scaricare la cartella %3.</translation>
+    </message>
+    <message>
+        <source>unknown folder</source>
+        <translation>cartella sconosciuta</translation>
     </message>
 </context>
 <context>
@@ -692,7 +748,7 @@
     </message>
     <message>
         <source>%1 Secure Mode</source>
-        <translation>Modalità Sicura %1</translation>
+        <translation type="vanished">Modalità Sicura %1</translation>
     </message>
     <message>
         <source>All Lan Users</source>
@@ -930,7 +986,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Droid Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Helvetica Neue DeskInterface&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
@@ -1543,7 +1599,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the messages&apos; timestamp</source>
-        <translation>Mostra l&apos;orario nei messaggi</translation>
+        <translation type="vanished">Mostra l&apos;orario nei messaggi</translation>
     </message>
     <message>
         <source>If enabled the message shows its timestamp in the chat window</source>
@@ -1864,7 +1920,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show emoticons</source>
-        <translation>Mostra le faccine con delle immagini</translation>
+        <translation type="vanished">Mostra le faccine con delle immagini</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and showed as images</source>
@@ -2084,7 +2140,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and shown as images</source>
-        <translation>Se abilitata le faccine saranno riconosciute e visualizzate come immagini</translation>
+        <translation type="vanished">Se abilitata le faccine saranno riconosciute e visualizzate come immagini</translation>
     </message>
     <message>
         <source>If enabled the messages will be shown grouped by user</source>
@@ -2684,11 +2740,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Reset window geometry at startup</source>
-        <translation>Reimposta le dimensioni della finestra l&apos;avvio</translation>
+        <translation>Reimposta le dimensioni della finestra all&apos;avvio</translation>
     </message>
     <message>
         <source>If enabled the window geometry will be reset to default value at next startup</source>
-        <translation>Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
+        <translation type="vanished">Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
     </message>
     <message>
         <source>Show only last %1 messages</source>
@@ -2753,6 +2809,42 @@ il file %2 (%3)?</translation>
     <message>
         <source>If enabled you have to confirm the action before downloading a file</source>
         <translation>Se abilitata dovrai sempre confermare di voler scaricare un file</translation>
+    </message>
+    <message>
+        <source>Show the timestamp</source>
+        <translation>Mostra l&apos;orario</translation>
+    </message>
+    <message>
+        <source>Parse Unicode and ASCII emoticons</source>
+        <translation>Interpreta le faccine Ascii e Unicode</translation>
+    </message>
+    <message>
+        <source>If enabled the ASCII emoticons will be recognized and shown as images</source>
+        <translation>Se abilitata le faccine in ASCII e Unicode saranno riconosciute e mostrate come immagini</translation>
+    </message>
+    <message>
+        <source>Use native emoticons</source>
+        <translation>Usa le faccine native</translation>
+    </message>
+    <message>
+        <source>If enabled the emoticons will be parsed by your system font</source>
+        <translation>Se abilitata le faccine saranno mostrate usando il carattere di sistema</translation>
+    </message>
+    <message>
+        <source>Do you want to download folder %1 (%2 files) from %3?</source>
+        <translation>Vuoi scaricare la cartella %1 (%2 file) da %3?</translation>
+    </message>
+    <message>
+        <source>If enabled the window geometry will be reset to default value at the next startup</source>
+        <translation>Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
+    </message>
+    <message>
+        <source>Save the users on exit</source>
+        <translation>Salva gli utenti all&apos;uscita</translation>
+    </message>
+    <message>
+        <source>If enabled the user list will be save on exit</source>
+        <translation>Se abilitata la lista degli utenti verrà salvata all&apos;uscita</translation>
     </message>
 </context>
 <context>

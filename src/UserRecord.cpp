@@ -25,7 +25,7 @@
 
 
 UserRecord::UserRecord()
-  : m_hostAddress(), m_hostPort( DEFAULT_LISTENER_PORT ), m_comment( "" )
+  : m_name( "" ), m_account( "" ), m_hostAddress(), m_hostPort( DEFAULT_LISTENER_PORT ), m_comment( "" )
 {
 }
 
@@ -38,6 +38,8 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
 {
   if( this != &ur )
   {
+    m_name = ur.m_name;
+    m_account = ur.account();
     m_hostAddress = ur.m_hostAddress;
     m_hostPort = ur.m_hostPort;
     m_comment = ur.m_comment;

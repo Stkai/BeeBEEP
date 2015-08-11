@@ -1,10 +1,14 @@
 BEEBEEP (Secure Lan Messanger)
 
-BeeBEEP 1.0.3
+BeeBEEP 2.0.0
+- Updated to Qt Library 5.4.2 (for unicode but it will be more than doubled the package size)
+- Users can be saved on exit
+- Offline messages
+- Send file and folder by drag and drop in a chat
 - Message box can be resized
 - Show only last [num] messages (increase the usability)
 - Reset windows geometry to default at startup option
-- New emoticons interface (emojis)
+- New emoticons interface (emojis unicode)
 - Escape key will minimize BeeBEEP into the system tray (option)
 - DataFolderPath and AddAccountNameToDataFolder option in RC file
 - ConfirmOnDownloadFile option added

@@ -136,6 +136,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
+  connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
   connect( mp_userList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
 
   connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChatForGroup( VNumber ) ) );
@@ -255,7 +256,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
       return;
     }
 
-    mp_core->stop();
+    stopCore();
   }
   raiseHomeView();
 
@@ -634,7 +635,7 @@ void GuiMain::createMenus()
   mp_actConfirmDownload->setData( 30 );
 
   act = mp_menuSettings->addAction( tr( "Reset window geometry at startup" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the window geometry will be reset to default value at next startup" ) );
+  act->setStatusTip( tr( "If enabled the window geometry will be reset to default value at the next startup" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().resetGeometryAtStartup() );
   act->setData( 26 );
@@ -684,6 +685,15 @@ void GuiMain::createMenus()
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
+
+  act = mp_menuUserList->addAction( tr( "Save the users on exit" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the user list will be save on exit" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().saveUserList() );
+  act->setData( 32 );
+
+  mp_menuUserList->addSeparator();
+
   act = mp_menuUserList->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
   act->setCheckable( true );
@@ -1236,6 +1246,9 @@ void GuiMain::settingsChanged()
   case 31:
     Settings::instance().setUseNativeEmoticons( act->isChecked() );
     refresh_chat = true;
+  case 32:
+    Settings::instance().setSaveUserList( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -2240,17 +2253,18 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 
 void GuiMain::loadSession()
 {
+  mp_core->loadUsersAndGroups();
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   mp_shareLocal->updatePaths();
   QTimer::singleShot( 2000, mp_core, SLOT( buildLocalShareList() ) );
-  mp_core->loadGroups();
+
   if( !mp_trayIcon->isVisible() )
     mp_trayIcon->show();
 }
 
 void GuiMain::saveSession()
 {
-  mp_core->saveGroups();
+  mp_core->saveUsersAndGroups();
   SaveChatList scl;
   scl.save();
 }
@@ -2651,4 +2665,28 @@ void GuiMain::sendBroadcastMessage()
 void GuiMain::enableBroadcastAction()
 {
   mp_actBroadcast->setEnabled( true );
+}
+
+void GuiMain::checkUserSelected( VNumber user_id )
+{
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user id" << user_id << "found in check user selected";
+    return;
+  }
+
+  Chat c = ChatManager::instance().privateChatForUser( user_id );
+  if( !c.isValid() )
+  {
+    mp_core->createPrivateChat( u );
+    c = ChatManager::instance().privateChatForUser( user_id );
+    if( !c.isValid() )
+    {
+      qWarning() << "Unable to create private chat for user" << user_id;
+      return;
+    }
+  }
+
+  showChat( c.id() );
 }

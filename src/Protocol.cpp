@@ -425,43 +425,70 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
 User Protocol::createTemporaryUser( const QString& user_path, const QString& account_name )
 {
-  User u;
   QString user_name = User::nameFromPath( user_path );
   if( user_name.isNull() || user_name.isEmpty() )
     return User();
-  else
-    u.setName( user_name );
+
+  QHostAddress user_address;
+  int user_port = 0;
 
   QString host_port = user_path;
-  host_port.remove( 0, u.name().size() + 1 ); // remove name and @
-
+  host_port.remove( 0, user_name.size() + 1 ); // remove name and @
   bool ok = false;
   QStringList sl = host_port.split( ":" );
   if( sl.size() > 2 ) // ipv6 address
   {
-    u.setHostPort( sl.last().toInt( &ok ) );
+    user_port = sl.last().toInt( &ok );
     if( !ok )
       return User();
     sl.removeLast();
-    u.setHostAddress( QHostAddress( sl.join( ":" ) ) );
+    user_address = QHostAddress( sl.join( ":" ) );
   }
   else if( sl.size() == 2 )
   {
-    u.setHostAddress( QHostAddress( sl.first() ) );
-    u.setHostPort( sl.last().toInt( &ok ));
+    user_address = QHostAddress( sl.first() );
+    user_port = sl.last().toInt( &ok );
     if( !ok )
       return User();
   }
   else
     return User();
 
+  return createTemporaryUser( user_name, account_name, user_address, user_port );
+}
+
+User Protocol::createTemporaryUser( const QString& user_name, const QString& user_account_name, const QHostAddress& user_address, int user_port )
+{
+  User u;
+  u.setName( user_name );
+  u.setHostAddress( user_address );
+  u.setHostPort( user_port );
+  if( !user_account_name.isEmpty() )
+    u.setAccountName( user_account_name );
+
   u.setStatus( User::Offline );
   u.setId( newId() );
 
-  if( !account_name.isEmpty() )
-    u.setAccountName( account_name );
-
   return u;
+}
+
+QString Protocol::saveUser( const User& u ) const
+{
+  UserRecord ur;
+  ur.setName( u.name() );
+  ur.setAccount( u.accountName() );
+  ur.setHostAddress( u.hostAddress() );
+  ur.setHostPort( u.hostPort() );
+  return saveUserRecord( ur );
+}
+
+User Protocol::loadUser( const QString& s )
+{
+  UserRecord ur = loadUserRecord( s );
+  if( !ur.isValid() )
+    return User();
+
+  return createTemporaryUser( ur.name(), ur.account(), ur.hostAddress(), ur.hostPort() );
 }
 
 QString Protocol::saveUserRecord( const UserRecord& ur ) const
@@ -470,6 +497,8 @@ QString Protocol::saveUserRecord( const UserRecord& ur ) const
   sl << ur.hostAddress().toString();
   sl << QString::number( ur.hostPort() );
   sl << ur.comment();
+  sl << ur.name();
+  sl << ur.account();
   return sl.join( DATA_FIELD_SEPARATOR );
 }
 
@@ -492,6 +521,12 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     ur.setHostPort( host_port );
 
   ur.setComment( sl.takeFirst() );
+
+  if( !sl.isEmpty() )
+    ur.setName( sl.takeFirst() );
+
+  if( !sl.isEmpty() )
+    ur.setAccount( sl.takeFirst() );
 
   return ur;
 }

@@ -86,11 +86,14 @@ public:
 
   User createUser( const Message&, const QHostAddress& );
   User createTemporaryUser( const QString& user_path, const QString& account_name );
+  User createTemporaryUser( const QString& user_name, const QString& user_account_name, const QHostAddress& user_address, int user_port );
   Chat createChat( const QList<VNumber>& user_list );
   Group createGroup( const QString& group_name, const QList<VNumber>& user_list );
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
 
+  QString saveUser( const User& ) const;
+  User loadUser( const QString& );
   QString saveUserRecord( const UserRecord& ) const;
   UserRecord loadUserRecord( const QString& ) const;
 

@@ -61,6 +61,7 @@ Settings::Settings()
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 30;
   m_confirmOnDownloadFile = true;
+  m_saveUserList = false;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
@@ -506,6 +507,8 @@ void Settings::load()
     m_passwordBeforeHash = simpleDecrypt( sets->value( "EncPwd", "" ).toString() );
   else
     m_passwordBeforeHash = "";
+  m_saveUserList = sets->value( "SaveUsers", m_saveUserList ).toBool();
+  m_userList = sets->value( "List", QStringList() ).toStringList();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -697,7 +700,13 @@ void Settings::save()
     sets->remove( "SavePassword" );
     sets->remove( "EncPwd" );
   }
+
+  sets->setValue( "SaveUsers", m_saveUserList );
+  if( m_saveUserList )
+    sets->setValue( "List", m_userList );
+
   sets->endGroup();
+
   sets->beginGroup( "VCard" );
   sets->setValue( "NickName", m_localUser.vCard().nickName() );
   sets->setValue( "FirstName", m_localUser.vCard().firstName() );
