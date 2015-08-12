@@ -1542,7 +1542,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
 
   if( msg_result == 2 )
   {
-    qDebug() << "Prompt on download file disabled";
+    qDebug() << "Prompt on download file disabled by user request";
     Settings::instance().setConfirmOnDownloadFile( false );
     mp_actConfirmDownload->setChecked( false );
   }
@@ -2084,7 +2084,7 @@ void GuiMain::openUrl( const QUrl& file_url )
 #ifdef Q_OS_MAC
     bool is_exe_file = fi.isBundle();
 #else
-    bool is_exe_file = fi.isExecutable();
+    bool is_exe_file = fi.isExecutable() && !fi.isDir();
 #endif
     if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you really want to open the file %1?" ).arg( file_path ),

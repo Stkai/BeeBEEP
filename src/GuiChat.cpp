@@ -64,9 +64,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenLinks( false );
   mp_lPix->setPixmap( QPixmap( ":/images/chat.png" ) );
 
-  //mp_lPixSecure->setPixmap( QPixmap( ":/images/secure.png" ) );
-  //mp_lPixSecure->setToolTip( tr( "%1 Secure Mode" ).arg( Settings::instance().programName() ) );
-
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
