@@ -304,9 +304,9 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size, 
         }
       }
     }
-    else if( !use_native_emoticons && m_uniqueKeys.contains( c ) )
+    else if( m_uniqueKeys.contains( c ) )
     {
-      if( isOneCharEmoticon( c ) )
+      if( !use_native_emoticons && isOneCharEmoticon( c ) )
       {
         Emoticon e = emoticon( c );
         if( e.isValid() )

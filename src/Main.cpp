@@ -76,6 +76,7 @@ int main( int argc, char *argv[] )
   }
 
   Q_INIT_RESOURCE( beebeep );
+  Q_INIT_RESOURCE( emojis );
 
   /* Enable internal logs */
   Log::installMessageHandler();

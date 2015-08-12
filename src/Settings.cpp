@@ -57,7 +57,9 @@ Settings::Settings()
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
-  m_emoticonSizeInChat = 24;
+
+  QFont f = QApplication::font();
+  setChatFont( f );
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 30;
   m_confirmOnDownloadFile = true;
@@ -83,6 +85,22 @@ Settings::Settings()
 #else
   m_useMulticastDns = false;
 #endif
+}
+
+void Settings::setChatFont( const QFont& new_value )
+{
+  m_chatFont = new_value;
+  QFontMetrics fm( m_chatFont );
+  m_emoticonSizeInChat = qMax( 16, qMin( 32, fm.height() ) );
+  m_emoticonSizeInEdit = qMax( 16, qMin( 32, fm.height() ) );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Font selected for chat:" << m_chatFont.toString();
+  qDebug() << "Font pixel size:" << m_chatFont.pixelSize();
+  qDebug() << "Font point size:" << m_chatFont.pointSize();
+  qDebug() << "Font height:" << fm.height();
+  qDebug() << "Emoticon size:" << m_emoticonSizeInChat;
+#endif
+
 }
 
 QString Settings::accountNameFromSystemEnvinroment() const
@@ -375,8 +393,6 @@ int Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
   return num_addresses;
 }
 
-
-
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
   if( host_address.toString() == QString( "0.0.0.0" ) )
@@ -476,6 +492,7 @@ void Settings::load()
 
   sets->beginGroup( "Chat" );
   m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
+  setChatFont( m_chatFont );
   m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
   m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
@@ -508,7 +525,11 @@ void Settings::load()
   else
     m_passwordBeforeHash = "";
   m_saveUserList = sets->value( "SaveUsers", m_saveUserList ).toBool();
-  m_userList = sets->value( "List", QStringList() ).toStringList();
+  QString user_list = sets->value( "List", "" ).toString();
+  if( user_list.isEmpty() )
+    m_userList = simpleDecrypt( user_list ).split( '\n' );
+  else
+    m_userList = QStringList();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -703,7 +724,7 @@ void Settings::save()
 
   sets->setValue( "SaveUsers", m_saveUserList );
   if( m_saveUserList )
-    sets->setValue( "List", m_userList );
+    sets->setValue( "List", simpleEncrypt( m_userList.join( '\n' ) ) );
 
   sets->endGroup();
 

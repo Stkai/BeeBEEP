@@ -118,7 +118,7 @@ public:
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
   inline const QFont& chatFont() const;
-  inline void setChatFont( const QFont& );
+  void setChatFont( const QFont& );
   inline bool chatCompact() const;
   inline void setChatCompact( bool );
   inline bool chatAddNewLineToMessage() const;
@@ -484,7 +484,6 @@ inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistor
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }
 inline const QFont& Settings::chatFont() const { return m_chatFont; }
-inline void Settings::setChatFont( const QFont& new_value ) { m_chatFont = new_value; }
 inline bool Settings::chatCompact() const { return m_chatCompact; }
 inline void Settings::setChatCompact( bool new_value ) { m_chatCompact = new_value; }
 inline bool Settings::chatAddNewLineToMessage() const { return m_chatAddNewLineToMessage; }
