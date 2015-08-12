@@ -91,7 +91,7 @@ void Settings::setChatFont( const QFont& new_value )
 {
   m_chatFont = new_value;
   QFontMetrics fm( m_chatFont );
-  m_emoticonSizeInChat = qMax( 16, qMin( 32, fm.height() ) );
+  m_emoticonSizeInChat = qMax( 24, qMin( 32, fm.height() ) );
   m_emoticonSizeInEdit = qMax( 16, qMin( 32, fm.height() ) );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Font selected for chat:" << m_chatFont.toString();

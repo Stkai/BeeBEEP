@@ -1524,16 +1524,25 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     return false;
   }
 
-  int msg_result = !make_questions ? 1 : (Settings::instance().confirmOnDownloadFile() ? 0 : 1);
+  int msg_result = make_questions ? 0 : 1;
+  bool auto_file_name = Settings::instance().automaticFileName();
+  if( !make_questions )
+    auto_file_name = true;
 
   if( msg_result == 0 )
   {
-    QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
-    msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
+    if( Settings::instance().confirmOnDownloadFile() )
+    {
+      QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
+      msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
+    }
+    else
+      msg_result = 1;
   }
 
   if( msg_result == 2 )
   {
+    qDebug() << "Prompt on download file disabled";
     Settings::instance().setConfirmOnDownloadFile( false );
     mp_actConfirmDownload->setChecked( false );
   }
@@ -1547,7 +1556,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     if( qfile_info.exists() )
     {
       QString file_name;
-      if( Settings::instance().automaticFileName() || !make_questions )
+      if( auto_file_name )
       {
         file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath() );
         qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save with" << file_name;
