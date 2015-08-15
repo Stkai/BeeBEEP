@@ -527,7 +527,7 @@ void Settings::load()
   m_saveUserList = sets->value( "SaveUsers", m_saveUserList ).toBool();
   QString user_list = sets->value( "List", "" ).toString();
   if( user_list.isEmpty() )
-    m_userList = simpleDecrypt( user_list ).split( '\n' );
+    m_userList = simpleDecrypt( user_list ).split( QString( "\n" ) );
   else
     m_userList = QStringList();
   sets->endGroup();
@@ -724,7 +724,7 @@ void Settings::save()
 
   sets->setValue( "SaveUsers", m_saveUserList );
   if( m_saveUserList )
-    sets->setValue( "List", simpleEncrypt( m_userList.join( '\n' ) ) );
+    sets->setValue( "List", simpleEncrypt( m_userList.join( QString( "\n" ) ) ) );
 
   sets->endGroup();
 

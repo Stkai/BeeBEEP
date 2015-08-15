@@ -39,7 +39,7 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
   if( this != &ur )
   {
     m_name = ur.m_name;
-    m_account = ur.account();
+    m_account = ur.m_account;
     m_hostAddress = ur.m_hostAddress;
     m_hostPort = ur.m_hostPort;
     m_comment = ur.m_comment;
