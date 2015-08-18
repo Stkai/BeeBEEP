@@ -106,6 +106,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( savedChatListAvailable() ), mp_savedChatList, SLOT( updateSavedChats() ) );
   connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_core, SIGNAL( updateGroup( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
+  connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -2466,12 +2467,7 @@ void GuiMain::clearChat( VNumber chat_id )
   mp_chatList->reloadChatList();
   mp_savedChatList->updateSavedChats();
   if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-  {
-    if( chat_id == ID_DEFAULT_CHAT )
-      mp_chat->reloadChat();
-    else
-      showChat( ID_DEFAULT_CHAT );
-  }
+    mp_chat->reloadChat();
 }
 
 void GuiMain::checkGroup( VNumber group_id )
@@ -2698,4 +2694,14 @@ void GuiMain::checkUserSelected( VNumber user_id )
   }
 
   showChat( c.id() );
+}
+
+void GuiMain::showConnectionStatusChanged( const User& u )
+{
+  QString msg = "";
+  if( u.isConnected() )
+    msg = tr( "%1 is online" ).arg( u.name() );
+  else
+    msg = tr( "%1 is offline" ).arg( u.name() );
+  mp_trayIcon->showMessageInTray( msg );
 }

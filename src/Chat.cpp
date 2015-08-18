@@ -73,7 +73,7 @@ QDateTime Chat::dateTimeStarted() const
   if( m_messages.isEmpty() )
     return QDateTime::currentDateTime();
   else
-    return m_messages.first().message().timestamp();
+    return m_messages.first().timestamp();
 }
 
 VNumber Chat::privateUserId() const

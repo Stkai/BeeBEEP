@@ -22,10 +22,12 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "ChatMessage.h"
+#include "Message.h"
+#include "Protocol.h"
 
 
 ChatMessage::ChatMessage()
-  : m_userId( ID_INVALID ), m_message(), m_type( ChatMessage::Other )
+  : m_userId( ID_INVALID ), m_message( "" ), m_timestamp(), m_textColor(), m_type( ChatMessage::Other )
 {
 }
 
@@ -35,8 +37,9 @@ ChatMessage::ChatMessage( const ChatMessage& cm )
 }
 
 ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt )
-  : m_userId( user_id ), m_message( m ), m_type( cmt )
+  : m_userId( user_id ), m_message( "" ), m_timestamp(), m_textColor(), m_type( cmt )
 {
+  fromMessage( m );
 }
 
 ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
@@ -45,8 +48,25 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
   {
     m_userId = cm.m_userId;
     m_message = cm.m_message;
+    m_timestamp = cm.m_timestamp;
+    m_textColor = cm.m_textColor;
     m_type = cm.m_type;
   }
   return *this;
 }
 
+void ChatMessage::fromMessage( const Message& m )
+{
+  if( m.type() == Message::System )
+  {
+    m_userId = ID_SYSTEM_MESSAGE;
+    m_message = m.text();
+  }
+  else
+    m_message = Protocol::instance().formatHtmlText( m.text() );
+
+  ChatMessageData cm_data = Protocol::instance().dataFromChatMessage( m );
+  if( cm_data.textColor().isValid() )
+    m_textColor = cm_data.textColor();
+  m_timestamp = m.timestamp();
+}

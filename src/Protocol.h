@@ -102,6 +102,9 @@ public:
   QString newMd5Id();
   QString fileHash( const QFileInfo& ) const;
 
+  QString linkifyText( QString );
+  QString formatHtmlText( const QString& );
+
   QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const;
   QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key ) const;
 

@@ -111,6 +111,7 @@ signals:
   void savedChatListAvailable();
   void updateStatus( const QString&, int );
   void updateGroup( VNumber );
+  void userConnectionStatusChanged( const User& );
 
 protected slots:
   void showBroadcasterUdpError();

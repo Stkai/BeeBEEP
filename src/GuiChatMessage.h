@@ -39,12 +39,6 @@ public:
   static bool messageCanBeShowedInActivity( const ChatMessage& );
   static bool messageCanBeShowedInDefaultChat( const ChatMessage& );
 
-protected:
-  static QString linkify( QString );
-  static QString formatHtmlText( const QString& );
-
-
-
 };
 
 #endif // BEEBEEP_GUICHATMESSAGE_H

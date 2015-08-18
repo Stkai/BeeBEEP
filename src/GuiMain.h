@@ -141,6 +141,7 @@ private slots:
   void sendBroadcastMessage();
   void enableBroadcastAction();
   void checkUserSelected( VNumber );
+  void showConnectionStatusChanged( const User& );
 
 protected:
   void keyPressEvent( QKeyEvent* );

@@ -27,6 +27,8 @@
 #include "Rijndael.h"
 #include "Settings.h"
 #include "UserManager.h"
+#include "EmoticonManager.h"
+#include "PluginManager.h"
 
 
 Protocol* Protocol::mp_instance = NULL;
@@ -1067,6 +1069,94 @@ QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
   return byte_array;
 }
 
+QString Protocol::linkifyText( QString text )
+{
+  if( !text.contains( QLatin1Char( '.' ) ) )
+    return text;
+  text.prepend( " " ); // for matching www.miosito.it
+  text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "<a href=\"\\1\">\\1</a>" );
+  text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
+  text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
+  text.remove( 0, 1 ); // remove the space added
+  return text;
+}
+
+QString Protocol::formatHtmlText( const QString& text )
+{
+  QString text_formatted = "";
+  int last_semicolon_index = -1;
+
+  for( int i = 0; i < text.length(); i++ )
+  {
+    if( text.at( i ) == QLatin1Char( ' ' ) )
+    {
+      if( (i + 1) < text.length() && text.at( (i+1) ) == QLatin1Char( ' ' ) )
+        text_formatted += QLatin1String( "&nbsp;" );
+      else
+        text_formatted += QLatin1Char( ' ' );
+    }
+    else if( text.at( i ) == QLatin1Char( '\n' ) )
+    {
+      // space added to match url after a \n
+      text_formatted += QLatin1String( "<br /> " );
+    }
+    else if( text.at( i ) == QLatin1Char( '<' ) )
+    {
+      if( Settings::instance().chatUseHtmlTags() )
+      {
+        if( last_semicolon_index >= 0 )
+          text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
+
+        last_semicolon_index = text_formatted.size();
+        text_formatted += QLatin1Char( '<' );
+      }
+      else
+        text_formatted += QLatin1String( "&lt;" );
+    }
+    else if( text.at( i ) == QLatin1Char( '>' ) )
+    {
+      if( Settings::instance().chatUseHtmlTags() )
+      {
+        text_formatted += QLatin1Char( '>' );
+        if( last_semicolon_index >= 0 )
+          last_semicolon_index = -1;
+      }
+      else
+        text_formatted += QLatin1String( "&gt;" );
+    }
+    else if( text.at( i ) == QLatin1Char( '"' ) )
+    {
+      if( last_semicolon_index >= 0 )
+        text_formatted += QLatin1Char( '"' );
+      else
+        text_formatted += QLatin1String( "&quot;" );
+    }
+    else if( text.at( i ) == QLatin1Char( '&' ) )
+    {
+      text_formatted += QLatin1Char( '&' ); // not &amp; for Linkify
+    }
+    else
+      text_formatted += text.at( i );
+  }
+
+  if( last_semicolon_index >= 0 )
+    text_formatted.replace( last_semicolon_index, 1, QLatin1String( "&lt;" ) );
+
+  text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
+  text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
+  text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
+
+  if( Settings::instance().chatUseClickableLinks() )
+    text_formatted = linkifyText( text_formatted );
+
+  if( Settings::instance().showEmoticons() )
+    text_formatted = EmoticonManager::instance().parseEmoticons( text_formatted, Settings::instance().emoticonSizeInChat(),
+                                                                 Settings::instance().useNativeEmoticons() );
+
+  PluginManager::instance().parseText( &text_formatted, false );
+
+  return text_formatted;
+}
 
 /* Encryption */
 QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2 ) const

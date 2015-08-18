@@ -31,6 +31,7 @@
 #if QT_VERSION >= 0x050000
   #include <QtWidgets>
   #include <QtMultimedia>
+  #include <QPrinter>
 #else
   typedef int qintptr;
 #endif

@@ -25,7 +25,7 @@
 #define BEEBEEP_CHATMESSAGE_H
 
 #include "Config.h"
-#include "Message.h"
+class Message;
 
 
 class ChatMessage
@@ -44,25 +44,32 @@ public:
   inline bool isFromLocalUser() const;
 
   inline VNumber userId() const;
-  inline const Message& message() const;
-  inline void setMessage( const Message& );
+  inline const QString& message() const;
+  inline const QDateTime& timestamp() const;
+  inline const QColor& textColor() const;
   inline ChatMessage::Type type() const;
+
+protected:
+  virtual void fromMessage( const Message& );
 
 private:
   VNumber m_userId;
-  Message m_message;
+  QString m_message;
+  QDateTime m_timestamp;
+  QColor m_textColor;
   Type m_type;
 
 };
 
 
 // Inline Functions
-inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID && m_message.isValid(); }
-inline bool ChatMessage::isSystem() const { return m_message.type() == Message::System; }
+inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID; }
+inline bool ChatMessage::isSystem() const { return m_userId == ID_SYSTEM_MESSAGE; }
 inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
 inline VNumber ChatMessage::userId() const { return m_userId; }
-inline const Message& ChatMessage::message() const { return m_message; }
-inline void ChatMessage::setMessage( const Message& new_value ) { m_message = new_value; }
+inline const QString& ChatMessage::message() const { return m_message; }
+inline const QDateTime& ChatMessage::timestamp() const { return m_timestamp; }
+inline const QColor& ChatMessage::textColor() const { return m_textColor; }
 inline ChatMessage::Type ChatMessage::type() const { return m_type; }
 
 #endif // BEEBEEP_CHATMESSAGE_H

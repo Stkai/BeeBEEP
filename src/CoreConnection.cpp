@@ -160,6 +160,8 @@ void Core::closeConnection( Connection *c )
       UserManager::instance().setUser( u );
       showUserStatusChanged( u );
 
+      userConnectionStatusChanged( u );
+
       Chat default_chat = ChatManager::instance().defaultChat();
       if( default_chat.removeUser( u.id() ) )
         ChatManager::instance().setChat( default_chat );
@@ -275,6 +277,8 @@ void Core::checkUserAuthentication( const Message& m )
     showUserStatusChanged( u );
   else
     emit userChanged( u );
+
+  emit userConnectionStatusChanged( u );
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
   {

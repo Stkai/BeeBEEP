@@ -43,6 +43,7 @@ public:
 public slots:
   void setDefaultIcon();
   void setMessageIcon();
+  void showMessageInTray( const QString& );
 
 private:
   int m_iconStatus;

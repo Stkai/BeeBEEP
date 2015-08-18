@@ -59,6 +59,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setObjectName( "GuiChatViewer" );
   mp_teChat->setFocusPolicy( Qt::ClickFocus );
   mp_teChat->setReadOnly( true );
+  mp_teChat->setUndoRedoEnabled( false );
   mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_teChat->setOpenExternalLinks( false );
   mp_teChat->setOpenLinks( false );
@@ -346,18 +347,15 @@ bool GuiChat::setChatId( VNumber chat_id )
 #endif
   m_chatId = c.id();
   m_chatName = c.name();
-
-  mp_actClear->setDisabled( c.isEmpty() );
-
   m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
-
+  bool chat_has_history = ChatManager::instance().chatHasSavedText( c.name() );
+  bool chat_is_empty = c.isEmpty() && !chat_has_history;
   QString html_text = "";
 
-  if( ChatManager::instance().isLoadHistoryCompleted()
-        && ChatManager::instance().chatHasSavedText( c.name() )
-        && historyCanBeShowed() )
+  if( ChatManager::instance().isLoadHistoryCompleted() && chat_has_history && historyCanBeShowed() )
   {
     html_text += ChatManager::instance().chatSavedText( c.name() );
+    chat_is_empty = false;
   }
 
   if( !html_text.isEmpty() )
@@ -383,12 +381,25 @@ bool GuiChat::setChatId( VNumber chat_id )
       html_text += chatMessageToText( cm );
   }
 
-  mp_teChat->setHtml( html_text );
-  ensureLastMessageVisible();
+#ifdef BEEBEEP_DEBUG
+  QTime time_to_open;
+  time_to_open.start();
+#endif
 
+  bool updates_is_enabled = mp_teChat->updatesEnabled();
+  mp_teChat->setUpdatesEnabled( false );
+  mp_teChat->clear();
+  mp_teChat->setHtml( html_text );
+  mp_teChat->setUpdatesEnabled( updates_is_enabled );
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Elapsed time to set HTML text in chat:" << time_to_open.elapsed() << "ms";
+#endif
+
+  mp_actClear->setDisabled( chat_is_empty );
+  ensureLastMessageVisible();
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
-
   return true;
 }
 
@@ -427,7 +438,7 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
     ChatManager::instance().setChat( c );
   }
 
-  mp_actClear->setDisabled( c.isEmpty() );
+  mp_actClear->setDisabled( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) );
 
   User u = m_chatUsers.find( cm.userId() );
   if( !u.isValid() )
@@ -449,14 +460,24 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( !text_message.isEmpty() )
   {
+#ifdef BEEBEEP_DEBUG
+    QTime time_to_insert;
+    time_to_insert.start();
+#endif
+    bool updates_enabled = mp_teChat->updatesEnabled();
+    mp_teChat->setUpdatesEnabled( false );
     QTextCursor cursor( mp_teChat->textCursor() );
     cursor.movePosition( QTextCursor::End );
     cursor.insertHtml( text_message );
+    mp_teChat->setUpdatesEnabled( updates_enabled );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Elapsed time to insert HTML text in chat:" << time_to_insert.elapsed() << "ms";
+#endif
     ensureLastMessageVisible();
   }
 
   if( read_all_messages )
-    setLastMessageTimestamp( cm.message().timestamp() );
+    setLastMessageTimestamp( cm.timestamp() );
 }
 
 void GuiChat::setChatFont( const QFont& f )
@@ -501,24 +522,19 @@ void GuiChat::saveChat()
 {
   QString file_name = QFileDialog::getSaveFileName( this,
                         tr( "Please select a file to save the messages of the chat." ),
-                        Settings::instance().chatSaveDirectory(), "HTML Chat Files (*.htm)" );
-  if( file_name.isNull() || file_name.isEmpty() )
+                        Settings::instance().chatSaveDirectory(), "PDF Chat Files (*.pdf)" );
+  if( file_name.isEmpty() )
     return;
+
+  QPrinter printer;
+  printer.setOutputFormat( QPrinter::PdfFormat );
+  printer.setOutputFileName( file_name );
+  QTextDocument *doc = mp_teChat->document();
+  doc->print( &printer );
+
   QFileInfo file_info( file_name );
   Settings::instance().setChatSaveDirectory( file_info.absolutePath() );
 
-  QFile file( file_name );
-  if( !file.open( QFile::WriteOnly ) )
-  {
-    QMessageBox::warning( this, Settings::instance().programName(),
-      tr( "%1: unable to save the messages.\nPlease check the file or the directories write permissions." ).arg( file_name ), QMessageBox::Ok );
-    return;
-  }
-
-  QTextStream text_stream( &file );
-  text_stream << mp_teChat->toHtml();
-  text_stream << endl;
-  file.close();
   QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
 }
 

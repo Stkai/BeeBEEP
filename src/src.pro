@@ -1,7 +1,7 @@
 include(../beebeep.pri)
 
 QT += network xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
 CONFIG(debug,debug|release) {
   message( Build BeeBEEP in Debug Mode )
@@ -93,6 +93,7 @@ HEADERS += AudioManager.h \
   Log.h \
   Message.h \
   MessageManager.h \
+  MessageRecord.h \
   NetworkManager.h \
   PluginManager.h \
   Protocol.h \
@@ -107,8 +108,7 @@ HEADERS += AudioManager.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-  Job.h \
-    MessageRecord.h
+  Job.h
 
 
 SOURCES += AudioManager.cpp \
@@ -182,6 +182,7 @@ SOURCES += AudioManager.cpp \
   Main.cpp \
   Message.cpp \
   MessageManager.cpp \
+  MessageRecord.cpp \
   NetworkManager.cpp \
   PluginManager.cpp \
   Protocol.cpp \
@@ -192,8 +193,7 @@ SOURCES += AudioManager.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp \
-    MessageRecord.cpp
+  VCard.cpp
 
 
 FORMS += GuiAddUser.ui \

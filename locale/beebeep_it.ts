@@ -841,7 +841,7 @@
     <message>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
-        <translation>%1: impossibile salvare i messaggi.
+        <translation type="vanished">%1: impossibile salvare i messaggi.
 Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
@@ -2846,6 +2846,14 @@ il file %2 (%3)?</translation>
         <source>If enabled the user list will be save on exit</source>
         <translation>Se abilitata la lista degli utenti verrà salvata all&apos;uscita</translation>
     </message>
+    <message>
+        <source>%1 is online</source>
+        <translation>%1 è in linea</translation>
+    </message>
+    <message>
+        <source>%1 is offline</source>
+        <translation>%1 non è più in linea</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3809,13 +3817,6 @@ il file %2 (%3)?</translation>
     <message>
         <source>Search</source>
         <translation>Cerca</translation>
-    </message>
-</context>
-<context>
-    <name>GuiUserListWidget</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
     </message>
 </context>
 <context>
