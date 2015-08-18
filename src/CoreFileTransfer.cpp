@@ -141,10 +141,26 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     if( peer->isTransferCompleted() && fi.isDownload() )
     {
       FileShare::instance().addDownloadedFile( fi );
+      bool image_preview_added = false;
+      if( Settings::instance().showImagePreview() && Bee::isFileTypeImage( fi.suffix() ) )
+      {
+        QImage img;
+        QImageReader img_reader( fi.path() );
+        img_reader.setAutoDetectImageFormat( true );
+        if( img_reader.read( &img ) )
+        {
+          sys_msg += QString( "<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;" )
+                  .arg( QUrl::fromLocalFile( fi.path() ).toString() ).arg( qMin( Settings::instance().imagePreviewHeight(), img.height() ) );
+          image_preview_added = true;
+        }
+      }
+
       QString s_open = tr( "Open" );
-      sys_msg += QString( " %1 <a href='%2'>%3</a>." ).arg( s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() );
+      sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() );
       QFileInfo file_info( fi.path() );
-      sys_msg += QString( " %1 <a href='%2'>%3</a>." ).arg( s_open, QUrl::fromLocalFile( file_info.absoluteDir().absolutePath() ).toString(), tr( "folder" ) );
+      sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( file_info.absoluteDir().absolutePath() ).toString(), tr( "folder" ) );
+      if( image_preview_added )
+        sys_msg += QString( "<br />" );
     }
   }
 

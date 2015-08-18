@@ -202,8 +202,9 @@ void ChatManager::autoLinkSavedChatByNickname( const Chat& c )
   if( !chatHasSavedText( c.name() ) )
   {
     QString chat_same_nickname = ChatManager::instance().findPrivateChatSavedTextWithSameNickname( c.name() );
-    if( !chat_same_nickname.isNull() && !chat_same_nickname.isEmpty() )
-      ChatManager::instance().updateChatSavedText( chat_same_nickname, c.name(), false );
+    if( chat_same_nickname.isEmpty() )
+      return;
+    ChatManager::instance().updateChatSavedText( chat_same_nickname, c.name(), false );
   }
 }
 

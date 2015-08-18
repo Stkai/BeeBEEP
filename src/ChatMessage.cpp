@@ -27,7 +27,8 @@
 
 
 ChatMessage::ChatMessage()
-  : m_userId( ID_INVALID ), m_message( "" ), m_timestamp(), m_textColor(), m_type( ChatMessage::Other )
+  : m_userId( ID_INVALID ), m_message( "" ), m_timestamp(), m_textColor(),
+    m_type( ChatMessage::Other ), m_isFromSystem( false )
 {
 }
 
@@ -37,7 +38,7 @@ ChatMessage::ChatMessage( const ChatMessage& cm )
 }
 
 ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt )
-  : m_userId( user_id ), m_message( "" ), m_timestamp(), m_textColor(), m_type( cmt )
+  : m_userId( user_id ), m_message( "" ), m_timestamp(), m_textColor(), m_type( cmt ), m_isFromSystem( false )
 {
   fromMessage( m );
 }
@@ -51,6 +52,7 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
     m_timestamp = cm.m_timestamp;
     m_textColor = cm.m_textColor;
     m_type = cm.m_type;
+    m_isFromSystem = cm.m_isFromSystem;
   }
   return *this;
 }
@@ -59,7 +61,7 @@ void ChatMessage::fromMessage( const Message& m )
 {
   if( m.type() == Message::System )
   {
-    m_userId = ID_SYSTEM_MESSAGE;
+    m_isFromSystem = true;
     m_message = m.text();
   }
   else

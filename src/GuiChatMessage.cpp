@@ -55,6 +55,8 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
 QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, bool force_timestamp )
 {
+  if( cm.message().isEmpty() )
+    return QString( "" );
   QString html_message = QString( "<font color=#808080>%1 %2</font>" )
             .arg( force_timestamp || Settings::instance().chatShowMessageTimestamp() ? cm.timestamp().toString( "(hh:mm:ss) " ) : "" )
             .arg( cm.message() );
@@ -77,7 +79,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
 
   foreach( ChatMessage cm, c.messages() )
   {
-    if( cm.isSystem() )
+    if( cm.isFromSystem() )
     {
       if( skip_system_message )
         continue;

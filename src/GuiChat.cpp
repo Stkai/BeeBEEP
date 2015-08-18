@@ -226,9 +226,14 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
   QString s = "";
 
   if( !messageCanBeShowed( cm ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "This chat message is filtered out:" << cm.message();
+#endif
     return s;
+  }
 
-  if( cm.isSystem() )
+  if( cm.isFromSystem() )
   {
     s = GuiChatMessage::formatSystemMessage( cm, false );
     m_lastMessageUserId = 0;
@@ -238,6 +243,7 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
     s = GuiChatMessage::formatMessage( findUser( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0 );
     m_lastMessageUserId = cm.userId();
   }
+
   return s;
 }
 
@@ -431,7 +437,7 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   Chat c = ChatManager::instance().chat( m_chatId );
   if( !c.isValid() )
     return;
-  bool read_all_messages = !cm.isFromLocalUser() && !cm.isSystem();
+  bool read_all_messages = !cm.isFromLocalUser() && !cm.isFromSystem();
   if( read_all_messages )
   {
     c.readAllMessages();

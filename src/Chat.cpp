@@ -62,7 +62,7 @@ bool Chat::isEmpty() const
 {
   foreach( ChatMessage cm, m_messages )
   {
-    if( !cm.isSystem() )
+    if( cm.type() == ChatMessage::Chat || cm.type() == ChatMessage::FileTransfer || cm.type() == ChatMessage::History )
       return false;
   }
   return true;

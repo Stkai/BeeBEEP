@@ -570,6 +570,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
 
+  act = mp_menuChat->addAction( tr( "Show preview of the images" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the preview of the downloaded images will be showed in the chat window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showImagePreview() );
+  act->setData( 33 );
+
   act = mp_menuChat->addAction( tr( "Parse Unicode and ASCII emoticons" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the ASCII emoticons will be recognized and shown as images" ) );
   act->setCheckable( true );
@@ -1250,6 +1256,9 @@ void GuiMain::settingsChanged()
   case 32:
     Settings::instance().setSaveUserList( act->isChecked() );
     break;
+  case 33:
+    Settings::instance().setShowImagePreview( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1313,10 +1322,10 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
   bool show_alert = false;
 
-  if( chat_id == ID_DEFAULT_CHAT && cm.isSystem() )
+  if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() )
     mp_home->addSystemMessage( cm );
 
-  if( !cm.isSystem() && !cm.isFromLocalUser() )
+  if( !cm.isFromSystem() && !cm.isFromLocalUser() )
     show_alert = showAlert( chat_id );
 
   if( chat_id == mp_chat->chatId() && mp_chat == mp_stackedWidget->currentWidget() )
@@ -1534,6 +1543,14 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
   {
     if( Settings::instance().confirmOnDownloadFile() )
     {
+      if( isMinimized() || !isActiveWindow() )
+      {
+        if( Settings::instance().raiseOnNewMessageArrived() )
+          raiseOnTop();
+        else
+          QApplication::alert( this );
+        raiseHomeView();
+      }
       QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
       msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
     }

@@ -82,6 +82,14 @@ void Core::createPrivateChat( const User& u )
   if( Settings::instance().autoLinkSavedChatByNickname() && ChatManager::instance().isLoadHistoryCompleted() )
     ChatManager::instance().autoLinkSavedChatByNickname( c );
 
+  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+  {
+    c = ChatManager::instance().chat( c.id() );
+    cm = ChatMessage( u.id(), Protocol::instance().systemMessage( "" ), ChatMessage::History );
+    c.addMessage( cm );
+    ChatManager::instance().setChat( c );
+  }
+
   emit updateChat( c.id() );
 }
 

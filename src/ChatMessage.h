@@ -40,7 +40,7 @@ public:
   ChatMessage& operator=( const ChatMessage& );
 
   inline bool isValid() const;
-  inline bool isSystem() const;
+  inline bool isFromSystem() const;
   inline bool isFromLocalUser() const;
 
   inline VNumber userId() const;
@@ -58,13 +58,14 @@ private:
   QDateTime m_timestamp;
   QColor m_textColor;
   Type m_type;
+  bool m_isFromSystem;
 
 };
 
 
 // Inline Functions
 inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID; }
-inline bool ChatMessage::isSystem() const { return m_userId == ID_SYSTEM_MESSAGE; }
+inline bool ChatMessage::isFromSystem() const { return m_isFromSystem; }
 inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
 inline VNumber ChatMessage::userId() const { return m_userId; }
 inline const QString& ChatMessage::message() const { return m_message; }

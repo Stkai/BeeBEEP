@@ -508,6 +508,10 @@ void Settings::load()
   if( m_chatMessageFilter.size() < (int)ChatMessage::NumTypes )
     m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
   m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
+  m_showImagePreview = sets->value( "ShowImagePreview", true ).toBool();
+  m_chatLinesToShow = sets->value( "ChatLinesToShow", 80 ).toInt();
+  m_chatMaxLinesToShow = sets->value( "ChatMaxLinesToShow", false ).toBool();
+  m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -587,8 +591,6 @@ void Settings::load()
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
-  m_chatLinesToShow = sets->value( "ChatLinesToShow", 80 ).toInt();
-  m_chatMaxLinesToShow = sets->value( "ChatMaxLinesToShow", false ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
   m_emoticonSizeInEdit = sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt();
   m_emoticonSizeInChat = sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt();
@@ -702,6 +704,10 @@ void Settings::save()
   sets->setValue( "AutoLinkSavedChatByNickname", m_autoLinkSavedChatByNickname );
   sets->setValue( "MessageFilter", m_chatMessageFilter );
   sets->setValue( "ShowOnlyMessagesInDefaultChat", m_showOnlyMessagesInDefaultChat );
+  sets->setValue( "ShowImagePreview", m_showImagePreview );
+  sets->setValue( "ChatLinesToShow", m_chatLinesToShow );
+  sets->setValue( "ChatMaxLinesToShow", m_chatMaxLinesToShow );
+  sets->setValue( "ImagePreviewHeight", m_imagePreviewHeight );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );
@@ -769,8 +775,6 @@ void Settings::save()
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
   sets->setValue( "ResetGeometryAtStartup", m_resetGeometryAtStartup );
-  sets->setValue( "ChatLinesToShow", m_chatLinesToShow );
-  sets->setValue( "ChatMaxLinesToShow", m_chatMaxLinesToShow );
   sets->setValue( "ShowEmoticonMenu", m_showEmoticonMenu );
   sets->setValue( "EmoticonSizeInEdit", m_emoticonSizeInEdit );
   sets->setValue( "EmoticonSizeInChat", m_emoticonSizeInChat );

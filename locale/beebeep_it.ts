@@ -2854,6 +2854,14 @@ il file %2 (%3)?</translation>
         <source>%1 is offline</source>
         <translation>%1 non è più in linea</translation>
     </message>
+    <message>
+        <source>Show preview of the images</source>
+        <translation>Mostra l&apos;anteprima delle immagini</translation>
+    </message>
+    <message>
+        <source>If enabled the preview of the downloaded images will be showed in the chat window</source>
+        <translation>Se abilitata l&apos;anteprima delle immagini scaricate sarà mostrata nella conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
