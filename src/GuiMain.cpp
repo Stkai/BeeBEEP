@@ -2723,7 +2723,10 @@ void GuiMain::checkUserSelected( VNumber user_id )
 
 void GuiMain::showConnectionStatusChanged( const User& u )
 {
-  QString msg = "";
+  if( !mp_core->isConnected() )
+    return;
+
+  QString msg;
   if( u.isConnected() )
     msg = tr( "%1 is online" ).arg( u.name() );
   else

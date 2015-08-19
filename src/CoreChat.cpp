@@ -297,6 +297,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   else
   {
     UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
+    QStringList offline_users;
     foreach( User u, user_list.toList() )
     {
       if( u.isLocal() )
@@ -309,10 +310,13 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       else
       {
         MessageManager::instance().addMessageToSend( u.id(), chat_id, m );
-        dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( u.name() ),
-                                 DispatchToChat, ChatMessage::System );
+        offline_users.append( u.name() );
       }
     }
+
+    if( !offline_users.isEmpty() )
+      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( offline_users.join( ", " ) ),
+                             DispatchToChat, ChatMessage::System );
   }
 
   if( chat_id == ID_DEFAULT_CHAT && messages_sent == 0 )

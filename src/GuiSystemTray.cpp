@@ -69,5 +69,5 @@ void GuiSystemTray::setMessageIcon()
 void GuiSystemTray::showMessageInTray( const QString& msg )
 {
   if( Settings::instance().showNotificationOnTray() && Settings::instance().trayMessageTimeout() > 0 )
-    showMessage( Settings::instance().programName(), msg, QSystemTrayIcon::Information, qMax( 1000, Settings::instance().trayMessageTimeout() ) );
+    showMessage( msg, Settings::instance().programName(), QSystemTrayIcon::Information, qMax( 1000, Settings::instance().trayMessageTimeout() ) );
 }

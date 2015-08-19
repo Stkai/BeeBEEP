@@ -901,15 +901,20 @@ void Settings::clearTemporaryFile()
 void Settings::setNotificationEnabledForGroup( const QString& group_id, bool enable_notification )
 {
   if( group_id.isEmpty() )
+  {
+    qWarning() << "Empty private group id in set notification enabled";
     return;
+  }
 
   if( enable_notification )
+  {
+    m_groupSilenced.removeOne( group_id );
+  }
+  else
   {
     if( !m_groupSilenced.contains( group_id ) )
       m_groupSilenced.append( group_id );
   }
-  else
-    m_groupSilenced.removeOne( group_id );
 }
 
 void Settings::addStartOnSystemBoot()

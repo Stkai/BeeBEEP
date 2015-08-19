@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Avatar.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ChatMessage.h"
@@ -39,9 +40,11 @@ GuiChat::GuiChat( QWidget *parent )
   setAcceptDrops( true );
 
   QGridLayout* grid_layout = new QGridLayout( this );
-  grid_layout->setSpacing(0);
-  grid_layout->setObjectName( QString::fromUtf8("grid_layout") );
-  grid_layout->setContentsMargins(0, 0, 0, 0);
+  grid_layout->setSpacing( 0 );
+  grid_layout->setObjectName( QString::fromUtf8( "grid_layout" ) );
+  grid_layout->setContentsMargins( 0, 0, 0, 0 );
+
+  grid_layout->addWidget( mp_frameHeader, 0, 0, 1, 1 );
 
   mp_splitter = new QSplitter( this );
   mp_splitter->setOrientation( Qt::Vertical );
@@ -49,7 +52,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_splitter->addWidget( mp_teChat );
   mp_splitter->addWidget( mp_frameMessage );
 
-  grid_layout->addWidget(mp_splitter, 0, 0, 1, 1);
+  grid_layout->addWidget( mp_splitter, 1, 0, 1, 1);
   QList<int> widget_sizes;
   widget_sizes.append( 200 );
   widget_sizes.append( 80 );
@@ -63,7 +66,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_teChat->setOpenExternalLinks( false );
   mp_teChat->setOpenLinks( false );
-  mp_lPix->setPixmap( QPixmap( ":/images/chat.png" ) );
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
@@ -278,9 +280,12 @@ bool GuiChat::isActiveUser( const User& u ) const
 void GuiChat::setChatUsers()
 {
   QString chat_users;
+  mp_pbProfile->disconnect();
+  mp_pbProfile->setToolTip( QString( "" ) );
 
   if( m_chatId == ID_DEFAULT_CHAT )
   {
+    mp_pbProfile->setIcon( QIcon( ":images/default-chat-online.png" ) );
     chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
     mp_menuMembers->setEnabled( false );
   }
@@ -288,7 +293,7 @@ void GuiChat::setChatUsers()
   {
     mp_menuMembers->setEnabled( true );
     mp_menuMembers->clear();
-    QAction* act;
+    QAction* act = 0;
     QStringList sl;
     m_chatUsers.sort();
     foreach( User u, m_chatUsers.toList() )
@@ -319,21 +324,38 @@ void GuiChat::setChatUsers()
           sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
         else
           sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
+
+        if( u.vCard().photo().isNull() )
+          mp_pbProfile->setIcon( Avatar::create( u.name(), u.color(), QSize( 32, 32 ) ) );
+        else
+          mp_pbProfile->setIcon( u.vCard().photo() );
+
+        connect( mp_pbProfile, SIGNAL( clicked() ), act, SIGNAL( triggered() ) );
+        mp_pbProfile->setToolTip( tr( "Show profile" ) );
       }
     }
 
     if( sl.size() > 2 )
+    {
       chat_users = QString( "<b>%1</b>" ).arg( m_chatName );
+      mp_pbProfile->setIcon( QIcon( ":/images/group.png" ) );
+      mp_pbProfile->disconnect();
+      connect( mp_pbProfile, SIGNAL( clicked() ), this, SLOT( showMembersMenu() ) );
+      mp_pbProfile->setToolTip( tr( "Show members" ) );
+    }
     else
-      chat_users = sl.size() == 0 ? tr( "Nobody" ) : (sl.size() == 2 ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ));
+    {
+      chat_users = sl.size() == 0 ? tr( "Nobody" ) : (sl.size() == 2 ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ) );
+    }
   }
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Chat members:" << m_chatUsers.toStringList( false, false ).join( ", " );
 #endif
 
-  QString text_to_write = tr( "To" ) + QString( ": %1" ).arg( chat_users );
-  mp_lTitle->setText( text_to_write  );
+  //QString text_to_write = tr( "To" ) + QString( ": %1" ).arg( chat_users );
+  //mp_lTitle->setText( text_to_write  );
+  mp_lTitle->setText( chat_users );
   mp_teMessage->setEnabled( isActiveUser( Settings::instance().localUser() ) );
 }
 

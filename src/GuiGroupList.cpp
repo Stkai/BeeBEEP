@@ -58,7 +58,7 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   connect( mp_actEnableGroupNotification, SIGNAL( triggered() ), this, SLOT( enableGroupNotification() ) );
 
   mp_actDisableGroupNotification = new QAction( QIcon( ":/images/notification-enabled.png" ), tr( "Disable notifications" ), this );
-  connect( mp_actDisableGroupNotification, SIGNAL( triggered() ), this, SLOT( enableGroupNotification() ) );
+  connect( mp_actDisableGroupNotification, SIGNAL( triggered() ), this, SLOT( disableGroupNotification() ) );
 
   mp_actRemoveGroup = new QAction( QIcon( ":/images/group-remove.png" ), tr( "Delete group" ), this );
   connect( mp_actRemoveGroup, SIGNAL( triggered() ), this, SLOT( removeGroupSelected() ) );
@@ -264,6 +264,12 @@ void GuiGroupList::enableGroupNotification()
   if( m_selectedGroupId != ID_INVALID )
   {
     Group g = UserManager::instance().group( m_selectedGroupId );
+    if( !g.isValid() )
+    {
+      qWarning() << "Invalid id" << m_selectedGroupId << "found in enable group notification";
+      return;
+    }
+    qDebug() << "Enable notification for group:" << g.name();
     Settings::instance().setNotificationEnabledForGroup( g.privateId(), true );
     m_selectedGroupId = ID_INVALID;
   }
@@ -274,6 +280,12 @@ void GuiGroupList::disableGroupNotification()
   if( m_selectedGroupId != ID_INVALID )
   {
     Group g = UserManager::instance().group( m_selectedGroupId );
+    if( !g.isValid() )
+    {
+      qWarning() << "Invalid id" << m_selectedGroupId << "found in disable group notification";
+      return;
+    }
+    qDebug() << "Disable notification for group:" << g.name();
     Settings::instance().setNotificationEnabledForGroup( g.privateId(), false );
     m_selectedGroupId = ID_INVALID;
   }
