@@ -47,6 +47,7 @@ signals:
 
 protected:
   void keyPressEvent( QKeyEvent* );
+  void dropEvent( QDropEvent* );
   void contextMenuEvent( QContextMenuEvent* );
   void addMessageToHistory();
   bool nextMessageFromHistory();

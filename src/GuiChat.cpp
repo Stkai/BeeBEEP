@@ -313,8 +313,10 @@ void GuiChat::setChatUsers()
       {
         if( !isActiveUser( u ) )
           sl.append( tr( "(You have left)" ).toLower() );
-        else
+        else if( u.isConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( tr( "You" ) ).toLower() );
+        else
+          sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
       }
       else
       {
@@ -357,6 +359,15 @@ void GuiChat::setChatUsers()
   //mp_lTitle->setText( text_to_write  );
   mp_lTitle->setText( chat_users );
   mp_teMessage->setEnabled( isActiveUser( Settings::instance().localUser() ) );
+}
+
+void GuiChat::reloadChatUsers()
+{
+  Chat c = ChatManager::instance().chat( m_chatId );
+  if( !c.isValid() )
+    return;
+  m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
+  setChatUsers();
 }
 
 bool GuiChat::setChatId( VNumber chat_id )

@@ -1775,6 +1775,7 @@ void GuiMain::showChat( VNumber chat_id )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Chat" << chat_id << "is already shown... skip";
 #endif
+    mp_chat->reloadChatUsers();
     mp_chat->ensureFocusInChat();
     return;
   }
@@ -1788,7 +1789,6 @@ void GuiMain::showChat( VNumber chat_id )
     raiseChatView();
   }
   QApplication::restoreOverrideCursor();
-
 }
 
 void GuiMain::changeVCard()

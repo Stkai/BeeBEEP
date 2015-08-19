@@ -150,6 +150,13 @@ void GuiMessageEdit::setMessageFromHistory()
   m_messageChanged = true;
 }
 
+void GuiMessageEdit::dropEvent( QDropEvent* e )
+{
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+  QTextEdit::dropEvent( e );
+  QApplication::restoreOverrideCursor();
+}
+
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 {
   bool reset_font = false;

@@ -45,6 +45,7 @@ public:
   inline VNumber chatId() const;
   void updateUser( const User& );
 
+  void reloadChatUsers();
   inline bool reloadChat();
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
