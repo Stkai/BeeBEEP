@@ -37,6 +37,8 @@ public:
   ChatMessage( const ChatMessage& );
   ChatMessage( VNumber user_id, const Message&, ChatMessage::Type );
 
+  virtual ~ChatMessage() {}
+
   ChatMessage& operator=( const ChatMessage& );
 
   inline bool isValid() const;

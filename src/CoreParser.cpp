@@ -165,9 +165,10 @@ void Core::parseFileMessage( const User& u, const Message& m )
   }
   fi.setHostAddress( c->peerAddress() );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is sending to you the file: %3." )
-                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), fi.name() ),
-                         DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+  QString sys_msg = tr( "%1 %2 is sending to you the file: %3." ).arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), fi.name() );
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+
   emit fileDownloadRequest( u, fi );
 }
 

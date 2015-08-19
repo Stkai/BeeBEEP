@@ -1552,7 +1552,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
         raiseHomeView();
       }
       QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
-      msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
+      msg_result = QMessageBox::question( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
     }
     else
       msg_result = 1;
@@ -1686,7 +1686,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
   if( msg_result == 0 )
   {
     QString msg = tr( "Do you want to download folder %1 (%2 files) from %3?" ).arg( folder_name ).arg( file_info_list.size() ).arg( u.name() );
-    msg_result = QMessageBox::information( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
+    msg_result = QMessageBox::question( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
   }
 
   if( msg_result == 2 )
@@ -2095,25 +2095,33 @@ void GuiMain::setGameInPauseMode()
 
 void GuiMain::openUrl( const QUrl& file_url )
 {
-  QString file_path = file_url.toLocalFile();
-  if( !file_path.isEmpty() )
+  if( file_url.isLocalFile() )
   {
-    QFileInfo fi( file_path );
+    QString file_path = file_url.toLocalFile();
+    if( !file_path.isEmpty() )
+    {
+      QFileInfo fi( file_path );
 #ifdef Q_OS_MAC
-    bool is_exe_file = fi.isBundle();
+      bool is_exe_file = fi.isBundle();
 #else
-    bool is_exe_file = fi.isExecutable() && !fi.isDir();
+      bool is_exe_file = fi.isExecutable() && !fi.isDir();
 #endif
-    if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
+      if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you really want to open the file %1?" ).arg( file_path ),
                                tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
-      return;
-  }
+        return;
+    }
 
-  qDebug() << "Open url:" << file_url.toString();
-  if( !QDesktopServices::openUrl( file_url ) )
-    QMessageBox::information( this, Settings::instance().programName(),
+    qDebug() << "Open url:" << file_url.toString();
+    if( !QDesktopServices::openUrl( file_url ) )
+      QMessageBox::information( this, Settings::instance().programName(),
                               tr( "Unable to open %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
+  }
+  else
+  {
+    QString url_txt = file_url.toString();
+    qWarning() << "Unable to open link url:" << url_txt;
+  }
 }
 
 void GuiMain::selectBeepFile()
