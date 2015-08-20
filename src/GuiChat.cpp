@@ -59,6 +59,8 @@ GuiChat::GuiChat( QWidget *parent )
   mp_splitter->setSizes( widget_sizes );
 
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
+  mp_teMessage->setAcceptRichText( false );
+
   mp_teChat->setObjectName( "GuiChatViewer" );
   mp_teChat->setFocusPolicy( Qt::ClickFocus );
   mp_teChat->setReadOnly( true );
@@ -66,6 +68,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_teChat->setOpenExternalLinks( false );
   mp_teChat->setOpenLinks( false );
+  mp_teChat->setAcceptRichText( false );
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
@@ -328,7 +331,7 @@ void GuiChat::setChatUsers()
           sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
 
         if( u.vCard().photo().isNull() )
-          mp_pbProfile->setIcon( Avatar::create( u.name(), u.color(), QSize( 32, 32 ) ) );
+          mp_pbProfile->setIcon( Avatar::create( u.name(), u.color(), QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ) ) );
         else
           mp_pbProfile->setIcon( u.vCard().photo() );
 
@@ -427,7 +430,6 @@ bool GuiChat::setChatId( VNumber chat_id )
 
   bool updates_is_enabled = mp_teChat->updatesEnabled();
   mp_teChat->setUpdatesEnabled( false );
-  mp_teChat->clear();
   mp_teChat->setHtml( html_text );
   mp_teChat->setUpdatesEnabled( updates_is_enabled );
 
