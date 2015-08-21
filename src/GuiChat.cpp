@@ -291,6 +291,7 @@ void GuiChat::setChatUsers()
     mp_pbProfile->setIcon( QIcon( ":images/default-chat-online.png" ) );
     chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
     mp_menuMembers->setEnabled( false );
+    connect( mp_pbProfile, SIGNAL( clicked() ), this, SLOT( showLocalUserVCard() ) );
   }
   else
   {
@@ -659,4 +660,9 @@ void GuiChat::showUserVCard()
 void GuiChat::showMembersMenu()
 {
   mp_menuMembers->exec( QCursor::pos() );
+}
+
+void GuiChat::showLocalUserVCard()
+{
+  emit showVCardRequest( ID_LOCAL_USER, false );
 }

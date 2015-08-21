@@ -98,6 +98,7 @@ private slots:
   void sendFile();
   void showUserVCard();
   void showMembersMenu();
+  void showLocalUserVCard();
 
 private:
   VNumber m_chatId;
