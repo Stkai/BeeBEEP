@@ -149,9 +149,16 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
         img_reader.setAutoDetectImageFormat( true );
         if( img_reader.read( &img ) )
         {
-          sys_msg += QString( "<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;" )
-                  .arg( QUrl::fromLocalFile( fi.path() ).toString() ).arg( qMin( Settings::instance().imagePreviewHeight(), img.height() ) );
-          image_preview_added = true;
+          QString img_file_name = QString( "beeimgtmp-%1-%2.png" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( fi.id() );
+          QString img_file_path = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory() ).arg( img_file_name ) );
+          QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
+          if( img_scaled.save( img_file_path, "png" ) )
+          {
+            sys_msg += QString( "<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;" )
+                    .arg( img_file_path ).arg( qMin( Settings::instance().imagePreviewHeight(), img_scaled.height() ) );
+            image_preview_added = true;
+            Settings::instance().addTemporaryFilePath( img_file_path );
+          }
         }
       }
 
