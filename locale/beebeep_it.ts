@@ -490,6 +490,10 @@
         <source>unknown folder</source>
         <translation>cartella sconosciuta</translation>
     </message>
+    <message>
+        <source>%1 %2 is sending to you the folder: %3.</source>
+        <translation>%1 %2 ti sta inviando la cartella: %3.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -728,7 +732,7 @@
     </message>
     <message>
         <source>To</source>
-        <translation>A</translation>
+        <translation type="vanished">A</translation>
     </message>
     <message>
         <source>Unable to open %1</source>
@@ -936,6 +940,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>last %1 messages</source>
         <translation>ultimi %1 messaggi</translation>
     </message>
+    <message>
+        <source>Show profile</source>
+        <translation>Mostra profilo</translation>
+    </message>
+    <message>
+        <source>Show members</source>
+        <translation>Mostra membri</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -965,10 +977,6 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Chat</source>
         <translation>Parla</translation>
-    </message>
-    <message>
-        <source>*</source>
-        <translation></translation>
     </message>
     <message>
         <source>Write to: &lt;b&gt;ALL&lt;/b&gt;</source>

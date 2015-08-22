@@ -315,6 +315,11 @@ void Core::parseFolderMessage( const User& u, const Message& m )
       qWarning() << "Invalid file info list found in folder message (CoreParser)";
       return;
     }
+
+    QString sys_msg = tr( "%1 %2 is sending to you the folder: %3." ).arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), folder_name );
+
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+
     emit folderDownloadRequest( u, folder_name, file_info_list );
   }
   else
