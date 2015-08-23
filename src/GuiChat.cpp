@@ -608,7 +608,11 @@ void GuiChat::dropEvent( QDropEvent *event )
     int num_files = 0;
     foreach( QUrl url, event->mimeData()->urls() )
     {
+#if QT_VERSION >= 0x040800
       if( url.isLocalFile() )
+#else
+      if( url.scheme() == QStringLiteral( "file" ) )
+#endif
       {
         num_files += Protocol::instance().countFilesCanBeSharedInPath( url.toLocalFile() );
         if( num_files > Settings::instance().maxQueuedDownloads() )
@@ -628,7 +632,11 @@ void GuiChat::dropEvent( QDropEvent *event )
 
     foreach( QUrl url, event->mimeData()->urls() )
     {
+#if QT_VERSION >= 0x040800
       if( url.isLocalFile() )
+#else
+      if( url.scheme() == QStringLiteral( "file" ) )
+#endif
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "Drag and drop: send file" << url.toLocalFile() << "to chat" << m_chatId;

@@ -267,7 +267,11 @@ void GuiShareLocal::dropEvent( QDropEvent *event )
   {
     foreach( QUrl url, event->mimeData()->urls() )
     {
+#if QT_VERSION >= 0x040800
       if( url.isLocalFile() )
+#else
+      if( url.scheme() == QStringLiteral( "file" ) )
+#endif
         addSharePath( QDir::toNativeSeparators( url.toLocalFile() ) );
     }
   }
