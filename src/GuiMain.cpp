@@ -2467,7 +2467,7 @@ void GuiMain::clearChat( VNumber chat_id )
   if( !c.isValid() )
     return;
   QString chat_name = c.isDefault() ? QObject::tr( "All Lan Users" ).toLower() : c.name();
-  if( c.isEmpty() )
+  if( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
     return;
