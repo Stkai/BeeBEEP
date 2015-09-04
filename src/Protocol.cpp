@@ -371,7 +371,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   /* Auth */
   if( hello_message.data().toUtf8() != Settings::instance().hash( user_name ) )
   {
-    qWarning() << "HELLO message has sn invalid password";
+    qWarning() << "HELLO message has an invalid password";
     return User();
   }
 
