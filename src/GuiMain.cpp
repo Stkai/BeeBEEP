@@ -2298,7 +2298,15 @@ void GuiMain::loadSession()
   QTimer::singleShot( 2000, mp_core, SLOT( buildLocalShareList() ) );
 
   if( !mp_trayIcon->isVisible() )
+  {
     mp_trayIcon->show();
+#ifdef Q_OS_LINUX
+    qApp->processEvents();
+    mp_trayIcon->hide();
+    qApp->processEvents();
+    mp_trayIcon->show();
+#endif
+  }
 }
 
 void GuiMain::saveSession()

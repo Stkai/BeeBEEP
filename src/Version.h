@@ -41,7 +41,7 @@ const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
 const char* BEEBEEP_VERSION = "2.0.1";
 const int BEEBEEP_PROTO_VERSION = 62;
 const int BEEBEEP_SETTINGS_VERSION = 5;
-const int BEEBEEP_BUILD = 475;
+const int BEEBEEP_BUILD = 476;
 
 #endif // BEEBEEP_VERSION_H
 
