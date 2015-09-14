@@ -229,6 +229,26 @@ int BeeApplication::idleTimeFromSystem()
 #endif
 
 #ifdef Q_OS_LINUX
+  /*
+  // gcc -o getIdleTime getIdleTime.c -lXss
+#include <X11/extensions/scrnsaver.h>
+#include <stdio.h>
+
+int main(void) {
+  Display *dpy = XOpenDisplay(NULL);
+
+  if (!dpy) {
+    return(1);
+  }
+
+  XScreenSaverInfo *info = XScreenSaverAllocInfo();
+  XScreenSaverQueryInfo(dpy, DefaultRootWindow(dpy), info);
+  printf("%u", info->idle);
+
+  return(0);
+}
+*/
+
   if( !m_xcbConnectHasError )
   {
     xcb_screensaver_query_info_cookie_t xcbCookie;

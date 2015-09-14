@@ -1,5 +1,11 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 2.0.2
+- Fixed a bug in "open url" function
+
+BeeBEEP 2.0.1
+- Fixed icon problem in Linux system tray 
+
 BeeBEEP 2.0.0
 - Updated to Qt Library 5.4.2 (for unicode emojis but it will be more than doubled the package size)
 - Users can be saved on exit

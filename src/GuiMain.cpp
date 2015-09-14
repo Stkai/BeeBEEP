@@ -2124,7 +2124,8 @@ void GuiMain::openUrl( const QUrl& file_url )
   else
   {
     QString url_txt = file_url.toString();
-    qWarning() << "Unable to open link url:" << url_txt;
+    if( !QDesktopServices::openUrl( file_url ) )
+      qWarning() << "Unable to open link url:" << url_txt;
   }
 }
 
