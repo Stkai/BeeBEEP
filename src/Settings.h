@@ -34,8 +34,9 @@ class Settings
   static Settings* mp_instance;
 
 public:
-  QSettings* objectSettings() const;
+  QSettings* objectSettings() const; // deleteLater instance after call
 
+  QString currentSettingsFilePath() const;
   QString operatingSystem( bool use_long_name ) const;
   QString accountNameFromSystemEnvinroment() const;
   void createLocalUser();

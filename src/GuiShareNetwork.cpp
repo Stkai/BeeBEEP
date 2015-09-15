@@ -198,9 +198,9 @@ void GuiShareNetwork::loadShares( const User& u )
         file_shared++;
         share_size += fi.size();
 
-        if( timer.elapsed() > 10000 )
+        if( timer.elapsed() > 20000 )
         {
-          qDebug() << "File share operation is too long, time out!";
+          qWarning() << "File share operation is too long, time out!";
           break;
         }
       }

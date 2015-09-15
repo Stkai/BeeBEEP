@@ -60,7 +60,7 @@ protected:
   void addFileInfoToList( VNumber, const FileInfo& );
   void addFileInfoListToList( VNumber, const QList<FileInfo>& );
   void addItemToFileInfoList( GuiFileInfoItem* );
-  void parseItem( QTreeWidgetItem* );
+  int parseItem( QTreeWidgetItem* );
   FileInfo fileInfoFromNetwork( GuiFileInfoItem* );
   GuiFileInfoItem* createSubFolderItem( GuiFileInfoItem*, VNumber, const QString&, const QString& );
 

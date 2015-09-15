@@ -98,7 +98,6 @@ QList<FileInfo> FileShare::networkFolder( VNumber user_id, const QString& folder
   {
     if( it.value().shareFolder() == folder_name )
       folder_file_info.append( it.value() );
-
      ++it;
   }
 

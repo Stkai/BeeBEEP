@@ -86,6 +86,7 @@ int main( int argc, char *argv[] )
   Settings::instance().setResourceFolder();
   Settings::instance().loadRcFile();
   Settings::instance().setDataFolder();
+  qDebug() << "Settings path:" << Settings::instance().currentSettingsFilePath();
   Settings::instance().load();
   Settings::instance().createLocalUser();
 

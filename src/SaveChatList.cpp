@@ -54,6 +54,8 @@ void SaveChatList::save()
     return;
   }
 
+  qDebug() << "Saving chat messages in" << file_name;
+
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
 

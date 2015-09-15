@@ -23,6 +23,7 @@
 
 #include "GuiFileInfoList.h"
 #include "FileShare.h"
+#include "Settings.h"
 #include "User.h"
 
 
@@ -128,8 +129,6 @@ GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& fo
 GuiFileInfoItem* GuiFileInfoList::createSubFolderItem( GuiFileInfoItem* parent_item, VNumber user_id,
                                                        const QString& subfolder_name, const QString& subfolder_path )
 {
-  if( !parent_item )
-    qWarning() << "PARENT IS NULL";
   GuiFileInfoItem* item;
   if( parent_item )
     item = new GuiFileInfoItem( parent_item );
@@ -251,24 +250,43 @@ void GuiFileInfoList::addItemToFileInfoList( GuiFileInfoItem* fi_item )
   addFileInfoToList( fi_item->userId(), fi );
 }
 
-void GuiFileInfoList::parseItem( QTreeWidgetItem* tw_item )
+int GuiFileInfoList::parseItem( QTreeWidgetItem* tw_item )
 {
   GuiFileInfoItem* item = (GuiFileInfoItem*)(tw_item);
 
   if( item->isObjectFile() )
   {
     addItemToFileInfoList( item );
+    return 1;
   }
-  else if( item->isObjectFolder() && item->childCount() > 0  )
+
+  if( item->isObjectFolder() && item->childCount() > 0  )
   {
     QList<FileInfo> folder_file_info_list = FileShare::instance().networkFolder( item->userId(), item->folder() );
     addFileInfoListToList( item->userId(), folder_file_info_list );
+
+    int item_count = folder_file_info_list.size();
+    if( item_count > Settings::instance().maxQueuedDownloads() )
+      return item_count;
+
+    for( int i=0; i < item->childCount(); i++ )
+    {
+      item_count += parseItem( item->child( i ) );
+      if( item_count > Settings::instance().maxQueuedDownloads() )
+        return item_count;
+    }
+
+    return item_count;
   }
-  else if( item->isObjectUser() )
+
+  if( item->isObjectUser() )
   {
     QList<FileInfo> user_file_info_list = FileShare::instance().fileSharedFromUser( item->userId() );
     addFileInfoListToList( item->userId(), user_file_info_list );
+    return user_file_info_list.size();
   }
+
+  return 0;
 }
 
 int GuiFileInfoList::parseSelectedItems()
@@ -278,8 +296,16 @@ int GuiFileInfoList::parseSelectedItems()
   if( selected_items.isEmpty() )
     return 0;
 
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+  QApplication::processEvents();
   foreach( QTreeWidgetItem* item, selected_items )
+  {
     parseItem( item );
+    if( m_selectedFileInfoList.size() > Settings::instance().maxQueuedDownloads() )
+      break;
+  }
+
+  QApplication::restoreOverrideCursor();
 
   return m_selectedFileInfoList.size();
 }

@@ -100,7 +100,6 @@ void Settings::setChatFont( const QFont& new_value )
   qDebug() << "Font height:" << fm.height();
   qDebug() << "Emoticon size:" << m_emoticonSizeInChat;
 #endif
-
 }
 
 QString Settings::accountNameFromSystemEnvinroment() const
@@ -459,6 +458,14 @@ void Settings::loadBroadcastAddressesFromFileHosts()
 
   qDebug() << "HOSTS file read:" << hosts_found << "IP addresses found";
   file.close();
+}
+
+QString Settings::currentSettingsFilePath() const
+{
+  if( m_useSettingsFileIni )
+    return defaultSettingsFilePath();
+  else
+    return QLatin1String( "Native OS Settings" );
 }
 
 QSettings* Settings::objectSettings() const
