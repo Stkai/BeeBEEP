@@ -26,29 +26,33 @@
 
 
 BuildFileShareList::BuildFileShareList( QObject *parent )
-  : QObject( parent ), m_path( "" ), m_shareFolder( "" ),
+  : QObject( parent ), m_folderPath( "" ), m_folderName( "" ),
     m_broadcastList( false ), m_shareList(), m_shareSize( 0 ),
     m_elapsedTime( 0 ), m_userId( ID_LOCAL_USER )
 {
   setObjectName( "BuildFileShareList" );
 }
 
-void BuildFileShareList::setPath( const QString& path_to_share )
+void BuildFileShareList::setFolderPath( const QString& path_to_share )
 {
-  m_path = path_to_share;
-  m_shareFolder = "";
+  QDir dir_shared( path_to_share );
+  m_folderName = dir_shared.dirName();
+  m_folderPath = dir_shared.absolutePath();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Building file share list" << m_folderName << "with path" << m_folderPath;
+#endif
 }
 
 void BuildFileShareList::buildList()
 {
-  if( m_path.isEmpty() )
+  if( m_folderPath.isEmpty() )
     return;
   if( !m_shareList.isEmpty() )
     m_shareList.clear();
   m_shareSize = 0;
   QTime elapsed_time;
   elapsed_time.start();
-  m_shareSize = addPathToList( m_path );
+  m_shareSize = addPathToList( m_folderName, m_folderPath );
   m_elapsedTime = elapsed_time.elapsed();
   qSort( m_shareList );
 #ifdef BEEBEEP_DEBUG
@@ -58,9 +62,9 @@ void BuildFileShareList::buildList()
   emit listCompleted();
 }
 
-FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
+FileSizeType BuildFileShareList::addPathToList( const QString& path_name, const QString& path_url )
 {
-  QFileInfo path_info( share_path );
+  QFileInfo path_info( path_url );
 
   if( !Protocol::instance().fileCanBeShared( path_info ) )
     return 0;
@@ -69,33 +73,28 @@ FileSizeType BuildFileShareList::addPathToList( const QString& share_path )
   {
     FileSizeType path_size = 0;
 
-    if( share_path == m_path )
-    {
-      m_shareFolder = path_info.fileName();
-      if( m_shareFolder.isEmpty() )
-        m_shareFolder = path_info.dir().dirName();
+    QDir dir_path( path_url );
+    QString subfolder_name = path_url == m_folderPath ? m_folderName : QDir::toNativeSeparators( QString( "%1/%2" ).arg( path_name, dir_path.dirName() ) );
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Share folder found:" << m_shareFolder;
+    qDebug() << "Subfolder " << subfolder_name << "found with path" << path_url;
 #endif
-    }
 
-    QDir dir_path( share_path );
     foreach( QString fp, dir_path.entryList() )
     {
-      path_size += addPathToList( QDir::toNativeSeparators( share_path + QString( "/" ) + fp ) );
+      path_size += addPathToList( subfolder_name, QDir::toNativeSeparators( QString( "%1/%2" ) .arg( path_url, fp ) ) );
     }
 
     return path_size;
   }
   else if( path_info.isFile() )
   {
-    FileInfo fi = Protocol::instance().fileInfo( path_info, m_shareFolder );
+    FileInfo fi = Protocol::instance().fileInfo( path_info, path_name );
     m_shareList.append( fi );
     return fi.size();
   }
   else
   {
-    qWarning() << "Path" << share_path << "is niether a file nor a folder (what is it?) and cannot be shared";
+    qWarning() << "Path" << path_url << "is niether a file nor a folder (what is it?) and cannot be shared";
     return 0;
   }
 }

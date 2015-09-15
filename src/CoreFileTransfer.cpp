@@ -379,7 +379,7 @@ void Core::addPathToShare( const QString& share_path, bool broadcast_list )
   emit updateStatus( share_status + QString( " ..." ), 1000 );
 
   BuildFileShareList *bfsl = new BuildFileShareList;
-  bfsl->setPath( share_path );
+  bfsl->setFolderPath( share_path );
   bfsl->setBroadcastList( broadcast_list );
   connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addListToLocalShare() ) );
   BeeApplication* bee_app = (BeeApplication*)qApp;
@@ -403,10 +403,10 @@ void Core::addListToLocalShare()
   QString share_status;
 
   if( bfsl->shareList().size() < 2 )
-    share_status = tr( "%1 is added to file sharing (%2)" ).arg( bfsl->path(), Bee::bytesToString( bfsl->shareSize() ) );
+    share_status = tr( "%1 is added to file sharing (%2)" ).arg( bfsl->folderPath(), Bee::bytesToString( bfsl->shareSize() ) );
   else
     share_status = tr( "%1 is added to file sharing with %2 files, %3 (elapsed time: %4)" )
-                           .arg( bfsl->path() )
+                           .arg( bfsl->folderPath() )
                            .arg( bfsl->shareList().size() )
                            .arg( Bee::bytesToString( bfsl->shareSize() ) )
                            .arg( Bee::elapsedTimeToString( bfsl->elapsedTime() ) );
@@ -414,7 +414,7 @@ void Core::addListToLocalShare()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 
-  FileShare::instance().addToLocal( bfsl->path(), bfsl->shareList(), bfsl->shareSize() );
+  FileShare::instance().addToLocal( bfsl->folderPath(), bfsl->shareList(), bfsl->shareSize() );
 
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->removeJob( bfsl );
@@ -485,7 +485,7 @@ bool Core::sendFolder( const User& u, const QFileInfo& file_info )
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You are about to send %2 to %3. Checking folder..." )
                          .arg( icon_html, file_info.fileName(), u.name() ), DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
   BuildFileShareList *bfsl = new BuildFileShareList;
-  bfsl->setPath( file_info.absoluteFilePath() );
+  bfsl->setFolderPath( file_info.absoluteFilePath() );
   bfsl->setBroadcastList( false );
   bfsl->setUserId( u.id() );
   connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addFolderToFileTransfer() ) );
@@ -506,7 +506,7 @@ void Core::addFolderToFileTransfer()
 
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->removeJob( bfsl );
-  QString folder_name = bfsl->shareFolder();
+  QString folder_name = bfsl->folderName();
   QList<FileInfo> file_info_list = bfsl->shareList();
   bfsl->deleteLater();
 

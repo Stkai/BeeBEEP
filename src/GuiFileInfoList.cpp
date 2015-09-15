@@ -125,25 +125,55 @@ GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& fo
   return 0;
 }
 
+GuiFileInfoItem* GuiFileInfoList::createSubFolderItem( GuiFileInfoItem* parent_item, VNumber user_id,
+                                                       const QString& subfolder_name, const QString& subfolder_path )
+{
+  if( !parent_item )
+    qWarning() << "PARENT IS NULL";
+  GuiFileInfoItem* item;
+  if( parent_item )
+    item = new GuiFileInfoItem( parent_item );
+  else
+    item = new GuiFileInfoItem( mp_tree );
+
+  item->initFolder( user_id, subfolder_name, subfolder_path );
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "GuiFileInfoList::createSubFolderItem for user" << user_id << subfolder_name;
+#endif
+  return item;
+}
+
 GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString& folder_name )
 {
 #ifdef BEEBEEP_DEBUG
   qDebug() << "GuiFileInfoList::createFolderItem for user" << u.id() << folder_name;
 #endif
-  GuiFileInfoItem* item;
-  if( u.isLocal() )
+  GuiFileInfoItem* parent_item = 0;
+  GuiFileInfoItem* item = 0;
+  if( !u.isLocal() )
   {
-    item = new GuiFileInfoItem( mp_tree );
-  }
-  else
-  {
-    GuiFileInfoItem* parent_item = userItem( u.id() );
+    parent_item = userItem( u.id() );
     if( !parent_item )
       parent_item = createUserItem( u );
-    item = new GuiFileInfoItem( parent_item );
   }
 
-  item->initFolder( u.id(), folder_name );
+  QString folder_path = QDir::toNativeSeparators( folder_name );
+  QStringList folder_list_path = folder_path.split( QDir::separator(), QString::SkipEmptyParts );
+
+  QString subfolder_path = "";
+  foreach( QString fn, folder_list_path )
+  {
+    if( subfolder_path.isEmpty() )
+      subfolder_path = fn;
+    else
+      subfolder_path = subfolder_path + QDir::separator() + fn;
+    item = folderItem( u.id(), subfolder_path );
+    if( !item )
+      item = createSubFolderItem( parent_item, u.id(), fn, subfolder_path );
+    parent_item = item;
+  }
+
   return item;
 }
 
@@ -182,7 +212,6 @@ GuiFileInfoItem* GuiFileInfoList::createFileItem( const User& u, const FileInfo&
 #endif
   GuiFileInfoItem* item = new GuiFileInfoItem( parent_item );
   item->initFile( u.id(), file_info );
-
 
   return item;
 }

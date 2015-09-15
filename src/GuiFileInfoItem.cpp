@@ -41,13 +41,23 @@ GuiFileInfoItem::GuiFileInfoItem( QTreeWidgetItem *parent )
 
 bool GuiFileInfoItem::operator<( const QTreeWidgetItem& item ) const
 {
-  if( treeWidget()->sortColumn() == (int)ColumnSize )
+  if( treeWidget()->sortColumn() == (int)ColumnFile)
+  {
+    const GuiFileInfoItem& fi_item = (GuiFileInfoItem&)item;
+    if( isObjectFile() && fi_item.isObjectFolder() )
+      return false;
+    else if( isObjectFolder() && fi_item.isObjectFile() )
+      return true;
+    else
+      return QTreeWidgetItem::operator<( item );
+  }
+  else if( treeWidget()->sortColumn() == (int)ColumnSize )
   {
     const GuiFileInfoItem& fi_item = (GuiFileInfoItem&)item;
     return m_fileSize < fi_item.fileSize();
   }
-
-  return QTreeWidgetItem::operator<( item );
+  else
+    return QTreeWidgetItem::operator<( item );
 }
 
 void GuiFileInfoItem::initUser( VNumber user_id, const QString& user_name )
@@ -60,11 +70,11 @@ void GuiFileInfoItem::initUser( VNumber user_id, const QString& user_name )
   setText( ColumnStatus, "" );
 }
 
-void GuiFileInfoItem::initFolder( VNumber user_id, const QString& folder_name )
+void GuiFileInfoItem::initFolder( VNumber user_id, const QString& folder_name, const QString& folder_path )
 {
   m_type = ObjectFolder;
   m_userId = user_id;
-  m_folder = folder_name;
+  m_folder = folder_path;
   setIcon( ColumnFile, QIcon( ":/images/folder.png" ) );
   setText( ColumnFile, folder_name );
   setText( ColumnSize, "" );

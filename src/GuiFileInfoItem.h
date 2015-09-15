@@ -40,7 +40,7 @@ public:
   bool operator<( const QTreeWidgetItem& ) const;
 
   void initUser( VNumber user_id, const QString& );
-  void initFolder( VNumber user_id, const QString& );
+  void initFolder( VNumber user_id, const QString&, const QString& );
   void initFile( VNumber user_id, const FileInfo& );
 
   inline bool isValid() const;

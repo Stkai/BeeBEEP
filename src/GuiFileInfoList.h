@@ -62,6 +62,7 @@ protected:
   void addItemToFileInfoList( GuiFileInfoItem* );
   void parseItem( QTreeWidgetItem* );
   FileInfo fileInfoFromNetwork( GuiFileInfoItem* );
+  GuiFileInfoItem* createSubFolderItem( GuiFileInfoItem*, VNumber, const QString&, const QString& );
 
 private:
   QTreeWidget* mp_tree;

@@ -35,9 +35,9 @@ class BuildFileShareList : public QObject
 public:
   explicit BuildFileShareList( QObject* parent = 0 );
 
-  void setPath( const QString& );
-  inline const QString& path() const;
-  inline const QString& shareFolder() const;
+  void setFolderPath( const QString& );
+  inline const QString& folderPath() const;
+  inline const QString& folderName() const;
   inline void setBroadcastList( bool );
   inline bool broadcastList() const;
   inline const QList<FileInfo>& shareList() const;
@@ -53,11 +53,11 @@ public slots:
   void buildList();
 
 protected:
-  FileSizeType addPathToList( const QString& );
+  FileSizeType addPathToList( const QString&, const QString& );
 
 private:
-  QString m_path;
-  QString m_shareFolder;
+  QString m_folderPath;
+  QString m_folderName;
   bool m_broadcastList;
   QList<FileInfo> m_shareList;
   FileSizeType m_shareSize;
@@ -68,8 +68,8 @@ private:
 
 
 // Inline Functions
-inline const QString& BuildFileShareList::path() const { return m_path; }
-inline const QString& BuildFileShareList::shareFolder() const { return m_shareFolder; }
+inline const QString& BuildFileShareList::folderPath() const { return m_folderPath; }
+inline const QString& BuildFileShareList::folderName() const { return m_folderName; }
 inline void BuildFileShareList::setBroadcastList( bool new_value ) { m_broadcastList = new_value; }
 inline bool BuildFileShareList::broadcastList() const { return m_broadcastList; }
 inline const QList<FileInfo>& BuildFileShareList::shareList() const { return m_shareList; }
