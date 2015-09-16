@@ -253,112 +253,112 @@
         <translation>naar</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="158"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="165"/>
         <source>Open</source>
         <translation>Open</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="215"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="222"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Onmogelijk %2 te verzenden naar %3:gebruiker is offline.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="189"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="196"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Kan %2 niet versturen. Bestandsoverdracht is uitgeschakeld.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="161"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="168"/>
         <source>folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="224"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="231"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: bestand niet gevonden.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="234"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="241"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 is een map. U kunt het delen.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="244"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="251"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Kan %2 niet versturen: %3 is niet aangemeld.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="255"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="262"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 U bent %2 naar %3 aan het versturen.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="278"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="285"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 U hebt de download van %2 geweigerd van %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="306"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="313"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="371"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="378"/>
         <source>Adding to file sharing</source>
         <translation>Toe aan het voegen aan bestandsdeling</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="399"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="406"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 is toegevoegd aan bestandsdeling (%2)</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="408"/>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
         <translation>%1 is toegevoegd aan bestandsdeling met %2 bestanden, %3 (verlopen tijd: %4)</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="438"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="445"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 is verwijderd uit de bestandsdeling</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="440"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="447"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 is verwijderd uit de bestandsdeling met %2 bestanden</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="478"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="485"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="513"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="520"/>
         <source>%1 Unable to send folder %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="518"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="525"/>
         <source>the folder is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="525"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="532"/>
         <source>file transfer is not working.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="533"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="540"/>
         <source>%1 is not connected.</source>
         <translation type="unfinished">%1 is niet verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="547"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="554"/>
         <source>internal error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="552"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="559"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -881,32 +881,32 @@ Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
         <translation>%1: opslaan voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="622"/>
+        <location filename="../src/GuiChat.cpp" line="626"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Wilt u %1 %2 echt versturen naar de leden van deze chat?</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="623"/>
+        <location filename="../src/GuiChat.cpp" line="627"/>
         <source>file</source>
         <translation>bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="623"/>
+        <location filename="../src/GuiChat.cpp" line="627"/>
         <source>files</source>
         <translation>bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="624"/>
+        <location filename="../src/GuiChat.cpp" line="628"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="624"/>
+        <location filename="../src/GuiChat.cpp" line="628"/>
         <source>No</source>
         <translation>Nee</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="640"/>
+        <location filename="../src/GuiChat.cpp" line="648"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U dient het bestand dat u wilt versturen opnieuw te selecteren.</translation>
     </message>
@@ -1130,17 +1130,17 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="40"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="41"/>
         <source>Shared folders and files</source>
         <translation>Deel mappen en bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="40"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="41"/>
         <source>Size</source>
         <translation>Grootte</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="40"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="41"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -1414,9 +1414,9 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="210"/>
-        <location filename="../src/GuiMain.cpp" line="2670"/>
-        <location filename="../src/GuiMain.cpp" line="2671"/>
-        <location filename="../src/GuiMain.cpp" line="2672"/>
+        <location filename="../src/GuiMain.cpp" line="2683"/>
+        <location filename="../src/GuiMain.cpp" line="2684"/>
+        <location filename="../src/GuiMain.cpp" line="2685"/>
         <source>offline</source>
         <translation>afgemeld</translation>
     </message>
@@ -1432,10 +1432,10 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/GuiMain.cpp" line="1625"/>
         <location filename="../src/GuiMain.cpp" line="1632"/>
         <location filename="../src/GuiMain.cpp" line="1689"/>
-        <location filename="../src/GuiMain.cpp" line="2111"/>
-        <location filename="../src/GuiMain.cpp" line="2140"/>
-        <location filename="../src/GuiMain.cpp" line="2477"/>
-        <location filename="../src/GuiMain.cpp" line="2557"/>
+        <location filename="../src/GuiMain.cpp" line="2115"/>
+        <location filename="../src/GuiMain.cpp" line="2145"/>
+        <location filename="../src/GuiMain.cpp" line="2490"/>
+        <location filename="../src/GuiMain.cpp" line="2570"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -1446,10 +1446,10 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/GuiMain.cpp" line="1625"/>
         <location filename="../src/GuiMain.cpp" line="1632"/>
         <location filename="../src/GuiMain.cpp" line="1689"/>
-        <location filename="../src/GuiMain.cpp" line="2111"/>
-        <location filename="../src/GuiMain.cpp" line="2140"/>
-        <location filename="../src/GuiMain.cpp" line="2477"/>
-        <location filename="../src/GuiMain.cpp" line="2557"/>
+        <location filename="../src/GuiMain.cpp" line="2115"/>
+        <location filename="../src/GuiMain.cpp" line="2145"/>
+        <location filename="../src/GuiMain.cpp" line="2490"/>
+        <location filename="../src/GuiMain.cpp" line="2570"/>
         <source>No</source>
         <translation>Nee</translation>
     </message>
@@ -1649,12 +1649,12 @@ Gebruik aub een andere naam.</translation>
         <translation>Herstel venster geometrie bij het opstarten</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2731"/>
+        <location filename="../src/GuiMain.cpp" line="2744"/>
         <source>%1 is online</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2733"/>
+        <location filename="../src/GuiMain.cpp" line="2746"/>
         <source>%1 is offline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1737,32 +1737,32 @@ Gebruik aub een andere naam.</translation>
         <translation>Selecteer het maximale aantal berichten  dat word getoond</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2205"/>
+        <location filename="../src/GuiMain.cpp" line="2210"/>
         <source>Group chat will be deleted when all members goes offline.</source>
         <translation>Groep-chat word verwijderd wanneer alle leden offline gaan.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2206"/>
+        <location filename="../src/GuiMain.cpp" line="2211"/>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
         <translation>Als je een blijfende chat wilt, iverweeg een groep aan te maken.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2207"/>
+        <location filename="../src/GuiMain.cpp" line="2212"/>
         <source>Do you wish to continue or create group?</source>
         <translation>Wil je doorgaan of een groep aanmaken?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2208"/>
+        <location filename="../src/GuiMain.cpp" line="2213"/>
         <source>Continue</source>
         <translation>Doorgaan</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2208"/>
+        <location filename="../src/GuiMain.cpp" line="2213"/>
         <source>Create Group</source>
         <translation>Groep aanmaken</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2680"/>
+        <location filename="../src/GuiMain.cpp" line="2693"/>
         <source>disabled</source>
         <translation>Uitgeschakeld</translation>
     </message>
@@ -2359,7 +2359,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1510"/>
-        <location filename="../src/GuiMain.cpp" line="2446"/>
+        <location filename="../src/GuiMain.cpp" line="2459"/>
         <source>User not found.</source>
         <translation>Gebruiker niet gevonden.</translation>
     </message>
@@ -2445,87 +2445,87 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">%1 zal actief blijven op de achtergrond</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2110"/>
+        <location filename="../src/GuiMain.cpp" line="2114"/>
         <source>Do you really want to open the file %1?</source>
         <translation>Wilt u echt het bestand %1 openen?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2118"/>
-        <location filename="../src/GuiMain.cpp" line="2370"/>
+        <location filename="../src/GuiMain.cpp" line="2122"/>
+        <location filename="../src/GuiMain.cpp" line="2383"/>
         <source>Unable to open %1</source>
         <translation>Kan %1 niet openen</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2118"/>
-        <location filename="../src/GuiMain.cpp" line="2370"/>
+        <location filename="../src/GuiMain.cpp" line="2122"/>
+        <location filename="../src/GuiMain.cpp" line="2383"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2129"/>
+        <location filename="../src/GuiMain.cpp" line="2134"/>
         <source>Sound files (*.wav)</source>
         <translation>Geluidsbestanden (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2140"/>
+        <location filename="../src/GuiMain.cpp" line="2145"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Geluid bij een nieuw bericht is niet ingeschakeld. Wilt u het geluid inschakelen?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2153"/>
+        <location filename="../src/GuiMain.cpp" line="2158"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation>Geluidsmodule werkt niet. De standaard BEEP zal gebruikt worden.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2158"/>
+        <location filename="../src/GuiMain.cpp" line="2163"/>
         <source>Sound file not found</source>
         <translation>Geluidsbestand niet gevonden</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2159"/>
+        <location filename="../src/GuiMain.cpp" line="2164"/>
         <source>The default BEEP will be used</source>
         <translation>De standaard BEEP zal gebruikt worden</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2234"/>
+        <location filename="../src/GuiMain.cpp" line="2239"/>
         <source>Unable to add users in this chat. Please select a group one.</source>
         <translation>Kan geen gebruikers toevoegen aan deze chat. Selecteer aub een groepschat.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2280"/>
+        <location filename="../src/GuiMain.cpp" line="2285"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Nu zal %1 starten bij het opstarten van Windows.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2285"/>
+        <location filename="../src/GuiMain.cpp" line="2290"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 zal niet starten bij het opstarten van Windows.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2336"/>
+        <location filename="../src/GuiMain.cpp" line="2349"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Select aub een chat die u wilt opslaan in een tekstbestand.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2345"/>
+        <location filename="../src/GuiMain.cpp" line="2358"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>De chat %1 werd eerder al opgeslagen in een tekstbestand.&lt;br /&gt;Wat wilt u doen met het bestaande tekstbestand?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2347"/>
+        <location filename="../src/GuiMain.cpp" line="2360"/>
         <source>Overwrite</source>
         <translation>Overschrijven</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2347"/>
+        <location filename="../src/GuiMain.cpp" line="2360"/>
         <source>Add in the head</source>
         <translation>Bovenaan toevoegen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1670"/>
-        <location filename="../src/GuiMain.cpp" line="2208"/>
-        <location filename="../src/GuiMain.cpp" line="2347"/>
-        <location filename="../src/GuiMain.cpp" line="2534"/>
+        <location filename="../src/GuiMain.cpp" line="2213"/>
+        <location filename="../src/GuiMain.cpp" line="2360"/>
+        <location filename="../src/GuiMain.cpp" line="2547"/>
         <source>Cancel</source>
         <translation>Afbreken</translation>
     </message>
@@ -2625,62 +2625,62 @@ Gebruik aub een andere naam.</translation>
         <translation>Herlaad de bestandenlijst</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2468"/>
+        <location filename="../src/GuiMain.cpp" line="2481"/>
         <source>Chat with %1 is empty.</source>
         <translation>Chat met %1 is leeg.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2472"/>
+        <location filename="../src/GuiMain.cpp" line="2485"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Wilt u echt alle berichten met %1 wissen?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2475"/>
+        <location filename="../src/GuiMain.cpp" line="2488"/>
         <source>Yes and delete history</source>
         <translation>Ja en verwijder geschiedenis</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2533"/>
+        <location filename="../src/GuiMain.cpp" line="2546"/>
         <source>%1 is a your group. You can not leave the chat.</source>
         <translation>%1 is uw groep. U kunt de chat niet verlaten.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2534"/>
+        <location filename="../src/GuiMain.cpp" line="2547"/>
         <source>Delete this group</source>
         <translation>Verwijder deze groep</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2547"/>
+        <location filename="../src/GuiMain.cpp" line="2560"/>
         <source>You cannot leave this chat.</source>
         <translation>U kunt deze chat niet verlaten.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2556"/>
+        <location filename="../src/GuiMain.cpp" line="2569"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Wilt u de groep &apos;%1&apos; echt verwijderen?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2578"/>
+        <location filename="../src/GuiMain.cpp" line="2591"/>
         <source>Unable to delete this chat.</source>
         <translation>Kan deze chat niet verwijderen.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2598"/>
+        <location filename="../src/GuiMain.cpp" line="2611"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 heeft %2 bestanden gedeeld</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2619"/>
+        <location filename="../src/GuiMain.cpp" line="2632"/>
         <source>Default language is restored.</source>
         <translation>Standaardtaal werd heringesteld.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2621"/>
+        <location filename="../src/GuiMain.cpp" line="2634"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Nieuwe taal &apos;%1&apos; is geselecteerd.</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2624"/>
+        <location filename="../src/GuiMain.cpp" line="2637"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Uw moet %1 herstarten om de wijzigingen door te voeren.</translation>
     </message>
@@ -3737,7 +3737,7 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <name>QObject</name>
     <message>
         <location filename="../src/GuiChatItem.cpp" line="63"/>
-        <location filename="../src/GuiMain.cpp" line="2465"/>
+        <location filename="../src/GuiMain.cpp" line="2478"/>
         <location filename="../src/GuiUserItem.cpp" line="83"/>
         <source>All Lan Users</source>
         <translation>Alle netwerkgebruikers</translation>
@@ -3787,12 +3787,12 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
         <translation type="obsolete">Dubbelklik om privé-bericht te verzenden</translation>
     </message>
     <message>
-        <location filename="../src/SaveChatList.cpp" line="84"/>
+        <location filename="../src/SaveChatList.cpp" line="86"/>
         <source>Saved in</source>
         <translation>Opgeslagen in</translation>
     </message>
     <message>
-        <location filename="../src/SaveChatList.cpp" line="102"/>
+        <location filename="../src/SaveChatList.cpp" line="104"/>
         <source>Started in</source>
         <translation>Gestart in</translation>
     </message>

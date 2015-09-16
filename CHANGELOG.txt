@@ -1,6 +1,9 @@
 BEEBEEP (Secure Lan Messanger)
 
 BeeBEEP 2.0.2
+- Fixed shared folder tree
+
+BeeBEEP 2.0.2
 - Fixed a bug in "open url" function
 
 BeeBEEP 2.0.1
