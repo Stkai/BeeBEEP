@@ -270,7 +270,7 @@ void GuiShareLocal::dropEvent( QDropEvent *event )
 #if QT_VERSION >= 0x040800
       if( url.isLocalFile() )
 #else
-      if( url.scheme() == QStringLiteral( "file" ) )
+      if( url.scheme() == QLatin1String( "file" ) )
 #endif
         addSharePath( QDir::toNativeSeparators( url.toLocalFile() ) );
     }

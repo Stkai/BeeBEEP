@@ -2098,7 +2098,7 @@ void GuiMain::openUrl( const QUrl& file_url )
 #if QT_VERSION >= 0x040800
   if( file_url.isLocalFile() )
 #else
-  if( file_url.scheme() == QStringLiteral( "file" ) )
+  if( file_url.scheme() == QLatin1String( "file" ) )
 #endif
   {
     QString file_path = file_url.toLocalFile();

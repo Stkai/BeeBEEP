@@ -611,7 +611,7 @@ void GuiChat::dropEvent( QDropEvent *event )
 #if QT_VERSION >= 0x040800
       if( url.isLocalFile() )
 #else
-      if( url.scheme() == QStringLiteral( "file" ) )
+      if( url.scheme() == QLatin1String( "file" ) )
 #endif
       {
         num_files += Protocol::instance().countFilesCanBeSharedInPath( url.toLocalFile() );
@@ -635,7 +635,7 @@ void GuiChat::dropEvent( QDropEvent *event )
 #if QT_VERSION >= 0x040800
       if( url.isLocalFile() )
 #else
-      if( url.scheme() == QStringLiteral( "file" ) )
+      if( url.scheme() == QLatin1String( "file" ) )
 #endif
       {
 #ifdef BEEBEEP_DEBUG
