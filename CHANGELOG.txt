@@ -1,6 +1,6 @@
 BEEBEEP (Secure Lan Messanger)
 
-BeeBEEP 2.0.2
+BeeBEEP 2.0.3
 - Fixed shared folder tree
 
 BeeBEEP 2.0.2

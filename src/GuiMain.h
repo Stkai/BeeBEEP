@@ -174,8 +174,9 @@ private:
   void checkViewActions();
   QMenu* gameMenu( GameInterface* );
   bool sendFile( const User&, const QString& );
+  void sendFiles( const User&, const QStringList& );
   bool openWebUrl( const QString& );
-  QString checkFilePath( const QString& );
+  QStringList checkFilePath( const QString& );
   void showVCard( const User&, bool ensure_visible );
   bool isAudioDeviceAvailable() const;
   void showDefaultServerPortInMenu();

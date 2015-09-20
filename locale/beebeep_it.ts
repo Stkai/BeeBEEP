@@ -2870,6 +2870,10 @@ il file %2 (%3)?</translation>
         <source>If enabled the preview of the downloaded images will be showed in the chat window</source>
         <translation>Se abilitata l&apos;anteprima delle immagini scaricate sarà mostrata nella conversazione</translation>
     </message>
+    <message>
+        <source>or more</source>
+        <translation>o più di uno</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

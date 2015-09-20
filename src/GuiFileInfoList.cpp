@@ -109,7 +109,12 @@ GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
 GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& folder_name )
 {
   if( m_lastFolderItem && m_lastFolderItem->userId() == user_id && m_lastFolderItem->folder() == folder_name )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "GuiFileInfoList::folderItem selects last folder" << folder_name;
+#endif
     return m_lastFolderItem;
+  }
 
   GuiFileInfoItem* item;
   QTreeWidgetItemIterator it( mp_tree );

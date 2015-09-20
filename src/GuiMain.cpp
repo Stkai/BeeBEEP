@@ -1447,40 +1447,48 @@ void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
   if( !c.isValid() )
     return;
 
-  QString file_path_selected = checkFilePath( file_path );
-  if( file_path_selected.isEmpty() )
+  QStringList files_path_selected = checkFilePath( file_path );
+  if( files_path_selected.isEmpty() )
     return;
 
   UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
   foreach( User u, chat_members.toList() )
-    sendFile( u, file_path_selected );
+    sendFiles( u, files_path_selected );
 }
 
 void GuiMain::sendFile( VNumber user_id )
 {
   User u = UserManager::instance().userList().find( user_id );
-  QString file_path_selected = checkFilePath( "" );
-  if( file_path_selected.isEmpty() )
+  QStringList files_path_selected = checkFilePath( "" );
+  if( files_path_selected.isEmpty() )
     return;
-  sendFile( u, file_path_selected );
+  sendFiles( u, files_path_selected );
 }
 
-QString GuiMain::checkFilePath( const QString& file_path )
+void GuiMain::sendFiles( const User& u, const QStringList& file_list )
 {
-  QString file_path_selected = file_path;
+  foreach( QString file_path, file_list )
+    sendFile( u, file_path );
+}
+
+QStringList GuiMain::checkFilePath( const QString& file_path )
+{
+  QStringList files_path_selected;
   if( file_path.isEmpty() || !QFile::exists( file_path ) )
   {
-    file_path_selected = QFileDialog::getOpenFileName( this, tr( "%1 - Select a file" ).arg( Settings::instance().programName() ),
+    files_path_selected = QFileDialog::getOpenFileNames( this, tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
                                                        Settings::instance().lastDirectorySelected() );
-    if( file_path_selected.isEmpty() || file_path_selected.isNull() )
-      return file_path_selected;
+    if( files_path_selected.isEmpty() )
+      return files_path_selected;
 
-      Settings::instance().setLastDirectorySelectedFromFile( file_path_selected );
+    Settings::instance().setLastDirectorySelectedFromFile( files_path_selected.last() );
   }
   else
-    file_path_selected = file_path;
+  {
+    files_path_selected.append( file_path );
+  }
 
-  return file_path_selected;
+  return files_path_selected;
 }
 
 bool GuiMain::sendFile( const User& u, const QString& file_path )
