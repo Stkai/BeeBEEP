@@ -719,6 +719,11 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showVCardOnRightClick() );
   act->setData( 25 );
 
+  mp_menuUserList->addSeparator();
+
+  act = mp_menuUserList->addAction( tr( "Change size of the user's picture" ), this, SLOT( changeAvatarSizeInList() ) );
+  act->setStatusTip( tr( "Click to change the picture size of the users in the list" ) );
+
   mp_userList->setMenuSettings( mp_menuUserList );
 
   /* Status Menu */
@@ -2753,4 +2758,16 @@ void GuiMain::showConnectionStatusChanged( const User& u )
   else
     msg = tr( "%1 is offline" ).arg( u.name() );
   mp_trayIcon->showMessageInTray( msg );
+}
+
+void GuiMain::changeAvatarSizeInList()
+{
+  bool ok = false;
+  int avatar_size = QInputDialog::getInt( this, Settings::instance().programName(), tr( "Please select the new size of the user picture" ),
+                                          Settings::instance().avatarIconSize().height(), 16, 96, 16, &ok );
+  if( !ok )
+    return;
+
+  Settings::instance().setAvatarIconSize( QSize( avatar_size, avatar_size ) );
+  mp_userList->updateUsers( mp_core->isConnected() );
 }

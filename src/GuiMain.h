@@ -142,6 +142,7 @@ private slots:
   void enableBroadcastAction();
   void checkUserSelected( VNumber );
   void showConnectionStatusChanged( const User& );
+  void changeAvatarSizeInList();
 
 protected:
   void keyPressEvent( QKeyEvent* );

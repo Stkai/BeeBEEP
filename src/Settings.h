@@ -157,6 +157,7 @@ public:
   inline int chatLinesToShow() const;
   inline void setChatLinesToShow( int );
   inline const QSize& mainBarIconSize() const;
+  inline void setAvatarIconSize( const QSize& );
   inline const QSize& avatarIconSize() const;
   inline void setGuiGeometry( const QByteArray& );
   inline const QByteArray& guiGeometry() const;
@@ -484,6 +485,7 @@ inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath =
 inline const QString& Settings::languagePath() const { return m_languagePath; }
 inline void Settings::setLanguagePath( const QString& new_value ) { m_languagePath = new_value; }
 inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize; }
+inline void Settings::setAvatarIconSize( const QSize& new_value ) { m_avatarIconSize = new_value; }
 inline const QSize& Settings::avatarIconSize() const { return m_avatarIconSize; }
 inline QString Settings::defaultChatName() const { return QString( "* BeeBEEP Chat *" ); }
 inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistorySize; }

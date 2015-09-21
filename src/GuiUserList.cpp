@@ -207,14 +207,21 @@ void GuiUserList::showUserMenu( const QPoint& p )
   if( !item )
     return;
 
-  if( !Settings::instance().showVCardOnRightClick() )
-    return;
-
-  m_blockShowChatRequest = true;
   GuiUserItem* user_item = (GuiUserItem*)item;
-  emit showVCardRequest( user_item->userId(), true );
-  mp_twUsers->clearSelection();
-  setChatOpened( m_chatOpened );
+  if( user_item->chatId() == ID_DEFAULT_CHAT )
+  {
+    emit chatSelected( ID_DEFAULT_CHAT );
+  }
+  else
+  {
+    if( !Settings::instance().showVCardOnRightClick() )
+      return;
+
+    m_blockShowChatRequest = true;
+    emit showVCardRequest( user_item->userId(), true );
+    mp_twUsers->clearSelection();
+    setChatOpened( m_chatOpened );
+  }
 }
 
 void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
@@ -286,5 +293,6 @@ void GuiUserList::clearFilter()
 
 void GuiUserList::showMenuSettings()
 {
-  mp_menu->exec( QCursor::pos() );
+  if( mp_menu )
+    mp_menu->exec( QCursor::pos() );
 }
