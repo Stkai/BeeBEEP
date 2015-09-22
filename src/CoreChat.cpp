@@ -501,21 +501,24 @@ bool Core::removeChat( VNumber chat_id )
   if( c.isDefault() )
     return false;
 
+  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+    ChatManager::instance().removeSavedTextFromChat( c.name() );
+
   if( c.isPrivate() )
   {
     c.clearMessages();
-#ifdef BEEBEEP_DEBUG
     qDebug() << "Private chat with" << c.name() << "cleared";
-#endif
     ChatManager::instance().setChat( c );
     return true;
   }
 
-  if( c.isGroup() && ChatManager::instance().removeChat( c ) )
+  if( ChatManager::instance().removeChat( c ) )
   {
-    qDebug() << "Chat deleted:" << c.name();
+    qDebug() << "Group chat deleted:" << c.name();
     return true;
   }
+
+  qWarning() << "Unable to delete chat with id" << c.id() << "and name" << c.name();
   return false;
 }
 

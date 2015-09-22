@@ -2483,44 +2483,6 @@ void GuiMain::changeUserColor( VNumber user_id )
   }
 }
 
-void GuiMain::clearChat( VNumber chat_id )
-{
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( !c.isValid() )
-    return;
-  QString chat_name = c.isDefault() ? QObject::tr( "All Lan Users" ).toLower() : c.name();
-  if( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) )
-  {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
-    return;
-  }
-
-  QString question_txt = tr( "Do you really want to clear messages with %1?" ).arg( chat_name );
-  QString button_2_text;
-  if( ChatManager::instance().chatHasSavedText( c.name() ) )
-    button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
-
-  switch( QMessageBox::warning( this, Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
-  {
-  case 0:
-    mp_core->clearMessagesInChat( chat_id );
-    break;
-  case 2:
-    mp_core->clearMessagesInChat( chat_id );
-    ChatManager::instance().removeSavedTextFromChat( c.name() );
-    break;
-  default:
-    return;
-  }
-
-  if( c.isPrivate() )
-    mp_userList->setUnreadMessages( chat_id, 0 );
-  mp_chatList->reloadChatList();
-  mp_savedChatList->updateSavedChats();
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-    mp_chat->reloadChat();
-}
-
 void GuiMain::checkGroup( VNumber group_id )
 {
   if( UserManager::instance().group( group_id ).isValid() )
@@ -2587,17 +2549,71 @@ void GuiMain::removeGroup( VNumber group_id )
   }
 }
 
+void GuiMain::clearChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return;
+  QString chat_name = c.isDefault() ? QObject::tr( "All Lan Users" ).toLower() : c.name();
+  if( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
+    return;
+  }
+
+  QString question_txt = tr( "Do you really want to clear messages with %1?" ).arg( chat_name );
+  QString button_2_text;
+  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+    button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
+
+  switch( QMessageBox::information( this, Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
+  {
+  case 0:
+    mp_core->clearMessagesInChat( chat_id );
+    break;
+  case 2:
+    mp_core->clearMessagesInChat( chat_id );
+    ChatManager::instance().removeSavedTextFromChat( c.name() );
+    break;
+  default:
+    return;
+  }
+
+  if( c.isPrivate() )
+    mp_userList->setUnreadMessages( chat_id, 0 );
+  mp_chatList->reloadChatList();
+  mp_savedChatList->updateSavedChats();
+  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
+    mp_chat->reloadChat();
+}
+
 void GuiMain::removeChat( VNumber chat_id )
 {
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat" << chat_id << "found in removeChat function";
+    return;
+  }
+
+  QString question_txt = tr( "Do you really want to delete chat with %1?" ).arg( c.name() );
+  if( QMessageBox::information( this, Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+    return;
+
   if( mp_core->removeChat( chat_id ) )
   {
     mp_chatList->reloadChatList();
     if( mp_chat->chatId() == chat_id )
     {
       if( mp_stackedWidget->currentWidget() == mp_chat )
+      {
         showChat( ID_DEFAULT_CHAT );
+      }
       else
+      {
         mp_chat->setChatId( ID_DEFAULT_CHAT );
+        raiseHomeView();
+      }
     }
   }
   else
@@ -2764,7 +2780,7 @@ void GuiMain::changeAvatarSizeInList()
 {
   bool ok = false;
   int avatar_size = QInputDialog::getInt( this, Settings::instance().programName(), tr( "Please select the new size of the user picture" ),
-                                          Settings::instance().avatarIconSize().height(), 16, 96, 16, &ok );
+                                          Settings::instance().avatarIconSize().height(), 16, 96, 8, &ok );
   if( !ok )
     return;
 

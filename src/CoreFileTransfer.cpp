@@ -141,32 +141,43 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     if( peer->isTransferCompleted() && fi.isDownload() )
     {
       FileShare::instance().addDownloadedFile( fi );
-      bool image_preview_added = false;
+      bool show_image_preview = false;
       if( Settings::instance().showImagePreview() && Bee::isFileTypeImage( fi.suffix() ) )
       {
         QImage img;
         QImageReader img_reader( fi.path() );
         img_reader.setAutoDetectImageFormat( true );
+        int img_preview_height = Settings::instance().imagePreviewHeight();
+        QString img_preview_path = fi.path();
         if( img_reader.read( &img ) )
         {
-          QString img_file_name = QString( "beeimgtmp-%1-%2.png" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( fi.id() );
-          QString img_file_path = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory() ).arg( img_file_name ) );
-          QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
-          if( img_scaled.save( img_file_path, "png" ) )
+          if( img.height() > img_preview_height )
           {
-            sys_msg += QString( "<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;" )
-                    .arg( img_file_path ).arg( qMin( Settings::instance().imagePreviewHeight(), img_scaled.height() ) );
-            image_preview_added = true;
-            Settings::instance().addTemporaryFilePath( img_file_path );
+            QString img_file_name = QString( "beeimgtmp-%1-%2.png" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( fi.id() );
+            QString img_file_path = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory() ).arg( img_file_name ) );
+            QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
+            if( img_scaled.save( img_file_path, "png" ) )
+            {
+              Settings::instance().addTemporaryFilePath( img_file_path );
+              img_preview_path = img_file_path;
+            }
           }
+          else
+            img_preview_height = img.height();
+
+          sys_msg += QString( "<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;" )
+                  .arg( img_preview_path ).arg( img_preview_height );
+          show_image_preview = true;
         }
+        else
+          qWarning() << "Unable to show image preview of the file" << img_preview_path;
       }
 
       QString s_open = tr( "Open" );
       sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() );
       QFileInfo file_info( fi.path() );
       sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( file_info.absoluteDir().absolutePath() ).toString(), tr( "folder" ) );
-      if( image_preview_added )
+      if( show_image_preview )
         sys_msg += QString( "<br />" );
     }
   }

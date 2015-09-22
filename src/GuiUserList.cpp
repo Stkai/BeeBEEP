@@ -254,15 +254,33 @@ void GuiUserList::setChatOpened( VNumber chat_id )
 {
   m_chatOpened = chat_id;
 
-  if( chat_id == ID_INVALID )
+  GuiUserItem* item;
+  QTreeWidgetItemIterator it( mp_twUsers );
+
+  if( chat_id != ID_INVALID )
+  {
+    while( *it )
+    {
+      item = (GuiUserItem*)(*it);
+      item->setChatOpened( false );
+      ++it;
+    }
     return;
+  }
 
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
+  {
+    while( *it )
+    {
+      item = (GuiUserItem*)(*it);
+      item->setChatOpened( false );
+      ++it;
+    }
+    qWarning() << "Invalid chat id" << chat_id << "found in GuiUserList::setChatOpened";
     return;
+  }
 
-  GuiUserItem* item;
-  QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
     item = (GuiUserItem*)(*it);

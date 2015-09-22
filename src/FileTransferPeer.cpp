@@ -46,8 +46,9 @@ void FileTransferPeer::cancelTransfer()
   m_socket.abort();
   qDebug() << name() << "cancels the transfer";
   m_state = FileTransferPeer::Cancelled;
-  emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
   closeAll();
+  emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
+  deleteLater();
 }
 
 void FileTransferPeer::closeAll()
@@ -66,8 +67,6 @@ void FileTransferPeer::closeAll()
     m_file.flush();
     m_file.close();
   }
-
-  deleteLater();
 }
 
 void FileTransferPeer::setFileInfo( const FileInfo& fi )
@@ -109,8 +108,9 @@ void FileTransferPeer::setTransferCompleted()
 {
   qDebug() << name() << "has completed the transfer of file" << m_fileInfo.name();
   m_state = FileTransferPeer::Completed;
-  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
   closeAll();
+  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
+  deleteLater();
 }
 
 void FileTransferPeer::socketError( QAbstractSocket::SocketError )
@@ -124,8 +124,9 @@ void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
   qWarning() << name() << "found an error when transfer file" << m_fileInfo.name() << ":" << str_err;
-  emit message( id(), userId(), m_fileInfo, str_err );
   closeAll();
+  emit message( id(), userId(), m_fileInfo, str_err );
+  deleteLater();
 }
 
 void FileTransferPeer::showProgress()
