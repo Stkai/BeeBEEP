@@ -1,5 +1,9 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 2.0.4
+- Some GUI improvements (new icons, file sharing tree load faster)
+- Always Beep on new message arrived option added
+
 BeeBEEP 2.0.3
 - Fixed shared folder tree
 

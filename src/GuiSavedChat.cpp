@@ -34,6 +34,7 @@ GuiSavedChat::GuiSavedChat( QWidget* parent )
 
 void GuiSavedChat::showSavedChat( const QString& chat_name )
 {
+  m_savedChatName = chat_name;
   QString html_text = QString( "%1: <b>%2</b> <br />" ).arg( tr( "Saved chat" ) ).arg( chat_name );
   if( !ChatManager::instance().chatHasSavedText( chat_name ) )
     html_text += QString( "<br />*** %1 ***<br />" ).arg( tr( "Empty" ) );

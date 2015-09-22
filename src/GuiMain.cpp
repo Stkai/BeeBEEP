@@ -1129,7 +1129,8 @@ void GuiMain::settingsChanged()
     {
       if( act->isChecked() )
       {
-        if( QMessageBox::question( this, Settings::instance().programName(), tr( "When do you want %1 to play beep?" ),
+        if( QMessageBox::question( this, Settings::instance().programName(), tr( "When do you want %1 to play beep?" )
+                                   .arg( Settings::instance().programName() ),
                                tr( "If it not visible" ), tr( "Always" ), QString::null, 0, 0 ) == 1 )
         {
           Settings::instance().setBeepAlwaysOnNewMessageArrived( true );
@@ -2374,6 +2375,8 @@ void GuiMain::removeSavedChat( const QString& chat_name )
 
   if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatName() == chat_name )
     mp_chat->reloadChat();
+  else if( mp_stackedWidget->currentWidget() == mp_savedChat )
+    mp_savedChat->showSavedChat( chat_name );
 }
 
 void GuiMain::linkSavedChat( const QString& chat_name )

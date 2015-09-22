@@ -34,10 +34,17 @@ class GuiSavedChat : public QWidget, private Ui::GuiSavedChatWidget
 
 public:
   explicit GuiSavedChat( QWidget *parent = 0 );
+  inline const QString& savedChatName() const;
 
 public slots:
   void showSavedChat( const QString& );
 
+private:
+  QString m_savedChatName;
+
 };
+
+// Inline Functions
+inline const QString& GuiSavedChat::savedChatName() const { return m_savedChatName; }
 
 #endif // BEEBEEP_GUISAVEDCHAT_H

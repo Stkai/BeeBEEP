@@ -2874,6 +2874,34 @@ il file %2 (%3)?</translation>
         <source>or more</source>
         <translation>o più di uno</translation>
     </message>
+    <message>
+        <source>Change size of the user&apos;s picture</source>
+        <translation>Cambia la dimensione della foto dell&apos;utente</translation>
+    </message>
+    <message>
+        <source>Click to change the picture size of the users in the list</source>
+        <translation>Clicca qui per cambiare la dimensione delle foto degli utenti in lista</translation>
+    </message>
+    <message>
+        <source>When do you want %1 to play beep?</source>
+        <translation>Quando vuoi che %1 ti avverta con un suono?</translation>
+    </message>
+    <message>
+        <source>If it not visible</source>
+        <translation>Se non visibile</translation>
+    </message>
+    <message>
+        <source>Always</source>
+        <translation>Sempre</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete chat with %1?</source>
+        <translation>Vuoi cancellare la conversazione con %1?</translation>
+    </message>
+    <message>
+        <source>Please select the new size of the user picture</source>
+        <translation>Seleziona la nuova dimensione della foto degli utenti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
