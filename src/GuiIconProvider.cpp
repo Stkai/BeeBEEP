@@ -58,6 +58,8 @@ QIcon GuiIconProvider::iconFromFileType( int file_type )
     return QIcon( ":/images/file-document.png" );
   case Bee::FileExe:
     return QIcon( ":/images/file-exe.png" );
+  case Bee::FileBundle:
+    return QIcon( ":/images/file-bundle.png" );
   default:
     return QIcon( ":/images/file-other.png" );
   };

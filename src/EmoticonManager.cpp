@@ -268,7 +268,7 @@ Emoticon EmoticonManager::emoticonByFile( const QString& e_file_name ) const
     QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
     while( it != m_emoticons.end() )
     {
-      if( it.value().fileName() == e_file_name )
+      if( it.value().fileName() == e_file_name && it.value().isInGroup() )
         return it.value();
       ++it;
     }
