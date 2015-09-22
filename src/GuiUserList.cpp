@@ -257,7 +257,7 @@ void GuiUserList::setChatOpened( VNumber chat_id )
   GuiUserItem* item;
   QTreeWidgetItemIterator it( mp_twUsers );
 
-  if( chat_id != ID_INVALID )
+  if( chat_id == ID_INVALID )
   {
     while( *it )
     {
