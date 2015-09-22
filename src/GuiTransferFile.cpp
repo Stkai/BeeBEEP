@@ -84,7 +84,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, TransferInProgress, true );
     item->setData( ColumnFile, TransferCompleted, false );
     item->setText( ColumnUser, u.name() );
-    item->setIcon( ColumnCancel, QIcon( ":/images/disconnect.png") );
+    item->setIcon( ColumnCancel, QIcon( ":/images/delete.png") );
     item->setText( ColumnSort, QString( "C0%1").arg( peer_id ) );
     sortItems( ColumnSort, Qt::DescendingOrder );
   }
@@ -120,7 +120,7 @@ void GuiTransferFile::showIcon( QTreeWidgetItem* item )
   }
   else if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {
-    icon = QIcon( ":/images/disconnect.png" );
+    icon = QIcon( ":/images/delete.png" );
     status_tip = tr( "Cancel Transfer" );
     sort_string.prepend( 'C' );
   }

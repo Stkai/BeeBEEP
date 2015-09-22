@@ -33,6 +33,7 @@ class ChatMessage;
 class GameInterface;
 class GuiChat;
 class GuiChatList;
+class GuiEmoticons;
 class GuiGroupList;
 class GuiLog;
 class GuiHome;
@@ -196,6 +197,7 @@ private:
   GuiSavedChat* mp_savedChat;
   GuiScreenShot* mp_screenShot;
   GuiHome* mp_home;
+  GuiEmoticons* mp_emoticonsWidget;
   Core *mp_core;
 
   QMenu *mp_menuMain;

@@ -261,6 +261,21 @@ Emoticon EmoticonManager::textEmoticon( const QString& e_text ) const
   return Emoticon();
 }
 
+Emoticon EmoticonManager::emoticonByFile( const QString& e_file_name ) const
+{
+  if( !e_file_name.isEmpty() )
+  {
+    QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
+    while( it != m_emoticons.end() )
+    {
+      if( it.value().fileName() == e_file_name )
+        return it.value();
+      ++it;
+    }
+  }
+  return Emoticon();
+}
+
 QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size, bool use_native_emoticons ) const
 {
   QString s = "";
@@ -286,7 +301,23 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size, 
     {
       text_to_match += c;
 
-      Emoticon e = use_native_emoticons ? textEmoticon( text_to_match ) : emoticon( text_to_match );
+      Emoticon e;
+      if( use_native_emoticons )
+      {
+        Emoticon text_emoticon = textEmoticon( text_to_match );
+        if( text_emoticon.isValid() )
+        {
+          Emoticon native_emoticon = emoticonByFile( text_emoticon.fileName() );
+          if( native_emoticon.isValid() )
+          {
+            s += native_emoticon.textToMatch();
+            text_to_match = "";
+            parse_emoticons = false;
+          }
+        }
+      }
+      else
+        e = emoticon( text_to_match );
 
       if( e.isValid() )
       {

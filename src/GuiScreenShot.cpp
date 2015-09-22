@@ -79,7 +79,7 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
   mp_actSend->setStatusTip( tr( "Send the captured screenshot to an user" ) );
   mp_actSave = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save" ), this, SLOT( doSave() ) );
   mp_actSave->setStatusTip( tr( "Save the captured screenshot as file" ) );
-  mp_actDelete = bar->addAction( QIcon( ":/images/disconnect.png" ), tr( "Delete" ), this, SLOT( doDelete() ) );
+  mp_actDelete = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( doDelete() ) );
   mp_actDelete->setStatusTip( tr( "Delete the captured screenshot" ) );
 
   updateScreenShot();

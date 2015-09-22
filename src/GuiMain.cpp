@@ -942,7 +942,7 @@ void GuiMain::createDockWindows()
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
 
-  GuiEmoticons* mp_emoticonsWidget = new GuiEmoticons( this );
+  mp_emoticonsWidget = new GuiEmoticons( this );
   mp_emoticonsWidget->initEmoticons();
   connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
   mp_dockEmoticons->setWidget( mp_emoticonsWidget );
@@ -1257,6 +1257,7 @@ void GuiMain::settingsChanged()
     break;
   case 31:
     Settings::instance().setUseNativeEmoticons( act->isChecked() );
+    mp_emoticonsWidget->updateEmoticons();
     refresh_chat = true;
   case 32:
     Settings::instance().setSaveUserList( act->isChecked() );

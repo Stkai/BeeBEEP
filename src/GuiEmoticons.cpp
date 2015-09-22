@@ -40,7 +40,7 @@ QSize GuiEmoticons::sizeHint() const
   return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH + 4, 40 );
 }
 
-void GuiEmoticons::initEmoticons()
+void GuiEmoticons::initEmoticons( int current_index )
 {
   mp_recent = new GuiEmoticonWidget( this );
   QList<Emoticon> emoticon_list = EmoticonManager::instance().recentEmoticons();
@@ -68,12 +68,31 @@ void GuiEmoticons::initEmoticons()
   emoticon_list = EmoticonManager::instance().emoticonsByGroup( Emoticon::Symbols );
   addEmoticonTab( emoticon_widget, emoticon_list, Emoticon::groupIcon( Emoticon::Symbols ), tr( "Symbols" ) );
 
-  setCurrentIndex( smiley_index );
+  if( current_index >= 0 && current_index < count() )
+    setCurrentIndex( current_index );
+  else
+    setCurrentIndex( smiley_index );
+}
+
+void GuiEmoticons::updateEmoticons()
+{
+  QWidget* w;
+  int smiley_index = currentIndex();
+  for( int i = 0; i < count(); i++ )
+  {
+    w = widget( i );
+    w->deleteLater();
+  }
+  clear();
+  initEmoticons( smiley_index );
 }
 
 void GuiEmoticons::setEmoticonToButton( const Emoticon& e, QPushButton* pb )
 {
-  pb->setIcon( e.icon() );
+  if( Settings::instance().useNativeEmoticons() )
+    pb->setText( e.textToMatch() );
+  else
+    pb->setIcon( e.icon() );
   QString object_name = QString( "GuiEmoticonCode" ) + e.textToMatch();
   pb->setObjectName( object_name );
 }
@@ -113,6 +132,7 @@ int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, const QLis
   scroll_area->setBackgroundRole( QPalette::Light );
   scroll_area->setWidgetResizable( true );
   scroll_area->setWidget( emoticon_widget );
+  emoticon_widget->setParent( scroll_area );
 
   int tab_id = addTab( scroll_area, group_icon, "" );
   setTabToolTip( tab_id, group_name );

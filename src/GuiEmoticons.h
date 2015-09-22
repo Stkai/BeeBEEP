@@ -35,7 +35,8 @@ class GuiEmoticons : public QTabWidget
 
 public:
   explicit GuiEmoticons( QWidget *parent = 0 );
-  void initEmoticons();
+  void initEmoticons( int current_index = -1 );
+  void updateEmoticons();
 
 signals:
   void emoticonSelected( const Emoticon& );
@@ -84,7 +85,7 @@ private:
 // Inline Functions
 inline void GuiEmoticonWidget::setEmoticonSize( int new_value ) { m_emoticonSize = new_value; }
 inline QSize GuiEmoticonWidget::emoticonSize() const { return QSize( m_emoticonSize, m_emoticonSize ); }
-inline QSize GuiEmoticonWidget::emoticonButtonSize() const { return QSize( m_emoticonSize + 2, m_emoticonSize + 2 ); }
+inline QSize GuiEmoticonWidget::emoticonButtonSize() const { return QSize( m_emoticonSize + 4, m_emoticonSize + 4 ); }
 inline void GuiEmoticonWidget::setEmoticonButtons( const QList<QPushButton*>& new_value ) { m_buttons = new_value; }
 inline const QList<QPushButton*>& GuiEmoticonWidget::emoticonButtons() const { return m_buttons; }
 

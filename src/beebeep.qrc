@@ -121,5 +121,6 @@
         <file>images/recent.png</file>
         <file>images/notification-disabled.png</file>
         <file>images/notification-enabled.png</file>
+        <file>images/delete.png</file>
     </qresource>
 </RCC>

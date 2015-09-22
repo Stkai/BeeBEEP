@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>422</width>
-    <height>404</height>
+    <height>406</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -386,7 +386,7 @@
         </property>
         <property name="icon">
          <iconset resource="beebeep.qrc">
-          <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
+          <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
         </property>
         <property name="iconSize">
          <size>

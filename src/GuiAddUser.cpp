@@ -148,7 +148,7 @@ void GuiAddUser::openCustomMenu( const QPoint& p )
     item->setSelected( true );
 
   QMenu menu;
-  menu.addAction( QIcon( ":/images/disconnect.png" ), tr( "Remove user path" ), this, SLOT( removeUserPath() ) );
+  menu.addAction( QIcon( ":/images/delete.png" ), tr( "Remove user path" ), this, SLOT( removeUserPath() ) );
   menu.exec( QCursor::pos() );
 }
 

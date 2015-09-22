@@ -83,7 +83,7 @@ void GuiShareLocal::setupToolBar( QToolBar* bar )
   mp_actUpdate = bar->addAction( QIcon( ":/images/update.png" ), tr( "Load shared files" ), this, SLOT( updateList() ) );
   mp_actUpdate->setStatusTip( tr( "Remove shared files from the selected path" ) );
 
-  mp_actRemove = bar->addAction( QIcon( ":/images/disconnect.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
+  mp_actRemove = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
   mp_actRemove->setStatusTip( tr( "Remove shared path from the list" ) );
 
   showStats( 0, 0 );
