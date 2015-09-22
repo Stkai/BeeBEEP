@@ -160,6 +160,7 @@ void GuiShareNetwork::loadShares( const User& u )
   setCursor( Qt::WaitCursor );
   QApplication::processEvents();
 
+  m_fileInfoList.setUpdatesEnabled( false );
   int file_shared = 0;
   FileSizeType share_size = 0;
   QTime timer;
@@ -206,6 +207,8 @@ void GuiShareNetwork::loadShares( const User& u )
       }
     }
   }
+
+  m_fileInfoList.setUpdatesEnabled( true );
 
   mp_comboUsers->blockSignals( true );
   if( file_shared > 0 )

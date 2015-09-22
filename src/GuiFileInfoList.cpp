@@ -58,7 +58,6 @@ void GuiFileInfoList::initTree( QTreeWidget* tree_widget )
   hv->setResizeMode( GuiFileInfoItem::ColumnSize, QHeaderView::ResizeToContents );
   hv->setResizeMode( GuiFileInfoItem::ColumnStatus, QHeaderView::ResizeToContents );
 #endif
-
 }
 
 void GuiFileInfoList::clearTree()

@@ -205,6 +205,8 @@ public:
 
   inline bool beepOnNewMessageArrived() const;
   inline void setBeepOnNewMessageArrived( bool );
+  inline bool beepAlwaysOnNewMessageArrived() const;
+  inline void setBeepAlwaysOnNewMessageArrived( bool );
   inline const QString& beepFilePath() const;
   inline void setBeepFilePath( const QString& );
 
@@ -407,6 +409,7 @@ private:
 
   QString m_language;
   bool m_beepOnNewMessageArrived;
+  bool m_beepAlwaysOnNewMessageArrived;
   QString m_beepFilePath;
 
   QStringList m_broadcastAddressesInFileHosts;
@@ -537,6 +540,8 @@ inline const QString& Settings::downloadDirectory() const { return m_downloadDir
 inline void Settings::setDownloadDirectory( const QString& new_value ) { m_downloadDirectory = new_value; }
 inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessageArrived; }
 inline void Settings::setBeepOnNewMessageArrived( bool new_value ) { m_beepOnNewMessageArrived = new_value; }
+inline bool Settings::beepAlwaysOnNewMessageArrived() const { return m_beepAlwaysOnNewMessageArrived; }
+inline void Settings::setBeepAlwaysOnNewMessageArrived( bool new_value ) { m_beepAlwaysOnNewMessageArrived = new_value; }
 inline const QString& Settings::beepFilePath() const { return m_beepFilePath; }
 inline void Settings::setBeepFilePath( const QString& new_value ) { m_beepFilePath = new_value; }
 inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }

@@ -38,6 +38,7 @@ public:
   GuiFileInfoList();
 
   void initTree( QTreeWidget* );
+  inline void setUpdatesEnabled( bool );
 
   GuiFileInfoItem* userItem( VNumber );
   GuiFileInfoItem* createUserItem( const User& );
@@ -73,6 +74,7 @@ private:
 };
 
 // Inline Functions
+inline void GuiFileInfoList::setUpdatesEnabled( bool new_value ) { mp_tree->setUpdatesEnabled( new_value ); }
 inline const QList<SharedFileInfo>& GuiFileInfoList::selectedFileInfoList() const { return m_selectedFileInfoList; }
 inline bool GuiFileInfoList::isEmpty() const { return mp_tree->topLevelItemCount() == 0; }
 

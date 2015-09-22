@@ -505,6 +505,7 @@ void Settings::load()
   m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
+  m_beepAlwaysOnNewMessageArrived = sets->value( "BeepAlwaysOnNewMessageArrived", false ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
   m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
@@ -703,6 +704,7 @@ void Settings::save()
   sets->setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
+  sets->setValue( "BeepAlwaysOnNewMessageArrived", m_beepAlwaysOnNewMessageArrived );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );
   sets->setValue( "UseClickableLinks", m_chatUseClickableLinks );
   sets->setValue( "MessageHistorySize", m_chatMessageHistorySize );

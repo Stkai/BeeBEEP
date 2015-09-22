@@ -1126,7 +1126,22 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 4:
-    Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
+    {
+      if( act->isChecked() )
+      {
+        if( QMessageBox::question( this, Settings::instance().programName(), tr( "When do you want %1 to play beep?" ),
+                               tr( "If it not visible" ), tr( "Always" ), QString::null, 0, 0 ) == 1 )
+        {
+          Settings::instance().setBeepAlwaysOnNewMessageArrived( true );
+        }
+        else
+          Settings::instance().setBeepAlwaysOnNewMessageArrived( false );
+      }
+      else
+        Settings::instance().setBeepAlwaysOnNewMessageArrived( false );
+
+      Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
+    }
     break;
   case 5:
     Settings::instance().setShowUserColor( act->isChecked() );
@@ -1300,12 +1315,20 @@ bool GuiMain::showAlert( VNumber chat_id )
     return false;
   }
 
+  bool beep_played = false;
+
+  if( Settings::instance().beepAlwaysOnNewMessageArrived() )
+  {
+    playBeep();
+    beep_played = true;
+  }
+
   if( isMinimized() || !isActiveWindow() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "BeeBEEP alert called";
 #endif
-    if( Settings::instance().beepOnNewMessageArrived() )
+    if( !beep_played && Settings::instance().beepOnNewMessageArrived() )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "New message arrived in background: play BEEP sound";
