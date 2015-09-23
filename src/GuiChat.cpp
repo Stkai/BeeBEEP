@@ -625,7 +625,7 @@ void GuiChat::dropEvent( QDropEvent *event )
     if( QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you really want to send %1 %2 to the members of this chat?" ).arg( num_files )
                                .arg( num_files == 1 ? tr( "file" ) : tr( "files" ) ),
-                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+                               tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
     {
        return;
     }

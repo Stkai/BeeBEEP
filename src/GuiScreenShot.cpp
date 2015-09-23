@@ -134,10 +134,16 @@ void GuiScreenShot::captureScreen()
 {
   m_screenShot = QPixmap(); // clear image for low memory situations on embedded devices.
 
+#if QT_VERSION >= 0x050000
+  QScreen *screen = QGuiApplication::primaryScreen();
+  if( screen )
+    m_screenShot = screen->grabWindow( 0 );
+#else
   if( mp_cbRetina->isChecked() )
     m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0, QApplication::desktop()->width() * 2, QApplication::desktop()->height() * 2  );
   else
     m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId() );
+#endif
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Screenshot width" << m_screenShot.width() << "height" << m_screenShot.height();

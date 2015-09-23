@@ -102,13 +102,15 @@ HEADERS += AudioManager.h \
   SaveChatList.h \
   Settings.h \
   Tips.h \
+  Updater.h \
   User.h \
   UserList.h \
   UserManager.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-  Job.h
+  Job.h \
+    HttpDownloader.h
 
 
 SOURCES += AudioManager.cpp \
@@ -189,11 +191,13 @@ SOURCES += AudioManager.cpp \
   Rijndael.cpp \
   SaveChatList.cpp \
   Settings.cpp \
+  Updater.cpp \
   User.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp
+  VCard.cpp \
+    HttpDownloader.cpp
 
 
 FORMS += GuiAddUser.ui \
@@ -215,9 +219,7 @@ FORMS += GuiAddUser.ui \
   GuiWizard.ui
 
 
-RESOURCES += beebeep.qrc \
-    emojis.qrc
+RESOURCES += beebeep.qrc emojis.qrc
+
 win32: RC_FILE = beebeep.rc
-
 macx: ICON = beebeep.icns
-

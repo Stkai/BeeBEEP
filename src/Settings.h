@@ -74,6 +74,7 @@ public:
   QString donationWebSite() const;
   QString helpWebSite() const;
   QString languageWebSite() const;
+  QString httpUserAgent() const;
 
   QString dnsRecord() const;
   inline bool useMulticastDns() const;

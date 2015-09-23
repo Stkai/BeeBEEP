@@ -17,6 +17,13 @@ sudo apt-get install qt5-default
 sudo apt-get install libqt5multimedia5
 sudo apt-get install libqt5multimedia5-plugins
 
+
+FEDORA 22 
+dnf install libxcb.so.1 libxcb-screensaver.so.0 libQt5PrintSupport.so.5 libQt5Multimedia.so.5 libQt5Widgets.so.5 libQt5Network.so.5 libQt5Gui.so.5 libQt5Core.so.5 -y
+
+# chmod +x /beebeep-folder/beebeep
+
+
 RPM:
 http://rpmfind.net/linux/rpm2html/search.php?query=libxcb-screensaver.so.0 
 http://rpmfind.net/linux/rpm2html/search.php?query=qt5

@@ -262,6 +262,11 @@ QString Settings::version( bool complete ) const
   return complete ? QString( "%1 (b%2p%3)" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION ) : QString( BEEBEEP_VERSION );
 }
 
+QString Settings::httpUserAgent() const
+{
+  return QString( "%1 %2" ).arg( programName() ).arg( version( false ) );
+}
+
 int Settings::protoVersion() const
 {
   return BEEBEEP_PROTO_VERSION;

@@ -195,6 +195,7 @@ int main( int argc, char *argv[] )
   Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
   Settings::instance().loadRcFile();
   Settings::instance().save();
+
 #ifdef BEEBEEP_DEBUG
   //Settings::instance().createDefaultRcFile();
   //Settings::instance().createDefaultHostsFile();
