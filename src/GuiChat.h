@@ -78,6 +78,7 @@ protected:
   bool historyCanBeShowed();
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
+  void setChatBackgroundColor( const QString& );
   User findUser( VNumber );
   bool isActiveUser( const User& ) const;
   void dragEnterEvent( QDragEnterEvent* );
@@ -91,6 +92,7 @@ private slots:
   void changeChatMessageFilter();
   void checkAnchorClicked( const QUrl& );
   void selectFontColor();
+  void selectBackgroundColor();
   void selectFont();
   void saveChat();
   void clearChat();
@@ -113,10 +115,12 @@ private:
   QAction* mp_actLeave;
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
+  QAction* mp_actSelectBackgroundColor;
 
   QMenu *mp_menuMembers;
   QSplitter* mp_splitter;
 
+  QPalette m_defaultChatPalette;
 };
 
 

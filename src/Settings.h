@@ -121,6 +121,8 @@ public:
   inline void setChatFontColor( const QString& );
   inline const QFont& chatFont() const;
   void setChatFont( const QFont& );
+  inline void setDefaultChatBackgroundColor( const QString& );
+  inline const QString& defaultChatBackgroundColor() const;
   inline bool chatCompact() const;
   inline void setChatCompact( bool );
   inline bool chatAddNewLineToMessage() const;
@@ -366,6 +368,7 @@ private:
   int m_chatMessageHistorySize;
   QString m_chatFontColor;
   QFont m_chatFont;
+  QString m_defaultChatBackgroundColor;
   bool m_chatCompact;
   bool m_chatAddNewLineToMessage;
   bool m_chatShowMessageTimestamp;
@@ -496,6 +499,8 @@ inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistor
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }
 inline const QFont& Settings::chatFont() const { return m_chatFont; }
+inline void Settings::setDefaultChatBackgroundColor( const QString& new_value ) { m_defaultChatBackgroundColor = new_value; }
+inline const QString& Settings::defaultChatBackgroundColor() const { return m_defaultChatBackgroundColor; }
 inline bool Settings::chatCompact() const { return m_chatCompact; }
 inline void Settings::setChatCompact( bool new_value ) { m_chatCompact = new_value; }
 inline bool Settings::chatAddNewLineToMessage() const { return m_chatAddNewLineToMessage; }

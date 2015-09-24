@@ -506,6 +506,7 @@ void Settings::load()
   m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
   setChatFont( m_chatFont );
   m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
+  m_defaultChatBackgroundColor = sets->value( "DefaultChatBackgroundColor", QColor( Qt::white ).name() ).toString();
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
   m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
@@ -705,6 +706,7 @@ void Settings::save()
   sets->beginGroup( "Chat" );
   sets->setValue( "Font", m_chatFont.toString() );
   sets->setValue( "FontColor", m_chatFontColor );
+  sets->setValue( "DefaultChatBackgroundColor", m_defaultChatBackgroundColor );
   sets->setValue( "CompactMessage", m_chatCompact );
   sets->setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );

@@ -1,4 +1,4 @@
-BeeBEEP has these dependencies:
+BeeBEEP 2.0 has these dependencies:
 	
 libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1
 libxcb-screensaver.so.0 => /usr/lib/x86_64-linux-gnu/libxcb-screensaver.so.0
@@ -18,9 +18,9 @@ sudo apt-get install libqt5multimedia5
 sudo apt-get install libqt5multimedia5-plugins
 
 
-FEDORA 22 
-dnf install libxcb.so.1 libxcb-screensaver.so.0 libQt5PrintSupport.so.5 libQt5Multimedia.so.5 libQt5Widgets.so.5 libQt5Network.so.5 libQt5Gui.so.5 libQt5Core.so.5 -y
+FEDORA 22 (thanks to Marcus Frohn)
 
+# dnf install libxcb.so.1 libxcb-screensaver.so.0 libQt5PrintSupport.so.5 libQt5Multimedia.so.5 libQt5Widgets.so.5 libQt5Network.so.5 libQt5Gui.so.5 libQt5Core.so.5 -y
 # chmod +x /beebeep-folder/beebeep
 
 

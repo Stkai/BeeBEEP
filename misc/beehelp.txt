@@ -41,7 +41,8 @@ BeeBang= installation date or beebeep first launch date
 
 [Chat]
 Font= font used in chat
-FontColor= font color used in chat 
+FontColor= font color used in chat
+DefaultChatBackgroundColor= background color in default chat window
 CompactMessage= messages are displayed without a blank line from eachother
 AddNewLineAfterMessage= add a blank line after a message displayed
 ShowMessageTimestamp= show message timestamp in the chat 

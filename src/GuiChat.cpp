@@ -62,6 +62,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teMessage->setAcceptRichText( false );
 
   mp_teChat->setObjectName( "GuiChatViewer" );
+  m_defaultChatPalette = mp_teChat->palette();
   mp_teChat->setFocusPolicy( Qt::ClickFocus );
   mp_teChat->setReadOnly( true );
   mp_teChat->setUndoRedoEnabled( false );
@@ -92,6 +93,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act->setStatusTip( tr( "Select your favourite chat font style" ) );
   act = bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
   act->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
+  mp_actSelectBackgroundColor = bar->addAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ), this, SLOT( selectBackgroundColor() ) );
+  mp_actSelectBackgroundColor->setStatusTip( tr( "Select your favourite background color for the chat window" ) );
   act = bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
   act->setStatusTip( tr( "Select the message types which will be showed in chat" ) );
   act = bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
@@ -388,6 +391,18 @@ bool GuiChat::setChatId( VNumber chat_id )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Setting chat" << chat_id << "in default chat window";
 #endif
+
+  if( c.isDefault() )
+  {
+    setChatBackgroundColor( Settings::instance().defaultChatBackgroundColor() );
+    mp_actSelectBackgroundColor->setEnabled( true );
+  }
+  else
+  {
+    mp_teChat->setPalette( m_defaultChatPalette );
+    mp_actSelectBackgroundColor->setEnabled( false );
+  }
+
   m_chatId = c.id();
   m_chatName = c.name();
   m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
@@ -544,13 +559,30 @@ void GuiChat::setChatFontColor( const QString& color_name )
   mp_teMessage->setTextColor( QColor( color_name ) );
 }
 
+void GuiChat::setChatBackgroundColor( const QString& color_name )
+{
+  QPalette pal = m_defaultChatPalette;
+  pal.setBrush( QPalette::Base, QBrush( QColor( color_name ) ) );
+  mp_teChat->setPalette( pal );
+}
+
 void GuiChat::selectFontColor()
 {
   QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
   if( c.isValid() )
   {
-    Settings::instance().setChatFontColor( c.name() );
+    Settings::instance().setDefaultChatBackgroundColor( c.name() );
     setChatFontColor( c.name() );
+  }
+}
+
+void GuiChat::selectBackgroundColor()
+{
+  QColor c = QColorDialog::getColor( QColor( Settings::instance().defaultChatBackgroundColor() ), this );
+  if( c.isValid() )
+  {
+    Settings::instance().setDefaultChatBackgroundColor( c.name() );
+    setChatBackgroundColor( c.name() );
   }
 }
 
@@ -627,7 +659,7 @@ void GuiChat::dropEvent( QDropEvent *event )
                                .arg( num_files == 1 ? tr( "file" ) : tr( "files" ) ),
                                tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
     {
-       return;
+      return;
     }
 
     foreach( QUrl url, event->mimeData()->urls() )
