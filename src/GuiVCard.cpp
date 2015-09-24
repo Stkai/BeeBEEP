@@ -41,6 +41,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
   connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeColor() ) );
+  connect( mp_pbFavorite, SIGNAL( clicked() ), this, SLOT( favoriteClicked() ) );
 }
 
 void GuiVCard::setVCard( const User& u, VNumber chat_id )
@@ -92,15 +93,29 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else
     mp_lStatus->setText( QString( "%1&nbsp;&nbsp;&nbsp;(%2: %3)" ).arg( user_status ).arg( Settings::instance().programName() ).arg( user_version ) );
 
-  if( u.isLocal() )
-    mp_pbChat->setToolTip( tr( "Chat with all" ) );
+  if( u.isFavorite() )
+  {
+    mp_pbFavorite->setIcon( QIcon( ":/images/star.png" ) );
+    mp_pbFavorite->setToolTip( tr( "Remove from favorites" ) );
+  }
   else
-    mp_pbChat->setToolTip( tr( "Open chat" ) );
+  {
+    mp_pbFavorite->setIcon( QIcon( ":/images/star-bn.png" ) );
+    mp_pbFavorite->setToolTip( tr( "Add to favorites" ) );
+  }
 
   if( u.isLocal() )
+  {
+    mp_pbChat->setToolTip( tr( "Chat with all" ) );
     mp_pbFile->hide();
+    mp_pbFavorite->hide();
+  }
   else
+  {
+    mp_pbChat->setToolTip( tr( "Open chat" ) );
     mp_pbFile->show();
+    mp_pbFavorite->hide();
+  }
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "VCard shown for the user" << u.path();
@@ -125,5 +140,12 @@ void GuiVCard::changeColor()
 {
   hide();
   emit changeUserColor( m_userId );
+  close();
+}
+
+void GuiVCard::favoriteClicked()
+{
+  hide();
+  emit toggleFavorite( m_userId );
   close();
 }

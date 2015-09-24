@@ -123,5 +123,6 @@
         <file>images/notification-enabled.png</file>
         <file>images/delete.png</file>
         <file>images/background-color.png</file>
+        <file>images/star-bn.png</file>
     </qresource>
 </RCC>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>364</width>
-    <height>132</height>
+    <width>374</width>
+    <height>130</height>
    </rect>
   </property>
   <property name="palette">
@@ -82,7 +82,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
-    <number>4</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
     <number>0</number>
@@ -93,10 +93,7 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="horizontalSpacing">
-    <number>6</number>
-   </property>
-   <property name="verticalSpacing">
+   <property name="spacing">
     <number>0</number>
    </property>
    <item row="0" column="0">
@@ -380,18 +377,33 @@
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="QFrame" name="mp_frameBottom">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>32</height>
+      </size>
+     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>4</number>
+      </property>
       <property name="leftMargin">
-       <number>2</number>
+       <number>4</number>
       </property>
       <property name="topMargin">
        <number>2</number>
       </property>
       <property name="rightMargin">
-       <number>2</number>
+       <number>4</number>
       </property>
       <property name="bottomMargin">
        <number>2</number>
@@ -427,6 +439,18 @@
       </item>
       <item>
        <widget class="QPushButton" name="mp_pbChat">
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Open chat</string>
         </property>
@@ -441,12 +465,30 @@
          <bool>true</bool>
         </property>
         <property name="flat">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="mp_pbFile">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Send a file</string>
         </property>
@@ -457,10 +499,31 @@
          <iconset resource="beebeep.qrc">
           <normaloff>:/images/send-file.png</normaloff>:/images/send-file.png</iconset>
         </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="mp_pbColor">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Change the nickname color</string>
         </property>
@@ -470,6 +533,38 @@
         <property name="icon">
          <iconset resource="beebeep.qrc">
           <normaloff>:/images/font-color.png</normaloff>:/images/font-color.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mp_pbFavorite">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="icon">
+         <iconset resource="beebeep.qrc">
+          <normaloff>:/images/star.png</normaloff>:/images/star.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

@@ -1863,6 +1863,7 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
+  connect( gvc, SIGNAL( toggleFavorite( VNumber ) ), this, SLOT( toggleUserFavorite( VNumber ) ) );
   gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id() );
 
   if( ensure_visible && dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
@@ -2812,5 +2813,22 @@ void GuiMain::changeAvatarSizeInList()
     return;
 
   Settings::instance().setAvatarIconSize( QSize( avatar_size, avatar_size ) );
+  mp_userList->updateUsers( mp_core->isConnected() );
+}
+
+void GuiMain::toggleUserFavorite( VNumber user_id )
+{
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user id" << user_id << "found in toggle favorite function";
+    return;
+  }
+
+  if( u.isFavorite() )
+    u.setIsFavorite( false );
+  else
+    u.setIsFavorite( true );
+
   mp_userList->updateUsers( mp_core->isConnected() );
 }

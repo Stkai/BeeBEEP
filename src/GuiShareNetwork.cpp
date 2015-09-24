@@ -92,7 +92,7 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   /* filter by user */
   label = new QLabel( bar );
   label->setObjectName( "GuiLabelFilterUser" );
-  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  label->setAlignment( Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter );
   label->setText( QString( "   " ) + tr( "User" ) + QString( " " ) );
   label->setMinimumWidth( 40 );
   bar->addWidget( label );
@@ -180,9 +180,7 @@ void GuiShareNetwork::loadShares( const User& u )
       {
         if( filterPassThrough( u.id(), fi ) )
         {
-          item = m_fileInfoList.fileItem( u.id(), fi.id() );
-          if( !item )
-            item = m_fileInfoList.createFileItem( u, fi );
+          item = m_fileInfoList.createFileItem( u, fi );
 
           file_info_downloaded = FileShare::instance().downloadedFile( fi.fileHash() );
           if( file_info_downloaded.isValid() )
@@ -199,7 +197,7 @@ void GuiShareNetwork::loadShares( const User& u )
         file_shared++;
         share_size += fi.size();
 
-        if( timer.elapsed() > 20000 )
+        if( timer.elapsed() > 10000 )
         {
           qWarning() << "File share operation is too long, time out!";
           break;

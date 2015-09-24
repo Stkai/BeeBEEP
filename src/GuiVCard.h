@@ -42,11 +42,13 @@ signals:
   void showChat( VNumber );
   void sendFile( VNumber );
   void changeUserColor( VNumber );
+  void toggleFavorite( VNumber );
 
 private slots:
   void showPrivateChat();
   void sendFile();
   void changeColor();
+  void favoriteClicked();
 
 private:
   VNumber m_userId;

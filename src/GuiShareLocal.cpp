@@ -168,6 +168,7 @@ void GuiShareLocal::updatePaths()
   if( Settings::instance().localShare().isEmpty() )
     return;
   QTreeWidgetItem *item;
+  mp_twMyShares->setUpdatesEnabled( false );
   foreach( QString share_path, Settings::instance().localShare() )
   {
     item = new QTreeWidgetItem( mp_twMyShares );
@@ -175,12 +176,12 @@ void GuiShareLocal::updatePaths()
     item->setText( 1, Bee::bytesToString( FileShare::instance().localSize( share_path ) ) );
     item->setText( 2, share_path );
   }
+  mp_twMyShares->setUpdatesEnabled( true );
 }
 
 void GuiShareLocal::updateFileSharedList()
 {
   setActionsEnabled( false );
-  mp_twLocalShares->clear();
   updatePaths();
   QTimer::singleShot( 200, this, SLOT( loadFileInfoInList() ) );
 }
@@ -190,6 +191,9 @@ void GuiShareLocal::loadFileInfoInList()
   int file_count = 0;
   FileSizeType total_file_size = 0;
   GuiFileInfoItem* item;
+
+  mp_twLocalShares->clear();
+  mp_twLocalShares->setUpdatesEnabled( false );
 
   if( !FileShare::instance().local().isEmpty() )
   {
@@ -201,7 +205,9 @@ void GuiShareLocal::loadFileInfoInList()
       item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Click to open %1" ).arg( fi.name() ) );
     }
   }
+
   setActionsEnabled( true );
+  mp_twLocalShares->setUpdatesEnabled( true );
   showStats( file_count, total_file_size );
 }
 
