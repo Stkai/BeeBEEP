@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: Protocol.h 464 2015-08-18 14:55:55Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
