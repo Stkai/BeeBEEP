@@ -514,17 +514,25 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
 {
   QStringList sl = s.split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 3 )
+  {
+    qWarning() << "Invalid user record found in data:" << s << "(size error)";
     return UserRecord();
+  }
 
   UserRecord ur;
   ur.setHostAddress( QHostAddress( sl.takeFirst() ) );
   if( ur.hostAddress().isNull() )
+  {
+    qWarning() << "Invalid user record found in data:" << s << "(host address error)";
     return UserRecord();
-
+  }
   bool ok = false;
   int host_port = sl.takeFirst().toInt( &ok, 10 );
   if( !ok || host_port < 1 || host_port > 65535 )
+  {
+    qWarning() << "Invalid user record found in data:" << s << "(host port error)";
     return UserRecord();
+  }
   else
     ur.setHostPort( host_port );
 
@@ -540,7 +548,10 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   {
     QString favorite_txt = sl.takeFirst();
     if( favorite_txt == QString( "*" ) )
+    {
+      qDebug() << "User" << ur.name() << "is in favorite list";
       ur.setFavorite( true );
+    }
   }
 
   return ur;

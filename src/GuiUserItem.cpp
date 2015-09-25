@@ -154,7 +154,7 @@ bool GuiUserItem::updateUser( const User& u )
 
       tool_tip += QString( "(%1)" ).arg( QObject::tr( "Click to send a private message" ) );
     }
-    user_priority = u.isFavorite() ? 100 : 1000;
+    user_priority = u.isFavorite() ? 100 : 10000;
     user_priority += u.isConnected() ? (1000*user_status) : 10000000;
   }
 

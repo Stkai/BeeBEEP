@@ -63,6 +63,15 @@ void FileShare::addToLocal( const QString& sp, const QList<FileInfo>& share_list
     m_local.insert( share_path, fi );
 }
 
+void FileShare::addToLocal( const FileInfo& file_info )
+{
+  QString share_path = Bee::convertToNativeFolderSeparator( file_info.path() );
+  m_localSize.insert( share_path, file_info.size() );
+  if( m_local.contains( share_path ) )
+    m_local.remove( share_path );
+  m_local.insert( share_path, file_info );
+}
+
 int FileShare::addToNetwork( VNumber user_id, const QList<FileInfo>& file_info_list )
 {
   removeFromNetwork( user_id );

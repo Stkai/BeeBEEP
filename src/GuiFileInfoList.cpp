@@ -164,19 +164,24 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
 
   QStringList folder_list_path = folder_name.split( QDir::separator(), QString::SkipEmptyParts );
 
-  QString subfolder_path = "";
-  foreach( QString fn, folder_list_path )
+  if( !folder_list_path.isEmpty() )
   {
-    qDebug() << "Parsing folder:" << fn;
-    if( subfolder_path.isEmpty() )
-      subfolder_path = fn;
-    else
-      subfolder_path = subfolder_path + QDir::separator() + fn;
-    item = folderItem( u.id(), subfolder_path );
-    if( !item )
-      item = createSubFolderItem( parent_item, u.id(), fn, subfolder_path );
-    parent_item = item;
+    QString subfolder_path = "";
+    foreach( QString fn, folder_list_path )
+    {
+      qDebug() << "Parsing folder:" << fn;
+      if( subfolder_path.isEmpty() )
+        subfolder_path = fn;
+      else
+        subfolder_path = subfolder_path + QDir::separator() + fn;
+      item = folderItem( u.id(), subfolder_path );
+      if( !item )
+        item = createSubFolderItem( parent_item, u.id(), fn, subfolder_path );
+      parent_item = item;
+    }
   }
+  else
+    item = parent_item;
 
   return item;
 }
@@ -197,12 +202,15 @@ GuiFileInfoItem* GuiFileInfoList::fileItem( VNumber user_id, VNumber file_info_i
 
 GuiFileInfoItem* GuiFileInfoList::createFileItem( const User& u, const FileInfo& file_info )
 {
-  GuiFileInfoItem* parent_item;
+  GuiFileInfoItem* parent_item = 0;
   if( file_info.shareFolder().isEmpty() )
   {
-    parent_item = userItem( u.id() );
-    if( !parent_item )
-      parent_item = createUserItem( u );
+    if( !u.isLocal() )
+    {
+      parent_item = userItem( u.id() );
+      if( !parent_item )
+        parent_item = createUserItem( u );
+    }
   }
   else
   {
@@ -211,12 +219,23 @@ GuiFileInfoItem* GuiFileInfoList::createFileItem( const User& u, const FileInfo&
       parent_item = createFolderItem( u, file_info.shareFolder() );
   }
 
+  GuiFileInfoItem* item;
+  if( parent_item )
+  {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiFileInfoList::createFileItem for user" << u.id() << "in folder" << parent_item->folder() << "with id" << file_info.id();
+    qDebug() << "GuiFileInfoList::createFileItem for user" << u.id() << "in folder" << parent_item->folder() << "with id" << file_info.id();
 #endif
-  GuiFileInfoItem* item = new GuiFileInfoItem( parent_item );
-  item->initFile( u.id(), file_info );
+    item = new GuiFileInfoItem( parent_item );
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "GuiFileInfoList::createFileItem for user" << u.id() << "in root folder with id" << file_info.id();
+#endif
+    item = new GuiFileInfoItem( mp_tree );
+  }
 
+  item->initFile( u.id(), file_info );
   return item;
 }
 

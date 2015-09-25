@@ -538,7 +538,7 @@ void Settings::load()
     m_passwordBeforeHash = "";
   m_saveUserList = sets->value( "SaveUsers", m_saveUserList ).toBool();
   QString user_list = sets->value( "List", "" ).toString();
-  if( user_list.isEmpty() )
+  if( !user_list.isEmpty() )
     m_userList = simpleDecrypt( user_list ).split( QString( "\n" ) );
   else
     m_userList = QStringList();
@@ -740,7 +740,11 @@ void Settings::save()
 
   sets->setValue( "SaveUsers", m_saveUserList );
   if( m_saveUserList )
-    sets->setValue( "List", simpleEncrypt( m_userList.join( QString( "\n" ) ) ) );
+  {
+    // I need a QString to avoid " in file ini
+    QString user_list_to_save = simpleEncrypt( m_userList.join( QString( "\n" ) ) );
+    sets->setValue( "List", user_list_to_save );
+  }
 
   sets->endGroup();
 

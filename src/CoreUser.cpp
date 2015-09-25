@@ -228,12 +228,23 @@ void Core::loadUsersAndGroups()
 {
   if( !Settings::instance().userList().isEmpty() )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Loading" << Settings::instance().userList().size() << "saved users";
+#endif
+
     User u;
     foreach( QString user_data, Settings::instance().userList() )
     {
       u = Protocol::instance().loadUser( user_data );
       if( u.isValid() )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Saved user added:" << u.path();
+#endif
+        if( u.isFavorite() )
+          qDebug() << "User" << u.path() << "is in favorite list";
         UserManager::instance().setUser( u );
+      }
     }
   }
 

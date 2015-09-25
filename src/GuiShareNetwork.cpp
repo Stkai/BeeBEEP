@@ -340,7 +340,10 @@ void GuiShareNetwork::showStatus( const QString& status_text )
 
 void GuiShareNetwork::showSharesForUser( const User& u )
 {
-  if( mp_comboUsers->findData( u.id() ) == -1 )
+  bool user_is_not_in_list = mp_comboUsers->findData( u.id() ) == -1;
+  int num_file_shared = FileShare::instance().network().count( u.id() );
+
+  if( user_is_not_in_list || num_file_shared < 999 )
   {
     loadShares( u );
     if( m_fileInfoList.countFileItems() < 100 )

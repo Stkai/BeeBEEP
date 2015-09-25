@@ -384,18 +384,41 @@ void Core::sendFileShareListToAll()
 
 void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 {
-  qDebug() << "Adding to file sharing" << share_path;
-
   QString share_status = tr( "Adding to file sharing" ) + QString( " %1" ).arg( share_path );
   emit updateStatus( share_status + QString( " ..." ), 1000 );
 
-  BuildFileShareList *bfsl = new BuildFileShareList;
-  bfsl->setFolderPath( share_path );
-  bfsl->setBroadcastList( broadcast_list );
-  connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addListToLocalShare() ) );
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->addJob( bfsl );
-  QMetaObject::invokeMethod( bfsl, "buildList", Qt::QueuedConnection );
+  QFileInfo fi( share_path );
+  if( fi.isDir() )
+  {
+    BuildFileShareList *bfsl = new BuildFileShareList;
+    bfsl->setFolderPath( share_path );
+    bfsl->setBroadcastList( broadcast_list );
+    connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addListToLocalShare() ) );
+    BeeApplication* bee_app = (BeeApplication*)qApp;
+    bee_app->addJob( bfsl );
+    QMetaObject::invokeMethod( bfsl, "buildList", Qt::QueuedConnection );
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Adding to file sharing" << share_path;
+#endif
+    FileInfo file_info = Protocol::instance().fileInfo( fi, "" );
+    FileShare::instance().addToLocal( file_info );
+
+    if( m_shareListToBuild > 0 )
+      m_shareListToBuild--;
+
+    if( m_shareListToBuild == 0 )
+    {
+      createLocalShareMessage();
+
+      if( broadcast_list )
+        sendFileShareListToAll();
+
+      emit localShareListAvailable();
+    }
+  }
 }
 
 void Core::addListToLocalShare()
