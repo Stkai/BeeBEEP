@@ -467,10 +467,8 @@ User Protocol::createTemporaryUser( const QString& user_name, const QString& use
   u.setHostPort( user_port );
   if( !user_account_name.isEmpty() )
     u.setAccountName( user_account_name );
-
   u.setStatus( User::Offline );
   u.setId( newId() );
-
   return u;
 }
 
@@ -481,6 +479,7 @@ QString Protocol::saveUser( const User& u ) const
   ur.setAccount( u.accountName() );
   ur.setHostAddress( u.hostAddress() );
   ur.setHostPort( u.hostPort() );
+  ur.setFavorite( u.isFavorite() );
   return saveUserRecord( ur );
 }
 
@@ -490,7 +489,10 @@ User Protocol::loadUser( const QString& s )
   if( !ur.isValid() )
     return User();
 
-  return createTemporaryUser( ur.name(), ur.account(), ur.hostAddress(), ur.hostPort() );
+  User u = createTemporaryUser( ur.name(), ur.account(), ur.hostAddress(), ur.hostPort() );
+  u.setIsFavorite( ur.isFavorite() );
+
+  return u;
 }
 
 QString Protocol::saveUserRecord( const UserRecord& ur ) const
@@ -501,6 +503,10 @@ QString Protocol::saveUserRecord( const UserRecord& ur ) const
   sl << ur.comment();
   sl << ur.name();
   sl << ur.account();
+  if( ur.isFavorite() )
+    sl << QString( "*" );
+  else
+    sl << QString( "" );
   return sl.join( DATA_FIELD_SEPARATOR );
 }
 
@@ -529,6 +535,13 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
 
   if( !sl.isEmpty() )
     ur.setAccount( sl.takeFirst() );
+
+  if( !sl.isEmpty() )
+  {
+    QString favorite_txt = sl.takeFirst();
+    if( favorite_txt == QString( "*" ) )
+      ur.setFavorite( true );
+  }
 
   return ur;
 }
@@ -803,7 +816,7 @@ int Protocol::countFilesCanBeSharedInPath( const QString& file_path )
       {
         if( num_files > Settings::instance().maxQueuedDownloads() )
           break;
-        dir_entry = QDir::toNativeSeparators( QString( "%1/%2" ).arg( dir.absolutePath() ).arg( dir_entry ) );
+        dir_entry = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dir.absolutePath() ).arg( dir_entry ) );
         num_files += countFilesCanBeSharedInPath( dir_entry );
       }
     }
@@ -885,7 +898,7 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
       fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
       fi.setPassword( sl_tmp.takeFirst().toUtf8() );
       fi.setFileHash( sl_tmp.takeFirst() );
-      fi.setShareFolder( sl_tmp.takeFirst() );
+      fi.setShareFolder( Bee::convertToNativeFolderSeparator( sl_tmp.takeFirst() ) );
 
       file_info_list.append( fi );
     }
@@ -898,7 +911,7 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
 
 void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
 {
-  if( file_info_list.isEmpty() || server_port <= 0 )
+  if( server_port <= 0 )
   {
     m_fileShareListMessage = "";
     return;
@@ -920,8 +933,8 @@ void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& f
     ++it;
   }
 
-  Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
-  m.setData( QString::number( server_port ) );
+  Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.isEmpty() ? QString( "" ) : msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
+  m.setData( msg_list.isEmpty() ? QString( "0" ) : QString::number( server_port ) );
   m.addFlag( Message::List );
 
   m_fileShareListMessage = fromMessage( m );
@@ -967,7 +980,7 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
         fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
 
       if( !sl_tmp.isEmpty() )
-        fi.setShareFolder( sl_tmp.takeFirst() );
+        fi.setShareFolder( Bee::convertToNativeFolderSeparator( sl_tmp.takeFirst() ) );
 
       file_info_list.append( fi );
     }

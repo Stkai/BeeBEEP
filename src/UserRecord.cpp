@@ -25,7 +25,8 @@
 
 
 UserRecord::UserRecord()
-  : m_name( "" ), m_account( "" ), m_hostAddress(), m_hostPort( DEFAULT_LISTENER_PORT ), m_comment( "" )
+  : m_name( "" ), m_account( "" ), m_hostAddress(), m_hostPort( DEFAULT_LISTENER_PORT ),
+    m_comment( "" ), m_isFavorite( false )
 {
 }
 
@@ -43,6 +44,7 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
     m_hostAddress = ur.m_hostAddress;
     m_hostPort = ur.m_hostPort;
     m_comment = ur.m_comment;
+    m_isFavorite = ur.m_isFavorite;
   }
   return *this;
 }

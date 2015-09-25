@@ -51,6 +51,8 @@ public:
   inline int hostPort() const;
   inline void setComment( const QString& );
   inline const QString& comment() const;
+  inline void setFavorite( bool );
+  inline bool isFavorite() const;
 
 private:
   QString m_name;
@@ -58,6 +60,7 @@ private:
   QHostAddress m_hostAddress;
   int m_hostPort;
   QString m_comment;
+  bool m_isFavorite;
 
 };
 
@@ -77,5 +80,7 @@ inline void UserRecord::setHostPort( int new_value ) { m_hostPort = new_value; }
 inline int UserRecord::hostPort() const { return m_hostPort; }
 inline void UserRecord::setComment( const QString& new_value ) { m_comment = new_value; }
 inline const QString& UserRecord::comment() const { return m_comment; }
+inline void UserRecord::setFavorite( bool new_value ) { m_isFavorite = new_value; }
+inline bool UserRecord::isFavorite() const { return m_isFavorite; }
 
 #endif // BEEBEEP_USERRECORD_H

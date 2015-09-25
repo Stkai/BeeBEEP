@@ -312,6 +312,7 @@ bool BeeApplication::otherInstanceExists()
   local_socket.connectToServer( localServerName() );
   if( local_socket.waitForConnected( 2000 ) )
   {
+    qDebug() << "Another instance of" << localServerName() << "exists";
     local_socket.close();
     return true;
   }

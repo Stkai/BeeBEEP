@@ -278,7 +278,7 @@ void GuiShareLocal::dropEvent( QDropEvent *event )
 #else
       if( url.scheme() == QLatin1String( "file" ) )
 #endif
-        addSharePath( QDir::toNativeSeparators( url.toLocalFile() ) );
+        addSharePath( Bee::convertToNativeFolderSeparator( url.toLocalFile() ) );
     }
   }
 }

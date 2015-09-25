@@ -1673,7 +1673,7 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
 
   foreach( SharedFileInfo sfi, share_file_info_list )
   {
-    download_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), sfi.second.shareFolder() ) );
+    download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), sfi.second.shareFolder() ) );
     u = UserManager::instance().userList().find( sfi.first );
     if( !askToDownloadFile( u, sfi.second, download_folder, false ) )
       return;
@@ -1741,7 +1741,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
     int files_to_download = 0;
     foreach( FileInfo fi, file_info_list )
     {
-      download_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), fi.shareFolder() ) );
+      download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), fi.shareFolder() ) );
       if( !askToDownloadFile( u, fi, download_folder, false ) )
         return;
 
@@ -2818,17 +2818,6 @@ void GuiMain::changeAvatarSizeInList()
 
 void GuiMain::toggleUserFavorite( VNumber user_id )
 {
-  User u = UserManager::instance().userList().find( user_id );
-  if( !u.isValid() )
-  {
-    qWarning() << "Invalid user id" << user_id << "found in toggle favorite function";
-    return;
-  }
-
-  if( u.isFavorite() )
-    u.setIsFavorite( false );
-  else
-    u.setIsFavorite( true );
-
+  mp_core->toggleUserFavorite( user_id );
   mp_userList->updateUsers( mp_core->isConnected() );
 }

@@ -21,8 +21,9 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "Settings.h"
+#include "BeeUtils.h"
 #include "ChatMessage.h"
+#include "Settings.h"
 #include "Version.h"
 
 
@@ -71,7 +72,7 @@ Settings::Settings()
 #if QT_VERSION >= 0x050400
   m_dataFolder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
 #elif QT_VERSION >= 0x050000
-  m_dataFolder = QDir::toNativeSeparators( QString( "%1/%2" )
+  m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" )
                    .arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) )
                    .arg( programName() ) );
 #else
@@ -93,13 +94,6 @@ void Settings::setChatFont( const QFont& new_value )
   QFontMetrics fm( m_chatFont );
   m_emoticonSizeInChat = qMax( 24, qMin( 32, fm.height() ) );
   m_emoticonSizeInEdit = qMax( 16, qMin( 32, fm.height() ) );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Font selected for chat:" << m_chatFont.toString();
-  qDebug() << "Font pixel size:" << m_chatFont.pixelSize();
-  qDebug() << "Font point size:" << m_chatFont.pointSize();
-  qDebug() << "Font height:" << fm.height();
-  qDebug() << "Emoticon size:" << m_emoticonSizeInChat;
-#endif
 }
 
 QString Settings::accountNameFromSystemEnvinroment() const
@@ -200,7 +194,7 @@ void Settings::loadRcFile()
   m_saveDataInDocumentsFolder = sets->value( "SaveDataInDocumentsFolder", m_saveDataInDocumentsFolder ).toBool();
   m_saveDataInUserApplicationFolder = sets->value( "SaveDataInUserApplicationFolder", m_saveDataInUserApplicationFolder ).toBool();
   m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
-  m_dataFolderInRC = QDir::toNativeSeparators( sets->value( "DataFolderPath", m_dataFolderInRC ).toString() );
+  m_dataFolderInRC = Bee::convertToNativeFolderSeparator( sets->value( "DataFolderPath", m_dataFolderInRC ).toString() );
   m_addAccountNameToDataFolder = sets->value( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
@@ -414,11 +408,11 @@ void Settings::loadBroadcastAddressesFromFileHosts()
   QFile file( defaultHostsFilePath( true ) );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qDebug() << "File HOSTS not found in current folder:" << file.fileName();
+    qDebug() << "File HOSTS not found in current path:" << file.fileName();
     file.setFileName( defaultHostsFilePath( false ) );
     if( !file.open( QIODevice::ReadOnly ) )
     {
-      qDebug() << "File HOSTS not found in custom folder:" << file.fileName();
+      qDebug() << "File HOSTS not found in custom path:" << file.fileName();
       return;
     }
   }
@@ -577,24 +571,24 @@ void Settings::load()
   if( m_language.size() > 2 )
     m_language.resize( 2 );
 #if QT_VERSION >= 0x050000
-  m_lastDirectorySelected = QDir::toNativeSeparators( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() );
-  m_downloadDirectory = QDir::toNativeSeparators( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
+  m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() );
+  m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
 #else
-  m_lastDirectorySelected = QDir::toNativeSeparators( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
-  m_downloadDirectory = QDir::toNativeSeparators( sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
+  m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
+  m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
 #endif
-  m_logPath = QDir::toNativeSeparators( sets->value( "LogPath", dataFolder() ).toString() );
-  m_pluginPath = QDir::toNativeSeparators( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() );
-  m_languagePath = QDir::toNativeSeparators( sets->value( "LanguagePath", resourceFolder() ).toString() );
+  m_logPath = Bee::convertToNativeFolderSeparator( sets->value( "LogPath", dataFolder() ).toString() );
+  m_pluginPath = Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() );
+  m_languagePath = Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
-  m_beepFilePath = QDir::toNativeSeparators( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() );
+  m_beepFilePath = Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 2000 ).toInt(), 100 );
-  m_chatSaveDirectory = QDir::toNativeSeparators( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
+  m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
@@ -658,7 +652,7 @@ void Settings::load()
   if( !local_share.isEmpty() )
   {
     foreach( QString share_path, local_share )
-      m_localShare.append( QDir::toNativeSeparators( share_path ) );
+      m_localShare.append( Bee::convertToNativeFolderSeparator( share_path ) );
   }
   else
     m_localShare = local_share;
@@ -1012,11 +1006,11 @@ bool Settings::setDataFolder()
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;
   else if( m_saveDataInUserApplicationFolder )
-    root_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
+    root_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
   else if( m_saveDataInDocumentsFolder )
     root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
   else
-    root_folder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
+    root_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
 #else
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;
@@ -1029,9 +1023,9 @@ bool Settings::setDataFolder()
 #endif
 
   if( m_addAccountNameToDataFolder || m_saveDataInDocumentsFolder )
-    m_dataFolder = QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder, data_folder ) );
+    m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder, data_folder ) );
   else
-    m_dataFolder = QDir::toNativeSeparators( root_folder );
+    m_dataFolder = Bee::convertToNativeFolderSeparator( root_folder );
 
   QDir folder( m_dataFolder );
   if( !folder.exists() )
@@ -1060,24 +1054,24 @@ bool Settings::setDataFolder()
 QString Settings::defaultHostsFilePath( bool use_resource_folder ) const
 {
   QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
-  return QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beehosts.ini" ) ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beehosts.ini" ) ) );
 }
 
 QString Settings::defaultRcFilePath( bool use_resource_folder ) const
 {
   QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
-  return QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beebeep.rc" ) ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beebeep.rc" ) ) );
 }
 
 QString Settings::defaultSettingsFilePath() const
 {
-  return QDir::toNativeSeparators( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "beebeep.ini" ) ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "beebeep.ini" ) ) );
 }
 
 QString Settings::defaultBeepFilePath( bool use_resource_folder ) const
 {
   QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
-  return QDir::toNativeSeparators( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beep.wav" ) ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beep.wav" ) ) );
 }
 
 QString Settings::defaultPluginFolderPath( bool use_resource_folder ) const

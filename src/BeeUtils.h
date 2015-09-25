@@ -61,6 +61,7 @@ namespace Bee
   QBrush defaultHighlightedText();
   QBrush defaultHighlightBrush();
   QPixmap convertToGrayScale( const QPixmap& );
+  QString convertToNativeFolderSeparator( const QString& );
 
 }
 

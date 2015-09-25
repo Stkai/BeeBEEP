@@ -114,7 +114,10 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   {
     mp_pbChat->setToolTip( tr( "Open chat" ) );
     mp_pbFile->show();
-    mp_pbFavorite->hide();
+    if( Settings::instance().saveUserList() )
+      mp_pbFavorite->show();
+    else
+      mp_pbFavorite->hide();
   }
 
 #ifdef BEEBEEP_DEBUG

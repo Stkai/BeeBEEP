@@ -58,6 +58,7 @@ public:
   void createGroup( const QString&, const QList<VNumber>& );
   void changeGroup( VNumber, const QString&, const QList<VNumber>& );
   void removeGroup( VNumber );
+  void toggleUserFavorite( VNumber );
 
   void loadUsersAndGroups();
   void saveUsersAndGroups();

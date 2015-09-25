@@ -71,6 +71,7 @@ int main( int argc, char *argv[] )
 
   if( bee_app.otherInstanceExists() )
   {
+    qDebug() << Settings::instance().programName() << "closed";
     Settings::close();
     return 0;
   }
@@ -89,6 +90,15 @@ int main( int argc, char *argv[] )
   qDebug() << "Settings path:" << Settings::instance().currentSettingsFilePath();
   Settings::instance().load();
   Settings::instance().createLocalUser();
+
+#ifdef BEEBEEP_DEBUG
+  QFont chat_font = Settings::instance().chatFont();
+  qDebug() << "Font selected for chat:" << chat_font.toString();
+  qDebug() << "Font pixel size:" << chat_font.pixelSize();
+  qDebug() << "Font point size:" << chat_font.pointSize();
+  qDebug() << "Font height:" << (int)(QFontMetrics( chat_font).height());
+  qDebug() << "Emoticon size:" << Settings::instance().emoticonSizeInChat();
+#endif
 
   if( !Settings::instance().allowMultipleInstances() )
     bee_app.preventMultipleInstances();

@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiFileInfoList.h"
 #include "FileShare.h"
 #include "Settings.h"
@@ -161,12 +162,12 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
       parent_item = createUserItem( u );
   }
 
-  QString folder_path = QDir::toNativeSeparators( folder_name );
-  QStringList folder_list_path = folder_path.split( QDir::separator(), QString::SkipEmptyParts );
+  QStringList folder_list_path = folder_name.split( QDir::separator(), QString::SkipEmptyParts );
 
   QString subfolder_path = "";
   foreach( QString fn, folder_list_path )
   {
+    qDebug() << "Parsing folder:" << fn;
     if( subfolder_path.isEmpty() )
       subfolder_path = fn;
     else

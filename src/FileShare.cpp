@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "FileShare.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -46,7 +47,7 @@ void FileShare::clearLocal()
 
 void FileShare::addToLocal( const QString& sp, const QList<FileInfo>& share_list, FileSizeType share_size )
 {
-  QString share_path = QDir::toNativeSeparators( sp );
+  QString share_path = Bee::convertToNativeFolderSeparator( sp );
   m_localSize.insert( share_path, share_size );
   if( m_local.contains( share_path ) )
     m_local.remove( share_path );

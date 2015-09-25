@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "BuildFileShareList.h"
 #include "Protocol.h"
 
@@ -74,14 +75,14 @@ FileSizeType BuildFileShareList::addPathToList( const QString& path_name, const 
     FileSizeType path_size = 0;
 
     QDir dir_path( path_url );
-    QString subfolder_name = path_url == m_folderPath ? m_folderName : QDir::toNativeSeparators( QString( "%1/%2" ).arg( path_name, dir_path.dirName() ) );
+    QString subfolder_name = path_url == m_folderPath ? m_folderName : Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( path_name, dir_path.dirName() ) );
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Subfolder " << subfolder_name << "found with path" << path_url;
 #endif
 
     foreach( QString fp, dir_path.entryList() )
     {
-      path_size += addPathToList( subfolder_name, QDir::toNativeSeparators( QString( "%1/%2" ) .arg( path_url, fp ) ) );
+      path_size += addPathToList( subfolder_name, Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( path_url, fp ) ) );
     }
 
     return path_size;

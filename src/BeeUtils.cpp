@@ -374,3 +374,14 @@ QPixmap Bee::convertToGrayScale( const QPixmap& pix )
   ret_pix.convertFromImage( img, Qt::MonoOnly );
   return ret_pix;
 }
+
+QString Bee::convertToNativeFolderSeparator( const QString& folder_path )
+{
+  QString folder_path_converted = folder_path;
+#ifdef Q_OS_WIN
+  folder_path_converted.replace( QChar( '/' ), QChar( '\\' ) );
+#else
+  folder_path_converted.replace( QChar( '\\' ), QChar( '/' ) );
+#endif
+  return folder_path_converted;
+}

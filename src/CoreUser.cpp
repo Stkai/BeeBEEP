@@ -273,3 +273,33 @@ void Core::saveUsersAndGroups()
   }
   Settings::instance().setGroupList( save_data );
 }
+
+void Core::toggleUserFavorite( VNumber user_id )
+{
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user id" << user_id << "found in toggle favorite function";
+    return;
+  }
+
+  QString favorite_icon;
+  QString favorite_txt;
+  if( u.isFavorite() )
+  {
+    u.setIsFavorite( false );
+    favorite_icon = Bee::iconToHtml( ":/images/star-bn.png", "*V*" );
+    favorite_txt = tr( "is removed from favorites" );
+  }
+  else
+  {
+    u.setIsFavorite( true );
+    favorite_icon = Bee::iconToHtml( ":/images/star.png", "*V*" );
+    favorite_txt = tr( "is added to favorites" );
+  }
+
+  UserManager::instance().setUser( u );
+
+  QString sHtmlMsg = QString( "%1 %2 %3." ).arg( favorite_icon, u.name(), favorite_txt );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );
+}
