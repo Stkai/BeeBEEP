@@ -58,7 +58,7 @@ QIcon GuiUserItem::selectUserIcon( int user_status, bool use_big_icon ) const
 
 bool GuiUserItem::updateUser()
 {
-  return updateUser( UserManager::instance().userList().find( userId() ) );
+  return updateUser( UserManager::instance().findUser( userId() ) );
 }
 
 bool GuiUserItem::updateUser( const User& u )

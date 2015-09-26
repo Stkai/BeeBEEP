@@ -261,7 +261,7 @@ User GuiChat::findUser( VNumber user_id )
   if( u.isValid() )
     return u;
 
-  u = UserManager::instance().userList().find( user_id );
+  u = UserManager::instance().findUser( user_id );
   if( u.isValid() )
     m_chatUsers.set( u );
 

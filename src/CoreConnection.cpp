@@ -152,7 +152,7 @@ void Core::closeConnection( Connection *c )
 
   if( c->userId() != ID_INVALID )
   {
-    User u = UserManager::instance().userList().find( c->userId() );
+    User u = UserManager::instance().findUser( c->userId() );
     if( u.isValid() )
     {
       qDebug() << "User" << u.path() << "goes offline";
@@ -237,6 +237,7 @@ void Core::checkUserAuthentication( const Message& m )
       qDebug() << "User" << u.path() << "reconnected";
 
     u.setId( user_found.id() );
+    u.setIsFavorite( user_found.isFavorite() );
   }
   else
   {

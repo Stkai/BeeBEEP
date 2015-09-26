@@ -1382,7 +1382,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       }
       else
       {
-        User u = UserManager::instance().userList().find( cm.userId() );
+        User u = UserManager::instance().findUser( cm.userId() );
         QString msg = u.isValid() ? tr( "New message from %1" ).arg( u.name() ) : tr( "New message arrived" );
         mp_trayIcon->showNewMessageArrived( chat_id, msg );
       }
@@ -1488,7 +1488,7 @@ void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
 
 void GuiMain::sendFile( VNumber user_id )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   QStringList files_path_selected = checkFilePath( "" );
   if( files_path_selected.isEmpty() )
     return;
@@ -1674,7 +1674,7 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
   foreach( SharedFileInfo sfi, share_file_info_list )
   {
     download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), sfi.second.shareFolder() ) );
-    u = UserManager::instance().userList().find( sfi.first );
+    u = UserManager::instance().findUser( sfi.first );
     if( !askToDownloadFile( u, sfi.second, download_folder, false ) )
       return;
 
@@ -1689,7 +1689,7 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
 
 void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   FileInfo file_info = FileShare::instance().networkFileInfo( user_id, file_id );
 
   if( u.isConnected() && file_info.isValid() )
@@ -1850,7 +1850,7 @@ void GuiMain::showLocalUserVCard()
 
 void GuiMain::showVCard( VNumber user_id, bool ensure_visible )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
     return;
 
@@ -2494,7 +2494,7 @@ void GuiMain::showMessage( const QString& status_msg, int time_out )
 
 void GuiMain::changeUserColor( VNumber user_id )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
@@ -2769,7 +2769,7 @@ void GuiMain::enableBroadcastAction()
 
 void GuiMain::checkUserSelected( VNumber user_id )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Invalid user id" << user_id << "found in check user selected";

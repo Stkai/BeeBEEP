@@ -37,7 +37,7 @@ void Core::parseMessage( VNumber user_id, const Message& m )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Parsing message received from user" << user_id;
 #endif
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Invalid user" << user_id << "found while parsing message";

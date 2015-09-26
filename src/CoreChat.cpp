@@ -288,7 +288,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     {
       if( !conn->sendMessage( m ) )
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
-                               .arg( UserManager::instance().userList().find( conn->userId() ).path() ),
+                               .arg( UserManager::instance().findUser( conn->userId() ).path() ),
                                DispatchToChat, ChatMessage::System );
       else
         messages_sent += 1;

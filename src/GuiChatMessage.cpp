@@ -92,7 +92,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message )
       u = chat_users.find( cm.userId() );
       if( !u.isValid() )
       {
-        u = UserManager::instance().userList().find( cm.userId() );
+        u = UserManager::instance().findUser( cm.userId() );
         chat_users.set( u );
       }
 

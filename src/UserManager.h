@@ -37,6 +37,7 @@ public:
   void setUser( const User& );
   inline bool removeUser( const User& );
   inline const UserList& userList() const;
+  inline User findUser( VNumber ) const;
   User findUserByPath( const QString& ) const;
   User findUserByAccountName( const QString& ) const;
   User findUserBySessionId( const QString& ) const;
@@ -79,6 +80,7 @@ private:
 
 
 // Inline Function
+inline User UserManager::findUser( VNumber user_id ) const { return m_users.find( user_id ); }
 inline bool UserManager::removeUser( const User& u ) { return m_users.remove( u ); }
 inline const UserList& UserManager::userList() const { return m_users; }
 inline const QList<Group>& UserManager::groups() const { return m_groups; }

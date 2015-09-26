@@ -287,7 +287,7 @@ void Core::saveUsersAndGroups()
 
 void Core::toggleUserFavorite( VNumber user_id )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Invalid user id" << user_id << "found in toggle favorite function";

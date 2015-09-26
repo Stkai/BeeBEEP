@@ -74,7 +74,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
       return false;
   }
 
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Unable to find user" << user_id << "to download file" << fi.name();
@@ -125,7 +125,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
 
 void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const FileInfo& fi, const QString& msg )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
@@ -189,7 +189,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
 void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
@@ -215,7 +215,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
       return false;
   }
 
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
     qWarning() << "Unable to find user" << user_id << "to send file" << file_path;
@@ -283,7 +283,7 @@ void Core::cancelFileTransfer( VNumber peer_id )
 
 void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
 
   if( !u.isValid() )
   {
@@ -313,7 +313,7 @@ void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
 
 void Core::refuseToDownloadFolder( VNumber user_id, const QString& folder_name )
 {
-  User u = UserManager::instance().userList().find( user_id );
+  User u = UserManager::instance().findUser( user_id );
 
   if( !u.isValid() )
   {
@@ -550,7 +550,7 @@ void Core::addFolderToFileTransfer()
     return;
   }
 
-  User u = UserManager::instance().userList().find( bfsl->userId() );
+  User u = UserManager::instance().findUser( bfsl->userId() );
   QString sys_header = tr( "%1 Unable to send folder %2" ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*F*" ) )
                                                           .arg( folder_name ) + QString( ": " );
 

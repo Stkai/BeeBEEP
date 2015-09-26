@@ -1141,4 +1141,3 @@ QString Settings::simpleDecrypt( const QString& text_to_decrypt )
 
   return text_decrypted;
 }
-
