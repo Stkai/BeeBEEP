@@ -94,6 +94,10 @@ void Settings::setChatFont( const QFont& new_value )
   QFontMetrics fm( m_chatFont );
   m_emoticonSizeInChat = qMax( 24, qMin( 32, fm.height() ) );
   m_emoticonSizeInEdit = qMax( 16, qMin( 32, fm.height() ) );
+  if( m_emoticonSizeInChat % 2 )
+    m_emoticonSizeInChat++;
+  if( m_emoticonSizeInEdit % 2 )
+    m_emoticonSizeInEdit++;
 }
 
 QString Settings::accountNameFromSystemEnvinroment() const
@@ -600,8 +604,8 @@ void Settings::load()
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
-  m_emoticonSizeInEdit = sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt();
-  m_emoticonSizeInChat = sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt();
+  m_emoticonSizeInEdit = qMax( m_emoticonSizeInEdit, (int)sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
+  m_emoticonSizeInChat = qMax( m_emoticonSizeInChat, (int)sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
   m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
   m_emoticonInRecentMenu = sets->value( "EmoticonInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
