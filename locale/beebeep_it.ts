@@ -494,6 +494,14 @@
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 ti sta inviando la cartella: %3.</translation>
     </message>
+    <message>
+        <source>is removed from favorites</source>
+        <translation>non è più tra i preferiti</translation>
+    </message>
+    <message>
+        <source>is added to favorites</source>
+        <translation>è ora tra i preferiti</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -947,6 +955,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Show members</source>
         <translation>Mostra membri</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation>Cambia il colore di sfondo</translation>
+    </message>
+    <message>
+        <source>Select your favourite background color for the chat window</source>
+        <translation>Seleziona il tuo colore di sfonto preferito per la conversazione</translation>
     </message>
 </context>
 <context>
@@ -3908,6 +3924,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>unknown</source>
         <translation>sconosciuto</translation>
+    </message>
+    <message>
+        <source>Remove from favorites</source>
+        <translation>Rimuovi dai preferiti</translation>
+    </message>
+    <message>
+        <source>Add to favorites</source>
+        <translation>Aggiungi ai preferiti</translation>
     </message>
 </context>
 <context>
