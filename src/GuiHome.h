@@ -44,7 +44,6 @@ signals:
 
 protected slots:
   void openDefaultChat();
-  void toggleShowHomeAtStartUp( bool );
   void checkAnchorClicked( const QUrl& );
   void customContextMenu( const QPoint& );
 

@@ -124,6 +124,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
   connect( mp_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
   connect( mp_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
+  connect( mp_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -681,14 +682,20 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
 
-#ifdef Q_OS_WIN
   mp_menuSettings->addSeparator();
+#ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled you can automatically load %1 at system startup" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().hasStartOnSystemBoot() );
   act->setData( 16 );
 #endif
+
+  act = mp_menuSettings->addAction( tr( "Show activities home page at startup" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the activities home page instead of chat page will be showed at startup" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showHomeAsDefaultPage() );
+  act->setData( 34 );
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
@@ -768,6 +775,10 @@ void GuiMain::createMenus()
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareNetwork->setStatusTip( tr( "Show the list of the network shared files" ) );
+  mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
+  mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
+  mp_actViewScreenShot = mp_menuView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
+  mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
 
   /* Plugins Menu */
   mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
@@ -852,12 +863,13 @@ void GuiMain::createToolAndMenuBars()
   QLabel *label_version = new QLabel( this );
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignCenter );
-  QString label_version_text = QString( "&nbsp;<b>v %2</b>&nbsp;" )
+  QString label_version_text = QString( "&nbsp;<b>v %2</b> %3&nbsp;" )
 #ifdef BEEBEEP_DEBUG
-                            .arg( Settings::instance().version( true ) );
+                            .arg( Settings::instance().version( true ) )
 #else
-                            .arg( Settings::instance().version( false ) );
+                            .arg( Settings::instance().version( false ) )
 #endif
+                            .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
   label_version->setText( label_version_text );
   menuBar()->setCornerWidget( label_version );
 
@@ -874,6 +886,8 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
+  mp_barMain->addAction( mp_actViewLog );
+  mp_barMain->addAction( mp_actViewScreenShot );
 
 }
 
@@ -1281,6 +1295,9 @@ void GuiMain::settingsChanged()
   case 33:
     Settings::instance().setShowImagePreview( act->isChecked() );
     break;
+  case 34:
+    Settings::instance().setShowHomeAsDefaultPage( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1353,9 +1370,9 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   bool show_alert = false;
 
   if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() )
-    mp_home->addSystemMessage( cm );
+      mp_home->addSystemMessage( cm );
 
-  if( !cm.isFromSystem() && !cm.isFromLocalUser() )
+   if( !cm.isFromSystem() && !cm.isFromLocalUser() )
     show_alert = showAlert( chat_id );
 
   if( chat_id == mp_chat->chatId() && mp_chat == mp_stackedWidget->currentWidget() )
@@ -1892,21 +1909,6 @@ void GuiMain::updadePluginMenu()
   if( PluginManager::instance().count() <= 0 )
   {
     mp_barPlugins->addAction( act );
-    mp_barPlugins->addSeparator();
-  }
-
-  /* Static Plugins */
-  mp_menuPlugins->addSeparator();
-  mp_actViewLog = mp_menuPlugins->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
-  mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
-  mp_barPlugins->addAction( mp_actViewLog );
-  mp_actViewScreenShot = mp_menuPlugins->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
-  mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
-  mp_barPlugins->addAction( mp_actViewScreenShot );
-
-  if( PluginManager::instance().count() <= 0 )
-  {
-    // mp_actViewLog and mp_actViewScreenshot must be created
     return;
   }
 
@@ -1932,7 +1934,7 @@ void GuiMain::updadePluginMenu()
   if( PluginManager::instance().games().size() > 0 )
   {
     mp_menuPlugins->addSeparator();
-    mp_barPlugins->addSeparator();
+
     QMenu* game_menu;
     int game_widget_id;
 
@@ -2320,13 +2322,17 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 {
   if( add_service )
   {
-    Settings::instance().addStartOnSystemBoot();
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Now %1 will start on windows boot." ).arg( Settings::instance().programName() ) );
+    if( Settings::instance().addStartOnSystemBoot() )
+      QMessageBox::information( this, Settings::instance().programName(), tr( "Now %1 will start on windows boot." ).arg( Settings::instance().programName() ) );
+    else
+      QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to add this key in the registry: permission denied." ) );
   }
   else
   {
-    Settings::instance().removeStartOnSystemBoot();
-    QMessageBox::information( this, Settings::instance().programName(), tr( "%1 will not start on windows boot." ).arg( Settings::instance().programName() ) );
+    if( Settings::instance().removeStartOnSystemBoot() )
+      QMessageBox::information( this, Settings::instance().programName(), tr( "%1 will not start on windows boot." ).arg( Settings::instance().programName() ) );
+    else
+      QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to add this key in the registry: permission denied." ) );
   }
 }
 
@@ -2550,12 +2556,20 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
                               tr( "Delete this group" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
         return;
 
-    mp_core->removeGroup( g.id() );
+    if( mp_core->removeGroup( g.id() ) )
+    {
+      raiseHomeView();
+      mp_chat->setChatId( ID_DEFAULT_CHAT );
+      mp_groupList->loadGroups();
+      mp_chatList->reloadChatList();
+      mp_savedChatList->updateSavedChats();
+    }
+    return;
   }
 
   if( mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
   {
-    mp_chat->updateUser( Settings::instance().localUser() );
+    mp_chat->reloadChatUsers();
     mp_chatList->reloadChatList();
     checkViewActions();
   }
@@ -2572,7 +2586,14 @@ void GuiMain::removeGroup( VNumber group_id )
                                tr( "Do you really want to delete group '%1'?" ).arg( g.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
-      mp_core->removeGroup( group_id );
+      if( mp_core->removeGroup( group_id ) )
+      {
+        raiseHomeView();
+        mp_chat->setChatId( ID_DEFAULT_CHAT );
+        mp_groupList->loadGroups();
+        mp_chatList->reloadChatList();
+        mp_savedChatList->updateSavedChats();
+      }
     }
   }
 }
@@ -2820,4 +2841,9 @@ void GuiMain::toggleUserFavorite( VNumber user_id )
 {
   mp_core->toggleUserFavorite( user_id );
   mp_userList->updateUsers( mp_core->isConnected() );
+}
+
+void GuiMain::createGroupFromChat( VNumber chat_id )
+{
+  mp_core->createGroupFromChat( chat_id );
 }

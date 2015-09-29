@@ -55,9 +55,10 @@ public:
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
   bool setLocalUserVCard( const QString&, const VCard& );
-  void createGroup( const QString&, const QList<VNumber>& );
+  bool createGroup( const QString&, const QList<VNumber>&, const QString& group_private_id = "" );
+  bool createGroupFromChat( VNumber );
   void changeGroup( VNumber, const QString&, const QList<VNumber>& );
-  void removeGroup( VNumber );
+  bool removeGroup( VNumber );
   void toggleUserFavorite( VNumber );
 
   void loadUsersAndGroups();

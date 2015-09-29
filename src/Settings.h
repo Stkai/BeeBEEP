@@ -38,6 +38,7 @@ public:
 
   QString currentSettingsFilePath() const;
   QString operatingSystem( bool use_long_name ) const;
+  QString operatingSystemIconPath() const;
   QString accountNameFromSystemEnvinroment() const;
   void createLocalUser();
   void createSessionId();
@@ -271,8 +272,8 @@ public:
   void addTemporaryFilePath( const QString& );
   void clearTemporaryFile();
 
-  void addStartOnSystemBoot();
-  void removeStartOnSystemBoot();
+  bool addStartOnSystemBoot();
+  bool removeStartOnSystemBoot();
   bool hasStartOnSystemBoot() const;
 
   inline void setGroupList( const QStringList& );

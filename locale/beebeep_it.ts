@@ -502,6 +502,14 @@
         <source>is added to favorites</source>
         <translation>è ora tra i preferiti</translation>
     </message>
+    <message>
+        <source>%1 You have created group from chat: %2.</source>
+        <translation>%1 Hai creato il gruppo dalla conversazione: %2.</translation>
+    </message>
+    <message>
+        <source>%1 You have deleted group: %2.</source>
+        <translation>%1 Hai cancellato il gruppo: %2.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -964,6 +972,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Select your favourite background color for the chat window</source>
         <translation>Seleziona il tuo colore di sfonto preferito per la conversazione</translation>
     </message>
+    <message>
+        <source>Create group from chat</source>
+        <translation>Crea il gruppo dalla conversazione</translation>
+    </message>
+    <message>
+        <source>Create a group from this chat</source>
+        <translation>Crea un gruppo da questa conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1258,7 +1274,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show this page at startup</source>
-        <translation>Mostra questa pagina alla partenza</translation>
+        <translation type="vanished">Mostra questa pagina alla partenza</translation>
     </message>
     <message>
         <source>chat with all users</source>
@@ -2917,6 +2933,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>Please select the new size of the user picture</source>
         <translation>Seleziona la nuova dimensione della foto degli utenti</translation>
+    </message>
+    <message>
+        <source>Show activities home page at startup</source>
+        <translation>Mostra la pagina delle attività all&apos;avvio</translation>
+    </message>
+    <message>
+        <source>If enabled the activities home page instead of chat page will be showed at startup</source>
+        <translation>Se abilitata la pagina delle attività sarà mostrata all&apos;avvio invece di quella di conversazione</translation>
+    </message>
+    <message>
+        <source>Unable to add this key in the registry: permission denied.</source>
+        <translation>Impossibile aggiungere questa chiave nel registro: permesso negato.</translation>
     </message>
 </context>
 <context>

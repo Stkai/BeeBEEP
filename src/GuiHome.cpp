@@ -45,10 +45,7 @@ GuiHome::GuiHome( QWidget* parent )
   mp_lNote->setWordWrap( true );
   mp_lNote->setText( QString( "<b>%1...</b>" ).arg( tr( "Select a user you want to chat with or" ) ) );
 
-  mp_cbShowHomeAtStartup->setChecked( Settings::instance().showHomeAsDefaultPage() );
-
   connect( mp_pbOpenDefaultChat, SIGNAL( clicked() ), this, SLOT( openDefaultChat() ) );
-  connect( mp_cbShowHomeAtStartup, SIGNAL( toggled( bool ) ), this, SLOT( toggleShowHomeAtStartUp( bool ) ) );
   connect( mp_teSystem, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teSystem, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
 }
@@ -74,11 +71,6 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
 void GuiHome::openDefaultChat()
 {
   emit openDefaultChatRequest();
-}
-
-void GuiHome::toggleShowHomeAtStartUp( bool checked )
-{
-  Settings::instance().setShowHomeAsDefaultPage( checked );
 }
 
 void GuiHome::checkAnchorClicked( const QUrl& url )

@@ -124,5 +124,10 @@
         <file>images/delete.png</file>
         <file>images/background-color.png</file>
         <file>images/star-bn.png</file>
+        <file>images/macosx.png</file>
+        <file>images/os2.png</file>
+        <file>images/linux.png</file>
+        <file>images/windows.png</file>
+        <file>images/group-wizard.png</file>
     </qresource>
 </RCC>

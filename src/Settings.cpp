@@ -63,7 +63,7 @@ Settings::Settings()
   setChatFont( f );
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 30;
-  m_confirmOnDownloadFile = true;
+  m_confirmOnDownloadFile = false;
   m_saveUserList = false;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
@@ -175,11 +175,13 @@ bool Settings::createDefaultRcFile()
 void Settings::loadRcFile()
 {
   QFileInfo rc_file_info( defaultRcFilePath( true ) );
-  qDebug() << "Check for RC file in current path:" << rc_file_info.absoluteFilePath();
+  QString rc_file_path = Bee::convertToNativeFolderSeparator( rc_file_info.absoluteFilePath() );
+  qDebug() << "Check for RC file in current path:" << rc_file_path;
   if( !rc_file_info.exists() || !rc_file_info.isReadable() )
   {
     rc_file_info = QFileInfo( defaultRcFilePath( false ) );
-    qDebug() << "Check for RC file in custom path:" << rc_file_info.absoluteFilePath();
+    rc_file_path = Bee::convertToNativeFolderSeparator( rc_file_info.absoluteFilePath() );
+    qDebug() << "Check for RC file in custom path:" << rc_file_path;
 
     if( !rc_file_info.exists() || !rc_file_info.isReadable() )
     {
@@ -188,7 +190,7 @@ void Settings::loadRcFile()
     }
   }
 
-  QSettings* sets = new QSettings( rc_file_info.absoluteFilePath(), QSettings::IniFormat );
+  QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
   sets->beginGroup( "BeeBEEP" );
   m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni ).toBool();
@@ -310,7 +312,7 @@ QString Settings::languageWebSite() const
   return officialWebSite() + QString( BEEBEEP_LANGUAGE_WEBSITE );
 }
 
-QString Settings::operatingSystem( bool use_long_name ) const
+QString Settings::operatingSystem( bool use_long_name  ) const
 {
   QString os_name_long = "Unknown OS";
   QString os_name_short = "unknown";
@@ -330,7 +332,27 @@ QString Settings::operatingSystem( bool use_long_name ) const
   os_name_long = "OS/2";
   os_name_short = "OS2";
 #endif
+
   return use_long_name ? os_name_long : os_name_short;
+}
+
+QString Settings::operatingSystemIconPath() const
+{
+  QString os_icon_path = "Unknown OS";
+
+#ifdef Q_OS_WIN
+  os_icon_path = ":/images/windows.png";
+#endif
+#ifdef Q_OS_LINUX
+  os_icon_path = ":/images/linux.png";
+#endif
+#ifdef Q_OS_MAC
+  os_icon_path = ":/images/macosx.png";
+#endif
+#ifdef Q_OS_OS2
+  os_icon_path = ":/images/os2.png";
+#endif
+  return os_icon_path;
 }
 
 QString Settings::checkVersionWebSite() const
@@ -935,23 +957,35 @@ void Settings::setNotificationEnabledForGroup( const QString& group_id, bool ena
   }
 }
 
-void Settings::addStartOnSystemBoot()
+bool Settings::addStartOnSystemBoot()
 {
 #ifdef Q_OS_WIN
-  QString program_path = qApp->applicationFilePath().replace( "/", "\\" );
+  QString program_path = Bee::convertToNativeFolderSeparator( qApp->applicationFilePath() );
   QSettings sets( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
-  sets.setValue( programName(), program_path );
-  sets.sync();
+  if( sets.isWritable() )
+  {
+    sets.setValue( programName(), program_path );
+    sets.sync();
+    return true;
+  }
+  qWarning() << "Unable to add auto start in registry key:" << sets.fileName();
 #endif
+  return false;
 }
 
-void Settings::removeStartOnSystemBoot()
+bool Settings::removeStartOnSystemBoot()
 {
 #ifdef Q_OS_WIN
   QSettings sets( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
-  sets.remove( programName() );
-  sets.sync();
+  if( sets.isWritable() )
+  {
+    sets.remove( programName() );
+    sets.sync();
+    return true;
+  }
+  qWarning() << "Unable to remove auto start from registry key:" << sets.fileName();
 #endif
+  return false;
 }
 
 bool Settings::hasStartOnSystemBoot() const
@@ -974,7 +1008,7 @@ void Settings::clearNativeSettings()
 
 void Settings::setResourceFolder()
 {
-  m_resourceFolder = QApplication::applicationDirPath();
+  m_resourceFolder = Bee::convertToNativeFolderSeparator( QApplication::applicationDirPath() );
 
 #ifdef Q_OS_MAC
   QDir macos_dir( m_resourceFolder );
@@ -988,7 +1022,7 @@ void Settings::setResourceFolder()
 
 bool Settings::setDataFolder()
 {
-  m_dataFolder = m_resourceFolder;
+  m_dataFolder = Bee::convertToNativeFolderSeparator( m_resourceFolder );
 
   QFileInfo data_file_info( m_dataFolder );
 

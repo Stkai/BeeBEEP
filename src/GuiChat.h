@@ -26,6 +26,7 @@
 
 #include "ui_GuiChat.h"
 #include "UserList.h"
+class Chat;
 class ChatMessage;
 class Emoticon;
 
@@ -61,6 +62,7 @@ signals:
   void sendFileFromChatRequest( VNumber, const QString& );
   void createGroupRequest();
   void createGroupChatRequest();
+  void createGroupFromChatRequest( VNumber );
   void editGroupRequest();
   void chatToClear( VNumber );
   void leaveThisChat( VNumber );
@@ -81,6 +83,7 @@ protected:
   void setChatBackgroundColor( const QString& );
   User findUser( VNumber );
   bool isActiveUser( const User& ) const;
+  bool isActiveUser( const Chat&, const User& ) const;
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
 
@@ -101,6 +104,7 @@ private slots:
   void showUserVCard();
   void showMembersMenu();
   void showLocalUserVCard();
+  void showGroupWizard();
 
 private:
   VNumber m_chatId;
@@ -116,6 +120,7 @@ private:
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
   QAction* mp_actSelectBackgroundColor;
+  QAction* mp_actGroupWizard;
 
   QMenu *mp_menuMembers;
   QSplitter* mp_splitter;

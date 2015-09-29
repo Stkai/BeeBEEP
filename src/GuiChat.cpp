@@ -122,6 +122,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
   bar->addSeparator();
 
+  mp_actGroupWizard = bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
+  mp_actGroupWizard->setStatusTip( tr( "Create a group from this chat" ) );
   mp_actCreateGroup = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this, SIGNAL( createGroupRequest() ) );
   mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
@@ -280,6 +282,11 @@ void GuiChat::updateUser( const User& u )
 bool GuiChat::isActiveUser( const User& u ) const
 {
   Chat c = ChatManager::instance().chat( m_chatId );
+  return isActiveUser( c, u );
+}
+
+bool GuiChat::isActiveUser( const Chat& c, const User& u ) const
+{
   return c.isValid() && c.usersId().contains( u.id() );
 }
 
@@ -289,7 +296,9 @@ void GuiChat::setChatUsers()
   mp_pbProfile->disconnect();
   mp_pbProfile->setToolTip( QString( "" ) );
 
-  if( m_chatId == ID_DEFAULT_CHAT )
+  Chat c = ChatManager::instance().chat( m_chatId );
+
+  if( c.isDefault() )
   {
     mp_pbProfile->setIcon( QIcon( ":images/default-chat-online.png" ) );
     chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
@@ -303,12 +312,13 @@ void GuiChat::setChatUsers()
     QAction* act = 0;
     QStringList sl;
     m_chatUsers.sort();
+
     foreach( User u, m_chatUsers.toList() )
     {
       act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), u.isLocal() ? tr( "You" ) : u.name() );
       act->setData( u.id() );
       act->setIconVisibleInMenu( true );
-      if( u.isConnected() && isActiveUser( u ) )
+      if( u.isConnected() && isActiveUser( c, u ) )
       {
         act->setEnabled( true  );
         connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
@@ -318,7 +328,7 @@ void GuiChat::setChatUsers()
 
       if( u.isLocal() )
       {
-        if( !isActiveUser( u ) )
+        if( !isActiveUser( c, u ) )
           sl.append( tr( "(You have left)" ).toLower() );
         else if( u.isConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( tr( "You" ) ).toLower() );
@@ -327,7 +337,7 @@ void GuiChat::setChatUsers()
       }
       else
       {
-        if( !isActiveUser( u ) )
+        if( !isActiveUser( c, u ) )
           sl.append( QString( "(%1 has left)" ).arg( u.name() ) );
         else if( u.isConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
@@ -344,7 +354,7 @@ void GuiChat::setChatUsers()
       }
     }
 
-    if( sl.size() > 2 )
+    if( c.isGroup() )
     {
       chat_users = QString( "<b>%1</b>" ).arg( m_chatName );
       mp_pbProfile->setIcon( QIcon( ":/images/group.png" ) );
@@ -354,7 +364,7 @@ void GuiChat::setChatUsers()
     }
     else
     {
-      chat_users = sl.size() == 0 ? tr( "Nobody" ) : (sl.size() == 2 ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ) );
+      chat_users = sl.size() == 0 ? tr( "Nobody" ) : (c.isPrivate() ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ) );
     }
   }
 
@@ -362,10 +372,8 @@ void GuiChat::setChatUsers()
   qDebug() << "Chat members:" << m_chatUsers.toStringList( false, false ).join( ", " );
 #endif
 
-  //QString text_to_write = tr( "To" ) + QString( ": %1" ).arg( chat_users );
-  //mp_lTitle->setText( text_to_write  );
   mp_lTitle->setText( chat_users );
-  mp_teMessage->setEnabled( isActiveUser( Settings::instance().localUser() ) );
+  mp_teMessage->setEnabled( isActiveUser( c, Settings::instance().localUser() ) );
 }
 
 void GuiChat::reloadChatUsers()
@@ -406,6 +414,7 @@ bool GuiChat::setChatId( VNumber chat_id )
   m_chatId = c.id();
   m_chatName = c.name();
   m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
+  mp_actGroupWizard->setEnabled( c.isGroup() && !UserManager::instance().hasGroupName( c.name() ) );
   bool chat_has_history = ChatManager::instance().chatHasSavedText( c.name() );
   bool chat_is_empty = c.isEmpty() && !chat_has_history;
   QString html_text = "";
@@ -705,4 +714,10 @@ void GuiChat::showMembersMenu()
 void GuiChat::showLocalUserVCard()
 {
   emit showVCardRequest( ID_LOCAL_USER, false );
+}
+
+void GuiChat::showGroupWizard()
+{
+  mp_actGroupWizard->setEnabled( false );
+  emit createGroupFromChatRequest( m_chatId );
 }

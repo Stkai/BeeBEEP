@@ -182,10 +182,42 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   return true;
 }
 
-void Core::createGroup( const QString& group_name, const QList<VNumber>& group_members )
+bool Core::createGroup( const QString& group_name, const QList<VNumber>& group_members, const QString& group_private_id )
 {
-  Group g = Protocol::instance().createGroup( group_name, group_members );
+  if( UserManager::instance().hasGroupName( group_name ) )
+  {
+    qWarning() << "Unable to create group" << group_name << ": it already exists";
+    return false;
+  }
+
+  Group g = Protocol::instance().createGroup( group_name, group_private_id, group_members );
   addGroup( g );
+  return true;
+}
+
+bool Core::createGroupFromChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat found" << chat_id << "in create group from chat";
+    return false;
+  }
+
+  if( !c.isGroup() )
+  {
+    qWarning() << "Chat" << c.id() << c.name() << "is private and can not become a group chat";
+    return false;
+  }
+
+  if( createGroup( c.name(), c.usersId(), c.privateId() ) )
+  {
+    QString sHtmlMsg = tr( "%1 You have created group from chat: %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), c.name() );
+    dispatchSystemMessage( c.id(), ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
+    return true;
+  }
+  else
+    return false;
 }
 
 void Core::addGroup( const Group& g )
@@ -216,12 +248,27 @@ void Core::changeGroup( VNumber group_id, const QString& group_name, const QList
   changeGroupChat( c.id(), group_name, group_members, true );
 }
 
-void Core::removeGroup( VNumber group_id )
+bool Core::removeGroup( VNumber group_id )
 {
+  Group g = UserManager::instance().group( group_id );
+  if( !g.isValid() )
+  {
+    qWarning() << "Invalid group id" << group_id << "found in remove group";
+    return false;
+  }
+
+  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  if( c.isValid() )
+    removeChat( c.id() );
+
   if( UserManager::instance().removeGroup( group_id ) )
   {
-    emit updateGroup( group_id );
+    QString sHtmlMsg = tr( "%1 You have deleted group: %2." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), g.name() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::Other );
+    return true;
   }
+  else
+    return false;
 }
 
 void Core::loadUsersAndGroups()

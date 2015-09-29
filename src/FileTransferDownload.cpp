@@ -93,5 +93,6 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 
   if( m_totalBytesTransferred == m_fileInfo.size() )
     setTransferCompleted();
+
 }
 

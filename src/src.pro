@@ -88,6 +88,7 @@ HEADERS += AudioManager.h \
   GuiWizard.h \
   HistoryManager.h \
   HistoryMessage.h \
+  HttpDownloader.h \
   Interfaces.h \
   Listener.h \
   Log.h \
@@ -109,8 +110,7 @@ HEADERS += AudioManager.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-  Job.h \
-    HttpDownloader.h
+  Job.h
 
 
 SOURCES += AudioManager.cpp \
@@ -177,6 +177,7 @@ SOURCES += AudioManager.cpp \
   GuiUserList.cpp \
   GuiVCard.cpp \
   GuiWizard.cpp \
+  HttpDownloader.cpp \
   HistoryManager.cpp \
   HistoryMessage.cpp \
   Listener.cpp \
@@ -196,8 +197,7 @@ SOURCES += AudioManager.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp \
-    HttpDownloader.cpp
+  VCard.cpp 
 
 
 FORMS += GuiAddUser.ui \

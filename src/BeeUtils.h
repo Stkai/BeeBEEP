@@ -36,7 +36,7 @@ namespace Bee
   QString userStatusIconFileName( int );
   QString menuUserStatusIconFileName( int );
   QString userStatusToString( int );
-  inline QString iconToHtml( const QString& icon_path, const QString& icon_alt );
+  inline QString iconToHtml( const QString& icon_path, const QString& icon_alt, int icon_width = 0, int icon_height = 0 );
   inline VNumber qVariantToVNumber( const QVariant& );
   QString bytesToString( FileSizeType, int precision = -1 );
   QString elapsedTimeToString( int msec );
@@ -68,7 +68,7 @@ namespace Bee
 
 // Inline Functions
 inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
-inline QString Bee::iconToHtml( const QString& icon_path, const QString& icon_alt ) { return QString( "<img src='%1' width=16 height=16 border=0 alt=' %2 ' />" ).arg( icon_path ).arg( icon_alt ); }
+inline QString Bee::iconToHtml( const QString& icon_path, const QString& icon_alt, int icon_width, int icon_height ) { return QString( "<img src='%1' width=%2 height=%3 border=0 alt=' %4 ' />" ).arg( icon_path ).arg( icon_width > 0 ? icon_width : 16 ).arg( icon_height > 0 ? icon_height : 16 ).arg( icon_alt ); }
 inline VNumber Bee::qVariantToVNumber( const QVariant& v ) { return v.toULongLong(); }
 inline int Bee::toLittleEndianFromBig( int big_endian_int ) { return (int) (0 | ((big_endian_int & 0x00ff) << 8) | ((big_endian_int & 0xff00) >> 8)); }
 

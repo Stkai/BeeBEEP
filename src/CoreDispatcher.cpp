@@ -147,7 +147,7 @@ void Core::dispatchToChat( const ChatMessage& cm, VNumber chat_id )
     if( (*it).id() == chat_id )
     {
       (*it).addMessage( cm );
-      emit chatMessage( (*it).id(), cm );
+      emit chatMessage( chat_id, cm );
       return;
     }
     ++it;

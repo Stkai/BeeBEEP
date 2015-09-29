@@ -569,13 +569,16 @@ Chat Protocol::createChat( const QList<VNumber>& user_list )
   return c;
 }
 
-Group Protocol::createGroup( const QString& group_name, const QList<VNumber>& user_list )
+Group Protocol::createGroup( const QString& group_name, const QString& group_private_id, const QList<VNumber>& user_list )
 {
   Group g;
   g.setId( newId() );
   g.setName( group_name );
   g.setUsers( user_list );
-  g.setPrivateId( newMd5Id() );
+  if( group_private_id.isEmpty() )
+    g.setPrivateId( newMd5Id() );
+  else
+    g.setPrivateId( group_private_id );
   return g;
 }
 
