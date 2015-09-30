@@ -828,15 +828,15 @@
     </message>
     <message>
         <source>Create group chat</source>
-        <translation>Crea una conversazione di gruppo</translation>
+        <translation type="vanished">Crea una conversazione di gruppo</translation>
     </message>
     <message>
         <source>Create a group chat with two or more users</source>
-        <translation>Crea una conversazione con due o più persone</translation>
+        <translation type="vanished">Crea una conversazione con due o più persone</translation>
     </message>
     <message>
         <source>Edit group chat</source>
-        <translation>Modifica il gruppo</translation>
+        <translation type="vanished">Modifica il gruppo</translation>
     </message>
     <message>
         <source>Change the name of the group or add and remove users</source>
@@ -979,6 +979,18 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Create a group from this chat</source>
         <translation>Crea un gruppo da questa conversazione</translation>
+    </message>
+    <message>
+        <source>Create chat</source>
+        <translation>Crea una conversazione</translation>
+    </message>
+    <message>
+        <source>Create a chat with two or more users</source>
+        <translation>Crea una conversazione con due o più utenti</translation>
+    </message>
+    <message>
+        <source>Edit group</source>
+        <translation>Modifica gruppo</translation>
     </message>
 </context>
 <context>
@@ -2945,6 +2957,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Impossibile aggiungere questa chiave nel registro: permesso negato.</translation>
+    </message>
+    <message>
+        <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
+        <translation>Non tutti i membri di questa conversazione sono connessi. I cambiamenti potrebbero non essere permanenti. Vuoi continuare?</translation>
     </message>
 </context>
 <context>

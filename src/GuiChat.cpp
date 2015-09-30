@@ -112,20 +112,18 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
-  bar->addSeparator();
-
-  mp_actCreateGroupChat = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create group chat" ), this, SIGNAL( createGroupChatRequest() ) );
-  mp_actCreateGroupChat->setStatusTip( tr( "Create a group chat with two or more users" ) );
-  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group chat" ), this, SIGNAL( editGroupRequest() ) );
-  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
   mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
   bar->addSeparator();
 
+  mp_actCreateGroupChat = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createChatRequest() ) );
+  mp_actCreateGroupChat->setStatusTip( tr( "Create a chat with two or more users" ) );
   mp_actGroupWizard = bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
   mp_actGroupWizard->setStatusTip( tr( "Create a group from this chat" ) );
   mp_actCreateGroup = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this, SIGNAL( createGroupRequest() ) );
   mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
+  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SIGNAL( editGroupRequest() ) );
+  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
 }
@@ -133,11 +131,13 @@ void GuiChat::setupToolBar( QToolBar* bar )
 void GuiChat::updateAction( bool is_connected, int connected_users )
 {
   bool local_user_is_member = isActiveUser( Settings::instance().localUser() );
+  bool is_group_chat = ChatManager::instance().isGroupChat( m_chatId );
+  int user_in_list = UserManager::instance().userList().toList().size();
   mp_actSendFile->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
-  mp_actCreateGroup->setEnabled( is_connected && connected_users > 1 );
-  mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
-  mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
-  mp_actLeave->setEnabled( local_user_is_member && is_connected && ChatManager::instance().isGroupChat( m_chatId ) );
+  mp_actCreateGroup->setEnabled( is_connected && user_in_list > 1 );
+  mp_actCreateGroupChat->setEnabled( is_connected && user_in_list > 1 );
+  mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
+  mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_teMessage->setEnabled( is_connected );
   mp_pbSend->setEnabled( is_connected );
 }

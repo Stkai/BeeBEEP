@@ -361,3 +361,18 @@ void Core::toggleUserFavorite( VNumber user_id )
   QString sHtmlMsg = QString( "%1 %2 %3." ).arg( favorite_icon, u.name(), favorite_txt );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );
 }
+
+bool Core::areUsersConnected( const QList<VNumber>& users_id )
+{
+  Connection* c;
+  foreach( VNumber user_id, users_id )
+  {
+    if( user_id != ID_LOCAL_USER )
+    {
+      c = connection( user_id );
+      if( !c )
+        return false;
+    }
+  }
+  return true;
+}

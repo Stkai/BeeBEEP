@@ -115,7 +115,7 @@ private slots:
   void testBeepFile();
   void playBeep();
   void addUserToGroupChat();
-  void createGroupChat();
+  void createChat();
   void createGroup();
   void editGroup( VNumber );
   void showSavedChatSelected( const QString& );
@@ -156,6 +156,7 @@ protected:
   void raiseOnTop();
   void checkChatToolbar();
   void raiseView( QWidget*, VNumber, const QString& );
+  bool checkAllChatMembersAreConnected( const QList<VNumber>& );
 
 private:
   void createActions();

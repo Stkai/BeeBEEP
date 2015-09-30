@@ -52,6 +52,7 @@ public:
 
   /* CoreUser */
   inline int connectedUsers() const;
+  bool areUsersConnected( const QList<VNumber>& );
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
   bool setLocalUserVCard( const QString&, const VCard& );

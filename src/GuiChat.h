@@ -61,7 +61,7 @@ signals:
   void openUrl( const QUrl& );
   void sendFileFromChatRequest( VNumber, const QString& );
   void createGroupRequest();
-  void createGroupChatRequest();
+  void createChatRequest();
   void createGroupFromChatRequest( VNumber );
   void editGroupRequest();
   void chatToClear( VNumber );

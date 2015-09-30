@@ -117,7 +117,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( mp_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
-  connect( mp_chat, SIGNAL( createGroupChatRequest() ), this, SLOT( createGroupChat() ) );
+  connect( mp_chat, SIGNAL( createChatRequest() ), this, SLOT( createChat() ) );
   connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
   connect( mp_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
@@ -2245,7 +2245,7 @@ void GuiMain::editGroup( VNumber group_id )
   }
 }
 
-void GuiMain::createGroupChat()
+void GuiMain::createChat()
 {
   switch( QMessageBox::question( this, Settings::instance().programName(),
                  tr( "Group chat will be deleted when all members goes offline." ) +
@@ -2540,12 +2540,27 @@ void GuiMain::checkChat( VNumber chat_id )
   }
 }
 
+bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
+{
+  if( !mp_core->areUsersConnected( users_id ) )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?" ),
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+       return false;
+  }
+  return true;
+}
+
 void GuiMain::leaveGroupChat( VNumber chat_id )
 {
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return;
   if( !c.hasUser( ID_LOCAL_USER ) )
+    return;
+
+  if( !checkAllChatMembersAreConnected( c.usersId() ) )
     return;
 
   Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
@@ -2582,6 +2597,9 @@ void GuiMain::removeGroup( VNumber group_id )
   Group g = UserManager::instance().group( group_id );
   if( g.isValid() )
   {
+    if( !checkAllChatMembersAreConnected( g.usersId() ) )
+      return;
+
     if( QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you really want to delete group '%1'?" ).arg( g.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
