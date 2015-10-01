@@ -81,7 +81,7 @@ private:
 
 // Inline Function
 inline User UserManager::findUser( VNumber user_id ) const { return m_users.find( user_id ); }
-inline bool UserManager::removeUser( const User& u ) { return m_users.remove( u ); }
+inline bool UserManager::removeUser( const User& u ) { return u.isLocal() ? false : m_users.remove( u ); }
 inline const UserList& UserManager::userList() const { return m_users; }
 inline const QList<Group>& UserManager::groups() const { return m_groups; }
 

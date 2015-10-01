@@ -118,7 +118,8 @@ void Connection::sendPong()
 
 void Connection::closeConnection()
 {
-  qDebug() << "Connection to" << peerAddress().toString() << peerPort() << "closed";
+  if( !peerAddress().isNull() )
+    qDebug() << "Connection to" << peerAddress().toString() << peerPort() << "closed";
   m_pingTimer.stop();
   abort();
 }

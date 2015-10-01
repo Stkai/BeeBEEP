@@ -423,6 +423,9 @@ void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 
 void Core::addListToLocalShare()
 {
+  if( m_shareListToBuild > 0 )
+    m_shareListToBuild--;
+
   BuildFileShareList *bfsl = qobject_cast<BuildFileShareList*>( sender() );
   if( !bfsl )
   {
@@ -431,8 +434,7 @@ void Core::addListToLocalShare()
     return;
   }
 
-  if( m_shareListToBuild > 0 )
-    m_shareListToBuild--;
+  FileShare::instance().addToLocal( bfsl->folderPath(), bfsl->shareList(), bfsl->shareSize() );
 
   QString share_status;
 
@@ -447,8 +449,6 @@ void Core::addListToLocalShare()
   emit updateStatus( share_status, 0 );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
-
-  FileShare::instance().addToLocal( bfsl->folderPath(), bfsl->shareList(), bfsl->shareSize() );
 
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->removeJob( bfsl );

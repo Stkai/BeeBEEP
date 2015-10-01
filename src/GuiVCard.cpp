@@ -42,6 +42,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
   connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeColor() ) );
   connect( mp_pbFavorite, SIGNAL( clicked() ), this, SLOT( favoriteClicked() ) );
+  connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removeUserClicked() ) );
 }
 
 void GuiVCard::setVCard( const User& u, VNumber chat_id )
@@ -120,6 +121,11 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
       mp_pbFavorite->hide();
   }
 
+  if( u.isConnected() )
+    mp_pbRemove->hide();
+  else
+    mp_pbRemove->show();
+
 #ifdef BEEBEEP_DEBUG
   qDebug() << "VCard shown for the user" << u.path();
 #endif
@@ -150,5 +156,12 @@ void GuiVCard::favoriteClicked()
 {
   hide();
   emit toggleFavorite( m_userId );
+  close();
+}
+
+void GuiVCard::removeUserClicked()
+{
+  hide();
+  emit removeUser( m_userId );
   close();
 }

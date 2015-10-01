@@ -81,8 +81,12 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
     qDebug() << name() << "receives corfirmation for" << m_bytesTransferred << "bytes";
 #endif
     m_totalBytesTransferred += m_bytesTransferred;
+
     showProgress();
-    if( m_totalBytesTransferred == m_fileInfo.size() )
+
+    if( m_totalBytesTransferred > m_fileInfo.size() )
+      setError( tr( "%1 bytes uploaded but the file size is only %2 bytes" ).arg( m_totalBytesTransferred ).arg( m_fileInfo.size() ) );
+    else if( m_totalBytesTransferred == m_fileInfo.size() )
       setTransferCompleted();
     else
       sendTransferData();

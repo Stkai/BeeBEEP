@@ -68,8 +68,8 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
   qDebug() << "GuiTransferFile setProgress::" << bytes << "of" << fi.size() << "bytes";
 #endif
   QHeaderView* hv = header();
-    if( hv->isHidden() )
-      hv->show();
+  if( hv->isHidden() )
+    hv->show();
 
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )

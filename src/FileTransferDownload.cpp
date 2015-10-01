@@ -91,8 +91,10 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     return;
   }
 
+  if( m_totalBytesTransferred > m_fileInfo.size() )
+    setError( tr( "%1 bytes downloaded but the file size is only %2 bytes" ).arg( m_totalBytesTransferred ).arg( m_fileInfo.size() ) );
+
   if( m_totalBytesTransferred == m_fileInfo.size() )
     setTransferCompleted();
-
 }
 

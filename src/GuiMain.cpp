@@ -1881,6 +1881,7 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
   connect( gvc, SIGNAL( toggleFavorite( VNumber ) ), this, SLOT( toggleUserFavorite( VNumber ) ) );
+  connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUserFromList( VNumber ) ) );
   gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id() );
 
   if( ensure_visible && dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
@@ -1894,6 +1895,7 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   {
     gvc->move( QCursor::pos() );
   }
+
   gvc->show();
   gvc->setFixedSize( gvc->size() );
 }
@@ -1911,6 +1913,9 @@ void GuiMain::updadePluginMenu()
     mp_barPlugins->addAction( act );
     return;
   }
+
+  if( PluginManager::instance().games().count() <= 0 )
+    mp_barPlugins->addAction( act );
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
@@ -2864,4 +2869,10 @@ void GuiMain::toggleUserFavorite( VNumber user_id )
 void GuiMain::createGroupFromChat( VNumber chat_id )
 {
   mp_core->createGroupFromChat( chat_id );
+}
+
+void GuiMain::removeUserFromList( VNumber user_id )
+{
+  if( mp_core->removeOfflineUser( user_id ) )
+    mp_userList->updateUsers( mp_core->isConnected() );
 }

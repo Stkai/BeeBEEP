@@ -80,8 +80,8 @@ void GuiShareLocal::setupToolBar( QToolBar* bar )
   mp_actAddFolder = bar->addAction( QIcon( ":/images/folder-add.png" ), tr( "Share a folder" ), this, SLOT( addFolderPath() ) );
   mp_actAddFolder->setStatusTip( tr( "Add a folder to your local share" ) );
 
-  mp_actUpdate = bar->addAction( QIcon( ":/images/update.png" ), tr( "Load shared files" ), this, SLOT( updateList() ) );
-  mp_actUpdate->setStatusTip( tr( "Remove shared files from the selected path" ) );
+  mp_actUpdate = bar->addAction( QIcon( ":/images/update.png" ), tr( "Update shares" ), this, SLOT( updateList() ) );
+  mp_actUpdate->setStatusTip( tr( "Update shared folders and files" ) );
 
   mp_actRemove = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
   mp_actRemove->setStatusTip( tr( "Remove shared path from the list" ) );
@@ -131,7 +131,7 @@ void GuiShareLocal::addFolderPath()
   if( folder_path.isEmpty() )
     return;
 
-  Settings::instance().setLastDirectorySelected( folder_path );
+  Settings::instance().setLastDirectorySelected( Bee::convertToNativeFolderSeparator( folder_path ) );
 
   addSharePath( folder_path );
 }
@@ -211,8 +211,9 @@ void GuiShareLocal::loadFileInfoInList()
   showStats( file_count, total_file_size );
 }
 
-void GuiShareLocal::addSharePath( const QString& share_path )
+void GuiShareLocal::addSharePath( const QString& sp )
 {
+  QString share_path = Bee::convertToNativeFolderSeparator( sp );
   if( Settings::instance().hasLocalSharePath( share_path ) )
   {
     QMessageBox::information( this, Settings::instance().programName(),
@@ -278,7 +279,7 @@ void GuiShareLocal::dropEvent( QDropEvent *event )
 #else
       if( url.scheme() == QLatin1String( "file" ) )
 #endif
-        addSharePath( Bee::convertToNativeFolderSeparator( url.toLocalFile() ) );
+        addSharePath( url.toLocalFile() );
     }
   }
 }

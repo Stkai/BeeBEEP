@@ -376,3 +376,30 @@ bool Core::areUsersConnected( const QList<VNumber>& users_id )
   }
   return true;
 }
+
+bool Core::removeOfflineUser( VNumber user_id )
+{
+  User u = UserManager::instance().findUser( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "User" << user_id << "is already removed from list";
+    return false;
+  }
+
+  if( u.isConnected() )
+  {
+    qWarning() << "User" << u.path() << "is connected and cannot be removed from list";
+    return false;
+  }
+
+  if( UserManager::instance().removeUser( u ) )
+  {
+    qDebug() << "User" << u.path() << "is removed from list";
+    return true;
+  }
+  else
+  {
+    qWarning() << "User" << u.path() << "cannot be removed from list";
+    return false;
+  }
+}

@@ -92,7 +92,8 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 void Core::setNewConnection( Connection *c )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Connecting SIGNAL/SLOT to connection from" << c->peerAddress().toString() << c->peerPort();
+  if( !c->peerAddress().isNull() )
+    qDebug() << "Connecting SIGNAL/SLOT to connection from" << c->peerAddress().toString() << c->peerPort();
 #endif
   connect( c, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( setConnectionError( QAbstractSocket::SocketError ) ) );
   connect( c, SIGNAL( disconnected() ), this, SLOT( setConnectionClosed() ) );
@@ -115,9 +116,14 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   if( c )
   {
     if( c->userId() != ID_INVALID )
+    {
       qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has an error:" << c->errorString() << "-" << (int)se;
+    }
     else
-      qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has refused password:" << c->errorString() << "-" << (int)se;
+    {
+      if( !c->peerAddress().isNull() )
+        qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has refused password:" << c->errorString() << "-" << (int)se;
+    }
     closeConnection( c );
   }
   else
@@ -138,15 +144,18 @@ void Core::closeConnection( Connection *c )
   int number_of_connection_pointers = m_connections.removeAll( c );
 
 #ifdef BEEBEEP_DEBUG
-  if( number_of_connection_pointers <= 0 )
-    qDebug() << "Connection pointer is not present (or already removed from list)";
-  else if( number_of_connection_pointers != 1 )
-    qDebug() << number_of_connection_pointers << "pointers of a single connection found in connection list";
-  else
-    qDebug() << "Connection pointer removed from connection list";
+  if( !c->peerAddress().isNull() )
+  {
+    if( number_of_connection_pointers <= 0 )
+      qDebug() << "Connection pointer is not present (or already removed from list)";
+    else if( number_of_connection_pointers != 1 )
+      qDebug() << number_of_connection_pointers << "pointers of a single connection found in connection list";
+    else
+      qDebug() << "Connection pointer removed from connection list";
+  }
 #else
    if( number_of_connection_pointers > 1 )
-     qWarning() << number_of_connection_pointers << "similar connection found in list and removed";
+     qWarning() << number_of_connection_pointers << "similar connections found in list and removed";
 #endif
 
 

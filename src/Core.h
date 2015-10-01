@@ -61,6 +61,7 @@ public:
   void changeGroup( VNumber, const QString&, const QList<VNumber>& );
   bool removeGroup( VNumber );
   void toggleUserFavorite( VNumber );
+  bool removeOfflineUser( VNumber );
 
   void loadUsersAndGroups();
   void saveUsersAndGroups();

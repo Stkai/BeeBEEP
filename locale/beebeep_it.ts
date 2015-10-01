@@ -587,6 +587,14 @@
         <source>Unable to upload data</source>
         <translation>Impossibile inviare i dati</translation>
     </message>
+    <message>
+        <source>%1 bytes downloaded but the file size is only %2 bytes</source>
+        <translation>%1 bytes scaricati ma la dimensione del file è di soli %2 bytes</translation>
+    </message>
+    <message>
+        <source>%1 bytes uploaded but the file size is only %2 bytes</source>
+        <translation>%1 bytes caricati ma la dimensione del file è di soli %2 bytes</translation>
+    </message>
 </context>
 <context>
     <name>GTalkService</name>
@@ -3567,11 +3575,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Load shared files</source>
-        <translation>Carica i file condivisi</translation>
+        <translation type="vanished">Carica i file condivisi</translation>
     </message>
     <message>
         <source>Remove shared files from the selected path</source>
-        <translation>Rimuovi i file condivi dal percorso selezionato</translation>
+        <translation type="vanished">Rimuovi i file condivi dal percorso selezionato</translation>
     </message>
     <message>
         <source>Remove shared path</source>
@@ -3604,6 +3612,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Click to open %1</source>
         <translation>Click per aprire %1</translation>
+    </message>
+    <message>
+        <source>Update shared folders and files</source>
+        <translation>Aggiorna le cartelle ed i file condivisi</translation>
+    </message>
+    <message>
+        <source>Update shares</source>
+        <translation>Aggiorna condivisioni</translation>
     </message>
 </context>
 <context>
@@ -4118,6 +4134,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Phone</source>
         <translation>Telefono</translation>
+    </message>
+    <message>
+        <source>Remove user</source>
+        <translation>Rimuovi utente</translation>
     </message>
 </context>
 <context>
