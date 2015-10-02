@@ -220,6 +220,7 @@ private:
   QToolBar *mp_barShareNetwork;
   QToolBar *mp_barShareLocal;
   QToolBar *mp_barScreenShot;
+  QToolBar *mp_barLog;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actConfigureNetwork;

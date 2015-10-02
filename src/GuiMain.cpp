@@ -435,10 +435,16 @@ void GuiMain::checkViewActions()
   else
     mp_barShareLocal->hide();
 
-  if( mp_stackedWidget->currentWidget() != mp_logView )
-    mp_logView->stopCheckingLog();
-  else
+  if( mp_stackedWidget->currentWidget() == mp_logView )
+  {
+    mp_barLog->show();
     mp_logView->startCheckingLog();
+  }
+  else
+  {
+    mp_barLog->hide();
+    mp_logView->stopCheckingLog();
+  }
 
   if( mp_stackedWidget->currentWidget() == mp_screenShot )
     mp_barScreenShot->show();
@@ -483,7 +489,7 @@ void GuiMain::createActions()
   mp_actStartStopCore = new QAction( this );
   connect( mp_actStartStopCore, SIGNAL( triggered() ), this, SLOT( startStopCore() ) );
 
-  mp_actConfigureNetwork = new QAction( QIcon( ":/images/search.png"), tr( "Search for users..."), this );
+  mp_actConfigureNetwork = new QAction( QIcon( ":/images/search-users.png"), tr( "Search for users..."), this );
   mp_actConfigureNetwork->setStatusTip( tr( "Configure %1 network to search a user who is not in your local subnet" ).arg( Settings::instance().programName() ) );
   connect( mp_actConfigureNetwork, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
@@ -1028,6 +1034,14 @@ void GuiMain::createStackedWidgets()
 
   mp_logView = new GuiLog( this );
   mp_stackedWidget->addWidget( mp_logView );
+  mp_barLog = new QToolBar( tr( "Show the bar of log" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barLog );
+  mp_barLog->setObjectName( "GuiLogToolBar" );
+  mp_barLog->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barLog->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_logView->setupToolBar( mp_barLog );
+  act = mp_barLog->toggleViewAction();
+  act->setEnabled( false );
 
   mp_savedChat = new GuiSavedChat( this );
   mp_stackedWidget->addWidget( mp_savedChat );

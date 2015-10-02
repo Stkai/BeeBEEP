@@ -112,7 +112,7 @@ void GuiEditVCard::changePhoto()
   img_reader.setScaledSize( QSize( 96, 96 ) );
   if( !img_reader.read( &img ) )
   {
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to load image %1." ).arg( photo_path ), QMessageBox::Ok );
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to load image %1." ).arg( photo_path ), tr( "Ok" ) );
     qWarning() << "Can not load profile picture. Format supported:" << supported_formats_string;
     return;
   }
@@ -143,7 +143,7 @@ bool GuiEditVCard::checkLineEdit( QLineEdit* ple, const QString& msg )
   QString s = ple->text().simplified();
   if( s.isEmpty() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), msg, QMessageBox::Ok );
+    QMessageBox::information( this, Settings::instance().programName(), msg, tr( "Ok" ) );
     ple->setFocus();
     return false;
   }

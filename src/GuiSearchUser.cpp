@@ -82,7 +82,7 @@ void GuiSearchUser::checkAndSearch()
       if( host_address.isNull() )
       {
         QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
-                              tr( "You have inserted an invalid host address:\n%1 is removed from the list." ).arg( s.simplified() ), QMessageBox::Ok );
+                              tr( "You have inserted an invalid host address:\n%1 is removed from the list." ).arg( s.simplified() ), tr( "Ok" ) );
         address_list.removeOne( s );
         mp_teAddressesInSettings->setPlainText( address_list.join( ", " ) );
         mp_teAddressesInSettings->setFocus();

@@ -21,8 +21,11 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiLog.h"
 #include "Log.h"
+#include "Settings.h"
+
 
 GuiLog::GuiLog( QWidget* parent )
   : QWidget( parent )
@@ -37,12 +40,130 @@ GuiLog::GuiLog( QWidget* parent )
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( refreshLog() ) );
 }
 
+void GuiLog::setupToolBar( QToolBar* bar )
+{
+  QLabel* label;
+  QAction* act;
+
+  /* save as button */
+  act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
+  act->setStatusTip( tr( "Save the log in a file" ) );
+
+  bar->addSeparator();
+
+  /* filter by keywords */
+  label = new QLabel( bar );
+  label->setObjectName( "GuiLabelFilterTextLog" );
+  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  label->setText( QString( "   " ) + tr( "Search" ) + QString( " " ) );
+  bar->addWidget( label );
+  mp_leFilter = new QLineEdit( bar );
+  mp_leFilter->setObjectName( "GuiLineEditFilterLog" );
+  mp_leFilter->setMaximumWidth( 140 );
+  mp_leFilter->setPlaceholderText( tr( "keyword" ) );
+  bar->addWidget( mp_leFilter );
+  connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( findTextInLog() ) );
+
+  /* search button */
+  act = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find" ), this, SLOT( findTextInLog() ) );
+  act->setStatusTip( tr( "Find keywords in the log" ) );
+
+  /* status label */
+  mp_lStatus = new QLabel( bar );
+  mp_lStatus->setObjectName( "GuiLabelStatusTextLog" );
+  mp_lStatus->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  mp_lStatus->setText( QString( "" ) );
+  bar->addWidget( mp_lStatus );
+
+}
+
+void GuiLog::saveLogAs()
+{
+  QString log_path = QFileDialog::getSaveFileName( this,
+                          tr( "Please select a file to save the log." ),
+                          Settings::instance().logPath(), "TXT Log Files (*.txt)" );
+  if( log_path.isEmpty() )
+    return;
+
+  QFile log_file( log_path );
+  if( !log_file.open( QIODevice::WriteOnly | QIODevice::Text ) )
+  {
+    qWarning() << "Unable to write log in file:" << log_path;
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to save log in the file: %1" ).arg( log_path ), tr( "Ok" ) );
+    return;
+  }
+
+  stopCheckingLog();
+  refreshLog();
+
+  QTextStream log_stream( &log_file );
+  log_stream.setCodec( "UTF-8" );
+
+  QString log_txt = QString( "BeeBEEP log saved in %1" ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
+  log_txt += QLatin1String( "\n" );
+  log_txt += mp_teLog->toPlainText();
+  log_txt += QLatin1String( "\n*END*\n" );
+  log_stream << log_txt;
+  log_stream.flush();
+
+  log_file.close();
+  log_txt = "";
+
+  QFileInfo log_file_info( log_path );
+  Settings::instance().setLogPath( Bee::convertToNativeFolderSeparator( log_file_info.absolutePath() ) );
+
+  startCheckingLog();
+
+  switch( QMessageBox::information( this, Settings::instance().programName(),
+                                tr( "%1: save log completed." ).arg( log_path ),
+                                tr( "Ok" ), tr( "Open file" ), tr( "Open folder" ), 0, 0 ) )
+  {
+  case 1:
+    {
+      if( !QDesktopServices::openUrl( QUrl::fromLocalFile( log_path ) ) )
+        qWarning() << "Unable to open log file" << log_path;
+    }
+    break;
+
+  case 2:
+    {
+      if( !QDesktopServices::openUrl( QUrl::fromLocalFile( Settings::instance().logPath() ) ) )
+        qWarning() << "Unable to open log folder" << Settings::instance().logPath();
+    }
+    break;
+
+  default:
+    return;
+
+  }
+}
+
+void GuiLog::findTextInLog()
+{
+  if( !mp_lStatus->text().isEmpty() )
+    mp_lStatus->setText( "" );
+  QString txt = mp_leFilter->text().simplified();
+  if( txt.isEmpty() )
+    return;
+
+  if( !mp_teLog->find( txt ) )
+  {
+    mp_teLog->moveCursor( QTextCursor::Start );
+    if( !mp_teLog->find( txt ) )
+    {
+      mp_lStatus->setText( tr( "%1 not found" ).arg( txt ) );
+      return;
+    }
+  }
+}
+
 void GuiLog::startCheckingLog()
 {
   if( !m_timer.isActive() )
   {
     refreshLog();
     m_timer.start();
+    mp_leFilter->setFocus();
   }
 }
 

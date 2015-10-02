@@ -34,14 +34,22 @@ class GuiLog : public QWidget, private Ui::GuiLogWidget
 
 public:
   explicit GuiLog( QWidget *parent = 0 );
+
+  void setupToolBar( QToolBar* );
+
   void startCheckingLog();
   void stopCheckingLog();
 
 protected slots:
   void refreshLog();
+  void findTextInLog();
+  void saveLogAs();
 
 private:
   QTimer m_timer;
+
+  QLineEdit* mp_leFilter;
+  QLabel* mp_lStatus;
 
 };
 

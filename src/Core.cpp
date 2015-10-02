@@ -168,7 +168,7 @@ bool Core::updateBroadcastAddresses()
   if( mp_broadcaster->updateAddresses() > 0 )
   {
     QString sHtmlMsg = tr( "%1 %2 will search users in these IP addresses: %3" )
-                .arg( Bee::iconToHtml( ":/images/search.png", "*B*" ), Settings::instance().programName(),
+                .arg( Bee::iconToHtml( ":/images/search-users.png", "*B*" ), Settings::instance().programName(),
                       Settings::instance().broadcastAddressesInSettings().join( ", " ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::Connection );
     return true;

@@ -618,7 +618,7 @@ void GuiChat::saveChat()
   QFileInfo file_info( file_name );
   Settings::instance().setChatSaveDirectory( file_info.absolutePath() );
 
-  QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), QMessageBox::Ok );
+  QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), tr( "Ok" ) );
 }
 
 void GuiChat::clearChat()

@@ -764,7 +764,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation type="obsolete">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>All users</source>
@@ -1185,6 +1185,10 @@ Inserisci un nome differente.</translation>
         <source>Images</source>
         <translation>Immagini</translation>
     </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
 </context>
 <context>
     <name>GuiEmoticons</name>
@@ -1450,6 +1454,58 @@ Inserisci un nome differente.</translation>
     <message>
         <source>System Log</source>
         <translation>Log di sistema</translation>
+    </message>
+    <message>
+        <source>Save log as</source>
+        <translation>Salva log con nome</translation>
+    </message>
+    <message>
+        <source>Save the log in a file</source>
+        <translation>Salva il log in un file</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
+    <message>
+        <source>keyword</source>
+        <translation>parola chiave</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation>Trova</translation>
+    </message>
+    <message>
+        <source>Find keywords in the log</source>
+        <translation>Trova la parola chiave nel log</translation>
+    </message>
+    <message>
+        <source>Please select a file to save the log.</source>
+        <translation>Seleziona un file dove salvare il log.</translation>
+    </message>
+    <message>
+        <source>Unable to save log in the file: %1</source>
+        <translation>Impossibile salvare il log nel file: %1</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>%1: save log completed.</source>
+        <translation>%1: salvataggio del log completato.</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation>Apri file</translation>
+    </message>
+    <message>
+        <source>Open folder</source>
+        <translation>Apri cartella</translation>
+    </message>
+    <message>
+        <source>%1 not found</source>
+        <translation>%1 non trovato</translation>
     </message>
 </context>
 <context>
@@ -2969,6 +3025,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Non tutti i membri di questa conversazione sono connessi. I cambiamenti potrebbero non essere permanenti. Vuoi continuare?</translation>
+    </message>
+    <message>
+        <source>Show the bar of log</source>
+        <translation>Mostra la barra del log</translation>
     </message>
 </context>
 <context>
