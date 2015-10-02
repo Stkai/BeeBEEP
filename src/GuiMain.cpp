@@ -2888,5 +2888,8 @@ void GuiMain::createGroupFromChat( VNumber chat_id )
 void GuiMain::removeUserFromList( VNumber user_id )
 {
   if( mp_core->removeOfflineUser( user_id ) )
+  {
     mp_userList->updateUsers( mp_core->isConnected() );
+    mp_chatList->reloadChatList();
+  }
 }

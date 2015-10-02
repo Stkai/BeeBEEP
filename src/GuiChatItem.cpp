@@ -70,14 +70,16 @@ bool GuiChatItem::updateItem( const Chat& c )
     QStringList sl;
     foreach( User u, user_list.toList() )
     {
-      if( !u.isLocal() )
+      if( !u.isLocal() && u.isValid() )
         sl.append( u.name() );
     }
 
     if( c.isGroup() )
-      chat_name = c.name().isEmpty() ? (sl.size() == 0 ? QObject::tr( "Nobody" ) : sl.join( ", " )) : c.name();
+      chat_name = c.name();
     else
-      chat_name = sl.size() == 0 ? QObject::tr( "Nobody" ) : sl.join( ", " );
+      chat_name = sl.isEmpty() ? c.name() : sl.first();
+
+    qDebug() << "Chat name" << c.name() << "and showed" << chat_name;
 
     tool_tip = QObject::tr( "Open chat with %1" ).arg( chat_name );
 
