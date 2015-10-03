@@ -36,6 +36,7 @@ FileShare::FileShare()
 
 int FileShare::removePath( const QString& share_path )
 {
+  m_localSize.remove( share_path );
   return m_local.remove( share_path );
 }
 

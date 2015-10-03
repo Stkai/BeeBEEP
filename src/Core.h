@@ -100,6 +100,7 @@ public slots:
   void buildLocalShareList();
   void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
+  void removeAllPathsFromShare();
 
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );

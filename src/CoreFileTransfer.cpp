@@ -469,12 +469,35 @@ void Core::addListToLocalShare()
   bfsl->deleteLater();
 }
 
+void Core::removeAllPathsFromShare()
+{
+  FileShare::instance().clearLocal();
+  QStringList local_share = Settings::instance().localShare();
+  local_share.clear();
+  Settings::instance().setLocalShare( local_share );
+  qDebug() << "All paths are removed from local shares";
+
+  QString share_status = tr( "All paths are removed from file sharing" );
+
+  emit updateStatus( share_status, 0 );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
+                         DispatchToChat, ChatMessage::FileTransfer );
+
+  createLocalShareMessage();
+  sendFileShareListToAll();
+
+  emit localShareListAvailable();
+}
+
 void Core::removePathFromShare( const QString& share_path )
 {
   int num_files = FileShare::instance().removePath( share_path );
+  QStringList local_share = Settings::instance().localShare();
+  if( local_share.removeOne( share_path ) )
+    Settings::instance().setLocalShare( local_share );
+  qDebug() << "Path" << share_path << "is removed from local shares";
 
   QString share_status;
-
   if( num_files < 2 )
     share_status = tr( "%1 is removed from file sharing" ).arg( share_path );
   else

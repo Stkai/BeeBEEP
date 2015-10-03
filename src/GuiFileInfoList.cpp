@@ -88,7 +88,7 @@ GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
     item = (GuiFileInfoItem*)(*it);
     if( item->isObjectUser() && item->userId() == user_id )
     {
-      m_lastUserItem = 0;
+      m_lastUserItem = item;
       return item;
     }
     ++it;
@@ -103,6 +103,7 @@ GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
 #endif
   GuiFileInfoItem* item = new GuiFileInfoItem( mp_tree );
   item->initUser( u.id(), u.name() );
+  m_lastUserItem = item;
   return item;
 }
 
@@ -141,6 +142,7 @@ GuiFileInfoItem* GuiFileInfoList::createSubFolderItem( GuiFileInfoItem* parent_i
     item = new GuiFileInfoItem( mp_tree );
 
   item->initFolder( user_id, subfolder_name, subfolder_path );
+  m_lastFolderItem = item;
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "GuiFileInfoList::createSubFolderItem for user" << user_id << subfolder_name;
@@ -182,6 +184,8 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
   }
   else
     item = parent_item;
+
+  m_lastFolderItem = item;
 
   return item;
 }

@@ -86,6 +86,9 @@ void GuiShareLocal::setupToolBar( QToolBar* bar )
   mp_actRemove = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
   mp_actRemove->setStatusTip( tr( "Remove shared path from the list" ) );
 
+  mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all shares" ), this, SLOT( clearAllPaths() ) );
+  mp_actClear->setStatusTip( tr( "Clear all shared paths from the list" ) );
+
   showStats( 0, 0 );
   setActionsEnabled( true );
 }
@@ -104,6 +107,7 @@ void GuiShareLocal::setActionsEnabled( bool enable )
   mp_actAddFolder->setEnabled( enable );
   mp_actRemove->setEnabled( enable && mp_twMyShares->topLevelItemCount() > 0 );
   mp_actUpdate->setEnabled( enable && mp_twMyShares->topLevelItemCount() > 0 );
+  mp_actClear->setEnabled( enable && mp_twMyShares->topLevelItemCount() > 0 );
   if( enable )
     setCursor( Qt::ArrowCursor );
   else
@@ -112,15 +116,16 @@ void GuiShareLocal::setActionsEnabled( bool enable )
 
 void GuiShareLocal::addFilePath()
 {
-  QString file_path = QFileDialog::getOpenFileName( this, tr( "Select a file to share" ),
+  QStringList file_path_list = QFileDialog::getOpenFileNames( this, tr( "Select a file to share" ),
                                                      Settings::instance().lastDirectorySelected(),
                                                      "", 0, QFileDialog::DontResolveSymlinks );
-  if( file_path.isEmpty() )
+  if( file_path_list.isEmpty() )
     return;
 
-  Settings::instance().setLastDirectorySelectedFromFile( file_path );
+  Settings::instance().setLastDirectorySelectedFromFile( file_path_list.last() );
 
-  addSharePath( file_path );
+  foreach( QString file_path, file_path_list )
+    addSharePath( file_path );
 }
 
 void GuiShareLocal::addFolderPath()
@@ -153,13 +158,19 @@ void GuiShareLocal::removePath()
 
   QString share_selected = item_list.first()->text( 2 );
 
-  QStringList local_share = Settings::instance().localShare();
-  if( local_share.removeOne( share_selected ) )
-    Settings::instance().setLocalShare( local_share );
-
-  updatePaths();
-
   emit sharePathRemoved( share_selected );
+}
+
+void GuiShareLocal::clearAllPaths()
+{
+  if( Settings::instance().localShare().isEmpty() )
+    return;
+
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to remove all shared paths?" ),
+                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+    return;
+
+  emit removeAllPathsRequest();
 }
 
 void GuiShareLocal::updatePaths()
@@ -192,7 +203,7 @@ void GuiShareLocal::loadFileInfoInList()
   FileSizeType total_file_size = 0;
   GuiFileInfoItem* item;
 
-  mp_twLocalShares->clear();
+  m_fileInfoList.clearTree();
   mp_twLocalShares->setUpdatesEnabled( false );
 
   if( !FileShare::instance().local().isEmpty() )

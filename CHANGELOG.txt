@@ -6,6 +6,7 @@ BeeBEEP 2.0.4
 - Favorite users (right click on user and enable star button) is on top of the list
 - improved group usability
 - Offline users can be removed from list (right click on an offline user in list and then remove)
+- Clear all files shared option added
 
 BeeBEEP 2.0.3
 - Fixed shared folder tree

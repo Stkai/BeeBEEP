@@ -44,6 +44,7 @@ signals:
   void sharePathRemoved( const QString& );
   void openUrlRequest( const QUrl& );
   void updateListRequest();
+  void removeAllPathsRequest();
 
 public slots:
   void updateFileSharedList();
@@ -56,6 +57,7 @@ protected slots:
   void updateList();
   void openItemDoubleClicked( QTreeWidgetItem*, int );
   void openMySharesMenu( const QPoint& );
+  void clearAllPaths();
 
 protected:
   void addSharePath( const QString& );
@@ -71,6 +73,7 @@ private:
   QAction* mp_actAddFolder;
   QAction* mp_actRemove;
   QAction* mp_actUpdate;
+  QAction* mp_actClear;
 
   GuiFileInfoList m_fileInfoList;
 };
