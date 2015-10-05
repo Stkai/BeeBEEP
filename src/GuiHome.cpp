@@ -23,6 +23,7 @@
 
 #include "GuiHome.h"
 #include "GuiChatMessage.h"
+#include "ChatManager.h"
 #include "ChatMessage.h"
 #include "Settings.h"
 
@@ -85,4 +86,14 @@ void GuiHome::customContextMenu( const QPoint& p )
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.exec( mapToGlobal( p ) );
+}
+
+void GuiHome::loadDefaultChat()
+{
+  Chat c = ChatManager::instance().defaultChat();
+  foreach( ChatMessage cm, c.messages() )
+  {
+    if( cm.isFromSystem() )
+      addSystemMessage( cm );
+  }
 }

@@ -76,6 +76,9 @@ public:
   QString helpWebSite() const;
   QString languageWebSite() const;
   QString httpUserAgent() const;
+  QString facebookPage() const;
+  inline void setIsFacebookPageLinkClicked( bool );
+  inline bool isFacebookPageLinkClicked() const;
 
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
@@ -291,6 +294,11 @@ public:
   inline bool showHomeAsDefaultPage() const;
   inline void setResetGeometryAtStartup( bool );
   inline bool resetGeometryAtStartup() const;
+  inline void setShowMinimizedAtStartup( bool );
+  inline bool showMinimizedAtStartup() const;
+
+  inline void setPromptOnCloseEvent( bool );
+  inline bool promptOnCloseEvent() const;
 
   void loadRcFile();
   void clearNativeSettings();
@@ -460,6 +468,10 @@ private:
 
   bool m_showHomeAsDefaultPage;
   bool m_resetGeometryAtStartup;
+  bool m_showMinimizedAtStartup;
+  bool m_promptOnCloseEvent;
+
+  bool m_isFacebookPageLinkClicked;
 
 };
 
@@ -626,6 +638,8 @@ inline void Settings::setShowHomeAsDefaultPage( bool new_value ) { m_showHomeAsD
 inline bool Settings::showHomeAsDefaultPage() const { return m_showHomeAsDefaultPage; }
 inline void Settings::setResetGeometryAtStartup( bool new_value ) { m_resetGeometryAtStartup = new_value; }
 inline bool Settings::resetGeometryAtStartup() const { return m_resetGeometryAtStartup; }
+inline void Settings::setShowMinimizedAtStartup( bool new_value ) { m_showMinimizedAtStartup = new_value; }
+inline bool Settings::showMinimizedAtStartup() const { return m_showMinimizedAtStartup; }
 inline void Settings::setChatSplitterState( const QByteArray& new_value ) { m_chatSplitterState = new_value; }
 inline const QByteArray& Settings::chatSplitterState() const { return m_chatSplitterState; }
 inline int Settings::chatLinesToShow() const { return m_chatLinesToShow; }
@@ -644,5 +658,9 @@ inline bool Settings::useNativeEmoticons() const { return m_useNativeEmoticons; 
 inline void Settings::setShowImagePreview( bool new_value ) { m_showImagePreview = new_value; }
 inline bool Settings::showImagePreview() const { return m_showImagePreview; }
 inline int Settings::imagePreviewHeight() const { return m_imagePreviewHeight; }
+inline void Settings::setPromptOnCloseEvent( bool new_value ) { m_promptOnCloseEvent = new_value; }
+inline bool Settings::promptOnCloseEvent() const { return m_promptOnCloseEvent; }
+inline void Settings::setIsFacebookPageLinkClicked( bool new_value ) { m_isFacebookPageLinkClicked = new_value; }
+inline bool Settings::isFacebookPageLinkClicked() const { return m_isFacebookPageLinkClicked; }
 
 #endif // BEEBEEP_SETTINGS_H

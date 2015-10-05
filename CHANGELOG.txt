@@ -2,11 +2,14 @@ BEEBEEP (Secure Lan Messanger)
 
 BeeBEEP 2.0.4
 - Some GUI improvements (new icons, file sharing tree load faster)
-- Always Beep on new message arrived option added
+- Always Beep on new message arrived (option)
 - Favorite users (right click on user and enable star button) is on top of the list
 - improved group usability
 - Offline users can be removed from list (right click on an offline user in list and then remove)
-- Clear all files shared option added
+- Clear all files shared (option)
+- Load minimized at startup (option)
+- Prompt on close event when connected (option)
+- Open your data folder (option)
 
 BeeBEEP 2.0.3
 - Fixed shared folder tree

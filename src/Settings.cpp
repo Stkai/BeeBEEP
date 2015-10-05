@@ -64,6 +64,7 @@ Settings::Settings()
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 30;
   m_confirmOnDownloadFile = false;
+  m_promptOnCloseEvent = true;
   m_saveUserList = false;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
@@ -371,6 +372,11 @@ QString Settings::dnsRecord() const
   return QString( BEEBEEP_DNS_RECORD );
 }
 
+QString Settings::facebookPage() const
+{
+  return QString( BEEBEEP_PAGE_ON_FACEBOOK );
+}
+
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;
@@ -632,6 +638,9 @@ void Settings::load()
   m_emoticonInRecentMenu = sets->value( "EmoticonInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useNativeEmoticons = sets->value( "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
+  m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", false ).toBool();
+  m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
+  m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -822,6 +831,9 @@ void Settings::save()
   sets->setValue( "EmoticonInRecentMenu", m_emoticonInRecentMenu );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
   sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
+  sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );
+  sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
+  sets->setValue( "FacebookPageLinkClicked", m_isFacebookPageLinkClicked );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

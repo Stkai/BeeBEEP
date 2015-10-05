@@ -71,9 +71,20 @@ void GuiLog::setupToolBar( QToolBar* bar )
   /* status label */
   mp_lStatus = new QLabel( bar );
   mp_lStatus->setObjectName( "GuiLabelStatusTextLog" );
-  mp_lStatus->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  mp_lStatus->setAlignment( Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter );
   mp_lStatus->setText( QString( "" ) );
   bar->addWidget( mp_lStatus );
+
+  /* flags */
+  mp_cbCaseSensitive = new QCheckBox( bar );
+  mp_cbCaseSensitive->setObjectName( "GuiCheckBoxFindCaseSensitiveInLog" );
+  mp_cbCaseSensitive->setText( tr( "Case sensitive" ) );
+  bar->addWidget( mp_cbCaseSensitive );
+
+  mp_cbWholeWordOnly = new QCheckBox( bar );
+  mp_cbWholeWordOnly->setObjectName( "GuiCheckBoxFindWholeWordOnlyInLog" );
+  mp_cbWholeWordOnly->setText( tr( "Whole word" ) );
+  bar->addWidget( mp_cbWholeWordOnly );
 
 }
 
@@ -146,7 +157,17 @@ void GuiLog::findTextInLog()
   if( txt.isEmpty() )
     return;
 
-  if( !mp_teLog->find( txt ) )
+  QTextDocument::FindFlags find_flags = 0;
+  if( mp_cbCaseSensitive->isChecked() )
+    find_flags |= QTextDocument::FindCaseSensitively;
+  if( mp_cbWholeWordOnly->isChecked() )
+    find_flags |= QTextDocument::FindWholeWords;
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Searching" << txt << "with flags" << (int)find_flags;
+#endif
+
+  if( !mp_teLog->find( txt, find_flags ) )
   {
     mp_teLog->moveCursor( QTextCursor::Start );
     if( !mp_teLog->find( txt ) )

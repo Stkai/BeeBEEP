@@ -50,6 +50,8 @@ private:
 
   QLineEdit* mp_leFilter;
   QLabel* mp_lStatus;
+  QCheckBox* mp_cbCaseSensitive;
+  QCheckBox* mp_cbWholeWordOnly;
 
 };
 

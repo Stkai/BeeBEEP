@@ -126,6 +126,7 @@ private slots:
   void openDownloadPluginPage();
   void openDonationPage();
   void openHelpPage();
+  void openFacebookPage();
   void clearChat( VNumber );
   void checkGroup( VNumber );
   void checkChat( VNumber );
@@ -147,6 +148,7 @@ private slots:
   void toggleUserFavorite( VNumber );
   void createGroupFromChat( VNumber );
   void removeUserFromList( VNumber );
+  void openDataFolder();
 
 protected:
   void keyPressEvent( QKeyEvent* );

@@ -130,5 +130,6 @@
         <file>images/windows.png</file>
         <file>images/group-wizard.png</file>
         <file>images/search-users.png</file>
+        <file>images/thumbup.png</file>
     </qresource>
 </RCC>

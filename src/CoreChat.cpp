@@ -47,6 +47,16 @@ void Core::createDefaultChat()
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header );
   c.addMessage( cm );
 
+  if( !Settings::instance().isFacebookPageLinkClicked() )
+  {
+    sHtmlMsg = QString( "%1 %2 <a href=""%3"">%4</a>" ).arg( Bee::iconToHtml( ":/images/thumbup.png", "*!*" ),
+                                                                 tr( "Help me to know how many people are really using BeeBEEP." ),
+                                                                 Settings::instance().facebookPage(),
+                                                                 tr( "Please add a like on Facebook." ) );
+    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other );
+    c.addMessage( cm );
+  }
+
   if( QDate::currentDate().month() == 4 && QDate::currentDate().day() == 6 )
   {
     int my_age = QDate::currentDate().year() - 1975;

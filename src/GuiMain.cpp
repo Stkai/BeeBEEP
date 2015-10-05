@@ -167,6 +167,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   initGuiItems();
+
+  mp_home->loadDefaultChat();
+
   statusBar()->showMessage( tr( "Ready" ) );
 }
 
@@ -182,7 +185,11 @@ void GuiMain::checkWindowFlagsAndShow()
   }
 
   checkViewActions();
-  show();
+
+  if( Settings::instance().showMinimizedAtStartup() )
+    showMinimized();
+  else
+    show();
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().chatSplitterState().isEmpty() )
@@ -252,11 +259,14 @@ void GuiMain::closeEvent( QCloseEvent* e )
       return;
     }
 
-    if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
-                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+    if( Settings::instance().promptOnCloseEvent() )
     {
-      e->ignore();
-      return;
+      if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+      {
+        e->ignore();
+        return;
+      }
     }
 
     stopCore();
@@ -546,7 +556,9 @@ void GuiMain::createMenus()
   act = mp_menuMain->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
   act->setStatusTip( tr( "Test the file to play on new message arrived" ) );
   mp_menuMain->addSeparator();
-
+  act = mp_menuMain->addAction( QIcon( ":/images/settings.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
+  act->setStatusTip( tr( "Click to open your data folder" ) );
+  mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actQuit );
 
   /* Chat Menu */
@@ -631,6 +643,34 @@ void GuiMain::createMenus()
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
 
+  act = mp_menuSettings->addAction( tr( "Show activities home page at startup" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the activities home page instead of chat page will be showed at startup" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showHomeAsDefaultPage() );
+  act->setData( 34 );
+
+  act = mp_menuSettings->addAction( tr( "Show minimized at startup" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled %1 is showed minimized at startup" ).arg( Settings::instance().programName() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showMinimizedAtStartup() );
+  act->setData( 35 );
+
+  act = mp_menuSettings->addAction( tr( "Reset window geometry at startup" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the window geometry will be reset to default value at the next startup" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().resetGeometryAtStartup() );
+  act->setData( 26 );
+
+#ifdef Q_OS_WIN
+  act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you can automatically load %1 at system startup" ).arg( Settings::instance().programName() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().hasStartOnSystemBoot() );
+  act->setData( 16 );
+#endif
+
+  mp_menuSettings->addSeparator();
+
   act = mp_menuSettings->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled you can transfer files with the other users" ) );
   act->setCheckable( true );
@@ -648,12 +688,6 @@ void GuiMain::createMenus()
   mp_actConfirmDownload->setCheckable( true );
   mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
   mp_actConfirmDownload->setData( 30 );
-
-  act = mp_menuSettings->addAction( tr( "Reset window geometry at startup" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the window geometry will be reset to default value at the next startup" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().resetGeometryAtStartup() );
-  act->setData( 26 );
 
   mp_menuSettings->addSeparator();
 
@@ -690,19 +724,13 @@ void GuiMain::createMenus()
   act->setData( 14 );
 
   mp_menuSettings->addSeparator();
-#ifdef Q_OS_WIN
-  act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled you can automatically load %1 at system startup" ).arg( Settings::instance().programName() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().hasStartOnSystemBoot() );
-  act->setData( 16 );
-#endif
 
-  act = mp_menuSettings->addAction( tr( "Show activities home page at startup" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the activities home page instead of chat page will be showed at startup" ) );
+  act = mp_menuSettings->addAction( tr( "Prompt on quit (only when connected)" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you will be asked if you really want to close %1" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().showHomeAsDefaultPage() );
-  act->setData( 34 );
+  act->setChecked( Settings::instance().promptOnCloseEvent() );
+  act->setData( 36 );
+
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
@@ -812,8 +840,10 @@ void GuiMain::createMenus()
   act = mp_menuInfo->addAction( QIcon( ":/images/info.png" ), tr( "Help online..." ), this, SLOT( openHelpPage() ) );
   act->setStatusTip( tr( "Open %1 website to have online support" ).arg( Settings::instance().programName() ) );
   mp_menuInfo->addSeparator();
-  act = mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Please donate for %1 :-)" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
-  act->setStatusTip( tr( "I'm so grateful and pleased about that" ) + QString( " :-)" ) );
+  act = mp_menuInfo->addAction( QIcon( ":/images/thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
+  act->setStatusTip( tr( "Help me to know how many people use BeeBEEP" ) );
+  act = mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Donate for %1" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
+  act->setStatusTip( tr( "I'm so grateful and pleased about that" ) );
 
   /* Tray icon menu */
   mp_menuTrayIcon = new QMenu( this );
@@ -1312,6 +1342,12 @@ void GuiMain::settingsChanged()
     break;
   case 34:
     Settings::instance().setShowHomeAsDefaultPage( act->isChecked() );
+    break;
+  case 35:
+    Settings::instance().setShowMinimizedAtStartup( act->isChecked() );
+    break;
+  case 36:
+    Settings::instance().setPromptOnCloseEvent( act->isChecked() );
     break;
   case 99:
     break;
@@ -2177,7 +2213,7 @@ void GuiMain::openUrl( const QUrl& file_url )
         return;
     }
 
-    qDebug() << "Open url:" << file_url.toString();
+    qDebug() << "Open file:" << file_url.toString();
     if( !QDesktopServices::openUrl( file_url ) )
       QMessageBox::information( this, Settings::instance().programName(),
                               tr( "Unable to open %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
@@ -2185,7 +2221,13 @@ void GuiMain::openUrl( const QUrl& file_url )
   else
   {
     QString url_txt = file_url.toString();
-    if( !QDesktopServices::openUrl( file_url ) )
+    qDebug() << "Open url:" << url_txt;
+    if( QDesktopServices::openUrl( file_url ) )
+    {
+      if( url_txt == Settings::instance().facebookPage() )
+        Settings::instance().setIsFacebookPageLinkClicked( true );
+    }
+    else
       qWarning() << "Unable to open link url:" << url_txt;
   }
 }
@@ -2480,6 +2522,12 @@ void GuiMain::openDonationPage()
 void GuiMain::openHelpPage()
 {
   openWebUrl( Settings::instance().helpWebSite() );
+}
+
+void GuiMain::openFacebookPage()
+{
+  if( openWebUrl( Settings::instance().facebookPage() ) )
+    Settings::instance().setIsFacebookPageLinkClicked( true );
 }
 
 void GuiMain::setInIdle()
@@ -2893,4 +2941,10 @@ void GuiMain::removeUserFromList( VNumber user_id )
     mp_userList->updateUsers( mp_core->isConnected() );
     mp_chatList->reloadChatList();
   }
+}
+
+void GuiMain::openDataFolder()
+{
+  QUrl data_folder_url = QUrl::fromLocalFile( Settings::instance().dataFolder() );
+  openUrl( data_folder_url );
 }

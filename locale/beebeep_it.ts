@@ -510,6 +510,18 @@
         <source>%1 You have deleted group: %2.</source>
         <translation>%1 Hai cancellato il gruppo: %2.</translation>
     </message>
+    <message>
+        <source>All paths are removed from file sharing</source>
+        <translation>Tutte le condivisioni sono state eliminate</translation>
+    </message>
+    <message>
+        <source>Help me to know how many people are really using BeeBEEP.</source>
+        <translation>Aiutami a sapere quante persone usano realmente BeeBEEP.</translation>
+    </message>
+    <message>
+        <source>Please add a like on Facebook.</source>
+        <translation>Metti mi piace su Facebook.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1507,6 +1519,14 @@ Inserisci un nome differente.</translation>
         <source>%1 not found</source>
         <translation>%1 non trovato</translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation>Maiuscole/Minuscole</translation>
+    </message>
+    <message>
+        <source>Whole word</source>
+        <translation>Parola intera</translation>
+    </message>
 </context>
 <context>
     <name>GuiLogWidget</name>
@@ -2440,7 +2460,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Please donate for %1 :-)</source>
-        <translation>Per favore dona qualcosa per %1 :-)</translation>
+        <translation type="vanished">Per favore dona qualcosa per %1 :-)</translation>
     </message>
     <message>
         <source>I&apos;m so grateful and pleased about that</source>
@@ -3029,6 +3049,42 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show the bar of log</source>
         <translation>Mostra la barra del log</translation>
+    </message>
+    <message>
+        <source>Show minimized at startup</source>
+        <translation>Mostra minimizzato alla partenza</translation>
+    </message>
+    <message>
+        <source>If enabled %1 is showed minimized at startup</source>
+        <translation>Se abilitata %1 sarà mostrato minimizzato alla partenza</translation>
+    </message>
+    <message>
+        <source>Prompt on quit (only when connected)</source>
+        <translation>Chiedi prima di uscire (solo quando connesso)</translation>
+    </message>
+    <message>
+        <source>If enabled you will be asked if you really want to close %1</source>
+        <translation>Se abilitata ti verrà chiesto se vuoi realmente chiudere %1</translation>
+    </message>
+    <message>
+        <source>Like %1 on Facebook</source>
+        <translation>Dai un mi piace a %1 su Facebook</translation>
+    </message>
+    <message>
+        <source>Help me to know how many people use BeeBEEP</source>
+        <translation>Aiutami a conoscere quante persone usano BeeBEEP</translation>
+    </message>
+    <message>
+        <source>Donate for %1</source>
+        <translation>Dona per %1</translation>
+    </message>
+    <message>
+        <source>Open your data folder</source>
+        <translation>Apri la tua cartella dei dati</translation>
+    </message>
+    <message>
+        <source>Click to open your data folder</source>
+        <translation>Clicca qui per aprire la tua cartella con le preferenze ed i messaggi salvati</translation>
     </message>
 </context>
 <context>
@@ -3681,6 +3737,26 @@ il file %2 (%3)?</translation>
         <source>Update shares</source>
         <translation>Aggiorna condivisioni</translation>
     </message>
+    <message>
+        <source>Clear all shares</source>
+        <translation>Elimina tutte le condivisioni</translation>
+    </message>
+    <message>
+        <source>Clear all shared paths from the list</source>
+        <translation>Elimina tutte le condivisioni dalla lista</translation>
+    </message>
+    <message>
+        <source>Do you really want to remove all shared paths?</source>
+        <translation>Vuoi veramente eliminare tutte le condivisioni?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
@@ -4307,7 +4383,7 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Nobody</source>
-        <translation>Nessuno</translation>
+        <translation type="vanished">Nessuno</translation>
     </message>
     <message>
         <source>You</source>

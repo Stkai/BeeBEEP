@@ -6,19 +6,24 @@
 // $Id$
 //
 
+/******** ATTENTION PLEASE!! **************/
+/* EDIT THESE FILES ONLY WHEN BEEBEEP IS  */
+/* CLOSED OR DATA MODIFIED WILL BE LOST   */
+/******************************************/
+
 /***************************/
 /***  FILE: beebeep.rc   ***/
 /***************************/
 
 [BeeBEEP]
-UseConfigurationFileIni= the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
-BroadcastOnlyToHostsIni= if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
+UseConfigurationFileIni= [true/false] the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
+BroadcastOnlyToHostsIni= [true/false] if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
 BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
 DefaultListenerPort= is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475) [1.0.0]
 DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the connected users (default 6476) [1.0.0]
-SaveDataInDocumentsFolder= force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data
-SaveDataInUserApplicationFolder= force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) [1.0.0]
-AllowMultipleInstances= enable the option to launch multiple instance of BeeBEEP [1.0.0]
+SaveDataInDocumentsFolder= [true/false] force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data
+SaveDataInUserApplicationFolder= [true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) [1.0.0]
+AllowMultipleInstances= [true/false] enable the option to launch multiple instance of BeeBEEP [1.0.0]
 DataFolderPath= you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder [1.0.3]
 AddAccountNameToDataFolder = you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath [1.0.3]
 
@@ -33,39 +38,39 @@ TrustSystemAccount= if true BeeBEEP trusts before system account to recognize a 
 
 
 [Version]
-Program= beebeep version major.minor.relese and build (b) and protocol (p) 
+Program= BeeBEEP version major.minor.relese and build (b) and protocol (p) 
 Proto= protocol version 
 Settings= settings version
 DataStream= serialized data stream  version
-BeeBang= installation date or beebeep first launch date
+BeeBang= installation date or BeeBEEP first launch date
 
 [Chat]
 Font= font used in chat
 FontColor= font color used in chat
 DefaultChatBackgroundColor= background color in default chat window
-CompactMessage= messages are displayed without a blank line from eachother
-AddNewLineAfterMessage= add a blank line after a message displayed
-ShowMessageTimestamp= show message timestamp in the chat 
-BeepOnNewMessageArrived= sound a beep when new message arrived (only if sound works) and the chat is not visible
-BeepAlwaysOnNewMessageArrived= always sound a beep when new message arrived (only if sound works)
-UseHtmlTags= if enabled beebeep doesn't parse tags html. Useful if you have to copy and paste in chat some html code
-UseClickableLinks= enable link in chat message. So link clicked where opened by OS
-MessageHistorySize= how many of your messages are stored by beebeep. The message can be recalled by CTRL+UP o CTRL+DOWN arrow
-ShowEmoticons= show emoticon images in chat
-ShowMessagesGroupByUsers= show messaged grouped by user or repeat user for every message
-AutoLinkSavedChatByNickname= link the saved chat when nickname are equal
-ShowSendMessageIcon= show the icon for sending message
-ShowOnlyMessagesInDefaultChat = if enabled it will be showed only chat message, user info and history in the default chat (other messages in activity window)
+CompactMessage= messages are displayed without a blank line from each other
+AddNewLineAfterMessage= [true/false] add a blank line after a message displayed
+ShowMessageTimestamp= [true/false] show message timestamp in the chat 
+BeepOnNewMessageArrived= [true/false] sound a beep when new message arrived (only if sound works) and the chat is not visible
+BeepAlwaysOnNewMessageArrived= [true/false] always sound a beep when new message arrived (only if sound works)
+UseHtmlTags= [true/false] if enabled BeeBEEP doesn't parse tags html. Useful if you have to copy and paste in chat some html code
+UseClickableLinks= [true/false] enable link in chat message. So link clicked where opened by OS
+MessageHistorySize= how many of your messages are stored by BeeBEEP. The message can be recalled by CTRL+UP o CTRL+DOWN arrow
+ShowEmoticons= [true/false] show emoticon images in chat (only for text emojis)
+ShowMessagesGroupByUsers= [true/false] show messaged grouped by user or repeat user for every message
+AutoLinkSavedChatByNickname= [true/false] link the saved chat when nickname are equal
+ShowSendMessageIcon= [true/false] show the icon for sending message
+ShowOnlyMessagesInDefaultChat = [true/false] if enabled it will be showed only chat message, user info and history in the default chat (other messages in activity window)
 MessageFilter= filter messages in chat window by its type (do not edit here)
 
 [User]
 LocalColor= your nickname color in chat 
 LocalLastStatus= your status (0 = Offline, 1 = Online, 2 = Busy, 3 = Away)
 LocalLastStatusDescription= your status description
-AutoAwayStatus= set your status away when pc is in idle
+AutoAwayStatus= [true/false] set your status away when pc is in idle
 UserAwayTimeout= how many minutes your pc must be in idle to set your status in away
-UseDefaultPassword= use default beebeep password
-AskPasswordAtStartup= show password dialog at connection to beebeep network
+UseDefaultPassword= [true/false] use default BeeBEEP password
+AskPasswordAtStartup= [true/false] show password dialog at connection to BeeBEEP network
 
 [VCard]
 NickName= your nickname
@@ -86,38 +91,41 @@ DownloadDirectory=
 LogPath=.
 PluginPath=.
 LocalePath=.
-KeyEscapeMinimizeInTray= Escape key will minimize BeeBEEP into the system tray
-MinimizeInTray= Close button will minimize BeeBEEP into the system tray
-StayOnTop=false
+KeyEscapeMinimizeInTray= [true/false] Escape key will minimize BeeBEEP into the system tray
+MinimizeInTray= [true/false] Close button will minimize BeeBEEP into the system tray
+StayOnTop= [true/false]
 BeepFilePath=beep.wav
-RaiseOnNewMessageArrived=false
-LoadOnTrayAtStartup=false
-ShowNotificationOnTray=true
+RaiseOnNewMessageArrived= [true/false]
+LoadOnTrayAtStartup= [true/false]
+ShowNotificationOnTray= [true/false]
 ChatSaveDirectory=.
 ChatAutoSave=true
 ChatMaxLineSaved=3000
 MainWindowGeometry= (do not use)
 MainWindowState= (do not use)
-ShowHomeAsDefaultPage= Show home page at start up (force user to click on available users to chat with them)
-ShowTipsOfTheDay=true
-ShowOnlyOnlineUsers= show only online users in user list
-ShowUserNameColor= show nickname colored
-ShowUserPhoto= show user photo or avatar in user list
-ShowVCardOnRightClick= show vCard when you right click on a user in list
-ResetGeometryAtStartup= reset geometry at startup (useful if some widget has an inusual geometry)
+ShowHomeAsDefaultPage= [true/false] Show home page at start up (force user to click on available users to chat with them)
+ShowTipsOfTheDay= [true/false]
+ShowOnlyOnlineUsers= [true/false] show only online users in user list
+ShowUserNameColor= [true/false] show nickname colored
+ShowUserPhoto= [true/false] show user photo or avatar in user list
+ShowVCardOnRightClick= [true/false] show vCard when you right click on a user in list
+ResetGeometryAtStartup= [true/false] reset geometry at startup (useful if some widget has an inusual geometry)
 ChatLinesToShow= number of lines to show in chat (working if the option below is enabled)
 ChatMaxLinesToShow= force chat to show only X messages (increase usability)
-ShowEmoticonMenu= show the emoticon menu when the chat window is raised
+ShowEmoticonMenu= [true/false] show the emoticon menu when the chat window is raised
 EmoticonSizeInEdit= emoticon size in message edit window (default: 18)
 EmoticonSizeInChat= emoticon size in chat windows (default: 24)
 EmoticonSizeInMenu= emoticon size in menu (default: 24)
+LoadMinimizedAtStartup= if enabled BeeBEEP is load minimized at startup
+PromptOnCloseEvent= [true/false] enable it if you want to be asked on closing (it prompts only if BeeBEEP is connected)
+ShowMinimizedAtStartup= [true/false] show minimized at start up
 
 [Tools]
 LogToFile=false
 
 [Misc]
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0)
-ListenerPort= is the last TCP port of chat communication between beebeep (default is 6475)
+ListenerPort= is the last TCP port of chat communication between BeeBEEP (default is 6475)
 PingInterval=31000
 PongTimeout=98000
 WritingTimeout=3000
@@ -127,16 +135,16 @@ SystemTrayMessageTimeout=2000
 BroadcastAddresses= (do not edit manually)
 LocalHostAddressForced= if BeeBEEP doesn't recognize your IP address automatically, you can set here your IP (useful if you have a lot of network configured)
 LocalSubnetForced= if BeeBEEP doesn't recognize your subnet address automatically, you can set here your subnet (useful if you have a lot of network configured)
-ParseBroadcastAddresses= if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254
-AddExternalSubnetAutomatically= if true BeeBEEP automatically add external user's subnet when they reach you
+ParseBroadcastAddresses= [true/false] if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254
+AddExternalSubnetAutomatically= [true/false] if true BeeBEEP automatically add external user's subnet when they reach you
 
 [FileShare]
-Active=true
-SetAutomaticFileName= on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it
+Active= [true/false]
+SetAutomaticFileName= [true/false] on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it
 MaxSimultaneousDownloads= is the max number of simultaneous downloads in file transfer
 MaxQueuedDownloads = is the max number of downloads can be selected in file sharing at once
 MaxFileShared=32700
 FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456
-ConfirmOnDownloadFile= if it is true always prompt before downloading a file
-ShareList=
+ConfirmOnDownloadFile= [true/false] if it is true always prompt before downloading a file
+ShareList= (do not edit manually)

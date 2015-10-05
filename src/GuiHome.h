@@ -36,6 +36,7 @@ class GuiHome : public QWidget, private Ui::GuiHomeWidget
 public:
   explicit GuiHome( QWidget *parent = 0 );
 
+  void loadDefaultChat();
   void addSystemMessage( const ChatMessage& );
 
 signals:
