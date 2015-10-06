@@ -178,6 +178,11 @@ void Core::closeConnection( Connection *c )
       FileShare::instance().removeFromNetwork( c->userId() );
       if( u.isValid() )
         emit fileShareAvailable( u );
+
+      QString sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*C*" ) );
+      sHtmlMsg += tr( "%1 (%2) is disconnected from %3 network." ).arg( u.name(), u.accountPath(), Settings::instance().programName() );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
+
     }
     else
       qWarning() << "User" << c->userId() << "not found while closing connection";
@@ -281,12 +286,9 @@ void Core::checkUserAuthentication( const Message& m )
 
   sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
   sHtmlMsg += tr( "%1 (%2) is connected to %3 network." ).arg( u.name(), u.accountPath(), Settings::instance().programName() );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
 
-  if( !u.statusDescription().isEmpty() || u.status() > User::Online )
-    showUserStatusChanged( u );
-  else
-    emit userChanged( u );
+  showUserStatusChanged( u );
 
   emit userConnectionStatusChanged( u );
 

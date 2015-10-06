@@ -10,6 +10,7 @@ BeeBEEP 2.0.4
 - Load minimized at startup (option)
 - Prompt on close event when connected (option)
 - Open your data folder (option)
+- The "chat with all" background color can be changed
 
 BeeBEEP 2.0.3
 - Fixed shared folder tree
