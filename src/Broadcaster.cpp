@@ -44,6 +44,7 @@ bool Broadcaster::startBroadcasting()
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;
   }
+
   m_baseBroadcastAddress = NetworkManager::instance().localBroadcastAddress();
   updateAddresses();
   qDebug() << "Broadcaster generates broadcast message data";
