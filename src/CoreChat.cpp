@@ -132,13 +132,13 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
 
   if( chat_private_id.isEmpty() )
   {
-    sHtmlMsg = tr( "%1 You have created the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), chat_name );
+    sHtmlMsg = tr( "%1 You have created the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( chat_name ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
   }
   else
   {
     c.setPrivateId( chat_private_id );
-    sHtmlMsg = tr( "%1 Welcome to the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), chat_name );
+    sHtmlMsg = tr( "%1 Welcome to the group %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( chat_name ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
   }
 

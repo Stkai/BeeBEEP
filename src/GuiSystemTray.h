@@ -39,10 +39,13 @@ public:
   void showNewMessageArrived( VNumber, const QString& );
   void setUnreadMessages( VNumber, int );
   inline VNumber chatId() const;
+  inline void resetChatId();
 
 public slots:
   void setDefaultIcon();
   void setMessageIcon();
+
+protected:
   void showMessageInTray( const QString& );
 
 private:
@@ -54,5 +57,6 @@ private:
 
 // Inline Functions
 inline VNumber GuiSystemTray::chatId() const { return m_chatId; }
+inline void GuiSystemTray::resetChatId() { m_chatId = ID_DEFAULT_CHAT; }
 
 #endif // BEEBEEP_GUISYSTEMTRAY_H

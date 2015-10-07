@@ -300,7 +300,7 @@
     </message>
     <message>
         <source>%1 %2 has not file shared.</source>
-        <translation>%1 %2 non ha file condivisi in rete.</translation>
+        <translation type="vanished">%1 %2 non ha file condivisi in rete.</translation>
     </message>
     <message>
         <source>%1 %2 has shared %3 files.</source>
@@ -525,6 +525,10 @@
     <message>
         <source>%1 (%2) is disconnected from %3 network.</source>
         <translation>%1 (%2) esce dalla tua rete %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has not shared files.</source>
+        <translation>%1 %2 non ha condiviso nessun file.</translation>
     </message>
 </context>
 <context>

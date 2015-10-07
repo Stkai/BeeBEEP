@@ -267,8 +267,8 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 
     if( file_info_list.isEmpty() )
     {
-      msg = tr( "%1 %2 has not file shared." ).arg( icon_html ).arg( u.name() );
-      qDebug() << u.path() << "has not file shared";
+      msg = tr( "%1 %2 has not shared files." ).arg( icon_html ).arg( u.name() );
+      qDebug() << u.path() << "has not shared files";
     }
     else
     {

@@ -1449,6 +1449,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
         statusBar()->clearMessage();
         showChat( chat_id );
         mp_trayIcon->setDefaultIcon();
+        mp_trayIcon->resetChatId();
       }
       else
       {
@@ -2112,6 +2113,7 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 void GuiMain::trayMessageClicked()
 {
   showChat( mp_trayIcon->chatId() );
+  mp_trayIcon->resetChatId();
   mp_trayIcon->setDefaultIcon();
   QTimer::singleShot( 0, this, SLOT( showUp() ) );
 }
@@ -2910,7 +2912,12 @@ void GuiMain::showConnectionStatusChanged( const User& u )
     msg = tr( "%1 is online" ).arg( u.name() );
   else
     msg = tr( "%1 is offline" ).arg( u.name() );
-  mp_trayIcon->showMessageInTray( msg );
+
+  Chat c = ChatManager::instance().privateChatForUser( u.id() );
+  if( c.isValid() && u.isConnected() )
+    mp_trayIcon->showNewMessageArrived( c.id(), msg );
+  else
+    mp_trayIcon->showNewMessageArrived( ID_DEFAULT_CHAT, msg );
 }
 
 void GuiMain::changeAvatarSizeInList()

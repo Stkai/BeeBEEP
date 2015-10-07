@@ -252,6 +252,7 @@ void GuiUserList::setDefaultChatConnected( bool yes )
 
 void GuiUserList::setChatOpened( VNumber chat_id )
 {
+  mp_twUsers->clearSelection();
   m_chatOpened = chat_id;
 
   GuiUserItem* item;

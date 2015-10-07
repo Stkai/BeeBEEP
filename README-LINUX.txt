@@ -29,7 +29,12 @@
    Where you can find packages?
 
    Ubuntu and Debian like
-   # sudo apt-get install libxcb-screensaver0 qt5-default libqt5multimedia5 libqt5multimedia5-plugins
+   [Runtime only libraries]
+   # sudo apt-get install libqt5core5a libqt5gui5 libqt5widgets5 libqt5network5 libqt5printsupport5 libqt5multimedia5 libqt5multimedia5-plugins libxcb-screensaver0
+   
+   [Developer libraries]
+   # sudo apt-get install libxcb-screensaver0-dev qt5-default libqt5multimedia5 libqt5multimedia5-plugins
+   * if qt5-default is not available remove it and add these packages: qtbase5-dev qtchooser qt5-qmake qtbase-dev-tools
    
    Fedora 22 (thanks to Marcus Frohn)
    # dnf install libxcb.so.1 libxcb-screensaver.so.0 libQt5PrintSupport.so.5 libQt5Multimedia.so.5 libQt5Widgets.so.5 libQt5Network.so.5 libQt5Gui.so.5 libQt5Core.so.5 -y
