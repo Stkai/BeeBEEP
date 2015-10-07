@@ -1422,8 +1422,6 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() )
     mp_home->addSystemMessage( cm );
-  else
-    qWarning() << "AAAAAAAAAAAAAAA NOT A SYS MESS O DEFAULT" << chat_id << (bool)cm.isFromSystem() << ":" << cm.message();
 
   if( !cm.isFromSystem() && !cm.isFromLocalUser() )
     show_alert = showAlert( chat_id );
