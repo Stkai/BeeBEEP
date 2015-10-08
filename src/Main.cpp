@@ -158,7 +158,7 @@ int main( int argc, char *argv[] )
   GuiMain mw;
   QObject::connect( &bee_app, SIGNAL( enteringInIdle() ), &mw, SLOT( setInIdle() ) );
   QObject::connect( &bee_app, SIGNAL( exitingFromIdle() ), &mw, SLOT( exitFromIdle() ) );
-  QObject::connect( &bee_app, SIGNAL( aboutToQuit() ), &mw, SLOT( quitCore() ) );
+  QObject::connect( &bee_app, SIGNAL( aboutToQuit() ), &mw, SLOT( forceShutdown() ) );
   QObject::connect( &bee_app, SIGNAL( showUp() ), &mw, SLOT( showUp() ) );
 
   QByteArray ba = Settings::instance().guiGeometry();

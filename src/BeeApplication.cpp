@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeApplication.h"
+#include "ShutdownMonitor.h"
 #include <QDebug>
 #include <QEvent>
 #include <QThread>
@@ -83,6 +84,12 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   signal( SIGTERM, &quitAfterSignal );
   signal( SIGABRT, &quitAfterSignal );
 
+#if QT_VERSION >= 0x050000
+  mp_shutdownMonitor = new ShutdownMonitor;
+  installNativeEventFilter( mp_shutdownMonitor );
+#else
+  mp_shutdownMonitor = 0;
+#endif
 }
 
 BeeApplication::~BeeApplication()
@@ -91,6 +98,14 @@ BeeApplication::~BeeApplication()
   {
     mp_localServer->close();
     delete mp_localServer;
+  }
+
+  if( mp_shutdownMonitor )
+  {
+#if QT_VERSION >= 0x050000
+    removeNativeEventFilter( mp_shutdownMonitor );
+#endif
+    delete mp_shutdownMonitor;
   }
 }
 
@@ -332,3 +347,4 @@ void BeeApplication::removeJob( QObject* obj )
   m_jobsInProgress--;
   qDebug() << obj->objectName() << "removed from job thread." << m_jobsInProgress << "jobs in progress";
 }
+

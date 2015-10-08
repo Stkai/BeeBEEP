@@ -171,7 +171,6 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
     QString subfolder_path = "";
     foreach( QString fn, folder_list_path )
     {
-      qDebug() << "Parsing folder:" << fn;
       if( subfolder_path.isEmpty() )
         subfolder_path = fn;
       else

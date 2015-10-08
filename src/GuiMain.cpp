@@ -85,6 +85,7 @@ GuiMain::GuiMain( QWidget *parent )
   mp_trayIcon = new GuiSystemTray( this );
 
   m_lastUserStatus = User::Online;
+  m_forceShutdown = false;
 
   createActions();
   createDockWindows();
@@ -173,7 +174,7 @@ GuiMain::GuiMain( QWidget *parent )
   statusBar()->showMessage( tr( "Ready" ) );
 }
 
-void GuiMain::checkWindowFlagsAndShow()
+void GuiMain::applyFlagStaysOnTop()
 {
   if( Settings::instance().stayOnTop() )
   {
@@ -183,6 +184,11 @@ void GuiMain::checkWindowFlagsAndShow()
   {
     setWindowFlags( windowFlags() & ~Qt::WindowStaysOnTopHint );
   }
+}
+
+void GuiMain::checkWindowFlagsAndShow()
+{
+  applyFlagStaysOnTop();
 
   checkViewActions();
 
@@ -221,13 +227,6 @@ void GuiMain::refreshTitle( const User& )
   setWindowTitle( window_title );
 }
 
-void GuiMain::forceExit()
-{
-  if( mp_core->isConnected() )
-    mp_core->stop();
-  close();
-}
-
 void GuiMain::keyPressEvent( QKeyEvent* e )
 {
   if( e->key() == Qt::Key_Escape && Settings::instance().keyEscapeMinimizeInTray() )
@@ -252,41 +251,49 @@ void GuiMain::closeEvent( QCloseEvent* e )
 {
   if( mp_core->isConnected() )
   {
-    if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
+    if( !m_forceShutdown )
     {
-      QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
-      e->ignore();
-      return;
-    }
-
-    if( Settings::instance().promptOnCloseEvent() )
-    {
-      if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
-                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+      if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
       {
+        QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
         e->ignore();
         return;
       }
+
+      if( Settings::instance().promptOnCloseEvent() )
+      {
+        if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+        {
+          e->ignore();
+          return;
+        }
+      }
     }
 
-    stopCore();
+    mp_core->stop();
   }
+
   raiseHomeView();
 
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
-  if( !sets->isWritable() )
+
+  if( !m_forceShutdown )
   {
-    if( QMessageBox::warning( this, Settings::instance().programName(),
+    if( !sets->isWritable() )
+    {
+      if( QMessageBox::warning( this, Settings::instance().programName(),
                               QString( "%1<br />%2<br />%3<br />%4<br />%5" ).arg( tr( "<b>Settings can not be saved</b>. Path:" ) )
                                                                      .arg( sets->fileName() )
                                                                      .arg( tr( "<b>is not writable</b> by user:" ) )
                                                                      .arg( Settings::instance().localUser().accountPath() )
                                                                      .arg( tr( "Do you want to close anyway?" ) ),
                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
-    {
-      e->ignore();
-      return;
+      {
+        e->ignore();
+        return;
+      }
     }
   }
 
@@ -339,10 +346,12 @@ void GuiMain::startStopCore()
     startCore();
 }
 
-void GuiMain::quitCore()
+void GuiMain::forceShutdown()
 {
+  m_forceShutdown = true;
   if( mp_core->isConnected() )
-    stopCore();
+    mp_core->stop();
+  close();
 }
 
 void GuiMain::startCore()
@@ -507,7 +516,7 @@ void GuiMain::createActions()
   mp_actQuit = new QAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this );
   mp_actQuit->setShortcuts( QKeySequence::Quit );
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
-  connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( forceExit() ) );
+  connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( forceShutdown() ) );
 
   mp_actVCard = new QAction( QIcon( ":/images/profile-edit.png"), tr( "Edit your profile..." ), this );
   mp_actVCard->setStatusTip( tr( "Change your profile information like your picture or your email or phone number" ) );
@@ -1239,7 +1248,8 @@ void GuiMain::settingsChanged()
     break;
   case 14:
     Settings::instance().setStayOnTop( act->isChecked() );
-    checkWindowFlagsAndShow();
+    applyFlagStaysOnTop();
+    show();
     break;
   case 15:
     Settings::instance().setRaiseOnNewMessageArrived( act->isChecked() );

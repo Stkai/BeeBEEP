@@ -34,6 +34,8 @@ struct xcb_connection_t;
 struct xcb_screen_t;
 #endif
 
+class ShutdownMonitor;
+
 
 class BeeApplication : public QApplication
 {
@@ -62,6 +64,7 @@ signals:
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
+
   int idleTimeFromSystem();
   bool isScreenSaverRunning();
   QString localServerName() const;
@@ -86,6 +89,8 @@ private:
   xcb_screen_t* mp_xcbScreen;
   bool m_xcbConnectHasError;
 #endif
+
+  ShutdownMonitor *mp_shutdownMonitor;
 
 };
 

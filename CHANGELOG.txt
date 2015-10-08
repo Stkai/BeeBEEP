@@ -1,5 +1,8 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 2.0.5
+- Fixed issue with "This app is preventing shutdown" in Windows
+
 BeeBEEP 2.0.4
 - Some GUI improvements (new icons, file sharing tree load faster)
 - Always Beep on new message arrived (option)

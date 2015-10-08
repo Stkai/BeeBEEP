@@ -101,6 +101,7 @@ HEADERS += AudioManager.h \
   Random.h \
   Rijndael.h \
   SaveChatList.h \
+  ShutdownMonitor.h \
   Settings.h \
   Tips.h \
   Updater.h \
@@ -191,13 +192,14 @@ SOURCES += AudioManager.cpp \
   Protocol.cpp \
   Rijndael.cpp \
   SaveChatList.cpp \
+  ShutdownMonitor.cpp \
   Settings.cpp \
   Updater.cpp \
   User.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp 
+  VCard.cpp
 
 
 FORMS += GuiAddUser.ui \

@@ -55,12 +55,13 @@ class GuiMain : public QMainWindow
 public:
   GuiMain( QWidget* parent = 0 );
   void checkWindowFlagsAndShow();
+
   void loadSession();
   void saveSession();
 
 public slots:
   void startStopCore();
-  void quitCore();
+  void forceShutdown();
   void hideToTrayIcon();
   void setInIdle();
   void exitFromIdle();
@@ -98,7 +99,6 @@ private slots:
   void showDefaultChat();
   void showChat( VNumber );
   void showWizard();
-  void forceExit();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
   void trayMessageClicked();
   void raiseChatView();
@@ -188,6 +188,7 @@ private:
   void showVCard( const User&, bool ensure_visible );
   bool isAudioDeviceAvailable() const;
   void showDefaultServerPortInMenu();
+  void applyFlagStaysOnTop();
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -264,6 +265,8 @@ private:
   QMap<QString, QMenu*> m_mapGameMenu;
 
   int m_lastUserStatus;
+
+  bool m_forceShutdown;
 
 };
 
