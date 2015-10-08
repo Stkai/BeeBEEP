@@ -191,6 +191,7 @@ bool Core::createGroup( const QString& group_name, const QList<VNumber>& group_m
   }
 
   Group g = Protocol::instance().createGroup( group_name, group_private_id, group_members );
+  qDebug() << "Group" << g.name() << "created with id:" << g.privateId();
   addGroup( g );
   return true;
 }
@@ -223,6 +224,10 @@ bool Core::createGroupFromChat( VNumber chat_id )
 void Core::addGroup( const Group& g )
 {
   UserManager::instance().setGroup( g );
+
+  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  if( !c.isValid() )
+    createGroupChat( g, false );
   emit updateGroup( g.id() );
 }
 
@@ -275,9 +280,7 @@ void Core::loadUsersAndGroups()
 {
   if( !Settings::instance().userList().isEmpty() )
   {
-#ifdef BEEBEEP_DEBUG
     qDebug() << "Loading" << Settings::instance().userList().size() << "saved users";
-#endif
 
     User u;
     foreach( QString user_data, Settings::instance().userList() )
@@ -285,12 +288,11 @@ void Core::loadUsersAndGroups()
       u = Protocol::instance().loadUser( user_data );
       if( u.isValid() )
       {
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Saved user added:" << u.path();
-#endif
+        qDebug() << "Loading user:" << u.path();
         if( u.isFavorite() )
           qDebug() << "User" << u.path() << "is in favorite list";
         UserManager::instance().setUser( u );
+        createPrivateChat( u );
       }
     }
   }

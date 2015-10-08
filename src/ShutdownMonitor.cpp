@@ -40,7 +40,10 @@ bool ShutdownMonitor::nativeEventFilter( const QByteArray& event_type, void* eve
     *event_result = TRUE;
     return true;
   }
-
+#else
+  Q_UNUSED( event_type );
+  Q_UNUSED( event_message );
+  Q_UNUSED( event_result );
 #endif
 
   return false;

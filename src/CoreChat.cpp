@@ -79,7 +79,7 @@ void Core::createDefaultChat()
 
 void Core::createPrivateChat( const User& u )
 {
-  qDebug() << "Creating private chat room for user" << u.path();
+  qDebug() << "Creating private chat room for user" << u.id() << u.path();
   QList<VNumber> user_list;
   user_list.append( u.id() );
   Chat c = Protocol::instance().createChat( user_list );
@@ -123,7 +123,7 @@ void Core::createGroupChat( const Group& g, bool broadcast_message )
 
 void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& users_id, const QString& chat_private_id, bool broadcast_message )
 {
-  qDebug() << "Creating group chat named" << chat_name;
+  qDebug() << "Creating group chat named" << chat_name << "with private id:" << chat_private_id;
   UserList ul = UserManager::instance().userList().fromUsersId( users_id );
   QString sHtmlMsg;
 
@@ -522,9 +522,12 @@ bool Core::removeChat( VNumber chat_id )
     return true;
   }
 
+
   if( ChatManager::instance().removeChat( c ) )
   {
     qDebug() << "Group chat deleted:" << c.name();
+    UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+    sendGroupChatRefuseMessage( c, group_members );
     return true;
   }
 
