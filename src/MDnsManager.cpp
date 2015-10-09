@@ -45,7 +45,9 @@ bool MDnsManager::start( const QString& service_base_name, const QString& servic
 {
   if( isActive() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << objectName() << "is already active";
+#endif
     return false;
   }
 
@@ -66,7 +68,9 @@ bool MDnsManager::stop()
 {
   if( !isActive() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << objectName() << "is already closed";
+#endif
     return false;
   }
 
@@ -76,7 +80,6 @@ bool MDnsManager::stop()
   m_bonjourRecords.clear();
   m_userRecords.clear();
   m_isActive = false;
-  qDebug() << objectName() << "closed";
   return true;
 }
 

@@ -21,8 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOUROBJECT_H
-#define BEEBEEP_BONJOUROBJECT_H
+#ifndef BEEBEEP_MDNSOBJECT_H
+#define BEEBEEP_MDNSOBJECT_H
 
 #include "Config.h"
 #include "MDnsRecord.h"
@@ -61,4 +61,4 @@ protected:
 inline const MDnsRecord& MDnsObject::record() const { return m_record; }
 inline void MDnsObject::setRecord( const MDnsRecord& new_value ) { m_record = new_value; }
 
-#endif // BEEBEEP_BONJOUROBJECT_H
+#endif // BEEBEEP_MDNSOBJECT_H

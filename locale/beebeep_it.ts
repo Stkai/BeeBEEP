@@ -530,6 +530,14 @@
         <source>%1 %2 has not shared files.</source>
         <translation>%1 %2 non ha condiviso nessun file.</translation>
     </message>
+    <message>
+        <source>%1 Zero Configuration Networking (multicast DNS) started: %3</source>
+        <translation>%1 Zero Configuration Networking (muticast DNS) inizializzato: %3</translation>
+    </message>
+    <message>
+        <source>%1 Zero Configuration Networking (multicast DNS) closed.</source>
+        <translation>%1 Zero Configuration Networking (multicast DNS) chiuso.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1386,10 +1394,6 @@ Inserisci un nome differente.</translation>
 <context>
     <name>GuiLife</name>
     <message>
-        <source>BeeLife</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Restart</source>
         <translation type="obsolete">Riavvia</translation>
     </message>
@@ -1399,7 +1403,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Paused (press space bar to continue)</source>
-        <translation>Pausa (premi spazio per continuare)</translation>
+        <translation type="vanished">Pausa (premi spazio per continuare)</translation>
     </message>
     <message>
         <source>Do you really want to restart?</source>
@@ -1407,11 +1411,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation type="vanished">Si</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="vanished">No</translation>
     </message>
     <message>
         <source>Bees Alive: %1 - Bees Died: %2 - Spaces: %3 - Hive Generation: %4</source>
@@ -1419,54 +1423,42 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>??? Evolution Completed ??? ... (or press space bar to continue)</source>
-        <translation>??? Evoluzione Completata ??? ... (o premi spazio per continuare)</translation>
+        <translation type="vanished">??? Evoluzione Completata ??? ... (o premi spazio per continuare)</translation>
     </message>
     <message>
         <source>Alive: %1 - Died: %2 - Spaces: %3 - Step: %4</source>
-        <translation>Vive: %1 - Morte: %2 - Spazi: %3 - Passi: %4</translation>
+        <translation type="vanished">Vive: %1 - Morte: %2 - Spazi: %3 - Passi: %4</translation>
     </message>
     <message>
         <source>Do you really want to randomize and restart?</source>
-        <translation>Vuoi creare una situazione iniziale a caso e ripartire?</translation>
+        <translation type="vanished">Vuoi creare una situazione iniziale a caso e ripartire?</translation>
     </message>
     <message>
         <source>Do you really want to clear all?</source>
-        <translation>Vuoi cancellare tutto?</translation>
+        <translation type="vanished">Vuoi cancellare tutto?</translation>
     </message>
 </context>
 <context>
     <name>GuiLifeWidget</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>#</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Press space bar to start</source>
-        <translation>Premi spazio per iniziare</translation>
-    </message>
-    <message>
-        <source>BeeLife</source>
-        <translation></translation>
+        <translation type="vanished">Premi spazio per iniziare</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation>Riavvia</translation>
+        <translation type="vanished">Riavvia</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Cancella</translation>
+        <translation type="vanished">Cancella</translation>
     </message>
     <message>
         <source>Fast</source>
-        <translation>Veloce</translation>
+        <translation type="vanished">Veloce</translation>
     </message>
     <message>
         <source>Slow</source>
-        <translation>Lento</translation>
+        <translation type="vanished">Lento</translation>
     </message>
 </context>
 <context>
@@ -3630,6 +3622,10 @@ il file %2 (%3)?</translation>
         <source>Automatically add external subnet</source>
         <translation>Aggiungi automaticamente le sottorete esterne</translation>
     </message>
+    <message>
+        <source>Use Zero Configuration Networking</source>
+        <translation>Usa lo Zero Configuration Networking</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocal</name>
@@ -3953,44 +3949,32 @@ il file %2 (%3)?</translation>
 <context>
     <name>GuiTetris</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Next Piece</source>
-        <translation>Prossimo Pezzo</translation>
+        <translation type="vanished">Prossimo Pezzo</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation>Punteggio</translation>
+        <translation type="vanished">Punteggio</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation>Linee</translation>
+        <translation type="vanished">Linee</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation>Livello</translation>
+        <translation type="vanished">Livello</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Nuova Partita</translation>
+        <translation type="vanished">Nuova Partita</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation>Pausa</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation></translation>
+        <translation type="vanished">Pausa</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Continua</translation>
-    </message>
-    <message>
-        <source>BeeTetris</source>
-        <translation></translation>
+        <translation type="vanished">Continua</translation>
     </message>
 </context>
 <context>
@@ -4332,12 +4316,8 @@ il file %2 (%3)?</translation>
 <context>
     <name>LifeGame</name>
     <message>
-        <source>BeeLife</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&lt;b&gt;The Game of Life&lt;/b&gt;, also known simply as Life, is a cellular automaton devised by the British mathematician &lt;b&gt;John Horton Conway&lt;/b&gt; in 1970. The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:&lt;ul&gt;&lt;li&gt;Any live cell with less than two live neighbours dies, as if caused by under-population.&lt;/li&gt;&lt;li&gt;Any live cell with two or three live neighbours lives on to the next generation.&lt;/li&gt;&lt;li&gt;Any live cell with more than three live neighbours dies, as if by overcrowding.&lt;/li&gt;&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.&lt;/li&gt;&lt;/ul&gt;The rules continue to be applied repeatedly to create further generations.&lt;br /&gt;For more info please visit &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</source>
-        <translation>Il &lt;b&gt;Gioco della vita&lt;/b&gt; (Game of Life in inglese) è un automa cellulare sviluppato dal matematico inglese &lt;b&gt;John Conway&lt;/b&gt; sul finire degli anni sessanta. Si tratta in realtà di un gioco senza giocatori, intendendo che la sua evoluzione è determinata dal suo stato iniziale, senza necessità di alcun input da parte di giocatori umani. Si svolge su una griglia di caselle quadrate (celle) che si estende all&apos;infinito in tutte le direzioni; questa griglia è detta mondo. Ogni cella ha 8 vicini, che sono le celle ad essa adiacenti, includendo quelle in senso diagonale. Ogni cella può trovarsi in due stati: viva o morta (o accesa e spenta, on e off). Lo stato della griglia evolve in intervalli di tempo discreti. Gli stati di tutte le celle in un dato istante sono usati per calcolare lo stato delle celle all&apos;istante successivo. Tutte le celle del mondo vengono quindi aggiornate simultaneamente nel passaggio da un istante a quello successivo: passa così una generazione.&lt;br /&gt;
+        <translation type="vanished">Il &lt;b&gt;Gioco della vita&lt;/b&gt; (Game of Life in inglese) è un automa cellulare sviluppato dal matematico inglese &lt;b&gt;John Conway&lt;/b&gt; sul finire degli anni sessanta. Si tratta in realtà di un gioco senza giocatori, intendendo che la sua evoluzione è determinata dal suo stato iniziale, senza necessità di alcun input da parte di giocatori umani. Si svolge su una griglia di caselle quadrate (celle) che si estende all&apos;infinito in tutte le direzioni; questa griglia è detta mondo. Ogni cella ha 8 vicini, che sono le celle ad essa adiacenti, includendo quelle in senso diagonale. Ogni cella può trovarsi in due stati: viva o morta (o accesa e spenta, on e off). Lo stato della griglia evolve in intervalli di tempo discreti. Gli stati di tutte le celle in un dato istante sono usati per calcolare lo stato delle celle all&apos;istante successivo. Tutte le celle del mondo vengono quindi aggiornate simultaneamente nel passaggio da un istante a quello successivo: passa così una generazione.&lt;br /&gt;
 Le transizioni di stato dipendono unicamente dal numero di vicini vivi:&lt;ul&gt;
 &lt;li&gt;Una cella morta con esattamente 3 vicini vivi nasce, diventando viva.&lt;/li&gt;
 &lt;li&gt;Una cella viva con 2 o 3 vicini vivi sopravvive; altrimenti muore (per isolamento o sovraffollamento)&lt;/li&gt;
@@ -4488,11 +4468,11 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <name>TetrisBoard</name>
     <message>
         <source>Pause</source>
-        <translation>Pausa</translation>
+        <translation type="vanished">Pausa</translation>
     </message>
     <message>
         <source>Game Over</source>
-        <translation>Game Over</translation>
+        <translation type="vanished">Game Over</translation>
     </message>
 </context>
 <context>
@@ -4503,11 +4483,7 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Use &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right Arrow&lt;/b&gt; to move the pieces on the board. &lt;b&gt;Up&lt;/b&gt; and &lt;b&gt;Down Arrow&lt;/b&gt; to rotate left and right. &lt;b&gt;Space&lt;/b&gt; to drop down the piece. &lt;b&gt;D&lt;/b&gt; to drop the piece only one line. &lt;b&gt;P&lt;/b&gt; to pause the game.</source>
-        <translation>Usa le frecce &lt;b&gt;Sinistra&lt;/b&gt; e &lt;b&gt;Destra&lt;/b&gt; per muovere i pezzi nello schermo. Le frecce &lt;b&gt;Su&lt;/b&gt; e &lt;b&gt;Giù&lt;/b&gt; per ruotare il pezzo a sinistra e destra rispettivamente. &lt;b&gt;Barra spaziatrice&lt;/b&gt; per far cadere il pezzo. Premi il tasto &lt;b&gt;D&lt;/b&gt; per scendere di una linea e &lt;b&gt;P&lt;/b&gt; per mettere in pausa il gioco.</translation>
-    </message>
-    <message>
-        <source>BeeTetris</source>
-        <translation></translation>
+        <translation type="vanished">Usa le frecce &lt;b&gt;Sinistra&lt;/b&gt; e &lt;b&gt;Destra&lt;/b&gt; per muovere i pezzi nello schermo. Le frecce &lt;b&gt;Su&lt;/b&gt; e &lt;b&gt;Giù&lt;/b&gt; per ruotare il pezzo a sinistra e destra rispettivamente. &lt;b&gt;Barra spaziatrice&lt;/b&gt; per far cadere il pezzo. Premi il tasto &lt;b&gt;D&lt;/b&gt; per scendere di una linea e &lt;b&gt;P&lt;/b&gt; per mettere in pausa il gioco.</translation>
     </message>
 </context>
 <context>

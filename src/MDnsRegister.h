@@ -21,8 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOURREGISTER_H
-#define BEEBEEP_BONJOURREGISTER_H
+#ifndef BEEBEEP_MDNSREGISTER_H
+#define BEEBEEP_MDNSREGISTER_H
 
 #include "MDnsObject.h"
 
@@ -56,4 +56,4 @@ private:
 // Inline Functions
 inline int MDnsRegister::servicePort() const { return m_servicePort; }
 
-#endif // BEEBEEP_BONJOURREGISTER_H
+#endif // BEEBEEP_MDNSREGISTER_H

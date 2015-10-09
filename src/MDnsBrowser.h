@@ -21,8 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOURBROWSER_H
-#define BEEBEEP_BONJOURBROWSER_H
+#ifndef BEEBEEP_MDNSBROWSER_H
+#define BEEBEEP_MDNSBROWSER_H
 
 #include "MDnsObject.h"
 
@@ -49,4 +49,4 @@ protected:
 
 };
 
-#endif // BEEBEEP_BONJOURBROWSER_H
+#endif // BEEBEEP_MDNSBROWSER_H

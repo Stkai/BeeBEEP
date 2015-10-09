@@ -79,14 +79,8 @@ Settings::Settings()
 #else
   m_dataFolder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
 #endif
-
   m_lastSave = QDateTime::currentDateTime();
-
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  m_useMulticastDns = true;
-#else
   m_useMulticastDns = false;
-#endif
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -661,7 +655,9 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Network");
+#ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
+#endif
   m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
@@ -847,7 +843,9 @@ void Settings::save()
   sets->setValue( "WritingTimeout", m_writingTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
+#ifdef BEEBEEP_USE_MULTICAST_DNS
   sets->setValue( "UseMulticastDns", m_useMulticastDns );
+#endif
   sets->setValue( "BroadcastAddresses", m_broadcastAddressesInSettings );
   if( !m_localHostAddressForced.isNull() )
     sets->setValue( "LocalHostAddressForced", m_localHostAddressForced.toString() );

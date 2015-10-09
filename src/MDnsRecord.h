@@ -21,8 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOURRECORD_H
-#define BEEBEEP_BONJOURRECORD_H
+#ifndef BEEBEEP_MDNSRECORD_H
+#define BEEBEEP_MDNSRECORD_H
 
 #include "Config.h"
 
@@ -65,4 +65,4 @@ inline const QString& MDnsRecord::replyDomain() const { return m_replyDomain; }
 inline void MDnsRecord::setReplyDomain( const QString& new_value ) { m_replyDomain = new_value; }
 inline QString MDnsRecord::name() const { return QString( "%1|%2|%3" ).arg( m_serviceName, m_registeredType, m_replyDomain ); }
 
-#endif // BEEBEEP_BONJOURRECORD_H
+#endif // BEEBEEP_MDNSRECORD_H

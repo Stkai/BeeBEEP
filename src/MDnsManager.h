@@ -21,8 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_BONJOURMANAGER_H
-#define BEEBEEP_BONJOURMANAGER_H
+#ifndef BEEBEEP_MDNSMANAGER_H
+#define BEEBEEP_MDNSMANAGER_H
 
 #include "UserRecord.h"
 #include "MDnsRecord.h"
@@ -70,4 +70,4 @@ private:
 inline const QList<UserRecord>& MDnsManager::userRecords() const { return m_userRecords; }
 inline bool MDnsManager::isActive() const { return m_isActive; }
 
-#endif // BEEBEEP_BONJOURMANAGER_H
+#endif // BEEBEEP_MDNSMANAGER_H
