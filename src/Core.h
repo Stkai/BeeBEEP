@@ -32,7 +32,7 @@ class Group;
 class UserList;
 class UserRecord;
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-class MdnsManager;
+class MDnsManager;
 #endif
 
 
@@ -46,6 +46,9 @@ public:
   bool isConnected() const;
   bool start();
   void stop();
+
+  void startDnsMulticasting();
+  void stopDnsMulticasting();
 
   bool updateBroadcastAddresses();
   int fileTransferPort() const;

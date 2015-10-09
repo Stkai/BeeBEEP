@@ -108,9 +108,7 @@ bool Core::start()
     QTimer::singleShot( 1000, this, SLOT( sendBroadcastMessage() ) );
   }
 
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_mDns->start( Settings::instance().programName(), Settings::instance().dnsRecord(), Settings::instance().localUser().hostAddress().toString(), mp_listener->serverPort() );
-#endif
+  startDnsMulticasting();
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
@@ -141,12 +139,50 @@ bool Core::start()
   return true;
 }
 
+void Core::startDnsMulticasting()
+{
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  if( mp_mDns->isActive() )
+    return;
+
+  if( Settings::instance().useMulticastDns() )
+  {
+    if( mp_mDns->start( Settings::instance().programName(),
+                        Settings::instance().dnsRecord(),
+                        Settings::instance().localUser().hostAddress().toString(),
+                        mp_listener->serverPort() ) )
+    {
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                             tr( "%1 Zero Configuration Networking (multicast DNS) started: %3" )
+                               .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
+                             DispatchToChat, ChatMessage::Connection );
+    }
+  }
+#endif
+}
+
+void Core::stopDnsMulticasting()
+{
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  if( !mp_mDns->isActive() )
+    return;
+
+  if( mp_mDns->stop() )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                             tr( "%1 Zero Configuration Networking (multicast DNS) closed." )
+                               .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ) ),
+                             DispatchToChat, ChatMessage::Connection );
+  }
+#endif
+}
+
 void Core::stop()
 {
+  stopDnsMulticasting();
+
   mp_broadcaster->stopBroadcasting();
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_mDns->stop();
-#endif
+
   stopFileTransferServer();
 
   mp_listener->close();

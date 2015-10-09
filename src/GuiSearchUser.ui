@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>542</width>
-    <height>411</height>
+    <height>395</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -173,6 +173,13 @@
         </property>
        </widget>
       </item>
+      <item row="8" column="0" colspan="2">
+       <widget class="QCheckBox" name="mp_cbMDnsResponder">
+        <property name="text">
+         <string>Use Zero Configuration Networking</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -219,6 +226,7 @@
   <tabstop>mp_teAddressesInSettings</tabstop>
   <tabstop>mp_cbParseAddresses</tabstop>
   <tabstop>mp_cbAutoAddSubnet</tabstop>
+  <tabstop>mp_cbMDnsResponder</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>

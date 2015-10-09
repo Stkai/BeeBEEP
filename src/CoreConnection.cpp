@@ -235,9 +235,15 @@ void Core::checkUserAuthentication( const Message& m )
 
   if( user_found.isValid() )
   {
+    if( user_found.isLocal() )
+    {
+      closeConnection( c );
+      return;
+    }
+
     if( user_found.isConnected() )
     {
-      qWarning() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
+      qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
       closeConnection( c );
       return;
     }

@@ -1489,6 +1489,13 @@ void GuiMain::searchUsers()
 
   raiseHomeView();
 
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  if( Settings::instance().useMulticastDns() )
+    mp_core->startDnsMulticasting();
+  else
+    mp_core->stopDnsMulticasting();
+#endif
+
   if( mp_core->updateBroadcastAddresses() )
     mp_core->sendBroadcastMessage();
 }
