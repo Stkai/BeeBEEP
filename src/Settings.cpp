@@ -204,7 +204,12 @@ void Settings::loadRcFile()
   m_trustSystemAccount = sets->value( "TrustSystemAccount", m_trustSystemAccount ).toBool();
   sets->endGroup();
 
+  QStringList key_list = sets->allKeys();
+  foreach( QString key, key_list )
+    qDebug() << "RC read ->" << qPrintable( key ) << "=" << qPrintable( sets->value( key ).toString() );
+
   qDebug() << "RC configuration file read";
+
   sets->deleteLater();
 }
 

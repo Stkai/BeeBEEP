@@ -1,6 +1,6 @@
 [BeeBEEP]
 BroadcastOnlyToHostsIni=false
-DefaultBroadcastPort=36475
+BroadcastPort=36475
 DefaultListenerPort=6475
 DefaultFileTransferPort=6476
 UseConfigurationFileIni=true
