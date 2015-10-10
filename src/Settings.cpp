@@ -81,6 +81,7 @@ Settings::Settings()
 #endif
   m_lastSave = QDateTime::currentDateTime();
   m_useMulticastDns = false;
+  m_preventMultipleConnectionsFromSingleHostAddress = false;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -658,6 +659,7 @@ void Settings::load()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
+  m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
   m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
@@ -716,7 +718,6 @@ void Settings::load()
 
 void Settings::save()
 {
-  qDebug() << "Saving settings";
   QSettings *sets = objectSettings();
 
   sets->clear();
@@ -846,6 +847,7 @@ void Settings::save()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   sets->setValue( "UseMulticastDns", m_useMulticastDns );
 #endif
+  sets->setValue( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress );
   sets->setValue( "BroadcastAddresses", m_broadcastAddressesInSettings );
   if( !m_localHostAddressForced.isNull() )
     sets->setValue( "LocalHostAddressForced", m_localHostAddressForced.toString() );

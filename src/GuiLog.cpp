@@ -163,10 +163,6 @@ void GuiLog::findTextInLog()
   if( mp_cbWholeWordOnly->isChecked() )
     find_flags |= QTextDocument::FindWholeWords;
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Searching" << txt << "with flags" << (int)find_flags;
-#endif
-
   if( !mp_teLog->find( txt, find_flags ) )
   {
     mp_teLog->moveCursor( QTextCursor::Start );

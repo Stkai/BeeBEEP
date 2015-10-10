@@ -226,14 +226,14 @@ RESOURCES += beebeep.qrc emojis.qrc
 win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns
 
-win32|macx: DEFINES += BEEBEEP_USE_MULTICAST_DNS
-win32|macx: HEADERS += MDnsBrowser.h MDnsManager.h MDnsObject.h MDnsRecord.h MDnsRegister.h MDnsResolver.h
-win32|macx: SOURCES += MDnsBrowser.cpp MDnsManager.cpp MDnsObject.cpp MDnsRecord.cpp MDnsRegister.cpp MDnsResolver.cpp
+win32|macx|unix: DEFINES += BEEBEEP_USE_MULTICAST_DNS
+win32|macx|unix: HEADERS += MDnsBrowser.h MDnsManager.h MDnsObject.h MDnsRecord.h MDnsRegister.h MDnsResolver.h
+win32|macx|unix: SOURCES += MDnsBrowser.cpp MDnsManager.cpp MDnsObject.cpp MDnsRecord.cpp MDnsRegister.cpp MDnsResolver.cpp
 win32: QMAKE_LFLAGS += /NODEFAULTLIB:libcmt
 win32: LIBS += -L$$PWD/../mdns-lib/ -ldnssd
 win32: INCLUDEPATH += $$PWD/../mdns-lib
 win32: DEPENDPATH += $$PWD/../mdns-lib
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/dnssd.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/libdnssd.a
-
+unix:!macx: LIBS += -ldns_sd
 

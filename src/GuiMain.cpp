@@ -2930,9 +2930,9 @@ void GuiMain::showConnectionStatusChanged( const User& u )
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( c.isValid() && u.isConnected() )
-    mp_trayIcon->showNewMessageArrived( c.id(), msg );
+    mp_trayIcon->showUserStatusChanged( c.id(), msg );
   else
-    mp_trayIcon->showNewMessageArrived( ID_DEFAULT_CHAT, msg );
+    mp_trayIcon->showUserStatusChanged( ID_DEFAULT_CHAT, msg );
 }
 
 void GuiMain::changeAvatarSizeInList()

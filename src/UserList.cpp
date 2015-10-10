@@ -75,6 +75,14 @@ User UserList::find( VNumber user_id ) const
 
 void UserList::set( const User& u )
 {
+  if( u.id() == ID_INVALID )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Unable to add user 0 (ID_INVALID) to UserList";
+#endif
+    return;
+  }
+
   bool user_found = false;
   QList<User>::iterator it = m_users.begin();
   while( it != m_users.end() )

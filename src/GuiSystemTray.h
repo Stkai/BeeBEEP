@@ -37,6 +37,7 @@ public:
   explicit GuiSystemTray( QObject *parent = 0 );
 
   void showNewMessageArrived( VNumber, const QString& );
+  void showUserStatusChanged( VNumber, const QString& );
   void setUnreadMessages( VNumber, int );
   inline VNumber chatId() const;
   inline void resetChatId();

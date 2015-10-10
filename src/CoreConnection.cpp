@@ -53,10 +53,25 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
     if( (sender_port == -1 || (*it)->peerPort() == sender_port) && (*it)->peerAddress() == sender_ip )
     {
       if( (*it)->isConnected() )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Connection from" << sender_ip.toString() << sender_port << "is already open";
+#endif
         return true;
+      }
     }
     ++it;
   }
+
+  User u = UserManager::instance().findUserByHostAddressAndPort( sender_ip, sender_port );
+  if( u.isValid() && u.isConnected() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "User from" << sender_ip.toString() << sender_port << "is already connected";
+#endif
+    return true;
+  }
+
   return false;
 }
 
@@ -77,19 +92,35 @@ void Core::checkUserRecord( const UserRecord& ur )
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
   if( hasConnection( sender_ip, sender_port ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Connection from" << sender_ip.toString() << sender_ip << "is already open";
-#endif
     return;
-  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Connecting to new peer" << sender_ip.toString() << sender_port;
+#endif
 
   Connection *c = new Connection( this );
-  setNewConnection( c );
+  setupNewConnection( c );
   c->connectToHost( sender_ip, sender_port );
 }
 
-void Core::setNewConnection( Connection *c )
+void Core::checkNewConnection( Connection *c )
+{
+  // Has connection never return true because peer port is always different.
+  // It comes from Listener. If I want to prevent multiple users from single
+  // ip, I can pass -1 to peer_port and check only host address
+  if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
+  {
+    if( hasConnection( c->peerAddress(), -1 ) )
+    {
+      closeConnection( c );
+      return;
+    }
+  }
+
+  setupNewConnection( c );
+}
+
+void Core::setupNewConnection( Connection *c )
 {
 #ifdef BEEBEEP_DEBUG
   if( !c->peerAddress().isNull() )
@@ -272,6 +303,9 @@ void Core::checkUserAuthentication( const Message& m )
       u.setColor( ColorManager::instance().unselectedQString() );
   }
 
+  UserManager::instance().setUser( u );
+  qDebug() << "User" << u.path() << "added with id" << u.id() << "and color" << u.color();
+
   Chat default_chat = ChatManager::instance().defaultChat();
   if( default_chat.addUser( u.id() ) )
   {
@@ -285,8 +319,6 @@ void Core::checkUserAuthentication( const Message& m )
   c->setReadyForUse( u.id() );
   addConnectionReadyForUse( c );
 
-  UserManager::instance().setUser( u );
-  qDebug() << "User" << u.path() << "added with id" << u.id() << "and color" << u.color();
   if( user_path_changed )
     ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 

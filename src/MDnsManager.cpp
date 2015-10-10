@@ -114,7 +114,12 @@ void MDnsManager::removeMDnsRecord( const MDnsRecord& bonjour_record )
 void MDnsManager::addUserRecord( const UserRecord& ur )
 {
   if( m_userRecords.contains( ur ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << objectName() << "already contains user record" << ur.hostAddressAndPort();
+#endif
     return;
+  }
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << objectName() << "adds new user record" << ur.hostAddressAndPort();

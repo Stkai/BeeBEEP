@@ -34,8 +34,13 @@ GuiSystemTray::GuiSystemTray( QObject *parent )
 void GuiSystemTray::showNewMessageArrived( VNumber chat_id, const QString& msg )
 {
   m_chatId = chat_id;
-
   setMessageIcon();
+  showMessageInTray( msg );
+}
+
+void GuiSystemTray::showUserStatusChanged( VNumber chat_id, const QString& msg )
+{
+  m_chatId = chat_id;
   showMessageInTray( msg );
 }
 

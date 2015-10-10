@@ -234,6 +234,8 @@ public:
   inline bool addExternalSubnetAutomatically() const;
   inline void setAddExternalSubnetAutomatically( bool );
   bool addSubnetToBroadcastAddress( const QHostAddress& );
+  inline void SetPreventMultipleConnectionsFromSingleHostAddress( bool );
+  inline bool preventMultipleConnectionsFromSingleHostAddress();
 
   inline bool keyEscapeMinimizeInTray() const;
   inline void setKeyEscapeMinimizeInTray( bool );
@@ -432,6 +434,7 @@ private:
   bool m_parseBroadcastAddresses;
   bool m_addExternalSubnetAutomatically;
   bool m_useMulticastDns;
+  bool m_preventMultipleConnectionsFromSingleHostAddress;
 
   bool m_keyEscapeMinimizeInTray;
   bool m_minimizeInTray;
@@ -662,5 +665,7 @@ inline void Settings::setPromptOnCloseEvent( bool new_value ) { m_promptOnCloseE
 inline bool Settings::promptOnCloseEvent() const { return m_promptOnCloseEvent; }
 inline void Settings::setIsFacebookPageLinkClicked( bool new_value ) { m_isFacebookPageLinkClicked = new_value; }
 inline bool Settings::isFacebookPageLinkClicked() const { return m_isFacebookPageLinkClicked; }
+inline void Settings::SetPreventMultipleConnectionsFromSingleHostAddress( bool new_value ) { m_preventMultipleConnectionsFromSingleHostAddress = new_value; }
+inline bool Settings::preventMultipleConnectionsFromSingleHostAddress() { return m_preventMultipleConnectionsFromSingleHostAddress; }
 
 #endif // BEEBEEP_SETTINGS_H

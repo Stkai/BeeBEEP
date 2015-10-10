@@ -125,7 +125,7 @@ protected slots:
   void showBroadcasterUdpError();
 
   /* CoreConnection */
-  void setNewConnection( Connection* );
+  void checkNewConnection( Connection* );
   void newPeerFound( const QHostAddress&, int );
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();
@@ -157,6 +157,7 @@ protected:
   void closeConnection( Connection* );
   void addConnectionReadyForUse( Connection* );
   void checkOfflineMessagesForUser( const User& );
+  void setupNewConnection( Connection* );
 
   /* CoreParser */
   void parseUserMessage( const User&, const Message& );

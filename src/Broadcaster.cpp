@@ -164,6 +164,9 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     }
 
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster has found new peer" << sender_ip.toString() << sender_listener_port;
+#endif
     emit newPeerFound( sender_ip, sender_listener_port );
   }
 
