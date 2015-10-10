@@ -2885,6 +2885,7 @@ void GuiMain::sendBroadcastMessage()
 {
   mp_actBroadcast->setDisabled( true );
   mp_core->sendBroadcastMessage();
+  mp_core->sendMulticastingMessage();
   QTimer::singleShot( 10000, this, SLOT( enableBroadcastAction() ) );
 }
 

@@ -37,6 +37,8 @@ public:
   bool registerService( const MDnsRecord&, int );
   void unregisterService();
   inline int servicePort() const;
+  inline void setServiceRegistered( bool );
+  inline bool serviceIsRegistered() const;
 
 signals:
   void serviceRegistered();
@@ -49,11 +51,14 @@ protected:
 
 private:
   int m_servicePort;
+  bool m_serviceIsRegistered;
 
 };
 
 
 // Inline Functions
 inline int MDnsRegister::servicePort() const { return m_servicePort; }
+inline void MDnsRegister::setServiceRegistered( bool new_value ) { m_serviceIsRegistered = new_value; }
+inline bool MDnsRegister::serviceIsRegistered() const { return m_serviceIsRegistered; }
 
 #endif // BEEBEEP_MDNSREGISTER_H

@@ -532,11 +532,27 @@
     </message>
     <message>
         <source>%1 Zero Configuration Networking (multicast DNS) started: %3</source>
-        <translation>%1 Zero Configuration Networking (muticast DNS) inizializzato: %3</translation>
+        <translation type="vanished">%1 Zero Configuration Networking (muticast DNS) inizializzato: %3</translation>
     </message>
     <message>
         <source>%1 Zero Configuration Networking (multicast DNS) closed.</source>
-        <translation>%1 Zero Configuration Networking (multicast DNS) chiuso.</translation>
+        <translation type="vanished">%1 Zero Configuration Networking (multicast DNS) chiuso.</translation>
+    </message>
+    <message>
+        <source>%1 Zero Configuration started with service name: %2</source>
+        <translation>%1 Il servizio Zero Configuration è stato inizializzato con il nome: %2</translation>
+    </message>
+    <message>
+        <source>%1 Zero Configuration service closed.</source>
+        <translation>%1 Il servizio Zero Configuration è stato chiuso.</translation>
+    </message>
+    <message>
+        <source>%1 Zero Configuration is browsing network for service: %2</source>
+        <translation>%1 Zero Configuration sta cercando nella tua rete il servizio: %2</translation>
+    </message>
+    <message>
+        <source>%1 Zero Configuration cannot browse network for service: %2</source>
+        <translation>%1 Zero Configuration non può cercare nella rete il servizio: %2</translation>
     </message>
 </context>
 <context>

@@ -28,7 +28,7 @@
 
 
 MDnsManager::MDnsManager( QObject* parent )
- : QObject( parent ), m_bonjourRecords(), m_userRecords(), m_isActive( false )
+ : QObject( parent ), m_mdnsRecords(), m_userRecords(), m_isActive( false )
 {
   setObjectName( "MDnsManager" );
 
@@ -38,7 +38,6 @@ MDnsManager::MDnsManager( QObject* parent )
   connect( mp_register, SIGNAL( serviceRegistered() ), this, SLOT( serviceIsRegistered() ) );
   connect( mp_browser, SIGNAL( newRecordFound( const MDnsRecord& ) ), this, SLOT( addMDnsRecord( const MDnsRecord& ) ) );
   connect( mp_browser, SIGNAL( recordToRemove( const MDnsRecord& ) ), this, SLOT( removeMDnsRecord( const MDnsRecord& ) ) );
-
 }
 
 bool MDnsManager::start( const QString& service_base_name, const QString& service_type, const QString& listener_address, int listener_port  )
@@ -51,11 +50,11 @@ bool MDnsManager::start( const QString& service_base_name, const QString& servic
     return false;
   }
 
-  MDnsRecord br;
-  br.setServiceName( QString( "%1 %2:%3" ).arg( service_base_name ).arg( listener_address ).arg( listener_port ) );
-  br.setRegisteredType( service_type );
-  qDebug() << objectName() << "started with" << br.name();
-  if( mp_register->registerService( br, listener_port ) )
+  MDnsRecord mdr;
+  mdr.setServiceName( QString( "%1 %2:%3" ).arg( service_base_name ).arg( listener_address ).arg( listener_port ) );
+  mdr.setRegisteredType( service_type );
+  qDebug() << objectName() << "started with" << mdr.name();
+  if( mp_register->registerService( mdr, listener_port ) )
   {
     m_isActive = true;
     return true;
@@ -77,38 +76,53 @@ bool MDnsManager::stop()
   qDebug() << objectName() << "has unregistered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
   mp_register->unregisterService();
   mp_browser->stop();
-  m_bonjourRecords.clear();
+  m_mdnsRecords.clear();
   m_userRecords.clear();
   m_isActive = false;
   return true;
 }
 
+bool MDnsManager::browseForService()
+{
+  if( !mp_register->serviceIsRegistered() )
+  {
+    qDebug() << objectName() << "has not registered the service and can not browse for it";
+    return false;
+  }
+
+  if( mp_browser->isActive() )
+    mp_browser->stop();
+
+  return mp_browser->browseForService( mp_register->record().registeredType() );
+}
+
 void MDnsManager::serviceIsRegistered()
 {
   qDebug() << objectName() << "has registered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
-  mp_browser->browseForService( mp_register->record().registeredType() );
+  emit serviceRegistered();
 }
 
-void MDnsManager::addMDnsRecord( const MDnsRecord& bonjour_record )
+void MDnsManager::addMDnsRecord( const MDnsRecord& mdns_record )
 {
-  if( m_bonjourRecords.contains( bonjour_record ) )
+  if( m_mdnsRecords.contains( mdns_record ) )
     return;
 
- #ifdef BEEBEEP_DEBUG
-   qDebug() << objectName() << "adds new dns record" << bonjour_record.name();
- #endif
-   m_bonjourRecords.append( bonjour_record );
-   MDnsResolver* resolver = new MDnsResolver( this );
-   connect( resolver, SIGNAL( resolved( const QHostInfo&, int ) ), this, SLOT( serviceResolved(const QHostInfo&, int ) ) );
-   resolver->resolve( bonjour_record );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << objectName() << "adds new dns record" << mdns_record.name();
+#endif
+  m_mdnsRecords.append( mdns_record );
+
+  MDnsResolver* resolver = new MDnsResolver( this );
+  connect( resolver, SIGNAL( resolved( const QHostInfo&, int ) ), this, SLOT( serviceResolved( const QHostInfo&, int ) ) );
+  resolver->resolve( mdns_record );
 }
 
-void MDnsManager::removeMDnsRecord( const MDnsRecord& bonjour_record )
+void MDnsManager::removeMDnsRecord( const MDnsRecord& mdns_record )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << objectName() << "removes dns record" << bonjour_record.name();
+  qDebug() << objectName() << "removes dns record" << mdns_record.name();
 #endif
-  m_bonjourRecords.removeOne( bonjour_record );
+  m_mdnsRecords.removeOne( mdns_record );
 }
 
 void MDnsManager::addUserRecord( const UserRecord& ur )

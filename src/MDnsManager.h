@@ -28,6 +28,7 @@
 #include "MDnsRecord.h"
 class MDnsRegister;
 class MDnsBrowser;
+class MDnsResolver;
 
 
 class MDnsManager : public QObject
@@ -43,7 +44,10 @@ public:
   bool stop();
   inline bool isActive() const;
 
+  bool browseForService();
+
 signals:
+  void serviceRegistered();
   void newUserFound( const UserRecord& );
 
 protected slots:
@@ -59,7 +63,7 @@ private:
   MDnsRegister* mp_register;
   MDnsBrowser* mp_browser;
   QString m_serviceName;
-  QList<MDnsRecord> m_bonjourRecords;
+  QList<MDnsRecord> m_mdnsRecords;
   QList<UserRecord> m_userRecords;
   bool m_isActive;
 

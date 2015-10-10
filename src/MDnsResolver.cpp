@@ -30,15 +30,19 @@ MDnsResolver::MDnsResolver( QObject* parent )
   setObjectName( "MDnsResolver" );
 }
 
+MDnsResolver::~MDnsResolver()
+{
+  cleanUp();
+}
+
 void MDnsResolver::cleanUp()
 {
-  qDebug() << "IT WORKS";
   if( m_lookUpHostId != -1 )
     QHostInfo::abortHostLookup( m_lookUpHostId );
   MDnsObject::cleanUp();
 }
 
-void MDnsResolver::resolve( const MDnsRecord& bonjour_record )
+void MDnsResolver::resolve( const MDnsRecord& mdns_record )
 {
   if( mp_dnss )
   {
@@ -46,11 +50,11 @@ void MDnsResolver::resolve( const MDnsRecord& bonjour_record )
     return;
   }
 
-  m_record = bonjour_record;
-  DNSServiceErrorType error_code = DNSServiceResolve(&mp_dnss, 0, 0,
-                                                bonjour_record.serviceName().toUtf8().constData(),
-                                                bonjour_record.registeredType().toUtf8().constData(),
-                                                bonjour_record.replyDomain().toUtf8().constData(),
+  m_record = mdns_record;
+  DNSServiceErrorType error_code = DNSServiceResolve( &mp_dnss, 0, 0,
+                                                mdns_record.serviceName().toUtf8().constData(),
+                                                mdns_record.registeredType().toUtf8().constData(),
+                                                mdns_record.replyDomain().toUtf8().constData(),
                                                 (DNSServiceResolveReply)MDnsResolveReply, this );
 
   checkErrorAndReadSocket( error_code );

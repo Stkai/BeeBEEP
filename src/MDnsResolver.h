@@ -33,6 +33,7 @@ class MDnsResolver : public MDnsObject
 
 public:
   MDnsResolver( QObject *parent );
+  ~MDnsResolver();
 
   void resolve( const MDnsRecord& );
 

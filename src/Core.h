@@ -94,6 +94,7 @@ public:
 public slots:
   void sendBroadcastMessage();
   void sendHelloToHostsInSettings();
+  void sendMulticastingMessage();
 
   /* CoreChat */
   void sendWritingMessage( VNumber );

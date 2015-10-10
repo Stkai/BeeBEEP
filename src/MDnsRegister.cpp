@@ -25,38 +25,39 @@
 
 
 MDnsRegister::MDnsRegister( QObject *parent )
- : MDnsObject( parent ), m_servicePort( 0 )
+ : MDnsObject( parent ), m_servicePort( 0 ), m_serviceIsRegistered( false )
 {
   setObjectName( "MDnsRegister" );
 }
 
 void MDnsRegister::unregisterService()
 {
+  m_serviceIsRegistered = false;
   m_servicePort = 0;
   cleanUp();
 }
 
-bool MDnsRegister::registerService( const MDnsRecord& bonjour_record, int service_port )
+bool MDnsRegister::registerService( const MDnsRecord& mdns_record, int service_port )
 {
   if( mp_dnss )
   {
-    qWarning() << objectName() << "has already registered a service" << m_record.name() << "on port" << m_servicePort;
+    qWarning() << objectName() << "has already registered a service" << m_record.registeredType() << "on port" << m_servicePort;
     return false;
   }
 
-  DNSServiceErrorType error_code = DNSServiceRegister( &mp_dnss, 0, 0, bonjour_record.serviceName().toUtf8().constData(),
-                                                 bonjour_record.registeredType().toUtf8().constData(),
-                                                 bonjour_record.replyDomain().isEmpty() ? 0 : bonjour_record.replyDomain().toUtf8().constData(),
+  DNSServiceErrorType error_code = DNSServiceRegister( &mp_dnss, 0, 0, mdns_record.serviceName().toUtf8().constData(),
+                                                 mdns_record.registeredType().toUtf8().constData(),
+                                                 mdns_record.replyDomain().isEmpty() ? 0 : mdns_record.replyDomain().toUtf8().constData(),
                                                  0, service_port, 0, 0, (DNSServiceRegisterReply)MDnsRegisterService, this );
   if( !checkErrorAndReadSocket( error_code ) )
   {
-    qWarning() << objectName() << "can not register" << bonjour_record.name() << "on port" << service_port;
+    qWarning() << objectName() << "can not register" << mdns_record.registeredType() << "on port" << service_port;
     return false;
   }
   else
   {
     m_servicePort = service_port;
-    qDebug() << objectName() << "tries to register" << bonjour_record.name() << "on port" << service_port;
+    qDebug() << objectName() << "tries to register" << mdns_record.registeredType() << "on port" << service_port;
     return true;
   }
 }
@@ -75,6 +76,7 @@ void MDnsRegister::MDnsRegisterService( DNSServiceRef, DNSServiceFlags,
   else
   {
     service_register->setRecord( MDnsRecord( service_name, registered_type, reply_domain ) );
+    service_register->setServiceRegistered( true );
     emit service_register->serviceRegistered();
   }
 }

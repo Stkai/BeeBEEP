@@ -45,7 +45,7 @@ signals:
 
 protected:
   virtual void cleanUp();
-  virtual bool checkErrorAndReadSocket( DNSServiceErrorType error_code );
+  virtual bool checkErrorAndReadSocket( DNSServiceErrorType );
 
 protected slots:
   void socketIsReadyRead();

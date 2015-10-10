@@ -34,8 +34,9 @@ class MDnsBrowser : public MDnsObject
 public:
   MDnsBrowser( QObject *parent = 0 );
 
-  void browseForService( const QString& );
+  bool browseForService( const QString& );
   void stop();
+  inline bool isActive() const;
 
 signals:
   void newRecordFound( const MDnsRecord& );
@@ -46,7 +47,13 @@ protected:
                                  DNSServiceErrorType error_code, const char *service_name,
                                  const char *registered_type, const char *reply_domain, void *browser_service_ref );
 
+private:
+  bool m_isActive;
 
 };
+
+
+// Inline Functions
+inline bool MDnsBrowser::isActive() const { return m_isActive; }
 
 #endif // BEEBEEP_MDNSBROWSER_H

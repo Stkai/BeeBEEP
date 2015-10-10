@@ -56,32 +56,32 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/Core.cpp" line="80"/>
+        <location filename="../src/Core.cpp" line="81"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Не удается соединиться с сетью %2. Пожалуйста, проверьте настройки вашего брандмауэра.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="99"/>
+        <location filename="../src/Core.cpp" line="100"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Не удается передать в сеть %2. Пожалуйста, проверьте настройки вашего брандмауэра..</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="114"/>
+        <location filename="../src/Core.cpp" line="113"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Вы соединены с сетью %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="156"/>
-        <source>%1 Zero Configuration Networking (multicast DNS) started: %3</source>
+        <location filename="../src/Core.cpp" line="157"/>
+        <source>%1 Zero Configuration started with service name: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="173"/>
-        <source>%1 Zero Configuration Networking (multicast DNS) closed.</source>
+        <location filename="../src/Core.cpp" line="174"/>
+        <source>%1 Zero Configuration service closed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="196"/>
+        <location filename="../src/Core.cpp" line="197"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Вы отключены от сети %2.</translation>
     </message>
@@ -90,42 +90,52 @@
         <translation type="obsolete">%1 Идет поиск доступных пользователей в %2...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="206"/>
+        <location filename="../src/Core.cpp" line="207"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 будет искать пользователей в этих IP-адресах: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="221"/>
+        <location filename="../src/Core.cpp" line="228"/>
+        <source>%1 Zero Configuration is browsing network for service: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="235"/>
+        <source>%1 Zero Configuration cannot browse network for service: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="253"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Передает в сеть %2...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="228"/>
+        <location filename="../src/Core.cpp" line="260"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 Вы не подключены к сети %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="235"/>
+        <location filename="../src/Core.cpp" line="267"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 нашел фильтр UDP порта %3. Пожалуйста, проверьте настройки вашего брандмауэра.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="242"/>
+        <location filename="../src/Core.cpp" line="274"/>
         <source>%1 You cannot reach %2 Network.</source>
         <translation>%1 Вы не можете связаться с сетью %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="262"/>
+        <location filename="../src/Core.cpp" line="294"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>присоединен от внешней сети (новая подсеть добавлена к вашему списку широковещательных адресов).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="275"/>
+        <location filename="../src/Core.cpp" line="307"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="295"/>
+        <location filename="../src/Core.cpp" line="327"/>
         <source>%1 Contacting %2 ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -495,12 +505,12 @@
         <translation>С днем рождения %1!</translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="183"/>
+        <location filename="../src/CoreConnection.cpp" line="214"/>
         <source>%1 (%2) is disconnected from %3 network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="294"/>
+        <location filename="../src/CoreConnection.cpp" line="326"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation>%1 (%2) подключен к сети %3.</translation>
     </message>
@@ -1550,7 +1560,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="175"/>
+        <location filename="../src/GuiLog.cpp" line="171"/>
         <source>%1 not found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2341,7 +2351,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Да и удалить историю</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2941"/>
+        <location filename="../src/GuiMain.cpp" line="2942"/>
         <source>Please select the new size of the user picture</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2381,12 +2391,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>выключен</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2927"/>
+        <location filename="../src/GuiMain.cpp" line="2928"/>
         <source>%1 is online</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2929"/>
+        <location filename="../src/GuiMain.cpp" line="2930"/>
         <source>%1 is offline</source>
         <translation type="unfinished"></translation>
     </message>

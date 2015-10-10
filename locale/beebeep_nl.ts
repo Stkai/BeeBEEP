@@ -52,72 +52,82 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/Core.cpp" line="80"/>
+        <location filename="../src/Core.cpp" line="81"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan niet verbinden met %2 netwerk. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="99"/>
+        <location filename="../src/Core.cpp" line="100"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan niet verzenden naar %2 netwerk. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="114"/>
+        <location filename="../src/Core.cpp" line="113"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 U bent verbonden met %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="156"/>
-        <source>%1 Zero Configuration Networking (multicast DNS) started: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Core.cpp" line="173"/>
-        <source>%1 Zero Configuration Networking (multicast DNS) closed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Core.cpp" line="196"/>
+        <location filename="../src/Core.cpp" line="197"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 U bent niet langer verbonden met het %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="206"/>
+        <location filename="../src/Core.cpp" line="207"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 zal zoeken naar gebruikers in deze ip adressen: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="221"/>
+        <location filename="../src/Core.cpp" line="157"/>
+        <source>%1 Zero Configuration started with service name: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="174"/>
+        <source>%1 Zero Configuration service closed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="228"/>
+        <source>%1 Zero Configuration is browsing network for service: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="235"/>
+        <source>%1 Zero Configuration cannot browse network for service: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="253"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Versturen naar %2 netwerk...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="228"/>
+        <location filename="../src/Core.cpp" line="260"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 U bent niet met het %2 netwerk verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="235"/>
+        <location filename="../src/Core.cpp" line="267"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 heeft een filter op de UDP poort ontdekt %3. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="242"/>
+        <location filename="../src/Core.cpp" line="274"/>
         <source>%1 You cannot reach %2 Network.</source>
         <translation>Voor %1 is het %2 netwerk onbereikbaar.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="262"/>
+        <location filename="../src/Core.cpp" line="294"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>is verbonden met een extern netwerk (het nieuwe subnet is aan uw verspreidingsadreslijst toegevoegd).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="275"/>
+        <location filename="../src/Core.cpp" line="307"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 Controleer %2 meer adressen...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="295"/>
+        <location filename="../src/Core.cpp" line="327"/>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 Contact opnemen met %2...</translation>
     </message>
@@ -238,12 +248,12 @@
         <translation>%1 %2 heeft de groep verlaten.</translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="183"/>
+        <location filename="../src/CoreConnection.cpp" line="214"/>
         <source>%1 (%2) is disconnected from %3 network.</source>
         <translation>%1 (%2) is niet verbonden met %3 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="294"/>
+        <location filename="../src/CoreConnection.cpp" line="326"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation>%1 (%2) is verbonden met het %3 netwerk.</translation>
     </message>
@@ -1554,7 +1564,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Open map</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="175"/>
+        <location filename="../src/GuiLog.cpp" line="171"/>
         <source>%1 not found</source>
         <translation>%1 niet gevonden</translation>
     </message>
@@ -1901,17 +1911,17 @@ Gebruik aub een andere naam.</translation>
         <translation>Wilt u echt de chat met %1 verwijderen?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2927"/>
+        <location filename="../src/GuiMain.cpp" line="2928"/>
         <source>%1 is online</source>
         <translation>%1 is online</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2929"/>
+        <location filename="../src/GuiMain.cpp" line="2930"/>
         <source>%1 is offline</source>
         <translation>%1 is offline</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="2941"/>
+        <location filename="../src/GuiMain.cpp" line="2942"/>
         <source>Please select the new size of the user picture</source>
         <translation>Selecteer een nieuwe grootte voor gebruikers foto</translation>
     </message>

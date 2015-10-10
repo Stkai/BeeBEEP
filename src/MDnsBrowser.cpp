@@ -25,27 +25,33 @@
 
 
 MDnsBrowser::MDnsBrowser( QObject *parent )
- : MDnsObject( parent )
+ : MDnsObject( parent ), m_isActive( false )
 {
   setObjectName( "MDnsBrowser" );
 }
 
 void MDnsBrowser::stop()
 {
+  m_isActive = false;
   cleanUp();
 }
 
-void MDnsBrowser::browseForService( const QString& service_name )
+bool MDnsBrowser::browseForService( const QString& service_type )
 {
   if( mp_dnss )
   {
-    qWarning() << objectName() << "is already browsing the service:" << m_record.serviceName();
-    return;
+    qWarning() << objectName() << "is already browsing the service:" << m_record.name();
+    return false;
   }
 
-  m_record.setServiceName( service_name );
-  DNSServiceErrorType error_code = DNSServiceBrowse( &mp_dnss, 0, 0, service_name.toUtf8().constData(), 0, MDnsBrowseReply, this );
-  checkErrorAndReadSocket( error_code );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << objectName() << "starts to browse for the service:" << service_type;
+#endif
+
+  m_record.setRegisteredType( service_type );
+  DNSServiceErrorType error_code = DNSServiceBrowse( &mp_dnss, 0, 0, service_type.toUtf8().constData(), 0, MDnsBrowseReply, this );
+  m_isActive = checkErrorAndReadSocket( error_code );
+  return m_isActive;
 }
 
 void MDnsBrowser::MDnsBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32,
@@ -61,14 +67,15 @@ void MDnsBrowser::MDnsBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32
   }
   else
   {
-    MDnsRecord bonjour_record( service_name, registered_type, reply_domain );
-
-    if( flags & kDNSServiceFlagsAdd )
-      emit service_browser->newRecordFound( bonjour_record );
-    else
-      emit service_browser->recordToRemove( bonjour_record );
+    MDnsRecord mdns_record( service_name, registered_type, reply_domain );
 
     //if( !(flags & kDNSServiceFlagsMoreComing) )
-    //No more is coming
+    //No more is coming, we can update the GUI...
+
+    if( flags & kDNSServiceFlagsAdd )
+      emit service_browser->newRecordFound( mdns_record );
+    else
+      emit service_browser->recordToRemove( mdns_record );
+
   }
 }

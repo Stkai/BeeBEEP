@@ -51,6 +51,7 @@ Core::Core( QObject* parent )
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_mDns = new MDnsManager( this );
+  connect( mp_mDns, SIGNAL( serviceRegistered() ), this, SLOT( sendMulticastingMessage() ) );
   connect( mp_mDns, SIGNAL( newUserFound( const UserRecord& ) ), this, SLOT( checkUserRecord( const UserRecord& ) ) );
 #endif
 
@@ -105,15 +106,15 @@ bool Core::start()
   else
   {
     qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
-    QTimer::singleShot( 1000, this, SLOT( sendBroadcastMessage() ) );
+    QTimer::singleShot( 100, this, SLOT( sendBroadcastMessage() ) );
   }
-
-  startDnsMulticasting();
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser, ChatMessage::Connection );
+
+  startDnsMulticasting();
 
   if( Settings::instance().fileTransferIsEnabled() )
     startFileTransferServer();
@@ -153,7 +154,7 @@ void Core::startDnsMulticasting()
                         mp_listener->serverPort() ) )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                             tr( "%1 Zero Configuration Networking (multicast DNS) started: %3" )
+                             tr( "%1 Zero Configuration started with service name: %2" )
                                .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
                              DispatchToChat, ChatMessage::Connection );
     }
@@ -170,7 +171,7 @@ void Core::stopDnsMulticasting()
   if( mp_mDns->stop() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                             tr( "%1 Zero Configuration Networking (multicast DNS) closed." )
+                             tr( "%1 Zero Configuration service closed." )
                                .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ) ),
                              DispatchToChat, ChatMessage::Connection );
   }
@@ -179,9 +180,9 @@ void Core::stopDnsMulticasting()
 
 void Core::stop()
 {
-  stopDnsMulticasting();
-
   mp_broadcaster->stopBroadcasting();
+
+  stopDnsMulticasting();
 
   stopFileTransferServer();
 
@@ -211,6 +212,37 @@ bool Core::updateBroadcastAddresses()
   }
   else
     return false;
+}
+
+void Core::sendMulticastingMessage()
+{
+  if( !Settings::instance().useMulticastDns() )
+    return;
+
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  if( mp_mDns->isActive() )
+  {
+    if( mp_mDns->browseForService() )
+    {
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                               tr( "%1 Zero Configuration is browsing network for service: %2" )
+                                 .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
+                               DispatchToChat, ChatMessage::Connection );
+    }
+    else
+    {
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                               tr( "%1 Zero Configuration cannot browse network for service: %2" )
+                                 .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
+                               DispatchToChat, ChatMessage::Connection );
+    }
+  }
+#ifdef BEEBEEP_DEBUG
+  else
+    qDebug() << "Unable to send multicast message because MDnsManager is not active";
+#endif
+
+#endif
 }
 
 void Core::sendBroadcastMessage()
