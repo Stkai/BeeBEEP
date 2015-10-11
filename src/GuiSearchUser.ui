@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>545</width>
-    <height>415</height>
+    <width>591</width>
+    <height>464</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -115,6 +115,9 @@
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
        </widget>
       </item>
       <item row="3" column="0" colspan="3">
@@ -122,7 +125,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>75</height>
+          <height>70</height>
          </size>
         </property>
         <property name="readOnly">
@@ -138,11 +141,20 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -154,7 +166,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>75</height>
+          <height>70</height>
          </size>
         </property>
        </widget>
@@ -177,6 +189,13 @@
        <widget class="QCheckBox" name="mp_cbMDnsResponder">
         <property name="text">
          <string>Use Zero Configuration Networking</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0" colspan="3">
+       <widget class="QCheckBox" name="mp_cbPreventMultipleConnectionsFromSingleHostAddress">
+        <property name="text">
+         <string>Prevent multiple connections from single host address</string>
         </property>
        </widget>
       </item>
@@ -227,6 +246,7 @@
   <tabstop>mp_cbParseAddresses</tabstop>
   <tabstop>mp_cbAutoAddSubnet</tabstop>
   <tabstop>mp_cbMDnsResponder</tabstop>
+  <tabstop>mp_cbPreventMultipleConnectionsFromSingleHostAddress</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>

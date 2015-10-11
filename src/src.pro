@@ -111,7 +111,8 @@ HEADERS += AudioManager.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-  Job.h
+  Job.h \
+    GuiFloatingChat.h
 
 
 SOURCES += AudioManager.cpp \
@@ -199,7 +200,8 @@ SOURCES += AudioManager.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp
+  VCard.cpp \
+    GuiFloatingChat.cpp
 
 
 FORMS += GuiAddUser.ui \

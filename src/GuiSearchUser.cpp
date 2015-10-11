@@ -70,6 +70,8 @@ void GuiSearchUser::loadSettings()
   mp_cbMDnsResponder->setChecked( false );
   mp_cbMDnsResponder->setEnabled( false );
 #endif
+
+  mp_cbPreventMultipleConnectionsFromSingleHostAddress->setChecked( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() );
   mp_teAddressesInSettings->setFocus();
 }
 
@@ -104,7 +106,7 @@ void GuiSearchUser::checkAndSearch()
   Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
   Settings::instance().setAddExternalSubnetAutomatically( mp_cbAutoAddSubnet->isChecked() );
   Settings::instance().setUseMulticastDns( mp_cbMDnsResponder->isChecked() );
+  Settings::instance().SetPreventMultipleConnectionsFromSingleHostAddress( mp_cbPreventMultipleConnectionsFromSingleHostAddress->isChecked() );
 
   accept();
 }
-

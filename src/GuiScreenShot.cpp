@@ -60,6 +60,7 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
   mp_cbHide->setToolTip( tr( "Hide this window before capture screenshot" ) );
   bar->addWidget( mp_cbHide );
 
+#if QT_VERSION < 0x050000
   mp_cbRetina = new QCheckBox( this );
   mp_cbRetina->setObjectName( "mp_cbRetina" );
 #ifdef Q_OS_MAC
@@ -70,6 +71,7 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
   mp_cbRetina->setText( tr( "Enable high dpi" ) + QString( "   " ) );
   mp_cbRetina->setToolTip( tr( "Enable high dpi support to manage, for example, Apple Retina display" ) );
   bar->addWidget( mp_cbRetina );
+#endif
 
   bar->addSeparator();
 
