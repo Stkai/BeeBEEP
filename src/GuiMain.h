@@ -34,6 +34,7 @@ class GameInterface;
 class GuiChat;
 class GuiChatList;
 class GuiEmoticons;
+class GuiFloatingChat;
 class GuiGroupList;
 class GuiLog;
 class GuiHome;
@@ -149,6 +150,8 @@ private slots:
   void createGroupFromChat( VNumber );
   void removeUserFromList( VNumber );
   void openDataFolder();
+  void detachChat( VNumber );
+  void attachChat( VNumber );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -162,6 +165,7 @@ protected:
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
 
 private:
+  void setupChatConnections( GuiChat* );
   void createActions();
   void createMenus();
   void createToolAndMenuBars();
@@ -189,6 +193,8 @@ private:
   bool isAudioDeviceAvailable() const;
   void showDefaultServerPortInMenu();
   void applyFlagStaysOnTop();
+  bool floatingChatExists( VNumber ) const;
+  GuiFloatingChat* floatingChat( VNumber ) const;
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -206,6 +212,7 @@ private:
   GuiHome* mp_home;
   GuiEmoticons* mp_emoticonsWidget;
   Core *mp_core;
+  QList<GuiFloatingChat*> m_floatingChats;
 
   QMenu *mp_menuMain;
   QMenu *mp_menuInfo;

@@ -3263,82 +3263,82 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Скрыть это окно перед захватом снимка</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="70"/>
+        <location filename="../src/GuiScreenShot.cpp" line="71"/>
         <source>Enable high dpi</source>
         <translation>Включить высокое разрешение</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="71"/>
+        <location filename="../src/GuiScreenShot.cpp" line="72"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>Включить поддержку высокого разрешения для управления, например, монитором Apple Retina</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="76"/>
+        <location filename="../src/GuiScreenShot.cpp" line="78"/>
         <source>Capture</source>
         <translation>Захват</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="77"/>
+        <location filename="../src/GuiScreenShot.cpp" line="79"/>
         <source>Capture a screenshot of your desktop</source>
         <translation>Сделать снимок вашего рабочего стола</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="78"/>
+        <location filename="../src/GuiScreenShot.cpp" line="80"/>
         <source>Send</source>
         <translation>Отправить</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="79"/>
+        <location filename="../src/GuiScreenShot.cpp" line="81"/>
         <source>Send the captured screenshot to an user</source>
         <translation>Отправить захваченный снимок пользователю</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="80"/>
+        <location filename="../src/GuiScreenShot.cpp" line="82"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="81"/>
+        <location filename="../src/GuiScreenShot.cpp" line="83"/>
         <source>Save the captured screenshot as file</source>
         <translation>Сохранить захваченный снимок в файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="82"/>
+        <location filename="../src/GuiScreenShot.cpp" line="84"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="83"/>
+        <location filename="../src/GuiScreenShot.cpp" line="85"/>
         <source>Delete the captured screenshot</source>
         <translation>Удалить захваченный снимок</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="103"/>
+        <location filename="../src/GuiScreenShot.cpp" line="105"/>
         <source>No screenshot available</source>
         <translation>Нет доступных снимков</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="163"/>
+        <location filename="../src/GuiScreenShot.cpp" line="165"/>
         <source>/beesshot-%1.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="166"/>
+        <location filename="../src/GuiScreenShot.cpp" line="168"/>
         <source>Save As</source>
         <translation>Сохранить как</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="168"/>
+        <location filename="../src/GuiScreenShot.cpp" line="170"/>
         <source>%1 Files (*.%2)</source>
         <translation>%1 Файлы (*.%2)</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="183"/>
+        <location filename="../src/GuiScreenShot.cpp" line="185"/>
         <source>/beesshottmp-%1.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="190"/>
+        <location filename="../src/GuiScreenShot.cpp" line="192"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Не удается сохранить временный файл: %1</translation>
     </message>
@@ -3369,7 +3369,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Адрес локальной подсети *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="142"/>
+        <location filename="../src/GuiSearchUser.ui" line="151"/>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Введите IP-адреса или подсеть вашей области сети, разделенные запятой (например: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
@@ -3394,33 +3394,28 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>(искать пользователей здесь по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="165"/>
+        <location filename="../src/GuiSearchUser.ui" line="177"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Разделить подсеть в IPV4-адресах</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="172"/>
+        <location filename="../src/GuiSearchUser.ui" line="184"/>
         <source>Automatically add external subnet</source>
         <translation>Автоматически добавлять внешнюю подсеть</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="179"/>
-        <source>Use Zero Configuration Networking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiSearchUser.ui" line="189"/>
+        <location filename="../src/GuiSearchUser.ui" line="194"/>
         <source>* (read only section)</source>
         <translation>* (раздел только для чтения)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="209"/>
-        <location filename="../src/GuiSearchUser.cpp" line="91"/>
+        <location filename="../src/GuiSearchUser.ui" line="214"/>
+        <location filename="../src/GuiSearchUser.cpp" line="85"/>
         <source>Ok</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="216"/>
+        <location filename="../src/GuiSearchUser.ui" line="221"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -3456,12 +3451,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Файл пуст</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="90"/>
+        <location filename="../src/GuiSearchUser.cpp" line="84"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="91"/>
+        <location filename="../src/GuiSearchUser.cpp" line="85"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Вы вставили неправильный адрес узла:

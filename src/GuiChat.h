@@ -41,7 +41,6 @@ public:
   void setupToolBar( QToolBar* );
   void updateAction( bool is_connected, int connected_users );
 
-  void appendChatMessage( VNumber, const ChatMessage& );
   bool setChatId( VNumber );
   inline VNumber chatId() const;
   void updateUser( const User& );
@@ -51,6 +50,8 @@ public:
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
   void ensureFocusInChat();
+
+  void enableDetachButton( bool );
 
   inline QSplitter* chatSplitter() const;
 
@@ -68,8 +69,10 @@ signals:
   void leaveThisChat( VNumber );
   void showChatMenuRequest();
   void showVCardRequest( VNumber, bool );
+  void detachChatRequest( VNumber );
 
 public slots:
+  void appendChatMessage( VNumber, const ChatMessage& );
   void addEmoticon( const Emoticon& );
 
 protected:
@@ -82,7 +85,6 @@ protected:
   void setChatFontColor( const QString& );
   void setChatBackgroundColor( const QString& );
   User findUser( VNumber );
-  bool isActiveUser( const User& ) const;
   bool isActiveUser( const Chat&, const User& ) const;
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
@@ -105,6 +107,7 @@ private slots:
   void showMembersMenu();
   void showLocalUserVCard();
   void showGroupWizard();
+  void detachThisChat();
 
 private:
   VNumber m_chatId;

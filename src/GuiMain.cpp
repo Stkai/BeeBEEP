@@ -34,6 +34,7 @@
 #include "GuiCreateGroup.h"
 #include "GuiEditVCard.h"
 #include "GuiEmoticons.h"
+#include "GuiFloatingChat.h"
 #include "GuiGroupList.h"
 #include "GuiHome.h"
 #include "GuiLanguage.h"
@@ -61,7 +62,7 @@
 
 
 GuiMain::GuiMain( QWidget *parent )
- : QMainWindow( parent )
+ : QMainWindow( parent ), m_floatingChats()
 {
   setObjectName( "GuiMainWindow" );
   mp_core = new Core( this );
@@ -113,19 +114,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferCompleted( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( setFileTransferCompleted( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_chat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
-  connect( mp_chat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
-  connect( mp_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
-  connect( mp_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
-  connect( mp_chat, SIGNAL( createChatRequest() ), this, SLOT( createChat() ) );
-  connect( mp_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
-  connect( mp_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
-  connect( mp_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
-  connect( mp_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
-  connect( mp_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
-  connect( mp_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
-  connect( mp_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
+
+  setupChatConnections( mp_chat );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -172,6 +162,24 @@ GuiMain::GuiMain( QWidget *parent )
   mp_home->loadDefaultChat();
 
   statusBar()->showMessage( tr( "Ready" ) );
+}
+
+void GuiMain::setupChatConnections( GuiChat* gui_chat )
+{
+  connect( gui_chat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
+  connect( gui_chat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
+  connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
+  connect( gui_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
+  connect( gui_chat, SIGNAL( createChatRequest() ), this, SLOT( createChat() ) );
+  connect( gui_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
+  connect( gui_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
+  connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
+  connect( gui_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
+  connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
+  connect( gui_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
+  connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
+  connect( gui_chat, SIGNAL( detachChatRequest( VNumber ) ), this, SLOT( detachChat( VNumber ) ) );
 }
 
 void GuiMain::applyFlagStaysOnTop()
@@ -296,6 +304,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
       }
     }
   }
+
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->close();
 
   if( isVisible() )
   {
@@ -1445,6 +1456,10 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   }
   else
   {
+    GuiFloatingChat* fl_chat = floatingChat( chat_id );
+    if( fl_chat )
+      fl_chat->guiChat()->appendChatMessage( chat_id, cm );
+
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
     int chat_messages = chat_hidden.chatMessages() + ChatManager::instance().savedChatSize( chat_hidden.name() );
@@ -1592,7 +1607,7 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
   QStringList files_path_selected;
   if( file_path.isEmpty() || !QFile::exists( file_path ) )
   {
-    files_path_selected = QFileDialog::getOpenFileNames( this, tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
+    files_path_selected = QFileDialog::getOpenFileNames( qApp->activeWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
                                                        Settings::instance().lastDirectorySelected() );
     if( files_path_selected.isEmpty() )
       return files_path_selected;
@@ -1904,13 +1919,28 @@ void GuiMain::showChat( VNumber chat_id )
     return;
   }
 
-  QApplication::setOverrideCursor( Qt::WaitCursor );
-  if( mp_chat->setChatId( chat_id ) )
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
   {
+    if( !fl_chat->isVisible() )
+      checkWindowFlagsAndShow();
+    else
+      fl_chat->raise();
+
+    fl_chat->guiChat()->ensureFocusInChat();
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
+    return;
+  }
+
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+  if( mp_chat->setChatId( chat_id ) )
+  {
     raiseChatView();
+    mp_userList->setUnreadMessages( chat_id, 0 );
+    mp_chatList->updateChat( chat_id );
+    mp_groupList->updateChat( chat_id );
   }
   QApplication::restoreOverrideCursor();
 }
@@ -2972,4 +3002,61 @@ void GuiMain::openDataFolder()
 {
   QUrl data_folder_url = QUrl::fromLocalFile( Settings::instance().dataFolder() );
   openUrl( data_folder_url );
+}
+
+GuiFloatingChat* GuiMain::floatingChat( VNumber chat_id ) const
+{
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  {
+    if( fl_chat->chatId() == chat_id )
+      return fl_chat;
+  }
+  return 0;
+}
+
+bool GuiMain::floatingChatExists( VNumber chat_id ) const
+{
+  return floatingChat( chat_id ) != 0;
+}
+
+void GuiMain::attachChat( VNumber chat_id )
+{
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( !fl_chat )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Floating chat" << chat_id << "not found in GuiMain::attachChat";
+#endif
+    return;
+  }
+
+  m_floatingChats.removeOne( fl_chat );
+  fl_chat->deleteLater();
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Floating chat" << chat_id << "closed and deleted";
+#endif
+}
+
+void GuiMain::detachChat( VNumber chat_id )
+{
+  if( floatingChatExists( chat_id ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Floating chat" << chat_id << "already exists";
+#endif
+    return;
+  }
+
+  GuiFloatingChat* fl_chat = new GuiFloatingChat;
+  fl_chat->setChatId( chat_id );
+
+  fl_chat->guiChat()->enableDetachButton( false );
+  setupChatConnections( fl_chat->guiChat() );
+  connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );
+  m_floatingChats.append( fl_chat );
+  fl_chat->checkWindowFlagsAndShow();
+  showDefaultChat();
+  fl_chat->guiChat()->ensureLastMessageVisible();
+  fl_chat->guiChat()->ensureFocusInChat();
 }

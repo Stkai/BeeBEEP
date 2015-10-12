@@ -71,16 +71,20 @@ Settings::Settings()
   setPassword( defaultPassword() );
   m_resourceFolder = ".";
 #if QT_VERSION >= 0x050400
-  m_dataFolder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
+  m_dataFolder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
 #elif QT_VERSION >= 0x050000
   m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" )
                    .arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) )
                    .arg( programName() ) );
 #else
-  m_dataFolder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
+  m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
 #endif
   m_lastSave = QDateTime::currentDateTime();
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  m_useMulticastDns = true;
+#else
   m_useMulticastDns = false;
+#endif
   m_preventMultipleConnectionsFromSingleHostAddress = false;
 }
 
@@ -152,6 +156,12 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "SaveDataInDocumentsFolder", m_saveDataInDocumentsFolder );
     sets->setValue( "SaveDataInUserApplicationFolder", m_saveDataInUserApplicationFolder );
     sets->setValue( "AllowMultipleInstances", m_allowMultipleInstances );
+    sets->setValue( "DataFolderPath", m_dataFolderInRC );
+    sets->setValue( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder );
+  #ifdef BEEBEEP_USE_MULTICAST_DNS
+    sets->setValue( "UseMulticastDns", m_useMulticastDns );
+  #endif
+    sets->setValue( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -198,6 +208,11 @@ void Settings::loadRcFile()
   m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
   m_dataFolderInRC = Bee::convertToNativeFolderSeparator( sets->value( "DataFolderPath", m_dataFolderInRC ).toString() );
   m_addAccountNameToDataFolder = sets->value( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder ).toBool();
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
+#endif
+  m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
+
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -661,16 +676,11 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Network");
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
-#endif
-  m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
   m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
-  m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", false ).toBool();
   m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", true ).toBool();
   m_addExternalSubnetAutomatically = sets->value( "AddExternalSubnetAutomatically", true ).toBool();
   m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();

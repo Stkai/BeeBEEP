@@ -4,11 +4,10 @@ BroadcastPort=36475
 DefaultListenerPort=6475
 DefaultFileTransferPort=6476
 UseConfigurationFileIni=true
-SaveDataInDocumentsFolder=false
 SaveDataInUserApplicationFolder=false
 AllowMultipleInstances=false
-DataFolderPath=//dgsaie-srv01/beebeep/data
-AddAccountNameToDataFolder=true
+UseMulticastDns=true
+PreventMultipleConnectionsFromSingleHostAddress=false
 
 [Groups]
 TrustNickname=true

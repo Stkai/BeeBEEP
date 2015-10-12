@@ -3,6 +3,8 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
+// Latest version: http://sourceforge.net/p/beebeep/code/HEAD/tree/misc/beehelp.txt
+//
 // $Id$
 //
 
@@ -26,6 +28,8 @@ SaveDataInUserApplicationFolder= [true/false] force BeeBEEP to save all data (se
 AllowMultipleInstances= [true/false] enable the option to launch multiple instance of BeeBEEP [1.0.0]
 DataFolderPath= you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder [1.0.3]
 AddAccountNameToDataFolder = you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath [1.0.3]
+UseMulticastDns= [true/false] if enabled BeeBEEP use Zero Configuration Networking
+PreventMultipleConnectionsFromSingleHostAddress= [true/false] if enableb BeeBEEP blocks multiple connections from single IP address 
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect
@@ -137,6 +141,7 @@ LocalHostAddressForced= if BeeBEEP doesn't recognize your IP address automatical
 LocalSubnetForced= if BeeBEEP doesn't recognize your subnet address automatically, you can set here your subnet (useful if you have a lot of network configured)
 ParseBroadcastAddresses= [true/false] if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254
 AddExternalSubnetAutomatically= [true/false] if true BeeBEEP automatically add external user's subnet when they reach you
+UserPathList= users saved (do not edit manually)
 
 [FileShare]
 Active= [true/false]

@@ -64,6 +64,7 @@ HEADERS += AudioManager.h \
   GuiEmoticons.h \
   GuiFileInfoItem.h \
   GuiFileInfoList.h \
+  GuiFloatingChat.h \
   GuiGroupItem.h \
   GuiGroupList.h \
   GuiHome.h \
@@ -111,8 +112,7 @@ HEADERS += AudioManager.h \
   UserRecord.h \
   VCard.h \
   Version.h \
-  Job.h \
-    GuiFloatingChat.h
+  Job.h
 
 
 SOURCES += AudioManager.cpp \
@@ -157,6 +157,7 @@ SOURCES += AudioManager.cpp \
   GuiEmoticons.cpp \
   GuiFileInfoItem.cpp \
   GuiFileInfoList.cpp \
+  GuiFloatingChat.cpp \
   GuiGroupItem.cpp \
   GuiGroupList.cpp \
   GuiHome.cpp \
@@ -200,8 +201,7 @@ SOURCES += AudioManager.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
-  VCard.cpp \
-    GuiFloatingChat.cpp
+  VCard.cpp
 
 
 FORMS += GuiAddUser.ui \

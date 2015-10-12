@@ -24,5 +24,38 @@
 #ifndef BEEBEEP_GUIFLOATINGCHAT_H
 #define BEEBEEP_GUIFLOATINGCHAT_H
 
+#include "GuiChat.h"
+
+
+class GuiFloatingChat : public QMainWindow
+{
+  Q_OBJECT
+
+public:
+  GuiFloatingChat( QWidget* parent = 0 );
+
+  bool setChatId( VNumber );
+  inline VNumber chatId() const;
+  inline GuiChat* guiChat() const;
+
+  void checkWindowFlagsAndShow();
+
+signals:
+  void attachChatRequest( VNumber );
+
+protected:
+  void closeEvent( QCloseEvent* );
+  void applyFlagStaysOnTop();
+
+private:
+  GuiChat* mp_chat;
+
+};
+
+
+// Inline Functions
+inline VNumber GuiFloatingChat::chatId() const { return mp_chat->chatId(); }
+inline GuiChat* GuiFloatingChat::guiChat() const { return mp_chat; }
+
 
 #endif // BEEBEEP_GUIFLOATINGCHAT_H

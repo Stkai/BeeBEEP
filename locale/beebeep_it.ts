@@ -3640,7 +3640,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use Zero Configuration Networking</source>
-        <translation>Usa lo Zero Configuration Networking</translation>
+        <translation type="vanished">Usa lo Zero Configuration Networking</translation>
     </message>
 </context>
 <context>

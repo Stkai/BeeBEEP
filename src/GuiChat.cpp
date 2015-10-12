@@ -83,6 +83,13 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
+  connect( mp_pbDetach, SIGNAL( clicked() ), this, SLOT( detachThisChat() ) );
+}
+
+void GuiChat::enableDetachButton( bool yes )
+{
+  mp_pbDetach->setEnabled( yes );
+  mp_pbDetach->setVisible( yes );
 }
 
 void GuiChat::setupToolBar( QToolBar* bar )
@@ -130,8 +137,12 @@ void GuiChat::setupToolBar( QToolBar* bar )
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
 {
-  bool local_user_is_member = isActiveUser( Settings::instance().localUser() );
-  bool is_group_chat = ChatManager::instance().isGroupChat( m_chatId );
+  Chat c = ChatManager::instance().chat( m_chatId );
+  if( !c.isValid() )
+    qWarning() << "Invalid chat id" << m_chatId << "found in GuiChat::updateAction";
+
+  bool local_user_is_member = isActiveUser( c, Settings::instance().localUser() );
+  bool is_group_chat = c.isGroup();
   int user_in_list = UserManager::instance().userList().toList().size();
   mp_actSendFile->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
   mp_actCreateGroup->setEnabled( is_connected && user_in_list > 1 );
@@ -279,12 +290,6 @@ void GuiChat::updateUser( const User& u )
   }
 }
 
-bool GuiChat::isActiveUser( const User& u ) const
-{
-  Chat c = ChatManager::instance().chat( m_chatId );
-  return isActiveUser( c, u );
-}
-
 bool GuiChat::isActiveUser( const Chat& c, const User& u ) const
 {
   return c.isValid() && c.usersId().contains( u.id() );
@@ -390,25 +395,28 @@ bool GuiChat::setChatId( VNumber chat_id )
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return false;
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Setting chat" << chat_id << "in default chat window";
+#endif
+
   if( c.unreadMessages() )
   {
     c.readAllMessages();
     ChatManager::instance().setChat( c );
   }
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Setting chat" << chat_id << "in default chat window";
-#endif
-
   if( c.isDefault() )
   {
     setChatBackgroundColor( Settings::instance().defaultChatBackgroundColor() );
     mp_actSelectBackgroundColor->setEnabled( true );
+    enableDetachButton( false );
   }
   else
   {
     mp_teChat->setPalette( m_defaultChatPalette );
     mp_actSelectBackgroundColor->setEnabled( false );
+    enableDetachButton( true );
   }
 
   m_chatId = c.id();
@@ -720,4 +728,9 @@ void GuiChat::showGroupWizard()
 {
   mp_actGroupWizard->setEnabled( false );
   emit createGroupFromChatRequest( m_chatId );
+}
+
+void GuiChat::detachThisChat()
+{
+  emit detachChatRequest( m_chatId );
 }

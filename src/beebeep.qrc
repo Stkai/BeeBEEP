@@ -131,5 +131,6 @@
         <file>images/group-wizard.png</file>
         <file>images/search-users.png</file>
         <file>images/thumbup.png</file>
+        <file>images/add-window.png</file>
     </qresource>
 </RCC>
