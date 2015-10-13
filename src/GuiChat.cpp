@@ -281,6 +281,11 @@ User GuiChat::findUser( VNumber user_id )
   return u;
 }
 
+bool GuiChat::hasUser( VNumber user_id )
+{
+  return m_chatUsers.find( user_id ).isValid();
+}
+
 void GuiChat::updateUser( const User& u )
 {
   if( m_chatUsers.find( u.id() ).isValid() )
@@ -400,6 +405,9 @@ bool GuiChat::setChatId( VNumber chat_id )
   qDebug() << "Setting chat" << chat_id << "in default chat window";
 #endif
 
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+  QApplication::processEvents();
+
   if( c.unreadMessages() )
   {
     c.readAllMessages();
@@ -474,6 +482,8 @@ bool GuiChat::setChatId( VNumber chat_id )
   ensureLastMessageVisible();
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
+
+  QApplication::restoreOverrideCursor();
   return true;
 }
 

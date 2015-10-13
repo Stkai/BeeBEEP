@@ -25,7 +25,7 @@
 #define BEEBEEP_GUIFLOATINGCHAT_H
 
 #include "GuiChat.h"
-
+class GuiEmoticons;
 
 class GuiFloatingChat : public QMainWindow
 {
@@ -37,8 +37,9 @@ public:
   bool setChatId( VNumber );
   inline VNumber chatId() const;
   inline GuiChat* guiChat() const;
-
   void checkWindowFlagsAndShow();
+  void showUserWriting( VNumber, const QString& );
+  void raiseOnTop();
 
 signals:
   void attachChatRequest( VNumber );
@@ -49,6 +50,9 @@ protected:
 
 private:
   GuiChat* mp_chat;
+  QToolBar* mp_barChat;
+  QDockWidget* mp_dockEmoticons;
+  GuiEmoticons* mp_emoticonsWidget;
 
 };
 

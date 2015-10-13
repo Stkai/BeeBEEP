@@ -54,7 +54,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
   /* filter by keywords */
   label = new QLabel( bar );
   label->setObjectName( "GuiLabelFilterTextLog" );
-  label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+  label->setAlignment( Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter );
   label->setText( QString( "   " ) + tr( "Search" ) + QString( " " ) );
   bar->addWidget( label );
   mp_leFilter = new QLineEdit( bar );
@@ -85,6 +85,15 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbWholeWordOnly->setObjectName( "GuiCheckBoxFindWholeWordOnlyInLog" );
   mp_cbWholeWordOnly->setText( tr( "Whole word" ) );
   bar->addWidget( mp_cbWholeWordOnly );
+
+  bar->addSeparator();
+  mp_cbLogToFile = new QCheckBox( bar );
+  mp_cbLogToFile->setObjectName( "GuiCheckBoxLogToFileInLog" );
+  mp_cbLogToFile->setText( tr( "Log to file" ) );
+  mp_cbLogToFile->setChecked( Settings::instance().logToFile() );
+  mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
+  connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
+  bar->addWidget( mp_cbLogToFile );
 
 }
 
@@ -205,5 +214,24 @@ void GuiLog::refreshLog()
     cursor.movePosition( QTextCursor::End );
     cursor.insertText( plain_text );
     Log::instance().clear();
+  }
+}
+
+void GuiLog::logToFile( bool yes )
+{
+  Settings::instance().setLogToFile( yes );
+  if( yes )
+  {
+    if( !Log::instance().isLoggingToFile() )
+    {
+      Log::instance().bootFileStream( Settings::instance().logFilePath() );
+    }
+  }
+  else
+  {
+    if( Log::instance().isLoggingToFile() )
+    {
+      Log::instance().closeFileStream();
+    }
   }
 }

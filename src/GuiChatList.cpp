@@ -115,6 +115,7 @@ void GuiChatList::chatClicked( QTreeWidgetItem* item, int )
     return;
   }
 
+  clearSelection();
   GuiChatItem* user_item = (GuiChatItem*)item;
   emit chatSelected( user_item->chatId() );
 }
@@ -161,6 +162,7 @@ void GuiChatList::removeChatSelected()
 void GuiChatList::setChatOpened( VNumber chat_id )
 {
   m_chatOpened = chat_id;
+  clearSelection();
 
   GuiChatItem* item;
   QTreeWidgetItemIterator it( this );

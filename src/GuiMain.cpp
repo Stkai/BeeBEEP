@@ -98,7 +98,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
-  connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( checkUser( const User& ) ) );
+  connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( updateUser( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
@@ -425,7 +425,7 @@ void GuiMain::initGuiItems()
   }
 
   mp_actBroadcast->setEnabled( enable );
-  mp_userList->updateUsers( enable );
+  refreshUserList();
 
   updateStatusIcon();
 
@@ -1148,7 +1148,7 @@ void GuiMain::createPluginWindows()
   }
 }
 
-void GuiMain::checkUser( const User& u )
+void GuiMain::updateUser( const User& u )
 {
   if( !u.isValid() )
   {
@@ -1159,19 +1159,17 @@ void GuiMain::checkUser( const User& u )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "User" << u.path() << "has updated his info";
 #endif
+
   mp_userList->setUser( u, true );
-  mp_chat->updateUser( u );
   mp_groupList->updateUser( u );
-  if( mp_stackedWidget->currentWidget() == mp_chat )
-    mp_chat->reloadChat();
+  mp_chat->updateUser( u );
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->guiChat()->updateUser( u );
   checkViewActions();
 }
 
 void GuiMain::refreshUserList()
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Refresh users in GuiUserList";
-#endif
   mp_userList->updateUsers( mp_core->isConnected() );
 }
 
@@ -1379,7 +1377,14 @@ void GuiMain::settingsChanged()
   if( refresh_users )
     refreshUserList();
   if( refresh_chat )
+  {
+    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::processEvents();
     mp_chat->reloadChat();
+    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+      fl_chat->guiChat()->reloadChat();
+    QApplication::restoreOverrideCursor();
+  }
   if( settings_data_id > 0 && settings_data_id < 99 )
     Settings::instance().save();
 }
@@ -1413,18 +1418,29 @@ bool GuiMain::showAlert( VNumber chat_id )
     beep_played = true;
   }
 
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+  {
+    if( fl_chat->isMinimized() || !fl_chat->isActiveWindow() )
+    {
+      if( !beep_played && Settings::instance().beepOnNewMessageArrived() )
+        playBeep();
+
+      if( Settings::instance().raiseOnNewMessageArrived() )
+        fl_chat->raiseOnTop();
+      else
+        QApplication::alert( fl_chat );
+
+      return true;
+    }
+    else
+      return false;
+  }
+
   if( isMinimized() || !isActiveWindow() )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "BeeBEEP alert called";
-#endif
     if( !beep_played && Settings::instance().beepOnNewMessageArrived() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "New message arrived in background: play BEEP sound";
-#endif
       playBeep();
-    }
 
     if( Settings::instance().raiseOnNewMessageArrived() )
       raiseOnTop();
@@ -1518,7 +1534,11 @@ void GuiMain::searchUsers()
 void GuiMain::showWritingUser( const User& u )
 {
   QString msg = tr( "%1 is writing..." ).arg( u.name() );
-  showMessage( msg, Settings::instance().writingTimeout() );
+  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->hasUser( u.id() ) )
+    showMessage( msg, Settings::instance().writingTimeout() );
+
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->showUserWriting( u.id(), msg );
 }
 
 void GuiMain::statusSelected()
@@ -1607,7 +1627,7 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
   QStringList files_path_selected;
   if( file_path.isEmpty() || !QFile::exists( file_path ) )
   {
-    files_path_selected = QFileDialog::getOpenFileNames( qApp->activeWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
+    files_path_selected = QFileDialog::getOpenFileNames( activeChatWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
                                                        Settings::instance().lastDirectorySelected() );
     if( files_path_selected.isEmpty() )
       return files_path_selected;
@@ -1631,12 +1651,12 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
     QStringList user_string_list = UserManager::instance().userList().toStringList( false, true );
     if( user_string_list.isEmpty() )
     {
-      QMessageBox::information( this, Settings::instance().programName(), tr( "There is no user connected." ) );
+      QMessageBox::information( activeChatWindow(), Settings::instance().programName(), tr( "There is no user connected." ) );
       return false;
     }
 
     bool ok = false;
-    QString user_path = QInputDialog::getItem( this, Settings::instance().programName(),
+    QString user_path = QInputDialog::getItem( activeChatWindow(), Settings::instance().programName(),
                                         tr( "Please select the user to whom you would like to send a file."),
                                         user_string_list, 0, false, &ok );
     if( !ok )
@@ -1646,7 +1666,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
 
     if( !user_selected.isValid() )
     {
-      QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
+      QMessageBox::warning( activeChatWindow(), Settings::instance().programName(), tr( "User not found." ) );
       return false;
     }
 
@@ -1904,18 +1924,8 @@ void GuiMain::showChat( VNumber chat_id )
   if( chat_id == ID_INVALID )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Unable to show invalid chat";
+    qWarning() << "Unable to show invalid chat";
 #endif
-    return;
-  }
-
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Chat" << chat_id << "is already shown... skip";
-#endif
-    mp_chat->reloadChatUsers();
-    mp_chat->ensureFocusInChat();
     return;
   }
 
@@ -1934,7 +1944,16 @@ void GuiMain::showChat( VNumber chat_id )
     return;
   }
 
-  QApplication::setOverrideCursor( Qt::WaitCursor );
+  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Chat" << chat_id << "is already shown... skip";
+#endif
+    mp_chat->reloadChatUsers();
+    mp_chat->ensureFocusInChat();
+    return;
+  }
+
   if( mp_chat->setChatId( chat_id ) )
   {
     raiseChatView();
@@ -1942,7 +1961,6 @@ void GuiMain::showChat( VNumber chat_id )
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
   }
-  QApplication::restoreOverrideCursor();
 }
 
 void GuiMain::changeVCard()
@@ -2182,6 +2200,7 @@ void GuiMain::raiseView( QWidget* w, VNumber chat_id, const QString& chat_name )
   mp_chatList->setChatOpened( chat_id );
   mp_groupList->setChatOpened( chat_id );
   mp_savedChatList->setSavedChatOpened( chat_name );
+  raise();
 }
 
 void GuiMain::raiseHomeView()
@@ -2649,12 +2668,14 @@ void GuiMain::checkChat( VNumber chat_id )
 
   if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
   {
-    Chat c = ChatManager::instance().chat( chat_id );
-    if( c.isValid() )
-      mp_chat->reloadChat();
-    else
-      showChat( ID_DEFAULT_CHAT );
+    mp_chat->reloadChat();
+    return;
   }
+
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    fl_chat->guiChat()->reloadChat();
+
 }
 
 bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
@@ -2690,6 +2711,7 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
 
     if( mp_core->removeGroup( g.id() ) )
     {
+      closeFloatingChat( chat_id );
       raiseHomeView();
       mp_chat->setChatId( ID_DEFAULT_CHAT );
       mp_groupList->loadGroups();
@@ -2721,8 +2743,11 @@ void GuiMain::removeGroup( VNumber group_id )
                                tr( "Do you really want to delete group '%1'?" ).arg( g.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
+      Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
       if( mp_core->removeGroup( group_id ) )
       {
+        if( c.isValid() )
+          closeFloatingChat( c.id() );
         raiseHomeView();
         mp_chat->setChatId( ID_DEFAULT_CHAT );
         mp_groupList->loadGroups();
@@ -2741,7 +2766,7 @@ void GuiMain::clearChat( VNumber chat_id )
   QString chat_name = c.isDefault() ? QObject::tr( "All Lan Users" ).toLower() : c.name();
   if( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
+    QMessageBox::information( activeChatWindow(), Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
     return;
   }
 
@@ -2750,7 +2775,7 @@ void GuiMain::clearChat( VNumber chat_id )
   if( ChatManager::instance().chatHasSavedText( c.name() ) )
     button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
 
-  switch( QMessageBox::information( this, Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
+  switch( QMessageBox::information( activeChatWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
   {
   case 0:
     mp_core->clearMessagesInChat( chat_id );
@@ -2767,8 +2792,19 @@ void GuiMain::clearChat( VNumber chat_id )
     mp_userList->setUnreadMessages( chat_id, 0 );
   mp_chatList->reloadChatList();
   mp_savedChatList->updateSavedChats();
+  reloadChat( chat_id );
+}
+
+bool GuiMain::reloadChat( VNumber chat_id )
+{
   if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-    mp_chat->reloadChat();
+    return mp_chat->reloadChat();
+
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    return fl_chat->guiChat()->reloadChat();
+
+  return false;
 }
 
 void GuiMain::removeChat( VNumber chat_id )
@@ -2798,6 +2834,12 @@ void GuiMain::removeChat( VNumber chat_id )
         mp_chat->setChatId( ID_DEFAULT_CHAT );
         raiseHomeView();
       }
+    }
+    else
+    {
+      GuiFloatingChat* fl_chat = floatingChat( chat_id );
+      if( fl_chat )
+        fl_chat->close();
     }
   }
   else
@@ -2975,13 +3017,13 @@ void GuiMain::changeAvatarSizeInList()
     return;
 
   Settings::instance().setAvatarIconSize( QSize( avatar_size, avatar_size ) );
-  mp_userList->updateUsers( mp_core->isConnected() );
+  refreshUserList();
 }
 
 void GuiMain::toggleUserFavorite( VNumber user_id )
 {
   mp_core->toggleUserFavorite( user_id );
-  mp_userList->updateUsers( mp_core->isConnected() );
+  refreshUserList();
 }
 
 void GuiMain::createGroupFromChat( VNumber chat_id )
@@ -2993,7 +3035,7 @@ void GuiMain::removeUserFromList( VNumber user_id )
 {
   if( mp_core->removeOfflineUser( user_id ) )
   {
-    mp_userList->updateUsers( mp_core->isConnected() );
+    refreshUserList();
     mp_chatList->reloadChatList();
   }
 }
@@ -3017,6 +3059,13 @@ GuiFloatingChat* GuiMain::floatingChat( VNumber chat_id ) const
 bool GuiMain::floatingChatExists( VNumber chat_id ) const
 {
   return floatingChat( chat_id ) != 0;
+}
+
+void GuiMain::closeFloatingChat( VNumber chat_id )
+{
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( !fl_chat )
+    fl_chat->close();
 }
 
 void GuiMain::attachChat( VNumber chat_id )
@@ -3049,14 +3098,35 @@ void GuiMain::detachChat( VNumber chat_id )
   }
 
   GuiFloatingChat* fl_chat = new GuiFloatingChat;
-  fl_chat->setChatId( chat_id );
+  if( !fl_chat->setChatId( chat_id ) )
+  {
+    qWarning() << "Unable to create floating chat" << chat_id;
+    fl_chat->deleteLater();
+    return;
+  }
 
+  showDefaultChat();
   fl_chat->guiChat()->enableDetachButton( false );
+  fl_chat->guiChat()->updateAction( mp_core->isConnected(), mp_core->connectedUsers() );
   setupChatConnections( fl_chat->guiChat() );
   connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );
   m_floatingChats.append( fl_chat );
+
   fl_chat->checkWindowFlagsAndShow();
-  showDefaultChat();
   fl_chat->guiChat()->ensureLastMessageVisible();
   fl_chat->guiChat()->ensureFocusInChat();
+
+  mp_chatList->updateChat( chat_id );
+  mp_groupList->updateChat( chat_id );
+}
+
+QWidget* GuiMain::activeChatWindow()
+{
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  {
+    if( fl_chat->isActiveWindow() )
+      return (QWidget*)fl_chat;
+  }
+
+  return (QWidget*)this;
 }

@@ -66,6 +66,8 @@ public:
   QString messageTypeToString( QtMsgType ) const;
   QString logNodeToString( const LogNode& ) const;
 
+  bool isLoggingToFile() const;
+
   static Log& instance()
   {
     if( !mp_instance )

@@ -44,6 +44,7 @@ public:
   bool setChatId( VNumber );
   inline VNumber chatId() const;
   void updateUser( const User& );
+  bool hasUser( VNumber );
 
   void reloadChatUsers();
   inline bool reloadChat();

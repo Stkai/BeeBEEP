@@ -502,7 +502,7 @@ inline int Settings::userAwayTimeout() const { return m_userAwayTimeout; }
 inline void Settings::setUserAwayTimeout( int new_value ) { m_userAwayTimeout = new_value; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
-inline QString Settings::logFilePath() const { return QDir::toNativeSeparators( QString( "%1/%2.log" ).arg( m_logPath, programName() ) ); }
+inline QString Settings::logFilePath() const { return QDir::toNativeSeparators( QString( "%1/%2.log" ).arg( m_logPath, programName().toLower() ) ); }
 inline const QString& Settings::pluginPath() const { return m_pluginPath; }
 inline void Settings::setPluginPath( const QString& new_value ) { m_pluginPath = new_value; }
 inline const QString& Settings::languagePath() const { return m_languagePath; }

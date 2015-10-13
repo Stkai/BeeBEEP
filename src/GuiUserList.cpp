@@ -238,6 +238,7 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
     return;
   }
 
+  mp_twUsers->clearSelection();
   GuiUserItem* user_item = (GuiUserItem*)item;
   if( user_item->chatId() != ID_INVALID )
     emit chatSelected( user_item->chatId() );

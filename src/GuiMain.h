@@ -72,7 +72,7 @@ public slots:
 private slots:
   void showAbout();
   void showLicense();
-  void checkUser( const User& );
+  void updateUser( const User& );
   void showWritingUser( const User& );
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
@@ -163,6 +163,8 @@ protected:
   void checkChatToolbar();
   void raiseView( QWidget*, VNumber, const QString& );
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
+  void closeFloatingChat( VNumber );
+  bool reloadChat( VNumber );
 
 private:
   void setupChatConnections( GuiChat* );
@@ -195,6 +197,7 @@ private:
   void applyFlagStaysOnTop();
   bool floatingChatExists( VNumber ) const;
   GuiFloatingChat* floatingChat( VNumber ) const;
+  QWidget* activeChatWindow();
 
 private:
   QStackedWidget* mp_stackedWidget;

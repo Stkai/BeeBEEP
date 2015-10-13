@@ -1,9 +1,10 @@
 BEEBEEP (Secure Lan Messanger)
 
-BeeBEEP 2.0.5
+BeeBEEP 3.0.0
 - Fixed issue with "This app is preventing shutdown" in Windows
 - Removing a group action will delete also the chat with the group members
 - Zero Configuration Networking option added
+- Floating chats (chat can be detached from the main window)
 
 BeeBEEP 2.0.4
 - Some GUI improvements (new icons, file sharing tree load faster)

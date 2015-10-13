@@ -23,6 +23,7 @@
 
 #include "ChatManager.h"
 #include "GuiFloatingChat.h"
+#include "GuiEmoticons.h"
 #include "Settings.h"
 
 
@@ -32,20 +33,52 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   setObjectName( "GuiFloatingChat" );
   mp_chat = new GuiChat( this );
 
-  QToolBar* mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
+  mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
   addToolBar( Qt::BottomToolBarArea, mp_barChat );
-  mp_barChat->setObjectName( "GuiChatToolBar" );
+  mp_barChat->setObjectName( "GuiFloatingChatToolBar" );
   mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barChat->setAllowedAreas( Qt::AllToolBarAreas );
   mp_chat->setupToolBar( mp_barChat );
-  mp_barChat->show();
+
+  mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
+  mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
+
+  mp_emoticonsWidget = new GuiEmoticons( this );
+  mp_emoticonsWidget->initEmoticons();
+  connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
+  mp_dockEmoticons->setWidget( mp_emoticonsWidget );
+
+  mp_dockEmoticons->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::LeftDockWidgetArea, mp_dockEmoticons );
+  QAction* mp_actViewEmoticons = mp_dockEmoticons->toggleViewAction();
+  mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
+  mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
+  mp_actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
+  mp_actViewEmoticons->setData( 28 );
+  mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
+  mp_dockEmoticons->hide();
+
   setCentralWidget( mp_chat );
+  statusBar();
 }
 
 bool GuiFloatingChat::setChatId( VNumber chat_id )
 {
   Chat c = ChatManager::instance().chat( chat_id );
-  setWindowTitle( c.name() );
+  if( c.isPrivate() )
+  {
+    QStringList sl = c.name().split( "@" );
+    if( !sl.isEmpty() )
+    {
+      sl.removeLast();
+      setWindowTitle( sl.join( "@" ) );
+    }
+    else
+      setWindowTitle( c.name() );
+  }
+  else
+    setWindowTitle( c.name() );
+
   return mp_chat->setChatId( chat_id );
 }
 
@@ -90,4 +123,30 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
   {
     chat_splitter->restoreState( Settings::instance().chatSplitterState() );
   }
+}
+
+void GuiFloatingChat::raiseOnTop()
+{
+  if( isMinimized() || !isVisible() )
+    showNormal();
+  else
+    show();
+
+#ifdef Q_OS_WIN
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  SetActiveWindow( (HWND)winId() );
+  SetFocus( (HWND)winId() );
+#else
+  raise();
+  qApp->setActiveWindow( this );
+#endif
+
+  mp_chat->ensureFocusInChat();
+}
+
+void GuiFloatingChat::showUserWriting( VNumber user_id, const QString& msg )
+{
+  if( mp_chat->hasUser( user_id ) )
+    statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
 }

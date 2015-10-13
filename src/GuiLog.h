@@ -44,6 +44,7 @@ protected slots:
   void refreshLog();
   void findTextInLog();
   void saveLogAs();
+  void logToFile( bool );
 
 private:
   QTimer m_timer;
@@ -52,6 +53,7 @@ private:
   QLabel* mp_lStatus;
   QCheckBox* mp_cbCaseSensitive;
   QCheckBox* mp_cbWholeWordOnly;
+  QCheckBox* mp_cbLogToFile;
 
 };
 

@@ -181,6 +181,7 @@ void GuiGroupList::openGroupChatSelected()
 {
   if( m_selectedGroupId != ID_INVALID )
   {
+    clearSelection();
     emit openChatForGroupRequest( m_selectedGroupId );
     m_selectedGroupId = ID_INVALID;
   }
@@ -237,6 +238,7 @@ void GuiGroupList::updateChat( VNumber chat_id )
 void GuiGroupList::setChatOpened( VNumber chat_id )
 {
   m_groupChatOpened = ID_INVALID;
+  clearSelection();
 
   if( chat_id != ID_INVALID )
   {

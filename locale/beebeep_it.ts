@@ -1087,12 +1087,8 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <translation>Premi qui o premi invio per spedire il messaggio</translation>
     </message>
     <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Helvetica Neue DeskInterface&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <source>Detach chat</source>
+        <translation>Stacca la finestra</translation>
     </message>
 </context>
 <context>
@@ -1274,6 +1270,25 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Status</source>
         <translation>Stato</translation>
+    </message>
+</context>
+<context>
+    <name>GuiFloatingChat</name>
+    <message>
+        <source>Show the bar of chat</source>
+        <translation>Mostra la barra delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Emoticons</source>
+        <translation>Faccine</translation>
+    </message>
+    <message>
+        <source>Show the emoticon panel</source>
+        <translation>Mostra il pannello delle faccine</translation>
+    </message>
+    <message>
+        <source>Add your preferred emoticon to the message</source>
+        <translation>Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
 </context>
 <context>
@@ -1542,6 +1557,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Whole word</source>
         <translation>Parola intera</translation>
+    </message>
+    <message>
+        <source>Log to file</source>
+        <translation>Usa un file di log</translation>
     </message>
 </context>
 <context>

@@ -58,6 +58,11 @@ Log::~Log()
   closeFileStream();
 }
 
+bool Log::isLoggingToFile() const
+{
+  return m_logFile.isOpen();
+}
+
 void Log::rebootFileStream( const QString& log_path, bool force_reboot )
 {
   if( m_logFile.isOpen() )
