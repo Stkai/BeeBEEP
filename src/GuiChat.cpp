@@ -515,13 +515,8 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
   Chat c = ChatManager::instance().chat( m_chatId );
   if( !c.isValid() )
     return;
-  bool read_all_messages = !cm.isFromLocalUser() && !cm.isFromSystem();
-  if( read_all_messages )
-  {
-    c.readAllMessages();
-    ChatManager::instance().setChat( c );
-  }
 
+  bool show_timestamp_last_message = !cm.isFromLocalUser() && !cm.isFromSystem();
   mp_actClear->setDisabled( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) );
 
   User u = m_chatUsers.find( cm.userId() );
@@ -560,7 +555,7 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
     ensureLastMessageVisible();
   }
 
-  if( read_all_messages )
+  if( show_timestamp_last_message )
     setLastMessageTimestamp( cm.timestamp() );
 }
 

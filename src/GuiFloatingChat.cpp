@@ -60,6 +60,9 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
 
   setCentralWidget( mp_chat );
   statusBar();
+  m_chatIsVisible = true;
+  m_prevActivatedState = true;
+  connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onApplicationFocusChanged(QWidget*,QWidget*)));
 }
 
 bool GuiFloatingChat::setChatId( VNumber chat_id )
@@ -142,6 +145,7 @@ void GuiFloatingChat::raiseOnTop()
   qApp->setActiveWindow( this );
 #endif
 
+  emit readAllMessages( chatId() );
   mp_chat->ensureFocusInChat();
 }
 
@@ -149,4 +153,49 @@ void GuiFloatingChat::showUserWriting( VNumber user_id, const QString& msg )
 {
   if( mp_chat->hasUser( user_id ) )
     statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
+}
+
+void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
+{
+  if( old == 0 && isAncestorOf( now )  )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Floating chat" << chatId() << "has grab focus";
+#endif
+    m_chatIsVisible = true;
+    m_prevActivatedState = true;
+    emit readAllMessages( chatId() );
+    return;
+  }
+
+  if( isAncestorOf( old ) && now == 0 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Floating chat" << chatId() << "has lost focus";
+#endif
+    m_chatIsVisible = false;
+    m_prevActivatedState = false;
+    return;
+  }
+
+  bool current_state = isActiveWindow();
+  if( current_state != m_prevActivatedState )
+  {
+    m_prevActivatedState = current_state;
+    if( current_state )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Floating chat" << chatId() << "has grab focus (active)";
+#endif
+      m_chatIsVisible = true;
+      emit readAllMessages( chatId() );
+    }
+    else
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Floating chat" << chatId() << "has lost focus (inactive)";
+#endif
+      m_chatIsVisible = false;
+    }
+  }
 }

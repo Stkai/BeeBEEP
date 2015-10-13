@@ -152,12 +152,12 @@ private slots:
   void openDataFolder();
   void detachChat( VNumber );
   void attachChat( VNumber );
+  void readAllMessagesInChat( VNumber );
 
 protected:
   void keyPressEvent( QKeyEvent* );
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
-  bool showAlert( VNumber );
   bool promptConnectionPassword();
   void raiseOnTop();
   void checkChatToolbar();
@@ -165,6 +165,9 @@ protected:
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
   void closeFloatingChat( VNumber );
   bool reloadChat( VNumber );
+  bool chatIsVisible( VNumber );
+  void showAlertForMessage( VNumber, const ChatMessage& );
+  GuiChat* guiChat( VNumber );
 
 private:
   void setupChatConnections( GuiChat* );

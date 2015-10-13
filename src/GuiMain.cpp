@@ -1399,7 +1399,7 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 #endif
 }
 
-bool GuiMain::showAlert( VNumber chat_id )
+void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
 {
   Chat c = ChatManager::instance().chat( chat_id );
   if( c.isValid() && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
@@ -1407,102 +1407,98 @@ bool GuiMain::showAlert( VNumber chat_id )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Notification disabled for group:" << c.privateId() << c.name();
 #endif
-    return false;
+    return;
   }
 
-  bool beep_played = false;
-
-  if( Settings::instance().beepAlwaysOnNewMessageArrived() )
-  {
-    playBeep();
-    beep_played = true;
-  }
+  playBeep();
+  bool show_message_in_tray = true;
 
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
   {
-    if( fl_chat->isMinimized() || !fl_chat->isActiveWindow() )
+    if( Settings::instance().raiseOnNewMessageArrived() )
     {
-      if( !beep_played && Settings::instance().beepOnNewMessageArrived() )
-        playBeep();
-
-      if( Settings::instance().raiseOnNewMessageArrived() )
-        fl_chat->raiseOnTop();
-      else
-        QApplication::alert( fl_chat );
-
-      return true;
+      fl_chat->raiseOnTop();
+      show_message_in_tray = false;
     }
     else
-      return false;
-  }
-
-  if( isMinimized() || !isActiveWindow() )
-  {
-    if( !beep_played && Settings::instance().beepOnNewMessageArrived() )
-      playBeep();
-
-    if( Settings::instance().raiseOnNewMessageArrived() )
-      raiseOnTop();
-    else
-      QApplication::alert( this );
-
-    return true;
+      QApplication::alert( fl_chat );
   }
   else
+  {
+    if( Settings::instance().raiseOnNewMessageArrived() )
+    {
+      showChat( chat_id );
+      raiseOnTop();
+      show_message_in_tray = false;
+    }
+    else
+      QApplication::alert( this );
+  }
+
+  if( show_message_in_tray )
+  {
+    User u = UserManager::instance().findUser( cm.userId() );
+    QString msg = u.isValid() ? tr( "New message from %1" ).arg( u.name() ) : tr( "New message arrived" );
+    mp_trayIcon->showNewMessageArrived( chat_id, msg );
+  }
+  else
+  {
+    mp_trayIcon->setDefaultIcon();
+    mp_trayIcon->resetChatId();
+  }
+}
+
+bool GuiMain::chatIsVisible( VNumber chat_id )
+{
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    return fl_chat->chatIsVisible();
+
+  if( isMinimized() )
     return false;
+
+  if( !isActiveWindow() )
+    return false;
+
+  return mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id;
 }
 
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
-  bool show_alert = false;
-
   if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() )
     mp_home->addSystemMessage( cm );
 
-  if( !cm.isFromSystem() && !cm.isFromLocalUser() )
-    show_alert = showAlert( chat_id );
+  bool chat_is_visible = chatIsVisible( chat_id );
+  bool show_alert = !cm.isFromSystem() && !cm.isFromLocalUser() && !chat_is_visible;
 
-  if( chat_id == mp_chat->chatId() && mp_chat == mp_stackedWidget->currentWidget() )
+  if( show_alert )
+    showAlertForMessage( chat_id, cm );
+  else if( Settings::instance().beepAlwaysOnNewMessageArrived() )
+    playBeep();
+
+  chat_is_visible = chatIsVisible( chat_id );
+
+  GuiChat* gui_chat = guiChat( chat_id );
+
+  if( gui_chat )
   {
-    mp_chat->appendChatMessage( chat_id, cm );
-    statusBar()->clearMessage();
-    mp_userList->setUnreadMessages( chat_id, 0 );
-    mp_trayIcon->setDefaultIcon();
+    if( chat_is_visible )
+      readAllMessagesInChat( chat_id );
+    gui_chat->appendChatMessage( chat_id, cm );
   }
   else
-  {
-    GuiFloatingChat* fl_chat = floatingChat( chat_id );
-    if( fl_chat )
-      fl_chat->guiChat()->appendChatMessage( chat_id, cm );
+    chat_is_visible = false;
 
+  if( !chat_is_visible )
+  {
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
     int chat_messages = chat_hidden.chatMessages() + ChatManager::instance().savedChatSize( chat_hidden.name() );
     mp_userList->setMessages( chat_id, chat_messages );
-
-    if( show_alert )
-    {
-      if( Settings::instance().raiseOnNewMessageArrived() )
-      {
-        statusBar()->clearMessage();
-        showChat( chat_id );
-        mp_trayIcon->setDefaultIcon();
-        mp_trayIcon->resetChatId();
-      }
-      else
-      {
-        User u = UserManager::instance().findUser( cm.userId() );
-        QString msg = u.isValid() ? tr( "New message from %1" ).arg( u.name() ) : tr( "New message arrived" );
-        mp_trayIcon->showNewMessageArrived( chat_id, msg );
-      }
-    }
+    mp_chatList->updateChat( chat_id );
+    mp_groupList->updateChat( chat_id );
   }
-
-  mp_chatList->updateChat( chat_id );
-  mp_groupList->updateChat( chat_id );
-  if( !show_alert )
-    mp_trayIcon->setDefaultIcon();
 }
 
 void GuiMain::searchUsers()
@@ -1935,12 +1931,12 @@ void GuiMain::showChat( VNumber chat_id )
     if( !fl_chat->isVisible() )
       checkWindowFlagsAndShow();
     else
-      fl_chat->raise();
+      fl_chat->raiseOnTop();
 
-    fl_chat->guiChat()->ensureFocusInChat();
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
+    fl_chat->guiChat()->ensureFocusInChat();
     return;
   }
 
@@ -1950,6 +1946,8 @@ void GuiMain::showChat( VNumber chat_id )
     qDebug() << "Chat" << chat_id << "is already shown... skip";
 #endif
     mp_chat->reloadChatUsers();
+    if( !isActiveWindow() )
+      raiseOnTop();
     mp_chat->ensureFocusInChat();
     return;
   }
@@ -2175,10 +2173,19 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 
 void GuiMain::trayMessageClicked()
 {
-  showChat( mp_trayIcon->chatId() );
+  GuiFloatingChat* fl_chat = floatingChat( mp_trayIcon->chatId() );
+  if( fl_chat )
+  {
+    fl_chat->raiseOnTop();
+  }
+  else
+  {
+    showChat( mp_trayIcon->chatId() );
+    QTimer::singleShot( 0, this, SLOT( showUp() ) );
+  }
+
   mp_trayIcon->resetChatId();
   mp_trayIcon->setDefaultIcon();
-  QTimer::singleShot( 0, this, SLOT( showUp() ) );
 }
 
 void GuiMain::addToShare( const QString& share_path )
@@ -3110,6 +3117,7 @@ void GuiMain::detachChat( VNumber chat_id )
   fl_chat->guiChat()->updateAction( mp_core->isConnected(), mp_core->connectedUsers() );
   setupChatConnections( fl_chat->guiChat() );
   connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );
+  connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
   m_floatingChats.append( fl_chat );
 
   fl_chat->checkWindowFlagsAndShow();
@@ -3129,4 +3137,42 @@ QWidget* GuiMain::activeChatWindow()
   }
 
   return (QWidget*)this;
+}
+
+void GuiMain::readAllMessagesInChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Invalid chat found in readAllMessagesInChat" << chat_id;
+#endif
+    return;
+  }
+
+  if( c.unreadMessages() > 0 )
+  {
+    c.readAllMessages();
+    ChatManager::instance().setChat( c );
+
+    mp_userList->setUnreadMessages( chat_id, 0 );
+    mp_chatList->updateChat( chat_id );
+    mp_groupList->updateChat( chat_id );
+    mp_trayIcon->setDefaultIcon();
+    mp_trayIcon->resetChatId();
+    statusBar()->clearMessage();
+  }
+}
+
+GuiChat* GuiMain::guiChat( VNumber chat_id )
+{
+  if( mp_chat->chatId() == chat_id )
+    return mp_chat;
+
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    return fl_chat->guiChat();
+  else
+    return 0;
+
 }

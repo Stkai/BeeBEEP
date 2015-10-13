@@ -40,13 +40,18 @@ public:
   void checkWindowFlagsAndShow();
   void showUserWriting( VNumber, const QString& );
   void raiseOnTop();
+  inline bool chatIsVisible() const;
 
 signals:
   void attachChatRequest( VNumber );
+  void readAllMessages( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );
   void applyFlagStaysOnTop();
+
+private slots:
+  void onApplicationFocusChanged( QWidget*, QWidget* );
 
 private:
   GuiChat* mp_chat;
@@ -54,12 +59,15 @@ private:
   QDockWidget* mp_dockEmoticons;
   GuiEmoticons* mp_emoticonsWidget;
 
+  bool m_chatIsVisible;
+  bool m_prevActivatedState;
 };
 
 
 // Inline Functions
 inline VNumber GuiFloatingChat::chatId() const { return mp_chat->chatId(); }
 inline GuiChat* GuiFloatingChat::guiChat() const { return mp_chat; }
+inline bool GuiFloatingChat::chatIsVisible() const { return m_chatIsVisible; }
 
 
 #endif // BEEBEEP_GUIFLOATINGCHAT_H
