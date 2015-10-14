@@ -201,6 +201,7 @@ private:
   bool floatingChatExists( VNumber ) const;
   GuiFloatingChat* floatingChat( VNumber ) const;
   QWidget* activeChatWindow();
+  void setChatMessagesToShowInAction( QAction* );
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -262,10 +263,13 @@ private:
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
 
+  QAction* mp_actHostAddress;
   QAction* mp_actPortBroadcast;
   QAction* mp_actPortListener;
   QAction* mp_actPortFileTransfer;
-
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  QAction* mp_actMulticastDns;
+#endif
   QDockWidget* mp_dockUserList;
   QDockWidget* mp_dockGroupList;
   QDockWidget* mp_dockSavedChatList;

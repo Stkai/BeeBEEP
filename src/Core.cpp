@@ -114,7 +114,9 @@ bool Core::start()
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToAllChatsWithUser, ChatMessage::Connection );
 
+#ifdef BEEBEEP_USE_MULTICAST_DNS
   startDnsMulticasting();
+#endif
 
   if( Settings::instance().fileTransferIsEnabled() )
     startFileTransferServer();
@@ -140,9 +142,9 @@ bool Core::start()
   return true;
 }
 
+#ifdef BEEBEEP_USE_MULTICAST_DNS
 void Core::startDnsMulticasting()
 {
-#ifdef BEEBEEP_USE_MULTICAST_DNS
   if( mp_mDns->isActive() )
     return;
 
@@ -159,12 +161,10 @@ void Core::startDnsMulticasting()
                              DispatchToChat, ChatMessage::Connection );
     }
   }
-#endif
 }
 
 void Core::stopDnsMulticasting()
 {
-#ifdef BEEBEEP_USE_MULTICAST_DNS
   if( !mp_mDns->isActive() )
     return;
 
@@ -175,14 +175,22 @@ void Core::stopDnsMulticasting()
                                .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ) ),
                              DispatchToChat, ChatMessage::Connection );
   }
-#endif
 }
+
+bool Core::dnsMulticastingIsActive() const
+{
+  return mp_mDns->isActive();
+}
+
+#endif
 
 void Core::stop()
 {
   mp_broadcaster->stopBroadcasting();
 
+#ifdef BEEBEEP_USE_MULTICAST_DNS
   stopDnsMulticasting();
+#endif
 
   stopFileTransferServer();
 

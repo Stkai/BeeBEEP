@@ -84,12 +84,15 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
   connect( mp_pbDetach, SIGNAL( clicked() ), this, SLOT( detachThisChat() ) );
+  connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
 }
 
 void GuiChat::enableDetachButton( bool yes )
 {
   mp_pbDetach->setEnabled( yes );
   mp_pbDetach->setVisible( yes );
+  mp_pbSaveState->setEnabled( !yes );
+  mp_pbSaveState->setVisible( !yes );
 }
 
 void GuiChat::setupToolBar( QToolBar* bar )
@@ -438,11 +441,9 @@ bool GuiChat::setChatId( VNumber chat_id )
   if( ChatManager::instance().isLoadHistoryCompleted() && chat_has_history && historyCanBeShowed() )
   {
     html_text += ChatManager::instance().chatSavedText( c.name() );
-    chat_is_empty = false;
+    if( !html_text.isEmpty() )
+      html_text.append( "<br />" );
   }
-
-  if( !html_text.isEmpty() )
-    html_text.append( "<br />" );
 
   int num_lines = c.messages().size();
   bool max_lines_message_written = false;
@@ -451,11 +452,11 @@ bool GuiChat::setChatId( VNumber chat_id )
   {
     num_lines--;
 
-    if( Settings::instance().chatMaxLinesToShow() && num_lines > Settings::instance().chatLinesToShow() )
+    if( Settings::instance().chatMaxMessagesToShow() && num_lines > Settings::instance().chatMessagesToShow() )
     {
       if( !max_lines_message_written )
       {
-        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=gray><i>... %1 ...</i></font><br /><br />" ).arg( tr( "last %1 messages" ).arg( Settings::instance().chatLinesToShow() ) );
+        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=gray><i>... %1 ...</i></font><br /><br />" ).arg( tr( "last %1 messages" ).arg( Settings::instance().chatMessagesToShow() ) );
         max_lines_message_written = true;
       }
       continue;

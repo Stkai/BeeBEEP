@@ -206,7 +206,7 @@ void GuiMain::checkWindowFlagsAndShow()
     show();
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
-  if( Settings::instance().resetGeometryAtStartup() || Settings::instance().chatSplitterState().isEmpty() )
+  if( Settings::instance().chatSplitterState().isEmpty() )
   {
     int central_widget_height = centralWidget()->size().height();
 #ifdef BEEBEEP_DEBUG
@@ -592,6 +592,12 @@ void GuiMain::createMenus()
 
   mp_menuChat->addSeparator();
 
+  act = mp_menuChat->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserColor() );
+  act->setData( 5 );
+
   act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
   act->setCheckable( true );
@@ -634,10 +640,10 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showMessagesGroupByUser() );
   act->setData( 13 );
 
-  act = mp_menuChat->addAction( tr( "Show only last %1 messages" ).arg( Settings::instance().chatLinesToShow() ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled only the last %1 messages will be shown in chat" ).arg( Settings::instance().chatLinesToShow() ) );
+  act = mp_menuChat->addAction( "", this, SLOT( settingsChanged() ) );
+  setChatMessagesToShowInAction( act );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().chatMaxLinesToShow() );
+  act->setChecked( Settings::instance().chatMaxMessagesToShow() );
   act->setData( 27 );
 
   mp_menuChat->addSeparator();
@@ -717,13 +723,13 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().autoUserAway() );
   act->setData( 20 );
 
-  act = mp_menuSettings->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the user's nickname in chat and in list is colored" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserColor() );
-  act->setData( 5 );
-
   mp_menuSettings->addSeparator();
+
+  act = mp_menuSettings->addAction( tr( "Always open a new floating chat window" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled when you always open chat in a new floating window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().alwaysOpenNewFloatingChat() );
+  act->setData( 37 );
 
   mp_actBeepOnNewMessage = mp_menuSettings->addAction( tr( "Enable BEEP alert on new message" ), this, SLOT( settingsChanged() ) );
   mp_actBeepOnNewMessage->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
@@ -899,10 +905,12 @@ void GuiMain::createMenus()
   act->setData( 19 );
 
   mp_menuTrayIcon->addSeparator();
-  mp_menuTrayIcon->addAction( tr( "Used Ports") );
+  mp_menuTrayIcon->addAction( tr( "Network" ) );
+  mp_actHostAddress = mp_menuTrayIcon->addAction( QString( "ip" ) );
   mp_actPortBroadcast = mp_menuTrayIcon->addAction( QString( "udp1" ) );
   mp_actPortListener = mp_menuTrayIcon->addAction( QString( "tcp1" ) );
   mp_actPortFileTransfer = mp_menuTrayIcon->addAction( QString( "tcp2" ) );
+  mp_actMulticastDns = mp_menuTrayIcon->addAction( QString( "mdns" ) );
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actQuit );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
@@ -1323,7 +1331,7 @@ void GuiMain::settingsChanged()
     break;
   case 27:
     {
-      Settings::instance().setChatMaxLinesToShow( act->isChecked() );
+      Settings::instance().setChatMaxMessagesToShow( act->isChecked() );
       if( act->isChecked() )
       {
 #if QT_VERSION >= 0x050000
@@ -1332,10 +1340,13 @@ void GuiMain::settingsChanged()
         int num_messages = QInputDialog::getInteger( this, Settings::instance().programName(),
 #endif
                                                      tr( "Please select the maximum number of messages to be showed" ),
-                                                     Settings::instance().chatLinesToShow(),
+                                                     Settings::instance().chatMessagesToShow(),
                                                      10, 1000, 5, &ok );
         if( ok )
-          Settings::instance().setChatLinesToShow( num_messages );
+        {
+          Settings::instance().setChatMessagesToShow( num_messages );
+          setChatMessagesToShowInAction( act );
+        }
       }
       refresh_chat = true;
     }
@@ -1368,6 +1379,9 @@ void GuiMain::settingsChanged()
   case 36:
     Settings::instance().setPromptOnCloseEvent( act->isChecked() );
     break;
+  case 37:
+    Settings::instance().setAlwaysOpenNewFloatingChat( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1387,6 +1401,12 @@ void GuiMain::settingsChanged()
   }
   if( settings_data_id > 0 && settings_data_id < 99 )
     Settings::instance().save();
+}
+
+void GuiMain::setChatMessagesToShowInAction( QAction* act )
+{
+  act->setText( tr( "Show only last %1 messages" ).arg( Settings::instance().chatMessagesToShow() ) );
+  act->setStatusTip( tr( "If enabled only the last %1 messages will be shown in chat" ).arg( Settings::instance().chatMessagesToShow() ) );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
@@ -1936,6 +1956,7 @@ void GuiMain::showChat( VNumber chat_id )
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
+    fl_chat->guiChat()->reloadChatUsers();
     fl_chat->guiChat()->ensureFocusInChat();
     return;
   }
@@ -1949,6 +1970,12 @@ void GuiMain::showChat( VNumber chat_id )
     if( !isActiveWindow() )
       raiseOnTop();
     mp_chat->ensureFocusInChat();
+    return;
+  }
+
+  if( chat_id != ID_DEFAULT_CHAT && Settings::instance().alwaysOpenNewFloatingChat() )
+  {
+    detachChat( chat_id );
     return;
   }
 
@@ -2730,7 +2757,9 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
 
   if( mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
   {
-    mp_chat->reloadChatUsers();
+    GuiChat* gui_chat = guiChat( chat_id );
+    if( gui_chat )
+      gui_chat->reloadChatUsers();
     mp_chatList->reloadChatList();
     checkViewActions();
   }
@@ -2800,6 +2829,9 @@ void GuiMain::clearChat( VNumber chat_id )
   mp_chatList->reloadChatList();
   mp_savedChatList->updateSavedChats();
   reloadChat( chat_id );
+  GuiChat* gui_chat = guiChat( chat_id );
+  if( gui_chat )
+    gui_chat->ensureFocusInChat();
 }
 
 bool GuiMain::reloadChat( VNumber chat_id )
@@ -2942,22 +2974,36 @@ void GuiMain::showChatSettingsMenu()
 
 void GuiMain::showDefaultServerPortInMenu()
 {
+  QString host_address = tr( "offline" );
   QString broadcast_port = tr( "offline" );
   QString listener_port = tr( "offline" );
   QString file_transfer_port = tr( "offline" );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  QString multicast_dns = tr( "inactive" );
+#endif
+
   if( mp_core->isConnected() )
   {
+    host_address = Settings::instance().localUser().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
     listener_port = QString::number( Settings::instance().localUser().hostPort() );
     if( Settings::instance().fileTransferIsEnabled() )
       file_transfer_port = QString::number( mp_core->fileTransferPort() );
     else
       file_transfer_port = tr( "disabled" );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+    if( mp_core->dnsMulticastingIsActive() )
+      multicast_dns = tr( "active" );
+#endif
   }
 
-  mp_actPortBroadcast->setText( QString( "udp1: %1" ).arg( broadcast_port ) );
+  mp_actHostAddress->setText( QString( "ip: %1" ).arg( host_address ) );
+  mp_actPortBroadcast->setText( QString( "udp: %1" ).arg( broadcast_port ) );
   mp_actPortListener->setText( QString( "tcp1: %1" ).arg( listener_port ) );
   mp_actPortFileTransfer->setText( QString( "tcp2: %1" ).arg( file_transfer_port ) );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  mp_actMulticastDns->setText( QString( "mdns: %1" ).arg( multicast_dns ) );
+#endif
 }
 
 void GuiMain::sendBroadcastMessage()
@@ -3112,7 +3158,9 @@ void GuiMain::detachChat( VNumber chat_id )
     return;
   }
 
-  showDefaultChat();
+  if( mp_chat->chatId() == chat_id )
+    showDefaultChat();
+
   fl_chat->guiChat()->enableDetachButton( false );
   fl_chat->guiChat()->updateAction( mp_core->isConnected(), mp_core->connectedUsers() );
   setupChatConnections( fl_chat->guiChat() );

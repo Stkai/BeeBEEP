@@ -1090,6 +1090,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Detach chat</source>
         <translation>Stacca la finestra</translation>
     </message>
+    <message>
+        <source>Save geometry and state</source>
+        <translation>Salva le dimensioni e lo stato della finestra</translation>
+    </message>
 </context>
 <context>
     <name>GuiCreateGroup</name>
@@ -1289,6 +1293,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Add your preferred emoticon to the message</source>
         <translation>Aggiungi la tua faccina preferita al messaggio</translation>
+    </message>
+    <message>
+        <source>Window&apos;s geometry and state saved</source>
+        <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
     </message>
 </context>
 <context>
@@ -2871,7 +2879,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Used Ports</source>
-        <translation>Porte usate</translation>
+        <translation type="vanished">Porte usate</translation>
     </message>
     <message>
         <source>disabled</source>
@@ -3120,6 +3128,26 @@ il file %2 (%3)?</translation>
     <message>
         <source>Click to open your data folder</source>
         <translation>Clicca qui per aprire la tua cartella con le preferenze ed i messaggi salvati</translation>
+    </message>
+    <message>
+        <source>Always open a new floating chat window</source>
+        <translation>Apri sempre la conversazione in una nuova finestra</translation>
+    </message>
+    <message>
+        <source>If enabled when you always open chat in a new floating window</source>
+        <translation>Se abilitata quando aprirai una conversazione questa sarà mostrata in una nuova finestra</translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation>Rete</translation>
+    </message>
+    <message>
+        <source>inactive</source>
+        <translation>non attivo</translation>
+    </message>
+    <message>
+        <source>active</source>
+        <translation>attivo</translation>
     </message>
 </context>
 <context>

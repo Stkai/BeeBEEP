@@ -127,8 +127,10 @@ void PluginManager::addPlugin( const QString& file_path )
 
     qDebug() << file_path << "is an invalid plugin";
   }
+#ifdef BEEBEEP_DEBUG
   else
     qDebug() << file_path << "is not a plugin";
+#endif
 }
 
 void PluginManager::setPluginEnabled( const QString& plugin_name, bool enabled )

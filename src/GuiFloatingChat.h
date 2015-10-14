@@ -48,10 +48,12 @@ signals:
 
 protected:
   void closeEvent( QCloseEvent* );
+  void keyPressEvent( QKeyEvent* );
   void applyFlagStaysOnTop();
 
 private slots:
   void onApplicationFocusChanged( QWidget*, QWidget* );
+  void saveGeometryAndState();
 
 private:
   GuiChat* mp_chat;

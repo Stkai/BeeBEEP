@@ -159,10 +159,10 @@ public:
   inline void setShowOnlyMessagesInDefaultChat( bool );
   inline bool showVCardOnRightClick() const;
   inline void setShowVCardOnRightClick( bool );
-  inline bool chatMaxLinesToShow() const;
-  inline void setChatMaxLinesToShow( bool );
-  inline int chatLinesToShow() const;
-  inline void setChatLinesToShow( int );
+  inline bool chatMaxMessagesToShow() const;
+  inline void setChatMaxMessagesToShow( bool );
+  inline int chatMessagesToShow() const;
+  inline void setChatMessagesToShow( int );
   inline const QSize& mainBarIconSize() const;
   inline void setAvatarIconSize( const QSize& );
   inline const QSize& avatarIconSize() const;
@@ -181,6 +181,12 @@ public:
   inline void setShowImagePreview( bool );
   inline bool showImagePreview() const;
   inline int imagePreviewHeight() const;
+  inline void setFloatingChatGeometry( const QByteArray& );
+  inline void setFloatingChatState( const QByteArray& );
+  inline void setFloatingChatSplitterState( const QByteArray& );
+  inline const QByteArray& floatingChatGeometry() const;
+  inline const QByteArray& floatingChatState() const;
+  inline const QByteArray& floatingChatSplitterState() const;
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
@@ -301,6 +307,8 @@ public:
 
   inline void setPromptOnCloseEvent( bool );
   inline bool promptOnCloseEvent() const;
+  inline void setAlwaysOpenNewFloatingChat( bool );
+  inline bool alwaysOpenNewFloatingChat() const;
 
   void loadRcFile();
   void clearNativeSettings();
@@ -398,8 +406,8 @@ private:
   bool m_showChatToolbar;
   bool m_showOnlyMessagesInDefaultChat;
   bool m_showVCardOnRightClick;
-  bool m_chatMaxLinesToShow;
-  int m_chatLinesToShow;
+  bool m_chatMaxMessagesToShow;
+  int m_chatMessagesToShow;
   bool m_showEmoticonMenu;
   bool m_useNativeEmoticons;
   bool m_showImagePreview;
@@ -415,6 +423,10 @@ private:
   int m_emoticonSizeInMenu;
   int m_emoticonInRecentMenu;
   QStringList m_recentEmoticons;
+
+  QByteArray m_floatingChatGeometry;
+  QByteArray m_floatingChatState;
+  QByteArray m_floatingChatSplitterState;
 
   QString m_passwordBeforeHash;
   QByteArray m_password;
@@ -473,6 +485,7 @@ private:
   bool m_resetGeometryAtStartup;
   bool m_showMinimizedAtStartup;
   bool m_promptOnCloseEvent;
+  bool m_alwaysOpenNewFloatingChat;
 
   bool m_isFacebookPageLinkClicked;
 
@@ -645,10 +658,10 @@ inline void Settings::setShowMinimizedAtStartup( bool new_value ) { m_showMinimi
 inline bool Settings::showMinimizedAtStartup() const { return m_showMinimizedAtStartup; }
 inline void Settings::setChatSplitterState( const QByteArray& new_value ) { m_chatSplitterState = new_value; }
 inline const QByteArray& Settings::chatSplitterState() const { return m_chatSplitterState; }
-inline int Settings::chatLinesToShow() const { return m_chatLinesToShow; }
-inline void Settings::setChatLinesToShow( int new_value ) { m_chatLinesToShow = new_value; }
-inline bool Settings::chatMaxLinesToShow() const { return m_chatMaxLinesToShow; }
-inline void Settings::setChatMaxLinesToShow( bool new_value ) { m_chatMaxLinesToShow = new_value; }
+inline int Settings::chatMessagesToShow() const { return m_chatMessagesToShow; }
+inline void Settings::setChatMessagesToShow( int new_value ) { m_chatMessagesToShow = new_value; }
+inline bool Settings::chatMaxMessagesToShow() const { return m_chatMaxMessagesToShow; }
+inline void Settings::setChatMaxMessagesToShow( bool new_value ) { m_chatMaxMessagesToShow = new_value; }
 inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
 inline int Settings::emoticonSizeInChat() const { return m_emoticonSizeInChat; }
 inline int Settings::emoticonSizeInMenu() const { return m_emoticonSizeInMenu; }
@@ -667,5 +680,13 @@ inline void Settings::setIsFacebookPageLinkClicked( bool new_value ) { m_isFaceb
 inline bool Settings::isFacebookPageLinkClicked() const { return m_isFacebookPageLinkClicked; }
 inline void Settings::SetPreventMultipleConnectionsFromSingleHostAddress( bool new_value ) { m_preventMultipleConnectionsFromSingleHostAddress = new_value; }
 inline bool Settings::preventMultipleConnectionsFromSingleHostAddress() { return m_preventMultipleConnectionsFromSingleHostAddress; }
+inline void Settings::setFloatingChatGeometry( const QByteArray& new_value ) { m_floatingChatGeometry = new_value; }
+inline void Settings::setFloatingChatState( const QByteArray& new_value ) { m_floatingChatState = new_value; }
+inline void Settings::setFloatingChatSplitterState( const QByteArray& new_value ) { m_floatingChatSplitterState = new_value; }
+inline const QByteArray& Settings::floatingChatGeometry() const { return m_floatingChatGeometry; }
+inline const QByteArray& Settings::floatingChatState() const { return m_floatingChatState; }
+inline const QByteArray& Settings::floatingChatSplitterState() const { return m_floatingChatSplitterState; }
+inline void Settings::setAlwaysOpenNewFloatingChat( bool new_value ) { m_alwaysOpenNewFloatingChat = new_value; }
+inline bool Settings::alwaysOpenNewFloatingChat() const { return m_alwaysOpenNewFloatingChat; }
 
 #endif // BEEBEEP_SETTINGS_H

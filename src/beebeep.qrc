@@ -132,5 +132,6 @@
         <file>images/search-users.png</file>
         <file>images/thumbup.png</file>
         <file>images/add-window.png</file>
+        <file>images/save-window.png</file>
     </qresource>
 </RCC>

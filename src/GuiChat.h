@@ -71,6 +71,7 @@ signals:
   void showChatMenuRequest();
   void showVCardRequest( VNumber, bool );
   void detachChatRequest( VNumber );
+  void saveStateAndGeometryRequest();
 
 public slots:
   void appendChatMessage( VNumber, const ChatMessage& );
@@ -89,6 +90,7 @@ protected:
   bool isActiveUser( const Chat&, const User& ) const;
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
+
 
 private slots:
   void sendMessage();

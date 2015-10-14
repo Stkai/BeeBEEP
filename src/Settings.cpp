@@ -86,6 +86,7 @@ Settings::Settings()
   m_useMulticastDns = false;
 #endif
   m_preventMultipleConnectionsFromSingleHostAddress = false;
+  m_alwaysOpenNewFloatingChat = false;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -564,8 +565,8 @@ void Settings::load()
     m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
   m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
   m_showImagePreview = sets->value( "ShowImagePreview", true ).toBool();
-  m_chatLinesToShow = sets->value( "ChatLinesToShow", 80 ).toInt();
-  m_chatMaxLinesToShow = sets->value( "ChatMaxLinesToShow", false ).toBool();
+  m_chatMessagesToShow = sets->value( "ChatMessagesToShow", 80 ).toInt();
+  m_chatMaxMessagesToShow = sets->value( "ChatMaxMessagesToShow", false ).toBool();
   m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
   sets->endGroup();
 
@@ -609,11 +610,29 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Gui" );
-  m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
-  m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
-  m_chatSplitterState = sets->value( "ChatSplitterState", "" ).toByteArray();
-  m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
-  m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
+  m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
+  if( m_resetGeometryAtStartup )
+  {
+    m_guiGeometry = "";
+    m_guiState = "";
+    m_chatSplitterState = "";
+    m_floatingChatGeometry = "";
+    m_floatingChatState = "";
+    m_floatingChatSplitterState = "";
+    m_mainBarIconSize = QSize( 24, 24 );
+    m_avatarIconSize = QSize( 32, 32 );
+  }
+  else
+  {
+    m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
+    m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
+    m_chatSplitterState = sets->value( "ChatSplitterState", "" ).toByteArray();
+    m_floatingChatGeometry = sets->value( "FloatingChatGeometry", "" ).toByteArray();
+    m_floatingChatState = sets->value( "FloatingChatState", "" ).toByteArray();
+    m_floatingChatSplitterState = sets->value( "FloatingChatSplitterState", "" ).toByteArray();
+    m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
+    m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
+  }
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
@@ -645,7 +664,6 @@ void Settings::load()
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
-  m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
   m_emoticonSizeInEdit = qMax( m_emoticonSizeInEdit, (int)sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
   m_emoticonSizeInChat = qMax( m_emoticonSizeInChat, (int)sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
@@ -656,6 +674,7 @@ void Settings::load()
   m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", false ).toBool();
   m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
+  m_alwaysOpenNewFloatingChat = sets->value( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -762,8 +781,8 @@ void Settings::save()
   sets->setValue( "MessageFilter", m_chatMessageFilter );
   sets->setValue( "ShowOnlyMessagesInDefaultChat", m_showOnlyMessagesInDefaultChat );
   sets->setValue( "ShowImagePreview", m_showImagePreview );
-  sets->setValue( "ChatLinesToShow", m_chatLinesToShow );
-  sets->setValue( "ChatMaxLinesToShow", m_chatMaxLinesToShow );
+  sets->setValue( "ChatMessagesToShow", m_chatMessagesToShow );
+  sets->setValue( "ChatMaxMessagesToShow", m_chatMaxMessagesToShow );
   sets->setValue( "ImagePreviewHeight", m_imagePreviewHeight );
   sets->endGroup();
   sets->beginGroup( "User" );
@@ -809,6 +828,9 @@ void Settings::save()
   sets->setValue( "MainWindowGeometry", m_guiGeometry );
   sets->setValue( "MainWindowState", m_guiState );
   sets->setValue( "ChatSplitterState", m_chatSplitterState );
+  sets->setValue( "FloatingChatGeometry", m_floatingChatGeometry );
+  sets->setValue( "FloatingChatState", m_floatingChatState );
+  sets->setValue( "FloatingChatSplitterState", m_floatingChatSplitterState );
   sets->setValue( "MainBarIconSize", m_mainBarIconSize );
   sets->setValue( "AvatarIconSize", m_avatarIconSize );
   sets->setValue( "Language", m_language );
@@ -846,6 +868,7 @@ void Settings::save()
   sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
   sets->setValue( "FacebookPageLinkClicked", m_isFacebookPageLinkClicked );
+  sets->setValue( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

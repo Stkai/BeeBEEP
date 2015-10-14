@@ -32,6 +32,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
 {
   setObjectName( "GuiFloatingChat" );
   mp_chat = new GuiChat( this );
+  connect( mp_chat, SIGNAL( saveStateAndGeometryRequest() ), this, SLOT( saveGeometryAndState() ) );
 
   mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
   addToolBar( Qt::BottomToolBarArea, mp_barChat );
@@ -62,7 +63,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   statusBar();
   m_chatIsVisible = true;
   m_prevActivatedState = true;
-  connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onApplicationFocusChanged(QWidget*,QWidget*)));
+  connect(qApp, SIGNAL( focusChanged( QWidget* ,QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
 bool GuiFloatingChat::setChatId( VNumber chat_id )
@@ -108,24 +109,25 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 {
   applyFlagStaysOnTop();
 
+  if( !Settings::instance().floatingChatGeometry().isEmpty() )
+    restoreGeometry( Settings::instance().floatingChatGeometry() );
+
+  if( !Settings::instance().floatingChatState().isEmpty() )
+    restoreState( Settings::instance().floatingChatState() );
+
   show();
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
-  if( Settings::instance().resetGeometryAtStartup() || Settings::instance().chatSplitterState().isEmpty() )
+  if( Settings::instance().floatingChatSplitterState().isEmpty() )
   {
     int central_widget_height = centralWidget()->size().height();
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Central widget height is" << central_widget_height << "then chat view height will be" << (int)(central_widget_height-80);
-#endif
     QList<int> splitter_size_list;
     splitter_size_list.append( central_widget_height - 80);
     splitter_size_list.append( 80 );
     chat_splitter->setSizes( splitter_size_list );
   }
   else
-  {
-    chat_splitter->restoreState( Settings::instance().chatSplitterState() );
-  }
+    chat_splitter->restoreState( Settings::instance().floatingChatSplitterState() );
 }
 
 void GuiFloatingChat::raiseOnTop()
@@ -198,4 +200,31 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
       m_chatIsVisible = false;
     }
   }
+}
+
+void GuiFloatingChat::saveGeometryAndState()
+{
+  if( isVisible() )
+  {
+    Settings::instance().setFloatingChatGeometry( saveGeometry() );
+    Settings::instance().setFloatingChatState( saveState() );
+    QSplitter* chat_splitter = mp_chat->chatSplitter();
+    Settings::instance().setFloatingChatSplitterState( chat_splitter->saveState() );
+    Settings::instance().save();
+    statusBar()->showMessage( tr( "Window's geometry and state saved" ), 3000 );
+  }
+  else
+    qWarning() << "Unable to save floating chat geometry and state (window is not visible)";
+}
+
+void GuiFloatingChat::keyPressEvent( QKeyEvent* e )
+{
+  if( e->key() == Qt::Key_Escape )
+  {
+    QTimer::singleShot( 0, this, SLOT( showMinimized() ) );
+    e->accept();
+    return;
+  }
+
+  QMainWindow::keyPressEvent( e );
 }

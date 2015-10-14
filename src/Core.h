@@ -47,8 +47,11 @@ public:
   bool start();
   void stop();
 
+#ifdef BEEBEEP_USE_MULTICAST_DNS
   void startDnsMulticasting();
   void stopDnsMulticasting();
+  bool dnsMulticastingIsActive() const;
+#endif
 
   bool updateBroadcastAddresses();
   int fileTransferPort() const;
