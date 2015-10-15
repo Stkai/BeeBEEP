@@ -67,7 +67,6 @@ private:
   QList<UserRecord> m_userRecords;
   bool m_isActive;
 
-
 };
 
 // Inline Functions

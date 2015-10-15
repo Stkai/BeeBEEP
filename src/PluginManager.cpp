@@ -54,6 +54,7 @@ void PluginManager::clearPlugins()
 
 void PluginManager::loadPlugins()
 {
+  clearPlugins();
   qDebug() << "Loading plugins from path:" << Settings::instance().pluginPath();
   QDir plugin_dir( Settings::instance().pluginPath() );
   if( !plugin_dir.exists() )

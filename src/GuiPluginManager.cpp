@@ -191,7 +191,7 @@ void GuiPluginManager::openFolder()
   QString plugin_path = QFileDialog::getExistingDirectory( this, tr( "%1 - Select the plugin folder" )
                                                                  .arg( Settings::instance().programName() ),
                                                                  Settings::instance().pluginPath() );
-  if( plugin_path.isNull() )
+  if( plugin_path.isEmpty() )
     return;
 
   mp_leFolder->setText( plugin_path );

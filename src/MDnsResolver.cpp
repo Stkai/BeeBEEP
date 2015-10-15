@@ -87,6 +87,28 @@ void MDnsResolver::lookedUp( const QHostInfo& host_info )
   if( host_info.error() != QHostInfo::NoError )
   {
     qWarning() << objectName() << "can not resolve" << m_record.name();
+    deleteLater();
+    return;
+  }
+
+  QString local_host_name = QHostInfo::localHostName();
+  if( host_info.hostName() == local_host_name )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << objectName() << "skips local host name:" << host_info.hostName();
+#endif
+    deleteLater();
+    return;
+  }
+
+  local_host_name.append( QString( ".local." ) );
+  if( host_info.hostName() == local_host_name )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << objectName() << "skips local host name :" << host_info.hostName();
+#endif
+    deleteLater();
+    return;
   }
 
   emit resolved( host_info, m_servicePort );

@@ -192,7 +192,7 @@ bool Core::createGroup( const QString& group_name, const QList<VNumber>& group_m
 
   Group g = Protocol::instance().createGroup( group_name, group_private_id, group_members );
   qDebug() << "Group" << g.name() << "created with id:" << g.privateId();
-  addGroup( g );
+  addGroup( g, true );
   return true;
 }
 
@@ -221,14 +221,14 @@ bool Core::createGroupFromChat( VNumber chat_id )
     return false;
 }
 
-void Core::addGroup( const Group& g )
+void Core::addGroup( const Group& g, bool broadcast_to_members )
 {
   UserManager::instance().setGroup( g );
+  emit updateGroup( g.id() );
 
   Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
   if( !c.isValid() )
-    createGroupChat( g, false );
-  emit updateGroup( g.id() );
+    createGroupChat( g, broadcast_to_members );
 }
 
 void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& group_members )
@@ -304,7 +304,7 @@ void Core::loadUsersAndGroups()
     {
       g = Protocol::instance().loadGroup( group_data );
       if( g.isValid() )
-        addGroup( g );
+        addGroup( g, false );
     }
   }
 }

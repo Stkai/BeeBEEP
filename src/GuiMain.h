@@ -115,7 +115,7 @@ private slots:
   void selectBeepFile();
   void testBeepFile();
   void playBeep();
-  void addUserToGroupChat();
+  void editGroupFromChat( VNumber );
   void createChat();
   void createGroup();
   void editGroup( VNumber );
@@ -233,11 +233,11 @@ private:
 
   QToolBar *mp_barMain;
   QToolBar *mp_barChat;
-  QToolBar *mp_barPlugins;
   QToolBar *mp_barShareNetwork;
   QToolBar *mp_barShareLocal;
   QToolBar *mp_barScreenShot;
   QToolBar *mp_barLog;
+  QToolBar *mp_barGames;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actConfigureNetwork;
@@ -246,7 +246,6 @@ private:
   QAction* mp_actVCard;
   QAction* mp_actToolBar;
   QAction* mp_actChatBar;
-  QAction* mp_actPluginBar;
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
   QAction* mp_actViewFileTransfer;

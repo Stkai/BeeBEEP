@@ -132,7 +132,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actGroupWizard->setStatusTip( tr( "Create a group from this chat" ) );
   mp_actCreateGroup = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this, SIGNAL( createGroupRequest() ) );
   mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
-  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SIGNAL( editGroupRequest() ) );
+  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
@@ -739,4 +739,9 @@ void GuiChat::showGroupWizard()
 void GuiChat::detachThisChat()
 {
   emit detachChatRequest( m_chatId );
+}
+
+void GuiChat::editChatMembers()
+{
+  emit editGroupRequestFromChat( m_chatId );
 }

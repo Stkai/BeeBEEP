@@ -78,11 +78,7 @@ GuiMain::GuiMain( QWidget *parent )
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
-
-  mp_barPlugins = addToolBar( tr( "Show the bar of plugins" ) );
-  mp_barPlugins->setObjectName( "GuiPluginToolBar" );
-  mp_barPlugins->setIconSize( Settings::instance().mainBarIconSize() );
-
+  mp_barGames = 0;
   mp_trayIcon = new GuiSystemTray( this );
 
   m_lastUserStatus = User::Online;
@@ -173,7 +169,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
   connect( gui_chat, SIGNAL( createChatRequest() ), this, SLOT( createChat() ) );
   connect( gui_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
-  connect( gui_chat, SIGNAL( editGroupRequest() ), this, SLOT( addUserToGroupChat() ) );
+  connect( gui_chat, SIGNAL( editGroupRequestFromChat( VNumber ) ), this, SLOT( editGroupFromChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
@@ -237,9 +233,12 @@ void GuiMain::refreshTitle( const User& )
 
 void GuiMain::keyPressEvent( QKeyEvent* e )
 {
-  if( e->key() == Qt::Key_Escape && Settings::instance().keyEscapeMinimizeInTray() )
+  if( e->key() == Qt::Key_Escape )
   {
-    QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+    if( Settings::instance().keyEscapeMinimizeInTray() )
+      QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+    else
+      QTimer::singleShot( 0, this, SLOT( showMinimized() ) );
     e->accept();
     return;
   }
@@ -537,10 +536,6 @@ void GuiMain::createActions()
   mp_actToolBar->setStatusTip( tr( "Show the main tool bar with settings" ) );
   mp_actToolBar->setData( 99 );
 
-  mp_actPluginBar = mp_barPlugins->toggleViewAction();
-  mp_actPluginBar->setStatusTip( tr( "Show the tool bar with plugin shortcuts" ) );
-  mp_actPluginBar->setData( 99 );
-
   mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setStatusTip( tr( "Show the informations about %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
@@ -820,7 +815,6 @@ void GuiMain::createMenus()
   /* View Menu */
   mp_menuView = new QMenu( tr( "View" ), this );
   mp_menuView->addAction( mp_actToolBar );
-  mp_menuView->addAction( mp_actPluginBar );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewUsers );
   mp_menuView->addAction( mp_actViewGroups );
@@ -910,7 +904,9 @@ void GuiMain::createMenus()
   mp_actPortBroadcast = mp_menuTrayIcon->addAction( QString( "udp1" ) );
   mp_actPortListener = mp_menuTrayIcon->addAction( QString( "tcp1" ) );
   mp_actPortFileTransfer = mp_menuTrayIcon->addAction( QString( "tcp2" ) );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_actMulticastDns = mp_menuTrayIcon->addAction( QString( "mdns" ) );
+#endif
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actQuit );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
@@ -2045,19 +2041,10 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
 void GuiMain::updadePluginMenu()
 {
   mp_menuPlugins->clear();
-  mp_barPlugins->clear();
   QAction* act;
 
   act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
   act->setStatusTip( tr( "Open the plugin manager dialog and manage the installed plugins" ) );
-  if( PluginManager::instance().count() <= 0 )
-  {
-    mp_barPlugins->addAction( act );
-    return;
-  }
-
-  if( PluginManager::instance().games().count() <= 0 )
-    mp_barPlugins->addAction( act );
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
@@ -2082,6 +2069,15 @@ void GuiMain::updadePluginMenu()
   {
     mp_menuPlugins->addSeparator();
 
+    if( !mp_barGames )
+    {
+      mp_barGames = addToolBar( tr( "Show the bar of games" ) );
+      mp_barGames->setObjectName( "GuiGamesToolBar" );
+      mp_barGames->setIconSize( Settings::instance().mainBarIconSize() );
+    }
+    else
+      mp_barGames->clear();
+
     QMenu* game_menu;
     int game_widget_id;
 
@@ -2092,7 +2088,7 @@ void GuiMain::updadePluginMenu()
       gi->mainWindow()->setEnabled( gi->isEnabled() );
       mp_menuPlugins->addMenu( game_menu );
 
-      act = mp_barPlugins->addAction( gi->icon(), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
+      act = mp_barGames->addAction( gi->icon(), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
       game_widget_id = mp_stackedWidget->indexOf( gi->mainWindow() ); // ensured by gameMenu function
       act->setData( game_widget_id );
     }
@@ -2397,7 +2393,7 @@ void GuiMain::editGroup( VNumber group_id )
   if( !g.isValid() )
     return;
 
-  GuiCreateGroup gcg( this );
+  GuiCreateGroup gcg( activeChatWindow() );
   gcg.init( g.name(), g.usersId() );
   gcg.loadData( true );
   gcg.setModal( true );
@@ -2412,8 +2408,8 @@ void GuiMain::editGroup( VNumber group_id )
 void GuiMain::createChat()
 {
   switch( QMessageBox::question( this, Settings::instance().programName(),
-                 tr( "Group chat will be deleted when all members goes offline." ) +
-                 tr( "If you want a persistent chat please consider to make a Group instead." ) +
+                 tr( "Group chat will be deleted when all members goes offline." ) + QString( " " ) +
+                 tr( "If you want a persistent chat please consider to make a Group instead." ) + QString( " " ) +
                  tr( "Do you wish to continue or create group?" ),
                  tr( "Continue" ), tr( "Create Group" ), tr( "Cancel" ), 0, 2 ) )
   {
@@ -2436,16 +2432,16 @@ void GuiMain::createChat()
     mp_core->createGroupChat( gcg.selectedName(), gcg.selectedUsersId(), "", true );
 }
 
-void GuiMain::addUserToGroupChat()
+void GuiMain::editGroupFromChat( VNumber chat_id )
 {
-  Chat group_chat_tmp = ChatManager::instance().chat( mp_chat->chatId() );
+  Chat group_chat_tmp = ChatManager::instance().chat( chat_id );
   if( !group_chat_tmp.isGroup() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to add users in this chat. Please select a group one." ) );
+    QMessageBox::information( activeChatWindow(), Settings::instance().programName(), tr( "Unable to add users in this chat. Please select a group one." ) );
     return;
   }
 
-  GuiCreateGroup gcg( this );
+  GuiCreateGroup gcg( activeChatWindow() );
   gcg.init( group_chat_tmp.name(), group_chat_tmp.usersId() );
   gcg.loadData( false );
   gcg.setModal( true );
@@ -2540,6 +2536,7 @@ void GuiMain::removeSavedChat( const QString& chat_name )
 {
   if( chat_name.isEmpty() )
     return;
+
   qDebug() << "Delete saved chat:" << chat_name;
   ChatManager::instance().removeSavedTextFromChat( chat_name );
   mp_savedChatList->updateSavedChats();
@@ -2716,7 +2713,7 @@ bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
 {
   if( !mp_core->areUsersConnected( users_id ) )
   {
-    if( QMessageBox::question( this, Settings::instance().programName(),
+    if( QMessageBox::question( activeChatWindow(), Settings::instance().programName(),
                                tr( "All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?" ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
        return false;
@@ -2738,7 +2735,7 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
   Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
   if( g.isValid() )
   {
-    if( QMessageBox::warning( this, Settings::instance().programName(),
+    if( QMessageBox::warning( activeChatWindow(), Settings::instance().programName(),
                               tr( "%1 is a your group. You can not leave the chat." ).arg( g.name() ),
                               tr( "Delete this group" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
         return;

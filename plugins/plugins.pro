@@ -5,3 +5,4 @@ TEMPLATE = subdirs
 SUBDIRS += rainbowtextmarker \
             numbertextmarker \
             regularboldtextmarker
+

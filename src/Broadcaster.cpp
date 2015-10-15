@@ -72,6 +72,12 @@ void Broadcaster::sendBroadcastDatagram()
 {
   int addresses_contacted = 0;
 
+#ifdef BEEBEEP_DEBUG
+  QStringList sl_host;
+  foreach( QHostAddress ha, m_broadcastAddresses )
+    sl_host << ha.toString();
+  qDebug() << "Sending datagram to hosts:" << qPrintable( sl_host.join( ", " ) );
+#endif
   QList<QHostAddress>::iterator it = m_broadcastAddresses.begin();
   while( it != m_broadcastAddresses.end() )
   {
@@ -111,16 +117,11 @@ bool Broadcaster::sendDatagramToHost( const QHostAddress& host_address )
 {
   if( m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().defaultBroadcastPort() ) > 0 )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster has sent datagram to network:" << host_address.toString();
-#endif
     return true;
   }
   else
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster does not reach the network:" << host_address.toString();
-#endif
+    qWarning() << "Broadcaster does not reach the network:" << host_address.toString();
     return false;
   }
 }

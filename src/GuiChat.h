@@ -65,7 +65,7 @@ signals:
   void createGroupRequest();
   void createChatRequest();
   void createGroupFromChatRequest( VNumber );
-  void editGroupRequest();
+  void editGroupRequestFromChat( VNumber );
   void chatToClear( VNumber );
   void leaveThisChat( VNumber );
   void showChatMenuRequest();
@@ -91,7 +91,6 @@ protected:
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
 
-
 private slots:
   void sendMessage();
   void checkWriting();
@@ -111,6 +110,7 @@ private slots:
   void showLocalUserVCard();
   void showGroupWizard();
   void detachThisChat();
+  void editChatMembers();
 
 private:
   VNumber m_chatId;

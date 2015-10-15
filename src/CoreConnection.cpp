@@ -93,9 +93,9 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
   if( hasConnection( sender_ip, sender_port ) )
     return;
-
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Connecting to new peer" << sender_ip.toString() << sender_port;
+  else
+    qDebug() << "Connecting to new peer" << sender_ip.toString() << sender_port;
 #endif
 
   Connection *c = new Connection( this );

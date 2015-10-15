@@ -285,7 +285,7 @@
        </size>
       </property>
       <property name="toolTip">
-       <string>Save geometry and state</string>
+       <string>Save window's geometry</string>
       </property>
       <property name="icon">
        <iconset resource="beebeep.qrc">

@@ -1092,7 +1092,15 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Save geometry and state</source>
-        <translation>Salva le dimensioni e lo stato della finestra</translation>
+        <translation type="vanished">Salva le dimensioni e lo stato della finestra</translation>
+    </message>
+    <message>
+        <source>Save window&apos;s geometry </source>
+        <translation type="vanished">Salva le dimensioni della finestra</translation>
+    </message>
+    <message>
+        <source>Save window&apos;s geometry</source>
+        <translation>Salva le dimensioni della finestra</translation>
     </message>
 </context>
 <context>
@@ -2411,11 +2419,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of plugins</source>
-        <translation>Mostra la barra dei plugin</translation>
+        <translation type="vanished">Mostra la barra dei plugin</translation>
     </message>
     <message>
         <source>Show the tool bar with plugin shortcuts</source>
-        <translation>Mostra la barra con i collegamenti ai plugin</translation>
+        <translation type="vanished">Mostra la barra con i collegamenti ai plugin</translation>
     </message>
     <message>
         <source>Download plugins...</source>
@@ -3148,6 +3156,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>active</source>
         <translation>attivo</translation>
+    </message>
+    <message>
+        <source>Show the bar of games</source>
+        <translation>Mostra la barra dei giochi</translation>
     </message>
 </context>
 <context>
