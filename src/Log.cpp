@@ -80,10 +80,24 @@ bool Log::bootFileStream( const QString& log_path )
 {
   m_logFile.setFileName( log_path );
 
-  if( !m_logFile.open( QIODevice::WriteOnly ) )
+  if( m_logFile.exists() )
   {
-    qWarning() << "Unable to open the log file" << log_path;
-    return false;
+    if( !m_logFile.open( QIODevice::Append ) )
+    {
+      qWarning() << "Unable to open the existing log file" << log_path;
+      return false;
+    }
+
+    m_logStream << endl;
+    m_logStream << "*****" << endl;
+  }
+  else
+  {
+    if( !m_logFile.open( QIODevice::WriteOnly ) )
+    {
+      qWarning() << "Unable to open the log file" << log_path;
+      return false;
+    }
   }
 
   qDebug() << "Logging to file" << log_path;

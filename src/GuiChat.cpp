@@ -76,6 +76,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = 0;
+  m_isFloating = false;
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -87,12 +88,22 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
 }
 
-void GuiChat::enableDetachButton( bool yes )
+void GuiChat::enableDetachButtons()
 {
-  mp_pbDetach->setEnabled( yes );
-  mp_pbDetach->setVisible( yes );
-  mp_pbSaveState->setEnabled( !yes );
-  mp_pbSaveState->setVisible( !yes );
+  if( m_chatId == ID_DEFAULT_CHAT )
+  {
+    mp_pbDetach->setEnabled( false );
+    mp_pbDetach->setVisible( false );
+    mp_pbSaveState->setEnabled( false );
+    mp_pbSaveState->setVisible( false );
+  }
+  else
+  {
+    mp_pbDetach->setEnabled( !m_isFloating );
+    mp_pbDetach->setVisible( !m_isFloating );
+    mp_pbSaveState->setEnabled( m_isFloating );
+    mp_pbSaveState->setVisible( m_isFloating );
+  }
 }
 
 void GuiChat::setupToolBar( QToolBar* bar )
@@ -398,7 +409,7 @@ void GuiChat::reloadChatUsers()
   setChatUsers();
 }
 
-bool GuiChat::setChatId( VNumber chat_id )
+bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
 {
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
@@ -409,7 +420,6 @@ bool GuiChat::setChatId( VNumber chat_id )
 #endif
 
   QApplication::setOverrideCursor( Qt::WaitCursor );
-  QApplication::processEvents();
 
   if( c.unreadMessages() )
   {
@@ -417,22 +427,24 @@ bool GuiChat::setChatId( VNumber chat_id )
     ChatManager::instance().setChat( c );
   }
 
+  m_chatId = c.id();
+  m_chatName = c.name();
+  m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
+  m_isFloating = is_floating;
+
   if( c.isDefault() )
   {
     setChatBackgroundColor( Settings::instance().defaultChatBackgroundColor() );
     mp_actSelectBackgroundColor->setEnabled( true );
-    enableDetachButton( false );
   }
   else
   {
     mp_teChat->setPalette( m_defaultChatPalette );
     mp_actSelectBackgroundColor->setEnabled( false );
-    enableDetachButton( true );
   }
 
-  m_chatId = c.id();
-  m_chatName = c.name();
-  m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
+  enableDetachButtons();
+
   mp_actGroupWizard->setEnabled( c.isGroup() && !UserManager::instance().hasGroupName( c.name() ) );
   bool chat_has_history = ChatManager::instance().chatHasSavedText( c.name() );
   bool chat_is_empty = c.isEmpty() && !chat_has_history;

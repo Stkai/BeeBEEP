@@ -41,7 +41,7 @@ public:
   void setupToolBar( QToolBar* );
   void updateAction( bool is_connected, int connected_users );
 
-  bool setChatId( VNumber );
+  bool setChatId( VNumber, bool );
   inline VNumber chatId() const;
   void updateUser( const User& );
   bool hasUser( VNumber );
@@ -51,8 +51,6 @@ public:
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
   void ensureFocusInChat();
-
-  void enableDetachButton( bool );
 
   inline QSplitter* chatSplitter() const;
 
@@ -78,6 +76,7 @@ public slots:
   void addEmoticon( const Emoticon& );
 
 protected:
+  void enableDetachButtons();
   void setLastMessageTimestamp( const QDateTime& );
   void setChatUsers();
   QString chatMessageToText( const ChatMessage& );
@@ -117,6 +116,7 @@ private:
   QString m_chatName;
   UserList m_chatUsers;
   VNumber m_lastMessageUserId;
+  bool m_isFloating;
 
   QMenu *mp_menuChat;
   QAction* mp_actSendFile;
@@ -138,7 +138,7 @@ private:
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline const QString& GuiChat::chatName() const { return m_chatName; }
-inline bool GuiChat::reloadChat() { return setChatId( m_chatId ); }
+inline bool GuiChat::reloadChat() { return setChatId( m_chatId, m_isFloating ); }
 inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
 
 #endif // BEEBEEP_GUICHAT_H

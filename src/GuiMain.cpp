@@ -1063,6 +1063,7 @@ void GuiMain::createStackedWidgets()
   mp_chat->setupToolBar( mp_barChat );
   QAction* act = mp_barChat->toggleViewAction();
   act->setData( 23 );
+  mp_chat->setChatId( ID_DEFAULT_CHAT, false );
   connect( act, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
 
   mp_shareLocal = new GuiShareLocal( this );
@@ -1975,7 +1976,7 @@ void GuiMain::showChat( VNumber chat_id )
     return;
   }
 
-  if( mp_chat->setChatId( chat_id ) )
+  if( mp_chat->setChatId( chat_id, false ) )
   {
     raiseChatView();
     mp_userList->setUnreadMessages( chat_id, 0 );
@@ -2744,7 +2745,7 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
     {
       closeFloatingChat( chat_id );
       raiseHomeView();
-      mp_chat->setChatId( ID_DEFAULT_CHAT );
+      mp_chat->setChatId( ID_DEFAULT_CHAT, false );
       mp_groupList->loadGroups();
       mp_chatList->reloadChatList();
       mp_savedChatList->updateSavedChats();
@@ -2782,7 +2783,7 @@ void GuiMain::removeGroup( VNumber group_id )
         if( c.isValid() )
           closeFloatingChat( c.id() );
         raiseHomeView();
-        mp_chat->setChatId( ID_DEFAULT_CHAT );
+        mp_chat->setChatId( ID_DEFAULT_CHAT, false );
         mp_groupList->loadGroups();
         mp_chatList->reloadChatList();
         mp_savedChatList->updateSavedChats();
@@ -2867,7 +2868,7 @@ void GuiMain::removeChat( VNumber chat_id )
       }
       else
       {
-        mp_chat->setChatId( ID_DEFAULT_CHAT );
+        mp_chat->setChatId( ID_DEFAULT_CHAT, false );
         raiseHomeView();
       }
     }
@@ -3158,7 +3159,6 @@ void GuiMain::detachChat( VNumber chat_id )
   if( mp_chat->chatId() == chat_id )
     showDefaultChat();
 
-  fl_chat->guiChat()->enableDetachButton( false );
   fl_chat->guiChat()->updateAction( mp_core->isConnected(), mp_core->connectedUsers() );
   setupChatConnections( fl_chat->guiChat() );
   connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );

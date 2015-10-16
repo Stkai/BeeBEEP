@@ -83,7 +83,7 @@ bool GuiFloatingChat::setChatId( VNumber chat_id )
   else
     setWindowTitle( c.name() );
 
-  return mp_chat->setChatId( chat_id );
+  return mp_chat->setChatId( chat_id, true );
 }
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )
