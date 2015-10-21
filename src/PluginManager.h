@@ -74,6 +74,7 @@ protected:
 
   bool parseTextWithPlugin( QString*, TextMarkerInterface* ) const;
 
+  bool fileCanBeSkipped( const QString& ) const;
 
 private:
   QList<TextMarkerInterface*> m_textMarkers;

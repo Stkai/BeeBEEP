@@ -95,6 +95,9 @@ void PluginManager::addPlugin( const QString& file_path )
     return;
 #endif
 
+  if( fileCanBeSkipped( file_info.fileName() ) )
+    return;
+
   QPluginLoader plugin_loader( file_path );
   QObject* plugin = plugin_loader.instance();
   if( plugin )
@@ -358,3 +361,28 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
 
   return true;
 }
+
+bool PluginManager::fileCanBeSkipped( const QString& file_name ) const
+{
+   QStringList file_names_to_skip;
+#ifdef Q_OS_WIN
+   file_names_to_skip << QString( "icudt53.dll" );
+   file_names_to_skip << QString( "icuin53.dll" );
+   file_names_to_skip << QString( "icuuc53.dll" );
+   file_names_to_skip << QString( "msvcp100.dll" );
+   file_names_to_skip << QString( "msvcr100.dll" );
+   file_names_to_skip << QString( "Qt5Core.dll" );
+   file_names_to_skip << QString( "Qt5Gui.dll" );
+   file_names_to_skip << QString( "Qt5Multimedia.dll" );
+   file_names_to_skip << QString( "Qt5Network.dll" );
+   file_names_to_skip << QString( "Qt5PrintSupport.dll" );
+   file_names_to_skip << QString( "Qt5Svg.dll" );
+   file_names_to_skip << QString( "Qt5Widgets.dll" );
+#endif
+
+  if( file_names_to_skip.isEmpty() )
+    return false;
+  else
+    return file_names_to_skip.contains( file_name, Qt::CaseInsensitive );
+}
+

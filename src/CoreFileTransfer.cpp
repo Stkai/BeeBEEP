@@ -133,7 +133,8 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   }
 
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
-  QString sys_msg = QString( "%1 %2 %3 %4: %5." ).arg( icon_html, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), u.name(), msg );
+  QString action_txt = fi.isDownload() ? tr( "Donwload" ) : tr( "Upload" );
+  QString sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), u.name(), msg );
 
   FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
   if( peer )

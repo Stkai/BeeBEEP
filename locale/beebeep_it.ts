@@ -554,6 +554,14 @@
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration non può cercare nella rete il servizio: %2</translation>
     </message>
+    <message>
+        <source>Donwload</source>
+        <translation>Scarica</translation>
+    </message>
+    <message>
+        <source>Upload</source>
+        <translation>Carica</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -3700,6 +3708,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Use Zero Configuration Networking</source>
         <translation type="vanished">Usa lo Zero Configuration Networking</translation>
+    </message>
+    <message>
+        <source>Enable Zero Configuration Networking</source>
+        <translation>Abilita Zero Configuration Networking</translation>
     </message>
 </context>
 <context>
