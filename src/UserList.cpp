@@ -114,7 +114,7 @@ QStringList UserList::toStringList( bool only_user_name, bool only_connected ) c
   QStringList sl;
   foreach( User u, m_users )
   {
-    if( !only_connected || u.isConnected() )
+    if( !only_connected || u.isStatusConnected() )
       sl << (only_user_name ? u.name() : u.path() );
   }
   return sl;

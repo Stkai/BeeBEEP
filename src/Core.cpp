@@ -261,7 +261,7 @@ void Core::sendBroadcastMessage()
                            tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
                                                                             Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
     mp_broadcaster->sendBroadcastDatagram();
-    sendHelloToHostsInSettings();
+    QTimer::singleShot( 500, this, SLOT( sendHelloToHostsInSettings() ) );
   }
   else
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -326,7 +326,7 @@ void Core::sendHelloToHostsInSettings()
     if( ur.isValid() )
     {
       u = UserManager::instance().findUserByHostAddressAndPort( ur.hostAddress(), ur.hostPort() );
-      if( !u.isValid() || !u.isConnected() )
+      if( !u.isValid() || !isUserConnected( u.id() ) )
       {
     #ifdef BEEBEEP_DEBUG
         qDebug() << "Contacting manually added host" << ur.hostAddress().toString() << ur.hostPort();

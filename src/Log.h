@@ -89,6 +89,7 @@ protected:
   ~Log();
 
   bool dumpLogToFile();
+  void checkFileSize();
 
 private:
   static Log* mp_instance;

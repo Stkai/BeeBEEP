@@ -400,7 +400,7 @@ void Core::sendGroupChatRefuseMessage( const Chat& group_chat, const UserList& u
     if( u.isLocal() )
       continue;
 
-    if( !sendMessageToLocalNetwork( u, group_refuse_message ) )
+    if( !u.isStatusConnected() || !sendMessageToLocalNetwork( u, group_refuse_message ) )
       dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 cannot be informed that you have left the group." )
                              .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) ).arg( u.name() ),
                              DispatchToChat, ChatMessage::Other );

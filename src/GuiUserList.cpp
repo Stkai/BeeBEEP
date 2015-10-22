@@ -154,7 +154,7 @@ void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
   bool item_is_created = false;
   if( !item )
   {
-    if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
+    if( !u.isStatusConnected() && Settings::instance().showOnlyOnlineUsers() )
       return;
 
     item = new GuiUserItem( mp_twUsers );
@@ -163,7 +163,7 @@ void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
   }
   else
   {
-    if( !u.isConnected() && Settings::instance().showOnlyOnlineUsers() )
+    if( !u.isStatusConnected() && Settings::instance().showOnlyOnlineUsers() )
     {
       removeUser( u );
       return;

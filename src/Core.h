@@ -58,7 +58,8 @@ public:
 
   /* CoreUser */
   inline int connectedUsers() const;
-  bool areUsersConnected( const QList<VNumber>& );
+  bool isUserConnected( VNumber ) const;
+  bool areUsersConnected( const QList<VNumber>& ) const;
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( const QString& );
   bool setLocalUserVCard( const QString&, const VCard& );
@@ -156,7 +157,7 @@ protected:
   void checkUserHostAddress( const User& );
 
   /* CoreConnection */
-  Connection* connection( VNumber );
+  Connection* connection( VNumber ) const;
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
   void addConnectionReadyForUse( Connection* );

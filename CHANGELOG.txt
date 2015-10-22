@@ -10,7 +10,7 @@ BeeBEEP 3.0.0
 BeeBEEP 2.0.4
 - Some GUI improvements (new icons, file sharing tree load faster)
 - Always Beep on new message arrived (option)
-- Favorite users (right click on user and enable star button) is on top of the list
+- Favorite users (right click on user and enable star button, save users option must be enabled) is on top of the list
 - improved group usability
 - Offline users can be removed from list (right click on an offline user in list and then remove)
 - Clear all files shared (option)

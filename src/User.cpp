@@ -26,14 +26,14 @@
 
 User::User()
   : m_id( ID_INVALID ), m_vCard(), m_hostAddress(), m_hostPort( 0 ),
-    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
+    m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
     m_version( "" ), m_sessionId( "" ), m_isFavorite( false )
 {
 }
 
 User::User( VNumber new_id )
   : m_id( new_id ), m_vCard(), m_hostAddress( "127.0.0.1" ), m_hostPort( DEFAULT_LISTENER_PORT ),
-    m_status( 0 ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
+    m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
     m_version( "" ), m_sessionId( "" ), m_isFavorite( false )
 {
   setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
@@ -101,10 +101,10 @@ bool User::operator<( const User& u ) const
   if( u.isLocal() )
     return true;
 
-  if( u.isConnected() && !isConnected() )
+  if( u.isStatusConnected() && !isStatusConnected() )
     return false;
 
-  if( !u.isConnected() && isConnected() )
+  if( !u.isStatusConnected() && isStatusConnected() )
     return true;
 
   if( u.isFavorite() && !isFavorite() )

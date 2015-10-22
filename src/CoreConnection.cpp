@@ -33,9 +33,9 @@
 #include "UserManager.h"
 
 
-Connection* Core::connection( VNumber user_id )
+Connection* Core::connection( VNumber user_id ) const
 {
-  QList<Connection*>::iterator it = m_connections.begin();
+  QList<Connection*>::const_iterator it = m_connections.begin();
   while( it != m_connections.end() )
   {
     if( (*it)->userId() == user_id )
@@ -64,7 +64,7 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
   }
 
   User u = UserManager::instance().findUserByHostAddressAndPort( sender_ip, sender_port );
-  if( u.isValid() && u.isConnected() )
+  if( u.isValid() && isUserConnected( u.id() ) )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "User from" << sender_ip.toString() << sender_port << "is already connected";
@@ -93,10 +93,8 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
   if( hasConnection( sender_ip, sender_port ) )
     return;
-#ifdef BEEBEEP_DEBUG
-  else
-    qDebug() << "Connecting to new peer" << sender_ip.toString() << sender_port;
-#endif
+
+  qDebug() << "Connecting to new peer" << sender_ip.toString() << sender_port;
 
   Connection *c = new Connection( this );
   setupNewConnection( c );
@@ -108,10 +106,16 @@ void Core::checkNewConnection( Connection *c )
   // Has connection never return true because peer port is always different.
   // It comes from Listener. If I want to prevent multiple users from single
   // ip, I can pass -1 to peer_port and check only host address
+
+  qDebug() << "New connection from" << c->peerAddress().toString() << c->peerPort();
+
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
   {
     if( hasConnection( c->peerAddress(), -1 ) )
     {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << c->peerAddress().toString() << "is already connected and blocked by prevent multiple connections";
+#endif
       closeConnection( c );
       return;
     }
@@ -185,8 +189,8 @@ void Core::closeConnection( Connection *c )
       qDebug() << "Connection pointer removed from connection list";
   }
 #else
-   if( number_of_connection_pointers > 1 )
-     qWarning() << number_of_connection_pointers << "similar connections found in list and removed";
+  if( number_of_connection_pointers > 1 )
+    qWarning() << number_of_connection_pointers << "similar connections found in list and removed";
 #endif
 
 
@@ -272,7 +276,7 @@ void Core::checkUserAuthentication( const Message& m )
       return;
     }
 
-    if( user_found.isConnected() )
+    if( isUserConnected( user_found.id() ) )
     {
       qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
       closeConnection( c );

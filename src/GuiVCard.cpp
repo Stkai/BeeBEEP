@@ -121,7 +121,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
       mp_pbFavorite->hide();
   }
 
-  if( u.isConnected() )
+  if( u.isStatusConnected() )
     mp_pbRemove->hide();
   else
     mp_pbRemove->show();

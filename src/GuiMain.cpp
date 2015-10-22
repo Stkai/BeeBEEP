@@ -1826,7 +1826,7 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
   User u = UserManager::instance().findUser( user_id );
   FileInfo file_info = FileShare::instance().networkFileInfo( user_id, file_id );
 
-  if( u.isConnected() && file_info.isValid() )
+  if( u.isStatusConnected() && file_info.isValid() )
   {
     askToDownloadFile( u, file_info, Settings::instance().downloadDirectory(), true );
     return;
@@ -1834,7 +1834,7 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
 
   qWarning() << "Unable to download shared file" << file_id << "from user" << user_id;
   QString info_msg = tr( "File is not available for download." );
-  if( u.isValid() && !u.isConnected() )
+  if( u.isValid() && !u.isStatusConnected() )
     info_msg += QLatin1String( "\n" ) + tr( "%1 is not connected." ).arg( u.name() );
   info_msg += QLatin1String( "\n" ) + tr( "Please reload the list of shared files." );
 
@@ -3047,13 +3047,13 @@ void GuiMain::showConnectionStatusChanged( const User& u )
     return;
 
   QString msg;
-  if( u.isConnected() )
+  if( u.isStatusConnected() )
     msg = tr( "%1 is online" ).arg( u.name() );
   else
     msg = tr( "%1 is offline" ).arg( u.name() );
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
-  if( c.isValid() && u.isConnected() )
+  if( c.isValid() && u.isStatusConnected() )
     mp_trayIcon->showUserStatusChanged( c.id(), msg );
   else
     mp_trayIcon->showUserStatusChanged( ID_DEFAULT_CHAT, msg );

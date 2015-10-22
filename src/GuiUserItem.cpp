@@ -101,7 +101,7 @@ bool GuiUserItem::updateUser( const User& u )
       {
         Avatar av;
         av.setName( u.name() );
-        if( u.isConnected() )
+        if( u.isStatusConnected() )
           av.setColor( u.color() );
         else
           av.setColor( QColor( Qt::gray ).name() );
@@ -114,7 +114,7 @@ bool GuiUserItem::updateUser( const User& u )
       else
       {
         user_avatar = u.vCard().photo();
-        if( !u.isConnected() )
+        if( !u.isStatusConnected() )
           user_avatar = Bee::convertToGrayScale( user_avatar );
       }
 
@@ -138,7 +138,7 @@ bool GuiUserItem::updateUser( const User& u )
   else
   {
     tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
-    if( u.isConnected() )
+    if( u.isStatusConnected() )
     {
       if( u.statusDescription().isEmpty() )
         tool_tip += QString( ".\n" );
@@ -155,7 +155,7 @@ bool GuiUserItem::updateUser( const User& u )
       tool_tip += QString( "(%1)" ).arg( QObject::tr( "Click to send a private message" ) );
     }
     user_priority = u.isFavorite() ? 100 : 10000;
-    user_priority += u.isConnected() ? (1000*user_status) : 10000000;
+    user_priority += u.isStatusConnected() ? (1000*user_status) : 10000000;
   }
 
   user_priority -= (unread_messages > 99 ? 99 : unread_messages);

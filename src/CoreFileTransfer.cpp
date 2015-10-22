@@ -83,7 +83,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
 
   QString icon_html;
 
-  if( !u.isConnected() )
+  if( !isUserConnected( u.id() ) )
   {
     icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: user is offline." ).arg( icon_html, fi.name(), u.name() ),
@@ -229,7 +229,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
     return false;
   }
 
-  if( !u.isConnected() )
+  if( !isUserConnected( u.id() ) )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, u.name() ),
                              DispatchToAllChatsWithUser, ChatMessage::FileTransfer );

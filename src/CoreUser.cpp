@@ -364,17 +364,30 @@ void Core::toggleUserFavorite( VNumber user_id )
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );
 }
 
-bool Core::areUsersConnected( const QList<VNumber>& users_id )
+bool Core::isUserConnected( VNumber user_id ) const
 {
-  Connection* c;
+  // Is not equal to User::isStatusConnected because status is passed in hello message
+  // before the authentication. Use this function in authentication and in Core.
+  // Use User::isStatusConnected only in GUI
+  if( user_id != ID_LOCAL_USER )
+  {
+    Connection* c = connection( user_id );
+    if( c )
+      return true;
+    else
+      return false;
+  }
+  else
+    return isConnected();
+
+}
+
+bool Core::areUsersConnected( const QList<VNumber>& users_id ) const
+{
   foreach( VNumber user_id, users_id )
   {
-    if( user_id != ID_LOCAL_USER )
-    {
-      c = connection( user_id );
-      if( !c )
-        return false;
-    }
+    if( !isUserConnected( user_id ) )
+      return false;
   }
   return true;
 }
@@ -388,7 +401,7 @@ bool Core::removeOfflineUser( VNumber user_id )
     return false;
   }
 
-  if( u.isConnected() )
+  if( isUserConnected( u.id() ) )
   {
     qWarning() << "User" << u.path() << "is connected and cannot be removed from list";
     return false;

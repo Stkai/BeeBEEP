@@ -33,7 +33,8 @@
   #include <QDesktopServices>
 #endif
 
-
+const quint64 LogMaxFileSize = 2000000;
+const quint64 LogResizedFileSize = 500000;
 Log* Log::mp_instance = NULL;
 
 LogNode& LogNode::operator=( const LogNode& ln )
@@ -76,12 +77,48 @@ void Log::rebootFileStream( const QString& log_path, bool force_reboot )
   bootFileStream( log_path );
 }
 
+void Log::checkFileSize()
+{
+  quint64 log_file_size = m_logFile.size();
+
+  if( log_file_size < LogMaxFileSize )
+    return;
+
+  if( !m_logFile.open( QIODevice::ReadOnly ) )
+  {
+    qWarning() << "Unable to resize log file" << m_logFile.fileName() << "(read step)";
+    return;
+  }
+
+  QByteArray log_data = m_logFile.readAll();
+  m_logFile.close();
+
+  log_data.remove( 0, log_file_size - LogResizedFileSize );
+
+  if( !m_logFile.open( QIODevice::WriteOnly ) )
+  {
+    qWarning() << "Unable to resize log file" << m_logFile.fileName() << "(write step)";
+    return;
+  }
+
+  QTextStream ts_log_file( &m_logFile );
+  ts_log_file << "Resized in date " << QDateTime::currentDateTime().toString() << endl;
+  ts_log_file << "*****" << endl;
+  ts_log_file << log_data;
+
+  m_logFile.close();
+
+  qDebug() << "Log file" << m_logFile.fileName() << "resized to" << m_logFile.size() << "bytes";
+}
+
 bool Log::bootFileStream( const QString& log_path )
 {
   m_logFile.setFileName( log_path );
 
   if( m_logFile.exists() )
   {
+    checkFileSize();
+
     if( !m_logFile.open( QIODevice::Append ) )
     {
       qWarning() << "Unable to open the existing log file" << log_path;

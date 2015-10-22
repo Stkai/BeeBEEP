@@ -170,7 +170,7 @@ void GuiShareNetwork::loadShares( const User& u )
   if( item )
     item->removeChildren();
 
-  if( u.isConnected() )
+  if( u.isStatusConnected() )
   {
     FileInfo file_info_downloaded;
 

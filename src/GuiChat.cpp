@@ -342,7 +342,7 @@ void GuiChat::setChatUsers()
       act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), u.isLocal() ? tr( "You" ) : u.name() );
       act->setData( u.id() );
       act->setIconVisibleInMenu( true );
-      if( u.isConnected() && isActiveUser( c, u ) )
+      if( u.isStatusConnected() && isActiveUser( c, u ) )
       {
         act->setEnabled( true  );
         connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
@@ -354,7 +354,7 @@ void GuiChat::setChatUsers()
       {
         if( !isActiveUser( c, u ) )
           sl.append( tr( "(You have left)" ).toLower() );
-        else if( u.isConnected() )
+        else if( u.isStatusConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( tr( "You" ) ).toLower() );
         else
           sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
@@ -363,7 +363,7 @@ void GuiChat::setChatUsers()
       {
         if( !isActiveUser( c, u ) )
           sl.append( QString( "(%1 has left)" ).arg( u.name() ) );
-        else if( u.isConnected() )
+        else if( u.isStatusConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
         else
           sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );

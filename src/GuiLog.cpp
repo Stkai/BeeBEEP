@@ -48,6 +48,14 @@ void GuiLog::setupToolBar( QToolBar* bar )
   /* save as button */
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
   act->setStatusTip( tr( "Save the log in a file" ) );
+  bar->addSeparator();
+  mp_cbLogToFile = new QCheckBox( bar );
+  mp_cbLogToFile->setObjectName( "GuiCheckBoxLogToFileInLog" );
+  mp_cbLogToFile->setText( tr( "Log to file" ) );
+  mp_cbLogToFile->setChecked( Settings::instance().logToFile() );
+  mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
+  connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
+  bar->addWidget( mp_cbLogToFile );
 
   bar->addSeparator();
 
@@ -85,15 +93,6 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbWholeWordOnly->setObjectName( "GuiCheckBoxFindWholeWordOnlyInLog" );
   mp_cbWholeWordOnly->setText( tr( "Whole word" ) );
   bar->addWidget( mp_cbWholeWordOnly );
-
-  bar->addSeparator();
-  mp_cbLogToFile = new QCheckBox( bar );
-  mp_cbLogToFile->setObjectName( "GuiCheckBoxLogToFileInLog" );
-  mp_cbLogToFile->setText( tr( "Log to file" ) );
-  mp_cbLogToFile->setChecked( Settings::instance().logToFile() );
-  mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
-  connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
-  bar->addWidget( mp_cbLogToFile );
 
 }
 
