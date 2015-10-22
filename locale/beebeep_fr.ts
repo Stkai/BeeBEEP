@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -227,7 +227,7 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="55"/>
         <source>Please add a like on Facebook.</source>
-        <translation>Like sur Facebook.</translation>
+        <translation>Like BeeBEEP sur Facebook.</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="488"/>
@@ -257,17 +257,17 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="89"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
-        <translation>%1 Impossible de télécharger %2 depuis %3: l&apos;utilisateur est hors-ligne.</translation>
+        <translation>%1 Impossible de télécharger %2 de %3: l&apos;utilisateur est hors-ligne.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="104"/>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
-        <translation>%1 Impossible de télécharger %2 depuis %3: le dossier %4 ne peut être crée.</translation>
+        <translation>%1 Impossible de télécharger %2 de %3: le dossier %4 ne peut être crée.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="116"/>
         <source>%1 Downloading %2 from %3.</source>
-        <translation>%1 Téléchargement %2 depuis %3.</translation>
+        <translation>%1 Téléchargement %2 de %3.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
@@ -462,7 +462,7 @@
     <message>
         <location filename="../src/CoreUser.cpp" line="98"/>
         <source>The %1&apos;s profile has been received.</source>
-        <translation>Le profile de %1 a bien été reçu.</translation>
+        <translation>Le profil de %1 a bien été reçu.</translation>
     </message>
     <message>
         <location filename="../src/CoreUser.cpp" line="112"/>
@@ -525,7 +525,7 @@
     <message>
         <location filename="../src/BeeUtils.cpp" line="234"/>
         <source>Executable</source>
-        <translation>Executable</translation>
+        <translation>Exécutable</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="235"/>
@@ -611,7 +611,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="118"/>
         <source>These IP address and port are already inserted in list.</source>
-        <translation>Cette adresse IP et ce port existe déjà dans la liste.</translation>
+        <translation>Cette adresse IP et ce port existent déjà dans la liste.</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="151"/>
@@ -775,7 +775,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="108"/>
         <source>Click to show the settings menu of the chat</source>
-        <translation>Cliquer pour afficher le menu de réglages du chat</translation>
+        <translation>Cliquer pour afficher le menu de réglage du chat</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="111"/>
@@ -800,7 +800,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="120"/>
         <source>Save chat</source>
-        <translation>Sauvegarde le chat</translation>
+        <translation>Enregistrer le chat</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="121"/>
@@ -908,7 +908,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="363"/>
         <source>Show profile</source>
-        <translation>Afficher le profile</translation>
+        <translation>Afficher le profil</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="373"/>
@@ -1107,7 +1107,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiEditVCard.cpp" line="34"/>
         <source>Edit your profile</source>
-        <translation>Editer votre profile</translation>
+        <translation>Editer votre profil</translation>
     </message>
     <message>
         <location filename="../src/GuiEditVCard.cpp" line="102"/>
@@ -1281,7 +1281,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiHome.ui" line="107"/>
         <source>chat with all users</source>
-        <translation>chatter avec tous les utilisateurs</translation>
+        <translation>Chatter avec tous les utilisateurs</translation>
     </message>
 </context>
 <context>
@@ -1365,12 +1365,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiLog.cpp" line="49"/>
         <source>Save log as</source>
-        <translation>Sauvegarde le journal sous</translation>
+        <translation>Enregistre le journal sous</translation>
     </message>
     <message>
         <location filename="../src/GuiLog.cpp" line="50"/>
         <source>Save the log in a file</source>
-        <translation>Sauvegarde le journal dans un fichier</translation>
+        <translation>Enregistre le journal dans un fichier</translation>
     </message>
     <message>
         <location filename="../src/GuiLog.cpp" line="58"/>
@@ -1562,7 +1562,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="507"/>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation>BeeBEEP est un logiciel libre, vous pouvez le redistribuer et/ou le modifier&lt;br /&gt;il est publié sous les termes de la license GNU &apos;General Public License&apos; &lt;br /&gt;par la Free Software Foundation, soit la version 3 de la licence ou (à votre choix ) toute version ultérieure.&lt;br /&gt;&lt;br /&gt;BeeBEEP est distribué dans l&apos;espoir d&apos;être utile,&lt;br /&gt;mais SANS AUCUNE GARANTIE; sans même la garantie implicite&lt;br /&gt;de COMMERCIALISATION ou D&apos;ADAPTATION A UN USAGE PARTICULIER . &lt;br /&gt; Voir la Licence Publique Générale GNU pour plus de détails .</translation>
+        <translation>BeeBEEP est un logiciel libre, vous pouvez le redistribuer et/ou le modifier il est publié sous les termes de la license GNU &apos;General Public License&apos; par la Free Software Foundation, soit la version 3 de la licence ou (à votre choix ) toute version ultérieure.&lt;br /&gt;&lt;br /&gt;BeeBEEP est distribué dans l&apos;espoir d&apos;être utile, mais SANS AUCUNE GARANTIE; sans même la garantie implicite de COMMERCIALISATION ou D&apos;ADAPTATION A UN USAGE PARTICULIER . &lt;br /&gt; Voir la Licence Publique Générale GNU pour plus de détails.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="523"/>
@@ -1602,7 +1602,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="570"/>
         <source>Download folder...</source>
-        <translation>Télécharger un dossier...</translation>
+        <translation>Dossier des téléchargements...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="571"/>
@@ -1612,7 +1612,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="574"/>
         <source>Select beep file...</source>
-        <translation>Choisir un fichier beep...</translation>
+        <translation>Choisir un fichier son BEEP...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="575"/>
@@ -1622,7 +1622,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="576"/>
         <source>Play beep</source>
-        <translation>Jouer un son</translation>
+        <translation>Jouer le son BEEP</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="577"/>
@@ -1687,7 +1687,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="895"/>
         <source>Enable tray icon notification</source>
-        <translation>Activer l&apos;icône de notification</translation>
+        <translation>Activer les notifications</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="896"/>
@@ -1732,7 +1732,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="595"/>
         <source>Enable the compact mode in chat window</source>
-        <translation>Actuver le mode compacte dans la fenêtre de chat</translation>
+        <translation>Activer le mode compact dans la fenêtre de chat</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="596"/>
@@ -1742,7 +1742,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="601"/>
         <source>Add a blank line between the messages</source>
-        <translation>Ajouter une ligne entre chaque messages</translation>
+        <translation>Ajouter une ligne entre chaque message</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="602"/>
@@ -1833,7 +1833,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="827"/>
         <source>Show the chat</source>
-        <translation>Afficher le chat</translation>
+        <translation>Fenêtre du Chat</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="828"/>
@@ -1843,7 +1843,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="829"/>
         <source>Show my shared files</source>
-        <translation>Afficher mes fichiers partagés</translation>
+        <translation>Mes fichiers partagés</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="830"/>
@@ -1853,7 +1853,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="831"/>
         <source>Show the network shared files</source>
-        <translation>Afficher les fichiers partagés sur le réseau</translation>
+        <translation>Fichiers partagés sur le réseau</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="832"/>
@@ -1958,7 +1958,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="417"/>
         <source>Disconnect</source>
-        <translation>Déconnecter</translation>
+        <translation>Déconnexion</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="423"/>
@@ -1978,7 +1978,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="532"/>
         <source>Edit your profile...</source>
-        <translation>Editer votre profile...</translation>
+        <translation>Editer votre profil...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="533"/>
@@ -1988,12 +1988,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="544"/>
         <source>About %1...</source>
-        <translation>A propos %1...</translation>
+        <translation>A propos de %1...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="554"/>
         <source>Main</source>
-        <translation>Principale</translation>
+        <translation>BeeBEEP</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="560"/>
@@ -2163,7 +2163,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="748"/>
         <source>Prompt on quit (only when connected)</source>
-        <translation>Demander avnt de fermer (seulement si connecté)</translation>
+        <translation>Demander confirmation avant de fermer (seulement si connecté)</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="749"/>
@@ -2188,7 +2188,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="825"/>
         <source>Show %1 home</source>
-        <translation>Afficher l&apos;Accueil de %1</translation>
+        <translation>Accueil de %1</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="826"/>
@@ -2288,7 +2288,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="1001"/>
         <source>File Transfers</source>
-        <translation>Transferts de Fichier</translation>
+        <translation>Transfert de fichier</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1010"/>
@@ -2349,12 +2349,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="1209"/>
         <source>When do you want %1 to play beep?</source>
-        <translation>Quand voulez-vous que %1 joue le son beep ?</translation>
+        <translation>Quand voulez-vous que %1 joue le son BEEP ?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1211"/>
         <source>If it not visible</source>
-        <translation>Si il est invisible</translation>
+        <translation>Lorsqu&apos;il est invisible</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1211"/>
@@ -2369,7 +2369,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="1298"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
-        <translation>Après combien de minutes d&apos;inactivité %1 peut attendre avant modifier le statut en &quot;absent&quot; ?</translation>
+        <translation>Après combien de minutes d&apos;inactivité %1 doit-il passer le statut sur &quot;absent&quot; ?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1334"/>
@@ -2404,7 +2404,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="1589"/>
         <source>Please insert the new status description</source>
-        <translation>Insérer la description du nouveau statut</translation>
+        <translation>Insérer la description du statut</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1630"/>
@@ -2487,7 +2487,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="833"/>
         <source>Show the %1 log</source>
-        <translation>Afficher le journal %1</translation>
+        <translation>Journal %1</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="834"/>
@@ -2497,7 +2497,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="835"/>
         <source>Make a screenshot</source>
-        <translation>Faire une capture d&apos;écran</translation>
+        <translation>Capture d&apos;écran</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="836"/>
@@ -2539,7 +2539,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="2329"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
-        <translation>Le module de son est désactivé. Le BEEP par défaut sera utilisé.</translation>
+        <translation>Le module de son est désactivé. Le son BEEP par défaut sera utilisé.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2334"/>
@@ -2549,7 +2549,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="2335"/>
         <source>The default BEEP will be used</source>
-        <translation>Le BEEP par défaut sera utilisé</translation>
+        <translation>Le son BEEP par défaut sera utilisé</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2381"/>
@@ -2673,12 +2673,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="997"/>
         <source>Show the history panel</source>
-        <translation>Afficher la panneau de l&apos;historique</translation>
+        <translation>Afficher le panneau de l&apos;historique</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1009"/>
         <source>Show the file transfer panel</source>
-        <translation>Afficher la panneau de transfert de fichier</translation>
+        <translation>Afficher le panneau de transfert de fichier</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1054"/>
@@ -2952,7 +2952,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiScreenShot.cpp" line="34"/>
         <source>Make a Screenshot</source>
-        <translation>Faire une capture d&apos;écran</translation>
+        <translation>Capture d&apos;écran</translation>
     </message>
     <message>
         <location filename="../src/GuiScreenShot.cpp" line="42"/>
@@ -3083,7 +3083,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="77"/>
         <source>Local subnet address *</source>
-        <translation>Adresse du sous-réseau local *</translation>
+        <translation>Adr. du sous-réseau local *</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="151"/>
@@ -3093,27 +3093,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="113"/>
         <source>Addresses in beehosts.ini *</source>
-        <translation>Adresses présentes dans beehosts.ini*</translation>
+        <translation>Adr. présentes dans beehosts.ini*</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="35"/>
         <source>UDP Port in beebeep.rc *</source>
-        <translation>Port UDP présent dans beebeep.rc *</translation>
+        <translation>Port UDP dans beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="64"/>
         <source>(the same for all clients)</source>
-        <translation>(le même pour tous les clients)</translation>
+        <translation>(même pour tous les clients)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="106"/>
         <source>(search users here by default)</source>
-        <translation>(recherche des utilisateurs ici par défaut)</translation>
+        <translation>(recherche des util. ici par défaut)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="177"/>
         <source>Split subnet to IPV4 addresses</source>
-        <translation>Diviser le sous-réseau en adresse IPv4</translation>
+        <translation>Diviser le sous-réseau en IPv4</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="184"/>
@@ -3139,7 +3139,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="36"/>
         <source>Search for users</source>
-        <translation>Recherche d&apos;utilisateur</translation>
+        <translation>Recherche d&apos;utilisateurs</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.cpp" line="46"/>
@@ -3399,7 +3399,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiShareNetwork.cpp" line="329"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
-        <translation>%1 fichiers sont dans votre liste(%2 sont disponibles sur votre réseau)</translation>
+        <translation>%1 fichiers sont dans votre liste (%2 sont disponibles sur votre réseau)</translation>
     </message>
     <message>
         <location filename="../src/GuiShareNetwork.cpp" line="331"/>
@@ -3589,7 +3589,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiEditVCard.ui" line="241"/>
         <source>Birthday</source>
-        <translation>Date anniversaire</translation>
+        <translation>Date de naissance</translation>
     </message>
     <message>
         <location filename="../src/GuiEditVCard.ui" line="274"/>
@@ -3731,12 +3731,12 @@ Please select a different name.</source>
     <message>
         <location filename="../plugins/numbertextmarker/NumberTextMarker.cpp" line="33"/>
         <source>Number Text Marker</source>
-        <translation>Nombre puce de texte</translation>
+        <translation>Texte en nombre</translation>
     </message>
     <message>
         <location filename="../plugins/numbertextmarker/NumberTextMarker.cpp" line="48"/>
         <source>If you want to encode your message with numbers write a #text to encode# .</source>
-        <translation>Si vous souhaitez encoder votre message avec des nombres, écrire un #texte à encoder # .</translation>
+        <translation>Si vous souhaitez encoder votre message avec des nombres, écrire votre # texte à encoder entre dièses # .</translation>
     </message>
 </context>
 <context>
@@ -3804,12 +3804,12 @@ Please select a different name.</source>
     <message>
         <location filename="../plugins/rainbowtextmarker/RainbowTextMarker.cpp" line="37"/>
         <source>Rainbow Text Marker</source>
-        <translation>Texte en couleur</translation>
+        <translation>Texte arc-en-ciel</translation>
     </message>
     <message>
         <location filename="../plugins/rainbowtextmarker/RainbowTextMarker.cpp" line="52"/>
         <source>If you want a &lt;font color=#FF0000&gt;r&lt;/font&gt;&lt;font color=#FF8000&gt;a&lt;/font&gt;&lt;font color=#FFff00&gt;i&lt;/font&gt;&lt;font color=#7Fff00&gt;n&lt;/font&gt;&lt;font color=#00ff00&gt;b&lt;/font&gt;&lt;font color=#00ff80&gt;o&lt;/font&gt;&lt;font color=#00ffff&gt;w&lt;/font&gt;&lt;font color=#0080ff&gt; &lt;/font&gt;&lt;font color=#0000ff&gt;t&lt;/font&gt;&lt;font color=#7F00ff&gt;e&lt;/font&gt;&lt;font color=#FF00ff&gt;x&lt;/font&gt;&lt;font color=#FF0080&gt;t&lt;/font&gt; write a ~rainbow text~ .</source>
-        <translation>Pour du texte coloré :  &lt;font color=#FF0000&gt;r&lt;/font&gt;&lt;font color=#FF8000&gt;a&lt;/font&gt;&lt;font color=#FFff00&gt;i&lt;/font&gt;&lt;font color=#7Fff00&gt;n&lt;/font&gt;&lt;font color=#00ff00&gt;b&lt;/font&gt;&lt;font color=#00ff80&gt;o&lt;/font&gt;&lt;font color=#00ffff&gt;w&lt;/font&gt;&lt;font color=#0080ff&gt; &lt;/font&gt;&lt;font color=#0000ff&gt;t&lt;/font&gt;&lt;font color=#7F00ff&gt;e&lt;/font&gt;&lt;font color=#FF00ff&gt;x&lt;/font&gt;&lt;font color=#FF0080&gt;t&lt;/font&gt; write a ~rainbow text~ .</translation>
+        <translation>Pour du texte coloré en &lt;font color=#FF0000&gt;a&lt;/font&gt;&lt;font color=#FF8000&gt;r&lt;/font&gt;&lt;font color=#FFff00&gt;c&lt;/font&gt;&lt;font color=#7Fff00&gt;-&lt;/font&gt;&lt;font color=#00ff00&gt;e&lt;/font&gt;&lt;font color=#00ff80&gt;n&lt;/font&gt;&lt;font color=#00ffff&gt;-&lt;/font&gt;&lt;font color=#0080ff&gt;c&lt;/font&gt;&lt;font color=#0000ff&gt;i&lt;/font&gt;&lt;font color=#7F00ff&gt;e&lt;/font&gt;&lt;font color=#FF00ff&gt;l&lt;/font&gt;&lt;font color=#FF0080&gt; &lt;/font&gt; écrivez ~votre texte entre tilde~ .</translation>
     </message>
 </context>
 <context>
@@ -3817,12 +3817,12 @@ Please select a different name.</source>
     <message>
         <location filename="../plugins/regularboldtextmarker/RegularBoldTextMarker.cpp" line="32"/>
         <source>Regular Bold Text Marker</source>
-        <translation>Texte normal ou gras</translation>
+        <translation>Texte alterné en gras et régulier</translation>
     </message>
     <message>
         <location filename="../plugins/regularboldtextmarker/RegularBoldTextMarker.cpp" line="47"/>
         <source>If you want to format your message with words in regular and bold font write a [text to format] .</source>
-        <translation>Si vous voulez formater votre texte en normal ou en gras, écrire [texte à formater].</translation>
+        <translation>Si vous voulez formater votre texte alternativement en gras et en régulier, écrire [votre texte entre crochets].</translation>
     </message>
 </context>
 <context>
@@ -3835,22 +3835,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/Tips.h" line="32"/>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation>Si vous voulez du &lt;b&gt;texte en gras&lt;/b&gt;, écrivez *votre texte comme ceci*.</translation>
+        <translation>Si vous voulez écrire votre &lt;b&gt;texte en gras&lt;/b&gt;, écrivez *votre texte entre astérisques*.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="33"/>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation>Si vous voulez du &lt;i&gt;texte en italique&lt;/i&gt;, écrivez /votre texte comme ceci/.</translation>
+        <translation>Si vous voulez écrire votre &lt;i&gt;texte en italique&lt;/i&gt;, écrivez /votre texte entre slashs/.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="34"/>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation>Si vous voulez du &lt;u&gt;texte souligné&lt;/u&gt;, écrivez _votre texte comme ceci_.</translation>
+        <translation>Si vous voulez &lt;u&gt;souligner votre texte &lt;/u&gt;, écrivez _votre texte entre tirets bas_.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="35"/>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation>Vous pouvez effectuer une recherche parmi les messages précédemment envoyés dans l&apos;historique en utilisant les touches Ctrl + Haut et Ctrl + Bas.</translation>
+        <translation>Vous pouvez effectuer une recherche dans l&apos;historique parmi les messages précédemment envoyés en utilisant les touches Ctrl + Haut et Ctrl + Bas.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="37"/>
@@ -3865,7 +3865,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/Tips.h" line="39"/>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation>Vous pouvez désactiver la notification de message d&apos;un droit de groupe cliquant sur son nom sur la liste .</translation>
+        <translation>Vous pouvez désactiver les notifications de message d&apos;un groupe en faisant un clic-droit sur son nom.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="47"/>
@@ -3875,172 +3875,172 @@ Please select a different name.</source>
     <message>
         <location filename="../src/Tips.h" line="48"/>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</translation>
+        <translation>&lt;i&gt; Soyez insatiables. Soyez fous.&lt;/i&gt; (Steve Jobs)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="49"/>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Il y a toujours un bug de plus.&lt;/i&gt;  (Loi de Lubarsky&apos;s)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="50"/>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; S&apos;il y a deux façons de faire quelque chose, et que l&apos;une d&apos;elles conduit à une catastrophe, alors quelqu&apos;un le fera &lt;/i&gt; Loi de Murphy</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="51"/>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; Si un programme est utile, alors il devra être modifié.&lt;/i&gt; (Loi de la programmation informatique)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="53"/>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; Les intellectuels résolvent les problèmes, les génies les évitent.&lt;/i&gt;  (Albert Einstein)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="54"/>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; Ce qui ne me tue pas, me rend plus fort.&lt;/i&gt; (Friedrich Nietzsche)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="55"/>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Je ne suis pas assez jeune pour tout savoir.&lt;/i&gt; (Oscar Wilde)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="56"/>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Un manque de doute conduit à un manque de créativité.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="57"/>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; La peur est le chemin vers le côté obscur.&lt;/i&gt; (Joda)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="59"/>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Je rêve ma peinture , puis je peins mon rêve.&lt;/i&gt; (Vincent Van Gogh)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="60"/>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Tout ce que vous pouvez imaginer est réel.&lt;/i&gt; (Pablo Picasso)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="61"/>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; Toutes les vérités sont faciles à comprendre une fois découvertes, la difficulté c&apos;est de les décrouvrir. &lt;/i&gt; (Galileo Galilei)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="62"/>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; La vérité règne là où les opinions sont libres.&lt;/i&gt; (Thomas Paine)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="63"/>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;J&apos;ai vu tant de choses, que vous, humains, ne pourriez pas croire.&lt;/i&gt; (Batty)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="65"/>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; Le caractère de l&apos;homme, c&apos;est son destin .&lt;/i&gt; (Eraclitus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="66"/>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i &gt;Une autre langue est une vision différente de la vie.&lt;/i&gt; ( Federico Fellini )</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="67"/>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="68"/>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Chaque jour en Afrique une gazelle se réveille . Elle sait qu&apos;elle doit courir plus vite que le plus rapide des lions ou elle sera tuée . Chaque matin, un lion se réveille . Il sait qu&apos;il doit rattraper la plus lente des gazelles ou il mourra de faim. Peu importe que vous soyez  un lion ou une gazelle, lorsque le soleil se lève, il vaut mieux courir. &lt;/i&gt; (Abe Gubegna)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="73"/>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Ok, Houston, nous avons un problème.&lt;/i&gt; (John L. Swigert)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="75"/>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Deuxième étoile à droite , puis tout droit jusqu&apos;au matin.&lt;/i&gt; (Peter Pan)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="76"/>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; La nécessité est la dernière et la meilleure arme . &lt;/i&gt; (Titus Livius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="77"/>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Les personnes âgées ne ​​sont pas sages , elles sont simplement prudentes.&lt;/i&gt; (Ernest Hemingway)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="78"/>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Un voyage de mille miles commence par une seule étape .&lt;/i&gt; (Confucius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="79"/>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;La vie sans le courage de la mort est l&apos;esclavage .&lt;/i&gt; (Lucius Annaeus Seneca)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="81"/>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Je peux calculer le mouvement des corps célestes , mais pas la folie des gens.&lt;/i&gt; (Isaac Newton)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="82"/>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;L&apos;émerveillement est le commencement de la sagesse .&lt;/i&gt; (Socrates)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="83"/>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Aucun homme sage n&apos;a jamais voulu être plus jeune.&lt;/i&gt; (Jonathan Swift)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="84"/>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; L&apos;homme qui ne fait jamais d&apos;erreur est celui qui ne fait jamais rien . &lt;/i&gt; (Theodore Roosevelt)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="85"/>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;L&apos;attitude est une petite chose qui fait une grande différence.&lt;/i&gt; (Winston Churchill)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="87"/>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Nous devenons ce que nous pensons .&lt;/i&gt; (Buddha)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="88"/>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; Les difficultés révèlent la vraie personnalité des gens. &lt;/i&gt; (Epictetus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="89"/>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt; Qui gardera les gardiens ?&lt;/i&gt; (Decimus Junius Juvenal)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="90"/>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Une maison sans livres est un corps sans âme.&lt;/i&gt; (Marcus Tullius Cicero)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="91"/>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="93"/>
@@ -4063,12 +4063,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/BeeUtils.cpp" line="64"/>
         <source>busy</source>
-        <translation>occupé</translation>
+        <translation>occupé(e)</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="65"/>
         <source>away</source>
-        <translation>absent</translation>
+        <translation>absent(e)</translation>
     </message>
     <message>
         <location filename="../src/BeeUtils.cpp" line="66"/>
