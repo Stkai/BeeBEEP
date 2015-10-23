@@ -556,11 +556,15 @@
     </message>
     <message>
         <source>Donwload</source>
-        <translation>Scarica</translation>
+        <translation type="vanished">Scarica</translation>
     </message>
     <message>
         <source>Upload</source>
         <translation>Carica</translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation>Scarica</translation>
     </message>
 </context>
 <context>

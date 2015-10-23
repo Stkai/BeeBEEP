@@ -304,13 +304,13 @@
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
-        <source>Donwload</source>
+        <source>Upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
-        <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <source>Download</source>
+        <translation>Downloaden</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="180"/>

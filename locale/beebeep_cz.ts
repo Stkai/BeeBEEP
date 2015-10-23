@@ -296,8 +296,8 @@
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
-        <source>Donwload</source>
-        <translation type="unfinished"></translation>
+        <source>Download</source>
+        <translation>Stáhnout</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
@@ -664,7 +664,7 @@
     <message>
         <location filename="../src/GuiAddUser.ui" line="110"/>
         <source>Click here to add user path</source>
-        <translation>Klikněte zde pro přidání uživatelské cesty</translation>
+        <translation>Kliknout zde pro přidání uživatelské cesty</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="121"/>
@@ -1019,7 +1019,7 @@
     <message>
         <location filename="../src/GuiChat.ui" line="238"/>
         <source>Write to: &lt;b&gt;ALL&lt;/b&gt;</source>
-        <translation>Napsat</translation>
+        <translation>Napsat: &lt;b&gt;všem&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.ui" line="260"/>
@@ -1037,9 +1037,21 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Helvetica Neue DeskInterface&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Helvetica Neue DeskInterface&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
         <location filename="../src/GuiChat.ui" line="136"/>
         <source>Click to send message or just hit enter</source>
-        <translation>Klikněte pro odeslání zprávy nebo zmáčkněte enter</translation>
+        <translation>Kliknout pro odeslání zprávy nebo zmáčknout enter</translation>
     </message>
 </context>
 <context>
@@ -1103,7 +1115,7 @@
     <message>
         <location filename="../src/GuiCreateGroup.cpp" line="110"/>
         <source>Please select two or more member for the group.</source>
-        <translation>Označte dva nebo více uživatelů, které chcete přidat do skupiny.</translation>
+        <translation>Označte prosím dva nebo více uživatelů, které chcete přidat do skupiny.</translation>
     </message>
     <message>
         <location filename="../src/GuiCreateGroup.cpp" line="118"/>
@@ -1208,22 +1220,22 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="37"/>
         <source>Show the bar of chat</source>
-        <translation>Zobrazit lištu chatu</translation>
+        <translation type="unfinished">Zobrazit lištu chatu</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="44"/>
         <source>Emoticons</source>
-        <translation>Smajlíci</translation>
+        <translation type="unfinished">Smajlíci</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="56"/>
         <source>Show the emoticon panel</source>
-        <translation>Zobraz panel smajlíků</translation>
+        <translation type="unfinished">Zobraz panel smajlíků</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="57"/>
         <source>Add your preferred emoticon to the message</source>
-        <translation>Přidat smajlíka do zprávy</translation>
+        <translation type="unfinished">Přidat smajlíka do zprávy</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="214"/>
@@ -1563,7 +1575,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="492"/>
         <source>Secure Lan Messenger</source>
-        <translation>Zabezpečený Lan Messenger</translation>
+        <translation>Secure Lan Messenger</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="493"/>
@@ -2644,7 +2656,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="2567"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
-        <translation></translation>
+        <translation>Chat &apos;%1&apos; má již uložený text.&lt;br /&gt;Co chcete udělat s vybraným uloženým textem?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2569"/>
@@ -3790,7 +3802,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../plugins/numbertextmarker/NumberTextMarker.cpp" line="48"/>
         <source>If you want to encode your message with numbers write a #text to encode# .</source>
-        <translation>Chcete-li zakódovat svou zprávu, s čísly napište #text k zakódování# .</translation>
+        <translation>Chcete-li zakódovat svou zprávu s čísly, napište #text k zakódování# .</translation>
     </message>
 </context>
 <context>
@@ -3820,7 +3832,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiUserItem.cpp" line="136"/>
         <source>Click to open chat with all local users</source>
-        <translation>Klikni pro otveření chatu se všemi uživateli v lokální síti</translation>
+        <translation>Kliknout pro otveření chatu se všemi uživateli v lokální síti</translation>
     </message>
     <message>
         <location filename="../src/GuiUserItem.cpp" line="140"/>
@@ -3830,7 +3842,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiUserItem.cpp" line="155"/>
         <source>Click to send a private message</source>
-        <translation>Klikněte pro odeslaní soukromé zprávy</translation>
+        <translation>Kliknout pro odeslaní soukromé zprávy</translation>
     </message>
     <message>
         <location filename="../src/SaveChatList.cpp" line="87"/>
@@ -3845,12 +3857,12 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiGroupItem.cpp" line="67"/>
         <source>Click to send message to group: %1</source>
-        <translation>Klikněte pro odeslání zprávy skupině: %1</translation>
+        <translation>Kliknnout pro odeslání zprávy skupině: %1</translation>
     </message>
     <message>
         <location filename="../src/GuiSavedChatList.cpp" line="129"/>
         <source>Click to view chat history: %1</source>
-        <translation>Klikněte pro zobrazení historie chatu: %1</translation>
+        <translation>Kliknout pro zobrazení historie chatu: %1</translation>
     </message>
 </context>
 <context>
@@ -3924,182 +3936,183 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/Tips.h" line="47"/>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Svoboda je, když je mysl řízena fantazií.&lt;/i&gt; (Marco Mastroddi)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="48"/>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Zůstaňte hladoví, zůstaňte pošetílí.&lt;/i&gt; (Steve Jobs)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="49"/>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Vždy tam zůstane ještě jedna chyba.&lt;/i&gt; (Lubarského zákon)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="50"/>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Pokud se něco může pokazit, tak se to taky pokazí.&lt;/i&gt; (Murphyho zákon)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="51"/>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Pokud je program užitečný, bude muset být změněn.&lt;/i&gt; (Zákon počítačového programování)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="53"/>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Intelektuálové řeší problémy, géniové jim předcházejí.&lt;/i&gt; (Albert Einstein)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="54"/>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Co mě nezabije, to mě posílí.&lt;/i&gt; (Friedrich Nietzsche)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="55"/>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Nejsem dost mladý na to, abych věděl vše.&lt;/i&gt; (Oscar Wilde)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="56"/>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Nedostatek pochybností vede k nedostatku kreativity.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="57"/>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Strach je cesta k temné straně.&lt;/i&gt; (Joda)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="59"/>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Sním můj obraz a pak maluji svůj sen.&lt;/i&gt; (Vincent Van Gogh)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="60"/>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Vše,co si dokážete představit, je skutečnél.&lt;/i&gt; (Pablo Picasso)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="61"/>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Všechny pravdy je jednoduché pochopit, když jsou objeveny - jde o to, aby byly objeveny.&lt;/i&gt; (Galileo Galilei)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="62"/>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Pravda vítězí tam, kde jsou svobodné názory.&lt;/i&gt; (Thomas Paine)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="63"/>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Viděl jsem věci, kterým byste vy, lidé, nevěřili...&lt;/i&gt; (Batty)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="65"/>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Charakterem muže je jeho osud.&lt;/i&gt; (Eraclitus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="66"/>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Jiný jazyk je jiný pohled na život.&lt;/i&gt; (Federico Fellini)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="67"/>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="68"/>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Každý den se v Africe probudí gazela. Ví, že musí utíkat rychleji než nejrychlejší lev, jinak zemře. Každý den se probouzí také lev. Ví, že musí předběhnout nejpomalejší gazelu, jinak zahyne hlady. Je jedno, jestli jste gazela nebo lev. Jakmile vyjde slunce, raději se rozběhněte.&lt;/i&gt; (Abe Gubegna)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="73"/>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;OK Houstone, máme tady problém.&lt;/i&gt; (John L. Swigert)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="75"/>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Druhá hvězda napravo a rovně až do rána.&lt;/i&gt; (Peter Pan)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="76"/>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Nutnost je poslední a nejsilnější zbraň.&lt;/i&gt; (Titus Livius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="77"/>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Staří lidé nejsou moudří - oni sou pouze opatrní.&lt;/i&gt; (Ernest Hemingway)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="78"/>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Cesta dlouhá tisíc mil začíná prvním krokem.&lt;/i&gt; (Confucius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="79"/>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Život bez odvahy zemřít je otroctví.&lt;/i&gt; (Lucius Annaeus Seneca)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="81"/>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Lze vypočítat pohyb nebeských těles, ale ne šílenství lidí.&lt;/i&gt; (Isaac Newton)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="82"/>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Zázrak je začátek moudrosti.&lt;/i&gt; (Socrates)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="83"/>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Žádný mladý člověk se nepřeje být mladší.&lt;/i&gt; (Jonathan Swift)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="84"/>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Člověk, který nikdy nedělá chyby, je člověk, který nikdy nedělá nic.&lt;/i&gt; (Theodore Roosevelt)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="85"/>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Postoj je malá věc, která dělá velký rozdíl.&lt;/i&gt; (Winston Churchill)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="87"/>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Vše, co jsme, je výsledkem toho, co jsme si mysleli.&lt;/i&gt; (Buddha)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="88"/>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Obtíže jsou věci, které ukazují člověka, jakým je.&lt;/i&gt; (Epictetus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="89"/>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Kdo bude strážit stráže?&lt;/i&gt; (Decimus Junius Juvenal)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="90"/>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Domov bez knih je jako tělo bez duše.&lt;/i&gt; (Marcus Tullius Cicero)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="91"/>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>&lt;i&gt;Nemůžeme zastavit přát si naše přání.&lt;/i&gt; (Arthur Schopenhauer)</translatorcomment>
+        <translation>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="93"/>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Trpělivost je také forma činnosti.&lt;/i&gt; (Auguste Rodin)</translation>
     </message>
 </context>
 <context>

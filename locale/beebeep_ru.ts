@@ -291,13 +291,13 @@
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
-        <source>Donwload</source>
+        <source>Upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
-        <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <source>Download</source>
+        <translation>Загрузка</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="180"/>
@@ -387,7 +387,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="598"/>
         <source>%1 is not connected.</source>
-        <translation type="unfinished">%1 не подключен.</translation>
+        <translation>%1 не подключен.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="612"/>

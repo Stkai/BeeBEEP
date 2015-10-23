@@ -295,14 +295,18 @@
         <translation>%1 Impossible d&apos;envoyer %2: Le transfert de fichier est désactivé.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="136"/>
         <source>Donwload</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Télécharger</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer</translation>
+    </message>
+    <message>
+        <location filename="../src/CoreFileTransfer.cpp" line="136"/>
+        <source>Download</source>
+        <translation>Télécharger</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="180"/>
@@ -1029,7 +1033,7 @@
     <message>
         <location filename="../src/GuiChat.ui" line="288"/>
         <source>Save window&apos;s geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer la géométrie de la fenêtre</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.ui" line="326"/>
@@ -1227,7 +1231,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="214"/>
         <source>Window&apos;s geometry and state saved</source>
-        <translation type="unfinished"></translation>
+        <translation>La géométrie et l&apos;état de la fenêtre ont été sauvegardé</translation>
     </message>
 </context>
 <context>
@@ -2510,12 +2514,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="723"/>
         <source>Always open a new floating chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours ouvrir une nouvelle fenêtre de chat</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="724"/>
         <source>If enabled when you always open chat in a new floating window</source>
-        <translation type="unfinished"></translation>
+        <translation>Si activée, le chat s&apos;ouvrira toujours dans une nouvelle fenêtre</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="834"/>
@@ -2535,7 +2539,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="902"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Réseau</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2050"/>
@@ -2545,7 +2549,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="2075"/>
         <source>Show the bar of games</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la barre des jeux</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2310"/>
@@ -2668,7 +2672,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="2980"/>
         <source>inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>inactif</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2991"/>
@@ -2678,7 +2682,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiMain.cpp" line="2994"/>
         <source>active</source>
-        <translation type="unfinished"></translation>
+        <translation>actif</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3051"/>
@@ -3171,7 +3175,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="191"/>
         <source>Enable Zero Configuration Networking</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le protocole réseau Zero Configuration</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="201"/>

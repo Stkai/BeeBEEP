@@ -1472,6 +1472,9 @@ bool GuiMain::chatIsVisible( VNumber chat_id )
   if( fl_chat )
     return fl_chat->chatIsVisible();
 
+  if( !isVisible() )
+    return false;
+
   if( isMinimized() )
     return false;
 
