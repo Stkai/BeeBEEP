@@ -495,12 +495,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="214"/>
+        <location filename="../src/CoreConnection.cpp" line="218"/>
         <source>%1 (%2) is disconnected from %3 network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="326"/>
+        <location filename="../src/CoreConnection.cpp" line="330"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1393,73 +1393,73 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="58"/>
+        <location filename="../src/GuiLog.cpp" line="66"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="63"/>
+        <location filename="../src/GuiLog.cpp" line="71"/>
         <source>keyword</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="68"/>
+        <location filename="../src/GuiLog.cpp" line="76"/>
         <source>Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="69"/>
+        <location filename="../src/GuiLog.cpp" line="77"/>
         <source>Find keywords in the log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="81"/>
+        <location filename="../src/GuiLog.cpp" line="89"/>
         <source>Case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="86"/>
+        <location filename="../src/GuiLog.cpp" line="94"/>
         <source>Whole word</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="92"/>
+        <location filename="../src/GuiLog.cpp" line="54"/>
         <source>Log to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="103"/>
+        <location filename="../src/GuiLog.cpp" line="102"/>
         <source>Please select a file to save the log.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="112"/>
+        <location filename="../src/GuiLog.cpp" line="111"/>
         <source>Unable to save log in the file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="112"/>
-        <location filename="../src/GuiLog.cpp" line="139"/>
+        <location filename="../src/GuiLog.cpp" line="111"/>
+        <location filename="../src/GuiLog.cpp" line="138"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="138"/>
+        <location filename="../src/GuiLog.cpp" line="137"/>
         <source>%1: save log completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="139"/>
+        <location filename="../src/GuiLog.cpp" line="138"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="139"/>
+        <location filename="../src/GuiLog.cpp" line="138"/>
         <source>Open folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="180"/>
+        <location filename="../src/GuiLog.cpp" line="179"/>
         <source>%1 not found</source>
         <translation type="unfinished"></translation>
     </message>
