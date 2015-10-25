@@ -94,6 +94,10 @@ bool Core::start()
   if( Settings::instance().localUser().sessionId().isEmpty() )
     Settings::instance().createSessionId();
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Network password used:" << Settings::instance().passwordBeforeHash();
+#endif
+
   if( !mp_broadcaster->startBroadcasting() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,

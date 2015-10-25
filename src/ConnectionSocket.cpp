@@ -209,6 +209,9 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 void ConnectionSocket::sendQuestionHello()
 {
   m_publicKey1 = Protocol::instance().newMd5Id();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( cipherKey() );
+#endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
   {
     qDebug() << "ConnectionSocket has sent question HELLO to" << peerAddress().toString() << peerPort();
@@ -221,6 +224,9 @@ void ConnectionSocket::sendQuestionHello()
 void ConnectionSocket::sendAnswerHello()
 {
   m_publicKey2 = Protocol::instance().newMd5Id();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( cipherKey() );
+#endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey2 ) ) )
   {
     qDebug() << "ConnectionSocket has sent answer HELLO to" << peerAddress().toString() << peerPort();

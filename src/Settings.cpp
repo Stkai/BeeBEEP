@@ -580,10 +580,10 @@ void Settings::load()
   m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
   m_savePassword = sets->value( "SavePassword", false ).toBool();
+  QString enc_pass = "";
   if( m_savePassword )
-    m_passwordBeforeHash = simpleDecrypt( sets->value( "EncPwd", "" ).toString() );
-  else
-    m_passwordBeforeHash = "";
+    enc_pass = simpleDecrypt( sets->value( "EncPwd", "" ).toString() );
+  setPassword( enc_pass );
   m_saveUserList = sets->value( "SaveUsers", m_saveUserList ).toBool();
   QString user_list = sets->value( "List", "" ).toString();
   if( !user_list.isEmpty() )
