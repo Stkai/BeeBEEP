@@ -78,6 +78,7 @@ void Broadcaster::sendBroadcastDatagram()
     sl_host << ha.toString();
   qDebug() << "Sending datagram to hosts:" << qPrintable( sl_host.join( ", " ) );
 #endif
+
   QList<QHostAddress>::iterator it = m_broadcastAddresses.begin();
   while( it != m_broadcastAddresses.end() )
   {

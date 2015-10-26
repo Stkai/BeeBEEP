@@ -874,6 +874,16 @@ void GuiMain::createMenus()
   mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
   mp_menuTrayIcon->addSeparator();
 
+  mp_menuNetworkStatus = mp_menuTrayIcon->addMenu( QIcon( ":/images/connect.png" ), tr( "Network" ) );
+  mp_actHostAddress = mp_menuNetworkStatus->addAction( QString( "ip" ) );
+  mp_actPortBroadcast = mp_menuNetworkStatus->addAction( QString( "udp1" ) );
+  mp_actPortListener = mp_menuNetworkStatus->addAction( QString( "tcp1" ) );
+  mp_actPortFileTransfer = mp_menuNetworkStatus->addAction( QString( "tcp2" ) );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  mp_actMulticastDns = mp_menuNetworkStatus->addAction( QString( "mdns" ) );
+#endif
+  mp_menuTrayIcon->addSeparator();
+
   act = mp_menuTrayIcon->addAction( tr( "Load on system tray at startup" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled %1 will be start hided in system tray" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
@@ -898,15 +908,6 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showNotificationOnTray()  );
   act->setData( 19 );
 
-  mp_menuTrayIcon->addSeparator();
-  mp_menuTrayIcon->addAction( tr( "Network" ) );
-  mp_actHostAddress = mp_menuTrayIcon->addAction( QString( "ip" ) );
-  mp_actPortBroadcast = mp_menuTrayIcon->addAction( QString( "udp1" ) );
-  mp_actPortListener = mp_menuTrayIcon->addAction( QString( "tcp1" ) );
-  mp_actPortFileTransfer = mp_menuTrayIcon->addAction( QString( "tcp2" ) );
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_actMulticastDns = mp_menuTrayIcon->addAction( QString( "mdns" ) );
-#endif
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actQuit );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
@@ -2985,16 +2986,42 @@ void GuiMain::showDefaultServerPortInMenu()
 
   if( mp_core->isConnected() )
   {
+    mp_menuNetworkStatus->setIcon( QIcon( ":/images/network-connected.png" ) );
+    mp_actHostAddress->setIcon( QIcon( ":/images/connect.png" ) );
+    mp_actPortBroadcast->setIcon( QIcon( ":/images/broadcast.png" ) );
+    mp_actPortListener->setIcon( QIcon( ":/images/chat.png" ) );
+
     host_address = Settings::instance().localUser().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
     listener_port = QString::number( Settings::instance().localUser().hostPort() );
     if( Settings::instance().fileTransferIsEnabled() )
+    {
       file_transfer_port = QString::number( mp_core->fileTransferPort() );
+      mp_actPortFileTransfer->setIcon( QIcon( ":/images/network-scan.png" ) );
+    }
     else
+    {
       file_transfer_port = tr( "disabled" );
+      mp_actPortFileTransfer->setIcon( QIcon() );
+    }
+
 #ifdef BEEBEEP_USE_MULTICAST_DNS
     if( mp_core->dnsMulticastingIsActive() )
+    {
       multicast_dns = tr( "active" );
+      mp_actMulticastDns->setIcon( QIcon( ":/images/mdns.png" ) );
+    }
+#endif
+  }
+  else
+  {
+    mp_menuNetworkStatus->setIcon( QIcon( ":/images/network-disconnected.png" ) );
+    mp_actHostAddress->setIcon( QIcon() );
+    mp_actPortBroadcast->setIcon( QIcon() );
+    mp_actPortListener->setIcon( QIcon() );
+    mp_actPortFileTransfer->setIcon( QIcon() );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+    mp_actMulticastDns->setIcon( QIcon() );
 #endif
   }
 

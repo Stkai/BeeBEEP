@@ -262,6 +262,7 @@ private:
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
 
+  QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
   QAction* mp_actPortBroadcast;
   QAction* mp_actPortListener;
