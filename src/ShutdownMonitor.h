@@ -35,6 +35,12 @@ public:
 
 };
 
+#else
+
+struct ShutdownMonitor
+{
+}
+
 #endif
 
 #endif // BEEBEEP_SHUTDOWNMONITOR_H
