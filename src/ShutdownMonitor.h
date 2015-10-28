@@ -39,7 +39,7 @@ public:
 
 struct ShutdownMonitor
 {
-}
+};
 
 #endif
 
