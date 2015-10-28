@@ -298,6 +298,11 @@ public:
   inline void setUserList( const QStringList& );
   inline const QStringList& userList() const;
 
+  inline void setAcceptConnectionsOnlyFromWorkgroups( bool );
+  inline bool acceptConnectionsOnlyFromWorkgroups() const;
+  inline void setWorkgroups( const QStringList& );
+  inline const QStringList& workgroups() const;
+
   inline void setShowHomeAsDefaultPage( bool );
   inline bool showHomeAsDefaultPage() const;
   inline void setResetGeometryAtStartup( bool );
@@ -488,6 +493,9 @@ private:
   bool m_alwaysOpenNewFloatingChat;
 
   bool m_isFacebookPageLinkClicked;
+
+  bool m_acceptConnectionsOnlyFromWorkgroups;
+  QStringList m_workgroups;
 
 };
 
@@ -688,5 +696,9 @@ inline const QByteArray& Settings::floatingChatState() const { return m_floating
 inline const QByteArray& Settings::floatingChatSplitterState() const { return m_floatingChatSplitterState; }
 inline void Settings::setAlwaysOpenNewFloatingChat( bool new_value ) { m_alwaysOpenNewFloatingChat = new_value; }
 inline bool Settings::alwaysOpenNewFloatingChat() const { return m_alwaysOpenNewFloatingChat; }
+inline void Settings::setAcceptConnectionsOnlyFromWorkgroups( bool new_value ) { m_acceptConnectionsOnlyFromWorkgroups = new_value; }
+inline bool Settings::acceptConnectionsOnlyFromWorkgroups() const { return m_acceptConnectionsOnlyFromWorkgroups; }
+inline void Settings::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
+inline const QStringList& Settings::workgroups() const { return m_workgroups; }
 
 #endif // BEEBEEP_SETTINGS_H

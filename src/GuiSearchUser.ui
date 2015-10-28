@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>566</width>
-    <height>386</height>
+    <width>600</width>
+    <height>473</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -134,6 +134,23 @@
        </widget>
       </item>
       <item row="4" column="0" colspan="3">
+       <widget class="QLabel" name="mp_lWorkgroups">
+        <property name="text">
+         <string>Workgroups (enter your network groups separated by comma)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="3">
+       <widget class="QLineEdit" name="mp_leWorkgroups"/>
+      </item>
+      <item row="6" column="0" colspan="2">
+       <widget class="QCheckBox" name="mp_cbAcceptConnectionsOnlyFromWorkgroups">
+        <property name="text">
+         <string>Accept connections only from your workgroups</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" colspan="3">
        <widget class="QLabel" name="mp_lBroadcast">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -148,7 +165,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
+         <string>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
@@ -161,7 +178,7 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="3">
+      <item row="8" column="0" colspan="3">
        <widget class="QPlainTextEdit" name="mp_teAddressesInSettings">
         <property name="maximumSize">
          <size>
@@ -171,21 +188,21 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="2">
+      <item row="9" column="0" colspan="2">
        <widget class="QCheckBox" name="mp_cbParseAddresses">
         <property name="text">
          <string>Split subnet to IPV4 addresses</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="0" colspan="2">
+      <item row="10" column="0" colspan="2">
        <widget class="QCheckBox" name="mp_cbAutoAddSubnet">
         <property name="text">
          <string>Automatically add external subnet</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="0" colspan="2">
+      <item row="11" column="0" colspan="2">
        <widget class="QCheckBox" name="mp_cbEnableMDns">
         <property name="text">
          <string>Enable Zero Configuration Networking</string>
@@ -235,6 +252,8 @@
   <tabstop>mp_leUdpPort</tabstop>
   <tabstop>mp_leSubnet</tabstop>
   <tabstop>mp_teAddressesInHosts</tabstop>
+  <tabstop>mp_leWorkgroups</tabstop>
+  <tabstop>mp_cbAcceptConnectionsOnlyFromWorkgroups</tabstop>
   <tabstop>mp_teAddressesInSettings</tabstop>
   <tabstop>mp_cbParseAddresses</tabstop>
   <tabstop>mp_cbAutoAddSubnet</tabstop>

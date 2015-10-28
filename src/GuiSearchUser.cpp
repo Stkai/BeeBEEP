@@ -49,15 +49,15 @@ void GuiSearchUser::loadSettings()
 
   mp_leUdpPort->setText( QString::number( Settings::instance().defaultBroadcastPort() ) );
 
-  QStringList sl_addresses = Settings::instance().broadcastAddressesInFileHosts();
-  if( sl_addresses.size() > 0 )
-    mp_teAddressesInHosts->setPlainText( sl_addresses.join( ", " ) );
+  QStringList sl_tmp = Settings::instance().broadcastAddressesInFileHosts();
+  if( sl_tmp.size() > 0 )
+    mp_teAddressesInHosts->setPlainText( sl_tmp.join( ", " ) );
   else
     mp_teAddressesInHosts->setPlainText( tr( "File is empty" ) );
 
-  sl_addresses = Settings::instance().broadcastAddressesInSettings();
-  if( sl_addresses.size() > 0 )
-    mp_teAddressesInSettings->setPlainText( sl_addresses.join( ", " ) );
+  sl_tmp = Settings::instance().broadcastAddressesInSettings();
+  if( sl_tmp.size() > 0 )
+    mp_teAddressesInSettings->setPlainText( sl_tmp.join( ", " ) );
   else
     mp_teAddressesInSettings->setPlainText( "" );
 
@@ -65,36 +65,56 @@ void GuiSearchUser::loadSettings()
   mp_cbAutoAddSubnet->setChecked( Settings::instance().addExternalSubnetAutomatically() );
   mp_cbEnableMDns->setChecked( Settings::instance().useMulticastDns() );
 
-  mp_teAddressesInSettings->setFocus();
+  sl_tmp = Settings::instance().workgroups();
+  if( sl_tmp.size() > 0 )
+    mp_leWorkgroups->setText( sl_tmp.join( ", " ) );
+  else
+    mp_leWorkgroups->setText( "" );
+
+  mp_cbAcceptConnectionsOnlyFromWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
+
+  mp_leWorkgroups->setFocus();
 }
 
 void GuiSearchUser::checkAndSearch()
 {
-  QString address_string = mp_teAddressesInSettings->toPlainText().simplified();
-  QStringList address_list;
-  if( address_string.size() > 0 )
-    address_list = address_string.split( ",", QString::SkipEmptyParts );
+  QString string_tmp = mp_teAddressesInSettings->toPlainText().simplified();
+  QStringList sl_tmp;
+  if( string_tmp.size() > 0 )
+    sl_tmp = string_tmp.split( ",", QString::SkipEmptyParts );
 
-  if( !address_list.isEmpty() )
+  if( !sl_tmp.isEmpty() )
   {
-    foreach( QString s, address_list )
+    foreach( QString s, sl_tmp )
     {
       QHostAddress host_address( s.simplified() );
       if( host_address.isNull() )
       {
         QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
                               tr( "You have inserted an invalid host address:\n%1 is removed from the list." ).arg( s.simplified() ), tr( "Ok" ) );
-        address_list.removeOne( s );
-        mp_teAddressesInSettings->setPlainText( address_list.join( ", " ) );
+        sl_tmp.removeOne( s );
+        mp_teAddressesInSettings->setPlainText( sl_tmp.join( ", " ) );
         mp_teAddressesInSettings->setFocus();
         return;
       }
     }
 
-    Settings::instance().setBroadcastAddressesInSettings( address_list );
+    Settings::instance().setBroadcastAddressesInSettings( sl_tmp );
   }
   else
     Settings::instance().setBroadcastAddressesInSettings( QStringList() );
+
+  string_tmp = mp_leWorkgroups->text().simplified();
+  QStringList sl_workgroups;
+  if( string_tmp.size() > 0 )
+  {
+    sl_tmp = string_tmp.split( ",", QString::SkipEmptyParts );
+    foreach( QString s, sl_tmp )
+      sl_workgroups.append( s.simplified() );
+  }
+
+  Settings::instance().setWorkgroups( sl_workgroups );
+  Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptConnectionsOnlyFromWorkgroups->isChecked() );
 
   Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
   Settings::instance().setAddExternalSubnetAutomatically( mp_cbAutoAddSubnet->isChecked() );

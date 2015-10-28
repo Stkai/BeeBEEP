@@ -566,6 +566,10 @@
         <source>Download</source>
         <translation>Scarica</translation>
     </message>
+    <message>
+        <source>%1 You have selected to join only in these workgroups: %2</source>
+        <translation>%1 Hai selezionato di partecipare solo a questi gruppi di lavoro: %2</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -3655,7 +3659,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation>Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+        <translation type="vanished">Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <source>Split subnet to IPV4 addresses</source>
@@ -3716,6 +3720,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>Enable Zero Configuration Networking</source>
         <translation>Abilita Zero Configuration Networking</translation>
+    </message>
+    <message>
+        <source>Workgroups (enter your network groups separated by comma)</source>
+        <translation>Gruppi di lavoro (inserisci i tuoi gruppi di rete separati da una virgola)</translation>
+    </message>
+    <message>
+        <source>Accept connections only from your workgroups</source>
+        <translation>Accetta solo connessioni dai membri dei tuoi gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
+        <translation>Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
 </context>
 <context>

@@ -168,7 +168,6 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
     return m;
   }
 
-
   QString msg_txt;
   if( sl.size() > 1 )
     msg_txt = sl.join( PROTOCOL_FIELD_SEPARATOR );
@@ -225,6 +224,10 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   data_list << Settings::instance().version( false );
   data_list << Settings::instance().localUser().sessionId();
   data_list << Settings::instance().localUser().color();
+  if( Settings::instance().workgroups().isEmpty() )
+    data_list << QString( "" );
+  else
+    data_list << Settings::instance().workgroups().join( ", " );
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -347,6 +350,36 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
   return true;
 }
 
+QStringList Protocol::workgroupsFromHelloMessage( const Message& hello_message ) const
+{
+  QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
+  if( sl.size() < 10 )
+    return QStringList();
+
+  QString workgroups = sl.at( 9 );
+  if( workgroups.isEmpty() )
+    return QStringList();
+  else
+    return workgroups.split( ", ", QString::SkipEmptyParts );
+}
+
+bool Protocol::acceptConnectionFromWorkgroup( const Message& hello_message ) const
+{
+  if( Settings::instance().workgroups().isEmpty() )
+    return true;
+
+  QStringList workgroups = workgroupsFromHelloMessage( hello_message );
+  if( workgroups.isEmpty() )
+    return Settings::instance().workgroups().isEmpty();
+
+  foreach( QString workgroup, workgroups )
+  {
+    if( Settings::instance().workgroups().contains( workgroup, Qt::CaseInsensitive ) )
+      return true;
+  }
+  return false;
+}
+
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
  /* Read User Field Data */
@@ -406,6 +439,10 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   QString user_color( "#000000" );
   if( !sl.isEmpty() )
     user_color = sl.takeFirst();
+
+  // skip workgroups at 9
+  if( !sl.isEmpty() )
+    sl.takeFirst();
 
   /* Skip other data */
   if( !sl.isEmpty() )

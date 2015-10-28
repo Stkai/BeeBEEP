@@ -122,6 +122,15 @@ bool Core::start()
   startDnsMulticasting();
 #endif
 
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                           tr( "%1 You have selected to join only in these workgroups: %2" )
+                           .arg( Bee::iconToHtml( ":/images/group.png", "*C*" ) ).arg( Settings::instance().workgroups().join( ", " ) ),
+                           DispatchToAllChatsWithUser, ChatMessage::Connection );
+    qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
+  }
+
   if( Settings::instance().fileTransferIsEnabled() )
     startFileTransferServer();
 

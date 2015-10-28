@@ -253,6 +253,18 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     return;
   }
 
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() )
+  {
+    if( !Protocol::instance().acceptConnectionFromWorkgroup( m ) )
+    {
+      qWarning() << "ConnectionSocket drops user of external workgroup from" << peerAddress().toString() << peerPort();
+      emit abortRequest();
+      return;
+    }
+    else
+      qDebug() << "ConnectionSocket accept user of your workgroup from" << peerAddress().toString() << peerPort();
+  }
+
   if( !m_isHelloSent )
     sendAnswerHello();
 

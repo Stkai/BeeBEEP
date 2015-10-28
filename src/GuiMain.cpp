@@ -1546,6 +1546,9 @@ void GuiMain::searchUsers()
 
   if( mp_core->updateBroadcastAddresses() )
     mp_core->sendBroadcastMessage();
+
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
+    qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
 }
 
 void GuiMain::showWritingUser( const User& u )

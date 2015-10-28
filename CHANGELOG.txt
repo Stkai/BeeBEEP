@@ -1,5 +1,9 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 3.0.1
+- Workgroups
+- Accept connections only from workgroups (option)
+
 BeeBEEP 3.0.0
 - Fixed issue with "This app is preventing shutdown" in Windows
 - Removing a group action will delete also the chat with the group members

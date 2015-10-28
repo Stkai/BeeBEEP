@@ -87,6 +87,7 @@ Settings::Settings()
 #endif
   m_preventMultipleConnectionsFromSingleHostAddress = false;
   m_alwaysOpenNewFloatingChat = false;
+  m_acceptConnectionsOnlyFromWorkgroups = true;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -703,6 +704,8 @@ void Settings::load()
   m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", true ).toBool();
   m_addExternalSubnetAutomatically = sets->value( "AddExternalSubnetAutomatically", true ).toBool();
   m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();
+  m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
+  m_workgroups = sets->value( "Workgroups", QStringList() ).toStringList();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -895,6 +898,8 @@ void Settings::save()
   sets->setValue( "ParseBroadcastAddresses", m_parseBroadcastAddresses );
   sets->setValue( "AddExternalSubnetAutomatically", m_addExternalSubnetAutomatically );
   sets->setValue( "UserPathList", m_userPathList );
+  sets->setValue( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups );
+  sets->setValue( "Workgroups", m_workgroups );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
