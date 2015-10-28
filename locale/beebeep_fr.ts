@@ -3840,17 +3840,17 @@ Please select a different name.</source>
         <translation>Vous</translation>
     </message>
     <message>
-        <location filename="../src/GuiUserItem.cpp" line="136"/>
+        <location filename="../src/GuiUserItem.cpp" line="148"/>
         <source>Click to open chat with all local users</source>
         <translation>Cliquer pour ouvrir le chat avec tous les utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/GuiUserItem.cpp" line="140"/>
+        <location filename="../src/GuiUserItem.cpp" line="152"/>
         <source>%1 is %2</source>
         <translation>%1 est %2</translation>
     </message>
     <message>
-        <location filename="../src/GuiUserItem.cpp" line="155"/>
+        <location filename="../src/GuiUserItem.cpp" line="167"/>
         <source>Click to send a private message</source>
         <translation>Cliquer pour envoyer un message privé</translation>
     </message>

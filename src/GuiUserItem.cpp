@@ -96,6 +96,7 @@ bool GuiUserItem::updateUser( const User& u )
     {
       QPixmap user_avatar;
       QSize icon_size = Settings::instance().avatarIconSize();
+      bool paint_status_box = false;
 
       if( u.vCard().photo().isNull() )
       {
@@ -107,7 +108,10 @@ bool GuiUserItem::updateUser( const User& u )
           av.setColor( QColor( Qt::gray ).name() );
         av.setSize( icon_size );
         if( av.create() )
+        {
           user_avatar = av.pixmap();
+          paint_status_box = true;
+        }
         else
           user_avatar = selectUserIcon( user_status, true ).pixmap( icon_size );
       }
@@ -116,13 +120,21 @@ bool GuiUserItem::updateUser( const User& u )
         user_avatar = u.vCard().photo();
         if( !u.isStatusConnected() )
           user_avatar = Bee::convertToGrayScale( user_avatar );
+        else
+          paint_status_box = true;
       }
 
-      QPixmap pix( icon_size );
-      pix.fill( Bee::userStatusColor( u.status() ) );
-      QPainter p( &pix );
-      p.drawPixmap( 1, 1, icon_size.width() - 2, icon_size.height() - 2, user_avatar );
-      setIcon( 0, pix );
+      if( paint_status_box )
+      {
+        QPixmap pix( icon_size );
+        pix.fill( Bee::userStatusColor( u.status() ) );
+        QPainter p( &pix );
+        p.drawPixmap( 1, 1, icon_size.width() - 2, icon_size.height() - 2, user_avatar );
+        setIcon( 0, pix );
+      }
+      else
+        setIcon( 0, user_avatar );
+
     }
     else
       setIcon( 0, selectUserIcon( user_status, false ) );

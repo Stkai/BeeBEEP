@@ -262,7 +262,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
       return;
     }
     else
-      qDebug() << "ConnectionSocket accept user of your workgroup from" << peerAddress().toString() << peerPort();
+      qDebug() << "ConnectionSocket has accepted user of your workgroup from" << peerAddress().toString() << peerPort();
   }
 
   if( !m_isHelloSent )

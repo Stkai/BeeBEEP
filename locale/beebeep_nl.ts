@@ -79,7 +79,7 @@
     <message>
         <location filename="../src/Core.cpp" line="172"/>
         <source>%1 Zero Configuration started with service name: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nul configuratie start altijd met service naam: %2</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="128"/>
@@ -89,17 +89,17 @@
     <message>
         <location filename="../src/Core.cpp" line="187"/>
         <source>%1 Zero Configuration service closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nul configuratie service gesloten.</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="249"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nul configuratie is netwerk voor service: %2 aan het doorbladeren</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="256"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nul configuratie kan niet netwerk voor service: %2 door bladeren</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="274"/>
@@ -310,7 +310,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Upload</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
@@ -1084,12 +1084,12 @@ Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
     <message>
         <location filename="../src/GuiChat.ui" line="288"/>
         <source>Save window&apos;s geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla vensters geometry op</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.ui" line="326"/>
         <source>Detach chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat losmaken</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1295,27 +1295,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="37"/>
         <source>Show the bar of chat</source>
-        <translation type="unfinished">Toon de chatbalk</translation>
+        <translation>Toon de chatbalk</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="44"/>
         <source>Emoticons</source>
-        <translation type="unfinished">Emoticons</translation>
+        <translation>Emoticons</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="56"/>
         <source>Show the emoticon panel</source>
-        <translation type="unfinished">Toon de emoticon-paneel</translation>
+        <translation>Toon de emoticon paneel</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="57"/>
         <source>Add your preferred emoticon to the message</source>
-        <translation type="unfinished">Voeg uw favoriete emoticon toe aan het bericht</translation>
+        <translation>Voeg uw favoriete emoticon toe aan het bericht</translation>
     </message>
     <message>
         <location filename="../src/GuiFloatingChat.cpp" line="214"/>
         <source>Window&apos;s geometry and state saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Venster geometrie en staat opgeslagen</translation>
     </message>
 </context>
 <context>
@@ -1587,7 +1587,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiLog.cpp" line="54"/>
         <source>Log to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Log naar bestand</translation>
     </message>
     <message>
         <location filename="../src/GuiLog.cpp" line="102"/>
@@ -1868,17 +1868,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="723"/>
         <source>Always open a new floating chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Open altijd een nieuw zwevend chatvenster</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="724"/>
         <source>If enabled when you always open chat in a new floating window</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien ingeschakeld open altijd een nieuw zwevend chatvenster</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="877"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Netwerk</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1406"/>
@@ -1968,7 +1968,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="2082"/>
         <source>Show the bar of games</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de bar van spellen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2496"/>
@@ -1989,12 +1989,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="2987"/>
         <source>inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Inactief</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3014"/>
         <source>active</source>
-        <translation type="unfinished"></translation>
+        <translation>actief</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3084"/>
@@ -3426,7 +3426,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="208"/>
         <source>Enable Zero Configuration Networking</source>
-        <translation type="unfinished"></translation>
+        <translation>Nul configuratie netwerken inschakelen</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="218"/>
@@ -4197,17 +4197,17 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
         <translation type="obsolete">Dubbelklik om chat te openen met alle lokale gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/GuiUserItem.cpp" line="136"/>
+        <location filename="../src/GuiUserItem.cpp" line="148"/>
         <source>Click to open chat with all local users</source>
         <translation>Klik om chat te openen met alle lokale gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/GuiUserItem.cpp" line="140"/>
+        <location filename="../src/GuiUserItem.cpp" line="152"/>
         <source>%1 is %2</source>
         <translation>%1 is %2</translation>
     </message>
     <message>
-        <location filename="../src/GuiUserItem.cpp" line="155"/>
+        <location filename="../src/GuiUserItem.cpp" line="167"/>
         <source>Click to send a private message</source>
         <translation>Klik om privé-bericht te verzenden</translation>
     </message>
