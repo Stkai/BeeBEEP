@@ -570,6 +570,14 @@
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Hai selezionato di partecipare solo a questi gruppi di lavoro: %2</translation>
     </message>
+    <message>
+        <source>%1 User %2 cannot save settings in path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 User %2 cannot save chat messages in path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -3176,6 +3184,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show the bar of games</source>
         <translation>Mostra la barra dei giochi</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
