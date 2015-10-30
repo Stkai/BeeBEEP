@@ -26,6 +26,7 @@
 #include "Core.h"
 #include "Broadcaster.h"
 #include "FileShare.h"
+#include "SaveChatList.h"
 #include "Settings.h"
 #include "NetworkManager.h"
 #include "Protocol.h"
@@ -62,6 +63,43 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
+}
+
+bool Core::checkSavingPaths()
+{
+  bool settings_can_be_saved = true;
+  bool chats_can_be_saved = true;
+
+  QSettings* sets = Settings::instance().objectSettings();
+  sets->deleteLater();
+  if( !sets->isWritable() )
+  {
+    qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save settings in path:" << sets->fileName();
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                           tr( "%1 User %2 cannot save settings in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
+                                                                              .arg( Settings::instance().localUser().accountName() )
+                                                                              .arg( Bee::convertToNativeFolderSeparator( sets->fileName() ) ),
+                           DispatchToChat, ChatMessage::Other );
+
+    settings_can_be_saved = false;
+  }
+
+  if( Settings::instance().chatAutoSave() )
+  {
+    if( !SaveChatList::canBeSaved() )
+    {
+      qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save chat messages in path:" << sets->fileName();
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                             tr( "%1 User %2 cannot save chat messages in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
+                                                                                .arg( Settings::instance().localUser().accountName() )
+                                                                                .arg( Settings::instance().savedChatsFilePath() ),
+                             DispatchToChat, ChatMessage::Other );
+
+      chats_can_be_saved = false;
+    }
+  }
+
+  return settings_can_be_saved && chats_can_be_saved;
 }
 
 bool Core::start()
@@ -151,6 +189,8 @@ bool Core::start()
   showUserVCardChanged( Settings::instance().localUser() );
 
   qDebug() << "Local user path:" << Settings::instance().localUser().path();
+
+  checkSavingPaths();
 
   return true;
 }

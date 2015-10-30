@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BeeUtils.h"
 #include "BuildSavedChatList.h"
 #include "Settings.h"
 
@@ -36,7 +35,7 @@ void BuildSavedChatList::buildList()
 {
   QTime elapsed_time;
   elapsed_time.start();
-  QString file_name = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" ) );
+  QString file_name = Settings::instance().savedChatsFilePath();
   QFile file( file_name );
 
   if( !file.open( QIODevice::ReadOnly ) )

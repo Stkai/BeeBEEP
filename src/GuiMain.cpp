@@ -294,12 +294,30 @@ void GuiMain::closeEvent( QCloseEvent* e )
                               QString( "%1<br />%2<br />%3<br />%4<br />%5" ).arg( tr( "<b>Settings can not be saved</b>. Path:" ) )
                                                                      .arg( sets->fileName() )
                                                                      .arg( tr( "<b>is not writable</b> by user:" ) )
-                                                                     .arg( Settings::instance().localUser().accountPath() )
+                                                                     .arg( Settings::instance().localUser().accountName() )
                                                                      .arg( tr( "Do you want to close anyway?" ) ),
                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
       {
         e->ignore();
         return;
+      }
+    }
+
+    if( Settings::instance().chatAutoSave() )
+    {
+      if( !SaveChatList::canBeSaved() )
+      {
+        if( QMessageBox::warning( this, Settings::instance().programName(),
+                              QString( "%1<br />%2<br />%3<br />%4<br />%5" ).arg( tr( "<b>Chat messages can not be saved</b>. Path:" ) )
+                                                                     .arg( Settings::instance().savedChatsFilePath() )
+                                                                     .arg( tr( "<b>is not writable</b> by user:" ) )
+                                                                     .arg( Settings::instance().localUser().accountName() )
+                                                                     .arg( tr( "Do you want to close anyway?" ) ),
+                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+        {
+          e->ignore();
+          return;
+        }
       }
     }
   }

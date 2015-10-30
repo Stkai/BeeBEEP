@@ -1148,6 +1148,11 @@ bool Settings::setDataFolder()
   return true;
 }
 
+QString Settings::savedChatsFilePath() const
+{
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_chatSaveDirectory ).arg( "beebeep.dat" ) );
+}
+
 QString Settings::defaultHostsFilePath( bool use_resource_folder ) const
 {
   QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();

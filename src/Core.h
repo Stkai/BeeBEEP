@@ -56,6 +56,8 @@ public:
   bool updateBroadcastAddresses();
   int fileTransferPort() const;
 
+  bool checkSavingPaths();
+
   /* CoreUser */
   inline int connectedUsers() const;
   bool isUserConnected( VNumber ) const;

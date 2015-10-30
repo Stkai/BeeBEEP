@@ -133,5 +133,6 @@
         <file>images/thumbup.png</file>
         <file>images/add-window.png</file>
         <file>images/save-window.png</file>
+        <file>images/warning.png</file>
     </qresource>
 </RCC>

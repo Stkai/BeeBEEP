@@ -261,6 +261,7 @@ public:
 
   inline const QString& chatSaveDirectory() const;
   inline void setChatSaveDirectory( const QString& );
+  QString savedChatsFilePath() const;
   inline bool chatAutoSave() const;
   inline void setChatAutoSave( bool );
   inline int chatMaxLineSaved() const;

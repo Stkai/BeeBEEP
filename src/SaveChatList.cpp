@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BeeUtils.h"
 #include "ChatManager.h"
 #include "GuiChatMessage.h"
 #include "SaveChatList.h"
@@ -35,9 +34,26 @@ SaveChatList::SaveChatList( QObject* parent )
   setObjectName( "SaveChatList" );
 }
 
+bool SaveChatList::canBeSaved()
+{
+  QFileInfo file_info( Settings::instance().savedChatsFilePath() );
+  if( file_info.exists() )
+    return file_info.isWritable();
+
+  QFile file( Settings::instance().savedChatsFilePath() );
+  if( file.open( QIODevice::WriteOnly ) )
+  {
+    file.close();
+    return true;
+  }
+  else
+    return false;
+}
+
 void SaveChatList::save()
 {
-  QString file_name = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().chatSaveDirectory() ).arg( "beebeep.dat" ) );
+  QString file_name = Settings::instance().savedChatsFilePath();
+
   QFile file( file_name );
   if( !Settings::instance().chatAutoSave() )
   {

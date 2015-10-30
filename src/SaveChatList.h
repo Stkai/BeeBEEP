@@ -34,9 +34,11 @@ class SaveChatList : public QObject
 public:
   explicit SaveChatList( QObject* parent = 0 );
 
+  static bool canBeSaved();
+
 public slots:
   void save();
-  
+
 protected:
   void saveChats( QDataStream* );
 
