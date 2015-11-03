@@ -38,7 +38,7 @@
    # sudo apt-get install libqt5core5a libqt5gui5 libqt5widgets5 libqt5network5 libqt5printsupport5 libqt5multimedia5 libqt5multimedia5-plugins libxcb-screensaver0 libavahi-compat-libdnssd1
    
    [Developer libraries]
-   # sudo apt-get install libxcb-screensaver0-dev qt5-default libqt5multimedia5 libqt5multimedia5-plugins libavahi-compat-libdnssd-dev
+   # sudo apt-get install build-essential libxcb-screensaver0-dev qt5-default qtmultimedia5-dev libqt5multimedia5-plugins libavahi-compat-libdnssd-dev
    * if qt5-default is not available remove it and add these packages: qtbase5-dev qtchooser qt5-qmake qtbase-dev-tools
 
    Fedora 22 (thanks to Marcus Frohn)

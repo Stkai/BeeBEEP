@@ -154,6 +154,9 @@ int main( int argc, char *argv[] )
   /* Init BeeApp */
   bee_app.init();
 
+  if( !QSystemTrayIcon::isSystemTrayAvailable() )
+    qWarning() << "System tray icon is not available in this OS";
+
   /* Init Main Window */
   GuiMain mw;
   QObject::connect( &bee_app, SIGNAL( enteringInIdle() ), &mw, SLOT( setInIdle() ) );

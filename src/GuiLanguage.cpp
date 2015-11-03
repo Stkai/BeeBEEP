@@ -94,16 +94,20 @@ void GuiLanguage::selectLanguage()
 {
   QString folder_selected = mp_lePath->text().simplified();
   QString language_selected = mp_leLanguage->text().trimmed();
-  QString language_file_path = Settings::instance().languageFilePath( folder_selected, language_selected );
 
-  QFileInfo file_info( language_file_path );
-  if( !file_info.exists() )
+  if( !language_selected.isEmpty() )
   {
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "Language '%1'' not found." ).arg( language_file_path ) );
-    return;
+    QString language_file_path = Settings::instance().languageFilePath( folder_selected, language_selected );
+
+    QFileInfo file_info( language_file_path );
+    if( !file_info.exists() )
+    {
+      QMessageBox::warning( this, Settings::instance().programName(), tr( "Language '%1'' not found." ).arg( language_file_path ) );
+      return;
+    }
   }
 
-  if( folder_selected == QApplication::applicationDirPath() )
+  if( folder_selected == QApplication::applicationDirPath() || folder_selected.isEmpty() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "The language folder is the same of application folder. Change it to '.'";
