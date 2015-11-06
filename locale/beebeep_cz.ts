@@ -292,7 +292,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="137"/>
         <source>to</source>
-        <translation>k</translation>
+        <translation>uživateli</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="177"/>
@@ -302,7 +302,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="234"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
-        <translation>%1 Nelze odeslat %2 %3: uživatel je odpojen.</translation>
+        <translation>%1 Nelze odeslat %2 uživateli  %3: uživatel je odpojen.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="208"/>
@@ -317,7 +317,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="136"/>
         <source>Upload</source>
-        <translation>Odeslat</translation>
+        <translation>Odesláno</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="180"/>
@@ -342,7 +342,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="274"/>
         <source>%1 You send %2 to %3.</source>
-        <translation>%1 Odeslal jste  %2  %3.</translation>
+        <translation>%1 Odeslal jste  %2 uživateli  %3.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="297"/>
@@ -387,7 +387,7 @@
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="543"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
-        <translation>%1 Chystáte se odeslat %2 k %3. Kontroluji složku...</translation>
+        <translation>%1 Chystáte se odeslat %2 k uživateli  %3. Kontroluji složku...</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="578"/>
@@ -583,7 +583,7 @@
     <message>
         <location filename="../src/FileTransferPeer.cpp" line="112"/>
         <source>Transfer completed in %1</source>
-        <translation>Přenos dokončen za %1</translation>
+        <translation>Přenos dokončen za  %1</translation>
     </message>
     <message>
         <location filename="../src/FileTransferPeer.cpp" line="170"/>
@@ -1355,7 +1355,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Vybrat složku s jazykem</translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.cpp" line="102"/>
+        <location filename="../src/GuiLanguage.cpp" line="105"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Jazyk &apos;%1&apos;&apos; nebyl nalezen.</translation>
     </message>
@@ -2399,7 +2399,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="1233"/>
         <source>When do you want %1 to play beep?</source>
-        <translation>Pokud chceš %1, přehrát pípnutí?</translation>
+        <translation>Kdy chcete, aby %1 přehrál zvuk?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1235"/>
@@ -2624,7 +2624,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="2391"/>
         <source>The default BEEP will be used</source>
-        <translation>Bude použit výchozí pípnutí</translation>
+        <translation>Bude použito výchozí pípnutí</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2437"/>
@@ -2659,7 +2659,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="2512"/>
         <source>Now %1 will start on windows boot.</source>
-        <translation>Nyní %1 začne při startu Windows.</translation>
+        <translation>Nyní se %1 spustí při startu Windows.</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2514"/>

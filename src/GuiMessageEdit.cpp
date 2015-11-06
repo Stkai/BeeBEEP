@@ -266,3 +266,23 @@ void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
   custom_context_menu.exec( event->globalPos() );
 }
 
+bool GuiMessageEdit::canInsertFromMimeData( const QMimeData* source ) const
+{
+  return source->hasImage() || source->hasUrls() || QTextEdit::canInsertFromMimeData( source );
+}
+
+void GuiMessageEdit::insertFromMimeData( const QMimeData* source )
+{
+  if( source->hasImage() )
+  {
+    emit imageToCheck( source );
+  }
+  else if( source->hasUrls() )
+  {
+    emit urlsToCheck( source );
+  }
+  else
+  {
+    QTextEdit::insertFromMimeData( source );
+  }
+}

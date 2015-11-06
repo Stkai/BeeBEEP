@@ -181,7 +181,7 @@ void GuiScreenShot::doSave()
 void GuiScreenShot::doSend()
 {
   QString screenshot_format = "png";
-  QString screenshot_initial_path = Settings::instance().lastDirectorySelected() +
+  QString screenshot_initial_path = Settings::instance().dataFolder() +
                                     tr( "/beesshottmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
                                     + screenshot_format;
   QString file_path = Bee::uniqueFilePath( screenshot_initial_path );

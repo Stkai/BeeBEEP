@@ -83,6 +83,8 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
   connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
+  connect( mp_teMessage, SIGNAL( urlsToCheck( const QMimeData* ) ), this, SLOT( checkAndSendUrls( const QMimeData* ) ) );
+  connect( mp_teMessage, SIGNAL( imageToCheck( const QMimeData* ) ), this, SLOT( checkAndSendImage( const QMimeData* ) ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
   connect( mp_pbDetach, SIGNAL( clicked() ), this, SLOT( detachThisChat() ) );
   connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
@@ -668,59 +670,89 @@ void GuiChat::dragEnterEvent( QDragEnterEvent *event )
     event->acceptProposedAction();
 }
 
-void GuiChat::dropEvent( QDropEvent *event )
+void GuiChat::checkAndSendImage( const QMimeData* source )
 {
-  if( event->mimeData()->hasUrls() )
+  if( !source->hasImage() )
+    return;
+
+  QString image_format = "png";
+  QString image_initial_path = Settings::instance().dataFolder() +
+                                    tr( "/beeimgtmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
+                                    + image_format;
+  QString file_path = Bee::uniqueFilePath( image_initial_path );
+  qDebug() << "Sending the dropped image as a file:" << file_path;
+
+  QImage image = qvariant_cast<QImage>( source->imageData() );
+
+  if( !image.save( file_path, image_format.toLatin1() ) )
   {
-    int num_files = 0;
-    foreach( QUrl url, event->mimeData()->urls() )
-    {
+    QMessageBox::warning( this, Settings::instance().programName(),
+      tr( "Unable to save temporary file: %1" ).arg( file_path ) );
+    return;
+  }
+
+  Settings::instance().addTemporaryFilePath( file_path );
+
+  emit sendFileFromChatRequest( m_chatId, file_path );
+}
+
+
+void GuiChat::checkAndSendUrls( const QMimeData* source )
+{
+  if( !source->hasUrls() )
+    return;
+
+  QStringList file_path_list;
+  QString file_path;
+  int num_files = 0;
+
+  foreach( QUrl url, source->urls() )
+  {
 #if QT_VERSION >= 0x040800
-      if( url.isLocalFile() )
+    if( url.isLocalFile() )
 #else
-      if( url.scheme() == QLatin1String( "file" ) )
+    if( url.scheme() == QLatin1String( "file" ) )
 #endif
-      {
-        num_files += Protocol::instance().countFilesCanBeSharedInPath( url.toLocalFile() );
-        if( num_files > Settings::instance().maxQueuedDownloads() )
-          break;
-      }
-    }
-
-    num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
-
-    if( QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "Do you really want to send %1 %2 to the members of this chat?" ).arg( num_files )
-                               .arg( num_files == 1 ? tr( "file" ) : tr( "files" ) ),
-                               tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
     {
+      file_path = url.toLocalFile();
+      num_files += Protocol::instance().countFilesCanBeSharedInPath( file_path );
+      if( num_files > Settings::instance().maxQueuedDownloads() )
+        break;
+      file_path_list.append( file_path );
+    }
+  }
+
+  num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
+
+  if( QMessageBox::question( this, Settings::instance().programName(),
+                             tr( "Do you really want to send %1 %2 to the members of this chat?" ).arg( num_files )
+                             .arg( num_files == 1 ? tr( "file" ) : tr( "files" ) ),
+                             tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
+  {
+    return;
+  }
+
+  foreach( QString local_file, file_path_list )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Drag and drop: send file" << local_file << "to chat" << m_chatId;
+#endif
+    if( !QFile::exists( local_file ) )
+    {
+      QMessageBox::information( this, Settings::instance().programName(),
+                                tr( "Qt library for this OS doesn't support Drag and Drop for files. You have to select again the file to send." ) );
+      qWarning() << "Drag and drop has invalid file path" << local_file;
       return;
     }
 
-    foreach( QUrl url, event->mimeData()->urls() )
-    {
-#if QT_VERSION >= 0x040800
-      if( url.isLocalFile() )
-#else
-      if( url.scheme() == QLatin1String( "file" ) )
-#endif
-      {
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Drag and drop: send file" << url.toLocalFile() << "to chat" << m_chatId;
-#endif
-
-        if( !QFile::exists( url.toLocalFile() ) )
-        {
-          QMessageBox::information( this, Settings::instance().programName(),
-                                    tr( "Qt library for this OS doesn't support Drag and Drop for files. You have to select again the file to send." ) );
-          qWarning() << "Drag and drop has invalid file path" << url.toLocalFile();
-          return;
-        }
-
-        emit sendFileFromChatRequest( m_chatId, url.toLocalFile() );
-      }
-    }
+    emit sendFileFromChatRequest( m_chatId, local_file );
   }
+}
+
+void GuiChat::dropEvent( QDropEvent *event )
+{
+  if( event->mimeData()->hasUrls() )
+    checkAndSendUrls( event->mimeData() );
 }
 
 void GuiChat::showUserVCard()

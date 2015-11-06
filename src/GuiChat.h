@@ -110,6 +110,8 @@ private slots:
   void showGroupWizard();
   void detachThisChat();
   void editChatMembers();
+  void checkAndSendUrls( const QMimeData* );
+  void checkAndSendImage( const QMimeData* );
 
 private:
   VNumber m_chatId;
@@ -118,7 +120,7 @@ private:
   VNumber m_lastMessageUserId;
   bool m_isFloating;
 
-  QMenu *mp_menuChat;
+  QMenu* mp_menuChat;
   QAction* mp_actSendFile;
   QAction* mp_actGroupAdd;
   QAction* mp_actClear;
@@ -128,10 +130,11 @@ private:
   QAction* mp_actSelectBackgroundColor;
   QAction* mp_actGroupWizard;
 
-  QMenu *mp_menuMembers;
+  QMenu* mp_menuMembers;
   QSplitter* mp_splitter;
 
   QPalette m_defaultChatPalette;
+
 };
 
 

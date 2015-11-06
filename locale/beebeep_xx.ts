@@ -1342,7 +1342,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.cpp" line="102"/>
+        <location filename="../src/GuiLanguage.cpp" line="105"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1429,7 +1429,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Selecteer de map met taalbestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.cpp" line="102"/>
+        <location filename="../src/GuiLanguage.cpp" line="105"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Taal &apos;%1&apos; niet gevonden.</translation>
     </message>

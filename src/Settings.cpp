@@ -987,6 +987,8 @@ void Settings::clearTemporaryFile()
     {
       if( !QFile::remove( file_path ) )
         qWarning() << "Unable to remove temporary file:" << file_path;
+      else
+        qDebug() << "Temporary file removed:" << file_path;
     }
   }
 

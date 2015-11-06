@@ -44,6 +44,8 @@ signals:
   void returnPressed();
   void writing();
   void tabPressed();
+  void urlsToCheck( const QMimeData* );
+  void imageToCheck( const QMimeData* );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -55,6 +57,8 @@ protected:
   inline int historySize() const;
   void setMessageFromHistory();
   void createMessageToSend();
+  bool canInsertFromMimeData( const QMimeData* ) const;
+  void insertFromMimeData( const QMimeData* );
 
 private slots:
   void checkWriting();
@@ -70,7 +74,5 @@ private:
   bool m_messageChanged;
 
 };
-
-
 
 #endif // BEEBEEP_GUIMESSAGEEDIT_H

@@ -1421,7 +1421,7 @@ Please select a different name.</source>
         <translation>Выберите папку языка</translation>
     </message>
     <message>
-        <location filename="../src/GuiLanguage.cpp" line="102"/>
+        <location filename="../src/GuiLanguage.cpp" line="105"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Язык &apos;%1&apos;&apos; не найден.</translation>
     </message>
