@@ -31,6 +31,7 @@
 #include "ChatMessageData.h"
 #include "User.h"
 #include "UserRecord.h"
+#include "UserStatusRecord.h"
 
 
 class Protocol
@@ -98,6 +99,8 @@ public:
   User loadUser( const QString& );
   QString saveUserRecord( const UserRecord& ) const;
   UserRecord loadUserRecord( const QString& ) const;
+  QString saveUserStatusRecord( const UserStatusRecord& ) const;
+  UserStatusRecord loadUserStatusRecord( const QString& ) const;
 
   inline VNumber currentId() const;
   inline VNumber newId();

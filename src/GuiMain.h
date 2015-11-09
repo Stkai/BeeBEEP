@@ -153,6 +153,8 @@ private slots:
   void detachChat( VNumber );
   void attachChat( VNumber );
   void readAllMessagesInChat( VNumber );
+  void recentlyUsedUserStatusSelected();
+  void setUserStatusSelected( int );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -202,6 +204,7 @@ private:
   GuiFloatingChat* floatingChat( VNumber ) const;
   QWidget* activeChatWindow();
   void setChatMessagesToShowInAction( QAction* );
+  void loadUserStatusRecentlyUsed();
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -230,6 +233,7 @@ private:
   QMenu *mp_menuView;
   QMenu *mp_menuTrayIcon;
   QMenu *mp_menuUserList;
+  QMenu *mp_menuUserStatusList;
 
   QToolBar *mp_barMain;
   QToolBar *mp_barChat;

@@ -591,6 +591,11 @@ void Settings::load()
     m_userList = simpleDecrypt( user_list ).split( QString( "\n" ) );
   else
     m_userList = QStringList();
+  QString user_status_list = sets->value( "StatusList", "" ).toString();
+  if( !user_status_list.isEmpty() )
+    m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
+  else
+    m_userStatusList = QStringList();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -611,7 +616,7 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Gui" );
-  m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", false ).toBool();
+  m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
   if( m_resetGeometryAtStartup )
   {
     m_guiGeometry = "";
@@ -814,6 +819,16 @@ void Settings::save()
     QString user_list_to_save = simpleEncrypt( m_userList.join( QString( "\n" ) ) );
     sets->setValue( "List", user_list_to_save );
   }
+  else
+    sets->remove( "List" );
+
+  if( !m_userStatusList.isEmpty() )
+  {
+    QString user_status_list_to_save = simpleEncrypt( m_userStatusList.join( QString( "\n" ) ) );
+    sets->setValue( "StatusList", user_status_list_to_save );
+  }
+  else
+    sets->remove( "StatusList" );
 
   sets->endGroup();
 

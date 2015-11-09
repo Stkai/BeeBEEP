@@ -110,6 +110,7 @@ HEADERS += AudioManager.h \
   UserList.h \
   UserManager.h \
   UserRecord.h \
+  UserStatusRecord.h \
   VCard.h \
   Version.h \
   Job.h
@@ -201,6 +202,7 @@ SOURCES += AudioManager.cpp \
   UserList.cpp \
   UserManager.cpp \
   UserRecord.cpp \
+  UserStatusRecord.cpp \
   VCard.cpp
 
 

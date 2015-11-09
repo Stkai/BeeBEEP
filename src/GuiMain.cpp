@@ -53,6 +53,7 @@
 #include "GuiVCard.h"
 #include "GuiWizard.h"
 #include "PluginManager.h"
+#include "Protocol.h"
 #include "SaveChatList.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -820,6 +821,12 @@ void GuiMain::createMenus()
   }
 
   mp_menuStatus->addSeparator();
+
+  mp_menuUserStatusList = new QMenu( tr( "Recently used" ), this );
+  act = mp_menuStatus->addMenu( mp_menuUserStatusList );
+  act->setIcon( QIcon( ":/images/recent.png" ) );
+  loadUserStatusRecentlyUsed();
+
   act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Add a status description..." ), this, SLOT( changeStatusDescription() ) );
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( User::Offline ) ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
@@ -1579,14 +1586,8 @@ void GuiMain::showWritingUser( const User& u )
     fl_chat->showUserWriting( u.id(), msg );
 }
 
-void GuiMain::statusSelected()
+void GuiMain::setUserStatusSelected( int user_status )
 {
-  QAction* act = qobject_cast<QAction*>( sender() );
-  if( !act )
-    return;
-
-  int user_status = act->data().toInt();
-
   if( user_status == User::Offline && mp_core->isConnected() )
   {
     if( QMessageBox::question( this, Settings::instance().programName(),
@@ -1602,6 +1603,16 @@ void GuiMain::statusSelected()
     startCore();
   else
     updateStatusIcon();
+}
+
+void GuiMain::statusSelected()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+
+  int user_status = act->data().toInt();
+  setUserStatusSelected( user_status );
 }
 
 void GuiMain::updateStatusIcon()
@@ -1926,7 +1937,7 @@ void GuiMain::selectDownloadDirectory()
                                                                        tr( "%1 - Select the download folder" )
                                                                        .arg( Settings::instance().programName() ),
                                                                        Settings::instance().downloadDirectory() );
-  if( download_directory_path.isNull() )
+  if( download_directory_path.isEmpty() )
     return;
 
   Settings::instance().setDownloadDirectory( download_directory_path );
@@ -3270,5 +3281,54 @@ GuiChat* GuiMain::guiChat( VNumber chat_id )
     return fl_chat->guiChat();
   else
     return 0;
+}
 
+void GuiMain::loadUserStatusRecentlyUsed()
+{
+  if( !mp_menuUserStatusList->isEmpty() )
+    mp_menuUserStatusList->clear();
+
+  QList<UserStatusRecord> user_status_list;
+  foreach( QString s, Settings::instance().userStatusList() )
+  {
+    UserStatusRecord usr = Protocol::instance().loadUserStatusRecord( s );
+    if( usr.isValid() )
+      user_status_list.append( usr );
+  }
+
+  UserStatusRecord usr1;
+  usr1.setStatus( User::Away );
+  usr1.setStatusDescription( tr( "At lunch" ) );
+  user_status_list.append( usr1 );
+
+  UserStatusRecord usr2;
+  usr2.setStatus( User::Busy );
+  usr2.setStatusDescription( tr( "In a meeting" ) );
+  user_status_list.append( usr2 );
+
+  qSort( user_status_list );
+
+  QAction* act;
+  foreach( UserStatusRecord usr, user_status_list )
+  {
+    if( usr.isValid() )
+    {
+      act = mp_menuUserStatusList->addAction( Bee::userStatusIcon( usr.status() ), usr.statusDescription(), this, SLOT( recentlyUsedUserStatusSelected() ) );
+      act->setData( Protocol::instance().saveUserStatusRecord( usr ) );
+    }
+  }
+}
+
+void GuiMain::recentlyUsedUserStatusSelected()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+
+  UserStatusRecord usr = Protocol::instance().loadUserStatusRecord( act->data().toString() );
+  if( usr.isValid() )
+  {
+    mp_core->setLocalUserStatusDescription( usr.statusDescription() );
+    setUserStatusSelected( usr.status() );
+  }
 }

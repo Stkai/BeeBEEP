@@ -26,6 +26,7 @@
 
 #include "Config.h"
 #include "User.h"
+#include "UserStatusRecord.h"
 
 
 class Settings
@@ -293,6 +294,8 @@ public:
 
   inline void setUserPathList( const QStringList& );
   inline const QStringList& userPathList() const;
+  inline void setUserStatusList( const QStringList& );
+  inline const QStringList& userStatusList() const;
 
   inline void setSaveUserList( bool );
   inline bool saveUserList() const;
@@ -483,6 +486,7 @@ private:
   QStringList m_groupList;
   QStringList m_userPathList;
   QStringList m_groupSilenced;
+  QStringList m_userStatusList;
 
   bool m_saveUserList;
   QStringList m_userList;
@@ -655,6 +659,8 @@ inline const QStringList& Settings::groupList() const { return m_groupList; }
 inline const QDateTime& Settings::lastSave() const { return m_lastSave; }
 inline void Settings::setUserPathList( const QStringList& new_value ) { m_userPathList = new_value; }
 inline const QStringList& Settings::userPathList() const { return m_userPathList; }
+inline void Settings::setUserStatusList( const QStringList& new_value ) { m_userStatusList = new_value; }
+inline const QStringList& Settings::userStatusList() const { return m_userStatusList; }
 inline void Settings::setSaveUserList( bool new_value ) { m_saveUserList = new_value; }
 inline bool Settings::saveUserList() const { return m_saveUserList; }
 inline void Settings::setUserList( const QStringList& new_value ) { m_userList = new_value; }

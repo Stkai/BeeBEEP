@@ -594,6 +594,42 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   return ur;
 }
 
+QString Protocol::saveUserStatusRecord( const UserStatusRecord& usr ) const
+{
+  QStringList sl;
+  sl << QString::number( usr.status() );
+  sl << usr.statusDescription();
+  return sl.join( DATA_FIELD_SEPARATOR );
+}
+
+UserStatusRecord Protocol::loadUserStatusRecord( const QString& s ) const
+{
+  QStringList sl = s.split( DATA_FIELD_SEPARATOR );
+  if( sl.size() < 2 )
+  {
+    qWarning() << "Invalid user status record found in data:" << s << "(size error)";
+    return UserStatusRecord();
+  }
+
+  bool ok = false;
+  int user_status = 0;
+  QString user_status_desc = "";
+
+  user_status = sl.takeFirst().toInt( &ok );
+  if( !ok || user_status < 0 || user_status >= User::NumStatus )
+  {
+    qWarning() << "Invalid user status record found in data:" << s << "(status error)";
+    return UserStatusRecord();
+  }
+
+  user_status_desc = sl.takeFirst();
+
+  UserStatusRecord usr;
+  usr.setStatus( user_status );
+  usr.setStatusDescription( user_status_desc );
+  return usr;
+}
+
 Chat Protocol::createChat( const QList<VNumber>& user_list )
 {
   Chat c;
