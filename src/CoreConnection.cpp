@@ -272,6 +272,7 @@ void Core::checkUserAuthentication( const Message& m )
   {
     if( user_found.isLocal() )
     {
+      qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is recognized to be Local";
       closeConnection( c );
       return;
     }

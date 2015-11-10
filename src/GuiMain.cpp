@@ -827,7 +827,8 @@ void GuiMain::createMenus()
   act->setIcon( QIcon( ":/images/recent.png" ) );
   loadUserStatusRecentlyUsed();
 
-  act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Add a status description..." ), this, SLOT( changeStatusDescription() ) );
+  act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Change your status description..." ), this, SLOT( changeStatusDescription() ) );
+  act = mp_menuStatus->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all status descriptions" ), this, SLOT( clearRecentlyUsedUserStatus() ) );
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( User::Offline ) ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
   act->setData( User::Offline );
@@ -1638,7 +1639,9 @@ void GuiMain::changeStatusDescription()
                            tr( "Please insert the new status description" ), QLineEdit::Normal, Settings::instance().localUser().statusDescription(), &ok );
   if( !ok || status_description.isNull() )
     return;
-  mp_core->setLocalUserStatusDescription( status_description );
+  mp_core->setLocalUserStatusDescription( Settings::instance().localUser().status(), status_description, true );
+  loadUserStatusRecentlyUsed();
+  updateStatusIcon();
 }
 
 void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
@@ -3296,15 +3299,23 @@ void GuiMain::loadUserStatusRecentlyUsed()
       user_status_list.append( usr );
   }
 
-  UserStatusRecord usr1;
-  usr1.setStatus( User::Away );
-  usr1.setStatusDescription( tr( "At lunch" ) );
-  user_status_list.append( usr1 );
+  if( user_status_list.size() < Settings::instance().maxUserStatusInList() )
+  {
+    UserStatusRecord usr1;
+    usr1.setStatus( User::Away );
+    usr1.setStatusDescription( tr( "at lunch" ) );
+    if( !user_status_list.contains( usr1 ) )
+      user_status_list.append( usr1 );
+  }
 
-  UserStatusRecord usr2;
-  usr2.setStatus( User::Busy );
-  usr2.setStatusDescription( tr( "In a meeting" ) );
-  user_status_list.append( usr2 );
+  if( user_status_list.size() < Settings::instance().maxUserStatusInList() )
+  {
+    UserStatusRecord usr2;
+    usr2.setStatus( User::Busy );
+    usr2.setStatusDescription( tr( "in a meeting" ) );
+    if( !user_status_list.contains( usr2 ) )
+      user_status_list.append( usr2 );
+  }
 
   qSort( user_status_list );
 
@@ -3328,7 +3339,22 @@ void GuiMain::recentlyUsedUserStatusSelected()
   UserStatusRecord usr = Protocol::instance().loadUserStatusRecord( act->data().toString() );
   if( usr.isValid() )
   {
-    mp_core->setLocalUserStatusDescription( usr.statusDescription() );
+    mp_core->setLocalUserStatusDescription( usr.status(), usr.statusDescription(), false );
     setUserStatusSelected( usr.status() );
+    loadUserStatusRecentlyUsed();
   }
+}
+
+void GuiMain::clearRecentlyUsedUserStatus()
+{
+  if( QMessageBox::question( this, Settings::instance().programName(),
+                             tr( "Do you really want to clear all saved status descriptions?" ),
+                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+    return;
+
+  qDebug() << "User status description list is cleared";
+  QStringList sl = Settings::instance().userStatusList();
+  sl.clear();
+  Settings::instance().setUserStatusList( sl );
+  loadUserStatusRecentlyUsed();
 }

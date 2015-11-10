@@ -75,6 +75,7 @@ AutoAwayStatus=[true/false] set your status away when pc is in idle
 UserAwayTimeout= how many minutes your pc must be in idle to set your status in away
 UseDefaultPassword=[true/false] use default BeeBEEP password
 AskPasswordAtStartup=[true/false] show password dialog at connection to BeeBEEP network
+MaxStatusInList=(10) maximum number of status used recently
 
 [VCard]
 NickName= your nickname

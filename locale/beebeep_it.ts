@@ -572,11 +572,11 @@
     </message>
     <message>
         <source>%1 User %2 cannot save settings in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 L&apos;utente %2 non può salvare le preferenze nell&apos;indirizzo: %3</translation>
     </message>
     <message>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 L&apos;utente %2 non può salvare i messaggi all&apos;indirizzo: %3</translation>
     </message>
 </context>
 <context>
@@ -1067,6 +1067,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Edit group</source>
         <translation>Modifica gruppo</translation>
+    </message>
+    <message>
+        <source>Unable to save temporary file: %1</source>
+        <translation>Impossibile salvare il file temporaneo: %1</translation>
     </message>
 </context>
 <context>
@@ -1862,7 +1866,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Add a status description...</source>
-        <translation>Aggiungi una descrizione al tuo stato...</translation>
+        <translation type="vanished">Aggiungi una descrizione al tuo stato...</translation>
     </message>
     <message>
         <source>&amp;?</source>
@@ -3187,7 +3191,31 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;I messaggi non possono essere salvati&lt;/b&gt;. Indirizzo:</translation>
+    </message>
+    <message>
+        <source>Recently used</source>
+        <translation>Usati di recente</translation>
+    </message>
+    <message>
+        <source>Change your status description...</source>
+        <translation>Cambia la descrizione del tuo stato...</translation>
+    </message>
+    <message>
+        <source>Clear all status descriptions</source>
+        <translation>Cancella tutte le descrizioni di stato</translation>
+    </message>
+    <message>
+        <source>at lunch</source>
+        <translation>a pranzo</translation>
+    </message>
+    <message>
+        <source>in a meeting</source>
+        <translation>in riunione</translation>
+    </message>
+    <message>
+        <source>Do you really want to clear all saved status descriptions?</source>
+        <translation>Vuoi realmente cancellare tutte le descrizioni di stato salvate?</translation>
     </message>
 </context>
 <context>

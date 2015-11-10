@@ -43,16 +43,35 @@ void Core::setLocalUserStatus( int new_status )
     sendLocalUserStatus();
 }
 
-void Core::setLocalUserStatusDescription( const QString& new_status_description )
+void Core::setLocalUserStatusDescription( int user_status, const QString& new_status_description, bool show_status )
 {
-  if( Settings::instance().localUser().statusDescription() == new_status_description )
-    return;
   User u = Settings::instance().localUser();
+  if( u.statusDescription() == new_status_description )
+    return;
+
   u.setStatusDescription( new_status_description );
   Settings::instance().setLocalUser( u );
-  showUserStatusChanged( u );
-  if( isConnected() )
-    sendLocalUserStatus();
+
+  if( !new_status_description.isEmpty() )
+  {
+    UserStatusRecord usr;
+    usr.setStatus( user_status );
+    usr.setStatusDescription( u.statusDescription() );
+    QString s_status = Protocol::instance().saveUserStatusRecord( usr );
+    QStringList sl_status = Settings::instance().userStatusList();
+    sl_status.removeOne( s_status );
+    if( sl_status.size() >= Settings::instance().maxUserStatusInList() )
+      sl_status.removeLast();
+    sl_status.prepend( s_status );
+    Settings::instance().setUserStatusList( sl_status );
+  }
+
+  if( show_status )
+  {
+    showUserStatusChanged( u );
+    if( isConnected() )
+      sendLocalUserStatus();
+  }
 }
 
 void Core::showUserStatusChanged( const User& u )
@@ -68,7 +87,7 @@ void Core::showUserStatusChanged( const User& u )
   else
     sHtmlMsg += tr( "%1 is" ).arg( u.name() );
 
-  sHtmlMsg += QString( " %1%2." ).arg( Bee::userStatusToString( u.status() ) )
+  sHtmlMsg += QString( " %1%2" ).arg( Bee::userStatusToString( u.status() ) )
                             .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );

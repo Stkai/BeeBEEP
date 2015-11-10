@@ -63,7 +63,7 @@ public:
   bool isUserConnected( VNumber ) const;
   bool areUsersConnected( const QList<VNumber>& ) const;
   void setLocalUserStatus( int );
-  void setLocalUserStatusDescription( const QString& );
+  void setLocalUserStatusDescription( int, const QString&, bool );
   bool setLocalUserVCard( const QString&, const VCard& );
   bool createGroup( const QString&, const QList<VNumber>&, const QString& group_private_id = "" );
   bool createGroupFromChat( VNumber );

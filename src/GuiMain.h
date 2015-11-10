@@ -154,7 +154,7 @@ private slots:
   void attachChat( VNumber );
   void readAllMessagesInChat( VNumber );
   void recentlyUsedUserStatusSelected();
-  void setUserStatusSelected( int );
+  void clearRecentlyUsedUserStatus();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -205,6 +205,7 @@ private:
   QWidget* activeChatWindow();
   void setChatMessagesToShowInAction( QAction* );
   void loadUserStatusRecentlyUsed();
+  void setUserStatusSelected( int );
 
 private:
   QStackedWidget* mp_stackedWidget;

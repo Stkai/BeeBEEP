@@ -677,7 +677,7 @@ void GuiChat::checkAndSendImage( const QMimeData* source )
 
   QString image_format = "png";
   QString image_initial_path = Settings::instance().dataFolder() +
-                                    tr( "/beeimgtmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
+                                    QString( "/beeimgtmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
                                     + image_format;
   QString file_path = Bee::uniqueFilePath( image_initial_path );
   qDebug() << "Sending the dropped image as a file:" << file_path;

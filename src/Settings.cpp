@@ -88,6 +88,7 @@ Settings::Settings()
   m_preventMultipleConnectionsFromSingleHostAddress = false;
   m_alwaysOpenNewFloatingChat = false;
   m_acceptConnectionsOnlyFromWorkgroups = true;
+  m_maxUserStatusInList = 10;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -596,6 +597,7 @@ void Settings::load()
     m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
   else
     m_userStatusList = QStringList();
+  m_maxUserStatusInList = sets->value( "MaxStatusInList", m_maxUserStatusInList ).toInt();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -830,6 +832,7 @@ void Settings::save()
   else
     sets->remove( "StatusList" );
 
+  sets->setValue( "MaxStatusInList", m_maxUserStatusInList );
   sets->endGroup();
 
   sets->beginGroup( "VCard" );

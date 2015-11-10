@@ -26,7 +26,6 @@
 
 #include "Config.h"
 #include "User.h"
-#include "UserStatusRecord.h"
 
 
 class Settings
@@ -296,6 +295,7 @@ public:
   inline const QStringList& userPathList() const;
   inline void setUserStatusList( const QStringList& );
   inline const QStringList& userStatusList() const;
+  inline int maxUserStatusInList() const;
 
   inline void setSaveUserList( bool );
   inline bool saveUserList() const;
@@ -487,6 +487,7 @@ private:
   QStringList m_userPathList;
   QStringList m_groupSilenced;
   QStringList m_userStatusList;
+  int m_maxUserStatusInList;
 
   bool m_saveUserList;
   QStringList m_userList;
@@ -707,5 +708,6 @@ inline void Settings::setAcceptConnectionsOnlyFromWorkgroups( bool new_value ) {
 inline bool Settings::acceptConnectionsOnlyFromWorkgroups() const { return m_acceptConnectionsOnlyFromWorkgroups; }
 inline void Settings::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
 inline const QStringList& Settings::workgroups() const { return m_workgroups; }
+inline int Settings::maxUserStatusInList() const { return m_maxUserStatusInList; }
 
 #endif // BEEBEEP_SETTINGS_H
