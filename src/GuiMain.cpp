@@ -2029,6 +2029,7 @@ void GuiMain::showChat( VNumber chat_id )
   {
     raiseChatView();
     mp_userList->setUnreadMessages( chat_id, 0 );
+    mp_userList->setChatOpened( chat_id );
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
   }

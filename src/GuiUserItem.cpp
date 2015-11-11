@@ -200,11 +200,16 @@ void GuiUserItem::setChatOpened( bool chat_is_opened )
 
 void GuiUserItem::showUserStatus()
 {
+  int user_status = data( 0, Status ).toInt();
   if( userId() == ID_LOCAL_USER )
     setBackground( 0, Bee::defaultBackgroundBrush() );
   else if( Settings::instance().showUserStatusBackgroundColor() )
-    setBackground( 0, Bee::userStatusBackgroundBrush( data( 0, Status ).toInt() ) );
+    setBackground( 0, Bee::userStatusBackgroundBrush( user_status  ) );
   else
     setBackground( 0, Bee::defaultBackgroundBrush() );
-  setTextColor( 0, Bee::defaultTextBrush().color() );
+
+  if( user_status == User::Offline )
+    setTextColor( 0, Bee::userStatusColor( user_status ) );
+  else
+    setTextColor( 0, Bee::defaultTextBrush().color() );
 }

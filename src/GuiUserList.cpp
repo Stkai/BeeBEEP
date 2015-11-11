@@ -171,11 +171,14 @@ void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
   }
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
-  if( !c.isValid() )
+  if( c.isValid() )
+  {
+    item->setChatId( c.id() );
+    item->setUnreadMessages( c.unreadMessages() );
+  }
+  else
     qWarning() << "Invalid chat id found in GuiUserList";
 
-  item->setChatId( c.id() );
-  item->setUnreadMessages( c.unreadMessages() );
   item->updateUser( u );
 
   if( sort_and_check_opened )
