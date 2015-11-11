@@ -55,6 +55,7 @@ public:
 
 private:
   QIcon selectUserIcon( int, bool ) const;
+  QPixmap avatarWithStatusBox( const QPixmap&, int ) const;
   void showUserStatus();
 
 };

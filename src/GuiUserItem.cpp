@@ -128,10 +128,7 @@ bool GuiUserItem::updateUser( const User& u )
 
       if( paint_status_box && !Settings::instance().showUserStatusBackgroundColor() )
       {
-        QPixmap pix( icon_size );
-        pix.fill( Bee::userStatusColor( u.status() ) );
-        QPainter p( &pix );
-        p.drawPixmap( 1, 1, icon_size.width() - 2, icon_size.height() - 2, user_avatar );
+        QPixmap pix = avatarWithStatusBox( user_avatar, u.status() );
         setIcon( 0, pix );
       }
       else
@@ -201,7 +198,10 @@ void GuiUserItem::setChatOpened( bool chat_is_opened )
 void GuiUserItem::showUserStatus()
 {
   int user_status = data( 0, Status ).toInt();
+
   if( userId() == ID_LOCAL_USER )
+    setBackground( 0, Bee::defaultBackgroundBrush() );
+  else if( !Settings::instance().showUserPhoto() )
     setBackground( 0, Bee::defaultBackgroundBrush() );
   else if( Settings::instance().showUserStatusBackgroundColor() )
     setBackground( 0, Bee::userStatusBackgroundBrush( user_status  ) );
@@ -212,4 +212,34 @@ void GuiUserItem::showUserStatus()
     setTextColor( 0, Bee::userStatusColor( user_status ) );
   else
     setTextColor( 0, Bee::defaultTextBrush().color() );
+}
+
+static int GetBoxSize( int pix_size )
+{
+  int box_size = pix_size >= 10 ? pix_size / 10 : 1;
+  if( box_size % 2 )
+    box_size--;
+  box_size = qMax( 2, box_size );
+  return box_size;
+}
+
+QPixmap GuiUserItem::avatarWithStatusBox( const QPixmap& user_avatar, int user_status ) const
+{
+  int pix_height = user_avatar.height();
+  int pix_width = user_avatar.width();
+  QPixmap pix( pix_width, pix_height );
+  pix.fill( Bee::userStatusColor( user_status ) );
+
+  int box_height = GetBoxSize( pix_height );
+  int box_width = GetBoxSize( pix_width );
+  int box_start_height = qMax( 1, box_height / 2 );
+  int box_start_width = qMax( 1, box_width / 2 );
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Avatar size:" << pix_width << "x" << pix_height << "-> Box size:" << box_width << "x" << box_height << ":" << box_start_width << box_start_height;
+#endif
+
+  QPainter p( &pix );
+  p.drawPixmap( box_start_width, box_start_height, pix_width - box_width, pix_height - box_height, user_avatar );
+  return pix;
 }

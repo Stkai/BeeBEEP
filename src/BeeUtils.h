@@ -33,6 +33,8 @@ namespace Bee
 
   inline QIcon userStatusIcon( int );
   QColor userStatusColor( int );
+  QColor userStatusBackgroundColor( int );
+  QColor userStatusForegroundColor( int );
   QString userStatusIconFileName( int );
   QString menuUserStatusIconFileName( int );
   QString userStatusToString( int );

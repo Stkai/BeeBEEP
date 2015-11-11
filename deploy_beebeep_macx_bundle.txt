@@ -42,7 +42,7 @@ echo "Done"
 
 #copy Info.plist
 printf "Copy Info.plist ... "
-cp $SOURCE_DIR/misc/Info.plist $BUNDLE_APP/Contents/.
+cp $SOURCE_DIR/src/Info.plist $BUNDLE_APP/Contents/.
 echo "Done"
 
 #copy beep.wav

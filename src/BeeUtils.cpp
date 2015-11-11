@@ -90,6 +90,40 @@ QColor Bee::userStatusColor( int user_status )
   }
 }
 
+QColor Bee::userStatusBackgroundColor( int user_status )
+{
+  switch( user_status )
+  {
+  case User::Online:
+    return defaultBackgroundBrush().color();
+  case User::Away:
+    return QColor( Qt::darkYellow );
+  case User::Busy:
+    return QColor( Qt::darkRed );
+  case User::Offline:
+    return QColor( Qt::gray );
+  default:
+    return defaultBackgroundBrush().color();
+  }
+}
+
+QColor Bee::userStatusForegroundColor( int user_status )
+{
+  switch( user_status )
+  {
+  case User::Online:
+    return defaultBackgroundBrush().color();
+  case User::Away:
+    return QColor( Qt::white );
+  case User::Busy:
+    return QColor( Qt::white );
+  case User::Offline:
+    return QColor( Qt::black );
+  default:
+    return defaultBackgroundBrush().color();
+  }
+}
+
 QString Bee::bytesToString( FileSizeType bytes, int precision )
 {
   QString suffix;
