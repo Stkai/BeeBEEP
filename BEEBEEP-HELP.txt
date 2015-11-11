@@ -5,7 +5,7 @@
 //
 // Latest version: http://sourceforge.net/p/beebeep/code/HEAD/tree/misc/beehelp.txt
 //
-// $Id$
+// $Id: beehelp.txt 549 2015-11-10 18:47:07Z mastroddi $
 //
 
 /******** ATTENTION PLEASE!! **************/

@@ -187,6 +187,8 @@ public:
   inline const QByteArray& floatingChatGeometry() const;
   inline const QByteArray& floatingChatState() const;
   inline const QByteArray& floatingChatSplitterState() const;
+  inline void setShowUserStatusBackgroundColor( bool );
+  inline bool showUserStatusBackgroundColor() const;
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
@@ -421,6 +423,7 @@ private:
   bool m_useNativeEmoticons;
   bool m_showImagePreview;
   int m_imagePreviewHeight;
+  bool m_showUserStatusBackgroundColor;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -709,5 +712,7 @@ inline bool Settings::acceptConnectionsOnlyFromWorkgroups() const { return m_acc
 inline void Settings::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
 inline const QStringList& Settings::workgroups() const { return m_workgroups; }
 inline int Settings::maxUserStatusInList() const { return m_maxUserStatusInList; }
+inline void Settings::setShowUserStatusBackgroundColor( bool new_value ) { m_showUserStatusBackgroundColor = new_value; }
+inline bool Settings::showUserStatusBackgroundColor() const { return m_showUserStatusBackgroundColor; }
 
 #endif // BEEBEEP_SETTINGS_H

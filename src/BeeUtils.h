@@ -58,8 +58,9 @@ namespace Bee
   QString chatMessageTypeToString( int );
   QBrush defaultTextBrush();
   QBrush defaultBackgroundBrush();
-  QBrush defaultHighlightedText();
+  QBrush defaultHighlightedTextBrush();
   QBrush defaultHighlightBrush();
+  QBrush userStatusBackgroundBrush( int );
   QPixmap convertToGrayScale( const QPixmap& );
   QString convertToNativeFolderSeparator( const QString& );
 

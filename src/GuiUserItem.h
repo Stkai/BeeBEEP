@@ -32,7 +32,7 @@ class GuiUserItem : public QTreeWidgetItem
 {
 
 public:
-  enum UserDataType { UserId = Qt::UserRole+2, ChatId, Messages, UnreadMessages, UserName, Priority };
+  enum UserDataType { UserId = Qt::UserRole+2, ChatId, Messages, UnreadMessages, UserName, Priority, Status };
 
   GuiUserItem( QTreeWidget* );
   GuiUserItem( QTreeWidgetItem* );
@@ -55,6 +55,7 @@ public:
 
 private:
   QIcon selectUserIcon( int, bool ) const;
+  void showUserStatus();
 
 };
 

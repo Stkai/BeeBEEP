@@ -801,6 +801,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showVCardOnRightClick() );
   act->setData( 25 );
 
+  act = mp_menuUserList->addAction( tr( "Show status color in background" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the user in list has colored backrgound as status" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserStatusBackgroundColor() );
+  act->setData( 38 );
+
   mp_menuUserList->addSeparator();
 
   act = mp_menuUserList->addAction( tr( "Change size of the user's picture" ), this, SLOT( changeAvatarSizeInList() ) );
@@ -1405,6 +1411,10 @@ void GuiMain::settingsChanged()
     break;
   case 37:
     Settings::instance().setAlwaysOpenNewFloatingChat( act->isChecked() );
+    break;
+  case 38:
+    Settings::instance().setShowUserStatusBackgroundColor( act->isChecked() );
+    refresh_users = true;
     break;
   case 99:
     break;

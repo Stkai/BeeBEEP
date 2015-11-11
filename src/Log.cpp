@@ -33,8 +33,8 @@
   #include <QDesktopServices>
 #endif
 
-const quint64 LogMaxFileSize = 2000000;
-const quint64 LogResizedFileSize = 500000;
+const quint64 LogMaxFileSize = 4000000;
+const quint64 LogResizedFileSize = 1500000;
 Log* Log::mp_instance = NULL;
 
 LogNode& LogNode::operator=( const LogNode& ln )

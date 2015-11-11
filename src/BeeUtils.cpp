@@ -343,7 +343,7 @@ QBrush Bee::defaultBackgroundBrush()
   return qApp->palette().base();
 }
 
-QBrush Bee::defaultHighlightedText()
+QBrush Bee::defaultHighlightedTextBrush()
 {
   return qApp->palette().highlightedText();
 }
@@ -351,6 +351,14 @@ QBrush Bee::defaultHighlightedText()
 QBrush Bee::defaultHighlightBrush()
 {
   return qApp->palette().highlight();
+}
+
+QBrush Bee::userStatusBackgroundBrush( int user_status )
+{
+  if( user_status == User::Away || user_status == User::Busy )
+    return QBrush( userStatusColor( user_status ) );
+  else
+    return defaultBackgroundBrush();
 }
 
 QPixmap Bee::convertToGrayScale( const QPixmap& pix )

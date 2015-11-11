@@ -3217,6 +3217,14 @@ il file %2 (%3)?</translation>
         <source>Do you really want to clear all saved status descriptions?</source>
         <translation>Vuoi realmente cancellare tutte le descrizioni di stato salvate?</translation>
     </message>
+    <message>
+        <source>Show status color in background</source>
+        <translation>Mostra il colore di stato sullo sfondo</translation>
+    </message>
+    <message>
+        <source>If enabled the user in list has colored backrgound as status</source>
+        <translation>Se abilitata l&apos;utente in lista avrà lo sfondo colorato in base al suo stato</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

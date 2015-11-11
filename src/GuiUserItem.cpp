@@ -73,6 +73,7 @@ bool GuiUserItem::updateUser( const User& u )
   }
 
   setData( 0, UserName, u.name() );
+  setData( 0, Status, u.status() );
 
   int unread_messages = unreadMessages();
 
@@ -110,7 +111,8 @@ bool GuiUserItem::updateUser( const User& u )
         if( av.create() )
         {
           user_avatar = av.pixmap();
-          paint_status_box = true;
+          if( u.isStatusConnected() )
+            paint_status_box = true;
         }
         else
           user_avatar = selectUserIcon( user_status, true ).pixmap( icon_size );
@@ -124,7 +126,7 @@ bool GuiUserItem::updateUser( const User& u )
           paint_status_box = true;
       }
 
-      if( paint_status_box )
+      if( paint_status_box && !Settings::instance().showUserStatusBackgroundColor() )
       {
         QPixmap pix( icon_size );
         pix.fill( Bee::userStatusColor( u.status() ) );
@@ -179,6 +181,9 @@ bool GuiUserItem::updateUser( const User& u )
   QFont f = font( 0 );
   f.setBold( unread_messages > 0 );
   setFont( 0, f );
+
+  showUserStatus();
+
   return true;
 }
 
@@ -187,11 +192,19 @@ void GuiUserItem::setChatOpened( bool chat_is_opened )
   if( chat_is_opened )
   {
     setBackground( 0, Bee::defaultHighlightBrush() );
-    setTextColor( 0, Bee::defaultHighlightedText().color() );
+    setTextColor( 0, Bee::defaultHighlightedTextBrush().color() );
   }
   else
-  {
+    showUserStatus();
+}
+
+void GuiUserItem::showUserStatus()
+{
+  if( userId() == ID_LOCAL_USER )
     setBackground( 0, Bee::defaultBackgroundBrush() );
-    setTextColor( 0, Bee::defaultTextBrush().color() );
-  }
+  else if( Settings::instance().showUserStatusBackgroundColor() )
+    setBackground( 0, Bee::userStatusBackgroundBrush( data( 0, Status ).toInt() ) );
+  else
+    setBackground( 0, Bee::defaultBackgroundBrush() );
+  setTextColor( 0, Bee::defaultTextBrush().color() );
 }

@@ -87,7 +87,7 @@ Settings::Settings()
 #endif
   m_preventMultipleConnectionsFromSingleHostAddress = false;
   m_alwaysOpenNewFloatingChat = false;
-  m_acceptConnectionsOnlyFromWorkgroups = true;
+  m_acceptConnectionsOnlyFromWorkgroups = false;
   m_maxUserStatusInList = 10;
 }
 
@@ -683,6 +683,7 @@ void Settings::load()
   m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
   m_alwaysOpenNewFloatingChat = sets->value( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat ).toBool();
+  m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -890,6 +891,7 @@ void Settings::save()
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
   sets->setValue( "FacebookPageLinkClicked", m_isFacebookPageLinkClicked );
   sets->setValue( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat );
+  sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

@@ -128,6 +128,7 @@ bool Avatar::create()
   pix.fill( m_color );
   QPainter p( &pix );
   p.setFont( f );
+  p.setRenderHint( QPainter::TextAntialiasing );
 
   QColor pen_color = Bee::isColorNear( m_color, Qt::white ) ? Bee::invertColor( m_color ) : Qt::white;
   QPen pen( pen_color );
