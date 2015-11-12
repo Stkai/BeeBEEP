@@ -39,6 +39,8 @@
 #include "Protocol.h"
 #include "Random.h"
 #include "Settings.h"
+#include "ShortcutManager.h"
+
 
 bool SetTranslator( QTranslator* translator, QString language_folder, QString lang )
 {
@@ -148,6 +150,12 @@ int main( int argc, char *argv[] )
   else
     qWarning() << "Sound manager seems to be not available for your system";
 
+  /* Init Shortcut Manager */
+  if( Settings::instance().shortcuts().isEmpty() )
+    ShortcutManager::instance().setDefaultShortcuts();
+  else
+    ShortcutManager::instance().loadFromStringList( Settings::instance().shortcuts() );
+
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
@@ -204,6 +212,7 @@ int main( int argc, char *argv[] )
 
   /* Save session */
   mw.saveSession();
+  Settings::instance().setShortcuts( ShortcutManager::instance().saveToStringList() );
   Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
   Settings::instance().loadRcFile();
   Settings::instance().save();
@@ -227,6 +236,7 @@ int main( int argc, char *argv[] )
   NetworkManager::close();
   ColorManager::close();
   AudioManager::close();
+  ShortcutManager::close();
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();

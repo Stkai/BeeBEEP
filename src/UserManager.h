@@ -49,6 +49,7 @@ public:
   bool hasGroupName( const QString& ) const;
   Group findGroupByPrivateId( const QString& ) const;
   bool removeGroup( VNumber );
+  bool isUserInGroups( VNumber ) const;
 
   QStringList saveGroups();
   int loadGroups( const QStringList& );

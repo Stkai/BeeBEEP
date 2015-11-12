@@ -56,6 +56,7 @@
 #include "Protocol.h"
 #include "SaveChatList.h"
 #include "Settings.h"
+#include "ShortcutManager.h"
 #include "UserManager.h"
 #ifdef Q_OS_WIN
   #include "windows.h"
@@ -102,7 +103,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), this, SLOT( checkChat( VNumber ) ) );
   connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
-  connect( mp_core, SIGNAL( savedChatListAvailable() ), mp_savedChatList, SLOT( updateSavedChats() ) );
+  connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
   connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_core, SIGNAL( updateGroup( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
@@ -154,9 +155,10 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_home, SIGNAL( openDefaultChatRequest() ), this, SLOT( showDefaultChat() ) );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
-  initGuiItems();
-
+  mp_chat->setChatId( ID_DEFAULT_CHAT, false );
   mp_home->loadDefaultChat();
+
+  initGuiItems();
 
   statusBar()->showMessage( tr( "Ready" ) );
 }
@@ -426,8 +428,6 @@ void GuiMain::initGuiItems()
 
   if( Settings::instance().showHomeAsDefaultPage() )
     raiseHomeView();
-  else
-    showDefaultChat();
 
   if( enable )
   {
@@ -737,6 +737,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().autoUserAway() );
   act->setData( 20 );
 
+  act = mp_menuSettings->addAction( tr( "Use shortcuts" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled you csn use some useful shortcuts" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useShortcuts() );
+  act->setData( 39 );
+
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Always open a new floating chat window" ), this, SLOT( settingsChanged() ) );
@@ -940,6 +946,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showNotificationOnTray()  );
   act->setData( 19 );
 
+  act = mp_menuTrayIcon->addAction( tr( "Show only message notifications" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled tray icon shows only message notifications" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showOnlyMessageNotificationOnTray()  );
+  act->setData( 40 );
+
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actQuit );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
@@ -1046,6 +1058,8 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
+  if( Settings::instance().useShortcuts() )
+    mp_actViewFileTransfer->setShortcut( ShortcutManager::instance().shortcut( ShortcutManager::ShowFileTransfers ) );
 
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
@@ -1148,6 +1162,8 @@ void GuiMain::createStackedWidgets()
 
   mp_home = new GuiHome( this );
   mp_stackedWidget->addWidget( mp_home );
+
+  mp_stackedWidget->setCurrentWidget( mp_chat );
 }
 
 QMenu* GuiMain::gameMenu( GameInterface* gi )
@@ -1415,6 +1431,12 @@ void GuiMain::settingsChanged()
   case 38:
     Settings::instance().setShowUserStatusBackgroundColor( act->isChecked() );
     refresh_users = true;
+    break;
+  case 39:
+    Settings::instance().setUseShortcuts( act->isChecked() );
+    break;
+  case 40:
+    Settings::instance().setShowOnlyMessageNotificationOnTray( act->isChecked() );
     break;
   case 99:
     break;
@@ -3122,6 +3144,9 @@ void GuiMain::showConnectionStatusChanged( const User& u )
   if( !mp_core->isConnected() )
     return;
 
+  if( Settings::instance().showOnlyMessageNotificationOnTray() )
+    return;
+
   QString msg;
   if( u.isStatusConnected() )
     msg = tr( "%1 is online" ).arg( u.name() );
@@ -3368,4 +3393,13 @@ void GuiMain::clearRecentlyUsedUserStatus()
   sl.clear();
   Settings::instance().setUserStatusList( sl );
   loadUserStatusRecentlyUsed();
+}
+
+void GuiMain::loadSavedChatsCompleted()
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Loading saved chats completed";
+#endif
+  mp_savedChatList->updateSavedChats();
+  mp_chat->reloadChat();
 }

@@ -3,9 +3,9 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// Latest version: http://sourceforge.net/p/beebeep/code/HEAD/tree/misc/beehelp.txt
+// Latest version: http://sourceforge.net/p/beebeep/code/HEAD/tree/BEEBEEP-HELP.txt
 //
-// $Id: beehelp.txt 549 2015-11-10 18:47:07Z mastroddi $
+// $Id$
 //
 
 /******** ATTENTION PLEASE!! **************/
@@ -106,12 +106,12 @@ ShowNotificationOnTray=[true/false]
 ChatSaveDirectory=.
 ChatAutoSave=true
 ChatMaxLineSaved=3000
-MainWindowGeometry= (do not edit manually)
-MainWindowState= (do not edit manually)
-ChatSplitterState= (do not edit manually)
-FloatingChatGeometry= (do not edit manually)
-FloatingChatState= (do not edit manually)
-FloatingChatSplitterState= (do not edit manually)
+MainWindowGeometry=(do not edit manually)
+MainWindowState=(do not edit manually)
+ChatSplitterState=(do not edit manually)
+FloatingChatGeometry=(do not edit manually)
+FloatingChatState= do not edit manually)
+FloatingChatSplitterState=(do not edit manually)
 ShowHomeAsDefaultPage=[true/false] Show home page at start up (force user to click on available users to chat with them)
 ShowTipsOfTheDay=[true/false]
 ShowOnlyOnlineUsers=[true/false] show only online users in user list
@@ -130,6 +130,8 @@ PromptOnCloseEvent=[true/false] enable it if you want to be asked on closing (it
 ShowMinimizedAtStartup=[true/false] show minimized at start up
 AlwaysOpenNewFloatingChat=[true/false] open always chat in a new floating window
 ShowUserStatusBackgroundColor=[true/false] show background color for status in user list
+UseShortcuts=[true/false] enable shortcuts in application
+Shortcuts=(do not edit manually)
 
 [Tools]
 LogToFile=false
@@ -143,7 +145,7 @@ WritingTimeout=3000
 SystemTrayMessageTimeout=2000
 
 [Network]
-BroadcastAddresses= (do not edit manually)
+BroadcastAddresses=(do not edit manually)
 LocalHostAddressForced= if BeeBEEP doesn't recognize your IP address automatically, you can set here your IP (useful if you have a lot of network configured)
 LocalSubnetForced= if BeeBEEP doesn't recognize your subnet address automatically, you can set here your subnet (useful if you have a lot of network configured)
 ParseBroadcastAddresses=[true/false] if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254
@@ -161,4 +163,4 @@ MaxFileShared=32700
 FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456
 ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a file
-ShareList= (do not edit manually)
+ShareList=(do not edit manually)

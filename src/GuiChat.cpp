@@ -29,6 +29,7 @@
 #include "GuiChatMessage.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "ShortcutManager.h"
 #include "UserManager.h"
 
 
@@ -133,6 +134,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
 
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
+  if( Settings::instance().useShortcuts() )
+    mp_actSendFile->setShortcut( ShortcutManager::instance().shortcut( ShortcutManager::SendFile ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );

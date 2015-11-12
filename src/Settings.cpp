@@ -661,6 +661,7 @@ void Settings::load()
   m_beepFilePath = Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
+  m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", false ).toBool();
   m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 2000 ).toInt(), 100 );
   m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
@@ -684,6 +685,8 @@ void Settings::load()
   m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
   m_alwaysOpenNewFloatingChat = sets->value( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat ).toBool();
   m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
+  m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
+  m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -725,7 +728,7 @@ void Settings::load()
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
-  m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", true ).toBool();
+  m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
   QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
   if( !local_share.isEmpty() )
   {
@@ -868,6 +871,7 @@ void Settings::save()
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
   sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );
   sets->setValue( "ShowNotificationOnTray", m_showNotificationOnTray );
+  sets->setValue( "ShowOnlyMessageNotificationOnTray", m_showOnlyMessageNotificationOnTray );
   sets->setValue( "ShowNotificationOnTrayTimeout", m_trayMessageTimeout );
   sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
@@ -892,6 +896,8 @@ void Settings::save()
   sets->setValue( "FacebookPageLinkClicked", m_isFacebookPageLinkClicked );
   sets->setValue( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat );
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
+  sets->setValue( "Shortcuts", m_shortcuts );
+  sets->setValue( "UseShortcuts", m_useShortcuts );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

@@ -155,6 +155,7 @@ private slots:
   void readAllMessagesInChat( VNumber );
   void recentlyUsedUserStatusSelected();
   void clearRecentlyUsedUserStatus();
+  void loadSavedChatsCompleted();
 
 protected:
   void keyPressEvent( QKeyEvent* );

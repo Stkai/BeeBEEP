@@ -102,6 +102,7 @@ HEADERS += AudioManager.h \
   Random.h \
   Rijndael.h \
   SaveChatList.h \
+  ShortcutManager.h \
   ShutdownMonitor.h \
   Settings.h \
   Tips.h \
@@ -195,6 +196,7 @@ SOURCES += AudioManager.cpp \
   Protocol.cpp \
   Rijndael.cpp \
   SaveChatList.cpp \
+  ShortcutManager.cpp \
   ShutdownMonitor.cpp \
   Settings.cpp \
   Updater.cpp \

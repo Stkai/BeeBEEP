@@ -253,6 +253,8 @@ public:
   inline void setLoadOnTrayAtStartup( bool );
   inline bool showNotificationOnTray() const;
   inline void setShowNotificationOnTray( bool );
+  inline bool showOnlyMessageNotificationOnTray() const;
+  inline void setShowOnlyMessageNotificationOnTray( bool );
 
   inline const QStringList& localShare() const;
   inline void setLocalShare( const QStringList& );
@@ -308,6 +310,11 @@ public:
   inline bool acceptConnectionsOnlyFromWorkgroups() const;
   inline void setWorkgroups( const QStringList& );
   inline const QStringList& workgroups() const;
+
+  inline void setShortcuts( const QStringList& );
+  inline const QStringList& shortcuts() const;
+  inline void setUseShortcuts( bool );
+  inline bool useShortcuts() const;
 
   inline void setShowHomeAsDefaultPage( bool );
   inline bool showHomeAsDefaultPage() const;
@@ -464,6 +471,7 @@ private:
   bool m_minimizeInTray;
   bool m_loadOnTrayAtStartup;
   bool m_showNotificationOnTray;
+  bool m_showOnlyMessageNotificationOnTray;
 
   bool m_fileTransferIsEnabled;
   QStringList m_localShare;
@@ -505,6 +513,9 @@ private:
 
   bool m_acceptConnectionsOnlyFromWorkgroups;
   QStringList m_workgroups;
+
+  QStringList m_shortcuts;
+  bool m_useShortcuts;
 
 };
 
@@ -633,6 +644,8 @@ inline bool Settings::loadOnTrayAtStartup() const { return m_loadOnTrayAtStartup
 inline void Settings::setLoadOnTrayAtStartup( bool new_value ) { m_loadOnTrayAtStartup = new_value; }
 inline bool Settings::showNotificationOnTray() const { return m_showNotificationOnTray; }
 inline void Settings::setShowNotificationOnTray( bool new_value ) { m_showNotificationOnTray = new_value; }
+inline bool Settings::showOnlyMessageNotificationOnTray() const { return m_showOnlyMessageNotificationOnTray; }
+inline void Settings::setShowOnlyMessageNotificationOnTray( bool new_value ) { m_showOnlyMessageNotificationOnTray = new_value; }
 inline const QStringList& Settings::localShare() const { return m_localShare; }
 inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
 inline bool Settings::hasLocalSharePath( const QString& share_path ) const { return m_localShare.contains( share_path ); }
@@ -714,5 +727,9 @@ inline const QStringList& Settings::workgroups() const { return m_workgroups; }
 inline int Settings::maxUserStatusInList() const { return m_maxUserStatusInList; }
 inline void Settings::setShowUserStatusBackgroundColor( bool new_value ) { m_showUserStatusBackgroundColor = new_value; }
 inline bool Settings::showUserStatusBackgroundColor() const { return m_showUserStatusBackgroundColor; }
+inline void Settings::setShortcuts( const QStringList& new_value ) { m_shortcuts = new_value; }
+inline const QStringList& Settings::shortcuts() const { return m_shortcuts; }
+inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_value; }
+inline bool Settings::useShortcuts() const { return m_useShortcuts; }
 
 #endif // BEEBEEP_SETTINGS_H

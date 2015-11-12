@@ -426,6 +426,12 @@ bool Core::removeOfflineUser( VNumber user_id )
     return false;
   }
 
+  if( UserManager::instance().isUserInGroups( u.id() ) )
+  {
+    qWarning() << "User" << u.path() << "is in some groups and cannot be removed from list";
+    return false;
+  }
+
   if( UserManager::instance().removeUser( u ) )
   {
     qDebug() << "User" << u.path() << "is removed from list";

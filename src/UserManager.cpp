@@ -98,6 +98,20 @@ bool UserManager::removeGroup( VNumber group_id )
     return false;
 }
 
+bool UserManager::isUserInGroups( VNumber user_id ) const
+{
+  if( user_id == ID_LOCAL_USER )
+    return true;
+
+  foreach( Group g, m_groups )
+  {
+    if( g.hasUser( user_id ) )
+      return true;
+  }
+
+  return false;
+}
+
 User UserManager::findUserByPath( const QString& user_path ) const
 {
   if( user_path.isEmpty() )

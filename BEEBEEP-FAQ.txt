@@ -1,0 +1,10 @@
+// 
+// BeeBEEP FAQ
+//
+// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+//
+// Latest version: http://sourceforge.net/p/beebeep/code/HEAD/tree/BEEBEEP-FAQ.txt
+//
+// $Id$
+//
+

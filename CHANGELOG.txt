@@ -6,6 +6,8 @@ BeeBEEP 3.0.1
 - Recently used User Status can be selected
 - Drop or paste images on the message box
 - Set background color as status for users in list (option)
+- Use shortcuts (option)
+- Show only message notifications in system tray (option)
 
 BeeBEEP 3.0.0
 - Fixed issue with "This app is preventing shutdown" in Windows
