@@ -102,6 +102,8 @@ void Broadcaster::sendBroadcastDatagram()
   }
 
   qDebug() << "Broadcaster has contacted" << addresses_contacted << "networks";
+
+  QTimer::singleShot( 0, this, SLOT( searchInPeerAddresses() ) );
 }
 
 bool Broadcaster::isLocalHostAddress( const QHostAddress& address_to_check )
@@ -189,9 +191,17 @@ int Broadcaster::updateAddresses()
   {
     foreach( QString s_address, Settings::instance().broadcastAddressesInFileHosts() )
     {
-      ha_broadcast = QHostAddress( s_address );
-      if( !ha_broadcast.isNull() )
-        addAddressToList( ha_broadcast );
+      NetworkAddress na = NetworkAddress::fromString( s_address );
+      if( na.isValid() )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Network address in hosts parsed:" << na.toString();
+#endif
+        if( na.hostPort() > 0 )
+          addPeerAddress( na );
+        else
+          addAddressToList( na.hostAddress() );
+      }
     }
   }
 
@@ -325,4 +335,26 @@ QList<QHostAddress> Broadcaster::parseHostAddress( const QHostAddress& host_addr
     }
   }
   return ha_list;
+}
+
+void Broadcaster::addPeerAddress( const NetworkAddress& peer_address )
+{
+  if( !m_peerAddresses.contains( peer_address ) )
+    m_peerAddresses.append( peer_address );
+}
+
+void Broadcaster::searchInPeerAddresses()
+{
+  if( m_peerAddresses.isEmpty() )
+    return;
+
+  qDebug() << "Broadcaster is also searching in" << m_peerAddresses.size() << "peer addresses";
+
+  foreach( NetworkAddress na, m_peerAddresses )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Try with network address:" << qPrintable( na.toString() );
+#endif
+    emit newPeerFound( na.hostAddress(), na.hostPort() );
+  }
 }

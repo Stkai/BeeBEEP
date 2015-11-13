@@ -99,6 +99,7 @@ public:
   inline int fileTransferConfirmTimeout() const;
   inline int fileTransferBufferSize() const;
   inline int trayMessageTimeout() const;
+  inline int connectionTimeout() const;
 
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
@@ -393,6 +394,7 @@ private:
   int m_fileTransferBufferSize;
   int m_trayMessageTimeout;
   int m_userAwayTimeout;
+  int m_connectionTimeout;
 
   QDateTime m_lastSave;
   bool m_logToFile;
@@ -731,5 +733,6 @@ inline void Settings::setShortcuts( const QStringList& new_value ) { m_shortcuts
 inline const QStringList& Settings::shortcuts() const { return m_shortcuts; }
 inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_value; }
 inline bool Settings::useShortcuts() const { return m_useShortcuts; }
+inline int Settings::connectionTimeout() const { return m_connectionTimeout; }
 
 #endif // BEEBEEP_SETTINGS_H

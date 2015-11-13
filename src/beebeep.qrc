@@ -134,5 +134,6 @@
         <file>images/add-window.png</file>
         <file>images/save-window.png</file>
         <file>images/warning.png</file>
+        <file>images/shortcut.png</file>
     </qresource>
 </RCC>

@@ -35,6 +35,8 @@ class ConnectionSocket : public QTcpSocket
 public:
   explicit ConnectionSocket( QObject* parent = 0 );
 
+  void connectToNetworkAddress( const QHostAddress&, int );
+
   bool sendData( const QByteArray& );
 
   inline VNumber userId() const;
@@ -44,6 +46,7 @@ public:
   int fileTransferBufferSize() const;
 
   inline bool isConnected() const;
+  inline bool isConnecting() const;
 
 signals:
   void dataReceived( const QByteArray& );
@@ -53,6 +56,7 @@ signals:
 protected slots:
   void readBlock();
   void sendQuestionHello();
+  void checkConnectionTimeout();
 
 protected:
   void sendAnswerHello();
@@ -72,6 +76,8 @@ private:
   QString m_publicKey1;
   QString m_publicKey2;
 
+  QString m_hostAndPort;
+
 };
 
 
@@ -80,5 +86,6 @@ inline VNumber ConnectionSocket::userId() const { return m_userId; }
 inline void ConnectionSocket::setUserId( VNumber new_value ) { m_userId = new_value; }
 inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
 inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::HostLookupState && state() <= QAbstractSocket::ConnectedState; }
+inline bool ConnectionSocket::isConnecting() const { return state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

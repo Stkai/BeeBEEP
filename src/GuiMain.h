@@ -156,6 +156,7 @@ private slots:
   void recentlyUsedUserStatusSelected();
   void clearRecentlyUsedUserStatus();
   void loadSavedChatsCompleted();
+  void editShortcuts();
 
 protected:
   void keyPressEvent( QKeyEvent* );

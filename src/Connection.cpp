@@ -120,6 +120,7 @@ void Connection::closeConnection()
 {
   if( !peerAddress().isNull() )
     qDebug() << "Connection to" << peerAddress().toString() << peerPort() << "closed";
+
   m_pingTimer.stop();
   abort();
 }

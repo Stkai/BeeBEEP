@@ -1,0 +1,109 @@
+//////////////////////////////////////////////////////////////////////
+//
+// This file is part of BeeBEEP.
+//
+// BeeBEEP is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License,
+// or (at your option) any later version.
+//
+// BeeBEEP is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
+//
+// $Id$
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "GuiShortcut.h"
+#include "Settings.h"
+#include "ShortcutManager.h"
+
+
+GuiShortcut::GuiShortcut( QWidget *parent )
+  : QDialog( parent )
+{
+  setupUi( this );
+
+  setWindowTitle( tr( "Shortcuts" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+
+  QStringList labels;
+  labels << tr( "Key" ) << tr( "Action" );
+  mp_twShortcuts->setHeaderLabels( labels );
+  mp_twShortcuts->setAlternatingRowColors( true );
+  mp_twShortcuts->setSortingEnabled( true );
+  mp_twShortcuts->setRootIsDecorated( false );
+  mp_twShortcuts->sortByColumn( 1, Qt::AscendingOrder );
+
+  connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveShortcuts() ) );
+  connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_pbDefault, SIGNAL( clicked() ), this, SLOT( restoreDefault() ) );
+  connect( mp_twShortcuts, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
+}
+
+void GuiShortcut::loadShortcuts()
+{
+  mp_cbUseShortcuts->setChecked( Settings::instance().useShortcuts() );
+
+  mp_twShortcuts->clear();
+
+  QTreeWidgetItem* item;
+  for( int i = ShortcutManager::Empty; i < ShortcutManager::NumShortcut; i++ )
+  {
+    if( i != ShortcutManager::Empty )
+    {
+      item = new QTreeWidgetItem( mp_twShortcuts );
+      item->setText( 0, ShortcutManager::instance().shortcut( i ).toString() );
+      item->setText( 1, ShortcutManager::instance().shortcutName( i ) );
+      item->setData( 0, Qt::UserRole+1, i );
+    }
+  }
+}
+
+void GuiShortcut::saveShortcuts()
+{
+  Settings::instance().setUseShortcuts( mp_cbUseShortcuts->isChecked() );
+  int shortcut_type;
+  QTreeWidgetItemIterator it( mp_twShortcuts );
+  while( *it )
+  {
+    shortcut_type = (*it)->data( 0, Qt::UserRole+1 ).toInt();
+    ShortcutManager::instance().setShortcut( shortcut_type, (*it)->text( 0 ).simplified() );
+    ++it;
+  }
+  accept();
+}
+
+void GuiShortcut::restoreDefault()
+{
+  ShortcutManager::instance().setDefaultShortcuts();
+  loadShortcuts();
+}
+
+void GuiShortcut::checkItemClicked( QTreeWidgetItem* item, int )
+{
+  if( !item )
+    return;
+
+  bool ok = false;
+  QString shortcut_key = QInputDialog::getText( this, Settings::instance().programName(),
+                                                tr( "Insert shorcut for the action: %1" ).arg( item->text( 1 ).toLower() ),
+                                                QLineEdit::Normal, item->text( 0 ), &ok );
+
+  if( !ok )
+    return;
+
+  if( !shortcut_key.isEmpty() )
+  {
+    QKeySequence ks = QKeySequence::fromString( shortcut_key );
+    item->setText( 0, ks.toString() );
+  }
+  else
+    item->setText( 0, "" );
+}

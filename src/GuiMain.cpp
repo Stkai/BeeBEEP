@@ -46,6 +46,7 @@
 #include "GuiSearchUser.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
+#include "GuiShortcut.h"
 #include "GuiSystemTray.h"
 #include "GuiTransferFile.h"
 #include "GuiUserList.h"
@@ -583,6 +584,8 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Select your preferred language" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
   act->setStatusTip( tr( "Select the download folder" ) );
+  act = mp_menuMain->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts..." ), this, SLOT( editShortcuts() ) );
+  act->setStatusTip( tr( "Enable and edit your custom shortcuts" ) );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
@@ -736,12 +739,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().autoUserAway() );
   act->setData( 20 );
-
-  act = mp_menuSettings->addAction( tr( "Use shortcuts" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled you csn use some useful shortcuts" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useShortcuts() );
-  act->setData( 39 );
 
   mp_menuSettings->addSeparator();
 
@@ -2935,14 +2932,9 @@ void GuiMain::removeChat( VNumber chat_id )
     if( mp_chat->chatId() == chat_id )
     {
       if( mp_stackedWidget->currentWidget() == mp_chat )
-      {
-        showChat( ID_DEFAULT_CHAT );
-      }
+        showDefaultChat();
       else
-      {
         mp_chat->setChatId( ID_DEFAULT_CHAT, false );
-        raiseHomeView();
-      }
     }
     else
     {
@@ -3187,6 +3179,18 @@ void GuiMain::removeUserFromList( VNumber user_id )
 {
   if( mp_core->removeOfflineUser( user_id ) )
   {
+    Chat c = ChatManager::instance().privateChatForUser( user_id );
+    if( c.isValid() )
+    {
+      closeFloatingChat( c.id() );
+      if( mp_chat->chatId() == c.id() )
+      {
+        if( mp_stackedWidget->currentWidget() == mp_chat )
+          showDefaultChat();
+        else
+          mp_chat->setChatId( ID_DEFAULT_CHAT, false );
+      }
+    }
     refreshUserList();
     mp_chatList->reloadChatList();
   }
@@ -3216,7 +3220,7 @@ bool GuiMain::floatingChatExists( VNumber chat_id ) const
 void GuiMain::closeFloatingChat( VNumber chat_id )
 {
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( !fl_chat )
+  if( fl_chat )
     fl_chat->close();
 }
 
@@ -3402,4 +3406,18 @@ void GuiMain::loadSavedChatsCompleted()
 #endif
   mp_savedChatList->updateSavedChats();
   mp_chat->reloadChat();
+}
+
+void GuiMain::editShortcuts()
+{
+  GuiShortcut gs( this );
+  gs.setModal( true );
+  gs.loadShortcuts();
+  gs.show();
+  gs.setFixedSize( gs.size() );
+  if( gs.exec() == QDialog::Rejected )
+    return;
+
+  Settings::instance().setShortcuts( ShortcutManager::instance().saveToStringList() );
+  Settings::instance().save();
 }

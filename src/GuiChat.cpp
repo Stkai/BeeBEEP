@@ -89,6 +89,12 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
   connect( mp_pbDetach, SIGNAL( clicked() ), this, SLOT( detachThisChat() ) );
   connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
+
+  if( Settings::instance().useShortcuts() )
+  {
+    QShortcut* sc = new QShortcut( ShortcutManager::instance().shortcut( ShortcutManager::SetFocusInMessageBox ), this );
+    connect( sc, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
+  }
 }
 
 void GuiChat::enableDetachButtons()

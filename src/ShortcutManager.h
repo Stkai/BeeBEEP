@@ -33,12 +33,13 @@ class ShortcutManager
   static ShortcutManager* mp_instance;
 
 public:
-  enum ShortcutType { Empty, SendFile, ShowFileTransfers, NumShortcut };
+  enum ShortcutType { Empty, SendFile, ShowFileTransfers, SetFocusInMessageBox, NumShortcut };
 
   void setDefaultShortcuts();
 
-  inline const QKeySequence& shortcut( ShortcutType ) const;
-  inline const QString& shortcutName( ShortcutType ) const;
+  inline const QKeySequence& shortcut( int ) const;
+  inline const QString& shortcutName( int ) const;
+  bool setShortcut( int, const QString& );
 
   QStringList saveToStringList() const;
   void loadFromStringList( const QStringList& );
@@ -69,7 +70,7 @@ private:
 };
 
 // Inline Functions
-inline const QKeySequence& ShortcutManager::shortcut( ShortcutType st ) const { return st < NumShortcut ? m_shortcuts.at( st ) : m_shortcuts.at( Empty ); }
-inline const QString& ShortcutManager::shortcutName( ShortcutType st ) const { return st < NumShortcut ? m_shortcutNames.at( st ) : m_shortcutNames.at( Empty ); }
+inline const QKeySequence& ShortcutManager::shortcut( int st ) const { return st > 0 && st < NumShortcut ? m_shortcuts.at( st ) : m_shortcuts.at( Empty ); }
+inline const QString& ShortcutManager::shortcutName( int st ) const { return st > 0 && st < NumShortcut ? m_shortcutNames.at( st ) : m_shortcutNames.at( Empty ); }
 
 #endif // BEEBEEP_SHORTCUTMANAGER_H

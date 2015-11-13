@@ -6,8 +6,9 @@ BeeBEEP 3.0.1
 - Recently used User Status can be selected
 - Drop or paste images on the message box
 - Set background color as status for users in list (option)
-- Use shortcuts (option)
+- Enable and edit custom shortcuts (option)
 - Show only message notifications in system tray (option)
+- File beehosts.ini now accepts host address and port (see beehosts_example.ini for more informations)
 
 BeeBEEP 3.0.0
 - Fixed issue with "This app is preventing shutdown" in Windows

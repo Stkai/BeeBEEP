@@ -29,9 +29,7 @@ ShortcutManager* ShortcutManager::mp_instance = NULL;
 ShortcutManager::ShortcutManager()
   : m_shortcuts( NumShortcut, QKeySequence() ), m_shortcutNames( NumShortcut )
 {
-  m_shortcutNames.fill( QObject::tr( "Empty" ) );
-  m_shortcutNames[ SendFile ] = QObject::tr( "Send file" );
-  m_shortcutNames[ ShowFileTransfers ] = QObject::tr( "Show file transfers" );
+  setDefaultShortcuts();
 }
 
 QStringList ShortcutManager::saveToStringList() const
@@ -40,9 +38,9 @@ QStringList ShortcutManager::saveToStringList() const
   QKeySequence ks;
   for( int i = 0; i < NumShortcut; i++ )
   {
-    ks = shortcut( (ShortcutType)i );
+    ks = shortcut( i );
     sl.append( ks.toString() );
-    qDebug() << "Save shortcut type" << i << shortcutName( (ShortcutType)i ) << "with key sequence:" << qPrintable( ks.toString() );
+    qDebug() << "Save shortcut type" << i << shortcutName( i ) << "with key sequence:" << qPrintable( ks.toString() );
   }
   return sl;
 }
@@ -52,16 +50,17 @@ void ShortcutManager::loadFromStringList( const QStringList& sl )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Loading" << sl.size() << "shortcuts:" << qPrintable( sl.join( ", " ) );
 #endif
-  QKeySequence empty_ks;
-  m_shortcuts.fill( empty_ks, NumShortcut );
-
   int shortcut_type = Empty;
 
   foreach( QString s, sl )
   {
-    QKeySequence ks = QKeySequence::fromString( s );
-    m_shortcuts[ shortcut_type ] = ks;
-    qDebug() << "Load shortcut type" << shortcut_type << shortcutName( (ShortcutType)shortcut_type ) << "with key sequence:" << qPrintable( ks.toString() );
+    if( shortcut_type != Empty )
+    {
+      if( setShortcut( shortcut_type, s ) )
+        qDebug() << "Load shortcut type" << shortcut_type << shortcutName( shortcut_type ) << "with key sequence:" << qPrintable( shortcut( shortcut_type ).toString() );
+      else
+        qWarning() << "Unable to load shortcut string:" << s;
+    }
 
     shortcut_type++;
     if( shortcut_type >= NumShortcut )
@@ -69,15 +68,31 @@ void ShortcutManager::loadFromStringList( const QStringList& sl )
   }
 }
 
+bool ShortcutManager::setShortcut( int st, const QString& s )
+{
+  if( st > 0 && st < NumShortcut )
+  {
+    QKeySequence ks = QKeySequence::fromString( s );
+    m_shortcuts[ st ] = ks;
+    return true;
+  }
+  else
+    return false;
+}
+
 void ShortcutManager::setDefaultShortcuts()
 {
   qDebug() << "Load default shortcuts";
-  QKeySequence ks_sendFile( Qt::CTRL | Qt::SHIFT | Qt::Key_F );
-  QKeySequence ks_showFileTransfer( Qt::CTRL | Qt::SHIFT | Qt::Key_T );
 
-  m_shortcuts[ SendFile ] = ks_sendFile;
-  m_shortcuts[ ShowFileTransfers ] = ks_showFileTransfer;
+  m_shortcutNames[ Empty ] = QObject::tr( "Empty" );
+  m_shortcuts[ Empty ] = QKeySequence();
+  m_shortcutNames[ SendFile ] = QObject::tr( "Send file" );
+  m_shortcuts[ SendFile ] = QKeySequence( Qt::CTRL | Qt::Key_S );
+  m_shortcutNames[ ShowFileTransfers ] = QObject::tr( "Show file transfers" );
+  m_shortcuts[ ShowFileTransfers ] = QKeySequence( Qt::CTRL | Qt::Key_J );
+  m_shortcutNames[ SetFocusInMessageBox ] = QObject::tr( "Set focus in message box" );
+  m_shortcuts[ SetFocusInMessageBox ] = QKeySequence( Qt::CTRL | Qt::Key_L );
 
-  for( int i = 0; i < NumShortcut; i++ )
+  for( int i = Empty; i < NumShortcut; i++ )
     qDebug() << "Default shortcut" << i << shortcutName( (ShortcutType)i ) << "with key sequence:" << qPrintable( m_shortcuts.at( i ).toString() );
 }

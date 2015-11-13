@@ -50,7 +50,6 @@ public:
   inline bool reloadChat();
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
-  void ensureFocusInChat();
 
   inline QSplitter* chatSplitter() const;
 
@@ -74,6 +73,7 @@ signals:
 public slots:
   void appendChatMessage( VNumber, const ChatMessage& );
   void addEmoticon( const Emoticon& );
+  void ensureFocusInChat();
 
 protected:
   void enableDetachButtons();

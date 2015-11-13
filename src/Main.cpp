@@ -151,9 +151,8 @@ int main( int argc, char *argv[] )
     qWarning() << "Sound manager seems to be not available for your system";
 
   /* Init Shortcut Manager */
-  if( Settings::instance().shortcuts().isEmpty() )
-    ShortcutManager::instance().setDefaultShortcuts();
-  else
+  (void)ShortcutManager::instance();
+  if( !Settings::instance().shortcuts().isEmpty() )
     ShortcutManager::instance().loadFromStringList( Settings::instance().shortcuts() );
 
   /* Init Plugins */

@@ -25,6 +25,7 @@
 #define BEEBEEP_BROADCASTER_H
 
 #include "Config.h"
+#include "NetworkAddress.h"
 
 
 class Broadcaster : public QObject
@@ -47,12 +48,14 @@ signals:
 private slots:
   void readBroadcastDatagram();
   void checkLoopback();
+  void searchInPeerAddresses();
 
 protected:
   bool sendDatagramToHost( const QHostAddress& );
   bool addAddressToList( const QHostAddress& );
   bool isLocalHostAddress( const QHostAddress& );
   QList<QHostAddress> parseHostAddress( const QHostAddress& ) const;
+  void addPeerAddress( const NetworkAddress& );
 
 private:
   QHostAddress m_baseBroadcastAddress;
@@ -64,6 +67,8 @@ private:
   QTimer m_broadcastTimer;
 
   int m_datagramSentToBaseBroadcastAddress;
+
+  QList<NetworkAddress> m_peerAddresses;
 
 };
 

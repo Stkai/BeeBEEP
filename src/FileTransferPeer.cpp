@@ -98,7 +98,7 @@ void FileTransferPeer::startConnection()
   else
   {
     qDebug() << name() << "is connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
-    m_socket.connectToHost( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
+    m_socket.connectToNetworkAddress( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
   }
 
   QTimer::singleShot( Settings::instance().fileTransferConfirmTimeout(), this, SLOT( connectionTimeout() ) );

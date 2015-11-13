@@ -94,11 +94,11 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
   if( hasConnection( sender_ip, sender_port ) )
     return;
 
-  qDebug() << "Connecting to new peer" << sender_ip.toString() << sender_port;
+  qDebug() << "Connecting to new peer" << qPrintable( sender_ip.toString() ) << sender_port;
 
   Connection *c = new Connection( this );
   setupNewConnection( c );
-  c->connectToHost( sender_ip, sender_port );
+  c->connectToNetworkAddress( sender_ip, sender_port );
 }
 
 void Core::checkNewConnection( Connection *c )
@@ -225,7 +225,7 @@ void Core::closeConnection( Connection *c )
 
   c->disconnect();
   c->closeConnection();
-  //do not delete the object. Can cause crash. See c->readblock( ... )
+  //do not delete the object. Can cause crash. See c->readblock( ... ) FIXME
   //c->deleteLater();
 }
 

@@ -32,10 +32,17 @@ const int SECURE_LEVEL_2_PROTO_VERSION = 60;
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ), m_preventLoop( 0 ),
-    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" )
+    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" )
 {
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
+}
+
+void ConnectionSocket::connectToNetworkAddress( const QHostAddress& host_address, int host_port )
+{
+  m_hostAndPort = QString( "%1:%2" ).arg( host_address.toString() ).arg( host_port );
+  QTimer::singleShot( Settings::instance().connectionTimeout(), this, SLOT( checkConnectionTimeout() ) );
+  connectToHost( host_address, host_port );
 }
 
 const QByteArray& ConnectionSocket::cipherKey() const
@@ -305,4 +312,14 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 int ConnectionSocket::fileTransferBufferSize() const
 {
   return m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( (int)65456, Settings::instance().fileTransferBufferSize() );
+}
+
+void ConnectionSocket::checkConnectionTimeout()
+{
+  if( !isConnecting() )
+    return;
+
+  qDebug() << "Connection timeout for" << m_hostAndPort;
+  disconnectFromHost();
+  emit disconnected();
 }

@@ -212,7 +212,7 @@ User UserManager::findUserByHostAddressAndPort( const QHostAddress& host_address
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with IP address" << host_address.toString() << "and port" << host_port;
+  qDebug() << "Unable to find user with IP address" << qPrintable( host_address.toString() ) << "and port" << host_port;
 #endif
 
   return User();

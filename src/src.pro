@@ -81,6 +81,7 @@ HEADERS += AudioManager.h \
   GuiSearchUser.h \
   GuiShareLocal.h \
   GuiShareNetwork.h \
+  GuiShortcut.h \
   GuiSystemTray.h \
   GuiTransferFile.h \
   GuiUserItem.h \
@@ -96,6 +97,7 @@ HEADERS += AudioManager.h \
   Message.h \
   MessageManager.h \
   MessageRecord.h \
+  NetworkAddress.h \
   NetworkManager.h \
   PluginManager.h \
   Protocol.h \
@@ -176,6 +178,7 @@ SOURCES += AudioManager.cpp \
   GuiSearchUser.cpp \
   GuiShareLocal.cpp \
   GuiShareNetwork.cpp \
+  GuiShortcut.cpp \
   GuiSystemTray.cpp \
   GuiTransferFile.cpp \
   GuiUserItem.cpp \
@@ -191,6 +194,7 @@ SOURCES += AudioManager.cpp \
   Message.cpp \
   MessageManager.cpp \
   MessageRecord.cpp \
+  NetworkAddress.cpp \
   NetworkManager.cpp \
   PluginManager.cpp \
   Protocol.cpp \
@@ -222,6 +226,7 @@ FORMS += GuiAddUser.ui \
   GuiSearchUser.ui \
   GuiShareLocal.ui \
   GuiShareNetwork.ui \
+  GuiShortcut.ui \
   GuiUserList.ui \
   GuiVCard.ui \
   GuiWizard.ui

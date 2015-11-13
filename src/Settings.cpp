@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "ChatMessage.h"
+#include "NetworkAddress.h"
 #include "Settings.h"
 #include "Version.h"
 
@@ -89,6 +90,8 @@ Settings::Settings()
   m_alwaysOpenNewFloatingChat = false;
   m_acceptConnectionsOnlyFromWorkgroups = false;
   m_maxUserStatusInList = 10;
+
+  m_connectionTimeout = 5000;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -251,6 +254,13 @@ bool Settings::createDefaultHostsFile()
   sl << "# 192.168.2.17";
   sl << "# 10.184.5.255";
   sl << "# 10.2.4.255";
+  sl << "# 2001:db8:1f70::999:de8:7648:6e8";
+  sl << "#";
+  sl << "# From version 3.0.1 you can also add port in the host addresses:";
+  sl << "#";
+  sl << "# 10.184.9.132:6475";
+  sl << "# [2001:db8:1f70::999:de8:7648:6e8]:6475";
+  sl << "#";
   sl << " ";
 
   QFile file_host_ini( defaultHostsFilePath( false ) );
@@ -470,11 +480,13 @@ void Settings::loadBroadcastAddressesFromFileHosts()
   qDebug() << "Reading HOSTS from file" << file.fileName();
   QString address_string;
   QString line_read;
+  int num_lines = 0;
   char c;
   int hosts_found = 0;
 
   while( !file.atEnd() )
   {
+    num_lines++;
     line_read = file.readLine();
     if( line_read.size() > 0 )
     {
@@ -486,9 +498,10 @@ void Settings::loadBroadcastAddressesFromFileHosts()
         if( c == '#' || c == '/' || c == '*' )
           continue;
 
-        if( QHostAddress( address_string ).isNull() )
+        NetworkAddress na = NetworkAddress::fromString( address_string );
+        if( !na.isValid() )
         {
-          qWarning() << "Invalid broadcast address found:" << address_string;
+          qWarning() << "Invalid broadcast address found in line" << num_lines << ":" << address_string;
           continue;
         }
 
@@ -698,12 +711,12 @@ void Settings::load()
   m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
   m_pingInterval = qMax( sets->value( "PingInterval", 31000 ).toInt(), 1000 );
-  m_pongTimeout = qMax( sets->value( "PongTimeout", 98000 ).toInt(), 1000 );
+  m_pongTimeout = qMax( sets->value( "PongTimeout", 98000 ).toInt(), 3000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 1000 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
-
+  m_connectionTimeout = qMax( sets->value( "ConnectionTimeout", m_connectionTimeout ).toInt(), 1000 );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -909,6 +922,7 @@ void Settings::save()
   sets->setValue( "PingInterval", m_pingInterval );
   sets->setValue( "PongTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
+  sets->setValue( "ConnectionTimeout", m_connectionTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS

@@ -3225,6 +3225,22 @@ il file %2 (%3)?</translation>
         <source>If enabled the user in list has colored backrgound as status</source>
         <translation>Se abilitata l&apos;utente in lista avrà lo sfondo colorato in base al suo stato</translation>
     </message>
+    <message>
+        <source>Show only message notifications</source>
+        <translation>Mostra solo notifiche dei messaggi</translation>
+    </message>
+    <message>
+        <source>If enabled tray icon shows only message notifications</source>
+        <translation>Se abilitata l&apos;icona di sistema mostrerà solo le notifiche dei messaggi</translation>
+    </message>
+    <message>
+        <source>Shortcuts...</source>
+        <translation>Scorciatoie...</translation>
+    </message>
+    <message>
+        <source>Enable and edit your custom shortcuts</source>
+        <translation>Abilita e modifica le scorciatoie personalizzabili</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4091,6 +4107,60 @@ il file %2 (%3)?</translation>
     </message>
 </context>
 <context>
+    <name>GuiShortcut</name>
+    <message>
+        <source>Shortcuts</source>
+        <translation>Scorciatoie</translation>
+    </message>
+    <message>
+        <source>Key</source>
+        <translation>Tasti</translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation>Azione</translation>
+    </message>
+    <message>
+        <source>Insert the new shorcut for %1</source>
+        <translation type="vanished">Inserisci la nuova combinazione per %1</translation>
+    </message>
+    <message>
+        <source>Insert shorcut for the action: %1</source>
+        <translation>Inserisci la combinazione di tasti per l&apos;azione: %1</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShortcutDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Use custom shortcuts (restart needed after changing)</source>
+        <translation>Usa scorciatoie personalizzate (riavvio richiesto dopo un cambiamento)</translation>
+    </message>
+    <message>
+        <source>Restore to default language</source>
+        <translation type="obsolete">Ripristina la lingua predefinita</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation>Ripristina</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Restore default shortcuts</source>
+        <translation>Ripristina le scorcatoie predefinite</translation>
+    </message>
+</context>
+<context>
     <name>GuiSystemTray</name>
     <message>
         <source>1 new message</source>
@@ -4587,6 +4657,22 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Click to send a private message</source>
         <translation>Click per inviare un messaggio privato</translation>
+    </message>
+    <message>
+        <source>Empty</source>
+        <translation>Vuota</translation>
+    </message>
+    <message>
+        <source>Send file</source>
+        <translation>Invia un file</translation>
+    </message>
+    <message>
+        <source>Show file transfers</source>
+        <translation>Mostra il trasferimento dei file</translation>
+    </message>
+    <message>
+        <source>Set focus in message box</source>
+        <translation>Attiva la finestra dei messaggi</translation>
     </message>
 </context>
 <context>
