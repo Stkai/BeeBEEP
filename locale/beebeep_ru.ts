@@ -955,18 +955,18 @@
         <translation>Показать только сообщения в чате по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="336"/>
+        <location filename="../src/GuiChat.cpp" line="341"/>
         <source>All Lan Users</source>
         <translation>Все пользователи сети</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="364"/>
+        <location filename="../src/GuiChat.cpp" line="369"/>
         <source>(You have left)</source>
         <translation>(Вы вышли)</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="350"/>
-        <location filename="../src/GuiChat.cpp" line="366"/>
+        <location filename="../src/GuiChat.cpp" line="355"/>
+        <location filename="../src/GuiChat.cpp" line="371"/>
         <source>You</source>
         <translation>Вы</translation>
     </message>
@@ -981,28 +981,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="368"/>
-        <location filename="../src/GuiChat.cpp" line="377"/>
+        <location filename="../src/GuiChat.cpp" line="373"/>
+        <location filename="../src/GuiChat.cpp" line="385"/>
         <source>offline</source>
         <translation>отключены</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="385"/>
+        <location filename="../src/GuiChat.cpp" line="393"/>
         <source>Show profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="395"/>
+        <location filename="../src/GuiChat.cpp" line="403"/>
         <source>Show members</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="399"/>
+        <location filename="../src/GuiChat.cpp" line="407"/>
         <source>Nobody</source>
         <translation>Никто</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="399"/>
+        <location filename="../src/GuiChat.cpp" line="407"/>
         <source>and</source>
         <translation>и</translation>
     </message>
@@ -1011,12 +1011,12 @@
         <translation type="vanished">В</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="479"/>
+        <location filename="../src/GuiChat.cpp" line="487"/>
         <source>last %1 messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="641"/>
+        <location filename="../src/GuiChat.cpp" line="650"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Пожалуйста, выберите файл для сохранения сообщений чата.</translation>
     </message>
@@ -1027,47 +1027,47 @@ Please check the file or the directories write permissions.</source>
 Пожалуйста, проверьте разрешения на запись файла или папок.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="655"/>
+        <location filename="../src/GuiChat.cpp" line="664"/>
         <source>%1: save completed.</source>
         <translation>%1: сохранение завершено.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="655"/>
+        <location filename="../src/GuiChat.cpp" line="664"/>
         <source>Ok</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="696"/>
+        <location filename="../src/GuiChat.cpp" line="705"/>
         <source>Unable to save temporary file: %1</source>
         <translation type="unfinished">Не удается сохранить временный файл: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="734"/>
+        <location filename="../src/GuiChat.cpp" line="743"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Вы дейсвительно хотите отправить %1 %2 членам этого чата?</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="735"/>
+        <location filename="../src/GuiChat.cpp" line="744"/>
         <source>file</source>
         <translation>файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="735"/>
+        <location filename="../src/GuiChat.cpp" line="744"/>
         <source>files</source>
         <translation>файлы</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="736"/>
+        <location filename="../src/GuiChat.cpp" line="745"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="736"/>
+        <location filename="../src/GuiChat.cpp" line="745"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="749"/>
+        <location filename="../src/GuiChat.cpp" line="758"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Библиотека Qt для этой ОС не поддерживает перетаскивание для файлов. Вы должны выбрать снова файл для отправки.</translation>
     </message>
@@ -4154,7 +4154,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="58"/>
+        <location filename="../src/GuiVCard.cpp" line="59"/>
         <source>Birthday: %1</source>
         <translation>День рождения: %1</translation>
     </message>
@@ -4171,37 +4171,37 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">использовать новый %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="84"/>
+        <location filename="../src/GuiVCard.cpp" line="85"/>
         <source>unknown</source>
         <translation>неизвестный</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="86"/>
+        <location filename="../src/GuiVCard.cpp" line="87"/>
         <source>old %1</source>
         <translation>старый %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="88"/>
+        <location filename="../src/GuiVCard.cpp" line="89"/>
         <source>new %1</source>
         <translation>новый %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="100"/>
+        <location filename="../src/GuiVCard.cpp" line="103"/>
         <source>Remove from favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="105"/>
+        <location filename="../src/GuiVCard.cpp" line="108"/>
         <source>Add to favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="110"/>
+        <location filename="../src/GuiVCard.cpp" line="113"/>
         <source>Chat with all</source>
         <translation>Общаться со всеми</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="116"/>
+        <location filename="../src/GuiVCard.cpp" line="119"/>
         <source>Open chat</source>
         <translation>Открыть чат</translation>
     </message>

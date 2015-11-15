@@ -898,18 +898,18 @@
         <translation>Dernier message %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="336"/>
+        <location filename="../src/GuiChat.cpp" line="341"/>
         <source>All Lan Users</source>
         <translation>Tous les utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="364"/>
+        <location filename="../src/GuiChat.cpp" line="369"/>
         <source>(You have left)</source>
         <translation>(Vous avez quitté)</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="350"/>
-        <location filename="../src/GuiChat.cpp" line="366"/>
+        <location filename="../src/GuiChat.cpp" line="355"/>
+        <location filename="../src/GuiChat.cpp" line="371"/>
         <source>You</source>
         <translation>Vous</translation>
     </message>
@@ -929,83 +929,83 @@
         <translation>Editer un groupe</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="368"/>
-        <location filename="../src/GuiChat.cpp" line="377"/>
+        <location filename="../src/GuiChat.cpp" line="373"/>
+        <location filename="../src/GuiChat.cpp" line="385"/>
         <source>offline</source>
         <translation>hors ligne</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="385"/>
+        <location filename="../src/GuiChat.cpp" line="393"/>
         <source>Show profile</source>
         <translation>Afficher le profil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="395"/>
+        <location filename="../src/GuiChat.cpp" line="403"/>
         <source>Show members</source>
         <translation>Afficher les membres</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="399"/>
+        <location filename="../src/GuiChat.cpp" line="407"/>
         <source>Nobody</source>
         <translation>Personne</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="399"/>
+        <location filename="../src/GuiChat.cpp" line="407"/>
         <source>and</source>
         <translation>et</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="479"/>
+        <location filename="../src/GuiChat.cpp" line="487"/>
         <source>last %1 messages</source>
         <translation>les %1 derniers messsages</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="641"/>
+        <location filename="../src/GuiChat.cpp" line="650"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Sélectionner un fichier pour enregistrer les messages du chat.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="655"/>
+        <location filename="../src/GuiChat.cpp" line="664"/>
         <source>%1: save completed.</source>
         <translation>%1 enregistrement réussi.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="655"/>
+        <location filename="../src/GuiChat.cpp" line="664"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="696"/>
+        <location filename="../src/GuiChat.cpp" line="705"/>
         <source>Unable to save temporary file: %1</source>
         <translation type="unfinished">Impossible d&apos;enregistrer le fichier temporaire: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="734"/>
+        <location filename="../src/GuiChat.cpp" line="743"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Voulez-vous vraiment envoyer %1 %2 aux membres de ce chat ?</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="735"/>
+        <location filename="../src/GuiChat.cpp" line="744"/>
         <source>file</source>
         <translation>fichier</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="735"/>
+        <location filename="../src/GuiChat.cpp" line="744"/>
         <source>files</source>
         <translation>fichiers</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="736"/>
+        <location filename="../src/GuiChat.cpp" line="745"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="736"/>
+        <location filename="../src/GuiChat.cpp" line="745"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="749"/>
+        <location filename="../src/GuiChat.cpp" line="758"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>La librairie QT pour ce système d&apos;exploitation ne supporte pas le glisser-déposer des fichiers. Vous devez resélectionner le fichier à envoyer.</translation>
     </message>
@@ -3740,42 +3740,42 @@ Please select a different name.</source>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="58"/>
+        <location filename="../src/GuiVCard.cpp" line="59"/>
         <source>Birthday: %1</source>
         <translation>Date de naissance: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="84"/>
+        <location filename="../src/GuiVCard.cpp" line="85"/>
         <source>unknown</source>
         <translation>inconnu</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="86"/>
+        <location filename="../src/GuiVCard.cpp" line="87"/>
         <source>old %1</source>
         <translation>%1 ans</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="88"/>
+        <location filename="../src/GuiVCard.cpp" line="89"/>
         <source>new %1</source>
         <translation>nouveau %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="100"/>
+        <location filename="../src/GuiVCard.cpp" line="103"/>
         <source>Remove from favorites</source>
         <translation>Supprimer des favoris</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="105"/>
+        <location filename="../src/GuiVCard.cpp" line="108"/>
         <source>Add to favorites</source>
         <translation>Ajouter aux favoris</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="110"/>
+        <location filename="../src/GuiVCard.cpp" line="113"/>
         <source>Chat with all</source>
         <translation>Chatter avec tous</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="116"/>
+        <location filename="../src/GuiVCard.cpp" line="119"/>
         <source>Open chat</source>
         <translation>Ouvrir le chat</translation>
     </message>

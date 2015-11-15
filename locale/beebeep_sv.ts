@@ -894,18 +894,18 @@
         <translation>Senaste meddelande %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="336"/>
+        <location filename="../src/GuiChat.cpp" line="341"/>
         <source>All Lan Users</source>
         <translation>Alla LAN-användare</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="364"/>
+        <location filename="../src/GuiChat.cpp" line="369"/>
         <source>(You have left)</source>
         <translation>(Du har lämnat chatten)</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="350"/>
-        <location filename="../src/GuiChat.cpp" line="366"/>
+        <location filename="../src/GuiChat.cpp" line="355"/>
+        <location filename="../src/GuiChat.cpp" line="371"/>
         <source>You</source>
         <translation>Du</translation>
     </message>
@@ -925,83 +925,83 @@
         <translation>Redigera grupp</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="368"/>
-        <location filename="../src/GuiChat.cpp" line="377"/>
+        <location filename="../src/GuiChat.cpp" line="373"/>
+        <location filename="../src/GuiChat.cpp" line="385"/>
         <source>offline</source>
         <translation>bortkopplad</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="385"/>
+        <location filename="../src/GuiChat.cpp" line="393"/>
         <source>Show profile</source>
         <translation>Visa profil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="395"/>
+        <location filename="../src/GuiChat.cpp" line="403"/>
         <source>Show members</source>
         <translation>Visa medlemmar</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="399"/>
+        <location filename="../src/GuiChat.cpp" line="407"/>
         <source>Nobody</source>
         <translation>Ingen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="399"/>
+        <location filename="../src/GuiChat.cpp" line="407"/>
         <source>and</source>
         <translation>och</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="479"/>
+        <location filename="../src/GuiChat.cpp" line="487"/>
         <source>last %1 messages</source>
         <translation>senaste %1 meddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="641"/>
+        <location filename="../src/GuiChat.cpp" line="650"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Välj en fil att spara chatten i.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="655"/>
+        <location filename="../src/GuiChat.cpp" line="664"/>
         <source>%1: save completed.</source>
         <translation>%1: Sparat.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="655"/>
+        <location filename="../src/GuiChat.cpp" line="664"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="696"/>
+        <location filename="../src/GuiChat.cpp" line="705"/>
         <source>Unable to save temporary file: %1</source>
         <translation type="unfinished">Kan inte spara tempfilen: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="734"/>
+        <location filename="../src/GuiChat.cpp" line="743"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Vill du verkligen skicka %1 %2 till medlemmarna i den här chatten?</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="735"/>
+        <location filename="../src/GuiChat.cpp" line="744"/>
         <source>file</source>
         <translation>fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="735"/>
+        <location filename="../src/GuiChat.cpp" line="744"/>
         <source>files</source>
         <translation>filer</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="736"/>
+        <location filename="../src/GuiChat.cpp" line="745"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="736"/>
+        <location filename="../src/GuiChat.cpp" line="745"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="749"/>
+        <location filename="../src/GuiChat.cpp" line="758"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt library för det här operativsystemet, stöder inte &apos;dra och släpp&apos; för filer. Du måste välja filen igen för att skicka.</translation>
     </message>
@@ -3725,42 +3725,42 @@ Välj ett annat namn.</translation>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="58"/>
+        <location filename="../src/GuiVCard.cpp" line="59"/>
         <source>Birthday: %1</source>
         <translation>Födelsedag: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="84"/>
+        <location filename="../src/GuiVCard.cpp" line="85"/>
         <source>unknown</source>
         <translation>okänd</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="86"/>
+        <location filename="../src/GuiVCard.cpp" line="87"/>
         <source>old %1</source>
         <translation>gammal %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="88"/>
+        <location filename="../src/GuiVCard.cpp" line="89"/>
         <source>new %1</source>
         <translation>ny %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="100"/>
+        <location filename="../src/GuiVCard.cpp" line="103"/>
         <source>Remove from favorites</source>
         <translation>Ta bort från favoriter</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="105"/>
+        <location filename="../src/GuiVCard.cpp" line="108"/>
         <source>Add to favorites</source>
         <translation>Lägg till i favoriter</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="110"/>
+        <location filename="../src/GuiVCard.cpp" line="113"/>
         <source>Chat with all</source>
         <translation>Chatta med alla</translation>
     </message>
     <message>
-        <location filename="../src/GuiVCard.cpp" line="116"/>
+        <location filename="../src/GuiVCard.cpp" line="119"/>
         <source>Open chat</source>
         <translation>Öppna chatt</translation>
     </message>
