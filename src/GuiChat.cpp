@@ -79,6 +79,10 @@ GuiChat::GuiChat( QWidget *parent )
   m_lastMessageUserId = 0;
   m_isFloating = false;
 
+  mp_scFocusInChat = new QShortcut( this );
+  mp_scFocusInChat->setContext( Qt::WindowShortcut );
+  connect( mp_scFocusInChat, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
+
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
@@ -90,11 +94,6 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_pbDetach, SIGNAL( clicked() ), this, SLOT( detachThisChat() ) );
   connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
 
-  if( Settings::instance().useShortcuts() )
-  {
-    QShortcut* sc = new QShortcut( ShortcutManager::instance().shortcut( ShortcutManager::SetFocusInMessageBox ), this );
-    connect( sc, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
-  }
 }
 
 void GuiChat::enableDetachButtons()
@@ -140,8 +139,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
 
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
-  if( Settings::instance().useShortcuts() )
-    mp_actSendFile->setShortcut( ShortcutManager::instance().shortcut( ShortcutManager::SendFile ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
@@ -315,7 +312,10 @@ void GuiChat::updateUser( const User& u )
 {
   if( m_chatUsers.find( u.id() ).isValid() )
   {
-    m_chatUsers.set( u );
+    if( UserManager::instance().findUser( u.id() ).isValid() )
+      m_chatUsers.set( u );
+    else
+      m_chatUsers.remove( u );
     setChatUsers();
   }
 }
@@ -331,10 +331,12 @@ void GuiChat::setChatUsers()
   mp_pbProfile->disconnect();
   mp_pbProfile->setToolTip( QString( "" ) );
 
+  bool chat_has_members = false;
   Chat c = ChatManager::instance().chat( m_chatId );
 
   if( c.isDefault() )
   {
+    chat_has_members = true;
     mp_pbProfile->setIcon( QIcon( ":images/default-chat-online.png" ) );
     chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
     mp_menuMembers->setEnabled( false );
@@ -372,6 +374,9 @@ void GuiChat::setChatUsers()
       }
       else
       {
+        if( !chat_has_members )
+          chat_has_members = true;
+
         if( !isActiveUser( c, u ) )
           sl.append( QString( "(%1 has left)" ).arg( u.name() ) );
         else if( u.isStatusConnected() )
@@ -408,7 +413,7 @@ void GuiChat::setChatUsers()
 #endif
 
   mp_lTitle->setText( chat_users );
-  mp_teMessage->setEnabled( isActiveUser( c, Settings::instance().localUser() ) );
+  mp_teMessage->setEnabled( isActiveUser( c, Settings::instance().localUser() ) && chat_has_members );
 }
 
 void GuiChat::reloadChatUsers()
@@ -513,7 +518,8 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
 
 void GuiChat::ensureFocusInChat()
 {
-  mp_teMessage->setFocus();
+  if( mp_teMessage->isEnabled() )
+    mp_teMessage->setFocus();
 }
 
 void GuiChat::ensureLastMessageVisible()
@@ -797,4 +803,22 @@ void GuiChat::detachThisChat()
 void GuiChat::editChatMembers()
 {
   emit editGroupRequestFromChat( m_chatId );
+}
+
+void GuiChat::updateShortcuts()
+{
+  QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::SetFocusInMessageBox );
+  if( !ks.isEmpty() )
+  {
+    mp_scFocusInChat->setKey( ks );
+    mp_scFocusInChat->setEnabled( Settings::instance().useShortcuts() );
+  }
+  else
+    mp_scFocusInChat->setEnabled( false );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::SendFile );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    mp_actSendFile->setShortcut( ks );
+  else
+    mp_actSendFile->setShortcut( QKeySequence() );
 }

@@ -33,7 +33,7 @@ GuiUserList::GuiUserList( QWidget* parent )
 {
   setupUi( this );
 
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
   gridLayout->setHorizontalSpacing( -1 );
   gridLayout->setVerticalSpacing( -1 );
 #endif

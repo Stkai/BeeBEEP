@@ -432,6 +432,12 @@ bool Core::removeOfflineUser( VNumber user_id )
     return false;
   }
 
+  if( ChatManager::instance().userIsInGroupChat( u.id() ) )
+  {
+    qWarning() << "User" << u.path() << "is in a group chat and cannot be removed from list";
+    return false;
+  }
+
   if( UserManager::instance().removeUser( u ) )
   {
     qDebug() << "User" << u.path() << "is removed from list";

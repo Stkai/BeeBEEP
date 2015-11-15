@@ -123,8 +123,13 @@ QStringList UserList::toStringList( bool only_user_name, bool only_connected ) c
 UserList UserList::fromUsersId( const QList<VNumber>& users_id ) const
 {
   UserList ul;
+  User u;
   foreach( VNumber user_id, users_id )
-    ul.set( find( user_id ) );
+  {
+    u = find( user_id );
+    if( u.isValid() )
+      ul.set( u );
+  }
   return ul;
 }
 

@@ -49,7 +49,8 @@ public:
   int unreadMessages() const;
   bool isGroupChat( VNumber ) const;
 
-  QList<Chat> groupChatForUser( VNumber ) const;
+  QList<Chat> groupChatsForUser( VNumber ) const;
+  bool userIsInGroupChat( VNumber ) const;
   Chat groupChatForUsers( const QList<VNumber>& ) const;
 
   void addSavedChats( const QMap<QString, QString>& );

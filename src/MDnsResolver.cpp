@@ -70,6 +70,7 @@ void MDnsResolver::MDnsResolveReply( DNSServiceRef, DNSServiceFlags,
   if( error_code != kDNSServiceErr_NoError )
   {
     int error_code_int = (int)error_code;
+    qWarning() << "MDnsResolver has found an error with code:" << error_code_int;
     emit service_resolver->error( error_code_int );
     return;
   }

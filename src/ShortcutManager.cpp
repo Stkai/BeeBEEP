@@ -68,11 +68,24 @@ void ShortcutManager::loadFromStringList( const QStringList& sl )
   }
 }
 
+QString ShortcutManager::shortcutKey( const QKeySequence& ks ) const
+{
+#ifdef Q_OS_MAC
+  return ks.toString().replace( QString( "Ctrl" ), QString( "Cmd" ) );
+#else
+  return ks.toString().replace( QString( "Cmd" ), QString( "Ctrl" ) );
+#endif
+}
+
 bool ShortcutManager::setShortcut( int st, const QString& s )
 {
   if( st > 0 && st < NumShortcut )
   {
-    QKeySequence ks = QKeySequence::fromString( s );
+    QString s_key = s;
+#ifdef Q_OS_MAC
+    s_key.replace( QString( "Cmd" ), QString( "Ctrl" ) );
+#endif
+    QKeySequence ks = QKeySequence::fromString( s_key );
     m_shortcuts[ st ] = ks;
     return true;
   }

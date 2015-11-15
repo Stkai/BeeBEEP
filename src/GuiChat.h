@@ -51,6 +51,8 @@ public:
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
 
+  void updateShortcuts();
+
   inline QSplitter* chatSplitter() const;
 
 signals:
@@ -134,6 +136,8 @@ private:
   QSplitter* mp_splitter;
 
   QPalette m_defaultChatPalette;
+
+  QShortcut* mp_scFocusInChat;
 
 };
 

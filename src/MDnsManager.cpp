@@ -53,7 +53,7 @@ bool MDnsManager::start( const QString& service_base_name, const QString& servic
   MDnsRecord mdr;
   mdr.setServiceName( QString( "%1 %2:%3" ).arg( service_base_name ).arg( listener_address ).arg( listener_port ) );
   mdr.setRegisteredType( service_type );
-  qDebug() << objectName() << "started with" << mdr.name();
+  qDebug() << objectName() << "starting with" << mdr.name();
   if( mp_register->registerService( mdr, listener_port ) )
   {
     m_isActive = true;

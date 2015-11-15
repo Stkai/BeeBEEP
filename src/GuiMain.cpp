@@ -160,6 +160,7 @@ GuiMain::GuiMain( QWidget *parent )
   mp_home->loadDefaultChat();
 
   initGuiItems();
+  updateShortcuts();
 
   statusBar()->showMessage( tr( "Ready" ) );
 }
@@ -1055,8 +1056,6 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
-  if( Settings::instance().useShortcuts() )
-    mp_actViewFileTransfer->setShortcut( ShortcutManager::instance().shortcut( ShortcutManager::ShowFileTransfers ) );
 
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
@@ -2090,7 +2089,7 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
   connect( gvc, SIGNAL( toggleFavorite( VNumber ) ), this, SLOT( toggleUserFavorite( VNumber ) ) );
   connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUserFromList( VNumber ) ) );
-  gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id() );
+  gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id(), mp_core->isConnected() );
 
   if( ensure_visible && dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
   {
@@ -2209,7 +2208,7 @@ void GuiMain::hideToTrayIcon()
 
 void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 {
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
 
   // In Mac that is the expected behavior, there is no distinction
   // between left and right buttons for the systray icons.
@@ -3271,6 +3270,7 @@ void GuiMain::detachChat( VNumber chat_id )
   m_floatingChats.append( fl_chat );
 
   fl_chat->checkWindowFlagsAndShow();
+  fl_chat->guiChat()->updateShortcuts();
   fl_chat->guiChat()->ensureLastMessageVisible();
   fl_chat->guiChat()->ensureFocusInChat();
 
@@ -3420,4 +3420,18 @@ void GuiMain::editShortcuts()
 
   Settings::instance().setShortcuts( ShortcutManager::instance().saveToStringList() );
   Settings::instance().save();
+  updateShortcuts();
+}
+
+void GuiMain::updateShortcuts()
+{
+  mp_chat->updateShortcuts();
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+     fl_chat->guiChat()->updateShortcuts();
+
+  QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowFileTransfers );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    mp_actViewFileTransfer->setShortcut( ks );
+  else
+    mp_actViewFileTransfer->setShortcut( QKeySequence() );
 }

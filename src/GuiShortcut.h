@@ -35,7 +35,7 @@ public:
   explicit GuiShortcut( QWidget *parent = 0 );
   void loadShortcuts();
 
-protected slots:
+private slots:
   void saveShortcuts();
   void restoreDefault();
   void checkItemClicked( QTreeWidgetItem*, int );

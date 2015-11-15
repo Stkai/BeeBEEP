@@ -38,11 +38,14 @@ public:
   void setDefaultShortcuts();
 
   inline const QKeySequence& shortcut( int ) const;
+  inline QString shortcutKey( int ) const;
+  QString shortcutKey( const QKeySequence& ) const;
   inline const QString& shortcutName( int ) const;
   bool setShortcut( int, const QString& );
 
   QStringList saveToStringList() const;
   void loadFromStringList( const QStringList& );
+
 
   static ShortcutManager& instance()
   {
@@ -71,6 +74,7 @@ private:
 
 // Inline Functions
 inline const QKeySequence& ShortcutManager::shortcut( int st ) const { return st > 0 && st < NumShortcut ? m_shortcuts.at( st ) : m_shortcuts.at( Empty ); }
+inline QString ShortcutManager::shortcutKey( int st ) const { return shortcutKey( shortcut( st ) ); }
 inline const QString& ShortcutManager::shortcutName( int st ) const { return st > 0 && st < NumShortcut ? m_shortcutNames.at( st ) : m_shortcutNames.at( Empty ); }
 
 #endif // BEEBEEP_SHORTCUTMANAGER_H

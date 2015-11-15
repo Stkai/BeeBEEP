@@ -20,7 +20,7 @@
    <item row="0" column="0" colspan="4">
     <widget class="QCheckBox" name="mp_cbUseShortcuts">
      <property name="text">
-      <string>Use custom shortcuts (restart needed after changing)</string>
+      <string>Use custom shortcuts</string>
      </property>
     </widget>
    </item>

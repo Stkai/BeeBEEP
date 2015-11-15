@@ -63,6 +63,7 @@ void MDnsBrowser::MDnsBrowseReply( DNSServiceRef, DNSServiceFlags flags, quint32
   if( error_code != kDNSServiceErr_NoError )
   {
     int error_code_int = (int)error_code;
+    qWarning() << "MDnsBrowser has found an error with code:" << error_code_int;
     emit service_browser->error( error_code_int );
   }
   else

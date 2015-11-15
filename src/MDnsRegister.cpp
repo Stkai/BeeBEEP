@@ -45,19 +45,21 @@ bool MDnsRegister::registerService( const MDnsRecord& mdns_record, int service_p
     return false;
   }
 
+  qDebug() << objectName() << "is starting to register service" << mdns_record.registeredType() << "on port" << service_port;
+
   DNSServiceErrorType error_code = DNSServiceRegister( &mp_dnss, 0, 0, mdns_record.serviceName().toUtf8().constData(),
                                                  mdns_record.registeredType().toUtf8().constData(),
                                                  mdns_record.replyDomain().isEmpty() ? 0 : mdns_record.replyDomain().toUtf8().constData(),
                                                  0, service_port, 0, 0, (DNSServiceRegisterReply)MDnsRegisterService, this );
   if( !checkErrorAndReadSocket( error_code ) )
   {
-    qWarning() << objectName() << "can not register" << mdns_record.registeredType() << "on port" << service_port;
+    qWarning() << objectName() << "can not register service" << mdns_record.registeredType() << "on port" << service_port;
     return false;
   }
   else
   {
     m_servicePort = service_port;
-    qDebug() << objectName() << "tries to register" << mdns_record.registeredType() << "on port" << service_port;
+    qDebug() << objectName() << "tries to register service" << mdns_record.registeredType() << "on port" << service_port;
     return true;
   }
 }
@@ -71,12 +73,15 @@ void MDnsRegister::MDnsRegisterService( DNSServiceRef, DNSServiceFlags,
   if( error_code != kDNSServiceErr_NoError )
   {
     int error_code_int = (int)error_code;
+    qWarning() << "MDnsRegister has found an error with code:" << error_code_int;
     emit service_register->error( error_code_int );
   }
   else
   {
-    service_register->setRecord( MDnsRecord( service_name, registered_type, reply_domain ) );
+    MDnsRecord mdr( service_name, registered_type, reply_domain );
+    service_register->setRecord( mdr );
     service_register->setServiceRegistered( true );
+    qDebug() << "MDnsRegister has registered service" << mdr.name();
     emit service_register->serviceRegistered();
   }
 }

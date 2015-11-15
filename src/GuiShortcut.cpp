@@ -59,7 +59,7 @@ void GuiShortcut::loadShortcuts()
     if( i != ShortcutManager::Empty )
     {
       item = new QTreeWidgetItem( mp_twShortcuts );
-      item->setText( 0, ShortcutManager::instance().shortcut( i ).toString() );
+      item->setText( 0, ShortcutManager::instance().shortcutKey( i ) );
       item->setText( 1, ShortcutManager::instance().shortcutName( i ) );
       item->setData( 0, Qt::UserRole+1, i );
     }
@@ -70,6 +70,7 @@ void GuiShortcut::saveShortcuts()
 {
   Settings::instance().setUseShortcuts( mp_cbUseShortcuts->isChecked() );
   int shortcut_type;
+  QString s_key;
   QTreeWidgetItemIterator it( mp_twShortcuts );
   while( *it )
   {
@@ -101,8 +102,12 @@ void GuiShortcut::checkItemClicked( QTreeWidgetItem* item, int )
 
   if( !shortcut_key.isEmpty() )
   {
+#ifdef Q_OS_MAC
+    shortcut_key.replace( QString( "Ctrl" ), QString( "Meta" ) );
+    shortcut_key.replace( QString( "Cmd" ), QString( "Ctrl" ) );
+#endif
     QKeySequence ks = QKeySequence::fromString( shortcut_key );
-    item->setText( 0, ks.toString() );
+    item->setText( 0, ShortcutManager::instance().shortcutKey( ks ) );
   }
   else
     item->setText( 0, "" );

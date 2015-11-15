@@ -26,7 +26,8 @@
 #include "PluginManager.h"
 #include "Avatar.h"
 #include "Settings.h"
-#include "User.h"
+#include "UserManager.h"
+#include "ChatManager.h"
 
 
 GuiVCard::GuiVCard( QWidget *parent )
@@ -45,7 +46,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removeUserClicked() ) );
 }
 
-void GuiVCard::setVCard( const User& u, VNumber chat_id )
+void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected )
 {
   m_userId = u.id();
   m_chatId = chat_id;
@@ -87,7 +88,9 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
   else if( u.version() > Settings::instance().version( false ) )
     user_version = tr( "new %1" ).arg( u.version() );
 
-  QString user_status = QString( "<img src='%1' width=16 height=16 border=0 /> <b>%2</b>" ).arg( Bee::userStatusIconFileName( u.status() ), Bee::userStatusToString( u.status() ) );
+  int user_current_status = core_is_connected ? u.status() : User::Offline;
+
+  QString user_status = QString( "<img src='%1' width=16 height=16 border=0 /> <b>%2</b>" ).arg( Bee::userStatusIconFileName( user_current_status ), Bee::userStatusToString( user_current_status ) );
 
   if( user_version.isEmpty() )
     mp_lStatus->setText( user_status );
@@ -121,7 +124,8 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id )
       mp_pbFavorite->hide();
   }
 
-  if( u.isStatusConnected() )
+  if( u.isStatusConnected() || UserManager::instance().isUserInGroups( u.id() )
+          || ChatManager::instance().userIsInGroupChat( u.id() ) )
     mp_pbRemove->hide();
   else
     mp_pbRemove->show();

@@ -36,7 +36,7 @@ class GuiVCard : public QWidget, private Ui::GuiVCardWidget
 public:
   GuiVCard( QWidget* parent = 0 );
 
-  void setVCard( const User&, VNumber chat_id );
+  void setVCard( const User&, VNumber chat_id, bool );
 
 signals:
   void showChat( VNumber );

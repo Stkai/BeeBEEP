@@ -208,6 +208,7 @@ private:
   void setChatMessagesToShowInAction( QAction* );
   void loadUserStatusRecentlyUsed();
   void setUserStatusSelected( int );
+  void updateShortcuts();
 
 private:
   QStackedWidget* mp_stackedWidget;

@@ -143,7 +143,7 @@ bool ChatManager::isGroupChat( VNumber chat_id ) const
   return c.isGroup();
 }
 
-QList<Chat> ChatManager::groupChatForUser( VNumber user_id ) const
+QList<Chat> ChatManager::groupChatsForUser( VNumber user_id ) const
 {
   QList<Chat> chat_list;
   foreach( Chat c, m_chats )
@@ -152,6 +152,16 @@ QList<Chat> ChatManager::groupChatForUser( VNumber user_id ) const
       chat_list.append( c );
   }
   return chat_list;
+}
+
+bool ChatManager::userIsInGroupChat( VNumber user_id ) const
+{
+  foreach( Chat c, m_chats )
+  {
+    if( c.isGroup() && c.usersId().contains( user_id ) )
+      return true;
+  }
+  return false;
 }
 
 QString ChatManager::findPrivateChatSavedTextWithSameNickname( const QString& chat_name ) const

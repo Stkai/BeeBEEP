@@ -4137,7 +4137,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use custom shortcuts (restart needed after changing)</source>
-        <translation>Usa scorciatoie personalizzate (riavvio richiesto dopo un cambiamento)</translation>
+        <translation type="vanished">Usa scorciatoie personalizzate (riavvio richiesto dopo un cambiamento)</translation>
     </message>
     <message>
         <source>Restore to default language</source>
@@ -4158,6 +4158,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Restore default shortcuts</source>
         <translation>Ripristina le scorcatoie predefinite</translation>
+    </message>
+    <message>
+        <source>Use custom shortcuts</source>
+        <translation>Usa le scorciatoie personalizzate</translation>
     </message>
 </context>
 <context>

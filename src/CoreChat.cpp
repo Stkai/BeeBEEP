@@ -105,7 +105,7 @@ void Core::createPrivateChat( const User& u )
 
 void Core::checkGroupChatAfterUserReconnect( const User& u )
 {
-  QList<Chat> chat_list = ChatManager::instance().groupChatForUser( u.id() );
+  QList<Chat> chat_list = ChatManager::instance().groupChatsForUser( u.id() );
   if( chat_list.isEmpty() )
     return;
 
