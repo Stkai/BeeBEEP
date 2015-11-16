@@ -56,6 +56,7 @@ Settings::Settings()
   m_trustSystemAccount = false;
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
+  m_preferredSubnets = "";
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -168,6 +169,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "UseMulticastDns", m_useMulticastDns );
   #endif
     sets->setValue( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress );
+    sets->setValue( "PreferredSubnets", m_preferredSubnets );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -218,7 +220,7 @@ void Settings::loadRcFile()
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
   m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
-
+  m_preferredSubnets = sets->value( "PreferredSubnets", m_preferredSubnets ).toString();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -721,6 +723,8 @@ void Settings::load()
 
   sets->beginGroup( "Network");
   m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
+  if( !m_broadcastAddressesInSettings.isEmpty() )
+    m_broadcastAddressesInSettings.removeDuplicates();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );

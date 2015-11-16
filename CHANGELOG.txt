@@ -1,7 +1,7 @@
 BEEBEEP (Secure Lan Messanger)
 
 BeeBEEP 3.0.1
-- Workgroups
+- Workgroups (in the search users dialog)
 - Accept connections only from workgroups (option)
 - Recently used User Status can be selected
 - Drop or paste images on the message box
@@ -9,6 +9,7 @@ BeeBEEP 3.0.1
 - Enable and edit custom shortcuts (option)
 - Show only message notifications in system tray (option)
 - File beehosts.ini now accepts host address and port (see beehosts_example.ini for more informations)
+- Added "PreferredSubnets" in beebeep.rc (option)
 
 BeeBEEP 3.0.0
 - Fixed issue with "This app is preventing shutdown" in Windows

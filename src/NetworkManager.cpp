@@ -34,8 +34,6 @@ NetworkManager::NetworkManager()
 {
 }
 
-
-
 bool NetworkManager::searchLocalHostAddress()
 {
   QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
@@ -114,8 +112,27 @@ bool NetworkManager::searchLocalHostAddress()
     return true;
 
   // check forced subnet
-  if( forceLocalSubnet( Settings::instance().localSubnetForced() ) )
-    return true;
+  if( !Settings::instance().localSubnetForced().isEmpty() )
+  {
+    qDebug() << "Checking local subnet forced:" << qPrintable( Settings::instance().localSubnetForced() );
+    if( forceLocalSubnet( Settings::instance().localSubnetForced() ) )
+      return true;
+  }
+
+  // check preferred subnets in RC
+  if( !Settings::instance().preferredSubnets().isEmpty() )
+  {
+    QStringList preferred_subnets = Settings::instance().preferredSubnets().split( "," );
+    if( !preferred_subnets.isEmpty() )
+    {
+       foreach( QString preferred_subnet, preferred_subnets )
+      {
+        qDebug() << "Checking preferred subnet from RC:" << preferred_subnet;
+        if( forceLocalSubnet( preferred_subnet.trimmed() ) )
+          return true;
+      }
+    }
+  }
 
   if( !m_ipv4Addresses.isEmpty() )
   {
@@ -139,7 +156,7 @@ void NetworkManager::setLocalHostAddress( const QHostAddress& host_address )
   {
     qDebug() << "Local host address IPV4 selected:" << host_address.toString();
     m_localHostAddress = host_address;
-    m_localBroadcastAddress = subnetFromHostAddress( host_address );
+    m_localBroadcastAddress = broadcastSubnetFromIpv4HostAddress( host_address );
   }
   else if( isIpv6Address( host_address ) )
   {
@@ -195,54 +212,39 @@ bool NetworkManager::forceLocalHostAddress( const QHostAddress& local_host_addre
 
 bool NetworkManager::forceLocalSubnet( const QString& local_subnet_forced )
 {
-  if( local_subnet_forced.isEmpty() )
+  if( local_subnet_forced.simplified().isEmpty() )
     return false;
 
-  qDebug() << "Checking forced Subnet:" << local_subnet_forced;
-
-  QPair<QHostAddress, int> subnet_forced = QHostAddress::parseSubnet( local_subnet_forced );
-
-  if( subnet_forced.first.isNull() )
-    return false;
-
-  if( isIpv4Address( subnet_forced.first ) )
+  if( !m_ipv4Addresses.isEmpty() )
   {
-    if( m_ipv4Addresses.isEmpty() )
-      return false;
-
     foreach( QHostAddress host_address, m_ipv4Addresses )
     {
-      if( host_address.isInSubnet( subnet_forced ) )
+      if( hostAddressIsInBroadcastSubnet( host_address, local_subnet_forced ) )
       {
+        qDebug() << "Ipv4 host address" << qPrintable( host_address.toString() ) << "is in subnet" << local_subnet_forced;
         setLocalHostAddress( host_address );
         return true;
       }
     }
-
-    return false;
   }
 
-  if( isIpv6Address( subnet_forced.first ) )
+  if( !m_ipv6Addresses.isEmpty() )
   {
-    if( m_ipv6Addresses.isEmpty() )
-      return false;
-
     foreach( QHostAddress host_address, m_ipv6Addresses )
     {
-      if( host_address.isInSubnet( subnet_forced ) )
+      if( hostAddressIsInBroadcastSubnet( host_address, local_subnet_forced ) )
       {
+        qDebug() << "Ipv6 host address" << qPrintable( host_address.toString() ) << "is in subnet" << local_subnet_forced;
         setLocalHostAddress( host_address );
         return true;
       }
     }
-
-    return false;
   }
 
   return false;
 }
 
-QHostAddress NetworkManager::subnetFromHostAddress( const QHostAddress& host_address ) const
+QHostAddress NetworkManager::broadcastSubnetFromIpv4HostAddress( const QHostAddress& host_address ) const
 {
   if( host_address.isNull() )
     return QHostAddress();
@@ -298,4 +300,83 @@ bool NetworkManager::isLoopback( const QHostAddress& host_address ) const
 #else
   return host_address == QHostAddress::LocalHost || host_address == QHostAddress::LocalHostIPv6;
 #endif
+}
+
+bool NetworkManager::hostAddressIsInBroadcastSubnet( const QHostAddress& host_address, const QString& broadcast_subnet )
+{
+  if( broadcast_subnet.simplified().isEmpty() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Unable to check host address" << host_address.toString() << "in a empty broadcast subnet";
+#endif
+    return false;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Checking host address" << host_address.toString() << "in subnet" << broadcast_subnet << "...";
+#endif
+
+  QPair<QHostAddress, int> subnet_parsed = QHostAddress::parseSubnet( broadcast_subnet );
+
+  if( subnet_parsed.first.isNull() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Subnet" << broadcast_subnet << "has null host address";
+#endif
+    return false;
+  }
+
+  if( host_address.isInSubnet( subnet_parsed ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Host address" << host_address.toString() << "is in parsed subnet" << broadcast_subnet;
+#endif
+    return true;
+  }
+
+  if( isIpv6Address( host_address ) )
+    return false;
+
+  if( broadcast_subnet.contains( "/" ) )
+    return false;
+
+  if( !broadcast_subnet.contains( "255" ) )
+    return false;
+
+  QStringList sl_ha = host_address.toString().split( "." );
+  QStringList sl_bs = broadcast_subnet.split( "." );
+
+  if( sl_ha.size() != 4 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Host address" << host_address.toString() << "is invalid ipv4 address";
+#endif
+    return false;
+  }
+
+  if( sl_bs.size() != 4 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcast subnet" << broadcast_subnet << "is invalid ipv4 address";
+#endif
+    return false;
+  }
+
+  for( int i = 3; i >= 0; i-- )
+  {
+    if( sl_bs.at( i ) != QString( "255" ) && sl_ha.at( i ) != sl_bs.at( i ) )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Host address" << host_address.toString() << "is not in broadcast subnet" << broadcast_subnet;
+#endif
+      return false;
+    }
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Host address" << host_address.toString() << "is in broadcast subnet" << broadcast_subnet;
+#endif
+
+  return true;
+
 }

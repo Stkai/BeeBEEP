@@ -29,6 +29,7 @@ GuiLanguage::GuiLanguage( QWidget *parent )
   : QDialog( parent )
 {
   setupUi( this );
+  setObjectName( "GuiLanguage" );
 
   setWindowTitle( tr( "Select language" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
 
@@ -44,6 +45,12 @@ GuiLanguage::GuiLanguage( QWidget *parent )
 
   mp_leLanguage->setText( m_languageSelected );
   mp_lePath->setText( m_folderSelected );
+
+  QString s_site = tr( "For the latest language translations please visit the %1" )
+          .arg( QString( "<a href=""%1"">%2</a>").arg( Settings::instance().languageWebSite() ).arg( tr( "website" ) ) );
+
+  mp_labelLanguageSite->setText( s_site );
+
 
   connect( mp_pbSelect, SIGNAL( clicked() ), this, SLOT( selectLanguage() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

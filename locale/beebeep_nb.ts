@@ -2171,12 +2171,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="588"/>
         <source>Shortcuts...</source>
-        <translation type="unfinished"></translation>
+        <translation>Snarveier...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="589"/>
         <source>Enable and edit your custom shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på og rediger dine egne snarveier</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="597"/>
@@ -2331,12 +2331,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="947"/>
         <source>Show only message notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Bare vis meldingsvarsler</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="948"/>
         <source>If enabled tray icon shows only message notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Merk av for at oppgavelinjeikon kun skal vise meldingsvarsler</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1009"/>
@@ -3593,22 +3593,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="34"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Snarveier</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="37"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Tast</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="37"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Aksjon</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="97"/>
         <source>Insert shorcut for the action: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett in snarvei for aksjonen: %1</translation>
     </message>
 </context>
 <context>
@@ -3616,32 +3616,32 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiShortcut.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="23"/>
         <source>Use custom shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk egne snarveier</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="50"/>
         <source>Restore default shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenopprett standard snarveier</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="53"/>
         <source>Restore</source>
-        <translation type="unfinished">Gjenopprett</translation>
+        <translation>Gjenopprett</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="73"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="80"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
 </context>
 <context>
@@ -3995,22 +3995,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="100"/>
         <source>Empty</source>
-        <translation type="unfinished">Tom</translation>
+        <translation>Tom</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="102"/>
         <source>Send file</source>
-        <translation type="unfinished">Send fil</translation>
+        <translation>Send fil</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="104"/>
         <source>Show file transfers</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis filoverføring</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="106"/>
         <source>Set focus in message box</source>
-        <translation type="unfinished"></translation>
+        <translation>Gi meldingsboks fokus</translation>
     </message>
 </context>
 <context>

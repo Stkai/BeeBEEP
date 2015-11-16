@@ -56,6 +56,7 @@ void GuiSearchUser::loadSettings()
     mp_teAddressesInHosts->setPlainText( tr( "File is empty" ) );
 
   sl_tmp = Settings::instance().broadcastAddressesInSettings();
+  sl_tmp.removeDuplicates();
   if( sl_tmp.size() > 0 )
     mp_teAddressesInSettings->setPlainText( sl_tmp.join( ", " ) );
   else
@@ -85,6 +86,7 @@ void GuiSearchUser::checkAndSearch()
 
   if( !sl_tmp.isEmpty() )
   {
+    QStringList sl_addresses;
     foreach( QString s, sl_tmp )
     {
       QHostAddress host_address( s.simplified() );
@@ -97,9 +99,11 @@ void GuiSearchUser::checkAndSearch()
         mp_teAddressesInSettings->setFocus();
         return;
       }
+      else
+        sl_addresses.append( s.trimmed() );
     }
 
-    Settings::instance().setBroadcastAddressesInSettings( sl_tmp );
+    Settings::instance().setBroadcastAddressesInSettings( sl_addresses );
   }
   else
     Settings::instance().setBroadcastAddressesInSettings( QStringList() );

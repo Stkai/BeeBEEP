@@ -42,6 +42,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   mp_twUsers->setRootIsDecorated( false );
   mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu);
   mp_twUsers->setSelectionMode( QAbstractItemView::MultiSelection );
+  mp_twUsers->setColumnWidth( 0, 180 );
 
   connect( mp_pbAdd, SIGNAL( clicked() ), this, SLOT( addUser() ) );
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveUsers() ) );

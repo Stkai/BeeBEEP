@@ -157,7 +157,7 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
     else
     {
       if( !c->peerAddress().isNull() )
-        qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has refused password:" << c->errorString() << "-" << (int)se;
+        qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has refused connection:" << c->errorString() << "-" << (int)se;
     }
     closeConnection( c );
   }

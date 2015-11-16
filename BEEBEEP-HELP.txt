@@ -26,10 +26,11 @@ DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the con
 SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data
 SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) [1.0.0]
 AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP [1.0.0]
-DataFolderPath= you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder [1.0.3]
+DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder [1.0.3]
 AddAccountNameToDataFolder = you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath [1.0.3]
 UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking
 PreventMultipleConnectionsFromSingleHostAddress=[true/false] if enableb BeeBEEP blocks multiple connections from single IP address 
+PreferredSubnets=(Strings "" comma separated) you can specify your subnets. BeeBEEP search your default IP address in these entries (for example ="10.184.9.255,10.184.15.255") [3.0.1]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect

@@ -42,7 +42,8 @@ public:
   inline bool isIpv6Address( const QHostAddress& ) const;
   bool isLinkLocal( const QHostAddress& ) const;
   bool isLoopback( const QHostAddress& ) const;
-  QHostAddress subnetFromHostAddress( const QHostAddress& ) const;
+  QHostAddress broadcastSubnetFromIpv4HostAddress( const QHostAddress& ) const;
+  bool hostAddressIsInBroadcastSubnet( const QHostAddress&, const QString& );
 
   static NetworkManager& instance()
   {
@@ -63,6 +64,7 @@ public:
 protected:
   NetworkManager();
 
+  bool checkPreferredSubnets();
   bool forceLocalHostAddress( const QHostAddress& );
   bool forceLocalSubnet( const QString& );
   void setLocalHostAddress( const QHostAddress& );

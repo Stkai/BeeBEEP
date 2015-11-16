@@ -218,7 +218,7 @@ static int GetBoxSize( int pix_size )
 {
   int box_size = pix_size >= 10 ? pix_size / 10 : 1;
   if( box_size % 2 )
-    box_size--;
+    box_size++;
   box_size = qMax( 2, box_size );
   return box_size;
 }

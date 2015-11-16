@@ -277,7 +277,7 @@ QList<QHostAddress> Broadcaster::parseHostAddress( const QHostAddress& host_addr
     return ha_list;
   }
 
-  if( ha_string.contains( ":" ) )
+  if( NetworkManager::instance().isIpv6Address( host_address ) )
   {
     ha_list << host_address;
 #ifdef BEEBEEP_DEBUG

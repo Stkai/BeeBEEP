@@ -8,6 +8,7 @@ SaveDataInUserApplicationFolder=false
 AllowMultipleInstances=false
 UseMulticastDns=true
 PreventMultipleConnectionsFromSingleHostAddress=false
+PreferredSubnets=
 
 [Groups]
 TrustNickname=true

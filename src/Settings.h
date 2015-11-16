@@ -245,6 +245,7 @@ public:
   bool addSubnetToBroadcastAddress( const QHostAddress& );
   inline void SetPreventMultipleConnectionsFromSingleHostAddress( bool );
   inline bool preventMultipleConnectionsFromSingleHostAddress();
+  inline const QString& preferredSubnets() const;
 
   inline bool keyEscapeMinimizeInTray() const;
   inline void setKeyEscapeMinimizeInTray( bool );
@@ -378,6 +379,7 @@ private:
   bool m_allowMultipleInstances;
   QString m_dataFolderInRC;
   bool m_addAccountNameToDataFolder;
+  QString m_preferredSubnets;
 
   // Ini
   bool m_firstTime;
@@ -734,5 +736,6 @@ inline const QStringList& Settings::shortcuts() const { return m_shortcuts; }
 inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_value; }
 inline bool Settings::useShortcuts() const { return m_useShortcuts; }
 inline int Settings::connectionTimeout() const { return m_connectionTimeout; }
+inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
 
 #endif // BEEBEEP_SETTINGS_H
