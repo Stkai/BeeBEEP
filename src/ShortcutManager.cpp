@@ -106,6 +106,8 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcutNames[ SetFocusInMessageBox ] = QObject::tr( "Set focus in message box" );
   m_shortcuts[ SetFocusInMessageBox ] = QKeySequence( Qt::CTRL | Qt::Key_L );
 
+#ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )
     qDebug() << "Default shortcut" << i << shortcutName( (ShortcutType)i ) << "with key sequence:" << qPrintable( m_shortcuts.at( i ).toString() );
+#endif
 }
