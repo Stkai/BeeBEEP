@@ -382,7 +382,7 @@ bool Protocol::acceptConnectionFromWorkgroup( const Message& hello_message ) con
 
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
- /* Read User Field Data */
+  /* Read User Field Data */
   QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
   bool ok = false;
 
