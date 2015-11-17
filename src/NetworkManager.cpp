@@ -380,3 +380,60 @@ bool NetworkManager::hostAddressIsInBroadcastSubnet( const QHostAddress& host_ad
   return true;
 
 }
+
+QList<QHostAddress> NetworkManager::splitBroadcastSubnetToIpv4HostAddresses( const QHostAddress& host_address ) const
+{
+  QList<QHostAddress> ha_list;
+  QString ha_string = host_address.toString();
+
+  if( isIpv6Address( host_address ) )
+  {
+    ha_list << host_address;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "NetworkManager has found IPv6 address in broadcast subnet:" << ha_string;
+#endif
+    return ha_list;
+  }
+
+  if( !ha_string.contains( QLatin1String( "255" ) ) )
+  {
+    ha_list << host_address;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "NetworkManager has found IPv4 address in broadcast subnet:" << ha_string;
+#endif
+    return ha_list;
+  }
+
+  if( ha_string.count( QLatin1String( "255" ) ) > 1 )
+  {
+    ha_list << host_address;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "NetworkManager has found IPv4 subnet" << ha_string << "to wide and cannot split it";
+#endif
+    return ha_list;
+  }
+
+  QStringList ha_string_list = ha_string.split( "." );
+  if( ha_string_list.size() != 4 )
+  {
+    qWarning() << "NetworkManager has found an invalid IPv4 address in subnet:" << ha_string;
+    return ha_list;
+  }
+
+  if( ha_string_list.last() == QLatin1String( "255" ) )
+  {
+    ha_string_list.removeLast();
+    ha_string = ha_string_list.join( "." );
+    QString s_tmp;
+    for( int i = 1; i < 255; i++ )
+    {
+      s_tmp = QString( "%1.%2" ).arg( ha_string ).arg( i );
+      ha_list << QHostAddress( s_tmp );
+    }
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "NetworkManager has found IPv4 broadcast subnet" << ha_string << "and has splitted it";
+#endif
+  }
+
+  return ha_list;
+}

@@ -40,12 +40,12 @@ bool MDnsBrowser::browseForService( const QString& service_type )
 {
   if( mp_dnss )
   {
-    qWarning() << objectName() << "is already browsing the service:" << m_record.name();
+    qWarning() << qPrintable( objectName() ) << "is already browsing the service:" << m_record.name();
     return false;
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << objectName() << "starts to browse for the service:" << service_type;
+  qDebug() << qPrintable( objectName() ) << "starts to browse for the service:" << service_type;
 #endif
 
   m_record.setRegisteredType( service_type );

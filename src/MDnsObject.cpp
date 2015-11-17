@@ -59,7 +59,7 @@ void MDnsObject::socketIsReadyRead()
 
   if( error_code != kDNSServiceErr_NoError )
   {
-    qWarning() << objectName() << "has an error in process result:" << error_code_int;
+    qWarning() << qPrintable( objectName() ) << "has an error in process result:" << error_code_int;
     emit error( error_code_int );
     return;
   }
@@ -71,7 +71,7 @@ bool MDnsObject::checkErrorAndReadSocket( DNSServiceErrorType error_code )
 
   if( error_code != kDNSServiceErr_NoError )
   {
-    qWarning() << objectName() << "has found an error with code:" << error_code_int;
+    qWarning() << qPrintable( objectName() ) << "has found an error with code:" << error_code_int;
     emit error( error_code_int );
     return false;
   }
@@ -79,7 +79,7 @@ bool MDnsObject::checkErrorAndReadSocket( DNSServiceErrorType error_code )
   int socket_descriptor = DNSServiceRefSockFD( mp_dnss );
   if( socket_descriptor < 0 )
   {
-    qWarning() << objectName() << "has an invalid socket descriptor:" << socket_descriptor;
+    qWarning() << qPrintable( objectName() ) << "has an invalid socket descriptor:" << socket_descriptor;
     error_code_int = (int)kDNSServiceErr_Invalid;
     emit error( error_code_int );
     return false;

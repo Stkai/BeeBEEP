@@ -55,11 +55,11 @@ void PluginManager::clearPlugins()
 void PluginManager::loadPlugins()
 {
   clearPlugins();
-  qDebug() << "Loading plugins from path:" << Settings::instance().pluginPath();
+  qDebug() << "Loading plugins from path:" << qPrintable( Settings::instance().pluginPath() );
   QDir plugin_dir( Settings::instance().pluginPath() );
   if( !plugin_dir.exists() )
   {
-    qWarning() << "Plugin folder" << Settings::instance().pluginPath() << "not found";
+    qWarning() << "Plugin folder" << qPrintable( Settings::instance().pluginPath() ) << "not found";
     return;
   }
 

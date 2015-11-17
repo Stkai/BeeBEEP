@@ -41,11 +41,11 @@ bool MDnsRegister::registerService( const MDnsRecord& mdns_record, int service_p
 {
   if( mp_dnss )
   {
-    qWarning() << objectName() << "has already registered a service" << m_record.registeredType() << "on port" << m_servicePort;
+    qWarning() << qPrintable( objectName() ) << "has already registered a service" << m_record.registeredType() << "on port" << m_servicePort;
     return false;
   }
 
-  qDebug() << objectName() << "is starting to register service" << mdns_record.registeredType() << "on port" << service_port;
+  qDebug() << qPrintable( objectName() ) << "is starting to register service" << mdns_record.registeredType() << "on port" << service_port;
 
   DNSServiceErrorType error_code = DNSServiceRegister( &mp_dnss, 0, 0, mdns_record.serviceName().toUtf8().constData(),
                                                  mdns_record.registeredType().toUtf8().constData(),
@@ -53,13 +53,13 @@ bool MDnsRegister::registerService( const MDnsRecord& mdns_record, int service_p
                                                  0, service_port, 0, 0, (DNSServiceRegisterReply)MDnsRegisterService, this );
   if( !checkErrorAndReadSocket( error_code ) )
   {
-    qWarning() << objectName() << "can not register service" << mdns_record.registeredType() << "on port" << service_port;
+    qWarning() << qPrintable( objectName() ) << "can not register service" << mdns_record.registeredType() << "on port" << service_port;
     return false;
   }
   else
   {
     m_servicePort = service_port;
-    qDebug() << objectName() << "tries to register service" << mdns_record.registeredType() << "on port" << service_port;
+    qDebug() << qPrintable( objectName() ) << "tries to register service" << mdns_record.registeredType() << "on port" << service_port;
     return true;
   }
 }
@@ -81,7 +81,6 @@ void MDnsRegister::MDnsRegisterService( DNSServiceRef, DNSServiceFlags,
     MDnsRecord mdr( service_name, registered_type, reply_domain );
     service_register->setRecord( mdr );
     service_register->setServiceRegistered( true );
-    qDebug() << "MDnsRegister has registered service" << mdr.name();
     emit service_register->serviceRegistered();
   }
 }

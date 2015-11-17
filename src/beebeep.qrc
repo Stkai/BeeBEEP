@@ -135,5 +135,7 @@
         <file>images/save-window.png</file>
         <file>images/warning.png</file>
         <file>images/shortcut.png</file>
+        <file>images/data-folder.png</file>
+        <file>images/resource-folder.png</file>
     </qresource>
 </RCC>

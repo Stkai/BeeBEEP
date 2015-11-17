@@ -70,7 +70,9 @@ Chat ChatManager::findGroupChatByPrivateId( const QString& chat_id ) const
       return *it;
     ++it;
   }
+#ifdef BEEBEEP_DEBUG
   qWarning() << "Unable to find group chat with private id" << chat_id;
+#endif
   return Chat();
 }
 

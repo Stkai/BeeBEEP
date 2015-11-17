@@ -47,9 +47,15 @@ Settings::Settings()
 #ifdef Q_OS_MAC
   m_saveDataInUserApplicationFolder = true;
   m_useNativeEmoticons = true;
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  m_useMulticastDns = true;
+#else
+  m_useMulticastDns = false;
+#endif
 #else
   m_saveDataInUserApplicationFolder = false;
   m_useNativeEmoticons = false;
+  m_useMulticastDns = false;
 #endif
   m_allowMultipleInstances = false;
   m_trustNickname = true;
@@ -82,11 +88,7 @@ Settings::Settings()
   m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
 #endif
   m_lastSave = QDateTime::currentDateTime();
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  m_useMulticastDns = true;
-#else
-  m_useMulticastDns = false;
-#endif
+
   m_preventMultipleConnectionsFromSingleHostAddress = false;
   m_alwaysOpenNewFloatingChat = false;
   m_acceptConnectionsOnlyFromWorkgroups = false;
@@ -190,16 +192,16 @@ void Settings::loadRcFile()
 {
   QFileInfo rc_file_info( defaultRcFilePath( true ) );
   QString rc_file_path = Bee::convertToNativeFolderSeparator( rc_file_info.absoluteFilePath() );
-  qDebug() << "Check for RC file in current path:" << rc_file_path;
+  qDebug() << "Check for RC file in current path:" << qPrintable( rc_file_path );
   if( !rc_file_info.exists() || !rc_file_info.isReadable() )
   {
     rc_file_info = QFileInfo( defaultRcFilePath( false ) );
     rc_file_path = Bee::convertToNativeFolderSeparator( rc_file_info.absoluteFilePath() );
-    qDebug() << "Check for RC file in custom path:" << rc_file_path;
+    qDebug() << "Check for RC file in custom path:" << qPrintable( rc_file_path );
 
     if( !rc_file_info.exists() || !rc_file_info.isReadable() )
     {
-      qDebug() << "RC file not found:" << programName() << "uses default RC configuration";
+      qDebug() << "RC file not found:" << qPrintable( programName() ) << "uses default RC configuration";
       return;
     }
   }
@@ -258,7 +260,8 @@ bool Settings::createDefaultHostsFile()
   sl << "# 10.2.4.255";
   sl << "# 2001:db8:1f70::999:de8:7648:6e8";
   sl << "#";
-  sl << "# From version 3.0.1 you can also add port in the host addresses:";
+  sl << "# From version 3.0.1 you can also add port to the host addresses";
+  sl << "# (ipv4 and ipv6 supported). For example:";
   sl << "#";
   sl << "# 10.184.9.132:6475";
   sl << "# [2001:db8:1f70::999:de8:7648:6e8]:6475";
@@ -470,11 +473,11 @@ void Settings::loadBroadcastAddressesFromFileHosts()
   QFile file( defaultHostsFilePath( true ) );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qDebug() << "File HOSTS not found in current path:" << file.fileName();
+    qDebug() << "File HOSTS not found in current path:" << qPrintable( file.fileName() );
     file.setFileName( defaultHostsFilePath( false ) );
     if( !file.open( QIODevice::ReadOnly ) )
     {
-      qDebug() << "File HOSTS not found in custom path:" << file.fileName();
+      qDebug() << "File HOSTS not found in custom path:" << qPrintable( file.fileName() );
       return;
     }
   }
@@ -668,7 +671,7 @@ void Settings::load()
 #endif
   m_logPath = Bee::convertToNativeFolderSeparator( sets->value( "LogPath", dataFolder() ).toString() );
   m_pluginPath = Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() );
-  m_languagePath = Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() );
+  m_languagePath = Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", m_resourceFolder ).toString() );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
@@ -734,6 +737,9 @@ void Settings::load()
   m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();
   m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
   m_workgroups = sets->value( "Workgroups", QStringList() ).toStringList();
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
+#endif
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -982,7 +988,7 @@ void Settings::save()
   if( sets->isWritable() )
   {
     sets->sync();
-    qDebug() << "Settings saved in" << sets->fileName();
+    qDebug() << "Settings saved in" << qPrintable( sets->fileName() );
     m_lastSave = QDateTime::currentDateTime();
   }
   sets->deleteLater();
@@ -1118,7 +1124,7 @@ void Settings::setResourceFolder()
   m_resourceFolder = macos_dir.absolutePath();
 #endif
 
-  qDebug() << "Resource folder:" << m_resourceFolder;
+  qDebug() << "Resource folder:" << qPrintable( m_resourceFolder );
 }
 
 bool Settings::setDataFolder()
@@ -1129,7 +1135,7 @@ bool Settings::setDataFolder()
 
   if( data_file_info.isWritable() && !m_saveDataInDocumentsFolder && !m_saveDataInUserApplicationFolder && m_dataFolderInRC.isEmpty() )
   {
-    qDebug() << "Data folder:" << m_dataFolder;
+    qDebug() << "Data folder:" << qPrintable( m_dataFolder );
     return true;
   }
 
@@ -1173,24 +1179,24 @@ bool Settings::setDataFolder()
   QDir folder( m_dataFolder );
   if( !folder.exists() )
   {
-    qWarning() << "Data folder not found in" << folder.absolutePath();
+    qWarning() << "Data folder not found in" << qPrintable( folder.absolutePath() );
     if( !folder.mkpath( m_dataFolder ) )
     {
-      qWarning() << "Unable to create data folder" << folder.absolutePath() ;
+      qWarning() << "Unable to create data folder" << qPrintable( folder.absolutePath() ) ;
       m_dataFolder = root_folder;
     }
     else
-      qDebug() << "Data folder created in" << m_dataFolder;
+      qDebug() << "Data folder created in" << qPrintable( m_dataFolder );
   }
 
   QFileInfo folder_info( m_dataFolder );
   if( !folder_info.isWritable() )
   {
-    qWarning() << "Data folder" << folder_info.absoluteFilePath() << "is not writeable";
+    qWarning() << "Data folder" << qPrintable( folder_info.absoluteFilePath() ) << "is not writeable";
     return false;
   }
 
-  qDebug() << "Data folder is" << m_dataFolder;
+  qDebug() << "Data folder is" << qPrintable(  m_dataFolder );
   return true;
 }
 

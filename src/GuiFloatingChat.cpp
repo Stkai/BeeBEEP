@@ -25,7 +25,9 @@
 #include "GuiFloatingChat.h"
 #include "GuiEmoticons.h"
 #include "Settings.h"
-
+#ifdef Q_OS_WIN
+  #include <windows.h>
+#endif
 
 GuiFloatingChat::GuiFloatingChat( QWidget *parent )
  : QMainWindow( parent )
@@ -63,7 +65,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   statusBar();
   m_chatIsVisible = true;
   m_prevActivatedState = true;
-  connect(qApp, SIGNAL( focusChanged( QWidget* ,QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
+  connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
 bool GuiFloatingChat::setChatId( VNumber chat_id )

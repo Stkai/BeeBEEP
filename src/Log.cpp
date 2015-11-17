@@ -86,7 +86,7 @@ void Log::checkFileSize()
 
   if( !m_logFile.open( QIODevice::ReadOnly ) )
   {
-    qWarning() << "Unable to resize log file" << m_logFile.fileName() << "(read step)";
+    qWarning() << "Unable to resize log file" << qPrintable( m_logFile.fileName() ) << "(read step)";
     return;
   }
 
@@ -97,7 +97,7 @@ void Log::checkFileSize()
 
   if( !m_logFile.open( QIODevice::WriteOnly ) )
   {
-    qWarning() << "Unable to resize log file" << m_logFile.fileName() << "(write step)";
+    qWarning() << "Unable to resize log file" << qPrintable( m_logFile.fileName() ) << "(write step)";
     return;
   }
 
@@ -108,7 +108,7 @@ void Log::checkFileSize()
 
   m_logFile.close();
 
-  qDebug() << "Log file" << m_logFile.fileName() << "resized to" << m_logFile.size() << "bytes";
+  qDebug() << "Log file" << qPrintable( m_logFile.fileName() ) << "resized to" << m_logFile.size() << "bytes";
 }
 
 bool Log::bootFileStream( const QString& log_path )
@@ -121,7 +121,7 @@ bool Log::bootFileStream( const QString& log_path )
 
     if( !m_logFile.open( QIODevice::Append ) )
     {
-      qWarning() << "Unable to open the existing log file" << log_path;
+      qWarning() << "Unable to open the existing log file" << qPrintable( log_path );
       return false;
     }
 
@@ -132,12 +132,12 @@ bool Log::bootFileStream( const QString& log_path )
   {
     if( !m_logFile.open( QIODevice::WriteOnly ) )
     {
-      qWarning() << "Unable to open the log file" << log_path;
+      qWarning() << "Unable to open the log file" << qPrintable( log_path );
       return false;
     }
   }
 
-  qDebug() << "Logging to file" << log_path;
+  qDebug() << "Logging to file" << qPrintable( log_path );
 
   dumpLogToFile();
 

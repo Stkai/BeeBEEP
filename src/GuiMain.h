@@ -150,6 +150,7 @@ private slots:
   void createGroupFromChat( VNumber );
   void removeUserFromList( VNumber );
   void openDataFolder();
+  void openResourceFolder();
   void detachChat( VNumber );
   void attachChat( VNumber );
   void readAllMessagesInChat( VNumber );
@@ -157,6 +158,7 @@ private slots:
   void clearRecentlyUsedUserStatus();
   void loadSavedChatsCompleted();
   void editShortcuts();
+  void onApplicationFocusChanged( QWidget*, QWidget* );
 
 protected:
   void keyPressEvent( QKeyEvent* );

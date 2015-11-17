@@ -39,7 +39,11 @@ Broadcaster::Broadcaster( QObject *parent )
 
 bool Broadcaster::startBroadcasting()
 {
+#if QT_VERSION >= 0x050000
+  if( !m_broadcastSocket.bind( QHostAddress::AnyIPv4, Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
+#else
   if( !m_broadcastSocket.bind( QHostAddress::Any, Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
+#endif
   {
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;
@@ -47,7 +51,9 @@ bool Broadcaster::startBroadcasting()
 
   m_baseBroadcastAddress = NetworkManager::instance().localBroadcastAddress();
   updateAddresses();
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Broadcaster generates broadcast message data";
+#endif
   m_broadcastData = Protocol::instance().broadcastMessage();
 
   if( Settings::instance().broadcastInterval() > 0 )
@@ -95,7 +101,7 @@ void Broadcaster::sendBroadcastDatagram()
 
   if( !m_baseBroadcastAddress.isNull() && sendDatagramToHost( m_baseBroadcastAddress ) )
   {
-    qDebug() << "Broadcaster has contacted default network:" << m_baseBroadcastAddress.toString();
+    qDebug() << "Broadcaster has contacted default network:" << qPrintable( m_baseBroadcastAddress.toString() );
     addresses_contacted++;
     m_datagramSentToBaseBroadcastAddress++;
     QTimer::singleShot( Settings::instance().broadcastLoopbackInterval(), this, SLOT( checkLoopback() ) );
@@ -242,14 +248,32 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
   if( m_broadcastAddresses.contains( host_address ) )
     return false;
 
-  QList<QHostAddress> host_address_list = parseHostAddress( host_address );
+  if( host_address == m_baseBroadcastAddress )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster skips base address:" << qPrintable( host_address.toString() );
+#endif
+    return false;
+  }
+
+  if( !Settings::instance().parseBroadcastAddresses() )
+  {
+    qDebug() << "Broadcaster add network" << qPrintable( host_address.toString() );
+    m_broadcastAddresses.append( host_address );
+    return true;
+  }
+
+  QList<QHostAddress> host_address_list = NetworkManager::instance().splitBroadcastSubnetToIpv4HostAddresses( host_address );
   if( host_address_list.isEmpty() )
     return false;
 
   foreach( QHostAddress ha, host_address_list )
-    m_broadcastAddresses << ha;
+  {
+    if( !m_broadcastAddresses.contains( ha ) )
+      m_broadcastAddresses.append( ha );
+  }
 
-  qDebug() << "Broadcaster adds network" << host_address.toString() << "with" << host_address_list.size() << "addresses";
+  qDebug() << "Broadcaster adds network" << qPrintable( host_address.toString() ) << "with" << host_address_list.size() << "addresses";
 
   return true;
 }
@@ -262,79 +286,6 @@ void Broadcaster::checkLoopback()
     qWarning() << "Broadcaster UDP port" <<  Settings::instance().defaultBroadcastPort() << "is blocked by firewall." << m_datagramSentToBaseBroadcastAddress << "datagram pendings";
     emit udpPortBlocked();
   }
-}
-
-QList<QHostAddress> Broadcaster::parseHostAddress( const QHostAddress& host_address ) const
-{
-  QList<QHostAddress> ha_list;
-  QString ha_string = host_address.toString();
-
-  if( host_address == m_baseBroadcastAddress )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster skips base address:" << ha_string;
-#endif
-    return ha_list;
-  }
-
-  if( NetworkManager::instance().isIpv6Address( host_address ) )
-  {
-    ha_list << host_address;
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster has found IPV6 address:" << ha_string;
-#endif
-    return ha_list;
-  }
-
-  if( !ha_string.contains( QLatin1String( "255" ) ) )
-  {
-    ha_list << host_address;
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster has found IPV4 address:" << ha_string;
-#endif
-    return ha_list;
-  }
-
-  if( !Settings::instance().parseBroadcastAddresses() )
-  {
-    ha_list << host_address;
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster has found IPV4 subnet skipped:" << ha_string;
-#endif
-    return ha_list;
-  }
-
-  if( ha_string.count( QLatin1String( "255" ) ) > 1 )
-  {
-    ha_list << host_address;
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster has found IPV4 subnet too big and skipped:" << ha_string;
-#endif
-    return ha_list;
-  }
-
-  QStringList ha_string_list = ha_string.split( "." );
-  if( ha_string_list.size() != 4 )
-  {
-    qWarning() << "Broadcaster has found an invalid IPV4 address:" << ha_string;
-    return ha_list;
-  }
-
-  if( ha_string_list.last() == QLatin1String( "255" ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster has found IPV4 subnet and has parsed it:" << ha_string;
-#endif
-    ha_string_list.removeLast();
-    ha_string = ha_string_list.join( "." );
-    QString s_tmp;
-    for( int i = 1; i < 255; i++ )
-    {
-      s_tmp = QString( "%1.%2" ).arg( ha_string ).arg( i );
-      ha_list << QHostAddress( s_tmp );
-    }
-  }
-  return ha_list;
 }
 
 void Broadcaster::addPeerAddress( const NetworkAddress& peer_address )

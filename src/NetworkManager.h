@@ -44,6 +44,7 @@ public:
   bool isLoopback( const QHostAddress& ) const;
   QHostAddress broadcastSubnetFromIpv4HostAddress( const QHostAddress& ) const;
   bool hostAddressIsInBroadcastSubnet( const QHostAddress&, const QString& );
+  QList<QHostAddress> splitBroadcastSubnetToIpv4HostAddresses( const QHostAddress& ) const;
 
   static NetworkManager& instance()
   {

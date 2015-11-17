@@ -60,7 +60,7 @@
 #include "ShortcutManager.h"
 #include "UserManager.h"
 #ifdef Q_OS_WIN
-  #include "windows.h"
+  #include <windows.h>
 #endif
 
 
@@ -161,6 +161,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   initGuiItems();
   updateShortcuts();
+
+  connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 
   statusBar()->showMessage( tr( "Ready" ) );
 }
@@ -594,7 +596,12 @@ void GuiMain::createMenus()
   act = mp_menuMain->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
   act->setStatusTip( tr( "Test the file to play on new message arrived" ) );
   mp_menuMain->addSeparator();
-  act = mp_menuMain->addAction( QIcon( ":/images/settings.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
+  if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
+  {
+    act = mp_menuMain->addAction( QIcon( ":/images/resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
+    act->setStatusTip( tr( "Click to open your resource folder" ) );
+  }
+  act = mp_menuMain->addAction( QIcon( ":/images/data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
   act->setStatusTip( tr( "Click to open your data folder" ) );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actQuit );
@@ -2954,9 +2961,11 @@ void GuiMain::showChatForGroup( VNumber group_id )
 
   Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
   if( !c.isValid() )
+  {
     mp_core->createGroupChat( g, true );
+    c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  }
 
-  c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
   showChat( c.id() );
 }
 
@@ -3193,6 +3202,12 @@ void GuiMain::removeUserFromList( VNumber user_id )
     refreshUserList();
     mp_chatList->reloadChatList();
   }
+}
+
+void GuiMain::openResourceFolder()
+{
+  QUrl data_folder_url = QUrl::fromLocalFile( Settings::instance().resourceFolder() );
+  openUrl( data_folder_url );
 }
 
 void GuiMain::openDataFolder()
@@ -3434,4 +3449,18 @@ void GuiMain::updateShortcuts()
     mp_actViewFileTransfer->setShortcut( ks );
   else
     mp_actViewFileTransfer->setShortcut( QKeySequence() );
+}
+
+void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
+{
+  if( old == 0 && isAncestorOf( now )  )
+  {
+    if( mp_stackedWidget->currentWidget() == mp_chat )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Chat in the main window has grab the focus. All messages can be set to read";
+#endif
+      readAllMessagesInChat( mp_chat->chatId() );
+    }
+  }
 }

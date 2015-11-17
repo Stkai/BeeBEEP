@@ -153,7 +153,8 @@ ParseBroadcastAddresses=[true/false] if true BeeBEEP splits subnet like 192.168.
 AddExternalSubnetAutomatically=[true/false] if true BeeBEEP automatically add external user's subnet when they reach you
 UserPathList= users saved (do not edit manually)
 AcceptConnectionsOnlyFromWorkgroups=[true/false] accepts connection only from members of your workgroups
-m_workgroups = workgroups saved (do not edit manually)
+Workgroups = workgroups saved (do not edit manually)
+UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (overwrite RC option)
 
 [FileShare]
 Active=[true/false]

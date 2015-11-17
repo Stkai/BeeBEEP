@@ -412,7 +412,8 @@ bool Core::sendMessageToLocalNetwork( const User& to_user, const Message& m )
   Connection* c = connection( to_user.id() );
   if( !c )
   {
-    qWarning() << "Unable to find connection socket for user" << to_user.id();
+    if( to_user.isStatusConnected() )
+      qWarning() << "Unable to find connection socket for user" << to_user.id();
     return false;
   }
 

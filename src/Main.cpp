@@ -85,11 +85,13 @@ int main( int argc, char *argv[] )
   Random::init();
 
   /* Load Settings */
-  qDebug() << "Starting BeeBEEP" << Settings::instance().version( true ) << "for" << Settings::instance().operatingSystem( true );
+  qDebug() << "Starting BeeBEEP" << qPrintable( Settings::instance().version( true ) )
+           << "for" << qPrintable( Settings::instance().operatingSystem( true ) )
+           << "and Qt" << QT_VERSION_STR;
   Settings::instance().setResourceFolder();
   Settings::instance().loadRcFile();
   Settings::instance().setDataFolder();
-  qDebug() << "Settings path:" << Settings::instance().currentSettingsFilePath();
+  qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().load();
   Settings::instance().createLocalUser();
 

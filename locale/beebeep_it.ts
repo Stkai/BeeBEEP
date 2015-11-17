@@ -1430,6 +1430,18 @@ Inserisci un nome differente.</translation>
         <source>Select language</source>
         <translation>Seleziona una lingua</translation>
     </message>
+    <message>
+        <source>For the latest language translations please visit the %1</source>
+        <translation>Per avere le ultime traduzioni disponibili andare sul %1</translation>
+    </message>
+    <message>
+        <source>website</source>
+        <translation type="vanished">sito web</translation>
+    </message>
+    <message>
+        <source>official website</source>
+        <translation>sito web ufficiale</translation>
+    </message>
 </context>
 <context>
     <name>GuiLanguageDialog</name>
@@ -3240,6 +3252,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Enable and edit your custom shortcuts</source>
         <translation>Abilita e modifica le scorciatoie personalizzabili</translation>
+    </message>
+    <message>
+        <source>Open your resource folder</source>
+        <translation>Apri la tua cartella delle risorse</translation>
+    </message>
+    <message>
+        <source>Click to open your resource folder</source>
+        <translation>Clicca qui per aprire la cartella delle risorse installate</translation>
     </message>
 </context>
 <context>

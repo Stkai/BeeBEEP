@@ -37,7 +37,7 @@ public:
 
 #else
 
-struct ShutdownMonitor
+class ShutdownMonitor
 {
 };
 

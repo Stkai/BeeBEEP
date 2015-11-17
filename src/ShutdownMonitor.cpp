@@ -23,11 +23,11 @@
 
 #include "ShutdownMonitor.h"
 
-#ifdef Q_OS_WIN
-#include "windows.h"
-#endif
-
 #if QT_VERSION >= 0x050000
+
+#ifdef Q_OS_WIN
+  #include <windows.h>
+#endif
 
 bool ShutdownMonitor::nativeEventFilter( const QByteArray& event_type, void* event_message, long* event_result )
 {

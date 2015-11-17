@@ -28,6 +28,7 @@
 #include "MDnsRecord.h"
 #include "dns_sd.h"
 
+// using Apple Bonjour SDK 3
 
 class MDnsObject : public QObject
 {

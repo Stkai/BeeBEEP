@@ -45,7 +45,7 @@ bool MDnsManager::start( const QString& service_base_name, const QString& servic
   if( isActive() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << objectName() << "is already active";
+    qDebug() << qPrintable( objectName() ) << "is already active";
 #endif
     return false;
   }
@@ -53,7 +53,7 @@ bool MDnsManager::start( const QString& service_base_name, const QString& servic
   MDnsRecord mdr;
   mdr.setServiceName( QString( "%1 %2:%3" ).arg( service_base_name ).arg( listener_address ).arg( listener_port ) );
   mdr.setRegisteredType( service_type );
-  qDebug() << objectName() << "starting with" << mdr.name();
+  qDebug() << qPrintable( objectName() ) << "starting with" << mdr.name();
   if( mp_register->registerService( mdr, listener_port ) )
   {
     m_isActive = true;
@@ -68,12 +68,12 @@ bool MDnsManager::stop()
   if( !isActive() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << objectName() << "is already closed";
+    qDebug() << qPrintable( objectName() ) << "is already closed";
 #endif
     return false;
   }
 
-  qDebug() << objectName() << "has unregistered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
+  qDebug() << qPrintable( objectName() ) << "has unregistered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
   mp_register->unregisterService();
   mp_browser->stop();
   m_mdnsRecords.clear();
@@ -86,7 +86,7 @@ bool MDnsManager::browseForService()
 {
   if( !mp_register->serviceIsRegistered() )
   {
-    qDebug() << objectName() << "has not registered the service and can not browse for it";
+    qDebug() << qPrintable( objectName() ) << "has not registered the service and can not browse for it";
     return false;
   }
 
@@ -98,7 +98,7 @@ bool MDnsManager::browseForService()
 
 void MDnsManager::serviceIsRegistered()
 {
-  qDebug() << objectName() << "has registered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
+  qDebug() << qPrintable( objectName() ) << "has registered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
   emit serviceRegistered();
 }
 
@@ -108,7 +108,7 @@ void MDnsManager::addMDnsRecord( const MDnsRecord& mdns_record )
     return;
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << objectName() << "adds new dns record" << mdns_record.name();
+  qDebug() << qPrintable( objectName() ) << "adds new dns record" << mdns_record.name();
 #endif
   m_mdnsRecords.append( mdns_record );
 
@@ -120,7 +120,7 @@ void MDnsManager::addMDnsRecord( const MDnsRecord& mdns_record )
 void MDnsManager::removeMDnsRecord( const MDnsRecord& mdns_record )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << objectName() << "removes dns record" << mdns_record.name();
+  qDebug() << qPrintable( objectName() ) << "removes dns record" << mdns_record.name();
 #endif
   m_mdnsRecords.removeOne( mdns_record );
 }
@@ -130,13 +130,13 @@ void MDnsManager::addUserRecord( const UserRecord& ur )
   if( m_userRecords.contains( ur ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << objectName() << "already contains user record" << ur.hostAddressAndPort();
+    qDebug() << qPrintable( objectName() ) << "already contains user record" << ur.hostAddressAndPort();
 #endif
     return;
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << objectName() << "adds new user record" << ur.hostAddressAndPort();
+  qDebug() << qPrintable( objectName() ) << "adds new user record" << ur.hostAddressAndPort();
 #endif
   m_userRecords.append( ur );
   emit newUserFound( ur );
@@ -147,7 +147,7 @@ void MDnsManager::serviceResolved( const QHostInfo& host_info, int host_port )
   MDnsResolver *resolver = qobject_cast<MDnsResolver*>( sender() );
   if( !resolver )
   {
-    qWarning() << objectName() << "received a signal from invalid MDnsResolver instance";
+    qWarning() << qPrintable( objectName() ) << "has received a signal from invalid MDnsResolver instance";
     return;
   }
 
@@ -159,7 +159,7 @@ void MDnsManager::serviceResolved( const QHostInfo& host_info, int host_port )
   foreach( QHostAddress ha, host_addresses )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << objectName() << "has resolved host" << host_info.hostName() << "with this address" << ha.toString();
+    qDebug() << qPrintable( objectName() ) << "has resolved host" << host_info.hostName() << "with this address" << ha.toString();
 #endif
     if( ha.toString().contains( ":" ) )
       ipv6_address = ha;

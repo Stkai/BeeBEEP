@@ -46,7 +46,7 @@ void MDnsResolver::resolve( const MDnsRecord& mdns_record )
 {
   if( mp_dnss )
   {
-    qWarning() << objectName() << "already has a resolve in process. Skip this one:" << m_record.name();
+    qWarning() << qPrintable( objectName() ) << "already has a resolve in process. Skip this one:" << m_record.name();
     return;
   }
 
@@ -87,7 +87,7 @@ void MDnsResolver::lookedUp( const QHostInfo& host_info )
 
   if( host_info.error() != QHostInfo::NoError )
   {
-    qWarning() << objectName() << "can not resolve" << m_record.name();
+    qWarning() << qPrintable( objectName() ) << "can not resolve" << m_record.name();
     deleteLater();
     return;
   }
@@ -96,7 +96,7 @@ void MDnsResolver::lookedUp( const QHostInfo& host_info )
   if( host_info.hostName() == local_host_name )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << objectName() << "skips local host name:" << host_info.hostName();
+    qDebug() << qPrintable( objectName() ) << "skips local host name:" << host_info.hostName();
 #endif
     deleteLater();
     return;
@@ -106,7 +106,7 @@ void MDnsResolver::lookedUp( const QHostInfo& host_info )
   if( host_info.hostName() == local_host_name )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << objectName() << "skips local host name :" << host_info.hostName();
+    qDebug() << qPrintable( objectName() ) << "skips local host name :" << host_info.hostName();
 #endif
     deleteLater();
     return;

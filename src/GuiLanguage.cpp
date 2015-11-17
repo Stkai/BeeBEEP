@@ -47,7 +47,7 @@ GuiLanguage::GuiLanguage( QWidget *parent )
   mp_lePath->setText( m_folderSelected );
 
   QString s_site = tr( "For the latest language translations please visit the %1" )
-          .arg( QString( "<a href=""%1"">%2</a>").arg( Settings::instance().languageWebSite() ).arg( tr( "website" ) ) );
+          .arg( QString( "<a href=""%1"">%2</a>").arg( Settings::instance().languageWebSite() ).arg( tr( "official website" ) ) );
 
   mp_labelLanguageSite->setText( s_site );
 

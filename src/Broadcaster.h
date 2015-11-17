@@ -54,7 +54,6 @@ protected:
   bool sendDatagramToHost( const QHostAddress& );
   bool addAddressToList( const QHostAddress& );
   bool isLocalHostAddress( const QHostAddress& );
-  QList<QHostAddress> parseHostAddress( const QHostAddress& ) const;
   void addPeerAddress( const NetworkAddress& );
 
 private:
