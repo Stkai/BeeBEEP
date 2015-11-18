@@ -162,13 +162,6 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
   bool reset_font = false;
   Qt::KeyboardModifiers mods = e->modifiers();
 
-  if( e->key() == Qt::Key_Tab && (mods & Qt::ControlModifier || mods & Qt::ShiftModifier) ) // switch between chats
-  {
-    e->accept();
-    emit tabPressed();
-    return;
-  }
-
   m_messageChanged = true;
 
   if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter )

@@ -105,6 +105,11 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ ShowFileTransfers ] = QKeySequence( Qt::CTRL | Qt::Key_J );
   m_shortcutNames[ SetFocusInMessageBox ] = QObject::tr( "Set focus in message box" );
   m_shortcuts[ SetFocusInMessageBox ] = QKeySequence( Qt::CTRL | Qt::Key_L );
+  m_shortcutNames[ MinimizeAllChats ] = QObject::tr( "Minimize all chats" );
+  m_shortcuts[ MinimizeAllChats ] = QKeySequence( Qt::CTRL | Qt::Key_M );
+  m_shortcutNames[ ShowNextUnreadMessage ] = QObject::tr( "Show the next unread message" );
+  m_shortcuts[ ShowNextUnreadMessage ] = QKeySequence( Qt::CTRL | Qt::Key_Tab );
+
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )

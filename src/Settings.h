@@ -88,6 +88,8 @@ public:
   inline void setLocalUser( const User& );
   void setLocalUserHost( const QHostAddress&, int );
 
+  inline bool useIPv6() const;
+  QHostAddress hostAddressToListen();
   inline int defaultBroadcastPort() const;
   inline int defaultListenerPort() const;
   inline int defaultFileTransferPort() const;
@@ -380,6 +382,7 @@ private:
   QString m_dataFolderInRC;
   bool m_addAccountNameToDataFolder;
   QString m_preferredSubnets;
+  bool m_useIPv6;
 
   // Ini
   bool m_firstTime;
@@ -737,5 +740,6 @@ inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_v
 inline bool Settings::useShortcuts() const { return m_useShortcuts; }
 inline int Settings::connectionTimeout() const { return m_connectionTimeout; }
 inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
+inline bool Settings::useIPv6() const { return m_useIPv6; }
 
 #endif // BEEBEEP_SETTINGS_H

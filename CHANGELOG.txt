@@ -4,7 +4,9 @@ BeeBEEP 3.0.2
 - Fixed compatibility with Windows 10 with Qt 5.5 (it will become the default windows release)
 - Fixed compatibility with Windows XP with Qt 4.8.6 (windows XP release)
 - mDnsResponder library updated to 330.10 in Windows
-- For better compatibility BeeBEEP now accepts connection only from IPv4 address 
+- For better compatibility BeeBEEP now accepts connection only from IPv4 address
+- IPv6 protocol can be enabled by "UseIPv6" in beebeep.rc (option)
+- Shortcut "Minimize all chats" added
 
 BeeBEEP 3.0.1
 - Workgroups (in the search users dialog)

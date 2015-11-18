@@ -200,6 +200,14 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
     foreach( QString user_path, user_paths )
     {
+      if( user_path.isEmpty() )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "ParseGroupMessage has found an empty user path";
+#endif
+        continue;
+      }
+
       User user_tmp = UserManager::instance().findUserByPath( user_path );
       if( user_tmp.isValid() )
       {
@@ -208,11 +216,11 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
       else
       {
-        qWarning() << "User" << user_path << "is request for group chat and it is not found in list";
+        qWarning() << "Creating temporary user" << user_path << "for group chat";
         user_tmp = Protocol::instance().createTemporaryUser( user_path, "" );
         if( user_tmp.isValid() )
         {
-          qDebug() << "Connecting to the new user" << user_path;
+          qDebug() << "Connecting to the temporary user" << user_path;
           UserManager::instance().setUser( user_tmp );
           ul.set( user_tmp );
           newPeerFound( user_tmp.hostAddress(), user_tmp.hostPort() );

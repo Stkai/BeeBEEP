@@ -745,7 +745,7 @@ Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
   QStringList sl = ul.toStringList( false, false );
   m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Users in group:" << m.text();
+  qDebug() << "Members to send group chat request:" << qPrintable( sl.join( ", " ) );
 #endif
   ChatMessageData cmd;
   cmd.setGroupId( c.privateId() );

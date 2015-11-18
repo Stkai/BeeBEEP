@@ -87,7 +87,6 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
   connect( mp_teMessage, SIGNAL( writing() ), this, SLOT( checkWriting() ) );
-  connect( mp_teMessage, SIGNAL( tabPressed() ), this, SIGNAL( nextChat() ) );
   connect( mp_teMessage, SIGNAL( urlsToCheck( const QMimeData* ) ), this, SLOT( checkAndSendUrls( const QMimeData* ) ) );
   connect( mp_teMessage, SIGNAL( imageToCheck( const QMimeData* ) ), this, SLOT( checkAndSendImage( const QMimeData* ) ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );

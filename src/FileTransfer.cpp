@@ -43,18 +43,10 @@ bool FileTransfer::startListener()
     return true;
   }
 
-#if QT_VERSION >= 0x050000
-  if( !listen( QHostAddress::AnyIPv4, Settings::instance().defaultFileTransferPort() ) )
-#else
-  if( !listen( QHostAddress::Any, Settings::instance().defaultFileTransferPort() ) )
-#endif
+  if( !listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultFileTransferPort() ) )
   {
     qWarning() << "Unable to bind default file transfer port" << Settings::instance().defaultFileTransferPort();
-#if QT_VERSION >= 0x050000
-    if( !listen( QHostAddress::AnyIPv4 ) )
-#else
-    if( !listen( QHostAddress::Any ) )
-#endif
+    if( !listen( Settings::instance().hostAddressToListen() ) )
     {
       qWarning() << "Unable to bind a valid file transfer port";
       return false;

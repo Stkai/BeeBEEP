@@ -63,6 +63,7 @@ Settings::Settings()
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
   m_preferredSubnets = "";
+  m_useIPv6 = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -172,6 +173,7 @@ bool Settings::createDefaultRcFile()
   #endif
     sets->setValue( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress );
     sets->setValue( "PreferredSubnets", m_preferredSubnets );
+    sets->setValue( "UseIPv6", m_useIPv6 );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -223,6 +225,7 @@ void Settings::loadRcFile()
 #endif
   m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
   m_preferredSubnets = sets->value( "PreferredSubnets", m_preferredSubnets ).toString();
+  m_useIPv6 = sets->value( "UseIPv6", m_useIPv6 ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -426,6 +429,15 @@ void Settings::setPassword( const QString& new_value )
 QString Settings::currentHash() const
 {
   return QString::fromUtf8( hash( m_localUser.name() ) );
+}
+
+QHostAddress Settings::hostAddressToListen()
+{
+#if QT_VERSION >= 0x050000
+  return m_useIPv6 ? QHostAddress::Any : QHostAddress::AnyIPv4;
+#else
+  return m_useIPv6 ? QHostAddress::AnyIPv6 : QHostAddress::Any;
+#endif
 }
 
 bool Settings::addBroadcastAddressInSettings( const QString& host_address )

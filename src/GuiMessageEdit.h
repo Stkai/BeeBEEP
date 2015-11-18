@@ -43,7 +43,6 @@ public:
 signals:
   void returnPressed();
   void writing();
-  void tabPressed();
   void urlsToCheck( const QMimeData* );
   void imageToCheck( const QMimeData* );
 

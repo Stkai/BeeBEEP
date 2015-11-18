@@ -159,6 +159,7 @@ private slots:
   void loadSavedChatsCompleted();
   void editShortcuts();
   void onApplicationFocusChanged( QWidget*, QWidget* );
+  void minimizeAllChats();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -210,6 +211,7 @@ private:
   void setChatMessagesToShowInAction( QAction* );
   void loadUserStatusRecentlyUsed();
   void setUserStatusSelected( int );
+  void initShortcuts();
   void updateShortcuts();
 
 private:
@@ -294,6 +296,9 @@ private:
   int m_lastUserStatus;
 
   bool m_forceShutdown;
+
+  QShortcut* mp_scMinimizeAllChats;
+  QShortcut* mp_scShowNextUnreadMessage;
 
 };
 

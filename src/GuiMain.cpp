@@ -159,12 +159,24 @@ GuiMain::GuiMain( QWidget *parent )
   mp_chat->setChatId( ID_DEFAULT_CHAT, false );
   mp_home->loadDefaultChat();
 
+  initShortcuts();
   initGuiItems();
   updateShortcuts();
 
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 
   statusBar()->showMessage( tr( "Ready" ) );
+}
+
+void GuiMain::initShortcuts()
+{
+  mp_scMinimizeAllChats = new QShortcut( this );
+  mp_scMinimizeAllChats->setContext( Qt::ApplicationShortcut );
+  connect( mp_scMinimizeAllChats, SIGNAL( activated() ), this, SLOT( minimizeAllChats() ) );
+
+  mp_scShowNextUnreadMessage = new QShortcut( this );
+  mp_scShowNextUnreadMessage->setContext( Qt::ApplicationShortcut );
+  connect( mp_scShowNextUnreadMessage, SIGNAL( activated() ), this, SLOT( showNextChat() ) );
 }
 
 void GuiMain::setupChatConnections( GuiChat* gui_chat )
@@ -2239,7 +2251,7 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
     if( mp_menuTrayIcon->isVisible() )
     {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "TrayIcon is activated with trigger click and menu will be hided";
+      qDebug() << "TrayIcon is activated with trigger click and menu will be hided";
 #endif
       mp_menuTrayIcon->hide();
       return;
@@ -2547,8 +2559,8 @@ void GuiMain::raiseOnTop()
   SetFocus( (HWND)winId() );
 #else
   raise();
-  qApp->setActiveWindow( this );
 #endif
+  qApp->setActiveWindow( this );
 
   if( mp_stackedWidget->currentWidget() == mp_chat )
     mp_chat->ensureFocusInChat();
@@ -3449,6 +3461,25 @@ void GuiMain::updateShortcuts()
     mp_actViewFileTransfer->setShortcut( ks );
   else
     mp_actViewFileTransfer->setShortcut( QKeySequence() );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::MinimizeAllChats );
+  if( !ks.isEmpty() )
+  {
+    mp_scMinimizeAllChats->setKey( ks );
+    mp_scMinimizeAllChats->setEnabled( Settings::instance().useShortcuts() );
+  }
+  else
+    mp_scMinimizeAllChats->setEnabled( false );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowNextUnreadMessage );
+  if( !ks.isEmpty() )
+  {
+    mp_scShowNextUnreadMessage->setKey( ks );
+    mp_scShowNextUnreadMessage->setEnabled( Settings::instance().useShortcuts() );
+  }
+  else
+    mp_scShowNextUnreadMessage->setEnabled( false );
+
 }
 
 void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
@@ -3463,4 +3494,19 @@ void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
       readAllMessagesInChat( mp_chat->chatId() );
     }
   }
+}
+
+void GuiMain::minimizeAllChats()
+{
+  if( !m_floatingChats.isEmpty() )
+  {
+    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    {
+      if( !fl_chat->isMinimized() )
+        fl_chat->showMinimized();
+    }
+  }
+
+  if( !isMinimized() )
+    showMinimized();
 }

@@ -92,12 +92,25 @@ void GuiShortcut::checkItemClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
+  QString shortcut_previous_key = item->text( 0 );
+  if( shortcut_previous_key.isEmpty() )
+  {
+#ifdef Q_OS_MAC
+    shortcut_previous_key = QString( "Cmd+" );
+#else
+    shortcut_previous_key = QString( "Ctrl+" );
+#endif
+  }
+
   bool ok = false;
   QString shortcut_key = QInputDialog::getText( this, Settings::instance().programName(),
                                                 tr( "Insert shorcut for the action: %1" ).arg( item->text( 1 ).toLower() ),
-                                                QLineEdit::Normal, item->text( 0 ), &ok );
+                                                QLineEdit::Normal, shortcut_previous_key, &ok ).simplified();
 
   if( !ok )
+    return;
+
+  if( shortcut_key == shortcut_previous_key )
     return;
 
   if( !shortcut_key.isEmpty() )

@@ -4698,6 +4698,14 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
         <source>Set focus in message box</source>
         <translation>Attiva la finestra dei messaggi</translation>
     </message>
+    <message>
+        <source>Minimize all chats</source>
+        <translation>Minimizza tutte le conversazioni</translation>
+    </message>
+    <message>
+        <source>Show the next unread message</source>
+        <translation>Mostra il prossimo messaggio non letto</translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

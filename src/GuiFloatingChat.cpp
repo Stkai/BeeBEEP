@@ -146,8 +146,8 @@ void GuiFloatingChat::raiseOnTop()
   SetFocus( (HWND)winId() );
 #else
   raise();
-  qApp->setActiveWindow( this );
 #endif
+  qApp->setActiveWindow( this );
 
   emit readAllMessages( chatId() );
   mp_chat->ensureFocusInChat();

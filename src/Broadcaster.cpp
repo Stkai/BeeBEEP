@@ -39,11 +39,7 @@ Broadcaster::Broadcaster( QObject *parent )
 
 bool Broadcaster::startBroadcasting()
 {
-#if QT_VERSION >= 0x050000
-  if( !m_broadcastSocket.bind( QHostAddress::AnyIPv4, Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
-#else
-  if( !m_broadcastSocket.bind( QHostAddress::Any, Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
-#endif
+  if( !m_broadcastSocket.bind( Settings::instance().hostAddressToListen(), Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
   {
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;

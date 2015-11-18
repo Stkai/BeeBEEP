@@ -106,26 +106,14 @@ bool Core::start()
 {
   qDebug() << "Starting" << Settings::instance().programName() << "core";
 
-#if QT_VERSION >= 0x050000
-  if( !mp_listener->listen( QHostAddress::AnyIPv4, Settings::instance().defaultListenerPort() ) )
-#else
-  if( !mp_listener->listen( QHostAddress::Any, Settings::instance().defaultListenerPort() ) )
-#endif
+  if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultListenerPort() ) )
   {
     qWarning() << "Unable to bind default listener port" << Settings::instance().defaultListenerPort();
 
-#if QT_VERSION >= 0x050000
-    if( !mp_listener->listen( QHostAddress::AnyIPv4, Settings::instance().localUser().hostPort() ) )
-#else
-    if( !mp_listener->listen( QHostAddress::Any, Settings::instance().localUser().hostPort() ) )
-#endif
+    if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().localUser().hostPort() ) )
     {
       qDebug() << "Unable to bind last used listener port" << Settings::instance().localUser().hostPort();
-#if QT_VERSION >= 0x050000
-      if( !mp_listener->listen( QHostAddress::AnyIPv4 ) )
-#else
-      if( !mp_listener->listen( QHostAddress::Any ) )
-#endif
+      if( !mp_listener->listen( Settings::instance().hostAddressToListen() ) )
       {
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )

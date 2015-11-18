@@ -381,7 +381,9 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
     group_message = Protocol::instance().groupChatRequestMessage( group_chat, u );
 
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Send group chat request to:" << group_message.text();
+    QString group_members = group_message.text();
+    group_members.replace( QChar::LineSeparator, ", " );
+    qDebug() << "Send group chat request to:" << qPrintable( group_members );
 #endif
 
     if( !sendMessageToLocalNetwork( u, group_message ) )
