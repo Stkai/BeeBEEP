@@ -7,7 +7,7 @@ echo "Source folder:" $SOURCE_DIR
 BUNDLE_APP=BeeBEEP.app
 echo "Bundle folder:" $BUNDLE_APP
 
-MACDEPLOY_APP=./Qt/5.4/clang_64/bin/macdeployqt
+MACDEPLOY_APP=./Qt/5.5/clang_64/bin/macdeployqt
 echo "Mac Deploy App:" $MACDEPLOY_APP
 
 # delete previous bundle folder

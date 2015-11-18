@@ -7,24 +7,24 @@
     <key>NSHighResolutionCapable</key>
     <string>True</string>
     <key>CFBundleIconFile</key>
-    <string>BeeBEEP.icns</string>
+    <string>beebeep.icns</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleExecutable</key>
-    <string>BeeBEEP</string>
+    <string>beebeep</string>
     <key>CFBundleIdentifier</key>
     <string>net.beebeep</string>
     <key>CFBundleName</key>
     <string>BeeBEEP</string>
     <key>CFBundleVersion</key>
-    <string>3.0.1</string>
+    <string>3.0.2</string>
     <key>CFBundleSignature</key>
     <string>bbip</string>
     <key>LSMinimumSystemVersion</key>
-    <string>10.5.0</string>
+    <string>10.6.0</string>
     <key>NSHumanReadableCopyright</key>
     <string>Copyright © 2010-2015,  Marco Mastroddi, All Rights Reserved</string>
     <key>CFBundleShortVersionString</key>
-    <string>3.0.1</string>
+    <string>3.0.2</string>
 </dict>
 </plist>

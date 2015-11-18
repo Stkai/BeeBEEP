@@ -22,11 +22,9 @@ win32: LIBS += -luser32
 macx: {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
   LIBS += -framework ApplicationServices
-  TARGET = BeeBEEP
-} else {
-  TARGET = beebeep
 }
 
+TARGET = beebeep
 TEMPLATE = app
 
 HEADERS += AudioManager.h \
