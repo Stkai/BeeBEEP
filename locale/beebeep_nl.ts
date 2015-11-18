@@ -84,17 +84,17 @@
     <message>
         <location filename="../src/Core.cpp" line="79"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Gebruiker %2 kan instellingen niet in pad opslaan:%3</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="93"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Gebruiker %2 kan chat berichten niet in pad opslaan:%3</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="166"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Je hebt gekozen om alleen deze werkgroepen deel te nemen: %2</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="227"/>
@@ -1019,7 +1019,7 @@ Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
     <message>
         <location filename="../src/GuiChat.cpp" line="704"/>
         <source>Unable to save temporary file: %1</source>
-        <translation type="unfinished">Kan tijdelijk bestand %1 niet opslaan</translation>
+        <translation>Kan tijdelijk bestand: %1 niet opslaan</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="742"/>
@@ -1431,12 +1431,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="49"/>
         <source>For the latest language translations please visit the %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voor de laatste vertaling bezoek %1</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="50"/>
         <source>official website</source>
-        <translation type="unfinished"></translation>
+        <translation>Officiele website</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="93"/>
@@ -1854,12 +1854,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="613"/>
         <source>Open your resource folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Open je bron map</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="614"/>
         <source>Click to open your resource folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om je bronmap te openen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="616"/>
@@ -1919,27 +1919,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="827"/>
         <source>Show status color in background</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon status kleur in achtergrond</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="828"/>
         <source>If enabled the user in list has colored backrgound as status</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien ingeschakeld heeft gebruikers lijst gekleurde achtergrond als status</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="854"/>
         <source>Recently used</source>
-        <translation type="unfinished"></translation>
+        <translation>Onlangs gebruikt</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="859"/>
         <source>Change your status description...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander je statusbeschrijving...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="860"/>
         <source>Clear all status descriptions</source>
-        <translation type="unfinished"></translation>
+        <translation>Wis alle statusbeschrijvingen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="932"/>
@@ -1949,12 +1949,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="966"/>
         <source>Show only message notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon alleen bericht meldingen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="967"/>
         <source>If enabled tray icon shows only message notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien taakbalkicoon ingeschakeld toon alleen bericht meldingen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1479"/>
@@ -1969,17 +1969,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="3373"/>
         <source>at lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Lunchtijd</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3382"/>
         <source>in a meeting</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergadering</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3418"/>
         <source>Do you really want to clear all saved status descriptions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je echt alle opgeslagen statusbeschrijvingen wissen?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="701"/>
@@ -2014,12 +2014,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="602"/>
         <source>Shortcuts...</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelkoppelingen...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="603"/>
         <source>Enable and edit your custom shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigen snelkoppelingen aanzetten en bewerken</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="709"/>
@@ -2383,7 +2383,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="330"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Chat bericht kan niet worden opgeslagen&lt;/b&gt;. Pad:</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="625"/>
@@ -3506,12 +3506,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="139"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkgroepen (voert u netwerkgroepen in gescheiden door een komma)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="149"/>
         <source>Accept connections only from your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Accepteer verbindingen alleen van je werkgroepen</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="168"/>
@@ -3909,22 +3909,22 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="34"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelkoppelingen</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="37"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Toets</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="37"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Actie</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="107"/>
         <source>Insert shorcut for the action: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg snelkoppeling toe voor de actie: %1</translation>
     </message>
 </context>
 <context>
@@ -3932,7 +3932,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiShortcut.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>Restore to default language</source>
@@ -3941,27 +3941,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiShortcut.ui" line="23"/>
         <source>Use custom shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik eigen snelkoppelingen</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="50"/>
         <source>Restore default shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Hestel standaard snelkoppelingen</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="53"/>
         <source>Restore</source>
-        <translation type="unfinished">Herstellen</translation>
+        <translation>Herstel</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="73"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="80"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleren</translation>
     </message>
 </context>
 <context>
@@ -4411,12 +4411,12 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/ShortcutManager.cpp" line="100"/>
         <source>Empty</source>
-        <translation type="unfinished">Leeg</translation>
+        <translation>Leeg</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="102"/>
         <source>Send file</source>
-        <translation type="unfinished">Stuur bestand</translation>
+        <translation>Stuur bestand</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="104"/>
