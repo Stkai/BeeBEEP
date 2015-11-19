@@ -6,11 +6,11 @@ CONFIG(debug,debug|release) {
   message( Building BeeBEEP in Release Mode )
 }
 
-message(Qt version: $$[QT_VERSION])
+message( Qt version: $$[QT_VERSION] )
 
 include(../beebeep.pri)
 
-message(BeeBEEP target folder: $$DESTDIR)
+message( Target folder: $$DESTDIR )
 
 QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
@@ -27,8 +27,8 @@ macx: {
   LIBS += -framework ApplicationServices
 }
 
-message(BeeBEEP Qt modules: $$QT)
-message(BeeBEEP Libs: $$LIBS)
+message( Qt modules: $$QT )
+message( Libs: $$LIBS )
 
 include(../locale/locale.pri)
 

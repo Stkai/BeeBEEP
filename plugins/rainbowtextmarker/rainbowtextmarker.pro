@@ -1,7 +1,5 @@
 include(../plugins.pri)
 
-message(RainbowTextMarker target folder: $$DESTDIR)
-
 TARGET = rainbowtextmarker
 TEMPLATE = lib
 

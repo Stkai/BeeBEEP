@@ -1,7 +1,5 @@
 include(../plugins.pri)
 
-message(RegularBoldTextMarker target folder: $$DESTDIR)
-
 TARGET = regularboldtextmarker
 TEMPLATE = lib
 
