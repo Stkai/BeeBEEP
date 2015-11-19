@@ -1,6 +1,6 @@
 #!/bin/sh
 CODE_FOLDER="beebeep-code"
-RELEASE_FOLDER="beebeep-3.0.2-qt4-i386"
+RELEASE_FOLDER="beebeep-3.0.3-qt4-i386"
 
 echo "Cleaning previous packages with the same name..."
 rm -rf $RELEASE_FOLDER
