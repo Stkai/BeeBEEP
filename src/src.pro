@@ -1,16 +1,19 @@
-include(../beebeep.pri)
-
-QT += network xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
 CONFIG(debug,debug|release) {
-  message( Build BeeBEEP in Debug Mode )
+  message( Building BeeBEEP in Debug Mode )
   DEFINES += BEEBEEP_DEBUG
 } else {
-  message( Build BeeBEEP in Release Mode )
+  message( Building BeeBEEP in Release Mode )
 }
 
 message(Qt version: $$[QT_VERSION])
+
+include(../beebeep.pri)
+
+message(BeeBEEP target folder: $$DESTDIR)
+
+QT += network xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
 unix:!macx {
   lessThan(QT_MAJOR_VERSION, 5): QT += phonon
@@ -23,6 +26,11 @@ macx: {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
   LIBS += -framework ApplicationServices
 }
+
+message(BeeBEEP Qt modules: $$QT)
+message(BeeBEEP Libs: $$LIBS)
+
+include(../locale/locale.pri)
 
 TARGET = beebeep
 TEMPLATE = app

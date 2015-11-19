@@ -1,5 +1,7 @@
 include(../plugins.pri)
 
+message(NumberTextMarker target folder: $$DESTDIR)
+
 TARGET = numbertextmarker
 TEMPLATE = lib
 

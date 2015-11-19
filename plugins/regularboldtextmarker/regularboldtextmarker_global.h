@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: regularboldtextmarker_global.h 346 2015-04-05 16:12:37Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
