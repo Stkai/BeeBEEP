@@ -10,6 +10,7 @@ UseMulticastDns=true
 PreventMultipleConnectionsFromSingleHostAddress=false
 PreferredSubnets=
 UseIPv6=false
+MulticastGroupAddress=
 
 [Groups]
 TrustNickname=true

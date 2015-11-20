@@ -1,34 +1,27 @@
 #!/bin/sh
-CODE_FOLDER="beebeep-code"
-RELEASE_FOLDER="beebeep-3.0.3-qt5-amd64"
+#
+# This file is part of BeeBEEP.
+#
+# BeeBEEP is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published
+# by the Free Software Foundation, either version 3 of the License,
+# or (at your option) any later version.
+#
+# BeeBEEP is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with BeeBEEP.  If not, see <http:#www.gnu.org/licenses/>.
+#
+# Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
+#
+# $Id$
+#
+######################################################################
 
-echo "Cleaning previous packages with the same name..."
-rm -rf $RELEASE_FOLDER
-rm -rf $RELEASE_FOLDER.tar.gz
-echo "Making $RELEASE_FOLDER ..."
-mkdir $RELEASE_FOLDER
-echo "Copying PNG..."
-cp $CODE_FOLDER/src/images/beebeep.png $RELEASE_FOLDER
-echo "Copying locales..."
-cp $CODE_FOLDER/locale/*.qm $RELEASE_FOLDER
-echo "Copying CHANGELOG..."
-cp $CODE_FOLDER/CHANGELOG.txt $RELEASE_FOLDER
-echo "Copying README-LINUX..."
-cp $CODE_FOLDER/README-LINUX.txt $RELEASE_FOLDER
-echo "Copying HELP..."
-cp $CODE_FOLDER/BEEBEEP-HELP.txt $RELEASE_FOLDER
-echo "Copying Examples..."
-cp $CODE_FOLDER/misc/beebeep_example.rc $RELEASE_FOLDER
-cp $CODE_FOLDER/misc/beehosts_example.ini $RELEASE_FOLDER
-echo "Copying sound..."
-cp $CODE_FOLDER/misc/beep.wav $RELEASE_FOLDER
-echo "Copying Plugins..."
-cp $CODE_FOLDER/test/libnumbertextmarker.so.1.0.0 $RELEASE_FOLDER
-cp $CODE_FOLDER/test/librainbowtextmarker.so.1.0.0 $RELEASE_FOLDER
-cp $CODE_FOLDER/test/libregularboldtextmarker.so.1.0.0 $RELEASE_FOLDER
-echo "Copying Executable..."
-cp $CODE_FOLDER/test/beebeep $RELEASE_FOLDER
-echo "Making tar.gz package..."
-tar zcvf $RELEASE_FOLDER.tar.gz $RELEASE_FOLDER
-echo "Done."
+BEEBEEP_QT_VERSION=qt5
+BEEBEEP_ARCH_TYPE=amd64
 
+source inc_linux_package.txt

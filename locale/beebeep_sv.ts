@@ -295,17 +295,17 @@
         <translation>till</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="177"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="179"/>
         <source>Open</source>
         <translation>Öppna</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="234"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="236"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Kunde inte skicka %2 till %3. Användaren är nerkopplad.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="208"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="210"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Kunde inte skicka %2. Filöverföring är inaktiverad.</translation>
     </message>
@@ -320,102 +320,102 @@
         <translation>Ladda ner</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="180"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="182"/>
         <source>folder</source>
         <translation>mapp</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="243"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="245"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: Filen kan inte hittas.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="253"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="255"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 är en mapp. Du kan dela den.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="263"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="265"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Kan inte skicka %2: %3 är inte ansluten.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="274"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="276"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Du skickar %2 till %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="297"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="299"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Du har nekat att ladda ner %2 från %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="325"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="327"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Du har nekat att ladda ner mappen &apos;%2&apos; från %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="388"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="390"/>
         <source>Adding to file sharing</source>
         <translation>Lägger till som fildelning</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="443"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="445"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 har lagts till i fildelningen (%2)</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="445"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="447"/>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
         <translation>%1 har lagts till i fildelningen med %2 filer, %3 (förfluten tid: %4)</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="481"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="483"/>
         <source>All paths are removed from file sharing</source>
         <translation>Alla mappar har tagits bort från fildelning</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="503"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="505"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 har tagits bort från fildelning</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="505"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="507"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 har tagits bort från fildelning, med %2 filer</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="543"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="545"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Du är på väg att skicka %2 till %3. Kontrollerar mapp...</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="578"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="580"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Kunde inte skicka mappen &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="583"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="585"/>
         <source>the folder is empty.</source>
         <translation>mappen är tom.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="590"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="592"/>
         <source>file transfer is not working.</source>
         <translation>filöverföring fungerar inte.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="598"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="600"/>
         <source>%1 is not connected.</source>
         <translation>%1 är inte ansluten.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="612"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="614"/>
         <source>internal error.</source>
         <translation>internt fel.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="617"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="619"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Du skickar mappen &apos;%2&apos; till %3.</translation>
     </message>
@@ -3236,7 +3236,7 @@ Välj ett annat namn.</translation>
         <translation type="vanished">Ange IP-adresser eller undernät i ditt lokala nätverk, separerade med kommatecken (exempel: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="113"/>
+        <location filename="../src/GuiSearchUser.ui" line="155"/>
         <source>Addresses in beehosts.ini *</source>
         <translation>Adresser i beehosts.ini *</translation>
     </message>
@@ -3256,48 +3256,53 @@ Välj ett annat namn.</translation>
         <translation>(sök användare här, som standard)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="139"/>
+        <location filename="../src/GuiSearchUser.ui" line="119"/>
+        <source>Multicast group in beebeep.rc *</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="181"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="149"/>
+        <location filename="../src/GuiSearchUser.ui" line="191"/>
         <source>Accept connections only from your workgroups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="168"/>
+        <location filename="../src/GuiSearchUser.ui" line="210"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="194"/>
+        <location filename="../src/GuiSearchUser.ui" line="236"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Dela upp undernät i IPv4-adresser</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="201"/>
+        <location filename="../src/GuiSearchUser.ui" line="243"/>
         <source>Automatically add external subnet</source>
         <translation>Lägg till externt undernät automatiskt</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="208"/>
+        <location filename="../src/GuiSearchUser.ui" line="250"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Aktivera Zero Configuration Networking</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="218"/>
+        <location filename="../src/GuiSearchUser.ui" line="260"/>
         <source>* (read only section)</source>
         <translation>* (skrivskyddad sektion)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="238"/>
-        <location filename="../src/GuiSearchUser.cpp" line="96"/>
+        <location filename="../src/GuiSearchUser.ui" line="280"/>
+        <location filename="../src/GuiSearchUser.cpp" line="101"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="245"/>
+        <location filename="../src/GuiSearchUser.ui" line="287"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -3307,22 +3312,22 @@ Välj ett annat namn.</translation>
         <translation>Sök efter användare</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="46"/>
+        <location filename="../src/GuiSearchUser.cpp" line="53"/>
         <source>Unknown address</source>
         <translation>Okänd adress</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="56"/>
+        <location filename="../src/GuiSearchUser.cpp" line="61"/>
         <source>File is empty</source>
         <translation>Filen är tom</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="95"/>
+        <location filename="../src/GuiSearchUser.cpp" line="100"/>
         <source>Warning</source>
         <translation>Varning</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="96"/>
+        <location filename="../src/GuiSearchUser.cpp" line="101"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Du har angett en ogiltig värdadress:

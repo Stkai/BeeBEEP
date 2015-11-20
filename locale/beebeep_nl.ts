@@ -303,17 +303,17 @@
         <translation>naar</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="177"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="179"/>
         <source>Open</source>
         <translation>Open</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="234"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="236"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Onmogelijk %2 te verzenden naar %3:gebruiker is offline.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="208"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="210"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Kan %2 niet versturen. Bestandsoverdracht is uitgeschakeld.</translation>
     </message>
@@ -328,102 +328,102 @@
         <translation>Downloaden</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="180"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="182"/>
         <source>folder</source>
         <translation>map</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="243"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="245"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: bestand niet gevonden.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="253"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="255"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 is een map. U kunt het delen.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="263"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="265"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Kan %2 niet versturen: %3 is niet aangemeld.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="274"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="276"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 U bent %2 naar %3 aan het versturen.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="297"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="299"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 U hebt de download van %2 geweigerd van %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="325"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="327"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Je hebt geweigerd om de map %2 te downloaden van %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="388"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="390"/>
         <source>Adding to file sharing</source>
         <translation>Toe aan het voegen aan bestandsdeling</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="443"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="445"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 is toegevoegd aan bestandsdeling (%2)</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="445"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="447"/>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
         <translation>%1 is toegevoegd aan bestandsdeling met %2 bestanden, %3 (verlopen tijd: %4)</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="481"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="483"/>
         <source>All paths are removed from file sharing</source>
         <translation>Alle paden zijn verwijderd van gedeelde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="503"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="505"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 is verwijderd uit de bestandsdeling</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="505"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="507"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 is verwijderd uit de bestandsdeling met %2 bestanden</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="543"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="545"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Je staat op het punt om %2 te zenden naar %3. Controleer map...</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="578"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="580"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Kan niet verzenden naar map %2</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="583"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="585"/>
         <source>the folder is empty.</source>
         <translation>de map is leeg.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="590"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="592"/>
         <source>file transfer is not working.</source>
         <translation>Bestandsoverdracht werkt niet.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="598"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="600"/>
         <source>%1 is not connected.</source>
         <translation>%1 is niet verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="612"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="614"/>
         <source>internal error.</source>
         <translation>interne fout.</translation>
     </message>
     <message>
-        <location filename="../src/CoreFileTransfer.cpp" line="617"/>
+        <location filename="../src/CoreFileTransfer.cpp" line="619"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Je zend map %2 naar %3.</translation>
     </message>
@@ -3484,7 +3484,7 @@ Gebruik aub een andere naam.</translation>
         <translation type="vanished">Geef de ip adressen of het subnet van uw lokaal netwerk in gescheiden door comma&apos;s (vb: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="113"/>
+        <location filename="../src/GuiSearchUser.ui" line="155"/>
         <source>Addresses in beehosts.ini *</source>
         <translation>Adressen in beehosts.ini *</translation>
     </message>
@@ -3504,48 +3504,53 @@ Gebruik aub een andere naam.</translation>
         <translation>(zoek alle gebruikers standaard hier)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="139"/>
+        <location filename="../src/GuiSearchUser.ui" line="119"/>
+        <source>Multicast group in beebeep.rc *</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="181"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
         <translation>Werkgroepen (voert u netwerkgroepen in gescheiden door een komma)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="149"/>
+        <location filename="../src/GuiSearchUser.ui" line="191"/>
         <source>Accept connections only from your workgroups</source>
         <translation>Accepteer verbindingen alleen van je werkgroepen</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="168"/>
+        <location filename="../src/GuiSearchUser.ui" line="210"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Geef de ip adressen of het subnet van uw lokaal netwerk in gescheiden door comma&apos;s (vb: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="194"/>
+        <location filename="../src/GuiSearchUser.ui" line="236"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Deel subnet op in IPV4 adressen</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="201"/>
+        <location filename="../src/GuiSearchUser.ui" line="243"/>
         <source>Automatically add external subnet</source>
         <translation>Voeg automatisch een externe subnet toe</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="208"/>
+        <location filename="../src/GuiSearchUser.ui" line="250"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Nul configuratie netwerken inschakelen</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="218"/>
+        <location filename="../src/GuiSearchUser.ui" line="260"/>
         <source>* (read only section)</source>
         <translation>* (alleen lezen sectie)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="238"/>
-        <location filename="../src/GuiSearchUser.cpp" line="96"/>
+        <location filename="../src/GuiSearchUser.ui" line="280"/>
+        <location filename="../src/GuiSearchUser.cpp" line="101"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="245"/>
+        <location filename="../src/GuiSearchUser.ui" line="287"/>
         <source>Cancel</source>
         <translation>Annuleer</translation>
     </message>
@@ -3559,22 +3564,22 @@ Gebruik aub een andere naam.</translation>
         <translation>Zoeken op gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="46"/>
+        <location filename="../src/GuiSearchUser.cpp" line="53"/>
         <source>Unknown address</source>
         <translation>Onbekend adres</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="56"/>
+        <location filename="../src/GuiSearchUser.cpp" line="61"/>
         <source>File is empty</source>
         <translation>Bestand is leeg</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="95"/>
+        <location filename="../src/GuiSearchUser.cpp" line="100"/>
         <source>Warning</source>
         <translation>Opgepast</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="96"/>
+        <location filename="../src/GuiSearchUser.cpp" line="101"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>U hebt een ongeldig host adres ingegeven:

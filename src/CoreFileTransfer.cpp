@@ -139,9 +139,11 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
   if( peer )
   {
-    if( peer->isTransferCompleted() && fi.isDownload() )
+    if( peer->isTransferCompleted() )
     {
-      FileShare::instance().addDownloadedFile( fi );
+      if( fi.isDownload() )
+        FileShare::instance().addDownloadedFile( fi );
+
       bool show_image_preview = false;
       if( Settings::instance().showImagePreview() && Bee::isFileTypeImage( fi.suffix() ) )
       {

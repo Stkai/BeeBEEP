@@ -174,6 +174,10 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress );
     sets->setValue( "PreferredSubnets", m_preferredSubnets );
     sets->setValue( "UseIPv6", m_useIPv6 );
+    if( m_multicastGroupAddress.isNull() )
+      sets->setValue( "MulticastGroupAddress", "" );
+    else
+      sets->setValue( "MulticastGroupAddress", m_multicastGroupAddress.toString() );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -226,6 +230,11 @@ void Settings::loadRcFile()
   m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
   m_preferredSubnets = sets->value( "PreferredSubnets", m_preferredSubnets ).toString();
   m_useIPv6 = sets->value( "UseIPv6", m_useIPv6 ).toBool();
+  QString multicast_group_address = sets->value( "MulticastGroupAddress", "" ).toString();
+  if( multicast_group_address.isEmpty() )
+    m_multicastGroupAddress = QHostAddress();
+  else
+    m_multicastGroupAddress = QHostAddress( multicast_group_address );
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -1034,7 +1043,7 @@ void Settings::addTemporaryFilePath( const QString& file_path )
   if( !m_tempFilePathList.contains( file_path ) )
   {
     m_tempFilePathList.append( file_path );
-    qDebug() << "Temporary file added:" << file_path;
+    qDebug() << "Temporary file added:" << qPrintable( file_path );
   }
 }
 
@@ -1048,9 +1057,9 @@ void Settings::clearTemporaryFile()
     if( QFile::exists( file_path ) )
     {
       if( !QFile::remove( file_path ) )
-        qWarning() << "Unable to remove temporary file:" << file_path;
+        qWarning() << "Unable to remove temporary file:" << qPrintable( file_path );
       else
-        qDebug() << "Temporary file removed:" << file_path;
+        qDebug() << "Temporary file removed:" << qPrintable( file_path );
     }
   }
 
@@ -1087,7 +1096,7 @@ bool Settings::addStartOnSystemBoot()
     sets.sync();
     return true;
   }
-  qWarning() << "Unable to add auto start in registry key:" << sets.fileName();
+  qWarning() << "Unable to add auto start in registry key:" << qPrintable( sets.fileName() );
 #endif
   return false;
 }

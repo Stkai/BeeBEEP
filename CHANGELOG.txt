@@ -1,5 +1,9 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 3.0.3
+- Image preview also added in upload completed
+- The multicast group can be specified as host address in beebeep.rc (option)
+
 BeeBEEP 3.0.2
 - Fixed compatibility with Windows 10 with Qt 5.5 (it will become the default windows release)
 - Fixed compatibility with Windows XP with Qt 4.8.6 (windows XP release)

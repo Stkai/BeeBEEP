@@ -14,7 +14,7 @@ BEEBEEP_TRANSLATIONS = $$BEEBEEP_LOCALE_FOLDER/beebeep_xx.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_sv.ts
 
 isEmpty(QMAKE_LRELEASE) {
-  win32|os2:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\lrelease.exe
+  win32|os2:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\\lrelease.exe
   else:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
   unix {
     !exists($$QMAKE_LRELEASE) { QMAKE_LRELEASE = lrelease-qt4 }

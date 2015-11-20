@@ -41,13 +41,18 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 
 void GuiSearchUser::loadSettings()
 {
+  mp_leUdpPort->setText( QString::number( Settings::instance().defaultBroadcastPort() ) );
+
+  if( !Settings::instance().multicastGroupAddress().isNull() )
+    mp_leMulticastGroup->setText( Settings::instance().multicastGroupAddress().toString() );
+  else
+    mp_leMulticastGroup->setText( "" );
+
   QHostAddress base_host_addresses = NetworkManager::instance().localBroadcastAddress();
   if( base_host_addresses.isNull() )
     mp_leSubnet->setText( tr( "Unknown address" ) );
   else
     mp_leSubnet->setText( base_host_addresses.toString() );
-
-  mp_leUdpPort->setText( QString::number( Settings::instance().defaultBroadcastPort() ) );
 
   QStringList sl_tmp = Settings::instance().broadcastAddressesInFileHosts();
   if( sl_tmp.size() > 0 )

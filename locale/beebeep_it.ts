@@ -3817,6 +3817,10 @@ il file %2 (%3)?</translation>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
+    <message>
+        <source>Multicast group in beebeep.rc *</source>
+        <translation>Gruppo multicast in beebeep.rc *</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocal</name>

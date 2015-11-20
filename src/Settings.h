@@ -90,6 +90,7 @@ public:
 
   inline bool useIPv6() const;
   QHostAddress hostAddressToListen();
+  inline const QHostAddress& multicastGroupAddress() const;
   inline int defaultBroadcastPort() const;
   inline int defaultListenerPort() const;
   inline int defaultFileTransferPort() const;
@@ -383,6 +384,7 @@ private:
   bool m_addAccountNameToDataFolder;
   QString m_preferredSubnets;
   bool m_useIPv6;
+  QHostAddress m_multicastGroupAddress;
 
   // Ini
   bool m_firstTime;
@@ -741,5 +743,6 @@ inline bool Settings::useShortcuts() const { return m_useShortcuts; }
 inline int Settings::connectionTimeout() const { return m_connectionTimeout; }
 inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
 inline bool Settings::useIPv6() const { return m_useIPv6; }
+inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }
 
 #endif // BEEBEEP_SETTINGS_H

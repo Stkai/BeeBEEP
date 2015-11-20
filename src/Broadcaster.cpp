@@ -45,6 +45,14 @@ bool Broadcaster::startBroadcasting()
     return false;
   }
 
+  if( !Settings::instance().multicastGroupAddress().isNull() )
+  {
+    if( m_broadcastSocket.joinMulticastGroup( Settings::instance().multicastGroupAddress() ) )
+      qDebug() << "Join to the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+    else
+      qWarning() << "Unable to join to the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+  }
+
   m_baseBroadcastAddress = NetworkManager::instance().localBroadcastAddress();
   updateAddresses();
 #ifdef BEEBEEP_DEBUG
@@ -63,6 +71,14 @@ bool Broadcaster::startBroadcasting()
 
 void Broadcaster::stopBroadcasting()
 {
+  if( !Settings::instance().multicastGroupAddress().isNull() )
+  {
+    if( m_broadcastSocket.leaveMulticastGroup( Settings::instance().multicastGroupAddress() ) )
+      qDebug() << "Leave from the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+    else
+      qWarning() << "Unable to leave from the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+  }
+
   qDebug() << "Broadcaster stops broadcasting";
   m_datagramSentToBaseBroadcastAddress = 0;
   if( m_broadcastTimer.isActive() )
