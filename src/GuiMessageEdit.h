@@ -36,6 +36,7 @@ public:
   GuiMessageEdit( QWidget* parent );
 
   void addEmoticon( const Emoticon& );
+  void addPasted( const QString& );
 
   QString message();
   void clearMessage();

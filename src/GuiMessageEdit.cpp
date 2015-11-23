@@ -69,6 +69,14 @@ QString GuiMessageEdit::message()
   return m_currentMessage;
 }
 
+void GuiMessageEdit::addPasted( const QString& txt )
+{
+  if( !isEnabled() )
+    return;
+  insertPlainText( txt);
+  m_messageChanged = true;
+}
+
 void GuiMessageEdit::addEmoticon( const Emoticon& e )
 {
   if( !isEnabled() )

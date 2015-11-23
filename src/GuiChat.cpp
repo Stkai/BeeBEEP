@@ -722,6 +722,10 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
 
   foreach( QUrl url, source->urls() )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Checking pasted url:" << qPrintable( url.toString() );
+#endif
+
 #if QT_VERSION >= 0x040800
     if( url.isLocalFile() )
 #else
@@ -734,7 +738,12 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
         break;
       file_path_list.append( file_path );
     }
+    else
+      mp_teMessage->addPasted( url.toString() );
   }
+
+  if( num_files <= 0 )
+    return;
 
   num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
 
