@@ -174,11 +174,9 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 
   if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter )
   {
-    if( mods & Qt::ControlModifier || mods & Qt::ShiftModifier )
+    if( !Settings::instance().useReturnToSendMessage() || mods & Qt::ControlModifier || mods & Qt::ShiftModifier )
     {
       insertPlainText( "\n" );
-      e->accept();
-      return;
     }
     else
     {
@@ -189,9 +187,10 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
         addMessageToHistory();
         emit returnPressed();
       }
-      e->accept();
-      return;
     }
+
+    e->accept();
+    return;
   }
 
   if( mods & Qt::ControlModifier )

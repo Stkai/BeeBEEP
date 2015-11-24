@@ -193,6 +193,8 @@ public:
   inline const QByteArray& floatingChatSplitterState() const;
   inline void setShowUserStatusBackgroundColor( bool );
   inline bool showUserStatusBackgroundColor() const;
+  inline void setUseReturnToSendMessage( bool );
+  inline bool useReturnToSendMessage() const;
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
@@ -440,6 +442,7 @@ private:
   bool m_showImagePreview;
   int m_imagePreviewHeight;
   bool m_showUserStatusBackgroundColor;
+  bool m_useReturnToSendMessage;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -744,5 +747,7 @@ inline int Settings::connectionTimeout() const { return m_connectionTimeout; }
 inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
 inline bool Settings::useIPv6() const { return m_useIPv6; }
 inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }
+inline void Settings::setUseReturnToSendMessage( bool new_value ) { m_useReturnToSendMessage = new_value; }
+inline bool Settings::useReturnToSendMessage() const { return m_useReturnToSendMessage; }
 
 #endif // BEEBEEP_SETTINGS_H

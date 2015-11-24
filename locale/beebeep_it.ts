@@ -3261,6 +3261,10 @@ il file %2 (%3)?</translation>
         <source>Click to open your resource folder</source>
         <translation>Clicca qui per aprire la cartella delle risorse installate</translation>
     </message>
+    <message>
+        <source>Use key Return to send message</source>
+        <translation>Usa il tasto Invio per mandare i messaggi</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

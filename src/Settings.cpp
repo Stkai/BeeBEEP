@@ -96,6 +96,7 @@ Settings::Settings()
   m_maxUserStatusInList = 10;
 
   m_connectionTimeout = 5000;
+  m_useReturnToSendMessage = true;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -609,6 +610,7 @@ void Settings::load()
   m_chatMessagesToShow = sets->value( "ChatMessagesToShow", 80 ).toInt();
   m_chatMaxMessagesToShow = sets->value( "ChatMaxMessagesToShow", false ).toBool();
   m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
+  m_useReturnToSendMessage = sets->value( "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -842,6 +844,7 @@ void Settings::save()
   sets->setValue( "ChatMessagesToShow", m_chatMessagesToShow );
   sets->setValue( "ChatMaxMessagesToShow", m_chatMaxMessagesToShow );
   sets->setValue( "ImagePreviewHeight", m_imagePreviewHeight );
+  sets->setValue( "UseKeyReturnToSendMessage", m_useReturnToSendMessage );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );
