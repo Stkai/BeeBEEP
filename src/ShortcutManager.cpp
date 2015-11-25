@@ -40,7 +40,7 @@ QStringList ShortcutManager::saveToStringList() const
   {
     ks = shortcut( i );
     sl.append( ks.toString() );
-    qDebug() << "Save shortcut type" << i << shortcutName( i ) << "with key sequence:" << qPrintable( ks.toString() );
+    qDebug() << "Save shortcut type" << i << shortcutName( i ) << "with key sequence:" << qPrintable( ks.isEmpty() ? "none" : ks.toString() );
   }
   return sl;
 }
@@ -57,7 +57,7 @@ void ShortcutManager::loadFromStringList( const QStringList& sl )
     if( shortcut_type != Empty )
     {
       if( setShortcut( shortcut_type, s ) )
-        qDebug() << "Load shortcut type" << shortcut_type << shortcutName( shortcut_type ) << "with key sequence:" << qPrintable( shortcut( shortcut_type ).toString() );
+        qDebug() << "Load shortcut type" << shortcut_type << shortcutName( shortcut_type ) << "with key sequence:" << qPrintable( shortcut( shortcut_type ).isEmpty() ? "none" : shortcut( shortcut_type ).toString() );
       else
         qWarning() << "Unable to load shortcut string:" << s;
     }
@@ -95,7 +95,7 @@ bool ShortcutManager::setShortcut( int st, const QString& s )
 
 void ShortcutManager::setDefaultShortcuts()
 {
-  qDebug() << "Load default shortcuts";
+  qDebug() << "Loading default shortcuts";
 
   m_shortcutNames[ Empty ] = QObject::tr( "Empty" );
   m_shortcuts[ Empty ] = QKeySequence();
@@ -109,6 +109,8 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ MinimizeAllChats ] = QKeySequence( Qt::CTRL | Qt::Key_M );
   m_shortcutNames[ ShowNextUnreadMessage ] = QObject::tr( "Show the next unread message" );
   m_shortcuts[ ShowNextUnreadMessage ] = QKeySequence( Qt::CTRL | Qt::Key_Tab );
+  m_shortcutNames[ SendChatMessage ] = QObject::tr( "Send chat message" );
+  m_shortcuts[ SendChatMessage ] = QKeySequence( Qt::CTRL | Qt::Key_Return );
 
 
 #ifdef BEEBEEP_DEBUG

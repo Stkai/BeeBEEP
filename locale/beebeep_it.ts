@@ -1072,6 +1072,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Unable to save temporary file: %1</source>
         <translation>Impossibile salvare il file temporaneo: %1</translation>
     </message>
+    <message>
+        <source>Use key Return to send message</source>
+        <translation>Usa il tasto Invio per mandare i messaggi</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -3263,7 +3267,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use key Return to send message</source>
-        <translation>Usa il tasto Invio per mandare i messaggi</translation>
+        <translation type="vanished">Usa il tasto Invio per mandare i messaggi</translation>
     </message>
 </context>
 <context>
@@ -4713,6 +4717,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Show the next unread message</source>
         <translation>Mostra il prossimo messaggio non letto</translation>
+    </message>
+    <message>
+        <source>Send chat message</source>
+        <translation>Invia messaggio</translation>
     </message>
 </context>
 <context>

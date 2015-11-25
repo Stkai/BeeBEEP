@@ -685,11 +685,6 @@ void GuiMain::createMenus()
 
   mp_menuChat->addSeparator();
 
-  act = mp_menuChat->addAction( tr( "Use key Return to send message" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useReturnToSendMessage() );
-  act->setData( 41 );
-
   act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled HTML tags are not removed from the message" ) );
   act->setCheckable( true );
@@ -1457,9 +1452,6 @@ void GuiMain::settingsChanged()
     break;
   case 40:
     Settings::instance().setShowOnlyMessageNotificationOnTray( act->isChecked() );
-    break;
-  case 41:
-    Settings::instance().setUseReturnToSendMessage( act->isChecked() );
     break;
   case 99:
     break;

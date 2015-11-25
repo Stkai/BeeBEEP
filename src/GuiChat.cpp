@@ -154,6 +154,15 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
+
+  bar->addSeparator();
+  mp_cbUseReturnToSendMessage = new QCheckBox( this );
+  mp_cbUseReturnToSendMessage->setObjectName( "mp_cbUseReturnToSendMessage" );
+  mp_cbUseReturnToSendMessage->setChecked( Settings::instance().useReturnToSendMessage() );
+  mp_cbUseReturnToSendMessage->setText( tr( "Use key Return to send message" ) + QString( "   " ) );
+  connect( mp_cbUseReturnToSendMessage, SIGNAL( stateChanged( int ) ), this, SLOT( onUseReturnToSendMessageClicked( int ) ) );
+  bar->addWidget( mp_cbUseReturnToSendMessage );
+
 }
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
@@ -829,4 +838,20 @@ void GuiChat::updateShortcuts()
     mp_actSendFile->setShortcut( ks );
   else
     mp_actSendFile->setShortcut( QKeySequence() );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::SendChatMessage );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    mp_pbSend->setShortcut( ks );
+  else
+    mp_pbSend->setShortcut( QKeySequence() );
+
+}
+
+void GuiChat::onUseReturnToSendMessageClicked( int button_state )
+{
+  if( button_state == Qt::Checked )
+    Settings::instance().setUseReturnToSendMessage( true );
+  else
+    Settings::instance().setUseReturnToSendMessage( false );
+  ensureFocusInChat();
 }

@@ -114,6 +114,7 @@ private slots:
   void editChatMembers();
   void checkAndSendUrls( const QMimeData* );
   void checkAndSendImage( const QMimeData* );
+  void onUseReturnToSendMessageClicked( int );
 
 private:
   VNumber m_chatId;
@@ -138,6 +139,8 @@ private:
   QPalette m_defaultChatPalette;
 
   QShortcut* mp_scFocusInChat;
+
+  QCheckBox* mp_cbUseReturnToSendMessage;
 
 };
 
