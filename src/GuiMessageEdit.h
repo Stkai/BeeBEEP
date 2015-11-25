@@ -26,7 +26,9 @@
 
 #include "Config.h"
 #include "Emoticon.h"
-
+#ifdef BEEBEEP_USE_HUNSPELL
+  class SpellCheckerHighlighter;
+#endif
 
 class GuiMessageEdit : public QTextEdit
 {
@@ -72,6 +74,10 @@ private:
   QList<Emoticon> m_emoticonsAdded;
   QString m_currentMessage;
   bool m_messageChanged;
+
+#ifdef BEEBEEP_USE_HUNSPELL
+  SpellCheckerHighlighter* mp_scHighlighter;
+#endif
 
 };
 

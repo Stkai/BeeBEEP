@@ -40,7 +40,9 @@
 #include "Random.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
-
+#ifdef BEEBEEP_USE_HUNSPELL
+#include "SpellChecker.h"
+#endif
 
 bool SetTranslator( QTranslator* translator, QString language_folder, QString lang )
 {
@@ -157,6 +159,12 @@ int main( int argc, char *argv[] )
   if( !Settings::instance().shortcuts().isEmpty() )
     ShortcutManager::instance().loadFromStringList( Settings::instance().shortcuts() );
 
+#ifdef BEEBEEP_USE_HUNSPELL
+  /* Init SpellChecker */
+  (void)SpellChecker::instance();
+  SpellChecker::instance().setDictionary( "../hunspell/dic-examples/it_IT.dic" );
+#endif
+
   /* Init Plugins */
   PluginManager::instance().loadPlugins();
 
@@ -238,6 +246,9 @@ int main( int argc, char *argv[] )
   ColorManager::close();
   AudioManager::close();
   ShortcutManager::close();
+#ifdef BEEBEEP_USE_HUNSPELL
+  SpellChecker::close();
+#endif
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();

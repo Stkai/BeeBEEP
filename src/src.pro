@@ -253,3 +253,13 @@ win32: DEPENDPATH += $$PWD/../mdns-lib
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/dnssd.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/libdnssd.a
 unix:!macx: LIBS += -ldns_sd
+
+#DEFINES += BEEBEEP_USE_HUNSPELL
+#win32: DEFINES += HUNSPELL_STATIC
+#HEADERS += SpellChecker.h SpellCheckerHighlighter.h
+#SOURCES += SpellChecker.cpp SpellCheckerHighlighter.cpp
+#win32: LIBS += -L$$PWD/../hunspell/lib/ -llibhunspell
+#INCLUDEPATH += $$PWD/../hunspell/include
+#DEPENDPATH += $$PWD/../hunspell/include
+#win32: PRE_TARGETDEPS += $$PWD/../hunspell/lib/libhunspell.lib
+

@@ -25,6 +25,9 @@
 #include "GuiMessageEdit.h"
 #include "HistoryManager.h"
 #include "Settings.h"
+#ifdef BEEBEEP_USE_HUNSPELL
+  #include "SpellCheckerHighlighter.h"
+#endif
 
 
 GuiMessageEdit::GuiMessageEdit( QWidget* parent )
@@ -37,6 +40,10 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   m_redoAvailable = false;
   m_currentMessage = "";
   m_messageChanged = true;
+
+#ifdef BEEBEEP_USE_HUNSPELL
+  mp_scHighlighter = new SpellCheckerHighlighter( this->document() );
+#endif
 
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
   connect( this, SIGNAL( undoAvailable( bool) ), this, SLOT( setUndoAvailable( bool ) ) );
