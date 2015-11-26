@@ -44,6 +44,7 @@ public:
   void clearMessage();
 
   void rehighlightMessage();
+  void setCompleter( QCompleter* );
 
 signals:
   void returnPressed();
@@ -63,11 +64,15 @@ protected:
   void createMessageToSend();
   bool canInsertFromMimeData( const QMimeData* ) const;
   void insertFromMimeData( const QMimeData* );
+  QString textUnderCursor() const;
+  void focusInEvent( QFocusEvent* );
+  virtual void completerKeyPressEvent( QKeyEvent* );
 
 private slots:
   void checkWriting();
   void setUndoAvailable( bool );
   void setRedoAvailable( bool );
+  void insertCompletion( const QString& );
 
 private:
   QTimer* mp_timer;
@@ -81,6 +86,7 @@ private:
   SpellCheckerHighlighter* mp_scHighlighter;
 #endif
 
+  QCompleter* mp_completer;
 };
 
 #endif // BEEBEEP_GUIMESSAGEEDIT_H

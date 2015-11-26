@@ -341,13 +341,12 @@ void Core::sendWritingMessage( VNumber chat_id )
     return;
 
   Chat from_chat = ChatManager::instance().chat( chat_id );
-  UserList user_list = UserManager::instance().userList().fromUsersId( from_chat.usersId() );
-  foreach( User u, user_list.toList() )
+  foreach( VNumber user_id,  from_chat.usersId() )
   {
-    if( u.isLocal() )
+    if( user_id == ID_LOCAL_USER )
       continue;
 
-    Connection* c = connection( u.id() );
+    Connection* c = connection( user_id );
     if( !c )
       continue;
 

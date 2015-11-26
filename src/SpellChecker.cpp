@@ -29,8 +29,21 @@
 SpellChecker* SpellChecker::mp_instance = NULL;
 
 SpellChecker::SpellChecker()
- : mp_hunspell( 0 ), m_dictionary( "" ), m_userDictionary( "" ), m_encoding( "ISO8859-1" ), mp_codec( 0 )
+ : mp_hunspell( 0 ), m_dictionary( "" ), m_userDictionary( "" ), m_encoding( "ISO8859-1" ), mp_codec( 0 ), m_baseWordList()
 {
+  m_baseWordList << "Marco" << "Mastroddi" << "BeeBEEP";
+  mp_completer = new QCompleter;
+  mp_completer->setModelSorting( QCompleter::CaseInsensitivelySortedModel );
+  mp_completer->setCaseSensitivity( Qt::CaseInsensitive );
+  mp_completer->setWrapAround( false );
+  updateCompleter( "" );
+}
+
+SpellChecker::~SpellChecker()
+{
+  if( mp_hunspell )
+    delete mp_hunspell;
+  delete mp_completer;
 }
 
 void SpellChecker::clearDictionary()
@@ -198,6 +211,19 @@ void SpellChecker::addToUserDictionary( const QString& word )
   }
   else
     qWarning() << "User dictionary path is empty";
+}
+
+void SpellChecker::updateCompleter( const QString& word_to_complete )
+{
+  QStringList sl = m_baseWordList;
+
+  if( !word_to_complete.isEmpty() )
+    sl.append( suggest( word_to_complete ) );
+
+  QStringListModel* slm = new QStringListModel( mp_completer );
+  slm->setStringList( sl );
+  mp_completer->setModel( slm );
+  mp_completer->setCompletionPrefix( word_to_complete );
 }
 
 #endif // BEEBEEP_USE_HUNSPELL

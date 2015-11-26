@@ -26,6 +26,7 @@
 #include "HistoryManager.h"
 #include "Settings.h"
 #ifdef BEEBEEP_USE_HUNSPELL
+  #include "SpellChecker.h"
   #include "SpellCheckerHighlighter.h"
 #endif
 
@@ -44,6 +45,7 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
 #ifdef BEEBEEP_USE_HUNSPELL
   mp_scHighlighter = new SpellCheckerHighlighter( this->document() );
 #endif
+  mp_completer = 0;
 
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
   connect( this, SIGNAL( undoAvailable( bool) ), this, SLOT( setUndoAvailable( bool ) ) );
@@ -172,8 +174,66 @@ void GuiMessageEdit::dropEvent( QDropEvent* e )
   QApplication::restoreOverrideCursor();
 }
 
+void GuiMessageEdit::completerKeyPressEvent( QKeyEvent* e )
+{
+  bool is_shortcut = e->modifiers() & Qt::ControlModifier; // CTRL+
+  if( !is_shortcut ) // do not process the shortcut when we have a completer
+    QTextEdit::keyPressEvent( e );
+
+  const bool ctrl_or_shift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
+  if( ctrl_or_shift && e->text().isEmpty() )
+    return;
+
+  static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
+  bool has_modifier = (e->modifiers() != Qt::NoModifier) && !ctrl_or_shift;
+  QString completion_prefix = textUnderCursor();
+
+  if( !is_shortcut && (has_modifier || e->text().isEmpty() || completion_prefix.length() < 3 || eow.contains( e->text().right( 1 ) ) ) )
+  {
+    mp_completer->popup()->hide();
+    return;
+  }
+
+  if( completion_prefix != mp_completer->completionPrefix() )
+  {
+#ifdef BEEBEEP_USE_HUNSPELL
+    SpellChecker::instance().updateCompleter( completion_prefix );
+#else
+    mp_completer->setCompletionPrefix( completion_prefix );
+#endif
+    mp_completer->popup()->setCurrentIndex( mp_completer->completionModel()->index( 0, 0 ) );
+  }
+
+  QRect cursor_rect = cursorRect();
+  cursor_rect.setWidth( mp_completer->popup()->sizeHintForColumn(0) + mp_completer->popup()->verticalScrollBar()->sizeHint().width() );
+  mp_completer->complete( cursor_rect );
+}
+
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 {
+  if( mp_completer && mp_completer->popup()->isVisible() )
+  {
+    // The following keys are forwarded by the completer to the widget
+    switch( e->key() )
+    {
+      case Qt::Key_Enter:
+      case Qt::Key_Return:
+      case Qt::Key_Escape:
+      case Qt::Key_Tab:
+      case Qt::Key_Backtab:
+      case Qt::Key_Down:
+      case Qt::Key_Right:
+      case Qt::Key_Left:
+      case Qt::Key_Up:
+      case Qt::Key_PageUp:
+      case Qt::Key_PageDown:
+        e->ignore();
+        return; // let the completer do default behavior
+      default:
+        break;
+    }
+  }
+
   bool reset_font = false;
   Qt::KeyboardModifiers mods = e->modifiers();
 
@@ -220,7 +280,11 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     reset_font = true;
   }
 
-  QTextEdit::keyPressEvent( e );
+  if( mp_completer )
+    completerKeyPressEvent( e );
+  else
+    QTextEdit::keyPressEvent( e );
+
 
   HistoryManager::instance().clearTemporaryMessage();
 
@@ -299,4 +363,45 @@ void GuiMessageEdit::rehighlightMessage()
 #ifdef BEEBEEP_USE_HUNSPELL
    mp_scHighlighter->rehighlight();
 #endif
+}
+
+void GuiMessageEdit::setCompleter(QCompleter *completer)
+{
+  if( mp_completer )
+    QObject::disconnect( mp_completer, 0, this, 0 );
+
+  mp_completer = completer;
+
+  if( !mp_completer )
+    return;
+
+  mp_completer->setWidget( this );
+  connect( mp_completer, SIGNAL( activated( const QString& ) ), this, SLOT( insertCompletion( const QString& ) ) );
+}
+
+void GuiMessageEdit::insertCompletion( const QString& completion )
+{
+  if( mp_completer->widget() != this )
+    return;
+
+  QTextCursor tc = textCursor();
+  int extra = completion.length() - mp_completer->completionPrefix().length();
+  tc.movePosition( QTextCursor::Left );
+  tc.movePosition( QTextCursor::EndOfWord );
+  tc.insertText( completion.right( extra ) );
+  setTextCursor( tc );
+}
+
+QString GuiMessageEdit::textUnderCursor() const
+{
+  QTextCursor tc = textCursor();
+  tc.select( QTextCursor::WordUnderCursor );
+  return tc.selectedText();
+}
+
+void GuiMessageEdit::focusInEvent( QFocusEvent* ev )
+{
+  if( mp_completer )
+    mp_completer->setWidget( this );
+  QTextEdit::focusInEvent( ev );
 }

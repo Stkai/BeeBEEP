@@ -36,6 +36,8 @@ class SpellChecker
   static SpellChecker* mp_instance;
 
 public:
+  inline bool isValid() const;
+
   bool setDictionary( const QString& );
   bool setUserDictionary( const QString& );
 
@@ -43,6 +45,9 @@ public:
   QStringList suggest( const QString& );
   void ignoreWord( const QString& );
   void addToUserDictionary(const QString& );
+
+  inline QCompleter* completer() const;
+  void updateCompleter( const QString& );
 
   static SpellChecker& instance()
   {
@@ -63,6 +68,7 @@ public:
 
 protected:
   SpellChecker();
+  ~SpellChecker();
   bool addWord( const QString& );
   void clearDictionary();
 
@@ -73,7 +79,14 @@ private:
   QString m_encoding;
   QTextCodec* mp_codec;
 
+  QStringList m_baseWordList;
+  QCompleter* mp_completer;
+
 };
+
+// Inline Functions
+inline bool SpellChecker::isValid() const { return mp_hunspell != 0; }
+inline QCompleter* SpellChecker::completer() const { return mp_completer; }
 
 #endif // BEEBEEP_USE_HUNSPELL
 #endif // BEEBEEP_SPELLCHECKER_H

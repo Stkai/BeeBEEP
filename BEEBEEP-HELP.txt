@@ -138,7 +138,10 @@ UseShortcuts=[true/false] enable shortcuts in application
 Shortcuts=(do not edit manually)
 
 [Tools]
-LogToFile=false
+LogToFile=[true/false] enable file logging
+UseSpellChecker=[true/false] enable spell checking on writing message 
+UseWordCompleter=[true/false] enable word completer on writing message
+DictionaryPath=(String) path to dictionary. It is accepted only file with extension .dic 
 
 [Misc]
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0)

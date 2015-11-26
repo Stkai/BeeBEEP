@@ -337,6 +337,8 @@ public:
 
   inline void setUseSpellChecker( bool );
   inline bool useSpellChecker() const;
+  inline void setUseWordCompleter( bool );
+  inline bool useWordCompleter() const;
   inline void setDictionaryPath( const QString& );
   inline const QString& dictionaryPath() const;
 
@@ -535,6 +537,7 @@ private:
   bool m_useShortcuts;
 
   bool m_useSpellChecker;
+  bool m_useWordCompleter;
   QString m_dictionaryPath;
 
 };
@@ -761,5 +764,7 @@ inline void Settings::setUseSpellChecker( bool new_value ) { m_useSpellChecker =
 inline bool Settings::useSpellChecker() const { return m_useSpellChecker; }
 inline void Settings::setDictionaryPath( const QString& new_value ) { m_dictionaryPath = new_value; }
 inline const QString& Settings::dictionaryPath() const { return m_dictionaryPath; }
+inline void Settings::setUseWordCompleter( bool new_value ) { m_useWordCompleter = new_value; }
+inline bool Settings::useWordCompleter() const { return m_useWordCompleter; }
 
 #endif // BEEBEEP_SETTINGS_H

@@ -6,6 +6,7 @@ BeeBEEP 3.0.3
 - Key Return can be disabled as shortcut to send chat message (option)
 - Shortcut "Send chat message" added
 - Spell checking can be enabled (thanks to HUNSPELL library)
+- Word completer can be enabled (option)
 
 BeeBEEP 3.0.2
 - Fixed compatibility with Windows 10 with Qt 5.5 (it will become the default windows release)

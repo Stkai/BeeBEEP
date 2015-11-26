@@ -1096,6 +1096,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Use key Return to make a carriage return</source>
         <translation>Usa il tasto Invio per andare a capo</translation>
     </message>
+    <message>
+        <source>There is not a valid dictionary</source>
+        <translation>Non è stato selezionato un dizionario valido</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>

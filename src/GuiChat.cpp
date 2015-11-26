@@ -30,6 +30,9 @@
 #include "Protocol.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
+#ifdef BEEBEEP_USE_HUNSPELL
+  #include "SpellChecker.h"
+#endif
 #include "UserManager.h"
 
 
@@ -61,6 +64,10 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
   mp_teMessage->setAcceptRichText( false );
+#ifdef BEEBEEP_USE_HUNSPELL
+  if( Settings::instance().useWordCompleter() )
+    mp_teMessage->setCompleter( SpellChecker::instance().completer() );
+#endif
 
   mp_teChat->setObjectName( "GuiChatViewer" );
   m_defaultChatPalette = mp_teChat->palette();
@@ -862,7 +869,12 @@ void GuiChat::onUseReturnToSendMessageClicked()
 void GuiChat::updateSpellCheckerToolTip()
 {
   if( Settings::instance().useSpellChecker() )
-    mp_actSpellChecker->setToolTip( tr( "Spell checking is enabled" ) );
+  {
+    QString tool_tip = tr( "Spell checking is enabled" );
+    if( !SpellChecker::instance().isValid() )
+      tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) );
+    mp_actSpellChecker->setToolTip( tool_tip );
+  }
   else
     mp_actSpellChecker->setToolTip( tr( "Spell checking is disabled" ) );
 }
