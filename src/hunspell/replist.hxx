@@ -3,10 +3,13 @@
 #define _REPLIST_HXX_
 
 #include "hunvisapi.h"
+
 #include "w_char.hxx"
 
 // There is "#define near" in WinAPI minwindef.h which is visible in that scope (Marco)
-#undef near
+#ifdef Q_OS_WIN
+  #undef near
+#endif
 
 class LIBHUNSPELL_DLL_EXPORTED RepList
 {

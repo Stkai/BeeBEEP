@@ -35,6 +35,8 @@ include(../locale/locale.pri)
 TARGET = beebeep
 TEMPLATE = app
 
+include(hunspell/hunspell.pri)
+
 HEADERS += AudioManager.h \
   Avatar.h \
   BeeApplication.h \
@@ -113,6 +115,8 @@ HEADERS += AudioManager.h \
   ShortcutManager.h \
   ShutdownMonitor.h \
   Settings.h \
+  SpellChecker.h \
+  SpellCheckerHighlighter.h \
   Tips.h \
   Updater.h \
   User.h \
@@ -209,6 +213,8 @@ SOURCES += AudioManager.cpp \
   ShortcutManager.cpp \
   ShutdownMonitor.cpp \
   Settings.cpp \
+  SpellChecker.cpp \
+  SpellCheckerHighlighter.cpp \
   Updater.cpp \
   User.cpp \
   UserList.cpp \
@@ -253,13 +259,4 @@ win32: DEPENDPATH += $$PWD/../mdns-lib
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/dnssd.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/libdnssd.a
 unix:!macx: LIBS += -ldns_sd
-
-#DEFINES += BEEBEEP_USE_HUNSPELL
-#win32: DEFINES += HUNSPELL_STATIC
-#HEADERS += SpellChecker.h SpellCheckerHighlighter.h
-#SOURCES += SpellChecker.cpp SpellCheckerHighlighter.cpp
-#win32: LIBS += -L$$PWD/../hunspell/lib/ -llibhunspell
-#INCLUDEPATH += $$PWD/../hunspell/include
-#DEPENDPATH += $$PWD/../hunspell/include
-#win32: PRE_TARGETDEPS += $$PWD/../hunspell/lib/libhunspell.lib
 

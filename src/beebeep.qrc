@@ -137,5 +137,8 @@
         <file>images/shortcut.png</file>
         <file>images/data-folder.png</file>
         <file>images/resource-folder.png</file>
+        <file>images/dictionary.png</file>
+        <file>images/spellchecker.png</file>
+        <file>images/key-return.png</file>
     </qresource>
 </RCC>

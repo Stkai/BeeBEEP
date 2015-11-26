@@ -54,6 +54,8 @@ bool SpellChecker::setDictionary( const QString& dictionary_path )
     return false;
   }
 
+  clearDictionary();
+
   m_dictionary = dictionary_path;
   m_encoding = "ISO8859-1";  // default
   qDebug() << "SpellChecker is loading dictionary from path:" << m_dictionary;

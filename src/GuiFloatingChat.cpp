@@ -168,6 +168,7 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
 #endif
     m_chatIsVisible = true;
     m_prevActivatedState = true;
+    mp_chat->updateActionsOnFocusChanged();
     emit readAllMessages( chatId() );
     return;
   }
@@ -192,6 +193,7 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
       qDebug() << "Floating chat" << chatId() << "has grab focus (active)";
 #endif
       m_chatIsVisible = true;
+      mp_chat->updateActionsOnFocusChanged();
       emit readAllMessages( chatId() );
     }
     else

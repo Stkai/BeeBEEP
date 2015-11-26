@@ -293,3 +293,10 @@ void GuiMessageEdit::insertFromMimeData( const QMimeData* source )
     QTextEdit::insertFromMimeData( source );
   }
 }
+
+void GuiMessageEdit::rehighlightMessage()
+{
+#ifdef BEEBEEP_USE_HUNSPELL
+   mp_scHighlighter->rehighlight();
+#endif
+}

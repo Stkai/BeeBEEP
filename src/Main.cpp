@@ -162,7 +162,8 @@ int main( int argc, char *argv[] )
 #ifdef BEEBEEP_USE_HUNSPELL
   /* Init SpellChecker */
   (void)SpellChecker::instance();
-  SpellChecker::instance().setDictionary( "../hunspell/dic-examples/it_IT.dic" );
+  if( !Settings::instance().dictionaryPath().isEmpty() )
+    SpellChecker::instance().setDictionary( Settings::instance().dictionaryPath() );
 #endif
 
   /* Init Plugins */

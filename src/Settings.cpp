@@ -97,6 +97,7 @@ Settings::Settings()
 
   m_connectionTimeout = 5000;
   m_useReturnToSendMessage = true;
+
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -732,6 +733,8 @@ void Settings::load()
 
   sets->beginGroup( "Tools" );
   m_logToFile = sets->value( "LogToFile", false ).toBool();
+  m_useSpellChecker = sets->value( "UseSpellChecker", false ).toBool();
+  m_dictionaryPath = sets->value( "DictionaryPath", resourceFolder() ).toString();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -948,6 +951,8 @@ void Settings::save()
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
+  sets->setValue( "UseSpellChecker", m_useSpellChecker );
+  sets->setValue( "DictionaryPath", m_dictionaryPath );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "BroadcastInterval", m_broadcastInterval );

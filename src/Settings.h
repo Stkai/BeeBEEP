@@ -335,6 +335,11 @@ public:
   inline void setAlwaysOpenNewFloatingChat( bool );
   inline bool alwaysOpenNewFloatingChat() const;
 
+  inline void setUseSpellChecker( bool );
+  inline bool useSpellChecker() const;
+  inline void setDictionaryPath( const QString& );
+  inline const QString& dictionaryPath() const;
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -528,6 +533,9 @@ private:
 
   QStringList m_shortcuts;
   bool m_useShortcuts;
+
+  bool m_useSpellChecker;
+  QString m_dictionaryPath;
 
 };
 
@@ -749,5 +757,9 @@ inline bool Settings::useIPv6() const { return m_useIPv6; }
 inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }
 inline void Settings::setUseReturnToSendMessage( bool new_value ) { m_useReturnToSendMessage = new_value; }
 inline bool Settings::useReturnToSendMessage() const { return m_useReturnToSendMessage; }
+inline void Settings::setUseSpellChecker( bool new_value ) { m_useSpellChecker = new_value; }
+inline bool Settings::useSpellChecker() const { return m_useSpellChecker; }
+inline void Settings::setDictionaryPath( const QString& new_value ) { m_dictionaryPath = new_value; }
+inline const QString& Settings::dictionaryPath() const { return m_dictionaryPath; }
 
 #endif // BEEBEEP_SETTINGS_H

@@ -52,6 +52,7 @@ public:
   void ensureLastMessageVisible();
 
   void updateShortcuts();
+  void updateActionsOnFocusChanged();
 
   inline QSplitter* chatSplitter() const;
 
@@ -91,6 +92,8 @@ protected:
   bool isActiveUser( const Chat&, const User& ) const;
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
+  void updateSpellCheckerToolTip();
+  void updateUseReturnKeyToSendMessageToolTip();
 
 private slots:
   void sendMessage();
@@ -114,7 +117,8 @@ private slots:
   void editChatMembers();
   void checkAndSendUrls( const QMimeData* );
   void checkAndSendImage( const QMimeData* );
-  void onUseReturnToSendMessageClicked( int );
+  void onUseReturnToSendMessageClicked();
+  void onSpellCheckerActionClicked();
 
 private:
   VNumber m_chatId;
@@ -132,6 +136,8 @@ private:
   QAction* mp_actCreateGroupChat;
   QAction* mp_actSelectBackgroundColor;
   QAction* mp_actGroupWizard;
+  QAction* mp_actSpellChecker;
+  QAction* mp_actUseReturnToSendMessage;
 
   QMenu* mp_menuMembers;
   QSplitter* mp_splitter;
@@ -139,8 +145,6 @@ private:
   QPalette m_defaultChatPalette;
 
   QShortcut* mp_scFocusInChat;
-
-  QCheckBox* mp_cbUseReturnToSendMessage;
 
 };
 

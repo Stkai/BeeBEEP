@@ -1076,6 +1076,26 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Use key Return to send message</source>
         <translation>Usa il tasto Invio per mandare i messaggi</translation>
     </message>
+    <message>
+        <source>Spell checking</source>
+        <translation>Controllo ortografico</translation>
+    </message>
+    <message>
+        <source>Use Return key to send message</source>
+        <translation>Usa il tasto Invio per spedire il messaggio</translation>
+    </message>
+    <message>
+        <source>Spell checking is enabled</source>
+        <translation>Il controllo ortografico è abilitato</translation>
+    </message>
+    <message>
+        <source>Spell checking is disabled</source>
+        <translation>Il controllo ortografico è disabilitato</translation>
+    </message>
+    <message>
+        <source>Use key Return to make a carriage return</source>
+        <translation>Usa il tasto Invio per andare a capo</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -3268,6 +3288,26 @@ il file %2 (%3)?</translation>
     <message>
         <source>Use key Return to send message</source>
         <translation type="vanished">Usa il tasto Invio per mandare i messaggi</translation>
+    </message>
+    <message>
+        <source>Dictionary...</source>
+        <translation>Dizionario...</translation>
+    </message>
+    <message>
+        <source>Select your preferred dictionary for spell checking</source>
+        <translation>Selezione il tuo dizionario preferito per il controllo ortografico</translation>
+    </message>
+    <message>
+        <source>Select your dictionary path</source>
+        <translation>Seleziona il tuo dizionario</translation>
+    </message>
+    <message>
+        <source>Dictionary selected: %1</source>
+        <translation>Il dizionario selezionato è: %1</translation>
+    </message>
+    <message>
+        <source>Unable to set dictionary: %1</source>
+        <translation>Impossibile caricare il dizionario: %1</translation>
     </message>
 </context>
 <context>

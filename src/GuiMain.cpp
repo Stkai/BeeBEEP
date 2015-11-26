@@ -58,6 +58,7 @@
 #include "SaveChatList.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
+#include "SpellChecker.h"
 #include "UserManager.h"
 #ifdef Q_OS_WIN
   #include <windows.h>
@@ -86,6 +87,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   m_lastUserStatus = User::Online;
   m_forceShutdown = false;
+  m_prevActivatedState = true;
 
   createActions();
   createDockWindows();
@@ -601,6 +603,8 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Select the download folder" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts..." ), this, SLOT( editShortcuts() ) );
   act->setStatusTip( tr( "Enable and edit your custom shortcuts" ) );
+  act = mp_menuMain->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary..." ), this, SLOT( selectDictionatyPath() ) );
+  act->setStatusTip( tr( "Select your preferred dictionary for spell checking" ) );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
@@ -2329,6 +2333,7 @@ void GuiMain::raiseHomeView()
 void GuiMain::raiseChatView()
 {
   raiseView( mp_chat, mp_chat->chatId(), mp_chat->chatName() );
+  mp_chat->updateActionsOnFocusChanged();
   mp_chat->ensureLastMessageVisible();
   mp_chat->ensureFocusInChat();
 }
@@ -3492,6 +3497,24 @@ void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
       qDebug() << "Chat in the main window has grab the focus. All messages can be set to read";
 #endif
       readAllMessagesInChat( mp_chat->chatId() );
+      mp_chat->updateActionsOnFocusChanged();
+      return;
+    }
+  }
+  else
+  {
+    bool current_state = isActiveWindow();
+    if( current_state != m_prevActivatedState )
+    {
+      m_prevActivatedState = current_state;
+      if( current_state && mp_stackedWidget->currentWidget() == mp_chat )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Chat in the main window has grab focus (active)";
+#endif
+        readAllMessagesInChat( mp_chat->chatId() );
+        mp_chat->updateActionsOnFocusChanged();
+      }
     }
   }
 }
@@ -3509,4 +3532,19 @@ void GuiMain::minimizeAllChats()
 
   if( !isMinimized() )
     showMinimized();
+}
+
+void GuiMain::selectDictionatyPath()
+{
+  QString dictionary_path = QFileDialog::getOpenFileName( this, tr( "Select your dictionary path" ), Settings::instance().dictionaryPath(), QString( "*.dic" ) );
+
+  if( dictionary_path.isEmpty() )
+    return;
+
+  Settings::instance().setDictionaryPath( dictionary_path );
+
+  if( SpellChecker::instance().setDictionary( dictionary_path ) )
+    showMessage( tr( "Dictionary selected: %1" ).arg( dictionary_path ), 3000 );
+  else
+    showMessage( tr( "Unable to set dictionary: %1" ).arg( dictionary_path ), 3000 );
 }

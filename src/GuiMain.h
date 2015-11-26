@@ -160,6 +160,7 @@ private slots:
   void editShortcuts();
   void onApplicationFocusChanged( QWidget*, QWidget* );
   void minimizeAllChats();
+  void selectDictionatyPath();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -300,6 +301,7 @@ private:
   QShortcut* mp_scMinimizeAllChats;
   QShortcut* mp_scShowNextUnreadMessage;
 
+  bool m_prevActivatedState;
 };
 
 #endif // BEEBEEP_GUIMAIN_H

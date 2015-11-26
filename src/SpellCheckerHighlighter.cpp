@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "SpellCheckerHighlighter.h"
+#include "Settings.h"
 #ifdef BEEBEEP_USE_HUNSPELL
 #include "SpellChecker.h"
 #endif
@@ -31,9 +32,7 @@ SpellCheckerHighlighter::SpellCheckerHighlighter( QTextDocument* text_document )
  : QSyntaxHighlighter( text_document ), m_format()
 {
   m_format.setUnderlineColor( Qt::red );
-  m_format.setUnderlineStyle( QTextCharFormat::DotLine );
-  m_format.setForeground( Qt::red );
-  m_format.setFontItalic( true );
+  m_format.setUnderlineStyle( QTextCharFormat::SpellCheckUnderline );
 }
 
 void SpellCheckerHighlighter::highlightWord( const QString& all_text, const QString& word )
@@ -50,6 +49,9 @@ void SpellCheckerHighlighter::highlightWord( const QString& all_text, const QStr
 
 void SpellCheckerHighlighter::highlightBlock( const QString& txt )
 {
+  if( !Settings::instance().useSpellChecker() )
+    return;
+
 #ifdef BEEBEEP_USE_HUNSPELL
 
   QStringList words;

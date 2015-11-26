@@ -43,6 +43,8 @@ public:
   QString message();
   void clearMessage();
 
+  void rehighlightMessage();
+
 signals:
   void returnPressed();
   void writing();

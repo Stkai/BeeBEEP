@@ -127,6 +127,11 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act->setStatusTip( tr( "Select the message types which will be showed in chat" ) );
   act = bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
   act->setStatusTip( tr( "Click to show the settings menu of the chat" ) );
+  mp_actSpellChecker = bar->addAction( QIcon( ":/images/spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
+  mp_actSpellChecker->setCheckable( true );
+  mp_actUseReturnToSendMessage = bar->addAction( QIcon( ":/images/key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
+  mp_actUseReturnToSendMessage->setCheckable( true );
+  updateActionsOnFocusChanged();
   bar->addSeparator();
 
   mp_menuMembers = new QMenu( tr( "Members" ), this );
@@ -154,14 +159,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
-
-  bar->addSeparator();
-  mp_cbUseReturnToSendMessage = new QCheckBox( this );
-  mp_cbUseReturnToSendMessage->setObjectName( "mp_cbUseReturnToSendMessage" );
-  mp_cbUseReturnToSendMessage->setChecked( Settings::instance().useReturnToSendMessage() );
-  mp_cbUseReturnToSendMessage->setText( tr( "Use key Return to send message" ) + QString( "   " ) );
-  connect( mp_cbUseReturnToSendMessage, SIGNAL( stateChanged( int ) ), this, SLOT( onUseReturnToSendMessageClicked( int ) ) );
-  bar->addWidget( mp_cbUseReturnToSendMessage );
 
 }
 
@@ -847,11 +844,41 @@ void GuiChat::updateShortcuts()
 
 }
 
-void GuiChat::onUseReturnToSendMessageClicked( int button_state )
+void GuiChat::updateUseReturnKeyToSendMessageToolTip()
 {
-  if( button_state == Qt::Checked )
-    Settings::instance().setUseReturnToSendMessage( true );
+  if( Settings::instance().useReturnToSendMessage() )
+    mp_actUseReturnToSendMessage->setToolTip( tr( "Use key Return to send message" ) );
   else
-    Settings::instance().setUseReturnToSendMessage( false );
+    mp_actUseReturnToSendMessage->setToolTip( tr( "Use key Return to make a carriage return" ) );
+}
+
+void GuiChat::onUseReturnToSendMessageClicked()
+{
+  Settings::instance().setUseReturnToSendMessage( mp_actUseReturnToSendMessage->isChecked() );
+  updateUseReturnKeyToSendMessageToolTip();
   ensureFocusInChat();
+}
+
+void GuiChat::updateSpellCheckerToolTip()
+{
+  if( Settings::instance().useSpellChecker() )
+    mp_actSpellChecker->setToolTip( tr( "Spell checking is enabled" ) );
+  else
+    mp_actSpellChecker->setToolTip( tr( "Spell checking is disabled" ) );
+}
+
+void GuiChat::onSpellCheckerActionClicked()
+{
+  Settings::instance().setUseSpellChecker( mp_actSpellChecker->isChecked() );
+  updateSpellCheckerToolTip();
+  mp_teMessage->rehighlightMessage();
+  ensureFocusInChat();
+}
+
+void GuiChat::updateActionsOnFocusChanged()
+{
+  mp_actUseReturnToSendMessage->setChecked( Settings::instance().useReturnToSendMessage() );
+  updateUseReturnKeyToSendMessageToolTip();
+  mp_actSpellChecker->setChecked( Settings::instance().useSpellChecker() );
+  updateSpellCheckerToolTip();
 }
