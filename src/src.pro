@@ -28,7 +28,6 @@ macx: {
 }
 
 message( Qt modules: $$QT )
-message( Libs: $$LIBS )
 
 include(../locale/locale.pri)
 
@@ -259,3 +258,5 @@ win32: DEPENDPATH += $$PWD/../mdns-lib
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/dnssd.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/libdnssd.a
 unix:!macx: LIBS += -ldns_sd
+
+message( Libs: $$LIBS )
