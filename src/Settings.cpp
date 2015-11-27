@@ -37,6 +37,7 @@ Settings::Settings()
   m_settingsVersion = BEEBEEP_SETTINGS_VERSION;
 
   /* Default RC start */
+  m_useChatWithAllUsers = true;
   m_useSettingsFileIni = true;
   m_broadcastOnlyToHostsIni = false;
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
@@ -180,6 +181,7 @@ bool Settings::createDefaultRcFile()
       sets->setValue( "MulticastGroupAddress", "" );
     else
       sets->setValue( "MulticastGroupAddress", m_multicastGroupAddress.toString() );
+    sets->setValue( "EnableChatWithAllUsers", m_useChatWithAllUsers );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -237,6 +239,7 @@ void Settings::loadRcFile()
     m_multicastGroupAddress = QHostAddress();
   else
     m_multicastGroupAddress = QHostAddress( multicast_group_address );
+  m_useChatWithAllUsers = sets->value( "EnableChatWithAllUsers", m_useChatWithAllUsers ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -585,7 +588,10 @@ void Settings::load()
   m_settingsCreationDate = sets->value( "BeeBang", QDate() ).toDate();
   if( m_settingsCreationDate.isNull() )
     m_settingsCreationDate = QDate::currentDate();
+  QString qt_version_in_settings = sets->value( "Qt", qtMajorVersion() ).toString();
   sets->endGroup();
+
+  bool qt_is_compatible = qt_version_in_settings == qtMajorVersion();
 
   sets->beginGroup( "Chat" );
   m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
@@ -661,7 +667,7 @@ void Settings::load()
 
   sets->beginGroup( "Gui" );
   m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
-  if( m_resetGeometryAtStartup )
+  if( m_resetGeometryAtStartup || !qt_is_compatible )
   {
     m_guiGeometry = "";
     m_guiState = "";
@@ -814,6 +820,16 @@ void Settings::load()
   sets->deleteLater();
 }
 
+QString Settings::qtMajorVersion() const
+{
+  QString qt_version( qVersion() );
+  QStringList sl_version = qt_version.split( "." );
+  if( sl_version.isEmpty() )
+    return QString( "0" );
+  else
+    return sl_version.at( 0 );
+}
+
 void Settings::save()
 {
   QSettings *sets = objectSettings();
@@ -826,6 +842,7 @@ void Settings::save()
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->setValue( "DataStream", (int)dataStreamVersion( false ) );
   sets->setValue( "BeeBang", m_settingsCreationDate );
+  sets->setValue( "Qt", qtMajorVersion() );
   sets->endGroup();
   sets->beginGroup( "Chat" );
   sets->setValue( "Font", m_chatFont.toString() );

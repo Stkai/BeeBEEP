@@ -21,7 +21,9 @@
 #
 ######################################################################
 
-echo "Making BeeBEEP Bundle..."
+BEEBEEP_VERSION=3.0.3
+
+echo "Making BeeBEEP Bundle version ${BEEBEEP_VERSION}"
 
 SOURCE_DIR=".."
 echo "Source folder:" $SOURCE_DIR
@@ -89,7 +91,7 @@ echo "Done"
 #copy locale
 printf "Copy translations ... "
 cp $SOURCE_DIR/locale/*.qm $BUNDLE_FOLDER/Contents/Resources/.
-echo "Removing xx locale..."
+printf "and removing xx locale..."
 rm $BUNDLE_FOLDER/Contents/Resources/beebeep_xx.qm
 echo "Done"
 
@@ -101,6 +103,10 @@ echo "Done"
 #mac deploy frameworks
 printf "MacOS X deploy and create DMG file ... "
 $MACDEPLOY_APP $BUNDLE_FOLDER -dmg
+echo "Done"
+
+printf "Renaming DMG with version ${BEEBEEP_VERSION}"
+cp ../packages/BeeBEEP.dmg ../packages/beebeep-${BEEBEEP_VERSION}.dmg
 echo "Done"
 
 echo "BeeBEEP to Bundle - Process completed."

@@ -33,6 +33,7 @@ PreventMultipleConnectionsFromSingleHostAddress=[true/false] if enableb BeeBEEP 
 PreferredSubnets=(Strings "" comma separated) you can specify your subnets. BeeBEEP search your default IP address in these entries (for example ="10.184.9.255,10.184.15.255") [3.0.1]
 UseIpv6=[true/false] enable Ipv6 protocol for connection (enable it if your network supports *only* IPv6... BeeBEEP works better in IPv4)
 MulticastGroupAddress=(String "" Host Address) if not empty MulticastGroup is added to Broadcaster
+EnableChatWithAllUsers=[true/false] if enabled you can chat with all users connected by default
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect

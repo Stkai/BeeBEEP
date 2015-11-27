@@ -24,7 +24,7 @@
 #include "SpellCheckerHighlighter.h"
 #include "Settings.h"
 #ifdef BEEBEEP_USE_HUNSPELL
-#include "SpellChecker.h"
+  #include "SpellChecker.h"
 #endif
 
 
@@ -61,8 +61,10 @@ void SpellCheckerHighlighter::highlightBlock( const QString& txt )
     if( !c.isLetter() )
     {
       if( !word.isEmpty() )
+      {
         words << word;
-      word = "";
+        word = "";
+      }
     }
     else
       word.append( c );

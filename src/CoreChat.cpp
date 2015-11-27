@@ -251,6 +251,12 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     return 0;
   }
 
+  if( chat_id == ID_DEFAULT_CHAT && !Settings::instance().chatWithAllUsersIsEnabled() )
+  {
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: this chat is disabled." ), DispatchToChat, ChatMessage::System );
+    return 0;
+  }
+
   if( msg.isEmpty() )
     return 0;
 
@@ -338,6 +344,9 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 void Core::sendWritingMessage( VNumber chat_id )
 {
   if( !isConnected() )
+    return;
+
+  if( chat_id == ID_DEFAULT_CHAT && !Settings::instance().chatWithAllUsersIsEnabled() )
     return;
 
   Chat from_chat = ChatManager::instance().chat( chat_id );

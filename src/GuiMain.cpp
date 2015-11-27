@@ -1701,6 +1701,9 @@ void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
   if( !c.isValid() )
     return;
 
+  if( c.isDefault() && !Settings::instance().chatWithAllUsersIsEnabled() )
+    return;
+
   QStringList files_path_selected = checkFilePath( file_path );
   if( files_path_selected.isEmpty() )
     return;

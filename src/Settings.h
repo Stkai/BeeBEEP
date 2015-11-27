@@ -64,6 +64,7 @@ public:
   QString defaultPluginFolderPath( bool use_resource_folder ) const;
 
   QString version( bool ) const;
+  QString qtMajorVersion() const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
   QString programName() const;
@@ -123,6 +124,7 @@ public:
   inline void setRecentEmoticons( const QStringList& );
   inline const QStringList& recentEmoticons() const;
 
+  inline bool chatWithAllUsersIsEnabled() const;
   inline QString defaultChatName() const;
   inline int chatMessageHistorySize() const;
   inline const QString& chatFontColor() const;
@@ -394,6 +396,7 @@ private:
   QString m_preferredSubnets;
   bool m_useIPv6;
   QHostAddress m_multicastGroupAddress;
+  bool m_useChatWithAllUsers;
 
   // Ini
   bool m_firstTime;
@@ -548,6 +551,7 @@ inline const QString& Settings::resourceFolder() const { return m_resourceFolder
 inline const QString& Settings::dataFolder() const { return m_dataFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
+inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
 inline bool Settings::trustNickname() const { return m_trustNickname; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }

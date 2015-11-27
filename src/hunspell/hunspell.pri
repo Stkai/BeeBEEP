@@ -3,7 +3,7 @@ DEFINES += BEEBEEP_USE_HUNSPELL
 
 unix:!macx: LIBS += -lhunspell
 
-win32 {
+win32|macx|os2: {
 
 DEFINES += HUNSPELL_STATIC
 

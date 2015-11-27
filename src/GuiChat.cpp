@@ -183,7 +183,10 @@ void GuiChat::updateAction( bool is_connected, int connected_users )
   mp_actCreateGroupChat->setEnabled( is_connected && user_in_list > 1 );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
-  mp_teMessage->setEnabled( is_connected );
+  if( c.isDefault() )
+    mp_teMessage->setEnabled( is_connected && Settings::instance().chatWithAllUsersIsEnabled() );
+  else
+    mp_teMessage->setEnabled( is_connected && local_user_is_member );
   mp_pbSend->setEnabled( is_connected );
 }
 
@@ -425,7 +428,11 @@ void GuiChat::setChatUsers()
 #endif
 
   mp_lTitle->setText( chat_users );
-  mp_teMessage->setEnabled( isActiveUser( c, Settings::instance().localUser() ) && chat_has_members );
+
+  if( c.isDefault() )
+    mp_teMessage->setEnabled( Settings::instance().chatWithAllUsersIsEnabled() );
+  else
+    mp_teMessage->setEnabled( isActiveUser( c, Settings::instance().localUser() ) && chat_has_members );
 }
 
 void GuiChat::reloadChatUsers()

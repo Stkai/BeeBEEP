@@ -14,7 +14,7 @@ class LIBHUNSPELL_DLL_EXPORTED HashMgr
 {
   int               tablesize;
   struct hentry **  tableptr;
-  int               userword;
+  //int               userword;
   flag              flag_mode;
   int               complexprefixes;
   int               utf8;

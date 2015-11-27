@@ -26,6 +26,8 @@
 #include "SpellChecker.h"
 #ifdef Q_OS_WIN32
   #include "hunspell.hxx"
+#elif defined Q_OS_MAC
+  #include "hunspell/hunspell.hxx"
 #else
   #include "hunspell/hunspell.hxx"
 #endif
@@ -219,7 +221,12 @@ void SpellChecker::addToUserDictionary( const QString& word )
 
 void SpellChecker::updateCompleter( const QString& word_to_complete )
 {
-  QStringList sl = m_baseWordList;
+  QStringList sl;
+  foreach( QString s, m_baseWordList )
+  {
+    if( s.startsWith( word_to_complete, Qt::CaseInsensitive ) )
+      sl << s;
+  }
 
   if( !word_to_complete.isEmpty() )
     sl.append( suggest( word_to_complete ) );
