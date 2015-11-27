@@ -24,7 +24,11 @@
 #ifdef BEEBEEP_USE_HUNSPELL
 
 #include "SpellChecker.h"
-#include "hunspell.hxx"
+#ifdef Q_OS_WIN32
+  #include "hunspell.hxx"
+#else
+  #include "hunspell/hunspell.hxx"
+#endif
 
 SpellChecker* SpellChecker::mp_instance = NULL;
 

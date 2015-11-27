@@ -871,8 +871,10 @@ void GuiChat::updateSpellCheckerToolTip()
   if( Settings::instance().useSpellChecker() )
   {
     QString tool_tip = tr( "Spell checking is enabled" );
+#ifdef BEEBEEP_USE_HUNSPELL
     if( !SpellChecker::instance().isValid() )
-      tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) );
+      tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
+#endif
     mp_actSpellChecker->setToolTip( tool_tip );
   }
   else
