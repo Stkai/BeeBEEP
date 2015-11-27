@@ -45,6 +45,7 @@ bool Broadcaster::startBroadcasting()
     return false;
   }
 
+#if QT_VERSION >= 0x040800
   if( !Settings::instance().multicastGroupAddress().isNull() )
   {
     if( m_broadcastSocket.joinMulticastGroup( Settings::instance().multicastGroupAddress() ) )
@@ -52,6 +53,7 @@ bool Broadcaster::startBroadcasting()
     else
       qWarning() << "Unable to join to the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
   }
+#endif
 
   m_baseBroadcastAddress = NetworkManager::instance().localBroadcastAddress();
   updateAddresses();
@@ -71,6 +73,7 @@ bool Broadcaster::startBroadcasting()
 
 void Broadcaster::stopBroadcasting()
 {
+#if QT_VERSION >= 0x040800
   if( !Settings::instance().multicastGroupAddress().isNull() )
   {
     if( m_broadcastSocket.leaveMulticastGroup( Settings::instance().multicastGroupAddress() ) )
@@ -78,6 +81,7 @@ void Broadcaster::stopBroadcasting()
     else
       qWarning() << "Unable to leave from the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
   }
+#endif
 
   qDebug() << "Broadcaster stops broadcasting";
   m_datagramSentToBaseBroadcastAddress = 0;
