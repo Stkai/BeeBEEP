@@ -24,23 +24,19 @@
 #ifdef BEEBEEP_USE_HUNSPELL
 
 #include "SpellChecker.h"
-#ifdef Q_OS_WIN32
-  #include "hunspell.hxx"
-#elif defined Q_OS_MAC
-  #include "hunspell/hunspell.hxx"
-#else
-  #include "hunspell/hunspell.hxx"
-#endif
+#include "hunspell.hxx"
 
 SpellChecker* SpellChecker::mp_instance = NULL;
 
 SpellChecker::SpellChecker()
- : mp_hunspell( 0 ), m_dictionary( "" ), m_userDictionary( "" ), m_encoding( "ISO8859-1" ), mp_codec( 0 )
+ : mp_hunspell( 0 ), m_dictionary( "" ), m_userDictionary( "" ), m_encoding( "ISO8859-1" ),
+   mp_codec( 0 ), m_completerPrefix( "" )
 {
   mp_completer = new QCompleter;
   mp_completer->setModelSorting( QCompleter::CaseInsensitivelySortedModel );
   mp_completer->setCaseSensitivity( Qt::CaseInsensitive );
   mp_completer->setWrapAround( false );
+  mp_completer->setCompletionMode( QCompleter::PopupCompletion );
   updateCompleter( "" );
 }
 
@@ -61,6 +57,7 @@ void SpellChecker::clearDictionary()
     delete mp_hunspell;
     m_dictionary = "";
     mp_hunspell = 0;
+    m_completerPrefix = "";
   }
 }
 
@@ -152,9 +149,8 @@ bool SpellChecker::isGoodWord( const QString& word )
   if( mp_hunspell )
   {
 #ifdef BEEBEEP_DEBUG
-    const char* unicode_word = mp_codec->fromUnicode( word ).constData();
-    int spell_code = mp_hunspell->spell( unicode_word );
-    qDebug() << "Spell check if" << unicode_word << "is good:" << spell_code;
+    int spell_code = mp_hunspell->spell( mp_codec->fromUnicode( word ).constData() );
+    qDebug() << "Spell check if" << word << "is good:" << spell_code;
     return spell_code != 0;
 #else
     return mp_hunspell->spell( mp_codec->fromUnicode( word ).constData() ) != 0;
@@ -183,7 +179,8 @@ QStringList SpellChecker::suggest( const QString& word )
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "SpellChecker suggests" << suggest_list.size() << "words";
+  foreach( QString s, suggest_list )
+    qDebug() << "Suggested word:" << s;
 #endif
   return suggest_list;
 }
@@ -233,14 +230,17 @@ void SpellChecker::addToUserDictionary( const QString& word )
 void SpellChecker::updateCompleter( const QString& word_to_complete )
 {
   QStringList sl;
+  m_completerPrefix = word_to_complete;
 
   if( !word_to_complete.isEmpty() )
-    sl.append( suggest( word_to_complete ) );
+    sl = suggest( word_to_complete );
 
-  QStringListModel* slm = new QStringListModel( mp_completer );
-  slm->setStringList( sl );
+  QStringListModel* slm = new QStringListModel( sl, mp_completer );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "SpellChecker suggests" << slm->rowCount() << "words";
+#endif
   mp_completer->setModel( slm );
-  mp_completer->setCompletionPrefix( word_to_complete );
+ // mp_completer->setCompletionPrefix( word_to_complete ); // this method is not working...
 }
 
 #endif // BEEBEEP_USE_HUNSPELL

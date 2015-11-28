@@ -227,7 +227,7 @@
     </message>
     <message>
         <source>%1 %2 can not be invited to the group.</source>
-        <translation type="vanished">%1 %2 не может быть приглашен в группу.</translation>
+        <translation type="obsolete">%1 %2 не может быть приглашен в группу.</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="414"/>
@@ -446,7 +446,7 @@
     </message>
     <message>
         <source>%1 %2 has not file shared.</source>
-        <translation type="vanished">%1 %2 не содержит общедоступных файлов.</translation>
+        <translation type="obsolete">%1 %2 не содержит общедоступных файлов.</translation>
     </message>
     <message>
         <location filename="../src/CoreParser.cpp" line="283"/>
@@ -791,7 +791,7 @@
     <name>GuiChat</name>
     <message>
         <source>%1 Secure Mode</source>
-        <translation type="vanished">%1 Безопасный режим</translation>
+        <translation type="obsolete">%1 Безопасный режим</translation>
     </message>
     <message>
         <source>Emoticons</source>
@@ -838,104 +838,110 @@
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="139"/>
+        <source>Word completer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiChat.cpp" line="141"/>
         <source>Use Return key to send message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="151"/>
+        <location filename="../src/GuiChat.cpp" line="153"/>
         <source>Send file</source>
         <translation>Отправить файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="152"/>
+        <location filename="../src/GuiChat.cpp" line="154"/>
         <source>Send a file to a user or a group</source>
         <translation>Отправить файл пользователю или группе</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="153"/>
+        <location filename="../src/GuiChat.cpp" line="155"/>
         <source>Save chat</source>
         <translation>Сохранить чат</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="154"/>
+        <location filename="../src/GuiChat.cpp" line="156"/>
         <source>Save the messages of the current chat to a file</source>
         <translation>Сохранить сообщения текущего чата в файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="880"/>
+        <location filename="../src/GuiChat.cpp" line="881"/>
         <source>Spell checking is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="884"/>
+        <location filename="../src/GuiChat.cpp" line="899"/>
         <source>There is not a valid dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="889"/>
+        <location filename="../src/GuiChat.cpp" line="896"/>
         <source>Word completer is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="891"/>
+        <location filename="../src/GuiChat.cpp" line="904"/>
         <source>Word completer is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="897"/>
+        <location filename="../src/GuiChat.cpp" line="889"/>
         <source>Spell checking is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create group chat</source>
-        <translation type="vanished">Создать группу чата</translation>
+        <translation type="obsolete">Создать группу чата</translation>
     </message>
     <message>
         <source>Create a group chat with two or more users</source>
-        <translation type="vanished">Создать группу чата с двумя или более пользователями</translation>
+        <translation type="obsolete">Создать группу чата с двумя или более пользователями</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="161"/>
+        <location filename="../src/GuiChat.cpp" line="163"/>
         <source>Create group from chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="162"/>
+        <location filename="../src/GuiChat.cpp" line="164"/>
         <source>Create a group from this chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="260"/>
+        <location filename="../src/GuiChat.cpp" line="261"/>
         <source>Last message %1</source>
         <translation>Последнее сообщение %1</translation>
     </message>
     <message>
         <source>Edit group chat</source>
-        <translation type="vanished">Редактировать группу чата</translation>
+        <translation type="obsolete">Редактировать группу чата</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="166"/>
+        <location filename="../src/GuiChat.cpp" line="168"/>
         <source>Change the name of the group or add and remove users</source>
         <translation>Изменить имя группы или добавить и удалить пользователей</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="155"/>
+        <location filename="../src/GuiChat.cpp" line="157"/>
         <source>Clear messages</source>
         <translation>Очистить сообщения</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="156"/>
+        <location filename="../src/GuiChat.cpp" line="158"/>
         <source>Clear all the messages of the chat</source>
         <translation>Очистить все сообщения чата</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="167"/>
-        <location filename="../src/GuiChat.cpp" line="168"/>
+        <location filename="../src/GuiChat.cpp" line="169"/>
+        <location filename="../src/GuiChat.cpp" line="170"/>
         <source>Leave the group</source>
         <translation>Покинуть группу</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="163"/>
+        <location filename="../src/GuiChat.cpp" line="165"/>
         <source>Create group</source>
         <translation>Создать группу</translation>
     </message>
@@ -960,164 +966,164 @@
         <translation>Нажмите для отображения меню настроек чата</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="159"/>
+        <location filename="../src/GuiChat.cpp" line="161"/>
         <source>Create chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="160"/>
+        <location filename="../src/GuiChat.cpp" line="162"/>
         <source>Create a chat with two or more users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="164"/>
+        <location filename="../src/GuiChat.cpp" line="166"/>
         <source>Create a group with two or more users</source>
         <translation>Создать группу с двумя и более пользователями</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="165"/>
+        <location filename="../src/GuiChat.cpp" line="167"/>
         <source>Edit group</source>
         <translation type="unfinished">Редактировать группу</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="196"/>
+        <location filename="../src/GuiChat.cpp" line="197"/>
         <source>Copy to clipboard</source>
         <translation>Копировать в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="198"/>
+        <location filename="../src/GuiChat.cpp" line="199"/>
         <source>Select All</source>
         <translation>Выбрать все</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="220"/>
+        <location filename="../src/GuiChat.cpp" line="221"/>
         <source>Show only messages in default chat</source>
         <translation>Показать только сообщения в чате по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="356"/>
+        <location filename="../src/GuiChat.cpp" line="357"/>
         <source>All Lan Users</source>
         <translation>Все пользователи сети</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="384"/>
+        <location filename="../src/GuiChat.cpp" line="385"/>
         <source>(You have left)</source>
         <translation>(Вы вышли)</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="864"/>
+        <location filename="../src/GuiChat.cpp" line="865"/>
         <source>Use key Return to send message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="866"/>
+        <location filename="../src/GuiChat.cpp" line="867"/>
         <source>Use key Return to make a carriage return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="370"/>
-        <location filename="../src/GuiChat.cpp" line="386"/>
+        <location filename="../src/GuiChat.cpp" line="371"/>
+        <location filename="../src/GuiChat.cpp" line="387"/>
         <source>You</source>
         <translation>Вы</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="144"/>
+        <location filename="../src/GuiChat.cpp" line="146"/>
         <source>Members</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="145"/>
+        <location filename="../src/GuiChat.cpp" line="147"/>
         <source>Show the members of the chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="388"/>
-        <location filename="../src/GuiChat.cpp" line="400"/>
+        <location filename="../src/GuiChat.cpp" line="389"/>
+        <location filename="../src/GuiChat.cpp" line="401"/>
         <source>offline</source>
         <translation>отключены</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="408"/>
+        <location filename="../src/GuiChat.cpp" line="409"/>
         <source>Show profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="418"/>
+        <location filename="../src/GuiChat.cpp" line="419"/>
         <source>Show members</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="422"/>
+        <location filename="../src/GuiChat.cpp" line="423"/>
         <source>Nobody</source>
         <translation>Никто</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="422"/>
+        <location filename="../src/GuiChat.cpp" line="423"/>
         <source>and</source>
         <translation>и</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="vanished">В</translation>
+        <translation type="obsolete">В</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="506"/>
+        <location filename="../src/GuiChat.cpp" line="507"/>
         <source>last %1 messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="669"/>
+        <location filename="../src/GuiChat.cpp" line="670"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Пожалуйста, выберите файл для сохранения сообщений чата.</translation>
     </message>
     <message>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
-        <translation type="vanished">%1: не удается сохранить сообщения.
+        <translation type="obsolete">%1: не удается сохранить сообщения.
 Пожалуйста, проверьте разрешения на запись файла или папок.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="683"/>
+        <location filename="../src/GuiChat.cpp" line="684"/>
         <source>%1: save completed.</source>
         <translation>%1: сохранение завершено.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="683"/>
+        <location filename="../src/GuiChat.cpp" line="684"/>
         <source>Ok</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="724"/>
+        <location filename="../src/GuiChat.cpp" line="725"/>
         <source>Unable to save temporary file: %1</source>
         <translation type="unfinished">Не удается сохранить временный файл: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="771"/>
+        <location filename="../src/GuiChat.cpp" line="772"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Вы дейсвительно хотите отправить %1 %2 членам этого чата?</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="772"/>
+        <location filename="../src/GuiChat.cpp" line="773"/>
         <source>file</source>
         <translation>файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="772"/>
+        <location filename="../src/GuiChat.cpp" line="773"/>
         <source>files</source>
         <translation>файлы</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="773"/>
+        <location filename="../src/GuiChat.cpp" line="774"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="773"/>
+        <location filename="../src/GuiChat.cpp" line="774"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="786"/>
+        <location filename="../src/GuiChat.cpp" line="787"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Библиотека Qt для этой ОС не поддерживает перетаскивание для файлов. Вы должны выбрать снова файл для отправки.</translation>
     </message>
@@ -1445,7 +1451,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show this page at startup</source>
-        <translation type="vanished">Показать эту страницу при запуске</translation>
+        <translation type="obsolete">Показать эту страницу при запуске</translation>
     </message>
     <message>
         <location filename="../src/GuiHome.ui" line="107"/>
@@ -1538,66 +1544,66 @@ Please select a different name.</source>
     <name>GuiLife</name>
     <message>
         <source>Paused (press space bar to continue)</source>
-        <translation type="vanished">На паузе (нажмите пробел для продолжения)</translation>
+        <translation type="obsolete">На паузе (нажмите пробел для продолжения)</translation>
     </message>
     <message>
         <source>Alive: %1 - Died: %2 - Spaces: %3 - Step: %4</source>
-        <translation type="vanished">Живы: %1 - Умерло: %2 - Свободны: %3 - Шаг: %4</translation>
+        <translation type="obsolete">Живы: %1 - Умерло: %2 - Свободны: %3 - Шаг: %4</translation>
     </message>
     <message>
         <source>BeeLife</source>
-        <translation type="vanished">Bee Жизнь</translation>
+        <translation type="obsolete">Bee Жизнь</translation>
     </message>
     <message>
         <source>Do you really want to randomize and restart?</source>
-        <translation type="vanished">Вы действительно хотите перемешать и перезапустить?</translation>
+        <translation type="obsolete">Вы действительно хотите перемешать и перезапустить?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="vanished">Да</translation>
+        <translation type="obsolete">Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="vanished">Нет</translation>
+        <translation type="obsolete">Нет</translation>
     </message>
     <message>
         <source>Do you really want to clear all?</source>
-        <translation type="vanished">Вы действительно хотите очистить все?</translation>
+        <translation type="obsolete">Вы действительно хотите очистить все?</translation>
     </message>
     <message>
         <source>??? Evolution Completed ??? ... (or press space bar to continue)</source>
-        <translation type="vanished">??? Эволюция завершена ??? ... (или нажмите пробел для продолжения)</translation>
+        <translation type="obsolete">??? Эволюция завершена ??? ... (или нажмите пробел для продолжения)</translation>
     </message>
 </context>
 <context>
     <name>GuiLifeWidget</name>
     <message>
         <source>Form</source>
-        <translation type="vanished">Форма</translation>
+        <translation type="obsolete">Форма</translation>
     </message>
     <message>
         <source>Press space bar to start</source>
-        <translation type="vanished">Нажмите пробел для запуска</translation>
+        <translation type="obsolete">Нажмите пробел для запуска</translation>
     </message>
     <message>
         <source>BeeLife</source>
-        <translation type="vanished">Bee Жизнь</translation>
+        <translation type="obsolete">Bee Жизнь</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="vanished">Перезапустить</translation>
+        <translation type="obsolete">Перезапустить</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="vanished">Очистить</translation>
+        <translation type="obsolete">Очистить</translation>
     </message>
     <message>
         <source>Fast</source>
-        <translation type="vanished">Быстро</translation>
+        <translation type="obsolete">Быстро</translation>
     </message>
     <message>
         <source>Slow</source>
-        <translation type="vanished">Медленно</translation>
+        <translation type="obsolete">Медленно</translation>
     </message>
 </context>
 <context>
@@ -1706,7 +1712,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show the bar of plugins</source>
-        <translation type="vanished">Показать панель расширений</translation>
+        <translation type="obsolete">Показать панель расширений</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="250"/>
@@ -1789,7 +1795,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Show the tool bar with plugin shortcuts</source>
-        <translation type="vanished">Показать панель инструментов с ярлыками расширений</translation>
+        <translation type="obsolete">Показать панель инструментов с ярлыками расширений</translation>
     </message>
     <message>
         <source>&amp;About %1...</source>
@@ -1965,7 +1971,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Show the messages&apos; timestamp</source>
-        <translation type="vanished">Показать метку времени сообщения </translation>
+        <translation type="obsolete">Показать метку времени сообщения </translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="655"/>
@@ -2003,11 +2009,11 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Show emoticons</source>
-        <translation type="vanished">Показать смайлики</translation>
+        <translation type="obsolete">Показать смайлики</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and shown as images</source>
-        <translation type="vanished">Если включено - смайлики будут распознаны и показаны как изображения</translation>
+        <translation type="obsolete">Если включено - смайлики будут распознаны и показаны как изображения</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="678"/>
@@ -2321,7 +2327,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Please donate for %1 :-)</source>
-        <translation type="vanished">Пожалуйста поддержите %1 :-)</translation>
+        <translation type="obsolete">Пожалуйста поддержите %1 :-)</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="925"/>
@@ -2708,7 +2714,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Add a status description...</source>
-        <translation type="vanished">Добавить описание статуса...</translation>
+        <translation type="obsolete">Добавить описание статуса...</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -2824,7 +2830,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Used Ports</source>
-        <translation type="vanished">Использованы порты</translation>
+        <translation type="obsolete">Использованы порты</translation>
     </message>
     <message>
         <source>Close</source>
@@ -3315,32 +3321,32 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
 <context>
     <name>GuiMessageEdit</name>
     <message>
-        <location filename="../src/GuiMessageEdit.cpp" line="325"/>
+        <location filename="../src/GuiMessageEdit.cpp" line="329"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../src/GuiMessageEdit.cpp" line="327"/>
+        <location filename="../src/GuiMessageEdit.cpp" line="331"/>
         <source>Redo</source>
         <translation>Вернуть</translation>
     </message>
     <message>
-        <location filename="../src/GuiMessageEdit.cpp" line="330"/>
+        <location filename="../src/GuiMessageEdit.cpp" line="334"/>
         <source>Cut</source>
         <translation>Вырезать</translation>
     </message>
     <message>
-        <location filename="../src/GuiMessageEdit.cpp" line="331"/>
+        <location filename="../src/GuiMessageEdit.cpp" line="335"/>
         <source>Copy</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../src/GuiMessageEdit.cpp" line="332"/>
+        <location filename="../src/GuiMessageEdit.cpp" line="336"/>
         <source>Paste</source>
         <translation>Вставить</translation>
     </message>
     <message>
-        <location filename="../src/GuiMessageEdit.cpp" line="335"/>
+        <location filename="../src/GuiMessageEdit.cpp" line="339"/>
         <source>Select All</source>
         <translation>Выбрать Все</translation>
     </message>
@@ -3627,7 +3633,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation type="vanished">Введите IP-адреса или подсеть вашей области сети, разделенные запятой (например: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+        <translation type="obsolete">Введите IP-адреса или подсеть вашей области сети, разделенные запятой (например: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="155"/>
@@ -3797,7 +3803,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Load shared files</source>
-        <translation type="vanished">Загрузиь общедоступные файлы</translation>
+        <translation type="obsolete">Загрузиь общедоступные файлы</translation>
     </message>
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="84"/>
@@ -3806,7 +3812,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Remove shared files from the selected path</source>
-        <translation type="vanished">Удалить общедоступные файлы из выбранного пути</translation>
+        <translation type="obsolete">Удалить общедоступные файлы из выбранного пути</translation>
     </message>
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="86"/>
@@ -4150,39 +4156,39 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <name>GuiTetris</name>
     <message>
         <source>BeeTetris</source>
-        <translation type="vanished">Bee Тетрис</translation>
+        <translation type="obsolete">Bee Тетрис</translation>
     </message>
     <message>
         <source>Next Piece</source>
-        <translation type="vanished">Следующая фигура</translation>
+        <translation type="obsolete">Следующая фигура</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="vanished">Счет</translation>
+        <translation type="obsolete">Счет</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation type="vanished">Линии</translation>
+        <translation type="obsolete">Линии</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="vanished">Уровень</translation>
+        <translation type="obsolete">Уровень</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="vanished">Запись</translation>
+        <translation type="obsolete">Запись</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="vanished">Запуск</translation>
+        <translation type="obsolete">Запуск</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="vanished">Пауза</translation>
+        <translation type="obsolete">Пауза</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="vanished">Продолжение</translation>
+        <translation type="obsolete">Продолжение</translation>
     </message>
 </context>
 <context>
@@ -4477,11 +4483,11 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <name>LifeGame</name>
     <message>
         <source>BeeLife</source>
-        <translation type="vanished">Bee Жизнь</translation>
+        <translation type="obsolete">Bee Жизнь</translation>
     </message>
     <message>
         <source>&lt;b&gt;The Game of Life&lt;/b&gt;, also known simply as Life, is a cellular automaton devised by the British mathematician &lt;b&gt;John Horton Conway&lt;/b&gt; in 1970. The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:&lt;ul&gt;&lt;li&gt;Any live cell with less than two live neighbours dies, as if caused by under-population.&lt;/li&gt;&lt;li&gt;Any live cell with two or three live neighbours lives on to the next generation.&lt;/li&gt;&lt;li&gt;Any live cell with more than three live neighbours dies, as if by overcrowding.&lt;/li&gt;&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.&lt;/li&gt;&lt;/ul&gt;The rules continue to be applied repeatedly to create further generations.&lt;br /&gt;For more info please visit &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</source>
-        <translation type="vanished">&lt;b&gt;Игра Жизни&lt;/b&gt;, также известная просто как Жизнь, - это клеточный автомат разработан британским математиком &lt;b&gt;Джоном Гортоном Конвеем (John Horton Conway)&lt;/b&gt; в 1970. Пространство Игры Жизни - это бесконечная двухмерная ортогональная сетка квадратных ячеек, каждая из которых имеет одно из двух возможных состояний, живое или мертвое. Каждая ячейка взаимодействует со своими восемью соседями, которые являются ячейками расположеными по горизонтали, вертикали или диагонали. В каждый шаг во времени происходят следующие преобразования:&lt;ul&gt;&lt;li&gt;Каждая живая ячейка с менее чем двумя живыми соседями умирает по причине низкого заселения.&lt;/li&gt;&lt;li&gt;Каждая живая ячейка с двумя иили тремя живыми соседями живет до следующего поколения.&lt;/li&gt;&lt;li&gt;Каждая живая ячейка с более чем тремя соседями умирает, Any live cell with more than three live neighbours dies по причине перенаселения.&lt;/li&gt;&lt;li&gt;Каждая мертвая ячейка с точно тремя живыми соседями становится живой ячейкой по причине размножения.&lt;/li&gt;&lt;/ul&gt;Правила продолжения для примениния повторяются для создания дальнейших поколений.&lt;br /&gt;Для детальной информации посетите &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</translation>
+        <translation type="obsolete">&lt;b&gt;Игра Жизни&lt;/b&gt;, также известная просто как Жизнь, - это клеточный автомат разработан британским математиком &lt;b&gt;Джоном Гортоном Конвеем (John Horton Conway)&lt;/b&gt; в 1970. Пространство Игры Жизни - это бесконечная двухмерная ортогональная сетка квадратных ячеек, каждая из которых имеет одно из двух возможных состояний, живое или мертвое. Каждая ячейка взаимодействует со своими восемью соседями, которые являются ячейками расположеными по горизонтали, вертикали или диагонали. В каждый шаг во времени происходят следующие преобразования:&lt;ul&gt;&lt;li&gt;Каждая живая ячейка с менее чем двумя живыми соседями умирает по причине низкого заселения.&lt;/li&gt;&lt;li&gt;Каждая живая ячейка с двумя иили тремя живыми соседями живет до следующего поколения.&lt;/li&gt;&lt;li&gt;Каждая живая ячейка с более чем тремя соседями умирает, Any live cell with more than three live neighbours dies по причине перенаселения.&lt;/li&gt;&lt;li&gt;Каждая мертвая ячейка с точно тремя живыми соседями становится живой ячейкой по причине размножения.&lt;/li&gt;&lt;/ul&gt;Правила продолжения для примениния повторяются для создания дальнейших поколений.&lt;br /&gt;Для детальной информации посетите &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -4513,7 +4519,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <source>Nobody</source>
-        <translation type="vanished">Никто</translation>
+        <translation type="obsolete">Никто</translation>
     </message>
     <message>
         <location filename="../src/GuiChatItem.cpp" line="84"/>
@@ -4654,22 +4660,22 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <name>TetrisBoard</name>
     <message>
         <source>Pause</source>
-        <translation type="vanished">Пауза</translation>
+        <translation type="obsolete">Пауза</translation>
     </message>
     <message>
         <source>Game Over</source>
-        <translation type="vanished">Игра окончена</translation>
+        <translation type="obsolete">Игра окончена</translation>
     </message>
 </context>
 <context>
     <name>TetrisGame</name>
     <message>
         <source>BeeTetris</source>
-        <translation type="vanished">Bee Тетрис</translation>
+        <translation type="obsolete">Bee Тетрис</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right Arrow&lt;/b&gt; to move the pieces on the board. &lt;b&gt;Up&lt;/b&gt; and &lt;b&gt;Down Arrow&lt;/b&gt; to rotate left and right. &lt;b&gt;Space&lt;/b&gt; to drop down the piece. &lt;b&gt;D&lt;/b&gt; to drop the piece only one line. &lt;b&gt;P&lt;/b&gt; to pause the game.</source>
-        <translation type="vanished">Используйте стрелки &lt;b&gt;Влево&lt;/b&gt; и &lt;b&gt;Вправо&lt;/b&gt; для движения фигур на доске. Стрелки&lt;b&gt;Вверх&lt;/b&gt; и &lt;b&gt;Вниз&lt;/b&gt; для поворота влево и вправо. &lt;b&gt;Пробел&lt;/b&gt; - для опускания фигуры вниз. &lt;b&gt;D&lt;/b&gt; - для опускания фигуры на одну линию. &lt;b&gt;P&lt;/b&gt; - для паузы игры.</translation>
+        <translation type="obsolete">Используйте стрелки &lt;b&gt;Влево&lt;/b&gt; и &lt;b&gt;Вправо&lt;/b&gt; для движения фигур на доске. Стрелки&lt;b&gt;Вверх&lt;/b&gt; и &lt;b&gt;Вниз&lt;/b&gt; для поворота влево и вправо. &lt;b&gt;Пробел&lt;/b&gt; - для опускания фигуры вниз. &lt;b&gt;D&lt;/b&gt; - для опускания фигуры на одну линию. &lt;b&gt;P&lt;/b&gt; - для паузы игры.</translation>
     </message>
 </context>
 <context>

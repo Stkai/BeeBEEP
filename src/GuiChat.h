@@ -93,6 +93,7 @@ protected:
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
   void updateSpellCheckerToolTip();
+  void updateCompleterToolTip();
   void updateUseReturnKeyToSendMessageToolTip();
 
 private slots:
@@ -119,6 +120,7 @@ private slots:
   void checkAndSendImage( const QMimeData* );
   void onUseReturnToSendMessageClicked();
   void onSpellCheckerActionClicked();
+  void onCompleterActionClicked();
 
 private:
   VNumber m_chatId;
@@ -137,6 +139,7 @@ private:
   QAction* mp_actSelectBackgroundColor;
   QAction* mp_actGroupWizard;
   QAction* mp_actSpellChecker;
+  QAction* mp_actCompleter;
   QAction* mp_actUseReturnToSendMessage;
 
   QMenu* mp_menuMembers;

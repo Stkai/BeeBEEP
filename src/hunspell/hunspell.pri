@@ -1,11 +1,5 @@
 
-DEFINES += BEEBEEP_USE_HUNSPELL
-
-#unix:!macx: LIBS += -lhunspell
-
-win32|macx|os2: {
-
-DEFINES += HUNSPELL_STATIC
+DEFINES += BEEBEEP_USE_HUNSPELL HUNSPELL_STATIC
 
 INCLUDEPATH += $$PWD
 
@@ -40,5 +34,3 @@ SOURCES +=  hunspell/utf_info.cxx \
             hunspell/phonet.cxx \
             hunspell/replist.cxx \
             hunspell/suggestmgr.cxx
-
-}

@@ -136,6 +136,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   act->setStatusTip( tr( "Click to show the settings menu of the chat" ) );
   mp_actSpellChecker = bar->addAction( QIcon( ":/images/spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
   mp_actSpellChecker->setCheckable( true );
+  mp_actCompleter = bar->addAction( QIcon( ":/images/dictionary.png" ), tr( "Word completer" ), this, SLOT( onCompleterActionClicked() ) );
+  mp_actCompleter->setCheckable( true );
   mp_actUseReturnToSendMessage = bar->addAction( QIcon( ":/images/key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
   mp_actUseReturnToSendMessage->setCheckable( true );
   updateActionsOnFocusChanged();
@@ -166,7 +168,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
-
 }
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
@@ -880,21 +881,27 @@ void GuiChat::updateSpellCheckerToolTip()
     QString tool_tip = tr( "Spell checking is enabled" );
 #ifdef BEEBEEP_USE_HUNSPELL
     if( !SpellChecker::instance().isValid() )
-    {
       tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
-    }
-    else
-    {
-      if( Settings::instance().useWordCompleter() )
-        tool_tip.append( QString( " (%1)" ).arg( tr( "Word completer is enabled" ) ) );
-      else
-        tool_tip.append( QString( " (%1)" ).arg( tr( "Word completer is disabled" ) ) );
-    }
 #endif
     mp_actSpellChecker->setToolTip( tool_tip );
   }
   else
     mp_actSpellChecker->setToolTip( tr( "Spell checking is disabled" ) );
+}
+
+void GuiChat::updateCompleterToolTip()
+{
+  if( Settings::instance().useWordCompleter() )
+  {
+    QString tool_tip = tr( "Word completer is enabled" );
+#ifdef BEEBEEP_USE_HUNSPELL
+    if( !SpellChecker::instance().isValid() )
+      tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
+#endif
+    mp_actCompleter->setToolTip( tool_tip );
+  }
+  else
+    mp_actCompleter->setToolTip( tr( "Word completer is disabled" ) );
 }
 
 void GuiChat::onSpellCheckerActionClicked()
@@ -905,10 +912,19 @@ void GuiChat::onSpellCheckerActionClicked()
   ensureFocusInChat();
 }
 
+void GuiChat::onCompleterActionClicked()
+{
+  Settings::instance().setUseWordCompleter( mp_actCompleter->isChecked() );
+  updateCompleterToolTip();
+  ensureFocusInChat();
+}
+
 void GuiChat::updateActionsOnFocusChanged()
 {
   mp_actUseReturnToSendMessage->setChecked( Settings::instance().useReturnToSendMessage() );
   updateUseReturnKeyToSendMessageToolTip();
   mp_actSpellChecker->setChecked( Settings::instance().useSpellChecker() );
   updateSpellCheckerToolTip();
+  mp_actCompleter->setChecked( Settings::instance().useWordCompleter() );
+  updateCompleterToolTip();
 }

@@ -42,12 +42,12 @@ public:
   bool setUserDictionary( const QString& );
 
   bool isGoodWord( const QString& );
-  QStringList suggest( const QString& );
   void ignoreWord( const QString& );
   void addToUserDictionary(const QString& );
 
   inline QCompleter* completer() const;
   void updateCompleter( const QString& );
+  inline const QString& completerPrefix() const;
 
   static SpellChecker& instance()
   {
@@ -71,6 +71,7 @@ protected:
   ~SpellChecker();
   bool addWord( const QString& );
   void clearDictionary();
+  QStringList suggest( const QString& );
 
 private:
   Hunspell* mp_hunspell;
@@ -80,12 +81,14 @@ private:
   QTextCodec* mp_codec;
 
   QCompleter* mp_completer;
+  QString m_completerPrefix;
 
 };
 
 // Inline Functions
 inline bool SpellChecker::isValid() const { return mp_hunspell != 0; }
 inline QCompleter* SpellChecker::completer() const { return mp_completer; }
+inline const QString& SpellChecker::completerPrefix() const { return m_completerPrefix; }
 
 #endif // BEEBEEP_USE_HUNSPELL
 #endif // BEEBEEP_SPELLCHECKER_H

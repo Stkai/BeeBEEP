@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -300,7 +300,7 @@
     </message>
     <message>
         <source>%1 %2 has not file shared.</source>
-        <translation type="vanished">%1 %2 non ha file condivisi in rete.</translation>
+        <translation type="obsolete">%1 %2 non ha file condivisi in rete.</translation>
     </message>
     <message>
         <source>%1 %2 has shared %3 files.</source>
@@ -344,7 +344,7 @@
     </message>
     <message>
         <source>%1 %2 can not be invited to the group.</source>
-        <translation type="vanished">%1 %2 non può essere aggiunto al gruppo.</translation>
+        <translation type="obsolete">%1 %2 non può essere aggiunto al gruppo.</translation>
     </message>
     <message>
         <source>%1 %2 cannot be informed that you have left the group.</source>
@@ -532,11 +532,11 @@
     </message>
     <message>
         <source>%1 Zero Configuration Networking (multicast DNS) started: %3</source>
-        <translation type="vanished">%1 Zero Configuration Networking (muticast DNS) inizializzato: %3</translation>
+        <translation type="obsolete">%1 Zero Configuration Networking (muticast DNS) inizializzato: %3</translation>
     </message>
     <message>
         <source>%1 Zero Configuration Networking (multicast DNS) closed.</source>
-        <translation type="vanished">%1 Zero Configuration Networking (multicast DNS) chiuso.</translation>
+        <translation type="obsolete">%1 Zero Configuration Networking (multicast DNS) chiuso.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration started with service name: %2</source>
@@ -556,7 +556,7 @@
     </message>
     <message>
         <source>Donwload</source>
-        <translation type="vanished">Scarica</translation>
+        <translation type="obsolete">Scarica</translation>
     </message>
     <message>
         <source>Upload</source>
@@ -828,7 +828,7 @@
     </message>
     <message>
         <source>To</source>
-        <translation type="vanished">A</translation>
+        <translation type="obsolete">A</translation>
     </message>
     <message>
         <source>Unable to open %1</source>
@@ -848,7 +848,7 @@
     </message>
     <message>
         <source>%1 Secure Mode</source>
-        <translation type="vanished">Modalità Sicura %1</translation>
+        <translation type="obsolete">Modalità Sicura %1</translation>
     </message>
     <message>
         <source>All Lan Users</source>
@@ -908,15 +908,15 @@
     </message>
     <message>
         <source>Create group chat</source>
-        <translation type="vanished">Crea una conversazione di gruppo</translation>
+        <translation type="obsolete">Crea una conversazione di gruppo</translation>
     </message>
     <message>
         <source>Create a group chat with two or more users</source>
-        <translation type="vanished">Crea una conversazione con due o più persone</translation>
+        <translation type="obsolete">Crea una conversazione con due o più persone</translation>
     </message>
     <message>
         <source>Edit group chat</source>
-        <translation type="vanished">Modifica il gruppo</translation>
+        <translation type="obsolete">Modifica il gruppo</translation>
     </message>
     <message>
         <source>Change the name of the group or add and remove users</source>
@@ -941,7 +941,7 @@
     <message>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
-        <translation type="vanished">%1: impossibile salvare i messaggi.
+        <translation type="obsolete">%1: impossibile salvare i messaggi.
 Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
@@ -1106,11 +1106,15 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Word completer is enabled</source>
-        <translation>Il completamento è abilitato</translation>
+        <translation>Il completamento della parola è abilitato</translation>
     </message>
     <message>
         <source>Word completer is disabled</source>
-        <translation>Il completamento è disabilitato</translation>
+        <translation>Il completamento della parola è disabilitato</translation>
+    </message>
+    <message>
+        <source>Word completer</source>
+        <translation>Completamento della parola</translation>
     </message>
 </context>
 <context>
@@ -1160,11 +1164,11 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Save geometry and state</source>
-        <translation type="vanished">Salva le dimensioni e lo stato della finestra</translation>
+        <translation type="obsolete">Salva le dimensioni e lo stato della finestra</translation>
     </message>
     <message>
         <source>Save window&apos;s geometry </source>
-        <translation type="vanished">Salva le dimensioni della finestra</translation>
+        <translation type="obsolete">Salva le dimensioni della finestra</translation>
     </message>
     <message>
         <source>Save window&apos;s geometry</source>
@@ -1441,7 +1445,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show this page at startup</source>
-        <translation type="vanished">Mostra questa pagina alla partenza</translation>
+        <translation type="obsolete">Mostra questa pagina alla partenza</translation>
     </message>
     <message>
         <source>chat with all users</source>
@@ -1476,7 +1480,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>website</source>
-        <translation type="vanished">sito web</translation>
+        <translation type="obsolete">sito web</translation>
     </message>
     <message>
         <source>official website</source>
@@ -1530,7 +1534,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Paused (press space bar to continue)</source>
-        <translation type="vanished">Pausa (premi spazio per continuare)</translation>
+        <translation type="obsolete">Pausa (premi spazio per continuare)</translation>
     </message>
     <message>
         <source>Do you really want to restart?</source>
@@ -1538,11 +1542,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="vanished">Si</translation>
+        <translation type="obsolete">Si</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="vanished">No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>Bees Alive: %1 - Bees Died: %2 - Spaces: %3 - Hive Generation: %4</source>
@@ -1550,42 +1554,42 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>??? Evolution Completed ??? ... (or press space bar to continue)</source>
-        <translation type="vanished">??? Evoluzione Completata ??? ... (o premi spazio per continuare)</translation>
+        <translation type="obsolete">??? Evoluzione Completata ??? ... (o premi spazio per continuare)</translation>
     </message>
     <message>
         <source>Alive: %1 - Died: %2 - Spaces: %3 - Step: %4</source>
-        <translation type="vanished">Vive: %1 - Morte: %2 - Spazi: %3 - Passi: %4</translation>
+        <translation type="obsolete">Vive: %1 - Morte: %2 - Spazi: %3 - Passi: %4</translation>
     </message>
     <message>
         <source>Do you really want to randomize and restart?</source>
-        <translation type="vanished">Vuoi creare una situazione iniziale a caso e ripartire?</translation>
+        <translation type="obsolete">Vuoi creare una situazione iniziale a caso e ripartire?</translation>
     </message>
     <message>
         <source>Do you really want to clear all?</source>
-        <translation type="vanished">Vuoi cancellare tutto?</translation>
+        <translation type="obsolete">Vuoi cancellare tutto?</translation>
     </message>
 </context>
 <context>
     <name>GuiLifeWidget</name>
     <message>
         <source>Press space bar to start</source>
-        <translation type="vanished">Premi spazio per iniziare</translation>
+        <translation type="obsolete">Premi spazio per iniziare</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="vanished">Riavvia</translation>
+        <translation type="obsolete">Riavvia</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="vanished">Cancella</translation>
+        <translation type="obsolete">Cancella</translation>
     </message>
     <message>
         <source>Fast</source>
-        <translation type="vanished">Veloce</translation>
+        <translation type="obsolete">Veloce</translation>
     </message>
     <message>
         <source>Slow</source>
-        <translation type="vanished">Lento</translation>
+        <translation type="obsolete">Lento</translation>
     </message>
 </context>
 <context>
@@ -1866,7 +1870,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the messages&apos; timestamp</source>
-        <translation type="vanished">Mostra l&apos;orario nei messaggi</translation>
+        <translation type="obsolete">Mostra l&apos;orario nei messaggi</translation>
     </message>
     <message>
         <source>If enabled the message shows its timestamp in the chat window</source>
@@ -1918,7 +1922,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Add a status description...</source>
-        <translation type="vanished">Aggiungi una descrizione al tuo stato...</translation>
+        <translation type="obsolete">Aggiungi una descrizione al tuo stato...</translation>
     </message>
     <message>
         <source>&amp;?</source>
@@ -2187,7 +2191,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show emoticons</source>
-        <translation type="vanished">Mostra le faccine con delle immagini</translation>
+        <translation type="obsolete">Mostra le faccine con delle immagini</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and showed as images</source>
@@ -2407,7 +2411,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and shown as images</source>
-        <translation type="vanished">Se abilitata le faccine saranno riconosciute e visualizzate come immagini</translation>
+        <translation type="obsolete">Se abilitata le faccine saranno riconosciute e visualizzate come immagini</translation>
     </message>
     <message>
         <source>If enabled the messages will be shown grouped by user</source>
@@ -2499,11 +2503,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of plugins</source>
-        <translation type="vanished">Mostra la barra dei plugin</translation>
+        <translation type="obsolete">Mostra la barra dei plugin</translation>
     </message>
     <message>
         <source>Show the tool bar with plugin shortcuts</source>
-        <translation type="vanished">Mostra la barra con i collegamenti ai plugin</translation>
+        <translation type="obsolete">Mostra la barra con i collegamenti ai plugin</translation>
     </message>
     <message>
         <source>Download plugins...</source>
@@ -2591,7 +2595,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Please donate for %1 :-)</source>
-        <translation type="vanished">Per favore dona qualcosa per %1 :-)</translation>
+        <translation type="obsolete">Per favore dona qualcosa per %1 :-)</translation>
     </message>
     <message>
         <source>I&apos;m so grateful and pleased about that</source>
@@ -2967,7 +2971,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Used Ports</source>
-        <translation type="vanished">Porte usate</translation>
+        <translation type="obsolete">Porte usate</translation>
     </message>
     <message>
         <source>disabled</source>
@@ -3011,7 +3015,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the window geometry will be reset to default value at next startup</source>
-        <translation type="vanished">Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
+        <translation type="obsolete">Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
     </message>
     <message>
         <source>Show only last %1 messages</source>
@@ -3303,7 +3307,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use key Return to send message</source>
-        <translation type="vanished">Usa il tasto Invio per mandare i messaggi</translation>
+        <translation type="obsolete">Usa il tasto Invio per mandare i messaggi</translation>
     </message>
     <message>
         <source>Dictionary...</source>
@@ -3807,7 +3811,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation type="vanished">Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+        <translation type="obsolete">Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <source>Split subnet to IPV4 addresses</source>
@@ -3863,7 +3867,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use Zero Configuration Networking</source>
-        <translation type="vanished">Usa lo Zero Configuration Networking</translation>
+        <translation type="obsolete">Usa lo Zero Configuration Networking</translation>
     </message>
     <message>
         <source>Enable Zero Configuration Networking</source>
@@ -3954,11 +3958,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Load shared files</source>
-        <translation type="vanished">Carica i file condivisi</translation>
+        <translation type="obsolete">Carica i file condivisi</translation>
     </message>
     <message>
         <source>Remove shared files from the selected path</source>
-        <translation type="vanished">Rimuovi i file condivi dal percorso selezionato</translation>
+        <translation type="obsolete">Rimuovi i file condivi dal percorso selezionato</translation>
     </message>
     <message>
         <source>Remove shared path</source>
@@ -4210,7 +4214,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Insert the new shorcut for %1</source>
-        <translation type="vanished">Inserisci la nuova combinazione per %1</translation>
+        <translation type="obsolete">Inserisci la nuova combinazione per %1</translation>
     </message>
     <message>
         <source>Insert shorcut for the action: %1</source>
@@ -4225,7 +4229,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use custom shortcuts (restart needed after changing)</source>
-        <translation type="vanished">Usa scorciatoie personalizzate (riavvio richiesto dopo un cambiamento)</translation>
+        <translation type="obsolete">Usa scorciatoie personalizzate (riavvio richiesto dopo un cambiamento)</translation>
     </message>
     <message>
         <source>Restore to default language</source>
@@ -4267,31 +4271,31 @@ il file %2 (%3)?</translation>
     <name>GuiTetris</name>
     <message>
         <source>Next Piece</source>
-        <translation type="vanished">Prossimo Pezzo</translation>
+        <translation type="obsolete">Prossimo Pezzo</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="vanished">Punteggio</translation>
+        <translation type="obsolete">Punteggio</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation type="vanished">Linee</translation>
+        <translation type="obsolete">Linee</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="vanished">Livello</translation>
+        <translation type="obsolete">Livello</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="vanished">Nuova Partita</translation>
+        <translation type="obsolete">Nuova Partita</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="vanished">Pausa</translation>
+        <translation type="obsolete">Pausa</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="vanished">Continua</translation>
+        <translation type="obsolete">Continua</translation>
     </message>
 </context>
 <context>
@@ -4634,7 +4638,7 @@ il file %2 (%3)?</translation>
     <name>LifeGame</name>
     <message>
         <source>&lt;b&gt;The Game of Life&lt;/b&gt;, also known simply as Life, is a cellular automaton devised by the British mathematician &lt;b&gt;John Horton Conway&lt;/b&gt; in 1970. The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:&lt;ul&gt;&lt;li&gt;Any live cell with less than two live neighbours dies, as if caused by under-population.&lt;/li&gt;&lt;li&gt;Any live cell with two or three live neighbours lives on to the next generation.&lt;/li&gt;&lt;li&gt;Any live cell with more than three live neighbours dies, as if by overcrowding.&lt;/li&gt;&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.&lt;/li&gt;&lt;/ul&gt;The rules continue to be applied repeatedly to create further generations.&lt;br /&gt;For more info please visit &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</source>
-        <translation type="vanished">Il &lt;b&gt;Gioco della vita&lt;/b&gt; (Game of Life in inglese) è un automa cellulare sviluppato dal matematico inglese &lt;b&gt;John Conway&lt;/b&gt; sul finire degli anni sessanta. Si tratta in realtà di un gioco senza giocatori, intendendo che la sua evoluzione è determinata dal suo stato iniziale, senza necessità di alcun input da parte di giocatori umani. Si svolge su una griglia di caselle quadrate (celle) che si estende all&apos;infinito in tutte le direzioni; questa griglia è detta mondo. Ogni cella ha 8 vicini, che sono le celle ad essa adiacenti, includendo quelle in senso diagonale. Ogni cella può trovarsi in due stati: viva o morta (o accesa e spenta, on e off). Lo stato della griglia evolve in intervalli di tempo discreti. Gli stati di tutte le celle in un dato istante sono usati per calcolare lo stato delle celle all&apos;istante successivo. Tutte le celle del mondo vengono quindi aggiornate simultaneamente nel passaggio da un istante a quello successivo: passa così una generazione.&lt;br /&gt;
+        <translation type="obsolete">Il &lt;b&gt;Gioco della vita&lt;/b&gt; (Game of Life in inglese) è un automa cellulare sviluppato dal matematico inglese &lt;b&gt;John Conway&lt;/b&gt; sul finire degli anni sessanta. Si tratta in realtà di un gioco senza giocatori, intendendo che la sua evoluzione è determinata dal suo stato iniziale, senza necessità di alcun input da parte di giocatori umani. Si svolge su una griglia di caselle quadrate (celle) che si estende all&apos;infinito in tutte le direzioni; questa griglia è detta mondo. Ogni cella ha 8 vicini, che sono le celle ad essa adiacenti, includendo quelle in senso diagonale. Ogni cella può trovarsi in due stati: viva o morta (o accesa e spenta, on e off). Lo stato della griglia evolve in intervalli di tempo discreti. Gli stati di tutte le celle in un dato istante sono usati per calcolare lo stato delle celle all&apos;istante successivo. Tutte le celle del mondo vengono quindi aggiornate simultaneamente nel passaggio da un istante a quello successivo: passa così una generazione.&lt;br /&gt;
 Le transizioni di stato dipendono unicamente dal numero di vicini vivi:&lt;ul&gt;
 &lt;li&gt;Una cella morta con esattamente 3 vicini vivi nasce, diventando viva.&lt;/li&gt;
 &lt;li&gt;Una cella viva con 2 o 3 vicini vivi sopravvive; altrimenti muore (per isolamento o sovraffollamento)&lt;/li&gt;
@@ -4688,7 +4692,7 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Nobody</source>
-        <translation type="vanished">Nessuno</translation>
+        <translation type="obsolete">Nessuno</translation>
     </message>
     <message>
         <source>You</source>
@@ -4813,11 +4817,11 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <name>TetrisBoard</name>
     <message>
         <source>Pause</source>
-        <translation type="vanished">Pausa</translation>
+        <translation type="obsolete">Pausa</translation>
     </message>
     <message>
         <source>Game Over</source>
-        <translation type="vanished">Game Over</translation>
+        <translation type="obsolete">Game Over</translation>
     </message>
 </context>
 <context>
@@ -4828,7 +4832,7 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Use &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right Arrow&lt;/b&gt; to move the pieces on the board. &lt;b&gt;Up&lt;/b&gt; and &lt;b&gt;Down Arrow&lt;/b&gt; to rotate left and right. &lt;b&gt;Space&lt;/b&gt; to drop down the piece. &lt;b&gt;D&lt;/b&gt; to drop the piece only one line. &lt;b&gt;P&lt;/b&gt; to pause the game.</source>
-        <translation type="vanished">Usa le frecce &lt;b&gt;Sinistra&lt;/b&gt; e &lt;b&gt;Destra&lt;/b&gt; per muovere i pezzi nello schermo. Le frecce &lt;b&gt;Su&lt;/b&gt; e &lt;b&gt;Giù&lt;/b&gt; per ruotare il pezzo a sinistra e destra rispettivamente. &lt;b&gt;Barra spaziatrice&lt;/b&gt; per far cadere il pezzo. Premi il tasto &lt;b&gt;D&lt;/b&gt; per scendere di una linea e &lt;b&gt;P&lt;/b&gt; per mettere in pausa il gioco.</translation>
+        <translation type="obsolete">Usa le frecce &lt;b&gt;Sinistra&lt;/b&gt; e &lt;b&gt;Destra&lt;/b&gt; per muovere i pezzi nello schermo. Le frecce &lt;b&gt;Su&lt;/b&gt; e &lt;b&gt;Giù&lt;/b&gt; per ruotare il pezzo a sinistra e destra rispettivamente. &lt;b&gt;Barra spaziatrice&lt;/b&gt; per far cadere il pezzo. Premi il tasto &lt;b&gt;D&lt;/b&gt; per scendere di una linea e &lt;b&gt;P&lt;/b&gt; per mettere in pausa il gioco.</translation>
     </message>
 </context>
 <context>

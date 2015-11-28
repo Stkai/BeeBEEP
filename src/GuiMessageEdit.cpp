@@ -176,6 +176,8 @@ void GuiMessageEdit::dropEvent( QDropEvent* e )
 
 void GuiMessageEdit::completerKeyPressEvent( QKeyEvent* e )
 {
+#ifdef BEEBEEP_USE_HUNSPELL
+
   bool is_shortcut = e->modifiers() & Qt::ControlModifier; // CTRL+
   if( !is_shortcut ) // do not process the shortcut when we have a completer
     QTextEdit::keyPressEvent( e );
@@ -194,19 +196,21 @@ void GuiMessageEdit::completerKeyPressEvent( QKeyEvent* e )
     return;
   }
 
-  if( completion_prefix != mp_completer->completionPrefix() )
+  if( completion_prefix != SpellChecker::instance().completerPrefix() )
   {
-#ifdef BEEBEEP_USE_HUNSPELL
     SpellChecker::instance().updateCompleter( completion_prefix );
-#else
-    mp_completer->setCompletionPrefix( completion_prefix );
-#endif
     mp_completer->popup()->setCurrentIndex( mp_completer->completionModel()->index( 0, 0 ) );
   }
 
   QRect cursor_rect = cursorRect();
   cursor_rect.setWidth( mp_completer->popup()->sizeHintForColumn(0) + mp_completer->popup()->verticalScrollBar()->sizeHint().width() );
   mp_completer->complete( cursor_rect );
+
+#else
+
+  QTextEdit::keyPressEvent( e );
+
+#endif
 }
 
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
@@ -280,7 +284,7 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     reset_font = true;
   }
 
-  if( mp_completer )
+  if( mp_completer && Settings::instance().useWordCompleter() )
     completerKeyPressEvent( e );
   else
     QTextEdit::keyPressEvent( e );
@@ -384,7 +388,7 @@ void GuiMessageEdit::insertCompletion( const QString& completion )
     return;
 
   QTextCursor tc = textCursor();
-  int extra = completion.length() - mp_completer->completionPrefix().length();
+  int extra = completion.length() - SpellChecker::instance().completerPrefix().length();
   tc.movePosition( QTextCursor::Left );
   tc.movePosition( QTextCursor::EndOfWord );
   tc.insertText( completion.right( extra ) );
