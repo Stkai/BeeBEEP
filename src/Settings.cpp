@@ -133,6 +133,7 @@ void Settings::createLocalUser()
   m_localUser.setAccountName( sName.toLower() );
   if( m_localUser.name().isEmpty() )
     m_localUser.setName( sName );
+  m_localUser.setQtVersion( qtMajorVersion() );
   qDebug() << "User name:" << m_localUser.name();
   qDebug() << "System Account:" << m_localUser.accountName();
 }
@@ -666,8 +667,12 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Gui" );
-  m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
-  if( m_resetGeometryAtStartup || !qt_is_compatible )
+  if( qt_is_compatible )
+    m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
+  else
+    m_resetGeometryAtStartup = true;
+
+  if( m_resetGeometryAtStartup )
   {
     m_guiGeometry = "";
     m_guiState = "";

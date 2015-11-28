@@ -990,12 +990,13 @@ void GuiMain::createToolAndMenuBars()
   QLabel *label_version = new QLabel( this );
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignCenter );
-  QString label_version_text = QString( "&nbsp;<b>v %2</b> %3&nbsp;" )
+  QString label_version_text = QString( "&nbsp;<b>v %1-qt%2</b> %3&nbsp;" )
 #ifdef BEEBEEP_DEBUG
                             .arg( Settings::instance().version( true ) )
 #else
                             .arg( Settings::instance().version( false ) )
 #endif
+                            .arg( Settings::instance().localUser().qtVersion() )
                             .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
   label_version->setText( label_version_text );
   menuBar()->setCornerWidget( label_version );

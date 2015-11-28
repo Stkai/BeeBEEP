@@ -27,14 +27,14 @@
 User::User()
   : m_id( ID_INVALID ), m_vCard(), m_hostAddress(), m_hostPort( 0 ),
     m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_version( "" ), m_sessionId( "" ), m_isFavorite( false )
+    m_version( "" ), m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" )
 {
 }
 
 User::User( VNumber new_id )
   : m_id( new_id ), m_vCard(), m_hostAddress( "127.0.0.1" ), m_hostPort( DEFAULT_LISTENER_PORT ),
     m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_version( "" ), m_sessionId( "" ), m_isFavorite( false )
+    m_version( "" ), m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" )
 {
   setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
 }
@@ -59,6 +59,7 @@ User& User::operator=( const User& u )
     m_version = u.m_version;
     m_sessionId = u.m_sessionId;
     m_isFavorite = u.m_isFavorite;
+    m_qtVersion = u.m_qtVersion;
   }
   return *this;
 }

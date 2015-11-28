@@ -38,6 +38,7 @@ SpellChecker::SpellChecker()
   mp_completer->setWrapAround( false );
   mp_completer->setCompletionMode( QCompleter::PopupCompletion );
   updateCompleter( "" );
+  qDebug() << "SpellChecker started with Hunspell version 1.3.3";
 }
 
 SpellChecker::~SpellChecker()

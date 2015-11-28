@@ -87,6 +87,8 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     user_version = tr( "old %1" ).arg( u.version() );
   else if( u.version() > Settings::instance().version( false ) )
     user_version = tr( "new %1" ).arg( u.version() );
+  else if( u.qtVersion() != Settings::instance().localUser().qtVersion() )
+    user_version = QString( "v%1qt%2" ).arg( u.version(), u.qtVersion() );
 
   int user_current_status = core_is_connected ? u.status() : User::Offline;
 
@@ -95,7 +97,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   if( user_version.isEmpty() )
     mp_lStatus->setText( user_status );
   else
-    mp_lStatus->setText( QString( "%1&nbsp;&nbsp;&nbsp;(%2: %3)" ).arg( user_status ).arg( Settings::instance().programName() ).arg( user_version ) );
+    mp_lStatus->setText( QString( "%1&nbsp;&nbsp;&nbsp;(%2)" ).arg( user_status ).arg( user_version ) );
 
   if( u.isFavorite() )
   {

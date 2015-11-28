@@ -64,7 +64,6 @@ public:
   QString defaultPluginFolderPath( bool use_resource_folder ) const;
 
   QString version( bool ) const;
-  QString qtMajorVersion() const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
   QString programName() const;
@@ -371,6 +370,8 @@ public:
 
 protected:
   Settings();
+
+  QString qtMajorVersion() const;
 
   void loadBroadcastAddressesFromFileHosts();
   QHostAddress subnetFromHostAddress( const QHostAddress& ) const;
