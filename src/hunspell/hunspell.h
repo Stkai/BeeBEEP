@@ -46,7 +46,7 @@ LIBHUNSPELL_DLL_EXPORTED int Hunspell_stem(Hunhandle *pHunspell, char*** slst, c
   * example:
   * char ** result, result2;
   * int n1 = Hunspell_analyze(result, "words");
-  * int n2 = Hunspell_stem2(result2, result, n1);   
+  * int n2 = Hunspell_stem2(result2, result, n1);
   */
 
 LIBHUNSPELL_DLL_EXPORTED int Hunspell_stem2(Hunhandle *pHunspell, char*** slst, char** desc, int n);
@@ -70,14 +70,14 @@ LIBHUNSPELL_DLL_EXPORTED int Hunspell_generate2(Hunhandle *pHunspell, char*** sl
   /* functions for run-time modification of the dictionary */
 
   /* add word to the run-time dictionary */
-  
+
 LIBHUNSPELL_DLL_EXPORTED int Hunspell_add(Hunhandle *pHunspell, const char * word);
 
   /* add word to the run-time dictionary with affix flags of
    * the example (a dictionary word): Hunspell will recognize
    * affixed forms of the new word, too.
    */
-  
+
 LIBHUNSPELL_DLL_EXPORTED int Hunspell_add_with_affix(Hunhandle *pHunspell, const char * word, const char * example);
 
   /* remove word from the run-time dictionary */

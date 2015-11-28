@@ -578,6 +578,10 @@
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 L&apos;utente %2 non può salvare i messaggi all&apos;indirizzo: %3</translation>
     </message>
+    <message>
+        <source>Unable to send the message: this chat is disabled.</source>
+        <translation>Impossibile inviare il messaggio: la conversazione è disabilitata.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1099,6 +1103,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>There is not a valid dictionary</source>
         <translation>Non è stato selezionato un dizionario valido</translation>
+    </message>
+    <message>
+        <source>Word completer is enabled</source>
+        <translation>Il completamento è abilitato</translation>
+    </message>
+    <message>
+        <source>Word completer is disabled</source>
+        <translation>Il completamento è disabilitato</translation>
     </message>
 </context>
 <context>

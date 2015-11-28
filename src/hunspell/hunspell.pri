@@ -1,7 +1,7 @@
 
 DEFINES += BEEBEEP_USE_HUNSPELL
 
-unix:!macx: LIBS += -lhunspell
+#unix:!macx: LIBS += -lhunspell
 
 win32|macx|os2: {
 

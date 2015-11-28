@@ -54,14 +54,14 @@ public:
 
   /* spell(word) - spellcheck word
    * output: 0 = bad word, not 0 = good word
-   *   
+   *
    * plus output:
    *   info: information bit array, fields:
-   *     SPELL_COMPOUND  = a compound word 
+   *     SPELL_COMPOUND  = a compound word
    *     SPELL_FORBIDDEN = an explicit forbidden word
    *   root: root (stem), when input is a word with affix(es)
    */
-   
+
   int spell(const char * word, int * info = NULL, char ** root = NULL);
 
   /* suggest(suggestions, word) - search suggestions
@@ -83,20 +83,20 @@ public:
  /* morphological functions */
 
  /* analyze(result, word) - morphological analysis of the word */
- 
+
   int analyze(char*** slst, const char * word);
 
  /* stem(result, word) - stemmer function */
-  
+
   int stem(char*** slst, const char * word);
-  
+
  /* stem(result, analysis, n) - get stems from a morph. analysis
   * example:
   * char ** result, result2;
   * int n1 = analyze(&result, "words");
-  * int n2 = stem(&result2, result, n1);   
+  * int n2 = stem(&result2, result, n1);
   */
- 
+
   int stem(char*** slst, char ** morph, int n);
 
  /* generate(result, word, word2) - morphological generation by example(s) */
@@ -116,14 +116,14 @@ public:
   /* functions for run-time modification of the dictionary */
 
   /* add word to the run-time dictionary */
-  
+
   int add(const char * word);
 
   /* add word to the run-time dictionary with affix flags of
    * the example (a dictionary word): Hunspell will recognize
    * affixed forms of the new word, too.
    */
-  
+
   int add_with_affix(const char * word, const char * example);
 
   /* remove word from the run-time dictionary */
@@ -143,11 +143,11 @@ public:
 
   /* need for putdic */
   int input_conv(const char * word, char * dest);
-  
+
   /* experimental and deprecated functions */
 
 #ifdef HUNSPELL_EXPERIMENTAL
-  /* suffix is an affix flag string, similarly in dictionary files */  
+  /* suffix is an affix flag string, similarly in dictionary files */
   int put_word_suffix(const char * word, const char * suffix);
   char * morph_with_correction(const char * word);
 

@@ -35,9 +35,8 @@
 SpellChecker* SpellChecker::mp_instance = NULL;
 
 SpellChecker::SpellChecker()
- : mp_hunspell( 0 ), m_dictionary( "" ), m_userDictionary( "" ), m_encoding( "ISO8859-1" ), mp_codec( 0 ), m_baseWordList()
+ : mp_hunspell( 0 ), m_dictionary( "" ), m_userDictionary( "" ), m_encoding( "ISO8859-1" ), mp_codec( 0 )
 {
-  m_baseWordList << "Marco" << "Mastroddi" << "BeeBEEP";
   mp_completer = new QCompleter;
   mp_completer->setModelSorting( QCompleter::CaseInsensitivelySortedModel );
   mp_completer->setCaseSensitivity( Qt::CaseInsensitive );
@@ -151,7 +150,16 @@ bool SpellChecker::setUserDictionary( const QString& user_dictionary )
 bool SpellChecker::isGoodWord( const QString& word )
 {
   if( mp_hunspell )
+  {
+#ifdef BEEBEEP_DEBUG
+    const char* unicode_word = mp_codec->fromUnicode( word ).constData();
+    int spell_code = mp_hunspell->spell( unicode_word );
+    qDebug() << "Spell check if" << unicode_word << "is good:" << spell_code;
+    return spell_code != 0;
+#else
     return mp_hunspell->spell( mp_codec->fromUnicode( word ).constData() ) != 0;
+#endif
+  }
   else
     return true;
 }
@@ -174,6 +182,9 @@ QStringList SpellChecker::suggest( const QString& word )
     free( suggest_word_list[ i ] );
   }
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "SpellChecker suggests" << suggest_list.size() << "words";
+#endif
   return suggest_list;
 }
 
@@ -222,11 +233,6 @@ void SpellChecker::addToUserDictionary( const QString& word )
 void SpellChecker::updateCompleter( const QString& word_to_complete )
 {
   QStringList sl;
-  foreach( QString s, m_baseWordList )
-  {
-    if( s.startsWith( word_to_complete, Qt::CaseInsensitive ) )
-      sl << s;
-  }
 
   if( !word_to_complete.isEmpty() )
     sl.append( suggest( word_to_complete ) );

@@ -32,7 +32,11 @@ SpellCheckerHighlighter::SpellCheckerHighlighter( QTextDocument* text_document )
  : QSyntaxHighlighter( text_document ), m_format()
 {
   m_format.setUnderlineColor( Qt::red );
+#ifdef Q_OS_MAC
+  m_format.setUnderlineStyle( QTextCharFormat::WaveUnderline );
+#else
   m_format.setUnderlineStyle( QTextCharFormat::SpellCheckUnderline );
+#endif
 }
 
 void SpellCheckerHighlighter::highlightWord( const QString& all_text, const QString& word )

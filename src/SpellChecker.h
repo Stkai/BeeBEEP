@@ -79,7 +79,6 @@ private:
   QString m_encoding;
   QTextCodec* mp_codec;
 
-  QStringList m_baseWordList;
   QCompleter* mp_completer;
 
 };
