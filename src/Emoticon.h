@@ -48,6 +48,7 @@ public:
   inline bool isInGroup() const;
   inline int sortOrder() const;
   inline QString fileName() const;
+  inline const QByteArray& utf8() const;
 
   inline QString toHtml( int icon_size ) const;
   inline QIcon icon() const;
@@ -60,12 +61,12 @@ private:
   QString m_name;
   int m_group;
   int m_sortOrder;
+  QByteArray m_utf8;
 
 };
 
 
 // Inline Functions
-
 inline bool Emoticon::operator==( const Emoticon& e ) const { return m_textToMatch == e.m_textToMatch; }
 inline bool Emoticon::isValid() const { return m_textToMatch.size() > 0 && m_name.size() > 0; }
 inline const QString& Emoticon::textToMatch() const { return m_textToMatch; }
@@ -75,6 +76,7 @@ inline int Emoticon::group() const { return m_group; }
 inline bool Emoticon::isInGroup() const { return m_group > Emoticon::Text && m_group < Emoticon::NumGroups; }
 inline int Emoticon::sortOrder() const { return m_sortOrder; }
 inline QString Emoticon::fileName() const { return QString( ":/%1/%2.png" ).arg( groupFolder( m_group ) ).arg( m_name ); }
+inline const QByteArray& Emoticon::utf8() const { return m_utf8; }
 inline QString Emoticon::toHtml( int icon_size ) const { return QString( "<img src=\"%1\"%2 />").arg( fileName() ).arg( QString( " height=\"%1\"" ).arg( icon_size ) ); }
 inline QIcon Emoticon::icon() const { return QIcon( fileName() ); }
 
