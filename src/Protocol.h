@@ -147,7 +147,6 @@ private:
 
 };
 
-
 // Inline Functions
 inline VNumber Protocol::currentId() const { return m_id; }
 inline VNumber Protocol::newId() { return ++m_id; }

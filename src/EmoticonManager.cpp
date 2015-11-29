@@ -156,9 +156,9 @@ void EmoticonManager::addEmoticon( const QString& e_text, const QString& e_name,
   int emoticon_key_size = e_text.size();
   QChar key_char = e_text.at( 0 );
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Add emoticon" << e_name << "with key" << e_text.toUtf8() << "and key size" << emoticon_key_size << "and char" << key_char;
-#endif
+//#ifdef BEEBEEP_DEBUG
+//  qDebug() << "Add emoticon" << e_name << "with key" << e_text << "and key size" << emoticon_key_size << "and char" << key_char;
+//#endif
 
   m_emoticons.insert( key_char, Emoticon( e_text, e_name, emoticon_group, sort_order ) );
 
@@ -270,21 +270,6 @@ Emoticon EmoticonManager::emoticonByFile( const QString& e_file_name ) const
     {
       if( it.value().fileName() == e_file_name && it.value().isInGroup() )
         return it.value();
-      ++it;
-    }
-  }
-  return Emoticon();
-}
-
-Emoticon EmoticonManager::emoticonUtf8( const QByteArray& e_utf8 ) const
-{
-  if( !e_utf8.isEmpty() )
-  {
-    QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
-    while( it != m_emoticons.end() )
-    {
-      if( it.value().utf8() == e_utf8 && it.value().isInGroup() )
-          return it.value();
       ++it;
     }
   }
@@ -573,7 +558,7 @@ void EmoticonManager::createEmojiFiles()
   foreach( Emoticon e, emoji_list )
   {
     if( e.isInGroup() )
-      text_stream_out << "  addEmoticon( \"" << e.textToMatch() << "\", \"" << e.name() << "\", Emoticon::" << emoji_group_names.at( e.group() ) << ", " << e.sortOrder() << " ); \n";
+      text_stream_out << "  addEmoticon( QString::fromUtf8( \"" << e.textToMatch() << "\" ), \"" << e.name() << "\", Emoticon::" << emoji_group_names.at( e.group() ) << ", " << e.sortOrder() << " ); \n";
   }
 
   text_stream_out << "\n}\n\n";

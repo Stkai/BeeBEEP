@@ -36,7 +36,6 @@ public:
   Emoticon emoticon( const QString& ) const;
   Emoticon textEmoticon( const QString& ) const;
   Emoticon emoticonByFile( const QString& ) const;
-  Emoticon emoticonUtf8( const QByteArray& ) const;
 
   QList<Emoticon> textEmoticons( bool remove_names_duplicated ) const;
   QList<Emoticon> emoticonsByGroup( int ) const;
