@@ -8,6 +8,7 @@ BeeBEEP 3.0.3
 - Spell checking can be enabled (thanks to HUNSPELL library)
 - Word completer can be enabled (option)
 - Chat with all users can be disabled in beebeep.rc (option)
+- Fixed compatibility issue between Qt4 and Qt5 version
 
 BeeBEEP 3.0.2
 - Fixed compatibility with Windows 10 with Qt 5.5 (it will become the default windows release)
@@ -33,7 +34,7 @@ BeeBEEP 3.0.0
 - Removing a group action will delete also the chat with the group members
 - Zero Configuration Networking option added
 - Floating chats
-- Esc key minimize the active window 
+- Esc key minimize the active window
 
 BeeBEEP 2.0.4
 - Some GUI improvements (new icons, file sharing tree load faster)
@@ -54,7 +55,7 @@ BeeBEEP 2.0.2
 - Fixed a bug in "open url" function
 
 BeeBEEP 2.0.1
-- Fixed icon problem in Linux system tray 
+- Fixed icon problem in Linux system tray
 
 BeeBEEP 2.0.0
 - Updated to Qt Library 5.4.2 (for unicode emojis but it will be more than doubled the package size)
@@ -73,7 +74,7 @@ BeeBEEP 2.0.0
 - Chat can be saved in pdf format
 - Show downloaded image preview in chat (option)
 
-BeeBEEP 1.0.2 
+BeeBEEP 1.0.2
 - Show homepage with activities at startup (can be disabled by option)
 - Display chat members in chat window and as selected users in user panel
 - Added "Max simultaneous downloads" option in beebeep.ini configuration file
@@ -105,11 +106,11 @@ BeeBEEP 0.9.8
 - More info in profile
 - MacOSX version
 - eComStation and OS/2 version
-- High dpi support for screenshot plugin 
+- High dpi support for screenshot plugin
 
 BeeBEEP 0.9.7
-- Clear chat messages option 
-- Encryption security level 2 
+- Clear chat messages option
+- Encryption security level 2
 - Removed the limit on the number of files can be shared
 - Groups
 - Regular-Bold Text Marker plugin
@@ -150,7 +151,7 @@ BeeBEEP 0.8.2
 - Minimize on System Tray option
 
 BeeBEEP 0.6.2
-- Number Encoder Text Marker plugin 
+- Number Encoder Text Marker plugin
 - File BeeHost.ini to reach custom networks
 
 BeeBEEP 0.5.2
