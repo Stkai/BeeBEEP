@@ -108,6 +108,27 @@ int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, const QLis
 {
   int emoticon_size = Settings::instance().emoticonSizeInMenu();
   emoticon_widget->setEmoticonSize( emoticon_size );
+  QFont f = emoticon_widget->font();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Use native emoticons for group" << group_name << "with starting font point size:" << f.pointSize();
+#endif
+  if( !emoticon_list.isEmpty() && Settings::instance().useNativeEmoticons() )
+  {
+    QFontMetrics fm( f );
+    Emoticon first_emoticon = emoticon_list.last();
+    int i_count = 0;
+    while( i_count < emoticon_size )
+    {
+      if( (fm.width( first_emoticon.textToMatch() ) + 2) > emoticon_size )
+        break;
+      else
+        f.setPointSize( f.pointSize() + 1 );
+      fm = QFontMetrics( f );
+    }
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Use native emoticons for group" << group_name << "with calculated font point size:" << f.pointSize();
+#endif
+  }
 
   QList<QPushButton*> button_list;
   QPushButton* emoticon_button = 0;
@@ -119,6 +140,7 @@ int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, const QLis
     emoticon_button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
     emoticon_button->setFixedSize( emoticon_widget->emoticonButtonSize() );
     emoticon_button->setStyleSheet( "QPushButton:hover{ background-color: #ffcf04; }");
+    emoticon_button->setFont( f );
     setEmoticonToButton( e, emoticon_button );
     connect( emoticon_button, SIGNAL( clicked() ), this, SLOT( emoticonClicked() ) );
     button_list.append( emoticon_button );
