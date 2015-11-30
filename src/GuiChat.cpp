@@ -65,8 +65,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
   mp_teMessage->setAcceptRichText( false );
 #ifdef BEEBEEP_USE_HUNSPELL
-  if( Settings::instance().useWordCompleter() )
-    mp_teMessage->setCompleter( SpellChecker::instance().completer() );
+  mp_teMessage->setCompleter( SpellChecker::instance().completer() );
 #endif
 
   mp_teChat->setObjectName( "GuiChatViewer" );
@@ -876,32 +875,33 @@ void GuiChat::onUseReturnToSendMessageClicked()
 
 void GuiChat::updateSpellCheckerToolTip()
 {
+  QString tool_tip = "";
   if( Settings::instance().useSpellChecker() )
-  {
-    QString tool_tip = tr( "Spell checking is enabled" );
-#ifdef BEEBEEP_USE_HUNSPELL
-    if( !SpellChecker::instance().isValid() )
-      tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
-#endif
-    mp_actSpellChecker->setToolTip( tool_tip );
-  }
+    tool_tip = tr( "Spell checking is enabled" );
   else
-    mp_actSpellChecker->setToolTip( tr( "Spell checking is disabled" ) );
+    tool_tip = tr( "Spell checking is disabled" );
+
+#ifdef BEEBEEP_USE_HUNSPELL
+  if( !SpellChecker::instance().isValid() )
+    tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
+#endif
+
+  mp_actSpellChecker->setToolTip( tool_tip );
 }
 
 void GuiChat::updateCompleterToolTip()
 {
+  QString tool_tip = "";
   if( Settings::instance().useWordCompleter() )
-  {
-    QString tool_tip = tr( "Word completer is enabled" );
-#ifdef BEEBEEP_USE_HUNSPELL
-    if( !SpellChecker::instance().isValid() )
-      tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
-#endif
-    mp_actCompleter->setToolTip( tool_tip );
-  }
+    tool_tip = tr( "Word completer is enabled" );
   else
-    mp_actCompleter->setToolTip( tr( "Word completer is disabled" ) );
+    tool_tip =  tr( "Word completer is disabled" );
+
+#ifdef BEEBEEP_USE_HUNSPELL
+  if( !SpellChecker::instance().isValid() )
+    tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
+#endif
+  mp_actCompleter->setToolTip( tool_tip );
 }
 
 void GuiChat::onSpellCheckerActionClicked()

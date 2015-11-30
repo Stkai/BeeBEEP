@@ -207,7 +207,7 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="256"/>
         <source>Unable to send the message: this chat is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze poslat zprávu: tento chat je zakázán.</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="306"/>
@@ -810,17 +810,17 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="137"/>
         <source>Spell checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrola pravopisu</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="139"/>
         <source>Word completer</source>
-        <translation type="unfinished"></translation>
+        <translation>Doplňovač slov</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="141"/>
         <source>Use Return key to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít klávesu Zpět k odeslání zprávy</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="146"/>
@@ -860,28 +860,28 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="881"/>
         <source>Spell checking is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrola pravopisu je povolena</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="884"/>
         <location filename="../src/GuiChat.cpp" line="899"/>
         <source>There is not a valid dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Není dostupný příslušný slovník</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="896"/>
         <source>Word completer is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Doplňovač slov je povolen</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="904"/>
         <source>Word completer is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Doplňovač slov je zakázán</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="889"/>
         <source>Spell checking is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrola pravopisu je zakázána</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="157"/>
@@ -1054,12 +1054,12 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="865"/>
         <source>Use key Return to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít klávesu Zpět k odeslání zprávy</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="867"/>
         <source>Use key Return to make a carriage return</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít klávesu Zpět k návratu na začátek textu</translation>
     </message>
 </context>
 <context>
@@ -2644,12 +2644,12 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="606"/>
         <source>Dictionary...</source>
-        <translation type="unfinished"></translation>
+        <translation>Slovník...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="607"/>
         <source>Select your preferred dictionary for spell checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte váš preferovaný slovník pro kontrolu pravopisu</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="617"/>
@@ -2887,17 +2887,17 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="3543"/>
         <source>Select your dictionary path</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat cestu ke slovníku</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3551"/>
         <source>Dictionary selected: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrán slovník: %1</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3553"/>
         <source>Unable to set dictionary: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze nastavit slovník: %1</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1936"/>
@@ -3363,7 +3363,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="119"/>
         <source>Multicast group in beebeep.rc *</source>
-        <translation type="unfinished"></translation>
+        <translation>Multicast skupina v beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="181"/>
@@ -4157,17 +4157,17 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="108"/>
         <source>Minimize all chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimalizovat všechny chaty</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="110"/>
         <source>Show the next unread message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit další nepřečtenou zprávu</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="112"/>
         <source>Send chat message</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat zprávu</translation>
     </message>
 </context>
 <context>

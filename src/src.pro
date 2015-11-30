@@ -16,15 +16,18 @@ QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
 unix:!macx {
-  lessThan(QT_MAJOR_VERSION, 5): QT += phonon
+  isEqual(QT_MAJOR_VERSION, 4): QT += phonon
   LIBS= -lxcb -lxcb-screensaver
 }
-
-win32: LIBS += -luser32
 
 macx: {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
   LIBS += -framework ApplicationServices
+}
+
+win32: {
+  DEFINES += _CRT_SECURE_NO_WARNINGS
+  LIBS += -luser32
 }
 
 message( Qt modules: $$QT )

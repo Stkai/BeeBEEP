@@ -66,6 +66,18 @@ void Core::createDefaultChat()
     c.addMessage( cm );
   }
 
+  if( QDate::currentDate().month() == 1 && QDate::currentDate().day() >= 1 && QDate::currentDate().day() <= 8 )
+  {
+    QString new_year_icons;
+    if( Settings::instance().useNativeEmoticons() )
+      new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ) );
+    else
+      new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ), Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ), Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ) );
+    sHtmlMsg = QString( "%1&nbsp;&nbsp;&nbsp;<font color=red><b>%2</b></font>&nbsp;&nbsp;&nbsp;%3" ).arg( new_year_icons, tr( "Happy New Year!" ), new_year_icons );
+    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Chat );
+    c.addMessage( cm );
+  }
+
   if( Settings::instance().localUser().isBirthDay() )
   {
     sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ), tr( "Happy Birthday to you!" ) );

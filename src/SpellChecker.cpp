@@ -172,10 +172,13 @@ QStringList SpellChecker::suggest( const QString& word )
 
   char **suggest_word_list;
   int num_suggestions = mp_hunspell->suggest( &suggest_word_list, mp_codec->fromUnicode( word ).constData() );
+  QString word_to_append;
 
   for( int i = 0; i < num_suggestions; i++ )
   {
-    suggest_list.append( mp_codec->toUnicode( suggest_word_list[ i ] ) );
+    word_to_append = mp_codec->toUnicode( suggest_word_list[ i ] );
+    if( word_to_append.startsWith( word ) )
+      suggest_list.append( word_to_append );
     free( suggest_word_list[ i ] );
   }
 
@@ -183,6 +186,7 @@ QStringList SpellChecker::suggest( const QString& word )
   foreach( QString s, suggest_list )
     qDebug() << "Suggested word:" << s;
 #endif
+
   return suggest_list;
 }
 
