@@ -906,7 +906,14 @@ void GuiChat::updateCompleterToolTip()
 
 void GuiChat::onSpellCheckerActionClicked()
 {
+#ifdef BEEBEEP_USE_HUNSPELL
+  if( SpellChecker::instance().isValid() )
+    Settings::instance().setUseSpellChecker( mp_actSpellChecker->isChecked() );
+  else
+    Settings::instance().setUseSpellChecker( false );
+#else
   Settings::instance().setUseSpellChecker( mp_actSpellChecker->isChecked() );
+#endif
   updateSpellCheckerToolTip();
   mp_teMessage->rehighlightMessage();
   ensureFocusInChat();
@@ -914,7 +921,14 @@ void GuiChat::onSpellCheckerActionClicked()
 
 void GuiChat::onCompleterActionClicked()
 {
+#ifdef BEEBEEP_USE_HUNSPELL
+  if( SpellChecker::instance().isValid() )
+    Settings::instance().setUseWordCompleter( mp_actCompleter->isChecked() );
+  else
+    Settings::instance().setUseWordCompleter( false );
+#else
   Settings::instance().setUseWordCompleter( mp_actCompleter->isChecked() );
+#endif
   updateCompleterToolTip();
   ensureFocusInChat();
 }
@@ -927,4 +941,8 @@ void GuiChat::updateActionsOnFocusChanged()
   updateSpellCheckerToolTip();
   mp_actCompleter->setChecked( Settings::instance().useWordCompleter() );
   updateCompleterToolTip();
+#ifdef BEEBEEP_USE_HUNSPELL
+  mp_actSpellChecker->setEnabled( SpellChecker::instance().isValid() );
+  mp_actCompleter->setEnabled( SpellChecker::instance().isValid() );
+#endif
 }

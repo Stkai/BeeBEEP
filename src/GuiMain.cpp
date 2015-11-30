@@ -3546,9 +3546,10 @@ void GuiMain::selectDictionatyPath()
     return;
 
   Settings::instance().setDictionaryPath( dictionary_path );
-
+#ifdef BEEBEEP_USE_HUNSPELL
   if( SpellChecker::instance().setDictionary( dictionary_path ) )
     showMessage( tr( "Dictionary selected: %1" ).arg( dictionary_path ), 3000 );
   else
     showMessage( tr( "Unable to set dictionary: %1" ).arg( dictionary_path ), 3000 );
+#endif
 }
