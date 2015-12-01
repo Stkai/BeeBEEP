@@ -307,7 +307,7 @@ public:
   inline const QStringList& userPathList() const;
   inline void setUserStatusList( const QStringList& );
   inline const QStringList& userStatusList() const;
-  inline int maxUserStatusInList() const;
+  inline int maxUserStatusDescriptionInList() const;
 
   inline void setSaveUserList( bool );
   inline bool saveUserList() const;
@@ -521,7 +521,7 @@ private:
   QStringList m_userPathList;
   QStringList m_groupSilenced;
   QStringList m_userStatusList;
-  int m_maxUserStatusInList;
+  int m_maxUserStatusDescriptionInList;
 
   bool m_saveUserList;
   QStringList m_userList;
@@ -752,7 +752,7 @@ inline void Settings::setAcceptConnectionsOnlyFromWorkgroups( bool new_value ) {
 inline bool Settings::acceptConnectionsOnlyFromWorkgroups() const { return m_acceptConnectionsOnlyFromWorkgroups; }
 inline void Settings::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
 inline const QStringList& Settings::workgroups() const { return m_workgroups; }
-inline int Settings::maxUserStatusInList() const { return m_maxUserStatusInList; }
+inline int Settings::maxUserStatusDescriptionInList() const { return m_maxUserStatusDescriptionInList; }
 inline void Settings::setShowUserStatusBackgroundColor( bool new_value ) { m_showUserStatusBackgroundColor = new_value; }
 inline bool Settings::showUserStatusBackgroundColor() const { return m_showUserStatusBackgroundColor; }
 inline void Settings::setShortcuts( const QStringList& new_value ) { m_shortcuts = new_value; }

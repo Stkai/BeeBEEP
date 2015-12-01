@@ -48,6 +48,9 @@ public:
   inline bool isConnected() const;
   inline bool isConnecting() const;
 
+  inline const QDateTime& latestActivityDateTime() const;
+  int activityIdle() const;
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const Message& );
@@ -77,6 +80,7 @@ private:
   QString m_publicKey2;
 
   QString m_hostAndPort;
+  QDateTime m_latestActivityDateTime;
 
 };
 
@@ -87,5 +91,6 @@ inline void ConnectionSocket::setUserId( VNumber new_value ) { m_userId = new_va
 inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
 inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::HostLookupState && state() <= QAbstractSocket::ConnectedState; }
 inline bool ConnectionSocket::isConnecting() const { return state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState; }
+inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { return m_latestActivityDateTime; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

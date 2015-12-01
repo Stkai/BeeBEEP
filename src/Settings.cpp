@@ -94,7 +94,7 @@ Settings::Settings()
   m_preventMultipleConnectionsFromSingleHostAddress = false;
   m_alwaysOpenNewFloatingChat = false;
   m_acceptConnectionsOnlyFromWorkgroups = false;
-  m_maxUserStatusInList = 10;
+  m_maxUserStatusDescriptionInList = 10;
 
   m_connectionTimeout = 5000;
   m_useReturnToSendMessage = true;
@@ -646,7 +646,7 @@ void Settings::load()
     m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
   else
     m_userStatusList = QStringList();
-  m_maxUserStatusInList = sets->value( "MaxStatusInList", m_maxUserStatusInList ).toInt();
+  m_maxUserStatusDescriptionInList = sets->value( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -718,11 +718,11 @@ void Settings::load()
   m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 2000 ).toInt(), 100 );
   m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
-  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 3000 ).toInt();
+  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 5000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", true ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
-  m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", true ).toBool();
+  m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
@@ -909,7 +909,7 @@ void Settings::save()
   else
     sets->remove( "StatusList" );
 
-  sets->setValue( "MaxStatusInList", m_maxUserStatusInList );
+  sets->setValue( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList );
   sets->endGroup();
 
   sets->beginGroup( "VCard" );

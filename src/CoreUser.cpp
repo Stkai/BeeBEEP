@@ -60,7 +60,7 @@ void Core::setLocalUserStatusDescription( int user_status, const QString& new_st
     QString s_status = Protocol::instance().saveUserStatusRecord( usr );
     QStringList sl_status = Settings::instance().userStatusList();
     sl_status.removeOne( s_status );
-    if( sl_status.size() >= Settings::instance().maxUserStatusInList() )
+    if( sl_status.size() >= Settings::instance().maxUserStatusDescriptionInList() )
       sl_status.removeLast();
     sl_status.prepend( s_status );
     Settings::instance().setUserStatusList( sl_status );

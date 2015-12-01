@@ -582,6 +582,14 @@
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Impossibile inviare il messaggio: la conversazione è disabilitata.</translation>
     </message>
+    <message>
+        <source>Happy New Year!</source>
+        <translation>Buon Anno!</translation>
+    </message>
+    <message>
+        <source>%1 Network interface %2 is gone down.</source>
+        <translation>%1 L&apos;interfaccia di rete %2 si è disattivata.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>

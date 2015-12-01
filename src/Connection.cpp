@@ -31,6 +31,7 @@
 Connection::Connection( QObject *parent )
   : ConnectionSocket( parent )
 {
+  setSocketOption( QAbstractSocket::KeepAliveOption, 1 );
   m_pingTimer.setInterval( Settings::instance().pingInterval() );
   connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( parseData( const QByteArray& ) ) );
   connect( &m_pingTimer, SIGNAL( timeout() ), this, SLOT( sendPing() ) );
@@ -97,6 +98,16 @@ void Connection::sendPing()
   {
     qDebug() << "Pong timeout for connection from"  << peerAddress().toString() << peerPort();
     emit abortRequest();
+    return;
+  }
+
+  // -200 takes care of time from here to sendData
+  if( activityIdle() < (Settings::instance().pingInterval()-200) )
+  {
+#if defined( CONNECTION_PING_PONG_DEBUG )
+    qDebug() << "Ping is not sent because activity idle is too short:" << activityIdle() << "<" << Settings::instance().pingInterval();
+#endif
+    m_pongTime.restart();
     return;
   }
 

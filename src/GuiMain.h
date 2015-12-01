@@ -161,6 +161,7 @@ private slots:
   void onApplicationFocusChanged( QWidget*, QWidget* );
   void minimizeAllChats();
   void selectDictionatyPath();
+  void onNetworkInterfaceDown();
 
 protected:
   void keyPressEvent( QKeyEvent* );

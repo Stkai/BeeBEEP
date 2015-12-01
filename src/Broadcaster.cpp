@@ -279,7 +279,7 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
     return true;
   }
 
-  QList<QHostAddress> host_address_list = NetworkManager::instance().splitBroadcastSubnetToIpv4HostAddresses( host_address );
+  QList<QHostAddress> host_address_list = NetworkManager::instance().splitBroadcastSubnetToIPv4HostAddresses( host_address );
   if( host_address_list.isEmpty() )
     return false;
 

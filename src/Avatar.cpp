@@ -91,6 +91,8 @@ bool Avatar::create()
 
     if( text_to_write.size() > 2 )
       text_to_write.truncate( 2 );
+
+    text_to_write = Bee::capitalizeFirstLetter( text_to_write, false );
   }
   else
   {

@@ -32,7 +32,7 @@ const int SECURE_LEVEL_2_PROTO_VERSION = 60;
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ), m_preventLoop( 0 ),
-    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" )
+    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" ), m_latestActivityDateTime()
 {
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
@@ -77,10 +77,10 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
 
 void ConnectionSocket::readBlock()
 {
+  m_latestActivityDateTime = QDateTime::currentDateTime();
   // QByteArray
   // If the byte array is null: 0xFFFFFFFF (quint32)
   // Otherwise: the array size (quint32) followed by the array bytes, i.e. size bytes
-
   QDataStream data_stream( this );
 
   if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
@@ -204,6 +204,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << peerAddress().toString() << peerPort();
 #endif
+    m_latestActivityDateTime = QDateTime::currentDateTime();
     return true;
   }
   else
@@ -322,4 +323,17 @@ void ConnectionSocket::checkConnectionTimeout()
   qDebug() << "Connection timeout for" << m_hostAndPort;
   disconnectFromHost();
   emit disconnected();
+}
+
+int ConnectionSocket::activityIdle() const
+{
+  if( !m_latestActivityDateTime.isValid() )
+    return 0;
+
+  quint64 idle_time = m_latestActivityDateTime.msecsTo( QDateTime::currentDateTime() );
+
+  if( idle_time < 2147483647 )
+    return (int)idle_time;
+  else
+    return 2147483647;
 }

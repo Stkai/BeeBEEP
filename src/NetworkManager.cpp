@@ -30,8 +30,33 @@ NetworkManager* NetworkManager::mp_instance = NULL;
 
 NetworkManager::NetworkManager()
   : m_localHostAddress(), m_localBroadcastAddress(), m_localHostAddressScopeId( "" ),
-    m_ipv4Addresses(), m_ipv6Addresses()
+    m_localInterfaceHardwareAddress( "" ), m_ipv4Addresses(), m_ipv6Addresses()
 {
+}
+
+bool NetworkManager::isMainInterfaceUp() const
+{
+  if( m_localInterfaceHardwareAddress.isEmpty() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Unable to check if local interface hardware is up";
+#endif
+    return true;
+  }
+
+  QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
+
+  foreach( QNetworkInterface if_net, interface_list )
+  {
+    if( (if_net.flags() & QNetworkInterface::IsUp) &&
+        (if_net.flags() & QNetworkInterface::IsRunning) &&
+        (if_net.flags() & ~QNetworkInterface::IsLoopBack) )
+    {
+       if( m_localInterfaceHardwareAddress == if_net.hardwareAddress() )
+         return true;
+    }
+  }
+  return false;
 }
 
 bool NetworkManager::searchLocalHostAddress()
@@ -39,10 +64,12 @@ bool NetworkManager::searchLocalHostAddress()
   QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
   QList<QHostAddress> interface_addresses;
   QList<QHostAddress> skipped_addresses;
+  QMap<QString, QString> interface_hardware_addresses;
 
   m_localHostAddress = QHostAddress( "127.0.0.1" );
   m_localBroadcastAddress = QHostAddress();
   m_localHostAddressScopeId = "";
+  m_localInterfaceHardwareAddress = "";
   if( !m_ipv4Addresses.isEmpty() )
     m_ipv4Addresses.clear();
   if( !m_ipv6Addresses.isEmpty() )
@@ -50,6 +77,7 @@ bool NetworkManager::searchLocalHostAddress()
 
   // Collect the list
   int interface_id = 0;
+  QString interface_hardware_address = "";
   foreach( QNetworkInterface if_net, interface_list )
   {
     if( (if_net.flags() & QNetworkInterface::IsUp) &&
@@ -58,37 +86,40 @@ bool NetworkManager::searchLocalHostAddress()
     {
        interface_addresses = if_net.allAddresses();
        interface_id++;
+       interface_hardware_address = if_net.hardwareAddress();
        foreach( QHostAddress host_address, interface_addresses )
        {
          if( host_address != QHostAddress::LocalHost && host_address != QHostAddress::LocalHostIPv6 )
          {
            if( isLinkLocal( host_address ) )
            {
-             if( !skipped_addresses.contains( host_address) )
+             if( !skipped_addresses.contains( host_address ) )
              {
                qDebug() << "In network interface" << interface_id << "skips link local:" << host_address.toString();
                skipped_addresses.append( host_address );
              }
            }
-           else if( isIpv6Address( host_address ) )
+           else if( isIPv6Address( host_address ) )
            {
              if( !m_ipv6Addresses.contains( host_address ) )
              {
-               qDebug() << "In network interface" << interface_id << "adds ipv6:" << host_address.toString();
+               qDebug() << "In network interface" << interface_id << "adds IPv6:" << host_address.toString();
                m_ipv6Addresses.append( host_address );
+               interface_hardware_addresses.insert( host_address.toString(), interface_hardware_address );
              }
            }
-           else if( isIpv4Address( host_address ) )
+           else if( isIPv4Address( host_address ) )
            {
              if( !m_ipv4Addresses.contains( host_address ) )
              {
-               qDebug() << "In network interface" << interface_id << "adds ipv4:" << host_address.toString();
+               qDebug() << "In network interface" << interface_id << "adds IPv4:" << host_address.toString();
                m_ipv4Addresses.append( host_address );
+               interface_hardware_addresses.insert( host_address.toString(), interface_hardware_address );
              }
            }
            else
            {
-             if( !skipped_addresses.contains( host_address) )
+             if( !skipped_addresses.contains( host_address ) )
              {
                qDebug() << "In network interface" << interface_id << "skips undefined:" << host_address.toString();
                skipped_addresses.append( host_address );
@@ -97,7 +128,7 @@ bool NetworkManager::searchLocalHostAddress()
          }
          else
          {
-           if( !skipped_addresses.contains( host_address) )
+           if( !skipped_addresses.contains( host_address ) )
            {
              qDebug() << "In network interface" << interface_id << "skips local:" << host_address.toString();
              skipped_addresses.append( host_address );
@@ -108,14 +139,14 @@ bool NetworkManager::searchLocalHostAddress()
   }
 
   // check forced ip
-  if( forceLocalHostAddress( Settings::instance().localHostAddressForced() ) )
+  if( forceLocalHostAddress( interface_hardware_addresses, Settings::instance().localHostAddressForced() ) )
     return true;
 
   // check forced subnet
   if( !Settings::instance().localSubnetForced().isEmpty() )
   {
     qDebug() << "Checking local subnet forced:" << qPrintable( Settings::instance().localSubnetForced() );
-    if( forceLocalSubnet( Settings::instance().localSubnetForced() ) )
+    if( forceLocalSubnet( interface_hardware_addresses, Settings::instance().localSubnetForced() ) )
       return true;
   }
 
@@ -128,7 +159,7 @@ bool NetworkManager::searchLocalHostAddress()
        foreach( QString preferred_subnet, preferred_subnets )
       {
         qDebug() << "Checking preferred subnet from RC:" << preferred_subnet;
-        if( forceLocalSubnet( preferred_subnet.trimmed() ) )
+        if( forceLocalSubnet( interface_hardware_addresses, preferred_subnet.trimmed() ) )
           return true;
       }
     }
@@ -136,13 +167,13 @@ bool NetworkManager::searchLocalHostAddress()
 
   if( !m_ipv4Addresses.isEmpty() )
   {
-    setLocalHostAddress( m_ipv4Addresses.first() );
+    setLocalHostAddress( interface_hardware_addresses, m_ipv4Addresses.first() );
     return true;
   }
 
   if( !m_ipv6Addresses.isEmpty() )
   {
-    setLocalHostAddress( m_ipv6Addresses.first() );
+    setLocalHostAddress( interface_hardware_addresses, m_ipv6Addresses.first() );
     return true;
   }
 
@@ -150,30 +181,40 @@ bool NetworkManager::searchLocalHostAddress()
   return false;
 }
 
-void NetworkManager::setLocalHostAddress( const QHostAddress& host_address )
+void NetworkManager::setLocalHostAddress( const QMultiMap<QString, QString>& interface_hardware_addresses, const QHostAddress& host_address )
 {
-  if( isIpv4Address( host_address ) )
+  if( isIPv4Address( host_address ) )
   {
     qDebug() << "Local host address IPV4 selected:" << host_address.toString();
     m_localHostAddress = host_address;
-    m_localBroadcastAddress = broadcastSubnetFromIpv4HostAddress( host_address );
+    m_localBroadcastAddress = broadcastSubnetFromIPv4HostAddress( host_address );
   }
-  else if( isIpv6Address( host_address ) )
+  else if( isIPv6Address( host_address ) )
   {
     qDebug() << "Local host address IPV6 selected:" << host_address.toString();
     m_localHostAddress = host_address;
+    m_localBroadcastAddress = QHostAddress();
     m_localHostAddressScopeId = host_address.scopeId();
   }
+
+  QString s_host_address = m_localHostAddress.toString();
+  if( interface_hardware_addresses.contains( s_host_address ) )
+  {
+    m_localInterfaceHardwareAddress = interface_hardware_addresses.value( s_host_address, QString( "" ) );
+    qDebug() << "Local interface hardware address:" << qPrintable( m_localInterfaceHardwareAddress );
+  }
+  else
+    qWarning() << "Unable to set local interface hardware for address:" << qPrintable( s_host_address );
 }
 
-bool NetworkManager::forceLocalHostAddress( const QHostAddress& local_host_address_forced )
+bool NetworkManager::forceLocalHostAddress( const QMultiMap<QString, QString>& interface_hardware_addresses, const QHostAddress& local_host_address_forced )
 {
   if( local_host_address_forced.isNull() )
     return false;
 
   qDebug() << "Checking forced IP:" << local_host_address_forced.toString();
 
-  if( isIpv4Address( local_host_address_forced ) )
+  if( isIPv4Address( local_host_address_forced ) )
   {
     if( m_ipv4Addresses.isEmpty() )
       return false;
@@ -182,7 +223,7 @@ bool NetworkManager::forceLocalHostAddress( const QHostAddress& local_host_addre
     {
       if( host_address == local_host_address_forced )
       {
-        setLocalHostAddress( host_address );
+        setLocalHostAddress( interface_hardware_addresses, host_address );
         return true;
       }
     }
@@ -190,7 +231,7 @@ bool NetworkManager::forceLocalHostAddress( const QHostAddress& local_host_addre
     return false;
   }
 
-  if( isIpv6Address( local_host_address_forced ) )
+  if( isIPv6Address( local_host_address_forced ) )
   {
     if( m_ipv6Addresses.isEmpty() )
       return false;
@@ -199,7 +240,7 @@ bool NetworkManager::forceLocalHostAddress( const QHostAddress& local_host_addre
     {
       if( host_address == local_host_address_forced )
       {
-        setLocalHostAddress( host_address );
+        setLocalHostAddress( interface_hardware_addresses, host_address );
         return true;
       }
     }
@@ -210,7 +251,7 @@ bool NetworkManager::forceLocalHostAddress( const QHostAddress& local_host_addre
   return false;
 }
 
-bool NetworkManager::forceLocalSubnet( const QString& local_subnet_forced )
+bool NetworkManager::forceLocalSubnet( const QMultiMap<QString, QString>& interface_hardware_addresses, const QString& local_subnet_forced )
 {
   if( local_subnet_forced.simplified().isEmpty() )
     return false;
@@ -222,7 +263,7 @@ bool NetworkManager::forceLocalSubnet( const QString& local_subnet_forced )
       if( hostAddressIsInBroadcastSubnet( host_address, local_subnet_forced ) )
       {
         qDebug() << "Ipv4 host address" << qPrintable( host_address.toString() ) << "is in subnet" << local_subnet_forced;
-        setLocalHostAddress( host_address );
+        setLocalHostAddress( interface_hardware_addresses, host_address );
         return true;
       }
     }
@@ -235,7 +276,7 @@ bool NetworkManager::forceLocalSubnet( const QString& local_subnet_forced )
       if( hostAddressIsInBroadcastSubnet( host_address, local_subnet_forced ) )
       {
         qDebug() << "Ipv6 host address" << qPrintable( host_address.toString() ) << "is in subnet" << local_subnet_forced;
-        setLocalHostAddress( host_address );
+        setLocalHostAddress( interface_hardware_addresses, host_address );
         return true;
       }
     }
@@ -244,12 +285,12 @@ bool NetworkManager::forceLocalSubnet( const QString& local_subnet_forced )
   return false;
 }
 
-QHostAddress NetworkManager::broadcastSubnetFromIpv4HostAddress( const QHostAddress& host_address ) const
+QHostAddress NetworkManager::broadcastSubnetFromIPv4HostAddress( const QHostAddress& host_address ) const
 {
   if( host_address.isNull() )
     return QHostAddress();
 
-  if( !isIpv4Address( host_address ) )
+  if( !isIPv4Address( host_address ) )
     return QHostAddress();
 
   if( isLoopback( host_address ) )
@@ -274,7 +315,7 @@ QHostAddress NetworkManager::broadcastSubnetFromIpv4HostAddress( const QHostAddr
 
 bool NetworkManager::isLinkLocal( const QHostAddress& host_address ) const
 {
-  if( isIpv6Address( host_address ) )
+  if( isIPv6Address( host_address ) )
   {
     QPair<QHostAddress, int> ipv6_range_link_local = QHostAddress::parseSubnet( "fe80::/10" );
     return host_address.isInSubnet( ipv6_range_link_local );
@@ -334,7 +375,7 @@ bool NetworkManager::hostAddressIsInBroadcastSubnet( const QHostAddress& host_ad
     return true;
   }
 
-  if( isIpv6Address( host_address ) )
+  if( isIPv6Address( host_address ) )
     return false;
 
   if( broadcast_subnet.contains( "/" ) )
@@ -381,12 +422,12 @@ bool NetworkManager::hostAddressIsInBroadcastSubnet( const QHostAddress& host_ad
 
 }
 
-QList<QHostAddress> NetworkManager::splitBroadcastSubnetToIpv4HostAddresses( const QHostAddress& host_address ) const
+QList<QHostAddress> NetworkManager::splitBroadcastSubnetToIPv4HostAddresses( const QHostAddress& host_address ) const
 {
   QList<QHostAddress> ha_list;
   QString ha_string = host_address.toString();
 
-  if( isIpv6Address( host_address ) )
+  if( isIPv6Address( host_address ) )
   {
     ha_list << host_address;
 #ifdef BEEBEEP_DEBUG

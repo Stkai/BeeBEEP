@@ -110,6 +110,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_core, SIGNAL( updateGroup( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
+  connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -3375,7 +3376,7 @@ void GuiMain::loadUserStatusRecentlyUsed()
       user_status_list.append( usr );
   }
 
-  if( user_status_list.size() < Settings::instance().maxUserStatusInList() )
+  if( user_status_list.size() < Settings::instance().maxUserStatusDescriptionInList() )
   {
     UserStatusRecord usr1;
     usr1.setStatus( User::Away );
@@ -3384,7 +3385,7 @@ void GuiMain::loadUserStatusRecentlyUsed()
       user_status_list.append( usr1 );
   }
 
-  if( user_status_list.size() < Settings::instance().maxUserStatusInList() )
+  if( user_status_list.size() < Settings::instance().maxUserStatusDescriptionInList() )
   {
     UserStatusRecord usr2;
     usr2.setStatus( User::Busy );
@@ -3552,4 +3553,11 @@ void GuiMain::selectDictionatyPath()
   else
     showMessage( tr( "Unable to set dictionary: %1" ).arg( dictionary_path ), 3000 );
 #endif
+}
+
+void GuiMain::onNetworkInterfaceDown()
+{
+  raiseHomeView();
+  if( mp_core->isConnected() )
+    stopCore();
 }

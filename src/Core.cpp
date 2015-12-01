@@ -346,7 +346,7 @@ void Core::checkUserHostAddress( const User& u )
   if( !Settings::instance().addExternalSubnetAutomatically() )
     return;
 
-  QHostAddress user_host_address = NetworkManager::instance().broadcastSubnetFromIpv4HostAddress( u.hostAddress() );
+  QHostAddress user_host_address = NetworkManager::instance().broadcastSubnetFromIPv4HostAddress( u.hostAddress() );
   if( Settings::instance().addSubnetToBroadcastAddress( user_host_address ) )
   {
     QString sHtmlMsg = QString( "%1 %2 %3" )
