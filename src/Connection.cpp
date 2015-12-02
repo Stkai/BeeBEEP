@@ -76,7 +76,6 @@ void Connection::parseData( const QByteArray& message_data )
 #if defined( CONNECTION_PING_PONG_DEBUG )
     qDebug() << "PONG received from" << peerAddress().toString() << peerPort();
 #endif
-    m_pongTime.restart();
     break;
   default:
     emit newMessage( userId(), m );
@@ -89,25 +88,24 @@ void Connection::setReadyForUse( VNumber user_id )
   qDebug() << "Connection is ready for use by the user" << user_id;
   setUserId( user_id );
   m_pingTimer.start();
-  m_pongTime.start();
 }
 
 void Connection::sendPing()
 {
-  if( m_pongTime.elapsed() > Settings::instance().pongTimeout() )
+  int activity_idle = activityIdle();
+  if( activity_idle > Settings::instance().pongTimeout() )
   {
-    qDebug() << "Pong timeout for connection from"  << peerAddress().toString() << peerPort();
+    qDebug() << "Connection timeout with" << activity_idle << "ms idle from"  << qPrintable( peerAddress().toString() ) << peerPort();
     emit abortRequest();
     return;
   }
 
   // -200 takes care of time from here to sendData
-  if( activityIdle() < (Settings::instance().pingInterval()-200) )
+  if( activity_idle < (Settings::instance().pingInterval()-200) )
   {
 #if defined( CONNECTION_PING_PONG_DEBUG )
     qDebug() << "Ping is not sent because activity idle is too short:" << activityIdle() << "<" << Settings::instance().pingInterval();
 #endif
-    m_pongTime.restart();
     return;
   }
 
@@ -115,7 +113,10 @@ void Connection::sendPing()
   qDebug() << "Sending PING to" << peerAddress().toString() << peerPort();
 #endif
   if( !sendData( Protocol::instance().pingMessage() ) )
+  {
     qWarning() << "Unable to send PING to" << peerAddress().toString() << peerPort();
+    emit abortRequest();
+  }
 }
 
 void Connection::sendPong()

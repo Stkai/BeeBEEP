@@ -49,7 +49,6 @@ protected slots:
 
 private:
   QTimer m_pingTimer;
-  QTime m_pongTime;
 
 };
 

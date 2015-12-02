@@ -204,7 +204,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << peerAddress().toString() << peerPort();
 #endif
-    m_latestActivityDateTime = QDateTime::currentDateTime();
+    // send data is asynchronous and m_latestActivityDateTime is not set
     return true;
   }
   else
@@ -226,7 +226,10 @@ void ConnectionSocket::sendQuestionHello()
     m_isHelloSent = true;
   }
   else
+  {
     qWarning() << "ConnectionSocket is unable to send question HELLO to" << peerAddress().toString() << peerPort();
+    emit abortRequest();
+  }
 }
 
 void ConnectionSocket::sendAnswerHello()
@@ -241,7 +244,10 @@ void ConnectionSocket::sendAnswerHello()
     m_isHelloSent = true;
   }
   else
+  {
     qWarning() << "ConnectionSocket is unable to send answer HELLO to" << peerAddress().toString() << peerPort();
+    emit abortRequest();
+  }
 }
 
 void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
@@ -297,10 +303,15 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     QString public_key = Protocol::instance().publicKey( m );
     if( !public_key.isEmpty() )
     {
-      if( createCipherKey( public_key ) )
-        qDebug() << "Encryption level 2 is activated with" << peerAddress().toString() << peerPort();
-      else
+      if( !createCipherKey( public_key ) )
+      {
         qWarning() << "You have not shared a public key for encryption";
+        emit abortRequest();
+        return;
+      }
+      else
+        qDebug() << "Encryption level 2 is activated with" << peerAddress().toString() << peerPort();
+
     }
     else
       qWarning() << "Remote host" << peerAddress().toString() << peerPort() << "has not shared a public key for encryption";

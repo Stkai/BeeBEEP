@@ -416,12 +416,13 @@ void Core::checkNetworkInterface()
 {
   if( !m_connections.isEmpty() )
   {
+    int max_activity_idle = Settings::instance().tickIntervalCheckNetwork() * 1000;
     foreach( Connection* c, m_connections )
     {
-      if( c->isConnected() && c->activityIdle() < (Settings::instance().tickIntervalCheckNetwork()*1000) )
+      if( c->isConnected() && c->activityIdle() < max_activity_idle )
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "Network interface has activity idle" << c->activityIdle() << "ms <" << Settings::instance().tickIntervalCheckNetwork() << "s from user" << c->userId();
+        qDebug() << "Network interface has activity idle" << c->activityIdle() << "ms <" << max_activity_idle << "ms from user" << c->userId();
 #endif
         return;
       }

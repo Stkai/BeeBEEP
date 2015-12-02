@@ -99,7 +99,7 @@ Settings::Settings()
   m_connectionTimeout = 5000;
   m_useReturnToSendMessage = true;
   m_tickIntervalCheckIdle = 10;
-  m_tickIntervalCheckNetwork = 5;
+  m_tickIntervalCheckNetwork = 15;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -751,18 +751,18 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
+  m_tickIntervalCheckIdle = qMax( sets->value( "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
+  m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 7 );
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
   m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
-  m_pingInterval = qMax( sets->value( "PingInterval", 31000 ).toInt(), 1000 );
-  m_pongTimeout = qMax( sets->value( "PongTimeout", 98000 ).toInt(), 3000 );
+  m_pingInterval = qMax( 2000, qMin( sets->value( "ConnectionPingInterval", m_tickIntervalCheckNetwork * 800 ).toInt(), m_tickIntervalCheckNetwork * 800 ) );
+  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", m_pingInterval * 3 + 500 ).toInt(), (m_pingInterval * 3 + 500) );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 1000 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
   m_connectionTimeout = qMax( sets->value( "ConnectionTimeout", m_connectionTimeout ).toInt(), 1000 );
-  m_tickIntervalCheckIdle = qMax( sets->value( "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
-  m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 2 );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -982,11 +982,13 @@ void Settings::save()
   sets->setValue( "DictionaryPath", m_dictionaryPath );
   sets->endGroup();
   sets->beginGroup( "Misc" );
+  sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );
+  sets->setValue( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork );
   sets->setValue( "BroadcastInterval", m_broadcastInterval );
   sets->setValue( "BroadcastLoopbackInterval", m_broadcastLoopbackInterval );
   sets->setValue( "ListenerPort", m_localUser.hostPort() );
-  sets->setValue( "PingInterval", m_pingInterval );
-  sets->setValue( "PongTimeout", m_pongTimeout );
+  sets->setValue( "ConnectionPingInterval", m_pingInterval );
+  sets->setValue( "ConnectionActivityTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
   sets->setValue( "ConnectionTimeout", m_connectionTimeout );
   sets->endGroup();
