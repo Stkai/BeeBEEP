@@ -437,7 +437,7 @@ void Core::checkNetworkInterface()
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Network interface %2 is gone down.")
                                .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
-                               NetworkManager::instance().localInterfaceHardwareAddress() ), DispatchToAllChatsWithUser,
+                               NetworkManager::instance().localInterfaceHardwareAddress() ), DispatchToChat,
                                ChatMessage::Connection );
       emit networkInterfaceIsDown();
     }
