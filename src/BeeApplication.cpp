@@ -60,9 +60,10 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   m_idleTimeout = 0;
   m_timer.setObjectName( "BeeMainTimer" );
-  m_timer.setInterval( 10000 );
+  m_timer.setInterval( 1000 );
   m_isInIdle = false;
   mp_localServer = 0;
+  m_tickCounter = 0;
 
   mp_jobThread = new QThread();
   m_jobsInProgress = 0;
@@ -78,7 +79,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
     setAttribute( Qt::AA_UseHighDpiPixmaps, true );
 #endif
 
-  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkIdle() ) );
+  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkTick() ) );
 
   signal( SIGINT, &quitAfterSignal );
   signal( SIGTERM, &quitAfterSignal );
@@ -117,16 +118,23 @@ void BeeApplication::quitAfterSignal( int sig )
 
 void BeeApplication::init()
 {
-  qDebug() << "Starting background thread";
+  qDebug() << "Starting background thread and tick timer";
   mp_jobThread->start();
   mp_jobThread->setPriority( QThread::LowPriority );
+  m_timer.start();
 }
 
 void BeeApplication::setIdleTimeout( int new_value )
 {
-  m_idleTimeout = new_value * 60;
-  if( m_timer.isActive() )
+  if( new_value <= 0 )
+  {
+    qWarning() << "Unable to set idle timout to value:" << new_value;
+    m_idleTimeout = 0;
     return;
+  }
+
+  m_idleTimeout = new_value * 60;
+
 #ifdef Q_OS_LINUX
   mp_xcbConnection = xcb_connect( 0, 0 );
   m_xcbConnectHasError = xcb_connection_has_error( mp_xcbConnection ) > 0;
@@ -135,7 +143,6 @@ void BeeApplication::setIdleTimeout( int new_value )
   else
     mp_xcbScreen = xcb_setup_roots_iterator( xcb_get_setup( mp_xcbConnection ) ).data;
 #endif
-  m_timer.start();
 }
 
 void BeeApplication::setIdle()
@@ -179,14 +186,16 @@ void BeeApplication::checkIdle()
 void BeeApplication::cleanUp()
 {
   if( m_timer.isActive() )
-  {
     m_timer.stop();
+
 #ifdef Q_OS_LINUX
+  if( m_idleTimeout > 0 )
+  {
  // mp_xcbScreen not need to free
  // disconnect from display and free memory
     xcb_disconnect( mp_xcbConnection );
-#endif
   }
+#endif
 
   if( mp_jobThread->isRunning() && m_jobsInProgress > 0 )
   {
@@ -348,3 +357,18 @@ void BeeApplication::removeJob( QObject* obj )
   qDebug() << obj->objectName() << "removed from job thread." << m_jobsInProgress << "jobs in progress";
 }
 
+void BeeApplication::checkTick()
+{
+  m_tickCounter++;
+
+  if( m_tickCounter > 31536000 )
+  {
+    // 1 year is passed ... it is time to close!
+    qWarning() << "A year in uptime is passed. It is time to close and restart";
+    m_timer.stop();
+    QTimer::singleShot( 0, this, SLOT( quit() ) );
+    return;
+  }
+  else
+    emit tickEvent( m_tickCounter );
+}

@@ -181,6 +181,7 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( exitingFromIdle() ), &mw, SLOT( exitFromIdle() ) );
   QObject::connect( &bee_app, SIGNAL( aboutToQuit() ), &mw, SLOT( forceShutdown() ) );
   QObject::connect( &bee_app, SIGNAL( showUp() ), &mw, SLOT( showUp() ) );
+  QObject::connect( &bee_app, SIGNAL( tickEvent( int ) ), &mw, SLOT( onTickEvent( int ) ) );
 
   if( !Settings::instance().guiGeometry().isEmpty() )
   {

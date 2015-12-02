@@ -50,6 +50,7 @@ public:
 
   void init();
   void setIdleTimeout( int ); // in minutes
+  inline int idleTimeout() const;
   void cleanUp();
 
   void addJob( QObject* );
@@ -61,6 +62,10 @@ signals:
   void enteringInIdle();
   void exitingFromIdle();
   void showUp();
+  void tickEvent( int );
+
+public slots:
+  void checkIdle();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
@@ -70,7 +75,7 @@ protected:
   QString localServerName() const;
 
 protected slots:
-  void checkIdle();
+  void checkTick();
   void setIdle();
   void removeIdle();
   void slotConnectionEstablished();
@@ -91,7 +96,11 @@ private:
 #endif
 
   ShutdownMonitor *mp_shutdownMonitor;
+  int m_tickCounter;
 
 };
+
+// Inline Functions
+inline int BeeApplication::idleTimeout() const { return m_idleTimeout; }
 
 #endif // BEEBEEP_APPLICATION_H

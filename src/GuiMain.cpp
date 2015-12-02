@@ -87,6 +87,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   m_lastUserStatus = User::Online;
   m_forceShutdown = false;
+  m_autoConnectOnInterfaceUp = false;
   m_prevActivatedState = true;
 
   createActions();
@@ -111,6 +112,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( updateGroup( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
+  connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -406,6 +408,8 @@ void GuiMain::forceShutdown()
 
 void GuiMain::startCore()
 {
+  m_autoConnectOnInterfaceUp = false;
+
   if( Settings::instance().firstTime() )
   {
     showWizard();
@@ -3557,7 +3561,31 @@ void GuiMain::selectDictionatyPath()
 
 void GuiMain::onNetworkInterfaceDown()
 {
-  raiseHomeView();
   if( mp_core->isConnected() )
-    stopCore();
+  {
+    raiseHomeView();
+    m_autoConnectOnInterfaceUp = true;
+    QTimer::singleShot( 1000, this, SLOT( stopCore() ) );
+  }
+}
+
+void GuiMain::onNetworkInterfaceUp()
+{
+  if( m_autoConnectOnInterfaceUp && !mp_core->isConnected() )
+    QTimer::singleShot( 1000, this, SLOT( startCore() ) );
+}
+
+static bool IsTimeToCheck( int ticks, int tick_for_check ) { return ticks % tick_for_check == 0; }
+
+void GuiMain::onTickEvent( int ticks )
+{
+  if( IsTimeToCheck( ticks, Settings::instance().tickIntervalCheckNetwork() ) )
+    QTimer::singleShot( 0, mp_core, SLOT( checkNetworkInterface() ) );
+
+  if( IsTimeToCheck( ticks, Settings::instance().tickIntervalCheckIdle() ) )
+  {
+    BeeApplication* bee_app = (BeeApplication*)qApp;
+    if( bee_app->idleTimeout() > 0 )
+      QTimer::singleShot( 0, bee_app, SLOT( checkIdle() ) );
+  }
 }

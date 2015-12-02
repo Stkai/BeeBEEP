@@ -68,8 +68,11 @@ public slots:
   void exitFromIdle();
   void showMessage( const QString&, int );
   void showUp();
+  void onTickEvent( int );
 
 private slots:
+  void startCore();
+  void stopCore();
   void showAbout();
   void showLicense();
   void updateUser( const User& );
@@ -162,6 +165,7 @@ private slots:
   void minimizeAllChats();
   void selectDictionatyPath();
   void onNetworkInterfaceDown();
+  void onNetworkInterfaceUp();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -188,8 +192,6 @@ private:
   void createPluginWindows();
   void refreshUserList();
   void refreshTitle( const User& );
-  void startCore();
-  void stopCore();
   void initGuiItems();
   void updadePluginMenu();
   void updateStatusIcon();
@@ -298,6 +300,7 @@ private:
   int m_lastUserStatus;
 
   bool m_forceShutdown;
+  bool m_autoConnectOnInterfaceUp;
 
   QShortcut* mp_scMinimizeAllChats;
   QShortcut* mp_scShowNextUnreadMessage;

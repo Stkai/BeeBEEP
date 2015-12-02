@@ -151,6 +151,9 @@ PingInterval=31000
 PongTimeout=98000
 WritingTimeout=3000
 SystemTrayMessageTimeout=2000
+ConnectionTimeout=5000
+TickIntervalCheckIdle=10
+TickIntervalCheckNetwork=5
 
 [Network]
 BroadcastAddresses=(do not edit manually)

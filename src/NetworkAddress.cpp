@@ -34,6 +34,11 @@ NetworkAddress::NetworkAddress( const NetworkAddress& na )
   (void)operator=( na );
 }
 
+NetworkAddress::NetworkAddress( const QHostAddress& ha, int hp )
+ : m_hostAddress( ha ), m_hostPort( hp )
+{
+}
+
 NetworkAddress& NetworkAddress::operator=( const NetworkAddress& na )
 {
   if( this != &na )
@@ -44,18 +49,30 @@ NetworkAddress& NetworkAddress::operator=( const NetworkAddress& na )
   return *this;
 }
 
-bool NetworkAddress::isLoopback() const
+bool NetworkAddress::isLinkLocal() const
 {
-#if QT_VERSION >= 0x050000
-  return m_hostAddress.isLoopback();
-#else
-  return m_hostAddress == QHostAddress::LocalHost || m_hostAddress == QHostAddress::LocalHostIPv6;
-#endif
+  if( isIPv6Address() )
+  {
+    QPair<QHostAddress, int> ipv6_range_link_local = QHostAddress::parseSubnet( "fe80::/10" );
+    return m_hostAddress.isInSubnet( ipv6_range_link_local );
+  }
+  else
+  {
+    QPair<QHostAddress, int> ipv4_range_link_local = QHostAddress::parseSubnet( "169.254.0.0/16" );
+    if( m_hostAddress.isInSubnet( ipv4_range_link_local ) )
+    {
+      QPair<QHostAddress, int> ipv4_pre_link_local = QHostAddress::parseSubnet( "169.254.1.0/24" );
+      QPair<QHostAddress, int> ipv4_post_link_local = QHostAddress::parseSubnet( "169.254.255.0/24" );
+      if( !m_hostAddress.isInSubnet( ipv4_pre_link_local ) && !m_hostAddress.isInSubnet( ipv4_post_link_local ) )
+        return true;
+    }
+    return false;
+  }
 }
 
 QString NetworkAddress::toString() const
 {
-  if( isIpv6Address() && m_hostPort > 0 )
+  if( isIPv6Address() && m_hostPort > 0 )
     return QString( "[%1]:%2" ).arg( m_hostAddress.toString() ).arg( m_hostPort );
   else if( m_hostPort > 0 )
     return QString( "%1:%2" ).arg( m_hostAddress.toString() ).arg( m_hostPort );

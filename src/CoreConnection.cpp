@@ -228,7 +228,8 @@ void Core::closeConnection( Connection *c )
   //do not delete the object. Can cause crash. See c->readblock( ... ) FIXME
   //c->deleteLater();
 
-  QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );
+  if( isConnected() && m_connections.isEmpty() )
+    QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );
 }
 
 void Core::checkUserAuthentication( const Message& m )
@@ -353,21 +354,4 @@ void Core::checkUserAuthentication( const Message& m )
 
   checkUserHostAddress( u );
   checkOfflineMessagesForUser( u );
-}
-
-void Core::checkNetworkInterface()
-{
-  if( m_connections.isEmpty() && isConnected() )
-  {
-    if( !NetworkManager::instance().isMainInterfaceUp() )
-    {
-      qWarning() << "Network interface is gone down";
-      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                             tr( "%1 Network interface %2 is gone down.")
-                               .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
-                               NetworkManager::instance().localInterfaceHardwareAddress() ), DispatchToAllChatsWithUser,
-                               ChatMessage::Connection );
-      emit networkInterfaceIsDown();
-    }
-  }
 }

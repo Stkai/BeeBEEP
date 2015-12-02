@@ -108,6 +108,7 @@ HEADERS += AudioManager.h \
   MessageManager.h \
   MessageRecord.h \
   NetworkAddress.h \
+  NetworkEntry.h \
   NetworkManager.h \
   PluginManager.h \
   Protocol.h \
@@ -207,6 +208,7 @@ SOURCES += AudioManager.cpp \
   MessageManager.cpp \
   MessageRecord.cpp \
   NetworkAddress.cpp \
+  NetworkEntry.cpp \
   NetworkManager.cpp \
   PluginManager.cpp \
   Protocol.cpp \

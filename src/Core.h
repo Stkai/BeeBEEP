@@ -101,6 +101,7 @@ public slots:
   void sendBroadcastMessage();
   void sendHelloToHostsInSettings();
   void sendMulticastingMessage();
+  void checkNetworkInterface();
 
   /* CoreChat */
   void sendWritingMessage( VNumber );
@@ -128,6 +129,7 @@ signals:
   void updateGroup( VNumber );
   void userConnectionStatusChanged( const User& );
   void networkInterfaceIsDown();
+  void networkInterfaceIsUp();
 
 protected slots:
   void showBroadcasterUdpError();
@@ -139,7 +141,6 @@ protected slots:
   void setConnectionClosed();
   void checkUserAuthentication( const Message& );
   void checkUserRecord( const UserRecord& );
-  void checkNetworkInterface();
 
   /* CoreParser */
   void parseMessage( VNumber, const Message& );

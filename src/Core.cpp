@@ -347,6 +347,10 @@ void Core::checkUserHostAddress( const User& u )
     return;
 
   QHostAddress user_host_address = NetworkManager::instance().broadcastSubnetFromIPv4HostAddress( u.hostAddress() );
+
+  if( user_host_address.isNull() )
+    return;
+
   if( Settings::instance().addSubnetToBroadcastAddress( user_host_address ) )
   {
     QString sHtmlMsg = QString( "%1 %2 %3" )
@@ -406,4 +410,40 @@ int Core::fileTransferPort() const
     return mp_fileTransfer->serverPort();
   else
     return Settings::instance().defaultFileTransferPort();
+}
+
+void Core::checkNetworkInterface()
+{
+  if( !m_connections.isEmpty() )
+  {
+    foreach( Connection* c, m_connections )
+    {
+      if( c->isConnected() && c->activityIdle() < (Settings::instance().tickIntervalCheckNetwork()*1000) )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Network interface has activity idle" << c->activityIdle() << "ms <" << Settings::instance().tickIntervalCheckNetwork() << "s from user" << c->userId();
+#endif
+        return;
+      }
+    }
+  }
+
+  if( !NetworkManager::instance().isMainInterfaceUp() )
+  {
+    if( isConnected() )
+    {
+      qWarning() << "Network interface is gone down";
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                             tr( "%1 Network interface %2 is gone down.")
+                               .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
+                               NetworkManager::instance().localInterfaceHardwareAddress() ), DispatchToAllChatsWithUser,
+                               ChatMessage::Connection );
+      emit networkInterfaceIsDown();
+    }
+  }
+  else
+  {
+    if( !isConnected() )
+      emit networkInterfaceIsUp();
+  }
 }

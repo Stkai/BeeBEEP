@@ -103,6 +103,8 @@ public:
   inline int fileTransferBufferSize() const;
   inline int trayMessageTimeout() const;
   inline int connectionTimeout() const;
+  inline int tickIntervalCheckIdle() const;
+  inline int tickIntervalCheckNetwork() const;
 
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
@@ -415,6 +417,8 @@ private:
   int m_trayMessageTimeout;
   int m_userAwayTimeout;
   int m_connectionTimeout;
+  int m_tickIntervalCheckIdle;
+  int m_tickIntervalCheckNetwork;
 
   QDateTime m_lastSave;
   bool m_logToFile;
@@ -771,5 +775,7 @@ inline void Settings::setDictionaryPath( const QString& new_value ) { m_dictiona
 inline const QString& Settings::dictionaryPath() const { return m_dictionaryPath; }
 inline void Settings::setUseWordCompleter( bool new_value ) { m_useWordCompleter = new_value; }
 inline bool Settings::useWordCompleter() const { return m_useWordCompleter; }
+inline int Settings::tickIntervalCheckIdle() const { return m_tickIntervalCheckIdle; }
+inline int Settings::tickIntervalCheckNetwork() const { return m_tickIntervalCheckNetwork; }
 
 #endif // BEEBEEP_SETTINGS_H

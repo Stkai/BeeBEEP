@@ -214,7 +214,7 @@ int Broadcaster::updateAddresses()
     foreach( QString s_address, Settings::instance().broadcastAddressesInFileHosts() )
     {
       NetworkAddress na = NetworkAddress::fromString( s_address );
-      if( na.isValid() )
+      if( na.isHostAddressValid() )
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "Network address in hosts parsed:" << na.toString();
@@ -237,21 +237,19 @@ int Broadcaster::updateAddresses()
     }
   }
 
-  foreach( QNetworkInterface interface, QNetworkInterface::allInterfaces() )
+  if( !Settings::instance().broadcastOnlyToHostsIni() )
   {
-    foreach( QNetworkAddressEntry entry, interface.addressEntries() )
+    QList<NetworkEntry> available_broadcast_entries = NetworkManager::instance().availableNetworkEntries();
+
+    foreach( NetworkEntry available_broadcast_entry, available_broadcast_entries )
     {
-      ha_broadcast = entry.broadcast();
-      if( !ha_broadcast.isNull() && !NetworkManager::instance().isLoopback( entry.ip() ) )
+      if( !available_broadcast_entry.broadcast().isNull() )
+        addAddressToList( available_broadcast_entry.broadcast() );
+
+      if( !m_ipAddresses.contains( available_broadcast_entry.hostAddress() ) )
       {
-        if( entry.ip() == Settings::instance().localUser().hostAddress() )
-          addAddressToList( ha_broadcast );
-        else if( !Settings::instance().broadcastOnlyToHostsIni() )
-          addAddressToList( ha_broadcast );
-        else
-          qDebug() << "Broadcaster skips" << ha_broadcast.toString();
-        m_ipAddresses << entry.ip();
-        qDebug() << "Broadcaster adds" << entry.ip().toString() << "to local IP list";
+        m_ipAddresses.append( available_broadcast_entry.hostAddress() );
+        qDebug() << "Broadcaster adds" << qPrintable( available_broadcast_entry.hostAddress().toString() ) << "to local IP list";
       }
     }
   }

@@ -98,7 +98,8 @@ Settings::Settings()
 
   m_connectionTimeout = 5000;
   m_useReturnToSendMessage = true;
-
+  m_tickIntervalCheckIdle = 10;
+  m_tickIntervalCheckNetwork = 5;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -531,7 +532,7 @@ void Settings::loadBroadcastAddressesFromFileHosts()
           continue;
 
         NetworkAddress na = NetworkAddress::fromString( address_string );
-        if( !na.isValid() )
+        if( !na.isHostAddressValid() )
         {
           qWarning() << "Invalid broadcast address found in line" << num_lines << ":" << address_string;
           continue;
@@ -760,6 +761,8 @@ void Settings::load()
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
   m_connectionTimeout = qMax( sets->value( "ConnectionTimeout", m_connectionTimeout ).toInt(), 1000 );
+  m_tickIntervalCheckIdle = qMax( sets->value( "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
+  m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 2 );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -770,7 +773,7 @@ void Settings::load()
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
-  m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", true ).toBool();
+  m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", false ).toBool();
   m_addExternalSubnetAutomatically = sets->value( "AddExternalSubnetAutomatically", true ).toBool();
   m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();
   m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
