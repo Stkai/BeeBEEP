@@ -279,31 +279,15 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     return 0;
   }
 
-  Message m;
   QString msg_to_send = msg;
-
   if( !Settings::instance().chatUseHtmlTags() )
   {
     msg_to_send.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
     msg_to_send.replace( "&lt;3", "<3" ); // hearth emoticon
   }
-
   PluginManager::instance().parseText( &msg_to_send, true );
-  m = Protocol::instance().chatMessage( msg_to_send );
-  ChatMessageData cmd;
-  cmd.setTextColor( Settings::instance().chatFontColor() );
-  if( c.isGroup() )
-  {
-    m.addFlag( Message::GroupChat );
-    cmd.setGroupId( c.privateId() );
-  }
-  else
-  {
-    if( chat_id != ID_DEFAULT_CHAT )
-      m.addFlag( Message::Private );
-  }
 
-  m.setData( Protocol::instance().chatMessageDataToString( cmd ) );
+  Message m = Protocol::instance().chatMessage( c, msg_to_send );
 
   int messages_sent = 0;
 
@@ -312,11 +296,11 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 
   if( chat_id == ID_DEFAULT_CHAT )
   {
-    foreach( Connection *conn, m_connections )
+    foreach( Connection *user_connection, m_connections )
     {
-      if( !conn->sendMessage( m ) )
+      if( !user_connection->sendMessage( m ) )
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
-                               .arg( UserManager::instance().findUser( conn->userId() ).path() ),
+                               .arg( UserManager::instance().findUser( user_connection->userId() ).path() ),
                                DispatchToChat, ChatMessage::System );
       else
         messages_sent += 1;
@@ -583,3 +567,55 @@ void Core::checkOfflineMessagesForUser( const User& u )
   }
 }
 
+bool Core::readAllMessagesInChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+  #ifdef BEEBEEP_DEBUG
+    qWarning() << "Invalid chat found in readAllMessagesInChat" << chat_id;
+  #endif
+    return false;
+  }
+
+  if( c.unreadMessages() > 0 )
+  {
+    c.readAllMessages();
+    ChatManager::instance().setChat( c );
+    // no updateChat signal emit (for now)
+    sendLocalUserHasReadChatMessage( c );
+    return true;
+  }
+  else
+    return false;
+}
+
+void Core::sendLocalUserHasReadChatMessage( const Chat& c )
+{
+  if( !isConnected() )
+    return;
+
+  Message m = Protocol::instance().chatReadMessage( c );
+  if( !m.isValid() )
+    return;
+
+  Connection* user_connection;
+  foreach( VNumber to_user_id, c.usersId() )
+  {
+    if( to_user_id == ID_LOCAL_USER )
+      continue;
+
+    user_connection = connection( to_user_id );
+    if( user_connection )
+    {
+      if( user_connection->protoVersion() > 62 )
+      {
+        user_connection->sendMessage( m );
+      }
+#ifdef BEEBEEP_DEBUG
+      else
+        qDebug() << "Unable to send read chat message to" << to_user_id << "because the user has an old protocol version" << user_connection->protoVersion();
+#endif
+    }
+  }
+}

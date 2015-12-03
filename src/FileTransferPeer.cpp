@@ -43,7 +43,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
 
 void FileTransferPeer::cancelTransfer()
 {
-  m_socket.abort();
+  m_socket.abortConnection();
   qDebug() << name() << "cancels the transfer";
   m_state = FileTransferPeer::Cancelled;
   closeAll();
@@ -57,8 +57,7 @@ void FileTransferPeer::closeAll()
   if( m_socket.isOpen() )
   {
     qDebug() << name() << "close socket with descriptor" << m_socket.socketDescriptor();
-    m_socket.flush();
-    m_socket.close();
+    m_socket.closeConnection();
   }
 
   if( m_file.isOpen() )

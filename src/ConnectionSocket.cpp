@@ -31,18 +31,59 @@ const int SECURE_LEVEL_2_PROTO_VERSION = 60;
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
-  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ), m_preventLoop( 0 ),
-    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" ), m_latestActivityDateTime()
+  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
+    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" ), m_latestActivityDateTime(),
+    m_timerTickId( 0 ), m_tickCounter( 0 )
 {
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
 }
 
+void ConnectionSocket::initSocket( qintptr socket_descriptor )
+{
+  setSocketDescriptor( socket_descriptor );
+  startTimerTick();
+}
+
 void ConnectionSocket::connectToNetworkAddress( const QHostAddress& host_address, int host_port )
 {
   m_hostAndPort = QString( "%1:%2" ).arg( host_address.toString() ).arg( host_port );
-  QTimer::singleShot( Settings::instance().connectionTimeout(), this, SLOT( checkConnectionTimeout() ) );
+  if( !startTimerTick() )
+    qWarning() << "Unable to start event timer for connection:" << m_hostAndPort;
   connectToHost( host_address, host_port );
+}
+
+bool ConnectionSocket::startTimerTick()
+{
+  stopTimerTick();
+  m_timerTickId = startTimer( TICK_INTERVAL );
+  return m_timerTickId != 0;
+}
+
+void ConnectionSocket::stopTimerTick()
+{
+  if( m_timerTickId != 0 )
+  {
+    killTimer( m_timerTickId );
+    m_timerTickId = 0;
+    m_tickCounter = 0;
+  }
+}
+
+void ConnectionSocket::abortConnection()
+{
+  stopTimerTick();
+  abort();
+}
+
+void ConnectionSocket::closeConnection()
+{
+  stopTimerTick();
+  if( isOpen() )
+  {
+    flushAll();
+    close();
+  }
 }
 
 const QByteArray& ConnectionSocket::cipherKey() const
@@ -119,8 +160,10 @@ void ConnectionSocket::readBlock()
   data_stream >> byte_array_read;
 
   if( byte_array_read.size() != (int)m_blockSize )
+  {
     qWarning() << "ConnectionSocket read an invalid block size from" << peerAddress().toString() << peerPort() << ":"
                << byte_array_read.size() << "bytes read and" << m_blockSize << "bytes aspected";
+  }
 
   m_blockSize = 0;
 
@@ -134,14 +177,17 @@ void ConnectionSocket::readBlock()
     checkHelloMessage( decrypted_byte_array );
   else
     emit dataReceived( decrypted_byte_array );
+}
 
-  if( bytesAvailable() && m_preventLoop < MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT )
+void ConnectionSocket::flushAll()
+{
+  int prevent_loop = 0;
+  while( bytesAvailable() && prevent_loop < (MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT * 10) )
   {
-    m_preventLoop++;
+    prevent_loop++;
     readBlock();
   }
-  else
-    m_preventLoop = 0;
+  flush();
 }
 
 QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
@@ -326,11 +372,12 @@ int ConnectionSocket::fileTransferBufferSize() const
   return m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( (int)65456, Settings::instance().fileTransferBufferSize() );
 }
 
-void ConnectionSocket::checkConnectionTimeout()
+void ConnectionSocket::checkConnectionTimeout( int ticks )
 {
-  if( !isConnecting() )
+  if( ticks < Settings::instance().tickIntervalConnectionTimeout() )
     return;
 
+  stopTimerTick();
   qDebug() << "Connection timeout for" << m_hostAndPort;
   disconnectFromHost();
   emit disconnected();
@@ -347,4 +394,40 @@ int ConnectionSocket::activityIdle() const
     return (int)idle_time;
   else
     return 2147483647;
+}
+
+void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
+{
+  if( timer_event->timerId() != m_timerTickId )
+  {
+    QTcpSocket::timerEvent( timer_event );
+    return;
+  }
+
+  m_tickCounter++;
+
+  if( isConnecting() )
+  {
+    checkConnectionTimeout( m_tickCounter );
+    return;
+  }
+
+  if( m_tickCounter > 31536000 )
+  {
+    // 1 year is passed ... it is time to close!
+    qWarning() << "A year in uptime is passed. It is time to close and restart connection" << m_hostAndPort;
+    emit abortRequest();
+    return;
+  }
+
+  if( activityIdle() > TICK_INTERVAL && bytesAvailable() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Bytes available in tick interval and read socket is forced for" << m_hostAndPort;
+#endif
+    readBlock();
+    return;
+  }
+
+  emit tickEvent( m_tickCounter );
 }

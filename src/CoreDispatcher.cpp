@@ -27,7 +27,7 @@
 #include "UserManager.h"
 
 
-void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
+Chat Core::findChatFromMessageData( VNumber from_user_id, const Message& m )
 {
   Chat c;
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
@@ -51,6 +51,13 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   }
   else
     c = ChatManager::instance().defaultChat();
+
+  return c;
+}
+
+void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
+{
+  Chat c = findChatFromMessageData( from_user_id, m );
 
   if( !c.isValid() )
   {
@@ -84,6 +91,24 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 #endif
   ChatManager::instance().setChat( c );
   emit chatMessage( c.id(), cm );
+}
+
+void Core::dispatchChatMessageReadReceived( VNumber from_user_id, const Message& m )
+{
+  Chat c = findChatFromMessageData( from_user_id, m );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat message read received from" << from_user_id;
+    return;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "User" << from_user_id << "has read messages inc chat" << c.name();
+#endif
+
+  c.setReadMessagesByUser( from_user_id );
+  ChatManager::instance().setChat( c );
+  emit chatReadByUser( c.id(), from_user_id );
 }
 
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt )

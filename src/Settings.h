@@ -102,7 +102,7 @@ public:
   inline int fileTransferConfirmTimeout() const;
   inline int fileTransferBufferSize() const;
   inline int trayMessageTimeout() const;
-  inline int connectionTimeout() const;
+  inline int tickIntervalConnectionTimeout() const;
   inline int tickIntervalCheckIdle() const;
   inline int tickIntervalCheckNetwork() const;
 
@@ -416,7 +416,7 @@ private:
   int m_fileTransferBufferSize;
   int m_trayMessageTimeout;
   int m_userAwayTimeout;
-  int m_connectionTimeout;
+  int m_tickIntervalConnectionTimeout;
   int m_tickIntervalCheckIdle;
   int m_tickIntervalCheckNetwork;
 
@@ -763,7 +763,7 @@ inline void Settings::setShortcuts( const QStringList& new_value ) { m_shortcuts
 inline const QStringList& Settings::shortcuts() const { return m_shortcuts; }
 inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_value; }
 inline bool Settings::useShortcuts() const { return m_useShortcuts; }
-inline int Settings::connectionTimeout() const { return m_connectionTimeout; }
+inline int Settings::tickIntervalConnectionTimeout() const { return m_tickIntervalConnectionTimeout; }
 inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
 inline bool Settings::useIPv6() const { return m_useIPv6; }
 inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }

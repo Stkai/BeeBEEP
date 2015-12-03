@@ -224,9 +224,8 @@ void Core::closeConnection( Connection *c )
   }
 
   c->disconnect();
-  c->closeConnection();
-  //do not delete the object. Can cause crash. See c->readblock( ... ) FIXME
-  //c->deleteLater();
+  c->abortConnection();
+  c->deleteLater();
 
   if( isConnected() && m_connections.isEmpty() )
     QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );

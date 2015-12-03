@@ -86,6 +86,7 @@ public:
   void clearMessagesInChat( VNumber );
   bool removeUserFromChat( const User&, VNumber );
   bool removeChat( VNumber );
+  bool readAllMessagesInChat( VNumber );
 
   /* CoreFileTransfer */
   bool sendFile( VNumber, const QString& file_path );
@@ -115,6 +116,7 @@ public slots:
 
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );
+  void chatReadByUser( VNumber chat_id, VNumber user_id );
   void fileDownloadRequest( const User&, const FileInfo& );
   void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
   void userIsWriting( const User& );
@@ -176,6 +178,7 @@ protected:
   void parseFileShareMessage( const User&, const Message& );
   void parseGroupMessage( const User&, const Message& );
   void parseFolderMessage( const User&, const Message& );
+  void parseChatReadMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserStatusChanged( const User& );
@@ -191,11 +194,14 @@ protected:
   void sendGroupChatRequestMessage( const Chat&, const UserList& );
   void sendGroupChatRefuseMessage( const Chat&, const UserList& );
   void checkGroupChatAfterUserReconnect( const User& );
+  void sendLocalUserHasReadChatMessage( const Chat& );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };
+  Chat findChatFromMessageData( VNumber from_user_id, const Message& );
   void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType, ChatMessage::Type );
-  void dispatchChatMessageReceived( VNumber from_user_id, const Message& m );
+  void dispatchChatMessageReceived( VNumber from_user_id, const Message& );
+  void dispatchChatMessageReadReceived( VNumber from_user_id, const Message& );
   void dispatchToAllChats( const ChatMessage& );
   void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );
   void dispatchToChat( const ChatMessage&, VNumber chat_id );

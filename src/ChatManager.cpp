@@ -76,7 +76,6 @@ Chat ChatManager::findGroupChatByPrivateId( const QString& chat_id ) const
   return Chat();
 }
 
-
 void ChatManager::setChat( const Chat& c )
 {
   QList<Chat>::iterator it = m_chats.begin();

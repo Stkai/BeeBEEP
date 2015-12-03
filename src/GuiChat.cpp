@@ -946,3 +946,10 @@ void GuiChat::updateActionsOnFocusChanged()
   mp_actCompleter->setEnabled( SpellChecker::instance().isValid() );
 #endif
 }
+
+void GuiChat::setChatReadByUser( VNumber user_id )
+{
+#ifdef BEEBEEP_DEBUG
+   qDebug() << "Chat" << m_chatId << m_chatName << "is read by user" << user_id;
+#endif
+}

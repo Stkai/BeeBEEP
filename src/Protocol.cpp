@@ -64,6 +64,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Share:  return "BEE-FSHR";
   case Message::Group:  return "BEE-GROU";
   case Message::Folder: return "BEE-FOLD";
+  case Message::Read:   return "BEE-READ";
   default:              return "BEE-BOOH";
   }
 }
@@ -80,6 +81,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::User;
   else if( msg_type == "BEE-CHAT")
     return Message::Chat;
+  else if( msg_type == "BEE-READ" )
+    return Message::Read;
   else if( msg_type == "BEE-CIAO")
     return Message::Hello;
   else if( msg_type == "BEE-SYST")
@@ -1126,6 +1129,33 @@ QString Protocol::chatMessageDataToString( const ChatMessageData& cmd )
   sl << (cmd.groupId().size() > 0 ? cmd.groupId() : "");
   sl << (cmd.groupName().size() > 0 ? cmd.groupName() : "");
   return sl.join( DATA_FIELD_SEPARATOR );
+}
+
+Message Protocol::chatMessage( const Chat& c, const QString& msg_txt )
+{
+  Message m( Message::Chat, newId(), msg_txt );
+  ChatMessageData cmd;
+  cmd.setTextColor( Settings::instance().chatFontColor() );
+  if( c.isGroup() )
+  {
+    m.addFlag( Message::GroupChat );
+    cmd.setGroupId( c.privateId() );
+  }
+  else
+  {
+    if( !c.isDefault() )
+      m.addFlag( Message::Private );
+  }
+
+  m.setData( Protocol::instance().chatMessageDataToString( cmd ) );
+  return m;
+}
+
+Message Protocol::chatReadMessage( const Chat& c )
+{
+  Message m = chatMessage( c, "" );
+  m.setType( Message::Read );
+  return m;
 }
 
 QString Protocol::fileInfoHash( const QFileInfo& file_info ) const

@@ -26,7 +26,8 @@
 
 Chat::Chat()
   : m_id( ID_INVALID ), m_name( "" ), m_usersId(), m_messages(),
-    m_lastMessageTimestamp(), m_unreadMessages( 0 ), m_privateId( "" )
+    m_lastMessageTimestamp(), m_unreadMessages( 0 ), m_privateId( "" ),
+    m_unreadMessageUsersId()
 {
 }
 
@@ -46,6 +47,7 @@ Chat& Chat::operator=( const Chat& c )
     m_lastMessageTimestamp = c.m_lastMessageTimestamp;
     m_unreadMessages = c.m_unreadMessages;
     m_privateId = c.m_privateId;
+    m_unreadMessageUsersId = c.m_unreadMessageUsersId;
   }
   return *this;
 }
@@ -130,4 +132,21 @@ int Chat::chatMessages() const
       chat_messages++;
   }
   return chat_messages;
+}
+
+void Chat::addMessage( const ChatMessage& cm )
+{
+  m_messages.append( cm );
+
+  if( cm.isFromLocalUser() && cm.type() == ChatMessage::Chat )
+  {
+    foreach( VNumber user_id, m_usersId )
+    {
+      if( user_id == ID_LOCAL_USER )
+        continue;
+
+      if( !m_unreadMessageUsersId.contains( user_id ) )
+        m_unreadMessageUsersId.append( user_id );
+    }
+  }
 }

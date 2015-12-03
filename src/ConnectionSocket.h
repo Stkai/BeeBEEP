@@ -36,6 +36,11 @@ public:
   explicit ConnectionSocket( QObject* parent = 0 );
 
   void connectToNetworkAddress( const QHostAddress&, int );
+  void initSocket( qintptr );
+
+  void flushAll();
+  void closeConnection();
+  void abortConnection();
 
   bool sendData( const QByteArray& );
 
@@ -51,17 +56,23 @@ public:
   inline const QDateTime& latestActivityDateTime() const;
   int activityIdle() const;
 
+  inline const QString& hostAndPort() const;
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const Message& );
   void abortRequest();
+  void tickEvent( int );
 
 protected slots:
   void readBlock();
   void sendQuestionHello();
-  void checkConnectionTimeout();
+  void checkConnectionTimeout( int );
+  void timerEvent( QTimerEvent* );
 
 protected:
+  bool startTimerTick();
+  void stopTimerTick();
   void sendAnswerHello();
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
@@ -74,13 +85,14 @@ private:
   bool m_isHelloSent;
   VNumber m_userId;
   int m_protoVersion;
-  int m_preventLoop;
   QByteArray m_cipherKey;
   QString m_publicKey1;
   QString m_publicKey2;
 
   QString m_hostAndPort;
   QDateTime m_latestActivityDateTime;
+  int m_timerTickId;
+  int m_tickCounter;
 
 };
 
@@ -92,5 +104,6 @@ inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
 inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::HostLookupState && state() <= QAbstractSocket::ConnectedState; }
 inline bool ConnectionSocket::isConnecting() const { return state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState; }
 inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { return m_latestActivityDateTime; }
+  inline const QString& ConnectionSocket::hostAndPort() const { return m_hostAndPort; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

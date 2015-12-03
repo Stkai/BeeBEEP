@@ -96,10 +96,10 @@ Settings::Settings()
   m_acceptConnectionsOnlyFromWorkgroups = false;
   m_maxUserStatusDescriptionInList = 10;
 
-  m_connectionTimeout = 5000;
+  m_tickIntervalConnectionTimeout = 6;
   m_useReturnToSendMessage = true;
   m_tickIntervalCheckIdle = 10;
-  m_tickIntervalCheckNetwork = 15;
+  m_tickIntervalCheckNetwork = 5;
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -752,7 +752,7 @@ void Settings::load()
 
   sets->beginGroup( "Misc" );
   m_tickIntervalCheckIdle = qMax( sets->value( "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
-  m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 7 );
+  m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 5 );
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
   m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
@@ -762,7 +762,7 @@ void Settings::load()
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
-  m_connectionTimeout = qMax( sets->value( "ConnectionTimeout", m_connectionTimeout ).toInt(), 1000 );
+  m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 3 );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -990,7 +990,7 @@ void Settings::save()
   sets->setValue( "ConnectionPingInterval", m_pingInterval );
   sets->setValue( "ConnectionActivityTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
-  sets->setValue( "ConnectionTimeout", m_connectionTimeout );
+  sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS

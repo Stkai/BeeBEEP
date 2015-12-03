@@ -56,10 +56,12 @@ public:
   inline void addUnreadMessage();
   inline void readAllMessages();
   inline const QList<ChatMessage> messages() const;
-  inline void addMessage( const ChatMessage& );
+  void addMessage( const ChatMessage& );
   void clearMessages();
   inline const QString& privateId() const;
   inline void setPrivateId( const QString& );
+  inline const QList<VNumber>& unreadMessageUsersId() const;
+  inline void setReadMessagesByUser( VNumber );
 
   bool isEmpty() const;
   bool isDefault() const;
@@ -75,6 +77,7 @@ private:
   QDateTime m_lastMessageTimestamp;
   int m_unreadMessages;
   QString m_privateId;
+  QList<VNumber> m_unreadMessageUsersId;
 
 };
 
@@ -90,17 +93,17 @@ inline void Chat::setName( const QString& new_value ) { m_name = new_value; }
 inline const QList<VNumber>& Chat::usersId() const { return m_usersId; }
 inline bool Chat::hasUser( VNumber user_id ) const { return m_usersId.contains( user_id ); }
 inline bool Chat::removeUser( VNumber user_id ) { return m_usersId.removeOne( user_id ); }
-inline bool Chat::isPrivateForUser( VNumber user_id ) const { return m_id != ID_DEFAULT_CHAT && m_usersId.size() == 2 && hasUser( user_id ); }
-inline bool Chat::isPrivate() const { return m_id != ID_DEFAULT_CHAT && m_usersId.size() == 2 && hasUser( ID_LOCAL_USER ); }
+inline bool Chat::isPrivateForUser( VNumber user_id ) const { return m_id != ID_DEFAULT_CHAT && !isGroup() && m_usersId.size() == 2 && hasUser( user_id ); }
+inline bool Chat::isPrivate() const { return m_id != ID_DEFAULT_CHAT && !isGroup() && m_usersId.size() == 2 && hasUser( ID_LOCAL_USER ); }
 inline const QDateTime& Chat::lastMessageTimestamp() const { return m_lastMessageTimestamp; }
 inline void Chat::setLastMessageTimestamp( const QDateTime& new_value ) { m_lastMessageTimestamp = new_value; }
 inline int Chat::unreadMessages() const { return m_unreadMessages; }
 inline void Chat::addUnreadMessage() { m_unreadMessages++; }
 inline void Chat::readAllMessages() { m_unreadMessages = 0; }
 inline const QList<ChatMessage> Chat::messages() const { return m_messages; }
-inline void Chat::addMessage( const ChatMessage& cm ) { m_messages.append( cm ); }
 inline const QString& Chat::privateId() const { return m_privateId; }
 inline void Chat::setPrivateId( const QString& new_value ) { m_privateId = new_value; }
 inline bool Chat::isGroup() const { return !m_privateId.isEmpty(); }
+inline void Chat::setReadMessagesByUser( VNumber user_id ) { m_unreadMessageUsersId.removeOne( user_id ); }
 
 #endif // BEEBEEP_CHAT_H

@@ -166,6 +166,7 @@ private slots:
   void selectDictionatyPath();
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
+  void onChatReadByUser( VNumber chat_id, VNumber user_id );
 
 protected:
   void keyPressEvent( QKeyEvent* );

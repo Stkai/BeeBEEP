@@ -56,6 +56,9 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::Chat:
     parseChatMessage( u, m );
     break;
+  case Message::Read:
+    parseChatReadMessage( u, m );
+    break;
   case Message::Group:
     parseGroupMessage( u, m );
     break;
@@ -332,4 +335,12 @@ void Core::parseFolderMessage( const User& u, const Message& m )
   }
   else
     qWarning() << "Invalid flag found in folder message (CoreParser)";
+}
+
+void Core::parseChatReadMessage( const User& u, const Message& m )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Message" << m.id() << "read from user" << u.path();
+#endif
+  dispatchChatMessageReadReceived( u.id(), m );
 }

@@ -113,6 +113,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
+  connect( mp_core, SIGNAL( chatReadByUser( VNumber, VNumber ) ), this, SLOT( onChatReadByUser( VNumber, VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -3330,31 +3331,6 @@ QWidget* GuiMain::activeChatWindow()
   return (QWidget*)this;
 }
 
-void GuiMain::readAllMessagesInChat( VNumber chat_id )
-{
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( !c.isValid() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qWarning() << "Invalid chat found in readAllMessagesInChat" << chat_id;
-#endif
-    return;
-  }
-
-  if( c.unreadMessages() > 0 )
-  {
-    c.readAllMessages();
-    ChatManager::instance().setChat( c );
-
-    mp_userList->setUnreadMessages( chat_id, 0 );
-    mp_chatList->updateChat( chat_id );
-    mp_groupList->updateChat( chat_id );
-    mp_trayIcon->setDefaultIcon();
-    mp_trayIcon->resetChatId();
-    statusBar()->clearMessage();
-  }
-}
-
 GuiChat* GuiMain::guiChat( VNumber chat_id )
 {
   if( mp_chat->chatId() == chat_id )
@@ -3587,5 +3563,25 @@ void GuiMain::onTickEvent( int ticks )
     BeeApplication* bee_app = (BeeApplication*)qApp;
     if( bee_app->idleTimeout() > 0 )
       QTimer::singleShot( 0, bee_app, SLOT( checkIdle() ) );
+  }
+}
+
+void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )
+{
+  GuiChat* gc = guiChat( chat_id );
+  if( gc )
+    gc->setChatReadByUser( user_id );
+}
+
+void GuiMain::readAllMessagesInChat( VNumber chat_id )
+{
+  if( mp_core->readAllMessagesInChat( chat_id ) )
+  {
+    mp_userList->setUnreadMessages( chat_id, 0 );
+    mp_chatList->updateChat( chat_id );
+    mp_groupList->updateChat( chat_id );
+    mp_trayIcon->setDefaultIcon();
+    mp_trayIcon->resetChatId();
+    statusBar()->clearMessage();
   }
 }

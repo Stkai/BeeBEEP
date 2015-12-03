@@ -60,7 +60,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   m_idleTimeout = 0;
   m_timer.setObjectName( "BeeMainTimer" );
-  m_timer.setInterval( 1000 );
+  m_timer.setInterval( TICK_INTERVAL );
   m_isInIdle = false;
   mp_localServer = 0;
   m_tickCounter = 0;

@@ -50,7 +50,8 @@ public:
   QByteArray helloMessage( const QString& cipher_key_tmp ) const;
   inline const QByteArray& writingMessage() const;
   inline Message systemMessage( const QString& ) const;
-  inline Message chatMessage( const QString& );
+  Message chatMessage( const Chat&, const QString& );
+  Message chatReadMessage( const Chat& );
   Message groupChatRequestMessage( const Chat&, const User& to_user );
   Message groupChatRefuseMessage( const Chat& );
   QStringList userPathsFromGroupRequestMessage( const Message& ) const;
@@ -152,7 +153,6 @@ inline VNumber Protocol::currentId() const { return m_id; }
 inline VNumber Protocol::newId() { return ++m_id; }
 inline int Protocol::messageMinimumSize() const { return 10; }
 inline const QByteArray& Protocol::writingMessage() const { return m_writingMessage; }
-inline Message Protocol::chatMessage( const QString& msg_txt ) { return Message( Message::Chat, newId(), msg_txt ); }
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
 inline const QByteArray& Protocol::fileShareListMessage() const { return m_fileShareListMessage; }
 inline const QByteArray& Protocol::fileShareRequestMessage() const { return m_fileShareRequestMessage; }
