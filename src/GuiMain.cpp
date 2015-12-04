@@ -69,6 +69,7 @@ GuiMain::GuiMain( QWidget *parent )
  : QMainWindow( parent ), m_floatingChats()
 {
   setObjectName( "GuiMainWindow" );
+
   mp_core = new Core( this );
 
   setWindowIcon( QIcon( ":/images/beebeep.png") );
@@ -401,6 +402,7 @@ void GuiMain::startStopCore()
 
 void GuiMain::forceShutdown()
 {
+  qDebug() << "Shutdown forced by user";
   m_forceShutdown = true;
   if( mp_core->isConnected() )
     mp_core->stop();
@@ -2618,13 +2620,6 @@ void GuiMain::loadSession()
   }
 }
 
-void GuiMain::saveSession()
-{
-  mp_core->saveUsersAndGroups();
-  SaveChatList scl;
-  scl.save();
-}
-
 void GuiMain::showSavedChatSelected( const QString& chat_name )
 {
   if( chat_name.isEmpty() )
@@ -3584,4 +3579,11 @@ void GuiMain::readAllMessagesInChat( VNumber chat_id )
     mp_trayIcon->resetChatId();
     statusBar()->clearMessage();
   }
+}
+
+void GuiMain::saveSession( QSessionManager& )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Session manager ask to save session";
+#endif
 }

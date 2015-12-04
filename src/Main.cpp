@@ -182,6 +182,7 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( aboutToQuit() ), &mw, SLOT( forceShutdown() ) );
   QObject::connect( &bee_app, SIGNAL( showUp() ), &mw, SLOT( showUp() ) );
   QObject::connect( &bee_app, SIGNAL( tickEvent( int ) ), &mw, SLOT( onTickEvent( int ) ) );
+  QObject::connect( &bee_app, SIGNAL( commitDataRequest( QSessionManager& ) ), &mw, SLOT( saveSession( QSessionManager& ) ), Qt::DirectConnection );
 
   if( !Settings::instance().guiGeometry().isEmpty() )
   {
@@ -221,9 +222,7 @@ int main( int argc, char *argv[] )
   /* Check Icon Provider */
   qDebug() << "IconProvider has load in cache" << GuiIconProvider::instance().cacheSize() << "icons";
 
-  /* Save session */
-  mw.saveSession();
-  Settings::instance().setShortcuts( ShortcutManager::instance().saveToStringList() );
+  /* Save final session */
   Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
   Settings::instance().loadRcFile();
   Settings::instance().save();

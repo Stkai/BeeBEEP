@@ -69,6 +69,7 @@ public slots:
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
+  void commitData( QSessionManager& );
 
   int idleTimeFromSystem();
   bool isScreenSaverRunning();

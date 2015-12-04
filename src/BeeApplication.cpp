@@ -44,7 +44,7 @@
 #endif
 
 #ifdef Q_OS_MAC
-#include <ApplicationServices/ApplicationServices.h>
+  #include <ApplicationServices/ApplicationServices.h>
 #endif
 
 
@@ -371,4 +371,11 @@ void BeeApplication::checkTick()
   }
   else
     emit tickEvent( m_tickCounter );
+}
+
+void BeeApplication::commitData( QSessionManager& )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Session manager ask to commit data";
+#endif
 }

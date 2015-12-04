@@ -164,11 +164,15 @@ bool SpellChecker::isGoodWord( const QString& word )
 QStringList SpellChecker::suggest( const QString& word )
 {
   QStringList suggest_list;
+
   if( !mp_hunspell )
   {
     qWarning() << "SpellChecker has not HUNSPELL instance";
     return suggest_list;
   }
+
+  if( word.isEmpty() )
+    return suggest_list;
 
   char **suggest_word_list;
   int num_suggestions = mp_hunspell->suggest( &suggest_word_list, mp_codec->fromUnicode( word ).constData() );

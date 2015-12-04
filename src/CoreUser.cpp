@@ -350,6 +350,7 @@ void Core::saveUsersAndGroups()
       save_data.append( Protocol::instance().saveGroup( g ) );
     }
   }
+
   Settings::instance().setGroupList( save_data );
 }
 

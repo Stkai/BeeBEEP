@@ -58,7 +58,6 @@ public:
   void checkWindowFlagsAndShow();
 
   void loadSession();
-  void saveSession();
 
 public slots:
   void startStopCore();
@@ -69,6 +68,7 @@ public slots:
   void showMessage( const QString&, int );
   void showUp();
   void onTickEvent( int );
+  void saveSession( QSessionManager& );
 
 private slots:
   void startCore();

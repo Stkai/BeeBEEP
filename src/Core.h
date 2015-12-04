@@ -87,6 +87,7 @@ public:
   bool removeUserFromChat( const User&, VNumber );
   bool removeChat( VNumber );
   bool readAllMessagesInChat( VNumber );
+  bool saveChatMessages();
 
   /* CoreFileTransfer */
   bool sendFile( VNumber, const QString& file_path );

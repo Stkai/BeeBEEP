@@ -83,12 +83,14 @@ bool Core::checkSavingPaths()
 
     settings_can_be_saved = false;
   }
+  else
+    qDebug() << "Settings will be saved in path:" << qPrintable( sets->fileName() );
 
   if( Settings::instance().chatAutoSave() )
   {
     if( !SaveChatList::canBeSaved() )
     {
-      qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save chat messages in path:" << sets->fileName();
+      qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save chat messages in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 User %2 cannot save chat messages in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
                                                                                 .arg( Settings::instance().localUser().accountName() )
@@ -97,7 +99,11 @@ bool Core::checkSavingPaths()
 
       chats_can_be_saved = false;
     }
+    else
+      qDebug() << "Chat messages will be saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
   }
+  else
+    qDebug() << "Save chat messages options is disabled";
 
   return settings_can_be_saved && chats_can_be_saved;
 }
@@ -259,6 +265,11 @@ void Core::stop()
                            .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
                            Settings::instance().programName() ), DispatchToAllChatsWithUser,
                            ChatMessage::Connection );
+
+  checkSavingPaths();
+  saveUsersAndGroups();
+  saveChatMessages();
+  Settings::instance().save();
 }
 
 bool Core::updateBroadcastAddresses()
@@ -420,12 +431,7 @@ void Core::checkNetworkInterface()
     foreach( Connection* c, m_connections )
     {
       if( c->isConnected() && c->activityIdle() < max_activity_idle )
-      {
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Network interface has activity idle" << c->activityIdle() << "ms <" << max_activity_idle << "ms from user" << c->userId();
-#endif
         return;
-      }
     }
   }
 
@@ -447,4 +453,24 @@ void Core::checkNetworkInterface()
     if( !isConnected() )
       emit networkInterfaceIsUp();
   }
+}
+
+bool Core::saveChatMessages()
+{
+  if( !Settings::instance().chatAutoSave() )
+  {
+    qDebug() << "Save chat messages option is disabled";
+    return false;
+  }
+
+  if( !SaveChatList::canBeSaved() )
+  {
+    qWarning() << "Chat messages can not be saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
+    return false;
+  }
+
+  SaveChatList scl;
+  scl.save();
+  qDebug() << "Chat messages are saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
+  return true;
 }
