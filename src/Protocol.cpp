@@ -163,13 +163,15 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
 
   m.setData( sl.takeFirst() );
 
-  m.setTimestamp( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
-  if( !m.timestamp().isValid() )
+  QDateTime dt_timestamp = QDateTime::fromString( sl.takeFirst(), Qt::ISODate );
+  if( !dt_timestamp.isValid() )
   {
     qWarning() << "Invalid message timestamp:" << message_data;
     m.setType( Message::Undefined );
     return m;
   }
+  else
+    m.setTimestamp( dt_timestamp.toLocalTime() ); // sometimes people in vpn are in different timezone
 
   QString msg_txt;
   if( sl.size() > 1 )
