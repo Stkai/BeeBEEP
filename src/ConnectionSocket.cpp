@@ -33,7 +33,7 @@ const int SECURE_LEVEL_2_PROTO_VERSION = 60;
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" ), m_latestActivityDateTime(),
-    m_timerTickId( 0 ), m_tickCounter( 0 )
+    m_timerTickId( 0 ), m_tickCounter( 0 ), m_isAborted( false )
 {
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
@@ -41,12 +41,14 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
 
 void ConnectionSocket::initSocket( qintptr socket_descriptor )
 {
+  m_isAborted = false;
   setSocketDescriptor( socket_descriptor );
   startTimerTick();
 }
 
 void ConnectionSocket::connectToNetworkAddress( const QHostAddress& host_address, int host_port )
 {
+  m_isAborted = false;
   m_hostAndPort = QString( "%1:%2" ).arg( host_address.toString() ).arg( host_port );
   if( !startTimerTick() )
     qWarning() << "Unable to start event timer for connection:" << m_hostAndPort;
@@ -72,12 +74,14 @@ void ConnectionSocket::stopTimerTick()
 
 void ConnectionSocket::abortConnection()
 {
+  m_isAborted = true;
   stopTimerTick();
   abort();
 }
 
 void ConnectionSocket::closeConnection()
 {
+  m_isAborted = true;
   stopTimerTick();
   if( isOpen() )
   {
@@ -177,6 +181,9 @@ void ConnectionSocket::readBlock()
     checkHelloMessage( decrypted_byte_array );
   else
     emit dataReceived( decrypted_byte_array );
+
+  if( isConnected() && !m_isAborted && bytesAvailable() )
+    QTimer::singleShot( 0, this, SLOT( readBlock() ) );
 }
 
 void ConnectionSocket::flushAll()
@@ -420,7 +427,7 @@ void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
     return;
   }
 
-  if( activityIdle() > TICK_INTERVAL && bytesAvailable() )
+  if( activityIdle() >= TICK_INTERVAL && bytesAvailable() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Bytes available in tick interval and read socket is forced for" << m_hostAndPort;

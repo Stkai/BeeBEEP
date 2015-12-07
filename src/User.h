@@ -68,6 +68,8 @@ public:
   inline bool isFavorite() const;
   inline void setQtVersion( const QString& );
   inline const QString& qtVersion() const;
+  inline void setProtocolVersion( int );
+  inline int protocolVersion() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -91,6 +93,7 @@ private:
   QString m_sessionId;
   bool m_isFavorite;
   QString m_qtVersion;
+  int m_protocolVersion;
 
 };
 
@@ -126,6 +129,8 @@ inline void User::setIsFavorite( bool new_value ) { m_isFavorite = new_value; }
 inline bool User::isFavorite() const { return m_isFavorite; }
 inline void User::setQtVersion( const QString& new_value ) { m_qtVersion = new_value; }
 inline const QString& User::qtVersion() const { return m_qtVersion; }
+inline void User::setProtocolVersion( int new_value ) { m_protocolVersion = new_value; }
+inline int User::protocolVersion() const { return m_protocolVersion; }
 inline QString User::path() const { return QString( "%1@%2:%3" ).arg( name().toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 inline QString User::accountPath() const { return QString( "%1@%2:%3" ).arg( m_accountName.toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
 inline QString User::hostAddressAndPort() const { return QString( "%1:%2" ).arg( m_hostAddress.toString(), QString::number( m_hostPort ) ); }

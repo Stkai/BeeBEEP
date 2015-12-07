@@ -363,11 +363,18 @@ void GuiChat::setChatUsers()
     mp_menuMembers->clear();
     QAction* act = 0;
     QStringList sl;
+    QString s_tmp = "";
     m_chatUsers.sort();
 
     foreach( User u, m_chatUsers.toList() )
     {
-      act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), u.isLocal() ? tr( "You" ) : u.name() );
+      if( u.isLocal() )
+        s_tmp = tr( "You" );
+      else if( c.userHasReadMessages( u.id() ) || u.protocolVersion() < 63 )
+        s_tmp = u.name();
+      else
+        s_tmp = QString( "%1 (%2)" ).arg( u.name() ).arg( tr( "unread messages" ) );
+      act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), s_tmp );
       act->setData( u.id() );
       act->setIconVisibleInMenu( true );
       if( u.isStatusConnected() && isActiveUser( c, u ) )
@@ -455,12 +462,6 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
 #endif
 
   QApplication::setOverrideCursor( Qt::WaitCursor );
-
-  if( c.unreadMessages() )
-  {
-    c.readAllMessages();
-    ChatManager::instance().setChat( c );
-  }
 
   m_chatId = c.id();
   m_chatName = c.name();
@@ -606,6 +607,9 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( show_timestamp_last_message )
     setLastMessageTimestamp( cm.timestamp() );
+
+  if( !cm.isFromSystem() && cm.isFromLocalUser() )
+    reloadChatUsers();
 }
 
 void GuiChat::setChatFont( const QFont& f )
@@ -952,4 +956,5 @@ void GuiChat::setChatReadByUser( VNumber user_id )
 #ifdef BEEBEEP_DEBUG
    qDebug() << "Chat" << m_chatId << m_chatName << "is read by user" << user_id;
 #endif
+   reloadChatUsers();
 }

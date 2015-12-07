@@ -1124,6 +1124,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Word completer</source>
         <translation>Completamento della parola</translation>
     </message>
+    <message>
+        <source>unread messages</source>
+        <translation>messaggi non letti</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>

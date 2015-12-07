@@ -33,6 +33,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
  : QMainWindow( parent )
 {
   setObjectName( "GuiFloatingChat" );
+  setMainIcon( false );
   mp_chat = new GuiChat( this );
   connect( mp_chat, SIGNAL( saveStateAndGeometryRequest() ), this, SLOT( saveGeometryAndState() ) );
 
@@ -170,6 +171,7 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
     m_prevActivatedState = true;
     mp_chat->updateActionsOnFocusChanged();
     emit readAllMessages( chatId() );
+    mp_chat->ensureFocusInChat();
     return;
   }
 
@@ -195,6 +197,7 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
       m_chatIsVisible = true;
       mp_chat->updateActionsOnFocusChanged();
       emit readAllMessages( chatId() );
+      mp_chat->ensureFocusInChat();
     }
     else
     {
@@ -231,4 +234,17 @@ void GuiFloatingChat::keyPressEvent( QKeyEvent* e )
   }
 
   QMainWindow::keyPressEvent( e );
+}
+
+void GuiFloatingChat::setMainIcon( bool with_message )
+{
+  if( with_message )
+    setWindowIcon( QIcon( ":/images/beebeep-message.png" ) );
+  else
+    setWindowIcon( QIcon( ":/images/beebeep.png" ) );
+}
+
+void GuiFloatingChat::showUp()
+{
+  raiseOnTop();
 }

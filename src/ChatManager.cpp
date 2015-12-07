@@ -103,6 +103,18 @@ int ChatManager::unreadMessages() const
   return unread_messages;
 }
 
+bool ChatManager::hasUnreadMessages() const
+{
+  QList<Chat>::const_iterator it = m_chats.begin();
+  while( it != m_chats.end() )
+  {
+    if( (*it).unreadMessages() > 0 )
+      return true;
+    ++it;
+  }
+  return false;
+}
+
 Chat ChatManager::firstChatWithUnreadMessages() const
 {
   bool default_chat_has_unread_messages = false;

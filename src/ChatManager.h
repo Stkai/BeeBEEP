@@ -48,6 +48,7 @@ public:
   bool hasName( const QString& ) const;
   int unreadMessages() const;
   bool isGroupChat( VNumber ) const;
+  bool hasUnreadMessages() const;
 
   QList<Chat> groupChatsForUser( VNumber ) const;
   bool userIsInGroupChat( VNumber ) const;

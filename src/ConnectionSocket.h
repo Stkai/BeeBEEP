@@ -93,6 +93,7 @@ private:
   QDateTime m_latestActivityDateTime;
   int m_timerTickId;
   int m_tickCounter;
+  bool m_isAborted;
 
 };
 

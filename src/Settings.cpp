@@ -135,6 +135,7 @@ void Settings::createLocalUser()
   if( m_localUser.name().isEmpty() )
     m_localUser.setName( sName );
   m_localUser.setQtVersion( qtMajorVersion() );
+  m_localUser.setProtocolVersion( protoVersion() );
   qDebug() << "User name:" << m_localUser.name();
   qDebug() << "System Account:" << m_localUser.accountName();
 }

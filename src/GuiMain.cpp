@@ -72,7 +72,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   mp_core = new Core( this );
 
-  setWindowIcon( QIcon( ":/images/beebeep.png") );
+  updateMainIcon();
   // Create a status bar before the actions and the menu
   (void) statusBar();
 
@@ -1526,7 +1526,10 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
       show_message_in_tray = false;
     }
     else
+    {
+      fl_chat->setMainIcon( true );
       QApplication::alert( fl_chat );
+    }
   }
   else
   {
@@ -1547,10 +1550,9 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
     mp_trayIcon->showNewMessageArrived( chat_id, msg );
   }
   else
-  {
-    mp_trayIcon->setDefaultIcon();
-    mp_trayIcon->resetChatId();
-  }
+    mp_trayIcon->setUnreadMessages( chat_id, 0 );
+
+  updateMainIcon();
 }
 
 bool GuiMain::chatIsVisible( VNumber chat_id )
@@ -2081,11 +2083,11 @@ void GuiMain::showChat( VNumber chat_id )
   if( mp_chat->setChatId( chat_id, false ) )
   {
     raiseChatView();
-    mp_userList->setUnreadMessages( chat_id, 0 );
     mp_userList->setChatOpened( chat_id );
-    mp_chatList->updateChat( chat_id );
-    mp_groupList->updateChat( chat_id );
+    readAllMessagesInChat( chat_id );
   }
+  else
+    raiseHomeView();
 }
 
 void GuiMain::changeVCard()
@@ -2278,8 +2280,7 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 #ifdef BEEBEEP_DEBUG
       qDebug() << "TrayIcon is activated with trigger click and main window will be showed";
 #endif
-      mp_trayIcon->setDefaultIcon();
-      QTimer::singleShot( 0, this, SLOT( showUp() ) );
+      trayMessageClicked();
     }
     else
     {
@@ -2303,16 +2304,17 @@ void GuiMain::trayMessageClicked()
   GuiFloatingChat* fl_chat = floatingChat( mp_trayIcon->chatId() );
   if( fl_chat )
   {
-    fl_chat->raiseOnTop();
+    QTimer::singleShot( 0, fl_chat, SLOT( showUp() ) );
   }
   else
   {
     showChat( mp_trayIcon->chatId() );
-    QTimer::singleShot( 0, this, SLOT( showUp() ) );
+    fl_chat = floatingChat( mp_trayIcon->chatId() );
+    if( fl_chat )
+      QTimer::singleShot( 0, fl_chat, SLOT( showUp() ) );
+    else
+      QTimer::singleShot( 0, this, SLOT( showUp() ) );
   }
-
-  mp_trayIcon->resetChatId();
-  mp_trayIcon->setDefaultIcon();
 }
 
 void GuiMain::addToShare( const QString& share_path )
@@ -3575,10 +3577,33 @@ void GuiMain::readAllMessagesInChat( VNumber chat_id )
     mp_userList->setUnreadMessages( chat_id, 0 );
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
-    mp_trayIcon->setDefaultIcon();
-    mp_trayIcon->resetChatId();
     statusBar()->clearMessage();
   }
+
+  GuiFloatingChat *fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    fl_chat->setMainIcon( false );
+
+  Chat c = ChatManager::instance().firstChatWithUnreadMessages();
+  if( c.isValid() )
+  {
+    mp_trayIcon->setUnreadMessages( c.id(), c.unreadMessages() );
+  }
+  else
+  {
+    mp_trayIcon->resetChatId();
+    mp_trayIcon->setDefaultIcon();
+  }
+
+  updateMainIcon();
+}
+
+void GuiMain::updateMainIcon()
+{
+  if( ChatManager::instance().hasUnreadMessages() )
+    setWindowIcon( QIcon( ":/images/beebeep-message.png" ) );
+  else
+    setWindowIcon( QIcon( ":/images/beebeep.png" ) );
 }
 
 void GuiMain::saveSession( QSessionManager& )

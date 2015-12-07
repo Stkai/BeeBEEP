@@ -310,6 +310,7 @@ void Core::checkUserAuthentication( const Message& m )
       u.setColor( ColorManager::instance().unselectedQString() );
   }
 
+  u.setProtocolVersion( c->protoVersion() );
   UserManager::instance().setUser( u );
   qDebug() << "User" << u.path() << "added with id" << u.id() << "and color" << u.color();
 

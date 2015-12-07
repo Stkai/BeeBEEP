@@ -184,6 +184,7 @@ protected:
   GuiChat* guiChat( VNumber );
 
 private:
+  void updateMainIcon();
   void setupChatConnections( GuiChat* );
   void createActions();
   void createMenus();

@@ -10,6 +10,7 @@ BeeBEEP 3.0.3
 - Chat with all users can be disabled in beebeep.rc (option)
 - Fixed enoticons compatibility issue between Qt4 and Qt5 version
 - Auto connection when network interface is up again
+- Application icon change if there are unread messages
 
 BeeBEEP 3.0.2
 - Fixed compatibility with Windows 10 with Qt 5.5 (it will become the default windows release)

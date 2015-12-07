@@ -41,6 +41,10 @@ public:
   void showUserWriting( VNumber, const QString& );
   void raiseOnTop();
   inline bool chatIsVisible() const;
+  void setMainIcon( bool with_message );
+
+public slots:
+  void showUp();
 
 signals:
   void attachChatRequest( VNumber );
