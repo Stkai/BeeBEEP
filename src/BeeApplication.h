@@ -26,7 +26,7 @@
 
 #include "Config.h"
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
 struct xcb_connection_t;
 struct xcb_screen_t;
 #endif
@@ -66,7 +66,6 @@ public slots:
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
-  void commitData( QSessionManager& );
 
   int idleTimeFromSystem();
   int idleTimeFromMac();
@@ -88,7 +87,7 @@ private:
   QLocalServer* mp_localServer;
   int m_jobsInProgress;
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
   xcb_connection_t* mp_xcbConnection;
   xcb_screen_t* mp_xcbScreen;
   bool m_xcbConnectHasError;

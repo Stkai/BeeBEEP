@@ -966,7 +966,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>(You have left)</source>
-        <translation>(Hai lasciato)</translation>
+        <translation type="vanished">(Hai lasciato)</translation>
     </message>
     <message>
         <source>You</source>

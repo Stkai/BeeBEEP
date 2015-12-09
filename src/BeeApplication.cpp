@@ -92,7 +92,7 @@ void BeeApplication::forceShutdown()
 
 void BeeApplication::quitAfterSignal( int sig )
 {
-  qWarning() << "Signal" << sig << "received. Quit and close.";
+  qWarning() << "Signal" << sig << "received by system";
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->forceShutdown();
 }
@@ -331,11 +331,4 @@ void BeeApplication::checkTick()
   }
   else
     emit tickEvent( m_tickCounter );
-}
-
-void BeeApplication::commitData( QSessionManager& )
-{
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Session manager ask to commit data";
-#endif
 }

@@ -11,6 +11,7 @@ BeeBEEP 3.0.3
 - Fixed enoticons compatibility issue between Qt4 and Qt5 version
 - Auto connection when network interface is up again
 - Application icon change if there are unread messages
+- Fixed saving bug on system session shutdown
 
 BeeBEEP 3.0.2
 - Fixed compatibility with Windows 10 with Qt 5.5 (it will become the default windows release)
