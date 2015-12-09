@@ -385,16 +385,7 @@ void GuiChat::setChatUsers()
       else
         act->setEnabled( false );
 
-      if( u.isLocal() )
-      {
-        if( !isActiveUser( c, u ) )
-          sl.append( tr( "(You have left)" ).toLower() );
-        else if( u.isStatusConnected() )
-          sl.append( QString( "<b>%1</b>" ).arg( tr( "You" ) ).toLower() );
-        else
-          sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
-      }
-      else
+      if( !u.isLocal() )
       {
         if( !chat_has_members )
           chat_has_members = true;

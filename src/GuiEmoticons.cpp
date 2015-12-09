@@ -76,15 +76,21 @@ void GuiEmoticons::initEmoticons( int current_index )
 
 void GuiEmoticons::updateEmoticons()
 {
-  QWidget* w;
-  int smiley_index = currentIndex();
-  for( int i = 0; i < count(); i++ )
+  int current_index = -1;
+
+  if( count() > 0 )
   {
-    w = widget( i );
-    w->deleteLater();
+    QWidget* w;
+    current_index = currentIndex();
+    for( int i = 0; i < count(); i++ )
+    {
+      w = widget( i );
+      w->deleteLater();
+    }
+    clear();
   }
-  clear();
-  initEmoticons( smiley_index );
+
+  initEmoticons( current_index );
 }
 
 void GuiEmoticons::setEmoticonToButton( const Emoticon& e, QPushButton* pb )

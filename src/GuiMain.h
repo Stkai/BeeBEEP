@@ -219,6 +219,7 @@ private:
   void setUserStatusSelected( int );
   void initShortcuts();
   void updateShortcuts();
+  void updateEmoticons();
 
 private:
   QStackedWidget* mp_stackedWidget;

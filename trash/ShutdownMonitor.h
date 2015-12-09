@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: ShutdownMonitor.h 561 2015-11-17 19:18:41Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 

@@ -24,17 +24,12 @@
 #ifndef BEEBEEP_APPLICATION_H
 #define BEEBEEP_APPLICATION_H
 
-#include <QApplication>
-#include <QDateTime>
-#include <QTimer>
-#include <QLocalServer>
+#include "Config.h"
 
 #ifdef Q_OS_UNIX
 struct xcb_connection_t;
 struct xcb_screen_t;
 #endif
-
-class ShutdownMonitor;
 
 
 class BeeApplication : public QApplication
@@ -72,6 +67,7 @@ protected:
   void commitData( QSessionManager& );
 
   int idleTimeFromSystem();
+  int idleTimeFromMac();
   bool isScreenSaverRunning();
   QString localServerName() const;
 
@@ -96,7 +92,6 @@ private:
   bool m_xcbConnectHasError;
 #endif
 
-  ShutdownMonitor *mp_shutdownMonitor;
   int m_tickCounter;
 
 };

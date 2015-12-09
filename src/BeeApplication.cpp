@@ -22,29 +22,16 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeApplication.h"
-#include "ShutdownMonitor.h"
-#include <QDebug>
-#include <QEvent>
-#include <QThread>
-#include <QRegExp>
-#include <QLocalSocket>
-
 #include <csignal>
-
 #ifdef Q_OS_WIN
-#include <windows.h>
+  #include <windows.h>
 #endif
-
 #ifdef Q_OS_LINUX
-// for check user inactivity time
-#include <xcb/xcb.h>
-#include <xcb/screensaver.h>
-// package libxcb-screensaver0-dev
-// package libx11-xcb-dev
-#endif
-
-#ifdef Q_OS_MAC
-  #include <ApplicationServices/ApplicationServices.h>
+  // for check user inactivity time
+  #include <xcb/xcb.h>
+  #include <xcb/screensaver.h>
+  // package libxcb-screensaver0-dev
+  // package libx11-xcb-dev
 #endif
 
 
@@ -85,12 +72,6 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   signal( SIGTERM, &quitAfterSignal );
   signal( SIGABRT, &quitAfterSignal );
 
-#if QT_VERSION >= 0x050000
-  mp_shutdownMonitor = new ShutdownMonitor;
-  installNativeEventFilter( mp_shutdownMonitor );
-#else
-  mp_shutdownMonitor = 0;
-#endif
 }
 
 BeeApplication::~BeeApplication()
@@ -99,14 +80,6 @@ BeeApplication::~BeeApplication()
   {
     mp_localServer->close();
     delete mp_localServer;
-  }
-
-  if( mp_shutdownMonitor )
-  {
-#if QT_VERSION >= 0x050000
-    removeNativeEventFilter( mp_shutdownMonitor );
-#endif
-    delete mp_shutdownMonitor;
   }
 }
 
@@ -253,26 +226,6 @@ int BeeApplication::idleTimeFromSystem()
 #endif
 
 #ifdef Q_OS_LINUX
-  /*
-  // gcc -o getIdleTime getIdleTime.c -lXss
-#include <X11/extensions/scrnsaver.h>
-#include <stdio.h>
-
-int main(void) {
-  Display *dpy = XOpenDisplay(NULL);
-
-  if (!dpy) {
-    return(1);
-  }
-
-  XScreenSaverInfo *info = XScreenSaverAllocInfo();
-  XScreenSaverQueryInfo(dpy, DefaultRootWindow(dpy), info);
-  printf("%u", info->idle);
-
-  return(0);
-}
-*/
-
   if( !m_xcbConnectHasError )
   {
     xcb_screensaver_query_info_cookie_t xcbCookie;
@@ -289,8 +242,7 @@ int main(void) {
 #endif
 
 #ifdef Q_OS_MAC
-  CFTimeInterval macx_idle_secs = CGEventSourceSecondsSinceLastEventType( kCGEventSourceStateHIDSystemState, kCGAnyInputEventType );
-  idle_time = static_cast<int>( qMax( 0.0, macx_idle_secs ) );
+  idle_time = idleTimeFromMac();
 #endif
 
   if( idle_time < 0 )

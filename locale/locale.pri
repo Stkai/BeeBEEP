@@ -6,6 +6,7 @@ DEPENDPATH += $$BEEBEEP_LOCALE_FOLDER
 BEEBEEP_TRANSLATIONS = $$BEEBEEP_LOCALE_FOLDER/beebeep_xx.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_it.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_de.ts \
+                $$BEEBEEP_LOCALE_FOLDER/beebeep_rs.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_ru.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_nb.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_nl.ts \

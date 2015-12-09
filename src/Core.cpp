@@ -245,6 +245,7 @@ bool Core::dnsMulticastingIsActive() const
 
 void Core::stop()
 {
+  qDebug() << "Closing core...";
   mp_broadcaster->stopBroadcasting();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -270,6 +271,7 @@ void Core::stop()
   saveUsersAndGroups();
   saveChatMessages();
   Settings::instance().save();
+  qDebug() << "Core closed";
 }
 
 bool Core::updateBroadcastAddresses()

@@ -35,11 +35,12 @@ class GuiEmoticons : public QTabWidget
 
 public:
   explicit GuiEmoticons( QWidget *parent = 0 );
-  void initEmoticons( int current_index = -1 );
-  void updateEmoticons();
 
 signals:
   void emoticonSelected( const Emoticon& );
+
+public slots:
+  void updateEmoticons();
 
 private slots:
   void emoticonClicked();
@@ -50,6 +51,7 @@ protected:
   void setRecentEmoticons( const QList<Emoticon>& );
   void setEmoticonToButton( const Emoticon&, QPushButton* );
   Emoticon emoticonFromObject( QObject* );
+  void initEmoticons( int );
 
 private:
   GuiEmoticonWidget* mp_recent;

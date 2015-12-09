@@ -402,7 +402,7 @@ void GuiMain::startStopCore()
 
 void GuiMain::forceShutdown()
 {
-  qDebug() << "Shutdown forced by user";
+  qDebug() << "Shutdown...";
   m_forceShutdown = true;
   if( mp_core->isConnected() )
     mp_core->stop();
@@ -1093,7 +1093,7 @@ void GuiMain::createDockWindows()
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
 
   mp_emoticonsWidget = new GuiEmoticons( this );
-  mp_emoticonsWidget->initEmoticons();
+  updateEmoticons();
   connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
   mp_dockEmoticons->setWidget( mp_emoticonsWidget );
 
@@ -1436,7 +1436,7 @@ void GuiMain::settingsChanged()
     break;
   case 31:
     Settings::instance().setUseNativeEmoticons( act->isChecked() );
-    mp_emoticonsWidget->updateEmoticons();
+    updateEmoticons();
     refresh_chat = true;
   case 32:
     Settings::instance().setSaveUserList( act->isChecked() );
@@ -3611,4 +3611,12 @@ void GuiMain::saveSession( QSessionManager& )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Session manager ask to save session";
 #endif
+  forceShutdown();
+}
+
+void GuiMain::updateEmoticons()
+{
+  QTimer::singleShot( 0, mp_emoticonsWidget, SLOT( updateEmoticons() ) );
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->updateEmoticon();
 }

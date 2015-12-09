@@ -339,9 +339,13 @@ void Core::saveUsersAndGroups()
       if( !u.isLocal() )
         save_data.append( Protocol::instance().saveUser( u ) );
     }
-    Settings::instance().setUserList( save_data );
-    save_data.clear();
   }
+
+  Settings::instance().setUserList( save_data );
+  qDebug() << save_data.size() << "users are now stored in settings";
+
+  if( !save_data.isEmpty() )
+    save_data.clear();
 
   if( !UserManager::instance().groups().isEmpty() )
   {
@@ -352,6 +356,7 @@ void Core::saveUsersAndGroups()
   }
 
   Settings::instance().setGroupList( save_data );
+  qDebug() << save_data.size() << "groups are now stored in settings";
 }
 
 void Core::toggleUserFavorite( VNumber user_id )

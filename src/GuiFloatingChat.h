@@ -45,6 +45,7 @@ public:
 
 public slots:
   void showUp();
+  void updateEmoticon();
 
 signals:
   void attachChatRequest( VNumber );

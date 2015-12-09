@@ -116,7 +116,6 @@ HEADERS += AudioManager.h \
   Rijndael.h \
   SaveChatList.h \
   ShortcutManager.h \
-  ShutdownMonitor.h \
   Settings.h \
   SpellChecker.h \
   SpellCheckerHighlighter.h \
@@ -135,6 +134,7 @@ HEADERS += AudioManager.h \
 SOURCES += AudioManager.cpp \
   Avatar.cpp \
   BeeApplication.cpp \
+  BeeApplication_mac.cpp \
   BeeUtils.cpp \
   Broadcaster.cpp \
   BuildFileShareList.cpp \
@@ -215,7 +215,6 @@ SOURCES += AudioManager.cpp \
   Rijndael.cpp \
   SaveChatList.cpp \
   ShortcutManager.cpp \
-  ShutdownMonitor.cpp \
   Settings.cpp \
   SpellChecker.cpp \
   SpellCheckerHighlighter.cpp \

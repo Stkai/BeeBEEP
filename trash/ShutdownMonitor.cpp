@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: ShutdownMonitor.cpp 561 2015-11-17 19:18:41Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -35,13 +35,20 @@ bool ShutdownMonitor::nativeEventFilter( const QByteArray& event_type, void* eve
   Q_UNUSED( event_type );
   MSG *pMsg = static_cast<MSG *>( event_message );
 
-  if( pMsg->message == WM_QUERYENDSESSION )
+  if( pMsg->message == WM_QUERYENDSESSION || pMsg->message == WM_ENDSESSION )
   {
-    qDebug() << "Windows Event END SESSION received. Quit and close";
-    qApp->quit();
-    *event_result = TRUE;
-    return true;
+    qDebug() << "Windows event END SESSION received";
+    if( pMsg->lParam == ENDSESSION_CLOSEAPP )
+    {
+      qDebug() << "Closing application...";
+      qApp->quit();
+      *event_result = TRUE;
+      return true;
+    }
   }
+
+  return false;
+
 #else
   Q_UNUSED( event_type );
   Q_UNUSED( event_message );

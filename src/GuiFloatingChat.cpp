@@ -48,7 +48,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
 
   mp_emoticonsWidget = new GuiEmoticons( this );
-  mp_emoticonsWidget->initEmoticons();
+  updateEmoticon();
   connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
   mp_dockEmoticons->setWidget( mp_emoticonsWidget );
 
@@ -247,4 +247,9 @@ void GuiFloatingChat::setMainIcon( bool with_message )
 void GuiFloatingChat::showUp()
 {
   raiseOnTop();
+}
+
+void GuiFloatingChat::updateEmoticon()
+{
+  QTimer::singleShot( 0, mp_emoticonsWidget, SLOT( updateEmoticons() ) );
 }
