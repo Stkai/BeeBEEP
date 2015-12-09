@@ -83,10 +83,18 @@ BeeApplication::~BeeApplication()
   }
 }
 
+void BeeApplication::forceShutdown()
+{
+  qDebug() << "Shutdown forced by user";
+  emit( shutdownRequest() );
+  quit();
+}
+
 void BeeApplication::quitAfterSignal( int sig )
 {
   qWarning() << "Signal" << sig << "received. Quit and close.";
-  qApp->quit();
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->forceShutdown();
 }
 
 void BeeApplication::init()
@@ -318,7 +326,7 @@ void BeeApplication::checkTick()
     // 1 year is passed ... it is time to close!
     qWarning() << "A year in uptime is passed. It is time to close and restart";
     m_timer.stop();
-    QTimer::singleShot( 0, this, SLOT( quit() ) );
+    QTimer::singleShot( 0, this, SLOT( forceShutdown() ) );
     return;
   }
   else

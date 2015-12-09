@@ -58,9 +58,11 @@ signals:
   void exitingFromIdle();
   void showUp();
   void tickEvent( int );
+  void shutdownRequest();
 
 public slots:
   void checkIdle();
+  void forceShutdown();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
