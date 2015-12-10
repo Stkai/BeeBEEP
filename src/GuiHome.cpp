@@ -49,6 +49,8 @@ GuiHome::GuiHome( QWidget* parent )
   connect( mp_pbOpenDefaultChat, SIGNAL( clicked() ), this, SLOT( openDefaultChat() ) );
   connect( mp_teSystem, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teSystem, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
+
+  mp_pbOpenDefaultChat->setEnabled( Settings::instance().chatWithAllUsersIsEnabled() );
 }
 
 void GuiHome::addSystemMessage( const ChatMessage& cm )

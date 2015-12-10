@@ -269,7 +269,6 @@ void Core::stop()
 
   checkSavingPaths();
   saveUsersAndGroups();
-  saveChatMessages();
   Settings::instance().save();
   qDebug() << "Core closed";
 }

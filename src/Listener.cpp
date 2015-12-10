@@ -33,6 +33,6 @@ Listener::Listener( QObject *parent )
 void Listener::incomingConnection( qintptr socketDescriptor )
 {
   Connection *connection = new Connection( this );
-  connection->setSocketDescriptor( socketDescriptor );
+  connection->initSocket( socketDescriptor );
   emit newConnection( connection );
 }

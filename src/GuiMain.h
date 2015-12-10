@@ -58,6 +58,7 @@ public:
   void checkWindowFlagsAndShow();
 
   void loadSession();
+  void saveChatMessagesOnExit();
 
 public slots:
   void startStopCore();
@@ -220,6 +221,7 @@ private:
   void initShortcuts();
   void updateShortcuts();
   void updateEmoticons();
+  void updateNewMessageAction();
 
 private:
   QStackedWidget* mp_stackedWidget;
@@ -277,6 +279,7 @@ private:
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
   QAction* mp_actViewHome;
+  QAction* mp_actViewNewMessage;
   QAction* mp_actBeepOnNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;

@@ -92,7 +92,7 @@ void FileTransferPeer::startConnection()
   if( m_socketDescriptor )
   {
     qDebug() << name() << "set socket descriptor" << m_socketDescriptor;
-    m_socket.setSocketDescriptor( m_socketDescriptor );
+    m_socket.initSocket( m_socketDescriptor );
   }
   else
   {

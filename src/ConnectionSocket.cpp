@@ -43,6 +43,7 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor )
 {
   m_isAborted = false;
   setSocketDescriptor( socket_descriptor );
+  m_hostAndPort = QString( "%1:%2" ).arg( peerAddress().toString() ).arg( peerPort() );
   startTimerTick();
 }
 
@@ -154,7 +155,7 @@ void ConnectionSocket::readBlock()
   }
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG )
-  qDebug() << "ConnectionSocket read from" << peerAddress().toString() << peerPort() << "the block size:" << m_blockSize;
+  qDebug() << "ConnectionSocket read from" << m_hostAndPort << "the block size:" << m_blockSize;
 #endif
 
   if( bytesAvailable() < m_blockSize )
@@ -165,7 +166,7 @@ void ConnectionSocket::readBlock()
 
   if( byte_array_read.size() != (int)m_blockSize )
   {
-    qWarning() << "ConnectionSocket read an invalid block size from" << peerAddress().toString() << peerPort() << ":"
+    qWarning() << "ConnectionSocket read an invalid block size from" << m_hostAndPort << ":"
                << byte_array_read.size() << "bytes read and" << m_blockSize << "bytes aspected";
   }
 
@@ -174,7 +175,7 @@ void ConnectionSocket::readBlock()
   QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey() );
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG )
-  qDebug() << "ConnectionSocket read from" << peerAddress().toString() << peerPort() << "the byte array:" << decrypted_byte_array;
+  qDebug() << "ConnectionSocket read from" << m_hostAndPort << "the byte array:" << decrypted_byte_array;
 #endif
 
   if( m_userId == ID_INVALID )
@@ -209,7 +210,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_32_LIMIT )
     {
-      qWarning() << "Unable to send a message to" << peerAddress() << peerPort() << "because exceeded the limit of 32bit block data... truncated to max size";
+      qWarning() << "Unable to send a message to" << m_hostAndPort << "because exceeded the limit of 32bit block data... truncated to max size";
       QByteArray bytes_to_send_truncated = bytes_to_send;
       bytes_to_send_truncated.truncate( DATA_BLOCK_SIZE_32_LIMIT );
       data_stream << bytes_to_send_truncated;
@@ -227,7 +228,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_16_LIMIT )
     {
-      qWarning() << "Unable to send a message to" << peerAddress() << peerPort() << "because exceeded the limit of 16bit block data... truncated to max size";
+      qWarning() << "Unable to send a message to" << m_hostAndPort << "because exceeded the limit of 16bit block data... truncated to max size";
       QByteArray bytes_to_send_truncated = bytes_to_send;
       bytes_to_send_truncated.truncate( DATA_BLOCK_SIZE_16_LIMIT );
       data_stream << bytes_to_send_truncated;
@@ -245,7 +246,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
 {
 #if defined( CONNECTION_SOCKET_IO_DEBUG )
-  qDebug() << "ConnectionSocket sends to" << peerAddress().toString() << peerPort() << "the following data:" << byte_array;
+  qDebug() << "ConnectionSocket sends to" << m_hostAndPort << "the following data:" << byte_array;
 #endif
 
   QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey() );
@@ -255,7 +256,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   if( write( data_serialized ) == data_serialized.size() )
   {
 #ifdef CONNECTION_SOCKET_IO_DEBUG
-    qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << peerAddress().toString() << peerPort();
+    qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << m_hostAndPort;
 #endif
     // send data is asynchronous and m_latestActivityDateTime is not set
     return true;
@@ -275,12 +276,12 @@ void ConnectionSocket::sendQuestionHello()
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
   {
-    qDebug() << "ConnectionSocket has sent question HELLO to" << peerAddress().toString() << peerPort();
+    qDebug() << "ConnectionSocket has sent question HELLO to" << m_hostAndPort;
     m_isHelloSent = true;
   }
   else
   {
-    qWarning() << "ConnectionSocket is unable to send question HELLO to" << peerAddress().toString() << peerPort();
+    qWarning() << "ConnectionSocket is unable to send question HELLO to" << m_hostAndPort;
     emit abortRequest();
   }
 }
@@ -293,12 +294,12 @@ void ConnectionSocket::sendAnswerHello()
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey2 ) ) )
   {
-    qDebug() << "ConnectionSocket has sent answer HELLO to" << peerAddress().toString() << peerPort();
+    qDebug() << "ConnectionSocket has sent answer HELLO to" << m_hostAndPort;
     m_isHelloSent = true;
   }
   else
   {
-    qWarning() << "ConnectionSocket is unable to send answer HELLO to" << peerAddress().toString() << peerPort();
+    qWarning() << "ConnectionSocket is unable to send answer HELLO to" << m_hostAndPort;
     emit abortRequest();
   }
 }
@@ -308,14 +309,14 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   Message m = Protocol::instance().toMessage( array_data );
   if( !m.isValid() )
   {
-    qWarning() << "ConnectionSocket has received an invalid HELLO from" << peerAddress().toString() << peerPort();
+    qWarning() << "ConnectionSocket has received an invalid HELLO from" << m_hostAndPort;
     emit abortRequest();
     return;
   }
 
   if( m.type() != Message::Hello )
   {
-    qWarning() << "ConnectionSocket is waiting for HELLO, but another message type" << m.type() << "is arrived from" << peerAddress().toString() << peerPort();
+    qWarning() << "ConnectionSocket is waiting for HELLO, but another message type" << m.type() << "is arrived from" << m_hostAndPort;
     emit abortRequest();
     return;
   }
@@ -324,12 +325,12 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   {
     if( !Protocol::instance().acceptConnectionFromWorkgroup( m ) )
     {
-      qWarning() << "ConnectionSocket drops user of external workgroup from" << peerAddress().toString() << peerPort();
+      qWarning() << "ConnectionSocket drops user of external workgroup from" << m_hostAndPort;
       emit abortRequest();
       return;
     }
     else
-      qDebug() << "ConnectionSocket has accepted user of your workgroup from" << peerAddress().toString() << peerPort();
+      qDebug() << "ConnectionSocket has accepted user of your workgroup from" << m_hostAndPort;
   }
 
   if( !m_isHelloSent )
@@ -340,15 +341,15 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
   if( m_protoVersion != Settings::instance().protoVersion() )
   {
-    qWarning() << "Protocol version from" << peerAddress().toString() << peerPort() << "is"
+    qWarning() << "Protocol version from" << m_hostAndPort << "is"
                << (m_protoVersion > Settings::instance().protoVersion() ? "newer" : "older") << "than yours";
     if( m_protoVersion > Settings::instance().protoVersion() )
     {
       m_protoVersion = Settings::instance().protoVersion();
-      qWarning() << "Your old protocol version" << m_protoVersion << "is used with" << peerAddress().toString() << peerPort();
+      qWarning() << "Your old protocol version" << m_protoVersion << "is used with" << m_hostAndPort;
     }
     else
-      qWarning() << "Old protocol version" << m_protoVersion << "is used with" << peerAddress().toString() << peerPort();
+      qWarning() << "Old protocol version" << m_protoVersion << "is used with" << m_hostAndPort;
   }
 
   if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
@@ -363,14 +364,14 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
         return;
       }
       else
-        qDebug() << "Encryption level 2 is activated with" << peerAddress().toString() << peerPort();
+        qDebug() << "Encryption level 2 is activated with" << m_hostAndPort;
 
     }
     else
-      qWarning() << "Remote host" << peerAddress().toString() << peerPort() << "has not shared a public key for encryption";
+      qWarning() << "Remote host" << m_hostAndPort << "has not shared a public key for encryption";
   }
 
-  qDebug() << "ConnectionSocket request an authentication for" << peerAddress().toString() << peerPort();
+  qDebug() << "ConnectionSocket request an authentication for" << m_hostAndPort;
   emit authenticationRequested( m );
 }
 

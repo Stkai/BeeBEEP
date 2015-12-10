@@ -3341,6 +3341,10 @@ il file %2 (%3)?</translation>
         <source>Unable to set dictionary: %1</source>
         <translation>Impossibile caricare il dizionario: %1</translation>
     </message>
+    <message>
+        <source>Show new message</source>
+        <translation>Mostra nuovi messaggi</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

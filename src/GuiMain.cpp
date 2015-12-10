@@ -169,6 +169,7 @@ GuiMain::GuiMain( QWidget *parent )
   initShortcuts();
   initGuiItems();
   updateShortcuts();
+  updateNewMessageAction();
 
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 
@@ -901,6 +902,8 @@ void GuiMain::createMenus()
   mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
   mp_actViewScreenShot = mp_menuView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
   mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
+  mp_actViewNewMessage = mp_menuView->addAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this, SLOT( showNextChat() ) );
+
 
   /* Plugins Menu */
   mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
@@ -1024,6 +1027,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewShareNetwork );
   mp_barMain->addAction( mp_actViewLog );
   mp_barMain->addAction( mp_actViewScreenShot );
+  mp_barMain->addAction( mp_actViewNewMessage );
 
 }
 
@@ -1608,6 +1612,8 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_chatList->updateChat( chat_id );
     mp_groupList->updateChat( chat_id );
   }
+
+  updateNewMessageAction();
 }
 
 void GuiMain::searchUsers()
@@ -3308,13 +3314,12 @@ void GuiMain::detachChat( VNumber chat_id )
   connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
   m_floatingChats.append( fl_chat );
 
+  readAllMessagesInChat( chat_id );
+
   fl_chat->checkWindowFlagsAndShow();
   fl_chat->guiChat()->updateShortcuts();
   fl_chat->guiChat()->ensureLastMessageVisible();
   fl_chat->guiChat()->ensureFocusInChat();
-
-  mp_chatList->updateChat( chat_id );
-  mp_groupList->updateChat( chat_id );
 }
 
 QWidget* GuiMain::activeChatWindow()
@@ -3596,6 +3601,7 @@ void GuiMain::readAllMessagesInChat( VNumber chat_id )
   }
 
   updateMainIcon();
+  updateNewMessageAction();
 }
 
 void GuiMain::updateMainIcon()
@@ -3619,4 +3625,18 @@ void GuiMain::updateEmoticons()
   QTimer::singleShot( 0, mp_emoticonsWidget, SLOT( updateEmoticons() ) );
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateEmoticon();
+}
+
+void GuiMain::saveChatMessagesOnExit()
+{
+  mp_core->saveChatMessages();
+}
+
+void GuiMain::updateNewMessageAction()
+{
+  QIcon new_message_icon( ":/images/beebeep-message.png" );
+  if( !ChatManager::instance().hasUnreadMessages() )
+    mp_actViewNewMessage->setIcon( Bee::convertToGrayScale( new_message_icon.pixmap( Settings::instance().mainBarIconSize() ) ) );
+  else
+    mp_actViewNewMessage->setIcon( new_message_icon );
 }

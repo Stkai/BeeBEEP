@@ -218,11 +218,13 @@ int main( int argc, char *argv[] )
 
   /* Event Loop */
   int iRet = bee_app.exec();
+  qDebug() << "Exit from the main event loop with code:" << iRet;
 
   /* Check Icon Provider */
   qDebug() << "IconProvider has load in cache" << GuiIconProvider::instance().cacheSize() << "icons";
 
   /* Save final session */
+  mw.saveChatMessagesOnExit();
   Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
   Settings::instance().loadRcFile();
   Settings::instance().save();

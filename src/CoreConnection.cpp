@@ -108,7 +108,7 @@ void Core::checkNewConnection( Connection *c )
   // It comes from Listener. If I want to prevent multiple users from single
   // ip, I can pass -1 to peer_port and check only host address
 
-  qDebug() << "New connection from" << c->peerAddress().toString() << c->peerPort();
+  qDebug() << "New connection from" << qPrintable( c->hostAndPort() );
 
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
   {
@@ -129,7 +129,7 @@ void Core::setupNewConnection( Connection *c )
 {
 #ifdef BEEBEEP_DEBUG
   if( !c->peerAddress().isNull() )
-    qDebug() << "Connecting SIGNAL/SLOT to connection from" << c->peerAddress().toString() << c->peerPort();
+    qDebug() << "Connecting SIGNAL/SLOT to connection from" << qPrintable( c->hostAndPort() );
 #endif
   connect( c, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( setConnectionError( QAbstractSocket::SocketError ) ) );
   connect( c, SIGNAL( disconnected() ), this, SLOT( setConnectionClosed() ) );
@@ -140,7 +140,7 @@ void Core::setupNewConnection( Connection *c )
 void Core::addConnectionReadyForUse( Connection* c )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "is ready for use";
+  qDebug() << "Connection from" << qPrintable( c->hostAndPort() ) << "is ready for use";
 #endif
   connect( c, SIGNAL( newMessage( VNumber, const Message& ) ), this, SLOT( parseMessage( VNumber, const Message& ) ) );
   m_connections.append( c );
@@ -153,12 +153,12 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   {
     if( c->userId() != ID_INVALID )
     {
-      qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has an error:" << c->errorString() << "-" << (int)se;
+      qWarning() << "Connection from" << qPrintable( c->hostAndPort() ) << "has an error:" << c->errorString() << "-" << (int)se;
     }
     else
     {
       if( !c->peerAddress().isNull() )
-        qWarning() << "Connection from" << c->peerAddress().toString() << c->peerPort() << "has refused connection:" << c->errorString() << "-" << (int)se;
+        qWarning() << "Connection from" << qPrintable( c->hostAndPort() ) << "has refused connection:" << c->errorString() << "-" << (int)se;
     }
     closeConnection( c );
   }
@@ -244,7 +244,7 @@ void Core::checkUserAuthentication( const Message& m )
   User u = Protocol::instance().createUser( m, c->peerAddress() );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to create a new user (invalid protocol or password) from the message arrived from:" << c->peerAddress().toString() << c->peerPort();
+    qWarning() << "Unable to create a new user (invalid protocol or password) from the message arrived from:" << qPrintable( c->hostAndPort() );
     closeConnection( c );
     return;
   }

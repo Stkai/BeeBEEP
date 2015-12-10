@@ -91,6 +91,11 @@ void Connection::setReadyForUse( VNumber user_id )
 void Connection::sendPing()
 {
   int activity_idle = activityIdle();
+
+#if defined( CONNECTION_PING_PONG_DEBUG )
+  qDebug() << "Connection" << qPrintable( hostAndPort() ) << "idle=" << activity_idle << "timeout=" << Settings::instance().pongTimeout();
+#endif
+
   if( activity_idle > Settings::instance().pongTimeout() )
   {
     qDebug() << "Connection timeout with" << activity_idle << "ms idle from"  << qPrintable( hostAndPort() );
@@ -102,7 +107,7 @@ void Connection::sendPing()
   if( activity_idle < (Settings::instance().pingInterval()-200) )
   {
 #if defined( CONNECTION_PING_PONG_DEBUG )
-    qDebug() << "Ping is not sent because activity idle is too short:" << activityIdle() << "<" << Settings::instance().pingInterval();
+    qDebug() << "Ping is not sent because connection" << qPrintable( hostAndPort() ) << "has activity idle too short:" << activity_idle << "<" << Settings::instance().pingInterval();
 #endif
     return;
   }

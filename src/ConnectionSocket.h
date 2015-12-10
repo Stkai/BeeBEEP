@@ -105,6 +105,6 @@ inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
 inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::HostLookupState && state() <= QAbstractSocket::ConnectedState; }
 inline bool ConnectionSocket::isConnecting() const { return state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState; }
 inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { return m_latestActivityDateTime; }
-  inline const QString& ConnectionSocket::hostAndPort() const { return m_hostAndPort; }
+inline const QString& ConnectionSocket::hostAndPort() const { return m_hostAndPort; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H
