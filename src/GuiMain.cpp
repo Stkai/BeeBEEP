@@ -169,7 +169,6 @@ GuiMain::GuiMain( QWidget *parent )
   initShortcuts();
   initGuiItems();
   updateShortcuts();
-  updateNewMessageAction();
 
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 
@@ -471,6 +470,7 @@ void GuiMain::initGuiItems()
   refreshUserList();
 
   updateStatusIcon();
+  updateNewMessageAction();
 
   refreshTitle( Settings::instance().localUser() );
 }
@@ -3544,10 +3544,16 @@ void GuiMain::selectDictionatyPath()
   Settings::instance().setDictionaryPath( dictionary_path );
 #ifdef BEEBEEP_USE_HUNSPELL
   if( SpellChecker::instance().setDictionary( dictionary_path ) )
-    showMessage( tr( "Dictionary selected: %1" ).arg( dictionary_path ), 3000 );
+    showMessage( tr( "Dictionary selected: %1" ).arg( dictionary_path ), 5000 );
   else
-    showMessage( tr( "Unable to set dictionary: %1" ).arg( dictionary_path ), 3000 );
+    showMessage( tr( "Unable to set dictionary: %1" ).arg( dictionary_path ), 5000 );
 #endif
+
+  // update spellchecker and wordcompleter actions
+  QList<GuiChat*> gui_chat_list = guiChatList();
+  foreach( GuiChat* gc, gui_chat_list )
+    gc->updateActionsOnFocusChanged();
+
 }
 
 void GuiMain::onNetworkInterfaceDown()
@@ -3636,6 +3642,10 @@ void GuiMain::saveSession( QSessionManager& )
 void GuiMain::updateEmoticons()
 {
   QTimer::singleShot( 0, mp_emoticonsWidget, SLOT( updateEmoticons() ) );
+
+  if( m_floatingChats.isEmpty() )
+    return;
+
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateEmoticon();
 }
@@ -3647,9 +3657,19 @@ void GuiMain::saveChatMessagesOnExit()
 
 void GuiMain::updateNewMessageAction()
 {
-  QIcon new_message_icon( ":/images/beebeep-message.png" );
-  if( !ChatManager::instance().hasUnreadMessages() )
-    mp_actViewNewMessage->setIcon( Bee::convertToGrayScale( new_message_icon.pixmap( Settings::instance().mainBarIconSize() ) ) );
-  else
-    mp_actViewNewMessage->setIcon( new_message_icon );
+  mp_actViewNewMessage->setEnabled( ChatManager::instance().hasUnreadMessages() );
+}
+
+QList<GuiChat*> GuiMain::guiChatList() const
+{
+  QList<GuiChat*> gui_chat_list;
+
+  gui_chat_list.append( mp_chat );
+  if( !m_floatingChats.isEmpty() )
+  {
+    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+      gui_chat_list.append( fl_chat->guiChat() );
+  }
+
+  return gui_chat_list;
 }

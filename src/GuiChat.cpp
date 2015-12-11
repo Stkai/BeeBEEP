@@ -872,7 +872,14 @@ void GuiChat::updateSpellCheckerToolTip()
 
 #ifdef BEEBEEP_USE_HUNSPELL
   if( !SpellChecker::instance().isValid() )
+  {
     tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
+    mp_actSpellChecker->setEnabled( false );
+  }
+  else
+    mp_actSpellChecker->setEnabled( true );
+#else
+  mp_actSpellChecker->setEnabled( false );
 #endif
 
   mp_actSpellChecker->setToolTip( tool_tip );
@@ -881,6 +888,7 @@ void GuiChat::updateSpellCheckerToolTip()
 void GuiChat::updateCompleterToolTip()
 {
   QString tool_tip = "";
+
   if( Settings::instance().useWordCompleter() )
     tool_tip = tr( "Word completer is enabled" );
   else
@@ -888,8 +896,16 @@ void GuiChat::updateCompleterToolTip()
 
 #ifdef BEEBEEP_USE_HUNSPELL
   if( !SpellChecker::instance().isValid() )
+  {
     tool_tip.append( QString( " (%1)" ).arg( tr( "There is not a valid dictionary" ) ) );
+    mp_actCompleter->setEnabled( false );
+  }
+  else
+    mp_actCompleter->setEnabled( true );
+#else
+  mp_actCompleter->setEnabled( false );
 #endif
+
   mp_actCompleter->setToolTip( tool_tip );
 }
 
@@ -930,10 +946,6 @@ void GuiChat::updateActionsOnFocusChanged()
   updateSpellCheckerToolTip();
   mp_actCompleter->setChecked( Settings::instance().useWordCompleter() );
   updateCompleterToolTip();
-#ifdef BEEBEEP_USE_HUNSPELL
-  mp_actSpellChecker->setEnabled( SpellChecker::instance().isValid() );
-  mp_actCompleter->setEnabled( SpellChecker::instance().isValid() );
-#endif
 }
 
 void GuiChat::setChatReadByUser( VNumber user_id )
@@ -945,3 +957,4 @@ void GuiChat::setChatReadByUser( VNumber user_id )
 #endif
    reloadChatUsers();
 }
+

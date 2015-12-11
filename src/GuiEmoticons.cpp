@@ -115,11 +115,12 @@ int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, const QLis
   int emoticon_size = Settings::instance().emoticonSizeInMenu();
   emoticon_widget->setEmoticonSize( emoticon_size );
   QFont f = emoticon_widget->font();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Use native emoticons for group" << group_name << "with starting font point size:" << f.pointSize();
-#endif
+
   if( Settings::instance().useNativeEmoticons() )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Use native emoticons for group" << group_name << "with starting font point size:" << f.pointSize();
+#endif
     Emoticon e_to_check = EmoticonManager::instance().emoticon( QString::fromUtf8( "✅" ) );
     if( e_to_check.isValid() )
     {
@@ -150,7 +151,8 @@ int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, const QLis
     emoticon_button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
     emoticon_button->setFixedSize( emoticon_widget->emoticonButtonSize() );
     emoticon_button->setStyleSheet( "QPushButton:hover{ background-color: #ffcf04; }");
-    emoticon_button->setFont( f );
+    if( Settings::instance().useNativeEmoticons() )
+      emoticon_button->setFont( f );
     setEmoticonToButton( e, emoticon_button );
     connect( emoticon_button, SIGNAL( clicked() ), this, SLOT( emoticonClicked() ) );
     button_list.append( emoticon_button );

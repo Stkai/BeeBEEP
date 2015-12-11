@@ -134,6 +134,11 @@ void ConnectionSocket::readBlock()
   else
     data_stream.setVersion( DATASTREAM_VERSION_1 );
 
+#ifdef BEEBEEP_DEBUG
+  if( isConnecting() )
+    qDebug() << "Connection" << m_hostAndPort << "use datastream version:" << data_stream.version();
+#endif
+
   if( m_blockSize == 0 )
   {
     if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )

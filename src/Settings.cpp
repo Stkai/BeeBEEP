@@ -748,7 +748,7 @@ void Settings::load()
   m_logToFile = sets->value( "LogToFile", false ).toBool();
   m_useSpellChecker = sets->value( "UseSpellChecker", false ).toBool();
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
-  m_dictionaryPath = sets->value( "DictionaryPath", resourceFolder() ).toString();
+  m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );

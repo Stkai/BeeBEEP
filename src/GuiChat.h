@@ -58,6 +58,7 @@ public:
 
   void setChatReadByUser( VNumber );
 
+
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );

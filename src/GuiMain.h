@@ -222,6 +222,7 @@ private:
   void updateShortcuts();
   void updateEmoticons();
   void updateNewMessageAction();
+  QList<GuiChat*> guiChatList() const;
 
 private:
   QStackedWidget* mp_stackedWidget;
