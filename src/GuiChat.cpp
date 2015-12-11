@@ -157,12 +157,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
   bar->addSeparator();
 
-  mp_actCreateGroupChat = bar->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createChatRequest() ) );
-  mp_actCreateGroupChat->setStatusTip( tr( "Create a chat with two or more users" ) );
   mp_actGroupWizard = bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
   mp_actGroupWizard->setStatusTip( tr( "Create a group from this chat" ) );
-  mp_actCreateGroup = bar->addAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this, SIGNAL( createGroupRequest() ) );
-  mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
   mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
@@ -177,10 +173,8 @@ void GuiChat::updateAction( bool is_connected, int connected_users )
 
   bool local_user_is_member = isActiveUser( c, Settings::instance().localUser() );
   bool is_group_chat = c.isGroup();
-  int user_in_list = UserManager::instance().userList().toList().size();
+
   mp_actSendFile->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
-  mp_actCreateGroup->setEnabled( is_connected && user_in_list > 1 );
-  mp_actCreateGroupChat->setEnabled( is_connected && user_in_list > 1 );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
   if( c.isDefault() )

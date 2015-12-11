@@ -982,11 +982,11 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Create group</source>
-        <translation>Crea gruppo</translation>
+        <translation type="vanished">Crea gruppo</translation>
     </message>
     <message>
         <source>Create a group with two or more users</source>
-        <translation>Crea un gruppo con due o più membri</translation>
+        <translation type="vanished">Crea un gruppo con due o più membri</translation>
     </message>
     <message>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
@@ -1070,11 +1070,11 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Create chat</source>
-        <translation>Crea una conversazione</translation>
+        <translation type="vanished">Crea una conversazione</translation>
     </message>
     <message>
         <source>Create a chat with two or more users</source>
-        <translation>Crea una conversazione con due o più utenti</translation>
+        <translation type="vanished">Crea una conversazione con due o più utenti</translation>
     </message>
     <message>
         <source>Edit group</source>
@@ -3344,6 +3344,22 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show new message</source>
         <translation>Mostra nuovi messaggi</translation>
+    </message>
+    <message>
+        <source>Create chat</source>
+        <translation>Crea una conversazione</translation>
+    </message>
+    <message>
+        <source>Create a chat with two or more users</source>
+        <translation>Crea una conversazione con due o più utenti</translation>
+    </message>
+    <message>
+        <source>Create group</source>
+        <translation>Crea gruppo</translation>
+    </message>
+    <message>
+        <source>Create a group with two or more users</source>
+        <translation>Crea un gruppo con due o più membri</translation>
     </message>
 </context>
 <context>

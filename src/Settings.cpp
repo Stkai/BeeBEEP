@@ -708,7 +708,7 @@ void Settings::load()
 #endif
   m_logPath = Bee::convertToNativeFolderSeparator( sets->value( "LogPath", dataFolder() ).toString() );
   m_pluginPath = Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() );
-  m_languagePath = Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", m_resourceFolder ).toString() );
+  m_languagePath = Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();

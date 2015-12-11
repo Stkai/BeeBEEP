@@ -284,6 +284,9 @@ private:
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
 
+  QAction* mp_actCreateGroup;
+  QAction* mp_actCreateGroupChat;
+
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
   QAction* mp_actPortBroadcast;

@@ -194,8 +194,6 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( gui_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
-  connect( gui_chat, SIGNAL( createChatRequest() ), this, SLOT( createChat() ) );
-  connect( gui_chat, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( gui_chat, SIGNAL( editGroupRequestFromChat( VNumber ) ), this, SLOT( editGroupFromChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
@@ -489,6 +487,9 @@ void GuiMain::checkViewActions()
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
   mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
 
+  mp_actCreateGroup->setEnabled( is_connected && connected_users > 1 );
+  mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
+
   if( mp_stackedWidget->currentWidget() == mp_chat )
   {
     mp_chat->updateAction( is_connected, connected_users );
@@ -585,6 +586,15 @@ void GuiMain::createActions()
   mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setStatusTip( tr( "Show the informations about %1" ).arg( Settings::instance().programName() ) );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
+
+  mp_actCreateGroupChat = new QAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this );
+  mp_actCreateGroupChat->setStatusTip( tr( "Create a chat with two or more users" ) );
+  connect( mp_actCreateGroupChat, SIGNAL( triggered() ), this, SLOT( createChat() ) );
+
+  mp_actCreateGroup = new QAction(  QIcon( ":/images/group-add.png" ), tr( "Create group" ), this );
+  mp_actCreateGroup->setStatusTip( tr( "Create a group with two or more users" ) );
+  connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SLOT( createGroup() ) );
+
 }
 
 void GuiMain::createMenus()
@@ -1015,6 +1025,10 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actViewNewMessage );
+  mp_barMain->addAction( mp_actCreateGroupChat );
+  mp_barMain->addAction( mp_actCreateGroup );
+  mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewGroups );
   mp_barMain->addAction( mp_actViewChats );
@@ -1027,7 +1041,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewShareNetwork );
   mp_barMain->addAction( mp_actViewLog );
   mp_barMain->addAction( mp_actViewScreenShot );
-  mp_barMain->addAction( mp_actViewNewMessage );
 
 }
 

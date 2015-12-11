@@ -29,9 +29,9 @@ const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
 const char* BEEBEEP_ORGANIZATION_DOMAIN = "beebeep.net";
 const char* BEEBEEP_DNS_RECORD = "_beebeep._tcp";
 #ifdef BEEBEEP_DEBUG
-const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
+  const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
 #else
-const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
+  const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
 #endif
 const char* BEEBEEP_PLUGIN_WEBSITE = "/download.php";
 const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";

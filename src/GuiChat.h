@@ -64,8 +64,6 @@ signals:
   void nextChat();
   void openUrl( const QUrl& );
   void sendFileFromChatRequest( VNumber, const QString& );
-  void createGroupRequest();
-  void createChatRequest();
   void createGroupFromChatRequest( VNumber );
   void editGroupRequestFromChat( VNumber );
   void chatToClear( VNumber );
@@ -136,8 +134,6 @@ private:
   QAction* mp_actGroupAdd;
   QAction* mp_actClear;
   QAction* mp_actLeave;
-  QAction* mp_actCreateGroup;
-  QAction* mp_actCreateGroupChat;
   QAction* mp_actSelectBackgroundColor;
   QAction* mp_actGroupWizard;
   QAction* mp_actSpellChecker;
