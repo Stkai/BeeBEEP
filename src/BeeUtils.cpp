@@ -413,7 +413,12 @@ QPixmap Bee::convertToGrayScale( const QPixmap& pix )
   }
 
   QPixmap ret_pix;
-  ret_pix.convertFromImage( img, Qt::MonoOnly );
+
+#if QT_VERSION < 0x040700
+  ret_pix = QPixmap::fromImage( img );
+#else
+  ret_pix.convertFromImage( img );
+#endif
   return ret_pix;
 }
 

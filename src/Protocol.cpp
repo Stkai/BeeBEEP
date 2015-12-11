@@ -338,7 +338,11 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
   if( sl.size() >= 6 )
   {
     QString user_color = sl.at( 5 );
+#if QT_VERSION >= 0x040700
     if( user_color != QString( "#000000" ) && QColor::isValidColor( user_color ) )
+#else
+    if( user_color != QString( "#000000" ) && QColor( user_color ).isValid() )
+#endif
       u->setColor( user_color );
   }
 

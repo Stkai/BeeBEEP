@@ -42,10 +42,17 @@
 typedef quint64 VNumber;
 typedef quint64 FileSizeType;
 
-// General
-#define DATASTREAM_VERSION_1 QDataStream::Qt_4_0
-#define DATASTREAM_VERSION_2 QDataStream::Qt_4_8
-#define LAST_DATASTREAM_VERSION DATASTREAM_VERSION_2
+// Datastream QDataStream::Qt_4_0 = 7
+#define DATASTREAM_VERSION_1 7
+
+// Datastream QDataStream::Qt_4_8 = QDataStream::Qt_4_6 = 12
+#define DATASTREAM_VERSION_2 12
+
+#if QT_VERSION < 0x040600
+  #define LAST_DATASTREAM_VERSION DATASTREAM_VERSION_1
+#else
+  #define LAST_DATASTREAM_VERSION DATASTREAM_VERSION_2
+#endif
 
 // Broadcast
 const int DEFAULT_BROADCAST_PORT = 36475;

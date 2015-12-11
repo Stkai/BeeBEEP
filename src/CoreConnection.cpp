@@ -302,7 +302,11 @@ void Core::checkUserAuthentication( const Message& m )
     qDebug() << "New user is connected from" << u.path();
   }
 
+#if QT_VERSION < 0x040700
+  if( u.color() == QString( "#000000" ) || !QColor( u.color() ).isValid() )
+#else
   if( u.color() == QString( "#000000" ) || !QColor::isValidColor( u.color() ) )
+#endif
   {
     if( user_found.isValid() && user_found.color() != QString( "#000000" ) )
       u.setColor( user_found.color() );

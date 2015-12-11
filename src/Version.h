@@ -42,7 +42,7 @@ const char* BEEBEEP_PAGE_ON_FACEBOOK = "https://www.facebook.com/beebeeplanmesse
 const char* BEEBEEP_VERSION = "3.0.3";
 const int BEEBEEP_PROTO_VERSION = 63;
 const int BEEBEEP_SETTINGS_VERSION = 5;
-const int BEEBEEP_BUILD = 608;
+const int BEEBEEP_BUILD = 610;
 
 #endif // BEEBEEP_VERSION_H
 

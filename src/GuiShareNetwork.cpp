@@ -70,7 +70,9 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_leFilter = new QLineEdit( bar );
   mp_leFilter->setObjectName( "GuiLineEditFilter" );
   mp_leFilter->setMaximumWidth( 140 );
+#if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "Search" ) );
+#endif
   bar->addWidget( mp_leFilter );
   connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterByText( const QString& ) ) );
 

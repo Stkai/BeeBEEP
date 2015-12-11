@@ -51,7 +51,9 @@ GuiUserList::GuiUserList( QWidget* parent )
   m_filter = "";
   m_blockShowChatRequest = false;
 
+#if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "Search" ) );
+#endif
 
   mp_twUsers->setHeaderHidden( true );
   resetList();

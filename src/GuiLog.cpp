@@ -73,7 +73,9 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_leFilter = new QLineEdit( bar );
   mp_leFilter->setObjectName( "GuiLineEditFilterLog" );
   mp_leFilter->setMaximumWidth( 140 );
+#if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "keyword" ) );
+#endif
   bar->addWidget( mp_leFilter );
   connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( findTextInLog() ) );
 
