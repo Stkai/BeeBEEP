@@ -32,6 +32,7 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiScreenShot" );
   mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Make a Screenshot" ) ) );
+  mp_labelScreenShot->setScaledContents( true );
 }
 
 void GuiScreenShot::setupToolBar( QToolBar* bar )
@@ -63,11 +64,11 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
 #if QT_VERSION < 0x050000
   mp_cbRetina = new QCheckBox( this );
   mp_cbRetina->setObjectName( "mp_cbRetina" );
-#ifdef Q_OS_MAC
-  mp_cbRetina->setChecked( true );
-#else
-  mp_cbRetina->setChecked( false );
-#endif
+  #ifdef Q_OS_MAC
+    mp_cbRetina->setChecked( true );
+  #else
+    mp_cbRetina->setChecked( false );
+  #endif
   mp_cbRetina->setText( tr( "Enable high dpi" ) + QString( "   " ) );
   mp_cbRetina->setToolTip( tr( "Enable high dpi support to manage, for example, Apple Retina display" ) );
   bar->addWidget( mp_cbRetina );
@@ -110,6 +111,7 @@ void GuiScreenShot::updateScreenShot()
   else
   {
     mp_labelScreenShot->setPixmap( m_screenShot.scaled( mp_labelScreenShot->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
+    mp_labelScreenShot->setPixmap( m_screenShot );
     mp_actSave->setEnabled( true );
     mp_actSend->setEnabled( true );
     mp_actDelete->setEnabled( true );
@@ -136,19 +138,30 @@ void GuiScreenShot::captureScreen()
 {
   m_screenShot = QPixmap(); // clear image for low memory situations on embedded devices.
 
+  qreal device_pixel_ratio;
+
 #if QT_VERSION >= 0x050000
-  QScreen *screen = QGuiApplication::primaryScreen();
-  if( screen )
-    m_screenShot = screen->grabWindow( 0 );
+  device_pixel_ratio = qApp->devicePixelRatio();
 #else
   if( mp_cbRetina->isChecked() )
-    m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0, QApplication::desktop()->width() * 2, QApplication::desktop()->height() * 2  );
+    device_pixel_ratio = 2.0;
   else
-    m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId() );
+    device_pixel_ratio = 1.0;
+#endif
+
+#if QT_VERSION >= 0x050000
+  QScreen* primary_screen = QApplication::primaryScreen();
+  if( primary_screen )
+    m_screenShot = primary_screen->grabWindow( 0 );
+  m_screenShot.setDevicePixelRatio( device_pixel_ratio );
+#else
+  m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0,
+                                      QApplication::desktop()->width() * device_pixel_ratio,
+                                      QApplication::desktop()->height() * device_pixel_ratio );
 #endif
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Screenshot width" << m_screenShot.width() << "height" << m_screenShot.height();
+  qDebug() << "Screenshot width" << m_screenShot.width() << "height" << m_screenShot.height() << "and ratio" << device_pixel_ratio;
 #endif
 
   updateScreenShot();
