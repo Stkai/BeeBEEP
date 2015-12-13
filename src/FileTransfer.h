@@ -66,7 +66,7 @@ protected:
   int activeDownloads() const;
 
   FileInfo fileInfo( VNumber ) const;
-  FileInfo fileInfo( const QString& file_absolute_path ) const;
+  FileInfo fileInfoFromPath( const QString& ) const;
   FileTransferPeer* nextDownloadInQueue() const;
   int downloadsInQueue() const;
 

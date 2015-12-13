@@ -96,7 +96,7 @@ FileInfo FileTransfer::fileInfo( VNumber file_id ) const
   return FileInfo();
 }
 
-FileInfo FileTransfer::fileInfo( const QString& file_absolute_path ) const
+FileInfo FileTransfer::fileInfoFromPath( const QString& file_absolute_path ) const
 {
   QList<FileInfo>::const_iterator it = m_files.begin();
   while( it != m_files.end() )
@@ -123,9 +123,16 @@ void FileTransfer::removeFile( const QFileInfo& fi )
 
 FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder )
 {
-  FileInfo file_info = fileInfo( fi.absoluteFilePath() );
+  FileInfo file_info = fileInfoFromPath( fi.absoluteFilePath() );
   if( file_info.isValid() )
-    return file_info;
+  {
+    QString file_hash = Protocol::instance().fileInfoHash( fi );
+    if( file_info.fileHash() == file_hash )
+      return file_info;
+    else
+      removeFile( fi );
+  }
+
   file_info = Protocol::instance().fileInfo( fi, share_folder );
   file_info.setHostAddress( Settings::instance().localUser().hostAddress() );
   file_info.setHostPort( serverPort() );
