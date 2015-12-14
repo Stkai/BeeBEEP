@@ -25,9 +25,7 @@
 #include "Protocol.h"
 #include "Settings.h"
 
-
 #undef CONNECTION_SOCKET_IO_DEBUG
-const int SECURE_LEVEL_2_PROTO_VERSION = 60;
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )

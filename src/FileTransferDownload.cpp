@@ -38,10 +38,13 @@ void FileTransferPeer::sendDownloadRequest()
   qDebug() << name() << "sending file request:" << m_fileInfo.id() << m_fileInfo.password();
   if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
   {
-    if( m_socket.protoVersion() < 63 )
+    if( m_socket.protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
+    {
       m_state = FileTransferPeer::Transferring;
+      qWarning() << name() << "using an old file download protocol version" << m_socket.protoVersion();
+    }
     else
-      m_state = FileTransferPeer::FileSizeHeader;
+      m_state = FileTransferPeer::FileHeader;
   }
   else
     cancelTransfer();
@@ -66,17 +69,18 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     return;
   }
 
-  if( m_state == FileTransferPeer::FileSizeHeader )
+  if( m_state == FileTransferPeer::FileHeader )
   {
-    bool ok = false;
-    FileSizeType new_file_size = byte_array.toULongLong( &ok );
-    if( !ok )
+    Message file_header_message = Protocol::instance().toMessage( byte_array );
+    if( !file_header_message.isValid() )
     {
-      setError( tr( "invalid file size" ) );
+      setError( tr( "invalid file header" ) );
       return;
     }
 
-    m_fileInfo.setSize( new_file_size );
+    FileInfo file_header = Protocol::instance().fileInfoFromMessage( file_header_message );
+
+    m_fileInfo.setSize( file_header.size() );
     m_state = FileTransferPeer::Transferring;
     m_bytesTransferred = 0;
     sendTransferData();

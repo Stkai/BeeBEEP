@@ -35,7 +35,7 @@ class FileTransferPeer : public QObject
 
 public:
   enum TransferType { Download, Upload };
-  enum TransferState { Unknown, Queue, Starting, Request, FileSizeHeader, Transferring, Completed, Error, Cancelled };
+  enum TransferState { Unknown, Queue, Starting, Request, FileHeader, Transferring, Completed, Error, Cancelled };
 
   explicit FileTransferPeer( QObject *parent = 0 );
 
@@ -91,14 +91,13 @@ protected:
   void checkUploadData( const QByteArray& );
   void checkUploadRequest( const QByteArray& );
   void checkUploading( const QByteArray& );
-  void sendFileSizeHeader();
+  void sendFileHeader();
 
   /* FileTransferDownload */
   void sendDownloadData();
   void checkDownloadData( const QByteArray& );
   void sendDownloadRequest();
   void sendDownloadDataConfirmation();
-  void checkFileSizeHeader( const QByteArray& );
 
 protected:
   TransferType m_transferType;
