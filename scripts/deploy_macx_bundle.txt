@@ -29,10 +29,10 @@ SOURCE_DIR=".."
 echo "Source folder:" $SOURCE_DIR
 
 BUNDLE_APP="BeeBEEP.app"
-BUNDLE_FOLDER="../packages/${BUNDLE_APP}"
+BUNDLE_FOLDER="${BUNDLE_APP}"
 echo "Bundle folder:" $BUNDLE_FOLDER
 
-BUNDLE_DMG="..packages/BeeBEEP.dmg"
+BUNDLE_DMG="BeeBEEP.dmg"
 echo "Bundle:" $BUNDLE_DMG
 
 MACDEPLOY_APP=../../Qt/5.5/clang_64/bin/macdeployqt
@@ -50,7 +50,7 @@ echo "Done"
 
 #copy beebeep.app from release
 printf "Copy beebeep.app ... "
-cp -R $SOURCE_DIR/test/$BUNDLE_APP ../packages/.
+cp -R $SOURCE_DIR/test/$BUNDLE_APP .
 echo "Done"
 
 #clean up
@@ -106,7 +106,7 @@ $MACDEPLOY_APP $BUNDLE_FOLDER -dmg
 echo "Done"
 
 printf "Renaming DMG with version ${BEEBEEP_VERSION}"
-cp ../packages/BeeBEEP.dmg ../packages/beebeep-${BEEBEEP_VERSION}.dmg
+cp BeeBEEP.dmg beebeep-${BEEBEEP_VERSION}.dmg
 echo "Done"
 
 echo "BeeBEEP to Bundle - Process completed."

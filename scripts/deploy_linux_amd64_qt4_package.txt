@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This file is part of BeeBEEP.
 #
@@ -24,4 +24,4 @@
 BEEBEEP_QT_VERSION=qt4
 BEEBEEP_ARCH_TYPE=amd64
 
-source inc_linux_package.txt
+. ./inc_linux_package.txt

@@ -23,7 +23,7 @@
 
 BEEBEEP_VERSION="3.0.3"
 BASE_FOLDER=".."
-RELEASE_FOLDER="../packages/beebeep-${BEEBEEP_VERSION}-${BEEBEEP_QT_VERSION}-${BEEBEEP_ARCH_TYPE}"
+RELEASE_FOLDER="beebeep-${BEEBEEP_VERSION}-${BEEBEEP_QT_VERSION}-${BEEBEEP_ARCH_TYPE}"
 
 echo "Cleaning previous packages with the same name..."
 rm -rf $RELEASE_FOLDER
