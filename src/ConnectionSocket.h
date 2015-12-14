@@ -54,7 +54,7 @@ public:
   inline bool isConnecting() const;
 
   inline const QDateTime& latestActivityDateTime() const;
-  int activityIdle() const;
+  int activityIdle() const; // ms idle
 
   inline const QString& hostAndPort() const;
 

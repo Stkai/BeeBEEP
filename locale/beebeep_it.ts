@@ -675,6 +675,14 @@
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
         <translation>%1 bytes caricati ma la dimensione del file è di soli %2 bytes</translation>
     </message>
+    <message>
+        <source>invalid file size</source>
+        <translation>dimensione del file non valida</translation>
+    </message>
+    <message>
+        <source>unable to send file header</source>
+        <translation>impossibile inizializzare l&apos;invio del file</translation>
+    </message>
 </context>
 <context>
     <name>GTalkService</name>

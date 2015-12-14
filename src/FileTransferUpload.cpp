@@ -69,8 +69,33 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setFileInfo( fi );
   qDebug() << name() << "starts uploading" << fi.path();
+  if( m_socket.protoVersion() < 63 )
+  {
+    m_state = FileTransferPeer::Transferring;
+    sendUploadData();
+  }
+  else
+  {
+    m_state = FileTransferPeer::FileSizeHeader;
+    sendFileSizeHeader();
+  }
+}
+
+void FileTransferPeer::sendFileSizeHeader()
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << name() << "sends File Size Header for" << m_fileInfo.path();
+#endif
+  m_bytesTransferred = 0;
   m_state = FileTransferPeer::Transferring;
-  sendUploadData();
+
+  QFileInfo file_info_now_in_system( m_fileInfo.path() );
+  if( file_info_now_in_system.exists() )
+    m_fileInfo.setSize( file_info_now_in_system.size() );
+
+  QByteArray file_size_header = QString::number( m_fileInfo.size() ).toLatin1();
+  if( !m_socket.sendData( file_size_header ) )
+    setError( tr( "unable to send file header" ) );
 }
 
 void FileTransferPeer::checkUploading( const QByteArray& byte_array )

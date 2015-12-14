@@ -37,7 +37,12 @@ void FileTransferPeer::sendDownloadRequest()
 {
   qDebug() << name() << "sending file request:" << m_fileInfo.id() << m_fileInfo.password();
   if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
-    m_state = FileTransferPeer::Transferring;
+  {
+    if( m_socket.protoVersion() < 63 )
+      m_state = FileTransferPeer::Transferring;
+    else
+      m_state = FileTransferPeer::FileSizeHeader;
+  }
   else
     cancelTransfer();
 }
@@ -57,6 +62,23 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
   {
     // after the authentication we receive "HELLO" from the other peer. Otherwise the connection is aborted.
     // Skip HELLO, but we will send file request;
+    sendTransferData();
+    return;
+  }
+
+  if( m_state == FileTransferPeer::FileSizeHeader )
+  {
+    bool ok = false;
+    FileSizeType new_file_size = byte_array.toULongLong( &ok );
+    if( !ok )
+    {
+      setError( tr( "invalid file size" ) );
+      return;
+    }
+
+    m_fileInfo.setSize( new_file_size );
+    m_state = FileTransferPeer::Transferring;
+    m_bytesTransferred = 0;
     sendTransferData();
     return;
   }

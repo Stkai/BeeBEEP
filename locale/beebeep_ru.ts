@@ -545,7 +545,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="334"/>
+        <location filename="../src/CoreConnection.cpp" line="338"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation>%1 (%2) подключен к сети %3.</translation>
     </message>
@@ -596,47 +596,58 @@
 <context>
     <name>FileTransferPeer</name>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="77"/>
+        <location filename="../src/FileTransferDownload.cpp" line="75"/>
+        <source>invalid file size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FileTransferDownload.cpp" line="99"/>
         <source>Unable to open file</source>
         <translation>Невозможно открыть файл</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="90"/>
+        <location filename="../src/FileTransferDownload.cpp" line="112"/>
         <source>Unable to write in the file</source>
         <translation>Невозможно записать в файл</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="95"/>
+        <location filename="../src/FileTransferDownload.cpp" line="117"/>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="50"/>
+        <location filename="../src/FileTransferPeer.cpp" line="51"/>
         <source>Transfer cancelled</source>
         <translation>Передача отменена</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="111"/>
+        <location filename="../src/FileTransferPeer.cpp" line="112"/>
         <source>Transfer completed in %1</source>
         <translation>Передача завершена в %1</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="169"/>
+        <location filename="../src/FileTransferPeer.cpp" line="170"/>
+        <location filename="../src/FileTransferPeer.cpp" line="178"/>
         <source>Connection timeout</source>
         <translation>Вышло время соединения</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="88"/>
+        <location filename="../src/FileTransferUpload.cpp" line="98"/>
+        <source>unable to send file header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FileTransferUpload.cpp" line="113"/>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="95"/>
+        <location filename="../src/FileTransferUpload.cpp" line="120"/>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
         <translation>%1 байт передачи не подтверждено (%2 байт подтверждено)</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="126"/>
+        <location filename="../src/FileTransferUpload.cpp" line="151"/>
         <source>Unable to upload data</source>
         <translation>Невозможно отправить данные</translation>
     </message>
@@ -887,18 +898,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="875"/>
-        <location filename="../src/GuiChat.cpp" line="891"/>
+        <location filename="../src/GuiChat.cpp" line="876"/>
+        <location filename="../src/GuiChat.cpp" line="900"/>
         <source>There is not a valid dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="885"/>
+        <location filename="../src/GuiChat.cpp" line="893"/>
         <source>Word completer is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="887"/>
+        <location filename="../src/GuiChat.cpp" line="895"/>
         <source>Word completer is disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1629,27 +1640,27 @@ Please select a different name.</source>
         <translation type="unfinished">Поиск</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="76"/>
+        <location filename="../src/GuiLog.cpp" line="77"/>
         <source>keyword</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="81"/>
+        <location filename="../src/GuiLog.cpp" line="83"/>
         <source>Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="82"/>
+        <location filename="../src/GuiLog.cpp" line="84"/>
         <source>Find keywords in the log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="94"/>
+        <location filename="../src/GuiLog.cpp" line="96"/>
         <source>Case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="99"/>
+        <location filename="../src/GuiLog.cpp" line="101"/>
         <source>Whole word</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1659,38 +1670,38 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="107"/>
+        <location filename="../src/GuiLog.cpp" line="109"/>
         <source>Please select a file to save the log.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="116"/>
+        <location filename="../src/GuiLog.cpp" line="118"/>
         <source>Unable to save log in the file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="116"/>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="118"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Ok</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="142"/>
+        <location filename="../src/GuiLog.cpp" line="144"/>
         <source>%1: save log completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Open folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="184"/>
+        <location filename="../src/GuiLog.cpp" line="186"/>
         <source>%1 not found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1715,7 +1726,7 @@ Please select a different name.</source>
         <translation type="obsolete">Показать панель расширений</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="254"/>
+        <location filename="../src/GuiMain.cpp" line="253"/>
         <location filename="../src/GuiMain.cpp" line="3090"/>
         <location filename="../src/GuiMain.cpp" line="3091"/>
         <location filename="../src/GuiMain.cpp" line="3092"/>
@@ -1724,12 +1735,12 @@ Please select a different name.</source>
         <translation>отключен</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="296"/>
         <source>Do you really want to quit %1?</source>
         <translation>Вы действительно хотите выйти из %1?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="391"/>
+        <location filename="../src/GuiMain.cpp" line="390"/>
         <source>No new message available</source>
         <translation>Новых сообщений нет</translation>
     </message>
@@ -1738,7 +1749,7 @@ Please select a different name.</source>
         <translation type="obsolete">&amp;Отключить</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="461"/>
+        <location filename="../src/GuiMain.cpp" line="460"/>
         <source>Disconnect from %1 network</source>
         <translation>Отключить от сети %1</translation>
     </message>
@@ -1747,7 +1758,7 @@ Please select a different name.</source>
         <translation type="obsolete">&amp;Подключить</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="467"/>
+        <location filename="../src/GuiMain.cpp" line="466"/>
         <source>Connect to %1 network</source>
         <translation>Подключить к сети %1</translation>
     </message>
@@ -2031,17 +2042,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Сохранить сообщения</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="336"/>
+        <location filename="../src/GuiMain.cpp" line="335"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="460"/>
+        <location filename="../src/GuiMain.cpp" line="459"/>
         <source>Disconnect</source>
         <translation>Разъединить</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="466"/>
+        <location filename="../src/GuiMain.cpp" line="465"/>
         <source>Connect</source>
         <translation>Соединить</translation>
     </message>
@@ -2665,19 +2676,19 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="319"/>
+        <location filename="../src/GuiMain.cpp" line="318"/>
         <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Настройки не могут быть сохранены&lt;/b&gt;. Путь:</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="321"/>
-        <location filename="../src/GuiMain.cpp" line="338"/>
+        <location filename="../src/GuiMain.cpp" line="320"/>
+        <location filename="../src/GuiMain.cpp" line="337"/>
         <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
         <translation>&lt;b&gt;не перезаписываемый&lt;/b&gt; пользователем:</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="323"/>
-        <location filename="../src/GuiMain.cpp" line="340"/>
+        <location filename="../src/GuiMain.cpp" line="322"/>
+        <location filename="../src/GuiMain.cpp" line="339"/>
         <source>Do you want to close anyway?</source>
         <translation>Вы хотите закрыть в любом случае?</translation>
     </message>
@@ -2862,7 +2873,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="176"/>
+        <location filename="../src/GuiMain.cpp" line="175"/>
         <source>Ready</source>
         <translation>Готов</translation>
     </message>
@@ -3154,9 +3165,9 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Вы хотите загрузить %1 (%2) от пользователя %3?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="298"/>
-        <location filename="../src/GuiMain.cpp" line="324"/>
-        <location filename="../src/GuiMain.cpp" line="341"/>
+        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="323"/>
+        <location filename="../src/GuiMain.cpp" line="340"/>
         <location filename="../src/GuiMain.cpp" line="1850"/>
         <location filename="../src/GuiMain.cpp" line="1920"/>
         <location filename="../src/GuiMain.cpp" line="1927"/>
@@ -3172,9 +3183,9 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="298"/>
-        <location filename="../src/GuiMain.cpp" line="324"/>
-        <location filename="../src/GuiMain.cpp" line="341"/>
+        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="323"/>
+        <location filename="../src/GuiMain.cpp" line="340"/>
         <location filename="../src/GuiMain.cpp" line="1850"/>
         <location filename="../src/GuiMain.cpp" line="1920"/>
         <location filename="../src/GuiMain.cpp" line="1927"/>
@@ -3526,107 +3537,107 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Сделать снимок</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="42"/>
+        <location filename="../src/GuiScreenShot.cpp" line="43"/>
         <source>Delay</source>
         <translation>Задержка</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="43"/>
+        <location filename="../src/GuiScreenShot.cpp" line="44"/>
         <source>Delay screenshot for selected seconds</source>
         <translation>Задержка снимка на выбранные секунды</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="51"/>
+        <location filename="../src/GuiScreenShot.cpp" line="52"/>
         <source>s</source>
         <translation>сек</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="59"/>
+        <location filename="../src/GuiScreenShot.cpp" line="60"/>
         <source>Hide this window</source>
         <translation>Скрыть это окно</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="60"/>
+        <location filename="../src/GuiScreenShot.cpp" line="61"/>
         <source>Hide this window before capture screenshot</source>
         <translation>Скрыть это окно перед захватом снимка</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="71"/>
+        <location filename="../src/GuiScreenShot.cpp" line="72"/>
         <source>Enable high dpi</source>
         <translation>Включить высокое разрешение</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="72"/>
+        <location filename="../src/GuiScreenShot.cpp" line="73"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>Включить поддержку высокого разрешения для управления, например, монитором Apple Retina</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="78"/>
+        <location filename="../src/GuiScreenShot.cpp" line="79"/>
         <source>Capture</source>
         <translation>Захват</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="79"/>
+        <location filename="../src/GuiScreenShot.cpp" line="80"/>
         <source>Capture a screenshot of your desktop</source>
         <translation>Сделать снимок вашего рабочего стола</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="80"/>
+        <location filename="../src/GuiScreenShot.cpp" line="81"/>
         <source>Send</source>
         <translation>Отправить</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="81"/>
+        <location filename="../src/GuiScreenShot.cpp" line="82"/>
         <source>Send the captured screenshot to an user</source>
         <translation>Отправить захваченный снимок пользователю</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="82"/>
+        <location filename="../src/GuiScreenShot.cpp" line="83"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="83"/>
+        <location filename="../src/GuiScreenShot.cpp" line="84"/>
         <source>Save the captured screenshot as file</source>
         <translation>Сохранить захваченный снимок в файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="84"/>
+        <location filename="../src/GuiScreenShot.cpp" line="85"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="85"/>
+        <location filename="../src/GuiScreenShot.cpp" line="86"/>
         <source>Delete the captured screenshot</source>
         <translation>Удалить захваченный снимок</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="105"/>
+        <location filename="../src/GuiScreenShot.cpp" line="106"/>
         <source>No screenshot available</source>
         <translation>Нет доступных снимков</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="165"/>
+        <location filename="../src/GuiScreenShot.cpp" line="178"/>
         <source>/beesshot-%1.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="168"/>
+        <location filename="../src/GuiScreenShot.cpp" line="181"/>
         <source>Save As</source>
         <translation>Сохранить как</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="170"/>
+        <location filename="../src/GuiScreenShot.cpp" line="183"/>
         <source>%1 Files (*.%2)</source>
         <translation>%1 Файлы (*.%2)</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="185"/>
+        <location filename="../src/GuiScreenShot.cpp" line="198"/>
         <source>/beesshottmp-%1.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="192"/>
+        <location filename="../src/GuiScreenShot.cpp" line="205"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Не удается сохранить временный файл: %1</translation>
     </message>
@@ -3951,7 +3962,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Размер</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="96"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="98"/>
         <source>User</source>
         <translation>Пользователь</translation>
     </message>
@@ -3990,7 +4001,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Фильтр</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="73"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="74"/>
         <source>Search</source>
         <translation>Поиск</translation>
     </message>
@@ -4003,12 +4014,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Фильтровать файлы в списке используя некоторые ключевые слова</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="81"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="83"/>
         <source>File Type</source>
         <translation>Тип файла</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="87"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="89"/>
         <source>All Files</source>
         <translation>Все файлы</translation>
     </message>
@@ -4023,77 +4034,77 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Загрузить один или несколько файлов одновременно</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="114"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="116"/>
         <source>All Users</source>
         <translation>Все пользователи</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="139"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="141"/>
         <source>%1 is searching shared files in your network</source>
         <translation>%1 ведет поиск общедоступных файлов в вашей сети</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="193"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="195"/>
         <source>Double click to download %1</source>
         <translation>Двойной щелчок для загрузки %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="232"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="234"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation>%1 открыл доступ для %2 файлов (%3)</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="313"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="315"/>
         <source>Double click to open %1</source>
         <translation>Двойной щелчок для открытия %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="315"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="317"/>
         <source>Transfer completed</source>
         <translation>Передача завершена</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="329"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="331"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation>%1 файлов показано в списке (%2 доступно в вашей сети)</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="331"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="333"/>
         <source>%1 files shared in your network</source>
         <translation>%1 файлов доступно в вашей сети</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="363"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download single file</source>
         <translation>Загрузить один файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="363"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download %1 selected files</source>
         <translation>Загрузить %1 выбранных файлов</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
         <source>MAX</source>
         <translation>МАКС.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="368"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
         <source>Clear selection</source>
         <translation>Отменить выбор</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="372"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
         <source>Expand all items</source>
         <translation>Развернуть все элементы</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="373"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Collapse all items</source>
         <translation>Свернуть все элементы</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
         <source>Please select one or more files to download.</source>
         <translation>Пожалуйста, выберите один или несколько файлов для загрузки.</translation>
     </message>
@@ -4277,7 +4288,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
 <context>
     <name>GuiUserList</name>
     <message>
-        <location filename="../src/GuiUserList.cpp" line="54"/>
+        <location filename="../src/GuiUserList.cpp" line="55"/>
         <source>Search</source>
         <translation>Поиск</translation>
     </message>

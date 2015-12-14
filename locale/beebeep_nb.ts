@@ -270,7 +270,7 @@
         <translation>%1 (%2) er kobla fra %3-nettverket.</translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="334"/>
+        <location filename="../src/CoreConnection.cpp" line="338"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation>%1 (%2) er kobla til %3-nettverket.</translation>
     </message>
@@ -576,47 +576,58 @@
 <context>
     <name>FileTransferPeer</name>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="77"/>
+        <location filename="../src/FileTransferDownload.cpp" line="75"/>
+        <source>invalid file size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FileTransferDownload.cpp" line="99"/>
         <source>Unable to open file</source>
         <translation>Kan ikke åpne fil</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="90"/>
+        <location filename="../src/FileTransferDownload.cpp" line="112"/>
         <source>Unable to write in the file</source>
         <translation>Kan ikke skrive i fila</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="95"/>
+        <location filename="../src/FileTransferDownload.cpp" line="117"/>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
         <translation>%1 bytes lasta ned, men filstørrelsen er bare %2 bytes</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="50"/>
+        <location filename="../src/FileTransferPeer.cpp" line="51"/>
         <source>Transfer cancelled</source>
         <translation>Overføring avbrutt</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="111"/>
+        <location filename="../src/FileTransferPeer.cpp" line="112"/>
         <source>Transfer completed in %1</source>
         <translation>Overføring fullført i %1</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="169"/>
+        <location filename="../src/FileTransferPeer.cpp" line="170"/>
+        <location filename="../src/FileTransferPeer.cpp" line="178"/>
         <source>Connection timeout</source>
         <translation>Forbindelse tidsutkobla</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="88"/>
+        <location filename="../src/FileTransferUpload.cpp" line="98"/>
+        <source>unable to send file header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FileTransferUpload.cpp" line="113"/>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
         <translation>%1 bytes lasta opp, men filstørrelsen er bare %2 bytes</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="95"/>
+        <location filename="../src/FileTransferUpload.cpp" line="120"/>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
         <translation>%1 bytes sendt ikke bekrefta (%2 bytes bekrefta)</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="126"/>
+        <location filename="../src/FileTransferUpload.cpp" line="151"/>
         <source>Unable to upload data</source>
         <translation>Kan ikke laste opp data</translation>
     </message>
@@ -878,18 +889,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="875"/>
-        <location filename="../src/GuiChat.cpp" line="891"/>
+        <location filename="../src/GuiChat.cpp" line="876"/>
+        <location filename="../src/GuiChat.cpp" line="900"/>
         <source>There is not a valid dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="885"/>
+        <location filename="../src/GuiChat.cpp" line="893"/>
         <source>Word completer is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="887"/>
+        <location filename="../src/GuiChat.cpp" line="895"/>
         <source>Word completer is disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1493,27 +1504,27 @@ Velg et annet navn.</translation>
         <translation>Søk</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="76"/>
+        <location filename="../src/GuiLog.cpp" line="77"/>
         <source>keyword</source>
         <translation>nøkkelord</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="81"/>
+        <location filename="../src/GuiLog.cpp" line="83"/>
         <source>Find</source>
         <translation>Finn</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="82"/>
+        <location filename="../src/GuiLog.cpp" line="84"/>
         <source>Find keywords in the log</source>
         <translation>Finn nøkkelrord i loggen</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="94"/>
+        <location filename="../src/GuiLog.cpp" line="96"/>
         <source>Case sensitive</source>
         <translation>Skill mellom store og små bokstaver</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="99"/>
+        <location filename="../src/GuiLog.cpp" line="101"/>
         <source>Whole word</source>
         <translation>Hele ord</translation>
     </message>
@@ -1523,38 +1534,38 @@ Velg et annet navn.</translation>
         <translation>Logg til fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="107"/>
+        <location filename="../src/GuiLog.cpp" line="109"/>
         <source>Please select a file to save the log.</source>
         <translation>Velg ei fil å lagre logg til.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="116"/>
+        <location filename="../src/GuiLog.cpp" line="118"/>
         <source>Unable to save log in the file: %1</source>
         <translation>Kunne ikke lagre logg i fila: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="116"/>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="118"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="142"/>
+        <location filename="../src/GuiLog.cpp" line="144"/>
         <source>%1: save log completed.</source>
         <translation>%1: logglagring fullført.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Open file</source>
         <translation>Åpne fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Open folder</source>
         <translation>Åpne mappe</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="184"/>
+        <location filename="../src/GuiLog.cpp" line="186"/>
         <source>%1 not found</source>
         <translation>%1 ikke funnet</translation>
     </message>
@@ -1575,7 +1586,7 @@ Velg et annet navn.</translation>
         <translation>Vis hovedverktøyslinja</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="254"/>
+        <location filename="../src/GuiMain.cpp" line="253"/>
         <location filename="../src/GuiMain.cpp" line="3090"/>
         <location filename="../src/GuiMain.cpp" line="3091"/>
         <location filename="../src/GuiMain.cpp" line="3092"/>
@@ -1584,14 +1595,14 @@ Velg et annet navn.</translation>
         <translation>fraværende</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="296"/>
         <source>Do you really want to quit %1?</source>
         <translation>Vil du avslutte %1?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="298"/>
-        <location filename="../src/GuiMain.cpp" line="324"/>
-        <location filename="../src/GuiMain.cpp" line="341"/>
+        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="323"/>
+        <location filename="../src/GuiMain.cpp" line="340"/>
         <location filename="../src/GuiMain.cpp" line="1850"/>
         <location filename="../src/GuiMain.cpp" line="1920"/>
         <location filename="../src/GuiMain.cpp" line="1927"/>
@@ -1607,9 +1618,9 @@ Velg et annet navn.</translation>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="298"/>
-        <location filename="../src/GuiMain.cpp" line="324"/>
-        <location filename="../src/GuiMain.cpp" line="341"/>
+        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="323"/>
+        <location filename="../src/GuiMain.cpp" line="340"/>
         <location filename="../src/GuiMain.cpp" line="1850"/>
         <location filename="../src/GuiMain.cpp" line="1920"/>
         <location filename="../src/GuiMain.cpp" line="1927"/>
@@ -1625,34 +1636,34 @@ Velg et annet navn.</translation>
         <translation>Nei</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="319"/>
+        <location filename="../src/GuiMain.cpp" line="318"/>
         <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Innstillinger kan ikke lagres&lt;/b&gt;. Sti:</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="321"/>
-        <location filename="../src/GuiMain.cpp" line="338"/>
+        <location filename="../src/GuiMain.cpp" line="320"/>
+        <location filename="../src/GuiMain.cpp" line="337"/>
         <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
         <translation>&lt;b&gt;er ikke skrivbar&lt;/b&gt; for bruker:</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="323"/>
-        <location filename="../src/GuiMain.cpp" line="340"/>
+        <location filename="../src/GuiMain.cpp" line="322"/>
+        <location filename="../src/GuiMain.cpp" line="339"/>
         <source>Do you want to close anyway?</source>
         <translation>Vil du lukke uansett?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="391"/>
+        <location filename="../src/GuiMain.cpp" line="390"/>
         <source>No new message available</source>
         <translation>Ingen nye meldinger tilgjengelig</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="461"/>
+        <location filename="../src/GuiMain.cpp" line="460"/>
         <source>Disconnect from %1 network</source>
         <translation>Frakoble fra %1 nettverk</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="467"/>
+        <location filename="../src/GuiMain.cpp" line="466"/>
         <source>Connect to %1 network</source>
         <translation>Koble til %1 nettverk</translation>
     </message>
@@ -2063,7 +2074,7 @@ Velg et annet navn.</translation>
         <translation>Jeg er så takknemlig og tilfreds med det</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="176"/>
+        <location filename="../src/GuiMain.cpp" line="175"/>
         <source>Ready</source>
         <translation>Klar</translation>
     </message>
@@ -2073,12 +2084,12 @@ Velg et annet navn.</translation>
         <translation>Brukere</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="460"/>
+        <location filename="../src/GuiMain.cpp" line="459"/>
         <source>Disconnect</source>
         <translation>Koble fra</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="466"/>
+        <location filename="../src/GuiMain.cpp" line="465"/>
         <source>Connect</source>
         <translation>Koble til</translation>
     </message>
@@ -2238,7 +2249,7 @@ Velg et annet navn.</translation>
         <translation>Lagre brukerne ved avslutt</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="336"/>
+        <location filename="../src/GuiMain.cpp" line="335"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Samtalemeldinger kan ikke lagres&lt;/b&gt;. Sti:</translation>
     </message>
@@ -3211,107 +3222,107 @@ Velg et annet navn.</translation>
         <translation>Gjør en skjermfangst</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="42"/>
+        <location filename="../src/GuiScreenShot.cpp" line="43"/>
         <source>Delay</source>
         <translation>Forsinkelse</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="43"/>
+        <location filename="../src/GuiScreenShot.cpp" line="44"/>
         <source>Delay screenshot for selected seconds</source>
         <translation>Forsink skjermfangst med valgte sekunder</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="51"/>
+        <location filename="../src/GuiScreenShot.cpp" line="52"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="59"/>
+        <location filename="../src/GuiScreenShot.cpp" line="60"/>
         <source>Hide this window</source>
         <translation>Skjul dette vinduet</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="60"/>
+        <location filename="../src/GuiScreenShot.cpp" line="61"/>
         <source>Hide this window before capture screenshot</source>
         <translation>Skjul dette vinduet før skjermfangst</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="71"/>
+        <location filename="../src/GuiScreenShot.cpp" line="72"/>
         <source>Enable high dpi</source>
         <translation>Slå på høy dpi</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="72"/>
+        <location filename="../src/GuiScreenShot.cpp" line="73"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>Slå på høy dpi-støtte for å handtere for eksempel Apple Retina skjerm</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="78"/>
+        <location filename="../src/GuiScreenShot.cpp" line="79"/>
         <source>Capture</source>
         <translation>Fang</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="79"/>
+        <location filename="../src/GuiScreenShot.cpp" line="80"/>
         <source>Capture a screenshot of your desktop</source>
         <translation>Ta en skjermfangst av hele skjermen</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="80"/>
+        <location filename="../src/GuiScreenShot.cpp" line="81"/>
         <source>Send</source>
         <translation>Send</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="81"/>
+        <location filename="../src/GuiScreenShot.cpp" line="82"/>
         <source>Send the captured screenshot to an user</source>
         <translation>Send skjermfangsten til en bruker</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="82"/>
+        <location filename="../src/GuiScreenShot.cpp" line="83"/>
         <source>Save</source>
         <translation>Lagre</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="83"/>
+        <location filename="../src/GuiScreenShot.cpp" line="84"/>
         <source>Save the captured screenshot as file</source>
         <translation>Lagre skjermfangsten til fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="84"/>
+        <location filename="../src/GuiScreenShot.cpp" line="85"/>
         <source>Delete</source>
         <translation>Slett</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="85"/>
+        <location filename="../src/GuiScreenShot.cpp" line="86"/>
         <source>Delete the captured screenshot</source>
         <translation>Slett skjermfangsten</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="105"/>
+        <location filename="../src/GuiScreenShot.cpp" line="106"/>
         <source>No screenshot available</source>
         <translation>Ingen skjermfangster tilgjengelig</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="165"/>
+        <location filename="../src/GuiScreenShot.cpp" line="178"/>
         <source>/beesshot-%1.</source>
         <translation>/beesfangst-%1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="168"/>
+        <location filename="../src/GuiScreenShot.cpp" line="181"/>
         <source>Save As</source>
         <translation>Lagre som</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="170"/>
+        <location filename="../src/GuiScreenShot.cpp" line="183"/>
         <source>%1 Files (*.%2)</source>
         <translation>%1 filer (*.%2)</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="185"/>
+        <location filename="../src/GuiScreenShot.cpp" line="198"/>
         <source>/beesshottmp-%1.</source>
         <translation>/beesfangsttmp-%1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="192"/>
+        <location filename="../src/GuiScreenShot.cpp" line="205"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Kunne ikke lagre midlertidig fil: %1</translation>
     </message>
@@ -3584,7 +3595,7 @@ Velg et annet navn.</translation>
 <context>
     <name>GuiShareNetwork</name>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="96"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="98"/>
         <source>User</source>
         <translation>Bruker</translation>
     </message>
@@ -3614,17 +3625,17 @@ Velg et annet navn.</translation>
         <translation>Tøm og les liste på nytt</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="73"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="74"/>
         <source>Search</source>
         <translation>Søk</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="81"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="83"/>
         <source>File Type</source>
         <translation>Filtype</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="87"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="89"/>
         <source>All Files</source>
         <translation>Alle filer</translation>
     </message>
@@ -3644,77 +3655,77 @@ Velg et annet navn.</translation>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="114"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="116"/>
         <source>All Users</source>
         <translation>Alle brukere</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="139"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="141"/>
         <source>%1 is searching shared files in your network</source>
         <translation>%1 søker etter delte filer i nettverket</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="193"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="195"/>
         <source>Double click to download %1</source>
         <translation>Dobbeltklikk for å laste ned %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="232"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="234"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation>%1 har delt %2 filer (%3)</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="313"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="315"/>
         <source>Double click to open %1</source>
         <translation>Dobbeltklikk for å åpne %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="315"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="317"/>
         <source>Transfer completed</source>
         <translation>Overføring fullført</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="329"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="331"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation>%1 filer vises i liste (%2 er tilgjengelig i nettverket)</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="331"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="333"/>
         <source>%1 files shared in your network</source>
         <translation>%1 filer er delt i nettverket</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="363"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download single file</source>
         <translation>Last ned enkeltfil</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="363"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download %1 selected files</source>
         <translation>Last ned %1 valgte filer</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
         <source>MAX</source>
         <translation>MAKS</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="368"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
         <source>Clear selection</source>
         <translation>Tøm utvalg</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="372"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
         <source>Expand all items</source>
         <translation>Ekspander alle elementer</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="373"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Collapse all items</source>
         <translation>Slå sammen alle elementer</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
         <source>Please select one or more files to download.</source>
         <translation>Velg en eller flere filer for nedlasting.</translation>
     </message>
@@ -3844,7 +3855,7 @@ Velg et annet navn.</translation>
 <context>
     <name>GuiUserList</name>
     <message>
-        <location filename="../src/GuiUserList.cpp" line="54"/>
+        <location filename="../src/GuiUserList.cpp" line="55"/>
         <source>Search</source>
         <translation>Søk</translation>
     </message>

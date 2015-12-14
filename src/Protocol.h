@@ -106,7 +106,6 @@ public:
   inline VNumber currentId() const;
   inline VNumber newId();
   QString newMd5Id();
-  QString fileHash( const QFileInfo& ) const;
 
   QString linkifyText( QString );
   QString formatHtmlText( const QString& );

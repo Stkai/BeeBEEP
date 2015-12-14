@@ -39,6 +39,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
   connect( &m_socket, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthenticationRequested( const Message& ) ) );
   connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
+  connect( &m_socket, SIGNAL( tickEvent( int ) ), this, SLOT( onTickEvent( int ) ) );
 }
 
 void FileTransferPeer::cancelTransfer()
@@ -167,4 +168,13 @@ void FileTransferPeer::connectionTimeout()
 {
   if( m_state <= FileTransferPeer::Request )
     setError( tr( "Connection timeout" ) );
+}
+
+void FileTransferPeer::onTickEvent( int )
+{
+  if( m_state == FileTransferPeer::Transferring )
+  {
+    if( m_socket.activityIdle() > Settings::instance().pongTimeout() )
+      setError( tr( "Connection timeout" ) );
+  }
 }

@@ -278,7 +278,7 @@
         <translation>%1 (%2) is niet verbonden met %3 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/CoreConnection.cpp" line="334"/>
+        <location filename="../src/CoreConnection.cpp" line="338"/>
         <source>%1 (%2) is connected to %3 network.</source>
         <translation>%1 (%2) is verbonden met het %3 netwerk.</translation>
     </message>
@@ -588,47 +588,58 @@
 <context>
     <name>FileTransferPeer</name>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="77"/>
+        <location filename="../src/FileTransferDownload.cpp" line="75"/>
+        <source>invalid file size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FileTransferDownload.cpp" line="99"/>
         <source>Unable to open file</source>
         <translation>Kan bestand niet openen</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="90"/>
+        <location filename="../src/FileTransferDownload.cpp" line="112"/>
         <source>Unable to write in the file</source>
         <translation>Kan niet schrijven in het bestand</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="95"/>
+        <location filename="../src/FileTransferDownload.cpp" line="117"/>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
         <translation>%1 bytes gedownload maar grootte van het bestand is maar %2 bytes</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="50"/>
+        <location filename="../src/FileTransferPeer.cpp" line="51"/>
         <source>Transfer cancelled</source>
         <translation>Overdracht annuleren</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="111"/>
+        <location filename="../src/FileTransferPeer.cpp" line="112"/>
         <source>Transfer completed in %1</source>
         <translation>Overdracht voltooid in %1</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="169"/>
+        <location filename="../src/FileTransferPeer.cpp" line="170"/>
+        <location filename="../src/FileTransferPeer.cpp" line="178"/>
         <source>Connection timeout</source>
         <translation>Kon niet tijdig verbinden</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="88"/>
+        <location filename="../src/FileTransferUpload.cpp" line="98"/>
+        <source>unable to send file header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FileTransferUpload.cpp" line="113"/>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
         <translation>%1 bytes geupload maar grootte van het bestand is maar %2 bytes</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="95"/>
+        <location filename="../src/FileTransferUpload.cpp" line="120"/>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
         <translation>%1 bytes verzonden niet bevestigd(%2 bytes bevestigd)</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="126"/>
+        <location filename="../src/FileTransferUpload.cpp" line="151"/>
         <source>Unable to upload data</source>
         <translation>Kan data niet uploaden</translation>
     </message>
@@ -907,8 +918,8 @@
         <translation>Spellingscontrole aanzetten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="875"/>
-        <location filename="../src/GuiChat.cpp" line="891"/>
+        <location filename="../src/GuiChat.cpp" line="876"/>
+        <location filename="../src/GuiChat.cpp" line="900"/>
         <source>There is not a valid dictionary</source>
         <translation>Er is geen geldige map</translation>
     </message>
@@ -918,12 +929,12 @@
         <translation>Spellingscontrole uitzetten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="885"/>
+        <location filename="../src/GuiChat.cpp" line="893"/>
         <source>Word completer is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="887"/>
+        <location filename="../src/GuiChat.cpp" line="895"/>
         <source>Word completer is disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1649,27 +1660,27 @@ Gebruik aub een andere naam.</translation>
         <translation>Zoek</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="76"/>
+        <location filename="../src/GuiLog.cpp" line="77"/>
         <source>keyword</source>
         <translation>Sleutelwoord</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="81"/>
+        <location filename="../src/GuiLog.cpp" line="83"/>
         <source>Find</source>
         <translation>Vind</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="82"/>
+        <location filename="../src/GuiLog.cpp" line="84"/>
         <source>Find keywords in the log</source>
         <translation>Vind een sleutelwoord in log</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="94"/>
+        <location filename="../src/GuiLog.cpp" line="96"/>
         <source>Case sensitive</source>
         <translation>Hoofdlettergevoelig</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="99"/>
+        <location filename="../src/GuiLog.cpp" line="101"/>
         <source>Whole word</source>
         <translation>Gehele woord</translation>
     </message>
@@ -1679,38 +1690,38 @@ Gebruik aub een andere naam.</translation>
         <translation>Log naar bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="107"/>
+        <location filename="../src/GuiLog.cpp" line="109"/>
         <source>Please select a file to save the log.</source>
         <translation>Selecteer een bestand om log op te slaan.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="116"/>
+        <location filename="../src/GuiLog.cpp" line="118"/>
         <source>Unable to save log in the file: %1</source>
         <translation>Kan log bestand:%1 niet opslaan</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="116"/>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="118"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="142"/>
+        <location filename="../src/GuiLog.cpp" line="144"/>
         <source>%1: save log completed.</source>
         <translation>%1: Opslaan log voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="143"/>
+        <location filename="../src/GuiLog.cpp" line="145"/>
         <source>Open folder</source>
         <translation>Open map</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="184"/>
+        <location filename="../src/GuiLog.cpp" line="186"/>
         <source>%1 not found</source>
         <translation>%1 niet gevonden</translation>
     </message>
@@ -1735,7 +1746,7 @@ Gebruik aub een andere naam.</translation>
         <translation type="vanished">Toon de plugin balk</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="254"/>
+        <location filename="../src/GuiMain.cpp" line="253"/>
         <location filename="../src/GuiMain.cpp" line="3090"/>
         <location filename="../src/GuiMain.cpp" line="3091"/>
         <location filename="../src/GuiMain.cpp" line="3092"/>
@@ -1744,14 +1755,14 @@ Gebruik aub een andere naam.</translation>
         <translation>afgemeld</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="296"/>
         <source>Do you really want to quit %1?</source>
         <translation>Wilt u %1 echt afsluiten ?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="298"/>
-        <location filename="../src/GuiMain.cpp" line="324"/>
-        <location filename="../src/GuiMain.cpp" line="341"/>
+        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="323"/>
+        <location filename="../src/GuiMain.cpp" line="340"/>
         <location filename="../src/GuiMain.cpp" line="1850"/>
         <location filename="../src/GuiMain.cpp" line="1920"/>
         <location filename="../src/GuiMain.cpp" line="1927"/>
@@ -1767,9 +1778,9 @@ Gebruik aub een andere naam.</translation>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="298"/>
-        <location filename="../src/GuiMain.cpp" line="324"/>
-        <location filename="../src/GuiMain.cpp" line="341"/>
+        <location filename="../src/GuiMain.cpp" line="297"/>
+        <location filename="../src/GuiMain.cpp" line="323"/>
+        <location filename="../src/GuiMain.cpp" line="340"/>
         <location filename="../src/GuiMain.cpp" line="1850"/>
         <location filename="../src/GuiMain.cpp" line="1920"/>
         <location filename="../src/GuiMain.cpp" line="1927"/>
@@ -1785,34 +1796,34 @@ Gebruik aub een andere naam.</translation>
         <translation>Nee</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="319"/>
+        <location filename="../src/GuiMain.cpp" line="318"/>
         <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Instellingen kunnen niet bewaard worden&lt;/b&gt;. Map:</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="321"/>
-        <location filename="../src/GuiMain.cpp" line="338"/>
+        <location filename="../src/GuiMain.cpp" line="320"/>
+        <location filename="../src/GuiMain.cpp" line="337"/>
         <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
         <translation>&lt;b&gt;is niet schrijfbaar&lt;/b&gt; voor user:</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="323"/>
-        <location filename="../src/GuiMain.cpp" line="340"/>
+        <location filename="../src/GuiMain.cpp" line="322"/>
+        <location filename="../src/GuiMain.cpp" line="339"/>
         <source>Do you want to close anyway?</source>
         <translation>Wilt u toch afsluiten?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="391"/>
+        <location filename="../src/GuiMain.cpp" line="390"/>
         <source>No new message available</source>
         <translation>Geen nieuwe berichten</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="461"/>
+        <location filename="../src/GuiMain.cpp" line="460"/>
         <source>Disconnect from %1 network</source>
         <translation>Verbinding met %1 netwerk verbreken</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="467"/>
+        <location filename="../src/GuiMain.cpp" line="466"/>
         <source>Connect to %1 network</source>
         <translation>Verbinden met %1 netwerk</translation>
     </message>
@@ -2495,7 +2506,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Sla berichten op</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="336"/>
+        <location filename="../src/GuiMain.cpp" line="335"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Chat bericht kan niet worden opgeslagen&lt;/b&gt;. Pad:</translation>
     </message>
@@ -2658,7 +2669,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Ik ben daar zo dankbaar en blij om</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="176"/>
+        <location filename="../src/GuiMain.cpp" line="175"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
@@ -2668,12 +2679,12 @@ Gebruik aub een andere naam.</translation>
         <translation>Gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="460"/>
+        <location filename="../src/GuiMain.cpp" line="459"/>
         <source>Disconnect</source>
         <translation>Verbreek</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="466"/>
+        <location filename="../src/GuiMain.cpp" line="465"/>
         <source>Connect</source>
         <translation>Verbind</translation>
     </message>
@@ -3463,107 +3474,107 @@ Gebruik aub een andere naam.</translation>
         <translation>Maak een schermafdruk</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="42"/>
+        <location filename="../src/GuiScreenShot.cpp" line="43"/>
         <source>Delay</source>
         <translation>Uitstel</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="43"/>
+        <location filename="../src/GuiScreenShot.cpp" line="44"/>
         <source>Delay screenshot for selected seconds</source>
         <translation>Stel schermafdruk uit voor geselecteerd aantal seconden</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="51"/>
+        <location filename="../src/GuiScreenShot.cpp" line="52"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="59"/>
+        <location filename="../src/GuiScreenShot.cpp" line="60"/>
         <source>Hide this window</source>
         <translation>Verberg dit venster</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="60"/>
+        <location filename="../src/GuiScreenShot.cpp" line="61"/>
         <source>Hide this window before capture screenshot</source>
         <translation>Verberg dit venster voor het nemen van de schermafdruk</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="71"/>
+        <location filename="../src/GuiScreenShot.cpp" line="72"/>
         <source>Enable high dpi</source>
         <translation>Schakel hoge DPI in</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="72"/>
+        <location filename="../src/GuiScreenShot.cpp" line="73"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>Schakel hoge DPI in om bv tegemoet te komen aan Apple&apos;s Retina scherm</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="78"/>
+        <location filename="../src/GuiScreenShot.cpp" line="79"/>
         <source>Capture</source>
         <translation>Neem schermafdruk</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="79"/>
+        <location filename="../src/GuiScreenShot.cpp" line="80"/>
         <source>Capture a screenshot of your desktop</source>
         <translation>Neem een schermafdruk van uw bureaublad</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="80"/>
+        <location filename="../src/GuiScreenShot.cpp" line="81"/>
         <source>Send</source>
         <translation>Verstuur</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="81"/>
+        <location filename="../src/GuiScreenShot.cpp" line="82"/>
         <source>Send the captured screenshot to an user</source>
         <translation>Verstuurt de schermafdruk naar een gebruiker</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="82"/>
+        <location filename="../src/GuiScreenShot.cpp" line="83"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="83"/>
+        <location filename="../src/GuiScreenShot.cpp" line="84"/>
         <source>Save the captured screenshot as file</source>
         <translation>Sla de schermafdruk op al bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="84"/>
+        <location filename="../src/GuiScreenShot.cpp" line="85"/>
         <source>Delete</source>
         <translation>Verwijder</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="85"/>
+        <location filename="../src/GuiScreenShot.cpp" line="86"/>
         <source>Delete the captured screenshot</source>
         <translation>Verwijder de geselecteerde schermafdruk</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="105"/>
+        <location filename="../src/GuiScreenShot.cpp" line="106"/>
         <source>No screenshot available</source>
         <translation>Geen schermafdruk beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="165"/>
+        <location filename="../src/GuiScreenShot.cpp" line="178"/>
         <source>/beesshot-%1.</source>
         <translation>/beesshot-%1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="168"/>
+        <location filename="../src/GuiScreenShot.cpp" line="181"/>
         <source>Save As</source>
         <translation>Opslaan als</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="170"/>
+        <location filename="../src/GuiScreenShot.cpp" line="183"/>
         <source>%1 Files (*.%2)</source>
         <translation>%1 Bestanden (*.%2)</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="185"/>
+        <location filename="../src/GuiScreenShot.cpp" line="198"/>
         <source>/beesshottmp-%1.</source>
         <translation>/beesshottmp-%1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiScreenShot.cpp" line="192"/>
+        <location filename="../src/GuiScreenShot.cpp" line="205"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Kan tijdelijk bestand %1 niet opslaan</translation>
     </message>
@@ -3868,7 +3879,7 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Grootte</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="96"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="98"/>
         <source>User</source>
         <translation>Gebruiker</translation>
     </message>
@@ -3907,7 +3918,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="73"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="74"/>
         <source>Search</source>
         <translation>Zoek</translation>
     </message>
@@ -3920,12 +3931,12 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Filter de bestanden in de lijst op basis van bepaalde kernwoorden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="81"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="83"/>
         <source>File Type</source>
         <translation>Bestandstype</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="87"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="89"/>
         <source>All Files</source>
         <translation>Alle bestanden</translation>
     </message>
@@ -3940,77 +3951,77 @@ Gebruik aub een andere naam.</translation>
         <translation>Download een of meerdere bestanden tegelijk</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="114"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="116"/>
         <source>All Users</source>
         <translation>Alle gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="139"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="141"/>
         <source>%1 is searching shared files in your network</source>
         <translation>%1 is gedeelde bestanden aan het zoeken in uw netwerk</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="193"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="195"/>
         <source>Double click to download %1</source>
         <translation>Dubbelklik om te downloaden %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="232"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="234"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation>%1 heeft %2 bestanden gedeeld (%3)</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="313"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="315"/>
         <source>Double click to open %1</source>
         <translation>Dubbelklik om te openen %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="315"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="317"/>
         <source>Transfer completed</source>
         <translation>Overdracht voltooid</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="329"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="331"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation>%1 bestanden worden getoond in lijst (%2 bestanden beschikbaar in je netwerk)</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="331"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="333"/>
         <source>%1 files shared in your network</source>
         <translation>%1 bestanden gedeeld in je netwerk</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="363"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download single file</source>
         <translation>Download een bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="363"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download %1 selected files</source>
         <translation>Dowload %1 geselecteerde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
         <source>MAX</source>
         <translation>Maximaal</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="368"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
         <source>Clear selection</source>
         <translation>Selectie wissen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="372"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
         <source>Expand all items</source>
         <translation>Alles uitvouwen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="373"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Collapse all items</source>
         <translation>Alles invouwen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
         <source>Please select one or more files to download.</source>
         <translation>Selecteer aub een of meerdere bestanden om te downloaden.</translation>
     </message>
@@ -4198,7 +4209,7 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiUserList</name>
     <message>
-        <location filename="../src/GuiUserList.cpp" line="54"/>
+        <location filename="../src/GuiUserList.cpp" line="55"/>
         <source>Search</source>
         <translation>Zoek</translation>
     </message>

@@ -3585,6 +3585,10 @@ void GuiMain::onTickEvent( int ticks )
     if( bee_app->idleTimeout() > 0 )
       QTimer::singleShot( 0, bee_app, SLOT( checkIdle() ) );
   }
+
+  mp_trayIcon->onTickEvent( ticks );
+  if( mp_trayIcon->iconStatusIsMessage() )
+    setWindowIcon( mp_trayIcon->icon() );
 }
 
 void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )

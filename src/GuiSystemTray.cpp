@@ -76,3 +76,14 @@ void GuiSystemTray::showMessageInTray( const QString& msg )
   if( Settings::instance().showNotificationOnTray() && Settings::instance().trayMessageTimeout() > 0 )
     showMessage( msg, Settings::instance().programName(), QSystemTrayIcon::Information, qMax( 1000, Settings::instance().trayMessageTimeout() ) );
 }
+
+void GuiSystemTray::onTickEvent( int ticks )
+{
+  if( m_iconStatus == GuiSystemTray::Message )
+  {
+    if( ticks % 2 == 0 )
+      setIcon( QIcon( ":/images/beebeep.png" ) );
+    else
+      setIcon( QIcon( ":/images/beebeep-message.png" ) );
+  }
+}

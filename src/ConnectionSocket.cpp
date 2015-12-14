@@ -44,7 +44,8 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor )
   m_isAborted = false;
   setSocketDescriptor( socket_descriptor );
   m_hostAndPort = QString( "%1:%2" ).arg( peerAddress().toString() ).arg( peerPort() );
-  startTimerTick();
+  if( !startTimerTick() )
+    qWarning() << "Unable to start event timer for connection:" << m_hostAndPort;
 }
 
 void ConnectionSocket::connectToNetworkAddress( const QHostAddress& host_address, int host_port )
