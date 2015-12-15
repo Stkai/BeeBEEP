@@ -24,7 +24,6 @@
 #include "BeeUtils.h"
 #include "GuiFileInfoList.h"
 #include "FileShare.h"
-#include "Settings.h"
 #include "User.h"
 
 
@@ -321,11 +320,7 @@ int GuiFileInfoList::parseSelectedItems()
   QApplication::setOverrideCursor( Qt::WaitCursor );
   QApplication::processEvents();
   foreach( QTreeWidgetItem* item, selected_items )
-  {
     parseItem( item );
-    if( m_selectedFileInfoList.size() > Settings::instance().maxQueuedDownloads() )
-      break;
-  }
 
   QApplication::restoreOverrideCursor();
 

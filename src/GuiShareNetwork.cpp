@@ -355,9 +355,19 @@ void GuiShareNetwork::showSharesForUser( const User& u )
     mp_actReload->setEnabled( true );
 }
 
-void GuiShareNetwork::openDownloadMenu( const QPoint& )
+void GuiShareNetwork::openDownloadMenu( const QPoint& p )
 {
-  int selected_items = m_fileInfoList.parseSelectedItems();
+  QTreeWidgetItem* item = mp_twShares->itemAt( p );
+  int selected_items;
+  if( item )
+  {
+    if( !item->isSelected() )
+      item->setSelected( true );
+    selected_items = m_fileInfoList.parseSelectedItems();
+  }
+  else
+    selected_items = 0;
+
   QMenu menu;
 
   if( selected_items )

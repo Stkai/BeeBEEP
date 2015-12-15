@@ -315,9 +315,19 @@ void GuiShareLocal::openMySharesMenu( const QPoint& p )
   menu.exec( QCursor::pos() );
 }
 
-void GuiShareLocal::openLocalSharesMenu( const QPoint& )
+void GuiShareLocal::openLocalSharesMenu( const QPoint& p )
 {
-  int selected_items = m_fileInfoList.parseSelectedItems();
+  QTreeWidgetItem* item = mp_twLocalShares->itemAt( p );
+  int selected_items;
+  if( item )
+  {
+    if( !item->isSelected() )
+      item->setSelected( true );
+    selected_items = m_fileInfoList.parseSelectedItems();
+  }
+  else
+    selected_items = 0;
+
   QMenu menu;
 
   if( selected_items )
