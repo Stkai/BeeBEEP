@@ -8,10 +8,10 @@ BeeBEEP 3.0.3
 - Spell checking can be enabled (thanks to HUNSPELL library)
 - Word completer can be enabled (option)
 - Chat with all users can be disabled in beebeep.rc (option)
-- Fixed enoticons compatibility issue between Qt4 and Qt5 version
+- Fixed emoticons compatibility issue between Qt4 and Qt5 version
 - Keep alive over socket implemented
 - Auto connection when network interface is up again
-- Application icon change if there are unread messages
+- Application icon blinks if there are unread messages
 - Fixed saving bug on system session shutdown
 - Message icon added in the main toolbar (it is enabled if there are some unread messages)
 

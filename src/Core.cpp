@@ -74,7 +74,7 @@ bool Core::checkSavingPaths()
   sets->deleteLater();
   if( !sets->isWritable() )
   {
-    qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save settings in path:" << sets->fileName();
+    qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save settings in path:" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 User %2 cannot save settings in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
                                                                               .arg( Settings::instance().localUser().accountName() )
@@ -84,7 +84,7 @@ bool Core::checkSavingPaths()
     settings_can_be_saved = false;
   }
   else
-    qDebug() << "Settings will be saved in path:" << qPrintable( sets->fileName() );
+    qDebug() << "Settings will be saved in path:" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
 
   if( Settings::instance().chatAutoSave() )
   {
@@ -336,16 +336,23 @@ void Core::sendBroadcastMessage()
 
 void Core::showBroadcasterUdpError()
 {
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 %2 has found a filter on UDP port %3. Please check your firewall settings." )
-                         .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
-                         .arg( Settings::instance().programName() )
-                         .arg( Settings::instance().defaultBroadcastPort() ),
-                         DispatchToChat, ChatMessage::Connection );
+  QString html_msg = tr( "%1 %2 has found a filter on UDP port %3. Please check your firewall settings." )
+                       .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
+                       .arg( Settings::instance().programName() )
+                       .arg( Settings::instance().defaultBroadcastPort() );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Connection );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                          tr( "%1 You cannot reach %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
-                            Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+  QStringList sl;
+  foreach( QHostAddress ha, mp_broadcaster->contactedAddress() )
+    sl << ha.toString();
+
+  if( !sl.isEmpty() )
+  {
+    html_msg = tr( "%1 The following networks appears as filtered: %2" )
+                 .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
+                 .arg( sl.join( ", " ) );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Connection );
+  }
 }
 
 bool Core::isConnected() const

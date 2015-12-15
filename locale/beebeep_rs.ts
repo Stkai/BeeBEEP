@@ -122,32 +122,36 @@
         <translation>%1 nisi konektovan na %2 mrežu.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="340"/>
+        <location filename="../src/Core.cpp" line="339"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 ima filter na UDP portu %3. Molimo Vas proverite vaše podešavanje firewall-a.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="347"/>
-        <source>%1 You cannot reach %2 Network.</source>
-        <translation>%1 nemožeš videti %2 mrežu.</translation>
+        <location filename="../src/Core.cpp" line="351"/>
+        <source>%1 The following networks appears as filtered: %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="395"/>
+        <source>%1 You cannot reach %2 Network.</source>
+        <translation type="vanished">%1 nemožeš videti %2 mrežu.</translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="402"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>je povezan sa spoljnom mrežom (nova podmreža je dodata u vašu listu adresa za broadcast).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="415"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 proveri %2 više adresa...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="428"/>
+        <location filename="../src/Core.cpp" line="435"/>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 poziva %2 ...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="469"/>
+        <location filename="../src/Core.cpp" line="476"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>

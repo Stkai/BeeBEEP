@@ -130,27 +130,31 @@
         <translation>%1 Вы не подключены к сети %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="340"/>
+        <location filename="../src/Core.cpp" line="339"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 нашел фильтр UDP порта %3. Пожалуйста, проверьте настройки вашего брандмауэра.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="347"/>
-        <source>%1 You cannot reach %2 Network.</source>
-        <translation>%1 Вы не можете связаться с сетью %2.</translation>
+        <location filename="../src/Core.cpp" line="351"/>
+        <source>%1 The following networks appears as filtered: %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="395"/>
+        <source>%1 You cannot reach %2 Network.</source>
+        <translation type="vanished">%1 Вы не можете связаться с сетью %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="402"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>присоединен от внешней сети (новая подсеть добавлена к вашему списку широковещательных адресов).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="415"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="428"/>
+        <location filename="../src/Core.cpp" line="435"/>
         <source>%1 Contacting %2 ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -550,7 +554,7 @@
         <translation>%1 (%2) подключен к сети %3.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="469"/>
+        <location filename="../src/Core.cpp" line="476"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>

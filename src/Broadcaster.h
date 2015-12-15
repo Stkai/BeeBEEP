@@ -38,6 +38,8 @@ public:
   void stopBroadcasting();
   int updateAddresses();
 
+  inline const QList<QHostAddress> contactedAddress() const;
+
 public slots:
   void sendBroadcastDatagram();
 
@@ -68,5 +70,8 @@ private:
   QList<QHostAddress> m_contactedAddresses;
 
 };
+
+// Inline Functions
+inline const QList<QHostAddress> Broadcaster::contactedAddress() const { return m_contactedAddresses; }
 
 #endif // BEEBEEP_BROADCASTER_H

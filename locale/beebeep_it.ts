@@ -400,7 +400,7 @@
     </message>
     <message>
         <source>%1 You cannot reach %2 Network.</source>
-        <translation>%1 Non puoi raggiungere la rete %2.</translation>
+        <translation type="vanished">%1 Non puoi raggiungere la rete %2.</translation>
     </message>
     <message>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
@@ -589,6 +589,10 @@
     <message>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 L&apos;interfaccia di rete %2 si è disattivata.</translation>
+    </message>
+    <message>
+        <source>%1 The following networks appears as filtered: %2</source>
+        <translation>%1 Le seguenti reti sembrano filtrate: %2</translation>
     </message>
 </context>
 <context>

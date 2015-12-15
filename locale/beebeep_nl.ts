@@ -122,27 +122,31 @@
         <translation>%1 U bent niet met het %2 netwerk verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="340"/>
+        <location filename="../src/Core.cpp" line="339"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 heeft een filter op de UDP poort ontdekt %3. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="347"/>
-        <source>%1 You cannot reach %2 Network.</source>
-        <translation>Voor %1 is het %2 netwerk onbereikbaar.</translation>
+        <location filename="../src/Core.cpp" line="351"/>
+        <source>%1 The following networks appears as filtered: %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="395"/>
+        <source>%1 You cannot reach %2 Network.</source>
+        <translation type="vanished">Voor %1 is het %2 netwerk onbereikbaar.</translation>
+    </message>
+    <message>
+        <location filename="../src/Core.cpp" line="402"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>is verbonden met een extern netwerk (het nieuwe subnet is aan uw verspreidingsadreslijst toegevoegd).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="415"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 Controleer %2 meer adressen...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="428"/>
+        <location filename="../src/Core.cpp" line="435"/>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 Contact opnemen met %2...</translation>
     </message>
@@ -283,7 +287,7 @@
         <translation>%1 (%2) is verbonden met het %3 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="469"/>
+        <location filename="../src/Core.cpp" line="476"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>
