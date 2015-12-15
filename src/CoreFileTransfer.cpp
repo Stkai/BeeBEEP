@@ -169,7 +169,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
             img_preview_height = img.height();
 
           sys_msg += QString( "<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;" )
-                  .arg( img_preview_path ).arg( img_preview_height );
+                  .arg( QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
           show_image_preview = true;
         }
         else

@@ -152,7 +152,9 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, cons
 {
   if( fi.size() == 0 )
   {
+#ifdef BEEBEEP_DEBUG
     qWarning() << "GuiTransferFile::showProgress try to show progress divided by 0:" << fi.path();
+#endif
     return;
   }
 

@@ -67,6 +67,11 @@ void FileTransfer::stopListener()
 {
   if( isListening() )
   {
+    foreach( FileTransferPeer* transfer_peer, m_peers )
+      transfer_peer->cancelTransfer();
+
+    m_files.clear();
+
     qDebug() << "File Transfer listener closed";
     close();
   }

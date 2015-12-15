@@ -44,8 +44,9 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
 
 void FileTransferPeer::cancelTransfer()
 {
-  m_socket.abortConnection();
   qDebug() << name() << "cancels the transfer";
+  if( m_socket.isOpen() )
+    m_socket.abortConnection();
   m_state = FileTransferPeer::Cancelled;
   closeAll();
   emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
