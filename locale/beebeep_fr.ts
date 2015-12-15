@@ -132,17 +132,17 @@
         <translation>%1 Vous ne pouvez pas joindre le réseau %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="371"/>
+        <location filename="../src/Core.cpp" line="395"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>est connecté à partir d&apos;un réseau externe (le nouveau réseau est ajouté à votre liste de diffusion).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="384"/>
+        <location filename="../src/Core.cpp" line="408"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 Vérfication %2 d&apos;adresses...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="404"/>
+        <location filename="../src/Core.cpp" line="428"/>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 Contact %2...</translation>
     </message>
@@ -275,7 +275,7 @@
         <translation>%1 (%2) est connecté au réseau %3.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="445"/>
+        <location filename="../src/Core.cpp" line="469"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -580,22 +580,22 @@
 <context>
     <name>FileTransferPeer</name>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="75"/>
-        <source>invalid file size</source>
+        <location filename="../src/FileTransferDownload.cpp" line="77"/>
+        <source>invalid file header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="99"/>
+        <location filename="../src/FileTransferDownload.cpp" line="103"/>
         <source>Unable to open file</source>
         <translation>Impossible d&apos;ouvrir le fichier</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="112"/>
+        <location filename="../src/FileTransferDownload.cpp" line="116"/>
         <source>Unable to write in the file</source>
         <translation>Impossible d&apos;écrire dans le fichier</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="117"/>
+        <location filename="../src/FileTransferDownload.cpp" line="121"/>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
         <translation>%1 octets téléchargés mais le fichier ne fait que %2 octets</translation>
     </message>
@@ -616,22 +616,22 @@
         <translation>Connexion : délais dépassé</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="98"/>
+        <location filename="../src/FileTransferUpload.cpp" line="101"/>
         <source>unable to send file header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="113"/>
+        <location filename="../src/FileTransferUpload.cpp" line="116"/>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
         <translation>%1 octets envoyés mais le fichier ne fait que %2 octets</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="120"/>
+        <location filename="../src/FileTransferUpload.cpp" line="123"/>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
         <translation>%1 octets envoyés non confirmés (%2 octets confirmés)</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="151"/>
+        <location filename="../src/FileTransferUpload.cpp" line="154"/>
         <source>Unable to upload data</source>
         <translation>Impossible d&apos;envoyer les données</translation>
     </message>

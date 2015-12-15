@@ -28,10 +28,10 @@
 
 
 Broadcaster::Broadcaster( QObject *parent )
-  : QObject( parent ), m_broadcastData()
+  : QObject( parent ), m_baseBroadcastAddress(), m_broadcastAddresses(), m_ipAddresses(),
+    m_broadcastSocket(), m_broadcastTimer(), m_peerAddresses(), m_contactedAddresses()
 {
   m_broadcastTimer.setSingleShot( false );
-  m_datagramSentToBaseBroadcastAddress = 0;
 
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
@@ -57,10 +57,6 @@ bool Broadcaster::startBroadcasting()
 
   m_baseBroadcastAddress = NetworkManager::instance().localBroadcastAddress();
   updateAddresses();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Broadcaster generates broadcast message data";
-#endif
-  m_broadcastData = Protocol::instance().broadcastMessage();
 
   if( Settings::instance().broadcastInterval() > 0 )
   {
@@ -84,7 +80,7 @@ void Broadcaster::stopBroadcasting()
 #endif
 
   qDebug() << "Broadcaster stops broadcasting";
-  m_datagramSentToBaseBroadcastAddress = 0;
+
   if( m_broadcastTimer.isActive() )
     m_broadcastTimer.stop();
   m_broadcastSocket.close();
@@ -92,38 +88,41 @@ void Broadcaster::stopBroadcasting()
 
 void Broadcaster::sendBroadcastDatagram()
 {
-  int addresses_contacted = 0;
-
+  QStringList sl_host_address;
+  if( !m_contactedAddresses.isEmpty() )
+  {
 #ifdef BEEBEEP_DEBUG
-  QStringList sl_host;
-  foreach( QHostAddress ha, m_broadcastAddresses )
-    sl_host << ha.toString();
-  qDebug() << "Sending datagram to hosts:" << qPrintable( sl_host.join( ", " ) );
+    foreach( QHostAddress ha, m_contactedAddresses )
+      sl_host_address << ha.toString();
+    qDebug() << "Clear contacted address list:" << qPrintable( sl_host_address.join( ", " ) );
+    sl_host_address.clear();
 #endif
+    m_contactedAddresses.clear();
+  }
+
+  if( sendDatagramToHost( m_baseBroadcastAddress ) )
+    qDebug() << "Broadcaster has contacted default network:" << qPrintable( m_baseBroadcastAddress.toString() );
+  else
+    qWarning() << "Unable to contact default network:" << qPrintable( m_baseBroadcastAddress.toString() );
+
 
   QList<QHostAddress>::iterator it = m_broadcastAddresses.begin();
   while( it != m_broadcastAddresses.end() )
   {
-    if( !sendDatagramToHost( *it ) )
+    if( sendDatagramToHost( *it ) )
     {
-      it = m_broadcastAddresses.erase( it );
-    }
-    else
-    {
-      addresses_contacted++;
+      sl_host_address << (*it).toString();
       ++it;
     }
+    else
+      it = m_broadcastAddresses.erase( it );
+
   }
 
-  if( !m_baseBroadcastAddress.isNull() && sendDatagramToHost( m_baseBroadcastAddress ) )
-  {
-    qDebug() << "Broadcaster has contacted default network:" << qPrintable( m_baseBroadcastAddress.toString() );
-    addresses_contacted++;
-    m_datagramSentToBaseBroadcastAddress++;
+  qDebug() << "Broadcaster has contacted" << m_contactedAddresses.size() << "external networks:" << qPrintable( sl_host_address.join( ", " ) );
+
+  if( !m_contactedAddresses.isEmpty() )
     QTimer::singleShot( Settings::instance().broadcastLoopbackInterval(), this, SLOT( checkLoopback() ) );
-  }
-
-  qDebug() << "Broadcaster has contacted" << addresses_contacted << "networks";
 
   QTimer::singleShot( 0, this, SLOT( searchInPeerAddresses() ) );
 }
@@ -140,13 +139,20 @@ bool Broadcaster::isLocalHostAddress( const QHostAddress& address_to_check )
 
 bool Broadcaster::sendDatagramToHost( const QHostAddress& host_address )
 {
-  if( m_broadcastSocket.writeDatagram( m_broadcastData, host_address, Settings::instance().defaultBroadcastPort() ) > 0 )
+  if( host_address.isNull() )
+    return false;
+
+  QByteArray broadcast_data = Protocol::instance().broadcastMessage( host_address );
+
+  if( m_broadcastSocket.writeDatagram( broadcast_data, host_address, Settings::instance().defaultBroadcastPort() ) > 0 )
   {
+    if( !m_contactedAddresses.contains( host_address ) )
+      m_contactedAddresses.prepend( host_address );
     return true;
   }
   else
   {
-    qWarning() << "Broadcaster does not reach the network:" << host_address.toString();
+    qWarning() << "Broadcaster does not reach the network:" << qPrintable( host_address.toString() );
     return false;
   }
 }
@@ -184,9 +190,12 @@ void Broadcaster::readBroadcastDatagram()
 
     if( isLocalHostAddress( sender_ip ) && sender_listener_port == Settings::instance().localUser().hostPort() )
     {
-      if( m_datagramSentToBaseBroadcastAddress > 0 )
-        m_datagramSentToBaseBroadcastAddress--;
-      qDebug() << "Broadcaster skip datagram received from himself:" << m_datagramSentToBaseBroadcastAddress << "pendings";
+      QHostAddress from_host_address = Protocol::instance().hostAddressFromBroadcastMessage( m );
+      if( m_contactedAddresses.contains( from_host_address ) )
+      {
+        m_contactedAddresses.removeOne( from_host_address );
+        qDebug() << "Broadcaster has received loopback datagram of network" << qPrintable( from_host_address.toString() ) << "from IP" << qPrintable( sender_ip.toString() );
+      }
       continue;
     }
 
@@ -203,7 +212,7 @@ void Broadcaster::readBroadcastDatagram()
 int Broadcaster::updateAddresses()
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Broadcaster updates the addresses";
+  qDebug() << "Broadcaster updates the network addresses";
 #endif
   m_broadcastAddresses.clear();
   m_ipAddresses.clear();
@@ -232,8 +241,7 @@ int Broadcaster::updateAddresses()
     foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
     {
       ha_broadcast = QHostAddress( s_address );
-      if( !ha_broadcast.isNull() )
-        addAddressToList( ha_broadcast );
+      addAddressToList( ha_broadcast );
     }
   }
 
@@ -243,8 +251,7 @@ int Broadcaster::updateAddresses()
 
     foreach( NetworkEntry available_broadcast_entry, available_broadcast_entries )
     {
-      if( !available_broadcast_entry.broadcast().isNull() )
-        addAddressToList( available_broadcast_entry.broadcast() );
+      addAddressToList( available_broadcast_entry.broadcast() );
 
       if( !m_ipAddresses.contains( available_broadcast_entry.hostAddress() ) )
       {
@@ -259,6 +266,9 @@ int Broadcaster::updateAddresses()
 
 bool Broadcaster::addAddressToList( const QHostAddress& host_address )
 {
+  if( host_address.isNull() )
+    return false;
+
   if( m_broadcastAddresses.contains( host_address ) )
     return false;
 
@@ -272,7 +282,7 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
 
   if( !Settings::instance().parseBroadcastAddresses() )
   {
-    qDebug() << "Broadcaster add network" << qPrintable( host_address.toString() );
+    qDebug() << "Broadcaster adds network address:" << qPrintable( host_address.toString() );
     m_broadcastAddresses.append( host_address );
     return true;
   }
@@ -294,10 +304,12 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
 
 void Broadcaster::checkLoopback()
 {
-  if( m_datagramSentToBaseBroadcastAddress > 0 )
+  if( !m_contactedAddresses.isEmpty() )
   {
-    m_datagramSentToBaseBroadcastAddress--;
-    qWarning() << "Broadcaster UDP port" <<  Settings::instance().defaultBroadcastPort() << "is blocked by firewall." << m_datagramSentToBaseBroadcastAddress << "datagram pendings";
+    QStringList sl_host;
+    foreach( QHostAddress ha, m_contactedAddresses )
+      sl_host << ha.toString();
+    qWarning() << "Broadcaster UDP port" <<  Settings::instance().defaultBroadcastPort() << "is blocked by firewall for networks:" << qPrintable( sl_host.join( ", " ) );
     emit udpPortBlocked();
   }
 }

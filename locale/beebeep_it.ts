@@ -677,11 +677,15 @@
     </message>
     <message>
         <source>invalid file size</source>
-        <translation>dimensione del file non valida</translation>
+        <translation type="vanished">dimensione del file non valida</translation>
     </message>
     <message>
         <source>unable to send file header</source>
         <translation>impossibile inizializzare l&apos;invio del file</translation>
+    </message>
+    <message>
+        <source>invalid file header</source>
+        <translation>inizializzazione non valida del file</translation>
     </message>
 </context>
 <context>

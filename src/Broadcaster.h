@@ -61,13 +61,11 @@ private:
   QList<QHostAddress> m_broadcastAddresses;
   QList<QHostAddress> m_ipAddresses;
   QUdpSocket m_broadcastSocket;
-  QByteArray m_broadcastData;
 
   QTimer m_broadcastTimer;
 
-  int m_datagramSentToBaseBroadcastAddress;
-
   QList<NetworkAddress> m_peerAddresses;
+  QList<QHostAddress> m_contactedAddresses;
 
 };
 

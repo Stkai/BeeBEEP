@@ -361,10 +361,34 @@ void Core::checkUserHostAddress( const User& u )
   QHostAddress user_host_address = NetworkManager::instance().broadcastSubnetFromIPv4HostAddress( u.hostAddress() );
 
   if( user_host_address.isNull() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Invalid broadcast address for user" << u.path();
+#endif
     return;
+  }
+
+  if( user_host_address == Settings::instance().localUser().hostAddress() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skip local user address for user" << u.path();
+#endif
+    return;
+  }
+
+  if( user_host_address == NetworkManager::instance().localBroadcastAddress() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skip subnet in the base broadcast for user" << u.path();
+#endif
+    return;
+  }
 
   if( Settings::instance().addSubnetToBroadcastAddress( user_host_address ) )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "External broadcast address" << user_host_address << "is added for user" << u.path();
+#endif
     QString sHtmlMsg = QString( "%1 %2 %3" )
                            .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
                            .arg( u.path() )

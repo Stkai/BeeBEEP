@@ -132,22 +132,22 @@
         <translation>%1 nemožeš videti %2 mrežu.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="371"/>
+        <location filename="../src/Core.cpp" line="395"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>je povezan sa spoljnom mrežom (nova podmreža je dodata u vašu listu adresa za broadcast).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="384"/>
+        <location filename="../src/Core.cpp" line="408"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 proveri %2 više adresa...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="404"/>
+        <location filename="../src/Core.cpp" line="428"/>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 poziva %2 ...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="445"/>
+        <location filename="../src/Core.cpp" line="469"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -576,22 +576,22 @@
 <context>
     <name>FileTransferPeer</name>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="75"/>
-        <source>invalid file size</source>
+        <location filename="../src/FileTransferDownload.cpp" line="77"/>
+        <source>invalid file header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="99"/>
+        <location filename="../src/FileTransferDownload.cpp" line="103"/>
         <source>Unable to open file</source>
         <translation>Nemogu da otvorim fajl</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="112"/>
+        <location filename="../src/FileTransferDownload.cpp" line="116"/>
         <source>Unable to write in the file</source>
         <translation>Nemogu da upišem u fajl</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="117"/>
+        <location filename="../src/FileTransferDownload.cpp" line="121"/>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
         <translation>%1 B je downloadovano ali veličina fajla je samo %2 B</translation>
     </message>
@@ -612,22 +612,22 @@
         <translation>Isteklo vreme za povezivanje</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="98"/>
+        <location filename="../src/FileTransferUpload.cpp" line="101"/>
         <source>unable to send file header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="113"/>
+        <location filename="../src/FileTransferUpload.cpp" line="116"/>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
         <translation>%1 B je uploadovano ali je veličina fajla samo %2 B</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="120"/>
+        <location filename="../src/FileTransferUpload.cpp" line="123"/>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
         <translation>%1 B je poslato ali nije potvrđen prijem (%2 B je potvrđeno)</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferUpload.cpp" line="151"/>
+        <location filename="../src/FileTransferUpload.cpp" line="154"/>
         <source>Unable to upload data</source>
         <translation>Nemoguć upload podataka</translation>
     </message>

@@ -46,7 +46,8 @@ public:
 
   QByteArray pingMessage() const;
   QByteArray pongMessage() const;
-  QByteArray broadcastMessage() const;
+  QByteArray broadcastMessage( const QHostAddress& ) const;
+  QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
   QByteArray helloMessage( const QString& cipher_key_tmp ) const;
   inline const QByteArray& writingMessage() const;
   inline Message systemMessage( const QString& ) const;

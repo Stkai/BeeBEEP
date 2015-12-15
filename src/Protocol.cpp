@@ -200,10 +200,28 @@ QByteArray Protocol::pongMessage() const
   return fromMessage( m );
 }
 
-QByteArray Protocol::broadcastMessage() const
+QByteArray Protocol::broadcastMessage( const QHostAddress& to_host_address ) const
 {
   Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().hostPort() ) );
+  QStringList sl;
+  sl << to_host_address.toString();
+  m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   return fromMessage( m );
+}
+
+QHostAddress Protocol::hostAddressFromBroadcastMessage( const Message& m ) const
+{
+  QHostAddress host_address;
+
+  if( m.data().isEmpty() )
+    return host_address;
+
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
+
+  if( !sl.isEmpty() )
+    host_address = QHostAddress( sl.takeFirst() );
+
+  return host_address;
 }
 
 int Protocol::protoVersion( const Message& m ) const
