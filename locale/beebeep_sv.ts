@@ -600,18 +600,18 @@
         <translation>%1 byte nerladdat, men filstorleken är endast %2 byte</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="51"/>
+        <location filename="../src/FileTransferPeer.cpp" line="52"/>
         <source>Transfer cancelled</source>
         <translation>Överföringen avbruten</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="112"/>
+        <location filename="../src/FileTransferPeer.cpp" line="113"/>
         <source>Transfer completed in %1</source>
         <translation>Överföringen slutförd på %1</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="170"/>
-        <location filename="../src/FileTransferPeer.cpp" line="178"/>
+        <location filename="../src/FileTransferPeer.cpp" line="171"/>
+        <location filename="../src/FileTransferPeer.cpp" line="179"/>
         <source>Connection timeout</source>
         <translation>Anslutningen överskred tidsgränsen</translation>
     </message>
@@ -1287,17 +1287,17 @@ Välj ett annat namn.</translation>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Shared folders and files</source>
         <translation>Delade mappar och filer</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Size</source>
         <translation>Storlek</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -1538,38 +1538,43 @@ Välj ett annat namn.</translation>
         <translation>Logga till fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="109"/>
+        <location filename="../src/GuiLog.cpp" line="108"/>
+        <source>Block scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiLog.cpp" line="115"/>
         <source>Please select a file to save the log.</source>
         <translation>Välj en fil för att spara loggen.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
         <source>Unable to save log in the file: %1</source>
         <translation>Kunde inte spara loggen i filen: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="144"/>
+        <location filename="../src/GuiLog.cpp" line="150"/>
         <source>%1: save log completed.</source>
         <translation>%1: Logg sparad.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open file</source>
         <translation>Öppna fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open folder</source>
         <translation>Öppna mapp</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="186"/>
+        <location filename="../src/GuiLog.cpp" line="192"/>
         <source>%1 not found</source>
         <translation>%1 kunde inte hittas</translation>
     </message>
@@ -3486,109 +3491,114 @@ Välj ett annat namn.</translation>
         <translation>Sökväg</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="77"/>
+        <location filename="../src/GuiShareLocal.cpp" line="76"/>
         <source>Share a file</source>
         <translation>Dela en fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="78"/>
+        <location filename="../src/GuiShareLocal.cpp" line="77"/>
         <source>Add a file to your local share</source>
         <translation>Lägg til en fil i din lokala utdelning</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="80"/>
+        <location filename="../src/GuiShareLocal.cpp" line="79"/>
         <source>Share a folder</source>
         <translation>Dela en mapp</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="81"/>
+        <location filename="../src/GuiShareLocal.cpp" line="80"/>
         <source>Add a folder to your local share</source>
         <translation>Lägg till en mapp i din lokala utdelning</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="83"/>
+        <location filename="../src/GuiShareLocal.cpp" line="82"/>
         <source>Update shares</source>
         <translation>Uppdatera utdelningar</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="84"/>
+        <location filename="../src/GuiShareLocal.cpp" line="83"/>
         <source>Update shared folders and files</source>
         <translation>Uppdatera delade mappar och filer</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="86"/>
+        <location filename="../src/GuiShareLocal.cpp" line="85"/>
         <source>Remove shared path</source>
         <translation>Ta bort utdelning</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="87"/>
+        <location filename="../src/GuiShareLocal.cpp" line="86"/>
         <source>Remove shared path from the list</source>
         <translation>Ta bort utdelning från listan</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="89"/>
+        <location filename="../src/GuiShareLocal.cpp" line="88"/>
         <source>Clear all shares</source>
         <translation>Rensa alla utdelningar</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="90"/>
+        <location filename="../src/GuiShareLocal.cpp" line="89"/>
         <source>Clear all shared paths from the list</source>
         <translation>Ta bort alla utdelningar från listan</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="99"/>
+        <location filename="../src/GuiShareLocal.cpp" line="98"/>
         <source>Shared files</source>
         <translation>Delade filer</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="101"/>
+        <location filename="../src/GuiShareLocal.cpp" line="100"/>
         <source>File transfer is disabled</source>
         <translation>Filöverföring är inaktiverad</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="119"/>
+        <location filename="../src/GuiShareLocal.cpp" line="118"/>
         <source>Select a file to share</source>
         <translation>Välj en fil att dela</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="133"/>
+        <location filename="../src/GuiShareLocal.cpp" line="132"/>
         <source>Select a folder to share</source>
         <translation>Välj en mapp att dela</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="152"/>
+        <location filename="../src/GuiShareLocal.cpp" line="151"/>
         <source>Please select a shared path.</source>
         <translation>Välj en utdelning.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="169"/>
+        <location filename="../src/GuiShareLocal.cpp" line="168"/>
         <source>Do you really want to remove all shared paths?</source>
         <translation>Vill du verkligen ta bort alla utdelningar?</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="216"/>
+        <location filename="../src/GuiShareLocal.cpp" line="215"/>
         <source>Click to open %1</source>
         <translation>Klicka för att öppna %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="231"/>
+        <location filename="../src/GuiShareLocal.cpp" line="230"/>
         <source>%1 is already shared.</source>
         <translation>%1 är redan delad.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="272"/>
+        <location filename="../src/GuiShareLocal.cpp" line="271"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>Filöverföring är inaktiverad. Öppna inställningsmenyn för att aktivera det.</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <source>%1 shared files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3828,17 +3838,17 @@ Välj ett annat namn.</translation>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="118"/>
+        <location filename="../src/GuiTransferFile.cpp" line="116"/>
         <source>Completed</source>
         <translation>Slutfört</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="124"/>
+        <location filename="../src/GuiTransferFile.cpp" line="122"/>
         <source>Cancel Transfer</source>
         <translation>Avbryt överföring</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="130"/>
+        <location filename="../src/GuiTransferFile.cpp" line="128"/>
         <source>Not Completed</source>
         <translation>Ej slutfört</translation>
     </message>

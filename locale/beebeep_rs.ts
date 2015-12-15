@@ -600,18 +600,18 @@
         <translation>%1 B je downloadovano ali veličina fajla je samo %2 B</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="51"/>
+        <location filename="../src/FileTransferPeer.cpp" line="52"/>
         <source>Transfer cancelled</source>
         <translation>Prenos je otkazan</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="112"/>
+        <location filename="../src/FileTransferPeer.cpp" line="113"/>
         <source>Transfer completed in %1</source>
         <translation>Prenos je završen za %1</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="170"/>
-        <location filename="../src/FileTransferPeer.cpp" line="178"/>
+        <location filename="../src/FileTransferPeer.cpp" line="171"/>
+        <location filename="../src/FileTransferPeer.cpp" line="179"/>
         <source>Connection timeout</source>
         <translation>Isteklo vreme za povezivanje</translation>
     </message>
@@ -1286,17 +1286,17 @@ Please select a different name.</source>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Shared folders and files</source>
         <translation>Deljeni folderi i fajlovi</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Size</source>
         <translation>Veličina</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -1537,38 +1537,43 @@ Please select a different name.</source>
         <translation>Log u fajl</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="109"/>
+        <location filename="../src/GuiLog.cpp" line="108"/>
+        <source>Block scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiLog.cpp" line="115"/>
         <source>Please select a file to save the log.</source>
         <translation>Izaberi fajl za snimanje loga.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
         <source>Unable to save log in the file: %1</source>
         <translation>Nemoguće snimanje loga u fajl: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="144"/>
+        <location filename="../src/GuiLog.cpp" line="150"/>
         <source>%1: save log completed.</source>
         <translation>%1: snimanje loga završeno.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open file</source>
         <translation>Otvori fajl</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open folder</source>
         <translation>Otvori folder</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="186"/>
+        <location filename="../src/GuiLog.cpp" line="192"/>
         <source>%1 not found</source>
         <translation>%1 nije nađen</translation>
     </message>
@@ -3477,109 +3482,114 @@ Please select a different name.</source>
         <translation>Put</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="77"/>
+        <location filename="../src/GuiShareLocal.cpp" line="76"/>
         <source>Share a file</source>
         <translation>Deli fajl</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="78"/>
+        <location filename="../src/GuiShareLocal.cpp" line="77"/>
         <source>Add a file to your local share</source>
         <translation>Dodaj fajl u tvoj folder za deljenje</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="80"/>
+        <location filename="../src/GuiShareLocal.cpp" line="79"/>
         <source>Share a folder</source>
         <translation>Folder za deljenje</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="81"/>
+        <location filename="../src/GuiShareLocal.cpp" line="80"/>
         <source>Add a folder to your local share</source>
         <translation>Dodaj folder za deljenje</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="83"/>
+        <location filename="../src/GuiShareLocal.cpp" line="82"/>
         <source>Update shares</source>
         <translation>Osveži deljenje</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="84"/>
+        <location filename="../src/GuiShareLocal.cpp" line="83"/>
         <source>Update shared folders and files</source>
         <translation>Osveži deljene foldere i fajlove</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="86"/>
+        <location filename="../src/GuiShareLocal.cpp" line="85"/>
         <source>Remove shared path</source>
         <translation>Izbriši put deljenja</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="87"/>
+        <location filename="../src/GuiShareLocal.cpp" line="86"/>
         <source>Remove shared path from the list</source>
         <translation>Izbriši put za deljenje iz liste</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="89"/>
+        <location filename="../src/GuiShareLocal.cpp" line="88"/>
         <source>Clear all shares</source>
         <translation>Obriši sva deljenja</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="90"/>
+        <location filename="../src/GuiShareLocal.cpp" line="89"/>
         <source>Clear all shared paths from the list</source>
         <translation>Obriši sve deljenje puteve iz liste</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="99"/>
+        <location filename="../src/GuiShareLocal.cpp" line="98"/>
         <source>Shared files</source>
         <translation>Deljeni fajlovi</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="101"/>
+        <location filename="../src/GuiShareLocal.cpp" line="100"/>
         <source>File transfer is disabled</source>
         <translation>Transfer fajlova je isključen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="119"/>
+        <location filename="../src/GuiShareLocal.cpp" line="118"/>
         <source>Select a file to share</source>
         <translation>Izaberi fajl za deljenje</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="133"/>
+        <location filename="../src/GuiShareLocal.cpp" line="132"/>
         <source>Select a folder to share</source>
         <translation>Izaberi folder za deljenjež</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="152"/>
+        <location filename="../src/GuiShareLocal.cpp" line="151"/>
         <source>Please select a shared path.</source>
         <translation>Selektuj deljeni put.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="169"/>
+        <location filename="../src/GuiShareLocal.cpp" line="168"/>
         <source>Do you really want to remove all shared paths?</source>
         <translation>Da li zaista želiš da izbrišeš sve deljene puteve?</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>Yes</source>
         <translation>Da</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="216"/>
+        <location filename="../src/GuiShareLocal.cpp" line="215"/>
         <source>Click to open %1</source>
         <translation>Klik za otvaranje %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="231"/>
+        <location filename="../src/GuiShareLocal.cpp" line="230"/>
         <source>%1 is already shared.</source>
         <translation>%1 je već deljen.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="272"/>
+        <location filename="../src/GuiShareLocal.cpp" line="271"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>Transfer fajlova je isključen. Otvori opcije i uključi.</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <source>%1 shared files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3815,17 +3825,17 @@ Please select a different name.</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="118"/>
+        <location filename="../src/GuiTransferFile.cpp" line="116"/>
         <source>Completed</source>
         <translation>Završeno</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="124"/>
+        <location filename="../src/GuiTransferFile.cpp" line="122"/>
         <source>Cancel Transfer</source>
         <translation>Odustani od transfera</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="130"/>
+        <location filename="../src/GuiTransferFile.cpp" line="128"/>
         <source>Not Completed</source>
         <translation>Nije završeno</translation>
     </message>

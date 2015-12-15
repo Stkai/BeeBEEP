@@ -620,18 +620,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="51"/>
+        <location filename="../src/FileTransferPeer.cpp" line="52"/>
         <source>Transfer cancelled</source>
         <translation>Передача отменена</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="112"/>
+        <location filename="../src/FileTransferPeer.cpp" line="113"/>
         <source>Transfer completed in %1</source>
         <translation>Передача завершена в %1</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="170"/>
-        <location filename="../src/FileTransferPeer.cpp" line="178"/>
+        <location filename="../src/FileTransferPeer.cpp" line="171"/>
+        <location filename="../src/FileTransferPeer.cpp" line="179"/>
         <source>Connection timeout</source>
         <translation>Вышло время соединения</translation>
     </message>
@@ -1353,17 +1353,17 @@ Please select a different name.</source>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Shared folders and files</source>
         <translation>Общедоступные папки и файлы</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Size</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Status</source>
         <translation>Статус</translation>
     </message>
@@ -1674,38 +1674,43 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="109"/>
+        <location filename="../src/GuiLog.cpp" line="108"/>
+        <source>Block scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiLog.cpp" line="115"/>
         <source>Please select a file to save the log.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
         <source>Unable to save log in the file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Ok</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="144"/>
+        <location filename="../src/GuiLog.cpp" line="150"/>
         <source>%1: save log completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="186"/>
+        <location filename="../src/GuiLog.cpp" line="192"/>
         <source>%1 not found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3817,27 +3822,27 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="77"/>
+        <location filename="../src/GuiShareLocal.cpp" line="76"/>
         <source>Share a file</source>
         <translation>Поделиться файлом</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="78"/>
+        <location filename="../src/GuiShareLocal.cpp" line="77"/>
         <source>Add a file to your local share</source>
         <translation>Добавить файл в ваш локальный общий доступ</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="80"/>
+        <location filename="../src/GuiShareLocal.cpp" line="79"/>
         <source>Share a folder</source>
         <translation>Поделиться папкой</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="81"/>
+        <location filename="../src/GuiShareLocal.cpp" line="80"/>
         <source>Add a folder to your local share</source>
         <translation>Добавить папку в ваш локальный общий доступ </translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="83"/>
+        <location filename="../src/GuiShareLocal.cpp" line="82"/>
         <source>Update shares</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3846,7 +3851,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Загрузиь общедоступные файлы</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="84"/>
+        <location filename="../src/GuiShareLocal.cpp" line="83"/>
         <source>Update shared folders and files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3855,76 +3860,81 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Удалить общедоступные файлы из выбранного пути</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="86"/>
+        <location filename="../src/GuiShareLocal.cpp" line="85"/>
         <source>Remove shared path</source>
         <translation>Удалить общедоступный путь</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="87"/>
+        <location filename="../src/GuiShareLocal.cpp" line="86"/>
         <source>Remove shared path from the list</source>
         <translation>Удалить общедоступный путь из списка</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="89"/>
+        <location filename="../src/GuiShareLocal.cpp" line="88"/>
         <source>Clear all shares</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="90"/>
+        <location filename="../src/GuiShareLocal.cpp" line="89"/>
         <source>Clear all shared paths from the list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="99"/>
+        <location filename="../src/GuiShareLocal.cpp" line="98"/>
         <source>Shared files</source>
         <translation>Общедоступные файлы</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="101"/>
+        <location filename="../src/GuiShareLocal.cpp" line="100"/>
         <source>File transfer is disabled</source>
         <translation>Передача файлов выключена</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="169"/>
+        <location filename="../src/GuiShareLocal.cpp" line="168"/>
         <source>Do you really want to remove all shared paths?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>Yes</source>
         <translation type="unfinished">Да</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>No</source>
         <translation type="unfinished">Нет</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="216"/>
+        <location filename="../src/GuiShareLocal.cpp" line="215"/>
         <source>Click to open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="272"/>
+        <location filename="../src/GuiShareLocal.cpp" line="271"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>Передача файлов выключена. Откройте меню настроек для включения.</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <source>%1 shared files</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File sharing is disabled</source>
         <translation type="obsolete">Общий доступ файлов выключен</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="119"/>
+        <location filename="../src/GuiShareLocal.cpp" line="118"/>
         <source>Select a file to share</source>
         <translation>Выберите файл для общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="133"/>
+        <location filename="../src/GuiShareLocal.cpp" line="132"/>
         <source>Select a folder to share</source>
         <translation>Выберите папку для общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="152"/>
+        <location filename="../src/GuiShareLocal.cpp" line="151"/>
         <source>Please select a shared path.</source>
         <translation>Пожалуйста, выберите общедоступный путь.</translation>
     </message>
@@ -3933,7 +3943,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Двойной щелчок для открытия %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="231"/>
+        <location filename="../src/GuiShareLocal.cpp" line="230"/>
         <source>%1 is already shared.</source>
         <translation>%1 уже общедоступен.</translation>
     </message>
@@ -4249,17 +4259,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="118"/>
+        <location filename="../src/GuiTransferFile.cpp" line="116"/>
         <source>Completed</source>
         <translation>Завершено</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="124"/>
+        <location filename="../src/GuiTransferFile.cpp" line="122"/>
         <source>Cancel Transfer</source>
         <translation>Отменить передачу</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="130"/>
+        <location filename="../src/GuiTransferFile.cpp" line="128"/>
         <source>Not Completed</source>
         <translation>Не завершено</translation>
     </message>

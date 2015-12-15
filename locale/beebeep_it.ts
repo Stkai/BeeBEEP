@@ -1690,6 +1690,10 @@ Inserisci un nome differente.</translation>
         <source>Log to file</source>
         <translation>Usa un file di log</translation>
     </message>
+    <message>
+        <source>Block scrolling</source>
+        <translation>Blocca scorrimento</translation>
+    </message>
 </context>
 <context>
     <name>GuiLogWidget</name>
@@ -4071,6 +4075,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>No</source>
         <translation>No</translation>
+    </message>
+    <message>
+        <source>%1 shared files</source>
+        <translation>%1 file condivisi</translation>
     </message>
 </context>
 <context>

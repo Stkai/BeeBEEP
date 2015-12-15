@@ -29,12 +29,13 @@
 
 
 GuiFileInfoList::GuiFileInfoList()
- : QObject( 0 ), mp_tree( 0 ), m_selectedFileInfoList(), m_lastFolderItem( 0 ), m_lastUserItem( 0 )
+ : QObject( 0 ), mp_tree( 0 ), m_selectedFileInfoList(), m_lastFolderItem( 0 ), m_lastUserItem( 0 ), m_isLocal( true )
 {
 }
 
-void GuiFileInfoList::initTree( QTreeWidget* tree_widget )
+void GuiFileInfoList::initTree( QTreeWidget* tree_widget, bool is_local )
 {
+  m_isLocal = is_local;
   mp_tree = tree_widget;
   mp_tree->setColumnCount( 3 );
 
@@ -265,7 +266,7 @@ void GuiFileInfoList::addItemToFileInfoList( GuiFileInfoItem* fi_item )
     return;
   }
 
-  FileInfo fi = FileShare::instance().networkFileInfo( fi_item->userId(), fi_item->fileInfoId() );
+  FileInfo fi = m_isLocal ? FileShare::instance().localFileInfo( fi_item->fileInfoId() ) : FileShare::instance().networkFileInfo( fi_item->userId(), fi_item->fileInfoId() );
   if( !fi.isValid() )
   {
 #ifdef BEEBEEP_DEBUG
@@ -289,26 +290,20 @@ int GuiFileInfoList::parseItem( QTreeWidgetItem* tw_item )
 
   if( item->isObjectFolder() && item->childCount() > 0  )
   {
-    QList<FileInfo> folder_file_info_list = FileShare::instance().networkFolder( item->userId(), item->folder() );
+    QList<FileInfo> folder_file_info_list = m_isLocal ? FileShare::instance().localFolder( item->folder() ) : FileShare::instance().networkFolder( item->userId(), item->folder() );
     addFileInfoListToList( item->userId(), folder_file_info_list );
 
     int item_count = folder_file_info_list.size();
-    if( item_count > Settings::instance().maxQueuedDownloads() )
-      return item_count;
 
     for( int i=0; i < item->childCount(); i++ )
-    {
       item_count += parseItem( item->child( i ) );
-      if( item_count > Settings::instance().maxQueuedDownloads() )
-        return item_count;
-    }
 
     return item_count;
   }
 
   if( item->isObjectUser() )
   {
-    QList<FileInfo> user_file_info_list = FileShare::instance().fileSharedFromUser( item->userId() );
+    QList<FileInfo> user_file_info_list = m_isLocal ? FileShare::instance().fileSharedFromLocalUser() : FileShare::instance().fileSharedFromUser( item->userId() );
     addFileInfoListToList( item->userId(), user_file_info_list );
     return user_file_info_list.size();
   }

@@ -57,6 +57,7 @@ protected slots:
   void updateList();
   void openItemDoubleClicked( QTreeWidgetItem*, int );
   void openMySharesMenu( const QPoint& );
+  void openLocalSharesMenu( const QPoint& );
   void clearAllPaths();
 
 protected:

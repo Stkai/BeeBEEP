@@ -57,13 +57,12 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 #endif
   header_view->setSortIndicator( 2, Qt::AscendingOrder );
 
-  m_fileInfoList.initTree( mp_twLocalShares );
-  mp_twLocalShares->setSelectionMode( QAbstractItemView::NoSelection );
+  m_fileInfoList.initTree( mp_twLocalShares, true );
   mp_twLocalShares->setColumnHidden( GuiFileInfoItem::ColumnStatus, true );
 
-  connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMySharesMenu( const QPoint& ) ) );
-
+  connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_twLocalShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openLocalSharesMenu( const QPoint& ) ) );
 }
 
 void GuiShareLocal::setupToolBar( QToolBar* bar )
@@ -204,7 +203,7 @@ void GuiShareLocal::loadFileInfoInList()
   GuiFileInfoItem* item;
 
   m_fileInfoList.clearTree();
-  mp_twLocalShares->setUpdatesEnabled( false );
+  m_fileInfoList.setUpdatesEnabled( false );
 
   if( !FileShare::instance().local().isEmpty() )
   {
@@ -218,7 +217,7 @@ void GuiShareLocal::loadFileInfoInList()
   }
 
   setActionsEnabled( true );
-  mp_twLocalShares->setUpdatesEnabled( true );
+  m_fileInfoList.setUpdatesEnabled( true );
   showStats( file_count, total_file_size );
 }
 
@@ -306,6 +305,24 @@ void GuiShareLocal::openMySharesMenu( const QPoint& p )
     if( !item->isSelected() )
       item->setSelected( true );
     menu.addAction( mp_actRemove );
+  }
+  else
+  {
+    menu.addAction( mp_actAddFile );
+    menu.addAction( mp_actAddFolder );
+  }
+
+  menu.exec( QCursor::pos() );
+}
+
+void GuiShareLocal::openLocalSharesMenu( const QPoint& )
+{
+  int selected_items = m_fileInfoList.parseSelectedItems();
+  QMenu menu;
+
+  if( selected_items )
+  {
+    menu.addAction( QIcon( ":/images/upload.png" ), tr( "%1 shared files" ).arg( selected_items )  );
   }
   else
   {

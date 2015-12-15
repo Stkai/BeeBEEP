@@ -38,7 +38,7 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   setObjectName( "GuiShareNetwork" );
   mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Folder and Files shared in your network" ) ) );
 
-  m_fileInfoList.initTree( mp_twShares );
+  m_fileInfoList.initTree( mp_twShares, false );
 
   connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_twShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openDownloadMenu( const QPoint& ) ) );

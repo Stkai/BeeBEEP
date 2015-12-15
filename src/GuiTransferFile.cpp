@@ -91,10 +91,8 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
 
   if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "FileTransfer in progress";
-#endif
-    item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
+    if( bytes > 0 )
+      item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
     item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
     showProgress( item, u.id(), fi, bytes );
   }
@@ -165,7 +163,7 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, cons
     return;
   }
 
-  QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading") : tr( "Uploading"),
+  QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
                                       Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
                                       QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
   item->setText( ColumnProgress, file_transfer_progress );

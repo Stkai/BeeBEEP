@@ -54,6 +54,7 @@ private:
   QCheckBox* mp_cbCaseSensitive;
   QCheckBox* mp_cbWholeWordOnly;
   QCheckBox* mp_cbLogToFile;
+  QCheckBox* mp_cbBlockScrolling;
 
 };
 

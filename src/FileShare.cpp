@@ -127,6 +127,21 @@ FileInfo FileShare::localFileInfo( VNumber file_info_id ) const
   return FileInfo();
 }
 
+QList<FileInfo> FileShare::localFolder( const QString& folder_name ) const
+{
+  QList<FileInfo> folder_file_info;
+  QMultiMap<QString, FileInfo>::const_iterator it = m_local.begin();
+  while( it != m_local.end() )
+  {
+    if( it.value().shareFolder() == folder_name )
+      folder_file_info.append( it.value() );
+     ++it;
+  }
+
+  return folder_file_info;
+}
+
+
 bool FileShare::userHasFileShareList( VNumber user_id ) const
 {
   QMultiMap<VNumber, FileInfo>::const_iterator it = m_network.find( user_id );

@@ -252,6 +252,7 @@ int main( int argc, char *argv[] )
 #ifdef BEEBEEP_USE_HUNSPELL
   SpellChecker::close();
 #endif
+  qDebug() << "Done";
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();

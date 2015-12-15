@@ -612,18 +612,18 @@
         <translation>%1 bytes gedownload maar grootte van het bestand is maar %2 bytes</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="51"/>
+        <location filename="../src/FileTransferPeer.cpp" line="52"/>
         <source>Transfer cancelled</source>
         <translation>Overdracht annuleren</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="112"/>
+        <location filename="../src/FileTransferPeer.cpp" line="113"/>
         <source>Transfer completed in %1</source>
         <translation>Overdracht voltooid in %1</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferPeer.cpp" line="170"/>
-        <location filename="../src/FileTransferPeer.cpp" line="178"/>
+        <location filename="../src/FileTransferPeer.cpp" line="171"/>
+        <location filename="../src/FileTransferPeer.cpp" line="179"/>
         <source>Connection timeout</source>
         <translation>Kon niet tijdig verbinden</translation>
     </message>
@@ -1369,17 +1369,17 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Shared folders and files</source>
         <translation>Deel mappen en bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Size</source>
         <translation>Grootte</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -1694,38 +1694,43 @@ Gebruik aub een andere naam.</translation>
         <translation>Log naar bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="109"/>
+        <location filename="../src/GuiLog.cpp" line="108"/>
+        <source>Block scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiLog.cpp" line="115"/>
         <source>Please select a file to save the log.</source>
         <translation>Selecteer een bestand om log op te slaan.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
         <source>Unable to save log in the file: %1</source>
         <translation>Kan log bestand:%1 niet opslaan</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="118"/>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="124"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="144"/>
+        <location filename="../src/GuiLog.cpp" line="150"/>
         <source>%1: save log completed.</source>
         <translation>%1: Opslaan log voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="145"/>
+        <location filename="../src/GuiLog.cpp" line="151"/>
         <source>Open folder</source>
         <translation>Open map</translation>
     </message>
     <message>
-        <location filename="../src/GuiLog.cpp" line="186"/>
+        <location filename="../src/GuiLog.cpp" line="192"/>
         <source>%1 not found</source>
         <translation>%1 niet gevonden</translation>
     </message>
@@ -3742,22 +3747,22 @@ Gebruik aub een andere naam.</translation>
         <translation>Deel je mappen en bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="77"/>
+        <location filename="../src/GuiShareLocal.cpp" line="76"/>
         <source>Share a file</source>
         <translation>Deel een bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="78"/>
+        <location filename="../src/GuiShareLocal.cpp" line="77"/>
         <source>Add a file to your local share</source>
         <translation>Voeg een bestand toe aan uw lokale share</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="80"/>
+        <location filename="../src/GuiShareLocal.cpp" line="79"/>
         <source>Share a folder</source>
         <translation>Deel een map</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="81"/>
+        <location filename="../src/GuiShareLocal.cpp" line="80"/>
         <source>Add a folder to your local share</source>
         <translation>Voeg een map toe aan je lokale share</translation>
     </message>
@@ -3770,91 +3775,96 @@ Gebruik aub een andere naam.</translation>
         <translation type="vanished">Verwijder gedeelde bestanden uit de geselecteerde map</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="83"/>
+        <location filename="../src/GuiShareLocal.cpp" line="82"/>
         <source>Update shares</source>
         <translation>Update gedeelde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="84"/>
+        <location filename="../src/GuiShareLocal.cpp" line="83"/>
         <source>Update shared folders and files</source>
         <translation>Update gedeelde mappen en bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="86"/>
+        <location filename="../src/GuiShareLocal.cpp" line="85"/>
         <source>Remove shared path</source>
         <translation>Verwijder gedeelde map</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="87"/>
+        <location filename="../src/GuiShareLocal.cpp" line="86"/>
         <source>Remove shared path from the list</source>
         <translation>Verwijder gedeelde map uit de lijst</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="89"/>
+        <location filename="../src/GuiShareLocal.cpp" line="88"/>
         <source>Clear all shares</source>
         <translation>Verwijder alle gedeelde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="90"/>
+        <location filename="../src/GuiShareLocal.cpp" line="89"/>
         <source>Clear all shared paths from the list</source>
         <translation>Verwijder alle gedeelde paden van de lijst</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="99"/>
+        <location filename="../src/GuiShareLocal.cpp" line="98"/>
         <source>Shared files</source>
         <translation>Gedeelde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="101"/>
+        <location filename="../src/GuiShareLocal.cpp" line="100"/>
         <source>File transfer is disabled</source>
         <translation>Bestandsoverdracht is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="119"/>
+        <location filename="../src/GuiShareLocal.cpp" line="118"/>
         <source>Select a file to share</source>
         <translation>Selecteer een bestand om te delen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="133"/>
+        <location filename="../src/GuiShareLocal.cpp" line="132"/>
         <source>Select a folder to share</source>
         <translation>Selecteer een map om te delen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="152"/>
+        <location filename="../src/GuiShareLocal.cpp" line="151"/>
         <source>Please select a shared path.</source>
         <translation>Selecteer een gedeelde map.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="169"/>
+        <location filename="../src/GuiShareLocal.cpp" line="168"/>
         <source>Do you really want to remove all shared paths?</source>
         <translation>Wil je echt alle gedeelde paden verwijderen?</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/GuiShareLocal.cpp" line="169"/>
         <source>No</source>
         <translation>Nee</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="216"/>
+        <location filename="../src/GuiShareLocal.cpp" line="215"/>
         <source>Click to open %1</source>
         <translation>Klik om %1 te openen</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <source>%1 shared files</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Double click to open %1</source>
         <translation type="obsolete">Dubbelklik op te openen %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="231"/>
+        <location filename="../src/GuiShareLocal.cpp" line="230"/>
         <source>%1 is already shared.</source>
         <translation>%1 is al geopend.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="272"/>
+        <location filename="../src/GuiShareLocal.cpp" line="271"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>Bestandsoverdracht is uitgeschakeld. Open het optie menu om het in te schakelen.</translation>
     </message>
@@ -4170,17 +4180,17 @@ Gebruik aub een andere naam.</translation>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="118"/>
+        <location filename="../src/GuiTransferFile.cpp" line="116"/>
         <source>Completed</source>
         <translation>Voltooid</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="124"/>
+        <location filename="../src/GuiTransferFile.cpp" line="122"/>
         <source>Cancel Transfer</source>
         <translation>Overdracht annuleren</translation>
     </message>
     <message>
-        <location filename="../src/GuiTransferFile.cpp" line="130"/>
+        <location filename="../src/GuiTransferFile.cpp" line="128"/>
         <source>Not Completed</source>
         <translation>Niet voltooid</translation>
     </message>

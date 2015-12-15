@@ -37,7 +37,7 @@ class GuiFileInfoList : public QObject
 public:
   GuiFileInfoList();
 
-  void initTree( QTreeWidget* );
+  void initTree( QTreeWidget*, bool is_local );
   inline void setUpdatesEnabled( bool );
 
   GuiFileInfoItem* userItem( VNumber );
@@ -70,6 +70,7 @@ private:
   QList<SharedFileInfo> m_selectedFileInfoList;
   GuiFileInfoItem* m_lastFolderItem;
   GuiFileInfoItem* m_lastUserItem;
+  bool m_isLocal;
 
 };
 

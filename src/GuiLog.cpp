@@ -101,6 +101,12 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbWholeWordOnly->setText( tr( "Whole word" ) );
   bar->addWidget( mp_cbWholeWordOnly );
 
+  bar->addSeparator();
+
+  mp_cbBlockScrolling = new QCheckBox( bar );
+  mp_cbBlockScrolling->setObjectName( "GuiCheckBoxBlockScrolling" );
+  mp_cbBlockScrolling->setText( tr( "Block scrolling" ) );
+  bar->addWidget( mp_cbBlockScrolling );
 }
 
 void GuiLog::saveLogAs()
@@ -220,6 +226,18 @@ void GuiLog::refreshLog()
     cursor.movePosition( QTextCursor::End );
     cursor.insertText( plain_text );
     Log::instance().clear();
+
+    if( !mp_cbBlockScrolling->isChecked() )
+    {
+      QScrollBar *bar = mp_teLog->verticalScrollBar();
+      if( bar )
+      {
+        if( !bar->isSliderDown() )
+          bar->setValue( bar->maximum() );
+      }
+      else
+        mp_teLog->ensureCursorVisible();
+    }
   }
 }
 
