@@ -56,7 +56,7 @@ Settings::Settings()
 #else
   m_saveDataInUserApplicationFolder = false;
   m_useNativeEmoticons = false;
-  m_useMulticastDns = false;
+  m_useMulticastDns = true;
 #endif
   m_allowMultipleInstances = false;
   m_trustNickname = true;

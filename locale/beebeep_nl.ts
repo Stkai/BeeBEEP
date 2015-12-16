@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -128,12 +128,12 @@
     </message>
     <message>
         <location filename="../src/Core.cpp" line="351"/>
-        <source>%1 The following networks appear as filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <source>%1 The following networks appears as filtered: %2</source>
+        <translation>%1 De volgende netwerken wordt weergegeven als gefilterd: %2</translation>
     </message>
     <message>
         <source>%1 You cannot reach %2 Network.</source>
-        <translation type="vanished">Voor %1 is het %2 netwerk onbereikbaar.</translation>
+        <translation>Voor %1 is het %2 netwerk onbereikbaar.</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="402"/>
@@ -188,7 +188,7 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="76"/>
         <source>Happy New Year!</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelukkig Nieuw Jaar!</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="99"/>
@@ -230,7 +230,7 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="268"/>
         <source>Unable to send the message: this chat is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bericht niet verzenden: de chat is uitgeschakeld.</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="302"/>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>%1 %2 can not be invited to the group.</source>
-        <translation type="vanished">%1 %2 kan niet uitgenodigd worden voor de groep.</translation>
+        <translation>%1 %2 kan niet uitgenodigd worden voor de groep.</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="410"/>
@@ -289,7 +289,7 @@
     <message>
         <location filename="../src/Core.cpp" line="476"/>
         <source>%1 Network interface %2 is gone down.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Netwerkkaart %2 is verdwenen.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="42"/>
@@ -473,7 +473,7 @@
     </message>
     <message>
         <source>%1 %2 has not file shared.</source>
-        <translation type="vanished">%1 %2 heeft geen bestanden gedeeld.</translation>
+        <translation>%1 %2 heeft geen bestanden gedeeld.</translation>
     </message>
     <message>
         <location filename="../src/CoreParser.cpp" line="286"/>
@@ -594,7 +594,7 @@
     <message>
         <location filename="../src/FileTransferDownload.cpp" line="77"/>
         <source>invalid file header</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig bestandstitel</translation>
     </message>
     <message>
         <location filename="../src/FileTransferDownload.cpp" line="103"/>
@@ -630,7 +630,7 @@
     <message>
         <location filename="../src/FileTransferUpload.cpp" line="101"/>
         <source>unable to send file header</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bestandstitel niet verzenden</translation>
     </message>
     <message>
         <location filename="../src/FileTransferUpload.cpp" line="116"/>
@@ -796,7 +796,7 @@
     <name>GuiChat</name>
     <message>
         <source>%1 Secure Mode</source>
-        <translation type="vanished">%1 Veilige Modus</translation>
+        <translation>%1 Veilige Modus</translation>
     </message>
     <message>
         <source>Emoticons</source>
@@ -864,7 +864,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="138"/>
         <source>Word completer</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig woord</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="140"/>
@@ -904,7 +904,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="370"/>
         <source>unread messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongelezen berichten</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="853"/>
@@ -935,24 +935,24 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="893"/>
         <source>Word completer is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig woord is uitgeschakeld</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="895"/>
         <source>Word completer is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig woord is ingeschakeld</translation>
     </message>
     <message>
         <source>Create group chat</source>
-        <translation type="vanished">Maak een groepschat aan</translation>
+        <translation>Maak een groepschat aan</translation>
     </message>
     <message>
         <source>Create a group chat with two or more users</source>
-        <translation type="vanished">Maak een groepschat met 2 of meer gebruikers</translation>
+        <translation>Maak een groepschat met 2 of meer gebruikers</translation>
     </message>
     <message>
         <source>Edit group chat</source>
-        <translation type="vanished">Bewerk groepschat</translation>
+        <translation>Bewerk groepschat</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="163"/>
@@ -971,11 +971,11 @@
     </message>
     <message>
         <source>Create chat</source>
-        <translation type="vanished">Chat aanmaken</translation>
+        <translation>Chat aanmaken</translation>
     </message>
     <message>
         <source>Create a chat with two or more users</source>
-        <translation type="vanished">Chat aanmaken met een of twee of meerdere gebruikers</translation>
+        <translation>Chat aanmaken met een of twee of meerdere gebruikers</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="160"/>
@@ -989,11 +989,11 @@
     </message>
     <message>
         <source>Create group</source>
-        <translation type="vanished">Groep aanmaken</translation>
+        <translation>Groep aanmaken</translation>
     </message>
     <message>
         <source>Create a group with two or more users</source>
-        <translation type="vanished">Groep aanmaken met 2 of meer gebruikers</translation>
+        <translation>Groep aanmaken met 2 of meer gebruikers</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="162"/>
@@ -1033,7 +1033,7 @@
     </message>
     <message>
         <source>(You have left)</source>
-        <translation type="vanished">(U bent weggegaan)</translation>
+        <translation>(U bent weggegaan)</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="366"/>
@@ -1067,7 +1067,7 @@
     </message>
     <message>
         <source>To</source>
-        <translation type="vanished">naar</translation>
+        <translation>naar</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="492"/>
@@ -1082,7 +1082,7 @@
     <message>
         <source>%1: unable to save the messages.
 Please check the file or the directories write permissions.</source>
-        <translation type="vanished">%1: kan de berichten niet opslaan.
+        <translation>%1: kan de berichten niet opslaan.
 Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
     </message>
     <message>
@@ -1163,7 +1163,7 @@ Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
     </message>
     <message>
         <source>*</source>
-        <translation type="vanished">*</translation>
+        <translation>*</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.ui" line="238"/>
@@ -1191,7 +1191,7 @@ Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Helvetica Neue DeskInterface&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta naam=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -1369,17 +1369,17 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Shared folders and files</source>
         <translation>Deel mappen en bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Size</source>
         <translation>Grootte</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -1482,7 +1482,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Show this page at startup</source>
-        <translation type="vanished">Toon deze pagina tijdens opstarten</translation>
+        <translation>Toon deze pagina tijdens opstarten</translation>
     </message>
     <message>
         <location filename="../src/GuiHome.ui" line="107"/>
@@ -1575,70 +1575,70 @@ Gebruik aub een andere naam.</translation>
     <name>GuiLife</name>
     <message>
         <source>Paused (press space bar to continue)</source>
-        <translation type="vanished">Gepauzeerd (druk op de spatiebalk om voort te gaan)</translation>
+        <translation>Gepauzeerd (druk op de spatiebalk om voort te gaan)</translation>
     </message>
     <message>
         <source>Alive: %1 - Died: %2 - Spaces: %3 - Step: %4</source>
-        <translation type="vanished">Levens: %1 - Dood: %2 - Spaties: %3 - Stap: %4</translation>
+        <translation>Levens: %1 - Dood: %2 - Spaties: %3 - Stap: %4</translation>
     </message>
     <message>
         <source>BeeLife</source>
-        <translation type="vanished">BeeLife</translation>
+        <translation>BeeLife</translation>
     </message>
     <message>
         <source>Do you really want to randomize and restart?</source>
-        <translation type="vanished">Wilt u echt herinstellen en herstarten?</translation>
+        <translation>Wilt u echt herinstellen en herstarten?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="vanished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="vanished">Nee</translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <source>Do you really want to clear all?</source>
-        <translation type="vanished">Wilt u echt alles wissen?</translation>
+        <translation>Wilt u echt alles wissen?</translation>
     </message>
     <message>
         <source>??? Evolution Completed ??? ... (or press space bar to continue)</source>
-        <translation type="vanished">??? Evolutie voltooid ??? ... (of druk op spatiebalk om voort te gaan)</translation>
+        <translation>??? Evolutie voltooid ??? ... (of druk op spatiebalk om voort te gaan)</translation>
     </message>
 </context>
 <context>
     <name>GuiLifeWidget</name>
     <message>
         <source>Form</source>
-        <translation type="vanished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <source>#</source>
-        <translation type="vanished">#</translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>Press space bar to start</source>
-        <translation type="vanished">Druk op spatiebalk om te starten</translation>
+        <translation>Druk op spatiebalk om te starten</translation>
     </message>
     <message>
         <source>BeeLife</source>
-        <translation type="vanished">BeeLife</translation>
+        <translation>BeeLife</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="vanished">Herstart</translation>
+        <translation>Herstart</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="vanished">Wis</translation>
+        <translation>Wis</translation>
     </message>
     <message>
         <source>Fast</source>
-        <translation type="vanished">Snel</translation>
+        <translation>Snel</translation>
     </message>
     <message>
         <source>Slow</source>
-        <translation type="vanished">Traag</translation>
+        <translation>Traag</translation>
     </message>
 </context>
 <context>
@@ -1696,7 +1696,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiLog.cpp" line="108"/>
         <source>Block scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Blok schrollen</translation>
     </message>
     <message>
         <location filename="../src/GuiLog.cpp" line="115"/>
@@ -1752,7 +1752,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Show the bar of plugins</source>
-        <translation type="vanished">Toon de plugin balk</translation>
+        <translation>Toon de plugin balk</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="253"/>
@@ -1878,7 +1878,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Show the tool bar with plugin shortcuts</source>
-        <translation type="vanished">Toon de toolbar met plugins en snelkoppelingen</translation>
+        <translation>Toon de toolbar met plugins en snelkoppelingen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="587"/>
@@ -2058,7 +2058,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="915"/>
         <source>Show new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon nieuw bericht</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="957"/>
@@ -2248,7 +2248,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>If enabled the window geometry will be reset to default value at next startup</source>
-        <translation type="vanished">Indien ingeschakeld wordt de venster geometrie teruggezet naar de standaardwaarde bij de volgende startup</translation>
+        <translation>Indien ingeschakeld wordt de venster geometrie teruggezet naar de standaardwaarde bij de volgende startup</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="822"/>
@@ -2459,7 +2459,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Show the messages&apos; timestamp</source>
-        <translation type="vanished">Toon tijd bij berichten</translation>
+        <translation>Toon tijd bij berichten</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="674"/>
@@ -2493,11 +2493,11 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Show emoticons</source>
-        <translation type="vanished">Toon emoticons</translation>
+        <translation>Toon emoticons</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and shown as images</source>
-        <translation type="vanished">Indien ingeschakeld worden emoticons herkend en getoond als afbeeldingen</translation>
+        <translation>Indien ingeschakeld worden emoticons herkend en getoond als afbeeldingen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="697"/>
@@ -2542,7 +2542,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Add a status description...</source>
-        <translation type="vanished">Voeg een statusbeschrijving toe...</translation>
+        <translation>Voeg een statusbeschrijving toe...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="903"/>
@@ -2670,7 +2670,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Please donate for %1 :-)</source>
-        <translation type="vanished">Doneer aub voor %1 :-)</translation>
+        <translation>Doneer aub voor %1 :-)</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="946"/>
@@ -3182,7 +3182,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Used Ports</source>
-        <translation type="vanished">Gebruikte poorten</translation>
+        <translation>Gebruikte poorten</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1057"/>
@@ -3615,7 +3615,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Enter the IP addresses or subnet of your local area network separed by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation type="vanished">Geef de ip adressen of het subnet van uw lokaal netwerk in gescheiden door comma&apos;s (vb: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+        <translation>Geef de ip adressen of het subnet van uw lokaal netwerk in gescheiden door comma&apos;s (vb: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="155"/>
@@ -3768,11 +3768,11 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Load shared files</source>
-        <translation type="vanished">Laad gedeelde bestanden</translation>
+        <translation>Laad gedeelde bestanden</translation>
     </message>
     <message>
         <source>Remove shared files from the selected path</source>
-        <translation type="vanished">Verwijder gedeelde bestanden uit de geselecteerde map</translation>
+        <translation>Verwijder gedeelde bestanden uit de geselecteerde map</translation>
     </message>
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="82"/>
@@ -3850,9 +3850,9 @@ Gebruik aub een andere naam.</translation>
         <translation>Klik om %1 te openen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="335"/>
+        <location filename="../src/GuiShareLocal.cpp" line="325"/>
         <source>%1 shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 gedeelde bestand</translation>
     </message>
     <message>
         <source>Double click to open %1</source>
@@ -4005,37 +4005,37 @@ Gebruik aub een andere naam.</translation>
         <translation>%1 bestanden gedeeld in je netwerk</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download single file</source>
         <translation>Download een bestand</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
         <source>Download %1 selected files</source>
         <translation>Dowload %1 geselecteerde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="377"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
         <source>MAX</source>
         <translation>Maximaal</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="380"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
         <source>Clear selection</source>
         <translation>Selectie wissen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
         <source>Expand all items</source>
         <translation>Alles uitvouwen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="385"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Collapse all items</source>
         <translation>Alles invouwen</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="396"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
         <source>Please select one or more files to download.</source>
         <translation>Selecteer aub een of meerdere bestanden om te downloaden.</translation>
     </message>
@@ -4123,43 +4123,43 @@ Gebruik aub een andere naam.</translation>
     <name>GuiTetris</name>
     <message>
         <source>Form</source>
-        <translation type="vanished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <source>BeeTetris</source>
-        <translation type="vanished">BeeTetris</translation>
+        <translation>BeeTetris</translation>
     </message>
     <message>
         <source>Next Piece</source>
-        <translation type="vanished">Volgend stuk</translation>
+        <translation>Volgend stuk</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="vanished">Score</translation>
+        <translation>Score</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation type="vanished">Lijnen</translation>
+        <translation>Lijnen</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="vanished">Level</translation>
+        <translation>Level</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="vanished">Record</translation>
+        <translation>Record</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="vanished">Start</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="vanished">Pause</translation>
+        <translation>Pause</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="vanished">Doorgaan</translation>
+        <translation>Doorgaan</translation>
     </message>
 </context>
 <context>
@@ -4232,7 +4232,7 @@ Gebruik aub een andere naam.</translation>
     <name>GuiUserListWidget</name>
     <message>
         <source>Form</source>
-        <translation type="vanished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
 </context>
 <context>
@@ -4449,12 +4449,12 @@ Gebruik aub een andere naam.</translation>
     <name>LifeGame</name>
     <message>
         <source>BeeLife</source>
-        <translation type="vanished">BeeLife</translation>
+        <translation>BeeLife</translation>
     </message>
     <message>
         <source>&lt;b&gt;The Game of Life&lt;/b&gt;, also known simply as Life, is a cellular automaton devised by the British mathematician &lt;b&gt;John Horton Conway&lt;/b&gt; in 1970. The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:&lt;ul&gt;&lt;li&gt;Any live cell with less than two live neighbours dies, as if caused by under-population.&lt;/li&gt;&lt;li&gt;Any live cell with two or three live neighbours lives on to the next generation.&lt;/li&gt;&lt;li&gt;Any live cell with more than three live neighbours dies, as if by overcrowding.&lt;/li&gt;&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.&lt;/li&gt;&lt;/ul&gt;The rules continue to be applied repeatedly to create further generations.&lt;br /&gt;For more info please visit &lt;a href=http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&gt;Conway&apos;s Game of Life&lt;/a&gt;.</source>
         <translatorcomment>Sorry not going to translate this whole text word for word. Copied explanation from dutch wikipedia website.</translatorcomment>
-        <translation type="vanished">&lt;b&gt;Game of Life&lt;/b&gt;, soms kortweg Life genoemd, is een in 1970 door de Britse wiskundige &lt;b&gt;John Conway&lt;/b&gt; bedachte cellulaire automaat, een tweedimensionaal raster met vierkante &apos;cellen&apos; die &apos;levend&apos; of &apos;dood&apos; kunnen zijn, en die zich volgens vastgestelde regels ontwikkelen en daarbij allerlei patronen kunnen vormen.
+        <translation>&lt;b&gt;Game of Life&lt;/b&gt;, soms kortweg Life genoemd, is een in 1970 door de Britse wiskundige &lt;b&gt;John Conway&lt;/b&gt; bedachte cellulaire automaat, een tweedimensionaal raster met vierkante &apos;cellen&apos; die &apos;levend&apos; of &apos;dood&apos; kunnen zijn, en die zich volgens vastgestelde regels ontwikkelen en daarbij allerlei patronen kunnen vormen.
 
 Het &quot;spel&quot; werd bekend na publicatie in de rubriek Mathematical Games van Martin Gardner in Scientific American. Conway heeft veel geëxperimenteerd met verschillende sets met regels om een goede balans te vinden. Met de verkeerde regels zouden namelijk meer cellen &apos;geboren&apos; worden dan &apos;dood&apos; gaan waardoor het hele raster &apos;levend&apos; wordt, of er gaan juist zoveel cellen dood dat het hele gebied &apos;dood&apos; wordt.
 Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt;http://nl.wikipedia.org/wiki/Game_of_Life&lt;/a&gt;.</translation>
@@ -4489,7 +4489,7 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     </message>
     <message>
         <source>Nobody</source>
-        <translation type="vanished">Niemand</translation>
+        <translation>Niemand</translation>
     </message>
     <message>
         <location filename="../src/GuiChatItem.cpp" line="84"/>
@@ -4618,22 +4618,22 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <name>TetrisBoard</name>
     <message>
         <source>Pause</source>
-        <translation type="vanished">Pause</translation>
+        <translation>Pause</translation>
     </message>
     <message>
         <source>Game Over</source>
-        <translation type="vanished">Spel afgelopen</translation>
+        <translation>Spel afgelopen</translation>
     </message>
 </context>
 <context>
     <name>TetrisGame</name>
     <message>
         <source>BeeTetris</source>
-        <translation type="vanished">BeeTetris</translation>
+        <translation>BeeTetris</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right Arrow&lt;/b&gt; to move the pieces on the board. &lt;b&gt;Up&lt;/b&gt; and &lt;b&gt;Down Arrow&lt;/b&gt; to rotate left and right. &lt;b&gt;Space&lt;/b&gt; to drop down the piece. &lt;b&gt;D&lt;/b&gt; to drop the piece only one line. &lt;b&gt;P&lt;/b&gt; to pause the game.</source>
-        <translation type="vanished">Gebruik &lt;b&gt;Links&lt;/b&gt; en &lt;b&gt;Rechts&lt;/b&gt; om de stukken op het bord te bewegen. &lt;b&gt;Op&lt;/b&gt; en &lt;b&gt;Neer&lt;/b&gt; om lins en rechts om te draaien. &lt;b&gt;Spatie&lt;/b&gt; om het stukje te laten vallen. &lt;b&gt;D&lt;/b&gt; om het stukje 1 lijntje te laten zakken. &lt;b&gt;P&lt;/b&gt; om het spel te pauzeren.</translation>
+        <translation>Gebruik &lt;b&gt;Links&lt;/b&gt; en &lt;b&gt;Rechts&lt;/b&gt; om de stukken op het bord te bewegen. &lt;b&gt;Op&lt;/b&gt; en &lt;b&gt;Neer&lt;/b&gt; om lins en rechts om te draaien. &lt;b&gt;Spatie&lt;/b&gt; om het stukje te laten vallen. &lt;b&gt;D&lt;/b&gt; om het stukje 1 lijntje te laten zakken. &lt;b&gt;P&lt;/b&gt; om het spel te pauzeren.</translation>
     </message>
 </context>
 <context>
