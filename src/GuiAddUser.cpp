@@ -82,7 +82,7 @@ void GuiAddUser::saveUsers()
 {
   QStringList sl;
   foreach( UserRecord ur, m_users )
-    sl.append( Protocol::instance().saveUserRecord( ur ) );
+    sl.append( Protocol::instance().saveUserRecord( ur, false ) );
 
   Settings::instance().setUserPathList( sl );
   accept();

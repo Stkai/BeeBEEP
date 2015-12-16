@@ -128,7 +128,7 @@
     </message>
     <message>
         <location filename="../src/Core.cpp" line="351"/>
-        <source>%1 The following networks appears as filtered: %2</source>
+        <source>%1 The following networks appear as filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1286,17 +1286,17 @@ Please select a different name.</source>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Shared folders and files</source>
         <translation>Deljeni folderi i fajlovi</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Size</source>
         <translation>Veličina</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -3587,7 +3587,7 @@ Please select a different name.</source>
         <translation>Transfer fajlova je isključen. Otvori opcije i uključi.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <location filename="../src/GuiShareLocal.cpp" line="335"/>
         <source>%1 shared files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3708,37 +3708,37 @@ Please select a different name.</source>
         <translation>%1 fajlovi su deljeni u tvojoj mreži</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download single file</source>
         <translation>Download pojedinačnog fajla</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download %1 selected files</source>
         <translation>Download %1 selektovanih fajlova</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="377"/>
         <source>MAX</source>
         <translation>MAX</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="380"/>
         <source>Clear selection</source>
         <translation>Izbriši selekciju</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
         <source>Expand all items</source>
         <translation>Otvori sve</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="385"/>
         <source>Collapse all items</source>
         <translation>Spakuj sve</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="396"/>
         <source>Please select one or more files to download.</source>
         <translation>Izaberi jedan ili više fajlova za download.</translation>
     </message>

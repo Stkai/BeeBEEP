@@ -52,11 +52,14 @@ public:
   bool updateUser( const User& );
 
   void setChatOpened( bool );
+  void onTickEvent( int );
 
 private:
   QIcon selectUserIcon( int, bool ) const;
   QPixmap avatarWithStatusBox( const QPixmap&, int ) const;
   void showUserStatus();
+
+  QIcon m_defaultIcon;
 
 };
 

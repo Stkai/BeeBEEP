@@ -592,6 +592,10 @@
     </message>
     <message>
         <source>%1 The following networks appears as filtered: %2</source>
+        <translation type="vanished">%1 Le seguenti reti sembrano filtrate: %2</translation>
+    </message>
+    <message>
+        <source>%1 The following networks appear as filtered: %2</source>
         <translation>%1 Le seguenti reti sembrano filtrate: %2</translation>
     </message>
 </context>

@@ -324,3 +324,15 @@ void GuiUserList::showMenuSettings()
   if( mp_menu )
     mp_menu->exec( QCursor::pos() );
 }
+
+void GuiUserList::onTickEvent( int ticks )
+{
+  GuiUserItem* item;
+  QTreeWidgetItemIterator it( mp_twUsers );
+  while( *it )
+  {
+    item = (GuiUserItem*)(*it);
+    item->onTickEvent( ticks );
+    ++it;
+  }
+}

@@ -75,7 +75,7 @@ Settings::Settings()
   m_emoticonInRecentMenu = 30;
   m_confirmOnDownloadFile = false;
   m_promptOnCloseEvent = true;
-  m_saveUserList = false;
+  m_saveUserList = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false ) );
   setPassword( defaultPassword() );
@@ -100,6 +100,12 @@ Settings::Settings()
   m_useReturnToSendMessage = true;
   m_tickIntervalCheckIdle = 10;
   m_tickIntervalCheckNetwork = 5;
+
+  m_chatMessageFilter = QBitArray( (int)ChatMessage::NumTypes );
+  for( int i = 0; i < ChatMessage::NumTypes; i++ )
+  {
+    m_chatMessageFilter.setBit( i,  i == ChatMessage::UserStatus );
+  }
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -612,7 +618,7 @@ void Settings::load()
   m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
   m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
   m_autoLinkSavedChatByNickname = sets->value( "AutoLinkSavedChatByNickname", true ).toBool();
-  m_chatMessageFilter = sets->value( "MessageFilter", QBitArray() ).toBitArray();
+  m_chatMessageFilter = sets->value( "MessageFilter", m_chatMessageFilter ).toBitArray();
   if( m_chatMessageFilter.size() < (int)ChatMessage::NumTypes )
     m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
   m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
@@ -716,11 +722,11 @@ void Settings::load()
   m_beepFilePath = Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
-  m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", false ).toBool();
-  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 2000 ).toInt(), 100 );
+  m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
+  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 3000 ).toInt(), 1000 );
   m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
-  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 5000 ).toInt();
+  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", true ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();

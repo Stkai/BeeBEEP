@@ -128,7 +128,7 @@
     </message>
     <message>
         <location filename="../src/Core.cpp" line="351"/>
-        <source>%1 The following networks appears as filtered: %2</source>
+        <source>%1 The following networks appear as filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1290,17 +1290,17 @@ Please select a different name.</source>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Shared folders and files</source>
         <translation>Dossiers et fichiers partagés</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Status</source>
         <translation>Statut</translation>
     </message>
@@ -3611,7 +3611,7 @@ Please select a different name.</source>
         <translation>Le transfert de fichier est désactivé. Ouvrez le menu des options pour l&apos;activer.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <location filename="../src/GuiShareLocal.cpp" line="335"/>
         <source>%1 shared files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3732,37 +3732,37 @@ Please select a different name.</source>
         <translation>%1 fichiers partagés sur votre réseau</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download single file</source>
         <translation>Télécharger un fichier</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download %1 selected files</source>
         <translation>Télécharger %1 fichiers sélectionnés</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="377"/>
         <source>MAX</source>
         <translation>MAX</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="380"/>
         <source>Clear selection</source>
         <translation>Effacer la sélection</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
         <source>Expand all items</source>
         <translation>Tout développer</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="385"/>
         <source>Collapse all items</source>
         <translation>Tout réduire</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="396"/>
         <source>Please select one or more files to download.</source>
         <translation>Sélectionner un ou plusieurs fichiers à télécharger.</translation>
     </message>

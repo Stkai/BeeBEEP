@@ -46,6 +46,7 @@ signals:
 
 public slots:
   void updateChat( VNumber chat_id );
+  void onTickEvent( int );
 
 protected slots:
   void chatClicked( QTreeWidgetItem*, int );

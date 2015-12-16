@@ -181,6 +181,8 @@ bool GuiUserItem::updateUser( const User& u )
 
   showUserStatus();
 
+  m_defaultIcon = icon( 0 );
+  onTickEvent( 2 );
   return true;
 }
 
@@ -204,7 +206,7 @@ void GuiUserItem::showUserStatus()
   else if( !Settings::instance().showUserPhoto() )
     setBackground( 0, Bee::defaultBackgroundBrush() );
   else if( Settings::instance().showUserStatusBackgroundColor() )
-    setBackground( 0, Bee::userStatusBackgroundBrush( user_status  ) );
+    setBackground( 0, Bee::userStatusBackgroundBrush( user_status ) );
   else
     setBackground( 0, Bee::defaultBackgroundBrush() );
 
@@ -242,4 +244,15 @@ QPixmap GuiUserItem::avatarWithStatusBox( const QPixmap& user_avatar, int user_s
   QPainter p( &pix );
   p.drawPixmap( box_start_width, box_start_height, pix_width - box_width, pix_height - box_height, user_avatar );
   return pix;
+}
+
+void GuiUserItem::onTickEvent( int ticks )
+{
+  if( unreadMessages() > 0 )
+  {
+    if( ticks % 2 == 0 )
+      setIcon( 0, QIcon( ":/images/beebeep-message.png" ) );
+    else
+      setIcon( 0, m_defaultIcon );
+  }
 }

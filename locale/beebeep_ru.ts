@@ -136,7 +136,7 @@
     </message>
     <message>
         <location filename="../src/Core.cpp" line="351"/>
-        <source>%1 The following networks appears as filtered: %2</source>
+        <source>%1 The following networks appear as filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1353,17 +1353,17 @@ Please select a different name.</source>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Shared folders and files</source>
         <translation>Общедоступные папки и файлы</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Size</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Status</source>
         <translation>Статус</translation>
     </message>
@@ -3915,7 +3915,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Передача файлов выключена. Откройте меню настроек для включения.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <location filename="../src/GuiShareLocal.cpp" line="335"/>
         <source>%1 shared files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4088,37 +4088,37 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>%1 файлов доступно в вашей сети</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download single file</source>
         <translation>Загрузить один файл</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download %1 selected files</source>
         <translation>Загрузить %1 выбранных файлов</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="377"/>
         <source>MAX</source>
         <translation>МАКС.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="380"/>
         <source>Clear selection</source>
         <translation>Отменить выбор</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
         <source>Expand all items</source>
         <translation>Развернуть все элементы</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="385"/>
         <source>Collapse all items</source>
         <translation>Свернуть все элементы</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="396"/>
         <source>Please select one or more files to download.</source>
         <translation>Пожалуйста, выберите один или несколько файлов для загрузки.</translation>
     </message>

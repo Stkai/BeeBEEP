@@ -348,7 +348,7 @@ void Core::showBroadcasterUdpError()
 
   if( !sl.isEmpty() )
   {
-    html_msg = tr( "%1 The following networks appears as filtered: %2" )
+    html_msg = tr( "%1 The following networks appear as filtered: %2" )
                  .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
                  .arg( sl.join( ", " ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Connection );

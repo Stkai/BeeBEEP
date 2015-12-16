@@ -53,12 +53,12 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
 
 bool GuiChatItem::updateItem( const Chat& c )
 {
-  setIcon( 0, QIcon( ":/images/chat.png" ) );
-
   QString chat_name;
   QString tool_tip;
 
-  if( chatId() == ID_DEFAULT_CHAT )
+  setIcon( 0, QIcon( ":/images/chat.png" ) );
+
+  if( c.isDefault() )
   {
     chat_name = QObject::tr( "All Lan Users" );
     tool_tip = QObject::tr( "Open chat with all local users" );
@@ -95,6 +95,10 @@ bool GuiChatItem::updateItem( const Chat& c )
   setText( 0, chat_name );
   setToolTip( 0, tool_tip );
   setStatusTip( 0, tool_tip );
+
+  setData( 0, ChatUnreadMessages, c.unreadMessages() );
+  onTickEvent( 0 );
+
   return true;
 }
 
@@ -104,4 +108,15 @@ void GuiChatItem::setChatOpened( bool chat_is_opened )
     setBackground( 0, Bee::defaultHighlightBrush() );
   else
     setBackground( 0, Bee::defaultBackgroundBrush() );
+}
+
+void GuiChatItem::onTickEvent( int ticks )
+{
+  if( unreadMessages() > 0 )
+  {
+    if( ticks % 2 == 0 )
+      setIcon( 0, QIcon( ":/images/beebeep-message.png" ) );
+    else
+      setIcon( 0, QIcon( ":/images/chat.png" ) );
+  }
 }

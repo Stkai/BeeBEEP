@@ -71,6 +71,9 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::Share:
     parseFileShareMessage( u, m );
     break;
+  case Message::Hive:
+    parseHiveMessage( u, m );
+    break;
   default:
     qWarning() << "Core cannot parse the message with type" << m.type();
     break;
@@ -343,4 +346,9 @@ void Core::parseChatReadMessage( const User& u, const Message& m )
   qDebug() << "Message" << m.id() << "read from user" << u.path();
 #endif
   dispatchChatMessageReadReceived( u.id(), m );
+}
+
+void Core::parseHiveMessage( const User&, const Message& )
+{
+
 }

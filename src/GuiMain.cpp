@@ -1535,6 +1535,13 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
   bool show_message_in_tray = true;
 
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
+
+  if( !fl_chat && Settings::instance().alwaysOpenNewFloatingChat() && Settings::instance().raiseOnNewMessageArrived() )
+  {
+    detachChat( chat_id );
+    fl_chat = floatingChat( chat_id );
+  }
+
   if( fl_chat )
   {
     if( Settings::instance().raiseOnNewMessageArrived() )
@@ -3310,6 +3317,12 @@ void GuiMain::detachChat( VNumber chat_id )
     return;
   }
 
+  if( chat_id == ID_DEFAULT_CHAT )
+  {
+    showDefaultChat();
+    return;
+  }
+
   GuiFloatingChat* fl_chat = new GuiFloatingChat;
   if( !fl_chat->setChatId( chat_id ) )
   {
@@ -3589,6 +3602,9 @@ void GuiMain::onTickEvent( int ticks )
   mp_trayIcon->onTickEvent( ticks );
   if( mp_trayIcon->iconStatusIsMessage() )
     setWindowIcon( mp_trayIcon->icon() );
+
+  mp_chatList->onTickEvent( ticks );
+  mp_userList->onTickEvent( ticks );
 }
 
 void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )

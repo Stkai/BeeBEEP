@@ -128,7 +128,7 @@
     </message>
     <message>
         <location filename="../src/Core.cpp" line="351"/>
-        <source>%1 The following networks appears as filtered: %2</source>
+        <source>%1 The following networks appear as filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1299,17 +1299,17 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Shared folders and files</source>
         <translation>Sdílené složky a soubory</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../src/GuiFileInfoList.cpp" line="43"/>
+        <location filename="../src/GuiFileInfoList.cpp" line="42"/>
         <source>Status</source>
         <translation>Stav</translation>
     </message>
@@ -3620,7 +3620,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Přenos souboru je zakázán. Otevřít menu možností pro povolení přenosu.</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareLocal.cpp" line="325"/>
+        <location filename="../src/GuiShareLocal.cpp" line="335"/>
         <source>%1 shared files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3741,37 +3741,37 @@ Vyberte prosím jiné jméno.</translation>
         <translation>%1 souborů sdílených v síti</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download single file</source>
         <translation>Stáhnout jeden soubor</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="365"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
         <source>Download %1 selected files</source>
         <translation>Stáhnout %1 vybraných souborů</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="367"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="377"/>
         <source>MAX</source>
         <translation>MAX</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="370"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="380"/>
         <source>Clear selection</source>
         <translation>Smazat vybrané</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="374"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="384"/>
         <source>Expand all items</source>
         <translation>Rozbalit všechny položky</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="385"/>
         <source>Collapse all items</source>
         <translation>Sbalit všechny položky</translation>
     </message>
     <message>
-        <location filename="../src/GuiShareNetwork.cpp" line="386"/>
+        <location filename="../src/GuiShareNetwork.cpp" line="396"/>
         <source>Please select one or more files to download.</source>
         <translation>Vyberte prosím jeden nebo více souborů ke stažení.</translation>
     </message>

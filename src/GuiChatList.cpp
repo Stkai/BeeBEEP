@@ -173,3 +173,15 @@ void GuiChatList::setChatOpened( VNumber chat_id )
     ++it;
   }
 }
+
+void GuiChatList::onTickEvent( int ticks )
+{
+  GuiChatItem* item;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    item = (GuiChatItem*)(*it);
+    item->onTickEvent( ticks );
+    ++it;
+  }
+}

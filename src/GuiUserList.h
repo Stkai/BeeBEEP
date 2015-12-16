@@ -47,6 +47,8 @@ public:
   void setChatOpened( VNumber );
   inline void setMenuSettings( QMenu* );
 
+  void onTickEvent( int );
+
 signals:
   void userSelected( VNumber );
   void chatSelected( VNumber );

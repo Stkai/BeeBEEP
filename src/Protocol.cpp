@@ -65,6 +65,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Group:  return "BEE-GROU";
   case Message::Folder: return "BEE-FOLD";
   case Message::Read:   return "BEE-READ";
+  case Message::Hive:   return "BEE-HIVE";
   default:              return "BEE-BOOH";
   }
 }
@@ -95,6 +96,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Group;
   else if( msg_type == "BEE-FOLD" )
     return Message::Folder;
+  else if( msg_type == "BEE-HIVE" )
+    return Message::Hive;
   else
     return Message::Undefined;
 }
@@ -550,7 +553,7 @@ QString Protocol::saveUser( const User& u ) const
   ur.setHostAddress( u.hostAddress() );
   ur.setHostPort( u.hostPort() );
   ur.setFavorite( u.isFavorite() );
-  return saveUserRecord( ur );
+  return saveUserRecord( ur, false );
 }
 
 User Protocol::loadUser( const QString& s )
@@ -565,15 +568,18 @@ User Protocol::loadUser( const QString& s )
   return u;
 }
 
-QString Protocol::saveUserRecord( const UserRecord& ur ) const
+QString Protocol::saveUserRecord( const UserRecord& ur, bool compact_fields ) const
 {
   QStringList sl;
   sl << ur.hostAddress().toString();
   sl << QString::number( ur.hostPort() );
-  sl << ur.comment();
+  if( compact_fields )
+    sl << QString( "" );
+  else
+    sl << ur.comment();
   sl << ur.name();
   sl << ur.account();
-  if( ur.isFavorite() )
+  if( ur.isFavorite() && !compact_fields )
     sl << QString( "*" );
   else
     sl << QString( "" );
