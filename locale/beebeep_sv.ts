@@ -84,17 +84,17 @@
     <message>
         <location filename="../src/Core.cpp" line="79"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Användare %2 kan inte spara inställningar på sökväg: %3</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="95"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Användare %2 kan inte spara chattmeddelanden på sökväg: %3</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="172"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du har valt att endast gå med i följande arbetsgrupper: %2</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="233"/>
@@ -129,11 +129,11 @@
     <message>
         <location filename="../src/Core.cpp" line="351"/>
         <source>%1 The following networks appear as filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Följande nätverk visas som filtrerade: %2</translation>
     </message>
     <message>
         <source>%1 You cannot reach %2 Network.</source>
-        <translation type="vanished">%1 Du kan inte nå nätverket, %2.</translation>
+        <translation>%1 Du kan inte nå nätverket, %2.</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="402"/>
@@ -174,7 +174,7 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="76"/>
         <source>Happy New Year!</source>
-        <translation type="unfinished"></translation>
+        <translation>Gott Nytt År!</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="99"/>
@@ -216,7 +216,7 @@
     <message>
         <location filename="../src/CoreChat.cpp" line="268"/>
         <source>Unable to send the message: this chat is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte skicka meddelandet. Denna chatt är inaktiverad.</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="302"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/Core.cpp" line="476"/>
         <source>%1 Network interface %2 is gone down.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nätverksgränssnittet %2 har gått ner.</translation>
     </message>
     <message>
         <location filename="../src/CoreFileTransfer.cpp" line="42"/>
@@ -582,7 +582,7 @@
     <message>
         <location filename="../src/FileTransferDownload.cpp" line="77"/>
         <source>invalid file header</source>
-        <translation type="unfinished"></translation>
+        <translation>ogiltigt filhuvud</translation>
     </message>
     <message>
         <location filename="../src/FileTransferDownload.cpp" line="103"/>
@@ -618,7 +618,7 @@
     <message>
         <location filename="../src/FileTransferUpload.cpp" line="101"/>
         <source>unable to send file header</source>
-        <translation type="unfinished"></translation>
+        <translation>kunde inte skicka filhuvud</translation>
     </message>
     <message>
         <location filename="../src/FileTransferUpload.cpp" line="116"/>
@@ -835,17 +835,17 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="136"/>
         <source>Spell checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Stavningskontroll</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="138"/>
         <source>Word completer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordkomplettering</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="140"/>
         <source>Use Return key to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd returtangenten för att skicka meddelanden</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="145"/>
@@ -885,33 +885,33 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="370"/>
         <source>unread messages</source>
-        <translation type="unfinished"></translation>
+        <translation>olästa meddelanden</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="869"/>
         <source>Spell checking is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Stavningskontroll är aktiverad</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="876"/>
         <location filename="../src/GuiChat.cpp" line="900"/>
         <source>There is not a valid dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Det finns ingen giltig ordbok</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="893"/>
         <source>Word completer is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordkomplettering är aktiverad</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="895"/>
         <source>Word completer is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordkomplettering är inaktiverad</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="871"/>
         <source>Spell checking is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Stavningskontroll är inaktiverad</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="156"/>
@@ -935,11 +935,11 @@
     </message>
     <message>
         <source>Create group</source>
-        <translation type="vanished">Skapa grupp</translation>
+        <translation>Skapa grupp</translation>
     </message>
     <message>
         <source>Create a group with two or more users</source>
-        <translation type="vanished">Skapa en grupp med 2 eller fler användare</translation>
+        <translation>Skapa en grupp med 2 eller fler användare</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="164"/>
@@ -974,7 +974,7 @@
     </message>
     <message>
         <source>(You have left)</source>
-        <translation type="vanished">(Du har lämnat chatten)</translation>
+        <translation>(Du har lämnat chatten)</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="366"/>
@@ -983,11 +983,11 @@
     </message>
     <message>
         <source>Create chat</source>
-        <translation type="vanished">Skapa chatt</translation>
+        <translation>Skapa chatt</translation>
     </message>
     <message>
         <source>Create a chat with two or more users</source>
-        <translation type="vanished">Skapa en chatt med två eller flera användare</translation>
+        <translation>Skapa en chatt med två eller flera användare</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="162"/>
@@ -1077,12 +1077,12 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="853"/>
         <source>Use key Return to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd returtangenten för att skicka meddelanden</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="855"/>
         <source>Use key Return to make a carriage return</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd returtangenten för ny rad</translation>
     </message>
 </context>
 <context>
@@ -1424,12 +1424,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="49"/>
         <source>For the latest language translations please visit the %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Besök %1 för de senaste språkfilerna</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="50"/>
         <source>official website</source>
-        <translation type="unfinished"></translation>
+        <translation>officiell webbsida</translation>
     </message>
     <message>
         <location filename="../src/GuiLanguage.cpp" line="93"/>
@@ -1540,7 +1540,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiLog.cpp" line="108"/>
         <source>Block scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockera skrollning</translation>
     </message>
     <message>
         <location filename="../src/GuiLog.cpp" line="115"/>
@@ -2264,7 +2264,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="335"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Chattmeddelanden kan inte sparas&lt;/b&gt;. Sökväg:</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="590"/>
@@ -2289,32 +2289,32 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="623"/>
         <source>Shortcuts...</source>
-        <translation type="unfinished"></translation>
+        <translation>Genvägar...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="624"/>
         <source>Enable and edit your custom shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera och redigera dina anpassade genvägar</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="625"/>
         <source>Dictionary...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordbok...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="626"/>
         <source>Select your preferred dictionary for spell checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj önskad ordbok för stavningskontroll</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="636"/>
         <source>Open your resource folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Öppna din resursmapp</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="637"/>
         <source>Click to open your resource folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicka för att öppna din resursmapp</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="639"/>
@@ -2374,12 +2374,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="850"/>
         <source>Show status color in background</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa statusfärg i bakgrunden</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="851"/>
         <source>If enabled the user in list has colored backrgound as status</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid aktivering får användare i listan, statusfärgad bakgrund</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="858"/>
@@ -2394,17 +2394,17 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="877"/>
         <source>Recently used</source>
-        <translation type="unfinished"></translation>
+        <translation>Senast använda</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="882"/>
         <source>Change your status description...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändra din statusbeskrivning...</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="883"/>
         <source>Clear all status descriptions</source>
-        <translation type="unfinished"></translation>
+        <translation>Rensa alla statusbeskrivningar</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="903"/>
@@ -2419,7 +2419,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="915"/>
         <source>Show new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa nytt meddelande</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="922"/>
@@ -2474,12 +2474,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="991"/>
         <source>Show only message notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa endast meddelandeaviseringar</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="992"/>
         <source>If enabled tray icon shows only message notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid aktivering visas endast meddelandeavisering i meddelandefältet</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1058"/>
@@ -2718,32 +2718,32 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="3378"/>
         <source>at lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>på lunch</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3387"/>
         <source>in a meeting</source>
-        <translation type="unfinished"></translation>
+        <translation>i ett möte</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3423"/>
         <source>Do you really want to clear all saved status descriptions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vill du verkligen ta bort alla sparade statusbeskrivningar?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3539"/>
         <source>Select your dictionary path</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj sökväg till ordboken</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3547"/>
         <source>Dictionary selected: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald ordbok: %1</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="3549"/>
         <source>Unable to set dictionary: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte ange ordbok: %1</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="911"/>
@@ -3392,22 +3392,22 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="119"/>
         <source>Multicast group in beebeep.rc *</source>
-        <translation type="unfinished"></translation>
+        <translation>Multicast-grupp i beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="181"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbetsgrupper (ange dina nätverksgrupper separerade med kommatecken)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="191"/>
         <source>Accept connections only from your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Acceptera anslutning endast från dina arbetsgrupper</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="210"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange IP-adresser eller undernät i ditt lokala nätverk, separerade med kommatecken (exempel: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="236"/>
@@ -3598,7 +3598,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiShareLocal.cpp" line="335"/>
         <source>%1 shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 delade filer</translation>
     </message>
 </context>
 <context>
@@ -3765,22 +3765,22 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="34"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Genvägar</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="37"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangent</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="37"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Åtgärd</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.cpp" line="107"/>
         <source>Insert shorcut for the action: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Infoga genväg för åtgärden: %1</translation>
     </message>
 </context>
 <context>
@@ -3788,7 +3788,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiShortcut.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>Restore to default language</source>
@@ -3797,27 +3797,27 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/GuiShortcut.ui" line="23"/>
         <source>Use custom shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd anpassade genvägar</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="50"/>
         <source>Restore default shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ standardgenvägar</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="53"/>
         <source>Restore</source>
-        <translation type="unfinished">Återställ</translation>
+        <translation>Återställ</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="73"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/GuiShortcut.ui" line="80"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
 </context>
 <context>
@@ -4171,37 +4171,37 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="100"/>
         <source>Empty</source>
-        <translation type="unfinished">Tom</translation>
+        <translation>Tom</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="102"/>
         <source>Send file</source>
-        <translation type="unfinished">Skicka fil</translation>
+        <translation>Skicka fil</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="104"/>
         <source>Show file transfers</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa filöverföringar</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="106"/>
         <source>Set focus in message box</source>
-        <translation type="unfinished"></translation>
+        <translation>Sätt fokus i meddelandefältet</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="108"/>
         <source>Minimize all chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimera alla chattar</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="110"/>
         <source>Show the next unread message</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa nästa olästa meddelande</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="112"/>
         <source>Send chat message</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka chattmeddelande</translation>
     </message>
 </context>
 <context>
