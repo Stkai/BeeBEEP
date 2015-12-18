@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiHome.h"
 #include "GuiChatMessage.h"
 #include "ChatManager.h"
@@ -58,7 +59,7 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
   if( !GuiChatMessage::messageCanBeShowedInActivity( cm ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Home skips sysmess:" << cm.message();
+    qDebug() << "Home skips sysmess:" << qPrintable( Bee::removeHtmlTags( cm.message() ) );
 #endif
     return;
   }

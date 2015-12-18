@@ -340,19 +340,8 @@ void Core::showBroadcasterUdpError()
                        .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
                        .arg( Settings::instance().programName() )
                        .arg( Settings::instance().defaultBroadcastPort() );
+  html_msg += QString( " %1." ).arg( tr( "View the log messages for more informations" ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Connection );
-
-  QStringList sl;
-  foreach( QHostAddress ha, mp_broadcaster->contactedAddress() )
-    sl << ha.toString();
-
-  if( !sl.isEmpty() )
-  {
-    html_msg = tr( "%1 The following networks appear as filtered: %2" )
-                 .arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ) )
-                 .arg( sl.join( ", " ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Connection );
-  }
 }
 
 bool Core::isConnected() const

@@ -80,6 +80,8 @@ public:
   inline void setIsFacebookPageLinkClicked( bool );
   inline bool isFacebookPageLinkClicked() const;
 
+  inline bool useHive() const;
+
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
   inline void setUseMulticastDns( bool );
@@ -400,6 +402,7 @@ private:
   bool m_useIPv6;
   QHostAddress m_multicastGroupAddress;
   bool m_useChatWithAllUsers;
+  bool m_useHive;
 
   // Ini
   bool m_firstTime;
@@ -560,6 +563,7 @@ inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAl
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
 inline bool Settings::trustNickname() const { return m_trustNickname; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
+inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }
 inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
 inline int Settings::defaultFileTransferPort() const { return m_defaultFileTransferPort; }

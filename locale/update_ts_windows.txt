@@ -1,1 +1,1 @@
-C:\Qt\5.5\msvc2010\bin\lupdate -recursive -verbose ../beebeep.pro
+C:\Qt\4.8.7\bin\lupdate -recursive -verbose ../beebeep.pro

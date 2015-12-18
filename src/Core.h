@@ -188,6 +188,7 @@ protected:
   void showUserVCardChanged( const User& );
   void sendLocalUserStatus();
   void addGroup( const Group&, bool );
+  void sendLocalConnectedUsersTo( const User& );
 
   /* CoreChat */
   void createDefaultChat();

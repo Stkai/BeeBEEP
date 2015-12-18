@@ -28,4 +28,8 @@ updateqm.input = BEEBEEP_TRANSLATIONS
 updateqm.output = $$BEEBEEP_LOCALE_FOLDER/${QMAKE_FILE_BASE}.qm
 updateqm.commands = $$QMAKE_LRELEASE -silent ${QMAKE_FILE_IN} -qm $$BEEBEEP_LOCALE_FOLDER/${QMAKE_FILE_BASE}.qm
 updateqm.CONFIG += no_link target_predeps
-QMAKE_EXTRA_COMPILERS += updateqm
+
+CONFIG(release,debug|release) {
+  QMAKE_EXTRA_COMPILERS += updateqm
+}
+

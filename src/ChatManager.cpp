@@ -274,3 +274,14 @@ int ChatManager::savedChatSize( const QString& chat_name ) const
   else
     return 0;
 }
+
+int ChatManager::countNotEmptyChats() const
+{
+  int num_chats = 0;
+  foreach( Chat c, m_chats )
+  {
+    if( !c.isEmpty() )
+      num_chats++;
+  }
+  return num_chats;
+}

@@ -103,6 +103,8 @@ public:
   UserRecord loadUserRecord( const QString& ) const;
   QString saveUserStatusRecord( const UserStatusRecord& ) const;
   UserStatusRecord loadUserStatusRecord( const QString& ) const;
+  Message userRecordListToMessage( const QList<UserRecord>& );
+  QList<UserRecord> messageToUserRecordList( const Message& ) const;
 
   inline VNumber currentId() const;
   inline VNumber newId();

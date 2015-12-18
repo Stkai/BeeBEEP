@@ -59,7 +59,7 @@ void SaveChatList::save()
   {
     if( file.exists() )
     {
-      qDebug() << "Saved chat file removed:" << file_name;
+      qDebug() << "Saved chat file removed:" << qPrintable( file_name );
       file.remove();
     }
     return;
@@ -67,11 +67,11 @@ void SaveChatList::save()
 
   if( !file.open( QIODevice::WriteOnly ) )
   {
-    qWarning() << "Unable to open file" << file.fileName() << ": saving chat messages aborted";
+    qWarning() << "Unable to open file" << qPrintable( file_name ) << ": saving chat messages aborted";
     return;
   }
 
-  qDebug() << "Saving chat messages in" << file_name;
+  qDebug() << "Saving chat messages in" << qPrintable( file_name );
 
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
@@ -96,7 +96,7 @@ void SaveChatList::saveChats( QDataStream* stream )
     return;
   }
 
-  qint32 num_of_chats = ChatManager::instance().constChatList().count();
+  qint32 num_of_chats = ChatManager::instance().countNotEmptyChats();
   quint64 file_pos = stream->device()->pos();
   (*stream) << num_of_chats;
 

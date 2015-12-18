@@ -65,6 +65,7 @@ Settings::Settings()
   m_addAccountNameToDataFolder = false;
   m_preferredSubnets = "";
   m_useIPv6 = false;
+  m_useHive = true;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -191,6 +192,7 @@ bool Settings::createDefaultRcFile()
     else
       sets->setValue( "MulticastGroupAddress", m_multicastGroupAddress.toString() );
     sets->setValue( "EnableChatWithAllUsers", m_useChatWithAllUsers );
+    sets->setValue( "UseHive", m_useHive );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -249,6 +251,7 @@ void Settings::loadRcFile()
   else
     m_multicastGroupAddress = QHostAddress( multicast_group_address );
   m_useChatWithAllUsers = sets->value( "EnableChatWithAllUsers", m_useChatWithAllUsers ).toBool();
+  m_useHive = sets->value( "UseHive", m_useHive ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -423,7 +426,7 @@ QString Settings::checkVersionWebSite() const
 
 QString Settings::languageFilePath( const QString& language_folder, const QString& language_selected ) const
 {
-  return QString( "%1/%2_%3.qm" ).arg( language_folder, Settings::instance().programName().toLower(), language_selected );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2_%3.qm" ).arg( language_folder, Settings::instance().programName().toLower(), language_selected ) );
 }
 
 QString Settings::dnsRecord() const
@@ -505,19 +508,21 @@ void Settings::loadBroadcastAddressesFromFileHosts()
   if( !m_broadcastAddressesInFileHosts.isEmpty() )
     m_broadcastAddressesInFileHosts.clear();
 
-  QFile file( defaultHostsFilePath( true ) );
+  QString file_path = defaultHostsFilePath( true );
+  QFile file( file_path );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qDebug() << "File HOSTS not found in current path:" << qPrintable( file.fileName() );
-    file.setFileName( defaultHostsFilePath( false ) );
+    qDebug() << "File HOSTS not found in current path:" << qPrintable( file_path );
+    file_path = defaultHostsFilePath( false );
+    file.setFileName( file_path );
     if( !file.open( QIODevice::ReadOnly ) )
     {
-      qDebug() << "File HOSTS not found in custom path:" << qPrintable( file.fileName() );
+      qDebug() << "File HOSTS not found in custom path:" << qPrintable( file_path );
       return;
     }
   }
 
-  qDebug() << "Reading HOSTS from file" << file.fileName();
+  qDebug() << "Reading HOSTS from file" << qPrintable( file_path );
   QString address_string;
   QString line_read;
   int num_lines = 0;
@@ -1053,7 +1058,7 @@ void Settings::save()
   if( sets->isWritable() )
   {
     sets->sync();
-    qDebug() << "Settings saved in" << qPrintable( sets->fileName() );
+    qDebug() << "Settings saved in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
     m_lastSave = QDateTime::currentDateTime();
   }
   sets->deleteLater();

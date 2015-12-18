@@ -280,7 +280,7 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
   if( !messageCanBeShowed( cm ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "This chat message is filtered out:" << cm.message();
+    qDebug() << "This chat message is filtered out:" << qPrintable( Bee::removeHtmlTags( cm.message() ) );
 #endif
     return s;
   }

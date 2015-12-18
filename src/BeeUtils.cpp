@@ -360,7 +360,7 @@ bool Bee::isColorNear( const QColor& c1, const QColor& c2 )
   return qAbs( r_diff ) < 30 && qAbs( g_diff ) < 30 && qAbs( b_diff ) < 30;
 }
 
-QString Bee::removeHtmlTag( const QString& s )
+QString Bee::removeHtmlTags( const QString& s )
 {
   QTextDocument text_document;
   text_document.setHtml( s );

@@ -55,11 +55,11 @@ bool SetTranslator( QTranslator* translator, QString language_folder, QString la
   QString language_file_path = Settings::instance().languageFilePath( language_folder, lang );
   if( !translator->load( language_file_path ) )
   {
-    qDebug() << language_file_path << "file not found. Language" << lang << "will not be installed";
+    qDebug() << qPrintable( language_file_path ) << "file not found. Language" << lang << "will not be installed";
     return false;
   }
   else
-    qDebug() << "Language file" << language_file_path << "found and" << lang << "installed";
+    qDebug() << "Language file" << qPrintable( language_file_path ) << "found and" << lang << "installed";
   qApp->installTranslator( translator );
   return true;
 }

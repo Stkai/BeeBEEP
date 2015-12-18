@@ -116,7 +116,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
       showUserVCardChanged( user_with_new_vcard );
     }
     else
-      qWarning() << "Unable to read vCard from the user" << u.path();
+      qWarning() << "Unable to read vCard from" << qPrintable( u.path() );
   }
   else if( m.hasFlag( Message::UserName ) )
   {
@@ -186,7 +186,7 @@ void Core::parseChatMessage( const User& u, const Message& m )
   if( m.hasFlag( Message::Private ) || m.flags() == 0 || m.hasFlag( Message::GroupChat ) )
     dispatchChatMessageReceived( u.id(), m );
   else
-    qWarning() << "Invalid flag found in chat message (CoreParser)";
+    qWarning() << "Invalid flag found in chat message from" << qPrintable( u.path() );
 }
 
 void Core::parseGroupMessage( const User& u, const Message& m )
@@ -209,7 +209,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       if( user_path.isEmpty() )
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "ParseGroupMessage has found an empty user path";
+        qDebug() << "Invalid group message with empty user paths from" << qPrintable( u.path() );
 #endif
         continue;
       }
@@ -267,7 +267,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       removeUserFromChat( u, group_chat.id() );
   }
   else
-    qWarning() << "Invalid flag found in group message (CoreParser)";
+    qWarning() << "Invalid flag found in group message from" << qPrintable( u.path() );
 }
 
 void Core::parseFileShareMessage( const User& u, const Message& m )
@@ -282,12 +282,12 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
     if( file_info_list.isEmpty() )
     {
       msg = tr( "%1 %2 has not shared files." ).arg( icon_html ).arg( u.name() );
-      qDebug() << u.path() << "has not shared files";
+      qDebug() << qPrintable( u.path() ) << "has not shared files";
     }
     else
     {
       msg = tr( "%1 %2 has shared %3 files." ).arg( icon_html ).arg( u.name() ).arg( file_info_list.size() );
-      qDebug() << u.path() << "has shared" << file_info_list.size() << "files";
+      qDebug() << qPrintable( u.path() ) << "has shared" << file_info_list.size() << "files";
     }
 
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg, DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
@@ -300,7 +300,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
   {
     if( !Settings::instance().fileTransferIsEnabled() )
     {
-      qDebug() << "File transfer is disabled. Ignoring request from user" << u.path();
+      qDebug() << "File transfer is disabled. Ignoring request from user" << qPrintable( u.path() );
       return;
     }
 
@@ -308,7 +308,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
       sendFileShareListTo( u.id() );
   }
   else
-    qWarning() << "Invalid flag found in file share message (CoreParser)";
+    qWarning() << "Invalid flag found in file share message from" << qPrintable( u.path() );
 }
 
 void Core::parseFolderMessage( const User& u, const Message& m )
@@ -326,7 +326,7 @@ void Core::parseFolderMessage( const User& u, const Message& m )
     QList<FileInfo> file_info_list = Protocol::instance().messageFolderToInfoList( m, u.hostAddress(), &folder_name );
     if( file_info_list.isEmpty() )
     {
-      qWarning() << "Invalid file info list found in folder message (CoreParser)";
+      qWarning() << "Invalid file info list found in folder message from" << qPrintable( u.path() );
       return;
     }
 
@@ -337,18 +337,38 @@ void Core::parseFolderMessage( const User& u, const Message& m )
     emit folderDownloadRequest( u, folder_name, file_info_list );
   }
   else
-    qWarning() << "Invalid flag found in folder message (CoreParser)";
+    qWarning() << "Invalid flag found in folder message from user" << qPrintable( u.path() );
 }
 
 void Core::parseChatReadMessage( const User& u, const Message& m )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Message" << m.id() << "read from user" << u.path();
+  qDebug() << "Message" << m.id() << "read from user" << qPrintable( u.path() );
 #endif
   dispatchChatMessageReadReceived( u.id(), m );
 }
 
-void Core::parseHiveMessage( const User&, const Message& )
+void Core::parseHiveMessage( const User& u, const Message& m )
 {
+  if( !Settings::instance().useHive() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skips hive message arrived from" << qPrintable( u.path() ) << "(option disabled)";
+#endif
+    return;
+  }
 
+  if( m.hasFlag( Message::List ) )
+  {
+    QList<UserRecord> user_record_list = Protocol::instance().messageToUserRecordList( m );
+    if( user_record_list.isEmpty() )
+      return;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Hive message arrived with" << user_record_list.size() << "users from" << qPrintable( u.path() );
+#endif
+    foreach( UserRecord ur, user_record_list )
+      newPeerFound( ur.hostAddress(), ur.hostPort() );
+  }
+  else
+    qWarning() << "Invalid flag found in hive message from user" << qPrintable( u.path() );
 }

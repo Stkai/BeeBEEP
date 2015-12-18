@@ -455,3 +455,47 @@ bool Core::removeOfflineUser( VNumber user_id )
     return false;
   }
 }
+
+void Core::sendLocalConnectedUsersTo( const User& to_user )
+{
+  if( connectedUsers() < 2 )
+    return;
+
+  QList<UserRecord> user_record_list;
+  UserRecord to_ur;
+  to_ur.setHostAddress( to_user.hostAddress() );
+  to_ur.setHostPort( to_user.hostPort() );
+  user_record_list.append( to_ur );
+  Message m = Protocol::instance().userRecordListToMessage( user_record_list );
+  user_record_list.clear();
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Sending to hive new user connected:" << to_user.path();
+#endif
+
+  foreach( User u, UserManager::instance().userList().toList() )
+  {
+    if( u.isLocal() || u == to_user )
+      continue;
+
+    if( isUserConnected( u.id() ) )
+    {
+      UserRecord ur;
+      ur.setHostAddress( u.hostAddress() );
+      ur.setHostPort( u.hostPort() );
+      user_record_list.append( ur );
+      sendMessageToLocalNetwork( u, m );
+    }
+  }
+
+  if( user_record_list.isEmpty() )
+    return;
+
+  m = Protocol::instance().userRecordListToMessage( user_record_list );
+  if( !sendMessageToLocalNetwork( to_user, m ) )
+    qWarning() << "Unable to send local connected users to" << to_user.path();
+#ifdef BEEBEEP_DEBUG
+  else
+    qDebug() << "Local hive sent to user:" << to_user.path();
+#endif
+}

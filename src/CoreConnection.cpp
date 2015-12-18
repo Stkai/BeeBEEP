@@ -358,4 +358,6 @@ void Core::checkUserAuthentication( const Message& m )
 
   checkUserHostAddress( u );
   checkOfflineMessagesForUser( u );
+  if( Settings::instance().useHive() && u.protocolVersion() >= HIVE_PROTO_VERSION )
+    sendLocalConnectedUsersTo( u );
 }

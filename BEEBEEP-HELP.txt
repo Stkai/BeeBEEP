@@ -18,26 +18,27 @@
 /***************************/
 
 [BeeBEEP]
-UseConfigurationFileIni=[true/false] the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry
-BroadcastOnlyToHostsIni=[true/false] if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini
+UseConfigurationFileIni=[true/false] the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry (default=true) [1.0.0]
+BroadcastOnlyToHostsIni=[true/false] if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini (default=false) [1.0.0]
 BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
 DefaultListenerPort= is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475) [1.0.0]
 DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the connected users (default 6476) [1.0.0]
-SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data (in windows %userprofile%\Documents\beebeep-data)
-SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) [1.0.0]
-AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP [1.0.0]
-DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder [1.0.3]
-AddAccountNameToDataFolder = you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath [1.0.3]
-UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking
-PreventMultipleConnectionsFromSingleHostAddress=[true/false] if enableb BeeBEEP blocks multiple connections from single IP address 
-PreferredSubnets=(Strings "" comma separated) you can specify your subnets. BeeBEEP search your default IP address in these entries (for example ="10.184.9.255,10.184.15.255") [3.0.1]
-UseIpv6=[true/false] enable Ipv6 protocol for connection (enable it if your network supports *only* IPv6... BeeBEEP works better in IPv4)
-MulticastGroupAddress=(String "" Host Address) if not empty MulticastGroup is added to Broadcaster
-EnableChatWithAllUsers=[true/false] if enabled you can chat with all users connected by default
+SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data (in windows %userprofile%\Documents\beebeep-data) (default=false) [1.0.3]
+SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) (default=false) [1.0.0]
+AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP (default=false) [1.0.0]
+DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder (default="") [1.0.3]
+AddAccountNameToDataFolder = you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath (default=false) [1.0.3]
+UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (default=true) 
+PreventMultipleConnectionsFromSingleHostAddress=[true/false] if enabled BeeBEEP blocks multiple connections from single IP address (default=true) 
+PreferredSubnets=(Strings "" comma separated) you can specify your subnets. BeeBEEP search your default IP address in these entries (for example ="10.184.9.255,10.184.15.255") (default="") [3.0.1]
+UseIpv6=[true/false] enable Ipv6 protocol for connection (enable it if your network supports *only* IPv6... BeeBEEP works better in IPv4) (default=false) 
+MulticastGroupAddress=(String "" Host Address) if not empty MulticastGroup is added to Broadcaster (default="") 
+EnableChatWithAllUsers=[true/false] if enabled you can chat with all users connected by default (default=true) 
+UseHive=[true/false] enable HIVE protocol. BeeBEEPs tell each other their connected users (default=true) [3.0.4]
 
 [Groups]
-TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect
-TrustSystemAccount= if true BeeBEEP trusts before system account to recognize a user. Useful if your are in active directory domain or similar
+TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]
+TrustSystemAccount= if true BeeBEEP trusts before system account to recognize a user. Useful if your are in active directory domain or similar (default=false) [1.0.0]
 
 
 /***************************/

@@ -573,23 +573,23 @@ QString Protocol::saveUserRecord( const UserRecord& ur, bool compact_fields ) co
   QStringList sl;
   sl << ur.hostAddress().toString();
   sl << QString::number( ur.hostPort() );
-  if( compact_fields )
-    sl << QString( "" );
-  else
+  if( !compact_fields )
+  {
     sl << ur.comment();
-  sl << ur.name();
-  sl << ur.account();
-  if( ur.isFavorite() && !compact_fields )
-    sl << QString( "*" );
-  else
-    sl << QString( "" );
+    sl << ur.name();
+    sl << ur.account();
+    if( ur.isFavorite() )
+      sl << QString( "*" );
+    else
+      sl << QString( "" );
+  }
   return sl.join( DATA_FIELD_SEPARATOR );
 }
 
 UserRecord Protocol::loadUserRecord( const QString& s ) const
 {
   QStringList sl = s.split( DATA_FIELD_SEPARATOR );
-  if( sl.size() < 3 )
+  if( sl.size() < 2 )
   {
     qWarning() << "Invalid user record found in data:" << s << "(size error)";
     return UserRecord();
@@ -612,7 +612,8 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   else
     ur.setHostPort( host_port );
 
-  ur.setComment( sl.takeFirst() );
+  if( !sl.isEmpty() )
+    ur.setComment( sl.takeFirst() );
 
   if( !sl.isEmpty() )
     ur.setName( sl.takeFirst() );
@@ -1233,6 +1234,35 @@ QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
   while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )
     byte_array.prepend( '0' );
   return byte_array;
+}
+
+Message Protocol::userRecordListToMessage( const QList<UserRecord>& user_record_list )
+{
+  QStringList msg_list;
+  foreach( UserRecord ur, user_record_list )
+    msg_list.append( saveUserRecord( ur, true ) );
+
+  Message m( Message::Hive, newId(), msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
+  m.addFlag( Message::List );
+  return m;
+}
+
+QList<UserRecord> Protocol::messageToUserRecordList( const Message& m ) const
+{
+  QList<UserRecord> user_record_list;
+  if( m.type() != Message::Hive && !m.hasFlag( Message::List ) )
+    return user_record_list;
+
+  QStringList sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
+  UserRecord ur;
+  foreach( QString s, sl )
+  {
+    ur = loadUserRecord( s );
+    if( ur.isValid() )
+      user_record_list.append( ur );
+  }
+
+  return user_record_list;
 }
 
 QString Protocol::linkifyText( QString text )

@@ -61,7 +61,7 @@ void GuiMessageEdit::createMessageToSend()
     QString html_text = toHtml();
     foreach( Emoticon e, m_emoticonsAdded )
       html_text.replace( e.toHtml( Settings::instance().emoticonSizeInEdit() ), e.textToMatch() );
-    text = Bee::removeHtmlTag( html_text );
+    text = Bee::removeHtmlTags( html_text );
   }
   else
     text = toPlainText();

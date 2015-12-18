@@ -11,6 +11,7 @@ PreventMultipleConnectionsFromSingleHostAddress=false
 PreferredSubnets=
 UseIPv6=false
 MulticastGroupAddress=
+UseHive=true
 
 [Groups]
 TrustNickname=true

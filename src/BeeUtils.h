@@ -55,7 +55,7 @@ namespace Bee
   QString capitalizeFirstLetter( const QString&, bool all_chars_after_space );
   QColor invertColor( const QColor& );
   bool isColorNear( const QColor&, const QColor& );
-  QString removeHtmlTag( const QString& );
+  QString removeHtmlTags( const QString& );
   inline int toLittleEndianFromBig( int );
   QString chatMessageTypeToString( int );
   QBrush defaultTextBrush();

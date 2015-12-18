@@ -45,6 +45,8 @@ public:
   QStringList chatNamesToStringList( bool add_default_chat ) const;
   inline bool removeChat( const Chat& );
 
+  int countNotEmptyChats() const;
+
   bool hasName( const QString& ) const;
   int unreadMessages() const;
   bool isGroupChat( VNumber ) const;
