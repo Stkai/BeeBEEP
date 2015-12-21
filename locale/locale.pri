@@ -12,6 +12,7 @@ BEEBEEP_TRANSLATIONS = $$BEEBEEP_LOCALE_FOLDER/beebeep_xx.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_nl.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_fr.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_cz.ts \
+                $$BEEBEEP_LOCALE_FOLDER/beebeep_pt.ts \
                 $$BEEBEEP_LOCALE_FOLDER/beebeep_sv.ts
 
 isEmpty(QMAKE_LRELEASE) {
