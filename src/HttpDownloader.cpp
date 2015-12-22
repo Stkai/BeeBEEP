@@ -27,17 +27,11 @@
 
 
 HttpDownloader::HttpDownloader( QObject* parent )
- : QObject( parent ), mp_manager( 0 ), m_queuedUrls(), m_replies()
+ : QObject( parent ), m_queuedUrls(), m_downloadedFilePaths()
 {
   setObjectName( "HttpDownloader" );
-  mp_manager = new QNetworkAccessManager;
-  connect( mp_manager, SIGNAL( finished( QNetworkReply* ) ), this, SLOT( onDownloadFinished( QNetworkReply* ) ) );
-}
-
-HttpDownloader::~HttpDownloader()
-{
-  if( mp_manager )
-    delete mp_manager;
+  mp_manager = new QNetworkAccessManager( this );
+  connect( mp_manager, SIGNAL( finished( QNetworkReply* ) ), this, SLOT( onReplyFinished( QNetworkReply* ) ) );
 }
 
 QString HttpDownloader::fileNameFromUrl( const QUrl& url )
@@ -56,20 +50,29 @@ QString HttpDownloader::filePathFromUrl( const QUrl& url )
 void HttpDownloader::startDownload()
 {
   if( m_queuedUrls.isEmpty() )
-    return;
-
-  while( !m_queuedUrls.isEmpty() )
   {
-    if( m_replies.size() < Settings::instance().maxSimultaneousDownloads() )
-      doDownload( m_queuedUrls.takeFirst() );
-    else
-      break;
+    mp_manager->disconnect();
+    emit jobFinished();
+    return;
   }
+
+  doDownload( m_queuedUrls.takeFirst() );
 }
 
 void HttpDownloader::doDownload( const QUrl& url )
 {
-  qDebug() << "HttpDownloader gets url:" << qPrintable( url.toString() );
+  qDebug() << qPrintable( objectName() ) << "gets url:" << qPrintable( url.toString() );
+
+  QList<QNetworkProxy> proxy_list = QNetworkProxyFactory::systemProxyForQuery( QNetworkProxyQuery( url ) );
+  if( !proxy_list.isEmpty() )
+  {
+    QNetworkProxy np = proxy_list.takeFirst();
+    if( np.type() != QNetworkProxy::NoProxy )
+    {
+      qDebug() << qPrintable( objectName() ) << "uses network proxy" << qPrintable( np.hostName() ) << ":" << np.port();
+      mp_manager->setProxy( np );
+    }
+  }
 
   QNetworkRequest request;
   request.setUrl( url );
@@ -82,8 +85,6 @@ void HttpDownloader::doDownload( const QUrl& url )
 #ifndef QT_NO_SSL
   connect( reply, SIGNAL( sslErrors( const QList<QSslError>& ) ), SLOT( onSslErrors( const QList<QSslError>& ) ) );
 #endif
-
-  m_replies.append( reply );
 }
 
 void HttpDownloader::onDownloadProgress( qint64 bytes_received, qint64 bytes_total )
@@ -91,21 +92,23 @@ void HttpDownloader::onDownloadProgress( qint64 bytes_received, qint64 bytes_tot
   QNetworkReply *reply = qobject_cast<QNetworkReply*>( sender() );
   if( !reply )
   {
-    qWarning() << "HttpDownloader received a signal from invalid QNetworkReply instance";
+    qWarning() << qPrintable( objectName() ) << "received a signal from invalid QNetworkReply instance";
     return;
   }
 
   if( bytes_received > 0 )
   {
+#ifdef BEEBEEP_DEBUG
     QString file_name = fileNameFromUrl( reply->url() );
     qDebug() << qPrintable( file_name ) << "-> downloading" << bytes_received << "of" << bytes_total << "bytes";
+#endif;
   }
 }
 
-void HttpDownloader::onDownloadFinished( QNetworkReply *reply )
+void HttpDownloader::onReplyFinished( QNetworkReply *reply )
 {
   QUrl url = reply->url();
-  qDebug() << "HttpDownloader has finished with url:" << qPrintable( url.toString() );
+  qDebug() << qPrintable( objectName() ) << "has finished with url:" << qPrintable( url.toString() );
   QString file_path = "";
 
   if( reply->error() != QNetworkReply::NoError )
@@ -114,16 +117,22 @@ void HttpDownloader::onDownloadFinished( QNetworkReply *reply )
   }
   else
   {
-    QString file_path = filePathFromUrl( url );
+    file_path = filePathFromUrl( url );
     if( saveToDisk( file_path, reply ) )
       qDebug() << "Url" << url.toString() << "saved to" << qPrintable( file_path );
+    else
+      file_path = "";
   }
 
-  m_replies.removeAll( reply );
+  if( !file_path.isEmpty() )
+  {
+    m_downloadedFilePaths.append( file_path );
+    emit downloadCompleted( file_path );
+  }
+
   reply->deleteLater();
 
-  if( !file_path.isEmpty() )
-    emit downloadCompleted( file_path );
+  QTimer::singleShot( 0, this, SLOT( startDownload() ) );
 }
 
 bool HttpDownloader::saveToDisk( const QString& file_path, QIODevice *io_device )
@@ -141,11 +150,11 @@ bool HttpDownloader::saveToDisk( const QString& file_path, QIODevice *io_device 
   return true;
 }
 
-void HttpDownloader::onSslErrors(const QList<QSslError>& ssl_errors )
+void HttpDownloader::onSslErrors( const QList<QSslError>& ssl_errors )
 {
 #ifndef QT_NO_SSL
   foreach( QSslError ssl_error, ssl_errors )
-    qWarning() << "HttpDownloader has SSL error:" << qPrintable( ssl_error.errorString() );
+    qWarning() << qPrintable( objectName() ) << "has found SSL error:" << qPrintable( ssl_error.errorString() );
 #else
   Q_UNUSED( ssl_errors );
 #endif

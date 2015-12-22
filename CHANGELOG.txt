@@ -2,6 +2,7 @@ BEEBEEP (Secure Lan Messanger)
 
 BeeBEEP 3.0.4
 - Hive protocol added: BeeBEEPs tell each other the host address of the connected users. It can be disabled in beebeep.rc (option)
+- Check for new version at startup. It can be disabled in beebeep.rc (option)
 
 BeeBEEP 3.0.3
 - Image preview is also showed when an upload is completed

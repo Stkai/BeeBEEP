@@ -66,6 +66,7 @@ Settings::Settings()
   m_preferredSubnets = "";
   m_useIPv6 = false;
   m_useHive = true;
+  m_checkNewVersionAtStartup = true;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -193,6 +194,7 @@ bool Settings::createDefaultRcFile()
       sets->setValue( "MulticastGroupAddress", m_multicastGroupAddress.toString() );
     sets->setValue( "EnableChatWithAllUsers", m_useChatWithAllUsers );
     sets->setValue( "UseHive", m_useHive );
+    sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -252,6 +254,7 @@ void Settings::loadRcFile()
     m_multicastGroupAddress = QHostAddress( multicast_group_address );
   m_useChatWithAllUsers = sets->value( "EnableChatWithAllUsers", m_useChatWithAllUsers ).toBool();
   m_useHive = sets->value( "UseHive", m_useHive ).toBool();
+  m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -357,7 +360,12 @@ QString Settings::officialWebSite() const
 
 QString Settings::pluginWebSite() const
 {
-  return officialWebSite() + QString( BEEBEEP_PLUGIN_WEBSITE );
+  return officialWebSite() + QString( BEEBEEP_DOWNLOAD_WEBSITE );
+}
+
+QString Settings::downloadWebSite() const
+{
+  return officialWebSite() + QString( BEEBEEP_DOWNLOAD_WEBSITE );
 }
 
 QString Settings::donationWebSite() const
@@ -373,6 +381,11 @@ QString Settings::helpWebSite() const
 QString Settings::languageWebSite() const
 {
   return officialWebSite() + QString( BEEBEEP_LANGUAGE_WEBSITE );
+}
+
+QString Settings::updaterWebSite() const
+{
+  return officialWebSite() + QString( BEEBEEP_UPDATER_WEBSITE );
 }
 
 QString Settings::operatingSystem( bool use_long_name  ) const

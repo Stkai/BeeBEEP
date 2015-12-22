@@ -104,6 +104,7 @@ public slots:
   void sendHelloToHostsInSettings();
   void sendMulticastingMessage();
   void checkNetworkInterface();
+  void checkNewVersion();
 
   /* CoreChat */
   void sendWritingMessage( VNumber );
@@ -136,6 +137,7 @@ signals:
 
 protected slots:
   void showBroadcasterUdpError();
+  void onUpdaterJobCompleted();
 
   /* CoreConnection */
   void checkNewConnection( Connection* );

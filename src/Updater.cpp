@@ -21,29 +21,29 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BeeApplication.h"
 #include "HttpDownloader.h"
 #include "Settings.h"
 #include "Updater.h"
 
 
 Updater::Updater( QObject *parent )
- : QObject(parent)
+ : QObject(parent), m_versionAvailable( "" ), m_downloadUrl( "" )
 {
-
 }
 
 void Updater::checkForNewVersion()
 {
-  QUrl url( "" );
+  m_versionAvailable = "";
+  m_downloadUrl = "";
+  QUrl url( Settings::instance().updaterWebSite() );
 
-  HttpDownloader* http_downloader = new HttpDownloader;
+  HttpDownloader* http_downloader = new HttpDownloader( this );
+  connect( http_downloader, SIGNAL( downloadCompleted( const QString& ) ),this, SLOT( onDownloadCompleted( const QString& ) ), Qt::QueuedConnection );
+  connect( http_downloader, SIGNAL( jobFinished() ), this, SIGNAL( jobCompleted() ) );
+
   http_downloader->addUrl( url );
-  connect( http_downloader, SIGNAL( downloadCompleted( const QString& ) ),this, SLOT( onDownloadCompleted( const QString& ) ) );
 
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->addJob( http_downloader );
-  QMetaObject::invokeMethod( http_downloader, "startDownload", Qt::QueuedConnection );
+  QTimer::singleShot( 0, http_downloader, SLOT( startDownload() ) );
 }
 
 void Updater::onDownloadCompleted( const QString& file_path )
@@ -55,13 +55,24 @@ void Updater::onDownloadCompleted( const QString& file_path )
     return;
   }
 
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->removeJob( http_downloader );
-
   qDebug() << file_path << "download completed";
+  Settings::instance().addTemporaryFilePath( file_path );
 
-  if( http_downloader->hasQueuedDownloads() )
-    http_downloader->startDownload();
-  else
-    http_downloader->deleteLater();
+  QSettings sets( file_path, QSettings::IniFormat );
+  if( !sets.allKeys().isEmpty() )
+  {
+    sets.beginGroup( Settings::instance().operatingSystem( false ) );
+    m_versionAvailable = sets.value( "CurrentVersion", "" ).toString();
+    m_downloadUrl = sets.value( "DownloadUrl", "" ).toString();
+    sets.endGroup();
+  }
+
+  if( m_versionAvailable.isEmpty() )
+    qWarning() << file_path << "is not valid to check new version";
+
+  if( !m_downloadUrl.isEmpty() )
+  {
+    QUrl url = QUrl::fromUserInput( m_downloadUrl );
+    m_downloadUrl = url.toString();
+  }
 }

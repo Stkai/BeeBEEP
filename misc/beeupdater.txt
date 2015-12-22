@@ -1,0 +1,11 @@
+[Windows]
+CurrentVersion=3.0.3
+
+[Linux]
+CurrentVersion=3.0.3
+
+[MacOSX]
+CurrentVersion=3.0.3
+
+[OS2]
+CurrentVersion=3.0.3

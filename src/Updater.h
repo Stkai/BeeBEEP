@@ -34,9 +34,11 @@ public:
   explicit Updater( QObject *parent = 0 );
 
   inline const QString& versionAvailable() const;
+  inline const QString& downloadUrl() const;
 
 signals:
   void newVersionAvailable( const QString& );
+  void jobCompleted();
 
 public slots:
   void checkForNewVersion();
@@ -46,10 +48,12 @@ protected slots:
 
 private:
   QString m_versionAvailable;
+  QString m_downloadUrl;
 
 };
 
 // Inline Functions
 const QString& Updater::versionAvailable() const { return m_versionAvailable; }
+inline const QString& Updater::downloadUrl() const { return m_downloadUrl; }
 
 #endif // BEEBEEP_UPDATER_H

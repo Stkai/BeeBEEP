@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -400,7 +400,7 @@
     </message>
     <message>
         <source>%1 You cannot reach %2 Network.</source>
-        <translation type="vanished">%1 Non puoi raggiungere la rete %2.</translation>
+        <translation type="obsolete">%1 Non puoi raggiungere la rete %2.</translation>
     </message>
     <message>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
@@ -592,11 +592,23 @@
     </message>
     <message>
         <source>%1 The following networks appears as filtered: %2</source>
-        <translation type="vanished">%1 Le seguenti reti sembrano filtrate: %2</translation>
+        <translation type="obsolete">%1 Le seguenti reti sembrano filtrate: %2</translation>
     </message>
     <message>
         <source>%1 The following networks appear as filtered: %2</source>
-        <translation>%1 Le seguenti reti sembrano filtrate: %2</translation>
+        <translation type="obsolete">%1 Le seguenti reti sembrano filtrate: %2</translation>
+    </message>
+    <message>
+        <source>View the log messages for more informations</source>
+        <translation>Guarda i messaggi di log per ulteriori informazioni</translation>
+    </message>
+    <message>
+        <source>New version is available</source>
+        <translation>Una nuova versione è disponibile</translation>
+    </message>
+    <message>
+        <source>Click here to download</source>
+        <translation>Premi qui per scaricarla</translation>
     </message>
 </context>
 <context>
@@ -685,7 +697,7 @@
     </message>
     <message>
         <source>invalid file size</source>
-        <translation type="vanished">dimensione del file non valida</translation>
+        <translation type="obsolete">dimensione del file non valida</translation>
     </message>
     <message>
         <source>unable to send file header</source>
@@ -986,7 +998,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>(You have left)</source>
-        <translation type="vanished">(Hai lasciato)</translation>
+        <translation type="obsolete">(Hai lasciato)</translation>
     </message>
     <message>
         <source>You</source>
@@ -1002,11 +1014,11 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Create group</source>
-        <translation type="vanished">Crea gruppo</translation>
+        <translation type="obsolete">Crea gruppo</translation>
     </message>
     <message>
         <source>Create a group with two or more users</source>
-        <translation type="vanished">Crea un gruppo con due o più membri</translation>
+        <translation type="obsolete">Crea un gruppo con due o più membri</translation>
     </message>
     <message>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
@@ -1090,11 +1102,11 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Create chat</source>
-        <translation type="vanished">Crea una conversazione</translation>
+        <translation type="obsolete">Crea una conversazione</translation>
     </message>
     <message>
         <source>Create a chat with two or more users</source>
-        <translation type="vanished">Crea una conversazione con due o più utenti</translation>
+        <translation type="obsolete">Crea una conversazione con due o più utenti</translation>
     </message>
     <message>
         <source>Edit group</source>

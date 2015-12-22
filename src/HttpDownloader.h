@@ -34,19 +34,19 @@ class HttpDownloader: public QObject
 
 public:
   explicit HttpDownloader( QObject* parent = 0 );
-  ~HttpDownloader();
 
   inline void addUrl( const QUrl& );
-  inline bool hasQueuedDownloads() const;
+  inline const QStringList& downloadedFilePaths() const;
 
 public slots:
   void startDownload();
 
 signals:
   void downloadCompleted( const QString& );
+  void jobFinished();
 
 protected slots:
-  void onDownloadFinished( QNetworkReply* );
+  void onReplyFinished( QNetworkReply* );
   void onSslErrors( const QList<QSslError>& );
   void onDownloadProgress( qint64, qint64 );
 
@@ -59,12 +59,12 @@ protected:
 private:
   QNetworkAccessManager* mp_manager;
   QList<QUrl> m_queuedUrls;
-  QList<QNetworkReply*> m_replies;
+  QStringList m_downloadedFilePaths;
 
 };
 
 // Inline Functions
 inline void HttpDownloader::addUrl( const QUrl& new_value ) { m_queuedUrls.append( new_value ); }
-inline bool HttpDownloader::hasQueuedDownloads() const { return !m_queuedUrls.isEmpty(); }
+inline const QStringList& HttpDownloader::downloadedFilePaths() const { return m_downloadedFilePaths; }
 
 #endif // BEEBEEP_DOWNLOADER_H

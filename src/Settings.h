@@ -53,6 +53,7 @@ public:
   inline bool allowMultipleInstances() const;
   inline bool trustNickname() const;
   inline bool trustSystemAccount() const;
+  inline bool checkNewVersionAtStartup() const;
 
   inline const QDate& settingsCreationDate() const;
   inline const QString& dataFolder() const;
@@ -77,6 +78,8 @@ public:
   QString languageWebSite() const;
   QString httpUserAgent() const;
   QString facebookPage() const;
+  QString updaterWebSite() const;
+  QString downloadWebSite() const;
   inline void setIsFacebookPageLinkClicked( bool );
   inline bool isFacebookPageLinkClicked() const;
 
@@ -403,6 +406,7 @@ private:
   QHostAddress m_multicastGroupAddress;
   bool m_useChatWithAllUsers;
   bool m_useHive;
+  bool m_checkNewVersionAtStartup;
 
   // Ini
   bool m_firstTime;
@@ -781,5 +785,6 @@ inline void Settings::setUseWordCompleter( bool new_value ) { m_useWordCompleter
 inline bool Settings::useWordCompleter() const { return m_useWordCompleter; }
 inline int Settings::tickIntervalCheckIdle() const { return m_tickIntervalCheckIdle; }
 inline int Settings::tickIntervalCheckNetwork() const { return m_tickIntervalCheckNetwork; }
+inline bool Settings::checkNewVersionAtStartup() const { return m_checkNewVersionAtStartup; }
 
 #endif // BEEBEEP_SETTINGS_H

@@ -35,6 +35,7 @@ UseIpv6=[true/false] enable Ipv6 protocol for connection (enable it if your netw
 MulticastGroupAddress=(String "" Host Address) if not empty MulticastGroup is added to Broadcaster (default="") 
 EnableChatWithAllUsers=[true/false] if enabled you can chat with all users connected by default (default=true) 
 UseHive=[true/false] enable HIVE protocol. BeeBEEPs tell each other their connected users (default=true) [3.0.4]
+CheckNewVersionAtStartup=[true/false] enable check for new version at BeeBEEP startup (default=true) [3.0.4]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]

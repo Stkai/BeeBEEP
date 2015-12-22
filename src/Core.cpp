@@ -31,6 +31,7 @@
 #include "NetworkManager.h"
 #include "Protocol.h"
 #include "UserManager.h"
+#include "Updater.h"
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   #include "MDnsManager.h"
 #endif
@@ -197,6 +198,9 @@ bool Core::start()
   qDebug() << "Local user path:" << Settings::instance().localUser().path();
 
   checkSavingPaths();
+
+  if( Settings::instance().checkNewVersionAtStartup() )
+    QTimer::singleShot( 0, this, SLOT( checkNewVersion() ) );
 
   return true;
 }
@@ -494,4 +498,47 @@ bool Core::saveChatMessages()
   scl.save();
   qDebug() << "Chat messages are saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
   return true;
+}
+
+void Core::checkNewVersion()
+{
+  qDebug() << "Checking for new version...";
+  Updater* updater = new Updater( this );
+  connect( updater, SIGNAL( jobCompleted() ), this, SLOT( onUpdaterJobCompleted() ) );
+  QTimer::singleShot( 0, updater, SLOT( checkForNewVersion() ) );
+}
+
+void Core::onUpdaterJobCompleted()
+{
+  Updater *updater = qobject_cast<Updater*>( sender() );
+  if( !updater )
+  {
+    qWarning() << "Core received a signal from invalid Updater instance";
+    return;
+  }
+
+  QString latest_version = updater->versionAvailable();
+  QString download_url = updater->downloadUrl().isEmpty() ? Settings::instance().downloadWebSite() : updater->downloadUrl();
+
+  updater->deleteLater();
+
+  if( latest_version.isEmpty() )
+    return;
+
+  QString my_version = Settings::instance().version( false );
+
+  if( my_version >= latest_version  )
+  {
+    qDebug() << "Latest version on the website is" << qPrintable( latest_version ) << "(update is not needed)";
+    return;
+  }
+
+  qDebug() << "Latest version on website is" << qPrintable( latest_version ) << "(update is recommended)";
+
+
+  QString html_msg = QString( "%1 <b>%2</b>. <a href=""%3"">%4</a>." ).arg( Bee::iconToHtml( ":/images/update.png", "*!*" ),
+                                                           tr( "New version is available" ), download_url,
+                                                           tr( "Click here to download" ) );
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Other );
 }
