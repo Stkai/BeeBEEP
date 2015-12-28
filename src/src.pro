@@ -15,7 +15,7 @@ message( Target folder: $$DESTDIR )
 QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
-unix:!macx {
+unix:!macx:!android: {
   isEqual(QT_MAJOR_VERSION, 4): QT += phonon
   LIBS= -lxcb -lxcb-screensaver
 }
@@ -252,15 +252,16 @@ RESOURCES += beebeep.qrc emojis.qrc
 win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns
 
-win32|macx|unix: DEFINES += BEEBEEP_USE_MULTICAST_DNS
-win32|macx|unix: HEADERS += MDnsBrowser.h MDnsManager.h MDnsObject.h MDnsRecord.h MDnsRegister.h MDnsResolver.h
-win32|macx|unix: SOURCES += MDnsBrowser.cpp MDnsManager.cpp MDnsObject.cpp MDnsRecord.cpp MDnsRegister.cpp MDnsResolver.cpp
+
+win32|macx|unix:!android: DEFINES += BEEBEEP_USE_MULTICAST_DNS
+win32|macx|unix:!android: HEADERS += MDnsBrowser.h MDnsManager.h MDnsObject.h MDnsRecord.h MDnsRegister.h MDnsResolver.h
+win32|macx|unix:!android: SOURCES += MDnsBrowser.cpp MDnsManager.cpp MDnsObject.cpp MDnsRecord.cpp MDnsRegister.cpp MDnsResolver.cpp
 win32: QMAKE_LFLAGS += /NODEFAULTLIB:libcmt
 win32: LIBS += -L$$PWD/../mdns-lib/ -ldnssd
 win32: INCLUDEPATH += $$PWD/../mdns-lib
 win32: DEPENDPATH += $$PWD/../mdns-lib
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/dnssd.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/../mdns-lib/libdnssd.a
-unix:!macx: LIBS += -ldns_sd
+unix:!macx:!android: LIBS += -ldns_sd
 
 message( Libs: $$LIBS )

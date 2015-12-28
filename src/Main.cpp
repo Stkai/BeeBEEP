@@ -184,6 +184,9 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( commitDataRequest( QSessionManager& ) ), &mw, SLOT( saveSession( QSessionManager& ) ), Qt::DirectConnection );
   QObject::connect( &bee_app, SIGNAL( shutdownRequest() ), &mw, SLOT( forceShutdown() ), Qt::DirectConnection );
 
+#ifdef Q_OS_ANDROID
+  mw.setGeometry( bee_app.desktop()->screenGeometry() );
+#else
   if( !Settings::instance().guiGeometry().isEmpty() )
   {
     mw.restoreGeometry( Settings::instance().guiGeometry() );
@@ -201,6 +204,7 @@ int main( int argc, char *argv[] )
     int m_h = qMax( 0, (int)((desktop_size.height() - app_h) / 2) );
     mw.move( m_w, m_h );
   }
+#endif
 
   mw.checkWindowFlagsAndShow();
 

@@ -26,7 +26,7 @@
 #ifdef Q_OS_WIN
   #include <windows.h>
 #endif
-#ifdef Q_OS_LINUX
+#if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
   // for check user inactivity time
   #include <xcb/xcb.h>
   #include <xcb/screensaver.h>
@@ -116,7 +116,7 @@ void BeeApplication::setIdleTimeout( int new_value )
 
   m_idleTimeout = new_value * 60;
 
-#ifdef Q_OS_LINUX
+#if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
   mp_xcbConnection = xcb_connect( 0, 0 );
   m_xcbConnectHasError = xcb_connection_has_error( mp_xcbConnection ) > 0;
   if( m_xcbConnectHasError )
@@ -169,7 +169,7 @@ void BeeApplication::cleanUp()
   if( m_timer.isActive() )
     m_timer.stop();
 
-#ifdef Q_OS_LINUX
+#if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
   if( m_idleTimeout > 0 )
   {
  // mp_xcbScreen not need to free
@@ -200,7 +200,7 @@ bool BeeApplication::isScreenSaverRunning()
   screen_saver_is_running = (bool)is_running;
 #endif
 
-#ifdef Q_OS_LINUX
+#if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
   if( !m_xcbConnectHasError )
   {
     xcb_screensaver_query_info_cookie_t xcbCookie;
@@ -233,7 +233,7 @@ int BeeApplication::idleTimeFromSystem()
   }
 #endif
 
-#ifdef Q_OS_LINUX
+#if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
   if( !m_xcbConnectHasError )
   {
     xcb_screensaver_query_info_cookie_t xcbCookie;

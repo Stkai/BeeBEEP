@@ -83,7 +83,7 @@ void HttpDownloader::doDownload( const QUrl& url )
 
   connect( reply, SIGNAL( downloadProgress( qint64, qint64 ) ), this, SLOT( onDownloadProgress( qint64, qint64 ) ) );
 #ifndef QT_NO_SSL
-  connect( reply, SIGNAL( sslErrors( const QList<QSslError>& ) ), SLOT( onSslErrors( const QList<QSslError>& ) ) );
+  connect( reply, SIGNAL( sslErrors( const QList<QSslError>& ) ), this, SLOT( onSslErrors( const QList<QSslError>& ) ) );
 #endif
 }
 
@@ -101,7 +101,9 @@ void HttpDownloader::onDownloadProgress( qint64 bytes_received, qint64 bytes_tot
 #ifdef BEEBEEP_DEBUG
     QString file_name = fileNameFromUrl( reply->url() );
     qDebug() << qPrintable( file_name ) << "-> downloading" << bytes_received << "of" << bytes_total << "bytes";
-#endif;
+#else
+    Q_UNUSED( bytes_total );
+#endif
   }
 }
 

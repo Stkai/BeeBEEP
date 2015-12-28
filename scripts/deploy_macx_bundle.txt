@@ -46,6 +46,7 @@ echo "Done"
 # delete previous bundle dmg
 printf "Delete previous bundle ... "
 rm -f BUNDLE_DMG
+rm -f *.dmg
 echo "Done"
 
 #copy beebeep.app from release
@@ -105,8 +106,8 @@ printf "MacOS X deploy and create DMG file ... "
 $MACDEPLOY_APP $BUNDLE_FOLDER -dmg
 echo "Done"
 
-printf "Renaming DMG with version ${BEEBEEP_VERSION}"
-cp BeeBEEP.dmg beebeep-${BEEBEEP_VERSION}.dmg
+printf "Renaming DMG with version ${BEEBEEP_VERSION} ... "
+mv BeeBEEP.dmg beebeep-${BEEBEEP_VERSION}.dmg
 echo "Done"
 
 echo "BeeBEEP to Bundle - Process completed."
