@@ -24,8 +24,11 @@
 #ifndef BEEBEEP_AUDIOMANAGER_H
 #define BEEBEEP_AUDIOMANAGER_H
 
+// PHONON
+#undef BEEBEEP_USE_PHONON4
+
 #include "Config.h"
-#if defined( Q_OS_UNIX ) && QT_VERSION < 0x050000
+#ifdef BEEBEEP_USE_PHONON4
   #include <Phonon/MediaObject>
 #endif
 
@@ -61,7 +64,7 @@ protected:
   AudioManager();
 
 private:
-#if defined( Q_OS_UNIX ) && QT_VERSION < 0x050000
+#ifdef BEEBEEP_USE_PHONON4
   Phonon::MediaObject *mp_sound;
 #else
   QSound* mp_sound;
