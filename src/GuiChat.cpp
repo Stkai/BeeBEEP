@@ -747,12 +747,13 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
         break;
       file_path_list.append( file_path );
     }
-    else
-      mp_teMessage->addPasted( url.toString() );
   }
 
   if( num_files <= 0 )
+  {
+    mp_teMessage->addPasted( source );
     return;
+  }
 
   num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
 

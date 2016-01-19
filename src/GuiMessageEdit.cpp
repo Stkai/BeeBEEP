@@ -78,11 +78,13 @@ QString GuiMessageEdit::message()
   return m_currentMessage;
 }
 
-void GuiMessageEdit::addPasted( const QString& txt )
+void GuiMessageEdit::addPasted( const QMimeData* source_data )
 {
   if( !isEnabled() )
     return;
-  insertPlainText( txt);
+
+  QTextEdit::insertFromMimeData( source_data );
+
   m_messageChanged = true;
 }
 
@@ -357,7 +359,7 @@ void GuiMessageEdit::insertFromMimeData( const QMimeData* source )
   }
   else
   {
-    QTextEdit::insertFromMimeData( source );
+    addPasted( source );
   }
 }
 

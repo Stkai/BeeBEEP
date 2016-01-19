@@ -81,13 +81,13 @@ void ConnectionSocket::abortConnection()
 
 void ConnectionSocket::closeConnection()
 {
-  m_isAborted = true;
   stopTimerTick();
   if( isOpen() )
   {
     flushAll();
     close();
   }
+  m_isAborted = true;
 }
 
 const QByteArray& ConnectionSocket::cipherKey() const
@@ -187,7 +187,7 @@ void ConnectionSocket::readBlock()
   else
     emit dataReceived( decrypted_byte_array );
 
-  if( isConnected() && !m_isAborted && bytesAvailable() )
+  if( !m_isAborted && bytesAvailable() )
     QTimer::singleShot( 0, this, SLOT( readBlock() ) );
 }
 
