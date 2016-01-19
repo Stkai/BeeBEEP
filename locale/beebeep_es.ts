@@ -4209,222 +4209,222 @@ Por favor, elija un nombre diferente.</translation>
     <message>
         <location filename="../src/Tips.h" line="31"/>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="unfinished"></translation>
+        <translation>Puedes cambiar entre Chats con las teclas CTRL+TAB si tiene nuevos mensajes diponibles.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="32"/>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si quieres un &lt;b&gt;texto en negrita&lt;/b&gt; escribe: *texto en negrita*.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="33"/>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si quiere un &lt;i&gt;texto en cursiva&lt;/i&gt; escribe: /texto en cursiva/.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="34"/>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si quieres un &lt;u&gt;texto subrayado&lt;/u&gt; escribe: _texto subrayado_.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="35"/>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="unfinished"></translation>
+        <translation>Puedes buscar mensajes enviados previamente en el historial usando las teclas CTRL+ARRIBA ó CTRL+ABAJO.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="37"/>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation type="unfinished"></translation>
+        <translation>Puedes arrastrar archivos al chat activo y se enviaran a los miembros.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="38"/>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="unfinished"></translation>
+        <translation>Puedes seleccionar multiples archivos desde la red compartida y descargarlos simultaneamente con el clic derecho.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="39"/>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Puedes deshabilitar la notificacion de mensajes de un grupo haciendo clic derecho en el nombre que está en la lista.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="47"/>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Free is that mind guided by the fantasy (Libre es la mente guiada por la fantasia).&lt;/i&gt;(Marco Mastroddi)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="48"/>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Stay hungry, stay foolish.(No seas conformista, ve por más)&lt;/i&gt; (Steve Jobs)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="49"/>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;There is always one more bug. (Siempre hay un error más) &lt;/i&gt; (Lubarsky&apos;s Law)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="50"/>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;If anything can go wrong, it will. (Si hay algo puede salir mal, saldra mal).&lt;/i&gt; (Murphy&apos;s Law)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="51"/>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;If a program is useful, it will have to be changed.(Si un programa es útil, tendrá que ser cambiado.)&lt;/i&gt; (Law of Computer Programming)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="53"/>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.(Los intelectuales resuelven problemas; los genios los impiden)&lt;/i&gt; (Albert Einstein)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="54"/>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;What does not destroy me, makes me strong.(Lo que no me destruye, me hace más fuerte).&lt;/i&gt; (Friedrich Nietzsche)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="55"/>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;I am not young enough to know everything.(No soy lo suficientemente joven para saberlo todo.)&lt;/i&gt; (Oscar Wilde)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="56"/>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;A lack of doubt leads to a lack of creativity.(La falta de dudas lleva a la falta de creatividad)&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="57"/>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Fear is the path to the dark side.(El miedo es el camino al lado oscuro.)&lt;/i&gt; (Joda)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="59"/>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;I dream my painting and then paint my dream.(Sueño mi pintura y entonces pinto mi sueño.)&lt;/i&gt; (Vincent Van Gogh)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="60"/>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Everything you can imagine is real.(Todo lo que puedas imaginar es real.)&lt;/i&gt; (Pablo Picasso)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="61"/>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.(Todas las verdades son fáciles de entender una vez descubiertas; el punto es descubrirlas.)&lt;/i&gt; (Galileo Galilei)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="62"/>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Truth prevails where opinions are free.(La verdad prevalece donde las opiniones son libres.)&lt;/i&gt; (Thomas Paine)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="63"/>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...(He visto ccosas que ustedes no creerian...)&lt;/i&gt; (Batty)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="65"/>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;A man&apos;s character is his fate.(El carácter de un hombre es su destino.)&lt;/i&gt; (Eraclitus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="66"/>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;A different language is a different vision of life.(Un idioma diferente es una vision diferente de la vida.)&lt;/i&gt; (Federico Fellini)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="67"/>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero (Mientras hablamos, el tiempo envidioso habrá huido: aprovechar el día, confía lo menos posible en el mañana)&lt;/i&gt; (Orazio)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="68"/>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.(Cada día en África una gacela se despierta. Sabe que debe correr más rápido que el león, más rápido o será asesinado. Cada mañana un león se despierta. Sabe que debe correr más rápido que la gacela más lenta o morirá de hambre. No importa si usted es un león o una gacela. Cuando sale el sol, es mejor estar corriendo.)&lt;/i&gt; (Abe Gubegna)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="73"/>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.(Entendido, Houston, tenemos un problema.)&lt;/i&gt; (John L. Swigert)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="75"/>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Second star to the right, and straight on till morning.(Segunda estrella a la derecha y todo recto hasta el amanecer.)&lt;/i&gt; (Peter Pan)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="76"/>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Necessity is the last and strongest weapon. (La necesidad es la última y más fuerte arma.)&lt;/i&gt; (Titus Livius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="77"/>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Old-aged people are not wise, they are simply careful.(Los ancianos no son sabios, son simplemente cuidadosos.)&lt;/i&gt; (Ernest Hemingway)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="78"/>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;A journey of a thousand miles begins with a single step.(Un viaje de mil millas, comienza con un solo paso.)&lt;/i&gt; (Confucius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="79"/>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Life without the courage for death is slavery.(La vida sin coraje para morir es la esclavitud.)&lt;/i&gt; (Lucius Annaeus Seneca)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="81"/>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.(Puedo calcular el movimiento de los cuerpos celestes, pero no la locura de la gente.)&lt;/i&gt; (Isaac Newton)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="82"/>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Wonder is the beginning of wisdom.(Preguntarse es el principio de la sabiduria.)&lt;/i&gt; (Socrates)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="83"/>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;No wise man ever wished to be younger.(No hay hombre sabio que nunca haya querido ser mas joven.)&lt;/i&gt; (Jonathan Swift)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="84"/>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.(El unico hombre que nunca se equivoca, es el que nunca hace nada.)&lt;/i&gt; (Theodore Roosevelt)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="85"/>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Attitude is a little thing that makes a big difference.(La actitud es esa pequeña cosa que hace una gran diferencia.)&lt;/i&gt; (Winston Churchill)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="87"/>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;We become what we think.(Nos convertimos en lo que pensamos.)&lt;/i&gt; (Buddha)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="88"/>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Difficulties are things that show a person what they are.(Las dificultades son cosas que muestran a una persona tal cual es.)&lt;/i&gt; (Epictetus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="89"/>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Who will guard the guards themselves?(Quien vigilara a los vigilantes mismos?)&lt;/i&gt; (Decimus Junius Juvenal)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="90"/>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;A home without books is a body without soul.(Un hogar sin libros es un cuerpo sin alma.)&lt;/i&gt; (Marcus Tullius Cicero)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="91"/>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;We can not stop wishing our wishes.(No podemos dejar de desear nuestros deseos.)&lt;/i&gt; (Arthur Schopenhauer)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="93"/>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;Patience is also a form of action.(La paciencia es tambien una forma de acción.)&lt;/i&gt; (Auguste Rodin)</translation>
     </message>
 </context>
 <context>
