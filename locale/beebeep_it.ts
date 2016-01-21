@@ -3397,6 +3397,10 @@ il file %2 (%3)?</translation>
         <source>Create a group with two or more users</source>
         <translation>Crea un gruppo con due o più membri</translation>
     </message>
+    <message>
+        <source>Use your name instead of &apos;You&apos;</source>
+        <translation>Usa il tuo nome invece di &apos;Tu&apos;</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

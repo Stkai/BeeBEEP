@@ -73,6 +73,7 @@ ShowSendMessageIcon=[true/false] show the icon for sending message
 ShowOnlyMessagesInDefaultChat =[true/false] if enabled it will be showed only chat message, user info and history in the default chat (other messages in activity window)
 MessageFilter= filter messages in chat window by its type (do not edit here)
 UseKeyReturnToSendMessage=[true/false] enable key Return as shortcut to send a chat message
+UseYourNameInsteadOfYou=[true/false] your name is showed before messages instead of "you"
 
 [User]
 LocalColor= your nickname color in chat 

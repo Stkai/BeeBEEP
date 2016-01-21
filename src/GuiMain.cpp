@@ -706,6 +706,11 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatMaxMessagesToShow() );
   act->setData( 27 );
 
+  act = mp_menuChat->addAction( tr( "Use your name instead of 'You'" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseYourNameInsteadOfYou() );
+  act->setData( 41 );
+
   mp_menuChat->addSeparator();
 
   act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
@@ -1482,6 +1487,10 @@ void GuiMain::settingsChanged()
     break;
   case 40:
     Settings::instance().setShowOnlyMessageNotificationOnTray( act->isChecked() );
+    break;
+  case 41:
+    Settings::instance().setChatUseYourNameInsteadOfYou( act->isChecked() );
+    refresh_chat = true;
     break;
   case 99:
     break;

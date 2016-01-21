@@ -39,7 +39,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   bool append_message_to_previous = last_user_id > 0 && last_user_id == u.id();
 
-  QString user_name = append_message_to_previous ? QString( "&nbsp;&nbsp;" ) : u.isLocal() ? QObject::tr( "You" ) : u.name();
+  QString user_name = append_message_to_previous ? QString( "&nbsp;&nbsp;" ) : (u.isLocal() && !Settings::instance().chatUseYourNameInsteadOfYou()) ? QObject::tr( "You" ) : u.name();
 
   QString html_message = QString( "%1<font color=%2><b>%3</b>%4</font>%5" )
       .arg( Settings::instance().chatShowMessageTimestamp() ? QString( "<font color=#808080>%1</font> " ).arg( cm.timestamp().toString( "(hh:mm:ss)" ) ) : "" )

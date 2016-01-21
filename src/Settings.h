@@ -203,6 +203,8 @@ public:
   inline bool showUserStatusBackgroundColor() const;
   inline void setUseReturnToSendMessage( bool );
   inline bool useReturnToSendMessage() const;
+  inline void setChatUseYourNameInsteadOfYou( bool );
+  inline bool chatUseYourNameInsteadOfYou() const;
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
@@ -465,6 +467,7 @@ private:
   int m_imagePreviewHeight;
   bool m_showUserStatusBackgroundColor;
   bool m_useReturnToSendMessage;
+  bool m_chatUseYourNameInsteadOfYou;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -786,5 +789,7 @@ inline bool Settings::useWordCompleter() const { return m_useWordCompleter; }
 inline int Settings::tickIntervalCheckIdle() const { return m_tickIntervalCheckIdle; }
 inline int Settings::tickIntervalCheckNetwork() const { return m_tickIntervalCheckNetwork; }
 inline bool Settings::checkNewVersionAtStartup() const { return m_checkNewVersionAtStartup; }
+inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatUseYourNameInsteadOfYou = new_value; }
+inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
 
 #endif // BEEBEEP_SETTINGS_H

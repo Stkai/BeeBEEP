@@ -645,6 +645,7 @@ void Settings::load()
   m_chatMaxMessagesToShow = sets->value( "ChatMaxMessagesToShow", false ).toBool();
   m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
   m_useReturnToSendMessage = sets->value( "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
+  m_chatUseYourNameInsteadOfYou = sets->value( "UseYourNameInsteadOfYou", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -899,6 +900,7 @@ void Settings::save()
   sets->setValue( "ChatMaxMessagesToShow", m_chatMaxMessagesToShow );
   sets->setValue( "ImagePreviewHeight", m_imagePreviewHeight );
   sets->setValue( "UseKeyReturnToSendMessage", m_useReturnToSendMessage );
+  sets->setValue( "UseYourNameInsteadOfYou", m_chatUseYourNameInsteadOfYou );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );
