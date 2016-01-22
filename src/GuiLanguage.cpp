@@ -102,6 +102,14 @@ void GuiLanguage::selectLanguage()
   QString folder_selected = mp_lePath->text().simplified();
   QString language_selected = mp_leLanguage->text().trimmed();
 
+  if( folder_selected.isEmpty() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "The language folder is empty. Change it to resource folder";
+#endif
+    folder_selected = Settings::instance().resourceFolder();
+  }
+
   if( !language_selected.isEmpty() )
   {
     QString language_file_path = Settings::instance().languageFilePath( folder_selected, language_selected );
@@ -112,14 +120,6 @@ void GuiLanguage::selectLanguage()
       QMessageBox::warning( this, Settings::instance().programName(), tr( "Language '%1'' not found." ).arg( language_file_path ) );
       return;
     }
-  }
-
-  if( folder_selected == QApplication::applicationDirPath() || folder_selected.isEmpty() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "The language folder is the same of application folder. Change it to '.'";
-#endif
-    folder_selected = ".";
   }
 
   m_folderSelected = folder_selected;
