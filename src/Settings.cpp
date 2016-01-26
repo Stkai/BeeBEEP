@@ -37,6 +37,7 @@ Settings::Settings()
   m_settingsVersion = BEEBEEP_SETTINGS_VERSION;
 
   /* Default RC start */
+  m_enableSaveData = true;
   m_useChatWithAllUsers = true;
   m_useSettingsFileIni = true;
   m_broadcastOnlyToHostsIni = false;
@@ -172,6 +173,7 @@ bool Settings::createDefaultRcFile()
   if( sets->isWritable() )
   {
     sets->beginGroup( "BeeBEEP" );
+    sets->setValue( "EnableSaveData", m_enableSaveData );
     sets->setValue( "UseConfigurationFileIni", m_useSettingsFileIni );
     sets->setValue( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni );
     sets->setValue( "BroadcastPort", m_defaultBroadcastPort );
@@ -231,6 +233,7 @@ void Settings::loadRcFile()
 
   QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
   sets->beginGroup( "BeeBEEP" );
+  m_enableSaveData = sets->value( "EnableSaveData", m_enableSaveData ).toBool();
   m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni ).toBool();
   m_defaultBroadcastPort = sets->value( "BroadcastPort", m_defaultBroadcastPort ).toInt();
@@ -866,6 +869,12 @@ QString Settings::qtMajorVersion() const
 
 void Settings::save()
 {
+  if( !m_enableSaveData )
+  {
+    qWarning() << "Skip savings settings because you have disabled it in RC file";
+    return;
+  }
+
   QSettings *sets = objectSettings();
 
   sets->clear();

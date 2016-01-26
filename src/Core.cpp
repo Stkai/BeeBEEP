@@ -482,6 +482,12 @@ void Core::checkNetworkInterface()
 
 bool Core::saveChatMessages()
 {
+  if( !Settings::instance().enableSaveData() )
+  {
+    qDebug() << "Skip saving chat messages because you have disabled this option in RC file";
+    return false;
+  }
+
   if( !Settings::instance().chatAutoSave() )
   {
     qDebug() << "Save chat messages option is disabled";

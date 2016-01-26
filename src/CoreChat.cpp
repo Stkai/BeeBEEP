@@ -428,6 +428,12 @@ bool Core::sendMessageToLocalNetwork( const User& to_user, const Message& m )
 
 void Core::buildSavedChatList()
 {
+  if( !Settings::instance().enableSaveData() )
+  {
+    qWarning() << "Skip loading chat messages because you have disabled this option in RC file";
+    return;
+  }
+
   BuildSavedChatList *bscl = new BuildSavedChatList;
   connect( bscl, SIGNAL( listCompleted() ), this, SLOT( addListToSavedChats() ) );
   BeeApplication* bee_app = (BeeApplication*)qApp;

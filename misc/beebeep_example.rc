@@ -1,4 +1,5 @@
 [BeeBEEP]
+EnableSaveData=true
 BroadcastOnlyToHostsIni=false
 BroadcastPort=36475
 DefaultListenerPort=6475

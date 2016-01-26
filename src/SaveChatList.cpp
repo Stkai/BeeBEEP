@@ -44,6 +44,7 @@ bool SaveChatList::canBeSaved()
   if( file.open( QIODevice::WriteOnly ) )
   {
     file.close();
+    file.remove();
     return true;
   }
   else

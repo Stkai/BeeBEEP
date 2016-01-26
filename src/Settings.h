@@ -36,6 +36,8 @@ class Settings
 public:
   QSettings* objectSettings() const; // deleteLater instance after call
 
+  bool enableSaveData() const;
+
   QString currentSettingsFilePath() const;
   QString operatingSystem( bool use_long_name ) const;
   QString operatingSystemIconPath() const;
@@ -409,6 +411,7 @@ private:
   bool m_useChatWithAllUsers;
   bool m_useHive;
   bool m_checkNewVersionAtStartup;
+  bool m_enableSaveData;
 
   // Ini
   bool m_firstTime;
@@ -562,6 +565,7 @@ private:
 
 
 // Inline Functions
+inline bool Settings::enableSaveData() const { return m_enableSaveData; }
 inline const QString& Settings::resourceFolder() const { return m_resourceFolder; }
 inline const QString& Settings::dataFolder() const { return m_dataFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
