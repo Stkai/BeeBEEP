@@ -147,6 +147,8 @@ public:
   inline void setChatAddNewLineToMessage( bool );
   inline bool chatShowMessageTimestamp() const;
   inline void setChatShowMessageTimestamp( bool );
+  inline bool chatShowMessageDatestamp() const;
+  inline void setChatShowMessageDatestamp( bool );
   inline void setChatUseHtmlTags( bool );
   inline bool chatUseHtmlTags() const;
   inline void setChatUseClickableLinks( bool );
@@ -447,6 +449,7 @@ private:
   bool m_chatCompact;
   bool m_chatAddNewLineToMessage;
   bool m_chatShowMessageTimestamp;
+  bool m_chatShowMessageDatestamp;
   bool m_chatUseHtmlTags;
   bool m_chatUseClickableLinks;
   QBitArray m_chatMessageFilter;
@@ -611,6 +614,8 @@ inline bool Settings::chatAddNewLineToMessage() const { return m_chatAddNewLineT
 inline void Settings::setChatAddNewLineToMessage( bool new_value ) { m_chatAddNewLineToMessage = new_value; }
 inline bool Settings::chatShowMessageTimestamp() const { return m_chatShowMessageTimestamp; }
 inline void Settings::setChatShowMessageTimestamp( bool new_value ) { m_chatShowMessageTimestamp = new_value; }
+inline bool Settings::chatShowMessageDatestamp() const { return m_chatShowMessageDatestamp; }
+inline void Settings::setChatShowMessageDatestamp( bool new_value ) { m_chatShowMessageDatestamp = new_value; }
 inline void Settings::setChatUseHtmlTags( bool new_value ) { m_chatUseHtmlTags = new_value; }
 inline bool Settings::chatUseHtmlTags() const { return m_chatUseHtmlTags; }
 inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClickableLinks = new_value; }

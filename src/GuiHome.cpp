@@ -64,7 +64,7 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
     return;
   }
 
-  QString sys_message = GuiChatMessage::formatSystemMessage( cm, true );
+  QString sys_message = GuiChatMessage::formatSystemMessage( cm, true, false );
 
   if( sys_message.isEmpty() )
     return;

@@ -676,6 +676,12 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
 
+  act = mp_menuChat->addAction( tr( "Show the datestamp" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "If enabled the message shows its datestamp in the chat window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatShowMessageDatestamp() );
+  act->setData( 42 );
+
   act = mp_menuChat->addAction( tr( "Show preview of the images" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the preview of the downloaded images will be showed in the chat window" ) );
   act->setCheckable( true );
@@ -1490,6 +1496,10 @@ void GuiMain::settingsChanged()
     break;
   case 41:
     Settings::instance().setChatUseYourNameInsteadOfYou( act->isChecked() );
+    refresh_chat = true;
+    break;
+  case 42:
+    Settings::instance().setChatShowMessageDatestamp( act->isChecked() );
     refresh_chat = true;
     break;
   case 99:

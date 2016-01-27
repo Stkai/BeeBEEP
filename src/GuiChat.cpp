@@ -287,12 +287,12 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
 
   if( cm.isFromSystem() )
   {
-    s = GuiChatMessage::formatSystemMessage( cm, false );
+    s = GuiChatMessage::formatSystemMessage( cm, Settings::instance().chatShowMessageTimestamp(), Settings::instance().chatShowMessageDatestamp() );
     m_lastMessageUserId = 0;
   }
   else
   {
-    s = GuiChatMessage::formatMessage( findUser( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0 );
+    s = GuiChatMessage::formatMessage( findUser( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0, Settings::instance().chatShowMessageTimestamp(), Settings::instance().chatShowMessageDatestamp() );
     m_lastMessageUserId = cm.userId();
   }
 

@@ -101,7 +101,7 @@ void SaveChatList::saveChats( QDataStream* stream )
   quint64 file_pos = stream->device()->pos();
   (*stream) << num_of_chats;
 
-  QString chat_footer = QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Saved in" ) ).arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleShortDate ) );
+  //QString chat_footer = QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Saved in" ) ).arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleShortDate ) );
   QStringList chat_lines;
   QString chat_name_encrypted;
   QString chat_text_encrypted;
@@ -115,13 +115,15 @@ void SaveChatList::saveChats( QDataStream* stream )
     chat_counter++;
     chat_name_encrypted = Settings::instance().simpleEncrypt( c.name() );
     (*stream) << chat_name_encrypted;
-    QString html_text = GuiChatMessage::chatToHtml( c, true );
+    QString html_text = GuiChatMessage::chatToHtml( c, true, true, true );
 
+    /*
     if( !html_text.simplified().isEmpty() )
     {
       html_text.prepend( QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Started in" ) ).arg( c.dateTimeStarted().toString( Qt::SystemLocaleShortDate ) ) );
       html_text.append( chat_footer );
     }
+    */
 
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
     {

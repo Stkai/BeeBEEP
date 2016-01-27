@@ -631,6 +631,7 @@ void Settings::load()
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
   m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
+  m_chatShowMessageDatestamp = sets->value( "ShowMessageDatestamp", false ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
   m_beepAlwaysOnNewMessageArrived = sets->value( "BeepAlwaysOnNewMessageArrived", false ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
@@ -894,6 +895,7 @@ void Settings::save()
   sets->setValue( "CompactMessage", m_chatCompact );
   sets->setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
+  sets->setValue( "ShowMessageDatestamp", m_chatShowMessageDatestamp );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets->setValue( "BeepAlwaysOnNewMessageArrived", m_beepAlwaysOnNewMessageArrived );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );

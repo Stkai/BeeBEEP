@@ -3401,6 +3401,14 @@ il file %2 (%3)?</translation>
         <source>Use your name instead of &apos;You&apos;</source>
         <translation>Usa il tuo nome invece di &apos;Tu&apos;</translation>
     </message>
+    <message>
+        <source>Show the datestamp</source>
+        <translation>Mostra la data</translation>
+    </message>
+    <message>
+        <source>If enabled the message shows its datestamp in the chat window</source>
+        <translation>Se abilitata il messaggio mostrerà la sua data nella finestra di conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4780,11 +4788,11 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     </message>
     <message>
         <source>Saved in</source>
-        <translation>Salvata in data</translation>
+        <translation type="obsolete">Salvata in data</translation>
     </message>
     <message>
         <source>Started in</source>
-        <translation>Iniziata in data</translation>
+        <translation type="obsolete">Iniziata in data</translation>
     </message>
     <message>
         <source>Double click to send message to group: %1</source>
