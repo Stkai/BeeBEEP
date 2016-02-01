@@ -529,12 +529,22 @@ void Core::createLocalShareMessage()
 
 void Core::buildLocalShareList()
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Building local share list...";
+#endif
   bool is_connected = isConnected();
+
   m_shareListToBuild = Settings::instance().localShare().size();
+
   if( !FileShare::instance().local().isEmpty() )
     FileShare::instance().clearLocal();
+
   if( Settings::instance().localShare().isEmpty() )
+  {
+    qDebug() << "There are not shared files";
     return;
+  }
+
   foreach( QString share_path, Settings::instance().localShare() )
     addPathToShare( share_path, is_connected );
 }

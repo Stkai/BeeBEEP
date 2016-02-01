@@ -55,8 +55,9 @@ void Updater::onDownloadCompleted( const QString& file_path )
     return;
   }
 
+#ifdef BEEBEEP_DEBUG
   qDebug() << file_path << "download completed";
-  Settings::instance().addTemporaryFilePath( file_path );
+#endif
 
   QSettings sets( file_path, QSettings::IniFormat );
   if( !sets.allKeys().isEmpty() )
@@ -74,5 +75,12 @@ void Updater::onDownloadCompleted( const QString& file_path )
   {
     QUrl url = QUrl::fromUserInput( m_downloadUrl );
     m_downloadUrl = url.toString();
+  }
+
+  QFile file_downloaded( file_path );
+  if( !file_downloaded.remove() )
+  {
+    qWarning() << "Unable to remove file" << file_path << "now so it is added to temporaty files";
+    Settings::instance().addTemporaryFilePath( file_path );
   }
 }
