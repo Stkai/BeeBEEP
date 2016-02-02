@@ -55,6 +55,8 @@ public:
   inline bool allowMultipleInstances() const;
   inline bool trustNickname() const;
   inline bool trustSystemAccount() const;
+
+  inline void setCheckNewVersionAtStartup( bool );
   inline bool checkNewVersionAtStartup() const;
 
   inline const QDate& settingsCreationDate() const;
@@ -101,6 +103,7 @@ public:
   inline int defaultBroadcastPort() const;
   inline int defaultListenerPort() const;
   inline int defaultFileTransferPort() const;
+  inline void setBroadcastInterval( int );
   inline int broadcastInterval() const;
   inline int broadcastLoopbackInterval() const;
   inline int pingInterval() const;
@@ -412,7 +415,6 @@ private:
   QHostAddress m_multicastGroupAddress;
   bool m_useChatWithAllUsers;
   bool m_useHive;
-  bool m_checkNewVersionAtStartup;
   bool m_enableSaveData;
 
   // Ini
@@ -564,6 +566,8 @@ private:
   bool m_useWordCompleter;
   QString m_dictionaryPath;
 
+  bool m_checkNewVersionAtStartup;
+
 };
 
 
@@ -581,6 +585,7 @@ inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }
 inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
 inline int Settings::defaultFileTransferPort() const { return m_defaultFileTransferPort; }
+inline void Settings::setBroadcastInterval( int new_value ) { m_broadcastInterval = new_value; }
 inline int Settings::broadcastInterval() const { return m_broadcastInterval; }
 inline int Settings::broadcastLoopbackInterval() const { return m_broadcastLoopbackInterval; }
 inline int Settings::pingInterval() const { return m_pingInterval; }
@@ -797,6 +802,7 @@ inline void Settings::setUseWordCompleter( bool new_value ) { m_useWordCompleter
 inline bool Settings::useWordCompleter() const { return m_useWordCompleter; }
 inline int Settings::tickIntervalCheckIdle() const { return m_tickIntervalCheckIdle; }
 inline int Settings::tickIntervalCheckNetwork() const { return m_tickIntervalCheckNetwork; }
+inline void Settings::setCheckNewVersionAtStartup( bool new_value ) { m_checkNewVersionAtStartup = new_value; }
 inline bool Settings::checkNewVersionAtStartup() const { return m_checkNewVersionAtStartup; }
 inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatUseYourNameInsteadOfYou = new_value; }
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }

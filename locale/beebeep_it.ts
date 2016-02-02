@@ -3409,6 +3409,10 @@ il file %2 (%3)?</translation>
         <source>If enabled the message shows its datestamp in the chat window</source>
         <translation>Se abilitata il messaggio mostrerà la sua data nella finestra di conversazione</translation>
     </message>
+    <message>
+        <source>Check for new version at startup</source>
+        <translation>Controlla la presenza di una nuova versione alla partenza</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3968,6 +3972,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Gruppo multicast in beebeep.rc *</translation>
+    </message>
+    <message>
+        <source>Enable broadcast interval of</source>
+        <translation>Abilita la ricerca automatica in un intervallo di</translation>
+    </message>
+    <message>
+        <source>s (0=disabled, 10=default)</source>
+        <translation>s (0=disabilitata, 10=predefinita)</translation>
     </message>
 </context>
 <context>

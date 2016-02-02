@@ -79,6 +79,17 @@ void GuiSearchUser::loadSettings()
 
   mp_cbAcceptConnectionsOnlyFromWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
 
+  if( Settings::instance().broadcastInterval() > 0 )
+  {
+    mp_cbBroadcastInterval->setChecked( true );
+    mp_sbBroadcastInterval->setValue( Settings::instance().broadcastInterval() / 1000 );
+  }
+  else
+  {
+    mp_cbBroadcastInterval->setChecked( false );
+    mp_sbBroadcastInterval->setValue( 10 );
+  }
+
   mp_leWorkgroups->setFocus();
 }
 
@@ -128,6 +139,17 @@ void GuiSearchUser::checkAndSearch()
   Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
   Settings::instance().setAddExternalSubnetAutomatically( mp_cbAutoAddSubnet->isChecked() );
   Settings::instance().setUseMulticastDns( mp_cbEnableMDns->isChecked() );
+
+  if( mp_cbBroadcastInterval->isEnabled() )
+  {
+    int iSeconds = mp_sbBroadcastInterval->value();
+    if( iSeconds > 0 )
+      Settings::instance().setBroadcastInterval( iSeconds * 1000 );
+    else
+      Settings::instance().setBroadcastInterval( 0 );
+  }
+  else
+    Settings::instance().setBroadcastInterval( 0 );
 
   accept();
 }

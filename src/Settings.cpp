@@ -196,7 +196,6 @@ bool Settings::createDefaultRcFile()
       sets->setValue( "MulticastGroupAddress", m_multicastGroupAddress.toString() );
     sets->setValue( "EnableChatWithAllUsers", m_useChatWithAllUsers );
     sets->setValue( "UseHive", m_useHive );
-    sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -257,7 +256,6 @@ void Settings::loadRcFile()
     m_multicastGroupAddress = QHostAddress( multicast_group_address );
   m_useChatWithAllUsers = sets->value( "EnableChatWithAllUsers", m_useChatWithAllUsers ).toBool();
   m_useHive = sets->value( "UseHive", m_useHive ).toBool();
-  m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -778,6 +776,7 @@ void Settings::load()
   m_useSpellChecker = sets->value( "UseSpellChecker", false ).toBool();
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
   m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
+  m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -1018,6 +1017,7 @@ void Settings::save()
   sets->setValue( "UseSpellChecker", m_useSpellChecker );
   sets->setValue( "UseWordCompleter", m_useWordCompleter );
   sets->setValue( "DictionaryPath", m_dictionaryPath );
+  sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );

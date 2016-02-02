@@ -57,6 +57,7 @@ public:
   int fileTransferPort() const;
 
   bool checkSavingPaths();
+  void checkBroadcastInterval();
 
   /* CoreUser */
   inline int connectedUsers() const;

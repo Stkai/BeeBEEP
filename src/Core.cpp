@@ -548,3 +548,9 @@ void Core::onUpdaterJobCompleted()
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Other );
 }
+
+void Core::checkBroadcastInterval()
+{
+  if( isConnected() )
+    mp_broadcaster->enableBroadcastTimer( Settings::instance().broadcastInterval() > 0 );
+}

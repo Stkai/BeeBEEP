@@ -530,7 +530,7 @@ void Core::createLocalShareMessage()
 void Core::buildLocalShareList()
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Building local share list...";
+  qDebug() << "Building local share list";
 #endif
   bool is_connected = isConnected();
 

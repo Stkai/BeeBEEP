@@ -40,6 +40,8 @@ public:
 
   inline const QList<QHostAddress> contactedAddress() const;
 
+  void enableBroadcastTimer( bool );
+
 public slots:
   void sendBroadcastDatagram();
 

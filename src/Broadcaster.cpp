@@ -37,6 +37,19 @@ Broadcaster::Broadcaster( QObject *parent )
   connect( &m_broadcastTimer, SIGNAL( timeout() ), this, SLOT( sendBroadcastDatagram() ) );
 }
 
+void Broadcaster::enableBroadcastTimer( bool enable )
+{
+  if( m_broadcastTimer.isActive() )
+    m_broadcastTimer.stop();
+
+  if( enable )
+  {
+    qDebug() << "Enable broadcasting timer with interval of" << Settings::instance().broadcastInterval();
+    m_broadcastTimer.setInterval( Settings::instance().broadcastInterval() < 1000 ? 1000 : Settings::instance().broadcastInterval() );
+    m_broadcastTimer.start();
+  }
+}
+
 bool Broadcaster::startBroadcasting()
 {
   if( !m_broadcastSocket.bind( Settings::instance().hostAddressToListen(), Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
@@ -58,11 +71,7 @@ bool Broadcaster::startBroadcasting()
   m_baseBroadcastAddress = NetworkManager::instance().localBroadcastAddress();
   updateAddresses();
 
-  if( Settings::instance().broadcastInterval() > 0 )
-  {
-    m_broadcastTimer.setInterval( Settings::instance().broadcastInterval() < 5000 ? 5000 : Settings::instance().broadcastInterval() );
-    m_broadcastTimer.start();
-  }
+  enableBroadcastTimer( Settings::instance().broadcastInterval() > 0 );
 
   return true;
 }
@@ -81,8 +90,8 @@ void Broadcaster::stopBroadcasting()
 
   qDebug() << "Broadcaster stops broadcasting";
 
-  if( m_broadcastTimer.isActive() )
-    m_broadcastTimer.stop();
+  enableBroadcastTimer( false );
+
   m_broadcastSocket.close();
 }
 

@@ -758,6 +758,11 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().resetGeometryAtStartup() );
   act->setData( 26 );
 
+  act = mp_menuSettings->addAction( tr( "Check for new version at startup" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().checkNewVersionAtStartup() );
+  act->setData( 43 );
+
 #ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled you can automatically load %1 at system startup" ).arg( Settings::instance().programName() ) );
@@ -1502,6 +1507,9 @@ void GuiMain::settingsChanged()
     Settings::instance().setChatShowMessageDatestamp( act->isChecked() );
     refresh_chat = true;
     break;
+  case 43:
+    Settings::instance().setCheckNewVersionAtStartup( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1682,6 +1690,9 @@ void GuiMain::searchUsers()
 
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
     qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
+
+  mp_core->checkBroadcastInterval();
+
 }
 
 void GuiMain::showWritingUser( const User& u )
