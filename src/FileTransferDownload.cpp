@@ -96,6 +96,8 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
   m_bytesTransferred = byte_array.size();
   m_totalBytesTransferred += m_bytesTransferred;
 
+  sendTransferData(); // send to upload client that data is arrived
+
   if( !m_file.isOpen() )
   {
     if( !m_file.open( QIODevice::WriteOnly ) )
@@ -105,17 +107,13 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     }
   }
 
-  showProgress();
-
-  if( m_file.write( byte_array ) == m_bytesTransferred )
-  {
-    sendTransferData();
-  }
-  else
+  if( m_file.write( byte_array ) != m_bytesTransferred )
   {
     setError( tr( "Unable to write in the file" ) );
     return;
   }
+
+  showProgress();
 
   if( m_totalBytesTransferred > m_fileInfo.size() )
     setError( tr( "%1 bytes downloaded but the file size is only %2 bytes" ).arg( m_totalBytesTransferred ).arg( m_fileInfo.size() ) );

@@ -140,7 +140,7 @@ void GuiSearchUser::checkAndSearch()
   Settings::instance().setAddExternalSubnetAutomatically( mp_cbAutoAddSubnet->isChecked() );
   Settings::instance().setUseMulticastDns( mp_cbEnableMDns->isChecked() );
 
-  if( mp_cbBroadcastInterval->isEnabled() )
+  if( mp_cbBroadcastInterval->isChecked() )
   {
     int iSeconds = mp_sbBroadcastInterval->value();
     if( iSeconds > 0 )

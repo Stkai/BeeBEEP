@@ -139,7 +139,7 @@ QString Bee::bytesToString( FileSizeType bytes, int precision )
   {
     suffix = "Mb";
     result = bytes / 1000000.0;
-    prec = result >= 10 ? 0 : 1;
+    prec = 2;
   }
   else if( bytes > 1000 )
   {

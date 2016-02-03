@@ -49,7 +49,7 @@ protected:
   virtual bool checkErrorAndReadSocket( DNSServiceErrorType );
 
 protected slots:
-  void socketIsReadyRead();
+  void socketIsReadyRead( int );
 
 protected:
  DNSServiceRef mp_dnss;

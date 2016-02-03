@@ -115,6 +115,9 @@ void MDnsManager::addMDnsRecord( const MDnsRecord& mdns_record )
   MDnsResolver* resolver = new MDnsResolver( this );
   connect( resolver, SIGNAL( resolved( const QHostInfo&, int ) ), this, SLOT( serviceResolved( const QHostInfo&, int ) ) );
   resolver->resolve( mdns_record );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( objectName() ) << "is now searching for" << mdns_record.name();
+#endif
 }
 
 void MDnsManager::removeMDnsRecord( const MDnsRecord& mdns_record )

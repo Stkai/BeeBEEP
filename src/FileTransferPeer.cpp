@@ -176,6 +176,6 @@ void FileTransferPeer::onTickEvent( int )
   if( m_state == FileTransferPeer::Transferring )
   {
     if( m_socket.activityIdle() > Settings::instance().pongTimeout() )
-      setError( tr( "Connection timeout" ) );
+      setError( tr( "Transfer timeout" ) );
   }
 }

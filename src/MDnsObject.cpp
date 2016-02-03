@@ -52,8 +52,17 @@ void MDnsObject::cleanUp()
 }
 
 
-void MDnsObject::socketIsReadyRead()
+void MDnsObject::socketIsReadyRead( int socket_descriptor )
 {
+  if( mp_socket->socket() != socket_descriptor )
+  {
+    qDebug() << qPrintable( objectName() ) << "is activated from another socket" << socket_descriptor;
+    return;
+  }
+
+  if( mp_socket->isEnabled() )
+    mp_socket->setEnabled( false );
+
   DNSServiceErrorType error_code = DNSServiceProcessResult( mp_dnss );
   int error_code_int = (int)error_code;
 
@@ -63,6 +72,8 @@ void MDnsObject::socketIsReadyRead()
     emit error( error_code_int );
     return;
   }
+
+  mp_socket->setEnabled( true );
 }
 
 bool MDnsObject::checkErrorAndReadSocket( DNSServiceErrorType error_code )
@@ -89,6 +100,6 @@ bool MDnsObject::checkErrorAndReadSocket( DNSServiceErrorType error_code )
     return false;
 
   mp_socket = new QSocketNotifier( socket_descriptor, QSocketNotifier::Read, this );
-  connect( mp_socket, SIGNAL( activated( int ) ), this, SLOT( socketIsReadyRead() ) );
+  connect( mp_socket, SIGNAL( activated( int ) ), this, SLOT( socketIsReadyRead( int ) ) );
   return true;
 }
