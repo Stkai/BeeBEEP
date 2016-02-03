@@ -595,17 +595,17 @@
         <translation>ugyldig fil-header</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="103"/>
+        <location filename="../src/FileTransferDownload.cpp" line="105"/>
         <source>Unable to open file</source>
         <translation>Kan ikke åpne fil</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="116"/>
+        <location filename="../src/FileTransferDownload.cpp" line="112"/>
         <source>Unable to write in the file</source>
         <translation>Kan ikke skrive i fila</translation>
     </message>
     <message>
-        <location filename="../src/FileTransferDownload.cpp" line="121"/>
+        <location filename="../src/FileTransferDownload.cpp" line="119"/>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
         <translation>%1 bytes lasta ned, men filstørrelsen er bare %2 bytes</translation>
     </message>
@@ -621,9 +621,13 @@
     </message>
     <message>
         <location filename="../src/FileTransferPeer.cpp" line="171"/>
-        <location filename="../src/FileTransferPeer.cpp" line="179"/>
         <source>Connection timeout</source>
         <translation>Forbindelse tidsutkobla</translation>
+    </message>
+    <message>
+        <location filename="../src/FileTransferPeer.cpp" line="179"/>
+        <source>Transfer timeout</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/FileTransferUpload.cpp" line="101"/>

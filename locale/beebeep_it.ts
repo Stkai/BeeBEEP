@@ -677,7 +677,7 @@
     </message>
     <message>
         <source>Connection timeout</source>
-        <translation>Tempo esaurito</translation>
+        <translation>Tempo esaurito per la connessione</translation>
     </message>
     <message>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
@@ -706,6 +706,10 @@
     <message>
         <source>invalid file header</source>
         <translation>inizializzazione non valida del file</translation>
+    </message>
+    <message>
+        <source>Transfer timeout</source>
+        <translation>Tempo esaurito per il trasferimento</translation>
     </message>
 </context>
 <context>
