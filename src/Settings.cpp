@@ -794,8 +794,7 @@ void Settings::load()
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
   m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
-  m_pingInterval = qMax( 2000, qMin( sets->value( "ConnectionPingInterval", m_tickIntervalCheckNetwork * 800 ).toInt(), m_tickIntervalCheckNetwork * 800 ) );
-  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", m_pingInterval * 3 + 500 ).toInt(), (m_pingInterval * 3 + 500) );
+  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", 11000 ).toInt(), 11000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 1000 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
@@ -1035,7 +1034,6 @@ void Settings::save()
   sets->setValue( "BroadcastInterval", m_broadcastInterval );
   sets->setValue( "BroadcastLoopbackInterval", m_broadcastLoopbackInterval );
   sets->setValue( "ListenerPort", m_localUser.hostPort() );
-  sets->setValue( "ConnectionPingInterval", m_pingInterval );
   sets->setValue( "ConnectionActivityTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );

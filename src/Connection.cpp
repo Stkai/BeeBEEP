@@ -98,16 +98,15 @@ void Connection::sendPing()
 
   if( activity_idle > Settings::instance().pongTimeout() )
   {
-    qDebug() << "Connection timeout with" << activity_idle << "ms idle from"  << qPrintable( hostAndPort() );
+    qDebug() << "Connection timeout with" << activity_idle << "ms idle from" << qPrintable( hostAndPort() );
     emit abortRequest();
     return;
   }
 
-  // -200 takes care of time from here to sendData
-  if( activity_idle < (Settings::instance().pingInterval()-200) )
+  if( activity_idle < PING_INTERVAL_IDLE )
   {
 #if defined( CONNECTION_PING_PONG_DEBUG )
-    qDebug() << "Ping is not sent because connection" << qPrintable( hostAndPort() ) << "has activity idle too short:" << activity_idle << "<" << Settings::instance().pingInterval();
+    qDebug() << "Ping is not sent because connection" << qPrintable( hostAndPort() ) << "has activity idle too short:" << activity_idle << "<" << PING_INTERVAL_IDLE;
 #endif
     return;
   }
@@ -141,6 +140,6 @@ void Connection::closeConnection()
 
 void Connection::onTickEvent( int ticks )
 {
-  if( ticks % 2 == 0 )
+  if( ticks % PING_INTERVAL_TICK == 0 )
     sendPing();
 }

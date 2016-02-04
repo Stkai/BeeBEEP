@@ -74,6 +74,8 @@ const int FILE_TRANSFER_2_PROTO_VERSION = 63;
 const int HIVE_PROTO_VERSION = 64;
 // Tick interval in ms
 const int TICK_INTERVAL = 1000;
+const int PING_INTERVAL_IDLE = 1800;
+const int PING_INTERVAL_TICK = 2;
 
 // Protocol
 #define ID_INVALID         0
