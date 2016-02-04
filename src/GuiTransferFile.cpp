@@ -159,7 +159,8 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, cons
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
     item->setText( ColumnProgress, tr( "Transfer completed" ) );
-    emit fileTransferCompleted( user_id, fi.id(), fi.path() );
+    if( fi.isDownload() )
+      emit fileTransferCompleted( user_id, fi.id(), fi.path() );
     return;
   }
 

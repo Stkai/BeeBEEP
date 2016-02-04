@@ -49,16 +49,21 @@ Settings::Settings()
 #ifdef Q_OS_MAC
   m_saveDataInUserApplicationFolder = true;
   m_useNativeEmoticons = true;
+  m_useNativeDialogs = true;
+#else
+  m_saveDataInUserApplicationFolder = false;
+  m_useNativeEmoticons = false;
+  // In windows native dialogs are application modal and the connection goes in timeout...
+  // In MacOSX instead it seems to work
+  m_useNativeDialogs = false;
+#endif
+
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = true;
 #else
   m_useMulticastDns = false;
 #endif
-#else
-  m_saveDataInUserApplicationFolder = false;
-  m_useNativeEmoticons = false;
-  m_useMulticastDns = true;
-#endif
+
   m_allowMultipleInstances = false;
   m_trustNickname = true;
   m_trustSystemAccount = false;
@@ -71,14 +76,6 @@ Settings::Settings()
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
-
-// In windows native dialogs are application modal and the connection goes in timeout...
-// In MacOSX instead it seems to work
-#ifdef Q_OS_MAC
-  m_useNativeDialogs = true;
-#else
-  m_useNativeDialogs = false;
-#endif
 
   QFont f = QApplication::font();
   setChatFont( f );
@@ -794,8 +791,8 @@ void Settings::load()
   m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
   m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
-  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", 11000 ).toInt(), 11000 );
-  m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 1000 );
+  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", 13000 ).toInt(), 13000 );
+  m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
