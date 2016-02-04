@@ -400,6 +400,9 @@ int ConnectionSocket::activityIdle() const
   if( !m_latestActivityDateTime.isValid() )
     return 0;
 
+  if( bytesAvailable() > 0 )
+    return TICK_INTERVAL; // force a read block
+
 #if QT_VERSION < 0x040700
   quint64 idle_time = m_latestActivityDateTime.time().msecsTo( QDateTime::currentDateTime().time() );
 #else

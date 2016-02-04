@@ -119,7 +119,11 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   else
   {
     mp_pbChat->setToolTip( tr( "Open chat" ) );
-    mp_pbFile->show();
+    if( u.isStatusConnected() )
+      mp_pbFile->show();
+    else
+      mp_pbFile->hide();
+
     if( Settings::instance().saveUserList() )
       mp_pbFavorite->show();
     else
