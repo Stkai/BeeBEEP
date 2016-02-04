@@ -23,6 +23,7 @@
 
 #include "GuiScreenShot.h"
 #include "BeeUtils.h"
+#include "FileDialog.h"
 #include "Settings.h"
 
 
@@ -178,7 +179,7 @@ void GuiScreenShot::doSave()
                                     tr( "/beesshot-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
                                     + screenshot_format;
 
-  QString file_path = QFileDialog::getSaveFileName( this, tr( "Save As" ),
+  QString file_path = FileDialog::getSaveFileName( this, tr( "Save As" ),
                                 screenshot_initial_path,
                                 tr( "%1 Files (*.%2)" )
                                 .arg( screenshot_format.toUpper() )

@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "FileDialog.h"
 #include "GuiLog.h"
 #include "Log.h"
 #include "Settings.h"
@@ -111,7 +112,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
 
 void GuiLog::saveLogAs()
 {
-  QString log_path = QFileDialog::getSaveFileName( this,
+  QString log_path = FileDialog::getSaveFileName( this,
                           tr( "Please select a file to save the log." ),
                           Settings::instance().logPath(), "TXT Log Files (*.txt)" );
   if( log_path.isEmpty() )

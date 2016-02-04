@@ -38,6 +38,7 @@ TARGET = beebeep
 TEMPLATE = app
 
 include(hunspell/hunspell.pri)
+include(override/override.pri)
 
 HEADERS += AudioManager.h \
   Avatar.h \

@@ -25,6 +25,7 @@
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ChatMessage.h"
+#include "FileDialog.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
 #include "Protocol.h"
@@ -654,7 +655,7 @@ void GuiChat::addEmoticon( const Emoticon& e )
 
 void GuiChat::saveChat()
 {
-  QString file_name = QFileDialog::getSaveFileName( this,
+  QString file_name = FileDialog::getSaveFileName( this,
                         tr( "Please select a file to save the messages of the chat." ),
                         Settings::instance().chatSaveDirectory(), "PDF Chat Files (*.pdf)" );
   if( file_name.isEmpty() )

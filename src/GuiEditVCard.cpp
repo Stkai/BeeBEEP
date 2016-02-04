@@ -21,9 +21,10 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Avatar.h"
+#include "FileDialog.h"
 #include "GuiEditVCard.h"
 #include "Settings.h"
-#include "Avatar.h"
 
 
 GuiEditVCard::GuiEditVCard( QWidget *parent )
@@ -99,7 +100,7 @@ void GuiEditVCard::changePhoto()
     supported_formats_string.append( sf );
   }
 
-  QString photo_path = QFileDialog::getOpenFileName( this, tr( "%1 - Select your profile photo" ).arg( Settings::instance().programName() ),
+  QString photo_path = FileDialog::getOpenFileName( this, tr( "%1 - Select your profile photo" ).arg( Settings::instance().programName() ),
                                                      Settings::instance().lastDirectorySelected(), tr( "Images" ) + QString( " (%1)" ).arg( supported_formats_string.simplified() ) );
   if( photo_path.isNull() || photo_path.isEmpty() )
     return;

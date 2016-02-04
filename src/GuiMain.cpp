@@ -26,6 +26,7 @@
 #include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
+#include "FileDialog.h"
 #include "FileShare.h"
 #include "GuiAddUser.h"
 #include "GuiAskPassword.h"
@@ -1800,7 +1801,7 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
   QStringList files_path_selected;
   if( file_path.isEmpty() || !QFile::exists( file_path ) )
   {
-    files_path_selected = QFileDialog::getOpenFileNames( activeChatWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
+    files_path_selected = FileDialog::getOpenFileNames( activeChatWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
                                                        Settings::instance().lastDirectorySelected() );
     if( files_path_selected.isEmpty() )
       return files_path_selected;
@@ -1913,7 +1914,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
       }
       else
       {
-        file_name = QFileDialog::getSaveFileName( this,
+        file_name = FileDialog::getSaveFileName( this,
                             tr( "%1 already exists. Please select a new filename." ).arg( qfile_info.fileName() ),
                             qfile_info.absoluteFilePath() );
         if( file_name.isNull() || file_name.isEmpty() )
@@ -2057,7 +2058,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
 
 void GuiMain::selectDownloadDirectory()
 {
-  QString download_directory_path = QFileDialog::getExistingDirectory( this,
+  QString download_directory_path = FileDialog::getExistingDirectory( this,
                                                                        tr( "%1 - Select the download folder" )
                                                                        .arg( Settings::instance().programName() ),
                                                                        Settings::instance().downloadDirectory() );
@@ -2495,7 +2496,7 @@ void GuiMain::openUrl( const QUrl& file_url )
 
 void GuiMain::selectBeepFile()
 {
-  QString file_path = QFileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().beepFilePath(), tr( "Sound files (*.wav)" ) );
+  QString file_path = FileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().beepFilePath(), tr( "Sound files (*.wav)" ) );
   if( file_path.isNull() || file_path.isEmpty() )
     return;
 
@@ -3579,7 +3580,7 @@ void GuiMain::minimizeAllChats()
 
 void GuiMain::selectDictionatyPath()
 {
-  QString dictionary_path = QFileDialog::getOpenFileName( this, tr( "Select your dictionary path" ), Settings::instance().dictionaryPath(), QString( "*.dic" ) );
+  QString dictionary_path = FileDialog::getOpenFileName( this, tr( "Select your dictionary path" ), Settings::instance().dictionaryPath(), QString( "*.dic" ) );
 
   if( dictionary_path.isEmpty() )
     return;

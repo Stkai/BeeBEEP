@@ -365,6 +365,8 @@ public:
   void save();
   inline const QDateTime& lastSave() const;
 
+  inline bool useNativeDialogs() const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
@@ -567,6 +569,7 @@ private:
   QString m_dictionaryPath;
 
   bool m_checkNewVersionAtStartup;
+  bool m_useNativeDialogs;
 
 };
 
@@ -806,5 +809,6 @@ inline void Settings::setCheckNewVersionAtStartup( bool new_value ) { m_checkNew
 inline bool Settings::checkNewVersionAtStartup() const { return m_checkNewVersionAtStartup; }
 inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatUseYourNameInsteadOfYou = new_value; }
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
+inline bool Settings::useNativeDialogs() const { return m_useNativeDialogs; }
 
 #endif // BEEBEEP_SETTINGS_H

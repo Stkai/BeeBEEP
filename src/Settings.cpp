@@ -72,6 +72,14 @@ Settings::Settings()
 
   m_emoticonSizeInEdit = 18;
 
+// In windows native dialogs are application modal and the connection goes in timeout...
+// In MacOSX instead it seems to work
+#ifdef Q_OS_MAC
+  m_useNativeDialogs = true;
+#else
+  m_useNativeDialogs = false;
+#endif
+
   QFont f = QApplication::font();
   setChatFont( f );
   m_emoticonSizeInMenu = 24;
@@ -769,6 +777,7 @@ void Settings::load()
   m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
+  m_useNativeDialogs = sets->value( "UseNativeDialogs", m_useNativeDialogs ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1011,6 +1020,7 @@ void Settings::save()
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
   sets->setValue( "Shortcuts", m_shortcuts );
   sets->setValue( "UseShortcuts", m_useShortcuts );
+  sets->setValue( "UseNativeDialogs", m_useNativeDialogs );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

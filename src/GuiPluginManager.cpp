@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "FileDialog.h"
 #include "GuiPluginManager.h"
 #include "PluginManager.h"
 #include "Settings.h"
@@ -188,7 +189,7 @@ void GuiPluginManager::updatePlugins()
 
 void GuiPluginManager::openFolder()
 {
-  QString plugin_path = QFileDialog::getExistingDirectory( this, tr( "%1 - Select the plugin folder" )
+  QString plugin_path = FileDialog::getExistingDirectory( this, tr( "%1 - Select the plugin folder" )
                                                                  .arg( Settings::instance().programName() ),
                                                                  Settings::instance().pluginPath() );
   if( plugin_path.isEmpty() )

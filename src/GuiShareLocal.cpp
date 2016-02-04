@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "GuiShareLocal.h"
+#include "FileDialog.h"
 #include "FileShare.h"
 #include "Settings.h"
 
@@ -115,9 +116,8 @@ void GuiShareLocal::setActionsEnabled( bool enable )
 
 void GuiShareLocal::addFilePath()
 {
-  QStringList file_path_list = QFileDialog::getOpenFileNames( this, tr( "Select a file to share" ),
-                                                     Settings::instance().lastDirectorySelected(),
-                                                     "", 0, QFileDialog::DontResolveSymlinks );
+  QStringList file_path_list = FileDialog::getOpenFileNames( this, tr( "Select a file to share" ),
+                                                     Settings::instance().lastDirectorySelected() );
   if( file_path_list.isEmpty() )
     return;
 
@@ -129,9 +129,8 @@ void GuiShareLocal::addFilePath()
 
 void GuiShareLocal::addFolderPath()
 {
-  QString folder_path = QFileDialog::getExistingDirectory( this, tr( "Select a folder to share" ),
-                                                           Settings::instance().lastDirectorySelected(),
-                                                           QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
+  QString folder_path = FileDialog::getExistingDirectory( this, tr( "Select a folder to share" ),
+                                                           Settings::instance().lastDirectorySelected() );
   if( folder_path.isEmpty() )
     return;
 

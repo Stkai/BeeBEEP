@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiLanguage.h"
+#include "FileDialog.h"
 #include "Settings.h"
 
 
@@ -90,7 +91,7 @@ void GuiLanguage::loadLanguages()
 
 void GuiLanguage::selectFolder()
 {
-  QString folder_path = QFileDialog::getExistingDirectory( this, tr( "Select a language folder" ), mp_lePath->text().simplified() );
+  QString folder_path = FileDialog::getExistingDirectory( this, tr( "Select a language folder" ), mp_lePath->text().simplified() );
   if( folder_path.isEmpty() )
     return;
   mp_lePath->setText( folder_path );
