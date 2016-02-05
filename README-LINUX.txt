@@ -50,7 +50,8 @@
    
    For BeeBEEP 3.0
    # sudo apt-get install libqt4-dev libqt4-core libqt4-gui libqt4-xml libxcb-screensaver0 libavahi-compat-libdnssd1 libphonon4 libhunspell-dev
- 
+   Note: in case of error "phonon backend plugin could not be loaded"
+   You have to install: #sudo apt install phonon-backend-gstreamer
    
    ** Arch LINUX **
    
