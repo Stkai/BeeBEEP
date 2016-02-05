@@ -17,6 +17,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
 unix:!macx:!android: {
   isEqual(QT_MAJOR_VERSION, 4): QT += phonon
+  isEqual(QT_MAJOR_VERSION, 4): DEFINES += BEEBEEP_USE_PHONON4
   LIBS= -lxcb -lxcb-screensaver
 }
 

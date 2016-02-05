@@ -24,13 +24,6 @@
 #ifndef BEEBEEP_AUDIOMANAGER_H
 #define BEEBEEP_AUDIOMANAGER_H
 
-// PHONON
-#if QT_VERSION < 0x050000
-  #define BEEBEEP_USE_PHONON4
-#else
-  #undef BEEBEEP_USE_PHONON4
-#endif
-
 #include "Config.h"
 #ifdef BEEBEEP_USE_PHONON4
   #include <Phonon/MediaObject>
