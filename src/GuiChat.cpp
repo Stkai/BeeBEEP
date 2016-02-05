@@ -632,7 +632,7 @@ void GuiChat::selectFontColor()
   QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
   if( c.isValid() )
   {
-    Settings::instance().setDefaultChatBackgroundColor( c.name() );
+    Settings::instance().setChatFontColor( c.name() );
     setChatFontColor( c.name() );
   }
 }
