@@ -627,7 +627,7 @@
     <message>
         <location filename="../src/FileTransferPeer.cpp" line="179"/>
         <source>Transfer timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Overføring tidsutkopling</translation>
     </message>
     <message>
         <location filename="../src/FileTransferUpload.cpp" line="101"/>
@@ -2339,12 +2339,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="679"/>
         <source>Show the datestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis datomerking</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="680"/>
         <source>If enabled the message shows its datestamp in the chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Merk av for at melding skal vise datomerking i samtalevindu</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="685"/>
@@ -2359,7 +2359,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="715"/>
         <source>Use your name instead of &apos;You&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk navnet ditt i stedet for &apos;Du&apos;</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="743"/>
@@ -2384,7 +2384,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="761"/>
         <source>Check for new version at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Se etter ny versjon ved oppstart</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="830"/>
@@ -3453,12 +3453,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="259"/>
         <source>Enable broadcast interval of</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver kringkastingsintervall på</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="288"/>
         <source>s (0=disabled, 10=default)</source>
-        <translation type="unfinished"></translation>
+        <translation>s (0=avslått, 10=standard)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="313"/>
