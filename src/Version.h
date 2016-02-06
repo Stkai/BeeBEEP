@@ -40,10 +40,10 @@ const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
 const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
 const char* BEEBEEP_PAGE_ON_FACEBOOK = "https://www.facebook.com/beebeeplanmessenger";
 const char* BEEBEEP_UPDATER_WEBSITE = "/update/beeupdater.txt";
-const char* BEEBEEP_VERSION = "3.0.4";
+const char* BEEBEEP_VERSION = "3.0.5";
 const int BEEBEEP_PROTO_VERSION = 64;
 const int BEEBEEP_SETTINGS_VERSION = 5;
-const int BEEBEEP_BUILD = 650;
+const int BEEBEEP_BUILD = 653;
 
 #endif // BEEBEEP_VERSION_H
 

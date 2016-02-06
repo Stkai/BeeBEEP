@@ -416,6 +416,12 @@ void GuiMain::startCore()
   {
     showWizard();
     Settings::instance().setFirstTime( false );
+
+    /* Save geometry for the first time */
+    /* If the user closes the application when it is not visible
+     * there are problems in saving state and geometry */
+    Settings::instance().setGuiGeometry( saveGeometry() );
+    Settings::instance().setGuiState( saveState() );
   }
 
   if( Settings::instance().askPassword() )
