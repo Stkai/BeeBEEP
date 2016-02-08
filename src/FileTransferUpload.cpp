@@ -21,7 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-
+#include "BeeUtils.h"
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -68,7 +68,7 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
 void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setFileInfo( fi );
-  qDebug() << name() << "starts uploading" << fi.path();
+  qDebug() << name() << "starts uploading" << qPrintable( Bee::convertToNativeFolderSeparator( fi.path() ) );
   if( m_socket.protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {
     qWarning() << name() << "using an old file upload protocol version" << m_socket.protoVersion();

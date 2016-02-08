@@ -43,7 +43,7 @@ const char* BEEBEEP_UPDATER_WEBSITE = "/update/beeupdater.txt";
 const char* BEEBEEP_VERSION = "3.0.5";
 const int BEEBEEP_PROTO_VERSION = 64;
 const int BEEBEEP_SETTINGS_VERSION = 5;
-const int BEEBEEP_BUILD = 654;
+const int BEEBEEP_BUILD = 657;
 
 #endif // BEEBEEP_VERSION_H
 

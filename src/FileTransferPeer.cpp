@@ -64,7 +64,7 @@ void FileTransferPeer::closeAll()
 
   if( m_file.isOpen() )
   {
-    qDebug() << name() << "close file" << m_file.fileName();
+    qDebug() << name() << "close file" << qPrintable( Bee::convertToNativeFolderSeparator( m_file.fileName() ) );
     m_file.flush();
     m_file.close();
   }
@@ -74,7 +74,7 @@ void FileTransferPeer::setFileInfo( const FileInfo& fi )
 {
   m_fileInfo = fi;
   m_file.setFileName( m_fileInfo.path() );
-  qDebug() << name() << "init the file" << m_fileInfo.path();
+  qDebug() << name() << "init the file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.path() ) );
 }
 
 void FileTransferPeer::startConnection()
@@ -98,7 +98,7 @@ void FileTransferPeer::startConnection()
   }
   else
   {
-    qDebug() << name() << "is connecting to" << m_fileInfo.hostAddress().toString() << ":" << m_fileInfo.hostPort();
+    qDebug() << name() << "is connecting to" << qPrintable( m_fileInfo.hostAddress().toString() ) << ":" << m_fileInfo.hostPort();
     m_socket.connectToNetworkAddress( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
   }
 
@@ -107,7 +107,7 @@ void FileTransferPeer::startConnection()
 
 void FileTransferPeer::setTransferCompleted()
 {
-  qDebug() << name() << "has completed the transfer of file" << m_fileInfo.name();
+  qDebug() << name() << "has completed the transfer of file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) );
   m_state = FileTransferPeer::Completed;
   closeAll();
   emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
@@ -124,7 +124,7 @@ void FileTransferPeer::socketError( QAbstractSocket::SocketError )
 void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
-  qWarning() << name() << "found an error when transfer file" << m_fileInfo.name() << ":" << str_err;
+  qWarning() << name() << "found an error when transfer file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) ) << ":" << str_err;
   closeAll();
   emit message( id(), userId(), m_fileInfo, str_err );
   deleteLater();

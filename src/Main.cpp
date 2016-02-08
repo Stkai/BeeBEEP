@@ -90,6 +90,7 @@ int main( int argc, char *argv[] )
   qDebug() << "Starting BeeBEEP" << qPrintable( Settings::instance().version( true ) )
            << "for" << qPrintable( Settings::instance().operatingSystem( true ) )
            << "and Qt" << QT_VERSION_STR;
+  qDebug() << "Applicaction folder:" << qPrintable( QDir::toNativeSeparators( bee_app.applicationDirPath() ) );
   Settings::instance().setResourceFolder();
   Settings::instance().loadRcFile();
   Settings::instance().setDataFolder();
