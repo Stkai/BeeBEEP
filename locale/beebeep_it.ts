@@ -3979,11 +3979,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Enable broadcast interval of</source>
-        <translation>Abilita la ricerca automatica in un intervallo di</translation>
+        <translation type="obsolete">Abilita la ricerca automatica in un intervallo di</translation>
     </message>
     <message>
         <source>s (0=disabled, 10=default)</source>
-        <translation>s (0=disabilitata, 10=predefinita)</translation>
+        <translation type="obsolete">s (0=disabilitata, 10=predefinita)</translation>
+    </message>
+    <message>
+        <source>Enable broadcast interval</source>
+        <translation>Abilita la ricerca automatica ogni </translation>
+    </message>
+    <message>
+        <source>seconds (0=disabled, 10=default)</source>
+        <translation>secondi (0=disabilitata, 10=predefinita)</translation>
     </message>
 </context>
 <context>
