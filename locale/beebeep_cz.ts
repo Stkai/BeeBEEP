@@ -3455,12 +3455,12 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="155"/>
         <source>Enable broadcast interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit interval prohledávání</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="184"/>
         <source>seconds (0=disabled, 10=default)</source>
-        <translation type="unfinished"></translation>
+        <translation>s (0=zakázáno, 10=výchozí)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="230"/>
