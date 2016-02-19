@@ -49,9 +49,7 @@
    # sudo apt-get install libqt5core5a libqt5gui5 libqt5widgets5 libqt5network5 libqt5printsupport5 libqt5multimedia5 libqt5multimedia5-plugins libxcb-screensaver0 libavahi-compat-libdnssd1
    
    For BeeBEEP 3.0
-   # sudo apt-get install libqt4-dev libqt4-core libqt4-gui libqt4-xml libxcb-screensaver0 libavahi-compat-libdnssd1 libphonon4 libhunspell-dev
-   Note: in case of error "phonon backend plugin could not be loaded"
-   You have to install: #sudo apt install phonon-backend-gstreamer
+   # sudo apt-get install libqt4-dev libqt4-core libqt4-gui libqt4-xml libxcb-screensaver0 libavahi-compat-libdnssd1 libphonon4 libhunspell-dev phonon-backend-gstreamer
    
    ** Arch LINUX **
    
