@@ -64,7 +64,7 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
     return;
   }
 
-  QString sys_message = GuiChatMessage::formatSystemMessage( cm, true, false );
+  QString sys_message = GuiChatMessage::formatSystemMessage( cm, Settings::instance().homeShowMessageTimestamp(), Settings::instance().homeShowMessageDatestamp() );
 
   if( sys_message.isEmpty() )
     return;
@@ -90,9 +90,18 @@ void GuiHome::checkAnchorClicked( const QUrl& url )
 void GuiHome::customContextMenu( const QPoint& p )
 {
   QMenu custom_context_menu;
-  custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
+  custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
+  custom_context_menu.addSeparator();
+  QAction* act = custom_context_menu.addAction( tr( "Show the datestamp" ), this, SLOT( onAddDatestampClicked() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().homeShowMessageDatestamp() );
+
+  act = custom_context_menu.addAction( tr( "Show the timestamp" ), this, SLOT( onAddTimestampClicked() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().homeShowMessageTimestamp() );
+
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
@@ -105,3 +114,32 @@ void GuiHome::loadDefaultChat()
       addSystemMessage( cm );
   }
 }
+
+void GuiHome::reloadMessages()
+{
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+  mp_teSystem->clear();
+  loadDefaultChat();
+  QApplication::restoreOverrideCursor();
+}
+
+void GuiHome::onAddDatestampClicked()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+
+  Settings::instance().setHomeShowMessageDatestamp( act->isChecked() );
+  QTimer::singleShot( 100, this, SLOT( reloadMessages() ) );
+}
+
+void GuiHome::onAddTimestampClicked()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+
+  Settings::instance().setHomeShowMessageTimestamp( act->isChecked() );
+  QTimer::singleShot( 100, this, SLOT( reloadMessages() ) );
+}
+

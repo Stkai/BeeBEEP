@@ -36,8 +36,8 @@ class GuiHome : public QWidget, private Ui::GuiHomeWidget
 public:
   explicit GuiHome( QWidget *parent = 0 );
 
-  void loadDefaultChat();
   void addSystemMessage( const ChatMessage& );
+  void loadDefaultChat();
 
 signals:
   void openDefaultChatRequest();
@@ -47,6 +47,9 @@ protected slots:
   void openDefaultChat();
   void checkAnchorClicked( const QUrl& );
   void customContextMenu( const QPoint& );
+  void onAddDatestampClicked();
+  void onAddTimestampClicked();
+  void reloadMessages();
 
 };
 

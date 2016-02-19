@@ -149,8 +149,12 @@ public:
   inline void setChatAddNewLineToMessage( bool );
   inline bool chatShowMessageTimestamp() const;
   inline void setChatShowMessageTimestamp( bool );
+  inline bool homeShowMessageTimestamp() const;
+  inline void setHomeShowMessageTimestamp( bool );
   inline bool chatShowMessageDatestamp() const;
   inline void setChatShowMessageDatestamp( bool );
+  inline bool homeShowMessageDatestamp() const;
+  inline void setHomeShowMessageDatestamp( bool );
   inline void setChatUseHtmlTags( bool );
   inline bool chatUseHtmlTags() const;
   inline void setChatUseClickableLinks( bool );
@@ -569,6 +573,9 @@ private:
   bool m_checkNewVersionAtStartup;
   bool m_useNativeDialogs;
 
+  bool m_homeShowMessageTimestamp;
+  bool m_homeShowMessageDatestamp;
+
 };
 
 
@@ -621,6 +628,10 @@ inline bool Settings::chatShowMessageTimestamp() const { return m_chatShowMessag
 inline void Settings::setChatShowMessageTimestamp( bool new_value ) { m_chatShowMessageTimestamp = new_value; }
 inline bool Settings::chatShowMessageDatestamp() const { return m_chatShowMessageDatestamp; }
 inline void Settings::setChatShowMessageDatestamp( bool new_value ) { m_chatShowMessageDatestamp = new_value; }
+inline bool Settings::homeShowMessageTimestamp() const { return m_homeShowMessageTimestamp; }
+inline void Settings::setHomeShowMessageTimestamp( bool new_value ) { m_homeShowMessageTimestamp = new_value; }
+inline bool Settings::homeShowMessageDatestamp() const { return m_homeShowMessageDatestamp; }
+inline void Settings::setHomeShowMessageDatestamp( bool new_value ) { m_homeShowMessageDatestamp = new_value; }
 inline void Settings::setChatUseHtmlTags( bool new_value ) { m_chatUseHtmlTags = new_value; }
 inline bool Settings::chatUseHtmlTags() const { return m_chatUseHtmlTags; }
 inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClickableLinks = new_value; }

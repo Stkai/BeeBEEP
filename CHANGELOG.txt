@@ -1,5 +1,8 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 3.0.5
+- Added timestamp and datestamp to home activities (option - right click on text)
+
 BeeBEEP 3.0.4
 - Hive protocol added: BeeBEEPs tell each other the host address of the connected users. It can be disabled in beebeep.rc (option)
 - Check for new version at startup (option)

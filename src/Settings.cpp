@@ -775,6 +775,8 @@ void Settings::load()
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
   m_useNativeDialogs = sets->value( "UseNativeDialogs", m_useNativeDialogs ).toBool();
+  m_homeShowMessageTimestamp = sets->value( "ShowHomeTimestamp", true ).toBool();
+  m_homeShowMessageDatestamp = sets->value( "ShowHomeDatestamp", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1017,6 +1019,8 @@ void Settings::save()
   sets->setValue( "Shortcuts", m_shortcuts );
   sets->setValue( "UseShortcuts", m_useShortcuts );
   sets->setValue( "UseNativeDialogs", m_useNativeDialogs );
+  sets->setValue( "ShowHomeTimestamp", m_homeShowMessageTimestamp );
+  sets->setValue( "ShowHomeDatestamp", m_homeShowMessageDatestamp );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
