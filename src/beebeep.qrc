@@ -140,5 +140,6 @@
         <file>images/dictionary.png</file>
         <file>images/spellchecker.png</file>
         <file>images/key-return.png</file>
+        <file>images/printer.png</file>
     </qresource>
 </RCC>

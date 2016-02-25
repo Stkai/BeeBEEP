@@ -96,6 +96,7 @@ NetworkEntry NetworkManager::firstNetworkEntry( bool use_ipv4 ) const
 
   return NetworkEntry();
 }
+
 bool NetworkManager::searchLocalHostAddress()
 {
   m_localHostAddress = QHostAddress( "127.0.0.1" );

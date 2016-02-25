@@ -111,6 +111,8 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ ShowNextUnreadMessage ] = QKeySequence( Qt::CTRL | Qt::Key_Tab );
   m_shortcutNames[ SendChatMessage ] = QObject::tr( "Send chat message" );
   m_shortcuts[ SendChatMessage ] = QKeySequence( Qt::CTRL | Qt::Key_Return );
+  m_shortcutNames[ Print ] = QObject::tr( "Print" );
+  m_shortcuts[ Print ] = QKeySequence( QKeySequence::Print );
 
 
 #ifdef BEEBEEP_DEBUG

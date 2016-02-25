@@ -122,6 +122,7 @@ private slots:
   void onUseReturnToSendMessageClicked();
   void onSpellCheckerActionClicked();
   void onCompleterActionClicked();
+  void printChat();
 
 private:
   VNumber m_chatId;
@@ -140,6 +141,7 @@ private:
   QAction* mp_actSpellChecker;
   QAction* mp_actCompleter;
   QAction* mp_actUseReturnToSendMessage;
+  QAction* mp_actPrint;
 
   QMenu* mp_menuMembers;
   QSplitter* mp_splitter;

@@ -50,6 +50,7 @@ protected slots:
   void onAddDatestampClicked();
   void onAddTimestampClicked();
   void reloadMessages();
+  void printActivities();
 
 };
 

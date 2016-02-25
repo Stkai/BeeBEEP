@@ -1164,6 +1164,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>unread messages</source>
         <translation>messaggi non letti</translation>
     </message>
+    <message>
+        <source>Print...</source>
+        <translation>Stampa...</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1483,6 +1487,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Select All</source>
         <translation>Seleziona tutto</translation>
+    </message>
+    <message>
+        <source>Print...</source>
+        <translation>Stampa...</translation>
+    </message>
+    <message>
+        <source>Show the datestamp</source>
+        <translation>Mostra la data</translation>
+    </message>
+    <message>
+        <source>Show the timestamp</source>
+        <translation>Mostra l&apos;orario</translation>
     </message>
 </context>
 <context>
@@ -4889,6 +4905,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Send chat message</source>
         <translation>Invia messaggio</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Stampa</translation>
     </message>
 </context>
 <context>

@@ -154,6 +154,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
+  mp_actPrint = bar->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
+  mp_actPrint->setShortcut( QKeySequence::Print );
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
   mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
   bar->addSeparator();
@@ -191,6 +193,8 @@ void GuiChat::customContextMenu( const QPoint& p )
   custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
+  custom_context_menu.addSeparator();
+  custom_context_menu.addAction( mp_actPrint );
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
@@ -847,6 +851,12 @@ void GuiChat::updateShortcuts()
   else
     mp_pbSend->setShortcut( QKeySequence() );
 
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    mp_actPrint->setShortcut( ks );
+  else
+    mp_actPrint->setShortcut( QKeySequence() );
+
 }
 
 void GuiChat::updateUseReturnKeyToSendMessageToolTip()
@@ -960,3 +970,17 @@ void GuiChat::setChatReadByUser( VNumber user_id )
    reloadChatUsers();
 }
 
+void GuiChat::printChat()
+{
+  QPrinter printer( QPrinter::HighResolution );
+  printer.setFullPage( true );
+  QPrintDialog *dlg = new QPrintDialog( &printer, this );
+  dlg->setOptions( QAbstractPrintDialog::PrintSelection | QAbstractPrintDialog::PrintPageRange |
+                   QAbstractPrintDialog::PrintShowPageSize |  QAbstractPrintDialog::PrintCollateCopies |
+                   QAbstractPrintDialog::PrintCurrentPage | QAbstractPrintDialog::PrintToFile );
+
+  if( dlg->exec() == QDialog::Accepted)
+    mp_teChat->print( dlg->printer() );
+
+  dlg->deleteLater();
+}

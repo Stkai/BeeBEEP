@@ -27,6 +27,7 @@
 #include "ChatManager.h"
 #include "ChatMessage.h"
 #include "Settings.h"
+#include "ShortcutManager.h"
 
 
 GuiHome::GuiHome( QWidget* parent )
@@ -94,7 +95,14 @@ void GuiHome::customContextMenu( const QPoint& p )
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.addSeparator();
-  QAction* act = custom_context_menu.addAction( tr( "Show the datestamp" ), this, SLOT( onAddDatestampClicked() ) );
+  QAction* act = custom_context_menu.addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
+  QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    act->setShortcut( ks );
+  else
+    act->setShortcut( QKeySequence() );
+  custom_context_menu.addSeparator();
+  act = custom_context_menu.addAction( tr( "Show the datestamp" ), this, SLOT( onAddDatestampClicked() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().homeShowMessageDatestamp() );
 
@@ -143,3 +151,17 @@ void GuiHome::onAddTimestampClicked()
   QTimer::singleShot( 100, this, SLOT( reloadMessages() ) );
 }
 
+void GuiHome::printActivities()
+{
+  QPrinter printer( QPrinter::HighResolution );
+  printer.setFullPage( true );
+  QPrintDialog *dlg = new QPrintDialog( &printer, this );
+  dlg->setOptions( QAbstractPrintDialog::PrintSelection | QAbstractPrintDialog::PrintPageRange |
+                   QAbstractPrintDialog::PrintShowPageSize |  QAbstractPrintDialog::PrintCollateCopies |
+                   QAbstractPrintDialog::PrintCurrentPage | QAbstractPrintDialog::PrintToFile );
+
+  if( dlg->exec() == QDialog::Accepted)
+    mp_teSystem->print( dlg->printer() );
+
+  dlg->deleteLater();
+}
