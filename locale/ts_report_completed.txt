@@ -1,0 +1,15 @@
+
+   translation file  %ready   (unfinished/(total-obsolete))
+=============================================================
+     beebeep_cz.ts :   99%    9/(860-7)
+     beebeep_de.ts :    0%    847/(847-0)
+     beebeep_fr.ts :   93%    65/(860-7)
+     beebeep_it.ts :  100%    0/(1252-397)
+     beebeep_nb.ts :   92%    69/(853-0)
+     beebeep_nl.ts :  100%    0/(946-36)
+     beebeep_pt.ts :   98%    22/(847-0)
+     beebeep_rs.ts :   97%    28/(853-0)
+     beebeep_ru.ts :   74%    225/(974-123)
+     beebeep_sv.ts :  100%    0/(856-3)
+     beebeep_xx.ts :    0%    847/(847-0)
+

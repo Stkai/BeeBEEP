@@ -55,7 +55,11 @@ void GAnalytics::doPost()
   QNetworkRequest req( ga_url );
   req.setHeader( QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded" );
 
+#if QT_VERSION >= 0x050000
   QUrlQuery query;
+#else
+  QUrl query;
+#endif
   query.addQueryItem("v", "1"); // Version
   query.addQueryItem("tid", Settings::instance().gaTrackingId() );
   query.addQueryItem("cid", uuid.toString() );
@@ -66,7 +70,11 @@ void GAnalytics::doPost()
                                               .arg( Settings::instance().version( false ) ) );
   query.addQueryItem( "ev", "1" );
 
+#if QT_VERSION >= 0x050000
   QByteArray query_data = query.query().toLatin1();
+#else
+  QByteArray query_data = query.encodedQuery();
+#endif
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "posts query:" << qPrintable( query_data );

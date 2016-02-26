@@ -45,7 +45,7 @@ const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect";
 const char* BEEBEEP_VERSION = "3.0.5";
 const int BEEBEEP_PROTO_VERSION = 64;
 const int BEEBEEP_SETTINGS_VERSION = 5;
-const int BEEBEEP_BUILD = 662;
+const int BEEBEEP_BUILD = 663;
 
 #endif // BEEBEEP_VERSION_H
 
