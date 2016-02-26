@@ -73,6 +73,7 @@ Settings::Settings()
   m_useIPv6 = false;
   m_useHive = true;
   m_checkNewVersionAtStartup = true;
+  m_postUsageStatistics = true;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -458,6 +459,16 @@ QString Settings::facebookPage() const
   return QString( BEEBEEP_PAGE_ON_FACEBOOK );
 }
 
+QString Settings::gaTrackingId() const
+{
+  return QString( BEEBEEP_GA_TRACKING_ID );
+}
+
+QString Settings::gaUrl() const
+{
+  return QString( BEEBEEP_GA_URL );
+}
+
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;
@@ -785,6 +796,7 @@ void Settings::load()
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
   m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
   m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
+  m_postUsageStatistics = sets->value( "PostUsageStatistics", m_postUsageStatistics ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -1028,6 +1040,7 @@ void Settings::save()
   sets->setValue( "UseWordCompleter", m_useWordCompleter );
   sets->setValue( "DictionaryPath", m_dictionaryPath );
   sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
+  sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );

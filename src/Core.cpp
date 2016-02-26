@@ -32,6 +32,7 @@
 #include "Protocol.h"
 #include "UserManager.h"
 #include "Updater.h"
+#include "GAnalytics.h"
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   #include "MDnsManager.h"
 #endif
@@ -201,6 +202,9 @@ bool Core::start()
 
   if( Settings::instance().checkNewVersionAtStartup() )
     QTimer::singleShot( 0, this, SLOT( checkNewVersion() ) );
+
+  if( Settings::instance().postUsageStatistics() )
+    QTimer::singleShot( 2000, this, SLOT( postUsageStatistics() ) );
 
   return true;
 }
@@ -553,4 +557,32 @@ void Core::checkBroadcastInterval()
 {
   if( isConnected() )
     mp_broadcaster->enableBroadcastTimer( Settings::instance().broadcastInterval() > 0 );
+}
+
+void Core::postUsageStatistics()
+{
+  GAnalytics* ga = new GAnalytics( this );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( ga->objectName() ) << "created";
+#endif
+  connect( ga, SIGNAL( jobFinished() ), this, SLOT( onPostUsageStatisticsJobCompleted() ) );
+  QTimer::singleShot( 0, ga, SLOT( doPost() ) );
+}
+
+void Core::onPostUsageStatisticsJobCompleted()
+{
+  GAnalytics *ga = qobject_cast<GAnalytics*>( sender() );
+  if( !ga )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Core received a signal from invalid GAnalytics instance";
+#endif
+    return;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( ga->objectName() ) << "will be cleared";
+#endif
+
+  ga->deleteLater();
 }

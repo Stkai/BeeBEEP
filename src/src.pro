@@ -130,7 +130,8 @@ HEADERS += AudioManager.h \
   UserStatusRecord.h \
   VCard.h \
   Version.h \
-  Job.h
+  Job.h \
+    GAnalytics.h
 
 
 SOURCES += AudioManager.cpp \
@@ -226,7 +227,8 @@ SOURCES += AudioManager.cpp \
   UserManager.cpp \
   UserRecord.cpp \
   UserStatusRecord.cpp \
-  VCard.cpp
+  VCard.cpp \
+    GAnalytics.cpp
 
 
 FORMS += GuiAddUser.ui \

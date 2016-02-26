@@ -58,6 +58,8 @@ public:
 
   inline void setCheckNewVersionAtStartup( bool );
   inline bool checkNewVersionAtStartup() const;
+  inline void setPostUsageStatistics( bool );
+  inline bool postUsageStatistics() const;
 
   inline const QDate& settingsCreationDate() const;
   inline const QString& dataFolder() const;
@@ -86,6 +88,8 @@ public:
   QString downloadWebSite() const;
   inline void setIsFacebookPageLinkClicked( bool );
   inline bool isFacebookPageLinkClicked() const;
+  QString gaTrackingId() const;
+  QString gaUrl() const;
 
   inline bool useHive() const;
 
@@ -572,6 +576,7 @@ private:
 
   bool m_checkNewVersionAtStartup;
   bool m_useNativeDialogs;
+  bool m_postUsageStatistics;
 
   bool m_homeShowMessageTimestamp;
   bool m_homeShowMessageDatestamp;
@@ -815,6 +820,8 @@ inline int Settings::tickIntervalCheckIdle() const { return m_tickIntervalCheckI
 inline int Settings::tickIntervalCheckNetwork() const { return m_tickIntervalCheckNetwork; }
 inline void Settings::setCheckNewVersionAtStartup( bool new_value ) { m_checkNewVersionAtStartup = new_value; }
 inline bool Settings::checkNewVersionAtStartup() const { return m_checkNewVersionAtStartup; }
+inline void Settings::setPostUsageStatistics( bool new_value ) { m_postUsageStatistics = new_value; }
+inline bool Settings::postUsageStatistics() const { return m_postUsageStatistics; }
 inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatUseYourNameInsteadOfYou = new_value; }
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
 inline bool Settings::useNativeDialogs() const { return m_useNativeDialogs; }
