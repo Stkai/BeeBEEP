@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "FileDialog.h"
+#include "PreviewFileDialog.h"
 #include "Settings.h"
 
 
