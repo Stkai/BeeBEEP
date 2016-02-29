@@ -4,47 +4,47 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="281"/>
+        <location filename="../src/BeeUtils.cpp" line="292"/>
         <source>Header</source>
         <translation>Rubriek</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="282"/>
+        <location filename="../src/BeeUtils.cpp" line="293"/>
         <source>System</source>
         <translation>Systeem</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="283"/>
+        <location filename="../src/BeeUtils.cpp" line="294"/>
         <source>Chat</source>
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="284"/>
+        <location filename="../src/BeeUtils.cpp" line="295"/>
         <source>Connection</source>
         <translation>Verbinding</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="285"/>
+        <location filename="../src/BeeUtils.cpp" line="296"/>
         <source>User Status</source>
         <translation>Gebruikers Status</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="286"/>
+        <location filename="../src/BeeUtils.cpp" line="297"/>
         <source>User Information</source>
         <translation>Gebruikers Informatie</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="287"/>
+        <location filename="../src/BeeUtils.cpp" line="298"/>
         <source>File Transfer</source>
         <translation>Bestandsoverdracht</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="288"/>
+        <location filename="../src/BeeUtils.cpp" line="299"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="289"/>
+        <location filename="../src/BeeUtils.cpp" line="300"/>
         <source>Other</source>
         <translation>Andere</translation>
     </message>
@@ -52,92 +52,92 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/Core.cpp" line="126"/>
+        <location filename="../src/Core.cpp" line="127"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan niet verbinden met %2 netwerk. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="149"/>
+        <location filename="../src/Core.cpp" line="152"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan niet verzenden naar %2 netwerk. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="162"/>
+        <location filename="../src/Core.cpp" line="165"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 U bent verbonden met %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="269"/>
+        <location filename="../src/Core.cpp" line="275"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 U bent niet langer verbonden met het %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="284"/>
+        <location filename="../src/Core.cpp" line="290"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 zal zoeken naar gebruikers in deze ip adressen: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="222"/>
+        <location filename="../src/Core.cpp" line="228"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Nul configuratie start altijd met service naam: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="80"/>
+        <location filename="../src/Core.cpp" line="81"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 Gebruiker %2 kan instellingen niet in pad opslaan:%3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="96"/>
+        <location filename="../src/Core.cpp" line="97"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 Gebruiker %2 kan chat berichten niet in pad opslaan:%3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="173"/>
+        <location filename="../src/Core.cpp" line="176"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Je hebt gekozen om alleen deze werkgroepen deel te nemen: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="237"/>
+        <location filename="../src/Core.cpp" line="243"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Nul configuratie service gesloten.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="305"/>
+        <location filename="../src/Core.cpp" line="311"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Nul configuratie is netwerk voor service: %2 aan het doorbladeren</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="312"/>
+        <location filename="../src/Core.cpp" line="318"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Nul configuratie kan niet netwerk voor service: %2 door bladeren</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="330"/>
+        <location filename="../src/Core.cpp" line="336"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Versturen naar %2 netwerk...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="337"/>
+        <location filename="../src/Core.cpp" line="343"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 U bent niet met het %2 netwerk verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="343"/>
+        <location filename="../src/Core.cpp" line="349"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 heeft een filter op de UDP poort ontdekt %3. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="347"/>
+        <location filename="../src/Core.cpp" line="353"/>
         <source>View the log messages for more informations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="546"/>
+        <location filename="../src/Core.cpp" line="551"/>
         <source>New version is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="547"/>
+        <location filename="../src/Core.cpp" line="552"/>
         <source>Click here to download</source>
         <translation type="unfinished"></translation>
     </message>
@@ -150,17 +150,17 @@
         <translation type="obsolete">Voor %1 is het %2 netwerk onbereikbaar.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="395"/>
+        <location filename="../src/Core.cpp" line="401"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>is verbonden met een extern netwerk (het nieuwe subnet is aan uw verspreidingsadreslijst toegevoegd).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="414"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 Controleer %2 meer adressen...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="428"/>
+        <location filename="../src/Core.cpp" line="434"/>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 Contact opnemen met %2...</translation>
     </message>
@@ -301,7 +301,7 @@
         <translation>%1 (%2) is verbonden met het %3 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="469"/>
+        <location filename="../src/Core.cpp" line="475"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Netwerkkaart %2 is verdwenen.</translation>
     </message>
@@ -568,37 +568,37 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="263"/>
+        <location filename="../src/BeeUtils.cpp" line="274"/>
         <source>Audio</source>
         <translation>Geluid</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="264"/>
+        <location filename="../src/BeeUtils.cpp" line="275"/>
         <source>Video</source>
         <translation>Beeld</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="265"/>
+        <location filename="../src/BeeUtils.cpp" line="276"/>
         <source>Image</source>
         <translation>Afbeelding</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="266"/>
+        <location filename="../src/BeeUtils.cpp" line="277"/>
         <source>Document</source>
         <translation>Document</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="267"/>
+        <location filename="../src/BeeUtils.cpp" line="278"/>
         <source>Other</source>
         <translation>Andere</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="268"/>
+        <location filename="../src/BeeUtils.cpp" line="279"/>
         <source>Executable</source>
         <translation>Uitvoerbaar bestand</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="269"/>
+        <location filename="../src/BeeUtils.cpp" line="280"/>
         <source>MacOSX</source>
         <translation>MacOSX</translation>
     </message>

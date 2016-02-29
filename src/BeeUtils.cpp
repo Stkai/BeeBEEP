@@ -197,6 +197,17 @@ QString Bee::uniqueFilePath( const QString& file_path )
   return fi.absoluteFilePath();
 }
 
+QString Bee::suffixFromFile( const QString& file_path )
+{
+  if( file_path.isEmpty() )
+    return "";
+  QStringList sl = file_path.split( "." );
+  if( sl.size() > 1 )
+    return sl.last();
+  else
+    return "";
+}
+
 bool Bee::isFileTypeAudio( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();

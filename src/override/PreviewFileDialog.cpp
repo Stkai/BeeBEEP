@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "PreviewFileDialog.h"
+#include "Settings.h"
 
 
 PreviewFileDialog::PreviewFileDialog( QWidget* parent, const QString& caption, const QString& directory, const QString& filter )
@@ -31,30 +32,45 @@ PreviewFileDialog::PreviewFileDialog( QWidget* parent, const QString& caption, c
   setObjectName("PreviewFileDialog");
   setOption( QFileDialog::DontUseNativeDialog, true );
 
-  QVBoxLayout* box = new QVBoxLayout(this);
+  mp_preview = new QLabel( this );
+  mp_preview->setAlignment( Qt::AlignCenter );
+  mp_preview->setObjectName( "LabelPreview" );
+  mp_preview->setMinimumWidth( Settings::instance().previewFileDialogImageSize() );
+  mp_preview->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  m_defaultPixmap = Bee::convertToGrayScale( QIcon( ":images/beebeep.png" ).pixmap( Settings::instance().previewFileDialogImageSize(), Settings::instance().previewFileDialogImageSize() ) );
+  setPixmapInPreview( m_defaultPixmap );
 
-  mp_preview = new QLabel(tr("Preview"), this);
-  mp_preview->setAlignment(Qt::AlignCenter);
-  mp_preview->setObjectName("labelPreview");
-  mp_preview->setGeometry( 0, 0, 200, 100 );
-    box->addWidget(mp_preview);
+  {
+    QGridLayout *layout = (QGridLayout*)this->layout();
+    layout->addWidget( mp_preview, 0, layout->columnCount()+1, layout->rowCount()-1, 1, 0 );
+  }
 
-    box->addStretch();
-
-    // add to QFileDialog layout
-    {
-        QGridLayout *layout = (QGridLayout*)this->layout();
-        layout->addLayout(box, 1, 3, 3, 1);
-    }
-    connect(this, SIGNAL(currentChanged(const QString&)), this, SLOT(OnCurrentChanged(const QString&)));
+  connect( this, SIGNAL( currentChanged( const QString& ) ), this, SLOT( onCurrentChanged( const QString& ) ) );
 }
 
-void PreviewFileDialog::OnCurrentChanged(const QString & path)
+void PreviewFileDialog::onCurrentChanged( const QString& file_path )
 {
-    QPixmap pixmap = QPixmap(path);
-    if (pixmap.isNull()) {
-        mp_preview->setText("not an image");
-    } else {
-        mp_preview->setPixmap(pixmap.scaled(mp_preview->width(), mp_preview->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  QString file_suffix = Bee::suffixFromFile( file_path );
+  if( Bee::isFileTypeImage( file_suffix ) )
+  {
+    QPixmap pix = QPixmap( file_path );
+    if( !pix.isNull() )
+    {
+      setPixmapInPreview( pix );
+      return;
     }
+  }
+
+  setPixmapInPreview( m_defaultPixmap );
+}
+
+void PreviewFileDialog::setPixmapInPreview( const QPixmap& pix )
+{
+  int max_width = qMax( Settings::instance().previewFileDialogImageSize(), mp_preview->width() );
+  if( pix.width() > max_width || pix.height() > mp_preview->height() )
+  {
+    mp_preview->setPixmap( pix.scaled( max_width, mp_preview->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
+  }
+  else
+    mp_preview->setPixmap( pix );
 }

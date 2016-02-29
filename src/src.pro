@@ -63,6 +63,7 @@ HEADERS += AudioManager.h \
   FileShare.h \
   FileTransfer.h \
   FileTransferPeer.h \
+  GAnalytics.h \
   Group.h \
   GuiAddUser.h \
   GuiAskPassword.h \
@@ -130,8 +131,7 @@ HEADERS += AudioManager.h \
   UserStatusRecord.h \
   VCard.h \
   Version.h \
-  Job.h \
-    GAnalytics.h
+  Job.h
 
 
 SOURCES += AudioManager.cpp \
@@ -165,6 +165,7 @@ SOURCES += AudioManager.cpp \
   FileTransferDownload.cpp \
   FileTransferPeer.cpp \
   FileTransferUpload.cpp \
+  GAnalytics.cpp \
   Group.cpp \
   GuiAddUser.cpp \
   GuiAskPassword.cpp \
@@ -227,8 +228,7 @@ SOURCES += AudioManager.cpp \
   UserManager.cpp \
   UserRecord.cpp \
   UserStatusRecord.cpp \
-  VCard.cpp \
-    GAnalytics.cpp
+  VCard.cpp
 
 
 FORMS += GuiAddUser.ui \

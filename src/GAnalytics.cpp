@@ -50,8 +50,6 @@ void GAnalytics::doPost()
     }
   }
 
-  QUuid uuid = QUuid::createUuid();
-
   QNetworkRequest req( ga_url );
   req.setHeader( QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded" );
 
@@ -62,7 +60,7 @@ void GAnalytics::doPost()
 #endif
   query.addQueryItem("v", "1" ); // Version
   query.addQueryItem("tid", Settings::instance().gaTrackingId() );
-  query.addQueryItem("cid", uuid.toString() );
+  query.addQueryItem("cid", Settings::instance().sessionUuid() );
   query.addQueryItem( "t", "event" );
   query.addQueryItem( "ec", Settings::instance().programName() );
   query.addQueryItem( "ea", "usage" );

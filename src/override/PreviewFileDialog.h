@@ -37,10 +37,14 @@ public:
                               const QString& filter = QString() );
 
 protected slots:
-  void OnCurrentChanged( const QString& path );
+  void onCurrentChanged( const QString& path );
+
+private:
+  void setPixmapInPreview( const QPixmap& );
 
 protected:
   QLabel* mp_preview;
+  QPixmap m_defaultPixmap;
 
 };
 

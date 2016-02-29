@@ -4,47 +4,47 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="281"/>
+        <location filename="../src/BeeUtils.cpp" line="292"/>
         <source>Header</source>
         <translation>Rubrik</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="282"/>
+        <location filename="../src/BeeUtils.cpp" line="293"/>
         <source>System</source>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="283"/>
+        <location filename="../src/BeeUtils.cpp" line="294"/>
         <source>Chat</source>
         <translation>Chatt</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="284"/>
+        <location filename="../src/BeeUtils.cpp" line="295"/>
         <source>Connection</source>
         <translation>Anslutning</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="285"/>
+        <location filename="../src/BeeUtils.cpp" line="296"/>
         <source>User Status</source>
         <translation>Användarstatus</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="286"/>
+        <location filename="../src/BeeUtils.cpp" line="297"/>
         <source>User Information</source>
         <translation>Användarinfo</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="287"/>
+        <location filename="../src/BeeUtils.cpp" line="298"/>
         <source>File Transfer</source>
         <translation>Filöverföring</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="288"/>
+        <location filename="../src/BeeUtils.cpp" line="299"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="289"/>
+        <location filename="../src/BeeUtils.cpp" line="300"/>
         <source>Other</source>
         <translation>Annat</translation>
     </message>
@@ -52,92 +52,92 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/Core.cpp" line="126"/>
+        <location filename="../src/Core.cpp" line="127"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan inte ansluta till nätverket, %2. Kontrollera dina brandväggsinställningar.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="149"/>
+        <location filename="../src/Core.cpp" line="152"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan inte sända till nätverket, %2. Kontrollera dina brandväggsinställningar.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="162"/>
+        <location filename="../src/Core.cpp" line="165"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Du är ansluten till nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="269"/>
+        <location filename="../src/Core.cpp" line="275"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Du är bortkopplad från nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="284"/>
+        <location filename="../src/Core.cpp" line="290"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 kommer att söka användare på dessa IP-adresser: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="222"/>
+        <location filename="../src/Core.cpp" line="228"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration startad med tjänstnamnet: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="80"/>
+        <location filename="../src/Core.cpp" line="81"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 Användare %2 kan inte spara inställningar på sökväg: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="96"/>
+        <location filename="../src/Core.cpp" line="97"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 Användare %2 kan inte spara chattmeddelanden på sökväg: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="173"/>
+        <location filename="../src/Core.cpp" line="176"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Du har valt att endast gå med i följande arbetsgrupper: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="237"/>
+        <location filename="../src/Core.cpp" line="243"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero Configuration-tjänsten stängd.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="305"/>
+        <location filename="../src/Core.cpp" line="311"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration genomsöker nätverket efter tjänsten: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="312"/>
+        <location filename="../src/Core.cpp" line="318"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration kan inte söka i nätverket efter tjänsten: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="330"/>
+        <location filename="../src/Core.cpp" line="336"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 sänder i nätverket, %2...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="337"/>
+        <location filename="../src/Core.cpp" line="343"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 Du är inte ansluten till nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="343"/>
+        <location filename="../src/Core.cpp" line="349"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 har hittat ett filter på UDP-port %3. Kontrollera dina brandväggsinställningar.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="347"/>
+        <location filename="../src/Core.cpp" line="353"/>
         <source>View the log messages for more informations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="546"/>
+        <location filename="../src/Core.cpp" line="551"/>
         <source>New version is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="547"/>
+        <location filename="../src/Core.cpp" line="552"/>
         <source>Click here to download</source>
         <translation type="unfinished"></translation>
     </message>
@@ -150,17 +150,17 @@
         <translation type="obsolete">%1 Du kan inte nå nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="395"/>
+        <location filename="../src/Core.cpp" line="401"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>är ansluten från externt nätverk (det nya undernätet läggs till i din adresslista).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="414"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 Kontrollerar %2 adresser till...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="428"/>
+        <location filename="../src/Core.cpp" line="434"/>
         <source>%1 Contacting %2 ...</source>
         <translation>%1 Kontaktar %2 ...</translation>
     </message>
@@ -293,7 +293,7 @@
         <translation>%1 (%2) är ansluten till nätverket, %3.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="469"/>
+        <location filename="../src/Core.cpp" line="475"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Nätverksgränssnittet %2 har gått ner.</translation>
     </message>
@@ -556,37 +556,37 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="263"/>
+        <location filename="../src/BeeUtils.cpp" line="274"/>
         <source>Audio</source>
         <translation>Musik</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="264"/>
+        <location filename="../src/BeeUtils.cpp" line="275"/>
         <source>Video</source>
         <translation>Filmer</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="265"/>
+        <location filename="../src/BeeUtils.cpp" line="276"/>
         <source>Image</source>
         <translation>Bilder</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="266"/>
+        <location filename="../src/BeeUtils.cpp" line="277"/>
         <source>Document</source>
         <translation>Dokument</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="267"/>
+        <location filename="../src/BeeUtils.cpp" line="278"/>
         <source>Other</source>
         <translation>Annat</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="268"/>
+        <location filename="../src/BeeUtils.cpp" line="279"/>
         <source>Executable</source>
         <translation>Körbara</translation>
     </message>
     <message>
-        <location filename="../src/BeeUtils.cpp" line="269"/>
+        <location filename="../src/BeeUtils.cpp" line="280"/>
         <source>MacOSX</source>
         <translation>MacOSX</translation>
     </message>

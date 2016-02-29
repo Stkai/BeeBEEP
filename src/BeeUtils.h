@@ -43,6 +43,7 @@ namespace Bee
   QString bytesToString( FileSizeType, int precision = -1 );
   QString elapsedTimeToString( int msec );
   QString uniqueFilePath( const QString& );
+  QString suffixFromFile( const QString& );
   FileType fileTypeFromSuffix( const QString& );
   bool isFileTypeAudio( const QString& );
   bool isFileTypeVideo( const QString& );

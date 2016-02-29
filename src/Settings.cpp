@@ -115,6 +115,33 @@ Settings::Settings()
   {
     m_chatMessageFilter.setBit( i, i == ChatMessage::UserStatus );
   }
+
+#ifdef Q_OS_WIN
+  m_usePreviewFileDialog = true;
+#else
+  m_usePreviewFileDialog = false;
+#endif
+  m_previewFileDialogGeometry = "";
+  m_previewFileDialogImageSize = 200;
+
+}
+
+void Settings::createSessionUuid()
+{
+  if( m_sessionUuid.isEmpty() || m_sessionUuidCreationDate != QDate::currentDate() )
+  {
+    m_sessionUuid = QUuid::createUuid().toString();
+    m_sessionUuidCreationDate = QDate::currentDate();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Create new session uuid:" << qPrintable( m_sessionUuid );
+#endif
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Continue to use recent session uuid:" << qPrintable( m_sessionUuid );
+#endif
+  }
 }
 
 void Settings::setChatFont( const QFont& new_value )
@@ -788,6 +815,12 @@ void Settings::load()
   m_useNativeDialogs = sets->value( "UseNativeDialogs", m_useNativeDialogs ).toBool();
   m_homeShowMessageTimestamp = sets->value( "ShowHomeTimestamp", true ).toBool();
   m_homeShowMessageDatestamp = sets->value( "ShowHomeDatestamp", false ).toBool();
+  m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
+  if( m_resetGeometryAtStartup )
+    m_previewFileDialogGeometry = "";
+  else
+    m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
+  m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -797,6 +830,8 @@ void Settings::load()
   m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
   m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "PostUsageStatistics", m_postUsageStatistics ).toBool();
+  m_sessionUuid = sets->value( "SessionUuid", "" ).toString();
+  m_sessionUuidCreationDate = sets->value( "SessionUuidCreationDate", QDate() ).toDate();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -1033,6 +1068,9 @@ void Settings::save()
   sets->setValue( "UseNativeDialogs", m_useNativeDialogs );
   sets->setValue( "ShowHomeTimestamp", m_homeShowMessageTimestamp );
   sets->setValue( "ShowHomeDatestamp", m_homeShowMessageDatestamp );
+  sets->setValue( "UsePreviewFileDialog", m_usePreviewFileDialog );
+  sets->setValue( "PreviewFileDialogGeometry", m_previewFileDialogGeometry );
+  sets->setValue( "PreviewFileDialogImageSize", m_previewFileDialogImageSize );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
@@ -1041,6 +1079,8 @@ void Settings::save()
   sets->setValue( "DictionaryPath", m_dictionaryPath );
   sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
   sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
+  sets->setValue( "SessionUuid", m_sessionUuid );
+  sets->setValue( "SessionUuidCreationDate", m_sessionUuidCreationDate );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );

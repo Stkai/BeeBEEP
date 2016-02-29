@@ -48,6 +48,24 @@ QString FileDialog::getOpenFileName( QWidget* parent, const QString& caption, co
 {
   if( Settings::instance().useNativeDialogs() )
     return QFileDialog::getOpenFileName( parent, caption, dir, filter, selectedFilter );
+
+  if( Settings::instance().usePreviewFileDialog() )
+  {
+    PreviewFileDialog pfd( parent, caption, dir, filter );
+    pfd.setAcceptMode( QFileDialog::AcceptOpen );
+    pfd.setFileMode( QFileDialog::ExistingFile );
+    pfd.show();
+    if( !Settings::instance().previewFileDialogGeometry().isEmpty() )
+      pfd.restoreGeometry( Settings::instance().previewFileDialogGeometry() );
+    if( pfd.exec() == QFileDialog::Accepted )
+    {
+      QStringList sl = pfd.selectedFiles();
+      Settings::instance().setPreviewFileDialogGeometry( pfd.saveGeometry() );
+      return sl.first();
+    }
+    else
+      return "";
+  }
   else
     return QFileDialog::getOpenFileName( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog );
 }
@@ -57,6 +75,23 @@ QStringList FileDialog::getOpenFileNames( QWidget* parent, const QString& captio
 {
   if( Settings::instance().useNativeDialogs() )
     return QFileDialog::getOpenFileNames( parent, caption, dir, filter, selectedFilter );
+
+  if( Settings::instance().usePreviewFileDialog() )
+  {
+    PreviewFileDialog pfd( parent, caption, dir, filter );
+    pfd.setAcceptMode( QFileDialog::AcceptOpen );
+    pfd.setFileMode( QFileDialog::ExistingFiles );
+    pfd.show();
+    if( !Settings::instance().previewFileDialogGeometry().isEmpty() )
+      pfd.restoreGeometry( Settings::instance().previewFileDialogGeometry() );
+    if( pfd.exec() == QFileDialog::Accepted )
+    {
+      Settings::instance().setPreviewFileDialogGeometry( pfd.saveGeometry() );
+      return pfd.selectedFiles();
+    }
+    else
+      return QStringList();
+  }
   else
     return QFileDialog::getOpenFileNames( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog );
 }

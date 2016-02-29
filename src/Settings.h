@@ -220,6 +220,11 @@ public:
   inline void setChatUseYourNameInsteadOfYou( bool );
   inline bool chatUseYourNameInsteadOfYou() const;
 
+  inline bool usePreviewFileDialog() const;
+  inline void setPreviewFileDialogGeometry( const QByteArray& );
+  inline const QByteArray& previewFileDialogGeometry();
+  inline int previewFileDialogImageSize() const;
+
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
 
@@ -366,6 +371,9 @@ public:
   inline void setDictionaryPath( const QString& );
   inline const QString& dictionaryPath() const;
 
+  inline const QString& sessionUuid() const;
+  void createSessionUuid();
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -496,6 +504,10 @@ private:
   int m_emoticonInRecentMenu;
   QStringList m_recentEmoticons;
 
+  bool m_usePreviewFileDialog;
+  QByteArray m_previewFileDialogGeometry;
+  int m_previewFileDialogImageSize;
+
   QByteArray m_floatingChatGeometry;
   QByteArray m_floatingChatState;
   QByteArray m_floatingChatSplitterState;
@@ -580,6 +592,9 @@ private:
 
   bool m_homeShowMessageTimestamp;
   bool m_homeShowMessageDatestamp;
+
+  QString m_sessionUuid;
+  QDate m_sessionUuidCreationDate;
 
 };
 
@@ -825,5 +840,10 @@ inline bool Settings::postUsageStatistics() const { return m_postUsageStatistics
 inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatUseYourNameInsteadOfYou = new_value; }
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
 inline bool Settings::useNativeDialogs() const { return m_useNativeDialogs; }
+inline const QString& Settings::sessionUuid() const { return m_sessionUuid; }
+inline bool Settings::usePreviewFileDialog() const { return m_usePreviewFileDialog; }
+inline void Settings::setPreviewFileDialogGeometry( const QByteArray& new_value ) { m_previewFileDialogGeometry = new_value; }
+inline const QByteArray& Settings::previewFileDialogGeometry() { return m_previewFileDialogGeometry; }
+inline int Settings::previewFileDialogImageSize() const { return m_previewFileDialogImageSize; }
 
 #endif // BEEBEEP_SETTINGS_H

@@ -140,6 +140,8 @@ bool Core::start()
   if( Settings::instance().localUser().sessionId().isEmpty() )
     Settings::instance().createSessionId();
 
+  Settings::instance().createSessionUuid();
+
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Network password used:" << Settings::instance().passwordBeforeHash();
 #endif
@@ -537,14 +539,13 @@ void Core::onUpdaterJobCompleted()
 
   QString my_version = Settings::instance().version( false );
 
-  if( my_version >= latest_version  )
+  if( my_version >= latest_version )
   {
     qDebug() << "Latest version on the website is" << qPrintable( latest_version ) << "(update is not needed)";
     return;
   }
 
   qDebug() << "Latest version on website is" << qPrintable( latest_version ) << "(update is recommended)";
-
 
   QString html_msg = QString( "%1 <b>%2</b>. <a href=""%3"">%4</a>." ).arg( Bee::iconToHtml( ":/images/update.png", "*!*" ),
                                                            tr( "New version is available" ), download_url,
