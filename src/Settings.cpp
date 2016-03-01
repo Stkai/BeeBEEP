@@ -1081,7 +1081,7 @@ void Settings::save()
   sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
   sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
   sets->setValue( "Uuid", m_applicationUuid );
-  sets->setValue( "UuidCreationDate", m_applicationUuid );
+  sets->setValue( "UuidCreationDate", m_applicationUuidCreationDate );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );
