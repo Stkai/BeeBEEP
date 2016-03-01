@@ -90,6 +90,7 @@ public:
   inline bool isFacebookPageLinkClicked() const;
   QString gaTrackingId() const;
   QString gaUrl() const;
+  QString gaEventVersion() const;
 
   inline bool useHive() const;
 
@@ -371,8 +372,9 @@ public:
   inline void setDictionaryPath( const QString& );
   inline const QString& dictionaryPath() const;
 
-  inline const QString& sessionUuid() const;
-  void createSessionUuid();
+  inline const QString& applicationUuid() const;
+  inline const QDate& applicationUuidCreationDate() const;
+  void createApplicationUuid();
 
   void loadRcFile();
   void clearNativeSettings();
@@ -593,8 +595,8 @@ private:
   bool m_homeShowMessageTimestamp;
   bool m_homeShowMessageDatestamp;
 
-  QString m_sessionUuid;
-  QDate m_sessionUuidCreationDate;
+  QString m_applicationUuid;
+  QDate m_applicationUuidCreationDate;
 
 };
 
@@ -840,7 +842,8 @@ inline bool Settings::postUsageStatistics() const { return m_postUsageStatistics
 inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatUseYourNameInsteadOfYou = new_value; }
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
 inline bool Settings::useNativeDialogs() const { return m_useNativeDialogs; }
-inline const QString& Settings::sessionUuid() const { return m_sessionUuid; }
+inline const QString& Settings::applicationUuid() const { return m_applicationUuid; }
+inline const QDate& Settings::applicationUuidCreationDate() const { return m_applicationUuidCreationDate; }
 inline bool Settings::usePreviewFileDialog() const { return m_usePreviewFileDialog; }
 inline void Settings::setPreviewFileDialogGeometry( const QByteArray& new_value ) { m_previewFileDialogGeometry = new_value; }
 inline const QByteArray& Settings::previewFileDialogGeometry() { return m_previewFileDialogGeometry; }

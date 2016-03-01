@@ -42,10 +42,11 @@ const char* BEEBEEP_PAGE_ON_FACEBOOK = "https://www.facebook.com/beebeeplanmesse
 const char* BEEBEEP_UPDATER_WEBSITE = "/update/beeupdater.txt";
 const char* BEEBEEP_GA_TRACKING_ID = "UA-57878696-1";
 const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect";
+const char* BEEBEEP_GA_EVENT_VERSION = "1";
 const char* BEEBEEP_VERSION = "3.0.5";
 const int BEEBEEP_PROTO_VERSION = 64;
 const int BEEBEEP_SETTINGS_VERSION = 5;
-const int BEEBEEP_BUILD = 665;
+const int BEEBEEP_BUILD = 667;
 
 #endif // BEEBEEP_VERSION_H
 

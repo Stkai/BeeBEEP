@@ -126,21 +126,17 @@ Settings::Settings()
 
 }
 
-void Settings::createSessionUuid()
+void Settings::createApplicationUuid()
 {
-  if( m_sessionUuid.isEmpty() || m_sessionUuidCreationDate != QDate::currentDate() )
+  if( m_applicationUuid.isEmpty() || m_applicationUuidCreationDate.isNull() )
   {
-    m_sessionUuid = QUuid::createUuid().toString();
-    m_sessionUuidCreationDate = QDate::currentDate();
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Create new session uuid:" << qPrintable( m_sessionUuid );
-#endif
+    m_applicationUuid = QUuid::createUuid().toString();
+    m_applicationUuidCreationDate = QDate::currentDate();
+    qDebug() << "Create new application uuid" << qPrintable( m_applicationUuid );
   }
   else
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Continue to use recent session uuid:" << qPrintable( m_sessionUuid );
-#endif
+    qDebug() << "Continue to use application uuid" << qPrintable( m_applicationUuid ) << "created in" << qPrintable( m_applicationUuidCreationDate.toString( Qt::ISODate ) );
   }
 }
 
@@ -496,6 +492,11 @@ QString Settings::gaUrl() const
   return QString( BEEBEEP_GA_URL );
 }
 
+QString Settings::gaEventVersion() const
+{
+  return QString( BEEBEEP_GA_EVENT_VERSION );
+}
+
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;
@@ -830,8 +831,8 @@ void Settings::load()
   m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
   m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "PostUsageStatistics", m_postUsageStatistics ).toBool();
-  m_sessionUuid = sets->value( "SessionUuid", "" ).toString();
-  m_sessionUuidCreationDate = sets->value( "SessionUuidCreationDate", QDate() ).toDate();
+  m_applicationUuid = sets->value( "Uuid", "" ).toString();
+  m_applicationUuidCreationDate = sets->value( "UuidCreationDate", QDate() ).toDate();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -1079,8 +1080,8 @@ void Settings::save()
   sets->setValue( "DictionaryPath", m_dictionaryPath );
   sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
   sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
-  sets->setValue( "SessionUuid", m_sessionUuid );
-  sets->setValue( "SessionUuidCreationDate", m_sessionUuidCreationDate );
+  sets->setValue( "Uuid", m_applicationUuid );
+  sets->setValue( "UuidCreationDate", m_applicationUuid );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );

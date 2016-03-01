@@ -140,7 +140,7 @@ bool Core::start()
   if( Settings::instance().localUser().sessionId().isEmpty() )
     Settings::instance().createSessionId();
 
-  Settings::instance().createSessionUuid();
+  Settings::instance().createApplicationUuid();
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Network password used:" << Settings::instance().passwordBeforeHash();

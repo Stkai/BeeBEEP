@@ -119,7 +119,7 @@ MainWindowGeometry=(do not edit manually)
 MainWindowState=(do not edit manually)
 ChatSplitterState=(do not edit manually)
 FloatingChatGeometry=(do not edit manually)
-FloatingChatState= do not edit manually)
+FloatingChatState=(do not edit manually)
 FloatingChatSplitterState=(do not edit manually)
 ShowHomeAsDefaultPage=[true/false] Show home page at start up (force user to click on available users to chat with them)
 ShowTipsOfTheDay=[true/false]
@@ -142,13 +142,21 @@ ShowUserStatusBackgroundColor=[true/false] show background color for status in u
 UseShortcuts=[true/false] enable shortcuts in application
 Shortcuts=(do not edit manually)
 UseNativeDialogs=[true/false] enable native OS dialogs (in some case these native dialogs can be modal and cause connection timeout)
-
+ShowHomeTimestamp=[true/false] (default=true) [3.0.5]
+ShowHomeDatestamp=[true/false] (default=false) [3.0.5]
+UsePreviewFileDialog=[true/false] (default=true only in windows, in other os false) [3.0.4]
+PreviewFileDialogGeometry=(do not edit manually) [3.0.5]
+PreviewFileDialogImageSize=[integer] (default=200) [3.0.5]
+  
 [Tools]
 LogToFile=[true/false] enable file logging
 UseSpellChecker=[true/false] enable spell checking on writing message
 UseWordCompleter=[true/false] enable word completer on writing message
 DictionaryPath=(String) path to dictionary. It is accepted only file with extension .dic
 CheckNewVersionAtStartup=[true/false] enable check for new version at BeeBEEP startup (default=true) [3.0.4]
+PostUsageStatistics= [true/false] add +1 user to anonymous usage statistics (default=true) [3.0.5]
+Uuid= [string] application UUID for anonymous statistics [3.0.5]
+UuidCreationDate=(do not edit manually) [3.0.5]
 
 [Misc]
 TickIntervalCheckIdle=10

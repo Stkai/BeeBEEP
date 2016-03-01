@@ -3275,7 +3275,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Help me to know how many people use BeeBEEP</source>
-        <translation>Aiutami a conoscere quante persone usano BeeBEEP</translation>
+        <translation type="obsolete">Aiutami a conoscere quante persone usano BeeBEEP</translation>
     </message>
     <message>
         <source>Donate for %1</source>
@@ -3432,6 +3432,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Check for new version at startup</source>
         <translation>Controlla la presenza di una nuova versione alla partenza</translation>
+    </message>
+    <message>
+        <source>Add +1 user to anonymous usage statistics</source>
+        <translation>Aggiungi +1 utente alle statistiche anonime</translation>
+    </message>
+    <message>
+        <source>Help me to know how many users have BeeBEEP</source>
+        <translation>Aiutami a sapere quante persone usano realmente BeeBEEP</translation>
     </message>
 </context>
 <context>

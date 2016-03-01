@@ -964,7 +964,11 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Open %1 website to have online support" ).arg( Settings::instance().programName() ) );
   mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( QIcon( ":/images/thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
-  act->setStatusTip( tr( "Help me to know how many people use BeeBEEP" ) );
+  act = mp_menuInfo->addAction( tr( "Add +1 user to anonymous usage statistics" ), this, SLOT( settingsChanged() ) );
+  act->setStatusTip( tr( "Help me to know how many users have BeeBEEP" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().postUsageStatistics() );
+  act->setData( 44 );
   act = mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Donate for %1" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
   act->setStatusTip( tr( "I'm so grateful and pleased about that" ) );
 
@@ -1516,6 +1520,9 @@ void GuiMain::settingsChanged()
     break;
   case 43:
     Settings::instance().setCheckNewVersionAtStartup( act->isChecked() );
+    break;
+  case 44:
+    Settings::instance().setPostUsageStatistics( act->isChecked() );
     break;
   case 99:
     break;

@@ -58,15 +58,19 @@ void GAnalytics::doPost()
 #else
   QUrl query;
 #endif
-  query.addQueryItem("v", "1" ); // Version
+  query.addQueryItem("v", Settings::instance().gaEventVersion() );
   query.addQueryItem("tid", Settings::instance().gaTrackingId() );
-  query.addQueryItem("cid", Settings::instance().sessionUuid() );
+  query.addQueryItem("cid", Settings::instance().applicationUuid() );
   query.addQueryItem( "t", "event" );
   query.addQueryItem( "ec", Settings::instance().programName() );
   query.addQueryItem( "ea", "usage" );
   query.addQueryItem( "el", QString( "%1-%2" ).arg( Settings::instance().operatingSystem( false ).toLower() )
                                               .arg( Settings::instance().version( false ) ) );
-  query.addQueryItem( "ev", "1" );
+
+  if( Settings::instance().applicationUuidCreationDate() != QDate::currentDate() )
+    query.addQueryItem( "ev", "1" );
+  else
+    query.addQueryItem( "ev", "0" );
 
 #if QT_VERSION >= 0x050000
   QByteArray query_data = query.query().toLatin1();
