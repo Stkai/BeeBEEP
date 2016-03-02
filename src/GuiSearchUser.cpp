@@ -37,6 +37,7 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_cbParseAddresses, SIGNAL( stateChanged( int ) ), this, SLOT( enableVerbose() ) );
 }
 
 void GuiSearchUser::loadSettings()
@@ -90,6 +91,8 @@ void GuiSearchUser::loadSettings()
     mp_sbBroadcastInterval->setValue( 10 );
   }
 
+  mp_cbVerbose->setChecked( Settings::instance().parseBroadcastAddressesAll() );
+  enableVerbose();
   mp_leWorkgroups->setFocus();
 }
 
@@ -137,6 +140,7 @@ void GuiSearchUser::checkAndSearch()
   Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptConnectionsOnlyFromWorkgroups->isChecked() );
 
   Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
+  Settings::instance().setParseBroadcastAddressesAll( mp_cbVerbose->isChecked() );
   Settings::instance().setAddExternalSubnetAutomatically( mp_cbAutoAddSubnet->isChecked() );
   Settings::instance().setUseMulticastDns( mp_cbEnableMDns->isChecked() );
 
@@ -152,4 +156,11 @@ void GuiSearchUser::checkAndSearch()
     Settings::instance().setBroadcastInterval( 0 );
 
   accept();
+}
+
+void GuiSearchUser::enableVerbose()
+{
+  mp_cbVerbose->setEnabled( mp_cbParseAddresses->isChecked() );
+  if( !mp_cbVerbose->isEnabled() )
+    mp_cbVerbose->setChecked( false );
 }

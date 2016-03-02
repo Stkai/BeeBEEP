@@ -113,7 +113,8 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ SendChatMessage ] = QKeySequence( Qt::CTRL | Qt::Key_Return );
   m_shortcutNames[ Print ] = QObject::tr( "Print" );
   m_shortcuts[ Print ] = QKeySequence( QKeySequence::Print );
-
+  m_shortcutNames[ Broadcast ] = QObject::tr( "Broadcast" );
+  m_shortcuts[ Broadcast ] = QKeySequence( Qt::CTRL | Qt::Key_B );
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )

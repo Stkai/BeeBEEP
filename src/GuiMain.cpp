@@ -3542,6 +3542,12 @@ void GuiMain::updateShortcuts()
   else
     mp_scShowNextUnreadMessage->setEnabled( false );
 
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::Broadcast );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    mp_actBroadcast->setShortcut( ks );
+  else
+    mp_actBroadcast->setShortcut( QKeySequence() );
+
 }
 
 void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
@@ -3649,6 +3655,7 @@ void GuiMain::onTickEvent( int ticks )
 
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
+  mp_core->onTickEvent( ticks );
 }
 
 void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )

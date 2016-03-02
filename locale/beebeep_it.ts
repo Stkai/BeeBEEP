@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -432,7 +432,7 @@
     </message>
     <message>
         <source>%1 Contacting %2 ...</source>
-        <translation>%1 Sto contattando %2 ...</translation>
+        <translation type="vanished">%1 Sto contattando %2 ...</translation>
     </message>
     <message>
         <source>The message will be delivered to %1.</source>
@@ -757,6 +757,10 @@
         <source>Please select an user path in the list.</source>
         <translation>Seleziona un indirizzo utente nella lista.</translation>
     </message>
+    <message>
+        <source>Clear all</source>
+        <translation>Cancella tutti</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUserDialog</name>
@@ -795,6 +799,10 @@
     <message>
         <source>Click here to add user path</source>
         <translation>Premi qui per aggiungere un indirizzo utente</translation>
+    </message>
+    <message>
+        <source>Split subnet in Ipv4 addresses</source>
+        <translation>Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
     </message>
 </context>
 <context>
@@ -4017,6 +4025,10 @@ il file %2 (%3)?</translation>
         <source>seconds (0=disabled, 10=default)</source>
         <translation>secondi (0=disabilitata, 10=predefinita)</translation>
     </message>
+    <message>
+        <source>Verbose</source>
+        <translation>In modo approfondito</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocal</name>
@@ -4917,6 +4929,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Print</source>
         <translation>Stampa</translation>
+    </message>
+    <message>
+        <source>Broadcast</source>
+        <translation>Cerca utenti</translation>
     </message>
 </context>
 <context>

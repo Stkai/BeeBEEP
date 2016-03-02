@@ -33,7 +33,8 @@ class ShortcutManager
   static ShortcutManager* mp_instance;
 
 public:
-  enum ShortcutType { Empty, SendFile, ShowFileTransfers, SetFocusInMessageBox, MinimizeAllChats, ShowNextUnreadMessage, SendChatMessage, Print, NumShortcut };
+  enum ShortcutType { Empty, SendFile, ShowFileTransfers, SetFocusInMessageBox, MinimizeAllChats,
+                      ShowNextUnreadMessage, SendChatMessage, Print, Broadcast, NumShortcut };
 
   void setDefaultShortcuts();
 

@@ -123,6 +123,7 @@ Settings::Settings()
 #endif
   m_previewFileDialogGeometry = "";
   m_previewFileDialogImageSize = 200;
+  m_maxUsersToConnectInATick = 20;
 
 }
 
@@ -858,6 +859,7 @@ void Settings::load()
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
   m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", false ).toBool();
+  m_parseBroadcastAddressesAll = sets->value( "ParseBroadcastAddressesAll", false ).toBool();
   m_addExternalSubnetAutomatically = sets->value( "AddExternalSubnetAutomatically", true ).toBool();
   m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();
   m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
@@ -865,6 +867,7 @@ void Settings::load()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
+  m_maxUsersToConnectInATick = sets->value( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick ).toInt();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1105,10 +1108,12 @@ void Settings::save()
     sets->setValue( "LocalHostAddressForced", QString( "" ) );
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
   sets->setValue( "ParseBroadcastAddresses", m_parseBroadcastAddresses );
+  sets->setValue( "ParseBroadcastAddressesAll", m_parseBroadcastAddressesAll );
   sets->setValue( "AddExternalSubnetAutomatically", m_addExternalSubnetAutomatically );
   sets->setValue( "UserPathList", m_userPathList );
   sets->setValue( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups );
   sets->setValue( "Workgroups", m_workgroups );
+  sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );

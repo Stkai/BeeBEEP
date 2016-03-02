@@ -107,6 +107,7 @@ public slots:
   void checkNetworkInterface();
   void checkNewVersion();
   void postUsageStatistics();
+  void onTickEvent( int );
 
   /* CoreChat */
   void sendWritingMessage( VNumber );

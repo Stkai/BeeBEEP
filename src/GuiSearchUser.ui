@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>697</width>
-    <height>538</height>
+    <width>807</width>
+    <height>591</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,325 +19,347 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0" colspan="4">
-    <widget class="QGroupBox" name="mp_boxBroadcast">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="mp_lUdpPort">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>UDP Port in beebeep.rc *</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QLineEdit" name="mp_leUdpPort">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3" colspan="2">
-       <widget class="QLabel" name="mp_lHelpUdp">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>(the same for all clients)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="mp_lBase">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Local subnet address *</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1" colspan="2">
-       <widget class="QLineEdit" name="mp_leSubnet">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3" colspan="2">
-       <widget class="QLabel" name="mp_lHelpSubnet">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>(search users here by default)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="mp_lMulticastGroup">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Multicast group in beebeep.rc *</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QLineEdit" name="mp_leMulticastGroup">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3" colspan="2">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>219</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="mp_cbBroadcastInterval">
-        <property name="text">
-         <string>Enable broadcast interval</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="mp_sbBroadcastInterval">
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="suffix">
-         <string/>
-        </property>
-        <property name="maximum">
-         <number>999</number>
-        </property>
-        <property name="singleStep">
-         <number>5</number>
-        </property>
-        <property name="value">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2" colspan="2">
-       <widget class="QLabel" name="mp_lBroadcastIntervalSuffix">
-        <property name="text">
-         <string>seconds (0=disabled, 10=default)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="4">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>259</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="mp_lHostIni">
-        <property name="text">
-         <string>Addresses in beehosts.ini *</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0" colspan="5">
-       <widget class="QPlainTextEdit" name="mp_teAddressesInHosts">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>70</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0" colspan="3">
-       <widget class="QLabel" name="mp_lWorkgroups">
-        <property name="text">
-         <string>Workgroups (enter your network groups separated by comma)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0" colspan="5">
-       <widget class="QLineEdit" name="mp_leWorkgroups"/>
-      </item>
-      <item row="8" column="0" colspan="3">
-       <widget class="QCheckBox" name="mp_cbAcceptConnectionsOnlyFromWorkgroups">
-        <property name="text">
-         <string>Accept connections only from your workgroups</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0" colspan="5">
-       <widget class="QLabel" name="mp_lBroadcast">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0" colspan="5">
-       <widget class="QPlainTextEdit" name="mp_teAddressesInSettings">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>70</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="0" colspan="2">
-       <widget class="QCheckBox" name="mp_cbParseAddresses">
-        <property name="text">
-         <string>Split subnet to IPV4 addresses</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="0" colspan="2">
-       <widget class="QCheckBox" name="mp_cbAutoAddSubnet">
-        <property name="text">
-         <string>Automatically add external subnet</string>
-        </property>
-       </widget>
-      </item>
-      <item row="13" column="0" colspan="2">
-       <widget class="QCheckBox" name="mp_cbEnableMDns">
-        <property name="text">
-         <string>Enable Zero Configuration Networking</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="mp_lRO">
-     <property name="text">
-      <string>* (read only section)</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>207</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="mp_pbOk">
-     <property name="text">
-      <string>Ok</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="QPushButton" name="mp_pbCancel">
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  <widget class="QGroupBox" name="mp_boxBroadcast">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>12</y>
+     <width>794</width>
+     <height>525</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="mp_lUdpPort">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>UDP Port in beebeep.rc *</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="3">
+     <widget class="QLineEdit" name="mp_leUdpPort">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4" colspan="2">
+     <widget class="QLabel" name="mp_lHelpUdp">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>(the same for all clients)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="mp_lBase">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Local subnet address *</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="3">
+     <widget class="QLineEdit" name="mp_leSubnet">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="4" colspan="2">
+     <widget class="QLabel" name="mp_lHelpSubnet">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>(search users here by default)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="mp_lMulticastGroup">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Multicast group in beebeep.rc *</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="3">
+     <widget class="QLineEdit" name="mp_leMulticastGroup">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="4" colspan="2">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>219</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="0">
+     <widget class="QCheckBox" name="mp_cbBroadcastInterval">
+      <property name="text">
+       <string>Enable broadcast interval</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1" colspan="2">
+     <widget class="QSpinBox" name="mp_sbBroadcastInterval">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="suffix">
+       <string/>
+      </property>
+      <property name="maximum">
+       <number>999</number>
+      </property>
+      <property name="singleStep">
+       <number>5</number>
+      </property>
+      <property name="value">
+       <number>10</number>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="3" colspan="2">
+     <widget class="QLabel" name="mp_lBroadcastIntervalSuffix">
+      <property name="text">
+       <string>seconds (0=disabled, 10=default)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="5">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>259</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="mp_lHostIni">
+      <property name="text">
+       <string>Addresses in beehosts.ini *</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="6">
+     <widget class="QPlainTextEdit" name="mp_teAddressesInHosts">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>70</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="4">
+     <widget class="QLabel" name="mp_lWorkgroups">
+      <property name="text">
+       <string>Workgroups (enter your network groups separated by comma)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0" colspan="6">
+     <widget class="QLineEdit" name="mp_leWorkgroups"/>
+    </item>
+    <item row="8" column="0" colspan="4">
+     <widget class="QCheckBox" name="mp_cbAcceptConnectionsOnlyFromWorkgroups">
+      <property name="text">
+       <string>Accept connections only from your workgroups</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0" colspan="6">
+     <widget class="QLabel" name="mp_lBroadcast">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0" colspan="6">
+     <widget class="QPlainTextEdit" name="mp_teAddressesInSettings">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>70</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0" colspan="2">
+     <widget class="QCheckBox" name="mp_cbParseAddresses">
+      <property name="text">
+       <string>Split subnet to IPV4 addresses</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="2" colspan="2">
+     <widget class="QCheckBox" name="mp_cbVerbose">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Verbose</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0" colspan="2">
+     <widget class="QCheckBox" name="mp_cbAutoAddSubnet">
+      <property name="text">
+       <string>Automatically add external subnet</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0" colspan="3">
+     <widget class="QCheckBox" name="mp_cbEnableMDns">
+      <property name="text">
+       <string>Enable Zero Configuration Networking</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="mp_lRO">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>559</y>
+     <width>123</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>* (read only section)</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mp_pbOk">
+   <property name="geometry">
+    <rect>
+     <x>659</x>
+     <y>555</y>
+     <width>59</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ok</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mp_pbCancel">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>555</y>
+     <width>81</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>mp_leUdpPort</tabstop>
@@ -350,6 +372,7 @@
   <tabstop>mp_cbAcceptConnectionsOnlyFromWorkgroups</tabstop>
   <tabstop>mp_teAddressesInSettings</tabstop>
   <tabstop>mp_cbParseAddresses</tabstop>
+  <tabstop>mp_cbVerbose</tabstop>
   <tabstop>mp_cbAutoAddSubnet</tabstop>
   <tabstop>mp_cbEnableMDns</tabstop>
   <tabstop>mp_pbOk</tabstop>

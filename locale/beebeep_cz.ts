@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -132,12 +132,12 @@
         <translation>Zobrazit logy pro více informací</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="551"/>
+        <location filename="../src/Core.cpp" line="546"/>
         <source>New version is available</source>
         <translation>Je dostupná nová verze</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="552"/>
+        <location filename="../src/Core.cpp" line="547"/>
         <source>Click here to download</source>
         <translation>Zde kliknout pro stažení</translation>
     </message>
@@ -156,9 +156,8 @@
         <translation>%1 Kontrola %2 více  adres...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="434"/>
         <source>%1 Contacting %2 ...</source>
-        <translation>%1 kontaktuje %2 ...</translation>
+        <translation type="vanished">%1 kontaktuje %2 ...</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="46"/>
@@ -289,7 +288,7 @@
         <translation>Uživatel %1 (%2) je připojen do %3 sítě.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="475"/>
+        <location filename="../src/Core.cpp" line="470"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1Síťové rozhraní %2 spadlo.</translation>
     </message>
@@ -653,42 +652,47 @@
 <context>
     <name>GuiAddUser</name>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="35"/>
+        <location filename="../src/GuiAddUser.cpp" line="36"/>
         <source>Add user</source>
         <translation>Přidat uživatele</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="38"/>
+        <location filename="../src/GuiAddUser.cpp" line="39"/>
         <source>Comment</source>
         <translation>Komentář</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="38"/>
+        <location filename="../src/GuiAddUser.cpp" line="39"/>
         <source>Address</source>
         <translation>Adresa</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="96"/>
+        <location filename="../src/GuiAddUser.cpp" line="97"/>
         <source>Please insert a valid IP address.</source>
         <translation>Vložte platnou IP adresu.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="106"/>
+        <location filename="../src/GuiAddUser.cpp" line="107"/>
         <source>Please insert a valid port or use the default one %1.</source>
         <translation>Vložte platný port nebo použijte základní %1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="119"/>
+        <location filename="../src/GuiAddUser.cpp" line="141"/>
         <source>These IP address and port are already inserted in list.</source>
         <translation>Tato IP adresa a port již v seznamu existují.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="152"/>
+        <location filename="../src/GuiAddUser.cpp" line="175"/>
         <source>Remove user path</source>
         <translation>Odebrat uživatelskou cestu</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="175"/>
+        <location filename="../src/GuiAddUser.cpp" line="177"/>
+        <source>Clear all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.cpp" line="202"/>
         <source>Please select an user path in the list.</source>
         <translation>Vybrat uživatelskou cestu ze seznamu.</translation>
     </message>
@@ -716,12 +720,12 @@
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="107"/>
+        <location filename="../src/GuiAddUser.ui" line="110"/>
         <source>Add</source>
         <translation>Přidat</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="110"/>
+        <location filename="../src/GuiAddUser.ui" line="107"/>
         <source>Click here to add user path</source>
         <translation>Zde kliknout pro přidání uživatelské cesty</translation>
     </message>
@@ -731,12 +735,17 @@
         <translation>Komentář</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="169"/>
+        <location filename="../src/GuiAddUser.ui" line="156"/>
+        <source>Split subnet in Ipv4 addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.ui" line="176"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="176"/>
+        <location filename="../src/GuiAddUser.ui" line="183"/>
         <source>Cancel</source>
         <translation>Ukončit</translation>
     </message>
@@ -3448,7 +3457,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="77"/>
+        <location filename="../src/GuiSearchUser.ui" line="83"/>
         <source>Local subnet address *</source>
         <translation>Adresa místní podsítě *</translation>
     </message>
@@ -3457,67 +3466,72 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">Zadat IP adresy nebo podsítě vaší místní sítě oddělené čárkou (příklad: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="204"/>
+        <location filename="../src/GuiSearchUser.ui" line="210"/>
         <source>Addresses in beehosts.ini *</source>
         <translation>Adresy v beehosts.ini *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="35"/>
+        <location filename="../src/GuiSearchUser.ui" line="41"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP Port v beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="64"/>
+        <location filename="../src/GuiSearchUser.ui" line="70"/>
         <source>(the same for all clients)</source>
         <translation>(stejné pro všechny klienty)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="106"/>
+        <location filename="../src/GuiSearchUser.ui" line="112"/>
         <source>(search users here by default)</source>
         <translation>(ve výchozím nastavení zde hledat uživatele)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="119"/>
+        <location filename="../src/GuiSearchUser.ui" line="125"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Multicast skupina v beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="155"/>
+        <location filename="../src/GuiSearchUser.ui" line="161"/>
         <source>Enable broadcast interval</source>
         <translation>Povolit interval prohledávání</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="184"/>
+        <location filename="../src/GuiSearchUser.ui" line="190"/>
         <source>seconds (0=disabled, 10=default)</source>
         <translation>s (0=zakázáno, 10=výchozí)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="230"/>
+        <location filename="../src/GuiSearchUser.ui" line="236"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
         <translation>Pracovní skupiny (zadejte vaše pracovní skupiny oddělené čárkou)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="240"/>
+        <location filename="../src/GuiSearchUser.ui" line="246"/>
         <source>Accept connections only from your workgroups</source>
         <translation>Přijmout připojení pouze od svých pracovních skupin</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="259"/>
+        <location filename="../src/GuiSearchUser.ui" line="265"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Zadat IP adresy nebo podsítě vaší místní sítě oddělené čárkou (příklad: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="285"/>
+        <location filename="../src/GuiSearchUser.ui" line="291"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Rozdělit podsítě podle IPV4 adres</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="292"/>
+        <location filename="../src/GuiSearchUser.ui" line="304"/>
+        <source>Verbose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="311"/>
         <source>Automatically add external subnet</source>
         <translation>Automaticky přidat externí podsíť</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="299"/>
+        <location filename="../src/GuiSearchUser.ui" line="318"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Povolit Zero Configuration sítě</translation>
     </message>
@@ -3530,18 +3544,18 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">s (0=zakázáno, 10=výchozí)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="309"/>
+        <location filename="../src/GuiSearchUser.ui" line="334"/>
         <source>* (read only section)</source>
         <translation>* (část pouze pro čtení)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="329"/>
-        <location filename="../src/GuiSearchUser.cpp" line="112"/>
+        <location filename="../src/GuiSearchUser.ui" line="347"/>
+        <location filename="../src/GuiSearchUser.cpp" line="115"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="336"/>
+        <location filename="../src/GuiSearchUser.ui" line="360"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
@@ -3551,22 +3565,22 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Najít uživatele</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="53"/>
+        <location filename="../src/GuiSearchUser.cpp" line="54"/>
         <source>Unknown address</source>
         <translation>Neznámá adresa</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="61"/>
+        <location filename="../src/GuiSearchUser.cpp" line="62"/>
         <source>File is empty</source>
         <translation>Soubor je prázdný</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="111"/>
+        <location filename="../src/GuiSearchUser.cpp" line="114"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="112"/>
+        <location filename="../src/GuiSearchUser.cpp" line="115"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Zadali jste neplatnou adresu:
@@ -4309,6 +4323,11 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="114"/>
         <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ShortcutManager.cpp" line="116"/>
+        <source>Broadcast</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

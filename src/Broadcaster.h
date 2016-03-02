@@ -41,6 +41,8 @@ public:
   inline const QList<QHostAddress> contactedAddress() const;
 
   void enableBroadcastTimer( bool );
+  void onTickEvent( int );
+  void addPeerAddressToContact( const QHostAddress&, int );
 
 public slots:
   void sendBroadcastDatagram();
@@ -70,6 +72,8 @@ private:
 
   QList<NetworkAddress> m_peerAddresses;
   QList<QHostAddress> m_contactedAddresses;
+
+  QList<NetworkAddress> m_peerAddressesToContact;
 
 };
 

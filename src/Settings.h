@@ -119,6 +119,7 @@ public:
   inline int tickIntervalConnectionTimeout() const;
   inline int tickIntervalCheckIdle() const;
   inline int tickIntervalCheckNetwork() const;
+  inline int maxUsersToConnectInATick() const;
 
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
@@ -275,6 +276,8 @@ public:
   inline bool broadcastOnlyToHostsIni() const;
   inline bool parseBroadcastAddresses() const;
   inline void setParseBroadcastAddresses( bool );
+  inline void setParseBroadcastAddressesAll( bool );
+  inline bool parseBroadcastAddressesAll() const;
   inline bool addExternalSubnetAutomatically() const;
   inline void setAddExternalSubnetAutomatically( bool );
   bool addSubnetToBroadcastAddress( const QHostAddress& );
@@ -453,6 +456,7 @@ private:
   int m_tickIntervalConnectionTimeout;
   int m_tickIntervalCheckIdle;
   int m_tickIntervalCheckNetwork;
+  int m_maxUsersToConnectInATick;
 
   QDateTime m_lastSave;
   bool m_logToFile;
@@ -530,6 +534,7 @@ private:
   QHostAddress m_localHostAddressForced;
   QString m_localSubnetForced;
   bool m_parseBroadcastAddresses;
+  bool m_parseBroadcastAddressesAll;
   bool m_addExternalSubnetAutomatically;
   bool m_useMulticastDns;
   bool m_preventMultipleConnectionsFromSingleHostAddress;
@@ -625,6 +630,7 @@ inline int Settings::fileTransferBufferSize() const { return m_fileTransferBuffe
 inline int Settings::trayMessageTimeout() const  { return m_trayMessageTimeout; }
 inline int Settings::userAwayTimeout() const { return m_userAwayTimeout; }
 inline void Settings::setUserAwayTimeout( int new_value ) { m_userAwayTimeout = new_value; }
+inline int Settings::maxUsersToConnectInATick() const { return m_maxUsersToConnectInATick; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline QString Settings::logFilePath() const { return QDir::toNativeSeparators( QString( "%1/%2.log" ).arg( m_logPath, programName().toLower() ) ); }
@@ -717,6 +723,8 @@ inline const QStringList& Settings::broadcastAddressesInFileHosts() const { retu
 inline const QStringList& Settings::broadcastAddressesInSettings() const { return m_broadcastAddressesInSettings; }
 inline bool Settings::parseBroadcastAddresses() const { return m_parseBroadcastAddresses; }
 inline void Settings::setParseBroadcastAddresses( bool new_value ) { m_parseBroadcastAddresses = new_value; }
+inline void Settings::setParseBroadcastAddressesAll( bool new_value ) { m_parseBroadcastAddressesAll = new_value; }
+inline bool Settings::parseBroadcastAddressesAll() const { return m_parseBroadcastAddressesAll; }
 inline const QHostAddress& Settings::localHostAddressForced() const { return m_localHostAddressForced; }
 inline const QString& Settings::localSubnetForced() const { return m_localSubnetForced; }
 inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }

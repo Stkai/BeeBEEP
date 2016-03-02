@@ -39,6 +39,7 @@ public:
 
 protected slots:
   void checkAndSearch();
+  void enableVerbose();
 
 };
 

@@ -281,7 +281,7 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
   if( m_broadcastAddresses.contains( host_address ) )
     return false;
 
-  if( host_address == m_baseBroadcastAddress )
+  if( host_address == m_baseBroadcastAddress && !Settings::instance().parseBroadcastAddressesAll() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Broadcaster skips base address:" << qPrintable( host_address.toString() );
@@ -296,7 +296,7 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
     return true;
   }
 
-  QList<QHostAddress> host_address_list = NetworkManager::instance().splitBroadcastSubnetToIPv4HostAddresses( host_address );
+  QList<QHostAddress> host_address_list = NetworkManager::instance().splitBroadcastSubnetToIPv4HostAddresses( host_address, Settings::instance().parseBroadcastAddressesAll() );
   if( host_address_list.isEmpty() )
     return false;
 
@@ -325,8 +325,25 @@ void Broadcaster::checkLoopback()
 
 void Broadcaster::addPeerAddress( const NetworkAddress& peer_address )
 {
-  if( !m_peerAddresses.contains( peer_address ) )
-    m_peerAddresses.append( peer_address );
+  if( Settings::instance().parseBroadcastAddresses() )
+  {
+    QList<QHostAddress> ha_list;
+    ha_list = NetworkManager::instance().splitBroadcastSubnetToIPv4HostAddresses( peer_address.hostAddress(), Settings::instance().parseBroadcastAddressesAll() );
+    if( !ha_list.isEmpty() )
+    {
+      foreach( QHostAddress ha, ha_list )
+      {
+        NetworkAddress na( ha, peer_address.hostPort() );
+        if( !m_peerAddresses.contains( na ) )
+          m_peerAddresses.append( na );
+      }
+    }
+  }
+  else
+  {
+    if( !m_peerAddresses.contains( peer_address ) )
+      m_peerAddresses.append( peer_address );
+  }
 }
 
 void Broadcaster::searchInPeerAddresses()
@@ -338,9 +355,27 @@ void Broadcaster::searchInPeerAddresses()
 
   foreach( NetworkAddress na, m_peerAddresses )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Try with network address:" << qPrintable( na.toString() );
-#endif
-    emit newPeerFound( na.hostAddress(), na.hostPort() );
+    if( !m_peerAddressesToContact.contains( na ) )
+      m_peerAddressesToContact.append( na );
   }
+}
+
+void Broadcaster::onTickEvent( int )
+{
+  if( !m_peerAddressesToContact.isEmpty() )
+  {
+    int max_count = m_peerAddressesToContact.size() < 15 ? m_peerAddressesToContact.size() : 15;
+    for( int i = 0; i < max_count; i++ )
+    {
+      NetworkAddress na = m_peerAddressesToContact.takeFirst();
+      emit newPeerFound( na.hostAddress(), na.hostPort() );
+    }
+  }
+}
+
+void Broadcaster::addPeerAddressToContact( const QHostAddress& ha, int ha_port )
+{
+  NetworkAddress na( ha, ha_port );
+  if( !m_peerAddressesToContact.contains( na ) )
+    m_peerAddressesToContact.append( na );
 }

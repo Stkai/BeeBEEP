@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nb_NO">
+<TS version="2.1" language="nb_NO">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -132,12 +132,12 @@
         <translation>Vis loggmeldingene for mer informasjon</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="551"/>
+        <location filename="../src/Core.cpp" line="546"/>
         <source>New version is available</source>
         <translation>Ny versjon er tilgjengelig</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="552"/>
+        <location filename="../src/Core.cpp" line="547"/>
         <source>Click here to download</source>
         <translation>Klikk her for å laste ned</translation>
     </message>
@@ -156,9 +156,8 @@
         <translation>%1 Sjekker %2 flere adresser...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="434"/>
         <source>%1 Contacting %2 ...</source>
-        <translation>%1 Kontakter %2 ...</translation>
+        <translation type="vanished">%1 Kontakter %2 ...</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="46"/>
@@ -289,7 +288,7 @@
         <translation>%1 (%2) er kobla til %3-nettverket.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="475"/>
+        <location filename="../src/Core.cpp" line="470"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 nettverksgrensesnittet %2 er nede.</translation>
     </message>
@@ -653,42 +652,47 @@
 <context>
     <name>GuiAddUser</name>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="35"/>
+        <location filename="../src/GuiAddUser.cpp" line="36"/>
         <source>Add user</source>
         <translation>Legg til bruker</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="38"/>
+        <location filename="../src/GuiAddUser.cpp" line="39"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="38"/>
+        <location filename="../src/GuiAddUser.cpp" line="39"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="96"/>
+        <location filename="../src/GuiAddUser.cpp" line="97"/>
         <source>Please insert a valid IP address.</source>
         <translation>Angi en gyldig IP-adresse.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="106"/>
+        <location filename="../src/GuiAddUser.cpp" line="107"/>
         <source>Please insert a valid port or use the default one %1.</source>
         <translation>Angi en gyldig port eller bruk standard %1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="119"/>
+        <location filename="../src/GuiAddUser.cpp" line="141"/>
         <source>These IP address and port are already inserted in list.</source>
         <translation>Disse IP-adressene og portene er allerede lagt til liste.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="152"/>
+        <location filename="../src/GuiAddUser.cpp" line="175"/>
         <source>Remove user path</source>
         <translation>Fjern brukersti</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="175"/>
+        <location filename="../src/GuiAddUser.cpp" line="177"/>
+        <source>Clear all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.cpp" line="202"/>
         <source>Please select an user path in the list.</source>
         <translation>Velg en brukersti i lista.</translation>
     </message>
@@ -716,12 +720,12 @@
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="107"/>
+        <location filename="../src/GuiAddUser.ui" line="110"/>
         <source>Add</source>
         <translation>Legg til</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="110"/>
+        <location filename="../src/GuiAddUser.ui" line="107"/>
         <source>Click here to add user path</source>
         <translation>Klikk her for å legge til brukersti</translation>
     </message>
@@ -731,12 +735,17 @@
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="169"/>
+        <location filename="../src/GuiAddUser.ui" line="156"/>
+        <source>Split subnet in Ipv4 addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.ui" line="176"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="176"/>
+        <location filename="../src/GuiAddUser.ui" line="183"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -3420,72 +3429,77 @@ Velg et annet navn.</translation>
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="77"/>
+        <location filename="../src/GuiSearchUser.ui" line="83"/>
         <source>Local subnet address *</source>
         <translation>Lokal subnett-adresse: *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="204"/>
+        <location filename="../src/GuiSearchUser.ui" line="210"/>
         <source>Addresses in beehosts.ini *</source>
         <translation>Adresser i beehosts.ini *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="35"/>
+        <location filename="../src/GuiSearchUser.ui" line="41"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP-port i beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="64"/>
+        <location filename="../src/GuiSearchUser.ui" line="70"/>
         <source>(the same for all clients)</source>
         <translation>(det samme for alle klienter)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="106"/>
+        <location filename="../src/GuiSearchUser.ui" line="112"/>
         <source>(search users here by default)</source>
         <translation>(søk bruiker her som standard)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="119"/>
+        <location filename="../src/GuiSearchUser.ui" line="125"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Multicast-gruppe i beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="155"/>
+        <location filename="../src/GuiSearchUser.ui" line="161"/>
         <source>Enable broadcast interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="184"/>
+        <location filename="../src/GuiSearchUser.ui" line="190"/>
         <source>seconds (0=disabled, 10=default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="230"/>
+        <location filename="../src/GuiSearchUser.ui" line="236"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
         <translation>Arbeidsgrupper (angi nettversgrupper adskilt med komma)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="240"/>
+        <location filename="../src/GuiSearchUser.ui" line="246"/>
         <source>Accept connections only from your workgroups</source>
         <translation>Godta forbindelser kun fra dine arbeidsgrupper</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="259"/>
+        <location filename="../src/GuiSearchUser.ui" line="265"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Angi IP-adresser eller subnett til ditt lokalnett adskilt med komma (eksempel: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="285"/>
+        <location filename="../src/GuiSearchUser.ui" line="291"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Del subnett til IPV4-adresser</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="292"/>
+        <location filename="../src/GuiSearchUser.ui" line="304"/>
+        <source>Verbose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="311"/>
         <source>Automatically add external subnet</source>
         <translation>Legg til eksternt subnett automatisk</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="299"/>
+        <location filename="../src/GuiSearchUser.ui" line="318"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Slå på nullkonfigurasjonsnettverk</translation>
     </message>
@@ -3498,18 +3512,18 @@ Velg et annet navn.</translation>
         <translation type="obsolete">s (0=avslått, 10=standard)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="309"/>
+        <location filename="../src/GuiSearchUser.ui" line="334"/>
         <source>* (read only section)</source>
         <translation>* (kun les seksjon)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="329"/>
-        <location filename="../src/GuiSearchUser.cpp" line="112"/>
+        <location filename="../src/GuiSearchUser.ui" line="347"/>
+        <location filename="../src/GuiSearchUser.cpp" line="115"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="336"/>
+        <location filename="../src/GuiSearchUser.ui" line="360"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -3519,22 +3533,22 @@ Velg et annet navn.</translation>
         <translation>Søke etter brukere</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="53"/>
+        <location filename="../src/GuiSearchUser.cpp" line="54"/>
         <source>Unknown address</source>
         <translation>Ukjent adresse</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="61"/>
+        <location filename="../src/GuiSearchUser.cpp" line="62"/>
         <source>File is empty</source>
         <translation>Fila er tom</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="111"/>
+        <location filename="../src/GuiSearchUser.cpp" line="114"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="112"/>
+        <location filename="../src/GuiSearchUser.cpp" line="115"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Du har satt inn en ugyldig maskinadresse:
@@ -4273,6 +4287,11 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="114"/>
         <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ShortcutManager.cpp" line="116"/>
+        <source>Broadcast</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -59,7 +59,7 @@ Core::Core( QObject* parent )
 #endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
-  connect( mp_broadcaster, SIGNAL( udpPortBlocked() ), this, SLOT( showBroadcasterUdpError() ) );
+  //connect( mp_broadcaster, SIGNAL( udpPortBlocked() ), this, SLOT( showBroadcasterUdpError() ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( checkNewConnection( Connection* ) ) );
   connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( fileTransferServerListening() ) );
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
@@ -430,12 +430,7 @@ void Core::sendHelloToHostsInSettings()
     #ifdef BEEBEEP_DEBUG
         qDebug() << "Contacting manually added host" << ur.hostAddress().toString() << ur.hostPort();
     #endif
-        dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                               tr( "%1 Contacting %2 ..." )
-                               .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
-                               .arg( ur.hostAddressAndPort() ),
-                               DispatchToChat, ChatMessage::Connection );
-        checkUserRecord( ur );
+        mp_broadcaster->addPeerAddressToContact( ur.hostAddress(), ur.hostPort() );
         user_contacted++;
       }
     }
@@ -586,4 +581,9 @@ void Core::onPostUsageStatisticsJobCompleted()
 #endif
 
   ga->deleteLater();
+}
+
+void Core::onTickEvent( int ticks )
+{
+  mp_broadcaster->onTickEvent( ticks );
 }

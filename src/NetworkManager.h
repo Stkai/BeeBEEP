@@ -45,7 +45,7 @@ public:
 
   QHostAddress broadcastSubnetFromIPv4HostAddress( const QHostAddress& ) const;
 
-  QList<QHostAddress> splitBroadcastSubnetToIPv4HostAddresses( const QHostAddress& ) const;
+  QList<QHostAddress> splitBroadcastSubnetToIPv4HostAddresses( const QHostAddress&, bool split_all ) const;
 
   static NetworkManager& instance()
   {

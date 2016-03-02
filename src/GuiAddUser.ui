@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>358</width>
+    <width>473</width>
     <height>344</height>
    </rect>
   </property>
@@ -103,11 +103,11 @@
    </item>
    <item row="1" column="2" rowspan="2">
     <widget class="QPushButton" name="mp_pbAdd">
-     <property name="text">
-     <string>Add</string>
-     </property>
      <property name="toolTip">
       <string>Click here to add user path</string>
+     </property>
+     <property name="text">
+      <string>Add</string>
      </property>
      <property name="icon">
       <iconset resource="beebeep.qrc">
@@ -151,6 +151,13 @@
    <item row="4" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
+      <widget class="QCheckBox" name="mp_cbSplitSubnet">
+       <property name="text">
+        <string>Split subnet in Ipv4 addresses</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -187,6 +194,7 @@
   <tabstop>mp_leComment</tabstop>
   <tabstop>mp_pbAdd</tabstop>
   <tabstop>mp_twUsers</tabstop>
+  <tabstop>mp_cbSplitSubnet</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>

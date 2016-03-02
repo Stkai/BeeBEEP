@@ -23,6 +23,7 @@
 
 #include "Config.h"
 #include "GuiAddUser.h"
+#include "NetworkManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -110,20 +111,42 @@ void GuiAddUser::addUser()
 
   QString user_comment = mp_leComment->text().simplified();
 
-  UserRecord ur;
-  ur.setHostAddress( QHostAddress( ip_address ) );
-  ur.setHostPort( address_port );
-  ur.setComment( user_comment );
-  if( m_users.contains( ur ) )
+  if( mp_cbSplitSubnet->isChecked() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "These IP address and port are already inserted in list." ) );
-    mp_leIpAddress->setFocus();
-    return;
+    QList<QHostAddress> ha_list = NetworkManager::instance().splitBroadcastSubnetToIPv4HostAddresses( QHostAddress( ip_address ), true );
+    if( !ha_list.isEmpty() )
+    {
+      foreach( QHostAddress ha, ha_list )
+      {
+        UserRecord ur;
+        ur.setHostAddress( QHostAddress( ha ) );
+        ur.setHostPort( address_port );
+        ur.setComment( user_comment );
+        if( !m_users.contains( ur ) )
+        {
+          m_users.append( ur );
+          addUserToList( ur );
+        }
+      }
+    }
   }
   else
   {
-    m_users.append( ur );
-    addUserToList( ur );
+    UserRecord ur;
+    ur.setHostAddress( QHostAddress( ip_address ) );
+    ur.setHostPort( address_port );
+    ur.setComment( user_comment );
+    if( m_users.contains( ur ) )
+    {
+      QMessageBox::information( this, Settings::instance().programName(), tr( "These IP address and port are already inserted in list." ) );
+      mp_leIpAddress->setFocus();
+      return;
+    }
+    else
+    {
+      m_users.append( ur );
+      addUserToList( ur );
+    }
   }
 
   mp_leIpAddress->setText( "" );
@@ -150,6 +173,8 @@ void GuiAddUser::openCustomMenu( const QPoint& p )
 
   QMenu menu;
   menu.addAction( QIcon( ":/images/delete.png" ), tr( "Remove user path" ), this, SLOT( removeUserPath() ) );
+  menu.addSeparator();
+  menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear all" ), this, SLOT( removeAllUsers() ) );
   menu.exec( QCursor::pos() );
 }
 
@@ -163,6 +188,8 @@ bool GuiAddUser::removeUserPathFromList( const QString& user_path )
       m_users.erase( it );
       return true;
     }
+
+    ++it;
   }
   return false;
 }
@@ -176,8 +203,18 @@ void GuiAddUser::removeUserPath()
     return;
   }
 
+  QStringList sl;
   foreach( QTreeWidgetItem* item, items )
-    removeUserPathFromList( item->text( 0 ) );
+    sl << item->text( 0 );
 
+  foreach( QString s, sl )
+    removeUserPathFromList( s );
+
+  loadUserPathInList();
+}
+
+void GuiAddUser::removeAllUsers()
+{
+  m_users.clear();
   loadUserPathInList();
 }
