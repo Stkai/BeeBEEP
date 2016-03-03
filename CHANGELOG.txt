@@ -7,6 +7,7 @@ BeeBEEP 3.0.5
 - Added anonymous usage statistics (option)
 - Added new edit option in add user manually dialog
 - Added shortcut for broadcast action
+- Fixed a bug in add user manually dialog
 
 BeeBEEP 3.0.4
 - Hive protocol added: BeeBEEPs tell each other the host address of the connected users. It can be disabled in beebeep.rc (option)

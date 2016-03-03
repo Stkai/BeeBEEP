@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "Broadcaster.h"
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
@@ -367,7 +368,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
     qDebug() << "Hive message arrived with" << user_record_list.size() << "users from" << qPrintable( u.path() );
 #endif
     foreach( UserRecord ur, user_record_list )
-      newPeerFound( ur.hostAddress(), ur.hostPort() );
+      mp_broadcaster->addPeerAddressToContact( ur.hostAddress(), ur.hostPort() );
   }
   else
     qWarning() << "Invalid flag found in hive message from user" << qPrintable( u.path() );

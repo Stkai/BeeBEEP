@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -432,7 +432,7 @@
     </message>
     <message>
         <source>%1 Contacting %2 ...</source>
-        <translation type="vanished">%1 Sto contattando %2 ...</translation>
+        <translation type="obsolete">%1 Sto contattando %2 ...</translation>
     </message>
     <message>
         <source>The message will be delivered to %1.</source>
@@ -761,6 +761,10 @@
         <source>Clear all</source>
         <translation>Cancella tutti</translation>
     </message>
+    <message>
+        <source>auto added</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUserDialog</name>
@@ -803,6 +807,10 @@
     <message>
         <source>Split subnet in Ipv4 addresses</source>
         <translation>Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
+    </message>
+    <message>
+        <source>Auto add from LAN</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

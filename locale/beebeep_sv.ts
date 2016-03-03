@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<TS version="2.0" language="sv">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>%1 Contacting %2 ...</source>
-        <translation type="vanished">%1 Kontaktar %2 ...</translation>
+        <translation type="obsolete">%1 Kontaktar %2 ...</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="46"/>
@@ -452,47 +452,47 @@
         <translation>%1 Du skickar mappen &apos;%2&apos; till %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="147"/>
+        <location filename="../src/CoreParser.cpp" line="148"/>
         <source>%1 %2 has refused to download %3.</source>
         <translation>%1 %2 har nekat att ladda ner %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="174"/>
+        <location filename="../src/CoreParser.cpp" line="175"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 skickar dig filen: %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="244"/>
+        <location filename="../src/CoreParser.cpp" line="245"/>
         <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
         <translation>%1 Ett fel uppstår när %2 försöker lägga till dig i gruppchatten: %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="250"/>
+        <location filename="../src/CoreParser.cpp" line="251"/>
         <source>%1 %2 adds you to the group chat: %3.</source>
         <translation>%1 %2 lägger till dig i gruppchatten: %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="284"/>
+        <location filename="../src/CoreParser.cpp" line="285"/>
         <source>%1 %2 has not shared files.</source>
         <translation>%1 %2 har inte delat filer.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="289"/>
+        <location filename="../src/CoreParser.cpp" line="290"/>
         <source>%1 %2 has shared %3 files.</source>
         <translation>%1 %2 har delat %3 filer.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="318"/>
+        <location filename="../src/CoreParser.cpp" line="319"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 har nekat att ladda ner mappen &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="325"/>
+        <location filename="../src/CoreParser.cpp" line="326"/>
         <source>unknown folder</source>
         <translation>okänd mapp</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="333"/>
+        <location filename="../src/CoreParser.cpp" line="334"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 skickar dig mappen: %3.</translation>
     </message>
@@ -671,34 +671,39 @@
         <translation>Adress</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="97"/>
+        <location filename="../src/GuiAddUser.cpp" line="98"/>
         <source>Please insert a valid IP address.</source>
         <translation>Ange en giltig IP-adress.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="107"/>
+        <location filename="../src/GuiAddUser.cpp" line="108"/>
         <source>Please insert a valid port or use the default one %1.</source>
         <translation>Ange ett giltigt portnummer eller använd standardport %1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="141"/>
+        <location filename="../src/GuiAddUser.cpp" line="142"/>
         <source>These IP address and port are already inserted in list.</source>
         <translation>Dessa IP-adresser och portnummer finns redan i listan.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="175"/>
+        <location filename="../src/GuiAddUser.cpp" line="176"/>
         <source>Remove user path</source>
         <translation>Ta bort användarsökväg</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="177"/>
+        <location filename="../src/GuiAddUser.cpp" line="178"/>
         <source>Clear all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="202"/>
+        <location filename="../src/GuiAddUser.cpp" line="203"/>
         <source>Please select an user path in the list.</source>
         <translation>Välj en användarsökväg från listan.</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.cpp" line="228"/>
+        <source>auto added</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -709,47 +714,52 @@
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="35"/>
+        <location filename="../src/GuiAddUser.ui" line="203"/>
         <source>Add an IP address and port of the user you want to connect</source>
         <translation>Lägg till IP-adress och port för den användare du vill ansluta till</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="48"/>
+        <location filename="../src/GuiAddUser.ui" line="29"/>
         <source>IP Address</source>
         <translation>IP-adress</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="73"/>
+        <location filename="../src/GuiAddUser.ui" line="61"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="110"/>
+        <location filename="../src/GuiAddUser.ui" line="119"/>
         <source>Add</source>
         <translation>Lägg till</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="107"/>
+        <location filename="../src/GuiAddUser.ui" line="116"/>
         <source>Click here to add user path</source>
         <translation>Klicka här för att lägga till användarsökväg</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="121"/>
+        <location filename="../src/GuiAddUser.ui" line="96"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="156"/>
+        <location filename="../src/GuiAddUser.ui" line="109"/>
         <source>Split subnet in Ipv4 addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="176"/>
+        <location filename="../src/GuiAddUser.ui" line="155"/>
+        <source>Auto add from LAN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.ui" line="175"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="183"/>
+        <location filename="../src/GuiAddUser.ui" line="182"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -2797,17 +2807,17 @@ Välj ett annat namn.</translation>
         <translation>Vill du verkligen ta bort alla sparade statusbeskrivningar?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="3596"/>
+        <location filename="../src/GuiMain.cpp" line="3602"/>
         <source>Select your dictionary path</source>
         <translation>Välj sökväg till ordboken</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="3604"/>
+        <location filename="../src/GuiMain.cpp" line="3610"/>
         <source>Dictionary selected: %1</source>
         <translation>Vald ordbok: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="3606"/>
+        <location filename="../src/GuiMain.cpp" line="3612"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Kunde inte ange ordbok: %1</translation>
     </message>

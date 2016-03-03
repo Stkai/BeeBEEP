@@ -45,6 +45,7 @@ protected slots:
   void openCustomMenu( const QPoint& );
   void removeUserPath();
   void removeAllUsers();
+  void addUsersAutoFromLan();
 
 protected:
   void addUserToList( const UserRecord& );

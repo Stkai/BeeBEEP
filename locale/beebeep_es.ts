@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.0" language="es_ES">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>%1 Contacting %2 ...</source>
-        <translation type="vanished">%1 Cantactando %2 ...</translation>
+        <translation type="obsolete">%1 Cantactando %2 ...</translation>
     </message>
     <message>
         <location filename="../src/CoreChat.cpp" line="46"/>
@@ -444,47 +444,47 @@
         <translation>%1 Vas a enviar la carpeta %2 a %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="147"/>
+        <location filename="../src/CoreParser.cpp" line="148"/>
         <source>%1 %2 has refused to download %3.</source>
         <translation>%1 %2 ha rechazado la descarga %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="174"/>
+        <location filename="../src/CoreParser.cpp" line="175"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 está enviandote el archivo: %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="244"/>
+        <location filename="../src/CoreParser.cpp" line="245"/>
         <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
         <translation>%1 A ocurrido un error cuando %2 intento agregarte a un grupo de chat: %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="250"/>
+        <location filename="../src/CoreParser.cpp" line="251"/>
         <source>%1 %2 adds you to the group chat: %3.</source>
         <translation>%1 %2 has sido agregado al grupo de chat: %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="284"/>
+        <location filename="../src/CoreParser.cpp" line="285"/>
         <source>%1 %2 has not shared files.</source>
         <translation>%1 %2 no tiene archivos compartidos.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="289"/>
+        <location filename="../src/CoreParser.cpp" line="290"/>
         <source>%1 %2 has shared %3 files.</source>
         <translation>%1 %2 tiene %3 archivos compartidos.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="318"/>
+        <location filename="../src/CoreParser.cpp" line="319"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 ha rechazado la descarga de carpeta %3.</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="325"/>
+        <location filename="../src/CoreParser.cpp" line="326"/>
         <source>unknown folder</source>
         <translation>directorio desconocido</translation>
     </message>
     <message>
-        <location filename="../src/CoreParser.cpp" line="333"/>
+        <location filename="../src/CoreParser.cpp" line="334"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 está enviandote una carpeta: %3.</translation>
     </message>
@@ -663,34 +663,39 @@
         <translation>Direccion</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="97"/>
+        <location filename="../src/GuiAddUser.cpp" line="98"/>
         <source>Please insert a valid IP address.</source>
         <translation>Por favor, ingrese una direccion IP valida.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="107"/>
+        <location filename="../src/GuiAddUser.cpp" line="108"/>
         <source>Please insert a valid port or use the default one %1.</source>
         <translation>Por favor, ingrese un puerto valido o use por defecto %1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="141"/>
+        <location filename="../src/GuiAddUser.cpp" line="142"/>
         <source>These IP address and port are already inserted in list.</source>
         <translation>Esta direccion IP y puerto ya están agregadas en la lista.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="175"/>
+        <location filename="../src/GuiAddUser.cpp" line="176"/>
         <source>Remove user path</source>
         <translation>Remover ruta de usuario</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="177"/>
+        <location filename="../src/GuiAddUser.cpp" line="178"/>
         <source>Clear all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="202"/>
+        <location filename="../src/GuiAddUser.cpp" line="203"/>
         <source>Please select an user path in the list.</source>
         <translation>Por favor, seleccione una ruta de usuario de la lista.</translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.cpp" line="228"/>
+        <source>auto added</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -701,47 +706,52 @@
         <translation>Dialogo</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="35"/>
+        <location filename="../src/GuiAddUser.ui" line="203"/>
         <source>Add an IP address and port of the user you want to connect</source>
         <translation>Agregar una direccion IP y puerto del usuario para conectar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="48"/>
+        <location filename="../src/GuiAddUser.ui" line="29"/>
         <source>IP Address</source>
         <translation>Direccion IP</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="73"/>
+        <location filename="../src/GuiAddUser.ui" line="61"/>
         <source>Port</source>
         <translation>Puerto</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="110"/>
+        <location filename="../src/GuiAddUser.ui" line="119"/>
         <source>Add</source>
         <translation>Agregar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="107"/>
+        <location filename="../src/GuiAddUser.ui" line="116"/>
         <source>Click here to add user path</source>
         <translation>Clic aqui para agregar ruta de usuario</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="121"/>
+        <location filename="../src/GuiAddUser.ui" line="96"/>
         <source>Comment</source>
         <translation>Comentario</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="156"/>
+        <location filename="../src/GuiAddUser.ui" line="109"/>
         <source>Split subnet in Ipv4 addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="176"/>
+        <location filename="../src/GuiAddUser.ui" line="155"/>
+        <source>Auto add from LAN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.ui" line="175"/>
         <source>Ok</source>
         <translation>Aceptar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="183"/>
+        <location filename="../src/GuiAddUser.ui" line="182"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -2765,17 +2775,17 @@ Por favor, elija un nombre diferente.</translation>
         <translation>¿Realmente desea borrar todas las descripciones de estado guardados?</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="3596"/>
+        <location filename="../src/GuiMain.cpp" line="3602"/>
         <source>Select your dictionary path</source>
         <translation>Seleccionar la ubicacion de su diccionario</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="3604"/>
+        <location filename="../src/GuiMain.cpp" line="3610"/>
         <source>Dictionary selected: %1</source>
         <translation>Diccionario seleccionado: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiMain.cpp" line="3606"/>
+        <location filename="../src/GuiMain.cpp" line="3612"/>
         <source>Unable to set dictionary: %1</source>
         <translation>No es posible setear diccionario: %1</translation>
     </message>

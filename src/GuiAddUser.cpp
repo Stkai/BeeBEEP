@@ -49,6 +49,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveUsers() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_twUsers, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openCustomMenu( const QPoint& ) ) );
+  connect( mp_pbAddUsersAuto, SIGNAL( clicked() ), this, SLOT( addUsersAutoFromLan() ) );
 }
 
 void GuiAddUser::loadUserPathInList()
@@ -150,7 +151,7 @@ void GuiAddUser::addUser()
   }
 
   mp_leIpAddress->setText( "" );
-  mp_lePort->setText( QString::number( DEFAULT_LISTENER_PORT ) );
+  mp_lePort->setText( QString::number( Settings::instance().defaultListenerPort() ) );
   mp_leIpAddress->setFocus();
 }
 
@@ -217,4 +218,17 @@ void GuiAddUser::removeAllUsers()
 {
   m_users.clear();
   loadUserPathInList();
+}
+
+void GuiAddUser::addUsersAutoFromLan()
+{
+  mp_leIpAddress->setText( NetworkManager::instance().localBroadcastAddress().toString() );
+  mp_lePort->setText( QString::number( Settings::instance().defaultListenerPort() ) );
+  QString last_comment = mp_leComment->text();
+  mp_leComment->setText( tr( "auto added" ) );
+  bool last_check = mp_cbSplitSubnet->isChecked();
+  mp_cbSplitSubnet->setChecked( true );
+  addUser();
+  mp_cbSplitSubnet->setChecked( last_check );
+  mp_leComment->setText( last_comment );
 }
