@@ -376,7 +376,6 @@ public:
   inline const QString& dictionaryPath() const;
 
   inline const QString& applicationUuid() const;
-  inline const QDate& applicationUuidCreationDate() const;
   void createApplicationUuid();
 
   void loadRcFile();
@@ -601,7 +600,6 @@ private:
   bool m_homeShowMessageDatestamp;
 
   QString m_applicationUuid;
-  QDate m_applicationUuidCreationDate;
 
 };
 
@@ -851,7 +849,6 @@ inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatU
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
 inline bool Settings::useNativeDialogs() const { return m_useNativeDialogs; }
 inline const QString& Settings::applicationUuid() const { return m_applicationUuid; }
-inline const QDate& Settings::applicationUuidCreationDate() const { return m_applicationUuidCreationDate; }
 inline bool Settings::usePreviewFileDialog() const { return m_usePreviewFileDialog; }
 inline void Settings::setPreviewFileDialogGeometry( const QByteArray& new_value ) { m_previewFileDialogGeometry = new_value; }
 inline const QByteArray& Settings::previewFileDialogGeometry() { return m_previewFileDialogGeometry; }

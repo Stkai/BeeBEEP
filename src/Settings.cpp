@@ -129,15 +129,14 @@ Settings::Settings()
 
 void Settings::createApplicationUuid()
 {
-  if( m_applicationUuid.isEmpty() || m_applicationUuidCreationDate.isNull() )
+  if( m_applicationUuid.isEmpty() )
   {
     m_applicationUuid = QUuid::createUuid().toString();
-    m_applicationUuidCreationDate = QDate::currentDate();
     qDebug() << "Create new application uuid" << qPrintable( m_applicationUuid );
   }
   else
   {
-    qDebug() << "Continue to use application uuid" << qPrintable( m_applicationUuid ) << "created in" << qPrintable( m_applicationUuidCreationDate.toString( Qt::ISODate ) );
+    qDebug() << "Continue to use application uuid" << qPrintable( m_applicationUuid );
   }
 }
 
@@ -833,7 +832,6 @@ void Settings::load()
   m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "PostUsageStatistics", m_postUsageStatistics ).toBool();
   m_applicationUuid = sets->value( "Uuid", "" ).toString();
-  m_applicationUuidCreationDate = sets->value( "UuidCreationDate", QDate() ).toDate();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -1084,7 +1082,6 @@ void Settings::save()
   sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
   sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
   sets->setValue( "Uuid", m_applicationUuid );
-  sets->setValue( "UuidCreationDate", m_applicationUuidCreationDate );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );

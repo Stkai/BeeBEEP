@@ -156,7 +156,6 @@ DictionaryPath=(String) path to dictionary. It is accepted only file with extens
 CheckNewVersionAtStartup=[true/false] enable check for new version at BeeBEEP startup (default=true) [3.0.4]
 PostUsageStatistics= [true/false] add +1 user to anonymous usage statistics (default=true) [3.0.5]
 Uuid= [string] application UUID for anonymous statistics [3.0.5]
-UuidCreationDate=(do not edit manually) [3.0.5]
 
 [Misc]
 TickIntervalCheckIdle=10
