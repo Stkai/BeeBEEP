@@ -206,7 +206,14 @@ bool Core::start()
     QTimer::singleShot( 0, this, SLOT( checkNewVersion() ) );
 
   if( Settings::instance().postUsageStatistics() )
-    QTimer::singleShot( 2000, this, SLOT( postUsageStatistics() ) );
+  {
+    if( Settings::instance().statsPostDate() != QDate::currentDate() )
+      QTimer::singleShot( 2000, this, SLOT( postUsageStatistics() ) );
+#ifdef BEEBEEP_DEBUG
+    else
+      qDebug() << "Skips post usage statistics";
+#endif
+  }
 
   return true;
 }

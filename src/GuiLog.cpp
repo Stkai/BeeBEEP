@@ -40,7 +40,7 @@ GuiLog::GuiLog( QWidget* parent )
   QPalette p = mp_teLog->palette();
   p.setColor( QPalette::Highlight, Qt::yellow );
   p.setColor( QPalette::HighlightedText, Qt::black );
-  mp_teLog->setPalette(p);
+  mp_teLog->setPalette( p );
 
   m_timer.setInterval( 1000 );
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( refreshLog() ) );

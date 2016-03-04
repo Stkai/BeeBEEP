@@ -34,7 +34,8 @@ class ShortcutManager
 
 public:
   enum ShortcutType { Empty, SendFile, ShowFileTransfers, SetFocusInMessageBox, MinimizeAllChats,
-                      ShowNextUnreadMessage, SendChatMessage, Print, Broadcast, NumShortcut };
+                      ShowNextUnreadMessage, SendChatMessage, Print, Broadcast, FindTextInChat,
+                      FindNextTextInChat, NumShortcut };
 
   void setDefaultShortcuts();
 

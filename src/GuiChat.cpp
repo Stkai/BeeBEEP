@@ -78,6 +78,10 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenExternalLinks( false );
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
+  QPalette p = mp_teChat->palette();
+  p.setColor( QPalette::Highlight, Qt::yellow );
+  p.setColor( QPalette::HighlightedText, Qt::black );
+  mp_teChat->setPalette( p );
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
@@ -85,10 +89,15 @@ GuiChat::GuiChat( QWidget *parent )
   m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = 0;
   m_isFloating = false;
+  m_lastTextFound = "";
 
   mp_scFocusInChat = new QShortcut( this );
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFocusInChat, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
+
+  mp_scFindNextTextInChat = new QShortcut( this );
+  mp_scFindNextTextInChat->setContext( Qt::WindowShortcut );
+  connect( mp_scFindNextTextInChat, SIGNAL( activated() ), this, SLOT( findNextTextInChat() ) );
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -150,6 +159,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   bar->addAction( mp_menuMembers->menuAction() );
   bar->addSeparator();
 
+  mp_actFindTextInChat = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
@@ -190,6 +200,8 @@ void GuiChat::updateAction( bool is_connected, int connected_users )
 void GuiChat::customContextMenu( const QPoint& p )
 {
   QMenu custom_context_menu;
+  custom_context_menu.addAction( mp_actFindTextInChat );
+  custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
@@ -839,6 +851,21 @@ void GuiChat::updateShortcuts()
   else
     mp_scFocusInChat->setEnabled( false );
 
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindNextTextInChat );
+  if( !ks.isEmpty() )
+  {
+    mp_scFindNextTextInChat->setKey( ks );
+    mp_scFindNextTextInChat->setEnabled( Settings::instance().useShortcuts() );
+  }
+  else
+    mp_scFindNextTextInChat->setEnabled( false );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindTextInChat );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    mp_actFindTextInChat->setShortcut( ks );
+  else
+    mp_actFindTextInChat->setShortcut( QKeySequence() );
+
   ks = ShortcutManager::instance().shortcut( ShortcutManager::SendFile );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     mp_actSendFile->setShortcut( ks );
@@ -983,4 +1010,50 @@ void GuiChat::printChat()
     mp_teChat->print( dlg->printer() );
 
   dlg->deleteLater();
+}
+
+void GuiChat::showFindTextInChatDialog()
+{
+  QString label = tr( "Find text in chat" );
+  bool ok = false;
+  QString text_to_search = QInputDialog::getText( this, Settings::instance().programName(), label,
+                                                  QLineEdit::Normal, m_lastTextFound, &ok );
+  if( ok )
+    findTextInChat( text_to_search.simplified() );
+}
+
+void GuiChat::findNextTextInChat()
+{
+  findTextInChat( m_lastTextFound );
+}
+
+void GuiChat::findTextInChat( const QString& txt )
+{
+  if( txt.isEmpty() )
+    return;
+
+  QTextDocument::FindFlags find_flags = 0;
+  bool search_from_start = false;
+  if( txt != m_lastTextFound )
+  {
+    mp_teChat->moveCursor( QTextCursor::Start );
+    search_from_start = true;
+  }
+
+  if( !mp_teChat->find( txt, find_flags ) )
+  {
+    if( !search_from_start )
+    {
+      mp_teChat->moveCursor( QTextCursor::Start );
+      if( mp_teChat->find( txt, find_flags ) )
+      {
+        m_lastTextFound = txt;
+        return;
+      }
+    }
+
+    QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found in chat." ).arg( txt ) );
+  }
+  else
+    m_lastTextFound = txt;
 }

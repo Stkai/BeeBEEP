@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sv">
+<TS version="2.1" language="sv">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -67,17 +67,17 @@
         <translation>%1 Du är ansluten till nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="275"/>
+        <location filename="../src/Core.cpp" line="282"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Du är bortkopplad från nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="290"/>
+        <location filename="../src/Core.cpp" line="297"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 kommer att söka användare på dessa IP-adresser: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="228"/>
+        <location filename="../src/Core.cpp" line="235"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration startad med tjänstnamnet: %2</translation>
     </message>
@@ -97,47 +97,47 @@
         <translation>%1 Du har valt att endast gå med i följande arbetsgrupper: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="243"/>
+        <location filename="../src/Core.cpp" line="250"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero Configuration-tjänsten stängd.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="311"/>
+        <location filename="../src/Core.cpp" line="318"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration genomsöker nätverket efter tjänsten: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="318"/>
+        <location filename="../src/Core.cpp" line="325"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration kan inte söka i nätverket efter tjänsten: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="336"/>
+        <location filename="../src/Core.cpp" line="343"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 sänder i nätverket, %2...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="343"/>
+        <location filename="../src/Core.cpp" line="350"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 Du är inte ansluten till nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="349"/>
+        <location filename="../src/Core.cpp" line="356"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 har hittat ett filter på UDP-port %3. Kontrollera dina brandväggsinställningar.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="353"/>
+        <location filename="../src/Core.cpp" line="360"/>
         <source>View the log messages for more informations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="546"/>
+        <location filename="../src/Core.cpp" line="553"/>
         <source>New version is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="547"/>
+        <location filename="../src/Core.cpp" line="554"/>
         <source>Click here to download</source>
         <translation type="unfinished"></translation>
     </message>
@@ -150,12 +150,12 @@
         <translation type="obsolete">%1 Du kan inte nå nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="401"/>
+        <location filename="../src/Core.cpp" line="408"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>är ansluten från externt nätverk (det nya undernätet läggs till i din adresslista).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="414"/>
+        <location filename="../src/Core.cpp" line="421"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 Kontrollerar %2 adresser till...</translation>
     </message>
@@ -292,7 +292,7 @@
         <translation>%1 (%2) är ansluten till nätverket, %3.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="470"/>
+        <location filename="../src/Core.cpp" line="477"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Nätverksgränssnittet %2 har gått ner.</translation>
     </message>
@@ -820,158 +820,169 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/GuiChat.cpp" line="127"/>
+        <location filename="../src/GuiChat.cpp" line="136"/>
         <source>Change font style</source>
         <translation>Byt teckensnitt</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="128"/>
+        <location filename="../src/GuiChat.cpp" line="137"/>
         <source>Select your favourite chat font style</source>
         <translation>Välj din egen chattstil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="129"/>
+        <location filename="../src/GuiChat.cpp" line="138"/>
         <source>Change font color</source>
         <translation>Byt teckenfärg</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="130"/>
+        <location filename="../src/GuiChat.cpp" line="139"/>
         <source>Select your favourite font color for the chat messages</source>
         <translation>Välj teckenfärg på dina chattmeddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="131"/>
+        <location filename="../src/GuiChat.cpp" line="140"/>
         <source>Change background color</source>
         <translation>Byt bakgrundsfärg</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="132"/>
+        <location filename="../src/GuiChat.cpp" line="141"/>
         <source>Select your favourite background color for the chat window</source>
         <translation>Välj din egen bakgrundsfärg i chattfönstret</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="133"/>
+        <location filename="../src/GuiChat.cpp" line="142"/>
         <source>Filter message</source>
         <translation>Filtrera meddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="134"/>
+        <location filename="../src/GuiChat.cpp" line="143"/>
         <source>Select the message types which will be showed in chat</source>
         <translation>Välj vilka typer av meddelanden som skall visas i chatten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="135"/>
+        <location filename="../src/GuiChat.cpp" line="144"/>
         <source>Chat settings</source>
         <translation>Chattinställningar</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="136"/>
+        <location filename="../src/GuiChat.cpp" line="145"/>
         <source>Click to show the settings menu of the chat</source>
         <translation>Klicka för att visa chattens inställningsmeny</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="137"/>
+        <location filename="../src/GuiChat.cpp" line="146"/>
         <source>Spell checking</source>
         <translation>Stavningskontroll</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="139"/>
+        <location filename="../src/GuiChat.cpp" line="148"/>
         <source>Word completer</source>
         <translation>Ordkomplettering</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="141"/>
+        <location filename="../src/GuiChat.cpp" line="150"/>
         <source>Use Return key to send message</source>
         <translation>Använd returtangenten för att skicka meddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="146"/>
+        <location filename="../src/GuiChat.cpp" line="155"/>
         <source>Members</source>
         <translation>Medlemmar</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="147"/>
+        <location filename="../src/GuiChat.cpp" line="156"/>
         <source>Show the members of the chat</source>
         <translation>Visa chattens medlemmar</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="153"/>
+        <location filename="../src/GuiChat.cpp" line="162"/>
+        <location filename="../src/GuiChat.cpp" line="1017"/>
+        <source>Find text in chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiChat.cpp" line="163"/>
         <source>Send file</source>
         <translation>Skicka fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="154"/>
+        <location filename="../src/GuiChat.cpp" line="164"/>
         <source>Send a file to a user or a group</source>
         <translation>Skicka en fil till en användare eller grupp</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="155"/>
+        <location filename="../src/GuiChat.cpp" line="165"/>
         <source>Save chat</source>
         <translation>Spara chatten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="156"/>
+        <location filename="../src/GuiChat.cpp" line="166"/>
         <source>Save the messages of the current chat to a file</source>
         <translation>Spara meddelanden från den aktuella chatten, i en fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="157"/>
+        <location filename="../src/GuiChat.cpp" line="167"/>
         <source>Print...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="166"/>
+        <location filename="../src/GuiChat.cpp" line="176"/>
         <source>Change the name of the group or add and remove users</source>
         <translation>Byt namn på gruppen eller lägg till och ta bort användare</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="375"/>
+        <location filename="../src/GuiChat.cpp" line="387"/>
         <source>unread messages</source>
         <translation>olästa meddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="881"/>
+        <location filename="../src/GuiChat.cpp" line="908"/>
         <source>Spell checking is enabled</source>
         <translation>Stavningskontroll är aktiverad</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="888"/>
-        <location filename="../src/GuiChat.cpp" line="912"/>
+        <location filename="../src/GuiChat.cpp" line="915"/>
+        <location filename="../src/GuiChat.cpp" line="939"/>
         <source>There is not a valid dictionary</source>
         <translation>Det finns ingen giltig ordbok</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="905"/>
+        <location filename="../src/GuiChat.cpp" line="932"/>
         <source>Word completer is enabled</source>
         <translation>Ordkomplettering är aktiverad</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="907"/>
+        <location filename="../src/GuiChat.cpp" line="934"/>
         <source>Word completer is disabled</source>
         <translation>Ordkomplettering är inaktiverad</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="883"/>
+        <location filename="../src/GuiChat.cpp" line="1055"/>
+        <source>%1 not found in chat.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiChat.cpp" line="910"/>
         <source>Spell checking is disabled</source>
         <translation>Stavningskontroll är inaktiverad</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="159"/>
+        <location filename="../src/GuiChat.cpp" line="169"/>
         <source>Clear messages</source>
         <translation>Rensa meddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="160"/>
+        <location filename="../src/GuiChat.cpp" line="170"/>
         <source>Clear all the messages of the chat</source>
         <translation>Ta bort alla meddelanden i chatten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="163"/>
+        <location filename="../src/GuiChat.cpp" line="173"/>
         <source>Create group from chat</source>
         <translation>Skapa en grupp av chatten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="164"/>
+        <location filename="../src/GuiChat.cpp" line="174"/>
         <source>Create a group from this chat</source>
         <translation>Skapa en grupp av den här chatten</translation>
     </message>
@@ -984,33 +995,33 @@
         <translation type="obsolete">Skapa en grupp med 2 eller fler användare</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="167"/>
-        <location filename="../src/GuiChat.cpp" line="168"/>
+        <location filename="../src/GuiChat.cpp" line="177"/>
+        <location filename="../src/GuiChat.cpp" line="178"/>
         <source>Leave the group</source>
         <translation>Lämna gruppen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="193"/>
+        <location filename="../src/GuiChat.cpp" line="205"/>
         <source>Copy to clipboard</source>
         <translation>Kopiera till Urklipp</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="195"/>
+        <location filename="../src/GuiChat.cpp" line="207"/>
         <source>Select All</source>
         <translation>Markera allt</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="219"/>
+        <location filename="../src/GuiChat.cpp" line="231"/>
         <source>Show only messages in default chat</source>
         <translation>Visa endast meddelanden i standardchatten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="259"/>
+        <location filename="../src/GuiChat.cpp" line="271"/>
         <source>Last message %1</source>
         <translation>Senaste meddelande %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="355"/>
+        <location filename="../src/GuiChat.cpp" line="367"/>
         <source>All Lan Users</source>
         <translation>Alla LAN-användare</translation>
     </message>
@@ -1019,7 +1030,7 @@
         <translation type="obsolete">(Du har lämnat chatten)</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="371"/>
+        <location filename="../src/GuiChat.cpp" line="383"/>
         <source>You</source>
         <translation>Du</translation>
     </message>
@@ -1032,97 +1043,97 @@
         <translation type="obsolete">Skapa en chatt med två eller flera användare</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="165"/>
+        <location filename="../src/GuiChat.cpp" line="175"/>
         <source>Edit group</source>
         <translation>Redigera grupp</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="397"/>
+        <location filename="../src/GuiChat.cpp" line="409"/>
         <source>offline</source>
         <translation>bortkopplad</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="405"/>
+        <location filename="../src/GuiChat.cpp" line="417"/>
         <source>Show profile</source>
         <translation>Visa profil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="415"/>
+        <location filename="../src/GuiChat.cpp" line="427"/>
         <source>Show members</source>
         <translation>Visa medlemmar</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="419"/>
+        <location filename="../src/GuiChat.cpp" line="431"/>
         <source>Nobody</source>
         <translation>Ingen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="419"/>
+        <location filename="../src/GuiChat.cpp" line="431"/>
         <source>and</source>
         <translation>och</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="497"/>
+        <location filename="../src/GuiChat.cpp" line="509"/>
         <source>last %1 messages</source>
         <translation>senaste %1 meddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="663"/>
+        <location filename="../src/GuiChat.cpp" line="675"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Välj en fil att spara chatten i.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="677"/>
+        <location filename="../src/GuiChat.cpp" line="689"/>
         <source>%1: save completed.</source>
         <translation>%1: Sparat.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="677"/>
+        <location filename="../src/GuiChat.cpp" line="689"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="718"/>
+        <location filename="../src/GuiChat.cpp" line="730"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Kan inte spara tempfilen: %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="766"/>
+        <location filename="../src/GuiChat.cpp" line="778"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Vill du verkligen skicka %1 %2 till medlemmarna i den här chatten?</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="767"/>
+        <location filename="../src/GuiChat.cpp" line="779"/>
         <source>file</source>
         <translation>fil</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="767"/>
+        <location filename="../src/GuiChat.cpp" line="779"/>
         <source>files</source>
         <translation>filer</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="768"/>
+        <location filename="../src/GuiChat.cpp" line="780"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="768"/>
+        <location filename="../src/GuiChat.cpp" line="780"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="781"/>
+        <location filename="../src/GuiChat.cpp" line="793"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt library för det här operativsystemet, stöder inte &apos;dra och släpp&apos; för filer. Du måste välja filen igen för att skicka.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="865"/>
+        <location filename="../src/GuiChat.cpp" line="892"/>
         <source>Use key Return to send message</source>
         <translation>Använd returtangenten för att skicka meddelanden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="867"/>
+        <location filename="../src/GuiChat.cpp" line="894"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Använd returtangenten för ny rad</translation>
     </message>
@@ -4310,6 +4321,16 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="116"/>
         <source>Broadcast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ShortcutManager.cpp" line="118"/>
+        <source>Find text in chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ShortcutManager.cpp" line="120"/>
+        <source>Find next text in chat</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

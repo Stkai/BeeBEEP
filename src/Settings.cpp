@@ -832,6 +832,7 @@ void Settings::load()
   m_checkNewVersionAtStartup = sets->value( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "PostUsageStatistics", m_postUsageStatistics ).toBool();
   m_applicationUuid = sets->value( "Uuid", "" ).toString();
+  m_statsPostDate = sets->value( "StatsPostDate", QDate() ).toDate();
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -1082,6 +1083,7 @@ void Settings::save()
   sets->setValue( "CheckNewVersionAtStartup", m_checkNewVersionAtStartup );
   sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
   sets->setValue( "Uuid", m_applicationUuid );
+  sets->setValue( "StatsPostDate", m_statsPostDate );
   sets->endGroup();
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );

@@ -92,12 +92,15 @@ void GAnalytics::doPost()
 void GAnalytics::onReplyFinished( QNetworkReply *reply )
 {
 #ifdef BEEBEEP_DEBUG
-  QUrl url = reply->url();
   if( reply->error() != QNetworkReply::NoError )
     qWarning() << qPrintable( objectName() ) << "has error:" << reply->errorString();
   else
     qDebug() << qPrintable( objectName() ) << "has finished";
 #endif
+
+  if( reply->error() == QNetworkReply::NoError )
+    Settings::instance().setStatsPostDate( QDate::currentDate() );
+
   reply->deleteLater();
   emit jobFinished();
 }

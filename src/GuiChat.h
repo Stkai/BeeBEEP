@@ -123,6 +123,11 @@ private slots:
   void onSpellCheckerActionClicked();
   void onCompleterActionClicked();
   void printChat();
+  void showFindTextInChatDialog();
+  void findNextTextInChat();
+
+protected:
+  void findTextInChat( const QString& );
 
 private:
   VNumber m_chatId;
@@ -142,6 +147,7 @@ private:
   QAction* mp_actCompleter;
   QAction* mp_actUseReturnToSendMessage;
   QAction* mp_actPrint;
+  QAction* mp_actFindTextInChat;
 
   QMenu* mp_menuMembers;
   QSplitter* mp_splitter;
@@ -149,6 +155,8 @@ private:
   QPalette m_defaultChatPalette;
 
   QShortcut* mp_scFocusInChat;
+  QShortcut* mp_scFindNextTextInChat;
+  QString m_lastTextFound;
 
 };
 

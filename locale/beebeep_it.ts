@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -763,7 +763,7 @@
     </message>
     <message>
         <source>auto added</source>
-        <translation type="unfinished"></translation>
+        <translation>aggiunto automaticamente</translation>
     </message>
 </context>
 <context>
@@ -810,7 +810,7 @@
     </message>
     <message>
         <source>Auto add from LAN</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi dalla LAN</translation>
     </message>
 </context>
 <context>
@@ -1183,6 +1183,18 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Print...</source>
         <translation>Stampa...</translation>
+    </message>
+    <message>
+        <source>Find text in chat</source>
+        <translation>Trova testo nella conversazione</translation>
+    </message>
+    <message>
+        <source>%1 not found in chat</source>
+        <translation type="vanished">%1 non trovato nella conversazione</translation>
+    </message>
+    <message>
+        <source>%1 not found in chat.</source>
+        <translation>%1 non trovato nella conversazione.</translation>
     </message>
 </context>
 <context>
@@ -4941,6 +4953,14 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Broadcast</source>
         <translation>Cerca utenti</translation>
+    </message>
+    <message>
+        <source>Find text in chat</source>
+        <translation>Trova testo nella conversazione</translation>
+    </message>
+    <message>
+        <source>Find next text in chat</source>
+        <translation>Trova testo successivo nella conversazione</translation>
     </message>
 </context>
 <context>

@@ -115,6 +115,10 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ Print ] = QKeySequence( QKeySequence::Print );
   m_shortcutNames[ Broadcast ] = QObject::tr( "Broadcast" );
   m_shortcuts[ Broadcast ] = QKeySequence( Qt::CTRL | Qt::Key_B );
+  m_shortcutNames[ FindTextInChat ] = QObject::tr( "Find text in chat" );
+  m_shortcuts[ FindTextInChat ] = QKeySequence( Qt::CTRL | Qt::Key_F );
+  m_shortcutNames[ FindNextTextInChat ] = QObject::tr( "Find next text in chat" );
+  m_shortcuts[ FindNextTextInChat ] = QKeySequence( Qt::CTRL | Qt::Key_G );
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )

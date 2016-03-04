@@ -375,8 +375,10 @@ public:
   inline void setDictionaryPath( const QString& );
   inline const QString& dictionaryPath() const;
 
-  inline const QString& applicationUuid() const;
   void createApplicationUuid();
+  inline const QString& applicationUuid() const;
+  inline void setStatsPostDate( const QDate& );
+  inline const QDate& statsPostDate() const;
 
   void loadRcFile();
   void clearNativeSettings();
@@ -600,6 +602,7 @@ private:
   bool m_homeShowMessageDatestamp;
 
   QString m_applicationUuid;
+  QDate m_statsPostDate;
 
 };
 
@@ -853,5 +856,7 @@ inline bool Settings::usePreviewFileDialog() const { return m_usePreviewFileDial
 inline void Settings::setPreviewFileDialogGeometry( const QByteArray& new_value ) { m_previewFileDialogGeometry = new_value; }
 inline const QByteArray& Settings::previewFileDialogGeometry() { return m_previewFileDialogGeometry; }
 inline int Settings::previewFileDialogImageSize() const { return m_previewFileDialogImageSize; }
+inline void Settings::setStatsPostDate( const QDate& new_value ) { m_statsPostDate = new_value; }
+inline const QDate& Settings::statsPostDate() const { return m_statsPostDate; }
 
 #endif // BEEBEEP_SETTINGS_H
