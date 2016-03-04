@@ -58,9 +58,15 @@ void GAnalytics::doPost()
 #else
   QUrl query;
 #endif
+
+  // Please refers to: https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
   query.addQueryItem("v", Settings::instance().gaEventVersion() );
   query.addQueryItem("tid", Settings::instance().gaTrackingId() );
   query.addQueryItem("cid", Settings::instance().applicationUuid() );
+  query.addQueryItem("aip", "1" ); // anonymized IP
+  query.addQueryItem("ds", "app" );
+  query.addQueryItem("an", Settings::instance().programName().toLower() );
+  query.addQueryItem("av", Settings::instance().version( false ) );
   query.addQueryItem( "t", "event" );
   query.addQueryItem( "ec", Settings::instance().programName() );
   query.addQueryItem( "ea", "usage" );
