@@ -765,6 +765,10 @@
         <source>auto added</source>
         <translation>aggiunto automaticamente</translation>
     </message>
+    <message>
+        <source>your IP is %1 in LAN %2</source>
+        <translation>il tuo IP è %1 nella LAN %2</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUserDialog</name>
@@ -806,11 +810,15 @@
     </message>
     <message>
         <source>Split subnet in Ipv4 addresses</source>
-        <translation>Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
+        <translation type="vanished">Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
     </message>
     <message>
         <source>Auto add from LAN</source>
         <translation>Aggiungi dalla LAN</translation>
+    </message>
+    <message>
+        <source>Split in IPv4 addresses</source>
+        <translation>Usa i singoli indirizzi IPv4 invece di una sottorete</translation>
     </message>
 </context>
 <context>
@@ -4048,6 +4056,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Verbose</source>
         <translation>In modo approfondito</translation>
+    </message>
+    <message>
+        <source>Max users to contact in a tick</source>
+        <translation type="unfinished">Numero di utenti da contattare in un tick</translation>
     </message>
 </context>
 <context>

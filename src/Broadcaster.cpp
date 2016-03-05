@@ -364,7 +364,7 @@ void Broadcaster::onTickEvent( int )
 {
   if( !m_peerAddressesToContact.isEmpty() )
   {
-    int max_count = m_peerAddressesToContact.size() < 15 ? m_peerAddressesToContact.size() : 15;
+    int max_count = m_peerAddressesToContact.size() < Settings::instance().maxUsersToConnectInATick() ? m_peerAddressesToContact.size() : Settings::instance().maxUsersToConnectInATick();
     for( int i = 0; i < max_count; i++ )
     {
       NetworkAddress na = m_peerAddressesToContact.takeFirst();

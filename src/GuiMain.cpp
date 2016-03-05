@@ -1683,7 +1683,7 @@ void GuiMain::searchUsers()
   gsu.setModal( true );
   gsu.loadSettings();
   gsu.show();
-  gsu.setFixedSize( gsu.size() );
+  //gsu.setFixedSize( gsu.size() );
   if( gsu.exec() != QDialog::Accepted )
     return;
 

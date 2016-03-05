@@ -205,16 +205,6 @@ bool Core::start()
   if( Settings::instance().checkNewVersionAtStartup() )
     QTimer::singleShot( 0, this, SLOT( checkNewVersion() ) );
 
-  if( Settings::instance().postUsageStatistics() )
-  {
-    if( Settings::instance().statsPostDate() != QDate::currentDate() )
-      QTimer::singleShot( 2000, this, SLOT( postUsageStatistics() ) );
-#ifdef BEEBEEP_DEBUG
-    else
-      qDebug() << "Skips post usage statistics";
-#endif
-  }
-
   return true;
 }
 
@@ -593,4 +583,7 @@ void Core::onPostUsageStatisticsJobCompleted()
 void Core::onTickEvent( int ticks )
 {
   mp_broadcaster->onTickEvent( ticks );
+
+  if( ticks > 0 && ticks % 5 == 0 && Settings::instance().canPostUsageStatistics() )
+    QTimer::singleShot( 0, this, SLOT( postUsageStatistics() ) );
 }

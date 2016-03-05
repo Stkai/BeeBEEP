@@ -60,6 +60,7 @@ public:
   inline bool checkNewVersionAtStartup() const;
   inline void setPostUsageStatistics( bool );
   inline bool postUsageStatistics() const;
+  inline bool canPostUsageStatistics() const;
 
   inline const QDate& settingsCreationDate() const;
   inline const QString& dataFolder() const;
@@ -119,6 +120,7 @@ public:
   inline int tickIntervalConnectionTimeout() const;
   inline int tickIntervalCheckIdle() const;
   inline int tickIntervalCheckNetwork() const;
+  inline void setMaxUsersToConnectInATick( int );
   inline int maxUsersToConnectInATick() const;
 
   inline int userAwayTimeout() const;
@@ -631,6 +633,7 @@ inline int Settings::fileTransferBufferSize() const { return m_fileTransferBuffe
 inline int Settings::trayMessageTimeout() const  { return m_trayMessageTimeout; }
 inline int Settings::userAwayTimeout() const { return m_userAwayTimeout; }
 inline void Settings::setUserAwayTimeout( int new_value ) { m_userAwayTimeout = new_value; }
+inline void Settings::setMaxUsersToConnectInATick( int new_value ) { m_maxUsersToConnectInATick = new_value; }
 inline int Settings::maxUsersToConnectInATick() const { return m_maxUsersToConnectInATick; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
@@ -858,5 +861,6 @@ inline const QByteArray& Settings::previewFileDialogGeometry() { return m_previe
 inline int Settings::previewFileDialogImageSize() const { return m_previewFileDialogImageSize; }
 inline void Settings::setStatsPostDate( const QDate& new_value ) { m_statsPostDate = new_value; }
 inline const QDate& Settings::statsPostDate() const { return m_statsPostDate; }
+inline bool Settings::canPostUsageStatistics() const { return m_postUsageStatistics && m_statsPostDate != QDate::currentDate(); }
 
 #endif // BEEBEEP_SETTINGS_H

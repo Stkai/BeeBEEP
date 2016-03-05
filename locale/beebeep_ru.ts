@@ -76,17 +76,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="235"/>
+        <location filename="../src/Core.cpp" line="225"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="250"/>
+        <location filename="../src/Core.cpp" line="240"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="282"/>
+        <location filename="../src/Core.cpp" line="272"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Вы отключены от сети %2.</translation>
     </message>
@@ -105,47 +105,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="297"/>
+        <location filename="../src/Core.cpp" line="287"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 будет искать пользователей в этих IP-адресах: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="318"/>
+        <location filename="../src/Core.cpp" line="308"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="325"/>
+        <location filename="../src/Core.cpp" line="315"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="343"/>
+        <location filename="../src/Core.cpp" line="333"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Передает в сеть %2...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="350"/>
+        <location filename="../src/Core.cpp" line="340"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 Вы не подключены к сети %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="356"/>
+        <location filename="../src/Core.cpp" line="346"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 нашел фильтр UDP порта %3. Пожалуйста, проверьте настройки вашего брандмауэра.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="360"/>
+        <location filename="../src/Core.cpp" line="350"/>
         <source>View the log messages for more informations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="553"/>
+        <location filename="../src/Core.cpp" line="543"/>
         <source>New version is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="554"/>
+        <location filename="../src/Core.cpp" line="544"/>
         <source>Click here to download</source>
         <translation type="unfinished"></translation>
     </message>
@@ -154,12 +154,12 @@
         <translation type="obsolete">%1 Вы не можете связаться с сетью %2.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="398"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>присоединен от внешней сети (новая подсеть добавлена к вашему списку широковещательных адресов).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="421"/>
+        <location filename="../src/Core.cpp" line="411"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -559,7 +559,7 @@
         <translation>%1 (%2) подключен к сети %3.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="477"/>
+        <location filename="../src/Core.cpp" line="467"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -674,46 +674,51 @@
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="39"/>
+        <source>your IP is %1 in LAN %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.cpp" line="45"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="39"/>
+        <location filename="../src/GuiAddUser.cpp" line="45"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="98"/>
+        <location filename="../src/GuiAddUser.cpp" line="104"/>
         <source>Please insert a valid IP address.</source>
         <translation>Пожалуйста, вставьте действительный IP-адрес.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="108"/>
+        <location filename="../src/GuiAddUser.cpp" line="114"/>
         <source>Please insert a valid port or use the default one %1.</source>
         <translation>Пожалуйста, вставьте действительный порт или используйте по умолчанию %1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="142"/>
+        <location filename="../src/GuiAddUser.cpp" line="148"/>
         <source>These IP address and port are already inserted in list.</source>
         <translation>Эти IP-адреса и порты уже вставлены в список.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="176"/>
+        <location filename="../src/GuiAddUser.cpp" line="182"/>
         <source>Remove user path</source>
         <translation>Убрать путь пользователя</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="178"/>
+        <location filename="../src/GuiAddUser.cpp" line="184"/>
         <source>Clear all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="203"/>
+        <location filename="../src/GuiAddUser.cpp" line="209"/>
         <source>Please select an user path in the list.</source>
         <translation>Пожалуйста, выберите путь пользователя в списке.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="228"/>
+        <location filename="../src/GuiAddUser.cpp" line="234"/>
         <source>auto added</source>
         <translation type="unfinished"></translation>
     </message>
@@ -726,52 +731,52 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="203"/>
+        <location filename="../src/GuiAddUser.ui" line="73"/>
         <source>Add an IP address and port of the user you want to connect</source>
         <translation>Добавьте IP-адрес и порт пользователя, с которым вы хотите соединиться</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="29"/>
+        <location filename="../src/GuiAddUser.ui" line="89"/>
         <source>IP Address</source>
         <translation>IP-адрес</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="61"/>
+        <location filename="../src/GuiAddUser.ui" line="121"/>
         <source>Port</source>
         <translation>Порт</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="119"/>
+        <location filename="../src/GuiAddUser.ui" line="169"/>
+        <source>Split in IPv4 addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.ui" line="179"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="116"/>
+        <location filename="../src/GuiAddUser.ui" line="176"/>
         <source>Click here to add user path</source>
         <translation>Нажмите здесь для добавления пути пользователя</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="96"/>
+        <location filename="../src/GuiAddUser.ui" line="156"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="109"/>
-        <source>Split subnet in Ipv4 addresses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiAddUser.ui" line="155"/>
+        <location filename="../src/GuiAddUser.ui" line="25"/>
         <source>Auto add from LAN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="175"/>
+        <location filename="../src/GuiAddUser.ui" line="45"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="182"/>
+        <location filename="../src/GuiAddUser.ui" line="52"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -3757,7 +3762,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="83"/>
+        <location filename="../src/GuiSearchUser.ui" line="77"/>
         <source>Local subnet address *</source>
         <translation>Адрес локальной подсети *</translation>
     </message>
@@ -3766,88 +3771,93 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Введите IP-адреса или подсеть вашей области сети, разделенные запятой (например: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="210"/>
+        <location filename="../src/GuiSearchUser.ui" line="204"/>
         <source>Addresses in beehosts.ini *</source>
         <translation>Адреса в beehosts.ini *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="41"/>
+        <location filename="../src/GuiSearchUser.ui" line="35"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP-порт в beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="70"/>
+        <location filename="../src/GuiSearchUser.ui" line="64"/>
         <source>(the same for all clients)</source>
         <translation>(одинаковый для всех клиентов)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="112"/>
+        <location filename="../src/GuiSearchUser.ui" line="106"/>
         <source>(search users here by default)</source>
         <translation>(искать пользователей здесь по умолчанию)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="125"/>
+        <location filename="../src/GuiSearchUser.ui" line="119"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="161"/>
+        <location filename="../src/GuiSearchUser.ui" line="155"/>
         <source>Enable broadcast interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="190"/>
+        <location filename="../src/GuiSearchUser.ui" line="184"/>
         <source>seconds (0=disabled, 10=default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="236"/>
+        <location filename="../src/GuiSearchUser.ui" line="230"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="246"/>
+        <location filename="../src/GuiSearchUser.ui" line="240"/>
         <source>Accept connections only from your workgroups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="265"/>
+        <location filename="../src/GuiSearchUser.ui" line="259"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Введите IP-адреса или подсеть вашей области сети, разделенные запятой (например: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="291"/>
+        <location filename="../src/GuiSearchUser.ui" line="285"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Разделить подсеть в IPV4-адресах</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="304"/>
+        <location filename="../src/GuiSearchUser.ui" line="298"/>
         <source>Verbose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="311"/>
+        <location filename="../src/GuiSearchUser.ui" line="329"/>
+        <source>Max users to contact in a tick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="338"/>
         <source>Automatically add external subnet</source>
         <translation>Автоматически добавлять внешнюю подсеть</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="318"/>
+        <location filename="../src/GuiSearchUser.ui" line="345"/>
         <source>Enable Zero Configuration Networking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="334"/>
+        <location filename="../src/GuiSearchUser.ui" line="361"/>
         <source>* (read only section)</source>
         <translation>* (раздел только для чтения)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="347"/>
-        <location filename="../src/GuiSearchUser.cpp" line="115"/>
+        <location filename="../src/GuiSearchUser.ui" line="368"/>
+        <location filename="../src/GuiSearchUser.cpp" line="117"/>
         <source>Ok</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="360"/>
+        <location filename="../src/GuiSearchUser.ui" line="375"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -3883,12 +3893,12 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Файл пуст</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="114"/>
+        <location filename="../src/GuiSearchUser.cpp" line="116"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="115"/>
+        <location filename="../src/GuiSearchUser.cpp" line="117"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Вы вставили неправильный адрес узла:

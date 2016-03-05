@@ -67,17 +67,17 @@
         <translation>%1 Povezani ste sa %2 mrežom.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="282"/>
+        <location filename="../src/Core.cpp" line="272"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Povezani ste sa %2 mrežom.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="297"/>
+        <location filename="../src/Core.cpp" line="287"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 traži korisnika sa sledećom IP adresom: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="235"/>
+        <location filename="../src/Core.cpp" line="225"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Nulta konfiguracija pokrenuta sa nazivom: %2</translation>
     </message>
@@ -97,47 +97,47 @@
         <translation>%1 možete se povezati samo sa sledećim grupama: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="250"/>
+        <location filename="../src/Core.cpp" line="240"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 nulta konfiguracija je zatvorena.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="318"/>
+        <location filename="../src/Core.cpp" line="308"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 nulta konfiguracija pretražuje mrežu tražeći servis: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="325"/>
+        <location filename="../src/Core.cpp" line="315"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 nulta konfiguracija nemože da pretražuje mrežu tražeći servis: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="343"/>
+        <location filename="../src/Core.cpp" line="333"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 broadcasting ka %2 mreži ...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="350"/>
+        <location filename="../src/Core.cpp" line="340"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 nisi konektovan na %2 mrežu.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="356"/>
+        <location filename="../src/Core.cpp" line="346"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 ima filter na UDP portu %3. Molimo Vas proverite vaše podešavanje firewall-a.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="360"/>
+        <location filename="../src/Core.cpp" line="350"/>
         <source>View the log messages for more informations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="553"/>
+        <location filename="../src/Core.cpp" line="543"/>
         <source>New version is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="554"/>
+        <location filename="../src/Core.cpp" line="544"/>
         <source>Click here to download</source>
         <translation type="unfinished"></translation>
     </message>
@@ -146,12 +146,12 @@
         <translation type="obsolete">%1 nemožeš videti %2 mrežu.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="398"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>je povezan sa spoljnom mrežom (nova podmreža je dodata u vašu listu adresa za broadcast).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="421"/>
+        <location filename="../src/Core.cpp" line="411"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 proveri %2 više adresa...</translation>
     </message>
@@ -160,7 +160,7 @@
         <translation type="obsolete">%1 poziva %2 ...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="477"/>
+        <location filename="../src/Core.cpp" line="467"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -658,46 +658,51 @@
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="39"/>
+        <source>your IP is %1 in LAN %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.cpp" line="45"/>
         <source>Comment</source>
         <translation>Komentar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="39"/>
+        <location filename="../src/GuiAddUser.cpp" line="45"/>
         <source>Address</source>
         <translation>Adresa</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="98"/>
+        <location filename="../src/GuiAddUser.cpp" line="104"/>
         <source>Please insert a valid IP address.</source>
         <translation>Upiši IP adresu.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="108"/>
+        <location filename="../src/GuiAddUser.cpp" line="114"/>
         <source>Please insert a valid port or use the default one %1.</source>
         <translation>Upiši port koji koristiš ili koristi podrazumevan %1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="142"/>
+        <location filename="../src/GuiAddUser.cpp" line="148"/>
         <source>These IP address and port are already inserted in list.</source>
         <translation>IP adresa i port su već ubačeni u listu.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="176"/>
+        <location filename="../src/GuiAddUser.cpp" line="182"/>
         <source>Remove user path</source>
         <translation>Izbrisana korisnička putanja</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="178"/>
+        <location filename="../src/GuiAddUser.cpp" line="184"/>
         <source>Clear all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="203"/>
+        <location filename="../src/GuiAddUser.cpp" line="209"/>
         <source>Please select an user path in the list.</source>
         <translation>Selektuj korisničku putanju iz liste.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="228"/>
+        <location filename="../src/GuiAddUser.cpp" line="234"/>
         <source>auto added</source>
         <translation type="unfinished"></translation>
     </message>
@@ -710,52 +715,52 @@
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="203"/>
+        <location filename="../src/GuiAddUser.ui" line="73"/>
         <source>Add an IP address and port of the user you want to connect</source>
         <translation>Dodaj IP adresu i port korisnika koga želiš da kontaktiraš</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="29"/>
+        <location filename="../src/GuiAddUser.ui" line="89"/>
         <source>IP Address</source>
         <translation>IP adresa</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="61"/>
+        <location filename="../src/GuiAddUser.ui" line="121"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="119"/>
+        <location filename="../src/GuiAddUser.ui" line="169"/>
+        <source>Split in IPv4 addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.ui" line="179"/>
         <source>Add</source>
         <translation>Dodaj</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="116"/>
+        <location filename="../src/GuiAddUser.ui" line="176"/>
         <source>Click here to add user path</source>
         <translation>Klikni ovde za dodavanje korisnikove putanje</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="96"/>
+        <location filename="../src/GuiAddUser.ui" line="156"/>
         <source>Comment</source>
         <translation>Komentar</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="109"/>
-        <source>Split subnet in Ipv4 addresses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiAddUser.ui" line="155"/>
+        <location filename="../src/GuiAddUser.ui" line="25"/>
         <source>Auto add from LAN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="175"/>
+        <location filename="../src/GuiAddUser.ui" line="45"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="182"/>
+        <location filename="../src/GuiAddUser.ui" line="52"/>
         <source>Cancel</source>
         <translation>Poništi</translation>
     </message>
@@ -3449,93 +3454,98 @@ Please select a different name.</source>
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="83"/>
+        <location filename="../src/GuiSearchUser.ui" line="77"/>
         <source>Local subnet address *</source>
         <translation>Adresa podmreže *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="210"/>
+        <location filename="../src/GuiSearchUser.ui" line="204"/>
         <source>Addresses in beehosts.ini *</source>
         <translation>Adresa u beehosts.ini *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="41"/>
+        <location filename="../src/GuiSearchUser.ui" line="35"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP port u beebeep.rs *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="70"/>
+        <location filename="../src/GuiSearchUser.ui" line="64"/>
         <source>(the same for all clients)</source>
         <translation>(isto za sve korisnike)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="112"/>
+        <location filename="../src/GuiSearchUser.ui" line="106"/>
         <source>(search users here by default)</source>
         <translation>(pretraži korisnike ovde kao podrazumevano)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="125"/>
+        <location filename="../src/GuiSearchUser.ui" line="119"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="161"/>
+        <location filename="../src/GuiSearchUser.ui" line="155"/>
         <source>Enable broadcast interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="190"/>
+        <location filename="../src/GuiSearchUser.ui" line="184"/>
         <source>seconds (0=disabled, 10=default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="236"/>
+        <location filename="../src/GuiSearchUser.ui" line="230"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
         <translation>Radna grupa (unesi tvoju mrežu grupa odvojenih zarezima)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="246"/>
+        <location filename="../src/GuiSearchUser.ui" line="240"/>
         <source>Accept connections only from your workgroups</source>
         <translation>Prihvati konekcije samo od tvoje grupe</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="265"/>
+        <location filename="../src/GuiSearchUser.ui" line="259"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Unedi IP adresu ili podmrežu lokalne mreže odvojenu zarezima (npr. 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="291"/>
+        <location filename="../src/GuiSearchUser.ui" line="285"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Podeli podmrežu sa IPv4 adresama</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="304"/>
+        <location filename="../src/GuiSearchUser.ui" line="298"/>
         <source>Verbose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="311"/>
+        <location filename="../src/GuiSearchUser.ui" line="329"/>
+        <source>Max users to contact in a tick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="338"/>
         <source>Automatically add external subnet</source>
         <translation>Automatski dodaj spoljenu podmrežu</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="318"/>
+        <location filename="../src/GuiSearchUser.ui" line="345"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Dozvoli podrazumevanu konfiguraciju mreže</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="334"/>
+        <location filename="../src/GuiSearchUser.ui" line="361"/>
         <source>* (read only section)</source>
         <translation>* (samo za čitanje)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="347"/>
-        <location filename="../src/GuiSearchUser.cpp" line="115"/>
+        <location filename="../src/GuiSearchUser.ui" line="368"/>
+        <location filename="../src/GuiSearchUser.cpp" line="117"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="360"/>
+        <location filename="../src/GuiSearchUser.ui" line="375"/>
         <source>Cancel</source>
         <translation>Odustani</translation>
     </message>
@@ -3555,12 +3565,12 @@ Please select a different name.</source>
         <translation>Fajl je prazan</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="114"/>
+        <location filename="../src/GuiSearchUser.cpp" line="116"/>
         <source>Warning</source>
         <translation>Upozorenje</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="115"/>
+        <location filename="../src/GuiSearchUser.cpp" line="117"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Uneo si neispravnu adresu računara:

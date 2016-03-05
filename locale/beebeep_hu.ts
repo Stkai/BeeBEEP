@@ -67,17 +67,17 @@
         <translation>%1 Csatlakozva %2 Hálózathoz.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="282"/>
+        <location filename="../src/Core.cpp" line="272"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Ön lecsatlakozott a %2 hálózatról.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="297"/>
+        <location filename="../src/Core.cpp" line="287"/>
         <source>%1 %2 will search users in these IP addresses: %3</source>
         <translation>%1 %2 megkeresi a felhasználókat ezeken az IP-címeken: %3</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="235"/>
+        <location filename="../src/Core.cpp" line="225"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero konfiguráció elindult a %2 nevü szolgáltatással</translation>
     </message>
@@ -97,57 +97,57 @@
         <translation>%1 Kiválasztottad, hogy csak ezek a munkacsoportok csatlakozzanak: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="250"/>
+        <location filename="../src/Core.cpp" line="240"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero konfiguráció szolgáltatás zárva.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="318"/>
+        <location filename="../src/Core.cpp" line="308"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration keresi a hálózati szolgáltatást: %2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="325"/>
+        <location filename="../src/Core.cpp" line="315"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration nem lehet böngészni hálózati szolgáltatást:%2</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="343"/>
+        <location filename="../src/Core.cpp" line="333"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 közvetítés a %2 Hálózat...</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="350"/>
+        <location filename="../src/Core.cpp" line="340"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 Nem kapcsolódik a %2 hálózathoz.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="356"/>
+        <location filename="../src/Core.cpp" line="346"/>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
         <translation>%1 %2 talált szűrő UDP-porton %3. Kérjük, ellenőrizze a tűzfal beállításait.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="360"/>
+        <location filename="../src/Core.cpp" line="350"/>
         <source>View the log messages for more informations</source>
         <translation>Tekintse meg a log üzeneteket további információkért</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="553"/>
+        <location filename="../src/Core.cpp" line="543"/>
         <source>New version is available</source>
         <translation>Új verzió elérhető</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="554"/>
+        <location filename="../src/Core.cpp" line="544"/>
         <source>Click here to download</source>
         <translation>Kattintson ide a letöltéshez</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="408"/>
+        <location filename="../src/Core.cpp" line="398"/>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
         <translation>csatlakozik a külső hálózat (az új alhálózat bekerül a broadcast cím listába).</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="421"/>
+        <location filename="../src/Core.cpp" line="411"/>
         <source>%1 Checking %2 more addresses...</source>
         <translation>%1 ellenőrzés %2 további címeket ...</translation>
     </message>
@@ -284,7 +284,7 @@
         <translation>%1 (%2) csatlakozott a %3 hálózathoz.</translation>
     </message>
     <message>
-        <location filename="../src/Core.cpp" line="477"/>
+        <location filename="../src/Core.cpp" line="467"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Hálózati interfész %2 nem elérhető.</translation>
     </message>
@@ -682,46 +682,51 @@ Te vagy</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="39"/>
+        <source>your IP is %1 in LAN %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.cpp" line="45"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="39"/>
+        <location filename="../src/GuiAddUser.cpp" line="45"/>
         <source>Address</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="98"/>
+        <location filename="../src/GuiAddUser.cpp" line="104"/>
         <source>Please insert a valid IP address.</source>
         <translation>Érvényes IP-címet adj meg.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="108"/>
+        <location filename="../src/GuiAddUser.cpp" line="114"/>
         <source>Please insert a valid port or use the default one %1.</source>
         <translation>Érvényes portot adj meg vagy használd az alapértelmezett %1.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="142"/>
+        <location filename="../src/GuiAddUser.cpp" line="148"/>
         <source>These IP address and port are already inserted in list.</source>
         <translation>Ezt az IP-címet és a portot  már behelyezted a listába.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="176"/>
+        <location filename="../src/GuiAddUser.cpp" line="182"/>
         <source>Remove user path</source>
         <translation>felhasználó útvonal eltávolítása</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="178"/>
+        <location filename="../src/GuiAddUser.cpp" line="184"/>
         <source>Clear all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="203"/>
+        <location filename="../src/GuiAddUser.cpp" line="209"/>
         <source>Please select an user path in the list.</source>
         <translation>Kérjük, válasszon ki egy felhasználói utat a listából.</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.cpp" line="228"/>
+        <location filename="../src/GuiAddUser.cpp" line="234"/>
         <source>auto added</source>
         <translation type="unfinished"></translation>
     </message>
@@ -734,52 +739,52 @@ Te vagy</translation>
         <translation>Párbeszéd</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="203"/>
+        <location filename="../src/GuiAddUser.ui" line="73"/>
         <source>Add an IP address and port of the user you want to connect</source>
         <translation>Adjunk hozzá egy IP címet és egy portot a felhasználó szeretne csatlakozni</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="29"/>
+        <location filename="../src/GuiAddUser.ui" line="89"/>
         <source>IP Address</source>
         <translation>IP cím</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="61"/>
+        <location filename="../src/GuiAddUser.ui" line="121"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="119"/>
+        <location filename="../src/GuiAddUser.ui" line="169"/>
+        <source>Split in IPv4 addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiAddUser.ui" line="179"/>
         <source>Add</source>
         <translation>Hozzáad</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="116"/>
+        <location filename="../src/GuiAddUser.ui" line="176"/>
         <source>Click here to add user path</source>
         <translation>Kattints ide a felhasználó útvonal hozzáadásához</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="96"/>
+        <location filename="../src/GuiAddUser.ui" line="156"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="109"/>
-        <source>Split subnet in Ipv4 addresses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GuiAddUser.ui" line="155"/>
+        <location filename="../src/GuiAddUser.ui" line="25"/>
         <source>Auto add from LAN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="175"/>
+        <location filename="../src/GuiAddUser.ui" line="45"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/GuiAddUser.ui" line="182"/>
+        <location filename="../src/GuiAddUser.ui" line="52"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
@@ -3484,94 +3489,99 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
         <translation>Párbeszéd</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="83"/>
+        <location filename="../src/GuiSearchUser.ui" line="77"/>
         <source>Local subnet address *</source>
         <translation>Helyi alhálózat cím *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="210"/>
+        <location filename="../src/GuiSearchUser.ui" line="204"/>
         <source>Addresses in beehosts.ini *</source>
         <translation>Címek a beehosts.ini -ben *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="41"/>
+        <location filename="../src/GuiSearchUser.ui" line="35"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP Port a beebeep.rc-ben*</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="70"/>
+        <location filename="../src/GuiSearchUser.ui" line="64"/>
         <source>(the same for all clients)</source>
         <translation>(Azonos az összes kliens)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="112"/>
+        <location filename="../src/GuiSearchUser.ui" line="106"/>
         <source>(search users here by default)</source>
         <translation>(alapértelmezetten itt keresi a felhasználókat)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="125"/>
+        <location filename="../src/GuiSearchUser.ui" line="119"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Multicast csoport beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="161"/>
+        <location filename="../src/GuiSearchUser.ui" line="155"/>
         <source>Enable broadcast interval</source>
         <translation>Engedélyezi adás időköz</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="190"/>
+        <location filename="../src/GuiSearchUser.ui" line="184"/>
         <source>seconds (0=disabled, 10=default)</source>
         <translation>másodperc (0=letiltva, 10=alapértelmezett)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="236"/>
+        <location filename="../src/GuiSearchUser.ui" line="230"/>
         <source>Workgroups (enter your network groups separated by comma)</source>
         <translation>Munkacsoportok (adja meg a hálózati csoportokat vesszővel elválasztva)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="246"/>
+        <location filename="../src/GuiSearchUser.ui" line="240"/>
         <source>Accept connections only from your workgroups</source>
         <translation>Kapcsolatot fogadása csak a te munkacsoportjaidból</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="265"/>
+        <location filename="../src/GuiSearchUser.ui" line="259"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
         <translation>Írja be az IP-címeket vagy alhálózatokat vesszővel elválasztva (például: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="291"/>
+        <location filename="../src/GuiSearchUser.ui" line="285"/>
         <source>Split subnet to IPV4 addresses</source>
         <translation>Osztott alhálózatot IPv4 címek</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="304"/>
+        <location filename="../src/GuiSearchUser.ui" line="298"/>
         <source>Verbose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="311"/>
+        <location filename="../src/GuiSearchUser.ui" line="329"/>
+        <source>Max users to contact in a tick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiSearchUser.ui" line="338"/>
         <source>Automatically add external subnet</source>
         <translation>Külső alhálózat automatikus hozzáadása</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="318"/>
+        <location filename="../src/GuiSearchUser.ui" line="345"/>
         <source>Enable Zero Configuration Networking</source>
         <translatorcomment>?</translatorcomment>
         <translation>Nulla konfiguráció hálózat engedélyezése</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="334"/>
+        <location filename="../src/GuiSearchUser.ui" line="361"/>
         <source>* (read only section)</source>
         <translation>* (Csak olvasható rész)</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="347"/>
-        <location filename="../src/GuiSearchUser.cpp" line="115"/>
+        <location filename="../src/GuiSearchUser.ui" line="368"/>
+        <location filename="../src/GuiSearchUser.cpp" line="117"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.ui" line="360"/>
+        <location filename="../src/GuiSearchUser.ui" line="375"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
@@ -3591,12 +3601,12 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
         <translation>Fájl üres</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="114"/>
+        <location filename="../src/GuiSearchUser.cpp" line="116"/>
         <source>Warning</source>
         <translation>Figyelem</translation>
     </message>
     <message>
-        <location filename="../src/GuiSearchUser.cpp" line="115"/>
+        <location filename="../src/GuiSearchUser.cpp" line="117"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation>Behelyezett egy érvénytelen gazdacímet:

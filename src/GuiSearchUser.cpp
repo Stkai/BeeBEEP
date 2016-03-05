@@ -92,6 +92,8 @@ void GuiSearchUser::loadSettings()
   }
 
   mp_cbVerbose->setChecked( Settings::instance().parseBroadcastAddressesAll() );
+  mp_sbMaxUsersToContact->setValue( Settings::instance().maxUsersToConnectInATick() );
+
   enableVerbose();
   mp_leWorkgroups->setFocus();
 }
@@ -154,6 +156,8 @@ void GuiSearchUser::checkAndSearch()
   }
   else
     Settings::instance().setBroadcastInterval( 0 );
+
+  Settings::instance().setMaxUsersToConnectInATick( mp_sbMaxUsersToContact->value() );
 
   accept();
 }

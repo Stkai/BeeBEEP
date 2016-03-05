@@ -34,6 +34,12 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   setupUi( this );
 
   setWindowTitle( tr( "Add user" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+
+  QString s_txt1 = mp_lHelp->text();
+  QString s_txt2 = tr( "your IP is %1 in LAN %2").arg( Settings::instance().localUser().hostAddress().toString() )
+                                                 .arg( NetworkManager::instance().localBroadcastAddress().toString() );
+  QString s_header = QString( "%1\n(%2)" ).arg( s_txt1 ).arg( s_txt2 );
+  mp_lHelp->setText( s_header );
   mp_twUsers->setColumnCount( 2 );
   QStringList labels;
   labels << tr( "Address" ) << tr( "Comment" );
