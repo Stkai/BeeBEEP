@@ -244,6 +244,9 @@ public:
   inline bool askPasswordAtStartup() const;
   bool askPassword() const;
 
+  inline void setAskNicknameAtStartup( bool );
+  inline bool askNicknameAtStartup() const;
+
   inline bool logToFile() const;
   inline void setLogToFile( bool );
 
@@ -297,6 +300,9 @@ public:
   inline void setShowNotificationOnTray( bool );
   inline bool showOnlyMessageNotificationOnTray() const;
   inline void setShowOnlyMessageNotificationOnTray( bool );
+  inline void setShowChatMessageOnTray( bool );
+  inline bool showChatMessageOnTray() const;
+  inline int textSizeInChatMessagePreviewOnTray() const;
 
   inline const QStringList& localShare() const;
   inline void setLocalShare( const QStringList& );
@@ -527,6 +533,8 @@ private:
   bool m_savePassword;
   bool m_askPasswordAtStartup;
 
+  bool m_askNicknameAtStartup;
+
   QString m_language;
   bool m_beepOnNewMessageArrived;
   bool m_beepAlwaysOnNewMessageArrived;
@@ -547,6 +555,8 @@ private:
   bool m_loadOnTrayAtStartup;
   bool m_showNotificationOnTray;
   bool m_showOnlyMessageNotificationOnTray;
+  bool m_showChatMessageOnTray;
+  int m_textSizeInChatMessagePreviewOnTray;
 
   bool m_fileTransferIsEnabled;
   QStringList m_localShare;
@@ -693,6 +703,8 @@ inline bool Settings::savePassword() const { return m_savePassword; }
 inline const QString& Settings::passwordBeforeHash() const { return m_passwordBeforeHash; }
 inline void Settings::setAskPasswordAtStartup( bool new_value ) { m_askPasswordAtStartup = new_value; }
 inline bool Settings::askPasswordAtStartup() const { return m_askPasswordAtStartup; }
+inline void Settings::setAskNicknameAtStartup( bool new_value ) { m_askNicknameAtStartup = new_value; }
+inline bool Settings::askNicknameAtStartup() const { return m_askNicknameAtStartup; }
 inline bool Settings::logToFile() const { return m_logToFile; }
 inline void Settings::setLogToFile( bool new_value ) { m_logToFile = new_value; }
 inline const QString& Settings::language() const { return m_language; }
@@ -748,6 +760,8 @@ inline bool Settings::showNotificationOnTray() const { return m_showNotification
 inline void Settings::setShowNotificationOnTray( bool new_value ) { m_showNotificationOnTray = new_value; }
 inline bool Settings::showOnlyMessageNotificationOnTray() const { return m_showOnlyMessageNotificationOnTray; }
 inline void Settings::setShowOnlyMessageNotificationOnTray( bool new_value ) { m_showOnlyMessageNotificationOnTray = new_value; }
+inline void Settings::setShowChatMessageOnTray( bool new_value ) { m_showChatMessageOnTray = new_value; }
+inline bool Settings::showChatMessageOnTray() const { return m_showChatMessageOnTray; }
 inline const QStringList& Settings::localShare() const { return m_localShare; }
 inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
 inline bool Settings::hasLocalSharePath( const QString& share_path ) const { return m_localShare.contains( share_path ); }
@@ -862,5 +876,6 @@ inline int Settings::previewFileDialogImageSize() const { return m_previewFileDi
 inline void Settings::setStatsPostDate( const QDate& new_value ) { m_statsPostDate = new_value; }
 inline const QDate& Settings::statsPostDate() const { return m_statsPostDate; }
 inline bool Settings::canPostUsageStatistics() const { return m_postUsageStatistics && m_statsPostDate != QDate::currentDate(); }
+inline int Settings::textSizeInChatMessagePreviewOnTray() const { return m_textSizeInChatMessagePreviewOnTray; }
 
 #endif // BEEBEEP_SETTINGS_H

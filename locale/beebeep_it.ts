@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -810,7 +810,7 @@
     </message>
     <message>
         <source>Split subnet in Ipv4 addresses</source>
-        <translation type="vanished">Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
+        <translation type="obsolete">Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
     </message>
     <message>
         <source>Auto add from LAN</source>
@@ -1198,7 +1198,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>%1 not found in chat</source>
-        <translation type="vanished">%1 non trovato nella conversazione</translation>
+        <translation type="obsolete">%1 non trovato nella conversazione</translation>
     </message>
     <message>
         <source>%1 not found in chat.</source>
@@ -3477,6 +3477,14 @@ il file %2 (%3)?</translation>
         <source>Help me to know how many users have BeeBEEP</source>
         <translation>Aiutami a sapere quante persone usano realmente BeeBEEP</translation>
     </message>
+    <message>
+        <source>Prompts for nickname on startup</source>
+        <translation>Richiedi il nickname ad ogni connessione</translation>
+    </message>
+    <message>
+        <source>Show chat message preview</source>
+        <translation>Mostra l&apos;anteprima dei messaggi</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4059,7 +4067,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Max users to contact in a tick</source>
-        <translation type="unfinished">Numero di utenti da contattare in un tick</translation>
+        <translation>Numero di utenti da contattare in un tick</translation>
     </message>
 </context>
 <context>

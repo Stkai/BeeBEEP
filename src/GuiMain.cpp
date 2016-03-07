@@ -423,6 +423,11 @@ void GuiMain::startCore()
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
   }
+  else
+  {
+    if( Settings::instance().askNicknameAtStartup() )
+      showWizard();
+  }
 
   if( Settings::instance().askPassword() )
   {
@@ -741,6 +746,11 @@ void GuiMain::createMenus()
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
 
+  act = mp_menuSettings->addAction( tr( "Prompts for nickname on startup" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().askNicknameAtStartup() );
+  act->setData( 45 );
+
   mp_actPromptPassword = mp_menuSettings->addAction( tr( "Prompts for network password on startup" ), this, SLOT( settingsChanged() ) );
   mp_actPromptPassword->setStatusTip( tr( "If enabled the password dialog will be shown on connection startup" ) );
   mp_actPromptPassword->setCheckable( true );
@@ -1020,6 +1030,11 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showOnlyMessageNotificationOnTray()  );
   act->setData( 40 );
+
+  act = mp_menuTrayIcon->addAction( tr( "Show chat message preview" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatMessageOnTray() );
+  act->setData( 46 );
 
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actQuit );
@@ -1524,6 +1539,12 @@ void GuiMain::settingsChanged()
   case 44:
     Settings::instance().setPostUsageStatistics( act->isChecked() );
     break;
+  case 45:
+    Settings::instance().setAskNicknameAtStartup( act->isChecked() );
+    break;
+  case 46:
+    Settings::instance().setShowChatMessageOnTray( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1611,7 +1632,26 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
   if( show_message_in_tray )
   {
     User u = UserManager::instance().findUser( cm.userId() );
-    QString msg = u.isValid() ? tr( "New message from %1" ).arg( u.name() ) : tr( "New message arrived" );
+    QString msg;
+
+    if( u.isValid() )
+    {
+      if( Settings::instance().showChatMessageOnTray() )
+      {
+        QString txt = Bee::removeHtmlTags( cm.message() );
+        if( txt.size() > Settings::instance().textSizeInChatMessagePreviewOnTray() )
+        {
+          txt.truncate( Settings::instance().textSizeInChatMessagePreviewOnTray() );
+          txt.append( "..." );
+        }
+        msg = QString( "%1: %2" ).arg( u.name() ).arg( txt );
+      }
+      else
+        msg = tr( "New message from %1" ).arg( u.name() );
+    }
+    else
+      msg = tr( "New message arrived" );
+
     mp_trayIcon->showNewMessageArrived( chat_id, msg );
   }
   else

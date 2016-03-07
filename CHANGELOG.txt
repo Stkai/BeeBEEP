@@ -8,7 +8,10 @@ BeeBEEP 3.0.5
 - Added new edit option in add user manually dialog
 - Added shortcut for broadcast action
 - Fixed a bug in add user manually dialog
-- Find text in chat
+- Find text in chat (right click on chat window)
+- Fixed a bug on paste string on message edit when word completer is enabled
+- Preview of chat message can be showed on tray notification (option)
+- Nickname can be selected at each connection (option)
 
 BeeBEEP 3.0.4
 - Hive protocol added: BeeBEEPs tell each other the host address of the connected users. It can be disabled in beebeep.rc (option)

@@ -702,6 +702,7 @@ void Settings::load()
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
+  m_askNicknameAtStartup = sets->value( "AskNicknameAtStartup", false ).toBool();
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
   m_savePassword = sets->value( "SavePassword", false ).toBool();
   QString enc_pass = "";
@@ -789,6 +790,8 @@ void Settings::load()
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
   m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 3000 ).toInt(), 1000 );
+  m_showChatMessageOnTray = sets->value( "ShowChatMessageOnTray", false ).toBool();
+  m_textSizeInChatMessagePreviewOnTray = sets->value( "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
   m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
@@ -976,6 +979,7 @@ void Settings::save()
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
   sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
+  sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartup );
   sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
   if( m_savePassword )
   {
@@ -1043,6 +1047,8 @@ void Settings::save()
   sets->setValue( "ShowNotificationOnTray", m_showNotificationOnTray );
   sets->setValue( "ShowOnlyMessageNotificationOnTray", m_showOnlyMessageNotificationOnTray );
   sets->setValue( "ShowNotificationOnTrayTimeout", m_trayMessageTimeout );
+  sets->setValue( "ShowChatMessageOnTray", m_showChatMessageOnTray );
+  sets->setValue( "TextSizeInChatMessagePreviewOnTray", m_textSizeInChatMessagePreviewOnTray );
   sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );

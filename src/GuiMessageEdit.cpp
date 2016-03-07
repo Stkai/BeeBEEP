@@ -180,19 +180,13 @@ void GuiMessageEdit::completerKeyPressEvent( QKeyEvent* e )
 {
 #ifdef BEEBEEP_USE_HUNSPELL
 
-  bool is_shortcut = e->modifiers() & Qt::ControlModifier; // CTRL+
-  if( !is_shortcut ) // do not process the shortcut when we have a completer
-    QTextEdit::keyPressEvent( e );
-
-  const bool ctrl_or_shift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
-  if( ctrl_or_shift && e->text().isEmpty() )
+  if( e->modifiers() != Qt::NoModifier ) // do not process the shortcut when we have a completer
     return;
 
   static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
-  bool has_modifier = (e->modifiers() != Qt::NoModifier) && !ctrl_or_shift;
   QString completion_prefix = textUnderCursor();
 
-  if( !is_shortcut && (has_modifier || e->text().isEmpty() || completion_prefix.length() < 3 || eow.contains( e->text().right( 1 ) ) ) )
+  if( e->text().isEmpty() || completion_prefix.length() < 3 || eow.contains( e->text().right( 1 ) ) )
   {
     mp_completer->popup()->hide();
     return;
@@ -208,11 +202,8 @@ void GuiMessageEdit::completerKeyPressEvent( QKeyEvent* e )
   cursor_rect.setWidth( mp_completer->popup()->sizeHintForColumn(0) + mp_completer->popup()->verticalScrollBar()->sizeHint().width() );
   mp_completer->complete( cursor_rect );
 
-#else
-
-  QTextEdit::keyPressEvent( e );
-
 #endif
+
 }
 
 void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
@@ -286,10 +277,10 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     reset_font = true;
   }
 
+  QTextEdit::keyPressEvent( e );
+
   if( mp_completer && Settings::instance().useWordCompleter() )
     completerKeyPressEvent( e );
-  else
-    QTextEdit::keyPressEvent( e );
 
   HistoryManager::instance().clearTemporaryMessage();
 

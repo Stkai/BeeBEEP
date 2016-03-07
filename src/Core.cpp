@@ -205,6 +205,9 @@ bool Core::start()
   if( Settings::instance().checkNewVersionAtStartup() )
     QTimer::singleShot( 0, this, SLOT( checkNewVersion() ) );
 
+  if( Settings::instance().canPostUsageStatistics() )
+    QTimer::singleShot( 5000, this, SLOT( postUsageStatistics() ) );
+
   return true;
 }
 
@@ -583,7 +586,4 @@ void Core::onPostUsageStatisticsJobCompleted()
 void Core::onTickEvent( int ticks )
 {
   mp_broadcaster->onTickEvent( ticks );
-
-  if( ticks > 0 && ticks % 5 == 0 && Settings::instance().canPostUsageStatistics() )
-    QTimer::singleShot( 0, this, SLOT( postUsageStatistics() ) );
 }

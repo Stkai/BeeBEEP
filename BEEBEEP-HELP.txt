@@ -84,6 +84,7 @@ AutoAwayStatus=[true/false] set your status away when pc is in idle
 UserAwayTimeout= how many minutes your pc must be in idle to set your status in away
 UseDefaultPassword=[true/false] use default BeeBEEP password
 AskPasswordAtStartup=[true/false] show password dialog at connection to BeeBEEP network
+AskNicknameAtStartup=[true/false] show nickname dialog at connection to BeeBEEP network [3.0.5]
 MaxStatusInList=(10) maximum number of status used recently
 
 [VCard]
@@ -112,6 +113,8 @@ BeepFilePath=beep.wav
 RaiseOnNewMessageArrived=[true/false]
 LoadOnTrayAtStartup=[true/false]
 ShowNotificationOnTray=[true/false]
+ShowChatMessageOnTray=[true/false] (default=false) [3.0.5]
+TextSizeInChatMessagePreviewOnTray=[integer] (default=40) [3.0.5]
 ChatSaveDirectory=.
 ChatAutoSave=true
 ChatMaxLineSaved=3000
@@ -147,6 +150,7 @@ ShowHomeDatestamp=[true/false] (default=false) [3.0.5]
 UsePreviewFileDialog=[true/false] (default=true only in windows, in other os false) [3.0.4]
 PreviewFileDialogGeometry=(do not edit manually) [3.0.5]
 PreviewFileDialogImageSize=[integer] (default=200) [3.0.5]
+
   
 [Tools]
 LogToFile=[true/false] enable file logging
