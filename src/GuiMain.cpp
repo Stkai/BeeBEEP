@@ -1633,6 +1633,7 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
   {
     User u = UserManager::instance().findUser( cm.userId() );
     QString msg;
+    bool long_time_show = false;
 
     if( u.isValid() )
     {
@@ -1645,6 +1646,7 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
           txt.append( "..." );
         }
         msg = QString( "%1: %2" ).arg( u.name() ).arg( txt );
+        long_time_show = true;
       }
       else
         msg = tr( "New message from %1" ).arg( u.name() );
@@ -1652,7 +1654,7 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
     else
       msg = tr( "New message arrived" );
 
-    mp_trayIcon->showNewMessageArrived( chat_id, msg );
+    mp_trayIcon->showNewMessageArrived( chat_id, msg, long_time_show );
   }
   else
     mp_trayIcon->setUnreadMessages( chat_id, 0 );

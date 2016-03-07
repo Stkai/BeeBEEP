@@ -31,17 +31,17 @@ GuiSystemTray::GuiSystemTray( QObject *parent )
   setDefaultIcon();
 }
 
-void GuiSystemTray::showNewMessageArrived( VNumber chat_id, const QString& msg )
+void GuiSystemTray::showNewMessageArrived( VNumber chat_id, const QString& msg, bool lont_time )
 {
   m_chatId = chat_id;
   setMessageIcon();
-  showMessageInTray( msg );
+  showMessageInTray( msg, lont_time );
 }
 
 void GuiSystemTray::showUserStatusChanged( VNumber chat_id, const QString& msg )
 {
   m_chatId = chat_id;
-  showMessageInTray( msg );
+  showMessageInTray( msg, false );
 }
 
 void GuiSystemTray::setUnreadMessages( VNumber chat_id, int ur )
@@ -71,10 +71,20 @@ void GuiSystemTray::setMessageIcon()
   }
 }
 
-void GuiSystemTray::showMessageInTray( const QString& msg )
+void GuiSystemTray::showMessageInTray( const QString& msg, bool long_time )
 {
   if( Settings::instance().showNotificationOnTray() && Settings::instance().trayMessageTimeout() > 0 )
-    showMessage( msg, Settings::instance().programName(), QSystemTrayIcon::Information, qMax( 1000, Settings::instance().trayMessageTimeout() ) );
+  {
+    int min_time = 1000;
+    int show_time = qMax( min_time, Settings::instance().trayMessageTimeout() );
+    if( long_time )
+    {
+      min_time = 3000;
+      show_time = qMax( 5000, show_time * 2 );
+    }
+
+    showMessage( msg, Settings::instance().programName(), QSystemTrayIcon::Information, show_time );
+  }
 }
 
 void GuiSystemTray::onTickEvent( int ticks )

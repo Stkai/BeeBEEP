@@ -71,6 +71,10 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_teChat->setObjectName( "GuiChatViewer" );
   m_defaultChatPalette = mp_teChat->palette();
+  m_defaultChatPalette.setColor( QPalette::Highlight, Qt::yellow );
+  m_defaultChatPalette.setColor( QPalette::HighlightedText, Qt::black );
+  mp_teChat->setPalette( m_defaultChatPalette );
+
   mp_teChat->setFocusPolicy( Qt::ClickFocus );
   mp_teChat->setReadOnly( true );
   mp_teChat->setUndoRedoEnabled( false );
@@ -78,10 +82,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenExternalLinks( false );
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
-  QPalette p = mp_teChat->palette();
-  p.setColor( QPalette::Highlight, Qt::yellow );
-  p.setColor( QPalette::HighlightedText, Qt::black );
-  mp_teChat->setPalette( p );
+
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
@@ -1052,7 +1053,7 @@ void GuiChat::findTextInChat( const QString& txt )
       }
     }
 
-    QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found in chat." ).arg( txt ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found in chat." ).arg( QString( "\"%1\"" ).arg( txt ) ) );
   }
   else
     m_lastTextFound = txt;

@@ -36,7 +36,7 @@ public:
 
   explicit GuiSystemTray( QObject *parent = 0 );
 
-  void showNewMessageArrived( VNumber, const QString& );
+  void showNewMessageArrived( VNumber, const QString&, bool );
   void showUserStatusChanged( VNumber, const QString& );
   void setUnreadMessages( VNumber, int );
   inline VNumber chatId() const;
@@ -50,7 +50,7 @@ public slots:
   void onTickEvent( int );
 
 protected:
-  void showMessageInTray( const QString& );
+  void showMessageInTray( const QString&, bool );
 
 private:
   int m_iconStatus;
