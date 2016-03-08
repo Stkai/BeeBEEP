@@ -82,6 +82,8 @@ int main( int argc, char *argv[] )
 
   /* Enable internal logs */
   Log::installMessageHandler();
+  // Next line removes QSslSocket: cannot resolve SSL_ warnings
+  QLoggingCategory::setFilterRules( QStringLiteral( "qt.network.ssl.warning=false" ) );
 
   /* Randomize */
   Random::init();
