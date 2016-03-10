@@ -397,6 +397,8 @@ public:
 
   inline bool useNativeDialogs() const;
 
+  inline bool useLowDelayOptionOnSocket() const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
@@ -576,6 +578,7 @@ private:
   QStringList m_tempFilePathList;
 
   int m_dataStreamVersion;
+  bool m_useLowDelayOptionOnSocket;
 
   bool m_confirmOnDownloadFile;
   int m_maxSimultaneousDownloads;
@@ -880,5 +883,6 @@ inline const QDate& Settings::statsPostDate() const { return m_statsPostDate; }
 inline bool Settings::canPostUsageStatistics() const { return m_postUsageStatistics && m_statsPostDate != QDate::currentDate(); }
 inline int Settings::textSizeInChatMessagePreviewOnTray() const { return m_textSizeInChatMessagePreviewOnTray; }
 inline bool Settings::autoSearchUsersWhenListIsEmpty() const { return m_autoSearchUsersWhenListIsEmpty; }
+inline bool Settings::useLowDelayOptionOnSocket() const { return m_useLowDelayOptionOnSocket; }
 
 #endif // BEEBEEP_SETTINGS_H

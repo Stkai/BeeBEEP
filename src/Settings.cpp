@@ -852,6 +852,7 @@ void Settings::load()
   m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 3 );
   if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < 16 )
     m_tickIntervalConnectionTimeout = 16;
+  m_useLowDelayOptionOnSocket = sets->value( "©", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Network");

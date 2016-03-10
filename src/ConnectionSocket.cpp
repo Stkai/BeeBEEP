@@ -33,6 +33,8 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" ), m_latestActivityDateTime(),
     m_timerTickId( 0 ), m_tickCounter( 0 ), m_isAborted( false )
 {
+  if( Settings::instance().useLowDelayOptionOnSocket() )
+    setSocketOption( QAbstractSocket::LowDelayOption, 1 );
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
 }

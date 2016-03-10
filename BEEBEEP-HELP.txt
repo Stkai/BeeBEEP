@@ -170,6 +170,7 @@ ConnectionActivityTimeout=12000
 WritingTimeout=3000
 SystemTrayMessageTimeout=2000
 ConnectionTimeout=5000
+UseLowDelayOptionOnSocket=[true/false] Try to optimize the socket for low latency. For a QTcpSocket this would set the TCP_NODELAY option and disable Nagle's algorithm (default=false) [3.0.5]
 
 [Network]
 BroadcastAddresses=(do not edit manually)
