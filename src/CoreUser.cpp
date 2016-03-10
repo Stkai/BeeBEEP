@@ -397,7 +397,7 @@ bool Core::isUserConnected( VNumber user_id ) const
   if( user_id != ID_LOCAL_USER )
   {
     Connection* c = connection( user_id );
-    if( c )
+    if( c && c->isConnected() )
       return true;
     else
       return false;

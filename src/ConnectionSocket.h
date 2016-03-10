@@ -102,8 +102,8 @@ private:
 inline VNumber ConnectionSocket::userId() const { return m_userId; }
 inline void ConnectionSocket::setUserId( VNumber new_value ) { m_userId = new_value; }
 inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
-inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::HostLookupState && state() <= QAbstractSocket::ConnectedState; }
-inline bool ConnectionSocket::isConnecting() const { return state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState; }
+inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::ConnectedState; }
+inline bool ConnectionSocket::isConnecting() const { return isOpen() && (state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState); }
 inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { return m_latestActivityDateTime; }
 inline const QString& ConnectionSocket::hostAndPort() const { return m_hostAndPort; }
 

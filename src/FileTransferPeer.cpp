@@ -33,7 +33,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ), m_messageAuth(),
     m_time( QTime::currentTime() ), m_socketDescriptor( 0 )
 {
-  setObjectName( "FileTransferPeer ");
+  setObjectName( "FileTransferPeer" );
   qDebug() << "Peer created for transfer file";
 
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );

@@ -461,9 +461,9 @@ void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
   if( activityIdle() >= TICK_INTERVAL && bytesAvailable() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Bytes available in tick interval and read socket is forced for" << m_hostAndPort;
+    qDebug() << (int)bytesAvailable() << "bytes available in tick interval and read socket is forced for" << m_hostAndPort;
 #endif
-    readBlock();
+    QTimer::singleShot( 0, this, SLOT( readBlock() ) );
     return;
   }
 

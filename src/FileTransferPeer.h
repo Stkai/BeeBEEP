@@ -117,7 +117,7 @@ protected:
 
 
 // Inline Functions
-inline QString FileTransferPeer::name() const { return QString( "%1 Peer #%2" ).arg( isDownload() ? "Download" : "Upload " ).arg( m_id ); }
+inline QString FileTransferPeer::name() const { return QString( "%1 Peer #%2" ).arg( isDownload() ? "Download" : "Upload" ).arg( m_id ); }
 inline void FileTransferPeer::setConnectionDescriptor( int new_value ) { m_socketDescriptor = new_value; }
 inline void FileTransferPeer::setInQueue() { m_state = FileTransferPeer::Queue; }
 inline bool FileTransferPeer::isInQueue() const { return m_state == FileTransferPeer::Queue; }

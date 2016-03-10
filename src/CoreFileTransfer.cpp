@@ -226,10 +226,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
   }
 
   if( u.isLocal() )
-  {
-    qWarning() << "Unable to send file to local user";
     return false;
-  }
 
   if( !isUserConnected( u.id() ) )
   {
@@ -260,22 +257,24 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
   FileInfo fi = mp_fileTransfer->addFile( file, "" );
 
   Connection* c = connection( u.id() );
-  if( !c )
+  if( c )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2: %3 is not connected." )
-                           .arg( icon_html ).arg( fi.name() ).arg( u.name() ),
-                           DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
-    return false;
+    icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+    Message m = Protocol::instance().fileInfoToMessage( fi );
+    if( c->sendMessage( m ) )
+    {
+      qDebug() << "File Transfer: sending" << fi.path() << "to" << u.path();
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." )
+                                 .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+      return true;
+    }
   }
 
-  qDebug() << "File Transfer: sending" << fi.path() << "to" << u.path();
-  icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
-  Message m = Protocol::instance().fileInfoToMessage( fi );
-  c->sendMessage( m );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2: %3 is not connected." )
+                         .arg( icon_html ).arg( fi.name() ).arg( u.name() ),
+                         DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+  return false;
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." )
-                       .arg( icon_html, fi.name(), u.name() ), DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
-  return true;
 }
 
 void Core::cancelFileTransfer( VNumber peer_id )
