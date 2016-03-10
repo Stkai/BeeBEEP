@@ -122,6 +122,7 @@ public:
   inline int tickIntervalCheckNetwork() const;
   inline void setMaxUsersToConnectInATick( int );
   inline int maxUsersToConnectInATick() const;
+  inline bool autoSearchUsersWhenListIsEmpty() const;
 
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
@@ -466,6 +467,7 @@ private:
   int m_tickIntervalCheckIdle;
   int m_tickIntervalCheckNetwork;
   int m_maxUsersToConnectInATick;
+  bool m_autoSearchUsersWhenListIsEmpty;
 
   QDateTime m_lastSave;
   bool m_logToFile;
@@ -877,5 +879,6 @@ inline void Settings::setStatsPostDate( const QDate& new_value ) { m_statsPostDa
 inline const QDate& Settings::statsPostDate() const { return m_statsPostDate; }
 inline bool Settings::canPostUsageStatistics() const { return m_postUsageStatistics && m_statsPostDate != QDate::currentDate(); }
 inline int Settings::textSizeInChatMessagePreviewOnTray() const { return m_textSizeInChatMessagePreviewOnTray; }
+inline bool Settings::autoSearchUsersWhenListIsEmpty() const { return m_autoSearchUsersWhenListIsEmpty; }
 
 #endif // BEEBEEP_SETTINGS_H

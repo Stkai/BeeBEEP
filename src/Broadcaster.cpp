@@ -109,6 +109,8 @@ void Broadcaster::sendBroadcastDatagram()
     m_contactedAddresses.clear();
   }
 
+  updateAddresses();
+
   if( sendDatagramToHost( m_baseBroadcastAddress ) )
     qDebug() << "Broadcaster has contacted default network:" << qPrintable( m_baseBroadcastAddress.toString() );
   else
@@ -128,7 +130,8 @@ void Broadcaster::sendBroadcastDatagram()
 
   }
 
-  qDebug() << "Broadcaster has contacted" << m_contactedAddresses.size() << "external networks:" << qPrintable( sl_host_address.join( ", " ) );
+  if( m_contactedAddresses.size() > 1 )
+    qDebug() << "Broadcaster has contacted" << (int)(m_contactedAddresses.size()-1) << "external networks";
 
   if( !m_contactedAddresses.isEmpty() )
     QTimer::singleShot( Settings::instance().broadcastLoopbackInterval(), this, SLOT( checkLoopback() ) );
@@ -220,9 +223,8 @@ void Broadcaster::readBroadcastDatagram()
 
 int Broadcaster::updateAddresses()
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Broadcaster updates the network addresses";
-#endif
+  qDebug() << "Broadcaster updates the network addresses to search users";
+
   m_broadcastAddresses.clear();
   m_ipAddresses.clear();
   QHostAddress ha_broadcast;
@@ -245,7 +247,15 @@ int Broadcaster::updateAddresses()
     }
   }
 
-  if( !Settings::instance().broadcastOnlyToHostsIni() && !Settings::instance().broadcastAddressesInSettings().isEmpty() )
+  if( Settings::instance().broadcastOnlyToHostsIni() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcast only to hosts in INI file option enabled";
+#endif
+    return m_broadcastAddresses.size();
+  }
+
+  if( !Settings::instance().broadcastAddressesInSettings().isEmpty() )
   {
     foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
     {
@@ -254,19 +264,28 @@ int Broadcaster::updateAddresses()
     }
   }
 
-  if( !Settings::instance().broadcastOnlyToHostsIni() )
+  if( !Settings::instance().userPathList().isEmpty() )
   {
-    QList<NetworkEntry> available_broadcast_entries = NetworkManager::instance().availableNetworkEntries();
-
-    foreach( NetworkEntry available_broadcast_entry, available_broadcast_entries )
+    UserRecord ur;
+    foreach( QString user_path, Settings::instance().userPathList() )
     {
-      addAddressToList( available_broadcast_entry.broadcast() );
+      ur = Protocol::instance().loadUserRecord( user_path );
+      if( ur.isValid() )
+        addPeerAddress( NetworkAddress( ur.hostAddress(), ur.hostPort() ) );
+      else
+        qWarning() << "Broadcaster has found an invalid host address in settings:" << user_path;
+    }
+  }
 
-      if( !m_ipAddresses.contains( available_broadcast_entry.hostAddress() ) )
-      {
-        m_ipAddresses.append( available_broadcast_entry.hostAddress() );
-        qDebug() << "Broadcaster adds" << qPrintable( available_broadcast_entry.hostAddress().toString() ) << "to local IP list";
-      }
+  QList<NetworkEntry> available_broadcast_entries = NetworkManager::instance().availableNetworkEntries();
+  foreach( NetworkEntry available_broadcast_entry, available_broadcast_entries )
+  {
+    addAddressToList( available_broadcast_entry.broadcast() );
+
+    if( !m_ipAddresses.contains( available_broadcast_entry.hostAddress() ) )
+    {
+      m_ipAddresses.append( available_broadcast_entry.hostAddress() );
+      qDebug() << "Broadcaster adds" << qPrintable( available_broadcast_entry.hostAddress().toString() ) << "to local IP list";
     }
   }
 

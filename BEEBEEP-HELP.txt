@@ -151,7 +151,7 @@ UsePreviewFileDialog=[true/false] (default=true only in windows, in other os fal
 PreviewFileDialogGeometry=(do not edit manually) [3.0.5]
 PreviewFileDialogImageSize=[integer] (default=200) [3.0.5]
 
-  
+
 [Tools]
 LogToFile=[true/false] enable file logging
 UseSpellChecker=[true/false] enable spell checking on writing message
@@ -181,7 +181,7 @@ UserPathList= users saved (do not edit manually)
 AcceptConnectionsOnlyFromWorkgroups=[true/false] accepts connection only from members of your workgroups
 Workgroups = workgroups saved (do not edit manually)
 UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (overwrite RC option)
-
+AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users when there aren't users connected (default=true) [3.0.5]
 [FileShare]
 Active=[true/false]
 SetAutomaticFileName=[true/false] on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it

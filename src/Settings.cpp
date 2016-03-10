@@ -105,7 +105,7 @@ Settings::Settings()
   m_acceptConnectionsOnlyFromWorkgroups = false;
   m_maxUserStatusDescriptionInList = 10;
 
-  m_tickIntervalConnectionTimeout = 6;
+  m_tickIntervalConnectionTimeout = 16;
   m_useReturnToSendMessage = true;
   m_tickIntervalCheckIdle = 10;
   m_tickIntervalCheckNetwork = 5;
@@ -850,6 +850,8 @@ void Settings::load()
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
   m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 3 );
+  if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < 16 )
+    m_tickIntervalConnectionTimeout = 16;
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -870,6 +872,7 @@ void Settings::load()
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
   m_maxUsersToConnectInATick = sets->value( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick ).toInt();
+  m_autoSearchUsersWhenListIsEmpty = sets->value( "AutoSearchUsersWhenListIsEmpty", true ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1119,6 +1122,7 @@ void Settings::save()
   sets->setValue( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups );
   sets->setValue( "Workgroups", m_workgroups );
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
+  sets->setValue( "AutoSearchUsersWhenListIsEmpty", m_autoSearchUsersWhenListIsEmpty );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -408,7 +408,7 @@
     </message>
     <message>
         <source>%1 %2 will search users in these IP addresses: %3</source>
-        <translation>%1 %2 cercherà gli utenti connessi a questi indirizzi IP: %3</translation>
+        <translation type="vanished">%1 %2 cercherà gli utenti connessi a questi indirizzi IP: %3</translation>
     </message>
     <message>
         <source>%1 Contacting %2 host addresses previously saved...</source>

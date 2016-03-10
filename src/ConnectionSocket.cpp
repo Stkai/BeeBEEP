@@ -123,6 +123,15 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
 void ConnectionSocket::readBlock()
 {
   m_latestActivityDateTime = QDateTime::currentDateTime();
+
+  if( bytesAvailable() == 0 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ConnectionSocket from" << m_hostAndPort << "is empty... wait for more bytes";
+#endif
+    return;
+  }
+
   // QByteArray
   // If the byte array is null: 0xFFFFFFFF (quint32)
   // Otherwise: the array size (quint32) followed by the array bytes, i.e. size bytes
@@ -143,7 +152,12 @@ void ConnectionSocket::readBlock()
     if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
       if( bytesAvailable() < (int)sizeof(DATA_BLOCK_SIZE_32))
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytesAvailable() << "bytes... wait for more";
+#endif
         return;
+      }
       DATA_BLOCK_SIZE_32 block_size_32;
       data_stream >> block_size_32;
       m_blockSize = block_size_32 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format
@@ -151,7 +165,12 @@ void ConnectionSocket::readBlock()
     else
     {
       if( bytesAvailable() < (int)sizeof(DATA_BLOCK_SIZE_16))
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytesAvailable() << "bytes... wait for more";
+#endif
         return;
+      }
       DATA_BLOCK_SIZE_16 block_size_16;
       data_stream >> block_size_16;
       m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format
@@ -390,7 +409,7 @@ void ConnectionSocket::checkConnectionTimeout( int ticks )
     return;
 
   stopTimerTick();
-  qDebug() << "Connection timeout for" << m_hostAndPort;
+  qDebug() << "Connection timeout for" << qPrintable( m_hostAndPort ) << ":" << ticks << "ticks";
   disconnectFromHost();
   emit disconnected();
 }

@@ -36,7 +36,6 @@ public:
   explicit Broadcaster( QObject* );
   bool startBroadcasting();
   void stopBroadcasting();
-  int updateAddresses();
 
   inline const QList<QHostAddress> contactedAddress() const;
 
@@ -61,6 +60,7 @@ protected:
   bool addAddressToList( const QHostAddress& );
   bool isLocalHostAddress( const QHostAddress& );
   void addPeerAddress( const NetworkAddress& );
+  int updateAddresses();
 
 private:
   QHostAddress m_baseBroadcastAddress;

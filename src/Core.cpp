@@ -283,19 +283,6 @@ void Core::stop()
   qDebug() << "Core closed";
 }
 
-bool Core::updateBroadcastAddresses()
-{
-  if( mp_broadcaster->updateAddresses() > 0 )
-  {
-    QString sHtmlMsg = tr( "%1 %2 will search users in these IP addresses: %3" )
-                .arg( Bee::iconToHtml( ":/images/search-users.png", "*B*" ), Settings::instance().programName(),
-                      Settings::instance().broadcastAddressesInSettings().join( ", " ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::Connection );
-    return true;
-  }
-  else
-    return false;
-}
 
 void Core::sendMulticastingMessage()
 {
@@ -335,8 +322,7 @@ void Core::sendBroadcastMessage()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
                                                                             Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
-    mp_broadcaster->sendBroadcastDatagram();
-    QTimer::singleShot( 500, this, SLOT( sendHelloToHostsInSettings() ) );
+    QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcastDatagram() ) );
   }
   else
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -401,7 +387,6 @@ void Core::checkUserHostAddress( const User& u )
                            .arg( tr( "is connected from external network (the new subnet is added to your broadcast address list)." ) );
 
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::Connection );
-    updateBroadcastAddresses();
   }
 }
 
@@ -416,29 +401,7 @@ void Core::sendHelloToHostsInSettings()
                          .arg( Settings::instance().userPathList().size() ),
                          DispatchToChat, ChatMessage::Connection );
 
-  UserRecord ur;
-  User u;
-  int user_contacted = 0;
-  foreach( QString user_path, Settings::instance().userPathList() )
-  {
-    ur = Protocol::instance().loadUserRecord( user_path );
-    if( ur.isValid() )
-    {
-      u = UserManager::instance().findUserByHostAddressAndPort( ur.hostAddress(), ur.hostPort() );
-      if( !u.isValid() || !isUserConnected( u.id() ) )
-      {
-    #ifdef BEEBEEP_DEBUG
-        qDebug() << "Contacting manually added host" << ur.hostAddress().toString() << ur.hostPort();
-    #endif
-        mp_broadcaster->addPeerAddressToContact( ur.hostAddress(), ur.hostPort() );
-        user_contacted++;
-      }
-    }
-    else
-      qWarning() << "Invalid host address found in settings:" << user_path;
-  }
-
-  qDebug() << user_contacted << "hosts manually added contacted";
+  QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcastDatagram() ) );
 }
 
 int Core::fileTransferPort() const
@@ -586,4 +549,12 @@ void Core::onPostUsageStatisticsJobCompleted()
 void Core::onTickEvent( int ticks )
 {
   mp_broadcaster->onTickEvent( ticks );
+
+  if( ticks % 10 == 0 && isConnected() && Settings::instance().autoSearchUsersWhenListIsEmpty() && connectedUsers() == 0 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Auto search for users is enabled. It's time to check...";
+#endif
+    QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcastDatagram() ) );
+  }
 }

@@ -53,7 +53,6 @@ public:
   bool dnsMulticastingIsActive() const;
 #endif
 
-  bool updateBroadcastAddresses();
   int fileTransferPort() const;
 
   bool checkSavingPaths();

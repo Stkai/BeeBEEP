@@ -1741,14 +1741,12 @@ void GuiMain::searchUsers()
     mp_core->stopDnsMulticasting();
 #endif
 
-  if( mp_core->updateBroadcastAddresses() )
-    mp_core->sendBroadcastMessage();
-
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
     qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
 
   mp_core->checkBroadcastInterval();
 
+  QTimer::singleShot( 0, mp_core, SLOT( sendBroadcastMessage() ) );
 }
 
 void GuiMain::showWritingUser( const User& u )
@@ -3168,9 +3166,7 @@ void GuiMain::showAddUser()
   gad.show();
   gad.setFixedSize( gad.size() );
   if( gad.exec() == QDialog::Accepted )
-  {
     mp_core->sendHelloToHostsInSettings();
-  }
 }
 
 void GuiMain::showChatSettingsMenu()
