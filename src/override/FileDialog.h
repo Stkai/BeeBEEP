@@ -36,11 +36,11 @@ public:
                                   const QString& dir = QString(), const QString& filter = QString(),
                                   QString* selectedFilter = 0 );
 
-  static QString getOpenFileName( QWidget* parent = 0, const QString& caption = QString(),
+  static QString getOpenFileName( bool with_image_preview, QWidget* parent = 0, const QString& caption = QString(),
                                        const QString& dir = QString(), const QString& filter = QString(),
                                        QString* selectedFilter = 0 );
 
-  static QStringList getOpenFileNames( QWidget* parent = 0, const QString& caption = QString(),
+  static QStringList getOpenFileNames( bool with_image_preview, QWidget* parent = 0, const QString& caption = QString(),
                                        const QString& dir = QString(), const QString& filter = QString(),
                                        QString* selectedFilter = 0 );
 

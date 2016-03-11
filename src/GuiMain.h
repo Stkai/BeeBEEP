@@ -168,6 +168,7 @@ private slots:
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
   void onChatReadByUser( VNumber chat_id, VNumber user_id );
+  void saveGeometryAndState();
 
 protected:
   void keyPressEvent( QKeyEvent* );

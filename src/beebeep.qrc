@@ -141,5 +141,6 @@
         <file>images/spellchecker.png</file>
         <file>images/key-return.png</file>
         <file>images/printer.png</file>
+        <file>images/file-transfer-progress.png</file>
     </qresource>
 </RCC>

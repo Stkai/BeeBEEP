@@ -54,6 +54,7 @@ public:
 #endif
 
   int fileTransferPort() const;
+  inline bool hasFileTransferInProgress() const;
 
   bool checkSavingPaths();
   void checkBroadcastInterval();
@@ -234,5 +235,6 @@ private:
 
 // Inline Functions
 inline int Core::connectedUsers() const { return m_connections.size(); }
+inline bool Core::hasFileTransferInProgress() const { return mp_fileTransfer->hasActivePeers(); }
 
 #endif // BEEBEEP_CLIENT_H

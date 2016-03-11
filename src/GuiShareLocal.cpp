@@ -116,7 +116,7 @@ void GuiShareLocal::setActionsEnabled( bool enable )
 
 void GuiShareLocal::addFilePath()
 {
-  QStringList file_path_list = FileDialog::getOpenFileNames( this, tr( "Select a file to share" ),
+  QStringList file_path_list = FileDialog::getOpenFileNames( true, this, tr( "Select a file to share" ),
                                                      Settings::instance().lastDirectorySelected() );
   if( file_path_list.isEmpty() )
     return;

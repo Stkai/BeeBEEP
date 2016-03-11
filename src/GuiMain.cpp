@@ -350,12 +350,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->close();
 
-  if( isVisible() )
-  {
-    Settings::instance().setGuiGeometry( saveGeometry() );
-    Settings::instance().setGuiState( saveState() );
-    Settings::instance().setChatSplitterState( mp_chat->chatSplitter()->saveState() );
-  }
+  saveGeometryAndState();
 
   mp_trayIcon->hide();
 
@@ -420,8 +415,7 @@ void GuiMain::startCore()
     /* Save geometry for the first time */
     /* If the user closes the application when it is not visible
      * there are problems in saving state and geometry */
-    Settings::instance().setGuiGeometry( saveGeometry() );
-    Settings::instance().setGuiState( saveState() );
+    saveGeometryAndState();
   }
   else
   {
@@ -925,6 +919,8 @@ void GuiMain::createMenus()
 
   /* View Menu */
   mp_menuView = new QMenu( tr( "View" ), this );
+  mp_menuView->addAction( QIcon( ":/images/save-window.png" ), tr( "Save main window geometry" ), this, SLOT( saveGeometryAndState() ) );
+  mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actToolBar );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewUsers );
@@ -1724,8 +1720,9 @@ void GuiMain::searchUsers()
   GuiSearchUser gsu( this );
   gsu.setModal( true );
   gsu.loadSettings();
+  gsu.setSizeGripEnabled( true );
   gsu.show();
-  //gsu.setFixedSize( gsu.size() );
+
   if( gsu.exec() != QDialog::Accepted )
     return;
 
@@ -1854,7 +1851,7 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
   QStringList files_path_selected;
   if( file_path.isEmpty() || !QFile::exists( file_path ) )
   {
-    files_path_selected = FileDialog::getOpenFileNames( activeChatWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
+    files_path_selected = FileDialog::getOpenFileNames( true, activeChatWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
                                                        Settings::instance().lastDirectorySelected() );
     if( files_path_selected.isEmpty() )
       return files_path_selected;
@@ -2205,8 +2202,9 @@ void GuiMain::changeVCard()
   GuiEditVCard gvc( this );
   gvc.setModal( true );
   gvc.setUser( Settings::instance().localUser() );
+  gvc.setSizeGripEnabled( true );
   gvc.show();
-  gvc.setFixedSize( gvc.size() );
+
   if( gvc.exec() == QDialog::Accepted )
   {
     if( mp_core->setLocalUserVCard( gvc.userColor(), gvc.vCard() ) )
@@ -2549,7 +2547,7 @@ void GuiMain::openUrl( const QUrl& file_url )
 
 void GuiMain::selectBeepFile()
 {
-  QString file_path = FileDialog::getOpenFileName( this, Settings::instance().programName(), Settings::instance().beepFilePath(), tr( "Sound files (*.wav)" ) );
+  QString file_path = FileDialog::getOpenFileName( false, this, Settings::instance().programName(), Settings::instance().beepFilePath(), tr( "Sound files (*.wav)" ) );
   if( file_path.isNull() || file_path.isEmpty() )
     return;
 
@@ -3115,8 +3113,9 @@ void GuiMain::selectLanguage()
   GuiLanguage gl( this );
   gl.setModal( true );
   gl.loadLanguages();
+  gl.setSizeGripEnabled( true );
   gl.show();
-  gl.setFixedSize( gl.size() );
+
   if( gl.exec() == QDialog::Rejected )
     return;
 
@@ -3163,8 +3162,9 @@ void GuiMain::showAddUser()
   GuiAddUser gad( this );
   gad.loadUsers();
   gad.setModal( true );
+  gad.setSizeGripEnabled( true );
   gad.show();
-  gad.setFixedSize( gad.size() );
+
   if( gad.exec() == QDialog::Accepted )
     mp_core->sendHelloToHostsInSettings();
 }
@@ -3540,8 +3540,9 @@ void GuiMain::editShortcuts()
   GuiShortcut gs( this );
   gs.setModal( true );
   gs.loadShortcuts();
+  gs.setSizeGripEnabled( true );
   gs.show();
-  gs.setFixedSize( gs.size() );
+
   if( gs.exec() == QDialog::Rejected )
     return;
 
@@ -3637,7 +3638,7 @@ void GuiMain::minimizeAllChats()
 
 void GuiMain::selectDictionatyPath()
 {
-  QString dictionary_path = FileDialog::getOpenFileName( this, tr( "Select your dictionary path" ), Settings::instance().dictionaryPath(), QString( "*.dic" ) );
+  QString dictionary_path = FileDialog::getOpenFileName( false, this, tr( "Select your dictionary path" ), Settings::instance().dictionaryPath(), QString( "*.dic" ) );
 
   if( dictionary_path.isEmpty() )
     return;
@@ -3694,6 +3695,10 @@ void GuiMain::onTickEvent( int ticks )
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
   mp_core->onTickEvent( ticks );
+
+  if( mp_core->hasFileTransferInProgress() )
+    mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? QIcon( ":/images/file-transfer-progress.png" ) : QIcon( ":/images/file-transfer.png" ) );
+
 }
 
 void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )
@@ -3781,4 +3786,26 @@ QList<GuiChat*> GuiMain::guiChatList() const
   }
 
   return gui_chat_list;
+}
+
+void GuiMain::saveGeometryAndState()
+{
+  bool save_settings = false;
+  if( isVisible() )
+  {
+    qDebug() << "Main window geometry and state saved";
+    Settings::instance().setGuiGeometry( saveGeometry() );
+    Settings::instance().setGuiState( saveState() );
+    save_settings = true;
+  }
+
+  if( mp_chat->isVisible() )
+  {
+    qDebug() << "Main chat window splitter state saved";
+    Settings::instance().setChatSplitterState( mp_chat->chatSplitter()->saveState() );
+    save_settings = true;
+  }
+
+  if( save_settings )
+    Settings::instance().save();
 }

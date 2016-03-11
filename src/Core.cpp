@@ -548,13 +548,13 @@ void Core::onPostUsageStatisticsJobCompleted()
 
 void Core::onTickEvent( int ticks )
 {
-  mp_broadcaster->onTickEvent( ticks );
-
-  if( ticks % 10 == 0 && isConnected() && Settings::instance().autoSearchUsersWhenListIsEmpty() && connectedUsers() == 0 )
+  if( ticks % 15 == 0 && isConnected() && Settings::instance().autoSearchUsersWhenListIsEmpty() && connectedUsers() == 0 )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Auto search for users is enabled. It's time to check...";
+    qDebug() << "Auto search for users is enabled. It's time to check..." << ticks;
 #endif
     QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcastDatagram() ) );
   }
+  else
+    mp_broadcaster->onTickEvent( ticks );
 }

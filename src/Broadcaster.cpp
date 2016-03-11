@@ -92,6 +92,8 @@ void Broadcaster::stopBroadcasting()
 
   enableBroadcastTimer( false );
 
+  m_peerAddressesToContact.clear();
+
   m_broadcastSocket.close();
 }
 

@@ -35,7 +35,7 @@ PreviewFileDialog::PreviewFileDialog( QWidget* parent, const QString& caption, c
   mp_preview = new QLabel( this );
   mp_preview->setAlignment( Qt::AlignCenter );
   mp_preview->setObjectName( "LabelPreview" );
-  mp_preview->setMinimumWidth( Settings::instance().previewFileDialogImageSize() );
+  mp_preview->setMinimumWidth( qMax( 100, Settings::instance().previewFileDialogImageSize() ) );
   mp_preview->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
   m_defaultPixmap = Bee::convertToGrayScale( QIcon( ":images/beebeep.png" ).pixmap( Settings::instance().previewFileDialogImageSize(), Settings::instance().previewFileDialogImageSize() ) );
   setPixmapInPreview( m_defaultPixmap );

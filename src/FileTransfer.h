@@ -41,6 +41,8 @@ public:
   bool startListener();
   void stopListener();
 
+  inline bool hasActivePeers() const;
+
   FileInfo addFile( const QFileInfo&, const QString& );
   void addFileInfoList( const QList<FileInfo>& );
   void removeFile( const QFileInfo& );
@@ -86,6 +88,6 @@ private:
 
 // Inline Functions
 inline void FileTransfer::clearFiles() { m_files.clear(); }
-
+inline bool FileTransfer::hasActivePeers() const { return !m_peers.isEmpty(); }
 
 #endif // BEEBEEP_FILETRANSFERSERVER_H

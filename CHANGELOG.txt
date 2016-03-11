@@ -12,6 +12,8 @@ BeeBEEP 3.0.5
 - Fixed a bug on paste string on message edit when word completer is enabled
 - Preview of chat message can be showed on tray notification (option)
 - Nickname can be selected at each connection (option)
+- Added save main window geometry option in view menu
+- Auto search for new users every 15 seconds if the connected user list is empty
 
 BeeBEEP 3.0.4
 - Hive protocol added: BeeBEEPs tell each other the host address of the connected users. It can be disabled in beebeep.rc (option)

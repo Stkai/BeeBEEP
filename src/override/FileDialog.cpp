@@ -43,13 +43,13 @@ QString FileDialog::getSaveFileName( QWidget* parent, const QString& caption, co
     return QFileDialog::getSaveFileName( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog );
 }
 
-QString FileDialog::getOpenFileName( QWidget* parent, const QString& caption, const QString& dir,
-                                     const QString& filter, QString* selectedFilter )
+QString FileDialog::getOpenFileName( bool with_image_preview, QWidget* parent, const QString& caption,
+                                     const QString& dir, const QString& filter, QString* selectedFilter )
 {
   if( Settings::instance().useNativeDialogs() )
     return QFileDialog::getOpenFileName( parent, caption, dir, filter, selectedFilter );
 
-  if( Settings::instance().usePreviewFileDialog() )
+  if( with_image_preview && Settings::instance().usePreviewFileDialog() )
   {
     PreviewFileDialog pfd( parent, caption, dir, filter );
     pfd.setAcceptMode( QFileDialog::AcceptOpen );
@@ -57,6 +57,7 @@ QString FileDialog::getOpenFileName( QWidget* parent, const QString& caption, co
     pfd.show();
     if( !Settings::instance().previewFileDialogGeometry().isEmpty() )
       pfd.restoreGeometry( Settings::instance().previewFileDialogGeometry() );
+
     if( pfd.exec() == QFileDialog::Accepted )
     {
       QStringList sl = pfd.selectedFiles();
@@ -70,13 +71,13 @@ QString FileDialog::getOpenFileName( QWidget* parent, const QString& caption, co
     return QFileDialog::getOpenFileName( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog );
 }
 
-QStringList FileDialog::getOpenFileNames( QWidget* parent, const QString& caption, const QString& dir,
-                                          const QString& filter, QString* selectedFilter )
+QStringList FileDialog::getOpenFileNames( bool with_image_preview, QWidget* parent, const QString& caption,
+                                          const QString& dir, const QString& filter, QString* selectedFilter )
 {
   if( Settings::instance().useNativeDialogs() )
     return QFileDialog::getOpenFileNames( parent, caption, dir, filter, selectedFilter );
 
-  if( Settings::instance().usePreviewFileDialog() )
+  if( with_image_preview && Settings::instance().usePreviewFileDialog() )
   {
     PreviewFileDialog pfd( parent, caption, dir, filter );
     pfd.setAcceptMode( QFileDialog::AcceptOpen );

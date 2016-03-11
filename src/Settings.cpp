@@ -756,6 +756,7 @@ void Settings::load()
     m_floatingChatSplitterState = "";
     m_mainBarIconSize = QSize( 24, 24 );
     m_avatarIconSize = QSize( 32, 32 );
+    m_previewFileDialogGeometry = "";
   }
   else
   {
@@ -767,7 +768,9 @@ void Settings::load()
     m_floatingChatSplitterState = sets->value( "FloatingChatSplitterState", "" ).toByteArray();
     m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
     m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
+    m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
   }
+
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
@@ -820,10 +823,6 @@ void Settings::load()
   m_homeShowMessageTimestamp = sets->value( "ShowHomeTimestamp", true ).toBool();
   m_homeShowMessageDatestamp = sets->value( "ShowHomeDatestamp", false ).toBool();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
-  if( m_resetGeometryAtStartup )
-    m_previewFileDialogGeometry = "";
-  else
-    m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
   m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
   sets->endGroup();
 
