@@ -111,6 +111,7 @@ private slots:
   void clearChat();
   void leaveThisGroup();
   void sendFile();
+  void sendFolder();
   void showUserVCard();
   void showMembersMenu();
   void showLocalUserVCard();
@@ -148,6 +149,7 @@ private:
   QAction* mp_actUseReturnToSendMessage;
   QAction* mp_actPrint;
   QAction* mp_actFindTextInChat;
+  QAction* mp_actSendFolder;
 
   QMenu* mp_menuMembers;
   QSplitter* mp_splitter;

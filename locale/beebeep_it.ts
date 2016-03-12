@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1203,6 +1203,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>%1 not found in chat.</source>
         <translation>%1 non trovato nella conversazione.</translation>
+    </message>
+    <message>
+        <source>Send folder</source>
+        <translation>Invia una cartella</translation>
     </message>
 </context>
 <context>

@@ -26,6 +26,7 @@
 #include "Settings.h"
 
 #undef CONNECTION_SOCKET_IO_DEBUG
+#undef CONNECTION_SOCKET_IO_DEBUG_VERBOSE
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
@@ -125,8 +126,9 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
 void ConnectionSocket::readBlock()
 {
   m_latestActivityDateTime = QDateTime::currentDateTime();
+  qint64 bytes_available = bytesAvailable();
 
-  if( bytesAvailable() == 0 )
+  if( bytes_available == 0 )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket from" << m_hostAndPort << "is empty... wait for more bytes";
@@ -153,10 +155,10 @@ void ConnectionSocket::readBlock()
   {
     if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
-      if( bytesAvailable() < (int)sizeof(DATA_BLOCK_SIZE_32))
+      if( bytes_available < (int)sizeof(DATA_BLOCK_SIZE_32))
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytesAvailable() << "bytes... wait for more";
+        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytes_available << "bytes... wait for more";
 #endif
         return;
       }
@@ -166,16 +168,16 @@ void ConnectionSocket::readBlock()
     }
     else
     {
-      if( bytesAvailable() < (int)sizeof(DATA_BLOCK_SIZE_16))
+      if( bytes_available < (int)sizeof(DATA_BLOCK_SIZE_16))
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytesAvailable() << "bytes... wait for more";
+        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytes_available << "bytes... wait for more";
 #endif
         return;
       }
       DATA_BLOCK_SIZE_16 block_size_16;
       data_stream >> block_size_16;
-      m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format
+      m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_16); // bytearray serialize format
     }
   }
 
@@ -183,8 +185,13 @@ void ConnectionSocket::readBlock()
   qDebug() << "ConnectionSocket read from" << m_hostAndPort << "the block size:" << m_blockSize;
 #endif
 
-  if( bytesAvailable() < m_blockSize )
+  if( bytes_available < m_blockSize )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytes_available << "bytes... wait for more" << m_blockSize;
+#endif
     return;
+  }
 
   QByteArray byte_array_read;
   data_stream >> byte_array_read;
@@ -199,7 +206,7 @@ void ConnectionSocket::readBlock()
 
   QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey() );
 
-#if defined( CONNECTION_SOCKET_IO_DEBUG )
+#if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket read from" << m_hostAndPort << "the byte array:" << decrypted_byte_array;
 #endif
 
@@ -270,8 +277,8 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
 {
-#if defined( CONNECTION_SOCKET_IO_DEBUG )
-  qDebug() << "ConnectionSocket sends to" << m_hostAndPort << "the following data:" << byte_array;
+#if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
+  qDebug() << "ConnectionSocket is sending to" << m_hostAndPort << "the following data:" << byte_array;
 #endif
 
   QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey() );

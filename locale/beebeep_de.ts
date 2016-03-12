@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -892,7 +892,7 @@
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="163"/>
-        <location filename="../src/GuiChat.cpp" line="1018"/>
+        <location filename="../src/GuiChat.cpp" line="1033"/>
         <source>Find text in chat</source>
         <translation type="unfinished"></translation>
     </message>
@@ -908,208 +908,213 @@
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="166"/>
+        <source>Send folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GuiChat.cpp" line="167"/>
         <source>Save chat</source>
         <translation>Chat speichern</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="167"/>
+        <location filename="../src/GuiChat.cpp" line="168"/>
         <source>Save the messages of the current chat to a file</source>
         <translation>Speicher die Nachrichten des aktuellen Chats in eine Datei</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="168"/>
+        <location filename="../src/GuiChat.cpp" line="169"/>
         <source>Print...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="177"/>
+        <location filename="../src/GuiChat.cpp" line="178"/>
         <source>Change the name of the group or add and remove users</source>
         <translation>Ändere den Gruppennamen oder füge einen Benutzer hinzu oder entferne einen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="388"/>
+        <location filename="../src/GuiChat.cpp" line="393"/>
         <source>unread messages</source>
         <translation>Ungelesene Nachrichten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="909"/>
+        <location filename="../src/GuiChat.cpp" line="924"/>
         <source>Spell checking is enabled</source>
         <translation>Rechtschreibprüfung ist aktiviert</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="916"/>
-        <location filename="../src/GuiChat.cpp" line="940"/>
+        <location filename="../src/GuiChat.cpp" line="931"/>
+        <location filename="../src/GuiChat.cpp" line="955"/>
         <source>There is not a valid dictionary</source>
         <translation>Dies ist kein gültiges Wörterbuch</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="933"/>
+        <location filename="../src/GuiChat.cpp" line="948"/>
         <source>Word completer is enabled</source>
         <translation>Autovervollständigung ist aktiviert</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="935"/>
+        <location filename="../src/GuiChat.cpp" line="950"/>
         <source>Word completer is disabled</source>
         <translation>Autovervollständigung ist deaktiviert</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="1056"/>
+        <location filename="../src/GuiChat.cpp" line="1071"/>
         <source>%1 not found in chat.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="911"/>
+        <location filename="../src/GuiChat.cpp" line="926"/>
         <source>Spell checking is disabled</source>
         <translation>Rechtschreibprüfung ist deaktiviert</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="170"/>
+        <location filename="../src/GuiChat.cpp" line="171"/>
         <source>Clear messages</source>
         <translation>Nachrichten löschen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="171"/>
+        <location filename="../src/GuiChat.cpp" line="172"/>
         <source>Clear all the messages of the chat</source>
         <translation>Kompletten Chatverlauf löschen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="174"/>
+        <location filename="../src/GuiChat.cpp" line="175"/>
         <source>Create group from chat</source>
         <translation>Gruppe aus Chat erstellen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="175"/>
+        <location filename="../src/GuiChat.cpp" line="176"/>
         <source>Create a group from this chat</source>
         <translation>Gruppe aus diesem Chat erstellen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="178"/>
         <location filename="../src/GuiChat.cpp" line="179"/>
+        <location filename="../src/GuiChat.cpp" line="180"/>
         <source>Leave the group</source>
         <translation>Gruppe verlassen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="206"/>
+        <location filename="../src/GuiChat.cpp" line="208"/>
         <source>Copy to clipboard</source>
         <translation>In Zwischenablage kopieren</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="208"/>
+        <location filename="../src/GuiChat.cpp" line="210"/>
         <source>Select All</source>
         <translation>Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="232"/>
+        <location filename="../src/GuiChat.cpp" line="237"/>
         <source>Show only messages in default chat</source>
         <translation>Zeige Nachrichten nur im Standard Chat</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="272"/>
+        <location filename="../src/GuiChat.cpp" line="277"/>
         <source>Last message %1</source>
         <translation>Letzte Nachricht %1</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="368"/>
+        <location filename="../src/GuiChat.cpp" line="373"/>
         <source>All Lan Users</source>
         <translation>Alle LAN Benutzer</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="384"/>
+        <location filename="../src/GuiChat.cpp" line="389"/>
         <source>You</source>
         <translation>Du</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="176"/>
+        <location filename="../src/GuiChat.cpp" line="177"/>
         <source>Edit group</source>
         <translation>Gruppe bearbeiten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="410"/>
+        <location filename="../src/GuiChat.cpp" line="415"/>
         <source>offline</source>
         <translation>offline</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="418"/>
+        <location filename="../src/GuiChat.cpp" line="423"/>
         <source>Show profile</source>
         <translation>Profil anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="428"/>
+        <location filename="../src/GuiChat.cpp" line="433"/>
         <source>Show members</source>
         <translation>Mitglieder anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="432"/>
+        <location filename="../src/GuiChat.cpp" line="437"/>
         <source>Nobody</source>
         <translation>Niemand</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="432"/>
+        <location filename="../src/GuiChat.cpp" line="437"/>
         <source>and</source>
         <translation>und</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="510"/>
+        <location filename="../src/GuiChat.cpp" line="515"/>
         <source>last %1 messages</source>
         <translation>letzte %1 Nachrichten</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="676"/>
+        <location filename="../src/GuiChat.cpp" line="681"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Bitte wähle eine Datei um die Chatnachrichten zu speichern.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="690"/>
+        <location filename="../src/GuiChat.cpp" line="695"/>
         <source>%1: save completed.</source>
         <translation>%1: speichern abgeschlossen.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="690"/>
+        <location filename="../src/GuiChat.cpp" line="695"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="731"/>
+        <location filename="../src/GuiChat.cpp" line="746"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Datei %1 konnte temporär nicht gespeichert werden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="779"/>
+        <location filename="../src/GuiChat.cpp" line="794"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Möchtest du wirklich %1 %2 an die Mitglieder des Gruppenchats senden?</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="780"/>
+        <location filename="../src/GuiChat.cpp" line="795"/>
         <source>file</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="780"/>
+        <location filename="../src/GuiChat.cpp" line="795"/>
         <source>files</source>
         <translation>Dateien</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="781"/>
+        <location filename="../src/GuiChat.cpp" line="796"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="781"/>
+        <location filename="../src/GuiChat.cpp" line="796"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="794"/>
+        <location filename="../src/GuiChat.cpp" line="809"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt Library unterstützt für dieses Betriebssystem  keine Drag und Drop Funktion. Wähle die Datei erneut zum senden.</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="893"/>
+        <location filename="../src/GuiChat.cpp" line="908"/>
         <source>Use key Return to send message</source>
         <translation>Benutze Enter um eine Nachricht zu senden</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="895"/>
+        <location filename="../src/GuiChat.cpp" line="910"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Benutze Enter um einen Zeilenumbruch zu machen</translation>
     </message>

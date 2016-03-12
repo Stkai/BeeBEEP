@@ -142,5 +142,6 @@
         <file>images/key-return.png</file>
         <file>images/printer.png</file>
         <file>images/file-transfer-progress.png</file>
+        <file>images/send-folder.png</file>
     </qresource>
 </RCC>

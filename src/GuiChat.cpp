@@ -163,6 +163,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actFindTextInChat = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
+  mp_actSendFolder = bar->addAction( QIcon( ":/images/send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
   act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
   act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
   mp_actPrint = bar->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
@@ -189,6 +190,7 @@ void GuiChat::updateAction( bool is_connected, int connected_users )
   bool is_group_chat = c.isGroup();
 
   mp_actSendFile->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
+  mp_actSendFolder->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
   if( c.isDefault() )
@@ -208,6 +210,9 @@ void GuiChat::customContextMenu( const QPoint& p )
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( mp_actPrint );
+  custom_context_menu.addSeparator();
+  custom_context_menu.addAction( mp_actSendFile );
+  custom_context_menu.addAction( mp_actSendFolder );
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
@@ -703,6 +708,16 @@ void GuiChat::leaveThisGroup()
 void GuiChat::sendFile()
 {
   emit sendFileFromChatRequest( m_chatId, QString( "" ) );
+}
+
+void GuiChat::sendFolder()
+{
+  QString folder_selected = FileDialog::getExistingDirectory( this, Settings::instance().programName(),
+                                                              Settings::instance().lastDirectorySelected() );
+  if( folder_selected.isEmpty() )
+    return;
+
+  emit sendFileFromChatRequest( m_chatId, folder_selected );
 }
 
 void GuiChat::dragEnterEvent( QDragEnterEvent *event )
