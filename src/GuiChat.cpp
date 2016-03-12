@@ -178,6 +178,9 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
+
+  mp_teMessage->addActionToContextMenu( mp_actSendFile );
+  mp_teMessage->addActionToContextMenu( mp_actSendFolder );
 }
 
 void GuiChat::updateAction( bool is_connected, int connected_users )
@@ -887,6 +890,12 @@ void GuiChat::updateShortcuts()
     mp_actSendFile->setShortcut( ks );
   else
     mp_actSendFile->setShortcut( QKeySequence() );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::SendFolder );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+    mp_actSendFolder->setShortcut( ks );
+  else
+    mp_actSendFolder->setShortcut( QKeySequence() );
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::SendChatMessage );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )

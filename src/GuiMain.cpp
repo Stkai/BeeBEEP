@@ -3807,5 +3807,8 @@ void GuiMain::saveGeometryAndState()
   }
 
   if( save_settings )
+  {
     Settings::instance().save();
+    showMessage( tr( "Window geometry and state saved" ), 3000 );
+  }
 }

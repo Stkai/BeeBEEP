@@ -3493,6 +3493,10 @@ il file %2 (%3)?</translation>
         <source>Save main window geometry</source>
         <translation>Salva le dimensioni della finestra principale</translation>
     </message>
+    <message>
+        <source>Window geometry and state saved</source>
+        <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4989,6 +4993,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Find next text in chat</source>
         <translation>Trova testo successivo nella conversazione</translation>
+    </message>
+    <message>
+        <source>Send folder</source>
+        <translation>Invia una cartella</translation>
     </message>
 </context>
 <context>

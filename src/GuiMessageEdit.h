@@ -46,6 +46,8 @@ public:
   void rehighlightMessage();
   void setCompleter( QCompleter* );
 
+  inline void addActionToContextMenu( QAction* );
+
 signals:
   void returnPressed();
   void writing();
@@ -87,6 +89,12 @@ private:
 #endif
 
   QCompleter* mp_completer;
+
+  QList<QAction*> m_actionsToContextMenu;
+
 };
+
+// Inline Functions
+inline void GuiMessageEdit::addActionToContextMenu( QAction* act ) { m_actionsToContextMenu.append( act ); }
 
 #endif // BEEBEEP_GUIMESSAGEEDIT_H

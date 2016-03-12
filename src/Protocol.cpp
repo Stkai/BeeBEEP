@@ -245,7 +245,17 @@ QString Protocol::publicKey( const Message& m ) const
 int Protocol::datastreamVersion( const Message& m ) const
 {
   QStringList data_list = m.text().split( DATA_FIELD_SEPARATOR );
-  return data_list.size() >= 12 ? data_list.at( 11 ).toInt() : 0;
+
+  int datastream_version = 0;
+  if( data_list.size() >= 12 )
+  {
+    bool ok = false;
+    datastream_version = data_list.at( 11 ).toInt( &ok );
+    if( !ok )
+      datastream_version = 0;
+  }
+
+  return datastream_version;
 }
 
 QByteArray Protocol::helloMessage( const QString& public_key ) const

@@ -183,7 +183,7 @@ void GuiMessageEdit::completerKeyPressEvent( QKeyEvent* e )
   if( e->modifiers() != Qt::NoModifier ) // do not process the shortcut when we have a completer
     return;
 
-  static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
+  static QString eow( "~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-=" ); // end of word
   QString completion_prefix = textUnderCursor();
 
   if( e->text().isEmpty() || completion_prefix.length() < 3 || eow.contains( e->text().right( 1 ) ) )
@@ -330,6 +330,12 @@ void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
   act->setEnabled( canPaste() );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
+  custom_context_menu.addSeparator();
+  if( !m_actionsToContextMenu.isEmpty() )
+  {
+    foreach( QAction* act, m_actionsToContextMenu )
+      custom_context_menu.addAction( act );
+  }
   custom_context_menu.exec( event->globalPos() );
 }
 

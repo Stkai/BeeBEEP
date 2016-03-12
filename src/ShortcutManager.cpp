@@ -119,6 +119,8 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ FindTextInChat ] = QKeySequence( Qt::CTRL | Qt::Key_F );
   m_shortcutNames[ FindNextTextInChat ] = QObject::tr( "Find next text in chat" );
   m_shortcuts[ FindNextTextInChat ] = QKeySequence( Qt::CTRL | Qt::Key_G );
+  m_shortcutNames[ SendFolder ] = QObject::tr( "Send folder" );
+  m_shortcuts[ SendFolder ] = QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_S );
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )
