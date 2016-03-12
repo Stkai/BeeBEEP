@@ -244,7 +244,11 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
   if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
   {
-    data_stream.setVersion( DATASTREAM_VERSION_2 );
+    if( m_datastreamVersion > 0 )
+      data_stream.setVersion( m_datastreamVersion );
+    else
+      data_stream.setVersion( DATASTREAM_VERSION_2 );
+
     data_stream << (DATA_BLOCK_SIZE_32)0;
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_32_LIMIT )
