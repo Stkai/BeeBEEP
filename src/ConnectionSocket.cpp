@@ -140,6 +140,7 @@ void ConnectionSocket::readBlock()
   // If the byte array is null: 0xFFFFFFFF (quint32)
   // Otherwise: the array size (quint32) followed by the array bytes, i.e. size bytes
   QDataStream data_stream( this );
+  data_stream.setByteOrder( QDataStream::BigEndian );
 
   if( m_datastreamVersion > 0 )
   {
@@ -241,6 +242,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 {
   QByteArray data_block;
   QDataStream data_stream( &data_block, QIODevice::WriteOnly );
+  data_stream.setByteOrder( QDataStream::BigEndian );
 
   if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
   {
