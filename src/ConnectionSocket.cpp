@@ -172,7 +172,7 @@ void ConnectionSocket::readBlock()
       }
       DATA_BLOCK_SIZE_32 block_size_32;
       data_stream >> block_size_32;
-      m_blockSize = block_size_32 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format
+      m_blockSize = block_size_32 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format must be 32byte
     }
     else
     {
@@ -185,7 +185,7 @@ void ConnectionSocket::readBlock()
       }
       DATA_BLOCK_SIZE_16 block_size_16;
       data_stream >> block_size_16;
-      m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_16); // bytearray serialize format
+      m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format must be 32byte
     }
   }
 
