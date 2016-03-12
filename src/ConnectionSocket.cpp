@@ -32,7 +32,7 @@
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" ), m_latestActivityDateTime(),
-    m_timerTickId( 0 ), m_tickCounter( 0 ), m_isAborted( false )
+    m_timerTickId( 0 ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
@@ -141,10 +141,17 @@ void ConnectionSocket::readBlock()
   // Otherwise: the array size (quint32) followed by the array bytes, i.e. size bytes
   QDataStream data_stream( this );
 
-  if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
-    data_stream.setVersion( DATASTREAM_VERSION_2 );
+  if( m_datastreamVersion > 0 )
+  {
+    data_stream.setVersion( m_datastreamVersion );
+  }
   else
-    data_stream.setVersion( DATASTREAM_VERSION_1 );
+  {
+    if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
+      data_stream.setVersion( DATASTREAM_VERSION_2 );
+    else
+      data_stream.setVersion( DATASTREAM_VERSION_1 );
+  }
 
 #ifdef BEEBEEP_DEBUG
   if( isConnecting() )
@@ -370,6 +377,14 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
   // After sending HELLO to ensure low protocol version compatibility
   m_protoVersion = Protocol::instance().protoVersion( m );
+  int peer_datastream_version = Protocol::instance().datastreamVersion( m );
+  if( peer_datastream_version > 0 )
+  {
+    m_datastreamVersion = qMax( 0, (int)qMin( peer_datastream_version, Protocol::instance().datastreamMaxVersion() ) );
+    qDebug() << "ConnectionSocket uses handshaked datastream version" << m_datastreamVersion;
+  }
+  else
+    m_datastreamVersion = 0;
 
   if( m_protoVersion != Settings::instance().protoVersion() )
   {

@@ -95,6 +95,8 @@ private:
   int m_tickCounter;
   bool m_isAborted;
 
+  int m_datastreamVersion;
+
 };
 
 

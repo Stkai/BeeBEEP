@@ -40,6 +40,7 @@ class Protocol
   static Protocol* mp_instance;
 
 public:
+  inline int datastreamMaxVersion() const;
   inline int messageMinimumSize() const;
   QByteArray fromMessage( const Message& ) const;
   Message toMessage( const QByteArray& ) const;
@@ -65,6 +66,7 @@ public:
   ChatMessageData dataFromChatMessage( const Message& );
   QString chatMessageDataToString( const ChatMessageData& );
   int protoVersion( const Message& ) const;
+  int datastreamVersion( const Message& ) const;
   QString publicKey( const Message& ) const;
   QByteArray createCipherKey( const QString&, const QString& ) const;
   QByteArray bytesArrivedConfirmation( int ) const;
@@ -147,6 +149,7 @@ private:
   QByteArray m_writingMessage;
   QByteArray m_fileShareListMessage;
   QByteArray m_fileShareRequestMessage;
+  int m_datastreamMaxVersion;
 
 };
 
@@ -158,5 +161,6 @@ inline const QByteArray& Protocol::writingMessage() const { return m_writingMess
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
 inline const QByteArray& Protocol::fileShareListMessage() const { return m_fileShareListMessage; }
 inline const QByteArray& Protocol::fileShareRequestMessage() const { return m_fileShareRequestMessage; }
+inline int Protocol::datastreamMaxVersion() const { return m_datastreamMaxVersion; }
 
 #endif // BEEBEEP_PROTOCOL_H

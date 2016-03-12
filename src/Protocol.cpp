@@ -47,6 +47,10 @@ Protocol::Protocol()
   Message file_share_request_message( Message::Share, ID_SHARE_MESSAGE, "" );
   file_share_request_message.addFlag( Message::Request );
   m_fileShareRequestMessage = fromMessage( file_share_request_message );
+
+  QDataStream ds;
+  m_datastreamMaxVersion = ds.version();
+  qDebug() << "Protocol has detected latest datastream version:" << m_datastreamMaxVersion;
 }
 
 QString Protocol::messageHeader( Message::Type mt ) const
@@ -238,6 +242,12 @@ QString Protocol::publicKey( const Message& m ) const
   return data_list.size() >= 6 ? data_list.at( 5 ) : QString();
 }
 
+int Protocol::datastreamVersion( const Message& m ) const
+{
+  QStringList data_list = m.text().split( DATA_FIELD_SEPARATOR );
+  return data_list.size() >= 12 ? data_list.at( 11 ).toInt() : 0;
+}
+
 QByteArray Protocol::helloMessage( const QString& public_key ) const
 {
   QStringList data_list;
@@ -255,6 +265,7 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   else
     data_list << Settings::instance().workgroups().join( ", " );
   data_list << Settings::instance().localUser().qtVersion();
+  data_list << QString::number( m_datastreamMaxVersion );
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -471,13 +482,17 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( !sl.isEmpty() )
     user_color = sl.takeFirst();
 
-  // skip workgroups at 9
+  /* skip workgroups */
   if( !sl.isEmpty() )
     sl.takeFirst();
 
   QString user_qt_version = Settings::instance().localUser().qtVersion();
   if( !sl.isEmpty() )
     user_qt_version = sl.takeFirst();
+
+  /* Skip datastream version */
+  if( !sl.isEmpty() )
+    sl.takeFirst();
 
   /* Skip other data */
   if( !sl.isEmpty() )
