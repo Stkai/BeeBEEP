@@ -157,7 +157,7 @@ LogToFile=[true/false] enable file logging
 UseSpellChecker=[true/false] enable spell checking on writing message
 UseWordCompleter=[true/false] enable word completer on writing message
 DictionaryPath=(String) path to dictionary. It is accepted only file with extension .dic
-CheckNewVersionAtStartup=[true/false] enable check for new version at BeeBEEP startup (default=true) [3.0.4]
+CheckForNewVersionAtStartup=[true/false] enable check for new version at BeeBEEP startup (default=false on win) [3.0.4]
 PostUsageStatistics= [true/false] add +1 user to anonymous usage statistics (default=true) [3.0.5]
 Uuid= [string] application UUID for anonymous statistics [3.0.5]
 
