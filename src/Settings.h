@@ -619,6 +619,7 @@ private:
   bool m_homeShowMessageDatestamp;
 
   QString m_applicationUuid;
+  QDate m_applicationUuidCreationDate;
   QDate m_statsPostDate;
 
 };
