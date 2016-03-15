@@ -62,8 +62,7 @@ protected:
 
 private:
 #ifdef BEEBEEP_USE_PHONON4
-  //Phonon::MediaObject *mp_sound;
-    QSound* mp_sound;
+  Phonon::MediaObject *mp_sound;
 #else
   QSound* mp_sound;
 #endif

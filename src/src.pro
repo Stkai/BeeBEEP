@@ -15,6 +15,13 @@ message( Target folder: $$DESTDIR )
 QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
+unix:!macx:!android: equals(QT_MAJOR_VERSION, 4) {
+  greaterThan(QT_MINOR_VERSION, 6 ): {
+    DEFINES += BEEBEEP_USE_PHONON4
+    QT += phonon
+  }
+}
+
 unix:!macx:!android: {
   LIBS= -lxcb -lxcb-screensaver
 }
@@ -255,3 +262,4 @@ win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns
 
 message( Libs: $$LIBS )
+message( Defines: $$DEFINES )
