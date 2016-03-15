@@ -158,7 +158,10 @@ void GuiHome::printActivities()
   QPrintDialog *dlg = new QPrintDialog( &printer, this );
   dlg->setOptions( QAbstractPrintDialog::PrintSelection | QAbstractPrintDialog::PrintPageRange |
                    QAbstractPrintDialog::PrintShowPageSize |  QAbstractPrintDialog::PrintCollateCopies |
-                   QAbstractPrintDialog::PrintCurrentPage | QAbstractPrintDialog::PrintToFile );
+#if QT_VERSION >= 0x040700
+                   QAbstractPrintDialog::PrintCurrentPage |
+#endif
+                   QAbstractPrintDialog::PrintToFile );
 
   if( dlg->exec() == QDialog::Accepted)
     mp_teSystem->print( dlg->printer() );
