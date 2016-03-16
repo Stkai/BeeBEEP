@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -128,17 +128,17 @@
     <message>
         <location filename="../src/Core.cpp" line="339"/>
         <source>View the log messages for more informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Controleer de logbestanden voor meer informatie</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="509"/>
         <source>New version is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe versie is beschikbaar</translation>
     </message>
     <message>
         <location filename="../src/Core.cpp" line="510"/>
         <source>Click here to download</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om te downloaden</translation>
     </message>
     <message>
         <source>%1 The following networks appears as filtered: %2</source>
@@ -641,7 +641,7 @@
     <message>
         <location filename="../src/FileTransferPeer.cpp" line="179"/>
         <source>Transfer timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Timeout tijdens overdracht</translation>
     </message>
     <message>
         <location filename="../src/FileTransferUpload.cpp" line="101"/>
@@ -674,7 +674,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="39"/>
         <source>your IP is %1 in LAN %2</source>
-        <translation type="unfinished"></translation>
+        <translation>uw IP is %1 in LAN %2</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="45"/>
@@ -709,7 +709,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="184"/>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles leegmaken</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="209"/>
@@ -719,7 +719,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="234"/>
         <source>auto added</source>
-        <translation type="unfinished"></translation>
+        <translation>automatisch toegevoegd</translation>
     </message>
 </context>
 <context>
@@ -747,7 +747,7 @@
     <message>
         <location filename="../src/GuiAddUser.ui" line="169"/>
         <source>Split in IPv4 addresses</source>
-        <translation type="unfinished"></translation>
+        <translation>In IPv4 addressen splitsen</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="179"/>
@@ -767,7 +767,7 @@
     <message>
         <location filename="../src/GuiAddUser.ui" line="25"/>
         <source>Auto add from LAN</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch toevoegen van LAN</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="45"/>
@@ -924,9 +924,9 @@
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="163"/>
-        <location filename="../src/GuiChat.cpp" line="1042"/>
+        <location filename="../src/GuiChat.cpp" line="1045"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind tekst in chat</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="164"/>
@@ -941,7 +941,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="166"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuur map</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="167"/>
@@ -956,7 +956,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="169"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk af...</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="396"/>
@@ -985,9 +985,9 @@
         <translation>Er is geen geldige map</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="1080"/>
+        <location filename="../src/GuiChat.cpp" line="1083"/>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 niet gevonden in chat.</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="935"/>
@@ -1537,17 +1537,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiHome.cpp" line="98"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk af...</translation>
     </message>
     <message>
         <location filename="../src/GuiHome.cpp" line="105"/>
         <source>Show the datestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de datumstempel</translation>
     </message>
     <message>
         <location filename="../src/GuiHome.cpp" line="109"/>
         <source>Show the timestamp</source>
-        <translation type="unfinished">Toon datum en tijd</translation>
+        <translation>Toon de tijdstempel</translation>
     </message>
 </context>
 <context>
@@ -2070,12 +2070,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="685"/>
         <source>Show the datestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de tijdstempel</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="686"/>
         <source>If enabled the message shows its datestamp in the chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Als deze optie ingeschakeld is wordt de datumstempel in het chatvenster getoond</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="691"/>
@@ -2110,17 +2110,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="721"/>
         <source>Use your name instead of &apos;You&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik uw naam ipv &apos;Jij&apos;</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="743"/>
         <source>Prompts for nickname on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag naar nickname bij opstarten</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="772"/>
         <source>Check for new version at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken naar updates bij het opstarten</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="815"/>
@@ -2160,7 +2160,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="922"/>
         <source>Save main window geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Afmetingen van hoofdvenster opslaan</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="944"/>
@@ -2170,12 +2170,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="973"/>
         <source>Add +1 user to anonymous usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiker toevoegen aan anonieme gebruikersstatistieken</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="974"/>
         <source>Help me to know how many users have BeeBEEP</source>
-        <translation type="unfinished"></translation>
+        <translation>Help mij te weten te komen hoeveel gebruikers BeeBEEP hebben</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="990"/>
@@ -2195,7 +2195,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="1030"/>
         <source>Show chat message preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon chatgesprekvoorbeeld</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="1567"/>
@@ -2240,7 +2240,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="3812"/>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Afmetingen en status hoofdvenster werden opgeslagen</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="741"/>
@@ -3771,12 +3771,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="155"/>
         <source>Enable broadcast interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel broadcastinterval in</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="184"/>
         <source>seconds (0=disabled, 10=default)</source>
-        <translation type="unfinished"></translation>
+        <translation>seconden (0=uitgeschakeld, 10=standaard)</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="351"/>
@@ -3801,12 +3801,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="297"/>
         <source>Verbose</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgebreide uitleg</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="328"/>
         <source>Max users to contact in a tick</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximum gebruikers die gecontacteerd kunnen worden met 1 selectie</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="337"/>
@@ -4734,27 +4734,27 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/ShortcutManager.cpp" line="114"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk af</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="116"/>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="118"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind tekst in chat</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="120"/>
         <source>Find next text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind volgende tekst in chat</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="122"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuur map</translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="hu_HU">
+<TS version="2.0" language="hu_HU">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -920,7 +920,7 @@ Te vagy</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="163"/>
-        <location filename="../src/GuiChat.cpp" line="1042"/>
+        <location filename="../src/GuiChat.cpp" line="1045"/>
         <source>Find text in chat</source>
         <translation type="unfinished"></translation>
     </message>
@@ -986,7 +986,7 @@ Te vagy</translation>
         <translation>Szó kiegészítő tiltása</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="1080"/>
+        <location filename="../src/GuiChat.cpp" line="1083"/>
         <source>%1 not found in chat.</source>
         <translation type="unfinished"></translation>
     </message>

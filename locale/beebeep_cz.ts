@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -658,7 +658,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="39"/>
         <source>your IP is %1 in LAN %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše IP je %1 v LAN %2</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="45"/>
@@ -693,7 +693,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="184"/>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit vše</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.cpp" line="209"/>
@@ -703,7 +703,7 @@
     <message>
         <location filename="../src/GuiAddUser.cpp" line="234"/>
         <source>auto added</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat automaticky</translation>
     </message>
 </context>
 <context>
@@ -731,7 +731,7 @@
     <message>
         <location filename="../src/GuiAddUser.ui" line="169"/>
         <source>Split in IPv4 addresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdělit na IPv4 adresy</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="179"/>
@@ -751,7 +751,7 @@
     <message>
         <location filename="../src/GuiAddUser.ui" line="25"/>
         <source>Auto add from LAN</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat automaticky z LAN</translation>
     </message>
     <message>
         <location filename="../src/GuiAddUser.ui" line="45"/>
@@ -896,9 +896,9 @@
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="163"/>
-        <location filename="../src/GuiChat.cpp" line="1042"/>
+        <location filename="../src/GuiChat.cpp" line="1045"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Najít text v chatu</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="164"/>
@@ -913,7 +913,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="166"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat složku</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="167"/>
@@ -928,7 +928,7 @@
     <message>
         <location filename="../src/GuiChat.cpp" line="169"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisk...</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="178"/>
@@ -962,9 +962,9 @@
         <translation>Doplňovač slov je zakázán</translation>
     </message>
     <message>
-        <location filename="../src/GuiChat.cpp" line="1080"/>
+        <location filename="../src/GuiChat.cpp" line="1083"/>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 nebyl nalezen v chatu.</translation>
     </message>
     <message>
         <location filename="../src/GuiChat.cpp" line="935"/>
@@ -1153,12 +1153,12 @@
     <message>
         <location filename="../src/GuiChatList.cpp" line="52"/>
         <source>Clear</source>
-        <translation>Vyčistit</translation>
+        <translation>Odstranit</translation>
     </message>
     <message>
         <location filename="../src/GuiChatList.cpp" line="53"/>
         <source>Clear all chat messages</source>
-        <translation>Vyčistit od všech zpráv</translation>
+        <translation>Odstranit všechny zprávy</translation>
     </message>
     <message>
         <location filename="../src/GuiChatList.cpp" line="55"/>
@@ -1463,17 +1463,17 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiHome.cpp" line="98"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisk...</translation>
     </message>
     <message>
         <location filename="../src/GuiHome.cpp" line="105"/>
         <source>Show the datestamp</source>
-        <translation type="unfinished">Zobrazit čas zprávy</translation>
+        <translation>Zobrazit datum zprávy</translation>
     </message>
     <message>
         <location filename="../src/GuiHome.cpp" line="109"/>
         <source>Show the timestamp</source>
-        <translation type="unfinished">Zobrazit čas zprávy</translation>
+        <translation>Zobrazit čas zprávy</translation>
     </message>
 </context>
 <context>
@@ -2719,7 +2719,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="3518"/>
         <source>Do you really want to clear all saved status descriptions?</source>
-        <translation>Opravdu chcete vymazat všechny uložené popisy stavu?</translation>
+        <translation>Opravdu chcete odstranit všechny uložené popisy stavu?</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="940"/>
@@ -2784,7 +2784,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="685"/>
         <source>Show the datestamp</source>
-        <translation>Zobrazit čas zprávy</translation>
+        <translation>Zobrazit datum zprávy</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="686"/>
@@ -2799,7 +2799,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="743"/>
         <source>Prompts for nickname on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyzvat k zadání přezdívky při startu</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="772"/>
@@ -2839,12 +2839,12 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="910"/>
         <source>Clear all status descriptions</source>
-        <translation>Vymazat všechny popisy stavu</translation>
+        <translation>Odstranit všechny popisy stavu</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="922"/>
         <source>Save main window geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit velikost okna</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="941"/>
@@ -2869,12 +2869,12 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="973"/>
         <source>Add +1 user to anonymous usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat uživatele do anonymní uživatelské statistiky</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="974"/>
         <source>Help me to know how many users have BeeBEEP</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoci mě zjistit, kolik uživatelů používá BeeBEEP</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="990"/>
@@ -2894,7 +2894,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="1030"/>
         <source>Show chat message preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit náhled zprávy</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2263"/>
@@ -3072,7 +3072,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiMain.cpp" line="3812"/>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost a stav okna uloženy</translation>
     </message>
     <message>
         <location filename="../src/GuiMain.cpp" line="2053"/>
@@ -3573,12 +3573,12 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="297"/>
         <source>Verbose</source>
-        <translation type="unfinished"></translation>
+        <translation>Upovídaný</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="328"/>
         <source>Max users to contact in a tick</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximální počet uživatelů k dispozici v tomto okamžiku</translation>
     </message>
     <message>
         <location filename="../src/GuiSearchUser.ui" line="337"/>
@@ -3908,7 +3908,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/GuiShareNetwork.cpp" line="380"/>
         <source>Clear selection</source>
-        <translation>Smazat vybrané</translation>
+        <translation>Odstranit vybrané</translation>
     </message>
     <message>
         <location filename="../src/GuiShareNetwork.cpp" line="384"/>
@@ -4378,27 +4378,27 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="114"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisk</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="116"/>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledat</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="118"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Najít text v chatu</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="120"/>
         <source>Find next text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Najít další text v chatu</translation>
     </message>
     <message>
         <location filename="../src/ShortcutManager.cpp" line="122"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat složku</translation>
     </message>
 </context>
 <context>
