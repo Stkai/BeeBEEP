@@ -13,6 +13,7 @@ PreferredSubnets=
 UseIPv6=false
 MulticastGroupAddress=
 UseHive=true
+UseHostnameForDefaultUsername=false
 
 [Groups]
 TrustNickname=true

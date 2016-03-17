@@ -1,5 +1,8 @@
 BEEBEEP (Secure Lan Messanger)
 
+BeeBEEP 3.0.6
+- Added "UseHostnameForDefaultUsername" option. It can be enabled in beebeep.rc
+
 BeeBEEP 3.0.5
 - Added timestamp and datestamp to home activities (option - right click on text)
 - Chat messages can be printed (all or selected)

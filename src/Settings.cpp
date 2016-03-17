@@ -78,6 +78,7 @@ Settings::Settings()
   m_checkNewVersionAtStartup = true;
 #endif
   m_postUsageStatistics = true;
+  m_useHostnameForDefaultUsername = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -171,10 +172,11 @@ void Settings::setChatFont( const QFont& new_value )
 QString Settings::accountNameFromSystemEnvinroment() const
 {
   QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
+  QString host_name = QHostInfo::localHostName();
   QString account_name = pe.value( "USERNAME", "" );
   if( account_name.isEmpty() )
     account_name = pe.value( "USER", "" );
-  return account_name.simplified();
+  return m_useHostnameForDefaultUsername ? host_name.simplified() : account_name.simplified();
 }
 
 void Settings::createLocalUser()
@@ -241,6 +243,7 @@ bool Settings::createDefaultRcFile()
       sets->setValue( "MulticastGroupAddress", m_multicastGroupAddress.toString() );
     sets->setValue( "EnableChatWithAllUsers", m_useChatWithAllUsers );
     sets->setValue( "UseHive", m_useHive );
+    sets->setValue( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -301,6 +304,7 @@ void Settings::loadRcFile()
     m_multicastGroupAddress = QHostAddress( multicast_group_address );
   m_useChatWithAllUsers = sets->value( "EnableChatWithAllUsers", m_useChatWithAllUsers ).toBool();
   m_useHive = sets->value( "UseHive", m_useHive ).toBool();
+  m_useHostnameForDefaultUsername = sets->value( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();

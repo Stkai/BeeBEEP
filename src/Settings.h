@@ -450,6 +450,7 @@ private:
   bool m_useChatWithAllUsers;
   bool m_useHive;
   bool m_enableSaveData;
+  bool m_useHostnameForDefaultUsername;
 
   // Ini
   bool m_firstTime;

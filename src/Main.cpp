@@ -106,7 +106,7 @@ int main( int argc, char *argv[] )
   qDebug() << "Font selected for chat:" << chat_font.toString();
   qDebug() << "Font pixel size:" << chat_font.pixelSize();
   qDebug() << "Font point size:" << chat_font.pointSize();
-  qDebug() << "Font height:" << (int)(QFontMetrics( chat_font).height());
+  qDebug() << "Font height:" << (int)(QFontMetrics( chat_font).height() );
   qDebug() << "Emoticon size in chat:" << Settings::instance().emoticonSizeInChat();
   qDebug() << "Emoticon size in edit:" << Settings::instance().emoticonSizeInEdit();
 #endif
