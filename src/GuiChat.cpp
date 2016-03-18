@@ -83,7 +83,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
 
-
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
 
@@ -99,6 +98,10 @@ GuiChat::GuiChat( QWidget *parent )
   mp_scFindNextTextInChat = new QShortcut( this );
   mp_scFindNextTextInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFindNextTextInChat, SIGNAL( activated() ), this, SLOT( findNextTextInChat() ) );
+
+  mp_scViewEmoticons = new QShortcut( this );
+  mp_scViewEmoticons->setContext( Qt::WindowShortcut );
+  connect( mp_scViewEmoticons, SIGNAL( activated() ), this, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ) );
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -183,7 +186,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
 }
 
-void GuiChat::updateAction( bool is_connected, int connected_users )
+void GuiChat::updateActions( bool is_connected, int connected_users )
 {
   Chat c = ChatManager::instance().chat( m_chatId );
   if( !c.isValid() )
@@ -908,6 +911,15 @@ void GuiChat::updateShortcuts()
     mp_actPrint->setShortcut( ks );
   else
     mp_actPrint->setShortcut( QKeySequence() );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowEmoticons );
+  if( !ks.isEmpty() )
+  {
+    mp_scViewEmoticons->setKey( ks );
+    mp_scViewEmoticons->setEnabled( Settings::instance().useShortcuts() );
+  }
+  else
+    mp_scViewEmoticons->setEnabled( false );
 
 }
 

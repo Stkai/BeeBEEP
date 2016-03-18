@@ -39,7 +39,7 @@ public:
   GuiChat( QWidget* parent = 0 );
 
   void setupToolBar( QToolBar* );
-  void updateAction( bool is_connected, int connected_users );
+  void updateActions( bool is_connected, int connected_users );
 
   bool setChatId( VNumber, bool );
   inline VNumber chatId() const;
@@ -73,6 +73,7 @@ signals:
   void showVCardRequest( VNumber, bool );
   void detachChatRequest( VNumber );
   void saveStateAndGeometryRequest();
+  void toggleVisibilityEmoticonsPanelRequest();
 
 public slots:
   void appendChatMessage( VNumber, const ChatMessage& );
@@ -158,6 +159,7 @@ private:
 
   QShortcut* mp_scFocusInChat;
   QShortcut* mp_scFindNextTextInChat;
+  QShortcut* mp_scViewEmoticons;
   QString m_lastTextFound;
 
 };

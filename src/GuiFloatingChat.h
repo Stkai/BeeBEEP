@@ -59,6 +59,7 @@ protected:
 private slots:
   void onApplicationFocusChanged( QWidget*, QWidget* );
   void saveGeometryAndState();
+  void toggleVisibilityEmoticonPanel();
 
 private:
   GuiChat* mp_chat;

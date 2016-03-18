@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -4997,6 +4997,14 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>Send folder</source>
         <translation>Invia una cartella</translation>
+    </message>
+    <message>
+        <source>Show emoticons</source>
+        <translation type="obsolete">Mostra le faccine con delle immagini</translation>
+    </message>
+    <message>
+        <source>Show emoticons panel</source>
+        <translation>Mostra il pannello delle faccine</translation>
     </message>
 </context>
 <context>

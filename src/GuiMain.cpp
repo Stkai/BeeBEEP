@@ -123,6 +123,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   setupChatConnections( mp_chat );
+  connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -201,6 +202,15 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
   connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( detachChatRequest( VNumber ) ), this, SLOT( detachChat( VNumber ) ) );
+
+}
+
+void GuiMain::toggleVisibilityEmoticonPanel()
+{
+  if( mp_dockEmoticons->isVisible() )
+    mp_dockEmoticons->hide();
+  else
+    mp_dockEmoticons->show();
 }
 
 void GuiMain::applyFlagStaysOnTop()
@@ -498,7 +508,7 @@ void GuiMain::checkViewActions()
 
   if( mp_stackedWidget->currentWidget() == mp_chat )
   {
-    mp_chat->updateAction( is_connected, connected_users );
+    mp_chat->updateActions( is_connected, connected_users );
     checkChatToolbar();
     mp_dockEmoticons->setVisible( Settings::instance().showEmoticonMenu() );
   }
@@ -3416,7 +3426,7 @@ void GuiMain::detachChat( VNumber chat_id )
   if( mp_chat->chatId() == chat_id )
     showDefaultChat();
 
-  fl_chat->guiChat()->updateAction( mp_core->isConnected(), mp_core->connectedUsers() );
+  fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
   setupChatConnections( fl_chat->guiChat() );
   connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );
   connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );

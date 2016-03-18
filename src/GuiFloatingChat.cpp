@@ -25,9 +25,11 @@
 #include "GuiFloatingChat.h"
 #include "GuiEmoticons.h"
 #include "Settings.h"
+#include "ShortcutManager.h"
 #ifdef Q_OS_WIN
   #include <windows.h>
 #endif
+
 
 GuiFloatingChat::GuiFloatingChat( QWidget *parent )
  : QMainWindow( parent )
@@ -58,7 +60,6 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
   mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
   mp_actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
-  mp_actViewEmoticons->setData( 28 );
   mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
   mp_dockEmoticons->hide();
 
@@ -66,6 +67,8 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   statusBar();
   m_chatIsVisible = true;
   m_prevActivatedState = true;
+
+  connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
@@ -252,4 +255,12 @@ void GuiFloatingChat::showUp()
 void GuiFloatingChat::updateEmoticon()
 {
   QTimer::singleShot( 0, mp_emoticonsWidget, SLOT( updateEmoticons() ) );
+}
+
+void GuiFloatingChat::toggleVisibilityEmoticonPanel()
+{
+  if( mp_dockEmoticons->isVisible() )
+    mp_dockEmoticons->hide();
+  else
+    mp_dockEmoticons->show();
 }

@@ -169,6 +169,7 @@ private slots:
   void onNetworkInterfaceUp();
   void onChatReadByUser( VNumber chat_id, VNumber user_id );
   void saveGeometryAndState();
+  void toggleVisibilityEmoticonPanel();
 
 protected:
   void keyPressEvent( QKeyEvent* );
