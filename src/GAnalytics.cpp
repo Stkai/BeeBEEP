@@ -67,11 +67,17 @@ void GAnalytics::doPost()
   query.addQueryItem("ds", "app" );
   query.addQueryItem("an", Settings::instance().programName().toLower() );
   query.addQueryItem("av", Settings::instance().version( false ) );
+
   query.addQueryItem( "t", "event" );
   query.addQueryItem( "ec", Settings::instance().programName() );
   query.addQueryItem( "ea", "usage" );
+#ifdef BEEBEEP_DEBUG
+  query.addQueryItem( "el", QString( "%1-%2" ).arg( "zz_test" )
+                                              .arg( Settings::instance().version( false ) ) );
+#else
   query.addQueryItem( "el", QString( "%1-%2" ).arg( Settings::instance().operatingSystem( false ).toLower() )
                                               .arg( Settings::instance().version( false ) ) );
+#endif
 
   qint64 days_used = qMax( (qint64)0, (qint64)Settings::instance().settingsCreationDate().daysTo( QDate::currentDate() ) ) + 1;
   query.addQueryItem( "ev", QString::number( days_used ) );

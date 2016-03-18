@@ -8,4 +8,4 @@ CurrentVersion=3.0.5
 CurrentVersion=3.0.5
 
 [OS2]
-CurrentVersion=3.0.4
+CurrentVersion=3.0.5
