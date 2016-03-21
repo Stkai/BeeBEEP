@@ -67,7 +67,9 @@ void GAnalytics::doPost()
   query.addQueryItem("ds", "app" );
   query.addQueryItem("an", Settings::instance().programName().toLower() );
   query.addQueryItem("av", Settings::instance().version( false ) );
-
+  QString user_language = QLocale::system().name().toLower();
+  if( !user_language.isEmpty() )
+    query.addQueryItem( "ul", user_language );
   query.addQueryItem( "t", "event" );
   query.addQueryItem( "ec", Settings::instance().programName() );
   query.addQueryItem( "ea", "usage" );

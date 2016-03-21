@@ -9,5 +9,5 @@ win32: {
   QMAKE_LFLAGS += /INCREMENTAL:NO
 }
 
-INCLUDEPATH += $$PWD/src
+INCLUDEPATH += $$PWD/src $$PWD/src/core
 DESTDIR = $$PWD/test

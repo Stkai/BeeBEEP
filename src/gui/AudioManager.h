@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: NetworkManager.h 407 2015-06-10 16:51:41Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 
