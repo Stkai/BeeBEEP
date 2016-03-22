@@ -50,16 +50,7 @@ include(desktop/desktop.pri)
 include(override/override.pri)
 include(utils/utils.pri)
 
-HEADERS += BeeApplication.h \
-  Interfaces.h \
-  Settings.h
-
-
-SOURCES += BeeApplication.cpp \
-  BeeApplication_mac.cpp \
-  Main.cpp \
-  Settings.cpp
-
+HEADERS += Interfaces.h Tips.h
 
 RESOURCES += beebeep.qrc emojis.qrc
 
