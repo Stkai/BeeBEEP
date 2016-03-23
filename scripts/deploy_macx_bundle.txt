@@ -35,7 +35,7 @@ echo "Bundle folder:" $BUNDLE_FOLDER
 BUNDLE_DMG="BeeBEEP.dmg"
 echo "Bundle:" $BUNDLE_DMG
 
-MACDEPLOY_APP=../../Qt/5.5/clang_64/bin/macdeployqt
+MACDEPLOY_APP=../../Qt/5.6/clang_64/bin/macdeployqt
 echo "Mac Deploy App:" $MACDEPLOY_APP
 
 # delete previous bundle folder
