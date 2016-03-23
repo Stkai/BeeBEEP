@@ -72,11 +72,7 @@ Settings::Settings()
   m_preferredSubnets = "";
   m_useIPv6 = false;
   m_useHive = true;
-#ifdef Q_OS_WIN
-  m_checkNewVersionAtStartup = false;
-#else
   m_checkNewVersionAtStartup = true;
-#endif
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;
   /* Default RC end */
@@ -851,7 +847,7 @@ void Settings::load()
   m_useSpellChecker = sets->value( "UseSpellChecker", false ).toBool();
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
   m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
-  m_checkNewVersionAtStartup = sets->value( "CheckForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
+  m_checkNewVersionAtStartup = sets->value( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "PostUsageStatistics", m_postUsageStatistics ).toBool();
   m_applicationUuid = sets->value( "Uuid", "" ).toString();
   m_applicationUuidCreationDate = sets->value( "UuidCreationDate", QDate::currentDate() ).toDate();
@@ -1110,7 +1106,7 @@ void Settings::save()
   sets->setValue( "UseSpellChecker", m_useSpellChecker );
   sets->setValue( "UseWordCompleter", m_useWordCompleter );
   sets->setValue( "DictionaryPath", m_dictionaryPath );
-  sets->setValue( "CheckForNewVersionAtStartup", m_checkNewVersionAtStartup );
+  sets->setValue( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup );
   sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
   sets->setValue( "Uuid", m_applicationUuid );
   sets->setValue( "UuidCreationDate", m_applicationUuidCreationDate );
