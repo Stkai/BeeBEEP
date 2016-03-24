@@ -26,6 +26,7 @@
 #include "GuiEmoticons.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
+#include "UserManager.h"
 #ifdef Q_OS_WIN
   #include <windows.h>
 #endif
@@ -77,11 +78,14 @@ bool GuiFloatingChat::setChatId( VNumber chat_id )
   Chat c = ChatManager::instance().chat( chat_id );
   if( c.isPrivate() )
   {
-    QStringList sl = c.name().split( "@" );
-    if( !sl.isEmpty() )
+    VNumber user_id = c.privateUserId();
+    if( user_id != ID_INVALID )
     {
-      sl.removeLast();
-      setWindowTitle( sl.join( "@" ) );
+      User u = UserManager::instance().findUser( user_id );
+      if( u.isValid() )
+        setWindowTitle( u.name() );
+      else
+        setWindowTitle( c.name() );
     }
     else
       setWindowTitle( c.name() );
@@ -90,6 +94,18 @@ bool GuiFloatingChat::setChatId( VNumber chat_id )
     setWindowTitle( c.name() );
 
   return mp_chat->setChatId( chat_id, true );
+}
+
+void GuiFloatingChat::updateUser( const User& u )
+{
+  Chat c = ChatManager::instance().chat( mp_chat->chatId() );
+  if( !c.hasUser( u.id() ) )
+    return;
+
+  if( c.isPrivateForUser( u.id() ) )
+    setWindowTitle( u.name() );
+
+  mp_chat->updateUser( u );
 }
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )

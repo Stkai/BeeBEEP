@@ -1311,7 +1311,7 @@ void GuiMain::updateUser( const User& u )
   mp_groupList->updateUser( u );
   mp_chat->updateUser( u );
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-    fl_chat->guiChat()->updateUser( u );
+    fl_chat->updateUser( u );
   checkViewActions();
 }
 
