@@ -1,1 +1,1 @@
-lupdate -recursive -verbose ../beebeep.pro
+lupdate -recursive -verbose ../beebeep-desktop.pro

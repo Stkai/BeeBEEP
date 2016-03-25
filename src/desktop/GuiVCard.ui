@@ -455,7 +455,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/chat.png</normaloff>:/images/chat.png</iconset>
         </property>
         <property name="default">
@@ -493,7 +493,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/send-file.png</normaloff>:/images/send-file.png</iconset>
         </property>
         <property name="flat">
@@ -528,7 +528,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/font-color.png</normaloff>:/images/font-color.png</iconset>
         </property>
         <property name="flat">
@@ -557,7 +557,7 @@
          </size>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/star.png</normaloff>:/images/star.png</iconset>
         </property>
         <property name="flat">
@@ -586,7 +586,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
         </property>
         <property name="default">
@@ -608,7 +608,7 @@
   <tabstop>mp_pbColor</tabstop>
  </tabstops>
  <resources>
-  <include location="beebeep.qrc"/>
+  <include location="../beebeep.qrc"/>
  </resources>
  <connections/>
 </ui>

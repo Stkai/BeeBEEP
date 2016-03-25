@@ -50,7 +50,7 @@
       </size>
      </property>
      <property name="icon">
-      <iconset resource="beebeep.qrc">
+      <iconset resource="../beebeep.qrc">
        <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
      </property>
      <property name="flat">
@@ -79,7 +79,7 @@
       </size>
      </property>
      <property name="icon">
-      <iconset resource="beebeep.qrc">
+      <iconset resource="../beebeep.qrc">
        <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
      </property>
      <property name="flat">
@@ -149,7 +149,7 @@
   <tabstop>mp_pbClose</tabstop>
  </tabstops>
  <resources>
-  <include location="beebeep.qrc"/>
+  <include location="../beebeep.qrc"/>
  </resources>
  <connections/>
 </ui>

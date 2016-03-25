@@ -12,6 +12,11 @@ include(../beebeep.pri)
 
 message( Target folder: $$DESTDIR )
 
+TEMPLATE = app
+DEFINES += MAKE_BEEBEEP_PORTABLE
+#TARGET = beebeep-portable
+TARGET = beebeep
+
 QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
@@ -39,10 +44,6 @@ win32: {
 message( Qt modules: $$QT )
 
 include(../locale/locale.pri)
-
-TARGET = beebeep
-TEMPLATE = app
-
 include(hunspell/hunspell.pri)
 include(core/core.pri)
 include(gui/gui.pri)
@@ -57,7 +58,7 @@ RESOURCES += beebeep.qrc emojis.qrc
 win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns
 
-win32|macx|unix:!android: equals(QT_MAJOR_VERSION, 4):lesserThan(QT_MINOR_VERSION, 7) {
+win32|macx|unix:!android: equals(QT_MAJOR_VERSION, 4): lessThan(QT_MINOR_VERSION, 7) {
     message( MDns disabled due the old Qt version )
   } else { include(mdns/mdns.pri) }
 

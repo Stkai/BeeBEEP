@@ -136,7 +136,7 @@
        <string>Click to send message or just hit enter</string>
       </property>
       <property name="icon">
-       <iconset resource="beebeep.qrc">
+       <iconset resource="../beebeep.qrc">
         <normaloff>:/images/send.png</normaloff>:/images/send.png</iconset>
       </property>
       <property name="iconSize">
@@ -288,7 +288,7 @@
        <string>Save window's geometry</string>
       </property>
       <property name="icon">
-       <iconset resource="beebeep.qrc">
+       <iconset resource="../beebeep.qrc">
         <normaloff>:/images/save-window.png</normaloff>:/images/save-window.png</iconset>
       </property>
       <property name="iconSize">
@@ -326,7 +326,7 @@
        <string>Detach chat</string>
       </property>
       <property name="icon">
-       <iconset resource="beebeep.qrc">
+       <iconset resource="../beebeep.qrc">
         <normaloff>:/images/add-window.png</normaloff>:/images/add-window.png</iconset>
       </property>
       <property name="iconSize">
@@ -354,7 +354,7 @@
   <tabstop>mp_teMessage</tabstop>
  </tabstops>
  <resources>
-  <include location="beebeep.qrc"/>
+  <include location="../beebeep.qrc"/>
  </resources>
  <connections/>
 </ui>

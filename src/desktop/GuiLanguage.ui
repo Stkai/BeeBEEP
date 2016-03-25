@@ -130,8 +130,11 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="beebeep.qrc">
+        <iconset resource="../beebeep.qrc">
          <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -168,6 +171,9 @@
      <property name="text">
       <string>Restore</string>
      </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
    <item row="4" column="2" colspan="2">
@@ -187,6 +193,9 @@
     <widget class="QPushButton" name="mp_pbSelect">
      <property name="text">
       <string>Select</string>
+     </property>
+     <property name="default">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -209,7 +218,7 @@
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>
  <resources>
-  <include location="beebeep.qrc"/>
+  <include location="../beebeep.qrc"/>
  </resources>
  <connections/>
 </ui>

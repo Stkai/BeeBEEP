@@ -96,7 +96,7 @@
          </size>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
         </property>
         <property name="iconSize">
@@ -131,7 +131,7 @@
          </size>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/settings.png</normaloff>:/images/settings.png</iconset>
         </property>
         <property name="iconSize">
@@ -165,7 +165,7 @@
   <tabstop>mp_pbClearFilter</tabstop>
  </tabstops>
  <resources>
-  <include location="beebeep.qrc"/>
+  <include location="../beebeep.qrc"/>
  </resources>
  <connections/>
 </ui>

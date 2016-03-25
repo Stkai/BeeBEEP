@@ -107,7 +107,7 @@
          <string>chat with all users</string>
         </property>
         <property name="icon">
-         <iconset resource="beebeep.qrc">
+         <iconset resource="../beebeep.qrc">
           <normaloff>:/images/default-chat-online.png</normaloff>:/images/default-chat-online.png</iconset>
         </property>
        </widget>
@@ -122,7 +122,7 @@
   <tabstop>mp_teSystem</tabstop>
  </tabstops>
  <resources>
-  <include location="beebeep.qrc"/>
+  <include location="../beebeep.qrc"/>
  </resources>
  <connections/>
 </ui>

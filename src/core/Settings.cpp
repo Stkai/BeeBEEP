@@ -27,9 +27,7 @@
 #include "Settings.h"
 #include "Version.h"
 
-
 Settings* Settings::mp_instance = NULL;
-
 
 Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
@@ -46,12 +44,18 @@ Settings::Settings()
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
   m_saveDataInDocumentsFolder = false;
   m_resetGeometryAtStartup = false;
+
+#ifdef MAKE_BEEBEEP_PORTABLE
+  m_saveDataInUserApplicationFolder = false;
+#else
+  m_saveDataInUserApplicationFolder = true;
+#endif
+
 #ifdef Q_OS_MAC
   m_saveDataInUserApplicationFolder = true;
   m_useNativeEmoticons = true;
   m_useNativeDialogs = true;
 #else
-  m_saveDataInUserApplicationFolder = false;
   m_useNativeEmoticons = false;
   // In windows native dialogs are application modal and the connection goes in timeout...
   // In MacOSX instead it seems to work
@@ -848,7 +852,7 @@ void Settings::load()
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
   m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
   m_checkNewVersionAtStartup = sets->value( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
-  m_postUsageStatistics = sets->value( "PostUsageStatistics", m_postUsageStatistics ).toBool();
+  m_postUsageStatistics = sets->value( "SendAnonymousUsageStatistics", m_postUsageStatistics ).toBool();
   m_applicationUuid = sets->value( "Uuid", "" ).toString();
   m_applicationUuidCreationDate = sets->value( "UuidCreationDate", QDate::currentDate() ).toDate();
   m_statsPostDate = sets->value( "StatsPostDate", QDate() ).toDate();
@@ -1107,7 +1111,7 @@ void Settings::save()
   sets->setValue( "UseWordCompleter", m_useWordCompleter );
   sets->setValue( "DictionaryPath", m_dictionaryPath );
   sets->setValue( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup );
-  sets->setValue( "PostUsageStatistics", m_postUsageStatistics );
+  sets->setValue( "SendAnonymousUsageStatistics", m_postUsageStatistics );
   sets->setValue( "Uuid", m_applicationUuid );
   sets->setValue( "UuidCreationDate", m_applicationUuidCreationDate );
   sets->setValue( "StatsPostDate", m_statsPostDate );

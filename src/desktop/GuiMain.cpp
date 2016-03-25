@@ -980,11 +980,13 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Open %1 website to have online support" ).arg( Settings::instance().programName() ) );
   mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( QIcon( ":/images/thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
+#ifdef BEEBEEP_DEBUG
   act = mp_menuInfo->addAction( tr( "Add +1 user to anonymous usage statistics" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "Help me to know how many users have BeeBEEP" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().postUsageStatistics() );
   act->setData( 44 );
+#endif
   act = mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Donate for %1" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
   act->setStatusTip( tr( "I'm so grateful and pleased about that" ) );
 
@@ -1710,7 +1712,9 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     gui_chat->appendChatMessage( chat_id, cm );
   }
   else
+  {
     chat_is_visible = false;
+  }
 
   if( !chat_is_visible )
   {
@@ -2186,13 +2190,17 @@ void GuiMain::showChat( VNumber chat_id )
 #endif
     mp_chat->reloadChatUsers();
     if( !isActiveWindow() )
+    {
+      readAllMessagesInChat( chat_id );
       raiseOnTop();
+    }
     mp_chat->ensureFocusInChat();
     return;
   }
 
   if( chat_id != ID_DEFAULT_CHAT && Settings::instance().alwaysOpenNewFloatingChat() )
   {
+    qApp->setActiveWindow( this ); // to get focus back on floating chat
     detachChat( chat_id );
     return;
   }
@@ -2205,6 +2213,9 @@ void GuiMain::showChat( VNumber chat_id )
   }
   else
     raiseHomeView();
+
+  if( !isActiveWindow() )
+    raiseOnTop();
 }
 
 void GuiMain::changeVCard()
@@ -2419,19 +2430,23 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 
 void GuiMain::trayMessageClicked()
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "TrayIcon message clicked";
+#endif
   GuiFloatingChat* fl_chat = floatingChat( mp_trayIcon->chatId() );
   if( fl_chat )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Found a floating chat and show it";
+#endif
     QTimer::singleShot( 0, fl_chat, SLOT( showUp() ) );
   }
   else
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Creating chat and show it";
+#endif
     showChat( mp_trayIcon->chatId() );
-    fl_chat = floatingChat( mp_trayIcon->chatId() );
-    if( fl_chat )
-      QTimer::singleShot( 0, fl_chat, SLOT( showUp() ) );
-    else
-      QTimer::singleShot( 0, this, SLOT( showUp() ) );
   }
 }
 
@@ -3437,7 +3452,9 @@ void GuiMain::detachChat( VNumber chat_id )
   fl_chat->checkWindowFlagsAndShow();
   fl_chat->guiChat()->updateShortcuts();
   fl_chat->guiChat()->ensureLastMessageVisible();
+  fl_chat->raiseOnTop();
   fl_chat->guiChat()->ensureFocusInChat();
+
 }
 
 QWidget* GuiMain::activeChatWindow()

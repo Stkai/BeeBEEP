@@ -4,6 +4,8 @@ BeeBEEP 3.0.6
 - Added "UseHostnameForDefaultUsername" option. It can be enabled in beebeep.rc
 - Updated nickname update also the name of the chat window
 - Fixed a bug that broke the link when there is an exclamation symbol in it
+- Fixed a bug in showing chat window when tray message is clicked
+- Users can not be removed from group by the other members but they can leave the group if they want to.
 
 BeeBEEP 3.0.5
 - Added timestamp and datestamp to home activities (option - right click on text)

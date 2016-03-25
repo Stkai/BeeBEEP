@@ -179,7 +179,7 @@
       <string>Add</string>
      </property>
      <property name="icon">
-      <iconset resource="beebeep.qrc">
+      <iconset resource="../beebeep.qrc">
        <normaloff>:/images/user-add.png</normaloff>:/images/user-add.png</iconset>
      </property>
     </widget>
@@ -221,7 +221,7 @@
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>
  <resources>
-  <include location="beebeep.qrc"/>
+  <include location="../beebeep.qrc"/>
  </resources>
  <connections/>
 </ui>

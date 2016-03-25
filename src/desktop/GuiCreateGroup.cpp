@@ -89,7 +89,10 @@ void GuiCreateGroup::loadData( bool is_group )
     item->setCheckState( 0, Qt::Checked );
 
     if( m_selectedUsersId.contains( u.id() ) )
+    {
       item->setCheckState( 0, Qt::Checked );
+      item->setDisabled( true );
+    }
     else
       item->setCheckState( 0, Qt::Unchecked );
   }

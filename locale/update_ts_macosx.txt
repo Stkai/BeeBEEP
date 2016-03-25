@@ -1,1 +1,1 @@
-../../Qt/5.6/clang_64/bin/lupdate -recursive -verbose ../beebeep.pro
+../../Qt/5.6/clang_64/bin/lupdate -recursive -verbose ../beebeep-desktop.pro
