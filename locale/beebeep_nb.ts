@@ -658,7 +658,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="39"/>
         <source>your IP is %1 in LAN %2</source>
-        <translation type="unfinished"></translation>
+        <translation>din IP er %1 i LAN %2</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="45"/>
@@ -693,7 +693,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="184"/>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Blank ut alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="209"/>
@@ -703,7 +703,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="234"/>
         <source>auto added</source>
-        <translation type="unfinished"></translation>
+        <translation>lagt til automatisk</translation>
     </message>
 </context>
 <context>
@@ -731,7 +731,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="169"/>
         <source>Split in IPv4 addresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Del opp i IPv4-adresser</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="179"/>
@@ -751,7 +751,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="25"/>
         <source>Auto add from LAN</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til automatisk fra LAN</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="45"/>
@@ -898,7 +898,7 @@
         <location filename="../src/desktop/GuiChat.cpp" line="166"/>
         <location filename="../src/desktop/GuiChat.cpp" line="1057"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Finn tekst i samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="167"/>
@@ -913,7 +913,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="169"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Send mappe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="170"/>
@@ -928,7 +928,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="172"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv ut...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="181"/>
@@ -964,7 +964,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1095"/>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ikke funnet i samtale.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="947"/>
@@ -1451,17 +1451,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="98"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv ut...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="105"/>
         <source>Show the datestamp</source>
-        <translation type="unfinished">Vis datomerking</translation>
+        <translation>Vis datomerking</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="109"/>
         <source>Show the timestamp</source>
-        <translation type="unfinished">Vis tidspunkt</translation>
+        <translation>Vis tidspunkt</translation>
     </message>
 </context>
 <context>
@@ -2423,7 +2423,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="753"/>
         <source>Prompts for nickname on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Spør etter kallenavn ved oppstart</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="764"/>
@@ -2503,7 +2503,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="932"/>
         <source>Save main window geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre geometri for hovedvindu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="942"/>
@@ -2582,7 +2582,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1042"/>
         <source>Show chat message preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Forhåndsvis samtalemelding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
@@ -2851,7 +2851,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3839"/>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Vindusgeometri og status lagret</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="950"/>
@@ -2876,12 +2876,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="984"/>
         <source>Add +1 user to anonymous usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg +1 bruker til anonym brukerstatistikk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="985"/>
         <source>Help me to know how many users have BeeBEEP</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjelp meg å anslå antall brukere av BeeBEEP</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1002"/>
@@ -3501,7 +3501,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="106"/>
         <source>(search users here by default)</source>
-        <translation>(søk bruiker her som standard)</translation>
+        <translation>(søk bruker her som standard)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="119"/>
@@ -3511,12 +3511,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="155"/>
         <source>Enable broadcast interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver kringkastingsintervall</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="184"/>
         <source>seconds (0=disabled, 10=default)</source>
-        <translation type="unfinished"></translation>
+        <translation>sekunder (0=avslått, 10=standard)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="351"/>
@@ -3541,12 +3541,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="297"/>
         <source>Verbose</source>
-        <translation type="unfinished"></translation>
+        <translation>Utfyllende</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="328"/>
         <source>Max users to contact in a tick</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks antall bruker å kontakte samtidig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="337"/>
@@ -4307,67 +4307,67 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="100"/>
         <source>Empty</source>
-        <translation type="unfinished">Tom</translation>
+        <translation>Tom</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="102"/>
         <source>Send file</source>
-        <translation type="unfinished">Send fil</translation>
+        <translation>Send fil</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="104"/>
         <source>Show file transfers</source>
-        <translation type="unfinished">Vis filoverføring</translation>
+        <translation>Vis filoverføringer</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="106"/>
         <source>Set focus in message box</source>
-        <translation type="unfinished">Gi meldingsboks fokus</translation>
+        <translation>Gi meldingsboks fokus</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="108"/>
         <source>Minimize all chats</source>
-        <translation type="unfinished">Minimer alle samtaler</translation>
+        <translation>Minimer alle samtaler</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="110"/>
         <source>Show the next unread message</source>
-        <translation type="unfinished">Vis neste uleste melding</translation>
+        <translation>Vis neste uleste melding</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="112"/>
         <source>Send chat message</source>
-        <translation type="unfinished">Send samtalemelding</translation>
+        <translation>Send samtalemelding</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="114"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="116"/>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Kringkast</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="118"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Finn tekst i samtale</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="120"/>
         <source>Find next text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Finn neste tekst i samtale</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="122"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Send mappe</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="124"/>
         <source>Show emoticons panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis panel for uttrykksikon</translation>
     </message>
 </context>
 <context>
@@ -4401,42 +4401,42 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/Tips.h" line="31"/>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="unfinished">Du kan veksle mellom samtaler med CTRL+TAB hvis nye meldinger er tilgjengelig.</translation>
+        <translation>Du kan veksle mellom samtaler med CTRL+TAB hvis nye meldinger er tilgjengelig.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="32"/>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="unfinished">Hvis du vil ha en &lt;b&gt;feit tekst&lt;/b&gt;, skriv en *feit tekst*.</translation>
+        <translation>Hvis du vil ha en &lt;b&gt;feit tekst&lt;/b&gt;, skriv en *feit tekst*.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="33"/>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="unfinished">Hvis du vil ha en &lt;i&gt;kursiv tekst&lt;/i&gt;, skriv en /kursiv tekst/.</translation>
+        <translation>Hvis du vil ha en &lt;i&gt;kursiv tekst&lt;/i&gt;, skriv en /kursiv tekst/.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="34"/>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="unfinished">Hvis du vil ha en &lt;u&gt;understreka tekst&lt;/u&gt;, skriv en _understreka tekst_.</translation>
+        <translation>Hvis du vil ha en &lt;u&gt;understreka tekst&lt;/u&gt;, skriv en _understreka tekst_.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="35"/>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="unfinished">Du kan søke i tildligere sendt melding i historikken med CTRL+Opp/CTRL+Ned taster.</translation>
+        <translation>Du kan søke i tildligere sendt melding i historikken med CTRL+Opp/CTRL+Ned taster.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="37"/>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation type="unfinished">Du kan dra filer til aktiv samtale og sende dem til medlemmer.</translation>
+        <translation>Du kan dra filer til aktiv samtale og sende dem til medlemmer.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="38"/>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="unfinished">Du kan velge flere filer fra nettverksdelinger og laste dem ned samtidig med et høyreklikk.</translation>
+        <translation>Du kan velge flere filer fra nettverksdelinger og laste dem ned samtidig med et høyreklikk.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="39"/>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="unfinished">Du kan slå av meldingsvarsel fra en gruppe med høyreklikk på gruppenavnet i lista.</translation>
+        <translation>Du kan slå av meldingsvarsel fra en gruppe med høyreklikk på gruppenavnet i lista.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="47"/>
