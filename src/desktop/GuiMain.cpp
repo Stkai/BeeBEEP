@@ -800,11 +800,19 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().fileTransferIsEnabled() );
   act->setData( 12 );
 
-  act = mp_menuSettings->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().automaticFileName() );
-  act->setData( 7 );
+  QMenu* existing_file_menu = mp_menuSettings->addMenu( tr( "If a file already exist" ) );
+  mp_actOverwriteExistingFile = existing_file_menu->addAction( tr( "Overwrite existing file" ), this, SLOT( settingsChanged() ) );
+  mp_actOverwriteExistingFile->setStatusTip( tr( "If the file to be downloaded already exists it is automatically overwritten" ) );
+  mp_actOverwriteExistingFile->setCheckable( true );
+  mp_actOverwriteExistingFile->setChecked( Settings::instance().overwriteExistingFiles() );
+  mp_actOverwriteExistingFile->setData( 47 );
+  mp_actGenerateAutomaticFilename = existing_file_menu->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
+  mp_actGenerateAutomaticFilename->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
+  mp_actGenerateAutomaticFilename->setCheckable( true );
+  mp_actGenerateAutomaticFilename->setChecked( Settings::instance().automaticFileName() );
+  mp_actGenerateAutomaticFilename->setData( 7 );
+  if( Settings::instance().overwriteExistingFiles() )
+    mp_actGenerateAutomaticFilename->setEnabled( false );
 
   mp_actConfirmDownload = mp_menuSettings->addAction( tr( "Prompt before downloading file" ), this, SLOT( settingsChanged() ) );
   mp_actConfirmDownload->setStatusTip( tr( "If enabled you have to confirm the action before downloading a file" ) );
@@ -1357,7 +1365,7 @@ void GuiMain::settingsChanged()
       {
         if( QMessageBox::question( this, Settings::instance().programName(), tr( "When do you want %1 to play beep?" )
                                    .arg( Settings::instance().programName() ),
-                               tr( "If it not visible" ), tr( "Always" ), QString::null, 0, 0 ) == 1 )
+                               tr( "When it is not visible" ), tr( "Always" ), QString::null, 0, 0 ) == 1 )
         {
           Settings::instance().setBeepAlwaysOnNewMessageArrived( true );
         }
@@ -1553,6 +1561,10 @@ void GuiMain::settingsChanged()
   case 46:
     Settings::instance().setShowChatMessageOnTray( act->isChecked() );
     break;
+  case 47:
+    Settings::instance().setOverwriteExistingFiles( act->isChecked() );
+    mp_actGenerateAutomaticFilename->setEnabled( !Settings::instance().overwriteExistingFiles() );
+    break;
   case 99:
     break;
   default:
@@ -1694,12 +1706,14 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_home->addSystemMessage( cm );
 
   bool chat_is_visible = chatIsVisible( chat_id );
-  bool show_alert = !cm.isFromSystem() && !cm.isFromLocalUser() && !chat_is_visible;
 
-  if( show_alert )
-    showAlertForMessage( chat_id, cm );
-  else if( Settings::instance().beepAlwaysOnNewMessageArrived() )
-    playBeep();
+  if( !cm.isFromSystem() && !cm.isFromLocalUser() )
+  {
+    if( !chat_is_visible )
+      showAlertForMessage( chat_id, cm );
+    else if(  Settings::instance().beepAlwaysOnNewMessageArrived() )
+      playBeep();
+  }
 
   chat_is_visible = chatIsVisible( chat_id );
 
@@ -1970,21 +1984,24 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     QFileInfo qfile_info( download_path, fi.name() );
     if( qfile_info.exists() )
     {
-      QString file_name;
-      if( auto_file_name )
+      if( !Settings::instance().overwriteExistingFiles() )
       {
-        file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath() );
-        qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save with" << file_name;
-      }
-      else
-      {
-        file_name = FileDialog::getSaveFileName( this,
+        QString file_name;
+        if( auto_file_name )
+        {
+          file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath() );
+          qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save with" << file_name;
+        }
+        else
+        {
+          file_name = FileDialog::getSaveFileName( this,
                             tr( "%1 already exists. Please select a new filename." ).arg( qfile_info.fileName() ),
                             qfile_info.absoluteFilePath() );
-        if( file_name.isNull() || file_name.isEmpty() )
-          return false;
+          if( file_name.isNull() || file_name.isEmpty() )
+            return false;
+        }
+        qfile_info = QFileInfo( file_name );
       }
-      qfile_info = QFileInfo( file_name );
     }
     FileInfo file_info = fi;
     file_info.setName( qfile_info.fileName() );
@@ -2530,6 +2547,9 @@ void GuiMain::setGameInPauseMode()
 
 void GuiMain::openUrl( const QUrl& file_url )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Opening url:" << file_url.toString();
+#endif
 #if QT_VERSION >= 0x040800
   if( file_url.isLocalFile() )
 #else
@@ -2537,19 +2557,22 @@ void GuiMain::openUrl( const QUrl& file_url )
 #endif
   {
     QString file_path = file_url.toLocalFile();
-    if( !file_path.isEmpty() )
+    if( file_path.isEmpty() )
     {
-      QFileInfo fi( file_path );
-#ifdef Q_OS_MAC
-      bool is_exe_file = fi.isBundle();
-#else
-      bool is_exe_file = fi.isExecutable() && !fi.isDir();
-#endif
-      if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "Do you really want to open the file %1?" ).arg( file_path ),
-                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
-        return;
+      qWarning() << "Unable to open an empty file path";
+      return;
     }
+
+    QFileInfo fi( file_path );
+#ifdef Q_OS_MAC
+    bool is_exe_file = fi.isBundle();
+#else
+    bool is_exe_file = fi.isExecutable() && !fi.isDir();
+#endif
+    if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
+                             tr( "Do you really want to open the file %1?" ).arg( file_path ),
+                             tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
+      return;
 
     qDebug() << "Open file:" << file_url.toString();
     if( !QDesktopServices::openUrl( file_url ) )

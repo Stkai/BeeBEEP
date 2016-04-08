@@ -905,6 +905,7 @@ void Settings::load()
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
+  m_overwriteExistingFiles = sets->value( "OverwriteExistingFiles", false ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
   QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
   if( !local_share.isEmpty() )
@@ -1149,6 +1150,7 @@ void Settings::save()
   sets->beginGroup( "FileShare" );
   sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
   sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
+  sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );
   sets->setValue( "MaxFileShared", m_maxFileShared );
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );

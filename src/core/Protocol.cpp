@@ -1292,6 +1292,30 @@ QList<UserRecord> Protocol::messageToUserRecordList( const Message& m ) const
 
 QString Protocol::linkifyText( QString text )
 {
+#ifdef Q_OS_WIN
+  // linkify windows network path
+  if( text.contains( "\\\\" ) )
+  {
+    int index_backslash = text.simplified().indexOf( "\\\\" );
+    QString pre_text = "";
+    if( index_backslash > 0 )
+    {
+      pre_text = text.section( "\\\\", 0, 0 );
+      if( !pre_text.isEmpty() )
+        text.remove( 0, pre_text.size() );
+    }
+
+    QUrl url_to_add = QUrl::fromLocalFile( text.simplified() );
+    text = QString( "<a href=\"%1\">%2</a>" ).arg( url_to_add.url() ).arg( text.simplified() );
+    if( !pre_text.isEmpty() )
+      text.prepend( pre_text );
+
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Linkified text:" << qPrintable( text );
+#endif
+  }
+#endif
+
   if( !text.contains( QLatin1Char( '.' ) ) )
     return text;
   text.prepend( " " ); // for matching www.miosito.it
@@ -1299,6 +1323,7 @@ QString Protocol::linkifyText( QString text )
   text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?!&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
   text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
   text.remove( 0, 1 ); // remove the space added
+
   return text;
 }
 

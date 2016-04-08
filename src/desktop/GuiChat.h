@@ -127,6 +127,7 @@ private slots:
   void printChat();
   void showFindTextInChatDialog();
   void findNextTextInChat();
+  void openSelectedTextAsUrl();
 
 protected:
   void findTextInChat( const QString& );

@@ -290,6 +290,9 @@ private:
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
 
+  QAction* mp_actOverwriteExistingFile;
+  QAction* mp_actGenerateAutomaticFilename;
+
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
   QAction* mp_actPortBroadcast;

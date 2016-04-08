@@ -215,6 +215,11 @@ void GuiChat::customContextMenu( const QPoint& p )
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.addSeparator();
+  if( !mp_teChat->textCursor().selectedText().isEmpty() )
+  {
+    custom_context_menu.addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+    custom_context_menu.addSeparator();
+  }
   custom_context_menu.addAction( mp_actPrint );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( mp_actSendFile );
@@ -1096,4 +1101,17 @@ void GuiChat::findTextInChat( const QString& txt )
   }
   else
     m_lastTextFound = txt;
+}
+
+void GuiChat::openSelectedTextAsUrl()
+{
+  QString selected_text = mp_teChat->textCursor().selectedText();
+  if( !selected_text.isEmpty() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Try to open selected text as url:" << selected_text;
+#endif
+    QUrl url = QUrl::fromUserInput( selected_text );
+    emit openUrl( url );
+  }
 }

@@ -5,7 +5,10 @@ BeeBEEP 3.0.6
 - Updated nickname update also the name of the chat window
 - Fixed a bug that broke the link when there is an exclamation symbol in it
 - Fixed a bug in showing chat window when tray message is clicked
-- Users can not be removed from group by the other members but they can leave the group if they want to.
+- Users can not be removed from group by the other members but they can leave the group if they want to (due serverless)
+- Windows UNC path are parsed and now it can be clickable
+- "Open selected text as url" option added in chat chat window (right click on selected text)
+- "Overwrite existings file" option added 
 
 BeeBEEP 3.0.5
 - Added timestamp and datestamp to home activities (option - right click on text)

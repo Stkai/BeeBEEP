@@ -192,7 +192,9 @@ QString ChatManager::findPrivateChatSavedTextWithSameNickname( const QString& ch
 
 void ChatManager::updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name, bool add_to_new )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Copy the chat history with name" << old_chat_name << "to" << new_chat_name;
+#endif
   QString chat_text_old = m_history.take( old_chat_name );
   if( add_to_new && chatHasSavedText( new_chat_name ) )
   {

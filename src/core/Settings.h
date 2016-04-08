@@ -273,6 +273,8 @@ public:
 
   inline bool automaticFileName() const;
   inline void setAutomaticFileName( bool );
+  inline bool overwriteExistingFiles() const;
+  inline void setOverwriteExistingFiles( bool );
 
   inline const QStringList& broadcastAddressesInFileHosts() const;
   inline const QStringList& broadcastAddressesInSettings() const;
@@ -500,6 +502,7 @@ private:
   bool m_showUserPhoto;
   bool m_showTipsOfTheDay;
   bool m_automaticFileName;
+  bool m_overwriteExistingFiles;
   bool m_showChatToolbar;
   bool m_showOnlyMessagesInDefaultChat;
   bool m_showVCardOnRightClick;
@@ -740,6 +743,8 @@ inline bool Settings::raiseOnNewMessageArrived() const { return m_raiseOnNewMess
 inline void Settings::setRaiseOnNewMessageArrived( bool new_value ) { m_raiseOnNewMessageArrived = new_value; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
+inline bool Settings::overwriteExistingFiles() const { return m_overwriteExistingFiles; }
+inline void Settings::setOverwriteExistingFiles( bool new_value ) { m_overwriteExistingFiles = new_value; }
 inline bool Settings::showChatToolbar() const { return m_showChatToolbar; }
 inline void Settings::setShowChatToolbar( bool new_value ) { m_showChatToolbar = new_value; }
 inline const QStringList& Settings::broadcastAddressesInFileHosts() const { return m_broadcastAddressesInFileHosts; }
