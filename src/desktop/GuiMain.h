@@ -170,6 +170,8 @@ private slots:
   void onChatReadByUser( VNumber chat_id, VNumber user_id );
   void saveGeometryAndState();
   void toggleVisibilityEmoticonPanel();
+  void onChangeSettingBeepOnNewMessage( QAction* );
+  void onChangeSettingOnExistingFile( QAction* );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -283,15 +285,21 @@ private:
   QAction* mp_actViewLog;
   QAction* mp_actViewHome;
   QAction* mp_actViewNewMessage;
-  QAction* mp_actBeepOnNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
 
+  QActionGroup* mp_actGroupExistingFile;
   QAction* mp_actOverwriteExistingFile;
   QAction* mp_actGenerateAutomaticFilename;
+  QAction* mp_actAskToDoOnExistingFile;
+
+  QActionGroup* mp_actGroupBeepOnNewMessage;
+  QAction* mp_actBeepOnNewMessage;
+  QAction* mp_actAlwaysBeepOnNewMessage;
+  QAction* mp_actNeverBeepOnNewMessage;
 
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
@@ -311,6 +319,7 @@ private:
   GuiSystemTray* mp_trayIcon;
 
   QMap<QString, QMenu*> m_mapGameMenu;
+  QMenu* mp_defaultGameMenu;
 
   int m_lastUserStatus;
 

@@ -139,9 +139,10 @@ bool GuiUserItem::updateUser( const User& u )
       setIcon( 0, selectUserIcon( user_status, false ) );
 
   }
+  else
+    setIcon( 0, m_defaultIcon );
 
   QString tool_tip;
-
   if( u.isLocal() )
   {
     tool_tip = QObject::tr( "Click to open chat with all local users" );
@@ -181,7 +182,8 @@ bool GuiUserItem::updateUser( const User& u )
 
   showUserStatus();
 
-  m_defaultIcon = icon( 0 );
+  if( !u.isLocal() )
+    m_defaultIcon = icon( 0 );
   onTickEvent( 2 );
   return true;
 }

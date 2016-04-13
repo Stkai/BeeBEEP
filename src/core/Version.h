@@ -43,10 +43,10 @@ const char* BEEBEEP_UPDATER_WEBSITE = "/update/beeupdater.txt";
 const char* BEEBEEP_GA_TRACKING_ID = "UA-57878696-1";
 const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect";
 const char* BEEBEEP_GA_EVENT_VERSION = "1";
-const char* BEEBEEP_VERSION = "3.0.5";
+const char* BEEBEEP_VERSION = "3.0.6";
 const int BEEBEEP_PROTO_VERSION = 65;
 const int BEEBEEP_SETTINGS_VERSION = 6;
-const int BEEBEEP_BUILD = 708;
+const int BEEBEEP_BUILD = 709;
 
 #endif // BEEBEEP_VERSION_H
 

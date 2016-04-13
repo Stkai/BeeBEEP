@@ -54,6 +54,8 @@ public:
   void setChatOpened( bool );
   void onTickEvent( int );
 
+  inline void setDefaultIcon( const QIcon& );
+
 private:
   QIcon selectUserIcon( int, bool ) const;
   QPixmap avatarWithStatusBox( const QPixmap&, int ) const;
@@ -73,5 +75,6 @@ inline void GuiUserItem::setMessages( int num_messages ) { setData( 0, Messages,
 inline int GuiUserItem::messages() const { return data( 0, Messages ).toInt(); }
 inline void GuiUserItem::setUnreadMessages( int unread_messages ) { setData( 0, UnreadMessages, unread_messages ); }
 inline int GuiUserItem::unreadMessages() const { return data( 0, UnreadMessages ).toInt(); }
+inline void GuiUserItem::setDefaultIcon( const QIcon& new_value ) { m_defaultIcon = new_value; }
 
 #endif // BEEBEEP_GUIUSERITEM_H

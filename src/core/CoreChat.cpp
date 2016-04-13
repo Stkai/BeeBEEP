@@ -588,6 +588,9 @@ bool Core::readAllMessagesInChat( VNumber chat_id )
   {
     c.readAllMessages();
     ChatManager::instance().setChat( c );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Read all chat messages in" << chat_id << qPrintable( c.name() );
+#endif
     // no updateChat signal emit (for now)
     sendLocalUserHasReadChatMessage( c );
     return true;

@@ -77,6 +77,8 @@ GuiMain::GuiMain( QWidget *parent )
   // Create a status bar before the actions and the menu
   (void) statusBar();
 
+  mp_defaultGameMenu = new QMenu( this );
+
   mp_stackedWidget = new QStackedWidget( this );
   createStackedWidgets();
   setCentralWidget( mp_stackedWidget );
@@ -801,18 +803,26 @@ void GuiMain::createMenus()
   act->setData( 12 );
 
   QMenu* existing_file_menu = mp_menuSettings->addMenu( tr( "If a file already exist" ) );
-  mp_actOverwriteExistingFile = existing_file_menu->addAction( tr( "Overwrite existing file" ), this, SLOT( settingsChanged() ) );
+  mp_actGroupExistingFile = new QActionGroup( this );
+  mp_actGroupExistingFile->setExclusive( true );
+  mp_actOverwriteExistingFile = existing_file_menu->addAction( tr( "Overwrite" ), this, SLOT( settingsChanged() ) );
   mp_actOverwriteExistingFile->setStatusTip( tr( "If the file to be downloaded already exists it is automatically overwritten" ) );
   mp_actOverwriteExistingFile->setCheckable( true );
   mp_actOverwriteExistingFile->setChecked( Settings::instance().overwriteExistingFiles() );
-  mp_actOverwriteExistingFile->setData( 47 );
+  mp_actOverwriteExistingFile->setData( 99 );
   mp_actGenerateAutomaticFilename = existing_file_menu->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
   mp_actGenerateAutomaticFilename->setStatusTip( tr( "If the file to be downloaded already exists a new filename is automatically generated" ) );
   mp_actGenerateAutomaticFilename->setCheckable( true );
   mp_actGenerateAutomaticFilename->setChecked( Settings::instance().automaticFileName() );
-  mp_actGenerateAutomaticFilename->setData( 7 );
-  if( Settings::instance().overwriteExistingFiles() )
-    mp_actGenerateAutomaticFilename->setEnabled( false );
+  mp_actGenerateAutomaticFilename->setData( 99 );
+  mp_actAskToDoOnExistingFile = existing_file_menu->addAction( tr( "Ask me" ), this, SLOT( settingsChanged() ) );
+  mp_actAskToDoOnExistingFile->setCheckable( true );
+  mp_actAskToDoOnExistingFile->setChecked( !Settings::instance().automaticFileName() && !Settings::instance().overwriteExistingFiles() );
+  mp_actAskToDoOnExistingFile->setData( 99 );
+  mp_actGroupExistingFile->addAction( mp_actOverwriteExistingFile );
+  mp_actGroupExistingFile->addAction( mp_actGenerateAutomaticFilename );
+  mp_actGroupExistingFile->addAction( mp_actAskToDoOnExistingFile );
+  connect( mp_actGroupExistingFile, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingOnExistingFile( QAction* ) ) );
 
   mp_actConfirmDownload = mp_menuSettings->addAction( tr( "Prompt before downloading file" ), this, SLOT( settingsChanged() ) );
   mp_actConfirmDownload->setStatusTip( tr( "If enabled you have to confirm the action before downloading a file" ) );
@@ -836,11 +846,26 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().alwaysOpenNewFloatingChat() );
   act->setData( 37 );
 
-  mp_actBeepOnNewMessage = mp_menuSettings->addAction( tr( "Enable BEEP alert on new message" ), this, SLOT( settingsChanged() ) );
-  mp_actBeepOnNewMessage->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
+  QMenu* beep_file_menu = mp_menuSettings->addMenu( tr( "Enable BEEP alert on new message" ) );
+  beep_file_menu->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
+  mp_actGroupBeepOnNewMessage = new QActionGroup( this );
+  mp_actGroupBeepOnNewMessage->setExclusive( true );
+  mp_actBeepOnNewMessage = beep_file_menu->addAction( tr( "When the chat is not visible" ), this, SLOT( settingsChanged() ) );
   mp_actBeepOnNewMessage->setCheckable( true );
   mp_actBeepOnNewMessage->setChecked( Settings::instance().beepOnNewMessageArrived() );
-  mp_actBeepOnNewMessage->setData( 4 );
+  mp_actBeepOnNewMessage->setData( 99 );
+  mp_actAlwaysBeepOnNewMessage = beep_file_menu->addAction( tr( "Always" ), this, SLOT( settingsChanged() ) );
+  mp_actAlwaysBeepOnNewMessage->setCheckable( true );
+  mp_actAlwaysBeepOnNewMessage->setChecked( Settings::instance().beepAlwaysOnNewMessageArrived() );
+  mp_actAlwaysBeepOnNewMessage->setData( 99 );
+  mp_actNeverBeepOnNewMessage = beep_file_menu->addAction( tr( "Never" ), this, SLOT( settingsChanged() ) );
+  mp_actNeverBeepOnNewMessage->setCheckable( true );
+  mp_actNeverBeepOnNewMessage->setChecked( !Settings::instance().beepAlwaysOnNewMessageArrived() && !Settings::instance().beepOnNewMessageArrived() );
+  mp_actNeverBeepOnNewMessage->setData( 99 );
+  mp_actGroupBeepOnNewMessage->addAction( mp_actBeepOnNewMessage );
+  mp_actGroupBeepOnNewMessage->addAction( mp_actAlwaysBeepOnNewMessage );
+  mp_actGroupBeepOnNewMessage->addAction( mp_actNeverBeepOnNewMessage );
+  connect( mp_actGroupBeepOnNewMessage, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingBeepOnNewMessage( QAction* ) ) );
 
   act = mp_menuSettings->addAction( tr( "Raise on top on new message" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled when a new message is arrived %1 is shown on top of all other windows" ).arg( Settings::instance().programName() ) );
@@ -1272,7 +1297,7 @@ void GuiMain::createStackedWidgets()
 QMenu* GuiMain::gameMenu( GameInterface* gi )
 {
   if( m_mapGameMenu.contains( gi->name() ) )
-    return m_mapGameMenu.value( gi->name() );
+    return m_mapGameMenu.value( gi->name(), mp_defaultGameMenu );
 
   QMenu *menu_game = new QMenu( gi->name(), this );
   menu_game->setIcon( gi->icon() );
@@ -1360,23 +1385,7 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 4:
-    {
-      if( act->isChecked() )
-      {
-        if( QMessageBox::question( this, Settings::instance().programName(), tr( "When do you want %1 to play beep?" )
-                                   .arg( Settings::instance().programName() ),
-                               tr( "When it is not visible" ), tr( "Always" ), QString::null, 0, 0 ) == 1 )
-        {
-          Settings::instance().setBeepAlwaysOnNewMessageArrived( true );
-        }
-        else
-          Settings::instance().setBeepAlwaysOnNewMessageArrived( false );
-      }
-      else
-        Settings::instance().setBeepAlwaysOnNewMessageArrived( false );
-
-      Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
-    }
+    // free
     break;
   case 5:
     Settings::instance().setShowUserColor( act->isChecked() );
@@ -1388,7 +1397,7 @@ void GuiMain::settingsChanged()
     refresh_users = true;
     refresh_chat = true;
   case 7:
-    Settings::instance().setAutomaticFileName( act->isChecked() );
+    // free
     break;
   case 8:
     Settings::instance().setChatUseHtmlTags( act->isChecked() );
@@ -1560,10 +1569,6 @@ void GuiMain::settingsChanged()
     break;
   case 46:
     Settings::instance().setShowChatMessageOnTray( act->isChecked() );
-    break;
-  case 47:
-    Settings::instance().setOverwriteExistingFiles( act->isChecked() );
-    mp_actGenerateAutomaticFilename->setEnabled( !Settings::instance().overwriteExistingFiles() );
     break;
   case 99:
     break;
@@ -2192,9 +2197,7 @@ void GuiMain::showChat( VNumber chat_id )
     else
       fl_chat->raiseOnTop();
 
-    mp_userList->setUnreadMessages( chat_id, 0 );
-    mp_chatList->updateChat( chat_id );
-    mp_groupList->updateChat( chat_id );
+    readAllMessagesInChat( chat_id );
     fl_chat->guiChat()->reloadChatUsers();
     fl_chat->guiChat()->ensureFocusInChat();
     return;
@@ -2206,11 +2209,9 @@ void GuiMain::showChat( VNumber chat_id )
     qDebug() << "Chat" << chat_id << "is already shown... skip";
 #endif
     mp_chat->reloadChatUsers();
+    readAllMessagesInChat( chat_id );
     if( !isActiveWindow() )
-    {
-      readAllMessagesInChat( chat_id );
       raiseOnTop();
-    }
     mp_chat->ensureFocusInChat();
     return;
   }
@@ -2604,7 +2605,7 @@ void GuiMain::selectBeepFile()
 
   AudioManager::instance().clearBeep();
 
-  if( !Settings::instance().beepOnNewMessageArrived() )
+  if( !Settings::instance().beepOnNewMessageArrived() && !Settings::instance().beepAlwaysOnNewMessageArrived() )
   {
     if( QMessageBox::question( this, Settings::instance().programName(), tr( "Sound is not enabled on a new message. Do you want to enable it?" ), tr( "Yes" ), tr( "No" ) ) == 0 )
     {
@@ -2732,6 +2733,7 @@ void GuiMain::raiseOnTop()
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetActiveWindow( (HWND)winId() );
   SetFocus( (HWND)winId() );
+  applyFlagStaysOnTop();
 #else
   raise();
 #endif
@@ -3861,4 +3863,24 @@ void GuiMain::saveGeometryAndState()
     Settings::instance().save();
     showMessage( tr( "Window geometry and state saved" ), 3000 );
   }
+}
+
+void GuiMain::onChangeSettingBeepOnNewMessage( QAction* act )
+{
+  if( !act )
+    return;
+
+  Settings::instance().setBeepOnNewMessageArrived( mp_actBeepOnNewMessage->isChecked() );
+  Settings::instance().setBeepAlwaysOnNewMessageArrived( mp_actAlwaysBeepOnNewMessage->isChecked() );
+  Settings::instance().save();
+}
+
+void GuiMain::onChangeSettingOnExistingFile( QAction* act )
+{
+  if( !act )
+    return;
+
+  Settings::instance().setOverwriteExistingFiles( mp_actOverwriteExistingFile->isChecked() );
+  Settings::instance().setAutomaticFileName( mp_actGenerateAutomaticFilename->isChecked() );
+  Settings::instance().save();
 }

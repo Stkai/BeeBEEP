@@ -90,7 +90,7 @@ void GuiUserList::updateUsers( bool is_connected )
   m_coreIsConnected = is_connected;
   resetList();
   setUser( Settings::instance().localUser(), false );
-  setDefaultChatConnected( is_connected );
+  setDefaultChatConnected( 0, is_connected );
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( m_filter.isEmpty() || u.name().startsWith( m_filter, Qt::CaseInsensitive ) )
@@ -181,6 +181,9 @@ void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
   else
     qWarning() << "Invalid chat id found in GuiUserList";
 
+  if( u.isLocal() )
+    setDefaultChatConnected( item, m_coreIsConnected );
+
   item->updateUser( u );
 
   if( sort_and_check_opened )
@@ -251,12 +254,15 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
     emit userSelected( user_item->userId() );
 }
 
-void GuiUserList::setDefaultChatConnected( bool yes )
+void GuiUserList::setDefaultChatConnected( GuiUserItem* item, bool yes )
 {
-  GuiUserItem* item = itemFromChatId( ID_DEFAULT_CHAT );
+  if( !item )
+    item = itemFromChatId( ID_DEFAULT_CHAT );
   if( !item )
     return;
-  item->setIcon( 0, QIcon( (yes ? ":/images/default-chat-online" : ":/images/default-chat-offline" ) ) );
+  QIcon def_icon = QIcon( (yes ? ":/images/default-chat-online" : ":/images/default-chat-offline" ) );
+  item->setIcon( 0, def_icon );
+  item->setDefaultIcon( def_icon );
 }
 
 void GuiUserList::setChatOpened( VNumber chat_id )

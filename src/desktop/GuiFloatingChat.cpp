@@ -164,6 +164,8 @@ void GuiFloatingChat::raiseOnTop()
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetActiveWindow( (HWND)winId() );
   SetFocus( (HWND)winId() );
+  applyFlagStaysOnTop();
+  show();
 #else
   raise();
 #endif
