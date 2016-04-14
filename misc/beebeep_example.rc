@@ -18,6 +18,7 @@ HideMainToolbar=false
 HideChatToolbar=false
 HideusersPanel=false
 HideOtherPanels=false
+AskNicknameAtStartup=false
 
 [Groups]
 TrustNickname=true

@@ -41,7 +41,7 @@ HideMainToolbar=[true/false] If enabled BeeBEEP hide the main toolbar at startup
 HideChatToolbar=[true/false] If enabled BeeBEEP hide the chat toolbar startup (default=false) [3.0.6]
 HideUsersPanel=[true/false] If enabled BeeBEEP hide users panel at startup (default=false) [3.0.6]
 HideOtherPanels=[true/false] If enabled BeeBEEP hide all other panels at startup (default=false) [3.0.6]
-AskNicknameAtStartup=[true/false] show nickname dialog at connection to BeeBEEP network [3.0.6]
+AskNicknameAtStartup=[true/false] show nickname dialog at connection to BeeBEEP network (default=false) [3.0.6]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]
@@ -89,6 +89,7 @@ LocalLastStatusDescription= your status description
 AutoAwayStatus=[true/false] set your status away when pc is in idle
 UserAwayTimeout= how many minutes your pc must be in idle to set your status in away
 UseDefaultPassword=[true/false] use default BeeBEEP password
+AskNicknameAtStartup=[true/false] show nickname dialog at connection to BeeBEEP network (default=false) [3.0.5]
 AskPasswordAtStartup=[true/false] show password dialog at connection to BeeBEEP network
 MaxStatusInList=(10) maximum number of status used recently
 

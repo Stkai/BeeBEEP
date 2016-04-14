@@ -123,8 +123,8 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ SendFolder ] = QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_S );
   m_shortcutNames[ ShowEmoticons ] = QObject::tr( "Show emoticons panel" );
   m_shortcuts[ ShowEmoticons ] = QKeySequence( Qt::CTRL | Qt::Key_E );
-  m_shortcutNames[ ShowMainWindow ] = QObject::tr( "Show main window" );
-  m_shortcuts[ ShowMainWindow ] = QKeySequence( Qt::CTRL | Qt::ALT | Qt::Key_M );
+  m_shortcutNames[ ShowAllChats ] = QObject::tr( "Show all chats" );
+  m_shortcuts[ ShowAllChats ] = QKeySequence( Qt::CTRL | Qt::ALT | Qt::Key_B );
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )

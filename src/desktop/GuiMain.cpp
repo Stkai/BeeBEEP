@@ -185,6 +185,10 @@ void GuiMain::initShortcuts()
   mp_scMinimizeAllChats->setContext( Qt::ApplicationShortcut );
   connect( mp_scMinimizeAllChats, SIGNAL( activated() ), this, SLOT( minimizeAllChats() ) );
 
+  mp_scShowAllChats = new QShortcut( this );
+  mp_scShowAllChats->setContext( Qt::ApplicationShortcut );
+  connect( mp_scShowAllChats, SIGNAL( activated() ), this, SLOT( showAllChats() ) );
+
   mp_scShowNextUnreadMessage = new QShortcut( this );
   mp_scShowNextUnreadMessage->setContext( Qt::ApplicationShortcut );
   connect( mp_scShowNextUnreadMessage, SIGNAL( activated() ), this, SLOT( showNextChat() ) );
@@ -511,7 +515,7 @@ void GuiMain::checkViewActions()
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
   mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
 
-  mp_actCreateGroup->setEnabled( is_connected && connected_users > 1 );
+  mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().toList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
 
   if( mp_stackedWidget->currentWidget() == mp_chat )
@@ -3635,6 +3639,15 @@ void GuiMain::updateShortcuts()
   else
     mp_scMinimizeAllChats->setEnabled( false );
 
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowAllChats );
+  if( !ks.isEmpty() )
+  {
+    mp_scShowAllChats->setKey( ks );
+    mp_scShowAllChats->setEnabled( Settings::instance().useShortcuts() );
+  }
+  else
+    mp_scShowAllChats->setEnabled( false );
+
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowNextUnreadMessage );
   if( !ks.isEmpty() )
   {
@@ -3686,17 +3699,55 @@ void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
 
 void GuiMain::minimizeAllChats()
 {
+  mp_lastActiveWindow = qApp->activeWindow();
+  bool last_active_window_exists = mp_lastActiveWindow == this ? true : false;
+
   if( !m_floatingChats.isEmpty() )
   {
     foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     {
       if( !fl_chat->isMinimized() )
         fl_chat->showMinimized();
+      if( fl_chat == mp_lastActiveWindow )
+        last_active_window_exists = true;
     }
   }
 
   if( !isMinimized() )
     showMinimized();
+}
+
+void GuiMain::showAllChats()
+{
+  bool last_active_window_exists = false;
+
+  if( !m_floatingChats.isEmpty() )
+  {
+    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    {
+      if( fl_chat->isMinimized() )
+        fl_chat->showNormal();
+      else
+        show();
+
+      if( fl_chat == mp_lastActiveWindow )
+        last_active_window_exists = true;
+    }
+  }
+
+  if( isMinimized() )
+    showNormal();
+  else
+    show();
+
+  if( this == mp_lastActiveWindow )
+    last_active_window_exists = true;
+
+  if( last_active_window_exists )
+  {
+    mp_lastActiveWindow->raise();
+    qApp->setActiveWindow( mp_lastActiveWindow );
+  }
 }
 
 void GuiMain::selectDictionatyPath()

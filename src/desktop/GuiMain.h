@@ -164,6 +164,7 @@ private slots:
   void editShortcuts();
   void onApplicationFocusChanged( QWidget*, QWidget* );
   void minimizeAllChats();
+  void showAllChats();
   void selectDictionatyPath();
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
@@ -328,6 +329,8 @@ private:
 
   QShortcut* mp_scMinimizeAllChats;
   QShortcut* mp_scShowNextUnreadMessage;
+  QShortcut* mp_scShowAllChats;
+  QWidget* mp_lastActiveWindow;
 
   bool m_prevActivatedState;
 };
