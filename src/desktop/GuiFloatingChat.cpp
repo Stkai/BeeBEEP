@@ -46,6 +46,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barChat->setAllowedAreas( Qt::AllToolBarAreas );
   mp_chat->setupToolBar( mp_barChat );
+  mp_barChat->setVisible( Settings::instance().showChatToolbar() );
 
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
@@ -117,18 +118,24 @@ void GuiFloatingChat::closeEvent( QCloseEvent* e )
 
 void GuiFloatingChat::applyFlagStaysOnTop()
 {
+#ifdef Q_OS_WIN
   if( Settings::instance().stayOnTop() )
-  {
-    setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint );
-  }
+    SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
   else
-  {
-    setWindowFlags( windowFlags() & ~Qt::WindowStaysOnTopHint );
-  }
+    SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+  Qt::WindowFlags flags = this->windowFlags();
+  if( Settings::instance().stayOnTop() )
+    setWindowFlags( flags | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint );
+  else
+    setWindowFlags( flags ^ (Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint) );
+  show();
+#endif
 }
 
 void GuiFloatingChat::checkWindowFlagsAndShow()
 {
+  show();
   applyFlagStaysOnTop();
 
   if( !Settings::instance().floatingChatGeometry().isEmpty() )
@@ -136,8 +143,6 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 
   if( !Settings::instance().floatingChatState().isEmpty() )
     restoreState( Settings::instance().floatingChatState() );
-
-  show();
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
   if( Settings::instance().floatingChatSplitterState().isEmpty() )
@@ -156,15 +161,13 @@ void GuiFloatingChat::raiseOnTop()
 {
   if( isMinimized() || !isVisible() )
     showNormal();
-  else
-    show();
 
 #ifdef Q_OS_WIN
   SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  applyFlagStaysOnTop();
   SetActiveWindow( (HWND)winId() );
   SetFocus( (HWND)winId() );
-  applyFlagStaysOnTop();
   show();
 #else
   raise();

@@ -12,6 +12,8 @@ BeeBEEP 3.0.6
 - Fixed a bug in icon of default chat when a new message is arrived
 - Fixed a bug in alert beep when a new message is arrived
 - Fixed a bug on stay on top (windows)
+- Added "HideMainToolbar", "HideChatToolbar", "HideUsersPanel" and "HideOtherPanels" options. They can be enabled in beebeep.rc
+- Added "AskNicknameAtStartup" to beebeep.rc also
 
 BeeBEEP 3.0.5
 - Added timestamp and datestamp to home activities (option - right click on text)

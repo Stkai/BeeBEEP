@@ -95,6 +95,12 @@ public:
 
   inline bool useHive() const;
 
+  inline bool hideMainToolbar() const;
+  inline bool hideChatToolbar() const;
+  inline bool hideUsersPanel() const;
+  inline bool hideOtherPanels() const;
+  inline bool hideAllPanels() const;
+
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
   inline void setUseMulticastDns( bool );
@@ -453,6 +459,11 @@ private:
   bool m_useHive;
   bool m_enableSaveData;
   bool m_useHostnameForDefaultUsername;
+  bool m_hideMainToolbar;
+  bool m_hideChatToolbar;
+  bool m_hideUsersPanel;
+  bool m_hideOtherPanels;
+  bool m_askNicknameAtStartupInRC;
 
   // Ini
   bool m_firstTime;
@@ -540,9 +551,7 @@ private:
   bool m_useDefaultPassword;
   bool m_savePassword;
   bool m_askPasswordAtStartup;
-
   bool m_askNicknameAtStartup;
-
   QString m_language;
   bool m_beepOnNewMessageArrived;
   bool m_beepAlwaysOnNewMessageArrived;
@@ -891,5 +900,9 @@ inline bool Settings::canPostUsageStatistics() const { return m_postUsageStatist
 inline int Settings::textSizeInChatMessagePreviewOnTray() const { return m_textSizeInChatMessagePreviewOnTray; }
 inline bool Settings::autoSearchUsersWhenListIsEmpty() const { return m_autoSearchUsersWhenListIsEmpty; }
 inline bool Settings::useLowDelayOptionOnSocket() const { return m_useLowDelayOptionOnSocket; }
+inline bool Settings::hideMainToolbar() const { return m_hideMainToolbar; }
+inline bool Settings::hideChatToolbar() const { return m_hideChatToolbar; }
+inline bool Settings::hideUsersPanel() const { return m_hideUsersPanel; }
+inline bool Settings::hideOtherPanels() const { return m_hideOtherPanels; }
 
 #endif // BEEBEEP_SETTINGS_H

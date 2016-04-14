@@ -217,26 +217,29 @@ void GuiMain::toggleVisibilityEmoticonPanel()
 
 void GuiMain::applyFlagStaysOnTop()
 {
+#ifdef Q_OS_WIN
   if( Settings::instance().stayOnTop() )
-  {
-    setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint );
-  }
+    SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
   else
-  {
-    setWindowFlags( windowFlags() & ~Qt::WindowStaysOnTopHint );
-  }
+    SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+  Qt::WindowFlags flags = this->windowFlags();
+  if( Settings::instance().stayOnTop() )
+    setWindowFlags( flags | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint );
+  else
+    setWindowFlags( flags ^ (Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint) );
+  show();
+#endif
 }
 
 void GuiMain::checkWindowFlagsAndShow()
 {
-  applyFlagStaysOnTop();
-
   checkViewActions();
 
+  show();
+  applyFlagStaysOnTop();
   if( Settings::instance().showMinimizedAtStartup() )
-    showMinimized();
-  else
-    show();
+    QTimer::singleShot( 100, this, SLOT( showMinimized() ) );
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
   if( Settings::instance().chatSplitterState().isEmpty() )
@@ -468,7 +471,7 @@ void GuiMain::initGuiItems()
 {
   bool enable = mp_core->isConnected();
 
-  if( Settings::instance().showHomeAsDefaultPage() )
+  if( Settings::instance().showHomeAsDefaultPage() && !mp_barMain->isHidden() )
     raiseHomeView();
 
   if( enable )
@@ -491,6 +494,9 @@ void GuiMain::initGuiItems()
   updateNewMessageAction();
 
   refreshTitle( Settings::instance().localUser() );
+
+  if( enable && mp_stackedWidget->currentWidget() == mp_chat && isActiveWindow() )
+    mp_chat->ensureFocusInChat();
 }
 
 void GuiMain::checkViewActions()
@@ -1125,6 +1131,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewLog );
   mp_barMain->addAction( mp_actViewScreenShot );
 
+  mp_barMain->setVisible( !Settings::instance().hideMainToolbar() );
 }
 
 void GuiMain::createDockWindows()
@@ -1208,13 +1215,17 @@ void GuiMain::createDockWindows()
   connect( mp_actViewEmoticons, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
   mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
 
-  if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() )
+  if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() || Settings::instance().hideOtherPanels() )
   {
     mp_dockGroupList->hide();
     mp_dockSavedChatList->hide();
     mp_dockFileTransfers->hide();
     mp_dockEmoticons->hide();
+    if( Settings::instance().hideOtherPanels() )
+      mp_dockChatList->hide();
   }
+
+  mp_dockUserList->setVisible( !Settings::instance().hideUsersPanel() );
 }
 
 void GuiMain::emoticonMenuVisibilityChanged( bool is_visible )
@@ -1290,6 +1301,8 @@ void GuiMain::createStackedWidgets()
 
   mp_home = new GuiHome( this );
   mp_stackedWidget->addWidget( mp_home );
+
+  mp_barChat->setVisible( Settings::instance().showChatToolbar() );
 
   mp_stackedWidget->setCurrentWidget( mp_chat );
 }
@@ -2732,8 +2745,8 @@ void GuiMain::raiseOnTop()
   SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
   SetActiveWindow( (HWND)winId() );
-  SetFocus( (HWND)winId() );
   applyFlagStaysOnTop();
+  SetFocus( (HWND)winId() );
 #else
   raise();
 #endif
@@ -3471,8 +3484,6 @@ void GuiMain::detachChat( VNumber chat_id )
   connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );
   connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
   m_floatingChats.append( fl_chat );
-
-  readAllMessagesInChat( chat_id );
 
   fl_chat->checkWindowFlagsAndShow();
   fl_chat->guiChat()->updateShortcuts();

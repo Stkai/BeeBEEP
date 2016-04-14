@@ -79,6 +79,11 @@ Settings::Settings()
   m_checkNewVersionAtStartup = true;
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;
+  m_hideMainToolbar = false;
+  m_hideChatToolbar = false;
+  m_hideUsersPanel = false;
+  m_hideOtherPanels = false;
+  m_askNicknameAtStartupInRC = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -244,6 +249,11 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "EnableChatWithAllUsers", m_useChatWithAllUsers );
     sets->setValue( "UseHive", m_useHive );
     sets->setValue( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername );
+    sets->setValue( "HideMainToolbar", m_hideMainToolbar );
+    sets->setValue( "HideChatToolbar", m_hideChatToolbar );
+    sets->setValue( "HideUsersPanel", m_hideUsersPanel );
+    sets->setValue( "HideOtherPanels", m_hideOtherPanels );
+    sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartupInRC );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -305,6 +315,11 @@ void Settings::loadRcFile()
   m_useChatWithAllUsers = sets->value( "EnableChatWithAllUsers", m_useChatWithAllUsers ).toBool();
   m_useHive = sets->value( "UseHive", m_useHive ).toBool();
   m_useHostnameForDefaultUsername = sets->value( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername ).toBool();
+  m_hideMainToolbar = sets->value( "HideMainToolbar", m_hideMainToolbar ).toBool();
+  m_hideChatToolbar = sets->value( "HideChatToolbar", m_hideChatToolbar ).toBool();
+  m_hideUsersPanel = sets->value( "HideUsersPanel", m_hideUsersPanel ).toBool();
+  m_hideOtherPanels = sets->value( "HideOtherPanels", m_hideOtherPanels ).toBool();
+  m_askNicknameAtStartupInRC = sets->value( "AskNicknameAtStartup", m_askNicknameAtStartupInRC ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -722,7 +737,10 @@ void Settings::load()
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
-  m_askNicknameAtStartup = sets->value( "AskNicknameAtStartup", false ).toBool();
+  if( !m_askNicknameAtStartupInRC )
+    m_askNicknameAtStartup = sets->value( "AskNicknameAtStartup", false ).toBool();
+  else
+    m_askNicknameAtStartup = m_askNicknameAtStartupInRC;
   m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
   m_savePassword = sets->value( "SavePassword", false ).toBool();
   QString enc_pass = "";
@@ -818,7 +836,10 @@ void Settings::load()
   m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
-  m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
+  if( m_hideChatToolbar )
+    m_showChatToolbar = false;
+  else
+    m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", true ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
@@ -1003,8 +1024,11 @@ void Settings::save()
   sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
+  if( m_askNicknameAtStartupInRC )
+    sets->remove( "AskNicknameAtStartup" );
+  else
+    sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartup );
   sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
-  sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartup );
   sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
   if( m_savePassword )
   {
@@ -1077,7 +1101,10 @@ void Settings::save()
   sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
-  sets->setValue( "ShowChatToolbar", m_showChatToolbar );
+  if( m_hideChatToolbar ) // to make the bar appears when rc option is disabled
+    sets->remove( "ShowChatToolbar" );
+  else
+    sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->setValue( "ShowHomeAsDefaultPage", m_showHomeAsDefaultPage );
   sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
