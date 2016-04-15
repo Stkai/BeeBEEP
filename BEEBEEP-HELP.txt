@@ -42,6 +42,7 @@ HideChatToolbar=[true/false] If enabled BeeBEEP hide the chat toolbar startup (d
 HideUsersPanel=[true/false] If enabled BeeBEEP hide users panel at startup (default=false) [3.0.6]
 HideOtherPanels=[true/false] If enabled BeeBEEP hide all other panels at startup (default=false) [3.0.6]
 AskNicknameAtStartup=[true/false] show nickname dialog at connection to BeeBEEP network (default=false) [3.0.6]
+DisableFileTransfer=[true/false] disable file transfer (default=false) [3.0.6]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]

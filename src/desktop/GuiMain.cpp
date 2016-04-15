@@ -496,6 +496,7 @@ void GuiMain::initGuiItems()
 
   updateStatusIcon();
   updateNewMessageAction();
+  checkViewActions();
 
   refreshTitle( Settings::instance().localUser() );
 
@@ -510,8 +511,8 @@ void GuiMain::checkViewActions()
 
   mp_actViewHome->setEnabled( mp_stackedWidget->currentWidget() != mp_home );
   mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_chat );
-  mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
-  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
+  mp_actViewShareLocal->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareLocal );
+  mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
   mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
 
@@ -557,6 +558,12 @@ void GuiMain::checkViewActions()
     mp_barScreenShot->hide();
 
   showDefaultServerPortInMenu();
+
+  if( !m_floatingChats.isEmpty() )
+  {
+    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+      fl_chat->guiChat()->updateActions( is_connected, connected_users );
+  }
 }
 
 void GuiMain::showAbout()
@@ -811,6 +818,7 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().fileTransferIsEnabled() );
   act->setData( 12 );
+  act->setEnabled( !Settings::instance().disableFileTransfer() );
 
   QMenu* existing_file_menu = mp_menuSettings->addMenu( tr( "If a file already exist" ) );
   mp_actGroupExistingFile = new QActionGroup( this );
@@ -1432,7 +1440,14 @@ void GuiMain::settingsChanged()
     Settings::instance().setMinimizeInTray( act->isChecked() );
     break;
   case 12:
-    Settings::instance().setFileTransferIsEnabled( act->isChecked() );
+    {
+      Settings::instance().setFileTransferIsEnabled( act->isChecked() );
+      if( act->isChecked() )
+        mp_core->startFileTransferServer();
+      else
+        mp_core->stopFileTransferServer();
+      checkViewActions();
+    }
     break;
   case 13:
     Settings::instance().setShowMessagesGroupByUser( act->isChecked() );

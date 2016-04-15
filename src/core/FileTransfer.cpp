@@ -36,12 +36,7 @@ FileTransfer::FileTransfer( QObject *parent )
 
 bool FileTransfer::startListener()
 {
-  qDebug() << "Starting File Transfer listener";
-  if( isListening() )
-  {
-    qDebug() << "File Transfer server is already listening";
-    return true;
-  }
+  qDebug() << "Starting File Transfer server";
 
   if( !listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultFileTransferPort() ) )
   {
@@ -72,9 +67,11 @@ void FileTransfer::stopListener()
 
     m_files.clear();
 
-    qDebug() << "File Transfer listener closed";
+    qDebug() << "File Transfer server closed";
     close();
   }
+  else
+    qDebug() << "File Transfer server is not active";
 }
 
 void FileTransfer::resetServerFiles()

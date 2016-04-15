@@ -181,6 +181,8 @@ bool Core::start()
 
   if( Settings::instance().fileTransferIsEnabled() )
     startFileTransferServer();
+  else
+    qWarning() << "File transfer is disabled";
 
   if( Settings::instance().showTipsOfTheDay() )
   {

@@ -101,6 +101,8 @@ public:
   inline bool hideOtherPanels() const;
   inline bool hideAllPanels() const;
 
+  inline bool disableFileTransfer() const;
+
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
   inline void setUseMulticastDns( bool );
@@ -464,6 +466,7 @@ private:
   bool m_hideUsersPanel;
   bool m_hideOtherPanels;
   bool m_askNicknameAtStartupInRC;
+  bool m_disableFileTransfer;
 
   // Ini
   bool m_firstTime;
@@ -904,5 +907,6 @@ inline bool Settings::hideMainToolbar() const { return m_hideMainToolbar; }
 inline bool Settings::hideChatToolbar() const { return m_hideChatToolbar; }
 inline bool Settings::hideUsersPanel() const { return m_hideUsersPanel; }
 inline bool Settings::hideOtherPanels() const { return m_hideOtherPanels; }
+inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer; }
 
 #endif // BEEBEEP_SETTINGS_H

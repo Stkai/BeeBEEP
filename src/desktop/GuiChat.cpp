@@ -195,8 +195,8 @@ void GuiChat::updateActions( bool is_connected, int connected_users )
   bool local_user_is_member = isActiveUser( c, Settings::instance().localUser() );
   bool is_group_chat = c.isGroup();
 
-  mp_actSendFile->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
-  mp_actSendFolder->setEnabled( local_user_is_member && is_connected && connected_users > 0 );
+  mp_actSendFile->setEnabled( Settings::instance().fileTransferIsEnabled() && local_user_is_member && is_connected && connected_users > 0 );
+  mp_actSendFolder->setEnabled( Settings::instance().fileTransferIsEnabled() && local_user_is_member && is_connected && connected_users > 0 );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
   if( c.isDefault() )

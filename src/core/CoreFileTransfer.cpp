@@ -35,13 +35,18 @@
 
 bool Core::startFileTransferServer()
 {
+  if( mp_fileTransfer->isListening() )
+  {
+    qDebug() << "Starting File Transfer server but it is already started";
+    return true;
+  }
+
   if( !mp_fileTransfer->startListener() )
   {
     QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ),
                            DispatchToChat, ChatMessage::FileTransfer );
-    qWarning() << "Unable to start file transfer server: bind address/port failed";
     return false;
   }
 

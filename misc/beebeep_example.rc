@@ -19,6 +19,7 @@ HideChatToolbar=false
 HideusersPanel=false
 HideOtherPanels=false
 AskNicknameAtStartup=false
+DisableFileTransfer=false
 
 [Groups]
 TrustNickname=true

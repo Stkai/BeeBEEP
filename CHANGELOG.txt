@@ -14,6 +14,7 @@ BeeBEEP 3.0.6
 - Fixed a bug on stay on top (windows)
 - Added "HideMainToolbar", "HideChatToolbar", "HideUsersPanel" and "HideOtherPanels" options. They can be enabled in beebeep.rc
 - Added "AskNicknameAtStartup" to beebeep.rc also
+- Added "DisableFileTransfer" option in beebeep.rc
 
 BeeBEEP 3.0.5
 - Added timestamp and datestamp to home activities (option - right click on text)

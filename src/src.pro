@@ -13,8 +13,8 @@ include(../beebeep.pri)
 message( Target folder: $$DESTDIR )
 
 TEMPLATE = app
-DEFINES += MAKE_BEEBEEP_PORTABLE
-#TARGET = beebeep-portable
+#DEFINES += MAKE_BEEBEEP_PORTABLE
+DEFINES += BEEBEEP_DISABLE_FILE_TRANSFER
 TARGET = beebeep
 
 QT += network xml

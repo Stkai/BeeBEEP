@@ -84,6 +84,11 @@ Settings::Settings()
   m_hideUsersPanel = false;
   m_hideOtherPanels = false;
   m_askNicknameAtStartupInRC = false;
+#ifdef BEEBEEP_DISABLE_FILE_TRANSFER
+  m_disableFileTransfer = true;
+#else
+  m_disableFileTransfer = false;
+#endif
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -254,6 +259,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "HideUsersPanel", m_hideUsersPanel );
     sets->setValue( "HideOtherPanels", m_hideOtherPanels );
     sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartupInRC );
+    sets->setValue( "DisableFileTransfer", m_disableFileTransfer );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -320,6 +326,11 @@ void Settings::loadRcFile()
   m_hideUsersPanel = sets->value( "HideUsersPanel", m_hideUsersPanel ).toBool();
   m_hideOtherPanels = sets->value( "HideOtherPanels", m_hideOtherPanels ).toBool();
   m_askNicknameAtStartupInRC = sets->value( "AskNicknameAtStartup", m_askNicknameAtStartupInRC ).toBool();
+#ifdef BEEBEEP_DISABLE_FILE_TRANSFER
+  m_disableFileTransfer = true;
+#else
+  m_disableFileTransfer = sets->value( "DisableFileTransfer", m_disableFileTransfer ).toBool();
+#endif
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -390,7 +401,11 @@ bool Settings::createDefaultHostsFile()
 
 QString Settings::version( bool complete ) const
 {
+#ifdef BEEBEEP_DISABLE_FILE_TRANSFER
+  return complete ? QString( "%1 (b%2p%3)-noft" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION ) : QString( "%1-noft" ).arg( BEEBEEP_VERSION );
+#else
   return complete ? QString( "%1 (b%2p%3)" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION ) : QString( BEEBEEP_VERSION );
+#endif
 }
 
 QString Settings::httpUserAgent() const
@@ -919,7 +934,10 @@ void Settings::load()
   loadBroadcastAddressesFromFileHosts();
 
   sets->beginGroup( "FileShare" );
-  m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
+  if( m_disableFileTransfer )
+    m_fileTransferIsEnabled = false;
+  else
+    m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
   m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
   m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
@@ -1175,7 +1193,10 @@ void Settings::save()
   sets->setValue( "AutoSearchUsersWhenListIsEmpty", m_autoSearchUsersWhenListIsEmpty );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
-  sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
+  if( m_disableFileTransfer )
+    sets->setValue( "FileTransferIsEnabled", false );
+  else
+    sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
   sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
   sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );
   sets->setValue( "MaxFileShared", m_maxFileShared );
