@@ -573,7 +573,7 @@ void GuiMain::showAbout()
                       .arg( Settings::instance().programName() )
                       .arg( tr( "Secure Lan Messenger" ) )
                       .arg( tr( "Version" ) )
-                      .arg( Settings::instance().version( true ) )
+                      .arg( Settings::instance().version( true, true ) )
                       .arg( tr( "for" ) )
                       .arg( Settings::instance().operatingSystem( true ) )
                       .arg( tr( "developed by" ) )
@@ -1112,13 +1112,12 @@ void GuiMain::createToolAndMenuBars()
   QLabel *label_version = new QLabel( this );
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignCenter );
-  QString label_version_text = QString( "&nbsp;<b>v %1-qt%2</b> %3&nbsp;" )
+  QString label_version_text = QString( "&nbsp;<b>v %1</b> %2&nbsp;" )
 #ifdef BEEBEEP_DEBUG
-                            .arg( Settings::instance().version( true ) )
+                            .arg( Settings::instance().version( true, true ) )
 #else
-                            .arg( Settings::instance().version( false ) )
+                            .arg( Settings::instance().version( true, false ) )
 #endif
-                            .arg( Settings::instance().localUser().qtVersion() )
                             .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
   label_version->setText( label_version_text );
   menuBar()->setCornerWidget( label_version );
@@ -2230,6 +2229,7 @@ void GuiMain::showChat( VNumber chat_id )
       fl_chat->raiseOnTop();
 
     readAllMessagesInChat( chat_id );
+    fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
     fl_chat->guiChat()->reloadChatUsers();
     fl_chat->guiChat()->ensureFocusInChat();
     return;
@@ -2242,6 +2242,7 @@ void GuiMain::showChat( VNumber chat_id )
 #endif
     mp_chat->reloadChatUsers();
     readAllMessagesInChat( chat_id );
+    mp_chat->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
     if( !isActiveWindow() )
       raiseOnTop();
     mp_chat->ensureFocusInChat();
@@ -3496,7 +3497,10 @@ void GuiMain::detachChat( VNumber chat_id )
   }
 
   if( mp_chat->chatId() == chat_id )
+  {
     showDefaultChat();
+    raiseHomeView();
+  }
 
   fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
   setupChatConnections( fl_chat->guiChat() );
@@ -3506,6 +3510,7 @@ void GuiMain::detachChat( VNumber chat_id )
 
   fl_chat->checkWindowFlagsAndShow();
   fl_chat->guiChat()->updateShortcuts();
+  fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
   fl_chat->guiChat()->ensureLastMessageVisible();
   fl_chat->raiseOnTop();
   fl_chat->guiChat()->ensureFocusInChat();

@@ -267,7 +267,7 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   data_list << Settings::instance().localUser().statusDescription();
   data_list << Settings::instance().localUser().accountName();
   data_list << public_key;
-  data_list << Settings::instance().version( false );
+  data_list << Settings::instance().version( false, false );
   data_list << Settings::instance().localUser().sessionId();
   data_list << Settings::instance().localUser().color();
   if( Settings::instance().workgroups().isEmpty() )

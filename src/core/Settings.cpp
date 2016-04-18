@@ -89,6 +89,11 @@ Settings::Settings()
 #else
   m_disableFileTransfer = false;
 #endif
+#ifdef BEEBEEP_DISABLE_SEND_MESSAGE
+  m_disableSendMessage = true;
+#else
+  m_disableSendMessage = false;
+#endif
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -101,7 +106,7 @@ Settings::Settings()
   m_promptOnCloseEvent = true;
   m_saveUserList = true;
   m_localUser.setStatus( User::Online );
-  m_localUser.setVersion( version( false ) );
+  m_localUser.setVersion( version( false, false ) );
   setPassword( defaultPassword() );
   m_resourceFolder = ".";
 #if QT_VERSION >= 0x050400
@@ -209,7 +214,7 @@ void Settings::createLocalUser()
 void Settings::createSessionId()
 {
   QString session_parameters = QString( "%1%2%3%4" ).arg( m_localUser.accountName() ).arg( m_localUser.path() )
-          .arg( version( true ) ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
+          .arg( version( true, true ) ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QByteArray id_generated = QCryptographicHash::hash( session_parameters.toUtf8(), QCryptographicHash::Sha1 );
   QString session_id = QString::fromUtf8( id_generated.toHex() );
   qDebug() << "Session ID created:" << session_id;
@@ -260,6 +265,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "HideOtherPanels", m_hideOtherPanels );
     sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartupInRC );
     sets->setValue( "DisableFileTransfer", m_disableFileTransfer );
+    sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -331,6 +337,7 @@ void Settings::loadRcFile()
 #else
   m_disableFileTransfer = sets->value( "DisableFileTransfer", m_disableFileTransfer ).toBool();
 #endif
+  m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -399,18 +406,30 @@ bool Settings::createDefaultHostsFile()
   }
 }
 
-QString Settings::version( bool complete ) const
+QString Settings::version( bool qt_version, bool debug_info ) const
 {
+  QString s_version = QString( BEEBEEP_VERSION );
+
+  if( debug_info )
+  {
+    s_version += QString( " (b%1p%2)" ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION );
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
-  return complete ? QString( "%1 (b%2p%3)-noft" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION ) : QString( "%1-noft" ).arg( BEEBEEP_VERSION );
-#else
-  return complete ? QString( "%1 (b%2p%3)" ).arg( BEEBEEP_VERSION ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION ) : QString( BEEBEEP_VERSION );
+    s_version += QLatin1String( "-noft" );
 #endif
+#ifdef BEEBEEP_DISABLE_SEND_MESSAGE
+    s_version += QLatin1String( "-nosm" );
+#endif
+  }
+
+  if( qt_version )
+    s_version += QString( "-qt%1" ).arg( qtMajorVersion() );
+
+  return s_version;
 }
 
 QString Settings::httpUserAgent() const
 {
-  return QString( "%1 %2" ).arg( programName() ).arg( version( false ) );
+  return QString( "%1 %2" ).arg( programName() ).arg( version( false, false ) );
 }
 
 int Settings::protoVersion() const
@@ -1004,7 +1023,7 @@ void Settings::save()
   sets->clear();
 
   sets->beginGroup( "Version" );
-  sets->setValue( "Program", version( true ) );
+  sets->setValue( "Program", version( false, true ) );
   sets->setValue( "Proto", protoVersion() );
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->setValue( "DataStream", (int)dataStreamVersion( false ) );

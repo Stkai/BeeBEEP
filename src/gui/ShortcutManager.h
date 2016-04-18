@@ -48,7 +48,6 @@ public:
   QStringList saveToStringList() const;
   void loadFromStringList( const QStringList& );
 
-
   static ShortcutManager& instance()
   {
     if( !mp_instance )

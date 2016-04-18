@@ -79,7 +79,7 @@ void SaveChatList::save()
 
   QStringList file_header;
   file_header << Settings::instance().programName();
-  file_header << Settings::instance().version( false );
+  file_header << Settings::instance().version( false, false );
   file_header << QString::number( Settings::instance().protoVersion() );
 
   stream << file_header;

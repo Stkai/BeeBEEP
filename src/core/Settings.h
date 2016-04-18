@@ -71,7 +71,7 @@ public:
   QString defaultBeepFilePath( bool use_resource_folder ) const;
   QString defaultPluginFolderPath( bool use_resource_folder ) const;
 
-  QString version( bool ) const;
+  QString version( bool qt_version, bool debug_info ) const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
   QString programName() const;
@@ -102,6 +102,7 @@ public:
   inline bool hideAllPanels() const;
 
   inline bool disableFileTransfer() const;
+  inline bool disableSendMessage() const;
 
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
@@ -467,6 +468,7 @@ private:
   bool m_hideOtherPanels;
   bool m_askNicknameAtStartupInRC;
   bool m_disableFileTransfer;
+  bool m_disableSendMessage;
 
   // Ini
   bool m_firstTime;
@@ -908,5 +910,6 @@ inline bool Settings::hideChatToolbar() const { return m_hideChatToolbar; }
 inline bool Settings::hideUsersPanel() const { return m_hideUsersPanel; }
 inline bool Settings::hideOtherPanels() const { return m_hideOtherPanels; }
 inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer; }
+inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
 
 #endif // BEEBEEP_SETTINGS_H

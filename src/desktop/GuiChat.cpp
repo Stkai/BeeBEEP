@@ -112,7 +112,6 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
   connect( mp_pbDetach, SIGNAL( clicked() ), this, SLOT( detachThisChat() ) );
   connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
-
 }
 
 void GuiChat::enableDetachButtons()
@@ -184,6 +183,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
 
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
+
 }
 
 void GuiChat::updateActions( bool is_connected, int connected_users )
@@ -199,11 +199,20 @@ void GuiChat::updateActions( bool is_connected, int connected_users )
   mp_actSendFolder->setEnabled( Settings::instance().fileTransferIsEnabled() && local_user_is_member && is_connected && connected_users > 0 );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
-  if( c.isDefault() )
-    mp_teMessage->setEnabled( is_connected && Settings::instance().chatWithAllUsersIsEnabled() );
+
+  if( Settings::instance().disableSendMessage() )
+  {
+    mp_teMessage->setEnabled( false );
+    mp_pbSend->setEnabled( false );
+  }
   else
-    mp_teMessage->setEnabled( is_connected && local_user_is_member );
-  mp_pbSend->setEnabled( is_connected );
+  {
+    if( c.isDefault() )
+      mp_teMessage->setEnabled( is_connected && Settings::instance().chatWithAllUsersIsEnabled() );
+    else
+      mp_teMessage->setEnabled( is_connected && local_user_is_member );
+    mp_pbSend->setEnabled( is_connected );
+  }
 }
 
 void GuiChat::customContextMenu( const QPoint& p )
@@ -292,6 +301,8 @@ void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
 
 void GuiChat::sendMessage()
 {
+  if( Settings::instance().disableSendMessage() )
+    return;
   emit newMessage( m_chatId, mp_teMessage->message() );
   mp_teMessage->clearMessage();
   ensureFocusInChat();
@@ -550,6 +561,9 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
   ensureLastMessageVisible();
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
+
+  mp_teMessage->setDisabled( Settings::instance().disableSendMessage() );
+  mp_pbSend->setDisabled( Settings::instance().disableSendMessage() );
 
   QApplication::restoreOverrideCursor();
   return true;
