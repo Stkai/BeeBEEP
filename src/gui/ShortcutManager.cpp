@@ -87,10 +87,22 @@ bool ShortcutManager::setShortcut( int st, const QString& s )
 #endif
     QKeySequence ks = QKeySequence::fromString( s_key );
     m_shortcuts[ st ] = ks;
+    if( isGlobalShortcut( st ) )
+      updateGlobalShortcuts( st );
     return true;
   }
   else
     return false;
+}
+
+bool ShortcutManager::isGlobalShortcut( int st )
+{
+  return st == ShowAllChats;
+}
+
+void ShortcutManager::updateGlobalShortcuts( int st )
+{
+  Q_UNUSED( st );
 }
 
 void ShortcutManager::setDefaultShortcuts()
@@ -125,6 +137,7 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ ShowEmoticons ] = QKeySequence( Qt::CTRL | Qt::Key_E );
   m_shortcutNames[ ShowAllChats ] = QObject::tr( "Show all chats" );
   m_shortcuts[ ShowAllChats ] = QKeySequence( Qt::CTRL | Qt::ALT | Qt::Key_B );
+  updateGlobalShortcuts( ShowAllChats );
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )

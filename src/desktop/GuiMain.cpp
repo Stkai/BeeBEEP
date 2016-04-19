@@ -1907,7 +1907,10 @@ void GuiMain::sendFile( VNumber user_id )
 void GuiMain::sendFiles( const User& u, const QStringList& file_list )
 {
   foreach( QString file_path, file_list )
-    sendFile( u, file_path );
+  {
+    if( !sendFile( u, file_path ) )
+      return;
+  }
 }
 
 QStringList GuiMain::checkFilePath( const QString& file_path )
@@ -1932,6 +1935,18 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
 
 bool GuiMain::sendFile( const User& u, const QString& file_path )
 {
+  if( !Settings::instance().fileTransferIsEnabled() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "File transfer is not enabled." ) );
+    return false;
+  }
+
+  if( !mp_core->isConnected() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "You are not connected." ) );
+    return false;
+  }
+
   User user_selected;
 
   if( !u.isValid() )

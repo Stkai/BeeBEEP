@@ -3521,6 +3521,14 @@ il file %2 (%3)?</translation>
         <source>Never</source>
         <translation>Mai</translation>
     </message>
+    <message>
+        <source>File transfer is not enabled.</source>
+        <translation>Il trasferimento dei file non è attivo.</translation>
+    </message>
+    <message>
+        <source>You are not connected.</source>
+        <translation>Non sei connesso.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
