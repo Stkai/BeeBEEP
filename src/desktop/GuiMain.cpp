@@ -185,8 +185,10 @@ void GuiMain::initShortcuts()
   mp_scMinimizeAllChats->setContext( Qt::ApplicationShortcut );
   connect( mp_scMinimizeAllChats, SIGNAL( activated() ), this, SLOT( minimizeAllChats() ) );
 
+#ifdef BEEBEEP_USE_QXT
   mp_scShowAllChats = new QxtGlobalShortcut( this );
   connect( mp_scShowAllChats, SIGNAL( activated() ), this, SLOT( showAllChats() ) );
+#endif
 
   mp_scShowNextUnreadMessage = new QShortcut( this );
   mp_scShowNextUnreadMessage->setContext( Qt::ApplicationShortcut );
@@ -3679,6 +3681,7 @@ void GuiMain::updateShortcuts()
   else
     mp_scMinimizeAllChats->setEnabled( false );
 
+#ifdef BEEBEEP_USE_QXT
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowAllChats );
   if( !ks.isEmpty() )
   {
@@ -3687,7 +3690,7 @@ void GuiMain::updateShortcuts()
   }
   else
     mp_scShowAllChats->setEnabled( false );
-
+#endif
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowNextUnreadMessage );
   if( !ks.isEmpty() )
   {

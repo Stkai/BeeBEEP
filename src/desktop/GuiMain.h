@@ -27,7 +27,9 @@
 
 #include "Config.h"
 #include "FileInfo.h"
-#include "qxtglobalshortcut.h"
+#ifdef BEEBEEP_USE_QXT
+ #include "qxtglobalshortcut.h"
+#endif
 class Core;
 class Chat;
 class ChatMessage;
@@ -330,7 +332,9 @@ private:
 
   QShortcut* mp_scMinimizeAllChats;
   QShortcut* mp_scShowNextUnreadMessage;
+#ifdef BEEBEEP_USE_QXT
   QxtGlobalShortcut* mp_scShowAllChats;
+#endif
   QWidget* mp_lastActiveWindow;
 
 

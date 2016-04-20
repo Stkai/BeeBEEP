@@ -45,6 +45,8 @@ public:
   inline const QString& shortcutName( int ) const;
   bool setShortcut( int, const QString& );
 
+  inline bool isGlobalShortcut( int ) const;
+
   QStringList saveToStringList() const;
   void loadFromStringList( const QStringList& );
 
@@ -77,5 +79,6 @@ private:
 inline const QKeySequence& ShortcutManager::shortcut( int st ) const { return st > 0 && st < NumShortcut ? m_shortcuts.at( st ) : m_shortcuts.at( Empty ); }
 inline QString ShortcutManager::shortcutKey( int st ) const { return shortcutKey( shortcut( st ) ); }
 inline const QString& ShortcutManager::shortcutName( int st ) const { return st > 0 && st < NumShortcut ? m_shortcutNames.at( st ) : m_shortcutNames.at( Empty ); }
+inline bool ShortcutManager::isGlobalShortcut( int st ) const { return st == ShowAllChats; }
 
 #endif // BEEBEEP_SHORTCUTMANAGER_H

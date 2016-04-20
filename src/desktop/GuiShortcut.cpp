@@ -62,6 +62,10 @@ void GuiShortcut::loadShortcuts()
       item->setText( 0, ShortcutManager::instance().shortcutKey( i ) );
       item->setText( 1, ShortcutManager::instance().shortcutName( i ) );
       item->setData( 0, Qt::UserRole+1, i );
+#ifndef BEEBEEP_USE_QXT
+      if( ShortcutManager::instance().isGlobalShortcut( i ) )
+        item->setDisabled( true );
+#endif
     }
   }
 }
@@ -90,6 +94,9 @@ void GuiShortcut::restoreDefault()
 void GuiShortcut::checkItemClicked( QTreeWidgetItem* item, int )
 {
   if( !item )
+    return;
+
+  if( item->isDisabled() )
     return;
 
   QString shortcut_previous_key = item->text( 0 );
