@@ -27,6 +27,7 @@
 
 #include "Config.h"
 #include "FileInfo.h"
+#include "qxtglobalshortcut.h"
 class Core;
 class Chat;
 class ChatMessage;
@@ -329,8 +330,9 @@ private:
 
   QShortcut* mp_scMinimizeAllChats;
   QShortcut* mp_scShowNextUnreadMessage;
-  QShortcut* mp_scShowAllChats;
+  QxtGlobalShortcut* mp_scShowAllChats;
   QWidget* mp_lastActiveWindow;
+
 
   bool m_prevActivatedState;
 };

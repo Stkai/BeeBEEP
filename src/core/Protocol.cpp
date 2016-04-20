@@ -1331,12 +1331,13 @@ QString Protocol::formatHtmlText( const QString& text )
 {
   QString text_formatted = "";
   int last_semicolon_index = -1;
+  bool there_is_a_space_before_it = false;
 
   for( int i = 0; i < text.length(); i++ )
   {
     if( text.at( i ) == QLatin1Char( ' ' ) )
     {
-      if( (i + 1) < text.length() && text.at( (i+1) ) == QLatin1Char( ' ' ) )
+      if( there_is_a_space_before_it )
         text_formatted += QLatin1String( "&nbsp;" );
       else
         text_formatted += QLatin1Char( ' ' );
@@ -1383,6 +1384,8 @@ QString Protocol::formatHtmlText( const QString& text )
     }
     else
       text_formatted += text.at( i );
+
+    there_is_a_space_before_it = text.at( i ) == QLatin1Char( ' ' );
   }
 
   if( last_semicolon_index >= 0 )

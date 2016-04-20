@@ -83,7 +83,7 @@ Settings::Settings()
   m_hideChatToolbar = false;
   m_hideUsersPanel = false;
   m_hideOtherPanels = false;
-  m_askNicknameAtStartupInRC = false;
+  m_useEasyConnection = false;
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
 #else
@@ -263,9 +263,9 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "HideChatToolbar", m_hideChatToolbar );
     sets->setValue( "HideUsersPanel", m_hideUsersPanel );
     sets->setValue( "HideOtherPanels", m_hideOtherPanels );
-    sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartupInRC );
     sets->setValue( "DisableFileTransfer", m_disableFileTransfer );
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
+    sets->setValue( "UseEasyConnection", m_useEasyConnection );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -331,13 +331,13 @@ void Settings::loadRcFile()
   m_hideChatToolbar = sets->value( "HideChatToolbar", m_hideChatToolbar ).toBool();
   m_hideUsersPanel = sets->value( "HideUsersPanel", m_hideUsersPanel ).toBool();
   m_hideOtherPanels = sets->value( "HideOtherPanels", m_hideOtherPanels ).toBool();
-  m_askNicknameAtStartupInRC = sets->value( "AskNicknameAtStartup", m_askNicknameAtStartupInRC ).toBool();
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
 #else
   m_disableFileTransfer = sets->value( "DisableFileTransfer", m_disableFileTransfer ).toBool();
 #endif
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
+  m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -770,12 +770,19 @@ void Settings::load()
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
-  m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
-  if( !m_askNicknameAtStartupInRC )
-    m_askNicknameAtStartup = sets->value( "AskNicknameAtStartup", false ).toBool();
+  if( m_useEasyConnection )
+  {
+    m_useDefaultPassword = true;
+    m_askNicknameAtStartup = false;
+    m_askPasswordAtStartup = false;
+  }
   else
-    m_askNicknameAtStartup = m_askNicknameAtStartupInRC;
-  m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", true ).toBool();
+  {
+    m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
+    m_askNicknameAtStartup = sets->value( "AskNicknameAtStartup", m_firstTime ).toBool();
+    m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", m_firstTime  ).toBool();
+  }
+
   m_savePassword = sets->value( "SavePassword", false ).toBool();
   QString enc_pass = "";
   if( m_savePassword )
@@ -1061,10 +1068,7 @@ void Settings::save()
   sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
-  if( m_askNicknameAtStartupInRC )
-    sets->remove( "AskNicknameAtStartup" );
-  else
-    sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartup );
+  sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartup );
   sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
   sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
   if( m_savePassword )

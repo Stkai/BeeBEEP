@@ -18,9 +18,9 @@ HideMainToolbar=false
 HideChatToolbar=false
 HideusersPanel=false
 HideOtherPanels=false
-AskNicknameAtStartup=false
 DisableFileTransfer=false
 DisableSendMessage=false
+UseEasyConnection=false
 
 [Groups]
 TrustNickname=true

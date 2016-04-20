@@ -103,6 +103,7 @@ public:
 
   inline bool disableFileTransfer() const;
   inline bool disableSendMessage() const;
+  inline bool useEasyConnection() const;
 
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
@@ -466,9 +467,9 @@ private:
   bool m_hideChatToolbar;
   bool m_hideUsersPanel;
   bool m_hideOtherPanels;
-  bool m_askNicknameAtStartupInRC;
   bool m_disableFileTransfer;
   bool m_disableSendMessage;
+  bool m_useEasyConnection;
 
   // Ini
   bool m_firstTime;
@@ -911,5 +912,6 @@ inline bool Settings::hideUsersPanel() const { return m_hideUsersPanel; }
 inline bool Settings::hideOtherPanels() const { return m_hideOtherPanels; }
 inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer; }
 inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
+inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }
 
 #endif // BEEBEEP_SETTINGS_H

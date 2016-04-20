@@ -66,8 +66,6 @@ public:
 
 protected:
   ShortcutManager();
-  bool isGlobalShortcut( int );
-  void updateGlobalShortcuts( int );
 
 private:
   QVector<QKeySequence> m_shortcuts;

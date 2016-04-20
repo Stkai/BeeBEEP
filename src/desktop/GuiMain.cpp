@@ -185,8 +185,7 @@ void GuiMain::initShortcuts()
   mp_scMinimizeAllChats->setContext( Qt::ApplicationShortcut );
   connect( mp_scMinimizeAllChats, SIGNAL( activated() ), this, SLOT( minimizeAllChats() ) );
 
-  mp_scShowAllChats = new QShortcut( this );
-  mp_scShowAllChats->setContext( Qt::ApplicationShortcut );
+  mp_scShowAllChats = new QxtGlobalShortcut( this );
   connect( mp_scShowAllChats, SIGNAL( activated() ), this, SLOT( showAllChats() ) );
 
   mp_scShowNextUnreadMessage = new QShortcut( this );
@@ -259,6 +258,9 @@ void GuiMain::checkWindowFlagsAndShow()
   }
   else
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Restoring chat splitter state";
+#endif
     chat_splitter->restoreState( Settings::instance().chatSplitterState() );
   }
 }
@@ -325,6 +327,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
     mp_core->stop();
   }
 
+  saveGeometryAndState();
   raiseHomeView();
 
   QSettings* sets = Settings::instance().objectSettings();
@@ -368,8 +371,6 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->close();
-
-  saveGeometryAndState();
 
   mp_trayIcon->hide();
 
@@ -428,8 +429,12 @@ void GuiMain::startCore()
 
   if( Settings::instance().firstTime() )
   {
-    showWizard();
     Settings::instance().setFirstTime( false );
+    if( Settings::instance().askNicknameAtStartup() )
+    {
+      showWizard();
+      Settings::instance().setAskNicknameAtStartup( false );
+    }
 
     /* Save geometry for the first time */
     /* If the user closes the application when it is not visible
@@ -3677,7 +3682,7 @@ void GuiMain::updateShortcuts()
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowAllChats );
   if( !ks.isEmpty() )
   {
-    mp_scShowAllChats->setKey( ks );
+    mp_scShowAllChats->setShortcut( ks );
     mp_scShowAllChats->setEnabled( Settings::instance().useShortcuts() );
   }
   else
