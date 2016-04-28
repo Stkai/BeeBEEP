@@ -43,6 +43,7 @@ Settings::Settings()
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
   m_resetGeometryAtStartup = false;
+  m_saveDataInDocumentsFolder = false;
 
 #ifdef Q_OS_MAC
   m_useNativeEmoticons = true;

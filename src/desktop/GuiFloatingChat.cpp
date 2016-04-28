@@ -129,13 +129,12 @@ void GuiFloatingChat::applyFlagStaysOnTop()
     setWindowFlags( flags | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint );
   else
     setWindowFlags( flags ^ (Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint) );
-  show();
 #endif
+  show();
 }
 
 void GuiFloatingChat::checkWindowFlagsAndShow()
 {
-  show();
   applyFlagStaysOnTop();
 
   if( !Settings::instance().floatingChatGeometry().isEmpty() )
@@ -163,16 +162,15 @@ void GuiFloatingChat::raiseOnTop()
     showNormal();
 
 #ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
   applyFlagStaysOnTop();
   SetActiveWindow( (HWND)winId() );
   SetFocus( (HWND)winId() );
-  show();
 #else
   raise();
-#endif
   qApp->setActiveWindow( this );
+#endif
 
   emit readAllMessages( chatId() );
   mp_chat->ensureFocusInChat();

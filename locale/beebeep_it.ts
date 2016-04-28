@@ -3503,7 +3503,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If a file already exist</source>
-        <translation>Se un file esiste </translation>
+        <translation type="obsolete">Se un file esiste </translation>
     </message>
     <message>
         <source>If the file to be downloaded already exists it is automatically overwritten</source>
@@ -3528,6 +3528,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>You are not connected.</source>
         <translation>Non sei connesso.</translation>
+    </message>
+    <message>
+        <source>If a file already exists</source>
+        <translation>Se un file esiste già </translation>
     </message>
 </context>
 <context>

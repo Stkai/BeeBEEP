@@ -233,16 +233,16 @@ void GuiMain::applyFlagStaysOnTop()
     setWindowFlags( flags | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint );
   else
     setWindowFlags( flags ^ (Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint) );
-  show();
 #endif
+  show();
 }
 
 void GuiMain::checkWindowFlagsAndShow()
 {
   checkViewActions();
 
-  show();
   applyFlagStaysOnTop();
+
   if( Settings::instance().showMinimizedAtStartup() )
     QTimer::singleShot( 100, this, SLOT( showMinimized() ) );
 
@@ -827,7 +827,7 @@ void GuiMain::createMenus()
   act->setData( 12 );
   act->setEnabled( !Settings::instance().disableFileTransfer() );
 
-  QMenu* existing_file_menu = mp_menuSettings->addMenu( tr( "If a file already exist" ) );
+  QMenu* existing_file_menu = mp_menuSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
   mp_actOverwriteExistingFile = existing_file_menu->addAction( tr( "Overwrite" ), this, SLOT( settingsChanged() ) );
@@ -871,7 +871,7 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().alwaysOpenNewFloatingChat() );
   act->setData( 37 );
 
-  QMenu* beep_file_menu = mp_menuSettings->addMenu( tr( "Enable BEEP alert on new message" ) );
+  QMenu* beep_file_menu = mp_menuSettings->addMenu( tr( "Enable BEEP alert on new message" ) + QString( "..." ) );
   beep_file_menu->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
   mp_actGroupBeepOnNewMessage = new QActionGroup( this );
   mp_actGroupBeepOnNewMessage->setExclusive( true );
@@ -1462,7 +1462,6 @@ void GuiMain::settingsChanged()
   case 14:
     Settings::instance().setStayOnTop( act->isChecked() );
     applyFlagStaysOnTop();
-    show();
     break;
   case 15:
     Settings::instance().setRaiseOnNewMessageArrived( act->isChecked() );
@@ -1656,7 +1655,9 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
     return;
   }
 
-  playBeep();
+  if( Settings::instance().beepOnNewMessageArrived() || Settings::instance().beepAlwaysOnNewMessageArrived() )
+    playBeep();
+
   bool show_message_in_tray = true;
 
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
@@ -1754,7 +1755,7 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   {
     if( !chat_is_visible )
       showAlertForMessage( chat_id, cm );
-    else if(  Settings::instance().beepAlwaysOnNewMessageArrived() )
+    else if( Settings::instance().beepAlwaysOnNewMessageArrived() )
       playBeep();
   }
 
@@ -2784,15 +2785,15 @@ void GuiMain::raiseOnTop()
     show();
 
 #ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
-  SetActiveWindow( (HWND)winId() );
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
   applyFlagStaysOnTop();
+  SetActiveWindow( (HWND)winId() );
   SetFocus( (HWND)winId() );
 #else
   raise();
-#endif
   qApp->setActiveWindow( this );
+#endif
 
   if( mp_stackedWidget->currentWidget() == mp_chat )
     mp_chat->ensureFocusInChat();
