@@ -1306,7 +1306,11 @@ QString Protocol::linkifyText( QString text )
     }
 
     QUrl url_to_add = QUrl::fromLocalFile( text.simplified() );
+#if QT_VERSION >= 0x050000
     text = QString( "<a href=\"%1\">%2</a>" ).arg( url_to_add.url() ).arg( text.simplified() );
+#else
+    text = QString( "<a href=\"%1\">%2</a>" ).arg( url_to_add.toString() ).arg( text.simplified() );
+#endif
     if( !pre_text.isEmpty() )
       text.prepend( pre_text );
 

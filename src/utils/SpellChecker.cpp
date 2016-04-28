@@ -79,8 +79,13 @@ bool SpellChecker::setDictionary( const QString& dictionary_path )
   QString affix_path = dictionary_path;
   affix_path.replace( QRegExp( QLatin1String( "\\.dic$" ) ), QLatin1String( ".aff" ) );
 
+#if QT_VERSION >= 0x040800
   QByteArray ba_dict_path = m_dictionary.toLocal8Bit();
   QByteArray ba_affix_path = affix_path.toLocal8Bit();
+#else
+  QByteArray ba_dict_path = m_dictionary.toLatin1();
+  QByteArray ba_affix_path = affix_path.toLatin1();
+#endif
 
   mp_hunspell = new Hunspell( ba_affix_path.constData(), ba_dict_path.constData() );
 
