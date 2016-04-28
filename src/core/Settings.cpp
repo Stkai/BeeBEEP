@@ -42,17 +42,9 @@ Settings::Settings()
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
-  m_saveDataInDocumentsFolder = false;
   m_resetGeometryAtStartup = false;
 
-#ifdef MAKE_BEEBEEP_PORTABLE
-  m_saveDataInUserApplicationFolder = false;
-#else
-  m_saveDataInUserApplicationFolder = true;
-#endif
-
 #ifdef Q_OS_MAC
-  m_saveDataInUserApplicationFolder = true;
   m_useNativeEmoticons = true;
   m_useNativeDialogs = true;
 #else
@@ -60,6 +52,12 @@ Settings::Settings()
   // In windows native dialogs are application modal and the connection goes in timeout...
   // In MacOSX instead it seems to work
   m_useNativeDialogs = false;
+#endif
+
+#ifdef MAKE_BEEBEEP_PORTABLE
+  m_saveDataInUserApplicationFolder = false;
+#else
+  m_saveDataInUserApplicationFolder = true;
 #endif
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
