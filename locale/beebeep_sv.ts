@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sv">
+<TS version="2.1" language="sv">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -128,17 +128,17 @@
     <message>
         <location filename="../src/core/Core.cpp" line="341"/>
         <source>View the log messages for more informations</source>
-        <translation type="unfinished"></translation>
+        <translation>Se loggmeddelanden för mer information</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="511"/>
         <source>New version is available</source>
-        <translation type="unfinished"></translation>
+        <translation>En ny version finns tillgänglig</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="512"/>
         <source>Click here to download</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicka här för att ladda ner</translation>
     </message>
     <message>
         <source>%1 The following networks appear as filtered: %2</source>
@@ -253,7 +253,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="457"/>
         <source>%1 saved chats are added to history</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sparade chattar har lagts till i historiken</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="573"/>
@@ -634,7 +634,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="179"/>
         <source>Transfer timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidsgräns för överföring</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="101"/>
@@ -667,7 +667,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="39"/>
         <source>your IP is %1 in LAN %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditt IP är %1 i LAN %2</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="45"/>
@@ -702,7 +702,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="184"/>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Rensa alla</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="209"/>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="234"/>
         <source>auto added</source>
-        <translation type="unfinished"></translation>
+        <translation>tillagt automatiskt</translation>
     </message>
 </context>
 <context>
@@ -740,7 +740,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="169"/>
         <source>Split in IPv4 addresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Dela upp i IPv4-adresser</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="179"/>
@@ -760,7 +760,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="25"/>
         <source>Auto add from LAN</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till automatiskt från LAN</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="45"/>
@@ -907,7 +907,7 @@
         <location filename="../src/desktop/GuiChat.cpp" line="165"/>
         <location filename="../src/desktop/GuiChat.cpp" line="1076"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök text i chatt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="166"/>
@@ -922,7 +922,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="168"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka mapp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="169"/>
@@ -937,7 +937,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="171"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv ut...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="180"/>
@@ -947,7 +947,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="229"/>
         <source>Open selected text as url</source>
-        <translation type="unfinished"></translation>
+        <translation>Öppna markerad text som URL</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="415"/>
@@ -978,7 +978,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1114"/>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hittades inte i chatten.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="966"/>
@@ -1465,17 +1465,17 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="98"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv ut...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="105"/>
         <source>Show the datestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa datumstämpel</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="109"/>
         <source>Show the timestamp</source>
-        <translation type="unfinished">Visa tidsstämplar</translation>
+        <translation>Visa tidsstämpel</translation>
     </message>
 </context>
 <context>
@@ -1861,7 +1861,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="830"/>
         <source>If a file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Om en fil redan finns</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="868"/>
@@ -2421,12 +2421,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="721"/>
         <source>Show the datestamp</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa datumstämpel</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="722"/>
         <source>If enabled the message shows its datestamp in the chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid aktivering visar meddelande, datumstämpel i chattfönstret</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="727"/>
@@ -2441,12 +2441,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="757"/>
         <source>Use your name instead of &apos;You&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd ditt namn istället för &apos;Du&apos;</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="779"/>
         <source>Prompts for nickname on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Frågar efter chattnamn vid uppstart</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="790"/>
@@ -2471,27 +2471,27 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="808"/>
         <source>Check for new version at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök efter nya versioner vid uppstart</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="834"/>
         <source>If the file to be downloaded already exists it is automatically overwritten</source>
-        <translation type="unfinished"></translation>
+        <translation>Om filen som skall laddas ner redan finns, skrivs den över automatiskt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="843"/>
         <source>Ask me</source>
-        <translation type="unfinished"></translation>
+        <translation>Fråga mig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="878"/>
         <source>When the chat is not visible</source>
-        <translation type="unfinished"></translation>
+        <translation>När chatten inte är synlig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="886"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Aldrig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="909"/>
@@ -2546,7 +2546,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="990"/>
         <source>Save main window geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Spara huvudfönstrets geometri</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1000"/>
@@ -2625,7 +2625,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1100"/>
         <source>Show chat message preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa förhandsgranskning av chattmeddelande</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1166"/>
@@ -2794,12 +2794,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1948"/>
         <source>File transfer is not enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filöverföring är inte aktiverat.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1954"/>
         <source>You are not connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du är inte ansluten.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1965"/>
@@ -2902,7 +2902,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3970"/>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Fönstergeometri och status sparades</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1008"/>
@@ -2927,12 +2927,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1042"/>
         <source>Add +1 user to anonymous usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till +1 användare till anonym användarstatistik</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1043"/>
         <source>Help me to know how many users have BeeBEEP</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjälpa mig ta reda på hur många som använder BeeBEEP</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1060"/>
@@ -3567,12 +3567,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="155"/>
         <source>Enable broadcast interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera sändningsintervall</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="184"/>
         <source>seconds (0=disabled, 10=default)</source>
-        <translation type="unfinished"></translation>
+        <translation>sekunder (0=inaktiverat, 10=standard)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="351"/>
@@ -3597,12 +3597,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="297"/>
         <source>Verbose</source>
-        <translation type="unfinished"></translation>
+        <translation>Detaljerat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="328"/>
         <source>Max users to contact in a tick</source>
-        <translation type="unfinished"></translation>
+        <translation>Max antal användare att kontakta på en gång</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="337"/>
@@ -4359,72 +4359,72 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="100"/>
         <source>Empty</source>
-        <translation type="unfinished">Tom</translation>
+        <translation>Tom</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="102"/>
         <source>Send file</source>
-        <translation type="unfinished">Skicka fil</translation>
+        <translation>Skicka fil</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="104"/>
         <source>Show file transfers</source>
-        <translation type="unfinished">Visa filöverföringar</translation>
+        <translation>Visa filöverföringar</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="106"/>
         <source>Set focus in message box</source>
-        <translation type="unfinished">Sätt fokus i meddelandefältet</translation>
+        <translation>Sätt fokus i meddelandefältet</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="108"/>
         <source>Minimize all chats</source>
-        <translation type="unfinished">Minimera alla chattar</translation>
+        <translation>Minimera alla chattar</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="110"/>
         <source>Show the next unread message</source>
-        <translation type="unfinished">Visa nästa olästa meddelande</translation>
+        <translation>Visa nästa olästa meddelande</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="112"/>
         <source>Send chat message</source>
-        <translation type="unfinished">Skicka chattmeddelande</translation>
+        <translation>Skicka chattmeddelande</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="114"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv ut</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="116"/>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Sänd</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="118"/>
         <source>Find text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök text i chatt</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="120"/>
         <source>Find next text in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök nästa text i chatt</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="122"/>
         <source>Send folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka mapp</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="124"/>
         <source>Show emoticons panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa smilie-panel</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="126"/>
         <source>Show all chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa alla chattar</translation>
     </message>
 </context>
 <context>
@@ -4458,222 +4458,222 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/Tips.h" line="31"/>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="unfinished">Du kan växla mellan chattar med CTRL+TAB, om det finns nya meddelanden tillgängliga.</translation>
+        <translation>Du kan växla mellan chattar med CTRL+TAB, om det finns nya meddelanden tillgängliga.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="32"/>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="unfinished">Vill du ha &lt;b&gt;fet text&lt;/b&gt;, skriver du *fet text*.</translation>
+        <translation>Vill du ha &lt;b&gt;fet text&lt;/b&gt;, skriver du *fet text*.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="33"/>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="unfinished">Vill du ha &lt;i&gt;kursiv text&lt;/i&gt;, skriver du /kursiv text/.</translation>
+        <translation>Vill du ha &lt;i&gt;kursiv text&lt;/i&gt;, skriver du /kursiv text/.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="34"/>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="unfinished">Vill du ha &lt;u&gt;understruken text&lt;/u&gt;, skriver du _understruken text_.</translation>
+        <translation>Vill du ha &lt;u&gt;understruken text&lt;/u&gt;, skriver du _understruken text_.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="35"/>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="unfinished">Du kan bläddra i tidigare skickade meddelanden med snabbtangenterna CTRL+PIL UPP och CTRL+PIL NER.</translation>
+        <translation>Du kan bläddra i tidigare skickade meddelanden med snabbtangenterna CTRL+PIL UPP och CTRL+PIL NER.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="37"/>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation type="unfinished">Du kan släppa filer i aktiv chatt för att skicka dem till medlemmarna.</translation>
+        <translation>Du kan släppa filer i aktiv chatt för att skicka dem till medlemmarna.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="38"/>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="unfinished">Du kan välja flera filer från nätverksdelningar och ladda ner dem samtidigt med ett högerklick.</translation>
+        <translation>Du kan välja flera filer från nätverksdelningar och ladda ner dem samtidigt med ett högerklick.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="39"/>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="unfinished">Du kan inaktivera meddelandeavisering från en grupp, genom högerklick på gruppnamnet i listan.</translation>
+        <translation>Du kan inaktivera meddelandeavisering från en grupp, genom högerklick på gruppnamnet i listan.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="47"/>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation type="unfinished">&lt;i&gt;Ett fritt sinne vägleds av fantasin.&lt;/i&gt; (Marco Mastroddi)</translation>
+        <translation>&lt;i&gt;Ett fritt sinne vägleds av fantasin.&lt;/i&gt; (Marco Mastroddi)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="48"/>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation type="unfinished">&lt;i&gt;Var hungrig, var dum.&lt;/i&gt; (Steve Jobs)</translation>
+        <translation>&lt;i&gt;Var hungrig, var dum.&lt;/i&gt; (Steve Jobs)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="49"/>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation type="unfinished">&lt;i&gt;Det finns alltid ett fel till.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
+        <translation>&lt;i&gt;Det finns alltid ett fel till.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="50"/>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation type="unfinished">&lt;i&gt;Om något kan gå fel, kommer det att göra så.&lt;/i&gt; (Murphy&apos;s lag)</translation>
+        <translation>&lt;i&gt;Om något kan gå fel, kommer det att göra så.&lt;/i&gt; (Murphy&apos;s lag)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="51"/>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation type="unfinished">&lt;i&gt;Om ett program är användbart, måste det ändras.&lt;/i&gt; (Law of Computer Programming)</translation>
+        <translation>&lt;i&gt;Om ett program är användbart, måste det ändras.&lt;/i&gt; (Law of Computer Programming)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="53"/>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation type="unfinished">&lt;i&gt;Intellektuella löser problem, genier förebygger dem.&lt;/i&gt; (Albert Einstein)</translation>
+        <translation>&lt;i&gt;Intellektuella löser problem, genier förebygger dem.&lt;/i&gt; (Albert Einstein)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="54"/>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation type="unfinished">&lt;i&gt;Vad som inte förgör mig, gör mig stark.&lt;/i&gt; (Friedrich Nietzsche)</translation>
+        <translation>&lt;i&gt;Vad som inte förgör mig, gör mig stark.&lt;/i&gt; (Friedrich Nietzsche)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="55"/>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="unfinished">&lt;i&gt;Jag är inte ung nog för att veta allt.&lt;/i&gt; (Oscar Wilde)</translation>
+        <translation>&lt;i&gt;Jag är inte ung nog för att veta allt.&lt;/i&gt; (Oscar Wilde)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="56"/>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation type="unfinished">&lt;i&gt;Brist på tvivel leder till brist på kreativitet.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
+        <translation>&lt;i&gt;Brist på tvivel leder till brist på kreativitet.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="57"/>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation type="unfinished">&lt;i&gt;Fruktan är vägen till den mörka sidan.&lt;/i&gt; (Joda)</translation>
+        <translation>&lt;i&gt;Fruktan är vägen till den mörka sidan.&lt;/i&gt; (Joda)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="59"/>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation type="unfinished">&lt;i&gt;Jag drömmer min målning och sedan målar jag min dröm.&lt;/i&gt; (Vincent Van Gogh)</translation>
+        <translation>&lt;i&gt;Jag drömmer min målning och sedan målar jag min dröm.&lt;/i&gt; (Vincent Van Gogh)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="60"/>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation type="unfinished">&lt;i&gt;Allt du kan föreställa dig är verkligt.&lt;/i&gt; (Pablo Picasso)</translation>
+        <translation>&lt;i&gt;Allt du kan föreställa dig är verkligt.&lt;/i&gt; (Pablo Picasso)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="61"/>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="unfinished">&lt;i&gt;All sanning är lätt att förstå, när den väl har upptäckts. Svårigheten är att upptäcka den.&lt;/i&gt; (Galileo Galilei)</translation>
+        <translation>&lt;i&gt;All sanning är lätt att förstå, när den väl har upptäckts. Svårigheten är att upptäcka den.&lt;/i&gt; (Galileo Galilei)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="62"/>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation type="unfinished">&lt;i&gt;Sanningen segrar där åsikter är fria.&lt;/i&gt; (Thomas Paine)</translation>
+        <translation>&lt;i&gt;Sanningen segrar där åsikter är fria.&lt;/i&gt; (Thomas Paine)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="63"/>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation type="unfinished">&lt;i&gt;Jag har sett saker ni inte skulle tro...&lt;/i&gt; (Batty)</translation>
+        <translation>&lt;i&gt;Jag har sett saker ni inte skulle tro...&lt;/i&gt; (Batty)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="65"/>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation type="unfinished">&lt;i&gt;En mans karaktär är hans öde.&lt;/i&gt; (Eraclitus)</translation>
+        <translation>&lt;i&gt;En mans karaktär är hans öde.&lt;/i&gt; (Eraclitus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="66"/>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation type="unfinished">&lt;i&gt;Ett annat språk är en annan syn på livet.&lt;/i&gt; (Federico Fellini)</translation>
+        <translation>&lt;i&gt;Ett annat språk är en annan syn på livet.&lt;/i&gt; (Federico Fellini)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="67"/>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation type="unfinished">&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
+        <translation>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="68"/>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation type="unfinished">&lt;i&gt;Varje dag vaknar en gasell i Afrika. Den vet att den måste springa snabbare än det snabbaste lejonet, eller så kommer den att dödas. Varje morgon vaknar ett lejon. Det vet att det måste springa fortare än den långsammaste gasellen, eller också kommer det att svälta ihjäl. Det spelar ingen roll om du är ett lejon eller en gasell. När solen går upp är det bäst du springer.&lt;/i&gt; (Abe Gubegna)</translation>
+        <translation>&lt;i&gt;Varje dag vaknar en gasell i Afrika. Den vet att den måste springa snabbare än det snabbaste lejonet, eller så kommer den att dödas. Varje morgon vaknar ett lejon. Det vet att det måste springa fortare än den långsammaste gasellen, eller också kommer det att svälta ihjäl. Det spelar ingen roll om du är ett lejon eller en gasell. När solen går upp är det bäst du springer.&lt;/i&gt; (Abe Gubegna)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="73"/>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation type="unfinished">&lt;i&gt;Okay, Houston, vi har haft ett problem här.&lt;/i&gt; (John L. Swigert)</translation>
+        <translation>&lt;i&gt;Okay, Houston, vi har haft ett problem här.&lt;/i&gt; (John L. Swigert)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="75"/>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="unfinished">&lt;i&gt;Andra stjärnan till höger och rakt fram till morgonen.&lt;/i&gt; (Peter Pan)</translation>
+        <translation>&lt;i&gt;Andra stjärnan till höger och rakt fram till morgonen.&lt;/i&gt; (Peter Pan)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="76"/>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation type="unfinished">&lt;i&gt;Nöden är det senaste och starkaste vapnet.&lt;/i&gt; (Titus Livius)</translation>
+        <translation>&lt;i&gt;Nöden är det senaste och starkaste vapnet.&lt;/i&gt; (Titus Livius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="77"/>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation type="unfinished">&lt;i&gt;Gamla människor är inte visa, de är bara försiktiga.&lt;/i&gt; (Ernest Hemingway)</translation>
+        <translation>&lt;i&gt;Gamla människor är inte visa, de är bara försiktiga.&lt;/i&gt; (Ernest Hemingway)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="78"/>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation type="unfinished">&lt;i&gt;En resa på tusen mil börjar med ett steg.&lt;/i&gt; (Confucius)</translation>
+        <translation>&lt;i&gt;En resa på tusen mil börjar med ett steg.&lt;/i&gt; (Confucius)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="79"/>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation type="unfinished">&lt;i&gt;Ett liv utan dödsförakt är slaveri.&lt;/i&gt; (Lucius Annaeus Seneca)</translation>
+        <translation>&lt;i&gt;Ett liv utan dödsförakt är slaveri.&lt;/i&gt; (Lucius Annaeus Seneca)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="81"/>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation type="unfinished">&lt;i&gt;Jag kan beräkna himlakroppars rörelse, men inte människors galenskap.&lt;/i&gt; (Isaac Newton)</translation>
+        <translation>&lt;i&gt;Jag kan beräkna himlakroppars rörelse, men inte människors galenskap.&lt;/i&gt; (Isaac Newton)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="82"/>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation type="unfinished">&lt;i&gt;Undran är vishetens begynnelse.&lt;/i&gt; (Socrates)</translation>
+        <translation>&lt;i&gt;Undran är vishetens begynnelse.&lt;/i&gt; (Socrates)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="83"/>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation type="unfinished">&lt;i&gt;Ingen vis man har någonsin önskat att han var yngre&lt;/i&gt; (Jonathan Swift)</translation>
+        <translation>&lt;i&gt;Ingen vis man har någonsin önskat att han var yngre&lt;/i&gt; (Jonathan Swift)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="84"/>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation type="unfinished">&lt;i&gt;Den enda man som aldrig begår några misstag, är han som aldrig gör någonting.&lt;/i&gt; (Theodore Roosevelt)</translation>
+        <translation>&lt;i&gt;Den enda man som aldrig begår några misstag, är han som aldrig gör någonting.&lt;/i&gt; (Theodore Roosevelt)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="85"/>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation type="unfinished">&lt;i&gt;Attityd är en liten sak som gör stor skillnad.&lt;/i&gt; (Winston Churchill)</translation>
+        <translation>&lt;i&gt;Attityd är en liten sak som gör stor skillnad.&lt;/i&gt; (Winston Churchill)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="87"/>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation type="unfinished">&lt;i&gt;Vi blir vad vi tänker.&lt;/i&gt; (Buddha)</translation>
+        <translation>&lt;i&gt;Vi blir vad vi tänker.&lt;/i&gt; (Buddha)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="88"/>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation type="unfinished">&lt;i&gt;Svårigheter är saker som visar en person vad de är.&lt;/i&gt; (Epictetus)</translation>
+        <translation>&lt;i&gt;Svårigheter är saker som visar en person vad de är.&lt;/i&gt; (Epictetus)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="89"/>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation type="unfinished">&lt;i&gt;Vem skall vakta väktarna?&lt;/i&gt; (Decimus Junius Juvenal)</translation>
+        <translation>&lt;i&gt;Vem skall vakta väktarna?&lt;/i&gt; (Decimus Junius Juvenal)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="90"/>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation type="unfinished">&lt;i&gt;Ett hem utan böcker är som en kropp utan själ.&lt;/i&gt; (Marcus Tullius Cicero)</translation>
+        <translation>&lt;i&gt;Ett hem utan böcker är som en kropp utan själ.&lt;/i&gt; (Marcus Tullius Cicero)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="91"/>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation type="unfinished">&lt;i&gt;Vi kan inte sluta önska oss.&lt;/i&gt; (Arthur Schopenhauer)</translation>
+        <translation>&lt;i&gt;Vi kan inte sluta önska oss.&lt;/i&gt; (Arthur Schopenhauer)</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="93"/>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation type="unfinished">&lt;i&gt;Tålamod är också en sorts åtgärd.&lt;/i&gt; (Auguste Rodin)</translation>
+        <translation>&lt;i&gt;Tålamod är också en sorts åtgärd.&lt;/i&gt; (Auguste Rodin)</translation>
     </message>
 </context>
 <context>
