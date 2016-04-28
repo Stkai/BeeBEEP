@@ -610,6 +610,10 @@
         <source>Click here to download</source>
         <translation>Premi qui per scaricarla</translation>
     </message>
+    <message>
+        <source>%1 saved chats are added to history</source>
+        <translation>%1 conversazioni salvate sono state caricate nella storia</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
