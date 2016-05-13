@@ -124,11 +124,12 @@ void GuiFloatingChat::applyFlagStaysOnTop()
   else
     SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
 #else
-  Qt::WindowFlags flags = this->windowFlags();
+  Qt::WindowFlags w_flags = this->windowFlags();
   if( Settings::instance().stayOnTop() )
-    setWindowFlags( flags | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint );
+    w_flags |= Qt::WindowStaysOnTopHint;
   else
-    setWindowFlags( flags ^ (Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint) );
+    w_flags &= ~Qt::WindowStaysOnTopHint;
+  setWindowFlags( w_flags );
 #endif
   show();
 }

@@ -228,13 +228,17 @@ void GuiMain::applyFlagStaysOnTop()
   else
     SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
 #else
-  Qt::WindowFlags flags = this->windowFlags();
+  Qt::WindowFlags w_flags = this->windowFlags();
   if( Settings::instance().stayOnTop() )
-    setWindowFlags( flags | Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint );
+    w_flags |= Qt::WindowStaysOnTopHint;
   else
-    setWindowFlags( flags ^ (Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint) );
+    w_flags &= ~Qt::WindowStaysOnTopHint;
+  setWindowFlags( w_flags );
 #endif
   show();
+
+  if( windowFlags() & Qt::WindowStaysOnTopHint )
+    qDebug() << "ON TOP 2";
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -3743,8 +3747,9 @@ void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
 
 void GuiMain::minimizeAllChats()
 {
-  mp_lastActiveWindow = qApp->activeWindow();
-  bool last_active_window_exists = mp_lastActiveWindow == this ? true : false;
+  QWidget* w = qApp->activeWindow();
+
+  bool last_active_window_exists = w == this ? true : false;
 
   if( !m_floatingChats.isEmpty() )
   {
@@ -3759,6 +3764,9 @@ void GuiMain::minimizeAllChats()
 
   if( !isMinimized() )
     showMinimized();
+
+  if( last_active_window_exists )
+    mp_lastActiveWindow = w;
 }
 
 void GuiMain::showAllChats()
