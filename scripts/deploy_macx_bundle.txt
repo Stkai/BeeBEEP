@@ -21,7 +21,7 @@
 #
 ######################################################################
 
-BEEBEEP_VERSION=3.0.6
+BEEBEEP_VERSION=3.0.6b
 
 echo "Making BeeBEEP Bundle version ${BEEBEEP_VERSION}"
 
