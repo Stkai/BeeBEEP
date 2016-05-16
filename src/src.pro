@@ -51,7 +51,7 @@ include(gui/gui.pri)
 include(desktop/desktop.pri)
 include(override/override.pri)
 include(utils/utils.pri)
-include(qxt/qxt.pri)
+win32:unix:macx:!android:include(qxt/qxt.pri)
 
 HEADERS += Interfaces.h Tips.h
 

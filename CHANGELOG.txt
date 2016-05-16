@@ -1,5 +1,12 @@
 BEEBEEP (Secure Lan Messanger)
 
+
+BeeBEEP 3.0.7
+- Added "Find text" and "Print" options in history (shortcut or right click)
+
+BeeBEEP 3.0.6b
+- Fixed "Stays on top" option in Linux and MacOSX
+
 BeeBEEP 3.0.6
 - Added "UseHostnameForDefaultUsername" option. It can be enabled in beebeep.rc
 - Updated nickname update also the name of the chat window

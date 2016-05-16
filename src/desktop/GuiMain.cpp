@@ -127,6 +127,8 @@ GuiMain::GuiMain( QWidget *parent )
   setupChatConnections( mp_chat );
   connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
 
+  connect( mp_savedChat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -3670,6 +3672,8 @@ void GuiMain::updateShortcuts()
   mp_chat->updateShortcuts();
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
      fl_chat->guiChat()->updateShortcuts();
+
+  mp_savedChat->updateShortcuts();
 
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowFileTransfers );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )

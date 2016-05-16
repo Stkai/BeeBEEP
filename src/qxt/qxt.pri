@@ -1,6 +1,6 @@
 
 INCLUDEPATH += $$PWD
-win32|macx|unix:!android: DEFINES += BEEBEEP_USE_QXT
+!android: DEFINES += BEEBEEP_USE_QXT
 
 HEADERS +=  qxt/qxtglobal.h \
             qxt/qxtglobalshortcut.h \
@@ -13,4 +13,4 @@ macx: LIBS += -framework Carbon
 unix:!macx:!android: SOURCES += qxt/qxtglobalshortcut_x11.cpp
 unix:!macx:!android: LIBS += -lX11
 win32: SOURCES += qxt/qxtglobalshortcut_win.cpp
-
+os2: SOURCES += qxt/qxtglobalshortcut_os2.cpp

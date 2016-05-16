@@ -35,12 +35,29 @@ class GuiSavedChat : public QWidget, private Ui::GuiSavedChatWidget
 public:
   explicit GuiSavedChat( QWidget *parent = 0 );
   inline const QString& savedChatName() const;
+  void updateShortcuts();
+
+signals:
+  void openUrl( const QUrl& );
 
 public slots:
   void showSavedChat( const QString& );
 
+protected slots:
+  void printChat();
+  void showFindTextInChatDialog();
+  void findNextTextInChat();
+  void customContextMenu( const QPoint& );
+  void openSelectedTextAsUrl();
+
 private:
+  void findTextInChat( const QString& );
+
   QString m_savedChatName;
+  QString m_lastTextFound;
+  QShortcut* mp_scFindTextInChat;
+  QShortcut* mp_scFindNextTextInChat;
+  QShortcut* mp_scPrint;
 
 };
 

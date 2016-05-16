@@ -3792,6 +3792,30 @@ il file %2 (%3)?</translation>
         <source>Empty</source>
         <translation>Vuota</translation>
     </message>
+    <message>
+        <source>Find text in chat</source>
+        <translation>Trova testo nella conversazione</translation>
+    </message>
+    <message>
+        <source>Copy to clipboard</source>
+        <translation>Copia in memoria</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Seleziona tutto</translation>
+    </message>
+    <message>
+        <source>Open selected text as url</source>
+        <translation>Apri il testo selezionato come un link</translation>
+    </message>
+    <message>
+        <source>Print...</source>
+        <translation>Stampa...</translation>
+    </message>
+    <message>
+        <source>%1 not found in chat.</source>
+        <translation>%1 non trovato nella conversazione.</translation>
+    </message>
 </context>
 <context>
     <name>GuiSavedChatList</name>
