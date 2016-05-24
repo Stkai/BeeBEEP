@@ -1,6 +1,11 @@
 include(../plugins.pri)
 
-TARGET = numbertextmarker
+os2: {
+ TARGET=numberte
+} else {
+ TARGET = numbertextmarker
+}
+
 TEMPLATE = lib
 
 DEFINES += NUMBERTEXTMARKER_LIBRARY

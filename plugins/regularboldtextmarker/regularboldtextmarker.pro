@@ -1,6 +1,11 @@
 include(../plugins.pri)
 
-TARGET = regularboldtextmarker
+os2: {
+ TARGET=regularb
+} else {
+ TARGET = regularboldtextmarker
+}
+
 TEMPLATE = lib
 
 DEFINES += REGULARBOLDTEXTMARKER_LIBRARY

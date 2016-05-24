@@ -1,6 +1,11 @@
 include(../plugins.pri)
 
-TARGET = rainbowtextmarker
+os2: {
+ TARGET=rainbowt
+} else {
+ TARGET = rainbowtextmarker
+}
+
 TEMPLATE = lib
 
 DEFINES += RAINBOWTEXTMARKER_LIBRARY

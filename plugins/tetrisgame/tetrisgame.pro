@@ -1,6 +1,11 @@
 include(../plugins.pri)
 
-TARGET = beetetris
+os2: {
+ TARGET=beetetri
+} else {
+ TARGET = beetetris
+}
+
 TEMPLATE = lib
 QT += widgets
 
