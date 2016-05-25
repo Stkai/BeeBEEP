@@ -267,7 +267,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="457"/>
         <source>%1 saved chats are added to history</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 opgeslagen chats zijn toegevoegd aan historie</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="573"/>
@@ -966,7 +966,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="229"/>
         <source>Open selected text as url</source>
-        <translation type="unfinished"></translation>
+        <translation>Open geselecteerde tekst als url</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="415"/>
@@ -2135,12 +2135,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="840"/>
         <source>If the file to be downloaded already exists it is automatically overwritten</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien het te downloaden bestand al bestaat, wordt het automatisch overschreven</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="849"/>
         <source>Ask me</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag mij</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="874"/>
@@ -2155,12 +2155,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="884"/>
         <source>When the chat is not visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Wanneer de chat niet zichtbaar is</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="892"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Nooit</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="951"/>
@@ -2240,12 +2240,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1954"/>
         <source>File transfer is not enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsoverdracht staat niet aan.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1960"/>
         <source>You are not connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je bent niet verbonden.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3589"/>
@@ -2914,7 +2914,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="836"/>
         <source>If a file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Als een bestand al bestaat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="939"/>
@@ -3607,32 +3607,32 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="72"/>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="143"/>
         <source>Find text in chat</source>
-        <translation type="unfinished">Vind text in chat</translation>
+        <translation>Vind text in chat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="77"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Naar klembord kopiëren</translation>
+        <translation>Naar klembord kopiëren</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="79"/>
         <source>Select All</source>
-        <translation type="unfinished">Alles selecteren</translation>
+        <translation>Alles selecteren</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="83"/>
         <source>Open selected text as url</source>
-        <translation type="unfinished"></translation>
+        <translation>Open geselecteerde tekst als url</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="86"/>
         <source>Print...</source>
-        <translation type="unfinished">Print...</translation>
+        <translation>Print...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="181"/>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished">%1 niet gevonden in chat.</translation>
+        <translation>%1 niet gevonden in chat.</translation>
     </message>
 </context>
 <context>
@@ -4774,72 +4774,72 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="100"/>
         <source>Empty</source>
-        <translation type="unfinished">Leeg</translation>
+        <translation>Leeg</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="102"/>
         <source>Send file</source>
-        <translation type="unfinished">Stuur bestand</translation>
+        <translation>Stuur bestand</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="104"/>
         <source>Show file transfers</source>
-        <translation type="unfinished">Toon bestandsoverdracht</translation>
+        <translation>Toon bestandsoverdracht</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="106"/>
         <source>Set focus in message box</source>
-        <translation type="unfinished">Stel focus op berichten box in</translation>
+        <translation>Stel focus op berichten box in</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="108"/>
         <source>Minimize all chats</source>
-        <translation type="unfinished">Maak alle chats klein</translation>
+        <translation>Maak alle chats klein</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="110"/>
         <source>Show the next unread message</source>
-        <translation type="unfinished">Toon volgend ongelezen bericht</translation>
+        <translation>Toon volgend ongelezen bericht</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="112"/>
         <source>Send chat message</source>
-        <translation type="unfinished">Stuur een chatbericht</translation>
+        <translation>Stuur een chatbericht</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="114"/>
         <source>Print</source>
-        <translation type="unfinished">Print</translation>
+        <translation>Print</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="116"/>
         <source>Broadcast</source>
-        <translation type="unfinished">Uitgezonden</translation>
+        <translation>Uitgezonden</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="118"/>
         <source>Find text in chat</source>
-        <translation type="unfinished">Vind text in chat</translation>
+        <translation>Vind text in chat</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="120"/>
         <source>Find next text in chat</source>
-        <translation type="unfinished">Vind volgende text in chat</translation>
+        <translation>Vind volgende text in chat</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="122"/>
         <source>Send folder</source>
-        <translation type="unfinished">Stuur map</translation>
+        <translation>Stuur map</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="124"/>
         <source>Show emoticons panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon emoticon paneel</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="126"/>
         <source>Show all chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon alle chats</translation>
     </message>
     <message>
         <source>Show emoticons</source>
@@ -4899,12 +4899,12 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/Tips.h" line="31"/>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="unfinished">U kunt tussen chats overschakelen met CTRL+TAB als er nieuwe berichten zijn.</translation>
+        <translation>U kunt tussen chats overschakelen met CTRL+TAB als er nieuwe berichten zijn.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="32"/>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="unfinished">Als u &lt;b&gt;vette tekst&lt;/b&gt; wilt, typt u *vette tekst*.</translation>
+        <translation>Als u &lt;b&gt;vette tekst&lt;/b&gt; wilt, typt u *vette tekst*.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="33"/>
