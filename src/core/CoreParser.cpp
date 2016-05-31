@@ -75,6 +75,9 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::Hive:
     parseHiveMessage( u, m );
     break;
+  case Message::ShareBox:
+    parseShareBoxMessage( u, m );
+    break;
   default:
     qWarning() << "Core cannot parse the message with type" << m.type();
     break;
@@ -372,4 +375,27 @@ void Core::parseHiveMessage( const User& u, const Message& m )
   }
   else
     qWarning() << "Invalid flag found in hive message from user" << qPrintable( u.path() );
+}
+
+void Core::parseShareBoxMessage( const User& u, const Message& m )
+{
+  if( !Settings::instance().fileTransferIsEnabled() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(option disabled)";
+#endif
+    return;
+  }
+
+  if( m.hasFlag( Message::List ) )
+  {
+
+  }
+  else if( m.hasFlag( Message::Request ) )
+  {
+
+  }
+  else
+    qWarning() << "Invalid flag found in share box message from user" << qPrintable( u.path() );
+
 }

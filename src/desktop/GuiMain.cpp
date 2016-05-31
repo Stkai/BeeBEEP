@@ -45,6 +45,7 @@
 #include "GuiSavedChatList.h"
 #include "GuiScreenShot.h"
 #include "GuiSearchUser.h"
+#include "GuiShareBox.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
 #include "GuiShortcut.h"
@@ -528,6 +529,7 @@ void GuiMain::checkViewActions()
   mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
   mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
+  mp_actViewShareBox->setEnabled( mp_stackedWidget->currentWidget() != mp_shareBox );
 
   mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().toList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
@@ -569,6 +571,11 @@ void GuiMain::checkViewActions()
     mp_barScreenShot->show();
   else
     mp_barScreenShot->hide();
+
+  if( mp_stackedWidget->currentWidget() == mp_shareBox )
+    mp_barShareBox->show();
+  else
+    mp_barShareBox->hide();
 
   showDefaultServerPortInMenu();
 
@@ -1011,12 +1018,12 @@ void GuiMain::createMenus()
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareNetwork->setStatusTip( tr( "Show the list of the network shared files" ) );
+  mp_actViewShareBox = mp_menuView->addAction( QIcon( ":/images/sharebox.png" ), tr( "Show the shared boxes" ), this, SLOT( raiseShareBoxView() ) );
   mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
   mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
   mp_actViewScreenShot = mp_menuView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
   mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
   mp_actViewNewMessage = mp_menuView->addAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this, SLOT( showNextChat() ) );
-
 
   /* Plugins Menu */
   mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
@@ -1152,6 +1159,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
+  mp_barMain->addAction( mp_actViewShareBox );
   mp_barMain->addAction( mp_actViewLog );
   mp_barMain->addAction( mp_actViewScreenShot );
 
@@ -1325,6 +1333,17 @@ void GuiMain::createStackedWidgets()
 
   mp_home = new GuiHome( this );
   mp_stackedWidget->addWidget( mp_home );
+
+  mp_shareBox = new GuiShareBox( this );
+  mp_stackedWidget->addWidget( mp_shareBox );
+  mp_barShareBox = new QToolBar( tr( "Show the bar of share box" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barShareBox );
+  mp_barShareBox->setObjectName( "GuiShareBoxToolBar" );
+  mp_barShareBox->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barShareBox->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_shareBox->setupToolBar( mp_barShareBox );
+  act = mp_barShareBox->toggleViewAction();
+  act->setEnabled( false );
 
   mp_barChat->setVisible( Settings::instance().showChatToolbar() );
 
@@ -2601,6 +2620,12 @@ void GuiMain::raiseLogView()
 void GuiMain::raiseScreenShotView()
 {
   raiseView( mp_screenShot, ID_INVALID, "" );
+}
+
+void GuiMain::raiseShareBoxView()
+{
+  raiseView( mp_shareBox, ID_INVALID, "" );
+  mp_shareBox->updateBox();
 }
 
 void GuiMain::setGameInPauseMode()

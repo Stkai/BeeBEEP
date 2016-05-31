@@ -187,6 +187,7 @@ protected:
   void parseFolderMessage( const User&, const Message& );
   void parseChatReadMessage( const User&, const Message& );
   void parseHiveMessage( const User&, const Message& );
+  void parseShareBoxMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserStatusChanged( const User& );

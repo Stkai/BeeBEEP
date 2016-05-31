@@ -55,6 +55,10 @@ public:
   FileInfo downloadedFile( const QString& ) const;
   inline bool isFileDownloaded( const QString& ) const;
 
+  int addToShareBoxes( VNumber, const QList<FileInfo>& );
+  int removeFromShareBoxes( VNumber );
+  inline QList<FileInfo> shareBox( VNumber ) const;
+
   static FileShare& instance()
   {
     if( !mp_instance )
@@ -78,6 +82,7 @@ private:
   QMultiMap<QString, FileInfo> m_local;
   QMap<QString, FileSizeType> m_localSize;
   QMultiMap<VNumber, FileInfo> m_network;
+  QMultiMap<VNumber, FileInfo> m_shareBoxes;
   QList<FileInfo> m_downloadedFiles;
 
 };
@@ -90,5 +95,6 @@ inline FileSizeType FileShare::localSize( const QString& share_path ) const { re
 inline QList<FileInfo> FileShare::fileSharedFromUser( VNumber user_id ) const { return m_network.values( user_id ); }
 inline QList<FileInfo> FileShare::fileSharedFromLocalUser() const { return m_local.values(); }
 inline bool FileShare::isFileDownloaded( const QString& file_info_hash ) const { return downloadedFile( file_info_hash ).isValid(); }
+inline QList<FileInfo> FileShare::shareBox( VNumber user_id ) const { return m_shareBoxes.values( user_id ); }
 
 #endif // BEEBEEP_FILESHARE_H

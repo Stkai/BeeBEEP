@@ -143,5 +143,7 @@
         <file>images/printer.png</file>
         <file>images/file-transfer-progress.png</file>
         <file>images/send-folder.png</file>
+        <file>images/sharebox.png</file>
+        <file>images/upload-box.png</file>
     </qresource>
 </RCC>

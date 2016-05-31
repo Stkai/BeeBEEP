@@ -143,7 +143,6 @@ Settings::Settings()
   m_previewFileDialogGeometry = "";
   m_previewFileDialogImageSize = 200;
   m_maxUsersToConnectInATick = 20;
-
 }
 
 void Settings::createApplicationUuid()
@@ -960,9 +959,16 @@ void Settings::load()
 
   sets->beginGroup( "FileShare" );
   if( m_disableFileTransfer )
+  {
     m_fileTransferIsEnabled = false;
+    m_useShareBox = false;
+  }
   else
+  {
     m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
+    m_useShareBox = sets->value( "UseShareBox", false ).toBool();
+  }
+  m_shareBoxPath = sets->value( "ShareBoxPath", "" ).toString();
   m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
   m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
@@ -1216,9 +1222,16 @@ void Settings::save()
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   if( m_disableFileTransfer )
+  {
     sets->setValue( "FileTransferIsEnabled", false );
+    sets->setValue( "UseShareBox", false );
+  }
   else
+  {
     sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
+    sets->setValue( "UseShareBox", m_useShareBox );
+  }
+  sets->setValue( "ShareBoxPath", m_shareBoxPath );
   sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
   sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );
   sets->setValue( "MaxFileShared", m_maxFileShared );

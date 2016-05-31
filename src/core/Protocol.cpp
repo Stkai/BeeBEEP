@@ -57,20 +57,21 @@ QString Protocol::messageHeader( Message::Type mt ) const
 {
   switch( mt )
   {
-  case Message::Beep:   return "BEE-BEEP";
-  case Message::Ping:   return "BEE-PING";
-  case Message::Pong:   return "BEE-PONG";
-  case Message::Chat:   return "BEE-CHAT";
-  case Message::Hello:  return "BEE-CIAO";
-  case Message::System: return "BEE-SYST";
-  case Message::User:   return "BEE-USER";
-  case Message::File:   return "BEE-FILE";
-  case Message::Share:  return "BEE-FSHR";
-  case Message::Group:  return "BEE-GROU";
-  case Message::Folder: return "BEE-FOLD";
-  case Message::Read:   return "BEE-READ";
-  case Message::Hive:   return "BEE-HIVE";
-  default:              return "BEE-BOOH";
+  case Message::Beep:     return "BEE-BEEP";
+  case Message::Ping:     return "BEE-PING";
+  case Message::Pong:     return "BEE-PONG";
+  case Message::Chat:     return "BEE-CHAT";
+  case Message::Hello:    return "BEE-CIAO";
+  case Message::System:   return "BEE-SYST";
+  case Message::User:     return "BEE-USER";
+  case Message::File:     return "BEE-FILE";
+  case Message::Share:    return "BEE-FSHR";
+  case Message::Group:    return "BEE-GROU";
+  case Message::Folder:   return "BEE-FOLD";
+  case Message::Read:     return "BEE-READ";
+  case Message::Hive:     return "BEE-HIVE";
+  case Message::ShareBox: return "BEE-SBOX";
+  default:                return "BEE-BOOH";
   }
 }
 
@@ -100,6 +101,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Group;
   else if( msg_type == "BEE-FOLD" )
     return Message::Folder;
+  else if( msg_type == "BEE-SBOX" )
+    return Message::ShareBox;
   else if( msg_type == "BEE-HIVE" )
     return Message::Hive;
   else

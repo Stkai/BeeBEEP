@@ -44,6 +44,7 @@ class GuiHome;
 class GuiSavedChat;
 class GuiSavedChatList;
 class GuiScreenShot;
+class GuiShareBox;
 class GuiShareLocal;
 class GuiShareNetwork;
 class GuiSystemTray;
@@ -116,6 +117,7 @@ private slots:
   void raiseLogView();
   void raiseScreenShotView();
   void raiseHomeView();
+  void raiseShareBoxView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
@@ -249,25 +251,27 @@ private:
   GuiEmoticons* mp_emoticonsWidget;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
+  GuiShareBox* mp_shareBox;
 
-  QMenu *mp_menuMain;
-  QMenu *mp_menuInfo;
-  QMenu *mp_menuChat;
-  QMenu *mp_menuSettings;
-  QMenu *mp_menuStatus;
-  QMenu *mp_menuPlugins;
-  QMenu *mp_menuView;
-  QMenu *mp_menuTrayIcon;
-  QMenu *mp_menuUserList;
-  QMenu *mp_menuUserStatusList;
+  QMenu* mp_menuMain;
+  QMenu* mp_menuInfo;
+  QMenu* mp_menuChat;
+  QMenu* mp_menuSettings;
+  QMenu* mp_menuStatus;
+  QMenu* mp_menuPlugins;
+  QMenu* mp_menuView;
+  QMenu* mp_menuTrayIcon;
+  QMenu* mp_menuUserList;
+  QMenu* mp_menuUserStatusList;
 
-  QToolBar *mp_barMain;
-  QToolBar *mp_barChat;
-  QToolBar *mp_barShareNetwork;
-  QToolBar *mp_barShareLocal;
-  QToolBar *mp_barScreenShot;
-  QToolBar *mp_barLog;
-  QToolBar *mp_barGames;
+  QToolBar* mp_barMain;
+  QToolBar* mp_barChat;
+  QToolBar* mp_barShareNetwork;
+  QToolBar* mp_barShareLocal;
+  QToolBar* mp_barScreenShot;
+  QToolBar* mp_barLog;
+  QToolBar* mp_barGames;
+  QToolBar* mp_barShareBox;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actConfigureNetwork;
@@ -291,6 +295,7 @@ private:
   QAction* mp_actViewNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
+  QAction* mp_actViewShareBox;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;

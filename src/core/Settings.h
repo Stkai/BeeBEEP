@@ -401,6 +401,11 @@ public:
   inline void setStatsPostDate( const QDate& );
   inline const QDate& statsPostDate() const;
 
+  inline void setUseShareBox( bool );
+  inline bool useShareBox() const;
+  inline void setShareBoxPath( const QString& );
+  inline const QString& shareBoxPath() const;
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -640,6 +645,9 @@ private:
   QString m_applicationUuid;
   QDate m_applicationUuidCreationDate;
   QDate m_statsPostDate;
+
+  bool m_useShareBox;
+  QString m_shareBoxPath;
 
 };
 
@@ -913,5 +921,9 @@ inline bool Settings::hideOtherPanels() const { return m_hideOtherPanels; }
 inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer; }
 inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
 inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }
+inline void Settings::setUseShareBox( bool new_value ) { m_useShareBox = new_value; }
+inline bool Settings::useShareBox() const { return m_useShareBox; }
+inline void Settings::setShareBoxPath( const QString& new_value ) { m_shareBoxPath = new_value; }
+inline const QString& Settings::shareBoxPath() const { return m_shareBoxPath; }
 
 #endif // BEEBEEP_SETTINGS_H

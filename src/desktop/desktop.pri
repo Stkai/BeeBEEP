@@ -29,6 +29,7 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiSavedChatList.h \
   desktop/GuiScreenShot.h \
   desktop/GuiSearchUser.h \
+  desktop/GuiShareBox.h \
   desktop/GuiShareLocal.h \
   desktop/GuiShareNetwork.h \
   desktop/GuiShortcut.h \
@@ -68,6 +69,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiSavedChatList.cpp \
   desktop/GuiScreenShot.cpp \
   desktop/GuiSearchUser.cpp \
+  desktop/GuiShareBox.cpp \
   desktop/GuiShareLocal.cpp \
   desktop/GuiShareNetwork.cpp \
   desktop/GuiShortcut.cpp \
@@ -91,6 +93,7 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiSavedChat.ui \
   desktop/GuiScreenShot.ui \
   desktop/GuiSearchUser.ui \
+  desktop/GuiShareBox.ui \
   desktop/GuiShareLocal.ui \
   desktop/GuiShareNetwork.ui \
   desktop/GuiShortcut.ui \

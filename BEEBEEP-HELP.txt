@@ -191,8 +191,11 @@ AcceptConnectionsOnlyFromWorkgroups=[true/false] accepts connection only from me
 Workgroups = workgroups saved (do not edit manually)
 UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (overwrite RC option)
 AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users when there aren't users connected (default=true) [3.0.5]
+
 [FileShare]
-Active=[true/false]
+FileTransferIsEnabled=[true/false] enable file transfer/sharing/box (default=true) [3.0.6]
+UseShareBox=[true/false] enable share box (default=false) [3.0.7]
+ShareBoxPath=[string] path of the box shared (default="") [3.0.7]
 SetAutomaticFileName=[true/false] on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it
 MaxSimultaneousDownloads= is the max number of simultaneous downloads in file transfer
 MaxQueuedDownloads = is the max number of downloads can be selected in file sharing at once

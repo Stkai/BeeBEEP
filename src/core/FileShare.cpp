@@ -172,3 +172,20 @@ FileInfo FileShare::downloadedFile( const QString& file_info_hash ) const
   }
   return FileInfo();
 }
+
+int FileShare::addToShareBoxes( VNumber user_id, const QList<FileInfo>& file_info_list )
+{
+  removeFromShareBoxes( user_id );
+  int num_files = 0;
+  foreach( FileInfo fi, file_info_list )
+  {
+    m_shareBoxes.insert( user_id, fi );
+    num_files++;
+  }
+  return num_files;
+}
+
+int FileShare::removeFromShareBoxes( VNumber user_id )
+{
+  return m_shareBoxes.remove( user_id );
+}
