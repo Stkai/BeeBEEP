@@ -23,8 +23,8 @@
 
 #include "BeeUtils.h"
 #include "GuiIconProvider.h"
-#include "GuiFileInfoList.h"
 #include "GuiShareBox.h"
+#include "GuiShareBoxFileInfoList.h"
 #include "FileShare.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -125,7 +125,13 @@ void GuiShareBox::enableUpdateButton()
 void GuiShareBox::updateBox()
 {
   mp_actUpdate->setEnabled( false );
+  emit shareBoxRequest( ID_LOCAL_USER, "test" );
   QTimer::singleShot( 10000, this, SLOT( enableUpdateButton() ) );
+}
+
+void GuiShareBox::updateBox( VNumber user_id, const QList<FileInfo>& file_info_list )
+{
+
 }
 
 void GuiShareBox::loadShareBox( const User& u )
@@ -139,7 +145,7 @@ void GuiShareBox::loadShareBox( const User& u )
   QTime timer;
   timer.start();
 
-  GuiFileInfoItem *item = m_fileInfoList.userItem( u.id() );
+  GuiShareBoxFileInfoItem *item = m_fileInfoList.userItem( u.id() );
   if( item )
     item->removeChildren();
 
@@ -163,7 +169,7 @@ void GuiShareBox::loadShareBox( const User& u )
           else
           {
             item->setFilePath( "" );
-            item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
+            item->setToolTip( GuiShareBoxFileInfoItem::ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
           }
         }
 
@@ -215,7 +221,7 @@ void GuiShareBox::checkItemDoubleClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
-  GuiFileInfoItem* file_info_item = (GuiFileInfoItem*)item;
+  GuiShareBoxFileInfoItem* file_info_item = (GuiShareBoxFileInfoItem*)item;
 
   if( !file_info_item->isObjectFile() )
     return;
@@ -252,12 +258,12 @@ bool GuiShareBox::filterPassThrough( VNumber user_id, const FileInfo& fi )
     return mp_comboFileType->currentIndex() == (int)Bee::fileTypeFromSuffix( fi.suffix() );
 }
 
-void GuiShareBox::showFileTransferCompleted( GuiFileInfoItem* item, const QString& file_path )
+void GuiShareBox::showFileTransferCompleted( GuiShareBoxFileInfoItem* item, const QString& file_path )
 {
   item->setFilePath( file_path );
-  item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
-  if( item->text( GuiFileInfoItem::ColumnStatus ).isEmpty() )
-    item->setText( GuiFileInfoItem::ColumnStatus, tr( "Transfer completed" ) );
+  item->setToolTip( GuiShareBoxFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
+  if( item->text( GuiShareBoxFileInfoItem::ColumnStatus ).isEmpty() )
+    item->setText( GuiShareBoxFileInfoItem::ColumnStatus, tr( "Transfer completed" ) );
   for( int i = 0; i < mp_twBox->columnCount(); i++ )
     item->setBackgroundColor( i, QColor( "#91D606" ) );
 }

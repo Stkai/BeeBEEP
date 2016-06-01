@@ -932,7 +932,7 @@ void Settings::load()
   m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 3 );
   if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < 16 )
     m_tickIntervalConnectionTimeout = 16;
-  m_useLowDelayOptionOnSocket = sets->value( "©", false ).toBool();
+  m_useLowDelayOptionOnSocket = sets->value( "UseLowDelayOptionOnSocket", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -1199,6 +1199,7 @@ void Settings::save()
   sets->setValue( "ConnectionActivityTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );
+  sets->setValue( "UseLowDelayOptionOnSocket", m_useLowDelayOptionOnSocket );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS

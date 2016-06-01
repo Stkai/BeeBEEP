@@ -41,6 +41,7 @@ public:
   bool startListener();
   void stopListener();
 
+  inline bool isActive() const;
   inline bool hasActivePeers() const;
 
   FileInfo addFile( const QFileInfo&, const QString& );
@@ -87,6 +88,7 @@ private:
 
 
 // Inline Functions
+inline bool FileTransfer::isActive() const { return isListening() && serverPort() > 0; }
 inline void FileTransfer::clearFiles() { m_files.clear(); }
 inline bool FileTransfer::hasActivePeers() const { return !m_peers.isEmpty(); }
 

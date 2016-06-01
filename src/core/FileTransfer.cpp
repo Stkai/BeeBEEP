@@ -135,7 +135,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
       removeFile( fi );
   }
 
-  file_info = Protocol::instance().fileInfo( fi, share_folder );
+  file_info = Protocol::instance().fileInfo( fi, share_folder, false );
   file_info.setHostAddress( Settings::instance().localUser().hostAddress() );
   file_info.setHostPort( serverPort() );
   m_files.append( file_info );

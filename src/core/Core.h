@@ -99,6 +99,7 @@ public:
   void stopFileTransferServer();
   void addPathToShare( const QString&, bool );
   void removePathFromShare( const QString& );
+  void sendShareBoxRequest( VNumber, const QString& );
 
 public slots:
   void sendBroadcastMessage();
@@ -137,6 +138,7 @@ signals:
   void userConnectionStatusChanged( const User& );
   void networkInterfaceIsDown();
   void networkInterfaceIsUp();
+  void shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& );
 
 protected slots:
   void showBroadcasterUdpError();
@@ -162,6 +164,7 @@ protected slots:
   void fileTransferServerListening();
   void addListToLocalShare();
   void addFolderToFileTransfer();
+  void sendShareBoxList();
 
   /* CoreChat */
   void addListToSavedChats();
@@ -221,6 +224,7 @@ protected:
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();
   bool sendFolder( const User&, const QFileInfo& );
+  void buildShareBoxFileList( const User&, const QString& );
 
 private:
   QList<Connection*> m_connections;

@@ -25,7 +25,7 @@
 #define BEEBEEP_GUISHAREBOX_H
 
 #include "ui_GuiShareBox.h"
-#include "GuiFileInfoList.h"
+#include "GuiShareBoxFileInfoList.h"
 class User;
 
 
@@ -43,9 +43,11 @@ signals:
   void downloadSharedFiles( const QList<SharedFileInfo>& );
   void openFileCompleted( const QUrl& );
   void updateStatus( const QString&, int );
+  void shareBoxRequest( VNumber, const QString& );
 
 public slots:
   void updateBox();
+  void updateBox( VNumber, const QList<FileInfo>& );
 
 protected slots:
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
@@ -58,7 +60,7 @@ protected:
   bool filterPassThrough( VNumber, const FileInfo& );
   void showStatus( const QString& );
   void loadShareBox( const User& );
-  void showFileTransferCompleted( GuiFileInfoItem*, const QString& );
+  void showFileTransferCompleted( GuiShareBoxFileInfoItem*, const QString& );
   void resetComboUsers();
   void downloadSelectedItem( QTreeWidgetItem* );
 
@@ -70,7 +72,7 @@ private:
   QAction* mp_actDownload;
   QAction* mp_actUpload;
 
-  GuiFileInfoList m_fileInfoList;
+  GuiShareBoxFileInfoList m_fileInfoList;
 
 };
 

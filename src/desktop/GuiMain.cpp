@@ -142,6 +142,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
+  connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
   connect( mp_userList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
@@ -530,7 +531,6 @@ void GuiMain::checkViewActions()
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
   mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
   mp_actViewShareBox->setEnabled( mp_stackedWidget->currentWidget() != mp_shareBox );
-
   mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().toList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
 
@@ -4026,4 +4026,9 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
   Settings::instance().setOverwriteExistingFiles( mp_actOverwriteExistingFile->isChecked() );
   Settings::instance().setAutomaticFileName( mp_actGenerateAutomaticFilename->isChecked() );
   Settings::instance().save();
+}
+
+void GuiMain::onShareBoxRequest( VNumber user_id, const QString& folder_name )
+{
+  mp_core->sendShareBoxRequest( user_id, folder_name );
 }

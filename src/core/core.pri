@@ -2,6 +2,7 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += core/Broadcaster.h \
+  core/BuildFileList.h \
   core/BuildFileShareList.h \
   core/BuildSavedChatList.h \
   core/Chat.h \
@@ -43,6 +44,7 @@ HEADERS += core/Broadcaster.h \
   core/Version.h
 
 SOURCES +=  core/Broadcaster.cpp \
+  core/BuildFileList.cpp \
   core/BuildFileShareList.cpp \
   core/BuildSavedChatList.cpp \
   core/Chat.cpp \

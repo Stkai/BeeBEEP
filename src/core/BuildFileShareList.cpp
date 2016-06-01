@@ -46,16 +46,20 @@ void BuildFileShareList::setFolderPath( const QString& path_to_share )
 
 void BuildFileShareList::buildList()
 {
-  if( m_folderPath.isEmpty() )
-    return;
   if( !m_shareList.isEmpty() )
     m_shareList.clear();
+
   m_shareSize = 0;
   QTime elapsed_time;
   elapsed_time.start();
-  m_shareSize = addPathToList( m_folderName, m_folderPath );
+
+  if( !m_folderPath.isEmpty() )
+  {
+    m_shareSize = addPathToList( m_folderName, m_folderPath );
+    qSort( m_shareList );
+  }
+
   m_elapsedTime = elapsed_time.elapsed();
-  qSort( m_shareList );
 #ifdef BEEBEEP_DEBUG
   foreach( FileInfo fi, m_shareList )
     qDebug() << "File shared" << fi.id() << "with path" << fi.path() << "and folder" << fi.shareFolder();
@@ -89,7 +93,7 @@ FileSizeType BuildFileShareList::addPathToList( const QString& path_name, const 
   }
   else if( path_info.isFile() )
   {
-    FileInfo fi = Protocol::instance().fileInfo( path_info, path_name );
+    FileInfo fi = Protocol::instance().fileInfo( path_info, path_name, false );
     m_shareList.append( fi );
     return fi.size();
   }

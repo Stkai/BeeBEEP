@@ -178,6 +178,7 @@ private slots:
   void toggleVisibilityEmoticonPanel();
   void onChangeSettingBeepOnNewMessage( QAction* );
   void onChangeSettingOnExistingFile( QAction* );
+  void onShareBoxRequest( VNumber, const QString& );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -251,7 +252,6 @@ private:
   GuiEmoticons* mp_emoticonsWidget;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
-  GuiShareBox* mp_shareBox;
 
   QMenu* mp_menuMain;
   QMenu* mp_menuInfo;
@@ -271,7 +271,6 @@ private:
   QToolBar* mp_barScreenShot;
   QToolBar* mp_barLog;
   QToolBar* mp_barGames;
-  QToolBar* mp_barShareBox;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actConfigureNetwork;
@@ -295,7 +294,10 @@ private:
   QAction* mp_actViewNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
+
+  GuiShareBox* mp_shareBox;
   QAction* mp_actViewShareBox;
+  QToolBar* mp_barShareBox;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
@@ -341,7 +343,6 @@ private:
   QxtGlobalShortcut* mp_scShowAllChats;
 #endif
   QWidget* mp_lastActiveWindow;
-
 
   bool m_prevActivatedState;
 };

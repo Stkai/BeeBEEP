@@ -60,7 +60,7 @@ public:
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
-  FileInfo fileInfo( const QFileInfo&, const QString& );
+  FileInfo fileInfo( const QFileInfo&, const QString&, bool );
   QString fileInfoHash( const QFileInfo& ) const;
   QString fileInfoHashTmp( VNumber, const QString&, FileSizeType ) const;
   ChatMessageData dataFromChatMessage( const Message& );
@@ -107,6 +107,12 @@ public:
   UserStatusRecord loadUserStatusRecord( const QString& ) const;
   Message userRecordListToMessage( const QList<UserRecord>& );
   QList<UserRecord> messageToUserRecordList( const Message& ) const;
+
+  Message shareBoxRequestPathList( const QString& );
+  Message refuseToShareBoxPath( const QString& );
+  Message acceptToShareBoxPath( const QString&, const QList<FileInfo>&, int );
+  QString folderNameFromShareBoxMessage( const Message& ) const;
+  QList<FileInfo> messageToShareBoxFileList( const Message&, const QHostAddress& ) const;
 
   inline VNumber currentId() const;
   inline VNumber newId();

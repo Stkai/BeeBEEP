@@ -36,6 +36,7 @@ public:
   explicit BuildFileShareList( QObject* parent = 0 );
 
   void setFolderPath( const QString& );
+
   inline const QString& folderPath() const;
   inline const QString& folderName() const;
   inline void setBroadcastList( bool );

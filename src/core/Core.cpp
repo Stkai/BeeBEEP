@@ -408,7 +408,7 @@ void Core::sendHelloToHostsInSettings()
 
 int Core::fileTransferPort() const
 {
-  if( mp_fileTransfer->isListening() )
+  if( mp_fileTransfer->isActive() )
     return mp_fileTransfer->serverPort();
   else
     return Settings::instance().defaultFileTransferPort();

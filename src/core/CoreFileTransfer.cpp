@@ -23,6 +23,7 @@
 
 #include "BeeApplication.h"
 #include "BeeUtils.h"
+#include "BuildFileList.h"
 #include "BuildFileShareList.h"
 #include "Connection.h"
 #include "Core.h"
@@ -35,7 +36,7 @@
 
 bool Core::startFileTransferServer()
 {
-  if( mp_fileTransfer->isListening() )
+  if( mp_fileTransfer->isActive() )
   {
     qDebug() << "Starting File Transfer server but it is already started";
     return true;
@@ -73,7 +74,7 @@ void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& pee
 
 bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message )
 {
-  if( !mp_fileTransfer->isListening() )
+  if( !mp_fileTransfer->isActive() )
   {
     if( !startFileTransferServer() )
       return false;
@@ -217,7 +218,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path )
     return false;
   }
 
-  if( !mp_fileTransfer->isListening() )
+  if( !mp_fileTransfer->isActive() )
   {
     if( !startFileTransferServer() )
       return false;
@@ -377,7 +378,7 @@ void Core::sendFileShareListToAll()
   if( !isConnected() )
     return;
 
-  if( !mp_fileTransfer->isListening() )
+  if( !mp_fileTransfer->isActive() )
     return;
 
   const QByteArray& share_list_message = Protocol::instance().fileShareListMessage();
@@ -410,7 +411,7 @@ void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Adding to file sharing" << share_path;
 #endif
-    FileInfo file_info = Protocol::instance().fileInfo( fi, "" );
+    FileInfo file_info = Protocol::instance().fileInfo( fi, "", false );
     FileShare::instance().addToLocal( file_info );
 
     if( m_shareListToBuild > 0 )
@@ -525,7 +526,7 @@ void Core::removePathFromShare( const QString& share_path )
 
 void Core::createLocalShareMessage()
 {
-  if( mp_fileTransfer->isListening() )
+  if( mp_fileTransfer->isActive() )
     Protocol::instance().createFileShareListMessage( FileShare::instance().local(), mp_fileTransfer->serverPort() );
   else
     Protocol::instance().createFileShareListMessage( FileShare::instance().local(), -1 );
@@ -601,7 +602,7 @@ void Core::addFolderToFileTransfer()
     return;
   }
 
-  if( !mp_fileTransfer->isListening() || mp_fileTransfer->serverPort() <= 0 )
+  if( !mp_fileTransfer->isActive() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_header + tr( "file transfer is not working." ),
                            DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
@@ -635,4 +636,75 @@ void Core::addFolderToFileTransfer()
 
   c->sendMessage( m );
 
+}
+
+void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name )
+{
+  if( user_id != ID_LOCAL_USER )
+  {
+    Message m = Protocol::instance().shareBoxRequestPathList( folder_name );
+    Connection* c = connection( user_id );
+    if( c )
+      c->sendMessage( m );
+    else
+      qWarning() << "Unable to send share box request to offline user" << user_id;
+  }
+  else
+    buildShareBoxFileList( Settings::instance().localUser(), folder_name );
+}
+
+void Core::buildShareBoxFileList( const User& u, const QString& folder_name )
+{
+  QString folder_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().shareBoxPath(), folder_name ) );
+  BuildFileList *bfl = new BuildFileList;
+  bfl->init( folder_name, folder_path, u.id() );
+  connect( bfl, SIGNAL( listCompleted() ), this, SLOT( sendShareBoxList() ) );
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->addJob( bfl );
+  QMetaObject::invokeMethod( bfl, "buildList", Qt::QueuedConnection );
+}
+
+void Core::sendShareBoxList()
+{
+  BuildFileList *bfl = qobject_cast<BuildFileList*>( sender() );
+  if( !bfl )
+  {
+    qWarning() << "Core received a signal from invalid BuildFileList instance";
+    return;
+  }
+
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->removeJob( bfl );
+  QString folder_name = bfl->folderName();
+  VNumber to_user_id = bfl->toUserId();
+  bool error_found = bfl->errorFound();
+  QList<FileInfo> file_info_list = bfl->fileList();
+  bfl->deleteLater();
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Share box has found" << file_info_list.size() << "files in folder" << folder_name;
+#endif
+
+
+  if( to_user_id != ID_LOCAL_USER )
+  {
+    if( !mp_fileTransfer->isActive() )
+      error_found = true;
+
+    Message m;
+    if( error_found )
+      m = Protocol::instance().refuseToShareBoxPath( folder_name );
+    else
+      m = Protocol::instance().acceptToShareBoxPath( folder_name, file_info_list, mp_fileTransfer->serverPort() );
+
+    Connection* c = connection( to_user_id );
+    if( c )
+      c->sendMessage( m );
+#ifdef BEEBEEP_DEBUG
+    else
+      qWarning() << "Unable to find connection for user" << to_user_id << "to send share box message";
+#endif
+  }
+  else
+    emit shareBoxAvailable( Settings::instance().localUser(), folder_name, file_info_list );
 }

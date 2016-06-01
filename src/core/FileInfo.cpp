@@ -60,6 +60,10 @@ FileInfo& FileInfo::operator=( const FileInfo& fi )
 
 bool FileInfo::operator<( const FileInfo& fi ) const
 {
+  if( isFolder() && !fi.isFolder() )
+    return false;
+  if( !isFolder() && !fi.isFolder() )
+    return true;
   if( m_path.isEmpty() || fi.m_path.isEmpty() )
     return m_name < fi.m_name;
   else
