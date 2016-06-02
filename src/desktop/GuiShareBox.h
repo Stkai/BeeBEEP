@@ -36,43 +36,28 @@ class GuiShareBox : public QWidget, private Ui::GuiShareBoxWidget
 public:
   explicit GuiShareBox( QWidget *parent = 0 );
   void setupToolBar( QToolBar* );
-  void showBoxForUser( const User& );
 
 signals:
-  void downloadSharedFile( VNumber, VNumber );
-  void downloadSharedFiles( const QList<SharedFileInfo>& );
-  void openFileCompleted( const QUrl& );
-  void updateStatus( const QString&, int );
   void shareBoxRequest( VNumber, const QString& );
+  void openUrlRequest( const QUrl& );
 
 public slots:
   void updateBox();
-  void updateBox( VNumber, const QList<FileInfo>& );
+  void updateBox( const User&, const QString&, const QList<FileInfo>& );
 
 protected slots:
-  void checkItemDoubleClicked( QTreeWidgetItem*, int );
-  void filterByText( const QString& );
   void enableUpdateButton();
   void openDownloadMenu( const QPoint& );
-  void downloadSelected();
-
-protected:
-  bool filterPassThrough( VNumber, const FileInfo& );
-  void showStatus( const QString& );
-  void loadShareBox( const User& );
-  void showFileTransferCompleted( GuiShareBoxFileInfoItem*, const QString& );
-  void resetComboUsers();
-  void downloadSelectedItem( QTreeWidgetItem* );
+  void onItemDoubleClicked( QTreeWidgetItem*, int );
 
 private:
-  QLineEdit* mp_leFilter;
-  QComboBox* mp_comboUsers;
-  QComboBox* mp_comboFileType;
   QAction* mp_actUpdate;
   QAction* mp_actDownload;
   QAction* mp_actUpload;
 
   GuiShareBoxFileInfoList m_fileInfoList;
+  VNumber m_userId;
+  QString m_currentFolder;
 
 };
 

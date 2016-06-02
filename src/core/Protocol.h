@@ -60,7 +60,7 @@ public:
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
-  FileInfo fileInfo( const QFileInfo&, const QString&, bool );
+  FileInfo fileInfo( const QFileInfo&, const QString&, bool to_sharebox );
   QString fileInfoHash( const QFileInfo& ) const;
   QString fileInfoHashTmp( VNumber, const QString&, FileSizeType ) const;
   ChatMessageData dataFromChatMessage( const Message& );

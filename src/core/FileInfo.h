@@ -66,6 +66,8 @@ public:
   inline void setId( VNumber );
   inline const QString& fileHash() const;
   inline void setFileHash( const QString& );
+  inline const QDateTime& lastModified() const;
+  inline void setLastModified( const QDateTime& );
 
 private:
   TransferType m_transferType;
@@ -80,6 +82,7 @@ private:
   QByteArray m_password;
   VNumber m_id;
   QString m_fileHash;
+  QDateTime m_lastModified;
 
 };
 
@@ -115,5 +118,7 @@ inline VNumber FileInfo::id() const { return m_id; }
 inline void FileInfo::setId( VNumber new_value ) { m_id = new_value; }
 inline const QString& FileInfo::fileHash() const { return m_fileHash; }
 inline void FileInfo::setFileHash( const QString& new_value ) { m_fileHash = new_value; }
+inline const QDateTime& FileInfo::lastModified() const { return m_lastModified; }
+inline void FileInfo::setLastModified( const QDateTime& new_value ) { m_lastModified = new_value; }
 
 #endif // BEEBEEP_FILEINFO_H

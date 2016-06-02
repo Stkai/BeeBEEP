@@ -25,59 +25,35 @@
 #define BEEBEEP_GUISHAREBOXFILEINFOITEM_H
 
 #include "Config.h"
-class FileInfo;
+#include "FileInfo.h"
 
 
 class GuiShareBoxFileInfoItem : public QTreeWidgetItem
 {
 public:
-  enum ObjectType { ObjectInvalid, ObjectUser, ObjectFolder, ObjectFile, ObjectNumTypes };
-  enum ColumnType { ColumnFile, ColumnSize, ColumnStatus };
+  enum ColumnType { ColumnFile, ColumnSize, ColumnLastModified };
 
   GuiShareBoxFileInfoItem( QTreeWidget* );
-  GuiShareBoxFileInfoItem( QTreeWidgetItem* );
 
   bool operator<( const QTreeWidgetItem& ) const;
 
-  void initUser( VNumber user_id, const QString& );
-  void initFolder( VNumber user_id, const QString&, const QString& );
-  void initFile( VNumber user_id, const FileInfo& );
-
   inline bool isValid() const;
-  inline bool isObjectUser() const;
-  inline bool isObjectFolder() const;
-  inline bool isObjectFile() const;
+  inline bool isFolder() const;
+  inline bool isFile() const;
 
-  inline VNumber userId() const;
-  inline VNumber fileInfoId() const;
-  inline FileSizeType fileSize() const;
-  inline const QString& folder() const;
-  inline const QString& filePath() const;
-  inline void setFilePath( const QString& );
-
-  int removeChildren();
+  inline const FileInfo& fileInfo() const;
+  void setFileInfo( const FileInfo& );
 
 private:
-  ObjectType m_type;
-  VNumber m_userId;
-  VNumber m_fileInfoId;
-  FileSizeType m_fileSize;
-  QString m_folder;
-  QString m_filePath;
+  FileInfo m_fileInfo;
 
 };
 
 
 // Inline functions
-inline bool GuiShareBoxFileInfoItem::isValid() const { return m_type == ObjectInvalid; }
-inline bool GuiShareBoxFileInfoItem::isObjectUser() const { return m_type == ObjectUser; }
-inline bool GuiShareBoxFileInfoItem::isObjectFolder() const { return m_type == ObjectFolder; }
-inline bool GuiShareBoxFileInfoItem::isObjectFile() const { return m_type == ObjectFile; }
-inline VNumber GuiShareBoxFileInfoItem::userId() const { return m_userId; }
-inline VNumber GuiShareBoxFileInfoItem::fileInfoId() const { return m_fileInfoId; }
-inline FileSizeType GuiShareBoxFileInfoItem::fileSize() const { return m_fileSize; }
-inline const QString& GuiShareBoxFileInfoItem::folder() const { return m_folder; }
-inline const QString& GuiShareBoxFileInfoItem::filePath() const { return m_filePath; }
-inline void GuiShareBoxFileInfoItem::setFilePath( const QString& new_value ) { m_filePath = new_value; }
+inline bool GuiShareBoxFileInfoItem::isValid() const { return m_fileInfo.isValid(); }
+inline bool GuiShareBoxFileInfoItem::isFolder() const { return m_fileInfo.isFolder(); }
+inline bool GuiShareBoxFileInfoItem::isFile() const { return !m_fileInfo.isFolder(); }
+inline const FileInfo& GuiShareBoxFileInfoItem::fileInfo() const { return m_fileInfo; }
 
 #endif // BEEBEEP_GUISHAREBOXFILEINFOITEM_H

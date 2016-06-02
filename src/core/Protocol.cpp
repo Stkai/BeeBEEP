@@ -368,21 +368,21 @@ QByteArray Protocol::localVCardMessage() const
 
 bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
 {
-  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
+  QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 5 )
     return false;
 
   VCard vc;
-  vc.setNickName( sl.at( 0 ) );
-  vc.setFirstName( sl.at( 1 ) );
-  vc.setLastName( sl.at( 2 ) );
-  vc.setBirthday( QDate::fromString( sl.at( 3 ), Qt::ISODate ) );
-  vc.setEmail( sl.at( 4 ) );
+  vc.setNickName( sl.takeFirst() );
+  vc.setFirstName( sl.takeFirst() );
+  vc.setLastName( sl.takeFirst() );
+  vc.setBirthday( QDate::fromString( sl.takeFirst(), Qt::ISODate ) );
+  vc.setEmail( sl.takeFirst() );
   vc.setPhoto( stringToPixmap( m.text() ) );
 
-  if( sl.size() >= 6 )
+  if( !sl.isEmpty() )
   {
-    QString user_color = sl.at( 5 );
+    QString user_color = sl.takeFirst();
 #if QT_VERSION >= 0x040700
     if( user_color != QString( "#000000" ) && QColor::isValidColor( user_color ) )
 #else
@@ -391,14 +391,11 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
       u->setColor( user_color );
   }
 
-  if( sl.size() >= 7 )
-    vc.setPhoneNumber( sl.at( 6 ) );
+  if( !sl.isEmpty() )
+    vc.setPhoneNumber( sl.takeFirst() );
 
-  if( sl.size() >= 8 )
-    vc.setInfo( sl.at( 7 ) );
-
-  if( sl.size() > 8 )
-    qWarning() << "VCARD message contains more data. Skip it";
+  if( !sl.isEmpty()  )
+    vc.setInfo( sl.takeFirst() );
 
   u->setVCard( vc );
 
@@ -407,7 +404,7 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
 
 QStringList Protocol::workgroupsFromHelloMessage( const Message& hello_message ) const
 {
-  QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
+  QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 10 )
     return QStringList();
 
@@ -438,7 +435,7 @@ bool Protocol::acceptConnectionFromWorkgroup( const Message& hello_message ) con
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
   /* Read User Field Data */
-  QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
+  QStringList sl = hello_message.text().split( DATA_FIELD_SEPARATOR );
   bool ok = false;
 
   if( sl.size() < 4 )
@@ -506,10 +503,6 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   /* Skip datastream version */
   if( !sl.isEmpty() )
     sl.takeFirst();
-
-  /* Skip other data */
-  if( !sl.isEmpty() )
-    qWarning() << "HELLO message contains more data. Skip it";
 
   /* Create User */
   User u( newId() );
@@ -886,14 +879,10 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   if( !sl.isEmpty() )
     fi.setShareFolder( sl.takeFirst() );
 
-  /* Skip other data */
-  if( !sl.isEmpty()  )
-    qWarning() << "FILEINFO message contains more data. Skip it";
-
   return fi;
 }
 
-FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, bool use_hash_password )
+FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, bool to_sharebox )
 {
   FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
   file_info.setName( fi.fileName() );
@@ -908,13 +897,14 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
   else
     file_info.setIsFolder( true );
 
-  file_info.setFileHash( fileInfoHash( fi ) );
-  if( use_hash_password )
+  if( to_sharebox )
   {
-    file_info.setPassword( file_info.fileHash().toLatin1() );
+    file_info.setPassword( Settings::instance().hash( file_info.path() ) );
+    file_info.setFileHash( QString::fromLatin1( file_info.password() ) );
   }
   else
   {
+    file_info.setFileHash( fileInfoHash( fi ) );
     QString password_key = QString( "%1%2%3%4%5%6" )
                             .arg( Random::number( 111111, 999999 ) )
                             .arg( file_info.id() )
@@ -924,6 +914,8 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
                             .arg( file_info.size() );
     file_info.setPassword( Settings::instance().hash( password_key ) );
   }
+
+  file_info.setLastModified( fi.lastModified() );
 
   return file_info;
 }
@@ -1038,16 +1030,12 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
   if( pFolderName )
     *pFolderName = folder_name;
 
-  /* Skip other data */
-  if( !sl.isEmpty() )
-    qWarning() << "Folder message contains more data. Skip it";
-
   sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
 
   QStringList::const_iterator it = sl.begin();
   while( it != sl.end() )
   {
-    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR, QString::SkipEmptyParts );
+    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR );
 
     if( sl_tmp.size() >= 7 )
     {
@@ -1115,16 +1103,13 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
     return file_info_list;
 
   int server_port = sl.takeFirst().toInt();
-  /* Skip other data */
-  if( !sl.isEmpty() )
-    qWarning() << "FILESHARE message contains more data. Skip it";
 
   sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
 
   QStringList::const_iterator it = sl.begin();
   while( it != sl.end() )
   {
-    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR, QString::SkipEmptyParts );
+    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR );
 
     if( sl_tmp.size() >= 5 )
     {
@@ -1157,7 +1142,7 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
 
 Message Protocol::shareBoxRequestPathList( const QString& folder_name )
 {
-  Message m( Message::ShareBox, newId(), "" );
+  Message m( Message::ShareBox, ID_SHAREBOX_MESSAGE, "" );
   QStringList msg_data;
   msg_data << QString::number( 0 );
   msg_data << folder_name;
@@ -1168,7 +1153,7 @@ Message Protocol::shareBoxRequestPathList( const QString& folder_name )
 
 Message Protocol::refuseToShareBoxPath( const QString& folder_name )
 {
-  Message m( Message::ShareBox, newId(), "" );
+  Message m( Message::ShareBox, ID_SHAREBOX_MESSAGE, "" );
   QStringList msg_data;
   msg_data << QString::number( 0 );
   msg_data << folder_name;
@@ -1190,11 +1175,16 @@ Message Protocol::acceptToShareBoxPath( const QString& folder_name, const QList<
     sl << QString::number( fi.id() );
     sl << QString::fromUtf8( fi.password() );
     sl << fi.fileHash();
-    sl << fi.shareFolder();
+    sl << QString( "" ); // shareFolder;
+    sl << fi.lastModified().toString( Qt::ISODate );
+    if( fi.isFolder() )
+      sl << QString( "1" );
+    else
+      sl << QString( "" );
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
   }
 
-  Message m( Message::ShareBox, newId(), msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
+  Message m( Message::ShareBox, ID_SHAREBOX_MESSAGE, msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
   msg_list.clear();
   msg_list << QString::number( server_port );
   msg_list << folder_name;
@@ -1224,16 +1214,14 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
 
   int server_port = sl.takeFirst().toInt();
   QString folder_name = sl.takeFirst();
-  /* Skip other data */
-  //if( !sl.isEmpty() )
-  //  qWarning() << "SHAREBOX message contains more data. Skip it";
+  QString s_tmp;
 
   sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
   QStringList::const_iterator it = sl.begin();
   while( it != sl.end() )
   {
-    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR, QString::SkipEmptyParts );
-    if( sl_tmp.size() >= 5 )
+    QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR );
+    if( sl_tmp.size() >= 9 )
     {
       FileInfo fi;
       fi.setTransferType( FileInfo::Download );
@@ -1244,16 +1232,15 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
       fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
       fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
       fi.setPassword( sl_tmp.takeFirst().toUtf8() );
-      if( !sl_tmp.isEmpty() )
-        fi.setFileHash( sl_tmp.takeFirst() );
-      else
-        fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
-
-      if( !sl_tmp.isEmpty() )
-        fi.setShareFolder( Bee::convertToNativeFolderSeparator( sl_tmp.takeFirst() ) );
-      else
+      fi.setFileHash( sl_tmp.takeFirst() );
+      s_tmp = sl_tmp.takeFirst();
+      if( s_tmp.isEmpty() )
         fi.setShareFolder( folder_name );
-
+      else
+        fi.setShareFolder( Bee::convertToNativeFolderSeparator( s_tmp ) );
+      fi.setLastModified( QDateTime::fromString( sl_tmp.takeFirst(), Qt::ISODate ) );
+      s_tmp = sl_tmp.takeFirst();
+      fi.setIsFolder( !s_tmp.isEmpty() );
       file_info_list.append( fi );
     }
 

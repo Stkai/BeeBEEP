@@ -119,6 +119,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
   connect( mp_core, SIGNAL( chatReadByUser( VNumber, VNumber ) ), this, SLOT( onChatReadByUser( VNumber, VNumber ) ) );
+  connect( mp_core, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), mp_shareBox, SLOT( updateBox( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -143,6 +144,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
+  connect( mp_shareBox, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
   connect( mp_userList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
@@ -679,6 +682,7 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Enable and edit your custom shortcuts" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary..." ), this, SLOT( selectDictionatyPath() ) );
   act->setStatusTip( tr( "Select your preferred dictionary for spell checking" ) );
+  act = mp_menuMain->addAction( QIcon( ":/images/sharebox.png" ), tr( "ShareBox folder..."), this, SLOT( selectShareBoxFolder() ) );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
@@ -4031,4 +4035,16 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
 void GuiMain::onShareBoxRequest( VNumber user_id, const QString& folder_name )
 {
   mp_core->sendShareBoxRequest( user_id, folder_name );
+}
+
+void GuiMain::selectShareBoxFolder()
+{
+  QString sharebox_folder_path = FileDialog::getExistingDirectory( this,
+                                                                   tr( "%1 - Select the ShareBox folder" )
+                                                                   .arg( Settings::instance().programName() ),
+                                                                         Settings::instance().shareBoxPath() );
+  if( sharebox_folder_path.isEmpty() )
+    return;
+
+  Settings::instance().setShareBoxPath( sharebox_folder_path );
 }

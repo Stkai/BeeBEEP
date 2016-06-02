@@ -655,6 +655,9 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name )
 
 void Core::buildShareBoxFileList( const User& u, const QString& folder_name )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Sharebox builds file list in folder" << folder_name << "for user" << u.path();
+#endif
   QString folder_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().shareBoxPath(), folder_name ) );
   BuildFileList *bfl = new BuildFileList;
   bfl->init( folder_name, folder_path, u.id() );
@@ -682,9 +685,8 @@ void Core::sendShareBoxList()
   bfl->deleteLater();
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Share box has found" << file_info_list.size() << "files in folder" << folder_name;
+  qDebug() << "Sharebox has found" << file_info_list.size() << "files in folder" << folder_name;
 #endif
-
 
   if( to_user_id != ID_LOCAL_USER )
   {

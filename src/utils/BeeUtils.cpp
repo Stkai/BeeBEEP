@@ -433,13 +433,32 @@ QPixmap Bee::convertToGrayScale( const QPixmap& pix )
   return ret_pix;
 }
 
+QChar Bee::naviveFolderSeparator()
+{
+#ifdef Q_OS_WIN
+  return QChar( '\\' );
+#else
+  return QChar( '/' );
+#endif
+}
+
 QString Bee::convertToNativeFolderSeparator( const QString& folder_path )
 {
   QString folder_path_converted = folder_path;
 #ifdef Q_OS_WIN
-  folder_path_converted.replace( QChar( '/' ), QChar( '\\' ) );
+  folder_path_converted.replace( QChar( '/' ), naviveFolderSeparator() );
 #else
-  folder_path_converted.replace( QChar( '\\' ), QChar( '/' ) );
+  folder_path_converted.replace( QChar( '\\' ), naviveFolderSeparator() );
 #endif
   return folder_path_converted;
+}
+
+QString Bee::folderCdUp( const QString& folder_path )
+{
+  QStringList sl = Bee::convertToNativeFolderSeparator( folder_path ).split( naviveFolderSeparator() );
+  if( sl.isEmpty() )
+    return folder_path;
+
+  sl.removeLast();
+  return sl.join( naviveFolderSeparator() );
 }

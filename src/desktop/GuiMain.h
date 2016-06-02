@@ -179,6 +179,7 @@ private slots:
   void onChangeSettingBeepOnNewMessage( QAction* );
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );
+  void selectShareBoxFolder();
 
 protected:
   void keyPressEvent( QKeyEvent* );

@@ -37,18 +37,12 @@ class GuiShareBoxFileInfoList : public QObject
 public:
   GuiShareBoxFileInfoList();
 
-  void initTree( QTreeWidget*, bool is_local );
-  inline void setUpdatesEnabled( bool );
+  void initTree( QTreeWidget* );
 
-  GuiShareBoxFileInfoItem* userItem( VNumber );
-  GuiShareBoxFileInfoItem* createUserItem( const User& );
-  GuiShareBoxFileInfoItem* folderItem( VNumber, const QString& );
-  GuiShareBoxFileInfoItem* createFolderItem( const User&, const QString& );
-  GuiShareBoxFileInfoItem* fileItem( VNumber, VNumber );
-  GuiShareBoxFileInfoItem* createFileItem( const User&, const FileInfo& );
+  void setFileInfoList( const QList<FileInfo>& );
+  QList<FileInfo> selectedFileInfoList() const;
 
-  int parseSelectedItems();
-  inline const QList<SharedFileInfo>& selectedFileInfoList() const;
+  void addDotDotFolder();
 
   void clearTree();
   int countFileItems() const;
@@ -57,26 +51,12 @@ public:
 public slots:
   void clearTreeSelection();
 
-protected:
-  void addFileInfoToList( VNumber, const FileInfo& );
-  void addFileInfoListToList( VNumber, const QList<FileInfo>& );
-  void addItemToFileInfoList( GuiShareBoxFileInfoItem* );
-  int parseItem( QTreeWidgetItem* );
-  FileInfo fileInfoFromNetwork( GuiShareBoxFileInfoItem* );
-  GuiShareBoxFileInfoItem* createSubFolderItem( GuiShareBoxFileInfoItem*, VNumber, const QString&, const QString& );
-
 private:
   QTreeWidget* mp_tree;
-  QList<SharedFileInfo> m_selectedFileInfoList;
-  GuiShareBoxFileInfoItem* m_lastFolderItem;
-  GuiShareBoxFileInfoItem* m_lastUserItem;
-  bool m_isLocal;
 
 };
 
 // Inline Functions
-inline void GuiShareBoxFileInfoList::setUpdatesEnabled( bool new_value ) { mp_tree->setUpdatesEnabled( new_value ); }
-inline const QList<SharedFileInfo>& GuiShareBoxFileInfoList::selectedFileInfoList() const { return m_selectedFileInfoList; }
 inline bool GuiShareBoxFileInfoList::isEmpty() const { return mp_tree->topLevelItemCount() == 0; }
 
 #endif // BEEBEEP_GUISHAREBOXFILEINFOLIST_H
