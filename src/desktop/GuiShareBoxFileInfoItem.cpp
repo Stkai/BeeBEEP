@@ -33,15 +33,15 @@ GuiShareBoxFileInfoItem::GuiShareBoxFileInfoItem( QTreeWidget *parent )
 
 bool GuiShareBoxFileInfoItem::operator<( const QTreeWidgetItem& item ) const
 {
+  const GuiShareBoxFileInfoItem& fi_item = (GuiShareBoxFileInfoItem&)item;
+  if( isFile() && fi_item.isFolder() )
+    return false;
+  else if( isFolder() && fi_item.isFile() )
+    return true;
+
   if( treeWidget()->sortColumn() == (int)ColumnFile)
   {
-    const GuiShareBoxFileInfoItem& fi_item = (GuiShareBoxFileInfoItem&)item;
-    if( isFile() && fi_item.isFolder() )
-      return false;
-    else if( isFolder() && fi_item.isFile() )
-      return true;
-    else
-      return QTreeWidgetItem::operator<( item );
+    return QTreeWidgetItem::operator<( item );
   }
   else if( treeWidget()->sortColumn() == (int)ColumnSize )
   {

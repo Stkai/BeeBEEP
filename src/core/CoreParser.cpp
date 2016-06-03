@@ -399,6 +399,7 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
     if( m.hasFlag( Message::Refused ) )
     {
       qDebug() << u.path() << "has refused to share info of folder:" << qPrintable( folder_name );
+      emit shareBoxUnavailable( u, folder_name );
     }
     else
     {

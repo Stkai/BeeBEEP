@@ -120,6 +120,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
   connect( mp_core, SIGNAL( chatReadByUser( VNumber, VNumber ) ), this, SLOT( onChatReadByUser( VNumber, VNumber ) ) );
   connect( mp_core, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), mp_shareBox, SLOT( updateBox( const User&, const QString&, const QList<FileInfo>& ) ) );
+  connect( mp_core, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
+
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -575,11 +577,6 @@ void GuiMain::checkViewActions()
   else
     mp_barScreenShot->hide();
 
-  if( mp_stackedWidget->currentWidget() == mp_shareBox )
-    mp_barShareBox->show();
-  else
-    mp_barShareBox->hide();
-
   showDefaultServerPortInMenu();
 
   if( !m_floatingChats.isEmpty() )
@@ -682,7 +679,6 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Enable and edit your custom shortcuts" ) );
   act = mp_menuMain->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary..." ), this, SLOT( selectDictionatyPath() ) );
   act->setStatusTip( tr( "Select your preferred dictionary for spell checking" ) );
-  act = mp_menuMain->addAction( QIcon( ":/images/sharebox.png" ), tr( "ShareBox folder..."), this, SLOT( selectShareBoxFolder() ) );
   mp_menuMain->addSeparator();
 
   act = mp_menuMain->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
@@ -1340,14 +1336,6 @@ void GuiMain::createStackedWidgets()
 
   mp_shareBox = new GuiShareBox( this );
   mp_stackedWidget->addWidget( mp_shareBox );
-  mp_barShareBox = new QToolBar( tr( "Show the bar of share box" ), this );
-  addToolBar( Qt::BottomToolBarArea, mp_barShareBox );
-  mp_barShareBox->setObjectName( "GuiShareBoxToolBar" );
-  mp_barShareBox->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_barShareBox->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
-  mp_shareBox->setupToolBar( mp_barShareBox );
-  act = mp_barShareBox->toggleViewAction();
-  act->setEnabled( false );
 
   mp_barChat->setVisible( Settings::instance().showChatToolbar() );
 
@@ -2629,7 +2617,7 @@ void GuiMain::raiseScreenShotView()
 void GuiMain::raiseShareBoxView()
 {
   raiseView( mp_shareBox, ID_INVALID, "" );
-  mp_shareBox->updateBox();
+  mp_shareBox->updateShareBoxes();
 }
 
 void GuiMain::setGameInPauseMode()
@@ -4035,16 +4023,4 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
 void GuiMain::onShareBoxRequest( VNumber user_id, const QString& folder_name )
 {
   mp_core->sendShareBoxRequest( user_id, folder_name );
-}
-
-void GuiMain::selectShareBoxFolder()
-{
-  QString sharebox_folder_path = FileDialog::getExistingDirectory( this,
-                                                                   tr( "%1 - Select the ShareBox folder" )
-                                                                   .arg( Settings::instance().programName() ),
-                                                                         Settings::instance().shareBoxPath() );
-  if( sharebox_folder_path.isEmpty() )
-    return;
-
-  Settings::instance().setShareBoxPath( sharebox_folder_path );
 }

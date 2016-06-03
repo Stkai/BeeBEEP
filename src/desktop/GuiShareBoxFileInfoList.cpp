@@ -58,6 +58,8 @@ void GuiShareBoxFileInfoList::initTree( QTreeWidget* tree_widget )
   hv->setResizeMode( GuiShareBoxFileInfoItem::ColumnSize, QHeaderView::ResizeToContents );
   hv->setResizeMode( GuiShareBoxFileInfoItem::ColumnLastModified, QHeaderView::ResizeToContents );
 #endif
+
+  mp_tree->setColumnHidden( 2, true );
 }
 
 void GuiShareBoxFileInfoList::clearTree()

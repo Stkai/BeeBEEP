@@ -179,7 +179,6 @@ private slots:
   void onChangeSettingBeepOnNewMessage( QAction* );
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );
-  void selectShareBoxFolder();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -298,7 +297,6 @@ private:
 
   GuiShareBox* mp_shareBox;
   QAction* mp_actViewShareBox;
-  QToolBar* mp_barShareBox;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;

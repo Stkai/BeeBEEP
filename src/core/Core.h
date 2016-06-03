@@ -139,6 +139,7 @@ signals:
   void networkInterfaceIsDown();
   void networkInterfaceIsUp();
   void shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& );
+  void shareBoxUnavailable( const User&, const QString& );
 
 protected slots:
   void showBroadcasterUdpError();

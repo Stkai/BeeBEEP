@@ -35,29 +35,45 @@ class GuiShareBox : public QWidget, private Ui::GuiShareBoxWidget
 
 public:
   explicit GuiShareBox( QWidget *parent = 0 );
-  void setupToolBar( QToolBar* );
+  void updateShareBoxes();
 
 signals:
   void shareBoxRequest( VNumber, const QString& );
   void openUrlRequest( const QUrl& );
 
 public slots:
-  void updateBox();
   void updateBox( const User&, const QString&, const QList<FileInfo>& );
+  void onShareFolderUnavailable(  const User&, const QString& );
 
 protected slots:
-  void enableUpdateButton();
-  void openDownloadMenu( const QPoint& );
-  void onItemDoubleClicked( QTreeWidgetItem*, int );
+  void updateMyBox();
+  void updateOutBox();
+  void enableMyUpdateButton();
+  void enableOutUpdateButton();
+
+  void onMyItemDoubleClicked( QTreeWidgetItem*, int );
+  void onOutItemDoubleClicked( QTreeWidgetItem*, int );
+  void onEnableMyShareBoxClicked();
+  void onShareBoxSelected( int );
+
+  void selectMyShareBoxFolder();
+
+protected:
+  void updateMyBox( const QString&, const QList<FileInfo>& );
+  void updateOutBox( const User&, const QString&, const QList<FileInfo>& );
 
 private:
   QAction* mp_actUpdate;
   QAction* mp_actDownload;
   QAction* mp_actUpload;
 
-  GuiShareBoxFileInfoList m_fileInfoList;
+  GuiShareBoxFileInfoList m_myBoxList;
+  GuiShareBoxFileInfoList m_outBoxList;
   VNumber m_userId;
-  QString m_currentFolder;
+  QString m_myCurrentFolder;
+  QString m_outCurrentFolder;
+
+  QSplitter* mp_splitter;
 
 };
 
