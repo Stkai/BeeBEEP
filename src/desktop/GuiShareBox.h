@@ -42,10 +42,12 @@ signals:
   void shareBoxRequest( VNumber, const QString& );
   void openUrlRequest( const QUrl& );
   void shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
+  void shareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
 
 public slots:
   void updateBox( const User&, const QString&, const QList<FileInfo>& );
   void onShareFolderUnavailable(  const User&, const QString& );
+  void onFileTransferCompleted( const QString& );
 
 protected slots:
   void updateMyBox();

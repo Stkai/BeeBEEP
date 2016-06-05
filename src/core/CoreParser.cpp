@@ -179,7 +179,22 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
 
-  emit fileDownloadRequest( u, fi );
+  if( fi.isInShareBox() )
+  {
+    QString to_path;
+    if( fi.shareFolder().isEmpty() )
+      to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath() )
+                                                                          .arg( fi.shareFolder() )
+                                                                          .arg( fi.name() ) );
+    else
+      to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() )
+                                                                       .arg( fi.name() ) );
+    qDebug() << "ShareBox downloads from user" << u.path() << "the file" << fi.name() << "in path" << to_path;
+    fi.setPath( to_path );
+    mp_fileTransfer->downloadFile( fi );
+  }
+  else
+    emit fileDownloadRequest( u, fi );
 }
 
 void Core::parseChatMessage( const User& u, const Message& m )

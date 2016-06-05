@@ -51,6 +51,7 @@ signals:
   void fileTransferProgress( VNumber, VNumber, const QString& );
   void fileTransferCompleted( VNumber, VNumber, const QString& );
   void openFileCompleted( const QUrl& );
+  void shareBoxTransferCompleted( const QString& );
 
 protected:
   QTreeWidgetItem* findItem( VNumber );

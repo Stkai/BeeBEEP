@@ -295,7 +295,7 @@ void GuiShareBox::dropInMyBox( const QString& share_path )
   QStringList sl_paths = share_path.split( "\n" );
   QList<FileInfo> selected_list = mp_outBox->selectedFileInfoList();
   if( sl_paths.size() != selected_list.size() )
-    qWarning() << "ShareBox has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
+    qWarning() << "ShareBox (mybox) has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
 
   foreach( FileInfo file_info, selected_list )
   {
@@ -313,12 +313,16 @@ void GuiShareBox::dropInMyBox( const QString& share_path )
 void GuiShareBox::dropInOutBox( const QString& share_path )
 {
   QStringList sl_paths = share_path.split( "\n" );
-  foreach( QString file_path, sl_paths )
+  QList<FileInfo> selected_list = mp_myBox->selectedFileInfoList();
+  if( sl_paths.size() != selected_list.size() )
+    qWarning() << "ShareBox (outbox) has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
+
+  foreach( FileInfo file_info, selected_list )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Drop in OUT sharebox the file" << file_path;
+    qDebug() << "Drop in OUT sharebox the file" << file_info.name() << "-> ./" << m_outCurrentFolder;
 #endif
-
+    emit shareBoxUploadRequest( m_userId, file_info, m_outCurrentFolder );
   }
 }
 
@@ -346,4 +350,13 @@ void GuiShareBox::updateUser( const User& u )
   }
 
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 0 );
+}
+
+void GuiShareBox::onFileTransferCompleted( const QString& folder_path )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "ShareBox update list of the folder" << folder_path;
+#endif
+  if( folder_path == m_myCurrentFolder )
+    updateMyBox();
 }

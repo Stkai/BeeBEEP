@@ -123,7 +123,7 @@ void FileTransfer::removeFile( const QFileInfo& fi )
   }
 }
 
-FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder )
+FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder, bool to_share_box )
 {
   FileInfo file_info = fileInfoFromPath( fi.absoluteFilePath() );
   if( file_info.isValid() )
@@ -135,7 +135,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
       removeFile( fi );
   }
 
-  file_info = Protocol::instance().fileInfo( fi, share_folder, false );
+  file_info = Protocol::instance().fileInfo( fi, share_folder, to_share_box );
   file_info.setHostAddress( Settings::instance().localUser().hostAddress() );
   file_info.setHostPort( serverPort() );
   m_files.append( file_info );
@@ -232,7 +232,13 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 {
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Checking upload request:" << file_info_to_check.id() << file_info_to_check.password();
+  qDebug() << "FileInfo name:" << file_info_to_check.name();
+  qDebug() << "FileInfo path:" << file_info_to_check.path();
+  qDebug() << "FileInfo share folder:" << file_info_to_check.shareFolder();
+  qDebug() << "FileInfo is share box:" << file_info_to_check.isInShareBox();
+  qDebug() << "FileInfo is folder:" << file_info_to_check.isFolder();
 #endif
+
   FileTransferPeer *upload_peer = qobject_cast<FileTransferPeer*>( sender() );
   if( !upload_peer )
   {
@@ -251,9 +257,14 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 
   if( file_info_to_check.id() == ID_SHAREBOX_FILE_INFO_ID )
   {
-    QString file_path = QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath() )
-                                             .arg( file_info_to_check.shareFolder() )
-                                             .arg( file_info_to_check.name() );
+    QString file_path;
+    if( file_info_to_check.shareFolder().isEmpty() )
+      file_path = QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() )
+                                    .arg( file_info_to_check.name() );
+    else
+      file_path = QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath() )
+                                       .arg( file_info_to_check.shareFolder() )
+                                       .arg( file_info_to_check.name() );
 
     if( !Settings::instance().useShareBox() )
     {

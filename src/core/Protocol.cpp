@@ -854,6 +854,10 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   sl << QString::fromUtf8( fi.password() );
   sl << fi.fileHash();
   sl << fi.shareFolder();
+  if( fi.isInShareBox() )
+    sl << QString( "1" );
+  else
+    sl << QString( "0" );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   return m;
@@ -879,6 +883,9 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   if( !sl.isEmpty() )
     fi.setShareFolder( sl.takeFirst() );
 
+  if( !sl.isEmpty() )
+    fi.setIsInShareBox( sl.takeFirst() == QString( "1" ) );
+
   return fi;
 }
 
@@ -889,6 +896,7 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
   file_info.setName( fi.fileName() );
   file_info.setPath( fi.absoluteFilePath() );
   file_info.setShareFolder( share_folder );
+  file_info.setIsInShareBox( to_sharebox );
 
   if( fi.isFile() )
   {

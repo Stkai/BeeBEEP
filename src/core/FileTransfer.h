@@ -44,7 +44,7 @@ public:
   inline bool isActive() const;
   inline bool hasActivePeers() const;
 
-  FileInfo addFile( const QFileInfo&, const QString& );
+  FileInfo addFile( const QFileInfo&, const QString&, bool );
   void addFileInfoList( const QList<FileInfo>& );
   void removeFile( const QFileInfo& );
 

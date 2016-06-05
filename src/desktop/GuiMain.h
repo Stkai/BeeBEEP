@@ -180,6 +180,7 @@ private slots:
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );
   void onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
+  void onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
 
 protected:
   void keyPressEvent( QKeyEvent* );

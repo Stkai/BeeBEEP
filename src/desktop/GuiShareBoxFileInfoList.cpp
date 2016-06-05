@@ -103,7 +103,8 @@ QList<FileInfo> GuiShareBoxFileInfoList::selectedFileInfoList() const
     foreach( QTreeWidgetItem* item, selected_items )
     {
       share_box_item = (GuiShareBoxFileInfoItem*)item;
-      file_info_selected_list.append( share_box_item->fileInfo() );
+      if( share_box_item->isFile() )
+        file_info_selected_list.append( share_box_item->fileInfo() );
     }
   }
   return file_info_selected_list;

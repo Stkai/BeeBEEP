@@ -91,7 +91,7 @@ public:
   bool saveChatMessages();
 
   /* CoreFileTransfer */
-  bool sendFile( VNumber, const QString& file_path );
+  bool sendFile( VNumber, const QString& file_path, const QString& to_share_box_path );
   bool downloadFile( VNumber, const FileInfo&, bool show_message );
   void refuseToDownloadFile( VNumber, const FileInfo& );
   void refuseToDownloadFolder( VNumber, const QString& );
@@ -101,6 +101,7 @@ public:
   void removePathFromShare( const QString& );
   void sendShareBoxRequest( VNumber, const QString& );
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
+  void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
 
 public slots:
   void sendBroadcastMessage();

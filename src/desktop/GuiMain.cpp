@@ -126,6 +126,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferCompleted( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( setFileTransferCompleted( VNumber, VNumber, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( shareBoxTransferCompleted( const QString& ) ), mp_shareBox, SLOT( onFileTransferCompleted( const QString& ) ) );
+
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   setupChatConnections( mp_chat );
@@ -148,6 +150,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
   connect( mp_shareBox, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( mp_shareBox, SIGNAL( shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ) );
+  connect( mp_shareBox, SIGNAL( shareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
@@ -2008,7 +2011,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
   else
     user_selected = u;
 
-  return mp_core->sendFile( user_selected.id(), file_path );
+  return mp_core->sendFile( user_selected.id(), file_path, "" );
 }
 
 void GuiMain::sendFile( const QString& file_path )
@@ -4034,4 +4037,9 @@ void GuiMain::onShareBoxRequest( VNumber user_id, const QString& share_box_path 
 void GuiMain::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   mp_core->downloadFromShareBox( user_id, fi, to_path );
+}
+
+void GuiMain::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
+{
+  mp_core->uploadToShareBox( user_id, fi, to_path );
 }
