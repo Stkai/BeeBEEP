@@ -36,6 +36,7 @@ class GuiShareBox : public QWidget, private Ui::GuiShareBoxWidget
 public:
   explicit GuiShareBox( QWidget *parent = 0 );
   void updateShareBoxes();
+  void updateUser( const User& );
 
 signals:
   void shareBoxRequest( VNumber, const QString& );
@@ -58,6 +59,9 @@ protected slots:
 
   void selectMyShareBoxFolder();
 
+  void dropInMyBox( const QString& );
+  void dropInOutBox( const QString& );
+
 protected:
   void updateMyBox( const QString&, const QList<FileInfo>& );
   void updateOutBox( const User&, const QString&, const QList<FileInfo>& );
@@ -67,8 +71,6 @@ private:
   QAction* mp_actDownload;
   QAction* mp_actUpload;
 
-  GuiShareBoxFileInfoList m_myBoxList;
-  GuiShareBoxFileInfoList m_outBoxList;
   VNumber m_userId;
   QString m_myCurrentFolder;
   QString m_outCurrentFolder;

@@ -27,28 +27,30 @@
 #include "User.h"
 
 
-GuiShareBoxFileInfoList::GuiShareBoxFileInfoList()
- : QObject( 0 ), mp_tree( 0 )
+GuiShareBoxFileInfoList::GuiShareBoxFileInfoList( QWidget* parent )
+ : QTreeWidget( parent )
 {
 }
 
-void GuiShareBoxFileInfoList::initTree( QTreeWidget* tree_widget )
+void GuiShareBoxFileInfoList::initTree()
 {
-  mp_tree = tree_widget;
-  mp_tree->setColumnCount( 3 );
+  setColumnCount( 3 );
 
   QStringList labels;
   labels << tr( "Shared folders and files" ) << tr( "Size" ) << tr( "Last modified" );
-  mp_tree->setHeaderLabels( labels );
+  setHeaderLabels( labels );
 
-  mp_tree->sortItems( GuiShareBoxFileInfoItem::ColumnFile, Qt::AscendingOrder );
+  sortItems( GuiShareBoxFileInfoItem::ColumnFile, Qt::AscendingOrder );
 
-  mp_tree->setAlternatingRowColors( true );
-  mp_tree->setRootIsDecorated( true );
-  mp_tree->setContextMenuPolicy( Qt::CustomContextMenu );
-  mp_tree->setSelectionMode( QAbstractItemView::ExtendedSelection );
+  setAlternatingRowColors( true );
+  setRootIsDecorated( true );
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  setSelectionMode( QAbstractItemView::ExtendedSelection );
+  setDragDropMode( QAbstractItemView::DragDrop );
+  setDragEnabled( true );
+  setAcceptDrops( true );
 
-  QHeaderView* hv = mp_tree->header();
+  QHeaderView* hv = header();
 #if QT_VERSION >= 0x050000
   hv->setSectionResizeMode( GuiShareBoxFileInfoItem::ColumnFile, QHeaderView::Stretch );
   hv->setSectionResizeMode( GuiShareBoxFileInfoItem::ColumnSize, QHeaderView::ResizeToContents );
@@ -59,37 +61,32 @@ void GuiShareBoxFileInfoList::initTree( QTreeWidget* tree_widget )
   hv->setResizeMode( GuiShareBoxFileInfoItem::ColumnLastModified, QHeaderView::ResizeToContents );
 #endif
 
-  mp_tree->setColumnHidden( 2, true );
+  setColumnHidden( 2, true );
 }
 
 void GuiShareBoxFileInfoList::clearTree()
 {
-  clearTreeSelection();
-  if( mp_tree->topLevelItemCount() > 0 )
-    mp_tree->clear();
-}
-
-void GuiShareBoxFileInfoList::clearTreeSelection()
-{
-  mp_tree->clearSelection();
+  clearSelection();
+  if( !isEmpty() )
+    clear();
 }
 
 void GuiShareBoxFileInfoList::setFileInfoList( const QList<FileInfo>& file_info_list )
 {
-  mp_tree->setUpdatesEnabled( false );
+  setUpdatesEnabled( false );
   clearTree();
   GuiShareBoxFileInfoItem* item;
   foreach( FileInfo fi, file_info_list )
   {
-    item = new GuiShareBoxFileInfoItem( mp_tree );
+    item = new GuiShareBoxFileInfoItem( this );
     item->setFileInfo( fi );
   }
-  mp_tree->setUpdatesEnabled( true );
+  setUpdatesEnabled( true );
 }
 
 void GuiShareBoxFileInfoList::addDotDotFolder()
 {
-  GuiShareBoxFileInfoItem* item = new GuiShareBoxFileInfoItem( mp_tree );
+  GuiShareBoxFileInfoItem* item = new GuiShareBoxFileInfoItem( this );
   FileInfo fi( ID_DOTDOT_FOLDER, FileInfo::Download );
   fi.setName( ".." );
   fi.setIsFolder( true );
@@ -99,7 +96,7 @@ void GuiShareBoxFileInfoList::addDotDotFolder()
 QList<FileInfo> GuiShareBoxFileInfoList::selectedFileInfoList() const
 {
   QList<FileInfo> file_info_selected_list;
-  QList<QTreeWidgetItem*> selected_items = mp_tree->selectedItems();
+  QList<QTreeWidgetItem*> selected_items = selectedItems();
   if( !selected_items.isEmpty() )
   {
     GuiShareBoxFileInfoItem* share_box_item;
@@ -116,7 +113,7 @@ int GuiShareBoxFileInfoList::countFileItems() const
 {
   int count_file_items = 0;
   GuiShareBoxFileInfoItem* item;
-  QTreeWidgetItemIterator it( mp_tree );
+  QTreeWidgetItemIterator it( (QTreeWidget*)this );
   while( *it )
   {
     item = (GuiShareBoxFileInfoItem*)(*it);
@@ -125,4 +122,101 @@ int GuiShareBoxFileInfoList::countFileItems() const
     ++it;
   }
   return count_file_items;
+}
+
+void GuiShareBoxFileInfoList::mousePressEvent( QMouseEvent* event )
+{
+  if( event->button() == Qt::LeftButton )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ShareBox mouse press event: store start point";
+#endif
+    m_dragStartPoint = event->pos();
+  }
+  QTreeWidget::mousePressEvent( event );
+}
+
+void GuiShareBoxFileInfoList::mouseMoveEvent( QMouseEvent* event )
+{
+  if( event->buttons() & Qt::LeftButton )
+  {
+    int distance = (event->pos() - m_dragStartPoint).manhattanLength();
+    if( distance >= QApplication::startDragDistance() )
+      performDrag();
+  }
+  QTreeWidget::mouseMoveEvent( event );
+}
+
+void GuiShareBoxFileInfoList::performDrag()
+{
+  QList<FileInfo> selected_list = selectedFileInfoList();
+  if( selected_list.isEmpty() )
+    return;
+
+  QStringList sl_path;
+  foreach( FileInfo fi, selected_list )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ShareBox performs DRAG of the file:" << fi.path();
+#endif
+    sl_path << fi.path();
+  }
+
+  QDrag* drag = new QDrag( this );
+  QMimeData* mime_data = new QMimeData;
+  mime_data->setText( sl_path.join( '\n' ) );
+  drag->setMimeData( mime_data );
+
+  QPixmap pix = QIcon( ":/images/sharebox.png" ).pixmap( 24 );
+  QPainter painter( &pix );
+  painter.setPen( Qt::red );
+  QFont f = QApplication::font();
+  f.setBold( true );
+  painter.setFont( f );
+  painter.drawText( QRect( 4, 4, 18, 18 ), Qt::AlignCenter, QString::number( selected_list.size() ) );
+  drag->setPixmap( pix );
+
+  if( drag->exec( Qt::MoveAction ) == Qt::MoveAction )
+    drag->deleteLater();
+}
+
+void GuiShareBoxFileInfoList::dragEnterEvent( QDragEnterEvent* event )
+{
+  GuiShareBoxFileInfoList* source = qobject_cast<GuiShareBoxFileInfoList*>(event->source());
+  if( source && source != this )
+  {
+    event->setDropAction( Qt::MoveAction );
+    event->accept();
+  }
+}
+
+void GuiShareBoxFileInfoList::dragMoveEvent( QDragMoveEvent* event )
+{
+  GuiShareBoxFileInfoList* source = qobject_cast<GuiShareBoxFileInfoList*>(event->source());
+  if( source && source != this )
+  {
+    event->setDropAction( Qt::MoveAction );
+    event->accept();
+  }
+}
+
+void GuiShareBoxFileInfoList::dropEvent( QDropEvent* event )
+{
+  GuiShareBoxFileInfoList* source = qobject_cast<GuiShareBoxFileInfoList*>(event->source());
+  if( source && source != this )
+  {
+    if( event->mimeData()->hasText() )
+    {
+      QStringList sl =  event->mimeData()->text().simplified().split( '\n' );
+      foreach( QString s, sl )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "ShareBox performs DROP of the file:" << s;
+#endif
+        emit dropEventRequest( s );
+      }
+      event->setDropAction( Qt::MoveAction );
+      event->accept();
+    }
+  }
 }

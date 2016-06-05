@@ -27,36 +27,45 @@
 #include "Config.h"
 #include "GuiShareBoxFileInfoItem.h"
 #include "FileInfo.h"
-class User;
 
 
-class GuiShareBoxFileInfoList : public QObject
+class GuiShareBoxFileInfoList : public QTreeWidget
 {
   Q_OBJECT
 
 public:
-  GuiShareBoxFileInfoList();
-
-  void initTree( QTreeWidget* );
+  GuiShareBoxFileInfoList( QWidget* parent );
 
   void setFileInfoList( const QList<FileInfo>& );
   QList<FileInfo> selectedFileInfoList() const;
 
   void addDotDotFolder();
 
-  void clearTree();
   int countFileItems() const;
   inline bool isEmpty() const;
 
+  void initTree();
+
+signals:
+  void dropEventRequest( const QString& );
+
 public slots:
-  void clearTreeSelection();
+  void clearTree();
+
+protected:
+  void mousePressEvent( QMouseEvent* );
+  void mouseMoveEvent( QMouseEvent* );
+  void dragEnterEvent( QDragEnterEvent* );
+  void dragMoveEvent( QDragMoveEvent* );
+  void dropEvent( QDropEvent* );
+  void performDrag();
 
 private:
-  QTreeWidget* mp_tree;
+  QPoint m_dragStartPoint;
 
 };
 
 // Inline Functions
-inline bool GuiShareBoxFileInfoList::isEmpty() const { return mp_tree->topLevelItemCount() == 0; }
+inline bool GuiShareBoxFileInfoList::isEmpty() const { return topLevelItemCount() == 0; }
 
 #endif // BEEBEEP_GUISHAREBOXFILEINFOLIST_H

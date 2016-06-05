@@ -1393,6 +1393,8 @@ void GuiMain::updateUser( const User& u )
   mp_userList->setUser( u, true );
   mp_groupList->updateUser( u );
   mp_chat->updateUser( u );
+  mp_shareBox->updateUser( u );
+  mp_shareNetwork->updateUser( u );
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateUser( u );
   checkViewActions();

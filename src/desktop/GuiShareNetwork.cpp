@@ -409,3 +409,20 @@ void GuiShareNetwork::filterByText( const QString& )
 {
   updateList();
 }
+
+void GuiShareNetwork::updateUser( const User& u )
+{
+  int user_index = mp_comboUsers->findData( u.id() );
+  if( user_index > 0 )
+  {
+    if( !u.isStatusConnected() )
+    {
+      if( mp_comboUsers->currentIndex() == user_index )
+        m_fileInfoList.clearTree();
+
+      mp_comboUsers->removeItem( user_index );
+    }
+    else
+      mp_comboUsers->setItemText( user_index, u.name() );
+  }
+}

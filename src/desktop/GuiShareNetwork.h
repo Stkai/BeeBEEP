@@ -38,6 +38,7 @@ public:
   void setupToolBar( QToolBar* );
   void initShares();
   void showSharesForUser( const User& );
+  void updateUser( const User& );
 
 signals:
   void fileShareListRequested();

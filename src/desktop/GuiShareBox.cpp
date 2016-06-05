@@ -31,7 +31,7 @@
 
 
 GuiShareBox::GuiShareBox( QWidget *parent )
-  : QWidget( parent ), m_myBoxList(), m_outBoxList()
+  : QWidget( parent )
 {
   setupUi( this );
   setObjectName( "GuiShareBox" );
@@ -53,8 +53,8 @@ GuiShareBox::GuiShareBox( QWidget *parent )
 
   mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "ShareBox" ) ) );
 
-  m_myBoxList.initTree( mp_twMyBox );
-  m_outBoxList.initTree( mp_twOutBox );
+  mp_myBox->initTree();
+  mp_outBox->initTree();
 
   m_myCurrentFolder = "";
   m_outCurrentFolder = "";
@@ -68,8 +68,10 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   connect( mp_cbEnableMyBox, SIGNAL( toggled( bool ) ), this, SLOT( onEnableMyShareBoxClicked() ) );
   connect( mp_pbMyUpdate, SIGNAL( clicked() ), this, SLOT( updateMyBox() ) );
   connect( mp_pbOutUpdate, SIGNAL( clicked() ), this, SLOT( updateOutBox() ) );
-  connect( mp_twMyBox, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onMyItemDoubleClicked( QTreeWidgetItem*, int ) ) );
-  connect( mp_twOutBox, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onOutItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_myBox, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onMyItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_outBox, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onOutItemDoubleClicked( QTreeWidgetItem*, int ) ) );
+  connect( mp_myBox, SIGNAL( dropEventRequest( const QString& ) ), this, SLOT( dropInMyBox( const QString& ) ) );
+  connect( mp_outBox, SIGNAL( dropEventRequest( const QString& ) ), this, SLOT( dropInOutBox( const QString& ) ) );
 }
 
 void GuiShareBox::updateShareBoxes()
@@ -118,7 +120,7 @@ void GuiShareBox::updateMyBox()
   }
   else
   {
-    m_myBoxList.clearTree();
+    mp_myBox->clearTree();
     m_myCurrentFolder = "";
     mp_lMyBox->setToolTip( "" );
     mp_lMyBox->setText( tr( "Your ShareBox is disabled" ) );
@@ -140,7 +142,7 @@ void GuiShareBox::updateOutBox()
   }
   else
   {
-    m_outBoxList.clearTree();
+    mp_outBox->clearTree();
     m_outCurrentFolder = "";
     mp_lOutBox->setText( tr( "ShareBox is not available" ) );
   }
@@ -163,9 +165,9 @@ void GuiShareBox::updateBox( const User& u, const QString& folder_path, const QL
 void GuiShareBox::updateMyBox( const QString& folder_path, const QList<FileInfo>&  file_info_list )
 {
   m_myCurrentFolder = folder_path;
-  m_myBoxList.setFileInfoList( file_info_list );
+  mp_myBox->setFileInfoList( file_info_list );
   if( !folder_path.isEmpty() )
-    m_myBoxList.addDotDotFolder();
+    mp_myBox->addDotDotFolder();
 
   QString s_title = QString( "<b>.%1</b>" ).arg( m_myCurrentFolder.isEmpty() ? "/" : m_myCurrentFolder );
   mp_lMyBox->setText( Bee::convertToNativeFolderSeparator( s_title ) );
@@ -175,9 +177,9 @@ void GuiShareBox::updateOutBox( const User& u, const QString& folder_path, const
 {
   m_userId = u.id();
   m_outCurrentFolder = folder_path;
-  m_outBoxList.setFileInfoList( file_info_list );
+  mp_outBox->setFileInfoList( file_info_list );
   if( !folder_path.isEmpty() )
-    m_outBoxList.addDotDotFolder();
+    mp_outBox->addDotDotFolder();
 
   QString s_title = QString( "<b>.%1</b>" ).arg( m_outCurrentFolder.isEmpty() ? "/" : m_outCurrentFolder );
   mp_lOutBox->setText( Bee::convertToNativeFolderSeparator( s_title ) );
@@ -233,14 +235,14 @@ void GuiShareBox::onOutItemDoubleClicked( QTreeWidgetItem* item, int )
 
 void GuiShareBox::selectMyShareBoxFolder()
 {
-  QString sharebox_folder_path = FileDialog::getExistingDirectory( this,
-                                                                   tr( "%1 - Select the ShareBox folder" )
-                                                                   .arg( Settings::instance().programName() ),
-                                                                         Settings::instance().shareBoxPath() );
-  if( sharebox_folder_path.isEmpty() )
+  QString folder_path = FileDialog::getExistingDirectory( this,
+                                                          tr( "%1 - Select the ShareBox folder" )
+                                                          .arg( Settings::instance().programName() ),
+                                                                Settings::instance().shareBoxPath() );
+  if( folder_path.isEmpty() )
     return;
 
-  Settings::instance().setShareBoxPath( sharebox_folder_path );
+  Settings::instance().setShareBoxPath( folder_path );
   Settings::instance().save();
   m_myCurrentFolder = "";
   updateMyBox();
@@ -248,10 +250,58 @@ void GuiShareBox::selectMyShareBoxFolder()
 
 void GuiShareBox::onShareBoxSelected( int )
 {
-  updateOutBox();
+  VNumber current_user_id = Bee::qVariantToVNumber( mp_comboUsers->currentData() );
+  if( current_user_id != m_userId )
+  {
+    m_outCurrentFolder = "";
+    m_userId = current_user_id;
+    mp_outBox->clearTree();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ShareBox requests list for user" << current_user_id;
+#endif
+    emit shareBoxRequest( current_user_id, m_outCurrentFolder );
+  }
 }
 
 void GuiShareBox::onShareFolderUnavailable( const User& u, const QString& folder_path )
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << u.path() << "has not shared box folder" << folder_path;
+#endif
+  if( u.isLocal() )
+    return;
+  QMessageBox::information( this, Settings::instance().programName(), tr( "%1 is unavailable." ).arg( folder_path ) );
+}
+
+void GuiShareBox::dropInMyBox( const QString& file_path )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Drop in MY sharebox the file" << file_path;
+#endif
+}
+
+void GuiShareBox::dropInOutBox( const QString& file_path )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Drop in OUT sharebox the file" << file_path;
+#endif
+}
+
+void GuiShareBox::updateUser( const User& u )
+{
+  int user_index = mp_comboUsers->findData( u.id() );
+  if( user_index > 0 )
+  {
+    if( !u.isStatusConnected() )
+    {
+      if( mp_comboUsers->currentIndex() == user_index )
+      {
+        mp_outBox->clearTree();
+        m_outCurrentFolder = "";
+      }
+      mp_comboUsers->removeItem( user_index );
+    }
+    else
+      mp_comboUsers->setItemText( user_index, u.name() );
+  }
 }
