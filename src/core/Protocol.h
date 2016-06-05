@@ -115,6 +115,7 @@ public:
   QList<FileInfo> messageToShareBoxFileList( const Message&, const QHostAddress& ) const;
 
   inline VNumber currentId() const;
+  inline VNumber maxId() const;
   inline VNumber newId();
   QString newMd5Id();
 
@@ -162,6 +163,7 @@ private:
 // Inline Functions
 inline VNumber Protocol::currentId() const { return m_id; }
 inline VNumber Protocol::newId() { return ++m_id; }
+inline VNumber Protocol::maxId() const { return 18446744073709000000u; }
 inline int Protocol::messageMinimumSize() const { return 10; }
 inline const QByteArray& Protocol::writingMessage() const { return m_writingMessage; }
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }

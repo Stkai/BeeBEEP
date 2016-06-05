@@ -126,7 +126,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferCompleted( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( setFileTransferCompleted( VNumber, VNumber, const QString& ) ) );
-  connect( mp_fileTransfer, SIGNAL( shareBoxTransferCompleted( const QString& ) ), mp_shareBox, SLOT( onFileTransferCompleted( const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( shareBoxDownloadCompleted( const QString& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( const QString& ) ) );
+   connect( mp_fileTransfer, SIGNAL( shareBoxUploadCompleted( VNumber, const QString& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const QString& ) ) );
 
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
@@ -2011,7 +2012,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
   else
     user_selected = u;
 
-  return mp_core->sendFile( user_selected.id(), file_path, "" );
+  return mp_core->sendFile( user_selected.id(), file_path, "", false );
 }
 
 void GuiMain::sendFile( const QString& file_path )

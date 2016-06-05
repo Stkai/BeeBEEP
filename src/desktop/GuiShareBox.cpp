@@ -319,10 +319,11 @@ void GuiShareBox::dropInOutBox( const QString& share_path )
 
   foreach( FileInfo file_info, selected_list )
   {
+    QString to_path = Bee::convertToNativeFolderSeparator( m_outCurrentFolder );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Drop in OUT sharebox the file" << file_info.name() << "-> ./" << m_outCurrentFolder;
+    qDebug() << "Drop in OUT sharebox the file" << file_info.name() << "->" << to_path;
 #endif
-    emit shareBoxUploadRequest( m_userId, file_info, m_outCurrentFolder );
+    emit shareBoxUploadRequest( m_userId, file_info, to_path );
   }
 }
 
@@ -352,7 +353,16 @@ void GuiShareBox::updateUser( const User& u )
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 0 );
 }
 
-void GuiShareBox::onFileTransferCompleted( const QString& folder_path )
+void GuiShareBox::onFileUploadCompleted( VNumber user_id, const QString& folder_path )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "ShareBox update list of the folder" << folder_path << "and user" << user_id;
+#endif
+  if( m_userId == user_id && folder_path == m_outCurrentFolder )
+    updateOutBox();
+}
+
+void GuiShareBox::onFileDownloadCompleted( const QString& folder_path )
 {
 #ifdef BEEBEEP_DEBUG
   qDebug() << "ShareBox update list of the folder" << folder_path;

@@ -207,7 +207,7 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
   emit fileTransferProgress( peer_id, u, fi, bytes );
 }
 
-bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& to_share_box_path )
+bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box )
 {
   QString icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
 
@@ -260,14 +260,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& t
     return false;
   }
 
-  FileInfo fi;
-  if( !to_share_box_path.isEmpty() )
-  {
-    fi = mp_fileTransfer->addFile( file, "", true );
-    fi.setShareFolder( to_share_box_path );
-  }
-  else
-    fi = mp_fileTransfer->addFile( file, "", false );
+  FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box );
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "File path" << fi.path() << "is added to file transfer list";
@@ -742,5 +735,5 @@ void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QStri
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Upload file" << fi.path() << "to path" << to_path << "of user" << to_user_id;
 #endif
-  sendFile( to_user_id, fi.path(), to_path );
+  sendFile( to_user_id, fi.path(), to_path, true );
 }

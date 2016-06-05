@@ -255,7 +255,7 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 
   FileInfo file_info;
 
-  if( file_info_to_check.id() == ID_SHAREBOX_FILE_INFO_ID )
+  if( file_info_to_check.isInShareBox() )
   {
     QString file_path;
     if( file_info_to_check.shareFolder().isEmpty() )

@@ -47,7 +47,8 @@ signals:
 public slots:
   void updateBox( const User&, const QString&, const QList<FileInfo>& );
   void onShareFolderUnavailable(  const User&, const QString& );
-  void onFileTransferCompleted( const QString& );
+  void onFileDownloadCompleted( const QString& );
+  void onFileUploadCompleted( VNumber, const QString& );
 
 protected slots:
   void updateMyBox();

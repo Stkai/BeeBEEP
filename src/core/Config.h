@@ -93,7 +93,6 @@ const int PING_INTERVAL_TICK = 3;
 #define ID_SHARE_MESSAGE          18
 #define ID_SHAREBOX_MESSAGE       19
 #define ID_DOTDOT_FOLDER          20
-#define ID_SHAREBOX_FILE_INFO_ID  21
 
 // FILE_SHARING
 #define MAX_NUM_FILE_SHARED 32700

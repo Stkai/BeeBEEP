@@ -91,7 +91,7 @@ public:
   bool saveChatMessages();
 
   /* CoreFileTransfer */
-  bool sendFile( VNumber, const QString& file_path, const QString& to_share_box_path );
+  bool sendFile( VNumber, const QString& file_path, const QString& share_folder, bool to_share_box );
   bool downloadFile( VNumber, const FileInfo&, bool show_message );
   void refuseToDownloadFile( VNumber, const FileInfo& );
   void refuseToDownloadFolder( VNumber, const QString& );
