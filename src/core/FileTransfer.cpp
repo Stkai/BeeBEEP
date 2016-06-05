@@ -257,35 +257,39 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 
   if( file_info_to_check.isInShareBox() )
   {
-    QString file_path;
-    if( file_info_to_check.shareFolder().isEmpty() )
-      file_path = QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() )
-                                    .arg( file_info_to_check.name() );
-    else
-      file_path = QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath() )
-                                       .arg( file_info_to_check.shareFolder() )
-                                       .arg( file_info_to_check.name() );
-
     if( !Settings::instance().useShareBox() )
     {
-      qWarning() << "ShareBox file upload request refused (disabled):" << file_path;
+      qWarning() << "ShareBox file upload request refused (disabled):" << file_info_to_check.name();
       upload_peer->cancelTransfer();
     }
 
-    QFileInfo share_box_file_info( file_path );
-    if( !share_box_file_info.exists() )
+    file_info = fileInfo( file_info_to_check.id() );
+    if( !file_info.isValid() )
     {
-      qWarning() << "ShareBox file upload request refused (not exists):" << file_path;
-      upload_peer->cancelTransfer();
-    }
+      QString file_path;
+      if( file_info_to_check.shareFolder().isEmpty() )
+        file_path = QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() )
+                                      .arg( file_info_to_check.name() );
+      else
+        file_path = QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath() )
+                                         .arg( file_info_to_check.shareFolder() )
+                                         .arg( file_info_to_check.name() );
 
-    if( !share_box_file_info.isReadable() )
-    {
-      qWarning() << "ShareBox file upload request refused (not readable):" << file_path;
-      upload_peer->cancelTransfer();
-    }
+      QFileInfo share_box_file_info( file_path );
+      if( !share_box_file_info.exists() )
+      {
+        qWarning() << "ShareBox file upload request refused (not exists):" << file_path;
+        upload_peer->cancelTransfer();
+      }
 
-    file_info = Protocol::instance().fileInfo( share_box_file_info, "", true );
+      if( !share_box_file_info.isReadable() )
+      {
+        qWarning() << "ShareBox file upload request refused (not readable):" << file_path;
+        upload_peer->cancelTransfer();
+      }
+
+      file_info = Protocol::instance().fileInfo( share_box_file_info, "", true );
+    }
   }
   else
   {

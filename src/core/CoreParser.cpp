@@ -167,6 +167,12 @@ void Core::parseFileMessage( const User& u, const Message& m )
     return;
   }
 
+  if( fi.isInShareBox() && !Settings::instance().useShareBox() )
+  {
+    refuseToDownloadFile( u.id(), fi );
+    return;
+  }
+
   Connection* c = connection( u.id() );
   if( !c )
   {
@@ -182,7 +188,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   if( fi.isInShareBox() )
   {
     QString to_path;
-    if( fi.shareFolder().isEmpty() )
+    if( !fi.shareFolder().isEmpty() )
       to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath() )
                                                                           .arg( fi.shareFolder() )
                                                                           .arg( fi.name() ) );
@@ -191,6 +197,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
                                                                        .arg( fi.name() ) );
     qDebug() << "ShareBox downloads from user" << u.path() << "the file" << fi.name() << "in path" << to_path;
     fi.setPath( to_path );
+
     mp_fileTransfer->downloadFile( fi );
   }
   else

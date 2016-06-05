@@ -646,6 +646,9 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name )
 {
   if( user_id != ID_LOCAL_USER )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ShareBox sends request to user" << user_id << "for folder" << folder_name;
+#endif
     Message m = Protocol::instance().shareBoxRequestPathList( folder_name );
     Connection* c = connection( user_id );
     if( c && c->sendMessage( m ) )

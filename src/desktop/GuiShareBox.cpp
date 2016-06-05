@@ -230,6 +230,8 @@ void GuiShareBox::onOutItemDoubleClicked( QTreeWidgetItem* item, int )
     QString new_folder;
     if( file_info_item->fileInfo().id() == ID_DOTDOT_FOLDER )
       new_folder = Bee::folderCdUp( m_outCurrentFolder );
+    else if( m_outCurrentFolder.isEmpty() )
+      new_folder = QString( "%1" ).arg( file_info_item->fileInfo().name() );
     else
       new_folder = QString( "%1/%2" ).arg( m_outCurrentFolder ).arg( file_info_item->fileInfo().name() );
     emit shareBoxRequest( m_userId, new_folder );
@@ -329,6 +331,9 @@ void GuiShareBox::dropInOutBox( const QString& share_path )
 
 void GuiShareBox::updateUser( const User& u )
 {
+  if( u.isLocal() )
+    return;
+
   int user_index = mp_comboUsers->findData( u.id() );
   if( user_index >= 0 )
   {

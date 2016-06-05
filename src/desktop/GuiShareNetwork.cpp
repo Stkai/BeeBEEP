@@ -412,6 +412,9 @@ void GuiShareNetwork::filterByText( const QString& )
 
 void GuiShareNetwork::updateUser( const User& u )
 {
+  if( u.isLocal() )
+    return;
+
   int user_index = mp_comboUsers->findData( u.id() );
   if( user_index > 0 )
   {
