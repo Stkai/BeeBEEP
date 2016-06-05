@@ -130,8 +130,11 @@ void GuiShareBox::updateMyBox()
 void GuiShareBox::updateOutBox()
 {
   mp_pbOutUpdate->setEnabled( false );
+#if QT_VERSION >= 0x050000
   VNumber user_id = mp_comboUsers->count() > 0 ? Bee::qVariantToVNumber( mp_comboUsers->currentData() ) : ID_INVALID;
-
+#else
+  VNumber user_id = mp_comboUsers->count() > 0 ? Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) ) : ID_INVALID;
+#endif
   if( user_id > ID_INVALID )
   {
     if( user_id != m_userId )
@@ -250,7 +253,11 @@ void GuiShareBox::selectMyShareBoxFolder()
 
 void GuiShareBox::onShareBoxSelected( int )
 {
+#if QT_VERSION >= 0x050000
   VNumber current_user_id = Bee::qVariantToVNumber( mp_comboUsers->currentData() );
+#else
+  VNumber current_user_id = Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
+#endif
   if( current_user_id != m_userId )
   {
     m_outCurrentFolder = "";

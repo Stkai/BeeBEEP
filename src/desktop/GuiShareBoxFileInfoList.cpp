@@ -164,7 +164,7 @@ void GuiShareBoxFileInfoList::performDrag()
 
   QDrag* drag = new QDrag( this );
   QMimeData* mime_data = new QMimeData;
-  mime_data->setText( sl_path.join( '\n' ) );
+  mime_data->setText( sl_path.join( "\n" ) );
   drag->setMimeData( mime_data );
 
   QPixmap pix = QIcon( ":/images/sharebox.png" ).pixmap( 24 );
@@ -207,7 +207,7 @@ void GuiShareBoxFileInfoList::dropEvent( QDropEvent* event )
   {
     if( event->mimeData()->hasText() )
     {
-      QStringList sl =  event->mimeData()->text().simplified().split( '\n' );
+      QStringList sl =  event->mimeData()->text().simplified().split( "\n" );
       foreach( QString s, sl )
       {
 #ifdef BEEBEEP_DEBUG
