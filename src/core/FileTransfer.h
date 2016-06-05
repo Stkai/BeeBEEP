@@ -76,7 +76,7 @@ protected:
 protected slots:
   void startNewDownload();
   void checkAuthentication();
-  void checkUploadRequest( VNumber, const QByteArray& );
+  void checkUploadRequest( const FileInfo& );
   void peerDestroyed();
   void setupPeer( FileTransferPeer*, int );
 

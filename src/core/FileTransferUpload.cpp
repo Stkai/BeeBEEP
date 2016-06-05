@@ -62,7 +62,7 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
   }
 
   qDebug() << name() << "receives a file request:" << file_info.id() << file_info.password();
-  emit fileUploadRequest( file_info.id(), file_info.password() );
+  emit fileUploadRequest( file_info );
 }
 
 void FileTransferPeer::startUpload( const FileInfo& fi )

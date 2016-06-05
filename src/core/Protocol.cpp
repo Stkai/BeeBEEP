@@ -884,7 +884,8 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
 
 FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, bool to_sharebox )
 {
-  FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
+  VNumber file_info_id = to_sharebox ? ID_SHAREBOX_FILE_INFO_ID : newId();
+  FileInfo file_info = FileInfo( file_info_id, FileInfo::Upload );
   file_info.setName( fi.fileName() );
   file_info.setPath( fi.absoluteFilePath() );
   file_info.setShareFolder( share_folder );

@@ -204,7 +204,7 @@ void Core::closeConnection( Connection *c )
       UserManager::instance().setUser( u );
       showUserStatusChanged( u );
 
-      userConnectionStatusChanged( u );
+      emit userConnectionStatusChanged( u );
 
       Chat default_chat = ChatManager::instance().defaultChat();
       if( default_chat.removeUser( u.id() ) )

@@ -66,7 +66,7 @@ public:
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
-  void fileUploadRequest( VNumber, const QByteArray& );
+  void fileUploadRequest( const FileInfo& );
   void authenticationRequested();
 
 public slots:

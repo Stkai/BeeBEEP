@@ -175,7 +175,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
 #endif
   if( !transfer_peer->isDownload() )
   {
-    connect( transfer_peer, SIGNAL( fileUploadRequest( VNumber, const QByteArray& ) ), this, SLOT( checkUploadRequest( VNumber, const QByteArray& ) ) );
+    connect( transfer_peer, SIGNAL( fileUploadRequest( const FileInfo& ) ), this, SLOT( checkUploadRequest( const FileInfo& ) ) );
   }
 
   connect( transfer_peer, SIGNAL( authenticationRequested() ), this, SLOT( checkAuthentication() ) );
@@ -228,10 +228,10 @@ void FileTransfer::validateUser( VNumber FileTransferPeer_id, VNumber user_id )
   }
 }
 
-void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_password )
+void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Checking upload request:" << file_id << file_password;
+  qDebug() << "Checking upload request:" << file_info_to_check.id() << file_info_to_check.password();
 #endif
   FileTransferPeer *upload_peer = qobject_cast<FileTransferPeer*>( sender() );
   if( !upload_peer )
@@ -247,25 +247,58 @@ void FileTransfer::checkUploadRequest( VNumber file_id, const QByteArray& file_p
     return;
   }
 
-  FileInfo file_info = fileInfo( file_id );
-  if( !file_info.isValid() )
+  FileInfo file_info;
+
+  if( file_info_to_check.id() == ID_SHAREBOX_FILE_INFO_ID )
   {
-    // Now check file sharing
-    file_info = FileShare::instance().localFileInfo( file_id );
+    QString file_path = QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath() )
+                                             .arg( file_info_to_check.shareFolder() )
+                                             .arg( file_info_to_check.name() );
+
+    if( !Settings::instance().useShareBox() )
+    {
+      qWarning() << "ShareBox file upload request refused (disabled):" << file_path;
+      upload_peer->cancelTransfer();
+    }
+
+    QFileInfo share_box_file_info( file_path );
+    if( !share_box_file_info.exists() )
+    {
+      qWarning() << "ShareBox file upload request refused (not exists):" << file_path;
+      upload_peer->cancelTransfer();
+    }
+
+    if( !share_box_file_info.isReadable() )
+    {
+      qWarning() << "ShareBox file upload request refused (not readable):" << file_path;
+      upload_peer->cancelTransfer();
+    }
+
+    file_info = Protocol::instance().fileInfo( share_box_file_info, "", true );
+  }
+  else
+  {
+    file_info = fileInfo( file_info_to_check.id() );
 
     if( !file_info.isValid() )
     {
-      qWarning() << "File Transfer server received a request of a file not in list";
+      // Now check file sharing
+      file_info = FileShare::instance().localFileInfo( file_info_to_check.id() );
+
+      if( !file_info.isValid() )
+      {
+        qWarning() << "File Transfer server received a request of a file not in list";
+        upload_peer->cancelTransfer();
+        return;
+      }
+    }
+
+    if( file_info.password() != file_info_to_check.password() )
+    {
+      qWarning() << "File Transfer server received a request for the file" << file_info.name() << "but with the wrong password";
       upload_peer->cancelTransfer();
       return;
     }
-  }
-
-  if( file_info.password() != file_password )
-  {
-    qWarning() << "File Transfer server received a request for the file" << file_info.name() << "but with the wrong password";
-    upload_peer->cancelTransfer();
-    return;
   }
 
   upload_peer->startUpload( file_info );

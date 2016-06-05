@@ -191,7 +191,7 @@ void GuiShareBox::updateOutBox( const User& u, const QString& folder_path, const
   if( mp_comboUsers->findData( u.id() ) == -1 )
     mp_comboUsers->addItem( u.name(), u.id() );
 
-  mp_comboUsers->setEnabled( mp_comboUsers->count() > 1 );
+  mp_comboUsers->setEnabled( mp_comboUsers->count() > 0 );
   mp_comboUsers->blockSignals( false );
 }
 
@@ -277,27 +277,55 @@ void GuiShareBox::onShareFolderUnavailable( const User& u, const QString& folder
 #endif
   if( u.isLocal() )
     return;
-  QMessageBox::information( this, Settings::instance().programName(), tr( "%1 is unavailable." ).arg( folder_path ) );
+
+#if QT_VERSION >= 0x050000
+  if( u.id() == Bee::qVariantToVNumber( mp_comboUsers->currentData() ) )
+#else
+  if( u.id() == Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) ) )
+#endif
+  {
+    mp_lOutBox->setText( tr( "%1 <b>%2</b>" ).arg( folder_path.isEmpty() ? tr( "ShareBox" ) : folder_path ).arg( tr( "is unavailable" ) ) );
+    if( folder_path == m_outCurrentFolder )
+      mp_outBox->clearTree();
+  }
 }
 
-void GuiShareBox::dropInMyBox( const QString& file_path )
+void GuiShareBox::dropInMyBox( const QString& share_path )
 {
+  QStringList sl_paths = share_path.split( "\n" );
+  QList<FileInfo> selected_list = mp_outBox->selectedFileInfoList();
+  if( sl_paths.size() != selected_list.size() )
+    qWarning() << "ShareBox has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
+
+  foreach( FileInfo file_info, selected_list )
+  {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Drop in MY sharebox the file" << file_path;
+    QString from_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( file_info.shareFolder(), file_info.name() ) );
+    qDebug() << "Drop in MY sharebox the file" << file_info.name() << "->" << from_path;
 #endif
+    QString to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_myCurrentFolder, file_info.name() ) );
+    to_path.prepend( Settings::instance().shareBoxPath() );
+    to_path = Bee::convertToNativeFolderSeparator( to_path );
+    emit shareBoxDownloadRequest( m_userId, file_info, to_path );
+  }
 }
 
-void GuiShareBox::dropInOutBox( const QString& file_path )
+void GuiShareBox::dropInOutBox( const QString& share_path )
 {
+  QStringList sl_paths = share_path.split( "\n" );
+  foreach( QString file_path, sl_paths )
+  {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Drop in OUT sharebox the file" << file_path;
+    qDebug() << "Drop in OUT sharebox the file" << file_path;
 #endif
+
+  }
 }
 
 void GuiShareBox::updateUser( const User& u )
 {
   int user_index = mp_comboUsers->findData( u.id() );
-  if( user_index > 0 )
+  if( user_index >= 0 )
   {
     if( !u.isStatusConnected() )
     {
@@ -311,4 +339,11 @@ void GuiShareBox::updateUser( const User& u )
     else
       mp_comboUsers->setItemText( user_index, u.name() );
   }
+  else
+  {
+    if( u.isStatusConnected() )
+      mp_comboUsers->addItem( u.name(), u.id() );
+  }
+
+  mp_comboUsers->setEnabled( mp_comboUsers->count() > 0 );
 }

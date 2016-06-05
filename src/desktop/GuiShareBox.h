@@ -41,6 +41,7 @@ public:
 signals:
   void shareBoxRequest( VNumber, const QString& );
   void openUrlRequest( const QUrl& );
+  void shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
 
 public slots:
   void updateBox( const User&, const QString&, const QList<FileInfo>& );

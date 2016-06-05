@@ -78,21 +78,22 @@ const int PING_INTERVAL_IDLE = 1800;
 const int PING_INTERVAL_TICK = 3;
 
 // Protocol
-#define ID_INVALID         0
-#define ID_LOCAL_USER      1
-#define ID_DEFAULT_CHAT    2
-#define ID_START           1000
-#define ID_SYSTEM_MESSAGE  10
-#define ID_BEEP_MESSAGE    11
-#define ID_WRITING_MESSAGE 12
-#define ID_PING_MESSAGE    13
-#define ID_PONG_MESSAGE    14
-#define ID_HELLO_MESSAGE   15
-#define ID_USER_MESSAGE    16
-#define ID_VCARD_MESSAGE   17
-#define ID_SHARE_MESSAGE   18
-#define ID_SHAREBOX_MESSAGE   19
-#define ID_DOTDOT_FOLDER   20
+#define ID_INVALID                0
+#define ID_LOCAL_USER             1
+#define ID_DEFAULT_CHAT           2
+#define ID_START                  1000
+#define ID_SYSTEM_MESSAGE         10
+#define ID_BEEP_MESSAGE           11
+#define ID_WRITING_MESSAGE        12
+#define ID_PING_MESSAGE           13
+#define ID_PONG_MESSAGE           14
+#define ID_HELLO_MESSAGE          15
+#define ID_USER_MESSAGE           16
+#define ID_VCARD_MESSAGE          17
+#define ID_SHARE_MESSAGE          18
+#define ID_SHAREBOX_MESSAGE       19
+#define ID_DOTDOT_FOLDER          20
+#define ID_SHAREBOX_FILE_INFO_ID  21
 
 // FILE_SHARING
 #define MAX_NUM_FILE_SHARED 32700

@@ -100,6 +100,7 @@ public:
   void addPathToShare( const QString&, bool );
   void removePathFromShare( const QString& );
   void sendShareBoxRequest( VNumber, const QString& );
+  void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
 
 public slots:
   void sendBroadcastMessage();

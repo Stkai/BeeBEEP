@@ -157,9 +157,9 @@ void GuiShareBoxFileInfoList::performDrag()
   foreach( FileInfo fi, selected_list )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ShareBox performs DRAG of the file:" << fi.path();
+    qDebug() << "ShareBox performs DRAG of the file:" << fi.name();
 #endif
-    sl_path << fi.path();
+    sl_path << fi.name();
   }
 
   QDrag* drag = new QDrag( this );
@@ -176,7 +176,7 @@ void GuiShareBoxFileInfoList::performDrag()
   painter.drawText( QRect( 4, 4, 18, 18 ), Qt::AlignCenter, QString::number( selected_list.size() ) );
   drag->setPixmap( pix );
 
-  if( drag->exec( Qt::MoveAction ) == Qt::MoveAction )
+  if( drag->exec( Qt::CopyAction ) == Qt::CopyAction )
     drag->deleteLater();
 }
 
@@ -185,7 +185,7 @@ void GuiShareBoxFileInfoList::dragEnterEvent( QDragEnterEvent* event )
   GuiShareBoxFileInfoList* source = qobject_cast<GuiShareBoxFileInfoList*>(event->source());
   if( source && source != this )
   {
-    event->setDropAction( Qt::MoveAction );
+    event->setDropAction( Qt::CopyAction );
     event->accept();
   }
 }
@@ -195,7 +195,7 @@ void GuiShareBoxFileInfoList::dragMoveEvent( QDragMoveEvent* event )
   GuiShareBoxFileInfoList* source = qobject_cast<GuiShareBoxFileInfoList*>(event->source());
   if( source && source != this )
   {
-    event->setDropAction( Qt::MoveAction );
+    event->setDropAction( Qt::CopyAction );
     event->accept();
   }
 }
@@ -207,16 +207,14 @@ void GuiShareBoxFileInfoList::dropEvent( QDropEvent* event )
   {
     if( event->mimeData()->hasText() )
     {
-      QStringList sl =  event->mimeData()->text().simplified().split( "\n" );
-      foreach( QString s, sl )
-      {
+
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "ShareBox performs DROP of the file:" << s;
+      QString s = event->mimeData()->text().simplified();
+      qDebug() << "ShareBox performs DROP of the path:" << s;
 #endif
-        emit dropEventRequest( s );
-      }
-      event->setDropAction( Qt::MoveAction );
-      event->accept();
+      emit dropEventRequest( event->mimeData()->text() );
     }
+    event->setDropAction( Qt::CopyAction );
+    event->accept();
   }
 }

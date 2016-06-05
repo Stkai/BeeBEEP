@@ -644,10 +644,12 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name )
   {
     Message m = Protocol::instance().shareBoxRequestPathList( folder_name );
     Connection* c = connection( user_id );
-    if( c )
-      c->sendMessage( m );
-    else
-      qWarning() << "Unable to send share box request to offline user" << user_id;
+    if( c && c->sendMessage( m ) )
+      return;
+
+    User u = UserManager::instance().findUser( user_id );
+    qWarning() << "Unable to send share box request to offline user" << u.path();
+    emit shareBoxUnavailable( u, folder_name );
   }
   else
     buildShareBoxFileList( Settings::instance().localUser(), folder_name );
@@ -709,4 +711,17 @@ void Core::sendShareBoxList()
   }
   else
     emit shareBoxAvailable( Settings::instance().localUser(), folder_name, file_info_list );
+}
+
+void Core::downloadFromShareBox( VNumber from_user_id, const FileInfo& fi, const QString& to_path )
+{
+  QString from_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( fi.shareFolder(), fi.name() ) );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Download path" << from_path << "from user" << from_user_id << "to path" << to_path
+           << "from server" << qPrintable( fi.hostAddress().toString() ) << ":" << fi.hostPort();
+#endif
+
+  FileInfo download_file_info = fi;
+  download_file_info.setPath( to_path );
+  mp_fileTransfer->downloadFile( fi );
 }

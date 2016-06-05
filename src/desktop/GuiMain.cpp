@@ -147,6 +147,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
   connect( mp_shareBox, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_shareBox, SIGNAL( shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
@@ -3421,6 +3422,9 @@ void GuiMain::showConnectionStatusChanged( const User& u )
     mp_trayIcon->showUserStatusChanged( c.id(), msg );
   else
     mp_trayIcon->showUserStatusChanged( ID_DEFAULT_CHAT, msg );
+
+  mp_shareBox->updateUser( u );
+  mp_shareNetwork->updateUser( u );
 }
 
 void GuiMain::changeAvatarSizeInList()
@@ -4022,7 +4026,12 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
   Settings::instance().save();
 }
 
-void GuiMain::onShareBoxRequest( VNumber user_id, const QString& folder_name )
+void GuiMain::onShareBoxRequest( VNumber user_id, const QString& share_box_path )
 {
-  mp_core->sendShareBoxRequest( user_id, folder_name );
+  mp_core->sendShareBoxRequest( user_id, share_box_path );
+}
+
+void GuiMain::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
+{
+  mp_core->downloadFromShareBox( user_id, fi, to_path );
 }
