@@ -142,6 +142,9 @@ signals:
   void networkInterfaceIsUp();
   void shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& );
   void shareBoxUnavailable( const User&, const QString& );
+  void fileTransferCompleted( VNumber, const FileInfo& );
+  void shareBoxDownloadCompleted( VNumber, const FileInfo& );
+  void shareBoxUploadCompleted( VNumber, const FileInfo& );
 
 protected slots:
   void showBroadcasterUdpError();
@@ -168,6 +171,7 @@ protected slots:
   void addListToLocalShare();
   void addFolderToFileTransfer();
   void sendShareBoxList();
+  void onFileTransferCompleted( int, VNumber, const FileInfo& );
 
   /* CoreChat */
   void addListToSavedChats();

@@ -722,8 +722,8 @@ void Core::sendShareBoxList()
 
 void Core::downloadFromShareBox( VNumber from_user_id, const FileInfo& fi, const QString& to_path )
 {
-  QString from_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( fi.shareFolder(), fi.name() ) );
 #ifdef BEEBEEP_DEBUG
+  QString from_path = fi.shareFolder().isEmpty() ? fi.name() : QString( "%1/%2" ).arg( fi.shareFolder(), fi.name() );
   qDebug() << "Download path" << from_path << "from user" << from_user_id << "to path" << to_path
            << "from server" << qPrintable( fi.hostAddress().toString() ) << ":" << fi.hostPort();
 #endif
@@ -739,4 +739,20 @@ void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QStri
   qDebug() << "Upload file" << fi.path() << "to path" << to_path << "of user" << to_user_id;
 #endif
   sendFile( to_user_id, fi.path(), to_path, true );
+}
+
+void Core::onFileTransferCompleted( int ftt, VNumber user_id, const FileInfo& fi )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Transfer completed of file" << fi.path() << "and send signals";
+#endif
+  if( fi.isInShareBox() )
+  {
+    if( ftt == FileTransferPeer::Upload )
+      emit shareBoxUploadCompleted( user_id, fi );
+    else
+      emit shareBoxDownloadCompleted( user_id, fi );
+  }
+  else
+    emit fileTransferCompleted( user_id, fi );
 }

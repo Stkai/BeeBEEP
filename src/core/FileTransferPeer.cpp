@@ -111,6 +111,7 @@ void FileTransferPeer::setTransferCompleted()
   m_state = FileTransferPeer::Completed;
   closeAll();
   emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
+  emit completed( (int)m_transferType, userId(), m_fileInfo );
   deleteLater();
 }
 

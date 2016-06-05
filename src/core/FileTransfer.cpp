@@ -182,6 +182,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
+  connect( transfer_peer, SIGNAL( completed( int, VNumber, const FileInfo& ) ), this, SIGNAL( completed( int, VNumber, const FileInfo& ) ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor );
   int delay = Random::number( 1, 9 ) * 100;

@@ -160,17 +160,7 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, cons
   {
     item->setText( ColumnProgress, tr( "Transfer completed" ) );
     if( fi.isDownload() )
-    {
-      if( fi.isInShareBox() )
-        emit shareBoxDownloadCompleted( fi.shareFolder() );
-      else
-        emit fileTransferCompleted( user_id, fi.id(), fi.path() );
-    }
-    else
-    {
-      if( fi.isInShareBox() )
-        emit( shareBoxUploadCompleted( user_id, fi.shareFolder() ) );
-    }
+      emit fileTransferCompleted( user_id, fi.id(), fi.path() );
     return;
   }
 

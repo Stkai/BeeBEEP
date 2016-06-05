@@ -65,6 +65,8 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
+  connect( mp_fileTransfer, SIGNAL( completed( int, VNumber, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( int, VNumber, const FileInfo& ) ) );
+
 }
 
 bool Core::checkSavingPaths()

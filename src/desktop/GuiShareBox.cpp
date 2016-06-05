@@ -58,7 +58,7 @@ GuiShareBox::GuiShareBox( QWidget *parent )
 
   m_myCurrentFolder = "";
   m_outCurrentFolder = "";
-  m_userId = ID_LOCAL_USER;
+  m_userId = ID_INVALID;
 
   mp_pbMyUpdate->setToolTip( tr( "Update your ShareBox" ) );
   mp_pbOutUpdate->setToolTip( tr( "Update ShareBox" ) );
@@ -172,7 +172,7 @@ void GuiShareBox::updateMyBox( const QString& folder_path, const QList<FileInfo>
   if( !folder_path.isEmpty() )
     mp_myBox->addDotDotFolder();
 
-  QString s_title = QString( "<b>.%1</b>" ).arg( m_myCurrentFolder.isEmpty() ? "/" : m_myCurrentFolder );
+  QString s_title = QString( "<b>./%1</b>" ).arg( m_myCurrentFolder );
   mp_lMyBox->setText( Bee::convertToNativeFolderSeparator( s_title ) );
 }
 
@@ -184,7 +184,7 @@ void GuiShareBox::updateOutBox( const User& u, const QString& folder_path, const
   if( !folder_path.isEmpty() )
     mp_outBox->addDotDotFolder();
 
-  QString s_title = QString( "<b>.%1</b>" ).arg( m_outCurrentFolder.isEmpty() ? "/" : m_outCurrentFolder );
+  QString s_title = QString( "<b>./%1</b>" ).arg( m_outCurrentFolder );
   mp_lOutBox->setText( Bee::convertToNativeFolderSeparator( s_title ) );
 
   mp_comboUsers->blockSignals( true );
@@ -207,6 +207,8 @@ void GuiShareBox::onMyItemDoubleClicked( QTreeWidgetItem* item, int )
     QString new_folder;
     if( file_info_item->fileInfo().id() == ID_DOTDOT_FOLDER )
       new_folder = Bee::folderCdUp( m_myCurrentFolder );
+    else if( m_myCurrentFolder.isEmpty() )
+      new_folder = QString( "%1" ).arg( file_info_item->fileInfo().name() );
     else
       new_folder = QString( "%1/%2" ).arg( m_myCurrentFolder ).arg( file_info_item->fileInfo().name() );
     emit shareBoxRequest( ID_LOCAL_USER, new_folder );
@@ -260,7 +262,7 @@ void GuiShareBox::onShareBoxSelected( int )
 #else
   VNumber current_user_id = Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) );
 #endif
-  if( current_user_id != m_userId )
+  if( current_user_id > 0 && current_user_id != m_userId )
   {
     m_outCurrentFolder = "";
     m_userId = current_user_id;
@@ -302,12 +304,15 @@ void GuiShareBox::dropInMyBox( const QString& share_path )
   foreach( FileInfo file_info, selected_list )
   {
 #ifdef BEEBEEP_DEBUG
-    QString from_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( file_info.shareFolder(), file_info.name() ) );
+    QString from_path = file_info.shareFolder().isEmpty() ? file_info.name() : QString( "%1/%2" ).arg( file_info.shareFolder(), file_info.name() );
     qDebug() << "Drop in MY sharebox the file" << file_info.name() << "->" << from_path;
 #endif
-    QString to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_myCurrentFolder, file_info.name() ) );
-    to_path.prepend( Settings::instance().shareBoxPath() );
-    to_path = Bee::convertToNativeFolderSeparator( to_path );
+    QString to_path;
+    if( m_myCurrentFolder.isEmpty() )
+      to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().shareBoxPath(), file_info.name() ) );
+    else
+      to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2/%3" ).arg( Settings::instance().shareBoxPath(), m_myCurrentFolder, file_info.name() ) );
+
     emit shareBoxDownloadRequest( m_userId, file_info, to_path );
   }
 }
@@ -358,20 +363,23 @@ void GuiShareBox::updateUser( const User& u )
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 0 );
 }
 
-void GuiShareBox::onFileUploadCompleted( VNumber user_id, const QString& folder_path )
+void GuiShareBox::onFileUploadCompleted( VNumber user_id, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "ShareBox update list of the folder" << folder_path << "and user" << user_id;
+  qDebug() << "ShareBox (upload completed) update list of the folder" << fi.shareFolder() << "and user" << user_id;
+#else
+  Q_UNUSED( fi );
 #endif
-  if( m_userId == user_id && folder_path == m_outCurrentFolder )
+  if( m_userId == user_id && fi.shareFolder() == m_outCurrentFolder )
     updateOutBox();
 }
 
-void GuiShareBox::onFileDownloadCompleted( const QString& folder_path )
+void GuiShareBox::onFileDownloadCompleted( VNumber, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "ShareBox update list of the folder" << folder_path;
+  qDebug() << "ShareBox (download completed) update list of the folder" << fi.shareFolder();
+#else
+  Q_UNUSED( fi );
 #endif
-  if( folder_path == m_myCurrentFolder )
-    updateMyBox();
+  updateMyBox();
 }

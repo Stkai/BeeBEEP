@@ -420,13 +420,16 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
   {
     if( m.hasFlag( Message::Refused ) )
     {
-      qDebug() << u.path() << "has refused to share info of folder:" << qPrintable( folder_name );
+      qDebug() << "User" << qPrintable( u.path() ) << "has refused to share info of folder:" << qPrintable( folder_name );
       emit shareBoxUnavailable( u, folder_name );
     }
     else
     {
       if( Settings::instance().useShareBox() )
+      {
+        qDebug() << "User" << qPrintable( u.path() ) << "has requested the list of folder:" << qPrintable( folder_name );
         buildShareBoxFileList( u, folder_name );
+      }
       else
         sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name ) );
     }
