@@ -102,6 +102,9 @@ public:
   void sendShareBoxRequest( VNumber, const QString& );
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
   void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
+  void addUserToDesktopShare( VNumber );
+  void removeUserToDesktopShare( VNumber );
+  void cancelDesktopShare();
 
 public slots:
   void sendBroadcastMessage();
@@ -145,6 +148,7 @@ signals:
   void fileTransferCompleted( VNumber, const FileInfo& );
   void shareBoxDownloadCompleted( VNumber, const FileInfo& );
   void shareBoxUploadCompleted( VNumber, const FileInfo& );
+  void desktopShareImageAvailable( const User&, const QPixmap& );
 
 protected slots:
   void showBroadcasterUdpError();
@@ -198,6 +202,7 @@ protected:
   void parseChatReadMessage( const User&, const Message& );
   void parseHiveMessage( const User&, const Message& );
   void parseShareBoxMessage( const User&, const Message& );
+  void parseDesktopShareMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserStatusChanged( const User& );

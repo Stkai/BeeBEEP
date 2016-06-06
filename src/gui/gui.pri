@@ -6,6 +6,7 @@ HEADERS +=  gui/AudioManager.h \
   gui/ColorManager.h \
   gui/Emoticon.h \
   gui/EmoticonManager.h \
+  gui/ShareDesktopJob.h \
   gui/ShortcutManager.h
 
 
@@ -15,4 +16,5 @@ SOURCES +=  gui/AudioManager.cpp \
   gui/Emojis.cpp \
   gui/Emoticon.cpp \
   gui/EmoticonManager.cpp \
+  gui/ShareDesktopJob.cpp \
   gui/ShortcutManager.cpp

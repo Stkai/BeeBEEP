@@ -78,6 +78,9 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::ShareBox:
     parseShareBoxMessage( u, m );
     break;
+  case Message::DesktopShare:
+    parseDesktopShareMessage( u, m );
+    break;
   default:
     qWarning() << "Core cannot parse the message with type" << m.type();
     break;
@@ -436,5 +439,9 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
   }
   else
     qWarning() << "Invalid flag found in share box message from user" << qPrintable( u.path() );
+}
 
+void Core::parseDesktopShareMessage( const User&, const Message& )
+{
+    //void desktopShareImageAvailable( const User&, const QPixmap& );
 }

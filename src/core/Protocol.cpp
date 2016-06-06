@@ -71,6 +71,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Read:     return "BEE-READ";
   case Message::Hive:     return "BEE-HIVE";
   case Message::ShareBox: return "BEE-SBOX";
+  case Message::DesktopShare : return "BEE-DESK";
   default:                return "BEE-BOOH";
   }
 }
@@ -105,6 +106,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::ShareBox;
   else if( msg_type == "BEE-HIVE" )
     return Message::Hive;
+  else if( msg_type == "BEE-DESK" )
+    return Message::DesktopShare;
   else
     return Message::Undefined;
 }

@@ -558,7 +558,7 @@ void Core::buildLocalShareList()
     addPathToShare( share_path, is_connected );
 }
 
-bool Core::sendFolder( const User& u, const QFileInfo& file_info )
+bool Core::sendFolder( const User& u, const QFileInfo& file_info  )
 {
   QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 You are about to send %2 to %3. Checking folder..." )
@@ -756,3 +756,12 @@ void Core::onFileTransferCompleted( int ftt, VNumber user_id, const FileInfo& fi
   else
     emit fileTransferCompleted( user_id, fi );
 }
+
+void Core::addUserToDesktopShare( VNumber )
+{}
+
+void Core::removeUserToDesktopShare( VNumber )
+{}
+
+void Core::cancelDesktopShare()
+{}
