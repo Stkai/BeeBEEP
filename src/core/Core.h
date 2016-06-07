@@ -34,6 +34,7 @@ class UserRecord;
 #ifdef BEEBEEP_USE_MULTICAST_DNS
 class MDnsManager;
 #endif
+class ShareDesktop;
 
 
 class Core : public QObject
@@ -104,7 +105,7 @@ public:
   void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
   void addUserToDesktopShare( VNumber );
   void removeUserToDesktopShare( VNumber );
-  void cancelDesktopShare();
+  void refuseDesktopShareFromUser( VNumber );
 
 public slots:
   void sendBroadcastMessage();
@@ -124,6 +125,8 @@ public slots:
   void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
   void removeAllPathsFromShare();
+  void startShareDesktop();
+  void stopShareDesktop();
 
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );
@@ -176,6 +179,7 @@ protected slots:
   void addFolderToFileTransfer();
   void sendShareBoxList();
   void onFileTransferCompleted( int, VNumber, const FileInfo& );
+  void onShareDesktopDataReady( const QByteArray& );
 
   /* CoreChat */
   void addListToSavedChats();
@@ -247,6 +251,7 @@ private:
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   MDnsManager* mp_mDns;
 #endif
+  ShareDesktop* mp_shareDesktop;
 
 };
 

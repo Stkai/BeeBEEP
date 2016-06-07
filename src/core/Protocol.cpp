@@ -71,7 +71,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Read:     return "BEE-READ";
   case Message::Hive:     return "BEE-HIVE";
   case Message::ShareBox: return "BEE-SBOX";
-  case Message::DesktopShare : return "BEE-DESK";
+  case Message::ShareDesktop : return "BEE-DESK";
   default:                return "BEE-BOOH";
   }
 }
@@ -107,7 +107,7 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
   else if( msg_type == "BEE-HIVE" )
     return Message::Hive;
   else if( msg_type == "BEE-DESK" )
-    return Message::DesktopShare;
+    return Message::ShareDesktop;
   else
     return Message::Undefined;
 }
@@ -1260,6 +1260,31 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
   }
 
   return file_info_list;
+}
+
+Message Protocol::refuseToViewDesktopShared() const
+{
+  Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, "" );
+  m.setData( "" );
+  m.addFlag( Message::Request );
+  m.addFlag( Message::Refused );
+  return m;
+}
+
+Message Protocol::shareDesktopDataToMessage( const QByteArray& pix_data ) const
+{
+  Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, pix_data.toBase64() );
+  m.setData( "" );
+  m.addFlag( Message::Private );
+  return m;
+}
+
+QPixmap Protocol::pixmapFromShareDesktopMessage( const Message& m ) const
+{
+  QPixmap pix;
+  QByteArray pix_data = QByteArray::fromBase64( m.text().toLatin1() );
+  pix.loadFromData( pix_data, "PNG" );
+  return pix;
 }
 
 ChatMessageData Protocol::dataFromChatMessage( const Message& m )

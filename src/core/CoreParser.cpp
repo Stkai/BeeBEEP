@@ -78,7 +78,7 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::ShareBox:
     parseShareBoxMessage( u, m );
     break;
-  case Message::DesktopShare:
+  case Message::ShareDesktop:
     parseDesktopShareMessage( u, m );
     break;
   default:
@@ -441,7 +441,21 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
     qWarning() << "Invalid flag found in share box message from user" << qPrintable( u.path() );
 }
 
-void Core::parseDesktopShareMessage( const User&, const Message& )
+void Core::parseDesktopShareMessage( const User& u, const Message& m )
 {
-    //void desktopShareImageAvailable( const User&, const QPixmap& );
+  if( m.hasFlag( Message::Request ) && m.hasFlag( Message::Refused ) )
+  {
+    qDebug() << "User" << qPrintable( u.path() ) << "has refused to view your shared desktop";
+    return;
+  }
+  else if( m.hasFlag( Message::Private ) )
+  {
+    QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
+    if( !pix.isNull() )
+      emit desktopShareImageAvailable( u, pix );
+  }
+  else
+  {
+    qWarning() << "Invalid flag found in desktop share message from user" << qPrintable( u.path() );
+  }
 }

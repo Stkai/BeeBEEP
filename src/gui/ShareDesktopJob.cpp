@@ -25,25 +25,50 @@
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_framePerSecond( 1 ), m_cancelJob( false ),
-    m_msecToShot( 1000 ), m_toUserId( ID_INVALID )
+  : QObject( parent ), m_timer(), m_mutex(), m_lastImageHash( "" )
 {
   setObjectName( "ShareDesktopJob" );
+  m_timer.setInterval( 200 );
+  m_timer.setSingleShot( false );
+  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ) );
 }
 
 void ShareDesktopJob::startJob()
 {
-  m_cancelJob = false;
-  QTimer::singleShot( m_msecToShot, this, SLOT( makeScreenshot() ) );
+  QMutexLocker ml( &m_mutex );
+  if( isRunning() )
+  {
+    qWarning() << "ShareDesktop job is already running";
+    return;
+  }
+  m_lastImageHash = "";
+  m_timer.start();
 }
 
 void ShareDesktopJob::stopJob()
 {
-  m_cancelJob = true;
+  QMutexLocker ml( &m_mutex );
+  m_timer.stop();
+  emit jobCompleted();
+}
+
+bool ShareDesktopJob::isRunning()
+{
+  QMutexLocker ml( &m_mutex );
+  return m_timer.isActive();
+}
+
+void ShareDesktopJob::setLastImageHash( const QByteArray& new_value )
+{
+  QMutexLocker ml( &m_mutex );
+  m_lastImageHash = new_value;
 }
 
 void ShareDesktopJob::makeScreenshot()
 {
+  if( !isRunning() )
+    return;
+
   QPixmap screen_shot;
   qreal device_pixel_ratio;
 
@@ -64,11 +89,17 @@ void ShareDesktopJob::makeScreenshot()
                                      QApplication::desktop()->height() * device_pixel_ratio );
 #endif
 
-  if( m_toUserId != ID_INVALID )
-    emit imageAvailable( screen_shot, m_toUserId );
+  QByteArray pix_bytes;
+  QBuffer buffer( &pix_bytes );
+  buffer.open( QIODevice::WriteOnly );
+  screen_shot.save( &buffer, "PNG" ); // writes pixmap into bytes in PNG format
 
-  if( !m_cancelJob )
-    QTimer::singleShot( m_msecToShot, this, SLOT( makeScreenshot() ) );
-  else
-    emit jobCompleted();
+  screen_shot = QPixmap();
+  QByteArray pix_hash = QCryptographicHash::hash( pix_bytes, QCryptographicHash::Sha1 );
+
+  if( pix_hash != m_lastImageHash )
+  {
+    setLastImageHash( pix_hash );
+    emit imageAvailable( pix_bytes );
+  }
 }

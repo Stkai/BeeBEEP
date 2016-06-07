@@ -44,6 +44,7 @@ win32: {
 
 message( Qt modules: $$QT )
 
+include(qxt/qxt.pri)
 include(../locale/locale.pri)
 include(hunspell/hunspell.pri)
 include(core/core.pri)
@@ -51,7 +52,6 @@ include(gui/gui.pri)
 include(desktop/desktop.pri)
 include(override/override.pri)
 include(utils/utils.pri)
-win32:unix:macx:!android:include(qxt/qxt.pri)
 
 HEADERS += Interfaces.h Tips.h
 

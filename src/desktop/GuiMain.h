@@ -194,7 +194,7 @@ protected:
   void closeFloatingChat( VNumber );
   bool reloadChat( VNumber );
   bool chatIsVisible( VNumber );
-  void showAlertForMessage( VNumber, const ChatMessage& );
+  void showAlertForMessage( VNumber, const ChatMessage&, bool* chat_window_is_created );
   GuiChat* guiChat( VNumber );
 
 private:

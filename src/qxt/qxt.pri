@@ -1,6 +1,7 @@
 
+DEFINES += BEEBEEP_USE_QXT
+
 INCLUDEPATH += $$PWD
-!android: DEFINES += BEEBEEP_USE_QXT
 
 HEADERS +=  qxt/qxtglobal.h \
             qxt/qxtglobalshortcut.h \

@@ -114,6 +114,10 @@ public:
   QString folderNameFromShareBoxMessage( const Message& ) const;
   QList<FileInfo> messageToShareBoxFileList( const Message&, const QHostAddress& ) const;
 
+  Message refuseToViewDesktopShared() const;
+  Message shareDesktopDataToMessage( const QByteArray& ) const;
+  QPixmap pixmapFromShareDesktopMessage( const Message& ) const;
+
   inline VNumber currentId() const;
   inline VNumber maxId() const;
   inline VNumber newId();

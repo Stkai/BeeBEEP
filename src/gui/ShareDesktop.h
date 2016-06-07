@@ -21,40 +21,47 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_SHAREDESKTOPJOB_H
-#define BEEBEEP_SHAREDESKTOPJOB_H
+#ifndef BEEBEEP_SHAREDESKTOP_H
+#define BEEBEEP_SHAREDESKTOP_H
 
 #include "Config.h"
+class ShareDesktopJob;
 
 
-class ShareDesktopJob : public QObject
+class ShareDesktop : public QObject
 {
   Q_OBJECT
 
 public:
-  explicit ShareDesktopJob( QObject* parent = 0 );
+  explicit ShareDesktop( QObject* parent = 0 );
 
-  bool isRunning();
+  void start();
+  void stop();
+  inline bool isActive() const;
+
+  inline const QList<VNumber>& users() const;
+
+  void addUser( VNumber );
+  inline void removeUser( VNumber );
+  inline void clearUsers();
 
 signals:
-  void imageAvailable( const QByteArray& );
-  void jobCompleted();
-
-public slots:
-  void startJob();
-  void stopJob();
+  void shareDesktopDataReady( const QByteArray& );
 
 protected slots:
-  void makeScreenshot();
-
-protected:
-  void setLastImageHash( const QByteArray& );
+  void onJobCompleted();
+  void onImageDataAvailable( const QByteArray& );
 
 private:
-  QTimer m_timer;
-  QMutex m_mutex;
-  QByteArray m_lastImageHash;
+  QList<VNumber> m_users;
+  ShareDesktopJob* mp_job;
 
 };
 
-#endif // BEEBEEP_SHAREDESKTOPJOB_H
+// Inline Functions
+inline bool ShareDesktop::isActive() const { return mp_job; }
+inline const QList<VNumber>& ShareDesktop::users() const { return m_users; }
+inline void ShareDesktop::removeUser( VNumber user_id ) { m_users.removeOne( user_id ); }
+inline void ShareDesktop::clearUsers() { m_users.clear(); }
+
+#endif // BEEBEEP_SHAREDESKTOP_H

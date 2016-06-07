@@ -36,6 +36,7 @@
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   #include "MDnsManager.h"
 #endif
+#include "ShareDesktop.h"
 
 
 Core::Core( QObject* parent )
@@ -58,6 +59,9 @@ Core::Core( QObject* parent )
   connect( mp_mDns, SIGNAL( newUserFound( const UserRecord& ) ), this, SLOT( checkUserRecord( const UserRecord& ) ) );
 #endif
 
+  mp_shareDesktop = new ShareDesktop( this );
+  qDebug() << "ShareDesktop created";
+
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   //connect( mp_broadcaster, SIGNAL( udpPortBlocked() ), this, SLOT( showBroadcasterUdpError() ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( checkNewConnection( Connection* ) ) );
@@ -66,7 +70,7 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( completed( int, VNumber, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( int, VNumber, const FileInfo& ) ) );
-
+  connect( mp_shareDesktop, SIGNAL( shareDesktopDataReady( const QByteArray& ) ), this, SLOT( onShareDesktopDataReady( const QByteArray& ) ) );
 }
 
 bool Core::checkSavingPaths()

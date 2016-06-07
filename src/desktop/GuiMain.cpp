@@ -1667,7 +1667,7 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 #endif
 }
 
-void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
+void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool* chat_window_is_created )
 {
   Chat c = ChatManager::instance().chat( chat_id );
   if( c.isValid() && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
@@ -1687,6 +1687,7 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( !fl_chat && Settings::instance().alwaysOpenNewFloatingChat() && Settings::instance().raiseOnNewMessageArrived() )
   {
+    *chat_window_is_created = true;
     detachChat( chat_id );
     fl_chat = floatingChat( chat_id );
   }
@@ -1773,11 +1774,12 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
     mp_home->addSystemMessage( cm );
 
   bool chat_is_visible = chatIsVisible( chat_id );
+  bool chat_window_is_created = false;
 
   if( !cm.isFromSystem() && !cm.isFromLocalUser() )
   {
     if( !chat_is_visible )
-      showAlertForMessage( chat_id, cm );
+      showAlertForMessage( chat_id, cm, &chat_window_is_created );
     else if( Settings::instance().beepAlwaysOnNewMessageArrived() )
       playBeep();
   }
@@ -1790,7 +1792,8 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
   {
     if( chat_is_visible )
       readAllMessagesInChat( chat_id );
-    gui_chat->appendChatMessage( chat_id, cm );
+    if( !chat_window_is_created )
+      gui_chat->appendChatMessage( chat_id, cm );
   }
   else
   {
@@ -3943,9 +3946,7 @@ void GuiMain::updateMainIcon()
 
 void GuiMain::saveSession( QSessionManager& )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Session manager ask to save session";
-#endif
+  qDebug() << "Session manager ask to save and close session";
   forceShutdown();
 }
 

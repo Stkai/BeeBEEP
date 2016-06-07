@@ -1,7 +1,7 @@
 
 INCLUDEPATH += $$PWD
 
-HEADERS +=  utils/BeeUtils.h \
+HEADERS += utils/BeeUtils.h \
   utils/GAnalytics.h \
   utils/HttpDownloader.h \
   utils/SpellChecker.h \
@@ -14,4 +14,3 @@ SOURCES += utils/BeeUtils.cpp \
   utils/SpellChecker.cpp \
   utils/SpellCheckerHighlighter.cpp \
   utils/Updater.cpp
-

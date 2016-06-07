@@ -31,6 +31,7 @@
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "ShareDesktop.h"
 #include "UserManager.h"
 
 
@@ -757,11 +758,50 @@ void Core::onFileTransferCompleted( int ftt, VNumber user_id, const FileInfo& fi
     emit fileTransferCompleted( user_id, fi );
 }
 
-void Core::addUserToDesktopShare( VNumber )
-{}
+void Core::addUserToDesktopShare( VNumber user_id )
+{
+  mp_shareDesktop->addUser( user_id );
+}
 
-void Core::removeUserToDesktopShare( VNumber )
-{}
+void Core::removeUserToDesktopShare( VNumber user_id )
+{
+  mp_shareDesktop->removeUser( user_id );
+  if( mp_shareDesktop->users().isEmpty() )
+    QTimer::singleShot( 0, this, SLOT( stopShareDesktop() ) );
+}
 
-void Core::cancelDesktopShare()
-{}
+void Core::startShareDesktop()
+{
+  mp_shareDesktop->start();
+}
+
+void Core::stopShareDesktop()
+{
+  mp_shareDesktop->stop();
+}
+
+void Core::refuseDesktopShareFromUser( VNumber user_id )
+{
+  Connection* c = connection( user_id );
+  if( c && c->isConnected() )
+  {
+    Message m = Protocol::instance().refuseToViewDesktopShared();
+    c->sendMessage( m );
+  }
+}
+
+void Core::onShareDesktopDataReady( const QByteArray& pix_data )
+{
+  const QList<VNumber>& user_id_list = mp_shareDesktop->users();
+  if( user_id_list.isEmpty() )
+    return;
+
+  Message m = Protocol::instance().shareDesktopDataToMessage( pix_data );
+  Connection* c;
+  foreach( VNumber user_id, user_id_list )
+  {
+    c = connection( user_id );
+    if( c && c->isConnected() )
+      c->sendMessage( m );
+  }
+}
