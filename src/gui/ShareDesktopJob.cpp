@@ -28,46 +28,61 @@ ShareDesktopJob::ShareDesktopJob( QObject *parent )
   : QObject( parent ), m_timer(), m_mutex(), m_lastImageHash( "" )
 {
   setObjectName( "ShareDesktopJob" );
-  m_timer.setInterval( 200 );
+  m_timer.setInterval( 2000 );
   m_timer.setSingleShot( false );
-  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ) );
+  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ), Qt::QueuedConnection );
 }
 
 void ShareDesktopJob::startJob()
 {
-  QMutexLocker ml( &m_mutex );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( objectName() ) << "is starting its job";
+#endif
+  //QMutexLocker ml( &m_mutex );
   if( isRunning() )
   {
-    qWarning() << "ShareDesktop job is already running";
+    qWarning() << qPrintable( objectName() ) << "is already running";
     return;
   }
   m_lastImageHash = "";
   m_timer.start();
+  if( !m_timer.isActive() )
+    qWarning() << qPrintable( objectName() ) << "is unable to start its internal timer";
 }
 
 void ShareDesktopJob::stopJob()
 {
-  QMutexLocker ml( &m_mutex );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( objectName() ) << "is stopping its job";
+#endif
+  //QMutexLocker ml( &m_mutex );
   m_timer.stop();
   emit jobCompleted();
 }
 
 bool ShareDesktopJob::isRunning()
 {
-  QMutexLocker ml( &m_mutex );
+  //QMutexLocker ml( &m_mutex );
   return m_timer.isActive();
 }
 
 void ShareDesktopJob::setLastImageHash( const QByteArray& new_value )
 {
-  QMutexLocker ml( &m_mutex );
+  //QMutexLocker ml( &m_mutex );
   m_lastImageHash = new_value;
 }
 
 void ShareDesktopJob::makeScreenshot()
 {
-  if( !isRunning() )
-    return;
+   if( !isRunning() )
+   {
+     qDebug() << qPrintable( objectName() ) << "is not running... screen capture aborted";
+     return;
+   }
+
+#ifdef BEEBEEP_DEBUG
+   qDebug() << qPrintable( objectName() ) << "is making a screen capture";
+#endif
 
   QPixmap screen_shot;
   qreal device_pixel_ratio;
@@ -102,4 +117,5 @@ void ShareDesktopJob::makeScreenshot()
     setLastImageHash( pix_hash );
     emit imageAvailable( pix_bytes );
   }
+
 }

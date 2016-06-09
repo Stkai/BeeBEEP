@@ -67,7 +67,7 @@ bool NetworkManager::isMainInterfaceUp() const
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to check if local interface hardware is up";
 #endif
-    return true;
+    return false;
   }
 
   QList<NetworkEntry> network_entries = availableNetworkEntries();
@@ -131,7 +131,7 @@ bool NetworkManager::searchLocalHostAddress()
     QStringList preferred_subnets = Settings::instance().preferredSubnets().split( "," );
     if( !preferred_subnets.isEmpty() )
     {
-       foreach( QString preferred_subnet, preferred_subnets )
+      foreach( QString preferred_subnet, preferred_subnets )
       {
         qDebug() << "Checking preferred subnet from RC:" << preferred_subnet;
         if( forceLocalSubnet( preferred_subnet.trimmed() ) )

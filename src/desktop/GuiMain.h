@@ -47,6 +47,7 @@ class GuiScreenShot;
 class GuiShareBox;
 class GuiShareLocal;
 class GuiShareNetwork;
+class GuiShareDesktop;
 class GuiSystemTray;
 class GuiTransferFile;
 class GuiUserList;
@@ -181,6 +182,8 @@ private slots:
   void onShareBoxRequest( VNumber, const QString& );
   void onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
   void onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
+  void onShareDesktopImageAvailable( const User&, const QPixmap& );
+  void onShareDesktopCloseEvent( VNumber );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -254,6 +257,7 @@ private:
   GuiEmoticons* mp_emoticonsWidget;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
+  QList<GuiShareDesktop*> m_desktops;
 
   QMenu* mp_menuMain;
   QMenu* mp_menuInfo;

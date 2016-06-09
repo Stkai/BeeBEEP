@@ -151,7 +151,7 @@ signals:
   void fileTransferCompleted( VNumber, const FileInfo& );
   void shareBoxDownloadCompleted( VNumber, const FileInfo& );
   void shareBoxUploadCompleted( VNumber, const FileInfo& );
-  void desktopShareImageAvailable( const User&, const QPixmap& );
+  void shareDesktopImageAvailable( const User&, const QPixmap& );
 
 protected slots:
   void showBroadcasterUdpError();

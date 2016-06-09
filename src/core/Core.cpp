@@ -216,6 +216,10 @@ bool Core::start()
   if( Settings::instance().canPostUsageStatistics() )
     QTimer::singleShot( 5000, this, SLOT( postUsageStatistics() ) );
 
+#ifdef BEEBEEP_DEBUG
+  startShareDesktop();
+#endif
+
   return true;
 }
 
@@ -269,6 +273,9 @@ void Core::stop()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   stopDnsMulticasting();
 #endif
+
+  if( mp_shareDesktop->isActive() )
+    mp_shareDesktop->stop();
 
   stopFileTransferServer();
 
@@ -480,6 +487,9 @@ bool Core::saveChatMessages()
 
 void Core::checkNewVersion()
 {
+  if( !NetworkManager::instance().isMainInterfaceUp() )
+    return;
+
   qDebug() << "Checking for new version...";
   Updater* updater = new Updater( this );
   connect( updater, SIGNAL( jobCompleted() ), this, SLOT( onUpdaterJobCompleted() ) );
@@ -528,6 +538,9 @@ void Core::checkBroadcastInterval()
 
 void Core::postUsageStatistics()
 {
+  if( !NetworkManager::instance().isMainInterfaceUp() )
+    return;
+
   GAnalytics* ga = new GAnalytics( this );
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( ga->objectName() ) << "created";

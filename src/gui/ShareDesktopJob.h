@@ -44,7 +44,7 @@ public slots:
   void startJob();
   void stopJob();
 
-protected slots:
+//protected slots:
   void makeScreenshot();
 
 protected:

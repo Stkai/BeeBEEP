@@ -794,14 +794,30 @@ void Core::onShareDesktopDataReady( const QByteArray& pix_data )
 {
   const QList<VNumber>& user_id_list = mp_shareDesktop->users();
   if( user_id_list.isEmpty() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Core received image data from desktop share but no user is present in list";
+#endif
     return;
+  }
 
   Message m = Protocol::instance().shareDesktopDataToMessage( pix_data );
   Connection* c;
   foreach( VNumber user_id, user_id_list )
   {
-    c = connection( user_id );
-    if( c && c->isConnected() )
-      c->sendMessage( m );
+    if( user_id == ID_LOCAL_USER )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Core sends own image desktop share data to local user";
+#endif
+      QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
+      emit shareDesktopImageAvailable( Settings::instance().localUser(), pix );
+    }
+    else
+    {
+      c = connection( user_id );
+      if( c && c->isConnected() )
+        c->sendMessage( m );
+    }
   }
 }

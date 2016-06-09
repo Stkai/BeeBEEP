@@ -46,6 +46,7 @@
 #include "GuiScreenShot.h"
 #include "GuiSearchUser.h"
 #include "GuiShareBox.h"
+#include "GuiShareDesktop.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
 #include "GuiShortcut.h"
@@ -123,7 +124,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
   connect( mp_core, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
-
+  connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -190,6 +191,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 
   statusBar()->showMessage( tr( "Ready" ) );
+
 }
 
 void GuiMain::initShortcuts()
@@ -4043,4 +4045,41 @@ void GuiMain::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, co
 void GuiMain::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   mp_core->uploadToShareBox( user_id, fi, to_path );
+}
+
+void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
+{
+  foreach( GuiShareDesktop* gsd, m_desktops )
+  {
+    if( gsd->ownerId() == u.id() )
+    {
+      gsd->updatePixmap( pix );
+      return;
+    }
+  }
+
+  GuiShareDesktop* new_gui = new GuiShareDesktop;
+  connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
+  new_gui->setOwner( u );
+  new_gui->setGeometry( 30, 30, 800, 600 );
+  new_gui->show();
+new_gui->updatePixmap( pix );
+
+  m_desktops.append( new_gui );
+
+}
+
+void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
+{
+  QList<GuiShareDesktop*>::iterator it = m_desktops.begin();
+  while( it != m_desktops.end() )
+  {
+    if( (*it)->ownerId() == user_id )
+    {
+      (*it)->disconnect();
+      (*it)->deleteLater();
+      m_desktops.erase( it );
+      return;
+    }
+  }
 }

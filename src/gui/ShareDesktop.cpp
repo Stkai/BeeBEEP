@@ -41,12 +41,17 @@ void ShareDesktop::start()
   }
 
   mp_job = new ShareDesktopJob;
-  connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ) );
-  connect( mp_job, SIGNAL( imageAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ) );
+  connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
+  connect( mp_job, SIGNAL( imageAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ), Qt::QueuedConnection );
 
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->addJob( mp_job );
+#ifdef BEEBEEP_DEBUG
+  addUser( ID_LOCAL_USER );
+#endif
+
+  //BeeApplication* bee_app = (BeeApplication*)qApp;
+  //bee_app->addJob( mp_job );
   QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
+
 }
 
 void ShareDesktop::stop()
@@ -76,9 +81,17 @@ void ShareDesktop::onJobCompleted()
   sdj->disconnect();
   sdj->deleteLater();
   mp_job = 0;
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( objectName() ) << "has completed its job";
+#endif
+
 }
 
 void ShareDesktop::onImageDataAvailable( const QByteArray& pix_data )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( objectName() ) << "has image data available";
+#endif
+
   emit shareDesktopDataReady( pix_data );
 }

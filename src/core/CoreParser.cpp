@@ -452,7 +452,7 @@ void Core::parseDesktopShareMessage( const User& u, const Message& m )
   {
     QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
     if( !pix.isNull() )
-      emit desktopShareImageAvailable( u, pix );
+      emit shareDesktopImageAvailable( u, pix );
   }
   else
   {
