@@ -216,10 +216,6 @@ bool Core::start()
   if( Settings::instance().canPostUsageStatistics() )
     QTimer::singleShot( 5000, this, SLOT( postUsageStatistics() ) );
 
-#ifdef BEEBEEP_DEBUG
-  startShareDesktop();
-#endif
-
   return true;
 }
 
