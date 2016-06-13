@@ -30,14 +30,18 @@
 *****************************************************************************/
 
 #include <QVector>
-#include <X11/Xlib.h>
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
+// in ubuntu 14.04 this include works
 #   include <QX11Info>
+// In other distro maybe you have to use the line below instead the above one
+//#   include <QtX11Extras/QX11Info>
 #else
 #   include <QApplication>
 #   include <qpa/qplatformnativeinterface.h>
 #   include <xcb/xcb.h>
 #endif
+#include <X11/Xlib.h>
+
 
 namespace {
 

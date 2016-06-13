@@ -727,6 +727,8 @@ void Core::downloadFromShareBox( VNumber from_user_id, const FileInfo& fi, const
   QString from_path = fi.shareFolder().isEmpty() ? fi.name() : QString( "%1/%2" ).arg( fi.shareFolder(), fi.name() );
   qDebug() << "Download path" << from_path << "from user" << from_user_id << "to path" << to_path
            << "from server" << qPrintable( fi.hostAddress().toString() ) << ":" << fi.hostPort();
+#else
+  Q_UNUSED( from_user_id );
 #endif
 
   FileInfo download_file_info = fi;
