@@ -31,7 +31,9 @@
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
-#include "ShareDesktop.h"
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  #include "ShareDesktop.h"
+#endif
 #include "UserManager.h"
 
 
@@ -760,6 +762,7 @@ void Core::onFileTransferCompleted( int ftt, VNumber user_id, const FileInfo& fi
     emit fileTransferCompleted( user_id, fi );
 }
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
 void Core::addUserToDesktopShare( VNumber user_id )
 {
   mp_shareDesktop->addUser( user_id );
@@ -823,3 +826,4 @@ void Core::onShareDesktopDataReady( const QByteArray& pix_data )
     }
   }
 }
+#endif  // BEEBEEP_USE_SHAREDESKTOP

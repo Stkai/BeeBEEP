@@ -32,7 +32,6 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiShareBox.h \
   desktop/GuiShareBoxFileInfoItem.h \
   desktop/GuiShareBoxFileInfoList.h \
-  desktop/GuiShareDesktop.h \
   desktop/GuiShareLocal.h \
   desktop/GuiShareNetwork.h \
   desktop/GuiShortcut.h \
@@ -75,7 +74,6 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiShareBox.cpp \
   desktop/GuiShareBoxFileInfoItem.cpp \
   desktop/GuiShareBoxFileInfoList.cpp \
-  desktop/GuiShareDesktop.cpp \
   desktop/GuiShareLocal.cpp \
   desktop/GuiShareNetwork.cpp \
   desktop/GuiShortcut.cpp \

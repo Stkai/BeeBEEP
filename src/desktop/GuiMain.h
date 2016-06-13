@@ -47,7 +47,9 @@ class GuiScreenShot;
 class GuiShareBox;
 class GuiShareLocal;
 class GuiShareNetwork;
-class GuiShareDesktop;
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  class GuiShareDesktop;
+#endif
 class GuiSystemTray;
 class GuiTransferFile;
 class GuiUserList;
@@ -182,8 +184,10 @@ private slots:
   void onShareBoxRequest( VNumber, const QString& );
   void onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
   void onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopImageAvailable( const User&, const QPixmap& );
   void onShareDesktopCloseEvent( VNumber );
+#endif
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -257,8 +261,9 @@ private:
   GuiEmoticons* mp_emoticonsWidget;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   QList<GuiShareDesktop*> m_desktops;
-
+#endif
   QMenu* mp_menuMain;
   QMenu* mp_menuInfo;
   QMenu* mp_menuChat;

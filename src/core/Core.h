@@ -34,7 +34,9 @@ class UserRecord;
 #ifdef BEEBEEP_USE_MULTICAST_DNS
 class MDnsManager;
 #endif
+#ifdef BEEBEEP_USE_SHAREDESKTOP
 class ShareDesktop;
+#endif
 
 
 class Core : public QObject
@@ -103,9 +105,11 @@ public:
   void sendShareBoxRequest( VNumber, const QString& );
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
   void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   void addUserToDesktopShare( VNumber );
   void removeUserToDesktopShare( VNumber );
   void refuseDesktopShareFromUser( VNumber );
+#endif
 
 public slots:
   void sendBroadcastMessage();
@@ -125,8 +129,10 @@ public slots:
   void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
   void removeAllPathsFromShare();
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   void startShareDesktop();
   void stopShareDesktop();
+#endif
 
 signals:
   void chatMessage( VNumber chat_id, const ChatMessage& );
@@ -151,7 +157,9 @@ signals:
   void fileTransferCompleted( VNumber, const FileInfo& );
   void shareBoxDownloadCompleted( VNumber, const FileInfo& );
   void shareBoxUploadCompleted( VNumber, const FileInfo& );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopImageAvailable( const User&, const QPixmap& );
+#endif
 
 protected slots:
   void showBroadcasterUdpError();
@@ -179,8 +187,9 @@ protected slots:
   void addFolderToFileTransfer();
   void sendShareBoxList();
   void onFileTransferCompleted( int, VNumber, const FileInfo& );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopDataReady( const QByteArray& );
-
+#endif
   /* CoreChat */
   void addListToSavedChats();
 
@@ -206,7 +215,9 @@ protected:
   void parseChatReadMessage( const User&, const Message& );
   void parseHiveMessage( const User&, const Message& );
   void parseShareBoxMessage( const User&, const Message& );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   void parseDesktopShareMessage( const User&, const Message& );
+#endif
 
   /* CoreUser */
   void showUserStatusChanged( const User& );
@@ -251,7 +262,9 @@ private:
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   MDnsManager* mp_mDns;
 #endif
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   ShareDesktop* mp_shareDesktop;
+#endif
 
 };
 

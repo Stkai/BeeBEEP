@@ -79,7 +79,9 @@ void Core::parseMessage( const User& u, const Message& m )
     parseShareBoxMessage( u, m );
     break;
   case Message::ShareDesktop:
+#ifdef BEEBEEP_USE_SHAREDESKTOP
     parseDesktopShareMessage( u, m );
+#endif
     break;
   default:
     qWarning() << "Core cannot parse the message with type" << m.type();
@@ -441,6 +443,7 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
     qWarning() << "Invalid flag found in share box message from user" << qPrintable( u.path() );
 }
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
 void Core::parseDesktopShareMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::Request ) && m.hasFlag( Message::Refused ) )
@@ -459,3 +462,4 @@ void Core::parseDesktopShareMessage( const User& u, const Message& m )
     qWarning() << "Invalid flag found in desktop share message from user" << qPrintable( u.path() );
   }
 }
+#endif

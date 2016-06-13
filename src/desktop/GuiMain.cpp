@@ -46,7 +46,9 @@
 #include "GuiScreenShot.h"
 #include "GuiSearchUser.h"
 #include "GuiShareBox.h"
-#include "GuiShareDesktop.h"
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  #include "GuiShareDesktop.h"
+#endif
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
 #include "GuiShortcut.h"
@@ -124,7 +126,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
   connect( mp_core, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
+#endif
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( stringToShow( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_fileTransfer, SIGNAL( fileTransferProgress( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( showMessage( VNumber, VNumber, const QString& ) ) );
@@ -4047,8 +4051,10 @@ void GuiMain::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, cons
   mp_core->uploadToShareBox( user_id, fi, to_path );
 }
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
 {
+
   foreach( GuiShareDesktop* gsd, m_desktops )
   {
     if( gsd->ownerId() == u.id() )
@@ -4063,10 +4069,9 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
   new_gui->setOwner( u );
   new_gui->setGeometry( 30, 30, 800, 600 );
   new_gui->show();
-new_gui->updatePixmap( pix );
+  new_gui->updatePixmap( pix );
 
   m_desktops.append( new_gui );
-
 }
 
 void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
@@ -4083,3 +4088,4 @@ void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
     }
   }
 }
+#endif

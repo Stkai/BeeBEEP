@@ -16,6 +16,7 @@ TEMPLATE = app
 !macx:DEFINES += MAKE_BEEBEEP_PORTABLE
 #DEFINES += BEEBEEP_DISABLE_FILE_TRANSFER
 #DEFINES += BEEBEEP_DISABLE_SEND_MESSAGE
+
 TARGET = beebeep
 
 QT += network xml
@@ -52,6 +53,7 @@ include(gui/gui.pri)
 include(desktop/desktop.pri)
 include(override/override.pri)
 include(utils/utils.pri)
+#include(sharedesktop/sharedesktop.pri)
 
 HEADERS += Interfaces.h Tips.h
 
