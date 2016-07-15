@@ -614,6 +614,10 @@
         <source>%1 saved chats are added to history</source>
         <translation>%1 conversazioni salvate sono state caricate nella storia</translation>
     </message>
+    <message>
+        <source>Max ID is reached. Please close and restart the application.</source>
+        <translation>Il numero massimo di ID è stato raggiunto. Chiudi e riavvia l&apos;applicazione.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -3537,6 +3541,22 @@ il file %2 (%3)?</translation>
         <source>If a file already exists</source>
         <translation>Se un file esiste già </translation>
     </message>
+    <message>
+        <source>Show the shared boxes</source>
+        <translation>Mostra le ShareBox</translation>
+    </message>
+    <message>
+        <source>Clear all read messages</source>
+        <translation type="obsolete">Cancella tutti i messaggi letti</translation>
+    </message>
+    <message>
+        <source>If enabled the messages are cleared when the window is closed</source>
+        <translation type="obsolete">Se abilitata i messaggi letti saranno cancellati alla chiusura della finestra</translation>
+    </message>
+    <message>
+        <source>Clear all read messages on closing window</source>
+        <translation>Cancella tutti i messaggi letti alla chiusura della finestra</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4144,6 +4164,79 @@ il file %2 (%3)?</translation>
     <message>
         <source>Max users to contact in a tick</source>
         <translation>Numero di utenti da contattare in un tick</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareBox</name>
+    <message>
+        <source>ShareBox</source>
+        <translation>ShareBox</translation>
+    </message>
+    <message>
+        <source>Update your ShareBox</source>
+        <translation>Aggiorna la tua ShareBox</translation>
+    </message>
+    <message>
+        <source>Update ShareBox</source>
+        <translation>Aggiorna la ShareBox</translation>
+    </message>
+    <message>
+        <source>ShareBox path does not exist. Please select a valid folder.</source>
+        <translation>Il percorso della ShareBox non esiste. Selezionane uno valido.</translation>
+    </message>
+    <message>
+        <source>Your ShareBox is disabled</source>
+        <translation>La tua ShareBox è disabilitata</translation>
+    </message>
+    <message>
+        <source>ShareBox is not available</source>
+        <translation>La ShareBox non è disponibile</translation>
+    </message>
+    <message>
+        <source>%1 - Select the ShareBox folder</source>
+        <translation>%1 - Seleziona la cartella della ShareBox</translation>
+    </message>
+    <message>
+        <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>is unavailable</source>
+        <translation>non è dispobibile</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareBoxFileInfoList</name>
+    <message>
+        <source>Shared folders and files</source>
+        <translation>Cartelle e file condivisi</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Dimensione</translation>
+    </message>
+    <message>
+        <source>Last modified</source>
+        <translation>Ultima modifica</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareBoxWidget</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Enable my ShareBox</source>
+        <translation>Abilita la mia ShareBox</translation>
+    </message>
+    <message>
+        <source>Select your folder</source>
+        <translation>Seleziona la tua cartella</translation>
+    </message>
+    <message>
+        <source>Select box</source>
+        <translation>Seleziona una ShareBox</translation>
     </message>
 </context>
 <context>

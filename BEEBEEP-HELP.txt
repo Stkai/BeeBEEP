@@ -43,7 +43,8 @@ HideUsersPanel=[true/false] If enabled BeeBEEP hide users panel at startup (defa
 HideOtherPanels=[true/false] If enabled BeeBEEP hide all other panels at startup (default=false) [3.0.6]
 DisableFileTransfer=[true/false] disable file transfer (default=false) [3.0.6]
 DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read only messenger (default=false) [3.0.6]
-UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session (default=false) [3.0.6]
+UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session (the same of AskNicknameAtStartup=false
+UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]
@@ -82,7 +83,8 @@ ShowSendMessageIcon=[true/false] show the icon for sending message
 ShowOnlyMessagesInDefaultChat =[true/false] if enabled it will be showed only chat message, user info and history in the default chat (other messages in activity window)
 MessageFilter= filter messages in chat window by its type (do not edit here)
 UseKeyReturnToSendMessage=[true/false] enable key Return as shortcut to send a chat message
-UseYourNameInsteadOfYou=[true/false] your name is showed before messages instead of "you"
+UseYourNameInsteadOfYou=[true/false] your name is showed before messages instead of "you" (default=false) [3.0.6]
+ClearAllReadMessages=[true/false] clear all messages when you close chat window (default=false) [3.0.7]
 
 [User]
 LocalColor= your nickname color in chat
@@ -94,6 +96,7 @@ UseDefaultPassword=[true/false] use default BeeBEEP password
 AskNicknameAtStartup=[true/false] show nickname dialog at connection to BeeBEEP network (default=false) [3.0.5]
 AskPasswordAtStartup=[true/false] show password dialog at connection to BeeBEEP network
 MaxStatusInList=(10) maximum number of status used recently
+SaveUsers=[true/false] save the user list (default=true) [1.0.0]
 
 [VCard]
 NickName= your nickname
@@ -158,7 +161,6 @@ ShowHomeDatestamp=[true/false] (default=false) [3.0.5]
 UsePreviewFileDialog=[true/false] (default=true only in windows, in other os false) [3.0.4]
 PreviewFileDialogGeometry=(do not edit manually) [3.0.5]
 PreviewFileDialogImageSize=[integer] (default=200) [3.0.5]
-
 
 [Tools]
 LogToFile=[true/false] enable file logging

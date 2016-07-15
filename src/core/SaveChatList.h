@@ -37,7 +37,7 @@ public:
   static bool canBeSaved();
 
 public slots:
-  void save();
+  bool save();
 
 protected:
   void saveChats( QDataStream* );

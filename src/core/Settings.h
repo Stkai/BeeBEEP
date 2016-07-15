@@ -234,6 +234,8 @@ public:
   inline bool useReturnToSendMessage() const;
   inline void setChatUseYourNameInsteadOfYou( bool );
   inline bool chatUseYourNameInsteadOfYou() const;
+  inline void setChatClearAllReadMessages( bool );
+  inline bool chatClearAllReadMessages() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -537,6 +539,7 @@ private:
   bool m_showUserStatusBackgroundColor;
   bool m_useReturnToSendMessage;
   bool m_chatUseYourNameInsteadOfYou;
+  bool m_chatClearAllReadMessages;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -902,6 +905,8 @@ inline void Settings::setPostUsageStatistics( bool new_value ) { m_postUsageStat
 inline bool Settings::postUsageStatistics() const { return m_postUsageStatistics; }
 inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatUseYourNameInsteadOfYou = new_value; }
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
+inline void Settings::setChatClearAllReadMessages( bool new_value ) { m_chatClearAllReadMessages = new_value; }
+inline bool Settings::chatClearAllReadMessages() const { return m_chatClearAllReadMessages; }
 inline bool Settings::useNativeDialogs() const { return m_useNativeDialogs; }
 inline const QString& Settings::applicationUuid() const { return m_applicationUuid; }
 inline bool Settings::usePreviewFileDialog() const { return m_usePreviewFileDialog; }

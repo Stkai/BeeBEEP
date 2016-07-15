@@ -1,8 +1,10 @@
-BEEBEEP (Secure Lan Messanger)
-
+BEEBEEP (Secure Lan Messanger) - CHANGELOG
 
 BeeBEEP 3.0.7
 - Added "Find text" and "Print" options in history (shortcut or right click)
+- Fixed a bug in "Send offline messages"
+- Added CopyMastro plugin support
+- "Clear all read messages on closing chat window" option added
 
 BeeBEEP 3.0.6b
 - Fixed "Stays on top" option in Linux and MacOSX
@@ -15,7 +17,7 @@ BeeBEEP 3.0.6
 - Users can not be removed from group by the other members but they can leave the group if they want to (due serverless)
 - Windows UNC path are parsed and now it can be clickable
 - "Open selected text as url" option added in chat chat window (right click on selected text)
-- "Overwrite existings file" and "Ask me" option added
+- "Overwrite existing files" and "Ask me" option added
 - Fixed a bug in icon of default chat when a new message is arrived
 - Fixed a bug in alert beep when a new message is arrived
 - Fixed a bug on stay on top (windows)

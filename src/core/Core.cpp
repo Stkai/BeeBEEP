@@ -471,22 +471,14 @@ bool Core::saveChatMessages()
     return false;
   }
 
-  if( !Settings::instance().chatAutoSave() )
-  {
-    qDebug() << "Save chat messages option is disabled";
-    return false;
-  }
-
-  if( !SaveChatList::canBeSaved() )
-  {
-    qWarning() << "Chat messages can not be saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
-    return false;
-  }
-
   SaveChatList scl;
-  scl.save();
-  qDebug() << "Chat messages are saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
-  return true;
+  if( scl.save() )
+  {
+    qDebug() << "Chat messages are saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
+    return true;
+  }
+  else
+    return false;
 }
 
 void Core::checkNewVersion()
@@ -573,7 +565,7 @@ void Core::onPostUsageStatisticsJobCompleted()
 
 void Core::onTickEvent( int ticks )
 {
-  if( ticks % 15 == 0 && isConnected() && Settings::instance().autoSearchUsersWhenListIsEmpty() && connectedUsers() == 0 )
+  if( ticks % 30 == 0 && isConnected() && Settings::instance().autoSearchUsersWhenListIsEmpty() && connectedUsers() == 0 )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Auto search for users is enabled. It's time to check..." << ticks;
@@ -586,7 +578,7 @@ void Core::onTickEvent( int ticks )
   if( Protocol::instance().currentId() >= Protocol::instance().maxId() )
   {
     QString html_msg = QString( "%1 <b>%2</b>." ).arg( Bee::iconToHtml( ":/images/warning.png", "*!*" ),
-                                                       tr( "Max ID is reached. Please close and restart the application" ) );
+                                                       tr( "Max ID is reached. Please close and restart the application." ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Other );
   }
 }

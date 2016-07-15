@@ -715,6 +715,11 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatAutoSave() );
   act->setData( 18 );
 
+  act = mp_menuChat->addAction( tr( "Clear all read messages on closing window" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatClearAllReadMessages() );
+  act->setData( 47 );
+
   mp_menuChat->addSeparator();
 
   act = mp_menuChat->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
@@ -725,7 +730,7 @@ void GuiMain::createMenus()
 
   act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the sender's nickname and his message are in the same line" ) );
-  act->setCheckable( true );
+    act->setCheckable( true );
   act->setChecked( Settings::instance().chatCompact() );
   act->setData( 1 );
 
@@ -1377,8 +1382,30 @@ QMenu* GuiMain::gameMenu( GameInterface* gi )
   return menu_game;
 }
 
+void GuiMain::startExternalApplicationFromActionData()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( !act )
+    return;
+
+  QString application_path = act->data().toString();
+  qDebug() << "Starting external application:" << qPrintable( application_path );
+  if( !QDesktopServices::openUrl( QUrl::fromLocalFile( application_path ) ) )
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1" ).arg( application_path ), tr( "Ok" ) );
+}
+
 void GuiMain::createPluginWindows()
 {
+#ifdef Q_OS_WIN
+  QString copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
+  if( QFile::exists( copy_mastro_path ) )
+  {
+    QAction* act = mp_barMain->addAction( QIcon( ":/images/CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
+    act->setToolTip( tr( "Start the new application to copy file and folders by Marco Mastroddi" ) );
+    act->setData( copy_mastro_path );
+  }
+#endif
+
   if( PluginManager::instance().games().size() <= 0 )
     return;
 
@@ -1635,6 +1662,9 @@ void GuiMain::settingsChanged()
     break;
   case 46:
     Settings::instance().setShowChatMessageOnTray( act->isChecked() );
+    break;
+  case 47:
+    Settings::instance().setChatClearAllReadMessages( act->isChecked() );
     break;
   case 99:
     break;

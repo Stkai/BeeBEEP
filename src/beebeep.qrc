@@ -145,5 +145,6 @@
         <file>images/send-folder.png</file>
         <file>images/sharebox.png</file>
         <file>images/upload-box.png</file>
+        <file>images/CopyMastro.png</file>
     </qresource>
 </RCC>

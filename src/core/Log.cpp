@@ -175,7 +175,7 @@ bool Log::dumpLogToFile()
     return false;
   }
 
-  if( m_logList.isEmpty() )
+  if( m_logList.empty() )
     return false;
 
   foreach( LogNode ln, m_logList )
@@ -190,7 +190,7 @@ bool Log::dumpLogToFile()
 QString Log::logNodeToString( const LogNode& ln ) const
 {
   QString sHeader = messageTypeToString( ln.type() );
-  return QString( "%1%2%3%4" ).arg( QDateTime::currentDateTime().toString( "hh:mm:ss" ) )
+  return QString( "%1%2%3%4" ).arg( QDateTime::currentDateTime().toString( "yyyy-MM-dd hh:mm:ss" ) )
                                       .arg( sHeader.isEmpty() ? " " : QString( " %1 " ).arg( sHeader ) )
                                       .arg( ln.text() )
                                       .arg( ln.note().isEmpty() ? "" : QString( " (%1)" ).arg( ln.note() ) );
@@ -219,7 +219,7 @@ void Log::add( QtMsgType mt, const QString& log_txt, const QString& log_note )
     abort();
   }
 
-  m_logList.append( ln );
+  m_logList.push_back( ln );
 }
 
 #if QT_VERSION >= 0x050000

@@ -28,6 +28,7 @@
 #include <QFile>
 #include <QStringList>
 #include <QTextStream>
+#include <list>
 
 
 class LogNode
@@ -61,7 +62,7 @@ public:
 
   void add( QtMsgType, const QString& log_txt, const QString& log_note );
   inline void clear();
-  inline const QList<LogNode>& toList() const;
+  inline const std::list<LogNode>& toList() const;
 
   QString messageTypeToString( QtMsgType ) const;
   QString logNodeToString( const LogNode& ) const;
@@ -96,14 +97,14 @@ private:
 
   QFile m_logFile;
   QTextStream m_logStream;
-  QList<LogNode> m_logList;
+  std::list<LogNode> m_logList;
 
 };
 
 
 // Inline Functions
 inline void Log::clear() { m_logList.clear(); }
-inline const QList<LogNode>& Log::toList() const { return m_logList; }
+inline const std::list<LogNode>& Log::toList() const { return m_logList; }
 
 
 #endif // BEEBEEP_LOG_H

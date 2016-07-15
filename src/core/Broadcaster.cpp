@@ -229,6 +229,7 @@ int Broadcaster::updateAddresses()
 
   m_broadcastAddresses.clear();
   m_ipAddresses.clear();
+  m_peerAddresses.clear();
   QHostAddress ha_broadcast;
 
   if( !Settings::instance().broadcastAddressesInFileHosts().isEmpty() )
@@ -239,7 +240,7 @@ int Broadcaster::updateAddresses()
       if( na.isHostAddressValid() )
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "Network address in hosts parsed:" << na.toString();
+        qDebug() << "Network address saved in hosts parsed:" << na.toString();
 #endif
         if( na.hostPort() > 0 )
           addPeerAddress( na );
@@ -261,6 +262,9 @@ int Broadcaster::updateAddresses()
   {
     foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
     {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Network address saved in settings parsed:" << s_address;
+#endif
       ha_broadcast = QHostAddress( s_address );
       addAddressToList( ha_broadcast );
     }
@@ -273,7 +277,13 @@ int Broadcaster::updateAddresses()
     {
       ur = Protocol::instance().loadUserRecord( user_path );
       if( ur.isValid() )
-        addPeerAddress( NetworkAddress( ur.hostAddress(), ur.hostPort() ) );
+      {
+        NetworkAddress na( ur.hostAddress(), ur.hostPort() );
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Network address saved in user path list parsed:" << na.toString();
+#endif
+        addPeerAddress( na );
+      }
       else
         qWarning() << "Broadcaster has found an invalid host address in settings:" << user_path;
     }
@@ -301,6 +311,10 @@ bool Broadcaster::addAddressToList( const QHostAddress& host_address )
 
   if( m_broadcastAddresses.contains( host_address ) )
     return false;
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Broadcaster tries to add address to list:" << qPrintable( host_address.toString() );
+#endif
 
   if( host_address == m_baseBroadcastAddress && !Settings::instance().parseBroadcastAddressesAll() )
   {

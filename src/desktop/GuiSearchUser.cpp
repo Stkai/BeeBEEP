@@ -95,7 +95,7 @@ void GuiSearchUser::loadSettings()
   mp_sbMaxUsersToContact->setValue( Settings::instance().maxUsersToConnectInATick() );
 
   enableVerbose();
-  mp_leWorkgroups->setFocus();
+  mp_teAddressesInSettings->setFocus();
 }
 
 void GuiSearchUser::checkAndSearch()

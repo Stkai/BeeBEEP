@@ -143,6 +143,7 @@ Settings::Settings()
   m_previewFileDialogGeometry = "";
   m_previewFileDialogImageSize = 200;
   m_maxUsersToConnectInATick = 20;
+  m_showHomeAsDefaultPage = true;
 }
 
 void Settings::createApplicationUuid()
@@ -759,6 +760,7 @@ void Settings::load()
   m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
   m_useReturnToSendMessage = sets->value( "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
   m_chatUseYourNameInsteadOfYou = sets->value( "UseYourNameInsteadOfYou", false ).toBool();
+  m_chatClearAllReadMessages = sets->value( "ClearAllReadMessages", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -879,7 +881,7 @@ void Settings::load()
     m_showChatToolbar = false;
   else
     m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
-  m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", true ).toBool();
+  m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", m_showHomeAsDefaultPage ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
@@ -1066,6 +1068,7 @@ void Settings::save()
   sets->setValue( "ImagePreviewHeight", m_imagePreviewHeight );
   sets->setValue( "UseKeyReturnToSendMessage", m_useReturnToSendMessage );
   sets->setValue( "UseYourNameInsteadOfYou", m_chatUseYourNameInsteadOfYou );
+  sets->setValue( "ClearAllReadMessages", m_chatClearAllReadMessages );
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "LocalColor", m_localUser.color() );

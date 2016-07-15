@@ -51,7 +51,7 @@ bool SaveChatList::canBeSaved()
     return false;
 }
 
-void SaveChatList::save()
+bool SaveChatList::save()
 {
   QString file_name = Settings::instance().savedChatsFilePath();
 
@@ -63,13 +63,13 @@ void SaveChatList::save()
       qDebug() << "Saved chat file removed:" << qPrintable( file_name );
       file.remove();
     }
-    return;
+    return false;
   }
 
   if( !file.open( QIODevice::WriteOnly ) )
   {
     qWarning() << "Unable to open file" << qPrintable( file_name ) << ": saving chat messages aborted";
-    return;
+    return false;
   }
 
   qDebug() << "Saving chat messages in" << qPrintable( file_name );
@@ -87,6 +87,7 @@ void SaveChatList::save()
   saveChats( &stream );
 
   file.close();
+  return true;
 }
 
 void SaveChatList::saveChats( QDataStream* stream )

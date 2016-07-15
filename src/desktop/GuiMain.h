@@ -188,6 +188,7 @@ private slots:
   void onShareDesktopImageAvailable( const User&, const QPixmap& );
   void onShareDesktopCloseEvent( VNumber );
 #endif
+  void startExternalApplicationFromActionData();
 
 protected:
   void keyPressEvent( QKeyEvent* );

@@ -137,20 +137,21 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
   QStringList sl = message_data.split( PROTOCOL_FIELD_SEPARATOR, QString::KeepEmptyParts );
   if( sl.size() < 7 )
   {
-    qWarning() << "Invalid number of fields in message:" << message_data;
+    qWarning() << "Invalid number of fields in message:" << message_data.simplified();
     return m;
   }
+
   m.setType( messageType( sl.takeFirst() ) );
   if( !m.isValid() )
   {
-    qWarning() << "Invalid message type:" << message_data;
+    qWarning() << "Invalid message type:" << message_data.simplified();
     return m;
   }
 
   VNumber msg_id = Bee::qVariantToVNumber( sl.takeFirst() );
   if( msg_id == ID_INVALID )
   {
-    qWarning() << "Invalid message id:" << message_data;
+    qWarning() << "Invalid message id:" << message_data.simplified();
     m.setType( Message::Undefined );
     return m;
   }
@@ -160,7 +161,7 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
   int msg_size = sl.takeFirst().toInt( &ok );
   if( !ok )
   {
-    qWarning() << "Invalid message size:" << message_data;
+    qWarning() << "Invalid message size:" << message_data.simplified();
     m.setType( Message::Undefined );
     return m;
   }
@@ -168,7 +169,7 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
   int msg_flags = sl.takeFirst().toInt( &ok );
   if( !ok )
   {
-    qWarning() << "Invalid message flags:" << message_data;
+    qWarning() << "Invalid message flags:" << message_data.simplified();
     m.setType( Message::Undefined );
     return m;
   }
@@ -179,7 +180,7 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
   QDateTime dt_timestamp = QDateTime::fromString( sl.takeFirst(), Qt::ISODate );
   if( !dt_timestamp.isValid() )
   {
-    qWarning() << "Invalid message timestamp:" << message_data;
+    qWarning() << "Invalid message timestamp:" << message_data.simplified();
     m.setType( Message::Undefined );
     return m;
   }
