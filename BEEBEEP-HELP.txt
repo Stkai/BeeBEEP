@@ -25,10 +25,9 @@ BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the lo
 DefaultListenerPort= is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475) [1.0.0]
 DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the connected users (default 6476) [1.0.0]
 SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data (in windows %userprofile%\Documents\beebeep-data) (default=false) [1.0.3]
-SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) (default=false) [1.0.0]
+SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) (default=false) [1.0.3]
 AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP (default=false) [1.0.0]
-DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder=[true/false] [1.0.3]
-AddAccountNameToDataFolder=[true/false] you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath (default=false) [1.0.3]
+DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and AddAccountNameToDataFolder=[true/false] you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath (default=false) [1.0.3]
 UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (default=true)
 PreventMultipleConnectionsFromSingleHostAddress=[true/false] if enabled BeeBEEP blocks multiple connections from single IP address (default=true)
 PreferredSubnets=(Strings "" comma separated) you can specify your subnets. BeeBEEP search your default IP address in these entries (for example ="10.184.9.255,10.184.15.255") (default="") [3.0.1]

@@ -545,7 +545,7 @@ void GuiMain::checkViewActions()
   mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
   mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
-  mp_actViewShareBox->setEnabled( mp_stackedWidget->currentWidget() != mp_shareBox );
+  mp_actViewShareBox->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareBox );
   mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().toList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
 
@@ -1433,7 +1433,7 @@ void GuiMain::updateUser( const User& u )
   mp_shareBox->updateUser( u );
   mp_shareNetwork->updateUser( u );
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-    fl_chat->updateUser( u );
+    fl_chat->updateUser( u, mp_core->isConnected() );
   checkViewActions();
 }
 
@@ -1933,6 +1933,7 @@ void GuiMain::updateStatusIcon()
   QAction* act = mp_menuStatus->menuAction();
   act->setToolTip( tip );
   act->setText( Bee::capitalizeFirstLetter( Bee::userStatusToString( status_type ), true ) );
+  refreshTitle( Settings::instance().localUser() );
 }
 
 void GuiMain::changeStatusDescription()
@@ -3088,7 +3089,6 @@ void GuiMain::checkChat( VNumber chat_id )
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
     fl_chat->guiChat()->reloadChat();
-
 }
 
 bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
@@ -3618,7 +3618,6 @@ QWidget* GuiMain::activeChatWindow()
     if( fl_chat->isActiveWindow() )
       return (QWidget*)fl_chat;
   }
-
   return (QWidget*)this;
 }
 
@@ -3933,7 +3932,6 @@ void GuiMain::onTickEvent( int ticks )
 
   if( mp_core->hasFileTransferInProgress() )
     mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? QIcon( ":/images/file-transfer-progress.png" ) : QIcon( ":/images/file-transfer.png" ) );
-
 }
 
 void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )

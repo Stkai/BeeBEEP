@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "ChatManager.h"
 #include "GuiFloatingChat.h"
 #include "GuiEmoticons.h"
@@ -97,14 +98,17 @@ bool GuiFloatingChat::setChatId( VNumber chat_id )
   return mp_chat->setChatId( chat_id, true );
 }
 
-void GuiFloatingChat::updateUser( const User& u )
+void GuiFloatingChat::updateUser( const User& u, bool is_connected )
 {
   Chat c = ChatManager::instance().chat( mp_chat->chatId() );
   if( !c.hasUser( u.id() ) )
     return;
 
   if( c.isPrivateForUser( u.id() ) )
-    setWindowTitle( u.name() );
+  {
+    QString window_title = QString( "%1 (%2)" ).arg( u.name(), is_connected ? Bee::userStatusToString( u.status() ) : tr( "offline" ) );
+    setWindowTitle( window_title );
+  }
 
   mp_chat->updateUser( u );
 }

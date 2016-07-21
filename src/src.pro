@@ -14,7 +14,7 @@ message( Target folder: $$DESTDIR )
 
 TEMPLATE = app
 !macx:DEFINES += MAKE_BEEBEEP_PORTABLE
-#DEFINES += BEEBEEP_DISABLE_FILE_TRANSFER
+DEFINES += BEEBEEP_DISABLE_FILE_TRANSFER
 #DEFINES += BEEBEEP_DISABLE_SEND_MESSAGE
 
 TARGET = beebeep
@@ -23,7 +23,7 @@ QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
 
 unix:!macx:!android: equals(QT_MAJOR_VERSION, 4) {
-  greaterThan(QT_MINOR_VERSION, 6 ): {
+  greaterThan(QT_MINOR_VERSION, 6): {
     DEFINES += BEEBEEP_USE_PHONON4
     QT += phonon
   }
