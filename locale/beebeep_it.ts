@@ -1482,6 +1482,10 @@ Inserisci un nome differente.</translation>
         <source>Window&apos;s geometry and state saved</source>
         <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
     </message>
+    <message>
+        <source>offline</source>
+        <translation>non in linea</translation>
+    </message>
 </context>
 <context>
     <name>GuiGroupList</name>
@@ -3556,6 +3560,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>Clear all read messages on closing window</source>
         <translation>Cancella tutti i messaggi letti alla chiusura della finestra</translation>
+    </message>
+    <message>
+        <source>Show file notification</source>
+        <translation>Mostra le notifiche sul trasferimento dei file</translation>
+    </message>
+    <message>
+        <source>Start the new application to copy file and folders by Marco Mastroddi</source>
+        <translation>Usa la nuova applicazione per copiare i file e le cartelle sviluppata da Marco Mastroddi</translation>
+    </message>
+    <message>
+        <source>New file from %1</source>
+        <translation>Nuovo file da %1</translation>
     </message>
 </context>
 <context>
