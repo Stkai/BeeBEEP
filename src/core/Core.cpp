@@ -73,7 +73,7 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
-  connect( mp_fileTransfer, SIGNAL( completed( int, VNumber, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( int, VNumber, const FileInfo& ) ) );
+  connect( mp_fileTransfer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, VNumber, const FileInfo& ) ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_shareDesktop, SIGNAL( shareDesktopDataReady( const QByteArray& ) ), this, SLOT( onShareDesktopDataReady( const QByteArray& ) ) );
 #endif
@@ -454,6 +454,18 @@ void Core::checkNetworkInterface()
                                NetworkManager::instance().localInterfaceHardwareAddress() ), DispatchToChat,
                                ChatMessage::Connection );
       emit networkInterfaceIsDown();
+      return;
+    }
+
+    if( NetworkManager::instance().isMainInterfaceUnavailable() )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Main network interface is not available. Searching...";
+#endif
+      if( NetworkManager::instance().searchLocalHostAddress() )
+        QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );
+      else
+        qWarning() << "Network iterface not found. Please check your connection";
     }
   }
   else

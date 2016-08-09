@@ -62,10 +62,10 @@ QList<NetworkEntry> NetworkManager::availableNetworkEntries() const
 
 bool NetworkManager::isMainInterfaceUp() const
 {
-  if( m_localInterfaceHardwareAddress.isEmpty() )
+  if( isMainInterfaceUnavailable() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Unable to check if local interface hardware is up";
+    qDebug() << "Unable to check if local interface hardware is up. Main interface is unavailable";
 #endif
     return false;
   }

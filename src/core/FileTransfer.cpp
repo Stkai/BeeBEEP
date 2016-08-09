@@ -154,7 +154,7 @@ void FileTransfer::addFileInfoList( const QList<FileInfo>& file_info_list )
 void FileTransfer::incomingConnection( qintptr socket_descriptor )
 {
   FileTransferPeer *upload_peer = new FileTransferPeer( this );
-  upload_peer->setTransferType( FileTransferPeer::Upload );
+  upload_peer->setTransferType( FileInfo::Upload );
   upload_peer->setId( Protocol::instance().newId() );
   m_peers.append( upload_peer );
   setupPeer( upload_peer, socket_descriptor );
@@ -182,7 +182,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
-  connect( transfer_peer, SIGNAL( completed( int, VNumber, const FileInfo& ) ), this, SIGNAL( completed( int, VNumber, const FileInfo& ) ) );
+  connect( transfer_peer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor );
   int delay = Random::number( 1, 9 ) * 100;
@@ -323,9 +323,9 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 void FileTransfer::downloadFile( const FileInfo& fi )
 {
   FileTransferPeer *download_peer = new FileTransferPeer( this );
-  download_peer->setTransferType( FileTransferPeer::Download );
+  download_peer->setTransferType( FileInfo::Download );
   download_peer->setId( Protocol::instance().newId() );
-  download_peer->setFileInfo( fi );
+  download_peer->setFileInfo( FileInfo::Download, fi );
   download_peer->setInQueue();
   m_peers.append( download_peer );
 #ifdef BEEBEEP_DEBUG

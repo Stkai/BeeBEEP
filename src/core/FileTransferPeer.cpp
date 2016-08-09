@@ -28,7 +28,7 @@
 
 
 FileTransferPeer::FileTransferPeer( QObject *parent )
-  : QObject( parent ), m_transferType( FileTransferPeer::Upload ), m_id( ID_INVALID ),
+  : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
     m_fileInfo( 0, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ), m_messageAuth(),
     m_time( QTime::currentTime() ), m_socketDescriptor( 0 )
@@ -70,9 +70,10 @@ void FileTransferPeer::closeAll()
   }
 }
 
-void FileTransferPeer::setFileInfo( const FileInfo& fi )
+void FileTransferPeer::setFileInfo( FileInfo::TransferType ftt, const FileInfo& fi )
 {
   m_fileInfo = fi;
+  m_fileInfo.setTransferType( ftt );
   m_file.setFileName( m_fileInfo.path() );
   qDebug() << name() << "init the file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.path() ) );
 }
@@ -111,7 +112,7 @@ void FileTransferPeer::setTransferCompleted()
   m_state = FileTransferPeer::Completed;
   closeAll();
   emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
-  emit completed( (int)m_transferType, userId(), m_fileInfo );
+  emit completed( id(), userId(), m_fileInfo );
   deleteLater();
 }
 

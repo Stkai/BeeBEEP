@@ -318,6 +318,8 @@ public:
   inline void setShowChatMessageOnTray( bool );
   inline bool showChatMessageOnTray() const;
   inline int textSizeInChatMessagePreviewOnTray() const;
+  inline void setShowFileTransferCompletedOnTray( bool );
+  inline bool showFileTransferCompletedOnTray() const;
 
   inline const QStringList& localShare() const;
   inline void setLocalShare( const QStringList& );
@@ -477,6 +479,7 @@ private:
   bool m_disableFileTransfer;
   bool m_disableSendMessage;
   bool m_useEasyConnection;
+  bool m_startMinimized;
 
   // Ini
   bool m_firstTime;
@@ -588,6 +591,7 @@ private:
   bool m_showOnlyMessageNotificationOnTray;
   bool m_showChatMessageOnTray;
   int m_textSizeInChatMessagePreviewOnTray;
+  bool m_showFileTransferCompletedOnTray;
 
   bool m_fileTransferIsEnabled;
   QStringList m_localShare;
@@ -917,6 +921,8 @@ inline void Settings::setStatsPostDate( const QDate& new_value ) { m_statsPostDa
 inline const QDate& Settings::statsPostDate() const { return m_statsPostDate; }
 inline bool Settings::canPostUsageStatistics() const { return m_postUsageStatistics && m_statsPostDate != QDate::currentDate(); }
 inline int Settings::textSizeInChatMessagePreviewOnTray() const { return m_textSizeInChatMessagePreviewOnTray; }
+inline void Settings::setShowFileTransferCompletedOnTray( bool new_value ) { m_showFileTransferCompletedOnTray = new_value; }
+inline bool Settings::showFileTransferCompletedOnTray() const { return m_showFileTransferCompletedOnTray; }
 inline bool Settings::autoSearchUsersWhenListIsEmpty() const { return m_autoSearchUsersWhenListIsEmpty; }
 inline bool Settings::useLowDelayOptionOnSocket() const { return m_useLowDelayOptionOnSocket; }
 inline bool Settings::hideMainToolbar() const { return m_hideMainToolbar; }

@@ -189,6 +189,7 @@ private slots:
   void onShareDesktopCloseEvent( VNumber );
 #endif
   void startExternalApplicationFromActionData();
+  void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
 
 protected:
   void keyPressEvent( QKeyEvent* );

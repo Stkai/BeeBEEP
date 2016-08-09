@@ -1,10 +1,13 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG
 
 BeeBEEP 3.0.7
+- ShareBox: new feature in beta (can share files like dropbox with all users connected)
 - Added "Find text" and "Print" options in history (shortcut or right click)
 - Fixed a bug in "Send offline messages"
 - Added CopyMastro plugin support
 - "Clear all read messages on closing chat window" option added
+- "File notification on system tray" option added
+- "StartMinimized" option added in beebeep.rc
 
 BeeBEEP 3.0.6b
 - Fixed "Stays on top" option in Linux and MacOSX
@@ -22,7 +25,7 @@ BeeBEEP 3.0.6
 - Fixed a bug in alert beep when a new message is arrived
 - Fixed a bug on stay on top (windows)
 - Added "HideMainToolbar", "HideChatToolbar", "HideUsersPanel" and "HideOtherPanels" options. They can be enabled in beebeep.rc
-- Added "UseEasyConnection" option to beebeep.rc 
+- Added "UseEasyConnection" option to beebeep.rc
 - Added "DisableFileTransfer" option in beebeep.rc
 - Added "DisableSendMessage" option in beebeep.rc
 - Added global shortcut for "Show all chat windows" (default CTRL+ALT+B)

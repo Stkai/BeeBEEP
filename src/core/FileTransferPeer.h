@@ -34,7 +34,6 @@ class FileTransferPeer : public QObject
   Q_OBJECT
 
 public:
-  enum TransferType { Download, Upload };
   enum TransferState { Unknown, Queue, Starting, Request, FileHeader, Transferring, Completed, Error, Cancelled };
 
   explicit FileTransferPeer( QObject *parent = 0 );
@@ -45,13 +44,13 @@ public:
   inline bool isInQueue() const;
   inline void removeFromQueue();
 
-  inline void setTransferType( TransferType );
+  inline void setTransferType( FileInfo::TransferType );
   inline bool isDownload() const;
   inline void setId( VNumber );
   inline VNumber id() const;
   inline VNumber userId() const;
   inline void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
-  void setFileInfo( const FileInfo& );
+  void setFileInfo( FileInfo::TransferType, const FileInfo& );
   inline const FileInfo& fileInfo() const;
 
   inline const Message& messageAuth() const; // Read below...
@@ -66,7 +65,7 @@ public:
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
-  void completed( int, VNumber, const FileInfo& );
+  void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
   void fileUploadRequest( const FileInfo& );
   void authenticationRequested();
 
@@ -101,7 +100,7 @@ protected:
   void sendDownloadDataConfirmation();
 
 protected:
-  TransferType m_transferType;
+  FileInfo::TransferType m_transferType;
   VNumber m_id;
   FileInfo m_fileInfo;
   QFile m_file;
@@ -123,8 +122,8 @@ inline void FileTransferPeer::setConnectionDescriptor( int new_value ) { m_socke
 inline void FileTransferPeer::setInQueue() { m_state = FileTransferPeer::Queue; }
 inline bool FileTransferPeer::isInQueue() const { return m_state == FileTransferPeer::Queue; }
 inline void FileTransferPeer::removeFromQueue() { m_state = FileTransferPeer::Starting; }
-inline void FileTransferPeer::setTransferType( FileTransferPeer::TransferType new_value ) { m_transferType = new_value; }
-inline bool FileTransferPeer::isDownload() const { return m_transferType == FileTransferPeer::Download; }
+inline void FileTransferPeer::setTransferType( FileInfo::TransferType new_value ) { m_transferType = new_value; }
+inline bool FileTransferPeer::isDownload() const { return m_transferType == FileInfo::Download; }
 inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber FileTransferPeer::id() const { return m_id; }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }

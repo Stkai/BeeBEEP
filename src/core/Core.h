@@ -143,6 +143,7 @@ signals:
   void userChanged( const User& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
+  void fileTransferCompleted( VNumber, const User&, const FileInfo& );
   void fileShareAvailable( const User& );
   void updateChat( VNumber );
   void localShareListAvailable();
@@ -154,7 +155,6 @@ signals:
   void networkInterfaceIsUp();
   void shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& );
   void shareBoxUnavailable( const User&, const QString& );
-  void fileTransferCompleted( VNumber, const FileInfo& );
   void shareBoxDownloadCompleted( VNumber, const FileInfo& );
   void shareBoxUploadCompleted( VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -186,7 +186,7 @@ protected slots:
   void addListToLocalShare();
   void addFolderToFileTransfer();
   void sendShareBoxList();
-  void onFileTransferCompleted( int, VNumber, const FileInfo& );
+  void onFileTransferCompleted( VNumber, VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopDataReady( const QByteArray& );
 #endif

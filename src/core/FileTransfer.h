@@ -60,7 +60,7 @@ public:
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
-  void completed( int, VNumber, const FileInfo& );
+  void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
   void userConnected( VNumber peer_id, const QHostAddress& peer_address, const Message& hello_message );
   void listening();
 

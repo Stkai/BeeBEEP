@@ -746,20 +746,28 @@ void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QStri
   sendFile( to_user_id, fi.path(), to_path, true );
 }
 
-void Core::onFileTransferCompleted( int ftt, VNumber user_id, const FileInfo& fi )
+void Core::onFileTransferCompleted( VNumber peer_id, VNumber user_id, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Transfer completed of file" << fi.path() << "and send signals";
 #endif
+
+  User u = UserManager::instance().findUser( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user" << user_id << "found on file transfer completed";
+    return;
+  }
+
   if( fi.isInShareBox() )
   {
-    if( ftt == FileTransferPeer::Upload )
-      emit shareBoxUploadCompleted( user_id, fi );
-    else
+    if( fi.isDownload() )
       emit shareBoxDownloadCompleted( user_id, fi );
+    else
+      emit shareBoxUploadCompleted( user_id, fi );
   }
   else
-    emit fileTransferCompleted( user_id, fi );
+    emit fileTransferCompleted( peer_id, u, fi );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

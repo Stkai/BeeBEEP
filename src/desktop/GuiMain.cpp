@@ -112,6 +112,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
+
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( mp_core, SIGNAL( updateChat( VNumber ) ), this, SLOT( checkChat( VNumber ) ) );
   connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
@@ -1130,6 +1132,11 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showChatMessageOnTray() );
   act->setData( 46 );
 
+  act = mp_menuTrayIcon->addAction( tr( "Show file notification" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showFileTransferCompletedOnTray() );
+  act->setData( 48 );
+
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actQuit );
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
@@ -1396,15 +1403,38 @@ void GuiMain::startExternalApplicationFromActionData()
 
 void GuiMain::createPluginWindows()
 {
+  QString copy_mastro_path = "";
+
 #ifdef Q_OS_WIN
-  QString copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
-  if( QFile::exists( copy_mastro_path ) )
+  copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
+#endif
+
+#ifdef Q_OS_MAC
+  foreach( QString folder_path, QStandardPaths::standardLocations( QStandardPaths::DesktopLocation ) )
   {
+    QString app_path = QString( "%1/%2" ).arg( folder_path, QString( "CopyMastro.app" ) );
+    if( QFile::exists( app_path ) )
+      copy_mastro_path = app_path;
+  }
+
+  if( copy_mastro_path.isEmpty() )
+  {
+    foreach( QString folder_path, QStandardPaths::standardLocations( QStandardPaths::ApplicationsLocation ) )
+    {
+      QString app_path = QString( "%1/%2" ).arg( folder_path, QString( "CopyMastro.app" ) );
+      if( QFile::exists( app_path ) )
+        copy_mastro_path = app_path;
+    }
+  }
+#endif
+
+  if( !copy_mastro_path.isEmpty() && QFile::exists( copy_mastro_path ) )
+  {
+    qDebug() << "CopyMastro is found:" << qPrintable( copy_mastro_path );
     QAction* act = mp_barMain->addAction( QIcon( ":/images/CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
     act->setToolTip( tr( "Start the new application to copy file and folders by Marco Mastroddi" ) );
     act->setData( copy_mastro_path );
   }
-#endif
 
   if( PluginManager::instance().games().size() <= 0 )
     return;
@@ -1665,6 +1695,9 @@ void GuiMain::settingsChanged()
     break;
   case 47:
     Settings::instance().setChatClearAllReadMessages( act->isChecked() );
+    break;
+  case 48:
+    Settings::instance().setShowFileTransferCompletedOnTray( act->isChecked() );
     break;
   case 99:
     break;
@@ -4077,6 +4110,19 @@ void GuiMain::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, co
 void GuiMain::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   mp_core->uploadToShareBox( user_id, fi, to_path );
+}
+
+void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& fi )
+{
+  Q_UNUSED( peer_id );
+  if( fi.isDownload() && Settings::instance().showFileTransferCompletedOnTray() )
+  {
+    VNumber chat_id = ID_DEFAULT_CHAT;
+    Chat c = ChatManager::instance().privateChatForUser( u.id() );
+    if( c.isValid() )
+      chat_id = c.id();
+    mp_trayIcon->showNewFileArrived( chat_id, tr( "New file from %1" ).arg( u.name() ), false );
+  }
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

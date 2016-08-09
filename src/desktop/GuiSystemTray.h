@@ -36,6 +36,7 @@ public:
 
   explicit GuiSystemTray( QObject *parent = 0 );
 
+  void showNewFileArrived( VNumber, const QString&, bool );
   void showNewMessageArrived( VNumber, const QString&, bool );
   void showUserStatusChanged( VNumber, const QString& );
   void setUnreadMessages( VNumber, int );

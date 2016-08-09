@@ -67,7 +67,8 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
 
 void FileTransferPeer::startUpload( const FileInfo& fi )
 {
-  setFileInfo( fi );
+  setTransferType( FileInfo::Upload );
+  setFileInfo( FileInfo::Upload, fi );
   qDebug() << name() << "starts uploading" << qPrintable( Bee::convertToNativeFolderSeparator( fi.path() ) );
   if( m_socket.protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {

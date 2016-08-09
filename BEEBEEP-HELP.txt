@@ -44,6 +44,7 @@ DisableFileTransfer=[true/false] disable file transfer (default=false) [3.0.6]
 DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read only messenger (default=false) [3.0.6]
 UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session (the same of AskNicknameAtStartup=false
 UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
+StartMinimized = [true/false] If enabled BeeBEEP starts minimized (can be overruled in beeebeep.ini) (default=false) [3.0.7]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]
@@ -160,6 +161,8 @@ ShowHomeDatestamp=[true/false] (default=false) [3.0.5]
 UsePreviewFileDialog=[true/false] (default=true only in windows, in other os false) [3.0.4]
 PreviewFileDialogGeometry=(do not edit manually) [3.0.5]
 PreviewFileDialogImageSize=[integer] (default=200) [3.0.5]
+TextSizeInChatMessagePreviewOnTray=[integer] (default=40) [3.0.7]
+ShowFileTransferCompletedOnTray=[true/false] (default=true) [3.0.7]
 
 [Tools]
 LogToFile=[true/false] enable file logging

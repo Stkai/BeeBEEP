@@ -36,6 +36,7 @@ class NetworkManager
 public:
   bool searchLocalHostAddress();
   bool isMainInterfaceUp() const;
+  inline bool isMainInterfaceUnavailable() const;
 
   inline const QHostAddress& localHostAddress() const;
   inline const QHostAddress& localBroadcastAddress() const;
@@ -92,5 +93,6 @@ inline const QString& NetworkManager::localHostAddressScopeId() const { return m
 inline const QString& NetworkManager::localInterfaceHardwareAddress() const { return m_localInterfaceHardwareAddress; }
 inline bool NetworkManager::isNetworkEntryAvailable( const NetworkEntry& ne ) const { return ne.isValid() && !ne.isLoopback() && ne.isProtocolValid() && !ne.isLinkLocal(); }
 inline bool NetworkManager::isNetworkInterfaceAvailable( const QNetworkInterface& ni ) const {  return (ni.flags() & QNetworkInterface::IsUp) && (ni.flags() & QNetworkInterface::IsRunning) && (ni.flags() & ~QNetworkInterface::IsLoopBack); }
+inline bool NetworkManager::isMainInterfaceUnavailable() const { return m_localInterfaceHardwareAddress.isEmpty(); }
 
 #endif // BEEBEEP_NETWORKMANAGER_H

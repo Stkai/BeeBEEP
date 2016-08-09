@@ -93,6 +93,7 @@ Settings::Settings()
 #else
   m_disableSendMessage = false;
 #endif
+  m_startMinimized = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -265,6 +266,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableFileTransfer", m_disableFileTransfer );
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
+    sets->setValue( "StartMinimized", m_startMinimized );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -337,6 +339,7 @@ void Settings::loadRcFile()
 #endif
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
+  m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
   sets->endGroup();
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
@@ -871,9 +874,10 @@ void Settings::load()
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
-  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 3000 ).toInt(), 1000 );
+  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 5000 ).toInt(), 1000 );
   m_showChatMessageOnTray = sets->value( "ShowChatMessageOnTray", false ).toBool();
   m_textSizeInChatMessagePreviewOnTray = sets->value( "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
+  m_showFileTransferCompletedOnTray = sets->value( "ShowFileTransferCompletedOnTray", true ).toBool();
   m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
@@ -894,7 +898,7 @@ void Settings::load()
   m_emoticonInRecentMenu = sets->value( "EmoticonInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useNativeEmoticons = sets->value( "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
-  m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", false ).toBool();
+  m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", m_startMinimized ).toBool();
   m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
   m_alwaysOpenNewFloatingChat = sets->value( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat ).toBool();
@@ -1147,6 +1151,7 @@ void Settings::save()
   sets->setValue( "ShowNotificationOnTrayTimeout", m_trayMessageTimeout );
   sets->setValue( "ShowChatMessageOnTray", m_showChatMessageOnTray );
   sets->setValue( "TextSizeInChatMessagePreviewOnTray", m_textSizeInChatMessagePreviewOnTray );
+  sets->setValue( "ShowFileTransferCompletedOnTray", m_showFileTransferCompletedOnTray );
   sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );

@@ -31,11 +31,17 @@ GuiSystemTray::GuiSystemTray( QObject *parent )
   setDefaultIcon();
 }
 
-void GuiSystemTray::showNewMessageArrived( VNumber chat_id, const QString& msg, bool lont_time )
+void GuiSystemTray::showNewMessageArrived( VNumber chat_id, const QString& msg, bool long_time )
 {
   m_chatId = chat_id;
   setMessageIcon();
-  showMessageInTray( msg, lont_time );
+  showMessageInTray( msg, long_time );
+}
+
+void GuiSystemTray::showNewFileArrived( VNumber chat_id, const QString& msg, bool long_time )
+{
+  m_chatId = chat_id;
+  showMessageInTray( msg, long_time );
 }
 
 void GuiSystemTray::showUserStatusChanged( VNumber chat_id, const QString& msg )
@@ -78,10 +84,7 @@ void GuiSystemTray::showMessageInTray( const QString& msg, bool long_time )
     int min_time = 1000;
     int show_time = qMax( min_time, Settings::instance().trayMessageTimeout() );
     if( long_time )
-    {
-      min_time = 3000;
       show_time = qMax( 5000, show_time * 2 );
-    }
 
     showMessage( msg, Settings::instance().programName(), QSystemTrayIcon::Information, show_time );
   }
