@@ -123,6 +123,7 @@ void GuiShareBox::updateMyBox()
   mp_pbMyUpdate->setEnabled( false );
   if( mp_cbEnableMyBox->isChecked() && Settings::instance().fileTransferIsEnabled() )
   {
+    mp_myBox->setEnabled( true );
     QString my_path = QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() ).arg( m_myCurrentFolder );
     mp_lMyBox->setToolTip( my_path );
     emit shareBoxRequest( ID_LOCAL_USER, m_myCurrentFolder );
@@ -134,6 +135,7 @@ void GuiShareBox::updateMyBox()
     m_myCurrentFolder = "";
     mp_lMyBox->setToolTip( "" );
     mp_lMyBox->setText( tr( "Your ShareBox is disabled" ) );
+    mp_myBox->setDisabled( true );
   }
 }
 
