@@ -222,7 +222,7 @@ void GuiShareNetwork::loadShares( const User& u )
 #endif
   showStatus( status_msg );
   setCursor( Qt::ArrowCursor );
-  QTimer::singleShot( 500, this, SLOT( processNextItemInQueue() ) );
+  QTimer::singleShot( 1000, this, SLOT( processNextItemInQueue() ) );
 }
 
 void GuiShareNetwork::processNextItemInQueue()
@@ -230,7 +230,7 @@ void GuiShareNetwork::processNextItemInQueue()
   setCursor( Qt::WaitCursor );
   m_fileInfoList.setUpdatesEnabled( false );
 
-  for( int i = 0; i < 50; i++ )
+  for( int i = 0; i < 100; i++ )
   {
     if( m_queue.isEmpty() )
       break;
@@ -253,7 +253,7 @@ void GuiShareNetwork::processNextItemInQueue()
   setCursor( Qt::ArrowCursor );
 
   if( !m_queue.isEmpty() )
-    QTimer::singleShot( 0, this, SLOT( processNextItemInQueue() ) );
+    QTimer::singleShot( 1000, this, SLOT( processNextItemInQueue() ) );
 }
 
 void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )

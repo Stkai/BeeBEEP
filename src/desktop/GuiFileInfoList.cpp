@@ -290,10 +290,6 @@ int GuiFileInfoList::parseItem( QTreeWidgetItem* tw_item )
 
   if( item->isObjectFolder() && item->childCount() > 0  )
   {
-    //QList<FileInfo> folder_file_info_list = m_isLocal ? FileShare::instance().localFolder( item->folder() ) : FileShare::instance().networkFolder( item->userId(), item->folder() );
-    //addFileInfoListToList( item->userId(), folder_file_info_list );
-
-    //int item_count = folder_file_info_list.size();
     int item_count = 0;
 
     for( int i=0; i < item->childCount(); i++ )

@@ -495,7 +495,7 @@ void EmoticonManager::createEmojiFiles()
   {
     QString emoji_folder_name = QString( "../src/emojis/" ) + emoji_group_names.at( i ).toLower();
     QDir emoji_folder( emoji_folder_name );
-    QStringList file_list = emoji_folder.entryList();
+    QStringList file_list = emoji_folder.entryList( QDir::NoDotAndDotDot | QDir::NoSymLinks );
     foreach( QString s, file_list )
     {
       if( !s.contains( ".png" ) )
