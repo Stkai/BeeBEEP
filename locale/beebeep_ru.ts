@@ -4037,7 +4037,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <name>GuiShareBox</name>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="54"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="301"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="307"/>
         <source>ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4057,27 +4057,27 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="136"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="137"/>
         <source>Your ShareBox is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="160"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="164"/>
         <source>ShareBox is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="256"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="261"/>
         <source>%1 - Select the ShareBox folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="301"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="307"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="301"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="307"/>
         <source>is unavailable</source>
         <translation type="unfinished"></translation>
     </message>

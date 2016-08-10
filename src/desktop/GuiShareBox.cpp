@@ -149,6 +149,7 @@ void GuiShareBox::updateOutBox()
 #endif
   if( user_id > ID_INVALID && Settings::instance().fileTransferIsEnabled() )
   {
+    mp_outBox->setEnabled( true );
     if( user_id != m_userId )
       emit shareBoxRequest( user_id, "" );
     else
@@ -157,6 +158,7 @@ void GuiShareBox::updateOutBox()
   }
   else
   {
+    mp_outBox->setEnabled( false );
     mp_outBox->clearTree();
     m_outCurrentFolder = "";
     mp_lOutBox->setText( tr( "ShareBox is not available" ) );
@@ -192,6 +194,7 @@ void GuiShareBox::updateOutBox( const User& u, const QString& folder_path, const
 {
   m_userId = u.id();
   m_outCurrentFolder = folder_path;
+  mp_outBox->setEnabled( true );
   mp_outBox->setFileInfoList( file_info_list );
   if( !folder_path.isEmpty() )
     mp_outBox->addDotDotFolder();
@@ -279,6 +282,7 @@ void GuiShareBox::onShareBoxSelected( int )
     m_outCurrentFolder = "";
     m_userId = current_user_id;
     mp_outBox->clearTree();
+    mp_outBox->setEnabled( true );
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ShareBox requests list for user" << current_user_id;
 #endif
@@ -302,7 +306,10 @@ void GuiShareBox::onShareFolderUnavailable( const User& u, const QString& folder
   {
     mp_lOutBox->setText( tr( "%1 <b>%2</b>" ).arg( folder_path.isEmpty() ? tr( "ShareBox" ) : folder_path ).arg( tr( "is unavailable" ) ) );
     if( folder_path == m_outCurrentFolder )
+    {
       mp_outBox->clearTree();
+      mp_outBox->setEnabled( false );
+    }
   }
 }
 
