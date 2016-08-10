@@ -69,7 +69,6 @@ void BuildFileList::buildList()
               m_fileList.append( file_info );
           }
         }
-        qSort( m_fileList );
       }
       else
       {

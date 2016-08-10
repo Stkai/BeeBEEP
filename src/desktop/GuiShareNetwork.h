@@ -28,6 +28,7 @@
 #include "GuiFileInfoList.h"
 class User;
 
+typedef QPair<User, FileInfo> UserFileInfo;
 
 class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
 {
@@ -61,6 +62,7 @@ protected slots:
   void updateList();
   void openDownloadMenu( const QPoint& );
   void downloadSelected();
+  void processNextItemInQueue();
 
 protected:
   bool filterPassThrough( VNumber, const FileInfo& );
@@ -79,6 +81,7 @@ private:
   QAction* mp_actDownload;
 
   GuiFileInfoList m_fileInfoList;
+  QQueue<UserFileInfo> m_queue;
 
 };
 

@@ -174,27 +174,12 @@ void GuiShareNetwork::loadShares( const User& u )
 
   if( u.isStatusConnected() )
   {
-    FileInfo file_info_downloaded;
-
     foreach( FileInfo fi, FileShare::instance().network().values( u.id() ) )
     {
       if( fi.isValid() )
       {
         if( filterPassThrough( u.id(), fi ) )
-        {
-          item = m_fileInfoList.createFileItem( u, fi );
-
-          file_info_downloaded = FileShare::instance().downloadedFile( fi.fileHash() );
-          if( file_info_downloaded.isValid() )
-          {
-            showFileTransferCompleted( item, file_info_downloaded.path() );
-          }
-          else
-          {
-            item->setFilePath( "" );
-            item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to download %1" ).arg( fi.name() ) );
-          }
-        }
+          m_queue.enqueue( UserFileInfo( u, fi ) );
 
         file_shared++;
         share_size += fi.size();
@@ -237,6 +222,38 @@ void GuiShareNetwork::loadShares( const User& u )
 #endif
   showStatus( status_msg );
   setCursor( Qt::ArrowCursor );
+  QTimer::singleShot( 500, this, SLOT( processNextItemInQueue() ) );
+}
+
+void GuiShareNetwork::processNextItemInQueue()
+{
+  setCursor( Qt::WaitCursor );
+  m_fileInfoList.setUpdatesEnabled( false );
+
+  for( int i = 0; i < 50; i++ )
+  {
+    if( m_queue.isEmpty() )
+      break;
+    UserFileInfo ufi = m_queue.dequeue();
+    GuiFileInfoItem* item = m_fileInfoList.createFileItem( ufi.first, ufi.second );
+    FileInfo file_info_downloaded = FileShare::instance().downloadedFile(  ufi.second.fileHash() );
+    if( file_info_downloaded.isValid() )
+    {
+      showFileTransferCompleted( item, file_info_downloaded.path() );
+    }
+    else
+    {
+      item->setFilePath( "" );
+      item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to download %1" ).arg(  ufi.second.name() ) );
+    }
+  }
+
+  m_fileInfoList.setUpdatesEnabled( true );
+
+  setCursor( Qt::ArrowCursor );
+
+  if( !m_queue.isEmpty() )
+    QTimer::singleShot( 0, this, SLOT( processNextItemInQueue() ) );
 }
 
 void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
