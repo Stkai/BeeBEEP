@@ -26,7 +26,7 @@
 
 #include "ui_GuiShareNetwork.h"
 #include "GuiFileInfoList.h"
-class User;
+#include "User.h"
 
 typedef QPair<User, FileInfo> UserFileInfo;
 
