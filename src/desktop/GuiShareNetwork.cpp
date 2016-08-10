@@ -389,10 +389,17 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& p )
 
   if( selected_items )
   {
-    QString action_text = selected_items == 1 ? tr( "Download single file" ) : tr( "Download %1 selected files" ).arg( selected_items );
+    QAction* act = menu.addAction( QIcon( ":/images/download.png" ), "", this, SLOT( downloadSelected() ) );
+    QString action_text;
     if( selected_items >= Settings::instance().maxQueuedDownloads() )
-      action_text += QString( " (%1 %2)" ).arg( Settings::instance().maxQueuedDownloads() ).arg( tr( "MAX" ) );
-    menu.addAction( QIcon( ":/images/download.png" ), action_text, this, SLOT( downloadSelected() ) );
+    {
+      action_text += tr( "You cannot download more than %1 files" ).arg( Settings::instance().maxQueuedDownloads() );
+      act->setDisabled( true );
+    }
+    else
+      action_text = selected_items == 1 ? tr( "Download single file" ) : tr( "Download %1 selected files" ).arg( selected_items );
+    act->setText( action_text );
+
     menu.addSeparator();
     menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
     menu.addSeparator();

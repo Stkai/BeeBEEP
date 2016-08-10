@@ -351,7 +351,8 @@ void GuiShareLocal::openLocalSharesMenu( const QPoint& p )
 
   if( selected_items )
   {
-    menu.addAction( QIcon( ":/images/upload.png" ), tr( "%1 shared files" ).arg( selected_items )  );
+    QString selected_items_to_string = selected_items > Settings::instance().maxQueuedDownloads() ? QString( "%1+" ).arg( Settings::instance().maxQueuedDownloads() ) : QString::number( selected_items );
+    menu.addAction( QIcon( ":/images/upload.png" ), tr( "%1 shared files" ).arg( selected_items_to_string ) );
   }
   else
   {
