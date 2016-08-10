@@ -4525,7 +4525,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>MAX</source>
-        <translation>MAX</translation>
+        <translation type="obsolete">MAX</translation>
     </message>
     <message>
         <source>Expand all items</source>
@@ -4542,6 +4542,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Search</source>
         <translation>Cerca</translation>
+    </message>
+    <message>
+        <source>You cannot download more than %1 files</source>
+        <translation>Non puoi scaricare più di %1 file</translation>
     </message>
 </context>
 <context>

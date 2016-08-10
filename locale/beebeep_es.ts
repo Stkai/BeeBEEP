@@ -1336,17 +1336,17 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>GuiFileInfoList</name>
     <message>
-        <location filename="../src/desktop/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/desktop/GuiFileInfoList.cpp" line="43"/>
         <source>Shared folders and files</source>
         <translation>Compartir carpetas y archivos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/desktop/GuiFileInfoList.cpp" line="43"/>
         <source>Size</source>
         <translation>Tamaño</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileInfoList.cpp" line="42"/>
+        <location filename="../src/desktop/GuiFileInfoList.cpp" line="43"/>
         <source>Status</source>
         <translation>Estado</translation>
     </message>
@@ -3893,22 +3893,22 @@ Por favor, elija un nombre diferente.</translation>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="214"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="232"/>
         <source>Click to open %1</source>
         <translation>Clic para abrir %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="229"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="249"/>
         <source>%1 is already shared.</source>
         <translation>%1 ya está compartido.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="270"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="290"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>La transferencia de archivos está desactivada. Abra el menú de opciones para habilitarla.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="334"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="355"/>
         <source>%1 shared files</source>
         <translation>%1 archivos compartidos</translation>
     </message>
@@ -3999,67 +3999,71 @@ Por favor, elija un nombre diferente.</translation>
         <translation>%1 está buscando archivos compartidos en tu red</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="195"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="247"/>
         <source>Double click to download %1</source>
         <translation>Doble clic para descargar %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="234"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="219"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation>%1 ha compartido %2 archivos (%3)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="315"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="332"/>
         <source>Double click to open %1</source>
         <translation>Doble clic para abrir %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="317"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="334"/>
         <source>Transfer completed</source>
         <translation>Transferencia completa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="331"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="348"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation>%1 archivos se muestran en la lista (%2 están disponibles en tu red)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="333"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="350"/>
         <source>%1 files shared in your network</source>
         <translation>%1 archivos compartidos en tu red</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="396"/>
+        <source>You cannot download more than %1 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="400"/>
         <source>Download single file</source>
         <translation>Descargar un solo archivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="375"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="400"/>
         <source>Download %1 selected files</source>
         <translation>Descargar %1 archivos seleccionados</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="377"/>
         <source>MAX</source>
-        <translation>MAX</translation>
+        <translation type="obsolete">MAX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="380"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="404"/>
         <source>Clear selection</source>
         <translation>Limpiar selección</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="384"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="408"/>
         <source>Expand all items</source>
         <translation>Expandir todos los items</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="385"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="409"/>
         <source>Collapse all items</source>
         <translation>Colapsar todos los items</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="396"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="420"/>
         <source>Please select one or more files to download.</source>
         <translation>Por favor, seleccione uno o más archivos para descargar.</translation>
     </message>
