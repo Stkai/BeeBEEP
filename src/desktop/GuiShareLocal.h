@@ -59,6 +59,7 @@ protected slots:
   void openMySharesMenu( const QPoint& );
   void openLocalSharesMenu( const QPoint& );
   void clearAllPaths();
+  void processNextItemInQueue();
 
 protected:
   void addSharePath( const QString& );
@@ -77,6 +78,8 @@ private:
   QAction* mp_actClear;
 
   GuiFileInfoList m_fileInfoList;
+  QQueue<FileInfo> m_queue;
+
 };
 
 

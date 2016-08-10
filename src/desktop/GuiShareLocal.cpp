@@ -199,25 +199,45 @@ void GuiShareLocal::loadFileInfoInList()
 {
   int file_count = 0;
   FileSizeType total_file_size = 0;
-  GuiFileInfoItem* item;
 
   m_fileInfoList.clearTree();
-  m_fileInfoList.setUpdatesEnabled( false );
+  m_queue.clear();
 
   if( !FileShare::instance().local().isEmpty() )
   {
     foreach( FileInfo fi, FileShare::instance().local() )
     {
+      m_queue.enqueue( fi );
       file_count++;
       total_file_size += fi.size();
-      item = m_fileInfoList.createFileItem( Settings::instance().localUser(), fi );
-      item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Click to open %1" ).arg( fi.name() ) );
     }
   }
 
   setActionsEnabled( true );
-  m_fileInfoList.setUpdatesEnabled( true );
   showStats( file_count, total_file_size );
+  if( !m_queue.isEmpty() )
+    QTimer::singleShot( 0, this, SLOT( processNextItemInQueue() ) );
+}
+
+void GuiShareLocal::processNextItemInQueue()
+{
+  m_fileInfoList.setUpdatesEnabled( false );
+
+  for( int i = 0; i < 50; i++ )
+  {
+    if( m_queue.isEmpty() )
+      break;
+    FileInfo fi = m_queue.dequeue();
+    GuiFileInfoItem* item = m_fileInfoList.createFileItem( Settings::instance().localUser(), fi );
+    item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Click to open %1" ).arg( fi.name() ) );
+  }
+
+  m_fileInfoList.setUpdatesEnabled( true );
+
+  if( m_queue.isEmpty() )
+    setActionsEnabled( true );
+  else
+    QTimer::singleShot( 0, this, SLOT( processNextItemInQueue() ) );
 }
 
 void GuiShareLocal::addSharePath( const QString& sp )
