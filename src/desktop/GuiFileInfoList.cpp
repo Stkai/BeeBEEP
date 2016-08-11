@@ -250,12 +250,6 @@ void GuiFileInfoList::addFileInfoToList( VNumber user_id, const FileInfo& fi )
     m_selectedFileInfoList.append( sfi );
 }
 
-void GuiFileInfoList::addFileInfoListToList( VNumber user_id, const QList<FileInfo>& file_info_list )
-{
-  foreach( FileInfo fi, file_info_list )
-    addFileInfoToList( user_id, fi );
-}
-
 void GuiFileInfoList::addItemToFileInfoList( GuiFileInfoItem* fi_item )
 {
   if( !fi_item->isObjectFile() )
@@ -278,38 +272,42 @@ void GuiFileInfoList::addItemToFileInfoList( GuiFileInfoItem* fi_item )
   addFileInfoToList( fi_item->userId(), fi );
 }
 
-int GuiFileInfoList::parseItem( QTreeWidgetItem* tw_item )
+void GuiFileInfoList::parseItem( QTreeWidgetItem* tw_item )
 {
+  if( m_selectedFileInfoList.size() > Settings::instance().maxQueuedDownloads() )
+    return;
+
   GuiFileInfoItem* item = (GuiFileInfoItem*)(tw_item);
 
   if( item->isObjectFile() )
   {
     addItemToFileInfoList( item );
-    return 1;
   }
-
-  if( item->isObjectFolder() && item->childCount() > 0  )
+  else if( item->isObjectFolder()  )
   {
-    int item_count = 0;
-
-    for( int i=0; i < item->childCount(); i++ )
+    if( item->childCount() > 0 )
     {
-      item_count += parseItem( item->child( i ) );
-      if( item_count > Settings::instance().maxQueuedDownloads() )
-        break;
+      for( int i=0; i < item->childCount(); i++ )
+      {
+        parseItem( item->child( i ) );
+        QApplication::processEvents(); // we don't want to block socket operations
+        if( m_selectedFileInfoList.size() > Settings::instance().maxQueuedDownloads() )
+          return;
+      }
     }
-
-    return item_count;
   }
-
-  if( item->isObjectUser() )
+  else if( item->isObjectUser() )
   {
     QList<FileInfo> user_file_info_list = m_isLocal ? FileShare::instance().fileSharedFromLocalUser() : FileShare::instance().fileSharedFromUser( item->userId() );
-    addFileInfoListToList( item->userId(), user_file_info_list );
-    return user_file_info_list.size();
+    foreach( FileInfo fi, user_file_info_list )
+    {
+      addFileInfoToList( item->userId(), fi );
+      if( selectedFileInfoList().size() > Settings::instance().maxQueuedDownloads() )
+        return;
+    }
   }
-
-  return 0;
+  else
+    qWarning() << "Invalid GuiFileInfoItem object found";
 }
 
 int GuiFileInfoList::parseSelectedItems()
@@ -319,12 +317,17 @@ int GuiFileInfoList::parseSelectedItems()
   if( selected_items.isEmpty() )
     return 0;
 
+  mp_tree->setUpdatesEnabled( false );
   QApplication::setOverrideCursor( Qt::WaitCursor );
   QApplication::processEvents();
   foreach( QTreeWidgetItem* item, selected_items )
+  {
     parseItem( item );
+    QApplication::processEvents(); // we don't want to block socket operations;
+  }
 
   QApplication::restoreOverrideCursor();
+  mp_tree->setUpdatesEnabled( true );
 
   return m_selectedFileInfoList.size();
 }

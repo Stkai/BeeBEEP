@@ -67,7 +67,6 @@ private:
 
 };
 
-
 // Inline functions
 inline bool GuiFileInfoItem::isValid() const { return m_type == ObjectInvalid; }
 inline bool GuiFileInfoItem::isObjectUser() const { return m_type == ObjectUser; }

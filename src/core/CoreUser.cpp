@@ -129,7 +129,7 @@ void Core::showUserVCardChanged( const User& u )
   {
     sHtmlMsg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/info.png", "*I*" ),
                                     (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( u.name() )) );
-    sHtmlMsg += QString( ":<br />%1" ).arg( u.vCard().info() );
+    sHtmlMsg += QString( ": <b>%1</b>" ).arg( u.vCard().info() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
   }
 
