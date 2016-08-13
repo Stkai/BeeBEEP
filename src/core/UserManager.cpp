@@ -65,7 +65,7 @@ bool UserManager::hasGroupName( const QString& group_name ) const
 {
   foreach( Group g, m_groups )
   {
-    if( g.name() == group_name )
+    if( g.name().toLower() == group_name.toLower() )
       return true;
   }
   return false;

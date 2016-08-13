@@ -142,7 +142,7 @@ bool ChatManager::hasName( const QString& chat_name ) const
 
   foreach( Chat c, m_chats )
   {
-    if( c.name() == chat_name )
+    if( c.name().toLower() == chat_name.toLower() )
       return true;
   }
   return false;
