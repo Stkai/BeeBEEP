@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nb_NO">
+<TS version="2.1" language="nb_NO">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="593"/>
         <source>Max ID is reached. Please close and restart the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Har nådd maks ID. Vennligst lukk og restart program.</translation>
     </message>
     <message>
         <source>%1 You cannot reach %2 Network.</source>
@@ -254,7 +254,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="457"/>
         <source>%1 saved chats are added to history</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 lagrede samtaler er lagt til historikk</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="573"/>
@@ -948,7 +948,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="229"/>
         <source>Open selected text as url</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne markert tekst som URL</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="415"/>
@@ -1400,7 +1400,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="109"/>
         <source>offline</source>
-        <translation type="unfinished"></translation>
+        <translation>offline</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="248"/>
@@ -1857,7 +1857,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="720"/>
         <source>Clear all read messages on closing window</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett alle meldinger når vindu lukkes</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="807"/>
@@ -1872,7 +1872,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="860"/>
         <source>If a file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvis en fil allreded finnes</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="898"/>
@@ -2483,22 +2483,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="864"/>
         <source>If the file to be downloaded already exists it is automatically overwritten</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvis filen som lastes ned allerede eksisterer, blir den automatisk overskrevet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="873"/>
         <source>Ask me</source>
-        <translation type="unfinished"></translation>
+        <translation>Spør meg</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="908"/>
         <source>When the chat is not visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Når samtalen ikke vises</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="916"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Aldri</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="939"/>
@@ -2568,7 +2568,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1038"/>
         <source>Show the shared boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis delte bokser</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1043"/>
@@ -2593,7 +2593,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4124"/>
         <source>New file from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny fil fra %1</translation>
     </message>
     <message>
         <source>Help me to know how many people use BeeBEEP</source>
@@ -2756,12 +2756,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1135"/>
         <source>Show file notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis filvarsel</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1435"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
-        <translation type="unfinished"></translation>
+        <translation>Start nytt program for kopiering av filer og mapper fra Marco Mastroddi</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1565"/>
@@ -2821,12 +2821,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2044"/>
         <source>File transfer is not enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fileoverføring er ikke slått på.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2050"/>
         <source>You are not connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du er ikke tilkobla.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2061"/>
@@ -3388,32 +3388,32 @@ Velg et annet navn.</translation>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="72"/>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="143"/>
         <source>Find text in chat</source>
-        <translation type="unfinished">Finn tekst i samtale</translation>
+        <translation>Finn tekst i samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="77"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Kopier til utklippstavle</translation>
+        <translation>Kopier til utklippstavle</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="79"/>
         <source>Select All</source>
-        <translation type="unfinished">Velg alt</translation>
+        <translation>Velg alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="83"/>
         <source>Open selected text as url</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne markert tekst som URL</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="86"/>
         <source>Print...</source>
-        <translation type="unfinished">Skriv ut...</translation>
+        <translation>Skriv ut...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="181"/>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished">%1 ikke funnet i samtale.</translation>
+        <translation>%1 ikke funnet i samtale.</translation>
     </message>
 </context>
 <context>
@@ -3728,47 +3728,47 @@ Velg et annet navn.</translation>
         <location filename="../src/desktop/GuiShareBox.cpp" line="54"/>
         <location filename="../src/desktop/GuiShareBox.cpp" line="307"/>
         <source>ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>ShareBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="63"/>
         <source>Update your ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater din ShareBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="64"/>
         <source>Update ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater ShareBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="99"/>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>ShareBox-stien finnes ikke. Vennligst velg ei gyldig mappe.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="137"/>
         <source>Your ShareBox is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Din ShareBox er slått av</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="164"/>
         <source>ShareBox is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>ShareBox er ikke tilgjengelig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="261"/>
         <source>%1 - Select the ShareBox folder</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Velg ShareBox-mappa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="307"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="307"/>
         <source>is unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>er utilgjengelig</translation>
     </message>
 </context>
 <context>
@@ -3776,17 +3776,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
         <source>Shared folders and files</source>
-        <translation type="unfinished">Delte mapper og filer</translation>
+        <translation>Delte mapper og filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
         <source>Size</source>
-        <translation type="unfinished">Størrelse</translation>
+        <translation>Størrelse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
         <source>Last modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Sist endra</translation>
     </message>
 </context>
 <context>
@@ -3794,22 +3794,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Skjema</translation>
+        <translation>Skjema</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="155"/>
         <source>Enable my ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på min ShareBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="195"/>
         <source>Select your folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg mappa di</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="397"/>
         <source>Select box</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg boks</translation>
     </message>
 </context>
 <context>
@@ -4063,7 +4063,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="396"/>
         <source>You cannot download more than %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan ikke laste ned mer enn %1 filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="400"/>
@@ -4578,7 +4578,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="126"/>
         <source>Show all chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis alle samtaler</translation>
     </message>
 </context>
 <context>

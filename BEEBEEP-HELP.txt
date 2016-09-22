@@ -1,7 +1,7 @@
 //
 // BeeBEEP Help
 //
-// Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
+// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
 // Latest version: http://sourceforge.net/p/beebeep/code/HEAD/tree/BEEBEEP-HELP.txt
 //
