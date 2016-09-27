@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="hu_HU">
+<TS version="2.0" language="hu_HU">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -889,9 +889,8 @@ Te vagy</translation>
         <translation>Üzenetek szűrése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select the message types which will be showed in chat</source>
-        <translation>Válaszd ki az üzenet típusát, amely megjelenik a chatben</translation>
+        <translation type="obsolete">Válaszd ki az üzenet típusát, amely megjelenik a chatben</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="147"/>
@@ -1070,6 +1069,11 @@ Te vagy</translation>
         <location filename="../src/desktop/GuiChat.cpp" line="179"/>
         <source>Edit group</source>
         <translation>Csoport változtatása</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <source>Select the message types which will be shown in chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="437"/>

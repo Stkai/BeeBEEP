@@ -143,7 +143,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actSelectBackgroundColor = bar->addAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ), this, SLOT( selectBackgroundColor() ) );
   mp_actSelectBackgroundColor->setStatusTip( tr( "Select your favourite background color for the chat window" ) );
   act = bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
-  act->setStatusTip( tr( "Select the message types which will be showed in chat" ) );
+  act->setStatusTip( tr( "Select the message types which will be shown in chat" ) );
   act = bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
   act->setStatusTip( tr( "Click to show the settings menu of the chat" ) );
   mp_actSpellChecker = bar->addAction( QIcon( ":/images/spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );

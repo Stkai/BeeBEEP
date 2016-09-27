@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nb_NO">
+<TS version="2.0" language="nb_NO">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -865,9 +865,8 @@
         <translation>Filtrer melding</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select the message types which will be showed in chat</source>
-        <translation>Velg meldingstypene som skal vises i samtale</translation>
+        <translation type="obsolete">Velg meldingstypene som skal vises i samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="147"/>
@@ -985,6 +984,11 @@
         <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>Spell checking is disabled</source>
         <translation>Stavekontroll er slått av</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <source>Select the message types which will be shown in chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="173"/>

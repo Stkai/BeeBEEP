@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -869,9 +869,8 @@
         <translation>Filtrer les messages</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select the message types which will be showed in chat</source>
-        <translation>Choisir les types de message à afficher dans le chat</translation>
+        <translation type="obsolete">Choisir les types de message à afficher dans le chat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="147"/>
@@ -989,6 +988,11 @@
         <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>Spell checking is disabled</source>
         <translation>La correction orthographique est désactivée</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <source>Select the message types which will be shown in chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="173"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru" sourcelanguage="en">
+<TS version="2.0" language="ru" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -900,6 +900,11 @@
         <translation>Выберите цвет фона для окна чата</translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <source>Select the message types which will be shown in chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiChat.cpp" line="149"/>
         <source>Spell checking</source>
         <translation>Проверка правописания</translation>
@@ -1049,9 +1054,8 @@
         <translation>Фильтр сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select the message types which will be showed in chat</source>
-        <translation>Выберите тип сообщений, которые будут показаны в чате</translation>
+        <translation type="obsolete">Выберите тип сообщений, которые будут показаны в чате</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="147"/>

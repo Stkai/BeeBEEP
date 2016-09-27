@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1086,7 +1086,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Select the message types which will be showed in chat</source>
-        <translation>Seleziona la tipologia di messaggi che vuoi che sia mostrata nella conversazione</translation>
+        <translation type="obsolete">Seleziona la tipologia di messaggi che vuoi che sia mostrata nella conversazione</translation>
     </message>
     <message>
         <source>Chat settings</source>
@@ -1219,6 +1219,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Open selected text as url</source>
         <translation>Apri il testo selezionato come un link</translation>
+    </message>
+    <message>
+        <source>Select the message types which will be shown in chat</source>
+        <translation>Seleziona la tipologia di messaggi che vuoi che sia mostrata nella conversazione</translation>
     </message>
 </context>
 <context>

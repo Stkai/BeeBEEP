@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -26,12 +26,12 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="296"/>
         <source>User Status</source>
-        <translation>Gebruikers Status</translation>
+        <translation>Gebruikersstatus</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="297"/>
         <source>User Information</source>
-        <translation>Gebruikers Informatie</translation>
+        <translation>Gebruikersinformatie</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="298"/>
@@ -88,12 +88,12 @@
     <message>
         <location filename="../src/core/Core.cpp" line="109"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
-        <translation>%1 Gebruiker %2 kan chat berichten niet in pad opslaan:%3</translation>
+        <translation>%1 Gebruiker %2 kan chatberichten niet in pad opslaan:%3</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="188"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
-        <translation>%1 Je hebt gekozen om alleen deze werkgroepen deel te nemen: %2</translation>
+        <translation>%1 Je hebt ervoor gekozen om enkel van deze werkgroepen deel uit te maken: %2</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="257"/>
@@ -103,12 +103,12 @@
     <message>
         <location filename="../src/core/Core.cpp" line="317"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
-        <translation>%1 Nul configuratie is netwerk voor service: %2 aan het doorbladeren</translation>
+        <translation>%1 Nul configuratie doorzoekt het netwerk naar de %2-service</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="324"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
-        <translation>%1 Nul configuratie kan niet netwerk voor service: %2 door bladeren</translation>
+        <translation>%1 Nul configuratie kan het netwerk niet doorzoeken naar de %2-service</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="342"/>
@@ -128,7 +128,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="358"/>
         <source>View the log messages for more informations</source>
-        <translation>Kijk in log bestand voor meer informatie</translation>
+        <translation>Kijk in de logbestanden voor meer informatie</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="535"/>
@@ -138,12 +138,12 @@
     <message>
         <location filename="../src/core/Core.cpp" line="536"/>
         <source>Click here to download</source>
-        <translation>Klik hier voor de download</translation>
+        <translation>Klik hier om te downloaden</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="593"/>
         <source>Max ID is reached. Please close and restart the application.</source>
-        <translation>Max-ID is beriekt. Sluit en herstart Beebeep AUB.</translation>
+        <translation>Max-ID is bereikt. Sluit en herstart Beebeep AUB.</translation>
     </message>
     <message>
         <source>%1 The following networks appears as filtered: %2</source>
@@ -252,7 +252,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="302"/>
         <source>Unable to send the message to %1.</source>
-        <translation>Kan bericht niet verzenden aan %1.</translation>
+        <translation>Kan bericht niet versturen naar %1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="330"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="410"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
-        <translation>%1 %2 kan niet verwittigd worden dat u de groep verlaten hebt.</translation>
+        <translation>%1 %2 kan niet verwittigd worden dat u de groep verlaten heeft.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="502"/>
@@ -709,7 +709,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="148"/>
         <source>These IP address and port are already inserted in list.</source>
-        <translation>Deze IP adres en poort staan al in de opgegeven lijst.</translation>
+        <translation>Dit IP-adres en deze poort staan al in de opgegeven lijst.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="182"/>
@@ -825,7 +825,7 @@
     <message>
         <location filename="../src/desktop/GuiAskPassword.ui" line="153"/>
         <source>Remember password (not recommended)</source>
-        <translation>Wachtwoord onthouden (niet aanbevolen)</translation>
+        <translation>Wachtwoord onthouden (niet aangeraden)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAskPassword.ui" line="160"/>
@@ -835,7 +835,7 @@
     <message>
         <location filename="../src/desktop/GuiAskPassword.cpp" line="33"/>
         <source>Chat Password - %1</source>
-        <translation>Chat wachtwoord - %1</translation>
+        <translation>Chatwachtwoord - %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAskPassword.cpp" line="103"/>
@@ -880,7 +880,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Change background color</source>
-        <translation>Wijzig achtergrond kleur</translation>
+        <translation>Wijzig achtergrondkleur</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="144"/>
@@ -893,9 +893,8 @@
         <translation>Bericht filteren</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select the message types which will be showed in chat</source>
-        <translation>Selecteer een bericht soort welke in chat worden getoond</translation>
+        <translation type="obsolete">Selecteer de berichtsoorten die in de chat getoond zullen worden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="147"/>
@@ -915,7 +914,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="151"/>
         <source>Word completer</source>
-        <translation>Volledig woord</translation>
+        <translation>Automatische tekstaanvulling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="153"/>
@@ -991,7 +990,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="964"/>
         <source>Spell checking is enabled</source>
-        <translation>Spellingscontrole aanzetten</translation>
+        <translation>Spellingscontrole is actief</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="971"/>
@@ -1007,17 +1006,22 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>Spell checking is disabled</source>
-        <translation>Spellingscontrole uitzetten</translation>
+        <translation>Spellingscontrole is uitgeschakeld</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <source>Select the message types which will be shown in chat</source>
+        <translation>Selecteer de berichtsoorten die in de chat getoond zullen worden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="988"/>
         <source>Word completer is enabled</source>
-        <translation>Volledig woord is ingeschakeld</translation>
+        <translation>Automatische tekstaanvulling is ingeschakeld</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="990"/>
         <source>Word completer is disabled</source>
-        <translation>Volledig woord is uitgeschakeld</translation>
+        <translation>Automatische tekstaanvulling is uitgeschakeld</translation>
     </message>
     <message>
         <source>Create group chat</source>
@@ -1096,7 +1100,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="257"/>
         <source>Show only messages in default chat</source>
-        <translation>Toon alleen berichten in de standaard chat</translation>
+        <translation>Toon alleen berichten in de standaardchat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="297"/>
@@ -1106,7 +1110,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="395"/>
         <source>All Lan Users</source>
-        <translation>Alle lan-gebruikers</translation>
+        <translation>Alle LAN-gebruikers</translation>
     </message>
     <message>
         <source>(You have left)</source>
@@ -1205,7 +1209,7 @@ Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="834"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation>Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U dient het bestand dat u wilt versturen opnieuw te selecteren.</translation>
+        <translation>Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
     </message>
 </context>
 <context>
@@ -1612,7 +1616,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiLanguage.cpp" line="51"/>
         <source>official website</source>
-        <translation>Officiele website</translation>
+        <translation>Officiële website</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLanguage.cpp" line="94"/>
@@ -1743,7 +1747,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="36"/>
         <source>System Log</source>
-        <translation>Systeem log</translation>
+        <translation>Systeemlog</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="55"/>
@@ -1793,7 +1797,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="109"/>
         <source>Block scrolling</source>
-        <translation>Blok schrollen</translation>
+        <translation>Blokscrollen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="116"/>
@@ -1803,7 +1807,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="125"/>
         <source>Unable to save log in the file: %1</source>
-        <translation>Kan log bestand:%1 niet opslaan</translation>
+        <translation>Kan logbestand:%1 niet opslaan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="125"/>
@@ -4257,7 +4261,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="52"/>
         <source>Scan network</source>
-        <translation>Scan netwerk</translation>
+        <translation>Netwerk doorzoeken</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="53"/>
@@ -4612,7 +4616,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="105"/>
         <source>Remove from favorites</source>
-        <translation>Verwijderd van favorieten</translation>
+        <translation>Uit favorieten verwijderen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="110"/>
@@ -4771,7 +4775,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="42"/>
         <source>Your system account is</source>
-        <translation>Uw systeem account is</translation>
+        <translation>Uw systeemaccount is</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="59"/>
@@ -4832,7 +4836,7 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
         <location filename="../src/desktop/GuiMain.cpp" line="3214"/>
         <location filename="../src/desktop/GuiUserItem.cpp" line="84"/>
         <source>All Lan Users</source>
-        <translation>Alle netwerkgebruikers</translation>
+        <translation>Alle LAN-gebruikers</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="64"/>
@@ -4895,7 +4899,7 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/desktop/GuiGroupItem.cpp" line="67"/>
         <source>Click to send message to group: %1</source>
-        <translation>Klik om bericht naar groep te zenden: %1</translation>
+        <translation>Klik om bericht naar  %1-groep te sturen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="129"/>
@@ -4920,12 +4924,12 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="106"/>
         <source>Set focus in message box</source>
-        <translation>Stel focus op berichten box in</translation>
+        <translation>Stel focus op berichtenbox in</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="108"/>
         <source>Minimize all chats</source>
-        <translation>Maak alle chats klein</translation>
+        <translation>Alle chats minimalizeren</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="110"/>
@@ -4950,12 +4954,12 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="118"/>
         <source>Find text in chat</source>
-        <translation>Vind text in chat</translation>
+        <translation>Vind tekst in chat</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="120"/>
         <source>Find next text in chat</source>
-        <translation>Vind volgende text in chat</translation>
+        <translation>Vind volgende tekst in chat</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="122"/>
@@ -5040,32 +5044,32 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/Tips.h" line="33"/>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="unfinished">Als u &lt;i&gt;cursieve tekst&lt;/i&gt; wilt, typ dan /cursieve tekst/.</translation>
+        <translation>Als u &lt;i&gt;cursieve tekst&lt;/i&gt; wilt, typ dan /cursieve tekst/.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="34"/>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="unfinished">Als u &lt;u&gt;onderlijnde tekst&lt;/u&gt; wilt, typ dan _onderlijnde tekst_.</translation>
+        <translation>Als u &lt;u&gt;onderlijnde tekst&lt;/u&gt; wilt, typ dan _onderlijnde tekst_.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="35"/>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="unfinished">U kunt zoeken in verstuurde berichten door gebruik te maken van de CTRL + omhoog en CTRL+omlaag-knoppen.</translation>
+        <translation>U kunt zoeken in verstuurde berichten door gebruik te maken van de CTRL + omhoog en CTRL+omlaag-knoppen.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="37"/>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation type="unfinished">U kunt bestand in de vensters van chatgesprekken laten vallen om ze te versturen naar de deelnemers in het chatgesprek.</translation>
+        <translation>U kunt bestand in de vensters van chatgesprekken laten vallen om ze te versturen naar de deelnemers in het chatgesprek.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="38"/>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="unfinished">Je kan verschillende bestanden van netwerk delen en tegelijk downloaden met een rechtermuisknop klik.</translation>
+        <translation>Je kan verschillende bestanden van netwerk delen en tegelijk downloaden met een rechtermuisknop klik.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="39"/>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="unfinished">Je kan bericht melding uitschakelen voor een groep door rechts te klikken op een naam in de lijst.</translation>
+        <translation>Je kan bericht melding uitschakelen voor een groep door rechts te klikken op een naam in de lijst.</translation>
     </message>
     <message>
         <location filename="../src/Tips.h" line="47"/>
@@ -5274,7 +5278,7 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="66"/>
         <source>status error</source>
-        <translation>foutmelding status</translation>
+        <translation>foutmeldingsstatus</translation>
     </message>
 </context>
 </TS>
