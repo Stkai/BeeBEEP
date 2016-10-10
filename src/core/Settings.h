@@ -119,9 +119,6 @@ public:
   inline int defaultBroadcastPort() const;
   inline int defaultListenerPort() const;
   inline int defaultFileTransferPort() const;
-  inline void setBroadcastInterval( int );
-  inline int broadcastInterval() const;
-  inline int broadcastLoopbackInterval() const;
   inline int pongTimeout() const;
   inline int writingTimeout() const;
   inline int fileTransferConfirmTimeout() const;
@@ -132,7 +129,6 @@ public:
   inline int tickIntervalCheckNetwork() const;
   inline void setMaxUsersToConnectInATick( int );
   inline int maxUsersToConnectInATick() const;
-  inline bool autoSearchUsersWhenListIsEmpty() const;
 
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
@@ -294,12 +290,6 @@ public:
   inline const QHostAddress& localHostAddressForced() const;
   inline const QString& localSubnetForced() const;
   inline bool broadcastOnlyToHostsIni() const;
-  inline bool parseBroadcastAddresses() const;
-  inline void setParseBroadcastAddresses( bool );
-  inline void setParseBroadcastAddressesAll( bool );
-  inline bool parseBroadcastAddressesAll() const;
-  inline bool addExternalSubnetAutomatically() const;
-  inline void setAddExternalSubnetAutomatically( bool );
   bool addSubnetToBroadcastAddress( const QHostAddress& );
   inline void SetPreventMultipleConnectionsFromSingleHostAddress( bool );
   inline bool preventMultipleConnectionsFromSingleHostAddress();
@@ -487,8 +477,6 @@ private:
   int m_settingsVersion;
 
   User m_localUser;
-  int m_broadcastInterval;
-  int m_broadcastLoopbackInterval;
   int m_pongTimeout;
   int m_writingTimeout;
   int m_fileTransferConfirmTimeout;
@@ -499,7 +487,6 @@ private:
   int m_tickIntervalCheckIdle;
   int m_tickIntervalCheckNetwork;
   int m_maxUsersToConnectInATick;
-  bool m_autoSearchUsersWhenListIsEmpty;
 
   QDateTime m_lastSave;
   bool m_logToFile;
@@ -578,9 +565,6 @@ private:
   QStringList m_broadcastAddressesInSettings;
   QHostAddress m_localHostAddressForced;
   QString m_localSubnetForced;
-  bool m_parseBroadcastAddresses;
-  bool m_parseBroadcastAddressesAll;
-  bool m_addExternalSubnetAutomatically;
   bool m_useMulticastDns;
   bool m_preventMultipleConnectionsFromSingleHostAddress;
 
@@ -673,9 +657,6 @@ inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }
 inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
 inline int Settings::defaultFileTransferPort() const { return m_defaultFileTransferPort; }
-inline void Settings::setBroadcastInterval( int new_value ) { m_broadcastInterval = new_value; }
-inline int Settings::broadcastInterval() const { return m_broadcastInterval; }
-inline int Settings::broadcastLoopbackInterval() const { return m_broadcastLoopbackInterval; }
 inline int Settings::pongTimeout() const { return m_pongTimeout; }
 inline int Settings::writingTimeout() const { return m_writingTimeout; }
 inline int Settings::fileTransferConfirmTimeout() const { return m_fileTransferConfirmTimeout; }
@@ -779,15 +760,9 @@ inline bool Settings::showChatToolbar() const { return m_showChatToolbar; }
 inline void Settings::setShowChatToolbar( bool new_value ) { m_showChatToolbar = new_value; }
 inline const QStringList& Settings::broadcastAddressesInFileHosts() const { return m_broadcastAddressesInFileHosts; }
 inline const QStringList& Settings::broadcastAddressesInSettings() const { return m_broadcastAddressesInSettings; }
-inline bool Settings::parseBroadcastAddresses() const { return m_parseBroadcastAddresses; }
-inline void Settings::setParseBroadcastAddresses( bool new_value ) { m_parseBroadcastAddresses = new_value; }
-inline void Settings::setParseBroadcastAddressesAll( bool new_value ) { m_parseBroadcastAddressesAll = new_value; }
-inline bool Settings::parseBroadcastAddressesAll() const { return m_parseBroadcastAddressesAll; }
 inline const QHostAddress& Settings::localHostAddressForced() const { return m_localHostAddressForced; }
 inline const QString& Settings::localSubnetForced() const { return m_localSubnetForced; }
 inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }
-inline bool Settings::addExternalSubnetAutomatically() const { return m_addExternalSubnetAutomatically; }
-inline void Settings::setAddExternalSubnetAutomatically( bool new_value ) { m_addExternalSubnetAutomatically = new_value; }
 inline bool Settings::useMulticastDns() const { return m_useMulticastDns; }
 inline void Settings::setUseMulticastDns( bool new_value ) { m_useMulticastDns = new_value; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }
@@ -923,7 +898,6 @@ inline bool Settings::canPostUsageStatistics() const { return m_postUsageStatist
 inline int Settings::textSizeInChatMessagePreviewOnTray() const { return m_textSizeInChatMessagePreviewOnTray; }
 inline void Settings::setShowFileTransferCompletedOnTray( bool new_value ) { m_showFileTransferCompletedOnTray = new_value; }
 inline bool Settings::showFileTransferCompletedOnTray() const { return m_showFileTransferCompletedOnTray; }
-inline bool Settings::autoSearchUsersWhenListIsEmpty() const { return m_autoSearchUsersWhenListIsEmpty; }
 inline bool Settings::useLowDelayOptionOnSocket() const { return m_useLowDelayOptionOnSocket; }
 inline bool Settings::hideMainToolbar() const { return m_hideMainToolbar; }
 inline bool Settings::hideChatToolbar() const { return m_hideChatToolbar; }

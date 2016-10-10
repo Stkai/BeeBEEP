@@ -1,5 +1,10 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG
 
+BeeBEEP 3.0.8
+- Chat messages are now saved on disconnection
+- fixed a bug in option "HideMainToolbar"
+- Broadcast processes are now simplified and optimized (some options are now obsolete, see BEEHELP.txt)
+
 BeeBEEP 3.0.7
 - ShareBox: new feature in beta (can share files like dropbox with all users connected)
 - Added "Find text" and "Print" options in history (shortcut or right click)

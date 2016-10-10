@@ -341,6 +341,7 @@ void Settings::loadRcFile()
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
   m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
   sets->endGroup();
+
   sets->beginGroup( "Groups" );
   m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
   m_trustSystemAccount = sets->value( "TrustSystemAccount", m_trustSystemAccount ).toBool();
@@ -927,8 +928,6 @@ void Settings::load()
   sets->beginGroup( "Misc" );
   m_tickIntervalCheckIdle = qMax( sets->value( "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
   m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 5 );
-  m_broadcastInterval = sets->value( "BroadcastInterval", 0 ).toInt();
-  m_broadcastLoopbackInterval = sets->value( "BroadcastLoopbackInterval", 2000 ).toInt();
   m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
   m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", 13000 ).toInt(), 13000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
@@ -949,9 +948,6 @@ void Settings::load()
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
-  m_parseBroadcastAddresses = sets->value( "ParseBroadcastAddresses", false ).toBool();
-  m_parseBroadcastAddressesAll = sets->value( "ParseBroadcastAddressesAll", false ).toBool();
-  m_addExternalSubnetAutomatically = sets->value( "AddExternalSubnetAutomatically", true ).toBool();
   m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();
   m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
   m_workgroups = sets->value( "Workgroups", QStringList() ).toStringList();
@@ -959,7 +955,6 @@ void Settings::load()
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
   m_maxUsersToConnectInATick = sets->value( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick ).toInt();
-  m_autoSearchUsersWhenListIsEmpty = sets->value( "AutoSearchUsersWhenListIsEmpty", true ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1201,8 +1196,6 @@ void Settings::save()
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );
   sets->setValue( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork );
-  sets->setValue( "BroadcastInterval", m_broadcastInterval );
-  sets->setValue( "BroadcastLoopbackInterval", m_broadcastLoopbackInterval );
   sets->setValue( "ListenerPort", m_localUser.hostPort() );
   sets->setValue( "ConnectionActivityTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
@@ -1220,14 +1213,10 @@ void Settings::save()
   else
     sets->setValue( "LocalHostAddressForced", QString( "" ) );
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
-  sets->setValue( "ParseBroadcastAddresses", m_parseBroadcastAddresses );
-  sets->setValue( "ParseBroadcastAddressesAll", m_parseBroadcastAddressesAll );
-  sets->setValue( "AddExternalSubnetAutomatically", m_addExternalSubnetAutomatically );
   sets->setValue( "UserPathList", m_userPathList );
   sets->setValue( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups );
   sets->setValue( "Workgroups", m_workgroups );
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
-  sets->setValue( "AutoSearchUsersWhenListIsEmpty", m_autoSearchUsersWhenListIsEmpty );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   if( m_disableFileTransfer )

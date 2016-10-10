@@ -67,7 +67,6 @@ Core::Core( QObject* parent )
 #endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
-  //connect( mp_broadcaster, SIGNAL( udpPortBlocked() ), this, SLOT( showBroadcasterUdpError() ) );
   connect( mp_listener, SIGNAL( newConnection( Connection* ) ), this, SLOT( checkNewConnection( Connection* ) ) );
   connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( fileTransferServerListening() ) );
   connect( mp_fileTransfer, SIGNAL( userConnected( VNumber, const QHostAddress&, const Message& ) ), this, SLOT( validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& ) ) );
@@ -158,7 +157,7 @@ bool Core::start()
   qDebug() << "Network password used:" << Settings::instance().passwordBeforeHash();
 #endif
 
-  if( !mp_broadcaster->startBroadcasting() )
+  if( !mp_broadcaster->startBroadcastServer() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
@@ -269,7 +268,7 @@ bool Core::dnsMulticastingIsActive() const
 
 void Core::stop()
 {
-  qDebug() << "Closing core...";
+  qDebug() << "Stopping network core...";
   mp_broadcaster->stopBroadcasting();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -298,8 +297,9 @@ void Core::stop()
 
   checkSavingPaths();
   saveUsersAndGroups();
+  saveChatMessages();
   Settings::instance().save();
-  qDebug() << "Core closed";
+  qDebug() << "Network core stopped";
 }
 
 
@@ -341,7 +341,7 @@ void Core::sendBroadcastMessage()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
                                                                             Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
-    QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcastDatagram() ) );
+    QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcast() ) );
   }
   else
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -349,78 +349,9 @@ void Core::sendBroadcastMessage()
                                                                              Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 }
 
-void Core::showBroadcasterUdpError()
-{
-  QString html_msg = tr( "%1 %2 has found a filter on UDP port %3. Please check your firewall settings." )
-                       .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
-                       .arg( Settings::instance().programName() )
-                       .arg( Settings::instance().defaultBroadcastPort() );
-  html_msg += QString( " %1." ).arg( tr( "View the log messages for more informations" ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Connection );
-}
-
 bool Core::isConnected() const
 {
   return mp_listener->isListening();
-}
-
-void Core::checkUserHostAddress( const User& u )
-{
-  if( !Settings::instance().addExternalSubnetAutomatically() )
-    return;
-
-  QHostAddress user_host_address = NetworkManager::instance().broadcastSubnetFromIPv4HostAddress( u.hostAddress() );
-
-  if( user_host_address.isNull() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Invalid broadcast address for user" << u.path();
-#endif
-    return;
-  }
-
-  if( user_host_address == Settings::instance().localUser().hostAddress() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Skip local user address for user" << u.path();
-#endif
-    return;
-  }
-
-  if( user_host_address == NetworkManager::instance().localBroadcastAddress() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Skip subnet in the base broadcast for user" << u.path();
-#endif
-    return;
-  }
-
-  if( Settings::instance().addSubnetToBroadcastAddress( user_host_address ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "External broadcast address" << user_host_address << "is added for user" << u.path();
-#endif
-    QString sHtmlMsg = QString( "%1 %2 %3" )
-                           .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
-                           .arg( u.path() )
-                           .arg( tr( "is connected from external network (the new subnet is added to your broadcast address list)." ) );
-
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::Connection );
-  }
-}
-
-void Core::sendHelloToHostsInSettings()
-{
-  if( Settings::instance().userPathList().isEmpty() )
-    return;
-
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 Checking %2 more addresses..." )
-                         .arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ) )
-                         .arg( Settings::instance().userPathList().size() ),
-                         DispatchToChat, ChatMessage::Connection );
-
-  QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcastDatagram() ) );
 }
 
 int Core::fileTransferPort() const
@@ -538,12 +469,6 @@ void Core::onUpdaterJobCompleted()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Other );
 }
 
-void Core::checkBroadcastInterval()
-{
-  if( isConnected() )
-    mp_broadcaster->enableBroadcastTimer( Settings::instance().broadcastInterval() > 0 );
-}
-
 void Core::postUsageStatistics()
 {
   if( !NetworkManager::instance().isMainInterfaceUp() )
@@ -577,15 +502,18 @@ void Core::onPostUsageStatisticsJobCompleted()
 
 void Core::onTickEvent( int ticks )
 {
-  if( ticks % 30 == 0 && isConnected() && Settings::instance().autoSearchUsersWhenListIsEmpty() && connectedUsers() == 0 )
+  if( isConnected() )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Auto search for users is enabled. It's time to check..." << ticks;
-#endif
-    QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcastDatagram() ) );
+    if( ticks % 63 == 0 )
+    {
+      if( UserManager::instance().userList().toList().isEmpty() )
+        mp_broadcaster->setVerboseBroadcasting( true );
+      if( connectedUsers() <= (UserManager::instance().userList().toList().size() / 2) )
+        mp_broadcaster->setNewBroadcastRequested( true );
+    }
+    else
+      mp_broadcaster->onTickEvent( ticks );
   }
-  else
-    mp_broadcaster->onTickEvent( ticks );
 
   if( Protocol::instance().currentId() >= Protocol::instance().maxId() )
   {

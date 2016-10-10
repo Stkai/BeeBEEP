@@ -60,7 +60,6 @@ public:
   inline bool hasFileTransferInProgress() const;
 
   bool checkSavingPaths();
-  void checkBroadcastInterval();
 
   /* CoreUser */
   inline int connectedUsers() const;
@@ -91,7 +90,6 @@ public:
   bool removeUserFromChat( const User&, VNumber );
   bool removeChat( VNumber );
   bool readAllMessagesInChat( VNumber );
-  bool saveChatMessages();
 
   /* CoreFileTransfer */
   bool sendFile( VNumber, const QString& file_path, const QString& share_folder, bool to_share_box );
@@ -113,7 +111,6 @@ public:
 
 public slots:
   void sendBroadcastMessage();
-  void sendHelloToHostsInSettings();
   void sendMulticastingMessage();
   void checkNetworkInterface();
   void checkNewVersion();
@@ -162,7 +159,6 @@ signals:
 #endif
 
 protected slots:
-  void showBroadcasterUdpError();
   void onUpdaterJobCompleted();
   void onPostUsageStatisticsJobCompleted();
 
@@ -195,7 +191,7 @@ protected slots:
 
 protected:
   void createLocalShareMessage();
-  void checkUserHostAddress( const User& );
+  bool saveChatMessages();
 
   /* CoreConnection */
   Connection* connection( VNumber ) const;

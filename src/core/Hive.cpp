@@ -21,25 +21,21 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISEARCHUSER_H
-#define BEEBEEP_GUISEARCHUSER_H
+#include "Hive.h"
 
-#include "ui_GuiSearchUser.h"
-#include <QDialog>
+Hive* Hive::mp_instance = NULL;
 
 
-class GuiSearchUser : public QDialog, private Ui::GuiSearchUser
+Hive::Hive()
+ : m_networkAddresses()
 {
-  Q_OBJECT
+}
 
-public:
-  GuiSearchUser( QWidget* );
+bool Hive::addNetworkAddress( const NetworkAddress& na )
+{
+  if( m_networkAddresses.contains( na ) )
+    return false;
 
-  void loadSettings();
-
-protected slots:
-  void checkAndSearch();
-
-};
-
-#endif // BEEBEEP_GUISEARCHUSER_H
+  m_networkAddresses.append( na );
+  return true;
+}

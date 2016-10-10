@@ -120,7 +120,7 @@ void GuiAddUser::addUser()
 
   if( mp_cbSplitSubnet->isChecked() )
   {
-    QList<QHostAddress> ha_list = NetworkManager::instance().splitBroadcastSubnetToIPv4HostAddresses( QHostAddress( ip_address ), true );
+    QList<QHostAddress> ha_list = NetworkManager::instance().splitInIPv4HostAddresses( QHostAddress( ip_address ) );
     if( !ha_list.isEmpty() )
     {
       foreach( QHostAddress ha, ha_list )

@@ -42,11 +42,12 @@ public:
   inline const QHostAddress& localBroadcastAddress() const;
   inline const QString& localHostAddressScopeId() const;
   inline const QString& localInterfaceHardwareAddress() const;
-  QList<NetworkEntry> availableNetworkEntries() const;
 
   QHostAddress broadcastSubnetFromIPv4HostAddress( const QHostAddress& ) const;
-
-  QList<QHostAddress> splitBroadcastSubnetToIPv4HostAddresses( const QHostAddress&, bool split_all ) const;
+  QList<QHostAddress> splitInIPv4HostAddresses( const QHostAddress& ) const;
+  bool isLocalHostAddress( const QHostAddress& ) const;
+  QList<QHostAddress> localBroadcastAddresses() const;
+  bool isInLocalBroadcastAddresses( const QHostAddress& ) const;
 
   static NetworkManager& instance()
   {
@@ -75,6 +76,7 @@ protected:
   bool forceLocalSubnet( const QString& );
   void setLocalHostAddress( const NetworkEntry& );
   NetworkEntry firstNetworkEntry( bool use_ipv4 ) const;
+  QList<NetworkEntry> availableNetworkEntries() const;
 
 private:
   QHostAddress m_localHostAddress;

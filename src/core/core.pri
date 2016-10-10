@@ -20,6 +20,7 @@ HEADERS += core/Broadcaster.h \
   core/Group.h \
   core/HistoryManager.h \
   core/HistoryMessage.h \
+  core/Hive.h \
   core/Log.h \
   core/Job.h \
   core/Listener.h \
@@ -69,6 +70,7 @@ SOURCES +=  core/Broadcaster.cpp \
   core/Group.cpp \
   core/HistoryManager.cpp \
   core/HistoryMessage.cpp \
+  core/Hive.cpp \
   core/Listener.cpp \
   core/Log.cpp \
   core/Message.cpp \

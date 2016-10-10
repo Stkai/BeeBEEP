@@ -28,6 +28,7 @@
 #include "Core.h"
 #include "FileInfo.h"
 #include "FileShare.h"
+#include "Hive.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -398,7 +399,10 @@ void Core::parseHiveMessage( const User& u, const Message& m )
     qDebug() << "Hive message arrived with" << user_record_list.size() << "users from" << qPrintable( u.path() );
 #endif
     foreach( UserRecord ur, user_record_list )
-      mp_broadcaster->addPeerAddressToContact( ur.hostAddress(), ur.hostPort() );
+    {
+       if( Hive::instance().addNetworkAddress( NetworkAddress( ur.hostAddress(), ur.hostPort() ) ) )
+         mp_broadcaster->setNewBroadcastRequested( true );
+    }
   }
   else
     qWarning() << "Invalid flag found in hive message from user" << qPrintable( u.path() );

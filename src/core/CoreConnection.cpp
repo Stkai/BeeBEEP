@@ -356,7 +356,6 @@ void Core::checkUserAuthentication( const Message& m )
   if( user_found.isValid() )
     checkGroupChatAfterUserReconnect( u );
 
-  checkUserHostAddress( u );
   checkOfflineMessagesForUser( u );
   if( Settings::instance().useHive() && u.protocolVersion() >= HIVE_PROTO_VERSION )
     sendLocalConnectedUsersTo( u );

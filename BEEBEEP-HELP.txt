@@ -42,9 +42,9 @@ HideUsersPanel=[true/false] If enabled BeeBEEP hide users panel at startup (defa
 HideOtherPanels=[true/false] If enabled BeeBEEP hide all other panels at startup (default=false) [3.0.6]
 DisableFileTransfer=[true/false] disable file transfer (default=false) [3.0.6]
 DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read only messenger (default=false) [3.0.6]
-UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session (the same of AskNicknameAtStartup=false
-UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
-StartMinimized = [true/false] If enabled BeeBEEP starts minimized (can be overruled in beeebeep.ini) (default=false) [3.0.7]
+UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session 
+                              (the same of AskNicknameAtStartup=false and UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
+StartMinimized=[true/false] If enabled BeeBEEP starts minimized (can be overruled in beeebeep.ini) (default=false) [3.0.7]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]
@@ -176,7 +176,7 @@ Uuid= [string] application UUID for anonymous statistics [3.0.5]
 [Misc]
 TickIntervalCheckIdle=10
 TickIntervalCheckNetwork=7
-BroadcastInterval= is the interval from a broadcast and another (default is disabled=0)
+BroadcastInterval= is the interval from a broadcast and another (default is disabled=0) [obsolete 3.0.8+]
 ListenerPort= is the last TCP port of chat communication between BeeBEEP (default is 6475)
 ConnectionActivityTimeout=12000
 WritingTimeout=3000
@@ -188,13 +188,14 @@ UseLowDelayOptionOnSocket=[true/false] Try to optimize the socket for low latenc
 BroadcastAddresses=(do not edit manually)
 LocalHostAddressForced= if BeeBEEP doesn't recognize your IP address automatically, you can set here your IP (useful if you have a lot of network configured)
 LocalSubnetForced= if BeeBEEP doesn't recognize your subnet address automatically, you can set here your subnet (useful if you have a lot of network configured)
-ParseBroadcastAddresses=[true/false] if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254
-AddExternalSubnetAutomatically=[true/false] if true BeeBEEP automatically add external user's subnet when they reach you
+ParseBroadcastAddresses=[true/false] if true BeeBEEP splits subnet like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254 [obsolete 3.0.8+]
+ParseBroadcastAddressesAll=[true/false] if true BeeBEEP splits subnet (also local subnet) like 192.168.2.255 to a list of ip addresses from 192.168.2.1 to 192.168.2.254 [obsolete 3.0.8+]
+AddExternalSubnetAutomatically=[true/false] if true BeeBEEP automatically add external user's subnet when they reach you [obsolete 3.0.8+]
 UserPathList= users saved (do not edit manually)
 AcceptConnectionsOnlyFromWorkgroups=[true/false] accepts connection only from members of your workgroups
 Workgroups = workgroups saved (do not edit manually)
 UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (overwrite RC option)
-AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users when there aren't users connected (default=true) [3.0.5]
+AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users when there aren't users connected (default=true) [3.0.5] [obsolete 3.0.8+]
 
 [FileShare]
 FileTransferIsEnabled=[true/false] enable file transfer/sharing/box (default=true) [3.0.6]

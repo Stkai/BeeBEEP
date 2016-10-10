@@ -65,7 +65,6 @@ public:
   void checkWindowFlagsAndShow();
 
   void loadSession();
-  void saveChatMessagesOnExit();
 
 public slots:
   void startStopCore();

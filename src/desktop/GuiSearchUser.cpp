@@ -37,7 +37,6 @@ GuiSearchUser::GuiSearchUser( QWidget *parent )
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
-  connect( mp_cbParseAddresses, SIGNAL( stateChanged( int ) ), this, SLOT( enableVerbose() ) );
 }
 
 void GuiSearchUser::loadSettings()
@@ -68,8 +67,6 @@ void GuiSearchUser::loadSettings()
   else
     mp_teAddressesInSettings->setPlainText( "" );
 
-  mp_cbParseAddresses->setChecked( Settings::instance().parseBroadcastAddresses() );
-  mp_cbAutoAddSubnet->setChecked( Settings::instance().addExternalSubnetAutomatically() );
   mp_cbEnableMDns->setChecked( Settings::instance().useMulticastDns() );
 
   sl_tmp = Settings::instance().workgroups();
@@ -79,22 +76,8 @@ void GuiSearchUser::loadSettings()
     mp_leWorkgroups->setText( "" );
 
   mp_cbAcceptConnectionsOnlyFromWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
-
-  if( Settings::instance().broadcastInterval() > 0 )
-  {
-    mp_cbBroadcastInterval->setChecked( true );
-    mp_sbBroadcastInterval->setValue( Settings::instance().broadcastInterval() / 1000 );
-  }
-  else
-  {
-    mp_cbBroadcastInterval->setChecked( false );
-    mp_sbBroadcastInterval->setValue( 10 );
-  }
-
-  mp_cbVerbose->setChecked( Settings::instance().parseBroadcastAddressesAll() );
   mp_sbMaxUsersToContact->setValue( Settings::instance().maxUsersToConnectInATick() );
 
-  enableVerbose();
   mp_teAddressesInSettings->setFocus();
 }
 
@@ -140,31 +123,8 @@ void GuiSearchUser::checkAndSearch()
 
   Settings::instance().setWorkgroups( sl_workgroups );
   Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptConnectionsOnlyFromWorkgroups->isChecked() );
-
-  Settings::instance().setParseBroadcastAddresses( mp_cbParseAddresses->isChecked() );
-  Settings::instance().setParseBroadcastAddressesAll( mp_cbVerbose->isChecked() );
-  Settings::instance().setAddExternalSubnetAutomatically( mp_cbAutoAddSubnet->isChecked() );
   Settings::instance().setUseMulticastDns( mp_cbEnableMDns->isChecked() );
-
-  if( mp_cbBroadcastInterval->isChecked() )
-  {
-    int iSeconds = mp_sbBroadcastInterval->value();
-    if( iSeconds > 0 )
-      Settings::instance().setBroadcastInterval( iSeconds * 1000 );
-    else
-      Settings::instance().setBroadcastInterval( 0 );
-  }
-  else
-    Settings::instance().setBroadcastInterval( 0 );
-
   Settings::instance().setMaxUsersToConnectInATick( mp_sbMaxUsersToContact->value() );
 
   accept();
-}
-
-void GuiSearchUser::enableVerbose()
-{
-  mp_cbVerbose->setEnabled( mp_cbParseAddresses->isChecked() );
-  if( !mp_cbVerbose->isEnabled() )
-    mp_cbVerbose->setChecked( false );
 }

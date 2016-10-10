@@ -31,6 +31,7 @@
 #include "GuiIconProvider.h"
 #include "GuiMain.h"
 #include "HistoryManager.h"
+#include "Hive.h"
 #include "Log.h"
 #include "MessageManager.h"
 #include "NetworkManager.h"
@@ -124,6 +125,9 @@ int main( int argc, char *argv[] )
 
   /* Init Network Manager */
   (void)NetworkManager::instance();
+
+  /* Init Hive */
+  (void)Hive::instance();
 
   /* Init Color Manager */
   (void)ColorManager::instance();
@@ -232,7 +236,6 @@ int main( int argc, char *argv[] )
   qDebug() << "IconProvider has load in cache" << GuiIconProvider::instance().cacheSize() << "icons";
 
   /* Save final session */
-  mw.saveChatMessagesOnExit();
   Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
   Settings::instance().loadRcFile();
   Settings::instance().save();
@@ -253,6 +256,7 @@ int main( int argc, char *argv[] )
   UserManager::close();
   Protocol::close();
   PluginManager::close();
+  Hive::close();
   NetworkManager::close();
   ColorManager::close();
   AudioManager::close();

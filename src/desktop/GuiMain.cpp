@@ -257,9 +257,6 @@ void GuiMain::applyFlagStaysOnTop()
   setWindowFlags( w_flags );
 #endif
   show();
-
-  if( windowFlags() & Qt::WindowStaysOnTopHint )
-    qDebug() << "ON TOP 2";
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -267,6 +264,8 @@ void GuiMain::checkWindowFlagsAndShow()
   checkViewActions();
 
   applyFlagStaysOnTop();
+
+  mp_barMain->setVisible( !Settings::instance().hideMainToolbar() );
 
   if( Settings::instance().showMinimizedAtStartup() )
     QTimer::singleShot( 100, this, SLOT( showMinimized() ) );
@@ -1184,8 +1183,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewShareBox );
   mp_barMain->addAction( mp_actViewLog );
   mp_barMain->addAction( mp_actViewScreenShot );
-
-  mp_barMain->setVisible( !Settings::instance().hideMainToolbar() );
 }
 
 void GuiMain::createDockWindows()
@@ -1908,9 +1905,7 @@ void GuiMain::searchUsers()
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
     qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
 
-  mp_core->checkBroadcastInterval();
-
-  QTimer::singleShot( 0, mp_core, SLOT( sendBroadcastMessage() ) );
+  QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
 }
 
 void GuiMain::showWritingUser( const User& u )
@@ -2343,7 +2338,7 @@ void GuiMain::showChat( VNumber chat_id )
   if( fl_chat )
   {
     if( !fl_chat->isVisible() )
-      checkWindowFlagsAndShow();
+      fl_chat->checkWindowFlagsAndShow();
     else
       fl_chat->raiseOnTop();
 
@@ -3373,7 +3368,7 @@ void GuiMain::showAddUser()
   gad.show();
 
   if( gad.exec() == QDialog::Accepted )
-    mp_core->sendHelloToHostsInSettings();
+    QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
 }
 
 void GuiMain::showChatSettingsMenu()
@@ -4026,11 +4021,6 @@ void GuiMain::updateEmoticons()
 
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateEmoticon();
-}
-
-void GuiMain::saveChatMessagesOnExit()
-{
-  mp_core->saveChatMessages();
 }
 
 void GuiMain::updateNewMessageAction()

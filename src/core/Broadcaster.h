@@ -34,50 +34,40 @@ class Broadcaster : public QObject
 
 public:
   explicit Broadcaster( QObject* );
-  bool startBroadcasting();
+  bool startBroadcastServer();
   void stopBroadcasting();
 
-  inline const QList<QHostAddress> contactedAddress() const;
-
-  void enableBroadcastTimer( bool );
   void onTickEvent( int );
-  void addPeerAddressToContact( const QHostAddress&, int );
+  inline void setNewBroadcastRequested( bool );
+  inline void setVerboseBroadcasting( bool );
 
 public slots:
-  void sendBroadcastDatagram();
+  void sendBroadcast();
 
 signals:
   void newPeerFound( const QHostAddress&, int );
-  void udpPortBlocked();
 
 private slots:
   void readBroadcastDatagram();
-  void checkLoopback();
-  void searchInPeerAddresses();
 
 protected:
-  bool sendDatagramToHost( const QHostAddress& );
-  bool addAddressToList( const QHostAddress& );
-  bool isLocalHostAddress( const QHostAddress& );
-  void addPeerAddress( const NetworkAddress& );
-  int updateAddresses();
+  bool contactNetworkAddress( const NetworkAddress& );
+
+  bool addNetworkAddress( const NetworkAddress&, bool split_ipv4_address );
+  inline bool addHostAddress( const QHostAddress& );
+  void updateAddresses();
 
 private:
-  QHostAddress m_baseBroadcastAddress;
-  QList<QHostAddress> m_broadcastAddresses;
-  QList<QHostAddress> m_ipAddresses;
   QUdpSocket m_broadcastSocket;
-
-  QTimer m_broadcastTimer;
-
-  QList<NetworkAddress> m_peerAddresses;
-  QList<QHostAddress> m_contactedAddresses;
-
-  QList<NetworkAddress> m_peerAddressesToContact;
+  QList<NetworkAddress> m_networkAddresses;
+  bool m_newBroadcastRequested;
+  bool m_verbose;
 
 };
 
 // Inline Functions
-inline const QList<QHostAddress> Broadcaster::contactedAddress() const { return m_contactedAddresses; }
+inline bool Broadcaster::addHostAddress( const QHostAddress& ha ) { return addNetworkAddress( NetworkAddress( ha, 0 ), false ); }
+inline void Broadcaster::setNewBroadcastRequested( bool new_value ) { m_newBroadcastRequested = new_value; }
+inline void Broadcaster::setVerboseBroadcasting( bool new_value ) { m_verbose = new_value; }
 
 #endif // BEEBEEP_BROADCASTER_H
