@@ -225,8 +225,8 @@ private:
   void checkAutoStartOnBoot( bool );
   void checkViewActions();
   QMenu* gameMenu( GameInterface* );
-  bool sendFile( const User&, const QString& );
-  void sendFiles( const User&, const QStringList& );
+  bool sendFile( const User&, const QString&, VNumber chat_id );
+  void sendFiles( const User&, const QStringList&, VNumber chat_id );
   bool openWebUrl( const QString& );
   QStringList checkFilePath( const QString& );
   void showVCard( const User&, bool ensure_visible );

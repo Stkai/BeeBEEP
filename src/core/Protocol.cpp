@@ -216,7 +216,7 @@ QByteArray Protocol::pongMessage() const
 
 QByteArray Protocol::broadcastMessage( const QHostAddress& to_host_address ) const
 {
-  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().hostPort() ) );
+  Message m( Message::Beep, ID_BEEP_MESSAGE, QString::number( Settings::instance().localUser().networkAddress().hostPort() ) );
   QStringList sl;
   sl << to_host_address.toString();
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
@@ -268,7 +268,7 @@ int Protocol::datastreamVersion( const Message& m ) const
 QByteArray Protocol::helloMessage( const QString& public_key ) const
 {
   QStringList data_list;
-  data_list << QString::number( Settings::instance().localUser().hostPort() );
+  data_list << QString::number( Settings::instance().localUser().networkAddress().hostPort() );
   data_list << Settings::instance().localUser().name();
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
@@ -511,8 +511,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   /* Create User */
   User u( newId() );
   u.setName( user_name );
-  u.setHostAddress( peer_address );
-  u.setHostPort( listener_port );
+  u.setNetworkAddress( NetworkAddress( peer_address, listener_port ) );
   u.setStatus( user_status );
   u.setStatusDescription( user_status_description );
   u.setAccountName( user_account_name );
@@ -561,8 +560,7 @@ User Protocol::createTemporaryUser( const QString& user_name, const QString& use
 {
   User u;
   u.setName( user_name );
-  u.setHostAddress( user_address );
-  u.setHostPort( user_port );
+  u.setNetworkAddress( NetworkAddress( user_address, user_port ) );
   if( !user_account_name.isEmpty() )
     u.setAccountName( user_account_name );
   u.setStatus( User::Offline );
@@ -575,8 +573,7 @@ QString Protocol::saveUser( const User& u ) const
   UserRecord ur;
   ur.setName( u.name() );
   ur.setAccount( u.accountName() );
-  ur.setHostAddress( u.hostAddress() );
-  ur.setHostPort( u.hostPort() );
+  ur.setNetworkAddress( u.networkAddress() );
   ur.setFavorite( u.isFavorite() );
   return saveUserRecord( ur, false );
 }
@@ -587,7 +584,7 @@ User Protocol::loadUser( const QString& s )
   if( !ur.isValid() )
     return User();
 
-  User u = createTemporaryUser( ur.name(), ur.account(), ur.hostAddress(), ur.hostPort() );
+  User u = createTemporaryUser( ur.name(), ur.account(), ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() );
   u.setIsFavorite( ur.isFavorite() );
 
   return u;
@@ -596,8 +593,8 @@ User Protocol::loadUser( const QString& s )
 QString Protocol::saveUserRecord( const UserRecord& ur, bool compact_fields ) const
 {
   QStringList sl;
-  sl << ur.hostAddress().toString();
-  sl << QString::number( ur.hostPort() );
+  sl << ur.networkAddress().hostAddress().toString();
+  sl << QString::number( ur.networkAddress().hostPort() );
   if( !compact_fields )
   {
     sl << ur.comment();
@@ -621,8 +618,9 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   }
 
   UserRecord ur;
-  ur.setHostAddress( QHostAddress( sl.takeFirst() ) );
-  if( ur.hostAddress().isNull() )
+
+  QHostAddress user_host_address = QHostAddress( sl.takeFirst() );
+  if( user_host_address.isNull() )
   {
     qWarning() << "Invalid user record found in data:" << s << "(host address error)";
     return UserRecord();
@@ -634,8 +632,8 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     qWarning() << "Invalid user record found in data:" << s << "(host port error)";
     return UserRecord();
   }
-  else
-    ur.setHostPort( host_port );
+
+  ur.setNetworkAddress( NetworkAddress( user_host_address, host_port ) );
 
   if( !sl.isEmpty() )
     ur.setComment( sl.takeFirst() );
@@ -862,6 +860,11 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
     sl << QString( "1" );
   else
     sl << QString( "0" );
+  sl << fi.chatPrivateId();
+  if( fi.lastModified().isValid() )
+    sl << fi.lastModified().toString( Qt::ISODate );
+  else
+    sl << QString( "" );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   return m;
@@ -889,6 +892,19 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
 
   if( !sl.isEmpty() )
     fi.setIsInShareBox( sl.takeFirst() == QString( "1" ) );
+
+  if( !sl.isEmpty() )
+    fi.setChatPrivateId( sl.takeFirst() );
+
+  if( !sl.isEmpty() )
+  {
+    if( !sl.first().isEmpty() )
+    {
+      QDateTime dt_last_modified = QDateTime::fromString( sl.takeFirst(), Qt::ISODate );
+      if( dt_last_modified.isValid() )
+        fi.setLastModified( dt_last_modified );
+    }
+  }
 
   return fi;
 }

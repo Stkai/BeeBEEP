@@ -129,6 +129,7 @@ Settings::Settings()
   m_useReturnToSendMessage = true;
   m_tickIntervalCheckIdle = 10;
   m_tickIntervalCheckNetwork = 5;
+  m_tickIntervalBroadcasting = 0;
 
   m_chatMessageFilter = QBitArray( (int)ChatMessage::NumTypes );
   for( int i = 0; i < ChatMessage::NumTypes; i++ )
@@ -627,10 +628,9 @@ int Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
   if( host_address.toString() == QString( "0.0.0.0" ) )
-    m_localUser.setHostAddress( QHostAddress( "127.0.0.1") );
+    m_localUser.setNetworkAddress( NetworkAddress( QHostAddress( "127.0.0.1" ), host_port ) );
   else
-    m_localUser.setHostAddress( host_address );
-  m_localUser.setHostPort( host_port );
+    m_localUser.setNetworkAddress( NetworkAddress( host_address, host_port ) );
 }
 
 void Settings::loadBroadcastAddressesFromFileHosts()
@@ -928,7 +928,10 @@ void Settings::load()
   sets->beginGroup( "Misc" );
   m_tickIntervalCheckIdle = qMax( sets->value( "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
   m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 5 );
-  m_localUser.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
+  m_tickIntervalBroadcasting = qMax( sets->value( "TickIntervalBroadcasting", m_tickIntervalBroadcasting ).toInt(), 0 );
+  NetworkAddress local_user_network_address = m_localUser.networkAddress();
+  local_user_network_address.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
+  m_localUser.setNetworkAddress( local_user_network_address );
   m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", 13000 ).toInt(), 13000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
@@ -1196,11 +1199,12 @@ void Settings::save()
   sets->beginGroup( "Misc" );
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );
   sets->setValue( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork );
-  sets->setValue( "ListenerPort", m_localUser.hostPort() );
+  sets->setValue( "ListenerPort", m_localUser.networkAddress().hostPort() );
   sets->setValue( "ConnectionActivityTimeout", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );
   sets->setValue( "UseLowDelayOptionOnSocket", m_useLowDelayOptionOnSocket );
+  sets->setValue( "TickIntervalBroadcasting", m_tickIntervalBroadcasting );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS

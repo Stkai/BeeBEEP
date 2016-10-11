@@ -176,6 +176,7 @@ Uuid= [string] application UUID for anonymous statistics [3.0.5]
 [Misc]
 TickIntervalCheckIdle=10
 TickIntervalCheckNetwork=7
+TickIntervalBroadcasting=[integer] is the tick interval (seconds) from a broadcast and another (default is disabled=0) [3.0.8]
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0) [obsolete 3.0.8+]
 ListenerPort= is the last TCP port of chat communication between BeeBEEP (default is 6475)
 ConnectionActivityTimeout=12000

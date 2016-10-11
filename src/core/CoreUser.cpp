@@ -463,8 +463,7 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
 
   QList<UserRecord> user_record_list;
   UserRecord to_ur;
-  to_ur.setHostAddress( to_user.hostAddress() );
-  to_ur.setHostPort( to_user.hostPort() );
+  to_ur.setNetworkAddress( to_user.networkAddress() );
   user_record_list.append( to_ur );
   Message m = Protocol::instance().userRecordListToMessage( user_record_list );
   user_record_list.clear();
@@ -481,8 +480,7 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
     if( isUserConnected( u.id() ) )
     {
       UserRecord ur;
-      ur.setHostAddress( u.hostAddress() );
-      ur.setHostPort( u.hostPort() );
+      ur.setNetworkAddress( u.networkAddress() );
       user_record_list.append( ur );
       sendMessageToLocalNetwork( u, m );
     }

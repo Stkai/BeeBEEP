@@ -134,7 +134,7 @@ User UserManager::findUserByPath( const QString& user_path ) const
 
   foreach( User u, m_users.toList() )
   {
-    if( u.hostAddressAndPort() == host_and_port )
+    if( u.networkAddress().toString() == host_and_port )
       return u;
   }
 
@@ -202,17 +202,19 @@ User UserManager::findUserBySessionId( const QString& user_session_id ) const
 
 User UserManager::findUserByHostAddressAndPort( const QHostAddress& host_address, int host_port )
 {
-  if( host_address.isNull() )
-    return User();
+ if( host_address.isNull() || host_port < 1 )
+   return User();
+
+  NetworkAddress network_address( host_address, host_port );
 
   foreach( User u, m_users.toList() )
   {
-    if( u.hostAddress() == host_address && u.hostPort() == host_port )
+    if( u.networkAddress() == network_address )
       return u;
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with IP address" << qPrintable( host_address.toString() ) << "and port" << host_port;
+  qDebug() << "Unable to find user with IP address" << qPrintable( network_address.toString() );
 #endif
 
   return User();

@@ -129,9 +129,9 @@ bool Core::start()
   {
     qWarning() << "Unable to bind default listener port" << Settings::instance().defaultListenerPort();
 
-    if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().localUser().hostPort() ) )
+    if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().localUser().networkAddress().hostPort() ) )
     {
-      qDebug() << "Unable to bind last used listener port" << Settings::instance().localUser().hostPort();
+      qDebug() << "Unable to bind last used listener port" << Settings::instance().localUser().networkAddress().hostPort();
       if( !mp_listener->listen( Settings::instance().hostAddressToListen() ) )
       {
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -146,8 +146,8 @@ bool Core::start()
 
   qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
   NetworkManager::instance().searchLocalHostAddress();
-
   Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), mp_listener->serverPort() );
+
   if( Settings::instance().localUser().sessionId().isEmpty() )
     Settings::instance().createSessionId();
 
@@ -168,7 +168,7 @@ bool Core::start()
   }
   else
   {
-    qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
+    qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().networkAddress().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
     QTimer::singleShot( 2000, this, SLOT( sendBroadcastMessage() ) );
   }
 
@@ -234,7 +234,7 @@ void Core::startDnsMulticasting()
   {
     if( mp_mDns->start( Settings::instance().programName(),
                         Settings::instance().dnsRecord(),
-                        Settings::instance().localUser().hostAddress().toString(),
+                        Settings::instance().localUser().networkAddress().hostAddress().toString(),
                         mp_listener->serverPort() ) )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -504,15 +504,10 @@ void Core::onTickEvent( int ticks )
 {
   if( isConnected() )
   {
-    if( ticks % 63 == 0 )
-    {
-      if( UserManager::instance().userList().toList().isEmpty() )
-        mp_broadcaster->setVerboseBroadcasting( true );
-      if( connectedUsers() <= (UserManager::instance().userList().toList().size() / 2) )
-        mp_broadcaster->setNewBroadcastRequested( true );
-    }
-    else
-      mp_broadcaster->onTickEvent( ticks );
+    if( Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0) )
+      mp_broadcaster->setNewBroadcastRequested( true );
+
+    mp_broadcaster->onTickEvent( ticks );
   }
 
   if( Protocol::instance().currentId() >= Protocol::instance().maxId() )

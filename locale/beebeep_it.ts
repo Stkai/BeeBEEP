@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -396,7 +396,7 @@
     </message>
     <message>
         <source>%1 %2 has found a filter on UDP port %3. Please check your firewall settings.</source>
-        <translation>%1 %2 ha trovato un filtro sulla porta UDP %3. Controlla le impostazioni del tuo firewall.</translation>
+        <translation type="obsolete">%1 %2 ha trovato un filtro sulla porta UDP %3. Controlla le impostazioni del tuo firewall.</translation>
     </message>
     <message>
         <source>%1 You cannot reach %2 Network.</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>is connected from external network (the new subnet is added to your broadcast address list).</source>
-        <translation>proviene da una rete esterna (la sua sottorete è stata aggiunta alla tua lista).</translation>
+        <translation type="obsolete">proviene da una rete esterna (la sua sottorete è stata aggiunta alla tua lista).</translation>
     </message>
     <message>
         <source>%1 %2 will search users in these IP addresses: %3</source>
@@ -428,7 +428,7 @@
     </message>
     <message>
         <source>%1 Checking %2 more addresses...</source>
-        <translation>%1 Controllo ancora %2 indirizzi...</translation>
+        <translation type="obsolete">%1 Controllo ancora %2 indirizzi...</translation>
     </message>
     <message>
         <source>%1 Contacting %2 ...</source>
@@ -600,7 +600,7 @@
     </message>
     <message>
         <source>View the log messages for more informations</source>
-        <translation>Guarda i messaggi di log per ulteriori informazioni</translation>
+        <translation type="obsolete">Guarda i messaggi di log per ulteriori informazioni</translation>
     </message>
     <message>
         <source>New version is available</source>
@@ -4087,7 +4087,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Split subnet to IPV4 addresses</source>
-        <translation>Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
+        <translation type="obsolete">Usa i singoli indirizzi IPV4 invece di una sottorete</translation>
     </message>
     <message>
         <source>Unknown address</source>
@@ -4135,7 +4135,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Automatically add external subnet</source>
-        <translation>Aggiungi automaticamente le sottorete esterne</translation>
+        <translation type="obsolete">Aggiungi automaticamente le sottorete esterne</translation>
     </message>
     <message>
         <source>Use Zero Configuration Networking</source>
@@ -4175,15 +4175,23 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>seconds (0=disabled, 10=default)</source>
-        <translation>secondi (0=disabilitata, 10=predefinita)</translation>
+        <translation type="obsolete">secondi (0=disabilitata, 10=predefinita)</translation>
     </message>
     <message>
         <source>Verbose</source>
-        <translation>In modo approfondito</translation>
+        <translation type="obsolete">In modo approfondito</translation>
     </message>
     <message>
         <source>Max users to contact in a tick</source>
-        <translation>Numero di utenti da contattare in un tick</translation>
+        <translation type="obsolete">Numero di utenti da contattare in un tick</translation>
+    </message>
+    <message>
+        <source>Max users to contact every second</source>
+        <translation>Numero di utenti da contattare ogni secondo</translation>
+    </message>
+    <message>
+        <source>seconds (0=disabled, 0=default)</source>
+        <translation>secondi (0=disabilitata, 0=predefinita)</translation>
     </message>
 </context>
 <context>

@@ -133,13 +133,13 @@ void MDnsManager::addUserRecord( const UserRecord& ur )
   if( m_userRecords.contains( ur ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( objectName() ) << "already contains user record" << ur.hostAddressAndPort();
+    qDebug() << qPrintable( objectName() ) << "already contains user record" << qPrintable( ur.networkAddress().toString() );
 #endif
     return;
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "adds new user record" << ur.hostAddressAndPort();
+  qDebug() << qPrintable( objectName() ) << "adds new user record" << qPrintable( ur.networkAddress().toString() );
 #endif
   m_userRecords.append( ur );
   emit newUserFound( ur );
@@ -174,10 +174,9 @@ void MDnsManager::serviceResolved( const QHostInfo& host_info, int host_port )
   {
     UserRecord ur;
     if( !ipv4_address.isNull() )
-      ur.setHostAddress( ipv4_address );
+      ur.setNetworkAddress( NetworkAddress( ipv4_address, host_port ) );
     else
-      ur.setHostAddress( ipv6_address );
-    ur.setHostPort( host_port );
+      ur.setNetworkAddress( NetworkAddress( ipv6_address, host_port ) );
     ur.setComment( QString( "MDns[%1]" ).arg( resolver->record().name() ) );
     addUserRecord( ur );
   }

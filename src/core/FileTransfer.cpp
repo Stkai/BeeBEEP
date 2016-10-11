@@ -76,11 +76,13 @@ void FileTransfer::stopListener()
 
 void FileTransfer::resetServerFiles()
 {
-  qDebug() << "File Transfer reset files to" << Settings::instance().localUser().hostAddress().toString() << serverPort();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "File Transfer reset files to" << qPrintable( Settings::instance().localUser().networkAddress().toString() );
+#endif
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )
   {
-    (*it).setHostAddress( Settings::instance().localUser().hostAddress() );
+    (*it).setHostAddress( Settings::instance().localUser().networkAddress().hostAddress() );
     (*it).setHostPort( serverPort() );
     ++it;
   }
@@ -136,7 +138,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
   }
 
   file_info = Protocol::instance().fileInfo( fi, share_folder, to_share_box );
-  file_info.setHostAddress( Settings::instance().localUser().hostAddress() );
+  file_info.setHostAddress( Settings::instance().localUser().networkAddress().hostAddress() );
   file_info.setHostPort( serverPort() );
   m_files.append( file_info );
   return file_info;

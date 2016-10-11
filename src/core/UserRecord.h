@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_USERRECORD_H
 #define BEEBEEP_USERRECORD_H
 
-#include "Config.h"
+#include "NetworkAddress.h"
 
 
 class UserRecord
@@ -38,17 +38,14 @@ public:
   inline bool operator==( const UserRecord& ) const;
 
   inline bool isValid() const;
-  inline QString hostAddressAndPort() const;
   inline QString path() const;
 
   inline void setName( const QString& );
   inline const QString& name() const;
   inline void setAccount( const QString& );
   inline const QString& account() const;
-  inline void setHostAddress( const QHostAddress& );
-  inline const QHostAddress& hostAddress() const;
-  inline void setHostPort( int );
-  inline int hostPort() const;
+  inline void setNetworkAddress( const NetworkAddress& );
+  inline const NetworkAddress& networkAddress() const;
   inline void setComment( const QString& );
   inline const QString& comment() const;
   inline void setFavorite( bool );
@@ -57,8 +54,7 @@ public:
 private:
   QString m_name;
   QString m_account;
-  QHostAddress m_hostAddress;
-  int m_hostPort;
+  NetworkAddress m_networkAddress;
   QString m_comment;
   bool m_isFavorite;
 
@@ -66,18 +62,15 @@ private:
 
 
 // Inline Functions
-inline bool UserRecord::operator==( const UserRecord& ur ) const { return m_hostAddress == ur.m_hostAddress && m_hostPort == ur.m_hostPort; }
-inline bool UserRecord::isValid() const { return !m_hostAddress.isNull(); }
+inline bool UserRecord::operator==( const UserRecord& ur ) const { return m_networkAddress == ur.m_networkAddress; }
+inline bool UserRecord::isValid() const { return m_networkAddress.isHostAddressValid() && m_networkAddress.isHostPortValid(); }
 inline void UserRecord::setName( const QString& new_value ) { m_name = new_value; }
 inline const QString& UserRecord::name() const { return m_name; }
 inline void UserRecord::setAccount( const QString& new_value ) { m_account = new_value; }
 inline const QString& UserRecord::account() const { return m_account; }
-inline QString UserRecord::hostAddressAndPort() const { return QString( "%1:%2" ).arg( m_hostAddress.toString(), QString::number( m_hostPort ) ); }
-inline QString UserRecord::path() const { return QString( "%1@%2" ).arg( m_name ).arg( hostAddressAndPort() ); }
-inline void UserRecord::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
-inline const QHostAddress& UserRecord::hostAddress() const { return m_hostAddress; }
-inline void UserRecord::setHostPort( int new_value ) { m_hostPort = new_value; }
-inline int UserRecord::hostPort() const { return m_hostPort; }
+inline QString UserRecord::path() const { return QString( "%1@%2" ).arg( m_name ).arg( m_networkAddress.toString() ); }
+inline void UserRecord::setNetworkAddress( const NetworkAddress& new_value ) { m_networkAddress = new_value; }
+inline const NetworkAddress& UserRecord::networkAddress() const { return m_networkAddress; }
 inline void UserRecord::setComment( const QString& new_value ) { m_comment = new_value; }
 inline const QString& UserRecord::comment() const { return m_comment; }
 inline void UserRecord::setFavorite( bool new_value ) { m_isFavorite = new_value; }

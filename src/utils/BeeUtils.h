@@ -68,6 +68,8 @@ namespace Bee
   QChar naviveFolderSeparator();
   QString convertToNativeFolderSeparator( const QString& );
   QString folderCdUp( const QString& );
+  bool setLastModifiedToFile( const QString&, const QDateTime& );
+  bool showFileInGraphicalShell( const QString& );
 
 }
 

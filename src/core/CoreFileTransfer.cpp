@@ -25,6 +25,7 @@
 #include "BeeUtils.h"
 #include "BuildFileList.h"
 #include "BuildFileShareList.h"
+#include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
 #include "FileShare.h"
@@ -194,7 +195,14 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     }
   }
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+  Chat chat_to_show_message;
+  if( !fi.chatPrivateId().isEmpty() )
+    chat_to_show_message = ChatManager::instance().findGroupChatByPrivateId( fi.chatPrivateId() );
+
+  if( !chat_to_show_message.isValid() )
+    chat_to_show_message = ChatManager::instance().privateChatForUser( u.id() );
+
+  dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToChat, ChatMessage::FileTransfer );
 
   emit fileTransferMessage( peer_id, u, fi, msg );
 }
@@ -210,7 +218,7 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
   emit fileTransferProgress( peer_id, u, fi, bytes );
 }
 
-bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box )
+bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id )
 {
   QString icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
 
@@ -264,6 +272,12 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
   }
 
   FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box );
+  if( chat_id != ID_INVALID )
+  {
+    Chat chat_selected = ChatManager::instance().chat( chat_id );
+    if( chat_selected.isValid() && chat_selected.isGroup() )
+      fi.setChatPrivateId( chat_selected.privateId() );
+  }
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "File path" << fi.path() << "is added to file transfer list";
@@ -743,7 +757,7 @@ void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QStri
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Upload file" << fi.path() << "to path" << to_path << "of user" << to_user_id;
 #endif
-  sendFile( to_user_id, fi.path(), to_path, true );
+  sendFile( to_user_id, fi.path(), to_path, true, ID_INVALID );
 }
 
 void Core::onFileTransferCompleted( VNumber peer_id, VNumber user_id, const FileInfo& fi )

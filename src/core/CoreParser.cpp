@@ -261,7 +261,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
           qDebug() << "Connecting to the temporary user" << user_path;
           UserManager::instance().setUser( user_tmp );
           ul.set( user_tmp );
-          newPeerFound( user_tmp.hostAddress(), user_tmp.hostPort() );
+          newPeerFound( user_tmp.networkAddress().hostAddress(), user_tmp.networkAddress().hostPort() );
         }
       }
     }
@@ -309,7 +309,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
     QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
     QString msg;
 
-    QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.hostAddress() );
+    QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.networkAddress().hostAddress() );
 
     if( file_info_list.isEmpty() )
     {
@@ -355,7 +355,7 @@ void Core::parseFolderMessage( const User& u, const Message& m )
   else if( m.hasFlag( Message::Request ) )
   {
     QString folder_name = tr( "unknown folder" );
-    QList<FileInfo> file_info_list = Protocol::instance().messageFolderToInfoList( m, u.hostAddress(), &folder_name );
+    QList<FileInfo> file_info_list = Protocol::instance().messageFolderToInfoList( m, u.networkAddress().hostAddress(), &folder_name );
     if( file_info_list.isEmpty() )
     {
       qWarning() << "Invalid file info list found in folder message from" << qPrintable( u.path() );
@@ -400,7 +400,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 #endif
     foreach( UserRecord ur, user_record_list )
     {
-       if( Hive::instance().addNetworkAddress( NetworkAddress( ur.hostAddress(), ur.hostPort() ) ) )
+       if( Hive::instance().addNetworkAddress( ur.networkAddress() ) )
          mp_broadcaster->setNewBroadcastRequested( true );
     }
   }
@@ -422,7 +422,7 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
 
   if( m.hasFlag( Message::List ) )
   {
-    QList<FileInfo> file_info_list = Protocol::instance().messageToShareBoxFileList( m, u.hostAddress() );
+    QList<FileInfo> file_info_list = Protocol::instance().messageToShareBoxFileList( m, u.networkAddress().hostAddress() );
     emit shareBoxAvailable( u, folder_name, file_info_list );
   }
   else if( m.hasFlag( Message::Request ) )

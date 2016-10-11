@@ -25,7 +25,7 @@
 
 
 UserRecord::UserRecord()
-  : m_name( "" ), m_account( "" ), m_hostAddress(), m_hostPort( DEFAULT_LISTENER_PORT ),
+  : m_name( "" ), m_account( "" ), m_networkAddress( QHostAddress(), DEFAULT_LISTENER_PORT ),
     m_comment( "" ), m_isFavorite( false )
 {
 }
@@ -41,20 +41,19 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
   {
     m_name = ur.m_name;
     m_account = ur.m_account;
-    m_hostAddress = ur.m_hostAddress;
-    m_hostPort = ur.m_hostPort;
+    m_networkAddress = ur.m_networkAddress;
     m_comment = ur.m_comment;
     m_isFavorite = ur.m_isFavorite;
   }
   return *this;
 }
 
-bool UserRecord::operator<( const UserRecord& u ) const
+bool UserRecord::operator<( const UserRecord& ur ) const
 {
-  if( u.m_hostAddress.isNull() )
+  if( !ur.m_networkAddress.isHostAddressValid() )
     return false;
-  else if( m_hostAddress.isNull() )
+  else if( !m_networkAddress.isHostAddressValid() )
     return true;
   else
-    return m_hostAddress.toString() < u.m_hostAddress.toString();
+    return m_networkAddress.toString() < ur.m_networkAddress.toString();
 }

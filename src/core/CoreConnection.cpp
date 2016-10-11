@@ -68,7 +68,7 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
   if( u.isValid() && isUserConnected( u.id() ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "User from" << sender_ip.toString() << sender_port << "is already connected";
+    qDebug() << "User from" << qPrintable( sender_ip.toString() ) << sender_port << "is already connected";
 #endif
     return true;
   }
@@ -78,16 +78,15 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
 
 void Core::checkUserRecord( const UserRecord& ur )
 {
-  if( ur.hostAddress() == Settings::instance().localUser().hostAddress() &&
-      ur.hostPort() == Settings::instance().localUser().hostPort() )
+  if( ur.networkAddress() == Settings::instance().localUser().networkAddress() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Skip local user record" << ur.hostAddressAndPort();
+    qDebug() << "Skip local user record:" << qPrintable( ur.networkAddress().toString() );
 #endif
     return;
   }
 
-  newPeerFound( ur.hostAddress(), ur.hostPort() );
+  newPeerFound( ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() );
 }
 
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )

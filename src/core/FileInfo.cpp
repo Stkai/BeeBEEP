@@ -28,7 +28,7 @@ FileInfo::FileInfo()
   : m_transferType( FileInfo::Upload ), m_name( "" ), m_path( "" ), m_suffix( "" ),
     m_size( 0 ), m_shareFolder( "" ), m_isFolder( false ), m_hostAddress(),
     m_hostPort( 0 ), m_password( "" ), m_id( ID_INVALID ), m_fileHash(), m_lastModified(),
-    m_isInShareBox( false )
+    m_isInShareBox( false ), m_chatPrivateId( "" )
 {
 }
 
@@ -36,7 +36,7 @@ FileInfo::FileInfo( VNumber id, FileInfo::TransferType tt )
   : m_transferType( tt ), m_name( "" ), m_path( "" ), m_suffix( "" ),
     m_size( 0 ), m_shareFolder( "" ), m_isFolder( false ), m_hostAddress(),
     m_hostPort( 0 ), m_password( "" ), m_id( id ), m_fileHash(), m_lastModified(),
-    m_isInShareBox( false )
+    m_isInShareBox( false ), m_chatPrivateId( "" )
 {
 }
 
@@ -58,6 +58,7 @@ FileInfo& FileInfo::operator=( const FileInfo& fi )
     m_fileHash = fi.m_fileHash;
     m_lastModified = fi.m_lastModified;
     m_isInShareBox = fi.m_isInShareBox;
+    m_chatPrivateId = fi.m_chatPrivateId;
   }
   return *this;
 }

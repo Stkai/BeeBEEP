@@ -30,7 +30,7 @@
 
 
 Broadcaster::Broadcaster( QObject *parent )
-  : QObject( parent ), m_broadcastSocket(), m_networkAddresses(), m_newBroadcastRequested( false ), m_verbose( false )
+  : QObject( parent ), m_broadcastSocket(), m_networkAddresses(), m_newBroadcastRequested( false )
 {
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
 }
@@ -169,7 +169,7 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     }
 
-    if( sender_listener_port == Settings::instance().localUser().hostPort() && NetworkManager::instance().isLocalHostAddress( sender_ip ) )
+    if( sender_listener_port == Settings::instance().localUser().networkAddress().hostPort() && NetworkManager::instance().isLocalHostAddress( sender_ip ) )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Broadcaster has received LOCAL datagram from ip address:" << qPrintable( Protocol::instance().hostAddressFromBroadcastMessage( m ).toString() );
@@ -222,22 +222,17 @@ void Broadcaster::updateAddresses()
   }
 
   addHostAddress( NetworkManager::instance().localBroadcastAddress() );
-  if( m_verbose )
-    addNetworkAddress( NetworkAddress( NetworkManager::instance().localBroadcastAddress(), Settings::instance().defaultListenerPort() ), true );
 
   foreach( QHostAddress ha, NetworkManager::instance().localBroadcastAddresses() )
   {
-    if( ha == NetworkManager::instance().localBroadcastAddress() )
-      continue;
-    addHostAddress( ha );
-    if( m_verbose )
-      addNetworkAddress( NetworkAddress( ha, Settings::instance().defaultListenerPort() ), true );
+    if( ha != NetworkManager::instance().localBroadcastAddress() )
+      addHostAddress( ha );
   }
 
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( !u.isStatusConnected() )
-      addNetworkAddress( NetworkAddress( u.hostAddress(), u.hostPort() ), false );
+      addNetworkAddress( u.networkAddress(), false );
   }
 
   foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
@@ -261,11 +256,10 @@ void Broadcaster::updateAddresses()
       UserRecord ur = Protocol::instance().loadUserRecord( user_path );
       if( ur.isValid() )
       {
-        NetworkAddress na( ur.hostAddress(), ur.hostPort() );
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "Network address saved in user path list parsed:" << na.toString();
+        qDebug() << "Network address saved in user path list parsed:" << user_path;
 #endif
-        addNetworkAddress( na, false );
+        addNetworkAddress( ur.networkAddress(), false );
       }
       else
         qWarning() << "Broadcaster has found error in user record saved in file settings:" << user_path;
@@ -293,6 +287,9 @@ void Broadcaster::onTickEvent( int )
   }
 
   if( m_broadcastSocket.state() != QAbstractSocket::BoundState )
+    return;
+
+  if( !NetworkManager::instance().isMainInterfaceUp() )
     return;
 
   for( int i = 0; i < Settings::instance().maxUsersToConnectInATick(); i++ )

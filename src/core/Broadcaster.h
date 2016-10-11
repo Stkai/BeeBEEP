@@ -39,7 +39,6 @@ public:
 
   void onTickEvent( int );
   inline void setNewBroadcastRequested( bool );
-  inline void setVerboseBroadcasting( bool );
 
 public slots:
   void sendBroadcast();
@@ -61,13 +60,11 @@ private:
   QUdpSocket m_broadcastSocket;
   QList<NetworkAddress> m_networkAddresses;
   bool m_newBroadcastRequested;
-  bool m_verbose;
 
 };
 
 // Inline Functions
 inline bool Broadcaster::addHostAddress( const QHostAddress& ha ) { return addNetworkAddress( NetworkAddress( ha, 0 ), false ); }
 inline void Broadcaster::setNewBroadcastRequested( bool new_value ) { m_newBroadcastRequested = new_value; }
-inline void Broadcaster::setVerboseBroadcasting( bool new_value ) { m_verbose = new_value; }
 
 #endif // BEEBEEP_BROADCASTER_H

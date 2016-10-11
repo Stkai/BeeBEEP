@@ -92,7 +92,7 @@ public:
   bool readAllMessagesInChat( VNumber );
 
   /* CoreFileTransfer */
-  bool sendFile( VNumber, const QString& file_path, const QString& share_folder, bool to_share_box );
+  bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );
   bool downloadFile( VNumber, const FileInfo&, bool show_message );
   void refuseToDownloadFile( VNumber, const FileInfo& );
   void refuseToDownloadFolder( VNumber, const QString& );

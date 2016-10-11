@@ -36,7 +36,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   setWindowTitle( tr( "Add user" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
 
   QString s_txt1 = mp_lHelp->text();
-  QString s_txt2 = tr( "your IP is %1 in LAN %2").arg( Settings::instance().localUser().hostAddress().toString() )
+  QString s_txt2 = tr( "your IP is %1 in LAN %2").arg( Settings::instance().localUser().networkAddress().hostAddress().toString() )
                                                  .arg( NetworkManager::instance().localBroadcastAddress().toString() );
   QString s_header = QString( "%1\n(%2)" ).arg( s_txt1 ).arg( s_txt2 );
   mp_lHelp->setText( s_header );
@@ -126,8 +126,7 @@ void GuiAddUser::addUser()
       foreach( QHostAddress ha, ha_list )
       {
         UserRecord ur;
-        ur.setHostAddress( QHostAddress( ha ) );
-        ur.setHostPort( address_port );
+        ur.setNetworkAddress( NetworkAddress( ha, address_port ) );
         ur.setComment( user_comment );
         if( !m_users.contains( ur ) )
         {
@@ -140,8 +139,7 @@ void GuiAddUser::addUser()
   else
   {
     UserRecord ur;
-    ur.setHostAddress( QHostAddress( ip_address ) );
-    ur.setHostPort( address_port );
+    ur.setNetworkAddress( NetworkAddress( QHostAddress( ip_address ), address_port ) );
     ur.setComment( user_comment );
     if( m_users.contains( ur ) )
     {
@@ -164,7 +162,7 @@ void GuiAddUser::addUser()
 void GuiAddUser::addUserToList( const UserRecord& ur )
 {
   QTreeWidgetItem* item = new QTreeWidgetItem( mp_twUsers );
-  item->setText( 0, ur.hostAddressAndPort() );
+  item->setText( 0, ur.networkAddress().toString() );
   item->setIcon( 0, QIcon( ":/images/user.png" ));
   item->setText( 1, ur.comment() );
 }
@@ -190,7 +188,7 @@ bool GuiAddUser::removeUserPathFromList( const QString& user_path )
   QList<UserRecord>::iterator it = m_users.begin();
   while( it != m_users.end() )
   {
-    if( it->hostAddressAndPort() == user_path )
+    if( it->networkAddress().toString() == user_path )
     {
       m_users.erase( it );
       return true;

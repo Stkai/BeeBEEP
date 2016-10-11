@@ -76,6 +76,18 @@ void GuiSearchUser::loadSettings()
     mp_leWorkgroups->setText( "" );
 
   mp_cbAcceptConnectionsOnlyFromWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
+
+  if( Settings::instance().tickIntervalBroadcasting() > 0 )
+  {
+    mp_cbBroadcastInterval->setChecked( true );
+    mp_sbBroadcastInterval->setValue( Settings::instance().tickIntervalBroadcasting() );
+  }
+  else
+  {
+    mp_cbBroadcastInterval->setChecked( false );
+    mp_sbBroadcastInterval->setValue( 301 );
+  }
+
   mp_sbMaxUsersToContact->setValue( Settings::instance().maxUsersToConnectInATick() );
 
   mp_teAddressesInSettings->setFocus();
@@ -124,6 +136,12 @@ void GuiSearchUser::checkAndSearch()
   Settings::instance().setWorkgroups( sl_workgroups );
   Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptConnectionsOnlyFromWorkgroups->isChecked() );
   Settings::instance().setUseMulticastDns( mp_cbEnableMDns->isChecked() );
+
+  if( mp_cbBroadcastInterval->isChecked() )
+    Settings::instance().setTickIntervalBroadcasting( qMax( 301, mp_sbBroadcastInterval->value() ) );
+  else
+    Settings::instance().setTickIntervalBroadcasting( 0 );
+
   Settings::instance().setMaxUsersToConnectInATick( mp_sbMaxUsersToContact->value() );
 
   accept();

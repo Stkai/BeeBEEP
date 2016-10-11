@@ -129,6 +129,8 @@ public:
   inline int tickIntervalCheckNetwork() const;
   inline void setMaxUsersToConnectInATick( int );
   inline int maxUsersToConnectInATick() const;
+  inline void setTickIntervalBroadcasting( int );
+  inline int tickIntervalBroadcasting() const;
 
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
@@ -151,6 +153,7 @@ public:
 
   inline bool chatWithAllUsersIsEnabled() const;
   inline QString defaultChatName() const;
+  inline QString defaultChatPrivateId() const;
   inline int chatMessageHistorySize() const;
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
@@ -487,6 +490,7 @@ private:
   int m_tickIntervalCheckIdle;
   int m_tickIntervalCheckNetwork;
   int m_maxUsersToConnectInATick;
+  int m_tickIntervalBroadcasting;
 
   QDateTime m_lastSave;
   bool m_logToFile;
@@ -677,6 +681,7 @@ inline const QSize& Settings::mainBarIconSize() const { return m_mainBarIconSize
 inline void Settings::setAvatarIconSize( const QSize& new_value ) { m_avatarIconSize = new_value; }
 inline const QSize& Settings::avatarIconSize() const { return m_avatarIconSize; }
 inline QString Settings::defaultChatName() const { return QString( "* BeeBEEP Chat *" ); }
+inline QString Settings::defaultChatPrivateId() const { return QString::fromLatin1( QCryptographicHash::hash( defaultChatName().toLatin1() , QCryptographicHash::Sha1 ).toHex() ); }
 inline int Settings::chatMessageHistorySize() const { return m_chatMessageHistorySize; }
 inline const QString& Settings::chatFontColor() const { return m_chatFontColor; }
 inline void Settings::setChatFontColor( const QString& new_value ) { m_chatFontColor = new_value; }
@@ -878,6 +883,8 @@ inline void Settings::setUseWordCompleter( bool new_value ) { m_useWordCompleter
 inline bool Settings::useWordCompleter() const { return m_useWordCompleter; }
 inline int Settings::tickIntervalCheckIdle() const { return m_tickIntervalCheckIdle; }
 inline int Settings::tickIntervalCheckNetwork() const { return m_tickIntervalCheckNetwork; }
+inline void Settings::setTickIntervalBroadcasting( int new_value ) { m_tickIntervalBroadcasting = new_value; }
+inline int Settings::tickIntervalBroadcasting() const { return m_tickIntervalBroadcasting; }
 inline void Settings::setCheckNewVersionAtStartup( bool new_value ) { m_checkNewVersionAtStartup = new_value; }
 inline bool Settings::checkNewVersionAtStartup() const { return m_checkNewVersionAtStartup; }
 inline void Settings::setPostUsageStatistics( bool new_value ) { m_postUsageStatistics = new_value; }

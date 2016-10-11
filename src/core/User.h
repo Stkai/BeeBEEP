@@ -24,6 +24,7 @@
 #ifndef BEEBEEP_USER_H
 #define BEEBEEP_USER_H
 
+#include "NetworkAddress.h"
 #include "VCard.h"
 
 
@@ -46,10 +47,8 @@ public:
   inline VNumber id() const;
   inline void setName( const QString& );
   inline const QString& name() const;
-  inline void setHostAddress( const QHostAddress& );
-  inline const QHostAddress& hostAddress() const;
-  inline void setHostPort( int );
-  inline int hostPort() const;
+  inline void setNetworkAddress( const NetworkAddress& );
+  inline const NetworkAddress& networkAddress() const;
   inline void setStatus( int );
   inline int status() const;
   inline void setStatusDescription( const QString& );
@@ -73,7 +72,6 @@ public:
 
   inline QString path() const;
   inline QString accountPath() const;
-  inline QString hostAddressAndPort() const;
 
   bool isBirthDay() const;
 
@@ -83,8 +81,7 @@ public:
 private:
   VNumber m_id;
   VCard m_vCard;
-  QHostAddress m_hostAddress; // his listener address
-  int m_hostPort;             // his listener port  (address+port = unique id)
+  NetworkAddress m_networkAddress; // his listener address and port (address+port = unique id)
   int m_status;
   QString m_statusDescription;
   QString m_color;
@@ -107,10 +104,8 @@ inline void User::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber User::id() const { return m_id; }
 inline void User::setName( const QString& new_value ) { m_vCard.setNickName( new_value ); }
 inline const QString& User::name() const { return m_vCard.nickName(); }
-inline void User::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
-inline const QHostAddress& User::hostAddress() const { return m_hostAddress; }
-inline void User::setHostPort( int new_value ) { m_hostPort = new_value; }
-inline int User::hostPort() const { return m_hostPort; }
+inline void User::setNetworkAddress( const NetworkAddress& new_value ) { m_networkAddress = new_value; }
+inline const NetworkAddress& User::networkAddress() const { return m_networkAddress; }
 inline void User::setStatus( int new_value ) { m_status = new_value; }
 inline int User::status() const { return m_status; }
 inline void User::setStatusDescription( const QString& new_value ) { m_statusDescription = new_value; }
@@ -131,8 +126,7 @@ inline void User::setQtVersion( const QString& new_value ) { m_qtVersion = new_v
 inline const QString& User::qtVersion() const { return m_qtVersion; }
 inline void User::setProtocolVersion( int new_value ) { m_protocolVersion = new_value; }
 inline int User::protocolVersion() const { return m_protocolVersion; }
-inline QString User::path() const { return QString( "%1@%2:%3" ).arg( name().toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
-inline QString User::accountPath() const { return QString( "%1@%2:%3" ).arg( m_accountName.toLower(), m_hostAddress.toString(), QString::number( m_hostPort ) ); }
-inline QString User::hostAddressAndPort() const { return QString( "%1:%2" ).arg( m_hostAddress.toString(), QString::number( m_hostPort ) ); }
+inline QString User::path() const { return QString( "%1@%2" ).arg( name().toLower(), m_networkAddress.toString() ); }
+inline QString User::accountPath() const { return QString( "%1@%2" ).arg( m_accountName.toLower(), m_networkAddress.toString() ); }
 
 #endif // BEEBEEP_USER_H

@@ -25,14 +25,14 @@
 
 
 User::User()
-  : m_id( ID_INVALID ), m_vCard(), m_hostAddress(), m_hostPort( 0 ),
-    m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_version( "" ), m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 )
+  : m_id( ID_INVALID ), m_vCard(), m_networkAddress(), m_status( User::Offline ),
+    m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ), m_version( "" ),
+    m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 )
 {
 }
 
 User::User( VNumber new_id )
-  : m_id( new_id ), m_vCard(), m_hostAddress( "127.0.0.1" ), m_hostPort( DEFAULT_LISTENER_PORT ),
+  : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( "127.0.0.1" ), DEFAULT_LISTENER_PORT ),
     m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
     m_version( "" ), m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 )
 {
@@ -50,8 +50,7 @@ User& User::operator=( const User& u )
   {
     m_id = u.m_id;
     m_vCard = u.m_vCard;
-    m_hostAddress = u.m_hostAddress;
-    m_hostPort = u.m_hostPort;
+    m_networkAddress = u.m_networkAddress;
     m_status = u.m_status;
     m_statusDescription = u.m_statusDescription;
     m_color = u.m_color;

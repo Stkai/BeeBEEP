@@ -101,6 +101,7 @@ void EmoticonManager::addTextEmoticon()
   addEmoticon( "^_^", "1f601", Emoticon::Text );
   addEmoticon( "O.o", "1f633", Emoticon::Text );
   addEmoticon( "o.O", "1f633", Emoticon::Text );
+  addEmoticon( ":""D", "1f602", Emoticon::Text );
 
 #if 0
 // emoticons since 1.0.2

@@ -93,7 +93,10 @@ void GuiUserList::updateUsers( bool is_connected )
   setDefaultChatConnected( 0, is_connected );
   foreach( User u, UserManager::instance().userList().toList() )
   {
-    if( m_filter.isEmpty() || u.name().startsWith( m_filter, Qt::CaseInsensitive ) )
+    if( m_filter.isEmpty() || u.name().contains( m_filter, Qt::CaseInsensitive ) ||
+        u.vCard().fullName().contains( m_filter, Qt::CaseInsensitive ) ||
+        u.vCard().email().contains( m_filter, Qt::CaseInsensitive ) ||
+        u.vCard().phoneNumber().contains( m_filter, Qt::CaseInsensitive ) )
       setUser( u, false );
   }
   setChatOpened( m_chatOpened );

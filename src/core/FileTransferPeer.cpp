@@ -111,6 +111,8 @@ void FileTransferPeer::setTransferCompleted()
   qDebug() << name() << "has completed the transfer of file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) );
   m_state = FileTransferPeer::Completed;
   closeAll();
+  if( isDownload() && m_fileInfo.lastModified().isValid() )
+    Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
   emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
   emit completed( id(), userId(), m_fileInfo );
   deleteLater();

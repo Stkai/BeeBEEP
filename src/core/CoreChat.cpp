@@ -43,6 +43,8 @@ void Core::createDefaultChat()
   c.setId( ID_DEFAULT_CHAT );
   c.setName( Settings::instance().defaultChatName() );
   c.addUser( ID_LOCAL_USER );
+  c.setPrivateId( Settings::instance().defaultChatPrivateId() );
+  qDebug() << "Default chat private id:" << c.privateId();
   QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header );
   c.addMessage( cm );

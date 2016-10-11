@@ -462,3 +462,110 @@ QString Bee::folderCdUp( const QString& folder_path )
   sl.removeLast();
   return sl.join( naviveFolderSeparator() );
 }
+
+bool Bee::setLastModifiedToFile( const QString& to_path, const QDateTime& dt_last_modified )
+{
+  QFileInfo file_info_to( to_path );
+  if( !file_info_to.exists() )
+  {
+    qWarning() << "Unable to set last modidified time to not existing file" << qPrintable( to_path );
+    return false;
+  }
+
+  uint mod_time = dt_last_modified.toTime_t();
+  uint ac_time = dt_last_modified.toTime_t();
+
+  if( mod_time == (uint)-1 || ac_time == (uint)-1 )
+  {
+    qWarning() << "Unable to set invalid last modidified time to file" << qPrintable( to_path );
+    return false;
+  }
+
+  bool ok = false;
+
+#ifdef Q_OS_WIN
+
+  uint cr_time = mod_time;
+
+  FILETIME ft_modified, ft_creation, ft_access;
+  LPCWSTR to_file_name = to_path.toStdWString().c_str();
+
+  HANDLE h_file = ::CreateFile( to_file_name, GENERIC_READ|GENERIC_WRITE, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL );
+
+  if( h_file != INVALID_HANDLE_VALUE )
+  {
+    LONGLONG ll = Int32x32To64( cr_time, 10000000) + 116444736000000000;
+    ft_creation.dwLowDateTime = (DWORD) ll;
+    ft_creation.dwHighDateTime = ll >> 32;
+    LONGLONG ll2 = Int32x32To64( mod_time, 10000000) + 116444736000000000;
+    ft_modified.dwLowDateTime = (DWORD) ll2;
+    ft_modified.dwHighDateTime = ll2 >> 32;
+    LONGLONG ll3 = Int32x32To64( ac_time, 10000000) + 116444736000000000;
+    ft_access.dwLowDateTime = (DWORD) ll3;
+    ft_access.dwHighDateTime = ll3 >> 32;
+
+    if( !::SetFileTime( h_file, &ft_creation, &ft_access, &ft_modified ) )
+    {
+      QString s_error = QString( "0x%1" ).arg( (unsigned long)GetLastError() );
+      qWarning() << "Function SetFileTime has error" << s_error << "for file" << qPrintable( to_path );
+    }
+    else
+      ok = true;
+  }
+  else
+    qWarning() << "Unable to get the HANDLE (CreateFile) of file" << qPrintable( to_path );
+
+  CloseHandle( h_file );
+
+#else
+
+  struct utimbuf from_time_buffer;
+  from_time_buffer.modtime = mod_time;
+  from_time_buffer.actime = ac_time;
+
+  const char *to_file_name = to_path.toLatin1().constData();
+  ok = utime( to_file_name, &from_time_buffer ) == 0;
+  if( !ok )
+    qWarning() << "Function utime error" << errno << ":" << qPrintable( strerror( errno ) ) << "for file" << qPrintable( to_path );
+
+#endif
+
+  return ok;
+}
+
+bool Bee::showFileInGraphicalShell( const QString& file_path )
+{
+  QFileInfo file_info( file_path );
+
+#ifdef Q_OS_WIN
+  QString explorer_path = QLatin1String( "c:\\windows\\explorer.exe" );
+
+  if( QFile::exists( explorer_path ) )
+  {
+    QStringList explorer_args;
+    if( !file_info.isDir() )
+      explorer_args += QLatin1String("/select,");
+     explorer_args += Bee::convertToNativeFolderSeparator( file_info.canonicalFilePath() );
+     if( QProcess::startDetached( explorer_path, explorer_args ) )
+       return true;
+     else
+       qWarning() << "Unable to start process:" << qPrintable( explorer_path ) << qPrintable( explorer_args.join( " " ) );
+  }
+#endif
+
+#ifdef Q_OS_MAC
+
+  QStringList script_args;
+  script_args << QLatin1String( "-e" )
+              << QString::fromLatin1( "tell application \"Finder\" to reveal POSIX file \"%1\"" ).arg( file_info.canonicalFilePath() );
+  QProcess::execute( QLatin1String( "/usr/bin/osascript" ), script_args );
+  script_args.clear();
+  script_args << QLatin1String( "-e" )
+             << QLatin1String( "tell application \"Finder\" to activate" );
+  QProcess::execute( QLatin1String( "/usr/bin/osascript" ), script_args );
+  return true;
+
+#endif
+
+  return false;
+}

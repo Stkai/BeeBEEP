@@ -1991,7 +1991,7 @@ void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
 
   UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
   foreach( User u, chat_members.toList() )
-    sendFiles( u, files_path_selected );
+    sendFiles( u, files_path_selected, chat_id );
 }
 
 void GuiMain::sendFile( VNumber user_id )
@@ -2000,14 +2000,14 @@ void GuiMain::sendFile( VNumber user_id )
   QStringList files_path_selected = checkFilePath( "" );
   if( files_path_selected.isEmpty() )
     return;
-  sendFiles( u, files_path_selected );
+  sendFiles( u, files_path_selected, ID_INVALID );
 }
 
-void GuiMain::sendFiles( const User& u, const QStringList& file_list )
+void GuiMain::sendFiles( const User& u, const QStringList& file_list, VNumber chat_id )
 {
   foreach( QString file_path, file_list )
   {
-    if( !sendFile( u, file_path ) )
+    if( !sendFile( u, file_path, chat_id ) )
       return;
   }
 }
@@ -2032,7 +2032,7 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
   return files_path_selected;
 }
 
-bool GuiMain::sendFile( const User& u, const QString& file_path )
+bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id )
 {
   if( !Settings::instance().fileTransferIsEnabled() )
   {
@@ -2074,17 +2074,22 @@ bool GuiMain::sendFile( const User& u, const QString& file_path )
 
     Chat c = ChatManager::instance().privateChatForUser( user_selected.id() );
     if( c.isValid() )
+    {
+      chat_id = c.id();
       showChat( c.id() );
+    }
+    else
+      chat_id = ID_INVALID;
   }
   else
     user_selected = u;
 
-  return mp_core->sendFile( user_selected.id(), file_path, "", false );
+  return mp_core->sendFile( user_selected.id(), file_path, "", false, chat_id );
 }
 
 void GuiMain::sendFile( const QString& file_path )
 {
-  sendFile( User(), file_path );
+  sendFile( User(), file_path, ID_INVALID );
 }
 
 bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QString& download_path, bool make_questions )
@@ -3368,7 +3373,10 @@ void GuiMain::showAddUser()
   gad.show();
 
   if( gad.exec() == QDialog::Accepted )
-    QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
+  {
+    if( !Settings::instance().userPathList().isEmpty() )
+      QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
+  }
 }
 
 void GuiMain::showChatSettingsMenu()
@@ -3393,9 +3401,9 @@ void GuiMain::showDefaultServerPortInMenu()
     mp_actPortBroadcast->setIcon( QIcon( ":/images/broadcast.png" ) );
     mp_actPortListener->setIcon( QIcon( ":/images/chat.png" ) );
 
-    host_address = Settings::instance().localUser().hostAddress().toString();
+    host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
-    listener_port = QString::number( Settings::instance().localUser().hostPort() );
+    listener_port = QString::number( Settings::instance().localUser().networkAddress().hostPort() );
     if( Settings::instance().fileTransferIsEnabled() )
     {
       file_transfer_port = QString::number( mp_core->fileTransferPort() );

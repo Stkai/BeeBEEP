@@ -93,7 +93,10 @@ void FileTransferPeer::sendFileHeader()
 
   QFileInfo file_info_now_in_system( m_fileInfo.path() );
   if( file_info_now_in_system.exists() )
+  {
     m_fileInfo.setSize( file_info_now_in_system.size() );
+    m_fileInfo.setLastModified( file_info_now_in_system.lastModified() );
+  }
 
   Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo );
   QByteArray file_header = Protocol::instance().fromMessage( file_header_message );

@@ -107,7 +107,6 @@ bool NetworkManager::isInLocalBroadcastAddresses( const QHostAddress& host_addre
   return host_address_list.contains( host_address );
 }
 
-
 NetworkEntry NetworkManager::firstNetworkEntry( bool use_ipv4 ) const
 {
   if( m_networkEntries.isEmpty() )

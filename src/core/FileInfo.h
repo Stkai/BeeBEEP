@@ -70,6 +70,8 @@ public:
   inline void setLastModified( const QDateTime& );
   inline bool isInShareBox() const;
   inline void setIsInShareBox( bool );
+  inline const QString& chatPrivateId() const;
+  inline void setChatPrivateId( const QString& );
 
 private:
   TransferType m_transferType;
@@ -86,6 +88,7 @@ private:
   QString m_fileHash;
   QDateTime m_lastModified;
   bool m_isInShareBox;
+  QString m_chatPrivateId;
 
 };
 
@@ -125,5 +128,7 @@ inline const QDateTime& FileInfo::lastModified() const { return m_lastModified; 
 inline void FileInfo::setLastModified( const QDateTime& new_value ) { m_lastModified = new_value; }
 inline bool FileInfo::isInShareBox() const { return m_isInShareBox; }
 inline void FileInfo::setIsInShareBox( bool new_value ) { m_isInShareBox = new_value; }
+inline const QString& FileInfo::chatPrivateId() const { return m_chatPrivateId; }
+inline void FileInfo::setChatPrivateId( const QString& new_value ) { m_chatPrivateId = new_value; }
 
 #endif // BEEBEEP_FILEINFO_H

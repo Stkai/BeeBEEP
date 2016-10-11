@@ -81,6 +81,8 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     FileInfo file_header = Protocol::instance().fileInfoFromMessage( file_header_message );
 
     m_fileInfo.setSize( file_header.size() );
+    if( file_header.lastModified().isValid() )
+      m_fileInfo.setLastModified( file_header.lastModified() );
     m_state = FileTransferPeer::Transferring;
     m_bytesTransferred = 0;
     sendTransferData();
