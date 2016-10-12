@@ -45,6 +45,8 @@ DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read onl
 UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session 
                               (the same of AskNicknameAtStartup=false and UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
 StartMinimized=[true/false] If enabled BeeBEEP starts minimized (can be overruled in beeebeep.ini) (default=false) [3.0.7]
+Signature=[string] If not empty BeeBEEP uses it to generate network password (all BeeBEEP clients in your network must have the same signature) (auth=signature+encpwd) (default="") [3.0.8]
+UseOnlyTextEmoticons=[true/false] If enabled BeeBEEP does not show the emoticon panel (default=false) [3.0.8]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]

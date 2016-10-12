@@ -37,13 +37,8 @@ const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 
 
 Protocol::Protocol()
-  : m_id( ID_START ), m_writingMessage(), m_fileShareListMessage( "" ), m_fileShareRequestMessage( "" )
+  : m_id( ID_START ), m_fileShareListMessage( "" ), m_fileShareRequestMessage( "" )
 {
-  Message writing_message( Message::User, ID_WRITING_MESSAGE, "*" );
-  writing_message.addFlag( Message::Private );
-  writing_message.addFlag( Message::UserWriting );
-  m_writingMessage = fromMessage( writing_message );
-
   Message file_share_request_message( Message::Share, ID_SHARE_MESSAGE, "" );
   file_share_request_message.addFlag( Message::Request );
   m_fileShareRequestMessage = fromMessage( file_share_request_message );
@@ -286,6 +281,16 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
+}
+
+QByteArray Protocol::writingMessage( const QString& chat_private_id ) const
+{
+  Message writing_message( Message::User, ID_WRITING_MESSAGE, "*" );
+  writing_message.addFlag( Message::Private );
+  writing_message.addFlag( Message::UserWriting );
+  if( !chat_private_id.isEmpty() )
+    writing_message.setData( chat_private_id );
+  return fromMessage( writing_message );
 }
 
 Message Protocol::userStatusMessage( int user_status, const QString& user_status_description ) const
@@ -829,7 +834,7 @@ Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
   m.addFlag( Message::Private );
   /* for backward compatibility 0.9.6 */
   QStringList sl;
-  sl << QString::number( fi.hostPort() );
+  sl << QString::number( fi.networkAddress().hostPort() );
   sl << QString::number( fi.size() );
   sl << QString::number( fi.id() );
   sl << QString( "*" );
@@ -850,7 +855,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
 {
   Message m( Message::File, newId(), fi.name() );
   QStringList sl;
-  sl << QString::number( fi.hostPort() );
+  sl << QString::number( fi.networkAddress().hostPort() );
   sl << QString::number( fi.size() );
   sl << QString::number( fi.id() );
   sl << QString::fromUtf8( fi.password() );

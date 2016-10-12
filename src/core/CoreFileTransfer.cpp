@@ -187,9 +187,13 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       }
 
       QString s_open = tr( "Open" );
-      sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( fi.path() ).toString(), fi.name() );
-      QFileInfo file_info( fi.path() );
-      sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( file_info.absoluteDir().absolutePath() ).toString(), tr( "folder" ) );
+      QUrl file_url = QUrl::fromLocalFile( fi.path() );
+      sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
+      file_url.setScheme( QLatin1String( "beeshowfileinfolder" ) );
+      sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
+      //QFileInfo file_info( fi.path() );
+      //sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( file_info.absoluteDir().absolutePath() ).toString(), tr( "folder" ) );
+
       if( show_image_preview )
         sys_msg += QString( "<br />" );
     }
@@ -742,7 +746,7 @@ void Core::downloadFromShareBox( VNumber from_user_id, const FileInfo& fi, const
 #ifdef BEEBEEP_DEBUG
   QString from_path = fi.shareFolder().isEmpty() ? fi.name() : QString( "%1/%2" ).arg( fi.shareFolder(), fi.name() );
   qDebug() << "Download path" << from_path << "from user" << from_user_id << "to path" << to_path
-           << "from server" << qPrintable( fi.hostAddress().toString() ) << ":" << fi.hostPort();
+           << "from server" << qPrintable( fi.networkAddress().toString() );
 #else
   Q_UNUSED( from_user_id );
 #endif

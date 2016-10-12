@@ -31,7 +31,7 @@
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
-    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_hostAndPort( "" ), m_latestActivityDateTime(),
+    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_networkAddress(), m_latestActivityDateTime(),
     m_timerTickId( 0 ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
@@ -44,18 +44,19 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor )
 {
   m_isAborted = false;
   setSocketDescriptor( socket_descriptor );
-  m_hostAndPort = QString( "%1:%2" ).arg( peerAddress().toString() ).arg( peerPort() );
+  m_networkAddress.setHostAddress( peerAddress() );
+  m_networkAddress.setHostPort( peerPort() );
   if( !startTimerTick() )
-    qWarning() << "Unable to start event timer for connection:" << m_hostAndPort;
+    qWarning() << "Unable to start event timer for connection:" << qPrintable( m_networkAddress.toString() );
 }
 
-void ConnectionSocket::connectToNetworkAddress( const QHostAddress& host_address, int host_port )
+void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_address )
 {
   m_isAborted = false;
-  m_hostAndPort = QString( "%1:%2" ).arg( host_address.toString() ).arg( host_port );
+  m_networkAddress = network_address;
   if( !startTimerTick() )
-    qWarning() << "Unable to start event timer for connection:" << m_hostAndPort;
-  connectToHost( host_address, host_port );
+    qWarning() << "Unable to start event timer for connection:" << qPrintable( m_networkAddress.toString() );
+  connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
 
 bool ConnectionSocket::startTimerTick()
@@ -131,7 +132,7 @@ void ConnectionSocket::readBlock()
   if( bytes_available == 0 )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ConnectionSocket from" << m_hostAndPort << "is empty... wait for more bytes";
+    qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "is empty... wait for more bytes";
 #endif
     return;
   }
@@ -156,7 +157,7 @@ void ConnectionSocket::readBlock()
 
 #ifdef BEEBEEP_DEBUG
   if( isConnecting() )
-    qDebug() << "Connection" << m_hostAndPort << "use datastream version:" << data_stream.version();
+    qDebug() << "Connection" << qPrintable( m_networkAddress.toString() ) << "use datastream version:" << data_stream.version();
 #endif
 
   if( m_blockSize == 0 )
@@ -166,7 +167,7 @@ void ConnectionSocket::readBlock()
       if( bytes_available < (int)sizeof(DATA_BLOCK_SIZE_32))
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytes_available << "bytes... wait for more";
+        qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
 #endif
         return;
       }
@@ -179,7 +180,7 @@ void ConnectionSocket::readBlock()
       if( bytes_available < (int)sizeof(DATA_BLOCK_SIZE_16))
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytes_available << "bytes... wait for more";
+        qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
 #endif
         return;
       }
@@ -190,13 +191,13 @@ void ConnectionSocket::readBlock()
   }
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG )
-  qDebug() << "ConnectionSocket read from" << m_hostAndPort << "the block size:" << m_blockSize;
+  qDebug() << "ConnectionSocket read from" << qPrintable( m_networkAddress.toString() ) << "the block size:" << m_blockSize;
 #endif
 
   if( bytes_available < m_blockSize )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ConnectionSocket from" << m_hostAndPort << "has only" << bytes_available << "bytes... wait for more" << m_blockSize;
+    qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more" << m_blockSize;
 #endif
     return;
   }
@@ -206,7 +207,7 @@ void ConnectionSocket::readBlock()
 
   if( byte_array_read.size() != (int)m_blockSize )
   {
-    qWarning() << "ConnectionSocket read an invalid block size from" << m_hostAndPort << ":"
+    qWarning() << "ConnectionSocket read an invalid block size from" << qPrintable( m_networkAddress.toString() ) << ":"
                << byte_array_read.size() << "bytes read and" << m_blockSize << "bytes aspected";
   }
 
@@ -215,7 +216,7 @@ void ConnectionSocket::readBlock()
   QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey() );
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
-  qDebug() << "ConnectionSocket read from" << m_hostAndPort << "the byte array:" << decrypted_byte_array;
+  qDebug() << "ConnectionSocket read from" << qPrintable( m_networkAddress.toString() ) << "the byte array:" << decrypted_byte_array;
 #endif
 
   if( m_userId == ID_INVALID )
@@ -255,7 +256,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_32_LIMIT )
     {
-      qWarning() << "Unable to send a message to" << m_hostAndPort << "because exceeded the limit of 32bit block data... truncated to max size";
+      qWarning() << "Unable to send a message to" << qPrintable( m_networkAddress.toString() ) << "because exceeded the limit of 32bit block data... truncated to max size";
       QByteArray bytes_to_send_truncated = bytes_to_send;
       bytes_to_send_truncated.truncate( DATA_BLOCK_SIZE_32_LIMIT );
       data_stream << bytes_to_send_truncated;
@@ -273,7 +274,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_16_LIMIT )
     {
-      qWarning() << "Unable to send a message to" << m_hostAndPort << "because exceeded the limit of 16bit block data... truncated to max size";
+      qWarning() << "Unable to send a message to" << qPrintable( m_networkAddress.toString() ) << "because exceeded the limit of 16bit block data... truncated to max size";
       QByteArray bytes_to_send_truncated = bytes_to_send;
       bytes_to_send_truncated.truncate( DATA_BLOCK_SIZE_16_LIMIT );
       data_stream << bytes_to_send_truncated;
@@ -291,7 +292,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
 {
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
-  qDebug() << "ConnectionSocket is sending to" << m_hostAndPort << "the following data:" << byte_array;
+  qDebug() << "ConnectionSocket is sending to" << qPrintable( m_networkAddress.toString() ) << "the following data:" << byte_array;
 #endif
 
   QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey() );
@@ -301,7 +302,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   if( write( data_serialized ) == data_serialized.size() )
   {
 #ifdef CONNECTION_SOCKET_IO_DEBUG
-    qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << m_hostAndPort;
+    qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << qPrintable( m_networkAddress.toString() );
 #endif
     // send data is asynchronous and m_latestActivityDateTime is not set
     return true;
@@ -321,12 +322,12 @@ void ConnectionSocket::sendQuestionHello()
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
   {
-    qDebug() << "ConnectionSocket has sent question HELLO to" << m_hostAndPort;
+    qDebug() << "ConnectionSocket has sent question HELLO to" << qPrintable( m_networkAddress.toString() );
     m_isHelloSent = true;
   }
   else
   {
-    qWarning() << "ConnectionSocket is unable to send question HELLO to" << m_hostAndPort;
+    qWarning() << "ConnectionSocket is unable to send question HELLO to" << qPrintable( m_networkAddress.toString() );
     emit abortRequest();
   }
 }
@@ -339,12 +340,12 @@ void ConnectionSocket::sendAnswerHello()
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey2 ) ) )
   {
-    qDebug() << "ConnectionSocket has sent answer HELLO to" << m_hostAndPort;
+    qDebug() << "ConnectionSocket has sent answer HELLO to" << qPrintable( m_networkAddress.toString() );
     m_isHelloSent = true;
   }
   else
   {
-    qWarning() << "ConnectionSocket is unable to send answer HELLO to" << m_hostAndPort;
+    qWarning() << "ConnectionSocket is unable to send answer HELLO to" << qPrintable( m_networkAddress.toString() );
     emit abortRequest();
   }
 }
@@ -354,14 +355,14 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   Message m = Protocol::instance().toMessage( array_data );
   if( !m.isValid() )
   {
-    qWarning() << "ConnectionSocket has received an invalid HELLO from" << m_hostAndPort;
+    qWarning() << "ConnectionSocket has received an invalid HELLO from" << qPrintable( m_networkAddress.toString() );
     emit abortRequest();
     return;
   }
 
   if( m.type() != Message::Hello )
   {
-    qWarning() << "ConnectionSocket is waiting for HELLO, but another message type" << m.type() << "is arrived from" << m_hostAndPort;
+    qWarning() << "ConnectionSocket is waiting for HELLO, but another message type" << m.type() << "is arrived from" << qPrintable( m_networkAddress.toString() );
     emit abortRequest();
     return;
   }
@@ -370,12 +371,12 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   {
     if( !Protocol::instance().acceptConnectionFromWorkgroup( m ) )
     {
-      qWarning() << "ConnectionSocket drops user of external workgroup from" << m_hostAndPort;
+      qWarning() << "ConnectionSocket drops user of external workgroup from" << qPrintable( m_networkAddress.toString() );
       emit abortRequest();
       return;
     }
     else
-      qDebug() << "ConnectionSocket has accepted user of your workgroup from" << m_hostAndPort;
+      qDebug() << "ConnectionSocket has accepted user of your workgroup from" << qPrintable( m_networkAddress.toString() );
   }
 
   if( !m_isHelloSent )
@@ -394,15 +395,15 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
   if( m_protoVersion != Settings::instance().protoVersion() )
   {
-    qWarning() << "Protocol version from" << m_hostAndPort << "is"
+    qWarning() << "Protocol version from" << qPrintable( m_networkAddress.toString() ) << "is"
                << (m_protoVersion > Settings::instance().protoVersion() ? "newer" : "older") << "than yours";
     if( m_protoVersion > Settings::instance().protoVersion() )
     {
       m_protoVersion = Settings::instance().protoVersion();
-      qWarning() << "Your old protocol version" << m_protoVersion << "is used with" << m_hostAndPort;
+      qWarning() << "Your old protocol version" << m_protoVersion << "is used with" << qPrintable( m_networkAddress.toString() );
     }
     else
-      qWarning() << "Old protocol version" << m_protoVersion << "is used with" << m_hostAndPort;
+      qWarning() << "Old protocol version" << m_protoVersion << "is used with" << qPrintable( m_networkAddress.toString() );
   }
 
   if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
@@ -417,14 +418,14 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
         return;
       }
       else
-        qDebug() << "Encryption level 2 is activated with" << m_hostAndPort;
+        qDebug() << "Encryption level 2 is activated with" << qPrintable( m_networkAddress.toString() );
 
     }
     else
-      qWarning() << "Remote host" << m_hostAndPort << "has not shared a public key for encryption";
+      qWarning() << "Remote host" << qPrintable( m_networkAddress.toString() ) << "has not shared a public key for encryption";
   }
 
-  qDebug() << "ConnectionSocket request an authentication for" << m_hostAndPort;
+  qDebug() << "ConnectionSocket request an authentication for" << qPrintable( m_networkAddress.toString() );
   emit authenticationRequested( m );
 }
 
@@ -439,7 +440,7 @@ void ConnectionSocket::checkConnectionTimeout( int ticks )
     return;
 
   stopTimerTick();
-  qDebug() << "Connection timeout for" << qPrintable( m_hostAndPort ) << ":" << ticks << "ticks";
+  qDebug() << "Connection timeout for" << qPrintable( m_networkAddress.toString() ) << ":" << ticks << "ticks";
   disconnectFromHost();
   emit disconnected();
 }
@@ -483,7 +484,7 @@ void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
   if( m_tickCounter > 31536000 )
   {
     // 1 year is passed ... it is time to close!
-    qWarning() << "A year in uptime is passed. It is time to close and restart connection" << m_hostAndPort;
+    qWarning() << "A year in uptime is passed. It is time to close and restart connection" << qPrintable( m_networkAddress.toString() );
     emit abortRequest();
     return;
   }
@@ -491,7 +492,7 @@ void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
   if( activityIdle() >= TICK_INTERVAL && bytesAvailable() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << (int)bytesAvailable() << "bytes available in tick interval and read socket is forced for" << m_hostAndPort;
+    qDebug() << (int)bytesAvailable() << "bytes available in tick interval and read socket is forced for" << qPrintable( m_networkAddress.toString() );
 #endif
     QTimer::singleShot( 0, this, SLOT( readBlock() ) );
     return;

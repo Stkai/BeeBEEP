@@ -102,35 +102,25 @@ void SaveChatList::saveChats( QDataStream* stream )
   quint64 file_pos = stream->device()->pos();
   (*stream) << num_of_chats;
 
-  //QString chat_footer = QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Saved in" ) ).arg( QDateTime::currentDateTime().toString( Qt::SystemLocaleShortDate ) );
   QStringList chat_lines;
   QString chat_name_encrypted;
   QString chat_text_encrypted;
   qint32 chat_counter = 0;
+  QStringList chat_name_saved_list;
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
     if( c.isEmpty() )
       continue;
-    qDebug() << "Saving chat" << c.name();
+    qDebug() << "Saving chat:" << qPrintable( c.name() );
+    chat_name_saved_list << c.name();
     chat_counter++;
     chat_name_encrypted = Settings::instance().simpleEncrypt( c.name() );
     (*stream) << chat_name_encrypted;
     QString html_text = GuiChatMessage::chatToHtml( c, true, true, true );
 
-    /*
-    if( !html_text.simplified().isEmpty() )
-    {
-      html_text.prepend( QString( "<font color=gray><b>*** %1 %2 ***</b></font><br />" ).arg( QObject::tr( "Started in" ) ).arg( c.dateTimeStarted().toString( Qt::SystemLocaleShortDate ) ) );
-      html_text.append( chat_footer );
-    }
-    */
-
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
-    {
       html_text.prepend( ChatManager::instance().chatSavedText( c.name() ) );
-      ChatManager::instance().removeSavedTextFromChat( c.name() );
-    }
 
     if( html_text.simplified().isEmpty() )
     {
@@ -155,12 +145,17 @@ void SaveChatList::saveChats( QDataStream* stream )
   QMap<QString, QString>::const_iterator it = ChatManager::instance().constHistoryMap().constBegin();
   while( it !=  ChatManager::instance().constHistoryMap().constEnd() )
   {
-    qDebug() << "Saving stored chat" << it.key();
-    chat_counter++;
-    chat_name_encrypted = Settings::instance().simpleEncrypt( it.key() );
-    (*stream) << chat_name_encrypted;
-    chat_text_encrypted = Settings::instance().simpleEncrypt( it.value() );
-    (*stream) << chat_text_encrypted;
+    if( !chat_name_saved_list.contains( it.key() ) )
+    {
+      qDebug() << "Saving history for chat:" << qPrintable( it.key() );
+      chat_counter++;
+      chat_name_encrypted = Settings::instance().simpleEncrypt( it.key() );
+      (*stream) << chat_name_encrypted;
+      chat_text_encrypted = Settings::instance().simpleEncrypt( it.value() );
+      (*stream) << chat_text_encrypted;
+    }
+    else
+      qDebug() << "Skip saving history for previous saved chat:" << qPrintable( it.key() );
     ++it;
   }
 

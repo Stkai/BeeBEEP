@@ -357,7 +357,7 @@ void Core::sendWritingMessage( VNumber chat_id )
     if( !c )
       continue;
 
-    c->sendData( Protocol::instance().writingMessage() );
+    c->sendData( Protocol::instance().writingMessage( from_chat.privateId() ) );
   }
 }
 

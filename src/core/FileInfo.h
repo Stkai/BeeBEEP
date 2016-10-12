@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_FILEINFO_H
 #define BEEBEEP_FILEINFO_H
 
-#include "Config.h"
+#include "NetworkAddress.h"
 
 
 class FileInfo
@@ -56,10 +56,10 @@ public:
   inline void setShareFolder( const QString& );
   inline bool isFolder() const;
   inline void setIsFolder( bool );
-  inline const QHostAddress& hostAddress() const;
+  inline void setNetworkAddress( const NetworkAddress& );
   inline void setHostAddress( const QHostAddress& );
-  inline int hostPort() const;
   inline void setHostPort( int );
+  inline const NetworkAddress& networkAddress() const;
   inline const QByteArray& password() const;
   inline void setPassword( const QByteArray& );
   inline VNumber id() const;
@@ -81,8 +81,7 @@ private:
   FileSizeType m_size;
   QString m_shareFolder;
   bool m_isFolder;
-  QHostAddress m_hostAddress;
-  int m_hostPort;
+  NetworkAddress m_networkAddress;
   QByteArray m_password;
   VNumber m_id;
   QString m_fileHash;
@@ -114,10 +113,10 @@ inline const QString& FileInfo::shareFolder() const { return m_shareFolder; }
 inline void FileInfo::setShareFolder( const QString& new_value ) { m_shareFolder = new_value; }
 inline bool FileInfo::isFolder() const { return m_isFolder; }
 inline void FileInfo::setIsFolder( bool new_value ) { m_isFolder = new_value; }
-inline const QHostAddress& FileInfo::hostAddress() const { return m_hostAddress; }
-inline void FileInfo::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
-inline int FileInfo::hostPort() const { return m_hostPort; }
-inline void FileInfo::setHostPort( int new_value ) { m_hostPort = new_value; }
+inline void FileInfo::setNetworkAddress( const NetworkAddress& new_value ) { m_networkAddress = new_value; }
+inline const NetworkAddress& FileInfo::networkAddress() const { return m_networkAddress; }
+inline void FileInfo::setHostAddress( const QHostAddress& new_value ) { m_networkAddress.setHostAddress( new_value ); }
+inline void FileInfo::setHostPort( int new_value ) { m_networkAddress.setHostPort( new_value ); }
 inline const QByteArray& FileInfo::password() const { return m_password; }
 inline void FileInfo::setPassword( const QByteArray& new_value ) { m_password = new_value; }
 inline VNumber FileInfo::id() const { return m_id; }

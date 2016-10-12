@@ -46,7 +46,7 @@ bool Connection::sendMessage( const Message& m )
   }
 
   if( message_data.size() > 524288 )
-    qWarning() << "Outgoing message to" << qPrintable( hostAndPort() ) << "is VERY VERY BIG:" << message_data.size() << "bytes";
+    qWarning() << "Outgoing message to" << qPrintable( networkAddress().toString() ) << "is VERY VERY BIG:" << message_data.size() << "bytes";
 
   return sendData( message_data );
 }
@@ -54,12 +54,12 @@ bool Connection::sendMessage( const Message& m )
 void Connection::parseData( const QByteArray& message_data )
 {
   if( message_data.size() > 524288 )
-    qWarning() << "Incoming message from" << qPrintable( hostAndPort() ) << "is VERY VERY BIG:" << message_data.size() << "bytes";
+    qWarning() << "Incoming message from" << qPrintable( networkAddress().toString() ) << "is VERY VERY BIG:" << message_data.size() << "bytes";
 
   Message m = Protocol::instance().toMessage( message_data );
   if( !m.isValid() )
   {
-    qWarning() << "Connection from" << qPrintable( hostAndPort() ) << "has received an invalid message data";
+    qWarning() << "Connection from" << qPrintable( networkAddress().toString() ) << "has received an invalid message data";
     return;
   }
 
@@ -67,13 +67,13 @@ void Connection::parseData( const QByteArray& message_data )
   {
   case Message::Ping:
 #if defined( CONNECTION_PING_PONG_DEBUG )
-    qDebug() << "PING received from" << qPrintable( hostAndPort() );
+    qDebug() << "PING received from" << qPrintable( networkAddress().toString() );
 #endif
     sendPong();
     break;
   case Message::Pong:
 #if defined( CONNECTION_PING_PONG_DEBUG )
-    qDebug() << "PONG received from" << qPrintable( hostAndPort() );
+    qDebug() << "PONG received from" << qPrintable( networkAddress().toString() );
 #endif
     break;
   default:
@@ -93,12 +93,12 @@ void Connection::sendPing()
   int activity_idle = activityIdle();
 
 #if defined( CONNECTION_PING_PONG_DEBUG )
-  qDebug() << "Connection" << qPrintable( hostAndPort() ) << "idle=" << activity_idle << "timeout=" << Settings::instance().pongTimeout();
+  qDebug() << "Connection" << qPrintable( networkAddress().toString() ) << "idle=" << activity_idle << "timeout=" << Settings::instance().pongTimeout();
 #endif
 
   if( activity_idle > Settings::instance().pongTimeout() )
   {
-    qDebug() << "Connection timeout with" << activity_idle << "ms idle from" << qPrintable( hostAndPort() );
+    qDebug() << "Connection timeout with" << activity_idle << "ms idle from" << qPrintable( networkAddress().toString() );
     emit abortRequest();
     return;
   }
@@ -106,17 +106,17 @@ void Connection::sendPing()
   if( activity_idle < PING_INTERVAL_IDLE )
   {
 #if defined( CONNECTION_PING_PONG_DEBUG )
-    qDebug() << "Ping is not sent because connection" << qPrintable( hostAndPort() ) << "has activity idle too short:" << activity_idle << "<" << PING_INTERVAL_IDLE;
+    qDebug() << "Ping is not sent because connection" << qPrintable( networkAddress().toString() ) << "has activity idle too short:" << activity_idle << "<" << PING_INTERVAL_IDLE;
 #endif
     return;
   }
 
 #if defined( CONNECTION_PING_PONG_DEBUG )
-  qDebug() << "Sending PING to" << qPrintable( hostAndPort() );
+  qDebug() << "Sending PING to" << qPrintable( networkAddress().toString() );
 #endif
   if( !sendData( Protocol::instance().pingMessage() ) )
   {
-    qWarning() << "Unable to send PING to" << qPrintable( hostAndPort() );
+    qWarning() << "Unable to send PING to" << qPrintable( networkAddress().toString() );
     emit abortRequest();
   }
 }
@@ -124,16 +124,16 @@ void Connection::sendPing()
 void Connection::sendPong()
 {
 #if defined( CONNECTION_PING_PONG_DEBUG )
-  qDebug() << "Sending PONG to" << qPrintable( hostAndPort() );
+  qDebug() << "Sending PONG to" << qPrintable( networkAddress().toString() );
 #endif
   if( !sendData( Protocol::instance().pongMessage() ) )
-    qWarning() << "Unable to send PONG to" << qPrintable( hostAndPort() );
+    qWarning() << "Unable to send PONG to" << qPrintable( networkAddress().toString() );
 }
 
 void Connection::closeConnection()
 {
   if( !peerAddress().isNull() )
-    qDebug() << "Connection to" << qPrintable( hostAndPort() ) << "closed";
+    qDebug() << "Connection to" << qPrintable( networkAddress().toString() ) << "closed";
 
   abortConnection();
 }

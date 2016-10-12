@@ -150,6 +150,7 @@ public:
   inline int emoticonInRecentMenu() const;
   inline void setRecentEmoticons( const QStringList& );
   inline const QStringList& recentEmoticons() const;
+  inline bool useOnlyTextEmoticons() const;
 
   inline bool chatWithAllUsersIsEnabled() const;
   inline QString defaultChatName() const;
@@ -473,6 +474,8 @@ private:
   bool m_disableSendMessage;
   bool m_useEasyConnection;
   bool m_startMinimized;
+  QString m_signature;
+  bool m_useOnlyTextEmoticons;
 
   // Ini
   bool m_firstTime;
@@ -714,6 +717,7 @@ inline bool Settings::showEmoticons() const { return m_showEmoticons; }
 inline void Settings::setShowEmoticons( bool new_value ) { m_showEmoticons = new_value; }
 inline void Settings::setShowEmoticonMenu(bool new_value ) { m_showEmoticonMenu = new_value; }
 inline bool Settings::showEmoticonMenu() const { return m_showEmoticonMenu; }
+inline bool Settings::useOnlyTextEmoticons() const { return m_useOnlyTextEmoticons; }
 inline bool Settings::showOnlyMessagesInDefaultChat() const { return m_showOnlyMessagesInDefaultChat; }
 inline void Settings::setShowOnlyMessagesInDefaultChat( bool new_value ) { m_showOnlyMessagesInDefaultChat = new_value; }
 inline void Settings::setGuiGeometry( const QByteArray& new_value ) { m_guiGeometry = new_value; }

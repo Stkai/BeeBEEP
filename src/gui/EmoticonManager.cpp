@@ -85,12 +85,16 @@ void EmoticonManager::addTextEmoticon()
   addEmoticon( ":-(", "1f614", Emoticon::Text );
   addEmoticon( ":T", "1f60b", Emoticon::Text );
   addEmoticon( ":%", "1f616", Emoticon::Text );
+  addEmoticon( ":""D", "1f602", Emoticon::Text );
+  addEmoticon( ":&quot;D", "1f602", Emoticon::Text ); // for html
   addEmoticon( "B)", "1f60e", Emoticon::Text );
   addEmoticon( "B-)", "1f60e", Emoticon::Text );
   addEmoticon( "<3", "2764", Emoticon::Text );
   addEmoticon( "&lt;3", "2764", Emoticon::Text );  // for html
   addEmoticon( "</3", "1f494", Emoticon::Text );
   addEmoticon( "&lt;/3", "1f494", Emoticon::Text ); // for html
+  addEmoticon( ">_<", "1f616", Emoticon::Text );
+  addEmoticon( "&gt;_&lt;", "1f616", Emoticon::Text ); // for html
   addEmoticon( "=)", "1f60a", Emoticon::Text );
   addEmoticon( "}:)", "1f608", Emoticon::Text );
   addEmoticon( "o:)", "1f608", Emoticon::Text );
@@ -101,54 +105,6 @@ void EmoticonManager::addTextEmoticon()
   addEmoticon( "^_^", "1f601", Emoticon::Text );
   addEmoticon( "O.o", "1f633", Emoticon::Text );
   addEmoticon( "o.O", "1f633", Emoticon::Text );
-  addEmoticon( ":""D", "1f602", Emoticon::Text );
-
-#if 0
-// emoticons since 1.0.2
-    addEmoticon( ":)", "smile" );
-    addEmoticon( ":-)", "smile" );
-    addEmoticon( ":p", "tongue" );
-    addEmoticon( ":-p", "tongue" );
-    addEmoticon( ":P", "big-tongue" );
-    addEmoticon( ":-P", "big-tongue" );
-    addEmoticon( ":'", "cry" );
-    addEmoticon( ":'(", "cry" );
-    addEmoticon( ":D", "laugh" );
-    addEmoticon( ":-D", "laugh" );
-    addEmoticon( ":@", "angry" );
-    addEmoticon( ":x", "kiss" );
-    addEmoticon( ":*", "big-kiss" );
-    addEmoticon( ":-*", "big-kiss" );
-    addEmoticon( ":z", "sleep" );
-    addEmoticon( ":o", "surprise" );
-    addEmoticon( ":O", "big-surprise" );
-    addEmoticon( ":|", "pouty" );
-    addEmoticon( ":L", "love" );
-    addEmoticon( ":w", "whistle" );
-    addEmoticon( ":$", "bandit" );
-    addEmoticon( ":!", "wizard" );
-    addEmoticon( ";)", "wink" );
-    addEmoticon( ";-)", "wink" );
-    addEmoticon( ":(", "disappointed" );
-    addEmoticon( ":-(", "disappointed" );
-    addEmoticon( ":T", "slurp" );
-    addEmoticon( "B)", "cool" );
-    addEmoticon( "B-)", "cool" );
-    addEmoticon( "<3", "heart" );
-    addEmoticon( "&lt;3", "heart" );  // for html
-    addEmoticon( "</3", "heart-broken" );
-    addEmoticon( "&lt;/3", "heart-broken" ); // for html
-    addEmoticon( "=)", "sideways" );
-    addEmoticon( "}:)", "devil" );
-    addEmoticon( "o:)", "angel" );
-    addEmoticon( "x(", "sick" );
-    addEmoticon( "x-(", "sick" );
-    addEmoticon( "X|", "pinched" );
-    addEmoticon( "X-|", "pinched" );
-    addEmoticon( "^_^", "happy" );
-    addEmoticon( "O.o", "confused" );
-    addEmoticon( "o.O", "confused" );
-#endif
 
 }
 

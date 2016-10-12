@@ -63,8 +63,8 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
   mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
   mp_actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
-  mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
   mp_dockEmoticons->hide();
+  mp_actViewEmoticons->setVisible( !Settings::instance().useOnlyTextEmoticons() );
 
   setCentralWidget( mp_chat );
   statusBar();

@@ -109,7 +109,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( updateUser( const User& ) ) );
-  connect( mp_core, SIGNAL( userIsWriting( const User& ) ), this, SLOT( showWritingUser( const User& ) ) );
+  connect( mp_core, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
@@ -587,6 +587,8 @@ void GuiMain::checkViewActions()
     mp_barScreenShot->show();
   else
     mp_barScreenShot->hide();
+
+  mp_dockEmoticons->toggleViewAction()->setVisible( !Settings::instance().useOnlyTextEmoticons() );
 
   showDefaultServerPortInMenu();
 
@@ -1908,21 +1910,38 @@ void GuiMain::searchUsers()
   QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
 }
 
-void GuiMain::showWritingUser( const User& u )
+void GuiMain::showWritingUser( const User& u, VNumber chat_id )
 {
   QString msg = tr( "%1 is writing..." ).arg( u.name() );
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->hasUser( u.id() ) )
-    showMessage( msg, Settings::instance().writingTimeout() );
 
-  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-    fl_chat->showUserWriting( u.id(), msg );
+  if( chat_id == ID_INVALID )
+  {
+    if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->hasUser( u.id() ) )
+      showMessage( msg, Settings::instance().writingTimeout() );
+
+    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+      fl_chat->showUserWriting( u.id(), msg );
+  }
+  else
+  {
+    if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->hasUser( u.id() ) && mp_chat->chatId() == chat_id )
+    {
+      showMessage( msg, Settings::instance().writingTimeout() );
+    }
+    else
+    {
+      GuiFloatingChat* fl_chat = floatingChat( chat_id );
+      if( fl_chat )
+        fl_chat->showUserWriting( u.id(), msg );
+    }
+  }
 }
 
 void GuiMain::setUserStatusSelected( int user_status )
 {
   if( user_status == User::Offline && mp_core->isConnected() )
   {
-    if( QMessageBox::question( this, Settings::instance().programName(),
+    if( !Settings::instance().promptOnCloseEvent() || QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
                                QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
       stopCore();
@@ -2709,10 +2728,21 @@ void GuiMain::openUrl( const QUrl& file_url )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Opening url:" << file_url.toString();
 #endif
+  if( file_url.scheme() == QLatin1String( "beeshowfileinfolder" ) )
+  {
+    QUrl adj_file_url = file_url;
+    adj_file_url.setScheme( QLatin1String( "file" ) );
+    if( !Bee::showFileInGraphicalShell( adj_file_url.toLocalFile() ) )
+    {
+      QFileInfo file_info_url( adj_file_url.toLocalFile() );
+      adj_file_url = QUrl::fromLocalFile( file_info_url.absoluteDir().absolutePath() );
+      openUrl( adj_file_url );
+    }
+  }
 #if QT_VERSION >= 0x040800
-  if( file_url.isLocalFile() )
+  else if( file_url.isLocalFile() )
 #else
-  if( file_url.scheme() == QLatin1String( "file" ) )
+  else if( file_url.scheme() == QLatin1String( "file" ) )
 #endif
   {
     QString file_path = file_url.toLocalFile();
@@ -3449,7 +3479,7 @@ void GuiMain::sendBroadcastMessage()
   mp_actBroadcast->setDisabled( true );
   mp_core->sendBroadcastMessage();
   mp_core->sendMulticastingMessage();
-  QTimer::singleShot( 10000, this, SLOT( enableBroadcastAction() ) );
+  QTimer::singleShot( 3 * 61 * 1000, this, SLOT( enableBroadcastAction() ) );
 }
 
 void GuiMain::enableBroadcastAction()

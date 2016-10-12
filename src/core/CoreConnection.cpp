@@ -98,7 +98,7 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 
   Connection *c = new Connection( this );
   setupNewConnection( c );
-  c->connectToNetworkAddress( sender_ip, sender_port );
+  c->connectToNetworkAddress( NetworkAddress( sender_ip, sender_port ) );
 }
 
 void Core::checkNewConnection( Connection *c )
@@ -107,14 +107,14 @@ void Core::checkNewConnection( Connection *c )
   // It comes from Listener. If I want to prevent multiple users from single
   // ip, I can pass -1 to peer_port and check only host address
 
-  qDebug() << "New connection from" << qPrintable( c->hostAndPort() );
+  qDebug() << "New connection from" << qPrintable( c->networkAddress().toString() );
 
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
   {
     if( hasConnection( c->peerAddress(), -1 ) )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << c->peerAddress().toString() << "is already connected and blocked by prevent multiple connections";
+      qDebug() << qPrintable( c->peerAddress().toString() ) << "is already connected and blocked by prevent multiple connections";
 #endif
       closeConnection( c );
       return;
@@ -128,7 +128,7 @@ void Core::setupNewConnection( Connection *c )
 {
 #ifdef BEEBEEP_DEBUG
   if( !c->peerAddress().isNull() )
-    qDebug() << "Connecting SIGNAL/SLOT to connection from" << qPrintable( c->hostAndPort() );
+    qDebug() << "Connecting SIGNAL/SLOT to connection from" << qPrintable( c->networkAddress().toString() );
 #endif
   connect( c, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( setConnectionError( QAbstractSocket::SocketError ) ) );
   connect( c, SIGNAL( disconnected() ), this, SLOT( setConnectionClosed() ) );
@@ -139,7 +139,7 @@ void Core::setupNewConnection( Connection *c )
 void Core::addConnectionReadyForUse( Connection* c )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Connection from" << qPrintable( c->hostAndPort() ) << "is ready for use";
+  qDebug() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "is ready for use";
 #endif
   connect( c, SIGNAL( newMessage( VNumber, const Message& ) ), this, SLOT( parseMessage( VNumber, const Message& ) ) );
   m_connections.append( c );
@@ -152,12 +152,12 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   {
     if( c->userId() != ID_INVALID )
     {
-      qWarning() << "Connection from" << qPrintable( c->hostAndPort() ) << "has an error:" << c->errorString() << "-" << (int)se;
+      qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has an error:" << c->errorString() << "-" << (int)se;
     }
     else
     {
       if( !c->peerAddress().isNull() )
-        qWarning() << "Connection from" << qPrintable( c->hostAndPort() ) << "has refused connection:" << c->errorString() << "-" << (int)se;
+        qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has refused connection:" << c->errorString() << "-" << (int)se;
     }
     closeConnection( c );
   }
@@ -243,7 +243,7 @@ void Core::checkUserAuthentication( const Message& m )
   User u = Protocol::instance().createUser( m, c->peerAddress() );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to create a new user (invalid protocol or password) from the message arrived from:" << qPrintable( c->hostAndPort() );
+    qWarning() << "Unable to create a new user (invalid protocol or password) from the message arrived from:" << qPrintable( c->networkAddress().toString() );
     closeConnection( c );
     return;
   }

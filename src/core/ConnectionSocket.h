@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_CONNECTIONSOCKET_H
 #define BEEBEEP_CONNECTIONSOCKET_H
 
-#include "Config.h"
+#include "NetworkAddress.h"
 class Message;
 
 
@@ -35,7 +35,7 @@ class ConnectionSocket : public QTcpSocket
 public:
   explicit ConnectionSocket( QObject* parent = 0 );
 
-  void connectToNetworkAddress( const QHostAddress&, int );
+  void connectToNetworkAddress( const NetworkAddress& );
   void initSocket( qintptr );
 
   void flushAll();
@@ -55,8 +55,7 @@ public:
 
   inline const QDateTime& latestActivityDateTime() const;
   int activityIdle() const; // ms idle
-
-  inline const QString& hostAndPort() const;
+  inline const NetworkAddress& networkAddress() const;
 
 signals:
   void dataReceived( const QByteArray& );
@@ -89,7 +88,8 @@ private:
   QString m_publicKey1;
   QString m_publicKey2;
 
-  QString m_hostAndPort;
+  NetworkAddress m_networkAddress;
+
   QDateTime m_latestActivityDateTime;
   int m_timerTickId;
   int m_tickCounter;
@@ -107,6 +107,6 @@ inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
 inline bool ConnectionSocket::isConnected() const { return isOpen() && state() >= QAbstractSocket::ConnectedState; }
 inline bool ConnectionSocket::isConnecting() const { return isOpen() && (state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState); }
 inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { return m_latestActivityDateTime; }
-inline const QString& ConnectionSocket::hostAndPort() const { return m_hostAndPort; }
+inline const NetworkAddress& ConnectionSocket::networkAddress() const { return m_networkAddress; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

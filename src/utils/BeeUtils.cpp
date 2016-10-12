@@ -25,6 +25,11 @@
 #include "ChatMessage.h"
 #include "PluginManager.h"
 #include "User.h"
+#if QT_VERSION < 0x050000
+  #ifdef Q_OS_WIN
+    #include <Windows.h>
+  #endif
+#endif
 
 
 QString Bee::userStatusIconFileName( int user_status )
@@ -211,27 +216,31 @@ QString Bee::suffixFromFile( const QString& file_path )
 bool Bee::isFileTypeAudio( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();
-  return sx == "mp3" || sx == "wav" || sx == "wma" || sx == "flac" || sx == "aiff" || sx == "aac" || sx == "m4a" || sx == "m4p" || sx == "ogg" || sx == "oga" || sx == "ra" || sx == "rm";
+  return sx == "mp3" || sx == "wav" || sx == "wma" || sx == "flac" || sx == "aiff" || sx == "aac" || sx == "m4a" || sx == "m4p" ||
+         sx == "ogg" || sx == "oga" || sx == "ra" || sx == "rm";
 }
 
 bool Bee::isFileTypeVideo( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();
-  return sx ==  "mpeg" || sx ==  "mpg" || sx == "mp4" || sx == "avi" || sx == "mkv" || sx == "wmv" || sx == "flv" || sx ==  "mov" || sx ==  "3gp" || sx ==  "mpe";
+  return sx ==  "mpeg" || sx ==  "mpg" || sx == "mp4" || sx == "avi" || sx == "mkv" || sx == "wmv" || sx == "flv" || sx ==  "mov" ||
+         sx ==  "3gp" || sx ==  "mpe";
 }
 
 bool Bee::isFileTypeImage( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();
-  return sx == "jpg" || sx == "jpeg" || sx == "gif" || sx == "bmp" || sx == "png" || sx == "tiff" || sx == "tif" || sx == "psd" || sx == "nef" || sx == "cr2"
-         || sx == "dng" || sx == "dcr" || sx == "3fr" || sx == "raf" || sx == "orf" || sx == "pef" || sx == "arw";
+  return sx == "jpg" || sx == "jpeg" || sx == "gif" || sx == "bmp" || sx == "png" || sx == "tiff" || sx == "tif" || sx == "psd" ||
+         sx == "nef" || sx == "cr2"  || sx == "dng" || sx == "dcr" || sx == "3fr" || sx == "raf" || sx == "orf" || sx == "pef" ||
+         sx == "arw" || sx == "svg" || sx == "ico" || sx == "ppm" || sx == "pgm" || sx == "pbm" || sx == "pnm" || sx == "webp";
 }
 
 bool Bee::isFileTypeDocument( const QString& file_suffix )
 {
   QString sx = file_suffix.toLower();
-  return sx ==  "pdf" || sx.startsWith( "doc" ) || sx.startsWith( "xls" ) || sx.startsWith( "ppt" ) || sx.startsWith( "pps" )
-    || sx ==  "rtf" || sx ==  "txt" || sx ==  "odt" || sx ==  "odp" || sx ==  "ods" || sx ==  "csv" || sx ==  "log" || sx ==  "mobi" || sx ==  "epub";
+  return sx ==  "pdf" || sx.startsWith( "doc" ) || sx.startsWith( "xls" ) || sx.startsWith( "ppt" ) || sx.startsWith( "pps" ) ||
+         sx ==  "rtf" || sx ==  "txt" || sx ==  "odt" || sx ==  "odp" || sx ==  "ods" || sx ==  "csv" || sx ==  "log" ||
+         sx ==  "mobi" || sx ==  "epub";
 }
 
 bool Bee::isFileTypeExe( const QString& file_suffix )
@@ -545,11 +554,11 @@ bool Bee::showFileInGraphicalShell( const QString& file_path )
     QStringList explorer_args;
     if( !file_info.isDir() )
       explorer_args += QLatin1String("/select,");
-     explorer_args += Bee::convertToNativeFolderSeparator( file_info.canonicalFilePath() );
-     if( QProcess::startDetached( explorer_path, explorer_args ) )
-       return true;
-     else
-       qWarning() << "Unable to start process:" << qPrintable( explorer_path ) << qPrintable( explorer_args.join( " " ) );
+    explorer_args += Bee::convertToNativeFolderSeparator( file_info.canonicalFilePath() );
+    if( QProcess::startDetached( explorer_path, explorer_args ) )
+      return true;
+    else
+      qWarning() << "Unable to start process:" << qPrintable( explorer_path ) << qPrintable( explorer_args.join( " " ) );
   }
 #endif
 
@@ -566,6 +575,8 @@ bool Bee::showFileInGraphicalShell( const QString& file_path )
   return true;
 
 #endif
+
+
 
   return false;
 }

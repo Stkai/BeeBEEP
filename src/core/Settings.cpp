@@ -94,6 +94,8 @@ Settings::Settings()
   m_disableSendMessage = false;
 #endif
   m_startMinimized = false;
+  m_signature = "";
+  m_useOnlyTextEmoticons = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -268,6 +270,8 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
     sets->setValue( "StartMinimized", m_startMinimized );
+    sets->setValue( "Signature", m_signature );
+    sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -341,6 +345,8 @@ void Settings::loadRcFile()
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
   m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
+  m_signature = sets->value( "Signature", m_signature ).toString();
+  m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Groups" );
@@ -573,6 +579,8 @@ QString Settings::gaEventVersion() const
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;
+  if( !m_signature.isEmpty() )
+    hash_pre += m_signature.toUtf8();
   QByteArray hash_generated = QCryptographicHash::hash( hash_pre, QCryptographicHash::Sha1 );
   return hash_generated.toHex();
 }
@@ -580,7 +588,10 @@ QByteArray Settings::hash( const QString& string_to_hash ) const
 void Settings::setPassword( const QString& new_value )
 {
   m_passwordBeforeHash = new_value;
-  m_password = QCryptographicHash::hash( QString( (new_value.isEmpty() || new_value == defaultPassword()) ? "*6475*" : new_value ).toUtf8(), QCryptographicHash::Sha1 ).toHex();
+  QString pwd_tmp = new_value.isEmpty() || new_value == defaultPassword() ? QString( "*6475*" ) : new_value;
+  if( !m_signature.isEmpty() )
+    pwd_tmp.prepend( m_signature );
+  m_password = QCryptographicHash::hash( pwd_tmp.toUtf8(), QCryptographicHash::Sha1 ).toHex();
 }
 
 QString Settings::currentHash() const

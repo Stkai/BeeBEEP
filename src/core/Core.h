@@ -136,7 +136,7 @@ signals:
   void chatReadByUser( VNumber chat_id, VNumber user_id );
   void fileDownloadRequest( const User&, const FileInfo& );
   void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
-  void userIsWriting( const User& );
+  void userIsWriting( const User&, VNumber );
   void userChanged( const User& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );

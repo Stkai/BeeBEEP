@@ -97,7 +97,13 @@ void Core::parseUserMessage( const User& u, const Message& m )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "User" << u.path() << "is writing";
 #endif
-    emit userIsWriting( u );
+    Chat c;
+    if( !m.data().isEmpty() )
+      c = ChatManager::instance().findGroupChatByPrivateId( m.data() );
+    else
+      c = ChatManager::instance().privateChatForUser( u.id() );
+
+    emit userIsWriting( u, c.id() );
     return;
   }
   else if( m.hasFlag( Message::UserStatus ) )

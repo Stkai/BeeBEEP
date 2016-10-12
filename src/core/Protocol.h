@@ -50,7 +50,7 @@ public:
   QByteArray broadcastMessage( const QHostAddress& ) const;
   QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
   QByteArray helloMessage( const QString& cipher_key_tmp ) const;
-  inline const QByteArray& writingMessage() const;
+  QByteArray writingMessage( const QString& chat_private_id ) const;
   inline Message systemMessage( const QString& ) const;
   Message chatMessage( const Chat&, const QString& );
   Message chatReadMessage( const Chat& );
@@ -157,7 +157,6 @@ protected:
 
 private:
   VNumber m_id;
-  QByteArray m_writingMessage;
   QByteArray m_fileShareListMessage;
   QByteArray m_fileShareRequestMessage;
   int m_datastreamMaxVersion;
@@ -169,7 +168,6 @@ inline VNumber Protocol::currentId() const { return m_id; }
 inline VNumber Protocol::newId() { return ++m_id; }
 inline VNumber Protocol::maxId() const { return 18446744073709000000u; }
 inline int Protocol::messageMinimumSize() const { return 10; }
-inline const QByteArray& Protocol::writingMessage() const { return m_writingMessage; }
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
 inline const QByteArray& Protocol::fileShareListMessage() const { return m_fileShareListMessage; }
 inline const QByteArray& Protocol::fileShareRequestMessage() const { return m_fileShareRequestMessage; }

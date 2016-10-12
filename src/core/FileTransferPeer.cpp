@@ -44,7 +44,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
 
 void FileTransferPeer::cancelTransfer()
 {
-  qDebug() << name() << "cancels the transfer";
+  qDebug() << qPrintable( name() ) << "cancels the transfer";
   if( m_socket.isOpen() )
     m_socket.abortConnection();
   m_state = FileTransferPeer::Cancelled;
@@ -55,16 +55,16 @@ void FileTransferPeer::cancelTransfer()
 
 void FileTransferPeer::closeAll()
 {
-  qDebug() << name() << "cleans up";
+  qDebug() << qPrintable( name() ) << "cleans up";
   if( m_socket.isOpen() )
   {
-    qDebug() << name() << "close socket with descriptor" << m_socket.socketDescriptor();
+    qDebug() << qPrintable( name() ) << "close socket with descriptor" << m_socket.socketDescriptor();
     m_socket.closeConnection();
   }
 
   if( m_file.isOpen() )
   {
-    qDebug() << name() << "close file" << qPrintable( Bee::convertToNativeFolderSeparator( m_file.fileName() ) );
+    qDebug() << qPrintable( name() ) << "close file" << qPrintable( Bee::convertToNativeFolderSeparator( m_file.fileName() ) );
     m_file.flush();
     m_file.close();
   }
@@ -75,14 +75,14 @@ void FileTransferPeer::setFileInfo( FileInfo::TransferType ftt, const FileInfo& 
   m_fileInfo = fi;
   m_fileInfo.setTransferType( ftt );
   m_file.setFileName( m_fileInfo.path() );
-  qDebug() << name() << "init the file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.path() ) );
+  qDebug() << qPrintable( name() ) << "init the file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.path() ) );
 }
 
 void FileTransferPeer::startConnection()
 {
   if( m_state >= FileTransferPeer::Request )
   {
-    qDebug() << name() << "is already started and it is in state" << m_state;
+    qDebug() << qPrintable( name() ) << "is already started and it is in state" << m_state;
     return;
   }
 
@@ -94,13 +94,13 @@ void FileTransferPeer::startConnection()
 
   if( m_socketDescriptor )
   {
-    qDebug() << name() << "set socket descriptor" << m_socketDescriptor;
+    qDebug() << qPrintable( name() ) << "set socket descriptor" << m_socketDescriptor;
     m_socket.initSocket( m_socketDescriptor );
   }
   else
   {
-    qDebug() << name() << "is connecting to" << qPrintable( m_fileInfo.hostAddress().toString() ) << ":" << m_fileInfo.hostPort();
-    m_socket.connectToNetworkAddress( m_fileInfo.hostAddress(), m_fileInfo.hostPort() );
+    qDebug() << qPrintable( name() ) << "is connecting to" << qPrintable( m_fileInfo.networkAddress().toString() );
+    m_socket.connectToNetworkAddress( m_fileInfo.networkAddress() );
   }
 
   QTimer::singleShot( Settings::instance().fileTransferConfirmTimeout(), this, SLOT( connectionTimeout() ) );
@@ -108,7 +108,7 @@ void FileTransferPeer::startConnection()
 
 void FileTransferPeer::setTransferCompleted()
 {
-  qDebug() << name() << "has completed the transfer of file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) );
+  qDebug() << qPrintable( name() ) << "has completed the transfer of file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) );
   m_state = FileTransferPeer::Completed;
   closeAll();
   if( isDownload() && m_fileInfo.lastModified().isValid() )
@@ -128,7 +128,7 @@ void FileTransferPeer::socketError( QAbstractSocket::SocketError )
 void FileTransferPeer::setError( const QString& str_err )
 {
   m_state = FileTransferPeer::Error;
-  qWarning() << name() << "found an error when transfer file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) ) << ":" << str_err;
+  qWarning() << qPrintable( name() ) << "found an error when transfer file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) ) << ":" << str_err;
   closeAll();
   emit message( id(), userId(), m_fileInfo, str_err );
   deleteLater();

@@ -83,7 +83,7 @@ private slots:
   void showAbout();
   void showLicense();
   void updateUser( const User& );
-  void showWritingUser( const User& );
+  void showWritingUser( const User&, VNumber );
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
   void showTipOfTheDay();
