@@ -70,6 +70,7 @@ namespace Bee
   QString folderCdUp( const QString& );
   bool setLastModifiedToFile( const QString&, const QDateTime& );
   bool showFileInGraphicalShell( const QString& );
+  bool folderIsWriteable( const QString& );
 
 }
 

@@ -922,6 +922,8 @@ void Settings::load()
   m_homeShowMessageDatestamp = sets->value( "ShowHomeDatestamp", false ).toBool();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
   m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
+  m_userSortingMode = qMax( 0, (int)sets->value( "UserSortingMode", 0 ).toInt() );
+  m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1195,6 +1197,8 @@ void Settings::save()
   sets->setValue( "UsePreviewFileDialog", m_usePreviewFileDialog );
   sets->setValue( "PreviewFileDialogGeometry", m_previewFileDialogGeometry );
   sets->setValue( "PreviewFileDialogImageSize", m_previewFileDialogImageSize );
+  sets->setValue( "UserSortingMode", m_userSortingMode );
+  sets->setValue( "SortUsersAscending", m_sortUsersAscending );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
@@ -1424,12 +1428,15 @@ bool Settings::setDataFolder()
 {
   m_dataFolder = Bee::convertToNativeFolderSeparator( m_resourceFolder );
 
-  QFileInfo data_file_info( m_dataFolder );
-
-  if( data_file_info.isWritable() && !m_saveDataInDocumentsFolder && !m_saveDataInUserApplicationFolder && m_dataFolderInRC.isEmpty() )
+  if( !m_saveDataInDocumentsFolder && !m_saveDataInUserApplicationFolder && m_dataFolderInRC.isEmpty() )
   {
-    qDebug() << "Data folder:" << qPrintable( m_dataFolder );
-    return true;
+    if( Bee::folderIsWriteable( m_dataFolder ) )
+    {
+      qDebug() << "Data folder:" << qPrintable( m_dataFolder );
+      return true;
+    }
+    else
+      qWarning() << "Default data folder" << qPrintable( m_dataFolder ) << "is not writeable";
   }
 
   QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
@@ -1448,11 +1455,11 @@ bool Settings::setDataFolder()
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;
   else if( m_saveDataInUserApplicationFolder )
-    root_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
+    root_folder = QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() );
   else if( m_saveDataInDocumentsFolder )
     root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
   else
-    root_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) );
+    root_folder = QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() );
 #else
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;
@@ -1482,14 +1489,13 @@ bool Settings::setDataFolder()
       qDebug() << "Data folder created in" << qPrintable( m_dataFolder );
   }
 
-  QFileInfo folder_info( m_dataFolder );
-  if( !folder_info.isWritable() )
+  if( !Bee::folderIsWriteable( m_dataFolder ) )
   {
-    qWarning() << "Data folder" << qPrintable( folder_info.absoluteFilePath() ) << "is not writeable";
+    qWarning() << "Data folder" << qPrintable( m_dataFolder ) << "is not writeable";
     return false;
   }
 
-  qDebug() << "Data folder is" << qPrintable(  m_dataFolder );
+  qDebug() << "Data folder (smart):" << qPrintable(  m_dataFolder );
   return true;
 }
 

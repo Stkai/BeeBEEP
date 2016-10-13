@@ -67,7 +67,7 @@ GuiUserList::GuiUserList( QWidget* parent )
 
 void GuiUserList::sortUsers()
 {
-  mp_twUsers->sortItems( 0, Qt::AscendingOrder );
+  mp_twUsers->sortItems( 0, Settings::instance().sortUsersAscending() ? Qt::AscendingOrder : Qt::DescendingOrder );
 }
 
 QSize GuiUserList::sizeHint() const

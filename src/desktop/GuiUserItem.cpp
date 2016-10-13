@@ -38,17 +38,55 @@ GuiUserItem::GuiUserItem( QTreeWidgetItem* parent )
 {
 }
 
+static int UserStatusSortingOrder( int user_status )
+{
+  switch( user_status )
+  {
+  case User::Offline : return 1;
+  case User::Busy    : return 2;
+  case User::Away    : return 3;
+  default:
+    return 4;
+  }
+}
+
 bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
 {
-  int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
-  int other_priority = item.data( 0, GuiUserItem::Priority ).toInt();
-  if( user_item_priority != other_priority )
-    return user_item_priority < other_priority;
-
-  QString user_item_name = data( 0, GuiUserItem::UserName ).toString().toLower();
+  QString user_name = data( 0, GuiUserItem::UserName ).toString().toLower();
   QString other_name = item.data( 0, GuiUserItem::UserName ).toString().toLower();
 
-  return user_item_name < other_name;
+  if( Settings::instance().userSortingMode() == 1 ) // by name
+  {
+    return user_name < other_name;
+  }
+  else if( Settings::instance().userSortingMode() == 2 ) // by status
+  {
+    int user_status = UserStatusSortingOrder( data( 0, GuiUserItem::Status ).toInt() );
+    int other_status = UserStatusSortingOrder( item.data( 0, GuiUserItem::Status ).toInt() );
+
+    if( user_status != other_status )
+      return user_status < other_status;
+    else
+      return user_name < other_name;
+  }
+  else if( Settings::instance().userSortingMode() == 3 ) // by messages
+  {
+    int user_messages = unreadMessages();
+    int other_messages = data( 0, UnreadMessages ).toInt();
+    if( user_messages != other_messages )
+      return user_messages < other_messages;
+    else
+      return user_name < other_name;
+  }
+  else
+  {
+    int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
+    int other_priority = item.data( 0, GuiUserItem::Priority ).toInt();
+    if( user_item_priority != other_priority )
+      return user_item_priority < other_priority;
+    else
+      return user_name < other_name;
+  }
 }
 
 QIcon GuiUserItem::selectUserIcon( int user_status, bool use_big_icon ) const

@@ -236,6 +236,10 @@ public:
   inline bool chatUseYourNameInsteadOfYou() const;
   inline void setChatClearAllReadMessages( bool );
   inline bool chatClearAllReadMessages() const;
+  inline void setUserSortingMode( int );
+  inline int userSortingMode() const;
+  inline void setSortUsersAscending( bool );
+  inline bool sortUsersAscending() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -537,6 +541,8 @@ private:
   bool m_useReturnToSendMessage;
   bool m_chatUseYourNameInsteadOfYou;
   bool m_chatClearAllReadMessages;
+  int m_userSortingMode;  //  0 priority( default), 1 by name, 2 by status, 3 by messages
+  bool m_sortUsersAscending;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -921,5 +927,9 @@ inline void Settings::setUseShareBox( bool new_value ) { m_useShareBox = new_val
 inline bool Settings::useShareBox() const { return m_useShareBox; }
 inline void Settings::setShareBoxPath( const QString& new_value ) { m_shareBoxPath = new_value; }
 inline const QString& Settings::shareBoxPath() const { return m_shareBoxPath; }
+inline void Settings::setUserSortingMode( int new_value ) { m_userSortingMode = new_value; }
+inline int Settings::userSortingMode() const { return m_userSortingMode; }
+inline void Settings::setSortUsersAscending( bool new_value ) { m_sortUsersAscending = new_value; }
+inline bool Settings::sortUsersAscending() const { return m_sortUsersAscending; }
 
 #endif // BEEBEEP_SETTINGS_H

@@ -955,6 +955,41 @@ void GuiMain::createMenus()
 
   mp_menuUserList->addSeparator();
 
+  act = mp_menuUserList->addAction( tr( "Sort users in ascending order" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().sortUsersAscending() );
+  act->setData( 49 );
+
+  QMenu* sorting_users_menu = mp_menuUserList->addMenu( tr( "Sorting mode" ) + QString( "..." ) );
+  QActionGroup* sorting_users_action_group = new QActionGroup( this );
+  sorting_users_action_group->setExclusive( true );
+
+  act = sorting_users_menu->addAction( tr( "Default mode" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userSortingMode() < 1 || Settings::instance().userSortingMode() > 3 );
+  act->setData( 50 );
+  sorting_users_action_group->addAction( act );
+
+  act = sorting_users_menu->addAction( tr( "By user name" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userSortingMode() == 1 );
+  act->setData( 51 );
+  sorting_users_action_group->addAction( act );
+
+  act = sorting_users_menu->addAction( tr( "By user status" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userSortingMode() == 2 );
+  act->setData( 52 );
+  sorting_users_action_group->addAction( act );
+
+  act = sorting_users_menu->addAction( tr( "By unread messages" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userSortingMode() == 3 );
+  act->setData( 53 );
+  sorting_users_action_group->addAction( act );
+
+  mp_menuUserList->addSeparator();
+
   act = mp_menuUserList->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled only the online users are shown in the list" ) );
   act->setCheckable( true );
@@ -1183,7 +1218,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
   mp_barMain->addAction( mp_actViewShareBox );
-  mp_barMain->addAction( mp_actViewLog );
+  //mp_barMain->addAction( mp_actViewLog );
   mp_barMain->addAction( mp_actViewScreenShot );
 }
 
@@ -1698,6 +1733,26 @@ void GuiMain::settingsChanged()
   case 48:
     Settings::instance().setShowFileTransferCompletedOnTray( act->isChecked() );
     break;
+  case 49:
+    Settings::instance().setSortUsersAscending( act->isChecked() );
+    refresh_users = true;
+    break;
+  case 50:
+    Settings::instance().setUserSortingMode( 0 );
+    refresh_users = true;
+    break;
+  case 51:
+    Settings::instance().setUserSortingMode( 1 );
+    refresh_users = true;
+    break;
+  case 52:
+    Settings::instance().setUserSortingMode( 2 );
+    refresh_users = true;
+    break;
+  case 53:
+    Settings::instance().setUserSortingMode( 3 );
+    refresh_users = true;
+    break;
   case 99:
     break;
   default:
@@ -1706,6 +1761,7 @@ void GuiMain::settingsChanged()
 
   if( refresh_users )
     refreshUserList();
+
   if( refresh_chat )
   {
     QApplication::setOverrideCursor( Qt::WaitCursor );
@@ -1715,6 +1771,7 @@ void GuiMain::settingsChanged()
       fl_chat->guiChat()->reloadChat();
     QApplication::restoreOverrideCursor();
   }
+
   if( settings_data_id > 0 && settings_data_id < 99 )
     Settings::instance().save();
 }

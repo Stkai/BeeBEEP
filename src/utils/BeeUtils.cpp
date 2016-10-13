@@ -576,7 +576,22 @@ bool Bee::showFileInGraphicalShell( const QString& file_path )
 
 #endif
 
-
-
   return false;
+}
+
+bool Bee::folderIsWriteable( const QString& folder_path )
+{
+  QDir folder_to_test( folder_path );
+  if( !folder_to_test.exists() )
+    return folder_to_test.mkpath( "." );
+
+  QFile test_file( QString( "%1/%2" ).arg( folder_path ).arg( "beetestfile.txt" ) );
+  if( test_file.open( QFile::WriteOnly ) )
+  {
+    test_file.close();
+    test_file.remove();
+    return true;
+  }
+  else
+    return false;
 }
