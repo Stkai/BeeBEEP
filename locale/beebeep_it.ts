@@ -3577,6 +3577,30 @@ il file %2 (%3)?</translation>
         <source>New file from %1</source>
         <translation>Nuovo file da %1</translation>
     </message>
+    <message>
+        <source>Sort users in ascending order</source>
+        <translation>Ordina gli utenti in modo crescente</translation>
+    </message>
+    <message>
+        <source>Sorting mode</source>
+        <translation>Modalità di ordinamento</translation>
+    </message>
+    <message>
+        <source>Default mode</source>
+        <translation>Predefinita</translation>
+    </message>
+    <message>
+        <source>By user name</source>
+        <translation>Sul nome utente</translation>
+    </message>
+    <message>
+        <source>By user status</source>
+        <translation>Sullo stato dell&apos;utente</translation>
+    </message>
+    <message>
+        <source>By unread messages</source>
+        <translation>Sui messaggi non letti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
