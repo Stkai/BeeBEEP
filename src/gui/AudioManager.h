@@ -26,7 +26,7 @@
 
 #include "Config.h"
 #ifdef BEEBEEP_USE_PHONON4
-  #include <Phonon/MediaObject>
+  #include <phonon/MediaObject>
 #endif
 
 

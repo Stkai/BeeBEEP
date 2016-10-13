@@ -30,6 +30,10 @@
     #include <Windows.h>
   #endif
 #endif
+#ifndef Q_OS_WIN
+  #include <utime.h>
+  #include <errno.h>
+#endif
 
 
 QString Bee::userStatusIconFileName( int user_status )
