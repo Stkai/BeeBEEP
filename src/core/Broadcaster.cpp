@@ -142,7 +142,7 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
 
 void Broadcaster::checkLoopbackDatagram()
 {
-  QList<QPair<NetworkAddress,QDateTime>>::iterator it = m_networkAddressesWaitingForLoopback.begin();
+  QList< QPair<NetworkAddress,QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
   while( it != m_networkAddressesWaitingForLoopback.end() )
   {
     if( it->second.msecsTo( QDateTime::currentDateTime() ) > 5600 )
@@ -157,7 +157,7 @@ void Broadcaster::checkLoopbackDatagram()
 
 void Broadcaster::removeHostAddressFromWaitingList( const QHostAddress& host_address )
 {
-  QList<QPair<NetworkAddress,QDateTime>>::iterator it = m_networkAddressesWaitingForLoopback.begin();
+  QList< QPair<NetworkAddress,QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
   while( it != m_networkAddressesWaitingForLoopback.end() )
   {
     if( it->first.hostAddress() == host_address )

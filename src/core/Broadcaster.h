@@ -63,7 +63,7 @@ private:
   QUdpSocket m_broadcastSocket;
   QList<NetworkAddress> m_networkAddresses;
   bool m_newBroadcastRequested;
-  QList<QPair<NetworkAddress,QDateTime>> m_networkAddressesWaitingForLoopback;
+  QList< QPair<NetworkAddress, QDateTime> > m_networkAddressesWaitingForLoopback;
 
 };
 
