@@ -12,6 +12,7 @@ BeeBEEP 3.0.8
 - "UseOnlyTextEmoticons" option added in beebeep.rc file
 - Fixed a bug on smart selection of the data folder (now if the application folder is not writeable, BeeBEEP save its data to UserAppData folder)
 - Users can be sorted in ascending or descending order, by name, by status, by unread messages and by priority (default)
+- A "new message notification" is shown also when a new file is received from a user
 
 BeeBEEP 3.0.7
 - ShareBox: new feature in beta (can share files like dropbox with all users connected)

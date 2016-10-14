@@ -100,12 +100,12 @@ FileInfo FileTransfer::fileInfo( VNumber file_id ) const
   return FileInfo();
 }
 
-FileInfo FileTransfer::fileInfoFromPath( const QString& file_absolute_path ) const
+FileInfo FileTransfer::fileInfo( const QString& file_absolute_path, const QString chat_private_id ) const
 {
   QList<FileInfo>::const_iterator it = m_files.begin();
   while( it != m_files.end() )
   {
-    if( (*it).path() == file_absolute_path )
+    if( (*it).path() == file_absolute_path && (*it).chatPrivateId() == chat_private_id )
       return *it;
     ++it;
   }
@@ -125,9 +125,9 @@ void FileTransfer::removeFile( const QFileInfo& fi )
   }
 }
 
-FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder, bool to_share_box )
+FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id )
 {
-  FileInfo file_info = fileInfoFromPath( fi.absoluteFilePath() );
+  FileInfo file_info = fileInfo( fi.absoluteFilePath(), chat_private_id );
   if( file_info.isValid() )
   {
     QString file_hash = Protocol::instance().fileInfoHash( fi );
@@ -137,7 +137,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
       removeFile( fi );
   }
 
-  file_info = Protocol::instance().fileInfo( fi, share_folder, to_share_box );
+  file_info = Protocol::instance().fileInfo( fi, share_folder, to_share_box, chat_private_id );
   file_info.setHostAddress( Settings::instance().localUser().networkAddress().hostAddress() );
   file_info.setHostPort( serverPort() );
   m_files.append( file_info );
@@ -291,7 +291,7 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
         upload_peer->cancelTransfer();
       }
 
-      file_info = Protocol::instance().fileInfo( share_box_file_info, "", true );
+      file_info = Protocol::instance().fileInfo( share_box_file_info, "", true, "" );
     }
   }
   else

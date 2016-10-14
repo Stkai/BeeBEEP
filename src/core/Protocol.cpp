@@ -907,13 +907,13 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   return fi;
 }
 
-FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, bool to_sharebox )
+FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id )
 {
   FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
   file_info.setName( fi.fileName() );
   file_info.setPath( fi.absoluteFilePath() );
   file_info.setShareFolder( share_folder );
-  file_info.setIsInShareBox( to_sharebox );
+  file_info.setIsInShareBox( to_share_box );
 
   if( fi.isFile() )
   {
@@ -923,7 +923,7 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
   else
     file_info.setIsFolder( true );
 
-  if( to_sharebox )
+  if( to_share_box )
   {
     file_info.setPassword( Settings::instance().hash( file_info.path() ) );
     file_info.setFileHash( QString::fromLatin1( file_info.password() ) );
@@ -942,6 +942,7 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
   }
 
   file_info.setLastModified( fi.lastModified() );
+  file_info.setChatPrivateId( chat_private_id );
 
   return file_info;
 }

@@ -204,6 +204,12 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   }
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
+  if( chat_to_show_message.isValid() && fi.isDownload() )
+  {
+    chat_to_show_message.addUnreadMessage();
+    ChatManager::instance().setChat( chat_to_show_message );
+  }
+
   dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
   emit fileTransferMessage( peer_id, u, fi, msg );
 }
@@ -268,7 +274,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
 
   if( file.isDir() )
   {
-    if( sendFolder( u, file, chat_selected.isValid() && chat_selected.isGroup() ? chat_selected.privateId() : QString( "" ) ) )
+    if( sendFolder( u, file, chat_selected.privateId() ) )
       return true;
 
     dispatchSystemMessage( chat_id, u.id(), tr( "%1 %2 is a folder. You can share it." ).arg( icon_html, file.fileName() ),
@@ -276,10 +282,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
     return false;
   }
 
-  FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box );
-
-  if( chat_selected.isValid() && chat_selected.isGroup() )
-    fi.setChatPrivateId( chat_selected.privateId() );
+  FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box, chat_selected.privateId() );
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "File path" << fi.path() << "is added to file transfer list";
@@ -435,7 +438,7 @@ void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Adding to file sharing" << share_path;
 #endif
-    FileInfo file_info = Protocol::instance().fileInfo( fi, "", false );
+    FileInfo file_info = Protocol::instance().fileInfo( fi, "", false, "" );
     FileShare::instance().addToLocal( file_info );
 
     if( m_shareListToBuild > 0 )

@@ -42,11 +42,11 @@ static int UserStatusSortingOrder( int user_status )
 {
   switch( user_status )
   {
-  case User::Offline : return 1;
-  case User::Busy    : return 2;
-  case User::Away    : return 3;
+  case User::Offline : return 4;
+  case User::Busy    : return 3;
+  case User::Away    : return 2;
   default:
-    return 4;
+    return 1;
   }
 }
 

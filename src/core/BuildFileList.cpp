@@ -64,7 +64,7 @@ void BuildFileList::buildList()
         {
           if( Protocol::instance().fileCanBeShared( fi ) )
           {
-            FileInfo file_info = Protocol::instance().fileInfo( fi, "", true );
+            FileInfo file_info = Protocol::instance().fileInfo( fi, "", true, "" );
             if( file_info.isValid() )
               m_fileList.append( file_info );
           }
@@ -72,7 +72,7 @@ void BuildFileList::buildList()
       }
       else
       {
-        FileInfo file_info = Protocol::instance().fileInfo( box_info, "", true );
+        FileInfo file_info = Protocol::instance().fileInfo( box_info, "", true, "" );
         if( file_info.isValid() )
           m_fileList.append( file_info );
       }

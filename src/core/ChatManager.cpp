@@ -33,6 +33,20 @@ ChatManager::ChatManager()
 {
 }
 
+Chat ChatManager::chat( VNumber chat_id ) const
+{
+  if( chat_id != ID_INVALID )
+  {
+    foreach( Chat c, m_chats )
+    {
+      if( c.id() == chat_id )
+        return c;
+    }
+    qWarning() << "Unable to find chat with id" << chat_id;
+  }
+  return Chat();
+}
+
 Chat ChatManager::privateChatForUser( VNumber user_id ) const
 {
   if( user_id == ID_LOCAL_USER )
@@ -45,19 +59,6 @@ Chat ChatManager::privateChatForUser( VNumber user_id ) const
   }
 
   qWarning() << "Unable to find private chat for user id" << user_id;
-  return Chat();
-}
-
-Chat ChatManager::chat( VNumber chat_id ) const
-{
-  QList<Chat>::const_iterator it = m_chats.begin();
-  while( it != m_chats.end() )
-  {
-    if( chat_id == (*it).id() )
-      return *it;
-    ++it;
-  }
-  qWarning() << "Unable to find chat with id" << chat_id;
   return Chat();
 }
 

@@ -44,7 +44,7 @@ public:
   inline bool isActive() const;
   inline bool hasActivePeers() const;
 
-  FileInfo addFile( const QFileInfo&, const QString&, bool );
+  FileInfo addFile( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id );
   void addFileInfoList( const QList<FileInfo>& );
   void removeFile( const QFileInfo& );
 
@@ -70,7 +70,7 @@ protected:
   int activeDownloads() const;
 
   FileInfo fileInfo( VNumber ) const;
-  FileInfo fileInfoFromPath( const QString& ) const;
+  FileInfo fileInfo( const QString& file_absolute_path, const QString chat_private_id ) const;
   FileTransferPeer* nextDownloadInQueue() const;
   int downloadsInQueue() const;
 
