@@ -75,7 +75,7 @@ bool GuiGroupItem::updateGroup( const Group& g )
     return false;
 
   setIcon( 0, QIcon( ":/images/group.png" ) );
-  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( c.isValid() )
     setGroupName( g.name(), c.unreadMessages() );
   else

@@ -245,7 +245,7 @@ void Core::addGroup( const Group& g, bool broadcast_to_members )
   UserManager::instance().setGroup( g );
   emit updateGroup( g.id() );
 
-  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
     createGroupChat( g, broadcast_to_members );
 }
@@ -262,7 +262,7 @@ void Core::changeGroup( VNumber group_id, const QString& group_name, const QList
 
   emit updateGroup( g.id() );
 
-  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
   {
     qWarning() << "Chat not found for group" << g.name();
@@ -281,7 +281,7 @@ bool Core::removeGroup( VNumber group_id )
     return false;
   }
 
-  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( c.isValid() )
     removeChat( c.id() );
 

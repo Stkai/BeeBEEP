@@ -37,7 +37,7 @@ public:
   inline Chat defaultChat() const;
   Chat chat( VNumber ) const;
   Chat privateChatForUser( VNumber user_id ) const;
-  Chat findGroupChatByPrivateId( const QString& ) const;
+  Chat findChatByPrivateId( const QString& chat_private_id, bool skip_default_chat, VNumber user_id ) const;
   Chat firstChatWithUnreadMessages() const;
 
   void setChat( const Chat& );

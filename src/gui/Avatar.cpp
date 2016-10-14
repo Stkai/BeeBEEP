@@ -104,7 +104,8 @@ bool Avatar::create()
   QFont f( QFont( "monospace", qMin( 128, m_size.height() ) ) );
   f.setBold( true );
   QFontMetrics fm( f );
-  int w_max_size = m_size.width() - qMax( 2, (int)(m_size.width() / 6) );
+  int w_min_max_size = m_size.width() >= 24 ? 8 : m_size.width() >= 16 ? 4 : 3;
+  int w_max_size = m_size.width() - qMax( w_min_max_size, (int)(m_size.width() / 6) );
 
   while( fm.width( text_to_write ) > w_max_size )
   {

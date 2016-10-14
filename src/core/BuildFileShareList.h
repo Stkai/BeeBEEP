@@ -46,6 +46,8 @@ public:
   inline int elapsedTime() const;
   inline void setUserId( VNumber );
   inline VNumber userId() const;
+  inline void setChatPrivateId( const QString& );
+  inline const QString& chatPrivateId() const;
 
 signals:
   void listCompleted();
@@ -64,6 +66,7 @@ private:
   FileSizeType m_shareSize;
   int m_elapsedTime;
   VNumber m_userId;
+  QString m_chatPrivateId;
 
 };
 
@@ -78,5 +81,7 @@ inline FileSizeType BuildFileShareList::shareSize() const { return m_shareSize; 
 inline int BuildFileShareList::elapsedTime() const { return m_elapsedTime; }
 inline void BuildFileShareList::setUserId( VNumber new_value ) { m_userId = new_value; }
 inline VNumber BuildFileShareList::userId() const { return m_userId; }
+inline void BuildFileShareList::setChatPrivateId( const QString& new_value ) { m_chatPrivateId = new_value; }
+inline const QString& BuildFileShareList::chatPrivateId() const { return m_chatPrivateId; }
 
 #endif // BEEBEEP_BUILDFILESHARELIST_H

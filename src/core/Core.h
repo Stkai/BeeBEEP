@@ -95,7 +95,7 @@ public:
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );
   bool downloadFile( VNumber, const FileInfo&, bool show_message );
   void refuseToDownloadFile( VNumber, const FileInfo& );
-  void refuseToDownloadFolder( VNumber, const QString& );
+  void refuseToDownloadFolder( VNumber, const QString& folder_name, const QString& chat_private_id );
   bool startFileTransferServer();
   void stopFileTransferServer();
   void addPathToShare( const QString&, bool );
@@ -246,7 +246,7 @@ protected:
   /* CoreFileTransfer */
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();
-  bool sendFolder( const User&, const QFileInfo& );
+  bool sendFolder( const User&, const QFileInfo&, const QString& chat_private_id );
   void buildShareBoxFileList( const User&, const QString& );
 
 private:

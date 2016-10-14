@@ -27,7 +27,7 @@
 #include "Config.h"
 #include "FileInfo.h"
 
-
+// For ShareBox only
 class BuildFileList : public QObject
 {
   Q_OBJECT

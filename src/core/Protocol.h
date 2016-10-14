@@ -72,7 +72,7 @@ public:
   QByteArray bytesArrivedConfirmation( int ) const;
   Message createFolderMessage( const QString&, const QList<FileInfo>&, int server_port );
   QList<FileInfo> messageFolderToInfoList( const Message&, const QHostAddress&, QString* pFolderName = 0 ) const;
-  Message folderRefusedToMessage( const QString& );
+  Message folderRefusedToMessage( const QString&, const QString& );
   QStringList workgroupsFromHelloMessage( const Message& ) const;
   bool acceptConnectionFromWorkgroup( const Message& ) const;
 

@@ -91,6 +91,9 @@ void Core::checkUserRecord( const UserRecord& ur )
 
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
+  if( !isConnected() )
+    return;
+
   if( hasConnection( sender_ip, sender_port ) )
     return;
 

@@ -227,7 +227,7 @@ bool Core::start()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
 void Core::startDnsMulticasting()
 {
-  if( mp_mDns->isActive() )
+  if( dnsMulticastingIsActive() )
     return;
 
   if( Settings::instance().useMulticastDns() )
@@ -247,7 +247,7 @@ void Core::startDnsMulticasting()
 
 void Core::stopDnsMulticasting()
 {
-  if( !mp_mDns->isActive() )
+  if( !dnsMulticastingIsActive() )
     return;
 
   if( mp_mDns->stop() )

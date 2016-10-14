@@ -74,11 +74,11 @@ bool MDnsManager::stop()
   }
 
   qDebug() << qPrintable( objectName() ) << "has unregistered service" << mp_register->record().name() << "on port" << mp_register->servicePort();
+  m_isActive = false;
   mp_register->unregisterService();
   mp_browser->stop();
   m_mdnsRecords.clear();
   m_userRecords.clear();
-  m_isActive = false;
   return true;
 }
 
@@ -130,6 +130,14 @@ void MDnsManager::removeMDnsRecord( const MDnsRecord& mdns_record )
 
 void MDnsManager::addUserRecord( const UserRecord& ur )
 {
+  if( !m_isActive )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( objectName() ) << "is not active and skips the user found in" << qPrintable( ur.networkAddress().toString() );
+#endif
+    return;
+  }
+
   if( m_userRecords.contains( ur ) )
   {
 #ifdef BEEBEEP_DEBUG

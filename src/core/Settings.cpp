@@ -62,7 +62,11 @@ Settings::Settings()
 #endif
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  m_useMulticastDns = true;
+  #ifdef Q_OS_MAC
+    m_useMulticastDns = true;
+  #else
+    m_useMulticastDns = false;
+  #endif
 #else
   m_useMulticastDns = false;
 #endif

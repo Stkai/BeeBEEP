@@ -97,12 +97,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "User" << u.path() << "is writing";
 #endif
-    Chat c;
-    if( !m.data().isEmpty() )
-      c = ChatManager::instance().findGroupChatByPrivateId( m.data() );
-    else
-      c = ChatManager::instance().privateChatForUser( u.id() );
-
+    Chat c = ChatManager::instance().findChatByPrivateId( m.data(), false, u.id() );
     emit userIsWriting( u, c.id() );
     return;
   }
@@ -156,20 +151,19 @@ void Core::parseUserMessage( const User& u, const Message& m )
 void Core::parseFileMessage( const User& u, const Message& m )
 {
   FileInfo fi = Protocol::instance().fileInfoFromMessage( m );
-
-  // check message first
-  if( m.hasFlag( Message::Refused ) )
-  {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has refused to download %3." )
-                           .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), fi.name() ),
-                           DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
-    return;
-  }
-
-  // check file is valid
   if( !fi.isValid() )
   {
     qWarning() << "Invalid FileInfo received from user" << u.id() << ": [" << m.data() << "]:" << m.text();
+    return;
+  }
+
+  Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
+
+  if( m.hasFlag( Message::Refused ) )
+  {
+    dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download %3." )
+                           .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), fi.name() ),
+                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
     return;
   }
 
@@ -194,8 +188,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   fi.setHostAddress( c->peerAddress() );
 
   QString sys_msg = tr( "%1 %2 is sending to you the file: %3." ).arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), fi.name() );
-
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+  dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
 
   if( fi.isInShareBox() )
   {
@@ -272,7 +265,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
     }
 
-    Chat group_chat = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
+    Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
 
     if( !group_chat.isValid() )
     {
@@ -300,7 +293,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Refused ) )
   {
-    Chat group_chat = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
+    Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
     if( group_chat.isValid() )
       removeUserFromChat( u, group_chat.id() );
   }
@@ -351,11 +344,13 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 
 void Core::parseFolderMessage( const User& u, const Message& m )
 {
+  Chat chat_to_show_message;
   if( m.hasFlag( Message::Refused ) )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has refused to download folder %3." )
+    chat_to_show_message = ChatManager::instance().findChatByPrivateId( m.data(), false, u.id() );
+    dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download folder %3." )
                              .arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), u.name(), m.text() ),
-                             DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                             chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return;
   }
   else if( m.hasFlag( Message::Request ) )
@@ -368,9 +363,10 @@ void Core::parseFolderMessage( const User& u, const Message& m )
       return;
     }
 
+    chat_to_show_message = ChatManager::instance().findChatByPrivateId( file_info_list.first().chatPrivateId(), false, u.id() );
     QString sys_msg = tr( "%1 %2 is sending to you the folder: %3." ).arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), folder_name );
 
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
+    dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
 
     emit folderDownloadRequest( u, folder_name, file_info_list );
   }

@@ -30,7 +30,8 @@
 
 
 Broadcaster::Broadcaster( QObject *parent )
-  : QObject( parent ), m_broadcastSocket(), m_networkAddresses(), m_newBroadcastRequested( false )
+  : QObject( parent ), m_broadcastSocket(), m_networkAddresses(), m_newBroadcastRequested( false ),
+    m_networkAddressesWaitingForLoopback()
 {
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
 }
@@ -134,7 +135,40 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
   else
   {
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
+    m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
     return m_broadcastSocket.writeDatagram( broadcast_data, na.hostAddress(), Settings::instance().defaultBroadcastPort() ) > 0;
+  }
+}
+
+void Broadcaster::checkLoopbackDatagram()
+{
+  QList<QPair<NetworkAddress,QDateTime>>::iterator it = m_networkAddressesWaitingForLoopback.begin();
+  while( it != m_networkAddressesWaitingForLoopback.end() )
+  {
+    if( it->second.msecsTo( QDateTime::currentDateTime() ) > 5600 )
+    {
+      qWarning() << "Broadcaster didn't received yet a loopback datagram from host:" << qPrintable( it->first.toString() );
+      it = m_networkAddressesWaitingForLoopback.erase( it );
+    }
+    else
+      ++it;
+  }
+}
+
+void Broadcaster::removeHostAddressFromWaitingList( const QHostAddress& host_address )
+{
+  QList<QPair<NetworkAddress,QDateTime>>::iterator it = m_networkAddressesWaitingForLoopback.begin();
+  while( it != m_networkAddressesWaitingForLoopback.end() )
+  {
+    if( it->first.hostAddress() == host_address )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Broadcaster has received loopback datagram from host:" << qPrintable( it->first.toString() );
+#endif
+      it = m_networkAddressesWaitingForLoopback.erase( it );
+    }
+    else
+      ++it;
   }
 }
 
@@ -152,20 +186,27 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     if( datagram.size() <= Protocol::instance().messageMinimumSize() )
     {
-      qWarning() << "Broadcaster has received an invalid data size:" << datagram;
+      qWarning() << "Broadcaster has received an invalid data size:" << qPrintable( datagram );
       continue;
     }
     Message m = Protocol::instance().toMessage( datagram );
     if( !m.isValid() || m.type() != Message::Beep )
     {
-      qWarning() << "Broadcaster has received an invalid data:" << datagram;
+      qWarning() << "Broadcaster has received an invalid data:" << qPrintable( datagram );
       continue;
     }
+
+    QHostAddress sender_host_address = Protocol::instance().hostAddressFromBroadcastMessage( m );
+    if( sender_host_address.isNull() )
+      qWarning() << "Broadcaster has received and invalid host address in data:" << qPrintable( datagram );
+    else
+      removeHostAddressFromWaitingList( sender_host_address );
+
     bool ok = false;
     int sender_listener_port = m.text().toInt( &ok );
     if( !ok )
     {
-      qWarning() << "Broadcaster has received an invalid listener port" << datagram;
+      qWarning() << "Broadcaster has received an invalid listener port" << qPrintable( datagram );
       continue;
     }
 
@@ -193,6 +234,7 @@ void Broadcaster::updateAddresses()
   qDebug() << "Broadcaster updates the network addresses to search users";
 #endif
 
+  m_networkAddressesWaitingForLoopback.clear();
   m_networkAddresses.clear();
   m_newBroadcastRequested = false;
 
@@ -279,6 +321,11 @@ void Broadcaster::updateAddresses()
 
 void Broadcaster::onTickEvent( int )
 {
+  if( !m_networkAddressesWaitingForLoopback.isEmpty() )
+  {
+    checkLoopbackDatagram();
+  }
+
   if( m_networkAddresses.isEmpty() )
   {
     if( m_newBroadcastRequested )

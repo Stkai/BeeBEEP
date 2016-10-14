@@ -37,7 +37,7 @@ Chat Core::findChatFromMessageData( VNumber from_user_id, const Message& m )
   }
   else if( m.hasFlag( Message::GroupChat ) )
   {
-    c = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
+    c = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
     if( !c.isValid() )
     {
       Group g = UserManager::instance().findGroupByPrivateId( cmd.groupId() );
@@ -45,7 +45,7 @@ Chat Core::findChatFromMessageData( VNumber from_user_id, const Message& m )
       {
         qDebug() << "New message arrived for your group" << g.name() << "but chat does not exists";
         createGroupChat( g.name(), g.usersId(), g.privateId(), false );
-        c = ChatManager::instance().findGroupChatByPrivateId( cmd.groupId() );
+        c = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
       }
     }
   }
@@ -118,6 +118,9 @@ void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const Q
 #endif
   Message m = Protocol::instance().systemMessage( msg );
   ChatMessage cm( from_user_id, m, cmt );
+
+  if( chat_id == ID_INVALID )
+    chat_id = ID_DEFAULT_CHAT;
 
   switch( dt )
   {

@@ -65,8 +65,8 @@ void EmoticonManager::addTextEmoticon()
   addEmoticon( ":-P", "1f61d", Emoticon::Text );
   addEmoticon( ":'", "1f62d", Emoticon::Text );
   addEmoticon( ":'(", "1f62d", Emoticon::Text );
-  addEmoticon( ":D", "1f602", Emoticon::Text );
-  addEmoticon( ":-D", "1f602", Emoticon::Text );
+  addEmoticon( ":D", "1f604", Emoticon::Text );
+  addEmoticon( ":-D", "1f604", Emoticon::Text );
   addEmoticon( ":@", "1f621", Emoticon::Text );
   addEmoticon( ":x", "1f61a", Emoticon::Text );
   addEmoticon( ":*", "1f618", Emoticon::Text );
@@ -85,7 +85,7 @@ void EmoticonManager::addTextEmoticon()
   addEmoticon( ":-(", "1f614", Emoticon::Text );
   addEmoticon( ":T", "1f60b", Emoticon::Text );
   addEmoticon( ":%", "1f616", Emoticon::Text );
-  addEmoticon( ":""D", "1f602", Emoticon::Text );
+  addEmoticon( ":\"D", "1f602", Emoticon::Text );
   addEmoticon( ":&quot;D", "1f602", Emoticon::Text ); // for html
   addEmoticon( "B)", "1f60e", Emoticon::Text );
   addEmoticon( "B-)", "1f60e", Emoticon::Text );

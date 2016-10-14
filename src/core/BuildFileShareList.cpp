@@ -29,7 +29,7 @@
 BuildFileShareList::BuildFileShareList( QObject *parent )
   : QObject( parent ), m_folderPath( "" ), m_folderName( "" ),
     m_broadcastList( false ), m_shareList(), m_shareSize( 0 ),
-    m_elapsedTime( 0 ), m_userId( ID_LOCAL_USER )
+    m_elapsedTime( 0 ), m_userId( ID_LOCAL_USER ), m_chatPrivateId( "" )
 {
   setObjectName( "BuildFileShareList" );
 }
@@ -91,6 +91,8 @@ FileSizeType BuildFileShareList::addPathToList( const QString& path_name, const 
   else if( path_info.isFile() )
   {
     FileInfo fi = Protocol::instance().fileInfo( path_info, path_name, false );
+    if( !m_chatPrivateId.isEmpty() )
+      fi.setChatPrivateId( m_chatPrivateId );
     m_shareList.push_back( fi );
     return fi.size();
   }

@@ -1218,7 +1218,9 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
   mp_barMain->addAction( mp_actViewShareBox );
-  //mp_barMain->addAction( mp_actViewLog );
+#ifdef BEEBEEP_DEBUG
+  mp_barMain->addAction( mp_actViewLog );
+#endif
   mp_barMain->addAction( mp_actViewScreenShot );
 }
 
@@ -2326,6 +2328,12 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
     return;
   }
 
+  if( file_info_list.isEmpty() )
+  {
+    qWarning() << "Unable to download folder" << folder_name << "from user" << qPrintable( u.path() ) << "with empty file list";
+    return;
+  }
+
   int msg_result = Settings::instance().confirmOnDownloadFile() ? 0 : 1;
 
   if( msg_result == 0 )
@@ -2364,7 +2372,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
   else
   {
     qDebug() << "You refuse to download folder" << folder_name << "from" << u.path();
-    mp_core->refuseToDownloadFolder( u.id(), folder_name );
+    mp_core->refuseToDownloadFolder( u.id(), folder_name, file_info_list.first().chatPrivateId() );
   }
 }
 
@@ -3278,7 +3286,7 @@ void GuiMain::removeGroup( VNumber group_id )
                                tr( "Do you really want to delete group '%1'?" ).arg( g.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
-      Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+      Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
       if( mp_core->removeGroup( group_id ) )
       {
         if( c.isValid() )
@@ -3385,11 +3393,11 @@ void GuiMain::showChatForGroup( VNumber group_id )
   if( !g.isValid() )
     return;
 
-  Chat c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
   {
     mp_core->createGroupChat( g, true );
-    c = ChatManager::instance().findGroupChatByPrivateId( g.privateId() );
+    c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   }
 
   showChat( c.id() );

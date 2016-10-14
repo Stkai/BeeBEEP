@@ -37,13 +37,13 @@ Chat ChatManager::privateChatForUser( VNumber user_id ) const
 {
   if( user_id == ID_LOCAL_USER )
     return chat( ID_DEFAULT_CHAT );
-  QList<Chat>::const_iterator it = m_chats.begin();
-  while( it != m_chats.end() )
+
+  foreach( Chat c, m_chats )
   {
-    if( (*it).isPrivateForUser( user_id ) )
-      return *it;
-    ++it;
+    if( c.isPrivateForUser( user_id ) )
+      return c;
   }
+
   qWarning() << "Unable to find private chat for user id" << user_id;
   return Chat();
 }
@@ -61,19 +61,25 @@ Chat ChatManager::chat( VNumber chat_id ) const
   return Chat();
 }
 
-Chat ChatManager::findGroupChatByPrivateId( const QString& chat_id ) const
+Chat ChatManager::findChatByPrivateId( const QString& chat_private_id, bool skip_default_chat, VNumber user_id ) const
 {
-  QList<Chat>::const_iterator it = m_chats.begin();
-  while( it != m_chats.end() )
+  if( !chat_private_id.isEmpty() )
   {
-    if( chat_id == (*it).privateId() )
-      return *it;
-    ++it;
-  }
+    foreach( Chat c, m_chats )
+    {
+      if( skip_default_chat && c.isDefault() )
+        continue;
+
+      if( c.privateId() == chat_private_id )
+        return c;
+    }
 #ifdef BEEBEEP_DEBUG
-  qWarning() << "Unable to find group chat with private id" << chat_id;
+    qWarning() << "Unable to find group chat with private id" << chat_private_id;
 #endif
-  return Chat();
+    return Chat();
+  }
+  else
+    return user_id > ID_LOCAL_USER ? privateChatForUser( user_id ) : Chat();
 }
 
 void ChatManager::setChat( const Chat& c )
@@ -94,23 +100,17 @@ void ChatManager::setChat( const Chat& c )
 int ChatManager::unreadMessages() const
 {
   int unread_messages = 0;
-  QList<Chat>::const_iterator it = m_chats.begin();
-  while( it != m_chats.end() )
-  {
-    unread_messages += (*it).unreadMessages();
-    ++it;
-  }
+  foreach( Chat c, m_chats )
+    unread_messages += c.unreadMessages();
   return unread_messages;
 }
 
 bool ChatManager::hasUnreadMessages() const
 {
-  QList<Chat>::const_iterator it = m_chats.begin();
-  while( it != m_chats.end() )
+  foreach( Chat c, m_chats )
   {
-    if( (*it).unreadMessages() > 0 )
+    if( c.unreadMessages() > 0 )
       return true;
-    ++it;
   }
   return false;
 }

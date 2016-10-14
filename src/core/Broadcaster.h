@@ -56,10 +56,14 @@ protected:
   inline bool addHostAddress( const QHostAddress& );
   void updateAddresses();
 
+  void checkLoopbackDatagram();
+  void removeHostAddressFromWaitingList( const QHostAddress& );
+
 private:
   QUdpSocket m_broadcastSocket;
   QList<NetworkAddress> m_networkAddresses;
   bool m_newBroadcastRequested;
+  QList<QPair<NetworkAddress,QDateTime>> m_networkAddressesWaitingForLoopback;
 
 };
 

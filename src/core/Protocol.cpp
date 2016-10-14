@@ -829,25 +829,18 @@ QStringList Protocol::userPathsFromGroupRequestMessage( const Message& m ) const
 
 Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
 {
-  Message m( Message::File, newId(), fi.name() );
+  Message m = fileInfoToMessage( fi );
   m.addFlag( Message::Refused );
   m.addFlag( Message::Private );
-  /* for backward compatibility 0.9.6 */
-  QStringList sl;
-  sl << QString::number( fi.networkAddress().hostPort() );
-  sl << QString::number( fi.size() );
-  sl << QString::number( fi.id() );
-  sl << QString( "*" );
-  m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
-  /* end of patch */
   return m;
 }
 
-Message Protocol::folderRefusedToMessage( const QString& folder_name )
+Message Protocol::folderRefusedToMessage( const QString& folder_name, const QString& chat_private_id )
 {
   Message m( Message::Folder, newId(), folder_name );
   m.addFlag( Message::Refused );
   m.addFlag( Message::Private );
+  m.setData( chat_private_id );
   return m;
 }
 
@@ -1031,6 +1024,7 @@ Message Protocol::createFolderMessage( const QString& folder_name, const QList<F
     sl << QString::fromUtf8( fi.password() );
     sl << fi.fileHash();
     sl << fi.shareFolder();
+    sl.append( fi.chatPrivateId().isEmpty() ? QString( "" ) : fi.chatPrivateId() );
     msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
   }
 
@@ -1084,7 +1078,8 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
       fi.setPassword( sl_tmp.takeFirst().toUtf8() );
       fi.setFileHash( sl_tmp.takeFirst() );
       fi.setShareFolder( Bee::convertToNativeFolderSeparator( sl_tmp.takeFirst() ) );
-
+      if( !sl_tmp.isEmpty() )
+        fi.setChatPrivateId( sl_tmp.takeFirst() );
       file_info_list.append( fi );
     }
 

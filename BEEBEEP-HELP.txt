@@ -28,7 +28,7 @@ SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings 
 SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) (default=false) [1.0.3]
 AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP (default=false) [1.0.0]
 DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and AddAccountNameToDataFolder=[true/false] you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath (default=false) [1.0.3]
-UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (default=true)
+UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking ((default=true in macosx, default=false in others)
 PreventMultipleConnectionsFromSingleHostAddress=[true/false] if enabled BeeBEEP blocks multiple connections from single IP address (default=true)
 PreferredSubnets=(Strings "" comma separated) you can specify your subnets. BeeBEEP search your default IP address in these entries (for example ="10.184.9.255,10.184.15.255") (default="") [3.0.1]
 UseIpv6=[true/false] enable Ipv6 protocol for connection (enable it if your network supports *only* IPv6... BeeBEEP works better in IPv4) (default=false)
@@ -199,7 +199,7 @@ AddExternalSubnetAutomatically=[true/false] if true BeeBEEP automatically add ex
 UserPathList= users saved (do not edit manually)
 AcceptConnectionsOnlyFromWorkgroups=[true/false] accepts connection only from members of your workgroups
 Workgroups = workgroups saved (do not edit manually)
-UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (overwrite RC option)
+UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (it overwrites RC option) (default=true in macosx, default=false in others os)
 AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users when there aren't users connected (default=true) [3.0.5] [obsolete 3.0.8+]
 
 [FileShare]
