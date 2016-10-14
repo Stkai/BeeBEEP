@@ -95,7 +95,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
   if( m.hasFlag( Message::UserWriting ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "User" << u.path() << "is writing";
+    qDebug() << "User" << qPrintable( u.path() ) << "is writing";
 #endif
     Chat c = ChatManager::instance().findChatByPrivateId( m.data(), false, u.id() );
     emit userIsWriting( u, c.id() );
@@ -107,7 +107,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
     if( Protocol::instance().changeUserStatusFromMessage( &user_with_new_status, m ) )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "User" << user_with_new_status.path() << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
+      qDebug() << "User" << qPrintable( user_with_new_status.path() ) << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
 #endif
       UserManager::instance().setUser( user_with_new_status );
       showUserStatusChanged( user_with_new_status );

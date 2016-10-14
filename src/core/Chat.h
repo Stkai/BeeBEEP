@@ -104,7 +104,7 @@ inline void Chat::readAllMessages() { m_unreadMessages = 0; }
 inline const QList<ChatMessage> Chat::messages() const { return m_messages; }
 inline const QString& Chat::privateId() const { return m_privateId; }
 inline void Chat::setPrivateId( const QString& new_value ) { m_privateId = new_value; }
-inline bool Chat::isGroup() const { return !m_privateId.isEmpty(); }
+inline bool Chat::isGroup() const { return !m_privateId.isEmpty() && !isDefault(); }
 inline void Chat::setReadMessagesByUser( VNumber user_id ) { m_unreadMessageUsersId.removeOne( user_id ); }
 inline bool Chat::userHasReadMessages( VNumber user_id ) const { return !m_unreadMessageUsersId.contains( user_id ); }
 
