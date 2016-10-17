@@ -26,7 +26,6 @@
 
 #include "ConnectionSocket.h"
 #include "FileInfo.h"
-#include "Message.h"
 
 
 class FileTransferPeer : public QObject
@@ -58,7 +57,6 @@ public:
 
   inline bool isActive() const;
   inline bool isTransferCompleted() const;
-  void setUserAuthorized( VNumber );
   void startUpload( const FileInfo& );
   void cancelTransfer();
 
@@ -67,7 +65,7 @@ signals:
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
   void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
   void fileUploadRequest( const FileInfo& );
-  void authenticationRequested();
+  void userValidationRequested( VNumber peer_id, VNumber user_id );
 
 public slots:
   void startConnection();
@@ -75,11 +73,12 @@ public slots:
 protected slots:
   void socketError( QAbstractSocket::SocketError );
   void checkTransferData( const QByteArray& );
-  void checkAuthenticationRequested( const Message& );
   void connectionTimeout();
   void onTickEvent( int );
+  void checkUserAuthentication( const QByteArray& );
 
 protected:
+  void setUserAuthorized( VNumber );
   void showProgress();
   void setError( const QString& );
   void setTransferCompleted();
@@ -108,8 +107,6 @@ protected:
   int m_bytesTransferred;
   FileSizeType m_totalBytesTransferred;
   ConnectionSocket m_socket;
-  Message m_messageAuth; // This class for a ? reason does not emit an authentication signal with arguments
-                         // so i have to store message so the parent class can access it
   QTime m_time;
   int m_socketDescriptor;
 
@@ -128,7 +125,6 @@ inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber FileTransferPeer::id() const { return m_id; }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
-inline const Message& FileTransferPeer::messageAuth() const { return m_messageAuth; }
 inline QHostAddress FileTransferPeer::peerAddress() const { return m_socket.peerAddress(); }
 inline bool FileTransferPeer::isActive() const { return m_state == FileTransferPeer::Starting || m_state == FileTransferPeer::Request || m_socket.isConnected(); }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }

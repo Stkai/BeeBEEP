@@ -53,15 +53,12 @@ public:
 
   inline void clearFiles();
 
-  void validateUser( VNumber peer_id, VNumber user_id );
-
   FileTransferPeer* peer( VNumber ) const;
 
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
   void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
-  void userConnected( VNumber peer_id, const QHostAddress& peer_address, const Message& hello_message );
   void listening();
 
 protected:
@@ -76,7 +73,6 @@ protected:
 
 protected slots:
   void startNewDownload();
-  void checkAuthentication();
   void checkUploadRequest( const FileInfo& );
   void peerDestroyed();
   void setupPeer( FileTransferPeer*, int );

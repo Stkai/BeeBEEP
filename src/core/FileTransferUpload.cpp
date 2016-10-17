@@ -139,7 +139,7 @@ void FileTransferPeer::sendUploadData()
   {
     if( !m_file.open( QIODevice::ReadOnly ) )
     {
-      setError( "Unable to open file" );
+      setError( tr( "Unable to open file %1" ).arg( m_file.fileName() ) );
       return;
     }
   }

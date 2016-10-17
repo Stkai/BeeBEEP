@@ -104,14 +104,14 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
   {
     if( !m_file.open( QIODevice::WriteOnly ) )
     {
-      setError( tr( "Unable to open file" ) );
+      setError( tr( "Unable to open file %1" ).arg( m_file.fileName() ) );
       return;
     }
   }
 
   if( m_file.write( byte_array ) != m_bytesTransferred )
   {
-    setError( tr( "Unable to write in the file" ) );
+    setError( tr( "Unable to write in the file %1" ).arg( m_file.fileName() ) );
     return;
   }
 

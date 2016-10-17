@@ -130,14 +130,6 @@ void Connection::sendPong()
     qWarning() << "Unable to send PONG to" << qPrintable( networkAddress().toString() );
 }
 
-void Connection::closeConnection()
-{
-  if( !peerAddress().isNull() )
-    qDebug() << "Connection to" << qPrintable( networkAddress().toString() ) << "closed";
-
-  abortConnection();
-}
-
 void Connection::onTickEvent( int ticks )
 {
   if( ticks % PING_INTERVAL_TICK == 0 )

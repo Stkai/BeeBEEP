@@ -37,7 +37,6 @@ public:
 
   bool sendMessage( const Message& );
   void setReadyForUse( VNumber );
-  void closeConnection();
 
 signals:
   void newMessage( VNumber, const Message& );

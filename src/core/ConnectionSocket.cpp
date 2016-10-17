@@ -426,7 +426,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   }
 
   qDebug() << "ConnectionSocket request an authentication for" << qPrintable( m_networkAddress.toString() );
-  emit authenticationRequested( m );
+  emit authenticationRequested( array_data );
 }
 
 int ConnectionSocket::fileTransferBufferSize() const

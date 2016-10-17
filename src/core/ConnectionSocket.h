@@ -59,7 +59,7 @@ public:
 
 signals:
   void dataReceived( const QByteArray& );
-  void authenticationRequested( const Message& );
+  void authenticationRequested( const QByteArray& );
   void abortRequest();
   void tickEvent( int );
 

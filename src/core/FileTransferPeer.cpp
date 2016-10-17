@@ -25,19 +25,21 @@
 #include "FileTransferPeer.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
     m_fileInfo( 0, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
-    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ), m_messageAuth(),
+    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ),
     m_time( QTime::currentTime() ), m_socketDescriptor( 0 )
 {
   setObjectName( "FileTransferPeer" );
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Peer created for transfer file";
-
+#endif
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
-  connect( &m_socket, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkAuthenticationRequested( const Message& ) ) );
+  connect( &m_socket, SIGNAL( authenticationRequested( const QByteArray& ) ), this, SLOT( checkUserAuthentication( const QByteArray& ) ) );
   connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
   connect( &m_socket, SIGNAL( tickEvent( int ) ), this, SLOT( onTickEvent( int ) ) );
 }
@@ -55,16 +57,22 @@ void FileTransferPeer::cancelTransfer()
 
 void FileTransferPeer::closeAll()
 {
+#ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "cleans up";
+#endif
   if( m_socket.isOpen() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "close socket with descriptor" << m_socket.socketDescriptor();
+#endif
     m_socket.closeConnection();
   }
 
   if( m_file.isOpen() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "close file" << qPrintable( Bee::convertToNativeFolderSeparator( m_file.fileName() ) );
+#endif
     m_file.flush();
     m_file.close();
   }
@@ -75,7 +83,9 @@ void FileTransferPeer::setFileInfo( FileInfo::TransferType ftt, const FileInfo& 
   m_fileInfo = fi;
   m_fileInfo.setTransferType( ftt );
   m_file.setFileName( m_fileInfo.path() );
+#ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "init the file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.path() ) );
+#endif
 }
 
 void FileTransferPeer::startConnection()
@@ -94,12 +104,16 @@ void FileTransferPeer::startConnection()
 
   if( m_socketDescriptor )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "set socket descriptor" << m_socketDescriptor;
+#endif
     m_socket.initSocket( m_socketDescriptor );
   }
   else
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "is connecting to" << qPrintable( m_fileInfo.networkAddress().toString() );
+#endif
     m_socket.connectToNetworkAddress( m_fileInfo.networkAddress() );
   }
 
@@ -156,10 +170,29 @@ void FileTransferPeer::sendTransferData()
     sendUploadData();
 }
 
-void FileTransferPeer::checkAuthenticationRequested( const Message& m )
+void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_array )
 {
-  m_messageAuth = m;
-  emit authenticationRequested();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( name() ) << "checks authentication message";
+#endif
+  Message m = Protocol::instance().toMessage( auth_byte_array );
+  if( !m.isValid() )
+  {
+    qWarning() << qPrintable( name() ) << "has found an invalid auth message";
+    cancelTransfer();
+    return;
+  }
+
+  User user_to_check = Protocol::instance().createUser( m, m_socket.peerAddress() );
+  User user_connected = user_to_check.isValid() ? UserManager::instance().findUserByPath( user_to_check.path() ) : User();
+  if( !user_connected.isValid() )
+  {
+    qWarning() << qPrintable( user_to_check.path() ) << "is not authorized for file transfer" << id();
+    cancelTransfer();
+    return;
+  }
+
+  setUserAuthorized( user_connected.id() );
 }
 
 void FileTransferPeer::setUserAuthorized( VNumber user_id )

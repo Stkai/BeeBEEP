@@ -911,7 +911,7 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
 {
   FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
   file_info.setName( fi.fileName() );
-  file_info.setPath( fi.absoluteFilePath() );
+  file_info.setPath( Bee::convertToNativeFolderSeparator( fi.absoluteFilePath() ) );
   file_info.setShareFolder( share_folder );
   file_info.setIsInShareBox( to_share_box );
 

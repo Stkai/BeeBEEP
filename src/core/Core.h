@@ -167,7 +167,7 @@ protected slots:
   void newPeerFound( const QHostAddress&, int );
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();
-  void checkUserAuthentication( const Message& );
+  void checkUserAuthentication( const QByteArray& );
   void checkUserRecord( const UserRecord& );
 
   /* CoreParser */
@@ -177,7 +177,6 @@ protected slots:
   /* CoreFileTransfer */
   void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType );
   void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
-  void validateUserForFileTransfer( VNumber, const QHostAddress&, const Message& );
   void fileTransferServerListening();
   void addListToLocalShare();
   void addFolderToFileTransfer();

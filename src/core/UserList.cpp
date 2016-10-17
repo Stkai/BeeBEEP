@@ -90,21 +90,14 @@ void UserList::set( const User& u )
     if( (*it).id() == u.id() )
     {
       (*it) = u;
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "User" << u.id() << "is modified in UserList";
-#endif
       user_found = true;
       break;
     }
     ++it;
   }
+
   if( !user_found )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "User" << u.id() << "is added to UserList";
-#endif
     m_users.append( u );
-  }
 
   qSort( m_users );
 }

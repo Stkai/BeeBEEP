@@ -339,11 +339,14 @@ void Broadcaster::onTickEvent( int )
   if( !NetworkManager::instance().isMainInterfaceUp() )
     return;
 
-  for( int i = 0; i < Settings::instance().maxUsersToConnectInATick(); i++ )
+  int contacted_users = 0;
+  while( !m_networkAddresses.isEmpty() )
   {
-    if( m_networkAddresses.isEmpty() )
-      break;
     NetworkAddress na = m_networkAddresses.takeFirst();
-    contactNetworkAddress( na );
+    if( contactNetworkAddress( na ) )
+      contacted_users++;
+
+    if( contacted_users >= Settings::instance().maxUsersToConnectInATick() )
+      break;
   }
 }

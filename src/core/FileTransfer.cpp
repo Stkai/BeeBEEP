@@ -180,7 +180,6 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
     connect( transfer_peer, SIGNAL( fileUploadRequest( const FileInfo& ) ), this, SLOT( checkUploadRequest( const FileInfo& ) ) );
   }
 
-  connect( transfer_peer, SIGNAL( authenticationRequested() ), this, SLOT( checkAuthentication() ) );
   connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
@@ -194,42 +193,6 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   QTimer::singleShot( delay, transfer_peer, SLOT( startConnection() ) );
 }
 
-void FileTransfer::checkAuthentication()
-{
-  FileTransferPeer* mp_peer = (FileTransferPeer*)sender();
-  if( !mp_peer )
-  {
-    qWarning() << "Sender Peer not found in check authentication";
-    return;
-  }
-
-  qDebug() << mp_peer->name() << "checks authentication message";
-  emit userConnected( mp_peer->id(), mp_peer->peerAddress(), mp_peer->messageAuth() );
-}
-
-void FileTransfer::validateUser( VNumber FileTransferPeer_id, VNumber user_id )
-{
-  qDebug() << "File Transfer server validate user" << user_id << "for peer" << FileTransferPeer_id;
-  QList<FileTransferPeer*>::iterator it = m_peers.begin();
-  while( it != m_peers.end() )
-  {
-    if( (*it)->id() == FileTransferPeer_id )
-    {
-      if( user_id == ID_INVALID )
-      {
-        qWarning() << (*it)->name() << "has not authorized the user";
-        (*it)->cancelTransfer();
-      }
-      else
-      {
-        qDebug() << (*it)->name() << "has authorized user" << user_id;
-        (*it)->setUserAuthorized( user_id );
-      }
-      return;
-    }
-    ++it;
-  }
-}
 
 void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 {

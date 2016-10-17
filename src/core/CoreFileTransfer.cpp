@@ -64,18 +64,6 @@ void Core::stopFileTransferServer()
   createLocalShareMessage();
 }
 
-void Core::validateUserForFileTransfer( VNumber peer_id, const QHostAddress& peer_address, const Message& m  )
-{
-  User user_to_check = Protocol::instance().createUser( m, peer_address );
-
-  User user_connected = user_to_check.isValid() ? UserManager::instance().findUserByPath( user_to_check.path() ) : User();
-  if( user_connected.isValid() )
-    qDebug() << "Found a connected user" << user_connected.id() << user_connected.path() << "to continue file transfer" << peer_id;
-  else
-    qWarning() << user_to_check.path() << "is not authorized for file transfer" << peer_id;
-  mp_fileTransfer->validateUser( peer_id, user_connected.id() );
-}
-
 bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message )
 {
   if( !mp_fileTransfer->isActive() )
@@ -119,7 +107,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
                                .arg( icon_html, fi.name(), u.name(), folder_path.absolutePath() ),
                                chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
       }
-      qWarning() << "Unable to download" << fi.name() << "because folder" << folder_path.absolutePath() << "can not be created";
+      qWarning() << "Unable to download" << qPrintable( fi.name() ) << "because folder" << qPrintable( folder_path.absolutePath() ) << "can not be created";
       return false;
     }
   }
@@ -132,7 +120,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
                          chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
   }
 
-  qDebug() << "Downloading file" << fi.path() << "from user" << u.path();
+  qDebug() << "Downloading file" << qPrintable( fi.path() ) << "from user" << qPrintable( u.path() );
   mp_fileTransfer->downloadFile( fi );
   return true;
 }
@@ -142,7 +130,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
+    qWarning() << "Unable to find user" << user_id << "for the file transfer" << qPrintable( fi.name() );
     return;
   }
 

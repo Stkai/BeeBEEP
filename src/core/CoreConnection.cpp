@@ -136,7 +136,7 @@ void Core::setupNewConnection( Connection *c )
   connect( c, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( setConnectionError( QAbstractSocket::SocketError ) ) );
   connect( c, SIGNAL( disconnected() ), this, SLOT( setConnectionClosed() ) );
   connect( c, SIGNAL( abortRequest() ), this, SLOT( setConnectionClosed() ) );
-  connect( c, SIGNAL( authenticationRequested( const Message& ) ), this, SLOT( checkUserAuthentication( const Message& ) ) );
+  connect( c, SIGNAL( authenticationRequested( const QByteArray& ) ), this, SLOT( checkUserAuthentication( const QByteArray& ) ) );
 }
 
 void Core::addConnectionReadyForUse( Connection* c )
@@ -233,7 +233,7 @@ void Core::closeConnection( Connection *c )
     QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );
 }
 
-void Core::checkUserAuthentication( const Message& m )
+void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 {
   Connection* c = qobject_cast<Connection*>( sender() );
   if( !c )
@@ -242,7 +242,21 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
 
-  QString sHtmlMsg;
+  Message m = Protocol::instance().toMessage( auth_byte_array );
+  if( !m.isValid() )
+  {
+    qWarning() << "Core has received an invalid HELLO from" << qPrintable( c->networkAddress().toString() );
+    closeConnection( c );
+    return;
+  }
+
+  if( m.type() != Message::Hello )
+  {
+    qWarning() << "Core is waiting for HELLO, but another message type" << m.type() << "is arrived from" << qPrintable( c->networkAddress().toString() );
+    closeConnection( c );
+    return;
+  }
+
   User u = Protocol::instance().createUser( m, c->peerAddress() );
   if( !u.isValid() )
   {
@@ -251,9 +265,10 @@ void Core::checkUserAuthentication( const Message& m )
     return;
   }
   else
-    qDebug() << u.path() << "has completed the authentication";
+    qDebug() << qPrintable( u.path() ) << "has completed the authentication";
 
   bool user_path_changed = false;
+  bool show_connection_message = true;
 
   User user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
   if( !user_found.isValid() )
@@ -276,16 +291,28 @@ void Core::checkUserAuthentication( const Message& m )
   {
     if( user_found.isLocal() )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is recognized to be Local";
+#endif
       closeConnection( c );
       return;
     }
 
     if( isUserConnected( user_found.id() ) )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
-      closeConnection( c );
-      return;
+#endif
+      Connection* old_c = connection( user_found.id() );
+      if( old_c )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Connection from user" << qPrintable( u.path( ) ) << "updated";
+#endif
+        show_connection_message = false;
+        old_c->setUserId( ID_INVALID );
+        closeConnection( old_c );
+      }
     }
 
     if( u.path() != user_found.path() )
@@ -318,12 +345,16 @@ void Core::checkUserAuthentication( const Message& m )
 
   u.setProtocolVersion( c->protoVersion() );
   UserManager::instance().setUser( u );
+#ifdef BEEBEEP_DEBUG
   qDebug() << "User" << u.path() << "added with id" << u.id() << "and color" << u.color();
+#endif
 
   Chat default_chat = ChatManager::instance().defaultChat();
   if( default_chat.addUser( u.id() ) )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Adding user" << u.path() << "to default chat";
+#endif
     ChatManager::instance().setChat( default_chat );
   }
 
@@ -336,9 +367,13 @@ void Core::checkUserAuthentication( const Message& m )
   if( user_path_changed )
     ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 
-  sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
-  sHtmlMsg += tr( "%1 (%2) is connected to %3 network." ).arg( u.name(), u.accountPath(), Settings::instance().programName() );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
+  if( show_connection_message )
+  {
+    QString sHtmlMsg;
+    sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
+    sHtmlMsg += tr( "%1 (%2) is connected to %3 network." ).arg( u.name(), u.accountPath(), Settings::instance().programName() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
+  }
 
   showUserStatusChanged( u );
 
