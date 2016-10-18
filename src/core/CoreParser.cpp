@@ -402,7 +402,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 #endif
     foreach( UserRecord ur, user_record_list )
     {
-       if( Hive::instance().addNetworkAddress( ur.networkAddress() ) )
+       if( Hive::instance().addNetworkAddress( ur.networkAddress() ) && !hasConnection( ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() ) )
          mp_broadcaster->setNewBroadcastRequested( true );
     }
   }

@@ -193,18 +193,13 @@ void Core::closeConnection( Connection *c )
       FileShare::instance().removeFromNetwork( c->userId() );
       if( u.isValid() )
         emit fileShareAvailable( u );
-
-      QString sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*C*" ) );
-      sHtmlMsg += tr( "%1 (%2) is disconnected from %3 network." ).arg( u.name(), u.accountPath(), Settings::instance().programName() );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
-
     }
     else
       qWarning() << "User" << c->userId() << "not found while closing connection";
   }
 
   c->disconnect();
-  c->abortConnection();
+  c->closeConnection();
   c->deleteLater();
 
   if( isConnected() && m_connections.isEmpty() )
@@ -246,7 +241,6 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     qDebug() << qPrintable( u.path() ) << "has completed the authentication";
 
   bool user_path_changed = false;
-  bool show_connection_message = true;
 
   User user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
   if( !user_found.isValid() )
@@ -276,24 +270,14 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
       return;
     }
 
-    if( isUserConnected( user_found.id() ) )
+    if(  isUserConnected( user_found.id() ) )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
 #endif
+      c->setUserId( ID_INVALID );
+      closeConnection( c );
       return;
-
-      Connection* old_c = connection( user_found.id() );
-      if( old_c )
-      {
-
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Connection from user" << qPrintable( u.path( ) ) << "updated";
-#endif
-        show_connection_message = false;
-        old_c->setUserId( ID_INVALID );
-        closeConnection( old_c );
-      }
     }
 
     if( u.path() != user_found.path() )
@@ -347,14 +331,6 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   if( user_path_changed )
     ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
-
-  if( show_connection_message )
-  {
-    QString sHtmlMsg;
-    sHtmlMsg = QString( "%1 " ).arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ) );
-    sHtmlMsg += tr( "%1 (%2) is connected to %3 network." ).arg( u.name(), u.accountPath(), Settings::instance().programName() );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
-  }
 
   showUserStatusChanged( u );
 

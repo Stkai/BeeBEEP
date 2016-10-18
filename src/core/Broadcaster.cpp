@@ -266,7 +266,8 @@ void Broadcaster::updateAddresses()
       qWarning() << "Broadcast only to hosts in INI file option enabled but the list is empty";
 
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcast only to hosts in INI file option enabled";
+    else
+      qDebug() << "Broadcast only to hosts in INI file option enabled";
 #endif
     return;
   }
@@ -276,23 +277,12 @@ void Broadcaster::updateAddresses()
   foreach( QHostAddress ha, NetworkManager::instance().localBroadcastAddresses() )
   {
     if( ha != NetworkManager::instance().localBroadcastAddress() )
-      addHostAddress( ha );
-  }
-
-  if( m_addOfflineUsersInNetworkAddresses )
-  {
-    int offline_users_to_add = 0;
-    foreach( User u, UserManager::instance().userList().toList() )
     {
-      if( !u.isStatusConnected() )
-      {
-        if( addNetworkAddress( u.networkAddress(), false ) )
-          offline_users_to_add++;
-      }
-    }
+      addHostAddress( ha );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster adds" << offline_users_to_add << "offline users to network addresses";
+      qDebug() << "Broadcaster adds this address from local network:" << qPrintable( ha.toString() );
 #endif
+    }
   }
 
   foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
@@ -326,8 +316,31 @@ void Broadcaster::updateAddresses()
     }
   }
 
-  foreach( NetworkAddress na, Hive::instance().networkAddresses() )
-    addNetworkAddress( na, false );
+  if( m_addOfflineUsersInNetworkAddresses )
+  {
+    int offline_users_to_add = 0;
+
+    if( Hive::instance().networkAddresses().isEmpty() )
+    {
+      foreach( User u, UserManager::instance().userList().toList() )
+      {
+        if( !u.isStatusConnected() && addNetworkAddress( u.networkAddress(), false ) )
+          offline_users_to_add++;
+      }
+    }
+    else
+    {
+      foreach( NetworkAddress na, Hive::instance().networkAddresses() )
+      {
+        if( addNetworkAddress( na, false ) )
+          offline_users_to_add++;
+      }
+    }
+
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster adds" << offline_users_to_add << "offline users to network addresses";
+#endif
+  }
 
 #ifdef BEEBEEP_DEBUG
   QStringList sl;

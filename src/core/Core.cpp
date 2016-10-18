@@ -174,7 +174,7 @@ bool Core::start()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
                          .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
-                               Settings::instance().programName() ), DispatchToAllChatsWithUser, ChatMessage::Connection );
+                               Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   startDnsMulticasting();
@@ -185,7 +185,7 @@ bool Core::start()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 You have selected to join only in these workgroups: %2" )
                            .arg( Bee::iconToHtml( ":/images/group.png", "*C*" ) ).arg( Settings::instance().workgroups().join( ", " ) ),
-                           DispatchToAllChatsWithUser, ChatMessage::Connection );
+                           DispatchToChat, ChatMessage::Connection );
     qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
   }
 
@@ -503,10 +503,9 @@ void Core::onTickEvent( int ticks )
 {
   if( isConnected() )
   {
+    mp_broadcaster->onTickEvent( ticks );
     if( Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0) )
       mp_broadcaster->setNewBroadcastRequested( true );
-
-    mp_broadcaster->onTickEvent( ticks );
   }
 
   if( Protocol::instance().currentId() >= Protocol::instance().maxId() )
