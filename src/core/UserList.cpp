@@ -137,19 +137,9 @@ QList<VNumber> UserList::toUsersId() const
 bool UserList::remove( const User& u )
 {
   if( m_users.removeOne( u ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "User" << u.path() << "is removed from UserList";
-#endif
     return true;
-  }
   else
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Unable to remove user with path" << u.path() << "from UserList";
-#endif
     return false;
-  }
 }
 
 void UserList::set( const UserList& ul )

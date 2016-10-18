@@ -36,24 +36,21 @@
 
 Connection* Core::connection( VNumber user_id ) const
 {
-  QList<Connection*>::const_iterator it = m_connections.begin();
-  while( it != m_connections.end() )
+  foreach( Connection* c, m_connections )
   {
-    if( (*it)->userId() == user_id )
-      return *it;
-    ++it;
+    if( c->userId() == user_id )
+      return c;
   }
   return 0;
 }
 
 bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
 {
-  QList<Connection*>::const_iterator it = m_connections.begin();
-  while( it != m_connections.end() )
+  foreach( Connection* c, m_connections )
   {
-    if( (sender_port == -1 || (*it)->peerPort() == sender_port) && (*it)->peerAddress() == sender_ip )
+    if( (sender_port == -1 || c->peerPort() == sender_port) && c->peerAddress() == sender_ip )
     {
-      if( (*it)->isConnected() || (*it)->isConnecting() )
+      if( c->isConnected() || c->isConnecting() )
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "Connection from" << sender_ip.toString() << sender_port << "is already open";
@@ -61,7 +58,6 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
         return true;
       }
     }
-    ++it;
   }
 
   User u = UserManager::instance().findUserByHostAddressAndPort( sender_ip, sender_port );
@@ -104,12 +100,14 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
   c->connectToNetworkAddress( NetworkAddress( sender_ip, sender_port ) );
 }
 
-void Core::checkNewConnection( Connection *c )
+void Core::checkNewConnection( qintptr socket_descriptor )
 {
   // Has connection never return true because peer port is always different.
   // It comes from Listener. If I want to prevent multiple users from single
   // ip, I can pass -1 to peer_port and check only host address
 
+  Connection *c = new Connection( this );
+  c->initSocket( socket_descriptor );
   qDebug() << "New connection from" << qPrintable( c->networkAddress().toString() );
 
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
@@ -153,15 +151,10 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   Connection* c = qobject_cast<Connection*>( sender() );
   if( c )
   {
-    if( c->userId() != ID_INVALID )
-    {
-      qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has an error:" << c->errorString() << "-" << (int)se;
-    }
+    if( !c->peerAddress().isNull() )
+      qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has refused connection:" << c->errorString() << "-" << (int)se;
     else
-    {
-      if( !c->peerAddress().isNull() )
-        qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has refused connection:" << c->errorString() << "-" << (int)se;
-    }
+      qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has an error:" << c->errorString() << "-" << (int)se;
     closeConnection( c );
   }
   else
@@ -179,22 +172,7 @@ void Core::setConnectionClosed()
 
 void Core::closeConnection( Connection *c )
 {
-  int number_of_connection_pointers = m_connections.removeAll( c );
-
-#ifdef BEEBEEP_DEBUG
-  if( !c->peerAddress().isNull() )
-  {
-    if( number_of_connection_pointers <= 0 )
-      qDebug() << "Connection pointer is not present (or already removed from list)";
-    else if( number_of_connection_pointers != 1 )
-      qDebug() << number_of_connection_pointers << "pointers of a single connection found in connection list";
-    else
-      qDebug() << "Connection pointer removed from connection list";
-  }
-#else
-  if( number_of_connection_pointers > 1 )
-    qWarning() << number_of_connection_pointers << "similar connections found in list and removed";
-#endif
+  m_connections.removeOne( c );
 
   if( c->userId() != ID_INVALID )
   {
@@ -303,9 +281,12 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 #ifdef BEEBEEP_DEBUG
       qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
 #endif
+      return;
+
       Connection* old_c = connection( user_found.id() );
       if( old_c )
       {
+
 #ifdef BEEBEEP_DEBUG
         qDebug() << "Connection from user" << qPrintable( u.path( ) ) << "updated";
 #endif

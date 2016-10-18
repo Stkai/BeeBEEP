@@ -31,7 +31,7 @@
 
 Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_broadcastSocket(), m_networkAddresses(), m_newBroadcastRequested( false ),
-    m_networkAddressesWaitingForLoopback()
+    m_networkAddressesWaitingForLoopback(), m_addOfflineUsersInNetworkAddresses( false )
 {
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
 }
@@ -56,6 +56,10 @@ bool Broadcaster::startBroadcastServer()
 
   if( !m_networkAddresses.isEmpty() )
     m_networkAddresses.clear();
+  if( !m_networkAddressesWaitingForLoopback.isEmpty() )
+    m_networkAddressesWaitingForLoopback.clear();
+  m_newBroadcastRequested = false;
+  m_addOfflineUsersInNetworkAddresses = false;
 
   return true;
 }
@@ -74,9 +78,13 @@ void Broadcaster::stopBroadcasting()
 
   qDebug() << "Broadcaster stops broadcasting";
 
-  m_networkAddresses.clear();
+  if( !m_networkAddresses.isEmpty() )
+    m_networkAddresses.clear();
+  if( !m_networkAddressesWaitingForLoopback.isEmpty() )
+    m_networkAddressesWaitingForLoopback.clear();
   m_broadcastSocket.close();
   m_newBroadcastRequested = false;
+  m_addOfflineUsersInNetworkAddresses = false;
 }
 
 void Broadcaster::sendBroadcast()
@@ -271,10 +279,20 @@ void Broadcaster::updateAddresses()
       addHostAddress( ha );
   }
 
-  foreach( User u, UserManager::instance().userList().toList() )
+  if( m_addOfflineUsersInNetworkAddresses )
   {
-    if( !u.isStatusConnected() )
-      addNetworkAddress( u.networkAddress(), false );
+    int offline_users_to_add = 0;
+    foreach( User u, UserManager::instance().userList().toList() )
+    {
+      if( !u.isStatusConnected() )
+      {
+        if( addNetworkAddress( u.networkAddress(), false ) )
+          offline_users_to_add++;
+      }
+    }
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster adds" << offline_users_to_add << "offline users to network addresses";
+#endif
   }
 
   foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
@@ -329,7 +347,11 @@ void Broadcaster::onTickEvent( int )
   if( m_networkAddresses.isEmpty() )
   {
     if( m_newBroadcastRequested )
+    {
+      setAddOfflineUsersInNetworkAddresses( true );
       updateAddresses();
+      setAddOfflineUsersInNetworkAddresses( false );
+    }
     return;
   }
 

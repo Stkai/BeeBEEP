@@ -21,18 +21,14 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "Connection.h"
 #include "Listener.h"
-
 
 Listener::Listener( QObject *parent )
   : QTcpServer( parent )
 {
 }
 
-void Listener::incomingConnection( qintptr socketDescriptor )
+void Listener::incomingConnection( qintptr socket_escriptor )
 {
-  Connection *connection = new Connection( this );
-  connection->initSocket( socketDescriptor );
-  emit newConnection( connection );
+  emit newConnection( socket_escriptor );
 }

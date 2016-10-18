@@ -36,7 +36,7 @@ public:
   explicit Listener( QObject *parent = 0 );
 
 signals:
-  void newConnection( Connection* );
+  void newConnection( qintptr );
 
 protected:
   void incomingConnection( qintptr );

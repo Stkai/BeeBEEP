@@ -163,7 +163,7 @@ protected slots:
   void onPostUsageStatisticsJobCompleted();
 
   /* CoreConnection */
-  void checkNewConnection( Connection* );
+  void checkNewConnection( qintptr );
   void newPeerFound( const QHostAddress&, int );
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();

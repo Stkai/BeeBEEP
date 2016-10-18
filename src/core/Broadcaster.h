@@ -39,6 +39,7 @@ public:
 
   void onTickEvent( int );
   inline void setNewBroadcastRequested( bool );
+  inline void setAddOfflineUsersInNetworkAddresses( bool );
 
 public slots:
   void sendBroadcast();
@@ -64,11 +65,13 @@ private:
   QList<NetworkAddress> m_networkAddresses;
   bool m_newBroadcastRequested;
   QList< QPair<NetworkAddress, QDateTime> > m_networkAddressesWaitingForLoopback;
+  bool m_addOfflineUsersInNetworkAddresses;
 
 };
 
 // Inline Functions
 inline bool Broadcaster::addHostAddress( const QHostAddress& ha ) { return addNetworkAddress( NetworkAddress( ha, 0 ), false ); }
 inline void Broadcaster::setNewBroadcastRequested( bool new_value ) { m_newBroadcastRequested = new_value; }
+inline void Broadcaster::setAddOfflineUsersInNetworkAddresses( bool new_value ) { m_addOfflineUsersInNetworkAddresses = new_value; }
 
 #endif // BEEBEEP_BROADCASTER_H
