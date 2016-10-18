@@ -276,9 +276,9 @@ QPixmap GuiUserItem::avatarWithStatusBox( const QPixmap& user_avatar, int user_s
   int box_start_height = qMax( 1, box_height / 2 );
   int box_start_width = qMax( 1, box_width / 2 );
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Avatar size:" << pix_width << "x" << pix_height << "-> Box size:" << box_width << "x" << box_height << ":" << box_start_width << box_start_height;
-#endif
+//#ifdef BEEBEEP_DEBUG
+//  qDebug() << "Avatar size:" << pix_width << "x" << pix_height << "-> Box size:" << box_width << "x" << box_height << ":" << box_start_width << box_start_height;
+//#endif
 
   QPixmap pix( pix_width, pix_height );
   QPainter p( &pix );

@@ -78,9 +78,7 @@ bool GuiChatItem::updateItem( const Chat& c )
       chat_name = c.name();
     else
       chat_name = sl.isEmpty() ? c.name() : sl.first();
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Chat name" << c.name() << "and showed" << chat_name;
-#endif
+
     tool_tip = QObject::tr( "Open chat with %1" ).arg( chat_name );
 
     if( c.unreadMessages() > 0 )

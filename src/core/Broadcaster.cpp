@@ -227,7 +227,7 @@ void Broadcaster::readBroadcastDatagram()
     }
 
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster has found new peer" << sender_ip.toString() << sender_listener_port;
+    qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port;
 #endif
     emit newPeerFound( sender_ip, sender_listener_port );
   }
@@ -347,6 +347,8 @@ void Broadcaster::updateAddresses()
   foreach( NetworkAddress na, m_networkAddresses )
     sl << na.toString();
   qDebug() << "Broadcaster is contacting the followings addresses:" << qPrintable( sl.join( ", " ) );
+#else
+  qDebug() << "Broadcaster will contact" << m_networkAddresses.size() << "network addresses";
 #endif
 }
 
@@ -374,6 +376,11 @@ void Broadcaster::onTickEvent( int )
   if( !NetworkManager::instance().isMainInterfaceUp() )
     return;
 
+  contactNetworkAddresses();
+}
+
+void Broadcaster::contactNetworkAddresses()
+{
   int contacted_users = 0;
   while( !m_networkAddresses.isEmpty() )
   {

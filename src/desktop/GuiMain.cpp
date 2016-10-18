@@ -1489,10 +1489,6 @@ void GuiMain::updateUser( const User& u )
     return;
   }
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "User" << u.path() << "has updated his info";
-#endif
-
   mp_userList->setUser( u, true );
   mp_groupList->updateUser( u );
   mp_chat->updateUser( u );

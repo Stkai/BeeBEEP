@@ -53,7 +53,7 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
       if( c->isConnected() || c->isConnecting() )
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "Connection from" << sender_ip.toString() << sender_port << "is already open";
+        qDebug() << "Connection from" << qPrintable( sender_ip.toString() ) << sender_port << "is already opened";
 #endif
         return true;
       }

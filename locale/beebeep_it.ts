@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -372,7 +372,7 @@
     </message>
     <message>
         <source>%1 (%2) is connected to %3 network.</source>
-        <translation>%1 (%2) entra nella tua rete %3.</translation>
+        <translation type="obsolete">%1 (%2) entra nella tua rete %3.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
@@ -524,7 +524,7 @@
     </message>
     <message>
         <source>%1 (%2) is disconnected from %3 network.</source>
-        <translation>%1 (%2) esce dalla tua rete %3.</translation>
+        <translation type="obsolete">%1 (%2) esce dalla tua rete %3.</translation>
     </message>
     <message>
         <source>%1 %2 has not shared files.</source>
@@ -665,11 +665,11 @@
     <name>FileTransferPeer</name>
     <message>
         <source>Unable to open file</source>
-        <translation>Impossibile aprire il file</translation>
+        <translation type="obsolete">Impossibile aprire il file</translation>
     </message>
     <message>
         <source>Unable to write in the file</source>
-        <translation>Impossibile scrivere sul file</translation>
+        <translation type="obsolete">Impossibile scrivere sul file</translation>
     </message>
     <message>
         <source>Transfer cancelled</source>
@@ -718,6 +718,14 @@
     <message>
         <source>Transfer timeout</source>
         <translation>Tempo esaurito per il trasferimento</translation>
+    </message>
+    <message>
+        <source>Unable to open file %1</source>
+        <translation>Impossibile aprire il file %1</translation>
+    </message>
+    <message>
+        <source>Unable to write in the file %1</source>
+        <translation>Impossibile scrivere sul file %1</translation>
     </message>
 </context>
 <context>

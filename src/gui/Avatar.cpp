@@ -50,9 +50,9 @@ bool Avatar::create()
 {
   if( m_name.isEmpty() )
   {
-  #ifdef BEEBEEP_DEBUG
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to create avatar: name is empty";
-  #endif
+#endif
     return false;
   }
 
@@ -61,26 +61,26 @@ bool Avatar::create()
 
   if( m_size.isNull() || m_size.isEmpty() )
   {
-  #ifdef BEEBEEP_DEBUG
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to create avatar: size is null or empty";
-  #endif
+#endif
     return false;
   }
 
   if( m_size.width() < 14 || m_size.height() < 14 )
   {
-  #ifdef BEEBEEP_DEBUG
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to create avatar: size is to small" << m_size.width() << m_size.height();
-  #endif
+#endif
     return false;
   }
 
   QStringList sl_name = m_name.split( " ", QString::SkipEmptyParts );
   if( sl_name.isEmpty() )
   {
-  #ifdef BEEBEEP_DEBUG
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to create avatar: string list is empty";
-  #endif
+#endif
     return false;
   }
 
@@ -123,9 +123,9 @@ bool Avatar::create()
   int border_x = (m_size.width() - fm.width( text_to_write )) / 2;
   int border_y = (m_size.height() - fm.height()) / 2;
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Creating avatar with color" << m_color.name() << "font size" << f.pointSize() << "and borders" << border_x << border_y;
-#endif
+//#ifdef BEEBEEP_DEBUG
+//  qDebug() << "Creating avatar with color" << m_color.name() << "font size" << f.pointSize() << "and borders" << border_x << border_y;
+//#endif
 
   QPixmap pix( m_size );
   pix.fill( m_color );

@@ -36,9 +36,9 @@
 
 void Core::parseMessage( VNumber user_id, const Message& m )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Parsing message received from user" << user_id;
-#endif
+//#ifdef BEEBEEP_DEBUG
+//  qDebug() << "Parsing message received from user" << user_id;
+//#endif
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
@@ -211,9 +211,6 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
 void Core::parseChatMessage( const User& u, const Message& m )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Chat message received from user" << u.path();
-#endif
   if( m.hasFlag( Message::Private ) || m.flags() == 0 || m.hasFlag( Message::GroupChat ) )
     dispatchChatMessageReceived( u.id(), m );
   else
@@ -223,10 +220,6 @@ void Core::parseChatMessage( const User& u, const Message& m )
 void Core::parseGroupMessage( const User& u, const Message& m )
 {
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Message for group" << cmd.groupId() << cmd.groupName();
-#endif
 
   if( m.hasFlag( Message::Request ) )
   {

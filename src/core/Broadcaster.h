@@ -49,6 +49,7 @@ signals:
 
 private slots:
   void readBroadcastDatagram();
+  void contactNetworkAddresses();
 
 protected:
   bool contactNetworkAddress( const NetworkAddress& );
