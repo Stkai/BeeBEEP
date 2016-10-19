@@ -295,7 +295,7 @@ void ConnectionSocket::onBytesWritten( qint64 bytes_written )
 #ifdef BEEBEEP_DEBUG
   qDebug() << bytes_written << "bytes written to" << qPrintable( peerAddress().toString() ) << peerPort();
 #endif
-  if( bytes_written > 0 )
+  if( bytes_written > 85 ) // psing/pong message size
     m_latestActivityDateTime = QDateTime::currentDateTime();
 }
 
