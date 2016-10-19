@@ -38,6 +38,7 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
+  connect( this, SIGNAL( bytesWritten( qint64 ) ), this, SLOT( onBytesWritten( qint64 ) ) );
 }
 
 void ConnectionSocket::initSocket( qintptr socket_descriptor )
@@ -289,12 +290,20 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
   return data_block;
 }
 
+void ConnectionSocket::onBytesWritten( qint64 bytes_written )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << bytes_written << "bytes written to" << qPrintable( peerAddress().toString() ) << peerPort();
+#endif
+  if( bytes_written > 0 )
+    m_latestActivityDateTime = QDateTime::currentDateTime();
+}
+
 bool ConnectionSocket::sendData( const QByteArray& byte_array )
 {
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket is sending to" << qPrintable( m_networkAddress.toString() ) << "the following data:" << byte_array;
 #endif
-
   QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey() );
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
@@ -304,8 +313,6 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << qPrintable( m_networkAddress.toString() );
 #endif
-    if( flush() )
-      m_latestActivityDateTime = QDateTime::currentDateTime();
     return true;
   }
   else

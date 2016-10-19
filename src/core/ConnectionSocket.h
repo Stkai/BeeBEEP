@@ -68,6 +68,7 @@ protected slots:
   void sendQuestionHello();
   void checkConnectionTimeout( int );
   void timerEvent( QTimerEvent* );
+  void onBytesWritten( qint64 );
 
 protected:
   bool startTimerTick();
