@@ -170,7 +170,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
           else
             img_preview_height = img.height();
 
-          sys_msg += QString( "<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;" )
+          sys_msg += QString( "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" />" )
                   .arg( QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
           show_image_preview = true;
         }
@@ -180,14 +180,11 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
       QString s_open = tr( "Open" );
       QUrl file_url = QUrl::fromLocalFile( fi.path() );
+      sys_msg += QString( "<br />%1" ).arg( icon_html );
       sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
       file_url.setScheme( QLatin1String( "beeshowfileinfolder" ) );
       sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
-      //QFileInfo file_info( fi.path() );
-      //sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, QUrl::fromLocalFile( file_info.absoluteDir().absolutePath() ).toString(), tr( "folder" ) );
-
-      if( show_image_preview )
-        sys_msg += QString( "<br />" );
+      sys_msg += QString( "<br />" );
     }
   }
 

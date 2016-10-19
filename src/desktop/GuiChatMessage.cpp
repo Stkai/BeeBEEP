@@ -130,17 +130,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, boo
 
 bool GuiChatMessage::messageCanBeShowedInActivity( const ChatMessage& cm )
 {
-  switch( cm.type() )
-  {
-  case ChatMessage::Header:
-  case ChatMessage::System:
-  case ChatMessage::Chat:
-  case ChatMessage::UserStatus:
-  case ChatMessage::History:
-    return false;
-  default:
-    return true;
-  }
+  return !messageCanBeShowedInDefaultChat( cm );
 }
 
 bool GuiChatMessage::messageCanBeShowedInDefaultChat( const ChatMessage& cm )

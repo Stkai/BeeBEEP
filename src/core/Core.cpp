@@ -168,7 +168,7 @@ bool Core::start()
   else
   {
     qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().networkAddress().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
-    QTimer::singleShot( 2000, this, SLOT( sendBroadcastMessage() ) );
+    QTimer::singleShot( 5000, this, SLOT( sendBroadcastMessage() ) );
   }
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -177,7 +177,7 @@ bool Core::start()
                                Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  startDnsMulticasting();
+  QTimer::singleShot( 12000, this, SLOT( startDnsMulticasting() ) );
 #endif
 
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
@@ -216,10 +216,10 @@ bool Core::start()
   checkSavingPaths();
 
   if( Settings::instance().checkNewVersionAtStartup() )
-    QTimer::singleShot( 0, this, SLOT( checkNewVersion() ) );
+    QTimer::singleShot( 1000, this, SLOT( checkNewVersion() ) );
 
   if( Settings::instance().canPostUsageStatistics() )
-    QTimer::singleShot( 5000, this, SLOT( postUsageStatistics() ) );
+    QTimer::singleShot( 7000, this, SLOT( postUsageStatistics() ) );
 
   return true;
 }

@@ -36,6 +36,8 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
+  m_pingByteArraySize = Protocol::instance().pingMessage().size() + 10;
+
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
   connect( this, SIGNAL( bytesWritten( qint64 ) ), this, SLOT( onBytesWritten( qint64 ) ) );
@@ -292,10 +294,9 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
 
 void ConnectionSocket::onBytesWritten( qint64 bytes_written )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << bytes_written << "bytes written to" << qPrintable( peerAddress().toString() ) << peerPort();
-#endif
-  if( bytes_written > 85 ) // psing/pong message size
+  // This function is useful for large byte array data to prevent connection timeout.
+  // To recognize disconnection, ping message must be skipped
+  if( bytes_written > m_pingByteArraySize )
     m_latestActivityDateTime = QDateTime::currentDateTime();
 }
 

@@ -97,6 +97,7 @@ private:
   bool m_isAborted;
 
   int m_datastreamVersion;
+  int m_pingByteArraySize;
 
 };
 

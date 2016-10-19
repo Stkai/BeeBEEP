@@ -4032,7 +4032,7 @@ void GuiMain::onNetworkInterfaceDown()
 void GuiMain::onNetworkInterfaceUp()
 {
   if( m_autoConnectOnInterfaceUp && !mp_core->isConnected() )
-    QTimer::singleShot( 1000, this, SLOT( startCore() ) );
+    QTimer::singleShot( 5000, this, SLOT( startCore() ) );
 }
 
 static bool IsTimeToCheck( int ticks, int tick_for_check ) { return ticks % tick_for_check == 0; }

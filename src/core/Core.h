@@ -51,8 +51,6 @@ public:
   void stop();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  void startDnsMulticasting();
-  void stopDnsMulticasting();
   bool dnsMulticastingIsActive() const;
 #endif
 
@@ -116,6 +114,10 @@ public slots:
   void checkNewVersion();
   void postUsageStatistics();
   void onTickEvent( int );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  void startDnsMulticasting();
+  void stopDnsMulticasting();
+#endif
 
   /* CoreChat */
   void sendWritingMessage( VNumber );
