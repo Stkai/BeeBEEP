@@ -209,6 +209,7 @@ bool Core::start()
 
   showUserStatusChanged( Settings::instance().localUser() );
   showUserVCardChanged( Settings::instance().localUser() );
+  emit userChanged( Settings::instance().localUser() );
 
   qDebug() << "Local user path:" << Settings::instance().localUser().path();
 
@@ -291,7 +292,7 @@ void Core::stop()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected from %2 Network.")
                            .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
-                           Settings::instance().programName() ), DispatchToAllChatsWithUser,
+                           Settings::instance().programName() ), DispatchToChat,
                            ChatMessage::Connection );
 
   checkSavingPaths();

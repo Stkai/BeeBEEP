@@ -39,6 +39,7 @@ void Core::setLocalUserStatus( int new_status )
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
   showUserStatusChanged( u );
+  emit userChanged( u );
   if( isConnected() )
     sendLocalUserStatus();
 }
@@ -66,6 +67,8 @@ void Core::setLocalUserStatusDescription( int user_status, const QString& new_st
     Settings::instance().setUserStatusList( sl_status );
   }
 
+  emit userChanged( u );
+
   if( show_status )
   {
     showUserStatusChanged( u );
@@ -76,8 +79,6 @@ void Core::setLocalUserStatusDescription( int user_status, const QString& new_st
 
 void Core::showUserStatusChanged( const User& u )
 {
-  emit userChanged( u );
-
   if( !isConnected() )
     return;
 
@@ -111,13 +112,6 @@ void Core::showUserVCardChanged( const User& u )
 {
   QString sHtmlMsg = "";
 
-  if( !u.isLocal() )
-  {
-    sHtmlMsg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/profile.png", "*V*" ),
-                                        tr( "The %1's profile has been received." ).arg( u.name() ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );
-  }
-
   if( u.isBirthDay() )
   {
     sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
@@ -130,10 +124,11 @@ void Core::showUserVCardChanged( const User& u )
     sHtmlMsg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/info.png", "*I*" ),
                                     (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( u.name() )) );
     sHtmlMsg += QString( ": <b>%1</b>" ).arg( u.vCard().info() );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
+    if( u.isLocal() )
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
+    else
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
   }
-
-  emit userChanged( u );
 }
 
 void Core::sendLocalUserStatus()
@@ -198,6 +193,8 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   }
 
   showUserVCardChanged( u );
+  emit userChanged( u );
+
   return true;
 }
 

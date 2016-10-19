@@ -36,6 +36,7 @@ public:
   VCard& operator=( const VCard& );
   inline bool operator==( const VCard& ) const;
 
+  inline bool isValid() const;
   inline bool hasOnlyNickName() const;
 
   inline const QString& nickName() const;
@@ -75,6 +76,7 @@ private:
 
 
 // Inline Functions
+inline bool VCard::isValid() const { return !m_nickName.isEmpty(); }
 inline const QString& VCard::nickName() const { return m_nickName; }
 inline void VCard::setNickName( const QString& new_value ) { m_nickName = new_value; }
 inline const QString& VCard::firstName() const { return m_firstName; }

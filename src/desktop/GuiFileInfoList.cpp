@@ -99,9 +99,6 @@ GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
 
 GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiFileInfoList::createUserItem for user" << u.id() << u.name();
-#endif
   GuiFileInfoItem* item = new GuiFileInfoItem( mp_tree );
   item->initUser( u.id(), u.name() );
   m_lastUserItem = item;
@@ -112,9 +109,6 @@ GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& fo
 {
   if( m_lastFolderItem && m_lastFolderItem->userId() == user_id && m_lastFolderItem->folder() == folder_name )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "GuiFileInfoList::folderItem selects last folder" << folder_name;
-#endif
     return m_lastFolderItem;
   }
 
@@ -145,17 +139,11 @@ GuiFileInfoItem* GuiFileInfoList::createSubFolderItem( GuiFileInfoItem* parent_i
   item->initFolder( user_id, subfolder_name, subfolder_path );
   m_lastFolderItem = item;
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiFileInfoList::createSubFolderItem for user" << user_id << subfolder_name;
-#endif
   return item;
 }
 
 GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString& folder_name )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiFileInfoList::createFolderItem for user" << u.id() << folder_name;
-#endif
   GuiFileInfoItem* parent_item = 0;
   GuiFileInfoItem* item = 0;
   if( !u.isLocal() )
@@ -225,19 +213,9 @@ GuiFileInfoItem* GuiFileInfoList::createFileItem( const User& u, const FileInfo&
 
   GuiFileInfoItem* item;
   if( parent_item )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "GuiFileInfoList::createFileItem for user" << u.id() << "in folder" << parent_item->folder() << "with id" << file_info.id();
-#endif
     item = new GuiFileInfoItem( parent_item );
-  }
   else
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "GuiFileInfoList::createFileItem for user" << u.id() << "in root folder with id" << file_info.id();
-#endif
     item = new GuiFileInfoItem( mp_tree );
-  }
 
   item->initFile( u.id(), file_info );
   return item;
@@ -253,12 +231,8 @@ void GuiFileInfoList::addFileInfoToList( VNumber user_id, const FileInfo& fi )
 void GuiFileInfoList::addItemToFileInfoList( GuiFileInfoItem* fi_item )
 {
   if( !fi_item->isObjectFile() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to add a not file item in list:" << fi_item->text( GuiFileInfoItem::ColumnFile );
-#endif
     return;
-  }
+
 
   FileInfo fi = m_isLocal ? FileShare::instance().localFileInfo( fi_item->fileInfoId() ) : FileShare::instance().networkFileInfo( fi_item->userId(), fi_item->fileInfoId() );
   if( !fi.isValid() )

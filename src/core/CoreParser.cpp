@@ -111,20 +111,28 @@ void Core::parseUserMessage( const User& u, const Message& m )
 #endif
       UserManager::instance().setUser( user_with_new_status );
       showUserStatusChanged( user_with_new_status );
+      emit userChanged( user_with_new_status );
     }
   }
   else if( m.hasFlag( Message::UserVCard ) )
   {
     User user_with_new_vcard = u;
+
     if( Protocol::instance().changeVCardFromMessage( &user_with_new_vcard, m ) )
     {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "User" << user_with_new_vcard.path() << "has new vCard";
-#endif
-      UserManager::instance().setUser( user_with_new_vcard );
-      if( user_with_new_vcard.path() != u.path() )
-        ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), user_with_new_vcard.path() );
-      showUserVCardChanged( user_with_new_vcard );
+      bool color_changed = user_with_new_vcard.color() != u.color();
+      bool vcard_changed = !(user_with_new_vcard.vCard() == u.vCard() );
+
+      if( vcard_changed || color_changed )
+      {
+        UserManager::instance().setUser( user_with_new_vcard );
+        if( user_with_new_vcard.path() != u.path() )
+          ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), user_with_new_vcard.path() );
+        if( vcard_changed )
+          showUserVCardChanged( user_with_new_vcard );
+
+        emit userChanged( user_with_new_vcard );
+      }
     }
     else
       qWarning() << "Unable to read vCard from" << qPrintable( u.path() );

@@ -182,8 +182,9 @@ void Core::closeConnection( Connection *c )
       qDebug() << "User" << u.path() << "goes offline";
       u.setStatus( User::Offline );
       UserManager::instance().setUser( u );
-      showUserStatusChanged( u );
 
+      showUserStatusChanged( u );
+      emit userChanged( u );
       emit userConnectionStatusChanged( u );
 
       Chat default_chat = ChatManager::instance().defaultChat();
@@ -333,7 +334,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 
   showUserStatusChanged( u );
-
+  emit userChanged( u );
   emit userConnectionStatusChanged( u );
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )

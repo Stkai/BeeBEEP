@@ -304,7 +304,8 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << qPrintable( m_networkAddress.toString() );
 #endif
-    // send data is asynchronous and m_latestActivityDateTime is not set
+    if( flush() )
+      m_latestActivityDateTime = QDateTime::currentDateTime();
     return true;
   }
   else
