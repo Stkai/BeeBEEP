@@ -67,7 +67,7 @@
         <translation>%1 Du är ansluten till nätverket, %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="292"/>
+        <location filename="../src/core/Core.cpp" line="293"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Du är bortkopplad från nätverket, %2.</translation>
     </message>
@@ -76,7 +76,7 @@
         <translation type="obsolete">%1 %2 kommer att söka användare på dessa IP-adresser: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="240"/>
+        <location filename="../src/core/Core.cpp" line="241"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration startad med tjänstnamnet: %2</translation>
     </message>
@@ -96,27 +96,27 @@
         <translation>%1 Du har valt att endast gå med i följande arbetsgrupper: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="255"/>
+        <location filename="../src/core/Core.cpp" line="256"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero Configuration-tjänsten stängd.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="316"/>
+        <location filename="../src/core/Core.cpp" line="317"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration genomsöker nätverket efter tjänsten: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="323"/>
+        <location filename="../src/core/Core.cpp" line="324"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration kan inte söka i nätverket efter tjänsten: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="341"/>
+        <location filename="../src/core/Core.cpp" line="342"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 sänder i nätverket, %2...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="347"/>
+        <location filename="../src/core/Core.cpp" line="348"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 Du är inte ansluten till nätverket, %2.</translation>
     </message>
@@ -129,17 +129,17 @@
         <translation type="obsolete">Se loggmeddelanden för mer information</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="465"/>
+        <location filename="../src/core/Core.cpp" line="466"/>
         <source>New version is available</source>
         <translation>En ny version finns tillgänglig</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="466"/>
+        <location filename="../src/core/Core.cpp" line="467"/>
         <source>Click here to download</source>
         <translation>Klicka här för att ladda ner</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="514"/>
+        <location filename="../src/core/Core.cpp" line="515"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -170,12 +170,12 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="85"/>
-        <location filename="../src/core/CoreUser.cpp" line="124"/>
+        <location filename="../src/core/CoreUser.cpp" line="118"/>
         <source>Happy Birthday to you!</source>
         <translation>Grattis på födelsedagen!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="124"/>
+        <location filename="../src/core/CoreUser.cpp" line="118"/>
         <source>Happy Birthday to %1!</source>
         <translation>Grattis på födelsedagen, till %1!</translation>
     </message>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="101"/>
         <location filename="../src/core/CoreChat.cpp" line="166"/>
-        <location filename="../src/core/CoreChat.cpp" line="246"/>
+        <location filename="../src/core/CoreChat.cpp" line="251"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chatta med %2.</translation>
     </message>
@@ -212,57 +212,57 @@
         <translation>%1 Gruppen har fått ett nytt namn: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="232"/>
+        <location filename="../src/core/CoreChat.cpp" line="237"/>
         <source>%1 Members removed from the group: %2.</source>
         <translation>%1 Medlemmar borttagna från gruppen: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="239"/>
+        <location filename="../src/core/CoreChat.cpp" line="244"/>
         <source>%1 Members added to the group: %2.</source>
         <translation>%1 Medlemmar tillagda i gruppen: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="264"/>
+        <location filename="../src/core/CoreChat.cpp" line="269"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Kunde inte skicka meddelandet. Du är inte ansluten.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="270"/>
+        <location filename="../src/core/CoreChat.cpp" line="275"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Kunde inte skicka meddelandet. Denna chatt är inaktiverad.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="304"/>
+        <location filename="../src/core/CoreChat.cpp" line="309"/>
         <source>Unable to send the message to %1.</source>
         <translation>Kunde inte skicka meddelande till %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="332"/>
+        <location filename="../src/core/CoreChat.cpp" line="337"/>
         <source>The message will be delivered to %1.</source>
         <translation>Inget meddelande levereras till %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="337"/>
+        <location filename="../src/core/CoreChat.cpp" line="342"/>
         <source>Nobody has received the message.</source>
         <translation>Ingen har tagit emot meddelandet.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="396"/>
+        <location filename="../src/core/CoreChat.cpp" line="401"/>
         <source>%1 %2 can not join to the group.</source>
         <translation>%1 %2 kan inte ansluta till gruppen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="459"/>
+        <location filename="../src/core/CoreChat.cpp" line="464"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 sparade chattar har lagts till i historiken</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="575"/>
+        <location filename="../src/core/CoreChat.cpp" line="580"/>
         <source>Offline messages sent to %2.</source>
         <translation>Nedkopplat meddelande skickat till %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="412"/>
+        <location filename="../src/core/CoreChat.cpp" line="417"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 kan inte informeras om att du lämnat gruppen.</translation>
     </message>
@@ -277,12 +277,12 @@
         <translation>Gilla oss på Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="504"/>
+        <location filename="../src/core/CoreChat.cpp" line="509"/>
         <source>%1 You have left the group.</source>
         <translation>%1 Du har lämnat gruppen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="506"/>
+        <location filename="../src/core/CoreChat.cpp" line="511"/>
         <source>%1 %2 has left the group.</source>
         <translation>%1 %2 har lämnat gruppen.</translation>
     </message>
@@ -295,7 +295,7 @@
         <translation type="obsolete">%1 (%2) är ansluten till nätverket, %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="382"/>
+        <location filename="../src/core/Core.cpp" line="383"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Nätverksgränssnittet %2 har gått ner.</translation>
     </message>
@@ -335,12 +335,12 @@
         <translation>Öppna</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="245"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="242"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Kunde inte skicka %2 till %3. Användaren är nerkopplad.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="222"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="219"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Kunde inte skicka %2. Filöverföring är inaktiverad.</translation>
     </message>
@@ -355,202 +355,201 @@
         <translation>Ladda ner</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="185"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="186"/>
         <source>folder</source>
         <translation>mapp</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="254"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="251"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: Filen kan inte hittas.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="268"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="265"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 är en mapp. Du kan dela den.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="293"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="290"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Kan inte skicka %2: %3 är inte ansluten.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="287"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="284"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Du skickar %2 till %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="319"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Du har nekat att ladda ner %2 från %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="347"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="344"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Du har nekat att ladda ner mappen &apos;%2&apos; från %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="410"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="407"/>
         <source>Adding to file sharing</source>
         <translation>Lägger till som fildelning</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="465"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="462"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 har lagts till i fildelningen (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="467"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="464"/>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
         <translation>%1 har lagts till i fildelningen med %2 filer, %3 (förfluten tid: %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="503"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="500"/>
         <source>All paths are removed from file sharing</source>
         <translation>Alla mappar har tagits bort från fildelning</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="525"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="522"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 har tagits bort från fildelning</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="527"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="524"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 har tagits bort från fildelning, med %2 filer</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="578"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="575"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Du är på väg att skicka %2 till %3. Kontrollerar mapp...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="617"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="614"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Kunde inte skicka mappen &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="622"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="619"/>
         <source>the folder is empty.</source>
         <translation>mappen är tom.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="629"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="626"/>
         <source>file transfer is not working.</source>
         <translation>filöverföring fungerar inte.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="637"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
         <source>%1 is not connected.</source>
         <translation>%1 är inte ansluten.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="651"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="648"/>
         <source>internal error.</source>
         <translation>internt fel.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="656"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="653"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Du skickar mappen &apos;%2&apos; till %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="164"/>
+        <location filename="../src/core/CoreParser.cpp" line="172"/>
         <source>%1 %2 has refused to download %3.</source>
         <translation>%1 %2 har nekat att ladda ner %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="190"/>
+        <location filename="../src/core/CoreParser.cpp" line="198"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 skickar dig filen: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="268"/>
+        <location filename="../src/core/CoreParser.cpp" line="276"/>
         <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
         <translation>%1 Ett fel uppstår när %2 försöker lägga till dig i gruppchatten: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="274"/>
+        <location filename="../src/core/CoreParser.cpp" line="282"/>
         <source>%1 %2 adds you to the group chat: %3.</source>
         <translation>%1 %2 lägger till dig i gruppchatten: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="308"/>
+        <location filename="../src/core/CoreParser.cpp" line="316"/>
         <source>%1 %2 has not shared files.</source>
         <translation>%1 %2 har inte delat filer.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="313"/>
+        <location filename="../src/core/CoreParser.cpp" line="321"/>
         <source>%1 %2 has shared %3 files.</source>
         <translation>%1 %2 har delat %3 filer.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="344"/>
+        <location filename="../src/core/CoreParser.cpp" line="352"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 har nekat att ladda ner mappen &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="351"/>
+        <location filename="../src/core/CoreParser.cpp" line="359"/>
         <source>unknown folder</source>
         <translation>okänd mapp</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="360"/>
+        <location filename="../src/core/CoreParser.cpp" line="368"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 skickar dig mappen: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="86"/>
+        <location filename="../src/core/CoreUser.cpp" line="87"/>
         <source>You are</source>
         <translation>Du är</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="88"/>
+        <location filename="../src/core/CoreUser.cpp" line="89"/>
         <source>%1 is</source>
         <translation>%1 är</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="101"/>
+        <location filename="../src/core/CoreUser.cpp" line="102"/>
         <source>You have changed your nickname from %1 to %2.</source>
         <translation>Du har ändrat ditt chattnamn från %1 till %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="103"/>
+        <location filename="../src/core/CoreUser.cpp" line="104"/>
         <source>%1 has changed the nickname in %2.</source>
         <translation>%1 har bytt chattnamn i %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="117"/>
         <source>The %1&apos;s profile has been received.</source>
-        <translation>%1s profil har tagits emot.</translation>
+        <translation type="obsolete">%1s profil har tagits emot.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="131"/>
+        <location filename="../src/core/CoreUser.cpp" line="125"/>
         <source>You share this information</source>
         <translation>Du delar den här informationen</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="131"/>
+        <location filename="../src/core/CoreUser.cpp" line="125"/>
         <source>%1 shares this information</source>
         <translation>%1 delar den här informationen</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="235"/>
+        <location filename="../src/core/CoreUser.cpp" line="232"/>
         <source>%1 You have created group from chat: %2.</source>
         <translation>%1 Du har skapat en grupp från chatt: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="290"/>
+        <location filename="../src/core/CoreUser.cpp" line="287"/>
         <source>%1 You have deleted group: %2.</source>
         <translation>%1 Du har tagit bort gruppen: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="377"/>
+        <location filename="../src/core/CoreUser.cpp" line="374"/>
         <source>is removed from favorites</source>
         <translation>är borttagen från favoriter</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="383"/>
+        <location filename="../src/core/CoreUser.cpp" line="380"/>
         <source>is added to favorites</source>
         <translation>har lagts till i favoriter</translation>
     </message>
@@ -1700,10 +1699,10 @@ Välj ett annat namn.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="301"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3480"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3481"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3482"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3483"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3485"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3486"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3487"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3488"/>
         <source>offline</source>
         <translation>bortkopplad</translation>
     </message>
@@ -1722,11 +1721,11 @@ Välj ett annat namn.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2338"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2824"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3224"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3317"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3362"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3288"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3322"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3367"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3831"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -1740,11 +1739,11 @@ Välj ett annat namn.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2338"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2824"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3224"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3317"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3362"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3288"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3322"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3367"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3831"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
@@ -2636,7 +2635,7 @@ Välj ett annat namn.</translation>
         <translation>Gilla %1 på Facebook</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4213"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4218"/>
         <source>New file from %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2885,7 +2884,7 @@ Välj ett annat namn.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2145"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3180"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3185"/>
         <source>User not found.</source>
         <translation>Användaren kan inte hittas.</translation>
     </message>
@@ -2942,37 +2941,37 @@ Välj ett annat namn.</translation>
         <translation>Öppna instickshanteraren och hantera installerade insticksmoduler</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3780"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3785"/>
         <source>at lunch</source>
         <translation>på lunch</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3789"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3794"/>
         <source>in a meeting</source>
         <translation>i ett möte</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3825"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3830"/>
         <source>Do you really want to clear all saved status descriptions?</source>
         <translation>Vill du verkligen ta bort alla sparade statusbeskrivningar?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4002"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4007"/>
         <source>Select your dictionary path</source>
         <translation>Välj sökväg till ordboken</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4010"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4015"/>
         <source>Dictionary selected: %1</source>
         <translation>Vald ordbok: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4012"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4017"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Kunde inte ange ordbok: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4165"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4170"/>
         <source>Window geometry and state saved</source>
         <translation>Fönstergeometri och status sparades</translation>
     </message>
@@ -3029,14 +3028,14 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1437"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2830"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3098"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3103"/>
         <source>Unable to open %1</source>
         <translation>Kunde inte öppna %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1437"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2830"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3098"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3103"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
@@ -3133,42 +3132,42 @@ Välj ett annat namn.</translation>
         <translation>Lägg till som rubrik</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3228"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Alla medlemmar i den här chatten är inte anslutna. Ändringarna kanske inte blir permanenta. Vill du fortsätta?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3361"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3366"/>
         <source>Do you really want to delete chat with %1?</source>
         <translation>Vill du verkligen ta bort chatten med %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3485"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3490"/>
         <source>inactive</source>
         <translation>inaktiv</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3505"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3510"/>
         <source>disabled</source>
         <translation>inaktiverad</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3512"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3517"/>
         <source>active</source>
         <translation>aktiv</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3585"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3590"/>
         <source>%1 is online</source>
         <translation>%1 är ansluten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3587"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3592"/>
         <source>%1 is offline</source>
         <translation>%1 är nerkopplad</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3602"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3607"/>
         <source>Please select the new size of the user picture</source>
         <translation>Välj ny storlek på användarbilden</translation>
     </message>
@@ -3176,7 +3175,7 @@ Välj ett annat namn.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2313"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2927"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3075"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3246"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3251"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -3236,62 +3235,62 @@ Välj ett annat namn.</translation>
         <translation>Uppdatera fillistan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3308"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3313"/>
         <source>Chat with %1 is empty.</source>
         <translation>Chatten med %1 är tom.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3312"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3317"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Vill du verkligen rensa konversationen med %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3315"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3320"/>
         <source>Yes and delete history</source>
         <translation>Ja, och ta bort historiken</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3245"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3250"/>
         <source>%1 is a your group. You can not leave the chat.</source>
         <translation>%1 är din grupp. Du kan inte lämna chatten.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3246"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3251"/>
         <source>Delete this group</source>
         <translation>Ta bort den här gruppen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3270"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3275"/>
         <source>You cannot leave this chat.</source>
         <translation>Du kan inte lämna den här chatten.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3282"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3287"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Vill du verkligen ta bort gruppen &apos;%1&apos;?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3383"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3388"/>
         <source>Unable to delete this chat.</source>
         <translation>Kan inte ta bort den här chatten.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3405"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3410"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 har delat %2 filer</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3427"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3432"/>
         <source>Default language is restored.</source>
         <translation>Standardspråket är återställt.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3429"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3434"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Nya språket &apos;%1&apos; är valt.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3432"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3437"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Du måste starta om %1 för att verkställa dessa ändringar.</translation>
     </message>
@@ -4507,7 +4506,7 @@ Välj ett annat namn.</translation>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="63"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3305"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3310"/>
         <location filename="../src/desktop/GuiUserItem.cpp" line="122"/>
         <source>All Lan Users</source>
         <translation>Alla LAN-användare</translation>

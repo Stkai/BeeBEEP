@@ -101,12 +101,6 @@ QList<QHostAddress> NetworkManager::localBroadcastAddresses() const
   return host_address_list;
 }
 
-bool NetworkManager::isInLocalBroadcastAddresses( const QHostAddress& host_address ) const
-{
-  QList<QHostAddress> host_address_list = localBroadcastAddresses();
-  return host_address_list.contains( host_address );
-}
-
 NetworkEntry NetworkManager::firstNetworkEntry( bool use_ipv4 ) const
 {
   if( m_networkEntries.isEmpty() )
@@ -271,19 +265,21 @@ QHostAddress NetworkManager::broadcastSubnetFromIPv4HostAddress( const QHostAddr
   if( host_address.isNull() )
     return host_address;
 
+  if( isInLocalBroadcastAddresses( host_address ) )
+    return host_address;
+
   NetworkAddress network_address( host_address, 0 );
 
   if( !network_address.isIPv4Address() || network_address.isLoopback() || network_address.isLinkLocal() )
     return QHostAddress();
 
   QString s_host_address = host_address.toString();
+  if( s_host_address.contains( QLatin1String( "255" ) ) )
+    return network_address.hostAddress();
 
   QStringList sl_host_address = s_host_address.split( "." );
   if( sl_host_address.size() != 4 )
     return QHostAddress();
-
-  if( s_host_address.contains( QLatin1String( "255" ) ) )
-    return network_address.hostAddress();
 
   sl_host_address.removeLast();
   sl_host_address.append( QLatin1String( "255" ) );

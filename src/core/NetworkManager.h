@@ -43,12 +43,11 @@ public:
   inline const QString& localHostAddressScopeId() const;
   inline const QString& localInterfaceHardwareAddress() const;
 
-  QHostAddress broadcastSubnetFromIPv4HostAddress( const QHostAddress& ) const;
+
   QList<QHostAddress> splitInIPv4HostAddresses( const QHostAddress& ) const;
   bool isLocalHostAddress( const QHostAddress& ) const;
   QList<QHostAddress> localBroadcastAddresses() const;
-  bool isInLocalBroadcastAddresses( const QHostAddress& ) const;
-  inline bool isExternalHostAddress( const QHostAddress& ) const;
+  inline bool isInLocalBroadcastAddresses( const QHostAddress& ) const;
 
   static NetworkManager& instance()
   {
@@ -78,6 +77,7 @@ protected:
   void setLocalHostAddress( const NetworkEntry& );
   NetworkEntry firstNetworkEntry( bool use_ipv4 ) const;
   QList<NetworkEntry> availableNetworkEntries() const;
+  QHostAddress broadcastSubnetFromIPv4HostAddress( const QHostAddress& ) const;
 
 private:
   QHostAddress m_localHostAddress;
@@ -97,5 +97,6 @@ inline const QString& NetworkManager::localInterfaceHardwareAddress() const { re
 inline bool NetworkManager::isNetworkEntryAvailable( const NetworkEntry& ne ) const { return ne.isValid() && !ne.isLoopback() && ne.isProtocolValid() && !ne.isLinkLocal(); }
 inline bool NetworkManager::isNetworkInterfaceAvailable( const QNetworkInterface& ni ) const {  return (ni.flags() & QNetworkInterface::IsUp) && (ni.flags() & QNetworkInterface::IsRunning) && (ni.flags() & ~QNetworkInterface::IsLoopBack); }
 inline bool NetworkManager::isMainInterfaceUnavailable() const { return m_localInterfaceHardwareAddress.isEmpty(); }
-inline bool NetworkManager::isExternalHostAddress( const QHostAddress& ha ) const { return !isInLocalBroadcastAddresses( broadcastSubnetFromIPv4HostAddress( ha ) ); }
+inline bool NetworkManager::isInLocalBroadcastAddresses( const QHostAddress& host_address ) const { return localBroadcastAddresses().contains( host_address ); }
+
 #endif // BEEBEEP_NETWORKMANAGER_H

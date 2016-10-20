@@ -458,39 +458,53 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
   if( connectedUsers() < 2 )
     return;
 
+  Message msg_to_send;
   QList<UserRecord> user_record_list;
-  UserRecord to_ur;
-  to_ur.setNetworkAddress( to_user.networkAddress() );
-  user_record_list.append( to_ur );
-  Message m = Protocol::instance().userRecordListToMessage( user_record_list );
-  user_record_list.clear();
+  UserRecord ur;
+
+  if( to_user.protocolVersion() >= HIVE_PROTO_VERSION )
+  {
+    foreach( User u, UserManager::instance().userList().toList() )
+    {
+      if( u.isLocal() || u == to_user )
+        continue;
+
+      if( isUserConnected( u.id() ) )
+      {
+        ur.setNetworkAddress( u.networkAddress() );
+        user_record_list.append( ur );
+      }
+    }
+
+    msg_to_send = Protocol::instance().userRecordListToMessage( user_record_list );
+    if( sendMessageToLocalNetwork( to_user, msg_to_send ) )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Hive protocol sends" << user_record_list.size() << "connected users to" << qPrintable( to_user.path() );
+#endif
+      return;
+    }
+    else
+      qWarning() << "Hive protocol is unable to send" << user_record_list.size() << "connected users to" << qPrintable( to_user.path() );
+  }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Sending to hive new user connected:" << to_user.path();
+  qDebug() << "Hive protocol tries to send" <<  qPrintable( to_user.path() ) << "to" << user_record_list.size() << "connected users";
 #endif
 
+  user_record_list.clear();
+  ur.setNetworkAddress( to_user.networkAddress() );
+  user_record_list.append( ur );
+  msg_to_send = Protocol::instance().userRecordListToMessage( user_record_list );
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isLocal() || u == to_user )
       continue;
 
-    if( isUserConnected( u.id() ) )
+    if( u.protocolVersion() >= HIVE_PROTO_VERSION && isUserConnected( u.id() ) )
     {
-      UserRecord ur;
-      ur.setNetworkAddress( u.networkAddress() );
-      user_record_list.append( ur );
-      sendMessageToLocalNetwork( u, m );
+      if( !sendMessageToLocalNetwork( u, msg_to_send ) )
+        qWarning() << "Hive protocol is unable to send" << qPrintable( to_user.path() ) << "to connected user" << qPrintable( u.path() );
     }
   }
-
-  if( user_record_list.isEmpty() )
-    return;
-
-  m = Protocol::instance().userRecordListToMessage( user_record_list );
-  if( !sendMessageToLocalNetwork( to_user, m ) )
-    qWarning() << "Unable to send local connected users to" << to_user.path();
-#ifdef BEEBEEP_DEBUG
-  else
-    qDebug() << "Local hive sent to user:" << to_user.path();
-#endif
 }

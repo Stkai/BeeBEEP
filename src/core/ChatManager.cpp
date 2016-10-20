@@ -182,7 +182,7 @@ QString ChatManager::findPrivateChatSavedTextWithSameNickname( const QString& ch
 {
   QString chat_user_nick = User::nameFromPath( chat_name );
 
-  foreach( QString key_name, m_history )
+  foreach( QString key_name, m_history.keys() )
   {
     if( chat_user_nick == User::nameFromPath( key_name ) )
       return key_name;
@@ -230,7 +230,10 @@ void ChatManager::autoLinkSavedChatByNickname( const Chat& c )
     QString chat_same_nickname = ChatManager::instance().findPrivateChatSavedTextWithSameNickname( c.name() );
     if( chat_same_nickname.isEmpty() )
       return;
-    ChatManager::instance().updateChatSavedText( chat_same_nickname, c.name(), false );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "The chat with name" << chat_same_nickname << "is auto link to" << c.name();
+#endif
+    updateChatSavedText( chat_same_nickname, c.name(), false );
   }
 }
 

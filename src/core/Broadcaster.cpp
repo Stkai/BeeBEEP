@@ -111,7 +111,7 @@ bool Broadcaster::addNetworkAddress( const NetworkAddress& network_address, bool
   if( m_networkAddresses.contains( network_address ) )
     return false;
 
-  if( network_address.isHostPortValid() && split_ipv4_address )
+  if( split_ipv4_address && (network_address.isHostPortValid() || !NetworkManager::instance().isInLocalBroadcastAddresses( network_address.hostAddress() ) ))
   {
     QList<QHostAddress> host_addresses_to_add = NetworkManager::instance().splitInIPv4HostAddresses( network_address.hostAddress() );
     if( host_addresses_to_add.isEmpty() )
@@ -137,11 +137,17 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
 
   if( na.isHostPortValid() )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster sends to core this network address:" << qPrintable( na.toString() );
+#endif
     emit newPeerFound( na.hostAddress(), na.hostPort() );
     return true;
   }
   else
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Broadcaster sends datagram this network address:" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
+#endif
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
     m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
     return m_broadcastSocket.writeDatagram( broadcast_data, na.hostAddress(), Settings::instance().defaultBroadcastPort() ) > 0;

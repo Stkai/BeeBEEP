@@ -201,7 +201,12 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     chat_changed = true;
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Changing saved chat from" << c.name() << "to" << chat_name;
+#endif
       ChatManager::instance().updateChatSavedText( c.name(), chat_name, false );
+    }
     c.setName( chat_name );
   }
 

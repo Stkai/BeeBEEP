@@ -3051,7 +3051,7 @@ void GuiMain::removeSavedChat( const QString& chat_name )
   if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatName() == chat_name )
     mp_chat->reloadChat();
   else if( mp_stackedWidget->currentWidget() == mp_savedChat )
-    mp_savedChat->showSavedChat( chat_name );
+    raiseHomeView();
 }
 
 void GuiMain::linkSavedChat( const QString& chat_name )
@@ -3087,6 +3087,11 @@ void GuiMain::linkSavedChat( const QString& chat_name )
 
   ChatManager::instance().updateChatSavedText( chat_name, chat_name_selected, add_to_existing_saved_text );
   mp_savedChatList->updateSavedChats();
+
+  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatName() == chat_name )
+    mp_chat->reloadChat();
+  else if( mp_stackedWidget->currentWidget() == mp_savedChat )
+    mp_savedChat->showSavedChat( chat_name_selected );
 }
 
 bool GuiMain::openWebUrl( const QString& web_url )

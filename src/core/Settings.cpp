@@ -150,7 +150,7 @@ Settings::Settings()
 #endif
   m_previewFileDialogGeometry = "";
   m_previewFileDialogImageSize = 200;
-  m_maxUsersToConnectInATick = 20;
+  m_maxUsersToConnectInATick = 25;
   m_showHomeAsDefaultPage = true;
 }
 

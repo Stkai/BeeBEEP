@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>The %1&apos;s profile has been received.</source>
-        <translation>E&apos; stato ricevuto il profilo di %1.</translation>
+        <translation type="obsolete">E&apos; stato ricevuto il profilo di %1.</translation>
     </message>
     <message>
         <source>Happy Birthday to you!</source>

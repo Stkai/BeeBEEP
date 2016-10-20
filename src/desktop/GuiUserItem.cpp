@@ -54,6 +54,8 @@ bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
 {
   QString user_name = data( 0, GuiUserItem::UserName ).toString().toLower();
   QString other_name = item.data( 0, GuiUserItem::UserName ).toString().toLower();
+  int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
+  int other_priority = item.data( 0, GuiUserItem::Priority ).toInt();
 
   if( Settings::instance().userSortingMode() == 1 ) // by name
   {
@@ -76,12 +78,10 @@ bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
     if( user_messages != other_messages )
       return user_messages < other_messages;
     else
-      return user_name < other_name;
+      return user_item_priority < other_priority;
   }
   else
   {
-    int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
-    int other_priority = item.data( 0, GuiUserItem::Priority ).toInt();
     if( user_item_priority != other_priority )
       return user_item_priority < other_priority;
     else

@@ -403,8 +403,13 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 #endif
     foreach( UserRecord ur, user_record_list )
     {
-       if( Hive::instance().addNetworkAddress( ur.networkAddress() ) && !hasConnection( ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() ) )
-         mp_broadcaster->setNewBroadcastRequested( true );
+      if( Hive::instance().addNetworkAddress( ur.networkAddress() ) && !hasConnection( ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() ) )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Hive message contains this path" << qPrintable( ur.path() ) << "and it is added to contact list";
+#endif
+        mp_broadcaster->setNewBroadcastRequested( true );
+      }
     }
   }
   else
