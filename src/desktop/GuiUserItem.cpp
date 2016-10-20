@@ -74,9 +74,9 @@ bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
   else if( Settings::instance().userSortingMode() == 3 ) // by messages
   {
     int user_messages = unreadMessages();
-    int other_messages = data( 0, UnreadMessages ).toInt();
+    int other_messages = item.data( 0, UnreadMessages ).toInt();
     if( user_messages != other_messages )
-      return user_messages < other_messages;
+      return user_messages > other_messages; // reverse order
     else
       return user_item_priority < other_priority;
   }
@@ -115,11 +115,7 @@ bool GuiUserItem::updateUser( const User& u )
 
   int unread_messages = unreadMessages();
 
-  int user_status = u.status();
-  if( !user_status )
-    unread_messages = 0;
-
-  QString s = u.isLocal() ? QObject::tr( "All Lan Users" ) : (user_status != User::Offline ? u.name() : u.path());
+  QString s = u.isLocal() ? QObject::tr( "All Lan Users" ) : (u.status() != User::Offline ? u.name() : u.path());
 
   int user_priority = 1;
 
@@ -155,7 +151,7 @@ bool GuiUserItem::updateUser( const User& u )
             paint_status_box = true;
         }
         else
-          user_avatar = selectUserIcon( user_status, true ).pixmap( icon_size );
+          user_avatar = selectUserIcon( u.status(), true ).pixmap( icon_size );
       }
       else
       {
@@ -176,7 +172,7 @@ bool GuiUserItem::updateUser( const User& u )
 
     }
     else
-      setIcon( 0, selectUserIcon( user_status, false ) );
+      setIcon( 0, selectUserIcon( u.status(), false ) );
 
   }
   else
@@ -189,7 +185,7 @@ bool GuiUserItem::updateUser( const User& u )
   }
   else
   {
-    tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( user_status ) );
+    tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
     if( u.isStatusConnected() )
     {
       if( u.statusDescription().isEmpty() )
@@ -207,7 +203,7 @@ bool GuiUserItem::updateUser( const User& u )
       tool_tip += QString( "(%1)" ).arg( QObject::tr( "Click to send a private message" ) );
     }
     user_priority = u.isFavorite() ? 100 : 10000;
-    user_priority += u.isStatusConnected() ? (1000*user_status) : 10000000;
+    user_priority += u.isStatusConnected() ? (1000*u.status()) : 10000000;
   }
 
   user_priority -= (unread_messages > 99 ? 99 : unread_messages);

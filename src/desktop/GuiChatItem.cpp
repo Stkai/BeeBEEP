@@ -48,7 +48,12 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
   if( !isGroup() && item.data( 0, GuiChatItem::ChatIsGroup ).toBool() )
     return true;
 
-  return user_item_name > other_name; // correct order
+  int chat_unread_messages = unreadMessages();
+  int other_unread_messages = item.data( 0, GuiChatItem::ChatUnreadMessages ).toInt();
+  if( chat_unread_messages != other_unread_messages )
+    return chat_unread_messages > other_unread_messages;
+  else
+    return user_item_name > other_name; // correct order
 }
 
 bool GuiChatItem::updateItem( const Chat& c )
@@ -81,21 +86,19 @@ bool GuiChatItem::updateItem( const Chat& c )
 
     tool_tip = QObject::tr( "Open chat with %1" ).arg( chat_name );
 
-    if( c.unreadMessages() > 0 )
-      chat_name.prepend( QString( "(%1) " ).arg( c.unreadMessages() ) );
-
     setData( 0, ChatName, chat_name );
-
     setIsGroup( c.isGroup() );
   }
+
+  if( c.unreadMessages() > 0 )
+    chat_name.prepend( QString( "(%1) " ).arg( c.unreadMessages() ) );
 
   chat_name += " ";
   setText( 0, chat_name );
   setToolTip( 0, tool_tip );
   setStatusTip( 0, tool_tip );
-
   setData( 0, ChatUnreadMessages, c.unreadMessages() );
-  onTickEvent( 0 );
+  onTickEvent( 2 );
 
   return true;
 }
