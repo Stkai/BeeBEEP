@@ -50,7 +50,6 @@ private:
   QTimer m_timer;
 
   QLineEdit* mp_leFilter;
-  QLabel* mp_lStatus;
   QCheckBox* mp_cbCaseSensitive;
   QCheckBox* mp_cbWholeWordOnly;
   QCheckBox* mp_cbLogToFile;

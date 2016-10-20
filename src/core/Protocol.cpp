@@ -1504,7 +1504,7 @@ QString Protocol::formatHtmlText( const QString& text )
     if( text.at( i ) == QLatin1Char( ' ' ) )
     {
       if( there_is_a_space_before_it )
-        text_formatted += QLatin1String( "&nbsp;" );
+        text_formatted += QLatin1String( "&nbsp; " ); // space added for emoticons recognize
       else
         text_formatted += QLatin1Char( ' ' );
     }

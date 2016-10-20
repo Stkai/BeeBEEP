@@ -62,7 +62,6 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
   connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
   bar->addWidget( mp_cbLogToFile );
-
   bar->addSeparator();
 
   /* filter by keywords */
@@ -83,13 +82,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
   /* search button */
   act = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find" ), this, SLOT( findTextInLog() ) );
   act->setStatusTip( tr( "Find keywords in the log" ) );
-
-  /* status label */
-  mp_lStatus = new QLabel( bar );
-  mp_lStatus->setObjectName( "GuiLabelStatusTextLog" );
-  mp_lStatus->setAlignment( Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter );
-  mp_lStatus->setText( QString( "" ) );
-  bar->addWidget( mp_lStatus );
+  bar->addSeparator();
 
   /* flags */
   mp_cbCaseSensitive = new QCheckBox( bar );
@@ -173,8 +166,6 @@ void GuiLog::saveLogAs()
 
 void GuiLog::findTextInLog()
 {
-  if( !mp_lStatus->text().isEmpty() )
-    mp_lStatus->setText( "" );
   QString txt = mp_leFilter->text().simplified();
   if( txt.isEmpty() )
     return;
@@ -190,7 +181,7 @@ void GuiLog::findTextInLog()
     mp_teLog->moveCursor( QTextCursor::Start );
     if( !mp_teLog->find( txt ) )
     {
-      mp_lStatus->setText( tr( "%1 not found" ).arg( txt ) );
+      QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found" ).arg( txt ) + QString( "." ), tr( "Ok" ) );
       return;
     }
   }

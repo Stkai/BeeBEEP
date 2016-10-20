@@ -101,7 +101,12 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
     }
     else
     {
-      insertHtml( QString( "&nbsp;" ) + e.toHtml( Settings::instance().emoticonSizeInEdit() ) );
+      QString plain_text = toPlainText();
+      if( !plain_text.isEmpty() && plain_text.at( plain_text.size() - 1 ).isSpace() )
+        insertHtml( e.toHtml( Settings::instance().emoticonSizeInEdit() ) );
+      else
+        insertHtml( QString( "&nbsp;" ) + e.toHtml( Settings::instance().emoticonSizeInEdit() ) );
+
       if( !m_emoticonsAdded.contains( e ) )
         m_emoticonsAdded.append( e );
     }
