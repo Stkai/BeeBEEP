@@ -2787,16 +2787,17 @@ void GuiMain::setGameInPauseMode()
 void GuiMain::openUrl( const QUrl& file_url )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Opening url:" << file_url.toString();
+  qDebug() << "Opening url (not encoded):" << file_url.toString();
 #endif
+
   if( file_url.scheme() == QLatin1String( "beeshowfileinfolder" ) )
   {
     QUrl adj_file_url = file_url;
     adj_file_url.setScheme( QLatin1String( "file" ) );
-    if( !Bee::showFileInGraphicalShell( adj_file_url.toLocalFile() ) )
+    if( !Bee::showFileInGraphicalShell( Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() ) ) )
     {
       QFileInfo file_info_url( adj_file_url.toLocalFile() );
-      adj_file_url = QUrl::fromLocalFile( file_info_url.absoluteDir().absolutePath() );
+      adj_file_url = QUrl::fromLocalFile( Bee::convertToNativeFolderSeparator( file_info_url.absoluteDir().absolutePath() ) );
       openUrl( adj_file_url );
     }
   }
@@ -2806,7 +2807,7 @@ void GuiMain::openUrl( const QUrl& file_url )
   else if( file_url.scheme() == QLatin1String( "file" ) )
 #endif
   {
-    QString file_path = file_url.toLocalFile();
+    QString file_path = Bee::convertToNativeFolderSeparator( file_url.toLocalFile() );
     if( file_path.isEmpty() )
     {
       qWarning() << "Unable to open an empty file path";
@@ -2824,8 +2825,8 @@ void GuiMain::openUrl( const QUrl& file_url )
                              tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
       return;
 
-    qDebug() << "Open file:" << file_url.toString();
-    if( !QDesktopServices::openUrl( file_url ) )
+    qDebug() << "Open file:" << file_path;
+    if( !QDesktopServices::openUrl( QUrl::fromLocalFile( file_path ) ) )
       QMessageBox::information( this, Settings::instance().programName(),
                               tr( "Unable to open %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
   }

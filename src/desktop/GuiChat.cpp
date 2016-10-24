@@ -323,12 +323,7 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
   QString s = "";
 
   if( !messageCanBeShowed( cm ) )
-  {
-//#ifdef BEEBEEP_DEBUG
-//    qDebug() << "This chat message is filtered out:" << qPrintable( Bee::removeHtmlTags( cm.message() ) );
-//#endif
     return s;
-  }
 
   if( cm.isFromSystem() )
   {
@@ -434,13 +429,10 @@ void GuiChat::setChatUsers()
         else if( u.isStatusConnected() )
           sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
         else
-          sl.append( QString( "%1 [%2]" ).arg( u.name() ).arg( tr( "offline" ) ) );
+          sl.append( QString( "%1" ).arg( u.name() ) );
 
-        if( u.vCard().photo().isNull() )
-          mp_pbProfile->setIcon( Avatar::create( u.name(), u.color(), QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ) ) );
-        else
-          mp_pbProfile->setIcon( u.vCard().photo() );
-
+        QPixmap user_avatar = Bee::avatarForUser( u, QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ), Settings::instance().showUserPhoto() );
+        mp_pbProfile->setIcon( user_avatar );
         connect( mp_pbProfile, SIGNAL( clicked() ), act, SIGNAL( triggered() ) );
         mp_pbProfile->setToolTip( tr( "Show profile" ) );
       }

@@ -304,7 +304,7 @@
     </message>
     <message>
         <source>%1 %2 has shared %3 files.</source>
-        <translation>%1 %2 ha condiviso in rete %3 file.</translation>
+        <translation type="obsolete">%1 %2 ha condiviso in rete %3 file.</translation>
     </message>
     <message>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
@@ -528,7 +528,7 @@
     </message>
     <message>
         <source>%1 %2 has not shared files.</source>
-        <translation>%1 %2 non ha condiviso nessun file.</translation>
+        <translation type="obsolete">%1 %2 non ha condiviso nessun file.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration Networking (multicast DNS) started: %3</source>
@@ -948,7 +948,7 @@
     </message>
     <message>
         <source>offline</source>
-        <translation>non in linea</translation>
+        <translation type="obsolete">non in linea</translation>
     </message>
     <message>
         <source>Emoticons</source>

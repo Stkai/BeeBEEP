@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Avatar.h"
 #include "BeeUtils.h"
 #include "ChatMessage.h"
 #include "PluginManager.h"
@@ -598,4 +599,162 @@ bool Bee::folderIsWriteable( const QString& folder_path )
   }
   else
     return false;
+}
+
+/*
+QIcon GuiUserItem::selectUserIcon( int user_status, bool use_big_icon ) const
+{
+  return use_big_icon ? QIcon( Bee::menuUserStatusIconFileName( user_status ) ) : Bee::userStatusIcon( user_status );
+}
+
+bool GuiUserItem::updateUser()
+{
+  return updateUser( UserManager::instance().findUser( userId() ) );
+}
+
+bool GuiUserItem::updateUser( const User& u )
+{
+  if( u.id() != userId() )
+    return false;
+
+  if( !u.isValid() )
+  {
+    setData( 0, GuiUserItem::Priority, 100000000 );
+    return false;
+  }
+
+  setData( 0, UserName, u.isLocal() ? QString( " all lan users " ) : u.name() );
+  setData( 0, Status, u.status() );
+
+  int unread_messages = unreadMessages();
+
+  QString s = u.isLocal() ? QObject::tr( "All Lan Users" ) : (u.status() != User::Offline ? u.name() : u.path());
+
+  int user_priority = 1;
+
+  if( unread_messages > 0 )
+    s.prepend( QString( "(%1) " ).arg( unread_messages ) );
+
+  s += " ";
+  setText( 0, s );
+
+  if( !u.isLocal() )
+  {
+    if( Settings::instance().showUserPhoto() )
+    {
+      QPixmap user_avatar;
+      QSize icon_size = Settings::instance().avatarIconSize();
+      bool paint_status_box = false;
+      bool default_avatar_used = false;
+
+      if( u.vCard().photo().isNull() )
+      {
+        default_avatar_used = true;
+        Avatar av;
+        av.setName( u.name() );
+        if( u.isStatusConnected() )
+          av.setColor( u.color() );
+        else
+          av.setColor( QColor( Qt::gray ).name() );
+        av.setSize( icon_size );
+        if( av.create() )
+        {
+          user_avatar = av.pixmap();
+          if( u.isStatusConnected() )
+            paint_status_box = true;
+        }
+        else
+          user_avatar = selectUserIcon( u.status(), true ).pixmap( icon_size );
+      }
+      else
+      {
+        user_avatar = u.vCard().photo();
+        if( !u.isStatusConnected() )
+          user_avatar = Bee::convertToGrayScale( user_avatar );
+        else
+          paint_status_box = true;
+      }
+
+      if( paint_status_box && !Settings::instance().showUserStatusBackgroundColor() )
+      {
+        QPixmap pix = Bee::addStatusBoxToAvatar( user_avatar, u.status(), default_avatar_used );
+        setIcon( 0, pix );
+      }
+      else
+        setIcon( 0, user_avatar );
+ */
+
+static int GetBoxSize( int pix_size )
+{
+  int box_size = pix_size > 10 ? pix_size / 10 : 1;
+  if( box_size % 2 > 7 )
+    box_size++;
+  box_size = qMax( 1, box_size );
+  return box_size;
+}
+
+QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_available_user_image )
+{
+  QPixmap user_avatar;
+  bool default_avatar_used = false;
+  if( u.vCard().photo().isNull() || !use_available_user_image )
+  {
+    default_avatar_used = true;
+    Avatar av;
+    av.setName( u.name() );
+    if( u.isStatusConnected() )
+      av.setColor( u.color() );
+    else
+      av.setColor( QColor( Qt::gray ).name() );
+    av.setSize( avatar_size );
+    if( !av.create() )
+    {
+      user_avatar = QIcon( Bee::menuUserStatusIconFileName( u.status() ) ).pixmap( avatar_size );
+      return user_avatar;
+    }
+    else
+      user_avatar = av.pixmap();
+  }
+  else
+  {
+    user_avatar = u.vCard().photo().scaled( avatar_size );
+    if( !u.isStatusConnected() )
+    {
+      user_avatar = convertToGrayScale(user_avatar );
+      return user_avatar;
+    }
+  }
+
+  int pix_height = user_avatar.height();
+  int pix_width = user_avatar.width();
+  int box_height = GetBoxSize( pix_height );
+  int box_width = GetBoxSize( pix_width );
+  int box_start_height = qMax( 1, box_height / 2 );
+  int box_start_width = qMax( 1, box_width / 2 );
+
+  QPixmap pix( pix_width, pix_height );
+  QPainter p( &pix );
+  if( !default_avatar_used )
+  {
+    pix.fill( Bee::userStatusColor( u.status() ) );
+    p.drawPixmap( box_start_width, box_start_height, pix_width - box_width, pix_height - box_height, user_avatar.scaled( pix_width - box_width, pix_height - box_height ) );
+  }
+  else
+  {
+    p.drawPixmap( 0, 0, pix_width, pix_height, user_avatar );
+    p.setPen( Bee::userStatusColor( u.status() ) );
+    for( int i = 0; i < box_height; i++ )
+    {
+      p.drawLine( 0, i, pix_width, i );
+      p.drawLine( 0, pix_height-box_height+i, pix_width, pix_height-box_height+i );
+    }
+
+    for( int i = 0; i < box_width; i++ )
+    {
+      p.drawLine( i, 0, i, pix_height );
+      p.drawLine( pix_width-box_width+i, 0, pix_width-box_width+i, pix_height );
+    }
+  }
+
+  return pix;
 }

@@ -25,6 +25,7 @@
 #define BEEBEEP_GUIUTILS_H
 
 #include "Config.h"
+class User;
 
 
 namespace Bee
@@ -71,6 +72,7 @@ namespace Bee
   bool setLastModifiedToFile( const QString&, const QDateTime& );
   bool showFileInGraphicalShell( const QString& );
   bool folderIsWriteable( const QString& );
+  QPixmap avatarForUser( const User&, const QSize&, bool use_available_user_image );
 
 }
 

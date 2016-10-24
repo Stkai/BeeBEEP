@@ -58,7 +58,6 @@ public:
 
 private:
   QIcon selectUserIcon( int, bool ) const;
-  QPixmap avatarWithStatusBox( const QPixmap&, int, bool ) const;
   void showUserStatus();
 
   QIcon m_defaultIcon;

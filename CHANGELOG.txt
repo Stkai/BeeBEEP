@@ -15,6 +15,7 @@ BeeBEEP 3.0.8
 - A "new message notification" is shown also when a new file is received from a user
 - Fixed a bug in emoticon parsing
 - Hive protocol optimized
+- Fixed a bug in opening url with diacritic characters in path
 
 BeeBEEP 3.0.7
 - ShareBox: new feature in beta (can share files like dropbox with all users connected)

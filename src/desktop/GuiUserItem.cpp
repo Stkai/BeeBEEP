@@ -127,53 +127,8 @@ bool GuiUserItem::updateUser( const User& u )
 
   if( !u.isLocal() )
   {
-    if( Settings::instance().showUserPhoto() )
-    {
-      QPixmap user_avatar;
-      QSize icon_size = Settings::instance().avatarIconSize();
-      bool paint_status_box = false;
-      bool default_avatar_used = false;
-
-      if( u.vCard().photo().isNull() )
-      {
-        default_avatar_used = true;
-        Avatar av;
-        av.setName( u.name() );
-        if( u.isStatusConnected() )
-          av.setColor( u.color() );
-        else
-          av.setColor( QColor( Qt::gray ).name() );
-        av.setSize( icon_size );
-        if( av.create() )
-        {
-          user_avatar = av.pixmap();
-          if( u.isStatusConnected() )
-            paint_status_box = true;
-        }
-        else
-          user_avatar = selectUserIcon( u.status(), true ).pixmap( icon_size );
-      }
-      else
-      {
-        user_avatar = u.vCard().photo();
-        if( !u.isStatusConnected() )
-          user_avatar = Bee::convertToGrayScale( user_avatar );
-        else
-          paint_status_box = true;
-      }
-
-      if( paint_status_box && !Settings::instance().showUserStatusBackgroundColor() )
-      {
-        QPixmap pix = avatarWithStatusBox( user_avatar, u.status(), default_avatar_used );
-        setIcon( 0, pix );
-      }
-      else
-        setIcon( 0, user_avatar );
-
-    }
-    else
-      setIcon( 0, selectUserIcon( u.status(), false ) );
-
+    QPixmap user_avatar = Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() );
+    setIcon( 0, user_avatar );
   }
   else
     setIcon( 0, m_defaultIcon );
@@ -254,53 +209,6 @@ void GuiUserItem::showUserStatus()
     setTextColor( 0, Bee::defaultTextBrush().color() );
 }
 
-static int GetBoxSize( int pix_size )
-{
-  int box_size = pix_size > 10 ? pix_size / 10 : 1;
-  if( box_size % 2 > 7 )
-    box_size++;
-  box_size = qMax( 1, box_size );
-  return box_size;
-}
-
-QPixmap GuiUserItem::avatarWithStatusBox( const QPixmap& user_avatar, int user_status, bool default_avatar_used ) const
-{
-  int pix_height = user_avatar.height();
-  int pix_width = user_avatar.width();
-  int box_height = GetBoxSize( pix_height );
-  int box_width = GetBoxSize( pix_width );
-  int box_start_height = qMax( 1, box_height / 2 );
-  int box_start_width = qMax( 1, box_width / 2 );
-
-//#ifdef BEEBEEP_DEBUG
-//  qDebug() << "Avatar size:" << pix_width << "x" << pix_height << "-> Box size:" << box_width << "x" << box_height << ":" << box_start_width << box_start_height;
-//#endif
-
-  QPixmap pix( pix_width, pix_height );
-  QPainter p( &pix );
-  if( !default_avatar_used )
-  {
-    pix.fill( Bee::userStatusColor( user_status ) );
-    p.drawPixmap( box_start_width, box_start_height, pix_width - box_width, pix_height - box_height, user_avatar.scaled( pix_width - box_width, pix_height - box_height ) );
-  }
-  else
-  {
-    p.drawPixmap( 0, 0, pix_width, pix_height, user_avatar );
-    p.setPen( Bee::userStatusColor( user_status ) );
-    for( int i = 0; i < box_height; i++ )
-    {
-      p.drawLine( 0, i, pix_width, i );
-      p.drawLine( 0, pix_height-box_height+i, pix_width, pix_height-box_height+i );
-    }
-
-    for( int i = 0; i < box_width; i++ )
-    {
-      p.drawLine( i, 0, i, pix_height );
-      p.drawLine( pix_width-box_width+i, 0, pix_width-box_width+i, pix_height );
-    }
-  }
-  return pix;
-}
 
 void GuiUserItem::onTickEvent( int ticks )
 {

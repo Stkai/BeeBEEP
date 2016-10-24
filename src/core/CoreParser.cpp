@@ -36,9 +36,6 @@
 
 void Core::parseMessage( VNumber user_id, const Message& m )
 {
-//#ifdef BEEBEEP_DEBUG
-//  qDebug() << "Parsing message received from user" << user_id;
-//#endif
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
@@ -306,23 +303,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::List ) )
   {
-    QString icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
-    QString msg;
-
     QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.networkAddress().hostAddress() );
-
-    if( file_info_list.isEmpty() )
-    {
-      msg = tr( "%1 %2 has not shared files." ).arg( icon_html ).arg( u.name() );
-      qDebug() << qPrintable( u.path() ) << "has not shared files";
-    }
-    else
-    {
-      msg = tr( "%1 %2 has shared %3 files." ).arg( icon_html ).arg( u.name() ).arg( file_info_list.size() );
-      qDebug() << qPrintable( u.path() ) << "has shared" << file_info_list.size() << "files";
-    }
-
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), msg, DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
 
     FileShare::instance().addToNetwork( u.id(), file_info_list );
 
@@ -332,7 +313,9 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
   {
     if( !Settings::instance().fileTransferIsEnabled() )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "File transfer is disabled. Ignoring request from user" << qPrintable( u.path() );
+#endif
       return;
     }
 
