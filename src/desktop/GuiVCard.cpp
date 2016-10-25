@@ -65,10 +65,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   else
     mp_lEmail->setText( "" );
 
-  if( !u.vCard().photo().isNull() )
-    mp_lPhoto->setPixmap( u.vCard().photo() );
-  else
-    mp_lPhoto->setPixmap( Avatar::create( u.name(), u.color(), QSize( 96, 96 ) ) );
+  mp_lPhoto->setPixmap( Bee::avatarForUser( u, QSize( 96, 96 ), true ) );
 
   if( !u.vCard().info().isEmpty() )
     mp_lPhoto->setToolTip( u.vCard().info() );
@@ -80,7 +77,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   else
     mp_lPhone->setText( "" );
 
-  QString user_version = "";
+  QString user_version;
   if( u.version().isEmpty() )
     user_version = tr( "unknown" );
   else if( u.version() < Settings::instance().version( false, false ) )
@@ -89,15 +86,13 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     user_version = tr( "new %1" ).arg( u.version() );
   else if( u.qtVersion() != Settings::instance().localUser().qtVersion() )
     user_version = QString( "v%1qt%2" ).arg( u.version(), u.qtVersion() );
-
-  int user_current_status = core_is_connected ? u.status() : User::Offline;
-
-  QString user_status = QString( "<img src='%1' width=16 height=16 border=0 /> <b>%2</b>" ).arg( Bee::userStatusIconFileName( user_current_status ), Bee::userStatusToString( user_current_status ) );
-
-  if( user_version.isEmpty() )
-    mp_lStatus->setText( user_status );
   else
-    mp_lStatus->setText( QString( "%1&nbsp;&nbsp;&nbsp;(%2)" ).arg( user_status ).arg( user_version ) );
+    user_version = "";
+
+  if( !user_version.isEmpty() )
+    mp_lStatus->setText( QString( " (%1) " ).arg( user_version ) );
+  else
+    mp_lStatus->setText( user_version );
 
   if( u.isFavorite() )
   {
@@ -119,7 +114,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   else
   {
     mp_pbChat->setToolTip( tr( "Open chat" ) );
-    if( Settings::instance().fileTransferIsEnabled() && u.isStatusConnected() )
+    if( Settings::instance().fileTransferIsEnabled() && u.isStatusConnected() && core_is_connected )
       mp_pbFile->show();
     else
       mp_pbFile->hide();

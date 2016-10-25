@@ -139,9 +139,7 @@ Settings::Settings()
 
   m_chatMessageFilter = QBitArray( (int)ChatMessage::NumTypes );
   for( int i = 0; i < ChatMessage::NumTypes; i++ )
-  {
-    m_chatMessageFilter.setBit( i, i == ChatMessage::UserStatus );
-  }
+    m_chatMessageFilter.setBit( i, false );
 
 #ifdef Q_OS_WIN
   m_usePreviewFileDialog = true;

@@ -207,7 +207,6 @@ bool Core::start()
     Settings::instance().setLocalUser( u );
   }
 
-  showUserStatusChanged( Settings::instance().localUser() );
   showUserVCardChanged( Settings::instance().localUser() );
   emit userChanged( Settings::instance().localUser() );
 

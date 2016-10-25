@@ -107,7 +107,6 @@ void Core::parseUserMessage( const User& u, const Message& m )
       qDebug() << "User" << qPrintable( user_with_new_status.path() ) << "changes status to" << user_with_new_status.status() << user_with_new_status.statusDescription();
 #endif
       UserManager::instance().setUser( user_with_new_status );
-      showUserStatusChanged( user_with_new_status );
       emit userChanged( user_with_new_status );
     }
   }

@@ -517,6 +517,7 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
 
   int num_lines = c.messages().size();
   bool max_lines_message_written = false;
+  m_lastMessageUserId = 0;
 
   foreach( ChatMessage cm, c.messages() )
   {

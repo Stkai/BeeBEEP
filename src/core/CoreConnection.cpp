@@ -183,7 +183,6 @@ void Core::closeConnection( Connection *c )
       u.setStatus( User::Offline );
       UserManager::instance().setUser( u );
 
-      showUserStatusChanged( u );
       emit userChanged( u );
       emit userConnectionStatusChanged( u );
 
@@ -333,7 +332,6 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   if( user_path_changed )
     ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 
-  showUserStatusChanged( u );
   emit userChanged( u );
   emit userConnectionStatusChanged( u );
 

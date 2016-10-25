@@ -217,7 +217,6 @@ protected:
 #endif
 
   /* CoreUser */
-  void showUserStatusChanged( const User& );
   void showUserNameChanged( const User&, const QString& );
   void showUserVCardChanged( const User& );
   void sendLocalUserStatus();

@@ -38,7 +38,6 @@ void Core::setLocalUserStatus( int new_status )
   User u = Settings::instance().localUser();
   u.setStatus( new_status );
   Settings::instance().setLocalUser( u );
-  showUserStatusChanged( u );
   emit userChanged( u );
   if( isConnected() )
     sendLocalUserStatus();
@@ -71,27 +70,9 @@ void Core::setLocalUserStatusDescription( int user_status, const QString& new_st
 
   if( show_status )
   {
-    showUserStatusChanged( u );
     if( isConnected() )
       sendLocalUserStatus();
   }
-}
-
-void Core::showUserStatusChanged( const User& u )
-{
-  if( !isConnected() )
-    return;
-
-  QString sHtmlMsg = Bee::iconToHtml( Bee::userStatusIconFileName( u.status() ), "*S*" ) + QString( " " );
-  if( u.isLocal() )
-    sHtmlMsg += tr( "You are" );
-  else
-    sHtmlMsg += tr( "%1 is" ).arg( u.name() );
-
-  sHtmlMsg += QString( " %1%2" ).arg( Bee::userStatusToString( u.status() ) )
-                            .arg( (u.statusDescription().isEmpty() || u.status() == User::Offline) ? "" : QString( ": %1").arg( u.statusDescription() ) );
-
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );
 }
 
 void Core::showUserNameChanged( const User& u, const QString& old_user_name )
