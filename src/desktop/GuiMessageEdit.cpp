@@ -117,6 +117,15 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
   m_messageChanged = true;
 }
 
+void GuiMessageEdit::addText( const QString& txt )
+{
+  if( !isEnabled() || txt.isEmpty() )
+    return;
+
+  insertHtml( txt );
+  m_messageChanged = true;
+}
+
 void GuiMessageEdit::clearMessage()
 {
   m_messageChanged = true;

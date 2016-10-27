@@ -41,6 +41,7 @@ class GuiFloatingChat;
 class GuiGroupList;
 class GuiLog;
 class GuiHome;
+class GuiPresetMessageList;
 class GuiSavedChat;
 class GuiSavedChatList;
 class GuiScreenShot;
@@ -152,6 +153,7 @@ private slots:
   void showAddUser();
   void showChatSettingsMenu();
   void emoticonMenuVisibilityChanged( bool );
+  void presetMessageListMenuVisibilityChanged( bool );
   void sendBroadcastMessage();
   void enableBroadcastAction();
   void checkUserSelected( VNumber );
@@ -178,6 +180,7 @@ private slots:
   void onChatReadByUser( VNumber chat_id, VNumber user_id );
   void saveGeometryAndState();
   void toggleVisibilityEmoticonPanel();
+  void toggleVisibilityPresetMessagesPanel();
   void onChangeSettingBeepOnNewMessage( QAction* );
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );
@@ -260,6 +263,7 @@ private:
   GuiScreenShot* mp_screenShot;
   GuiHome* mp_home;
   GuiEmoticons* mp_emoticonsWidget;
+  GuiPresetMessageList* mp_presetMessageListWidget;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -337,6 +341,7 @@ private:
   QDockWidget* mp_dockChatList;
   QDockWidget* mp_dockFileTransfers;
   QDockWidget* mp_dockEmoticons;
+  QDockWidget* mp_dockPresetMessageList;
 
   GuiSystemTray* mp_trayIcon;
 

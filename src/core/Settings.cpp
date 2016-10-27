@@ -817,6 +817,7 @@ void Settings::load()
   else
     m_userStatusList = QStringList();
   m_maxUserStatusDescriptionInList = sets->value( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
+  m_presetMessages = sets->value( "PresetMessages", QMap<QString,QVariant>() ).toMap();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -906,6 +907,7 @@ void Settings::load()
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
+  m_showPresetMessages = sets->value( "ShowPresetMessages", false ).toBool();
   m_emoticonSizeInEdit = qMax( m_emoticonSizeInEdit, (int)sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
   m_emoticonSizeInChat = qMax( m_emoticonSizeInChat, (int)sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
   m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
@@ -1126,6 +1128,7 @@ void Settings::save()
     sets->remove( "StatusList" );
 
   sets->setValue( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList );
+  sets->setValue( "PresetMessages", m_presetMessages );
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -1180,6 +1183,7 @@ void Settings::save()
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
   sets->setValue( "ResetGeometryAtStartup", m_resetGeometryAtStartup );
   sets->setValue( "ShowEmoticonMenu", m_showEmoticonMenu );
+  sets->setValue( "ShowPresetMessages", m_showPresetMessages );
   sets->setValue( "EmoticonSizeInEdit", m_emoticonSizeInEdit );
   sets->setValue( "EmoticonSizeInChat", m_emoticonSizeInChat );
   sets->setValue( "EmoticonSizeInMenu", m_emoticonSizeInMenu );

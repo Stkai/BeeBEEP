@@ -167,6 +167,7 @@ TextSizeInChatMessagePreviewOnTray=[integer] (default=40) [3.0.7]
 ShowFileTransferCompletedOnTray=[true/false] (default=true) [3.0.7]
 UserSortingMode=[integer] it defines the mode of users sorting (0=default) [3.0.8]
 SortUsersAscending=[true/false] if not true the users are sorting in descending mode [3.0.8]
+ShowPresetMessages=[true/false] if true the preset messages list is showed [3.0.8]
 
 [Tools]
 LogToFile=[true/false] enable file logging

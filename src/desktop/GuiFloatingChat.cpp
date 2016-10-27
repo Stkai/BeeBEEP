@@ -72,6 +72,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   m_prevActivatedState = true;
 
   connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
+  connect( mp_chat, SIGNAL( toggleVisibilityPresetMessagesPanelRequest() ), this, SLOT( toggleVisibilityPresetMessagesPanel() ) );
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
@@ -287,4 +288,12 @@ void GuiFloatingChat::toggleVisibilityEmoticonPanel()
     mp_dockEmoticons->hide();
   else
     mp_dockEmoticons->show();
+}
+
+void GuiFloatingChat::toggleVisibilityPresetMessagesPanel()
+{
+  if( mp_dockPresetMessageList->isVisible() )
+    mp_dockPresetMessageList->hide();
+  else
+    mp_dockPresetMessageList->show();
 }

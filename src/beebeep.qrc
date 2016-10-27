@@ -146,5 +146,8 @@
         <file>images/sharebox.png</file>
         <file>images/upload-box.png</file>
         <file>images/CopyMastro.png</file>
+        <file>images/preset-message-remove.png</file>
+        <file>images/preset-message.png</file>
+        <file>images/preset-message-edit.png</file>
     </qresource>
 </RCC>

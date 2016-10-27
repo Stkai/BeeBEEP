@@ -693,6 +693,11 @@ void GuiChat::addEmoticon( const Emoticon& e )
   ensureFocusInChat();
 }
 
+void GuiChat::addText( const QString& txt )
+{
+  mp_teMessage->addText( txt );
+}
+
 void GuiChat::saveChat()
 {
   QString file_name = FileDialog::getSaveFileName( this,

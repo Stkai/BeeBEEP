@@ -41,6 +41,7 @@
 #include "GuiLanguage.h"
 #include "GuiLog.h"
 #include "GuiPluginManager.h"
+#include "GuiPresetMessageList.h"
 #include "GuiSavedChat.h"
 #include "GuiSavedChatList.h"
 #include "GuiScreenShot.h"
@@ -139,6 +140,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   setupChatConnections( mp_chat );
   connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
+  connect( mp_chat, SIGNAL( toggleVisibilityPresetMessagesPanelRequest() ), this, SLOT( toggleVisibilityPresetMessagesPanel() ) );
 
   connect( mp_savedChat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
@@ -239,6 +241,14 @@ void GuiMain::toggleVisibilityEmoticonPanel()
     mp_dockEmoticons->hide();
   else
     mp_dockEmoticons->show();
+}
+
+void GuiMain::toggleVisibilityPresetMessagesPanel()
+{
+  if( mp_dockPresetMessageList->isVisible() )
+    mp_dockPresetMessageList->hide();
+  else
+    mp_dockPresetMessageList->show();
 }
 
 void GuiMain::applyFlagStaysOnTop()
@@ -410,6 +420,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
     mp_dockFileTransfers->hide();
   if( mp_dockEmoticons->isFloating() && mp_dockEmoticons->isVisible() )
     mp_dockEmoticons->hide();
+  if( mp_dockPresetMessageList->isFloating() && mp_dockPresetMessageList->isVisible() )
+    mp_dockPresetMessageList->hide();
 
   // maybe timer is active
   mp_logView->stopCheckingLog();
@@ -555,11 +567,13 @@ void GuiMain::checkViewActions()
     mp_chat->updateActions( is_connected, connected_users );
     checkChatToolbar();
     mp_dockEmoticons->setVisible( Settings::instance().showEmoticonMenu() );
+    mp_dockPresetMessageList->setVisible( Settings::instance().showPresetMessages() );
   }
   else
   {
     mp_barChat->hide();
     mp_dockEmoticons->hide();
+    mp_dockPresetMessageList->hide();
   }
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork )
@@ -1286,24 +1300,38 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
 
+  mp_dockPresetMessageList = new QDockWidget( tr( "Preset messages" ), this );
+  mp_dockPresetMessageList->setObjectName( "GuiDockPresetMessageList" );
+  mp_presetMessageListWidget = new GuiPresetMessageList( this );
+  mp_presetMessageListWidget->loadFromSettings();
+  connect( mp_presetMessageListWidget, SIGNAL( presetMessageSelected( const QString& ) ), mp_chat, SLOT( addText( const QString& ) ) );
+  mp_dockPresetMessageList->setWidget( mp_presetMessageListWidget );
+  mp_dockPresetMessageList->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::LeftDockWidgetArea, mp_dockPresetMessageList );
+  QAction* actViewPresetMessageList = mp_dockPresetMessageList->toggleViewAction();
+  actViewPresetMessageList->setIcon( QIcon( ":/images/preset-message.png" ) );
+  actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
+   actViewPresetMessageList->setData( 54 );
+  connect( mp_dockPresetMessageList, SIGNAL( visibilityChanged( bool ) ), this, SLOT( presetMessageListMenuVisibilityChanged( bool ) ) );
+  connect( actViewPresetMessageList, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
+  mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
+
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
-
   mp_emoticonsWidget = new GuiEmoticons( this );
   updateEmoticons();
   connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
   mp_dockEmoticons->setWidget( mp_emoticonsWidget );
-
   mp_dockEmoticons->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::LeftDockWidgetArea, mp_dockEmoticons );
-  QAction* mp_actViewEmoticons = mp_dockEmoticons->toggleViewAction();
-  mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
-  mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
-  mp_actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
-  mp_actViewEmoticons->setData( 28 );
+  QAction* actViewEmoticons = mp_dockEmoticons->toggleViewAction();
+  actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
+  actViewEmoticons->setToolTip( tr( "Show the emoticon panel" ) );
+  actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
+  actViewEmoticons->setData( 28 );
   connect( mp_dockEmoticons, SIGNAL( visibilityChanged( bool ) ), this, SLOT( emoticonMenuVisibilityChanged( bool ) ) );
-  connect( mp_actViewEmoticons, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
-  mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
+  connect( actViewEmoticons, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
+  mp_barChat->insertAction( mp_barChat->actions().first(), actViewEmoticons );
 
   if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() || Settings::instance().hideOtherPanels() )
   {
@@ -1311,6 +1339,7 @@ void GuiMain::createDockWindows()
     mp_dockSavedChatList->hide();
     mp_dockFileTransfers->hide();
     mp_dockEmoticons->hide();
+    mp_dockPresetMessageList->hide();
     if( Settings::instance().hideOtherPanels() )
       mp_dockChatList->hide();
   }
@@ -1324,6 +1353,15 @@ void GuiMain::emoticonMenuVisibilityChanged( bool is_visible )
   {
     if( !is_visible )
       Settings::instance().setShowEmoticonMenu( false );
+  }
+}
+
+void GuiMain::presetMessageListMenuVisibilityChanged( bool is_visible )
+{
+  if( mp_stackedWidget->currentWidget() == mp_chat )
+  {
+    if( !is_visible )
+      Settings::instance().setShowPresetMessages( false );
   }
 }
 
@@ -1750,6 +1788,9 @@ void GuiMain::settingsChanged()
   case 53:
     Settings::instance().setUserSortingMode( 3 );
     refresh_users = true;
+    break;
+  case 54:
+    Settings::instance().setShowPresetMessages( act->isChecked() );
     break;
   case 99:
     break;
@@ -3729,7 +3770,6 @@ void GuiMain::detachChat( VNumber chat_id )
     raiseHomeView();
   }
 
-  fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
   setupChatConnections( fl_chat->guiChat() );
   connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );
   connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );

@@ -74,11 +74,13 @@ signals:
   void detachChatRequest( VNumber );
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
+  void toggleVisibilityPresetMessagesPanelRequest();
 
 public slots:
   void appendChatMessage( VNumber, const ChatMessage& );
   void addEmoticon( const Emoticon& );
   void ensureFocusInChat();
+  void addText( const QString& );
 
 protected:
   void enableDetachButtons();

@@ -26,6 +26,8 @@
 
 #include "GuiChat.h"
 class GuiEmoticons;
+class GuiPresetMessageList;
+
 
 class GuiFloatingChat : public QMainWindow
 {
@@ -62,12 +64,15 @@ private slots:
   void onApplicationFocusChanged( QWidget*, QWidget* );
   void saveGeometryAndState();
   void toggleVisibilityEmoticonPanel();
+  void toggleVisibilityPresetMessagesPanel();
 
 private:
   GuiChat* mp_chat;
   QToolBar* mp_barChat;
   QDockWidget* mp_dockEmoticons;
+  QDockWidget* mp_dockPresetMessageList;
   GuiEmoticons* mp_emoticonsWidget;
+  GuiPresetMessageList* mp_presetMessageListWidget;
 
   bool m_chatIsVisible;
   bool m_prevActivatedState;

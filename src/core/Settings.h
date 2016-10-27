@@ -215,6 +215,8 @@ public:
   inline const QByteArray& chatSplitterState() const;
   inline void setShowEmoticonMenu( bool );
   inline bool showEmoticonMenu() const;
+  inline void setShowPresetMessages( bool );
+  inline bool showPresetMessages() const;
   inline bool isNotificationDisabledForGroup( const QString& ) const;
   void setNotificationEnabledForGroup( const QString&, bool );
   inline void setUseNativeEmoticons( bool );
@@ -408,6 +410,10 @@ public:
   inline void setShareBoxPath( const QString& );
   inline const QString& shareBoxPath() const;
 
+  inline void setPresetMessages( const QMap<QString,QVariant>& );
+  inline const QMap<QString,QVariant>& presetMessages() const;
+
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -543,6 +549,7 @@ private:
   bool m_chatClearAllReadMessages;
   int m_userSortingMode;  //  0 priority( default), 1 by name, 2 by status, 3 by messages
   bool m_sortUsersAscending;
+  bool m_showPresetMessages;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -652,6 +659,8 @@ private:
 
   bool m_useShareBox;
   QString m_shareBoxPath;
+
+  QMap<QString,QVariant> m_presetMessages;
 
 };
 
@@ -931,5 +940,9 @@ inline void Settings::setUserSortingMode( int new_value ) { m_userSortingMode = 
 inline int Settings::userSortingMode() const { return m_userSortingMode; }
 inline void Settings::setSortUsersAscending( bool new_value ) { m_sortUsersAscending = new_value; }
 inline bool Settings::sortUsersAscending() const { return m_sortUsersAscending; }
+inline void Settings::setPresetMessages( const QMap<QString,QVariant>& new_value ) { m_presetMessages = new_value; }
+inline const QMap<QString,QVariant>& Settings::presetMessages() const { return m_presetMessages; }
+inline void Settings::setShowPresetMessages( bool new_value ) { m_showPresetMessages = new_value; }
+inline bool Settings::showPresetMessages() const { return m_showPresetMessages; }
 
 #endif // BEEBEEP_SETTINGS_H

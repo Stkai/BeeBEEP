@@ -39,6 +39,7 @@ public:
 
   void addEmoticon( const Emoticon& );
   void addPasted( const QMimeData* );
+  void addText( const QString& );
 
   QString message();
   void clearMessage();

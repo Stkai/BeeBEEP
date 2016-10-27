@@ -42,6 +42,9 @@ QSize GuiEmoticons::sizeHint() const
 
 void GuiEmoticons::initEmoticons( int current_index )
 {
+  if( Settings::instance().useNativeEmoticons() )
+    setFont( Settings::instance().chatFont() );
+
   mp_recent = new GuiEmoticonWidget( this );
   QList<Emoticon> emoticon_list = EmoticonManager::instance().recentEmoticons();
   while( emoticon_list.size() < Settings::instance().emoticonInRecentMenu() )
