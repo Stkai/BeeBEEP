@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>You are</source>
-        <translation>Il tuo stato è</translation>
+        <translation type="vanished">Il tuo stato è</translation>
     </message>
     <message>
         <source>is</source>
@@ -148,7 +148,7 @@
     </message>
     <message>
         <source>%1 is</source>
-        <translation>Lo stato di %1 è</translation>
+        <translation type="vanished">Lo stato di %1 è</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>%1 Welcome to the group %2.</source>
-        <translation>%1 Benvenuti nel gruppo %2.</translation>
+        <translation type="vanished">%1 Benvenuti nel gruppo %2.</translation>
     </message>
     <message>
         <source>%1 The group has a new name: %2.</source>
@@ -1497,6 +1497,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>offline</source>
         <translation>non in linea</translation>
+    </message>
+    <message>
+        <source>Preset messages</source>
+        <translation>Messaggi predefiniti</translation>
+    </message>
+    <message>
+        <source>Show the preset messages panel</source>
+        <translation>Mostra il pannello dei messaggi predefiniti</translation>
     </message>
 </context>
 <context>
@@ -3609,6 +3617,14 @@ il file %2 (%3)?</translation>
         <source>By unread messages</source>
         <translation>Sui messaggi non letti</translation>
     </message>
+    <message>
+        <source>Preset messages</source>
+        <translation>Messaggi predefiniti</translation>
+    </message>
+    <message>
+        <source>Show the preset messages panel</source>
+        <translation>Mostra il pannello dei messaggi predefiniti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3852,6 +3868,49 @@ il file %2 (%3)?</translation>
     <message>
         <source>Folder %1 not found.</source>
         <translation>La cartella %1 non è stata trovata.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiPresetMessageList</name>
+    <message>
+        <source>New</source>
+        <translation>Nuovo</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Modifica</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation>Rinomina</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Cancella</translation>
+    </message>
+    <message>
+        <source>Please insert your new preset message.</source>
+        <translation>Inserisci il tuo nuovo messaggio predefinito.</translation>
+    </message>
+    <message>
+        <source>Edit your preset message.</source>
+        <translation>Modifica il tuo messaggio predefinito.</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete this preset?</source>
+        <translation>Vuoi cancellare il messaggio predefinito selezionato?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+    <message>
+        <source>Edit the name of your preset message.</source>
+        <translation>Modifica il nome del tuo messaggio predefinito.</translation>
     </message>
 </context>
 <context>

@@ -696,6 +696,7 @@ void GuiChat::addEmoticon( const Emoticon& e )
 void GuiChat::addText( const QString& txt )
 {
   mp_teMessage->addText( txt );
+  ensureFocusInChat();
 }
 
 void GuiChat::saveChat()

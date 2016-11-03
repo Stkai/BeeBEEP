@@ -25,6 +25,7 @@
 #include "ChatManager.h"
 #include "GuiFloatingChat.h"
 #include "GuiEmoticons.h"
+#include "GuiPresetMessageList.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
 #include "UserManager.h"
@@ -49,14 +50,26 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_chat->setupToolBar( mp_barChat );
   mp_barChat->setVisible( Settings::instance().showChatToolbar() );
 
+  mp_barChat->insertSeparator( mp_barChat->actions().first() );
+  mp_dockPresetMessageList = new QDockWidget( tr( "Preset messages" ), this );
+  mp_dockPresetMessageList->setObjectName( "GuiDockPresetMessageList" );
+  mp_presetMessageListWidget = new GuiPresetMessageList( this );
+  mp_presetMessageListWidget->loadFromSettings();
+  connect( mp_presetMessageListWidget, SIGNAL( presetMessageSelected( const QString& ) ), mp_chat, SLOT( addText( const QString& ) ) );
+  mp_dockPresetMessageList->setWidget( mp_presetMessageListWidget );
+  mp_dockPresetMessageList->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::LeftDockWidgetArea, mp_dockPresetMessageList );
+  QAction* actViewPresetMessageList = mp_dockPresetMessageList->toggleViewAction();
+  actViewPresetMessageList->setIcon( QIcon( ":/images/preset-message.png" ) );
+  actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
+  mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
+
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
-
   mp_emoticonsWidget = new GuiEmoticons( this );
   updateEmoticon();
   connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
   mp_dockEmoticons->setWidget( mp_emoticonsWidget );
-
   mp_dockEmoticons->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::LeftDockWidgetArea, mp_dockEmoticons );
   QAction* mp_actViewEmoticons = mp_dockEmoticons->toggleViewAction();

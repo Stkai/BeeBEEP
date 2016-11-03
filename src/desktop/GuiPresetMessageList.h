@@ -43,12 +43,15 @@ signals:
 
 protected slots:
   void onDoubleClicked( QTreeWidgetItem*, int );
-  void onNew();
-  void onRename();
-  void onEdit();
-  void onRemove();
-  void saveInSettings();
   void showContextMenu( const QPoint& );
+
+protected:
+  void onNew();
+  void onRename( QTreeWidgetItem* );
+  void onEdit( QTreeWidgetItem* );
+  void onRemove( QTreeWidgetItem* );
+  void savePreset( const QString& preset_key, const QString& preset_value );
+  void removePreset( const QString& preset_key );
 
 private:
   QAction* mp_actNew;

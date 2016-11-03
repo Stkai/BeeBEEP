@@ -38,18 +38,13 @@ GuiPresetMessageList::GuiPresetMessageList( QWidget* parent )
 
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
+  setSelectionMode( QAbstractItemView::SingleSelection );
+  setAlternatingRowColors( true );
 
   mp_actNew = new QAction( QIcon( ":/images/preset-message.png" ), tr( "New" ), this );
-  connect( mp_actNew, SIGNAL( triggered() ), this, SLOT( onNew() ) );
-
   mp_actEdit = new QAction( QIcon( ":/images/preset-message-edit.png" ), tr( "Edit" ), this );
-  connect( mp_actEdit, SIGNAL( triggered() ), this, SLOT( onEdit() ) );
-
   mp_actRename = new QAction( QIcon( ":/images/preset-message-edit.png" ), tr( "Rename" ), this );
-  connect( mp_actRename, SIGNAL( triggered() ), this, SLOT( onRename() ) );
-
   mp_actRemove = new QAction( QIcon( ":/images/preset-message-remove.png" ), tr( "Delete" ), this );
-  connect( mp_actRemove, SIGNAL( triggered() ), this, SLOT( onRemove() ) );
 
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showContextMenu( const QPoint& ) ) );
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onDoubleClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
@@ -66,6 +61,12 @@ void GuiPresetMessageList::loadFromSettings()
     clear();
 
   QMap<QString,QVariant> preset_messages = Settings::instance().presetMessages();
+  if( preset_messages.isEmpty() )
+  {
+    setToolTip( tr( "Right click on panel to create a new preset message" ) );
+    return;
+  }
+
   QMap<QString,QVariant>::const_iterator it = preset_messages.constBegin();
   while( it != preset_messages.constEnd() )
   {
@@ -80,19 +81,6 @@ void GuiPresetMessageList::loadFromSettings()
     item->setTextAlignment( 0, Qt::AlignCenter );
     ++it;
   }
-}
-
-void GuiPresetMessageList::saveInSettings()
-{
-  QMap<QString,QVariant> preset_messages;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
-  {
-    preset_messages.insert( (*it)->data( 0, Qt::UserRole+1 ).toString(), (*it)->data( 0, Qt::UserRole+2 ) );
-    ++it;
-  }
-  Settings::instance().setPresetMessages( preset_messages );
-  Settings::instance().save();
 }
 
 void GuiPresetMessageList::onDoubleClicked( QTreeWidgetItem* item, int )
@@ -114,28 +102,91 @@ void GuiPresetMessageList::showContextMenu( const QPoint& p )
     menu.addAction( mp_actEdit );
     menu.addSeparator();
     menu.addAction( mp_actRemove );
-
   }
   else
+  {
     menu.addAction( mp_actNew );
+    clearSelection();
+  }
 
-  menu.exec( QCursor::pos() );
+  QAction* ret_act = menu.exec( QCursor::pos() );
+  if( !ret_act )
+    return;
+
+  if( ret_act == mp_actRename )
+    onRename( item );
+  else if( ret_act == mp_actEdit )
+    onEdit( item );
+  else if( ret_act == mp_actRemove )
+    onRemove( item );
+  else
+    onNew();
+
+}
+
+void GuiPresetMessageList::savePreset( const QString& preset_key, const QString& preset_value )
+{
+  QMap<QString,QVariant> preset_messages = Settings::instance().presetMessages();
+  preset_messages.insert( preset_key, preset_value );
+  Settings::instance().setPresetMessages( preset_messages );
+}
+
+void GuiPresetMessageList::removePreset( const QString& preset_key )
+{
+  QMap<QString,QVariant> preset_messages = Settings::instance().presetMessages();
+  preset_messages.remove( preset_key );
+  Settings::instance().setPresetMessages( preset_messages );
 }
 
 void GuiPresetMessageList::onNew()
 {
+  QString new_preset = QInputDialog::getMultiLineText( this, Settings::instance().programName(),
+                                                       tr( "Please insert your new preset message." ),
+                                                       QString( "" ) );
+  if( new_preset.simplified().isEmpty() )
+    return;
 
+  savePreset( new_preset, new_preset );
+  loadFromSettings();
+  Settings::instance().save();
 }
 
-void GuiPresetMessageList::onEdit()
+void GuiPresetMessageList::onEdit( QTreeWidgetItem* item )
 {
+  QString edit_preset = QInputDialog::getMultiLineText( this, Settings::instance().programName(),
+                                                        tr( "Edit your preset message." ),
+                                                        item->data( 0, Qt::UserRole+2 ).toString() );
+
+  if( edit_preset.simplified().isEmpty() )
+    return;
+
+  savePreset( item->data( 0, Qt::UserRole+1 ).toString(), edit_preset );
+  loadFromSettings();
+  Settings::instance().save();
 }
 
-void GuiPresetMessageList::onRename()
+void GuiPresetMessageList::onRename( QTreeWidgetItem* item )
 {
+  QString edit_preset_key = QInputDialog::getText( this, Settings::instance().programName(),
+                                                          tr( "Edit the name of your preset message." ), QLineEdit::Normal,
+                                                          item->data( 0, Qt::UserRole+1 ).toString() );
 
+  if( edit_preset_key.simplified().isEmpty() )
+    return;
+
+  removePreset( item->data( 0, Qt::UserRole+1 ).toString() );
+  savePreset( edit_preset_key.simplified(), item->data( 0, Qt::UserRole+2 ).toString() );
+  loadFromSettings();
+  Settings::instance().save();
 }
 
-void GuiPresetMessageList::onRemove()
+void GuiPresetMessageList::onRemove( QTreeWidgetItem* item )
 {
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to delete this preset?" ),
+                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+    return;
+
+  removePreset( item->data( 0, Qt::UserRole+1 ).toString() );
+  loadFromSettings();
+  Settings::instance().save();
 }

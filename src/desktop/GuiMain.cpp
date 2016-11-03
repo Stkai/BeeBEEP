@@ -1300,6 +1300,7 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
 
+  mp_barChat->insertSeparator( mp_barChat->actions().first() );
   mp_dockPresetMessageList = new QDockWidget( tr( "Preset messages" ), this );
   mp_dockPresetMessageList->setObjectName( "GuiDockPresetMessageList" );
   mp_presetMessageListWidget = new GuiPresetMessageList( this );
@@ -1311,7 +1312,7 @@ void GuiMain::createDockWindows()
   QAction* actViewPresetMessageList = mp_dockPresetMessageList->toggleViewAction();
   actViewPresetMessageList->setIcon( QIcon( ":/images/preset-message.png" ) );
   actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
-   actViewPresetMessageList->setData( 54 );
+  actViewPresetMessageList->setData( 54 );
   connect( mp_dockPresetMessageList, SIGNAL( visibilityChanged( bool ) ), this, SLOT( presetMessageListMenuVisibilityChanged( bool ) ) );
   connect( actViewPresetMessageList, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
   mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );

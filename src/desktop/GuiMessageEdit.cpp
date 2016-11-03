@@ -119,10 +119,13 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
 
 void GuiMessageEdit::addText( const QString& txt )
 {
-  if( !isEnabled() || txt.isEmpty() )
+  if( !isEnabled() || txt.simplified().isEmpty() )
     return;
 
-  insertHtml( txt );
+  QString html_txt = txt;
+  html_txt.replace( QLatin1String( " " ), QLatin1String( "&nbsp;" ) );
+  html_txt.replace( QLatin1String( "\n" ), QLatin1String( "<br />" ) );
+  insertHtml( html_txt );
   m_messageChanged = true;
 }
 
