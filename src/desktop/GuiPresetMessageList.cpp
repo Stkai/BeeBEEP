@@ -46,13 +46,15 @@ GuiPresetMessageList::GuiPresetMessageList( QWidget* parent )
   mp_actRename = new QAction( QIcon( ":/images/preset-message-edit.png" ), tr( "Rename" ), this );
   mp_actRemove = new QAction( QIcon( ":/images/preset-message-remove.png" ), tr( "Delete" ), this );
 
+  setToolTip( tr( "Right click on panel to create a new preset message" ) );
+
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showContextMenu( const QPoint& ) ) );
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onDoubleClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
 }
 
 QSize GuiPresetMessageList::sizeHint() const
 {
-  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
+  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT_SMALL );
 }
 
 void GuiPresetMessageList::loadFromSettings()
@@ -62,10 +64,7 @@ void GuiPresetMessageList::loadFromSettings()
 
   QMap<QString,QVariant> preset_messages = Settings::instance().presetMessages();
   if( preset_messages.isEmpty() )
-  {
-    setToolTip( tr( "Right click on panel to create a new preset message" ) );
     return;
-  }
 
   QMap<QString,QVariant>::const_iterator it = preset_messages.constBegin();
   while( it != preset_messages.constEnd() )
@@ -85,10 +84,8 @@ void GuiPresetMessageList::loadFromSettings()
 
 void GuiPresetMessageList::onDoubleClicked( QTreeWidgetItem* item, int )
 {
-  if( !item )
-    return;
-
-  emit presetMessageSelected( item->data( 0, Qt::UserRole+2 ).toString() );
+  if( item )
+    emit presetMessageSelected( item->data( 0, Qt::UserRole+2 ).toString() );
 }
 
 void GuiPresetMessageList::showContextMenu( const QPoint& p )

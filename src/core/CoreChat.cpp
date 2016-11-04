@@ -46,26 +46,28 @@ void Core::createDefaultChat()
   c.setPrivateId( Settings::instance().defaultChatPrivateId() );
   qDebug() << "Default chat private id:" << c.privateId();
   QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
-  ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header );
-  c.addMessage( cm );
+  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
 
   if( !Settings::instance().isFacebookPageLinkClicked() )
   {
-    sHtmlMsg = QString( "%1 %2 <a href=""%3"">%4</a>" ).arg( Bee::iconToHtml( ":/images/thumbup.png", "*!*" ),
+    sHtmlMsg = QString( "%1 %2 <a href=""%3"">%4</a><br />" ).arg( Bee::iconToHtml( ":/images/thumbup.png", "*!*" ),
                                                                  tr( "Help me to know how many people are really using BeeBEEP." ),
                                                                  Settings::instance().facebookPage(),
                                                                  tr( "Please add a like on Facebook." ) );
-    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other );
-    c.addMessage( cm );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
   }
+
+  sHtmlMsg = QString( "%1 <b>%2</b><br />" ).arg( Bee::iconToHtml( ":/images/CopyMastro.png", "*!*" ),
+                                               tr( "Try the new awesome application developed by Marco Mastrodi" )
+                                               + QString( " : <a href=""%1""><b>CopyMastro</b></a> !!!" ).arg( Settings::instance().copyMastroWebSite() ) );
+  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
 
   if( QDate::currentDate().month() == 4 && QDate::currentDate().day() == 6 )
   {
     int my_age = QDate::currentDate().year() - 1975;
     sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
                                                  tr( "Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!" ).arg( my_age ) );
-    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Chat );
-    c.addMessage( cm );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Chat ) );
   }
 
   if( QDate::currentDate().month() == 1 && QDate::currentDate().day() >= 1 && QDate::currentDate().day() <= 8 )
@@ -76,15 +78,13 @@ void Core::createDefaultChat()
     else
       new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ), Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ), Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ) );
     sHtmlMsg = QString( "%1&nbsp;&nbsp;&nbsp;<font color=red><b>%2</b></font>&nbsp;&nbsp;&nbsp;%3" ).arg( new_year_icons, tr( "Happy New Year!" ), new_year_icons );
-    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Chat );
-    c.addMessage( cm );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Chat ) );
   }
 
   if( Settings::instance().localUser().isBirthDay() )
   {
     sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ), tr( "Happy Birthday to you!" ) );
-    ChatMessage cm( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Chat );
-    c.addMessage( cm );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Chat ) );
   }
 
   ChatManager::instance().setChat( c );

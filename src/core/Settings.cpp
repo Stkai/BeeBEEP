@@ -499,6 +499,12 @@ QString Settings::updaterWebSite() const
   return officialWebSite() + QString( BEEBEEP_UPDATER_WEBSITE );
 }
 
+QString Settings::copyMastroWebSite() const
+{
+  return QString( COPYMASTRO_WEBSITE );
+}
+
+
 QString Settings::operatingSystem( bool use_long_name  ) const
 {
   QString os_name_long = "Unknown OS";
@@ -893,7 +899,6 @@ void Settings::load()
   m_showChatMessageOnTray = sets->value( "ShowChatMessageOnTray", false ).toBool();
   m_textSizeInChatMessagePreviewOnTray = sets->value( "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
   m_showFileTransferCompletedOnTray = sets->value( "ShowFileTransferCompletedOnTray", true ).toBool();
-  m_chatSaveDirectory = Bee::convertToNativeFolderSeparator( sets->value( "ChatSaveDirectory", dataFolder() ).toString() );
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
   if( m_hideChatToolbar )
@@ -1168,7 +1173,6 @@ void Settings::save()
   sets->setValue( "ShowChatMessageOnTray", m_showChatMessageOnTray );
   sets->setValue( "TextSizeInChatMessagePreviewOnTray", m_textSizeInChatMessagePreviewOnTray );
   sets->setValue( "ShowFileTransferCompletedOnTray", m_showFileTransferCompletedOnTray );
-  sets->setValue( "ChatSaveDirectory", m_chatSaveDirectory );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   if( m_hideChatToolbar ) // to make the bar appears when rc option is disabled
@@ -1507,7 +1511,7 @@ bool Settings::setDataFolder()
 
 QString Settings::savedChatsFilePath() const
 {
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_chatSaveDirectory ).arg( "beebeep.dat" ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.dat" ) );
 }
 
 QString Settings::defaultHostsFilePath( bool use_resource_folder ) const

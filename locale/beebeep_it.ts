@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>You are</source>
-        <translation type="vanished">Il tuo stato è</translation>
+        <translation type="obsolete">Il tuo stato è</translation>
     </message>
     <message>
         <source>is</source>
@@ -148,7 +148,7 @@
     </message>
     <message>
         <source>%1 is</source>
-        <translation type="vanished">Lo stato di %1 è</translation>
+        <translation type="obsolete">Lo stato di %1 è</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>%1 Welcome to the group %2.</source>
-        <translation type="vanished">%1 Benvenuti nel gruppo %2.</translation>
+        <translation type="obsolete">%1 Benvenuti nel gruppo %2.</translation>
     </message>
     <message>
         <source>%1 The group has a new name: %2.</source>
@@ -617,6 +617,10 @@
     <message>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Il numero massimo di ID è stato raggiunto. Chiudi e riavvia l&apos;applicazione.</translation>
+    </message>
+    <message>
+        <source>Try the new awesome application developed by Marco Mastrodi</source>
+        <translation>Prova la nuova mitica applicazione  sviluppata da Marco Mastroddi</translation>
     </message>
 </context>
 <context>
@@ -3911,6 +3915,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Edit the name of your preset message.</source>
         <translation>Modifica il nome del tuo messaggio predefinito.</translation>
+    </message>
+    <message>
+        <source>Right click on panel to create a new preset message</source>
+        <translation>Pulsante destro sul pannello per creare un nuovo messaggio predefinito</translation>
     </message>
 </context>
 <context>

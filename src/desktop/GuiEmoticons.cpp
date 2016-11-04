@@ -33,11 +33,12 @@ GuiEmoticons::GuiEmoticons( QWidget* parent )
   setObjectName( "GuiEmoticons" );
   setTabPosition( QTabWidget::South );
   setUsesScrollButtons( true );
+  setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Expanding );
 }
 
 QSize GuiEmoticons::sizeHint() const
 {
-  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH + 4, 40 );
+  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH + 6, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
 }
 
 void GuiEmoticons::initEmoticons( int current_index )

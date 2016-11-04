@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -165,7 +165,7 @@
         <translation>%1 Chat avec tous les utilisateurs locaux.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="85"/>
+        <location filename="../src/core/CoreChat.cpp" line="86"/>
         <location filename="../src/core/CoreUser.cpp" line="99"/>
         <source>Happy Birthday to you!</source>
         <translation>Joyeux Anniversaire !</translation>
@@ -176,12 +176,12 @@
         <translation>Joyeux Anniversaire à %1 !</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="66"/>
+        <location filename="../src/core/CoreChat.cpp" line="69"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>Joyeux Anniversaire Marco Mastroddi : %1 ans aujourd&apos;hui ! Longue vie !!!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="78"/>
+        <location filename="../src/core/CoreChat.cpp" line="80"/>
         <source>Happy New Year!</source>
         <translation>Bonne Année !</translation>
     </message>
@@ -199,7 +199,7 @@
     </message>
     <message>
         <source>%1 Welcome to the group %2.</source>
-        <translation type="vanished">%1 Bienvenue dans le groupe %2.</translation>
+        <translation type="obsolete">%1 Bienvenue dans le groupe %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="196"/>
@@ -262,14 +262,19 @@
         <translation>%1 %2 ne peut pas être averti que vous quittez le groupe.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="55"/>
+        <location filename="../src/core/CoreChat.cpp" line="54"/>
         <source>Help me to know how many people are really using BeeBEEP.</source>
         <translation>Adez-moi à savoir combien de personnes utilisent BeeBEEP.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="57"/>
+        <location filename="../src/core/CoreChat.cpp" line="56"/>
         <source>Please add a like on Facebook.</source>
         <translation>Liker BeeBEEP sur Facebook.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastrodi</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="505"/>
@@ -498,11 +503,11 @@
     </message>
     <message>
         <source>You are</source>
-        <translation type="vanished">Vous êtes</translation>
+        <translation type="obsolete">Vous êtes</translation>
     </message>
     <message>
         <source>%1 is</source>
-        <translation type="vanished">%1 est</translation>
+        <translation type="obsolete">%1 est</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="83"/>
@@ -1330,32 +1335,32 @@ Please select a different name.</source>
 <context>
     <name>GuiEmoticons</name>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="52"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
         <source>Recent</source>
         <translation>Récents</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="56"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
         <source>Smiley</source>
         <translation>Smiley</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="60"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="61"/>
         <source>Objects</source>
         <translation>Objet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="64"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="65"/>
         <source>Nature</source>
         <translation>Nature</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="68"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="69"/>
         <source>Places</source>
         <translation>Lieux</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="72"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="73"/>
         <source>Symbols</source>
         <translation>Symboles</translation>
     </message>
@@ -3451,47 +3456,52 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="45"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="50"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="46"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="53"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="144"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="49"/>
+        <source>Right click on panel to create a new preset message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="141"/>
         <source>Please insert your new preset message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="162"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="154"/>
         <source>Edit your preset message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="181"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="168"/>
         <source>Edit the name of your preset message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="199"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="182"/>
         <source>Do you really want to delete this preset?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="200"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="183"/>
         <source>Yes</source>
         <translation type="unfinished">Oui</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="200"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="183"/>
         <source>No</source>
         <translation type="unfinished">Non</translation>
     </message>

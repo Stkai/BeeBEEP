@@ -703,18 +703,18 @@ void GuiChat::saveChat()
 {
   QString file_name = FileDialog::getSaveFileName( this,
                         tr( "Please select a file to save the messages of the chat." ),
-                        Settings::instance().chatSaveDirectory(), "PDF Chat Files (*.pdf)" );
+                        Settings::instance().dataFolder(), "PDF Chat Files (*.pdf)" );
   if( file_name.isEmpty() )
     return;
+
+  if( !file_name.toLower().endsWith( QLatin1String( ".pdf" ) ) )
+    file_name.append( QLatin1String( ".pdf" ) );
 
   QPrinter printer;
   printer.setOutputFormat( QPrinter::PdfFormat );
   printer.setOutputFileName( file_name );
   QTextDocument *doc = mp_teChat->document();
   doc->print( &printer );
-
-  QFileInfo file_info( file_name );
-  Settings::instance().setChatSaveDirectory( file_info.absolutePath() );
 
   QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), tr( "Ok" ) );
 }

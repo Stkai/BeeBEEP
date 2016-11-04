@@ -92,6 +92,7 @@ public:
   QString gaTrackingId() const;
   QString gaUrl() const;
   QString gaEventVersion() const;
+  QString copyMastroWebSite() const;
 
   inline bool useHive() const;
 
@@ -328,8 +329,6 @@ public:
   inline void setFileTransferIsEnabled( bool );
   inline int maxFileShared() const;
 
-  inline const QString& chatSaveDirectory() const;
-  inline void setChatSaveDirectory( const QString& );
   QString savedChatsFilePath() const;
   inline bool chatAutoSave() const;
   inline void setChatAutoSave( bool );
@@ -601,7 +600,6 @@ private:
   QStringList m_localShare;
   int m_maxFileShared;
 
-  QString m_chatSaveDirectory;
   bool m_chatAutoSave;
   int m_chatMaxLineSaved;
 
@@ -809,8 +807,6 @@ inline bool Settings::hasLocalSharePath( const QString& share_path ) const { ret
 inline bool Settings::fileTransferIsEnabled() const { return m_fileTransferIsEnabled; }
 inline void Settings::setFileTransferIsEnabled( bool new_value ) { m_fileTransferIsEnabled = new_value; }
 inline int Settings::maxFileShared() const { return m_maxFileShared; }
-inline const QString& Settings::chatSaveDirectory() const { return m_chatSaveDirectory; }
-inline void Settings::setChatSaveDirectory( const QString& new_value ) { m_chatSaveDirectory = new_value; }
 inline bool Settings::chatAutoSave() const { return m_chatAutoSave; }
 inline void Settings::setChatAutoSave( bool new_value ) { m_chatAutoSave = new_value; }
 inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved; }
