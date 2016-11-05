@@ -527,6 +527,11 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   return u;
 }
 
+QString Protocol::temporaryUserName()
+{
+  return QString( "Bee%1" ).arg( newId() );
+}
+
 User Protocol::createTemporaryUser( const QString& user_path, const QString& account_name )
 {
   QString user_name = User::nameFromPath( user_path );
@@ -597,9 +602,47 @@ User Protocol::loadUser( const QString& s )
 
 User Protocol::loadUserFromPath( const QString& user_path, bool use_account_name )
 {
-  Q_UNUSED( user_path )
-  Q_UNUSED( use_account_name )
-  User user_found;
+  User user_found = UserManager::instance().findUserByPath( user_path );
+  if( !user_found.isValid() )
+  {
+    QString host_and_port = User::hostAddressAndPortFromPath( user_path );
+    NetworkAddress na = NetworkAddress::fromString( host_and_port.isEmpty() ? user_path : host_and_port );
+    if( na.isHostAddressValid() )
+    {
+      if( !na.isHostPortValid() )
+        na.setHostPort( Settings::instance().defaultListenerPort() );
+      user_found = UserManager::instance().findUserByHostAddressAndPort( na.hostAddress(), na.hostPort() );
+      if( !user_found.isValid() )
+      {
+        user_found = createTemporaryUser( temporaryUserName(), "", na.hostAddress(), na.hostPort() );
+        if( user_found.isValid() )
+          UserManager::instance().setUser( user_found );
+      }
+    }
+    else
+    {
+      if( use_account_name )
+      {
+        user_found = UserManager::instance().findUserByAccountName( user_path );
+        if( !user_found.isValid() )
+        {
+          user_found = createTemporaryUser( user_path, user_path, QHostAddress::LocalHost, Settings::instance().defaultListenerPort() );
+          if( user_found.isValid() )
+            UserManager::instance().setUser( user_found );
+        }
+      }
+      else
+      {
+        user_found = UserManager::instance().findUserByNickname( user_path );
+        if( !user_found.isValid() )
+        {
+          user_found = createTemporaryUser( user_path, "", QHostAddress::LocalHost, Settings::instance().defaultListenerPort() );
+          if( user_found.isValid() )
+            UserManager::instance().setUser( user_found );
+        }
+      }
+    }
+  }
   return user_found;
 }
 

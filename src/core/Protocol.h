@@ -91,6 +91,7 @@ public:
   QList<FileInfo> messageToFileShare( const Message&, const QHostAddress& ) const;
   inline const QByteArray& fileShareRequestMessage() const;
 
+  QString temporaryUserName();
   User createUser( const Message&, const QHostAddress& );
   User createTemporaryUser( const QString& user_path, const QString& account_name );
   User createTemporaryUser( const QString& user_name, const QString& user_account_name, const QHostAddress& user_address, int user_port );
