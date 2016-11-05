@@ -42,6 +42,7 @@ public:
   User findUserByAccountName( const QString& ) const;
   User findUserBySessionId( const QString& ) const;
   User findUserByHostAddressAndPort( const QHostAddress&, int );
+  User findUserByNickname( const QString& ) const;
 
   inline const QList<Group>& groups() const;
   void setGroup( const Group& );
@@ -50,9 +51,6 @@ public:
   Group findGroupByPrivateId( const QString& ) const;
   bool removeGroup( VNumber );
   bool isUserInGroups( VNumber ) const;
-
-  QStringList saveGroups();
-  int loadGroups( const QStringList& );
 
   static UserManager& instance()
   {

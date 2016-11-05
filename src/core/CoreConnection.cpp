@@ -249,22 +249,24 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       user_found = UserManager::instance().findUserByAccountName( u.accountName() );
       if( user_found.isValid() )
-        qDebug() << "User found in list with account name:" << u.accountName();
+        qDebug() << "User found in list with account name:" << qPrintable( u.accountName() );
     }
     else
     {
       user_found = UserManager::instance().findUserByPath( u.path() );
       if( user_found.isValid() )
-        qDebug() << "User found in list with path:" << u.path();
+        qDebug() << "User found in list with path:" << qPrintable( u.path() );
     }
   }
+  else
+    qDebug() << "User found in list with session id:" << qPrintable( u.sessionId() );
 
   if( user_found.isValid() )
   {
     if( user_found.isLocal() )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is recognized to be Local";
+      qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
 #endif
       closeConnection( c );
       return;
@@ -273,7 +275,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     if(  isUserConnected( user_found.id() ) )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "User with account" << u.accountName() << "and path" << u.path() << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
+      qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
 #endif
       c->setUserId( ID_INVALID );
       closeConnection( c );
@@ -283,10 +285,10 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     if( u.path() != user_found.path() )
     {
       user_path_changed = true;
-      qDebug() << "On connection old user found" << user_found.path() << "and associated to" << u.path();
+      qDebug() << "On connection old user found" << qPrintable( user_found.path() ) << "and associated to" << qPrintable( u.path() );
     }
     else
-      qDebug() << "User" << u.path() << "reconnected";
+      qDebug() << "User" << qPrintable( u.path() ) << "reconnected";
 
     u.setId( user_found.id() );
     u.setIsFavorite( user_found.isFavorite() );

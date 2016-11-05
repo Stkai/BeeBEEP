@@ -95,6 +95,27 @@ QString User::hostAddressAndPortFromPath( const QString& user_path )
     return sl.last();
 }
 
+QHostAddress User::parseHostAddressFromPath( const QString& user_path )
+{
+  QString host_and_port = hostAddressAndPortFromPath( user_path );
+  QHostAddress host_address;
+  if( !host_and_port.isEmpty() )
+  {
+    if( host_and_port.contains( QLatin1String( ":" ) ) )
+    {
+      QStringList sl = host_and_port.split( QLatin1String( ":" ) );
+      if( !sl.isEmpty() )
+        sl.removeLast();
+      if( !sl.isEmpty() )
+        host_address = QHostAddress( sl.join( QLatin1String( ":" ) ) );
+    }
+  }
+  else
+    host_address = QHostAddress( user_path );
+
+  return host_address;
+}
+
 bool User::operator<( const User& u ) const
 {
   if( isLocal() )

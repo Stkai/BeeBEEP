@@ -593,6 +593,12 @@ QByteArray Settings::hash( const QString& string_to_hash ) const
   return hash_generated.toHex();
 }
 
+QString Settings::simpleHash( const QString& string_to_hash ) const
+{
+  QByteArray hash_generated = QCryptographicHash::hash( string_to_hash.toUtf8(), QCryptographicHash::Sha1 );
+  return QString::fromLatin1( hash_generated.toHex() );
+}
+
 void Settings::setPassword( const QString& new_value )
 {
   m_passwordBeforeHash = new_value;
@@ -1554,6 +1560,12 @@ QString Settings::defaultPluginFolderPath( bool use_resource_folder ) const
 #else
   return use_resource_folder ? resourceFolder() : dataFolder();
 #endif
+}
+
+QString Settings::defaultGroupsFilePath( bool use_resource_folder ) const
+{
+  QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beegroups.ini" ) ) );
 }
 
 bool Settings::addSubnetToBroadcastAddress( const QHostAddress& ext_subnet )

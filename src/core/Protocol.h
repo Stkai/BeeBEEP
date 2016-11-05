@@ -98,6 +98,8 @@ public:
   Group createGroup( const QString& group_name, const QString& group_private_id, const QList<VNumber>& user_list );
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
+  QList<Group> loadGroupsFromFile();
+  User loadUserFromPath( const QString&, bool use_account_name );
 
   QString saveUser( const User& ) const;
   User loadUser( const QString& );

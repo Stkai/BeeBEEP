@@ -77,6 +77,7 @@ public:
 
   static QString nameFromPath( const QString& );
   static QString hostAddressAndPortFromPath( const QString& );
+  static QHostAddress parseHostAddressFromPath( const QString& );
 
 private:
   VNumber m_id;

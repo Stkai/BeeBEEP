@@ -207,6 +207,9 @@ User UserManager::findUserByHostAddressAndPort( const QHostAddress& host_address
 
   NetworkAddress network_address( host_address, host_port );
 
+  if( Settings::instance().localUser().networkAddress() == network_address )
+    return Settings::instance().localUser();
+
   foreach( User u, m_users.toList() )
   {
     if( u.networkAddress() == network_address )
@@ -217,5 +220,25 @@ User UserManager::findUserByHostAddressAndPort( const QHostAddress& host_address
   qDebug() << "Unable to find user with IP address" << qPrintable( network_address.toString() );
 #endif
 
+  return User();
+}
+
+User UserManager::findUserByNickname( const QString& user_nickname ) const
+{
+  if( user_nickname.isEmpty() )
+    return User();
+
+  if( Settings::instance().localUser().vCard().nickName() == user_nickname )
+    return Settings::instance().localUser();
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.vCard().nickName() == user_nickname )
+      return u;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find user with nickname" << qPrintable( user_nickname );
+#endif
   return User();
 }

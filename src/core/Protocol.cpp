@@ -595,6 +595,14 @@ User Protocol::loadUser( const QString& s )
   return u;
 }
 
+User Protocol::loadUserFromPath( const QString& user_path, bool use_account_name )
+{
+  Q_UNUSED( user_path )
+  Q_UNUSED( use_account_name )
+  User user_found;
+  return user_found;
+}
+
 QString Protocol::saveUserRecord( const UserRecord& ur, bool compact_fields ) const
 {
   QStringList sl;
@@ -776,12 +784,17 @@ Group Protocol::loadGroup( const QString& group_data_saved )
         user_found = UserManager::instance().findUserByPath( user_path );
 
       if( !user_found.isValid() )
+      {
         user_found = createTemporaryUser( user_path, user_account_name );
 
-      if( user_found.isValid() )
+        if( !user_found.isValid() )
+        {
+          qWarning() << "Unable to load group" << g.name() << "from settings";
+          return Group();
+        }
+
         UserManager::instance().setUser( user_found );
-      else
-        return Group();
+      }
 
       member_list.set( user_found );
     }
@@ -790,6 +803,70 @@ Group Protocol::loadGroup( const QString& group_data_saved )
   g.setUsers( member_list.toUsersId() );
 
   return g;
+}
+
+QList<Group> Protocol::loadGroupsFromFile()
+{
+  QList<Group> group_list;
+
+  QFileInfo groups_file_info( Settings::instance().defaultGroupsFilePath( true ) );
+  QString groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
+  if( !groups_file_info.exists() || !groups_file_info.isReadable() )
+  {
+    groups_file_info = QFileInfo( Settings::instance().defaultGroupsFilePath( false ) );
+    groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
+
+    if( !groups_file_info.exists() || !groups_file_info.isReadable() )
+      return group_list;
+  }
+
+  QSettings* sets = new QSettings( groups_file_path, QSettings::IniFormat );
+  sets->beginGroup( "Groups" );
+  bool use_account_name = sets->value( "UseAccountName", false ).toBool();
+  sets->endGroup();
+
+  QStringList sl_groups = sets->childGroups();
+  if( !sl_groups.isEmpty() )
+  {
+    foreach( QString s_group, sl_groups )
+    {
+      Group g;
+      QString key_groups = QString( "%1/%2" ).arg( s_group ).arg( "Members" );
+      QString group_data = sets->value( key_groups, QString( "" ) ).toString();
+      if( !group_data.isEmpty() )
+      {
+        QStringList sl_members = group_data.split( QLatin1String( "," ), QString::SkipEmptyParts );
+        if( !sl_members.isEmpty() )
+        {
+          foreach( QString s_member, sl_members )
+          {
+            User u = loadUserFromPath( s_member, use_account_name );
+            if( u.isValid() )
+              g.addUser( u.id() );
+            else
+              qWarning() << "Unable to load user" << qPrintable( s_member ) << "for group" << qPrintable( s_group );
+          }
+        }
+      }
+
+      if( g.hasUser( ID_LOCAL_USER ) )
+      {
+        g.setName( s_group );
+        g.setId( newId() );
+        g.setPrivateId( Settings::instance().simpleHash( s_group ) );
+        group_list.append( g );
+      }
+    }
+  }
+  else
+    qWarning() << "File" << qPrintable( groups_file_path ) << "is empty (no group found)";
+
+  sets->deleteLater();
+
+  if( !group_list.isEmpty() )
+    qDebug() << "File" << qPrintable( groups_file_path ) << "contains" << group_list.size() << "groups";
+
+  return group_list;
 }
 
 Message Protocol::groupChatRefuseMessage( const Chat& c )

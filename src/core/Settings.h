@@ -70,6 +70,7 @@ public:
   QString defaultSettingsFilePath() const;
   QString defaultBeepFilePath( bool use_resource_folder ) const;
   QString defaultPluginFolderPath( bool use_resource_folder ) const;
+  QString defaultGroupsFilePath( bool use_resource_folder ) const;
 
   QString version( bool qt_version, bool debug_info ) const;
   int protoVersion() const;
@@ -251,6 +252,7 @@ public:
 
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
+  QString simpleHash( const QString& ) const;
 
   void setPassword( const QString& );
   inline const QByteArray& password() const;
@@ -411,7 +413,6 @@ public:
 
   inline void setPresetMessages( const QMap<QString,QVariant>& );
   inline const QMap<QString,QVariant>& presetMessages() const;
-
 
   void loadRcFile();
   void clearNativeSettings();

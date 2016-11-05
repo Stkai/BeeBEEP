@@ -17,6 +17,7 @@ BeeBEEP 3.0.8
 - Hive protocol optimized
 - Fixed a bug in opening url with diacritic characters in path
 - Preset Messages
+- Added option to read a "beegroups.ini" file (beta)
 
 BeeBEEP 3.0.7
 - ShareBox: new feature in beta (can share files like dropbox with all users connected)

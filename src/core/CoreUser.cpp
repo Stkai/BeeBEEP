@@ -304,6 +304,16 @@ void Core::loadUsersAndGroups()
         addGroup( g, false );
     }
   }
+
+  QList<Group> group_list = Protocol::instance().loadGroupsFromFile();
+  if( !group_list.isEmpty() )
+  {
+    foreach( Group g, group_list )
+    {
+      if( g.isValid() )
+        addGroup( g, false );
+    }
+  }
 }
 
 void Core::saveUsersAndGroups()
