@@ -253,6 +253,13 @@ bool GuiChat::historyCanBeShowed()
   return !Settings::instance().chatMessageFilter().testBit( (int)ChatMessage::History );
 }
 
+bool GuiChat::reloadChat()
+{
+  bool chat_is_reloaded = setChatId( m_chatId, m_isFloating );
+  ensureFocusInChat();
+  return chat_is_reloaded;
+}
+
 void GuiChat::showChatMessageFilterMenu()
 {
   QMenu filter_menu;

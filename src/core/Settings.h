@@ -454,6 +454,8 @@ protected:
   void loadBroadcastAddressesFromFileHosts();
   QHostAddress subnetFromHostAddress( const QHostAddress& ) const;
   bool addBroadcastAddressInSettings( const QString& );
+  QString checkFilePath( const QString& file_path, const QString& default_value );
+  QString checkFolderPath( const QString& folder_path, const QString& default_value );
 
 private:
   QString m_resourceFolder;

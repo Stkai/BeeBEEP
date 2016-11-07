@@ -731,6 +731,18 @@ QString Settings::currentSettingsFilePath() const
     return QLatin1String( "Native OS Settings" );
 }
 
+QString Settings::checkFilePath( const QString& file_path, const QString& default_value )
+{
+  QFile file( file_path );
+  return file.exists() ? file_path : default_value;
+}
+
+QString Settings::checkFolderPath( const QString& folder_path, const QString& default_value )
+{
+  QDir folder( folder_path );
+  return folder.exists() ? folder_path : default_value;
+}
+
 QSettings* Settings::objectSettings() const
 {
   QSettings *sets;
@@ -886,19 +898,24 @@ void Settings::load()
     m_language.resize( 2 );
 #if QT_VERSION >= 0x050000
   m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() );
+  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ) );
   m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
+  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ) );
 #else
   m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
+  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
   m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
+  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
 #endif
-  m_logPath = Bee::convertToNativeFolderSeparator( sets->value( "LogPath", dataFolder() ).toString() );
-  m_pluginPath = Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() );
-  m_languagePath = Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() );
+
+  m_logPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LogFolderPath", dataFolder() ).toString() ), dataFolder() );
+  m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() ), defaultPluginFolderPath( true ) );
+  m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() ), resourceFolder() );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
-  m_beepFilePath = Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() );
+  m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() ), defaultBeepFilePath( true ) );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
@@ -947,7 +964,7 @@ void Settings::load()
   m_logToFile = sets->value( "LogToFile", false ).toBool();
   m_useSpellChecker = sets->value( "UseSpellChecker", false ).toBool();
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
-  m_dictionaryPath = sets->value( "DictionaryPath", "" ).toString();
+  m_dictionaryPath = checkFolderPath( sets->value( "DictionaryPath", "" ).toString(), "" );
   m_checkNewVersionAtStartup = sets->value( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "SendAnonymousUsageStatistics", m_postUsageStatistics ).toBool();
   m_applicationUuid = sets->value( "Uuid", "" ).toString();
@@ -1002,7 +1019,7 @@ void Settings::load()
     m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
     m_useShareBox = sets->value( "UseShareBox", false ).toBool();
   }
-  m_shareBoxPath = sets->value( "ShareBoxPath", "" ).toString();
+  m_shareBoxPath = checkFolderPath( sets->value( "ShareBoxPath", "" ).toString(), "" );
   m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
   m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
@@ -1166,7 +1183,7 @@ void Settings::save()
   sets->setValue( "Language", m_language );
   sets->setValue( "LastDirectorySelected", m_lastDirectorySelected );
   sets->setValue( "DownloadDirectory", m_downloadDirectory );
-  sets->setValue( "LogPath", m_logPath );
+  sets->setValue( "LogFolderPath", m_logPath );
   sets->setValue( "PluginPath", m_pluginPath );
   sets->setValue( "LanguagePath", m_languagePath );
   sets->setValue( "KeyEscapeMinimizeInTray", m_keyEscapeMinimizeInTray );

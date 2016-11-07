@@ -47,7 +47,7 @@ public:
   bool hasUser( VNumber );
 
   void reloadChatUsers();
-  inline bool reloadChat();
+  bool reloadChat();
   inline const QString& chatName() const;
   void ensureLastMessageVisible();
 
@@ -172,7 +172,6 @@ private:
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline const QString& GuiChat::chatName() const { return m_chatName; }
-inline bool GuiChat::reloadChat() { return setChatId( m_chatId, m_isFloating ); }
 inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
 
 #endif // BEEBEEP_GUICHAT_H
