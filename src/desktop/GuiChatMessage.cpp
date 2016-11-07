@@ -60,12 +60,26 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   QString user_name = append_message_to_previous ? QString( "&nbsp;&nbsp;" ) : (u.isLocal() && !Settings::instance().chatUseYourNameInsteadOfYou()) ? QObject::tr( "You" ) : u.name();
 
-  QString html_message = QString( "%1<font color=%2><b>%3</b>%4</font>%5" )
+  QString html_message;
+
+  if( Settings::instance().showTextInModeRTL() )
+  {
+    html_message = QString( "%1<font color=%2>%3<b>%4</b></font>%5" )
+      .arg( text_formatted )
+      .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
+      .arg( append_message_to_previous ? "&nbsp;" : Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
+      .arg( user_name )
+      .arg( date_time_stamp.isEmpty() ? QString( "" ) : QString( " <font color=#808080>(%1)</font>" ).arg( date_time_stamp ) );
+  }
+  else
+  {
+    html_message = QString( "%1<font color=%2><b>%3</b>%4</font>%5" )
       .arg( date_time_stamp.isEmpty() ? QString( "" ) : QString( "<font color=#808080>(%1)</font> " ).arg( date_time_stamp ) )
       .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
       .arg( user_name )
       .arg( append_message_to_previous ? "&nbsp;" : Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
       .arg( text_formatted );
+  }
 
   html_message += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
 

@@ -414,6 +414,8 @@ public:
   inline void setPresetMessages( const QMap<QString,QVariant>& );
   inline const QMap<QString,QVariant>& presetMessages() const;
 
+  inline bool showTextInModeRTL() const;
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -550,6 +552,7 @@ private:
   int m_userSortingMode;  //  0 priority( default), 1 by name, 2 by status, 3 by messages
   bool m_sortUsersAscending;
   bool m_showPresetMessages;
+  bool m_showTextInModeRTL;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -941,5 +944,6 @@ inline void Settings::setPresetMessages( const QMap<QString,QVariant>& new_value
 inline const QMap<QString,QVariant>& Settings::presetMessages() const { return m_presetMessages; }
 inline void Settings::setShowPresetMessages( bool new_value ) { m_showPresetMessages = new_value; }
 inline bool Settings::showPresetMessages() const { return m_showPresetMessages; }
+inline bool Settings::showTextInModeRTL() const { return m_showTextInModeRTL; }
 
 #endif // BEEBEEP_SETTINGS_H

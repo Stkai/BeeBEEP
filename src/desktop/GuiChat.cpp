@@ -91,6 +91,21 @@ GuiChat::GuiChat( QWidget *parent )
   m_isFloating = false;
   m_lastTextFound = "";
 
+  if( Settings::instance().showTextInModeRTL() )
+  {
+    QTextDocument *text_document = mp_teChat->document();
+    QTextOption text_option = text_document->defaultTextOption();
+    text_option.setTextDirection( Qt::RightToLeft );
+    text_document->setDefaultTextOption( text_option );
+    mp_teChat->setDocument( text_document );
+
+    text_document = mp_teMessage->document();
+    text_option = text_document->defaultTextOption();
+    text_option.setTextDirection( Qt::RightToLeft );
+    text_document->setDefaultTextOption( text_option );
+    mp_teMessage->setDocument( text_document );
+  }
+
   mp_scFocusInChat = new QShortcut( this );
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFocusInChat, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );

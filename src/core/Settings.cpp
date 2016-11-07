@@ -150,6 +150,7 @@ Settings::Settings()
   m_previewFileDialogImageSize = 200;
   m_maxUsersToConnectInATick = 25;
   m_showHomeAsDefaultPage = true;
+  m_showTextInModeRTL = false;
 }
 
 void Settings::createApplicationUuid()
@@ -939,6 +940,7 @@ void Settings::load()
   m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
   m_userSortingMode = qMax( 0, (int)sets->value( "UserSortingMode", 0 ).toInt() );
   m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
+  m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1215,6 +1217,7 @@ void Settings::save()
   sets->setValue( "PreviewFileDialogImageSize", m_previewFileDialogImageSize );
   sets->setValue( "UserSortingMode", m_userSortingMode );
   sets->setValue( "SortUsersAscending", m_sortUsersAscending );
+  sets->setValue( "ShowChatTextInModeRTL", m_showTextInModeRTL );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
