@@ -91,21 +91,6 @@ GuiChat::GuiChat( QWidget *parent )
   m_isFloating = false;
   m_lastTextFound = "";
 
-  if( Settings::instance().showTextInModeRTL() )
-  {
-    QTextDocument *text_document = mp_teChat->document();
-    QTextOption text_option = text_document->defaultTextOption();
-    text_option.setTextDirection( Qt::RightToLeft );
-    text_document->setDefaultTextOption( text_option );
-    mp_teChat->setDocument( text_document );
-
-    text_document = mp_teMessage->document();
-    text_option = text_document->defaultTextOption();
-    text_option.setTextDirection( Qt::RightToLeft );
-    text_document->setDefaultTextOption( text_option );
-    mp_teMessage->setDocument( text_document );
-  }
-
   mp_scFocusInChat = new QShortcut( this );
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFocusInChat, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
@@ -181,8 +166,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
   mp_actSendFolder = bar->addAction( QIcon( ":/images/send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
-  act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
-  act->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
+  mp_actSaveAs = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
+  mp_actSaveAs->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
   mp_actPrint = bar->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
   mp_actPrint->setShortcut( QKeySequence::Print );
   mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
@@ -244,10 +229,14 @@ void GuiChat::customContextMenu( const QPoint& p )
     custom_context_menu.addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
     custom_context_menu.addSeparator();
   }
+  custom_context_menu.addAction( mp_actSaveAs );
   custom_context_menu.addAction( mp_actPrint );
+  custom_context_menu.addSeparator();
+  custom_context_menu.addAction( mp_actClear );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( mp_actSendFile );
   custom_context_menu.addAction( mp_actSendFolder );
+
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
@@ -558,6 +547,20 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
 
   bool updates_is_enabled = mp_teChat->updatesEnabled();
   mp_teChat->setUpdatesEnabled( false );
+  mp_teChat->clear();
+
+  QTextDocument *text_document = mp_teChat->document();
+  QTextOption text_option = text_document->defaultTextOption();
+  text_option.setTextDirection( Settings::instance().showTextInModeRTL() ? Qt::RightToLeft : Qt::LeftToRight );
+  text_document->setDefaultTextOption( text_option );
+  mp_teChat->setDocument( text_document );
+
+  text_document = mp_teMessage->document();
+  text_option = text_document->defaultTextOption();
+  text_option.setTextDirection( Settings::instance().showTextInModeRTL() ? Qt::RightToLeft : Qt::LeftToRight );
+  text_document->setDefaultTextOption( text_option );
+  mp_teMessage->setDocument( text_document );
+
   mp_teChat->setHtml( html_text );
   mp_teChat->setUpdatesEnabled( updates_is_enabled );
 

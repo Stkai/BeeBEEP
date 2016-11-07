@@ -3629,6 +3629,10 @@ il file %2 (%3)?</translation>
         <source>Show the preset messages panel</source>
         <translation>Mostra il pannello dei messaggi predefiniti</translation>
     </message>
+    <message>
+        <source>Use RTL mode to show text</source>
+        <translation>Usa la modalità RTL per mostrare il testo</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

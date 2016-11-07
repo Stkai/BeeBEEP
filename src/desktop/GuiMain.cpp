@@ -726,6 +726,13 @@ void GuiMain::createMenus()
   /* Chat Menu */
   mp_menuChat = new QMenu( tr( "Chat" ), this );
 
+  act = mp_menuChat->addAction( tr( "Use RTL mode to show text" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showTextInModeRTL() );
+  act->setData( 55 );
+
+  mp_menuChat->addSeparator();
+
   act = mp_menuChat->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled the messages are saved when the program is closed" ) );
   act->setCheckable( true );
@@ -1792,6 +1799,10 @@ void GuiMain::settingsChanged()
     break;
   case 54:
     Settings::instance().setShowPresetMessages( act->isChecked() );
+    break;
+  case 55:
+    Settings::instance().setShowTextInModeRTL( act->isChecked() );
+    refresh_chat = true;
     break;
   case 99:
     break;

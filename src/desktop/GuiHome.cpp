@@ -58,12 +58,7 @@ GuiHome::GuiHome( QWidget* parent )
 void GuiHome::addSystemMessage( const ChatMessage& cm )
 {
   if( !GuiChatMessage::messageCanBeShowedInActivity( cm ) )
-  {
-//#ifdef BEEBEEP_DEBUG
-//    qDebug() << "Home skips sysmess:" << qPrintable( Bee::removeHtmlTags( cm.message() ) );
-//#endif
     return;
-  }
 
   QString sys_message = GuiChatMessage::formatSystemMessage( cm, Settings::instance().homeShowMessageTimestamp(), Settings::instance().homeShowMessageDatestamp() );
 

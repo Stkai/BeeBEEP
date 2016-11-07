@@ -42,7 +42,7 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
     date_time_stamp_format += QString( "hh:mm:ss" );
   }
 
-  return date_time_stamp_format.isEmpty() ? QString( "" ) : cm.timestamp().toString( date_time_stamp_format );
+  return date_time_stamp_format.isEmpty() ? date_time_stamp_format : cm.timestamp().toString( date_time_stamp_format );
 }
 
 QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp )
@@ -51,37 +51,30 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   if( cm.textColor().isValid() )
   {
     text_formatted.prepend( QString( "<font color=%1>" ).arg( cm.textColor().name() ) );
-    text_formatted.append( QString( "</font>" ) );
+    text_formatted.append( QLatin1String( "</font>" ) );
   }
 
   bool append_message_to_previous = last_user_id > 0 && last_user_id == u.id();
 
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
-
-  QString user_name = append_message_to_previous ? QString( "&nbsp;&nbsp;" ) : (u.isLocal() && !Settings::instance().chatUseYourNameInsteadOfYou()) ? QObject::tr( "You" ) : u.name();
+  QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=#808080>(%1)</font>" ).arg( date_time_stamp );
+  QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !Settings::instance().chatUseYourNameInsteadOfYou()) ? QObject::tr( "You" ) : u.name();
+  QString html_user_name = user_name.isEmpty() ? user_name : QString( "<font color=%1><b>%2</b></font>%3%4" )
+                                                               .arg( Settings::instance().showUserColor() ? u.color() : QLatin1String( "#000000" ) )
+                                                               .arg( user_name )
+                                                               .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
+                                                               .arg( (Settings::instance().chatCompact() && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br />" ) );
 
   QString html_message;
 
   if( Settings::instance().showTextInModeRTL() )
-  {
-    html_message = QString( "%1<font color=%2>%3<b>%4</b></font>%5" )
-      .arg( text_formatted )
-      .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
-      .arg( append_message_to_previous ? "&nbsp;" : Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
-      .arg( user_name )
-      .arg( date_time_stamp.isEmpty() ? QString( "" ) : QString( " <font color=#808080>(%1)</font>" ).arg( date_time_stamp ) );
-  }
+    html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
+  else if( Settings::instance().chatCompact() )
+    html_message = QString( "%1 %2 %3" ).arg( html_date_time_stamp ).arg( html_user_name.isEmpty() ? QLatin1String( "&nbsp;&nbsp;" ) : html_user_name ).arg( text_formatted );
   else
-  {
-    html_message = QString( "%1<font color=%2><b>%3</b>%4</font>%5" )
-      .arg( date_time_stamp.isEmpty() ? QString( "" ) : QString( "<font color=#808080>(%1)</font> " ).arg( date_time_stamp ) )
-      .arg( Settings::instance().showUserColor() ? u.color() : "#000000" )
-      .arg( user_name )
-      .arg( append_message_to_previous ? "&nbsp;" : Settings::instance().chatCompact() ? ":&nbsp;" : ":<br />" )
-      .arg( text_formatted );
-  }
+    html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
 
-  html_message += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
+  html_message +=  Settings::instance().chatAddNewLineToMessage() ? QLatin1String( "<br /><br />" ) : QLatin1String( "<br />" );
 
   return html_message;
 }
@@ -94,10 +87,11 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, bool show_ti
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
 
   QString html_message = QString( "<font color=#808080>%1%2</font>" )
-                           .arg( date_time_stamp.isEmpty() ? QString( "" ) : QString( "(%1) " ).arg( date_time_stamp ) )
+                           .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
                            .arg( cm.message() );
 
   html_message += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
+
   return html_message;
 }
 

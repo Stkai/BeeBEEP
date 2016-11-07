@@ -93,6 +93,13 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
   if( !isEnabled() )
     return;
 
+  if( Settings::instance().showTextInModeRTL() )
+  {
+    QTextCursor tc = textCursor();
+    tc.movePosition( QTextCursor::Start );
+    setTextCursor( tc );
+  }
+
   if( e.isInGroup() )
   {
     if( Settings::instance().useNativeEmoticons() )
@@ -114,6 +121,13 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
   else
     insertPlainText( QString( " " ) + e.textToMatch() );
 
+  if( Settings::instance().showTextInModeRTL() )
+  {
+    QTextCursor tc = textCursor();
+    tc.movePosition( QTextCursor::Start );
+    setTextCursor( tc );
+  }
+
   m_messageChanged = true;
 }
 
@@ -125,7 +139,23 @@ void GuiMessageEdit::addText( const QString& txt )
   QString html_txt = txt;
   html_txt.replace( QLatin1String( " " ), QLatin1String( "&nbsp;" ) );
   html_txt.replace( QLatin1String( "\n" ), QLatin1String( "<br />" ) );
+
+  if( Settings::instance().showTextInModeRTL() )
+  {
+    QTextCursor tc = textCursor();
+    tc.movePosition( QTextCursor::Start );
+    setTextCursor( tc );
+  }
+
   insertHtml( html_txt );
+
+  if( Settings::instance().showTextInModeRTL() )
+  {
+    QTextCursor tc = textCursor();
+    tc.movePosition( QTextCursor::Start );
+    setTextCursor( tc );
+  }
+
   m_messageChanged = true;
 }
 
@@ -409,7 +439,7 @@ void GuiMessageEdit::insertCompletion( const QString& completion )
 #else
   int extra = 0;
 #endif
-  tc.movePosition( QTextCursor::Left );
+  tc.movePosition( Settings::instance().showTextInModeRTL() ? QTextCursor::Right : QTextCursor::Left );
   tc.movePosition( QTextCursor::EndOfWord );
   tc.insertText( completion.right( extra ) );
   tc.insertText( " " );

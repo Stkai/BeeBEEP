@@ -154,6 +154,7 @@ private:
   QAction* mp_actPrint;
   QAction* mp_actFindTextInChat;
   QAction* mp_actSendFolder;
+  QAction* mp_actSaveAs;
 
   QMenu* mp_menuMembers;
   QSplitter* mp_splitter;

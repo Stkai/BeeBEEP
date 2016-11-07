@@ -113,10 +113,6 @@ void EmoticonManager::addEmoticon( const QString& e_text, const QString& e_name,
   int emoticon_key_size = e_text.size();
   QChar key_char = e_text.at( 0 );
 
-//#ifdef BEEBEEP_DEBUG
-//  qDebug() << "Add emoticon" << e_name << "with key" << e_text << "and key size" << emoticon_key_size << "and char" << key_char;
-//#endif
-
   m_emoticons.insert( key_char, Emoticon( e_text, e_name, emoticon_group, sort_order ) );
 
   if( emoticon_key_size == 1 && !m_oneCharEmoticons.contains( key_char ) )

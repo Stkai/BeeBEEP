@@ -414,6 +414,7 @@ public:
   inline void setPresetMessages( const QMap<QString,QVariant>& );
   inline const QMap<QString,QVariant>& presetMessages() const;
 
+  inline void setShowTextInModeRTL( bool );
   inline bool showTextInModeRTL() const;
 
   void loadRcFile();
@@ -944,6 +945,8 @@ inline void Settings::setPresetMessages( const QMap<QString,QVariant>& new_value
 inline const QMap<QString,QVariant>& Settings::presetMessages() const { return m_presetMessages; }
 inline void Settings::setShowPresetMessages( bool new_value ) { m_showPresetMessages = new_value; }
 inline bool Settings::showPresetMessages() const { return m_showPresetMessages; }
+inline void Settings::setShowTextInModeRTL( bool new_value ) { m_showTextInModeRTL = new_value; }
 inline bool Settings::showTextInModeRTL() const { return m_showTextInModeRTL; }
+
 
 #endif // BEEBEEP_SETTINGS_H

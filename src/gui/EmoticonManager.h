@@ -32,7 +32,7 @@ class EmoticonManager
   static EmoticonManager* mp_instance;
 
 public:
-  QString parseEmoticons( const QString&, int, bool ) const;
+  QString parseEmoticons( const QString&, int emoticon_size, bool use_native_emoticons ) const;
   Emoticon emoticon( const QString& ) const;
   Emoticon textEmoticon( const QString& ) const;
   Emoticon emoticonByFile( const QString& ) const;
