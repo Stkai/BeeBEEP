@@ -125,6 +125,8 @@ int main( int argc, char *argv[] )
 
   /* Init Network Manager */
   (void)NetworkManager::instance();
+  NetworkManager::instance().searchLocalHostAddress();
+  Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), Settings::instance().localUser().networkAddress().hostPort() );
 
   /* Init Hive */
   (void)Hive::instance();

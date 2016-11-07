@@ -143,7 +143,7 @@ bool Core::start()
     }
   }
 
-  qDebug() << "Listener binds" << mp_listener->serverAddress().toString() << mp_listener->serverPort();
+  qDebug() << "Listener binds" << qPrintable( mp_listener->serverAddress().toString() ) << mp_listener->serverPort();
   NetworkManager::instance().searchLocalHostAddress();
   Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), mp_listener->serverPort() );
 

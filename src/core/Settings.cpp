@@ -653,7 +653,7 @@ int Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
 
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
-  if( host_address.toString() == QString( "0.0.0.0" ) )
+  if( host_address.isNull() || host_address.toString() == QString( "0.0.0.0" ) )
     m_localUser.setNetworkAddress( NetworkAddress( QHostAddress( "127.0.0.1" ), host_port ) );
   else
     m_localUser.setNetworkAddress( NetworkAddress( host_address, host_port ) );
