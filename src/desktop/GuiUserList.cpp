@@ -181,8 +181,6 @@ void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
     item->setChatId( c.id() );
     item->setUnreadMessages( c.unreadMessages() );
   }
-  else
-    qWarning() << "Invalid chat id found in GuiUserList";
 
   if( u.isLocal() )
     setDefaultChatConnected( item, m_coreIsConnected );
