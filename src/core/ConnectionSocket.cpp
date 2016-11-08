@@ -66,6 +66,7 @@ bool ConnectionSocket::startTimerTick()
 {
   stopTimerTick();
   m_timerTickId = startTimer( TICK_INTERVAL );
+  m_tickCounter = 0;
   return m_timerTickId != 0;
 }
 

@@ -358,7 +358,7 @@ void Broadcaster::updateAddresses()
 #endif
 }
 
-void Broadcaster::onTickEvent( int )
+void Broadcaster::onTickEvent( int ticks )
 {
   if( !m_networkAddressesWaitingForLoopback.isEmpty() )
   {

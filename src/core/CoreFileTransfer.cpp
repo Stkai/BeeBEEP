@@ -145,8 +145,6 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     {
       if( fi.isDownload() )
         FileShare::instance().addDownloadedFile( fi );
-
-      bool show_image_preview = false;
       if( Settings::instance().showImagePreview() && Bee::isFileTypeImage( fi.suffix() ) )
       {
         QImage img;
@@ -172,7 +170,6 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
           sys_msg += QString( "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"%1\" height=\"%2\" />" )
                   .arg( QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
-          show_image_preview = true;
         }
         else
           qWarning() << "Unable to show image preview of the file" << img_preview_path;

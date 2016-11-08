@@ -190,7 +190,7 @@ bool Log::dumpLogToFile()
 QString Log::logNodeToString( const LogNode& ln ) const
 {
   QString sHeader = messageTypeToString( ln.type() );
-  return QString( "%1%2%3%4" ).arg( QDateTime::currentDateTime().toString( "yyyy-MM-dd hh:mm:ss" ) )
+  return QString( "%1%2%3%4" ).arg( QDateTime::currentDateTime().toString( "yyyy-MM-dd HH:mm:ss" ) )
                                       .arg( sHeader.isEmpty() ? " " : QString( " %1 " ).arg( sHeader ) )
                                       .arg( ln.text() )
                                       .arg( ln.note().isEmpty() ? "" : QString( " (%1)" ).arg( ln.note() ) );

@@ -404,7 +404,10 @@ QList<QHostAddress> NetworkManager::splitInIPv4HostAddresses( const QHostAddress
   }
 
   if( max_ip > 254 )
+  {
     max_ip = 254;
+    ha_list.clear(); // remove host address with 255
+  }
 
   ha_string_list.removeLast();
   ha_string = ha_string_list.join( "." );
