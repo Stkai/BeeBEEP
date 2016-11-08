@@ -417,21 +417,15 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Request ) )
   {
-    if( m.hasFlag( Message::Refused ) )
-    {
-      qDebug() << "User" << qPrintable( u.path() ) << "has refused to share info of folder:" << qPrintable( folder_name );
-      emit shareBoxUnavailable( u, folder_name );
-    }
-    else
+    if( !m.hasFlag( Message::Refused ) )
     {
       if( Settings::instance().useShareBox() )
-      {
-        qDebug() << "User" << qPrintable( u.path() ) << "has requested the list of folder:" << qPrintable( folder_name );
         buildShareBoxFileList( u, folder_name );
-      }
       else
         sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name ) );
     }
+    else
+      emit shareBoxUnavailable( u, folder_name );
   }
   else
     qWarning() << "Invalid flag found in share box message from user" << qPrintable( u.path() );
