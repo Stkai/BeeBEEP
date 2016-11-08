@@ -1491,25 +1491,6 @@ void GuiMain::createPluginWindows()
   copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
 #endif
 
-#ifdef Q_OS_MAC
-  foreach( QString folder_path, QStandardPaths::standardLocations( QStandardPaths::DesktopLocation ) )
-  {
-    QString app_path = QString( "%1/%2" ).arg( folder_path, QString( "CopyMastro.app" ) );
-    if( QFile::exists( app_path ) )
-      copy_mastro_path = app_path;
-  }
-
-  if( copy_mastro_path.isEmpty() )
-  {
-    foreach( QString folder_path, QStandardPaths::standardLocations( QStandardPaths::ApplicationsLocation ) )
-    {
-      QString app_path = QString( "%1/%2" ).arg( folder_path, QString( "CopyMastro.app" ) );
-      if( QFile::exists( app_path ) )
-        copy_mastro_path = app_path;
-    }
-  }
-#endif
-
   if( !copy_mastro_path.isEmpty() && QFile::exists( copy_mastro_path ) )
   {
     qDebug() << "CopyMastro is found:" << qPrintable( copy_mastro_path );
