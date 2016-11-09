@@ -37,6 +37,7 @@ public:
 
   bool sendMessage( const Message& );
   void setReadyForUse( VNumber );
+  inline bool isReadyForUse() const;
 
 signals:
   void newMessage( VNumber, const Message& );
@@ -49,5 +50,7 @@ protected slots:
 
 };
 
+// Inline Functions
+inline bool Connection::isReadyForUse() const { return userId() != ID_INVALID; }
 
 #endif // BEEBEEP_CONNECTION_H

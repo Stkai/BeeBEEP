@@ -33,7 +33,7 @@ GuiPresetMessageList::GuiPresetMessageList( QWidget* parent )
 
   setColumnCount( 1 );
   header()->hide();
-  setRootIsDecorated( true );
+  setRootIsDecorated( false );
   setSortingEnabled( true );
 
   setContextMenuPolicy( Qt::CustomContextMenu );

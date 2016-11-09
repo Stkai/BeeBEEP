@@ -200,19 +200,19 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     if( datagram.size() <= Protocol::instance().messageMinimumSize() )
     {
-      qWarning() << "Broadcaster has received an invalid data size:" << qPrintable( datagram );
+      qWarning() << "Broadcaster has received an invalid data size:" << datagram;
       continue;
     }
     Message m = Protocol::instance().toMessage( datagram );
     if( !m.isValid() || m.type() != Message::Beep )
     {
-      qWarning() << "Broadcaster has received an invalid data:" << qPrintable( datagram );
+      qWarning() << "Broadcaster has received an invalid data:" << datagram;
       continue;
     }
 
     QHostAddress sender_host_address = Protocol::instance().hostAddressFromBroadcastMessage( m );
     if( sender_host_address.isNull() )
-      qWarning() << "Broadcaster has received and invalid host address in data:" << qPrintable( datagram );
+      qWarning() << "Broadcaster has received and invalid host address in data:" << datagram;
     else
       removeHostAddressFromWaitingList( sender_host_address );
 
@@ -220,7 +220,7 @@ void Broadcaster::readBroadcastDatagram()
     int sender_listener_port = m.text().toInt( &ok );
     if( !ok )
     {
-      qWarning() << "Broadcaster has received an invalid listener port" << qPrintable( datagram );
+      qWarning() << "Broadcaster has received an invalid listener port" << datagram;
       continue;
     }
 
@@ -258,12 +258,12 @@ void Broadcaster::updateAddresses()
     if( na.isHostAddressValid() )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Network address saved in file hosts added:" << na.toString();
+      qDebug() << "Network address saved in file hosts added:" << qPrintable( na.toString() );
 #endif
       addNetworkAddress( na, true );
     }
     else
-      qWarning() << "Broadcaster has found error in network address saved in file hosts:" << na.toString();
+      qWarning() << "Broadcaster has found error in network address saved in file hosts:" << qPrintable( na.toString() );
   }
 
   if( Settings::instance().broadcastOnlyToHostsIni() )
@@ -302,7 +302,7 @@ void Broadcaster::updateAddresses()
       addNetworkAddress( na, true );
     }
     else
-      qWarning() << "Broadcaster has found error in network address saved in file settings:" << na.toString();
+      qWarning() << "Broadcaster has found error in network address saved in file settings:" << qPrintable( na.toString() );;
   }
 
   if( !Settings::instance().userPathList().isEmpty() )

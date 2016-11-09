@@ -90,6 +90,9 @@ void Connection::setReadyForUse( VNumber user_id )
 
 void Connection::sendPing()
 {
+  if( !isReadyForUse() )
+    return;
+
   int activity_idle = activityIdle();
 
 #if defined( CONNECTION_PING_PONG_DEBUG )
