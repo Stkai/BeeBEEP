@@ -979,7 +979,7 @@ void Settings::load()
   NetworkAddress local_user_network_address = m_localUser.networkAddress();
   local_user_network_address.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
   m_localUser.setNetworkAddress( local_user_network_address );
-  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout", 13000 ).toInt(), 13000 );
+  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout(ms)", 30000 ).toInt(), 13000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
@@ -1251,7 +1251,7 @@ void Settings::save()
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );
   sets->setValue( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork );
   sets->setValue( "ListenerPort", m_localUser.networkAddress().hostPort() );
-  sets->setValue( "ConnectionActivityTimeout", m_pongTimeout );
+  sets->setValue( "ConnectionActivityTimeout(ms)", m_pongTimeout );
   sets->setValue( "WritingTimeout", m_writingTimeout );
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );
   sets->setValue( "UseLowDelayOptionOnSocket", m_useLowDelayOptionOnSocket );

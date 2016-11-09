@@ -151,10 +151,7 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   Connection* c = qobject_cast<Connection*>( sender() );
   if( c )
   {
-    if( !c->peerAddress().isNull() )
-      qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has refused connection:" << c->errorString() << "-" << (int)se;
-    else
-      qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has an error:" << c->errorString() << "-" << (int)se;
+    qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has an error:" << c->errorString() << "-" << (int)se;
     closeConnection( c );
   }
   else
