@@ -540,7 +540,7 @@ bool Bee::setLastModifiedToFile( const QString& to_path, const QDateTime& dt_las
   const char *to_file_name = to_path.toLatin1().constData();
   ok = utime( to_file_name, &from_time_buffer ) == 0;
   if( !ok )
-    qWarning() << "Function utime error" << errno << ":" << qPrintable( strerror( errno ) ) << "for file" << qPrintable( to_path );
+    qWarning() << "Function utime error" << errno << ":" << qPrintable( QString::fromLatin1( strerror( errno ) ) ) << "for file" << qPrintable( to_path );
 
 #endif
 

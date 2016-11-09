@@ -76,6 +76,7 @@ const int HIVE_PROTO_VERSION = 64;
 const int TICK_INTERVAL = 1000;
 const int PING_INTERVAL_IDLE = 1800;
 const int PING_INTERVAL_TICK = 7;
+const int AUTO_BROADCAST_CHECK_TICK = 31;
 
 // Protocol
 #define ID_INVALID                0

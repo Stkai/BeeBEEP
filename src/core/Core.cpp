@@ -504,7 +504,11 @@ void Core::onTickEvent( int ticks )
   if( isConnected() )
   {
     mp_broadcaster->onTickEvent( ticks );
+
     if( Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0) )
+      mp_broadcaster->setNewBroadcastRequested( true );
+
+    if( (ticks % AUTO_BROADCAST_CHECK_TICK == 0) && m_connections.isEmpty() )
       mp_broadcaster->setNewBroadcastRequested( true );
   }
 
