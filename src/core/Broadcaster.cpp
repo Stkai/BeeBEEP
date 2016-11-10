@@ -159,7 +159,11 @@ void Broadcaster::checkLoopbackDatagram()
   QList< QPair<NetworkAddress,QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
   while( it != m_networkAddressesWaitingForLoopback.end() )
   {
+#if QT_VERSION >= 0x040700
     if( it->second.msecsTo( QDateTime::currentDateTime() ) > 5600 )
+#else
+    if( it->second.secsTo( QDateTime::currentDateTime() ) > 5 )
+#endif
     {
       qWarning() << "Broadcaster didn't received yet a loopback datagram from host:" << qPrintable( it->first.toString() );
       it = m_networkAddressesWaitingForLoopback.erase( it );
