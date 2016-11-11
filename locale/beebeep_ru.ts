@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru" sourcelanguage="en">
+<TS version="2.1" language="ru" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -143,7 +143,7 @@
         <translation>Щёлкните здесь для загрузки</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="514"/>
+        <location filename="../src/core/Core.cpp" line="518"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -310,17 +310,17 @@
         <translation>в</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="178"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="242"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="239"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Не удаётся отправить %2 для %3: пользователь отключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="219"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="216"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Не удается отправить %2. Передача файлов выключена.</translation>
     </message>
@@ -335,102 +335,102 @@
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="186"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="183"/>
         <source>folder</source>
         <translation>папка</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="251"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="248"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: файл не найден.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="265"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="262"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 - это папка. Вы можете открыть общий доступ к ней.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="290"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="287"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Не удается отправить %2: %3 не подключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="284"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="281"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Вы отправили %2 в %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="313"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Вы отказались загружать %2 из %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="344"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="341"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Вы отказались загружать папку %2 из %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="407"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="404"/>
         <source>Adding to file sharing</source>
         <translation>Добавление общего доступа файла</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="462"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="459"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 добавлен в файловый общий доступ (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="464"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="461"/>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
         <translation>%1 добавлен в файловый общий доступ с %2 файлам, %3 (прошло времени: %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="500"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="497"/>
         <source>All paths are removed from file sharing</source>
         <translation>Все пути исклчены из файлового общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="522"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="519"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 исключен из файлового общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="524"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="521"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 исключено из файлового общего доступа с %2 файлов</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="575"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="572"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Вы собираетесь отправить %2 для %3. Проверка папки...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="614"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="611"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Не удалось отправить папку %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="619"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
         <source>the folder is empty.</source>
         <translation>папка пуста.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="626"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="623"/>
         <source>file transfer is not working.</source>
         <translation>передача файлов не работает.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="631"/>
         <source>%1 is not connected.</source>
         <translation>%1 не подключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="648"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="645"/>
         <source>internal error.</source>
         <translation>внутренняя ошибка.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="653"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="650"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Вы отправили папку %2 для%3.</translation>
     </message>
@@ -1829,10 +1829,10 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="311"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3539"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3540"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3541"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3542"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3520"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3521"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3522"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3523"/>
         <source>offline</source>
         <translation>отключен</translation>
     </message>
@@ -2449,37 +2449,37 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1517"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1498"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1832"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1813"/>
         <source>Show only last %1 messages</source>
         <translation>Показать только %1 последних сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1833"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1814"/>
         <source>If enabled only the last %1 messages will be shown in chat</source>
         <translation>Если включено, то в чате будут отображаться только последние %1 сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2166"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2147"/>
         <source>File transfer is not enabled.</source>
         <translation>Передача файлов не включена.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2172"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2153"/>
         <source>You are not connected.</source>
         <translation>Вы не подключены.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4223"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4204"/>
         <source>Window geometry and state saved</source>
         <translation>Геометрия окна и состояние сохранены</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4271"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4252"/>
         <source>New file from %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2696,224 +2696,224 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Если файл уже существует</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1665"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1646"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Сколько минут %1 может простаивать перед изменением статуса на вышел?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1701"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1682"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Выберите максимальное количество отображаемых сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2147"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2128"/>
         <source>%1 - Select a file</source>
         <translation>%1 - Выберите файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2147"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2128"/>
         <source>or more</source>
         <translation>или более</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2226"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2376"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2207"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2357"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Передача файлов выключена. Вы не можете загрузить %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2319"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Вы не можете загрузить все файлы за раз. Вы хотите загрузить первые %1 файлов из списка?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2327"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2308"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>С трудом загружается %1 файлов. Возможно вам придется подождать несколько минут. Вы хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2345"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2326"/>
         <source>%1 files are scheduled for download</source>
         <translation>%1 файлов запланировано для загрузки</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2360"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2341"/>
         <source>File is not available for download.</source>
         <translation>Файл не доступен для загрузки.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2343"/>
         <source>%1 is not connected.</source>
         <translation>%1 не подключен.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2363"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2344"/>
         <source>Please reload the list of shared files.</source>
         <translation>Пожалуйста, перезагрузите список общедоступных файлов.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2366"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2347"/>
         <source>Reload file list</source>
         <translation>Перезагрузить список файлов</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2390"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2371"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>Вы хотите загрузить папку %1 (%2 файлов) из %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2612"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2593"/>
         <source>Show the bar of games</source>
         <translation>Показать панель игр</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2932"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
         <source>The default BEEP will be used</source>
         <translation>Будет использован звуковой сигнал по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2978"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2959"/>
         <source>Group chat will be deleted when all members goes offline.</source>
         <translation>Групповой чат будет удалён, когда все участники отключатся.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2979"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2960"/>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
         <translation>Если вам нужен постоянный чат, создайте взамен группу.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2980"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2961"/>
         <source>Do you wish to continue or create group?</source>
         <translation>Продолжить или создать группу?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2962"/>
         <source>Continue</source>
         <translation>Продолжить</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2962"/>
         <source>Create Group</source>
         <translation>Создать группу</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3007"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2988"/>
         <source>Unable to add users in this chat. Please select a group one.</source>
         <translation>Не удается добавить пользователей в этот чат. Пожалуйста выберите группу.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3056"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3063"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3037"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3044"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Не удаётся добавить этот ключ в реестр: доступ запрещён.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3282"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3263"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Все участники этого чата отключились. Изменения могут оказаться не постоянными. Хотите продолжить?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3367"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3348"/>
         <source>Chat with %1 is empty.</source>
         <translation>Чат с %1 пустой.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3352"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Вы действительно хотите очистить сообщения %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3374"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3355"/>
         <source>Yes and delete history</source>
         <translation>Да и удалить историю</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3544"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3525"/>
         <source>inactive</source>
         <translation>неактивен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3571"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3552"/>
         <source>active</source>
         <translation>активен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3661"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3642"/>
         <source>Please select the new size of the user picture</source>
         <translation>Выберите новый размер изображения пользователя</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3819"/>
         <source>at lunch</source>
         <translation>ушёл на обед</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3847"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3828"/>
         <source>in a meeting</source>
         <translation>на собрании</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3883"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3864"/>
         <source>Do you really want to clear all saved status descriptions?</source>
         <translation>Вы действительно хотите очистить все сохранённые описания статуса?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4060"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4041"/>
         <source>Select your dictionary path</source>
         <translation>Выберите путь к вашему словарю</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4068"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4049"/>
         <source>Dictionary selected: %1</source>
         <translation>Выбран словарь: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4070"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4051"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Не удалось задать словарь: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3285"/>
         <source>%1 is a your group. You can not leave the chat.</source>
         <translation>%1 - это ваша группа. Вы не можете покинуть чат.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3305"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3286"/>
         <source>Delete this group</source>
         <translation>Удалить эту группу</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3329"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3310"/>
         <source>You cannot leave this chat.</source>
         <translation>Вы не можете покинуть этот чат.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3341"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3322"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Вы действительно хотите удалить группу &apos;%1&apos;?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3442"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3423"/>
         <source>Unable to delete this chat.</source>
         <translation>Не удается удалить этот чат.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3445"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 открыл общий доступ к %2 файлам</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3564"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3545"/>
         <source>disabled</source>
         <translation>выключен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3644"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3625"/>
         <source>%1 is online</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3646"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3627"/>
         <source>%1 is offline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3192,7 +3192,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1457"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2629"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2610"/>
         <source>Play %1</source>
         <translation>Играть %1</translation>
     </message>
@@ -3207,48 +3207,48 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>О программе %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2198"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3239"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2179"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3220"/>
         <source>User not found.</source>
         <translation>Пользователь не найден.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2247"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2228"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Вы хотите загрузить %1 (%2) из %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2926"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2907"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation>Звуковой модуль не работает. Будет использован звуковой сигнал по умолчанию.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2931"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2912"/>
         <source>Sound file not found</source>
         <translation>Звуковой файл не найден</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3420"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3401"/>
         <source>Do you really want to delete chat with %1?</source>
         <translation>Вы дейстительно хотите удалить чат с %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3486"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3467"/>
         <source>Default language is restored.</source>
         <translation>Язык по умолчанию восстановлен.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3488"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3469"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Новый язык &apos;%1&apos; выбран.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3491"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3472"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Вы должны перезапустить %1 для применения изменений.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1643"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1624"/>
         <source>Please save the network password in the next dialog.</source>
         <translation>Пожалуйста, сохраните сетевой пароль в следующем диалоге.</translation>
     </message>
@@ -3363,42 +3363,42 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Сеть</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1916"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1897"/>
         <source>New message from %1</source>
         <translation>Новое сообщение от %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1919"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1900"/>
         <source>New message arrived</source>
         <translation>Новое сообщение получено</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2023"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2004"/>
         <source>%1 is writing...</source>
         <translation>%1 набирает...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2053"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2034"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Вы хотите отключиться от сети %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2086"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2067"/>
         <source>You are %1%2</source>
         <translation>Вы - %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2098"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2079"/>
         <source>Please insert the new status description</source>
         <translation>Пожалуйста, вставьте описание нового статуса</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2183"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2164"/>
         <source>There is no user connected.</source>
         <translation>Нет подключенных пользователей.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2189"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2170"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Пожалуйста, выберите пользователя, которому вы хотите отослать файл.</translation>
     </message>
@@ -3410,17 +3410,17 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <location filename="../src/desktop/GuiMain.cpp" line="355"/>
         <location filename="../src/desktop/GuiMain.cpp" line="382"/>
         <location filename="../src/desktop/GuiMain.cpp" line="399"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2248"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2321"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2878"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3342"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3376"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3421"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2302"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2309"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3264"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3402"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3865"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
@@ -3428,22 +3428,22 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <location filename="../src/desktop/GuiMain.cpp" line="355"/>
         <location filename="../src/desktop/GuiMain.cpp" line="382"/>
         <location filename="../src/desktop/GuiMain.cpp" line="399"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2248"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2321"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2878"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3342"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3376"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3421"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2302"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2309"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3264"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3402"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3865"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2280"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2261"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 уже существует. Пожалуйста выберите новое имя файла.</translation>
     </message>
@@ -3452,22 +3452,22 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Файл не доступен для загрузки. Пользователь отключен.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2431"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2412"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - Выберите папку загрузки</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2584"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2565"/>
         <source>Plugin Manager...</source>
         <translation>Менеджер расширений...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2585"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2566"/>
         <source>Open the plugin manager dialog and manage the installed plugins</source>
         <translation>Открыть диалог менеджера расширений и управлять установленными расширениями</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2587"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2568"/>
         <source>is a plugin developed by</source>
         <translation>расширение разработано</translation>
     </message>
@@ -3512,8 +3512,8 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation>Показать панель общедоступных файлов в сети</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2248"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2372"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Да, и больше не спрашивать</translation>
     </message>
@@ -3527,31 +3527,31 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">%1 будет поддерживаться работащим в фоновом режиме</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2877"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2858"/>
         <source>Do you really want to open the file %1?</source>
         <translation>Вы действительно хотите открыть файл %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1483"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2884"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3157"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2865"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3138"/>
         <source>Unable to open %1</source>
         <translation>Не удается открыть %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1483"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2884"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3157"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2865"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3138"/>
         <source>Ok</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2902"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2883"/>
         <source>Sound files (*.wav)</source>
         <translation>Звуковые файл (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2894"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Звук не включен для новых сообщений. Вы хотите включить его?</translation>
     </message>
@@ -3560,41 +3560,41 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
         <translation type="obsolete">Звуковой файл %1 не найден.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3054"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3035"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Теперь %1 будет запускаться при загрузке Windows.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3061"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3042"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 не будет запускаться при загрузке Windows.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3118"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3099"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Пожалуйста, выберите чат, с которым вы хотите связать сохраненный текст.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3127"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3108"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>Выбранный чат &apos;%1&apos; уже содержит сохраненный текст.&lt;br /&gt;Что вы хотите сделать с выбранным сохраненным текстом?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="885"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3129"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3110"/>
         <source>Overwrite</source>
         <translation>Перезаписать</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3129"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3110"/>
         <source>Add in the head</source>
         <translation>Добавить в заголовок</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2366"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3129"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3305"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2347"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2962"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3110"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3286"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -4999,7 +4999,7 @@ BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it unde
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="68"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3364"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3345"/>
         <location filename="../src/desktop/GuiUserItem.cpp" line="118"/>
         <source>All Lan Users</source>
         <translation>Все пользователи сети</translation>

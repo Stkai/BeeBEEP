@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -139,7 +139,7 @@
         <translation>Zde kliknout pro stažení</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="514"/>
+        <location filename="../src/core/Core.cpp" line="518"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -330,17 +330,17 @@
         <translation>uživateli</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="178"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="242"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="239"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Nelze odeslat %2 uživateli  %3: uživatel je odpojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="219"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="216"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Nelze odeslat %2. Přenos souborů je zakázán.</translation>
     </message>
@@ -355,102 +355,102 @@
         <translation>Odesláno</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="186"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="183"/>
         <source>folder</source>
         <translation>složku</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="251"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="248"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: soubor nenalezen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="265"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="262"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 je složka. Můžete ji sdílet.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="290"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="287"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Nelze odeslat %2: %3 není připojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="284"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="281"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Odeslal jste  %2 uživateli  %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="313"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 jste odmítl stáhnout %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="344"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="341"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 jste odmítl stáhnout složku %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="407"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="404"/>
         <source>Adding to file sharing</source>
         <translation>Přidat ke sdílení</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="462"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="459"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 je přidán ke sdílení (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="464"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="461"/>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
         <translation>%1 je přidán do sílení souborů s %2 souborem, %3 (uplynulý čas: %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="500"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="497"/>
         <source>All paths are removed from file sharing</source>
         <translation>Všechny cesty jsou odstraněny ze sdílení</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="522"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="519"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 se odstraní ze sdílení</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="524"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="521"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 je odebrán ze sdílení s %2 soubory</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="575"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="572"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Chystáte se odeslat %2 k uživateli  %3. Kontroluji složku...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="614"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="611"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Nelze odeslat složku %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="619"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
         <source>the folder is empty.</source>
         <translation>Složka je prázdná.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="626"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="623"/>
         <source>file transfer is not working.</source>
         <translation>přenos souborů nefunguje.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="631"/>
         <source>%1 is not connected.</source>
         <translation>%1 není připojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="648"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="645"/>
         <source>internal error.</source>
         <translation>interní chyba.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="653"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="650"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 poslal jste složku %2 k %3.</translation>
     </message>
@@ -1721,10 +1721,10 @@ Vyberte prosím jiné jméno.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="311"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3539"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3540"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3541"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3542"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3520"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3521"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3522"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3523"/>
         <source>offline</source>
         <translation>Odpojen</translation>
     </message>
@@ -1737,17 +1737,17 @@ Vyberte prosím jiné jméno.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="355"/>
         <location filename="../src/desktop/GuiMain.cpp" line="382"/>
         <location filename="../src/desktop/GuiMain.cpp" line="399"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2248"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2321"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2878"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3342"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3376"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3421"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2302"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2309"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3264"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3402"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3865"/>
         <source>Yes</source>
         <translation>Ano</translation>
     </message>
@@ -1755,17 +1755,17 @@ Vyberte prosím jiné jméno.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="355"/>
         <location filename="../src/desktop/GuiMain.cpp" line="382"/>
         <location filename="../src/desktop/GuiMain.cpp" line="399"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2248"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2321"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2878"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3342"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3376"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3421"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2302"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2309"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3264"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3402"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3865"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
@@ -2336,12 +2336,12 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Pokud je volba povolena, smajlíci budou zobrazeny jako font</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1832"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1813"/>
         <source>Show only last %1 messages</source>
         <translation>Zobrazit pouze posledních %1 znaků zprávy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1833"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1814"/>
         <source>If enabled only the last %1 messages will be shown in chat</source>
         <translation>Pokud je volba povolena,v chatu se zobrazí pouze poslední %1 zprávy</translation>
     </message>
@@ -2600,7 +2600,7 @@ Vyberte prosím jiné jméno.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1457"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2629"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2610"/>
         <source>Play %1</source>
         <translation>Hrát %1</translation>
     </message>
@@ -2628,140 +2628,140 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Vždy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1643"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1624"/>
         <source>Please save the network password in the next dialog.</source>
         <translation>Uložte prosím síťové heslo v následujícím dialogovém okně.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1665"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1646"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Kolik minut nečinnosti %1 má program čekat, než se přepne do stavu Nepřítomný?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1701"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1682"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Vyberte prosím maximální počet zobrazovaných zpráv</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1916"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1897"/>
         <source>New message from %1</source>
         <translation>Nová zpráva od %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1919"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1900"/>
         <source>New message arrived</source>
         <translation>Obdržena nová zpráva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2023"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2004"/>
         <source>%1 is writing...</source>
         <translation>%1 píše....</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2053"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2034"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Chcete se odpojit od %1 sítě?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2086"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2067"/>
         <source>You are %1%2</source>
         <translation>Jste %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2098"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2079"/>
         <source>Please insert the new status description</source>
         <translation>Zadejte prosím nový popis stavu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2147"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2128"/>
         <source>%1 - Select a file</source>
         <translation>%1 - Vybrat jeden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2147"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2128"/>
         <source>or more</source>
         <translation>nebo více souborů</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2183"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2164"/>
         <source>There is no user connected.</source>
         <translation>Žádný uživatel není připojen.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2189"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2170"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Vyberte prosím uživatele, kterému chcete odeslat soubor.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2198"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3239"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2179"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3220"/>
         <source>User not found.</source>
         <translation>Uživatel nebyl nalezen.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2226"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2376"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2207"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2357"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Přenos souborů je zakázán.Nelze stáhnout %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2248"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2372"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Ano a příště se neptat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2280"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2261"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 existuje. Vyberte nový název souboru.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2319"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Nelze stáhnout všechny tyto soubory najednou.  Chcete stáhnout prvních %1 souborů ze seznamu?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2327"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2308"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>Stahování  %1 souborů může trvat velmi dlouho. Opravdu chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2345"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2326"/>
         <source>%1 files are scheduled for download</source>
         <translation>%1 soubor je zařazen ke stažení</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2390"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2371"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>Chcete stáhnout složku %1 (%2 souborů) od %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2431"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2412"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - vybrat složku pro uložení</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2584"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2565"/>
         <source>Plugin Manager...</source>
         <translation>Správce doplňků...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2585"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2566"/>
         <source>Open the plugin manager dialog and manage the installed plugins</source>
         <translation>Otevřít správce doplňků a spravovat nainstalované doplňky</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3819"/>
         <source>at lunch</source>
         <translation>na obědě</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3847"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3828"/>
         <source>in a meeting</source>
         <translation>na schůzi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3883"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3864"/>
         <source>Do you really want to clear all saved status descriptions?</source>
         <translation>Opravdu chcete odstranit všechny uložené popisy stavu?</translation>
     </message>
@@ -3016,211 +3016,211 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1517"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1498"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2166"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2147"/>
         <source>File transfer is not enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2172"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2153"/>
         <source>You are not connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2587"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2568"/>
         <source>is a plugin developed by</source>
         <translation>je doplněk vyvinutý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2612"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2593"/>
         <source>Show the bar of games</source>
         <translation>Zobrazit lištu her</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2877"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2858"/>
         <source>Do you really want to open the file %1?</source>
         <translation>Opravdu chcete otevřít soubor %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4271"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4252"/>
         <source>New file from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1483"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2884"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3157"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2865"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3138"/>
         <source>Unable to open %1</source>
         <translation>Nelze otevřít %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1483"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2884"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3157"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2865"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3138"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2902"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2883"/>
         <source>Sound files (*.wav)</source>
         <translation>Zvukové soubory (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2894"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>U nové zprávy není povolen zvuk. Chcete ho povolit?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2926"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2907"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation>Zvukový modul nefunguje. Bude použit výchozí pípnutí.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2931"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2912"/>
         <source>Sound file not found</source>
         <translation>Zvukový soubor nebyl nalezen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2932"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
         <source>The default BEEP will be used</source>
         <translation>Bude použito výchozí pípnutí</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2978"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2959"/>
         <source>Group chat will be deleted when all members goes offline.</source>
         <translation>Skupinový chat bude zrušen, jakmile všichni uživatelé tento chat opustí.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2979"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2960"/>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
         <translation>Pokud chcete chatovat s těmito uživateli trvale, zvažte prosím vytvoření skupiny.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2980"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2961"/>
         <source>Do you wish to continue or create group?</source>
         <translation>Chcete pokračovat nebo vytvořit skupinu?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2962"/>
         <source>Continue</source>
         <translation>Pokračovat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2962"/>
         <source>Create Group</source>
         <translation>Vytvořit skupinu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3007"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2988"/>
         <source>Unable to add users in this chat. Please select a group one.</source>
         <translation>Nelze přidat uživatele v tomto chatu. Vyberte prosím skupinu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3054"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3035"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Nyní se %1 spustí při startu Windows.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3056"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3063"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3037"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3044"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Nelze přidat tento klíč do registru: přístup odepřen.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3061"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3042"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 se nespustí při startu Windows.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3118"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3099"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Vyberte prosím chat, do kterého chcete přiřadit uložený text.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3127"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3108"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>Chat &apos;%1&apos; má již uložený text.&lt;br /&gt;Co chcete udělat s vybraným uloženým textem?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="885"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3129"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3110"/>
         <source>Overwrite</source>
         <translation>Přepsat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3129"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3110"/>
         <source>Add in the head</source>
         <translation>Přidat do hlavičky</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3282"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3263"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Všichni členové tohoto chatu nejsou online. Tyto změny nemusí být trvalé. Přejete si pokračovat?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3420"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3401"/>
         <source>Do you really want to delete chat with %1?</source>
         <translation>Opravdu chcete vymazat chat s %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3544"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3525"/>
         <source>inactive</source>
         <translation>neaktivní</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3564"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3545"/>
         <source>disabled</source>
         <translation>zakázán</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3571"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3552"/>
         <source>active</source>
         <translation>aktivní</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3644"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3625"/>
         <source>%1 is online</source>
         <translation>Uživatel %1 je připojen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3646"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3627"/>
         <source>%1 is offline</source>
         <translation>Uživatel %1 je odpojen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3661"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3642"/>
         <source>Please select the new size of the user picture</source>
         <translation>Vyberte prosím novou velikost obrázku uživatele</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4060"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4041"/>
         <source>Select your dictionary path</source>
         <translation>Vybrat cestu ke slovníku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4068"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4049"/>
         <source>Dictionary selected: %1</source>
         <translation>Vybrán slovník: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4070"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4051"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Nelze nastavit slovník: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4223"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4204"/>
         <source>Window geometry and state saved</source>
         <translation>Velikost a stav okna uloženy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2366"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3129"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3305"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2347"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2962"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3110"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3286"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
@@ -3255,87 +3255,87 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Zobrazit lištu chatu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2247"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2228"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Chcete stáhnout %1 (%2) od %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2360"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2341"/>
         <source>File is not available for download.</source>
         <translation>Soubor není k dispozici.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2343"/>
         <source>%1 is not connected.</source>
         <translation>%1 není připojen.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2363"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2344"/>
         <source>Please reload the list of shared files.</source>
         <translation>Obnovte prosím seznam sdílených souborů.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2366"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2347"/>
         <source>Reload file list</source>
         <translation>Obnovit seznam souborů</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3367"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3348"/>
         <source>Chat with %1 is empty.</source>
         <translation>Chat s %1 je prázdný.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3352"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Opravdu chcete odstranit zprávy od %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3374"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3355"/>
         <source>Yes and delete history</source>
         <translation>Ano a odstranit historii</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3285"/>
         <source>%1 is a your group. You can not leave the chat.</source>
         <translation>%1 je vaše skupina. Nemůžete opustit chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3305"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3286"/>
         <source>Delete this group</source>
         <translation>Odstranit tuto skupinu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3329"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3310"/>
         <source>You cannot leave this chat.</source>
         <translation>Nelze opustit tento chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3341"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3322"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Opravdu chcete vymazat skupinu &apos;%1&apos;?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3442"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3423"/>
         <source>Unable to delete this chat.</source>
         <translation>Nelze odstranit tento chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3445"/>
         <source>%1 has shared %2 files</source>
         <translation>Uživatel %1 nasdílel %2 souborů</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3486"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3467"/>
         <source>Default language is restored.</source>
         <translation>Výchozí jazyk byl obnoven.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3488"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3469"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Nový jazyk &apos;%1&apos; byl vybrán.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3491"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3472"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Pro použití těchto změn je nutno restartovat %1.</translation>
     </message>
@@ -4619,7 +4619,7 @@ Vyberte prosím jiné jméno.</translation>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="68"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3364"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3345"/>
         <location filename="../src/desktop/GuiUserItem.cpp" line="118"/>
         <source>All Lan Users</source>
         <translation>Všichni uživatelé v síti</translation>
