@@ -1,3 +1,4 @@
+BeeBEEP 3.0.8 
 
    translation file  %ready   (unfinished/(total-obsolete))
 =============================================================
