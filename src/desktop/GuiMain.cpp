@@ -129,6 +129,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
   connect( mp_core, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
+  connect( mp_core, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
 #endif
@@ -232,7 +233,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
   connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( detachChatRequest( VNumber ) ), this, SLOT( detachChat( VNumber ) ) );
-
+  connect( gui_chat, SIGNAL( sendBuzzToUserRequest( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
 }
 
 void GuiMain::toggleVisibilityEmoticonPanel()
@@ -943,6 +944,11 @@ void GuiMain::createMenus()
   mp_actGroupBeepOnNewMessage->addAction( mp_actAlwaysBeepOnNewMessage );
   mp_actGroupBeepOnNewMessage->addAction( mp_actNeverBeepOnNewMessage );
   connect( mp_actGroupBeepOnNewMessage, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingBeepOnNewMessage( QAction* ) ) );
+
+  act = mp_menuSettings->addAction( tr( "Enable Buzz sound" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().playBuzzSound() );
+  act->setData( 56 );
 
   act = mp_menuSettings->addAction( tr( "Raise on top on new message" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled when a new message is arrived %1 is shown on top of all other windows" ).arg( Settings::instance().programName() ) );
@@ -1784,6 +1790,9 @@ void GuiMain::settingsChanged()
   case 55:
     Settings::instance().setShowTextInModeRTL( act->isChecked() );
     refresh_chat = true;
+    break;
+  case 56:
+    Settings::instance().setPlayBuzzSound( act->isChecked() );
     break;
   case 99:
     break;
@@ -4251,6 +4260,22 @@ void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const Fil
       chat_id = c.id();
     mp_trayIcon->showNewFileArrived( chat_id, tr( "New file from %1" ).arg( u.name() ), false );
   }
+}
+
+void GuiMain::sendBuzzToUser( VNumber user_id )
+{
+  if( mp_core->isConnected() )
+    mp_core->sendBuzzToUser( user_id );
+}
+
+void GuiMain::showBuzzFromUser( const User& u )
+{
+  if( Settings::instance().playBuzzSound() )
+    playBeep();
+
+  Chat c = ChatManager::instance().privateChatForUser( u.id() );
+  if( c.isValid() )
+    mp_trayIcon->showNewMessageArrived( c.id(), tr( "%1 is buzzing you!" ), true );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

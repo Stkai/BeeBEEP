@@ -75,6 +75,7 @@ signals:
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
+  void sendBuzzToUserRequest( VNumber );
 
 public slots:
   void appendChatMessage( VNumber, const ChatMessage& );
@@ -130,6 +131,7 @@ private slots:
   void showFindTextInChatDialog();
   void findNextTextInChat();
   void openSelectedTextAsUrl();
+  void sendBuzz();
 
 protected:
   void findTextInChat( const QString& );
@@ -155,6 +157,7 @@ private:
   QAction* mp_actFindTextInChat;
   QAction* mp_actSendFolder;
   QAction* mp_actSaveAs;
+  QAction* mp_actBuzz;
 
   QMenu* mp_menuMembers;
   QSplitter* mp_splitter;

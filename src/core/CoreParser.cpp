@@ -76,6 +76,9 @@ void Core::parseMessage( const User& u, const Message& m )
   case Message::ShareBox:
     parseShareBoxMessage( u, m );
     break;
+  case Message::Buzz:
+    parseBuzzMessage( u, m );
+    break;
   case Message::ShareDesktop:
 #ifdef BEEBEEP_USE_SHAREDESKTOP
     parseDesktopShareMessage( u, m );
@@ -429,6 +432,16 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
   }
   else
     qWarning() << "Invalid flag found in share box message from user" << qPrintable( u.path() );
+}
+
+void Core::parseBuzzMessage( const User& u, const Message& )
+{
+  QString sys_msg = tr( "%1 %2 is buzzing you." ).arg( Bee::iconToHtml( ":/images/bell.png", "*Z*" ), u.name() );
+  Chat c = ChatManager::instance().privateChatForUser( u.id() );
+  if( !c.isValid() )
+    c = ChatManager::instance().defaultChat();
+  dispatchSystemMessage( c.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::Other );
+  emit localUserIsBuzzedBy( u );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

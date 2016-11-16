@@ -417,6 +417,9 @@ public:
   inline void setShowTextInModeRTL( bool );
   inline bool showTextInModeRTL() const;
 
+  inline void setPlayBuzzSound( bool );
+  inline bool playBuzzSound() const;
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -556,6 +559,7 @@ private:
   bool m_sortUsersAscending;
   bool m_showPresetMessages;
   bool m_showTextInModeRTL;
+  bool m_playBuzzSound;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -949,6 +953,7 @@ inline void Settings::setShowPresetMessages( bool new_value ) { m_showPresetMess
 inline bool Settings::showPresetMessages() const { return m_showPresetMessages; }
 inline void Settings::setShowTextInModeRTL( bool new_value ) { m_showTextInModeRTL = new_value; }
 inline bool Settings::showTextInModeRTL() const { return m_showTextInModeRTL; }
-
+inline void Settings::setPlayBuzzSound( bool new_value ) { m_playBuzzSound = new_value; }
+inline bool Settings::playBuzzSound() const { return m_playBuzzSound; }
 
 #endif // BEEBEEP_SETTINGS_H

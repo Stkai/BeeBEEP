@@ -56,6 +56,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Ping:     return "BEE-PING";
   case Message::Pong:     return "BEE-PONG";
   case Message::Chat:     return "BEE-CHAT";
+  case Message::Buzz:     return "BEE-BUZZ";
   case Message::Hello:    return "BEE-CIAO";
   case Message::System:   return "BEE-SYST";
   case Message::User:     return "BEE-USER";
@@ -85,6 +86,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Chat;
   else if( msg_type == "BEE-READ" )
     return Message::Read;
+  else if( msg_type == "BEE-BUZZ" )
+    return Message::Buzz;
   else if( msg_type == "BEE-CIAO")
     return Message::Hello;
   else if( msg_type == "BEE-SYST")

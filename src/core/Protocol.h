@@ -75,6 +75,7 @@ public:
   Message folderRefusedToMessage( const QString&, const QString& );
   QStringList workgroupsFromHelloMessage( const Message& ) const;
   bool acceptConnectionFromWorkgroup( const Message& ) const;
+  inline Message buzzMessage() const;
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
   QByteArray localUserStatusMessage() const;
@@ -172,6 +173,7 @@ inline VNumber Protocol::newId() { return ++m_id; }
 inline VNumber Protocol::maxId() const { return 18446744073709000000u; }
 inline int Protocol::messageMinimumSize() const { return 10; }
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
+inline Message Protocol::buzzMessage() const { return Message( Message::Buzz, ID_BUZZ_MESSAGE, QLatin1String( "*" ) ); }
 inline const QByteArray& Protocol::fileShareListMessage() const { return m_fileShareListMessage; }
 inline const QByteArray& Protocol::fileShareRequestMessage() const { return m_fileShareRequestMessage; }
 inline int Protocol::datastreamMaxVersion() const { return m_datastreamMaxVersion; }

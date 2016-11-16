@@ -95,6 +95,7 @@ const int AUTO_BROADCAST_CHECK_TICK = 31;
 #define ID_SHAREBOX_MESSAGE       19
 #define ID_DOTDOT_FOLDER          20
 #define ID_SHAREDESKTOP_MESSAGE   21
+#define ID_BUZZ_MESSAGE           22
 
 
 // FILE_SHARING

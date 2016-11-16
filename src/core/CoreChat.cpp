@@ -640,3 +640,24 @@ void Core::sendLocalUserHasReadChatMessage( const Chat& c )
     }
   }
 }
+
+void Core::sendBuzzToUser( VNumber user_id )
+{
+  User u = UserManager::instance().userList().find( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to send a buzz to invalid user id" << user_id;
+    return;
+  }
+
+  if( sendMessageToLocalNetwork( u, Protocol::instance().buzzMessage() ) )
+  {
+    QString sys_msg = tr( "%1 You have buzzed %2." ).arg( Bee::iconToHtml( ":/images/bell.png", "*Z*" ), u.name() );
+    Chat c = ChatManager::instance().privateChatForUser( u.id() );
+    if( !c.isValid() )
+      c = ChatManager::instance().defaultChat();
+    dispatchSystemMessage( c.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::Other );
+  }
+  else
+    qWarning() << "Unable to send a buzz to offline user" << qPrintable( u.path() );
+}

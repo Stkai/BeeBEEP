@@ -958,6 +958,7 @@ void Settings::load()
   m_userSortingMode = qMax( 0, (int)sets->value( "UserSortingMode", 0 ).toInt() );
   m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
   m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
+  m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1235,6 +1236,7 @@ void Settings::save()
   sets->setValue( "UserSortingMode", m_userSortingMode );
   sets->setValue( "SortUsersAscending", m_sortUsersAscending );
   sets->setValue( "ShowChatTextInModeRTL", m_showTextInModeRTL );
+  sets->setValue( "PlayBuzzSound", m_playBuzzSound );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

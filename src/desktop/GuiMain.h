@@ -77,6 +77,8 @@ public slots:
   void showUp();
   void onTickEvent( int );
   void saveSession( QSessionManager& );
+  void sendBuzzToUser( VNumber );
+  void showBuzzFromUser( const User& );
 
 private slots:
   void startCore();

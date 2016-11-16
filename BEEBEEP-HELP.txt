@@ -169,6 +169,7 @@ UserSortingMode=[integer] it defines the mode of users sorting (0=default) [3.0.
 SortUsersAscending=[true/false] if not true the users are sorting in descending mode [3.0.8]
 ShowPresetMessages=[true/false] if true the preset messages list is showed [3.0.8]
 ShowChatTextInModeRTL=[true/false] if true the layout direction in chat is RTL (default=false) [3.0.8]
+PlayBuzzSound=[true/false] if true a user can send you a buzz alert (default=true) [3.0.9]
 
 [Tools]
 LogToFile=[true/false] enable file logging

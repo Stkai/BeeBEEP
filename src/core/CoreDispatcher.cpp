@@ -113,9 +113,6 @@ void Core::dispatchChatMessageReadReceived( VNumber from_user_id, const Message&
 
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt )
 {
-//#ifdef BEEBEEP_DEBUG
-//  qDebug() << "Dispatch system message to chat" << chat_id << "from user" << from_user_id << "with type" << (int)dt;
-//#endif
   Message m = Protocol::instance().systemMessage( msg );
   ChatMessage cm( from_user_id, m, cmt );
 

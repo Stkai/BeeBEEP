@@ -154,6 +154,8 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actUseReturnToSendMessage->setCheckable( true );
   updateActionsOnFocusChanged();
   bar->addSeparator();
+  mp_actBuzz = bar->addAction( QIcon( ":/images/bell.png" ), tr( "Send a buzz" ), this, SLOT( sendBuzz() ) );
+  bar->addSeparator();
 
   mp_menuMembers = new QMenu( tr( "Members" ), this );
   mp_menuMembers->setStatusTip( tr( "Show the members of the chat" ) );
@@ -393,6 +395,7 @@ void GuiChat::setChatUsers()
 
   bool chat_has_members = false;
   Chat c = ChatManager::instance().chat( m_chatId );
+  mp_actBuzz->setDisabled( true );
 
   if( c.isDefault() )
   {
@@ -425,6 +428,8 @@ void GuiChat::setChatUsers()
       if( u.isStatusConnected() && isActiveUser( c, u ) )
       {
         act->setEnabled( true  );
+        if( !u.isLocal() )
+          mp_actBuzz->setEnabled( c.isPrivate() );
         connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
       }
       else
@@ -1151,5 +1156,17 @@ void GuiChat::openSelectedTextAsUrl()
 #endif
     QUrl url = QUrl::fromUserInput( selected_text );
     emit openUrl( url );
+  }
+}
+
+void GuiChat::sendBuzz()
+{
+  if( !mp_pbSend->isEnabled() )
+    return;
+
+  foreach( User u, m_chatUsers.toList() )
+  {
+    if( !u.isLocal() )
+      sendBuzzToUserRequest( u.id() );
   }
 }

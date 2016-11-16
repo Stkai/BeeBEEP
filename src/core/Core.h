@@ -88,6 +88,7 @@ public:
   bool removeUserFromChat( const User&, VNumber );
   bool removeChat( VNumber );
   bool readAllMessagesInChat( VNumber );
+  void sendBuzzToUser( VNumber );
 
   /* CoreFileTransfer */
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );
@@ -156,6 +157,7 @@ signals:
   void shareBoxUnavailable( const User&, const QString& );
   void shareBoxDownloadCompleted( VNumber, const FileInfo& );
   void shareBoxUploadCompleted( VNumber, const FileInfo& );
+  void localUserIsBuzzedBy( const User& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopImageAvailable( const User&, const QPixmap& );
 #endif
@@ -212,6 +214,7 @@ protected:
   void parseChatReadMessage( const User&, const Message& );
   void parseHiveMessage( const User&, const Message& );
   void parseShareBoxMessage( const User&, const Message& );
+  void parseBuzzMessage( const User&, const Message& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void parseDesktopShareMessage( const User&, const Message& );
 #endif
