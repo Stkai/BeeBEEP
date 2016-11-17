@@ -21,7 +21,7 @@
 #
 ######################################################################
 
-BEEBEEP_VERSION="3.0.8"
+BEEBEEP_VERSION="3.0.9"
 BASE_FOLDER=".."
 RELEASE_FOLDER="beebeep-${BEEBEEP_VERSION}-${BEEBEEP_QT_VERSION}-${BEEBEEP_ARCH_TYPE}"
 

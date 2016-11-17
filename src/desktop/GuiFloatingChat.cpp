@@ -63,6 +63,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   actViewPresetMessageList->setIcon( QIcon( ":/images/preset-message.png" ) );
   actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
   mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
+  mp_dockPresetMessageList->hide();
 
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
@@ -76,8 +77,9 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
   mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
   mp_actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
-  mp_dockEmoticons->hide();
   mp_actViewEmoticons->setVisible( !Settings::instance().useOnlyTextEmoticons() );
+  mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
+  mp_dockEmoticons->hide();
 
   setCentralWidget( mp_chat );
   statusBar();
