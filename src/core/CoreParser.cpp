@@ -440,6 +440,8 @@ void Core::parseBuzzMessage( const User& u, const Message& )
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( !c.isValid() )
     c = ChatManager::instance().defaultChat();
+  c.addUnreadMessage();
+  ChatManager::instance().setChat( c );
   dispatchSystemMessage( c.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::Other );
   emit localUserIsBuzzedBy( u );
 }

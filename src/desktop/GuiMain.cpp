@@ -4273,7 +4273,7 @@ void GuiMain::showBuzzFromUser( const User& u )
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( c.isValid() )
-    mp_trayIcon->showNewMessageArrived( c.id(), tr( "%1 is buzzing you!" ), true );
+    mp_trayIcon->showNewMessageArrived( c.id(), tr( "%1 is buzzing you!" ).arg( u.name() ), true );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

@@ -179,7 +179,7 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actGroupWizard = bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
   mp_actGroupWizard->setStatusTip( tr( "Create a group from this chat" ) );
   mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
-  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add and remove users" ) );
+  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
   mp_actLeave->setStatusTip( tr( "Leave the group" ) );
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -622,6 +622,14 @@
         <source>Try the new awesome application developed by Marco Mastrodi</source>
         <translation>Prova la nuova mitica applicazione  sviluppata da Marco Mastroddi</translation>
     </message>
+    <message>
+        <source>%1 You have buzzed %2.</source>
+        <translation>%1 Hai inviato un Buzz a %2.</translation>
+    </message>
+    <message>
+        <source>%1 %2 is buzzing you.</source>
+        <translation>%1 %2 ti ha inviato un Buzz.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1008,7 +1016,7 @@
     </message>
     <message>
         <source>Change the name of the group or add and remove users</source>
-        <translation>Cambia il nome del gruppo o aggiungi o rimuovi i membri</translation>
+        <translation type="obsolete">Cambia il nome del gruppo o aggiungi o rimuovi i membri</translation>
     </message>
     <message>
         <source>Clear messages</source>
@@ -1235,6 +1243,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Select the message types which will be shown in chat</source>
         <translation>Seleziona la tipologia di messaggi che vuoi che sia mostrata nella conversazione</translation>
+    </message>
+    <message>
+        <source>Send a buzz</source>
+        <translation>Invia un Buzz</translation>
+    </message>
+    <message>
+        <source>Change the name of the group or add users</source>
+        <translation>Cambia il nome del gruppo e aggiungi altri utenti</translation>
     </message>
 </context>
 <context>
@@ -3632,6 +3648,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>Use RTL mode to show text</source>
         <translation>Usa la modalità RTL per mostrare il testo</translation>
+    </message>
+    <message>
+        <source>Enable Buzz sound</source>
+        <translation>Abilita il suono del Buzz</translation>
+    </message>
+    <message>
+        <source>%1 is buzzing you!</source>
+        <translation>%1 ti inviato un Buzz!</translation>
     </message>
 </context>
 <context>
