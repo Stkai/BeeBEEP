@@ -132,6 +132,7 @@ private slots:
   void findNextTextInChat();
   void openSelectedTextAsUrl();
   void sendBuzz();
+  void enableBuzz();
 
 protected:
   void findTextInChat( const QString& );

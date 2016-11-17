@@ -1169,4 +1169,12 @@ void GuiChat::sendBuzz()
     if( !u.isLocal() )
       sendBuzzToUserRequest( u.id() );
   }
+
+  mp_actBuzz->setDisabled( true );
+  QTimer::singleShot( 1000, this, SLOT( enableBuzz() ) );
+}
+
+void GuiChat::enableBuzz()
+{
+  mp_actBuzz->setEnabled( true );
 }

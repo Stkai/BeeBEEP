@@ -1245,10 +1245,8 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
   mp_barMain->addAction( mp_actViewShareBox );
-#ifdef BEEBEEP_DEBUG
-  mp_barMain->addAction( mp_actViewLog );
-#endif
   mp_barMain->addAction( mp_actViewScreenShot );
+  mp_barMain->addAction( mp_actViewLog );
 }
 
 void GuiMain::createDockWindows()
