@@ -159,7 +159,7 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
       user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.accountPath() ) );
   }
 
-  sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), user_string_list.join( ", " ) );
+  sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), user_string_list.join( ", " ) );
   c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
 
   ChatManager::instance().setChat( c );
@@ -244,7 +244,7 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
 
   if( user_removed_string_list.size() > 0 || user_added_string_list.size() > 0 )
   {
-    sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/user-list.png", "*G*" ), user_string_list.join( ", " ) );
+    sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), user_string_list.join( ", " ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
   }
 
@@ -393,10 +393,7 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
     qDebug() << "Send group chat request to:" << qPrintable( group_members );
 #endif
 
-    if( !sendMessageToLocalNetwork( u, group_message ) )
-      dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 can not join to the group." )
-                             .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) ).arg( u.name() ),
-                             DispatchToChat, ChatMessage::Other );
+    sendMessageToLocalNetwork( u, group_message );
   }
 }
 

@@ -94,7 +94,15 @@ void GuiShareBox::onEnableMyShareBoxClicked()
   Settings::instance().setUseShareBox( mp_cbEnableMyBox->isChecked() );
   if( mp_cbEnableMyBox->isChecked() )
   {
-    if( Settings::instance().shareBoxPath().isEmpty() || !QDir( Settings::instance().shareBoxPath() ).exists() )
+    bool select_box = Settings::instance().shareBoxPath().isEmpty();
+    if( !select_box )
+    {
+      QDir box_folder( Settings::instance().shareBoxPath() );
+      if( box_folder.exists() )
+        select_box = !Bee::folderIsWriteable( Settings::instance().shareBoxPath() );
+    }
+
+    if( select_box )
     {
       QMessageBox::information( this, Settings::instance().programName(), tr( "ShareBox path does not exist. Please select a valid folder.") );
       selectMyShareBoxFolder();

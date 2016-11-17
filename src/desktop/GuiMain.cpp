@@ -1901,7 +1901,7 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
         long_time_show = true;
       }
       else
-        msg = tr( "New message from %1" ).arg( u.name() );
+        msg = tr( "New message from %1" ).arg( c.isGroup() ? c.name() : u.name() );
     }
     else
       msg = tr( "New message arrived" );
