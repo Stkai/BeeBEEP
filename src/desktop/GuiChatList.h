@@ -43,6 +43,7 @@ signals:
   void chatSelected( VNumber chat_id );
   void chatToClear( VNumber chat_id );
   void chatToRemove( VNumber chat_id );
+  void createNewChatRequest();
 
 public slots:
   void updateChat( VNumber chat_id );

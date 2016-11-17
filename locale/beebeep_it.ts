@@ -440,7 +440,7 @@
     </message>
     <message>
         <source>%1 %2 can not join to the group.</source>
-        <translation>%1 %2 non può far parte del gruppo.</translation>
+        <translation type="obsolete">%1 %2 non può far parte del gruppo.</translation>
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
@@ -1270,6 +1270,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Delete</source>
         <translation>Cancella</translation>
+    </message>
+    <message>
+        <source>Create chat</source>
+        <translation>Crea una conversazione</translation>
     </message>
 </context>
 <context>
@@ -2711,7 +2715,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>New message from %1</source>
-        <translation>Nuovo messaggio da %1</translation>
+        <translation type="obsolete">Nuovo messaggio da %1</translation>
     </message>
     <message>
         <source>New message arrived</source>
@@ -3656,6 +3660,34 @@ il file %2 (%3)?</translation>
     <message>
         <source>%1 is buzzing you!</source>
         <translation>%1 ti inviato un Buzz!</translation>
+    </message>
+    <message>
+        <source>New message from %1 to all</source>
+        <translation type="obsolete">Nuovo messaggio da %1 a tutti</translation>
+    </message>
+    <message>
+        <source>New message from %1 to %2</source>
+        <translation type="obsolete">Nuovo messaggio da %1 a %2</translation>
+    </message>
+    <message>
+        <source>New message from %1 to you</source>
+        <translation type="obsolete">Nuovo messaggio da %1 a te</translation>
+    </message>
+    <message>
+        <source>to all</source>
+        <translation>a tutti</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation>a</translation>
+    </message>
+    <message>
+        <source>to you</source>
+        <translation>a te</translation>
+    </message>
+    <message>
+        <source>New message from</source>
+        <translation>Nuovo messaggio da</translation>
     </message>
 </context>
 <context>

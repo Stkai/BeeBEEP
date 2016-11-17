@@ -124,7 +124,12 @@ void GuiChatList::showChatMenu( const QPoint& p )
 {
   QTreeWidgetItem* item = itemAt( p );
   if( !item )
+  {
+    QMenu menu_create_chat;
+    menu_create_chat.addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
+    menu_create_chat.exec( QCursor::pos() );
     return;
+  }
 
   GuiChatItem* chat_item = (GuiChatItem*)item;
   m_chatSelected = chat_item->chatId();

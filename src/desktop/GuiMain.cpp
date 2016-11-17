@@ -175,6 +175,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToRemove( VNumber ) ), this, SLOT( removeChat( VNumber ) ) );
+  connect( mp_chatList, SIGNAL( createNewChatRequest() ), this, SLOT( createChat() ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
@@ -1873,6 +1874,7 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
   {
     if( Settings::instance().raiseOnNewMessageArrived() )
     {
+      *chat_window_is_created = mp_chat->chatId() != chat_id;
       showChat( chat_id );
       raiseOnTop();
       show_message_in_tray = false;
@@ -1897,11 +1899,26 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
           txt.truncate( Settings::instance().textSizeInChatMessagePreviewOnTray() );
           txt.append( "..." );
         }
-        msg = QString( "%1: %2" ).arg( u.name() ).arg( txt );
+
+        if( c.isDefault() )
+          msg = QString( "%1 %2: %3" ).arg( u.name(), tr( "to all" ), txt );
+        else if( c.isGroup() )
+          msg = QString( "%1 %2 %3: %4" ).arg( u.name(), tr( "to" ), c.name(), txt );
+        else
+          msg = QString( "%1 %2: %4" ).arg( u.name(), tr( "to you" ), txt );
+
         long_time_show = true;
       }
       else
-        msg = tr( "New message from %1" ).arg( c.isGroup() ? c.name() : u.name() );
+      {
+        QString pre_msg = tr( "New message from" );
+        if( c.isDefault() )
+          msg = QString( "%1 %2 %3" ).arg( pre_msg, u.name(), tr( "to all" ) );
+        else if( c.isGroup() )
+          msg = QString( "%1 %2 %3 %4" ).arg( pre_msg, u.name(), tr( "to" ), c.name() );
+        else
+          msg = QString( "%1 %2 %3" ).arg( pre_msg, u.name(), tr( "to you" ) );
+      }
     }
     else
       msg = tr( "New message arrived" );
