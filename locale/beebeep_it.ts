@@ -5132,6 +5132,10 @@ il file %2 (%3)?</translation>
         <source>Remove user</source>
         <translation>Rimuovi utente</translation>
     </message>
+    <message>
+        <source>Send a buzz</source>
+        <translation>Invia un Buzz</translation>
+    </message>
 </context>
 <context>
     <name>GuiWizard</name>

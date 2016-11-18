@@ -44,6 +44,7 @@ signals:
   void changeUserColor( VNumber );
   void toggleFavorite( VNumber );
   void removeUser( VNumber );
+  void buzzUser( VNumber );
 
 private slots:
   void showPrivateChat();
@@ -51,6 +52,7 @@ private slots:
   void changeColor();
   void favoriteClicked();
   void removeUserClicked();
+  void sendBuzz();
 
 private:
   VNumber m_userId;

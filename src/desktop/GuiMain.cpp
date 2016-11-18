@@ -2563,6 +2563,7 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
   connect( gvc, SIGNAL( toggleFavorite( VNumber ) ), this, SLOT( toggleUserFavorite( VNumber ) ) );
   connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUserFromList( VNumber ) ) );
+  connect( gvc, SIGNAL( buzzUser( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
   gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id(), mp_core->isConnected() );
 
   if( ensure_visible && dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )

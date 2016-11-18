@@ -66,6 +66,5 @@ win32|macx|unix:!android: equals(QT_MAJOR_VERSION, 4): lessThan(QT_MINOR_VERSION
     message( MDns disabled due the old Qt version )
   } else { include(mdns/mdns.pri) }
 
-
 message( Libs: $$LIBS )
 message( Defines: $$DEFINES )

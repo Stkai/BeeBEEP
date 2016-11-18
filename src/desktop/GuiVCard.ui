@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>376</width>
-    <height>144</height>
+    <width>414</width>
+    <height>168</height>
    </rect>
   </property>
   <property name="palette">
@@ -94,7 +94,7 @@
     <number>0</number>
    </property>
    <property name="spacing">
-    <number>0</number>
+    <number>2</number>
    </property>
    <item row="0" column="0">
     <widget class="QLabel" name="mp_lPhoto">
@@ -393,18 +393,6 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="leftMargin">
-       <number>2</number>
-      </property>
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="rightMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
       <item>
        <widget class="QLabel" name="mp_lStatus">
         <property name="sizePolicy">
@@ -495,6 +483,41 @@
         <property name="icon">
          <iconset resource="../beebeep.qrc">
           <normaloff>:/images/send-file.png</normaloff>:/images/send-file.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mp_pbBuzz">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Send a buzz</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../beebeep.qrc">
+          <normaloff>:/images/bell.png</normaloff>:/images/bell.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>

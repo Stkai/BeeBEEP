@@ -44,6 +44,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeColor() ) );
   connect( mp_pbFavorite, SIGNAL( clicked() ), this, SLOT( favoriteClicked() ) );
   connect( mp_pbRemove, SIGNAL( clicked() ), this, SLOT( removeUserClicked() ) );
+  connect( mp_pbBuzz, SIGNAL( clicked() ), this, SLOT( sendBuzz() ) );
 }
 
 void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected )
@@ -110,6 +111,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     mp_pbChat->setToolTip( tr( "Chat with all" ) );
     mp_pbFile->hide();
     mp_pbFavorite->hide();
+    mp_pbBuzz->hide();
   }
   else
   {
@@ -123,6 +125,11 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
       mp_pbFavorite->show();
     else
       mp_pbFavorite->hide();
+
+    if( u.isStatusConnected() )
+      mp_pbBuzz->show();
+    else
+      mp_pbBuzz->hide();
   }
 
   if( u.isStatusConnected() || UserManager::instance().isUserInGroups( u.id() )
@@ -130,10 +137,6 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     mp_pbRemove->hide();
   else
     mp_pbRemove->show();
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "VCard shown for the user" << u.path();
-#endif
 }
 
 void GuiVCard::showPrivateChat()
@@ -168,5 +171,13 @@ void GuiVCard::removeUserClicked()
 {
   hide();
   emit removeUser( m_userId );
+  close();
+}
+
+void GuiVCard::sendBuzz()
+{
+  hide();
+  emit showChat( m_chatId );
+  emit buzzUser( m_userId );
   close();
 }
