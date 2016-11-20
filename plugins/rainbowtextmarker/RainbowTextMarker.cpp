@@ -133,9 +133,9 @@ namespace
     g = g*max + min;
     b = b*max + min;
 */
-    int color_r = qRound( qMax( 0.0, qMin( 255.0, r ) ) );
-    int color_g = qRound( qMax( 0.0, qMin( 255.0, g ) ) );
-    int color_b = qRound( qMax( 0.0, qMin( 255.0, b ) ) );
+    int color_r = qRound( qMax( 0.0, qMin( 255.0, (double)r ) ) );
+    int color_g = qRound( qMax( 0.0, qMin( 255.0, (double)g ) ) );
+    int color_b = qRound( qMax( 0.0, qMin( 255.0, (double)b ) ) );
 
  #if defined( COLOR_GRADIENT_DEBUG )
     qDebug() << "RGB color (end):" << color_r << color_g << color_b;
