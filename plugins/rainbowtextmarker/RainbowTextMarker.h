@@ -59,7 +59,7 @@ public:
   QString parseString( const QString& );
 
 protected:
-  qreal m_scale;
+  double m_scale;
   int m_rainbowIndex;
 
 };

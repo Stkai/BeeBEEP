@@ -80,11 +80,11 @@ bool RainbowTextMarker::parseBeforeSending() const
 namespace
 {
 
-  QColor GetRainbowColor( qreal k, bool reverse_color )
+  QColor GetRainbowColor( double k, bool reverse_color )
   {
-    qreal r = 127.0 + 127.0 * qCos( k - 0.5 );
-    qreal g = 127.0 + 127.0 * qCos( k - 2.5 );
-    qreal b = 127.0 + 127.0 * qCos( k - 4.5 );
+    double r = 127.0 + 127.0 * qCos( k - 0.5 );
+    double g = 127.0 + 127.0 * qCos( k - 2.5 );
+    double b = 127.0 + 127.0 * qCos( k - 4.5 );
 
     if( reverse_color )
     {
@@ -98,7 +98,7 @@ namespace
 #endif
 
     // Make fully saturated
-    qreal min = qMin( r, qMin( g, b ) );
+    double min = qMin( r, qMin( g, b ) );
     // Subtract the minimum from all values so that the darkest becomes zero
     r -= min;
     g -= min;
@@ -109,7 +109,7 @@ namespace
 #endif
 
     // Now find the highest value
-    qreal max = qMax( r, qMax( g, b ) );
+    double max = qMax( r, qMax( g, b ) );
 
     // Scale the RGB values up so that the brightest equals the brightness input value.
     max = 255.0 / max;
@@ -123,8 +123,8 @@ namespace
 
     // Adjust for brightness and contrast
     /*
-    qreal tekBright = 200.0;
-    qreal tekContrast = 255.0;
+    double tekBright = 200.0;
+    double tekContrast = 255.0;
 
     max = (tekBright / 255.0) * (tekContrast / 255.0);
     min = (255.0 - tekContrast) * (tekBright / 255.0);
@@ -133,9 +133,9 @@ namespace
     g = g*max + min;
     b = b*max + min;
 */
-    int color_r = qRound( qMax( 0.0, qMin( 255.0, (double)r ) ) );
-    int color_g = qRound( qMax( 0.0, qMin( 255.0, (double)g ) ) );
-    int color_b = qRound( qMax( 0.0, qMin( 255.0, (double)b ) ) );
+    int color_r = qRound( qMax( 0.0, qMin( 255.0, r ) ) );
+    int color_g = qRound( qMax( 0.0, qMin( 255.0, g ) ) );
+    int color_b = qRound( qMax( 0.0, qMin( 255.0, b ) ) );
 
  #if defined( COLOR_GRADIENT_DEBUG )
     qDebug() << "RGB color (end):" << color_r << color_g << color_b;
@@ -185,9 +185,9 @@ QString RainbowTextMarker::parseString( const QString& str )
 {
   if( str.size() == 1 && str.at( 0 ).isSpace() )
     return str;
-  
+
   m_rainbowIndex++;
-  qreal k = m_scale * m_rainbowIndex;
+  double k = m_scale * m_rainbowIndex;
   return QString( "<font color=""%1"">%2</font>" ).arg( GetRainbowColor( k, false ).name(), str );
 }
 

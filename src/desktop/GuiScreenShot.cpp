@@ -139,7 +139,7 @@ void GuiScreenShot::captureScreen()
 {
   m_screenShot = QPixmap(); // clear image for low memory situations on embedded devices.
 
-  qreal device_pixel_ratio;
+  double device_pixel_ratio;
 
 #if QT_VERSION >= 0x050000
   device_pixel_ratio = qApp->devicePixelRatio();

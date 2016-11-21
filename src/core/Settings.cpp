@@ -551,7 +551,7 @@ QString Settings::operatingSystemIconPath() const
   os_icon_path = ":/images/os2.png";
 #endif
 #ifdef BEEBEEP_FOR_RASPBERRY_PI
-  os_icon_path = ":/images/raspberry.png";
+  os_icon_path = ":/images/raspberry-pi.png";
 #endif
   return os_icon_path;
 }
