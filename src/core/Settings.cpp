@@ -526,6 +526,10 @@ QString Settings::operatingSystem( bool use_long_name  ) const
   os_name_long = "OS/2";
   os_name_short = "OS2";
 #endif
+#ifdef BEEBEEP_FOR_RASPBERRY_PI
+  os_name_long = "Raspberry PI";
+  os_name_short = "PI";
+#endif
 
   return use_long_name ? os_name_long : os_name_short;
 }
@@ -545,6 +549,9 @@ QString Settings::operatingSystemIconPath() const
 #endif
 #ifdef Q_OS_OS2
   os_icon_path = ":/images/os2.png";
+#endif
+#ifdef BEEBEEP_FOR_RASPBERRY_PI
+  os_icon_path = ":/images/raspberry.png";
 #endif
   return os_icon_path;
 }
