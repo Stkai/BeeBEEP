@@ -117,6 +117,9 @@ bool GuiUserItem::updateUser( const User& u )
 
   QString s = u.isLocal() ? QObject::tr( "All Lan Users" ) : (u.status() != User::Offline ? u.name() : u.path());
 
+  if( u.isLocal() && !Settings::instance().chatWithAllUsersIsEnabled() )
+    s.append( QString( " [%1] " ).arg( QObject::tr( "read only" ) ) );
+
   int user_priority = 1;
 
   if( unread_messages > 0 )
@@ -203,7 +206,9 @@ void GuiUserItem::showUserStatus()
   else
     setBackground( 0, Bee::defaultBackgroundBrush() );
 
-  if( user_status == User::Offline )
+  if( userId() == ID_LOCAL_USER && !Settings::instance().chatWithAllUsersIsEnabled() )
+    setTextColor( 0, Bee::userStatusColor( User::Offline ) );
+  else if( user_status == User::Offline )
     setTextColor( 0, Bee::userStatusColor( user_status ) );
   else
     setTextColor( 0, Bee::defaultTextBrush().color() );

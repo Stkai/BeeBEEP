@@ -5362,6 +5362,10 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
         <source>Show all chats</source>
         <translation>Mostra tutte le finestre</translation>
     </message>
+    <message>
+        <source>read only</source>
+        <translation>sola lettura</translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

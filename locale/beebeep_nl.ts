@@ -949,7 +949,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="167"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1105"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1101"/>
         <source>Find text in chat</source>
         <translation>Vind text in chat</translation>
     </message>
@@ -999,33 +999,33 @@
         <translation>Ongelezen berichten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="977"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="973"/>
         <source>Use key Return to send message</source>
         <translation>Gebruik enter toets om bericht te verzenden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="979"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="975"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Gebruik enter toest</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="993"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="989"/>
         <source>Spell checking is enabled</source>
         <translation>Spellingscontrole is actief</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1000"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1024"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="996"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
         <source>There is not a valid dictionary</source>
         <translation>Er is geen geldige map</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1143"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1139"/>
         <source>%1 not found in chat.</source>
         <translation>%1 niet gevonden in chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="995"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="991"/>
         <source>Spell checking is disabled</source>
         <translation>Spellingscontrole is uitgeschakeld</translation>
     </message>
@@ -1035,12 +1035,12 @@
         <translation>Selecteer de berichtsoorten die in de chat getoond zullen worden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1017"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1013"/>
         <source>Word completer is enabled</source>
         <translation>Automatische tekstaanvulling is ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1019"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1015"/>
         <source>Word completer is disabled</source>
         <translation>Automatische tekstaanvulling is uitgeschakeld</translation>
     </message>
@@ -1170,12 +1170,12 @@
         <translation type="obsolete">naar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="546"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="542"/>
         <source>last %1 messages</source>
         <translation>laatste %1 berichten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="735"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="731"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Selecteer aub een bestand om de chatberichten in op te slaan.</translation>
     </message>
@@ -1186,47 +1186,47 @@ Please check the file or the directories write permissions.</source>
 Controleer de schrijfrechten op de betrokken map of het bestand.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="749"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="745"/>
         <source>%1: save completed.</source>
         <translation>%1: opslaan voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="749"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="745"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="800"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="796"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Kan tijdelijk bestand: %1 niet opslaan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="848"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Wilt u %1 %2 echt versturen naar de leden van deze chat?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="849"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
         <source>file</source>
         <translation>bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="849"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
         <source>files</source>
         <translation>bestanden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="850"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="846"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="850"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="846"/>
         <source>No</source>
         <translation>Nee</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="863"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="859"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
     </message>
@@ -5044,17 +5044,22 @@ Voor meer info, ga naar: &lt;a href=http://nl.wikipedia.org/wiki/Game_of_Life&gt
         <translation type="obsolete">Dubbelklik om chat te openen met alle lokale gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="139"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="121"/>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="142"/>
         <source>Click to open chat with all local users</source>
         <translation>Klik om chat te openen met alle lokale gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="143"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="146"/>
         <source>%1 is %2</source>
         <translation>%1 is %2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="158"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="161"/>
         <source>Click to send a private message</source>
         <translation>Klik om privé-bericht te verzenden</translation>
     </message>

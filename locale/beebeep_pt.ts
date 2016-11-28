@@ -917,7 +917,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="167"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1105"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1101"/>
         <source>Find text in chat</source>
         <translation type="unfinished"></translation>
     </message>
@@ -966,33 +966,33 @@
         <translation>Mensagens não Lidas</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="993"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="989"/>
         <source>Spell checking is enabled</source>
         <translation>Verificação Ortográfica ativada</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1000"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1024"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="996"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
         <source>There is not a valid dictionary</source>
         <translation>Insira um Dicionário válido</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1017"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1013"/>
         <source>Word completer is enabled</source>
         <translation>Completar Texto Ativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1019"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1015"/>
         <source>Word completer is disabled</source>
         <translation>Completar Texto Desativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1143"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1139"/>
         <source>%1 not found in chat.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="995"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="991"/>
         <source>Spell checking is disabled</source>
         <translation>Verificar Ortografia Desativado</translation>
     </message>
@@ -1092,67 +1092,67 @@
         <translation>e</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="546"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="542"/>
         <source>last %1 messages</source>
         <translation>Últimas %1 mensagens</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="735"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="731"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Selecione um arquivo para salvar o chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="749"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="745"/>
         <source>%1: save completed.</source>
         <translation>%1: Arquivo gravado.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="749"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="745"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="800"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="796"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Impossível salvar arquivo temporário: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="848"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Confirma o envio %1 %2 para os participantes do Chat?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="849"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
         <source>file</source>
         <translation>Arquivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="849"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
         <source>files</source>
         <translation>arquvos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="850"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="846"/>
         <source>Yes</source>
         <translation>Sim</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="850"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="846"/>
         <source>No</source>
         <translation>Não</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="863"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="859"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt library para este OSl não suporta &quot; Drag and Drop&quot;  para seus arquivos. Selecione novamente o arquivo a enviar.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="977"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="973"/>
         <source>Use key Return to send message</source>
         <translation>Use a Tecla ENTER para enviar a mensagem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="979"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="975"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Utilize a tecla ENTER para mudar de linha</translation>
     </message>
@@ -4616,17 +4616,22 @@ Selecione um nome diferente.</translation>
         <translation>Você</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="139"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="121"/>
+        <source>read only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="142"/>
         <source>Click to open chat with all local users</source>
         <translation>Click para Iniciar Conversa com todos Usuários Locais</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="143"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="146"/>
         <source>%1 is %2</source>
         <translation>%1 é %2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="158"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="161"/>
         <source>Click to send a private message</source>
         <translation>Click para enviar Mensagem Privada</translation>
     </message>

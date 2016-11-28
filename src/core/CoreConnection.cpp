@@ -196,8 +196,8 @@ void Core::closeConnection( Connection *c )
   }
 
   c->disconnect();
-  c->closeConnection();
-  c->deleteLater();
+  c->abortConnection();
+  // do not delete later connection... socket notifier in qabstractsocket.cpp can crash
 
   if( isConnected() && m_connections.isEmpty() )
     QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );

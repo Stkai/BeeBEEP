@@ -468,10 +468,6 @@ void GuiChat::setChatUsers()
     }
   }
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Chat members:" << m_chatUsers.toStringList( false, false ).join( ", " );
-#endif
-
   mp_lTitle->setText( chat_users );
 
   if( c.isDefault() )
