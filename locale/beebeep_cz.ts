@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1206,7 +1206,7 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="129"/>
         <source>Create chat</source>
-        <translation type="unfinished">Vytvořit chat</translation>
+        <translation>Vytvořit chat</translation>
     </message>
 </context>
 <context>
@@ -3106,7 +3106,7 @@ Vyberte prosím jiné jméno.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="1906"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1918"/>
         <source>to</source>
-        <translation type="unfinished">uživateli</translation>
+        <translation>uživateli</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1908"/>
@@ -3117,7 +3117,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1914"/>
         <source>New message from</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová zpráva od</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2908"/>

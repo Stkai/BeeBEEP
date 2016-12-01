@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sv">
+<TS version="2.1" language="sv">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="518"/>
         <source>Max ID is reached. Please close and restart the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Max ID har uppnåtts. Stäng och starta om programmet.</translation>
     </message>
     <message>
         <source>%1 The following networks appear as filtered: %2</source>
@@ -262,7 +262,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
         <source>%1 You have buzzed %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du har surrat på %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="410"/>
@@ -282,7 +282,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="61"/>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation type="unfinished"></translation>
+        <translation>Prova det nya häftiga programmet, utvecklat av Marco Mastrodi</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="502"/>
@@ -485,7 +485,7 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="439"/>
         <source>%1 %2 is buzzing you.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 surrar på dig.</translation>
     </message>
     <message>
         <source>%1 %2 has not shared files.</source>
@@ -612,12 +612,12 @@
         <location filename="../src/core/FileTransferDownload.cpp" line="107"/>
         <location filename="../src/core/FileTransferUpload.cpp" line="142"/>
         <source>Unable to open file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inte öppna filen &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferDownload.cpp" line="114"/>
         <source>Unable to write in the file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inte skriva i filen &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Unable to open file</source>
@@ -911,7 +911,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="157"/>
         <source>Send a buzz</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka ett surr</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="160"/>
@@ -1007,7 +1007,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select the message types which will be shown in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj vilka meddelandetyper som skall visas i chatten</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="175"/>
@@ -1097,7 +1097,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Change the name of the group or add users</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändra gruppnamn eller lägg till användare</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="453"/>
@@ -1210,7 +1210,7 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="129"/>
         <source>Create chat</source>
-        <translation type="unfinished">Skapa chatt</translation>
+        <translation>Skapa chatt</translation>
     </message>
 </context>
 <context>
@@ -1417,12 +1417,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
         <source>Preset messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Förinställda meddelanden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="64"/>
         <source>Show the preset messages panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa panel för förinställda meddelanden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="68"/>
@@ -1442,7 +1442,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="125"/>
         <source>offline</source>
-        <translation type="unfinished"></translation>
+        <translation>nerkopplad</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="264"/>
@@ -1900,7 +1900,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="744"/>
         <source>Clear all read messages on closing window</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort alla lästa meddelanden när föntret stängs</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="831"/>
@@ -2500,7 +2500,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="731"/>
         <source>Use RTL mode to show text</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd HTV-läge för att visa text</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="833"/>
@@ -2555,7 +2555,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="949"/>
         <source>Enable Buzz sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera surr-ljud</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="968"/>
@@ -2575,32 +2575,32 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="986"/>
         <source>Sort users in ascending order</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortera användare i stigande ordning</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="991"/>
         <source>Sorting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteringsläge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="995"/>
         <source>Default mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardläge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1001"/>
         <source>By user name</source>
-        <translation type="unfinished"></translation>
+        <translation>Efter användarnamn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1007"/>
         <source>By user status</source>
-        <translation type="unfinished"></translation>
+        <translation>Efter användarstatus</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1013"/>
         <source>By unread messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Efter olästa meddelanden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
@@ -2655,7 +2655,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1102"/>
         <source>Show the shared boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa de delade fälten</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1107"/>
@@ -2680,22 +2680,22 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1316"/>
         <source>Preset messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Förinställda meddelanden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1326"/>
         <source>Show the preset messages panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa panel för förinställda meddelanden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4277"/>
         <source>New file from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny fil från %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4294"/>
         <source>%1 is buzzing you!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 surrar dig</translation>
     </message>
     <message>
         <source>Help me to know how many people use BeeBEEP</source>
@@ -2858,12 +2858,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1199"/>
         <source>Show file notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa filaviseringar</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1503"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
-        <translation type="unfinished"></translation>
+        <translation>Starta det nya programmet för att kopiera filer och mappar av Marco Mastroddi</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1629"/>
@@ -3100,24 +3100,24 @@ Välj ett annat namn.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="1904"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1916"/>
         <source>to all</source>
-        <translation type="unfinished"></translation>
+        <translation>till alla</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1906"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1918"/>
         <source>to</source>
-        <translation type="unfinished">till</translation>
+        <translation>tilltill</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1908"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1920"/>
         <source>to you</source>
-        <translation type="unfinished"></translation>
+        <translation>till dig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1914"/>
         <source>New message from</source>
-        <translation type="unfinished"></translation>
+        <translation>Nytt meddelande från</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2908"/>
@@ -3501,59 +3501,59 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="44"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nytt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="45"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigera</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="46"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Byt namn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
         <source>Delete</source>
-        <translation type="unfinished">Ta bort</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="49"/>
         <source>Right click on panel to create a new preset message</source>
-        <translation type="unfinished"></translation>
+        <translation>Högerklicka på panelen för att skapa nytt förinställt meddelande</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="142"/>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="146"/>
         <source>Please insert your new preset message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Infoga ditt nya förinställda meddelande.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="162"/>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="166"/>
         <source>Edit your preset message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigera ditt förinställda meddelande.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="181"/>
         <source>Edit the name of your preset message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigera namnet på ditt förinställda meddelande.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="195"/>
         <source>Do you really want to delete this preset?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vill du verkligen ta bort detta förinställda meddelande?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="196"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="196"/>
         <source>No</source>
-        <translation type="unfinished">Nej</translation>
+        <translation>Nej</translation>
     </message>
 </context>
 <context>
@@ -3572,32 +3572,32 @@ Välj ett annat namn.</translation>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="72"/>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="143"/>
         <source>Find text in chat</source>
-        <translation type="unfinished">Sök text i chatt</translation>
+        <translation>Sök text i chatten</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="77"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Kopiera till Urklipp</translation>
+        <translation>Kopiera till Urklipp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="79"/>
         <source>Select All</source>
-        <translation type="unfinished">Markera allt</translation>
+        <translation>Markera alla</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="83"/>
         <source>Open selected text as url</source>
-        <translation type="unfinished">Öppna markerad text som URL</translation>
+        <translation>Öppna markerad text som URL</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="86"/>
         <source>Print...</source>
-        <translation type="unfinished">Skriv ut...</translation>
+        <translation>Skriv ut...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="181"/>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished">%1 hittades inte i chatten.</translation>
+        <translation>%1 hittades inte i chatten.</translation>
     </message>
 </context>
 <context>
@@ -3806,12 +3806,12 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="306"/>
         <source>Max users to contact every second</source>
-        <translation type="unfinished"></translation>
+        <translation>Max antal användare att kontakta varje sekund</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="313"/>
         <source>seconds (0=disabled, 0=default)</source>
-        <translation type="unfinished">sekunder (0=inaktiverat, 10=standard) {0=?} {0=?}</translation>
+        <translation>sekunder (0=inaktiverat, 0=standard)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="103"/>
@@ -3821,7 +3821,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="271"/>
         <source>Enable broadcast interval</source>
-        <translation type="unfinished">Aktivera sändningsintervall</translation>
+        <translation>Aktivera sändningsintervall</translation>
     </message>
     <message>
         <source>seconds (0=disabled, 10=default)</source>
@@ -3913,47 +3913,47 @@ Välj ett annat namn.</translation>
         <location filename="../src/desktop/GuiShareBox.cpp" line="54"/>
         <location filename="../src/desktop/GuiShareBox.cpp" line="315"/>
         <source>ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>DelatBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="63"/>
         <source>Update your ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatera din DelatBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="64"/>
         <source>Update ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppdatera DelatBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="107"/>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>DelatBoxens sökväg finns inte. Välj en giltig mapp.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="145"/>
         <source>Your ShareBox is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Din DelatBox ärinaktiverad</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="172"/>
         <source>ShareBox is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>DelatBoxen är inte tillgänglig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="269"/>
         <source>%1 - Select the ShareBox folder</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Välj DelatBox-mapp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="315"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="315"/>
         <source>is unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>är inte tillgänglig</translation>
     </message>
 </context>
 <context>
@@ -3961,17 +3961,17 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
         <source>Shared folders and files</source>
-        <translation type="unfinished">Delade mappar och filer</translation>
+        <translation>Delade mappar och filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
         <source>Size</source>
-        <translation type="unfinished">Storlek</translation>
+        <translation>Storlek</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
         <source>Last modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Senast ändrad</translation>
     </message>
 </context>
 <context>
@@ -3979,22 +3979,22 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulär</translation>
+        <translation>Formulär</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="155"/>
         <source>Enable my ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera min DelatBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="195"/>
         <source>Select your folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj din mapp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="397"/>
         <source>Select box</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj Box</translation>
     </message>
 </context>
 <context>
@@ -4248,7 +4248,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="396"/>
         <source>You cannot download more than %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan inte ladda ner mer än %1 filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="400"/>
@@ -4585,7 +4585,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="513"/>
         <source>Send a buzz</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka ett surrande</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="548"/>
@@ -4674,7 +4674,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="121"/>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>skrivskyddad</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="142"/>
