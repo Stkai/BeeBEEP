@@ -165,6 +165,11 @@
         <translation>%1 Samtal med alle lokale brukere.</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation>Prøv det nye flotte programmet utviklet av Marco Mastroddi</translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="86"/>
         <location filename="../src/core/CoreUser.cpp" line="99"/>
         <source>Happy Birthday to you!</source>
@@ -258,7 +263,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
         <source>%1 You have buzzed %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du har plinget %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="410"/>
@@ -276,9 +281,8 @@
         <translation>Vennligst legg til en &quot;liker&quot; på Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="61"/>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Prøv det nye flotte programmet utviklet av Marco Mastroddi</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="502"/>
@@ -481,7 +485,7 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="439"/>
         <source>%1 %2 is buzzing you.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 plinger på deg.</translation>
     </message>
     <message>
         <source>%1 %2 has not shared files.</source>
@@ -608,12 +612,12 @@
         <location filename="../src/core/FileTransferDownload.cpp" line="107"/>
         <location filename="../src/core/FileTransferUpload.cpp" line="142"/>
         <source>Unable to open file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke åpne fil %1</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferDownload.cpp" line="114"/>
         <source>Unable to write in the file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke skrive til fila %1</translation>
     </message>
     <message>
         <source>Unable to open file</source>
@@ -907,7 +911,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="157"/>
         <source>Send a buzz</source>
-        <translation type="unfinished"></translation>
+        <translation>Send en pling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="160"/>
@@ -1003,7 +1007,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select the message types which will be shown in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg meldingstypene som skal vises i samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="175"/>
@@ -1093,7 +1097,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Change the name of the group or add users</source>
-        <translation type="unfinished"></translation>
+        <translation>Endre navn på gruppa eller legg til brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="453"/>
@@ -1206,7 +1210,7 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="129"/>
         <source>Create chat</source>
-        <translation type="unfinished">Opprett samtale</translation>
+        <translation>Opprett samtale</translation>
     </message>
 </context>
 <context>
@@ -1413,12 +1417,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
         <source>Preset messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Forhåndsinnstilte meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="64"/>
         <source>Show the preset messages panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis panelet for forhåndsinnstilte meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="68"/>
@@ -2492,7 +2496,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="731"/>
         <source>Use RTL mode to show text</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk RTL-modus til å vise tekst</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="833"/>
@@ -2547,7 +2551,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="949"/>
         <source>Enable Buzz sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på plingelyd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="968"/>
@@ -2567,32 +2571,32 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="986"/>
         <source>Sort users in ascending order</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorter brukere i stigende rekkefølge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="991"/>
         <source>Sorting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteringsmåte</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="995"/>
         <source>Default mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardmåte</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1001"/>
         <source>By user name</source>
-        <translation type="unfinished"></translation>
+        <translation>Etter brukernavn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1007"/>
         <source>By user status</source>
-        <translation type="unfinished"></translation>
+        <translation>Etter brukerstatus</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1013"/>
         <source>By unread messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Etter uleste meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
@@ -2672,12 +2676,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1316"/>
         <source>Preset messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Forhåndsinnstilte meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1326"/>
         <source>Show the preset messages panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis panelet for forhåndsinnstilte meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4277"/>
@@ -2687,7 +2691,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4294"/>
         <source>%1 is buzzing you!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 plinger på deg!</translation>
     </message>
     <message>
         <source>Help me to know how many people use BeeBEEP</source>
@@ -3092,24 +3096,24 @@ Velg et annet navn.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="1904"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1916"/>
         <source>to all</source>
-        <translation type="unfinished"></translation>
+        <translation>til alle</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1906"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1918"/>
         <source>to</source>
-        <translation type="unfinished">til</translation>
+        <translation>til</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1908"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1920"/>
         <source>to you</source>
-        <translation type="unfinished"></translation>
+        <translation>til deg</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1914"/>
         <source>New message from</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny melding fra</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2908"/>
@@ -3493,59 +3497,59 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="44"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="45"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="46"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Omdøp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
         <source>Delete</source>
-        <translation type="unfinished">Slett</translation>
+        <translation>Slett</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="49"/>
         <source>Right click on panel to create a new preset message</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyreklikk på panel for å lage en ny forhåndsinnstilt melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="142"/>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="146"/>
         <source>Please insert your new preset message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst set inn ny forhåndsinnstilt melding.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="162"/>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="166"/>
         <source>Edit your preset message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger forhåndsinnstilt melding.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="181"/>
         <source>Edit the name of your preset message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger navn på forhåndsinnstilg melding.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="195"/>
         <source>Do you really want to delete this preset?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du virkelig slette denne forhåndsmeldingen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="196"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="196"/>
         <source>No</source>
-        <translation type="unfinished">Nei</translation>
+        <translation>Nei</translation>
     </message>
 </context>
 <context>
@@ -3779,12 +3783,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="306"/>
         <source>Max users to contact every second</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks antall bruker å kontakte hvert sekund</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="313"/>
         <source>seconds (0=disabled, 0=default)</source>
-        <translation type="unfinished">sekunder (0=avslått, 10=standard) {0=?} {0=?}</translation>
+        <translation>sekunder (0=avslått, 0=standard)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="71"/>
@@ -3809,7 +3813,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSearchUser.ui" line="271"/>
         <source>Enable broadcast interval</source>
-        <translation type="unfinished">Aktiver kringkastingsintervall</translation>
+        <translation>Aktiver kringkastingsintervall</translation>
     </message>
     <message>
         <source>seconds (0=disabled, 10=default)</source>
@@ -4577,7 +4581,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="513"/>
         <source>Send a buzz</source>
-        <translation type="unfinished"></translation>
+        <translation>Send en pling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="548"/>
@@ -4666,7 +4670,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="121"/>
         <source>read only</source>
-        <translation type="unfinished"></translation>
+        <translation>kun lesbar</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="142"/>

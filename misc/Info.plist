@@ -17,7 +17,7 @@
     <key>CFBundleName</key>
     <string>BeeBEEP</string>
     <key>CFBundleVersion</key>
-    <string>3.0.9</string>
+    <string>3.2.0</string>
     <key>CFBundleSignature</key>
     <string>bbip</string>
     <key>LSMinimumSystemVersion</key>
@@ -25,6 +25,6 @@
     <key>NSHumanReadableCopyright</key>
     <string>Copyright © Marco Mastroddi, All Rights Reserved</string>
     <key>CFBundleShortVersionString</key>
-    <string>3.0.9</string>
+    <string>3.2.0</string>
 </dict>
 </plist>

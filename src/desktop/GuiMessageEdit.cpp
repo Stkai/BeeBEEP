@@ -372,7 +372,8 @@ void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
   act->setEnabled( m_redoAvailable );
   custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/cut.png" ), tr( "Cut" ), this, SLOT( cut() ), QKeySequence::Cut );
-  custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy" ), this, SLOT( copy() ), QKeySequence::Copy );
+  act = custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy" ), this, SLOT( copy() ), QKeySequence::Copy );
+  act->setEnabled( !textCursor().selectedText().isEmpty() );
   act = custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
   act->setEnabled( canPaste() );
   custom_context_menu.addSeparator();

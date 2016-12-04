@@ -165,6 +165,11 @@
         <translation>%1 Chat avec tous les utilisateurs locaux.</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="86"/>
         <location filename="../src/core/CoreUser.cpp" line="99"/>
         <source>Happy Birthday to you!</source>
@@ -274,11 +279,6 @@
         <location filename="../src/core/CoreChat.cpp" line="56"/>
         <source>Please add a like on Facebook.</source>
         <translation>Liker BeeBEEP sur Facebook.</translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreChat.cpp" line="61"/>
-        <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="502"/>

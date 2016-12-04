@@ -620,15 +620,19 @@
     </message>
     <message>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation>Prova la nuova mitica applicazione  sviluppata da Marco Mastroddi</translation>
+        <translation type="vanished">Prova la nuova mitica applicazione  sviluppata da Marco Mastroddi</translation>
     </message>
     <message>
         <source>%1 You have buzzed %2.</source>
-        <translation>%1 Hai inviato un Buzz a %2.</translation>
+        <translation>%1 Hai inviato un trillo a %2.</translation>
     </message>
     <message>
         <source>%1 %2 is buzzing you.</source>
-        <translation>%1 %2 ti ha inviato un Buzz.</translation>
+        <translation>%1 %2 ti ha inviato un trillo.</translation>
+    </message>
+    <message>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation>Prova la nuova mitica applicazione sviluppata da Marco Mastroddi</translation>
     </message>
 </context>
 <context>

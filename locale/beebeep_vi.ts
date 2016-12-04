@@ -137,6 +137,11 @@
         <translation>%1 Chat với tất cả người dùng nội bộ.</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation>Hãy thử các ứng dụng tuyệt vời mới được phát triển bởi Marco Mastroddi</translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="86"/>
         <location filename="../src/core/CoreUser.cpp" line="99"/>
         <source>Happy Birthday to you!</source>
@@ -244,9 +249,8 @@
         <translation>Hãy like trên Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="61"/>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation>Hãy thử các ứng dụng tuyệt vời mới được phát triển bởi Marco Mastrodi</translation>
+        <translation type="vanished">Hãy thử các ứng dụng tuyệt vời mới được phát triển bởi Marco Mastrodi</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="502"/>
@@ -997,7 +1001,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Change the name of the group or add users</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Thay đổi tên của nhóm hoặc thêm và xóa người dùng</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="453"/>

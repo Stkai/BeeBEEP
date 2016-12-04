@@ -165,6 +165,11 @@
         <translation>%1 Chat se všemi uživateli.</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="86"/>
         <location filename="../src/core/CoreUser.cpp" line="99"/>
         <source>Happy Birthday to you!</source>
@@ -276,9 +281,8 @@
         <translation>Přidejte prosím lajk na Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="61"/>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation>Vyzkoušet nové úžasné aplikace vyvinuté Marcem Mastrodim</translation>
+        <translation type="vanished">Vyzkoušet nové úžasné aplikace vyvinuté Marcem Mastrodim</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="502"/>

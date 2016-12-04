@@ -169,6 +169,11 @@
         <translation>%1 Chatta med alla lokala användare.</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation>Prova det nya häftiga programmet, utvecklat av Marco Mastroddi</translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="86"/>
         <location filename="../src/core/CoreUser.cpp" line="99"/>
         <source>Happy Birthday to you!</source>
@@ -280,9 +285,8 @@
         <translation>Gilla oss på Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="61"/>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation>Prova det nya häftiga programmet, utvecklat av Marco Mastrodi</translation>
+        <translation type="vanished">Prova det nya häftiga programmet, utvecklat av Marco Mastrodi</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="502"/>
@@ -2695,7 +2699,7 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4294"/>
         <source>%1 is buzzing you!</source>
-        <translation>%1 surrar dig</translation>
+        <translation>%1 surrar dig!</translation>
     </message>
     <message>
         <source>Help me to know how many people use BeeBEEP</source>

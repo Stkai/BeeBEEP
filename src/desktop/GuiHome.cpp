@@ -86,11 +86,12 @@ void GuiHome::checkAnchorClicked( const QUrl& url )
 void GuiHome::customContextMenu( const QPoint& p )
 {
   QMenu custom_context_menu;
-  custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
-  custom_context_menu.addSeparator();
   custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
   custom_context_menu.addSeparator();
-  QAction* act = custom_context_menu.addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
+  QAction* act = custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
+  act->setEnabled( !mp_teSystem->textCursor().selectedText().isEmpty() );
+  custom_context_menu.addSeparator();
+  act = custom_context_menu.addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     act->setShortcut( ks );

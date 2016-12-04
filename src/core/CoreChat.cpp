@@ -58,7 +58,7 @@ void Core::createDefaultChat()
   }
 
   sHtmlMsg = QString( "%1 <b>%2</b><br />" ).arg( Bee::iconToHtml( ":/images/CopyMastro.png", "*!*" ),
-                                               tr( "Try the new awesome application developed by Marco Mastrodi" )
+                                               tr( "Try the new awesome application developed by Marco Mastroddi" )
                                                + QString( " : <a href=""%1""><b>CopyMastro</b></a> !!!" ).arg( Settings::instance().copyMastroWebSite() ) );
   c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
 

@@ -175,11 +175,6 @@
         <translation>Пожалуйста, добавьте лайк в Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="61"/>
-        <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreChat.cpp" line="69"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>С днем рождения Марко Мастродди: %1 лет исполнилось сегодня! Ваше здоровье!!!</translation>
@@ -224,6 +219,11 @@
         <location filename="../src/core/CoreChat.cpp" line="247"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Общается с %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="196"/>

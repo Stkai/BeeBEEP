@@ -183,9 +183,8 @@
         <translation>Voeg een like toe op Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="61"/>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation>Probeer dit nieuwe geweldige programma ontwikkeld door MArco Mastrodi</translation>
+        <translation type="vanished">Probeer dit nieuwe geweldige programma ontwikkeld door MArco Mastrodi</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="86"/>
@@ -223,6 +222,11 @@
     <message>
         <source>%1 Welcome to the group %2.</source>
         <translation type="obsolete">%1 Welkom bij groep %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="61"/>
+        <source>Try the new awesome application developed by Marco Mastroddi</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="196"/>
