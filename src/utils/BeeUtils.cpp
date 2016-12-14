@@ -307,7 +307,6 @@ static const char* ChatMessageTypeToString[] =
   QT_TRANSLATE_NOOP( "ChatMessage", "System" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "Chat" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "Connection" ),
-  QT_TRANSLATE_NOOP( "ChatMessage", "User Status" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "User Information" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "File Transfer" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "History" ),

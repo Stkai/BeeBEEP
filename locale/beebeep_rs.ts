@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sr" sourcelanguage="en_GB">
+<TS version="2.0" language="sr" sourcelanguage="en_GB">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -24,27 +24,26 @@
         <translation>Konekcija</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="310"/>
         <source>User Status</source>
-        <translation>Korisnički status</translation>
+        <translation type="obsolete">Korisnički status</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="311"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="310"/>
         <source>User Information</source>
         <translation>Korisničke informacije</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="312"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="311"/>
         <source>File Transfer</source>
         <translation>File Transfer</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="313"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="312"/>
         <source>History</source>
         <translation>Istorija</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="314"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="313"/>
         <source>Other</source>
         <translation>Ostalo</translation>
     </message>
@@ -902,7 +901,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="167"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1101"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1099"/>
         <source>Find text in chat</source>
         <translation type="unfinished"></translation>
     </message>
@@ -980,27 +979,27 @@
         <translation>Napuštanje grupe</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="225"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="227"/>
         <source>Copy to clipboard</source>
         <translation>Kopiranje na klipbord</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="227"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="225"/>
         <source>Select All</source>
         <translation>Selektuj sve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="270"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="268"/>
         <source>Show only messages in default chat</source>
         <translation>Prikaz samo poruka u podrazumevanom chatu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="310"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="308"/>
         <source>Last message %1</source>
         <translation>Poslenja poruka %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="404"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="402"/>
         <source>All Lan Users</source>
         <translation>Svi LAN korisnici</translation>
     </message>
@@ -1009,7 +1008,7 @@
         <translation type="obsolete">(Napustio si)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="420"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="418"/>
         <source>You</source>
         <translation>Ti</translation>
     </message>
@@ -1047,12 +1046,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="231"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="229"/>
         <source>Open selected text as url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="424"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="422"/>
         <source>unread messages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1061,118 +1060,118 @@
         <translation type="obsolete">offline</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="453"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="451"/>
         <source>Show profile</source>
         <translation>Prikaz profila</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="463"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="461"/>
         <source>Show members</source>
         <translation>Prikaz korisnika</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="467"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="465"/>
         <source>Nobody</source>
         <translation>Niko</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="467"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="465"/>
         <source>and</source>
         <translation>i</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="542"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="540"/>
         <source>last %1 messages</source>
         <translation>poslenjih %1 poruka</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="731"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="729"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Izaberi fajl za snimanje poruka iz tekućeg chata.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="745"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="743"/>
         <source>%1: save completed.</source>
         <translation>%1: snimanje gotovo.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="745"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="743"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="796"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="794"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Nemoguće snimanje privremenog fajla: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="842"/>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
         <translation>Da li zaista želiš da pošalješ %1 %2 korisnicima ovog chata?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="843"/>
         <source>file</source>
         <translation>fajl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="843"/>
         <source>files</source>
         <translation>fajlovi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="846"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>Yes</source>
         <translation>Da</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="846"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="859"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="857"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Program za ovaj OS ne podržava prevlačenje fajlova.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="973"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="971"/>
         <source>Use key Return to send message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="975"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="973"/>
         <source>Use key Return to make a carriage return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="989"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="987"/>
         <source>Spell checking is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="991"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="989"/>
         <source>Spell checking is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="996"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="994"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1018"/>
         <source>There is not a valid dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1013"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1011"/>
         <source>Word completer is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1015"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1013"/>
         <source>Word completer is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1139"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1137"/>
         <source>%1 not found in chat.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1492,27 +1491,27 @@ Please select a different name.</source>
         <translation>Izaberi korisnika sa kojim želiš da razgovaraš ili</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="89"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="91"/>
         <source>Copy to clipboard</source>
         <translation>Kopiraj na klipbord</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="91"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="89"/>
         <source>Select All</source>
         <translation>Izaberi sve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="93"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="94"/>
         <source>Print...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="100"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="101"/>
         <source>Show the datestamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="104"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="105"/>
         <source>Show the timestamp</source>
         <translation type="unfinished">Prikaži pečat</translation>
     </message>
@@ -3385,12 +3384,12 @@ Please select a different name.</source>
         <translation>Copy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="376"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="377"/>
         <source>Paste</source>
         <translation>Paste</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="379"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="380"/>
         <source>Select All</source>
         <translation>Selektuj sve</translation>
     </message>

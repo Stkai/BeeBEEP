@@ -374,7 +374,7 @@ void Core::toggleUserFavorite( VNumber user_id )
   UserManager::instance().setUser( u );
 
   QString sHtmlMsg = QString( "%1 %2 %3." ).arg( favorite_icon, u.name(), favorite_txt );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserStatus );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToDefaultAndPrivateChat, ChatMessage::UserInfo );
 }
 
 bool Core::isUserConnected( VNumber user_id ) const

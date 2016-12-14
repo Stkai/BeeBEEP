@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>User Status</source>
-        <translation>Stato Utente</translation>
+        <translation type="obsolete">Stato Utente</translation>
     </message>
     <message>
         <source>User Information</source>
@@ -620,7 +620,7 @@
     </message>
     <message>
         <source>Try the new awesome application developed by Marco Mastrodi</source>
-        <translation type="vanished">Prova la nuova mitica applicazione  sviluppata da Marco Mastroddi</translation>
+        <translation type="obsolete">Prova la nuova mitica applicazione  sviluppata da Marco Mastroddi</translation>
     </message>
     <message>
         <source>%1 You have buzzed %2.</source>
