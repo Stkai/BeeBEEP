@@ -37,6 +37,7 @@ void Core::setLocalUserStatus( int new_status )
     return;
   User u = Settings::instance().localUser();
   u.setStatus( new_status );
+  u.setStatusChangedIn( QDateTime::currentDateTime() );
   Settings::instance().setLocalUser( u );
   emit userChanged( u );
   if( isConnected() )

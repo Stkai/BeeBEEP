@@ -401,7 +401,6 @@ void GuiChat::setChatUsers()
     mp_pbProfile->setIcon( QIcon( ":images/default-chat-online.png" ) );
     chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
     mp_menuMembers->setEnabled( false );
-    connect( mp_pbProfile, SIGNAL( clicked() ), this, SLOT( showLocalUserVCard() ) );
   }
   else
   {
@@ -427,7 +426,10 @@ void GuiChat::setChatUsers()
       {
         act->setEnabled( true  );
         if( !u.isLocal() )
+        {
           mp_actBuzz->setEnabled( c.isPrivate() );
+          mp_pbProfile->setToolTip( tr( "Show profile" ) );
+        }
         connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
       }
       else
@@ -448,7 +450,6 @@ void GuiChat::setChatUsers()
         QPixmap user_avatar = Bee::avatarForUser( u, QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ), Settings::instance().showUserPhoto() );
         mp_pbProfile->setIcon( user_avatar );
         connect( mp_pbProfile, SIGNAL( clicked() ), act, SIGNAL( triggered() ) );
-        mp_pbProfile->setToolTip( tr( "Show profile" ) );
       }
     }
 

@@ -262,18 +262,14 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   {
     if( user_found.isLocal() )
     {
-#ifdef BEEBEEP_DEBUG
       qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
-#endif
       closeConnection( c );
       return;
     }
 
-    if(  isUserConnected( user_found.id() ) )
+    if( isUserConnected( user_found.id() ) )
     {
-#ifdef BEEBEEP_DEBUG
       qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
-#endif
       c->setUserId( ID_INVALID );
       closeConnection( c );
       return;

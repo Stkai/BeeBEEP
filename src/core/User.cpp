@@ -27,14 +27,16 @@
 User::User()
   : m_id( ID_INVALID ), m_vCard(), m_networkAddress(), m_status( User::Offline ),
     m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ), m_version( "" ),
-    m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 )
+    m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
+    m_statusChangedIn()
 {
 }
 
 User::User( VNumber new_id )
   : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( "127.0.0.1" ), DEFAULT_LISTENER_PORT ),
     m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_version( "" ), m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 )
+    m_version( "" ), m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
+    m_statusChangedIn()
 {
   setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
 }
@@ -60,6 +62,7 @@ User& User::operator=( const User& u )
     m_isFavorite = u.m_isFavorite;
     m_qtVersion = u.m_qtVersion;
     m_protocolVersion = u.m_protocolVersion;
+    m_statusChangedIn = u.m_statusChangedIn;
   }
   return *this;
 }

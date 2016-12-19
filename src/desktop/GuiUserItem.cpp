@@ -144,6 +144,10 @@ bool GuiUserItem::updateUser( const User& u )
   else
   {
     tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
+
+    if( u.statusChangedIn().isValid() )
+      tool_tip += QString( " %1 %2" ).arg( QObject::tr( "since" ) ).arg( u.statusChangedIn().date() == QDate::currentDate() ? u.statusChangedIn().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
+
     if( u.isStatusConnected() )
     {
       if( u.statusDescription().isEmpty() )

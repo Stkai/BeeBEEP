@@ -281,6 +281,10 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
     data_list << Settings::instance().workgroups().join( ", " );
   data_list << Settings::instance().localUser().qtVersion();
   data_list << QString::number( m_datastreamMaxVersion );
+  if( Settings::instance().localUser().statusChangedIn().isValid() )
+    data_list << Settings::instance().localUser().statusChangedIn().toString( Qt::ISODate );
+  else
+    data_list << QString( "" );
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m );
@@ -320,13 +324,21 @@ bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
 {
   int user_status = m.data().toInt();
   QString user_status_description = m.text();
-  if( u->status() != user_status || u->statusDescription() != user_status_description )
+  bool status_changed = false;
+  if( u->status() != user_status  )
   {
+    status_changed = true;
     u->setStatus( user_status );
-    u->setStatusDescription( user_status_description );
-    return true;
+    u->setStatusChangedIn( QDateTime::currentDateTime() );
   }
-  return false;
+
+  if( u->statusDescription() != user_status_description )
+  {
+    status_changed = true;
+    u->setStatusDescription( user_status_description );
+  }
+
+  return status_changed;
 }
 
 bool Protocol::changeUserNameFromMessage( User* u, const Message& m ) const
@@ -516,11 +528,21 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( !sl.isEmpty() )
     sl.takeFirst();
 
+  QDateTime status_changed_in = QDateTime::currentDateTime();
+  if( !sl.isEmpty() )
+  {
+    /* User status changed in datetime */
+    QString s_datetime = sl.takeFirst();
+    if( !s_datetime.isEmpty() )
+      status_changed_in = QDateTime::fromString( s_datetime, Qt::ISODate );
+  }
+
   /* Create User */
   User u( newId() );
   u.setName( user_name );
   u.setNetworkAddress( NetworkAddress( peer_address, listener_port ) );
   u.setStatus( user_status );
+  u.setStatusChangedIn( status_changed_in );
   u.setStatusDescription( user_status_description );
   u.setAccountName( user_account_name );
   u.setVersion( user_version );

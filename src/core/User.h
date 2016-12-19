@@ -69,6 +69,8 @@ public:
   inline const QString& qtVersion() const;
   inline void setProtocolVersion( int );
   inline int protocolVersion() const;
+  inline void setStatusChangedIn( const QDateTime& );
+  inline const QDateTime& statusChangedIn() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -92,6 +94,7 @@ private:
   bool m_isFavorite;
   QString m_qtVersion;
   int m_protocolVersion;
+  QDateTime m_statusChangedIn;
 
 };
 
@@ -127,6 +130,8 @@ inline void User::setQtVersion( const QString& new_value ) { m_qtVersion = new_v
 inline const QString& User::qtVersion() const { return m_qtVersion; }
 inline void User::setProtocolVersion( int new_value ) { m_protocolVersion = new_value; }
 inline int User::protocolVersion() const { return m_protocolVersion; }
+inline void User::setStatusChangedIn( const QDateTime& new_value ) { m_statusChangedIn = new_value; }
+inline const QDateTime& User::statusChangedIn() const { return m_statusChangedIn; }
 inline QString User::path() const { return QString( "%1@%2" ).arg( name().toLower(), m_networkAddress.toString() ); }
 inline QString User::accountPath() const { return QString( "%1@%2" ).arg( m_accountName.toLower(), m_networkAddress.toString() ); }
 
