@@ -12,6 +12,7 @@ PreventMultipleConnectionsFromSingleHostAddress=false
 PreferredSubnets=
 UseIPv6=false
 MulticastGroupAddress=
+EnableChatWithAllUsers=true
 UseHive=true
 UseHostnameForDefaultUsername=false
 HideMainToolbar=false
@@ -21,6 +22,8 @@ HideOtherPanels=false
 DisableFileTransfer=false
 DisableSendMessage=false
 UseEasyConnection=false
+UseOnlyTextEmoticons=false
+StartMinimized=false
 
 [Groups]
 TrustNickname=true

@@ -24,14 +24,14 @@
 #ifndef BEEBEEP_VERSION_H
 #define BEEBEEP_VERSION_H
 
-const char* BEEBEEP_NAME = "BeeBEEP";
-const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";
-const char* BEEBEEP_ORGANIZATION_DOMAIN = "beebeep.net";
+const char* BEEBEEP_NAME = "BeeBEEP";  // QmVlQkVFUA==
+const char* BEEBEEP_ORGANIZATION = "MarcoMastroddiSW";  // TWFyY29NYXN0cm9kZGlTVw==
+const char* BEEBEEP_ORGANIZATION_DOMAIN = "beebeep.net"; // YmVlYmVlcC5uZXQ=
 const char* BEEBEEP_DNS_RECORD = "_beebeep._tcp";
 #ifdef BEEBEEP_DEBUG
-  const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";
+  const char* BEEBEEP_WEBSITE = "http://localhost/beebeep";  // aHR0cDovL2xvY2FsaG9zdC9iZWViZWVw
 #else
-  const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";
+  const char* BEEBEEP_WEBSITE = "http://beebeep.sourceforge.net";  // aHR0cDovL2JlZWJlZXAuc291cmNlZm9yZ2UubmV0
 #endif
 const char* COPYMASTRO_WEBSITE = "http://copymastro.sourceforge.net";
 const char* BEEBEEP_DOWNLOAD_WEBSITE = "/download.php";
@@ -41,13 +41,13 @@ const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
 const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
 const char* BEEBEEP_PAGE_ON_FACEBOOK = "https://www.facebook.com/beebeeplanmessenger";
 const char* BEEBEEP_UPDATER_WEBSITE = "/update/beeupdater.txt";
-const char* BEEBEEP_GA_TRACKING_ID = "UA-57878696-1";
-const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect";
+const char* BEEBEEP_GA_TRACKING_ID = "UA-57878696-1";  // VUEtNTc4Nzg2OTYtMQ==
+const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect"; // aHR0cDovL3d3dy5nb29nbGUtYW5hbHl0aWNzLmNvbS9jb2xsZWN0
 const char* BEEBEEP_GA_EVENT_VERSION = "1";
 const char* BEEBEEP_VERSION = "3.2.0";
 const int BEEBEEP_PROTO_VERSION = 65;
 const int BEEBEEP_SETTINGS_VERSION = 6;
-const int BEEBEEP_BUILD = 827;
+const int BEEBEEP_BUILD = 829;
 
 #endif // BEEBEEP_VERSION_H
 
