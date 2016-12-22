@@ -143,27 +143,8 @@ bool GuiUserItem::updateUser( const User& u )
   }
   else
   {
-    tool_tip = QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
-
-    if( u.statusChangedIn().isValid() )
-      tool_tip += QString( " %1 %2" ).arg( QObject::tr( "since" ) ).arg( u.statusChangedIn().date() == QDate::currentDate() ? u.statusChangedIn().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
-
-    if( u.isStatusConnected() )
-    {
-      if( u.statusDescription().isEmpty() )
-        tool_tip += QString( ".\n" );
-      else
-        tool_tip += QString( ": %1\n" ).arg( u.statusDescription() );
-
-      if( !u.vCard().info().isEmpty() )
-      {
-        tool_tip += QString( "~~~\n" );
-        tool_tip += u.vCard().info();
-        tool_tip += QString( "\n~~~\n" );
-      }
-
-      tool_tip += QString( "(%1)" ).arg( QObject::tr( "Click to send a private message" ) );
-    }
+    tool_tip = Bee::toolTipForUser( u, false );
+    tool_tip += QString( "(%1)" ).arg( QObject::tr( "Click to send a private message" ) );
     user_priority = u.isFavorite() ? 100 : 10000;
     user_priority += u.isStatusConnected() ? (1000*u.status()) : 10000000;
   }

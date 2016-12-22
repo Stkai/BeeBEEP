@@ -674,3 +674,30 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
 
   return pix;
 }
+
+QString Bee::toolTipForUser( const User& u, bool only_status )
+{
+  QString tool_tip = u.isLocal() ? QObject::tr( "You are %1" ).arg( Bee::userStatusToString( u.status() ) ) : QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
+
+  if( u.statusChangedIn().isValid() )
+    tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last update" ) ).arg( u.statusChangedIn().date() == QDate::currentDate() ? u.statusChangedIn().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
+
+  if( !only_status && u.isStatusConnected() )
+  {
+    if( u.statusDescription().isEmpty() )
+      tool_tip += QString( "\n" );
+    else
+      tool_tip += QString( ": %1\n" ).arg( u.statusDescription() );
+
+    if( !u.vCard().info().isEmpty() )
+    {
+      tool_tip += QString( "~~~\n" );
+      tool_tip += u.vCard().info();
+      tool_tip += QString( "\n~~~\n" );
+    }
+  }
+  else
+    tool_tip += QString( "\n" );
+
+  return tool_tip;
+}

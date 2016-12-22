@@ -49,6 +49,8 @@ public:
 
   void onTickEvent( int );
 
+  void clear();
+
 signals:
   void userSelected( VNumber );
   void chatSelected( VNumber );

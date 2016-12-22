@@ -68,27 +68,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
 
   mp_lPhoto->setPixmap( Bee::avatarForUser( u, QSize( 96, 96 ), true ) );
 
-  QString tool_tip = tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
-
-  if( u.statusChangedIn().isValid() )
-    tool_tip += QString( " %1 %2" ).arg( tr( "since" ) ).arg( u.statusChangedIn().date() == QDate::currentDate() ? u.statusChangedIn().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
-
-  if( u.isStatusConnected() )
-  {
-    if( u.statusDescription().isEmpty() )
-      tool_tip += QString( ".\n" );
-    else
-      tool_tip += QString( ": %1\n" ).arg( u.statusDescription() );
-
-    if( !u.vCard().info().isEmpty() )
-    {
-      tool_tip += QString( "~~~\n" );
-      tool_tip += u.vCard().info();
-      tool_tip += QString( "\n~~~\n" );
-    }
-  }
-
-  mp_lPhoto->setToolTip( tool_tip );
+  mp_lPhoto->setToolTip( Bee::toolTipForUser( u, false ) );
 
   if( !u.vCard().phoneNumber().isEmpty() )
     mp_lPhone->setText( u.vCard().phoneNumber() );

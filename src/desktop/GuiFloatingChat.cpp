@@ -26,6 +26,7 @@
 #include "GuiFloatingChat.h"
 #include "GuiEmoticons.h"
 #include "GuiPresetMessageList.h"
+#include "GuiUserList.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
 #include "UserManager.h"
@@ -81,6 +82,16 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
   mp_dockEmoticons->hide();
 
+  mp_dockMembers = new QDockWidget( tr( "Members" ), this );
+  mp_dockMembers->setObjectName( "GuiMembersDock" );
+  mp_members = new GuiUserList( mp_dockMembers );
+  mp_dockMembers->setWidget( mp_members );
+  mp_dockMembers->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::RightDockWidgetArea, mp_dockMembers );
+  QAction* mp_actViewMembers = mp_dockMembers->toggleViewAction();
+  mp_actViewMembers->setIcon( QIcon( ":/images/group.png" ) );
+  mp_actViewMembers->setText( tr( "Show the members of the chat" ) );
+
   setCentralWidget( mp_chat );
   statusBar();
   m_chatIsVisible = true;
@@ -111,7 +122,22 @@ bool GuiFloatingChat::setChatId( VNumber chat_id )
   else
     setWindowTitle( c.name() );
 
-  return mp_chat->setChatId( chat_id, true );
+  mp_members->clear();
+  mp_dockMembers->setVisible( c.isGroup() );
+
+  if( mp_chat->setChatId( chat_id, true ) )
+  {
+    foreach( VNumber user_id, c.usersId() )
+    {
+      User u = UserManager::instance().findUser( user_id );
+      if( !u.isLocal() )
+        mp_members->setUser( u, false );
+    }
+
+    return true;
+  }
+
+  return false;
 }
 
 void GuiFloatingChat::updateUser( const User& u, bool is_connected )
@@ -127,6 +153,7 @@ void GuiFloatingChat::updateUser( const User& u, bool is_connected )
   }
 
   mp_chat->updateUser( u );
+  mp_members->setUser( u, false );
 }
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )

@@ -107,7 +107,10 @@ bool GuiGroupItem::updateUser( const User& u )
 
   setIcon( 0, Bee::userStatusIcon( u.status() ) );
   setText( 0, u.name() );
-  setToolTip( 0, u.path() );
+  if( u.isStatusConnected() )
+    setToolTip( 0, Bee::toolTipForUser( u, false ) );
+  else
+    setToolTip( 0, u.path() );
 
   return true;
 }

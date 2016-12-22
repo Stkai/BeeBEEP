@@ -1138,7 +1138,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Show profile</source>
-        <translation>Mostra profilo</translation>
+        <translation type="obsolete">Mostra profilo</translation>
     </message>
     <message>
         <source>Show members</source>
@@ -1255,6 +1255,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Change the name of the group or add users</source>
         <translation>Cambia il nome del gruppo e aggiungi altri utenti</translation>
+    </message>
+    <message>
+        <source>Click to show user profile</source>
+        <translation type="obsolete">Premi qui per mostrare il profilo dell&apos;utente</translation>
+    </message>
+    <message>
+        <source>Click here to show the user profile</source>
+        <translation>Premi qui per mostrare il profilo dell&apos;utente</translation>
     </message>
 </context>
 <context>
@@ -5369,6 +5377,18 @@ Per ulteriori informazioni basterà visitare il sito de &lt;a href=http://it.wik
     <message>
         <source>read only</source>
         <translation>sola lettura</translation>
+    </message>
+    <message>
+        <source>You are %1</source>
+        <translation>Il tuo stato è %1</translation>
+    </message>
+    <message>
+        <source>since</source>
+        <translation type="obsolete">dalle</translation>
+    </message>
+    <message>
+        <source>last update</source>
+        <translation>ultimo aggiornamento</translation>
     </message>
 </context>
 <context>

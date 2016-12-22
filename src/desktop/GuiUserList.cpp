@@ -65,6 +65,11 @@ GuiUserList::GuiUserList( QWidget* parent )
   connect( mp_pbSettings, SIGNAL( clicked() ), this, SLOT( showMenuSettings() ) );
 }
 
+void GuiUserList::clear()
+{
+  resetList();
+}
+
 void GuiUserList::sortUsers()
 {
   mp_twUsers->sortItems( 0, Settings::instance().sortUsersAscending() ? Qt::AscendingOrder : Qt::DescendingOrder );

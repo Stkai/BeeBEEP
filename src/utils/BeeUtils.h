@@ -73,6 +73,7 @@ namespace Bee
   bool showFileInGraphicalShell( const QString& );
   bool folderIsWriteable( const QString& );
   QPixmap avatarForUser( const User&, const QSize&, bool use_available_user_image );
+  QString toolTipForUser( const User&, bool only_status );
 
 }
 

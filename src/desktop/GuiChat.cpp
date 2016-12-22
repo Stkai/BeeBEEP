@@ -413,6 +413,7 @@ void GuiChat::setChatUsers()
 
     foreach( User u, m_chatUsers.toList() )
     {
+      QPixmap user_avatar = Bee::avatarForUser( u, QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ), Settings::instance().showUserPhoto() );
       if( u.isLocal() )
         s_tmp = tr( "You" );
       else if( c.userHasReadMessages( u.id() ) || u.protocolVersion() < 63 )
@@ -422,13 +423,15 @@ void GuiChat::setChatUsers()
       act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), s_tmp );
       act->setData( u.id() );
       act->setIconVisibleInMenu( true );
+      act->setStatusTip( Bee::toolTipForUser( u, true ) );
+      act->setToolTip( Bee::toolTipForUser( u, false ) );
       if( u.isStatusConnected() && isActiveUser( c, u ) )
       {
         act->setEnabled( true  );
         if( !u.isLocal() )
         {
           mp_actBuzz->setEnabled( c.isPrivate() );
-          mp_pbProfile->setToolTip( tr( "Show profile" ) );
+          mp_pbProfile->setToolTip( QString( "%1\n(%2)" ).arg( act->toolTip() ).arg( tr( "Click here to show the user profile" ) ) );
         }
         connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
       }
@@ -447,7 +450,6 @@ void GuiChat::setChatUsers()
         else
           sl.append( QString( "%1" ).arg( u.name() ) );
 
-        QPixmap user_avatar = Bee::avatarForUser( u, QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ), Settings::instance().showUserPhoto() );
         mp_pbProfile->setIcon( user_avatar );
         connect( mp_pbProfile, SIGNAL( clicked() ), act, SIGNAL( triggered() ) );
       }
