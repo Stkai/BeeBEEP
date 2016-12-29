@@ -97,6 +97,8 @@ public:
 
   inline bool useHive() const;
 
+  inline bool disablePrivateChats() const;
+
   inline bool hideMainToolbar() const;
   inline bool hideChatToolbar() const;
   inline bool hideUsersPanel() const;
@@ -494,6 +496,7 @@ private:
   bool m_startMinimized;
   QString m_signature;
   bool m_useOnlyTextEmoticons;
+  bool m_disablePrivateChats;
 
   // Ini
   bool m_firstTime;
@@ -955,5 +958,6 @@ inline void Settings::setShowTextInModeRTL( bool new_value ) { m_showTextInModeR
 inline bool Settings::showTextInModeRTL() const { return m_showTextInModeRTL; }
 inline void Settings::setPlayBuzzSound( bool new_value ) { m_playBuzzSound = new_value; }
 inline bool Settings::playBuzzSound() const { return m_playBuzzSound; }
+inline bool Settings::disablePrivateChats() const { return m_disablePrivateChats; }
 
 #endif // BEEBEEP_SETTINGS_H

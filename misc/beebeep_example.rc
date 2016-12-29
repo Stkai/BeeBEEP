@@ -24,6 +24,7 @@ DisableSendMessage=false
 UseEasyConnection=false
 UseOnlyTextEmoticons=false
 StartMinimized=false
+DisablePrivateChats=false
 
 [Groups]
 TrustNickname=true

@@ -35,7 +35,7 @@ GuiHome::GuiHome( QWidget* parent )
 {
   setupUi( this );
   setObjectName( "GuiHome" );
-
+  m_prev_sys_mess = "";
   mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Home" ) ) );
 
   mp_teSystem->setObjectName( "GuiSystemViewer" );
@@ -64,6 +64,11 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
 
   if( sys_message.isEmpty() )
     return;
+
+  if( sys_message == m_prev_sys_mess )
+    return;
+
+  m_prev_sys_mess = sys_message;
 
   QTextCursor cursor( mp_teSystem->textCursor() );
   cursor.movePosition( QTextCursor::End );

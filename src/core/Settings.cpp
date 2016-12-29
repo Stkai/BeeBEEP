@@ -100,6 +100,7 @@ Settings::Settings()
   m_startMinimized = false;
   m_signature = "";
   m_useOnlyTextEmoticons = false;
+  m_disablePrivateChats = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -275,6 +276,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "StartMinimized", m_startMinimized );
     sets->setValue( "Signature", m_signature );
     sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
+    sets->setValue( "DisablePrivateChats", m_disablePrivateChats );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -350,6 +352,7 @@ void Settings::loadRcFile()
   m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
   m_signature = sets->value( "Signature", m_signature ).toString();
   m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();
+  m_disablePrivateChats = sets->value( "DisablePrivateChats", m_disablePrivateChats ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Groups" );

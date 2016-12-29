@@ -3327,7 +3327,10 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
   {
     GuiChat* gui_chat = guiChat( chat_id );
     if( gui_chat )
+    {
       gui_chat->reloadChatUsers();
+      gui_chat->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
+    }
     mp_chatList->reloadChatList();
     checkViewActions();
   }

@@ -100,6 +100,7 @@ protected:
   void updateSpellCheckerToolTip();
   void updateCompleterToolTip();
   void updateUseReturnKeyToSendMessageToolTip();
+  void checkChatDisabled( const Chat& );
 
 private slots:
   void sendMessage();

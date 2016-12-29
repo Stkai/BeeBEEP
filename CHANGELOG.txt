@@ -2,6 +2,8 @@ BEEBEEP (Secure Lan Messanger) - CHANGELOG
 
 BeeBEEP 3.2.0
 - Added status tooltip on the user's avatar/icon
+- Added a check and an alert on same nickname/account of the users
+- Added "DisablePrivateChats" option on beebeep.rc file
 
 BeeBEEP 3.0.9
 - The emoticon icon is now showed in detached chat (bug fixed)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -634,6 +634,22 @@
         <source>Try the new awesome application developed by Marco Mastroddi</source>
         <translation>Prova la nuova mitica applicazione sviluppata da Marco Mastroddi</translation>
     </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses your system name.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso nome di sistema.</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses your nickname.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso soprannome.</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso nome di sistema dell&apos;utente connesso %3.</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso soprannome dell&apos;utente connesso %3.</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -1264,6 +1280,26 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <source>Click here to show the user profile</source>
         <translation>Premi qui per mostrare il profilo dell&apos;utente</translation>
     </message>
+    <message>
+        <source>You are not connected</source>
+        <translation>Non sei in linea</translation>
+    </message>
+    <message>
+        <source>Send messages is disabled</source>
+        <translation>L&apos;invio dei messaggi è disabilitato</translation>
+    </message>
+    <message>
+        <source>Chat with all users is disabled</source>
+        <translation>La conversazione con tutti gli utenti connessi è disabilitata</translation>
+    </message>
+    <message>
+        <source>Private chat is disabled</source>
+        <translation>La conversazione privata è disabilitata</translation>
+    </message>
+    <message>
+        <source>You have left this chat</source>
+        <translation>Hai abbandonato questa conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1465,6 +1501,10 @@ Inserisci un nome differente.</translation>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
+    <message>
+        <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
+        <translation>Il soprannome %1 è usato già dall&apos;utente %2.</translation>
+    </message>
 </context>
 <context>
     <name>GuiEmoticons</name>
@@ -1541,6 +1581,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show the preset messages panel</source>
         <translation>Mostra il pannello dei messaggi predefiniti</translation>
+    </message>
+    <message>
+        <source>Members</source>
+        <translation>Membri</translation>
+    </message>
+    <message>
+        <source>Show the members of the chat</source>
+        <translation>Mostra i membri della conversazione</translation>
     </message>
 </context>
 <context>

@@ -130,7 +130,26 @@ User UserManager::findUserByPath( const QString& user_path ) const
   qDebug() << "Unable to find user with path" << user_path;
 #endif
 
+  if( Settings::instance().trustNickname() )
+  {
+    QString user_nickname = User::nameFromPath( user_path ).toLower();
+    if( user_nickname == Settings::instance().localUser().name().toLower() )
+      return Settings::instance().localUser();
+
+    foreach( User u, m_users.toList() )
+    {
+      if( u.name().toLower() == user_nickname )
+        return u;
+    }
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Unable to find user with nickname" << user_nickname;
+#endif
+  }
+
   QString host_and_port = User::hostAddressAndPortFromPath( user_path );
+
+  if( host_and_port == Settings::instance().localUser().networkAddress().toString() )
+    return Settings::instance().localUser();
 
   foreach( User u, m_users.toList() )
   {
@@ -141,19 +160,6 @@ User UserManager::findUserByPath( const QString& user_path ) const
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Unable to find user with host and port" << host_and_port;
 #endif
-
-  if( Settings::instance().trustNickname() )
-  {
-    QString user_nickname = User::nameFromPath( user_path );
-    foreach( User u, m_users.toList() )
-    {
-      if( u.name() == user_nickname )
-        return u;
-    }
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Unable to find user with name" << user_nickname;
-#endif
-  }
 
   return User();
 }
@@ -228,12 +234,12 @@ User UserManager::findUserByNickname( const QString& user_nickname ) const
   if( user_nickname.isEmpty() )
     return User();
 
-  if( Settings::instance().localUser().vCard().nickName() == user_nickname )
+  if( Settings::instance().localUser().vCard().nickName().toLower() == user_nickname.toLower() )
     return Settings::instance().localUser();
 
   foreach( User u, m_users.toList() )
   {
-    if( u.vCard().nickName() == user_nickname )
+    if( u.vCard().nickName().toLower() == user_nickname.toLower() )
       return u;
   }
 

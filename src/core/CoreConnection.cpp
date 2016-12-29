@@ -237,8 +237,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   else
     qDebug() << qPrintable( u.path() ) << "has completed the authentication";
 
-  bool user_path_changed = false;
-
+  bool user_has_same_account_name = false;
   User user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
   if( !user_found.isValid() )
   {
@@ -246,7 +245,10 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       user_found = UserManager::instance().findUserByAccountName( u.accountName() );
       if( user_found.isValid() )
+      {
+        user_has_same_account_name = true;
         qDebug() << "User found in list with account name:" << qPrintable( u.accountName() );
+      }
     }
     else
     {
@@ -258,10 +260,30 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   else
     qDebug() << "User found in list with session id:" << qPrintable( u.sessionId() );
 
+  bool user_path_changed = false;
+
   if( user_found.isValid() )
   {
+    QString sAlertMsg;
+    user_path_changed = (u.path() != user_found.path());
     if( user_found.isLocal() )
     {
+      if( user_path_changed )
+      {
+        if( user_has_same_account_name )
+        {
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your system name." )
+                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.accountPath() );
+        }
+        else
+        {
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname." )
+                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path() );
+        }
+
+        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+      }
+
       qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
       closeConnection( c );
       return;
@@ -269,17 +291,30 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
     if( isUserConnected( user_found.id() ) )
     {
+      if( user_path_changed )
+      {
+        if( user_has_same_account_name )
+        {
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3." )
+                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.accountPath(), user_found.accountPath() );
+        }
+        else
+        {
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3." )
+                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path() );
+        }
+
+        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+      }
+
       qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
       c->setUserId( ID_INVALID );
       closeConnection( c );
       return;
     }
 
-    if( u.path() != user_found.path() )
-    {
-      user_path_changed = true;
+    if( user_path_changed )
       qDebug() << "On connection old user found" << qPrintable( user_found.path() ) << "and associated to" << qPrintable( u.path() );
-    }
     else
       qDebug() << "User" << qPrintable( u.path() ) << "reconnected";
 

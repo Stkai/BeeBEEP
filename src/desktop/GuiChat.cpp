@@ -202,18 +202,45 @@ void GuiChat::updateActions( bool is_connected, int connected_users )
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
 
+  if( !is_connected )
+  {
+    mp_teMessage->setEnabled( false );
+    mp_pbSend->setEnabled( false );
+    mp_teMessage->setToolTip( tr( "You are not connected" ) );
+  }
+  else
+    checkChatDisabled( c );
+}
+
+void GuiChat::checkChatDisabled( const Chat& c )
+{
   if( Settings::instance().disableSendMessage() )
   {
     mp_teMessage->setEnabled( false );
     mp_pbSend->setEnabled( false );
+    mp_teMessage->setToolTip( tr( "Send messages is disabled" ) );
+  }
+  else if( c.isDefault() && !Settings::instance().chatWithAllUsersIsEnabled() )
+  {
+    mp_teMessage->setEnabled( false );
+    mp_pbSend->setEnabled( false );
+    mp_teMessage->setToolTip( tr( "Chat with all users is disabled" ) );
+  }
+  else if( c.isPrivate() && Settings::instance().disablePrivateChats() )
+  {
+    mp_teMessage->setEnabled( false );
+    mp_pbSend->setEnabled( false );
+    mp_teMessage->setToolTip( tr( "Private chat is disabled" ) );
   }
   else
   {
-    if( c.isDefault() )
-      mp_teMessage->setEnabled( is_connected && Settings::instance().chatWithAllUsersIsEnabled() );
+    bool local_user_is_active_in_chat = isActiveUser( c, Settings::instance().localUser() );
+    mp_teMessage->setEnabled( local_user_is_active_in_chat );
+    mp_pbSend->setEnabled( local_user_is_active_in_chat );
+    if( local_user_is_active_in_chat )
+      mp_teMessage->setToolTip( "" );
     else
-      mp_teMessage->setEnabled( is_connected && local_user_is_member );
-    mp_pbSend->setEnabled( is_connected );
+      mp_teMessage->setToolTip( tr( "You have left this chat" ) );
   }
 }
 
@@ -470,11 +497,6 @@ void GuiChat::setChatUsers()
   }
 
   mp_lTitle->setText( chat_users );
-
-  if( c.isDefault() )
-    mp_teMessage->setEnabled( Settings::instance().chatWithAllUsersIsEnabled() );
-  else
-    mp_teMessage->setEnabled( isActiveUser( c, Settings::instance().localUser() ) && chat_has_members );
 }
 
 void GuiChat::reloadChatUsers()
@@ -581,9 +603,7 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
   ensureLastMessageVisible();
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   setChatUsers();
-
-  mp_teMessage->setDisabled( Settings::instance().disableSendMessage() );
-  mp_pbSend->setDisabled( Settings::instance().disableSendMessage() );
+  checkChatDisabled( c );
 
   QApplication::restoreOverrideCursor();
   return true;

@@ -181,8 +181,15 @@ void Core::dispatchToChat( const ChatMessage& cm, VNumber chat_id )
 
 void Core::dispatchToDefaultAndPrivateChat( const ChatMessage& cm, VNumber user_id )
 {
+  Chat c = ChatManager::instance().defaultChat();
+  c.addMessage( cm );
+  ChatManager::instance().setChat( c );
   emit chatMessage( ID_DEFAULT_CHAT, cm );
-  Chat c = ChatManager::instance().privateChatForUser( user_id );
+  c = ChatManager::instance().privateChatForUser( user_id );
   if( c.isValid() )
+  {
+    c.addMessage( cm );
+    ChatManager::instance().setChat( c );
     emit chatMessage( c.id(), cm );
+  }
 }

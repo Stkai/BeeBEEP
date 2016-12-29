@@ -52,6 +52,9 @@ protected slots:
   void reloadMessages();
   void printActivities();
 
+private:
+  QString m_prev_sys_mess;
+
 };
 
 

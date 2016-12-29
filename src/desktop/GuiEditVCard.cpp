@@ -25,6 +25,7 @@
 #include "FileDialog.h"
 #include "GuiEditVCard.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 GuiEditVCard::GuiEditVCard( QWidget *parent )
@@ -156,7 +157,18 @@ void GuiEditVCard::checkData()
   if( !checkLineEdit( mp_leNickname, tr( "Please insert your nickname." ) ) )
     return;
 
-  m_vCard.setNickName( mp_leNickname->text().simplified() );
+  QString user_nickname = mp_leNickname->text().simplified();
+  User u = UserManager::instance().findUserByNickname( user_nickname );
+  if( u.isValid() && !u.isLocal() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(),
+                          tr( "The nickname '%1' is already in use by the user %2." )
+                            .arg( user_nickname ).arg( u.path() ) );
+    mp_leNickname->setFocus();
+    return;
+  }
+
+  m_vCard.setNickName( user_nickname );
   m_vCard.setFirstName( mp_leFirstName->text().simplified() );
   m_vCard.setLastName( mp_leLastName->text().simplified() );
   if( mp_deBirthday->date() != QDate( 1900, 1, 1 ) )
