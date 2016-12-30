@@ -194,6 +194,7 @@ private slots:
   void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );
+  void toggleCompactMode();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -209,6 +210,8 @@ protected:
   bool chatIsVisible( VNumber );
   void showAlertForMessage( VNumber, const ChatMessage&, bool* chat_window_is_created );
   GuiChat* guiChat( VNumber );
+  void showInCompactMode();
+  void restoreFromCompactMode();
 
 private:
   void updateMainIcon();
@@ -312,6 +315,7 @@ private:
   QAction* mp_actViewNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
+  QAction* mp_actViewInCompactMode;
 
   GuiShareBox* mp_shareBox;
   QAction* mp_actViewShareBox;

@@ -25,6 +25,7 @@ UseEasyConnection=false
 UseOnlyTextEmoticons=false
 StartMinimized=false
 DisablePrivateChats=false
+ViewInCompactMode=false
 
 [Groups]
 TrustNickname=true

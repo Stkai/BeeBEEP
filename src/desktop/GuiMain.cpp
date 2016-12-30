@@ -33,6 +33,7 @@
 #include "GuiChat.h"
 #include "GuiChatList.h"
 #include "GuiCreateGroup.h"
+#include "GuiConfig.h"
 #include "GuiEditVCard.h"
 #include "GuiEmoticons.h"
 #include "GuiFloatingChat.h"
@@ -301,6 +302,10 @@ void GuiMain::checkWindowFlagsAndShow()
 #endif
     chat_splitter->restoreState( Settings::instance().chatSplitterState() );
   }
+
+  mp_actViewInCompactMode->setChecked( Settings::instance().viewInCompactMode() );
+  if( Settings::instance().viewInCompactMode() )
+    showInCompactMode();
 }
 
 void GuiMain::refreshTitle( const User& )
@@ -1084,6 +1089,9 @@ void GuiMain::createMenus()
   mp_menuView->addAction( QIcon( ":/images/save-window.png" ), tr( "Save main window geometry" ), this, SLOT( saveGeometryAndState() ) );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actToolBar );
+  mp_menuView->addSeparator();
+  mp_actViewInCompactMode = mp_menuView->addAction( QIcon( ":/images/compact.png" ), tr( "Show in compact mode" ), this, SLOT( toggleCompactMode() ) );
+  mp_actViewInCompactMode->setCheckable( true );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewUsers );
   mp_menuView->addAction( mp_actViewGroups );
@@ -4295,6 +4303,42 @@ void GuiMain::showBuzzFromUser( const User& u )
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( c.isValid() )
     mp_trayIcon->showNewMessageArrived( c.id(), tr( "%1 is buzzing you!" ).arg( u.name() ), true );
+}
+
+void GuiMain::toggleCompactMode()
+{
+  if( mp_actViewInCompactMode->isChecked() )
+  {
+    Settings::instance().setViewInCompactMode( true );
+    showInCompactMode();
+  }
+  else
+  {
+    Settings::instance().setViewInCompactMode( false );
+    restoreFromCompactMode();
+  }
+}
+
+void GuiMain::showInCompactMode()
+{
+  int previous_height = isVisible() ? height() : BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT;
+  raiseHomeView();
+  mp_stackedWidget->hide();
+  if( !mp_dockUserList->isVisible() )
+    mp_dockUserList->show();
+  if( !mp_dockUserList->isVisible() )
+    mp_dockChatList->show();
+  resize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, previous_height );
+  mp_barMain->repaint();
+  repaint();
+}
+
+void GuiMain::restoreFromCompactMode()
+{
+  mp_stackedWidget->show();
+  resize( BEE_MAIN_WINDOW_BASE_SIZE_WIDTH, BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT );
+  mp_barMain->repaint();
+  repaint();
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

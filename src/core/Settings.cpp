@@ -101,6 +101,7 @@ Settings::Settings()
   m_signature = "";
   m_useOnlyTextEmoticons = false;
   m_disablePrivateChats = false;
+  m_viewInCompactMode = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -277,6 +278,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "Signature", m_signature );
     sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
     sets->setValue( "DisablePrivateChats", m_disablePrivateChats );
+    sets->setValue( "ViewInCompactMode", m_viewInCompactMode );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -353,6 +355,7 @@ void Settings::loadRcFile()
   m_signature = sets->value( "Signature", m_signature ).toString();
   m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();
   m_disablePrivateChats = sets->value( "DisablePrivateChats", m_disablePrivateChats ).toBool();
+  m_viewInCompactMode = sets->value( "ViewInCompactMode", m_viewInCompactMode ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Groups" );
@@ -969,6 +972,7 @@ void Settings::load()
   m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
   m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
   m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
+  m_viewInCompactMode = sets->value( "ViewInCompactMode", m_viewInCompactMode ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1247,6 +1251,7 @@ void Settings::save()
   sets->setValue( "SortUsersAscending", m_sortUsersAscending );
   sets->setValue( "ShowChatTextInModeRTL", m_showTextInModeRTL );
   sets->setValue( "PlayBuzzSound", m_playBuzzSound );
+  sets->setValue( "ViewInCompactMode", m_viewInCompactMode );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

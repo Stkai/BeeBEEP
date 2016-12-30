@@ -151,5 +151,6 @@
         <file>images/preset-message-edit.png</file>
         <file>images/bell.png</file>
         <file>images/raspberry-pi.png</file>
+        <file>images/compact.png</file>
     </qresource>
 </RCC>

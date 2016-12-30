@@ -104,6 +104,8 @@ public:
   inline bool hideUsersPanel() const;
   inline bool hideOtherPanels() const;
   inline bool hideAllPanels() const;
+  inline void setViewInCompactMode( bool );
+  inline bool viewInCompactMode() const;
 
   inline bool disableFileTransfer() const;
   inline bool disableSendMessage() const;
@@ -497,6 +499,7 @@ private:
   QString m_signature;
   bool m_useOnlyTextEmoticons;
   bool m_disablePrivateChats;
+  bool m_viewInCompactMode;
 
   // Ini
   bool m_firstTime;
@@ -959,5 +962,7 @@ inline bool Settings::showTextInModeRTL() const { return m_showTextInModeRTL; }
 inline void Settings::setPlayBuzzSound( bool new_value ) { m_playBuzzSound = new_value; }
 inline bool Settings::playBuzzSound() const { return m_playBuzzSound; }
 inline bool Settings::disablePrivateChats() const { return m_disablePrivateChats; }
+inline void Settings::setViewInCompactMode( bool new_value ) { m_viewInCompactMode = new_value; }
+inline bool Settings::viewInCompactMode() const { return m_viewInCompactMode; }
 
 #endif // BEEBEEP_SETTINGS_H
