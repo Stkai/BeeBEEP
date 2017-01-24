@@ -501,9 +501,10 @@ bool Bee::setLastModifiedToFile( const QString& to_path, const QDateTime& dt_las
   uint cr_time = mod_time;
 
   FILETIME ft_modified, ft_creation, ft_access;
-  LPCWSTR to_file_name = to_path.toStdWString().c_str();
 
-  HANDLE h_file = ::CreateFile( to_file_name, GENERIC_READ|GENERIC_WRITE, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL );
+  LPCWSTR to_file_name = (const WCHAR*)to_path.utf16();
+
+  HANDLE h_file = ::CreateFileW( to_file_name, GENERIC_READ|GENERIC_WRITE, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL );
 
   if( h_file != INVALID_HANDLE_VALUE )
   {

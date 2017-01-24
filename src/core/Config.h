@@ -80,7 +80,7 @@ const int FILE_TRANSFER_2_PROTO_VERSION = 63;
 const int HIVE_PROTO_VERSION = 64;
 // Tick interval in ms
 const int TICK_INTERVAL = 1000;
-const int PING_INTERVAL_IDLE = 1800;
+const int PING_INTERVAL_IDLE = 4700;
 const int PING_INTERVAL_TICK = 7;
 const int AUTO_BROADCAST_CHECK_TICK = 31;
 

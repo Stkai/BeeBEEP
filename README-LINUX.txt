@@ -15,34 +15,6 @@
 
 4) Check BeeBEEP dependencies and install packages if needed
 
-   BeeBEEP 2.0
-
-   libxcb.so.1 => /usr/lib/x86_64-linux-gnu/libxcb.so.1
-   libxcb-screensaver.so.0 => /usr/lib/x86_64-linux-gnu/libxcb-screensaver.so.0
-   libQt5PrintSupport.so.5 => /opt/qt/5.2.1/gcc_64/lib/libQt5PrintSupport.so.5
-   libQt5Multimedia.so.5 => /opt/qt/5.2.1/gcc_64/lib/libQt5Multimedia.so.5
-   libQt5Widgets.so.5 => /opt/qt/5.2.1/gcc_64/lib/libQt5Widgets.so.5
-   libQt5Network.so.5 => /opt/qt/5.2.1/gcc_64/lib/libQt5Network.so.5
-   libQt5Gui.so.5 => /opt/qt/5.2.1/gcc_64/lib/libQt5Gui.so.5
-   libQt5Core.so.5 => /opt/qt/5.2.1/gcc_64/lib/libQt5Core.so.5
-
-   From 2.0.5 these dependencies are added (libavahi-compat-libdnssd):
-   libdns_sd.so.1 => /usr/lib/x86_64-linux-gnu/libdns_sd.so.1
-   libavahi-common.so.3 => /usr/lib/x86_64-linux-gnu/libavahi-common.so.3
-   libavahi-client.so.3 => /usr/lib/x86_64-linux-gnu/libavahi-client.so.3
-
-   From BeeBEEP 3.0.2 you need Qt4 libraries and Phonon:
-   libphonon.so.4 => /usr/lib/i386-linux-gnu/libphonon.so.4
-   libQtGui.so.4 => /usr/lib/i386-linux-gnu/libQtGui.so.4
-   libQtNetwork.so.4 => /usr/lib/i386-linux-gnu/libQtNetwork.so.4
-   libQtCore.so.4 => /usr/lib/i386-linux-gnu/libQtCore.so.4
-   libQtXml.so.4 => /usr/lib/i386-linux-gnu/libQtXml.so.4
-
-   From BeeBEEP 3.0.3 you need hunspell library for spell checking:
-   libhunspell-1.3.so.0 => /usr/lib/x86_64-linux-gnu/libhunspell-1.3.so.0
-
-   [ RUNTIME LIBRARIES ]
-
    ** Ubuntu and Debian like **
 
    For BeeBEEP 2.0
