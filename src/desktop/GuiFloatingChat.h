@@ -43,18 +43,19 @@ public:
   void checkWindowFlagsAndShow();
   void showUserWriting( VNumber, const QString& );
   void raiseOnTop();
+  void setFocusInChat();
+
   inline bool chatIsVisible() const;
   void setMainIcon( bool with_message );
 
   void updateUser( const User&, bool );
 
 public slots:
-  void showUp();
   void updateEmoticon();
 
 signals:
-  void attachChatRequest( VNumber );
   void readAllMessages( VNumber );
+  void chatIsAboutToClose( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -79,6 +80,9 @@ private:
 
   bool m_chatIsVisible;
   bool m_prevActivatedState;
+
+  QIcon m_mainWindowIcon;
+
 };
 
 

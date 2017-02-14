@@ -58,7 +58,6 @@ public:
 
   void setChatReadByUser( VNumber );
 
-
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );
@@ -71,7 +70,6 @@ signals:
   void leaveThisChat( VNumber );
   void showChatMenuRequest();
   void showVCardRequest( VNumber, bool );
-  void detachChatRequest( VNumber );
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
@@ -84,7 +82,6 @@ public slots:
   void addText( const QString& );
 
 protected:
-  void enableDetachButtons();
   void setLastMessageTimestamp( const QDateTime& );
   void setChatUsers();
   QString chatMessageToText( const ChatMessage& );
@@ -121,7 +118,6 @@ private slots:
   void showMembersMenu();
   void showLocalUserVCard();
   void showGroupWizard();
-  void detachThisChat();
   void editChatMembers();
   void checkAndSendUrls( const QMimeData* );
   void checkAndSendImage( const QMimeData* );

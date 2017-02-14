@@ -302,44 +302,6 @@
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QPushButton" name="mp_pbDetach">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>34</width>
-        <height>34</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>34</width>
-        <height>34</height>
-       </size>
-      </property>
-      <property name="toolTip">
-       <string>Detach chat</string>
-      </property>
-      <property name="icon">
-       <iconset resource="../beebeep.qrc">
-        <normaloff>:/images/add-window.png</normaloff>:/images/add-window.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>24</width>
-        <height>24</height>
-       </size>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
  </widget>

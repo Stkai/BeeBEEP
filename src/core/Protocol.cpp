@@ -1527,10 +1527,7 @@ QString Protocol::fileInfoHash( const QFileInfo& file_info ) const
   sl << file_info.fileName();
   sl << QString::number( file_info.size() );
   sl << file_info.lastModified().toString( "dd.MM.yyyy-hh:mm:ss" );
-
-  QCryptographicHash ch( QCryptographicHash::Sha1 );
-  ch.addData( sl.join( "-" ).toUtf8() );
-  return QString::fromLatin1( ch.result().toHex() );
+  return Settings::instance().simpleHash( sl.join( "-" ) );
 }
 
 QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_info_name, FileSizeType file_info_size ) const
@@ -1539,10 +1536,7 @@ QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_inf
   sl << QString::number( file_info_id );
   sl << file_info_name;
   sl << QString::number( file_info_size );
-
-  QCryptographicHash ch( QCryptographicHash::Sha1 );
-  ch.addData( sl.join( "-" ).toUtf8() );
-  return QString::fromLatin1( ch.result().toHex() );
+  return Settings::instance().simpleHash( sl.join( "-" ) );
 }
 
 QString Protocol::newMd5Id()
@@ -1554,10 +1548,7 @@ QString Protocol::newMd5Id()
   sl << QString::number( Random::d100() );
   sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" );
   sl << QString::number( Random::d100() );
-
-  QCryptographicHash ch( QCryptographicHash::Sha1 );
-  ch.addData( sl.join( "=" ).toUtf8() );
-  return QString::fromLatin1( ch.result().toHex() );
+  return Settings::instance().simpleHash( sl.join( "=" ) );
 }
 
 QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const

@@ -107,13 +107,11 @@ private slots:
   void changeUserColor( VNumber );
   void showPluginHelp();
   void showPluginManager();
-  void showCurrentChat();
   void showDefaultChat();
   void showChat( VNumber );
   void showWizard();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
   void trayMessageClicked();
-  void raiseChatView();
   void raiseLocalShareView();
   void raiseNetworkShareView();
   void raisePluginView();
@@ -152,8 +150,6 @@ private slots:
   void showLocalUserVCard();
   void showAddUser();
   void showChatSettingsMenu();
-  void emoticonMenuVisibilityChanged( bool );
-  void presetMessageListMenuVisibilityChanged( bool );
   void sendBroadcastMessage();
   void enableBroadcastAction();
   void checkUserSelected( VNumber );
@@ -164,14 +160,11 @@ private slots:
   void removeUserFromList( VNumber );
   void openDataFolder();
   void openResourceFolder();
-  void detachChat( VNumber );
-  void attachChat( VNumber );
   void readAllMessagesInChat( VNumber );
   void recentlyUsedUserStatusSelected();
   void clearRecentlyUsedUserStatus();
   void loadSavedChatsCompleted();
   void editShortcuts();
-  void onApplicationFocusChanged( QWidget*, QWidget* );
   void minimizeAllChats();
   void showAllChats();
   void selectDictionatyPath();
@@ -179,8 +172,6 @@ private slots:
   void onNetworkInterfaceUp();
   void onChatReadByUser( VNumber chat_id, VNumber user_id );
   void saveGeometryAndState();
-  void toggleVisibilityEmoticonPanel();
-  void toggleVisibilityPresetMessagesPanel();
   void onChangeSettingBeepOnNewMessage( QAction* );
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );
@@ -195,6 +186,7 @@ private slots:
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );
   void toggleCompactMode();
+  void removeFloatingChatFromList( VNumber );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -202,19 +194,18 @@ protected:
   void changeEvent( QEvent* );
   bool promptConnectionPassword();
   void raiseOnTop();
-  void checkChatToolbar();
   void raiseView( QWidget*, VNumber, const QString& );
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
-  void closeFloatingChat( VNumber );
   bool reloadChat( VNumber );
   bool chatIsVisible( VNumber );
   void showAlertForMessage( VNumber, const ChatMessage&, bool* chat_window_is_created );
   GuiChat* guiChat( VNumber );
   void showInCompactMode();
   void restoreFromCompactMode();
+  GuiFloatingChat* createFloatingChat( VNumber );
+  void closeFloatingChat( VNumber );
 
 private:
-  void updateMainIcon();
   void setupChatConnections( GuiChat* );
   void createActions();
   void createMenus();
@@ -241,7 +232,6 @@ private:
   bool isAudioDeviceAvailable() const;
   void showDefaultServerPortInMenu();
   void applyFlagStaysOnTop();
-  bool floatingChatExists( VNumber ) const;
   GuiFloatingChat* floatingChat( VNumber ) const;
   QWidget* activeChatWindow();
   void setChatMessagesToShowInAction( QAction* );
@@ -251,11 +241,9 @@ private:
   void updateShortcuts();
   void updateEmoticons();
   void updateNewMessageAction();
-  QList<GuiChat*> guiChatList() const;
 
 private:
   QStackedWidget* mp_stackedWidget;
-  GuiChat* mp_chat;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
@@ -267,8 +255,6 @@ private:
   GuiSavedChat* mp_savedChat;
   GuiScreenShot* mp_screenShot;
   GuiHome* mp_home;
-  GuiEmoticons* mp_emoticonsWidget;
-  GuiPresetMessageList* mp_presetMessageListWidget;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -286,7 +272,6 @@ private:
   QMenu* mp_menuUserStatusList;
 
   QToolBar* mp_barMain;
-  QToolBar* mp_barChat;
   QToolBar* mp_barShareNetwork;
   QToolBar* mp_barShareLocal;
   QToolBar* mp_barScreenShot;
@@ -303,12 +288,11 @@ private:
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
   QAction* mp_actViewFileTransfer;
-  QAction* mp_actViewChats;
   QAction* mp_actViewSavedChats;
   QAction* mp_actViewGroups;
   QAction* mp_actViewShareLocal;
   QAction* mp_actViewShareNetwork;
-  QAction* mp_actViewDefaultChat;
+  QAction* mp_actViewChats;
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
   QAction* mp_actViewHome;
@@ -346,8 +330,6 @@ private:
   QDockWidget* mp_dockSavedChatList;
   QDockWidget* mp_dockChatList;
   QDockWidget* mp_dockFileTransfers;
-  QDockWidget* mp_dockEmoticons;
-  QDockWidget* mp_dockPresetMessageList;
 
   GuiSystemTray* mp_trayIcon;
 

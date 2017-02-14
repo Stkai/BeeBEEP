@@ -108,15 +108,14 @@ void Core::checkNewConnection( qintptr socket_descriptor )
 
   Connection *c = new Connection( this );
   c->initSocket( socket_descriptor );
+
   qDebug() << "New connection from" << qPrintable( c->networkAddress().toString() );
 
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
   {
     if( hasConnection( c->peerAddress(), -1 ) )
     {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << qPrintable( c->peerAddress().toString() ) << "is already connected and blocked by prevent multiple connections";
-#endif
+      qWarning() << qPrintable( c->networkAddress().toString() ) << "is already connected and blocked by prevent multiple connections";
       closeConnection( c );
       return;
     }

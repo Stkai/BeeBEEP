@@ -217,8 +217,6 @@ public:
   inline const QByteArray& guiGeometry() const;
   inline void setGuiState( const QByteArray& );
   inline const QByteArray& guiState() const;
-  inline void setChatSplitterState( const QByteArray& );
-  inline const QByteArray& chatSplitterState() const;
   inline void setShowEmoticonMenu( bool );
   inline bool showEmoticonMenu() const;
   inline void setShowPresetMessages( bool );
@@ -386,8 +384,6 @@ public:
   inline void setUseShortcuts( bool );
   inline bool useShortcuts() const;
 
-  inline void setShowHomeAsDefaultPage( bool );
-  inline bool showHomeAsDefaultPage() const;
   inline void setResetGeometryAtStartup( bool );
   inline bool resetGeometryAtStartup() const;
   inline void setShowMinimizedAtStartup( bool );
@@ -395,8 +391,6 @@ public:
 
   inline void setPromptOnCloseEvent( bool );
   inline bool promptOnCloseEvent() const;
-  inline void setAlwaysOpenNewFloatingChat( bool );
-  inline bool alwaysOpenNewFloatingChat() const;
 
   inline void setUseSpellChecker( bool );
   inline bool useSpellChecker() const;
@@ -571,7 +565,6 @@ private:
   QByteArray m_guiState;
   QSize m_mainBarIconSize;
   QSize m_avatarIconSize;
-  QByteArray m_chatSplitterState;
   int m_emoticonSizeInEdit;
   int m_emoticonSizeInChat;
   int m_emoticonSizeInMenu;
@@ -643,11 +636,9 @@ private:
   bool m_saveUserList;
   QStringList m_userList;
 
-  bool m_showHomeAsDefaultPage;
   bool m_resetGeometryAtStartup;
   bool m_showMinimizedAtStartup;
   bool m_promptOnCloseEvent;
-  bool m_alwaysOpenNewFloatingChat;
 
   bool m_isFacebookPageLinkClicked;
 
@@ -852,14 +843,10 @@ inline void Settings::setSaveUserList( bool new_value ) { m_saveUserList = new_v
 inline bool Settings::saveUserList() const { return m_saveUserList; }
 inline void Settings::setUserList( const QStringList& new_value ) { m_userList = new_value; }
 inline const QStringList& Settings::userList() const { return m_userList; }
-inline void Settings::setShowHomeAsDefaultPage( bool new_value ) { m_showHomeAsDefaultPage = new_value; }
-inline bool Settings::showHomeAsDefaultPage() const { return m_showHomeAsDefaultPage; }
 inline void Settings::setResetGeometryAtStartup( bool new_value ) { m_resetGeometryAtStartup = new_value; }
 inline bool Settings::resetGeometryAtStartup() const { return m_resetGeometryAtStartup; }
 inline void Settings::setShowMinimizedAtStartup( bool new_value ) { m_showMinimizedAtStartup = new_value; }
 inline bool Settings::showMinimizedAtStartup() const { return m_showMinimizedAtStartup; }
-inline void Settings::setChatSplitterState( const QByteArray& new_value ) { m_chatSplitterState = new_value; }
-inline const QByteArray& Settings::chatSplitterState() const { return m_chatSplitterState; }
 inline int Settings::chatMessagesToShow() const { return m_chatMessagesToShow; }
 inline void Settings::setChatMessagesToShow( int new_value ) { m_chatMessagesToShow = new_value; }
 inline bool Settings::chatMaxMessagesToShow() const { return m_chatMaxMessagesToShow; }
@@ -888,8 +875,6 @@ inline void Settings::setFloatingChatSplitterState( const QByteArray& new_value 
 inline const QByteArray& Settings::floatingChatGeometry() const { return m_floatingChatGeometry; }
 inline const QByteArray& Settings::floatingChatState() const { return m_floatingChatState; }
 inline const QByteArray& Settings::floatingChatSplitterState() const { return m_floatingChatSplitterState; }
-inline void Settings::setAlwaysOpenNewFloatingChat( bool new_value ) { m_alwaysOpenNewFloatingChat = new_value; }
-inline bool Settings::alwaysOpenNewFloatingChat() const { return m_alwaysOpenNewFloatingChat; }
 inline void Settings::setAcceptConnectionsOnlyFromWorkgroups( bool new_value ) { m_acceptConnectionsOnlyFromWorkgroups = new_value; }
 inline bool Settings::acceptConnectionsOnlyFromWorkgroups() const { return m_acceptConnectionsOnlyFromWorkgroups; }
 inline void Settings::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }

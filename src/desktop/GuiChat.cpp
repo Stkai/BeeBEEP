@@ -110,26 +110,7 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teMessage, SIGNAL( urlsToCheck( const QMimeData* ) ), this, SLOT( checkAndSendUrls( const QMimeData* ) ) );
   connect( mp_teMessage, SIGNAL( imageToCheck( const QMimeData* ) ), this, SLOT( checkAndSendImage( const QMimeData* ) ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
-  connect( mp_pbDetach, SIGNAL( clicked() ), this, SLOT( detachThisChat() ) );
   connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
-}
-
-void GuiChat::enableDetachButtons()
-{
-  if( m_chatId == ID_DEFAULT_CHAT )
-  {
-    mp_pbDetach->setEnabled( false );
-    mp_pbDetach->setVisible( false );
-    mp_pbSaveState->setEnabled( false );
-    mp_pbSaveState->setVisible( false );
-  }
-  else
-  {
-    mp_pbDetach->setEnabled( !m_isFloating );
-    mp_pbDetach->setVisible( !m_isFloating );
-    mp_pbSaveState->setEnabled( m_isFloating );
-    mp_pbSaveState->setVisible( m_isFloating );
-  }
 }
 
 void GuiChat::setupToolBar( QToolBar* bar )
@@ -536,8 +517,6 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
     mp_actSelectBackgroundColor->setEnabled( false );
   }
 
-  enableDetachButtons();
-
   mp_actGroupWizard->setEnabled( c.isGroup() && !UserManager::instance().hasGroupName( c.name() ) );
   bool chat_has_history = ChatManager::instance().chatHasSavedText( c.name() );
   bool chat_is_empty = c.isEmpty() && !chat_has_history;
@@ -915,11 +894,6 @@ void GuiChat::showGroupWizard()
 {
   mp_actGroupWizard->setEnabled( false );
   emit createGroupFromChatRequest( m_chatId );
-}
-
-void GuiChat::detachThisChat()
-{
-  emit detachChatRequest( m_chatId );
 }
 
 void GuiChat::editChatMembers()

@@ -129,7 +129,6 @@ Settings::Settings()
   m_lastSave = QDateTime::currentDateTime();
 
   m_preventMultipleConnectionsFromSingleHostAddress = false;
-  m_alwaysOpenNewFloatingChat = false;
   m_acceptConnectionsOnlyFromWorkgroups = false;
   m_maxUserStatusDescriptionInList = 10;
 
@@ -151,7 +150,6 @@ Settings::Settings()
   m_previewFileDialogGeometry = "";
   m_previewFileDialogImageSize = 200;
   m_maxUsersToConnectInATick = 25;
-  m_showHomeAsDefaultPage = true;
   m_showTextInModeRTL = false;
 }
 
@@ -223,8 +221,7 @@ void Settings::createSessionId()
 {
   QString session_parameters = QString( "%1%2%3%4" ).arg( m_localUser.accountName() ).arg( m_localUser.path() )
           .arg( version( true, true ) ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
-  QByteArray id_generated = QCryptographicHash::hash( session_parameters.toUtf8(), QCryptographicHash::Sha1 );
-  QString session_id = QString::fromUtf8( id_generated.toHex() );
+  QString session_id = simpleHash( session_parameters );
   qDebug() << "Session ID created:" << session_id;
   m_localUser.setSessionId( session_id );
 }
@@ -609,7 +606,11 @@ QByteArray Settings::hash( const QString& string_to_hash ) const
 
 QString Settings::simpleHash( const QString& string_to_hash ) const
 {
+#if QT_VERSION >= 0x050000
+  QByteArray hash_generated = QCryptographicHash::hash( string_to_hash.toUtf8(), QCryptographicHash::Sha512 );
+#else
   QByteArray hash_generated = QCryptographicHash::hash( string_to_hash.toUtf8(), QCryptographicHash::Sha1 );
+#endif
   return QString::fromLatin1( hash_generated.toHex() );
 }
 
@@ -885,7 +886,6 @@ void Settings::load()
   {
     m_guiGeometry = "";
     m_guiState = "";
-    m_chatSplitterState = "";
     m_floatingChatGeometry = "";
     m_floatingChatState = "";
     m_floatingChatSplitterState = "";
@@ -897,7 +897,6 @@ void Settings::load()
   {
     m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
     m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
-    m_chatSplitterState = sets->value( "ChatSplitterState", "" ).toByteArray();
     m_floatingChatGeometry = sets->value( "FloatingChatGeometry", "" ).toByteArray();
     m_floatingChatState = sets->value( "FloatingChatState", "" ).toByteArray();
     m_floatingChatSplitterState = sets->value( "FloatingChatSplitterState", "" ).toByteArray();
@@ -942,7 +941,6 @@ void Settings::load()
     m_showChatToolbar = false;
   else
     m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
-  m_showHomeAsDefaultPage = sets->value( "ShowHomeAsDefaultPage", m_showHomeAsDefaultPage ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
   m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
@@ -959,7 +957,6 @@ void Settings::load()
   m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", m_startMinimized ).toBool();
   m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
-  m_alwaysOpenNewFloatingChat = sets->value( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat ).toBool();
   m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
@@ -1189,7 +1186,6 @@ void Settings::save()
   sets->beginGroup( "Gui" );
   sets->setValue( "MainWindowGeometry", m_guiGeometry );
   sets->setValue( "MainWindowState", m_guiState );
-  sets->setValue( "ChatSplitterState", m_chatSplitterState );
   sets->setValue( "FloatingChatGeometry", m_floatingChatGeometry );
   sets->setValue( "FloatingChatState", m_floatingChatState );
   sets->setValue( "FloatingChatSplitterState", m_floatingChatSplitterState );
@@ -1219,7 +1215,6 @@ void Settings::save()
     sets->remove( "ShowChatToolbar" );
   else
     sets->setValue( "ShowChatToolbar", m_showChatToolbar );
-  sets->setValue( "ShowHomeAsDefaultPage", m_showHomeAsDefaultPage );
   sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserNameColor", m_showUserColor );
@@ -1237,7 +1232,6 @@ void Settings::save()
   sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
   sets->setValue( "FacebookPageLinkClicked", m_isFacebookPageLinkClicked );
-  sets->setValue( "AlwaysOpenNewFloatingChat", m_alwaysOpenNewFloatingChat );
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
   sets->setValue( "Shortcuts", m_shortcuts );
   sets->setValue( "UseShortcuts", m_useShortcuts );

@@ -76,10 +76,9 @@ GuiMain::GuiMain( QWidget *parent )
  : QMainWindow( parent ), m_floatingChats()
 {
   setObjectName( "GuiMainWindow" );
-
+  setWindowIcon( QIcon( ":/images/beebeep.png" ) );
   mp_core = new Core( this );
 
-  updateMainIcon();
   // Create a status bar before the actions and the menu
   (void) statusBar();
 
@@ -140,10 +139,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_fileTransfer, SIGNAL( fileTransferCompleted( VNumber, VNumber, const QString& ) ), mp_shareNetwork, SLOT( setFileTransferCompleted( VNumber, VNumber, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
-  setupChatConnections( mp_chat );
-  connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
-  connect( mp_chat, SIGNAL( toggleVisibilityPresetMessagesPanelRequest() ), this, SLOT( toggleVisibilityPresetMessagesPanel() ) );
-
   connect( mp_savedChat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
@@ -192,17 +187,13 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_home, SIGNAL( openDefaultChatRequest() ), this, SLOT( showDefaultChat() ) );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
-  mp_chat->setChatId( ID_DEFAULT_CHAT, false );
   mp_home->loadDefaultChat();
 
   initShortcuts();
   initGuiItems();
   updateShortcuts();
 
-  connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
-
   statusBar()->showMessage( tr( "Ready" ) );
-
 }
 
 void GuiMain::initShortcuts()
@@ -234,24 +225,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
   connect( gui_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
   connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
-  connect( gui_chat, SIGNAL( detachChatRequest( VNumber ) ), this, SLOT( detachChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( sendBuzzToUserRequest( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
-}
-
-void GuiMain::toggleVisibilityEmoticonPanel()
-{
-  if( mp_dockEmoticons->isVisible() )
-    mp_dockEmoticons->hide();
-  else
-    mp_dockEmoticons->show();
-}
-
-void GuiMain::toggleVisibilityPresetMessagesPanel()
-{
-  if( mp_dockPresetMessageList->isVisible() )
-    mp_dockPresetMessageList->hide();
-  else
-    mp_dockPresetMessageList->show();
 }
 
 void GuiMain::applyFlagStaysOnTop()
@@ -269,7 +243,8 @@ void GuiMain::applyFlagStaysOnTop()
     w_flags &= ~Qt::WindowStaysOnTopHint;
   setWindowFlags( w_flags );
 #endif
-  show();
+  if( !isVisible() )
+    show();
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -282,26 +257,6 @@ void GuiMain::checkWindowFlagsAndShow()
 
   if( Settings::instance().showMinimizedAtStartup() )
     QTimer::singleShot( 100, this, SLOT( showMinimized() ) );
-
-  QSplitter* chat_splitter = mp_chat->chatSplitter();
-  if( Settings::instance().chatSplitterState().isEmpty() )
-  {
-    int central_widget_height = centralWidget()->size().height();
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Central widget height is" << central_widget_height << "then chat view height will be" << (int)(central_widget_height-80);
-#endif
-    QList<int> splitter_size_list;
-    splitter_size_list.append( central_widget_height - 80);
-    splitter_size_list.append( 80 );
-    chat_splitter->setSizes( splitter_size_list );
-  }
-  else
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Restoring chat splitter state";
-#endif
-    chat_splitter->restoreState( Settings::instance().chatSplitterState() );
-  }
 
   mp_actViewInCompactMode->setChecked( Settings::instance().viewInCompactMode() );
   if( Settings::instance().viewInCompactMode() )
@@ -425,10 +380,6 @@ void GuiMain::closeEvent( QCloseEvent* e )
     mp_dockChatList->hide();
   if( mp_dockFileTransfers->isFloating() && mp_dockFileTransfers->isVisible() )
     mp_dockFileTransfers->hide();
-  if( mp_dockEmoticons->isFloating() && mp_dockEmoticons->isVisible() )
-    mp_dockEmoticons->hide();
-  if( mp_dockPresetMessageList->isFloating() && mp_dockPresetMessageList->isVisible() )
-    mp_dockPresetMessageList->hide();
 
   // maybe timer is active
   mp_logView->stopCheckingLog();
@@ -525,8 +476,7 @@ void GuiMain::initGuiItems()
 {
   bool enable = mp_core->isConnected();
 
-  if( Settings::instance().showHomeAsDefaultPage() && !mp_barMain->isHidden() )
-    raiseHomeView();
+  raiseHomeView();
 
   if( enable )
   {
@@ -549,9 +499,6 @@ void GuiMain::initGuiItems()
   checkViewActions();
 
   refreshTitle( Settings::instance().localUser() );
-
-  if( enable && mp_stackedWidget->currentWidget() == mp_chat && isActiveWindow() )
-    mp_chat->ensureFocusInChat();
 }
 
 void GuiMain::checkViewActions()
@@ -560,7 +507,6 @@ void GuiMain::checkViewActions()
   int connected_users = mp_core->connectedUsers();
 
   mp_actViewHome->setEnabled( mp_stackedWidget->currentWidget() != mp_home );
-  mp_actViewDefaultChat->setEnabled( mp_stackedWidget->currentWidget() != mp_chat );
   mp_actViewShareLocal->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
@@ -568,20 +514,6 @@ void GuiMain::checkViewActions()
   mp_actViewShareBox->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareBox );
   mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().toList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
-
-  if( mp_stackedWidget->currentWidget() == mp_chat )
-  {
-    mp_chat->updateActions( is_connected, connected_users );
-    checkChatToolbar();
-    mp_dockEmoticons->setVisible( Settings::instance().showEmoticonMenu() );
-    mp_dockPresetMessageList->setVisible( Settings::instance().showPresetMessages() );
-  }
-  else
-  {
-    mp_barChat->hide();
-    mp_dockEmoticons->hide();
-    mp_dockPresetMessageList->hide();
-  }
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork )
     mp_barShareNetwork->show();
@@ -608,8 +540,6 @@ void GuiMain::checkViewActions()
     mp_barScreenShot->show();
   else
     mp_barScreenShot->hide();
-
-  mp_dockEmoticons->toggleViewAction()->setVisible( !Settings::instance().useOnlyTextEmoticons() );
 
   showDefaultServerPortInMenu();
 
@@ -846,12 +776,6 @@ void GuiMain::createMenus()
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
 
-  act = mp_menuSettings->addAction( tr( "Show activities home page at startup" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled the activities home page instead of chat page will be showed at startup" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showHomeAsDefaultPage() );
-  act->setData( 34 );
-
   act = mp_menuSettings->addAction( tr( "Show minimized at startup" ), this, SLOT( settingsChanged() ) );
   act->setStatusTip( tr( "If enabled %1 is showed minimized at startup" ).arg( Settings::instance().programName() ) );
   act->setCheckable( true );
@@ -923,12 +847,6 @@ void GuiMain::createMenus()
   act->setData( 20 );
 
   mp_menuSettings->addSeparator();
-
-  act = mp_menuSettings->addAction( tr( "Always open a new floating chat window" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "If enabled when you always open chat in a new floating window" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().alwaysOpenNewFloatingChat() );
-  act->setData( 37 );
 
   QMenu* beep_file_menu = mp_menuSettings->addMenu( tr( "Enable BEEP alert on new message" ) + QString( "..." ) );
   beep_file_menu->setStatusTip( tr( "If enabled when a new message is arrived a sound is emitted" ) );
@@ -1095,14 +1013,11 @@ void GuiMain::createMenus()
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewUsers );
   mp_menuView->addAction( mp_actViewGroups );
-  mp_menuView->addAction( mp_actViewChats );
   mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
   mp_actViewHome = mp_menuView->addAction( QIcon( ":/images/home.png" ), tr( "Show %1 home" ).arg( Settings::instance().programName() ), this, SLOT( raiseHomeView() ) );
   mp_actViewHome->setStatusTip( tr( "Show the homepage with %1 activity" ).arg( Settings::instance().programName() ) );
-  mp_actViewDefaultChat = mp_menuView->addAction( QIcon( ":/images/chat-view.png" ), tr( "Show the chat" ), this, SLOT( showCurrentChat() ) );
-  mp_actViewDefaultChat->setStatusTip( tr( "Show the chat view" ) );
   mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
@@ -1243,14 +1158,14 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
   mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actViewInCompactMode );
   mp_barMain->addAction( mp_actViewUsers );
-  mp_barMain->addAction( mp_actViewGroups );
   mp_barMain->addAction( mp_actViewChats );
+  mp_barMain->addAction( mp_actViewGroups );
   mp_barMain->addAction( mp_actViewSavedChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewHome );
-  mp_barMain->addAction( mp_actViewDefaultChat );
   mp_barMain->addAction( mp_actViewShareLocal );
   mp_barMain->addAction( mp_actViewShareNetwork );
   mp_barMain->addAction( mp_actViewShareBox );
@@ -1320,47 +1235,11 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
 
-  mp_barChat->insertSeparator( mp_barChat->actions().first() );
-  mp_dockPresetMessageList = new QDockWidget( tr( "Preset messages" ), this );
-  mp_dockPresetMessageList->setObjectName( "GuiDockPresetMessageList" );
-  mp_presetMessageListWidget = new GuiPresetMessageList( this );
-  mp_presetMessageListWidget->loadFromSettings();
-  connect( mp_presetMessageListWidget, SIGNAL( presetMessageSelected( const QString& ) ), mp_chat, SLOT( addText( const QString& ) ) );
-  mp_dockPresetMessageList->setWidget( mp_presetMessageListWidget );
-  mp_dockPresetMessageList->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::LeftDockWidgetArea, mp_dockPresetMessageList );
-  QAction* actViewPresetMessageList = mp_dockPresetMessageList->toggleViewAction();
-  actViewPresetMessageList->setIcon( QIcon( ":/images/preset-message.png" ) );
-  actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
-  actViewPresetMessageList->setData( 54 );
-  connect( mp_dockPresetMessageList, SIGNAL( visibilityChanged( bool ) ), this, SLOT( presetMessageListMenuVisibilityChanged( bool ) ) );
-  connect( actViewPresetMessageList, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
-  mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
-
-  mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
-  mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
-  mp_emoticonsWidget = new GuiEmoticons( this );
-  updateEmoticons();
-  connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
-  mp_dockEmoticons->setWidget( mp_emoticonsWidget );
-  mp_dockEmoticons->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::LeftDockWidgetArea, mp_dockEmoticons );
-  QAction* actViewEmoticons = mp_dockEmoticons->toggleViewAction();
-  actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
-  actViewEmoticons->setToolTip( tr( "Show the emoticon panel" ) );
-  actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
-  actViewEmoticons->setData( 28 );
-  connect( mp_dockEmoticons, SIGNAL( visibilityChanged( bool ) ), this, SLOT( emoticonMenuVisibilityChanged( bool ) ) );
-  connect( actViewEmoticons, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
-  mp_barChat->insertAction( mp_barChat->actions().first(), actViewEmoticons );
-
   if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() || Settings::instance().hideOtherPanels() )
   {
     mp_dockGroupList->hide();
     mp_dockSavedChatList->hide();
     mp_dockFileTransfers->hide();
-    mp_dockEmoticons->hide();
-    mp_dockPresetMessageList->hide();
     if( Settings::instance().hideOtherPanels() )
       mp_dockChatList->hide();
   }
@@ -1368,39 +1247,9 @@ void GuiMain::createDockWindows()
   mp_dockUserList->setVisible( !Settings::instance().hideUsersPanel() );
 }
 
-void GuiMain::emoticonMenuVisibilityChanged( bool is_visible )
-{
-  if( mp_stackedWidget->currentWidget() == mp_chat )
-  {
-    if( !is_visible )
-      Settings::instance().setShowEmoticonMenu( false );
-  }
-}
-
-void GuiMain::presetMessageListMenuVisibilityChanged( bool is_visible )
-{
-  if( mp_stackedWidget->currentWidget() == mp_chat )
-  {
-    if( !is_visible )
-      Settings::instance().setShowPresetMessages( false );
-  }
-}
-
 void GuiMain::createStackedWidgets()
 {
-  mp_chat = new GuiChat( this );
-  mp_stackedWidget->addWidget( mp_chat );
-  mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
-  addToolBar( Qt::BottomToolBarArea, mp_barChat );
-  mp_barChat->setObjectName( "GuiChatToolBar" );
-  mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_barChat->setAllowedAreas( Qt::AllToolBarAreas );
-  mp_chat->setupToolBar( mp_barChat );
-  QAction* act = mp_barChat->toggleViewAction();
-  act->setData( 23 );
-  mp_chat->setChatId( ID_DEFAULT_CHAT, false );
-  connect( act, SIGNAL( triggered() ), this, SLOT( settingsChanged() ) );
-
+  QAction* act;
   mp_shareLocal = new GuiShareLocal( this );
   mp_stackedWidget->addWidget( mp_shareLocal );
   mp_barShareLocal= new QToolBar( tr( "Show the bar of local file sharing" ), this );
@@ -1454,9 +1303,7 @@ void GuiMain::createStackedWidgets()
   mp_shareBox = new GuiShareBox( this );
   mp_stackedWidget->addWidget( mp_shareBox );
 
-  mp_barChat->setVisible( Settings::instance().showChatToolbar() );
-
-  mp_stackedWidget->setCurrentWidget( mp_chat );
+  mp_stackedWidget->setCurrentWidget( mp_home );
 }
 
 QMenu* GuiMain::gameMenu( GameInterface* gi )
@@ -1531,7 +1378,6 @@ void GuiMain::updateUser( const User& u )
 
   mp_userList->setUser( u, true );
   mp_groupList->updateUser( u );
-  mp_chat->updateUser( u );
   mp_shareBox->updateUser( u );
   mp_shareNetwork->updateUser( u );
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
@@ -1670,8 +1516,7 @@ void GuiMain::settingsChanged()
     refresh_users = true;
     break;
   case 23:
-    Settings::instance().setShowChatToolbar( act->isChecked() );
-    checkChatToolbar();
+    // Empty
     break;
   case 24:
     Settings::instance().setLoadOnTrayAtStartup( act->isChecked() );
@@ -1724,7 +1569,7 @@ void GuiMain::settingsChanged()
     Settings::instance().setShowImagePreview( act->isChecked() );
     break;
   case 34:
-    Settings::instance().setShowHomeAsDefaultPage( act->isChecked() );
+    // Empty
     break;
   case 35:
     Settings::instance().setShowMinimizedAtStartup( act->isChecked() );
@@ -1733,7 +1578,7 @@ void GuiMain::settingsChanged()
     Settings::instance().setPromptOnCloseEvent( act->isChecked() );
     break;
   case 37:
-    Settings::instance().setAlwaysOpenNewFloatingChat( act->isChecked() );
+    // Empty
     break;
   case 38:
     Settings::instance().setShowUserStatusBackgroundColor( act->isChecked() );
@@ -1814,7 +1659,6 @@ void GuiMain::settingsChanged()
   {
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
-    mp_chat->reloadChat();
     foreach( GuiFloatingChat* fl_chat, m_floatingChats )
       fl_chat->guiChat()->reloadChat();
     QApplication::restoreOverrideCursor();
@@ -1858,11 +1702,10 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
 
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
 
-  if( !fl_chat && Settings::instance().alwaysOpenNewFloatingChat() && Settings::instance().raiseOnNewMessageArrived() )
+  if( !fl_chat && Settings::instance().raiseOnNewMessageArrived() )
   {
     *chat_window_is_created = true;
-    detachChat( chat_id );
-    fl_chat = floatingChat( chat_id );
+    fl_chat = createFloatingChat( chat_id );
   }
 
   if( fl_chat )
@@ -1873,23 +1716,12 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
       show_message_in_tray = false;
     }
     else
-    {
       fl_chat->setMainIcon( true );
-      QApplication::alert( fl_chat );
-    }
+
+    QApplication::alert( fl_chat );
   }
   else
-  {
-    if( Settings::instance().raiseOnNewMessageArrived() )
-    {
-      *chat_window_is_created = mp_chat->chatId() != chat_id;
-      showChat( chat_id );
-      raiseOnTop();
-      show_message_in_tray = false;
-    }
-    else
-      QApplication::alert( this );
-  }
+    QApplication::alert( this );
 
   if( show_message_in_tray )
   {
@@ -1935,8 +1767,6 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
   }
   else
     mp_trayIcon->setUnreadMessages( chat_id, 0 );
-
-  updateMainIcon();
 }
 
 bool GuiMain::chatIsVisible( VNumber chat_id )
@@ -1944,17 +1774,8 @@ bool GuiMain::chatIsVisible( VNumber chat_id )
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
     return fl_chat->chatIsVisible();
-
-  if( !isVisible() )
+  else
     return false;
-
-  if( isMinimized() )
-    return false;
-
-  if( !isActiveWindow() )
-    return false;
-
-  return mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id;
 }
 
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
@@ -2034,28 +1855,9 @@ void GuiMain::searchUsers()
 void GuiMain::showWritingUser( const User& u, VNumber chat_id )
 {
   QString msg = tr( "%1 is writing..." ).arg( u.name() );
-
-  if( chat_id == ID_INVALID )
-  {
-    if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->hasUser( u.id() ) )
-      showMessage( msg, Settings::instance().writingTimeout() );
-
-    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-      fl_chat->showUserWriting( u.id(), msg );
-  }
-  else
-  {
-    if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->hasUser( u.id() ) && mp_chat->chatId() == chat_id )
-    {
-      showMessage( msg, Settings::instance().writingTimeout() );
-    }
-    else
-    {
-      GuiFloatingChat* fl_chat = floatingChat( chat_id );
-      if( fl_chat )
-        fl_chat->showUserWriting( u.id(), msg );
-    }
-  }
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    fl_chat->showUserWriting( u.id(), msg );
 }
 
 void GuiMain::setUserStatusSelected( int user_status )
@@ -2253,8 +2055,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
       {
         if( Settings::instance().raiseOnNewMessageArrived() )
           raiseOnTop();
-        else
-          QApplication::alert( this );
+        QApplication::alert( this );
         raiseHomeView();
       }
       QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
@@ -2462,14 +2263,6 @@ void GuiMain::showFactOfTheDay()
   mp_core->showFactOfTheDay();
 }
 
-void GuiMain::showCurrentChat()
-{
-  if( mp_chat->chatId() != ID_INVALID )
-    showChat( mp_chat->chatId() );
-  else
-    showChat( ID_DEFAULT_CHAT );
-}
-
 void GuiMain::showDefaultChat()
 {
   showChat( ID_DEFAULT_CHAT );
@@ -2485,53 +2278,26 @@ void GuiMain::showChat( VNumber chat_id )
     return;
   }
 
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-  {
-    if( !fl_chat->isVisible() )
-      fl_chat->checkWindowFlagsAndShow();
-    else
-      fl_chat->raiseOnTop();
+  GuiFloatingChat* fl_chat = createFloatingChat( chat_id );
 
-    readAllMessagesInChat( chat_id );
-    fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
-    fl_chat->guiChat()->reloadChatUsers();
-    fl_chat->guiChat()->ensureFocusInChat();
-    return;
-  }
-
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
+  if( !fl_chat )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Chat" << chat_id << "is already shown... skip";
+    qWarning() << "Unable to create floating window for chat" << chat_id;
 #endif
-    mp_chat->reloadChatUsers();
-    readAllMessagesInChat( chat_id );
-    mp_chat->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
-    if( !isActiveWindow() )
-      raiseOnTop();
-    mp_chat->ensureFocusInChat();
     return;
   }
 
-  if( chat_id != ID_DEFAULT_CHAT && Settings::instance().alwaysOpenNewFloatingChat() )
-  {
-    qApp->setActiveWindow( this ); // to get focus back on floating chat
-    detachChat( chat_id );
-    return;
-  }
-
-  if( mp_chat->setChatId( chat_id, false ) )
-  {
-    raiseChatView();
-    mp_userList->setChatOpened( chat_id );
-    readAllMessagesInChat( chat_id );
-  }
+  if( !fl_chat->isVisible() )
+    fl_chat->checkWindowFlagsAndShow();
   else
-    raiseHomeView();
+    fl_chat->raiseOnTop();
 
-  if( !isActiveWindow() )
-    raiseOnTop();
+  readAllMessagesInChat( chat_id );
+  fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
+  fl_chat->guiChat()->reloadChatUsers();
+
+  fl_chat->setFocusInChat();
 }
 
 void GuiMain::changeVCard()
@@ -2685,7 +2451,7 @@ void GuiMain::hideToTrayIcon()
   if( c.isValid() )
     mp_trayIcon->setUnreadMessages( c.id(), c.unreadMessages() );
   else
-    mp_trayIcon->setUnreadMessages( mp_chat->chatId(), 0 );
+    mp_trayIcon->setUnreadMessages( ID_INVALID, 0 );
   hide();
 }
 
@@ -2747,24 +2513,11 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 
 void GuiMain::trayMessageClicked()
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "TrayIcon message clicked";
-#endif
   GuiFloatingChat* fl_chat = floatingChat( mp_trayIcon->chatId() );
   if( fl_chat )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Found a floating chat and show it";
-#endif
     QTimer::singleShot( 0, fl_chat, SLOT( showUp() ) );
-  }
   else
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Creating chat and show it";
-#endif
-    showChat( mp_trayIcon->chatId() );
-  }
+    QTimer::singleShot( 0, this, SLOT( showUp() ) );
 }
 
 void GuiMain::addToShare( const QString& share_path )
@@ -2792,14 +2545,6 @@ void GuiMain::raiseView( QWidget* w, VNumber chat_id, const QString& chat_name )
 void GuiMain::raiseHomeView()
 {
   raiseView( mp_home, ID_INVALID, "" );
-}
-
-void GuiMain::raiseChatView()
-{
-  raiseView( mp_chat, mp_chat->chatId(), mp_chat->chatName() );
-  mp_chat->updateActionsOnFocusChanged();
-  mp_chat->ensureLastMessageVisible();
-  mp_chat->ensureFocusInChat();
 }
 
 void GuiMain::raiseLocalShareView()
@@ -3040,24 +2785,19 @@ void GuiMain::editGroupFromChat( VNumber chat_id )
 
 void GuiMain::raiseOnTop()
 {
-  if( isMinimized() || !isVisible() )
+  if( isMinimized() )
     showNormal();
-  else
+
+  if( !isVisible() )
     show();
 
 #ifdef Q_OS_WIN
   SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
   SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
   applyFlagStaysOnTop();
-  SetActiveWindow( (HWND)winId() );
-  SetFocus( (HWND)winId() );
 #else
   raise();
-  qApp->setActiveWindow( this );
 #endif
-
-  if( mp_stackedWidget->currentWidget() == mp_chat )
-    mp_chat->ensureFocusInChat();
 }
 
 void GuiMain::checkAutoStartOnBoot( bool add_service )
@@ -3116,10 +2856,11 @@ void GuiMain::removeSavedChat( const QString& chat_name )
   ChatManager::instance().removeSavedTextFromChat( chat_name );
   mp_savedChatList->updateSavedChats();
 
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatName() == chat_name )
-    mp_chat->reloadChat();
-  else if( mp_stackedWidget->currentWidget() == mp_savedChat )
-    raiseHomeView();
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  {
+    if( fl_chat->guiChat()->chatName() == chat_name )
+      fl_chat->guiChat()->reloadChat();
+  }
 }
 
 void GuiMain::linkSavedChat( const QString& chat_name )
@@ -3156,10 +2897,11 @@ void GuiMain::linkSavedChat( const QString& chat_name )
   ChatManager::instance().updateChatSavedText( chat_name, chat_name_selected, add_to_existing_saved_text );
   mp_savedChatList->updateSavedChats();
 
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatName() == chat_name )
-    mp_chat->reloadChat();
-  else if( mp_stackedWidget->currentWidget() == mp_savedChat )
-    mp_savedChat->showSavedChat( chat_name_selected );
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  {
+    if( fl_chat->guiChat()->chatName() == chat_name_selected || fl_chat->guiChat()->chatName() == chat_name )
+      fl_chat->guiChat()->reloadChat();
+  }
 }
 
 bool GuiMain::openWebUrl( const QString& web_url )
@@ -3259,8 +3001,7 @@ void GuiMain::changeUserColor( VNumber user_id )
   {
     u.setColor( c.name() );
     UserManager::instance().setUser( u );
-    mp_chat->reloadChat();
-    mp_userList->setUser( u, false );
+    updateUser( u );
   }
 }
 
@@ -3276,16 +3017,7 @@ void GuiMain::checkChat( VNumber chat_id )
 {
   mp_chatList->updateChat( chat_id );
   mp_savedChatList->updateSavedChats();
-
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-  {
-    mp_chat->reloadChat();
-    return;
-  }
-
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    fl_chat->guiChat()->reloadChat();
+  reloadChat( chat_id );
 }
 
 bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
@@ -3321,9 +3053,7 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
 
     if( mp_core->removeGroup( g.id() ) )
     {
-      closeFloatingChat( chat_id );
       raiseHomeView();
-      mp_chat->setChatId( ID_DEFAULT_CHAT, false );
       mp_groupList->loadGroups();
       mp_chatList->reloadChatList();
       mp_savedChatList->updateSavedChats();
@@ -3362,9 +3092,12 @@ void GuiMain::removeGroup( VNumber group_id )
       if( mp_core->removeGroup( group_id ) )
       {
         if( c.isValid() )
-          closeFloatingChat( c.id() );
+        {
+          GuiFloatingChat* fl_chat = floatingChat( c.id() );
+          if( fl_chat )
+            fl_chat->close();
+        }
         raiseHomeView();
-        mp_chat->setChatId( ID_DEFAULT_CHAT, false );
         mp_groupList->loadGroups();
         mp_chatList->reloadChatList();
         mp_savedChatList->updateSavedChats();
@@ -3408,21 +3141,15 @@ void GuiMain::clearChat( VNumber chat_id )
   mp_chatList->reloadChatList();
   mp_savedChatList->updateSavedChats();
   reloadChat( chat_id );
-  GuiChat* gui_chat = guiChat( chat_id );
-  if( gui_chat )
-    gui_chat->ensureFocusInChat();
 }
 
 bool GuiMain::reloadChat( VNumber chat_id )
 {
-  if( mp_stackedWidget->currentWidget() == mp_chat && mp_chat->chatId() == chat_id )
-    return mp_chat->reloadChat();
-
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
     return fl_chat->guiChat()->reloadChat();
-
-  return false;
+  else
+    return false;
 }
 
 void GuiMain::removeChat( VNumber chat_id )
@@ -3441,19 +3168,9 @@ void GuiMain::removeChat( VNumber chat_id )
   if( mp_core->removeChat( chat_id ) )
   {
     mp_chatList->reloadChatList();
-    if( mp_chat->chatId() == chat_id )
-    {
-      if( mp_stackedWidget->currentWidget() == mp_chat )
-        showDefaultChat();
-      else
-        mp_chat->setChatId( ID_DEFAULT_CHAT, false );
-    }
-    else
-    {
-      GuiFloatingChat* fl_chat = floatingChat( chat_id );
-      if( fl_chat )
-        fl_chat->close();
-    }
+    GuiFloatingChat* fl_chat = floatingChat( chat_id );
+    if( fl_chat )
+      fl_chat->close();
   }
   else
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to delete this chat." ) );
@@ -3516,19 +3233,6 @@ void GuiMain::selectLanguage()
 void GuiMain::showUp()
 {
   raiseOnTop();
-}
-
-void GuiMain::checkChatToolbar()
-{
-  if( mp_stackedWidget->currentWidget() != mp_chat )
-  {
-    if( mp_barChat->isVisible() )
-      mp_barChat->hide();
-  }
-  else
-  {
-    mp_barChat->setVisible( Settings::instance().showChatToolbar() );
-  }
 }
 
 void GuiMain::showAddUser()
@@ -3701,16 +3405,7 @@ void GuiMain::removeUserFromList( VNumber user_id )
   {
     Chat c = ChatManager::instance().privateChatForUser( user_id );
     if( c.isValid() )
-    {
       closeFloatingChat( c.id() );
-      if( mp_chat->chatId() == c.id() )
-      {
-        if( mp_stackedWidget->currentWidget() == mp_chat )
-          showDefaultChat();
-        else
-          mp_chat->setChatId( ID_DEFAULT_CHAT, false );
-      }
-    }
     refreshUserList();
     mp_chatList->reloadChatList();
   }
@@ -3738,69 +3433,55 @@ GuiFloatingChat* GuiMain::floatingChat( VNumber chat_id ) const
   return 0;
 }
 
-bool GuiMain::floatingChatExists( VNumber chat_id ) const
-{
-  return floatingChat( chat_id ) != 0;
-}
-
 void GuiMain::closeFloatingChat( VNumber chat_id )
-{
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    fl_chat->close();
-}
-
-void GuiMain::attachChat( VNumber chat_id )
 {
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( !fl_chat )
   {
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "Floating chat" << chat_id << "not found in GuiMain::attachChat";
+    qWarning() << "Unable to find floating chat" << chat_id << "in GuiMain::closeFloatingChat(...)";
 #endif
     return;
   }
+  else
+    fl_chat->close();
+}
+
+void GuiMain::removeFloatingChatFromList( VNumber chat_id )
+{
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( !fl_chat )
+    return;
 
   m_floatingChats.removeOne( fl_chat );
   fl_chat->deleteLater();
-
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Floating chat" << chat_id << "closed and deleted";
 #endif
 }
 
-void GuiMain::detachChat( VNumber chat_id )
+GuiFloatingChat* GuiMain::createFloatingChat( VNumber chat_id )
 {
-  if( floatingChatExists( chat_id ) )
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Floating chat" << chat_id << "already exists";
 #endif
-    return;
+    return fl_chat;
   }
+  else
+    fl_chat = new GuiFloatingChat;
 
-  if( chat_id == ID_DEFAULT_CHAT )
-  {
-    showDefaultChat();
-    return;
-  }
-
-  GuiFloatingChat* fl_chat = new GuiFloatingChat;
   if( !fl_chat->setChatId( chat_id ) )
   {
     qWarning() << "Unable to create floating chat" << chat_id;
     fl_chat->deleteLater();
-    return;
-  }
-
-  if( mp_chat->chatId() == chat_id )
-  {
-    showDefaultChat();
-    raiseHomeView();
+    return 0;
   }
 
   setupChatConnections( fl_chat->guiChat() );
-  connect( fl_chat, SIGNAL( attachChatRequest( VNumber ) ),this, SLOT( attachChat( VNumber ) ) );
+  connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
   connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
   m_floatingChats.append( fl_chat );
 
@@ -3808,9 +3489,7 @@ void GuiMain::detachChat( VNumber chat_id )
   fl_chat->guiChat()->updateShortcuts();
   fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
   fl_chat->guiChat()->ensureLastMessageVisible();
-  fl_chat->raiseOnTop();
-  fl_chat->guiChat()->ensureFocusInChat();
-
+  return fl_chat;
 }
 
 QWidget* GuiMain::activeChatWindow()
@@ -3825,9 +3504,6 @@ QWidget* GuiMain::activeChatWindow()
 
 GuiChat* GuiMain::guiChat( VNumber chat_id )
 {
-  if( mp_chat->chatId() == chat_id )
-    return mp_chat;
-
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
     return fl_chat->guiChat();
@@ -3914,7 +3590,8 @@ void GuiMain::loadSavedChatsCompleted()
   qDebug() << "Loading saved chats completed";
 #endif
   mp_savedChatList->updateSavedChats();
-  mp_chat->reloadChat();
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->guiChat()->reloadChat();
 }
 
 void GuiMain::editShortcuts()
@@ -3935,7 +3612,6 @@ void GuiMain::editShortcuts()
 
 void GuiMain::updateShortcuts()
 {
-  mp_chat->updateShortcuts();
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
      fl_chat->guiChat()->updateShortcuts();
 
@@ -3981,38 +3657,6 @@ void GuiMain::updateShortcuts()
   else
     mp_actBroadcast->setShortcut( QKeySequence() );
 
-}
-
-void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
-{
-  if( old == 0 && isAncestorOf( now )  )
-  {
-    if( mp_stackedWidget->currentWidget() == mp_chat )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Chat in the main window has grab the focus. All messages can be set to read";
-#endif
-      readAllMessagesInChat( mp_chat->chatId() );
-      mp_chat->updateActionsOnFocusChanged();
-      return;
-    }
-  }
-  else
-  {
-    bool current_state = isActiveWindow();
-    if( current_state != m_prevActivatedState )
-    {
-      m_prevActivatedState = current_state;
-      if( current_state && mp_stackedWidget->currentWidget() == mp_chat )
-      {
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Chat in the main window has grab focus (active)";
-#endif
-        readAllMessagesInChat( mp_chat->chatId() );
-        mp_chat->updateActionsOnFocusChanged();
-      }
-    }
-  }
 }
 
 void GuiMain::minimizeAllChats()
@@ -4088,10 +3732,8 @@ void GuiMain::selectDictionatyPath()
 #endif
 
   // update spellchecker and wordcompleter actions
-  QList<GuiChat*> gui_chat_list = guiChatList();
-  foreach( GuiChat* gc, gui_chat_list )
-    gc->updateActionsOnFocusChanged();
-
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->guiChat()->updateActionsOnFocusChanged();
 }
 
 void GuiMain::onNetworkInterfaceDown()
@@ -4125,9 +3767,6 @@ void GuiMain::onTickEvent( int ticks )
   }
 
   mp_trayIcon->onTickEvent( ticks );
-  if( mp_trayIcon->iconStatusIsMessage() )
-    setWindowIcon( mp_trayIcon->icon() );
-
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
   mp_core->onTickEvent( ticks );
@@ -4168,16 +3807,7 @@ void GuiMain::readAllMessagesInChat( VNumber chat_id )
     mp_trayIcon->setDefaultIcon();
   }
 
-  updateMainIcon();
   updateNewMessageAction();
-}
-
-void GuiMain::updateMainIcon()
-{
-  if( ChatManager::instance().hasUnreadMessages() )
-    setWindowIcon( QIcon( ":/images/beebeep-message.png" ) );
-  else
-    setWindowIcon( QIcon( ":/images/beebeep.png" ) );
 }
 
 void GuiMain::saveSession( QSessionManager& )
@@ -4188,8 +3818,6 @@ void GuiMain::saveSession( QSessionManager& )
 
 void GuiMain::updateEmoticons()
 {
-  QTimer::singleShot( 0, mp_emoticonsWidget, SLOT( updateEmoticons() ) );
-
   if( m_floatingChats.isEmpty() )
     return;
 
@@ -4202,40 +3830,13 @@ void GuiMain::updateNewMessageAction()
   mp_actViewNewMessage->setEnabled( ChatManager::instance().hasUnreadMessages() );
 }
 
-QList<GuiChat*> GuiMain::guiChatList() const
-{
-  QList<GuiChat*> gui_chat_list;
-
-  gui_chat_list.append( mp_chat );
-  if( !m_floatingChats.isEmpty() )
-  {
-    foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-      gui_chat_list.append( fl_chat->guiChat() );
-  }
-
-  return gui_chat_list;
-}
-
 void GuiMain::saveGeometryAndState()
 {
-  bool save_settings = false;
   if( isVisible() )
   {
     qDebug() << "Main window geometry and state saved";
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
-    save_settings = true;
-  }
-
-  if( mp_chat->isVisible() )
-  {
-    qDebug() << "Main chat window splitter state saved";
-    Settings::instance().setChatSplitterState( mp_chat->chatSplitter()->saveState() );
-    save_settings = true;
-  }
-
-  if( save_settings )
-  {
     Settings::instance().save();
     showMessage( tr( "Window geometry and state saved" ), 3000 );
   }

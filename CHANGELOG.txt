@@ -5,6 +5,7 @@ BeeBEEP 3.2.0
 - Added a check and an alert on same nickname/account of the users
 - Added "DisablePrivateChats" option on beebeep.rc file
 - Added "View in compact mode" option on beebeep.rc and beebeep.ini files
+- Chats are now always opened in separate window 
 
 BeeBEEP 3.0.9
 - The emoticon icon is now showed in detached chat (bug fixed)
