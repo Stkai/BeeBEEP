@@ -178,19 +178,6 @@ bool ChatManager::userIsInGroupChat( VNumber user_id ) const
   return false;
 }
 
-QString ChatManager::findPrivateChatSavedTextWithSameNickname( const QString& chat_name ) const
-{
-  QString chat_user_nick = User::nameFromPath( chat_name );
-
-  foreach( QString key_name, m_history.keys() )
-  {
-    if( chat_user_nick == User::nameFromPath( key_name ) )
-      return key_name;
-  }
-
-  return QString();
-}
-
 void ChatManager::updateChatSavedText( const QString& old_chat_name, const QString& new_chat_name, bool add_to_new )
 {
 #ifdef BEEBEEP_DEBUG
@@ -206,14 +193,14 @@ void ChatManager::updateChatSavedText( const QString& old_chat_name, const QStri
   m_history.insert( new_chat_name, chat_text_old );
 }
 
-void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path )
+void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& new_chat_name )
 {
   Chat c = privateChatForUser( user_id );
   if( !c.isValid() )
     return;
 
   QString old_chat_name = c.name();
-  c.setName( user_new_path );
+  c.setName( new_chat_name );
   setChat( c );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "The chat with name" << old_chat_name << "is changed to" << c.name();
@@ -223,29 +210,10 @@ void ChatManager::changePrivateChatNameAfterUserNameChanged( VNumber user_id, co
     updateChatSavedText( old_chat_name, c.name(), false );
 }
 
-void ChatManager::autoLinkSavedChatByNickname( const Chat& c )
-{
-  if( !chatHasSavedText( c.name() ) )
-  {
-    QString chat_same_nickname = ChatManager::instance().findPrivateChatSavedTextWithSameNickname( c.name() );
-    if( chat_same_nickname.isEmpty() )
-      return;
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "The chat with name" << chat_same_nickname << "is auto link to" << c.name();
-#endif
-    updateChatSavedText( chat_same_nickname, c.name(), false );
-  }
-}
-
 void ChatManager::addSavedChats( const QMap<QString, QString>& saved_chats )
 {
   m_history = saved_chats;
   m_isLoadHistoryCompleted = true;
-  if( Settings::instance().autoLinkSavedChatByNickname() )
-  {
-    foreach( Chat c, m_chats )
-      autoLinkSavedChatByNickname( c );
-  }
 }
 
 QStringList ChatManager::chatNamesToStringList( bool add_default_chat ) const

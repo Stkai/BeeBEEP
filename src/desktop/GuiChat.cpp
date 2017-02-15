@@ -518,17 +518,24 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
   }
 
   mp_actGroupWizard->setEnabled( c.isGroup() && !UserManager::instance().hasGroupName( c.name() ) );
-  bool chat_has_history = ChatManager::instance().chatHasSavedText( c.name() );
-  bool chat_is_empty = c.isEmpty() && !chat_has_history;
+
   QString html_text = "";
 
-  if( ChatManager::instance().isLoadHistoryCompleted() && chat_has_history && historyCanBeShowed() )
+  if( ChatManager::instance().isLoadHistoryCompleted() && historyCanBeShowed() )
   {
-    html_text += ChatManager::instance().chatSavedText( c.name() );
+    if( !ChatManager::instance().chatHasSavedText( c.name() ) )
+    {
+      if( c.isPrivate() && c.name().contains( "@" ) && ChatManager::instance().chatHasSavedText( User::nameFromPath( c.name() ) ) )
+        html_text += ChatManager::instance().chatSavedText( User::nameFromPath( c.name() ) );
+    }
+    else
+      html_text += ChatManager::instance().chatSavedText( c.name() );
+
     if( !html_text.isEmpty() )
       html_text.append( "<br />" );
   }
 
+  bool chat_is_empty = c.isEmpty() && html_text.isEmpty();
   int num_lines = c.messages().size();
   bool max_lines_message_written = false;
   m_lastMessageUserId = 0;

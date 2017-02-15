@@ -279,7 +279,6 @@ void Core::loadUsersAndGroups()
   if( !Settings::instance().userList().isEmpty() )
   {
     qDebug() << "Loading" << Settings::instance().userList().size() << "saved users";
-
     User u;
     foreach( QString user_data, Settings::instance().userList() )
     {
@@ -287,8 +286,6 @@ void Core::loadUsersAndGroups()
       if( u.isValid() )
       {
         qDebug() << "Loading user:" << u.path();
-        if( u.isFavorite() )
-          qDebug() << "User" << u.path() << "is in favorite list";
         UserManager::instance().setUser( u );
         createPrivateChat( u );
       }

@@ -57,7 +57,6 @@ public:
   Chat groupChatForUsers( const QList<VNumber>& ) const;
 
   void addSavedChats( const QMap<QString, QString>& );
-  void autoLinkSavedChatByNickname( const Chat& );
   inline QString chatSavedText( const QString& ) const;
   inline bool chatHasSavedText( const QString& ) const;
   inline void removeSavedTextFromChat( const QString& );
@@ -66,7 +65,7 @@ public:
   inline const QMap<QString, QString>& constHistoryMap() const;
   int savedChatSize( const QString& ) const;
 
-  void changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& user_new_path );
+  void changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& new_chat_name );
 
   static ChatManager& instance()
   {
@@ -86,8 +85,6 @@ public:
 
 protected:
   ChatManager();
-
-  QString findPrivateChatSavedTextWithSameNickname( const QString& ) const;
 
   inline QList<Chat>& chatList();
 

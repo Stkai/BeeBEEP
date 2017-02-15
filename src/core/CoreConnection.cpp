@@ -352,14 +352,17 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     ChatManager::instance().setChat( default_chat );
   }
 
-  if( !ChatManager::instance().privateChatForUser( u.id() ).isValid() )
+  Chat private_chat = ChatManager::instance().privateChatForUser( u.id() );
+  if( private_chat.isValid() )
+  {
+    if( user_found.isValid() && u.name() != user_found.name() )
+      ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), u.name() );
+  }
+  else
     createPrivateChat( u );
 
   c->setReadyForUse( u.id() );
   addConnectionReadyForUse( c );
-
-  if( user_path_changed )
-    ChatManager::instance().changePrivateChatNameAfterUserNameChanged( user_found.id(), u.path() );
 
   emit userChanged( u );
   emit userConnectionStatusChanged( u );

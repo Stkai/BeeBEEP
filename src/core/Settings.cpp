@@ -805,7 +805,6 @@ void Settings::load()
   m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
   m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
   m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
-  m_autoLinkSavedChatByNickname = sets->value( "AutoLinkSavedChatByNickname", true ).toBool();
   m_chatMessageFilter = sets->value( "MessageFilter", m_chatMessageFilter ).toBitArray();
   if( m_chatMessageFilter.size() < (int)ChatMessage::NumTypes )
     m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
@@ -1120,7 +1119,6 @@ void Settings::save()
   sets->setValue( "MessageHistorySize", m_chatMessageHistorySize );
   sets->setValue( "ShowEmoticons", m_showEmoticons );
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
-  sets->setValue( "AutoLinkSavedChatByNickname", m_autoLinkSavedChatByNickname );
   sets->setValue( "MessageFilter", m_chatMessageFilter );
   sets->setValue( "ShowOnlyMessagesInDefaultChat", m_showOnlyMessagesInDefaultChat );
   sets->setValue( "ShowImagePreview", m_showImagePreview );

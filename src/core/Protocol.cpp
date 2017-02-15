@@ -560,7 +560,7 @@ QString Protocol::temporaryUserName()
 User Protocol::createTemporaryUser( const QString& user_path, const QString& account_name )
 {
   QString user_name = User::nameFromPath( user_path );
-  if( user_name.isNull() || user_name.isEmpty() )
+  if( user_name == user_path )
     return User();
 
   QHostAddress user_address;

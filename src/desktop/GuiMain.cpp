@@ -2550,6 +2550,11 @@ void GuiMain::raiseHomeView()
 void GuiMain::raiseLocalShareView()
 {
   raiseView( mp_shareLocal, ID_INVALID, "" );
+  if( mp_actViewInCompactMode->isChecked() )
+  {
+    mp_actViewInCompactMode->setChecked( false );
+    toggleCompactMode();
+  }
 }
 
 void GuiMain::raiseNetworkShareView()

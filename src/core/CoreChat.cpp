@@ -97,16 +97,17 @@ void Core::createPrivateChat( const User& u )
   QList<VNumber> user_list;
   user_list.append( u.id() );
   Chat c = Protocol::instance().createChat( user_list );
-  c.setName( u.path() );
+  c.setName( u.name() );
   QString sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name() );
   ChatMessage cm( u.id(), Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header );
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
 
-  if( Settings::instance().autoLinkSavedChatByNickname() && ChatManager::instance().isLoadHistoryCompleted() )
-    ChatManager::instance().autoLinkSavedChatByNickname( c );
+  bool chat_has_history = ChatManager::instance().chatHasSavedText( c.name() );
+  if( !chat_has_history && c.name().contains( "@" ) )
+    chat_has_history = ChatManager::instance().chatHasSavedText( User::nameFromPath( c.name() ) );
 
-  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+  if( chat_has_history )
   {
     c = ChatManager::instance().chat( c.id() );
     cm = ChatMessage( u.id(), Protocol::instance().systemMessage( "" ), ChatMessage::History );
@@ -161,6 +162,9 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
 
   sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), user_string_list.join( ", " ) );
   c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
+
+  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( "" ), ChatMessage::History ) );
 
   ChatManager::instance().setChat( c );
 

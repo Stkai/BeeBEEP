@@ -34,9 +34,6 @@ GuiCreateGroup::GuiCreateGroup( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiCreateGroup" );
 
-  mp_labelName->setText( tr( "Group name" ) );
-  mp_labelText->setText( tr( "Please add member in the group:" ) );
-
   QStringList labels;
   labels << tr( "Users" );
   mp_twUsers->setHeaderLabels( labels );
@@ -58,6 +55,17 @@ void GuiCreateGroup::init( const QString& group_name, const QList<VNumber>& grou
 
 void GuiCreateGroup::loadData( bool is_group )
 {
+  if( is_group )
+  {
+    mp_labelName->setText( tr( "Group name" ) );
+    mp_labelText->setText( tr( "Please add member in the group:" ) );
+  }
+  else
+  {
+    mp_labelName->setText( tr( "Chat name" ) );
+    mp_labelText->setText( tr( "Please add member in the chat:" ) );
+  }
+
   if( m_selectedName.isEmpty() )
   {
     mp_leName->setText( "" );

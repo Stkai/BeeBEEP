@@ -341,8 +341,6 @@ public:
 
   inline bool autoUserAway() const;
   inline void setAutoUserAway( bool );
-  inline bool autoLinkSavedChatByNickname() const;
-  inline void setAutoLinkSavedChatByNickname( bool );
 
   inline bool confirmOnDownloadFile() const;
   inline void setConfirmOnDownloadFile( bool );
@@ -614,7 +612,6 @@ private:
   int m_chatMaxLineSaved;
 
   bool m_autoUserAway;
-  bool m_autoLinkSavedChatByNickname;
 
   QMap<QString, QStringList> m_pluginSettings;
 
@@ -821,8 +818,6 @@ inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved; }
 inline void Settings::setChatMaxLineSaved( int new_value ) { m_chatMaxLineSaved = new_value; }
 inline bool Settings::autoUserAway() const { return m_autoUserAway; }
 inline void Settings::setAutoUserAway( bool new_value ) { m_autoUserAway = new_value; }
-inline bool Settings::autoLinkSavedChatByNickname() const { return m_autoLinkSavedChatByNickname; }
-inline void Settings::setAutoLinkSavedChatByNickname( bool new_value ) { m_autoLinkSavedChatByNickname = new_value; }
 inline QStringList Settings::pluginSettings( const QString& plugin_name ) const { return m_pluginSettings.value( plugin_name ); }
 inline void Settings::setPluginSettings( const QString& plugin_name, const QStringList& plugin_settings ) { m_pluginSettings.insert( plugin_name, plugin_settings ); }
 inline bool Settings::pluginHasSettings( const QString& plugin_name ) const { return m_pluginSettings.contains( plugin_name ); }

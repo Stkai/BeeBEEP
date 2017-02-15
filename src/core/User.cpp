@@ -77,16 +77,17 @@ bool User::isBirthDay() const
 
 QString User::nameFromPath( const QString& user_path )
 {
+  if( !user_path.contains( "@" ) )
+    return user_path;
+
   QStringList sl = user_path.split( "@" );
   if( sl.size() > 2 )
   {
     sl.removeLast();
     return sl.join( "@" );
   }
-  else if( sl.size() == 2 )
-    return sl.first();
   else
-    return QString();
+    return sl.first();
 }
 
 QString User::hostAddressAndPortFromPath( const QString& user_path )
