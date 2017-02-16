@@ -34,7 +34,7 @@ class GuiUserList : public QWidget, private Ui::GuiUserListWidget
   Q_OBJECT
 
 public:
-  GuiUserList( QWidget* parent = 0 );
+  GuiUserList( bool, QWidget* parent = 0 );
 
   virtual QSize sizeHint() const;
 
@@ -44,7 +44,6 @@ public:
   void setMessages( VNumber private_chat_id, int );
   void updateUsers( bool );
 
-  void setChatOpened( VNumber );
   inline void setMenuSettings( QMenu* );
 
   void onTickEvent( int );
@@ -70,7 +69,6 @@ private:
   void resetList();
   void setDefaultChatConnected( GuiUserItem*, bool );
 
-  VNumber m_chatOpened;
   QString m_filter;
   bool m_coreIsConnected;
 

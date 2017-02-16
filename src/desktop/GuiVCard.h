@@ -41,7 +41,7 @@ public:
 signals:
   void showChat( VNumber );
   void sendFile( VNumber );
-  void changeUserColor( VNumber );
+  void changeUserColor( VNumber, const QString& );
   void toggleFavorite( VNumber );
   void removeUser( VNumber );
   void buzzUser( VNumber );
@@ -57,6 +57,7 @@ private slots:
 private:
   VNumber m_userId;
   VNumber m_chatId;
+  QString m_userColor;
 
 };
 

@@ -81,7 +81,6 @@ void GuiGroupList::loadGroups()
   {
     GuiGroupItem* group_item = new GuiGroupItem( this );
     group_item->init( g.id(), true );
-    group_item->setChatOpened( g.id() == m_groupChatOpened );
     group_item->updateGroup( g );
   }
 }
@@ -97,7 +96,6 @@ void GuiGroupList::updateGroup( VNumber group_id )
   {
     group_item = new GuiGroupItem( this );
     group_item->init( group_id, true );
-    group_item->setChatOpened( group_id == m_groupChatOpened );
   }
   group_item->updateGroup( g );
   sortItems( 0, Qt::AscendingOrder );
@@ -219,44 +217,18 @@ void GuiGroupList::updateUser( const User& u )
   sortItems( 0, Qt::AscendingOrder );
 }
 
-void GuiGroupList::updateChat( VNumber chat_id )
+void GuiGroupList::updateChat( const Chat& c )
 {
   GuiGroupItem* item;
   QTreeWidgetItemIterator it( this );
   while( *it )
   {
     item = (GuiGroupItem*)(*it);
-    if( item->updateChat( chat_id ) )
+    if( item->updateChat( c ) )
     {
       sortItems( 0, Qt::AscendingOrder );
       return;
     }
-    ++it;
-  }
-}
-
-void GuiGroupList::setChatOpened( VNumber chat_id )
-{
-  m_groupChatOpened = ID_INVALID;
-  clearSelection();
-
-  if( chat_id != ID_INVALID )
-  {
-    Chat c = ChatManager::instance().chat( chat_id );
-    if( c.isValid() && c.isGroup() )
-    {
-      Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
-      if( g.isValid() )
-        m_groupChatOpened = g.id();
-    }
-  }
-
-  GuiGroupItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
-  {
-    item = (GuiGroupItem*)(*it);
-    item->setChatOpened( item->itemId() == m_groupChatOpened );
     ++it;
   }
 }

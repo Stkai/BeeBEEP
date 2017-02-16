@@ -167,17 +167,6 @@ bool GuiUserItem::updateUser( const User& u )
   return true;
 }
 
-void GuiUserItem::setChatOpened( bool chat_is_opened )
-{
-  if( chat_is_opened )
-  {
-    setBackground( 0, Bee::defaultHighlightBrush() );
-    setTextColor( 0, Bee::defaultHighlightedTextBrush().color() );
-  }
-  else
-    showUserStatus();
-}
-
 void GuiUserItem::showUserStatus()
 {
   int user_status = data( 0, Status ).toInt();

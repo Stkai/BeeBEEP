@@ -37,7 +37,6 @@ public:
   virtual QSize sizeHint() const;
 
   void reloadChatList();
-  void setChatOpened( VNumber );
 
 signals:
   void chatSelected( VNumber chat_id );
@@ -46,7 +45,7 @@ signals:
   void createNewChatRequest();
 
 public slots:
-  void updateChat( VNumber chat_id );
+  void updateChat( const Chat& );
   void onTickEvent( int );
 
 protected slots:

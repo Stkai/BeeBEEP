@@ -52,6 +52,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   m_userId = u.id();
   m_chatId = chat_id;
   mp_lPath->setText( u.accountPath() );
+  m_userColor = u.color();
 
   QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.name() );
   mp_lName->setText( QString( "<font color=""%1"">%2</font>" ).arg( u.color(), name_txt ) );
@@ -153,7 +154,7 @@ void GuiVCard::sendFile()
 void GuiVCard::changeColor()
 {
   hide();
-  emit changeUserColor( m_userId );
+  emit changeUserColor( m_userId, m_userColor );
   close();
 }
 

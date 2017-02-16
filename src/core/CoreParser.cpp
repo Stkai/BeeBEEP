@@ -98,7 +98,8 @@ void Core::parseUserMessage( const User& u, const Message& m )
     qDebug() << "User" << qPrintable( u.path() ) << "is writing";
 #endif
     Chat c = ChatManager::instance().findChatByPrivateId( m.data(), false, u.id() );
-    emit userIsWriting( u, c.id() );
+    if( c.hasUser( u.id() ) )
+      emit userIsWriting( u, c.id() );
     return;
   }
   else if( m.hasFlag( Message::UserStatus ) )

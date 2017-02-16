@@ -88,7 +88,7 @@ void Core::createDefaultChat()
   }
 
   ChatManager::instance().setChat( c );
-  emit updateChat( c.id() );
+  emit chatChanged( c );
 }
 
 void Core::createPrivateChat( const User& u )
@@ -115,7 +115,7 @@ void Core::createPrivateChat( const User& u )
     ChatManager::instance().setChat( c );
   }
 
-  emit updateChat( c.id() );
+  emit chatChanged( c );
 }
 
 void Core::checkGroupChatAfterUserReconnect( const User& u )
@@ -171,7 +171,7 @@ void Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
   if( broadcast_message && isConnected() )
     sendGroupChatRequestMessage( c, ul );
 
-  emit updateChat( c.id() );
+  emit chatChanged( c );
 }
 
 void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>& users_id, bool broadcast_message )
@@ -255,7 +255,7 @@ void Core::changeGroupChat( VNumber chat_id, const QString& chat_name, const QLi
   if( chat_changed )
   {
     ChatManager::instance().setChat( c );
-    emit updateChat( c.id() );
+    emit chatChanged( c );
   }
 
   if( broadcast_message && isConnected() )
@@ -510,7 +510,7 @@ bool Core::removeUserFromChat( const User& u, VNumber chat_id )
   c.removeUser( u.id() );
   c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
   ChatManager::instance().setChat( c );
-  emit updateChat( c.id() );
+  emit chatChanged( c );
 
   if( u.isLocal() )
   {
@@ -661,4 +661,16 @@ void Core::sendBuzzToUser( VNumber user_id )
   }
   else
     qWarning() << "Unable to send a buzz to offline user" << qPrintable( u.path() );
+}
+
+void Core::removeSavedChat( const QString& chat_name )
+{
+  if( chat_name.isEmpty() )
+    return;
+
+  qDebug() << "Delete saved chat:" << chat_name;
+  ChatManager::instance().removeSavedTextFromChat( chat_name );
+  Chat c = ChatManager::instance().findChatByName( chat_name );
+  if( c.isValid() )
+    emit chatChanged( c );
 }

@@ -123,10 +123,6 @@ bool Avatar::create()
   int border_x = (m_size.width() - fm.width( text_to_write )) / 2;
   int border_y = (m_size.height() - fm.height()) / 2;
 
-//#ifdef BEEBEEP_DEBUG
-//  qDebug() << "Creating avatar with color" << m_color.name() << "font size" << f.pointSize() << "and borders" << border_x << border_y;
-//#endif
-
   QPixmap pix( m_size );
   pix.fill( m_color );
   QPainter p( &pix );

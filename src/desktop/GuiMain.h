@@ -83,7 +83,7 @@ private slots:
   void stopCore();
   void showAbout();
   void showLicense();
-  void updateUser( const User& );
+  void onUserChanged( const User& );
   void showWritingUser( const User&, VNumber );
   void showChatMessage( VNumber, const ChatMessage& );
   void sendMessage( VNumber, const QString& );
@@ -104,7 +104,7 @@ private slots:
   void selectDownloadDirectory();
   void changeVCard();
   void showVCard( VNumber, bool );
-  void changeUserColor( VNumber );
+  void changeUserColor( VNumber, const QString& );
   void showPluginHelp();
   void showPluginManager();
   void showDefaultChat();
@@ -140,7 +140,7 @@ private slots:
   void openFacebookPage();
   void clearChat( VNumber );
   void checkGroup( VNumber );
-  void checkChat( VNumber );
+  void onChatChanged( const Chat& );
   void leaveGroupChat( VNumber );
   void removeGroup( VNumber );
   void removeChat( VNumber );
@@ -194,15 +194,12 @@ protected:
   void changeEvent( QEvent* );
   bool promptConnectionPassword();
   void raiseOnTop();
-  void raiseView( QWidget*, VNumber, const QString& );
+  void raiseView( QWidget* );
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
-  bool reloadChat( VNumber );
-  bool chatIsVisible( VNumber );
   void showAlertForMessage( VNumber, const ChatMessage&, bool* chat_window_is_created );
-  GuiChat* guiChat( VNumber );
   void showInCompactMode();
   void restoreFromCompactMode();
-  GuiFloatingChat* createFloatingChat( VNumber );
+  GuiFloatingChat* createFloatingChat( const Chat& );
   void closeFloatingChat( VNumber );
 
 private:

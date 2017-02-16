@@ -176,7 +176,6 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
 
   showUserVCardChanged( u );
   emit userChanged( u );
-
   return true;
 }
 
@@ -496,4 +495,18 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
         qWarning() << "Hive protocol is unable to send" << qPrintable( to_user.path() ) << "to connected user" << qPrintable( u.path() );
     }
   }
+}
+
+void Core::changeUserColor( VNumber user_id, const QString& user_color )
+{
+  User u = UserManager::instance().findUser( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user" << user_id << "found in Core::changeUserColor(...)";
+    return;
+  }
+
+  u.setColor( user_color );
+  UserManager::instance().setUser( u );
+  userChanged( u );
 }

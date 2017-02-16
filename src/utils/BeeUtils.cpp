@@ -618,7 +618,7 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
   {
     default_avatar_used = true;
     Avatar av;
-    av.setName( u.name() );
+    av.setName( u.isValid() ? u.name() : "??" );
     if( u.isStatusConnected() )
       av.setColor( u.color() );
     else

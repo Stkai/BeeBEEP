@@ -37,6 +37,7 @@ public:
   inline Chat defaultChat() const;
   Chat chat( VNumber ) const;
   Chat privateChatForUser( VNumber user_id ) const;
+  Chat findChatByName( const QString& ) const;
   Chat findChatByPrivateId( const QString& chat_private_id, bool skip_default_chat, VNumber user_id ) const;
   Chat firstChatWithUnreadMessages() const;
 
@@ -47,7 +48,7 @@ public:
 
   int countNotEmptyChats() const;
 
-  bool hasName( const QString& ) const;
+  inline bool hasName( const QString& ) const;
   int unreadMessages() const;
   bool isGroupChat( VNumber ) const;
   bool hasUnreadMessages() const;
@@ -100,6 +101,7 @@ private:
 inline Chat ChatManager::defaultChat() const { return chat( ID_DEFAULT_CHAT ); }
 inline const QList<Chat>& ChatManager::constChatList() const { return m_chats; }
 inline QList<Chat>& ChatManager::chatList() { return m_chats; }
+inline bool ChatManager::hasName( const QString& chat_name ) const { return findChatByName( chat_name ).isValid(); }
 inline QString ChatManager::chatSavedText( const QString& chat_name ) const { return m_history.value( chat_name ); }
 inline bool ChatManager::chatHasSavedText( const QString& chat_name ) const { return m_history.contains( chat_name ); }
 inline void ChatManager::removeSavedTextFromChat( const QString& chat_name ) { m_history.remove( chat_name ); }

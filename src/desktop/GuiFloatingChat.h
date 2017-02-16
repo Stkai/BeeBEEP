@@ -37,11 +37,9 @@ class GuiFloatingChat : public QMainWindow
 public:
   GuiFloatingChat( QWidget* parent = 0 );
 
-  bool setChatId( VNumber );
-  inline VNumber chatId() const;
+  bool setChat( const Chat& );
   inline GuiChat* guiChat() const;
   void checkWindowFlagsAndShow();
-  void showUserWriting( VNumber, const QString& );
   void raiseOnTop();
   void setFocusInChat();
 
@@ -49,6 +47,7 @@ public:
   void setMainIcon( bool with_message );
 
   void updateUser( const User&, bool );
+  void setChatReadByUser( VNumber );
 
 public slots:
   void updateEmoticon();
@@ -56,6 +55,7 @@ public slots:
 signals:
   void readAllMessages( VNumber );
   void chatIsAboutToClose( VNumber );
+  void showVCardRequest( VNumber, bool );
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -85,11 +85,8 @@ private:
 
 };
 
-
 // Inline Functions
-inline VNumber GuiFloatingChat::chatId() const { return mp_chat->chatId(); }
 inline GuiChat* GuiFloatingChat::guiChat() const { return mp_chat; }
 inline bool GuiFloatingChat::chatIsVisible() const { return m_chatIsVisible; }
-
 
 #endif // BEEBEEP_GUIFLOATINGCHAT_H

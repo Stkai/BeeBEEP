@@ -41,22 +41,14 @@ public:
   void setupToolBar( QToolBar* );
   void updateActions( bool is_connected, int connected_users );
 
-  bool setChatId( VNumber, bool );
+  bool setChat( const Chat& );
   inline VNumber chatId() const;
-  void updateUser( const User& );
-  bool hasUser( VNumber );
-
-  void reloadChatUsers();
-  bool reloadChat();
-  inline const QString& chatName() const;
   void ensureLastMessageVisible();
 
   void updateShortcuts();
   void updateActionsOnFocusChanged();
 
   inline QSplitter* chatSplitter() const;
-
-  void setChatReadByUser( VNumber );
 
 signals:
   void newMessage( VNumber, const QString& );
@@ -73,7 +65,6 @@ signals:
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
-  void sendBuzzToUserRequest( VNumber );
 
 public slots:
   void appendChatMessage( VNumber, const ChatMessage& );
@@ -83,14 +74,13 @@ public slots:
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
-  void setChatUsers();
-  QString chatMessageToText( const ChatMessage& );
+  void setChatTitle( const Chat& );
+  QString chatMessageToText( const User&, const ChatMessage& );
   bool messageCanBeShowed( const ChatMessage& );
   bool historyCanBeShowed();
   void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
   void setChatBackgroundColor( const QString& );
-  User findUser( VNumber );
   bool isActiveUser( const Chat&, const User& ) const;
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
@@ -115,7 +105,6 @@ private slots:
   void sendFile();
   void sendFolder();
   void showUserVCard();
-  void showMembersMenu();
   void showLocalUserVCard();
   void showGroupWizard();
   void editChatMembers();
@@ -128,18 +117,14 @@ private slots:
   void showFindTextInChatDialog();
   void findNextTextInChat();
   void openSelectedTextAsUrl();
-  void sendBuzz();
-  void enableBuzz();
 
 protected:
   void findTextInChat( const QString& );
+  void updateChat();
 
 private:
   VNumber m_chatId;
-  QString m_chatName;
-  UserList m_chatUsers;
   VNumber m_lastMessageUserId;
-  bool m_isFloating;
 
   QMenu* mp_menuChat;
   QAction* mp_actSendFile;
@@ -155,9 +140,7 @@ private:
   QAction* mp_actFindTextInChat;
   QAction* mp_actSendFolder;
   QAction* mp_actSaveAs;
-  QAction* mp_actBuzz;
 
-  QMenu* mp_menuMembers;
   QSplitter* mp_splitter;
 
   QPalette m_defaultChatPalette;
@@ -172,7 +155,6 @@ private:
 
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
-inline const QString& GuiChat::chatName() const { return m_chatName; }
 inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
 
 #endif // BEEBEEP_GUICHAT_H

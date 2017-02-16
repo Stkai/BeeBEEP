@@ -51,7 +51,6 @@ public:
   bool updateUser();
   bool updateUser( const User& );
 
-  void setChatOpened( bool );
   void onTickEvent( int );
 
   inline void setDefaultIcon( const QIcon& );

@@ -72,6 +72,7 @@ public:
   bool removeGroup( VNumber );
   void toggleUserFavorite( VNumber );
   bool removeOfflineUser( VNumber );
+  void changeUserColor( VNumber, const QString& );
 
   void loadUsersAndGroups();
   void saveUsersAndGroups();
@@ -89,6 +90,7 @@ public:
   bool removeChat( VNumber );
   bool readAllMessagesInChat( VNumber );
   void sendBuzzToUser( VNumber );
+  void removeSavedChat( const QString& );
 
   /* CoreFileTransfer */
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );
@@ -145,7 +147,7 @@ signals:
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
   void fileTransferCompleted( VNumber, const User&, const FileInfo& );
   void fileShareAvailable( const User& );
-  void updateChat( VNumber );
+  void chatChanged( const Chat& );
   void localShareListAvailable();
   void savedChatListAvailable();
   void updateStatus( const QString&, int );
@@ -228,7 +230,6 @@ protected:
 
   /* CoreChat */
   void createDefaultChat();
-  QString chatMessageToText( const UserList&, const ChatMessage& );
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
   void sendGroupChatRequestMessage( const Chat&, const UserList& );
   void sendGroupChatRefuseMessage( const Chat&, const UserList& );

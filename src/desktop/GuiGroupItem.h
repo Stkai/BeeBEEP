@@ -25,6 +25,7 @@
 #define BEEBEEP_GUIGROUPITEM_H
 
 #include "BeeUtils.h"
+class Chat;
 class Group;
 class User;
 
@@ -49,9 +50,7 @@ public:
 
   bool updateGroup( const Group& );
   bool updateUser( const User& );
-  bool updateChat( VNumber );
-
-  void setChatOpened( bool );
+  bool updateChat( const Chat& );
 
 private:
   inline void setObjectType( ObjectTypeId );

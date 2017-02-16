@@ -109,14 +109,14 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
-  connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( updateUser( const User& ) ) );
+  connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( onUserChanged( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
 
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
-  connect( mp_core, SIGNAL( updateChat( VNumber ) ), this, SLOT( checkChat( VNumber ) ) );
+  connect( mp_core, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
   connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
   connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
@@ -225,7 +225,6 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
   connect( gui_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
   connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
-  connect( gui_chat, SIGNAL( sendBuzzToUserRequest( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
 }
 
 void GuiMain::applyFlagStaysOnTop()
@@ -1368,14 +1367,8 @@ void GuiMain::createPluginWindows()
   }
 }
 
-void GuiMain::updateUser( const User& u )
+void GuiMain::onUserChanged( const User& u )
 {
-  if( !u.isValid() )
-  {
-    qWarning() << "Invalid user found in GuiMain::checkUser( const User& u )";
-    return;
-  }
-
   mp_userList->setUser( u, true );
   mp_groupList->updateUser( u );
   mp_shareBox->updateUser( u );
@@ -1383,6 +1376,8 @@ void GuiMain::updateUser( const User& u )
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateUser( u, mp_core->isConnected() );
   checkViewActions();
+  if( u.isLocal() )
+    refreshTitle( u );
 }
 
 void GuiMain::refreshUserList()
@@ -1660,7 +1655,11 @@ void GuiMain::settingsChanged()
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
     foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-      fl_chat->guiChat()->reloadChat();
+    {
+      Chat c = ChatManager::instance().chat( fl_chat->guiChat()->chatId() );
+      if( c.isValid() )
+        fl_chat->setChat( c );
+    }
     QApplication::restoreOverrideCursor();
   }
 
@@ -1705,7 +1704,7 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
   if( !fl_chat && Settings::instance().raiseOnNewMessageArrived() )
   {
     *chat_window_is_created = true;
-    fl_chat = createFloatingChat( chat_id );
+    fl_chat = createFloatingChat( c );
   }
 
   if( fl_chat )
@@ -1769,21 +1768,13 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
     mp_trayIcon->setUnreadMessages( chat_id, 0 );
 }
 
-bool GuiMain::chatIsVisible( VNumber chat_id )
-{
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    return fl_chat->chatIsVisible();
-  else
-    return false;
-}
-
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
   if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() )
     mp_home->addSystemMessage( cm );
 
-  bool chat_is_visible = chatIsVisible( chat_id );
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  bool chat_is_visible = fl_chat && fl_chat->chatIsVisible();
   bool chat_window_is_created = false;
 
   if( !cm.isFromSystem() && !cm.isFromLocalUser() )
@@ -1794,30 +1785,24 @@ void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
       playBeep();
   }
 
-  chat_is_visible = chatIsVisible( chat_id );
+  fl_chat = floatingChat( chat_id );
+  chat_is_visible = fl_chat && fl_chat->chatIsVisible();
 
-  GuiChat* gui_chat = guiChat( chat_id );
-
-  if( gui_chat )
+  if( chat_is_visible )
   {
-    if( chat_is_visible )
+    if( fl_chat->isActiveWindow() )
       readAllMessagesInChat( chat_id );
     if( !chat_window_is_created )
-      gui_chat->appendChatMessage( chat_id, cm );
+      fl_chat->guiChat()->appendChatMessage( chat_id, cm );
   }
   else
-  {
-    chat_is_visible = false;
-  }
-
-  if( !chat_is_visible )
   {
     Chat chat_hidden = ChatManager::instance().chat( chat_id );
     mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
     int chat_messages = chat_hidden.chatMessages() + ChatManager::instance().savedChatSize( chat_hidden.name() );
     mp_userList->setMessages( chat_id, chat_messages );
-    mp_chatList->updateChat( chat_id );
-    mp_groupList->updateChat( chat_id );
+    mp_chatList->updateChat( chat_hidden );
+    mp_groupList->updateChat( chat_hidden );
   }
 
   updateNewMessageAction();
@@ -1857,7 +1842,7 @@ void GuiMain::showWritingUser( const User& u, VNumber chat_id )
   QString msg = tr( "%1 is writing..." ).arg( u.name() );
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
-    fl_chat->showUserWriting( u.id(), msg );
+    fl_chat->statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
 }
 
 void GuiMain::setUserStatusSelected( int user_status )
@@ -2270,16 +2255,16 @@ void GuiMain::showDefaultChat()
 
 void GuiMain::showChat( VNumber chat_id )
 {
-  if( chat_id == ID_INVALID )
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
   {
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to show invalid chat";
+    qWarning() << "Invalid chat" << chat_id << "found in GuiMain::showChat(...)";
 #endif
     return;
   }
 
-  GuiFloatingChat* fl_chat = createFloatingChat( chat_id );
-
+  GuiFloatingChat* fl_chat = createFloatingChat( c );
   if( !fl_chat )
   {
 #ifdef BEEBEEP_DEBUG
@@ -2295,8 +2280,6 @@ void GuiMain::showChat( VNumber chat_id )
 
   readAllMessagesInChat( chat_id );
   fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
-  fl_chat->guiChat()->reloadChatUsers();
-
   fl_chat->setFocusInChat();
 }
 
@@ -2309,10 +2292,7 @@ void GuiMain::changeVCard()
   gvc.show();
 
   if( gvc.exec() == QDialog::Accepted )
-  {
-    if( mp_core->setLocalUserVCard( gvc.userColor(), gvc.vCard() ) )
-      refreshTitle( Settings::instance().localUser() );
-  }
+    mp_core->setLocalUserVCard( gvc.userColor(), gvc.vCard() );
 }
 
 void GuiMain::showLocalUserVCard()
@@ -2334,7 +2314,7 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   GuiVCard* gvc = new GuiVCard( this );
   connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
-  connect( gvc, SIGNAL( changeUserColor( VNumber ) ), this, SLOT( changeUserColor( VNumber) ) );
+  connect( gvc, SIGNAL( changeUserColor( VNumber, const QString& ) ), this, SLOT( changeUserColor( VNumber, const QString& ) ) );
   connect( gvc, SIGNAL( toggleFavorite( VNumber ) ), this, SLOT( toggleUserFavorite( VNumber ) ) );
   connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUserFromList( VNumber ) ) );
   connect( gvc, SIGNAL( buzzUser( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
@@ -2530,26 +2510,22 @@ void GuiMain::removeFromShare( const QString& share_path )
   mp_core->removePathFromShare( share_path );
 }
 
-void GuiMain::raiseView( QWidget* w, VNumber chat_id, const QString& chat_name )
+void GuiMain::raiseView( QWidget* w )
 {
   setGameInPauseMode();
   mp_stackedWidget->setCurrentWidget( w );
   checkViewActions();
-  mp_userList->setChatOpened( chat_id );
-  mp_chatList->setChatOpened( chat_id );
-  mp_groupList->setChatOpened( chat_id );
-  mp_savedChatList->setSavedChatOpened( chat_name );
   raise();
 }
 
 void GuiMain::raiseHomeView()
 {
-  raiseView( mp_home, ID_INVALID, "" );
+  raiseView( mp_home );
 }
 
 void GuiMain::raiseLocalShareView()
 {
-  raiseView( mp_shareLocal, ID_INVALID, "" );
+  raiseView( mp_shareLocal );
   if( mp_actViewInCompactMode->isChecked() )
   {
     mp_actViewInCompactMode->setChecked( false );
@@ -2560,7 +2536,7 @@ void GuiMain::raiseLocalShareView()
 void GuiMain::raiseNetworkShareView()
 {
   mp_shareNetwork->initShares();
-  raiseView( mp_shareNetwork, ID_INVALID, "" );
+  raiseView( mp_shareNetwork );
 }
 
 void GuiMain::raisePluginView()
@@ -2577,22 +2553,22 @@ void GuiMain::raisePluginView()
   if( !plugin_widget )
     return;
 
-  raiseView( plugin_widget, ID_INVALID, "" );
+  raiseView( plugin_widget );
 }
 
 void GuiMain::raiseLogView()
 {
-  raiseView( mp_logView, ID_INVALID, "" );
+  raiseView( mp_logView );
 }
 
 void GuiMain::raiseScreenShotView()
 {
-  raiseView( mp_screenShot, ID_INVALID, "" );
+  raiseView( mp_screenShot );
 }
 
 void GuiMain::raiseShareBoxView()
 {
-  raiseView( mp_shareBox, ID_INVALID, "" );
+  raiseView( mp_shareBox );
   mp_shareBox->updateShareBoxes();
 }
 
@@ -2848,24 +2824,13 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
     return;
 
   mp_savedChat->showSavedChat( chat_name );
-
-  raiseView( mp_savedChat, ID_INVALID, chat_name );
+  mp_savedChatList->setSavedChatOpened( chat_name );
+  raiseView( mp_savedChat );
 }
 
 void GuiMain::removeSavedChat( const QString& chat_name )
 {
-  if( chat_name.isEmpty() )
-    return;
-
-  qDebug() << "Delete saved chat:" << chat_name;
-  ChatManager::instance().removeSavedTextFromChat( chat_name );
-  mp_savedChatList->updateSavedChats();
-
-  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-  {
-    if( fl_chat->guiChat()->chatName() == chat_name )
-      fl_chat->guiChat()->reloadChat();
-  }
+  mp_core->removeSavedChat( chat_name );
 }
 
 void GuiMain::linkSavedChat( const QString& chat_name )
@@ -2902,10 +2867,20 @@ void GuiMain::linkSavedChat( const QString& chat_name )
   ChatManager::instance().updateChatSavedText( chat_name, chat_name_selected, add_to_existing_saved_text );
   mp_savedChatList->updateSavedChats();
 
-  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  Chat c = ChatManager::instance().findChatByName( chat_name );
+  if( c.isValid() )
   {
-    if( fl_chat->guiChat()->chatName() == chat_name_selected || fl_chat->guiChat()->chatName() == chat_name )
-      fl_chat->guiChat()->reloadChat();
+    GuiFloatingChat* fl_chat = floatingChat( c.id() );
+    if( fl_chat )
+      fl_chat->setChat( c );
+  }
+
+  c = ChatManager::instance().findChatByName( chat_name_selected );
+  if( c.isValid() )
+  {
+    GuiFloatingChat* fl_chat = floatingChat( c.id() );
+    if( fl_chat )
+      fl_chat->setChat( c );
   }
 }
 
@@ -2992,22 +2967,11 @@ void GuiMain::showMessage( const QString& status_msg, int time_out )
   statusBar()->showMessage( status_msg, time_out );
 }
 
-void GuiMain::changeUserColor( VNumber user_id )
+void GuiMain::changeUserColor( VNumber user_id, const QString& user_color )
 {
-  User u = UserManager::instance().findUser( user_id );
-  if( !u.isValid() )
-  {
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "User not found." ) );
-    return;
-  }
-
-  QColor c = QColorDialog::getColor( QColor( u.color() ), this );
+  QColor c = QColorDialog::getColor( QColor( user_color ), this );
   if( c.isValid() )
-  {
-    u.setColor( c.name() );
-    UserManager::instance().setUser( u );
-    updateUser( u );
-  }
+    mp_core->changeUserColor( user_id, c.name() );
 }
 
 void GuiMain::checkGroup( VNumber group_id )
@@ -3018,11 +2982,13 @@ void GuiMain::checkGroup( VNumber group_id )
     mp_groupList->loadGroups();
 }
 
-void GuiMain::checkChat( VNumber chat_id )
+void GuiMain::onChatChanged( const Chat& c )
 {
-  mp_chatList->updateChat( chat_id );
+  mp_chatList->updateChat( c );
   mp_savedChatList->updateSavedChats();
-  reloadChat( chat_id );
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  if( fl_chat )
+    fl_chat->setChat( c );
 }
 
 bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
@@ -3056,28 +3022,11 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
                               tr( "Delete this group" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
         return;
 
-    if( mp_core->removeGroup( g.id() ) )
-    {
-      raiseHomeView();
-      mp_groupList->loadGroups();
-      mp_chatList->reloadChatList();
-      mp_savedChatList->updateSavedChats();
-    }
+    removeGroup( g.id() );
     return;
   }
 
-  if( mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
-  {
-    GuiChat* gui_chat = guiChat( chat_id );
-    if( gui_chat )
-    {
-      gui_chat->reloadChatUsers();
-      gui_chat->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
-    }
-    mp_chatList->reloadChatList();
-    checkViewActions();
-  }
-  else
+  if( !mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
     QMessageBox::warning( this, Settings::instance().programName(), tr( "You cannot leave this chat." ) );
 }
 
@@ -3145,16 +3094,7 @@ void GuiMain::clearChat( VNumber chat_id )
     mp_userList->setUnreadMessages( chat_id, 0 );
   mp_chatList->reloadChatList();
   mp_savedChatList->updateSavedChats();
-  reloadChat( chat_id );
-}
 
-bool GuiMain::reloadChat( VNumber chat_id )
-{
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    return fl_chat->guiChat()->reloadChat();
-  else
-    return false;
 }
 
 void GuiMain::removeChat( VNumber chat_id )
@@ -3432,7 +3372,7 @@ GuiFloatingChat* GuiMain::floatingChat( VNumber chat_id ) const
 {
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
   {
-    if( fl_chat->chatId() == chat_id )
+    if( fl_chat->guiChat()->chatId() == chat_id )
       return fl_chat;
   }
   return 0;
@@ -3465,22 +3405,17 @@ void GuiMain::removeFloatingChatFromList( VNumber chat_id )
 #endif
 }
 
-GuiFloatingChat* GuiMain::createFloatingChat( VNumber chat_id )
+GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
 {
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Floating chat" << chat_id << "already exists";
-#endif
     return fl_chat;
-  }
-  else
-    fl_chat = new GuiFloatingChat;
 
-  if( !fl_chat->setChatId( chat_id ) )
+  fl_chat = new GuiFloatingChat;
+
+  if( !fl_chat->setChat( c ) )
   {
-    qWarning() << "Unable to create floating chat" << chat_id;
+    qWarning() << "Unable to create floating chat" << c.id() << c.name();
     fl_chat->deleteLater();
     return 0;
   }
@@ -3488,6 +3423,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( VNumber chat_id )
   setupChatConnections( fl_chat->guiChat() );
   connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
   connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
+  connect( fl_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
   m_floatingChats.append( fl_chat );
 
   fl_chat->checkWindowFlagsAndShow();
@@ -3505,15 +3441,6 @@ QWidget* GuiMain::activeChatWindow()
       return (QWidget*)fl_chat;
   }
   return (QWidget*)this;
-}
-
-GuiChat* GuiMain::guiChat( VNumber chat_id )
-{
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    return fl_chat->guiChat();
-  else
-    return 0;
 }
 
 void GuiMain::loadUserStatusRecentlyUsed()
@@ -3591,12 +3518,9 @@ void GuiMain::clearRecentlyUsedUserStatus()
 
 void GuiMain::loadSavedChatsCompleted()
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Loading saved chats completed";
-#endif
   mp_savedChatList->updateSavedChats();
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-    fl_chat->guiChat()->reloadChat();
+    fl_chat->setChat( ChatManager::instance().chat( fl_chat->guiChat()->chatId() ) );
 }
 
 void GuiMain::editShortcuts()
@@ -3782,18 +3706,19 @@ void GuiMain::onTickEvent( int ticks )
 
 void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )
 {
-  GuiChat* gc = guiChat( chat_id );
-  if( gc )
-    gc->setChatReadByUser( user_id );
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    fl_chat->setChatReadByUser( user_id );
 }
 
 void GuiMain::readAllMessagesInChat( VNumber chat_id )
 {
   if( mp_core->readAllMessagesInChat( chat_id ) )
   {
-    mp_userList->setUnreadMessages( chat_id, 0 );
-    mp_chatList->updateChat( chat_id );
-    mp_groupList->updateChat( chat_id );
+    Chat c = ChatManager::instance().chat( chat_id );
+    mp_userList->setUnreadMessages( c.id(), 0 );
+    mp_chatList->updateChat( c );
+    mp_groupList->updateChat( c );
     statusBar()->clearMessage();
   }
 

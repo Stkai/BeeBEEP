@@ -32,6 +32,7 @@ GuiUserList::GuiUserList( QWidget* parent )
   : QWidget( parent )
 {
   setupUi( this );
+  m_showOnlyChatMembers = false;
 
 #ifdef Q_OS_MAC
   gridLayout->setHorizontalSpacing( -1 );
@@ -46,7 +47,6 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_twUsers->setSortingEnabled( true );
   mp_twUsers->setColumnCount( 1 );
 
-  m_chatOpened = ID_INVALID;
   m_coreIsConnected = false;
   m_filter = "";
   m_blockShowChatRequest = false;
@@ -104,7 +104,6 @@ void GuiUserList::updateUsers( bool is_connected )
         u.vCard().phoneNumber().contains( m_filter, Qt::CaseInsensitive ) )
       setUser( u, false );
   }
-  setChatOpened( m_chatOpened );
   sortUsers();
 }
 
@@ -193,12 +192,7 @@ void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
   item->updateUser( u );
 
   if( sort_and_check_opened )
-  {
-    if( item_is_created )
-      setChatOpened( m_chatOpened );
-
     sortUsers();
-  }
 }
 
 void GuiUserList::removeUser( const User& u )
@@ -236,8 +230,6 @@ void GuiUserList::showUserMenu( const QPoint& p )
 
     m_blockShowChatRequest = true;
     emit showVCardRequest( user_item->userId(), true );
-    mp_twUsers->clearSelection();
-    setChatOpened( m_chatOpened );
   }
 }
 
@@ -252,7 +244,6 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
     return;
   }
 
-  mp_twUsers->clearSelection();
   GuiUserItem* user_item = (GuiUserItem*)item;
   if( user_item->chatId() != ID_INVALID )
     emit chatSelected( user_item->chatId() );
@@ -269,51 +260,6 @@ void GuiUserList::setDefaultChatConnected( GuiUserItem* item, bool yes )
   QIcon def_icon = QIcon( (yes ? ":/images/default-chat-online" : ":/images/default-chat-offline" ) );
   item->setIcon( 0, def_icon );
   item->setDefaultIcon( def_icon );
-}
-
-void GuiUserList::setChatOpened( VNumber chat_id )
-{
-  mp_twUsers->clearSelection();
-  m_chatOpened = chat_id;
-
-  GuiUserItem* item;
-  QTreeWidgetItemIterator it( mp_twUsers );
-
-  if( chat_id == ID_INVALID )
-  {
-    while( *it )
-    {
-      item = (GuiUserItem*)(*it);
-      item->setChatOpened( false );
-      ++it;
-    }
-    return;
-  }
-
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( !c.isValid() )
-  {
-    while( *it )
-    {
-      item = (GuiUserItem*)(*it);
-      item->setChatOpened( false );
-      ++it;
-    }
-    qWarning() << "Invalid chat id" << chat_id << "found in GuiUserList::setChatOpened";
-    return;
-  }
-
-  while( *it )
-  {
-    item = (GuiUserItem*)(*it);
-    if( c.isPrivate() || c.isDefault() )
-      item->setChatOpened( item->chatId() == chat_id );
-    else if( item->chatId() == ID_DEFAULT_CHAT )
-      item->setChatOpened( false );
-    else
-      item->setChatOpened( c.hasUser( item->userId() ) );
-    ++it;
-  }
 }
 
 void GuiUserList::filterText( const QString& txt )

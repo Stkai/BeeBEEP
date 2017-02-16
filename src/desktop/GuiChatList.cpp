@@ -40,7 +40,6 @@ GuiChatList::GuiChatList( QWidget* parent )
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
 
-  m_chatOpened = ID_INVALID;
   m_chatSelected = ID_INVALID;
   m_blockShowChatRequest = false;
 
@@ -68,7 +67,7 @@ void GuiChatList::reloadChatList()
   clearSelection();
   clear();
   foreach( Chat c, ChatManager::instance().constChatList() )
-    updateChat( c.id() );
+    updateChat( c );
 }
 
 GuiChatItem* GuiChatList::itemFromChatId( VNumber chat_id )
@@ -85,20 +84,18 @@ GuiChatItem* GuiChatList::itemFromChatId( VNumber chat_id )
   return 0;
 }
 
-void GuiChatList::updateChat( VNumber chat_id )
+void GuiChatList::updateChat( const Chat& c )
 {
-  Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return;
   if( c.isEmpty() && !c.isGroup() && !c.isDefault() )
     return;
 
-  GuiChatItem* item = itemFromChatId( chat_id );
+  GuiChatItem* item = itemFromChatId( c.id() );
   if( !item )
   {
     item = new GuiChatItem( this );
-    item->setChatId( chat_id );
-    item->setChatOpened( chat_id == m_chatOpened );
+    item->setChatId( c.id() );
   }
 
   item->updateItem( c );
@@ -146,7 +143,6 @@ void GuiChatList::showChatMenu( const QPoint& p )
   mp_menu->exec( QCursor::pos() );
 
   clearSelection();
-  setChatOpened( m_chatOpened );
 }
 
 void GuiChatList::openChatSelected()
@@ -162,21 +158,6 @@ void GuiChatList::clearChatSelected()
 void GuiChatList::removeChatSelected()
 {
   emit chatToRemove( m_chatSelected );
-}
-
-void GuiChatList::setChatOpened( VNumber chat_id )
-{
-  m_chatOpened = chat_id;
-  clearSelection();
-
-  GuiChatItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
-  {
-    item = (GuiChatItem*)(*it);
-    item->setChatOpened( item->chatId() == chat_id );
-    ++it;
-  }
 }
 
 void GuiChatList::onTickEvent( int ticks )

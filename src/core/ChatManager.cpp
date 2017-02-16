@@ -62,6 +62,26 @@ Chat ChatManager::privateChatForUser( VNumber user_id ) const
   return Chat();
 }
 
+Chat ChatManager::findChatByName( const QString& chat_name ) const
+{
+  if( !chat_name.isEmpty() )
+  {
+    foreach( Chat c, m_chats )
+    {
+      if( c.name().toLower() == chat_name.toLower() )
+        return c;
+    }
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Unable to find group chat with name" << chat_name;
+#endif
+  }
+#ifdef BEEBEEP_DEBUG
+  else
+    qWarning() << "Unable to find group chat with empty name";
+#endif
+  return Chat();
+}
+
 Chat ChatManager::findChatByPrivateId( const QString& chat_private_id, bool skip_default_chat, VNumber user_id ) const
 {
   if( !chat_private_id.isEmpty() )
@@ -134,19 +154,6 @@ Chat ChatManager::firstChatWithUnreadMessages() const
     return chat( ID_DEFAULT_CHAT );
   else
     return Chat();
-}
-
-bool ChatManager::hasName( const QString& chat_name ) const
-{
-  if( Settings::instance().defaultChatName() == chat_name )
-    return true;
-
-  foreach( Chat c, m_chats )
-  {
-    if( c.name().toLower() == chat_name.toLower() )
-      return true;
-  }
-  return false;
 }
 
 bool ChatManager::isGroupChat( VNumber chat_id ) const

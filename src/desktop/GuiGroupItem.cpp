@@ -115,9 +115,8 @@ bool GuiGroupItem::updateUser( const User& u )
   return true;
 }
 
-bool GuiGroupItem::updateChat( VNumber chat_id )
+bool GuiGroupItem::updateChat( const Chat& c )
 {
-  Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return false;
   if( !c.isGroup() )
@@ -134,12 +133,4 @@ bool GuiGroupItem::updateChat( VNumber chat_id )
   }
   else
     return false;
-}
-
-void GuiGroupItem::setChatOpened( bool chat_is_opened )
-{
-  if( chat_is_opened )
-    setBackground( 0, Bee::defaultHighlightBrush() );
-  else
-    setBackground( 0, Bee::defaultBackgroundBrush() );
 }

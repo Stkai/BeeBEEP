@@ -88,7 +88,6 @@ GuiChat::GuiChat( QWidget *parent )
 
   m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = 0;
-  m_isFloating = false;
   m_lastTextFound = "";
 
   mp_scFocusInChat = new QShortcut( this );
@@ -134,15 +133,6 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actUseReturnToSendMessage = bar->addAction( QIcon( ":/images/key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
   mp_actUseReturnToSendMessage->setCheckable( true );
   updateActionsOnFocusChanged();
-  bar->addSeparator();
-  mp_actBuzz = bar->addAction( QIcon( ":/images/bell.png" ), tr( "Send a buzz" ), this, SLOT( sendBuzz() ) );
-  bar->addSeparator();
-
-  mp_menuMembers = new QMenu( tr( "Members" ), this );
-  mp_menuMembers->setStatusTip( tr( "Show the members of the chat" ) );
-  mp_menuMembers->setIcon( QIcon( ":/images/group.png" ) );
-  connect( mp_menuMembers->menuAction(), SIGNAL( triggered() ), this, SLOT( showMembersMenu() ) );
-  bar->addAction( mp_menuMembers->menuAction() );
   bar->addSeparator();
 
   mp_actFindTextInChat = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
@@ -261,13 +251,6 @@ bool GuiChat::historyCanBeShowed()
   return !Settings::instance().chatMessageFilter().testBit( (int)ChatMessage::History );
 }
 
-bool GuiChat::reloadChat()
-{
-  bool chat_is_reloaded = setChatId( m_chatId, m_isFloating );
-  ensureFocusInChat();
-  return chat_is_reloaded;
-}
-
 void GuiChat::showChatMessageFilterMenu()
 {
   QMenu filter_menu;
@@ -299,15 +282,17 @@ void GuiChat::changeChatMessageFilter()
   if( act->data().toInt() == (int)ChatMessage::NumTypes )
   {
     Settings::instance().setShowOnlyMessagesInDefaultChat( act->isChecked() );
-    if( m_chatId == ID_DEFAULT_CHAT )
-      reloadChat();
-    return;
+    if( m_chatId != ID_DEFAULT_CHAT )
+      return;
+  }
+  else
+  {
+    QBitArray filter_array = Settings::instance().chatMessageFilter();
+    filter_array.setBit( act->data().toInt(), !act->isChecked() );
+    Settings::instance().setChatMessageFilter( filter_array );
   }
 
-  QBitArray filter_array = Settings::instance().chatMessageFilter();
-  filter_array.setBit( act->data().toInt(), !act->isChecked() );
-  Settings::instance().setChatMessageFilter( filter_array );
-  reloadChat();
+  updateChat();
 }
 
 void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
@@ -337,7 +322,7 @@ void GuiChat::checkAnchorClicked( const QUrl& url )
   emit openUrl( url );
 }
 
-QString GuiChat::chatMessageToText( const ChatMessage& cm )
+QString GuiChat::chatMessageToText( const User& u, const ChatMessage& cm )
 {
   QString s = "";
 
@@ -351,41 +336,11 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
   }
   else
   {
-    s = GuiChatMessage::formatMessage( findUser( cm.userId() ), cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0, Settings::instance().chatShowMessageTimestamp(), Settings::instance().chatShowMessageDatestamp() );
+    s = GuiChatMessage::formatMessage( u, cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0, Settings::instance().chatShowMessageTimestamp(), Settings::instance().chatShowMessageDatestamp() );
     m_lastMessageUserId = cm.userId();
   }
 
   return s;
-}
-
-User GuiChat::findUser( VNumber user_id )
-{
-  User u = m_chatUsers.find( user_id );
-  if( u.isValid() )
-    return u;
-
-  u = UserManager::instance().findUser( user_id );
-  if( u.isValid() )
-    m_chatUsers.set( u );
-
-  return u;
-}
-
-bool GuiChat::hasUser( VNumber user_id )
-{
-  return m_chatUsers.find( user_id ).isValid();
-}
-
-void GuiChat::updateUser( const User& u )
-{
-  if( m_chatUsers.find( u.id() ).isValid() )
-  {
-    if( UserManager::instance().findUser( u.id() ).isValid() )
-      m_chatUsers.set( u );
-    else
-      m_chatUsers.remove( u );
-    setChatUsers();
-  }
 }
 
 bool GuiChat::isActiveUser( const Chat& c, const User& u ) const
@@ -393,118 +348,63 @@ bool GuiChat::isActiveUser( const Chat& c, const User& u ) const
   return c.isValid() && c.usersId().contains( u.id() );
 }
 
-void GuiChat::setChatUsers()
+void GuiChat::setChatTitle( const Chat& c )
 {
-  QString chat_users;
+  QString chat_title;
   mp_pbProfile->disconnect();
   mp_pbProfile->setToolTip( QString( "" ) );
 
-  bool chat_has_members = false;
-  Chat c = ChatManager::instance().chat( m_chatId );
-  mp_actBuzz->setDisabled( true );
-
   if( c.isDefault() )
   {
-    chat_has_members = true;
     mp_pbProfile->setIcon( QIcon( ":images/default-chat-online.png" ) );
-    chat_users = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
-    mp_menuMembers->setEnabled( false );
+    chat_title = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
   }
-  else
+  else if( c.isPrivate() )
   {
-    mp_menuMembers->setEnabled( true );
-    mp_menuMembers->clear();
-    QAction* act = 0;
-    QStringList sl;
-    QString s_tmp = "";
-    m_chatUsers.sort();
-
-    foreach( User u, m_chatUsers.toList() )
+    User u = UserManager::instance().findUser( c.privateUserId() );
+    QPixmap user_avatar = Bee::avatarForUser( u, QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ), Settings::instance().showUserPhoto() );
+    mp_pbProfile->setIcon( user_avatar );
+    if( !u.isValid() )
     {
-      QPixmap user_avatar = Bee::avatarForUser( u, QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ), Settings::instance().showUserPhoto() );
-      if( u.isLocal() )
-        s_tmp = tr( "You" );
-      else if( c.userHasReadMessages( u.id() ) || u.protocolVersion() < 63 )
-        s_tmp = u.name();
-      else
-        s_tmp = QString( "%1 (%2)" ).arg( u.name() ).arg( tr( "unread messages" ) );
-      act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), s_tmp );
-      act->setData( u.id() );
-      act->setIconVisibleInMenu( true );
-      act->setStatusTip( Bee::toolTipForUser( u, true ) );
-      act->setToolTip( Bee::toolTipForUser( u, false ) );
-      if( u.isStatusConnected() && isActiveUser( c, u ) )
-      {
-        act->setEnabled( true  );
-        if( !u.isLocal() )
-        {
-          mp_actBuzz->setEnabled( c.isPrivate() );
-          mp_pbProfile->setToolTip( QString( "%1\n(%2)" ).arg( act->toolTip() ).arg( tr( "Click here to show the user profile" ) ) );
-        }
-        connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
-      }
-      else
-        act->setEnabled( false );
-
-      if( !u.isLocal() )
-      {
-        if( !chat_has_members )
-          chat_has_members = true;
-
-        if( !isActiveUser( c, u ) )
-          sl.append( QString( "(%1 has left)" ).arg( u.name() ) );
-        else if( u.isStatusConnected() )
-          sl.append( QString( "<b>%1</b>" ).arg( u.name() ) );
-        else
-          sl.append( QString( "%1" ).arg( u.name() ) );
-
-        mp_pbProfile->setIcon( user_avatar );
-        connect( mp_pbProfile, SIGNAL( clicked() ), act, SIGNAL( triggered() ) );
-      }
-    }
-
-    if( c.isGroup() )
-    {
-      chat_users = QString( "<b>%1</b>" ).arg( m_chatName );
-      mp_pbProfile->setIcon( QIcon( ":/images/group.png" ) );
-      mp_pbProfile->disconnect();
-      connect( mp_pbProfile, SIGNAL( clicked() ), this, SLOT( showMembersMenu() ) );
-      mp_pbProfile->setToolTip( tr( "Show members" ) );
+      chat_title = tr( "Unknown" );
+      qWarning() << "Invalid user" << c.privateUserId() << "found in GuiChat::setChatTitle(...)";
     }
     else
     {
-      chat_users = sl.size() == 0 ? tr( "Nobody" ) : (c.isPrivate() ? sl.join( QString( " %1 " ).arg( tr( "and" ) ) ) : sl.join( ", " ) );
+      chat_title = QString( "<b>%1</b>" ).arg( u.name() ) ;
+      mp_pbProfile->setToolTip( QString( "%1\n(%2)" ).arg( Bee::toolTipForUser( u, false ) ).arg( tr( "Click here to show the user profile" ) ) );
+      connect( mp_pbProfile, SIGNAL( clicked() ), this, SLOT( showUserVCard() ) );
     }
   }
+  else
+  {
+    chat_title = QString( "<b>%1</b>" ).arg( c.name() );
+    mp_pbProfile->setIcon( QIcon( ":/images/group.png" ) );
+  }
 
-  mp_lTitle->setText( chat_users );
+  mp_lTitle->setText( chat_title );
 }
 
-void GuiChat::reloadChatUsers()
+void GuiChat::updateChat()
 {
   Chat c = ChatManager::instance().chat( m_chatId );
   if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat" << m_chatId << "found in GuiChat::updateChat(...)";
     return;
-  m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
-  setChatUsers();
+  }
+  setChat( c );
 }
 
-bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
+bool GuiChat::setChat( const Chat& c )
 {
-  Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return false;
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Setting chat" << chat_id << "in default chat window";
-#endif
 
   QApplication::setOverrideCursor( Qt::WaitCursor );
 
   m_chatId = c.id();
-  m_chatName = c.name();
-  m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
-  m_isFloating = is_floating;
+  setChatTitle( c );
 
   if( c.isDefault() )
   {
@@ -539,6 +439,7 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
   int num_lines = c.messages().size();
   bool max_lines_message_written = false;
   m_lastMessageUserId = 0;
+  UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
 
   foreach( ChatMessage cm, c.messages() )
   {
@@ -554,7 +455,7 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
       continue;
     }
     else
-      html_text += chatMessageToText( cm );
+      html_text += chatMessageToText( chat_members.find( cm.userId() ), cm );
   }
 
 #ifdef BEEBEEP_DEBUG
@@ -588,7 +489,6 @@ bool GuiChat::setChatId( VNumber chat_id, bool is_floating )
   mp_actClear->setDisabled( chat_is_empty );
   ensureLastMessageVisible();
   setLastMessageTimestamp( c.lastMessageTimestamp() );
-  setChatUsers();
   checkChatDisabled( c );
 
   QApplication::restoreOverrideCursor();
@@ -623,28 +523,22 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   Chat c = ChatManager::instance().chat( m_chatId );
   if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat" << m_chatId << "found in GuiChat::appendChatMessage(...)";
     return;
+  }
 
   bool show_timestamp_last_message = !cm.isFromLocalUser() && !cm.isFromSystem();
   mp_actClear->setDisabled( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) );
 
-  User u = m_chatUsers.find( cm.userId() );
+  User u = UserManager::instance().findUser( cm.userId() );
   if( !u.isValid() )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "User" << cm.userId() << "is not present in current chat" << m_chatId << "... force update";
-#endif
-    m_chatUsers = UserManager::instance().userList().fromUsersId( c.usersId() );
-    u = m_chatUsers.find( cm.userId() );
-    if( !u.isValid() )
-    {
-      qWarning() << "User" << cm.userId() << "is not present in current chat" << m_chatId << "... message is not shown";
-      return;
-    }
-    setChatUsers();
+    qWarning() << "Invalid user" << cm.userId() << "found in GuiChat::appendChatMessage(...)";
+    return;
   }
 
-  QString text_message = chatMessageToText( cm );
+  QString text_message = chatMessageToText( u, cm );
 
   if( !text_message.isEmpty() )
   {
@@ -666,9 +560,6 @@ void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
 
   if( show_timestamp_last_message )
     setLastMessageTimestamp( cm.timestamp() );
-
-  if( !cm.isFromSystem() && cm.isFromLocalUser() )
-    reloadChatUsers();
 }
 
 void GuiChat::setChatFont( const QFont& f )
@@ -887,11 +778,6 @@ void GuiChat::showUserVCard()
   emit showVCardRequest( user_id, false );
 }
 
-void GuiChat::showMembersMenu()
-{
-  mp_menuMembers->exec( QCursor::pos() );
-}
-
 void GuiChat::showLocalUserVCard()
 {
   emit showVCardRequest( ID_LOCAL_USER, false );
@@ -1070,16 +956,6 @@ void GuiChat::updateActionsOnFocusChanged()
   updateCompleterToolTip();
 }
 
-void GuiChat::setChatReadByUser( VNumber user_id )
-{
-#ifdef BEEBEEP_DEBUG
-   qDebug() << "Chat" << m_chatId << m_chatName << "is read by user" << user_id;
-#else
-   Q_UNUSED( user_id );
-#endif
-   reloadChatUsers();
-}
-
 void GuiChat::printChat()
 {
   QPrinter printer( QPrinter::HighResolution );
@@ -1155,24 +1031,4 @@ void GuiChat::openSelectedTextAsUrl()
     QUrl url = QUrl::fromUserInput( selected_text );
     emit openUrl( url );
   }
-}
-
-void GuiChat::sendBuzz()
-{
-  if( !mp_pbSend->isEnabled() )
-    return;
-
-  foreach( User u, m_chatUsers.toList() )
-  {
-    if( !u.isLocal() )
-      sendBuzzToUserRequest( u.id() );
-  }
-
-  mp_actBuzz->setDisabled( true );
-  QTimer::singleShot( 1000, this, SLOT( enableBuzz() ) );
-}
-
-void GuiChat::enableBuzz()
-{
-  mp_actBuzz->setEnabled( true );
 }

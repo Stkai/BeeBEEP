@@ -86,6 +86,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_dockMembers = new QDockWidget( tr( "Members" ), this );
   mp_dockMembers->setObjectName( "GuiMembersDock" );
   mp_members = new GuiUserList( mp_dockMembers );
+  connect( mp_members, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SIGNAL( showVCardRequest( VNumber, bool ) ) );
   mp_dockMembers->setWidget( mp_members );
   mp_dockMembers->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::RightDockWidgetArea, mp_dockMembers );
@@ -103,9 +104,8 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
-bool GuiFloatingChat::setChatId( VNumber chat_id )
+bool GuiFloatingChat::setChat( const Chat& c )
 {
-  Chat c = ChatManager::instance().chat( chat_id );
   if( c.isPrivate() )
   {
     VNumber user_id = c.privateUserId();
@@ -140,7 +140,7 @@ bool GuiFloatingChat::setChatId( VNumber chat_id )
   mp_members->clear();
   mp_dockMembers->setVisible( c.isGroup() );
 
-  if( mp_chat->setChatId( chat_id, true ) )
+  if( mp_chat->setChat( c ) )
   {
     foreach( VNumber user_id, c.usersId() )
     {
@@ -169,14 +169,13 @@ void GuiFloatingChat::updateUser( const User& u, bool is_connected )
     setMainIcon( false );
   }
 
-  mp_chat->updateUser( u );
   mp_members->setUser( u, false );
 }
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )
 {
   QMainWindow::closeEvent( e );
-  emit chatIsAboutToClose( chatId() );
+  emit chatIsAboutToClose( mp_chat->chatId() );
   e->accept();
 }
 
@@ -250,23 +249,17 @@ void GuiFloatingChat::setFocusInChat()
   mp_chat->ensureFocusInChat();
 }
 
-void GuiFloatingChat::showUserWriting( VNumber user_id, const QString& msg )
-{
-  if( mp_chat->hasUser( user_id ) )
-    statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
-}
-
 void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
 {
   if( old == 0 && isAncestorOf( now )  )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Floating chat" << chatId() << "has grab focus";
+    qDebug() << "Floating chat" << mp_chat->chatId() << "has grab focus";
 #endif
     m_chatIsVisible = true;
     m_prevActivatedState = true;
     mp_chat->updateActionsOnFocusChanged();
-    emit readAllMessages( chatId() );
+    emit readAllMessages( mp_chat->chatId() );
     mp_chat->ensureFocusInChat();
     return;
   }
@@ -274,7 +267,7 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
   if( isAncestorOf( old ) && now == 0 )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Floating chat" << chatId() << "has lost focus";
+    qDebug() << "Floating chat" << mp_chat->chatId() << "has lost focus";
 #endif
     m_chatIsVisible = false;
     m_prevActivatedState = false;
@@ -288,17 +281,17 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
     if( current_state )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Floating chat" << chatId() << "has grab focus (active)";
+      qDebug() << "Floating chat" << mp_chat->chatId() << "has grab focus (active)";
 #endif
       m_chatIsVisible = true;
       mp_chat->updateActionsOnFocusChanged();
-      emit readAllMessages( chatId() );
+      emit readAllMessages( mp_chat->chatId() );
       mp_chat->ensureFocusInChat();
     }
     else
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Floating chat" << chatId() << "has lost focus (inactive)";
+      qDebug() << "Floating chat" << mp_chat->chatId() << "has lost focus (inactive)";
 #endif
       m_chatIsVisible = false;
     }
@@ -359,4 +352,9 @@ void GuiFloatingChat::toggleVisibilityPresetMessagesPanel()
     mp_dockPresetMessageList->hide();
   else
     mp_dockPresetMessageList->show();
+}
+
+void GuiFloatingChat::setChatReadByUser( VNumber )
+{
+
 }

@@ -46,8 +46,6 @@ public:
 
   bool updateItem( const Chat& );
 
-  void setChatOpened( bool );
-
   void onTickEvent( int );
 
 };
