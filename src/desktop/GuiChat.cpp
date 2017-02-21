@@ -90,6 +90,11 @@ GuiChat::GuiChat( QWidget *parent )
   m_lastMessageUserId = 0;
   m_lastTextFound = "";
 
+  mp_menuMembers = new QMenu( tr( "Members" ), this );
+  mp_menuMembers->setStatusTip( tr( "Show the members of the chat" ) );
+  mp_menuMembers->setIcon( QIcon( ":/images/group.png" ) );
+  connect( mp_menuMembers->menuAction(), SIGNAL( triggered() ), this, SLOT( showMembersMenu() ) );
+
   mp_scFocusInChat = new QShortcut( this );
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFocusInChat, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
@@ -133,6 +138,9 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actUseReturnToSendMessage = bar->addAction( QIcon( ":/images/key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
   mp_actUseReturnToSendMessage->setCheckable( true );
   updateActionsOnFocusChanged();
+  bar->addSeparator();
+
+  bar->addAction( mp_menuMembers->menuAction() );
   bar->addSeparator();
 
   mp_actFindTextInChat = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
@@ -410,11 +418,13 @@ bool GuiChat::setChat( const Chat& c )
   {
     setChatBackgroundColor( Settings::instance().defaultChatBackgroundColor() );
     mp_actSelectBackgroundColor->setEnabled( true );
+    mp_menuMembers->setEnabled( false );
   }
   else
   {
     mp_teChat->setPalette( m_defaultChatPalette );
     mp_actSelectBackgroundColor->setEnabled( false );
+    mp_menuMembers->setEnabled( true );
   }
 
   mp_actGroupWizard->setEnabled( c.isGroup() && !UserManager::instance().hasGroupName( c.name() ) );
@@ -486,6 +496,7 @@ bool GuiChat::setChat( const Chat& c )
   qDebug() << "Elapsed time to set HTML text in chat:" << time_to_open.elapsed() << "ms";
 #endif
 
+  updateMenuMembers( c );
   mp_actClear->setDisabled( chat_is_empty );
   ensureLastMessageVisible();
   setLastMessageTimestamp( c.lastMessageTimestamp() );
@@ -1031,4 +1042,46 @@ void GuiChat::openSelectedTextAsUrl()
     QUrl url = QUrl::fromUserInput( selected_text );
     emit openUrl( url );
   }
+}
+
+void GuiChat::updateMenuMembers( const Chat& c )
+{
+  User u;
+  QString s_tmp;
+  QAction* act;
+  mp_menuMembers->clear();
+
+  foreach( VNumber user_id, c.usersId() )
+  {
+    u = UserManager::instance().findUser( user_id );
+
+    if( u.isLocal() )
+      s_tmp = tr( "You" );
+    else if( c.userHasReadMessages( u.id() ) || u.protocolVersion() < 63 )
+      s_tmp = u.name();
+    else
+      s_tmp = QString( "%1 (%2)" ).arg( u.name() ).arg( tr( "unread messages" ) );
+
+    act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), s_tmp );
+    act->setData( u.id() );
+    act->setIconVisibleInMenu( true );
+    if( u.isStatusConnected() && isActiveUser( c, u ) )
+    {
+      act->setEnabled( true  );
+      connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
+    }
+    else
+      act->setEnabled( false );
+  }
+}
+
+void GuiChat::showMembersMenu()
+{
+  updateMenuMembers( ChatManager::instance().chat( m_chatId ) );
+  mp_menuMembers->show();
+}
+
+void GuiChat::setChatReadByUser( VNumber )
+{
+  updateMenuMembers( ChatManager::instance().chat( m_chatId ) );
 }

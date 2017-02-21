@@ -32,7 +32,6 @@ GuiUserList::GuiUserList( QWidget* parent )
   : QWidget( parent )
 {
   setupUi( this );
-  m_showOnlyChatMembers = false;
 
 #ifdef Q_OS_MAC
   gridLayout->setHorizontalSpacing( -1 );
@@ -157,7 +156,7 @@ void GuiUserList::setMessages( VNumber private_chat_id, int n )
   sortUsers();
 }
 
-void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
+void GuiUserList::setUser( const User& u, bool sort_users )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
   bool item_is_created = false;
@@ -191,7 +190,7 @@ void GuiUserList::setUser( const User& u, bool sort_and_check_opened )
 
   item->updateUser( u );
 
-  if( sort_and_check_opened )
+  if( sort_users )
     sortUsers();
 }
 

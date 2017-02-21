@@ -44,6 +44,7 @@ public:
   bool setChat( const Chat& );
   inline VNumber chatId() const;
   void ensureLastMessageVisible();
+  void setChatReadByUser( VNumber );
 
   void updateShortcuts();
   void updateActionsOnFocusChanged();
@@ -117,16 +118,19 @@ private slots:
   void showFindTextInChatDialog();
   void findNextTextInChat();
   void openSelectedTextAsUrl();
+  void showMembersMenu();
 
 protected:
   void findTextInChat( const QString& );
   void updateChat();
+  void updateMenuMembers( const Chat& );
 
 private:
   VNumber m_chatId;
   VNumber m_lastMessageUserId;
 
   QMenu* mp_menuChat;
+  QMenu* mp_menuMembers;
   QAction* mp_actSendFile;
   QAction* mp_actGroupAdd;
   QAction* mp_actClear;

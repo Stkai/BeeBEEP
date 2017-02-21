@@ -269,6 +269,7 @@ private:
   QMenu* mp_menuUserStatusList;
 
   QToolBar* mp_barMain;
+  QToolBar* mp_barView;
   QToolBar* mp_barShareNetwork;
   QToolBar* mp_barShareLocal;
   QToolBar* mp_barScreenShot;
@@ -280,7 +281,8 @@ private:
   QAction* mp_actBroadcast;
   QAction* mp_actQuit;
   QAction* mp_actVCard;
-  QAction* mp_actToolBar;
+  QAction* mp_actMainToolBar;
+  QAction* mp_actViewToolBar;
   QAction* mp_actChatBar;
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
@@ -346,6 +348,7 @@ private:
   QWidget* mp_lastActiveWindow;
 
   bool m_prevActivatedState;
+
 };
 
 #endif // BEEBEEP_GUIMAIN_H

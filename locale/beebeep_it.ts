@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -960,7 +960,7 @@
     </message>
     <message>
         <source>Nobody</source>
-        <translation>Nessuno</translation>
+        <translation type="obsolete">Nessuno</translation>
     </message>
     <message>
         <source>%1 Secure Mode</source>
@@ -1082,7 +1082,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>and</source>
-        <translation>e</translation>
+        <translation type="obsolete">e</translation>
     </message>
     <message>
         <source>Last message %1</source>
@@ -1158,7 +1158,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Show members</source>
-        <translation>Mostra membri</translation>
+        <translation type="obsolete">Mostra membri</translation>
     </message>
     <message>
         <source>Change background color</source>
@@ -1266,7 +1266,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Send a buzz</source>
-        <translation>Invia un Buzz</translation>
+        <translation type="obsolete">Invia un Buzz</translation>
     </message>
     <message>
         <source>Change the name of the group or add users</source>
@@ -1299,6 +1299,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>You have left this chat</source>
         <translation>Hai abbandonato questa conversazione</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1348,7 +1352,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Detach chat</source>
-        <translation>Stacca la finestra</translation>
+        <translation type="obsolete">Stacca la finestra</translation>
     </message>
     <message>
         <source>Save geometry and state</source>
@@ -1422,6 +1426,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Edit Chat - %1</source>
         <translation>Modifica una conversazione - %1</translation>
+    </message>
+    <message>
+        <source>Chat name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please add member in the chat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1568,7 +1580,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Window&apos;s geometry and state saved</source>
-        <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
+        <translation type="obsolete">Le dimensioni e lo stato della finestra sono stati salvati</translation>
     </message>
     <message>
         <source>offline</source>
@@ -1584,11 +1596,19 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Members</source>
-        <translation>Membri</translation>
+        <translation type="obsolete">Membri</translation>
     </message>
     <message>
         <source>Show the members of the chat</source>
-        <translation>Mostra i membri della conversazione</translation>
+        <translation type="obsolete">Mostra i membri della conversazione</translation>
+    </message>
+    <message>
+        <source>Chat with all connected users</source>
+        <translation type="unfinished">Parla con tutti gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>The window geometry and state are saved.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2130,11 +2150,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Emoticons</source>
-        <translation>Faccine</translation>
+        <translation type="obsolete">Faccine</translation>
     </message>
     <message>
         <source>Add your preferred emoticon to the message</source>
-        <translation>Aggiungi la tua faccina preferita al messaggio</translation>
+        <translation type="obsolete">Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
     <message>
         <source>Status</source>
@@ -2471,11 +2491,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the chat</source>
-        <translation>Mostra la finestra delle conversazioni</translation>
+        <translation type="obsolete">Mostra la finestra delle conversazioni</translation>
     </message>
     <message>
         <source>Show the chat view</source>
-        <translation>Mostra la finestra delle conversazioni</translation>
+        <translation type="obsolete">Mostra la finestra delle conversazioni</translation>
     </message>
     <message>
         <source>Show my shared files</source>
@@ -3159,7 +3179,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of chat</source>
-        <translation>Mostra la barra delle conversazioni</translation>
+        <translation type="obsolete">Mostra la barra delle conversazioni</translation>
     </message>
     <message>
         <source>Show the toolbar</source>
@@ -3263,7 +3283,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the emoticon panel</source>
-        <translation>Mostra il pannello delle faccine</translation>
+        <translation type="obsolete">Mostra il pannello delle faccine</translation>
     </message>
     <message>
         <source>Group chat will be deleted when all members goes offline.</source>
@@ -3395,11 +3415,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show activities home page at startup</source>
-        <translation>Mostra la pagina delle attività all&apos;avvio</translation>
+        <translation type="obsolete">Mostra la pagina delle attività all&apos;avvio</translation>
     </message>
     <message>
         <source>If enabled the activities home page instead of chat page will be showed at startup</source>
-        <translation>Se abilitata la pagina delle attività sarà mostrata all&apos;avvio invece di quella di conversazione</translation>
+        <translation type="obsolete">Se abilitata la pagina delle attività sarà mostrata all&apos;avvio invece di quella di conversazione</translation>
     </message>
     <message>
         <source>Unable to add this key in the registry: permission denied.</source>
@@ -3451,11 +3471,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Always open a new floating chat window</source>
-        <translation>Apri sempre la conversazione in una nuova finestra</translation>
+        <translation type="obsolete">Apri sempre la conversazione in una nuova finestra</translation>
     </message>
     <message>
         <source>If enabled when you always open chat in a new floating window</source>
-        <translation>Se abilitata quando aprirai una conversazione questa sarà mostrata in una nuova finestra</translation>
+        <translation type="obsolete">Se abilitata quando aprirai una conversazione questa sarà mostrata in una nuova finestra</translation>
     </message>
     <message>
         <source>Network</source>
@@ -3703,11 +3723,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Preset messages</source>
-        <translation>Messaggi predefiniti</translation>
+        <translation type="obsolete">Messaggi predefiniti</translation>
     </message>
     <message>
         <source>Show the preset messages panel</source>
-        <translation>Mostra il pannello dei messaggi predefiniti</translation>
+        <translation type="obsolete">Mostra il pannello dei messaggi predefiniti</translation>
     </message>
     <message>
         <source>Use RTL mode to show text</source>
@@ -3748,6 +3768,14 @@ il file %2 (%3)?</translation>
     <message>
         <source>New message from</source>
         <translation>Nuovo messaggio da</translation>
+    </message>
+    <message>
+        <source>Show the view tool bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show in compact mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

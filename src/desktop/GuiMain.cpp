@@ -91,6 +91,9 @@ GuiMain::GuiMain( QWidget *parent )
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barView = addToolBar( tr( "Show the view tool bar" ) );
+  mp_barView->setObjectName( "GuiViewToolBar" );
+  mp_barView->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barGames = 0;
   mp_trayIcon = new GuiSystemTray( this );
 
@@ -253,6 +256,7 @@ void GuiMain::checkWindowFlagsAndShow()
   applyFlagStaysOnTop();
 
   mp_barMain->setVisible( !Settings::instance().hideMainToolbar() );
+  mp_barView->setVisible( !Settings::instance().hideMainToolbar() );
 
   if( Settings::instance().showMinimizedAtStartup() )
     QTimer::singleShot( 100, this, SLOT( showMinimized() ) );
@@ -514,17 +518,17 @@ void GuiMain::checkViewActions()
   mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().toList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
 
-  if( mp_stackedWidget->currentWidget() == mp_shareNetwork )
+  if( mp_stackedWidget->currentWidget() == mp_shareNetwork && !Settings::instance().viewInCompactMode() )
     mp_barShareNetwork->show();
   else
     mp_barShareNetwork->hide();
 
-  if( mp_stackedWidget->currentWidget() == mp_shareLocal )
+  if( mp_stackedWidget->currentWidget() == mp_shareLocal && !Settings::instance().viewInCompactMode() )
     mp_barShareLocal->show();
   else
     mp_barShareLocal->hide();
 
-  if( mp_stackedWidget->currentWidget() == mp_logView )
+  if( mp_stackedWidget->currentWidget() == mp_logView && !Settings::instance().viewInCompactMode() )
   {
     mp_barLog->show();
     mp_logView->startCheckingLog();
@@ -535,7 +539,7 @@ void GuiMain::checkViewActions()
     mp_logView->stopCheckingLog();
   }
 
-  if( mp_stackedWidget->currentWidget() == mp_screenShot )
+  if( mp_stackedWidget->currentWidget() == mp_screenShot && !Settings::instance().viewInCompactMode() )
     mp_barScreenShot->show();
   else
     mp_barScreenShot->hide();
@@ -597,9 +601,12 @@ void GuiMain::createActions()
   mp_actVCard->setStatusTip( tr( "Change your profile information like your picture or your email or phone number" ) );
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
 
-  mp_actToolBar = mp_barMain->toggleViewAction();
-  mp_actToolBar->setStatusTip( tr( "Show the main tool bar with settings" ) );
-  mp_actToolBar->setData( 99 );
+  mp_actMainToolBar = mp_barMain->toggleViewAction();
+  mp_actMainToolBar->setStatusTip( tr( "Show the main tool bar with settings" ) );
+  mp_actMainToolBar->setData( 99 );
+  mp_actViewToolBar = mp_barView->toggleViewAction();
+  mp_actViewToolBar->setStatusTip( tr( "Show the view tool bar" ) );
+  mp_actViewToolBar->setData( 99 );
 
   mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setStatusTip( tr( "Show the informations about %1" ).arg( Settings::instance().programName() ) );
@@ -1005,7 +1012,8 @@ void GuiMain::createMenus()
   mp_menuView = new QMenu( tr( "View" ), this );
   mp_menuView->addAction( QIcon( ":/images/save-window.png" ), tr( "Save main window geometry" ), this, SLOT( saveGeometryAndState() ) );
   mp_menuView->addSeparator();
-  mp_menuView->addAction( mp_actToolBar );
+  mp_menuView->addAction( mp_actMainToolBar );
+  mp_menuView->addAction( mp_actViewToolBar );
   mp_menuView->addSeparator();
   mp_actViewInCompactMode = mp_menuView->addAction( QIcon( ":/images/compact.png" ), tr( "Show in compact mode" ), this, SLOT( toggleCompactMode() ) );
   mp_actViewInCompactMode->setCheckable( true );
@@ -1163,13 +1171,13 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewGroups );
   mp_barMain->addAction( mp_actViewSavedChats );
   mp_barMain->addAction( mp_actViewFileTransfer );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actViewHome );
-  mp_barMain->addAction( mp_actViewShareLocal );
-  mp_barMain->addAction( mp_actViewShareNetwork );
-  mp_barMain->addAction( mp_actViewShareBox );
-  mp_barMain->addAction( mp_actViewScreenShot );
-  mp_barMain->addAction( mp_actViewLog );
+
+  mp_barView->addAction( mp_actViewHome );
+  mp_barView->addAction( mp_actViewShareLocal );
+  mp_barView->addAction( mp_actViewShareNetwork );
+  mp_barView->addAction( mp_actViewShareBox );
+  mp_barView->addAction( mp_actViewScreenShot );
+  mp_barView->addAction( mp_actViewLog );
 }
 
 void GuiMain::createDockWindows()
@@ -3708,7 +3716,7 @@ void GuiMain::onChatReadByUser( VNumber chat_id, VNumber user_id )
 {
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
-    fl_chat->setChatReadByUser( user_id );
+    fl_chat->guiChat()->setChatReadByUser( user_id );
 }
 
 void GuiMain::readAllMessagesInChat( VNumber chat_id )
@@ -3852,24 +3860,37 @@ void GuiMain::toggleCompactMode()
 
 void GuiMain::showInCompactMode()
 {
-  int previous_height = isVisible() ? height() : BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT;
-  raiseHomeView();
+  int prev_h = BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT;
+  if( isVisible() )
+  {
+    prev_h = height();
+    saveGeometryAndState();
+  }
+
+  mp_barView->hide();
   mp_stackedWidget->hide();
   if( !mp_dockUserList->isVisible() )
     mp_dockUserList->show();
   if( !mp_dockUserList->isVisible() )
     mp_dockChatList->show();
-  resize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, previous_height );
-  mp_barMain->repaint();
-  repaint();
+  resize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, prev_h );
+  checkViewActions();
 }
 
 void GuiMain::restoreFromCompactMode()
 {
   mp_stackedWidget->show();
-  resize( BEE_MAIN_WINDOW_BASE_SIZE_WIDTH, BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT );
-  mp_barMain->repaint();
-  repaint();
+  mp_barView->show();
+
+  if( !Settings::instance().guiGeometry().isEmpty() )
+  {
+    restoreGeometry( Settings::instance().guiGeometry() );
+    if( !Settings::instance().guiState().isEmpty() )
+      restoreState( Settings::instance().guiState() );
+  }
+  else
+    resize( BEE_MAIN_WINDOW_BASE_SIZE_WIDTH, BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT );
+  checkViewActions();
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

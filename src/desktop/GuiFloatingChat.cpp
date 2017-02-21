@@ -83,17 +83,6 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
   mp_dockEmoticons->hide();
 
-  mp_dockMembers = new QDockWidget( tr( "Members" ), this );
-  mp_dockMembers->setObjectName( "GuiMembersDock" );
-  mp_members = new GuiUserList( mp_dockMembers );
-  connect( mp_members, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SIGNAL( showVCardRequest( VNumber, bool ) ) );
-  mp_dockMembers->setWidget( mp_members );
-  mp_dockMembers->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, mp_dockMembers );
-  QAction* mp_actViewMembers = mp_dockMembers->toggleViewAction();
-  mp_actViewMembers->setIcon( QIcon( ":/images/group.png" ) );
-  mp_actViewMembers->setText( tr( "Show the members of the chat" ) );
-
   setCentralWidget( mp_chat );
   statusBar();
   m_chatIsVisible = true;
@@ -132,27 +121,14 @@ bool GuiFloatingChat::setChat( const Chat& c )
       setWindowTitle( c.name() );
 
     if( c.isGroup() )
+    {
       m_mainWindowIcon = QIcon( ":/images/group.png" );
+    }
   }
 
   setMainIcon( false );
 
-  mp_members->clear();
-  mp_dockMembers->setVisible( c.isGroup() );
-
-  if( mp_chat->setChat( c ) )
-  {
-    foreach( VNumber user_id, c.usersId() )
-    {
-      User u = UserManager::instance().findUser( user_id );
-      if( !u.isLocal() )
-        mp_members->setUser( u, false );
-    }
-
-    return true;
-  }
-
-  return false;
+  return mp_chat->setChat( c );
 }
 
 void GuiFloatingChat::updateUser( const User& u, bool is_connected )
@@ -168,8 +144,6 @@ void GuiFloatingChat::updateUser( const User& u, bool is_connected )
     m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
     setMainIcon( false );
   }
-
-  mp_members->setUser( u, false );
 }
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )
@@ -307,7 +281,7 @@ void GuiFloatingChat::saveGeometryAndState()
     QSplitter* chat_splitter = mp_chat->chatSplitter();
     Settings::instance().setFloatingChatSplitterState( chat_splitter->saveState() );
     Settings::instance().save();
-    statusBar()->showMessage( tr( "Window's geometry and state saved" ), 3000 );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "The window geometry and state are saved." ) );
   }
   else
     qWarning() << "Unable to save floating chat geometry and state (window is not visible)";
@@ -352,9 +326,4 @@ void GuiFloatingChat::toggleVisibilityPresetMessagesPanel()
     mp_dockPresetMessageList->hide();
   else
     mp_dockPresetMessageList->show();
-}
-
-void GuiFloatingChat::setChatReadByUser( VNumber )
-{
-
 }

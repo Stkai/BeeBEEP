@@ -34,11 +34,11 @@ class GuiUserList : public QWidget, private Ui::GuiUserListWidget
   Q_OBJECT
 
 public:
-  GuiUserList( bool, QWidget* parent = 0 );
+  GuiUserList( QWidget* parent = 0 );
 
   virtual QSize sizeHint() const;
 
-  void setUser( const User&, bool sort_and_check_opened );
+  void setUser( const User&, bool );
   void removeUser( const User& );
   void setUnreadMessages( VNumber private_chat_id, int );
   void setMessages( VNumber private_chat_id, int );
@@ -75,6 +75,7 @@ private:
   QMenu *mp_menu;
 
   bool m_blockShowChatRequest;
+  bool m_showOnlyChatMembers;
 
 };
 

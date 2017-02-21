@@ -27,7 +27,6 @@
 #include "GuiChat.h"
 class GuiEmoticons;
 class GuiPresetMessageList;
-class GuiUserList;
 
 
 class GuiFloatingChat : public QMainWindow
@@ -47,7 +46,6 @@ public:
   void setMainIcon( bool with_message );
 
   void updateUser( const User&, bool );
-  void setChatReadByUser( VNumber );
 
 public slots:
   void updateEmoticon();
@@ -75,8 +73,6 @@ private:
   QDockWidget* mp_dockPresetMessageList;
   GuiEmoticons* mp_emoticonsWidget;
   GuiPresetMessageList* mp_presetMessageListWidget;
-  QDockWidget* mp_dockMembers;
-  GuiUserList* mp_members;
 
   bool m_chatIsVisible;
   bool m_prevActivatedState;
