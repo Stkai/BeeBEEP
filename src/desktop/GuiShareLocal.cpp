@@ -213,7 +213,7 @@ void GuiShareLocal::loadFileInfoInList()
     }
   }
 
-  setActionsEnabled( true );
+  setActionsEnabled( false );
   showStats( file_count, total_file_size );
   if( !m_queue.isEmpty() )
     QTimer::singleShot( 300, this, SLOT( processNextItemInQueue() ) );
@@ -221,6 +221,7 @@ void GuiShareLocal::loadFileInfoInList()
 
 void GuiShareLocal::processNextItemInQueue()
 {
+  setCursor( Qt::WaitCursor );
   m_fileInfoList.setUpdatesEnabled( false );
 
   for( int i = 0; i < 100; i++ )
@@ -233,11 +234,12 @@ void GuiShareLocal::processNextItemInQueue()
   }
 
   m_fileInfoList.setUpdatesEnabled( true );
+  setCursor( Qt::ArrowCursor );
 
   if( m_queue.isEmpty() )
     setActionsEnabled( true );
   else
-    QTimer::singleShot( 300, this, SLOT( processNextItemInQueue() ) );
+    QTimer::singleShot( 1000, this, SLOT( processNextItemInQueue() ) );
 }
 
 void GuiShareLocal::addSharePath( const QString& sp )
