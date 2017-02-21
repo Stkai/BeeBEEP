@@ -456,5 +456,9 @@ void GuiShareNetwork::updateUser( const User& u )
     }
     else
       mp_comboUsers->setItemText( user_index, u.name() );
+
+    GuiFileInfoItem* user_item = m_fileInfoList.userItem( u.id() );
+    if( user_item )
+      user_item->initUser( u.id(), u.name() );
   }
 }

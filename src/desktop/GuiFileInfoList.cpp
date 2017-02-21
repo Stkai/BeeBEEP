@@ -29,7 +29,7 @@
 
 
 GuiFileInfoList::GuiFileInfoList()
- : QObject( 0 ), mp_tree( 0 ), m_selectedFileInfoList(), m_lastFolderItem( 0 ), m_lastUserItem( 0 ), m_isLocal( true )
+ : QObject( 0 ), mp_tree( 0 ), m_selectedFileInfoList(), m_isLocal( true )
 {
 }
 
@@ -67,8 +67,6 @@ void GuiFileInfoList::clearTree()
   if( mp_tree->topLevelItemCount() > 0 )
     mp_tree->clear();
   m_selectedFileInfoList.clear();
-  m_lastFolderItem = 0;
-  m_lastUserItem = 0;
 }
 
 void GuiFileInfoList::clearTreeSelection()
@@ -79,10 +77,6 @@ void GuiFileInfoList::clearTreeSelection()
 
 GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
 {
-  if( m_lastUserItem && m_lastUserItem->userId() == user_id )
-    return m_lastUserItem;
-
-  m_lastFolderItem = 0;
   GuiFileInfoItem* item;
   QTreeWidgetItemIterator it( mp_tree );
   while( *it )
@@ -90,7 +84,6 @@ GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
     item = (GuiFileInfoItem*)(*it);
     if( item->isObjectUser() && item->userId() == user_id )
     {
-      m_lastUserItem = item;
       return item;
     }
     ++it;
@@ -102,18 +95,11 @@ GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
 {
   GuiFileInfoItem* item = new GuiFileInfoItem( mp_tree );
   item->initUser( u.id(), u.name() );
-  m_lastUserItem = item;
-  m_lastFolderItem = 0;
   return item;
 }
 
 GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& folder_name )
 {
-  if( m_lastFolderItem && m_lastFolderItem->userId() == user_id && m_lastFolderItem->folder() == folder_name )
-  {
-    return m_lastFolderItem;
-  }
-
   GuiFileInfoItem* item;
   QTreeWidgetItemIterator it( mp_tree );
   while( *it )
@@ -121,7 +107,6 @@ GuiFileInfoItem* GuiFileInfoList::folderItem( VNumber user_id, const QString& fo
     item = (GuiFileInfoItem*)(*it);
     if( item->isObjectFolder() && item->userId() == user_id && item->folder() == folder_name )
     {
-      m_lastFolderItem = item;
       return item;
     }
     ++it;
@@ -139,7 +124,6 @@ GuiFileInfoItem* GuiFileInfoList::createSubFolderItem( GuiFileInfoItem* parent_i
     item = new GuiFileInfoItem( mp_tree );
 
   item->initFolder( user_id, subfolder_name, subfolder_path );
-  m_lastFolderItem = item;
 
   return item;
 }
@@ -174,8 +158,6 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
   }
   else
     item = parent_item;
-
-  m_lastFolderItem = item;
 
   return item;
 }
