@@ -135,6 +135,7 @@ void GuiShareNetwork::enableScanButton()
 void GuiShareNetwork::scanNetwork()
 {
   resetComboUsers();
+  m_queue.clear();
   m_fileInfoList.clearTree();
   mp_actScan->setEnabled( false );
   mp_actReload->setEnabled( true );
@@ -274,6 +275,7 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 
 void GuiShareNetwork::updateList()
 {
+  m_queue.clear();
   m_fileInfoList.clearTree();
   foreach( User u, UserManager::instance().userList().toList() )
     loadShares( u );
@@ -445,7 +447,10 @@ void GuiShareNetwork::updateUser( const User& u )
     if( !u.isStatusConnected() )
     {
       if( mp_comboUsers->currentIndex() == user_index )
+      {
+        m_queue.clear();
         m_fileInfoList.clearTree();
+      }
 
       mp_comboUsers->removeItem( user_index );
     }

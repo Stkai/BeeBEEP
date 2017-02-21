@@ -1166,6 +1166,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroup );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewInCompactMode );
+  mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewUsers );
   mp_barMain->addAction( mp_actViewChats );
   mp_barMain->addAction( mp_actViewGroups );

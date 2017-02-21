@@ -82,6 +82,7 @@ GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
   if( m_lastUserItem && m_lastUserItem->userId() == user_id )
     return m_lastUserItem;
 
+  m_lastFolderItem = 0;
   GuiFileInfoItem* item;
   QTreeWidgetItemIterator it( mp_tree );
   while( *it )
@@ -102,6 +103,7 @@ GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
   GuiFileInfoItem* item = new GuiFileInfoItem( mp_tree );
   item->initUser( u.id(), u.name() );
   m_lastUserItem = item;
+  m_lastFolderItem = 0;
   return item;
 }
 
