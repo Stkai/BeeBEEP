@@ -91,6 +91,9 @@ GuiMain::GuiMain( QWidget *parent )
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barPanel = addToolBar( tr( "Show the panel tool bar" ) );
+  mp_barPanel->setObjectName( "GuiPanelToolBar" );
+  mp_barPanel->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barView = addToolBar( tr( "Show the view tool bar" ) );
   mp_barView->setObjectName( "GuiViewToolBar" );
   mp_barView->setIconSize( Settings::instance().mainBarIconSize() );
@@ -256,6 +259,7 @@ void GuiMain::checkWindowFlagsAndShow()
   applyFlagStaysOnTop();
 
   mp_barMain->setVisible( !Settings::instance().hideMainToolbar() );
+  mp_barPanel->setVisible( !Settings::instance().hideMainToolbar() );
   mp_barView->setVisible( !Settings::instance().hideMainToolbar() );
 
   if( Settings::instance().showMinimizedAtStartup() )
@@ -266,15 +270,16 @@ void GuiMain::checkWindowFlagsAndShow()
     showInCompactMode();
 }
 
-void GuiMain::refreshTitle( const User& )
+void GuiMain::updateWindowTitle()
 {
   QString window_title;
-
-  window_title = QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName(),
+  if( Settings::instance().viewInCompactMode() )
+    window_title = Settings::instance().localUser().name();
+  else
+    window_title = QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName(),
                      Settings::instance().localUser().name(),
                      mp_core->isConnected() ?
                      Bee::userStatusToString( Settings::instance().localUser().status() ) : tr( "offline" ) );
-
   setWindowTitle( window_title );
 }
 
@@ -500,8 +505,6 @@ void GuiMain::initGuiItems()
   updateStatusIcon();
   updateNewMessageAction();
   checkViewActions();
-
-  refreshTitle( Settings::instance().localUser() );
 }
 
 void GuiMain::checkViewActions()
@@ -551,6 +554,8 @@ void GuiMain::checkViewActions()
     foreach( GuiFloatingChat* fl_chat, m_floatingChats )
       fl_chat->guiChat()->updateActions( is_connected, connected_users );
   }
+
+  updateWindowTitle();
 }
 
 void GuiMain::showAbout()
@@ -604,6 +609,9 @@ void GuiMain::createActions()
   mp_actMainToolBar = mp_barMain->toggleViewAction();
   mp_actMainToolBar->setStatusTip( tr( "Show the main tool bar with settings" ) );
   mp_actMainToolBar->setData( 99 );
+  mp_actPanelToolBar = mp_barPanel->toggleViewAction();
+  mp_actPanelToolBar->setStatusTip( tr( "Show the panel tool bar" ) );
+  mp_actPanelToolBar->setData( 99 );
   mp_actViewToolBar = mp_barView->toggleViewAction();
   mp_actViewToolBar->setStatusTip( tr( "Show the view tool bar" ) );
   mp_actViewToolBar->setData( 99 );
@@ -1013,6 +1021,7 @@ void GuiMain::createMenus()
   mp_menuView->addAction( QIcon( ":/images/save-window.png" ), tr( "Save main window geometry" ), this, SLOT( saveGeometryAndState() ) );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actMainToolBar );
+  mp_menuView->addAction( mp_actPanelToolBar );
   mp_menuView->addAction( mp_actViewToolBar );
   mp_menuView->addSeparator();
   mp_actViewInCompactMode = mp_menuView->addAction( QIcon( ":/images/compact.png" ), tr( "Show in compact mode" ), this, SLOT( toggleCompactMode() ) );
@@ -1145,9 +1154,9 @@ void GuiMain::createToolAndMenuBars()
   menuBar()->addMenu( mp_menuPlugins );
   menuBar()->addMenu( mp_menuInfo );
 
-  QLabel *label_version = new QLabel( this );
-  label_version->setTextFormat( Qt::RichText );
-  label_version->setAlignment( Qt::AlignCenter );
+  mp_lMainBarVersion = new QLabel( this );
+  mp_lMainBarVersion->setTextFormat( Qt::RichText );
+  mp_lMainBarVersion->setAlignment( Qt::AlignCenter );
   QString label_version_text = QString( "&nbsp;<b>v %1</b> %2&nbsp;" )
 #ifdef BEEBEEP_DEBUG
                             .arg( Settings::instance().version( true, true ) )
@@ -1155,8 +1164,8 @@ void GuiMain::createToolAndMenuBars()
                             .arg( Settings::instance().version( true, false ) )
 #endif
                             .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
-  label_version->setText( label_version_text );
-  menuBar()->setCornerWidget( label_version );
+  mp_lMainBarVersion->setText( label_version_text );
+  menuBar()->setCornerWidget( mp_lMainBarVersion );
 
   mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_menuStatus->menuAction() );
@@ -1166,19 +1175,20 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroup );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewInCompactMode );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actViewUsers );
-  mp_barMain->addAction( mp_actViewChats );
-  mp_barMain->addAction( mp_actViewGroups );
-  mp_barMain->addAction( mp_actViewSavedChats );
-  mp_barMain->addAction( mp_actViewFileTransfer );
-
+  addToolBarBreak( Qt::RightToolBarArea );
+  mp_barPanel->addAction( mp_actViewUsers );
+  mp_barPanel->addAction( mp_actViewChats );
+  mp_barPanel->addAction( mp_actViewGroups );
+  mp_barPanel->addAction( mp_actViewSavedChats );
+  mp_barPanel->addAction( mp_actViewFileTransfer );
+  addToolBarBreak( Qt::RightToolBarArea );
   mp_barView->addAction( mp_actViewHome );
   mp_barView->addAction( mp_actViewShareLocal );
   mp_barView->addAction( mp_actViewShareNetwork );
   mp_barView->addAction( mp_actViewShareBox );
   mp_barView->addAction( mp_actViewScreenShot );
   mp_barView->addAction( mp_actViewLog );
+  addToolBarBreak( Qt::RightToolBarArea );
 }
 
 void GuiMain::createDockWindows()
@@ -1353,20 +1363,6 @@ void GuiMain::startExternalApplicationFromActionData()
 
 void GuiMain::createPluginWindows()
 {
-  QString copy_mastro_path = "";
-
-#ifdef Q_OS_WIN
-  copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
-#endif
-
-  if( !copy_mastro_path.isEmpty() && QFile::exists( copy_mastro_path ) )
-  {
-    qDebug() << "CopyMastro is found:" << qPrintable( copy_mastro_path );
-    QAction* act = mp_barMain->addAction( QIcon( ":/images/CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
-    act->setToolTip( tr( "Start the new application to copy file and folders by Marco Mastroddi" ) );
-    act->setData( copy_mastro_path );
-  }
-
   if( PluginManager::instance().games().size() <= 0 )
     return;
 
@@ -1386,7 +1382,7 @@ void GuiMain::onUserChanged( const User& u )
     fl_chat->updateUser( u, mp_core->isConnected() );
   checkViewActions();
   if( u.isLocal() )
-    refreshTitle( u );
+    updateWindowTitle();
 }
 
 void GuiMain::refreshUserList()
@@ -1468,8 +1464,12 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 14:
-    Settings::instance().setStayOnTop( act->isChecked() );
-    applyFlagStaysOnTop();
+    {
+      Settings::instance().setStayOnTop( act->isChecked() );
+      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        fl_chat->applyFlagStaysOnTop();
+      applyFlagStaysOnTop();
+    }
     break;
   case 15:
     Settings::instance().setRaiseOnNewMessageArrived( act->isChecked() );
@@ -1897,7 +1897,7 @@ void GuiMain::updateStatusIcon()
   QAction* act = mp_menuStatus->menuAction();
   act->setToolTip( tip );
   act->setText( Bee::capitalizeFirstLetter( Bee::userStatusToString( status_type ), true ) );
-  refreshTitle( Settings::instance().localUser() );
+  updateWindowTitle();
 }
 
 void GuiMain::changeStatusDescription()
@@ -2287,9 +2287,7 @@ void GuiMain::showChat( VNumber chat_id )
   else
     fl_chat->raiseOnTop();
 
-  readAllMessagesInChat( chat_id );
   fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
-  fl_chat->setFocusInChat();
 }
 
 void GuiMain::changeVCard()
@@ -2372,7 +2370,18 @@ void GuiMain::updadePluginMenu()
     }
   }
 
-  if( PluginManager::instance().games().size() > 0 )
+  bool copymastro_available = false;
+#ifdef Q_OS_WIN
+  QString copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
+  copymastro_available = QFile::exists( copy_mastro_path );
+  if( !copymastro_available )
+  {
+    copy_mastro_path = QString( "C:\\Program Files (x86)\\CopyMastro\\CopyMastro.exe" );
+    copymastro_available = QFile::exists( copy_mastro_path );
+  }
+#endif
+
+  if( PluginManager::instance().games().size() > 0 || copymastro_available )
   {
     mp_menuPlugins->addSeparator();
 
@@ -2385,19 +2394,31 @@ void GuiMain::updadePluginMenu()
     else
       mp_barGames->clear();
 
-    QMenu* game_menu;
-    int game_widget_id;
-
-    foreach( GameInterface* gi, PluginManager::instance().games() )
+    if( copymastro_available )
     {
-      game_menu = gameMenu( gi );
-      game_menu->setEnabled( gi->isEnabled() );
-      gi->mainWindow()->setEnabled( gi->isEnabled() );
-      mp_menuPlugins->addMenu( game_menu );
+      qDebug() << "CopyMastro is found:" << qPrintable( copy_mastro_path );
+      QAction* act = mp_barGames->addAction( QIcon( ":/images/CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
+      act->setToolTip( tr( "Start the new application to copy file and folders by Marco Mastroddi" ) );
+      act->setData( copy_mastro_path );
+      mp_menuPlugins->addAction( act );
+    }
 
-      act = mp_barGames->addAction( gi->icon(), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
-      game_widget_id = mp_stackedWidget->indexOf( gi->mainWindow() ); // ensured by gameMenu function
-      act->setData( game_widget_id );
+    if( PluginManager::instance().games().size() > 0 )
+    {
+      QMenu* game_menu;
+      int game_widget_id;
+
+      foreach( GameInterface* gi, PluginManager::instance().games() )
+      {
+        game_menu = gameMenu( gi );
+        game_menu->setEnabled( gi->isEnabled() );
+        gi->mainWindow()->setEnabled( gi->isEnabled() );
+        mp_menuPlugins->addMenu( game_menu );
+
+        act = mp_barGames->addAction( gi->icon(), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
+        game_widget_id = mp_stackedWidget->indexOf( gi->mainWindow() ); // ensured by gameMenu function
+        act->setData( game_widget_id );
+      }
     }
   }
 }
@@ -2431,7 +2452,7 @@ void GuiMain::showWizard()
   gw.show();
   gw.setFixedSize( gw.size() );
   if( gw.exec() == QDialog::Accepted )
-    refreshTitle( Settings::instance().localUser() );
+    updateWindowTitle();
 }
 
 void GuiMain::hideToTrayIcon()
@@ -2782,8 +2803,8 @@ void GuiMain::raiseOnTop()
     show();
 
 #ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
   applyFlagStaysOnTop();
 #else
   raise();
@@ -3868,7 +3889,10 @@ void GuiMain::showInCompactMode()
     saveGeometryAndState();
   }
 
+  mp_lMainBarVersion->hide();
   mp_barView->hide();
+  if( mp_barGames )
+    mp_barGames->hide();
   mp_stackedWidget->hide();
   if( !mp_dockUserList->isVisible() )
     mp_dockUserList->show();
@@ -3882,6 +3906,9 @@ void GuiMain::restoreFromCompactMode()
 {
   mp_stackedWidget->show();
   mp_barView->show();
+  if( mp_barGames )
+    mp_barGames->show();
+  mp_lMainBarVersion->show();
 
   if( !Settings::instance().guiGeometry().isEmpty() )
   {
@@ -3892,6 +3919,7 @@ void GuiMain::restoreFromCompactMode()
   else
     resize( BEE_MAIN_WINDOW_BASE_SIZE_WIDTH, BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT );
   checkViewActions();
+
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

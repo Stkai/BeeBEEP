@@ -47,6 +47,8 @@ public:
 
   void updateUser( const User&, bool );
 
+  void applyFlagStaysOnTop();
+
 public slots:
   void updateEmoticon();
 
@@ -58,7 +60,6 @@ signals:
 protected:
   void closeEvent( QCloseEvent* );
   void keyPressEvent( QKeyEvent* );
-  void applyFlagStaysOnTop();
 
 private slots:
   void onApplicationFocusChanged( QWidget*, QWidget* );

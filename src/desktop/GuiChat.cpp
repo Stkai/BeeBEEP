@@ -1078,7 +1078,7 @@ void GuiChat::updateMenuMembers( const Chat& c )
 void GuiChat::showMembersMenu()
 {
   updateMenuMembers( ChatManager::instance().chat( m_chatId ) );
-  mp_menuMembers->show();
+  mp_menuMembers->exec( QCursor::pos() );
 }
 
 void GuiChat::setChatReadByUser( VNumber )

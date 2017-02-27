@@ -248,6 +248,7 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
     emit chatSelected( user_item->chatId() );
   else
     emit userSelected( user_item->userId() );
+  mp_twUsers->clearSelection();
 }
 
 void GuiUserList::setDefaultChatConnected( GuiUserItem* item, bool yes )

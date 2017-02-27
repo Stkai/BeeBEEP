@@ -211,7 +211,7 @@ private:
   void createStackedWidgets();
   void createPluginWindows();
   void refreshUserList();
-  void refreshTitle( const User& );
+  void updateWindowTitle();
   void initGuiItems();
   void updadePluginMenu();
   void updateStatusIcon();
@@ -269,6 +269,7 @@ private:
   QMenu* mp_menuUserStatusList;
 
   QToolBar* mp_barMain;
+  QToolBar* mp_barPanel;
   QToolBar* mp_barView;
   QToolBar* mp_barShareNetwork;
   QToolBar* mp_barShareLocal;
@@ -282,6 +283,7 @@ private:
   QAction* mp_actQuit;
   QAction* mp_actVCard;
   QAction* mp_actMainToolBar;
+  QAction* mp_actPanelToolBar;
   QAction* mp_actViewToolBar;
   QAction* mp_actChatBar;
   QAction* mp_actAbout;
@@ -348,6 +350,7 @@ private:
   QWidget* mp_lastActiveWindow;
 
   bool m_prevActivatedState;
+  QLabel *mp_lMainBarVersion;
 
 };
 

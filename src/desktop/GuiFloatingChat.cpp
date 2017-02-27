@@ -121,9 +121,9 @@ bool GuiFloatingChat::setChat( const Chat& c )
       setWindowTitle( c.name() );
 
     if( c.isGroup() )
-    {
       m_mainWindowIcon = QIcon( ":/images/group.png" );
-    }
+    else
+      m_mainWindowIcon = QIcon( ":/images/default-chat-online.png" );
   }
 
   setMainIcon( false );
@@ -204,8 +204,8 @@ void GuiFloatingChat::raiseOnTop()
     show();
 
 #ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW );
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
   applyFlagStaysOnTop();
 #else
   raise();

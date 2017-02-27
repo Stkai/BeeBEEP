@@ -256,8 +256,8 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
-        <property name="displayFormat">
-         <string notr="true">dd/MM/yyyy</string>
+        <property name="showGroupSeparator" stdset="0">
+         <bool>false</bool>
         </property>
         <property name="calendarPopup">
          <bool>true</bool>
