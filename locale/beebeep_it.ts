@@ -1302,7 +1302,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Sconosciuto</translation>
     </message>
 </context>
 <context>
@@ -1429,11 +1429,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Chat name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome della conversazione</translation>
     </message>
     <message>
         <source>Please add member in the chat:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi membri nella conversazione</translation>
     </message>
 </context>
 <context>
@@ -1604,11 +1604,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Chat with all connected users</source>
-        <translation type="unfinished">Parla con tutti gli utenti connessi</translation>
+        <translation>Parla con tutti gli utenti connessi</translation>
     </message>
     <message>
         <source>The window geometry and state are saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le dimensioni e lo stato della finestra sono stati salvati.</translation>
     </message>
 </context>
 <context>
@@ -3771,11 +3771,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the view tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la barra delle viste</translation>
     </message>
     <message>
         <source>Show in compact mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra in modalità compatta</translation>
+    </message>
+    <message>
+        <source>Show the panel tool bar</source>
+        <translation>Mostra la barra dei pannelli</translation>
+    </message>
+    <message>
+        <source>Use native file dialogs</source>
+        <translation>Usa le finestre di selezione file native</translation>
     </message>
 </context>
 <context>

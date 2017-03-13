@@ -43,7 +43,7 @@ void Updater::checkForNewVersion()
 
   http_downloader->addUrl( url );
 
-  QTimer::singleShot( 0, http_downloader, SLOT( startDownload() ) );
+  QMetaObject::invokeMethod( http_downloader, "startDownload", Qt::QueuedConnection );
 }
 
 void Updater::onDownloadCompleted( const QString& file_path )

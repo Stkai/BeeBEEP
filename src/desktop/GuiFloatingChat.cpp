@@ -291,7 +291,7 @@ void GuiFloatingChat::keyPressEvent( QKeyEvent* e )
 {
   if( e->key() == Qt::Key_Escape )
   {
-    QTimer::singleShot( 0, this, SLOT( showMinimized() ) );
+    QMetaObject::invokeMethod( this, "showMinimized", Qt::QueuedConnection );
     e->accept();
     return;
   }
@@ -309,7 +309,7 @@ void GuiFloatingChat::setMainIcon( bool with_message )
 
 void GuiFloatingChat::updateEmoticon()
 {
-  QTimer::singleShot( 0, mp_emoticonsWidget, SLOT( updateEmoticons() ) );
+  QMetaObject::invokeMethod( mp_emoticonsWidget, "updateEmoticons", Qt::QueuedConnection );
 }
 
 void GuiFloatingChat::toggleVisibilityEmoticonPanel()

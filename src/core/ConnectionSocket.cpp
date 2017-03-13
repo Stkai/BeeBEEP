@@ -229,7 +229,7 @@ void ConnectionSocket::readBlock()
     emit dataReceived( decrypted_byte_array );
 
   if( !m_isAborted && bytesAvailable() )
-    QTimer::singleShot( 0, this, SLOT( readBlock() ) );
+    QMetaObject::invokeMethod( this, "readBlock", Qt::QueuedConnection );
 }
 
 void ConnectionSocket::flushAll()
@@ -319,7 +319,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   }
   else
   {
-    qWarning() << "ConnectionSocket has an I/O error";
+    qWarning() << "ConnectionSocket to"  << qPrintable( m_networkAddress.toString() ) << "has an I/O error";
     return false;
   }
 }
@@ -504,7 +504,7 @@ void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
 #ifdef BEEBEEP_DEBUG
     qDebug() << (int)bytesAvailable() << "bytes available in tick interval and read socket is forced for" << qPrintable( m_networkAddress.toString() );
 #endif
-    QTimer::singleShot( 0, this, SLOT( readBlock() ) );
+    QMetaObject::invokeMethod( this, "readBlock", Qt::QueuedConnection );
     return;
   }
 

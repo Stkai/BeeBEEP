@@ -134,7 +134,7 @@ void HttpDownloader::onReplyFinished( QNetworkReply *reply )
 
   reply->deleteLater();
 
-  QTimer::singleShot( 0, this, SLOT( startDownload() ) );
+  QMetaObject::invokeMethod( this, "startDownload", Qt::QueuedConnection );
 }
 
 bool HttpDownloader::saveToDisk( const QString& file_path, QIODevice *io_device )

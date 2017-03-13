@@ -340,7 +340,7 @@ void Core::sendBroadcastMessage()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
                                                                             Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
-    QTimer::singleShot( 0, mp_broadcaster, SLOT( sendBroadcast() ) );
+    QMetaObject::invokeMethod( mp_broadcaster, "sendBroadcast", Qt::QueuedConnection );
   }
   else
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -393,7 +393,7 @@ void Core::checkNetworkInterface()
       qDebug() << "Main network interface is not available. Searching...";
 #endif
       if( NetworkManager::instance().searchLocalHostAddress() )
-        QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );
+        QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
       else
         qWarning() << "Network iterface not found. Please check your connection";
     }
@@ -431,7 +431,7 @@ void Core::checkNewVersion()
   qDebug() << "Checking for new version...";
   Updater* updater = new Updater( this );
   connect( updater, SIGNAL( jobCompleted() ), this, SLOT( onUpdaterJobCompleted() ) );
-  QTimer::singleShot( 0, updater, SLOT( checkForNewVersion() ) );
+  QMetaObject::invokeMethod( updater, "checkForNewVersion", Qt::QueuedConnection );
 }
 
 void Core::onUpdaterJobCompleted()
@@ -478,7 +478,7 @@ void Core::postUsageStatistics()
   qDebug() << qPrintable( ga->objectName() ) << "created";
 #endif
   connect( ga, SIGNAL( jobFinished() ), this, SLOT( onPostUsageStatisticsJobCompleted() ) );
-  QTimer::singleShot( 0, ga, SLOT( doPost() ) );
+  QMetaObject::invokeMethod( ga, "doPost", Qt::QueuedConnection );
 }
 
 void Core::onPostUsageStatisticsJobCompleted()

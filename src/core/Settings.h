@@ -423,6 +423,7 @@ public:
   inline const QDateTime& lastSave() const;
 
   inline bool useNativeDialogs() const;
+  inline void setUseNativeDialogs( bool );
 
   inline bool useLowDelayOptionOnSocket() const;
 
@@ -905,6 +906,7 @@ inline void Settings::setChatUseYourNameInsteadOfYou( bool new_value ) { m_chatU
 inline bool Settings::chatUseYourNameInsteadOfYou() const { return m_chatUseYourNameInsteadOfYou; }
 inline void Settings::setChatClearAllReadMessages( bool new_value ) { m_chatClearAllReadMessages = new_value; }
 inline bool Settings::chatClearAllReadMessages() const { return m_chatClearAllReadMessages; }
+inline void Settings::setUseNativeDialogs( bool new_value ) { m_useNativeDialogs = new_value; }
 inline bool Settings::useNativeDialogs() const { return m_useNativeDialogs; }
 inline const QString& Settings::applicationUuid() const { return m_applicationUuid; }
 inline bool Settings::usePreviewFileDialog() const { return m_usePreviewFileDialog; }

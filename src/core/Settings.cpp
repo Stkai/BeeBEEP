@@ -45,14 +45,13 @@ Settings::Settings()
   m_resetGeometryAtStartup = false;
   m_saveDataInDocumentsFolder = false;
 
+  // In windows native dialogs are application modal and the connection goes in timeout...
+  // In MacOSX instead it seems to work... I have changed the connection timeout...
+  m_useNativeDialogs = true;
 #ifdef Q_OS_MAC
   m_useNativeEmoticons = true;
-  m_useNativeDialogs = true;
 #else
   m_useNativeEmoticons = false;
-  // In windows native dialogs are application modal and the connection goes in timeout...
-  // In MacOSX instead it seems to work
-  m_useNativeDialogs = false;
 #endif
 
 #ifdef MAKE_BEEBEEP_PORTABLE
@@ -891,6 +890,7 @@ void Settings::load()
     m_mainBarIconSize = QSize( 24, 24 );
     m_avatarIconSize = QSize( 32, 32 );
     m_previewFileDialogGeometry = "";
+    m_viewInCompactMode = false;
   }
   else
   {
@@ -902,6 +902,7 @@ void Settings::load()
     m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
     m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
     m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
+    m_viewInCompactMode = sets->value( "ViewInCompactMode", m_viewInCompactMode ).toBool();
   }
 
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
@@ -947,8 +948,8 @@ void Settings::load()
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
   m_showPresetMessages = sets->value( "ShowPresetMessages", false ).toBool();
-  m_emoticonSizeInEdit = qMax( m_emoticonSizeInEdit, (int)sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
-  m_emoticonSizeInChat = qMax( m_emoticonSizeInChat, (int)sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
+  m_emoticonSizeInEdit = qMax( 12, (int)sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
+  m_emoticonSizeInChat = qMax( 12, (int)sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
   m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
   m_emoticonInRecentMenu = sets->value( "EmoticonInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
@@ -959,7 +960,7 @@ void Settings::load()
   m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
-  m_useNativeDialogs = sets->value( "UseNativeDialogs", m_useNativeDialogs ).toBool();
+  m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
   m_homeShowMessageTimestamp = sets->value( "ShowHomeTimestamp", true ).toBool();
   m_homeShowMessageDatestamp = sets->value( "ShowHomeDatestamp", false ).toBool();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
@@ -968,7 +969,6 @@ void Settings::load()
   m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
   m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
   m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
-  m_viewInCompactMode = sets->value( "ViewInCompactMode", m_viewInCompactMode ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1233,7 +1233,7 @@ void Settings::save()
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
   sets->setValue( "Shortcuts", m_shortcuts );
   sets->setValue( "UseShortcuts", m_useShortcuts );
-  sets->setValue( "UseNativeDialogs", m_useNativeDialogs );
+  sets->setValue( "UseNativeFileDialogs", m_useNativeDialogs );
   sets->setValue( "ShowHomeTimestamp", m_homeShowMessageTimestamp );
   sets->setValue( "ShowHomeDatestamp", m_homeShowMessageDatestamp );
   sets->setValue( "UsePreviewFileDialog", m_usePreviewFileDialog );

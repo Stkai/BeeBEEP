@@ -326,7 +326,7 @@ void BeeApplication::checkTick()
     // 1 year is passed ... it is time to close!
     qWarning() << "A year in uptime is passed. It is time to close and restart";
     m_timer.stop();
-    QTimer::singleShot( 0, this, SLOT( forceShutdown() ) );
+    QMetaObject::invokeMethod( this, "forceShutdown", Qt::QueuedConnection );
     return;
   }
   else

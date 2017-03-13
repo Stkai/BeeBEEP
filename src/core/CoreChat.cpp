@@ -48,20 +48,6 @@ void Core::createDefaultChat()
   QString sHtmlMsg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
   c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
 
-  if( !Settings::instance().isFacebookPageLinkClicked() )
-  {
-    sHtmlMsg = QString( "%1 %2 <a href=""%3"">%4</a><br />" ).arg( Bee::iconToHtml( ":/images/thumbup.png", "*!*" ),
-                                                                 tr( "Help me to know how many people are really using BeeBEEP." ),
-                                                                 Settings::instance().facebookPage(),
-                                                                 tr( "Please add a like on Facebook." ) );
-    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
-  }
-
-  sHtmlMsg = QString( "%1 <b>%2</b><br />" ).arg( Bee::iconToHtml( ":/images/CopyMastro.png", "*!*" ),
-                                               tr( "Try the new awesome application developed by Marco Mastroddi" )
-                                               + QString( " : <a href=""%1""><b>CopyMastro</b></a> !!!" ).arg( Settings::instance().copyMastroWebSite() ) );
-  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
-
   if( QDate::currentDate().month() == 4 && QDate::currentDate().day() == 6 )
   {
     int my_age = QDate::currentDate().year() - 1975;

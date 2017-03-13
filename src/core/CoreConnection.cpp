@@ -199,7 +199,7 @@ void Core::closeConnection( Connection *c )
   // do not delete later connection... socket notifier in qabstractsocket.cpp can crash
 
   if( isConnected() && m_connections.isEmpty() )
-    QTimer::singleShot( 0, this, SLOT( checkNetworkInterface() ) );
+    QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
 }
 
 void Core::checkUserAuthentication( const QByteArray& auth_byte_array )

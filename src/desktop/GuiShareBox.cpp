@@ -301,7 +301,7 @@ void GuiShareBox::onShareBoxSelected( int )
 void GuiShareBox::onShareFolderUnavailable( const User& u, const QString& folder_path )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << u.path() << "has not shared box folder" << folder_path;
+  qDebug() << qPrintable( u.path() ) << "has not shared box folder" << folder_path;
 #endif
   if( u.isLocal() )
     return;

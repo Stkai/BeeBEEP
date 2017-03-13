@@ -31,7 +31,7 @@ QString FileDialog::getExistingDirectory( QWidget* parent, const QString& captio
   if( Settings::instance().useNativeDialogs() )
     return QFileDialog::getExistingDirectory( parent, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
   else
-    return QFileDialog::getExistingDirectory( parent, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks | QFileDialog::DontUseNativeDialog );
+    return QFileDialog::getExistingDirectory( parent, caption, dir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks | QFileDialog::DontUseCustomDirectoryIcons | QFileDialog::DontUseNativeDialog );
 }
 
 QString FileDialog::getSaveFileName( QWidget* parent, const QString& caption, const QString& dir,
@@ -40,7 +40,7 @@ QString FileDialog::getSaveFileName( QWidget* parent, const QString& caption, co
   if( Settings::instance().useNativeDialogs() )
     return QFileDialog::getSaveFileName( parent, caption, dir, filter, selectedFilter );
   else
-    return QFileDialog::getSaveFileName( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog );
+    return QFileDialog::getSaveFileName( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog | QFileDialog::DontUseCustomDirectoryIcons );
 }
 
 QString FileDialog::getOpenFileName( bool with_image_preview, QWidget* parent, const QString& caption,
@@ -68,7 +68,7 @@ QString FileDialog::getOpenFileName( bool with_image_preview, QWidget* parent, c
       return "";
   }
   else
-    return QFileDialog::getOpenFileName( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog );
+    return QFileDialog::getOpenFileName( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog | QFileDialog::DontUseCustomDirectoryIcons );
 }
 
 QStringList FileDialog::getOpenFileNames( bool with_image_preview, QWidget* parent, const QString& caption,
@@ -94,5 +94,5 @@ QStringList FileDialog::getOpenFileNames( bool with_image_preview, QWidget* pare
       return QStringList();
   }
   else
-    return QFileDialog::getOpenFileNames( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog );
+    return QFileDialog::getOpenFileNames( parent, caption, dir, filter, selectedFilter, QFileDialog::DontUseNativeDialog  |QFileDialog::DontUseCustomDirectoryIcons );
 }

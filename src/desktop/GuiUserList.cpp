@@ -83,10 +83,7 @@ void GuiUserList::resetList()
 {
   if( mp_twUsers->topLevelItemCount() > 0 )
     mp_twUsers->clear();
-  if( Settings::instance().showUserPhoto() )
-    mp_twUsers->setIconSize( Settings::instance().avatarIconSize() );
-  else
-    mp_twUsers->setIconSize( QSize( 16, 16 ) );
+  mp_twUsers->setIconSize( Settings::instance().avatarIconSize() );
 }
 
 void GuiUserList::updateUsers( bool is_connected )

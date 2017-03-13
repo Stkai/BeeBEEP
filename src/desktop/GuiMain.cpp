@@ -600,6 +600,7 @@ void GuiMain::createActions()
   mp_actQuit = new QAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this );
   mp_actQuit->setShortcuts( QKeySequence::Quit );
   mp_actQuit->setStatusTip( tr( "Close the chat and quit %1" ).arg( Settings::instance().programName() ) );
+  mp_actQuit->setMenuRole( QAction::QuitRole );
   connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( forceShutdown() ) );
 
   mp_actVCard = new QAction( QIcon( ":/images/profile-edit.png"), tr( "Edit your profile..." ), this );
@@ -618,6 +619,7 @@ void GuiMain::createActions()
 
   mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setStatusTip( tr( "Show the informations about %1" ).arg( Settings::instance().programName() ) );
+  mp_actAbout->setMenuRole( QAction::AboutRole );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
 
   mp_actCreateGroupChat = new QAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this );
@@ -806,6 +808,11 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().checkNewVersionAtStartup() );
   act->setData( 43 );
+
+  act = mp_menuSettings->addAction( tr( "Use native file dialogs" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useNativeDialogs() );
+  act->setData( 4 );
 
 #ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
@@ -1060,6 +1067,7 @@ void GuiMain::createMenus()
   act->setStatusTip( tr( "Show the informations about %1's license" ).arg( Settings::instance().programName() ) );
   act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "Qt Library..." ), qApp, SLOT( aboutQt() ) );
   act->setStatusTip( tr( "Show the informations about Qt library" ) );
+  act->setMenuRole( QAction::AboutQtRole );
   mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( QIcon( ":/images/beebeep.png" ), tr( "Open %1 official website..." ).arg( Settings::instance().programName() ), this, SLOT( openWebSite() ) );
   act->setStatusTip( tr( "Explore %1 official website" ).arg( Settings::instance().programName() ) );
@@ -1073,7 +1081,6 @@ void GuiMain::createMenus()
   act = mp_menuInfo->addAction( QIcon( ":/images/thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
 #ifdef BEEBEEP_DEBUG
   act = mp_menuInfo->addAction( tr( "Add +1 user to anonymous usage statistics" ), this, SLOT( settingsChanged() ) );
-  act->setStatusTip( tr( "Help me to know how many users have BeeBEEP" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().postUsageStatistics() );
   act->setData( 44 );
@@ -1420,7 +1427,7 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 4:
-    // free
+    Settings::instance().setUseNativeDialogs( act->isChecked() );
     break;
   case 5:
     Settings::instance().setShowUserColor( act->isChecked() );
@@ -1537,9 +1544,9 @@ void GuiMain::settingsChanged()
       if( act->isChecked() )
       {
 #if QT_VERSION >= 0x050000
-        int num_messages = QInputDialog::getInt( this, Settings::instance().programName(),
+        int num_messages = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
 #else
-        int num_messages = QInputDialog::getInteger( this, Settings::instance().programName(),
+        int num_messages = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
 #endif
                                                      tr( "Please select the maximum number of messages to be showed" ),
                                                      Settings::instance().chatMessagesToShow(),
@@ -2525,9 +2532,9 @@ void GuiMain::trayMessageClicked()
 {
   GuiFloatingChat* fl_chat = floatingChat( mp_trayIcon->chatId() );
   if( fl_chat )
-    QTimer::singleShot( 0, fl_chat, SLOT( showUp() ) );
+    QMetaObject::invokeMethod( fl_chat, "showUp", Qt::QueuedConnection );
   else
-    QTimer::singleShot( 0, this, SLOT( showUp() ) );
+    QMetaObject::invokeMethod( this, "showUp", Qt::QueuedConnection );
 }
 
 void GuiMain::addToShare( const QString& share_path )
@@ -2556,11 +2563,6 @@ void GuiMain::raiseHomeView()
 void GuiMain::raiseLocalShareView()
 {
   raiseView( mp_shareLocal );
-  if( mp_actViewInCompactMode->isChecked() )
-  {
-    mp_actViewInCompactMode->setChecked( false );
-    toggleCompactMode();
-  }
 }
 
 void GuiMain::raiseNetworkShareView()
@@ -3221,7 +3223,7 @@ void GuiMain::showAddUser()
   if( gad.exec() == QDialog::Accepted )
   {
     if( !Settings::instance().userPathList().isEmpty() )
-      QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
+      QMetaObject::invokeMethod( this, "sendBroadcastMessage", Qt::QueuedConnection );
   }
 }
 
@@ -3716,13 +3718,13 @@ static bool IsTimeToCheck( int ticks, int tick_for_check ) { return ticks % tick
 void GuiMain::onTickEvent( int ticks )
 {
   if( IsTimeToCheck( ticks, Settings::instance().tickIntervalCheckNetwork() ) )
-    QTimer::singleShot( 0, mp_core, SLOT( checkNetworkInterface() ) );
+    QMetaObject::invokeMethod( mp_core, "checkNetworkInterface", Qt::QueuedConnection );
 
   if( IsTimeToCheck( ticks, Settings::instance().tickIntervalCheckIdle() ) )
   {
     BeeApplication* bee_app = (BeeApplication*)qApp;
     if( bee_app->idleTimeout() > 0 )
-      QTimer::singleShot( 0, bee_app, SLOT( checkIdle() ) );
+      QMetaObject::invokeMethod( bee_app, "checkIdle", Qt::QueuedConnection );
   }
 
   mp_trayIcon->onTickEvent( ticks );

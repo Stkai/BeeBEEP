@@ -790,7 +790,7 @@ void Core::removeUserToDesktopShare( VNumber user_id )
 {
   mp_shareDesktop->removeUser( user_id );
   if( mp_shareDesktop->users().isEmpty() )
-    QTimer::singleShot( 0, this, SLOT( stopShareDesktop() ) );
+    QMetaObject::invokeMethod( this, "stopShareDesktop", Qt::QueuedConnection );
 }
 
 void Core::startShareDesktop()
