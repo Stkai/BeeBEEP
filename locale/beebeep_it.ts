@@ -516,11 +516,11 @@
     </message>
     <message>
         <source>Help me to know how many people are really using BeeBEEP.</source>
-        <translation>Aiutami a sapere quante persone usano realmente BeeBEEP.</translation>
+        <translation type="obsolete">Aiutami a sapere quante persone usano realmente BeeBEEP.</translation>
     </message>
     <message>
         <source>Please add a like on Facebook.</source>
-        <translation>Metti mi piace su Facebook.</translation>
+        <translation type="obsolete">Metti mi piace su Facebook.</translation>
     </message>
     <message>
         <source>%1 (%2) is disconnected from %3 network.</source>
@@ -632,7 +632,7 @@
     </message>
     <message>
         <source>Try the new awesome application developed by Marco Mastroddi</source>
-        <translation>Prova la nuova mitica applicazione sviluppata da Marco Mastroddi</translation>
+        <translation type="obsolete">Prova la nuova mitica applicazione sviluppata da Marco Mastroddi</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your system name.</source>
@@ -3619,7 +3619,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Help me to know how many users have BeeBEEP</source>
-        <translation>Aiutami a sapere quante persone usano realmente BeeBEEP</translation>
+        <translation type="obsolete">Aiutami a sapere quante persone usano realmente BeeBEEP</translation>
     </message>
     <message>
         <source>Prompts for nickname on startup</source>
