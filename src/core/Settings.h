@@ -246,6 +246,8 @@ public:
   inline int userSortingMode() const;
   inline void setSortUsersAscending( bool );
   inline bool sortUsersAscending() const;
+  inline void setShowChatsInOneWindow( bool );
+  inline bool showChatsInOneWindow() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -559,6 +561,7 @@ private:
   bool m_showPresetMessages;
   bool m_showTextInModeRTL;
   bool m_playBuzzSound;
+  bool m_showChatsInOneWindow;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -946,5 +949,7 @@ inline bool Settings::playBuzzSound() const { return m_playBuzzSound; }
 inline bool Settings::disablePrivateChats() const { return m_disablePrivateChats; }
 inline void Settings::setViewInCompactMode( bool new_value ) { m_viewInCompactMode = new_value; }
 inline bool Settings::viewInCompactMode() const { return m_viewInCompactMode; }
+inline void Settings::setShowChatsInOneWindow( bool new_value ) { m_showChatsInOneWindow = new_value; }
+inline bool Settings::showChatsInOneWindow() const { return m_showChatsInOneWindow; }
 
 #endif // BEEBEEP_SETTINGS_H

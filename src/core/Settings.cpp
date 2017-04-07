@@ -150,6 +150,7 @@ Settings::Settings()
   m_previewFileDialogImageSize = 200;
   m_maxUsersToConnectInATick = 25;
   m_showTextInModeRTL = false;
+  m_showChatsInOneWindow = false;
 }
 
 void Settings::createApplicationUuid()
@@ -969,6 +970,7 @@ void Settings::load()
   m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
   m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
   m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
+  m_showChatsInOneWindow = sets->value( "ShowChatsInOneWindow", m_showChatsInOneWindow ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );

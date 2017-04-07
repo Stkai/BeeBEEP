@@ -3785,6 +3785,10 @@ il file %2 (%3)?</translation>
         <source>Use native file dialogs</source>
         <translation>Usa le finestre di selezione file native</translation>
     </message>
+    <message>
+        <source>Open chats only in a single window</source>
+        <translation>Apri le conversazioni in un&apos;unica finestra</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

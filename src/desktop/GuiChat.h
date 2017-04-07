@@ -45,6 +45,7 @@ public:
   inline VNumber chatId() const;
   void ensureLastMessageVisible();
   void setChatReadByUser( VNumber );
+  void updateUsers( const Chat& );
 
   void updateShortcuts();
   void updateActionsOnFocusChanged();

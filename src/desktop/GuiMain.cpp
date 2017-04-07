@@ -907,6 +907,11 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
 
+  act = mp_menuSettings->addAction( tr( "Open chats only in a single window" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatsInOneWindow() );
+  act->setData( 7 );
+
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Prompt on quit (only when connected)" ), this, SLOT( settingsChanged() ) );
@@ -1439,7 +1444,14 @@ void GuiMain::settingsChanged()
     refresh_users = true;
     refresh_chat = true;
   case 7:
-    // free
+    {
+      Settings::instance().setShowChatsInOneWindow( act->isChecked() );
+      if( Settings::instance().showChatsInOneWindow() )
+      {
+        foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+          fl_chat->close();
+      }
+    }
     break;
   case 8:
     Settings::instance().setChatUseHtmlTags( act->isChecked() );
@@ -2293,8 +2305,6 @@ void GuiMain::showChat( VNumber chat_id )
     fl_chat->checkWindowFlagsAndShow();
   else
     fl_chat->raiseOnTop();
-
-  fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
 }
 
 void GuiMain::changeVCard()
@@ -3001,7 +3011,7 @@ void GuiMain::showMessage( const QString& status_msg, int time_out )
 
 void GuiMain::changeUserColor( VNumber user_id, const QString& user_color )
 {
-  QColor c = QColorDialog::getColor( QColor( user_color ), this );
+  QColor c = QColorDialog::getColor( QColor( user_color ), qApp->activeWindow() );
   if( c.isValid() )
     mp_core->changeUserColor( user_id, c.name() );
 }
@@ -3443,7 +3453,18 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   if( fl_chat )
     return fl_chat;
 
-  fl_chat = new GuiFloatingChat;
+  if( Settings::instance().showChatsInOneWindow() && !m_floatingChats.isEmpty() )
+    fl_chat = m_floatingChats.first();
+
+  if( !fl_chat )
+  {
+    fl_chat = new GuiFloatingChat;
+    setupChatConnections( fl_chat->guiChat() );
+    connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
+    connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
+    connect( fl_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
+    m_floatingChats.append( fl_chat );
+  }
 
   if( !fl_chat->setChat( c ) )
   {
@@ -3451,12 +3472,6 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     fl_chat->deleteLater();
     return 0;
   }
-
-  setupChatConnections( fl_chat->guiChat() );
-  connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
-  connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
-  connect( fl_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
-  m_floatingChats.append( fl_chat );
 
   fl_chat->checkWindowFlagsAndShow();
   fl_chat->guiChat()->updateShortcuts();

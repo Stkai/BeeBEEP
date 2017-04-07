@@ -144,6 +144,8 @@ void GuiFloatingChat::updateUser( const User& u, bool is_connected )
     m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
     setMainIcon( false );
   }
+
+  mp_chat->updateUsers( c );
 }
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )

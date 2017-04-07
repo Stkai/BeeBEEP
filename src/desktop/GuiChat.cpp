@@ -783,10 +783,13 @@ void GuiChat::dropEvent( QDropEvent *event )
 void GuiChat::showUserVCard()
 {
   QAction *act = qobject_cast<QAction*>( sender() );
-  if( !act )
-    return;
-  VNumber user_id = Bee::qVariantToVNumber( act->data() );
-  emit showVCardRequest( user_id, false );
+  if( act )
+  {
+    VNumber user_id = Bee::qVariantToVNumber( act->data() );
+    emit showVCardRequest( user_id, false );
+  }
+  else
+    showMembersMenu();
 }
 
 void GuiChat::showLocalUserVCard()
@@ -1077,6 +1080,8 @@ void GuiChat::updateMenuMembers( const Chat& c )
 
 void GuiChat::showMembersMenu()
 {
+  if( !mp_menuMembers->isEnabled() )
+    return;
   updateMenuMembers( ChatManager::instance().chat( m_chatId ) );
   mp_menuMembers->exec( QCursor::pos() );
 }
@@ -1084,4 +1089,13 @@ void GuiChat::showMembersMenu()
 void GuiChat::setChatReadByUser( VNumber )
 {
   updateMenuMembers( ChatManager::instance().chat( m_chatId ) );
+}
+
+void GuiChat::updateUsers( const Chat& c )
+{
+  if( c.id() != m_chatId )
+    return;
+
+  setChatTitle( c );
+  updateMenuMembers( c );
 }
