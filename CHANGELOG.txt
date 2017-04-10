@@ -1,10 +1,10 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG
 
 BeeBEEP 3.2.0
+- Simplified user interface
 - Added status tooltip on the user's avatar/icon
 - Added a check and an alert on same nickname/account of the users
 - Added "DisablePrivateChats" option on beebeep.rc file
-- Added "View in compact mode" option on beebeep.rc and beebeep.ini files
 - Chats are now always opened in separate window (single or multi)
 
 BeeBEEP 3.0.9

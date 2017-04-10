@@ -36,7 +36,7 @@ GuiHome::GuiHome( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiHome" );
   m_prev_sys_mess = "";
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Home" ) ) );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Activities" ) ) );
 
   mp_teSystem->setObjectName( "GuiSystemViewer" );
   mp_teSystem->setFocusPolicy( Qt::ClickFocus );
@@ -45,14 +45,9 @@ GuiHome::GuiHome( QWidget* parent )
   mp_teSystem->setOpenExternalLinks( false );
   mp_teSystem->setOpenLinks( false );
 
-  mp_lNote->setWordWrap( true );
-  mp_lNote->setText( QString( "<b>%1...</b>" ).arg( tr( "Select a user you want to chat with or" ) ) );
-
-  connect( mp_pbOpenDefaultChat, SIGNAL( clicked() ), this, SLOT( openDefaultChat() ) );
   connect( mp_teSystem, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teSystem, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
 
-  mp_pbOpenDefaultChat->setEnabled( Settings::instance().chatWithAllUsersIsEnabled() );
 }
 
 void GuiHome::addSystemMessage( const ChatMessage& cm )
@@ -76,11 +71,6 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
   QScrollBar *bar = mp_teSystem->verticalScrollBar();
   if( bar )
     bar->setValue( bar->maximum() );
-}
-
-void GuiHome::openDefaultChat()
-{
-  emit openDefaultChatRequest();
 }
 
 void GuiHome::checkAnchorClicked( const QUrl& url )

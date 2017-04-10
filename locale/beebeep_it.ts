@@ -1546,6 +1546,77 @@ Inserisci un nome differente.</translation>
     </message>
 </context>
 <context>
+    <name>GuiExtra</name>
+    <message>
+        <source>Show the view tool bar</source>
+        <translation type="unfinished">Mostra la barra delle viste</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished">Pronto</translation>
+    </message>
+    <message>
+        <source>Show %1 home</source>
+        <translation type="unfinished">Mostra la pagina iniziale di %1</translation>
+    </message>
+    <message>
+        <source>Show the homepage with %1 activity</source>
+        <translation type="unfinished">Mostra la pagina iniziale con le attività di %1</translation>
+    </message>
+    <message>
+        <source>Show my shared files</source>
+        <translation type="unfinished">Mostra i miei file condivisi</translation>
+    </message>
+    <message>
+        <source>Show the list of the files which I have shared</source>
+        <translation type="unfinished">Mostra la lista dei file che hai condiviso con gli altri utenti</translation>
+    </message>
+    <message>
+        <source>Show the network shared files</source>
+        <translation type="unfinished">Mostra i file condivisi presenti sulla rete</translation>
+    </message>
+    <message>
+        <source>Show the list of the network shared files</source>
+        <translation type="unfinished">Mostra la lista dei file condivisi dagli altri utenti sulla rete</translation>
+    </message>
+    <message>
+        <source>Show the shared boxes</source>
+        <translation type="unfinished">Mostra le ShareBox</translation>
+    </message>
+    <message>
+        <source>Make a screenshot</source>
+        <translation type="unfinished">Fai una foto allo schermo</translation>
+    </message>
+    <message>
+        <source>Show the utility to capture a screenshot</source>
+        <translation type="unfinished">Mostra l&apos;interfaccia per fare una foto allo schermo</translation>
+    </message>
+    <message>
+        <source>Show the %1 log</source>
+        <translation type="unfinished">Mostra il log di %1</translation>
+    </message>
+    <message>
+        <source>Show the application log to see if an error occurred</source>
+        <translation type="unfinished">Mostra i log dell&apos;applicazione per vedere se ci sono stati errori</translation>
+    </message>
+    <message>
+        <source>Show the bar of local file sharing</source>
+        <translation type="unfinished">Mostra la barra dei tuoi file condivisi</translation>
+    </message>
+    <message>
+        <source>Show the bar of network file sharing</source>
+        <translation type="unfinished">Mostra la barra di tutti i file condivisi in rete</translation>
+    </message>
+    <message>
+        <source>Show the bar of log</source>
+        <translation type="unfinished">Mostra la barra del log</translation>
+    </message>
+    <message>
+        <source>Show the bar of screenshot plugin</source>
+        <translation type="unfinished">Mostra la barra del cattura schermo</translation>
+    </message>
+</context>
+<context>
     <name>GuiFileInfoList</name>
     <message>
         <source>Shared folders and files</source>
@@ -1650,7 +1721,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select a user you want to chat with or</source>
-        <translation>Seleziona un utente con cui vuoi parlare oppure</translation>
+        <translation type="obsolete">Seleziona un utente con cui vuoi parlare oppure</translation>
     </message>
     <message>
         <source>%1 Activities</source>
@@ -1658,7 +1729,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Home</translation>
+        <translation type="obsolete">Home</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -1680,6 +1751,10 @@ Inserisci un nome differente.</translation>
         <source>Show the timestamp</source>
         <translation>Mostra l&apos;orario</translation>
     </message>
+    <message>
+        <source>Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
@@ -1693,7 +1768,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>chat with all users</source>
-        <translation>parla con tutti</translation>
+        <translation type="obsolete">parla con tutti</translation>
     </message>
 </context>
 <context>
@@ -2499,19 +2574,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show my shared files</source>
-        <translation>Mostra i miei file condivisi</translation>
+        <translation type="obsolete">Mostra i miei file condivisi</translation>
     </message>
     <message>
         <source>Show the list of the files which I have shared</source>
-        <translation>Mostra la lista dei file che hai condiviso con gli altri utenti</translation>
+        <translation type="obsolete">Mostra la lista dei file che hai condiviso con gli altri utenti</translation>
     </message>
     <message>
         <source>Show the network shared files</source>
-        <translation>Mostra i file condivisi presenti sulla rete</translation>
+        <translation type="obsolete">Mostra i file condivisi presenti sulla rete</translation>
     </message>
     <message>
         <source>Show the list of the network shared files</source>
-        <translation>Mostra la lista dei file condivisi dagli altri utenti sulla rete</translation>
+        <translation type="obsolete">Mostra la lista dei file condivisi dagli altri utenti sulla rete</translation>
     </message>
     <message>
         <source>Do you want to download %1 (%2) from the user %3?</source>
@@ -2651,11 +2726,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the %1 log</source>
-        <translation>Mostra il log di %1</translation>
+        <translation type="obsolete">Mostra il log di %1</translation>
     </message>
     <message>
         <source>Show the application log to see if an error occurred</source>
-        <translation>Mostra i log dell&apos;applicazione per vedere se ci sono stati errori</translation>
+        <translation type="obsolete">Mostra i log dell&apos;applicazione per vedere se ci sono stati errori</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and shown as images</source>
@@ -2731,11 +2806,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Make a screenshot</source>
-        <translation>Fai una foto allo schermo</translation>
+        <translation type="obsolete">Fai una foto allo schermo</translation>
     </message>
     <message>
         <source>Show the utility to capture a screenshot</source>
-        <translation>Mostra l&apos;interfaccia per fare una foto allo schermo</translation>
+        <translation type="obsolete">Mostra l&apos;interfaccia per fare una foto allo schermo</translation>
     </message>
     <message>
         <source>Open %1 official website...</source>
@@ -2807,11 +2882,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of local file sharing</source>
-        <translation>Mostra la barra dei tuoi file condivisi</translation>
+        <translation type="obsolete">Mostra la barra dei tuoi file condivisi</translation>
     </message>
     <message>
         <source>Show the bar of network file sharing</source>
-        <translation>Mostra la barra di tutti i file condivisi in rete</translation>
+        <translation type="obsolete">Mostra la barra di tutti i file condivisi in rete</translation>
     </message>
     <message>
         <source>Show the main tool bar with settings</source>
@@ -2823,7 +2898,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of screenshot plugin</source>
-        <translation>Mostra la barra del cattura schermo</translation>
+        <translation type="obsolete">Mostra la barra del cattura schermo</translation>
     </message>
     <message>
         <source>Yes, and don&apos;t ask anymore</source>
@@ -3227,11 +3302,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show %1 home</source>
-        <translation>Mostra la pagina iniziale di %1</translation>
+        <translation type="obsolete">Mostra la pagina iniziale di %1</translation>
     </message>
     <message>
         <source>Show the homepage with %1 activity</source>
-        <translation>Mostra la pagina iniziale con le attività di %1</translation>
+        <translation type="obsolete">Mostra la pagina iniziale con le attività di %1</translation>
     </message>
     <message>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
@@ -3431,7 +3506,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of log</source>
-        <translation>Mostra la barra del log</translation>
+        <translation type="obsolete">Mostra la barra del log</translation>
     </message>
     <message>
         <source>Show minimized at startup</source>
@@ -3491,7 +3566,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of games</source>
-        <translation>Mostra la barra dei giochi</translation>
+        <translation type="obsolete">Mostra la barra dei giochi</translation>
     </message>
     <message>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
@@ -3631,7 +3706,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Save main window geometry</source>
-        <translation>Salva le dimensioni della finestra principale</translation>
+        <translation type="obsolete">Salva le dimensioni della finestra principale</translation>
     </message>
     <message>
         <source>Window geometry and state saved</source>
@@ -3671,7 +3746,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the shared boxes</source>
-        <translation>Mostra le ShareBox</translation>
+        <translation type="obsolete">Mostra le ShareBox</translation>
     </message>
     <message>
         <source>Clear all read messages</source>
@@ -3691,7 +3766,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
-        <translation>Usa la nuova applicazione per copiare i file e le cartelle sviluppata da Marco Mastroddi</translation>
+        <translation type="obsolete">Usa la nuova applicazione per copiare i file e le cartelle sviluppata da Marco Mastroddi</translation>
     </message>
     <message>
         <source>New file from %1</source>
@@ -3771,11 +3846,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the view tool bar</source>
-        <translation>Mostra la barra delle viste</translation>
+        <translation type="obsolete">Mostra la barra delle viste</translation>
     </message>
     <message>
         <source>Show in compact mode</source>
-        <translation>Mostra in modalità compatta</translation>
+        <translation type="obsolete">Mostra in modalità compatta</translation>
     </message>
     <message>
         <source>Show the panel tool bar</source>
@@ -3788,6 +3863,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Open chats only in a single window</source>
         <translation>Apri le conversazioni in un&apos;unica finestra</translation>
+    </message>
+    <message>
+        <source>Show extra window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -40,11 +40,9 @@ public:
   void loadDefaultChat();
 
 signals:
-  void openDefaultChatRequest();
   void openUrlRequest( const QUrl& );
 
 protected slots:
-  void openDefaultChat();
   void checkAnchorClicked( const QUrl& );
   void customContextMenu( const QPoint& );
   void onAddDatestampClicked();

@@ -47,7 +47,7 @@ const char* BEEBEEP_GA_EVENT_VERSION = "1";
 const char* BEEBEEP_VERSION = "3.1.9c";
 const int BEEBEEP_PROTO_VERSION = 65;
 const int BEEBEEP_SETTINGS_VERSION = 6;
-const int BEEBEEP_BUILD = 844;
+const int BEEBEEP_BUILD = 847;
 
 #endif // BEEBEEP_VERSION_H
 

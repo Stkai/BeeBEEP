@@ -48,7 +48,6 @@ StartMinimized=[true/false] If enabled BeeBEEP starts minimized (can be overrule
 Signature=[string] If not empty BeeBEEP uses it to generate network password (all BeeBEEP clients in your network must have the same signature) (auth=signature+encpwd) (default="") [3.0.8]
 UseOnlyTextEmoticons=[true/false] If enabled BeeBEEP does not show the emoticon panel (default=false) [3.0.8]
 DisablePrivateChats=[true/false] disable private chat with users (default=false) [3.2.0]
-ViewInCompactMode=[true/false] enable the view in compact mode (can be overruled in beeebeep.ini) (default=false) [3.2.0]
 
 [Groups]
 TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0]
@@ -172,7 +171,6 @@ SortUsersAscending=[true/false] if not true the users are sorting in descending 
 ShowPresetMessages=[true/false] if true the preset messages list is showed [3.0.8]
 ShowChatTextInModeRTL=[true/false] if true the layout direction in chat is RTL (default=false) [3.0.8]
 PlayBuzzSound=[true/false] if true a user can send you a buzz alert (default=true) [3.0.9]
-ViewInCompactMode=[true/false] enable the view in compact mode (default=false) [3.2.0]
 ShowChatsInOneWindow=[true/false] if true BeeBEEP opens chats in a single window (default=false) [3.2.0]
 
 [Tools]

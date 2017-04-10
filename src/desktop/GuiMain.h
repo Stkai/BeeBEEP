@@ -37,20 +37,11 @@ class GameInterface;
 class GuiChat;
 class GuiChatList;
 class GuiEmoticons;
+class GuiExtra;
 class GuiFloatingChat;
 class GuiGroupList;
-class GuiLog;
-class GuiHome;
-class GuiPresetMessageList;
 class GuiSavedChat;
 class GuiSavedChatList;
-class GuiScreenShot;
-class GuiShareBox;
-class GuiShareLocal;
-class GuiShareNetwork;
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-  class GuiShareDesktop;
-#endif
 class GuiSystemTray;
 class GuiTransferFile;
 class GuiUserList;
@@ -112,13 +103,6 @@ private slots:
   void showWizard();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
   void trayMessageClicked();
-  void raiseLocalShareView();
-  void raiseNetworkShareView();
-  void raisePluginView();
-  void raiseLogView();
-  void raiseScreenShotView();
-  void raiseHomeView();
-  void raiseShareBoxView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
@@ -185,8 +169,9 @@ private slots:
   void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );
-  void toggleCompactMode();
   void removeFloatingChatFromList( VNumber );
+  void showExtraWindow();
+  void onExtraWindowClosed();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -194,11 +179,8 @@ protected:
   void changeEvent( QEvent* );
   bool promptConnectionPassword();
   void raiseOnTop();
-  void raiseView( QWidget* );
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
   void showAlertForMessage( VNumber, const ChatMessage&, bool* chat_window_is_created );
-  void showInCompactMode();
-  void restoreFromCompactMode();
   GuiFloatingChat* createFloatingChat( const Chat& );
   void closeFloatingChat( VNumber );
 
@@ -208,7 +190,6 @@ private:
   void createMenus();
   void createToolAndMenuBars();
   void createDockWindows();
-  void createStackedWidgets();
   void createPluginWindows();
   void refreshUserList();
   void updateWindowTitle();
@@ -240,20 +221,14 @@ private:
   void updateNewMessageAction();
 
 private:
-  QStackedWidget* mp_stackedWidget;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
   GuiSavedChatList* mp_savedChatList;
   GuiGroupList* mp_groupList;
-  GuiShareLocal* mp_shareLocal;
-  GuiShareNetwork* mp_shareNetwork;
-  GuiLog* mp_logView;
-  GuiSavedChat* mp_savedChat;
-  GuiScreenShot* mp_screenShot;
-  GuiHome* mp_home;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
+  GuiExtra* mp_extra;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   QList<GuiShareDesktop*> m_desktops;
 #endif
@@ -270,12 +245,6 @@ private:
 
   QToolBar* mp_barMain;
   QToolBar* mp_barPanel;
-  QToolBar* mp_barView;
-  QToolBar* mp_barShareNetwork;
-  QToolBar* mp_barShareLocal;
-  QToolBar* mp_barScreenShot;
-  QToolBar* mp_barLog;
-  QToolBar* mp_barGames;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actConfigureNetwork;
@@ -284,26 +253,17 @@ private:
   QAction* mp_actVCard;
   QAction* mp_actMainToolBar;
   QAction* mp_actPanelToolBar;
-  QAction* mp_actViewToolBar;
   QAction* mp_actChatBar;
   QAction* mp_actAbout;
   QAction* mp_actViewUsers;
   QAction* mp_actViewFileTransfer;
   QAction* mp_actViewSavedChats;
-  QAction* mp_actViewGroups;
-  QAction* mp_actViewShareLocal;
-  QAction* mp_actViewShareNetwork;
   QAction* mp_actViewChats;
-  QAction* mp_actViewScreenShot;
-  QAction* mp_actViewLog;
-  QAction* mp_actViewHome;
+  QAction* mp_actViewGroups;
   QAction* mp_actViewNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
-  QAction* mp_actViewInCompactMode;
-
-  GuiShareBox* mp_shareBox;
-  QAction* mp_actViewShareBox;
+  QAction* mp_actViewExtra;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
@@ -350,7 +310,6 @@ private:
   QWidget* mp_lastActiveWindow;
 
   bool m_prevActivatedState;
-  QLabel *mp_lMainBarVersion;
 
 };
 

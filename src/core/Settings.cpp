@@ -100,7 +100,6 @@ Settings::Settings()
   m_signature = "";
   m_useOnlyTextEmoticons = false;
   m_disablePrivateChats = false;
-  m_viewInCompactMode = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -275,7 +274,6 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "Signature", m_signature );
     sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
     sets->setValue( "DisablePrivateChats", m_disablePrivateChats );
-    sets->setValue( "ViewInCompactMode", m_viewInCompactMode );
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustNickname", m_trustNickname );
@@ -352,7 +350,6 @@ void Settings::loadRcFile()
   m_signature = sets->value( "Signature", m_signature ).toString();
   m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();
   m_disablePrivateChats = sets->value( "DisablePrivateChats", m_disablePrivateChats ).toBool();
-  m_viewInCompactMode = sets->value( "ViewInCompactMode", m_viewInCompactMode ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Groups" );
@@ -891,7 +888,6 @@ void Settings::load()
     m_mainBarIconSize = QSize( 24, 24 );
     m_avatarIconSize = QSize( 32, 32 );
     m_previewFileDialogGeometry = "";
-    m_viewInCompactMode = false;
   }
   else
   {
@@ -903,7 +899,6 @@ void Settings::load()
     m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
     m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
     m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
-    m_viewInCompactMode = sets->value( "ViewInCompactMode", m_viewInCompactMode ).toBool();
   }
 
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
@@ -1245,7 +1240,6 @@ void Settings::save()
   sets->setValue( "SortUsersAscending", m_sortUsersAscending );
   sets->setValue( "ShowChatTextInModeRTL", m_showTextInModeRTL );
   sets->setValue( "PlayBuzzSound", m_playBuzzSound );
-  sets->setValue( "ViewInCompactMode", m_viewInCompactMode );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

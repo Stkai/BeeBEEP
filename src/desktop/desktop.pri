@@ -12,6 +12,7 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiConfig.h \
   desktop/GuiEditVCard.h \
   desktop/GuiEmoticons.h \
+  desktop/GuiExtra.h \
   desktop/GuiFileInfoItem.h \
   desktop/GuiFileInfoList.h \
   desktop/GuiFloatingChat.h \
@@ -55,6 +56,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiCreateGroup.cpp \
   desktop/GuiEditVCard.cpp \
   desktop/GuiEmoticons.cpp \
+  desktop/GuiExtra.cpp \
   desktop/GuiFileInfoItem.cpp \
   desktop/GuiFileInfoList.cpp \
   desktop/GuiFloatingChat.cpp \
