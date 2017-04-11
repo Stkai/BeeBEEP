@@ -37,7 +37,7 @@ public:
   explicit GuiHome( QWidget *parent = 0 );
 
   void addSystemMessage( const ChatMessage& );
-  void loadDefaultChat();
+  void loadSystemMessages();
 
 signals:
   void openUrlRequest( const QUrl& );

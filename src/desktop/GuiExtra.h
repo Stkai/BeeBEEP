@@ -32,7 +32,6 @@ class Core;
 class ChatMessage;
 class GameInterface;
 class GuiLog;
-class GuiHome;
 class GuiScreenShot;
 class GuiShareBox;
 class GuiShareLocal;
@@ -47,8 +46,6 @@ class GuiExtra : public QMainWindow
 public:
   GuiExtra( Core*, QWidget* parent = 0 );
 
-  void updateSystemMessages();
-  void addSystemMessage( const ChatMessage& );
   void updateLocalFileList();
   void updateNetworkFileList();
   void showUserFileList( const User& );
@@ -64,13 +61,10 @@ public slots:
   void onUserChanged( const User& );
 
 private slots:
-  void showTipOfTheDay();
-  void showFactOfTheDay();
   void raiseLocalShareView();
   void raiseNetworkShareView();
   void raiseLogView();
   void raiseScreenShotView();
-  void raiseHomeView();
   void raiseShareBoxView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
@@ -101,7 +95,6 @@ private:
   GuiShareNetwork* mp_shareNetwork;
   GuiLog* mp_logView;
   GuiScreenShot* mp_screenShot;
-  GuiHome* mp_home;
   GuiShareBox* mp_shareBox;
 
   QToolBar* mp_barView;
@@ -115,7 +108,6 @@ private:
   QAction* mp_actViewShareNetwork;
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
-  QAction* mp_actViewHome;
   QAction* mp_actViewShareBox;
 
 };

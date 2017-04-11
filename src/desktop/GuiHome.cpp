@@ -36,7 +36,6 @@ GuiHome::GuiHome( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiHome" );
   m_prev_sys_mess = "";
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Activities" ) ) );
 
   mp_teSystem->setObjectName( "GuiSystemViewer" );
   mp_teSystem->setFocusPolicy( Qt::ClickFocus );
@@ -104,7 +103,7 @@ void GuiHome::customContextMenu( const QPoint& p )
   custom_context_menu.exec( mapToGlobal( p ) );
 }
 
-void GuiHome::loadDefaultChat()
+void GuiHome::loadSystemMessages()
 {
   Chat c = ChatManager::instance().defaultChat();
   foreach( ChatMessage cm, c.messages() )
@@ -118,7 +117,7 @@ void GuiHome::reloadMessages()
 {
   QApplication::setOverrideCursor( Qt::WaitCursor );
   mp_teSystem->clear();
-  loadDefaultChat();
+  loadSystemMessages();
   QApplication::restoreOverrideCursor();
 }
 

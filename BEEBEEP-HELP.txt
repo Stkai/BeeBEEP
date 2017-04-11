@@ -159,8 +159,8 @@ ShowUserStatusBackgroundColor=[true/false] show background color for status in u
 UseShortcuts=[true/false] enable shortcuts in application
 Shortcuts=(do not edit manually)
 UseNativeDialogs=[true/false] enable native OS dialogs (in some case these native dialogs can be modal and cause connection timeout)
-ShowHomeTimestamp=[true/false] (default=true) [3.0.5]
-ShowHomeDatestamp=[true/false] (default=false) [3.0.5]
+ShowActivitiesTimestamp=[true/false] (default=false) [3.2.0]
+ShowActivitiesDatestamp=[true/false] (default=false) [3.2.0]
 UsePreviewFileDialog=[true/false] (default=true only in windows, in other os false) [3.0.4]
 PreviewFileDialogGeometry=(do not edit manually) [3.0.5]
 PreviewFileDialogImageSize=[integer] (default=200) [3.0.5]

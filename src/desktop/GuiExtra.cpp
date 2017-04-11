@@ -78,7 +78,7 @@ GuiExtra::GuiExtra( Core* main_core, QWidget *parent )
   connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
   connect( mp_shareNetwork, SIGNAL( downloadSharedFiles( const QList<SharedFileInfo>& ) ), this, SLOT( downloadSharedFiles( const QList<SharedFileInfo>& ) ) );
   connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
+  connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
   connect( mp_shareBox, SIGNAL( openUrlRequest( const QUrl& ) ), this, SIGNAL( openUrlRequest( const QUrl& ) ) );
@@ -88,8 +88,6 @@ GuiExtra::GuiExtra( Core* main_core, QWidget *parent )
   connect( mp_screenShot, SIGNAL( hideRequest() ), this, SLOT( hide() ) );
   connect( mp_screenShot, SIGNAL( showRequest() ), this, SLOT( show() ) );
   connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SIGNAL( sendFileRequest( const QString& ) ) );
-
-  connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SIGNAL( openUrlRequest( const QUrl& ) ) );
 
   initGuiItems();
 
@@ -127,7 +125,7 @@ void GuiExtra::closeEvent( QCloseEvent* e )
 
 void GuiExtra::initGuiItems()
 {
-  raiseHomeView();
+  raiseLocalShareView();
   checkViewActions();
 }
 
@@ -136,7 +134,6 @@ void GuiExtra::checkViewActions()
   bool is_connected = mp_core->isConnected();
   int connected_users = mp_core->connectedUsers();
 
-  mp_actViewHome->setEnabled( mp_stackedWidget->currentWidget() != mp_home );
   mp_actViewShareLocal->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
@@ -178,8 +175,6 @@ void GuiExtra::createActions()
 
 void GuiExtra::createToolbars()
 {
-  mp_actViewHome = mp_barView->addAction( QIcon( ":/images/home.png" ), tr( "Show %1 home" ).arg( Settings::instance().programName() ), this, SLOT( raiseHomeView() ) );
-  mp_actViewHome->setStatusTip( tr( "Show the homepage with %1 activity" ).arg( Settings::instance().programName() ) );
   mp_actViewShareLocal = mp_barView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_barView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
@@ -239,33 +234,16 @@ void GuiExtra::createStackedWidgets()
   act = mp_barScreenShot->toggleViewAction();
   act->setEnabled( false );
 
-  mp_home = new GuiHome( this );
-  mp_stackedWidget->addWidget( mp_home );
-
   mp_shareBox = new GuiShareBox( this );
   mp_stackedWidget->addWidget( mp_shareBox );
 
-  mp_stackedWidget->setCurrentWidget( mp_home );
+  mp_stackedWidget->setCurrentWidget( mp_shareLocal );
 }
 
 void GuiExtra::onUserChanged( const User& u )
 {
   mp_shareBox->updateUser( u );
   mp_shareNetwork->updateUser( u );
-}
-
-
-
-void GuiExtra::showTipOfTheDay()
-{
-  raiseHomeView();
-  mp_core->showTipOfTheDay();
-}
-
-void GuiExtra::showFactOfTheDay()
-{
-  raiseHomeView();
-  mp_core->showFactOfTheDay();
 }
 
 void GuiExtra::addToShare( const QString& share_path )
@@ -283,11 +261,6 @@ void GuiExtra::raiseView( QWidget* w )
   mp_stackedWidget->setCurrentWidget( w );
   checkViewActions();
   raise();
-}
-
-void GuiExtra::raiseHomeView()
-{
-  raiseView( mp_home );
 }
 
 void GuiExtra::raiseLocalShareView()
@@ -356,16 +329,6 @@ void GuiExtra::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, c
 void GuiExtra::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   mp_core->uploadToShareBox( user_id, fi, to_path );
-}
-
-void GuiExtra::updateSystemMessages()
-{
-  mp_home->loadDefaultChat();
-}
-
-void GuiExtra::addSystemMessage( const ChatMessage& chat_msg )
-{
-  mp_home->addSystemMessage( chat_msg );
 }
 
 void GuiExtra::updateLocalFileList()

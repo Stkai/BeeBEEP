@@ -401,9 +401,6 @@ void Core::sendFileShareListToAll()
 
 void Core::addPathToShare( const QString& share_path, bool broadcast_list )
 {
-  QString share_status = tr( "Adding to file sharing" ) + QString( " %1" ).arg( share_path );
-  emit updateStatus( share_status + QString( " ..." ), 1000 );
-
   QFileInfo fi( share_path );
   if( fi.isDir() )
   {
@@ -463,7 +460,7 @@ void Core::addListToLocalShare()
                            .arg( bfsl->shareList().size() )
                            .arg( Bee::bytesToString( bfsl->shareSize() ) )
                            .arg( Bee::elapsedTimeToString( bfsl->elapsedTime() ) );
-  emit updateStatus( share_status, 0 );
+
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 
@@ -496,7 +493,6 @@ void Core::removeAllPathsFromShare()
 
   QString share_status = tr( "All paths are removed from file sharing" );
 
-  emit updateStatus( share_status, 0 );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 
@@ -520,7 +516,6 @@ void Core::removePathFromShare( const QString& share_path )
   else
     share_status = tr( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
 
-  emit updateStatus( share_status, 0 );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 

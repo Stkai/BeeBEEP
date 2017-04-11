@@ -40,6 +40,7 @@ class GuiEmoticons;
 class GuiExtra;
 class GuiFloatingChat;
 class GuiGroupList;
+class GuiHome;
 class GuiSavedChat;
 class GuiSavedChatList;
 class GuiSystemTray;
@@ -229,6 +230,7 @@ private:
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
   GuiExtra* mp_extra;
+  GuiHome* mp_home;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   QList<GuiShareDesktop*> m_desktops;
 #endif
@@ -264,6 +266,7 @@ private:
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
   QAction* mp_actViewExtra;
+  QAction* mp_actViewHome;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
@@ -291,6 +294,7 @@ private:
   QDockWidget* mp_dockSavedChatList;
   QDockWidget* mp_dockChatList;
   QDockWidget* mp_dockFileTransfers;
+  QDockWidget* mp_dockHome;
 
   GuiSystemTray* mp_trayIcon;
 

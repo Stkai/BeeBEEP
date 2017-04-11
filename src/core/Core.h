@@ -150,7 +150,6 @@ signals:
   void fileShareAvailable( const User& );
   void localShareListAvailable();
   void savedChatListAvailable();
-  void updateStatus( const QString&, int );
   void updateGroup( VNumber );
   void userConnectionStatusChanged( const User& );
   void networkInterfaceIsDown();

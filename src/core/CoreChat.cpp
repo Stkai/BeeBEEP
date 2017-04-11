@@ -450,7 +450,6 @@ void Core::addListToSavedChats()
 
   if( bscl->savedChats().size() > 1 )
   {
-    emit updateStatus( loading_status, 3000 );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/saved-chat.png", "*H*" ), loading_status ),
                            DispatchToChat, ChatMessage::Other );
   }

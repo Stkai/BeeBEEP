@@ -448,22 +448,27 @@ QPixmap Bee::convertToGrayScale( const QPixmap& pix )
 
 QChar Bee::naviveFolderSeparator()
 {
-#ifdef Q_OS_WIN
-  return QChar( '\\' );
-#else
-  return QChar( '/' );
-#endif
+  return QDir::separator();
 }
 
-QString Bee::convertToNativeFolderSeparator( const QString& folder_path )
+QString Bee::convertToNativeFolderSeparator( const QString& raw_path )
 {
-  QString folder_path_converted = folder_path;
-#ifdef Q_OS_WIN
-  folder_path_converted.replace( QChar( '/' ), naviveFolderSeparator() );
+  QString path_converted( raw_path );
+  QChar from_char;
+#if defined( Q_FS_FAT ) || defined( Q_OS_OS2EMX ) || defined( Q_OS_SYMBIAN )
+  from_char = QLatin1Char( '/' );
 #else
-  folder_path_converted.replace( QChar( '\\' ), naviveFolderSeparator() );
+  from_char = QLatin1Char( '\\' );
 #endif
-  return folder_path_converted;
+  QChar to_char = QDir::separator();
+
+  for( int i = 0; i < (int)path_converted.length(); i++ )
+  {
+    if( path_converted[ i ] == from_char )
+      path_converted[ i ] = to_char;
+  }
+
+  return path_converted;
 }
 
 QString Bee::folderCdUp( const QString& folder_path )

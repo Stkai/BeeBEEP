@@ -119,7 +119,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( mp_core, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
-  connect( mp_core, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( mp_core, SIGNAL( updateGroup( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
@@ -141,24 +140,6 @@ GuiMain::GuiMain( QWidget *parent )
 
   //connect( mp_savedChat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
-  /*
-  connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
-  connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
-  connect( mp_shareLocal, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_shareLocal, SIGNAL( updateListRequest() ), mp_core, SLOT( buildLocalShareList() ) );
-  connect( mp_shareLocal, SIGNAL( removeAllPathsRequest() ), mp_core, SLOT( removeAllPathsFromShare() ) );
-
-  connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
-  connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
-  connect( mp_shareNetwork, SIGNAL( downloadSharedFiles( const QList<SharedFileInfo>& ) ), this, SLOT( downloadSharedFiles( const QList<SharedFileInfo>& ) ) );
-  connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
-
-  connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
-  connect( mp_shareBox, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  connect( mp_shareBox, SIGNAL( shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ) );
-  connect( mp_shareBox, SIGNAL( shareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ) );
-*/
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
   connect( mp_userList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
@@ -187,7 +168,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
 
   connect( mp_home, SIGNAL( openDefaultChatRequest() ), this, SLOT( showDefaultChat() ) );
-  connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+
 
   mp_home->loadDefaultChat();
 
@@ -197,8 +178,12 @@ GuiMain::GuiMain( QWidget *parent )
   initGuiItems();
   updateShortcuts();
 
+#ifdef Q_OS_MACOS
+  setMinimumWidth( 340 );
+#else
   setMinimumWidth( 260 );
-  statusBar()->showMessage( tr( "Ready" ) );
+#endif
+  showMessage( tr( "Ready" ), 0 );
 }
 
 void GuiMain::initShortcuts()
@@ -1008,14 +993,14 @@ void GuiMain::createMenus()
   mp_menuView->addSeparator();
   mp_actViewExtra = mp_menuView->addAction( QIcon( ":/images/extra.png" ), tr( "Show extra window" ), this, SLOT( showExtraWindow() ) );
   mp_menuView->addSeparator();
+  mp_menuView->addAction( mp_actViewHome );
   mp_menuView->addAction( mp_actViewUsers );
   mp_menuView->addAction( mp_actViewGroups );
   mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
+
   /*
-  mp_actViewHome = mp_menuView->addAction( QIcon( ":/images/home.png" ), tr( "Show %1 home" ).arg( Settings::instance().programName() ), this, SLOT( raiseHomeView() ) );
-  mp_actViewHome->setStatusTip( tr( "Show the homepage with %1 activity" ).arg( Settings::instance().programName() ) );
   mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
@@ -1160,21 +1145,13 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewExtra );
   addToolBarBreak( Qt::RightToolBarArea );
+  mp_barPanel->addAction( mp_actViewHome );
   mp_barPanel->addAction( mp_actViewUsers );
   mp_barPanel->addAction( mp_actViewChats );
   mp_barPanel->addAction( mp_actViewGroups );
   mp_barPanel->addAction( mp_actViewSavedChats );
   mp_barPanel->addAction( mp_actViewFileTransfer );
   addToolBarBreak( Qt::RightToolBarArea );
-  /*
-  mp_barView->addAction( mp_actViewHome );
-  mp_barView->addAction( mp_actViewShareLocal );
-  mp_barView->addAction( mp_actViewShareNetwork );
-  mp_barView->addAction( mp_actViewShareBox );
-  mp_barView->addAction( mp_actViewScreenShot );
-  mp_barView->addAction( mp_actViewLog );
-  addToolBarBreak( Qt::RightToolBarArea );
-  */
 }
 
 void GuiMain::createDockWindows()
@@ -1188,7 +1165,6 @@ void GuiMain::createDockWindows()
   mp_actViewUsers = mp_dockUserList->toggleViewAction();
   mp_actViewUsers->setIcon( QIcon( ":/images/user-list.png" ) );
   mp_actViewUsers->setText( tr( "Show the user panel" ) );
-  mp_actViewUsers->setStatusTip( tr( "Show the list of the connected users" ) );
   mp_actViewUsers->setData( 99 );
 
   mp_dockGroupList = new QDockWidget( tr( "Groups" ), this );
@@ -1200,7 +1176,6 @@ void GuiMain::createDockWindows()
   mp_actViewGroups = mp_dockGroupList->toggleViewAction();
   mp_actViewGroups->setIcon( QIcon( ":/images/group.png" ) );
   mp_actViewGroups->setText( tr( "Show the group panel" ) );
-  mp_actViewGroups->setStatusTip( tr( "Show the list of your groups" ) );
   mp_actViewGroups->setData( 99 );
 
   mp_dockChatList = new QDockWidget( tr( "Chats" ), this );
@@ -1212,7 +1187,6 @@ void GuiMain::createDockWindows()
   mp_actViewChats = mp_dockChatList->toggleViewAction();
   mp_actViewChats->setIcon( QIcon( ":/images/chat-list.png" ) );
   mp_actViewChats->setText( tr( "Show the chat panel" ) );
-  mp_actViewChats->setStatusTip( tr( "Show the list of the chats" ) );
   mp_actViewChats->setData( 99 );
 
   mp_dockSavedChatList = new QDockWidget( tr( "History" ), this );
@@ -1224,7 +1198,6 @@ void GuiMain::createDockWindows()
   mp_actViewSavedChats = mp_dockSavedChatList->toggleViewAction();
   mp_actViewSavedChats->setIcon( QIcon( ":/images/saved-chat-list.png" ) );
   mp_actViewSavedChats->setText( tr( "Show the history panel" ) );
-  mp_actViewSavedChats->setStatusTip( tr( "Show the list of the saved chats" ) );
   mp_actViewSavedChats->setData( 99 );
 
   mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
@@ -1236,8 +1209,19 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer = mp_dockFileTransfers->toggleViewAction();
   mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
-  mp_actViewFileTransfer->setStatusTip( tr( "Show the list of the file transfers" ) );
   mp_actViewFileTransfer->setData( 99 );
+
+  mp_dockHome = new QDockWidget( tr( "Activities" ), this );
+  mp_dockHome->setObjectName( "GuiHomeDock" );
+  mp_home = new GuiHome( mp_dockUserList );
+  connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  mp_dockHome->setWidget( mp_home );
+  mp_dockHome->setAllowedAreas( Qt::AllDockWidgetAreas );
+  addDockWidget( Qt::RightDockWidgetArea, mp_dockHome );
+  mp_actViewHome = mp_dockHome->toggleViewAction();
+  mp_actViewHome->setIcon( QIcon( ":/images/home.png" ) );
+  mp_actViewHome->setText( tr( "Show activities" ) );
+  mp_actViewHome->setData( 99 );
 
   if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() || Settings::instance().hideOtherPanels() )
   {
@@ -1245,7 +1229,10 @@ void GuiMain::createDockWindows()
     mp_dockSavedChatList->hide();
     mp_dockFileTransfers->hide();
     if( Settings::instance().hideOtherPanels() )
+    {
+      mp_dockHome->hide();
       mp_dockChatList->hide();
+    }
   }
 
   mp_dockUserList->setVisible( !Settings::instance().hideUsersPanel() );
@@ -1716,8 +1703,8 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
 
 void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
 {
-  if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() && mp_extra )
-    mp_extra->addSystemMessage( cm );
+  if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() )
+    mp_home->addSystemMessage( cm );
 
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   bool chat_is_visible = fl_chat && fl_chat->chatIsVisible();
@@ -2182,15 +2169,15 @@ void GuiMain::selectDownloadDirectory()
 
 void GuiMain::showTipOfTheDay()
 {
-  if( mp_extra )
-    mp_extra->showUp();
+  if( !mp_dockHome->isVisible() )
+    mp_dockHome->show();
   mp_core->showTipOfTheDay();
 }
 
 void GuiMain::showFactOfTheDay()
 {
-  if( mp_extra )
-    mp_extra->showUp();
+  if( !mp_dockHome->isVisible() )
+    mp_dockHome->show();
   mp_core->showFactOfTheDay();
 }
 
@@ -2712,6 +2699,8 @@ void GuiMain::loadSession()
     mp_trayIcon->show();
 #endif
   }
+
+  mp_home->loadSystemMessages();
 }
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )
@@ -3621,7 +3610,6 @@ void GuiMain::readAllMessagesInChat( VNumber chat_id )
     mp_userList->setUnreadMessages( c.id(), 0 );
     mp_chatList->updateChat( c );
     mp_groupList->updateChat( c );
-    statusBar()->clearMessage();
   }
 
   GuiFloatingChat *fl_chat = floatingChat( chat_id );
@@ -3742,7 +3730,6 @@ void GuiMain::showExtraWindow()
   if( !mp_extra )
   {
     mp_extra = new GuiExtra( mp_core, 0 );
-    mp_extra->updateSystemMessages();
     mp_extra->updateLocalFileList();
     connect( mp_extra, SIGNAL( aboutToClose() ), this, SLOT( onExtraWindowClosed() ) );
     connect( mp_extra, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );

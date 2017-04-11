@@ -957,8 +957,8 @@ void Settings::load()
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
   m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
-  m_homeShowMessageTimestamp = sets->value( "ShowHomeTimestamp", true ).toBool();
-  m_homeShowMessageDatestamp = sets->value( "ShowHomeDatestamp", false ).toBool();
+  m_homeShowMessageTimestamp = sets->value( "ShowActivitiesTimestamp", false ).toBool();
+  m_homeShowMessageDatestamp = sets->value( "ShowActivitiesDatestamp", false ).toBool();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
   m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
   m_userSortingMode = qMax( 0, (int)sets->value( "UserSortingMode", 0 ).toInt() );
@@ -1231,8 +1231,8 @@ void Settings::save()
   sets->setValue( "Shortcuts", m_shortcuts );
   sets->setValue( "UseShortcuts", m_useShortcuts );
   sets->setValue( "UseNativeFileDialogs", m_useNativeDialogs );
-  sets->setValue( "ShowHomeTimestamp", m_homeShowMessageTimestamp );
-  sets->setValue( "ShowHomeDatestamp", m_homeShowMessageDatestamp );
+  sets->setValue( "ShowActivitiesTimestamp", m_homeShowMessageTimestamp );
+  sets->setValue( "ShowActivitiesDatestamp", m_homeShowMessageDatestamp );
   sets->setValue( "UsePreviewFileDialog", m_usePreviewFileDialog );
   sets->setValue( "PreviewFileDialogGeometry", m_previewFileDialogGeometry );
   sets->setValue( "PreviewFileDialogImageSize", m_previewFileDialogImageSize );
