@@ -92,6 +92,7 @@ private:
   QCompleter* mp_completer;
 
   QList<QAction*> m_actionsToContextMenu;
+  QMenu* mp_menuContext;
 
 };
 

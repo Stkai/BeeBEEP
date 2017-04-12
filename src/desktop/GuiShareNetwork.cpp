@@ -40,6 +40,8 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
 
   m_fileInfoList.initTree( mp_twShares, false );
 
+  mp_menuContext = new QMenu( this );
+
   connect( mp_twShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_twShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openDownloadMenu( const QPoint& ) ) );
 }
@@ -387,11 +389,11 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& p )
   else
     selected_items = 0;
 
-  QMenu menu;
+  mp_menuContext->clear();
 
   if( selected_items )
   {
-    QAction* act = menu.addAction( QIcon( ":/images/download.png" ), "", this, SLOT( downloadSelected() ) );
+    QAction* act = mp_menuContext->addAction( QIcon( ":/images/download.png" ), "", this, SLOT( downloadSelected() ) );
     QString action_text;
     if( selected_items >= Settings::instance().maxQueuedDownloads() )
     {
@@ -402,14 +404,14 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& p )
       action_text = selected_items == 1 ? tr( "Download single file" ) : tr( "Download %1 selected files" ).arg( selected_items );
     act->setText( action_text );
 
-    menu.addSeparator();
-    menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
-    menu.addSeparator();
+    mp_menuContext->addSeparator();
+    mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
+    mp_menuContext->addSeparator();
   }
 
-  menu.addAction( QIcon( ":/images/add.png" ), tr( "Expand all items" ), mp_twShares, SLOT( expandAll() ) );
-  menu.addAction( QIcon( ":/images/remove.png" ), tr( "Collapse all items" ), mp_twShares, SLOT( collapseAll() ) );
-  menu.exec( QCursor::pos() );
+  mp_menuContext->addAction( QIcon( ":/images/add.png" ), tr( "Expand all items" ), mp_twShares, SLOT( expandAll() ) );
+  mp_menuContext->addAction( QIcon( ":/images/remove.png" ), tr( "Collapse all items" ), mp_twShares, SLOT( collapseAll() ) );
+  mp_menuContext->exec( QCursor::pos() );
 }
 
 void GuiShareNetwork::downloadSelected()

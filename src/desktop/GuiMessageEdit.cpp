@@ -47,6 +47,8 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
 #endif
   mp_completer = 0;
 
+  mp_menuContext = new QMenu( this );
+
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
   connect( this, SIGNAL( undoAvailable( bool) ), this, SLOT( setUndoAvailable( bool ) ) );
   connect( this, SIGNAL( redoAvailable( bool ) ), this, SLOT( setRedoAvailable( bool ) ) );
@@ -364,27 +366,28 @@ void GuiMessageEdit::setRedoAvailable( bool new_value )
 
 void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
 {
-  QMenu custom_context_menu;
+  mp_menuContext->clear();
+
   QAction* act;
-  act = custom_context_menu.addAction( QIcon( ":/images/undo.png" ), tr( "Undo" ), this, SLOT( undo() ), QKeySequence::Undo );
+  act = mp_menuContext->addAction( QIcon( ":/images/undo.png" ), tr( "Undo" ), this, SLOT( undo() ), QKeySequence::Undo );
   act->setEnabled( m_undoAvailable );
-  act = custom_context_menu.addAction( QIcon( ":/images/redo.png" ), tr( "Redo" ), this, SLOT( redo() ), QKeySequence::Redo );
+  act = mp_menuContext->addAction( QIcon( ":/images/redo.png" ), tr( "Redo" ), this, SLOT( redo() ), QKeySequence::Redo );
   act->setEnabled( m_redoAvailable );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( QIcon( ":/images/cut.png" ), tr( "Cut" ), this, SLOT( cut() ), QKeySequence::Cut );
-  act = custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy" ), this, SLOT( copy() ), QKeySequence::Copy );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/cut.png" ), tr( "Cut" ), this, SLOT( cut() ), QKeySequence::Cut );
+  act = mp_menuContext->addAction( QIcon( ":/images/copy.png" ), tr( "Copy" ), this, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !textCursor().selectedText().isEmpty() );
-  act = custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
+  act = mp_menuContext->addAction( QIcon( ":/images/paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
   act->setEnabled( canPaste() );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
-  custom_context_menu.addSeparator();
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addSeparator();
   if( !m_actionsToContextMenu.isEmpty() )
   {
     foreach( QAction* act, m_actionsToContextMenu )
-      custom_context_menu.addAction( act );
+      mp_menuContext->addAction( act );
   }
-  custom_context_menu.exec( event->globalPos() );
+  mp_menuContext->exec( event->globalPos() );
 }
 
 bool GuiMessageEdit::canInsertFromMimeData( const QMimeData* source ) const

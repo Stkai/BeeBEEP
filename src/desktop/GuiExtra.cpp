@@ -176,14 +176,10 @@ void GuiExtra::createActions()
 void GuiExtra::createToolbars()
 {
   mp_actViewShareLocal = mp_barView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
-  mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
   mp_actViewShareNetwork = mp_barView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
-  mp_actViewShareNetwork->setStatusTip( tr( "Show the list of the network shared files" ) );
   mp_actViewShareBox = mp_barView->addAction( QIcon( ":/images/sharebox.png" ), tr( "Show the shared boxes" ), this, SLOT( raiseShareBoxView() ) );
   mp_actViewScreenShot = mp_barView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
-  mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
   mp_actViewLog = mp_barView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
-  mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
   addToolBarBreak( Qt::RightToolBarArea );
 }
 

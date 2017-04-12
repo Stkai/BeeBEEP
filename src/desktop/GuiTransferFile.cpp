@@ -57,6 +57,9 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 #endif
   hv->hide();
 
+  mp_menuContext = new QMenu( this );
+  mp_menuContext->addAction( QIcon( ":/images/remove.png" ), tr( "Remove all transfers" ), this, SLOT( removeAllCompleted() ) );
+
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMenu( const QPoint& ) ) );
@@ -246,11 +249,7 @@ void GuiTransferFile::checkItemDoubleClicked( QTreeWidgetItem* item, int )
 void GuiTransferFile::openMenu( const QPoint& )
 {
   if( topLevelItemCount() > 0 )
-  {
-    QMenu menu;
-    menu.addAction( QIcon( ":/images/remove.png" ), tr( "Remove all transfers" ), this, SLOT( removeAllCompleted() ) );
-    menu.exec( QCursor::pos() );
-  }
+    mp_menuContext->exec( QCursor::pos() );
 }
 
 void GuiTransferFile::removeAllCompleted()

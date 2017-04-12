@@ -82,6 +82,7 @@ private:
 
   GuiFileInfoList m_fileInfoList;
   QQueue<UserFileInfo> m_queue;
+  QMenu* mp_menuContext;
 
 };
 

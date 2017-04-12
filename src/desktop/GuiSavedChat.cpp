@@ -28,10 +28,12 @@
 
 
 GuiSavedChat::GuiSavedChat( QWidget* parent )
- : QWidget( parent )
+ : QDialog( parent )
 {
   setupUi( this );
   setObjectName( "GuiSavedChat" );
+
+  mp_menuContext = new QMenu( this );
 
   mp_scFindTextInChat = new QShortcut( this );
   mp_scFindTextInChat->setContext( Qt::WindowShortcut );
@@ -53,41 +55,47 @@ GuiSavedChat::GuiSavedChat( QWidget* parent )
 void GuiSavedChat::showSavedChat( const QString& chat_name )
 {
   m_savedChatName = chat_name;
-  QString html_text = QString( "%1: <b>%2</b> <br />" ).arg( tr( "Saved chat" ) ).arg( chat_name );
+  QString html_text = "";
   if( !ChatManager::instance().chatHasSavedText( chat_name ) )
     html_text += QString( "<br />*** %1 ***<br />" ).arg( tr( "Empty" ) );
   else
-    html_text += QString( "<br />%1<br /><br /><br />" ).arg( ChatManager::instance().chatSavedText( chat_name ) );
+    html_text += QString( "%1<br /><br /><br />" ).arg( ChatManager::instance().chatSavedText( chat_name ) );
 
   mp_teSavedChat->setText( html_text );
 
   QScrollBar *bar = mp_teSavedChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
+
+  setWindowTitle( chat_name );
 }
 
 void GuiSavedChat::customContextMenu( const QPoint& p )
 {
-  QMenu custom_context_menu;
+  mp_menuContext->clear();
 
-  QAction* act = custom_context_menu.addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
+  QAction* act = mp_menuContext->addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::FindTextInChat );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     act->setShortcut( ks );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teSavedChat, SLOT( copy() ), QKeySequence::Copy );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSavedChat, SLOT( selectAll() ), QKeySequence::SelectAll );
-  custom_context_menu.addSeparator();
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teSavedChat, SLOT( copy() ), QKeySequence::Copy );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSavedChat, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addSeparator();
   if( !mp_teSavedChat->textCursor().selectedText().isEmpty() )
   {
-    custom_context_menu.addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
-    custom_context_menu.addSeparator();
+    mp_menuContext->addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+    mp_menuContext->addSeparator();
   }
-  act = custom_context_menu.addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
+  act = mp_menuContext->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
   ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     act->setShortcut( ks );
-  custom_context_menu.exec( mapToGlobal( p ) );
+
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( deleteSavedChat() ) );
+
+  mp_menuContext->exec( mapToGlobal( p ) );
 }
 
 void GuiSavedChat::updateShortcuts()
@@ -195,4 +203,10 @@ void GuiSavedChat::openSelectedTextAsUrl()
     QUrl url = QUrl::fromUserInput( selected_text );
     emit openUrl( url );
   }
+}
+
+void GuiSavedChat::deleteSavedChat()
+{
+  emit deleteSavedChatRequest( m_savedChatName );
+  close();
 }

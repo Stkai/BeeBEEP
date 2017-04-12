@@ -178,6 +178,8 @@ public:
   inline void setChatShowMessageDatestamp( bool );
   inline bool homeShowMessageDatestamp() const;
   inline void setHomeShowMessageDatestamp( bool );
+  inline void setHomeBackgroundColor( const QString& );
+  inline const QString& homeBackgroundColor() const;
   inline void setChatUseHtmlTags( bool );
   inline bool chatUseHtmlTags() const;
   inline void setChatUseClickableLinks( bool );
@@ -656,6 +658,7 @@ private:
 
   bool m_homeShowMessageTimestamp;
   bool m_homeShowMessageDatestamp;
+  QString m_homeBackgroundColor;
 
   QString m_applicationUuid;
   QDate m_applicationUuidCreationDate;
@@ -946,6 +949,7 @@ inline bool Settings::playBuzzSound() const { return m_playBuzzSound; }
 inline bool Settings::disablePrivateChats() const { return m_disablePrivateChats; }
 inline void Settings::setShowChatsInOneWindow( bool new_value ) { m_showChatsInOneWindow = new_value; }
 inline bool Settings::showChatsInOneWindow() const { return m_showChatsInOneWindow; }
-
+inline void Settings::setHomeBackgroundColor( const QString& new_value ) { m_homeBackgroundColor = new_value; }
+inline const QString& Settings::homeBackgroundColor() const { return m_homeBackgroundColor; }
 
 #endif // BEEBEEP_SETTINGS_H

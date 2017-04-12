@@ -49,9 +49,14 @@ protected slots:
   void onAddTimestampClicked();
   void reloadMessages();
   void printActivities();
+  void selectBackgroundColor();
+
+private:
+  void setBackgroundColor( const QString& );
 
 private:
   QString m_prev_sys_mess;
+  QMenu* mp_menuContext;
 
 };
 

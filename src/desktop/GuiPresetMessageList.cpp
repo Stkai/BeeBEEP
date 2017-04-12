@@ -90,23 +90,23 @@ void GuiPresetMessageList::onDoubleClicked( QTreeWidgetItem* item, int )
 
 void GuiPresetMessageList::showContextMenu( const QPoint& p )
 {
-  QMenu menu;
+  QMenu* menu = new QMenu( this );
   QTreeWidgetItem* item = itemAt( p );
   if( item )
   {
-    menu.addAction( mp_actRename );
-    menu.addSeparator();
-    menu.addAction( mp_actEdit );
-    menu.addSeparator();
-    menu.addAction( mp_actRemove );
+    menu->addAction( mp_actRename );
+    menu->addSeparator();
+    menu->addAction( mp_actEdit );
+    menu->addSeparator();
+    menu->addAction( mp_actRemove );
   }
   else
   {
-    menu.addAction( mp_actNew );
+    menu->addAction( mp_actNew );
     clearSelection();
   }
 
-  QAction* ret_act = menu.exec( QCursor::pos() );
+  QAction* ret_act = menu->exec( QCursor::pos() );
   if( !ret_act )
     return;
 
@@ -118,7 +118,6 @@ void GuiPresetMessageList::showContextMenu( const QPoint& p )
     onRemove( item );
   else
     onNew();
-
 }
 
 void GuiPresetMessageList::savePreset( const QString& preset_key, const QString& preset_value )

@@ -34,8 +34,6 @@ class GuiGroupList : public QTreeWidget
 public:
   GuiGroupList( QWidget* parent = 0 );
 
-  virtual QSize sizeHint() const;
-
   void loadGroups();
   void updateGroup( VNumber );
   void updateUser( const User& );

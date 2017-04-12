@@ -132,6 +132,8 @@ private:
 
   QMenu* mp_menuChat;
   QMenu* mp_menuMembers;
+  QMenu* mp_menuContext;
+  QMenu* mp_menuFilters;
   QAction* mp_actSendFile;
   QAction* mp_actGroupAdd;
   QAction* mp_actClear;

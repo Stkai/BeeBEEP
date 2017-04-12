@@ -47,7 +47,7 @@ GuiChat::GuiChat( QWidget *parent )
   QGridLayout* grid_layout = new QGridLayout( this );
   grid_layout->setSpacing( 0 );
   grid_layout->setObjectName( QString::fromUtf8( "grid_layout" ) );
-  grid_layout->setContentsMargins( 0, 0, 0, 0 );
+  grid_layout->setContentsMargins( 4, 4, 4, 4 );
 
   grid_layout->addWidget( mp_frameHeader, 0, 0, 1, 1 );
 
@@ -90,8 +90,10 @@ GuiChat::GuiChat( QWidget *parent )
   m_lastMessageUserId = 0;
   m_lastTextFound = "";
 
+  mp_menuContext = new QMenu( this );
+  mp_menuFilters = new QMenu( this );
+
   mp_menuMembers = new QMenu( tr( "Members" ), this );
-  mp_menuMembers->setStatusTip( tr( "Show the members of the chat" ) );
   mp_menuMembers->setIcon( QIcon( ":/images/group.png" ) );
   connect( mp_menuMembers->menuAction(), SIGNAL( triggered() ), this, SLOT( showMembersMenu() ) );
 
@@ -107,6 +109,22 @@ GuiChat::GuiChat( QWidget *parent )
   mp_scViewEmoticons->setContext( Qt::WindowShortcut );
   connect( mp_scViewEmoticons, SIGNAL( activated() ), this, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ) );
 
+  mp_actSelectBackgroundColor = new QAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ), this );
+  connect( mp_actSelectBackgroundColor, SIGNAL( triggered() ), this, SLOT( selectBackgroundColor() ) );
+
+  mp_actSaveAs = new QAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this );
+  connect( mp_actSaveAs, SIGNAL( triggered() ), this, SLOT( saveChat() ) );
+
+  mp_actPrint = new QAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this );
+  mp_actPrint->setShortcut( QKeySequence::Print );
+  connect( mp_actPrint, SIGNAL( triggered() ), this, SLOT( printChat() ) );
+
+  mp_actClear = new QAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this );
+  connect( mp_actClear, SIGNAL( triggered() ), this, SLOT( clearChat() ) );
+
+  mp_actFindTextInChat = new QAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this );
+  connect( mp_actFindTextInChat, SIGNAL( triggered() ), this, SLOT( showFindTextInChatDialog() ) );
+
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
@@ -119,18 +137,10 @@ GuiChat::GuiChat( QWidget *parent )
 
 void GuiChat::setupToolBar( QToolBar* bar )
 {
-  QAction* act;
-
-  act = bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
-  act->setStatusTip( tr( "Select your favourite chat font style" ) );
-  act = bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
-  act->setStatusTip( tr( "Select your favourite font color for the chat messages" ) );
-  mp_actSelectBackgroundColor = bar->addAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ), this, SLOT( selectBackgroundColor() ) );
-  mp_actSelectBackgroundColor->setStatusTip( tr( "Select your favourite background color for the chat window" ) );
-  act = bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
-  act->setStatusTip( tr( "Select the message types which will be shown in chat" ) );
-  act = bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
-  act->setStatusTip( tr( "Click to show the settings menu of the chat" ) );
+  bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
+  bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
+  bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
+  bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
   mp_actSpellChecker = bar->addAction( QIcon( ":/images/spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
   mp_actSpellChecker->setCheckable( true );
   mp_actCompleter = bar->addAction( QIcon( ":/images/dictionary.png" ), tr( "Word completer" ), this, SLOT( onCompleterActionClicked() ) );
@@ -142,29 +152,14 @@ void GuiChat::setupToolBar( QToolBar* bar )
 
   bar->addAction( mp_menuMembers->menuAction() );
   bar->addSeparator();
-
-  mp_actFindTextInChat = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
   mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
-  mp_actSendFile->setStatusTip( tr( "Send a file to a user or a group" ) );
   mp_actSendFolder = bar->addAction( QIcon( ":/images/send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
-  mp_actSaveAs = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this, SLOT( saveChat() ) );
-  mp_actSaveAs->setStatusTip( tr( "Save the messages of the current chat to a file" ) );
-  mp_actPrint = bar->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
-  mp_actPrint->setShortcut( QKeySequence::Print );
-  mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this, SLOT( clearChat() ) );
-  mp_actClear->setStatusTip( tr( "Clear all the messages of the chat" ) );
   bar->addSeparator();
-
   mp_actGroupWizard = bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
-  mp_actGroupWizard->setStatusTip( tr( "Create a group from this chat" ) );
   mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
-  mp_actGroupAdd->setStatusTip( tr( "Change the name of the group or add users" ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
-  mp_actLeave->setStatusTip( tr( "Leave the group" ) );
-
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
-
 }
 
 void GuiChat::updateActions( bool is_connected, int connected_users )
@@ -225,25 +220,30 @@ void GuiChat::checkChatDisabled( const Chat& c )
 
 void GuiChat::customContextMenu( const QPoint& p )
 {
-  QMenu custom_context_menu;
-  custom_context_menu.addAction( mp_actFindTextInChat );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
-  custom_context_menu.addSeparator();
-  QAction* act = custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
-  act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
-  act = custom_context_menu.addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
-  act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( mp_actSaveAs );
-  custom_context_menu.addAction( mp_actPrint );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( mp_actClear );
-  custom_context_menu.addSeparator();
-  custom_context_menu.addAction( mp_actSendFile );
-  custom_context_menu.addAction( mp_actSendFolder );
+  mp_menuContext->clear();
 
-  custom_context_menu.exec( mapToGlobal( p ) );
+  if( mp_actSelectBackgroundColor->isEnabled() )
+  {
+    mp_menuContext->addAction( mp_actSelectBackgroundColor );
+    mp_menuContext->addSeparator();
+  }
+  mp_menuContext->addAction( mp_actFindTextInChat );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addSeparator();
+  QAction* act = mp_menuContext->addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
+  act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
+  act = mp_menuContext->addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+  act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( mp_actSaveAs );
+  mp_menuContext->addAction( mp_actPrint );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( mp_actClear );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( mp_actSendFile );
+  mp_menuContext->addAction( mp_actSendFolder );
+  mp_menuContext->exec( mapToGlobal( p ) );
 }
 
 bool GuiChat::messageCanBeShowed( const ChatMessage& cm )
@@ -261,24 +261,24 @@ bool GuiChat::historyCanBeShowed()
 
 void GuiChat::showChatMessageFilterMenu()
 {
-  QMenu filter_menu;
+  mp_menuFilters->clear();
   QAction* act;
 
-  act = filter_menu.addAction( tr( "Show only messages in default chat" ), this, SLOT( changeChatMessageFilter() ) );
+  act = mp_menuFilters->addAction( tr( "Show only messages in default chat" ), this, SLOT( changeChatMessageFilter() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showOnlyMessagesInDefaultChat() );
   act->setData( (int)ChatMessage::NumTypes );
-  filter_menu.addSeparator();
+  mp_menuFilters->addSeparator();
 
   for( int i = ChatMessage::System; i < ChatMessage::NumTypes; i++ )
   {
-    act = filter_menu.addAction( Bee::chatMessageTypeToString( i ), this, SLOT( changeChatMessageFilter() ) );
+    act = mp_menuFilters->addAction( Bee::chatMessageTypeToString( i ), this, SLOT( changeChatMessageFilter() ) );
     act->setCheckable( true );
     act->setChecked( !Settings::instance().chatMessageFilter().testBit( i ) );
     act->setData( i );
   }
 
-  filter_menu.exec( QCursor::pos() );
+  mp_menuFilters->exec( QCursor::pos() );
 }
 
 void GuiChat::changeChatMessageFilter()

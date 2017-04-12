@@ -67,11 +67,6 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
 }
 
-QSize GuiGroupList::sizeHint() const
-{
-  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
-}
-
 void GuiGroupList::loadGroups()
 {
   if( topLevelItemCount() > 0 )

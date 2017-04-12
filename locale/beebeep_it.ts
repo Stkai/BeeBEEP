@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -296,7 +296,7 @@
     </message>
     <message>
         <source>Adding to file sharing</source>
-        <translation>Aggiungo ai file condivisi in rete</translation>
+        <translation type="vanished">Aggiungo ai file condivisi in rete</translation>
     </message>
     <message>
         <source>%1 %2 has not file shared.</source>
@@ -308,7 +308,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing with %2 files, %3 (elapsed time: %4)</source>
-        <translation>%1 è stata condivisa in rete con %2 file, %3 (elaborazione: %4)</translation>
+        <translation type="vanished">%1 è stata condivisa in rete con %2 file, %3 (elaborazione: %4)</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
@@ -649,6 +649,10 @@
     <message>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3.</source>
         <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso soprannome dell&apos;utente connesso %3.</translation>
+    </message>
+    <message>
+        <source>%1 is added to file sharing with %2 files, %3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -996,7 +1000,7 @@
     </message>
     <message>
         <source>Select your favourite chat font style</source>
-        <translation>Seleziona il carattere in cui vuoi che vengano visualizzati i messaggi</translation>
+        <translation type="vanished">Seleziona il carattere in cui vuoi che vengano visualizzati i messaggi</translation>
     </message>
     <message>
         <source>Change font color</source>
@@ -1004,7 +1008,7 @@
     </message>
     <message>
         <source>Select your favourite font color for the chat messages</source>
-        <translation>Seleziona il colore del carattere per i tuoi messaggi</translation>
+        <translation type="vanished">Seleziona il colore del carattere per i tuoi messaggi</translation>
     </message>
     <message>
         <source>Send file</source>
@@ -1012,7 +1016,7 @@
     </message>
     <message>
         <source>Send a file to a user or a group</source>
-        <translation>Invia un file ad un utente o ad un gruppo</translation>
+        <translation type="vanished">Invia un file ad un utente o ad un gruppo</translation>
     </message>
     <message>
         <source>Save chat</source>
@@ -1020,7 +1024,7 @@
     </message>
     <message>
         <source>Save the messages of the current chat to a file</source>
-        <translation>Salva i messaggi della conversazione corrente in un file</translation>
+        <translation type="vanished">Salva i messaggi della conversazione corrente in un file</translation>
     </message>
     <message>
         <source>Create group chat</source>
@@ -1044,7 +1048,7 @@
     </message>
     <message>
         <source>Clear all the messages of the chat</source>
-        <translation>Cancella tutti i messaggi della conversazione</translation>
+        <translation type="vanished">Cancella tutti i messaggi della conversazione</translation>
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
@@ -1134,7 +1138,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Click to show the settings menu of the chat</source>
-        <translation>Premi qui per mostrare il menu delle preferenze delle conversazioni</translation>
+        <translation type="vanished">Premi qui per mostrare il menu delle preferenze delle conversazioni</translation>
     </message>
     <message>
         <source>Show only messages in default chat</source>
@@ -1146,7 +1150,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Show the members of the chat</source>
-        <translation>Mostra i membri della conversazione</translation>
+        <translation type="vanished">Mostra i membri della conversazione</translation>
     </message>
     <message>
         <source>last %1 messages</source>
@@ -1166,7 +1170,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Select your favourite background color for the chat window</source>
-        <translation>Seleziona il tuo colore di sfonto preferito per la conversazione</translation>
+        <translation type="vanished">Seleziona il tuo colore di sfonto preferito per la conversazione</translation>
     </message>
     <message>
         <source>Create group from chat</source>
@@ -1174,7 +1178,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Create a group from this chat</source>
-        <translation>Crea un gruppo da questa conversazione</translation>
+        <translation type="vanished">Crea un gruppo da questa conversazione</translation>
     </message>
     <message>
         <source>Create chat</source>
@@ -1262,7 +1266,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Select the message types which will be shown in chat</source>
-        <translation>Seleziona la tipologia di messaggi che vuoi che sia mostrata nella conversazione</translation>
+        <translation type="vanished">Seleziona la tipologia di messaggi che vuoi che sia mostrata nella conversazione</translation>
     </message>
     <message>
         <source>Send a buzz</source>
@@ -1270,7 +1274,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Change the name of the group or add users</source>
-        <translation>Cambia il nome del gruppo e aggiungi altri utenti</translation>
+        <translation type="vanished">Cambia il nome del gruppo e aggiungi altri utenti</translation>
     </message>
     <message>
         <source>Click to show user profile</source>
@@ -1557,11 +1561,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show %1 home</source>
-        <translation type="unfinished">Mostra la pagina iniziale di %1</translation>
+        <translation type="obsolete">Mostra la pagina iniziale di %1</translation>
     </message>
     <message>
         <source>Show the homepage with %1 activity</source>
-        <translation type="unfinished">Mostra la pagina iniziale con le attività di %1</translation>
+        <translation type="obsolete">Mostra la pagina iniziale con le attività di %1</translation>
     </message>
     <message>
         <source>Show my shared files</source>
@@ -1569,7 +1573,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the list of the files which I have shared</source>
-        <translation type="unfinished">Mostra la lista dei file che hai condiviso con gli altri utenti</translation>
+        <translation type="obsolete">Mostra la lista dei file che hai condiviso con gli altri utenti</translation>
     </message>
     <message>
         <source>Show the network shared files</source>
@@ -1577,7 +1581,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the list of the network shared files</source>
-        <translation type="unfinished">Mostra la lista dei file condivisi dagli altri utenti sulla rete</translation>
+        <translation type="obsolete">Mostra la lista dei file condivisi dagli altri utenti sulla rete</translation>
     </message>
     <message>
         <source>Show the shared boxes</source>
@@ -1589,7 +1593,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the utility to capture a screenshot</source>
-        <translation type="unfinished">Mostra l&apos;interfaccia per fare una foto allo schermo</translation>
+        <translation type="obsolete">Mostra l&apos;interfaccia per fare una foto allo schermo</translation>
     </message>
     <message>
         <source>Show the %1 log</source>
@@ -1597,7 +1601,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the application log to see if an error occurred</source>
-        <translation type="unfinished">Mostra i log dell&apos;applicazione per vedere se ci sono stati errori</translation>
+        <translation type="obsolete">Mostra i log dell&apos;applicazione per vedere se ci sono stati errori</translation>
     </message>
     <message>
         <source>Show the bar of local file sharing</source>
@@ -1647,7 +1651,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Add your preferred emoticon to the message</source>
-        <translation>Aggiungi la tua faccina preferita al messaggio</translation>
+        <translation type="vanished">Aggiungi la tua faccina preferita al messaggio</translation>
     </message>
     <message>
         <source>Window&apos;s geometry and state saved</source>
@@ -1752,8 +1756,8 @@ Inserisci un nome differente.</translation>
         <translation>Mostra l&apos;orario</translation>
     </message>
     <message>
-        <source>Activities</source>
-        <translation type="unfinished"></translation>
+        <source>Change background color</source>
+        <translation type="unfinished">Cambia il colore di sfondo</translation>
     </message>
 </context>
 <context>
@@ -1923,7 +1927,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Save the log in a file</source>
-        <translation>Salva il log in un file</translation>
+        <translation type="vanished">Salva il log in un file</translation>
     </message>
     <message>
         <source>Search</source>
@@ -1939,7 +1943,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Find keywords in the log</source>
-        <translation>Trova la parola chiave nel log</translation>
+        <translation type="vanished">Trova la parola chiave nel log</translation>
     </message>
     <message>
         <source>Please select a file to save the log.</source>
@@ -2025,7 +2029,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Disconnect from %1 network</source>
-        <translation>Disconnettiti dalla rete %1</translation>
+        <translation type="vanished">Disconnettiti dalla rete %1</translation>
     </message>
     <message>
         <source>&amp;Connect</source>
@@ -2033,7 +2037,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Connect to %1 network</source>
-        <translation>Connettiti alla rete %1</translation>
+        <translation type="vanished">Connettiti alla rete %1</translation>
     </message>
     <message>
         <source>Secure Network Chat version %1</source>
@@ -2073,7 +2077,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Close the chat and quit %1</source>
-        <translation>Esci da %1</translation>
+        <translation type="vanished">Esci da %1</translation>
     </message>
     <message>
         <source>Change your nickname...</source>
@@ -2145,7 +2149,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the informations about %1</source>
-        <translation>Mostra le informazioni sull&apos;applicazione %1</translation>
+        <translation type="vanished">Mostra le informazioni sull&apos;applicazione %1</translation>
     </message>
     <message>
         <source>&amp;Main</source>
@@ -2161,7 +2165,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select the download folder</source>
-        <translation>Seleziona una cartella dove salvare i file scaricati</translation>
+        <translation type="vanished">Seleziona una cartella dove salvare i file scaricati</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -2181,7 +2185,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If enabled the sender&apos;s nickname and his message are in the same line</source>
-        <translation>Se abilitata il soprannome ed il messaggio relativo staranno sulla stessa linea</translation>
+        <translation type="vanished">Se abilitata il soprannome ed il messaggio relativo staranno sulla stessa linea</translation>
     </message>
     <message>
         <source>Add a blank line between the messages</source>
@@ -2189,7 +2193,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If enabled the messages in the chat window are separated by a blank line</source>
-        <translation>Se abilitata i messaggi saranno separati da una linea vuota</translation>
+        <translation type="vanished">Se abilitata i messaggi saranno separati da una linea vuota</translation>
     </message>
     <message>
         <source>Show the messages&apos; timestamp</source>
@@ -2197,7 +2201,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If enabled the message shows its timestamp in the chat window</source>
-        <translation>Se abilitata i messaggi saranno preceduti dall&apos;orario di invio</translation>
+        <translation type="vanished">Se abilitata i messaggi saranno preceduti dall&apos;orario di invio</translation>
     </message>
     <message>
         <source>Show the user&apos;s colors</source>
@@ -2205,7 +2209,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If enabled the user&apos;s nickname in chat and in list is colored</source>
-        <translation>Se abilitata il soprannome degli utenti in chat e nella lista sarà colorato</translation>
+        <translation type="vanished">Se abilitata il soprannome degli utenti in chat e nella lista sarà colorato</translation>
     </message>
     <message>
         <source>Beep on new message arrived</source>
@@ -2213,7 +2217,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If enabled when a new message is arrived a sound is emitted</source>
-        <translation>Se abilitata un suono verrà emesso quando un nuovo messaggio arriverà</translation>
+        <translation type="vanished">Se abilitata un suono verrà emesso quando un nuovo messaggio arriverà</translation>
     </message>
     <message>
         <source>Generate automatic filename</source>
@@ -2221,7 +2225,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If the file to be downloaded already exists a new filename is automatically generated</source>
-        <translation>Se il file esiste già automaticamente ne verrà creato uno con un nuovo nome</translation>
+        <translation type="vanished">Se il file esiste già automaticamente ne verrà creato uno con un nuovo nome</translation>
     </message>
     <message>
         <source>Emoticons</source>
@@ -2237,11 +2241,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select your status</source>
-        <translation>Seleziona il tuo stato</translation>
+        <translation type="vanished">Seleziona il tuo stato</translation>
     </message>
     <message>
         <source>Your status will be %1</source>
-        <translation>Il tuo stato sarà %1</translation>
+        <translation type="vanished">Il tuo stato sarà %1</translation>
     </message>
     <message>
         <source>Add a status description...</source>
@@ -2257,7 +2261,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show me the tip of the day</source>
-        <translation>Mostrami il suggerimento del giorno</translation>
+        <translation type="vanished">Mostrami il suggerimento del giorno</translation>
     </message>
     <message>
         <source>About &amp;Qt...</source>
@@ -2265,7 +2269,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the informations about Qt library</source>
-        <translation>Mostra le informazioni sulla libreria Qt</translation>
+        <translation type="vanished">Mostra le informazioni sulla libreria Qt</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2293,7 +2297,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the list of the file transfers</source>
-        <translation>Mostra la lista dei trasferimenti dei file</translation>
+        <translation type="vanished">Mostra la lista dei trasferimenti dei file</translation>
     </message>
     <message>
         <source>User not found.</source>
@@ -2387,7 +2391,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled HTML tags are not removed from the message</source>
-        <translation>Se abilitata i tag HTML non saranno rimossi dai messaggi</translation>
+        <translation type="vanished">Se abilitata i tag HTML non saranno rimossi dai messaggi</translation>
     </message>
     <message>
         <source>Use clickable links</source>
@@ -2395,7 +2399,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the links in the message are recognized and made clickable</source>
-        <translation>Se abilitata i link nei messaggi saranno riconosciuti e resi cliccabili</translation>
+        <translation type="vanished">Se abilitata i link nei messaggi saranno riconosciuti e resi cliccabili</translation>
     </message>
     <message>
         <source>Plugins</source>
@@ -2451,7 +2455,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled only the online users are shown in the list</source>
-        <translation>Se abilitata saranno visualizzati nella lista solo gli utenti connessi</translation>
+        <translation type="vanished">Se abilitata saranno visualizzati nella lista solo gli utenti connessi</translation>
     </message>
     <message>
         <source>Chats</source>
@@ -2463,7 +2467,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the list of the chats</source>
-        <translation>Mostra la lista delle conversazioni</translation>
+        <translation type="vanished">Mostra la lista delle conversazioni</translation>
     </message>
     <message>
         <source>Please insert the Host Address or Broadcast Address to contact
@@ -2510,7 +2514,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the informations about %1&apos;s license</source>
-        <translation>Mostra le informazioni sulla licenza di %1</translation>
+        <translation type="vanished">Mostra le informazioni sulla licenza di %1</translation>
     </message>
     <message>
         <source>Show emoticons</source>
@@ -2618,7 +2622,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled %1 stays on top of the other windows</source>
-        <translation>Se abilitata %1 starà sempre in primo piano</translation>
+        <translation type="vanished">Se abilitata %1 starà sempre in primo piano</translation>
     </message>
     <message>
         <source>Close to tray icon</source>
@@ -2638,7 +2642,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Select the file to play on new message arrived</source>
-        <translation>Seleziona un file da suonare quando arriva un nuovo messaggio</translation>
+        <translation type="vanished">Seleziona un file da suonare quando arriva un nuovo messaggio</translation>
     </message>
     <message>
         <source>Play beep</source>
@@ -2646,7 +2650,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Test the file to play on new message arrived</source>
-        <translation>Prova il flle da suonare all&apos;arrivo di un nuovo messaggio</translation>
+        <translation type="vanished">Prova il flle da suonare all&apos;arrivo di un nuovo messaggio</translation>
     </message>
     <message>
         <source>Sound files (*.wav)</source>
@@ -2694,7 +2698,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled when a new message is arrived %1 is shown on top of all other windows</source>
-        <translation>Se abilitata %1 sarà mostrato in primo piano all&apos;arrivo di ogni nuovo messaggio</translation>
+        <translation type="vanished">Se abilitata %1 sarà mostrato in primo piano all&apos;arrivo di ogni nuovo messaggio</translation>
     </message>
     <message>
         <source>Load %1 on Windows startup</source>
@@ -2702,7 +2706,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled you can automatically load %1 at system startup</source>
-        <translation>Se abilitata %1 sarà lanciato automaticamente alla partenza di Windows</translation>
+        <translation type="vanished">Se abilitata %1 sarà lanciato automaticamente alla partenza di Windows</translation>
     </message>
     <message>
         <source>Now %1 will start on windows boot.</source>
@@ -2738,11 +2742,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the messages will be shown grouped by user</source>
-        <translation>Se abilitata i messaggi verranno visualizzati raggruppati per utente</translation>
+        <translation type="vanished">Se abilitata i messaggi verranno visualizzati raggruppati per utente</translation>
     </message>
     <message>
         <source>If enabled the password dialog will be shown on connection startup</source>
-        <translation>Se abilitata verrà mostrato all&apos;avvio la finestra con la richiesta della password</translation>
+        <translation type="vanished">Se abilitata verrà mostrato all&apos;avvio la finestra con la richiesta della password</translation>
     </message>
     <message>
         <source>Save messages</source>
@@ -2750,7 +2754,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the messages are saved when the program is closed</source>
-        <translation>Se abilitata i messaggi saranno salvati al termine del programma</translation>
+        <translation type="vanished">Se abilitata i messaggi saranno salvati al termine del programma</translation>
     </message>
     <message>
         <source>&amp;Chat</source>
@@ -2766,7 +2770,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the list of the saved chats</source>
-        <translation>Mostra la lista delle conversazioni salvate</translation>
+        <translation type="vanished">Mostra la lista delle conversazioni salvate</translation>
     </message>
     <message>
         <source>Enable tray icon notification</source>
@@ -2774,7 +2778,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled tray icon shows some notification about status and message</source>
-        <translation>Se abilitata l&apos;icona di sistema mostrerà notifiche sullo stato e sui messaggi</translation>
+        <translation type="vanished">Se abilitata l&apos;icona di sistema mostrerà notifiche sullo stato e sui messaggi</translation>
     </message>
     <message>
         <source>Check for new version...</source>
@@ -2782,7 +2786,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Open %1 website and check if a new version exists</source>
-        <translation>Apri il sito di %1 e controlla se esistono degli aggiornamenti</translation>
+        <translation type="vanished">Apri il sito di %1 e controlla se esistono degli aggiornamenti</translation>
     </message>
     <message>
         <source>Play %1</source>
@@ -2818,7 +2822,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Explore %1 official website</source>
-        <translation>Esplosa il sito ufficiale di %1</translation>
+        <translation type="vanished">Esplosa il sito ufficiale di %1</translation>
     </message>
     <message>
         <source>Show the main tool bar</source>
@@ -2838,7 +2842,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Open %1 website and download your preferred plugin</source>
-        <translation>April sito ufficiale di %1 e scarica i tuoi plugin preferiti</translation>
+        <translation type="vanished">April sito ufficiale di %1 e scarica i tuoi plugin preferiti</translation>
     </message>
     <message>
         <source>Please select a chat you would like to link the saved text.</source>
@@ -2922,7 +2926,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>I&apos;m so grateful and pleased about that</source>
-        <translation>Grazieeeee! Lo apprezzo molto</translation>
+        <translation type="vanished">Grazieeeee! Lo apprezzo molto</translation>
     </message>
     <message>
         <source>Show online users</source>
@@ -2930,7 +2934,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the list of the connected users</source>
-        <translation>Moastra la lista degli utenti connessi</translation>
+        <translation type="vanished">Moastra la lista degli utenti connessi</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -2942,7 +2946,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the list of your groups</source>
-        <translation>Mostra la lista dei tuoi gruppi</translation>
+        <translation type="vanished">Mostra la lista dei tuoi gruppi</translation>
     </message>
     <message>
         <source>Unable to add users in this chat. Please select a group one.</source>
@@ -3022,7 +3026,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show me the fact of the day</source>
-        <translation>Mostrami la perla di saggezza quotidiana</translation>
+        <translation type="vanished">Mostrami la perla di saggezza quotidiana</translation>
     </message>
     <message>
         <source>Select language...</source>
@@ -3030,7 +3034,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Select your preferred language</source>
-        <translation>Seleziona la traduzione che vuoi che il programma usi</translation>
+        <translation type="vanished">Seleziona la traduzione che vuoi che il programma usi</translation>
     </message>
     <message>
         <source>Enable file transfer</source>
@@ -3038,7 +3042,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled you can transfer files with the other users</source>
-        <translation>Se abilitata puoi inviare e ricevere file dagli altri utenti connessi</translation>
+        <translation type="vanished">Se abilitata puoi inviare e ricevere file dagli altri utenti connessi</translation>
     </message>
     <message>
         <source>Help online...</source>
@@ -3046,7 +3050,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Open %1 website to have online support</source>
-        <translation>Apri il sito ufficiale di %1 per avere supporto in linea</translation>
+        <translation type="vanished">Apri il sito ufficiale di %1 per avere supporto in linea</translation>
     </message>
     <message>
         <source>File transfer is disabled. You cannot download %1.</source>
@@ -3118,7 +3122,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled you can see a picture of the users in the list (if they have)</source>
-        <translation>Se abilitata puoi vedere un&apos;immagine degli utenti in lista (se l&apos;hanno pubblicata)</translation>
+        <translation type="vanished">Se abilitata puoi vedere un&apos;immagine degli utenti in lista (se l&apos;hanno pubblicata)</translation>
     </message>
     <message>
         <source>Disconnect</source>
@@ -3134,7 +3138,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Configure %1 network to search a user who is not in your local subnet</source>
-        <translation>Configura la impostazioni di %1 per cercare gli utenti che non sono nella tua sottorete</translation>
+        <translation type="vanished">Configura la impostazioni di %1 per cercare gli utenti che non sono nella tua sottorete</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -3154,7 +3158,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Broadcast a message in your network to find available users</source>
-        <translation>Manda un messaggio nella tua rete per individuare altri utenti connessi</translation>
+        <translation type="vanished">Manda un messaggio nella tua rete per individuare altri utenti connessi</translation>
     </message>
     <message>
         <source>Show colored nickname</source>
@@ -3202,7 +3206,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled %1 change your status to away after an idle of %2 minutes</source>
-        <translation>%1 cambierà il tuo stato in assente automaticamente quando non userai il computer per %2 minuti</translation>
+        <translation type="vanished">%1 cambierà il tuo stato in assente automaticamente quando non userai il computer per %2 minuti</translation>
     </message>
     <message>
         <source>Edit your profile...</source>
@@ -3210,7 +3214,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Change your profile information like your picture or your email or phone number</source>
-        <translation>Completa le informazioni del tuo profilo con la tua email il tuo numero di telefono o la tua immagine</translation>
+        <translation type="vanished">Completa le informazioni del tuo profilo con la tua email il tuo numero di telefono o la tua immagine</translation>
     </message>
     <message>
         <source>Show send message icon</source>
@@ -3222,7 +3226,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Search for users...</source>
-        <translation>Cerca utenti...</translation>
+        <translation type="vanished">Cerca utenti...</translation>
     </message>
     <message>
         <source>Show the chat toolbar</source>
@@ -3266,7 +3270,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Add the IP address and the port of the users you want to connect</source>
-        <translation>Aggiungi l&apos;indirizzo IP e la porta degli utenti a cui vuoi connetterti</translation>
+        <translation type="vanished">Aggiungi l&apos;indirizzo IP e la porta degli utenti a cui vuoi connetterti</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -3278,7 +3282,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled %1 will be start hided in system tray</source>
-        <translation>Se abilitata %1 partirà nascosto nell&apos;icona di sistema</translation>
+        <translation type="vanished">Se abilitata %1 partirà nascosto nell&apos;icona di sistema</translation>
     </message>
     <message>
         <source>Qt Library...</source>
@@ -3330,7 +3334,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled you can see the user&apos;s vCard when right click on it</source>
-        <translation>Se abilitata potrai vedere il profilo degli utenti premento il tasto destro del mouse</translation>
+        <translation type="vanished">Se abilitata potrai vedere il profilo degli utenti premento il tasto destro del mouse</translation>
     </message>
     <message>
         <source>Reset window geometry at startup</source>
@@ -3386,7 +3390,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled when the close button is clicked the window will be minimized to the system tray icon</source>
-        <translation>Se abilitata quando il pulsante chiudi sarà premuto la finestra verrà minimizzata ad icona di sistema</translation>
+        <translation type="vanished">Se abilitata quando il pulsante chiudi sarà premuto la finestra verrà minimizzata ad icona di sistema</translation>
     </message>
     <message>
         <source>Escape key minimize to tray icon</source>
@@ -3394,7 +3398,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled when the escape button is clicked the window will be minimized to the system tray icon</source>
-        <translation>Se abilitata quando premerai il tasto ESC la finestra sarà minimizzata ad icona di sistema</translation>
+        <translation type="vanished">Se abilitata quando premerai il tasto ESC la finestra sarà minimizzata ad icona di sistema</translation>
     </message>
     <message>
         <source>Prompt before downloading file</source>
@@ -3402,7 +3406,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled you have to confirm the action before downloading a file</source>
-        <translation>Se abilitata dovrai sempre confermare di voler scaricare un file</translation>
+        <translation type="vanished">Se abilitata dovrai sempre confermare di voler scaricare un file</translation>
     </message>
     <message>
         <source>Show the timestamp</source>
@@ -3414,7 +3418,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the ASCII emoticons will be recognized and shown as images</source>
-        <translation>Se abilitata le faccine in ASCII e Unicode saranno riconosciute e mostrate come immagini</translation>
+        <translation type="vanished">Se abilitata le faccine in ASCII e Unicode saranno riconosciute e mostrate come immagini</translation>
     </message>
     <message>
         <source>Use native emoticons</source>
@@ -3422,7 +3426,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be parsed by your system font</source>
-        <translation>Se abilitata le faccine saranno mostrate usando il carattere di sistema</translation>
+        <translation type="vanished">Se abilitata le faccine saranno mostrate usando il carattere di sistema</translation>
     </message>
     <message>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
@@ -3430,7 +3434,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the window geometry will be reset to default value at the next startup</source>
-        <translation>Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
+        <translation type="vanished">Se abilitata le dimensioni della finestra saranno ripristinate a quelle iniziali nel prossimo avvio</translation>
     </message>
     <message>
         <source>Save the users on exit</source>
@@ -3438,7 +3442,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the user list will be save on exit</source>
-        <translation>Se abilitata la lista degli utenti verrà salvata all&apos;uscita</translation>
+        <translation type="vanished">Se abilitata la lista degli utenti verrà salvata all&apos;uscita</translation>
     </message>
     <message>
         <source>%1 is online</source>
@@ -3454,7 +3458,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the preview of the downloaded images will be showed in the chat window</source>
-        <translation>Se abilitata l&apos;anteprima delle immagini scaricate sarà mostrata nella conversazione</translation>
+        <translation type="vanished">Se abilitata l&apos;anteprima delle immagini scaricate sarà mostrata nella conversazione</translation>
     </message>
     <message>
         <source>or more</source>
@@ -3466,7 +3470,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Click to change the picture size of the users in the list</source>
-        <translation>Clicca qui per cambiare la dimensione delle foto degli utenti in lista</translation>
+        <translation type="vanished">Clicca qui per cambiare la dimensione delle foto degli utenti in lista</translation>
     </message>
     <message>
         <source>When do you want %1 to play beep?</source>
@@ -3514,7 +3518,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled %1 is showed minimized at startup</source>
-        <translation>Se abilitata %1 sarà mostrato minimizzato alla partenza</translation>
+        <translation type="vanished">Se abilitata %1 sarà mostrato minimizzato alla partenza</translation>
     </message>
     <message>
         <source>Prompt on quit (only when connected)</source>
@@ -3522,7 +3526,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled you will be asked if you really want to close %1</source>
-        <translation>Se abilitata ti verrà chiesto se vuoi realmente chiudere %1</translation>
+        <translation type="vanished">Se abilitata ti verrà chiesto se vuoi realmente chiudere %1</translation>
     </message>
     <message>
         <source>Like %1 on Facebook</source>
@@ -3542,7 +3546,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Click to open your data folder</source>
-        <translation>Clicca qui per aprire la tua cartella con le preferenze ed i messaggi salvati</translation>
+        <translation type="vanished">Clicca qui per aprire la tua cartella con le preferenze ed i messaggi salvati</translation>
     </message>
     <message>
         <source>Always open a new floating chat window</source>
@@ -3602,7 +3606,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the user in list has colored backrgound as status</source>
-        <translation>Se abilitata l&apos;utente in lista avrà lo sfondo colorato in base al suo stato</translation>
+        <translation type="vanished">Se abilitata l&apos;utente in lista avrà lo sfondo colorato in base al suo stato</translation>
     </message>
     <message>
         <source>Show only message notifications</source>
@@ -3610,7 +3614,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled tray icon shows only message notifications</source>
-        <translation>Se abilitata l&apos;icona di sistema mostrerà solo le notifiche dei messaggi</translation>
+        <translation type="vanished">Se abilitata l&apos;icona di sistema mostrerà solo le notifiche dei messaggi</translation>
     </message>
     <message>
         <source>Shortcuts...</source>
@@ -3618,7 +3622,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Enable and edit your custom shortcuts</source>
-        <translation>Abilita e modifica le scorciatoie personalizzabili</translation>
+        <translation type="vanished">Abilita e modifica le scorciatoie personalizzabili</translation>
     </message>
     <message>
         <source>Open your resource folder</source>
@@ -3626,7 +3630,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Click to open your resource folder</source>
-        <translation>Clicca qui per aprire la cartella delle risorse installate</translation>
+        <translation type="vanished">Clicca qui per aprire la cartella delle risorse installate</translation>
     </message>
     <message>
         <source>Use key Return to send message</source>
@@ -3638,7 +3642,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Select your preferred dictionary for spell checking</source>
-        <translation>Selezione il tuo dizionario preferito per il controllo ortografico</translation>
+        <translation type="vanished">Selezione il tuo dizionario preferito per il controllo ortografico</translation>
     </message>
     <message>
         <source>Select your dictionary path</source>
@@ -3662,7 +3666,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Create a chat with two or more users</source>
-        <translation>Crea una conversazione con due o più utenti</translation>
+        <translation type="vanished">Crea una conversazione con due o più utenti</translation>
     </message>
     <message>
         <source>Create group</source>
@@ -3670,7 +3674,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Create a group with two or more users</source>
-        <translation>Crea un gruppo con due o più membri</translation>
+        <translation type="vanished">Crea un gruppo con due o più membri</translation>
     </message>
     <message>
         <source>Use your name instead of &apos;You&apos;</source>
@@ -3682,7 +3686,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled the message shows its datestamp in the chat window</source>
-        <translation>Se abilitata il messaggio mostrerà la sua data nella finestra di conversazione</translation>
+        <translation type="vanished">Se abilitata il messaggio mostrerà la sua data nella finestra di conversazione</translation>
     </message>
     <message>
         <source>Check for new version at startup</source>
@@ -3718,7 +3722,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If the file to be downloaded already exists it is automatically overwritten</source>
-        <translation>Se il file scaricato esiste già verrà automaticamente sovrascritto</translation>
+        <translation type="vanished">Se il file scaricato esiste già verrà automaticamente sovrascritto</translation>
     </message>
     <message>
         <source>Ask me</source>
@@ -3866,6 +3870,18 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show extra window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show activities</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4164,7 +4180,7 @@ il file %2 (%3)?</translation>
     <name>GuiSavedChat</name>
     <message>
         <source>Saved chat</source>
-        <translation>Conversazione salvata</translation>
+        <translation type="vanished">Conversazione salvata</translation>
     </message>
     <message>
         <source>Empty</source>
@@ -4194,6 +4210,10 @@ il file %2 (%3)?</translation>
         <source>%1 not found in chat.</source>
         <translation>%1 non trovato nella conversazione.</translation>
     </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Cancella</translation>
+    </message>
 </context>
 <context>
     <name>GuiSavedChatList</name>
@@ -4220,13 +4240,6 @@ il file %2 (%3)?</translation>
     <message>
         <source>Link to chat</source>
         <translation>Associa alla conversazione</translation>
-    </message>
-</context>
-<context>
-    <name>GuiSavedChatWidget</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
     </message>
 </context>
 <context>

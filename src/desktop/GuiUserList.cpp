@@ -39,7 +39,7 @@ GuiUserList::GuiUserList( QWidget* parent )
 #endif
 
   setObjectName( "GuiUserList" );
-  mp_menu = 0;
+  mp_menuSettings = 0;
 
   mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twUsers->setRootIsDecorated( false );
@@ -72,11 +72,6 @@ void GuiUserList::clear()
 void GuiUserList::sortUsers()
 {
   mp_twUsers->sortItems( 0, Settings::instance().sortUsersAscending() ? Qt::AscendingOrder : Qt::DescendingOrder );
-}
-
-QSize GuiUserList::sizeHint() const
-{
-  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
 }
 
 void GuiUserList::resetList()
@@ -276,8 +271,8 @@ void GuiUserList::clearFilter()
 
 void GuiUserList::showMenuSettings()
 {
-  if( mp_menu )
-    mp_menu->exec( QCursor::pos() );
+  if( mp_menuSettings )
+    mp_menuSettings->exec( QCursor::pos() );
 }
 
 void GuiUserList::onTickEvent( int ticks )

@@ -28,7 +28,7 @@
 #include "ui_GuiSavedChat.h"
 
 
-class GuiSavedChat : public QWidget, private Ui::GuiSavedChatWidget
+class GuiSavedChat : public QDialog, private Ui::GuiSavedChatDialog
 {
   Q_OBJECT
 
@@ -39,6 +39,7 @@ public:
 
 signals:
   void openUrl( const QUrl& );
+  void deleteSavedChatRequest( const QString& );
 
 public slots:
   void showSavedChat( const QString& );
@@ -49,6 +50,7 @@ protected slots:
   void findNextTextInChat();
   void customContextMenu( const QPoint& );
   void openSelectedTextAsUrl();
+  void deleteSavedChat();
 
 private:
   void findTextInChat( const QString& );
@@ -58,6 +60,8 @@ private:
   QShortcut* mp_scFindTextInChat;
   QShortcut* mp_scFindNextTextInChat;
   QShortcut* mp_scPrint;
+
+  QMenu* mp_menuContext;
 
 };
 

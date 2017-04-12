@@ -48,12 +48,9 @@ GuiLog::GuiLog( QWidget* parent )
 
 void GuiLog::setupToolBar( QToolBar* bar )
 {
-  QLabel* label;
-  QAction* act;
 
   /* save as button */
-  act = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
-  act->setStatusTip( tr( "Save the log in a file" ) );
+  bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
   bar->addSeparator();
   mp_cbLogToFile = new QCheckBox( bar );
   mp_cbLogToFile->setObjectName( "GuiCheckBoxLogToFileInLog" );
@@ -65,7 +62,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
   bar->addSeparator();
 
   /* filter by keywords */
-  label = new QLabel( bar );
+  QLabel* label = new QLabel( bar );
   label->setObjectName( "GuiLabelFilterTextLog" );
   label->setAlignment( Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter );
   label->setText( QString( "   " ) + tr( "Search" ) + QString( " " ) );
@@ -80,8 +77,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
   connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( findTextInLog() ) );
 
   /* search button */
-  act = bar->addAction( QIcon( ":/images/search.png" ), tr( "Find" ), this, SLOT( findTextInLog() ) );
-  act->setStatusTip( tr( "Find keywords in the log" ) );
+  bar->addAction( QIcon( ":/images/search.png" ), tr( "Find" ), this, SLOT( findTextInLog() ) );
   bar->addSeparator();
 
   /* flags */

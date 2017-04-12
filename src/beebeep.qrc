@@ -115,7 +115,6 @@
         <file>images/user-add.png</file>
         <file>images/mdns.png</file>
         <file>images/settings.png</file>
-        <file>images/home.png</file>
         <file>images/download-box.png</file>
         <file>images/remove.png</file>
         <file>images/recent.png</file>
@@ -151,5 +150,6 @@
         <file>images/bell.png</file>
         <file>images/raspberry-pi.png</file>
         <file>images/extra.png</file>
+        <file>images/activities.png</file>
     </qresource>
 </RCC>

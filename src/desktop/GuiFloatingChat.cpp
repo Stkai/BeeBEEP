@@ -78,7 +78,6 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   QAction* mp_actViewEmoticons = mp_dockEmoticons->toggleViewAction();
   mp_actViewEmoticons->setIcon( QIcon( ":/images/emoticon.png" ) );
   mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
-  mp_actViewEmoticons->setStatusTip( tr( "Add your preferred emoticon to the message" ) );
   mp_actViewEmoticons->setVisible( !Settings::instance().useOnlyTextEmoticons() );
   mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
   mp_dockEmoticons->hide();
@@ -178,11 +177,11 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 {
   applyFlagStaysOnTop();
 
-  if( !Settings::instance().floatingChatGeometry().isEmpty() )
-    restoreGeometry( Settings::instance().floatingChatGeometry() );
-
   if( !Settings::instance().floatingChatState().isEmpty() )
     restoreState( Settings::instance().floatingChatState() );
+
+  if( !Settings::instance().floatingChatGeometry().isEmpty() )
+    restoreGeometry( Settings::instance().floatingChatGeometry() );
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
   if( Settings::instance().floatingChatSplitterState().isEmpty() )

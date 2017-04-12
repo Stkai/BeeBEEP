@@ -36,8 +36,6 @@ class GuiUserList : public QWidget, private Ui::GuiUserListWidget
 public:
   GuiUserList( QWidget* parent = 0 );
 
-  virtual QSize sizeHint() const;
-
   void setUser( const User&, bool );
   void removeUser( const User& );
   void setUnreadMessages( VNumber private_chat_id, int );
@@ -72,7 +70,7 @@ private:
   QString m_filter;
   bool m_coreIsConnected;
 
-  QMenu *mp_menu;
+  QMenu* mp_menuSettings;
 
   bool m_blockShowChatRequest;
   bool m_showOnlyChatMembers;
@@ -81,6 +79,6 @@ private:
 
 
 // Inline Functions
-inline void GuiUserList::setMenuSettings( QMenu* new_value ) { mp_menu = new_value; }
+inline void GuiUserList::setMenuSettings( QMenu* new_value ) { mp_menuSettings = new_value; }
 
 #endif // BEEBEEP_GUIUSERLIST_H

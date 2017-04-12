@@ -42,22 +42,16 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
 
   m_blockShowChatRequest = false;
 
-  mp_menu = new QMenu( this );
-
-  QAction* act = mp_menu->addAction( QIcon( ":/images/saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
-  mp_menu->setDefaultAction( act );
-  mp_menu->addSeparator();
-  mp_actLink = mp_menu->addAction( QIcon( ":/images/update.png" ), tr( "Link to chat" ), this, SLOT( linkSavedChatSelected() ) );
-  mp_menu->addSeparator();
-  mp_menu->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
+  mp_menuContext = new QMenu( this );
+  QAction* act = mp_menuContext->addAction( QIcon( ":/images/saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
+  mp_menuContext->setDefaultAction( act );
+  mp_menuContext->addSeparator();
+  mp_actLink = mp_menuContext->addAction( QIcon( ":/images/update.png" ), tr( "Link to chat" ), this, SLOT( linkSavedChatSelected() ) );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
 
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
-}
-
-QSize GuiSavedChatList::sizeHint() const
-{
-  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
 }
 
 void GuiSavedChatList::savedChatClicked( QTreeWidgetItem* item, int )
@@ -88,7 +82,7 @@ void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
   m_savedChatSelected = saved_chat_item->chatName();
   mp_actLink->setEnabled( !ChatManager::instance().hasName( m_savedChatSelected ) );
 
-  mp_menu->exec( QCursor::pos() );
+  mp_menuContext->exec( QCursor::pos() );
 
   clearSelection();
 }

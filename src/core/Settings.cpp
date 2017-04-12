@@ -150,6 +150,8 @@ Settings::Settings()
   m_maxUsersToConnectInATick = 25;
   m_showTextInModeRTL = false;
   m_showChatsInOneWindow = false;
+  m_homeBackgroundColor = "#E8E8E8";
+  m_defaultChatBackgroundColor = "#E8E8E8";
 }
 
 void Settings::createApplicationUuid()
@@ -790,7 +792,7 @@ void Settings::load()
   m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
   setChatFont( m_chatFont );
   m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
-  m_defaultChatBackgroundColor = sets->value( "DefaultChatBackgroundColor", QColor( Qt::white ).name() ).toString();
+  m_defaultChatBackgroundColor = sets->value( "DefaultChatBackgroundColor", m_defaultChatBackgroundColor ).toString();
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
   m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
@@ -959,6 +961,7 @@ void Settings::load()
   m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
   m_homeShowMessageTimestamp = sets->value( "ShowActivitiesTimestamp", false ).toBool();
   m_homeShowMessageDatestamp = sets->value( "ShowActivitiesDatestamp", false ).toBool();
+  m_homeBackgroundColor = sets->value( "HomeBackgroundColor", m_homeBackgroundColor ).toString();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
   m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
   m_userSortingMode = qMax( 0, (int)sets->value( "UserSortingMode", 0 ).toInt() );
@@ -1233,6 +1236,7 @@ void Settings::save()
   sets->setValue( "UseNativeFileDialogs", m_useNativeDialogs );
   sets->setValue( "ShowActivitiesTimestamp", m_homeShowMessageTimestamp );
   sets->setValue( "ShowActivitiesDatestamp", m_homeShowMessageDatestamp );
+  sets->setValue( "HomeBackgroundColor", m_homeBackgroundColor );
   sets->setValue( "UsePreviewFileDialog", m_usePreviewFileDialog );
   sets->setValue( "PreviewFileDialogGeometry", m_previewFileDialogGeometry );
   sets->setValue( "PreviewFileDialogImageSize", m_previewFileDialogImageSize );

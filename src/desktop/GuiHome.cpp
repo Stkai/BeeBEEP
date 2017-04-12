@@ -44,6 +44,8 @@ GuiHome::GuiHome( QWidget* parent )
   mp_teSystem->setOpenExternalLinks( false );
   mp_teSystem->setOpenLinks( false );
 
+  mp_menuContext = new QMenu( this );
+
   connect( mp_teSystem, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teSystem, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
 
@@ -79,32 +81,35 @@ void GuiHome::checkAnchorClicked( const QUrl& url )
 
 void GuiHome::customContextMenu( const QPoint& p )
 {
-  QMenu custom_context_menu;
-  custom_context_menu.addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
-  custom_context_menu.addSeparator();
-  QAction* act = custom_context_menu.addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
+  mp_menuContext->clear();
+  mp_menuContext->addAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addSeparator();
+  QAction* act = mp_menuContext->addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teSystem->textCursor().selectedText().isEmpty() );
-  custom_context_menu.addSeparator();
-  act = custom_context_menu.addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
+  mp_menuContext->addSeparator();
+  act = mp_menuContext->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     act->setShortcut( ks );
   else
     act->setShortcut( QKeySequence() );
-  custom_context_menu.addSeparator();
-  act = custom_context_menu.addAction( tr( "Show the datestamp" ), this, SLOT( onAddDatestampClicked() ) );
+  mp_menuContext->addSeparator();
+  act = mp_menuContext->addAction( tr( "Show the datestamp" ), this, SLOT( onAddDatestampClicked() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().homeShowMessageDatestamp() );
 
-  act = custom_context_menu.addAction( tr( "Show the timestamp" ), this, SLOT( onAddTimestampClicked() ) );
+  act = mp_menuContext->addAction( tr( "Show the timestamp" ), this, SLOT( onAddTimestampClicked() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().homeShowMessageTimestamp() );
 
-  custom_context_menu.exec( mapToGlobal( p ) );
+  mp_menuContext->exec( mapToGlobal( p ) );
 }
 
 void GuiHome::loadSystemMessages()
 {
+  setBackgroundColor( Settings::instance().homeBackgroundColor() );
   Chat c = ChatManager::instance().defaultChat();
   foreach( ChatMessage cm, c.messages() )
   {
@@ -157,4 +162,21 @@ void GuiHome::printActivities()
     mp_teSystem->print( dlg->printer() );
 
   dlg->deleteLater();
+}
+
+void GuiHome::setBackgroundColor( const QString& color_name )
+{
+  QPalette pal = mp_teSystem->palette();
+  pal.setBrush( QPalette::Base, QBrush( QColor( color_name ) ) );
+  mp_teSystem->setPalette( pal );
+}
+
+void GuiHome::selectBackgroundColor()
+{
+  QColor c = QColorDialog::getColor( QColor( Settings::instance().homeBackgroundColor() ), this );
+  if( c.isValid() )
+  {
+    Settings::instance().setHomeBackgroundColor( c.name() );
+    setBackgroundColor( c.name() );
+  }
 }

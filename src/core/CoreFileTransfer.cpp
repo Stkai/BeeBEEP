@@ -455,11 +455,10 @@ void Core::addListToLocalShare()
   if( bfsl->shareList().size() < 2 )
     share_status = tr( "%1 is added to file sharing (%2)" ).arg( bfsl->folderPath(), Bee::bytesToString( bfsl->shareSize() ) );
   else
-    share_status = tr( "%1 is added to file sharing with %2 files, %3 (elapsed time: %4)" )
+    share_status = tr( "%1 is added to file sharing with %2 files, %3" )
                            .arg( bfsl->folderPath() )
                            .arg( bfsl->shareList().size() )
-                           .arg( Bee::bytesToString( bfsl->shareSize() ) )
-                           .arg( Bee::elapsedTimeToString( bfsl->elapsedTime() ) );
+                           .arg( Bee::bytesToString( bfsl->shareSize() ) );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );

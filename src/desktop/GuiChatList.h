@@ -34,8 +34,6 @@ class GuiChatList : public QTreeWidget
 public:
   GuiChatList( QWidget* parent = 0 );
 
-  virtual QSize sizeHint() const;
-
   void reloadChatList();
 
 signals:
@@ -58,7 +56,7 @@ protected slots:
 private:
   GuiChatItem* itemFromChatId( VNumber );
 
-  QMenu* mp_menu;
+  QMenu* mp_menuContext;
   VNumber m_chatSelected;
   QAction* mp_actClear;
   QAction* mp_actDelete;

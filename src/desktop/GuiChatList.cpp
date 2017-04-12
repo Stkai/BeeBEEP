@@ -43,23 +43,18 @@ GuiChatList::GuiChatList( QWidget* parent )
   m_chatSelected = ID_INVALID;
   m_blockShowChatRequest = false;
 
-  mp_menu = new QMenu( this );
+  mp_menuContext = new QMenu( this );
 
-  QAction* act = mp_menu->addAction( QIcon( ":/images/chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
-  mp_menu->setDefaultAction( act );
-  mp_menu->addSeparator();
-  mp_actClear = mp_menu->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
+  QAction* act = mp_menuContext->addAction( QIcon( ":/images/chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
+  mp_menuContext->setDefaultAction( act );
+  mp_menuContext->addSeparator();
+  mp_actClear = mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
   mp_actClear->setToolTip( tr( "Clear all chat messages" ) );
-  mp_menu->addSeparator();
-  mp_actDelete = mp_menu->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
+  mp_menuContext->addSeparator();
+  mp_actDelete = mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
 
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
-}
-
-QSize GuiChatList::sizeHint() const
-{
-  return QSize( BEE_DOCK_WIDGET_SIZE_HINT_WIDTH, BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT );
 }
 
 void GuiChatList::reloadChatList()
@@ -140,7 +135,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
   mp_actClear->setDisabled( c.isEmpty() );
   mp_actDelete->setDisabled( c.isDefault() );
 
-  mp_menu->exec( QCursor::pos() );
+  mp_menuContext->exec( QCursor::pos() );
 
   clearSelection();
 }

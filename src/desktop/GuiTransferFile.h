@@ -63,6 +63,9 @@ private slots:
   void removeAllCompleted();
   void openMenu( const QPoint& );
 
+private:
+  QMenu* mp_menuContext;
+
 };
 
 

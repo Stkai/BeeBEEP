@@ -61,6 +61,8 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   m_fileInfoList.initTree( mp_twLocalShares, true );
   mp_twLocalShares->setColumnHidden( GuiFileInfoItem::ColumnStatus, true );
 
+  mp_menuContext = new QMenu( this );
+
   connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMySharesMenu( const QPoint& ) ) );
   connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_twLocalShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openLocalSharesMenu( const QPoint& ) ) );
@@ -319,21 +321,21 @@ void GuiShareLocal::openMySharesMenu( const QPoint& p )
 {
   QTreeWidgetItem* item = mp_twMyShares->itemAt( p );
 
-  QMenu menu;
+  mp_menuContext->clear();
 
   if( item )
   {
     if( !item->isSelected() )
       item->setSelected( true );
-    menu.addAction( mp_actRemove );
+    mp_menuContext->addAction( mp_actRemove );
   }
   else
   {
-    menu.addAction( mp_actAddFile );
-    menu.addAction( mp_actAddFolder );
+    mp_menuContext->addAction( mp_actAddFile );
+    mp_menuContext->addAction( mp_actAddFolder );
   }
 
-  menu.exec( QCursor::pos() );
+  mp_menuContext->exec( QCursor::pos() );
 }
 
 void GuiShareLocal::openLocalSharesMenu( const QPoint& p )
@@ -349,18 +351,18 @@ void GuiShareLocal::openLocalSharesMenu( const QPoint& p )
   else
     selected_items = 0;
 
-  QMenu menu;
+  mp_menuContext->clear();
 
   if( selected_items )
   {
     QString selected_items_to_string = selected_items > Settings::instance().maxQueuedDownloads() ? QString( "%1+" ).arg( Settings::instance().maxQueuedDownloads() ) : QString::number( selected_items );
-    menu.addAction( QIcon( ":/images/upload.png" ), tr( "%1 shared files" ).arg( selected_items_to_string ) );
+    mp_menuContext->addAction( QIcon( ":/images/upload.png" ), tr( "%1 shared files" ).arg( selected_items_to_string ) );
   }
   else
   {
-    menu.addAction( mp_actAddFile );
-    menu.addAction( mp_actAddFolder );
+    mp_menuContext->addAction( mp_actAddFile );
+    mp_menuContext->addAction( mp_actAddFolder );
   }
 
-  menu.exec( QCursor::pos() );
+  mp_menuContext->exec( QCursor::pos() );
 }

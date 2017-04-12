@@ -51,6 +51,11 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   mp_twUsers->setSelectionMode( QAbstractItemView::MultiSelection );
   mp_twUsers->setColumnWidth( 0, 180 );
 
+  mp_menuContext = new QMenu( this );
+  mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Remove user path" ), this, SLOT( removeUserPath() ) );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all" ), this, SLOT( removeAllUsers() ) );
+
   connect( mp_pbAdd, SIGNAL( clicked() ), this, SLOT( addUser() ) );
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveUsers() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -176,11 +181,7 @@ void GuiAddUser::openCustomMenu( const QPoint& p )
   if( !item->isSelected() )
     item->setSelected( true );
 
-  QMenu menu;
-  menu.addAction( QIcon( ":/images/delete.png" ), tr( "Remove user path" ), this, SLOT( removeUserPath() ) );
-  menu.addSeparator();
-  menu.addAction( QIcon( ":/images/clear.png" ), tr( "Clear all" ), this, SLOT( removeAllUsers() ) );
-  menu.exec( QCursor::pos() );
+  mp_menuContext->exec( mapToGlobal( p ) );
 }
 
 bool GuiAddUser::removeUserPathFromList( const QString& user_path )

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GuiSavedChatWidget</class>
- <widget class="QWidget" name="GuiSavedChatWidget">
+ <class>GuiSavedChatDialog</class>
+ <widget class="QDialog" name="GuiSavedChatDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,21 +10,18 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="grid_layout">
    <property name="leftMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <item row="0" column="0">
     <widget class="QTextEdit" name="mp_teSavedChat">

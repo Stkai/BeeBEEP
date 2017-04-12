@@ -54,6 +54,7 @@ protected:
 
 private:
   QList<UserRecord> m_users;
+  QMenu* mp_menuContext;
 
 };
 
