@@ -51,7 +51,7 @@ public:
 signals:
   void userSelected( VNumber );
   void chatSelected( VNumber );
-  void showVCardRequest( VNumber, bool );
+  void showVCardRequest( VNumber );
 
 protected slots:
   void userItemClicked( QTreeWidgetItem*, int );

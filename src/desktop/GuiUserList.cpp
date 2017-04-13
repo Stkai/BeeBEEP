@@ -220,7 +220,7 @@ void GuiUserList::showUserMenu( const QPoint& p )
       return;
 
     m_blockShowChatRequest = true;
-    emit showVCardRequest( user_item->userId(), true );
+    emit showVCardRequest( user_item->userId() );
   }
 }
 

@@ -55,7 +55,7 @@ public slots:
 signals:
   void readAllMessages( VNumber );
   void chatIsAboutToClose( VNumber );
-  void showVCardRequest( VNumber, bool );
+  void showVCardRequest( VNumber );
 
 protected:
   void closeEvent( QCloseEvent* );

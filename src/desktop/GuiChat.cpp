@@ -786,7 +786,7 @@ void GuiChat::showUserVCard()
   if( act )
   {
     VNumber user_id = Bee::qVariantToVNumber( act->data() );
-    emit showVCardRequest( user_id, false );
+    emit showVCardRequest( user_id );
   }
   else
     showMembersMenu();
@@ -794,7 +794,7 @@ void GuiChat::showUserVCard()
 
 void GuiChat::showLocalUserVCard()
 {
-  emit showVCardRequest( ID_LOCAL_USER, false );
+  emit showVCardRequest( ID_LOCAL_USER );
 }
 
 void GuiChat::showGroupWizard()

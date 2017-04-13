@@ -112,10 +112,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( onUserChanged( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
-  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_fileTransfer, SLOT( setProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
-  connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), mp_fileTransfer, SLOT( setMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
+  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
-
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( mp_core, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
@@ -136,12 +135,12 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
-  connect( mp_userList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
+  connect( mp_userList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
 
   connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChatForGroup( VNumber ) ) );
   connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
   connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroup( VNumber ) ) );
-  connect( mp_groupList, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
+  connect( mp_groupList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
   connect( mp_groupList, SIGNAL( removeGroupRequest( VNumber ) ), this, SLOT( removeGroup( VNumber ) ) );
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
@@ -198,7 +197,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
-  connect( gui_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
+  connect( gui_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
   connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
 }
 
@@ -597,95 +596,10 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actQuit );
 
+  QAction* act;
   /* Chat Menu */
   mp_menuChat = new QMenu( tr( "Chat" ), this );
 
-  QAction* act = mp_menuChat->addAction( tr( "Use RTL mode to show text" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showTextInModeRTL() );
-  act->setData( 55 );
-
-  mp_menuChat->addSeparator();
-
-  act = mp_menuChat->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatAutoSave() );
-  act->setData( 18 );
-
-  act = mp_menuChat->addAction( tr( "Clear all read messages on closing window" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatClearAllReadMessages() );
-  act->setData( 47 );
-
-  mp_menuChat->addSeparator();
-
-  act = mp_menuChat->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUserColor() );
-  act->setData( 5 );
-
-  act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatCompact() );
-  act->setData( 1 );
-
-  act = mp_menuChat->addAction( tr( "Add a blank line between the messages" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatAddNewLineToMessage() );
-  act->setData( 2 );
-
-  act = mp_menuChat->addAction( tr( "Show the timestamp" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatShowMessageTimestamp() );
-  act->setData( 3 );
-
-  act = mp_menuChat->addAction( tr( "Show the datestamp" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatShowMessageDatestamp() );
-  act->setData( 42 );
-
-  act = mp_menuChat->addAction( tr( "Show preview of the images" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showImagePreview() );
-  act->setData( 33 );
-
-  act = mp_menuChat->addAction( tr( "Parse Unicode and ASCII emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showEmoticons() );
-  act->setData( 10 );
-
-  act = mp_menuChat->addAction( tr( "Use native emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeEmoticons() );
-  act->setData( 31 );
-
-  act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showMessagesGroupByUser() );
-  act->setData( 13 );
-
-  act = mp_menuChat->addAction( "", this, SLOT( settingsChanged() ) );
-  setChatMessagesToShowInAction( act );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatMaxMessagesToShow() );
-  act->setData( 27 );
-
-  act = mp_menuChat->addAction( tr( "Use your name instead of 'You'" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatUseYourNameInsteadOfYou() );
-  act->setData( 41 );
-
-  mp_menuChat->addSeparator();
-
-  act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatUseHtmlTags() );
-  act->setData( 8 );
-
-  act = mp_menuChat->addAction( tr( "Use clickable links" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatUseClickableLinks() );
-  act->setData( 9 );
 
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
@@ -1134,7 +1048,7 @@ void GuiMain::createDockWindows()
   addDockWidget( Qt::RightDockWidgetArea, mp_dockHome );
   mp_actViewHome = mp_dockHome->toggleViewAction();
   mp_actViewHome->setIcon( QIcon( ":/images/activities.png" ) );
-  mp_actViewHome->setText( tr( "Show activities" ) );
+  mp_actViewHome->setText( tr( "Show the activity panel" ) );
   mp_actViewHome->setData( 99 );
 
   if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() || Settings::instance().hideOtherPanels() )
@@ -1358,7 +1272,11 @@ void GuiMain::settingsChanged()
     refresh_users = true;
     break;
   case 23:
-    // Empty
+    {
+      Settings::instance().setChatFont( QApplication::font() );
+      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        fl_chat->guiChat()->setChatFont( Settings::instance().chatFont() );
+    }
     break;
   case 24:
     Settings::instance().setLoadOnTrayAtStartup( act->isChecked() );
@@ -2140,20 +2058,15 @@ void GuiMain::changeVCard()
 
 void GuiMain::showLocalUserVCard()
 {
-  showVCard( Settings::instance().localUser(), false );
+  showVCard( ID_LOCAL_USER );
 }
 
-void GuiMain::showVCard( VNumber user_id, bool ensure_visible )
+void GuiMain::showVCard( VNumber user_id )
 {
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
     return;
 
-  showVCard( u, ensure_visible );
-}
-
-void GuiMain::showVCard( const User& u, bool ensure_visible )
-{
   GuiVCard* gvc = new GuiVCard( this );
   connect( gvc, SIGNAL( showChat( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( gvc, SIGNAL( sendFile( VNumber ) ), this, SLOT( sendFile( VNumber ) ) );
@@ -2163,18 +2076,13 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
   connect( gvc, SIGNAL( buzzUser( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
   gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id(), mp_core->isConnected() );
 
-  if( ensure_visible && dockWidgetArea( mp_dockUserList ) == Qt::RightDockWidgetArea )
-  {
-    // Ensure vCard visible
-    QPoint pos = QCursor::pos();
-    pos.setX( pos.x() - gvc->size().width() );
-    gvc->move( pos );
-  }
-  else
-  {
-    gvc->move( QCursor::pos() );
-  }
-
+  QPoint cursor_pos = QCursor::pos();
+  QRect screen_rect = qApp->desktop()->availableGeometry( cursor_pos );
+  int diff_margin =  (cursor_pos.x() + gvc->size().width()+5) - screen_rect.width();
+  if( diff_margin > 0 )
+    //cursor_pos.setX( cursor_pos.x() - diff_margin );
+    cursor_pos.setX( cursor_pos.x() - gvc->size().width() );
+  gvc->move( cursor_pos );
   gvc->show();
   gvc->setFixedSize( gvc->size() );
 }
@@ -2182,10 +2090,7 @@ void GuiMain::showVCard( const User& u, bool ensure_visible )
 void GuiMain::updadePluginMenu()
 {
   mp_menuPlugins->clear();
-  QAction* act;
-
-  act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
-  act->setStatusTip( tr( "Open the plugin manager dialog and manage the installed plugins" ) );
+  QAction* act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
@@ -3002,6 +2907,101 @@ void GuiMain::showAddUser()
 
 void GuiMain::showChatSettingsMenu()
 {
+  mp_menuChat->clear();
+
+  QAction* act = mp_menuChat->addAction( tr( "Use RTL mode to show text" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showTextInModeRTL() );
+  act->setData( 55 );
+
+  mp_menuChat->addSeparator();
+
+  act = mp_menuChat->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatAutoSave() );
+  act->setData( 18 );
+
+  act = mp_menuChat->addAction( tr( "Clear all read messages on closing window" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatClearAllReadMessages() );
+  act->setData( 47 );
+
+  mp_menuChat->addSeparator();
+
+  act = mp_menuChat->addAction( tr( "Show colored nickname" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserColor() );
+  act->setData( 5 );
+
+  act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatCompact() );
+  act->setData( 1 );
+
+  act = mp_menuChat->addAction( tr( "Add a blank line between the messages" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatAddNewLineToMessage() );
+  act->setData( 2 );
+
+  act = mp_menuChat->addAction( tr( "Show the timestamp" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatShowMessageTimestamp() );
+  act->setData( 3 );
+
+  act = mp_menuChat->addAction( tr( "Show the datestamp" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatShowMessageDatestamp() );
+  act->setData( 42 );
+
+  act = mp_menuChat->addAction( tr( "Show preview of the images" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showImagePreview() );
+  act->setData( 33 );
+
+  act = mp_menuChat->addAction( tr( "Parse Unicode and ASCII emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showEmoticons() );
+  act->setData( 10 );
+
+  act = mp_menuChat->addAction( tr( "Use native emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useNativeEmoticons() );
+  act->setData( 31 );
+
+  act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showMessagesGroupByUser() );
+  act->setData( 13 );
+
+  act = mp_menuChat->addAction( "", this, SLOT( settingsChanged() ) );
+  setChatMessagesToShowInAction( act );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatMaxMessagesToShow() );
+  act->setData( 27 );
+
+  act = mp_menuChat->addAction( tr( "Use your name instead of 'You'" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseYourNameInsteadOfYou() );
+  act->setData( 41 );
+
+  mp_menuChat->addSeparator();
+
+  act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseHtmlTags() );
+  act->setData( 8 );
+
+  act = mp_menuChat->addAction( tr( "Use clickable links" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseClickableLinks() );
+  act->setData( 9 );
+
+  mp_menuChat->addSeparator();
+
+  act = mp_menuChat->addAction( tr( "Restore default font" ), this, SLOT( settingsChanged() ) );
+  act->setIcon( QIcon( ":/images/font.png" ) );
+  act->setData( 23 );
+
   mp_menuChat->exec( QCursor::pos() );
 }
 
@@ -3203,6 +3203,9 @@ void GuiMain::removeFloatingChatFromList( VNumber chat_id )
   if( !fl_chat )
     return;
 
+  if( mp_menuChat->isVisible() )
+    mp_menuChat->close();
+
   m_floatingChats.removeOne( fl_chat );
   fl_chat->deleteLater();
 #ifdef BEEBEEP_DEBUG
@@ -3225,7 +3228,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     setupChatConnections( fl_chat->guiChat() );
     connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
-    connect( fl_chat, SIGNAL( showVCardRequest( VNumber, bool ) ), this, SLOT( showVCard( VNumber, bool ) ) );
+    connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
     m_floatingChats.append( fl_chat );
   }
 
@@ -3611,6 +3614,16 @@ void GuiMain::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, co
 void GuiMain::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   mp_core->uploadToShareBox( user_id, fi, to_path );
+}
+
+void GuiMain::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
+{
+  mp_fileTransfer->setProgress( peer_id, u, fi, bytes );
+}
+
+void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
+{
+  mp_fileTransfer->setMessage( peer_id, u, fi, msg );
 }
 
 void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& fi )

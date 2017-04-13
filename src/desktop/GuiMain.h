@@ -95,7 +95,7 @@ private slots:
   void downloadSharedFiles( const QList<SharedFileInfo>& );
   void selectDownloadDirectory();
   void changeVCard();
-  void showVCard( VNumber, bool );
+  void showVCard( VNumber );
   void changeUserColor( VNumber, const QString& );
   void showPluginHelp();
   void showPluginManager();
@@ -167,6 +167,8 @@ private slots:
   void onShareDesktopCloseEvent( VNumber );
 #endif
   void startExternalApplicationFromActionData();
+  void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
+  void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
   void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );
@@ -207,7 +209,6 @@ private:
   void sendFiles( const User&, const QStringList&, VNumber chat_id );
   bool openWebUrl( const QString& );
   QStringList checkFilePath( const QString& );
-  void showVCard( const User&, bool ensure_visible );
   bool isAudioDeviceAvailable() const;
   void showDefaultServerPortInMenu();
   void applyFlagStaysOnTop();

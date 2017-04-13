@@ -49,6 +49,7 @@ public:
 
   void updateShortcuts();
   void updateActionsOnFocusChanged();
+  void setChatFont( const QFont& );
 
   inline QSplitter* chatSplitter() const;
 
@@ -63,7 +64,7 @@ signals:
   void chatToClear( VNumber );
   void leaveThisChat( VNumber );
   void showChatMenuRequest();
-  void showVCardRequest( VNumber, bool );
+  void showVCardRequest( VNumber );
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
@@ -80,7 +81,6 @@ protected:
   QString chatMessageToText( const User&, const ChatMessage& );
   bool messageCanBeShowed( const ChatMessage& );
   bool historyCanBeShowed();
-  void setChatFont( const QFont& );
   void setChatFontColor( const QString& );
   void setChatBackgroundColor( const QString& );
   bool isActiveUser( const Chat&, const User& ) const;
@@ -130,7 +130,6 @@ private:
   VNumber m_chatId;
   VNumber m_lastMessageUserId;
 
-  QMenu* mp_menuChat;
   QMenu* mp_menuMembers;
   QMenu* mp_menuContext;
   QMenu* mp_menuFilters;
