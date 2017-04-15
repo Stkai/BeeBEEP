@@ -35,7 +35,7 @@
 #include "GuiCreateGroup.h"
 #include "GuiConfig.h"
 #include "GuiEditVCard.h"
-#include "GuiExtra.h"
+#include "GuiFileSharing.h"
 #include "GuiFloatingChat.h"
 #include "GuiGroupList.h"
 #include "GuiHome.h"
@@ -81,7 +81,8 @@ GuiMain::GuiMain( QWidget *parent )
   // Create a status bar before the actions and the menu
   (void) statusBar();
 
-  mp_extra = 0;
+  mp_fileSharing = 0;
+  mp_screenShot = 0;
   mp_defaultGameMenu = new QMenu( this );
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
@@ -154,12 +155,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_savedChatList, SIGNAL( savedChatSelected( const QString& ) ), this, SLOT( showSavedChatSelected( const QString& ) ) );
   connect( mp_savedChatList, SIGNAL( savedChatRemoved( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
   connect( mp_savedChatList, SIGNAL( savedChatLinkRequest( const QString& ) ), this, SLOT( linkSavedChat( const QString& ) ) );
-
-  /*
-  connect( mp_screenShot, SIGNAL( hideRequest() ), this, SLOT( hide() ) );
-  connect( mp_screenShot, SIGNAL( showRequest() ), this, SLOT( show() ) );
-  connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
-  */
 
   initShortcuts();
   initGuiItems();
@@ -355,8 +350,11 @@ void GuiMain::closeEvent( QCloseEvent* e )
     }
   }
 
-  if( mp_extra )
-    mp_extra->close();
+  if( mp_fileSharing )
+    mp_fileSharing->close();
+
+  if( mp_screenShot )
+    mp_screenShot->close();
 
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->close();
@@ -833,7 +831,8 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actMainToolBar );
   mp_menuView->addAction( mp_actPanelToolBar );
   mp_menuView->addSeparator();
-  mp_actViewExtra = mp_menuView->addAction( QIcon( ":/images/extra.png" ), tr( "Show extra window" ), this, SLOT( showExtraWindow() ) );
+  mp_actViewExtra = mp_menuView->addAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this, SLOT( showFileSharingWindow() ) );
+  mp_actViewScreenShot = mp_menuView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( showScreenShotWindow() ) );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewHome );
   mp_menuView->addAction( mp_actViewUsers );
@@ -972,6 +971,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroup );
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewExtra );
+  mp_barMain->addAction( mp_actViewScreenShot );
   addToolBarBreak( Qt::RightToolBarArea );
   mp_barPanel->addAction( mp_actViewHome );
   mp_barPanel->addAction( mp_actViewUsers );
@@ -1121,8 +1121,8 @@ void GuiMain::onUserChanged( const User& u )
 {
   mp_userList->setUser( u, true );
   mp_groupList->updateUser( u );
-  if( mp_extra )
-    mp_extra->onUserChanged( u );
+  if( mp_fileSharing )
+    mp_fileSharing->onUserChanged( u );
  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateUser( u, mp_core->isConnected() );
   checkViewActions();
@@ -1926,8 +1926,8 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
   if( QMessageBox::information( this, Settings::instance().programName(), info_msg,
                               tr( "Reload file list" ), tr( "Cancel" ), QString::null, 1, 1 ) == 0 )
   {
-    if( mp_extra )
-      mp_extra->updateNetworkFileList();
+    if( mp_fileSharing )
+      mp_fileSharing->updateNetworkFileList();
   }
 }
 
@@ -2789,21 +2789,14 @@ void GuiMain::clearChat( VNumber chat_id )
   switch( QMessageBox::information( activeChatWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
   {
   case 0:
-    mp_core->clearMessagesInChat( chat_id );
+    mp_core->clearMessagesInChat( chat_id, false );
     break;
   case 2:
-    mp_core->clearMessagesInChat( chat_id );
-    ChatManager::instance().removeSavedTextFromChat( c.name() );
+    mp_core->clearMessagesInChat( chat_id, true );
     break;
   default:
     return;
   }
-
-  if( c.isPrivate() )
-    mp_userList->setUnreadMessages( chat_id, 0 );
-  mp_chatList->reloadChatList();
-  mp_savedChatList->updateSavedChats();
-
 }
 
 void GuiMain::removeChat( VNumber chat_id )
@@ -2848,8 +2841,8 @@ void GuiMain::showChatForGroup( VNumber group_id )
 
 void GuiMain::showSharesForUser( const User& u )
 {
-  if( mp_extra )
-    mp_extra->showUserFileList( u );
+  if( mp_fileSharing )
+    mp_fileSharing->showUserFileList( u );
   QString share_message = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( FileShare::instance().fileSharedFromUser( u.id() ).size() );
   showMessage( share_message, 0 );
 }
@@ -3122,8 +3115,8 @@ void GuiMain::showConnectionStatusChanged( const User& u )
   else
     mp_trayIcon->showUserStatusChanged( ID_DEFAULT_CHAT, msg );
 
-  if( mp_extra )
-    mp_extra->onUserChanged( u );
+  if( mp_fileSharing )
+    mp_fileSharing->onUserChanged( u );
 }
 
 void GuiMain::changeAvatarSizeInList()
@@ -3655,26 +3648,49 @@ void GuiMain::showBuzzFromUser( const User& u )
     mp_trayIcon->showNewMessageArrived( c.id(), tr( "%1 is buzzing you!" ).arg( u.name() ), true );
 }
 
-void GuiMain::showExtraWindow()
+void GuiMain::showFileSharingWindow()
 {
-  if( !mp_extra )
+  if( !mp_fileSharing )
   {
-    mp_extra = new GuiExtra( mp_core, 0 );
-    mp_extra->updateLocalFileList();
-    connect( mp_extra, SIGNAL( aboutToClose() ), this, SLOT( onExtraWindowClosed() ) );
-    connect( mp_extra, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-    connect( mp_extra, SIGNAL( sendFileRequest( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
+    mp_fileSharing = new GuiFileSharing( mp_core, 0 );
+    mp_fileSharing->updateLocalFileList();
+    connect( mp_fileSharing, SIGNAL( aboutToClose() ), this, SLOT( onFileSharingWindowClosed() ) );
+    connect( mp_fileSharing, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+    connect( mp_fileSharing, SIGNAL( sendFileRequest( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
   }
 
-  mp_extra->showUp();
+  mp_fileSharing->showUp();
 }
 
-void GuiMain::onExtraWindowClosed()
+void GuiMain::onFileSharingWindowClosed()
 {
-  if( mp_extra )
+  if( mp_fileSharing )
   {
-    mp_extra->deleteLater();
-    mp_extra = 0;
+    mp_fileSharing->deleteLater();
+    mp_fileSharing = 0;
+  }
+}
+
+void GuiMain::showScreenShotWindow()
+{
+  if( !mp_screenShot )
+  {
+    mp_screenShot = new GuiScreenShot;
+    mp_screenShot->setWindowFlags( mp_screenShot->windowFlags() & Qt::WA_DeleteOnClose );
+    mp_screenShot->resize( 640, 480 );
+    connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
+    connect( mp_screenShot, SIGNAL( aboutToClose() ), this, SLOT( onScreenShotWindowClosed() ) );
+  }
+
+  mp_screenShot->showUp();
+}
+
+void GuiMain::onScreenShotWindowClosed()
+{
+  if( mp_screenShot )
+  {
+    mp_screenShot->deleteLater();
+    mp_screenShot = 0;
   }
 }
 

@@ -218,7 +218,7 @@ void GuiChat::checkChatDisabled( const Chat& c )
   }
 }
 
-void GuiChat::customContextMenu( const QPoint& p )
+void GuiChat::customContextMenu( const QPoint& )
 {
   mp_menuContext->clear();
 
@@ -243,7 +243,7 @@ void GuiChat::customContextMenu( const QPoint& p )
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actSendFile );
   mp_menuContext->addAction( mp_actSendFolder );
-  mp_menuContext->exec( mapToGlobal( p ) );
+  mp_menuContext->exec( QCursor::pos() );
 }
 
 bool GuiChat::messageCanBeShowed( const ChatMessage& cm )

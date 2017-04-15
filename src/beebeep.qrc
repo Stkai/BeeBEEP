@@ -149,7 +149,7 @@
         <file>images/preset-message-edit.png</file>
         <file>images/bell.png</file>
         <file>images/raspberry-pi.png</file>
-        <file>images/extra.png</file>
         <file>images/activities.png</file>
+        <file>images/file-sharing.png</file>
     </qresource>
 </RCC>

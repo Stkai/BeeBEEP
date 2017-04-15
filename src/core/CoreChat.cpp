@@ -463,14 +463,22 @@ void Core::addListToSavedChats()
   emit savedChatListAvailable();
 }
 
-void Core::clearMessagesInChat( VNumber chat_id )
+void Core::clearMessagesInChat( VNumber chat_id, bool clear_history )
 {
   Chat c = ChatManager::instance().chat( chat_id );
-  if( c.isValid() )
+  if( !c.isValid() )
   {
-    c.clearMessages();
-    ChatManager::instance().setChat( c );
+    qWarning() << "Invalid chat" << chat_id << "in Core::clearMessagesInChat(...)";
+    return;
   }
+
+  c.clearMessages();
+  ChatManager::instance().setChat( c );
+
+  if( clear_history )
+    ChatManager::instance().removeSavedTextFromChat( c.name() );
+
+  emit chatChanged( c );
 }
 
 bool Core::removeUserFromChat( const User& u, VNumber chat_id )

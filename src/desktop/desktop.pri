@@ -12,9 +12,9 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiConfig.h \
   desktop/GuiEditVCard.h \
   desktop/GuiEmoticons.h \
-  desktop/GuiExtra.h \
   desktop/GuiFileInfoItem.h \
   desktop/GuiFileInfoList.h \
+  desktop/GuiFileSharing.h \
   desktop/GuiFloatingChat.h \
   desktop/GuiGroupItem.h \
   desktop/GuiGroupList.h \
@@ -56,9 +56,9 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiCreateGroup.cpp \
   desktop/GuiEditVCard.cpp \
   desktop/GuiEmoticons.cpp \
-  desktop/GuiExtra.cpp \
   desktop/GuiFileInfoItem.cpp \
   desktop/GuiFileInfoList.cpp \
+  desktop/GuiFileSharing.cpp \
   desktop/GuiFloatingChat.cpp \
   desktop/GuiGroupItem.cpp \
   desktop/GuiGroupList.cpp \
@@ -89,6 +89,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiWizard.cpp \
   desktop/Main.cpp
 
+
 FORMS += desktop/GuiAddUser.ui \
   desktop/GuiAskPassword.ui \
   desktop/GuiChat.ui \
@@ -99,7 +100,6 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiLog.ui \
   desktop/GuiPluginManager.ui \
   desktop/GuiSavedChat.ui \
-  desktop/GuiScreenShot.ui \
   desktop/GuiSearchUser.ui \
   desktop/GuiShareBox.ui \
   desktop/GuiShareLocal.ui \

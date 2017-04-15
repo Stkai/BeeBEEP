@@ -28,12 +28,24 @@
 
 
 GuiScreenShot::GuiScreenShot( QWidget* parent )
-  : QWidget( parent )
+  : QMainWindow( parent )
 {
-  setupUi( this );
   setObjectName( "GuiScreenShot" );
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Make a Screenshot" ) ) );
+  setWindowTitle( QString( "%1 - %2" ).arg( tr( "Make a Screenshot" ), Settings::instance().programName() ) );
+  setWindowIcon( QIcon( ":/images/screenshot.png" ) );
+
+  mp_labelScreenShot = new QLabel( this );
   mp_labelScreenShot->setScaledContents( true );
+  mp_labelScreenShot->setAlignment( Qt::AlignCenter );
+  mp_labelScreenShot->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  setCentralWidget( mp_labelScreenShot );
+
+  mp_barScreenShot = new QToolBar( tr( "Show the bar of screenshot plugin" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barScreenShot );
+  mp_barScreenShot->setObjectName( "GuiScreenShotToolBar" );
+  mp_barScreenShot->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barScreenShot->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  setupToolBar( mp_barScreenShot );
 }
 
 void GuiScreenShot::setupToolBar( QToolBar* bar )
@@ -89,6 +101,12 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
   updateScreenShot();
 }
 
+void GuiScreenShot::closeEvent( QCloseEvent* e )
+{
+  emit aboutToClose();
+  QMainWindow::closeEvent( e );
+}
+
 void GuiScreenShot::resizeEvent( QResizeEvent* )
 {
   if( !m_screenShot.isNull() )
@@ -97,8 +115,24 @@ void GuiScreenShot::resizeEvent( QResizeEvent* )
     scaled_size.scale( mp_labelScreenShot->size(), Qt::KeepAspectRatio );
     if( scaled_size != mp_labelScreenShot->pixmap()->size() )
       updateScreenShot();
-   }
- }
+  }
+}
+
+void GuiScreenShot::showUp()
+{
+  if( isMinimized() )
+    showNormal();
+
+  if( !isVisible() )
+    show();
+
+#ifdef Q_OS_WIN
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+  raise();
+#endif
+}
 
 void GuiScreenShot::updateScreenShot()
 {
@@ -112,7 +146,6 @@ void GuiScreenShot::updateScreenShot()
   else
   {
     mp_labelScreenShot->setPixmap( m_screenShot.scaled( mp_labelScreenShot->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
-    mp_labelScreenShot->setPixmap( m_screenShot );
     mp_actSave->setEnabled( true );
     mp_actSend->setEnabled( true );
     mp_actDelete->setEnabled( true );
@@ -122,7 +155,7 @@ void GuiScreenShot::updateScreenShot()
 void GuiScreenShot::doScreenShot()
 {
   if( mp_cbHide->isChecked() )
-    emit( hideRequest() );
+    hide();
 
   mp_actShot->setDisabled( true );
 
@@ -167,7 +200,8 @@ void GuiScreenShot::captureScreen()
 
   updateScreenShot();
 
-  emit( showRequest() );
+  if( mp_cbHide->isChecked() )
+    showUp();
 
   mp_actShot->setEnabled( true );
 }

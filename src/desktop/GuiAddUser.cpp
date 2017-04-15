@@ -181,7 +181,7 @@ void GuiAddUser::openCustomMenu( const QPoint& p )
   if( !item->isSelected() )
     item->setSelected( true );
 
-  mp_menuContext->exec( mapToGlobal( p ) );
+  mp_menuContext->exec( QCursor::pos() );
 }
 
 bool GuiAddUser::removeUserPathFromList( const QString& user_path )

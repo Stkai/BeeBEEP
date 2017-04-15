@@ -85,7 +85,7 @@ public:
   void createGroupChat( const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
   void createGroupChat( const Group&, bool broadcast_message );
   void changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>&, bool broadcast_message );
-  void clearMessagesInChat( VNumber );
+  void clearMessagesInChat( VNumber, bool clear_history );
   bool removeUserFromChat( const User&, VNumber );
   bool removeChat( VNumber );
   bool readAllMessagesInChat( VNumber );

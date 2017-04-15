@@ -37,12 +37,13 @@ class GameInterface;
 class GuiChat;
 class GuiChatList;
 class GuiEmoticons;
-class GuiExtra;
+class GuiFileSharing;
 class GuiFloatingChat;
 class GuiGroupList;
 class GuiHome;
 class GuiSavedChat;
 class GuiSavedChatList;
+class GuiScreenShot;
 class GuiSystemTray;
 class GuiTransferFile;
 class GuiUserList;
@@ -173,8 +174,10 @@ private slots:
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );
   void removeFloatingChatFromList( VNumber );
-  void showExtraWindow();
-  void onExtraWindowClosed();
+  void showFileSharingWindow();
+  void onFileSharingWindowClosed();
+  void showScreenShotWindow();
+  void onScreenShotWindowClosed();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -228,9 +231,10 @@ private:
   GuiChatList* mp_chatList;
   GuiSavedChatList* mp_savedChatList;
   GuiGroupList* mp_groupList;
+  GuiScreenShot* mp_screenShot;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
-  GuiExtra* mp_extra;
+  GuiFileSharing* mp_fileSharing;
   GuiHome* mp_home;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   QList<GuiShareDesktop*> m_desktops;
@@ -268,6 +272,7 @@ private:
   QAction* mp_actConfirmDownload;
   QAction* mp_actViewExtra;
   QAction* mp_actViewHome;
+  QAction* mp_actViewScreenShot;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;

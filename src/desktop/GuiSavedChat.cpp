@@ -69,7 +69,7 @@ void GuiSavedChat::showSavedChat( const QString& chat_name )
   setWindowTitle( chat_name );
 }
 
-void GuiSavedChat::customContextMenu( const QPoint& p )
+void GuiSavedChat::customContextMenu( const QPoint& )
 {
   mp_menuContext->clear();
 
@@ -95,7 +95,7 @@ void GuiSavedChat::customContextMenu( const QPoint& p )
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( deleteSavedChat() ) );
 
-  mp_menuContext->exec( mapToGlobal( p ) );
+  mp_menuContext->exec( QCursor::pos() );
 }
 
 void GuiSavedChat::updateShortcuts()

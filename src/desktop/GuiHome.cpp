@@ -79,7 +79,7 @@ void GuiHome::checkAnchorClicked( const QUrl& url )
   emit openUrlRequest( url );
 }
 
-void GuiHome::customContextMenu( const QPoint& p )
+void GuiHome::customContextMenu( const QPoint& )
 {
   mp_menuContext->clear();
   mp_menuContext->addAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
@@ -104,7 +104,7 @@ void GuiHome::customContextMenu( const QPoint& p )
   act->setCheckable( true );
   act->setChecked( Settings::instance().homeShowMessageTimestamp() );
 
-  mp_menuContext->exec( mapToGlobal( p ) );
+  mp_menuContext->exec( QCursor::pos() );
 }
 
 void GuiHome::loadSystemMessages()

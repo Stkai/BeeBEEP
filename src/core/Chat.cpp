@@ -102,7 +102,7 @@ bool Chat::hasUsers( const QList<VNumber>& user_list )
 
 void Chat::clearMessages()
 {
-  setLastMessageTimestamp( QDateTime::currentDateTime() );
+  setLastMessageTimestamp( QDateTime() );
   readAllMessages();
 
   ChatMessage cm_intro;

@@ -25,24 +25,21 @@
 #define BEEBEEP_GUISCREENSHOT_H
 
 #include "Config.h"
-#include "ui_GuiScreenShot.h"
 
 
-class GuiScreenShot : public QWidget, private Ui::GuiScreenShotWidget
+class GuiScreenShot : public QMainWindow
 {
   Q_OBJECT
 
 public:
   explicit GuiScreenShot( QWidget *parent = 0 );
 
-  void setupToolBar( QToolBar* );
-
   inline const QPixmap& screenShot() const;
+  void showUp();
 
 signals:
-  void hideRequest();
-  void showRequest();
   void screenShotToSend( const QString& );
+  void aboutToClose();
 
 protected slots:
   void doScreenShot();
@@ -52,8 +49,10 @@ protected slots:
   void doDelete();
 
 protected:
+  void closeEvent( QCloseEvent* );
   void resizeEvent( QResizeEvent* );
   void updateScreenShot();
+  void setupToolBar( QToolBar* );
 
 private:
   QPixmap m_screenShot;
@@ -66,6 +65,9 @@ private:
   QAction* mp_actSave;
   QAction* mp_actSend;
   QAction* mp_actDelete;
+
+  QToolBar* mp_barScreenShot;
+  QLabel* mp_labelScreenShot;
 
 };
 

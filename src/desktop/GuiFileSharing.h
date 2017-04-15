@@ -21,30 +21,25 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIEXTRA_H
-#define BEEBEEP_GUIEXTRA_H
-
+#ifndef BEEBEEP_GUIFILESHARING_H
+#define BEEBEEP_GUIFILESHARING_H
 
 #include "Config.h"
-#include "FileInfo.h"
-
 class Core;
-class ChatMessage;
-class GameInterface;
+class FileInfo;
 class GuiLog;
-class GuiScreenShot;
 class GuiShareBox;
 class GuiShareLocal;
 class GuiShareNetwork;
 class User;
 
 
-class GuiExtra : public QMainWindow
+class GuiFileSharing : public QMainWindow
 {
   Q_OBJECT
 
 public:
-  GuiExtra( Core*, QWidget* parent = 0 );
+  GuiFileSharing( Core*, QWidget* parent = 0 );
 
   void updateLocalFileList();
   void updateNetworkFileList();
@@ -64,7 +59,6 @@ private slots:
   void raiseLocalShareView();
   void raiseNetworkShareView();
   void raiseLogView();
-  void raiseScreenShotView();
   void raiseShareBoxView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
@@ -94,7 +88,6 @@ private:
   GuiShareLocal* mp_shareLocal;
   GuiShareNetwork* mp_shareNetwork;
   GuiLog* mp_logView;
-  GuiScreenShot* mp_screenShot;
   GuiShareBox* mp_shareBox;
 
   QToolBar* mp_barView;
@@ -112,4 +105,4 @@ private:
 
 };
 
-#endif // BEEBEEP_GUIEXTRA_H
+#endif // BEEBEEP_GUIFILESHARING_H

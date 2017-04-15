@@ -24,15 +24,15 @@
 #include "Core.h"
 #include "BeeApplication.h"
 #include "BeeUtils.h"
+#include "FileInfo.h"
 #include "GuiConfig.h"
 #include "GuiHome.h"
 #include "GuiLog.h"
-#include "GuiScreenShot.h"
 #include "GuiSearchUser.h"
 #include "GuiShareBox.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
-#include "GuiExtra.h"
+#include "GuiFileSharing.h"
 #include "PluginManager.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -41,12 +41,12 @@
 #endif
 
 
-GuiExtra::GuiExtra( Core* main_core, QWidget *parent )
+GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
  : QMainWindow( parent ), mp_core( main_core )
 {
-  setObjectName( "GuiExtra" );
-  setWindowIcon( QIcon( ":/images/beebeep.png" ) );
-  setWindowTitle( Settings::instance().programName() );
+  setObjectName( "GuiFileSharing" );
+  setWindowIcon( QIcon( ":/images/file-sharing.png" ) );
+  setWindowTitle( QString( "%1 - %2" ).arg( tr( "File Sharing" ), Settings::instance().programName() ) );
 
   // Create a status bar before the actions and the menu
   (void) statusBar();
@@ -85,17 +85,15 @@ GuiExtra::GuiExtra( Core* main_core, QWidget *parent )
   connect( mp_shareBox, SIGNAL( shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_shareBox, SIGNAL( shareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ) );
 
-  connect( mp_screenShot, SIGNAL( hideRequest() ), this, SLOT( hide() ) );
-  connect( mp_screenShot, SIGNAL( showRequest() ), this, SLOT( show() ) );
-  connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SIGNAL( sendFileRequest( const QString& ) ) );
+
 
   initGuiItems();
 
   setMinimumWidth( 620 );
-  statusBar()->showMessage( tr( "Ready" ) );
+  statusBar()->showMessage( tr( "Ready" ), 10000 );
 }
 
-void GuiExtra::keyPressEvent( QKeyEvent* e )
+void GuiFileSharing::keyPressEvent( QKeyEvent* e )
 {
   if( e->key() == Qt::Key_Escape )
   {
@@ -110,12 +108,12 @@ void GuiExtra::keyPressEvent( QKeyEvent* e )
   QMainWindow::keyPressEvent( e );
 }
 
-void GuiExtra::changeEvent( QEvent* e )
+void GuiFileSharing::changeEvent( QEvent* e )
 {
   QMainWindow::changeEvent( e );
 }
 
-void GuiExtra::closeEvent( QCloseEvent* e )
+void GuiFileSharing::closeEvent( QCloseEvent* e )
 {
   // maybe timer is active
   mp_logView->stopCheckingLog();
@@ -123,13 +121,13 @@ void GuiExtra::closeEvent( QCloseEvent* e )
   QMainWindow::closeEvent( e );
 }
 
-void GuiExtra::initGuiItems()
+void GuiFileSharing::initGuiItems()
 {
   raiseLocalShareView();
   checkViewActions();
 }
 
-void GuiExtra::checkViewActions()
+void GuiFileSharing::checkViewActions()
 {
   bool is_connected = mp_core->isConnected();
   int connected_users = mp_core->connectedUsers();
@@ -137,7 +135,6 @@ void GuiExtra::checkViewActions()
   mp_actViewShareLocal->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
   mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
-  mp_actViewScreenShot->setEnabled( mp_stackedWidget->currentWidget() != mp_screenShot );
   mp_actViewShareBox->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareBox );
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork  )
@@ -160,30 +157,25 @@ void GuiExtra::checkViewActions()
     mp_barLog->hide();
     mp_logView->stopCheckingLog();
   }
-
-  if( mp_stackedWidget->currentWidget() == mp_screenShot )
-    mp_barScreenShot->show();
-  else
-    mp_barScreenShot->hide();
 }
-void GuiExtra::createActions()
+
+void GuiFileSharing::createActions()
 {
   mp_actViewToolBar = mp_barView->toggleViewAction();
   mp_actViewToolBar->setStatusTip( tr( "Show the view tool bar" ) );
   mp_actViewToolBar->setData( 99 );
 }
 
-void GuiExtra::createToolbars()
+void GuiFileSharing::createToolbars()
 {
   mp_actViewShareLocal = mp_barView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareNetwork = mp_barView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareBox = mp_barView->addAction( QIcon( ":/images/sharebox.png" ), tr( "Show the shared boxes" ), this, SLOT( raiseShareBoxView() ) );
-  mp_actViewScreenShot = mp_barView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
   mp_actViewLog = mp_barView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
   addToolBarBreak( Qt::RightToolBarArea );
 }
 
-void GuiExtra::createStackedWidgets()
+void GuiFileSharing::createStackedWidgets()
 {
   QAction* act;
   mp_shareLocal = new GuiShareLocal( this );
@@ -219,74 +211,58 @@ void GuiExtra::createStackedWidgets()
   act = mp_barLog->toggleViewAction();
   act->setEnabled( false );
 
-  mp_screenShot = new GuiScreenShot( this );
-  mp_stackedWidget->addWidget( mp_screenShot );
-  mp_barScreenShot = new QToolBar( tr( "Show the bar of screenshot plugin" ), this );
-  addToolBar( Qt::BottomToolBarArea, mp_barScreenShot );
-  mp_barScreenShot->setObjectName( "GuiScreenShotToolBar" );
-  mp_barScreenShot->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_barScreenShot->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
-  mp_screenShot->setupToolBar( mp_barScreenShot );
-  act = mp_barScreenShot->toggleViewAction();
-  act->setEnabled( false );
-
   mp_shareBox = new GuiShareBox( this );
   mp_stackedWidget->addWidget( mp_shareBox );
 
   mp_stackedWidget->setCurrentWidget( mp_shareLocal );
 }
 
-void GuiExtra::onUserChanged( const User& u )
+void GuiFileSharing::onUserChanged( const User& u )
 {
   mp_shareBox->updateUser( u );
   mp_shareNetwork->updateUser( u );
 }
 
-void GuiExtra::addToShare( const QString& share_path )
+void GuiFileSharing::addToShare( const QString& share_path )
 {
   mp_core->addPathToShare( share_path, true );
 }
 
-void GuiExtra::removeFromShare( const QString& share_path )
+void GuiFileSharing::removeFromShare( const QString& share_path )
 {
   mp_core->removePathFromShare( share_path );
 }
 
-void GuiExtra::raiseView( QWidget* w )
+void GuiFileSharing::raiseView( QWidget* w )
 {
   mp_stackedWidget->setCurrentWidget( w );
   checkViewActions();
   raise();
 }
 
-void GuiExtra::raiseLocalShareView()
+void GuiFileSharing::raiseLocalShareView()
 {
   raiseView( mp_shareLocal );
 }
 
-void GuiExtra::raiseNetworkShareView()
+void GuiFileSharing::raiseNetworkShareView()
 {
   mp_shareNetwork->initShares();
   raiseView( mp_shareNetwork );
 }
 
-void GuiExtra::raiseLogView()
+void GuiFileSharing::raiseLogView()
 {
   raiseView( mp_logView );
 }
 
-void GuiExtra::raiseScreenShotView()
-{
-  raiseView( mp_screenShot );
-}
-
-void GuiExtra::raiseShareBoxView()
+void GuiFileSharing::raiseShareBoxView()
 {
   raiseView( mp_shareBox );
   mp_shareBox->updateShareBoxes();
 }
 
-void GuiExtra::raiseOnTop()
+void GuiFileSharing::raiseOnTop()
 {
   if( isMinimized() )
     showNormal();
@@ -302,42 +278,42 @@ void GuiExtra::raiseOnTop()
 #endif
 }
 
-void GuiExtra::showUp()
+void GuiFileSharing::showUp()
 {
   raiseOnTop();
 }
 
-void GuiExtra::onTickEvent( int )
+void GuiFileSharing::onTickEvent( int )
 {
 
 }
 
-void GuiExtra::onShareBoxRequest( VNumber user_id, const QString& share_box_path )
+void GuiFileSharing::onShareBoxRequest( VNumber user_id, const QString& share_box_path )
 {
   mp_core->sendShareBoxRequest( user_id, share_box_path );
 }
 
-void GuiExtra::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
+void GuiFileSharing::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   mp_core->downloadFromShareBox( user_id, fi, to_path );
 }
 
-void GuiExtra::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
+void GuiFileSharing::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   mp_core->uploadToShareBox( user_id, fi, to_path );
 }
 
-void GuiExtra::updateLocalFileList()
+void GuiFileSharing::updateLocalFileList()
 {
   mp_shareLocal->updatePaths();
 }
 
-void GuiExtra::updateNetworkFileList()
+void GuiFileSharing::updateNetworkFileList()
 {
   mp_shareNetwork->reloadList();
 }
 
-void GuiExtra::showUserFileList( const User& u )
+void GuiFileSharing::showUserFileList( const User& u )
 {
   mp_shareNetwork->showSharesForUser( u );
 }

@@ -282,7 +282,7 @@ void GuiFloatingChat::saveGeometryAndState()
     QSplitter* chat_splitter = mp_chat->chatSplitter();
     Settings::instance().setFloatingChatSplitterState( chat_splitter->saveState() );
     Settings::instance().save();
-    QMessageBox::information( this, Settings::instance().programName(), tr( "The window geometry and state are saved." ) );
+    statusBar()->showMessage( tr( "The window geometry and state are saved" ), 5000 );
   }
   else
     qWarning() << "Unable to save floating chat geometry and state (window is not visible)";
