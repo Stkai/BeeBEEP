@@ -39,7 +39,6 @@ public:
 
 signals:
   void screenShotToSend( const QString& );
-  void aboutToClose();
 
 protected slots:
   void doScreenShot();
@@ -49,7 +48,6 @@ protected slots:
   void doDelete();
 
 protected:
-  void closeEvent( QCloseEvent* );
   void resizeEvent( QResizeEvent* );
   void updateScreenShot();
   void setupToolBar( QToolBar* );

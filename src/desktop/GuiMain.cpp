@@ -83,6 +83,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   mp_fileSharing = 0;
   mp_screenShot = 0;
+  mp_log = 0;
   mp_defaultGameMenu = new QMenu( this );
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
@@ -162,7 +163,16 @@ GuiMain::GuiMain( QWidget *parent )
 
   setMinimumWidth( 260 );
 
-  showMessage( tr( "Ready" ), 0 );
+  showVersionInStatusBar();
+}
+
+void GuiMain::showVersionInStatusBar()
+{
+  QString label_version_text = QString( "%1 %2 (%3)" )
+                                 .arg( Settings::instance().programName() )
+                                 .arg( Settings::instance().version( false, false ) )
+                                 .arg( Settings::instance().operatingSystem( true ) );
+  showMessage( label_version_text, 0 );
 }
 
 void GuiMain::initShortcuts()
@@ -248,15 +258,7 @@ void GuiMain::checkWindowFlagsAndShow()
 
 void GuiMain::updateWindowTitle()
 {
-  QString window_title;
-  window_title = Settings::instance().localUser().name();
-  /*
-    window_title = QString( "%1 - %2 (%3)" ).arg( Settings::instance().programName(),
-                     Settings::instance().localUser().name(),
-                     mp_core->isConnected() ?
-                     Bee::userStatusToString( Settings::instance().localUser().status() ) : tr( "offline" ) );
-  */
-  setWindowTitle( window_title );
+  setWindowTitle( Settings::instance().localUser().name() );
 }
 
 void GuiMain::keyPressEvent( QKeyEvent* e )
@@ -356,6 +358,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
   if( mp_screenShot )
     mp_screenShot->close();
 
+  if( mp_log )
+    mp_log->close();
+
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->close();
 
@@ -385,7 +390,7 @@ void GuiMain::showNextChat()
   if( c.isValid() )
     showChat( c.id() );
   else
-    showMessage( tr( "No new message available" ), 0 );
+    showMessage( tr( "No new message available" ), 5000 );
 }
 
 void GuiMain::startStopCore()
@@ -547,10 +552,8 @@ void GuiMain::createActions()
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
 
   mp_actMainToolBar = mp_barMain->toggleViewAction();
-  mp_actMainToolBar->setStatusTip( tr( "Show the main tool bar with settings" ) );
   mp_actMainToolBar->setData( 99 );
   mp_actPanelToolBar = mp_barPanel->toggleViewAction();
-  mp_actPanelToolBar->setStatusTip( tr( "Show the panel tool bar" ) );
   mp_actPanelToolBar->setData( 99 );
 
   mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
@@ -562,6 +565,9 @@ void GuiMain::createActions()
 
   mp_actCreateGroup = new QAction(  QIcon( ":/images/group-add.png" ), tr( "Create group" ), this );
   connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SLOT( createGroup() ) );
+
+  mp_actViewScreenShot = new QAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this );
+  connect( mp_actViewScreenShot, SIGNAL( triggered() ), this, SLOT( showScreenShotWindow() ) );
 }
 
 void GuiMain::createMenus()
@@ -831,8 +837,8 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actMainToolBar );
   mp_menuView->addAction( mp_actPanelToolBar );
   mp_menuView->addSeparator();
-  mp_actViewExtra = mp_menuView->addAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this, SLOT( showFileSharingWindow() ) );
-  mp_actViewScreenShot = mp_menuView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( showScreenShotWindow() ) );
+  mp_actViewFileSharing = mp_menuView->addAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this, SLOT( showFileSharingWindow() ) );
+  mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( showLogWindow() ) );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewHome );
   mp_menuView->addAction( mp_actViewUsers );
@@ -840,18 +846,6 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actViewSavedChats );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
-
-  /*
-  mp_actViewShareLocal = mp_menuView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
-  mp_actViewShareLocal->setStatusTip( tr( "Show the list of the files which I have shared" ) );
-  mp_actViewShareNetwork = mp_menuView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
-  mp_actViewShareNetwork->setStatusTip( tr( "Show the list of the network shared files" ) );
-  mp_actViewShareBox = mp_menuView->addAction( QIcon( ":/images/sharebox.png" ), tr( "Show the shared boxes" ), this, SLOT( raiseShareBoxView() ) );
-  mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
-  mp_actViewLog->setStatusTip( tr( "Show the application log to see if an error occurred" ) );
-  mp_actViewScreenShot = mp_menuView->addAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this, SLOT( raiseScreenShotView() ) );
-  mp_actViewScreenShot->setStatusTip( tr( "Show the utility to capture a screenshot" ) );
-  */
   mp_actViewNewMessage = mp_menuView->addAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this, SLOT( showNextChat() ) );
 
   /* Plugins Menu */
@@ -936,7 +930,11 @@ void GuiMain::createMenus()
   act->setData( 48 );
 
   mp_menuTrayIcon->addSeparator();
+#ifdef Q_OS_MACOS
+  mp_menuTrayIcon->addAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this, SLOT( forceShutdown() ) );
+#else
   mp_menuTrayIcon->addAction( mp_actQuit );
+#endif
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
 
 }
@@ -963,23 +961,19 @@ void GuiMain::createToolAndMenuBars()
   mp_lMainBarVersion->setText( label_version_text );
   menuBar()->setCornerWidget( mp_lMainBarVersion );
 */
-  mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_menuStatus->menuAction() );
-  mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
-  mp_barMain->addSeparator();
-  mp_barMain->addAction( mp_actViewExtra );
-  mp_barMain->addAction( mp_actViewScreenShot );
-  addToolBarBreak( Qt::RightToolBarArea );
+  mp_barMain->addAction( mp_actBroadcast );
+  mp_barMain->addAction( mp_actViewFileSharing );
+
   mp_barPanel->addAction( mp_actViewHome );
   mp_barPanel->addAction( mp_actViewUsers );
   mp_barPanel->addAction( mp_actViewChats );
   mp_barPanel->addAction( mp_actViewGroups );
   mp_barPanel->addAction( mp_actViewSavedChats );
   mp_barPanel->addAction( mp_actViewFileTransfer );
-  addToolBarBreak( Qt::RightToolBarArea );
 }
 
 void GuiMain::createDockWindows()
@@ -1435,7 +1429,6 @@ void GuiMain::settingsChanged()
 void GuiMain::setChatMessagesToShowInAction( QAction* act )
 {
   act->setText( tr( "Show only last %1 messages" ).arg( Settings::instance().chatMessagesToShow() ) );
-  act->setStatusTip( tr( "If enabled only the last %1 messages will be shown in chat" ).arg( Settings::instance().chatMessagesToShow() ) );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
@@ -1597,7 +1590,7 @@ void GuiMain::searchUsers()
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
     qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
 
-  QTimer::singleShot( 0, this, SLOT( sendBroadcastMessage() ) );
+  QMetaObject::invokeMethod( this, "sendBroadcastMessage", Qt::QueuedConnection );
 }
 
 void GuiMain::showWritingUser( const User& u, VNumber chat_id )
@@ -1707,7 +1700,7 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
   QStringList files_path_selected;
   if( file_path.isEmpty() || !QFile::exists( file_path ) )
   {
-    files_path_selected = FileDialog::getOpenFileNames( true, activeChatWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
+    files_path_selected = FileDialog::getOpenFileNames( true, activeWindow(), tr( "%1 - Select a file" ).arg( Settings::instance().programName() ) + QString( " %1" ).arg( tr( "or more" ) ),
                                                        Settings::instance().lastDirectorySelected() );
     if( files_path_selected.isEmpty() )
       return files_path_selected;
@@ -1726,13 +1719,13 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
 {
   if( !Settings::instance().fileTransferIsEnabled() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "File transfer is not enabled." ) );
+    QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "File transfer is not enabled." ) );
     return false;
   }
 
   if( !mp_core->isConnected() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "You are not connected." ) );
+    QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "You are not connected." ) );
     return false;
   }
 
@@ -1743,12 +1736,12 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
     QStringList user_string_list = UserManager::instance().userList().toStringList( false, true );
     if( user_string_list.isEmpty() )
     {
-      QMessageBox::information( activeChatWindow(), Settings::instance().programName(), tr( "There is no user connected." ) );
+      QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "There is no user connected." ) );
       return false;
     }
 
     bool ok = false;
-    QString user_path = QInputDialog::getItem( activeChatWindow(), Settings::instance().programName(),
+    QString user_path = QInputDialog::getItem( activeWindow(), Settings::instance().programName(),
                                         tr( "Please select the user to whom you would like to send a file."),
                                         user_string_list, 0, false, &ok );
     if( !ok )
@@ -1758,7 +1751,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
 
     if( !user_selected.isValid() )
     {
-      QMessageBox::warning( activeChatWindow(), Settings::instance().programName(), tr( "User not found." ) );
+      QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "User not found." ) );
       return false;
     }
 
@@ -1786,7 +1779,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
 {
   if( !Settings::instance().fileTransferIsEnabled() )
   {
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( fi.name() ) );
+    QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( fi.name() ) );
     return false;
   }
 
@@ -1876,7 +1869,7 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
 
   if( share_file_info_list.size() > Settings::instance().maxQueuedDownloads() )
   {
-    if( QMessageBox::question( this, Settings::instance().programName(),
+    if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                                tr( "You cannot download all these files at once. Do you want to download the first %1 files of the list?" )
                                .arg( Settings::instance().maxQueuedDownloads() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
@@ -1884,7 +1877,7 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
   }
   else if( share_file_info_list.size() > 100 )
   {
-    if( QMessageBox::question( this, Settings::instance().programName(),
+    if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                            tr( "Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?" ).arg( share_file_info_list.size() ),
                            tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
       return;
@@ -1903,7 +1896,7 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
       break;
   }
 
-  showMessage( tr( "%1 files are scheduled for download" ).arg( files_to_download ), 5 );
+  showMessage( tr( "%1 files are scheduled for download" ).arg( files_to_download ), 5000 );
 }
 
 void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
@@ -1923,7 +1916,7 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
     info_msg += QLatin1String( "\n" ) + tr( "%1 is not connected." ).arg( u.name() );
   info_msg += QLatin1String( "\n" ) + tr( "Please reload the list of shared files." );
 
-  if( QMessageBox::information( this, Settings::instance().programName(), info_msg,
+  if( QMessageBox::information( activeWindow(), Settings::instance().programName(), info_msg,
                               tr( "Reload file list" ), tr( "Cancel" ), QString::null, 1, 1 ) == 0 )
   {
     if( mp_fileSharing )
@@ -1935,7 +1928,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
 {
   if( !Settings::instance().fileTransferIsEnabled() )
   {
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( folder_name ) );
+    QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( folder_name ) );
     return;
   }
 
@@ -1950,7 +1943,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
   if( msg_result == 0 )
   {
     QString msg = tr( "Do you want to download folder %1 (%2 files) from %3?" ).arg( folder_name ).arg( file_info_list.size() ).arg( u.name() );
-    msg_result = QMessageBox::question( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
+    msg_result = QMessageBox::question( activeWindow(), Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
   }
 
   if( msg_result == 2 )
@@ -1989,7 +1982,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
 
 void GuiMain::selectDownloadDirectory()
 {
-  QString download_directory_path = FileDialog::getExistingDirectory( this,
+  QString download_directory_path = FileDialog::getExistingDirectory( activeWindow(),
                                                                        tr( "%1 - Select the download folder" )
                                                                        .arg( Settings::instance().programName() ),
                                                                        Settings::instance().downloadDirectory() );
@@ -2110,6 +2103,9 @@ void GuiMain::updadePluginMenu()
       act->setEnabled( text_marker->isEnabled() );
     }
   }
+
+  mp_menuPlugins->addSeparator();
+  mp_menuPlugins->addAction( mp_actViewScreenShot );
 
     /*
 
@@ -2404,7 +2400,7 @@ void GuiMain::editGroup( VNumber group_id )
   if( !g.isValid() )
     return;
 
-  GuiCreateGroup gcg( activeChatWindow() );
+  GuiCreateGroup gcg( activeWindow() );
   gcg.init( g.name(), g.usersId() );
   gcg.loadData( true );
   gcg.setModal( true );
@@ -2448,11 +2444,11 @@ void GuiMain::editGroupFromChat( VNumber chat_id )
   Chat group_chat_tmp = ChatManager::instance().chat( chat_id );
   if( !group_chat_tmp.isGroup() )
   {
-    QMessageBox::information( activeChatWindow(), Settings::instance().programName(), tr( "Unable to add users in this chat. Please select a group one." ) );
+    QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "Unable to add users in this chat. Please select a group one." ) );
     return;
   }
 
-  GuiCreateGroup gcg( activeChatWindow() );
+  GuiCreateGroup gcg( activeWindow() );
   gcg.init( group_chat_tmp.name(), group_chat_tmp.usersId() );
   gcg.loadData( false );
   gcg.setModal( true );
@@ -2529,7 +2525,7 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
     return;
 
   GuiSavedChat* saved_chat = new GuiSavedChat( this );
-  saved_chat->setWindowFlags( saved_chat->windowFlags() & Qt::WA_DeleteOnClose );
+  saved_chat->setAttribute( Qt::WA_DeleteOnClose, true );
   connect( saved_chat, SIGNAL( deleteSavedChatRequest( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
   connect( saved_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   saved_chat->showSavedChat( chat_name );
@@ -2704,7 +2700,7 @@ bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
 {
   if( !mp_core->areUsersConnected( users_id ) )
   {
-    if( QMessageBox::question( activeChatWindow(), Settings::instance().programName(),
+    if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                                tr( "All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?" ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
        return false;
@@ -2726,7 +2722,7 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
   Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
   if( g.isValid() )
   {
-    if( QMessageBox::warning( activeChatWindow(), Settings::instance().programName(),
+    if( QMessageBox::warning( activeWindow(), Settings::instance().programName(),
                               tr( "%1 is a your group. You can not leave the chat." ).arg( g.name() ),
                               tr( "Delete this group" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
         return;
@@ -2777,7 +2773,7 @@ void GuiMain::clearChat( VNumber chat_id )
   QString chat_name = c.isDefault() ? QObject::tr( "All Lan Users" ).toLower() : c.name();
   if( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) )
   {
-    QMessageBox::information( activeChatWindow(), Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
+    QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
     return;
   }
 
@@ -2786,7 +2782,7 @@ void GuiMain::clearChat( VNumber chat_id )
   if( ChatManager::instance().chatHasSavedText( c.name() ) )
     button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
 
-  switch( QMessageBox::information( activeChatWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
+  switch( QMessageBox::information( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
   {
   case 0:
     mp_core->clearMessagesInChat( chat_id, false );
@@ -2844,7 +2840,7 @@ void GuiMain::showSharesForUser( const User& u )
   if( mp_fileSharing )
     mp_fileSharing->showUserFileList( u );
   QString share_message = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( FileShare::instance().fileSharedFromUser( u.id() ).size() );
-  showMessage( share_message, 0 );
+  showMessage( share_message, 5000 );
 }
 
 void GuiMain::selectLanguage()
@@ -3239,14 +3235,13 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   return fl_chat;
 }
 
-QWidget* GuiMain::activeChatWindow()
+QWidget* GuiMain::activeWindow() const
 {
-  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-  {
-    if( fl_chat->isActiveWindow() )
-      return (QWidget*)fl_chat;
-  }
-  return (QWidget*)this;
+  QWidget* active_window = QApplication::activeWindow();
+  if( active_window )
+    return active_window;
+  else
+    return (QWidget*)this;
 }
 
 void GuiMain::loadUserStatusRecentlyUsed()
@@ -3653,8 +3648,9 @@ void GuiMain::showFileSharingWindow()
   if( !mp_fileSharing )
   {
     mp_fileSharing = new GuiFileSharing( mp_core, 0 );
+    mp_fileSharing->setAttribute( Qt::WA_DeleteOnClose, true );
     mp_fileSharing->updateLocalFileList();
-    connect( mp_fileSharing, SIGNAL( aboutToClose() ), this, SLOT( onFileSharingWindowClosed() ) );
+    connect( mp_fileSharing, SIGNAL( destroyed() ), this, SLOT( onFileSharingWindowClosed() ) );
     connect( mp_fileSharing, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
     connect( mp_fileSharing, SIGNAL( sendFileRequest( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
   }
@@ -3665,10 +3661,7 @@ void GuiMain::showFileSharingWindow()
 void GuiMain::onFileSharingWindowClosed()
 {
   if( mp_fileSharing )
-  {
-    mp_fileSharing->deleteLater();
     mp_fileSharing = 0;
-  }
 }
 
 void GuiMain::showScreenShotWindow()
@@ -3676,10 +3669,10 @@ void GuiMain::showScreenShotWindow()
   if( !mp_screenShot )
   {
     mp_screenShot = new GuiScreenShot;
-    mp_screenShot->setWindowFlags( mp_screenShot->windowFlags() & Qt::WA_DeleteOnClose );
+    mp_screenShot->setAttribute( Qt::WA_DeleteOnClose, true );
     mp_screenShot->resize( 640, 480 );
     connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
-    connect( mp_screenShot, SIGNAL( aboutToClose() ), this, SLOT( onScreenShotWindowClosed() ) );
+    connect( mp_screenShot, SIGNAL( destroyed() ), this, SLOT( onScreenShotWindowClosed() ) );
   }
 
   mp_screenShot->showUp();
@@ -3688,10 +3681,25 @@ void GuiMain::showScreenShotWindow()
 void GuiMain::onScreenShotWindowClosed()
 {
   if( mp_screenShot )
-  {
-    mp_screenShot->deleteLater();
     mp_screenShot = 0;
+}
+
+void GuiMain::showLogWindow()
+{
+  if( !mp_log )
+  {
+    mp_log = new GuiLog;
+    mp_log->resize( 780, 520 );
+    connect( mp_log, SIGNAL( destroyed() ), this, SLOT( onLogWindowClosed() ) );
   }
+
+  mp_log->showUp();
+}
+
+void GuiMain::onLogWindowClosed()
+{
+  if( mp_log )
+    mp_log = 0;
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

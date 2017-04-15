@@ -275,6 +275,7 @@ public:
 
   inline bool logToFile() const;
   inline void setLogToFile( bool );
+  inline int maxLogLines() const;
 
   inline const QString& language() const;
   inline void setLanguage( const QString& );
@@ -514,12 +515,14 @@ private:
   int m_tickIntervalBroadcasting;
 
   QDateTime m_lastSave;
-  bool m_logToFile;
   QString m_logPath;
   QString m_pluginPath;
   QString m_languagePath;
   QString m_lastDirectorySelected;
   QString m_downloadDirectory;
+
+  bool m_logToFile;
+  int m_maxLogLines;
 
   int m_chatMessageHistorySize;
   QString m_chatFontColor;
@@ -759,6 +762,7 @@ inline void Settings::setAskNicknameAtStartup( bool new_value ) { m_askNicknameA
 inline bool Settings::askNicknameAtStartup() const { return m_askNicknameAtStartup; }
 inline bool Settings::logToFile() const { return m_logToFile; }
 inline void Settings::setLogToFile( bool new_value ) { m_logToFile = new_value; }
+inline int Settings::maxLogLines() const { return m_maxLogLines; }
 inline const QString& Settings::language() const { return m_language; }
 inline void Settings::setLanguage( const QString& new_value ) { m_language = new_value; }
 inline const QString& Settings::lastDirectorySelected() const { return m_lastDirectorySelected; }

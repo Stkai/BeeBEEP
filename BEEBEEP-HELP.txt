@@ -175,6 +175,7 @@ ShowChatsInOneWindow=[true/false] if true BeeBEEP opens chats in a single window
 
 [Tools]
 LogToFile=[true/false] enable file logging
+MaxLogLines=[integer] max lines to show in log [3.2.0]
 UseSpellChecker=[true/false] enable spell checking on writing message
 UseWordCompleter=[true/false] enable word completer on writing message
 DictionaryPath=(String) path to dictionary. It is accepted only file with extension .dic

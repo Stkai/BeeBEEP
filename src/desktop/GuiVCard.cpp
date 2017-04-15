@@ -37,7 +37,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   setObjectName( "GuiVCard" );
 
   setWindowFlags( Qt::Popup );
-  setAttribute( Qt::WA_DeleteOnClose );
+  setAttribute( Qt::WA_DeleteOnClose, true );
 
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );

@@ -46,7 +46,6 @@ public:
   void showUserFileList( const User& );
 
 signals:
-  void aboutToClose();
   void openUrlRequest( const QUrl& );
   void sendFileRequest( const QString& );
 
@@ -58,7 +57,6 @@ public slots:
 private slots:
   void raiseLocalShareView();
   void raiseNetworkShareView();
-  void raiseLogView();
   void raiseShareBoxView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
@@ -68,7 +66,6 @@ private slots:
 
 protected:
   void keyPressEvent( QKeyEvent* );
-  void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
   bool promptConnectionPassword();
   void raiseOnTop();
@@ -87,14 +84,12 @@ private:
   QStackedWidget* mp_stackedWidget;
   GuiShareLocal* mp_shareLocal;
   GuiShareNetwork* mp_shareNetwork;
-  GuiLog* mp_logView;
   GuiShareBox* mp_shareBox;
 
   QToolBar* mp_barView;
   QToolBar* mp_barShareNetwork;
   QToolBar* mp_barShareLocal;
   QToolBar* mp_barScreenShot;
-  QToolBar* mp_barLog;
 
   QAction* mp_actViewToolBar;
   QAction* mp_actViewShareLocal;

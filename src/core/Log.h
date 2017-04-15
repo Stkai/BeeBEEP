@@ -60,12 +60,11 @@ public:
   bool bootFileStream( const QString& log_path ); // after load Settings
   void closeFileStream();
 
+  inline void setMaxLogLines( int );
+
   void add( QtMsgType, const QString& log_txt, const QString& log_note );
   inline void clear();
-  inline const std::list<LogNode>& toList() const;
-
-  QString messageTypeToString( QtMsgType ) const;
-  QString logNodeToString( const LogNode& ) const;
+  inline const std::list<QString>& toList() const;
 
   bool isLoggingToFile() const;
 
@@ -92,19 +91,24 @@ protected:
   bool dumpLogToFile();
   void checkFileSize();
 
+  QString messageTypeToString( QtMsgType ) const;
+  QString logNodeToString( const LogNode& ) const;
+
 private:
   static Log* mp_instance;
 
   QFile m_logFile;
   QTextStream m_logStream;
-  std::list<LogNode> m_logList;
+  std::list<QString> m_logList;
+  std::list<QString>::size_type m_maxLogLines;
 
 };
 
 
 // Inline Functions
+inline void Log::setMaxLogLines( int new_value ) { m_maxLogLines = new_value; }
 inline void Log::clear() { m_logList.clear(); }
-inline const std::list<LogNode>& Log::toList() const { return m_logList; }
+inline const std::list<QString>& Log::toList() const { return m_logList; }
 
 
 #endif // BEEBEEP_LOG_H

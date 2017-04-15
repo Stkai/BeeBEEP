@@ -41,6 +41,7 @@ class GuiFileSharing;
 class GuiFloatingChat;
 class GuiGroupList;
 class GuiHome;
+class GuiLog;
 class GuiSavedChat;
 class GuiSavedChatList;
 class GuiScreenShot;
@@ -178,6 +179,8 @@ private slots:
   void onFileSharingWindowClosed();
   void showScreenShotWindow();
   void onScreenShotWindowClosed();
+  void showLogWindow();
+  void onLogWindowClosed();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -216,7 +219,7 @@ private:
   void showDefaultServerPortInMenu();
   void applyFlagStaysOnTop();
   GuiFloatingChat* floatingChat( VNumber ) const;
-  QWidget* activeChatWindow();
+  QWidget* activeWindow() const;
   void setChatMessagesToShowInAction( QAction* );
   void loadUserStatusRecentlyUsed();
   void setUserStatusSelected( int );
@@ -224,6 +227,7 @@ private:
   void updateShortcuts();
   void updateEmoticons();
   void updateNewMessageAction();
+  void showVersionInStatusBar();
 
 private:
   GuiTransferFile* mp_fileTransfer;
@@ -232,6 +236,7 @@ private:
   GuiSavedChatList* mp_savedChatList;
   GuiGroupList* mp_groupList;
   GuiScreenShot* mp_screenShot;
+  GuiLog* mp_log;
   Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
   GuiFileSharing* mp_fileSharing;
@@ -270,9 +275,10 @@ private:
   QAction* mp_actViewNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
-  QAction* mp_actViewExtra;
+  QAction* mp_actViewFileSharing;
   QAction* mp_actViewHome;
   QAction* mp_actViewScreenShot;
+  QAction* mp_actViewLog;
 
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;

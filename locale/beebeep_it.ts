@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1643,7 +1643,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished">Pronto</translation>
+        <translation type="obsolete">Pronto</translation>
     </message>
     <message>
         <source>Show my shared files</source>
@@ -1659,7 +1659,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the %1 log</source>
-        <translation type="unfinished">Mostra il log di %1</translation>
+        <translation type="obsolete">Mostra il log di %1</translation>
     </message>
     <message>
         <source>Show the bar of local file sharing</source>
@@ -1671,7 +1671,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the bar of log</source>
-        <translation type="unfinished">Mostra la barra del log</translation>
+        <translation type="obsolete">Mostra la barra del log</translation>
     </message>
     <message>
         <source>File Sharing</source>
@@ -1966,7 +1966,7 @@ Inserisci un nome differente.</translation>
     <name>GuiLog</name>
     <message>
         <source>System Log</source>
-        <translation>Log di sistema</translation>
+        <translation type="vanished">Log di sistema</translation>
     </message>
     <message>
         <source>Save log as</source>
@@ -2036,12 +2036,33 @@ Inserisci un nome differente.</translation>
         <source>Block scrolling</source>
         <translation>Blocca scorrimento</translation>
     </message>
-</context>
-<context>
-    <name>GuiLogWidget</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
+        <source>Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the log tool bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished">Seleziona tutto</translation>
+    </message>
+    <message>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished">Copia in memoria</translation>
+    </message>
+    <message>
+        <source>Show log file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: log not found.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2320,7 +2341,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Pronto</translation>
+        <translation type="vanished">Pronto</translation>
     </message>
     <message>
         <source>Users</source>
@@ -2777,7 +2798,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the %1 log</source>
-        <translation type="obsolete">Mostra il log di %1</translation>
+        <translation type="unfinished">Mostra il log di %1</translation>
     </message>
     <message>
         <source>Show the application log to see if an error occurred</source>
@@ -2941,7 +2962,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the main tool bar with settings</source>
-        <translation>Mostra la barra principale con le opzioni</translation>
+        <translation type="vanished">Mostra la barra principale con le opzioni</translation>
     </message>
     <message>
         <source>Show the chat tool bar</source>
@@ -3397,7 +3418,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled only the last %1 messages will be shown in chat</source>
-        <translation>Se alibilitata nella conversazione saranno mostrati solo gli ultimi %1 messaggi</translation>
+        <translation type="vanished">Se alibilitata nella conversazione saranno mostrati solo gli ultimi %1 messaggi</translation>
     </message>
     <message>
         <source>Please select the maximum number of messages to be showed</source>
@@ -4341,35 +4362,35 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Cattura</translation>
+        <translation type="vanished">Cattura</translation>
     </message>
     <message>
         <source>Capture a screenshot of your desktop</source>
-        <translation>Cattura una foto dello schermo</translation>
+        <translation type="vanished">Cattura una foto dello schermo</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation type="vanished">Invia</translation>
     </message>
     <message>
         <source>Send the captured screenshot to an user</source>
-        <translation>Invia la foto del tuo schermo ad un utente</translation>
+        <translation type="vanished">Invia la foto del tuo schermo ad un utente</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Salva</translation>
+        <translation type="vanished">Salva</translation>
     </message>
     <message>
         <source>Save the captured screenshot as file</source>
-        <translation>Salva la foto del tuo schermo come un file</translation>
+        <translation type="vanished">Salva la foto del tuo schermo come un file</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation type="vanished">Cancella</translation>
     </message>
     <message>
         <source>Delete the captured screenshot</source>
-        <translation>Cancella la foto catturata dal tuo schermo</translation>
+        <translation type="vanished">Cancella la foto catturata dal tuo schermo</translation>
     </message>
     <message>
         <source>Enable high dpi</source>
@@ -4386,6 +4407,22 @@ il file %2 (%3)?</translation>
     <message>
         <source>Show the bar of screenshot plugin</source>
         <translation type="unfinished">Mostra la barra del cattura schermo</translation>
+    </message>
+    <message>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send screenshot to a user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete screenshot</source>
+        <translation type="unfinished">Cancella l&apos;immagine</translation>
     </message>
 </context>
 <context>

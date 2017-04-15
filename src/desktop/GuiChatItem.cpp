@@ -96,7 +96,6 @@ bool GuiChatItem::updateItem( const Chat& c )
   chat_name += " ";
   setText( 0, chat_name );
   setToolTip( 0, tool_tip );
-  setStatusTip( 0, tool_tip );
   setData( 0, ChatUnreadMessages, c.unreadMessages() );
   onTickEvent( 2 );
 

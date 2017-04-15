@@ -29,26 +29,44 @@
 
 
 GuiLog::GuiLog( QWidget* parent )
-  : QWidget( parent )
+  : QMainWindow( parent )
 {
-  setupUi( this );
   setObjectName( "GuiLog" );
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "System Log" ) ) );
+  setWindowTitle( QString( "%1 - %2" ).arg( tr( "Log" ), Settings::instance().programName() ) );
+  setWindowIcon( QIcon( ":/images/log.png" ) );
 
+  mp_teLog = new QPlainTextEdit( this );
+  mp_teLog->setUndoRedoEnabled( false );
+  mp_teLog->setReadOnly( true );
+  mp_teLog->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_teLog->setPlainText( QString( " \n" ) );
 
   QPalette p = mp_teLog->palette();
   p.setColor( QPalette::Highlight, Qt::yellow );
   p.setColor( QPalette::HighlightedText, Qt::black );
   mp_teLog->setPalette( p );
+  connect( mp_teLog, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openLogMenu( const QPoint& ) ) );
+
+  setCentralWidget( mp_teLog );
+
+  mp_actOpenLogFilePath = new QAction( QIcon( ":/images/log.png" ), tr( "Show log file" ), this );
+  connect( mp_actOpenLogFilePath, SIGNAL( triggered() ), this, SLOT( openLogFilePath() ) );
+
+  mp_barLog = new QToolBar( tr( "Show the log tool bar" ), this );
+  addToolBar( Qt::BottomToolBarArea, mp_barLog );
+  mp_barLog->setObjectName( "GuiLogToolBar" );
+  mp_barLog->setIconSize( Settings::instance().mainBarIconSize() );
+  setupToolBar( mp_barLog );
+
+  mp_logMenu = new QMenu( tr( "Log menu" ), this );
 
   m_timer.setInterval( 1000 );
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( refreshLog() ) );
+
 }
 
 void GuiLog::setupToolBar( QToolBar* bar )
 {
-
   /* save as button */
   bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
   bar->addSeparator();
@@ -59,6 +77,8 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
   connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
   bar->addWidget( mp_cbLogToFile );
+  bar->addAction( mp_actOpenLogFilePath );
+  mp_actOpenLogFilePath->setEnabled( Settings::instance().logToFile() );
   bar->addSeparator();
 
   /* filter by keywords */
@@ -78,7 +98,6 @@ void GuiLog::setupToolBar( QToolBar* bar )
 
   /* search button */
   bar->addAction( QIcon( ":/images/search.png" ), tr( "Find" ), this, SLOT( findTextInLog() ) );
-  bar->addSeparator();
 
   /* flags */
   mp_cbCaseSensitive = new QCheckBox( bar );
@@ -90,13 +109,31 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbWholeWordOnly->setObjectName( "GuiCheckBoxFindWholeWordOnlyInLog" );
   mp_cbWholeWordOnly->setText( tr( "Whole word" ) );
   bar->addWidget( mp_cbWholeWordOnly );
+}
 
-  bar->addSeparator();
+void GuiLog::showUp()
+{
+  if( isMinimized() )
+    showNormal();
 
-  mp_cbBlockScrolling = new QCheckBox( bar );
-  mp_cbBlockScrolling->setObjectName( "GuiCheckBoxBlockScrolling" );
-  mp_cbBlockScrolling->setText( tr( "Block scrolling" ) );
-  bar->addWidget( mp_cbBlockScrolling );
+  if( !isVisible() )
+    show();
+
+#ifdef Q_OS_WIN
+  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+  raise();
+#endif
+
+  static bool log_first_show = true;
+  if( log_first_show )
+  {
+    QTimer::singleShot( 100, this, SLOT( refreshLog() ) );
+    log_first_show = false;
+  }
+
+  startCheckingLog();
 }
 
 void GuiLog::saveLogAs()
@@ -160,6 +197,14 @@ void GuiLog::saveLogAs()
   }
 }
 
+void GuiLog::closeEvent( QCloseEvent* e )
+{
+  stopCheckingLog();
+  if( mp_logMenu->isVisible() )
+    mp_logMenu->close();
+  e->accept();
+}
+
 void GuiLog::findTextInLog()
 {
   QString txt = mp_leFilter->text().simplified();
@@ -187,7 +232,6 @@ void GuiLog::startCheckingLog()
 {
   if( !m_timer.isActive() )
   {
-    refreshLog();
     m_timer.start();
     mp_leFilter->setFocus();
   }
@@ -202,20 +246,21 @@ void GuiLog::stopCheckingLog()
 void GuiLog::refreshLog()
 {
   QString plain_text = "";
-  foreach( LogNode ln, Log::instance().toList() )
+  foreach( QString log_line, Log::instance().toList() )
   {
-    plain_text += Log::instance().logNodeToString( ln );
+    plain_text += log_line;
     plain_text += QLatin1String( "\n" );
   }
+
+  Log::instance().clear();
 
   if( !plain_text.isEmpty() )
   {
     QTextCursor cursor( mp_teLog->textCursor() );
     cursor.movePosition( QTextCursor::End );
     cursor.insertText( plain_text );
-    Log::instance().clear();
 
-    if( !mp_cbBlockScrolling->isChecked() )
+    if( !m_blockScrolling )
     {
       QScrollBar *bar = mp_teLog->verticalScrollBar();
       if( bar )
@@ -246,4 +291,32 @@ void GuiLog::logToFile( bool yes )
       Log::instance().closeFileStream();
     }
   }
+
+  mp_actOpenLogFilePath->setEnabled( Settings::instance().logToFile() );
+}
+
+void GuiLog::openLogMenu( const QPoint& )
+{
+  mp_logMenu->clear();
+  mp_logMenu->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teLog, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_logMenu->addSeparator();
+  QAction* act = mp_logMenu->addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teLog, SLOT( copy() ), QKeySequence::Copy );
+  act->setEnabled( !mp_teLog->textCursor().selectedText().isEmpty() );
+  mp_logMenu->addSeparator();
+  act = mp_logMenu->addAction( tr( "Block scrolling" ), this, SLOT( toggleBlockScrolling() ) );
+  act->setCheckable( true );
+  act->setChecked( m_blockScrolling );
+
+  mp_logMenu->exec( QCursor::pos() );
+}
+
+void GuiLog::toggleBlockScrolling()
+{
+  m_blockScrolling = !m_blockScrolling;
+}
+
+void GuiLog::openLogFilePath()
+{
+  if( !Bee::showFileInGraphicalShell( Settings::instance().logFilePath() ) )
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "%1: log not found." ).arg( Settings::instance().logFilePath() ) );
 }

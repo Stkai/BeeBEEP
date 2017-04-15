@@ -85,12 +85,9 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   connect( mp_shareBox, SIGNAL( shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_shareBox, SIGNAL( shareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ) );
 
-
-
   initGuiItems();
 
   setMinimumWidth( 620 );
-  statusBar()->showMessage( tr( "Ready" ), 10000 );
 }
 
 void GuiFileSharing::keyPressEvent( QKeyEvent* e )
@@ -113,14 +110,6 @@ void GuiFileSharing::changeEvent( QEvent* e )
   QMainWindow::changeEvent( e );
 }
 
-void GuiFileSharing::closeEvent( QCloseEvent* e )
-{
-  // maybe timer is active
-  mp_logView->stopCheckingLog();
-  emit aboutToClose();
-  QMainWindow::closeEvent( e );
-}
-
 void GuiFileSharing::initGuiItems()
 {
   raiseLocalShareView();
@@ -134,7 +123,6 @@ void GuiFileSharing::checkViewActions()
 
   mp_actViewShareLocal->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
-  mp_actViewLog->setEnabled( mp_stackedWidget->currentWidget() != mp_logView );
   mp_actViewShareBox->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareBox );
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork  )
@@ -146,17 +134,6 @@ void GuiFileSharing::checkViewActions()
     mp_barShareLocal->show();
   else
     mp_barShareLocal->hide();
-
-  if( mp_stackedWidget->currentWidget() == mp_logView )
-  {
-    mp_barLog->show();
-    mp_logView->startCheckingLog();
-  }
-  else
-  {
-    mp_barLog->hide();
-    mp_logView->stopCheckingLog();
-  }
 }
 
 void GuiFileSharing::createActions()
@@ -171,7 +148,6 @@ void GuiFileSharing::createToolbars()
   mp_actViewShareLocal = mp_barView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareNetwork = mp_barView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareBox = mp_barView->addAction( QIcon( ":/images/sharebox.png" ), tr( "Show the shared boxes" ), this, SLOT( raiseShareBoxView() ) );
-  mp_actViewLog = mp_barView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( raiseLogView() ) );
   addToolBarBreak( Qt::RightToolBarArea );
 }
 
@@ -198,17 +174,6 @@ void GuiFileSharing::createStackedWidgets()
   mp_barShareNetwork->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
   mp_shareNetwork->setupToolBar( mp_barShareNetwork );
   act = mp_barShareNetwork->toggleViewAction();
-  act->setEnabled( false );
-
-  mp_logView = new GuiLog( this );
-  mp_stackedWidget->addWidget( mp_logView );
-  mp_barLog = new QToolBar( tr( "Show the bar of log" ), this );
-  addToolBar( Qt::BottomToolBarArea, mp_barLog );
-  mp_barLog->setObjectName( "GuiLogToolBar" );
-  mp_barLog->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_barLog->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
-  mp_logView->setupToolBar( mp_barLog );
-  act = mp_barLog->toggleViewAction();
   act->setEnabled( false );
 
   mp_shareBox = new GuiShareBox( this );
@@ -249,11 +214,6 @@ void GuiFileSharing::raiseNetworkShareView()
 {
   mp_shareNetwork->initShares();
   raiseView( mp_shareNetwork );
-}
-
-void GuiFileSharing::raiseLogView()
-{
-  raiseView( mp_logView );
 }
 
 void GuiFileSharing::raiseShareBoxView()

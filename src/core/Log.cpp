@@ -52,6 +52,7 @@ Log::Log()
  : m_logFile(), m_logStream()
 {
   m_logStream.setDevice( &m_logFile );
+  m_maxLogLines = 5000;
 }
 
 Log::~Log()
@@ -178,9 +179,9 @@ bool Log::dumpLogToFile()
   if( m_logList.empty() )
     return false;
 
-  foreach( LogNode ln, m_logList )
+  foreach( QString log_line, m_logList )
   {
-    m_logStream << (QString)logNodeToString( ln );
+    m_logStream << log_line;
     m_logStream << endl;
   }
 
@@ -203,13 +204,13 @@ void Log::add( QtMsgType mt, const QString& log_txt, const QString& log_note )
 
   LogNode ln( mt, log_txt, log_note );
 
-  QString sTmp = logNodeToString( ln );
+  QString log_line = logNodeToString( ln );
 
   if( m_logFile.isOpen() )
-    m_logStream << sTmp << endl;
+    m_logStream << log_line << endl;
 
 #ifdef BEEBEEP_DEBUG
-  fprintf( stderr, "%s\n", log_txt.toLatin1().constData() );
+  fprintf( stderr, "%s\n", log_line.toLatin1().constData() );
   fflush( stderr );
 #endif
 
@@ -219,7 +220,9 @@ void Log::add( QtMsgType mt, const QString& log_txt, const QString& log_note )
     abort();
   }
 
-  m_logList.push_back( ln );
+  if( m_logList.size() > m_maxLogLines )
+    m_logList.pop_front();
+  m_logList.push_back( log_line );
 }
 
 #if QT_VERSION >= 0x050000
@@ -228,15 +231,8 @@ void LogMessageHandler( QtMsgType type, const QMessageLogContext &context, const
   if( msg.isNull() || msg.isEmpty() )
     return;
 
-  /*QString sNote = QString( "%1:%2, %3" )
-                     .arg( context.file )
-                     .arg( context.line )
-                     .arg( context.function );
-  Log::instance().add( type, msg, sNote );*/
-
   Q_UNUSED( context );
   Log::instance().add( type, msg, "" );
-
 }
 
 #else

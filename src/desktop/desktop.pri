@@ -97,7 +97,6 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiEditVCard.ui \
   desktop/GuiHome.ui \
   desktop/GuiLanguage.ui \
-  desktop/GuiLog.ui \
   desktop/GuiPluginManager.ui \
   desktop/GuiSavedChat.ui \
   desktop/GuiSearchUser.ui \

@@ -25,18 +25,16 @@
 #define BEEBEEP_GUILOG_H
 
 #include "Config.h"
-#include "ui_GuiLog.h"
 
 
-class GuiLog : public QWidget, private Ui::GuiLogWidget
+class GuiLog : public QMainWindow
 {
   Q_OBJECT
 
 public:
   explicit GuiLog( QWidget *parent = 0 );
 
-  void setupToolBar( QToolBar* );
-
+  void showUp();
   void startCheckingLog();
   void stopCheckingLog();
 
@@ -45,15 +43,27 @@ protected slots:
   void findTextInLog();
   void saveLogAs();
   void logToFile( bool );
+  void openLogMenu( const QPoint& );
+  void toggleBlockScrolling();
+  void openLogFilePath();
+
+protected:
+  void setupToolBar( QToolBar* );
+  void closeEvent( QCloseEvent* );
 
 private:
+  QPlainTextEdit *mp_teLog;
   QTimer m_timer;
 
   QLineEdit* mp_leFilter;
   QCheckBox* mp_cbCaseSensitive;
   QCheckBox* mp_cbWholeWordOnly;
   QCheckBox* mp_cbLogToFile;
-  QCheckBox* mp_cbBlockScrolling;
+  QToolBar* mp_barLog;
+  QMenu* mp_logMenu;
+  QAction* mp_actOpenLogFilePath;
+
+  bool m_blockScrolling;
 
 };
 

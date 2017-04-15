@@ -44,7 +44,6 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
   addToolBar( Qt::BottomToolBarArea, mp_barScreenShot );
   mp_barScreenShot->setObjectName( "GuiScreenShotToolBar" );
   mp_barScreenShot->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_barScreenShot->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
   setupToolBar( mp_barScreenShot );
 }
 
@@ -89,22 +88,12 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
 
   bar->addSeparator();
 
-  mp_actShot = bar->addAction( QIcon( ":/images/screenshot.png" ), tr( "Capture" ), this, SLOT( doScreenShot() ) );
-  mp_actShot->setStatusTip( tr( "Capture a screenshot of your desktop" ) );
-  mp_actSend = bar->addAction( QIcon( ":/images/send.png" ), tr( "Send" ), this, SLOT( doSend() ) );
-  mp_actSend->setStatusTip( tr( "Send the captured screenshot to an user" ) );
-  mp_actSave = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save" ), this, SLOT( doSave() ) );
-  mp_actSave->setStatusTip( tr( "Save the captured screenshot as file" ) );
-  mp_actDelete = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( doDelete() ) );
-  mp_actDelete->setStatusTip( tr( "Delete the captured screenshot" ) );
+  mp_actShot = bar->addAction( QIcon( ":/images/screenshot.png" ), tr( "Capture screen" ), this, SLOT( doScreenShot() ) );
+  mp_actSend = bar->addAction( QIcon( ":/images/send.png" ), tr( "Send screenshot to a user" ), this, SLOT( doSend() ) );
+  mp_actSave = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save screenshot" ), this, SLOT( doSave() ) );
+  mp_actDelete = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Delete screenshot" ), this, SLOT( doDelete() ) );
 
   updateScreenShot();
-}
-
-void GuiScreenShot::closeEvent( QCloseEvent* e )
-{
-  emit aboutToClose();
-  QMainWindow::closeEvent( e );
 }
 
 void GuiScreenShot::resizeEvent( QResizeEvent* )
