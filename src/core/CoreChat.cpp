@@ -327,8 +327,6 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   if( chat_id == ID_DEFAULT_CHAT && messages_sent == 0 )
     dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::System );
 
-  c = ChatManager::instance().chat( chat_id ); // reload chat
-  emit chatChanged( c );
   return messages_sent;
 }
 
@@ -599,7 +597,8 @@ bool Core::readAllMessagesInChat( VNumber chat_id )
     }
     ChatManager::instance().setChat( c );
 
-    // no updateChat signal emit (for now)
+    // no signal... it will be managed in Gui
+    // emit chatChanged( c );
     sendLocalUserHasReadChatMessage( c );
     return true;
   }

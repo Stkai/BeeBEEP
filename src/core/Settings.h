@@ -236,6 +236,8 @@ public:
   inline const QByteArray& floatingChatSplitterState() const;
   inline void setShowUserStatusBackgroundColor( bool );
   inline bool showUserStatusBackgroundColor() const;
+  inline void setShowUserStatusDescription( bool );
+  inline bool showUserStatusDescription() const;
   inline void setUseReturnToSendMessage( bool );
   inline bool useReturnToSendMessage() const;
   inline void setChatUseYourNameInsteadOfYou( bool );
@@ -289,8 +291,6 @@ public:
 
   inline bool beepOnNewMessageArrived() const;
   inline void setBeepOnNewMessageArrived( bool );
-  inline bool beepAlwaysOnNewMessageArrived() const;
-  inline void setBeepAlwaysOnNewMessageArrived( bool );
   inline const QString& beepFilePath() const;
   inline void setBeepFilePath( const QString& );
 
@@ -555,6 +555,7 @@ private:
   bool m_showImagePreview;
   int m_imagePreviewHeight;
   bool m_showUserStatusBackgroundColor;
+  bool m_showUserStatusDescription;
   bool m_useReturnToSendMessage;
   bool m_chatUseYourNameInsteadOfYou;
   bool m_chatClearAllReadMessages;
@@ -591,7 +592,6 @@ private:
   bool m_askNicknameAtStartup;
   QString m_language;
   bool m_beepOnNewMessageArrived;
-  bool m_beepAlwaysOnNewMessageArrived;
   QString m_beepFilePath;
 
   QStringList m_broadcastAddressesInFileHosts;
@@ -771,8 +771,6 @@ inline const QString& Settings::downloadDirectory() const { return m_downloadDir
 inline void Settings::setDownloadDirectory( const QString& new_value ) { m_downloadDirectory = new_value; }
 inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessageArrived; }
 inline void Settings::setBeepOnNewMessageArrived( bool new_value ) { m_beepOnNewMessageArrived = new_value; }
-inline bool Settings::beepAlwaysOnNewMessageArrived() const { return m_beepAlwaysOnNewMessageArrived; }
-inline void Settings::setBeepAlwaysOnNewMessageArrived( bool new_value ) { m_beepAlwaysOnNewMessageArrived = new_value; }
 inline const QString& Settings::beepFilePath() const { return m_beepFilePath; }
 inline void Settings::setBeepFilePath( const QString& new_value ) { m_beepFilePath = new_value; }
 inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
@@ -885,6 +883,8 @@ inline const QStringList& Settings::workgroups() const { return m_workgroups; }
 inline int Settings::maxUserStatusDescriptionInList() const { return m_maxUserStatusDescriptionInList; }
 inline void Settings::setShowUserStatusBackgroundColor( bool new_value ) { m_showUserStatusBackgroundColor = new_value; }
 inline bool Settings::showUserStatusBackgroundColor() const { return m_showUserStatusBackgroundColor; }
+inline void Settings::setShowUserStatusDescription( bool new_value ) { m_showUserStatusDescription = new_value; }
+inline bool Settings::showUserStatusDescription() const { return m_showUserStatusDescription; }
 inline void Settings::setShortcuts( const QStringList& new_value ) { m_shortcuts = new_value; }
 inline const QStringList& Settings::shortcuts() const { return m_shortcuts; }
 inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_value; }

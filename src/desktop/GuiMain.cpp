@@ -109,7 +109,7 @@ GuiMain::GuiMain( QWidget *parent )
   createPluginWindows();
   updadePluginMenu();
 
-  connect( mp_core, SIGNAL( chatMessage( VNumber, const ChatMessage& ) ), this, SLOT( showChatMessage( VNumber, const ChatMessage& ) ) );
+  connect( mp_core, SIGNAL( newChatMessage( const Chat&, const ChatMessage& ) ), this, SLOT( onNewChatMessage( const Chat&, const ChatMessage& ) ) );
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( onUserChanged( const User& ) ) );
@@ -160,17 +160,6 @@ GuiMain::GuiMain( QWidget *parent )
   updateShortcuts();
 
   setMinimumWidth( 260 );
-
-  showVersionInStatusBar();
-}
-
-void GuiMain::showVersionInStatusBar()
-{
-  QString label_version_text = QString( "%1 %2 (%3)" )
-                                 .arg( Settings::instance().programName() )
-                                 .arg( Settings::instance().version( false, false ) )
-                                 .arg( Settings::instance().operatingSystem( true ) );
-  showMessage( label_version_text, 0 );
 }
 
 void GuiMain::initShortcuts()
@@ -685,40 +674,20 @@ void GuiMain::createMenus()
 
   mp_menuSettings->addSeparator();
 
-  QMenu* beep_file_menu = mp_menuSettings->addMenu( tr( "Enable BEEP alert on new message" ) + QString( "..." ) );
-  mp_actGroupBeepOnNewMessage = new QActionGroup( this );
-  mp_actGroupBeepOnNewMessage->setExclusive( true );
-  mp_actBeepOnNewMessage = beep_file_menu->addAction( tr( "When the chat is not visible" ), this, SLOT( settingsChanged() ) );
+  mp_actBeepOnNewMessage = mp_menuSettings->addAction( tr( "Enable BEEP alert on new message" ), this, SLOT( settingsChanged() ) );
   mp_actBeepOnNewMessage->setCheckable( true );
   mp_actBeepOnNewMessage->setChecked( Settings::instance().beepOnNewMessageArrived() );
-  mp_actBeepOnNewMessage->setData( 99 );
-  mp_actAlwaysBeepOnNewMessage = beep_file_menu->addAction( tr( "Always" ), this, SLOT( settingsChanged() ) );
-  mp_actAlwaysBeepOnNewMessage->setCheckable( true );
-  mp_actAlwaysBeepOnNewMessage->setChecked( Settings::instance().beepAlwaysOnNewMessageArrived() );
-  mp_actAlwaysBeepOnNewMessage->setData( 99 );
-  mp_actNeverBeepOnNewMessage = beep_file_menu->addAction( tr( "Never" ), this, SLOT( settingsChanged() ) );
-  mp_actNeverBeepOnNewMessage->setCheckable( true );
-  mp_actNeverBeepOnNewMessage->setChecked( !Settings::instance().beepAlwaysOnNewMessageArrived() && !Settings::instance().beepOnNewMessageArrived() );
-  mp_actNeverBeepOnNewMessage->setData( 99 );
-  mp_actGroupBeepOnNewMessage->addAction( mp_actBeepOnNewMessage );
-  mp_actGroupBeepOnNewMessage->addAction( mp_actAlwaysBeepOnNewMessage );
-  mp_actGroupBeepOnNewMessage->addAction( mp_actNeverBeepOnNewMessage );
-  connect( mp_actGroupBeepOnNewMessage, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingBeepOnNewMessage( QAction* ) ) );
+  mp_actBeepOnNewMessage->setData( 34 );
 
   act = mp_menuSettings->addAction( tr( "Enable Buzz sound" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().playBuzzSound() );
   act->setData( 56 );
 
-  act = mp_menuSettings->addAction( tr( "Raise on top on new message" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Raise existing chat window on new message" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
   act->setData( 15 );
-
-  act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().stayOnTop() );
-  act->setData( 14 );
 
   act = mp_menuSettings->addAction( tr( "Open chats only in a single window" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -726,6 +695,11 @@ void GuiMain::createMenus()
   act->setData( 7 );
 
   mp_menuSettings->addSeparator();
+
+  act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().stayOnTop() );
+  act->setData( 14 );
 
   act = mp_menuSettings->addAction( tr( "Prompt on quit (only when connected)" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -796,6 +770,11 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserStatusBackgroundColor() );
   act->setData( 38 );
+
+  act = mp_menuUserList->addAction( tr( "Show the status description" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUserStatusDescription() );
+  act->setData( 37 );
 
   mp_menuUserList->addSeparator();
 
@@ -945,20 +924,6 @@ void GuiMain::createToolAndMenuBars()
   menuBar()->addMenu( mp_menuPlugins );
   menuBar()->addMenu( mp_menuInfo );
 
-  /*
-  mp_lMainBarVersion = new QLabel( this );
-  mp_lMainBarVersion->setTextFormat( Qt::RichText );
-  mp_lMainBarVersion->setAlignment( Qt::AlignCenter );
-  QString label_version_text = QString( "&nbsp;<b>v %1</b> %2&nbsp;" )
-#ifdef BEEBEEP_DEBUG
-                            .arg( Settings::instance().version( true, true ) )
-#else
-                            .arg( Settings::instance().version( true, false ) )
-#endif
-                            .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
-  mp_lMainBarVersion->setText( label_version_text );
-  menuBar()->setCornerWidget( mp_lMainBarVersion );
-*/
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
@@ -1031,7 +996,8 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setData( 99 );
 
-  mp_dockHome = new QDockWidget( tr( "Activities" ), this );
+  QString label_version_text = QString( "%1 %2" ).arg( Settings::instance().programName() ).arg( Settings::instance().version( false, false ) );
+  mp_dockHome = new QDockWidget( label_version_text, this );
   mp_dockHome->setObjectName( "GuiHomeDock" );
   mp_home = new GuiHome( mp_dockHome );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -1116,7 +1082,7 @@ void GuiMain::onUserChanged( const User& u )
   if( mp_fileSharing )
     mp_fileSharing->onUserChanged( u );
  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-    fl_chat->updateUser( u, mp_core->isConnected() );
+    fl_chat->updateUser( u );
   checkViewActions();
   if( u.isLocal() )
     updateWindowTitle();
@@ -1321,7 +1287,7 @@ void GuiMain::settingsChanged()
     Settings::instance().setShowImagePreview( act->isChecked() );
     break;
   case 34:
-    // Empty
+    Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
     break;
   case 35:
     Settings::instance().setShowMinimizedAtStartup( act->isChecked() );
@@ -1330,7 +1296,8 @@ void GuiMain::settingsChanged()
     Settings::instance().setPromptOnCloseEvent( act->isChecked() );
     break;
   case 37:
-    // Empty
+    Settings::instance().setShowUserStatusDescription( act->isChecked() );
+    refresh_users = true;
     break;
   case 38:
     Settings::instance().setShowUserStatusBackgroundColor( act->isChecked() );
@@ -1439,9 +1406,8 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 #endif
 }
 
-void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool* chat_window_is_created )
+void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 {
-  Chat c = ChatManager::instance().chat( chat_id );
   if( c.isValid() && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
   {
 #ifdef BEEBEEP_DEBUG
@@ -1450,29 +1416,22 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
     return;
   }
 
-  if( Settings::instance().beepOnNewMessageArrived() || Settings::instance().beepAlwaysOnNewMessageArrived() )
+  if( Settings::instance().beepOnNewMessageArrived() )
     playBeep();
 
   bool show_message_in_tray = true;
 
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-
-  if( !fl_chat && Settings::instance().raiseOnNewMessageArrived() )
-  {
-    *chat_window_is_created = true;
-    fl_chat = createFloatingChat( c );
-  }
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
 
   if( fl_chat )
   {
     if( Settings::instance().raiseOnNewMessageArrived() )
     {
-      fl_chat->raiseOnTop();
+      fl_chat->showUp();
       show_message_in_tray = false;
     }
-    else
-      fl_chat->setMainIcon( true );
 
+    fl_chat->setMainIcon( true );
     QApplication::alert( fl_chat );
   }
   else
@@ -1518,47 +1477,36 @@ void GuiMain::showAlertForMessage( VNumber chat_id, const ChatMessage& cm, bool*
     else
       msg = tr( "New message arrived" );
 
-    mp_trayIcon->showNewMessageArrived( chat_id, msg, long_time_show );
+    mp_trayIcon->showNewMessageArrived( c.id(), msg, long_time_show );
   }
   else
-    mp_trayIcon->setUnreadMessages( chat_id, 0 );
+    mp_trayIcon->setUnreadMessages( c.id(), 0 );
 }
 
-void GuiMain::showChatMessage( VNumber chat_id, const ChatMessage& cm )
+void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 {
-  if( chat_id == ID_DEFAULT_CHAT && cm.isFromSystem() )
+  if( c.isDefault() && cm.isFromSystem() )
     mp_home->addSystemMessage( cm );
 
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  bool chat_is_visible = fl_chat && fl_chat->chatIsVisible();
-  bool chat_window_is_created = false;
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  if( fl_chat )
+    fl_chat->guiChat()->appendChatMessage( c, cm );
 
-  if( !cm.isFromSystem() && !cm.isFromLocalUser() )
-  {
-    if( !chat_is_visible )
-      showAlertForMessage( chat_id, cm, &chat_window_is_created );
-    else if( Settings::instance().beepAlwaysOnNewMessageArrived() )
-      playBeep();
-  }
+  if( cm.isFromSystem() || cm.isFromLocalUser() )
+    return;
 
-  fl_chat = floatingChat( chat_id );
-  chat_is_visible = fl_chat && fl_chat->chatIsVisible();
+  bool chat_is_visible = fl_chat && fl_chat->isActiveWindow();
 
   if( chat_is_visible )
   {
-    if( fl_chat->isActiveWindow() )
-      readAllMessagesInChat( chat_id );
-    if( !chat_window_is_created )
-      fl_chat->guiChat()->appendChatMessage( chat_id, cm );
+    readAllMessagesInChat( c.id() );
   }
   else
   {
-    Chat chat_hidden = ChatManager::instance().chat( chat_id );
-    mp_userList->setUnreadMessages( chat_id, chat_hidden.unreadMessages() );
-    int chat_messages = chat_hidden.chatMessages() + ChatManager::instance().savedChatSize( chat_hidden.name() );
-    mp_userList->setMessages( chat_id, chat_messages );
-    mp_chatList->updateChat( chat_hidden );
-    mp_groupList->updateChat( chat_hidden );
+    showAlertForMessage( c, cm );
+    mp_userList->updateChat( c );
+    mp_chatList->updateChat( c );
+    mp_groupList->updateChat( c );
   }
 
   updateNewMessageAction();
@@ -1755,10 +1703,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
 
     Chat c = ChatManager::instance().privateChatForUser( user_selected.id() );
     if( c.isValid() )
-    {
       chat_id = c.id();
-      showChat( c.id() );
-    }
     else
       chat_id = ID_INVALID;
   }
@@ -1793,7 +1738,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
       if( isMinimized() || !isActiveWindow() )
       {
         if( Settings::instance().raiseOnNewMessageArrived() )
-          raiseOnTop();
+          showUp();
         QApplication::alert( this );
       }
       QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
@@ -2004,11 +1949,6 @@ void GuiMain::showFactOfTheDay()
   mp_core->showFactOfTheDay();
 }
 
-void GuiMain::showDefaultChat()
-{
-  showChat( ID_DEFAULT_CHAT );
-}
-
 void GuiMain::showChat( VNumber chat_id )
 {
   Chat c = ChatManager::instance().chat( chat_id );
@@ -2029,10 +1969,13 @@ void GuiMain::showChat( VNumber chat_id )
     return;
   }
 
-  if( !fl_chat->isVisible() )
-    fl_chat->checkWindowFlagsAndShow();
+  if( fl_chat->isVisible() )
+    fl_chat->showUp();
   else
-    fl_chat->raiseOnTop();
+    fl_chat->checkWindowFlagsAndShow();   
+
+  readAllMessagesInChat( chat_id );
+  fl_chat->setFocusInChat();
 }
 
 void GuiMain::changeVCard()
@@ -2346,7 +2289,7 @@ void GuiMain::selectBeepFile()
 
   AudioManager::instance().clearBeep();
 
-  if( !Settings::instance().beepOnNewMessageArrived() && !Settings::instance().beepAlwaysOnNewMessageArrived() )
+  if( !Settings::instance().beepOnNewMessageArrived() )
   {
     if( QMessageBox::question( this, Settings::instance().programName(), tr( "Sound is not enabled on a new message. Do you want to enable it?" ), tr( "Yes" ), tr( "No" ) ) == 0 )
     {
@@ -2462,7 +2405,7 @@ void GuiMain::editGroupFromChat( VNumber chat_id )
   }
 }
 
-void GuiMain::raiseOnTop()
+void GuiMain::showUp()
 {
   if( isMinimized() )
     showNormal();
@@ -2687,6 +2630,7 @@ void GuiMain::checkGroup( VNumber group_id )
 
 void GuiMain::onChatChanged( const Chat& c )
 {
+  mp_userList->updateChat( c );
   mp_chatList->updateChat( c );
   mp_savedChatList->updateSavedChats();
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
@@ -2870,11 +2814,6 @@ void GuiMain::selectLanguage()
     Settings::instance().setLanguage( gl.languageSelected() );
     Settings::instance().setLanguagePath( gl.folderSelected() );
   }
-}
-
-void GuiMain::showUp()
-{
-  raiseOnTop();
 }
 
 void GuiMain::showAddUser()
@@ -3565,16 +3504,6 @@ void GuiMain::saveGeometryAndState()
     Settings::instance().save();
     showMessage( tr( "Window geometry and state saved" ), 3000 );
   }
-}
-
-void GuiMain::onChangeSettingBeepOnNewMessage( QAction* act )
-{
-  if( !act )
-    return;
-
-  Settings::instance().setBeepOnNewMessageArrived( mp_actBeepOnNewMessage->isChecked() );
-  Settings::instance().setBeepAlwaysOnNewMessageArrived( mp_actAlwaysBeepOnNewMessage->isChecked() );
-  Settings::instance().save();
 }
 
 void GuiMain::onChangeSettingOnExistingFile( QAction* act )

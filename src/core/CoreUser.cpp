@@ -25,7 +25,6 @@
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
-#include "Broadcaster.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"

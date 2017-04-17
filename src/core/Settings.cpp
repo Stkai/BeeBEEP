@@ -799,7 +799,6 @@ void Settings::load()
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
   m_chatShowMessageDatestamp = sets->value( "ShowMessageDatestamp", false ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
-  m_beepAlwaysOnNewMessageArrived = sets->value( "BeepAlwaysOnNewMessageArrived", false ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
   m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
@@ -957,6 +956,7 @@ void Settings::load()
   m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
   m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
+  m_showUserStatusDescription = sets->value( "ShowUserStatusDescription", false ).toBool();
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
   m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
@@ -1115,7 +1115,6 @@ void Settings::save()
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
   sets->setValue( "ShowMessageDatestamp", m_chatShowMessageDatestamp );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
-  sets->setValue( "BeepAlwaysOnNewMessageArrived", m_beepAlwaysOnNewMessageArrived );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );
   sets->setValue( "UseClickableLinks", m_chatUseClickableLinks );
   sets->setValue( "MessageHistorySize", m_chatMessageHistorySize );
@@ -1233,6 +1232,7 @@ void Settings::save()
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
   sets->setValue( "FacebookPageLinkClicked", m_isFacebookPageLinkClicked );
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
+  sets->setValue( "ShowUserStatusDescription", m_showUserStatusDescription );
   sets->setValue( "Shortcuts", m_shortcuts );
   sets->setValue( "UseShortcuts", m_useShortcuts );
   sets->setValue( "UseNativeFileDialogs", m_useNativeDialogs );

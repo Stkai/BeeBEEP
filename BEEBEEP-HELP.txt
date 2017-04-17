@@ -156,6 +156,7 @@ PromptOnCloseEvent=[true/false] enable it if you want to be asked on closing (it
 ShowMinimizedAtStartup=[true/false] show minimized at start up
 AlwaysOpenNewFloatingChat=[true/false] open always chat in a new floating window [obsolete in 3.2.0]
 ShowUserStatusBackgroundColor=[true/false] show background color for status in user list
+ShowUserStatusDescription=[true/false] show the user status description in user list (default=false) [3.2.0]
 UseShortcuts=[true/false] enable shortcuts in application
 Shortcuts=(do not edit manually)
 UseNativeDialogs=[true/false] enable native OS dialogs (in some case these native dialogs can be modal and cause connection timeout)

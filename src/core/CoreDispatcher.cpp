@@ -90,7 +90,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   qDebug() << "Chat" << c.id() << "has" << c.unreadMessages() << "unread messages";
 #endif
   ChatManager::instance().setChat( c );
-  emit chatMessage( c.id(), cm );
+  emit newChatMessage( c, cm );
 }
 
 void Core::dispatchChatMessageReadReceived( VNumber from_user_id, const Message& m )
@@ -145,7 +145,7 @@ void Core::dispatchToAllChats( const ChatMessage& cm )
   while( it != ChatManager::instance().chatList().end() )
   {
     (*it).addMessage( cm );
-    emit chatMessage( (*it).id(), cm );
+    emit newChatMessage( *it, cm );
     ++it;
   }
 }
@@ -158,7 +158,7 @@ void Core::dispatchToAllChatsWithUser( const ChatMessage& cm, VNumber user_id )
     if( (*it).hasUser( user_id ) )
     {
       (*it).addMessage( cm );
-      emit chatMessage( (*it).id(), cm );
+      emit newChatMessage( *it, cm );
     }
     ++it;
   }
@@ -172,7 +172,7 @@ void Core::dispatchToChat( const ChatMessage& cm, VNumber chat_id )
     if( (*it).id() == chat_id )
     {
       (*it).addMessage( cm );
-      emit chatMessage( chat_id, cm );
+      emit newChatMessage( *it, cm );
       return;
     }
     ++it;
@@ -184,12 +184,12 @@ void Core::dispatchToDefaultAndPrivateChat( const ChatMessage& cm, VNumber user_
   Chat c = ChatManager::instance().defaultChat();
   c.addMessage( cm );
   ChatManager::instance().setChat( c );
-  emit chatMessage( ID_DEFAULT_CHAT, cm );
+  emit newChatMessage( c, cm );
   c = ChatManager::instance().privateChatForUser( user_id );
   if( c.isValid() )
   {
     c.addMessage( cm );
     ChatManager::instance().setChat( c );
-    emit chatMessage( c.id(), cm );
+    emit newChatMessage( c, cm );
   }
 }

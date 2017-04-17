@@ -92,57 +92,60 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
-bool GuiFloatingChat::setChat( const Chat& c )
+void GuiFloatingChat::updateChatTitle( const Chat& c )
 {
+  QString window_title = "";
+
   if( c.isPrivate() )
   {
     VNumber user_id = c.privateUserId();
-    if( user_id != ID_INVALID )
+    User u = UserManager::instance().findUser( user_id );
+    if( u.isValid() )
     {
-      User u = UserManager::instance().findUser( user_id );
-      if( u.isValid() )
-      {
-        QString window_title = QString( "%1 (%2)" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
-        setWindowTitle( window_title );
-        m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
-      }
+      window_title = u.name();
+      if( !u.statusDescription().isEmpty() )
+        window_title += QString( " (%1 - %2)" ).arg( Bee::userStatusToString( u.status() ), u.statusDescription() );
       else
-        setWindowTitle( c.name() );
+        window_title += QString( " (%1)" ).arg( Bee::userStatusToString( u.status() ) );
+
+      m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
+      setWindowTitle( window_title );
     }
     else
-      setWindowTitle( c.name() );
+    {
+      m_mainWindowIcon = QIcon( ":/images/chat.png" );
+      window_title = c.name();
+    }
+  }
+  else if( c.isDefault() )
+  {
+    window_title = tr( "Chat with all connected users" );
+    m_mainWindowIcon = QIcon( ":/images/default-chat-online.png" );
   }
   else
   {
-    if( c.isDefault() )
-      setWindowTitle( tr( "Chat with all connected users" ) );
-    else
-      setWindowTitle( c.name() );
-
-    if( c.isGroup() )
-      m_mainWindowIcon = QIcon( ":/images/group.png" );
-    else
-      m_mainWindowIcon = QIcon( ":/images/default-chat-online.png" );
+    window_title = c.name();
+    m_mainWindowIcon = QIcon( ":/images/group.png" );
   }
 
-  setMainIcon( false );
+  setMainIcon( c.unreadMessages() > 0 );
+  setWindowTitle( window_title );
+}
 
+bool GuiFloatingChat::setChat( const Chat& c )
+{
+  updateChatTitle( c );
   return mp_chat->setChat( c );
 }
 
-void GuiFloatingChat::updateUser( const User& u, bool is_connected )
+void GuiFloatingChat::updateUser( const User& u )
 {
   Chat c = ChatManager::instance().chat( mp_chat->chatId() );
   if( !c.hasUser( u.id() ) )
     return;
 
   if( c.isPrivateForUser( u.id() ) )
-  {
-    QString window_title = QString( "%1 (%2)" ).arg( u.name(), is_connected ? Bee::userStatusToString( u.status() ) : tr( "offline" ) );
-    setWindowTitle( window_title );
-    m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
-    setMainIcon( false );
-  }
+    updateChatTitle( c );
 
   mp_chat->updateUsers( c );
 }
@@ -156,7 +159,7 @@ void GuiFloatingChat::closeEvent( QCloseEvent* e )
 
 void GuiFloatingChat::applyFlagStaysOnTop()
 {
-#ifdef Q_OS_WIN
+ #ifdef Q_OS_WIN
   if( Settings::instance().stayOnTop() )
     SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
   else
@@ -196,7 +199,7 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
     chat_splitter->restoreState( Settings::instance().floatingChatSplitterState() );
 }
 
-void GuiFloatingChat::raiseOnTop()
+void GuiFloatingChat::showUp()
 {
   if( isMinimized() )
     showNormal();
@@ -306,6 +309,8 @@ void GuiFloatingChat::setMainIcon( bool with_message )
     setWindowIcon( QIcon( ":/images/beebeep-message.png" ) );
   else
     setWindowIcon( m_mainWindowIcon );
+
+  qDebug() << "Main icon has message" << with_message;
 }
 
 void GuiFloatingChat::updateEmoticon()

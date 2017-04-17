@@ -51,6 +51,8 @@ public:
   void updateActionsOnFocusChanged();
   void setChatFont( const QFont& );
 
+  void appendChatMessage( const Chat&, const ChatMessage& );
+
   inline QSplitter* chatSplitter() const;
 
 signals:
@@ -70,14 +72,12 @@ signals:
   void toggleVisibilityPresetMessagesPanelRequest();
 
 public slots:
-  void appendChatMessage( VNumber, const ChatMessage& );
   void addEmoticon( const Emoticon& );
   void ensureFocusInChat();
   void addText( const QString& );
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
-  void setChatTitle( const Chat& );
   QString chatMessageToText( const User&, const ChatMessage& );
   bool messageCanBeShowed( const ChatMessage& );
   bool historyCanBeShowed();
@@ -146,6 +146,7 @@ private:
   QAction* mp_actFindTextInChat;
   QAction* mp_actSendFolder;
   QAction* mp_actSaveAs;
+  QAction* mp_actSaveGeometryAndState;
 
   QSplitter* mp_splitter;
 

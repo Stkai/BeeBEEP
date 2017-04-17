@@ -39,18 +39,15 @@ public:
   bool setChat( const Chat& );
   inline GuiChat* guiChat() const;
   void checkWindowFlagsAndShow();
-  void raiseOnTop();
   void setFocusInChat();
-
   inline bool chatIsVisible() const;
   void setMainIcon( bool with_message );
-
-  void updateUser( const User&, bool );
-
+  void updateUser( const User& );
   void applyFlagStaysOnTop();
 
 public slots:
   void updateEmoticon();
+  void showUp();
 
 signals:
   void readAllMessages( VNumber );
@@ -60,6 +57,7 @@ signals:
 protected:
   void closeEvent( QCloseEvent* );
   void keyPressEvent( QKeyEvent* );
+  void updateChatTitle( const Chat& );
 
 private slots:
   void onApplicationFocusChanged( QWidget*, QWidget* );

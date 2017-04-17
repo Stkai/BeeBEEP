@@ -125,7 +125,11 @@ bool GuiUserItem::updateUser( const User& u )
   if( unread_messages > 0 )
     s.prepend( QString( "(%1) " ).arg( unread_messages ) );
 
-  s += " ";
+  if( Settings::instance().showUserStatusDescription() && !u.statusDescription().isEmpty() )
+    s += QString( "\n[%1]" ).arg( u.statusDescription() );
+  else
+    s += " ";
+
   setText( 0, s );
 
   if( !u.isLocal() )

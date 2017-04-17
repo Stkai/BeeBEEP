@@ -286,3 +286,10 @@ void GuiUserList::onTickEvent( int ticks )
     ++it;
   }
 }
+
+void GuiUserList::updateChat( const Chat& c )
+{
+  setUnreadMessages( c.id(), c.unreadMessages() );
+  int chat_messages = c.chatMessages() + ChatManager::instance().savedChatSize( c.name() );
+  setMessages( c.id(), chat_messages );
+}

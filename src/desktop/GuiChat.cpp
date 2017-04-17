@@ -49,8 +49,6 @@ GuiChat::GuiChat( QWidget *parent )
   grid_layout->setObjectName( QString::fromUtf8( "grid_layout" ) );
   grid_layout->setContentsMargins( 4, 4, 4, 4 );
 
-  grid_layout->addWidget( mp_frameHeader, 0, 0, 1, 1 );
-
   mp_splitter = new QSplitter( this );
   mp_splitter->setOrientation( Qt::Vertical );
   mp_splitter->setChildrenCollapsible( false );
@@ -125,6 +123,9 @@ GuiChat::GuiChat( QWidget *parent )
   mp_actFindTextInChat = new QAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this );
   connect( mp_actFindTextInChat, SIGNAL( triggered() ), this, SLOT( showFindTextInChatDialog() ) );
 
+  mp_actSaveGeometryAndState = new QAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this );
+  connect( mp_actSaveGeometryAndState, SIGNAL( triggered() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
+
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
@@ -132,7 +133,6 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_teMessage, SIGNAL( urlsToCheck( const QMimeData* ) ), this, SLOT( checkAndSendUrls( const QMimeData* ) ) );
   connect( mp_teMessage, SIGNAL( imageToCheck( const QMimeData* ) ), this, SLOT( checkAndSendImage( const QMimeData* ) ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
-  connect( mp_pbSaveState, SIGNAL( clicked() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
 }
 
 void GuiChat::setupToolBar( QToolBar* bar )
@@ -158,6 +158,9 @@ void GuiChat::setupToolBar( QToolBar* bar )
   mp_actGroupWizard = bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
   mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
   mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
+  bar->addSeparator();
+  bar->addAction( mp_actSaveGeometryAndState );
+
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
 }
@@ -306,9 +309,16 @@ void GuiChat::changeChatMessageFilter()
 void GuiChat::setLastMessageTimestamp( const QDateTime& dt )
 {
   if( dt.isValid() && !Settings::instance().chatShowMessageTimestamp() )
-    mp_lTimestamp->setText( QString( "  " ) + tr( "Last message %1" ).arg( dt.toString( "hh:mm" )) + QString( "  " ) );
+  {
+    QString last_msg_timestamp = tr( "Last message %1" );
+    if( dt.date() == QDate::currentDate() )
+      last_msg_timestamp = last_msg_timestamp.arg( dt.toString( "hh:mm" ) );
+    else
+      last_msg_timestamp = last_msg_timestamp.arg( dt.toString( Qt::SystemLocaleLongDate ) );
+    mp_teChat->setToolTip( last_msg_timestamp );
+  }
   else
-    mp_lTimestamp->setText( "" );
+    mp_teChat->setToolTip( "" );
 }
 
 void GuiChat::sendMessage()
@@ -356,43 +366,6 @@ bool GuiChat::isActiveUser( const Chat& c, const User& u ) const
   return c.isValid() && c.usersId().contains( u.id() );
 }
 
-void GuiChat::setChatTitle( const Chat& c )
-{
-  QString chat_title;
-  mp_pbProfile->disconnect();
-  mp_pbProfile->setToolTip( QString( "" ) );
-
-  if( c.isDefault() )
-  {
-    mp_pbProfile->setIcon( QIcon( ":images/default-chat-online.png" ) );
-    chat_title = QString( "<b>%1</b>" ).arg( tr( "All Lan Users" ) ) ;
-  }
-  else if( c.isPrivate() )
-  {
-    User u = UserManager::instance().findUser( c.privateUserId() );
-    QPixmap user_avatar = Bee::avatarForUser( u, QSize( mp_pbProfile->width()-1, mp_pbProfile->height()-1 ), Settings::instance().showUserPhoto() );
-    mp_pbProfile->setIcon( user_avatar );
-    if( !u.isValid() )
-    {
-      chat_title = tr( "Unknown" );
-      qWarning() << "Invalid user" << c.privateUserId() << "found in GuiChat::setChatTitle(...)";
-    }
-    else
-    {
-      chat_title = QString( "<b>%1</b>" ).arg( u.name() ) ;
-      mp_pbProfile->setToolTip( QString( "%1\n(%2)" ).arg( Bee::toolTipForUser( u, false ) ).arg( tr( "Click here to show the user profile" ) ) );
-      connect( mp_pbProfile, SIGNAL( clicked() ), this, SLOT( showUserVCard() ) );
-    }
-  }
-  else
-  {
-    chat_title = QString( "<b>%1</b>" ).arg( c.name() );
-    mp_pbProfile->setIcon( QIcon( ":/images/group.png" ) );
-  }
-
-  mp_lTitle->setText( chat_title );
-}
-
 void GuiChat::updateChat()
 {
   Chat c = ChatManager::instance().chat( m_chatId );
@@ -412,7 +385,6 @@ bool GuiChat::setChat( const Chat& c )
   QApplication::setOverrideCursor( Qt::WaitCursor );
 
   m_chatId = c.id();
-  setChatTitle( c );
 
   if( c.isDefault() )
   {
@@ -524,15 +496,14 @@ void GuiChat::ensureLastMessageVisible()
     mp_teChat->ensureCursorVisible();
 }
 
-void GuiChat::appendChatMessage( VNumber chat_id, const ChatMessage& cm )
+void GuiChat::appendChatMessage( const Chat& c, const ChatMessage& cm )
 {
-  if( m_chatId != chat_id )
+  if( m_chatId != c.id() )
   {
-    qWarning() << "Trying to append chat message of chat id" << chat_id << "in chat shown with id" << m_chatId << "... skip it";
+    qWarning() << "Trying to append chat message of chat id" << c.id() << "in chat shown with id" << m_chatId << "... skip it";
     return;
   }
 
-  Chat c = ChatManager::instance().chat( m_chatId );
   if( !c.isValid() )
   {
     qWarning() << "Invalid chat" << m_chatId << "found in GuiChat::appendChatMessage(...)";
@@ -1096,6 +1067,5 @@ void GuiChat::updateUsers( const Chat& c )
   if( c.id() != m_chatId )
     return;
 
-  setChatTitle( c );
   updateMenuMembers( c );
 }

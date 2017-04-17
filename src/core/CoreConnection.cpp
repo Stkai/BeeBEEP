@@ -302,10 +302,9 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3." )
                         .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path() );
         }
-
-        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
       }
 
+      dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
       qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
       c->setUserId( ID_INVALID );
       closeConnection( c );

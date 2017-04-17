@@ -27,6 +27,7 @@
 #include "GuiUserItem.h"
 #include "ui_GuiUserList.h"
 class User;
+class Chat;
 
 
 class GuiUserList : public QWidget, private Ui::GuiUserListWidget
@@ -41,6 +42,7 @@ public:
   void setUnreadMessages( VNumber private_chat_id, int );
   void setMessages( VNumber private_chat_id, int );
   void updateUsers( bool );
+  void updateChat( const Chat& );
 
   inline void setMenuSettings( QMenu* );
 

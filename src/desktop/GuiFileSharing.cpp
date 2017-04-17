@@ -224,7 +224,7 @@ void GuiFileSharing::raiseShareBoxView()
   mp_shareBox->updateShareBoxes();
 }
 
-void GuiFileSharing::raiseOnTop()
+void GuiFileSharing::showUp()
 {
   if( isMinimized() )
     showNormal();
@@ -238,11 +238,6 @@ void GuiFileSharing::raiseOnTop()
 #else
   raise();
 #endif
-}
-
-void GuiFileSharing::showUp()
-{
-  raiseOnTop();
 }
 
 void GuiFileSharing::onTickEvent( int )

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -652,7 +652,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing with %2 files, %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 è stata condivisa in rete con %2 file, %3</translation>
     </message>
 </context>
 <context>
@@ -972,7 +972,7 @@
     </message>
     <message>
         <source>All Lan Users</source>
-        <translation>Utenti Locali</translation>
+        <translation type="obsolete">Utenti Locali</translation>
     </message>
     <message>
         <source>%1 Local Secure Mode</source>
@@ -1282,7 +1282,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Click here to show the user profile</source>
-        <translation>Premi qui per mostrare il profilo dell&apos;utente</translation>
+        <translation type="obsolete">Premi qui per mostrare il profilo dell&apos;utente</translation>
     </message>
     <message>
         <source>You are not connected</source>
@@ -1306,7 +1306,11 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Sconosciuto</translation>
+        <translation type="obsolete">Sconosciuto</translation>
+    </message>
+    <message>
+        <source>Save window&apos;s geometry</source>
+        <translation>Salva le dimensioni della finestra</translation>
     </message>
 </context>
 <context>
@@ -1343,14 +1347,6 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
         <translation>Parla</translation>
     </message>
     <message>
-        <source>Write to: &lt;b&gt;ALL&lt;/b&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Click to send message or just hit enter</source>
         <translation>Premi qui o premi invio per spedire il messaggio</translation>
     </message>
@@ -1368,7 +1364,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Save window&apos;s geometry</source>
-        <translation>Salva le dimensioni della finestra</translation>
+        <translation type="obsolete">Salva le dimensioni della finestra</translation>
     </message>
 </context>
 <context>
@@ -1639,7 +1635,7 @@ Inserisci un nome differente.</translation>
     <name>GuiFileSharing</name>
     <message>
         <source>Show the view tool bar</source>
-        <translation type="unfinished">Mostra la barra delle viste</translation>
+        <translation>Mostra la barra delle viste</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -1647,15 +1643,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show my shared files</source>
-        <translation type="unfinished">Mostra i miei file condivisi</translation>
+        <translation>Mostra i miei file condivisi</translation>
     </message>
     <message>
         <source>Show the network shared files</source>
-        <translation type="unfinished">Mostra i file condivisi presenti sulla rete</translation>
+        <translation>Mostra i file condivisi presenti sulla rete</translation>
     </message>
     <message>
         <source>Show the shared boxes</source>
-        <translation type="unfinished">Mostra le ShareBox</translation>
+        <translation>Mostra le ShareBox</translation>
     </message>
     <message>
         <source>Show the %1 log</source>
@@ -1663,11 +1659,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the bar of local file sharing</source>
-        <translation type="unfinished">Mostra la barra dei tuoi file condivisi</translation>
+        <translation>Mostra la barra dei tuoi file condivisi</translation>
     </message>
     <message>
         <source>Show the bar of network file sharing</source>
-        <translation type="unfinished">Mostra la barra di tutti i file condivisi in rete</translation>
+        <translation>Mostra la barra di tutti i file condivisi in rete</translation>
     </message>
     <message>
         <source>Show the bar of log</source>
@@ -1675,7 +1671,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>File Sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Condivisione file</translation>
     </message>
 </context>
 <context>
@@ -1702,7 +1698,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>offline</source>
-        <translation>non in linea</translation>
+        <translation type="obsolete">non in linea</translation>
     </message>
     <message>
         <source>Preset messages</source>
@@ -1730,7 +1726,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
     </message>
 </context>
 <context>
@@ -1804,7 +1800,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Change background color</source>
-        <translation type="unfinished">Cambia il colore di sfondo</translation>
+        <translation>Cambia il colore di sfondo</translation>
     </message>
 </context>
 <context>
@@ -1966,7 +1962,7 @@ Inserisci un nome differente.</translation>
     <name>GuiLog</name>
     <message>
         <source>System Log</source>
-        <translation type="vanished">Log di sistema</translation>
+        <translation type="obsolete">Log di sistema</translation>
     </message>
     <message>
         <source>Save log as</source>
@@ -2038,31 +2034,31 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log</translation>
     </message>
     <message>
         <source>Show the log tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la barra del log</translation>
     </message>
     <message>
         <source>Log menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu del log</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished">Seleziona tutto</translation>
+        <translation>Seleziona tutto</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copia in memoria</translation>
+        <translation>Copia in memoria</translation>
     </message>
     <message>
         <source>Show log file</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra il file di log</translation>
     </message>
     <message>
         <source>%1: log not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: il log non è stato trovato.</translation>
     </message>
 </context>
 <context>
@@ -2341,7 +2337,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="vanished">Pronto</translation>
+        <translation type="obsolete">Pronto</translation>
     </message>
     <message>
         <source>Users</source>
@@ -2798,7 +2794,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the %1 log</source>
-        <translation type="unfinished">Mostra il log di %1</translation>
+        <translation>Mostra il log di %1</translation>
     </message>
     <message>
         <source>Show the application log to see if an error occurred</source>
@@ -2878,7 +2874,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Make a screenshot</source>
-        <translation type="unfinished">Fai una foto allo schermo</translation>
+        <translation>Fai una foto allo schermo</translation>
     </message>
     <message>
         <source>Show the utility to capture a screenshot</source>
@@ -2962,7 +2958,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the main tool bar with settings</source>
-        <translation type="vanished">Mostra la barra principale con le opzioni</translation>
+        <translation type="obsolete">Mostra la barra principale con le opzioni</translation>
     </message>
     <message>
         <source>Show the chat tool bar</source>
@@ -3250,7 +3246,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Raise on top on new message</source>
-        <translation>Porta in primo piano all&apos;arrivo di un messaggio</translation>
+        <translation type="obsolete">Porta in primo piano all&apos;arrivo di un messaggio</translation>
     </message>
     <message>
         <source>Always stay on top</source>
@@ -3418,7 +3414,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>If enabled only the last %1 messages will be shown in chat</source>
-        <translation type="vanished">Se alibilitata nella conversazione saranno mostrati solo gli ultimi %1 messaggi</translation>
+        <translation type="obsolete">Se alibilitata nella conversazione saranno mostrati solo gli ultimi %1 messaggi</translation>
     </message>
     <message>
         <source>Please select the maximum number of messages to be showed</source>
@@ -3550,7 +3546,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Always</source>
-        <translation>Sempre</translation>
+        <translation type="obsolete">Sempre</translation>
     </message>
     <message>
         <source>Do you really want to delete chat with %1?</source>
@@ -3798,11 +3794,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>When the chat is not visible</source>
-        <translation>Quando la finestra non è visibile</translation>
+        <translation type="obsolete">Quando la finestra non è visibile</translation>
     </message>
     <message>
         <source>Never</source>
-        <translation>Mai</translation>
+        <translation type="obsolete">Mai</translation>
     </message>
     <message>
         <source>File transfer is not enabled.</source>
@@ -3938,23 +3934,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Network...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>Rete...</translation>
     </message>
     <message>
         <source>Show file sharing window</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la finestra della condivisione file</translation>
     </message>
     <message>
         <source>Show the activity panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra il pannello delle attività</translation>
     </message>
     <message>
         <source>Restore default font</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina il carattere predefinito</translation>
+    </message>
+    <message>
+        <source>Raise existing chat window on new message</source>
+        <translation>Porta in primo piano una finestra esistente all&apos;arrivo di un messaggio</translation>
+    </message>
+    <message>
+        <source>Show the status description</source>
+        <translation>Mostra la descrizione dello stato</translation>
     </message>
 </context>
 <context>
@@ -4284,7 +4284,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Cancella</translation>
+        <translation>Cancella</translation>
     </message>
 </context>
 <context>
@@ -4362,35 +4362,35 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation type="vanished">Cattura</translation>
+        <translation type="obsolete">Cattura</translation>
     </message>
     <message>
         <source>Capture a screenshot of your desktop</source>
-        <translation type="vanished">Cattura una foto dello schermo</translation>
+        <translation type="obsolete">Cattura una foto dello schermo</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="vanished">Invia</translation>
+        <translation type="obsolete">Invia</translation>
     </message>
     <message>
         <source>Send the captured screenshot to an user</source>
-        <translation type="vanished">Invia la foto del tuo schermo ad un utente</translation>
+        <translation type="obsolete">Invia la foto del tuo schermo ad un utente</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="vanished">Salva</translation>
+        <translation type="obsolete">Salva</translation>
     </message>
     <message>
         <source>Save the captured screenshot as file</source>
-        <translation type="vanished">Salva la foto del tuo schermo come un file</translation>
+        <translation type="obsolete">Salva la foto del tuo schermo come un file</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Cancella</translation>
+        <translation type="obsolete">Cancella</translation>
     </message>
     <message>
         <source>Delete the captured screenshot</source>
-        <translation type="vanished">Cancella la foto catturata dal tuo schermo</translation>
+        <translation type="obsolete">Cancella la foto catturata dal tuo schermo</translation>
     </message>
     <message>
         <source>Enable high dpi</source>
@@ -4406,23 +4406,23 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the bar of screenshot plugin</source>
-        <translation type="unfinished">Mostra la barra del cattura schermo</translation>
+        <translation>Mostra la barra del cattura schermo</translation>
     </message>
     <message>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Cattura lo schermo</translation>
     </message>
     <message>
         <source>Send screenshot to a user</source>
-        <translation type="unfinished"></translation>
+        <translation>Invia l&apos;immagine ad un utente</translation>
     </message>
     <message>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva l&apos;immagine</translation>
     </message>
     <message>
         <source>Delete screenshot</source>
-        <translation type="unfinished">Cancella l&apos;immagine</translation>
+        <translation>Cancella l&apos;immagine</translation>
     </message>
 </context>
 <context>
@@ -4634,7 +4634,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Network settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferenze di rete</translation>
     </message>
 </context>
 <context>
@@ -4814,7 +4814,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Click to open %1</source>
-        <translation>Click per aprire %1</translation>
+        <translation type="obsolete">Click per aprire %1</translation>
     </message>
     <message>
         <source>Update shared folders and files</source>
@@ -4846,7 +4846,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 shared files</source>
-        <translation>%1 file condivisi</translation>
+        <translation type="obsolete">%1 file condivisi</translation>
+    </message>
+    <message>
+        <source>Do you really want to remove this path:</source>
+        <translation>Vuoi realmente eliminare questa condivisione:</translation>
     </message>
 </context>
 <context>
@@ -4976,7 +4980,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Folder and Files shared in your network</source>
-        <translation>Cartelle e file condivisi nella tua rete</translation>
+        <translation type="obsolete">Cartelle e file condivisi nella tua rete</translation>
     </message>
     <message>
         <source>MAX</source>
@@ -5001,6 +5005,18 @@ il file %2 (%3)?</translation>
     <message>
         <source>You cannot download more than %1 files</source>
         <translation>Non puoi scaricare più di %1 file</translation>
+    </message>
+    <message>
+        <source>Files and folders shared in your network</source>
+        <translation>File e cartelle condivisi nella tua rete</translation>
+    </message>
+    <message>
+        <source>Downloading</source>
+        <translation>Scaricati</translation>
+    </message>
+    <message>
+        <source>Uploading</source>
+        <translation>Inviati</translation>
     </message>
 </context>
 <context>

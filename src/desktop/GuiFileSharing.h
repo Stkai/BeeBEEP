@@ -70,7 +70,6 @@ protected:
   void keyPressEvent( QKeyEvent* );
   void changeEvent( QEvent* );
   bool promptConnectionPassword();
-  void raiseOnTop();
   void raiseView( QWidget* );
 
 private:

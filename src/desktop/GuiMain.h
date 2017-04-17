@@ -79,7 +79,8 @@ private slots:
   void showLicense();
   void onUserChanged( const User& );
   void showWritingUser( const User&, VNumber );
-  void showChatMessage( VNumber, const ChatMessage& );
+  void onNewChatMessage( const Chat&, const ChatMessage& );
+  void onChatChanged( const Chat& );
   void sendMessage( VNumber, const QString& );
   void showTipOfTheDay();
   void showFactOfTheDay();
@@ -101,7 +102,6 @@ private slots:
   void changeUserColor( VNumber, const QString& );
   void showPluginHelp();
   void showPluginManager();
-  void showDefaultChat();
   void showChat( VNumber );
   void showWizard();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
@@ -127,7 +127,6 @@ private slots:
   void openFacebookPage();
   void clearChat( VNumber );
   void checkGroup( VNumber );
-  void onChatChanged( const Chat& );
   void leaveGroupChat( VNumber );
   void removeGroup( VNumber );
   void removeChat( VNumber );
@@ -159,7 +158,6 @@ private slots:
   void onNetworkInterfaceUp();
   void onChatReadByUser( VNumber chat_id, VNumber user_id );
   void saveGeometryAndState();
-  void onChangeSettingBeepOnNewMessage( QAction* );
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );
   void onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
@@ -187,9 +185,8 @@ protected:
   void closeEvent( QCloseEvent* );
   void changeEvent( QEvent* );
   bool promptConnectionPassword();
-  void raiseOnTop();
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
-  void showAlertForMessage( VNumber, const ChatMessage&, bool* chat_window_is_created );
+  void showAlertForMessage( const Chat&, const ChatMessage& );
   GuiFloatingChat* createFloatingChat( const Chat& );
   void closeFloatingChat( VNumber );
 
@@ -227,7 +224,6 @@ private:
   void updateShortcuts();
   void updateEmoticons();
   void updateNewMessageAction();
-  void showVersionInStatusBar();
 
 private:
   GuiTransferFile* mp_fileTransfer;
@@ -288,10 +284,7 @@ private:
   QAction* mp_actGenerateAutomaticFilename;
   QAction* mp_actAskToDoOnExistingFile;
 
-  QActionGroup* mp_actGroupBeepOnNewMessage;
   QAction* mp_actBeepOnNewMessage;
-  QAction* mp_actAlwaysBeepOnNewMessage;
-  QAction* mp_actNeverBeepOnNewMessage;
 
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
