@@ -25,12 +25,12 @@
 #define BEEBEEP_GUIFILESHARING_H
 
 #include "Config.h"
+#include "GuiShareNetwork.h"
 class Core;
 class FileInfo;
 class GuiLog;
 class GuiShareBox;
 class GuiShareLocal;
-class GuiShareNetwork;
 class User;
 
 
@@ -48,6 +48,8 @@ public:
 signals:
   void openUrlRequest( const QUrl& );
   void sendFileRequest( const QString& );
+  void downloadSharedFileRequest( VNumber, VNumber );
+  void downloadSharedFilesRequest( const QList<SharedFileInfo>& );
 
 public slots:
   void showUp();

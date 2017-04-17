@@ -53,13 +53,10 @@ protected slots:
   void addFilePath();
   void addFolderPath();
   void removePath();
-  void loadFileInfoInList();
   void updateList();
   void openItemDoubleClicked( QTreeWidgetItem*, int );
   void openMySharesMenu( const QPoint& );
-  void openLocalSharesMenu( const QPoint& );
   void clearAllPaths();
-  void processNextItemInQueue();
 
 protected:
   void addSharePath( const QString& );
@@ -76,9 +73,7 @@ private:
   QAction* mp_actRemove;
   QAction* mp_actUpdate;
   QAction* mp_actClear;
-
-  GuiFileInfoList m_fileInfoList;
-  QQueue<FileInfo> m_queue;
+  QAction* mp_actOpenPath;
   QMenu* mp_menuContext;
 
 };

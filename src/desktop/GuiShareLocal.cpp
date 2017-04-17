@@ -29,7 +29,7 @@
 
 
 GuiShareLocal::GuiShareLocal( QWidget *parent )
-  : QWidget(parent), m_fileInfoList()
+  : QWidget(parent)
 {
   setupUi( this );
   setAcceptDrops( true );
@@ -58,14 +58,9 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
 #endif
   header_view->setSortIndicator( 2, Qt::AscendingOrder );
 
-  m_fileInfoList.initTree( mp_twLocalShares, true );
-  mp_twLocalShares->setColumnHidden( GuiFileInfoItem::ColumnStatus, true );
-
   mp_menuContext = new QMenu( this );
 
   connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMySharesMenu( const QPoint& ) ) );
-  connect( mp_twLocalShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
-  connect( mp_twLocalShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openLocalSharesMenu( const QPoint& ) ) );
 }
 
 void GuiShareLocal::setupToolBar( QToolBar* bar )
@@ -154,9 +149,14 @@ void GuiShareLocal::removePath()
     return;
   }
 
-  setActionsEnabled( false );
-
   QString share_selected = item_list.first()->text( 2 );
+
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to remove this path:" )
+                             + QString( "\n%1").arg( share_selected ),
+                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+    return;
+
+  setActionsEnabled( false );
 
   emit sharePathRemoved( share_selected );
 }
@@ -194,54 +194,20 @@ void GuiShareLocal::updateFileSharedList()
 {
   setActionsEnabled( false );
   updatePaths();
-  QTimer::singleShot( 200, this, SLOT( loadFileInfoInList() ) );
-}
-
-void GuiShareLocal::loadFileInfoInList()
-{
   int file_count = 0;
   FileSizeType total_file_size = 0;
-
-  m_fileInfoList.clearTree();
-  m_queue.clear();
 
   if( !FileShare::instance().local().isEmpty() )
   {
     foreach( FileInfo fi, FileShare::instance().local() )
     {
-      m_queue.enqueue( fi );
       file_count++;
       total_file_size += fi.size();
     }
   }
 
-  setActionsEnabled( false );
   showStats( file_count, total_file_size );
-  if( !m_queue.isEmpty() )
-    QTimer::singleShot( 300, this, SLOT( processNextItemInQueue() ) );
-}
-
-void GuiShareLocal::processNextItemInQueue()
-{
-  setCursor( Qt::WaitCursor );
-  m_fileInfoList.setUpdatesEnabled( false );
-
-  for( int i = 0; i < 100; i++ )
-  {
-    if( m_queue.isEmpty() )
-      break;
-    FileInfo fi = m_queue.dequeue();
-    GuiFileInfoItem* item = m_fileInfoList.createFileItem( Settings::instance().localUser(), fi );
-    item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Click to open %1" ).arg( fi.name() ) );
-  }
-
-  m_fileInfoList.setUpdatesEnabled( true );
-  setCursor( Qt::ArrowCursor );
-
-  if( m_queue.isEmpty() )
-    setActionsEnabled( true );
-  else
-    QTimer::singleShot( 1000, this, SLOT( processNextItemInQueue() ) );
+  setActionsEnabled( true );
 }
 
 void GuiShareLocal::addSharePath( const QString& sp )
@@ -328,35 +294,6 @@ void GuiShareLocal::openMySharesMenu( const QPoint& p )
     if( !item->isSelected() )
       item->setSelected( true );
     mp_menuContext->addAction( mp_actRemove );
-  }
-  else
-  {
-    mp_menuContext->addAction( mp_actAddFile );
-    mp_menuContext->addAction( mp_actAddFolder );
-  }
-
-  mp_menuContext->exec( QCursor::pos() );
-}
-
-void GuiShareLocal::openLocalSharesMenu( const QPoint& p )
-{
-  QTreeWidgetItem* item = mp_twLocalShares->itemAt( p );
-  int selected_items;
-  if( item )
-  {
-    if( !item->isSelected() )
-      item->setSelected( true );
-    selected_items = m_fileInfoList.parseSelectedItems();
-  }
-  else
-    selected_items = 0;
-
-  mp_menuContext->clear();
-
-  if( selected_items )
-  {
-    QString selected_items_to_string = selected_items > Settings::instance().maxQueuedDownloads() ? QString( "%1+" ).arg( Settings::instance().maxQueuedDownloads() ) : QString::number( selected_items );
-    mp_menuContext->addAction( QIcon( ":/images/upload.png" ), tr( "%1 shared files" ).arg( selected_items_to_string ) );
   }
   else
   {

@@ -56,18 +56,6 @@
    </item>
    <item row="1" column="0">
     <widget class="QTreeWidget" name="mp_twMyShares">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>140</height>
-      </size>
-     </property>
-     <property name="baseSize">
-      <size>
-       <width>120</width>
-       <height>0</height>
-      </size>
-     </property>
      <property name="selectionMode">
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
@@ -94,48 +82,10 @@
      </column>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QTreeWidget" name="mp_twLocalShares">
-     <property name="baseSize">
-      <size>
-       <width>120</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-     <property name="allColumnsShowFocus">
-      <bool>true</bool>
-     </property>
-     <property name="columnCount">
-      <number>3</number>
-     </property>
-     <attribute name="headerStretchLastSection">
-      <bool>false</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string notr="true">2</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string notr="true">3</string>
-      </property>
-     </column>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>mp_twMyShares</tabstop>
-  <tabstop>mp_twLocalShares</tabstop>
  </tabstops>
  <resources/>
  <connections/>

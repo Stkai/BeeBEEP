@@ -50,7 +50,8 @@ signals:
 
 public slots:
   void showMessage( VNumber, VNumber, const QString& );
-  void setFileTransferCompleted( VNumber, VNumber, const QString& );
+  void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
+  void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
   void reloadList();
 
 protected slots:

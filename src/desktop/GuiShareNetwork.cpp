@@ -321,25 +321,6 @@ void GuiShareNetwork::showMessage( VNumber user_id, VNumber file_info_id, const 
   item->setText( GuiFileInfoItem::ColumnStatus, msg );
 }
 
-void GuiShareNetwork::setFileTransferCompleted( VNumber user_id, VNumber file_info_id, const QString& file_path )
-{
-  GuiFileInfoItem* item = m_fileInfoList.fileItem( user_id, file_info_id );
-  if( !item )
-    return;
-
-  showFileTransferCompleted( item, file_path );
-}
-
-void GuiShareNetwork::showFileTransferCompleted( GuiFileInfoItem* item, const QString& file_path )
-{
-  item->setFilePath( file_path );
-  item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
-  if( item->text( GuiFileInfoItem::ColumnStatus ).isEmpty() )
-    item->setText( GuiFileInfoItem::ColumnStatus, tr( "Transfer completed" ) );
-  for( int i = 0; i < mp_twShares->columnCount(); i++ )
-    item->setBackgroundColor( i, QColor( "#91D606" ) );
-}
-
 void GuiShareNetwork::showStatus( const QString& status_text )
 {
   if( status_text.isEmpty() )
@@ -463,4 +444,45 @@ void GuiShareNetwork::updateUser( const User& u )
     if( user_item )
       user_item->initUser( u.id(), u.name() );
   }
+}
+
+void GuiShareNetwork::onFileTransferProgress( VNumber file_info_id, const User& u, const FileInfo& fi, FileSizeType bytes )
+{
+  GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), file_info_id );
+  if( !item )
+    return;
+
+  if( fi.size() == 0 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "GuiShareNetwork::onFileTransferProgress try to show progress divided by 0:" << fi.path();
+#endif
+    return;
+  }
+
+  QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
+                                      Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
+                                      QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
+
+
+  item->setText( GuiFileInfoItem::ColumnStatus, file_transfer_progress );
+}
+
+void GuiShareNetwork::onFileTransferCompleted( VNumber file_info_id, const User& u, const FileInfo& file_info )
+{
+  GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), file_info_id );
+  if( !item )
+    return;
+
+  showFileTransferCompleted( item, file_info.path() );
+}
+
+void GuiShareNetwork::showFileTransferCompleted( GuiFileInfoItem* item, const QString& file_path )
+{
+  item->setFilePath( file_path );
+  item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
+  if( item->text( GuiFileInfoItem::ColumnStatus ).isEmpty() )
+    item->setText( GuiFileInfoItem::ColumnStatus, tr( "Transfer completed" ) );
+  for( int i = 0; i < mp_twShares->columnCount(); i++ )
+    item->setBackgroundColor( i, QColor( "#91D606" ) );
 }

@@ -67,6 +67,8 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   connect( mp_core, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
   connect( mp_core, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
+  connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), mp_shareNetwork, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
+  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_shareNetwork, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -75,9 +77,9 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   connect( mp_shareLocal, SIGNAL( removeAllPathsRequest() ), mp_core, SLOT( removeAllPathsFromShare() ) );
 
   connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
-  connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
-  connect( mp_shareNetwork, SIGNAL( downloadSharedFiles( const QList<SharedFileInfo>& ) ), this, SLOT( downloadSharedFiles( const QList<SharedFileInfo>& ) ) );
-  connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SIGNAL( downloadSharedFileRequest( VNumber, VNumber ) ) );
+  connect( mp_shareNetwork, SIGNAL( downloadSharedFiles( const QList<SharedFileInfo>& ) ), this, SIGNAL( downloadSharedFilesRequest( const QList<SharedFileInfo>& ) ) );
+  connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SIGNAL( openUrlRequest( const QUrl& ) ) );
   connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
   connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
