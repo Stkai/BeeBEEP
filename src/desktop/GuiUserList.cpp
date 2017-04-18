@@ -151,7 +151,6 @@ void GuiUserList::setMessages( VNumber private_chat_id, int n )
 void GuiUserList::setUser( const User& u, bool sort_users )
 {
   GuiUserItem* item = itemFromUserId( u.id() );
-  bool item_is_created = false;
   if( !item )
   {
     if( !u.isStatusConnected() && Settings::instance().showOnlyOnlineUsers() )
@@ -159,7 +158,6 @@ void GuiUserList::setUser( const User& u, bool sort_users )
 
     item = new GuiUserItem( mp_twUsers );
     item->setUserId( u.id() );
-    item_is_created = true;
   }
   else
   {

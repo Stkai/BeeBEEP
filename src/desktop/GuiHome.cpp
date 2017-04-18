@@ -56,7 +56,7 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
   if( !GuiChatMessage::messageCanBeShowedInActivity( cm ) )
     return;
 
-  QString sys_message = GuiChatMessage::formatSystemMessage( cm, Settings::instance().homeShowMessageTimestamp(), Settings::instance().homeShowMessageDatestamp() );
+  QString sys_message = GuiChatMessage::formatSystemMessage( cm, Settings::instance().homeShowMessageTimestamp(), false );
 
   if( sys_message.isEmpty() )
     return;
@@ -96,10 +96,6 @@ void GuiHome::customContextMenu( const QPoint& )
   else
     act->setShortcut( QKeySequence() );
   mp_menuContext->addSeparator();
-  act = mp_menuContext->addAction( tr( "Show the datestamp" ), this, SLOT( onAddDatestampClicked() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().homeShowMessageDatestamp() );
-
   act = mp_menuContext->addAction( tr( "Show the timestamp" ), this, SLOT( onAddTimestampClicked() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().homeShowMessageTimestamp() );
@@ -124,16 +120,6 @@ void GuiHome::reloadMessages()
   mp_teSystem->clear();
   loadSystemMessages();
   QApplication::restoreOverrideCursor();
-}
-
-void GuiHome::onAddDatestampClicked()
-{
-  QAction* act = qobject_cast<QAction*>( sender() );
-  if( !act )
-    return;
-
-  Settings::instance().setHomeShowMessageDatestamp( act->isChecked() );
-  QTimer::singleShot( 100, this, SLOT( reloadMessages() ) );
 }
 
 void GuiHome::onAddTimestampClicked()

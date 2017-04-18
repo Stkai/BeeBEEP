@@ -797,7 +797,6 @@ void Settings::load()
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
   m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
-  m_chatShowMessageDatestamp = sets->value( "ShowMessageDatestamp", false ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
@@ -875,7 +874,9 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Gui" );
-  if( qt_is_compatible )
+  if( m_settingsVersion < 7 )
+    m_resetGeometryAtStartup = true;
+  else if( qt_is_compatible )
     m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
   else
     m_resetGeometryAtStartup = true;
@@ -941,7 +942,6 @@ void Settings::load()
     m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
-  m_showUserColor = sets->value( "ShowUserNameColor", true ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
@@ -961,7 +961,6 @@ void Settings::load()
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
   m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
   m_homeShowMessageTimestamp = sets->value( "ShowActivitiesTimestamp", false ).toBool();
-  m_homeShowMessageDatestamp = sets->value( "ShowActivitiesDatestamp", false ).toBool();
   m_homeBackgroundColor = sets->value( "HomeBackgroundColor", m_homeBackgroundColor ).toString();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
   m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
@@ -1113,7 +1112,6 @@ void Settings::save()
   sets->setValue( "CompactMessage", m_chatCompact );
   sets->setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
-  sets->setValue( "ShowMessageDatestamp", m_chatShowMessageDatestamp );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );
   sets->setValue( "UseClickableLinks", m_chatUseClickableLinks );
@@ -1216,7 +1214,6 @@ void Settings::save()
     sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
-  sets->setValue( "ShowUserNameColor", m_showUserColor );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
   sets->setValue( "ResetGeometryAtStartup", m_resetGeometryAtStartup );
@@ -1237,7 +1234,6 @@ void Settings::save()
   sets->setValue( "UseShortcuts", m_useShortcuts );
   sets->setValue( "UseNativeFileDialogs", m_useNativeDialogs );
   sets->setValue( "ShowActivitiesTimestamp", m_homeShowMessageTimestamp );
-  sets->setValue( "ShowActivitiesDatestamp", m_homeShowMessageDatestamp );
   sets->setValue( "HomeBackgroundColor", m_homeBackgroundColor );
   sets->setValue( "UsePreviewFileDialog", m_usePreviewFileDialog );
   sets->setValue( "PreviewFileDialogGeometry", m_previewFileDialogGeometry );

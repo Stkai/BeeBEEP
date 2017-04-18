@@ -103,12 +103,12 @@ void Core::dispatchChatMessageReadReceived( VNumber from_user_id, const Message&
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "User" << from_user_id << "has read messages inc chat" << c.name();
+  qDebug() << "User" << from_user_id << "has read messages in chat" << c.name();
 #endif
 
   c.setReadMessagesByUser( from_user_id );
   ChatManager::instance().setChat( c );
-  emit chatReadByUser( c.id(), from_user_id );
+  emit chatReadByUser( c, from_user_id );
 }
 
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt )

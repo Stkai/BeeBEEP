@@ -455,7 +455,7 @@ QString Bee::convertToNativeFolderSeparator( const QString& raw_path )
 {
   QString path_converted( raw_path );
   QChar from_char;
-#if defined( Q_FS_FAT ) || defined( Q_OS_OS2EMX ) || defined( Q_OS_SYMBIAN )
+#if defined( Q_OS_WIN ) || defined( Q_OS_OS2 ) || defined( Q_OS_OS2EMX ) || defined( Q_OS_SYMBIAN )
   from_char = QLatin1Char( '/' );
 #else
   from_char = QLatin1Char( '\\' );
@@ -706,4 +706,21 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
     tool_tip += QString( "\n" );
 
   return tool_tip;
+}
+
+void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
+{
+  bool w_is_visible = w->isVisible();
+  if( w_is_visible )
+    w->hide();
+
+  Qt::WindowFlags w_flags = w->windowFlags();
+  if( enable )
+    w_flags |= Qt::WindowStaysOnTopHint;
+  else
+    w_flags &= ~Qt::WindowStaysOnTopHint;
+  w->setWindowFlags( w_flags );
+
+  if( w_is_visible )
+    w->show();
 }

@@ -139,7 +139,7 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
       parent_item = createUserItem( u );
   }
 
-  QStringList folder_list_path = folder_name.split( QDir::separator(), QString::SkipEmptyParts );
+  QStringList folder_list_path = folder_name.split( Bee::naviveFolderSeparator(), QString::SkipEmptyParts );
 
   if( !folder_list_path.isEmpty() )
   {
@@ -149,7 +149,7 @@ GuiFileInfoItem* GuiFileInfoList::createFolderItem( const User& u, const QString
       if( subfolder_path.isEmpty() )
         subfolder_path = fn;
       else
-        subfolder_path = subfolder_path + QDir::separator() + fn;
+        subfolder_path = subfolder_path + Bee::naviveFolderSeparator() + fn;
       item = folderItem( u.id(), subfolder_path );
       if( !item )
         item = createSubFolderItem( parent_item, u.id(), fn, subfolder_path );

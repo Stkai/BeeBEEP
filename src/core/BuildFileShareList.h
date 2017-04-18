@@ -39,8 +39,6 @@ public:
 
   inline const QString& folderPath() const;
   inline const QString& folderName() const;
-  inline void setBroadcastList( bool );
-  inline bool broadcastList() const;
   inline const QList<FileInfo>& shareList() const;
   inline FileSizeType shareSize() const;
   inline int elapsedTime() const;
@@ -61,7 +59,6 @@ protected:
 private:
   QString m_folderPath;
   QString m_folderName;
-  bool m_broadcastList;
   QList<FileInfo> m_shareList;
   FileSizeType m_shareSize;
   int m_elapsedTime;
@@ -74,8 +71,6 @@ private:
 // Inline Functions
 inline const QString& BuildFileShareList::folderPath() const { return m_folderPath; }
 inline const QString& BuildFileShareList::folderName() const { return m_folderName; }
-inline void BuildFileShareList::setBroadcastList( bool new_value ) { m_broadcastList = new_value; }
-inline bool BuildFileShareList::broadcastList() const { return m_broadcastList; }
 inline const QList<FileInfo>& BuildFileShareList::shareList() const { return m_shareList; }
 inline FileSizeType BuildFileShareList::shareSize() const { return m_shareSize; }
 inline int BuildFileShareList::elapsedTime() const { return m_elapsedTime; }

@@ -1372,8 +1372,8 @@ QString Protocol::folderNameFromShareBoxMessage( const Message& m ) const
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 2 )
     return "";
-  sl.takeFirst();
-  return sl.takeFirst();
+  else
+    return Bee::convertToNativeFolderSeparator( sl.at( 1 ) );
 }
 
 QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHostAddress& server_address ) const
@@ -1387,7 +1387,7 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
     return file_info_list;
 
   int server_port = sl.takeFirst().toInt();
-  QString folder_name = sl.takeFirst();
+  QString folder_name = Bee::convertToNativeFolderSeparator( sl.takeFirst() );
   QString s_tmp;
 
   sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );

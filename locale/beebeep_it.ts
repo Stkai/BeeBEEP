@@ -1433,7 +1433,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please add member in the chat:</source>
-        <translation>Aggiungi membri nella conversazione</translation>
+        <translation>Aggiungi membri nella conversazione:</translation>
     </message>
 </context>
 <context>
@@ -1792,7 +1792,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the datestamp</source>
-        <translation>Mostra la data</translation>
+        <translation type="obsolete">Mostra la data</translation>
     </message>
     <message>
         <source>Show the timestamp</source>
@@ -3226,7 +3226,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show colored nickname</source>
-        <translation>Mostra i nickname colorati</translation>
+        <translation type="obsolete">Mostra i nickname colorati</translation>
     </message>
     <message>
         <source>Show the user&apos;s picture</source>
@@ -3586,7 +3586,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Prompt on quit (only when connected)</source>
-        <translation>Chiedi prima di uscire (solo quando connesso)</translation>
+        <translation type="obsolete">Chiedi prima di uscire (solo quando connesso)</translation>
     </message>
     <message>
         <source>If enabled you will be asked if you really want to close %1</source>
@@ -3746,7 +3746,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the datestamp</source>
-        <translation>Mostra la data</translation>
+        <translation type="obsolete">Mostra la data</translation>
     </message>
     <message>
         <source>If enabled the message shows its datestamp in the chat window</source>
@@ -3930,7 +3930,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Open chats only in a single window</source>
-        <translation>Apri le conversazioni in un&apos;unica finestra</translation>
+        <translation type="obsolete">Apri le conversazioni in un&apos;unica finestra</translation>
     </message>
     <message>
         <source>Network...</source>
@@ -3950,11 +3950,27 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Raise existing chat window on new message</source>
-        <translation>Porta in primo piano una finestra esistente all&apos;arrivo di un messaggio</translation>
+        <translation type="obsolete">Porta in primo piano una finestra esistente all&apos;arrivo di un messaggio</translation>
     </message>
     <message>
         <source>Show the status description</source>
         <translation>Mostra la descrizione dello stato</translation>
+    </message>
+    <message>
+        <source>Save window&apos;s geometry</source>
+        <translation>Salva le dimensioni della finestra</translation>
+    </message>
+    <message>
+        <source>Raise on new message</source>
+        <translation>Porta in primo piano all&apos;arrivo di un nuovo messaggio</translation>
+    </message>
+    <message>
+        <source>Open chats in a single window</source>
+        <translation>Apri le conversazioni in un&apos;unica finestra</translation>
+    </message>
+    <message>
+        <source>Prompt on quit when connected</source>
+        <translation>Se connesso chiedi prima di uscire</translation>
     </message>
 </context>
 <context>

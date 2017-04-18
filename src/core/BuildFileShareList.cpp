@@ -28,8 +28,8 @@
 
 BuildFileShareList::BuildFileShareList( QObject *parent )
   : QObject( parent ), m_folderPath( "" ), m_folderName( "" ),
-    m_broadcastList( false ), m_shareList(), m_shareSize( 0 ),
-    m_elapsedTime( 0 ), m_userId( ID_LOCAL_USER ), m_chatPrivateId( "" )
+    m_shareList(), m_shareSize( 0 ), m_elapsedTime( 0 ),
+    m_userId( ID_LOCAL_USER ), m_chatPrivateId( "" )
 {
   setObjectName( "BuildFileShareList" );
 }
@@ -38,7 +38,7 @@ void BuildFileShareList::setFolderPath( const QString& path_to_share )
 {
   QDir dir_shared( path_to_share );
   m_folderName = dir_shared.dirName();
-  m_folderPath = dir_shared.absolutePath();
+  m_folderPath = Bee::convertToNativeFolderSeparator( dir_shared.absolutePath() );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Building file share list" << m_folderName << "with path" << qPrintable( m_folderPath );
 #endif
@@ -78,12 +78,15 @@ FileSizeType BuildFileShareList::addPathToList( const QString& path_name, const 
     QDir dir_path( path_url );
     QString subfolder_name = path_url == m_folderPath ? m_folderName : Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( path_name, dir_path.dirName() ) );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Subfolder " << subfolder_name << "found with path" << path_url;
+    qDebug() << "Subfolder" << subfolder_name << "found with path" << path_url;
 #endif
 
     foreach( QString fp, dir_path.entryList() )
     {
-      path_size += addPathToList( subfolder_name, Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( path_url, fp ) ) );
+      QString file_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( path_url, fp ) );
+      QFileInfo file_info( file_path );
+      if( file_info.isDir() || Protocol::instance().fileCanBeShared( file_info ) )
+        path_size += addPathToList( subfolder_name, file_path );
     }
 
     return path_size;

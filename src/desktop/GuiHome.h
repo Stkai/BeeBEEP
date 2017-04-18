@@ -45,7 +45,6 @@ signals:
 protected slots:
   void checkAnchorClicked( const QUrl& );
   void customContextMenu( const QPoint& );
-  void onAddDatestampClicked();
   void onAddTimestampClicked();
   void reloadMessages();
   void printActivities();

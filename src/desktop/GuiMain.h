@@ -156,7 +156,7 @@ private slots:
   void selectDictionatyPath();
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
-  void onChatReadByUser( VNumber chat_id, VNumber user_id );
+  void onChatReadByUser( const Chat&, VNumber user_id );
   void saveGeometryAndState();
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );
@@ -214,7 +214,6 @@ private:
   QStringList checkFilePath( const QString& );
   bool isAudioDeviceAvailable() const;
   void showDefaultServerPortInMenu();
-  void applyFlagStaysOnTop();
   GuiFloatingChat* floatingChat( VNumber ) const;
   QWidget* activeWindow() const;
   void setChatMessagesToShowInAction( QAction* );

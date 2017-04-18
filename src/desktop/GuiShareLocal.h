@@ -36,7 +36,6 @@ class GuiShareLocal : public QWidget, private Ui::GuiShareLocalWidget
 public:
   explicit GuiShareLocal( QWidget *parent = 0 );
 
-  void updatePaths();
   void setupToolBar( QToolBar* );
 
 signals:
@@ -59,6 +58,7 @@ protected slots:
   void clearAllPaths();
 
 protected:
+  void updatePaths();
   void addSharePath( const QString& );
   void setActionsEnabled( bool );
   void showStats( int, FileSizeType );

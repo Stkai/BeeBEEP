@@ -37,7 +37,7 @@ BuildFileList::BuildFileList( QObject *parent )
 void BuildFileList::init( const QString& folder_name, const QString folder_path, VNumber to_user_id )
 {
   m_folderName = folder_name;
-  m_folderPath = folder_path;
+  m_folderPath = Bee::convertToNativeFolderSeparator( folder_path );
   m_toUserId = to_user_id;
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Building file list of folder" << m_folderName << "with path" << qPrintable( m_folderPath ) << "of user" << to_user_id;

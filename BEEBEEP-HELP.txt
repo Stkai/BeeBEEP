@@ -73,7 +73,6 @@ DefaultChatBackgroundColor= background color in default chat window
 CompactMessage= messages are displayed without a blank line from each other
 AddNewLineAfterMessage=[true/false] add a blank line after a message displayed
 ShowMessageTimestamp=[true/false] show message timestamp in the chat
-ShowMessageDatestamp=[true/false] show message datestamp in the chat
 BeepOnNewMessageArrived=[true/false] sound a beep when new message arrived (only if sound works) and the chat is not visible
 BeepAlwaysOnNewMessageArrived=[true/false] always sound a beep when new message arrived (only if sound works)
 UseHtmlTags=[true/false] if enabled BeeBEEP doesn't parse tags html. Useful if you have to copy and paste in chat some html code
@@ -141,7 +140,7 @@ FloatingChatSplitterState=(do not edit manually)
 ShowHomeAsDefaultPage=[true/false] Show home page at start up (force user to click on available users to chat with them) [obsolete in 3.2.0]
 ShowTipsOfTheDay=[true/false]
 ShowOnlyOnlineUsers=[true/false] show only online users in user list
-ShowUserNameColor=[true/false] show nickname colored
+ShowUserNameColor=[true/false] show nickname colored [obsolete in 3.2.0]
 ShowUserPhoto=[true/false] show user photo or avatar in user list
 ShowVCardOnRightClick=[true/false] show vCard when you right click on a user in list
 ResetGeometryAtStartup=[true/false] reset geometry at startup (useful if some widget has an inusual geometry)
@@ -161,7 +160,6 @@ UseShortcuts=[true/false] enable shortcuts in application
 Shortcuts=(do not edit manually)
 UseNativeDialogs=[true/false] enable native OS dialogs (in some case these native dialogs can be modal and cause connection timeout)
 ShowActivitiesTimestamp=[true/false] (default=false) [3.2.0]
-ShowActivitiesDatestamp=[true/false] (default=false) [3.2.0]
 UsePreviewFileDialog=[true/false] (default=true only in windows, in other os false) [3.0.4]
 PreviewFileDialogGeometry=(do not edit manually) [3.0.5]
 PreviewFileDialogImageSize=[integer] (default=200) [3.0.5]

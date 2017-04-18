@@ -32,7 +32,7 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
 {
   QString date_time_stamp_format = "";
 
-  if( show_datestamp )
+  if( show_datestamp || cm.timestamp().date() != QDate::currentDate() )
     date_time_stamp_format += QString( "yyyy-MM-dd" );
 
   if( show_timestamp )
@@ -60,7 +60,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=#808080>(%1)</font>" ).arg( date_time_stamp );
   QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !Settings::instance().chatUseYourNameInsteadOfYou()) ? QObject::tr( "You" ) : u.name();
   QString html_user_name = user_name.isEmpty() ? user_name : QString( "<font color=%1><b>%2</b></font>%3%4" )
-                                                               .arg( Settings::instance().showUserColor() ? u.color() : QLatin1String( "#000000" ) )
+                                                               .arg( u.color() )
                                                                .arg( user_name )
                                                                .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
                                                                .arg( (Settings::instance().chatCompact() && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br />" ) );
@@ -115,7 +115,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, boo
       if( skip_system_message )
         continue;
 
-      html_text += formatSystemMessage( cm, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp || Settings::instance().chatShowMessageDatestamp() );
+      html_text += formatSystemMessage( cm, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp );
       last_message_user_id = 0;
     }
     else
@@ -128,7 +128,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, boo
       }
 
       html_text += formatMessage( u, cm, Settings::instance().showMessagesGroupByUser() ? last_message_user_id : 0,
-                                  force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp || Settings::instance().chatShowMessageDatestamp() );
+                                  force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp );
       last_message_user_id = cm.userId();
     }
   }

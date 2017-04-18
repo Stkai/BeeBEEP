@@ -107,11 +107,6 @@ void GuiFileSharing::keyPressEvent( QKeyEvent* e )
   QMainWindow::keyPressEvent( e );
 }
 
-void GuiFileSharing::changeEvent( QEvent* e )
-{
-  QMainWindow::changeEvent( e );
-}
-
 void GuiFileSharing::initGuiItems()
 {
   raiseLocalShareView();
@@ -126,6 +121,12 @@ void GuiFileSharing::checkViewActions()
   mp_actViewShareLocal->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
   mp_actViewShareBox->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareBox );
+
+  if( !Settings::instance().fileTransferIsEnabled() )
+  {
+    raiseLocalShareView();
+    return;
+  }
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork  )
     mp_barShareNetwork->show();
@@ -192,7 +193,7 @@ void GuiFileSharing::onUserChanged( const User& u )
 
 void GuiFileSharing::addToShare( const QString& share_path )
 {
-  mp_core->addPathToShare( share_path, true );
+  mp_core->addPathToShare( share_path );
 }
 
 void GuiFileSharing::removeFromShare( const QString& share_path )
@@ -226,18 +227,23 @@ void GuiFileSharing::raiseShareBoxView()
 
 void GuiFileSharing::showUp()
 {
+  bool on_top_flag_added = false;
+  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
+  {
+    Bee::setWindowStaysOnTop( this, true );
+    on_top_flag_added = true;
+  }
+
   if( isMinimized() )
     showNormal();
 
   if( !isVisible() )
     show();
 
-#ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
   raise();
-#endif
+
+  if( on_top_flag_added )
+    Bee::setWindowStaysOnTop( this, false );
 }
 
 void GuiFileSharing::onTickEvent( int )
@@ -262,7 +268,7 @@ void GuiFileSharing::onShareBoxUploadRequest( VNumber user_id, const FileInfo& f
 
 void GuiFileSharing::updateLocalFileList()
 {
-  mp_shareLocal->updatePaths();
+  mp_shareLocal->updateFileSharedList();
 }
 
 void GuiFileSharing::updateNetworkFileList()

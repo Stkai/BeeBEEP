@@ -44,7 +44,7 @@ public:
   bool setChat( const Chat& );
   inline VNumber chatId() const;
   void ensureLastMessageVisible();
-  void setChatReadByUser( VNumber );
+  void setChatReadByUser( const Chat&, VNumber );
   void updateUsers( const Chat& );
 
   void updateShortcuts();

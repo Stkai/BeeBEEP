@@ -97,7 +97,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     if( bytes > 0 )
       item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
     item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
-    showProgress( item, u.id(), fi, bytes );
+    showProgress( item, fi, bytes );
   }
 
   showIcon( item );
@@ -149,7 +149,7 @@ QTreeWidgetItem* GuiTransferFile::findItem( VNumber peer_id )
   return 0;
 }
 
-void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, const FileInfo& fi, FileSizeType bytes )
+void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, FileSizeType bytes )
 {
   if( fi.size() == 0 )
   {
@@ -162,8 +162,6 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, cons
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
     item->setText( ColumnProgress, tr( "Transfer completed" ) );
-    if( fi.isDownload() )
-      emit fileTransferCompleted( user_id, fi.id(), fi.path() );
     return;
   }
 
@@ -171,25 +169,10 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, VNumber user_id, cons
                                       Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
                                       QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
   item->setText( ColumnProgress, file_transfer_progress );
-
-  if( fi.isDownload() )
-    emit fileTransferProgress( user_id, fi.id(), file_transfer_progress );
-
-  file_transfer_progress.prepend( QString( "[%1] " ).arg( fi.name() ) );
-  if( !isVisible() )
-    emit stringToShow( file_transfer_progress, 3000 );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << file_transfer_progress;
-#endif
-
 }
 
 void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
 {
-  qApp->processEvents();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiTransferFile setMessage:" << msg;
-#endif
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
     setProgress( peer_id, u, fi, 0 );
@@ -203,9 +186,6 @@ void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo
   item->setData( ColumnFile, TransferInProgress, false );
   item->setText( ColumnProgress, msg );
   showIcon( item );
-
-  if( fi.isDownload() )
-    emit fileTransferProgress( u.id(), fi.id(), msg );
 }
 
 void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )

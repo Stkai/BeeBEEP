@@ -41,6 +41,7 @@ class GuiFileSharing : public QMainWindow
 public:
   GuiFileSharing( Core*, QWidget* parent = 0 );
 
+  void checkViewActions();
   void updateLocalFileList();
   void updateNetworkFileList();
   void showUserFileList( const User& );
@@ -68,8 +69,6 @@ private slots:
 
 protected:
   void keyPressEvent( QKeyEvent* );
-  void changeEvent( QEvent* );
-  bool promptConnectionPassword();
   void raiseView( QWidget* );
 
 private:
@@ -78,7 +77,6 @@ private:
   void createStackedWidgets();
   void refreshUserList();
   void initGuiItems();
-  void checkViewActions();
 
 private:
   Core* mp_core;

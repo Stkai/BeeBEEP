@@ -349,12 +349,12 @@ QString GuiChat::chatMessageToText( const User& u, const ChatMessage& cm )
 
   if( cm.isFromSystem() )
   {
-    s = GuiChatMessage::formatSystemMessage( cm, Settings::instance().chatShowMessageTimestamp(), Settings::instance().chatShowMessageDatestamp() );
+    s = GuiChatMessage::formatSystemMessage( cm, Settings::instance().chatShowMessageTimestamp(), false );
     m_lastMessageUserId = 0;
   }
   else
   {
-    s = GuiChatMessage::formatMessage( u, cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0, Settings::instance().chatShowMessageTimestamp(), Settings::instance().chatShowMessageDatestamp() );
+    s = GuiChatMessage::formatMessage( u, cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0, Settings::instance().chatShowMessageTimestamp(), false );
     m_lastMessageUserId = cm.userId();
   }
 
@@ -1057,15 +1057,14 @@ void GuiChat::showMembersMenu()
   mp_menuMembers->exec( QCursor::pos() );
 }
 
-void GuiChat::setChatReadByUser( VNumber )
+void GuiChat::setChatReadByUser( const Chat& c, VNumber )
 {
-  updateMenuMembers( ChatManager::instance().chat( m_chatId ) );
+  if( c.id() == m_chatId )
+    updateMenuMembers( c );
 }
 
 void GuiChat::updateUsers( const Chat& c )
 {
-  if( c.id() != m_chatId )
-    return;
-
-  updateMenuMembers( c );
+  if( c.id() == m_chatId )
+    updateMenuMembers( c );
 }

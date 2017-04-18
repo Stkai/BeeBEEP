@@ -99,7 +99,7 @@ public:
   void refuseToDownloadFolder( VNumber, const QString& folder_name, const QString& chat_private_id );
   bool startFileTransferServer();
   void stopFileTransferServer();
-  void addPathToShare( const QString&, bool );
+  void addPathToShare( const QString& );
   void removePathFromShare( const QString& );
   void sendShareBoxRequest( VNumber, const QString& );
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
@@ -141,7 +141,7 @@ signals:
   void userIsWriting( const User&, VNumber );
   void chatChanged( const Chat& );
   void newChatMessage( const Chat&, const ChatMessage& );
-  void chatReadByUser( VNumber chat_id, VNumber user_id );
+  void chatReadByUser( const Chat&, VNumber user_id );
   void fileDownloadRequest( const User&, const FileInfo& );
   void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );

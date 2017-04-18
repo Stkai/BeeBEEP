@@ -43,7 +43,6 @@ public:
   inline bool chatIsVisible() const;
   void setMainIcon( bool with_message );
   void updateUser( const User& );
-  void applyFlagStaysOnTop();
 
 public slots:
   void updateEmoticon();

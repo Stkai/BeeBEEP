@@ -174,10 +174,6 @@ public:
   inline void setChatShowMessageTimestamp( bool );
   inline bool homeShowMessageTimestamp() const;
   inline void setHomeShowMessageTimestamp( bool );
-  inline bool chatShowMessageDatestamp() const;
-  inline void setChatShowMessageDatestamp( bool );
-  inline bool homeShowMessageDatestamp() const;
-  inline void setHomeShowMessageDatestamp( bool );
   inline void setHomeBackgroundColor( const QString& );
   inline const QString& homeBackgroundColor() const;
   inline void setChatUseHtmlTags( bool );
@@ -188,8 +184,6 @@ public:
   inline const QBitArray& chatMessageFilter() const;
   inline bool showOnlyOnlineUsers() const;
   inline void setShowOnlyOnlineUsers( bool );
-  inline bool showUserColor() const;
-  inline void setShowUserColor( bool );
   inline bool showUserPhoto() const;
   inline void setShowUserPhoto( bool );
   inline bool showEmoticons() const;
@@ -536,7 +530,6 @@ private:
   bool m_chatUseClickableLinks;
   QBitArray m_chatMessageFilter;
   bool m_showOnlyOnlineUsers;
-  bool m_showUserColor;
   bool m_showEmoticons;
   bool m_showMessagesGroupByUser;
   bool m_stayOnTop;
@@ -660,7 +653,6 @@ private:
   bool m_postUsageStatistics;
 
   bool m_homeShowMessageTimestamp;
-  bool m_homeShowMessageDatestamp;
   QString m_homeBackgroundColor;
 
   QString m_applicationUuid;
@@ -722,12 +714,8 @@ inline bool Settings::chatAddNewLineToMessage() const { return m_chatAddNewLineT
 inline void Settings::setChatAddNewLineToMessage( bool new_value ) { m_chatAddNewLineToMessage = new_value; }
 inline bool Settings::chatShowMessageTimestamp() const { return m_chatShowMessageTimestamp; }
 inline void Settings::setChatShowMessageTimestamp( bool new_value ) { m_chatShowMessageTimestamp = new_value; }
-inline bool Settings::chatShowMessageDatestamp() const { return m_chatShowMessageDatestamp; }
-inline void Settings::setChatShowMessageDatestamp( bool new_value ) { m_chatShowMessageDatestamp = new_value; }
 inline bool Settings::homeShowMessageTimestamp() const { return m_homeShowMessageTimestamp; }
 inline void Settings::setHomeShowMessageTimestamp( bool new_value ) { m_homeShowMessageTimestamp = new_value; }
-inline bool Settings::homeShowMessageDatestamp() const { return m_homeShowMessageDatestamp; }
-inline void Settings::setHomeShowMessageDatestamp( bool new_value ) { m_homeShowMessageDatestamp = new_value; }
 inline void Settings::setChatUseHtmlTags( bool new_value ) { m_chatUseHtmlTags = new_value; }
 inline bool Settings::chatUseHtmlTags() const { return m_chatUseHtmlTags; }
 inline void Settings::setChatUseClickableLinks( bool new_value ) { m_chatUseClickableLinks = new_value; }
@@ -775,8 +763,6 @@ inline const QString& Settings::beepFilePath() const { return m_beepFilePath; }
 inline void Settings::setBeepFilePath( const QString& new_value ) { m_beepFilePath = new_value; }
 inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
 inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
-inline void Settings::setShowUserColor( bool new_value ) { m_showUserColor = new_value; }
-inline bool Settings::showUserColor() const { return m_showUserColor; }
 inline bool Settings::showVCardOnRightClick() const { return m_showVCardOnRightClick; }
 inline void Settings::setShowVCardOnRightClick( bool new_value ) { m_showVCardOnRightClick = new_value; }
 inline bool Settings::showMessagesGroupByUser() const { return m_showMessagesGroupByUser; }

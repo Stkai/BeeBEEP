@@ -102,17 +102,24 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
     User u = UserManager::instance().findUser( user_id );
     if( u.isValid() )
     {
-      window_title = u.name();
-      if( !u.statusDescription().isEmpty() )
-        window_title += QString( " (%1 - %2)" ).arg( Bee::userStatusToString( u.status() ), u.statusDescription() );
+      QString user_status = u.status() != User::Online ? Bee::userStatusToString( u.status() ) : "";
+      QString user_status_description = u.status() != User::Offline ? u.statusDescription() : "";
+
+      if( !user_status.isEmpty() && !user_status_description.isEmpty() )
+        window_title = QString( "%1 (%2 - %3)" ).arg( u.name(), Bee::userStatusToString( u.status() ), user_status_description );
+      else if( !user_status.isEmpty() )
+        window_title = QString( "%1 (%2)" ).arg( u.name(), user_status );
+      else if( !user_status_description.isEmpty() )
+        window_title = QString( "%1 (%2)" ).arg( u.name(), user_status_description );
       else
-        window_title += QString( " (%1)" ).arg( Bee::userStatusToString( u.status() ) );
+        window_title = u.name();
 
       m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
       setWindowTitle( window_title );
     }
     else
     {
+      qWarning() << "Invalid user" << user_id << "found for private chat" << c.name();
       m_mainWindowIcon = QIcon( ":/images/chat.png" );
       window_title = c.name();
     }
@@ -157,28 +164,13 @@ void GuiFloatingChat::closeEvent( QCloseEvent* e )
   e->accept();
 }
 
-void GuiFloatingChat::applyFlagStaysOnTop()
-{
- #ifdef Q_OS_WIN
-  if( Settings::instance().stayOnTop() )
-    SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-  else
-    SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
-  Qt::WindowFlags w_flags = this->windowFlags();
-  if( Settings::instance().stayOnTop() )
-    w_flags |= Qt::WindowStaysOnTopHint;
-  else
-    w_flags &= ~Qt::WindowStaysOnTopHint;
-  setWindowFlags( w_flags );
-#endif
-  if( !isVisible() )
-    show();
-}
-
 void GuiFloatingChat::checkWindowFlagsAndShow()
 {
-  applyFlagStaysOnTop();
+  Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
+  setAttribute( Qt::WA_ShowWithoutActivating );
+
+  if( !isVisible() )
+    show();
 
   if( !Settings::instance().floatingChatState().isEmpty() )
     restoreState( Settings::instance().floatingChatState() );
@@ -201,29 +193,28 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 
 void GuiFloatingChat::showUp()
 {
+  bool on_top_flag_added = false;
+  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
+  {
+    Bee::setWindowStaysOnTop( this, true );
+    on_top_flag_added = true;
+  }
+
   if( isMinimized() )
     showNormal();
 
   if( !isVisible() )
     show();
 
-#ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-  applyFlagStaysOnTop();
-#else
   raise();
-#endif
+
+  if( on_top_flag_added )
+    Bee::setWindowStaysOnTop( this, false );
 }
 
 void GuiFloatingChat::setFocusInChat()
 {
-#ifdef Q_OS_WIN
-  SetActiveWindow( (HWND)winId() );
-  SetFocus( (HWND)winId() );
-#else
-  qApp->setActiveWindow( this );
-#endif
+  QApplication::setActiveWindow( this );
   mp_chat->ensureFocusInChat();
 }
 
@@ -309,8 +300,6 @@ void GuiFloatingChat::setMainIcon( bool with_message )
     setWindowIcon( QIcon( ":/images/beebeep-message.png" ) );
   else
     setWindowIcon( m_mainWindowIcon );
-
-  qDebug() << "Main icon has message" << with_message;
 }
 
 void GuiFloatingChat::updateEmoticon()

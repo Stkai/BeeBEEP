@@ -239,7 +239,7 @@ void GuiShareNetwork::processNextItemInQueue()
       break;
     UserFileInfo ufi = m_queue.dequeue();
     GuiFileInfoItem* item = m_fileInfoList.createFileItem( ufi.first, ufi.second );
-    FileInfo file_info_downloaded = FileShare::instance().downloadedFile(  ufi.second.fileHash() );
+    FileInfo file_info_downloaded = FileShare::instance().downloadedFile( ufi.second.fileHash() );
     if( file_info_downloaded.isValid() )
     {
       showFileTransferCompleted( item, file_info_downloaded.path() );
