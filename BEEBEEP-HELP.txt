@@ -143,7 +143,7 @@ ShowOnlyOnlineUsers=[true/false] show only online users in user list
 ShowUserNameColor=[true/false] show nickname colored [obsolete in 3.2.0]
 ShowUserPhoto=[true/false] show user photo or avatar in user list
 ShowVCardOnRightClick=[true/false] show vCard when you right click on a user in list
-ResetGeometryAtStartup=[true/false] reset geometry at startup (useful if some widget has an inusual geometry)
+ResetWindowGeometryAtStartup=[true/false] reset geometry at startup (useful if some widget has an inusual geometry)
 ChatLinesToShow= number of lines to show in chat (working if the option below is enabled)
 ChatMaxLinesToShow= force chat to show only X messages (increase usability)
 ShowEmoticonMenu=[true/false] show the emoticon menu when the chat window is raised
@@ -214,7 +214,7 @@ ShareBoxPath=[string] path of the box shared (default="") [3.0.7]
 SetAutomaticFileName=[true/false] on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it
 MaxSimultaneousDownloads= is the max number of simultaneous downloads in file transfer
 MaxQueuedDownloads = is the max number of downloads can be selected in file sharing at once
-MaxFileShared=32700
+MaxSharedFiles=[integer] is the max number of shared files for user (default=4096) [3.2.0]
 FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456
 ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a file

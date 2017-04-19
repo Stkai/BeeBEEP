@@ -443,17 +443,23 @@ void Core::addListToLocalShare()
     return;
   }
 
-  FileShare::instance().addToLocal( bfsl->folderPath(), bfsl->shareList(), bfsl->shareSize() );
+  int num_files = FileShare::instance().addToLocal( bfsl->folderPath(), bfsl->shareList() );
 
   QString share_status;
 
-  if( bfsl->shareList().size() < 2 )
+  if( num_files != bfsl->shareList().size() )
+    share_status = tr( "%1 is added to file sharing with only %2 of %3 files (%4 limit reached)" )
+                     .arg( bfsl->folderPath() )
+                     .arg( num_files )
+                     .arg( bfsl->shareList().size() )
+                     .arg( Settings::instance().maxFileShared() );
+  else if( bfsl->shareList().size() < 2 )
     share_status = tr( "%1 is added to file sharing (%2)" ).arg( bfsl->folderPath(), Bee::bytesToString( bfsl->shareSize() ) );
   else
     share_status = tr( "%1 is added to file sharing with %2 files, %3" )
-                           .arg( bfsl->folderPath() )
-                           .arg( bfsl->shareList().size() )
-                           .arg( Bee::bytesToString( bfsl->shareSize() ) );
+                     .arg( bfsl->folderPath() )
+                     .arg( bfsl->shareList().size() )
+                     .arg( Bee::bytesToString( bfsl->shareSize() ) );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );

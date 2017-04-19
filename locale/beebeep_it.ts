@@ -654,6 +654,10 @@
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 è stata condivisa in rete con %2 file, %3</translation>
     </message>
+    <message>
+        <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
+        <translation>%1 è stata condivisa in rete con solo %2 file su %3, (il limite di %4 è stato raggiunto)</translation>
+    </message>
 </context>
 <context>
     <name>FacebookService</name>
@@ -3018,7 +3022,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 is a your group. You can not leave the chat.</source>
-        <translation>%1 è un gruppo creato da te, non puoi lasciare la conversazione.</translation>
+        <translation type="obsolete">%1 è un gruppo creato da te, non puoi lasciare la conversazione.</translation>
     </message>
     <message>
         <source>Delete this group</source>
@@ -3026,7 +3030,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>You cannot leave this chat.</source>
-        <translation>Non puoi lasciare questa conversazione.</translation>
+        <translation type="obsolete">Non puoi lasciare questa conversazione.</translation>
     </message>
     <message>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
@@ -3972,6 +3976,22 @@ il file %2 (%3)?</translation>
         <source>Prompt on quit when connected</source>
         <translation>Se connesso chiedi prima di uscire</translation>
     </message>
+    <message>
+        <source>%1 is a your group. You can not leave the chat until the group exists.</source>
+        <translation>%1 è un gruppo creato da te, non puoi lasciare la conversazione finchè esiste il gruppo.</translation>
+    </message>
+    <message>
+        <source>You cannot leave chat &apos;%1&apos;.</source>
+        <translation type="obsolete">Non puoi lasciare la conversazione con &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>You cannot leave group &apos;%1&apos;.</source>
+        <translation type="obsolete">Non puoi lasciare il gruppo &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>You cannot leave %1.</source>
+        <translation>Non puoi abbandonare %1.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4868,6 +4888,10 @@ il file %2 (%3)?</translation>
         <source>Do you really want to remove this path:</source>
         <translation>Vuoi realmente eliminare questa condivisione:</translation>
     </message>
+    <message>
+        <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
+        <translation>massimo &lt;b&gt;%1&lt;/b&gt; file</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
@@ -5451,6 +5475,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Send a buzz</source>
         <translation>Invia un Buzz</translation>
+    </message>
+    <message>
+        <source>Status description</source>
+        <translation>Descrizione dello stato</translation>
     </message>
 </context>
 <context>

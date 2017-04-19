@@ -251,12 +251,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="570"/>
+        <location filename="../src/core/CoreChat.cpp" line="564"/>
         <source>Offline messages sent to %2.</source>
         <translation>Poruka je OFFLINE poslata %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="650"/>
+        <location filename="../src/core/CoreChat.cpp" line="644"/>
         <source>%1 You have buzzed %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -274,12 +274,12 @@
         <translation type="obsolete">Upozoravam te da nikad ne koristiš Facebook.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="499"/>
+        <location filename="../src/core/CoreChat.cpp" line="493"/>
         <source>%1 You have left the group.</source>
         <translation>%1 napustio si grupu.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="501"/>
+        <location filename="../src/core/CoreChat.cpp" line="495"/>
         <source>%1 %2 has left the group.</source>
         <translation>%1 %2 je napustio grupu.</translation>
     </message>
@@ -386,7 +386,7 @@
         <translation type="obsolete">Dodavanje fajla za deljenje</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="451"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="457"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 je dodat u fajlove za deljenje (%2)</translation>
     </message>
@@ -395,57 +395,62 @@
         <translation type="obsolete">%1 je dodat u fajlove za deljenje sa %2 fajlovima, %3 (proteklo vreme: %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="453"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="451"/>
+        <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="459"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="484"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="490"/>
         <source>All paths are removed from file sharing</source>
         <translation>Sve putanje su izbrisane iz spiska za deljenje fajlova</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="505"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="511"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 se više ne deli</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="507"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="513"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 je izbrisan iz deljenja sa %2 fajlom</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="552"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="558"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 je za slanje %2 za %3. Proveri folder...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="590"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="596"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 nemože da pošalje folder %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="595"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="601"/>
         <source>the folder is empty.</source>
         <translation>folder je prazan.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="602"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="608"/>
         <source>file transfer is not working.</source>
         <translation>prenos fajlova nije u funkciji.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="610"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
         <source>%1 is not connected.</source>
         <translation>%1 nije prijavljen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="624"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="630"/>
         <source>internal error.</source>
         <translation>interna greška.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="629"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="635"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 šalješ folder %2 za %3.</translation>
     </message>
@@ -470,7 +475,7 @@
         <translation>%1 %2 te je dodao u grupu za razgovor: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="440"/>
+        <location filename="../src/core/CoreParser.cpp" line="439"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -483,17 +488,17 @@
         <translation type="obsolete">%1 %2 je podelio %3 fajlova.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="338"/>
+        <location filename="../src/core/CoreParser.cpp" line="337"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 je odbio da downloaduje folder %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="345"/>
+        <location filename="../src/core/CoreParser.cpp" line="344"/>
         <source>unknown folder</source>
         <translation>nepoznat folder</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="354"/>
+        <location filename="../src/core/CoreParser.cpp" line="353"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 ti šalje folder: %3.</translation>
     </message>
@@ -535,17 +540,17 @@
         <translation>%1 kreirao si grupu za razgovor: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="267"/>
+        <location filename="../src/core/CoreUser.cpp" line="291"/>
         <source>%1 You have deleted group: %2.</source>
         <translation>%1 izbrisao si grupu: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="361"/>
+        <location filename="../src/core/CoreUser.cpp" line="385"/>
         <source>is removed from favorites</source>
         <translation>je izbrisan iz favorita</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="367"/>
+        <location filename="../src/core/CoreUser.cpp" line="391"/>
         <source>is added to favorites</source>
         <translation>je dodat u favorite</translation>
     </message>
@@ -1906,10 +1911,10 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2908"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2909"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2910"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2911"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2912"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2914"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2915"/>
         <source>offline</source>
         <translation>lokalni rad</translation>
     </message>
@@ -1922,17 +1927,17 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="284"/>
         <location filename="../src/desktop/GuiMain.cpp" line="310"/>
         <location filename="../src/desktop/GuiMain.cpp" line="327"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1752"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1825"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1832"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1896"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2257"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2629"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2672"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2709"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2732"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3219"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1834"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2259"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2631"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2674"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2713"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2736"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>Yes</source>
         <translation>Da</translation>
     </message>
@@ -1940,17 +1945,17 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="284"/>
         <location filename="../src/desktop/GuiMain.cpp" line="310"/>
         <location filename="../src/desktop/GuiMain.cpp" line="327"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1752"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1825"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1832"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1896"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2257"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2629"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2672"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2709"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2732"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3219"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1834"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2259"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2631"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2674"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2713"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2736"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
@@ -2062,7 +2067,7 @@ Please select a different name.</source>
         <translation type="obsolete">Testiraj izabrani zvuk za novu poruku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2832"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2836"/>
         <source>Clear all read messages on closing window</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2168,7 +2173,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ako uključiš možeš automatski učitati %1 prilikom podizanja sistema</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2839"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2843"/>
         <source>Enable the compact mode in chat window</source>
         <translation>Dozvoli kompakt mod u chat prozoru</translation>
     </message>
@@ -2177,7 +2182,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ako uključiš nadimak pošiljaoca i njegova poruka će biti u istoj liniji</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2844"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2848"/>
         <source>Add a blank line between the messages</source>
         <translation>Dodaj praznu liniju između poruka</translation>
     </message>
@@ -2194,7 +2199,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ako uključiš korisničko ime u chat i list prozoru će biti u boji</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2887"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2891"/>
         <source>Use HTML tags</source>
         <translation>Koristi HTML tagove</translation>
     </message>
@@ -2203,7 +2208,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ako uključiš HTML tagovi se ne brišui iz poruka</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2892"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2896"/>
         <source>Use clickable links</source>
         <translation>Koristi podvučene linkove</translation>
     </message>
@@ -2212,7 +2217,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ako uključiš linkovi u porukama će se prikazivati kao podvučeni</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2869"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2873"/>
         <source>Show messages grouped by user</source>
         <translation>Prikaži prouke grupisane po korisnicima</translation>
     </message>
@@ -2221,7 +2226,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ako uključiš poruke će se prikazati grupisane po korisnicima</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2827"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2831"/>
         <source>Save messages</source>
         <translation>Snimi poruke</translation>
     </message>
@@ -2451,12 +2456,12 @@ Please select a different name.</source>
         <translation>Pogled</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2849"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2853"/>
         <source>Show the timestamp</source>
         <translation>Prikaži pečat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2863"/>
         <source>Parse Unicode and ASCII emoticons</source>
         <translation>Izdvoj Unicode i ASCII emotikone</translation>
     </message>
@@ -2465,7 +2470,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ako uključiš ASCII emotikoni će biti prepoznati i prikazani kao slike</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2864"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2868"/>
         <source>Use native emoticons</source>
         <translation>Koristi uobičajene emotikone</translation>
     </message>
@@ -2571,7 +2576,7 @@ Please select a different name.</source>
         <translation type="obsolete">Klik za otvaranje tvog data foldera</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2854"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2858"/>
         <source>Show preview of the images</source>
         <translation>Prikaži slike</translation>
     </message>
@@ -2580,12 +2585,12 @@ Please select a different name.</source>
         <translation type="obsolete">Ako dozvoliš preview skinutih slika, videće se u chat prozoru</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2880"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2884"/>
         <source>Use your name instead of &apos;You&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2820"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2824"/>
         <source>Use RTL mode to show text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2735,12 +2740,12 @@ Please select a different name.</source>
         <translation>Kao %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3525"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3529"/>
         <source>New file from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3542"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3546"/>
         <source>%1 is buzzing you!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2915,104 +2920,104 @@ Please select a different name.</source>
         <translation>Nova poruka je stigla</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1551"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1553"/>
         <source>%1 is writing...</source>
         <translation>%1 piše...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1562"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1564"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Da li želiš da se odjaviš sa %1 mreže?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1595"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1597"/>
         <source>You are %1%2</source>
         <translation>Ti si %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1607"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1609"/>
         <source>Please insert the new status description</source>
         <translation>Ubaci novi opis statusa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1656"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1658"/>
         <source>%1 - Select a file</source>
         <translation>%1 - izaberi fajl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1656"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1658"/>
         <source>or more</source>
         <translation>ili više</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1675"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1677"/>
         <source>File transfer is not enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1681"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1683"/>
         <source>You are not connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1692"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1694"/>
         <source>There is no user connected.</source>
         <translation>Nema prijavljenih korisnika.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1698"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1700"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Izaberi korisnika kome šalješ poruku.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1707"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1709"/>
         <source>User not found.</source>
         <translation>Nepoznat korisnik.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1732"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1881"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1734"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1883"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Fajl transfer prekinut. Nemožeš downloadovati %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1752"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1896"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Da, i ne pitaj više</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1784"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1786"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 već postoji. Izaberi novo ime.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1823"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1825"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Nemožeš downloadovati sve fajlove odjednom. Da li želiš da downloaduješ prvih %1 fajlova sa liste?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1831"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1833"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>Download %1 fajlova je ogroman. Možda da sačekaš par minuta. Da li želiš da nastaviš?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1849"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1851"/>
         <source>%1 files are scheduled for download</source>
         <translation>%1 fajlovi su spremni za download</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1895"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1897"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>Da li želiš da downloaduješ folder %1 (%2 fajlova) od %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1936"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1938"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - Izaberi folder za download</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2025"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2027"/>
         <source>Plugin Manager...</source>
         <translation>Menadžer dodataka...</translation>
     </message>
@@ -3021,37 +3026,37 @@ Please select a different name.</source>
         <translation type="obsolete">Otvori menadžer dodataka i instaliraj dodatke</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3173"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3177"/>
         <source>at lunch</source>
         <translation>na ručku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3182"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3186"/>
         <source>in a meeting</source>
         <translation>na sastanku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3218"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3222"/>
         <source>Do you really want to clear all saved status descriptions?</source>
         <translation>Da li zaista želiš da izbrišeš sve snimljene opise statusa?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3358"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3362"/>
         <source>Select your dictionary path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3366"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3370"/>
         <source>Dictionary selected: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3368"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
         <source>Unable to set dictionary: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3477"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3481"/>
         <source>Window geometry and state saved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3084,7 +3089,7 @@ Please select a different name.</source>
         <translation>Mreža</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2027"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2029"/>
         <source>is a plugin developed by</source>
         <translation>je dodatak razvijen od</translation>
     </message>
@@ -3093,14 +3098,14 @@ Please select a different name.</source>
         <translation type="obsolete">Prikaži informaciju o igrama</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2256"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2258"/>
         <source>Do you really want to open the file %1?</source>
         <translation>Da li zaista želiš da otvoriš fajl %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1063"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2521"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2265"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2523"/>
         <source>Unable to open %1</source>
         <translation>Nemogu da otvorim %1</translation>
     </message>
@@ -3131,8 +3136,8 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1063"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2521"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2265"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2523"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
@@ -3160,89 +3165,89 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2283"/>
         <source>Sound files (*.wav)</source>
         <translation>Audio fajl (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Zvuk nije dozvoljen u ovoj poruci. Da li želiš da ga uključiš?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2305"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2307"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation>Zvuk ne radi. Koristiće se podrazumevani BEEP.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2310"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2312"/>
         <source>Sound file not found</source>
         <translation>Zvuk ne postoji</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2311"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2313"/>
         <source>The default BEEP will be used</source>
         <translation>Podrazumevani BEEP se koristi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2359"/>
         <source>Group chat will be deleted when all members goes offline.</source>
         <translation>Grupa chata će biti izbrisana kad svi korinici budu offline.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2358"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2360"/>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
         <translation>Ako želiš da zadržiš chat napravi grupu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2359"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2361"/>
         <source>Do you wish to continue or create group?</source>
         <translation>Da li želiš da nastaviš ili kreiraš grupu?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2360"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
         <source>Continue</source>
         <translation>Nastavi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2360"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
         <source>Create Group</source>
         <translation>Kreiraj grupu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2386"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2388"/>
         <source>Unable to add users in this chat. Please select a group one.</source>
         <translation>Nemoguće dodavanje novih korisnika u chat. </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2411"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2413"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Sada %1 je startovan prilikom bootovanja.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2413"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2420"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2415"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2422"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Nemogu da dodam taster u registre: zabranjeno.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2418"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2420"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 nije startovano kod bootovanja.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2471"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2473"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Izaberi chat koji želiš da linkuješ sa tekstom.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2480"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2482"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>Chat &apos;%1&apos; izabran je već snimljen.&lt;br/&gt;Šta želiš sa snimljenim tekstom?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="643"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2482"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2484"/>
         <source>Overwrite</source>
         <translation>Prebriši</translation>
     </message>
@@ -3262,60 +3267,65 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2482"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2484"/>
         <source>Add in the head</source>
         <translation>Dodaj na vrh</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2628"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2630"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Svi korisnici ovog chata su offline. Promene nisu trajne. Da li želiš da nastaviš?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2731"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2649"/>
+        <source>%1 is a your group. You can not leave the chat until the group exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="2735"/>
         <source>Do you really want to delete chat with %1?</source>
         <translation>Da li zaista želiš da obrišeš chat sa %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2899"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2903"/>
         <source>Restore default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2917"/>
         <source>inactive</source>
         <translation>neaktivan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2937"/>
         <source>disabled</source>
         <translation>isključen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2940"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2944"/>
         <source>active</source>
         <translation>aktivan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3013"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3017"/>
         <source>%1 is online</source>
         <translation>%1 je online</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3015"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3019"/>
         <source>%1 is offline</source>
         <translation>%1 je offline</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3030"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3034"/>
         <source>Please select the new size of the user picture</source>
         <translation>Izaberi novu veličinu slike</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1870"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2360"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2482"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2651"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1872"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2484"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2650"/>
         <source>Cancel</source>
         <translation>Odustani</translation>
     </message>
@@ -3349,87 +3359,91 @@ Please select a different name.</source>
         <translation type="obsolete">Prikaži informaciju o chatu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1751"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1753"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Da li želiš da skineš %1 (%2) od %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1864"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1866"/>
         <source>File is not available for download.</source>
         <translation>Fajl nije slobodan za download.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1866"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1868"/>
         <source>%1 is not connected.</source>
         <translation>%1 nije prijavljen.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1867"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1869"/>
         <source>Please reload the list of shared files.</source>
         <translation>Osveži listu deljenih fajlova.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1870"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1872"/>
         <source>Reload file list</source>
         <translation>Osveži listu fajlova</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2700"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2661"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2691"/>
+        <source>You cannot leave %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="2704"/>
         <source>Chat with %1 is empty.</source>
         <translation>Chat sa %1 je prazan.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2704"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2708"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Da li zaista želiš da izbrišeš prouke sa %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2707"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2711"/>
         <source>Yes and delete history</source>
         <translation>Da i briši istoriju</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2650"/>
         <source>%1 is a your group. You can not leave the chat.</source>
-        <translation>%1 je tvoja grupa. Ne možeš da napustiš chat.</translation>
+        <translation type="obsolete">%1 je tvoja grupa. Ne možeš da napustiš chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2651"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2650"/>
         <source>Delete this group</source>
         <translation>Briši ovu grupu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2659"/>
         <source>You cannot leave this chat.</source>
-        <translation>Ne možeš da napustiš chat.</translation>
+        <translation type="obsolete">Ne možeš da napustiš chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2671"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2673"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Da li zaista želiš da obrišeš grupu  &apos;%1&apos;?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2743"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2747"/>
         <source>Unable to delete this chat.</source>
         <translation>Ne mogu da izbrišem ovaj chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2766"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2770"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 je delio %2 fajlova</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2788"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2792"/>
         <source>Default language is restored.</source>
         <translation>Podrazumevan jezik je vraćen.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2790"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2794"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Novi jezik  &apos;%1&apos; je izabran.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2793"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2797"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Moraš restartovati %1 da bi se promene primenile.</translation>
     </message>
@@ -4070,6 +4084,11 @@ Please select a different name.</source>
         <translation>Podeli tvoj folder ili fajlove</translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="37"/>
+        <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="46"/>
         <source>File</source>
         <translation>Fajl</translation>
@@ -4498,42 +4517,42 @@ Please select a different name.</source>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="61"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="63"/>
         <source>Birthday: %1</source>
         <translation>Rođendan: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="81"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
         <source>unknown</source>
         <translation>nepoznat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="85"/>
         <source>old %1</source>
         <translation>stari %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="85"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="87"/>
         <source>new %1</source>
         <translation>novi %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="99"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="101"/>
         <source>Remove from favorites</source>
         <translation>Izrbiši iz favorita</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="104"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="106"/>
         <source>Add to favorites</source>
         <translation>Dodaj u favorite</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="111"/>
         <source>Chat with all</source>
         <translation>Razgovaraj sa svima</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="116"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="118"/>
         <source>Open chat</source>
         <translation>Otvori chat</translation>
     </message>
@@ -4619,57 +4638,62 @@ Please select a different name.</source>
         <translation>Ikona</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="291"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="276"/>
         <source>User Path</source>
         <translation>Korisnički put</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="307"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="292"/>
         <source>User Name</source>
         <translation>Korisničko ime</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="323"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="308"/>
+        <source>Status description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.ui" line="327"/>
         <source>Birthday</source>
         <translation>Rođendan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="339"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="343"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="355"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="359"/>
         <source>Phone</source>
         <translation>Telefon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="405"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="409"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="440"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="444"/>
         <source>Open chat</source>
         <translation>Otvori chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="478"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="482"/>
         <source>Send a file</source>
         <translation>Pošalji fajl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="513"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="517"/>
         <source>Send a buzz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="548"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="552"/>
         <source>Change the nickname color</source>
         <translation>Izmeni boju nadimka</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="606"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="610"/>
         <source>Remove user</source>
         <translation>Izbriši korisnika</translation>
     </message>
@@ -4727,7 +4751,7 @@ Please select a different name.</source>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="68"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2697"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2701"/>
         <location filename="../src/desktop/GuiUserItem.cpp" line="118"/>
         <source>All Lan Users</source>
         <translation>Svi korisnici na mreži</translation>

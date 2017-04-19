@@ -249,6 +249,30 @@ void Core::changeGroup( VNumber group_id, const QString& group_name, const QList
   changeGroupChat( c.id(), group_name, group_members, true );
 }
 
+bool Core::removeUserFromGroup( const User& u, const QString& group_private_id )
+{
+  if( u.isLocal() )
+    return false;
+
+  Group g = UserManager::instance().findGroupByPrivateId( group_private_id );
+  if( !g.isValid() )
+    return true;
+
+  if( g.hasUser( u.id() ) )
+  {
+    if( !g.removeUser( u.id() ) )
+    {
+      qWarning() << "Unable to remove" << qPrintable( u.path() ) << "from group" << qPrintable( g.name() );
+      return false;
+    }
+
+    UserManager::instance().setGroup( g );
+    emit updateGroup( g.id() );
+  }
+
+  return true;
+}
+
 bool Core::removeGroup( VNumber group_id )
 {
   Group g = UserManager::instance().group( group_id );
@@ -257,10 +281,6 @@ bool Core::removeGroup( VNumber group_id )
     qWarning() << "Invalid group id" << group_id << "found in remove group";
     return false;
   }
-
-  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
-  if( c.isValid() )
-    removeChat( c.id() );
 
   if( UserManager::instance().removeGroup( group_id ) )
   {

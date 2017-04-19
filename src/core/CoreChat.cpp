@@ -479,18 +479,12 @@ void Core::clearMessagesInChat( VNumber chat_id, bool clear_history )
   emit chatChanged( c );
 }
 
-bool Core::removeUserFromChat( const User& u, VNumber chat_id )
+bool Core::removeUserFromChat( const User& u, const QString& chat_private_id )
 {
-  if( chat_id == ID_DEFAULT_CHAT )
-    return false;
-
-  Chat c = ChatManager::instance().chat( chat_id );
+  Chat c = ChatManager::instance().findChatByPrivateId( chat_private_id, true, ID_INVALID );
   if( !c.isValid() )
-    return false;
+    return true;
   if( !c.isGroup() )
-    return false;
-  Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
-  if( g.isValid() )
     return false;
 
   QString sHtmlMsg;

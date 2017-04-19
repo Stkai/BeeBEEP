@@ -294,9 +294,11 @@ void Core::parseGroupMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Refused ) )
   {
-    Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
-    if( group_chat.isValid() )
-      removeUserFromChat( u, group_chat.id() );
+    removeUserFromGroup( u, cmd.groupId() );
+    removeUserFromChat( u, cmd.groupId() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has left the group: %3." )
+                                                      .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name(), cmd.groupName() ),
+                           DispatchToChat, ChatMessage::Other );
   }
   else
     qWarning() << "Invalid flag found in group message from" << qPrintable( u.path() );

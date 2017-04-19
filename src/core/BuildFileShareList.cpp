@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "BuildFileShareList.h"
 #include "Protocol.h"
+#include "Settings.h"
 
 
 BuildFileShareList::BuildFileShareList( QObject *parent )

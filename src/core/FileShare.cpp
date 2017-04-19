@@ -46,31 +46,44 @@ void FileShare::clearLocal()
   m_localSize.clear();
 }
 
-void FileShare::addToLocal( const QString& sp, const QList<FileInfo>& share_list, FileSizeType share_size )
+int FileShare::addToLocal( const QString& sp, const QList<FileInfo>& share_list )
 {
+  FileSizeType share_size = 0;
+  int num_files = 0;
   QString share_path = Bee::convertToNativeFolderSeparator( sp );
-  m_localSize.insert( share_path, share_size );
   if( m_local.contains( share_path ) )
     m_local.remove( share_path );
   if( share_list.isEmpty() )
   {
     qWarning() << "Fileshare can not add empty file list for path" << share_path;
-    return;
+    return 0;
   }
   else
     qDebug() << "FileShare shares" << share_list.size() << "files for path" << share_path;
 
   foreach( FileInfo fi, share_list )
+  {
+    if( m_local.size() >= Settings::instance().maxFileShared() )
+      break;
+    share_size += fi.size();
+    num_files++;
     m_local.insert( share_path, fi );
+  }
+
+  m_localSize.insert( share_path, share_size );
+  return num_files;
 }
 
-void FileShare::addToLocal( const FileInfo& file_info )
+int FileShare::addToLocal( const FileInfo& file_info )
 {
+  if( m_local.size() > Settings::instance().maxFileShared() )
+    return 0;
   QString share_path = Bee::convertToNativeFolderSeparator( file_info.path() );
   m_localSize.insert( share_path, file_info.size() );
   if( m_local.contains( share_path ) )
     m_local.remove( share_path );
   m_local.insert( share_path, file_info );
+  return 1;
 }
 
 int FileShare::addToNetwork( VNumber user_id, const QList<FileInfo>& file_info_list )

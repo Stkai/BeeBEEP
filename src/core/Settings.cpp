@@ -874,14 +874,9 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Gui" );
-  if( m_settingsVersion < 7 )
-    m_resetGeometryAtStartup = true;
-  else if( qt_is_compatible )
-    m_resetGeometryAtStartup = sets->value( "ResetGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
-  else
-    m_resetGeometryAtStartup = true;
+  m_resetGeometryAtStartup = sets->value( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
 
-  if( m_resetGeometryAtStartup )
+  if( m_resetGeometryAtStartup ||  m_settingsVersion < 7 || !qt_is_compatible )
   {
     m_guiGeometry = "";
     m_guiState = "";
@@ -1036,7 +1031,7 @@ void Settings::load()
   m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
-  m_maxFileShared = qMax( 0, sets->value( "MaxFileShared", MAX_NUM_FILE_SHARED ).toInt() );
+  m_maxFileShared = qMax( 0, sets->value( "MaxSharedFiles", 4096 ).toInt() );
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
   m_overwriteExistingFiles = sets->value( "OverwriteExistingFiles", false ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
@@ -1216,7 +1211,7 @@ void Settings::save()
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
-  sets->setValue( "ResetGeometryAtStartup", m_resetGeometryAtStartup );
+  sets->setValue( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup );
   sets->setValue( "ShowEmoticonMenu", m_showEmoticonMenu );
   sets->setValue( "ShowPresetMessages", m_showPresetMessages );
   sets->setValue( "EmoticonSizeInEdit", m_emoticonSizeInEdit );
@@ -1294,7 +1289,7 @@ void Settings::save()
   sets->setValue( "ShareBoxPath", m_shareBoxPath );
   sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
   sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );
-  sets->setValue( "MaxFileShared", m_maxFileShared );
+  sets->setValue( "MaxSharedFiles", m_maxFileShared );
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->setValue( "MaxSimultaneousDownloads", m_maxSimultaneousDownloads );

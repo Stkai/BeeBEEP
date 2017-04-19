@@ -36,8 +36,8 @@ public:
   inline const QMultiMap<QString, FileInfo>& local() const;
   inline const QMultiMap<VNumber, FileInfo>& network() const;
 
-  void addToLocal( const QString&, const QList<FileInfo>&, FileSizeType );
-  void addToLocal( const FileInfo& );
+  int addToLocal( const QString&, const QList<FileInfo>& );
+  int addToLocal( const FileInfo& );
   void clearLocal();
   int removePath( const QString& );
   FileInfo networkFileInfo( VNumber user_id, VNumber file_info_id ) const;

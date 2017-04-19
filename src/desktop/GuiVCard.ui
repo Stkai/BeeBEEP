@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>414</width>
-    <height>168</height>
+    <width>420</width>
+    <height>158</height>
    </rect>
   </property>
   <property name="palette">
@@ -80,7 +80,7 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -94,7 +94,7 @@
     <number>0</number>
    </property>
    <property name="spacing">
-    <number>2</number>
+    <number>0</number>
    </property>
    <item row="0" column="0">
     <widget class="QLabel" name="mp_lPhoto">
@@ -263,23 +263,8 @@
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <property name="leftMargin">
-       <number>3</number>
-      </property>
-      <property name="topMargin">
-       <number>3</number>
-      </property>
-      <property name="rightMargin">
-       <number>3</number>
-      </property>
-      <property name="bottomMargin">
-       <number>3</number>
-      </property>
-      <property name="spacing">
-       <number>3</number>
-      </property>
-      <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
        <widget class="QLabel" name="mp_lPath">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -295,7 +280,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item>
        <widget class="QLabel" name="mp_lName">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -311,7 +296,26 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item>
+       <widget class="QLabel" name="mp_lStatusDescription">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Status description</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="mp_lBirthday">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -327,7 +331,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item>
        <widget class="QLabel" name="mp_lEmail">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -343,7 +347,7 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item>
        <widget class="QLabel" name="mp_lPhone">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">

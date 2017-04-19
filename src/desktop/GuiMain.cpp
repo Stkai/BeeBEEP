@@ -1507,6 +1507,8 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( chat_is_visible )
   {
     readAllMessagesInChat( c.id() );
+    if( !cm.isFromSystem() && !cm.isFromLocalUser() )
+      fl_chat->statusBar()->showMessage( "" ); // reset writing message
   }
   else
   {
@@ -2640,23 +2642,28 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
   if( !c.hasUser( ID_LOCAL_USER ) )
     return;
 
-  if( !checkAllChatMembersAreConnected( c.usersId() ) )
-    return;
-
   Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
   if( g.isValid() )
   {
     if( QMessageBox::warning( activeWindow(), Settings::instance().programName(),
-                              tr( "%1 is a your group. You can not leave the chat." ).arg( g.name() ),
+                              tr( "%1 is a your group. You cannot leave the chat until the group exists." ).arg( g.name() ),
                               tr( "Delete this group" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
         return;
 
-    removeGroup( g.id() );
-    return;
+    if( !mp_core->removeGroup( g.id() ) )
+    {
+      QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot delete %1." ).arg( g.name() ) );
+      return;
+    }
+
+    mp_groupList->loadGroups();
   }
 
-  if( !mp_core->removeUserFromChat( Settings::instance().localUser(), chat_id ) )
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "You cannot leave this chat." ) );
+  if( !checkAllChatMembersAreConnected( c.usersId() ) )
+    return;
+
+  if( !mp_core->removeUserFromChat( Settings::instance().localUser(), c.privateId() ) )
+    QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot leave %1." ).arg( c.name() ) );
 }
 
 void GuiMain::removeGroup( VNumber group_id )
@@ -2664,27 +2671,14 @@ void GuiMain::removeGroup( VNumber group_id )
   Group g = UserManager::instance().group( group_id );
   if( g.isValid() )
   {
-    if( !checkAllChatMembersAreConnected( g.usersId() ) )
-      return;
-
-    if( QMessageBox::question( this, Settings::instance().programName(),
+    if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                                tr( "Do you really want to delete group '%1'?" ).arg( g.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
-      Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
       if( mp_core->removeGroup( group_id ) )
-      {
-        if( c.isValid() )
-        {
-          GuiFloatingChat* fl_chat = floatingChat( c.id() );
-          if( fl_chat )
-            fl_chat->close();
-        }
-        //raiseHomeView();
         mp_groupList->loadGroups();
-        mp_chatList->reloadChatList();
-        mp_savedChatList->updateSavedChats();
-      }
+      else
+        QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot delete %1." ).arg( g.name() ) );
     }
   }
 }
@@ -2729,7 +2723,7 @@ void GuiMain::removeChat( VNumber chat_id )
   }
 
   QString question_txt = tr( "Do you really want to delete chat with %1?" ).arg( c.name() );
-  if( QMessageBox::information( this, Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+  if( QMessageBox::information( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
   if( mp_core->removeChat( chat_id ) )
@@ -2740,7 +2734,7 @@ void GuiMain::removeChat( VNumber chat_id )
       fl_chat->close();
   }
   else
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to delete this chat." ) );
+    QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "Unable to delete %1." ).arg( c.name() ) );
 }
 
 void GuiMain::showChatForGroup( VNumber group_id )

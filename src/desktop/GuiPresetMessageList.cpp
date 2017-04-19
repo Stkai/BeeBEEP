@@ -62,7 +62,7 @@ void GuiPresetMessageList::loadFromSettings()
   if( topLevelItemCount() > 0 )
     clear();
 
-  QMap<QString,QVariant> preset_messages = Settings::instance().presetMessages();
+  const QMap<QString,QVariant>& preset_messages = Settings::instance().presetMessages();
   if( preset_messages.isEmpty() )
     return;
 
