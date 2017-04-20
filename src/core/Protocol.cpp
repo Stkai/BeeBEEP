@@ -774,12 +774,17 @@ UserStatusRecord Protocol::loadUserStatusRecord( const QString& s ) const
   return usr;
 }
 
-Chat Protocol::createChat( const QList<VNumber>& user_list )
+Chat Protocol::createChat( const QList<VNumber>& user_list, const QString& chat_private_id )
 {
   Chat c;
   c.setId( newId() );
   if( user_list.size() > 1 )
-    c.setPrivateId( newMd5Id() );
+  {
+    if( chat_private_id.isEmpty() )
+      c.setPrivateId( newMd5Id() );
+    else
+      c.setPrivateId( chat_private_id );
+  }
   foreach( VNumber user_id, user_list )
     c.addUser( user_id );
   c.addUser( ID_LOCAL_USER );

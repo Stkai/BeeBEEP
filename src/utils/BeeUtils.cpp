@@ -322,8 +322,7 @@ QString Bee::chatMessageTypeToString( int cmt )
 
 QString Bee::dateTimeStringSuffix( const QDateTime& dt )
 {
-  QString s = dt.toString( "yyyy mm dd-hhmmss" );
-  s.remove( QChar( ' ' ) );
+  QString s = dt.toString( "yyyyMMdd-hhmmss" );
   return s;
 }
 

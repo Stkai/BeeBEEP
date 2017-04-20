@@ -25,6 +25,7 @@
 #include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "FileInfo.h"
+#include "FileShare.h"
 #include "GuiConfig.h"
 #include "GuiHome.h"
 #include "GuiLog.h"
@@ -279,4 +280,6 @@ void GuiFileSharing::updateNetworkFileList()
 void GuiFileSharing::showUserFileList( const User& u )
 {
   mp_shareNetwork->showSharesForUser( u );
+  QString share_message = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( FileShare::instance().fileSharedFromUser( u.id() ).size() );
+  statusBar()->showMessage( share_message, 5000 );
 }

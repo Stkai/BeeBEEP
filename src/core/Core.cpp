@@ -516,6 +516,6 @@ void Core::onTickEvent( int ticks )
   {
     QString html_msg = QString( "%1 <b>%2</b>." ).arg( Bee::iconToHtml( ":/images/warning.png", "*!*" ),
                                                        tr( "Max ID is reached. Please close and restart the application." ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Other );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System );
   }
 }

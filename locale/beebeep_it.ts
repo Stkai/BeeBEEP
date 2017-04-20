@@ -260,7 +260,7 @@
     </message>
     <message>
         <source>%1 You have created the group %2.</source>
-        <translation>%1 Hai creato il gruppo %2.</translation>
+        <translation type="obsolete">%1 Hai creato il gruppo %2.</translation>
     </message>
     <message>
         <source>%1 Welcome to the group %2.</source>
@@ -657,6 +657,14 @@
     <message>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 è stata condivisa in rete con solo %2 file su %3, (il limite di %4 è stato raggiunto)</translation>
+    </message>
+    <message>
+        <source>%1 %2 has left the group: %3.</source>
+        <translation>%1 %2 ha lasciato il gruppo: %3.</translation>
+    </message>
+    <message>
+        <source>%1 You have created group: %2.</source>
+        <translation>%1 Hai creato il gruppo: %2.</translation>
     </message>
 </context>
 <context>
@@ -1677,6 +1685,10 @@ Inserisci un nome differente.</translation>
         <source>File Sharing</source>
         <translation>Condivisione file</translation>
     </message>
+    <message>
+        <source>%1 has shared %2 files</source>
+        <translation>%1 ha condiviso %2 file</translation>
+    </message>
 </context>
 <context>
     <name>GuiFloatingChat</name>
@@ -2249,7 +2261,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Enable the compact mode in chat window</source>
-        <translation>Abilita la versione compatta dei messaggi</translation>
+        <translation type="obsolete">Abilita la versione compatta dei messaggi</translation>
     </message>
     <message>
         <source>If enabled the sender&apos;s nickname and his message are in the same line</source>
@@ -2257,7 +2269,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Add a blank line between the messages</source>
-        <translation>Aggiungi una linea vuota tra i messaggi</translation>
+        <translation type="obsolete">Aggiungi una linea vuota tra i messaggi</translation>
     </message>
     <message>
         <source>If enabled the messages in the chat window are separated by a blank line</source>
@@ -2586,7 +2598,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show emoticons</source>
-        <translation type="obsolete">Mostra le faccine con delle immagini</translation>
+        <translation>Mostra le faccine con delle immagini</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be recognized and showed as images</source>
@@ -3050,11 +3062,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Unable to delete this chat.</source>
-        <translation>Impossibile cancellare questa conversazione.</translation>
+        <translation type="obsolete">Impossibile cancellare questa conversazione.</translation>
     </message>
     <message>
         <source>%1 has shared %2 files</source>
-        <translation>%1 ha condiviso %2 file</translation>
+        <translation type="obsolete">%1 ha condiviso %2 file</translation>
     </message>
     <message>
         <source>Settings can not be saved. Do you want to continue?</source>
@@ -3390,7 +3402,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 files are scheduled for download</source>
-        <translation>%1 file sono stati messi in coda per essere scaricati</translation>
+        <translation type="obsolete">%1 file sono stati messi in coda per essere scaricati</translation>
     </message>
     <message>
         <source>Options</source>
@@ -3482,7 +3494,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Parse Unicode and ASCII emoticons</source>
-        <translation>Interpreta le faccine Ascii e Unicode</translation>
+        <translation type="obsolete">Interpreta le faccine Ascii e Unicode</translation>
     </message>
     <message>
         <source>If enabled the ASCII emoticons will be recognized and shown as images</source>
@@ -3490,7 +3502,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use native emoticons</source>
-        <translation>Usa le faccine native</translation>
+        <translation type="obsolete">Usa le faccine native</translation>
     </message>
     <message>
         <source>If enabled the emoticons will be parsed by your system font</source>
@@ -3746,7 +3758,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Use your name instead of &apos;You&apos;</source>
-        <translation>Usa il tuo nome invece di &apos;Tu&apos;</translation>
+        <translation type="obsolete">Usa il tuo nome invece di &apos;Tu&apos;</translation>
     </message>
     <message>
         <source>Show the datestamp</source>
@@ -3978,7 +3990,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>%1 is a your group. You can not leave the chat until the group exists.</source>
-        <translation>%1 è un gruppo creato da te, non puoi lasciare la conversazione finchè esiste il gruppo.</translation>
+        <translation type="obsolete">%1 è un gruppo creato da te, non puoi lasciare la conversazione finchè esiste il gruppo.</translation>
     </message>
     <message>
         <source>You cannot leave chat &apos;%1&apos;.</source>
@@ -3991,6 +4003,42 @@ il file %2 (%3)?</translation>
     <message>
         <source>You cannot leave %1.</source>
         <translation>Non puoi abbandonare %1.</translation>
+    </message>
+    <message>
+        <source>Activities</source>
+        <translation>Attività</translation>
+    </message>
+    <message>
+        <source>%1 is a your group. You cannot leave the chat until the group exists.</source>
+        <translation>%1 è un gruppo creato da te, non puoi lasciare la conversazione finchè esiste il gruppo.</translation>
+    </message>
+    <message>
+        <source>You cannot delete %1.</source>
+        <translation>Non puoi cancellare %1.</translation>
+    </message>
+    <message>
+        <source>Unable to delete %1.</source>
+        <translation>Impossibile cancellare %1.</translation>
+    </message>
+    <message>
+        <source>Use the chat compact mode</source>
+        <translation type="obsolete">Abilita la virsione compatta dei messaggi</translation>
+    </message>
+    <message>
+        <source>Show the chat in compact view mode</source>
+        <translation>Abilita la visione compatta dei messaggi</translation>
+    </message>
+    <message>
+        <source>Show your name instead of &apos;You&apos;</source>
+        <translation>Mostra il tuo nome invece di &apos;Tu&apos;</translation>
+    </message>
+    <message>
+        <source>Use font emoticons</source>
+        <translation>Usa le faccine presenti nel tuo sistema</translation>
+    </message>
+    <message>
+        <source>Downloading %1 files</source>
+        <translation>Inizio a scaricare %1 file</translation>
     </message>
 </context>
 <context>
@@ -5273,7 +5321,11 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Cerca</translation>
+        <translation type="obsolete">Cerca</translation>
+    </message>
+    <message>
+        <source>Search users</source>
+        <translation>Cerca utenti</translation>
     </message>
 </context>
 <context>

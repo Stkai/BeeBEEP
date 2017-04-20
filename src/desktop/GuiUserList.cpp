@@ -49,11 +49,9 @@ GuiUserList::GuiUserList( QWidget* parent )
   m_coreIsConnected = false;
   m_filter = "";
   m_blockShowChatRequest = false;
-
 #if QT_VERSION >= 0x040700
-  mp_leFilter->setPlaceholderText( tr( "Search" ) );
+  mp_leFilter->setPlaceholderText( tr( "Search users" ) );
 #endif
-
   mp_twUsers->setHeaderHidden( true );
   resetList();
 
@@ -85,8 +83,8 @@ void GuiUserList::updateUsers( bool is_connected )
 {
   m_coreIsConnected = is_connected;
   resetList();
-  setUser( Settings::instance().localUser(), false );
-  setDefaultChatConnected( 0, is_connected );
+  if( m_filter.isEmpty() )
+    setUser( Settings::instance().localUser(), false );
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( m_filter.isEmpty() || u.vCard().nickName().contains( m_filter, Qt::CaseInsensitive ) ||

@@ -44,8 +44,7 @@ Chat Core::findChatFromMessageData( VNumber from_user_id, const Message& m )
       if( g.isValid() )
       {
         qDebug() << "New message arrived for your group" << g.name() << "but chat does not exists";
-        createGroupChat( g.name(), g.usersId(), g.privateId(), false );
-        c = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
+        c = createGroupChat( g.name(), g.usersId(), g.privateId(), false );
       }
     }
   }

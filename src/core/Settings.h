@@ -168,8 +168,6 @@ public:
   inline const QString& defaultChatBackgroundColor() const;
   inline bool chatCompact() const;
   inline void setChatCompact( bool );
-  inline bool chatAddNewLineToMessage() const;
-  inline void setChatAddNewLineToMessage( bool );
   inline bool chatShowMessageTimestamp() const;
   inline void setChatShowMessageTimestamp( bool );
   inline bool homeShowMessageTimestamp() const;
@@ -523,7 +521,6 @@ private:
   QFont m_chatFont;
   QString m_defaultChatBackgroundColor;
   bool m_chatCompact;
-  bool m_chatAddNewLineToMessage;
   bool m_chatShowMessageTimestamp;
   bool m_chatShowMessageDatestamp;
   bool m_chatUseHtmlTags;
@@ -710,8 +707,6 @@ inline void Settings::setDefaultChatBackgroundColor( const QString& new_value ) 
 inline const QString& Settings::defaultChatBackgroundColor() const { return m_defaultChatBackgroundColor; }
 inline bool Settings::chatCompact() const { return m_chatCompact; }
 inline void Settings::setChatCompact( bool new_value ) { m_chatCompact = new_value; }
-inline bool Settings::chatAddNewLineToMessage() const { return m_chatAddNewLineToMessage; }
-inline void Settings::setChatAddNewLineToMessage( bool new_value ) { m_chatAddNewLineToMessage = new_value; }
 inline bool Settings::chatShowMessageTimestamp() const { return m_chatShowMessageTimestamp; }
 inline void Settings::setChatShowMessageTimestamp( bool new_value ) { m_chatShowMessageTimestamp = new_value; }
 inline bool Settings::homeShowMessageTimestamp() const { return m_homeShowMessageTimestamp; }

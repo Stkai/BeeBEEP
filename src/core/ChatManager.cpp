@@ -49,6 +49,9 @@ Chat ChatManager::chat( VNumber chat_id ) const
 
 Chat ChatManager::privateChatForUser( VNumber user_id ) const
 {
+  if( user_id == ID_INVALID )
+    return Chat();
+
   if( user_id == ID_LOCAL_USER )
     return chat( ID_DEFAULT_CHAT );
 

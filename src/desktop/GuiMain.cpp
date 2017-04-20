@@ -556,6 +556,10 @@ void GuiMain::createActions()
 
 void GuiMain::createMenus()
 {
+  /* Plugins Menu */
+  mp_menuPlugins = new QMenu( tr( "Plugins" ) + QString( "..." ), this );
+  mp_menuPlugins->setIcon( QIcon( ":/images/plugin.png" ) );
+
   /* Main Menu */
   mp_menuMain = new QMenu( tr( "Main" ), this );
   mp_menuMain->addAction( mp_actStartStopCore );
@@ -578,6 +582,8 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
   mp_menuMain->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
   mp_menuMain->addSeparator();
+  mp_menuMain->addMenu( mp_menuPlugins );
+  mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( QIcon( ":/images/resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
   mp_menuMain->addAction( QIcon( ":/images/data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
@@ -588,9 +594,9 @@ void GuiMain::createMenus()
   /* Chat Menu */
   mp_menuChat = new QMenu( tr( "Chat" ), this );
 
-
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
+  mp_menuSettings->setIcon( QIcon( ":/images/settings.png" ) );
 
   act = mp_menuSettings->addAction( tr( "Prompts for nickname on startup" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -812,9 +818,9 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actPanelToolBar );
   mp_menuView->addSeparator();
   mp_actViewNewMessage = mp_menuView->addAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this, SLOT( showNextChat() ) );
-  mp_menuView->addSeparator();
   mp_actViewFileSharing = mp_menuView->addAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this, SLOT( showFileSharingWindow() ) );
   mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( showLogWindow() ) );
+  mp_menuView->addAction( mp_actViewScreenShot );
   mp_menuView->addSeparator();
   mp_menuView->addAction( mp_actViewHome );
   mp_menuView->addAction( mp_actViewUsers );
@@ -823,9 +829,6 @@ void GuiMain::createMenus()
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
   mp_menuView->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
-
-  /* Plugins Menu */
-  mp_menuPlugins = new QMenu( tr( "Plugins" ), this );
 
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("?" ), this );
@@ -918,10 +921,17 @@ void GuiMain::createMenus()
 void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
-  menuBar()->addMenu( mp_menuSettings );
   menuBar()->addMenu( mp_menuView );
-  menuBar()->addMenu( mp_menuPlugins );
   menuBar()->addMenu( mp_menuInfo );
+  QLabel *label_version = new QLabel( this );
+  label_version->setTextFormat( Qt::RichText );
+  label_version->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+  QString label_version_text = QString( "&nbsp;&nbsp;BeeBEEP <b>%1</b> %2&nbsp;" )
+                                .arg( Settings::instance().version( false, false ) )
+                                .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
+  label_version->setText( label_version_text );
+  label_version->setToolTip( QString( "BeeBEEP %1 %2" ).arg( Settings::instance().version( true, true ), Settings::instance().operatingSystem( true ) ) );
+  menuBar()->setCornerWidget( label_version );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addAction( mp_actViewNewMessage );
@@ -929,6 +939,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroup );
   mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_actViewFileSharing );
+  mp_barMain->addAction( mp_menuSettings->menuAction() );
 
   mp_barPanel->addAction( mp_actViewHome );
   mp_barPanel->addAction( mp_actViewUsers );
@@ -995,8 +1006,7 @@ void GuiMain::createDockWindows()
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setData( 99 );
 
-  QString label_version_text = QString( "%1 %2" ).arg( Settings::instance().programName() ).arg( Settings::instance().version( false, false ) );
-  mp_dockHome = new QDockWidget( label_version_text, this );
+  mp_dockHome = new QDockWidget( tr( "Activities" ), this );
   mp_dockHome->setObjectName( "GuiHomeDock" );
   mp_home = new GuiHome( mp_dockHome );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -1114,8 +1124,7 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 2:
-    Settings::instance().setChatAddNewLineToMessage( act->isChecked() );
-    refresh_chat = true;
+    // free
     break;
   case 3:
     Settings::instance().setChatShowMessageTimestamp( act->isChecked() );
@@ -1848,7 +1857,7 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
       break;
   }
 
-  showMessage( tr( "%1 files are scheduled for download" ).arg( files_to_download ), 5000 );
+  showMessage( tr( "Downloading %1 files" ).arg( files_to_download ), 5000 );
 }
 
 void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
@@ -2045,9 +2054,6 @@ void GuiMain::updadePluginMenu()
     }
   }
 
-  mp_menuPlugins->addSeparator();
-  mp_menuPlugins->addAction( mp_actViewScreenShot );
-
     /*
 
   bool copymastro_available = false;
@@ -2196,9 +2202,10 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 
 void GuiMain::trayMessageClicked()
 {
-  GuiFloatingChat* fl_chat = floatingChat( mp_trayIcon->chatId() );
-  if( fl_chat )
-    QMetaObject::invokeMethod( fl_chat, "showUp", Qt::QueuedConnection );
+  if( mp_trayIcon->chatId() != ID_INVALID && ChatManager::instance().chat( mp_trayIcon->chatId() ).isValid() )
+  {
+    showChat( mp_trayIcon->chatId() );
+  }
   else
     QMetaObject::invokeMethod( this, "showUp", Qt::QueuedConnection );
 }
@@ -2331,7 +2338,9 @@ void GuiMain::createGroup()
   gcg.setFixedSize( gcg.size() );
   if( gcg.exec() == QDialog::Accepted )
   {
-    mp_core->createGroup( gcg.selectedName(), gcg.selectedUsersId() );
+    Group g = mp_core->createGroup( gcg.selectedName(), gcg.selectedUsersId() );
+    if( g.isValid() )
+      showChatForGroup( g.id() );
   }
 }
 
@@ -2377,7 +2386,11 @@ void GuiMain::createChat()
   gcg.show();
   gcg.setFixedSize( gcg.size() );
   if( gcg.exec() == QDialog::Accepted )
-    mp_core->createGroupChat( gcg.selectedName(), gcg.selectedUsersId(), "", true );
+  {
+    Chat c = mp_core->createGroupChat( gcg.selectedName(), gcg.selectedUsersId(), "", true );
+    if( c.isValid() )
+      showChat( c.id() );
+  }
 }
 
 void GuiMain::editGroupFromChat( VNumber chat_id )
@@ -2401,7 +2414,7 @@ void GuiMain::editGroupFromChat( VNumber chat_id )
     if( g.isValid() )
       mp_core->changeGroup( g.id(), gcg.selectedName(), gcg.selectedUsersId() );
     else
-      mp_core->changeGroupChat( group_chat_tmp.id(), gcg.selectedName(), gcg.selectedUsersId(), true );
+      mp_core->changeGroupChat( Settings::instance().localUser(), group_chat_tmp.id(), gcg.selectedName(), gcg.selectedUsersId() );
   }
 }
 
@@ -2745,10 +2758,7 @@ void GuiMain::showChatForGroup( VNumber group_id )
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
-  {
-    mp_core->createGroupChat( g, true );
-    c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
-  }
+    c = mp_core->createGroupChat( g.name(), g.usersId(), g.privateId(), true );
 
   showChat( c.id() );
 }
@@ -2757,8 +2767,6 @@ void GuiMain::showSharesForUser( const User& u )
 {
   if( mp_fileSharing )
     mp_fileSharing->showUserFileList( u );
-  QString share_message = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( FileShare::instance().fileSharedFromUser( u.id() ).size() );
-  showMessage( share_message, 5000 );
 }
 
 void GuiMain::selectLanguage()
@@ -2830,15 +2838,10 @@ void GuiMain::showChatSettingsMenu()
 
   mp_menuChat->addSeparator();
 
-  act = mp_menuChat->addAction( tr( "Enable the compact mode in chat window" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChat->addAction( tr( "Show the chat in compact view mode" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatCompact() );
   act->setData( 1 );
-
-  act = mp_menuChat->addAction( tr( "Add a blank line between the messages" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatAddNewLineToMessage() );
-  act->setData( 2 );
 
   act = mp_menuChat->addAction( tr( "Show the timestamp" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -2849,16 +2852,6 @@ void GuiMain::showChatSettingsMenu()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showImagePreview() );
   act->setData( 33 );
-
-  act = mp_menuChat->addAction( tr( "Parse Unicode and ASCII emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showEmoticons() );
-  act->setData( 10 );
-
-  act = mp_menuChat->addAction( tr( "Use native emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeEmoticons() );
-  act->setData( 31 );
 
   act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -2871,10 +2864,22 @@ void GuiMain::showChatSettingsMenu()
   act->setChecked( Settings::instance().chatMaxMessagesToShow() );
   act->setData( 27 );
 
-  act = mp_menuChat->addAction( tr( "Use your name instead of 'You'" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChat->addAction( tr( "Show your name instead of 'You'" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseYourNameInsteadOfYou() );
   act->setData( 41 );
+
+  mp_menuChat->addSeparator();
+
+  act = mp_menuChat->addAction( tr( "Show emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showEmoticons() );
+  act->setData( 10 );
+
+  act = mp_menuChat->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useNativeEmoticons() );
+  act->setData( 31 );
 
   mp_menuChat->addSeparator();
 
@@ -3357,9 +3362,9 @@ void GuiMain::selectDictionatyPath()
   Settings::instance().setDictionaryPath( dictionary_path );
 #ifdef BEEBEEP_USE_HUNSPELL
   if( SpellChecker::instance().setDictionary( dictionary_path ) )
-    showMessage( tr( "Dictionary selected: %1" ).arg( dictionary_path ), 5000 );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Dictionary selected: %1" ).arg( dictionary_path ) );
   else
-    showMessage( tr( "Unable to set dictionary: %1" ).arg( dictionary_path ), 5000 );
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to set dictionary: %1" ).arg( dictionary_path ) );
 #endif
 
   // update spellchecker and wordcompleter actions

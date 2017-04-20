@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>174</width>
-    <height>332</height>
+    <width>181</width>
+    <height>199</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -16,7 +16,7 @@
     <height>0</height>
    </size>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -29,37 +29,49 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="horizontalSpacing">
+   <property name="spacing">
     <number>2</number>
    </property>
-   <property name="verticalSpacing">
-    <number>0</number>
-   </property>
    <item row="0" column="0">
-    <widget class="QFrame" name="frame">
+    <widget class="QTreeWidget" name="mp_twUsers">
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QFrame" name="mp_frameBar">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gridlayout">
       <property name="leftMargin">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="topMargin">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="bottomMargin">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="spacing">
-       <number>0</number>
+       <number>2</number>
       </property>
-      <item row="0" column="0">
+      <item row="0" column="1">
        <widget class="QLineEdit" name="mp_leFilter">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -75,7 +87,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="0" column="2">
        <widget class="QPushButton" name="mp_pbClearFilter">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -110,7 +122,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="0" column="0">
        <widget class="QPushButton" name="mp_pbSettings">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -148,19 +160,11 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QTreeWidget" name="mp_twUsers">
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>mp_twUsers</tabstop>
+  <tabstop>mp_pbSettings</tabstop>
   <tabstop>mp_leFilter</tabstop>
   <tabstop>mp_pbClearFilter</tabstop>
  </tabstops>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
-    <height>320</height>
+    <width>538</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
+    <enum>Qt::ClickFocus</enum>
    </property>
    <property name="readOnly">
     <bool>true</bool>

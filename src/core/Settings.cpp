@@ -795,7 +795,6 @@ void Settings::load()
   m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
   m_defaultChatBackgroundColor = sets->value( "DefaultChatBackgroundColor", m_defaultChatBackgroundColor ).toString();
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
-  m_chatAddNewLineToMessage = sets->value( "AddNewLineAfterMessage", false ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
@@ -1105,7 +1104,6 @@ void Settings::save()
   sets->setValue( "FontColor", m_chatFontColor );
   sets->setValue( "DefaultChatBackgroundColor", m_defaultChatBackgroundColor );
   sets->setValue( "CompactMessage", m_chatCompact );
-  sets->setValue( "AddNewLineAfterMessage", m_chatAddNewLineToMessage );
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );

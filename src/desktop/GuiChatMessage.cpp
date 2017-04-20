@@ -74,7 +74,10 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   else
     html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
 
-  html_message +=  Settings::instance().chatAddNewLineToMessage() ? QLatin1String( "<br /><br />" ) : QLatin1String( "<br />" );
+  if( !append_message_to_previous && !Settings::instance().chatCompact() )
+    html_message.prepend( QLatin1String( "<br />" ) );
+
+  html_message += QLatin1String( "<br />" );
 
   return html_message;
 }
@@ -86,12 +89,10 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, bool show_ti
 
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
 
-  QString html_message = QString( "<font color=#808080>%1%2</font>" )
+  QString html_message = QString( "%1<font color=#808080>%2%3</font><br />" )
+                           .arg( Settings::instance().chatCompact() ? QLatin1String( "" ) : QLatin1String( "<br />" ) )
                            .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
                            .arg( cm.message() );
-
-  html_message += Settings::instance().chatAddNewLineToMessage() ? "<br /><br />" : "<br />";
-
   return html_message;
 }
 

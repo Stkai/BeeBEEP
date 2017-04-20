@@ -214,6 +214,9 @@ void GuiFloatingChat::showUp()
 
 void GuiFloatingChat::setFocusInChat()
 {
+  QWidget* w = QApplication::activeWindow();
+  if( !w )
+    return;
   QApplication::setActiveWindow( this );
   mp_chat->ensureFocusInChat();
 }

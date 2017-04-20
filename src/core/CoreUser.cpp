@@ -178,18 +178,22 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   return true;
 }
 
-bool Core::createGroup( const QString& group_name, const QList<VNumber>& group_members, const QString& group_private_id )
+Group Core::createGroup( const QString& group_name, const QList<VNumber>& group_members, const QString& group_private_id )
 {
   if( UserManager::instance().hasGroupName( group_name ) )
   {
     qWarning() << "Unable to create group" << group_name << ": it already exists";
-    return false;
+    return Group();
   }
 
   Group g = Protocol::instance().createGroup( group_name, group_private_id, group_members );
   qDebug() << "Group" << g.name() << "created with id:" << g.privateId();
   addGroup( g, true );
-  return true;
+
+  QString sHtmlMsg = tr( "%1 You have created group: %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), g.name() );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
+
+  return g;
 }
 
 bool Core::createGroupFromChat( VNumber chat_id )
@@ -207,7 +211,7 @@ bool Core::createGroupFromChat( VNumber chat_id )
     return false;
   }
 
-  if( createGroup( c.name(), c.usersId(), c.privateId() ) )
+  if( createGroup( c.name(), c.usersId(), c.privateId() ).isValid() )
   {
     QString sHtmlMsg = tr( "%1 You have created group from chat: %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), c.name() );
     dispatchSystemMessage( c.id(), ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
@@ -224,29 +228,22 @@ void Core::addGroup( const Group& g, bool broadcast_to_members )
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
-    createGroupChat( g, broadcast_to_members );
+    createGroupChat( g.name(), g.usersId(), g.privateId(), broadcast_to_members );
 }
 
-void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& group_members )
+void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& members_id )
 {
   Group g = UserManager::instance().group( group_id );
   if( !g.isValid() )
     return;
 
   g.setName( group_name );
-  g.setUsers( group_members );
+  g.setUsers( members_id );
   UserManager::instance().setGroup( g );
-
   emit updateGroup( g.id() );
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
-  if( !c.isValid() )
-  {
-    qWarning() << "Chat not found for group" << g.name();
-    return;
-  }
-
-  changeGroupChat( c.id(), group_name, group_members, true );
+  changeGroupChat( Settings::instance().localUser(), c.id(), group_name, members_id );
 }
 
 bool Core::removeUserFromGroup( const User& u, const QString& group_private_id )
@@ -285,7 +282,7 @@ bool Core::removeGroup( VNumber group_id )
   if( UserManager::instance().removeGroup( group_id ) )
   {
     QString sHtmlMsg = tr( "%1 You have deleted group: %2." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), g.name() );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::Other );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
     return true;
   }
   else
@@ -408,7 +405,6 @@ bool Core::isUserConnected( VNumber user_id ) const
   }
   else
     return isConnected();
-
 }
 
 bool Core::areUsersConnected( const QList<VNumber>& users_id ) const

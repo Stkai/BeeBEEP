@@ -66,9 +66,9 @@ public:
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( int, const QString&, bool );
   bool setLocalUserVCard( const QString&, const VCard& );
-  bool createGroup( const QString&, const QList<VNumber>&, const QString& group_private_id = "" );
+  Group createGroup( const QString&, const QList<VNumber>&, const QString& group_private_id = "" );
   bool createGroupFromChat( VNumber );
-  void changeGroup( VNumber, const QString&, const QList<VNumber>& );
+  void changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& members_id );
   bool removeGroup( VNumber );
   void toggleUserFavorite( VNumber );
   bool removeOfflineUser( VNumber );
@@ -82,10 +82,9 @@ public:
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
   void showTipOfTheDay();
   void showFactOfTheDay();
-  void createGroupChat( const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
-  void createGroupChat( const Group&, bool broadcast_message );
-  void changeGroupChat( VNumber chat_id, const QString& chat_name, const QList<VNumber>&, bool broadcast_message );
-  void clearMessagesInChat( VNumber, bool clear_history );
+  Chat createGroupChat( const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
+  void changeGroupChat( const User&, VNumber chat_id, const QString& chat_name, const QList<VNumber>& members_is );
+  bool clearMessagesInChat( VNumber, bool clear_history );
   bool removeUserFromChat( const User&, const QString& chat_private_id );
   bool removeUserFromGroup( const User&, const QString& group_private_id );
   bool removeChat( VNumber );
@@ -235,6 +234,7 @@ protected:
   void sendGroupChatRefuseMessage( const Chat&, const UserList& );
   void checkGroupChatAfterUserReconnect( const User& );
   void sendLocalUserHasReadChatMessage( const Chat& );
+  void addChatHeader( Chat* );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };

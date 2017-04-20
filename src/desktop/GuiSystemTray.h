@@ -62,7 +62,7 @@ private:
 
 // Inline Functions
 inline VNumber GuiSystemTray::chatId() const { return m_chatId; }
-inline void GuiSystemTray::resetChatId() { m_chatId = ID_DEFAULT_CHAT; }
+inline void GuiSystemTray::resetChatId() { m_chatId = ID_INVALID; }
 inline bool GuiSystemTray::iconStatusIsMessage() const { return m_iconStatus == GuiSystemTray::Message; }
 
 #endif // BEEBEEP_GUISYSTEMTRAY_H

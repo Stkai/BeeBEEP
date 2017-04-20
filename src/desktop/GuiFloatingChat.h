@@ -39,10 +39,10 @@ public:
   bool setChat( const Chat& );
   inline GuiChat* guiChat() const;
   void checkWindowFlagsAndShow();
-  void setFocusInChat();
   inline bool chatIsVisible() const;
   void setMainIcon( bool with_message );
   void updateUser( const User& );
+  void setFocusInChat();
 
 public slots:
   void updateEmoticon();

@@ -132,13 +132,10 @@ bool GuiUserItem::updateUser( const User& u )
 
   setText( 0, s );
 
-  if( !u.isLocal() )
-  {
-    QPixmap user_avatar = Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() );
-    setIcon( 0, user_avatar );
-  }
-  else
+  if( u.isLocal() )
     setIcon( 0, m_defaultIcon );
+  else
+    setIcon( 0, Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() ) );
 
   QString tool_tip;
   if( u.isLocal() )

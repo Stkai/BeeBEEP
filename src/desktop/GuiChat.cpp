@@ -482,6 +482,11 @@ void GuiChat::ensureFocusInChat()
 {
   if( mp_teMessage->isEnabled() )
     mp_teMessage->setFocus();
+
+  if( !mp_teMessage->hasFocus() )
+    mp_teMessage->setCursor( Qt::WaitCursor );
+  else
+    mp_teMessage->setCursor( Qt::ArrowCursor );
 }
 
 void GuiChat::ensureLastMessageVisible()

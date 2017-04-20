@@ -104,23 +104,7 @@ void Chat::clearMessages()
 {
   setLastMessageTimestamp( QDateTime() );
   readAllMessages();
-
-  ChatMessage cm_intro;
-  if( isGroup() )
-  {
-    cm_intro = m_messages.first();
-    m_messages.removeFirst();
-    ChatMessage cm_intro_group = m_messages.first();
-    m_messages.clear();
-    addMessage( cm_intro );
-    addMessage( cm_intro_group );
-  }
-  else
-  {
-    cm_intro = m_messages.first();
-    m_messages.clear();
-    addMessage( cm_intro );
-  }
+  m_messages.clear();
 }
 
 int Chat::chatMessages() const
@@ -136,6 +120,9 @@ int Chat::chatMessages() const
 
 void Chat::addMessage( const ChatMessage& cm )
 {
+  if( !cm.isValid() )
+    return;
+
   m_messages.append( cm );
 
   if( cm.isFromLocalUser() && cm.type() == ChatMessage::Chat )
