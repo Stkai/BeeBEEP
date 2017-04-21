@@ -91,10 +91,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_menuContext = new QMenu( this );
   mp_menuFilters = new QMenu( this );
 
-  mp_menuMembers = new QMenu( tr( "Members" ), this );
-  mp_menuMembers->setIcon( QIcon( ":/images/group.png" ) );
-  connect( mp_menuMembers->menuAction(), SIGNAL( triggered() ), this, SLOT( showMembersMenu() ) );
-
   mp_scFocusInChat = new QShortcut( this );
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFocusInChat, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
@@ -135,47 +131,50 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
 }
 
-void GuiChat::setupToolBar( QToolBar* bar )
+void GuiChat::setupToolBars( QToolBar* chat_bar, QToolBar* group_bar )
 {
-  bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
-  bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
-  bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
-  bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
-  mp_actSpellChecker = bar->addAction( QIcon( ":/images/spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
+  chat_bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
+  chat_bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
+  chat_bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
+  chat_bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
+  mp_actSpellChecker = chat_bar->addAction( QIcon( ":/images/spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
   mp_actSpellChecker->setCheckable( true );
-  mp_actCompleter = bar->addAction( QIcon( ":/images/dictionary.png" ), tr( "Word completer" ), this, SLOT( onCompleterActionClicked() ) );
+  mp_actCompleter = chat_bar->addAction( QIcon( ":/images/dictionary.png" ), tr( "Word completer" ), this, SLOT( onCompleterActionClicked() ) );
   mp_actCompleter->setCheckable( true );
-  mp_actUseReturnToSendMessage = bar->addAction( QIcon( ":/images/key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
+  mp_actUseReturnToSendMessage = chat_bar->addAction( QIcon( ":/images/key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
   mp_actUseReturnToSendMessage->setCheckable( true );
   updateActionsOnFocusChanged();
-  bar->addSeparator();
+  chat_bar->addSeparator();
+  mp_actSendFile = chat_bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
+  mp_actSendFolder = chat_bar->addAction( QIcon( ":/images/send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
+  chat_bar->addSeparator();
+  chat_bar->addAction( mp_actSaveAs );
+  chat_bar->addAction( mp_actPrint );
+  chat_bar->addSeparator();
+  chat_bar->addAction( mp_actSaveGeometryAndState );
 
-  bar->addAction( mp_menuMembers->menuAction() );
-  bar->addSeparator();
-  mp_actSendFile = bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
-  mp_actSendFolder = bar->addAction( QIcon( ":/images/send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
-  bar->addSeparator();
-  mp_actGroupWizard = bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
-  mp_actGroupAdd = bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
-  mp_actLeave = bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
-  bar->addSeparator();
-  bar->addAction( mp_actSaveGeometryAndState );
+  mp_actGroupWizard = group_bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
+  mp_actGroupAdd = group_bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
+  mp_actLeave = group_bar->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
 
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
 }
 
-void GuiChat::updateActions( bool is_connected, int connected_users )
+void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_users )
 {
-  Chat c = ChatManager::instance().chat( m_chatId );
-  if( !c.isValid() )
-    qWarning() << "Invalid chat id" << m_chatId << "found in GuiChat::updateAction";
+  if( c.id() != m_chatId )
+    return;
 
   bool local_user_is_member = isActiveUser( c, Settings::instance().localUser() );
   bool is_group_chat = c.isGroup();
+  bool local_group_exists = is_group_chat ? UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() : false;
+  bool chat_is_empty = c.isEmpty();
 
+  mp_actClear->setDisabled( chat_is_empty );
   mp_actSendFile->setEnabled( Settings::instance().fileTransferIsEnabled() && local_user_is_member && is_connected && connected_users > 0 );
   mp_actSendFolder->setEnabled( Settings::instance().fileTransferIsEnabled() && local_user_is_member && is_connected && connected_users > 0 );
+  mp_actGroupWizard->setEnabled( local_user_is_member && is_group_chat && !local_group_exists );
   mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
   mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
 
@@ -186,39 +185,48 @@ void GuiChat::updateActions( bool is_connected, int connected_users )
     mp_teMessage->setToolTip( tr( "You are not connected" ) );
   }
   else
-    checkChatDisabled( c );
-}
+  {
+    if( Settings::instance().disableSendMessage() )
+    {
+      mp_teMessage->setEnabled( false );
+      mp_pbSend->setEnabled( false );
+      mp_teMessage->setToolTip( tr( "Send messages is disabled" ) );
+    }
+    else if( c.isDefault() && !Settings::instance().chatWithAllUsersIsEnabled() )
+    {
+      mp_teMessage->setEnabled( false );
+      mp_pbSend->setEnabled( false );
+      mp_teMessage->setToolTip( tr( "Chat with all users is disabled" ) );
+    }
+    else if( c.isPrivate() && Settings::instance().disablePrivateChats() )
+    {
+      mp_teMessage->setEnabled( false );
+      mp_pbSend->setEnabled( false );
+      mp_teMessage->setToolTip( tr( "Private chat is disabled" ) );
+    }
+    else
+    {
+      bool local_user_is_active_in_chat = isActiveUser( c, Settings::instance().localUser() );
+      mp_teMessage->setEnabled( local_user_is_active_in_chat );
+      mp_pbSend->setEnabled( local_user_is_active_in_chat );
+      if( local_user_is_active_in_chat )
+        mp_teMessage->setToolTip( "" );
+      else
+        mp_teMessage->setToolTip( tr( "You have left this chat" ) );
+    }
+  }
 
-void GuiChat::checkChatDisabled( const Chat& c )
-{
-  if( Settings::instance().disableSendMessage() )
+#if QT_VERSION >= 0x050200
+  if( mp_teMessage->isEnabled() )
   {
-    mp_teMessage->setEnabled( false );
-    mp_pbSend->setEnabled( false );
-    mp_teMessage->setToolTip( tr( "Send messages is disabled" ) );
-  }
-  else if( c.isDefault() && !Settings::instance().chatWithAllUsersIsEnabled() )
-  {
-    mp_teMessage->setEnabled( false );
-    mp_pbSend->setEnabled( false );
-    mp_teMessage->setToolTip( tr( "Chat with all users is disabled" ) );
-  }
-  else if( c.isPrivate() && Settings::instance().disablePrivateChats() )
-  {
-    mp_teMessage->setEnabled( false );
-    mp_pbSend->setEnabled( false );
-    mp_teMessage->setToolTip( tr( "Private chat is disabled" ) );
+    if( c.isDefault() )
+      mp_teMessage->setPlaceholderText( tr( "Write a message to all connected user" ) );
+    else
+      mp_teMessage->setPlaceholderText( tr( "Write a message to %1" ).arg( c.name() ) );
   }
   else
-  {
-    bool local_user_is_active_in_chat = isActiveUser( c, Settings::instance().localUser() );
-    mp_teMessage->setEnabled( local_user_is_active_in_chat );
-    mp_pbSend->setEnabled( local_user_is_active_in_chat );
-    if( local_user_is_active_in_chat )
-      mp_teMessage->setToolTip( "" );
-    else
-      mp_teMessage->setToolTip( tr( "You have left this chat" ) );
-  }
+    mp_teMessage->setPlaceholderText( mp_teMessage->toolTip() );
+#endif
 }
 
 void GuiChat::customContextMenu( const QPoint& )
@@ -238,9 +246,6 @@ void GuiChat::customContextMenu( const QPoint& )
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   act = mp_menuContext->addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
-  mp_menuContext->addSeparator();
-  mp_menuContext->addAction( mp_actSaveAs );
-  mp_menuContext->addAction( mp_actPrint );
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actClear );
   mp_menuContext->addSeparator();
@@ -325,7 +330,10 @@ void GuiChat::sendMessage()
 {
   if( Settings::instance().disableSendMessage() )
     return;
-  emit newMessage( m_chatId, mp_teMessage->message() );
+  QString msg = mp_teMessage->message();
+  if( msg.isEmpty() )
+    return;
+  emit newMessage( m_chatId, msg );
   mp_teMessage->clearMessage();
   ensureFocusInChat();
 }
@@ -390,16 +398,12 @@ bool GuiChat::setChat( const Chat& c )
   {
     setChatBackgroundColor( Settings::instance().defaultChatBackgroundColor() );
     mp_actSelectBackgroundColor->setEnabled( true );
-    mp_menuMembers->setEnabled( false );
   }
   else
   {
     mp_teChat->setPalette( m_defaultChatPalette );
     mp_actSelectBackgroundColor->setEnabled( false );
-    mp_menuMembers->setEnabled( true );
   }
-
-  mp_actGroupWizard->setEnabled( c.isGroup() && !UserManager::instance().hasGroupName( c.name() ) );
 
   QString html_text = "";
 
@@ -417,7 +421,6 @@ bool GuiChat::setChat( const Chat& c )
       html_text.append( "<br />" );
   }
 
-  bool chat_is_empty = c.isEmpty() && html_text.isEmpty();
   int num_lines = c.messages().size();
   bool max_lines_message_written = false;
   m_lastMessageUserId = 0;
@@ -446,6 +449,7 @@ bool GuiChat::setChat( const Chat& c )
 #endif
 
   bool updates_is_enabled = mp_teChat->updatesEnabled();
+  int scrollbar_previous_value = mp_teChat->verticalScrollBar() ? mp_teChat->verticalScrollBar()->value() : -1;
   mp_teChat->setUpdatesEnabled( false );
   mp_teChat->clear();
 
@@ -468,11 +472,10 @@ bool GuiChat::setChat( const Chat& c )
   qDebug() << "Elapsed time to set HTML text in chat:" << time_to_open.elapsed() << "ms";
 #endif
 
-  updateMenuMembers( c );
-  mp_actClear->setDisabled( chat_is_empty );
-  ensureLastMessageVisible();
   setLastMessageTimestamp( c.lastMessageTimestamp() );
-  checkChatDisabled( c );
+
+  if( scrollbar_previous_value >= 0 && mp_teChat->verticalScrollBar() )
+    mp_teChat->verticalScrollBar()->setValue( qMin( scrollbar_previous_value, mp_teChat->verticalScrollBar()->maximum() ) );
 
   QApplication::restoreOverrideCursor();
   return true;
@@ -501,30 +504,27 @@ void GuiChat::ensureLastMessageVisible()
     mp_teChat->ensureCursorVisible();
 }
 
-void GuiChat::appendChatMessage( const Chat& c, const ChatMessage& cm )
+bool GuiChat::appendChatMessage( const Chat& c, const User& u, const ChatMessage& cm )
 {
   if( m_chatId != c.id() )
   {
     qWarning() << "Trying to append chat message of chat id" << c.id() << "in chat shown with id" << m_chatId << "... skip it";
-    return;
+    return false;
   }
 
   if( !c.isValid() )
   {
     qWarning() << "Invalid chat" << m_chatId << "found in GuiChat::appendChatMessage(...)";
-    return;
+    return false;
+  }
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user" << cm.userId() << "found in GuiChat::appendChatMessage(...)";
+    return false;
   }
 
   bool show_timestamp_last_message = !cm.isFromLocalUser() && !cm.isFromSystem();
   mp_actClear->setDisabled( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) );
-
-  User u = UserManager::instance().findUser( cm.userId() );
-  if( !u.isValid() )
-  {
-    qWarning() << "Invalid user" << cm.userId() << "found in GuiChat::appendChatMessage(...)";
-    return;
-  }
-
   QString text_message = chatMessageToText( u, cm );
 
   if( !text_message.isEmpty() )
@@ -547,6 +547,8 @@ void GuiChat::appendChatMessage( const Chat& c, const ChatMessage& cm )
 
   if( show_timestamp_last_message )
     setLastMessageTimestamp( cm.timestamp() );
+
+  return true;
 }
 
 void GuiChat::setChatFont( const QFont& f )
@@ -754,23 +756,6 @@ void GuiChat::dropEvent( QDropEvent *event )
 {
   if( event->mimeData()->hasUrls() )
     checkAndSendUrls( event->mimeData() );
-}
-
-void GuiChat::showUserVCard()
-{
-  QAction *act = qobject_cast<QAction*>( sender() );
-  if( act )
-  {
-    VNumber user_id = Bee::qVariantToVNumber( act->data() );
-    emit showVCardRequest( user_id );
-  }
-  else
-    showMembersMenu();
-}
-
-void GuiChat::showLocalUserVCard()
-{
-  emit showVCardRequest( ID_LOCAL_USER );
 }
 
 void GuiChat::showGroupWizard()
@@ -1021,55 +1006,4 @@ void GuiChat::openSelectedTextAsUrl()
     QUrl url = QUrl::fromUserInput( selected_text );
     emit openUrl( url );
   }
-}
-
-void GuiChat::updateMenuMembers( const Chat& c )
-{
-  User u;
-  QString s_tmp;
-  QAction* act;
-  mp_menuMembers->clear();
-
-  foreach( VNumber user_id, c.usersId() )
-  {
-    u = UserManager::instance().findUser( user_id );
-
-    if( u.isLocal() )
-      s_tmp = tr( "You" );
-    else if( c.userHasReadMessages( u.id() ) || u.protocolVersion() < 63 )
-      s_tmp = u.name();
-    else
-      s_tmp = QString( "%1 (%2)" ).arg( u.name() ).arg( tr( "unread messages" ) );
-
-    act = mp_menuMembers->addAction( QIcon( Bee::userStatusIcon( u.status() ) ), s_tmp );
-    act->setData( u.id() );
-    act->setIconVisibleInMenu( true );
-    if( u.isStatusConnected() && isActiveUser( c, u ) )
-    {
-      act->setEnabled( true  );
-      connect( act, SIGNAL( triggered() ), this, SLOT( showUserVCard() ) );
-    }
-    else
-      act->setEnabled( false );
-  }
-}
-
-void GuiChat::showMembersMenu()
-{
-  if( !mp_menuMembers->isEnabled() )
-    return;
-  updateMenuMembers( ChatManager::instance().chat( m_chatId ) );
-  mp_menuMembers->exec( QCursor::pos() );
-}
-
-void GuiChat::setChatReadByUser( const Chat& c, VNumber )
-{
-  if( c.id() == m_chatId )
-    updateMenuMembers( c );
-}
-
-void GuiChat::updateUsers( const Chat& c )
-{
-  if( c.id() == m_chatId )
-    updateMenuMembers( c );
 }

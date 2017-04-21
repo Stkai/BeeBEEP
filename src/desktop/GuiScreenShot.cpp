@@ -44,6 +44,8 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
   addToolBar( Qt::BottomToolBarArea, mp_barScreenShot );
   mp_barScreenShot->setObjectName( "GuiScreenShotToolBar" );
   mp_barScreenShot->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barScreenShot->setAllowedAreas( Qt::AllToolBarAreas );
+  mp_barScreenShot->setFloatable( false );
   setupToolBar( mp_barScreenShot );
 }
 

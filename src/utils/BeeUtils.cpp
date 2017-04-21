@@ -709,8 +709,8 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
 
 void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
 {
-  bool w_is_visible = w->isVisible();
-  if( w_is_visible )
+  bool w_was_visible = w->isVisible();
+  if( w_was_visible )
     w->hide();
 
   Qt::WindowFlags w_flags = w->windowFlags();
@@ -720,6 +720,6 @@ void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
     w_flags &= ~Qt::WindowStaysOnTopHint;
   w->setWindowFlags( w_flags );
 
-  if( w_is_visible )
-    w->show();
+  if( w_was_visible )
+    QMetaObject::invokeMethod( w, "show", Qt::QueuedConnection );
 }

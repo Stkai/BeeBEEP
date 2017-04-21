@@ -27,7 +27,7 @@
 
 
 Updater::Updater( QObject *parent )
- : QObject(parent), m_versionAvailable( "" ), m_downloadUrl( "" )
+ : QObject( parent ), m_versionAvailable( "" ), m_downloadUrl( "" )
 {
 }
 
@@ -41,6 +41,7 @@ void Updater::checkForNewVersion()
   connect( http_downloader, SIGNAL( downloadCompleted( const QString& ) ),this, SLOT( onDownloadCompleted( const QString& ) ), Qt::QueuedConnection );
   connect( http_downloader, SIGNAL( jobFinished() ), this, SIGNAL( jobCompleted() ) );
 
+  http_downloader->setOverwriteExistingFiles( true );
   http_downloader->addUrl( url );
 
   QMetaObject::invokeMethod( http_downloader, "startDownload", Qt::QueuedConnection );

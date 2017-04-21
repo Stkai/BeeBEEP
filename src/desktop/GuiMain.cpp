@@ -124,7 +124,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
-  connect( mp_core, SIGNAL( chatReadByUser( const Chat&, VNumber ) ), this, SLOT( onChatReadByUser( const Chat&, VNumber ) ) );
+  connect( mp_core, SIGNAL( chatReadByUser( const Chat&, const User& ) ), this, SLOT( onChatReadByUser( const Chat&, const User& ) ) );
   connect( mp_core, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -159,8 +159,6 @@ GuiMain::GuiMain( QWidget *parent )
   initShortcuts();
   initGuiItems();
   updateShortcuts();
-
-  setMinimumWidth( 260 );
 }
 
 void GuiMain::initShortcuts()
@@ -186,20 +184,31 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( gui_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
-  connect( gui_chat, SIGNAL( editGroupRequestFromChat( VNumber ) ), this, SLOT( editGroupFromChat( VNumber ) ) );
+  connect( gui_chat, SIGNAL( editGroupRequestFromChat( VNumber ) ), this, SLOT( editChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
-  connect( gui_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
   connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
 }
 
 void GuiMain::checkWindowFlagsAndShow()
 {
+  if( !mp_trayIcon->isVisible() )
+  {
+    mp_trayIcon->show();
+#ifdef Q_OS_LINUX
+    qApp->processEvents();
+    mp_trayIcon->hide();
+    qApp->processEvents();
+    mp_trayIcon->show();
+#endif
+  }
+
   Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
+  setAttribute( Qt::WA_ShowWithoutActivating );
+
   if( !isVisible() )
     show();
-
 
   if( !Settings::instance().guiGeometry().isEmpty() )
   {
@@ -212,8 +221,14 @@ void GuiMain::checkWindowFlagsAndShow()
   mp_barMain->setVisible( !Settings::instance().hideMainToolbar() );
   mp_barPanel->setVisible( !Settings::instance().hideMainToolbar() );
 
+  if( Settings::instance().loadOnTrayAtStartup() && QSystemTrayIcon::isSystemTrayAvailable() )
+  {
+    QMetaObject::invokeMethod( this, "hideToTrayIcon", Qt::QueuedConnection );
+    return;
+  }
+
   if( Settings::instance().showMinimizedAtStartup() )
-    QTimer::singleShot( 100, this, SLOT( showMinimized() ) );
+    QMetaObject::invokeMethod( this, "showMinimized", Qt::QueuedConnection );
 }
 
 void GuiMain::showUp()
@@ -480,7 +495,7 @@ void GuiMain::checkViewActions()
   if( !m_floatingChats.isEmpty() )
   {
     foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-      fl_chat->guiChat()->updateActions( is_connected, connected_users );
+      fl_chat->updateActions( is_connected, connected_users );
   }
 
   if( mp_fileSharing )
@@ -596,7 +611,7 @@ void GuiMain::createMenus()
 
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
-  mp_menuSettings->setIcon( QIcon( ":/images/settings.png" ) );
+  //mp_menuSettings->setIcon( QIcon( ":/images/settings.png" ) );
 
   act = mp_menuSettings->addAction( tr( "Prompts for nickname on startup" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -921,12 +936,13 @@ void GuiMain::createMenus()
 void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
+  menuBar()->addMenu( mp_menuSettings );
   menuBar()->addMenu( mp_menuView );
   menuBar()->addMenu( mp_menuInfo );
   QLabel *label_version = new QLabel( this );
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
-  QString label_version_text = QString( "&nbsp;&nbsp;BeeBEEP <b>%1</b> %2&nbsp;" )
+  QString label_version_text = QString( "&nbsp;&nbsp;<b>%1</b> %2&nbsp;" )
                                 .arg( Settings::instance().version( false, false ) )
                                 .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
   label_version->setText( label_version_text );
@@ -937,9 +953,10 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
-  mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_actViewFileSharing );
+#ifdef Q_OS_UNIX
   mp_barMain->addAction( mp_menuSettings->menuAction() );
+#endif
 
   mp_barPanel->addAction( mp_actViewHome );
   mp_barPanel->addAction( mp_actViewUsers );
@@ -1184,11 +1201,15 @@ void GuiMain::settingsChanged()
   case 14:
     {
       Settings::instance().setStayOnTop( act->isChecked() );
+      Bee::setWindowStaysOnTop( this, act->isChecked() );
       foreach( GuiFloatingChat* fl_chat, m_floatingChats )
         Bee::setWindowStaysOnTop( fl_chat, act->isChecked() );
-      Bee::setWindowStaysOnTop( this, act->isChecked() );
       if( mp_fileSharing )
         Bee::setWindowStaysOnTop( mp_fileSharing, act->isChecked() );
+      if( mp_log )
+        Bee::setWindowStaysOnTop( mp_log, act->isChecked() );
+      if( mp_screenShot )
+        Bee::setWindowStaysOnTop( mp_screenShot, act->isChecked() );
     }
     break;
   case 15:
@@ -1506,7 +1527,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
-    fl_chat->guiChat()->appendChatMessage( c, cm );
+    fl_chat->showChatMessage( c, cm );
 
   if( cm.isFromSystem() || cm.isFromLocalUser() )
     return;
@@ -2393,12 +2414,22 @@ void GuiMain::createChat()
   }
 }
 
-void GuiMain::editGroupFromChat( VNumber chat_id )
+void GuiMain::editChat( VNumber chat_id )
 {
   Chat group_chat_tmp = ChatManager::instance().chat( chat_id );
+  if( !group_chat_tmp.isValid() )
+    return;
+
   if( !group_chat_tmp.isGroup() )
   {
-    QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "Unable to add users in this chat. Please select a group one." ) );
+    qWarning() << "Unable to edit chat" << chat_id << qPrintable( group_chat_tmp.name() ) << "because it is not a group";
+    return;
+  }
+
+  Group g = UserManager::instance().findGroupByPrivateId( group_chat_tmp.privateId() );
+  if( g.isValid() )
+  {
+    editGroup( g.id() );
     return;
   }
 
@@ -2409,13 +2440,7 @@ void GuiMain::editGroupFromChat( VNumber chat_id )
   gcg.show();
   gcg.setFixedSize( gcg.size() );
   if( gcg.exec() == QDialog::Accepted )
-  {
-    Group g = UserManager::instance().findGroupByPrivateId( group_chat_tmp.privateId() );
-    if( g.isValid() )
-      mp_core->changeGroup( g.id(), gcg.selectedName(), gcg.selectedUsersId() );
-    else
-      mp_core->changeGroupChat( Settings::instance().localUser(), group_chat_tmp.id(), gcg.selectedName(), gcg.selectedUsersId() );
-  }
+    mp_core->changeGroupChat( Settings::instance().localUser(), group_chat_tmp.id(), gcg.selectedName(), gcg.selectedUsersId() );
 }
 
 void GuiMain::checkAutoStartOnBoot( bool add_service )
@@ -2438,22 +2463,9 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 
 void GuiMain::loadSession()
 {
-  mp_core->loadUsersAndGroups();
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   if( Settings::instance().fileTransferIsEnabled() )
     QTimer::singleShot( 2000, mp_core, SLOT( buildLocalShareList() ) );
-
-  if( !mp_trayIcon->isVisible() )
-  {
-    mp_trayIcon->show();
-#ifdef Q_OS_LINUX
-    qApp->processEvents();
-    mp_trayIcon->hide();
-    qApp->processEvents();
-    mp_trayIcon->show();
-#endif
-  }
-
   mp_home->loadSystemMessages();
 }
 
@@ -3121,7 +3133,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
 
   if( !fl_chat )
   {
-    fl_chat = new GuiFloatingChat;
+    fl_chat = new GuiFloatingChat( mp_core );
     setupChatConnections( fl_chat->guiChat() );
     connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
@@ -3137,9 +3149,6 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   }
 
   fl_chat->checkWindowFlagsAndShow();
-  fl_chat->guiChat()->updateShortcuts();
-  fl_chat->guiChat()->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
-  fl_chat->guiChat()->ensureLastMessageVisible();
   return fl_chat;
 }
 
@@ -3402,6 +3411,12 @@ void GuiMain::onTickEvent( int ticks )
       QMetaObject::invokeMethod( bee_app, "checkIdle", Qt::QueuedConnection );
   }
 
+  if( mp_actViewNewMessage->isEnabled() )
+  {
+    QIcon new_message_blinking_icon( ":/images/beebeep-message.png" );
+    mp_actViewNewMessage->setIcon( ticks % 2 == 0 ? new_message_blinking_icon : Bee::convertToGrayScale( new_message_blinking_icon.pixmap( Settings::instance().mainBarIconSize() ) ) );
+  }
+
   mp_trayIcon->onTickEvent( ticks );
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
@@ -3411,11 +3426,11 @@ void GuiMain::onTickEvent( int ticks )
     mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? QIcon( ":/images/file-transfer-progress.png" ) : QIcon( ":/images/file-transfer.png" ) );
 }
 
-void GuiMain::onChatReadByUser( const Chat& c, VNumber user_id )
+void GuiMain::onChatReadByUser( const Chat& c, const User& u )
 {
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
-    fl_chat->guiChat()->setChatReadByUser( c, user_id );
+    fl_chat->setChatReadByUser( c, u );
 }
 
 void GuiMain::readAllMessagesInChat( VNumber chat_id )
@@ -3548,6 +3563,7 @@ void GuiMain::showFileSharingWindow()
     mp_fileSharing = new GuiFileSharing( mp_core, 0 );
     mp_fileSharing->setAttribute( Qt::WA_DeleteOnClose, true );
     Bee::setWindowStaysOnTop( mp_fileSharing, Settings::instance().stayOnTop() );
+    mp_fileSharing->resize( 620, 460 );
     mp_fileSharing->updateLocalFileList();
     connect( mp_fileSharing, SIGNAL( destroyed() ), this, SLOT( onFileSharingWindowClosed() ) );
     connect( mp_fileSharing, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -3571,7 +3587,8 @@ void GuiMain::showScreenShotWindow()
   {
     mp_screenShot = new GuiScreenShot;
     mp_screenShot->setAttribute( Qt::WA_DeleteOnClose, true );
-    mp_screenShot->resize( 640, 480 );
+    Bee::setWindowStaysOnTop( mp_screenShot, Settings::instance().stayOnTop() );
+    mp_screenShot->resize( 620, 460 );
     connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
     connect( mp_screenShot, SIGNAL( destroyed() ), this, SLOT( onScreenShotWindowClosed() ) );
   }
@@ -3590,7 +3607,8 @@ void GuiMain::showLogWindow()
   if( !mp_log )
   {
     mp_log = new GuiLog;
-    mp_log->resize( 780, 520 );
+    Bee::setWindowStaysOnTop( mp_log, Settings::instance().stayOnTop() );
+    mp_log->resize( 620, 460 );
     connect( mp_log, SIGNAL( destroyed() ), this, SLOT( onLogWindowClosed() ) );
   }
 

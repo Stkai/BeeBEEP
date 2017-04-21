@@ -67,7 +67,7 @@ bool Avatar::create()
     return false;
   }
 
-  if( m_size.width() < 14 || m_size.height() < 14 )
+  if( m_size.width() < 17 || m_size.height() < 17 )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Unable to create avatar: size is to small" << m_size.width() << m_size.height();
@@ -101,7 +101,8 @@ bool Avatar::create()
     text_to_write += sl_name.first().at( 0 ).toUpper() ;
   }
 
-  QFont f( QFont( "monospace", qMin( 128, m_size.height() ) ) );
+  QFont f( QApplication::font().family(), qMin( 128, m_size.height() ) );
+  f.setStyleHint( QFont::TypeWriter );
   f.setBold( true );
   QFontMetrics fm( f );
   int w_min_max_size = m_size.width() >= 24 ? 8 : m_size.width() >= 16 ? 4 : 3;
@@ -111,7 +112,7 @@ bool Avatar::create()
   {
     f.setPointSize( f.pointSize() - 2 );
     fm = QFontMetrics( f );
-    if( f.pointSize() < 8 )
+    if( f.pointSize() < 6 )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Unable to create avatar: font is too small for this size" << m_size.width() << m_size.height();

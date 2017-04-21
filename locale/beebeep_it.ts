@@ -224,7 +224,7 @@
     </message>
     <message>
         <source>%1 Chat with all local users.</source>
-        <translation>%1 Parla con tutti gli utenti locali.</translation>
+        <translation type="obsolete">%1 Parla con tutti gli utenti locali.</translation>
     </message>
     <message>
         <source>%1 Looking for the available users in %2...</source>
@@ -268,7 +268,7 @@
     </message>
     <message>
         <source>%1 The group has a new name: %2.</source>
-        <translation>%1 Il gruppo ha un nuovo nome: %2.</translation>
+        <translation type="obsolete">%1 Il gruppo ha un nuovo nome: %2.</translation>
     </message>
     <message>
         <source>%1 Adding in group: %2.</source>
@@ -324,11 +324,11 @@
     </message>
     <message>
         <source>%1 Members removed from the group: %2.</source>
-        <translation>%1 Membri rimossi dal gruppo: %2.</translation>
+        <translation type="obsolete">%1 Membri rimossi dal gruppo: %2.</translation>
     </message>
     <message>
         <source>%1 Members added to the group: %2.</source>
-        <translation>%1 Membri aggiunti al gruppo: %2.</translation>
+        <translation type="obsolete">%1 Membri aggiunti al gruppo: %2.</translation>
     </message>
     <message>
         <source>%1 cannot be informed that you have left the group.</source>
@@ -665,6 +665,30 @@
     <message>
         <source>%1 You have created group: %2.</source>
         <translation>%1 Hai creato il gruppo: %2.</translation>
+    </message>
+    <message>
+        <source>%1 You have created chat: %2.</source>
+        <translation>%1 Hai creato la conversazione: %2.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has changed the group name: %3.</source>
+        <translation>%1 %2 ha cambiato il nome del gruppo: %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has added members to the group: %3.</source>
+        <translation>%1 %2 ha aggiunto dei membri al gruppo: %3.</translation>
+    </message>
+    <message>
+        <source>Unknown %1</source>
+        <translation>Sconosciuto %1</translation>
+    </message>
+    <message>
+        <source>Chat with all connected users</source>
+        <translation>Parla con tutti gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>%1 Chat with %2</source>
+        <translation>%1 Parla con %2</translation>
     </message>
 </context>
 <context>
@@ -1094,7 +1118,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>You</source>
-        <translation>Te</translation>
+        <translation type="obsolete">Te</translation>
     </message>
     <message>
         <source>and</source>
@@ -1158,7 +1182,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>Members</source>
-        <translation>Membri</translation>
+        <translation type="obsolete">Membri</translation>
     </message>
     <message>
         <source>Show the members of the chat</source>
@@ -1250,7 +1274,7 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     </message>
     <message>
         <source>unread messages</source>
-        <translation>messaggi non letti</translation>
+        <translation type="obsolete">messaggi non letti</translation>
     </message>
     <message>
         <source>Print...</source>
@@ -1323,6 +1347,14 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Save window&apos;s geometry</source>
         <translation>Salva le dimensioni della finestra</translation>
+    </message>
+    <message>
+        <source>Write a message to all connected user</source>
+        <translation>Scrivi un messaggio a tutti gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>Write a message to %1</source>
+        <translation>Scrivi un messaggio a %1</translation>
     </message>
 </context>
 <context>
@@ -1743,6 +1775,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>The window geometry and state are saved</source>
         <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
+    </message>
+    <message>
+        <source>Show the bar of members</source>
+        <translation>Mostra la barra dei membri</translation>
+    </message>
+    <message>
+        <source>%1 has not read last messages</source>
+        <translation>%1 non ha letto gli ultimi messaggi</translation>
+    </message>
+    <message>
+        <source>Show the bar of group</source>
+        <translation>Mostra la barra del gruppo</translation>
     </message>
 </context>
 <context>
@@ -3030,7 +3074,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Unable to add users in this chat. Please select a group one.</source>
-        <translation>Impossibile aggiungere utenti a questa conversazione. Selezionane una di gruppo.</translation>
+        <translation type="obsolete">Impossibile aggiungere utenti a questa conversazione. Selezionane una di gruppo.</translation>
     </message>
     <message>
         <source>%1 is a your group. You can not leave the chat.</source>

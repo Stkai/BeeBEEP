@@ -33,8 +33,8 @@
 GuiHome::GuiHome( QWidget* parent )
   : QWidget( parent )
 {
-  setupUi( this );
   setObjectName( "GuiHome" );
+  setupUi( this );
   m_prev_sys_mess = "";
 
   mp_teSystem->setObjectName( "GuiSystemViewer" );
@@ -48,7 +48,6 @@ GuiHome::GuiHome( QWidget* parent )
 
   connect( mp_teSystem, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teSystem, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
-
 }
 
 void GuiHome::addSystemMessage( const ChatMessage& cm )

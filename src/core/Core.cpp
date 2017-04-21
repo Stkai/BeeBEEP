@@ -75,6 +75,8 @@ Core::Core( QObject* parent )
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_shareDesktop, SIGNAL( shareDesktopDataReady( const QByteArray& ) ), this, SLOT( onShareDesktopDataReady( const QByteArray& ) ) );
 #endif
+
+  QMetaObject::invokeMethod( this, "loadUsersAndGroups", Qt::QueuedConnection );
 }
 
 bool Core::checkSavingPaths()

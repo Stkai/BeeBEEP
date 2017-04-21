@@ -92,24 +92,6 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   emit newChatMessage( c, cm );
 }
 
-void Core::dispatchChatMessageReadReceived( VNumber from_user_id, const Message& m )
-{
-  Chat c = findChatFromMessageData( from_user_id, m );
-  if( !c.isValid() )
-  {
-    qWarning() << "Invalid chat message read received from" << from_user_id;
-    return;
-  }
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "User" << from_user_id << "has read messages in chat" << c.name();
-#endif
-
-  c.setReadMessagesByUser( from_user_id );
-  ChatManager::instance().setChat( c );
-  emit chatReadByUser( c, from_user_id );
-}
-
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt )
 {
   Message m = Protocol::instance().systemMessage( msg );

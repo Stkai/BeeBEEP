@@ -130,9 +130,6 @@ Chat Core::createGroupChat( const QString& chat_name, const QList<VNumber>& user
 
 void Core::changeGroupChat( const User& u, VNumber chat_id, const QString& chat_name, const QList<VNumber>& members_id )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Changing group chat named" << chat_name << "by user" << qPrintable( u.path() );
-#endif
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
   {
@@ -182,6 +179,7 @@ void Core::changeGroupChat( const User& u, VNumber chat_id, const QString& chat_
 
   if( chat_changed )
   {
+    qDebug() << "Changing group chat" << chat_name << "by user" << qPrintable( u.path() );
     ChatManager::instance().setChat( c );
     emit chatChanged( c );
 
@@ -615,12 +613,12 @@ void Core::addChatHeader( Chat* p_chat )
 
   if( p_chat->isDefault() )
   {
-    header_msg = tr( "%1 Chat with all local users." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ) );
+    header_msg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), tr( "Chat with all connected users" ) );
   }
   else if( p_chat->isPrivate() )
   {
     User u = UserManager::instance().findUser( p_chat->privateUserId() );
-    header_msg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.name() );
+    header_msg = tr( "%1 Chat with %2" ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.path() );
   }
   else
   {
@@ -632,7 +630,7 @@ void Core::addChatHeader( Chat* p_chat )
         user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.accountPath() ) );
     }
 
-    header_msg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), user_string_list.join( ", " ) );
+    header_msg = tr( "%1 Chat with %2" ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), user_string_list.join( ", " ) );
   }
 
   p_chat->addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );

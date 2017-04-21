@@ -53,8 +53,10 @@ GuiLog::GuiLog( QWidget* parent )
   connect( mp_actOpenLogFilePath, SIGNAL( triggered() ), this, SLOT( openLogFilePath() ) );
 
   mp_barLog = new QToolBar( tr( "Show the log tool bar" ), this );
-  addToolBar( Qt::BottomToolBarArea, mp_barLog );
   mp_barLog->setObjectName( "GuiLogToolBar" );
+  addToolBar( Qt::BottomToolBarArea, mp_barLog );
+  mp_barLog->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_barLog->setFloatable( false );
   mp_barLog->setIconSize( Settings::instance().mainBarIconSize() );
   setupToolBar( mp_barLog );
 

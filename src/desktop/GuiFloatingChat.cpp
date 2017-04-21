@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "ChatManager.h"
+#include "Core.h"
 #include "GuiFloatingChat.h"
 #include "GuiEmoticons.h"
 #include "GuiPresetMessageList.h"
@@ -35,8 +36,8 @@
 #endif
 
 
-GuiFloatingChat::GuiFloatingChat( QWidget *parent )
- : QMainWindow( parent )
+GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
+ : QMainWindow( parent ), mp_core( p_core )
 {
   setObjectName( "GuiFloatingChat" );
   m_mainWindowIcon = QIcon( ":/images/chat-view.png" );
@@ -44,15 +45,30 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_chat = new GuiChat( this );
   connect( mp_chat, SIGNAL( saveStateAndGeometryRequest() ), this, SLOT( saveGeometryAndState() ) );
 
+  mp_barGroup = new QToolBar( tr( "Show the bar of group" ), this );
+  addToolBar( Qt::TopToolBarArea, mp_barGroup );
+  mp_barGroup->setObjectName( "GuiFloatingChatGroupToolBar" );
+  mp_barGroup->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barGroup->setAllowedAreas( Qt::AllToolBarAreas );
+  mp_barGroup->setFloatable( false );
+
+  mp_barMembers = new QToolBar( tr( "Show the bar of members" ), this );
+  addToolBar( Qt::TopToolBarArea, mp_barMembers );
+  mp_barMembers->setObjectName( "GuiFloatingChatMemberToolBar" );
+  mp_barMembers->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barMembers->setAllowedAreas( Qt::AllToolBarAreas );
+  mp_barMembers->setFloatable( false );
+
   mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
   addToolBar( Qt::BottomToolBarArea, mp_barChat );
   mp_barChat->setObjectName( "GuiFloatingChatToolBar" );
   mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barChat->setAllowedAreas( Qt::AllToolBarAreas );
-  mp_chat->setupToolBar( mp_barChat );
+  mp_chat->setupToolBars( mp_barChat, mp_barGroup );
   mp_barChat->setVisible( Settings::instance().showChatToolbar() );
-
   mp_barChat->insertSeparator( mp_barChat->actions().first() );
+  mp_barChat->setFloatable( false );
+
   mp_dockPresetMessageList = new QDockWidget( tr( "Preset messages" ), this );
   mp_dockPresetMessageList->setObjectName( "GuiDockPresetMessageList" );
   mp_presetMessageListWidget = new GuiPresetMessageList( this );
@@ -139,10 +155,77 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
   setWindowTitle( window_title );
 }
 
+void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
+{
+  if( !mp_barMembers->isEnabled() )
+    return;
+
+  QAction* act_user = 0;
+  QList<QAction*> member_actions = mp_barMembers->actions();
+  foreach( QAction* act, member_actions )
+  {
+    if( u.id() == Bee::qVariantToVNumber( act->data() ) )
+    {
+      act_user = act;
+      break;
+    }
+  }
+
+  if( !act_user )
+  {
+    act_user = mp_barMembers->addAction( u.name(), this, SLOT( onGroupMemberActionTriggered() ) );
+    act_user->setData( u.id() );
+  }
+
+  act_user->setText( u.name() );
+  int avatar_size = qMax( mp_barMembers->iconSize().width(), 96 );
+  act_user->setIcon( Bee::avatarForUser( u, QSize( avatar_size, avatar_size ), Settings::instance().showUserPhoto() ) );
+  QString user_tooltip = Bee::toolTipForUser( u, true );
+  if( !u.isLocal() && u.protocolVersion() >= 63 && !c.userHasReadMessages( u.id() ) )
+    user_tooltip += tr( "%1 has not read last messages" ).arg( u.name() );
+
+  act_user->setToolTip( user_tooltip.trimmed() );
+  act_user->setEnabled( u.isStatusConnected() );
+}
+
+void GuiFloatingChat::updateChatMembers( const Chat& c )
+{
+  mp_barGroup->setVisible( c.isGroup() );
+  mp_barGroup->setEnabled( c.isGroup() );
+  mp_barMembers->setVisible( !c.isDefault() );
+  mp_barMembers->setEnabled( !c.isDefault() );
+
+  if( mp_barMembers->isEnabled() )
+  {
+    mp_barMembers->clear();
+    mp_barMembers->show();
+
+    UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
+    foreach( User u, ul.toList() )
+      updateChatMember( c, u );
+  }
+}
+
 bool GuiFloatingChat::setChat( const Chat& c )
 {
-  updateChatTitle( c );
-  return mp_chat->setChat( c );
+  if( mp_chat->setChat( c ) )
+  {
+    updateChatTitle( c );
+    updateChatMembers( c );
+    mp_chat->updateShortcuts();
+    mp_chat->updateActions( c, mp_core->isConnected(), mp_core->connectedUsers() );
+    return true;
+  }
+  else
+    return false;
+}
+
+void GuiFloatingChat::updateActions( bool is_connected, int connected_users )
+{
+  Chat c = ChatManager::instance().chat( mp_chat->chatId() );
+  if( !c.isValid() )
+    return;
+  mp_chat->updateActions( c, is_connected, connected_users );
 }
 
 void GuiFloatingChat::updateUser( const User& u )
@@ -154,7 +237,7 @@ void GuiFloatingChat::updateUser( const User& u )
   if( c.isPrivateForUser( u.id() ) )
     updateChatTitle( c );
 
-  mp_chat->updateUsers( c );
+  updateChatMember( c, u );
 }
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )
@@ -177,18 +260,22 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 
   if( !Settings::instance().floatingChatGeometry().isEmpty() )
     restoreGeometry( Settings::instance().floatingChatGeometry() );
+  else
+    resize( 560, 380 );
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
   if( Settings::instance().floatingChatSplitterState().isEmpty() )
   {
     int central_widget_height = centralWidget()->size().height();
     QList<int> splitter_size_list;
-    splitter_size_list.append( central_widget_height - 80);
+    splitter_size_list.append( central_widget_height - 80 );
     splitter_size_list.append( 80 );
     chat_splitter->setSizes( splitter_size_list );
   }
   else
     chat_splitter->restoreState( Settings::instance().floatingChatSplitterState() );
+
+  mp_chat->ensureLastMessageVisible();
 }
 
 void GuiFloatingChat::showUp()
@@ -324,4 +411,30 @@ void GuiFloatingChat::toggleVisibilityPresetMessagesPanel()
     mp_dockPresetMessageList->hide();
   else
     mp_dockPresetMessageList->show();
+}
+
+void GuiFloatingChat::onGroupMemberActionTriggered()
+{
+  QAction *act = qobject_cast<QAction*>( sender() );
+  if( act )
+  {
+    VNumber user_id = Bee::qVariantToVNumber( act->data() );
+    emit showVCardRequest( user_id );
+  }
+}
+
+void GuiFloatingChat::setChatReadByUser( const Chat& c, const User& u )
+{
+  if( c.id() == mp_chat->chatId() )
+    updateChatMember( c, u );
+}
+
+void GuiFloatingChat::showChatMessage( const Chat& c, const ChatMessage& cm )
+{
+  User u = UserManager::instance().findUser( cm.userId() );
+  if( mp_chat->appendChatMessage( c, u, cm ) )
+  {
+    if( cm.isFromLocalUser() && !cm.isFromSystem() )
+      updateChatMembers( c );
+  }
 }

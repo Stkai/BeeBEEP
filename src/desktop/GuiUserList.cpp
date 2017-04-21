@@ -31,6 +31,7 @@
 GuiUserList::GuiUserList( QWidget* parent )
   : QWidget( parent )
 {
+  setObjectName( "GuiUserList" );
   setupUi( this );
 
 #ifdef Q_OS_MAC
@@ -38,7 +39,6 @@ GuiUserList::GuiUserList( QWidget* parent )
   gridLayout->setVerticalSpacing( -1 );
 #endif
 
-  setObjectName( "GuiUserList" );
   mp_menuSettings = 0;
 
   mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu );

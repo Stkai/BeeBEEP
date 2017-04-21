@@ -25,16 +25,16 @@
 #define BEEBEEP_GUIFLOATINGCHAT_H
 
 #include "GuiChat.h"
+class Core;
 class GuiEmoticons;
 class GuiPresetMessageList;
-
 
 class GuiFloatingChat : public QMainWindow
 {
   Q_OBJECT
 
 public:
-  GuiFloatingChat( QWidget* parent = 0 );
+  GuiFloatingChat( Core*, QWidget* parent = 0 );
 
   bool setChat( const Chat& );
   inline GuiChat* guiChat() const;
@@ -43,6 +43,9 @@ public:
   void setMainIcon( bool with_message );
   void updateUser( const User& );
   void setFocusInChat();
+  void updateActions( bool is_connected, int connected_users );
+  void setChatReadByUser( const Chat&, const User& );
+  void showChatMessage( const Chat&, const ChatMessage& );
 
 public slots:
   void updateEmoticon();
@@ -57,16 +60,22 @@ protected:
   void closeEvent( QCloseEvent* );
   void keyPressEvent( QKeyEvent* );
   void updateChatTitle( const Chat& );
+  void updateChatMembers( const Chat& );
+  void updateChatMember( const Chat&, const User& );
 
 private slots:
   void onApplicationFocusChanged( QWidget*, QWidget* );
   void saveGeometryAndState();
   void toggleVisibilityEmoticonPanel();
   void toggleVisibilityPresetMessagesPanel();
+  void onGroupMemberActionTriggered();
 
 private:
+  Core* mp_core;
   GuiChat* mp_chat;
   QToolBar* mp_barChat;
+  QToolBar* mp_barMembers;
+  QToolBar* mp_barGroup;
   QDockWidget* mp_dockEmoticons;
   QDockWidget* mp_dockPresetMessageList;
   GuiEmoticons* mp_emoticonsWidget;

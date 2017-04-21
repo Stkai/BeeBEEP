@@ -258,10 +258,8 @@ void Core::parseGroupMessage( const User& u, const Message& m )
         user_tmp = Protocol::instance().createTemporaryUser( user_path, "" );
         if( user_tmp.isValid() )
         {
-          qDebug() << "Connecting to the temporary user" << user_path;
           UserManager::instance().setUser( user_tmp );
           ul.set( user_tmp );
-          newPeerFound( user_tmp.networkAddress().hostAddress(), user_tmp.networkAddress().hostPort() );
         }
       }
     }
@@ -271,10 +269,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
     if( group_chat.isValid() )
     {
       if( group_chat.usersId().contains( ID_LOCAL_USER ) )
-      {
-        qDebug() << qPrintable( u.path() ) << "has requested to change chat" << group_chat.name();
         changeGroupChat( u, group_chat.id(), cmd.groupName(), ul.toUsersId() );
-      }
       else
         sendGroupChatRefuseMessage( group_chat, ul );
     }
@@ -372,10 +367,20 @@ void Core::parseFolderMessage( const User& u, const Message& m )
 
 void Core::parseChatReadMessage( const User& u, const Message& m )
 {
+  Chat c = findChatFromMessageData( u.id(), m );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat message read received from" << qPrintable( u.path() );
+    return;
+  }
+
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Message" << m.id() << "read from user" << qPrintable( u.path() );
+  qDebug() << "User" << qPrintable( u.path() ) << "has read messages in chat" << c.name();
 #endif
-  dispatchChatMessageReadReceived( u.id(), m );
+
+  c.setReadMessagesByUser( u.id() );
+  ChatManager::instance().setChat( c );
+  emit chatReadByUser( c, u );
 }
 
 void Core::parseHiveMessage( const User& u, const Message& m )

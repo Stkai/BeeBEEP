@@ -57,11 +57,10 @@ class GuiMain : public QMainWindow
 
 public:
   GuiMain( QWidget* parent = 0 );
-  void checkWindowFlagsAndShow();
-
-  void loadSession();
 
 public slots:
+  void loadSession();
+  void checkWindowFlagsAndShow();
   void startStopCore();
   void forceShutdown();
   void hideToTrayIcon();
@@ -112,7 +111,7 @@ private slots:
   void selectBeepFile();
   void testBeepFile();
   void playBeep();
-  void editGroupFromChat( VNumber );
+  void editChat( VNumber );
   void createChat();
   void createGroup();
   void editGroup( VNumber );
@@ -156,7 +155,7 @@ private slots:
   void selectDictionatyPath();
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
-  void onChatReadByUser( const Chat&, VNumber user_id );
+  void onChatReadByUser( const Chat&, const User& );
   void saveGeometryAndState();
   void onChangeSettingOnExistingFile( QAction* );
   void onShareBoxRequest( VNumber, const QString& );

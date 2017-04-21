@@ -37,6 +37,7 @@ public:
 
   inline void addUrl( const QUrl& );
   inline const QStringList& downloadedFilePaths() const;
+  inline void setOverwriteExistingFiles( bool );
 
 public slots:
   void startDownload();
@@ -60,11 +61,13 @@ private:
   QNetworkAccessManager* mp_manager;
   QList<QUrl> m_queuedUrls;
   QStringList m_downloadedFilePaths;
+  bool m_overwriteExistingFiles;
 
 };
 
 // Inline Functions
 inline void HttpDownloader::addUrl( const QUrl& new_value ) { m_queuedUrls.append( new_value ); }
 inline const QStringList& HttpDownloader::downloadedFilePaths() const { return m_downloadedFilePaths; }
+inline void HttpDownloader::setOverwriteExistingFiles( bool new_value ) { m_overwriteExistingFiles = new_value; }
 
 #endif // BEEBEEP_DOWNLOADER_H

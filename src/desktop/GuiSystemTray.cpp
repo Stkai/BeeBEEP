@@ -26,7 +26,7 @@
 
 
 GuiSystemTray::GuiSystemTray( QObject *parent )
-  : QSystemTrayIcon( parent ), m_iconStatus( -1 ), m_chatId( ID_DEFAULT_CHAT )
+  : QSystemTrayIcon( parent ), m_iconStatus( -1 ), m_chatId( ID_INVALID )
 {
   setDefaultIcon();
 }

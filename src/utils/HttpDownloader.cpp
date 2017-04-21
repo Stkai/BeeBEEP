@@ -27,7 +27,7 @@
 
 
 HttpDownloader::HttpDownloader( QObject* parent )
- : QObject( parent ), m_queuedUrls(), m_downloadedFilePaths()
+ : QObject( parent ), m_queuedUrls(), m_downloadedFilePaths(), m_overwriteExistingFiles( false )
 {
   setObjectName( "HttpDownloader" );
   mp_manager = new QNetworkAccessManager( this );
@@ -44,7 +44,7 @@ QString HttpDownloader::filePathFromUrl( const QUrl& url )
 {
   QString file_name = fileNameFromUrl( url );
   QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory() ).arg( file_name ) );
-  return Bee::uniqueFilePath( file_path_tmp );
+  return m_overwriteExistingFiles ? file_path_tmp : Bee::uniqueFilePath( file_path_tmp );
 }
 
 void HttpDownloader::startDownload()

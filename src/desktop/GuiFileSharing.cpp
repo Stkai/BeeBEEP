@@ -59,6 +59,7 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   mp_barView = addToolBar( tr( "Show the view tool bar" ) );
   mp_barView->setObjectName( "GuiViewToolBar" );
   mp_barView->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barView->setFloatable( false );
 
   createActions();
   createToolbars();
@@ -89,8 +90,6 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   connect( mp_shareBox, SIGNAL( shareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ) );
 
   initGuiItems();
-
-  setMinimumWidth( 620 );
 }
 
 void GuiFileSharing::keyPressEvent( QKeyEvent* e )
@@ -165,6 +164,7 @@ void GuiFileSharing::createStackedWidgets()
   mp_barShareLocal->setObjectName( "GuiShareLocalToolBar" );
   mp_barShareLocal->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barShareLocal->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_barShareLocal->setFloatable( false );
   mp_shareLocal->setupToolBar( mp_barShareLocal );
   act = mp_barShareLocal->toggleViewAction();
   act->setEnabled( false );
@@ -176,6 +176,7 @@ void GuiFileSharing::createStackedWidgets()
   mp_barShareNetwork->setObjectName( "GuiShareNetworkToolBar" );
   mp_barShareNetwork->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barShareNetwork->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_barShareNetwork->setFloatable( false );
   mp_shareNetwork->setupToolBar( mp_barShareNetwork );
   act = mp_barShareNetwork->toggleViewAction();
   act->setEnabled( false );

@@ -74,9 +74,6 @@ public:
   bool removeOfflineUser( VNumber );
   void changeUserColor( VNumber, const QString& );
 
-  void loadUsersAndGroups();
-  void saveUsersAndGroups();
-
   /* CoreChat */
   void createPrivateChat( const User& );
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
@@ -141,7 +138,7 @@ signals:
   void userIsWriting( const User&, VNumber );
   void chatChanged( const Chat& );
   void newChatMessage( const Chat&, const ChatMessage& );
-  void chatReadByUser( const Chat&, VNumber user_id );
+  void chatReadByUser( const Chat&, const User& );
   void fileDownloadRequest( const User&, const FileInfo& );
   void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
@@ -166,6 +163,10 @@ signals:
 protected slots:
   void onUpdaterJobCompleted();
   void onPostUsageStatisticsJobCompleted();
+
+  /* CoreUser */
+  void loadUsersAndGroups();
+  void saveUsersAndGroups();
 
   /* CoreConnection */
   void checkNewConnection( qintptr );
@@ -241,7 +242,6 @@ protected:
   Chat findChatFromMessageData( VNumber from_user_id, const Message& );
   void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType, ChatMessage::Type );
   void dispatchChatMessageReceived( VNumber from_user_id, const Message& );
-  void dispatchChatMessageReadReceived( VNumber from_user_id, const Message& );
   void dispatchToAllChats( const ChatMessage& );
   void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );
   void dispatchToChat( const ChatMessage&, VNumber chat_id );

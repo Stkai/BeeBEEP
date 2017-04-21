@@ -38,20 +38,16 @@ class GuiChat : public QWidget, private Ui::GuiChatWidget
 public:
   GuiChat( QWidget* parent = 0 );
 
-  void setupToolBar( QToolBar* );
-  void updateActions( bool is_connected, int connected_users );
+  void setupToolBars( QToolBar* chat_bar, QToolBar* group_bar );
+  void updateActions( const Chat&, bool is_connected, int connected_users );
 
   bool setChat( const Chat& );
   inline VNumber chatId() const;
   void ensureLastMessageVisible();
-  void setChatReadByUser( const Chat&, VNumber );
-  void updateUsers( const Chat& );
-
   void updateShortcuts();
   void updateActionsOnFocusChanged();
   void setChatFont( const QFont& );
-
-  void appendChatMessage( const Chat&, const ChatMessage& );
+  bool appendChatMessage( const Chat&, const User&, const ChatMessage& );
 
   inline QSplitter* chatSplitter() const;
 
@@ -66,7 +62,6 @@ signals:
   void chatToClear( VNumber );
   void leaveThisChat( VNumber );
   void showChatMenuRequest();
-  void showVCardRequest( VNumber );
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
@@ -89,7 +84,6 @@ protected:
   void updateSpellCheckerToolTip();
   void updateCompleterToolTip();
   void updateUseReturnKeyToSendMessageToolTip();
-  void checkChatDisabled( const Chat& );
 
 private slots:
   void sendMessage();
@@ -106,8 +100,6 @@ private slots:
   void leaveThisGroup();
   void sendFile();
   void sendFolder();
-  void showUserVCard();
-  void showLocalUserVCard();
   void showGroupWizard();
   void editChatMembers();
   void checkAndSendUrls( const QMimeData* );
@@ -119,18 +111,15 @@ private slots:
   void showFindTextInChatDialog();
   void findNextTextInChat();
   void openSelectedTextAsUrl();
-  void showMembersMenu();
 
 protected:
   void findTextInChat( const QString& );
   void updateChat();
-  void updateMenuMembers( const Chat& );
 
 private:
   VNumber m_chatId;
   VNumber m_lastMessageUserId;
 
-  QMenu* mp_menuMembers;
   QMenu* mp_menuContext;
   QMenu* mp_menuFilters;
   QAction* mp_actSendFile;
