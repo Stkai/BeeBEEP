@@ -954,9 +954,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
   mp_barMain->addAction( mp_actViewFileSharing );
-#ifdef Q_OS_UNIX
-  mp_barMain->addAction( mp_menuSettings->menuAction() );
-#endif
 
   mp_barPanel->addAction( mp_actViewHome );
   mp_barPanel->addAction( mp_actViewUsers );
