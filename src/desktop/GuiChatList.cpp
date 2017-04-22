@@ -25,6 +25,7 @@
 #include "GuiConfig.h"
 #include "ChatManager.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
 GuiChatList::GuiChatList( QWidget* parent )
@@ -118,7 +119,11 @@ void GuiChatList::showChatMenu( const QPoint& p )
   if( !item )
   {
     QMenu menu_create_chat;
-    menu_create_chat.addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
+    if( UserManager::instance().userList().toList().size() < 2 )
+      menu_create_chat.addAction( QIcon( ":/images/group-remove.png" ), tr( "Waiting for two or more connected user" ) );
+    else
+      menu_create_chat.addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
+
     menu_create_chat.exec( QCursor::pos() );
     return;
   }

@@ -36,10 +36,10 @@ MulticastGroupAddress=(String "" Host Address) if not empty MulticastGroup is ad
 EnableChatWithAllUsers=[true/false] if enabled you can chat with all users connected by default (default=true)
 UseHive=[true/false] enable HIVE protocol. BeeBEEPs tell each other their connected users (default=true) [3.0.4]
 UseHostnameForDefaultUsername=[true/false] if enabled BeeBEEP uses hostname as default username at first startup (default=false) [3.0.6]
-HideMainToolbar=[true/false] If enabled BeeBEEP hide the main toolbar at startup (default=false) [3.0.6]
-HideChatToolbar=[true/false] If enabled BeeBEEP hide the chat toolbar startup (default=false) [3.0.6]
-HideUsersPanel=[true/false] If enabled BeeBEEP hide users panel at startup (default=false) [3.0.6]
-HideOtherPanels=[true/false] If enabled BeeBEEP hide all other panels at startup (default=false) [3.0.6]
+HideMainToolbar=[true/false] If enabled BeeBEEP hide the main toolbar at startup (default=false) [3.0.6] [obsolete 3.2.0]
+HideChatToolbar=[true/false] If enabled BeeBEEP hide the chat toolbar startup (default=false) [3.0.6] [obsolete 3.2.0]
+HideUsersPanel=[true/false] If enabled BeeBEEP hide users panel at startup (default=false) [3.0.6] [obsolete 3.2.0]
+HideOtherPanels=[true/false] If enabled BeeBEEP hide all other panels at startup (default=false) [3.0.6] [obsolete 3.2.0]
 DisableFileTransfer=[true/false] disable file transfer (default=false) [3.0.6]
 DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read only messenger (default=false) [3.0.6]
 UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session

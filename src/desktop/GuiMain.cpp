@@ -81,6 +81,11 @@ GuiMain::GuiMain( QWidget *parent )
   // Create a status bar before the actions and the menu
   (void) statusBar();
 
+  mp_tabMain = new QTabWidget( this );
+  mp_tabMain->setObjectName( "GuiTabMain" );
+  mp_tabMain->setTabPosition( QTabWidget::South );
+  setCentralWidget( mp_tabMain );
+
   mp_fileSharing = 0;
   mp_screenShot = 0;
   mp_log = 0;
@@ -90,11 +95,6 @@ GuiMain::GuiMain( QWidget *parent )
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
 
-  mp_barPanel = addToolBar( tr( "Show the panel tool bar" ) );
-  mp_barPanel->setObjectName( "GuiPanelToolBar" );
-  mp_barPanel->setIconSize( Settings::instance().mainBarIconSize() );
-  addToolBar( Qt::BottomToolBarArea, mp_barPanel );
-
   mp_trayIcon = new GuiSystemTray( this );
 
   m_lastUserStatus = User::Online;
@@ -103,7 +103,7 @@ GuiMain::GuiMain( QWidget *parent )
   m_prevActivatedState = true;
 
   createActions();
-  createDockWindows();
+  createMainWidgets();
   createMenus();
   createToolAndMenuBars();
   createPluginWindows();
@@ -210,7 +210,12 @@ void GuiMain::checkWindowFlagsAndShow()
   if( !isVisible() )
     show();
 
-  if( !Settings::instance().guiGeometry().isEmpty() )
+  if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
+  {
+    resize( width()+12, qMax( QApplication::desktop()->screenGeometry().height() - 120, 560 ) );
+    move( QApplication::desktop()->screenGeometry().width() - width() - 10, 30 );
+  }
+  else
   {
     if( !Settings::instance().guiState().isEmpty() )
       restoreState( Settings::instance().guiState() );
@@ -218,8 +223,6 @@ void GuiMain::checkWindowFlagsAndShow()
   }
 
   checkViewActions();
-  mp_barMain->setVisible( !Settings::instance().hideMainToolbar() );
-  mp_barPanel->setVisible( !Settings::instance().hideMainToolbar() );
 
   if( Settings::instance().loadOnTrayAtStartup() && QSystemTrayIcon::isSystemTrayAvailable() )
   {
@@ -362,12 +365,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
   mp_trayIcon->hide();
 
-  if( mp_dockGroupList->isFloating() && mp_dockGroupList->isVisible() )
-    mp_dockGroupList->hide();
-  if( mp_dockSavedChatList->isFloating() && mp_dockSavedChatList->isVisible() )
-    mp_dockSavedChatList->hide();
-  if( mp_dockChatList->isFloating() && mp_dockChatList->isVisible() )
-    mp_dockChatList->hide();
+  if( mp_dockHome->isFloating() && mp_dockHome->isVisible() )
+    mp_dockHome->hide();
   if( mp_dockFileTransfers->isFloating() && mp_dockFileTransfers->isVisible() )
     mp_dockFileTransfers->hide();
 
@@ -552,8 +551,6 @@ void GuiMain::createActions()
 
   mp_actMainToolBar = mp_barMain->toggleViewAction();
   mp_actMainToolBar->setData( 99 );
-  mp_actPanelToolBar = mp_barPanel->toggleViewAction();
-  mp_actPanelToolBar->setData( 99 );
 
   mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setMenuRole( QAction::AboutRole );
@@ -830,18 +827,13 @@ void GuiMain::createMenus()
   /* View Menu */
   mp_menuView = new QMenu( tr( "View" ), this );
   mp_menuView->addAction( mp_actMainToolBar );
-  mp_menuView->addAction( mp_actPanelToolBar );
   mp_menuView->addSeparator();
+  mp_menuView->addAction( mp_actViewHome );
   mp_actViewNewMessage = mp_menuView->addAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this, SLOT( showNextChat() ) );
+  mp_menuView->addAction( mp_actViewFileTransfer );
   mp_actViewFileSharing = mp_menuView->addAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this, SLOT( showFileSharingWindow() ) );
   mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( showLogWindow() ) );
   mp_menuView->addAction( mp_actViewScreenShot );
-  mp_menuView->addSeparator();
-  mp_menuView->addAction( mp_actViewHome );
-  mp_menuView->addAction( mp_actViewUsers );
-  mp_menuView->addAction( mp_actViewGroups );
-  mp_menuView->addAction( mp_actViewSavedChats );
-  mp_menuView->addAction( mp_actViewFileTransfer );
   mp_menuView->addSeparator();
   mp_menuView->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
 
@@ -953,68 +945,37 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
+  mp_barMain->addAction( mp_actViewHome );
+  mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
-
-  mp_barPanel->addAction( mp_actViewHome );
-  mp_barPanel->addAction( mp_actViewUsers );
-  mp_barPanel->addAction( mp_actViewChats );
-  mp_barPanel->addAction( mp_actViewGroups );
-  mp_barPanel->addAction( mp_actViewSavedChats );
-  mp_barPanel->addAction( mp_actViewFileTransfer );
 }
 
-void GuiMain::createDockWindows()
+void GuiMain::createMainWidgets()
 {
-  mp_dockUserList = new QDockWidget( tr( "Users" ), this );
-  mp_dockUserList->setObjectName( "GuiUserListDock" );
-  mp_userList = new GuiUserList( mp_dockUserList );
-  mp_dockUserList->setWidget( mp_userList );
-  mp_dockUserList->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, mp_dockUserList );
-  mp_actViewUsers = mp_dockUserList->toggleViewAction();
-  mp_actViewUsers->setIcon( QIcon( ":/images/user-list.png" ) );
-  mp_actViewUsers->setText( tr( "Show the user panel" ) );
-  mp_actViewUsers->setData( 99 );
-
-  mp_dockGroupList = new QDockWidget( tr( "Groups" ), this );
-  mp_dockGroupList->setObjectName( "GuiGroupListDock" );
-  mp_groupList = new GuiGroupList( mp_dockGroupList );
-  mp_dockGroupList->setWidget( mp_groupList );
-  mp_dockGroupList->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, mp_dockGroupList );
-  mp_actViewGroups = mp_dockGroupList->toggleViewAction();
-  mp_actViewGroups->setIcon( QIcon( ":/images/group.png" ) );
-  mp_actViewGroups->setText( tr( "Show the group panel" ) );
-  mp_actViewGroups->setData( 99 );
-
-  mp_dockChatList = new QDockWidget( tr( "Chats" ), this );
-  mp_dockChatList->setObjectName( "GuiChatListDock" );
+  int tab_index;
+  mp_userList = new GuiUserList( this );
+  mp_userList->setToolTip( tr( "Users" ) );
+  tab_index = mp_tabMain->addTab( mp_userList, QIcon( ":/images/user-list.png" ), "" );
+  mp_tabMain->setTabToolTip( tab_index , mp_userList->toolTip() );
   mp_chatList = new GuiChatList( this );
-  mp_dockChatList->setWidget( mp_chatList );
-  mp_dockChatList->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, mp_dockChatList );
-  mp_actViewChats = mp_dockChatList->toggleViewAction();
-  mp_actViewChats->setIcon( QIcon( ":/images/chat-list.png" ) );
-  mp_actViewChats->setText( tr( "Show the chat panel" ) );
-  mp_actViewChats->setData( 99 );
-
-  mp_dockSavedChatList = new QDockWidget( tr( "History" ), this );
-  mp_dockSavedChatList->setObjectName( "GuiSavedChatListDock" );
+  mp_chatList->setToolTip( tr( "Chats" ) );
+  tab_index = mp_tabMain->addTab( mp_chatList, QIcon( ":/images/chat-list.png" ), "" );
+  mp_tabMain->setTabToolTip( tab_index , mp_chatList->toolTip() );
+  mp_groupList = new GuiGroupList( this );
+  mp_groupList->setToolTip( tr( "Groups" ) );
+  tab_index = mp_tabMain->addTab( mp_groupList, QIcon( ":/images/group.png" ), "" );
+  mp_tabMain->setTabToolTip( tab_index , mp_groupList->toolTip() );
   mp_savedChatList = new GuiSavedChatList( this );
-  mp_dockSavedChatList->setWidget( mp_savedChatList );
-  mp_dockSavedChatList->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, mp_dockSavedChatList );
-  mp_actViewSavedChats = mp_dockSavedChatList->toggleViewAction();
-  mp_actViewSavedChats->setIcon( QIcon( ":/images/saved-chat-list.png" ) );
-  mp_actViewSavedChats->setText( tr( "Show the history panel" ) );
-  mp_actViewSavedChats->setData( 99 );
+  mp_savedChatList->setToolTip( tr( "Chat histories" ) );
+  tab_index = mp_tabMain->addTab( mp_savedChatList, QIcon( ":/images/saved-chat-list.png" ), "" );
+  mp_tabMain->setTabToolTip( tab_index , mp_savedChatList->toolTip() );
 
   mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
   mp_dockFileTransfers->setObjectName( "GuiFileTransferDock" );
   mp_fileTransfer = new GuiTransferFile( this );
   mp_dockFileTransfers->setWidget( mp_fileTransfer );
   mp_dockFileTransfers->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::BottomDockWidgetArea, mp_dockFileTransfers );
+  addDockWidget( Qt::TopDockWidgetArea, mp_dockFileTransfers );
   mp_actViewFileTransfer = mp_dockFileTransfers->toggleViewAction();
   mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
@@ -1022,29 +983,21 @@ void GuiMain::createDockWindows()
 
   mp_dockHome = new QDockWidget( tr( "Activities" ), this );
   mp_dockHome->setObjectName( "GuiHomeDock" );
-  mp_home = new GuiHome( mp_dockHome );
+  mp_home = new GuiHome( this );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   mp_dockHome->setWidget( mp_home );
   mp_dockHome->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::RightDockWidgetArea, mp_dockHome );
+  addDockWidget( Qt::BottomDockWidgetArea, mp_dockHome );
   mp_actViewHome = mp_dockHome->toggleViewAction();
   mp_actViewHome->setIcon( QIcon( ":/images/activities.png" ) );
   mp_actViewHome->setText( tr( "Show the activity panel" ) );
   mp_actViewHome->setData( 99 );
 
-  if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() || Settings::instance().hideOtherPanels() )
+  if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() )
   {
-    mp_dockGroupList->hide();
-    mp_dockSavedChatList->hide();
+    mp_tabMain->setCurrentWidget( mp_userList );
     mp_dockFileTransfers->hide();
-    if( Settings::instance().hideOtherPanels() )
-    {
-      mp_dockHome->hide();
-      mp_dockChatList->hide();
-    }
   }
-
-  mp_dockUserList->setVisible( !Settings::instance().hideUsersPanel() );
 }
 
 

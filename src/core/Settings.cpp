@@ -81,10 +81,6 @@ Settings::Settings()
   m_checkNewVersionAtStartup = true;
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;
-  m_hideMainToolbar = false;
-  m_hideChatToolbar = false;
-  m_hideUsersPanel = false;
-  m_hideOtherPanels = false;
   m_useEasyConnection = false;
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
@@ -266,10 +262,6 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "EnableChatWithAllUsers", m_useChatWithAllUsers );
     sets->setValue( "UseHive", m_useHive );
     sets->setValue( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername );
-    sets->setValue( "HideMainToolbar", m_hideMainToolbar );
-    sets->setValue( "HideChatToolbar", m_hideChatToolbar );
-    sets->setValue( "HideUsersPanel", m_hideUsersPanel );
-    sets->setValue( "HideOtherPanels", m_hideOtherPanels );
     sets->setValue( "DisableFileTransfer", m_disableFileTransfer );
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
@@ -338,10 +330,6 @@ void Settings::loadRcFile()
   m_useChatWithAllUsers = sets->value( "EnableChatWithAllUsers", m_useChatWithAllUsers ).toBool();
   m_useHive = sets->value( "UseHive", m_useHive ).toBool();
   m_useHostnameForDefaultUsername = sets->value( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername ).toBool();
-  m_hideMainToolbar = sets->value( "HideMainToolbar", m_hideMainToolbar ).toBool();
-  m_hideChatToolbar = sets->value( "HideChatToolbar", m_hideChatToolbar ).toBool();
-  m_hideUsersPanel = sets->value( "HideUsersPanel", m_hideUsersPanel ).toBool();
-  m_hideOtherPanels = sets->value( "HideOtherPanels", m_hideOtherPanels ).toBool();
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
 #else
@@ -875,7 +863,7 @@ void Settings::load()
   sets->beginGroup( "Gui" );
   m_resetGeometryAtStartup = sets->value( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
 
-  if( m_resetGeometryAtStartup ||  m_settingsVersion < 7 || !qt_is_compatible )
+  if( m_resetGeometryAtStartup ||  m_settingsVersion < 8 || !qt_is_compatible )
   {
     m_guiGeometry = "";
     m_guiState = "";
@@ -930,10 +918,7 @@ void Settings::load()
   m_showFileTransferCompletedOnTray = sets->value( "ShowFileTransferCompletedOnTray", true ).toBool();
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
-  if( m_hideChatToolbar )
-    m_showChatToolbar = false;
-  else
-    m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
+  m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
@@ -1201,10 +1186,7 @@ void Settings::save()
   sets->setValue( "ShowFileTransferCompletedOnTray", m_showFileTransferCompletedOnTray );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
-  if( m_hideChatToolbar ) // to make the bar appears when rc option is disabled
-    sets->remove( "ShowChatToolbar" );
-  else
-    sets->setValue( "ShowChatToolbar", m_showChatToolbar );
+  sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );

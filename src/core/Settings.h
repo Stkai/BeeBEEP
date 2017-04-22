@@ -99,12 +99,6 @@ public:
 
   inline bool disablePrivateChats() const;
 
-  inline bool hideMainToolbar() const;
-  inline bool hideChatToolbar() const;
-  inline bool hideUsersPanel() const;
-  inline bool hideOtherPanels() const;
-  inline bool hideAllPanels() const;
-
   inline bool disableFileTransfer() const;
   inline bool disableSendMessage() const;
   inline bool useEasyConnection() const;
@@ -476,10 +470,6 @@ private:
   bool m_useHive;
   bool m_enableSaveData;
   bool m_useHostnameForDefaultUsername;
-  bool m_hideMainToolbar;
-  bool m_hideChatToolbar;
-  bool m_hideUsersPanel;
-  bool m_hideOtherPanels;
   bool m_disableFileTransfer;
   bool m_disableSendMessage;
   bool m_useEasyConnection;
@@ -908,10 +898,6 @@ inline int Settings::textSizeInChatMessagePreviewOnTray() const { return m_textS
 inline void Settings::setShowFileTransferCompletedOnTray( bool new_value ) { m_showFileTransferCompletedOnTray = new_value; }
 inline bool Settings::showFileTransferCompletedOnTray() const { return m_showFileTransferCompletedOnTray; }
 inline bool Settings::useLowDelayOptionOnSocket() const { return m_useLowDelayOptionOnSocket; }
-inline bool Settings::hideMainToolbar() const { return m_hideMainToolbar; }
-inline bool Settings::hideChatToolbar() const { return m_hideChatToolbar; }
-inline bool Settings::hideUsersPanel() const { return m_hideUsersPanel; }
-inline bool Settings::hideOtherPanels() const { return m_hideOtherPanels; }
 inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer; }
 inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
 inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }

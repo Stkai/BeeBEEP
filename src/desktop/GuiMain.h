@@ -36,7 +36,6 @@ class ChatMessage;
 class GameInterface;
 class GuiChat;
 class GuiChatList;
-class GuiEmoticons;
 class GuiFileSharing;
 class GuiFloatingChat;
 class GuiGroupList;
@@ -194,7 +193,7 @@ private:
   void createActions();
   void createMenus();
   void createToolAndMenuBars();
-  void createDockWindows();
+  void createMainWidgets();
   void createPluginWindows();
   void refreshUserList();
   void updateWindowTitle();
@@ -224,6 +223,7 @@ private:
   void updateNewMessageAction();
 
 private:
+  QTabWidget* mp_tabMain;
   GuiTransferFile* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
@@ -250,7 +250,6 @@ private:
   QMenu* mp_menuUserStatusList;
 
   QToolBar* mp_barMain;
-  QToolBar* mp_barPanel;
 
   QAction* mp_actStartStopCore;
   QAction* mp_actConfigureNetwork;
@@ -258,14 +257,8 @@ private:
   QAction* mp_actQuit;
   QAction* mp_actVCard;
   QAction* mp_actMainToolBar;
-  QAction* mp_actPanelToolBar;
-  QAction* mp_actChatBar;
   QAction* mp_actAbout;
-  QAction* mp_actViewUsers;
   QAction* mp_actViewFileTransfer;
-  QAction* mp_actViewSavedChats;
-  QAction* mp_actViewChats;
-  QAction* mp_actViewGroups;
   QAction* mp_actViewNewMessage;
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
@@ -292,10 +285,7 @@ private:
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   QAction* mp_actMulticastDns;
 #endif
-  QDockWidget* mp_dockUserList;
-  QDockWidget* mp_dockGroupList;
-  QDockWidget* mp_dockSavedChatList;
-  QDockWidget* mp_dockChatList;
+
   QDockWidget* mp_dockFileTransfers;
   QDockWidget* mp_dockHome;
 

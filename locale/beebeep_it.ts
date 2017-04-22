@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1378,6 +1378,10 @@ Controlla i permessi di scrittura nella cartella selezionata.</translation>
     <message>
         <source>Create chat</source>
         <translation>Crea una conversazione</translation>
+    </message>
+    <message>
+        <source>Waiting for two or more connected user</source>
+        <translation>Aspetta per due o più utenti connessi</translation>
     </message>
 </context>
 <context>
@@ -2886,7 +2890,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>History</source>
-        <translation>Storia</translation>
+        <translation type="vanished">Storia</translation>
     </message>
     <message>
         <source>Show the saved chat list</source>
@@ -3362,19 +3366,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the user panel</source>
-        <translation>Mostra il pannello degli utenti</translation>
+        <translation type="vanished">Mostra il pannello degli utenti</translation>
     </message>
     <message>
         <source>Show the group panel</source>
-        <translation>Mostra il pannello dei gruppi</translation>
+        <translation type="vanished">Mostra il pannello dei gruppi</translation>
     </message>
     <message>
         <source>Show the chat panel</source>
-        <translation>Mostra il pannello delle conversazioni</translation>
+        <translation type="vanished">Mostra il pannello delle conversazioni</translation>
     </message>
     <message>
         <source>Show the history panel</source>
-        <translation>Mostra il pannello della storia</translation>
+        <translation type="vanished">Mostra il pannello della storia</translation>
     </message>
     <message>
         <source>Show the file transfer panel</source>
@@ -3982,7 +3986,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the panel tool bar</source>
-        <translation>Mostra la barra dei pannelli</translation>
+        <translation type="vanished">Mostra la barra dei pannelli</translation>
     </message>
     <message>
         <source>Use native file dialogs</source>
@@ -4083,6 +4087,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Downloading %1 files</source>
         <translation>Inizio a scaricare %1 file</translation>
+    </message>
+    <message>
+        <source>Chat histories</source>
+        <translation>Conversazioni salvate</translation>
     </message>
 </context>
 <context>
