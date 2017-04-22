@@ -53,7 +53,6 @@ public:
   inline void setFirstTime( bool );
 
   inline bool allowMultipleInstances() const;
-  inline bool trustNickname() const;
   inline bool trustSystemAccount() const;
 
   inline void setCheckNewVersionAtStartup( bool );
@@ -452,7 +451,6 @@ private:
 
   // RC
   bool m_useSettingsFileIni;
-  bool m_trustNickname;
   bool m_trustSystemAccount;
   bool m_broadcastOnlyToHostsIni;
   int m_defaultBroadcastPort;
@@ -662,7 +660,6 @@ inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
-inline bool Settings::trustNickname() const { return m_trustNickname; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
 inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }

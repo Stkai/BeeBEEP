@@ -534,16 +534,23 @@ void Core::buildLocalShareList()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Building local share list";
 #endif
-  m_shareListToBuild = Settings::instance().localShare().size();
 
   if( !FileShare::instance().local().isEmpty() )
     FileShare::instance().clearLocal();
+
+  if( Settings::instance().maxFileShared() <= 0 )
+  {
+    qWarning() << "File sharing is disabled";
+    return;
+  }
 
   if( Settings::instance().localShare().isEmpty() )
   {
     qDebug() << "There are not shared files";
     return;
   }
+
+  m_shareListToBuild = Settings::instance().localShare().size();
 
   foreach( QString share_path, Settings::instance().localShare() )
     addPathToShare( share_path );

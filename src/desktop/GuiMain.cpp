@@ -435,6 +435,7 @@ void GuiMain::startCore()
       return;
   }
 
+  showMessage( tr( "Connecting" ), 2000 );
   mp_core->start();
   initGuiItems();
 }
@@ -2413,9 +2414,10 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 
 void GuiMain::loadSession()
 {
+  showMessage( tr( "Starting" ), 4000 );
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   if( Settings::instance().fileTransferIsEnabled() )
-    QTimer::singleShot( 2000, mp_core, SLOT( buildLocalShareList() ) );
+    QTimer::singleShot( 10000, mp_core, SLOT( buildLocalShareList() ) );
   mp_home->loadSystemMessages();
 }
 

@@ -4092,6 +4092,14 @@ il file %2 (%3)?</translation>
         <source>Chat histories</source>
         <translation>Conversazioni salvate</translation>
     </message>
+    <message>
+        <source>Connecting</source>
+        <translation>Connessione in corso</translation>
+    </message>
+    <message>
+        <source>Starting</source>
+        <translation>Avvio in corso</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

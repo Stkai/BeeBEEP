@@ -199,8 +199,10 @@ int main( int argc, char *argv[] )
 
   QMetaObject::invokeMethod( &mw, "checkWindowFlagsAndShow", Qt::QueuedConnection );
 
+  mw.loadSession();
+
   /* Starting connection to BeeBEEP Network */
-  QTimer::singleShot( 1000, &mw, SLOT( startStopCore() ) );
+  QTimer::singleShot( 4000, &mw, SLOT( startStopCore() ) );
 
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );

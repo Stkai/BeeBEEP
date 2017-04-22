@@ -130,16 +130,14 @@ User UserManager::findUserByPath( const QString& user_path ) const
   qDebug() << "Unable to find user with path" << user_path;
 #endif
 
-  if( Settings::instance().trustNickname() )
-  {
-    QString user_nickname = User::nameFromPath( user_path );
-    User user_by_nickname = findUserByNickname( user_nickname );
-    if( user_by_nickname.isValid() )
-      return user_by_nickname;
+  QString user_nickname = User::nameFromPath( user_path );
+  User user_by_nickname = findUserByNickname( user_nickname );
+  if( user_by_nickname.isValid() )
+    return user_by_nickname;
+
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Unable to find user with nickname" << user_nickname;
+  qDebug() << "Unable to find user with nickname" << user_nickname;
 #endif
-  }
 
   QString host_and_port = User::hostAddressAndPortFromPath( user_path );
 

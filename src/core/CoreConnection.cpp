@@ -251,9 +251,9 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     }
     else
     {
-      user_found = UserManager::instance().findUserByPath( u.path() );
+      user_found = UserManager::instance().findUserByNickname( u.name() );
       if( user_found.isValid() )
-        qDebug() << "User found in list with path:" << qPrintable( u.path() );
+        qDebug() << "User found in list with name:" << qPrintable( u.name() );
     }
   }
   else

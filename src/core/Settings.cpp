@@ -71,7 +71,6 @@ Settings::Settings()
 #endif
 
   m_allowMultipleInstances = false;
-  m_trustNickname = true;
   m_trustSystemAccount = false;
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
@@ -271,7 +270,6 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisablePrivateChats", m_disablePrivateChats );
     sets->endGroup();
     sets->beginGroup( "Groups" );
-    sets->setValue( "TrustNickname", m_trustNickname );
     sets->setValue( "TrustSystemAccount", m_trustSystemAccount );
     sets->endGroup();
     sets->sync();
@@ -344,7 +342,6 @@ void Settings::loadRcFile()
   sets->endGroup();
 
   sets->beginGroup( "Groups" );
-  m_trustNickname = sets->value( "TrustNickname", m_trustNickname ).toBool();
   m_trustSystemAccount = sets->value( "TrustSystemAccount", m_trustSystemAccount ).toBool();
   sets->endGroup();
 
