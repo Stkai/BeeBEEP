@@ -531,24 +531,24 @@ void Core::createLocalShareMessage()
 
 void Core::buildLocalShareList()
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Building local share list";
-#endif
-
   if( !FileShare::instance().local().isEmpty() )
     FileShare::instance().clearLocal();
 
-  if( Settings::instance().maxFileShared() <= 0 )
+  if( Settings::instance().disableFileSharing() || Settings::instance().maxFileShared() <= 0 )
   {
-    qWarning() << "File sharing is disabled";
+    qWarning() << "Unable to build local file share list: file sharing is disabled";
     return;
   }
 
   if( Settings::instance().localShare().isEmpty() )
   {
-    qDebug() << "There are not shared files";
+    qDebug() << "Unable to build local file share list: there are not shared files";
     return;
   }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Building local file share list";
+#endif
 
   m_shareListToBuild = Settings::instance().localShare().size();
 

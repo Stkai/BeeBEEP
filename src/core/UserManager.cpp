@@ -178,22 +178,22 @@ User UserManager::findUserByAccountName( const QString& user_account_name ) cons
   return User();
 }
 
-User UserManager::findUserBySessionId( const QString& user_session_id ) const
+User UserManager::findUserByHash( const QString& user_hash ) const
 {
-  if( user_session_id.isEmpty() )
+  if( user_hash.isEmpty() )
     return User();
 
-  if( user_session_id == Settings::instance().localUser().sessionId() )
+  if( user_hash == Settings::instance().localUser().hash() )
     return Settings::instance().localUser();
 
   foreach( User u, m_users.toList() )
   {
-    if( u.sessionId() == user_session_id )
+    if( u.hash() == user_hash )
       return u;
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with session id" << user_session_id;
+  qDebug() << "Unable to find user with hash" << user_hash;
 #endif
 
   return User();

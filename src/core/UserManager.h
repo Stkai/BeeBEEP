@@ -40,7 +40,7 @@ public:
   inline User findUser( VNumber ) const;
   User findUserByPath( const QString& ) const;
   User findUserByAccountName( const QString& ) const;
-  User findUserBySessionId( const QString& ) const;
+  User findUserByHash( const QString& ) const;
   User findUserByHostAddressAndPort( const QHostAddress&, int );
   User findUserByNickname( const QString& ) const;
 

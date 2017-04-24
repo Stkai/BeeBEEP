@@ -166,15 +166,22 @@ void GuiUserList::setUser( const User& u, bool sort_users )
     }
   }
 
-  Chat c = ChatManager::instance().privateChatForUser( u.id() );
-  if( c.isValid() )
-  {
-    item->setChatId( c.id() );
-    item->setUnreadMessages( c.unreadMessages() );
-  }
-
   if( u.isLocal() )
+  {
     setDefaultChatConnected( item, m_coreIsConnected );
+    Chat default_chat = ChatManager::instance().defaultChat();
+    item->setChatId( default_chat.id() );
+    item->setUnreadMessages( default_chat.unreadMessages() );
+  }
+  else
+  {
+    Chat c = ChatManager::instance().privateChatForUser( u.id() );
+    if( c.isValid() )
+    {
+      item->setChatId( c.id() );
+      item->setUnreadMessages( c.unreadMessages() );
+    }
+  }
 
   item->updateUser( u );
 

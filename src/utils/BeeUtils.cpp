@@ -182,7 +182,7 @@ QString Bee::elapsedTimeToString( int time_elapsed )
   return s;
 }
 
-QString Bee::uniqueFilePath( const QString& file_path )
+QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
 {
   int counter = 1;
   QFileInfo fi( file_path );
@@ -193,7 +193,10 @@ QString Bee::uniqueFilePath( const QString& file_path )
 
   while( fi.exists() )
   {
-    new_file_name = QString( "%1 (%2)%3%4" ).arg( file_base_name ).arg( counter ).arg( (file_suffix.isEmpty() ? "" : ".") ).arg( file_suffix );
+    new_file_name = QString( "%1 (%2)%3%4" )
+                      .arg( file_base_name )
+                      .arg( add_date_time ? QString( "%1 %2" ).arg( QDateTime::currentDateTime().toString( Qt::ISODate ) ) : QString::number( counter ) )
+                      .arg( (file_suffix.isEmpty() ? "" : ".") ).arg( file_suffix );
     fi.setFile( dir_path, new_file_name );
     counter++;
 

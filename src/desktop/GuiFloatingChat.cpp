@@ -40,7 +40,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
  : QMainWindow( parent ), mp_core( p_core )
 {
   setObjectName( "GuiFloatingChat" );
-  m_mainWindowIcon = QIcon( ":/images/chat-view.png" );
+  m_mainWindowIcon = QIcon( ":/images/chat.png" );
   setMainIcon( false );
   mp_chat = new GuiChat( this );
   connect( mp_chat, SIGNAL( saveStateAndGeometryRequest() ), this, SLOT( saveGeometryAndState() ) );
@@ -101,7 +101,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   setCentralWidget( mp_chat );
   statusBar();
   m_chatIsVisible = true;
-  m_prevActivatedState = true;
+  m_prevActivatedState = false;
 
   connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
   connect( mp_chat, SIGNAL( toggleVisibilityPresetMessagesPanelRequest() ), this, SLOT( toggleVisibilityPresetMessagesPanel() ) );
@@ -303,7 +303,13 @@ void GuiFloatingChat::setFocusInChat()
 {
   QWidget* w = QApplication::activeWindow();
   if( !w )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Unable to set focus in chat: application has not the focus";
+#endif
     return;
+  }
+
   QApplication::setActiveWindow( this );
   mp_chat->ensureFocusInChat();
 }
@@ -355,6 +361,8 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
       m_chatIsVisible = false;
     }
   }
+
+  qDebug() << "Focus changed";
 }
 
 void GuiFloatingChat::saveGeometryAndState()

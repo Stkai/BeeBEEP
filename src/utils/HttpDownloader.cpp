@@ -44,7 +44,7 @@ QString HttpDownloader::filePathFromUrl( const QUrl& url )
 {
   QString file_name = fileNameFromUrl( url );
   QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory() ).arg( file_name ) );
-  return m_overwriteExistingFiles ? file_path_tmp : Bee::uniqueFilePath( file_path_tmp );
+  return m_overwriteExistingFiles ? file_path_tmp : Bee::uniqueFilePath( file_path_tmp, false );
 }
 
 void HttpDownloader::startDownload()

@@ -43,7 +43,7 @@ namespace Bee
   inline VNumber qVariantToVNumber( const QVariant& );
   QString bytesToString( FileSizeType, int precision = -1 );
   QString elapsedTimeToString( int msec );
-  QString uniqueFilePath( const QString& );
+  QString uniqueFilePath( const QString&, bool add_date_time );
   QString suffixFromFile( const QString& );
   FileType fileTypeFromSuffix( const QString& );
   bool isFileTypeAudio( const QString& );

@@ -1,7 +1,7 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG
 
 BeeBEEP 3.2.0
-- Simplified user interface
+- Simplified user interface (a lot of changes here)
 - Added status description option in user list
 - Added status tooltip on the user's avatar/icon
 - Added a check and an alert on same nickname/account of the users

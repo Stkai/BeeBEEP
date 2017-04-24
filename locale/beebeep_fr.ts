@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="306"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="309"/>
         <source>Header</source>
         <translation>En-tête</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="307"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="310"/>
         <source>System</source>
         <translation>Système</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="308"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="311"/>
         <source>Chat</source>
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="309"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="312"/>
         <source>Connection</source>
         <translation>Connexion</translation>
     </message>
@@ -28,22 +28,22 @@
         <translation type="obsolete">Statut Utilisateur</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="310"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="313"/>
         <source>User Information</source>
         <translation>Information Utilisateur</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="311"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="314"/>
         <source>File Transfer</source>
         <translation>Transfert de Fichier</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="312"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="315"/>
         <source>History</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="313"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="316"/>
         <source>Other</source>
         <translation>Autre</translation>
     </message>
@@ -51,22 +51,22 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="139"/>
+        <location filename="../src/core/Core.cpp" line="140"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1Impossible de se connecter au réseau %2. Vérifier la configuration du pare-feu.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="164"/>
+        <location filename="../src/core/Core.cpp" line="160"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Impossible de diffuser sur le réseau %2. Vérifier la configuration du pare-feu.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="177"/>
+        <location filename="../src/core/Core.cpp" line="173"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Vous êtes connecté au réseau %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="290"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Vous êtes déconnecté du réseau %2.</translation>
     </message>
@@ -75,47 +75,47 @@
         <translation type="obsolete">%1 %2 cherchera des utilisateurs dans cette plage d&apos;adresse IP: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="242"/>
+        <location filename="../src/core/Core.cpp" line="238"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration démarre avec le service : %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="93"/>
+        <location filename="../src/core/Core.cpp" line="94"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 L&apos;utilisateur %2 ne peut pas enregistrer les paramètres dans le dossier : %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="109"/>
+        <location filename="../src/core/Core.cpp" line="110"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 L&apos;utilisateur %2 ne peut pas enregistrer les messages de chat dans le dossier : %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="188"/>
+        <location filename="../src/core/Core.cpp" line="184"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Vous avez choisi de ne vous joindre qu&apos;à ces groupes de travail : %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="257"/>
+        <location filename="../src/core/Core.cpp" line="253"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero Configuration service arrêté.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="318"/>
+        <location filename="../src/core/Core.cpp" line="314"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration recherche le service : %2 sur le réseau</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="325"/>
+        <location filename="../src/core/Core.cpp" line="321"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration ne peut pas rechercher le service : %2 sur le réseau</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="343"/>
+        <location filename="../src/core/Core.cpp" line="339"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Diffusion sur le réseau %2 ...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="349"/>
+        <location filename="../src/core/Core.cpp" line="345"/>
         <source>%1 You are not connected to %2 Network.</source>
         <translation>%1 Vous n&apos;êtes pas connecté au réseau %2.</translation>
     </message>
@@ -128,17 +128,17 @@
         <translation type="obsolete">Voir les messages Log pour plus d&apos;informations</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="467"/>
+        <location filename="../src/core/Core.cpp" line="470"/>
         <source>New version is available</source>
         <translation>Une nouvelle version est disponible</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="468"/>
+        <location filename="../src/core/Core.cpp" line="471"/>
         <source>Click here to download</source>
         <translation>Cliquer ici pour télécharger</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="520"/>
+        <location filename="../src/core/Core.cpp" line="530"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -315,7 +315,7 @@
         <translation type="obsolete">%1 (%2) est connecté au réseau %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="384"/>
+        <location filename="../src/core/Core.cpp" line="380"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -492,27 +492,27 @@
         <translation>%1 %2 a refusé de télécharger %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="198"/>
+        <location filename="../src/core/CoreParser.cpp" line="201"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 vous envoie le fichier : %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="282"/>
+        <location filename="../src/core/CoreParser.cpp" line="285"/>
         <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
         <translation>%1 Une erreur est survenue lorsque %2 a essayé de vous ajouter au groupe %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="290"/>
+        <location filename="../src/core/CoreParser.cpp" line="293"/>
         <source>%1 %2 adds you to the group chat: %3.</source>
         <translation>%1 %2 vous a ajouté au groupe : %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="301"/>
+        <location filename="../src/core/CoreParser.cpp" line="304"/>
         <source>%1 %2 has left the group: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="454"/>
+        <location filename="../src/core/CoreParser.cpp" line="465"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -525,17 +525,17 @@
         <translation type="obsolete">%1 %2 a partagé %3 fichiers.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="342"/>
+        <location filename="../src/core/CoreParser.cpp" line="345"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 a refusé de télécharger le dossier %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="349"/>
+        <location filename="../src/core/CoreParser.cpp" line="352"/>
         <source>unknown folder</source>
         <translation>dossier inconnu</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="358"/>
+        <location filename="../src/core/CoreParser.cpp" line="361"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 vous envoie le dossier : %3.</translation>
     </message>
@@ -597,22 +597,22 @@
         <translation>a été ajouté à vos favoris</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="274"/>
-        <source>%1 Connection closed to user %2 because it uses your system name.</source>
+        <location filename="../src/core/CoreConnection.cpp" line="279"/>
+        <source>%1 Connection closed to user %2 because it uses your account name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="279"/>
+        <location filename="../src/core/CoreConnection.cpp" line="284"/>
         <source>%1 Connection closed to user %2 because it uses your nickname.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="297"/>
+        <location filename="../src/core/CoreConnection.cpp" line="302"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="302"/>
+        <location filename="../src/core/CoreConnection.cpp" line="307"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -620,37 +620,37 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
         <source>Image</source>
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Document</source>
         <translation>Document</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="295"/>
         <source>Other</source>
         <translation>Autre</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="296"/>
         <source>Executable</source>
         <translation>Exécutable</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="294"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="297"/>
         <source>MacOSX</source>
         <translation>MacOSX</translation>
     </message>
@@ -1249,32 +1249,32 @@
 <context>
     <name>GuiChatList</name>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="49"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="50"/>
         <source>Show</source>
         <translation>Afficher</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="53"/>
         <source>Clear</source>
         <translation>Effacer</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="53"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="54"/>
         <source>Clear all chat messages</source>
         <translation>Effacer tous les messages du chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="55"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="56"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="123"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="136"/>
         <source>Waiting for two or more connected user</source>
         <translation type="unfinished">Attente de connexion de plusieurs utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="125"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="138"/>
         <source>Create chat</source>
         <translation type="unfinished">Créer un chat</translation>
     </message>
@@ -1645,7 +1645,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="369"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="377"/>
         <source>The window geometry and state are saved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1992,73 +1992,73 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la barre des plugins</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2871"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2872"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2873"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2874"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2911"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2912"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2914"/>
         <source>offline</source>
         <translation>hors ligne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="301"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="320"/>
         <source>Do you really want to quit %1?</source>
         <translation>Voulez-vous vraiment quitter %1 ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="302"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="345"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1735"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1808"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1815"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1879"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2238"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2273"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2608"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2653"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2680"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2703"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3179"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="321"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="347"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="364"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1834"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2259"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2641"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2687"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2717"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2742"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3231"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="302"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="345"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1735"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1808"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1815"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1879"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2238"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2273"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2608"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2653"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2680"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2703"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3179"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="321"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="347"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="364"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1834"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2259"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2641"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2687"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2717"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2742"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3231"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="342"/>
         <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Impossible d&apos;enregistrer les réglages&lt;/b&gt;. Chemin :</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="325"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="342"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="361"/>
         <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
         <translation>&lt;b&gt; écriture impossible &lt;/b&gt; par l&apos;utilisateur :</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="327"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="346"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="363"/>
         <source>Do you want to close anyway?</source>
         <translation>Voulez-vous vraiment fermer ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="388"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="407"/>
         <source>No new message available</source>
         <translation>Pas de nouveau message</translation>
     </message>
@@ -2071,27 +2071,27 @@ Please select a different name.</source>
         <translation type="obsolete">Connecté au réseau %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="512"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="532"/>
         <source>Secure Lan Messenger</source>
         <translation>Secure Lan Messenger</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="513"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="533"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="515"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="535"/>
         <source>for</source>
         <translation>pour</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="517"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="537"/>
         <source>developed by</source>
         <translation>développé par</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="526"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="546"/>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
         <translation>BeeBEEP est un logiciel libre, vous pouvez le redistribuer et/ou le modifier il est publié sous les termes de la license GNU &apos;General Public License&apos; par la Free Software Foundation, soit la version 3 de la licence ou (à votre choix ) toute version ultérieure.&lt;br /&gt;&lt;br /&gt;BeeBEEP est distribué dans l&apos;espoir d&apos;être utile, mais SANS AUCUNE GARANTIE; sans même la garantie implicite de COMMERCIALISATION ou D&apos;ADAPTATION A UN USAGE PARTICULIER .&lt;br /&gt;Voir la Licence Publique Générale GNU pour plus de détails.</translation>
     </message>
@@ -2116,7 +2116,7 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher les informations à propos de %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="589"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="609"/>
         <source>Select language...</source>
         <translation>Choisir la langue...</translation>
     </message>
@@ -2125,7 +2125,7 @@ Please select a different name.</source>
         <translation type="obsolete">Choisir votre langue préférée</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="590"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="610"/>
         <source>Download folder...</source>
         <translation>Dossier des téléchargements...</translation>
     </message>
@@ -2134,7 +2134,7 @@ Please select a different name.</source>
         <translation type="obsolete">Choisir le dossier de téléchargement</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="595"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="615"/>
         <source>Select beep file...</source>
         <translation>Choisir un fichier son BEEP...</translation>
     </message>
@@ -2143,7 +2143,7 @@ Please select a different name.</source>
         <translation type="obsolete">Choisir le son à jouer lors de l&apos;arrivé d&apos;un nouveau message</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="596"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="616"/>
         <source>Play beep</source>
         <translation>Jouer le son BEEP</translation>
     </message>
@@ -2152,7 +2152,7 @@ Please select a different name.</source>
         <translation type="obsolete">Tester le son à jouer lors d&apos;un nouveau message</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="611"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="631"/>
         <source>Settings</source>
         <translation>Réglages</translation>
     </message>
@@ -2161,7 +2161,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, la géométrie de la fenêtre sera réinitialisée au prochain lancement</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="770"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="790"/>
         <source>Show only the online users</source>
         <translation>Afficher seulement les utilisateurs en ligne</translation>
     </message>
@@ -2174,7 +2174,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, vous verrez l&apos;avatar des utilisateurs dans la liste (s&apos;ils en ont un)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="686"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="706"/>
         <source>Set status to away automatically</source>
         <translation>Passer automatiquement le statut sur &quot;absent&quot;</translation>
     </message>
@@ -2191,7 +2191,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, lors de l&apos;arrivée d&apos;un nouveau message, %1 sera affiché au dessus des autres fenêtres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="666"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="686"/>
         <source>Generate automatic filename</source>
         <translation>Générer automatiquement un nom de fichier</translation>
     </message>
@@ -2200,7 +2200,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si le fichier téléchargé existe déjà, un nouveau nom sera attribué automatiquement</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="899"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="920"/>
         <source>Enable tray icon notification</source>
         <translation>Activer les notifications</translation>
     </message>
@@ -2213,7 +2213,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, %1 restera au-dessus des autres fenêtres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="653"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="673"/>
         <source>Enable file transfer</source>
         <translation>Activer le transfert de fichier</translation>
     </message>
@@ -2222,7 +2222,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, vous pourrez envoyer des fichiers aux autres utilisateurs </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="619"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="639"/>
         <source>Prompts for network password on startup</source>
         <translation>Demander le mot de passe réseau au démarrage</translation>
     </message>
@@ -2231,7 +2231,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, la boîte de dialogue de demande de mot de passe sera affichée au démarrage</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="645"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="665"/>
         <source>Load %1 on Windows startup</source>
         <translation>Lancer %1 au démarrage de l&apos;ordinateur</translation>
     </message>
@@ -2264,7 +2264,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, le pseudo sera affiché en couleur dans le chat et dans la liste</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2890"/>
         <source>Use HTML tags</source>
         <translation>Activer les tags HTML</translation>
     </message>
@@ -2273,7 +2273,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, les tags HTML ne seront pas retirés des messages</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2855"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2895"/>
         <source>Use clickable links</source>
         <translation>Activer les liens cliquables</translation>
     </message>
@@ -2282,7 +2282,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, les liens dans les messages sont reconnus et rendus cliquables</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2820"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2860"/>
         <source>Show messages grouped by user</source>
         <translation>Afficher les messages regroupés par utilisateurs</translation>
     </message>
@@ -2291,12 +2291,12 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, les messages seront regroupés par utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2793"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2833"/>
         <source>Save messages</source>
         <translation>Enregistrer les messages</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="586"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="606"/>
         <source>Add users manually...</source>
         <translation>Ajouter manuellement un utilisateur...</translation>
     </message>
@@ -2309,7 +2309,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée,  les messages sont enregistrés lors de la fermeture du programme</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="802"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="822"/>
         <source>Status</source>
         <translation>Statut</translation>
     </message>
@@ -2350,12 +2350,12 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la liste des fichiers partagés sur le réseau</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="573"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="593"/>
         <source>Plugins</source>
         <translation>Plugins</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="843"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="864"/>
         <source>Tip of the day</source>
         <translation>Conseil du jour</translation>
     </message>
@@ -2364,7 +2364,7 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher le conseil du jour</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="844"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="865"/>
         <source>Fact of the day</source>
         <translation>Fait du jour</translation>
     </message>
@@ -2373,7 +2373,7 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher le fait du jour</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="847"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="868"/>
         <source>Show %1&apos;s license...</source>
         <translation>Afficher la license de %1...</translation>
     </message>
@@ -2386,7 +2386,7 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher les informations à propos de la librairie Qt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="851"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="872"/>
         <source>Open %1 official website...</source>
         <translation>Ouvrir le site officiel de %1...</translation>
     </message>
@@ -2395,7 +2395,7 @@ Please select a different name.</source>
         <translation type="obsolete">Explorer le site officiel de %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="852"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="873"/>
         <source>Check for new version...</source>
         <translation>Recherche d&apos;une nouvelle version...</translation>
     </message>
@@ -2404,7 +2404,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ouvrir le site de %1 et vérifier la présence d&apos;une nouvelle version</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="853"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="874"/>
         <source>Download plugins...</source>
         <translation>Télécharger des plugins...</translation>
     </message>
@@ -2413,7 +2413,7 @@ Please select a different name.</source>
         <translation type="obsolete">Ouvrir le site de %1 et télécharger vos plugins préférés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="854"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="875"/>
         <source>Help online...</source>
         <translation>Aide en ligne...</translation>
     </message>
@@ -2430,17 +2430,17 @@ Please select a different name.</source>
         <translation type="obsolete">Prêt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="958"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="979"/>
         <source>Users</source>
         <translation>Utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="469"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="488"/>
         <source>Disconnect</source>
         <translation>Déconnexion</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="474"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="493"/>
         <source>Connect</source>
         <translation>Connexion</translation>
     </message>
@@ -2449,13 +2449,13 @@ Please select a different name.</source>
         <translation type="obsolete">Configurer le réseau %1 pour rechercher un utilisateur qui n&apos;est pas sur votre sous-réseau local</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="545"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="921"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="565"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="942"/>
         <source>Quit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="550"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="570"/>
         <source>Edit your profile...</source>
         <translation>Editer votre profil...</translation>
     </message>
@@ -2464,17 +2464,17 @@ Please select a different name.</source>
         <translation type="obsolete">Modifier les informations de votre profil, comme l&apos;avatar, le mail ou le numéro de téléphone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="556"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="576"/>
         <source>About %1...</source>
         <translation>A propos de %1...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="577"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="597"/>
         <source>Main</source>
         <translation>BeeBEEP</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="583"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="603"/>
         <source>Broadcast to network</source>
         <translation>Diffuser sur le réseau</translation>
     </message>
@@ -2487,17 +2487,17 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher les pseudos en couleur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="775"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="795"/>
         <source>Show the user&apos;s picture</source>
         <translation>Afficher l&apos;avatar des utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="608"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="628"/>
         <source>Chat</source>
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="693"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="713"/>
         <source>Enable BEEP alert on new message</source>
         <translation>Activer l&apos;alerte BEEP lors d&apos;un nouveau message</translation>
     </message>
@@ -2506,12 +2506,12 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la fenêtre lors d&apos;un nouveau message</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="715"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="735"/>
         <source>Always stay on top</source>
         <translation>Toujours au premier plan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="905"/>
         <source>Load on system tray at startup</source>
         <translation>Charger dans la zone de notification au démarrage</translation>
     </message>
@@ -2520,17 +2520,17 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, %1 démarrera caché dans la barre de notification </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="829"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
         <source>View</source>
         <translation>Vue</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2805"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2845"/>
         <source>Show the chat in compact view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2810"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2850"/>
         <source>Show the timestamp</source>
         <translation>Afficher l&apos;horodatage</translation>
     </message>
@@ -2551,7 +2551,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, les émoticônes seront analysées par votre police système</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1377"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1399"/>
         <source>Show only last %1 messages</source>
         <translation>Afficher seulement les %1 derniers messages</translation>
     </message>
@@ -2560,7 +2560,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activé, seuls les %1 derniers messages seront affichés dans le chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="679"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="699"/>
         <source>Prompt before downloading file</source>
         <translation>Demander avant de télécharger un fichier</translation>
     </message>
@@ -2569,17 +2569,17 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, vous devrez confirmer avant de télécharger un fichier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="629"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="649"/>
         <source>Reset window geometry at startup</source>
         <translation>Réinitialiser la géométrie de la fenêtre au démarrage</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="726"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="746"/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="780"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="800"/>
         <source>Show the user&apos;s vCard on right click</source>
         <translation>Afficher la vCard des utilisateurs par un clic droit</translation>
     </message>
@@ -2588,12 +2588,12 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, vous pouvez afficher la vCard des utilisateurs en faisant un clic droit</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="728"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="748"/>
         <source>Save the users on exit</source>
         <translation>Enregistrer les utilisateurs à la fermeture</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="602"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="622"/>
         <source>Open your data folder</source>
         <translation>Ouvrir votre dossier</translation>
     </message>
@@ -2602,12 +2602,12 @@ Please select a different name.</source>
         <translation type="obsolete">Cliquer pour ouvrir votre dossier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2798"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2838"/>
         <source>Clear all read messages on closing window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2815"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2855"/>
         <source>Show preview of the images</source>
         <translation>Afficher un aperçu des images</translation>
     </message>
@@ -2624,7 +2624,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, la fenêtre d&apos;accueil sera affichée au démarrage à la place de la fenêtre de chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="624"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="644"/>
         <source>Show minimized at startup</source>
         <translation>Minimiser au démarrage</translation>
     </message>
@@ -2633,7 +2633,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, %1 apparait minimisé au démarrage</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="659"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="679"/>
         <source>If a file already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2650,7 +2650,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, la liste des utilisateurs sera enregistrée à la fermeture</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="797"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="817"/>
         <source>Change size of the user&apos;s picture</source>
         <translation>Changer la taille de l&apos;avatar des utilisateurs</translation>
     </message>
@@ -2667,17 +2667,17 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher l&apos;accueil avec les activités de %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="842"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="863"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="848"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="869"/>
         <source>Qt Library...</source>
         <translation>Librairie Qt...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="856"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="877"/>
         <source>Like %1 on Facebook</source>
         <translation>Liker %1 sur Facebook</translation>
     </message>
@@ -2686,17 +2686,17 @@ Please select a different name.</source>
         <translation type="obsolete">Adez-moi à savoir combien de personnes utilisent BeeBEEP</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="863"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="884"/>
         <source>Donate for %1</source>
         <translation>Donner pour %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="867"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="888"/>
         <source>Show</source>
         <translation>Afficher</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="889"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="910"/>
         <source>Close button minimize to tray icon</source>
         <translation>Minimiser dans la zone de notification à la fermeture</translation>
     </message>
@@ -2705,7 +2705,7 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, la fenêtre sera réduite dans la zone de notification en cliquant sur le bouton de fermeture</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="915"/>
         <source>Escape key minimize to tray icon</source>
         <translation>La touche ECHAP minimise dans la zone de notification</translation>
     </message>
@@ -2722,7 +2722,7 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la liste des utilisateurs connectés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="966"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="987"/>
         <source>Groups</source>
         <translation>Groupes</translation>
     </message>
@@ -2731,7 +2731,7 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la liste des groupes</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="962"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="983"/>
         <source>Chats</source>
         <translation>Chats</translation>
     </message>
@@ -2741,14 +2741,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>History</source>
-        <translation type="vanished">Historique</translation>
+        <translation type="obsolete">Historique</translation>
     </message>
     <message>
         <source>Show the list of the saved chats</source>
         <translation type="obsolete">Afficher la liste des chats enregistrés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="974"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="995"/>
         <source>File Transfers</source>
         <translation>Transfert de fichier</translation>
     </message>
@@ -2785,17 +2785,17 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la barre du plugin des capture d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1035"/>
         <source>Play %1</source>
         <translation>Jouer %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1018"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
         <source>is a game developed by</source>
         <translation>est un jeu développé par</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1021"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1042"/>
         <source>About %1</source>
         <translation>A propos %1</translation>
     </message>
@@ -2812,17 +2812,17 @@ Please select a different name.</source>
         <translation type="obsolete">Toujours</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1179"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1201"/>
         <source>Please save the network password in the next dialog.</source>
         <translation>Veuillez sauvegarder le mot de passe réseau dans la fenêtre suivante.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1201"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1223"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Après combien de minutes d&apos;inactivité %1 doit-il passer le statut sur &quot;absent&quot; ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1240"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1262"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Sélectionnez le nombre maximal de messages à afficher</translation>
     </message>
@@ -2831,79 +2831,79 @@ Please select a different name.</source>
         <translation type="obsolete">Nouveau message de %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1466"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1488"/>
         <source>New message arrived</source>
         <translation>Un nouveau message est arrivé</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1534"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1556"/>
         <source>%1 is writing...</source>
         <translation>%1 est en train d&apos;écrire...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1545"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1567"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Voulez-vous vous déconnecter du réseau %1 ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1578"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1600"/>
         <source>You are %1%2</source>
         <translation>Vous êtes %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1590"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1612"/>
         <source>Please insert the new status description</source>
         <translation>Insérer la description du statut</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1639"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1661"/>
         <source>%1 - Select a file</source>
         <translation>%1 - Choisir un fichier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1639"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1661"/>
         <source>or more</source>
         <translation>ou plus</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1675"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1697"/>
         <source>There is no user connected.</source>
         <translation>Aucun utilisateur connecté.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1681"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1703"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Sélectionnez l&apos;utilisateur auquel vous souhaitez envoyer un fichier.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1690"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1712"/>
         <source>User not found.</source>
         <translation>Utilisateur introuvable.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1715"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1864"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1734"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1883"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Le transfert de fichier est désactivé. Vous ne pouvez pas télécharger %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1735"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1879"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Oui, et ne plus le redemander</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1767"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1786"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 existe déjà. Sélectionner un nouveau nom.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1806"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1825"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Vous ne pouvez pas télécharger tous ces fichiers en même temps. Voulez-vous télécharger les %1 premiers fichiers de la liste ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1814"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1833"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>Le téléchargement de %1 fichiers risque de prendre beaucoup de temps. Voulez-vous continuer ?</translation>
     </message>
@@ -2912,17 +2912,17 @@ Please select a different name.</source>
         <translation type="obsolete">%1 fichiers sont planifiés pour le téléchargement</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1878"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1897"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>Voulez-vous télécharger le dossier %1 (%2 fichiers) de %3 ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1919"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1938"/>
         <source>%1 - Select the download folder</source>
         <translation>%1- Sélectionne le dossier de téléchargement</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2008"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2026"/>
         <source>Plugin Manager...</source>
         <translation>Gestionnaire de plugins...</translation>
     </message>
@@ -2931,32 +2931,32 @@ Please select a different name.</source>
         <translation type="obsolete">Ouvrir le gestionnaire de plugins et gérer les plugins</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3133"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3185"/>
         <source>at lunch</source>
         <translation>en pause déjeuner</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3142"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3194"/>
         <source>in a meeting</source>
         <translation>en réunion</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3178"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3230"/>
         <source>Do you really want to clear all saved status descriptions?</source>
         <translation>Voulez-vous vraiment supprimer tous les statuts enregistrés ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="836"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="857"/>
         <source>Show the %1 log</source>
         <translation type="unfinished">Journal %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="340"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="359"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Impossible d&apos;enregistrer les messages de chat&lt;/b&gt;. Dossier :</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="560"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="580"/>
         <source>Create chat</source>
         <translation>Créer un chat</translation>
     </message>
@@ -2965,7 +2965,7 @@ Please select a different name.</source>
         <translation type="obsolete">Créer un chat avec au moins 2 utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="563"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="583"/>
         <source>Create group</source>
         <translation>Créer un groupe</translation>
     </message>
@@ -2974,7 +2974,7 @@ Please select a different name.</source>
         <translation type="obsolete">Créer un groupe avec au moins 2 utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="591"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="611"/>
         <source>Shortcuts...</source>
         <translation>Raccourcis...</translation>
     </message>
@@ -2983,7 +2983,7 @@ Please select a different name.</source>
         <translation type="obsolete">Activer et modifier vos raccourcis personnels</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="592"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="612"/>
         <source>Dictionary...</source>
         <translation>Dictionnaires...</translation>
     </message>
@@ -2992,7 +2992,7 @@ Please select a different name.</source>
         <translation type="obsolete">Choisir votre dictionnaire préféré pour la correction d&apos;orthographe</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="601"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="621"/>
         <source>Open your resource folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3005,22 +3005,22 @@ Please select a different name.</source>
         <translation type="obsolete">Utiliser votre nom au lieu de &quot;Vous&quot;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2786"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2826"/>
         <source>Use RTL mode to show text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="614"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="634"/>
         <source>Prompts for nickname on startup</source>
         <translation>Demander le nom d&apos;utilisateur au démarrage</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="634"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="654"/>
         <source>Check for new version at startup</source>
         <translation>Rechercher une nouvelle version au démarrage</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="670"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="690"/>
         <source>Ask me</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3033,57 +3033,57 @@ Please select a different name.</source>
         <translation type="obsolete">Si activée, le chat s&apos;ouvrira toujours dans une nouvelle fenêtre</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="698"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="718"/>
         <source>Enable Buzz sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="735"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="755"/>
         <source>Sort users in ascending order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="740"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="760"/>
         <source>Sorting mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="744"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="764"/>
         <source>Default mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="750"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="770"/>
         <source>By user name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="756"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="776"/>
         <source>By user status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="762"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="782"/>
         <source>By unread messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="785"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="805"/>
         <source>Show status color in background</source>
         <translation>Afficher la couleur du statut en arrière-plan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="813"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="833"/>
         <source>Recently used</source>
         <translation>Utilisés récemment</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="818"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="838"/>
         <source>Change your status description...</source>
         <translation>Changer votre statut...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="819"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="839"/>
         <source>Clear all status descriptions</source>
         <translation>Effacer tous les statuts</translation>
     </message>
@@ -3096,7 +3096,7 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher le journal de l&apos;application pour consulter les erreurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="566"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="586"/>
         <source>Make a screenshot</source>
         <translation type="unfinished">Capture d&apos;écran</translation>
     </message>
@@ -3105,12 +3105,12 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la fonction de capture d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="833"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="853"/>
         <source>Show new message</source>
         <translation>Afficher le nouveau message</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="858"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="879"/>
         <source>Add +1 user to anonymous usage statistics</source>
         <translation>Ajouter +1 utilisateur aux statistiques d&apos;utilisation anonymes</translation>
     </message>
@@ -3119,37 +3119,37 @@ Please select a different name.</source>
         <translation type="obsolete">Adez-moi à savoir combien d&apos;utilisateurs ont BeeBEEP</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="874"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="895"/>
         <source>Network</source>
         <translation>Réseau</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="904"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="925"/>
         <source>Show only message notifications</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="930"/>
         <source>Show chat message preview</source>
         <translation>Afficher l&apos;aperçu du message de chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="914"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="935"/>
         <source>Show file notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1658"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1680"/>
         <source>File transfer is not enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1664"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1686"/>
         <source>You are not connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2010"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2028"/>
         <source>is a plugin developed by</source>
         <translation>est un plugin développé par</translation>
     </message>
@@ -3158,139 +3158,139 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la barre des jeux</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2237"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2258"/>
         <source>Do you really want to open the file %1?</source>
         <translation>Voulez-vous vraiment ouvrir le fichier %1 ? </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3491"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3548"/>
         <source>New file from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3508"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3565"/>
         <source>%1 is buzzing you!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1041"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2244"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2500"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1062"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2265"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2532"/>
         <source>Unable to open %1</source>
         <translation>Impossible d&apos;ouvrir %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="542"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="562"/>
         <source>Network...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="639"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="659"/>
         <source>Use native file dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="790"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="810"/>
         <source>Show the status description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="839"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="860"/>
         <source>Save window&apos;s geometry</source>
         <translation type="unfinished">Enregistrer la géométrie de la fenêtre</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="970"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="991"/>
         <source>Chat histories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="985"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1006"/>
         <source>Activities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1041"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2244"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2500"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1062"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2265"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2532"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1446"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1458"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1468"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1480"/>
         <source>to all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1448"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1460"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1470"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1482"/>
         <source>to</source>
         <translation type="unfinished">à</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1450"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1462"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1472"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1484"/>
         <source>to you</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1456"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1478"/>
         <source>New message from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1832"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1851"/>
         <source>Downloading %1 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2283"/>
         <source>Sound files (*.wav)</source>
         <translation>Fichier son (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2273"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Le son n&apos;est pas activé lors d&apos;un nouveau message. Voulez-vous l&apos;activer ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2286"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2307"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation>Le module de son est désactivé. Le son BEEP par défaut sera utilisé.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2291"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2312"/>
         <source>Sound file not found</source>
         <translation>Fichier son introuvable</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2313"/>
         <source>The default BEEP will be used</source>
         <translation>Le son BEEP par défaut sera utilisé</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2340"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2361"/>
         <source>Group chat will be deleted when all members goes offline.</source>
         <translation>Le groupe de chat sera effacé lorsque tous les utilisateurs seront hors-ligne.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2341"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
         <translation>Si vous souhaitez un chat persistent, pensez à créer un Groupe.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2342"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2363"/>
         <source>Do you wish to continue or create group?</source>
         <translation>Voulez-vous continuer ou créer un groupe ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2343"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2364"/>
         <source>Continue</source>
         <translation>Continuer</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2343"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2364"/>
         <source>Create Group</source>
         <translation>Créer un groupe</translation>
     </message>
@@ -3299,188 +3299,188 @@ Please select a different name.</source>
         <translation type="obsolete">Impossible d&apos;ajouter un utilisateur dans ce chat. Sélectionner un autre groupe.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2402"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2423"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Désormais, %1 se lancera au démarrage de l&apos;ordinateur.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2404"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2411"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2425"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2432"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Impossible d&apos;ajouter cette clef de registre : permission refusée.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2409"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2430"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 ne se lancera pas au démarrage.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2450"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2482"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Sélectionner un chat auquel vous souhaitez  lier le texte sauvegardé.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2459"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2491"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>Le chat &apos;%1&apos; sélectionné a déjà un texte de sauvegarde.&lt;br /&gt;Que voulez-vous faire avec le texte sélectionné ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="662"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2461"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="682"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2493"/>
         <source>Overwrite</source>
         <translation>Ecraser</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="438"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="457"/>
         <source>Connecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="703"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="723"/>
         <source>Raise on new message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="708"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="728"/>
         <source>Open chats in a single window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="720"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="740"/>
         <source>Prompt on quit when connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="835"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="855"/>
         <source>Show file sharing window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="994"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1015"/>
         <source>Show the activity panel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2417"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2438"/>
         <source>Starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2461"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2493"/>
         <source>Add in the head</source>
         <translation>Ajouter dans l&apos;en-tête</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2607"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2640"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Tous les membres de ce chat ne sont pas en ligne. Les changements effectués ne seront pas permanents. Souhaitez-vous continuer ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2702"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2741"/>
         <source>Do you really want to delete chat with %1?</source>
         <translation>Etes-vous sûr de vouloir effacer le chat avec %1 ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2714"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2754"/>
         <source>Unable to delete %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2831"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2871"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2878"/>
         <source>Show emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2843"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2883"/>
         <source>Use font emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2862"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2902"/>
         <source>Restore default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2876"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2916"/>
         <source>inactive</source>
         <translation>inactif</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2896"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2936"/>
         <source>disabled</source>
         <translation>désactivé</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2903"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2943"/>
         <source>active</source>
         <translation>actif</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2976"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3016"/>
         <source>%1 is online</source>
         <translation>%1 est en ligne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2978"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3018"/>
         <source>%1 is offline</source>
         <translation>%1 est hors-ligne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2993"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3033"/>
         <source>Please select the new size of the user picture</source>
         <translation>Sélectionnez la nouvelle taille de l&apos;avatar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3318"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
         <source>Select your dictionary path</source>
         <translation>Sélectionner votre dossier de dictionnaires</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3326"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3380"/>
         <source>Dictionary selected: %1</source>
         <translation>Dictionnaire sélectionné : %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3382"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Impossible de définir le dictionnaire : %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3443"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3500"/>
         <source>Window geometry and state saved</source>
         <translation>La géométrie et l&apos;état de la fenêtre ont été sauvegardé</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1853"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2343"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2461"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2627"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1872"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2364"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2493"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2660"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
         <source>Show the user panel</source>
-        <translation type="vanished">Afficher le panneau utilisateur</translation>
+        <translation type="obsolete">Afficher le panneau utilisateur</translation>
     </message>
     <message>
         <source>Show the group panel</source>
-        <translation type="vanished">Afficher le panneau des groupes</translation>
+        <translation type="obsolete">Afficher le panneau des groupes</translation>
     </message>
     <message>
         <source>Show the chat panel</source>
-        <translation type="vanished">Afficher le panneau du chat</translation>
+        <translation type="obsolete">Afficher le panneau du chat</translation>
     </message>
     <message>
         <source>Show the history panel</source>
-        <translation type="vanished">Afficher le panneau de l&apos;historique</translation>
+        <translation type="obsolete">Afficher le panneau de l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1003"/>
         <source>Show the file transfer panel</source>
         <translation>Afficher le panneau de transfert de fichier</translation>
     </message>
@@ -3489,58 +3489,58 @@ Please select a different name.</source>
         <translation type="obsolete">Afficher la barre de chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1734"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1753"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Voulez-vous télécharger %1 (%2) de %3 ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1847"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1866"/>
         <source>File is not available for download.</source>
         <translation>Le fichier n&apos;est pas disponible pour le téléchargement.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1849"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1868"/>
         <source>%1 is not connected.</source>
         <translation>%1 n&apos;est pas connecté.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1869"/>
         <source>Please reload the list of shared files.</source>
         <translation>Veuillez recharger la liste des fichiers partagés.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1853"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1872"/>
         <source>Reload file list</source>
         <translation>Recharger la liste</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2626"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2659"/>
         <source>%1 is a your group. You cannot leave the chat until the group exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2632"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2658"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2665"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2695"/>
         <source>You cannot delete %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2643"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2677"/>
         <source>You cannot leave %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2671"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2708"/>
         <source>Chat with %1 is empty.</source>
         <translation>La chat avec %1 est vide.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2675"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2712"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Voulez-vous vraiment effacer les messages avec %1 ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2678"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2715"/>
         <source>Yes and delete history</source>
         <translation>Oui et effacer l&apos;historique</translation>
     </message>
@@ -3550,7 +3550,7 @@ Please select a different name.</source>
         <translation type="obsolete">%1 est votre groupe. Vous ne pouvez pas quitter le chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2627"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2660"/>
         <source>Delete this group</source>
         <translation>Effacer ce groupe</translation>
     </message>
@@ -3559,7 +3559,7 @@ Please select a different name.</source>
         <translation type="obsolete">Vous ne pouvez pas quitter ce chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2652"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2686"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Etes-vous sûr de vouloir effacer le groupe &apos;%1&apos; ?</translation>
     </message>
@@ -3572,17 +3572,17 @@ Please select a different name.</source>
         <translation type="obsolete">%1 a partagé %2 fichiers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2794"/>
         <source>Default language is restored.</source>
         <translation>La langue par défaut a été restauré.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2756"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2796"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>La langue &apos;%1&apos; a été sélectionné.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2759"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2799"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Vous devez redémarrer %1 pour appliquer ces changements. </translation>
     </message>
@@ -4231,119 +4231,124 @@ Please select a different name.</source>
         <translation>Partager vos dossiers ou fichiers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="37"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="38"/>
         <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="46"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="38"/>
+        <source>disabled</source>
+        <translation type="unfinished">désactivé</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="47"/>
         <source>File</source>
         <translation>Fichier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="46"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="47"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="46"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="47"/>
         <source>Path</source>
         <translation>Chemin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="74"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="75"/>
         <source>Share a file</source>
         <translation>Partager un fichier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="75"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="76"/>
         <source>Add a file to your local share</source>
         <translation>Ajouter un fichier à votre partage local</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="77"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="78"/>
         <source>Share a folder</source>
         <translation>Partager un dossier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="78"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="79"/>
         <source>Add a folder to your local share</source>
         <translation>Ajouter un dossier à votre partage local</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="80"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="81"/>
         <source>Update shares</source>
         <translation>Actualiser les partages</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="81"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="82"/>
         <source>Update shared folders and files</source>
         <translation>Actualiser les dossiers et fichiers partagés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="83"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="84"/>
         <source>Remove shared path</source>
         <translation>Supprimer un partage</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="84"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="85"/>
         <source>Remove shared path from the list</source>
         <translation>Supprimer un partage de la liste</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="86"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="87"/>
         <source>Clear all shares</source>
         <translation>Supprimer tous les partages</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="87"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="88"/>
         <source>Clear all shared paths from the list</source>
         <translation>Supprimer tous les partages de la liste</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="96"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="97"/>
         <source>Shared files</source>
         <translation>Fichiers partagés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="98"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="99"/>
         <source>File transfer is disabled</source>
         <translation>Le transfert de fichier est désactivé</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="116"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="117"/>
         <source>Select a file to share</source>
         <translation>Sélectionner un fichier à partager</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="129"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="130"/>
         <source>Select a folder to share</source>
         <translation>Sélectionner un dossier à partager</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="147"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="148"/>
         <source>Please select a shared path.</source>
         <translation>Sélectionnez un chemin de partage.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="154"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="155"/>
         <source>Do you really want to remove this path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="169"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="170"/>
         <source>Do you really want to remove all shared paths?</source>
         <translation>Voulez-vous vraiment supprimer tous les partages ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="156"/>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="157"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="171"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="156"/>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="170"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="157"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="171"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
@@ -4352,12 +4357,12 @@ Please select a different name.</source>
         <translation type="obsolete">Cliquer pour ouvrir %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="219"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="220"/>
         <source>%1 is already shared.</source>
         <translation>%1 est déjà partagé.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="260"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="261"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>Le transfert de fichier est désactivé. Ouvrez le menu des options pour l&apos;activer.</translation>
     </message>
@@ -4676,42 +4681,47 @@ Please select a different name.</source>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="63"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="64"/>
         <source>Birthday: %1</source>
         <translation>Date de naissance : %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="66"/>
+        <source>Happy Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="88"/>
         <source>unknown</source>
         <translation>inconnu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="85"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
         <source>old %1</source>
         <translation>%1 ans</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="87"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>new %1</source>
         <translation>nouveau %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="101"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="106"/>
         <source>Remove from favorites</source>
         <translation>Supprimer des favoris</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="106"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="111"/>
         <source>Add to favorites</source>
         <translation>Ajouter aux favoris</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="111"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="116"/>
         <source>Chat with all</source>
         <translation>Chatter avec tous</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="118"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="123"/>
         <source>Open chat</source>
         <translation>Ouvrir le chat</translation>
     </message>
@@ -4909,19 +4919,19 @@ Please select a different name.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="68"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2668"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="67"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2705"/>
         <location filename="../src/desktop/GuiUserItem.cpp" line="118"/>
         <source>All Lan Users</source>
         <translation>Tous les utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="69"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="68"/>
         <source>Open chat with all local users</source>
         <translation>Ouvrir le chat avec tous les utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="87"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="96"/>
         <source>Open chat with %1</source>
         <translation>Ouvrir le chat avec %1</translation>
     </message>
@@ -4941,17 +4951,17 @@ Please select a different name.</source>
         <translation>Cliquer pour ouvrir le chat avec tous les utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="685"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="688"/>
         <source>%1 is %2</source>
         <translation>%1 est %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="685"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="688"/>
         <source>You are %1</source>
         <translation type="unfinished">Vous êtes %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="688"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="691"/>
         <source>last update</source>
         <translation type="unfinished"></translation>
     </message>

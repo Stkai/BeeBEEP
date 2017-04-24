@@ -29,6 +29,7 @@
 Updater::Updater( QObject *parent )
  : QObject( parent ), m_versionAvailable( "" ), m_downloadUrl( "" )
 {
+  setObjectName( "Updater" );
 }
 
 void Updater::checkForNewVersion()

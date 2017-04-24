@@ -44,6 +44,7 @@ signals:
 
 public slots:
   void updateChat( const Chat& );
+  void updateUser( const User& );
   void onTickEvent( int );
 
 protected slots:

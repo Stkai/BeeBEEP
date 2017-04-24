@@ -223,10 +223,11 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 
   if( file_info_to_check.isInShareBox() )
   {
-    if( !Settings::instance().useShareBox() )
+    if( !Settings::instance().useShareBox() || Settings::instance().disableFileTransfer() )
     {
-      qWarning() << "ShareBox file upload request refused (disabled):" << file_info_to_check.name();
+      qWarning() << "ShareBox file upload request refused (file sharing or sharebox disabled):" << file_info_to_check.name();
       upload_peer->cancelTransfer();
+      return;
     }
 
     file_info = fileInfo( file_info_to_check.id() );
@@ -261,17 +262,17 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
   {
     file_info = fileInfo( file_info_to_check.id() );
 
-    if( !file_info.isValid() )
+    if( !file_info.isValid() && !Settings::instance().disableFileSharing() )
     {
       // Now check file sharing
       file_info = FileShare::instance().localFileInfo( file_info_to_check.id() );
+    }
 
-      if( !file_info.isValid() )
-      {
-        qWarning() << "File Transfer server received a request of a file not in list";
-        upload_peer->cancelTransfer();
-        return;
-      }
+    if( !file_info.isValid() )
+    {
+      qWarning() << "File Transfer server received a request of a file not in list (or file sharing is disabled)";
+      upload_peer->cancelTransfer();
+      return;
     }
 
     if( file_info.password() != file_info_to_check.password() )

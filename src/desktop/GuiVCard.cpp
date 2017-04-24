@@ -60,7 +60,12 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   mp_lStatusDescription->setText( u.statusDescription().isEmpty() ? QString( "" ) : QString( "<i>%1</i>" ).arg( u.statusDescription() ) );
 
   if( u.vCard().birthday().isValid() )
-    mp_lBirthday->setText( tr( "Birthday: %1" ).arg( u.vCard().birthday().toString( Qt::SystemLocaleShortDate ) ) );
+  {
+    QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().toString( Qt::SystemLocaleShortDate ) );
+    if( u.isBirthDay() )
+      s_birth_day += QString( " <font color=red><b>%1!!!</b></font>" ).arg( tr( "Happy Birthday" ) );
+    mp_lBirthday->setText( s_birth_day );
+  }
   else
     mp_lBirthday->setText( "" );
 

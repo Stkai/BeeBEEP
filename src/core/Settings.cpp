@@ -72,6 +72,7 @@ Settings::Settings()
 
   m_allowMultipleInstances = false;
   m_trustSystemAccount = false;
+  m_trustUserHash = true;
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
   m_preferredSubnets = "";
@@ -83,8 +84,10 @@ Settings::Settings()
   m_useEasyConnection = false;
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
+  m_disableFileSharing = true;
 #else
   m_disableFileTransfer = false;
+  m_disableFileSharing = false;
 #endif
 #ifdef BEEBEEP_DISABLE_SEND_MESSAGE
   m_disableSendMessage = true;
@@ -214,13 +217,13 @@ void Settings::createLocalUser()
   qDebug() << "System Account:" << m_localUser.accountName();
 }
 
-void Settings::createSessionId()
+void Settings::createLocalUserHash()
 {
-  QString session_parameters = QString( "%1%2%3%4" ).arg( m_localUser.accountName() ).arg( m_localUser.path() )
+  QString hash_parameters = QString( "%1%2%3%4" ).arg( m_localUser.accountName() ).arg( m_localUser.name() )
           .arg( version( true, true ) ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
-  QString session_id = simpleHash( session_parameters );
-  qDebug() << "Session ID created:" << session_id;
-  m_localUser.setSessionId( session_id );
+  QString local_user_hash = simpleHash( hash_parameters );
+  qDebug() << "Local user HASH created:" << local_user_hash;
+  m_localUser.setHash( local_user_hash );
 }
 
 bool Settings::createDefaultRcFile()
@@ -262,6 +265,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "UseHive", m_useHive );
     sets->setValue( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername );
     sets->setValue( "DisableFileTransfer", m_disableFileTransfer );
+    sets->setValue( "DisableFileSharing", m_disableFileSharing );
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
     sets->setValue( "StartMinimized", m_startMinimized );
@@ -271,6 +275,7 @@ bool Settings::createDefaultRcFile()
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustSystemAccount", m_trustSystemAccount );
+    sets->setValue( "TrustUserHash", m_trustUserHash );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << sets->fileName();
@@ -330,8 +335,10 @@ void Settings::loadRcFile()
   m_useHostnameForDefaultUsername = sets->value( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername ).toBool();
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
+  m_disableFileSharing = true;
 #else
   m_disableFileTransfer = sets->value( "DisableFileTransfer", m_disableFileTransfer ).toBool();
+  m_disableFileSharing = sets->value( "DisableFileSharing", m_disableFileSharing ).toBool();
 #endif
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
@@ -343,6 +350,7 @@ void Settings::loadRcFile()
 
   sets->beginGroup( "Groups" );
   m_trustSystemAccount = sets->value( "TrustSystemAccount", m_trustSystemAccount ).toBool();
+  m_trustUserHash = sets->value( "TrustUserHash", m_trustUserHash ).toBool();
   sets->endGroup();
 
   QStringList key_list = sets->allKeys();
@@ -868,7 +876,7 @@ void Settings::load()
     m_floatingChatState = "";
     m_floatingChatSplitterState = "";
     m_mainBarIconSize = QSize( 24, 24 );
-    m_avatarIconSize = QSize( 32, 32 );
+    m_avatarIconSize = QSize( 28, 28 );
     m_previewFileDialogGeometry = "";
   }
   else
@@ -879,7 +887,7 @@ void Settings::load()
     m_floatingChatState = sets->value( "FloatingChatState", "" ).toByteArray();
     m_floatingChatSplitterState = sets->value( "FloatingChatSplitterState", "" ).toByteArray();
     m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
-    m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 32, 32 ) ).toSize();
+    m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 28, 28 ) ).toSize();
     m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
   }
 
@@ -1001,18 +1009,30 @@ void Settings::load()
   {
     m_fileTransferIsEnabled = false;
     m_useShareBox = false;
+    m_maxFileShared = -1;
   }
   else
   {
     m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
-    m_useShareBox = sets->value( "UseShareBox", false ).toBool();
+    if( m_disableFileSharing )
+    {
+      m_useShareBox = false;
+      m_maxFileShared = -1;
+    }
+    else
+    {
+      m_useShareBox = sets->value( "UseShareBox", false ).toBool();
+      m_maxFileShared = sets->value( "MaxSharedFiles", 4096 ).toInt();
+      if( m_maxFileShared < 0 )
+        m_maxFileShared = 4096;
+    }
   }
   m_shareBoxPath = checkFolderPath( sets->value( "ShareBoxPath", "" ).toString(), "" );
   m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
   m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
-  m_maxFileShared = qMax( 0, sets->value( "MaxSharedFiles", 4096 ).toInt() );
+
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
   m_overwriteExistingFiles = sets->value( "OverwriteExistingFiles", false ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
@@ -1257,16 +1277,17 @@ void Settings::save()
   {
     sets->setValue( "FileTransferIsEnabled", false );
     sets->setValue( "UseShareBox", false );
+    sets->setValue( "MaxSharedFiles", -1 );
   }
   else
   {
     sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
     sets->setValue( "UseShareBox", m_useShareBox );
+    sets->setValue( "MaxSharedFiles", m_maxFileShared );
   }
   sets->setValue( "ShareBoxPath", m_shareBoxPath );
   sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
   sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );
-  sets->setValue( "MaxSharedFiles", m_maxFileShared );
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->setValue( "MaxSimultaneousDownloads", m_maxSimultaneousDownloads );

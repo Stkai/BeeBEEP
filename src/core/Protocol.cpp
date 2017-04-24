@@ -273,7 +273,7 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   data_list << Settings::instance().localUser().accountName();
   data_list << public_key;
   data_list << Settings::instance().version( false, false );
-  data_list << Settings::instance().localUser().sessionId();
+  data_list << Settings::instance().localUser().hash();
   data_list << Settings::instance().localUser().color();
   if( Settings::instance().workgroups().isEmpty() )
     data_list << QString( "" );
@@ -508,9 +508,9 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( !sl.isEmpty() )
     user_version = sl.takeFirst();
 
-  QString user_session_id = "";
+  QString user_hash = "";
   if( !sl.isEmpty() )
-    user_session_id = sl.takeFirst();
+    user_hash = sl.takeFirst();
 
   QString user_color( "#000000" );
   if( !sl.isEmpty() )
@@ -546,7 +546,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setStatusDescription( user_status_description );
   u.setAccountName( user_account_name );
   u.setVersion( user_version );
-  u.setSessionId( user_session_id );
+  u.setHash( user_hash );
   u.setColor( user_color );
   u.setQtVersion( user_qt_version );
   return u;

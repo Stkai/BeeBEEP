@@ -181,10 +181,13 @@ void Core::parseFileMessage( const User& u, const Message& m )
     return;
   }
 
-  if( fi.isInShareBox() && !Settings::instance().useShareBox() )
+  if( fi.isInShareBox() )
   {
-    refuseToDownloadFile( u.id(), fi );
-    return;
+    if( !Settings::instance().useShareBox() || Settings::instance().disableFileSharing() )
+    {
+      refuseToDownloadFile( u.id(), fi );
+      return;
+    }
   }
 
   Connection* c = connection( u.id() );
@@ -421,7 +424,15 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
   if( !Settings::instance().fileTransferIsEnabled() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(option disabled)";
+    qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file transfer disabled)";
+#endif
+    return;
+  }
+
+  if( Settings::instance().disableFileSharing() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file sharing disabled)";
 #endif
     return;
   }

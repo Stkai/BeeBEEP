@@ -83,7 +83,7 @@ int main( int argc, char *argv[] )
 
   /* Enable internal logs */
   Log::installMessageHandler();
-  // Next line removes QSslSocket: cannot resolve SSL_ warnings
+  // Next line removes QSslSocket: cannot resolve SSL_* warnings
 #if QT_VERSION >= 0x050000
   QLoggingCategory::setFilterRules( QStringLiteral( "qt.network.ssl.warning=false" ) );
 #endif
@@ -101,6 +101,8 @@ int main( int argc, char *argv[] )
   qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().load();
   Settings::instance().createLocalUser();
+  Settings::instance().createLocalUserHash();
+  Settings::instance().createApplicationUuid();
   Log::instance().setMaxLogLines( Settings::instance().maxLogLines() );
   qDebug() << "Log has set max lines to:" << (int)Settings::instance().maxLogLines();
 

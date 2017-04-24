@@ -27,7 +27,7 @@
 User::User()
   : m_id( ID_INVALID ), m_vCard(), m_networkAddress(), m_status( User::Offline ),
     m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ), m_version( "" ),
-    m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
+    m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
     m_statusChangedIn()
 {
 }
@@ -35,7 +35,7 @@ User::User()
 User::User( VNumber new_id )
   : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( "127.0.0.1" ), DEFAULT_LISTENER_PORT ),
     m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_version( "" ), m_sessionId( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
+    m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
     m_statusChangedIn()
 {
   setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
@@ -58,21 +58,13 @@ User& User::operator=( const User& u )
     m_color = u.m_color;
     m_accountName = u.m_accountName;
     m_version = u.m_version;
-    m_sessionId = u.m_sessionId;
+    m_hash = u.m_hash;
     m_isFavorite = u.m_isFavorite;
     m_qtVersion = u.m_qtVersion;
     m_protocolVersion = u.m_protocolVersion;
     m_statusChangedIn = u.m_statusChangedIn;
   }
   return *this;
-}
-
-bool User::isBirthDay() const
-{
-  if( m_vCard.birthday().isNull() )
-    return false;
-  QDate current_date = QDateTime::currentDateTime().date();
-  return current_date.month() == m_vCard.birthday().month() && current_date.day() == m_vCard.birthday().day();
 }
 
 QString User::nameFromPath( const QString& user_path )
@@ -140,4 +132,13 @@ bool User::operator<( const User& u ) const
     return true;
 
   return name() < u.name();
+}
+
+bool User::isBirthDay() const
+{
+  if( m_vCard.birthday().isNull() )
+    return false;
+
+  QDate d_today = QDate::currentDate();
+  return m_vCard.birthday().day() == d_today.day() && m_vCard.birthday().month() == d_today.month();
 }

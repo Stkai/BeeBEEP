@@ -223,7 +223,7 @@ void GuiScreenShot::doSend()
   QString screenshot_initial_path = Settings::instance().dataFolder() +
                                     tr( "/beesshottmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
                                     + screenshot_format;
-  QString file_path = Bee::uniqueFilePath( screenshot_initial_path );
+  QString file_path = Bee::uniqueFilePath( screenshot_initial_path, false );
 
   if( !m_screenShot.save( file_path, screenshot_format.toLatin1() ) )
   {

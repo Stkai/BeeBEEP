@@ -98,7 +98,7 @@ void SaveChatList::saveChats( QDataStream* stream )
     return;
   }
 
-  qint32 num_of_chats = ChatManager::instance().countNotEmptyChats();
+  qint32 num_of_chats = ChatManager::instance().countNotEmptyChats( false );
   quint64 file_pos = stream->device()->pos();
   (*stream) << num_of_chats;
 

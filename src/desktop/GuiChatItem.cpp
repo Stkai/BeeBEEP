@@ -23,6 +23,7 @@
 
 #include "GuiChatItem.h"
 #include "Chat.h"
+#include "Settings.h"
 #include "UserManager.h"
 
 
@@ -37,10 +38,10 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
   QString other_name = item.data( 0, GuiChatItem::ChatName ).toString().toLower();
 
   if( chatId() == ID_DEFAULT_CHAT )
-    return false;
+    return true;
 
   if( Bee::qVariantToVNumber( item.data( 0, GuiChatItem::ChatId ) ) == ID_DEFAULT_CHAT )
-    return true;
+    return false;
 
   if( isGroup() && !item.data( 0, GuiChatItem::ChatIsGroup ).toBool() )
     return false;
@@ -61,26 +62,34 @@ bool GuiChatItem::updateItem( const Chat& c )
   QString chat_name;
   QString tool_tip;
 
-  setIcon( 0, QIcon( ":/images/chat.png" ) );
-
   if( c.isDefault() )
   {
     chat_name = QObject::tr( "All Lan Users" );
     tool_tip = QObject::tr( "Open chat with all local users" );
     setData( 0, ChatName, " " );
+    setIcon( 0, QIcon( ":/images/default-chat-online.png" ) );
   }
   else
   {
+    setIcon( 0, QIcon( ":/images/chat.png" ) );
     UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
     QStringList sl;
     foreach( User u, user_list.toList() )
     {
       if( !u.isLocal() && u.isValid() )
+      {
         sl.append( u.name() );
+        if( c.isPrivateForUser( u.id() ) )
+          setIcon( 0, Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() ) );
+      }
     }
 
     if( c.isGroup() )
+    {
       chat_name = c.name();
+      if( UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() )
+        setIcon( 0, QIcon( ":/images/group.png" ) );
+    }
     else
       chat_name = sl.isEmpty() ? c.name() : sl.first();
 

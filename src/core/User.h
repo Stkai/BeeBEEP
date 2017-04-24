@@ -61,8 +61,8 @@ public:
   inline const QString& accountName() const;
   inline void setVersion( const QString& );
   inline const QString& version() const;
-  inline void setSessionId( const QString& );
-  inline const QString& sessionId() const;
+  inline void setHash( const QString& );
+  inline const QString& hash() const;
   inline void setIsFavorite( bool );
   inline bool isFavorite() const;
   inline void setQtVersion( const QString& );
@@ -90,7 +90,7 @@ private:
   QString m_color;
   QString m_accountName;
   QString m_version;
-  QString m_sessionId;
+  QString m_hash;
   bool m_isFavorite;
   QString m_qtVersion;
   int m_protocolVersion;
@@ -122,8 +122,8 @@ inline void User::setAccountName( const QString& new_value ) { m_accountName = n
 inline const QString& User::accountName() const { return m_accountName; }
 inline void User::setVersion( const QString& new_value ) { m_version = new_value; }
 inline const QString& User::version() const { return m_version; }
-inline void User::setSessionId( const QString& new_value ) { m_sessionId = new_value; }
-inline const QString& User::sessionId() const { return m_sessionId; }
+inline void User::setHash( const QString& new_value ) { m_hash = new_value; }
+inline const QString& User::hash() const { return m_hash; }
 inline void User::setIsFavorite( bool new_value ) { m_isFavorite = new_value; }
 inline bool User::isFavorite() const { return m_isFavorite; }
 inline void User::setQtVersion( const QString& new_value ) { m_qtVersion = new_value; }

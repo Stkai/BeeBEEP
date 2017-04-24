@@ -50,9 +50,9 @@ UseOnlyTextEmoticons=[true/false] If enabled BeeBEEP does not show the emoticon 
 DisablePrivateChats=[true/false] disable private chat with users (default=false) [3.2.0]
 
 [Groups]
-TrustNickname= if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete 3.2.0]
-TrustSystemAccount= if true BeeBEEP trusts before system account to recognize a user. Useful if your are in active directory domain or similar (default=false) [1.0.0]
-
+TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete 3.2.0]
+TrustSystemAccount=[true/false] if true BeeBEEP trusts only system account to recognize a user. Useful if your are in active directory domain or similar (default=false) [1.0.0]
+TrustUserHash=[true/false] if true BeeBEEP tries to recognize users using their hash (default=true) [3.2.0]
 
 /***************************/
 /***  FILE: beebeep.ini  ***/

@@ -43,7 +43,7 @@ public:
   QString operatingSystemIconPath() const;
   QString accountNameFromSystemEnvinroment() const;
   void createLocalUser();
-  void createSessionId();
+  void createLocalUserHash();
   void setResourceFolder();
   bool setDataFolder();
   bool createDefaultRcFile();
@@ -54,6 +54,7 @@ public:
 
   inline bool allowMultipleInstances() const;
   inline bool trustSystemAccount() const;
+  inline bool trustUserHash() const;
 
   inline void setCheckNewVersionAtStartup( bool );
   inline bool checkNewVersionAtStartup() const;
@@ -99,6 +100,7 @@ public:
   inline bool disablePrivateChats() const;
 
   inline bool disableFileTransfer() const;
+  inline bool disableFileSharing() const;
   inline bool disableSendMessage() const;
   inline bool useEasyConnection() const;
 
@@ -452,6 +454,7 @@ private:
   // RC
   bool m_useSettingsFileIni;
   bool m_trustSystemAccount;
+  bool m_trustUserHash;
   bool m_broadcastOnlyToHostsIni;
   int m_defaultBroadcastPort;
   int m_defaultListenerPort;
@@ -475,6 +478,7 @@ private:
   QString m_signature;
   bool m_useOnlyTextEmoticons;
   bool m_disablePrivateChats;
+  bool m_disableFileSharing;
 
   // Ini
   bool m_firstTime;
@@ -661,6 +665,7 @@ inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
+inline bool Settings::trustUserHash() const { return m_trustUserHash; }
 inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }
 inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
@@ -896,6 +901,7 @@ inline void Settings::setShowFileTransferCompletedOnTray( bool new_value ) { m_s
 inline bool Settings::showFileTransferCompletedOnTray() const { return m_showFileTransferCompletedOnTray; }
 inline bool Settings::useLowDelayOptionOnSocket() const { return m_useLowDelayOptionOnSocket; }
 inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer; }
+inline bool Settings::disableFileSharing() const { return m_disableFileSharing; }
 inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
 inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }
 inline void Settings::setUseShareBox( bool new_value ) { m_useShareBox = new_value; }

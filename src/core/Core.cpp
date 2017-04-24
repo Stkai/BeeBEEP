@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "Connection.h"
 #include "Core.h"
@@ -148,11 +149,6 @@ bool Core::start()
   qDebug() << "Listener binds" << qPrintable( mp_listener->serverAddress().toString() ) << mp_listener->serverPort();
   NetworkManager::instance().searchLocalHostAddress();
   Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), mp_listener->serverPort() );
-
-  if( Settings::instance().localUser().sessionId().isEmpty() )
-    Settings::instance().createSessionId();
-
-  Settings::instance().createApplicationUuid();
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Network password used:" << Settings::instance().passwordBeforeHash();
@@ -431,8 +427,11 @@ void Core::checkNewVersion()
     return;
 
   qDebug() << "Checking for new version...";
-  Updater* updater = new Updater( this );
+  Updater* updater = new Updater;
   connect( updater, SIGNAL( jobCompleted() ), this, SLOT( onUpdaterJobCompleted() ) );
+  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
+  if( bee_app )
+    bee_app->addJob( updater );
   QMetaObject::invokeMethod( updater, "checkForNewVersion", Qt::QueuedConnection );
 }
 
@@ -444,6 +443,10 @@ void Core::onUpdaterJobCompleted()
     qWarning() << "Core received a signal from invalid Updater instance";
     return;
   }
+
+  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
+  if( bee_app )
+    bee_app->removeJob( updater );
 
   QString latest_version = updater->versionAvailable();
   QString download_url = updater->downloadUrl().isEmpty() ? Settings::instance().downloadWebSite() : updater->downloadUrl();
@@ -475,11 +478,14 @@ void Core::postUsageStatistics()
   if( !NetworkManager::instance().isMainInterfaceUp() )
     return;
 
-  GAnalytics* ga = new GAnalytics( this );
+  GAnalytics* ga = new GAnalytics;
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( ga->objectName() ) << "created";
 #endif
   connect( ga, SIGNAL( jobFinished() ), this, SLOT( onPostUsageStatisticsJobCompleted() ) );
+  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
+  if( bee_app )
+    bee_app->addJob( ga );
   QMetaObject::invokeMethod( ga, "doPost", Qt::QueuedConnection );
 }
 
@@ -497,6 +503,10 @@ void Core::onPostUsageStatisticsJobCompleted()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( ga->objectName() ) << "will be cleared";
 #endif
+
+  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
+  if( bee_app )
+    bee_app->removeJob( ga );
 
   ga->deleteLater();
 }

@@ -205,15 +205,15 @@ void GuiMain::checkWindowFlagsAndShow()
   }
 
   Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
-  setAttribute( Qt::WA_ShowWithoutActivating );
 
   if( !isVisible() )
     show();
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width()+12, qMax( QApplication::desktop()->screenGeometry().height() - 120, 560 ) );
-    move( QApplication::desktop()->screenGeometry().width() - width() - 10, 30 );
+    resize( width()+12, qMin( 720, qMax( QApplication::desktop()->availableGeometry().height() - 120, 560 ) ) );
+    move( QApplication::desktop()->availableGeometry().width() - width() - 20,
+          ((QApplication::desktop()->availableGeometry().height() - height()) / 3) );
   }
   else
   {
@@ -258,6 +258,25 @@ void GuiMain::showUp()
 void GuiMain::updateWindowTitle()
 {
   setWindowTitle( Settings::instance().localUser().name() );
+}
+
+void GuiMain::updateTabTitles()
+{
+  int tab_index = mp_tabMain->indexOf( mp_userList );
+  int current_value = mp_core->connectedUsers();
+  mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
+
+  tab_index = mp_tabMain->indexOf( mp_chatList );
+  current_value = mp_chatList->topLevelItemCount();
+  mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
+
+  tab_index = mp_tabMain->indexOf( mp_groupList );
+  current_value = UserManager::instance().groups().size();
+  mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
+
+  tab_index = mp_tabMain->indexOf( mp_savedChatList );
+  current_value = ChatManager::instance().constHistoryMap().size();
+  mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
 }
 
 void GuiMain::keyPressEvent( QKeyEvent* e )
@@ -502,6 +521,7 @@ void GuiMain::checkViewActions()
     mp_fileSharing->checkViewActions();
 
   updateWindowTitle();
+  updateTabTitles();
 }
 
 void GuiMain::showAbout()
@@ -833,6 +853,7 @@ void GuiMain::createMenus()
   mp_actViewNewMessage = mp_menuView->addAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this, SLOT( showNextChat() ) );
   mp_menuView->addAction( mp_actViewFileTransfer );
   mp_actViewFileSharing = mp_menuView->addAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this, SLOT( showFileSharingWindow() ) );
+  mp_actViewFileSharing->setDisabled( Settings::instance().disableFileSharing() );
   mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( showLogWindow() ) );
   mp_menuView->addAction( mp_actViewScreenShot );
   mp_menuView->addSeparator();
@@ -1056,6 +1077,7 @@ void GuiMain::onUserChanged( const User& u )
 {
   mp_userList->setUser( u, true );
   mp_groupList->updateUser( u );
+  mp_chatList->updateUser( u );
   if( mp_fileSharing )
     mp_fileSharing->onUserChanged( u );
  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
@@ -1416,13 +1438,13 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
     }
 
     fl_chat->setMainIcon( true );
-    QApplication::alert( fl_chat );
+    QApplication::alert( fl_chat, 0 );
   }
   else
   {
     if( Settings::instance().raiseOnNewMessageArrived() )
       showUp();
-    QApplication::alert( this );
+    QApplication::alert( this, 2000 );
   }
 
   if( show_message_in_tray )
@@ -1692,10 +1714,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
     }
 
     Chat c = ChatManager::instance().privateChatForUser( user_selected.id() );
-    if( c.isValid() )
-      chat_id = c.id();
-    else
-      chat_id = ID_INVALID;
+    chat_id = c.id();
   }
   else
     user_selected = u;
@@ -1729,7 +1748,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
       {
         if( Settings::instance().raiseOnNewMessageArrived() )
           showUp();
-        QApplication::alert( this );
+        QApplication::alert( this, 0 );
       }
       QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
       msg_result = QMessageBox::question( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
@@ -1758,7 +1777,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
         QString file_name;
         if( auto_file_name )
         {
-          file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath() );
+          file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath(), true );
           qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save with" << file_name;
         }
         else
@@ -1955,7 +1974,6 @@ void GuiMain::showChat( VNumber chat_id )
   if( !fl_chat->chatIsVisible() )
     fl_chat->showUp();
 
-  readAllMessagesInChat( chat_id );
   fl_chat->setFocusInChat();
 }
 
@@ -2174,9 +2192,12 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 
 void GuiMain::trayMessageClicked()
 {
+  // QT 2017-04-24: Currently this signal is not sent on macOS.
+
   if( mp_trayIcon->chatId() != ID_INVALID && ChatManager::instance().chat( mp_trayIcon->chatId() ).isValid() )
   {
-    showChat( mp_trayIcon->chatId() );
+    VNumber chat_id = mp_trayIcon->chatId();
+    showChat( chat_id );
   }
   else
     QMetaObject::invokeMethod( this, "showUp", Qt::QueuedConnection );
@@ -2426,6 +2447,16 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
   if( chat_name.isEmpty() )
     return;
 
+  foreach( QWidget* w, qApp->allWidgets() )
+  {
+    GuiSavedChat* gsv = qobject_cast<GuiSavedChat*>( w );
+    if( gsv && gsv->savedChatName() == chat_name )
+    {
+      gsv->raise();
+      return;
+    }
+  }
+
   GuiSavedChat* saved_chat = new GuiSavedChat( this );
   saved_chat->setAttribute( Qt::WA_DeleteOnClose, true );
   connect( saved_chat, SIGNAL( deleteSavedChatRequest( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
@@ -2438,6 +2469,7 @@ void GuiMain::removeSavedChat( const QString& chat_name )
 {
   mp_core->removeSavedChat( chat_name );
   mp_savedChatList->updateSavedChats();
+  updateTabTitles();
 }
 
 void GuiMain::linkSavedChat( const QString& chat_name )
@@ -2597,6 +2629,7 @@ void GuiMain::onChatChanged( const Chat& c )
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
     fl_chat->setChat( c );
+  updateTabTitles();
 }
 
 bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
@@ -2634,6 +2667,7 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
     }
 
     mp_groupList->loadGroups();
+    updateTabTitles();
   }
 
   if( !checkAllChatMembersAreConnected( c.usersId() ) )
@@ -2653,7 +2687,10 @@ void GuiMain::removeGroup( VNumber group_id )
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
       if( mp_core->removeGroup( group_id ) )
+      {
         mp_groupList->loadGroups();
+        updateTabTitles();
+      }
       else
         QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot delete %1." ).arg( g.name() ) );
     }
@@ -2688,6 +2725,8 @@ void GuiMain::clearChat( VNumber chat_id )
   default:
     return;
   }
+
+  updateTabTitles();
 }
 
 void GuiMain::removeChat( VNumber chat_id )
@@ -2706,6 +2745,7 @@ void GuiMain::removeChat( VNumber chat_id )
   if( mp_core->removeChat( chat_id ) )
   {
     mp_chatList->reloadChatList();
+    updateTabTitles();
     GuiFloatingChat* fl_chat = floatingChat( chat_id );
     if( fl_chat )
       fl_chat->close();
@@ -2991,12 +3031,13 @@ void GuiMain::changeAvatarSizeInList()
 {
   bool ok = false;
   int avatar_size = QInputDialog::getInt( this, Settings::instance().programName(), tr( "Please select the new size of the user picture" ),
-                                          Settings::instance().avatarIconSize().height(), 16, 96, 8, &ok );
+                                          Settings::instance().avatarIconSize().height(), 16, 96, 4, &ok );
   if( !ok )
     return;
 
   Settings::instance().setAvatarIconSize( QSize( avatar_size, avatar_size ) );
   refreshUserList();
+  mp_chatList->reloadChatList();
 }
 
 void GuiMain::toggleUserFavorite( VNumber user_id )
@@ -3019,6 +3060,7 @@ void GuiMain::removeUserFromList( VNumber user_id )
       closeFloatingChat( c.id() );
     refreshUserList();
     mp_chatList->reloadChatList();
+    updateTabTitles();
   }
 }
 
@@ -3083,6 +3125,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   if( Settings::instance().showChatsInOneWindow() && !m_floatingChats.isEmpty() )
     fl_chat = m_floatingChats.first();
 
+  bool window_is_created = true;
   if( !fl_chat )
   {
     fl_chat = new GuiFloatingChat( mp_core );
@@ -3092,6 +3135,8 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
     m_floatingChats.append( fl_chat );
   }
+  else
+    window_is_created = false;
 
   if( !fl_chat->setChat( c ) )
   {
@@ -3100,7 +3145,14 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     return 0;
   }
 
-  fl_chat->checkWindowFlagsAndShow();
+  if( window_is_created )
+  {
+    fl_chat->checkWindowFlagsAndShow();
+    QApplication::setActiveWindow( fl_chat );
+  }
+  else
+    fl_chat->showUp();
+
   return fl_chat;
 }
 
@@ -3188,9 +3240,11 @@ void GuiMain::clearRecentlyUsedUserStatus()
 
 void GuiMain::loadSavedChatsCompleted()
 {
+  mp_chatList->reloadChatList();
   mp_savedChatList->updateSavedChats();
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->setChat( ChatManager::instance().chat( fl_chat->guiChat()->chatId() ) );
+  updateTabTitles();
 }
 
 void GuiMain::editShortcuts()
@@ -3376,6 +3430,9 @@ void GuiMain::onTickEvent( int ticks )
 
   if( mp_core->hasFileTransferInProgress() )
     mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? QIcon( ":/images/file-transfer-progress.png" ) : QIcon( ":/images/file-transfer.png" ) );
+
+  if( mp_actViewNewMessage->isEnabled() )
+    QApplication::alert( this, 1000 );
 }
 
 void GuiMain::onChatReadByUser( const Chat& c, const User& u )
@@ -3510,6 +3567,9 @@ void GuiMain::showBuzzFromUser( const User& u )
 
 void GuiMain::showFileSharingWindow()
 {
+  if( Settings::instance().disableFileSharing() )
+    return;
+
   if( !mp_fileSharing )
   {
     mp_fileSharing = new GuiFileSharing( mp_core, 0 );

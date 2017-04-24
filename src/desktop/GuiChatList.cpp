@@ -37,6 +37,7 @@ GuiChatList::GuiChatList( QWidget* parent )
   header()->hide();
   setRootIsDecorated( false );
   setSortingEnabled( true );
+  setIconSize( Settings::instance().avatarIconSize() );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
@@ -62,6 +63,7 @@ void GuiChatList::reloadChatList()
 {
   clearSelection();
   clear();
+  setIconSize( Settings::instance().avatarIconSize() );
   foreach( Chat c, ChatManager::instance().constChatList() )
     updateChat( c );
 }
@@ -84,8 +86,12 @@ void GuiChatList::updateChat( const Chat& c )
 {
   if( !c.isValid() )
     return;
-  if( c.isEmpty() && !c.isGroup() && !c.isDefault() )
-    return;
+
+  if( !c.isGroup() )
+  {
+    if( ChatManager::instance().isChatEmpty( c, true ) )
+      return;
+  }
 
   GuiChatItem* item = itemFromChatId( c.id() );
   if( !item )
@@ -95,6 +101,13 @@ void GuiChatList::updateChat( const Chat& c )
   }
 
   item->updateItem( c );
+}
+
+void GuiChatList::updateUser( const User& u )
+{
+  Chat c = ChatManager::instance().privateChatForUser( u.id() );
+  if( c.isValid() )
+    updateChat( c );
 }
 
 void GuiChatList::chatClicked( QTreeWidgetItem* item, int )

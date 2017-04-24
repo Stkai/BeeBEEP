@@ -236,28 +236,33 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   else
     qDebug() << qPrintable( u.path() ) << "has completed the authentication";
 
+  User user_found;
   bool user_has_same_account_name = false;
-  User user_found = UserManager::instance().findUserBySessionId( u.sessionId() );
-  if( !user_found.isValid() )
+
+  if( Settings::instance().trustSystemAccount() )
   {
-    if( Settings::instance().trustSystemAccount() )
+    user_found = UserManager::instance().findUserByAccountName( u.accountName() );
+    if( user_found.isValid() )
     {
-      user_found = UserManager::instance().findUserByAccountName( u.accountName() );
-      if( user_found.isValid() )
-      {
-        user_has_same_account_name = true;
-        qDebug() << "User found in list with account name:" << qPrintable( u.accountName() );
-      }
-    }
-    else
-    {
-      user_found = UserManager::instance().findUserByNickname( u.name() );
-      if( user_found.isValid() )
-        qDebug() << "User found in list with name:" << qPrintable( u.name() );
+      user_has_same_account_name = true;
+      qDebug() << "User found in list with account name:" << qPrintable( u.accountName() );
     }
   }
   else
-    qDebug() << "User found in list with session id:" << qPrintable( u.sessionId() );
+  {
+    user_found = UserManager::instance().findUserByNickname( u.name() );
+    if( !user_found.isValid() )
+    {
+      if( Settings::instance().trustUserHash() )
+      {
+        user_found = UserManager::instance().findUserByHash( u.hash() );
+        if( user_found.isValid() )
+          qDebug() << "User found in list with hash:" << qPrintable( u.hash() );
+      }
+    }
+    else
+      qDebug() << "User found in list with name:" << qPrintable( u.name() );
+  }
 
   bool user_path_changed = false;
 
@@ -271,7 +276,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
       {
         if( user_has_same_account_name )
         {
-          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your system name." )
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name." )
                           .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.accountPath() );
         }
         else
@@ -283,7 +288,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
       }
 
-      qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
+      qWarning() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
       closeConnection( c );
       return;
     }

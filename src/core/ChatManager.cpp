@@ -42,18 +42,15 @@ Chat ChatManager::chat( VNumber chat_id ) const
       if( c.id() == chat_id )
         return c;
     }
-    qWarning() << "Unable to find chat with id" << chat_id;
+    qWarning() << "Unable to find chat with id:" << chat_id;
   }
   return Chat();
 }
 
 Chat ChatManager::privateChatForUser( VNumber user_id ) const
 {
-  if( user_id == ID_INVALID )
+  if( user_id == ID_INVALID || user_id == ID_LOCAL_USER )
     return Chat();
-
-  if( user_id == ID_LOCAL_USER )
-    return chat( ID_DEFAULT_CHAT );
 
   foreach( Chat c, m_chats )
   {
@@ -61,7 +58,7 @@ Chat ChatManager::privateChatForUser( VNumber user_id ) const
       return c;
   }
 
-  qWarning() << "Unable to find private chat for user id" << user_id;
+  qWarning() << "Unable to find private chat for user id:" << user_id;
   return Chat();
 }
 
@@ -75,7 +72,7 @@ Chat ChatManager::findChatByName( const QString& chat_name ) const
         return c;
     }
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to find group chat with name" << chat_name;
+    qWarning() << "Unable to find group chat with name:" << chat_name;
 #endif
   }
 #ifdef BEEBEEP_DEBUG
@@ -98,7 +95,7 @@ Chat ChatManager::findChatByPrivateId( const QString& chat_private_id, bool skip
         return c;
     }
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to find group chat with private id" << chat_private_id;
+    qWarning() << "Unable to find group chat with private id:" << chat_private_id;
 #endif
     return Chat();
   }
@@ -259,12 +256,25 @@ int ChatManager::savedChatSize( const QString& chat_name ) const
     return 0;
 }
 
-int ChatManager::countNotEmptyChats() const
+bool ChatManager::isChatEmpty( const Chat& c, bool check_also_history ) const
+{
+  if( c.isEmpty() )
+  {
+    if( check_also_history)
+      return !chatHasSavedText( c.name() );
+    else
+      return true;
+  }
+  else
+    return false;
+}
+
+int ChatManager::countNotEmptyChats( bool check_also_history ) const
 {
   int num_chats = 0;
   foreach( Chat c, m_chats )
   {
-    if( !c.isEmpty() )
+    if( isChatEmpty( c, check_also_history ) )
       num_chats++;
   }
   return num_chats;

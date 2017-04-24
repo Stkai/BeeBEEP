@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -636,7 +636,7 @@
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your system name.</source>
-        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso nome di sistema.</translation>
+        <translation type="obsolete">%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso nome di sistema.</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your nickname.</source>
@@ -689,6 +689,10 @@
     <message>
         <source>%1 Chat with %2</source>
         <translation>%1 Parla con %2</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses your account name.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso account di sistema.</translation>
     </message>
 </context>
 <context>
@@ -2890,7 +2894,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="vanished">Storia</translation>
+        <translation type="obsolete">Storia</translation>
     </message>
     <message>
         <source>Show the saved chat list</source>
@@ -3366,19 +3370,19 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the user panel</source>
-        <translation type="vanished">Mostra il pannello degli utenti</translation>
+        <translation type="obsolete">Mostra il pannello degli utenti</translation>
     </message>
     <message>
         <source>Show the group panel</source>
-        <translation type="vanished">Mostra il pannello dei gruppi</translation>
+        <translation type="obsolete">Mostra il pannello dei gruppi</translation>
     </message>
     <message>
         <source>Show the chat panel</source>
-        <translation type="vanished">Mostra il pannello delle conversazioni</translation>
+        <translation type="obsolete">Mostra il pannello delle conversazioni</translation>
     </message>
     <message>
         <source>Show the history panel</source>
-        <translation type="vanished">Mostra il pannello della storia</translation>
+        <translation type="obsolete">Mostra il pannello della storia</translation>
     </message>
     <message>
         <source>Show the file transfer panel</source>
@@ -3986,7 +3990,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Show the panel tool bar</source>
-        <translation type="vanished">Mostra la barra dei pannelli</translation>
+        <translation type="obsolete">Mostra la barra dei pannelli</translation>
     </message>
     <message>
         <source>Use native file dialogs</source>
@@ -5000,6 +5004,10 @@ il file %2 (%3)?</translation>
         <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
         <translation>massimo &lt;b&gt;%1&lt;/b&gt; file</translation>
     </message>
+    <message>
+        <source>disabled</source>
+        <translation>disabilitato</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
@@ -5437,6 +5445,10 @@ il file %2 (%3)?</translation>
     <message>
         <source>Add to favorites</source>
         <translation>Aggiungi ai preferiti</translation>
+    </message>
+    <message>
+        <source>Happy Birthday</source>
+        <translation>Buon Compleanno</translation>
     </message>
 </context>
 <context>
