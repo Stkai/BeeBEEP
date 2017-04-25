@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -3326,7 +3326,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Visualizza</translation>
+        <translation type="vanished">Viste</translation>
     </message>
     <message>
         <source>?</source>
@@ -3406,7 +3406,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Preferenze</translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <source>Load on system tray at startup</source>
@@ -3902,7 +3902,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
-        <translation type="obsolete">Usa la nuova applicazione per copiare i file e le cartelle sviluppata da Marco Mastroddi</translation>
+        <translation>Usa la nuova applicazione per copiare i file e le cartelle sviluppata da Marco Mastroddi</translation>
     </message>
     <message>
         <source>New file from %1</source>
@@ -5436,7 +5436,7 @@ il file %2 (%3)?</translation>
     </message>
     <message>
         <source>unknown</source>
-        <translation>sconosciuto</translation>
+        <translation type="vanished">sconosciuto</translation>
     </message>
     <message>
         <source>Remove from favorites</source>

@@ -583,6 +583,16 @@ void GuiMain::createActions()
   mp_actCreateGroup = new QAction(  QIcon( ":/images/group-add.png" ), tr( "Create group" ), this );
   connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SLOT( createGroup() ) );
 
+  mp_actViewNewMessage = new QAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this );
+  connect( mp_actViewNewMessage, SIGNAL( triggered() ), this, SLOT( showNextChat() ) );
+
+  mp_actViewFileSharing = new QAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this );
+  connect( mp_actViewFileSharing, SIGNAL( triggered() ), this, SLOT( showFileSharingWindow() ) );
+  mp_actViewFileSharing->setDisabled( Settings::instance().disableFileSharing() );
+
+  mp_actViewLog = new QAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this );
+  connect( mp_actViewLog, SIGNAL( triggered() ), this, SLOT( showLogWindow() ) );
+
   mp_actViewScreenShot = new QAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this );
   connect( mp_actViewScreenShot, SIGNAL( triggered() ), this, SLOT( showScreenShotWindow() ) );
 }
@@ -616,6 +626,7 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
   mp_menuMain->addSeparator();
   mp_menuMain->addMenu( mp_menuPlugins );
+  mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( QIcon( ":/images/resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
@@ -742,6 +753,9 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().promptOnCloseEvent() );
   act->setData( 36 );
 
+  mp_menuSettings->addSeparator();
+  mp_menuSettings->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
+
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
 
@@ -845,20 +859,6 @@ void GuiMain::createMenus()
   act = mp_menuStatus->menuAction();
   connect( act, SIGNAL( triggered() ), this, SLOT( showLocalUserVCard() ) );
 
-  /* View Menu */
-  mp_menuView = new QMenu( tr( "View" ), this );
-  mp_menuView->addAction( mp_actMainToolBar );
-  mp_menuView->addSeparator();
-  mp_menuView->addAction( mp_actViewHome );
-  mp_actViewNewMessage = mp_menuView->addAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this, SLOT( showNextChat() ) );
-  mp_menuView->addAction( mp_actViewFileTransfer );
-  mp_actViewFileSharing = mp_menuView->addAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this, SLOT( showFileSharingWindow() ) );
-  mp_actViewFileSharing->setDisabled( Settings::instance().disableFileSharing() );
-  mp_actViewLog = mp_menuView->addAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this, SLOT( showLogWindow() ) );
-  mp_menuView->addAction( mp_actViewScreenShot );
-  mp_menuView->addSeparator();
-  mp_menuView->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
-
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("?" ), this );
   mp_menuInfo->addAction( QIcon( ":/images/tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
@@ -951,7 +951,6 @@ void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
   menuBar()->addMenu( mp_menuSettings );
-  menuBar()->addMenu( mp_menuView );
   menuBar()->addMenu( mp_menuInfo );
   QLabel *label_version = new QLabel( this );
   label_version->setTextFormat( Qt::RichText );
@@ -1022,10 +1021,8 @@ void GuiMain::createMainWidgets()
   }
 }
 
-
 QMenu* GuiMain::gameMenu( GameInterface* gi )
 {
-
   if( m_mapGameMenu.contains( gi->name() ) )
     return m_mapGameMenu.value( gi->name(), mp_defaultGameMenu );
 
@@ -1033,7 +1030,7 @@ QMenu* GuiMain::gameMenu( GameInterface* gi )
   menu_game->setIcon( gi->icon() );
 
   QAction* act = menu_game->addAction( QIcon( ":/images/play.png" ), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
-  //act->setData( mp_stackedWidget->addWidget( gi->mainWindow() ) );
+  act->setData( gi->name() );
   menu_game->setDefaultAction( act );
 
   QString help_data_ts = tr( "is a game developed by" );
@@ -1045,7 +1042,6 @@ QMenu* GuiMain::gameMenu( GameInterface* gi )
                       gi->name(), help_data_ts, gi->author(), gi->help() ) );
 
   m_mapGameMenu.insert( gi->name(), menu_game );
-
 
   return menu_game;
 }
@@ -2013,7 +2009,6 @@ void GuiMain::showVCard( VNumber user_id )
   QRect screen_rect = qApp->desktop()->availableGeometry( cursor_pos );
   int diff_margin =  (cursor_pos.x() + gvc->size().width()+5) - screen_rect.width();
   if( diff_margin > 0 )
-    //cursor_pos.setX( cursor_pos.x() - diff_margin );
     cursor_pos.setX( cursor_pos.x() - gvc->size().width() );
   gvc->move( cursor_pos );
   gvc->show();
@@ -2027,6 +2022,28 @@ void GuiMain::updadePluginMenu()
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
+
+  mp_menuPlugins->addAction( mp_actViewScreenShot );
+
+  bool copymastro_available = false;
+  QString copy_mastro_path = "";
+#ifdef Q_OS_WIN
+  copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
+  copymastro_available = QFile::exists( copy_mastro_path );
+  if( !copymastro_available )
+  {
+    copy_mastro_path = QString( "C:\\Program Files (x86)\\CopyMastro\\CopyMastro.exe" );
+    copymastro_available = QFile::exists( copy_mastro_path );
+  }
+#endif
+
+  if( copymastro_available )
+  {
+    qDebug() << "CopyMastro is found:" << qPrintable( copy_mastro_path );
+    act = mp_menuPlugins->addAction( QIcon( ":/images/CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
+    act->setToolTip( tr( "Start the new application to copy file and folders by Marco Mastroddi" ) );
+    act->setData( copy_mastro_path );
+  }
 
   if( PluginManager::instance().textMarkers().size() > 0 )
   {
@@ -2044,52 +2061,22 @@ void GuiMain::updadePluginMenu()
     }
   }
 
-    /*
-
-  bool copymastro_available = false;
-#ifdef Q_OS_WIN
-  QString copy_mastro_path = QString( "%1\\%2" ).arg( Settings::instance().pluginPath(), QString( "CopyMastro.exe" ) );
-  copymastro_available = QFile::exists( copy_mastro_path );
-  if( !copymastro_available )
-  {
-    copy_mastro_path = QString( "C:\\Program Files (x86)\\CopyMastro\\CopyMastro.exe" );
-    copymastro_available = QFile::exists( copy_mastro_path );
-  }
-#endif
-
-  if( PluginManager::instance().games().size() > 0 || copymastro_available )
+  if( PluginManager::instance().games().size() > 0 )
   {
     mp_menuPlugins->addSeparator();
-
-    if( copymastro_available )
-    {
-      qDebug() << "CopyMastro is found:" << qPrintable( copy_mastro_path );
-      QAction* act = mp_barGames->addAction( QIcon( ":/images/CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
-      act->setToolTip( tr( "Start the new application to copy file and folders by Marco Mastroddi" ) );
-      act->setData( copy_mastro_path );
-      mp_menuPlugins->addAction( act );
-    }
-
 
     if( PluginManager::instance().games().size() > 0 )
     {
       QMenu* game_menu;
-      int game_widget_id;
 
       foreach( GameInterface* gi, PluginManager::instance().games() )
       {
         game_menu = gameMenu( gi );
         game_menu->setEnabled( gi->isEnabled() );
-        gi->mainWindow()->setEnabled( gi->isEnabled() );
         mp_menuPlugins->addMenu( game_menu );
-
-        act = mp_barGames->addAction( gi->icon(), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
-        //game_widget_id = mp_stackedWidget->indexOf( gi->mainWindow() ); // ensured by gameMenu function
-        act->setData( game_widget_id );
       }
     }
   }
-  */
 }
 
 void GuiMain::showPluginHelp()
@@ -2350,9 +2337,7 @@ void GuiMain::editGroup( VNumber group_id )
   gcg.show();
   gcg.setFixedSize( gcg.size() );
   if( gcg.exec() == QDialog::Accepted )
-  {
     mp_core->changeGroup( group_id, gcg.selectedName(), gcg.selectedUsersId() );
-  }
 }
 
 void GuiMain::createChat()
@@ -3427,6 +3412,7 @@ void GuiMain::onTickEvent( int ticks )
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
   mp_core->onTickEvent( ticks );
+  mp_fileSharing->onTickEvent( ticks );
 
   if( mp_core->hasFileTransferInProgress() )
     mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? QIcon( ":/images/file-transfer-progress.png" ) : QIcon( ":/images/file-transfer.png" ) );
@@ -3575,7 +3561,7 @@ void GuiMain::showFileSharingWindow()
     mp_fileSharing = new GuiFileSharing( mp_core, 0 );
     mp_fileSharing->setAttribute( Qt::WA_DeleteOnClose, true );
     Bee::setWindowStaysOnTop( mp_fileSharing, Settings::instance().stayOnTop() );
-    mp_fileSharing->resize( 620, 460 );
+    mp_fileSharing->resize( qMin( (QApplication::desktop()->availableGeometry().width()-20), 760 ), 460 );
     mp_fileSharing->updateLocalFileList();
     connect( mp_fileSharing, SIGNAL( destroyed() ), this, SLOT( onFileSharingWindowClosed() ) );
     connect( mp_fileSharing, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -3600,7 +3586,7 @@ void GuiMain::showScreenShotWindow()
     mp_screenShot = new GuiScreenShot;
     mp_screenShot->setAttribute( Qt::WA_DeleteOnClose, true );
     Bee::setWindowStaysOnTop( mp_screenShot, Settings::instance().stayOnTop() );
-    mp_screenShot->resize( 620, 460 );
+    mp_screenShot->resize( 620,  460 );
     connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
     connect( mp_screenShot, SIGNAL( destroyed() ), this, SLOT( onScreenShotWindowClosed() ) );
   }
@@ -3620,7 +3606,7 @@ void GuiMain::showLogWindow()
   {
     mp_log = new GuiLog;
     Bee::setWindowStaysOnTop( mp_log, Settings::instance().stayOnTop() );
-    mp_log->resize( 620, 460 );
+    mp_log->resize( qMin( (QApplication::desktop()->availableGeometry().width()-20), 760 ), 460 );
     connect( mp_log, SIGNAL( destroyed() ), this, SLOT( onLogWindowClosed() ) );
   }
 

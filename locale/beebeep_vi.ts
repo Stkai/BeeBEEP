@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="vi_VN">
+<TS version="2.1" language="vi_VN">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1902,10 +1902,10 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Hiện thanh công cụ chính</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2911"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2912"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2914"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2896"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2897"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2899"/>
         <source>offline</source>
         <translation>không trực tuyến</translation>
     </message>
@@ -1918,17 +1918,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="321"/>
         <location filename="../src/desktop/GuiMain.cpp" line="347"/>
         <location filename="../src/desktop/GuiMain.cpp" line="364"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1834"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2259"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2641"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2687"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2717"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2742"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3231"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1750"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1823"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1830"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2246"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2626"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2672"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2702"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2727"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3216"/>
         <source>Yes</source>
         <translation>Có</translation>
     </message>
@@ -1936,17 +1936,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="321"/>
         <location filename="../src/desktop/GuiMain.cpp" line="347"/>
         <location filename="../src/desktop/GuiMain.cpp" line="364"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1834"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2259"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2641"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2687"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2717"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2742"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3231"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1750"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1823"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1830"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2246"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2626"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2672"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2702"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2727"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3216"/>
         <source>No</source>
         <translation>Không</translation>
     </message>
@@ -2022,7 +2022,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện các thông tin về %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="609"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="619"/>
         <source>Select language...</source>
         <translation>Chọn ngôn ngữ...</translation>
     </message>
@@ -2031,7 +2031,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Chọn ngôn ngữ ưa thích của bạn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="610"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="620"/>
         <source>Download folder...</source>
         <translation>Thư mục tải về...</translation>
     </message>
@@ -2040,7 +2040,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Chọn thư mục chứa các tập tin tải về</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="615"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="625"/>
         <source>Select beep file...</source>
         <translation>Chọn âm báo tiếng beep...</translation>
     </message>
@@ -2049,7 +2049,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Chọn tập tin âm báo khi có tin nhắn mới</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="616"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="626"/>
         <source>Play beep</source>
         <translation>Phát tiếng beep</translation>
     </message>
@@ -2058,12 +2058,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Kiểm thử tập tin âm báo khi có tin nhắn mới</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2823"/>
         <source>Clear all read messages on closing window</source>
         <translation>Dọn sạcht tin nhắn đã đọc khi đóng cửa sổ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="631"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="642"/>
         <source>Settings</source>
         <translation>Cài đặt</translation>
     </message>
@@ -2072,7 +2072,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật vị trí cửa sổ sẽ được đặt lại giá trị mặc định ở lần chạy tiếp theo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="679"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="690"/>
         <source>If a file already exists</source>
         <translation>Nếu một tập tin đang tồn tại</translation>
     </message>
@@ -2085,7 +2085,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu được kích hoạt khi chat luôn luôn mở cửa sổ mới dạng nổi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="790"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="804"/>
         <source>Show only the online users</source>
         <translation>Chỉ hiện những người dùng trực tuyến</translation>
     </message>
@@ -2098,7 +2098,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật bạn có thể nhìn thấy hình ảnh của người dùng trong danh sách (nếu có)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="706"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="717"/>
         <source>Set status to away automatically</source>
         <translation>Đặt trạng thái tự động</translation>
     </message>
@@ -2115,7 +2115,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật khi có tin nhắn mới %1 sẽ được hiển thị trên tất cả các cửa sổ khác</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="686"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="697"/>
         <source>Generate automatic filename</source>
         <translation>Tạo tên tệp tự động</translation>
     </message>
@@ -2137,7 +2137,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật %1 vẫn hiện trên các cửa sổ khác</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="673"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="684"/>
         <source>Enable file transfer</source>
         <translation>Bật chuyển tập tin</translation>
     </message>
@@ -2146,7 +2146,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật bạn có thể chuyển tập tin với những người khác</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="639"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="650"/>
         <source>Prompts for network password on startup</source>
         <translation>Nhắc nhập mật khẩu mạng khi khởi động</translation>
     </message>
@@ -2155,7 +2155,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật hộp thoại nhập mật khẩu sẽ hiện lúc khởi động kết nối</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="665"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="676"/>
         <source>Load %1 on Windows startup</source>
         <translation>Chạy %1 lúc khởi động Windows</translation>
     </message>
@@ -2188,7 +2188,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật biệt danh của người sử dụng trong chat và trong danh sách được tô màu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2890"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2875"/>
         <source>Use HTML tags</source>
         <translation>Sử dụng thẻ HTML</translation>
     </message>
@@ -2197,7 +2197,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật thẻ HTML không được gỡ bỏ khỏi tin nhắn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2895"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2880"/>
         <source>Use clickable links</source>
         <translation>Sử dụng link có thể nhấn</translation>
     </message>
@@ -2206,7 +2206,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật các link trong tin nhắn nhận dạng và tạo liên kết để bạn có thể nhấp chuột</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2860"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2845"/>
         <source>Show messages grouped by user</source>
         <translation>Hiện các tin nhắn được nhóm bời người dùng</translation>
     </message>
@@ -2215,12 +2215,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật các tin nhắn hiển thị sẽ được nhóm theo người dùng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2833"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2818"/>
         <source>Save messages</source>
         <translation>Lưu các tin nhắn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="606"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="616"/>
         <source>Add users manually...</source>
         <translation>Thêm người dùng theo cách thủ công...</translation>
     </message>
@@ -2233,7 +2233,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật các tin nhắn được lưu khi đóng chương trình</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="822"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="836"/>
         <source>Status</source>
         <translation>Trạng thái</translation>
     </message>
@@ -2270,7 +2270,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiển thị danh sách các tập tin chia sẻ trên mạng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="593"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="603"/>
         <source>Plugins</source>
         <translation>Phần bổ trợ</translation>
     </message>
@@ -2350,7 +2350,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Sẳn sàng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="979"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="978"/>
         <source>Users</source>
         <translation>Những người dùng</translation>
     </message>
@@ -2389,12 +2389,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Về %1...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="597"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="607"/>
         <source>Main</source>
         <translation>Chính</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="603"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="613"/>
         <source>Broadcast to network</source>
         <translation>Gửi broadcast tới mạng</translation>
     </message>
@@ -2407,17 +2407,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện màu biệt danh</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="795"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="809"/>
         <source>Show the user&apos;s picture</source>
         <translation>Hiện ảnh đại diện</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="628"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="639"/>
         <source>Chat</source>
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="713"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="724"/>
         <source>Enable BEEP alert on new message</source>
         <translation>Bật tiếng BEEP khi có tin nhắn mới</translation>
     </message>
@@ -2426,7 +2426,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Đưa tin nhắn mới lên trên cùng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="735"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="746"/>
         <source>Always stay on top</source>
         <translation>Luôn ở bên trên</translation>
     </message>
@@ -2440,12 +2440,11 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật %1 sẽ được khởi động ẩn trong khay hệ thống</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
         <source>View</source>
-        <translation>Khung nhìn</translation>
+        <translation type="vanished">Khung nhìn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2835"/>
         <source>Show the timestamp</source>
         <translation>Hiện giờ</translation>
     </message>
@@ -2466,7 +2465,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật các biểu tượng cảm xúc sẽ được phân tích bằng phông chữ hệ thống của bạn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1399"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1395"/>
         <source>Show only last %1 messages</source>
         <translation>Chỉ hiển thị %1 tin nhắn mới nhất</translation>
     </message>
@@ -2475,7 +2474,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật thì chỉ hiển thị %1 tin nhắn mới nhất trong chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="699"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="710"/>
         <source>Prompt before downloading file</source>
         <translation>Hỏi trước khi tải tập tin</translation>
     </message>
@@ -2484,17 +2483,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật bạn phải xác nhận hành động trước khi tải về một tập tin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="649"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="660"/>
         <source>Reset window geometry at startup</source>
         <translation>Đặt lại vị trí cửa sổ lúc khởi động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="746"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="760"/>
         <source>Options</source>
         <translation>Tùy chọn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="800"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="814"/>
         <source>Show the user&apos;s vCard on right click</source>
         <translation>Hiện vCard của người dùng khi nhấn chuột phải</translation>
     </message>
@@ -2503,7 +2502,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật bạn có thể xem vCard của người dùng khi nhấp chuột phải vào nó</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="748"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="762"/>
         <source>Save the users on exit</source>
         <translation>Lưu người dùng khi thoát</translation>
     </message>
@@ -2531,7 +2530,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Tạo nhóm với hai hoặc nhiều người</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="611"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="621"/>
         <source>Shortcuts...</source>
         <translation>Phím tắt...</translation>
     </message>
@@ -2540,7 +2539,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Bật và thay đổi tùy chọn phím tắt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="612"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="622"/>
         <source>Dictionary...</source>
         <translation>Từ điển...</translation>
     </message>
@@ -2549,7 +2548,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Chọn từ điển ưa thích của bạn để kiểm tra chính tả</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="621"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="632"/>
         <source>Open your resource folder</source>
         <translation>Mở thư mục tài nguyên</translation>
     </message>
@@ -2558,7 +2557,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nhấn vào đây để mở thư mục tài nguyên của bạn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="622"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="633"/>
         <source>Open your data folder</source>
         <translation>Mở thư mục dữ liệu</translation>
     </message>
@@ -2575,7 +2574,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật tin nhắn cho thấy dấu thời gian của nó trong cửa sổ chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2855"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2840"/>
         <source>Show preview of the images</source>
         <translation>Hiện ảnh xem trước</translation>
     </message>
@@ -2588,12 +2587,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Sử dụng tên của bạn để thay cho &apos;You&apos;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2811"/>
         <source>Use RTL mode to show text</source>
         <translation>Sử dụng chế độ RTL để hiển thị văn bản</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="634"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="645"/>
         <source>Prompts for nickname on startup</source>
         <translation>Nhắc nhập biệt danh khi khởi động</translation>
     </message>
@@ -2606,7 +2605,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật các hoạt động trang chủ thay vì trang chat sẽ được hiển thị lúc khởi động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="644"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="655"/>
         <source>Show minimized at startup</source>
         <translation>Hiện thu nhỏ khi khởi động</translation>
     </message>
@@ -2615,12 +2614,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật %1 sẽ được thu nhỏ khi khởi động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="654"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="665"/>
         <source>Check for new version at startup</source>
         <translation>Kiểm tra phiên bản mới lúc khởi động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="659"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="670"/>
         <source>Use native file dialogs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2629,7 +2628,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu tập tin được tải về đã tồn tại nó sẽ tự động ghi đè</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="690"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="701"/>
         <source>Ask me</source>
         <translation>Hỏi tôi</translation>
     </message>
@@ -2642,7 +2641,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Không bao giờ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="718"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="729"/>
         <source>Enable Buzz sound</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2659,37 +2658,37 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu bật danh sách người dùng sẽ được lưu khi thoát ứng dụng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="755"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="769"/>
         <source>Sort users in ascending order</source>
         <translation>Sắp xếp người dùng tăng dần</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="760"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="774"/>
         <source>Sorting mode</source>
         <translation>Chế độ sắp xếp</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="764"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="778"/>
         <source>Default mode</source>
         <translation>Mặc định</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="770"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="784"/>
         <source>By user name</source>
         <translation>Theo tên người dùng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="776"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="790"/>
         <source>By user status</source>
         <translation>Theo trạng thái người dùng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="782"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>By unread messages</source>
         <translation>Theo tin nhắn chưa đọc</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="805"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="819"/>
         <source>Show status color in background</source>
         <translation>Hiện trạng thái bằng màu nền</translation>
     </message>
@@ -2698,7 +2697,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nếu cho phép người sử dụng trong danh sách đã có màu nền là tình trạng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="817"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="831"/>
         <source>Change size of the user&apos;s picture</source>
         <translation>Thay đổi kích cỡ ảnh đại diện</translation>
     </message>
@@ -2707,17 +2706,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Nhấn vào đây để thay đổi kích cỡ ảnh người dùng trong danh sách</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="833"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="847"/>
         <source>Recently used</source>
         <translation>Được dùng gần đây</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="852"/>
         <source>Change your status description...</source>
         <translation>Thay đổi mô tả trạng thái của bạn...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="839"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="853"/>
         <source>Clear all status descriptions</source>
         <translation>Dọn các mô tả trạng thái</translation>
     </message>
@@ -2738,7 +2737,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện hộp chia sẻ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="853"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="586"/>
         <source>Show new message</source>
         <translation>Hiện tin nhắn mới</translation>
     </message>
@@ -2809,7 +2808,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện danh sách những người sử dụng đã kết nối</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="987"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="986"/>
         <source>Groups</source>
         <translation>Các nhóm</translation>
     </message>
@@ -2818,7 +2817,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện danh sách nhóm của bạn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="983"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="982"/>
         <source>Chats</source>
         <translation>Các chat</translation>
     </message>
@@ -2835,7 +2834,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện danh sách chat đã lưu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="995"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="994"/>
         <source>File Transfers</source>
         <translation>Chuyển tập tin</translation>
     </message>
@@ -2880,32 +2879,32 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện thanh phần bổ trợ chụp ảnh màn hình</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1035"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1032"/>
         <source>Play %1</source>
         <translation>Phát %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1036"/>
         <source>is a game developed by</source>
         <translation>là một trò chơi được phát triển bởi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1042"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
         <source>About %1</source>
         <translation>Về %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2845"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2830"/>
         <source>Show the chat in compact view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3548"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3534"/>
         <source>New file from %1</source>
         <translation>Tập tin mới từ %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3565"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3551"/>
         <source>%1 is buzzing you!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2914,21 +2913,22 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Luôn luôn</translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="2044"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
-        <translation type="obsolete">Khởi động ứng dụng mới để sao chép tập tin và thư mục của Marco Mastroddi</translation>
+        <translation type="unfinished">Khởi động ứng dụng mới để sao chép tập tin và thư mục của Marco Mastroddi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1201"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1197"/>
         <source>Please save the network password in the next dialog.</source>
         <translation>Vui lòng lưu các mật khẩu mạng trong hộp thoại tiếp theo.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1219"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Bao nhiêu phút nhàn rỗi %1 có thể chờ đợi trước khi thay đổi trạng thái đang ở xa?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1258"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Vui lòng chọn số tin nhắn tối đa được hiển thị</translation>
     </message>
@@ -2937,89 +2937,89 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Tin nhắn mới từ %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1488"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1484"/>
         <source>New message arrived</source>
         <translation>Tin nhắn mới đến</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1556"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1552"/>
         <source>%1 is writing...</source>
         <translation>%1 đang ghi...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1567"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1563"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Bạn có muốn ngắt kết nối từ mạng %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1600"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1596"/>
         <source>You are %1%2</source>
         <translation>Bạn là %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1612"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1608"/>
         <source>Please insert the new status description</source>
         <translation>Vui lòng chèn mô tả trạng thái mới</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1661"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1657"/>
         <source>%1 - Select a file</source>
         <translation>%1 - Chọn 1 tập tin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1661"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1657"/>
         <source>or more</source>
         <translation>hoặc nhiều hơn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1680"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1676"/>
         <source>File transfer is not enabled.</source>
         <translation>Chuyển tập tin không được bật.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1686"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1682"/>
         <source>You are not connected.</source>
         <translation>Bạn không kết nối.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1697"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1693"/>
         <source>There is no user connected.</source>
         <translation>Không có người dùng kết nối.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1703"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1699"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Vui lòng chọn người mà bạn muốn gửi tập tin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1712"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1708"/>
         <source>User not found.</source>
         <translation>Không tìm thấy người dùng.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1734"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1883"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1730"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1879"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Đã tắt chuyển tập tin. Bạn không thề tải %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1750"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1894"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Có, và đừng hỏi nữa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1786"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1782"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 đã tồn tại. Vui lòng chọn tên tập tin khác.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1825"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1821"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Bạn không thể tải tất cả tập tin này cùng lúc. Bạn có muốn tải tập tin %1 đầu tiên trong danh sách?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1833"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1829"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>Tải tập tin %1 là một việc làm khó khăn. Có lẽ bạn phải chờ đợi rất nhiều phút. Bạn muốn tiếp tục không?</translation>
     </message>
@@ -3028,17 +3028,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Các tập tin %1 đã lên lịch để tải về</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1897"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1893"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>Bạn có muốn tải xuống thư mục %1 (%2 tập tin) từ %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1938"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1934"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - Chọn thư mục tải xuống</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2026"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2021"/>
         <source>Plugin Manager...</source>
         <translation>Quản lý phần bổ trợ...</translation>
     </message>
@@ -3047,42 +3047,42 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Mở hộp thoại quản lý phần bổ trợ và quản lý các phần bổ trợ đã cài đặt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3185"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3170"/>
         <source>at lunch</source>
         <translation>lúc ăn tối</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3194"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3179"/>
         <source>in a meeting</source>
         <translation>trong cuộc họp</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3230"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3215"/>
         <source>Do you really want to clear all saved status descriptions?</source>
         <translation>Bạn có thực sự muốn xóa tất cả các mô tả trạng thái đã lưu?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
         <source>Select your dictionary path</source>
         <translation>Chọn đường dẫn từ điển</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3380"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3365"/>
         <source>Dictionary selected: %1</source>
         <translation>Từ điển được chọn: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3382"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3367"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Không thể thiết lập từ điển: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3500"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3486"/>
         <source>Window geometry and state saved</source>
         <translation>Vị trí cửa sổ và trạng thái đã được lưu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="857"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="593"/>
         <source>Show the %1 log</source>
         <translation type="unfinished">Hiện nhật ký %1</translation>
     </message>
@@ -3091,7 +3091,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện nhật ký ứng dụng nếu có lỗi xảy ra</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="586"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="596"/>
         <source>Make a screenshot</source>
         <translation type="unfinished">Tạo ảnh chụp màn hình</translation>
     </message>
@@ -3114,7 +3114,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Mạng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2028"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2023"/>
         <source>is a plugin developed by</source>
         <translation>là phần bổ trợ được phát triển bởi</translation>
     </message>
@@ -3123,14 +3123,14 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện thanh trò chơi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2258"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2245"/>
         <source>Do you really want to open the file %1?</source>
         <translation>Bạn có thực sự muốn mở tập tin %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1062"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2265"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2532"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1058"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2252"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2517"/>
         <source>Unable to open %1</source>
         <translation>Không thể mở %1</translation>
     </message>
@@ -3145,112 +3145,112 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="728"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="739"/>
         <source>Open chats in a single window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="740"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="751"/>
         <source>Prompt on quit when connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="810"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="824"/>
         <source>Show the status description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="860"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="757"/>
         <source>Save window&apos;s geometry</source>
         <translation type="unfinished">Lưu vị trí cửa sổ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1006"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1005"/>
         <source>Activities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1062"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2265"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2532"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1058"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2252"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2517"/>
         <source>Ok</source>
         <translation>Đồng ý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1468"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1480"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1476"/>
         <source>to all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1470"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1482"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1466"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1478"/>
         <source>to</source>
         <translation type="unfinished">đến</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1472"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1484"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1468"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1480"/>
         <source>to you</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1478"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1474"/>
         <source>New message from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1851"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1847"/>
         <source>Downloading %1 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2283"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2270"/>
         <source>Sound files (*.wav)</source>
         <translation>Tập tin âm thanh (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Âm thanh không được bật trên một tin nhắn mới. Bạn có muốn bật nó?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2307"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2294"/>
         <source>Sound module is not working. The default BEEP will be used.</source>
         <translation>Module âm thanh không hoạt động. Tiếng BEEP sẽ được sử dụng mặc định.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2312"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2299"/>
         <source>Sound file not found</source>
         <translation>Không tìm thấy tập tin âm thanh</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2313"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
         <source>The default BEEP will be used</source>
         <translation>Tiếng BEEP mặc định được sử dụng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2361"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2346"/>
         <source>Group chat will be deleted when all members goes offline.</source>
         <translation>Trò chuyện nhóm sẽ bị xóa khi tất cả các thành viên không trực tuyến.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2347"/>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
         <translation>Nếu bạn muốn có một trò chuyện liên tục vui lòng xem xét việc tạo nhóm để thay thế.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2363"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2348"/>
         <source>Do you wish to continue or create group?</source>
         <translation>Bạn có muốn tiếp tục hoặc tạo nhóm không?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2364"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2349"/>
         <source>Continue</source>
         <translation>Tiếp tục</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2364"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2349"/>
         <source>Create Group</source>
         <translation>Tạo nhóm</translation>
     </message>
@@ -3259,137 +3259,137 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Không thể thêm các người dùng trong chat  này. Vui lòng chọn một nhóm.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2423"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2408"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Bây giờ %1 sẽ chạy lúc windows khởi động.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2425"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2432"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2410"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2417"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Không thể thêm key này vào registry: quyền cấm.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2430"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2415"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 sẽ không chạy lúc windows khởi động.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2482"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2467"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Vui lòng chọn chat bạn muốn liên kết các văn bản đã lưu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2491"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2476"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>Chat &apos;%1%&apos; được chọn đã có bản lưu.&lt;br /&gt;Bạn muốn làm gì với bản lưu được chọn?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="682"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2493"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="693"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2478"/>
         <source>Overwrite</source>
         <translation>Ghi đè</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="723"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="734"/>
         <source>Raise on new message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="855"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="589"/>
         <source>Show file sharing window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="991"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="990"/>
         <source>Chat histories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1015"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
         <source>Show the activity panel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2438"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2423"/>
         <source>Starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2493"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2478"/>
         <source>Add in the head</source>
         <translation>Thêm vào đầu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2640"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2625"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Tất cả các thành viên của cuộc trò chuyện này là không trực tuyến. Những thay đổi có thể không được cố định. Bạn có muốn tiếp tục?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2741"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2726"/>
         <source>Do you really want to delete chat with %1?</source>
         <translation>Bạn có thực sự muốn xoá trò chuyện với %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2739"/>
         <source>Unable to delete %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2871"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2856"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2878"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2863"/>
         <source>Show emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2883"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2868"/>
         <source>Use font emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2902"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2887"/>
         <source>Restore default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2916"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2901"/>
         <source>inactive</source>
         <translation>không hoạt động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2936"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2921"/>
         <source>disabled</source>
         <translation>bị tắt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2943"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2928"/>
         <source>active</source>
         <translation>hoạt động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3016"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3001"/>
         <source>%1 is online</source>
         <translation>%1 trực tuyến</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3018"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3003"/>
         <source>%1 is offline</source>
         <translation>%1 không trực tuyến</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3033"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3018"/>
         <source>Please select the new size of the user picture</source>
         <translation>Vui lòng chọn kích thước mới cho ảnh đại diện</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1872"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2364"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2493"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2660"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1868"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2349"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2478"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2645"/>
         <source>Cancel</source>
         <translation>Hủy bỏ</translation>
     </message>
@@ -3410,7 +3410,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện bảng điều khiển lịch sử</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1003"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1002"/>
         <source>Show the file transfer panel</source>
         <translation>Hiện bảng điều khiển chuyển tập tin</translation>
     </message>
@@ -3419,58 +3419,58 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hiện thanh chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1753"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1749"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Bạn có muốn tải xuống %1 (%2) từ %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1866"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1862"/>
         <source>File is not available for download.</source>
         <translation>Tệp không có sẵn để tải về.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1868"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1864"/>
         <source>%1 is not connected.</source>
         <translation>%1 không được kết nối.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1869"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1865"/>
         <source>Please reload the list of shared files.</source>
         <translation>Vui lòng tải lại danh sách các tập tin được chia sẻ.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1872"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1868"/>
         <source>Reload file list</source>
         <translation>Nạp lại danh sách tập tin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2659"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2644"/>
         <source>%1 is a your group. You cannot leave the chat until the group exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2665"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2695"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2650"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2680"/>
         <source>You cannot delete %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2677"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2662"/>
         <source>You cannot leave %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2708"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2693"/>
         <source>Chat with %1 is empty.</source>
         <translation>Chat với %1 rỗng.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2712"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2697"/>
         <source>Do you really want to clear messages with %1?</source>
         <translation>Bạn có thực sự muốn xóa tin nhắn với %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2715"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2700"/>
         <source>Yes and delete history</source>
         <translation>Có và xóa lịch sử</translation>
     </message>
@@ -3479,7 +3479,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">%1 là một nhóm của bạn. Bạn không thể rời khỏi trò chuyện.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2660"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2645"/>
         <source>Delete this group</source>
         <translation>Xóa nhóm này</translation>
     </message>
@@ -3488,7 +3488,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Bạn không thể rời chat này.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2686"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2671"/>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
         <translation>Bạn có thực sự muốn xoá nhóm &apos;%1&apos;?</translation>
     </message>
@@ -3501,17 +3501,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">%1 đã chia sẻ %2 tập tin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2794"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2779"/>
         <source>Default language is restored.</source>
         <translation>Ngôn ngữ mặc định đã được phục hồi.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2796"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2781"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Ngôn ngữ mới &apos;%1&apos; đã được chọn.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2799"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2784"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Bạn phải khởi động lại %1 để áp dụng các thay đổi.</translation>
     </message>
@@ -4589,9 +4589,8 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="88"/>
         <source>unknown</source>
-        <translation>không xác định</translation>
+        <translation type="vanished">không xác định</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
@@ -4735,32 +4734,32 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Điện thoại</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="409"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="430"/>
         <source>S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="444"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="465"/>
         <source>Open chat</source>
         <translation>Mở chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="482"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="503"/>
         <source>Send a file</source>
         <translation>Gửi tập tin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="517"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="538"/>
         <source>Send a buzz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="552"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="573"/>
         <source>Change the nickname color</source>
         <translation>Thay đổi màu biệt danh</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="610"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="631"/>
         <source>Remove user</source>
         <translation>Xóa người dùng</translation>
     </message>
@@ -4818,7 +4817,7 @@ Vui lòng chọn một tên khác nhau.</translation>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="67"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2705"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2690"/>
         <location filename="../src/desktop/GuiUserItem.cpp" line="118"/>
         <source>All Lan Users</source>
         <translation>Tất cả người dùng</translation>

@@ -245,7 +245,6 @@ private:
   QMenu* mp_menuSettings;
   QMenu* mp_menuStatus;
   QMenu* mp_menuPlugins;
-  QMenu* mp_menuView;
   QMenu* mp_menuTrayIcon;
   QMenu* mp_menuUserList;
   QMenu* mp_menuUserStatusList;
