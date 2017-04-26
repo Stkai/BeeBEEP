@@ -103,7 +103,7 @@ private:
 inline bool User::operator==( const User& u ) const { return m_id == u.m_id; }
 inline bool User::isValid() const { return m_id != ID_INVALID; }
 inline bool User::isLocal() const { return m_id == ID_LOCAL_USER; }
-inline bool User::isStatusConnected() const { return m_status != User::Offline; }
+inline bool User::isStatusConnected() const { return m_status > User::Offline && m_status < User::NumStatus; }
 inline void User::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber User::id() const { return m_id; }
 inline void User::setName( const QString& new_value ) { m_vCard.setNickName( new_value ); }

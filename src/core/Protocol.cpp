@@ -22,14 +22,14 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "ColorManager.h"
+#include "EmoticonManager.h"
+#include "PluginManager.h"
 #include "Protocol.h"
 #include "Random.h"
 #include "Rijndael.h"
 #include "Settings.h"
 #include "UserManager.h"
-#include "EmoticonManager.h"
-#include "PluginManager.h"
-
 
 Protocol* Protocol::mp_instance = NULL;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
@@ -407,12 +407,11 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
   if( !sl.isEmpty() )
   {
     QString user_color = sl.takeFirst();
-#if QT_VERSION >= 0x040700
-    if( user_color != QString( "#000000" ) && QColor::isValidColor( user_color ) )
-#else
-    if( user_color != QString( "#000000" ) && QColor( user_color ).isValid() )
-#endif
+    if( ColorManager::instance().isValidColor( user_color ) )
+    {
       u->setColor( user_color );
+      ColorManager::instance().setColorSelected( user_color );
+    }
   }
 
   if( !sl.isEmpty() )
@@ -610,7 +609,8 @@ QString Protocol::saveUser( const User& u ) const
   ur.setAccount( u.accountName() );
   ur.setNetworkAddress( u.networkAddress() );
   ur.setFavorite( u.isFavorite() );
-  return saveUserRecord( ur, false );
+  ur.setColor( u.color() );
+  return saveUserRecord( ur, true, true );
 }
 
 User Protocol::loadUser( const QString& s )
@@ -621,7 +621,11 @@ User Protocol::loadUser( const QString& s )
 
   User u = createTemporaryUser( ur.name(), ur.account(), ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() );
   u.setIsFavorite( ur.isFavorite() );
-
+  if( ColorManager::instance().isValidColor( ur.color() ) )
+  {
+    u.setColor( ur.color() );
+    ColorManager::instance().setColorSelected( ur.color() );
+  }
   return u;
 }
 
@@ -671,20 +675,22 @@ User Protocol::loadUserFromPath( const QString& user_path, bool use_account_name
   return user_found;
 }
 
-QString Protocol::saveUserRecord( const UserRecord& ur, bool compact_fields ) const
+QString Protocol::saveUserRecord( const UserRecord& ur, bool add_comment, bool add_extras ) const
 {
   QStringList sl;
   sl << ur.networkAddress().hostAddress().toString();
   sl << QString::number( ur.networkAddress().hostPort() );
-  if( !compact_fields )
-  {
+  if( add_comment || add_extras )
     sl << ur.comment();
+  if( add_extras )
+  {
     sl << ur.name();
     sl << ur.account();
     if( ur.isFavorite() )
       sl << QString( "*" );
     else
       sl << QString( "" );
+    sl << ur.color();
   }
   return sl.join( DATA_FIELD_SEPARATOR );
 }
@@ -730,9 +736,15 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     QString favorite_txt = sl.takeFirst();
     if( favorite_txt == QString( "*" ) )
     {
-      qDebug() << "User" << ur.name() << "is in favorite list";
+      qDebug() << "User" << qPrintable( ur.name() ) << "is in favorite list";
       ur.setFavorite( true );
     }
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setColor( sl.takeFirst() );
+    qDebug() << "User" << qPrintable( ur.name() ) << "has color saved:" << qPrintable( ur.color() );
   }
 
   return ur;
@@ -1568,7 +1580,7 @@ Message Protocol::userRecordListToMessage( const QList<UserRecord>& user_record_
 {
   QStringList msg_list;
   foreach( UserRecord ur, user_record_list )
-    msg_list.append( saveUserRecord( ur, true ) );
+    msg_list.append( saveUserRecord( ur, false, false ) );
 
   Message m( Message::Hive, newId(), msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
   m.addFlag( Message::List );

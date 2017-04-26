@@ -37,8 +37,9 @@ public:
   inline QColor randomQColor();
   QString unselectedQString();
   inline QColor unselectedQColor();
-
+  void setColorSelected( const QString& );
   inline void clearSelectedColors();
+  bool isValidColor( const QString& );
 
   static ColorManager& instance()
   {

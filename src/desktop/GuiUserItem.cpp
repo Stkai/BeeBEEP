@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "GuiChatItem.h"
 #include "GuiUserItem.h"
 #include "Settings.h"
 #include "PluginManager.h"
@@ -110,12 +111,12 @@ bool GuiUserItem::updateUser( const User& u )
     return false;
   }
 
-  setData( 0, UserName, u.isLocal() ? QString( " all lan users " ) : u.name() );
+  setData( 0, UserName, u.isLocal() ? QString( " %1 " ).arg( GuiChatItem::defaultChatName() ) : u.name() );
   setData( 0, Status, u.status() );
 
   int unread_messages = unreadMessages();
 
-  QString s = u.isLocal() ? QObject::tr( "All Lan Users" ) : (u.status() != User::Offline ? u.name() : u.path());
+  QString s = u.isLocal() ? GuiChatItem::defaultChatName() : (u.status() != User::Offline ? u.name() : u.path());
 
   if( u.isLocal() && !Settings::instance().chatWithAllUsersIsEnabled() )
     s.append( QString( " [%1] " ).arg( QObject::tr( "read only" ) ) );

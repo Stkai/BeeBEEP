@@ -100,26 +100,17 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   else
     mp_lStatus->setText( user_version );
 
-  if( u.isFavorite() )
-  {
-    mp_pbFavorite->setIcon( QIcon( ":/images/star.png" ) );
-    mp_pbFavorite->setToolTip( tr( "Remove from favorites" ) );
-  }
-  else
-  {
-    mp_pbFavorite->setIcon( QIcon( ":/images/star-bn.png" ) );
-    mp_pbFavorite->setToolTip( tr( "Add to favorites" ) );
-  }
-
   if( u.isLocal() )
   {
-    mp_pbChat->setToolTip( tr( "Chat with all" ) );
+    mp_pbChat->hide();
     mp_pbFile->hide();
     mp_pbFavorite->hide();
     mp_pbBuzz->hide();
+    mp_pbRemove->hide();
   }
   else
   {
+    mp_pbChat->show();
     mp_pbChat->setToolTip( tr( "Open chat" ) );
     if( Settings::instance().fileTransferIsEnabled() && u.isStatusConnected() && core_is_connected )
       mp_pbFile->show();
@@ -127,7 +118,19 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
       mp_pbFile->hide();
 
     if( Settings::instance().saveUserList() )
+    {
       mp_pbFavorite->show();
+      if( u.isFavorite() )
+      {
+        mp_pbFavorite->setIcon( QIcon( ":/images/star.png" ) );
+        mp_pbFavorite->setToolTip( tr( "Remove from favorites" ) );
+      }
+      else
+      {
+        mp_pbFavorite->setIcon( QIcon( ":/images/star-bn.png" ) );
+        mp_pbFavorite->setToolTip( tr( "Add to favorites" ) );
+      }
+    }
     else
       mp_pbFavorite->hide();
 
@@ -135,13 +138,13 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
       mp_pbBuzz->show();
     else
       mp_pbBuzz->hide();
-  }
 
-  if( u.isStatusConnected() || UserManager::instance().isUserInGroups( u.id() )
-          || ChatManager::instance().userIsInGroupChat( u.id() ) )
-    mp_pbRemove->hide();
-  else
-    mp_pbRemove->show();
+    if( u.isStatusConnected() || UserManager::instance().isUserInGroups( u.id() )
+            || ChatManager::instance().userIsInGroupChat( u.id() ) )
+      mp_pbRemove->hide();
+    else
+      mp_pbRemove->show();
+  }
 }
 
 void GuiVCard::showPrivateChat()

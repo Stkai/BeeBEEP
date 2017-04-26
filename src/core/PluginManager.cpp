@@ -29,7 +29,7 @@ PluginManager* PluginManager::mp_instance = NULL;
 
 
 PluginManager::PluginManager()
-  : m_textMarkers(), m_games()
+  : m_textMarkers()
 {
 }
 
@@ -40,15 +40,6 @@ void PluginManager::clearPlugins()
     qDebug() << "Unload" << m_textMarkers.size() << "text marker plugins";
     qDeleteAll( m_textMarkers.begin(), m_textMarkers.end() );
     m_textMarkers.clear();
-  }
-
-  if( m_games.size() > 0 )
-  {
-    qDebug() << "Unload" << m_games.size() << "game plugins";
-    foreach( GameInterface* g, m_games )
-      Settings::instance().setPluginSettings( g->name(), g->settings() );
-    qDeleteAll( m_games.begin(), m_games.end() );
-    m_games.clear();
   }
 }
 
@@ -67,7 +58,6 @@ void PluginManager::loadPlugins()
     addPlugin( plugin_dir.absoluteFilePath( file_name ) );
 
   qDebug() << m_textMarkers.size() << "text marker plugins found";
-  qDebug() << m_games.size() << "game plugins found";
   sortPlugins();
 }
 
@@ -113,22 +103,6 @@ void PluginManager::addPlugin( const QString& file_path )
       return;
     }
 
-    GameInterface* game_plugin = qobject_cast<GameInterface*>( plugin );
-    if( game_plugin )
-    {
-      qDebug() << game_plugin->name() << "is a game plugin";
-      if( !game( game_plugin->name() ) )
-      {
-        if( Settings::instance().pluginHasSettings( game_plugin->name() ) )
-        {
-          qDebug() << "Load" << game_plugin->name() << "settings";
-          game_plugin->setSettings( Settings::instance().pluginSettings( game_plugin->name() ) );
-        }
-        m_games.append( game_plugin );
-      }
-      return;
-    }
-
     qDebug() << file_path << "is an invalid plugin";
   }
 #ifdef BEEBEEP_DEBUG
@@ -144,21 +118,12 @@ void PluginManager::setPluginEnabled( const QString& plugin_name, bool enabled )
     if( tm->name() == plugin_name )
       tm->setEnabled( enabled );
   }
-
-  foreach( GameInterface* g, m_games )
-  {
-    if( g->name() == plugin_name )
-      g->setEnabled( enabled );
-  }
 }
 
 void PluginManager::setPluginsEnabled( bool enabled )
 {
   foreach( TextMarkerInterface* tm, m_textMarkers )
     tm->setEnabled( enabled );
-
-  foreach( GameInterface* g, m_games )
-    g->setEnabled( enabled );
 }
 
 static bool TextMarkerForPriority( TextMarkerInterface* tm1, TextMarkerInterface* tm2 )
@@ -166,15 +131,9 @@ static bool TextMarkerForPriority( TextMarkerInterface* tm1, TextMarkerInterface
   return tm1->priority() < tm2->priority();
 }
 
-static bool GameForName( GameInterface* g1, GameInterface* g2 )
-{
-  return g1->name() < g2->name();
-}
-
 void PluginManager::sortPlugins()
 {
   qSort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
-  qSort( m_games.begin(), m_games.end(), GameForName );
 }
 
 TextMarkerInterface* PluginManager::textMarker( const QString& text_marker_name ) const
@@ -185,25 +144,6 @@ TextMarkerInterface* PluginManager::textMarker( const QString& text_marker_name 
       return tmi;
   }
   return 0;
-}
-
-GameInterface* PluginManager::game( const QString& game_name ) const
-{
-  foreach( GameInterface* g, m_games )
-  {
-    if( g->name() == game_name )
-      return g;
-  }
-  return 0;
-}
-
-void PluginManager::setGamePauseOn()
-{
-  foreach( GameInterface* g, m_games )
-  {
-    if( !g->isPaused() )
-      g->pause();
-  }
 }
 
 bool PluginManager::parseText( QString* p_txt, bool before_sending ) const
@@ -371,6 +311,8 @@ bool PluginManager::fileCanBeSkipped( const QString& file_name ) const
    file_names_to_skip << QString( "icuuc53.dll" );
    file_names_to_skip << QString( "msvcp100.dll" );
    file_names_to_skip << QString( "msvcr100.dll" );
+   file_names_to_skip << QString( "msvcp120.dll" );
+   file_names_to_skip << QString( "msvcr120.dll" );
    file_names_to_skip << QString( "Qt5Core.dll" );
    file_names_to_skip << QString( "Qt5Gui.dll" );
    file_names_to_skip << QString( "Qt5Multimedia.dll" );
@@ -378,6 +320,9 @@ bool PluginManager::fileCanBeSkipped( const QString& file_name ) const
    file_names_to_skip << QString( "Qt5PrintSupport.dll" );
    file_names_to_skip << QString( "Qt5Svg.dll" );
    file_names_to_skip << QString( "Qt5Widgets.dll" );
+   file_names_to_skip << QString( "Qt5WinExtras.dll" );
+   file_names_to_skip << QString( "libeay32.dll" );
+   file_names_to_skip << QString( "ssleay32.dll" );
 #endif
 
   if( file_names_to_skip.isEmpty() )

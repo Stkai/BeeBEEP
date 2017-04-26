@@ -94,7 +94,7 @@ bool Core::checkSavingPaths()
                            tr( "%1 User %2 cannot save settings in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
                                                                               .arg( Settings::instance().localUser().accountName() )
                                                                               .arg( Bee::convertToNativeFolderSeparator( sets->fileName() ) ),
-                           DispatchToChat, ChatMessage::Other );
+                           DispatchToChat, ChatMessage::System );
 
     settings_can_be_saved = false;
   }
@@ -110,7 +110,7 @@ bool Core::checkSavingPaths()
                              tr( "%1 User %2 cannot save chat messages in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
                                                                                 .arg( Settings::instance().localUser().accountName() )
                                                                                 .arg( Settings::instance().savedChatsFilePath() ),
-                             DispatchToChat, ChatMessage::Other );
+                             DispatchToChat, ChatMessage::System );
 
       chats_can_be_saved = false;
     }
@@ -198,12 +198,8 @@ bool Core::start()
     showFactOfTheDay();
   }
 
-  if( Settings::instance().localUser().status() == User::Offline )
-  {
-    User u = Settings::instance().localUser();
-    u.setStatus( User::Online );
-    Settings::instance().setLocalUser( u );
-  }
+  if( !Settings::instance().localUser().isStatusConnected() )
+    Settings::instance().setLocalUserStatus( User::Online );
 
   showUserVCardChanged( Settings::instance().localUser() );
   emit userChanged( Settings::instance().localUser() );
@@ -286,6 +282,12 @@ void Core::stop()
 
   m_connections.clear();
 
+  if( Settings::instance().localUser().isStatusConnected() )
+  {
+    Settings::instance().setLocalUserStatus( User::Offline );
+    emit userChanged( Settings::instance().localUser() );
+  }
+
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected from %2 Network.")
                            .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
@@ -303,6 +305,9 @@ void Core::stop()
 void Core::sendMulticastingMessage()
 {
   if( !Settings::instance().useMulticastDns() )
+    return;
+
+  if( !isConnected() )
     return;
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -333,17 +338,13 @@ void Core::sendMulticastingMessage()
 
 void Core::sendBroadcastMessage()
 {
-  if( isConnected() )
-  {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                           tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
-                                                                            Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
-    QMetaObject::invokeMethod( mp_broadcaster, "sendBroadcast", Qt::QueuedConnection );
-  }
-  else
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are not connected to %2 Network." ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*E*" ),
-                                                                             Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+  if( !isConnected() )
+    return;
+
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                         tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
+                                                                           Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+  QMetaObject::invokeMethod( mp_broadcaster, "sendBroadcast", Qt::QueuedConnection );
 }
 
 bool Core::isConnected() const
@@ -470,7 +471,7 @@ void Core::onUpdaterJobCompleted()
                                                            tr( "New version is available" ), download_url,
                                                            tr( "Click here to download" ) );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::Other );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System );
 }
 
 void Core::postUsageStatistics()

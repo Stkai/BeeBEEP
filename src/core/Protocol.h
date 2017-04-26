@@ -105,7 +105,7 @@ public:
 
   QString saveUser( const User& ) const;
   User loadUser( const QString& );
-  QString saveUserRecord( const UserRecord&, bool compact_fields ) const;
+  QString saveUserRecord( const UserRecord&, bool add_comment, bool add_extras ) const;
   UserRecord loadUserRecord( const QString& ) const;
   QString saveUserStatusRecord( const UserStatusRecord& ) const;
   UserStatusRecord loadUserStatusRecord( const QString& ) const;

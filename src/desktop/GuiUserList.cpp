@@ -34,11 +34,6 @@ GuiUserList::GuiUserList( QWidget* parent )
   setObjectName( "GuiUserList" );
   setupUi( this );
 
-#ifdef Q_OS_MAC
-  gridLayout->setHorizontalSpacing( -1 );
-  gridLayout->setVerticalSpacing( -1 );
-#endif
-
   mp_menuSettings = 0;
 
   mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -50,7 +45,7 @@ GuiUserList::GuiUserList( QWidget* parent )
   m_filter = "";
   m_blockShowChatRequest = false;
 #if QT_VERSION >= 0x040700
-  mp_leFilter->setPlaceholderText( tr( "Search users" ) );
+  mp_leFilter->setPlaceholderText( tr( "Search user" ) );
 #endif
   mp_twUsers->setHeaderHidden( true );
   resetList();
@@ -83,8 +78,6 @@ void GuiUserList::updateUsers( bool is_connected )
 {
   m_coreIsConnected = is_connected;
   resetList();
-  if( m_filter.isEmpty() )
-    setUser( Settings::instance().localUser(), false );
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( m_filter.isEmpty() || u.vCard().nickName().contains( m_filter, Qt::CaseInsensitive ) ||
@@ -148,6 +141,9 @@ void GuiUserList::setMessages( VNumber private_chat_id, int n )
 
 void GuiUserList::setUser( const User& u, bool sort_users )
 {
+  if( u.isLocal() )
+    return;
+
   GuiUserItem* item = itemFromUserId( u.id() );
   if( !item )
   {
@@ -166,21 +162,11 @@ void GuiUserList::setUser( const User& u, bool sort_users )
     }
   }
 
-  if( u.isLocal() )
+  Chat c = ChatManager::instance().privateChatForUser( u.id() );
+  if( c.isValid() )
   {
-    setDefaultChatConnected( item, m_coreIsConnected );
-    Chat default_chat = ChatManager::instance().defaultChat();
-    item->setChatId( default_chat.id() );
-    item->setUnreadMessages( default_chat.unreadMessages() );
-  }
-  else
-  {
-    Chat c = ChatManager::instance().privateChatForUser( u.id() );
-    if( c.isValid() )
-    {
-      item->setChatId( c.id() );
-      item->setUnreadMessages( c.unreadMessages() );
-    }
+    item->setChatId( c.id() );
+    item->setUnreadMessages( c.unreadMessages() );
   }
 
   item->updateUser( u );
@@ -244,17 +230,6 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
   else
     emit userSelected( user_item->userId() );
   mp_twUsers->clearSelection();
-}
-
-void GuiUserList::setDefaultChatConnected( GuiUserItem* item, bool yes )
-{
-  if( !item )
-    item = itemFromChatId( ID_DEFAULT_CHAT );
-  if( !item )
-    return;
-  QIcon def_icon = QIcon( (yes ? ":/images/default-chat-online" : ":/images/default-chat-offline" ) );
-  item->setIcon( 0, def_icon );
-  item->setDefaultIcon( def_icon );
 }
 
 void GuiUserList::filterText( const QString& txt )

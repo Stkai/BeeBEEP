@@ -119,9 +119,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_actFindTextInChat = new QAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this );
   connect( mp_actFindTextInChat, SIGNAL( triggered() ), this, SLOT( showFindTextInChatDialog() ) );
 
-  mp_actSaveGeometryAndState = new QAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this );
-  connect( mp_actSaveGeometryAndState, SIGNAL( triggered() ), this, SIGNAL( saveStateAndGeometryRequest() ) );
-
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
@@ -150,8 +147,6 @@ void GuiChat::setupToolBars( QToolBar* chat_bar, QToolBar* group_bar )
   chat_bar->addSeparator();
   chat_bar->addAction( mp_actSaveAs );
   chat_bar->addAction( mp_actPrint );
-  chat_bar->addSeparator();
-  chat_bar->addAction( mp_actSaveGeometryAndState );
 
   mp_actGroupWizard = group_bar->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
   mp_actGroupAdd = group_bar->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
@@ -166,7 +161,10 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   if( c.id() != m_chatId )
     return;
 
-  bool local_user_is_member = isActiveUser( c, Settings::instance().localUser() );
+  mp_teMessage->setEnabled( c.isValid() );
+  mp_teChat->setEnabled( c.isValid() );
+
+  bool local_user_is_member = c.hasUser( Settings::instance().localUser().id() );
   bool is_group_chat = c.isGroup();
   bool local_group_exists = is_group_chat ? UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() : false;
   bool chat_is_empty = c.isEmpty();
@@ -206,10 +204,9 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
     }
     else
     {
-      bool local_user_is_active_in_chat = isActiveUser( c, Settings::instance().localUser() );
-      mp_teMessage->setEnabled( local_user_is_active_in_chat );
-      mp_pbSend->setEnabled( local_user_is_active_in_chat );
-      if( local_user_is_active_in_chat )
+      mp_teMessage->setEnabled( local_user_is_member );
+      mp_pbSend->setEnabled( local_user_is_member );
+      if( local_user_is_member )
         mp_teMessage->setToolTip( "" );
       else
         mp_teMessage->setToolTip( tr( "You have left this chat" ) );
@@ -367,11 +364,6 @@ QString GuiChat::chatMessageToText( const User& u, const ChatMessage& cm )
   }
 
   return s;
-}
-
-bool GuiChat::isActiveUser( const Chat& c, const User& u ) const
-{
-  return c.isValid() && c.usersId().contains( u.id() );
 }
 
 void GuiChat::updateChat()

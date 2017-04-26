@@ -56,7 +56,7 @@ Group UserManager::group( VNumber group_id ) const
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find group with id" << group_id;
+  qDebug() << "Unable to find group with id:" << group_id;
 #endif
   return Group();
 }
@@ -90,7 +90,7 @@ bool UserManager::removeGroup( VNumber group_id )
   if( g.isValid() && m_groups.removeOne( g ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << g.name() << "is removed from group list";
+    qDebug() << "Group is removed from group list:" << qPrintable( g.name() );
 #endif
     return true;
   }
@@ -127,7 +127,7 @@ User UserManager::findUserByPath( const QString& user_path ) const
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with path" << user_path;
+  qDebug() << "Unable to find user with path:" << qPrintable( user_path );
 #endif
 
   QString user_nickname = User::nameFromPath( user_path );
@@ -136,7 +136,7 @@ User UserManager::findUserByPath( const QString& user_path ) const
     return user_by_nickname;
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with nickname" << user_nickname;
+  qDebug() << "Unable to find user with nickname:" << qPrintable( user_nickname );
 #endif
 
   QString host_and_port = User::hostAddressAndPortFromPath( user_path );
@@ -151,7 +151,7 @@ User UserManager::findUserByPath( const QString& user_path ) const
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with host and port" << host_and_port;
+  qDebug() << "Unable to find user with host and port:" << qPrintable( host_and_port );
 #endif
 
   return User();
@@ -193,7 +193,7 @@ User UserManager::findUserByHash( const QString& user_hash ) const
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with hash" << user_hash;
+  qDebug() << "Unable to find user with hash:" << qPrintable( user_hash );
 #endif
 
   return User();
@@ -216,7 +216,7 @@ User UserManager::findUserByHostAddressAndPort( const QHostAddress& host_address
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with IP address" << qPrintable( network_address.toString() );
+  qDebug() << "Unable to find user with IP address:" << qPrintable( network_address.toString() );
 #endif
 
   return User();
@@ -237,7 +237,7 @@ User UserManager::findUserByNickname( const QString& user_nickname ) const
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with nickname" << qPrintable( user_nickname );
+  qDebug() << "Unable to find user with nickname:" << qPrintable( user_nickname );
 #endif
   return User();
 }

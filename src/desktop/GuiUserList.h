@@ -67,7 +67,6 @@ private:
   GuiUserItem* itemFromChatId( VNumber );
   void sortUsers();
   void resetList();
-  void setDefaultChatConnected( GuiUserItem*, bool );
 
   QString m_filter;
   bool m_coreIsConnected;

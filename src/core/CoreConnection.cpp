@@ -323,26 +323,19 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
     u.setId( user_found.id() );
     u.setIsFavorite( user_found.isFavorite() );
+    u.setColor( user_found.color() );
+    qDebug() << "User" << qPrintable( u.path() ) << "has saved color:" << qPrintable( u.color() );
   }
   else
   {
     qDebug() << "New user is connected from" << u.path();
   }
 
-#if QT_VERSION < 0x040700
-  if( u.color() == QString( "#000000" ) || !QColor( u.color() ).isValid() )
-#else
-  if( u.color() == QString( "#000000" ) || !QColor::isValidColor( u.color() ) )
-#endif
-  {
-    if( user_found.isValid() && user_found.color() != QString( "#000000" ) )
-      u.setColor( user_found.color() );
-    else
-      u.setColor( ColorManager::instance().unselectedQString() );
-  }
-
+  if( !ColorManager::instance().isValidColor( u.color() ) )
+    u.setColor( ColorManager::instance().unselectedQString() );
   u.setProtocolVersion( c->protoVersion() );
   UserManager::instance().setUser( u );
+
 #ifdef BEEBEEP_DEBUG
   qDebug() << "User" << u.path() << "added with id" << u.id() << "and color" << u.color();
 #endif

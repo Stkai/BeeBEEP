@@ -38,10 +38,10 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
   QString other_name = item.data( 0, GuiChatItem::ChatName ).toString().toLower();
 
   if( chatId() == ID_DEFAULT_CHAT )
-    return true;
+    return false;
 
   if( Bee::qVariantToVNumber( item.data( 0, GuiChatItem::ChatId ) ) == ID_DEFAULT_CHAT )
-    return false;
+    return true;
 
   if( isGroup() && !item.data( 0, GuiChatItem::ChatIsGroup ).toBool() )
     return false;
@@ -57,21 +57,26 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
     return user_item_name > other_name; // correct order
 }
 
+QString GuiChatItem::defaultChatName()
+{
+  return QObject::tr( "All Lan Users" );
+}
+
 bool GuiChatItem::updateItem( const Chat& c )
 {
   QString chat_name;
   QString tool_tip;
+  m_defaultIcon = QIcon();
 
   if( c.isDefault() )
   {
-    chat_name = QObject::tr( "All Lan Users" );
+    chat_name = defaultChatName();
     tool_tip = QObject::tr( "Open chat with all local users" );
     setData( 0, ChatName, " " );
-    setIcon( 0, QIcon( ":/images/default-chat-online.png" ) );
+    m_defaultIcon = QIcon( ":/images/default-chat-online.png" );
   }
   else
   {
-    setIcon( 0, QIcon( ":/images/chat.png" ) );
     UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
     QStringList sl;
     foreach( User u, user_list.toList() )
@@ -80,7 +85,7 @@ bool GuiChatItem::updateItem( const Chat& c )
       {
         sl.append( u.name() );
         if( c.isPrivateForUser( u.id() ) )
-          setIcon( 0, Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() ) );
+          m_defaultIcon = Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() );
       }
     }
 
@@ -88,7 +93,7 @@ bool GuiChatItem::updateItem( const Chat& c )
     {
       chat_name = c.name();
       if( UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() )
-        setIcon( 0, QIcon( ":/images/group.png" ) );
+        m_defaultIcon = QIcon( ":/images/group.png" );
     }
     else
       chat_name = sl.isEmpty() ? c.name() : sl.first();
@@ -106,6 +111,11 @@ bool GuiChatItem::updateItem( const Chat& c )
   setText( 0, chat_name );
   setToolTip( 0, tool_tip );
   setData( 0, ChatUnreadMessages, c.unreadMessages() );
+  if( m_defaultIcon.isNull() )
+    m_defaultIcon = QIcon( ":/images/chat.png" );
+  if( !chatHasOnlineUsers( c ) )
+    m_defaultIcon = Bee::convertToGrayScale( m_defaultIcon.pixmap( Settings::instance().avatarIconSize() ) );
+  setIcon( 0, m_defaultIcon );
   onTickEvent( 2 );
 
   return true;
@@ -118,6 +128,27 @@ void GuiChatItem::onTickEvent( int ticks )
     if( ticks % 2 == 0 )
       setIcon( 0, QIcon( ":/images/beebeep-message.png" ) );
     else
-      setIcon( 0, QIcon( ":/images/chat.png" ) );
+      setIcon( 0, m_defaultIcon );
   }
+}
+
+bool GuiChatItem::chatHasOnlineUsers( const Chat& c )
+{
+  if( !Settings::instance().localUser().isStatusConnected() )
+    return false;
+
+  if( c.isDefault() )
+    return true;
+
+  foreach( VNumber user_id, c.usersId() )
+  {
+    if( user_id != ID_LOCAL_USER )
+    {
+      User u = UserManager::instance().findUser( user_id );
+      if( u.isValid() && u.isStatusConnected() )
+        return true;
+    }
+  }
+
+  return false;
 }

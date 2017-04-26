@@ -91,7 +91,7 @@ void Core::createPrivateChat( const User& u )
 
 void Core::checkGroupChatAfterUserReconnect( const User& u )
 {
-  QList<Chat> chat_list = ChatManager::instance().groupChatsForUser( u.id() );
+  QList<Chat> chat_list = ChatManager::instance().groupChatsWithUser( u.id() );
   if( chat_list.isEmpty() )
     return;
 
@@ -145,7 +145,7 @@ void Core::changeGroupChat( const User& u, VNumber chat_id, const QString& chat_
 
   if( c.name() != chat_name )
   {
-    sHtmlMsg = tr( "%1 %2 has changed the group name: %3." ).arg( Bee::iconToHtml( ":/images/chat.png", "*G*" ), u.name(), chat_name );
+    sHtmlMsg = tr( "%1 %2 has changed the group name: %3." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), u.name(), chat_name );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     chat_changed = true;
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
@@ -192,13 +192,13 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 {
   if( !isConnected() )
   {
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat, ChatMessage::System );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat, ChatMessage::Other );
     return 0;
   }
 
   if( chat_id == ID_DEFAULT_CHAT && !Settings::instance().chatWithAllUsersIsEnabled() )
   {
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: this chat is disabled." ), DispatchToChat, ChatMessage::System );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: this chat is disabled." ), DispatchToChat, ChatMessage::Other );
     return 0;
   }
 
@@ -234,7 +234,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       if( !user_connection->sendMessage( m ) )
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
                                .arg( UserManager::instance().findUser( user_connection->userId() ).path() ),
-                               DispatchToChat, ChatMessage::System );
+                               DispatchToChat, ChatMessage::Other );
       else
         messages_sent += 1;
     }
@@ -261,11 +261,11 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
 
     if( !offline_users.isEmpty() )
       dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( offline_users.join( ", " ) ),
-                             DispatchToChat, ChatMessage::System );
+                             DispatchToChat, ChatMessage::Other );
   }
 
   if( chat_id == ID_DEFAULT_CHAT && messages_sent == 0 )
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::System );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::Other );
 
   return messages_sent;
 }
@@ -296,14 +296,14 @@ void Core::showFactOfTheDay()
 {
   QString fact_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/fact.png", "*T*" ),
                                                    qApp->translate( "Tips", BeeBeepFacts[ Random::number( 0, (BeeBeepFactsSize-1) ) ] ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, fact_of_the_day, DispatchToChat, ChatMessage::Other );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, fact_of_the_day, DispatchToChat, ChatMessage::System );
 }
 
 void Core::showTipOfTheDay()
 {
   QString tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),
                                                    qApp->translate( "Tips", BeeBeepTips[ Random::number( 0, (BeeBeepTipsSize-1) ) ] ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat, ChatMessage::Other );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat, ChatMessage::System );
 }
 
 void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& user_list )
@@ -494,7 +494,7 @@ void Core::checkOfflineMessagesForUser( const User& u )
 
   foreach( VNumber ci, chat_list )
   {
-    dispatchSystemMessage( ci, u.id(), tr( "Offline messages sent to %2." ).arg( u.name() ), DispatchToChat, ChatMessage::System );
+    dispatchSystemMessage( ci, u.id(), tr( "Offline messages sent to %2." ).arg( u.name() ), DispatchToChat, ChatMessage::Other );
   }
 }
 
@@ -613,12 +613,12 @@ void Core::addChatHeader( Chat* p_chat )
 
   if( p_chat->isDefault() )
   {
-    header_msg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), tr( "Chat with all connected users" ) );
+    header_msg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), tr( "Chat with all connected users" ) );
   }
   else if( p_chat->isPrivate() )
   {
     User u = UserManager::instance().findUser( p_chat->privateUserId() );
-    header_msg = tr( "%1 Chat with %2" ).arg( Bee::iconToHtml( ":/images/chat.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.path() );
+    header_msg = tr( "%1 Chat with %2" ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.path() );
   }
   else
   {

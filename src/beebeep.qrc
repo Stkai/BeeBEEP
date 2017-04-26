@@ -105,7 +105,6 @@
         <file>images/folder.png</file>
         <file>images/language.png</file>
         <file>emoticons/angry.png</file>
-        <file>images/default-chat-offline.png</file>
         <file>images/default-chat-online.png</file>
         <file>images/menu-user-away.png</file>
         <file>images/menu-user-busy.png</file>
@@ -150,5 +149,9 @@
         <file>images/raspberry-pi.png</file>
         <file>images/activities.png</file>
         <file>images/file-sharing.png</file>
+        <file>images/settings-start.png</file>
+        <file>images/settings-close.png</file>
+        <file>images/settings-tray-icon.png</file>
+        <file>images/chat-small.png</file>
     </qresource>
 </RCC>

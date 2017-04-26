@@ -43,7 +43,6 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   m_mainWindowIcon = QIcon( ":/images/chat.png" );
   setMainIcon( false );
   mp_chat = new GuiChat( this );
-  connect( mp_chat, SIGNAL( saveStateAndGeometryRequest() ), this, SLOT( saveGeometryAndState() ) );
 
   mp_barGroup = new QToolBar( tr( "Show the bar of group" ), this );
   addToolBar( Qt::TopToolBarArea, mp_barGroup );
@@ -81,6 +80,8 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   actViewPresetMessageList->setIcon( QIcon( ":/images/preset-message.png" ) );
   actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
   mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
+  mp_barChat->addSeparator();
+  mp_barChat->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
   mp_dockPresetMessageList->hide();
 
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
@@ -145,10 +146,15 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
     window_title = tr( "Chat with all connected users" );
     m_mainWindowIcon = QIcon( ":/images/default-chat-online.png" );
   }
-  else
+  else if( UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() )
   {
     window_title = c.name();
     m_mainWindowIcon = QIcon( ":/images/group.png" );
+  }
+  else
+  {
+    window_title = c.name();
+    m_mainWindowIcon = QIcon( ":/images/chat.png" );
   }
 
   setMainIcon( c.unreadMessages() > 0 );

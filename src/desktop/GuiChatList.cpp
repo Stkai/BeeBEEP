@@ -29,21 +29,27 @@
 
 
 GuiChatList::GuiChatList( QWidget* parent )
-  : QTreeWidget( parent )
+  : QWidget( parent )
 {
   setObjectName( "GuiChatList" );
+  setupUi( this );
 
-  setColumnCount( 1 );
-  header()->hide();
-  setRootIsDecorated( false );
-  setSortingEnabled( true );
-  setIconSize( Settings::instance().avatarIconSize() );
-
-  setContextMenuPolicy( Qt::CustomContextMenu );
-  setMouseTracking( true );
+  mp_twChatList->setColumnCount( 1 );
+  mp_twChatList->header()->hide();
+  mp_twChatList->setRootIsDecorated( false );
+  mp_twChatList->setSortingEnabled( true );
+  mp_twChatList->setIconSize( Settings::instance().avatarIconSize() );
+  mp_twChatList->setContextMenuPolicy( Qt::CustomContextMenu );
+  mp_twChatList->setMouseTracking( true );
+  mp_twChatList->setHeaderHidden( true );
 
   m_chatSelected = ID_INVALID;
   m_blockShowChatRequest = false;
+  m_filter = "";
+
+#if QT_VERSION >= 0x040700
+  mp_leFilter->setPlaceholderText( tr( "Search chat" ) );
+#endif
 
   mp_menuContext = new QMenu( this );
 
@@ -55,15 +61,17 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_menuContext->addSeparator();
   mp_actDelete = mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
 
-  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
-  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
+  connect( mp_twChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
+  connect( mp_twChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
+  connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
+  connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
 }
 
 void GuiChatList::reloadChatList()
 {
-  clearSelection();
-  clear();
-  setIconSize( Settings::instance().avatarIconSize() );
+  mp_twChatList->clearSelection();
+  mp_twChatList->clear();
+  mp_twChatList->setIconSize( Settings::instance().avatarIconSize() );
   foreach( Chat c, ChatManager::instance().constChatList() )
     updateChat( c );
 }
@@ -71,7 +79,7 @@ void GuiChatList::reloadChatList()
 GuiChatItem* GuiChatList::itemFromChatId( VNumber chat_id )
 {
   GuiChatItem* item;
-  QTreeWidgetItemIterator it( this );
+  QTreeWidgetItemIterator it( mp_twChatList );
   while( *it )
   {
     item = (GuiChatItem*)(*it);
@@ -87,16 +95,24 @@ void GuiChatList::updateChat( const Chat& c )
   if( !c.isValid() )
     return;
 
-  if( !c.isGroup() )
+  if( !m_filter.isEmpty() )
   {
-    if( ChatManager::instance().isChatEmpty( c, true ) )
-      return;
+    if( c.isDefault() )
+    {
+      if( !GuiChatItem::defaultChatName().contains( m_filter, Qt::CaseInsensitive ) )
+        return;
+    }
+    else
+    {
+      if( !c.name().contains( m_filter, Qt::CaseInsensitive ) )
+        return;
+    }
   }
 
   GuiChatItem* item = itemFromChatId( c.id() );
   if( !item )
   {
-    item = new GuiChatItem( this );
+    item = new GuiChatItem( mp_twChatList );
     item->setChatId( c.id() );
   }
 
@@ -105,8 +121,8 @@ void GuiChatList::updateChat( const Chat& c )
 
 void GuiChatList::updateUser( const User& u )
 {
-  Chat c = ChatManager::instance().privateChatForUser( u.id() );
-  if( c.isValid() )
+  QList<Chat> chat_list = ChatManager::instance().chatsWithUser( u.id() );
+  foreach( Chat c, chat_list )
     updateChat( c );
 }
 
@@ -121,14 +137,14 @@ void GuiChatList::chatClicked( QTreeWidgetItem* item, int )
     return;
   }
 
-  clearSelection();
+  mp_twChatList->clearSelection();
   GuiChatItem* user_item = (GuiChatItem*)item;
   emit chatSelected( user_item->chatId() );
 }
 
 void GuiChatList::showChatMenu( const QPoint& p )
 {
-  QTreeWidgetItem* item = itemAt( p );
+  QTreeWidgetItem* item = mp_twChatList->itemAt( p );
   if( !item )
   {
     QMenu menu_create_chat;
@@ -155,7 +171,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
 
   mp_menuContext->exec( QCursor::pos() );
 
-  clearSelection();
+  mp_twChatList->clearSelection();
 }
 
 void GuiChatList::openChatSelected()
@@ -176,11 +192,26 @@ void GuiChatList::removeChatSelected()
 void GuiChatList::onTickEvent( int ticks )
 {
   GuiChatItem* item;
-  QTreeWidgetItemIterator it( this );
+  QTreeWidgetItemIterator it( mp_twChatList );
   while( *it )
   {
     item = (GuiChatItem*)(*it);
     item->onTickEvent( ticks );
     ++it;
   }
+}
+
+void GuiChatList::filterText( const QString& txt )
+{
+  QString new_filter = txt.trimmed().toLower();
+  if( m_filter == new_filter )
+    return;
+
+  m_filter = new_filter;
+  reloadChatList();
+}
+
+void GuiChatList::clearFilter()
+{
+  mp_leFilter->setText( "" );
 }

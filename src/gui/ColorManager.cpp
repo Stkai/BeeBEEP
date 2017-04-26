@@ -40,6 +40,23 @@ QString ColorManager::unselectedQString()
   return m_unselectedColors.takeAt( Random::number( 0, (m_unselectedColors.size()-1) ) );
 }
 
+void ColorManager::setColorSelected( const QString& s_color )
+{
+  m_unselectedColors.removeOne( s_color );
+}
+
+bool ColorManager::isValidColor( const QString& s_color )
+{
+#if QT_VERSION >= 0x040700
+  if( s_color != QString( "#000000" ) && QColor::isValidColor( s_color ) )
+#else
+  if( s_color != QString( "#000000" ) && QColor( s_color ).isValid() )
+#endif
+    return true;
+  else
+    return false;
+}
+
 ColorManager::ColorManager()
   : m_colors(), m_unselectedColors()
 {
@@ -131,7 +148,6 @@ ColorManager::ColorManager()
   m_colors << "#808080";
   m_colors << "#A0A0A0";
   m_colors << "#C0C0C0";
-  m_colors << "#000000";
 
   clearSelectedColors();
   qDebug() << "ColorManager loads" << m_colors.size() << "colors";

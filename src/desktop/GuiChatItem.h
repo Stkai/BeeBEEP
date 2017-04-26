@@ -48,6 +48,13 @@ public:
 
   void onTickEvent( int );
 
+  static QString defaultChatName();
+
+private:
+  QIcon m_defaultIcon;
+
+  bool chatHasOnlineUsers( const Chat& );
+
 };
 
 

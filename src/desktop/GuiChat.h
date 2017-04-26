@@ -78,7 +78,6 @@ protected:
   bool historyCanBeShowed();
   void setChatFontColor( const QString& );
   void setChatBackgroundColor( const QString& );
-  bool isActiveUser( const Chat&, const User& ) const;
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
   void updateSpellCheckerToolTip();
@@ -135,7 +134,6 @@ private:
   QAction* mp_actFindTextInChat;
   QAction* mp_actSendFolder;
   QAction* mp_actSaveAs;
-  QAction* mp_actSaveGeometryAndState;
 
   QSplitter* mp_splitter;
 

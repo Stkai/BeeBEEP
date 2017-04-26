@@ -67,46 +67,14 @@ public:
 
 };
 
-class ServiceInterface : public PluginInterface
-{
-public:
-  virtual QString protocol() const = 0;
-  virtual QString hostAddress() const = 0;
-  virtual int hostPort() const = 0;
-
-  virtual bool fileTransferIsEnabled() const = 0;
-
-  virtual QString userStatusOfflineIconPath() const = 0;
-  virtual QString userStatusOnlineIconPath() const = 0;
-  virtual QString userStatusBusyIconPath() const = 0;
-  virtual QString userStatusAwayIconPath() const = 0;
-
-};
-
-class GameInterface : public PluginInterface
-{
-public:
-  virtual QWidget* mainWindow() const = 0;
-
-  virtual void pause() = 0;
-  virtual bool isPaused() const = 0;
-  virtual void setSettings( QStringList ) = 0;
-  virtual QStringList settings() const = 0;
-
-};
-
 // Inline Functions
 inline void PluginInterface::setEnabled( bool new_value ) { m_isEnabled = new_value; }
 inline bool PluginInterface::isEnabled() const { return m_isEnabled; }
 
 #if QT_VERSION >= 0x050000
 Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/2.0" )
-Q_DECLARE_INTERFACE( ServiceInterface, "beebeep.plugin.ServiceInterface/2.0" )
-Q_DECLARE_INTERFACE( GameInterface, "beebeep.plugin.GameInterface/2.0" )
 #else
 Q_DECLARE_INTERFACE( TextMarkerInterface, "beebeep.plugin.TextMarkerInterface/1.5" )
-Q_DECLARE_INTERFACE( ServiceInterface, "beebeep.plugin.ServiceInterface/1.0" )
-Q_DECLARE_INTERFACE( GameInterface, "beebeep.plugin.GameInterface/1.0" )
 #endif
 
 

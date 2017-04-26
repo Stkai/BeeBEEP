@@ -156,6 +156,19 @@ Chat ChatManager::firstChatWithUnreadMessages() const
     return Chat();
 }
 
+QList<Chat> ChatManager::chatsWithUser( VNumber user_id ) const
+{
+  if( user_id == ID_LOCAL_USER )
+    return m_chats;
+  QList<Chat> chat_list;
+  foreach( Chat c, m_chats )
+  {
+    if( c.hasUser( user_id ) )
+      chat_list.append( c );
+  }
+  return chat_list;
+}
+
 bool ChatManager::isGroupChat( VNumber chat_id ) const
 {
   if( chat_id == ID_DEFAULT_CHAT )
@@ -164,12 +177,12 @@ bool ChatManager::isGroupChat( VNumber chat_id ) const
   return c.isGroup();
 }
 
-QList<Chat> ChatManager::groupChatsForUser( VNumber user_id ) const
+QList<Chat> ChatManager::groupChatsWithUser( VNumber user_id ) const
 {
   QList<Chat> chat_list;
   foreach( Chat c, m_chats )
   {
-    if( c.isGroup() && c.usersId().contains( user_id ) )
+    if( c.isGroup() && c.hasUser( user_id ) )
       chat_list.append( c );
   }
   return chat_list;

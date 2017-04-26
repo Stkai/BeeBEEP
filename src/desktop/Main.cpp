@@ -204,7 +204,7 @@ int main( int argc, char *argv[] )
   mw.loadSession();
 
   /* Starting connection to BeeBEEP Network */
-  QTimer::singleShot( 4000, &mw, SLOT( startStopCore() ) );
+  QTimer::singleShot( 3000, &mw, SLOT( startStopCore() ) );
 
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );

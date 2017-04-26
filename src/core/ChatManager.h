@@ -53,9 +53,9 @@ public:
   int unreadMessages() const;
   bool isGroupChat( VNumber ) const;
   bool hasUnreadMessages() const;
+  QList<Chat> chatsWithUser( VNumber ) const;
 
-
-  QList<Chat> groupChatsForUser( VNumber ) const;
+  QList<Chat> groupChatsWithUser( VNumber ) const;
   bool userIsInGroupChat( VNumber ) const;
   Chat groupChatForUsers( const QList<VNumber>& ) const;
 

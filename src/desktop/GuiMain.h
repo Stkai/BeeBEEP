@@ -33,7 +33,6 @@
 class Core;
 class Chat;
 class ChatMessage;
-class GameInterface;
 class GuiChat;
 class GuiChatList;
 class GuiFileSharing;
@@ -194,7 +193,6 @@ private:
   void createMenus();
   void createToolAndMenuBars();
   void createMainWidgets();
-  void createPluginWindows();
   void refreshUserList();
   void updateWindowTitle();
   void initGuiItems();
@@ -202,10 +200,8 @@ private:
   void updateStatusIcon();
   void sendFile( const User& );
   bool askToDownloadFile( const User&, const FileInfo&, const QString&, bool );
-  void setGameInPauseMode();
   void checkAutoStartOnBoot( bool );
   void checkViewActions();
-  QMenu* gameMenu( GameInterface* );
   bool sendFile( const User&, const QString&, VNumber chat_id );
   void sendFiles( const User&, const QStringList&, VNumber chat_id );
   bool openWebUrl( const QString& );
@@ -248,6 +244,12 @@ private:
   QMenu* mp_menuTrayIcon;
   QMenu* mp_menuUserList;
   QMenu* mp_menuUserStatusList;
+  QMenu* mp_menuStartupSettings;
+  QMenu* mp_menuCloseSettings;
+  QMenu* mp_menuChatSettings;
+  QMenu* mp_menuFileTransferSettings;
+  QMenu* mp_menuSoundSettings;
+  QMenu* mp_menuTrayIconSettings;
 
   QToolBar* mp_barMain;
 
@@ -290,10 +292,6 @@ private:
   QDockWidget* mp_dockHome;
 
   GuiSystemTray* mp_trayIcon;
-
-  QMap<QString, QMenu*> m_mapGameMenu;
-  QMenu* mp_defaultGameMenu;
-
   int m_lastUserStatus;
 
   bool m_forceShutdown;

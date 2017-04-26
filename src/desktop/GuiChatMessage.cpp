@@ -147,9 +147,9 @@ bool GuiChatMessage::messageCanBeShowedInDefaultChat( const ChatMessage& cm )
   switch( cm.type() )
   {
   case ChatMessage::Header:
-  case ChatMessage::System:
   case ChatMessage::Chat:
   case ChatMessage::History:
+  case ChatMessage::Other:
     return true;
   default:
     return false;

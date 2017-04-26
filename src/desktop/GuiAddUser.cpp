@@ -95,8 +95,7 @@ void GuiAddUser::saveUsers()
 {
   QStringList sl;
   foreach( UserRecord ur, m_users )
-    sl.append( Protocol::instance().saveUserRecord( ur, false ) );
-
+    sl.append( Protocol::instance().saveUserRecord( ur, true, false ) );
   Settings::instance().setUserPathList( sl );
   accept();
 }

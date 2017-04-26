@@ -92,10 +92,10 @@ inline void Chat::setId( VNumber new_value ) { m_id = new_value; }
 inline const QString& Chat::name() const { return m_name; }
 inline void Chat::setName( const QString& new_value ) { m_name = new_value; }
 inline const QList<VNumber>& Chat::usersId() const { return m_usersId; }
-inline bool Chat::hasUser( VNumber user_id ) const { return m_usersId.contains( user_id ); }
+inline bool Chat::hasUser( VNumber user_id ) const { return isDefault() ? true : m_usersId.contains( user_id ); }
 inline bool Chat::removeUser( VNumber user_id ) { return m_usersId.removeOne( user_id ); }
-inline bool Chat::isPrivateForUser( VNumber user_id ) const { return m_id != ID_DEFAULT_CHAT && !isGroup() && m_usersId.size() == 2 && hasUser( user_id ); }
-inline bool Chat::isPrivate() const { return m_id != ID_DEFAULT_CHAT && !isGroup() && m_usersId.size() == 2 && hasUser( ID_LOCAL_USER ); }
+inline bool Chat::isPrivateForUser( VNumber user_id ) const { return !isDefault() && !isGroup() && m_usersId.size() == 2 && hasUser( user_id ); }
+inline bool Chat::isPrivate() const { return !isDefault() && !isGroup() && m_usersId.size() == 2 && hasUser( ID_LOCAL_USER ); }
 inline const QDateTime& Chat::lastMessageTimestamp() const { return m_lastMessageTimestamp; }
 inline void Chat::setLastMessageTimestamp( const QDateTime& new_value ) { m_lastMessageTimestamp = new_value; }
 inline int Chat::unreadMessages() const { return m_unreadMessages; }

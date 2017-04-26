@@ -89,7 +89,6 @@ GuiMain::GuiMain( QWidget *parent )
   mp_fileSharing = 0;
   mp_screenShot = 0;
   mp_log = 0;
-  mp_defaultGameMenu = new QMenu( this );
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
@@ -106,7 +105,6 @@ GuiMain::GuiMain( QWidget *parent )
   createMainWidgets();
   createMenus();
   createToolAndMenuBars();
-  createPluginWindows();
   updadePluginMenu();
 
   connect( mp_core, SIGNAL( newChatMessage( const Chat&, const ChatMessage& ) ), this, SLOT( onNewChatMessage( const Chat&, const ChatMessage& ) ) );
@@ -211,9 +209,13 @@ void GuiMain::checkWindowFlagsAndShow()
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width()+12, qMin( 720, qMax( QApplication::desktop()->availableGeometry().height() - 120, 560 ) ) );
-    move( QApplication::desktop()->availableGeometry().width() - width() - 20,
+    resize( width()+12, qMin( 720, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
+    move( QApplication::desktop()->availableGeometry().width() - width() - 40,
           ((QApplication::desktop()->availableGeometry().height() - height()) / 3) );
+
+    mp_dockFileTransfers->setVisible( false );
+    mp_dockHome->setVisible( true );
+    mp_tabMain->setCurrentWidget( mp_userList );
   }
   else
   {
@@ -267,7 +269,7 @@ void GuiMain::updateTabTitles()
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
 
   tab_index = mp_tabMain->indexOf( mp_chatList );
-  current_value = mp_chatList->topLevelItemCount();
+  current_value = ChatManager::instance().constChatList().size();
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
 
   tab_index = mp_tabMain->indexOf( mp_groupList );
@@ -297,9 +299,6 @@ void GuiMain::keyPressEvent( QKeyEvent* e )
 void GuiMain::changeEvent( QEvent* e )
 {
   QMainWindow::changeEvent( e );
-
-  if( e->type() == QEvent::WindowStateChange )
-    setGameInPauseMode();
 }
 
 void GuiMain::closeEvent( QCloseEvent* e )
@@ -328,8 +327,6 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
     mp_core->stop();
   }
-
-  saveGeometryAndState();
 
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
@@ -436,11 +433,6 @@ void GuiMain::startCore()
       showWizard();
       Settings::instance().setAskNicknameAtStartup( false );
     }
-
-    /* Save geometry for the first time */
-    /* If the user closes the application when it is not visible
-     * there are problems in saving state and geometry */
-    saveGeometryAndState();
   }
   else
   {
@@ -615,18 +607,9 @@ void GuiMain::createMenus()
 
   mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
   mp_menuMain->addSeparator();
-
-  mp_menuMain->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
-  mp_menuMain->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
-  mp_menuMain->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts..." ), this, SLOT( editShortcuts() ) );
-  mp_menuMain->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary..." ), this, SLOT( selectDictionatyPath() ) );
-  mp_menuMain->addSeparator();
-
-  mp_menuMain->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
-  mp_menuMain->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
+  mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
   mp_menuMain->addMenu( mp_menuPlugins );
-  mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( QIcon( ":/images/resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
@@ -640,54 +623,89 @@ void GuiMain::createMenus()
 
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
-  //mp_menuSettings->setIcon( QIcon( ":/images/settings.png" ) );
 
-  act = mp_menuSettings->addAction( tr( "Prompts for nickname on startup" ), this, SLOT( settingsChanged() ) );
+  mp_menuStartupSettings = new QMenu( tr( "On start" ), this );
+  mp_menuStartupSettings->setIcon( QIcon( ":/images/settings-start.png" ) );
+  mp_menuSettings->addMenu( mp_menuStartupSettings );
+  act = mp_menuStartupSettings->addAction( tr( "Prompts for nickname" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().askNicknameAtStartup() );
   act->setData( 45 );
-
-  mp_actPromptPassword = mp_menuSettings->addAction( tr( "Prompts for network password on startup" ), this, SLOT( settingsChanged() ) );
+  mp_actPromptPassword = mp_menuStartupSettings->addAction( tr( "Prompts for network password" ), this, SLOT( settingsChanged() ) );
   mp_actPromptPassword->setCheckable( true );
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
-
-  act = mp_menuSettings->addAction( tr( "Show minimized at startup" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuStartupSettings->addAction( tr( "Show minimized" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showMinimizedAtStartup() );
   act->setData( 35 );
-
-  act = mp_menuSettings->addAction( tr( "Reset window geometry at startup" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuStartupSettings->addAction( tr( "Show only on system tray" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().loadOnTrayAtStartup() );
+  act->setData( 24 );
+  act = mp_menuStartupSettings->addAction( tr( "Reset window geometry" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().resetGeometryAtStartup() );
   act->setData( 26 );
-
-  act = mp_menuSettings->addAction( tr( "Check for new version at startup" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuStartupSettings->addAction( tr( "Check for new version" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().checkNewVersionAtStartup() );
   act->setData( 43 );
 
-  act = mp_menuSettings->addAction( tr( "Use native file dialogs" ), this, SLOT( settingsChanged() ) );
+  mp_menuCloseSettings = new QMenu( tr( "On close" ), this );
+  mp_menuCloseSettings->setIcon( QIcon( ":/images/settings-close.png" ) );
+  mp_menuSettings->addMenu( mp_menuCloseSettings );
+  act = mp_menuCloseSettings->addAction( tr( "Prompt on quit when connected" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeDialogs() );
-  act->setData( 4 );
-
-#ifdef Q_OS_WIN
-  act = mp_menuSettings->addAction( tr( "Load %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
+  act->setChecked( Settings::instance().promptOnCloseEvent() );
+  act->setData( 36 );
+  act = mp_menuCloseSettings->addAction( tr( "Close button minimize to tray icon" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().hasStartOnSystemBoot() );
-  act->setData( 16 );
-#endif
+  act->setChecked( Settings::instance().minimizeInTray() );
+  act->setData( 11 );
+  act = mp_menuCloseSettings->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
+  act->setData( 29 );
 
-  mp_menuSettings->addSeparator();
+  mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
+  mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
+  mp_menuSettings->addMenu( mp_menuChatSettings );
+  act = mp_menuChatSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().saveUserList() );
+  act->setData( 32 );
+  act = mp_menuChatSettings->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatAutoSave() );
+  act->setData( 18 );
+  mp_menuChatSettings->addSeparator();
+  act = mp_menuChatSettings->addAction( tr( "Open chats in a single window" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatsInOneWindow() );
+  act->setData( 7 );
+  act = mp_menuChatSettings->addAction( tr( "Raise chat window on new message" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
+  act->setData( 15 );
+  act = mp_menuChatSettings->addAction( tr( "Clear all read messages on closing window" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatClearAllReadMessages() );
+  act->setData( 47 );
+  act = mp_menuChatSettings->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().autoUserAway() );
+  act->setData( 20 );
 
-  act = mp_menuSettings->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
+  mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
+  mp_menuFileTransferSettings->setIcon( QIcon( ":/images/file-transfer.png" ) );
+  mp_menuFileTransferSettings->setDisabled( Settings::instance().disableFileTransfer() );
+  mp_menuSettings->addMenu( mp_menuFileTransferSettings );
+  act = mp_menuFileTransferSettings->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().fileTransferIsEnabled() );
   act->setData( 12 );
-  act->setEnabled( !Settings::instance().disableFileTransfer() );
-
-  QMenu* existing_file_menu = mp_menuSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
+  QMenu* existing_file_menu = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
   mp_actOverwriteExistingFile = existing_file_menu->addAction( tr( "Overwrite" ), this, SLOT( settingsChanged() ) );
@@ -706,65 +724,74 @@ void GuiMain::createMenus()
   mp_actGroupExistingFile->addAction( mp_actGenerateAutomaticFilename );
   mp_actGroupExistingFile->addAction( mp_actAskToDoOnExistingFile );
   connect( mp_actGroupExistingFile, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingOnExistingFile( QAction* ) ) );
-
-  mp_actConfirmDownload = mp_menuSettings->addAction( tr( "Prompt before downloading file" ), this, SLOT( settingsChanged() ) );
+  mp_actConfirmDownload = mp_menuFileTransferSettings->addAction( tr( "Prompt before downloading file" ), this, SLOT( settingsChanged() ) );
   mp_actConfirmDownload->setCheckable( true );
   mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
   mp_actConfirmDownload->setData( 30 );
+  mp_menuFileTransferSettings->addSeparator();
+  mp_menuFileTransferSettings->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
 
-  mp_menuSettings->addSeparator();
-
-  act = mp_menuSettings->addAction( tr( "Set status to away automatically" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().autoUserAway() );
-  act->setData( 20 );
-
-  mp_menuSettings->addSeparator();
-
-  mp_actBeepOnNewMessage = mp_menuSettings->addAction( tr( "Enable BEEP alert on new message" ), this, SLOT( settingsChanged() ) );
+  mp_menuSoundSettings = new QMenu( tr( "Sound" ), this );
+  mp_menuSoundSettings->setIcon( QIcon( ":/images/bell.png" ) );
+  mp_menuSettings->addMenu( mp_menuSoundSettings );
+  mp_actBeepOnNewMessage = mp_menuSoundSettings->addAction( tr( "Enable BEEP alert" ), this, SLOT( settingsChanged() ) );
   mp_actBeepOnNewMessage->setCheckable( true );
   mp_actBeepOnNewMessage->setChecked( Settings::instance().beepOnNewMessageArrived() );
   mp_actBeepOnNewMessage->setData( 34 );
-
-  act = mp_menuSettings->addAction( tr( "Enable Buzz sound" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSoundSettings->addAction( tr( "Enable Buzz sound" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().playBuzzSound() );
   act->setData( 56 );
+  mp_menuSoundSettings->addSeparator();
+  mp_menuSoundSettings->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
+  mp_menuSoundSettings->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
 
-  act = mp_menuSettings->addAction( tr( "Raise on new message" ), this, SLOT( settingsChanged() ) );
+  mp_menuTrayIconSettings = new QMenu( tr( "System tray icon" ), this );
+  mp_menuTrayIconSettings->setIcon( QIcon( ":/images/settings-tray-icon.png" ) );
+  mp_menuSettings->addMenu( mp_menuTrayIconSettings );
+  act = mp_menuTrayIconSettings->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
-  act->setData( 15 );
-
-  act = mp_menuSettings->addAction( tr( "Open chats in a single window" ), this, SLOT( settingsChanged() ) );
+  act->setChecked( Settings::instance().showNotificationOnTray()  );
+  act->setData( 19 );
+  act = mp_menuTrayIconSettings->addAction( tr( "Show only message notifications" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().showChatsInOneWindow() );
-  act->setData( 7 );
+  act->setChecked( Settings::instance().showOnlyMessageNotificationOnTray()  );
+  act->setData( 40 );
+  act = mp_menuTrayIconSettings->addAction( tr( "Show chat message preview" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatMessageOnTray() );
+  act->setData( 46 );
+  act = mp_menuTrayIconSettings->addAction( tr( "Show file notification" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showFileTransferCompletedOnTray() );
+  act->setData( 48 );
 
+  mp_menuSettings->addSeparator();
+  mp_menuSettings->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts..." ), this, SLOT( editShortcuts() ) );
+  mp_menuSettings->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
+  mp_menuSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
-
-  act = mp_menuSettings->addAction( tr( "Prompt on quit when connected" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Use native file dialogs" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().promptOnCloseEvent() );
-  act->setData( 36 );
+  act->setChecked( Settings::instance().useNativeDialogs() );
+  act->setData( 4 );
+#ifdef Q_OS_WIN
+  act = mp_menuSettings->addAction( tr( "Start %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().hasStartOnSystemBoot() );
+  act->setData( 16 );
+#endif
 
   mp_menuSettings->addSeparator();
   mp_menuSettings->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
-
-  act = mp_menuUserList->addAction( tr( "Save the users on exit" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().saveUserList() );
-  act->setData( 32 );
-
-  mp_menuUserList->addSeparator();
 
   act = mp_menuUserList->addAction( tr( "Sort users in ascending order" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -901,50 +928,9 @@ void GuiMain::createMenus()
   mp_actMulticastDns = mp_menuNetworkStatus->addAction( QString( "mdns" ) );
 #endif
   mp_menuTrayIcon->addSeparator();
-
-  act = mp_menuTrayIcon->addAction( tr( "Load on system tray at startup" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().loadOnTrayAtStartup() );
-  act->setData( 24 );
-
-  act = mp_menuTrayIcon->addAction( tr( "Close button minimize to tray icon" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().minimizeInTray() );
-  act->setData( 11 );
-
-  act = mp_menuTrayIcon->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
-  act->setData( 29 );
-
-  act = mp_menuTrayIcon->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showNotificationOnTray()  );
-  act->setData( 19 );
-
-  act = mp_menuTrayIcon->addAction( tr( "Show only message notifications" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showOnlyMessageNotificationOnTray()  );
-  act->setData( 40 );
-
-  act = mp_menuTrayIcon->addAction( tr( "Show chat message preview" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showChatMessageOnTray() );
-  act->setData( 46 );
-
-  act = mp_menuTrayIcon->addAction( tr( "Show file notification" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showFileTransferCompletedOnTray() );
-  act->setData( 48 );
-
-  mp_menuTrayIcon->addSeparator();
-#ifdef Q_OS_MACOS
   mp_menuTrayIcon->addAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this, SLOT( forceShutdown() ) );
-#else
-  mp_menuTrayIcon->addAction( mp_actQuit );
-#endif
-  mp_trayIcon->setContextMenu( mp_menuTrayIcon );
 
+  mp_trayIcon->setContextMenu( mp_menuTrayIcon );
 }
 
 void GuiMain::createToolAndMenuBars()
@@ -1021,31 +1007,6 @@ void GuiMain::createMainWidgets()
   }
 }
 
-QMenu* GuiMain::gameMenu( GameInterface* gi )
-{
-  if( m_mapGameMenu.contains( gi->name() ) )
-    return m_mapGameMenu.value( gi->name(), mp_defaultGameMenu );
-
-  QMenu *menu_game = new QMenu( gi->name(), this );
-  menu_game->setIcon( gi->icon() );
-
-  QAction* act = menu_game->addAction( QIcon( ":/images/play.png" ), tr( "Play %1" ).arg( gi->name() ), this, SLOT( raisePluginView() ) );
-  act->setData( gi->name() );
-  menu_game->setDefaultAction( act );
-
-  QString help_data_ts = tr( "is a game developed by" );
-  QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
-
-  act = menu_game->addAction( QIcon( ":/images/info.png" ), tr( "About %1" ).arg( gi->name() ), this, SLOT( showPluginHelp() ) );
-  act->setData( help_data_format
-                .arg( Bee::iconToHtml( (gi->icon().isNull() ? ":/images/plugin.png" : gi->iconFileName()), "*P*" ),
-                      gi->name(), help_data_ts, gi->author(), gi->help() ) );
-
-  m_mapGameMenu.insert( gi->name(), menu_game );
-
-  return menu_game;
-}
-
 void GuiMain::startExternalApplicationFromActionData()
 {
   QAction* act = qobject_cast<QAction*>( sender() );
@@ -1056,17 +1017,6 @@ void GuiMain::startExternalApplicationFromActionData()
   qDebug() << "Starting external application:" << qPrintable( application_path );
   if( !QDesktopServices::openUrl( QUrl::fromLocalFile( application_path ) ) )
     QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1" ).arg( application_path ), tr( "Ok" ) );
-}
-
-void GuiMain::createPluginWindows()
-{
-  if( PluginManager::instance().games().size() <= 0 )
-    return;
-
-  foreach( GameInterface* gi, PluginManager::instance().games() )
-  {
-    gameMenu( gi );
-  }
 }
 
 void GuiMain::onUserChanged( const User& u )
@@ -2060,23 +2010,6 @@ void GuiMain::updadePluginMenu()
       act->setEnabled( text_marker->isEnabled() );
     }
   }
-
-  if( PluginManager::instance().games().size() > 0 )
-  {
-    mp_menuPlugins->addSeparator();
-
-    if( PluginManager::instance().games().size() > 0 )
-    {
-      QMenu* game_menu;
-
-      foreach( GameInterface* gi, PluginManager::instance().games() )
-      {
-        game_menu = gameMenu( gi );
-        game_menu->setEnabled( gi->isEnabled() );
-        mp_menuPlugins->addMenu( game_menu );
-      }
-    }
-  }
 }
 
 void GuiMain::showPluginHelp()
@@ -2198,11 +2131,6 @@ void GuiMain::addToShare( const QString& share_path )
 void GuiMain::removeFromShare( const QString& share_path )
 {
   mp_core->removePathFromShare( share_path );
-}
-
-void GuiMain::setGameInPauseMode()
-{
-  PluginManager::instance().setGamePauseOn();
 }
 
 void GuiMain::openUrl( const QUrl& file_url )
@@ -2420,7 +2348,7 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 
 void GuiMain::loadSession()
 {
-  showMessage( tr( "Starting" ), 4000 );
+  showMessage( tr( "Starting" ), 3000 );
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   if( Settings::instance().fileTransferIsEnabled() )
     QTimer::singleShot( 10000, mp_core, SLOT( buildLocalShareList() ) );
@@ -2524,8 +2452,6 @@ bool GuiMain::openWebUrl( const QString& web_url )
 void GuiMain::checkNewVersion()
 {
   QString url_and_arguments = Settings::instance().checkVersionWebSite();
-  foreach( GameInterface* gi, PluginManager::instance().games() )
-    url_and_arguments.append( QString( "&%1=%2").arg( gi->name().toLower() ).arg( gi->version() ) );
   openWebUrl( url_and_arguments );
 }
 
@@ -2815,18 +2741,6 @@ void GuiMain::showChatSettingsMenu()
 
   mp_menuChat->addSeparator();
 
-  act = mp_menuChat->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatAutoSave() );
-  act->setData( 18 );
-
-  act = mp_menuChat->addAction( tr( "Clear all read messages on closing window" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatClearAllReadMessages() );
-  act->setData( 47 );
-
-  mp_menuChat->addSeparator();
-
   act = mp_menuChat->addAction( tr( "Show the chat in compact view mode" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatCompact() );
@@ -2906,7 +2820,7 @@ void GuiMain::showDefaultServerPortInMenu()
     mp_menuNetworkStatus->setIcon( QIcon( ":/images/network-connected.png" ) );
     mp_actHostAddress->setIcon( QIcon( ":/images/connect.png" ) );
     mp_actPortBroadcast->setIcon( QIcon( ":/images/broadcast.png" ) );
-    mp_actPortListener->setIcon( QIcon( ":/images/chat.png" ) );
+    mp_actPortListener->setIcon( QIcon( ":/images/default-chat-online.png" ) );
 
     host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );

@@ -93,6 +93,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
 FORMS += desktop/GuiAddUser.ui \
   desktop/GuiAskPassword.ui \
   desktop/GuiChat.ui \
+  desktop/GuiChatList.ui \
   desktop/GuiCreateGroup.ui \
   desktop/GuiEditVCard.ui \
   desktop/GuiHome.ui \

@@ -111,6 +111,7 @@ public:
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
   void setLocalUserHost( const QHostAddress&, int );
+  inline void setLocalUserStatus( User::Status );
 
   inline bool useIPv6() const;
   QHostAddress hostAddressToListen();
@@ -662,6 +663,7 @@ inline const QString& Settings::resourceFolder() const { return m_resourceFolder
 inline const QString& Settings::dataFolder() const { return m_dataFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
+inline void Settings::setLocalUserStatus( User::Status new_value ) { m_localUser.setStatus( new_value ); }
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }

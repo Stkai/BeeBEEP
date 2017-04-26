@@ -25,9 +25,10 @@
 #define BEEBEEP_GUICHATLIST_H
 
 #include "GuiChatItem.h"
+#include "ui_GuiChatList.h"
 
 
-class GuiChatList : public QTreeWidget
+class GuiChatList : public QWidget, private Ui::GuiChatListWidget
 {
   Q_OBJECT
 
@@ -53,6 +54,8 @@ protected slots:
   void openChatSelected();
   void clearChatSelected();
   void removeChatSelected();
+  void filterText( const QString& );
+  void clearFilter();
 
 private:
   GuiChatItem* itemFromChatId( VNumber );
@@ -65,6 +68,7 @@ private:
   VNumber m_chatOpened;
   bool m_blockShowChatRequest;
 
+  QString m_filter;
 };
 
 

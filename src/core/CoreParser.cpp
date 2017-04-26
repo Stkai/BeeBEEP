@@ -289,11 +289,10 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
       else
       {
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
-                               tr( "%1 %2 adds you to the group chat: %3." )
-                                 .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ),
-                               DispatchToChat, ChatMessage::System );
-        createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
+        QString sys_msg = tr( "%1 %2 has added you to the group chat: %3." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToChat, ChatMessage::System );
+        group_chat = createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
+        dispatchSystemMessage( group_chat.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::System );
       }
     }
   }
