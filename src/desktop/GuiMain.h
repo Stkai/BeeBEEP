@@ -265,7 +265,6 @@ private:
   QAction* mp_actPromptPassword;
   QAction* mp_actConfirmDownload;
   QAction* mp_actViewFileSharing;
-  QAction* mp_actViewHome;
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
 
@@ -289,7 +288,6 @@ private:
 #endif
 
   QDockWidget* mp_dockFileTransfers;
-  QDockWidget* mp_dockHome;
 
   GuiSystemTray* mp_trayIcon;
   int m_lastUserStatus;

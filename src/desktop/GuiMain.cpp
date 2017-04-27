@@ -209,13 +209,11 @@ void GuiMain::checkWindowFlagsAndShow()
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width()+12, qMin( 720, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
-    move( QApplication::desktop()->availableGeometry().width() - width() - 40,
+    resize( width()+12, qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
+    move( QApplication::desktop()->availableGeometry().width() - width() - 30,
           ((QApplication::desktop()->availableGeometry().height() - height()) / 3) );
-
     mp_dockFileTransfers->setVisible( false );
-    mp_dockHome->setVisible( true );
-    mp_tabMain->setCurrentWidget( mp_userList );
+    mp_tabMain->setCurrentWidget( mp_home );
   }
   else
   {
@@ -381,8 +379,6 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
   mp_trayIcon->hide();
 
-  if( mp_dockHome->isFloating() && mp_dockHome->isVisible() )
-    mp_dockHome->hide();
   if( mp_dockFileTransfers->isFloating() && mp_dockFileTransfers->isVisible() )
     mp_dockFileTransfers->hide();
 
@@ -955,7 +951,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
-  mp_barMain->addAction( mp_actViewHome );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
 }
@@ -963,51 +958,39 @@ void GuiMain::createToolAndMenuBars()
 void GuiMain::createMainWidgets()
 {
   int tab_index;
+
+  mp_home = new GuiHome( this );
+  connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  tab_index = mp_tabMain->addTab( mp_home, QIcon( ":/images/activities.png" ), "" );
+  mp_tabMain->setTabToolTip( tab_index, tr( "Activities" ) );
   mp_userList = new GuiUserList( this );
   mp_userList->setToolTip( tr( "Users" ) );
   tab_index = mp_tabMain->addTab( mp_userList, QIcon( ":/images/user-list.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index , mp_userList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, mp_userList->toolTip() );
   mp_chatList = new GuiChatList( this );
   mp_chatList->setToolTip( tr( "Chats" ) );
   tab_index = mp_tabMain->addTab( mp_chatList, QIcon( ":/images/chat-list.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index , mp_chatList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, mp_chatList->toolTip() );
   mp_groupList = new GuiGroupList( this );
   mp_groupList->setToolTip( tr( "Groups" ) );
   tab_index = mp_tabMain->addTab( mp_groupList, QIcon( ":/images/group.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index , mp_groupList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, mp_groupList->toolTip() );
   mp_savedChatList = new GuiSavedChatList( this );
   mp_savedChatList->setToolTip( tr( "Chat histories" ) );
   tab_index = mp_tabMain->addTab( mp_savedChatList, QIcon( ":/images/saved-chat-list.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index , mp_savedChatList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, mp_savedChatList->toolTip() );
 
   mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
   mp_dockFileTransfers->setObjectName( "GuiFileTransferDock" );
   mp_fileTransfer = new GuiTransferFile( this );
   mp_dockFileTransfers->setWidget( mp_fileTransfer );
   mp_dockFileTransfers->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::TopDockWidgetArea, mp_dockFileTransfers );
+  addDockWidget( Qt::BottomDockWidgetArea, mp_dockFileTransfers );
   mp_actViewFileTransfer = mp_dockFileTransfers->toggleViewAction();
   mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setData( 99 );
 
-  mp_dockHome = new QDockWidget( tr( "Activities" ), this );
-  mp_dockHome->setObjectName( "GuiHomeDock" );
-  mp_home = new GuiHome( this );
-  connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  mp_dockHome->setWidget( mp_home );
-  mp_dockHome->setAllowedAreas( Qt::AllDockWidgetAreas );
-  addDockWidget( Qt::BottomDockWidgetArea, mp_dockHome );
-  mp_actViewHome = mp_dockHome->toggleViewAction();
-  mp_actViewHome->setIcon( QIcon( ":/images/activities.png" ) );
-  mp_actViewHome->setText( tr( "Show the activity panel" ) );
-  mp_actViewHome->setData( 99 );
-
-  if( Settings::instance().firstTime() || Settings::instance().resetGeometryAtStartup() )
-  {
-    mp_tabMain->setCurrentWidget( mp_userList );
-    mp_dockFileTransfers->hide();
-  }
 }
 
 void GuiMain::startExternalApplicationFromActionData()
@@ -1895,15 +1878,13 @@ void GuiMain::selectDownloadDirectory()
 
 void GuiMain::showTipOfTheDay()
 {
-  if( !mp_dockHome->isVisible() )
-    mp_dockHome->show();
+  mp_tabMain->setCurrentWidget( mp_home );
   mp_core->showTipOfTheDay();
 }
 
 void GuiMain::showFactOfTheDay()
 {
-  if( !mp_dockHome->isVisible() )
-    mp_dockHome->show();
+  mp_tabMain->setCurrentWidget( mp_home );
   mp_core->showFactOfTheDay();
 }
 

@@ -116,7 +116,7 @@ bool GuiUserItem::updateUser( const User& u )
 
   int unread_messages = unreadMessages();
 
-  QString s = u.isLocal() ? GuiChatItem::defaultChatName() : (u.status() != User::Offline ? u.name() : u.path());
+  QString s = u.isLocal() ? GuiChatItem::defaultChatName() : u.name();
 
   if( u.isLocal() && !Settings::instance().chatWithAllUsersIsEnabled() )
     s.append( QString( " [%1] " ).arg( QObject::tr( "read only" ) ) );
