@@ -33,7 +33,7 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 {
   setObjectName( "GuiTransferFile" );
   QStringList labels;
-  labels << "" << tr( "File" ) << tr( "User" ) << tr( "Status" ) << "";
+  labels << "" << "%" << tr( "File" ) << tr( "User" ) << tr( "Status" ) << "";
   setHeaderLabels( labels );
   setRootIsDecorated( false );
   setSortingEnabled( false );
@@ -44,21 +44,23 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   QHeaderView* hv = header();
 #if QT_VERSION >= 0x050000
   hv->setSectionResizeMode( ColumnCancel, QHeaderView::Fixed );
-  setColumnWidth( ColumnCancel, 24 );
+  hv->setSectionResizeMode( ColumnReport, QHeaderView::Fixed );
   hv->setSectionResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnProgress, QHeaderView::Stretch );
 #else
   hv->setResizeMode( ColumnCancel, QHeaderView::Fixed );
-  setColumnWidth( ColumnCancel, 24 );
+  hv->setResizeMode( ColumnReport, QHeaderView::Fixed );
   hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
 #endif
+
+  setColumnWidth( ColumnCancel, 24 );
+  setColumnWidth( ColumnReport, 24 );
   hv->hide();
 
   mp_menuContext = new QMenu( this );
-  mp_menuContext->addAction( QIcon( ":/images/remove.png" ), tr( "Remove all transfers" ), this, SLOT( removeAllCompleted() ) );
 
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
@@ -162,13 +164,15 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
     item->setText( ColumnProgress, tr( "Transfer completed" ) );
+    item->setText( ColumnReport, tr( "Ok" ) );
     return;
   }
 
-  QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
-                                      Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
-                                      QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
+  QString file_transfer_progress_perc = QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size()));
+  QString file_transfer_progress = QString( "%1 %2 of %3" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
+                                      Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ) );
   item->setText( ColumnProgress, file_transfer_progress );
+  item->setText( ColumnReport, file_transfer_progress_perc );
 }
 
 void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
@@ -218,21 +222,26 @@ void GuiTransferFile::checkItemDoubleClicked( QTreeWidgetItem* item, int )
     return;
   }
 
-  if( item->data( ColumnFile, TransferCompleted ).toBool() )
-  {
-    QUrl url = QUrl::fromLocalFile( item->data( ColumnFile, FilePath ).toString() );
-    emit openFileCompleted( url );
-    return;
-  }
+  QUrl url = QUrl::fromLocalFile( item->data( ColumnFile, FilePath ).toString() );
+  url.setScheme( "beeshowfileinfolder" );
+  emit openFileCompleted( url );
 }
 
 void GuiTransferFile::openMenu( const QPoint& )
 {
   if( topLevelItemCount() > 0 )
-    mp_menuContext->exec( QCursor::pos() );
+  {
+    if( !mp_menuContext->actions().isEmpty() )
+      mp_menuContext->addSeparator();
+    mp_menuContext->addAction( QIcon( ":/images/remove.png" ), tr( "Remove all transfers" ), this, SLOT( removeAllCompleted() ) );
+  }
+
+  mp_menuContext->exec( QCursor::pos() );
 }
 
 void GuiTransferFile::removeAllCompleted()
 {
   clear();
+  if( header()->isVisible() )
+    header()->hide();
 }

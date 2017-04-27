@@ -36,7 +36,7 @@ class GuiTransferFile : public QTreeWidget
   Q_OBJECT
 
 public:
-  enum ColumnType { ColumnCancel, ColumnFile, ColumnUser, ColumnProgress, ColumnSort };
+  enum ColumnType { ColumnCancel, ColumnReport, ColumnFile, ColumnUser, ColumnProgress, ColumnSort };
   enum FileDataType { PeerId = Qt::UserRole+2, FileId, FilePath, TransferInProgress, TransferCompleted };
 
   GuiTransferFile( QWidget* parent = 0 );

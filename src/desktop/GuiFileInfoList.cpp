@@ -217,7 +217,6 @@ void GuiFileInfoList::addItemToFileInfoList( GuiFileInfoItem* fi_item )
   if( !fi_item->isObjectFile() )
     return;
 
-
   FileInfo fi = m_isLocal ? FileShare::instance().localFileInfo( fi_item->fileInfoId() ) : FileShare::instance().networkFileInfo( fi_item->userId(), fi_item->fileInfoId() );
   if( !fi.isValid() )
   {

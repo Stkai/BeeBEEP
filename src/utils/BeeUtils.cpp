@@ -193,10 +193,10 @@ QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
 
   while( fi.exists() )
   {
-    new_file_name = QString( "%1 (%2)%3%4" )
+    new_file_name = QString( "%1 (%2)%3" )
                       .arg( file_base_name )
-                      .arg( add_date_time ? QString( "%1 %2" ).arg( QDateTime::currentDateTime().toString( Qt::ISODate ) ) : QString::number( counter ) )
-                      .arg( (file_suffix.isEmpty() ? "" : ".") ).arg( file_suffix );
+                      .arg( add_date_time ? QString( "%1 %2" ).arg( QDateTime::currentDateTime().toString( Qt::ISODate ).replace( ":", "." ), QString::number( counter ) ) : QString::number( counter ) )
+                      .arg( file_suffix.isEmpty() ? QString( "" ) : QString( ".%1" ) ).arg( file_suffix );
     fi.setFile( dir_path, new_file_name );
     counter++;
 
@@ -557,6 +557,8 @@ bool Bee::setLastModifiedToFile( const QString& to_path, const QDateTime& dt_las
 bool Bee::showFileInGraphicalShell( const QString& file_path )
 {
   QFileInfo file_info( file_path );
+  if( !file_info.exists() )
+    return false;
 
 #ifdef Q_OS_WIN
   QString explorer_path = QLatin1String( "c:\\windows\\explorer.exe" );

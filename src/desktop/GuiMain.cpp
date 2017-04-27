@@ -425,6 +425,9 @@ void GuiMain::startCore()
 {
   m_autoConnectOnInterfaceUp = false;
 
+  if( mp_core->isConnected() )
+    return;
+
   if( Settings::instance().firstTime() )
   {
     Settings::instance().setFirstTime( false );
@@ -2148,6 +2151,7 @@ void GuiMain::openUrl( const QUrl& file_url )
       QFileInfo file_info_url( adj_file_url.toLocalFile() );
       adj_file_url = QUrl::fromLocalFile( Bee::convertToNativeFolderSeparator( file_info_url.absoluteDir().absolutePath() ) );
       openUrl( adj_file_url );
+      return;
     }
   }
 #if QT_VERSION >= 0x040800

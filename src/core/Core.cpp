@@ -125,7 +125,13 @@ bool Core::checkSavingPaths()
 
 bool Core::start()
 {
-  qDebug() << "Starting" << Settings::instance().programName() << "core";
+  if( isConnected() )
+  {
+    qDebug() << "Core is already connected to" << qPrintable( Settings::instance().programName() ) << "network";
+    return false;
+  }
+  else
+    qDebug() << "Starting" << Settings::instance().programName() << "core";
 
   if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultListenerPort() ) )
   {

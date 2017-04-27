@@ -751,7 +751,7 @@ void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QStri
 void Core::onFileTransferCompleted( VNumber peer_id, VNumber user_id, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Transfer completed of file" << fi.path() << "and send signals";
+  qDebug() << "Transfer completed of file" << qPrintable( QDir::toNativeSeparators( fi.path() ) ) << "and send signals";
 #endif
 
   User u = UserManager::instance().findUser( user_id );

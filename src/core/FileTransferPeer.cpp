@@ -76,6 +76,9 @@ void FileTransferPeer::closeAll()
     m_file.flush();
     m_file.close();
   }
+
+  if( !isTransferCompleted() && isDownload() && m_file.exists() )
+    m_file.remove();
 }
 
 void FileTransferPeer::setFileInfo( FileInfo::TransferType ftt, const FileInfo& fi )
