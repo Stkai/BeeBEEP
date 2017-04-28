@@ -47,6 +47,7 @@ Core::Core( QObject* parent )
 {
   qDebug() << "Core created";
   createDefaultChat();
+  loadUsersAndGroups();
 
   mp_listener = new Listener( this );
   qDebug() << "Listener created";
@@ -76,8 +77,6 @@ Core::Core( QObject* parent )
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_shareDesktop, SIGNAL( shareDesktopDataReady( const QByteArray& ) ), this, SLOT( onShareDesktopDataReady( const QByteArray& ) ) );
 #endif
-
-  QMetaObject::invokeMethod( this, "loadUsersAndGroups", Qt::QueuedConnection );
 }
 
 bool Core::checkSavingPaths()
@@ -188,7 +187,7 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 You have selected to join only in these workgroups: %2" )
-                           .arg( Bee::iconToHtml( ":/images/group.png", "*C*" ) ).arg( Settings::instance().workgroups().join( ", " ) ),
+                           .arg( Bee::iconToHtml( ":/images/group.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().workgroups() ) ),
                            DispatchToChat, ChatMessage::Connection );
     qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
   }

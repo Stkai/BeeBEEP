@@ -50,18 +50,21 @@ GuiHome::GuiHome( QWidget* parent )
   connect( mp_teSystem, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
 }
 
-void GuiHome::addSystemMessage( const ChatMessage& cm )
+bool GuiHome::addSystemMessage( const ChatMessage& cm )
 {
+  if( !cm.isFromSystem() )
+    return false;
+
   if( !GuiChatMessage::messageCanBeShowedInActivity( cm ) )
-    return;
+    return false;
 
   QString sys_message = GuiChatMessage::formatSystemMessage( cm, Settings::instance().homeShowMessageTimestamp(), false );
 
   if( sys_message.isEmpty() )
-    return;
+    return false;
 
   if( sys_message == m_prev_sys_mess )
-    return;
+    return false;
 
   m_prev_sys_mess = sys_message;
 
@@ -71,6 +74,7 @@ void GuiHome::addSystemMessage( const ChatMessage& cm )
   QScrollBar *bar = mp_teSystem->verticalScrollBar();
   if( bar )
     bar->setValue( bar->maximum() );
+  return true;
 }
 
 void GuiHome::checkAnchorClicked( const QUrl& url )
@@ -102,15 +106,18 @@ void GuiHome::customContextMenu( const QPoint& )
   mp_menuContext->exec( QCursor::pos() );
 }
 
-void GuiHome::loadSystemMessages()
+int GuiHome::loadSystemMessages()
 {
+  int num_sys_msg = 0;
+  mp_teSystem->clear();
   setBackgroundColor( Settings::instance().homeBackgroundColor() );
   Chat c = ChatManager::instance().defaultChat();
   foreach( ChatMessage cm, c.messages() )
   {
-    if( cm.isFromSystem() )
-      addSystemMessage( cm );
+    if( addSystemMessage( cm ) )
+      num_sys_msg++;
   }
+  return num_sys_msg;
 }
 
 void GuiHome::reloadMessages()

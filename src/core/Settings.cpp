@@ -275,7 +275,6 @@ bool Settings::createDefaultRcFile()
     sets->endGroup();
     sets->beginGroup( "Groups" );
     sets->setValue( "TrustSystemAccount", m_trustSystemAccount );
-    sets->setValue( "TrustUserHash", m_trustUserHash );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << sets->fileName();
@@ -350,7 +349,6 @@ void Settings::loadRcFile()
 
   sets->beginGroup( "Groups" );
   m_trustSystemAccount = sets->value( "TrustSystemAccount", m_trustSystemAccount ).toBool();
-  m_trustUserHash = sets->value( "TrustUserHash", m_trustUserHash ).toBool();
   sets->endGroup();
 
   QStringList key_list = sets->allKeys();
@@ -809,6 +807,7 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "User" );
+  m_trustUserHash = sets->value( "TrustUserHash", m_trustUserHash ).toBool();
   m_localUser.setName( sets->value( "LocalName", "" ).toString() ); // For Backward compatibility, if empty the name is set after
   m_localUser.setColor( sets->value( "LocalColor", "#000000" ).toString() );
   m_localUser.setStatus( sets->value( "LocalLastStatus", m_localUser.status() ).toInt() );
@@ -1124,6 +1123,7 @@ void Settings::save()
   sets->setValue( "ClearAllReadMessages", m_chatClearAllReadMessages );
   sets->endGroup();
   sets->beginGroup( "User" );
+  sets->setValue( "TrustUserHash", m_trustUserHash );
   sets->setValue( "LocalColor", m_localUser.color() );
   sets->setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
   sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );

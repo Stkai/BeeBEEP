@@ -45,6 +45,7 @@ public:
   void updateChat( const Chat& );
 
   inline void setMenuSettings( QMenu* );
+  inline void setContextMenuUsers( QMenu* );
 
   void onTickEvent( int );
 
@@ -72,6 +73,7 @@ private:
   bool m_coreIsConnected;
 
   QMenu* mp_menuSettings;
+  QMenu* mp_menuUsers;
 
   bool m_blockShowChatRequest;
   bool m_showOnlyChatMembers;
@@ -81,5 +83,6 @@ private:
 
 // Inline Functions
 inline void GuiUserList::setMenuSettings( QMenu* new_value ) { mp_menuSettings = new_value; }
+inline void GuiUserList::setContextMenuUsers( QMenu* new_value ) { mp_menuUsers = new_value; }
 
 #endif // BEEBEEP_GUIUSERLIST_H

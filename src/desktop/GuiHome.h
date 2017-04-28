@@ -36,8 +36,8 @@ class GuiHome : public QWidget, private Ui::GuiHomeWidget
 public:
   explicit GuiHome( QWidget *parent = 0 );
 
-  void addSystemMessage( const ChatMessage& );
-  void loadSystemMessages();
+  bool addSystemMessage( const ChatMessage& );
+  int loadSystemMessages();
 
 signals:
   void openUrlRequest( const QUrl& );

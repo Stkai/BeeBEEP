@@ -50,6 +50,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   mp_barGroup->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barGroup->setAllowedAreas( Qt::AllToolBarAreas );
   mp_barGroup->setFloatable( false );
+  mp_barGroup->toggleViewAction()->setVisible( false );
 
   mp_barMembers = new QToolBar( tr( "Show the bar of members" ), this );
   addToolBar( Qt::TopToolBarArea, mp_barMembers );
@@ -57,6 +58,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   mp_barMembers->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barMembers->setAllowedAreas( Qt::AllToolBarAreas );
   mp_barMembers->setFloatable( false );
+  mp_barMembers->toggleViewAction()->setVisible( false );
 
   mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
   addToolBar( Qt::BottomToolBarArea, mp_barChat );

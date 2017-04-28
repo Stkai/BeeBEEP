@@ -163,16 +163,16 @@ void Core::changeGroupChat( const User& u, VNumber chat_id, const QString& chat_
     if( !u.isLocal() )
     {
       if( c.addUser( u.id() ) )
-        user_added_string_list << QString( "%1 (%2)" ).arg( u.name(), u.accountPath() );
+        user_added_string_list << u.name();
       user_string_list.append( u.name() );
     }
   }
 
   if( user_added_string_list.size() > 0 )
   {
-    sHtmlMsg = tr( "%1 %2 has added members to the group: %3." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), u.name(), user_added_string_list.join( ", " ) );
+    sHtmlMsg = tr( "%1 %2 has added members to the group: %3." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-    sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), user_string_list.join( ", " ) );
+    sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
     chat_changed = true;
   }
@@ -260,7 +260,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     }
 
     if( !offline_users.isEmpty() )
-      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( offline_users.join( ", " ) ),
+      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( Bee::stringListToTextString( offline_users ) ),
                              DispatchToChat, ChatMessage::Other );
   }
 
@@ -613,12 +613,16 @@ void Core::addChatHeader( Chat* p_chat )
 
   if( p_chat->isDefault() )
   {
-    header_msg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), tr( "Chat with all connected users" ) );
+    QString hv_msg = QByteArray::fromBase64( "QmVlQkVFUCB2ZXJzaW9uICZjb3B5OyBNYXJjbyBNYXN0cm9kZGk=" );
+    hv_msg.replace( "version", Settings::instance().version( false, false ) );
+    header_msg = QString( "%1 <b>%2</b>." ).arg( Bee::iconToHtml( ":/images/beebeep.png", "***" ), hv_msg );
+    p_chat->addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
+    header_msg = QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), tr( "Chat with all connected users" ) );
   }
   else if( p_chat->isPrivate() )
   {
     User u = UserManager::instance().findUser( p_chat->privateUserId() );
-    header_msg = tr( "%1 Chat with %2" ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.path() );
+    header_msg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.name() );
   }
   else
   {
@@ -627,10 +631,10 @@ void Core::addChatHeader( Chat* p_chat )
     foreach( User u, ul.toList() )
     {
       if( !u.isLocal() )
-        user_string_list.append( QString( "%1 (%2)" ).arg( u.name(), u.accountPath() ) );
+        user_string_list.append( u.name() );
     }
 
-    header_msg = tr( "%1 Chat with %2" ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), user_string_list.join( ", " ) );
+    header_msg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
   }
 
   p_chat->addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );

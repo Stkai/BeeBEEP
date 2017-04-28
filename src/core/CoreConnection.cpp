@@ -187,8 +187,7 @@ void Core::closeConnection( Connection *c )
         ChatManager::instance().setChat( default_chat );
 
       FileShare::instance().removeFromNetwork( c->userId() );
-      if( u.isValid() )
-        emit fileShareAvailable( u );
+      emit fileShareAvailable( u );
     }
     else
       qWarning() << "User" << c->userId() << "not found while closing connection";

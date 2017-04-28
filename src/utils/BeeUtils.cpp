@@ -728,3 +728,21 @@ void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
   if( w_was_visible )
     QMetaObject::invokeMethod( w, "show", Qt::QueuedConnection );
 }
+
+QString Bee::stringListToTextString( const QStringList& sl )
+{
+  if( sl.isEmpty() )
+    return "";
+  if( sl.size() == 1 )
+    return sl.first();
+
+  QStringList sl_to_join = sl;
+  QString last_string = sl_to_join.takeLast();
+  QString s_joined = sl_to_join.join( ", " );
+  if( !last_string.isEmpty() )
+  {
+    s_joined.append( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
+    s_joined.append( last_string );
+  }
+  return s_joined;
+}

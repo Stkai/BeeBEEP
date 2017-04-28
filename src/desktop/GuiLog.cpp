@@ -59,6 +59,7 @@ GuiLog::GuiLog( QWidget* parent )
   mp_barLog->setFloatable( false );
   mp_barLog->setIconSize( Settings::instance().mainBarIconSize() );
   setupToolBar( mp_barLog );
+  mp_barLog->toggleViewAction()->setVisible( false );
 
   mp_logMenu = new QMenu( tr( "Log menu" ), this );
 

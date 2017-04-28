@@ -60,6 +60,7 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   mp_barView->setObjectName( "GuiViewToolBar" );
   mp_barView->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barView->setFloatable( false );
+  mp_barView->toggleViewAction()->setVisible( false );
 
   createActions();
   createToolbars();
@@ -168,6 +169,7 @@ void GuiFileSharing::createStackedWidgets()
   mp_shareLocal->setupToolBar( mp_barShareLocal );
   act = mp_barShareLocal->toggleViewAction();
   act->setEnabled( false );
+  act->setVisible( false );
 
   mp_shareNetwork = new GuiShareNetwork( this );
   mp_stackedWidget->addWidget( mp_shareNetwork );
@@ -180,6 +182,7 @@ void GuiFileSharing::createStackedWidgets()
   mp_shareNetwork->setupToolBar( mp_barShareNetwork );
   act = mp_barShareNetwork->toggleViewAction();
   act->setEnabled( false );
+  act->setVisible( false );
 
   mp_shareBox = new GuiShareBox( this );
   mp_stackedWidget->addWidget( mp_shareBox );

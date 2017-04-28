@@ -47,6 +47,7 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
   mp_barScreenShot->setAllowedAreas( Qt::AllToolBarAreas );
   mp_barScreenShot->setFloatable( false );
   setupToolBar( mp_barScreenShot );
+  mp_barScreenShot->toggleViewAction()->setVisible( false );
 }
 
 void GuiScreenShot::setupToolBar( QToolBar* bar )

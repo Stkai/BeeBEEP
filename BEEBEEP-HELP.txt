@@ -52,7 +52,6 @@ DisablePrivateChats=[true/false] disable private chat with users (default=false)
 [Groups]
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete 3.2.0]
 TrustSystemAccount=[true/false] if true BeeBEEP trusts only system account to recognize a user. Useful if your are in active directory domain or similar (default=false) [1.0.0]
-TrustUserHash=[true/false] if true BeeBEEP tries to recognize users using their hash (default=true) [3.2.0]
 
 /***************************/
 /***  FILE: beebeep.ini  ***/
@@ -89,6 +88,7 @@ UseYourNameInsteadOfYou=[true/false] your name is showed before messages instead
 ClearAllReadMessages=[true/false] clear all messages when you close chat window (default=false) [3.0.7]
 
 [User]
+TrustUserHash=[true/false] if true BeeBEEP tries to recognize users using their hash (default=true) [3.2.0]
 LocalColor= your nickname color in chat
 LocalLastStatus= your status (0 = Offline, 1 = Online, 2 = Busy, 3 = Away)
 LocalLastStatusDescription= your status description

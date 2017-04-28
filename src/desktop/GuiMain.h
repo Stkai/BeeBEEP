@@ -176,6 +176,7 @@ private slots:
   void onScreenShotWindowClosed();
   void showLogWindow();
   void onLogWindowClosed();
+  void onMainTabChanged( int );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -246,6 +247,7 @@ private:
   QMenu* mp_menuUserStatusList;
   QMenu* mp_menuStartupSettings;
   QMenu* mp_menuCloseSettings;
+  QMenu* mp_menuUsersSettings;
   QMenu* mp_menuChatSettings;
   QMenu* mp_menuFileTransferSettings;
   QMenu* mp_menuSoundSettings;
@@ -267,7 +269,7 @@ private:
   QAction* mp_actViewFileSharing;
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
-
+  QAction* mp_actAddUsers;
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
 
@@ -303,6 +305,7 @@ private:
   QWidget* mp_lastActiveWindow;
 
   bool m_prevActivatedState;
+  int m_unreadActivities;
 
 };
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -327,10 +327,6 @@
         <translation>Premi qui per scaricarla</translation>
     </message>
     <message>
-        <source>%1 saved chats are added to history</source>
-        <translation>%1 conversazioni salvate sono state caricate nella storia</translation>
-    </message>
-    <message>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Il numero massimo di ID è stato raggiunto. Chiudi e riavvia l&apos;applicazione.</translation>
     </message>
@@ -391,16 +387,16 @@
         <translation>Parla con tutti gli utenti connessi</translation>
     </message>
     <message>
-        <source>%1 Chat with %2</source>
-        <translation>%1 Parla con %2</translation>
-    </message>
-    <message>
         <source>%1 Connection closed to user %2 because it uses your account name.</source>
         <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso account di sistema.</translation>
     </message>
     <message>
         <source>%1 %2 has added you to the group chat: %3.</source>
         <translation>%1 %2 ti ha aggiunto alla conversazione di gruppo: %3.</translation>
+    </message>
+    <message>
+        <source>%1 saved chats are added to history</source>
+        <translation>%1 conversazioni precedenti sono state caricate</translation>
     </message>
 </context>
 <context>
@@ -1700,10 +1696,6 @@ Inserisci un nome differente.</translation>
         <translation>Mostra il pannello del trasferimento dei file</translation>
     </message>
     <message>
-        <source>Add users manually...</source>
-        <translation>Aggiungi utenti manualmente...</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Opzioni</translation>
     </message>
@@ -2024,10 +2016,6 @@ Inserisci un nome differente.</translation>
         <translation>Mostra la finestra della condivisione file</translation>
     </message>
     <message>
-        <source>Show the activity panel</source>
-        <translation>Mostra il pannello delle attività</translation>
-    </message>
-    <message>
         <source>Restore default font</source>
         <translation>Ripristina il carattere predefinito</translation>
     </message>
@@ -2109,7 +2097,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show only on system tray</source>
-        <translation type="unfinished">Mostra solo come icona di sistema</translation>
+        <translation>Mostra solo come icona di sistema</translation>
     </message>
     <message>
         <source>Reset window geometry</source>
@@ -2158,6 +2146,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>On close</source>
         <translation>Alla chiusura</translation>
+    </message>
+    <message>
+        <source>connected</source>
+        <translation>connessi</translation>
+    </message>
+    <message>
+        <source>Recognize users by system or domain account</source>
+        <translation>Riconosci gli utenti dal loro account di dominio o di sistema</translation>
+    </message>
+    <message>
+        <source>Recognize users only by nickname</source>
+        <translation>Riconosci gli utenti solo dal soprannome</translation>
+    </message>
+    <message>
+        <source>news</source>
+        <translation>nuove</translation>
+    </message>
+    <message>
+        <source>Add users</source>
+        <translation>Aggiungi utenti</translation>
     </message>
 </context>
 <context>
@@ -2948,6 +2956,10 @@ Inserisci un nome differente.</translation>
         <source>Remove all transfers</source>
         <translation>Cancella tutti i trasferimenti</translation>
     </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
 </context>
 <context>
     <name>GuiUserList</name>
@@ -3247,6 +3259,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>last update</source>
         <translation>ultimo aggiornamento</translation>
+    </message>
+    <message>
+        <source>and</source>
+        <translation>e</translation>
     </message>
 </context>
 <context>

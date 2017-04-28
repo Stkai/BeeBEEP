@@ -29,4 +29,3 @@ DisablePrivateChats=false
 
 [Groups]
 TrustSystemAccount=false
-TrustUserHash=true

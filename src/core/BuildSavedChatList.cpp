@@ -73,24 +73,29 @@ void BuildSavedChatList::loadSavedChats( QDataStream* stream )
   QString chat_name;
   QString chat_text;
 
-  for( int i = 0; i < num_of_chats; i++ )
+  for( int i = 1; i <= num_of_chats; i++ )
   {
     (*stream) >> chat_name_encrypted;
-    (*stream) >> chat_text_encrypted;
 
     if( stream->status() != QDataStream::Ok )
     {
-      qWarning() << "Error reading datastream, abort loading chat";
+      qWarning() << "Error reading datastream, abort loading chat:" << i;
       return;
     }
-
     chat_name = Settings::instance().simpleDecrypt( chat_name_encrypted );
+
+    (*stream) >> chat_text_encrypted;
+    if( stream->status() != QDataStream::Ok )
+    {
+      qWarning() << "Error reading datastream, abort loading chat:" << qPrintable( chat_name );
+      return;
+    }
     chat_text = Settings::instance().simpleDecrypt( chat_text_encrypted );
 
-    qDebug() << "Loading chat" << chat_name;
+    qDebug() << "Loading chat" << i << "completed:" << qPrintable( chat_name );
 
     if( chat_text.simplified().isEmpty() )
-      qDebug() << "The chat" << chat_name << "saved is empty";
+      qDebug() << "This saved chat is empty:" << qPrintable( chat_name );
     else
       m_savedChats.insert( chat_name, chat_text );
   }

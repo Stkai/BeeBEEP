@@ -89,10 +89,12 @@ GuiMain::GuiMain( QWidget *parent )
   mp_fileSharing = 0;
   mp_screenShot = 0;
   mp_log = 0;
+  m_unreadActivities = 0;
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
   mp_barMain->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barMain->toggleViewAction()->setVisible( false );
 
   mp_trayIcon = new GuiSystemTray( this );
 
@@ -106,6 +108,8 @@ GuiMain::GuiMain( QWidget *parent )
   createMenus();
   createToolAndMenuBars();
   updadePluginMenu();
+
+  connect( mp_tabMain, SIGNAL( currentChanged( int ) ), this, SLOT( onMainTabChanged( int ) ) );
 
   connect( mp_core, SIGNAL( newChatMessage( const Chat&, const ChatMessage& ) ), this, SLOT( onNewChatMessage( const Chat&, const ChatMessage& ) ) );
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
@@ -209,11 +213,10 @@ void GuiMain::checkWindowFlagsAndShow()
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width()+12, qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
-    move( QApplication::desktop()->availableGeometry().width() - width() - 30,
+    resize( width()+10, qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
+    move( QApplication::desktop()->availableGeometry().width() - width() - 20,
           ((QApplication::desktop()->availableGeometry().height() - height()) / 3) );
     mp_dockFileTransfers->setVisible( false );
-    mp_tabMain->setCurrentWidget( mp_home );
   }
   else
   {
@@ -262,9 +265,22 @@ void GuiMain::updateWindowTitle()
 
 void GuiMain::updateTabTitles()
 {
-  int tab_index = mp_tabMain->indexOf( mp_userList );
-  int current_value = mp_core->connectedUsers();
+  int tab_index = mp_tabMain->indexOf( mp_home );
+  int current_value = m_unreadActivities;
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
+  if( current_value > 0 )
+    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( mp_home->toolTip() ).arg( current_value ).arg( tr( "news" ) ) );
+  else
+    mp_tabMain->setTabToolTip( tab_index, mp_home->toolTip() );
+
+  tab_index = mp_tabMain->indexOf( mp_userList );
+  current_value = mp_core->connectedUsers();
+  int other_value = UserManager::instance().userList().size();
+  mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : (other_value > 0 ? QString::number( other_value ) : "" ) );
+  if( current_value > 0 )
+    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( mp_userList->toolTip() ).arg( current_value ).arg( tr( "connected" ) ) );
+  else
+    mp_tabMain->setTabToolTip( tab_index, mp_userList->toolTip() );
 
   tab_index = mp_tabMain->indexOf( mp_chatList );
   current_value = ChatManager::instance().constChatList().size();
@@ -497,7 +513,7 @@ void GuiMain::checkViewActions()
   bool is_connected = mp_core->isConnected();
   int connected_users = mp_core->connectedUsers();
 
-  mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().toList().size() >= 2 );
+  mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
 
   showDefaultServerPortInMenu();
@@ -550,6 +566,9 @@ void GuiMain::createActions()
   mp_actStartStopCore = new QAction( this );
   connect( mp_actStartStopCore, SIGNAL( triggered() ), this, SLOT( startStopCore() ) );
 
+  mp_actBroadcast = new QAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), this );
+  connect( mp_actBroadcast, SIGNAL( triggered() ), this, SLOT( sendBroadcastMessage() ) );
+
   mp_actConfigureNetwork = new QAction( QIcon( ":/images/search-users.png"), tr( "Network..."), this );
   connect( mp_actConfigureNetwork, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
@@ -560,9 +579,6 @@ void GuiMain::createActions()
 
   mp_actVCard = new QAction( QIcon( ":/images/profile-edit.png"), tr( "Edit your profile..." ), this );
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
-
-  mp_actMainToolBar = mp_barMain->toggleViewAction();
-  mp_actMainToolBar->setData( 99 );
 
   mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setMenuRole( QAction::AboutRole );
@@ -600,11 +616,8 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addSeparator();
-
-  mp_actBroadcast = mp_menuMain->addAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), this, SLOT( sendBroadcastMessage() ) );
   mp_menuMain->addAction( mp_actConfigureNetwork );
-
-  mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users manually..."), this, SLOT( showAddUser() ) );
+  mp_actAddUsers = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
@@ -667,13 +680,32 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
   act->setData( 29 );
 
-  mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
-  mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
-  mp_menuSettings->addMenu( mp_menuChatSettings );
-  act = mp_menuChatSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
+  mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
+  mp_menuUsersSettings->setIcon( QIcon( ":/images/user-list.png" ) );
+  mp_menuSettings->addMenu( mp_menuUsersSettings );
+  if( !Settings::instance().trustSystemAccount() )
+  {
+    act = mp_menuUsersSettings->addAction( tr( "Recognize users by system or domain account" ) );
+    act->setCheckable( true );
+    act->setChecked( true );
+    act->setDisabled( true );
+  }
+  else
+  {
+    act = mp_menuUsersSettings->addAction( tr( "Recognize users only by nickname" ), this, SLOT( settingsChanged() ) );
+    act->setCheckable( true );
+    act->setChecked( !Settings::instance().trustUserHash() );
+    act->setData( 2 );
+  }
+  mp_menuUsersSettings->addSeparator();
+  act = mp_menuUsersSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().saveUserList() );
   act->setData( 32 );
+
+  mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
+  mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
+  mp_menuSettings->addMenu( mp_menuChatSettings );
   act = mp_menuChatSettings->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatAutoSave() );
@@ -858,6 +890,14 @@ void GuiMain::createMenus()
 
   mp_userList->setMenuSettings( mp_menuUserList );
 
+  /* Context Menu for user list view */
+  QMenu* context_menu_users = new QMenu( "Menu", this );
+  context_menu_users->addAction( mp_actVCard );
+  context_menu_users->addSeparator();
+  context_menu_users->addAction( mp_actConfigureNetwork );
+  context_menu_users->addAction( mp_actAddUsers );
+  mp_userList->setContextMenuUsers( context_menu_users );
+
   /* Status Menu */
   mp_menuStatus = new QMenu( tr( "Status" ), this );
   mp_menuStatus->setIcon( QIcon( ":/images/user-status.png" ) );
@@ -948,6 +988,7 @@ void GuiMain::createToolAndMenuBars()
   menuBar()->setCornerWidget( label_version );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
+  mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
@@ -960,9 +1001,10 @@ void GuiMain::createMainWidgets()
   int tab_index;
 
   mp_home = new GuiHome( this );
+  mp_home->setToolTip( tr( "Activities" ) );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   tab_index = mp_tabMain->addTab( mp_home, QIcon( ":/images/activities.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index, tr( "Activities" ) );
+  mp_tabMain->setTabToolTip( tab_index, mp_home->toolTip() );
   mp_userList = new GuiUserList( this );
   mp_userList->setToolTip( tr( "Users" ) );
   tab_index = mp_tabMain->addTab( mp_userList, QIcon( ":/images/user-list.png" ), "" );
@@ -990,7 +1032,6 @@ void GuiMain::createMainWidgets()
   mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setData( 99 );
-
 }
 
 void GuiMain::startExternalApplicationFromActionData()
@@ -1046,7 +1087,7 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 2:
-    // free
+    Settings::instance().setTrustUserHash( !act->isChecked() );
     break;
   case 3:
     Settings::instance().setChatShowMessageTimestamp( act->isChecked() );
@@ -1427,8 +1468,14 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 
 void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 {
-  if( c.isDefault() && cm.isFromSystem() )
-    mp_home->addSystemMessage( cm );
+  if( c.isDefault() )
+  {
+    if( mp_home->addSystemMessage( cm ) && mp_tabMain->currentWidget() != mp_home )
+    {
+      m_unreadActivities++;
+      updateTabTitles();
+    }
+  }
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
@@ -2337,7 +2384,17 @@ void GuiMain::loadSession()
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   if( Settings::instance().fileTransferIsEnabled() )
     QTimer::singleShot( 10000, mp_core, SLOT( buildLocalShareList() ) );
-  mp_home->loadSystemMessages();
+  m_unreadActivities = mp_home->loadSystemMessages();
+  mp_groupList->loadGroups();
+  if( UserManager::instance().userList().isEmpty() )
+  {
+    m_unreadActivities = 0;
+    mp_tabMain->setCurrentWidget( mp_home );
+  }
+  else
+    mp_tabMain->setCurrentWidget( mp_userList );
+
+  updateTabTitles();
 }
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )
@@ -3516,6 +3573,15 @@ void GuiMain::onLogWindowClosed()
 {
   if( mp_log )
     mp_log = 0;
+}
+
+void GuiMain::onMainTabChanged( int tab_index )
+{
+  if( mp_tabMain->widget( tab_index ) == mp_home )
+  {
+    m_unreadActivities = 0;
+    updateTabTitles();
+  }
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

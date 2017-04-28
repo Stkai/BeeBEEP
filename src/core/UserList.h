@@ -41,6 +41,8 @@ public:
   void set( const User& );
   void set( const UserList& );
   bool remove( const User& );
+  inline int size() const;
+  inline bool isEmpty() const;
 
   QStringList toStringList( bool only_user_name, bool only_connected ) const;
   UserList fromUsersId( const QList<VNumber>& ) const;
@@ -56,6 +58,9 @@ private:
 
 
 // Inline Functions
+inline int UserList::size() const { return m_users.size(); }
+inline bool UserList::isEmpty() const { return m_users.isEmpty(); }
 inline const QList<User>& UserList::toList() const { return m_users; }
+
 
 #endif // BEEBEEP_USERLIST_H

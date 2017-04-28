@@ -35,6 +35,7 @@ GuiUserList::GuiUserList( QWidget* parent )
   setupUi( this );
 
   mp_menuSettings = 0;
+  mp_menuUsers = 0;
 
   mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twUsers->setRootIsDecorated( false );
@@ -196,7 +197,11 @@ void GuiUserList::showUserMenu( const QPoint& p )
 {
   QTreeWidgetItem* item = mp_twUsers->itemAt( p );
   if( !item )
+  {
+    if( mp_menuUsers )
+      mp_menuUsers->exec( QCursor::pos() );
     return;
+  }
 
   GuiUserItem* user_item = (GuiUserItem*)item;
   if( user_item->chatId() == ID_DEFAULT_CHAT )

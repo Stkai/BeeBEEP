@@ -54,6 +54,7 @@ public:
 
   inline bool allowMultipleInstances() const;
   inline bool trustSystemAccount() const;
+  inline void setTrustUserHash( bool );
   inline bool trustUserHash() const;
 
   inline void setCheckNewVersionAtStartup( bool );
@@ -667,6 +668,7 @@ inline void Settings::setLocalUserStatus( User::Status new_value ) { m_localUser
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
 inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
+inline void Settings::setTrustUserHash( bool new_value ) { m_trustUserHash = new_value; }
 inline bool Settings::trustUserHash() const { return m_trustUserHash; }
 inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }

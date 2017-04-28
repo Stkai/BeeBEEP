@@ -75,6 +75,7 @@ namespace Bee
   QPixmap avatarForUser( const User&, const QSize&, bool use_available_user_image );
   QString toolTipForUser( const User&, bool only_status );
   void setWindowStaysOnTop( QWidget*, bool );
+  QString stringListToTextString( const QStringList& );
 }
 
 
