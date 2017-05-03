@@ -187,6 +187,8 @@ protected:
   void showAlertForMessage( const Chat&, const ChatMessage& );
   GuiFloatingChat* createFloatingChat( const Chat& );
   void closeFloatingChat( VNumber );
+  void setFileTransferEnabled( bool );
+  void setFileSharingEnabled( bool );
 
 private:
   void setupChatConnections( GuiChat* );
@@ -252,6 +254,7 @@ private:
   QMenu* mp_menuFileTransferSettings;
   QMenu* mp_menuSoundSettings;
   QMenu* mp_menuTrayIconSettings;
+  QMenu* mp_menuExistingFile;
 
   QToolBar* mp_barMain;
 
@@ -272,6 +275,8 @@ private:
   QAction* mp_actAddUsers;
   QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
+  QAction* mp_actEnableFileSharing;
+  QAction* mp_actSelectDownloadFolder;
 
   QActionGroup* mp_actGroupExistingFile;
   QAction* mp_actOverwriteExistingFile;
@@ -306,6 +311,7 @@ private:
 
   bool m_prevActivatedState;
   int m_unreadActivities;
+  bool m_coreIsConnecting;
 
 };
 

@@ -151,6 +151,9 @@ Settings::Settings()
   m_homeBackgroundColor = "#E8E8E8";
   m_defaultChatBackgroundColor = "#E8E8E8";
   m_maxLogLines = 5000;
+
+  m_enableFileTransfer = true;
+  m_enableFileSharing = false;
 }
 
 void Settings::createApplicationUuid()
@@ -337,7 +340,10 @@ void Settings::loadRcFile()
   m_disableFileSharing = true;
 #else
   m_disableFileTransfer = sets->value( "DisableFileTransfer", m_disableFileTransfer ).toBool();
-  m_disableFileSharing = sets->value( "DisableFileSharing", m_disableFileSharing ).toBool();
+  if( m_disableFileTransfer )
+    m_disableFileSharing = true;
+  else
+    m_disableFileSharing = sets->value( "DisableFileSharing", m_disableFileSharing ).toBool();
 #endif
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
@@ -1005,27 +1011,29 @@ void Settings::load()
 
   sets->beginGroup( "FileShare" );
   if( m_disableFileTransfer )
+    m_enableFileTransfer = false;
+  else
+    m_enableFileTransfer = sets->value( "EnableFileTransfer", true ).toBool();
+
+  if( m_enableFileTransfer )
   {
-    m_fileTransferIsEnabled = false;
-    m_useShareBox = false;
-    m_maxFileShared = -1;
+    if( m_disableFileSharing )
+      m_enableFileSharing = false;
+    else
+      m_enableFileSharing = sets->value( "EnableFileSharing", false ).toBool();
+
+    if( m_enableFileSharing )
+      m_useShareBox = sets->value( "UseShareBox", false ).toBool();
+    else
+      m_useShareBox = false;
   }
   else
   {
-    m_fileTransferIsEnabled = sets->value( "FileTransferIsEnabled", true ).toBool();
-    if( m_disableFileSharing )
-    {
-      m_useShareBox = false;
-      m_maxFileShared = -1;
-    }
-    else
-    {
-      m_useShareBox = sets->value( "UseShareBox", false ).toBool();
-      m_maxFileShared = sets->value( "MaxSharedFiles", 4096 ).toInt();
-      if( m_maxFileShared < 0 )
-        m_maxFileShared = 4096;
-    }
+    m_enableFileSharing = false;
+    m_useShareBox = false;
   }
+
+  m_maxFileShared = qMax( 1024, sets->value( "MaxSharedFiles", 8192 ).toInt() );
   m_shareBoxPath = checkFolderPath( sets->value( "ShareBoxPath", "" ).toString(), "" );
   m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
   m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
@@ -1273,18 +1281,10 @@ void Settings::save()
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
-  if( m_disableFileTransfer )
-  {
-    sets->setValue( "FileTransferIsEnabled", false );
-    sets->setValue( "UseShareBox", false );
-    sets->setValue( "MaxSharedFiles", -1 );
-  }
-  else
-  {
-    sets->setValue( "FileTransferIsEnabled", m_fileTransferIsEnabled );
-    sets->setValue( "UseShareBox", m_useShareBox );
-    sets->setValue( "MaxSharedFiles", m_maxFileShared );
-  }
+  sets->setValue( "EnableFileTransfer", m_enableFileTransfer );
+  sets->setValue( "EnableFileSharing", m_enableFileSharing );
+  sets->setValue( "UseShareBox", m_useShareBox );
+  sets->setValue( "MaxSharedFiles", m_maxFileShared );
   sets->setValue( "ShareBoxPath", m_shareBoxPath );
   sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
   sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );

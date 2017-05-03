@@ -38,7 +38,7 @@ class GuiChat : public QWidget, private Ui::GuiChatWidget
 public:
   GuiChat( QWidget* parent = 0 );
 
-  void setupToolBars( QToolBar* chat_bar, QToolBar* group_bar );
+  void setupToolBar( QToolBar* chat_bar );
   void updateActions( const Chat&, bool is_connected, int connected_users );
 
   bool setChat( const Chat& );
@@ -50,6 +50,7 @@ public:
   bool appendChatMessage( const Chat&, const User&, const ChatMessage& );
 
   inline QSplitter* chatSplitter() const;
+  inline QMenu* groupMenu() const;
 
 signals:
   void newMessage( VNumber, const QString& );
@@ -121,6 +122,7 @@ private:
 
   QMenu* mp_menuContext;
   QMenu* mp_menuFilters;
+  QMenu* mp_menuGroup;
   QAction* mp_actSendFile;
   QAction* mp_actGroupAdd;
   QAction* mp_actClear;
@@ -150,5 +152,6 @@ private:
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
+inline QMenu* GuiChat::groupMenu() const { return mp_menuGroup; }
 
 #endif // BEEBEEP_GUICHAT_H

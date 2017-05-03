@@ -321,8 +321,11 @@ public:
   inline const QStringList& localShare() const;
   inline void setLocalShare( const QStringList& );
   inline bool hasLocalSharePath( const QString& ) const;
-  inline bool fileTransferIsEnabled() const;
-  inline void setFileTransferIsEnabled( bool );
+  inline bool enableFileTransfer() const;
+  inline void setEnableFileTransfer( bool );
+  inline bool enableFileSharing() const;
+  inline void setEnableFileSharing( bool );
+
   inline int maxFileShared() const;
 
   QString savedChatsFilePath() const;
@@ -594,7 +597,8 @@ private:
   int m_textSizeInChatMessagePreviewOnTray;
   bool m_showFileTransferCompletedOnTray;
 
-  bool m_fileTransferIsEnabled;
+  bool m_enableFileTransfer;
+  bool m_enableFileSharing;
   QStringList m_localShare;
   int m_maxFileShared;
 
@@ -792,8 +796,10 @@ inline bool Settings::showChatMessageOnTray() const { return m_showChatMessageOn
 inline const QStringList& Settings::localShare() const { return m_localShare; }
 inline void Settings::setLocalShare( const QStringList& new_value ) { m_localShare = new_value; }
 inline bool Settings::hasLocalSharePath( const QString& share_path ) const { return m_localShare.contains( share_path ); }
-inline bool Settings::fileTransferIsEnabled() const { return m_fileTransferIsEnabled; }
-inline void Settings::setFileTransferIsEnabled( bool new_value ) { m_fileTransferIsEnabled = new_value; }
+inline bool Settings::enableFileTransfer() const { return m_enableFileTransfer; }
+inline void Settings::setEnableFileTransfer( bool new_value ) { m_enableFileTransfer = new_value; }
+inline bool Settings::enableFileSharing() const { return m_enableFileSharing; }
+inline void Settings::setEnableFileSharing( bool new_value ) { m_enableFileSharing = new_value; }
 inline int Settings::maxFileShared() const { return m_maxFileShared; }
 inline bool Settings::chatAutoSave() const { return m_chatAutoSave; }
 inline void Settings::setChatAutoSave( bool new_value ) { m_chatAutoSave = new_value; }

@@ -183,7 +183,7 @@ protected slots:
   /* CoreFileTransfer */
   void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType );
   void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
-  void fileTransferServerListening();
+  void onFileTransferServerListening();
   void addListToLocalShare();
   void addFolderToFileTransfer();
   void sendShareBoxList();

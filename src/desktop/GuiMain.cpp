@@ -102,6 +102,7 @@ GuiMain::GuiMain( QWidget *parent )
   m_forceShutdown = false;
   m_autoConnectOnInterfaceUp = false;
   m_prevActivatedState = true;
+  m_coreIsConnecting = false;
 
   createActions();
   createMainWidgets();
@@ -433,12 +434,15 @@ void GuiMain::forceShutdown()
   close();
 }
 
+
 void GuiMain::startCore()
 {
   m_autoConnectOnInterfaceUp = false;
 
   if( mp_core->isConnected() )
     return;
+
+  mp_tabMain->setCurrentWidget( mp_home );
 
   if( Settings::instance().firstTime() )
   {
@@ -462,6 +466,7 @@ void GuiMain::startCore()
   }
 
   showMessage( tr( "Connecting" ), 2000 );
+  m_coreIsConnecting = true;
   mp_core->start();
   initGuiItems();
 }
@@ -515,6 +520,11 @@ void GuiMain::checkViewActions()
 
   mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().size() >= 2 );
   mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
+  mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
+  mp_actEnableFileSharing->setEnabled( Settings::instance().enableFileTransfer() && !Settings::instance().disableFileSharing() );
+  mp_menuExistingFile->setEnabled( Settings::instance().enableFileTransfer() );
+  mp_actConfirmDownload->setEnabled( Settings::instance().enableFileTransfer() );
+  mp_actSelectDownloadFolder->setEnabled( Settings::instance().enableFileTransfer() );
 
   showDefaultServerPortInMenu();
 
@@ -525,7 +535,12 @@ void GuiMain::checkViewActions()
   }
 
   if( mp_fileSharing )
-    mp_fileSharing->checkViewActions();
+  {
+    if( mp_actViewFileSharing->isEnabled() )
+      mp_fileSharing->checkViewActions();
+    else
+      mp_fileSharing->close();
+  }
 
   updateWindowTitle();
   updateTabTitles();
@@ -543,7 +558,7 @@ void GuiMain::showAbout()
                       .arg( Settings::instance().operatingSystem( true ) )
                       .arg( tr( "developed by" ) )
                       .arg( QString( "<a href='http://it.linkedin.com/pub/marco-mastroddi/20/5a7/191'>Marco Mastroddi</a>" ) )
-                      .arg( QString( "e-mail: marco.mastroddi@gmail.com<br />web: <a href='http://www.beebeep.net'>www.beebeep.net</a>" ) )
+                      .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br />web: <a href='http://www.beebeep.net'>www.beebeep.net</a>" ) )
                       );
 
 }
@@ -569,7 +584,7 @@ void GuiMain::createActions()
   mp_actBroadcast = new QAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), this );
   connect( mp_actBroadcast, SIGNAL( triggered() ), this, SLOT( sendBroadcastMessage() ) );
 
-  mp_actConfigureNetwork = new QAction( QIcon( ":/images/search-users.png"), tr( "Network..."), this );
+  mp_actConfigureNetwork = new QAction( QIcon( ":/images/network.png"), tr( "Network..."), this );
   connect( mp_actConfigureNetwork, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
   mp_actQuit = new QAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this );
@@ -595,7 +610,6 @@ void GuiMain::createActions()
 
   mp_actViewFileSharing = new QAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this );
   connect( mp_actViewFileSharing, SIGNAL( triggered() ), this, SLOT( showFileSharingWindow() ) );
-  mp_actViewFileSharing->setDisabled( Settings::instance().disableFileSharing() );
 
   mp_actViewLog = new QAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this );
   connect( mp_actViewLog, SIGNAL( triggered() ), this, SLOT( showLogWindow() ) );
@@ -615,17 +629,14 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actStartStopCore );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
-  mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actConfigureNetwork );
   mp_actAddUsers = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
-  mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
   mp_menuMain->addMenu( mp_menuPlugins );
   mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( QIcon( ":/images/resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
   mp_menuMain->addAction( QIcon( ":/images/data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
+  mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actQuit );
 
@@ -683,7 +694,7 @@ void GuiMain::createMenus()
   mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
   mp_menuUsersSettings->setIcon( QIcon( ":/images/user-list.png" ) );
   mp_menuSettings->addMenu( mp_menuUsersSettings );
-  if( !Settings::instance().trustSystemAccount() )
+  if( Settings::instance().trustSystemAccount() )
   {
     act = mp_menuUsersSettings->addAction( tr( "Recognize users by system or domain account" ) );
     act->setCheckable( true );
@@ -734,20 +745,27 @@ void GuiMain::createMenus()
   mp_menuSettings->addMenu( mp_menuFileTransferSettings );
   act = mp_menuFileTransferSettings->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().fileTransferIsEnabled() );
+  act->setChecked( Settings::instance().enableFileTransfer() );
   act->setData( 12 );
-  QMenu* existing_file_menu = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
+  mp_actEnableFileSharing = mp_menuFileTransferSettings->addAction( tr( "Enable file sharing" ), this, SLOT( settingsChanged() ) );
+  mp_actEnableFileSharing->setCheckable( true );
+  mp_actEnableFileSharing->setChecked( Settings::instance().enableFileSharing() );
+  mp_actEnableFileSharing->setData( 5 );
+  mp_actEnableFileSharing->setDisabled( Settings::instance().disableFileSharing() );
+
+  mp_menuFileTransferSettings->addSeparator();
+  mp_menuExistingFile = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
-  mp_actOverwriteExistingFile = existing_file_menu->addAction( tr( "Overwrite" ), this, SLOT( settingsChanged() ) );
+  mp_actOverwriteExistingFile = mp_menuExistingFile->addAction( tr( "Overwrite" ), this, SLOT( settingsChanged() ) );
   mp_actOverwriteExistingFile->setCheckable( true );
   mp_actOverwriteExistingFile->setChecked( Settings::instance().overwriteExistingFiles() );
   mp_actOverwriteExistingFile->setData( 99 );
-  mp_actGenerateAutomaticFilename = existing_file_menu->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
+  mp_actGenerateAutomaticFilename = mp_menuExistingFile->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
   mp_actGenerateAutomaticFilename->setCheckable( true );
   mp_actGenerateAutomaticFilename->setChecked( Settings::instance().automaticFileName() );
   mp_actGenerateAutomaticFilename->setData( 99 );
-  mp_actAskToDoOnExistingFile = existing_file_menu->addAction( tr( "Ask me" ), this, SLOT( settingsChanged() ) );
+  mp_actAskToDoOnExistingFile = mp_menuExistingFile->addAction( tr( "Ask me" ), this, SLOT( settingsChanged() ) );
   mp_actAskToDoOnExistingFile->setCheckable( true );
   mp_actAskToDoOnExistingFile->setChecked( !Settings::instance().automaticFileName() && !Settings::instance().overwriteExistingFiles() );
   mp_actAskToDoOnExistingFile->setData( 99 );
@@ -760,7 +778,7 @@ void GuiMain::createMenus()
   mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
   mp_actConfirmDownload->setData( 30 );
   mp_menuFileTransferSettings->addSeparator();
-  mp_menuFileTransferSettings->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
+  mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
 
   mp_menuSoundSettings = new QMenu( tr( "Sound" ), this );
   mp_menuSoundSettings->setIcon( QIcon( ":/images/bell.png" ) );
@@ -798,6 +816,7 @@ void GuiMain::createMenus()
   act->setData( 48 );
 
   mp_menuSettings->addSeparator();
+  mp_menuSettings->addAction( mp_actConfigureNetwork );
   mp_menuSettings->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts..." ), this, SLOT( editShortcuts() ) );
   mp_menuSettings->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
   mp_menuSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary..." ), this, SLOT( selectDictionatyPath() ) );
@@ -907,21 +926,19 @@ void GuiMain::createMenus()
     act->setData( i );
     act->setIconVisibleInMenu( true );
   }
-
   mp_menuStatus->addSeparator();
-
+  mp_menuStatus->addAction( mp_actVCard );
+  mp_menuStatus->addSeparator();
   mp_menuUserStatusList = new QMenu( tr( "Recently used" ), this );
   act = mp_menuStatus->addMenu( mp_menuUserStatusList );
   act->setIcon( QIcon( ":/images/recent.png" ) );
   loadUserStatusRecentlyUsed();
-
   act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Change your status description..." ), this, SLOT( changeStatusDescription() ) );
   act = mp_menuStatus->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all status descriptions" ), this, SLOT( clearRecentlyUsedUserStatus() ) );
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( User::Offline ) ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
   act->setData( User::Offline );
   act->setIconVisibleInMenu( true );
-
   act = mp_menuStatus->menuAction();
   connect( act, SIGNAL( triggered() ), this, SLOT( showLocalUserVCard() ) );
 
@@ -1057,7 +1074,17 @@ void GuiMain::onUserChanged( const User& u )
     fl_chat->updateUser( u );
   checkViewActions();
   if( u.isLocal() )
+  {
     updateWindowTitle();
+  }
+  else
+  {
+    if( m_coreIsConnecting && u.isStatusConnected() && mp_tabMain->currentWidget() == mp_home )
+    {
+      m_coreIsConnecting = false;
+      mp_tabMain->setCurrentWidget( mp_userList );
+    }
+  }
 }
 
 void GuiMain::refreshUserList()
@@ -1097,7 +1124,7 @@ void GuiMain::settingsChanged()
     Settings::instance().setUseNativeDialogs( act->isChecked() );
     break;
   case 5:
-    // free
+    setFileSharingEnabled( act->isChecked() );
     break;
   case 6:
     Settings::instance().setShowOnlyOnlineUsers( act->isChecked() );
@@ -1129,16 +1156,7 @@ void GuiMain::settingsChanged()
     Settings::instance().setMinimizeInTray( act->isChecked() );
     break;
   case 12:
-    {
-      Settings::instance().setFileTransferIsEnabled( act->isChecked() );
-      if( act->isChecked() )
-        mp_core->startFileTransferServer();
-      else
-        mp_core->stopFileTransferServer();
-      checkViewActions();
-      if( mp_fileSharing )
-        mp_fileSharing->updateLocalFileList();
-    }
+    setFileTransferEnabled( act->isChecked() );
     break;
   case 13:
     Settings::instance().setShowMessagesGroupByUser( act->isChecked() );
@@ -1575,7 +1593,7 @@ void GuiMain::updateStatusIcon()
   else
     status_type = Settings::instance().localUser().status();
 
-  mp_menuStatus->setIcon( QIcon( Bee::menuUserStatusIconFileName( status_type ) ) );
+  mp_menuStatus->setIcon( Bee::avatarForUser( Settings::instance().localUser(), Settings::instance().avatarIconSize(), true ) );
   QString tip = tr( "You are %1%2" ).arg( Bee::userStatusToString( status_type ) )
       .arg( (Settings::instance().localUser().statusDescription().isEmpty() ? QString( "" ) : QString( ": %1" ).arg( Settings::instance().localUser().statusDescription() ) ) );
   QAction* act = mp_menuStatus->menuAction();
@@ -1654,7 +1672,7 @@ QStringList GuiMain::checkFilePath( const QString& file_path )
 
 bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id )
 {
-  if( !Settings::instance().fileTransferIsEnabled() )
+  if( !Settings::instance().enableFileTransfer() )
   {
     QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "File transfer is not enabled." ) );
     return false;
@@ -1708,7 +1726,7 @@ void GuiMain::sendFile( const QString& file_path )
 
 bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QString& download_path, bool make_questions )
 {
-  if( !Settings::instance().fileTransferIsEnabled() )
+  if( !Settings::instance().enableFileTransfer() )
   {
     QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( fi.name() ) );
     return false;
@@ -1857,7 +1875,7 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
 
 void GuiMain::downloadFolder( const User& u, const QString& folder_name, const QList<FileInfo>& file_info_list )
 {
-  if( !Settings::instance().fileTransferIsEnabled() )
+  if( !Settings::instance().enableFileTransfer() )
   {
     QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "File transfer is disabled. You cannot download %1." ).arg( folder_name ) );
     return;
@@ -1963,7 +1981,10 @@ void GuiMain::changeVCard()
   gvc.show();
 
   if( gvc.exec() == QDialog::Accepted )
+  {
     mp_core->setLocalUserVCard( gvc.userColor(), gvc.vCard() );
+    updateStatusIcon();
+  }
 }
 
 void GuiMain::showLocalUserVCard()
@@ -2248,16 +2269,17 @@ void GuiMain::selectBeepFile()
 
 void GuiMain::testBeepFile()
 {
+  QString s_default_beep = tr( "The default BEEP will be used" );
   if( !AudioManager::instance().isAudioDeviceAvailable() )
   {
     qWarning() << "Sound device is not available";
-    QMessageBox::warning( this, Settings::instance().programName(), tr( "Sound module is not working. The default BEEP will be used." ) );
+    QMessageBox::warning( this, Settings::instance().programName(), QString( "%1. %2." ).arg( tr( "Sound module is not working" ), s_default_beep  ) );
   }
   else if( !QFile::exists( Settings::instance().beepFilePath() ) )
   {
     QString warn_text = QString( "%1\n%2. %3." ).arg( Settings::instance().beepFilePath() )
                                                   .arg( tr( "Sound file not found" ) )
-                                                  .arg( tr( "The default BEEP will be used" ) );
+                                                  .arg( s_default_beep );
     QMessageBox::warning( this, Settings::instance().programName(), warn_text );
   }
 
@@ -2382,19 +2404,9 @@ void GuiMain::loadSession()
 {
   showMessage( tr( "Starting" ), 3000 );
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
-  if( Settings::instance().fileTransferIsEnabled() )
-    QTimer::singleShot( 10000, mp_core, SLOT( buildLocalShareList() ) );
-  m_unreadActivities = mp_home->loadSystemMessages();
+  mp_tabMain->setCurrentWidget( mp_home );
+  mp_home->loadSystemMessages();
   mp_groupList->loadGroups();
-  if( UserManager::instance().userList().isEmpty() )
-  {
-    m_unreadActivities = 0;
-    mp_tabMain->setCurrentWidget( mp_home );
-  }
-  else
-    mp_tabMain->setCurrentWidget( mp_userList );
-
-  updateTabTitles();
 }
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )
@@ -2867,7 +2879,7 @@ void GuiMain::showDefaultServerPortInMenu()
     host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
     listener_port = QString::number( Settings::instance().localUser().networkAddress().hostPort() );
-    if( Settings::instance().fileTransferIsEnabled() )
+    if( Settings::instance().enableFileTransfer() )
     {
       file_transfer_port = QString::number( mp_core->fileTransferPort() );
       mp_actPortFileTransfer->setIcon( QIcon( ":/images/network-scan.png" ) );
@@ -3583,6 +3595,36 @@ void GuiMain::onMainTabChanged( int tab_index )
     updateTabTitles();
   }
 }
+
+void GuiMain::setFileTransferEnabled( bool enable )
+{
+  if( Settings::instance().disableFileTransfer() )
+    return;
+
+ Settings::instance().setEnableFileTransfer( enable );
+ if( !enable )
+ {
+   Settings::instance().setEnableFileSharing( false );
+   Settings::instance().setUseShareBox( false );
+   mp_core->stopFileTransferServer();
+   QMetaObject::invokeMethod( mp_core, "buildLocalShareList", Qt::QueuedConnection );
+ }
+ else
+   mp_core->startFileTransferServer();
+
+ checkViewActions();
+}
+
+void GuiMain::setFileSharingEnabled( bool enable )
+{
+  if( Settings::instance().disableFileTransfer() || Settings::instance().disableFileSharing() )
+    return;
+
+  Settings::instance().setEnableFileSharing( enable );
+  QMetaObject::invokeMethod( mp_core, "buildLocalShareList", Qt::QueuedConnection );
+  checkViewActions();
+}
+
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )

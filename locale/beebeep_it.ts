@@ -398,6 +398,14 @@
         <source>%1 saved chats are added to history</source>
         <translation>%1 conversazioni precedenti sono state caricate</translation>
     </message>
+    <message>
+        <source>%1 has removed shared files</source>
+        <translation>%1 ha rimosso i suoi file condivisi</translation>
+    </message>
+    <message>
+        <source>%1 has shared %2 files</source>
+        <translation>%1 ha condiviso %2 file</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -484,10 +492,6 @@
 <context>
     <name>GuiAddUser</name>
     <message>
-        <source>Add user</source>
-        <translation>Aggiungi utente</translation>
-    </message>
-    <message>
         <source>Comment</source>
         <translation>Commento</translation>
     </message>
@@ -526,6 +530,10 @@
     <message>
         <source>your IP is %1 in LAN %2</source>
         <translation>il tuo IP è %1 nella LAN %2</translation>
+    </message>
+    <message>
+        <source>Add users</source>
+        <translation>Aggiungi utenti</translation>
     </message>
 </context>
 <context>
@@ -1071,12 +1079,12 @@ Inserisci un nome differente.</translation>
         <translation>%1 non ha letto gli ultimi messaggi</translation>
     </message>
     <message>
-        <source>Show the bar of group</source>
-        <translation>Mostra la barra del gruppo</translation>
-    </message>
-    <message>
         <source>Save window&apos;s geometry</source>
         <translation>Salva le dimensioni della finestra</translation>
+    </message>
+    <message>
+        <source>Show group menu</source>
+        <translation>Mostra il menu del gruppo</translation>
     </message>
 </context>
 <context>
@@ -1618,10 +1626,6 @@ Inserisci un nome differente.</translation>
     <message>
         <source>The default BEEP will be used</source>
         <translation>Verrà usato il BEEP di sistema</translation>
-    </message>
-    <message>
-        <source>Sound module is not working. The default BEEP will be used.</source>
-        <translation>Il modulo sonoro non funziona. Verrà usato il BEEP di sistema.</translation>
     </message>
     <message>
         <source>File is not available for download.</source>
@@ -2166,6 +2170,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Add users</source>
         <translation>Aggiungi utenti</translation>
+    </message>
+    <message>
+        <source>Sound module is not working</source>
+        <translation>Il modulo del suono non funziona</translation>
+    </message>
+    <message>
+        <source>Enable file sharing</source>
+        <translation>Abilita la condivisione dei file</translation>
     </message>
 </context>
 <context>

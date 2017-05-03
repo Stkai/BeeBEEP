@@ -40,7 +40,8 @@ HideMainToolbar=[true/false] If enabled BeeBEEP hide the main toolbar at startup
 HideChatToolbar=[true/false] If enabled BeeBEEP hide the chat toolbar startup (default=false) [3.0.6] [obsolete 3.2.0]
 HideUsersPanel=[true/false] If enabled BeeBEEP hide users panel at startup (default=false) [3.0.6] [obsolete 3.2.0]
 HideOtherPanels=[true/false] If enabled BeeBEEP hide all other panels at startup (default=false) [3.0.6] [obsolete 3.2.0]
-DisableFileTransfer=[true/false] disable file transfer (default=false) [3.0.6]
+DisableFileTransfer=[true/false] disable file transfer and the file sharing (default=false) [3.0.6]
+DisableFileSharing=[true/false] disable the file sharing (default=false) [3.2.0]
 DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read only messenger (default=false) [3.0.6]
 UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session
                               (the same of AskNicknameAtStartup=false and UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
@@ -208,7 +209,9 @@ UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networkin
 AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users when there aren't users connected (default=true) [3.0.5] [obsolete 3.0.8+]
 
 [FileShare]
-FileTransferIsEnabled=[true/false] enable file transfer/sharing/box (default=true) [3.0.6]
+FileTransferIsEnabled=[true/false] enable file transfer/sharing/box (default=true) [3.0.6] [obsolete 3.2.0]
+EnableFileTransfer=[true/false] enable file transfer/sharing/box <can be overruled by rc file> (default=true) [3.2.0]
+EnableFileSharing=[true/false] enable file sharing/box <can be overruled by rc file> (default=false) [3.2.0]
 UseShareBox=[true/false] enable share box (default=false) [3.0.7]
 ShareBoxPath=[string] path of the box shared (default="") [3.0.7]
 SetAutomaticFileName=[true/false] on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it

@@ -44,16 +44,11 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   setMainIcon( false );
   mp_chat = new GuiChat( this );
 
-  mp_barGroup = new QToolBar( tr( "Show the bar of group" ), this );
-  addToolBar( Qt::TopToolBarArea, mp_barGroup );
-  mp_barGroup->setObjectName( "GuiFloatingChatGroupToolBar" );
-  mp_barGroup->setIconSize( Settings::instance().mainBarIconSize() );
-  mp_barGroup->setAllowedAreas( Qt::AllToolBarAreas );
-  mp_barGroup->setFloatable( false );
-  mp_barGroup->toggleViewAction()->setVisible( false );
+  mp_actGroupMenu = new QAction( QIcon( ":/images/group-edit.png" ), tr( "Show group menu" ), this );
+  connect( mp_actGroupMenu, SIGNAL( triggered() ), this, SLOT( showGroupMenu() ) );
 
   mp_barMembers = new QToolBar( tr( "Show the bar of members" ), this );
-  addToolBar( Qt::TopToolBarArea, mp_barMembers );
+  addToolBar( Qt::RightToolBarArea, mp_barMembers );
   mp_barMembers->setObjectName( "GuiFloatingChatMemberToolBar" );
   mp_barMembers->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barMembers->setAllowedAreas( Qt::AllToolBarAreas );
@@ -65,7 +60,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   mp_barChat->setObjectName( "GuiFloatingChatToolBar" );
   mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barChat->setAllowedAreas( Qt::AllToolBarAreas );
-  mp_chat->setupToolBars( mp_barChat, mp_barGroup );
+  mp_chat->setupToolBar( mp_barChat );
   mp_barChat->setVisible( Settings::instance().showChatToolbar() );
   mp_barChat->insertSeparator( mp_barChat->actions().first() );
   mp_barChat->setFloatable( false );
@@ -168,6 +163,9 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
   if( !mp_barMembers->isEnabled() )
     return;
 
+  if( u.isLocal() )
+    return;
+
   QAction* act_user = 0;
   QList<QAction*> member_actions = mp_barMembers->actions();
   foreach( QAction* act, member_actions )
@@ -186,7 +184,7 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
   }
 
   act_user->setText( u.name() );
-  int avatar_size = qMax( mp_barMembers->iconSize().width(), 96 );
+  int avatar_size = qMax( mp_barMembers->iconSize().width(), 32 );
   act_user->setIcon( Bee::avatarForUser( u, QSize( avatar_size, avatar_size ), Settings::instance().showUserPhoto() ) );
   QString user_tooltip = Bee::toolTipForUser( u, true );
   if( !u.isLocal() && u.protocolVersion() >= 63 && !c.userHasReadMessages( u.id() ) )
@@ -198,19 +196,25 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
 
 void GuiFloatingChat::updateChatMembers( const Chat& c )
 {
-  mp_barGroup->setVisible( c.isGroup() );
-  mp_barGroup->setEnabled( c.isGroup() );
   mp_barMembers->setVisible( !c.isDefault() );
   mp_barMembers->setEnabled( !c.isDefault() );
 
   if( mp_barMembers->isEnabled() )
   {
     mp_barMembers->clear();
-    mp_barMembers->show();
+    mp_barMembers->setVisible( true );
 
     UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
     foreach( User u, ul.toList() )
       updateChatMember( c, u );
+
+    if( c.isGroup() )
+    {
+      mp_barMembers->addSeparator();
+      mp_barMembers->addAction( mp_actGroupMenu );
+    }
+    else
+      mp_actGroupMenu->setDisabled( true );
   }
 }
 
@@ -453,4 +457,9 @@ void GuiFloatingChat::showChatMessage( const Chat& c, const ChatMessage& cm )
     if( cm.isFromLocalUser() && !cm.isFromSystem() )
       updateChatMembers( c );
   }
+}
+
+void GuiFloatingChat::showGroupMenu()
+{
+  mp_chat->groupMenu()->exec( QCursor::pos() );
 }

@@ -129,7 +129,7 @@ void GuiShareBox::enableOutUpdateButton()
 void GuiShareBox::updateMyBox()
 {
   mp_pbMyUpdate->setEnabled( false );
-  if( mp_cbEnableMyBox->isChecked() && Settings::instance().fileTransferIsEnabled() )
+  if( mp_cbEnableMyBox->isChecked() )
   {
     mp_myBox->setEnabled( true );
     QString my_path = QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() ).arg( m_myCurrentFolder );
@@ -155,7 +155,7 @@ void GuiShareBox::updateOutBox()
 #else
   VNumber user_id = mp_comboUsers->count() > 0 ? Bee::qVariantToVNumber( mp_comboUsers->itemData( mp_comboUsers->currentIndex() ) ) : ID_INVALID;
 #endif
-  if( user_id > ID_INVALID && Settings::instance().fileTransferIsEnabled() )
+  if( user_id > ID_INVALID )
   {
     mp_outBox->setEnabled( true );
     if( user_id != m_userId )

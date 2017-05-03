@@ -116,18 +116,17 @@ void GuiFileSharing::initGuiItems()
 
 void GuiFileSharing::checkViewActions()
 {
+  setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
+
+  if( !isEnabled() )
+    return;
+
   bool is_connected = mp_core->isConnected();
   int connected_users = mp_core->connectedUsers();
 
-  mp_actViewShareLocal->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareLocal );
-  mp_actViewShareNetwork->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
-  mp_actViewShareBox->setEnabled( Settings::instance().fileTransferIsEnabled() && mp_stackedWidget->currentWidget() != mp_shareBox );
-
-  if( !Settings::instance().fileTransferIsEnabled() )
-  {
-    raiseLocalShareView();
-    return;
-  }
+  mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
+  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
+  mp_actViewShareBox->setEnabled( mp_stackedWidget->currentWidget() != mp_shareBox );
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork  )
     mp_barShareNetwork->show();

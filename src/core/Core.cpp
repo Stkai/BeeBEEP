@@ -70,7 +70,7 @@ Core::Core( QObject* parent )
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( qintptr ) ), this, SLOT( checkNewConnection( qintptr ) ) );
-  connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( fileTransferServerListening() ) );
+  connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( onFileTransferServerListening() ) );
   connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, VNumber, const FileInfo& ) ) );
@@ -192,7 +192,7 @@ bool Core::start()
     qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
   }
 
-  if( Settings::instance().fileTransferIsEnabled() )
+  if( Settings::instance().enableFileTransfer() )
     startFileTransferServer();
   else
     qWarning() << "File transfer is disabled";

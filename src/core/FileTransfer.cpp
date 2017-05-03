@@ -212,7 +212,7 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
     return;
   }
 
-  if( !Settings::instance().fileTransferIsEnabled() )
+  if( !Settings::instance().enableFileTransfer() )
   {
     qWarning() << "File Transfer is disabled";
     upload_peer->cancelTransfer();
@@ -223,9 +223,16 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
 
   if( file_info_to_check.isInShareBox() )
   {
-    if( !Settings::instance().useShareBox() || Settings::instance().disableFileTransfer() )
+    if( !Settings::instance().enableFileSharing() )
     {
-      qWarning() << "ShareBox file upload request refused (file sharing or sharebox disabled):" << file_info_to_check.name();
+      qWarning() << "ShareBox file upload request refused (file sharing disabled):" << file_info_to_check.name();
+      upload_peer->cancelTransfer();
+      return;
+    }
+
+    if( !Settings::instance().useShareBox() )
+    {
+      qWarning() << "ShareBox file upload request refused (sharebox disabled):" << file_info_to_check.name();
       upload_peer->cancelTransfer();
       return;
     }

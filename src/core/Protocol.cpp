@@ -1254,26 +1254,24 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
 
 void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
 {
-  if( server_port <= 0 )
-  {
-    m_fileShareListMessage = "";
-    return;
-  }
-
   QStringList msg_list;
-  QMultiMap<QString, FileInfo>::const_iterator it = file_info_list.begin();
-  while( it != file_info_list.end() )
+
+  if( server_port > 0 )
   {
-    QStringList sl;
-    sl << it.value().name();
-    sl << it.value().suffix();
-    sl << QString::number( it.value().size() );
-    sl << QString::number( it.value().id() );
-    sl << QString::fromUtf8( it.value().password() );
-    sl << it.value().fileHash();
-    sl << it.value().shareFolder();
-    msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
-    ++it;
+    QMultiMap<QString, FileInfo>::const_iterator it = file_info_list.begin();
+    while( it != file_info_list.end() )
+    {
+      QStringList sl;
+      sl << it.value().name();
+      sl << it.value().suffix();
+      sl << QString::number( it.value().size() );
+      sl << QString::number( it.value().id() );
+      sl << QString::fromUtf8( it.value().password() );
+      sl << it.value().fileHash();
+      sl << it.value().shareFolder();
+      msg_list.append( sl.join( DATA_FIELD_SEPARATOR ) );
+      ++it;
+    }
   }
 
   Message m( Message::Share, ID_SHARE_MESSAGE, msg_list.isEmpty() ? QString( "" ) : msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );

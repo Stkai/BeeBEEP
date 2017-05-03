@@ -35,7 +35,7 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   setAcceptDrops( true );
 
   mp_lTitle->setText( QString( "<b>%1</b> (%2)" ).arg( tr( "Share your folders or files" ) )
-                        .arg( Settings::instance().maxFileShared() > 0 ? tr( "max <b>%1</b> files" ).arg( Settings::instance().maxFileShared() ) : tr( "disabled" ) ) );
+                        .arg( Settings::instance().enableFileSharing() ? tr( "max <b>%1</b> files" ).arg( Settings::instance().maxFileShared() ) : tr( "disabled" ) ) );
 
   mp_twMyShares->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twMyShares->setRootIsDecorated( false );
@@ -93,7 +93,7 @@ void GuiShareLocal::setupToolBar( QToolBar* bar )
 
 void GuiShareLocal::showStats( int file_count, FileSizeType total_file_size )
 {
-  if( Settings::instance().fileTransferIsEnabled() )
+  if( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() )
     mp_labelShareStats->setText( QString( "%1: <b>%2</b> (%3)  " ).arg( tr( "Shared files" ) ).arg( file_count ).arg( Bee::bytesToString( total_file_size ) ) );
   else
     mp_labelShareStats->setText( QString( "<b>%1</b>  " ).arg( tr( "File transfer is disabled" ) ) );
@@ -255,7 +255,7 @@ void GuiShareLocal::updateList()
 
 bool GuiShareLocal::isFileSharingEnabled()
 {
-  if( Settings::instance().fileTransferIsEnabled() )
+  if( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() )
     return true;
 
   QMessageBox::information( this, Settings::instance().programName(), tr( "File transfer is disabled. Open the option menu to enable it." ) );

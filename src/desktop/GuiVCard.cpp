@@ -112,7 +112,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   {
     mp_pbChat->show();
     mp_pbChat->setToolTip( tr( "Open chat" ) );
-    if( Settings::instance().fileTransferIsEnabled() && u.isStatusConnected() && core_is_connected )
+    if( Settings::instance().enableFileTransfer() && u.isStatusConnected() && core_is_connected )
       mp_pbFile->show();
     else
       mp_pbFile->hide();

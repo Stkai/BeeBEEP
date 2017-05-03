@@ -175,7 +175,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
     return;
   }
 
-  if( !Settings::instance().fileTransferIsEnabled() )
+  if( !Settings::instance().enableFileTransfer() )
   {
     refuseToDownloadFile( u.id(), fi );
     return;
@@ -313,20 +313,30 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
   if( m.hasFlag( Message::List ) )
   {
     QList<FileInfo> file_info_list = Protocol::instance().messageToFileShare( m, u.networkAddress().hostAddress() );
+    int prev_files = FileShare::instance().network().count( u.id() );
+    int new_files = FileShare::instance().addToNetwork( u.id(), file_info_list );
 
-    FileShare::instance().addToNetwork( u.id(), file_info_list );
+    QString share_status;
+    if( prev_files > 0 && new_files == 0 )
+      share_status = tr( "%1 has removed shared files" ).arg( u.name() );
+    else if( new_files > 0 )
+      share_status = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( new_files );
+    else
+      share_status = "";
+
+    if( !share_status.isEmpty() )
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), share_status ),
+                             DispatchToChat, ChatMessage::FileTransfer );
 
     emit fileShareAvailable( u );
   }
   else if( m.hasFlag( Message::Request ) )
   {
-    if( !Settings::instance().fileTransferIsEnabled() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "File transfer is disabled. Ignoring request from user" << qPrintable( u.path() );
-#endif
+    if( !Settings::instance().enableFileTransfer() )
       return;
-    }
+
+    if( !Settings::instance().enableFileSharing() )
+      return;
 
     if( !Protocol::instance().fileShareListMessage().isEmpty() )
       sendFileShareListTo( u.id() );
@@ -348,6 +358,9 @@ void Core::parseFolderMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Request ) )
   {
+    if( !Settings::instance().enableFileTransfer() )
+      return;
+
     QString folder_name = tr( "unknown folder" );
     QList<FileInfo> file_info_list = Protocol::instance().messageFolderToInfoList( m, u.networkAddress().hostAddress(), &folder_name );
     if( file_info_list.isEmpty() )
@@ -420,7 +433,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 
 void Core::parseShareBoxMessage( const User& u, const Message& m )
 {
-  if( !Settings::instance().fileTransferIsEnabled() )
+  if( !Settings::instance().enableFileTransfer() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file transfer disabled)";
@@ -428,7 +441,7 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
     return;
   }
 
-  if( Settings::instance().disableFileSharing() )
+  if( !Settings::instance().enableFileSharing() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file sharing disabled)";

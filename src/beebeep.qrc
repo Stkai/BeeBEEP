@@ -126,7 +126,6 @@
         <file>images/linux.png</file>
         <file>images/windows.png</file>
         <file>images/group-wizard.png</file>
-        <file>images/search-users.png</file>
         <file>images/thumbup.png</file>
         <file>images/save-window.png</file>
         <file>images/warning.png</file>
@@ -153,5 +152,6 @@
         <file>images/settings-close.png</file>
         <file>images/settings-tray-icon.png</file>
         <file>images/chat-small.png</file>
+        <file>images/network.png</file>
     </qresource>
 </RCC>

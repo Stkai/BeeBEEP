@@ -61,7 +61,7 @@ bool Core::startFileTransferServer()
 void Core::stopFileTransferServer()
 {
   mp_fileTransfer->stopListener();
-  createLocalShareMessage();
+  Protocol::instance().createFileShareListMessage( FileShare::instance().local(), -1 );
 }
 
 bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message )
@@ -211,7 +211,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
 {
   QString icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
 
-  if( !Settings::instance().fileTransferIsEnabled() )
+  if( !Settings::instance().enableFileTransfer() )
   {
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, user_id, tr( "%1 Unable to send %2. File transfer is disabled." ).arg( icon_html, file_path ),
                            chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
@@ -355,9 +355,10 @@ void Core::refuseToDownloadFolder( VNumber user_id, const QString& folder_name, 
     c->sendMessage( m );
 }
 
-void Core::fileTransferServerListening()
+void Core::onFileTransferServerListening()
 {
   createLocalShareMessage();
+  buildLocalShareList();
 }
 
 void Core::sendFileShareRequestToAll()
@@ -381,13 +382,7 @@ void Core::sendFileShareListTo( VNumber user_id )
 
 void Core::sendFileShareListToAll()
 {
-  if( !Settings::instance().fileTransferIsEnabled() )
-    return;
-
   if( !isConnected() )
-    return;
-
-  if( !mp_fileTransfer->isActive() )
     return;
 
   const QByteArray& share_list_message = Protocol::instance().fileShareListMessage();
@@ -516,7 +511,10 @@ void Core::removePathFromShare( const QString& share_path )
                          DispatchToChat, ChatMessage::FileTransfer );
 
   if( num_files > 0 )
+  {
     createLocalShareMessage();
+    sendFileShareListToAll();
+  }
 
   emit localShareListAvailable();
 }
@@ -532,17 +530,27 @@ void Core::createLocalShareMessage()
 void Core::buildLocalShareList()
 {
   if( !FileShare::instance().local().isEmpty() )
-    FileShare::instance().clearLocal();
-
-  if( Settings::instance().disableFileSharing() || Settings::instance().maxFileShared() <= 0 )
   {
-    qWarning() << "Unable to build local file share list: file sharing is disabled";
+    FileShare::instance().clearLocal();
+    createLocalShareMessage();
+    sendFileShareListToAll();
+  }
+
+  if( !Settings::instance().enableFileTransfer() )
+  {
+    qWarning() << "Skip building local file share list: file transfer is disabled";
+    return;
+  }
+
+  if( !Settings::instance().enableFileSharing() )
+  {
+    qWarning() << "Skip building local file share list: file sharing is disabled";
     return;
   }
 
   if( Settings::instance().localShare().isEmpty() )
   {
-    qDebug() << "Unable to build local file share list: there are not shared files";
+    qDebug() << "Skip building local file share list: there are not shared files";
     return;
   }
 

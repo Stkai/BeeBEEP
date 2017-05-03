@@ -69,13 +69,13 @@ private slots:
   void toggleVisibilityEmoticonPanel();
   void toggleVisibilityPresetMessagesPanel();
   void onGroupMemberActionTriggered();
+  void showGroupMenu();
 
 private:
   Core* mp_core;
   GuiChat* mp_chat;
   QToolBar* mp_barChat;
   QToolBar* mp_barMembers;
-  QToolBar* mp_barGroup;
   QDockWidget* mp_dockEmoticons;
   QDockWidget* mp_dockPresetMessageList;
   GuiEmoticons* mp_emoticonsWidget;
@@ -85,6 +85,7 @@ private:
   bool m_prevActivatedState;
 
   QIcon m_mainWindowIcon;
+  QAction* mp_actGroupMenu;
 
 };
 
