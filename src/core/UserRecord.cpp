@@ -26,7 +26,7 @@
 
 UserRecord::UserRecord()
   : m_name( "" ), m_account( "" ), m_networkAddress( QHostAddress(), DEFAULT_LISTENER_PORT ),
-    m_comment( "" ), m_isFavorite( false ), m_color( "#000000" )
+    m_comment( "" ), m_isFavorite( false ), m_color( "#000000" ), m_hash( "" )
 {
 }
 
@@ -45,6 +45,7 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
     m_comment = ur.m_comment;
     m_isFavorite = ur.m_isFavorite;
     m_color = ur.m_color;
+    m_hash = ur.m_hash;
   }
   return *this;
 }

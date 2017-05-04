@@ -323,7 +323,6 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     u.setId( user_found.id() );
     u.setIsFavorite( user_found.isFavorite() );
     u.setColor( user_found.color() );
-    qDebug() << "User" << qPrintable( u.path() ) << "has saved color:" << qPrintable( u.color() );
   }
   else
   {

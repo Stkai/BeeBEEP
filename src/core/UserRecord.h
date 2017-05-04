@@ -52,6 +52,8 @@ public:
   inline bool isFavorite() const;
   inline void setColor( const QString& );
   inline const QString& color() const;
+  inline void setHash( const QString& );
+  inline const QString& hash() const;
 
 private:
   QString m_name;
@@ -60,6 +62,7 @@ private:
   QString m_comment;
   bool m_isFavorite;
   QString m_color;
+  QString m_hash;
 
 };
 
@@ -80,5 +83,7 @@ inline void UserRecord::setFavorite( bool new_value ) { m_isFavorite = new_value
 inline bool UserRecord::isFavorite() const { return m_isFavorite; }
 inline void UserRecord::setColor( const QString& new_value ) { m_color = new_value; }
 inline const QString& UserRecord::color() const { return m_color; }
+inline void UserRecord::setHash( const QString& new_value ) { m_hash = new_value; }
+inline const QString& UserRecord::hash() const { return m_hash; }
 
 #endif // BEEBEEP_USERRECORD_H

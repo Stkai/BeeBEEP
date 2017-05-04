@@ -610,6 +610,7 @@ QString Protocol::saveUser( const User& u ) const
   ur.setNetworkAddress( u.networkAddress() );
   ur.setFavorite( u.isFavorite() );
   ur.setColor( u.color() );
+  ur.setHash( u.hash() );
   return saveUserRecord( ur, true, true );
 }
 
@@ -620,12 +621,18 @@ User Protocol::loadUser( const QString& s )
     return User();
 
   User u = createTemporaryUser( ur.name(), ur.account(), ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() );
+
   u.setIsFavorite( ur.isFavorite() );
+
   if( ColorManager::instance().isValidColor( ur.color() ) )
   {
     u.setColor( ur.color() );
     ColorManager::instance().setColorSelected( ur.color() );
   }
+
+  if( !ur.hash().isEmpty() )
+    u.setHash( ur.hash() );
+
   return u;
 }
 
@@ -691,6 +698,7 @@ QString Protocol::saveUserRecord( const UserRecord& ur, bool add_comment, bool a
     else
       sl << QString( "" );
     sl << ur.color();
+    sl << ur.hash();
   }
   return sl.join( DATA_FIELD_SEPARATOR );
 }
@@ -745,6 +753,12 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   {
     ur.setColor( sl.takeFirst() );
     qDebug() << "User" << qPrintable( ur.name() ) << "has color saved:" << qPrintable( ur.color() );
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setHash( sl.takeFirst() );
+    qDebug() << "User" << qPrintable( ur.name() ) << "has hash saved:" << qPrintable( ur.hash() );
   }
 
   return ur;
