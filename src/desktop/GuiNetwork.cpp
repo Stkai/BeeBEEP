@@ -21,25 +21,25 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "Config.h"
-#include "GuiSearchUser.h"
+#include "GuiNetwork.h"
 #include "NetworkManager.h"
 #include "PluginManager.h"
 #include "Settings.h"
 
 
-GuiSearchUser::GuiSearchUser( QWidget *parent )
-  : QDialog(parent)
+GuiNetwork::GuiNetwork( QWidget* parent )
+  : QDialog( parent )
 {
   setupUi( this );
-  setObjectName( "GuiSearchUser" );
-  setWindowTitle( tr( "Network settings" ) + QString( " - %1" ).arg( Settings::instance().programName() ));
+  setObjectName( "GuiNetworkDialog" );
+  setWindowTitle( tr( "Network" ) + QString( " - %1" ).arg( Settings::instance().programName() ));
+  setWindowIcon( QIcon( ":/images/network.png" ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
-void GuiSearchUser::loadSettings()
+void GuiNetwork::loadSettings()
 {
   mp_leUdpPort->setText( QString::number( Settings::instance().defaultBroadcastPort() ) );
 
@@ -69,14 +69,6 @@ void GuiSearchUser::loadSettings()
 
   mp_cbEnableMDns->setChecked( Settings::instance().useMulticastDns() );
 
-  sl_tmp = Settings::instance().workgroups();
-  if( sl_tmp.size() > 0 )
-    mp_leWorkgroups->setText( sl_tmp.join( ", " ) );
-  else
-    mp_leWorkgroups->setText( "" );
-
-  mp_cbAcceptConnectionsOnlyFromWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
-
   if( Settings::instance().tickIntervalBroadcasting() > 0 )
   {
     mp_cbBroadcastInterval->setChecked( true );
@@ -93,7 +85,7 @@ void GuiSearchUser::loadSettings()
   mp_teAddressesInSettings->setFocus();
 }
 
-void GuiSearchUser::checkAndSearch()
+void GuiNetwork::checkAndSearch()
 {
   QString string_tmp = mp_teAddressesInSettings->toPlainText().simplified();
   QStringList sl_tmp;
@@ -124,17 +116,6 @@ void GuiSearchUser::checkAndSearch()
   else
     Settings::instance().setBroadcastAddressesInSettings( QStringList() );
 
-  string_tmp = mp_leWorkgroups->text().simplified();
-  QStringList sl_workgroups;
-  if( string_tmp.size() > 0 )
-  {
-    sl_tmp = string_tmp.split( ",", QString::SkipEmptyParts );
-    foreach( QString s, sl_tmp )
-      sl_workgroups.append( s.simplified() );
-  }
-
-  Settings::instance().setWorkgroups( sl_workgroups );
-  Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptConnectionsOnlyFromWorkgroups->isChecked() );
   Settings::instance().setUseMulticastDns( mp_cbEnableMDns->isChecked() );
 
   if( mp_cbBroadcastInterval->isChecked() )

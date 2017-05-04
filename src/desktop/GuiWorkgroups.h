@@ -21,32 +21,40 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIWIZARD_H
-#define BEEBEEP_GUIWIZARD_H
+#ifndef BEEBEEP_GUIWORKGROUPS_H
+#define BEEBEEP_GUIWORKGROUPS_H
 
-#include "ui_GuiWizard.h"
+#include "ui_GuiWorkgroups.h"
 
 
-
-class GuiWizard : public QDialog, private Ui::GuiWizardDialog
+class GuiWorkgroups : public QDialog, private Ui::GuiWorkgroupsDialog
 {
   Q_OBJECT
 
 public:
-  GuiWizard( QWidget* parent = 0 );
-  void loadSettings();
+  explicit GuiWorkgroups( QWidget *parent = 0 );
 
-  inline const QString& userName() const;
+  void loadWorkgroups();
+
+  inline const QStringList& workgroups() const;
 
 protected slots:
-  void saveSettings();
+  void addWorkgroup();
+  void saveWorkgroups();
+  void removeWorkgroup();
+  void removeAllWorkgroups();
+  void openCustomMenu( const QPoint& );
+
+protected:
+  void updateWorkgroupList();
 
 private:
-  QString m_userName;
+  QStringList m_workgroups;
+  QMenu* mp_menuContext;
 
 };
 
 // Inline Functions
-inline const QString& GuiWizard::userName() const { return m_userName; }
+inline const QStringList& GuiWorkgroups::workgroups() const { return m_workgroups; }
 
-#endif // BEEBEEP_GUIWIZARD_H
+#endif // BEEBEEP_GUIWORKGROUPS_H

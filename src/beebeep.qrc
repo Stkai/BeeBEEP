@@ -153,5 +153,6 @@
         <file>images/settings-tray-icon.png</file>
         <file>images/chat-small.png</file>
         <file>images/network.png</file>
+        <file>images/workgroup.png</file>
     </qresource>
 </RCC>

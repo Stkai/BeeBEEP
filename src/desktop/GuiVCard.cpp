@@ -51,7 +51,10 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
 {
   m_userId = u.id();
   m_chatId = chat_id;
-  mp_lPath->setText( u.accountPath() );
+  mp_lPath->setText( u.isStatusConnected() ? QString( "%1: <b>%2</b>&nbsp;&nbsp;&nbsp;%3: <b>%4</b>" )
+                                               .arg( "IP Address" ).arg( u.networkAddress().hostAddress().toString() )
+                                               .arg( "Port" ).arg( u.networkAddress().hostPort() )
+                                           : u.accountPath() );
   m_userColor = u.color();
 
   QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.name() );

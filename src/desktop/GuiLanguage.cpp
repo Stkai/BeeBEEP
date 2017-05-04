@@ -31,8 +31,8 @@ GuiLanguage::GuiLanguage( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiLanguage" );
-
   setWindowTitle( tr( "Select language" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+  setWindowIcon( QIcon( ":/images/language.png" ) );
 
   QStringList labels;
   labels << tr( "Language" ) << tr( "File" );

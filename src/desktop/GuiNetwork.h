@@ -21,19 +21,19 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISEARCHUSER_H
-#define BEEBEEP_GUISEARCHUSER_H
+#ifndef BEEBEEP_GUINETWORK_H
+#define BEEBEEP_GUINETWORK_H
 
-#include "ui_GuiSearchUser.h"
-#include <QDialog>
+#include "Config.h"
+#include "ui_GuiNetwork.h"
 
 
-class GuiSearchUser : public QDialog, private Ui::GuiSearchUser
+class GuiNetwork : public QDialog, private Ui::GuiNetworkWidget
 {
   Q_OBJECT
 
 public:
-  GuiSearchUser( QWidget* );
+  GuiNetwork( QWidget* parent = 0 );
 
   void loadSettings();
 
@@ -42,4 +42,4 @@ protected slots:
 
 };
 
-#endif // BEEBEEP_GUISEARCHUSER_H
+#endif // BEEBEEP_GUINETWORK_H

@@ -30,11 +30,11 @@ GuiWizard::GuiWizard( QWidget *parent )
   : QDialog( parent )
 {
   setupUi( this );
-
   setWindowTitle( Settings::instance().programName() );
-
   mp_lWelcome->setText( tr( "Welcome to <b>%1 Network</b>." ).arg( Settings::instance().programName() ) );
-  connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkSettings() ) );
+  m_userName = "";
+  connect( mp_pbChangeUser, SIGNAL( clicked() ), this, SLOT( saveSettings() ) );
+  connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
 void GuiWizard::loadSettings()
@@ -51,7 +51,7 @@ void GuiWizard::loadSettings()
     mp_leName->setText( Settings::instance().localUser().name() );
 }
 
-void GuiWizard::checkSettings()
+void GuiWizard::saveSettings()
 {
   QString user_name = mp_leName->text().simplified();
   if( user_name.isEmpty() )
@@ -61,9 +61,12 @@ void GuiWizard::checkSettings()
     return;
   }
 
-  User u = Settings::instance().localUser();
-  u.setName( user_name );
-  Settings::instance().setLocalUser( u );
-  accept();
+  if( user_name != Settings::instance().localUser().name() )
+  {
+    m_userName = user_name;
+    accept();
+  }
+  else
+    reject();
 }
 

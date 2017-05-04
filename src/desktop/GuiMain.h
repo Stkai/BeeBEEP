@@ -100,7 +100,7 @@ private slots:
   void showPluginHelp();
   void showPluginManager();
   void showChat( VNumber );
-  void showWizard();
+  bool showWizard();
   void trayIconClicked( QSystemTrayIcon::ActivationReason );
   void trayMessageClicked();
   void addToShare( const QString& );
@@ -177,6 +177,7 @@ private slots:
   void showLogWindow();
   void onLogWindowClosed();
   void onMainTabChanged( int );
+  void showWorkgroups();
 
 protected:
   void keyPressEvent( QKeyEvent* );

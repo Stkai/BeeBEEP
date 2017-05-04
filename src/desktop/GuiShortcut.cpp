@@ -30,8 +30,8 @@ GuiShortcut::GuiShortcut( QWidget *parent )
   : QDialog( parent )
 {
   setupUi( this );
-
   setWindowTitle( tr( "Shortcuts" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+  setWindowIcon( QIcon( ":/images/shortcut.png" ) );
 
   QStringList labels;
   labels << tr( "Key" ) << tr( "Action" );

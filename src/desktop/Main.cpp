@@ -101,7 +101,6 @@ int main( int argc, char *argv[] )
   qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().load();
   Settings::instance().createLocalUser();
-  Settings::instance().createLocalUserHash();
   Settings::instance().createApplicationUuid();
   Log::instance().setMaxLogLines( Settings::instance().maxLogLines() );
   qDebug() << "Log has set max lines to:" << (int)Settings::instance().maxLogLines();

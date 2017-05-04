@@ -32,8 +32,8 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiPluginManager" );
-
   setWindowTitle( tr( "Plugin Manager - %1" ).arg( Settings::instance().programName() ) );
+  setWindowIcon( QIcon( ":/images/plugin.png" ) );
 
   m_changed = false;
 

@@ -24,13 +24,13 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiLog.h \
   desktop/GuiMain.h \
   desktop/GuiMessageEdit.h \
+  desktop/GuiNetwork.h \
   desktop/GuiPluginManager.h \
   desktop/GuiPresetMessageList.h \
   desktop/GuiSavedChat.h \
   desktop/GuiSavedChatItem.h \
   desktop/GuiSavedChatList.h \
   desktop/GuiScreenShot.h \
-  desktop/GuiSearchUser.h \
   desktop/GuiShareBox.h \
   desktop/GuiShareBoxFileInfoItem.h \
   desktop/GuiShareBoxFileInfoList.h \
@@ -42,7 +42,8 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiUserItem.h \
   desktop/GuiUserList.h \
   desktop/GuiVCard.h \
-  desktop/GuiWizard.h
+  desktop/GuiWizard.h \
+  desktop/GuiWorkgroups.h
 
 
 SOURCES +=  desktop/BeeApplication.cpp \
@@ -68,13 +69,13 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiLog.cpp \
   desktop/GuiMain.cpp \
   desktop/GuiMessageEdit.cpp \
+  desktop/GuiNetwork.cpp \
   desktop/GuiPluginManager.cpp \
   desktop/GuiPresetMessageList.cpp \
   desktop/GuiSavedChat.cpp \
   desktop/GuiSavedChatItem.cpp \
   desktop/GuiSavedChatList.cpp \
   desktop/GuiScreenShot.cpp \
-  desktop/GuiSearchUser.cpp \
   desktop/GuiShareBox.cpp \
   desktop/GuiShareBoxFileInfoItem.cpp \
   desktop/GuiShareBoxFileInfoList.cpp \
@@ -87,6 +88,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiUserList.cpp \
   desktop/GuiVCard.cpp \
   desktop/GuiWizard.cpp \
+  desktop/GuiWorkgroups.cpp \
   desktop/Main.cpp
 
 
@@ -98,13 +100,14 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiEditVCard.ui \
   desktop/GuiHome.ui \
   desktop/GuiLanguage.ui \
+  desktop/GuiNetwork.ui \
   desktop/GuiPluginManager.ui \
   desktop/GuiSavedChat.ui \
-  desktop/GuiSearchUser.ui \
   desktop/GuiShareBox.ui \
   desktop/GuiShareLocal.ui \
   desktop/GuiShareNetwork.ui \
   desktop/GuiShortcut.ui \
   desktop/GuiUserList.ui \
   desktop/GuiVCard.ui \
-  desktop/GuiWizard.ui
+  desktop/GuiWizard.ui \
+  desktop/GuiWorkgroups.ui

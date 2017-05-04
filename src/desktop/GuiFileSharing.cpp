@@ -27,19 +27,12 @@
 #include "FileInfo.h"
 #include "FileShare.h"
 #include "GuiConfig.h"
-#include "GuiHome.h"
-#include "GuiLog.h"
-#include "GuiSearchUser.h"
 #include "GuiShareBox.h"
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
 #include "GuiFileSharing.h"
-#include "PluginManager.h"
 #include "Settings.h"
 #include "UserManager.h"
-#ifdef Q_OS_WIN
-  #include <windows.h>
-#endif
 
 
 GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )

@@ -60,6 +60,7 @@ public:
   bool checkSavingPaths();
 
   /* CoreUser */
+  bool changeLocalUser( const QString& );
   inline int connectedUsers() const;
   bool isUserConnected( VNumber ) const;
   bool areUsersConnected( const QList<VNumber>& ) const;

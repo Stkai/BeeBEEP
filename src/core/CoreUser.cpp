@@ -85,8 +85,6 @@ void Core::showUserNameChanged( const User& u, const QString& old_user_name )
     sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( old_user_name, u.name() );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
-
-  emit userChanged( u );
 }
 
 void Core::showUserVCardChanged( const User& u )
@@ -119,12 +117,32 @@ void Core::sendLocalUserStatus()
     c->sendData( user_status_message );
 }
 
+bool Core::changeLocalUser( const QString& user_name )
+{
+  if( isConnected() )
+  {
+    qWarning() << "Unable to change user if core is connected";
+    return false;
+  }
+
+  User u = Settings::instance().localUser();
+  QString old_user_name = u.name();
+  u.setName( user_name );
+  u.setHash( Settings::instance().createLocalUserHash() );
+  Settings::instance().setLocalUser( u );
+  Settings::instance().save();
+  showUserNameChanged( u, old_user_name );
+  emit userChanged( u );
+  return true;
+}
+
 bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
 {
   User u = Settings::instance().localUser();
   bool nick_name_changed = false;
   bool color_changed = false;
   bool vc_changed = true;
+  QString old_user_name = "";
 
   if( u.vCard().nickName() != vc.nickName() )
   {
@@ -132,6 +150,7 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
     qDebug() << "Local user nickname is changed";
 #endif
     nick_name_changed = true;
+    old_user_name = u.vCard().nickName();
   }
 
   if( u.color() != user_color )
@@ -162,18 +181,23 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   QByteArray vcard_message = Protocol::instance().localVCardMessage();
   QByteArray nick_message = Protocol::instance().localUserNameMessage();
 
-  foreach( Connection *c, m_connections )
+  if( isConnected() )
   {
-    if( c->protoVersion() == 1 )
+    foreach( Connection *c, m_connections )
     {
-      if( nick_name_changed )
-        c->sendData( nick_message );
+      if( c->protoVersion() == 1 )
+      {
+        if( nick_name_changed )
+          c->sendData( nick_message );
+      }
+      else
+        c->sendData( vcard_message );
     }
-    else
-      c->sendData( vcard_message );
   }
 
   showUserVCardChanged( u );
+  if( nick_name_changed )
+    showUserNameChanged( u, old_user_name );
   emit userChanged( u );
   return true;
 }

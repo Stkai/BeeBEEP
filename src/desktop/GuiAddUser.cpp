@@ -34,11 +34,17 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   setupUi( this );
 
   setWindowTitle( tr( "Add users" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+  setWindowIcon( QIcon( ":/images/user-add.png" ) );
 
-  QString s_txt1 = mp_lHelp->text();
-  QString s_txt2 = tr( "your IP is %1 in LAN %2").arg( Settings::instance().localUser().networkAddress().hostAddress().toString() )
-                                                 .arg( NetworkManager::instance().localBroadcastAddress().toString() );
-  QString s_header = QString( "%1\n(%2)" ).arg( s_txt1 ).arg( s_txt2 );
+  QString s_txt1 = QString( "<b>%1</b>&nbsp;&nbsp;&nbsp;%2: <b>%3</b>&nbsp;&nbsp;&nbsp;%4: <b>%5</b>&nbsp;&nbsp;&nbsp;%6: %7" )
+                     .arg( tr( "Your parameters" ) )
+                     .arg( tr( "IP Address" ) ).arg( Settings::instance().localUser().networkAddress().hostAddress().toString() )
+                     .arg( tr( "Port" ) ).arg( Settings::instance().localUser().networkAddress().hostPort() )
+                     .arg( tr( "Subnet" ) ).arg( NetworkManager::instance().localBroadcastAddress().toString() );
+
+  QString s_txt2 = mp_lHelp->text();
+
+  QString s_header = QString( "%1<br /><br />%2." ).arg( s_txt1 ).arg( s_txt2 );
   mp_lHelp->setText( s_header );
   mp_twUsers->setColumnCount( 2 );
   QStringList labels;
@@ -105,7 +111,7 @@ void GuiAddUser::addUser()
   QString ip_address = mp_leIpAddress->text().simplified();
   if( ip_address.isEmpty() || QHostAddress( ip_address ).isNull() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert a valid IP address.") );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert a valid IP Address.") );
     mp_leIpAddress->setFocus();
     return;
   }
@@ -115,7 +121,7 @@ void GuiAddUser::addUser()
 
   if( !ok || address_port < 1 || address_port > 65535 )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert a valid port or use the default one %1." ).arg( DEFAULT_LISTENER_PORT ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert a valid Port or use the default one %1." ).arg( DEFAULT_LISTENER_PORT ) );
     mp_lePort->setFocus();
     return;
   }
@@ -147,7 +153,7 @@ void GuiAddUser::addUser()
     ur.setComment( user_comment );
     if( m_users.contains( ur ) )
     {
-      QMessageBox::information( this, Settings::instance().programName(), tr( "These IP address and port are already inserted in list." ) );
+      QMessageBox::information( this, Settings::instance().programName(), tr( "These IP Address and Port are already in list." ) );
       mp_leIpAddress->setFocus();
       return;
     }
@@ -204,7 +210,7 @@ void GuiAddUser::removeUserPath()
   QList<QTreeWidgetItem*> items = mp_twUsers->selectedItems();
   if( items.isEmpty() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select an user path in the list." ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select an item in the list." ) );
     return;
   }
 

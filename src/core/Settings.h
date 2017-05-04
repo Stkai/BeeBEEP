@@ -43,7 +43,7 @@ public:
   QString operatingSystemIconPath() const;
   QString accountNameFromSystemEnvinroment() const;
   void createLocalUser();
-  void createLocalUserHash();
+  QString createLocalUserHash();
   void setResourceFolder();
   bool setDataFolder();
   bool createDefaultRcFile();
@@ -261,8 +261,8 @@ public:
   inline bool askPasswordAtStartup() const;
   bool askPassword() const;
 
-  inline void setAskNicknameAtStartup( bool );
-  inline bool askNicknameAtStartup() const;
+  inline void setAskChangeUserAtStartup( bool );
+  inline bool askChangeUserAtStartup() const;
 
   inline bool logToFile() const;
   inline void setLogToFile( bool );
@@ -576,7 +576,7 @@ private:
   bool m_useDefaultPassword;
   bool m_savePassword;
   bool m_askPasswordAtStartup;
-  bool m_askNicknameAtStartup;
+  bool m_askChangeUserAtStartup;
   QString m_language;
   bool m_beepOnNewMessageArrived;
   QString m_beepFilePath;
@@ -741,8 +741,8 @@ inline bool Settings::savePassword() const { return m_savePassword; }
 inline const QString& Settings::passwordBeforeHash() const { return m_passwordBeforeHash; }
 inline void Settings::setAskPasswordAtStartup( bool new_value ) { m_askPasswordAtStartup = new_value; }
 inline bool Settings::askPasswordAtStartup() const { return m_askPasswordAtStartup; }
-inline void Settings::setAskNicknameAtStartup( bool new_value ) { m_askNicknameAtStartup = new_value; }
-inline bool Settings::askNicknameAtStartup() const { return m_askNicknameAtStartup; }
+inline void Settings::setAskChangeUserAtStartup( bool new_value ) { m_askChangeUserAtStartup = new_value; }
+inline bool Settings::askChangeUserAtStartup() const { return m_askChangeUserAtStartup; }
 inline bool Settings::logToFile() const { return m_logToFile; }
 inline void Settings::setLogToFile( bool new_value ) { m_logToFile = new_value; }
 inline int Settings::maxLogLines() const { return m_maxLogLines; }

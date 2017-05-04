@@ -218,15 +218,17 @@ void Settings::createLocalUser()
   m_localUser.setProtocolVersion( protoVersion() );
   qDebug() << "User name:" << m_localUser.name();
   qDebug() << "System Account:" << m_localUser.accountName();
+  if( m_localUser.hash().isEmpty() )
+    m_localUser.setHash( Settings::instance().createLocalUserHash() );
 }
 
-void Settings::createLocalUserHash()
+QString Settings::createLocalUserHash()
 {
   QString hash_parameters = QString( "%1%2%3%4" ).arg( m_localUser.accountName() ).arg( m_localUser.name() )
           .arg( version( true, true ) ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
   qDebug() << "Local user HASH created:" << local_user_hash;
-  m_localUser.setHash( local_user_hash );
+  return local_user_hash;
 }
 
 bool Settings::createDefaultRcFile()
@@ -814,6 +816,7 @@ void Settings::load()
 
   sets->beginGroup( "User" );
   m_trustUserHash = sets->value( "TrustUserHash", m_trustUserHash ).toBool();
+  m_localUser.setHash( sets->value( "LocalHash", "" ).toString() );
   m_localUser.setName( sets->value( "LocalName", "" ).toString() ); // For Backward compatibility, if empty the name is set after
   m_localUser.setColor( sets->value( "LocalColor", "#000000" ).toString() );
   m_localUser.setStatus( sets->value( "LocalLastStatus", m_localUser.status() ).toInt() );
@@ -823,13 +826,13 @@ void Settings::load()
   if( m_useEasyConnection )
   {
     m_useDefaultPassword = true;
-    m_askNicknameAtStartup = false;
+    m_askChangeUserAtStartup = false;
     m_askPasswordAtStartup = false;
   }
   else
   {
     m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
-    m_askNicknameAtStartup = sets->value( "AskNicknameAtStartup", m_firstTime ).toBool();
+    m_askChangeUserAtStartup = sets->value( "AskChangeUserAtStartup", m_firstTime ).toBool();
     m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", m_firstTime  ).toBool();
   }
 
@@ -1132,12 +1135,13 @@ void Settings::save()
   sets->endGroup();
   sets->beginGroup( "User" );
   sets->setValue( "TrustUserHash", m_trustUserHash );
+  sets->setValue( "LocalHash", m_localUser.hash() );
   sets->setValue( "LocalColor", m_localUser.color() );
   sets->setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
   sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes
-  sets->setValue( "AskNicknameAtStartup", m_askNicknameAtStartup );
+  sets->setValue( "AskChangeUserAtStartup", m_askChangeUserAtStartup );
   sets->setValue( "UseDefaultPassword", m_useDefaultPassword );
   sets->setValue( "AskPasswordAtStartup", m_askPasswordAtStartup );
   if( m_savePassword )

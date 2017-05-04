@@ -496,28 +496,12 @@
         <translation>Commento</translation>
     </message>
     <message>
-        <source>Please insert a valid IP address.</source>
-        <translation>Inserisci un indirizzo IP valido.</translation>
-    </message>
-    <message>
-        <source>Please insert a valid port or use the default one %1.</source>
-        <translation>Inserisci una porta valida o usa quella predefinita %1.</translation>
-    </message>
-    <message>
-        <source>These IP address and port are already inserted in list.</source>
-        <translation>Questa combinazione di indirizzo IP e porta è già stata inserita in lista.</translation>
-    </message>
-    <message>
         <source>Address</source>
         <translation>Indirizzo</translation>
     </message>
     <message>
         <source>Remove user path</source>
         <translation>Rimuovi l&apos;indirizzo utente</translation>
-    </message>
-    <message>
-        <source>Please select an user path in the list.</source>
-        <translation>Seleziona un indirizzo utente nella lista.</translation>
     </message>
     <message>
         <source>Clear all</source>
@@ -528,12 +512,40 @@
         <translation>aggiunto automaticamente</translation>
     </message>
     <message>
-        <source>your IP is %1 in LAN %2</source>
-        <translation>il tuo IP è %1 nella LAN %2</translation>
-    </message>
-    <message>
         <source>Add users</source>
         <translation>Aggiungi utenti</translation>
+    </message>
+    <message>
+        <source>Your parameters</source>
+        <translation>I tuoi parametri</translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation>Indirizzo IP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Porta</translation>
+    </message>
+    <message>
+        <source>Subnet</source>
+        <translation>Sottorete</translation>
+    </message>
+    <message>
+        <source>Please insert a valid IP Address.</source>
+        <translation>Inserisci un Indirizzo IP valido.</translation>
+    </message>
+    <message>
+        <source>Please insert a valid Port or use the default one %1.</source>
+        <translation>Inserisci una Porta valida o usa quella predefinita %1.</translation>
+    </message>
+    <message>
+        <source>These IP Address and Port are already in list.</source>
+        <translation>Questo Indirizzo IP e questa Porta sono già presenti nella lista.</translation>
+    </message>
+    <message>
+        <source>Please select an item in the list.</source>
+        <translation>Seleziona un elemento della lista.</translation>
     </message>
 </context>
 <context>
@@ -541,10 +553,6 @@
     <message>
         <source>Dialog</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Add an IP address and port of the user you want to connect</source>
-        <translation>Aggiungo un indirizzo IP e la porta dell&apos;utente a cui ti vuoi connettere</translation>
     </message>
     <message>
         <source>IP Address</source>
@@ -567,20 +575,20 @@
         <translation>Annulla</translation>
     </message>
     <message>
-        <source>Add</source>
-        <translation>Aggiungi</translation>
+        <source>Add an &lt;b&gt;IP Address&lt;/b&gt; and &lt;b&gt;Port&lt;/b&gt; of the user you want to connect</source>
+        <translation>Aggiungi &lt;b&gt;un Indirizzo IP&lt;/b&gt; e la &lt;b&gt;Porta&lt;/b&gt; dell&apos;utente a cui ti vuoi connettere</translation>
     </message>
     <message>
-        <source>Click here to add user path</source>
-        <translation>Premi qui per aggiungere un indirizzo utente</translation>
+        <source>Split Subnet in IP Addresses to add all users in that range</source>
+        <translation>Suddividi la Sottorete in Indirizzi IP per aggiungere tutti gli utenti in quel raggio</translation>
     </message>
     <message>
-        <source>Auto add from LAN</source>
-        <translation>Aggiungi dalla LAN</translation>
+        <source>Add user</source>
+        <translation>Aggiungi utente</translation>
     </message>
     <message>
-        <source>Split in IPv4 addresses</source>
-        <translation>Usa i singoli indirizzi IPv4 invece di una sottorete</translation>
+        <source>Auto add from your Subnet</source>
+        <translation>Aggiungi automaticamente dalla tua Sottorete</translation>
     </message>
 </context>
 <context>
@@ -1588,10 +1596,6 @@ Inserisci un nome differente.</translation>
         <translation>Perle di saggezza</translation>
     </message>
     <message>
-        <source>Select language...</source>
-        <translation>Seleziona una lingua...</translation>
-    </message>
-    <message>
         <source>Enable file transfer</source>
         <translation>Abilita il trasferimento dei file</translation>
     </message>
@@ -1876,16 +1880,8 @@ Inserisci un nome differente.</translation>
         <translation>Mostra solo notifiche dei messaggi</translation>
     </message>
     <message>
-        <source>Shortcuts...</source>
-        <translation>Scorciatoie...</translation>
-    </message>
-    <message>
         <source>Open your resource folder</source>
         <translation>Apri la tua cartella delle risorse</translation>
-    </message>
-    <message>
-        <source>Dictionary...</source>
-        <translation>Dizionario...</translation>
     </message>
     <message>
         <source>Select your dictionary path</source>
@@ -2088,10 +2084,6 @@ Inserisci un nome differente.</translation>
         <translation>Avvio in corso</translation>
     </message>
     <message>
-        <source>Prompts for nickname</source>
-        <translation>Chiedi il soprannome</translation>
-    </message>
-    <message>
         <source>Prompts for network password</source>
         <translation>Chiedi la password di rete</translation>
     </message>
@@ -2179,6 +2171,26 @@ Inserisci un nome differente.</translation>
         <source>Enable file sharing</source>
         <translation>Abilita la condivisione dei file</translation>
     </message>
+    <message>
+        <source>Workgroups</source>
+        <translation>Gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Shortcuts</source>
+        <translation>Scorciatoie</translation>
+    </message>
+    <message>
+        <source>Select language</source>
+        <translation>Seleziona una lingua</translation>
+    </message>
+    <message>
+        <source>Dictionary</source>
+        <translation>Dizionario</translation>
+    </message>
+    <message>
+        <source>Prompts for change user</source>
+        <translation>Chiedi il cambio di utente</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2205,6 +2217,94 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Select All</source>
         <translation>Seleziona tutto</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetwork</name>
+    <message>
+        <source>Network</source>
+        <translation>Rete</translation>
+    </message>
+    <message>
+        <source>Unknown address</source>
+        <translation>Indirizzo IP sconosciuto</translation>
+    </message>
+    <message>
+        <source>File is empty</source>
+        <translation>Il file è vuoto</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Attenzione</translation>
+    </message>
+    <message>
+        <source>You have inserted an invalid host address:
+%1 is removed from the list.</source>
+        <translation>Hai inserito un indirizzo IP non valido:
+%1 verrà rimosso dalla lista.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkWidget</name>
+    <message>
+        <source>* (read only section)</source>
+        <translation>* (sezione non modificabile da qui)</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Addresses in beehosts.ini *</source>
+        <translation>Indirizzi IP in beehosts.ini *</translation>
+    </message>
+    <message>
+        <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
+        <translation>Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+    </message>
+    <message>
+        <source>Enable broadcast interval</source>
+        <translation>Abilita la ricerca automatica ogni </translation>
+    </message>
+    <message>
+        <source>Max users to contact every second</source>
+        <translation>Numero di utenti da contattare ogni secondo</translation>
+    </message>
+    <message>
+        <source>seconds (0=disabled, 0=default)</source>
+        <translation>secondi (0=disabilitata, 0=predefinita)</translation>
+    </message>
+    <message>
+        <source>Enable Zero Configuration Networking</source>
+        <translation>Abilita Zero Configuration Networking</translation>
+    </message>
+    <message>
+        <source>UDP Port in beebeep.rc *</source>
+        <translation>Porta UDP in beebeep.rc *</translation>
+    </message>
+    <message>
+        <source>Local subnet address *</source>
+        <translation>Sottorete locale *</translation>
+    </message>
+    <message>
+        <source>Multicast group in beebeep.rc *</source>
+        <translation>Gruppo multicast in beebeep.rc *</translation>
+    </message>
+    <message>
+        <source>(the same for all clients)</source>
+        <translation>(la stessa per tutti i client)</translation>
+    </message>
+    <message>
+        <source>(search users here by default)</source>
+        <translation>(cerca utenti automaticamente in questa)</translation>
     </message>
 </context>
 <context>
@@ -2460,99 +2560,6 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Delete screenshot</source>
         <translation>Cancella l&apos;immagine</translation>
-    </message>
-</context>
-<context>
-    <name>GuiSearchUser</name>
-    <message>
-        <source>Dialog</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annulla</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Attenzione</translation>
-    </message>
-    <message>
-        <source>You have inserted an invalid host address:
-%1 is removed from the list.</source>
-        <translation>Hai inserito un indirizzo IP non valido:
-%1 verrà rimosso dalla lista.</translation>
-    </message>
-    <message>
-        <source>Unknown address</source>
-        <translation>Indirizzo IP sconosciuto</translation>
-    </message>
-    <message>
-        <source>File is empty</source>
-        <translation>Il file è vuoto</translation>
-    </message>
-    <message>
-        <source>Local subnet address *</source>
-        <translation>Sottorete locale *</translation>
-    </message>
-    <message>
-        <source>Addresses in beehosts.ini *</source>
-        <translation>Indirizzi IP in beehosts.ini *</translation>
-    </message>
-    <message>
-        <source>UDP Port in beebeep.rc *</source>
-        <translation>Porta UDP in beebeep.rc *</translation>
-    </message>
-    <message>
-        <source>* (read only section)</source>
-        <translation>* (sezione non modificabile da qui)</translation>
-    </message>
-    <message>
-        <source>(the same for all clients)</source>
-        <translation>(la stessa per tutti i client)</translation>
-    </message>
-    <message>
-        <source>(search users here by default)</source>
-        <translation>(cerca utenti automaticamente in questa)</translation>
-    </message>
-    <message>
-        <source>Enable Zero Configuration Networking</source>
-        <translation>Abilita Zero Configuration Networking</translation>
-    </message>
-    <message>
-        <source>Workgroups (enter your network groups separated by comma)</source>
-        <translation>Gruppi di lavoro (inserisci i tuoi gruppi di rete separati da una virgola)</translation>
-    </message>
-    <message>
-        <source>Accept connections only from your workgroups</source>
-        <translation>Accetta solo connessioni dai membri dei tuoi gruppi di lavoro</translation>
-    </message>
-    <message>
-        <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation>Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
-    </message>
-    <message>
-        <source>Multicast group in beebeep.rc *</source>
-        <translation>Gruppo multicast in beebeep.rc *</translation>
-    </message>
-    <message>
-        <source>Enable broadcast interval</source>
-        <translation>Abilita la ricerca automatica ogni </translation>
-    </message>
-    <message>
-        <source>Max users to contact every second</source>
-        <translation>Numero di utenti da contattare ogni secondo</translation>
-    </message>
-    <message>
-        <source>seconds (0=disabled, 0=default)</source>
-        <translation>secondi (0=disabilitata, 0=predefinita)</translation>
-    </message>
-    <message>
-        <source>Network settings</source>
-        <translation>Preferenze di rete</translation>
     </message>
 </context>
 <context>
@@ -3058,10 +3065,6 @@ Inserisci un nome differente.</translation>
         <translation></translation>
     </message>
     <message>
-        <source>User ID</source>
-        <translation>ID Utente</translation>
-    </message>
-    <message>
         <source>Phone</source>
         <translation>Telefono</translation>
     </message>
@@ -3151,8 +3154,66 @@ Inserisci un nome differente.</translation>
         <translation></translation>
     </message>
     <message>
+        <source>Change user</source>
+        <translation>Cambia utente</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+</context>
+<context>
+    <name>GuiWorkgroups</name>
+    <message>
+        <source>Workgroups</source>
+        <translation>Gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Clear all</source>
+        <translation>Cancella tutti</translation>
+    </message>
+    <message>
+        <source>Please select an item in the list.</source>
+        <translation>Seleziona un elemento della lista.</translation>
+    </message>
+    <message>
+        <source>Remove workgroup</source>
+        <translation>Rimuovi gruppo di lavoro</translation>
+    </message>
+    <message>
+        <source>Please insert a workgroup.</source>
+        <translation>Inserisci un gruppo di lavoro.</translation>
+    </message>
+    <message>
+        <source>This workgroup is already in list.</source>
+        <translation>Questo gruppo di lavoro è già presente nella lista.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiWorkgroupsDialog</name>
+    <message>
+        <source>Add</source>
+        <translation>Aggiungi</translation>
+    </message>
+    <message>
+        <source>Accept connections only from your workgroups</source>
+        <translation>Accetta solo connessioni dai membri dei tuoi gruppi di lavoro</translation>
+    </message>
+    <message>
         <source>Ok</source>
         <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
+        <translation>Gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Enter the name of workgroup you want to add </source>
+        <translation>Inserisci il nome del gruppo di lavoro</translation>
     </message>
 </context>
 <context>

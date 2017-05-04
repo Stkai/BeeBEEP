@@ -45,7 +45,7 @@
 #include "GuiSavedChat.h"
 #include "GuiSavedChatList.h"
 #include "GuiScreenShot.h"
-#include "GuiSearchUser.h"
+#include "GuiNetwork.h"
 #include "GuiShareBox.h"
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   #include "GuiShareDesktop.h"
@@ -59,6 +59,7 @@
 #include "GuiMain.h"
 #include "GuiVCard.h"
 #include "GuiWizard.h"
+#include "GuiWorkgroups.h"
 #include "PluginManager.h"
 #include "Protocol.h"
 #include "SaveChatList.h"
@@ -214,9 +215,11 @@ void GuiMain::checkWindowFlagsAndShow()
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width()+10, qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
-    move( QApplication::desktop()->availableGeometry().width() - width() - 20,
-          ((QApplication::desktop()->availableGeometry().height() - height()) / 3) );
+    resize( width(), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
+    int diff_w = qMax( 20, QApplication::desktop()->screenGeometry().width() - QApplication::desktop()->availableGeometry().width() );
+    int diff_h = qMax( 20, QApplication::desktop()->screenGeometry().height() - QApplication::desktop()->availableGeometry().height() );
+    move( QApplication::desktop()->availableGeometry().width() - width() - diff_w,
+          QApplication::desktop()->availableGeometry().height() - height() - diff_h );
     mp_dockFileTransfers->setVisible( false );
   }
   else
@@ -447,16 +450,20 @@ void GuiMain::startCore()
   if( Settings::instance().firstTime() )
   {
     Settings::instance().setFirstTime( false );
-    if( Settings::instance().askNicknameAtStartup() )
+    if( Settings::instance().askChangeUserAtStartup() )
     {
-      showWizard();
-      Settings::instance().setAskNicknameAtStartup( false );
+      if( !showWizard() )
+        return;
+      Settings::instance().setAskChangeUserAtStartup( false );
     }
   }
   else
   {
-    if( Settings::instance().askNicknameAtStartup() )
-      showWizard();
+    if( Settings::instance().askChangeUserAtStartup() )
+    {
+      if( !showWizard() )
+        return;
+    }
   }
 
   if( Settings::instance().askPassword() )
@@ -650,9 +657,9 @@ void GuiMain::createMenus()
   mp_menuStartupSettings = new QMenu( tr( "On start" ), this );
   mp_menuStartupSettings->setIcon( QIcon( ":/images/settings-start.png" ) );
   mp_menuSettings->addMenu( mp_menuStartupSettings );
-  act = mp_menuStartupSettings->addAction( tr( "Prompts for nickname" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuStartupSettings->addAction( tr( "Prompts for change user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().askNicknameAtStartup() );
+  act->setChecked( Settings::instance().askChangeUserAtStartup() );
   act->setData( 45 );
   mp_actPromptPassword = mp_menuStartupSettings->addAction( tr( "Prompts for network password" ), this, SLOT( settingsChanged() ) );
   mp_actPromptPassword->setCheckable( true );
@@ -713,6 +720,8 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().saveUserList() );
   act->setData( 32 );
+  mp_menuUsersSettings->addSeparator();
+  mp_menuUsersSettings->addAction( QIcon( ":/images/workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
 
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
   mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
@@ -817,9 +826,9 @@ void GuiMain::createMenus()
 
   mp_menuSettings->addSeparator();
   mp_menuSettings->addAction( mp_actConfigureNetwork );
-  mp_menuSettings->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts..." ), this, SLOT( editShortcuts() ) );
-  mp_menuSettings->addAction( QIcon( ":/images/language.png" ), tr( "Select language..."), this, SLOT( selectLanguage() ) );
-  mp_menuSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary..." ), this, SLOT( selectDictionatyPath() ) );
+  mp_menuSettings->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
+  mp_menuSettings->addAction( QIcon( ":/images/language.png" ), tr( "Select language") + QString( "..." ), this, SLOT( selectLanguage() ) );
+  mp_menuSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
@@ -1318,7 +1327,7 @@ void GuiMain::settingsChanged()
     Settings::instance().setPostUsageStatistics( act->isChecked() );
     break;
   case 45:
-    Settings::instance().setAskNicknameAtStartup( act->isChecked() );
+    Settings::instance().setAskChangeUserAtStartup( act->isChecked() );
     break;
   case 46:
     Settings::instance().setShowChatMessageOnTray( act->isChecked() );
@@ -1523,13 +1532,13 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 
 void GuiMain::searchUsers()
 {
-  GuiSearchUser gsu( this );
-  gsu.setModal( true );
-  gsu.loadSettings();
-  gsu.setSizeGripEnabled( true );
-  gsu.show();
+  GuiNetwork gn;
+  gn.setModal( true );
+  gn.loadSettings();
+  gn.setSizeGripEnabled( true );
+  gn.show();
 
-  if( gsu.exec() != QDialog::Accepted )
+  if( gn.exec() != QDialog::Accepted )
     return;
 
   if( !mp_core->isConnected() )
@@ -1541,9 +1550,6 @@ void GuiMain::searchUsers()
   else
     mp_core->stopDnsMulticasting();
 #endif
-
-  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
-    qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
 
   QMetaObject::invokeMethod( this, "sendBroadcastMessage", Qt::QueuedConnection );
 }
@@ -1974,7 +1980,7 @@ void GuiMain::showChat( VNumber chat_id )
 
 void GuiMain::changeVCard()
 {
-  GuiEditVCard gvc( this );
+  GuiEditVCard gvc;
   gvc.setModal( true );
   gvc.setUser( Settings::instance().localUser() );
   gvc.setSizeGripEnabled( true );
@@ -2075,7 +2081,7 @@ void GuiMain::showPluginHelp()
 
 void GuiMain::showPluginManager()
 {
-  GuiPluginManager gpm( this );
+  GuiPluginManager gpm;
   gpm.setModal( true );
   gpm.setSizeGripEnabled( true );
   gpm.updatePlugins();
@@ -2085,7 +2091,7 @@ void GuiMain::showPluginManager()
     updadePluginMenu();
 }
 
-void GuiMain::showWizard()
+bool GuiMain::showWizard()
 {
   GuiWizard gw( this );
   gw.setModal( true );
@@ -2093,7 +2099,9 @@ void GuiMain::showWizard()
   gw.show();
   gw.setFixedSize( gw.size() );
   if( gw.exec() == QDialog::Accepted )
-    updateWindowTitle();
+    return mp_core->changeLocalUser( gw.userName() );
+  else
+    return false;
 }
 
 void GuiMain::hideToTrayIcon()
@@ -2293,7 +2301,7 @@ void GuiMain::playBeep()
 
 void GuiMain::createGroup()
 {
-  GuiCreateGroup gcg( this );
+  GuiCreateGroup gcg;
   gcg.loadData( true );
   gcg.setModal( true );
   gcg.show();
@@ -2340,7 +2348,7 @@ void GuiMain::createChat()
     return;
   }
 
-  GuiCreateGroup gcg( this );
+  GuiCreateGroup gcg;
   gcg.loadData( false );
   gcg.setModal( true );
   gcg.show();
@@ -2740,7 +2748,7 @@ void GuiMain::showSharesForUser( const User& u )
 
 void GuiMain::selectLanguage()
 {
-  GuiLanguage gl( this );
+  GuiLanguage gl;
   gl.setModal( true );
   gl.loadLanguages();
   gl.setSizeGripEnabled( true );
@@ -2771,7 +2779,7 @@ void GuiMain::selectLanguage()
 
 void GuiMain::showAddUser()
 {
-  GuiAddUser gad( this );
+  GuiAddUser gad;
   gad.loadUsers();
   gad.setModal( true );
   gad.setSizeGripEnabled( true );
@@ -3202,7 +3210,7 @@ void GuiMain::loadSavedChatsCompleted()
 
 void GuiMain::editShortcuts()
 {
-  GuiShortcut gs( this );
+  GuiShortcut gs;
   gs.setModal( true );
   gs.loadShortcuts();
   gs.setSizeGripEnabled( true );
@@ -3625,6 +3633,19 @@ void GuiMain::setFileSharingEnabled( bool enable )
   checkViewActions();
 }
 
+void GuiMain::showWorkgroups()
+{
+  GuiWorkgroups gw;
+  gw.loadWorkgroups();
+  gw.setModal( true );
+  gw.setSizeGripEnabled( true );
+  gw.show();
+  if( gw.exec() != QDialog::Accepted )
+    return;
+
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
+    qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
+}
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
