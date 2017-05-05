@@ -54,9 +54,11 @@ public:
   inline Message systemMessage( const QString& ) const;
   Message chatMessage( const Chat&, const QString& );
   Message chatReadMessage( const Chat& );
+  Message groupChatRequestMessage_obsolete( const Chat&, const User& to_user );
   Message groupChatRequestMessage( const Chat&, const User& to_user );
   Message groupChatRefuseMessage( const Chat& );
-  QStringList userPathsFromGroupRequestMessage( const Message& ) const;
+  QStringList userPathsFromGroupRequestMessage_obsolete( const Message& ) const;
+  QList<UserRecord> userRecordsFromGroupRequestMessage( const Message& ) const;
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
@@ -92,25 +94,29 @@ public:
   QList<FileInfo> messageToFileShare( const Message&, const QHostAddress& ) const;
   inline const QByteArray& fileShareRequestMessage() const;
 
-  QString temporaryUserName();
   User createUser( const Message&, const QHostAddress& );
-  User createTemporaryUser( const QString& user_path, const QString& account_name );
-  User createTemporaryUser( const QString& user_name, const QString& user_account_name, const QHostAddress& user_address, int user_port );
+  User createTemporaryUser( const UserRecord& );
   Chat createChat( const QList<VNumber>& user_list, const QString& chat_private_id );
   Group createGroup( const QString& group_name, const QString& group_private_id, const QList<VNumber>& user_list );
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
+
+  /* Fixme
   QList<Group> loadGroupsFromFile();
   User loadUserFromPath( const QString&, bool use_account_name );
+  */
 
   QString saveUser( const User& ) const;
   User loadUser( const QString& );
-  QString saveUserRecord( const UserRecord&, bool add_comment, bool add_extras ) const;
+  QString saveUserRecord( const UserRecord&, bool add_extras ) const;
   UserRecord loadUserRecord( const QString& ) const;
   QString saveUserStatusRecord( const UserStatusRecord& ) const;
   UserStatusRecord loadUserStatusRecord( const QString& ) const;
-  Message userRecordListToMessage( const QList<UserRecord>& );
-  QList<UserRecord> messageToUserRecordList( const Message& ) const;
+  Message userRecordListToHiveMessage( const QList<UserRecord>& );
+  QList<UserRecord> hiveMessageToUserRecordList( const Message& ) const;
+
+  QString saveNetworkAddress( const NetworkAddress& ) const;
+  NetworkAddress loadNetworkAddress( const QString& ) const;
 
   Message shareBoxRequestPathList( const QString& );
   Message refuseToShareBoxPath( const QString& );

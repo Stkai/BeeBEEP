@@ -356,8 +356,8 @@ public:
   inline void setGroupList( const QStringList& );
   inline const QStringList& groupList() const;
 
-  inline void setUserPathList( const QStringList& );
-  inline const QStringList& userPathList() const;
+  inline void setNetworkAddressList( const QStringList& );
+  inline const QStringList& networkAddressList() const;
   inline void setUserStatusList( const QStringList& );
   inline const QStringList& userStatusList() const;
   inline int maxUserStatusDescriptionInList() const;
@@ -619,7 +619,7 @@ private:
   int m_maxQueuedDownloads;
 
   QStringList m_groupList;
-  QStringList m_userPathList;
+  QStringList m_networkAddressList;
   QStringList m_groupSilenced;
   QStringList m_userStatusList;
   int m_maxUserStatusDescriptionInList;
@@ -819,8 +819,8 @@ inline const QDate& Settings::settingsCreationDate() const { return m_settingsCr
 inline void Settings::setGroupList( const QStringList& new_value ) { m_groupList = new_value; }
 inline const QStringList& Settings::groupList() const { return m_groupList; }
 inline const QDateTime& Settings::lastSave() const { return m_lastSave; }
-inline void Settings::setUserPathList( const QStringList& new_value ) { m_userPathList = new_value; }
-inline const QStringList& Settings::userPathList() const { return m_userPathList; }
+inline void Settings::setNetworkAddressList( const QStringList& new_value ) { m_networkAddressList = new_value; }
+inline const QStringList& Settings::networkAddressList() const { return m_networkAddressList; }
 inline void Settings::setUserStatusList( const QStringList& new_value ) { m_userStatusList = new_value; }
 inline const QStringList& Settings::userStatusList() const { return m_userStatusList; }
 inline void Settings::setSaveUserList( bool new_value ) { m_saveUserList = new_value; }

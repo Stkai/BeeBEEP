@@ -142,11 +142,32 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     else
       mp_pbBuzz->hide();
 
-    if( u.isStatusConnected() || UserManager::instance().isUserInGroups( u.id() )
-            || ChatManager::instance().userIsInGroupChat( u.id() ) )
-      mp_pbRemove->hide();
+    bool remove_is_enabled;
+    QString remove_tooltip;
+
+    if( u.isStatusConnected() )
+    {
+      remove_is_enabled = false;
+      remove_tooltip = tr( "You cannot remove an user who is connected" );
+    }
+    else if( UserManager::instance().isUserInGroups( u.id() ) )
+    {
+      remove_is_enabled = false;
+      remove_tooltip = tr( "You cannot remove an user who is in group" );
+    }
+    else if( ChatManager::instance().userIsInGroupChat( u.id() ) )
+    {
+      remove_is_enabled = false;
+      remove_tooltip = tr( "You cannot remove an user who is in group chat" );
+    }
     else
-      mp_pbRemove->show();
+    {
+      remove_is_enabled = true;
+      remove_tooltip = tr( "Remove this user" );
+    }
+
+    mp_pbRemove->setToolTip( remove_tooltip );
+    mp_pbRemove->setEnabled( remove_is_enabled );
   }
 }
 

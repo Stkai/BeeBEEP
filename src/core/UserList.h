@@ -44,7 +44,6 @@ public:
   inline int size() const;
   inline bool isEmpty() const;
 
-  QStringList toStringList( bool only_user_name, bool only_connected ) const;
   UserList fromUsersId( const QList<VNumber>& ) const;
   QList<VNumber> toUsersId() const;
   inline const QList<User>& toList() const;

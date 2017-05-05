@@ -26,6 +26,7 @@
 
 #include "UserList.h"
 #include "Group.h"
+class UserRecord;
 
 
 class UserManager
@@ -43,6 +44,7 @@ public:
   User findUserByHash( const QString& ) const;
   User findUserByHostAddressAndPort( const QHostAddress&, int );
   User findUserByNickname( const QString& ) const;
+  User findUserByUserRecord( const UserRecord& ) const;
 
   inline const QList<Group>& groups() const;
   void setGroup( const Group& );

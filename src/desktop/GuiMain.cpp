@@ -215,23 +215,13 @@ void GuiMain::checkWindowFlagsAndShow()
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width(), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
-    int diff_w = qMax( 0, QApplication::desktop()->screenGeometry().width() - QApplication::desktop()->availableGeometry().width() );
-    int diff_h = qMax( 0, QApplication::desktop()->screenGeometry().height() - QApplication::desktop()->availableGeometry().height() );
+    resize( width()+12, qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
 
 #ifdef Q_OS_WIN
-    diff_w += qMax( 20, diff_w );
-    diff_h += qMax( 20, diff_h );
-    move( QApplication::desktop()->availableGeometry().width() - width() - diff_w,
-          QApplication::desktop()->availableGeometry().height() - height() - diff_h );
-#elif defined Q_OS_MAC
-    diff_h = 0; // skip only macosx top bar
-    move( QApplication::desktop()->availableGeometry().width() - width() - diff_w, diff_h );
+    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(),
+          QApplication::desktop()->availableGeometry().height() - frameGeometry().height() );
 #else
-    diff_w += qMax( 15, diff_w );
-    diff_h += qMax( 15, diff_h );
-    move( QApplication::desktop()->availableGeometry().width() - width() - diff_w,
-          diff_h );
+    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 0 );
 #endif
     mp_dockFileTransfers->setVisible( false );
   }
@@ -860,7 +850,8 @@ void GuiMain::createMenus()
 #endif
 
   mp_menuSettings->addSeparator();
-  mp_menuSettings->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
+  mp_actSaveWindowGeometry = mp_menuSettings->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
+  mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
@@ -1260,7 +1251,12 @@ void GuiMain::settingsChanged()
     Settings::instance().setShowVCardOnRightClick( act->isChecked() );
     break;
   case 26:
-    Settings::instance().setResetGeometryAtStartup( act->isChecked() );
+    {
+      Settings::instance().setResetGeometryAtStartup( act->isChecked() );
+      mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
+      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        fl_chat->setSaveGeometryDisabled( Settings::instance().resetGeometryAtStartup() );
+    }
     break;
   case 27:
     {
@@ -1707,7 +1703,13 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
 
   if( !u.isValid() )
   {
-    QStringList user_string_list = UserManager::instance().userList().toStringList( false, true );
+    QStringList user_string_list;
+    foreach( User u, UserManager::instance().userList().toList() )
+    {
+      if( u.isStatusConnected() )
+        user_string_list.append( u.path() );
+    }
+
     if( user_string_list.isEmpty() )
     {
       QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "There is no user connected." ) );
@@ -2720,12 +2722,12 @@ void GuiMain::removeChat( VNumber chat_id )
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
   {
-    qWarning() << "Invalid chat" << chat_id << "found in removeChat function";
+    qWarning() << "Invalid chat" << chat_id << "found in GuiMain::removeChat(...)";
     return;
   }
 
   QString question_txt = tr( "Do you really want to delete chat with %1?" ).arg( c.name() );
-  if( QMessageBox::information( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+  if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
   if( mp_core->removeChat( chat_id ) )
@@ -2800,7 +2802,7 @@ void GuiMain::showAddUser()
 
   if( gad.exec() == QDialog::Accepted )
   {
-    if( !Settings::instance().userPathList().isEmpty() )
+    if( !Settings::instance().networkAddressList().isEmpty() )
       QMetaObject::invokeMethod( this, "sendBroadcastMessage", Qt::QueuedConnection );
   }
 }
@@ -3027,14 +3029,16 @@ void GuiMain::createGroupFromChat( VNumber chat_id )
 
 void GuiMain::removeUserFromList( VNumber user_id )
 {
+  QString question_txt = tr( "Do you really want to delete user %1?" ).arg( UserManager::instance().findUser( user_id ).name() );
+  if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+    return;
+
+  Chat c = ChatManager::instance().privateChatForUser( user_id );
   if( mp_core->removeOfflineUser( user_id ) )
   {
-    Chat c = ChatManager::instance().privateChatForUser( user_id );
-    if( c.isValid() )
-      closeFloatingChat( c.id() );
     refreshUserList();
-    mp_chatList->reloadChatList();
     updateTabTitles();
+    removeChat( c.id() );
   }
 }
 
@@ -3060,20 +3064,6 @@ GuiFloatingChat* GuiMain::floatingChat( VNumber chat_id ) const
   return 0;
 }
 
-void GuiMain::closeFloatingChat( VNumber chat_id )
-{
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( !fl_chat )
-  {
-#ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to find floating chat" << chat_id << "in GuiMain::closeFloatingChat(...)";
-#endif
-    return;
-  }
-  else
-    fl_chat->close();
-}
-
 void GuiMain::removeFloatingChatFromList( VNumber chat_id )
 {
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
@@ -3096,10 +3086,11 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   if( fl_chat )
     return fl_chat;
 
+  bool window_is_created = false;
+
   if( Settings::instance().showChatsInOneWindow() && !m_floatingChats.isEmpty() )
     fl_chat = m_floatingChats.first();
 
-  bool window_is_created = true;
   if( !fl_chat )
   {
     fl_chat = new GuiFloatingChat( mp_core );
@@ -3108,9 +3099,9 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
     m_floatingChats.append( fl_chat );
+    window_is_created = true;
+    fl_chat->setSaveGeometryDisabled( Settings::instance().resetGeometryAtStartup() );
   }
-  else
-    window_is_created = false;
 
   if( !fl_chat->setChat( c ) )
   {

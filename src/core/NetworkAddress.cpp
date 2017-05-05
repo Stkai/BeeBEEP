@@ -25,7 +25,7 @@
 
 
 NetworkAddress::NetworkAddress()
- : m_hostAddress(), m_hostPort( 0 )
+ : m_hostAddress(), m_hostPort( 0 ), m_info( "" )
 {
 }
 
@@ -35,7 +35,7 @@ NetworkAddress::NetworkAddress( const NetworkAddress& na )
 }
 
 NetworkAddress::NetworkAddress( const QHostAddress& ha, int hp )
- : m_hostAddress( ha ), m_hostPort( hp )
+ : m_hostAddress( ha ), m_hostPort( hp ), m_info( "" )
 {
 }
 
@@ -45,6 +45,7 @@ NetworkAddress& NetworkAddress::operator=( const NetworkAddress& na )
   {
     m_hostAddress = na.m_hostAddress;
     m_hostPort = na.m_hostPort;
+    m_info = na.m_info;
   }
   return *this;
 }

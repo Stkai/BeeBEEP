@@ -2191,6 +2191,10 @@ Inserisci un nome differente.</translation>
         <source>Prompts for change user</source>
         <translation>Chiedi il cambio di utente</translation>
     </message>
+    <message>
+        <source>Do you really want to delete user %1?</source>
+        <translation>Vuoi cancellare l&apos;utente %1?</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3016,6 +3020,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Happy Birthday</source>
         <translation>Buon Compleanno</translation>
+    </message>
+    <message>
+        <source>You cannot remove an user who is connected</source>
+        <translation>Non puoi cancellare un utente connesso</translation>
+    </message>
+    <message>
+        <source>You cannot remove an user who is in group</source>
+        <translation>Non puoi cancellare un utente presente in un gruppo</translation>
+    </message>
+    <message>
+        <source>You cannot remove an user who is in group chat</source>
+        <translation>Non puoi cancellare un utente presente in una conversazione di gruppo</translation>
+    </message>
+    <message>
+        <source>Remove this user</source>
+        <translation>Cancella questo utente</translation>
     </message>
 </context>
 <context>

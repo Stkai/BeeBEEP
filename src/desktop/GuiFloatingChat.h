@@ -47,6 +47,8 @@ public:
   void setChatReadByUser( const Chat&, const User& );
   void showChatMessage( const Chat&, const ChatMessage& );
 
+  inline void setSaveGeometryDisabled( bool );
+
 public slots:
   void updateEmoticon();
   void showUp();
@@ -86,11 +88,13 @@ private:
 
   QIcon m_mainWindowIcon;
   QAction* mp_actGroupMenu;
+  QAction* mp_actSaveWindowGeometry;
 
 };
 
 // Inline Functions
 inline GuiChat* GuiFloatingChat::guiChat() const { return mp_chat; }
 inline bool GuiFloatingChat::chatIsVisible() const { return m_chatIsVisible; }
+inline void GuiFloatingChat::setSaveGeometryDisabled( bool new_value ) { mp_actSaveWindowGeometry->setDisabled( new_value ); }
 
 #endif // BEEBEEP_GUIFLOATINGCHAT_H

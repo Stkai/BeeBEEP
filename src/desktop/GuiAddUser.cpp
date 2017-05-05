@@ -29,10 +29,9 @@
 
 
 GuiAddUser::GuiAddUser( QWidget *parent )
-  : QDialog( parent ), m_users()
+  : QDialog( parent ), m_networkAddresses()
 {
   setupUi( this );
-
   setWindowTitle( tr( "Add users" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( QIcon( ":/images/user-add.png" ) );
 
@@ -69,28 +68,31 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   connect( mp_pbAddUsersAuto, SIGNAL( clicked() ), this, SLOT( addUsersAutoFromLan() ) );
 }
 
-void GuiAddUser::loadUserPathInList()
+void GuiAddUser::loadNetworkAddressesInList()
 {
   if( mp_twUsers->topLevelItemCount() > 0 )
     mp_twUsers->clear();
-  foreach( UserRecord ur, m_users )
-    addUserToList( ur );
+  foreach( NetworkAddress na, m_networkAddresses )
+    addNetworkAddressToList( na );
 }
 
 void GuiAddUser::loadUsers()
 {
-  if( !m_users.isEmpty() )
-    m_users.clear();
+  if( !m_networkAddresses.isEmpty() )
+    m_networkAddresses.clear();
 
-  UserRecord ur;
-  foreach( QString user_path, Settings::instance().userPathList() )
+  NetworkAddress na;
+  foreach( QString s_network_address, Settings::instance().networkAddressList() )
   {
-    ur = Protocol::instance().loadUserRecord( user_path );
-    if( ur.isValid() && !m_users.contains( ur ) )
-      m_users.append( ur );
+    na = Protocol::instance().loadNetworkAddress( s_network_address );
+    if( na.isHostAddressValid() && na.isHostPortValid() )
+    {
+      if( !m_networkAddresses.contains( na ) )
+        m_networkAddresses.append( na );
+    }
   }
 
-  loadUserPathInList();
+  loadNetworkAddressesInList();
   mp_lePort->setText( QString::number( DEFAULT_LISTENER_PORT ) );
   mp_leIpAddress->setText( "" );
   mp_leComment->setText( "" );
@@ -100,9 +102,9 @@ void GuiAddUser::loadUsers()
 void GuiAddUser::saveUsers()
 {
   QStringList sl;
-  foreach( UserRecord ur, m_users )
-    sl.append( Protocol::instance().saveUserRecord( ur, true, false ) );
-  Settings::instance().setUserPathList( sl );
+  foreach( NetworkAddress na, m_networkAddresses )
+    sl.append( Protocol::instance().saveNetworkAddress( na ) );
+  Settings::instance().setNetworkAddressList( sl );
   accept();
 }
 
@@ -135,23 +137,21 @@ void GuiAddUser::addUser()
     {
       foreach( QHostAddress ha, ha_list )
       {
-        UserRecord ur;
-        ur.setNetworkAddress( NetworkAddress( ha, address_port ) );
-        ur.setComment( user_comment );
-        if( !m_users.contains( ur ) )
+        NetworkAddress na( NetworkAddress( ha, address_port ) );
+        na.setInfo( user_comment );
+        if( !m_networkAddresses.contains( na ) )
         {
-          m_users.append( ur );
-          addUserToList( ur );
+          m_networkAddresses.append( na );
+          addNetworkAddressToList( na );
         }
       }
     }
   }
   else
   {
-    UserRecord ur;
-    ur.setNetworkAddress( NetworkAddress( QHostAddress( ip_address ), address_port ) );
-    ur.setComment( user_comment );
-    if( m_users.contains( ur ) )
+    NetworkAddress na( QHostAddress( ip_address ), address_port );
+    na.setInfo( user_comment );
+    if( m_networkAddresses.contains( na ) )
     {
       QMessageBox::information( this, Settings::instance().programName(), tr( "These IP Address and Port are already in list." ) );
       mp_leIpAddress->setFocus();
@@ -159,8 +159,8 @@ void GuiAddUser::addUser()
     }
     else
     {
-      m_users.append( ur );
-      addUserToList( ur );
+      m_networkAddresses.append( na );
+      addNetworkAddressToList( na );
     }
   }
 
@@ -169,12 +169,12 @@ void GuiAddUser::addUser()
   mp_leIpAddress->setFocus();
 }
 
-void GuiAddUser::addUserToList( const UserRecord& ur )
+void GuiAddUser::addNetworkAddressToList( const NetworkAddress& na )
 {
   QTreeWidgetItem* item = new QTreeWidgetItem( mp_twUsers );
-  item->setText( 0, ur.networkAddress().toString() );
+  item->setText( 0, na.toString() );
   item->setIcon( 0, QIcon( ":/images/user.png" ));
-  item->setText( 1, ur.comment() );
+  item->setText( 1, na.info() );
 }
 
 void GuiAddUser::openCustomMenu( const QPoint& p )
@@ -191,12 +191,12 @@ void GuiAddUser::openCustomMenu( const QPoint& p )
 
 bool GuiAddUser::removeUserPathFromList( const QString& user_path )
 {
-  QList<UserRecord>::iterator it = m_users.begin();
-  while( it != m_users.end() )
+  QList<NetworkAddress>::iterator it = m_networkAddresses.begin();
+  while( it != m_networkAddresses.end() )
   {
-    if( it->networkAddress().toString() == user_path )
+    if( it->toString() == user_path )
     {
-      m_users.erase( it );
+      m_networkAddresses.erase( it );
       return true;
     }
 
@@ -221,13 +221,13 @@ void GuiAddUser::removeUserPath()
   foreach( QString s, sl )
     removeUserPathFromList( s );
 
-  loadUserPathInList();
+  loadNetworkAddressesInList();
 }
 
 void GuiAddUser::removeAllUsers()
 {
-  m_users.clear();
-  loadUserPathInList();
+  m_networkAddresses.clear();
+  loadNetworkAddressesInList();
 }
 
 void GuiAddUser::addUsersAutoFromLan()

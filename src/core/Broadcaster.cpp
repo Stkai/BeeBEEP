@@ -306,23 +306,18 @@ void Broadcaster::updateAddresses()
       addNetworkAddress( na, true );
     }
     else
-      qWarning() << "Broadcaster has found error in network address saved in file settings:" << qPrintable( na.toString() );;
+      qWarning() << "Broadcaster has found error in broadcast address saved in file settings:" << qPrintable( s_address );
   }
 
-  if( !Settings::instance().userPathList().isEmpty() )
+  if( !Settings::instance().networkAddressList().isEmpty() )
   {
-    foreach( QString user_path, Settings::instance().userPathList() )
+    foreach( QString s_network_address, Settings::instance().networkAddressList() )
     {
-      UserRecord ur = Protocol::instance().loadUserRecord( user_path );
-      if( ur.isValid() )
-      {
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Network address saved in user path list parsed:" << user_path;
-#endif
-        addNetworkAddress( ur.networkAddress(), false );
-      }
+      NetworkAddress na = Protocol::instance().loadNetworkAddress( s_network_address );
+      if( na.isHostAddressValid() && na.isHostPortValid() )
+        addNetworkAddress( na, false );
       else
-        qWarning() << "Broadcaster has found error in user record saved in file settings:" << user_path;
+        qWarning() << "Broadcaster has found error in network address saved in file settings:" << qPrintable( s_network_address );
     }
   }
 

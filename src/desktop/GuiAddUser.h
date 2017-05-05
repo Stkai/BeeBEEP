@@ -37,7 +37,7 @@ public:
 
   void loadUsers();
 
-  inline const QList<UserRecord>& usersToAdd() const;
+  inline const QList<NetworkAddress>& networkAddressesToAdd() const;
 
 protected slots:
   void addUser();
@@ -48,17 +48,17 @@ protected slots:
   void addUsersAutoFromLan();
 
 protected:
-  void addUserToList( const UserRecord& );
+  void addNetworkAddressToList( const NetworkAddress& );
   bool removeUserPathFromList( const QString& );
-  void loadUserPathInList();
+  void loadNetworkAddressesInList();
 
 private:
-  QList<UserRecord> m_users;
+  QList<NetworkAddress> m_networkAddresses;
   QMenu* mp_menuContext;
 
 };
 
 // Inline Functions
-inline const QList<UserRecord>& GuiAddUser::usersToAdd() const { return m_users; }
+inline const QList<NetworkAddress>& GuiAddUser::networkAddressesToAdd() const { return m_networkAddresses; }
 
 #endif // BEEBEEP_GUIADDUDER_H

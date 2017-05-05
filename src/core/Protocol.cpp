@@ -543,62 +543,32 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setStatus( user_status );
   u.setStatusChangedIn( status_changed_in );
   u.setStatusDescription( user_status_description );
-  u.setAccountName( user_account_name );
+  u.setAccountName( user_account_name.isEmpty() ? user_name : user_account_name );
   u.setVersion( user_version );
-  u.setHash( user_hash );
+  u.setHash( user_hash.isEmpty() ? newMd5Id() : user_hash );
   u.setColor( user_color );
   u.setQtVersion( user_qt_version );
   return u;
 }
 
-QString Protocol::temporaryUserName()
-{
-  return QString( "Bee%1" ).arg( newId() );
-}
-
-User Protocol::createTemporaryUser( const QString& user_path, const QString& account_name )
-{
-  QString user_name = User::nameFromPath( user_path );
-  if( user_name == user_path )
-    return User();
-
-  QHostAddress user_address;
-  int user_port = 0;
-
-  QString host_port = user_path;
-  host_port.remove( 0, user_name.size() + 1 ); // remove name and @
-  bool ok = false;
-  QStringList sl = host_port.split( ":" );
-  if( sl.size() > 2 ) // ipv6 address
-  {
-    user_port = sl.last().toInt( &ok );
-    if( !ok )
-      return User();
-    sl.removeLast();
-    user_address = QHostAddress( sl.join( ":" ) );
-  }
-  else if( sl.size() == 2 )
-  {
-    user_address = QHostAddress( sl.first() );
-    user_port = sl.last().toInt( &ok );
-    if( !ok )
-      return User();
-  }
-  else
-    return User();
-
-  return createTemporaryUser( user_name, account_name, user_address, user_port );
-}
-
-User Protocol::createTemporaryUser( const QString& user_name, const QString& user_account_name, const QHostAddress& user_address, int user_port )
+User Protocol::createTemporaryUser( const UserRecord& ur )
 {
   User u;
-  u.setName( user_name );
-  u.setNetworkAddress( NetworkAddress( user_address, user_port ) );
-  if( !user_account_name.isEmpty() )
-    u.setAccountName( user_account_name );
-  u.setStatus( User::Offline );
   u.setId( newId() );
+  if( ur.name().isEmpty() )
+    u.setName( QString( "Bee%1" ).arg( u.id() ) );
+  else
+    u.setName( ur.name() );
+  u.setNetworkAddress( ur.networkAddress() );
+  if( ur.account().isEmpty() )
+    u.setAccountName( u.name() );
+  else
+    u.setAccountName( ur.account() );
+  if( ur.hash().isEmpty() )
+    u.setHash( newMd5Id() );
+  else
+    u.setHash( ur.hash() );
+  u.setStatus( User::Offline );
   return u;
 }
 
@@ -611,16 +581,16 @@ QString Protocol::saveUser( const User& u ) const
   ur.setFavorite( u.isFavorite() );
   ur.setColor( u.color() );
   ur.setHash( u.hash() );
-  return saveUserRecord( ur, true, true );
+  return saveUserRecord( ur, true );
 }
 
 User Protocol::loadUser( const QString& s )
 {
   UserRecord ur = loadUserRecord( s );
-  if( !ur.isValid() )
+  if( ur.name().isEmpty() || !ur.networkAddressIsValid() )
     return User();
 
-  User u = createTemporaryUser( ur.name(), ur.account(), ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() );
+  User u = createTemporaryUser( ur );
 
   u.setIsFavorite( ur.isFavorite() );
 
@@ -636,61 +606,54 @@ User Protocol::loadUser( const QString& s )
   return u;
 }
 
-User Protocol::loadUserFromPath( const QString& user_path, bool use_account_name )
+QString Protocol::saveNetworkAddress( const NetworkAddress& na ) const
 {
-  User user_found = UserManager::instance().findUserByPath( user_path );
-  if( !user_found.isValid() )
-  {
-    QString host_and_port = User::hostAddressAndPortFromPath( user_path );
-    NetworkAddress na = NetworkAddress::fromString( host_and_port.isEmpty() ? user_path : host_and_port );
-    if( na.isHostAddressValid() )
-    {
-      if( !na.isHostPortValid() )
-        na.setHostPort( Settings::instance().defaultListenerPort() );
-      user_found = UserManager::instance().findUserByHostAddressAndPort( na.hostAddress(), na.hostPort() );
-      if( !user_found.isValid() )
-      {
-        user_found = createTemporaryUser( temporaryUserName(), "", na.hostAddress(), na.hostPort() );
-        if( user_found.isValid() )
-          UserManager::instance().setUser( user_found );
-      }
-    }
-    else
-    {
-      if( use_account_name )
-      {
-        user_found = UserManager::instance().findUserByAccountName( user_path );
-        if( !user_found.isValid() )
-        {
-          user_found = createTemporaryUser( user_path, user_path, QHostAddress::LocalHost, Settings::instance().defaultListenerPort() );
-          if( user_found.isValid() )
-            UserManager::instance().setUser( user_found );
-        }
-      }
-      else
-      {
-        user_found = UserManager::instance().findUserByNickname( user_path );
-        if( !user_found.isValid() )
-        {
-          user_found = createTemporaryUser( user_path, "", QHostAddress::LocalHost, Settings::instance().defaultListenerPort() );
-          if( user_found.isValid() )
-            UserManager::instance().setUser( user_found );
-        }
-      }
-    }
-  }
-  return user_found;
+  QStringList sl;
+  sl << na.hostAddress().toString();
+  sl << QString::number( na.hostPort() );
+  sl << na.info();
+  return sl.join( DATA_FIELD_SEPARATOR );
 }
 
-QString Protocol::saveUserRecord( const UserRecord& ur, bool add_comment, bool add_extras ) const
+NetworkAddress Protocol::loadNetworkAddress( const QString& s ) const
+{
+  QStringList sl = s.split( DATA_FIELD_SEPARATOR );
+  if( sl.size() < 2 )
+  {
+    qWarning() << "Invalid network address found in data:" << s << "(size error)";
+    return NetworkAddress();
+  }
+
+  QHostAddress user_host_address = QHostAddress( sl.takeFirst() );
+  if( user_host_address.isNull() )
+  {
+    qWarning() << "Invalid network address found in data:" << s << "(host address error)";
+    return NetworkAddress();
+  }
+
+  bool ok = false;
+  int host_port = sl.takeFirst().toInt( &ok, 10 );
+  if( !ok || host_port < 1 || host_port > 65535 )
+  {
+    qWarning() << "Invalid network address found in data:" << s << "(host port error)";
+    return NetworkAddress();
+  }
+
+  NetworkAddress na( user_host_address, host_port );
+  if( !sl.isEmpty() )
+    na.setInfo( sl.takeFirst() );
+
+  return na;
+}
+
+QString Protocol::saveUserRecord( const UserRecord& ur, bool add_extras ) const
 {
   QStringList sl;
   sl << ur.networkAddress().hostAddress().toString();
   sl << QString::number( ur.networkAddress().hostPort() );
-  if( add_comment || add_extras )
-    sl << ur.comment();
   if( add_extras )
   {
+    sl << QString( "" ); // comment obsolete in 3.2.0
     sl << ur.name();
     sl << ur.account();
     if( ur.isFavorite() )
@@ -731,7 +694,7 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   ur.setNetworkAddress( NetworkAddress( user_host_address, host_port ) );
 
   if( !sl.isEmpty() )
-    ur.setComment( sl.takeFirst() );
+    sl.takeFirst(); // comment obsolete in 3.2.0
 
   if( !sl.isEmpty() )
     ur.setName( sl.takeFirst() );
@@ -842,8 +805,9 @@ QString Protocol::saveGroup( const Group& g ) const
 
   foreach( User u, ul.toList() )
   {
-    sl << u.path();
+    sl << u.name();
     sl << u.accountName();
+    sl << u.hash();
   }
 
   return sl.join( DATA_FIELD_SEPARATOR );
@@ -865,107 +829,43 @@ Group Protocol::loadGroup( const QString& group_data_saved )
     return Group();
 
   UserList member_list;
-  QString user_path;
-  QString user_account_name;
-  User user_found;
+  QString user_nickname = "";
+  QString user_account_name = "";
+  QString user_hash = "";
 
   member_list.set( Settings::instance().localUser() );
+
+  bool read_user_hash = sl.size() > (members*2);
 
   for( int i = 0; i < members; i++ )
   {
     if( sl.size() >= 2 )
     {
-      user_path = sl.takeFirst();
+      user_nickname = sl.takeFirst();
+      if( read_user_hash )
+        user_nickname = User::nameFromPath( user_nickname );
       user_account_name = sl.takeFirst();
-      if( Settings::instance().trustSystemAccount() )
-        user_found = UserManager::instance().findUserByAccountName( user_account_name );
+      if( read_user_hash && !sl.isEmpty() )
+        user_hash = sl.takeFirst();
       else
-        user_found = UserManager::instance().findUserByPath( user_path );
+        user_hash = "";
 
-      if( !user_found.isValid() )
+      UserRecord ur( user_nickname, user_account_name, user_hash );
+      User u = UserManager::instance().findUserByUserRecord( ur );
+
+      if( !u.isValid() )
       {
-        user_found = createTemporaryUser( user_path, user_account_name );
-
-        if( !user_found.isValid() )
-        {
-          qWarning() << "Unable to load group" << g.name() << "from settings";
-          return Group();
-        }
-
-        UserManager::instance().setUser( user_found );
+        u = createTemporaryUser( ur );
+        UserManager::instance().setUser( u );
       }
 
-      member_list.set( user_found );
+      member_list.set( u );
     }
   }
 
   g.setUsers( member_list.toUsersId() );
 
   return g;
-}
-
-QList<Group> Protocol::loadGroupsFromFile()
-{
-  QList<Group> group_list;
-
-  QFileInfo groups_file_info( Settings::instance().defaultGroupsFilePath( true ) );
-  QString groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
-  if( !groups_file_info.exists() || !groups_file_info.isReadable() )
-  {
-    groups_file_info = QFileInfo( Settings::instance().defaultGroupsFilePath( false ) );
-    groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
-
-    if( !groups_file_info.exists() || !groups_file_info.isReadable() )
-      return group_list;
-  }
-
-  QSettings* sets = new QSettings( groups_file_path, QSettings::IniFormat );
-  sets->beginGroup( "Groups" );
-  bool use_account_name = sets->value( "UseAccountName", false ).toBool();
-  sets->endGroup();
-
-  QStringList sl_groups = sets->childGroups();
-  if( !sl_groups.isEmpty() )
-  {
-    foreach( QString s_group, sl_groups )
-    {
-      Group g;
-      QString key_groups = QString( "%1/%2" ).arg( s_group ).arg( "Members" );
-      QString group_data = sets->value( key_groups, QString( "" ) ).toString();
-      if( !group_data.isEmpty() )
-      {
-        QStringList sl_members = group_data.split( QLatin1String( "," ), QString::SkipEmptyParts );
-        if( !sl_members.isEmpty() )
-        {
-          foreach( QString s_member, sl_members )
-          {
-            User u = loadUserFromPath( s_member, use_account_name );
-            if( u.isValid() )
-              g.addUser( u.id() );
-            else
-              qWarning() << "Unable to load user" << qPrintable( s_member ) << "for group" << qPrintable( s_group );
-          }
-        }
-      }
-
-      if( g.hasUser( ID_LOCAL_USER ) )
-      {
-        g.setName( s_group );
-        g.setId( newId() );
-        g.setPrivateId( Settings::instance().simpleHash( s_group ) );
-        group_list.append( g );
-      }
-    }
-  }
-  else
-    qWarning() << "File" << qPrintable( groups_file_path ) << "is empty (no group found)";
-
-  sets->deleteLater();
-
-  if( !group_list.isEmpty() )
-    qDebug() << "File" << qPrintable( groups_file_path ) << "contains" << group_list.size() << "groups";
-
-  return group_list;
 }
 
 Message Protocol::groupChatRefuseMessage( const Chat& c )
@@ -986,11 +886,19 @@ Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
   UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
   ul.remove( Settings::instance().localUser() );
   ul.remove( to_user );
-  QStringList sl = ul.toStringList( false, false );
-  m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Members to send group chat request:" << qPrintable( sl.join( ", " ) );
-#endif
+
+  QStringList sl;
+  sl << QString::number( ul.size() );
+  foreach( User u, ul.toList() )
+  {
+    sl << u.name();
+    sl << u.accountName();
+    sl << u.hash();
+  }
+
+  if( ul.size() >= 1 )
+    m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
+
   ChatMessageData cmd;
   cmd.setGroupId( c.privateId() );
   cmd.setGroupName( c.name() );
@@ -998,9 +906,62 @@ Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
   return m;
 }
 
-QStringList Protocol::userPathsFromGroupRequestMessage( const Message& m ) const
+QList<UserRecord> Protocol::userRecordsFromGroupRequestMessage( const Message& m ) const
 {
-  return m.text().split( PROTOCOL_FIELD_SEPARATOR );
+  QList<UserRecord> user_records;
+  if( m.text().isEmpty() )
+    return user_records;
+  QStringList sl = m.text().split( PROTOCOL_FIELD_SEPARATOR );
+  if( sl.isEmpty() )
+    return user_records;
+
+  bool ok = false;
+  int members = sl.takeFirst().toInt( &ok );
+  if( !ok )
+    return user_records;
+
+  for( int i = 0; i < members; i++ )
+  {
+    if( sl.size() >= 3 )
+    {
+      UserRecord ur;
+      ur.setName( sl.takeFirst() );
+      ur.setAccount( sl.takeFirst() );
+      ur.setHash( sl.takeFirst() );
+      user_records.append( ur );
+    }
+    else
+    {
+      user_records.clear();
+      return user_records;
+    }
+  }
+
+  return user_records;
+}
+
+Message Protocol::groupChatRequestMessage_obsolete( const Chat& c, const User& to_user )
+{
+  Message m( Message::Group, newId(), "" );
+  m.addFlag( Message::Request );
+  UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
+  ul.remove( Settings::instance().localUser() );
+  ul.remove( to_user );
+  QStringList sl;
+  foreach( User u, ul.toList() )
+    sl << u.path();
+  if( !sl.isEmpty() )
+    m.setText( sl.join( PROTOCOL_FIELD_SEPARATOR ) );
+  ChatMessageData cmd;
+  cmd.setGroupId( c.privateId() );
+  cmd.setGroupName( c.name() );
+  m.setData( chatMessageDataToString( cmd ) );
+  return m;
+}
+
+QStringList Protocol::userPathsFromGroupRequestMessage_obsolete( const Message& m ) const
+{
+  return m.text().isEmpty() ? QStringList() : m.text().split( PROTOCOL_FIELD_SEPARATOR );
 }
 
 Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
@@ -1588,18 +1549,18 @@ QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
   return byte_array;
 }
 
-Message Protocol::userRecordListToMessage( const QList<UserRecord>& user_record_list )
+Message Protocol::userRecordListToHiveMessage( const QList<UserRecord>& user_record_list )
 {
   QStringList msg_list;
   foreach( UserRecord ur, user_record_list )
-    msg_list.append( saveUserRecord( ur, false, false ) );
+    msg_list.append( saveUserRecord( ur, false ) );
 
   Message m( Message::Hive, newId(), msg_list.join( PROTOCOL_FIELD_SEPARATOR ) );
   m.addFlag( Message::List );
   return m;
 }
 
-QList<UserRecord> Protocol::messageToUserRecordList( const Message& m ) const
+QList<UserRecord> Protocol::hiveMessageToUserRecordList( const Message& m ) const
 {
   QList<UserRecord> user_record_list;
   if( m.type() != Message::Hive && !m.hasFlag( Message::List ) )
@@ -1610,7 +1571,7 @@ QList<UserRecord> Protocol::messageToUserRecordList( const Message& m ) const
   foreach( QString s, sl )
   {
     ur = loadUserRecord( s );
-    if( ur.isValid() )
+    if( ur.networkAddressIsValid() )
       user_record_list.append( ur );
   }
 
@@ -1886,3 +1847,151 @@ QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const 
 
   return decrypted_byte_array;
 }
+
+/*
+
+User Protocol::createTemporaryUser( const QString& user_path, const QString& account_name, const QString& user_hash )
+{
+  QString user_name = User::nameFromPath( user_path );
+  if( user_name == user_path )
+    return User();
+
+  QHostAddress user_address;
+  int user_port = 0;
+
+  QString host_port = user_path;
+  host_port.remove( 0, user_name.size() + 1 ); // remove name and @
+  bool ok = false;
+  QStringList sl = host_port.split( ":" );
+  if( sl.size() > 2 ) // ipv6 address
+  {
+    user_port = sl.last().toInt( &ok );
+    if( !ok )
+      return User();
+    sl.removeLast();
+    user_address = QHostAddress( sl.join( ":" ) );
+  }
+  else if( sl.size() == 2 )
+  {
+    user_address = QHostAddress( sl.first() );
+    user_port = sl.last().toInt( &ok );
+    if( !ok )
+      return User();
+  }
+  else
+    return User();
+
+  return createTemporaryUser( user_name, account_name, user_hash, NetworkAddress( user_address, user_port ) );
+}
+
+User Protocol::loadUserFromPath( const QString& user_path, bool use_account_name )
+{
+  NetworkAddress default_network_address( QHostAddress::LocalHost, Settings::instance().defaultListenerPort() );
+  User user_found = UserManager::instance().findUserByPath( user_path );
+  if( !user_found.isValid() )
+  {
+    QString host_and_port = User::hostAddressAndPortFromPath( user_path );
+    NetworkAddress na = NetworkAddress::fromString( host_and_port.isEmpty() ? user_path : host_and_port );
+    if( na.isHostAddressValid() )
+    {
+      if( !na.isHostPortValid() )
+        na.setHostPort( Settings::instance().defaultListenerPort() );
+      user_found = UserManager::instance().findUserByHostAddressAndPort( na.hostAddress(), na.hostPort() );
+      if( !user_found.isValid() )
+      {
+        user_found = createTemporaryUser( UserRecord( "", "", "", na ) );
+        if( user_found.isValid() )
+          UserManager::instance().setUser( user_found );
+      }
+    }
+    else
+    {
+      if( use_account_name )
+      {
+        user_found = UserManager::instance().findUserByAccountName( user_path );
+        if( !user_found.isValid() )
+        {
+          user_found = createTemporaryUser( UserRecord( user_path, user_path, "", default_network_address ) );
+          if( user_found.isValid() )
+            UserManager::instance().setUser( user_found );
+        }
+      }
+      else
+      {
+        user_found = UserManager::instance().findUserByNickname( user_path );
+        if( !user_found.isValid() )
+        {
+          user_found = createTemporaryUser(UserRecord( user_path, "", "", default_network_address ) );
+          if( user_found.isValid() )
+            UserManager::instance().setUser( user_found );
+        }
+      }
+    }
+  }
+  return user_found;
+}
+
+QList<Group> Protocol::loadGroupsFromFile()
+{
+  QList<Group> group_list;
+
+  QFileInfo groups_file_info( Settings::instance().defaultGroupsFilePath( true ) );
+  QString groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
+  if( !groups_file_info.exists() || !groups_file_info.isReadable() )
+  {
+    groups_file_info = QFileInfo( Settings::instance().defaultGroupsFilePath( false ) );
+    groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
+
+    if( !groups_file_info.exists() || !groups_file_info.isReadable() )
+      return group_list;
+  }
+
+  QSettings* sets = new QSettings( groups_file_path, QSettings::IniFormat );
+  sets->beginGroup( "Groups" );
+  bool use_account_name = sets->value( "UseAccountName", false ).toBool();
+  sets->endGroup();
+
+  QStringList sl_groups = sets->childGroups();
+  if( !sl_groups.isEmpty() )
+  {
+    foreach( QString s_group, sl_groups )
+    {
+      Group g;
+      QString key_groups = QString( "%1/%2" ).arg( s_group ).arg( "Members" );
+      QString group_data = sets->value( key_groups, QString( "" ) ).toString();
+      if( !group_data.isEmpty() )
+      {
+        QStringList sl_members = group_data.split( QLatin1String( "," ), QString::SkipEmptyParts );
+        if( !sl_members.isEmpty() )
+        {
+          foreach( QString s_member, sl_members )
+          {
+            User u = loadUserFromPath( s_member, use_account_name );
+            if( u.isValid() )
+              g.addUser( u.id() );
+            else
+              qWarning() << "Unable to load user" << qPrintable( s_member ) << "for group" << qPrintable( s_group );
+          }
+        }
+      }
+
+      if( g.hasUser( ID_LOCAL_USER ) )
+      {
+        g.setName( s_group );
+        g.setId( newId() );
+        g.setPrivateId( Settings::instance().simpleHash( s_group ) );
+        group_list.append( g );
+      }
+    }
+  }
+  else
+    qWarning() << "File" << qPrintable( groups_file_path ) << "is empty (no group found)";
+
+  sets->deleteLater();
+
+  if( !group_list.isEmpty() )
+    qDebug() << "File" << qPrintable( groups_file_path ) << "contains" << group_list.size() << "groups";
+
+  return group_list;
+}
+*/

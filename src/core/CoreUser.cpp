@@ -342,6 +342,7 @@ void Core::loadUsersAndGroups()
     }
   }
 
+  /* fixme
   QList<Group> group_list = Protocol::instance().loadGroupsFromFile();
   if( !group_list.isEmpty() )
   {
@@ -351,6 +352,7 @@ void Core::loadUsersAndGroups()
         addGroup( g, false );
     }
   }
+  */
 }
 
 void Core::saveUsersAndGroups()
@@ -452,25 +454,25 @@ bool Core::removeOfflineUser( VNumber user_id )
 
   if( isUserConnected( u.id() ) )
   {
-    qWarning() << "User" << u.path() << "is connected and cannot be removed from list";
+    qWarning() << "User" << qPrintable( u.path() ) << "is connected and cannot be removed from list";
     return false;
   }
 
   if( UserManager::instance().isUserInGroups( u.id() ) )
   {
-    qWarning() << "User" << u.path() << "is in some groups and cannot be removed from list";
+    qWarning() << "User" << qPrintable( u.path() ) << "is in some groups and cannot be removed from list";
     return false;
   }
 
   if( ChatManager::instance().userIsInGroupChat( u.id() ) )
   {
-    qWarning() << "User" << u.path() << "is in a group chat and cannot be removed from list";
+    qWarning() << "User" << qPrintable( u.path() ) << "is in a group chat and cannot be removed from list";
     return false;
   }
 
   if( UserManager::instance().removeUser( u ) )
   {
-    qDebug() << "User" << u.path() << "is removed from list";
+    qDebug() << "User" << qPrintable( u.path() ) << "is removed from list";
     return true;
   }
   else
@@ -503,7 +505,7 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
       }
     }
 
-    msg_to_send = Protocol::instance().userRecordListToMessage( user_record_list );
+    msg_to_send = Protocol::instance().userRecordListToHiveMessage( user_record_list );
     if( sendMessageToLocalNetwork( to_user, msg_to_send ) )
     {
 #ifdef BEEBEEP_DEBUG
@@ -522,7 +524,7 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
   user_record_list.clear();
   ur.setNetworkAddress( to_user.networkAddress() );
   user_record_list.append( ur );
-  msg_to_send = Protocol::instance().userRecordListToMessage( user_record_list );
+  msg_to_send = Protocol::instance().userRecordListToHiveMessage( user_record_list );
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isLocal() || u == to_user )

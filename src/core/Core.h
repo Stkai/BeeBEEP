@@ -175,7 +175,7 @@ protected slots:
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();
   void checkUserAuthentication( const QByteArray& );
-  void checkUserRecord( const UserRecord& );
+  void checkNetworkAddress( const NetworkAddress& );
 
   /* CoreParser */
   void parseMessage( VNumber, const Message& );

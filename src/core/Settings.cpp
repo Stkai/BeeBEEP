@@ -147,7 +147,7 @@ Settings::Settings()
   m_previewFileDialogImageSize = 200;
   m_maxUsersToConnectInATick = 25;
   m_showTextInModeRTL = false;
-  m_showChatsInOneWindow = false;
+  m_showChatsInOneWindow = true;
   m_homeBackgroundColor = "#E8E8E8";
   m_defaultChatBackgroundColor = "#E8E8E8";
   m_maxLogLines = 5000;
@@ -960,7 +960,8 @@ void Settings::load()
   m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
   m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
   m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
-  m_showChatsInOneWindow = sets->value( "ShowChatsInOneWindow", m_showChatsInOneWindow ).toBool();
+  bool open_chat_in_new_window = sets->value( "AlwaysOpenNewFloatingChat", !m_showChatsInOneWindow ).toBool();
+  m_showChatsInOneWindow = sets->value( "ShowChatsInOneWindow", !open_chat_in_new_window ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1002,7 +1003,7 @@ void Settings::load()
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
-  m_userPathList = sets->value( "UserPathList", QStringList() ).toStringList();
+  m_networkAddressList = sets->value( "UserPathList", QStringList() ).toStringList();
   m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
   m_workgroups = sets->value( "Workgroups", QStringList() ).toStringList();
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -1279,7 +1280,7 @@ void Settings::save()
   else
     sets->setValue( "LocalHostAddressForced", QString( "" ) );
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
-  sets->setValue( "UserPathList", m_userPathList );
+  sets->setValue( "UserPathList", m_networkAddressList );
   sets->setValue( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups );
   sets->setValue( "Workgroups", m_workgroups );
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );

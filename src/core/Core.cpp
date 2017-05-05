@@ -60,7 +60,7 @@ Core::Core( QObject* parent )
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_mDns = new MDnsManager( this );
   connect( mp_mDns, SIGNAL( serviceRegistered() ), this, SLOT( sendMulticastingMessage() ) );
-  connect( mp_mDns, SIGNAL( newUserFound( const UserRecord& ) ), this, SLOT( checkUserRecord( const UserRecord& ) ) );
+  connect( mp_mDns, SIGNAL( networkAddressFound( const NetworkAddress& ) ), this, SLOT( checkNetworkAddress( const NetworkAddress& ) ) );
 #endif
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

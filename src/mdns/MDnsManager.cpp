@@ -28,7 +28,7 @@
 
 
 MDnsManager::MDnsManager( QObject* parent )
- : QObject( parent ), m_mdnsRecords(), m_userRecords(), m_isActive( false )
+ : QObject( parent ), m_mdnsRecords(), m_networkAddresses(), m_isActive( false )
 {
   setObjectName( "MDnsManager" );
 
@@ -78,7 +78,7 @@ bool MDnsManager::stop()
   mp_register->unregisterService();
   mp_browser->stop();
   m_mdnsRecords.clear();
-  m_userRecords.clear();
+  m_networkAddresses.clear();
   return true;
 }
 
@@ -128,29 +128,29 @@ void MDnsManager::removeMDnsRecord( const MDnsRecord& mdns_record )
   m_mdnsRecords.removeOne( mdns_record );
 }
 
-void MDnsManager::addUserRecord( const UserRecord& ur )
+void MDnsManager::addNetworkAddress( const NetworkAddress& na )
 {
   if( !m_isActive )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( objectName() ) << "is not active and skips the user found in" << qPrintable( ur.networkAddress().toString() );
+    qDebug() << qPrintable( objectName() ) << "is not active and skips the user found in" << qPrintable( na.toString() );
 #endif
     return;
   }
 
-  if( m_userRecords.contains( ur ) )
+  if( m_networkAddresses.contains( na ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( objectName() ) << "already contains user record" << qPrintable( ur.networkAddress().toString() );
+    qDebug() << qPrintable( objectName() ) << "already contains user record" << qPrintable( na.toString() );
 #endif
     return;
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "adds new user record" << qPrintable( ur.networkAddress().toString() );
+  qDebug() << qPrintable( objectName() ) << "adds new user record" << qPrintable( na.toString() );
 #endif
-  m_userRecords.append( ur );
-  emit newUserFound( ur );
+  m_networkAddresses.append( na );
+  emit networkAddressFound( na );
 }
 
 void MDnsManager::serviceResolved( const QHostInfo& host_info, int host_port )
@@ -164,29 +164,14 @@ void MDnsManager::serviceResolved( const QHostInfo& host_info, int host_port )
 
   const QList<QHostAddress>& host_addresses = host_info.addresses();
 
-  QHostAddress ipv4_address;
-  QHostAddress ipv6_address;
-
   foreach( QHostAddress ha, host_addresses )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( objectName() ) << "has resolved host" << host_info.hostName() << "with this address" << ha.toString();
 #endif
-    if( ha.toString().contains( ":" ) )
-      ipv6_address = ha;
-    else
-      ipv4_address = ha;
-  }
-
-  if( !ipv4_address.isNull() || !ipv6_address.isNull() )
-  {
-    UserRecord ur;
-    if( !ipv4_address.isNull() )
-      ur.setNetworkAddress( NetworkAddress( ipv4_address, host_port ) );
-    else
-      ur.setNetworkAddress( NetworkAddress( ipv6_address, host_port ) );
-    ur.setComment( QString( "MDns[%1]" ).arg( resolver->record().name() ) );
-    addUserRecord( ur );
+    NetworkAddress na( ha, host_port );
+    na.setInfo( QString( "MDns[%1]" ).arg( resolver->record().name() ) );
+    addNetworkAddress( na );
   }
 
   resolver->deleteLater();

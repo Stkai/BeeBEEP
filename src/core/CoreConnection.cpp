@@ -72,17 +72,12 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
   return false;
 }
 
-void Core::checkUserRecord( const UserRecord& ur )
+void Core::checkNetworkAddress( const NetworkAddress& na )
 {
-  if( ur.networkAddress() == Settings::instance().localUser().networkAddress() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Skip local user record:" << qPrintable( ur.networkAddress().toString() );
-#endif
+  if( na == Settings::instance().localUser().networkAddress() )
     return;
-  }
 
-  newPeerFound( ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() );
+  newPeerFound( na.hostAddress(), na.hostPort() );
 }
 
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )

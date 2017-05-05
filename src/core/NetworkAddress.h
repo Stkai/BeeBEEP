@@ -50,12 +50,16 @@ public:
   inline void setHostPort( int );
   inline int hostPort() const;
 
+  inline void setInfo( const QString& );
+  inline const QString& info() const;
+
   static NetworkAddress fromString( const QString& );
   QString toString() const;
 
 private:
   QHostAddress m_hostAddress;
   int m_hostPort;
+  QString m_info;
 
 };
 
@@ -75,5 +79,7 @@ inline void NetworkAddress::setHostAddress( const QHostAddress& new_value ) { m_
 inline const QHostAddress& NetworkAddress::hostAddress() const { return m_hostAddress; }
 inline void NetworkAddress::setHostPort( int new_value ) { m_hostPort = new_value; }
 inline int NetworkAddress::hostPort() const { return m_hostPort; }
+inline void NetworkAddress::setInfo( const QString& new_value ) { m_info = new_value; }
+inline const QString& NetworkAddress::info() const { return m_info; }
 
 #endif // BEEBEEP_NETWORKADDRESS_H

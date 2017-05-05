@@ -315,15 +315,13 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
     if( u.isLocal() )
       continue;
 
-    group_message = Protocol::instance().groupChatRequestMessage( group_chat, u );
+    if( u.protocolVersion() < NEW_GROUP_PROTO_VERSION )
+      group_message = Protocol::instance().groupChatRequestMessage_obsolete( group_chat, u );
+    else
+      group_message = Protocol::instance().groupChatRequestMessage( group_chat, u );
 
-#ifdef BEEBEEP_DEBUG
-    QString group_members = group_message.text();
-    group_members.replace( QChar::LineSeparator, ", " );
-    qDebug() << "Send group chat request to:" << qPrintable( group_members );
-#endif
-
-    sendMessageToLocalNetwork( u, group_message );
+    if( !group_message.text().isEmpty() )
+      sendMessageToLocalNetwork( u, group_message );
   }
 }
 
@@ -459,14 +457,25 @@ bool Core::removeChat( VNumber chat_id )
   if( c.isDefault() )
     return false;
   if( c.isPrivate() )
-    return true;
+  {
+    if( UserManager::instance().findUser( c.privateUserId() ).isValid() )
+      return true;
+  }
 
   if( ChatManager::instance().removeChat( c ) )
   {
-    qDebug() << "Group chat deleted:" << c.name();
-    UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
-    sendGroupChatRefuseMessage( c, group_members );
-    return true;
+    if( c.isGroup() )
+    {
+      qDebug() << "Group chat deleted:" << c.name();
+      UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+      sendGroupChatRefuseMessage( c, group_members );
+      return true;
+    }
+    else
+    {
+      qDebug() << "Private chat deleted:" << c.name();
+      return true;
+    }
   }
 
   qWarning() << "Unable to delete chat with id" << c.id() << "and name" << c.name();

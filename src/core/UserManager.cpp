@@ -21,8 +21,9 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "UserManager.h"
 #include "Settings.h"
+#include "UserManager.h"
+#include "UserRecord.h"
 
 UserManager* UserManager::mp_instance = NULL;
 
@@ -240,4 +241,20 @@ User UserManager::findUserByNickname( const QString& user_nickname ) const
   qDebug() << "Unable to find user with nickname:" << qPrintable( user_nickname );
 #endif
   return User();
+}
+
+User UserManager::findUserByUserRecord( const UserRecord& ur ) const
+{
+  if( Settings::instance().trustSystemAccount() )
+  {
+    return findUserByAccountName( ur.account() );
+  }
+  else
+  {
+    User u = findUserByNickname( ur.name() );
+    if( !u.isValid() && Settings::instance().trustUserHash() )
+      u = findUserByHash( ur.hash() );
+
+    return u;
+  }
 }

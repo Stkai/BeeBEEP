@@ -25,14 +25,20 @@
 
 
 UserRecord::UserRecord()
-  : m_name( "" ), m_account( "" ), m_networkAddress( QHostAddress(), DEFAULT_LISTENER_PORT ),
-    m_comment( "" ), m_isFavorite( false ), m_color( "#000000" ), m_hash( "" )
+ : m_name( "" ), m_account( "" ), m_networkAddress( QHostAddress(), DEFAULT_LISTENER_PORT ),
+   m_isFavorite( false ), m_color( "#000000" ), m_hash( "" )
 {
 }
 
 UserRecord::UserRecord( const UserRecord& ur )
 {
   (void)operator=( ur );
+}
+
+UserRecord::UserRecord( const QString& user_name, const QString& user_account, const QString& user_hash )
+ : m_name( user_name ), m_account( user_account ), m_networkAddress( QHostAddress::LocalHost, DEFAULT_LISTENER_PORT ),
+   m_isFavorite( false ), m_color( "#000000" ), m_hash( user_hash )
+{
 }
 
 UserRecord& UserRecord::operator=( const UserRecord& ur )
@@ -42,7 +48,6 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
     m_name = ur.m_name;
     m_account = ur.m_account;
     m_networkAddress = ur.m_networkAddress;
-    m_comment = ur.m_comment;
     m_isFavorite = ur.m_isFavorite;
     m_color = ur.m_color;
     m_hash = ur.m_hash;

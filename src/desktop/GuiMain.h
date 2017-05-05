@@ -187,7 +187,6 @@ protected:
   bool checkAllChatMembersAreConnected( const QList<VNumber>& );
   void showAlertForMessage( const Chat&, const ChatMessage& );
   GuiFloatingChat* createFloatingChat( const Chat& );
-  void closeFloatingChat( VNumber );
   void setFileTransferEnabled( bool );
   void setFileSharingEnabled( bool );
 
@@ -278,6 +277,7 @@ private:
   QAction* mp_actCreateGroupChat;
   QAction* mp_actEnableFileSharing;
   QAction* mp_actSelectDownloadFolder;
+  QAction* mp_actSaveWindowGeometry;
 
   QActionGroup* mp_actGroupExistingFile;
   QAction* mp_actOverwriteExistingFile;

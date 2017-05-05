@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_MDNSMANAGER_H
 #define BEEBEEP_MDNSMANAGER_H
 
-#include "UserRecord.h"
+#include "NetworkAddress.h"
 #include "MDnsRecord.h"
 class MDnsRegister;
 class MDnsBrowser;
@@ -38,7 +38,7 @@ class MDnsManager : public QObject
 public:
   MDnsManager( QObject* parent = 0 );
 
-  inline const QList<UserRecord>& userRecords() const;
+  inline const QList<NetworkAddress>& networkAddresses() const;
 
   bool start( const QString& service_base_name, const QString& service_type, const QString& listener_address, int listener_port );
   bool stop();
@@ -48,7 +48,7 @@ public:
 
 signals:
   void serviceRegistered();
-  void newUserFound( const UserRecord& );
+  void networkAddressFound( const NetworkAddress& );
 
 protected slots:
   void serviceIsRegistered();
@@ -57,20 +57,20 @@ protected slots:
   void serviceResolved( const QHostInfo&, int );
 
 protected:
-  void addUserRecord( const UserRecord& );
+  void addNetworkAddress( const NetworkAddress& );
 
 private:
   MDnsRegister* mp_register;
   MDnsBrowser* mp_browser;
   QString m_serviceName;
   QList<MDnsRecord> m_mdnsRecords;
-  QList<UserRecord> m_userRecords;
+  QList<NetworkAddress> m_networkAddresses;
   bool m_isActive;
 
 };
 
 // Inline Functions
-inline const QList<UserRecord>& MDnsManager::userRecords() const { return m_userRecords; }
+inline const QList<NetworkAddress>& MDnsManager::networkAddresses() const { return m_networkAddresses; }
 inline bool MDnsManager::isActive() const { return m_isActive; }
 
 #endif // BEEBEEP_MDNSMANAGER_H

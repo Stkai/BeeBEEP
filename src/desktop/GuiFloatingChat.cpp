@@ -78,7 +78,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
   mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
   mp_barChat->addSeparator();
-  mp_barChat->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
+  mp_actSaveWindowGeometry = mp_barChat->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
   mp_dockPresetMessageList->hide();
 
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
@@ -309,6 +309,8 @@ void GuiFloatingChat::showUp()
 
   if( on_top_flag_added )
     Bee::setWindowStaysOnTop( this, false );
+
+  mp_chat->ensureLastMessageVisible();
 }
 
 void GuiFloatingChat::setFocusInChat()

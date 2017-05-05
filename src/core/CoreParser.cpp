@@ -235,36 +235,69 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
   if( m.hasFlag( Message::Request ) )
   {
-    QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage( m );
     UserList ul;
     ul.set( u ); // User from request
     ul.set( Settings::instance().localUser() );
 
-    foreach( QString user_path, user_paths )
+    if( u.protocolVersion() < NEW_GROUP_PROTO_VERSION )
     {
-      if( user_path.isEmpty() )
+      QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage_obsolete( m );
+      if( user_paths.isEmpty() )
       {
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Invalid group message with empty user paths from" << qPrintable( u.path() );
-#endif
-        continue;
+        qWarning() << "Invalid group message request from" << qPrintable( u.path() ) << "for chat" << qPrintable( cmd.groupName() );
+        return;
       }
 
-      User user_tmp = UserManager::instance().findUserByPath( user_path );
-      if( user_tmp.isValid() )
+      foreach( QString user_path, user_paths )
       {
-        if( !user_tmp.isLocal() )
-          ul.set( user_tmp );
-      }
-      else
-      {
-        qWarning() << "Creating temporary user" << user_path << "for group chat";
-        user_tmp = Protocol::instance().createTemporaryUser( user_path, "" );
+        if( user_path.isEmpty() )
+        {
+          qWarning() << "Invalid group message with empty user path from" << qPrintable( u.path() ) << "for chat" << qPrintable( cmd.groupName() );
+          continue;
+        }
+
+        User user_tmp = UserManager::instance().findUserByPath( user_path );
         if( user_tmp.isValid() )
         {
-          UserManager::instance().setUser( user_tmp );
-          ul.set( user_tmp );
+          if( !user_tmp.isLocal() )
+            ul.set( user_tmp );
         }
+        else
+        {
+          qDebug() << "Creating temporary user" << qPrintable( user_path ) << "for group chat";
+          UserRecord ur( User::nameFromPath( user_path ), "", "" );
+          ur.setNetworkAddress( NetworkAddress::fromString( User::hostAddressAndPortFromPath( user_path ) ) );
+          user_tmp = Protocol::instance().createTemporaryUser( ur );
+          if( user_tmp.isValid() )
+          {
+            UserManager::instance().setUser( user_tmp );
+            ul.set( user_tmp );
+          }
+          else
+            qWarning() << "Unable to create temporary user:" << qPrintable( user_path );
+        }
+      }
+    }
+    else
+    {
+      QList<UserRecord> user_records = Protocol::instance().userRecordsFromGroupRequestMessage( m );
+      if( user_records.isEmpty() )
+      {
+        qWarning() << "Invalid group message request with empty user records from" << qPrintable( u.path() ) << "for chat" << qPrintable( cmd.groupName() );;
+        return;
+      }
+
+      foreach( UserRecord ur, user_records )
+      {
+        User u = UserManager::instance().findUserByUserRecord( ur );
+        if( u.isLocal() )
+          continue;
+
+        if( !u.isValid() )
+          u = Protocol::instance().createTemporaryUser( ur );
+
+        UserManager::instance().setUser( u );
+        ul.set( u );
       }
     }
 
@@ -411,7 +444,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 
   if( m.hasFlag( Message::List ) )
   {
-    QList<UserRecord> user_record_list = Protocol::instance().messageToUserRecordList( m );
+    QList<UserRecord> user_record_list = Protocol::instance().hiveMessageToUserRecordList( m );
     if( user_record_list.isEmpty() )
       return;
 #ifdef BEEBEEP_DEBUG
@@ -422,7 +455,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
       if( Hive::instance().addNetworkAddress( ur.networkAddress() ) && !hasConnection( ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() ) )
       {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "Hive message contains this path" << qPrintable( ur.path() ) << "and it is added to contact list";
+        qDebug() << "Hive message contains this path" << qPrintable( ur.networkAddress().toString() ) << "and it is added to contact list";
 #endif
         mp_broadcaster->setNewBroadcastRequested( true );
       }
