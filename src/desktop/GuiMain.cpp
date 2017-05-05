@@ -216,10 +216,23 @@ void GuiMain::checkWindowFlagsAndShow()
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
     resize( width(), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
-    int diff_w = qMax( 20, QApplication::desktop()->screenGeometry().width() - QApplication::desktop()->availableGeometry().width() );
-    int diff_h = qMax( 20, QApplication::desktop()->screenGeometry().height() - QApplication::desktop()->availableGeometry().height() );
+    int diff_w = qMax( 0, QApplication::desktop()->screenGeometry().width() - QApplication::desktop()->availableGeometry().width() );
+    int diff_h = qMax( 0, QApplication::desktop()->screenGeometry().height() - QApplication::desktop()->availableGeometry().height() );
+
+#ifdef Q_OS_WIN
+    diff_w += qMax( 20, diff_w );
+    diff_h += qMax( 20, diff_h );
     move( QApplication::desktop()->availableGeometry().width() - width() - diff_w,
           QApplication::desktop()->availableGeometry().height() - height() - diff_h );
+#elif defined Q_OS_MAC
+    diff_h = 0; // skip only macosx top bar
+    move( QApplication::desktop()->availableGeometry().width() - width() - diff_w, diff_h );
+#else
+    diff_w += qMax( 15, diff_w );
+    diff_h += qMax( 15, diff_h );
+    move( QApplication::desktop()->availableGeometry().width() - width() - diff_w,
+          diff_h );
+#endif
     mp_dockFileTransfers->setVisible( false );
   }
   else
