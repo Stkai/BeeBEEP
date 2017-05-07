@@ -157,6 +157,7 @@ signals:
   void shareBoxDownloadCompleted( VNumber, const FileInfo& );
   void shareBoxUploadCompleted( VNumber, const FileInfo& );
   void localUserIsBuzzedBy( const User& );
+  void newSystemStatusMessage( const QString&, int );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopImageAvailable( const User&, const QPixmap& );
 #endif
@@ -198,6 +199,7 @@ protected slots:
 protected:
   void createLocalShareMessage();
   bool saveChatMessages();
+  void showMessage( const QString&, int ms_to_show );
 
   /* CoreConnection */
   Connection* connection( VNumber ) const;

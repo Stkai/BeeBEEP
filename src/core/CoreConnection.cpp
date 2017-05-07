@@ -356,6 +356,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   emit userChanged( u );
   emit userConnectionStatusChanged( u );
+  showMessage( tr( "%1 found" ).arg( u.name() ), 2000 );
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
   {

@@ -132,6 +132,8 @@ bool Core::start()
   else
     qDebug() << "Starting" << Settings::instance().programName() << "core";
 
+  showMessage( tr( "Connecting" ), 2000 );
+
   if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultListenerPort() ) )
   {
     qWarning() << "Unable to bind default listener port" << Settings::instance().defaultListenerPort();
@@ -304,6 +306,7 @@ void Core::stop()
   saveChatMessages();
   Settings::instance().save();
   qDebug() << "Network core stopped";
+  showMessage( tr( "Disconnected" ), 5000 );
 }
 
 
@@ -349,6 +352,7 @@ void Core::sendBroadcastMessage()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
                                                                            Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+  showMessage( tr( "Searching users" ), 3000 );
   QMetaObject::invokeMethod( mp_broadcaster, "sendBroadcast", Qt::QueuedConnection );
 }
 
@@ -536,4 +540,9 @@ void Core::onTickEvent( int ticks )
                                                        tr( "Max ID is reached. Please close and restart the application." ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System );
   }
+}
+
+void Core::showMessage( const QString& msg, int ms_to_display )
+{
+  emit newSystemStatusMessage( msg, ms_to_display );
 }

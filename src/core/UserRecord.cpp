@@ -54,13 +54,3 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
   }
   return *this;
 }
-
-bool UserRecord::operator<( const UserRecord& ur ) const
-{
-  if( !ur.m_networkAddress.isHostAddressValid() )
-    return false;
-  else if( !m_networkAddress.isHostAddressValid() )
-    return true;
-  else
-    return m_networkAddress.toString() < ur.m_networkAddress.toString();
-}

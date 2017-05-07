@@ -35,7 +35,6 @@ public:
   UserRecord( const QString& user_name, const QString& user_account, const QString& user_hash );
 
   UserRecord& operator=( const UserRecord& );
-  bool operator<( const UserRecord& ) const;
 
   inline bool networkAddressIsValid() const;
 

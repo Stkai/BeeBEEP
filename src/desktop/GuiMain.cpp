@@ -130,7 +130,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
   connect( mp_core, SIGNAL( chatReadByUser( const Chat&, const User& ) ), this, SLOT( onChatReadByUser( const Chat&, const User& ) ) );
   connect( mp_core, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
-
+  connect( mp_core, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
 #endif
@@ -397,8 +397,26 @@ void GuiMain::closeEvent( QCloseEvent* e )
   if( mp_log )
     mp_log->close();
 
+  foreach( QWidget* w, qApp->allWidgets() )
+  {
+    GuiSavedChat* gsv = qobject_cast<GuiSavedChat*>( w );
+    if( gsv )
+      gsv->close();
+  }
+
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->close();
+
+  if( mp_menuMain && mp_menuMain->isVisible() )
+    mp_menuMain->close();
+  if( mp_menuSettings && mp_menuSettings->isVisible() )
+    mp_menuSettings->close();
+  if( mp_menuInfo && mp_menuInfo->isVisible() )
+    mp_menuInfo->close();
+  if( mp_menuStatus && mp_menuStatus->isVisible() )
+    mp_menuStatus->close();
+  if( mp_menuUsersSettings && mp_menuUsersSettings->isVisible() )
+    mp_menuUsersSettings->close();
 
   mp_trayIcon->hide();
 
@@ -448,7 +466,8 @@ void GuiMain::startCore()
   if( mp_core->isConnected() )
     return;
 
-  mp_tabMain->setCurrentWidget( mp_home );
+  if( mp_tabMain->currentWidget() != mp_home )
+    mp_tabMain->setCurrentWidget( mp_home );
 
   if( Settings::instance().firstTime() )
   {
@@ -475,7 +494,6 @@ void GuiMain::startCore()
       return;
   }
 
-  showMessage( tr( "Connecting" ), 2000 );
   m_coreIsConnecting = true;
   mp_core->start();
   initGuiItems();
@@ -2457,6 +2475,15 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
 
 void GuiMain::removeSavedChat( const QString& chat_name )
 {
+  foreach( QWidget* w, qApp->allWidgets() )
+  {
+    GuiSavedChat* gsv = qobject_cast<GuiSavedChat*>( w );
+    if( gsv && gsv->savedChatName() == chat_name )
+    {
+      gsv->close();
+      break;
+    }
+  }
   mp_core->removeSavedChat( chat_name );
   mp_savedChatList->updateSavedChats();
   updateTabTitles();
@@ -3606,6 +3633,9 @@ void GuiMain::onMainTabChanged( int tab_index )
     m_unreadActivities = 0;
     updateTabTitles();
   }
+
+  if( m_coreIsConnecting )
+    m_coreIsConnecting = false;
 }
 
 void GuiMain::setFileTransferEnabled( bool enable )
