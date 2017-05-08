@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiLanguage.h"
 #include "FileDialog.h"
 #include "Settings.h"
@@ -33,6 +34,7 @@ GuiLanguage::GuiLanguage( QWidget *parent )
   setObjectName( "GuiLanguage" );
   setWindowTitle( tr( "Select language" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( QIcon( ":/images/language.png" ) );
+  Bee::removeContextHelpButton( this );
 
   QStringList labels;
   labels << tr( "Language" ) << tr( "File" );

@@ -406,6 +406,22 @@
         <source>%1 has shared %2 files</source>
         <translation>%1 ha condiviso %2 file</translation>
     </message>
+    <message>
+        <source>Connecting</source>
+        <translation>Connessione in corso</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Disconnesso</translation>
+    </message>
+    <message>
+        <source>Searching users</source>
+        <translation>Ricerca utenti</translation>
+    </message>
+    <message>
+        <source>%1 users connected</source>
+        <translation>%1 utenti connessi</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -938,6 +954,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Please add member in the chat:</source>
         <translation>Aggiungi membri nella conversazione:</translation>
+    </message>
+    <message>
+        <source>There is a group with the same members: %1.</source>
+        <translation>Esiste già un gruppo con gli stessi membri: %1.</translation>
+    </message>
+    <message>
+        <source>Create new group</source>
+        <translation>Crea un nuovo gruppo</translation>
     </message>
 </context>
 <context>
@@ -2008,10 +2032,6 @@ Inserisci un nome differente.</translation>
         <translation>Usa le finestre di selezione file native</translation>
     </message>
     <message>
-        <source>Network...</source>
-        <translation>Rete...</translation>
-    </message>
-    <message>
         <source>Show file sharing window</source>
         <translation>Mostra la finestra della condivisione file</translation>
     </message>
@@ -2076,10 +2096,6 @@ Inserisci un nome differente.</translation>
         <translation>Conversazioni salvate</translation>
     </message>
     <message>
-        <source>Connecting</source>
-        <translation>Connessione in corso</translation>
-    </message>
-    <message>
         <source>Starting</source>
         <translation>Avvio in corso</translation>
     </message>
@@ -2102,10 +2118,6 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Check for new version</source>
         <translation>Controlla gli aggiornamenti</translation>
-    </message>
-    <message>
-        <source>Start %1 on Windows startup</source>
-        <translation>Avvia %1 alla partenza di Windows</translation>
     </message>
     <message>
         <source>Save users</source>
@@ -2194,6 +2206,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Do you really want to delete user %1?</source>
         <translation>Vuoi cancellare l&apos;utente %1?</translation>
+    </message>
+    <message>
+        <source>There is a chat with the same members: %1.</source>
+        <translation>Esiste già una conversazione con gli stessi membri: %1.</translation>
+    </message>
+    <message>
+        <source>Create new group</source>
+        <translation>Crea un nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>Create group from chat</source>
+        <translation>Crea il gruppo dalla conversazione</translation>
+    </message>
+    <message>
+        <source>Configure network...</source>
+        <translation>Configura rete...</translation>
+    </message>
+    <message>
+        <source>Start %1 automatically</source>
+        <translation>Avvia %1 automaticamente</translation>
     </message>
 </context>
 <context>

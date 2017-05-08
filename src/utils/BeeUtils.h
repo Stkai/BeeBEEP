@@ -76,6 +76,8 @@ namespace Bee
   QString toolTipForUser( const User&, bool only_status );
   void setWindowStaysOnTop( QWidget*, bool );
   QString stringListToTextString( const QStringList& );
+  void removeContextHelpButton( QWidget* );
+
 }
 
 

@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "FileDialog.h"
 #include "GuiPluginManager.h"
 #include "PluginManager.h"
@@ -34,6 +35,7 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
   setObjectName( "GuiPluginManager" );
   setWindowTitle( tr( "Plugin Manager - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( QIcon( ":/images/plugin.png" ) );
+  Bee::removeContextHelpButton( this );
 
   m_changed = false;
 

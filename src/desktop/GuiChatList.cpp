@@ -42,6 +42,10 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_twChatList->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twChatList->setMouseTracking( true );
   mp_twChatList->setHeaderHidden( true );
+  QString w_stylesheet = "background: white url(:/images/chat-list.png);"
+                        "background-repeat: no-repeat;"
+                        "background-position: bottom center;";
+  mp_twChatList->setStyleSheet( w_stylesheet );
 
   m_chatSelected = ID_INVALID;
   m_blockShowChatRequest = false;
@@ -166,8 +170,8 @@ void GuiChatList::showChatMenu( const QPoint& p )
 
   m_blockShowChatRequest = true;
 
-  mp_actClear->setDisabled( c.isEmpty() );
-  mp_actDelete->setDisabled( c.isDefault() );
+  mp_actClear->setDisabled( ChatManager::instance().isChatEmpty( c, true ) );
+  mp_actDelete->setDisabled( c.isDefault() || c.isPrivate() );
 
   mp_menuContext->exec( QCursor::pos() );
 

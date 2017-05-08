@@ -46,9 +46,6 @@ Core::Core( QObject* parent )
  : QObject( parent ), m_connections()
 {
   qDebug() << "Core created";
-  createDefaultChat();
-  loadUsersAndGroups();
-
   mp_listener = new Listener( this );
   qDebug() << "Listener created";
   mp_broadcaster = new Broadcaster( this );
@@ -56,6 +53,9 @@ Core::Core( QObject* parent )
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
   m_shareListToBuild = 0;
+
+  createDefaultChat();
+  loadUsersAndGroups();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_mDns = new MDnsManager( this );

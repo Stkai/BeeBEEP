@@ -36,6 +36,10 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   header()->hide();
   setRootIsDecorated( false );
   setSortingEnabled( true );
+  QString w_stylesheet = "background: white url(:/images/saved-chat-list.png);"
+                        "background-repeat: no-repeat;"
+                        "background-position: bottom center;";
+  setStyleSheet( w_stylesheet );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
@@ -106,6 +110,8 @@ void GuiSavedChatList::linkSavedChatSelected()
 
 void GuiSavedChatList::updateSavedChats()
 {
+  setIconSize( Settings::instance().avatarIconSize() );
+
   if( topLevelItemCount() > 0 )
     clear();
 

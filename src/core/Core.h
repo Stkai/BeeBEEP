@@ -228,7 +228,7 @@ protected:
   void showUserNameChanged( const User&, const QString& );
   void showUserVCardChanged( const User& );
   void sendLocalUserStatus();
-  void addGroup( const Group&, bool broadcast_to_members );
+  void addGroup( const Group& );
   void sendLocalConnectedUsersTo( const User& );
 
   /* CoreChat */

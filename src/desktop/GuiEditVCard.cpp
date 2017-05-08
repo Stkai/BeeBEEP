@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Avatar.h"
+#include "BeeUtils.h"
 #include "FileDialog.h"
 #include "GuiEditVCard.h"
 #include "Settings.h"
@@ -35,6 +36,7 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   setObjectName( "GuiEditVCard" );
   setWindowTitle( tr( "Edit your profile" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( QIcon( ":/images/profile-edit.png" ) );
+  Bee::removeContextHelpButton( this );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

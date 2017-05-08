@@ -746,3 +746,10 @@ QString Bee::stringListToTextString( const QStringList& sl )
   }
   return s_joined;
 }
+
+void Bee::removeContextHelpButton( QWidget* w )
+{
+  Qt::WindowFlags w_flags = w->windowFlags();
+  w_flags &= ~Qt::WindowContextHelpButtonHint;
+  w->setWindowFlags( w_flags );
+}

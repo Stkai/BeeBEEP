@@ -346,7 +346,10 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   if( private_chat.isValid() )
   {
     if( user_found.isValid() && u.name() != user_found.name() )
+    {
       ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), u.name() );
+      showUserNameChanged( u, user_found.name() );
+    }
   }
   else
     createPrivateChat( u );
@@ -356,7 +359,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   emit userChanged( u );
   emit userConnectionStatusChanged( u );
-  showMessage( tr( "%1 found" ).arg( u.name() ), 2000 );
+  showMessage( tr( "%1 users connected" ).arg( connectedUsers() ), 3000 );
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
   {

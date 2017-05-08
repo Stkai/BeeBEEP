@@ -249,11 +249,11 @@ QStringList ChatManager::chatNamesToStringList( bool add_default_chat ) const
   return sl;
 }
 
-Chat ChatManager::groupChatForUsers( const QList<VNumber>& user_list ) const
+Chat ChatManager::findGroupChatByUsers( const QList<VNumber>& user_list ) const
 {
   foreach( Chat c, m_chats )
   {
-    if( c.isGroup() && c.hasUsers( user_list ) )
+    if( c.isGroup() && c.usersId().size() == user_list.size() && c.hasUsers( user_list ) )
       return c;
   }
   return Chat();
@@ -287,7 +287,7 @@ int ChatManager::countNotEmptyChats( bool check_also_history ) const
   int num_chats = 0;
   foreach( Chat c, m_chats )
   {
-    if( isChatEmpty( c, check_also_history ) )
+    if( !isChatEmpty( c, check_also_history ) )
       num_chats++;
   }
   return num_chats;

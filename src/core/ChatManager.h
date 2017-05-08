@@ -40,6 +40,7 @@ public:
   Chat findChatByName( const QString& ) const;
   Chat findChatByPrivateId( const QString& chat_private_id, bool skip_default_chat, VNumber user_id ) const;
   Chat firstChatWithUnreadMessages() const;
+  Chat findGroupChatByUsers( const QList<VNumber>& ) const;
 
   void setChat( const Chat& );
   inline const QList<Chat>& constChatList() const;
@@ -57,7 +58,6 @@ public:
 
   QList<Chat> groupChatsWithUser( VNumber ) const;
   bool userIsInGroupChat( VNumber ) const;
-  Chat groupChatForUsers( const QList<VNumber>& ) const;
 
   void addSavedChats( const QMap<QString, QString>& );
   inline QString chatSavedText( const QString& ) const;

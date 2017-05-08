@@ -21,8 +21,9 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "GuiSavedChat.h"
+#include "BeeUtils.h"
 #include "ChatManager.h"
+#include "GuiSavedChat.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
 
@@ -32,6 +33,7 @@ GuiSavedChat::GuiSavedChat( QWidget* parent )
 {
   setupUi( this );
   setObjectName( "GuiSavedChat" );
+  Bee::removeContextHelpButton( this );
 
   mp_menuContext = new QMenu( this );
 

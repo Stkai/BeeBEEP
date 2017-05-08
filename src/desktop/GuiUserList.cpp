@@ -41,6 +41,10 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_twUsers->setRootIsDecorated( false );
   mp_twUsers->setSortingEnabled( true );
   mp_twUsers->setColumnCount( 1 );
+  QString w_stylesheet = "background: white url(:/images/user-list.png);"
+                        "background-repeat: no-repeat;"
+                        "background-position: bottom center;";
+  mp_twUsers->setStyleSheet( w_stylesheet );
 
   m_coreIsConnected = false;
   m_filter = "";

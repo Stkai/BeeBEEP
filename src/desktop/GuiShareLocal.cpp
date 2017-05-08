@@ -186,6 +186,7 @@ void GuiShareLocal::updatePaths()
   {
     item = new QTreeWidgetItem( mp_twMyShares );
     item->setText( 0, QString::number( FileShare::instance().local().count( share_path ) ) );
+    item->setData( 0, Qt::UserRole + 1, share_path );
     item->setText( 1, Bee::bytesToString( FileShare::instance().localSize( share_path ) ) );
     item->setText( 2, share_path );
   }

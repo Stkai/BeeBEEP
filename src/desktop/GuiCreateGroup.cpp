@@ -33,6 +33,7 @@ GuiCreateGroup::GuiCreateGroup( QWidget *parent )
 {
   setupUi( this );
   setObjectName( "GuiCreateGroup" );
+  Bee::removeContextHelpButton( this );
 
   QStringList labels;
   labels << tr( "Users" );
@@ -145,6 +146,7 @@ void GuiCreateGroup::checkAndClose()
 
   if( m_selectedUsersId.size() > 0 )
     m_selectedUsersId.clear();
+  m_selectedUsersId.append( ID_LOCAL_USER );
 
   VNumber user_id = 0;
   foreach( QTreeWidgetItem* item, item_list )
@@ -152,6 +154,19 @@ void GuiCreateGroup::checkAndClose()
     user_id = Bee::qVariantToVNumber( item->data( 0, Qt::UserRole+1 ) );
     if( !m_selectedUsersId.contains( user_id ) )
       m_selectedUsersId.append( user_id );
+  }
+
+  Group g = UserManager::instance().findGroupByUsers( m_selectedUsersId );
+  if( g.isValid() )
+  {
+    if( QMessageBox::question( this, Settings::instance().programName(),
+                               QString( "%1\n%2" ).arg( tr( "There is a group with the same members: %1." ).arg( g.name() ) )
+                                                  .arg( "How do you want to continue?" ),
+                               tr( "Create new group" ), tr( "Cancel" ), QString::null, 1, 1 ) == 1 )
+    {
+      mp_leName->setFocus();
+      return;
+    }
   }
 
   accept();

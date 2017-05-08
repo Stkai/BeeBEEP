@@ -85,6 +85,22 @@ Group UserManager::findGroupByPrivateId( const QString& group_private_id ) const
   return Group();
 }
 
+Group UserManager::findGroupByUsers( const QList<VNumber>& group_members ) const
+{
+  if( group_members.size() < 2 )
+    return Group();
+
+  foreach( Group g, m_groups )
+  {
+    if( g.usersId().size() == group_members.size() )
+    {
+      if( g.hasUsers( group_members ) )
+        return g;
+    }
+  }
+  return Group();
+}
+
 bool UserManager::removeGroup( VNumber group_id )
 {
   Group g = group( group_id );

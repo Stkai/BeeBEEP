@@ -21,10 +21,13 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
+#include "ChatManager.h"
 #include "GuiGroupItem.h"
 #include "Group.h"
+#include "Settings.h"
 #include "UserManager.h"
-#include "ChatManager.h"
+
 
 
 GuiGroupItem::GuiGroupItem( QTreeWidget* parent )
@@ -105,12 +108,12 @@ bool GuiGroupItem::updateUser( const User& u )
   if( isGroup() )
     return false;
 
-  setIcon( 0, Bee::userStatusIcon( u.status() ) );
+  setIcon( 0, Bee::avatarForUser( u, Settings::instance().avatarIconSize(), true ) );
   setText( 0, u.name() );
   if( u.isStatusConnected() )
     setToolTip( 0, Bee::toolTipForUser( u, false ) );
   else
-    setToolTip( 0, u.path() );
+    setToolTip( 0, "" );
 
   return true;
 }

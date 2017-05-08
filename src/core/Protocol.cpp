@@ -792,6 +792,7 @@ Group Protocol::createGroup( const QString& group_name, const QString& group_pri
     g.setPrivateId( newMd5Id() );
   else
     g.setPrivateId( group_private_id );
+  g.addUser( ID_LOCAL_USER );
   return g;
 }
 

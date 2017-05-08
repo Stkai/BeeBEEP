@@ -61,3 +61,13 @@ void Group::setUsers( const QList<VNumber>& group_members )
   foreach( VNumber member_id, group_members )
     addUser( member_id );
 }
+
+bool Group::hasUsers( const QList<VNumber>& user_id_list ) const
+{
+  foreach( VNumber user_id, user_id_list )
+  {
+    if( !hasUser( user_id ) )
+      return false;
+  }
+  return true;
+}

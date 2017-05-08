@@ -31,6 +31,8 @@ GuiWizard::GuiWizard( QWidget *parent )
 {
   setupUi( this );
   setWindowTitle( Settings::instance().programName() );
+  Bee::removeContextHelpButton( this );
+
   mp_lWelcome->setText( tr( "Welcome to <b>%1 Network</b>." ).arg( Settings::instance().programName() ) );
   m_userName = "";
   connect( mp_pbChangeUser, SIGNAL( clicked() ), this, SLOT( saveSettings() ) );

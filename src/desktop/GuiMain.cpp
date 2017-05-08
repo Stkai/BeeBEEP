@@ -612,7 +612,7 @@ void GuiMain::createActions()
   mp_actBroadcast = new QAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), this );
   connect( mp_actBroadcast, SIGNAL( triggered() ), this, SLOT( sendBroadcastMessage() ) );
 
-  mp_actConfigureNetwork = new QAction( QIcon( ":/images/network.png"), tr( "Network..."), this );
+  mp_actConfigureNetwork = new QAction( QIcon( ":/images/network.png"), tr( "Configure network..."), this );
   connect( mp_actConfigureNetwork, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
   mp_actQuit = new QAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this );
@@ -655,9 +655,6 @@ void GuiMain::createMenus()
   /* Main Menu */
   mp_menuMain = new QMenu( tr( "Main" ), this );
   mp_menuMain->addAction( mp_actStartStopCore );
-  mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actVCard );
-  mp_actAddUsers = mp_menuMain->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
   mp_menuMain->addSeparator();
   mp_menuMain->addMenu( mp_menuPlugins );
   mp_menuMain->addSeparator();
@@ -719,6 +716,19 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
   act->setData( 29 );
 
+  mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
+  mp_menuNetworkStatus->setIcon( QIcon( ":/images/connect.png" ) );
+  mp_menuSettings->addMenu( mp_menuNetworkStatus );
+  mp_menuNetworkStatus->addAction( mp_actConfigureNetwork );
+  mp_menuNetworkStatus->addSeparator();
+  mp_actHostAddress = mp_menuNetworkStatus->addAction( QString( "ip" ) );
+  mp_actPortBroadcast = mp_menuNetworkStatus->addAction( QString( "udp1" ) );
+  mp_actPortListener = mp_menuNetworkStatus->addAction( QString( "tcp1" ) );
+  mp_actPortFileTransfer = mp_menuNetworkStatus->addAction( QString( "tcp2" ) );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  mp_actMulticastDns = mp_menuNetworkStatus->addAction( QString( "mdns" ) );
+#endif
+
   mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
   mp_menuUsersSettings->setIcon( QIcon( ":/images/user-list.png" ) );
   mp_menuSettings->addMenu( mp_menuUsersSettings );
@@ -742,7 +752,13 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().saveUserList() );
   act->setData( 32 );
   mp_menuUsersSettings->addSeparator();
+  mp_actAddUsers = mp_menuUsersSettings->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
   mp_menuUsersSettings->addAction( QIcon( ":/images/workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
+  mp_menuUsersSettings->addSeparator();
+  act = mp_menuUsersSettings->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().autoUserAway() );
+  act->setData( 20 );
 
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
   mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
@@ -764,10 +780,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatClearAllReadMessages() );
   act->setData( 47 );
-  act = mp_menuChatSettings->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().autoUserAway() );
-  act->setData( 20 );
 
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
   mp_menuFileTransferSettings->setIcon( QIcon( ":/images/file-transfer.png" ) );
@@ -846,7 +858,6 @@ void GuiMain::createMenus()
   act->setData( 48 );
 
   mp_menuSettings->addSeparator();
-  mp_menuSettings->addAction( mp_actConfigureNetwork );
   mp_menuSettings->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
   mp_menuSettings->addAction( QIcon( ":/images/language.png" ), tr( "Select language") + QString( "..." ), this, SLOT( selectLanguage() ) );
   mp_menuSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
@@ -861,7 +872,7 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().useNativeDialogs() );
   act->setData( 4 );
 #ifdef Q_OS_WIN
-  act = mp_menuSettings->addAction( tr( "Start %1 on Windows startup" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Start %1 automatically" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().hasStartOnSystemBoot() );
   act->setData( 16 );
@@ -958,8 +969,6 @@ void GuiMain::createMenus()
     act->setIconVisibleInMenu( true );
   }
   mp_menuStatus->addSeparator();
-  mp_menuStatus->addAction( mp_actVCard );
-  mp_menuStatus->addSeparator();
   mp_menuUserStatusList = new QMenu( tr( "Recently used" ), this );
   act = mp_menuStatus->addMenu( mp_menuUserStatusList );
   act->setIcon( QIcon( ":/images/recent.png" ) );
@@ -1005,15 +1014,7 @@ void GuiMain::createMenus()
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
   mp_menuTrayIcon->addSeparator();
-
-  mp_menuNetworkStatus = mp_menuTrayIcon->addMenu( QIcon( ":/images/connect.png" ), tr( "Network" ) );
-  mp_actHostAddress = mp_menuNetworkStatus->addAction( QString( "ip" ) );
-  mp_actPortBroadcast = mp_menuNetworkStatus->addAction( QString( "udp1" ) );
-  mp_actPortListener = mp_menuNetworkStatus->addAction( QString( "tcp1" ) );
-  mp_actPortFileTransfer = mp_menuNetworkStatus->addAction( QString( "tcp2" ) );
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_actMulticastDns = mp_menuNetworkStatus->addAction( QString( "mdns" ) );
-#endif
+  mp_menuTrayIcon->addMenu( mp_menuNetworkStatus );
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this, SLOT( forceShutdown() ) );
 
@@ -1037,6 +1038,7 @@ void GuiMain::createToolAndMenuBars()
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addAction( mp_actBroadcast );
+  mp_barMain->addAction( mp_actVCard );
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actCreateGroup );
@@ -2341,6 +2343,23 @@ void GuiMain::createGroup()
   gcg.setFixedSize( gcg.size() );
   if( gcg.exec() == QDialog::Accepted )
   {
+    Chat c = ChatManager::instance().findGroupChatByUsers( gcg.selectedUsersId() );
+    if( c.isValid() )
+    {
+      switch( QMessageBox::question( this, Settings::instance().programName(),
+                                     QString( "%1\n%2" ).arg( tr( "There is a chat with the same members: %1." ).arg( c.name() ) )
+                                                        .arg( "How do you want to continue?" ),
+                                     tr( "Create new group" ), tr( "Create group from chat" ), tr( "Cancel" ), 1, 2 ) )
+      {
+      case 0: break;
+      case 1:
+        createGroupFromChat( c.id() );
+        return;
+      default:
+        return;
+      }
+    }
+
     Group g = mp_core->createGroup( gcg.selectedName(), gcg.selectedUsersId() );
     if( g.isValid() )
       showChatForGroup( g.id() );
@@ -3041,6 +3060,8 @@ void GuiMain::changeAvatarSizeInList()
   Settings::instance().setAvatarIconSize( QSize( avatar_size, avatar_size ) );
   refreshUserList();
   mp_chatList->reloadChatList();
+  mp_groupList->loadGroups();
+  mp_savedChatList->updateSavedChats();
 }
 
 void GuiMain::toggleUserFavorite( VNumber user_id )

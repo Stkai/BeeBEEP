@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiAskPassword.h"
 #include "Settings.h"
 
@@ -31,6 +32,7 @@ GuiAskPassword::GuiAskPassword( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiAskPassword" );
   setWindowTitle( tr( "Chat Password - %1" ).arg( Settings::instance().programName() ) );
+  Bee::removeContextHelpButton( this );
 
   m_bgPasswordType.addButton( mp_rbSelectPassaword, 0 );
   m_bgPasswordType.addButton( mp_rbUseDefaultPassword, 1 );

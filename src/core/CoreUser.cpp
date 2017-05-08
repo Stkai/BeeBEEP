@@ -212,7 +212,7 @@ Group Core::createGroup( const QString& group_name, const QList<VNumber>& group_
 
   Group g = Protocol::instance().createGroup( group_name, group_private_id, group_members );
   qDebug() << "Group" << g.name() << "created with id:" << g.privateId();
-  addGroup( g, true );
+  addGroup( g );
 
   QString sHtmlMsg = tr( "%1 You have created group: %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), g.name() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
@@ -245,14 +245,14 @@ bool Core::createGroupFromChat( VNumber chat_id )
     return false;
 }
 
-void Core::addGroup( const Group& g, bool broadcast_to_members )
+void Core::addGroup( const Group& g )
 {
   UserManager::instance().setGroup( g );
   emit updateGroup( g.id() );
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
-    createGroupChat( g.name(), g.usersId(), g.privateId(), broadcast_to_members );
+    createGroupChat( g.name(), g.usersId(), g.privateId(), isConnected() );
 }
 
 void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& members_id )
@@ -338,7 +338,7 @@ void Core::loadUsersAndGroups()
     {
       g = Protocol::instance().loadGroup( group_data );
       if( g.isValid() )
-        addGroup( g, false );
+        addGroup( g );
     }
   }
 

@@ -51,6 +51,7 @@ public:
   Group group( VNumber ) const;
   bool hasGroupName( const QString& ) const;
   Group findGroupByPrivateId( const QString& ) const;
+  Group findGroupByUsers( const QList<VNumber>& ) const;
   bool removeGroup( VNumber );
   bool isUserInGroups( VNumber ) const;
 

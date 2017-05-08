@@ -37,6 +37,10 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   header()->hide();
   setRootIsDecorated( true );
   setSortingEnabled( true );
+  QString w_stylesheet = "background: white url(:/images/group-list.png);"
+                        "background-repeat: no-repeat;"
+                        "background-position: bottom center;";
+  setStyleSheet( w_stylesheet );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
@@ -69,6 +73,7 @@ GuiGroupList::GuiGroupList( QWidget* parent )
 
 void GuiGroupList::loadGroups()
 {
+  setIconSize( Settings::instance().avatarIconSize() );
   if( topLevelItemCount() > 0 )
     clear();
 

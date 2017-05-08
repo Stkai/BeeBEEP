@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "Config.h"
 #include "GuiWorkgroups.h"
 #include "Settings.h"
@@ -32,6 +33,7 @@ GuiWorkgroups::GuiWorkgroups( QWidget *parent )
   setupUi( this );
   setWindowTitle( tr( "Workgroups" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( QIcon( ":/images/workgroup.png" ) );
+  Bee::removeContextHelpButton( this );
 
   mp_twWorkgroups->setColumnCount( 1 );
   QStringList labels;

@@ -21,7 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "Config.h"
+#include "BeeUtils.h"
 #include "GuiAddUser.h"
 #include "NetworkManager.h"
 #include "Protocol.h"
@@ -34,6 +34,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   setupUi( this );
   setWindowTitle( tr( "Add users" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( QIcon( ":/images/user-add.png" ) );
+  Bee::removeContextHelpButton( this );
 
   QString s_txt1 = QString( "<b>%1</b>&nbsp;&nbsp;&nbsp;%2: <b>%3</b>&nbsp;&nbsp;&nbsp;%4: <b>%5</b>&nbsp;&nbsp;&nbsp;%6: %7" )
                      .arg( tr( "Your parameters" ) )
