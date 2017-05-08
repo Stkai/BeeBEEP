@@ -38,11 +38,11 @@ public:
   void connectToNetworkAddress( const NetworkAddress& );
   void initSocket( qintptr );
 
+  bool sendData( const QByteArray& );
+
   void flushAll();
   void closeConnection();
   void abortConnection();
-
-  bool sendData( const QByteArray& );
 
   inline VNumber userId() const;
   inline void setUserId( VNumber );

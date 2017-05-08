@@ -205,7 +205,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     return;
   }
 
-  Message m = Protocol::instance().toMessage( auth_byte_array );
+  Message m = Protocol::instance().toMessage( auth_byte_array, c->protoVersion() );
   if( !m.isValid() )
   {
     qWarning() << "Core has received an invalid HELLO from" << qPrintable( c->networkAddress().toString() );
@@ -365,7 +365,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Sending my VCard to" << u.path();
 #endif
-      c->sendData( Protocol::instance().localVCardMessage() );
+      c->sendMessage( Protocol::instance().localVCardMessage() );
     }
   }
 

@@ -363,11 +363,11 @@ void Core::onFileTransferServerListening()
 
 void Core::sendFileShareRequestToAll()
 {
-  const QByteArray& file_share_request_message = Protocol::instance().fileShareRequestMessage();
+  Message file_share_request_message = Protocol::instance().fileShareRequestMessage();
   foreach( Connection* c, m_connections )
   {
     if( !FileShare::instance().userHasFileShareList( c->userId() ) )
-      c->sendData( file_share_request_message );
+      c->sendMessage( file_share_request_message );
   }
 }
 
@@ -375,7 +375,7 @@ void Core::sendFileShareListTo( VNumber user_id )
 {
   Connection* c = connection( user_id );
   if( c )
-    c->sendData( Protocol::instance().fileShareListMessage() );
+    c->sendMessage( Protocol::instance().fileShareListMessage() );
   else
     qWarning() << user_id << "is not a valid user id. Unable to send share list message";
 }
@@ -385,13 +385,10 @@ void Core::sendFileShareListToAll()
   if( !isConnected() )
     return;
 
-  const QByteArray& share_list_message = Protocol::instance().fileShareListMessage();
-
-  if( share_list_message.isEmpty() )
-    return;
+  Message share_list_message = Protocol::instance().fileShareListMessage();
 
   foreach( Connection* c, m_connections )
-    c->sendData( share_list_message );
+    c->sendMessage( share_list_message );
 }
 
 void Core::addPathToShare( const QString& share_path )

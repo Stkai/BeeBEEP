@@ -37,12 +37,8 @@ const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 
 
 Protocol::Protocol()
-  : m_id( ID_START ), m_fileShareListMessage( "" ), m_fileShareRequestMessage( "" )
+  : m_id( ID_START ), m_fileShareListMessage( Message::Share, ID_SHARE_MESSAGE, "" )
 {
-  Message file_share_request_message( Message::Share, ID_SHARE_MESSAGE, "" );
-  file_share_request_message.addFlag( Message::Request );
-  m_fileShareRequestMessage = fromMessage( file_share_request_message );
-
   QDataStream ds;
   m_datastreamMaxVersion = ds.version();
   qDebug() << "Protocol has detected latest datastream version:" << m_datastreamMaxVersion;
@@ -110,7 +106,7 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Undefined;
 }
 
-QByteArray Protocol::fromMessage( const Message& m ) const
+QByteArray Protocol::fromMessage( const Message& m, int proto_version ) const
 {
   if( !m.isValid() )
     return "";
@@ -120,7 +116,10 @@ QByteArray Protocol::fromMessage( const Message& m ) const
   sl << QString::number( m.text().size() );
   sl << QString::number( m.flags() );
   sl << m.data();
-  sl << m.timestamp().toString( Qt::ISODate );
+  if( proto_version < UTC_TIMESTAMP_PROTO_VERSION )
+    sl << m.timestamp().toString( Qt::ISODate );
+  else
+    sl << m.timestamp().toUTC().toString( Qt::ISODate );
   sl << m.text();
   QByteArray byte_array = sl.join( PROTOCOL_FIELD_SEPARATOR ).toUtf8();
   while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )
@@ -128,7 +127,7 @@ QByteArray Protocol::fromMessage( const Message& m ) const
   return byte_array;
 }
 
-Message Protocol::toMessage( const QByteArray& byte_array_data ) const
+Message Protocol::toMessage( const QByteArray& byte_array_data, int proto_version ) const
 {
   QString message_data = QString::fromUtf8( byte_array_data );
   Message m;
@@ -183,7 +182,17 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
     return m;
   }
   else
-    m.setTimestamp( dt_timestamp.toLocalTime() ); // sometimes people in vpn are in different timezone
+  {
+    if( proto_version < UTC_TIMESTAMP_PROTO_VERSION )
+    {
+      m.setTimestamp( dt_timestamp.toLocalTime() );
+    }
+    else
+    {
+      dt_timestamp.setTimeSpec( Qt::UTC );
+      m.setTimestamp( dt_timestamp.toLocalTime() );
+    }
+  }
 
   QString msg_txt;
   if( sl.size() > 1 )
@@ -203,13 +212,13 @@ Message Protocol::toMessage( const QByteArray& byte_array_data ) const
 QByteArray Protocol::pingMessage() const
 {
   Message m( Message::Ping, ID_PING_MESSAGE, "*" );
-  return fromMessage( m );
+  return fromMessage( m, 1 );
 }
 
 QByteArray Protocol::pongMessage() const
 {
   Message m( Message::Pong, ID_PONG_MESSAGE, "*" );
-  return fromMessage( m );
+  return fromMessage( m, 1 );
 }
 
 QByteArray Protocol::broadcastMessage( const QHostAddress& to_host_address ) const
@@ -218,7 +227,7 @@ QByteArray Protocol::broadcastMessage( const QHostAddress& to_host_address ) con
   QStringList sl;
   sl << to_host_address.toString();
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
-  return fromMessage( m );
+  return fromMessage( m, 1 );
 }
 
 QHostAddress Protocol::hostAddressFromBroadcastMessage( const Message& m ) const
@@ -287,17 +296,17 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
     data_list << QString( "" );
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
-  return fromMessage( m );
+  return fromMessage( m, 1 );
 }
 
-QByteArray Protocol::writingMessage( const QString& chat_private_id ) const
+Message Protocol::writingMessage( const QString& chat_private_id ) const
 {
   Message writing_message( Message::User, ID_WRITING_MESSAGE, "*" );
   writing_message.addFlag( Message::Private );
   writing_message.addFlag( Message::UserWriting );
   if( !chat_private_id.isEmpty() )
     writing_message.setData( chat_private_id );
-  return fromMessage( writing_message );
+  return writing_message;
 }
 
 Message Protocol::userStatusMessage( int user_status, const QString& user_status_description ) const
@@ -308,16 +317,11 @@ Message Protocol::userStatusMessage( int user_status, const QString& user_status
   return m;
 }
 
-QByteArray Protocol::localUserStatusMessage() const
-{
-  return fromMessage( userStatusMessage( Settings::instance().localUser().status(), Settings::instance().localUser().statusDescription() ) );
-}
-
-QByteArray Protocol::localUserNameMessage() const
+Message Protocol::localUserNameMessage() const
 {
   Message m( Message::User, ID_USER_MESSAGE, Settings::instance().localUser().name() );
   m.addFlag( Message::UserName );
-  return fromMessage( m );
+  return m;
 }
 
 bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
@@ -370,12 +374,11 @@ QPixmap Protocol::stringToPixmap( const QString& s ) const
   return pix;
 }
 
-QByteArray Protocol::localVCardMessage() const
+Message Protocol::localVCardMessage() const
 {
   const VCard& vc = Settings::instance().localUser().vCard();
   Message m( Message::User, ID_USER_MESSAGE, pixmapToString( vc.photo() ) );
   m.addFlag( Message::UserVCard );
-
   QStringList data_list;
   data_list << vc.nickName();
   data_list << vc.firstName();
@@ -386,8 +389,7 @@ QByteArray Protocol::localVCardMessage() const
   data_list << vc.phoneNumber();
   data_list << vc.info();
   m.setData( data_list.join( DATA_FIELD_SEPARATOR ) );
-
-  return fromMessage( m );
+  return m;
 }
 
 bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
@@ -1227,6 +1229,13 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
   return file_info_list;
 }
 
+Message Protocol::fileShareRequestMessage() const
+{
+  Message file_share_request_message( Message::Share, ID_SHARE_MESSAGE, "" );
+  file_share_request_message.addFlag( Message::Request );
+  return file_share_request_message;
+}
+
 void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& file_info_list, int server_port )
 {
   QStringList msg_list;
@@ -1253,7 +1262,7 @@ void Protocol::createFileShareListMessage( const QMultiMap<QString, FileInfo>& f
   m.setData( msg_list.isEmpty() ? QString( "0" ) : QString::number( server_port ) );
   m.addFlag( Message::List );
 
-  m_fileShareListMessage = fromMessage( m );
+  m_fileShareListMessage = m;
 }
 
 QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddress& server_address ) const
@@ -1500,7 +1509,7 @@ Message Protocol::chatMessage( const Chat& c, const QString& msg_txt )
       m.addFlag( Message::Private );
   }
 
-  m.setData( Protocol::instance().chatMessageDataToString( cmd ) );
+  m.setData( chatMessageDataToString( cmd ) );
   return m;
 }
 

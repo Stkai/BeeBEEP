@@ -70,14 +70,6 @@ bool Chat::isEmpty() const
   return true;
 }
 
-QDateTime Chat::dateTimeStarted() const
-{
-  if( m_messages.isEmpty() )
-    return QDateTime::currentDateTime();
-  else
-    return m_messages.first().timestamp();
-}
-
 VNumber Chat::privateUserId() const
 {
   foreach( VNumber user_id, m_usersId )

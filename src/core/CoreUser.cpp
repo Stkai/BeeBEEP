@@ -112,9 +112,9 @@ void Core::showUserVCardChanged( const User& u )
 
 void Core::sendLocalUserStatus()
 {
-  QByteArray user_status_message = Protocol::instance().localUserStatusMessage();
+  Message user_status_message = Protocol::instance().userStatusMessage( Settings::instance().localUser().status(), Settings::instance().localUser().statusDescription() );
   foreach( Connection *c, m_connections )
-    c->sendData( user_status_message );
+    c->sendMessage( user_status_message );
 }
 
 bool Core::changeLocalUser( const QString& user_name )
@@ -178,8 +178,8 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   Settings::instance().setLocalUser( u );
   Settings::instance().save();
 
-  QByteArray vcard_message = Protocol::instance().localVCardMessage();
-  QByteArray nick_message = Protocol::instance().localUserNameMessage();
+  Message vcard_message = Protocol::instance().localVCardMessage();
+  Message nick_message = Protocol::instance().localUserNameMessage();
 
   if( isConnected() )
   {
@@ -188,10 +188,10 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
       if( c->protoVersion() == 1 )
       {
         if( nick_name_changed )
-          c->sendData( nick_message );
+          c->sendMessage( nick_message );
       }
       else
-        c->sendData( vcard_message );
+        c->sendMessage( vcard_message );
     }
   }
 

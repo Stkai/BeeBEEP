@@ -372,8 +372,7 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
     if( !Settings::instance().enableFileSharing() )
       return;
 
-    if( !Protocol::instance().fileShareListMessage().isEmpty() )
-      sendFileShareListTo( u.id() );
+    sendFileShareListTo( u.id() );
   }
   else
     qWarning() << "Invalid flag found in file share message from" << qPrintable( u.path() );

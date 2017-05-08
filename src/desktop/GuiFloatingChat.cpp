@@ -293,6 +293,7 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 void GuiFloatingChat::showUp()
 {
   bool on_top_flag_added = false;
+
   if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
   {
     Bee::setWindowStaysOnTop( this, true );

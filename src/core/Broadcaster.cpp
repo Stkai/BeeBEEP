@@ -207,7 +207,7 @@ void Broadcaster::readBroadcastDatagram()
       qWarning() << "Broadcaster has received an invalid data size:" << datagram;
       continue;
     }
-    Message m = Protocol::instance().toMessage( datagram );
+    Message m = Protocol::instance().toMessage( datagram, 1 );
     if( !m.isValid() || m.type() != Message::Beep )
     {
       qWarning() << "Broadcaster has received an invalid data:" << datagram;

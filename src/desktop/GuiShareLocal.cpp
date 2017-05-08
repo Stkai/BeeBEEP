@@ -62,6 +62,7 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   mp_menuContext = new QMenu( this );
 
   connect( mp_twMyShares, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMySharesMenu( const QPoint& ) ) );
+  connect( mp_twMyShares, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( openItemDoubleClicked( QTreeWidgetItem*, int ) ) );
 }
 
 void GuiShareLocal::setupToolBar( QToolBar* bar )

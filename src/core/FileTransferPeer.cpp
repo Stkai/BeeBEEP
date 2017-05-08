@@ -178,7 +178,7 @@ void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_arra
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "checks authentication message";
 #endif
-  Message m = Protocol::instance().toMessage( auth_byte_array );
+  Message m = Protocol::instance().toMessage( auth_byte_array, m_socket.protoVersion() );
   if( !m.isValid() )
   {
     qWarning() << qPrintable( name() ) << "has found an invalid auth message";

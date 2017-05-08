@@ -45,7 +45,7 @@ void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
 
 void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
 {
-  Message m = Protocol::instance().toMessage( byte_array );
+  Message m = Protocol::instance().toMessage( byte_array, m_socket.protoVersion() );
   if( !m.isValid() )
   {
     qWarning() << name() << "receives an invalid file request:" << byte_array;
@@ -99,7 +99,7 @@ void FileTransferPeer::sendFileHeader()
   }
 
   Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo );
-  QByteArray file_header = Protocol::instance().fromMessage( file_header_message );
+  QByteArray file_header = Protocol::instance().fromMessage( file_header_message, m_socket.protoVersion() );
 
   if( !m_socket.sendData( file_header ) )
     setError( tr( "unable to send file header" ) );

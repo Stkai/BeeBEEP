@@ -362,7 +362,7 @@ void ConnectionSocket::sendAnswerHello()
 
 void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 {
-  Message m = Protocol::instance().toMessage( array_data );
+  Message m = Protocol::instance().toMessage( array_data, m_protoVersion );
   if( !m.isValid() )
   {
     qWarning() << "ConnectionSocket has received an invalid HELLO from" << qPrintable( m_networkAddress.toString() );

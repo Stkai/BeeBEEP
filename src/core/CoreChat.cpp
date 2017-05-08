@@ -279,6 +279,7 @@ void Core::sendWritingMessage( VNumber chat_id )
     return;
 
   Chat from_chat = ChatManager::instance().chat( chat_id );
+  Message m = Protocol::instance().writingMessage( from_chat.privateId() );
   foreach( VNumber user_id,  from_chat.usersId() )
   {
     if( user_id == ID_LOCAL_USER )
@@ -288,7 +289,7 @@ void Core::sendWritingMessage( VNumber chat_id )
     if( !c )
       continue;
 
-    c->sendData( Protocol::instance().writingMessage( from_chat.privateId() ) );
+    c->sendMessage( m );
   }
 }
 

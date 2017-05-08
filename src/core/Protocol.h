@@ -42,15 +42,15 @@ class Protocol
 public:
   inline int datastreamMaxVersion() const;
   inline int messageMinimumSize() const;
-  QByteArray fromMessage( const Message& ) const;
-  Message toMessage( const QByteArray& ) const;
+  QByteArray fromMessage( const Message&, int proto_version ) const;
+  Message toMessage( const QByteArray&, int proto_version ) const;
 
   QByteArray pingMessage() const;
   QByteArray pongMessage() const;
   QByteArray broadcastMessage( const QHostAddress& ) const;
   QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
   QByteArray helloMessage( const QString& cipher_key_tmp ) const;
-  QByteArray writingMessage( const QString& chat_private_id ) const;
+  Message writingMessage( const QString& chat_private_id ) const;
   inline Message systemMessage( const QString& ) const;
   Message chatMessage( const Chat&, const QString& );
   Message chatReadMessage( const Chat& );
@@ -80,19 +80,18 @@ public:
   inline Message buzzMessage() const;
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
-  QByteArray localUserStatusMessage() const;
   bool changeUserStatusFromMessage( User*, const Message& ) const;
-  QByteArray localUserNameMessage() const;
+  Message localUserNameMessage() const;
   bool changeUserNameFromMessage( User*, const Message& ) const;
-  QByteArray localVCardMessage() const;
+  Message localVCardMessage() const;
   bool changeVCardFromMessage( User*, const Message& ) const;
 
   static bool fileCanBeShared( const QFileInfo& );
   int countFilesCanBeSharedInPath( const QString& );
   void createFileShareListMessage( const QMultiMap<QString, FileInfo>&, int server_port );
-  inline const QByteArray& fileShareListMessage() const;
+  inline const Message& fileShareListMessage() const;
   QList<FileInfo> messageToFileShare( const Message&, const QHostAddress& ) const;
-  inline const QByteArray& fileShareRequestMessage() const;
+  Message fileShareRequestMessage() const;
 
   User createUser( const Message&, const QHostAddress& );
   User createTemporaryUser( const UserRecord& );
@@ -167,9 +166,8 @@ protected:
 
 private:
   VNumber m_id;
-  QByteArray m_fileShareListMessage;
-  QByteArray m_fileShareRequestMessage;
   int m_datastreamMaxVersion;
+  Message m_fileShareListMessage;
 
 };
 
@@ -180,8 +178,7 @@ inline VNumber Protocol::maxId() const { return 18446744073709000000u; }
 inline int Protocol::messageMinimumSize() const { return 10; }
 inline Message Protocol::systemMessage( const QString& msg_txt ) const { return Message( Message::System, ID_SYSTEM_MESSAGE, msg_txt ); }
 inline Message Protocol::buzzMessage() const { return Message( Message::Buzz, ID_BUZZ_MESSAGE, QLatin1String( "*" ) ); }
-inline const QByteArray& Protocol::fileShareListMessage() const { return m_fileShareListMessage; }
-inline const QByteArray& Protocol::fileShareRequestMessage() const { return m_fileShareRequestMessage; }
 inline int Protocol::datastreamMaxVersion() const { return m_datastreamMaxVersion; }
+inline const Message& Protocol::fileShareListMessage() const { return m_fileShareListMessage; }
 
 #endif // BEEBEEP_PROTOCOL_H

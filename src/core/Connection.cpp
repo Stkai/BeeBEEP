@@ -38,7 +38,7 @@ Connection::Connection( QObject *parent )
 
 bool Connection::sendMessage( const Message& m )
 {
-  QByteArray message_data = Protocol::instance().fromMessage( m );
+  QByteArray message_data = Protocol::instance().fromMessage( m, protoVersion() );
   if( message_data.isEmpty() )
   {
     qWarning() << "Connection has received an invalid message to send";
@@ -56,7 +56,7 @@ void Connection::parseData( const QByteArray& message_data )
   if( message_data.size() > 524288 )
     qWarning() << "Incoming message from" << qPrintable( networkAddress().toString() ) << "is VERY VERY BIG:" << message_data.size() << "bytes";
 
-  Message m = Protocol::instance().toMessage( message_data );
+  Message m = Protocol::instance().toMessage( message_data, protoVersion() );
   if( !m.isValid() )
   {
     qWarning() << "Connection from" << qPrintable( networkAddress().toString() ) << "has received an invalid message data";

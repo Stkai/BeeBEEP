@@ -68,8 +68,6 @@ public:
   bool isDefault() const;
   inline bool isGroup() const;
 
-  QDateTime dateTimeStarted() const;
-
 private:
   VNumber m_id;
   QString m_name;

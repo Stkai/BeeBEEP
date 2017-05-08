@@ -36,7 +36,7 @@ void FileTransferPeer::sendDownloadData()
 void FileTransferPeer::sendDownloadRequest()
 {
   qDebug() << name() << "sending file request:" << m_fileInfo.id() << m_fileInfo.password();
-  if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ) ) ) )
+  if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ), m_socket.protoVersion() ) ) )
   {
     if( m_socket.protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
     {
@@ -71,7 +71,7 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 
   if( m_state == FileTransferPeer::FileHeader )
   {
-    Message file_header_message = Protocol::instance().toMessage( byte_array );
+    Message file_header_message = Protocol::instance().toMessage( byte_array, m_socket.protoVersion() );
     if( !file_header_message.isValid() )
     {
       setError( tr( "invalid file header" ) );
