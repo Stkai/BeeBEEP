@@ -151,13 +151,18 @@ void GuiChatList::showChatMenu( const QPoint& p )
   QTreeWidgetItem* item = mp_twChatList->itemAt( p );
   if( !item )
   {
-    QMenu menu_create_chat;
+    QMenu* menu_create_chat = new QMenu( this );
+    bool create_chat_is_enabled = true;
     if( UserManager::instance().userList().toList().size() < 2 )
-      menu_create_chat.addAction( QIcon( ":/images/group-remove.png" ), tr( "Waiting for two or more connected user" ) );
-    else
-      menu_create_chat.addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
+    {
+      menu_create_chat->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
+      create_chat_is_enabled = false;
+      menu_create_chat->addSeparator();
+    }
 
-    menu_create_chat.exec( QCursor::pos() );
+    QAction* act = menu_create_chat->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
+    act->setEnabled( create_chat_is_enabled );
+    menu_create_chat->exec( QCursor::pos() );
     return;
   }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -869,11 +869,15 @@
     </message>
     <message>
         <source>Waiting for two or more connected user</source>
-        <translation>Aspetta per due o più utenti connessi</translation>
+        <translation type="vanished">Aspetta per due o più utenti connessi</translation>
     </message>
     <message>
         <source>Search chat</source>
         <translation>Cerca una conversazione</translation>
+    </message>
+    <message>
+        <source>Please wait for two or more users</source>
+        <translation>Aspetta due o più utenti connessi</translation>
     </message>
 </context>
 <context>
@@ -1135,7 +1139,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Waiting for two or more connected user</source>
-        <translation>Aspetta per due o più utenti connessi</translation>
+        <translation type="vanished">Aspetta per due o più utenti connessi</translation>
     </message>
     <message>
         <source>Delete group</source>
@@ -1148,6 +1152,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Disable notifications</source>
         <translation>Disabilita notifiche</translation>
+    </message>
+    <message>
+        <source>Please wait for two or more users</source>
+        <translation>Aspetta due o più utenti connessi</translation>
     </message>
 </context>
 <context>

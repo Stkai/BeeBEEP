@@ -191,13 +191,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
     }
   }
 
-  Connection* c = connection( u.id() );
-  if( !c )
-  {
-    qWarning() << "Connection not found for user" << u.id() << "while parsing file message";
-    return;
-  }
-  fi.setHostAddress( c->peerAddress() );
+  fi.setHostAddress( u.networkAddress().hostAddress() );
 
   QString sys_msg = tr( "%1 %2 is sending to you the file: %3." ).arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), u.name(), fi.name() );
   dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
@@ -294,9 +288,12 @@ void Core::parseGroupMessage( const User& u, const Message& m )
           continue;
 
         if( !u.isValid() )
+        {
           u = Protocol::instance().createTemporaryUser( ur );
+          UserManager::instance().setUser( u );
+          emit userChanged( u );
+        }
 
-        UserManager::instance().setUser( u );
         ul.set( u );
       }
     }

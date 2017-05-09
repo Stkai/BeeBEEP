@@ -77,7 +77,9 @@ void FileTransfer::stopListener()
 void FileTransfer::resetServerFiles()
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "File Transfer reset files to" << qPrintable( Settings::instance().localUser().networkAddress().toString() );
+  qDebug() << "File Transfer reset files to"
+           << qPrintable( Settings::instance().localUser().networkAddress().hostAddress().toString() )
+           << serverPort();
 #endif
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )

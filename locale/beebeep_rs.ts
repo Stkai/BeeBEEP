@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sr" sourcelanguage="en_GB">
+<TS version="2.1" language="sr" sourcelanguage="en_GB">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -410,52 +410,52 @@
         <translation>%1 %2 je odbio download %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="202"/>
+        <location filename="../src/core/CoreParser.cpp" line="196"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 ti šalje fajl: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="319"/>
+        <location filename="../src/core/CoreParser.cpp" line="316"/>
         <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
         <translation>%1 pojavila se greška kad je %2 pokušao da te doda u chat grupu: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="337"/>
+        <location filename="../src/core/CoreParser.cpp" line="334"/>
         <source>%1 %2 has left the group: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="355"/>
+        <location filename="../src/core/CoreParser.cpp" line="352"/>
         <source>%1 has removed shared files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="357"/>
+        <location filename="../src/core/CoreParser.cpp" line="354"/>
         <source>%1 has shared %2 files</source>
         <translation type="unfinished">%1 je delio %2 fajlova</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="510"/>
+        <location filename="../src/core/CoreParser.cpp" line="507"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="387"/>
+        <location filename="../src/core/CoreParser.cpp" line="384"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 je odbio da downloaduje folder %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="326"/>
+        <location filename="../src/core/CoreParser.cpp" line="323"/>
         <source>%1 %2 has added you to the group chat: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="397"/>
+        <location filename="../src/core/CoreParser.cpp" line="394"/>
         <source>unknown folder</source>
         <translation>nepoznat folder</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="406"/>
+        <location filename="../src/core/CoreParser.cpp" line="403"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 ti šalje folder: %3.</translation>
     </message>
@@ -1084,12 +1084,16 @@
         <translation>Brisanje</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="156"/>
-        <source>Waiting for two or more connected user</source>
-        <translation type="unfinished">Sačekaj dva ili više prijavljenih korisnika</translation>
+        <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
+        <source>Please wait for two or more users</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
+        <source>Waiting for two or more connected user</source>
+        <translation type="obsolete">Sačekaj dva ili više prijavljenih korisnika</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatList.cpp" line="163"/>
         <source>Create chat</source>
         <translation type="unfinished">Kreiranje chata</translation>
     </message>
@@ -1428,9 +1432,13 @@ Please select a different name.</source>
         <translation>Izbriši grupu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="141"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="142"/>
+        <source>Please wait for two or more users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Waiting for two or more connected user</source>
-        <translation>Sačekaj dva ili više prijavljenih korisnika</translation>
+        <translation type="vanished">Sačekaj dva ili više prijavljenih korisnika</translation>
     </message>
 </context>
 <context>

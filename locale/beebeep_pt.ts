@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pt_BR">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -410,52 +410,52 @@
         <translation>%1 %2 download recusado %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="202"/>
+        <location filename="../src/core/CoreParser.cpp" line="196"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 está enviando o arquivo: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="319"/>
+        <location filename="../src/core/CoreParser.cpp" line="316"/>
         <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
         <translation>%1 Ocorreu um Erro %2 tentativas de adicioná-lo ao chat: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="337"/>
+        <location filename="../src/core/CoreParser.cpp" line="334"/>
         <source>%1 %2 has left the group: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="355"/>
+        <location filename="../src/core/CoreParser.cpp" line="352"/>
         <source>%1 has removed shared files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="357"/>
+        <location filename="../src/core/CoreParser.cpp" line="354"/>
         <source>%1 has shared %2 files</source>
         <translation type="unfinished">%1 compartilhou %2 arquivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="510"/>
+        <location filename="../src/core/CoreParser.cpp" line="507"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="387"/>
+        <location filename="../src/core/CoreParser.cpp" line="384"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 recusou fazer o download da pasta %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="326"/>
+        <location filename="../src/core/CoreParser.cpp" line="323"/>
         <source>%1 %2 has added you to the group chat: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="397"/>
+        <location filename="../src/core/CoreParser.cpp" line="394"/>
         <source>unknown folder</source>
         <translation>Pasta Desconhecida</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="406"/>
+        <location filename="../src/core/CoreParser.cpp" line="403"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 está enviando  uma pasta: %3.</translation>
     </message>
@@ -1084,12 +1084,16 @@
         <translation>Apagar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="156"/>
-        <source>Waiting for two or more connected user</source>
-        <translation type="unfinished">Esperando por Conexões</translation>
+        <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
+        <source>Please wait for two or more users</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
+        <source>Waiting for two or more connected user</source>
+        <translation type="obsolete">Esperando por Conexões</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatList.cpp" line="163"/>
         <source>Create chat</source>
         <translation type="unfinished">Criar novo Chat</translation>
     </message>
@@ -1429,9 +1433,13 @@ Selecione um nome diferente.</translation>
         <translation>Excluir Grupo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="141"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="142"/>
+        <source>Please wait for two or more users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Waiting for two or more connected user</source>
-        <translation>Esperando por Conexões</translation>
+        <translation type="vanished">Esperando por Conexões</translation>
     </message>
 </context>
 <context>

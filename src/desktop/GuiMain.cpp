@@ -656,6 +656,9 @@ void GuiMain::createMenus()
   mp_menuMain = new QMenu( tr( "Main" ), this );
   mp_menuMain->addAction( mp_actStartStopCore );
   mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actCreateGroupChat );
+  mp_menuMain->addAction( mp_actCreateGroup );
+  mp_menuMain->addSeparator();
   mp_menuMain->addMenu( mp_menuPlugins );
   mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
@@ -1040,8 +1043,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_actVCard );
   mp_barMain->addAction( mp_actViewNewMessage );
-  mp_barMain->addAction( mp_actCreateGroupChat );
-  mp_barMain->addAction( mp_actCreateGroup );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
 }

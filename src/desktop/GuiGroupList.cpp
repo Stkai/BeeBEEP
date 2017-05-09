@@ -136,12 +136,16 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   QTreeWidgetItem* item = itemAt( p );
   if( !item )
   {
-    QMenu menu;
+    QMenu* menu_create_group = new QMenu( (QWidget*)parent() );
     if( UserManager::instance().userList().toList().size() < 2 )
-      menu.addAction( QIcon( ":/images/group-remove.png" ), tr( "Waiting for two or more connected user" ) );
-    else
-      menu.addAction( mp_actCreateGroup );
-    menu.exec( QCursor::pos() );
+    {
+      menu_create_group->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
+      menu_create_group->addSeparator();
+    }
+
+    menu_create_group->addAction( mp_actCreateGroup );
+    mp_actCreateGroup->setEnabled( UserManager::instance().userList().toList().size() >= 2 );
+    menu_create_group->exec( QCursor::pos() );
     return;
   }
 
@@ -152,20 +156,20 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   if( group_item->isGroup() )
   {
     m_selectedGroupId = group_item->itemId();
-    QMenu menu;
-    menu.addAction( mp_actOpenChat );
-    menu.setDefaultAction( mp_actOpenChat );
-    menu.addSeparator();
-    menu.addAction( mp_actEditGroup );
-    menu.addSeparator();
+    QMenu* menu = new QMenu( (QWidget*)parent() );
+    menu->addAction( mp_actOpenChat );
+    menu->setDefaultAction( mp_actOpenChat );
+    menu->addSeparator();
+    menu->addAction( mp_actEditGroup );
+    menu->addSeparator();
     Group g = UserManager::instance().group( m_selectedGroupId );
     if( Settings::instance().isNotificationDisabledForGroup( g.privateId() ) )
-      menu.addAction( mp_actEnableGroupNotification );
+      menu->addAction( mp_actEnableGroupNotification );
     else
-      menu.addAction( mp_actDisableGroupNotification );
-    menu.addSeparator();
-    menu.addAction( mp_actRemoveGroup );
-    menu.exec( QCursor::pos() );
+      menu->addAction( mp_actDisableGroupNotification );
+    menu->addSeparator();
+    menu->addAction( mp_actRemoveGroup );
+    menu->exec( QCursor::pos() );
   }
   else
   {
