@@ -39,7 +39,6 @@ public:
   inline void setChatName( const QString& );
   inline QString chatName() const;
 
-  void setSavedChatOpened( bool );
 
 };
 

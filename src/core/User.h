@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_USER_H
 #define BEEBEEP_USER_H
 
-#include "NetworkAddress.h"
+#include "UserRecord.h"
 #include "VCard.h"
 
 
@@ -79,7 +79,6 @@ public:
 
   static QString nameFromPath( const QString& );
   static QString hostAddressAndPortFromPath( const QString& );
-  static QHostAddress parseHostAddressFromPath( const QString& );
 
 private:
   VNumber m_id;

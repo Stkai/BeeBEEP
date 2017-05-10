@@ -35,11 +35,12 @@ class GuiCreateGroup : public QDialog, private Ui::GuiCreateGroup
 public:
   explicit GuiCreateGroup( QWidget *parent = 0 );
 
-  void init( const QString&, const QList<VNumber>& );
+  void init( const QString& group_name, const QList<VNumber>&, const QString& private_id );
   void loadData( bool is_group );
 
   inline const QString& selectedName() const;
   inline const QList<VNumber>& selectedUsersId() const;
+  inline const QString& privateId() const;
 
 protected slots:
   void checkAndClose();
@@ -47,6 +48,7 @@ protected slots:
 private:
   QString m_selectedName;
   QList<VNumber> m_selectedUsersId;
+  QString m_privateId;
 
 };
 
@@ -54,6 +56,6 @@ private:
 // Inline Functions
 inline const QString& GuiCreateGroup::selectedName() const { return m_selectedName; }
 inline const QList<VNumber>& GuiCreateGroup::selectedUsersId() const { return m_selectedUsersId; }
-
+inline const QString& GuiCreateGroup::privateId() const { return m_privateId; }
 
 #endif // BEEBEEP_GUICREATEGROUP_H

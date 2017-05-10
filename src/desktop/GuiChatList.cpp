@@ -55,15 +55,7 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_leFilter->setPlaceholderText( tr( "Search chat" ) );
 #endif
 
-  mp_menuContext = new QMenu( this );
-
-  QAction* act = mp_menuContext->addAction( QIcon( ":/images/chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
-  mp_menuContext->setDefaultAction( act );
-  mp_menuContext->addSeparator();
-  mp_actClear = mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
-  mp_actClear->setToolTip( tr( "Clear all chat messages" ) );
-  mp_menuContext->addSeparator();
-  mp_actDelete = mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
+  mp_menuContext = new QMenu( parent );
 
   connect( mp_twChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
   connect( mp_twChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
@@ -148,39 +140,50 @@ void GuiChatList::chatClicked( QTreeWidgetItem* item, int )
 
 void GuiChatList::showChatMenu( const QPoint& p )
 {
+  mp_menuContext->clear();
+  QAction* act;
+
   QTreeWidgetItem* item = mp_twChatList->itemAt( p );
   if( !item )
   {
-    QMenu* menu_create_chat = new QMenu( this );
     bool create_chat_is_enabled = true;
     if( UserManager::instance().userList().toList().size() < 2 )
     {
-      menu_create_chat->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
+      mp_menuContext->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
       create_chat_is_enabled = false;
-      menu_create_chat->addSeparator();
+      mp_menuContext->addSeparator();
     }
 
-    QAction* act = menu_create_chat->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
+    act = mp_menuContext->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
     act->setEnabled( create_chat_is_enabled );
-    menu_create_chat->exec( QCursor::pos() );
-    return;
+  }
+  else
+  {
+    GuiChatItem* chat_item = (GuiChatItem*)item;
+    m_chatSelected = chat_item->chatId();
+    Chat c = ChatManager::instance().chat( m_chatSelected );
+    if( !c.isValid() )
+      return;
+
+    act = mp_menuContext->addAction( QIcon( ":/images/chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
+    mp_menuContext->setDefaultAction( act );
+    mp_menuContext->addSeparator();
+    act = mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
+    act->setToolTip( tr( "Clear all chat messages" ) );
+    act->setDisabled( ChatManager::instance().isChatEmpty( c, true ) );
+    mp_menuContext->addSeparator();
+    if( c.isGroup() )
+    {
+      mp_menuContext->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit" ), this, SLOT( editChatSelected() ) );
+      mp_menuContext->addSeparator();
+    }
+    act = mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
+    act->setDisabled( c.isDefault() || c.isPrivate() );
+    m_blockShowChatRequest = true;
+    mp_twChatList->clearSelection();
   }
 
-  GuiChatItem* chat_item = (GuiChatItem*)item;
-  m_chatSelected = chat_item->chatId();
-
-  Chat c = ChatManager::instance().chat( m_chatSelected );
-  if( !c.isValid() )
-    return;
-
-  m_blockShowChatRequest = true;
-
-  mp_actClear->setDisabled( ChatManager::instance().isChatEmpty( c, true ) );
-  mp_actDelete->setDisabled( c.isDefault() || c.isPrivate() );
-
   mp_menuContext->exec( QCursor::pos() );
-
-  mp_twChatList->clearSelection();
 }
 
 void GuiChatList::openChatSelected()
@@ -196,6 +199,11 @@ void GuiChatList::clearChatSelected()
 void GuiChatList::removeChatSelected()
 {
   emit chatToRemove( m_chatSelected );
+}
+
+void GuiChatList::editChatSelected()
+{
+  emit chatToEdit( m_chatSelected );
 }
 
 void GuiChatList::onTickEvent( int ticks )

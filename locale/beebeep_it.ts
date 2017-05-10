@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -869,7 +869,7 @@
     </message>
     <message>
         <source>Waiting for two or more connected user</source>
-        <translation type="vanished">Aspetta per due o più utenti connessi</translation>
+        <translation type="obsolete">Aspetta per due o più utenti connessi</translation>
     </message>
     <message>
         <source>Search chat</source>
@@ -1139,7 +1139,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Waiting for two or more connected user</source>
-        <translation type="vanished">Aspetta per due o più utenti connessi</translation>
+        <translation type="obsolete">Aspetta per due o più utenti connessi</translation>
     </message>
     <message>
         <source>Delete group</source>
@@ -2235,6 +2235,10 @@ Inserisci un nome differente.</translation>
         <source>Start %1 automatically</source>
         <translation>Avvia %1 automaticamente</translation>
     </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation>Pulsante destro per aprire il menu</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2525,6 +2529,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Link to chat</source>
         <translation>Associa alla conversazione</translation>
+    </message>
+    <message>
+        <source>Please select an item</source>
+        <translation>Seleziona un elemento</translation>
     </message>
 </context>
 <context>

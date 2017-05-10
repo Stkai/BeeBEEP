@@ -221,6 +221,7 @@ private:
   void updateEmoticons();
   void updateNewMessageAction();
   void updateTabTitles();
+  QString tabToolTip( int );
 
 private:
   QTabWidget* mp_tabMain;

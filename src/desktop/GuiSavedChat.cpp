@@ -34,6 +34,7 @@ GuiSavedChat::GuiSavedChat( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiSavedChat" );
   Bee::removeContextHelpButton( this );
+  setWindowFlags( windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint );
 
   mp_menuContext = new QMenu( this );
 

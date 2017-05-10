@@ -258,17 +258,14 @@ void Core::parseGroupMessage( const User& u, const Message& m )
         }
         else
         {
-          qDebug() << "Creating temporary user" << qPrintable( user_path ) << "for group chat";
           UserRecord ur( User::nameFromPath( user_path ), "", "" );
           ur.setNetworkAddress( NetworkAddress::fromString( User::hostAddressAndPortFromPath( user_path ) ) );
+          if( !ur.networkAddressIsValid() )
+            qWarning() << "Invalid network address found in user" << qPrintable( user_path ) << "from group request of" << qPrintable( u.name() );
           user_tmp = Protocol::instance().createTemporaryUser( ur );
-          if( user_tmp.isValid() )
-          {
-            UserManager::instance().setUser( user_tmp );
-            ul.set( user_tmp );
-          }
-          else
-            qWarning() << "Unable to create temporary user:" << qPrintable( user_path );
+          qDebug() << "Temporary user" << user_tmp.path() << "created by group request of" << qPrintable( u.name() );
+          UserManager::instance().setUser( user_tmp );
+          ul.set( user_tmp );
         }
       }
     }
@@ -283,18 +280,19 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
       foreach( UserRecord ur, user_records )
       {
-        User u = UserManager::instance().findUserByUserRecord( ur );
-        if( u.isLocal() )
+        User group_member = UserManager::instance().findUserByUserRecord( ur );
+        if( group_member.isLocal() )
           continue;
 
-        if( !u.isValid() )
+        if( !group_member.isValid() )
         {
-          u = Protocol::instance().createTemporaryUser( ur );
-          UserManager::instance().setUser( u );
-          emit userChanged( u );
+          group_member = Protocol::instance().createTemporaryUser( ur );
+          UserManager::instance().setUser( group_member );
+          qDebug() << "Temporary user" << group_member.path() << "created by group request of" << u.name();
+          emit userChanged( group_member );
         }
 
-        ul.set( u );
+        ul.set( group_member );
       }
     }
 

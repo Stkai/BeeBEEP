@@ -561,7 +561,10 @@ User Protocol::createTemporaryUser( const UserRecord& ur )
     u.setName( QString( "Bee%1" ).arg( u.id() ) );
   else
     u.setName( ur.name() );
-  u.setNetworkAddress( ur.networkAddress() );
+  if( ur.networkAddressIsValid() )
+    u.setNetworkAddress( ur.networkAddress() );
+  else
+    u.setNetworkAddress( NetworkAddress( QHostAddress::LocalHost, DEFAULT_LISTENER_PORT ) );
   if( ur.account().isEmpty() )
     u.setAccountName( u.name() );
   else
@@ -655,7 +658,7 @@ QString Protocol::saveUserRecord( const UserRecord& ur, bool add_extras ) const
   sl << QString::number( ur.networkAddress().hostPort() );
   if( add_extras )
   {
-    sl << QString( "" ); // comment obsolete in 3.2.0
+    sl << ur.networkAddress().info();
     sl << ur.name();
     sl << ur.account();
     if( ur.isFavorite() )
@@ -693,10 +696,12 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     return UserRecord();
   }
 
-  ur.setNetworkAddress( NetworkAddress( user_host_address, host_port ) );
+  NetworkAddress na( user_host_address, host_port );
 
   if( !sl.isEmpty() )
-    sl.takeFirst(); // comment obsolete in 3.2.0
+    na.setInfo( sl.takeFirst() );
+
+  ur.setNetworkAddress( na );
 
   if( !sl.isEmpty() )
     ur.setName( sl.takeFirst() );
@@ -808,7 +813,7 @@ QString Protocol::saveGroup( const Group& g ) const
 
   foreach( User u, ul.toList() )
   {
-    sl << u.name();
+    sl << u.path();
     sl << u.accountName();
     sl << u.hash();
   }
@@ -832,9 +837,11 @@ Group Protocol::loadGroup( const QString& group_data_saved )
     return Group();
 
   UserList member_list;
+  QString user_path = "";
   QString user_nickname = "";
   QString user_account_name = "";
   QString user_hash = "";
+  NetworkAddress user_na;
 
   member_list.set( Settings::instance().localUser() );
 
@@ -844,9 +851,12 @@ Group Protocol::loadGroup( const QString& group_data_saved )
   {
     if( sl.size() >= 2 )
     {
-      user_nickname = sl.takeFirst();
-      if( read_user_hash )
-        user_nickname = User::nameFromPath( user_nickname );
+      user_path = sl.takeFirst();
+      user_nickname = User::nameFromPath( user_path );
+      user_na = NetworkAddress::fromString( User::hostAddressAndPortFromPath( user_path ) );
+#ifdef BEEBEEP_DEBUG
+      qWarning() << "Invalid network address found in" << qPrintable( user_nickname ) << "of group" << qPrintable( g.name() );
+#endif
       user_account_name = sl.takeFirst();
       if( read_user_hash && !sl.isEmpty() )
         user_hash = sl.takeFirst();
@@ -854,6 +864,7 @@ Group Protocol::loadGroup( const QString& group_data_saved )
         user_hash = "";
 
       UserRecord ur( user_nickname, user_account_name, user_hash );
+      ur.setNetworkAddress( user_na );
       User u = UserManager::instance().findUserByUserRecord( ur );
 
       if( !u.isValid() )
@@ -894,7 +905,7 @@ Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
   sl << QString::number( ul.size() );
   foreach( User u, ul.toList() )
   {
-    sl << u.name();
+    sl << u.path();
     sl << u.accountName();
     sl << u.hash();
   }
@@ -928,9 +939,13 @@ QList<UserRecord> Protocol::userRecordsFromGroupRequestMessage( const Message& m
     if( sl.size() >= 3 )
     {
       UserRecord ur;
-      ur.setName( sl.takeFirst() );
+      QString user_path = sl.takeFirst();
+      ur.setName( User::nameFromPath( user_path ) );
       ur.setAccount( sl.takeFirst() );
       ur.setHash( sl.takeFirst() );
+      QString user_host_and_port = User::hostAddressAndPortFromPath( user_path );
+      if( !user_host_and_port.isEmpty() )
+        ur.setNetworkAddress( NetworkAddress::fromString( user_host_and_port ) );
       user_records.append( ur );
     }
     else

@@ -753,3 +753,4 @@ void Bee::removeContextHelpButton( QWidget* w )
   w_flags &= ~Qt::WindowContextHelpButtonHint;
   w->setWindowFlags( w_flags );
 }
+

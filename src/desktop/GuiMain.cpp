@@ -151,6 +151,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToRemove( VNumber ) ), this, SLOT( removeChat( VNumber ) ) );
+  connect( mp_chatList, SIGNAL( chatToEdit( VNumber ) ), this, SLOT( editChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( createNewChatRequest() ), this, SLOT( createChat() ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
@@ -209,13 +210,14 @@ void GuiMain::checkWindowFlagsAndShow()
   }
 
   Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
+  setWindowFlags( windowFlags() & ~Qt::WindowMaximizeButtonHint );
 
   if( !isVisible() )
     show();
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width()+12, qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
+    resize( width(), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
 
 #ifdef Q_OS_WIN
     move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(),
@@ -270,24 +272,29 @@ void GuiMain::updateWindowTitle()
   setWindowTitle( Settings::instance().localUser().name() );
 }
 
+static QString RemoveMenuStringFromTooltip( const QString& s )
+{
+  return s.isEmpty() ? QString( "" ) : s.split( QString( "\n" ), QString::KeepEmptyParts ).first();
+}
+
 void GuiMain::updateTabTitles()
 {
   int tab_index = mp_tabMain->indexOf( mp_home );
   int current_value = m_unreadActivities;
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
   if( current_value > 0 )
-    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( mp_home->toolTip() ).arg( current_value ).arg( tr( "news" ) ) );
+    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( RemoveMenuStringFromTooltip( mp_home->toolTip() ) ).arg( current_value ).arg( tr( "news" ) ) );
   else
-    mp_tabMain->setTabToolTip( tab_index, mp_home->toolTip() );
+    mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_home->toolTip() ) );
 
   tab_index = mp_tabMain->indexOf( mp_userList );
   current_value = mp_core->connectedUsers();
   int other_value = UserManager::instance().userList().size();
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : (other_value > 0 ? QString::number( other_value ) : "" ) );
   if( current_value > 0 )
-    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( mp_userList->toolTip() ).arg( current_value ).arg( tr( "connected" ) ) );
+    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( RemoveMenuStringFromTooltip( mp_userList->toolTip() ) ).arg( current_value ).arg( tr( "connected" ) ) );
   else
-    mp_tabMain->setTabToolTip( tab_index, mp_userList->toolTip() );
+    mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_userList->toolTip() ) );
 
   tab_index = mp_tabMain->indexOf( mp_chatList );
   current_value = ChatManager::instance().constChatList().size();
@@ -1050,28 +1057,33 @@ void GuiMain::createToolAndMenuBars()
 void GuiMain::createMainWidgets()
 {
   int tab_index;
+  QString tooltip_right_button = tr( "Right click to open menu" );
 
   mp_home = new GuiHome( this );
-  mp_home->setToolTip( tr( "Activities" ) );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   tab_index = mp_tabMain->addTab( mp_home, QIcon( ":/images/activities.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index, mp_home->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, tr( "Activities" ) );
+  mp_home->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+
   mp_userList = new GuiUserList( this );
-  mp_userList->setToolTip( tr( "Users" ) );
   tab_index = mp_tabMain->addTab( mp_userList, QIcon( ":/images/user-list.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index, mp_userList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, tr( "Users" ) );
+  mp_userList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+
   mp_chatList = new GuiChatList( this );
-  mp_chatList->setToolTip( tr( "Chats" ) );
   tab_index = mp_tabMain->addTab( mp_chatList, QIcon( ":/images/chat-list.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index, mp_chatList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, tr( "Chats" ) );
+  mp_chatList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+
   mp_groupList = new GuiGroupList( this );
-  mp_groupList->setToolTip( tr( "Groups" ) );
   tab_index = mp_tabMain->addTab( mp_groupList, QIcon( ":/images/group.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index, mp_groupList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, tr( "Groups" ) );
+  mp_groupList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+
   mp_savedChatList = new GuiSavedChatList( this );
-  mp_savedChatList->setToolTip( tr( "Chat histories" ) );
   tab_index = mp_tabMain->addTab( mp_savedChatList, QIcon( ":/images/saved-chat-list.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index, mp_savedChatList->toolTip() );
+  mp_tabMain->setTabToolTip( tab_index, tr( "Chat histories" ) );
+  mp_savedChatList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
   mp_dockFileTransfers->setObjectName( "GuiFileTransferDock" );
@@ -2374,7 +2386,7 @@ void GuiMain::editGroup( VNumber group_id )
     return;
 
   GuiCreateGroup gcg( activeWindow() );
-  gcg.init( g.name(), g.usersId() );
+  gcg.init( g.name(), g.usersId(), g.privateId() );
   gcg.loadData( true );
   gcg.setModal( true );
   gcg.show();
@@ -2434,7 +2446,7 @@ void GuiMain::editChat( VNumber chat_id )
   }
 
   GuiCreateGroup gcg( activeWindow() );
-  gcg.init( group_chat_tmp.name(), group_chat_tmp.usersId() );
+  gcg.init( group_chat_tmp.name(), group_chat_tmp.usersId(), group_chat_tmp.privateId() );
   gcg.loadData( false );
   gcg.setModal( true );
   gcg.show();
@@ -2495,6 +2507,9 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
 
 void GuiMain::removeSavedChat( const QString& chat_name )
 {
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to delete this saved chat?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+    return;
+
   foreach( QWidget* w, qApp->allWidgets() )
   {
     GuiSavedChat* gsv = qobject_cast<GuiSavedChat*>( w );

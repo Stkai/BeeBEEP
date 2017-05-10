@@ -46,13 +46,7 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
 
   m_blockShowChatRequest = false;
 
-  mp_menuContext = new QMenu( this );
-  QAction* act = mp_menuContext->addAction( QIcon( ":/images/saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
-  mp_menuContext->setDefaultAction( act );
-  mp_menuContext->addSeparator();
-  mp_actLink = mp_menuContext->addAction( QIcon( ":/images/update.png" ), tr( "Link to chat" ), this, SLOT( linkSavedChatSelected() ) );
-  mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
+  mp_menuContext = new QMenu( parent );
 
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
@@ -77,18 +71,28 @@ void GuiSavedChatList::savedChatClicked( QTreeWidgetItem* item, int )
 void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
 {
   QTreeWidgetItem* item = itemAt( p );
+  mp_menuContext->clear();
+
   if( !item )
-    return;
-
-  m_blockShowChatRequest = true;
-
-  GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
-  m_savedChatSelected = saved_chat_item->chatName();
-  mp_actLink->setEnabled( !ChatManager::instance().hasName( m_savedChatSelected ) );
+  {
+    mp_menuContext->addAction( QIcon( ":/images/info.png" ), tr( "Please select an item" ) );
+  }
+  else
+  {
+    QAction* act = mp_menuContext->addAction( QIcon( ":/images/saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
+    mp_menuContext->setDefaultAction( act );
+    mp_menuContext->addSeparator();
+    act = mp_menuContext->addAction( QIcon( ":/images/update.png" ), tr( "Link to chat" ), this, SLOT( linkSavedChatSelected() ) );
+    act->setEnabled( !ChatManager::instance().hasName( m_savedChatSelected ) );
+    mp_menuContext->addSeparator();
+    mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
+    m_blockShowChatRequest = true;
+    GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
+    m_savedChatSelected = saved_chat_item->chatName();
+    clearSelection();
+  }
 
   mp_menuContext->exec( QCursor::pos() );
-
-  clearSelection();
 }
 
 void GuiSavedChatList::showSavedChatSelected()
@@ -98,8 +102,6 @@ void GuiSavedChatList::showSavedChatSelected()
 
 void GuiSavedChatList::removeSavedChatSelected()
 {
-  if( QMessageBox::warning( this, Settings::instance().programName(), tr( "Do you really want to delete this saved chat?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
-    return;
   emit savedChatRemoved( m_savedChatSelected );
 }
 
@@ -127,23 +129,6 @@ void GuiSavedChatList::updateSavedChats()
     item->setIcon( 0, QIcon( ":/images/saved-chat.png" ) );
     item->setText( 0, it.key() );
     item->setToolTip( 0, QObject::tr( "Click to view chat history: %1" ).arg( it.key() ) );
-    ++it;
-  }
-}
-
-void GuiSavedChatList::setSavedChatOpened( const QString& saved_chat_opened )
-{
-  GuiSavedChatItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
-  {
-    item = (GuiSavedChatItem*)(*it);
-    if( saved_chat_opened.isEmpty() )
-      item->setSavedChatOpened( false );
-    else if( item->chatName() == saved_chat_opened )
-      item->setSavedChatOpened( true );
-    else
-      item->setSavedChatOpened( false );
     ++it;
   }
 }

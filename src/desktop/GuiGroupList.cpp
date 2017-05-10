@@ -45,6 +45,8 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   setContextMenuPolicy( Qt::CustomContextMenu );
   setMouseTracking( true );
 
+  mp_contextMenu = new QMenu( parent );
+
   m_selectedGroupId = ID_INVALID;
   m_groupChatOpened = ID_INVALID;
   m_blockShowChatRequest = false;
@@ -134,18 +136,19 @@ void GuiGroupList::checkItemClicked( QTreeWidgetItem* item, int )
 void GuiGroupList::showGroupMenu( const QPoint& p )
 {
   QTreeWidgetItem* item = itemAt( p );
+  mp_contextMenu->clear();
+
   if( !item )
   {
-    QMenu* menu_create_group = new QMenu( (QWidget*)parent() );
     if( UserManager::instance().userList().toList().size() < 2 )
     {
-      menu_create_group->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
-      menu_create_group->addSeparator();
+      mp_contextMenu->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
+      mp_contextMenu->addSeparator();
     }
 
-    menu_create_group->addAction( mp_actCreateGroup );
+    mp_contextMenu->addAction( mp_actCreateGroup );
     mp_actCreateGroup->setEnabled( UserManager::instance().userList().toList().size() >= 2 );
-    menu_create_group->exec( QCursor::pos() );
+    mp_contextMenu->exec( QCursor::pos() );
     return;
   }
 
@@ -156,20 +159,19 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   if( group_item->isGroup() )
   {
     m_selectedGroupId = group_item->itemId();
-    QMenu* menu = new QMenu( (QWidget*)parent() );
-    menu->addAction( mp_actOpenChat );
-    menu->setDefaultAction( mp_actOpenChat );
-    menu->addSeparator();
-    menu->addAction( mp_actEditGroup );
-    menu->addSeparator();
+    mp_contextMenu->addAction( mp_actOpenChat );
+    mp_contextMenu->setDefaultAction( mp_actOpenChat );
+    mp_contextMenu->addSeparator();
+    mp_contextMenu->addAction( mp_actEditGroup );
+    mp_contextMenu->addSeparator();
     Group g = UserManager::instance().group( m_selectedGroupId );
     if( Settings::instance().isNotificationDisabledForGroup( g.privateId() ) )
-      menu->addAction( mp_actEnableGroupNotification );
+      mp_contextMenu->addAction( mp_actEnableGroupNotification );
     else
-      menu->addAction( mp_actDisableGroupNotification );
-    menu->addSeparator();
-    menu->addAction( mp_actRemoveGroup );
-    menu->exec( QCursor::pos() );
+      mp_contextMenu->addAction( mp_actDisableGroupNotification );
+    mp_contextMenu->addSeparator();
+    mp_contextMenu->addAction( mp_actRemoveGroup );
+    mp_contextMenu->exec( QCursor::pos() );
   }
   else
   {

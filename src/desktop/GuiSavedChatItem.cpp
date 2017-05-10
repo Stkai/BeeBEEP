@@ -37,11 +37,3 @@ bool GuiSavedChatItem::operator<( const QTreeWidgetItem& item ) const
 
   return user_item_name > other_name; // correct order
 }
-
-void GuiSavedChatItem::setSavedChatOpened( bool saved_chat_is_opened )
-{
-  if( saved_chat_is_opened )
-    setBackground( 0, Bee::defaultHighlightBrush() );
-  else
-    setBackground( 0, Bee::defaultBackgroundBrush() );
-}

@@ -32,9 +32,7 @@ class GuiSavedChatList : public QTreeWidget
   Q_OBJECT
 
 public:
-  GuiSavedChatList( QWidget* parent = 0 );
-
-  void setSavedChatOpened( const QString& );
+  GuiSavedChatList( QWidget* parent  );
 
 signals:
   void savedChatSelected( const QString& );
@@ -54,7 +52,6 @@ protected slots:
 private:
   QString m_savedChatSelected;
   QMenu* mp_menuContext;
-  QAction* mp_actLink;
   bool m_blockShowChatRequest;
 
 };

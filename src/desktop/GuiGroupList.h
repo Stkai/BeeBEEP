@@ -32,7 +32,7 @@ class GuiGroupList : public QTreeWidget
   Q_OBJECT
 
 public:
-  GuiGroupList( QWidget* parent = 0 );
+  GuiGroupList( QWidget* parent );
 
   void loadGroups();
   void updateGroup( VNumber );
@@ -64,6 +64,8 @@ private:
   QAction* mp_actRemoveGroup;
   QAction* mp_actEnableGroupNotification;
   QAction* mp_actDisableGroupNotification;
+
+  QMenu* mp_contextMenu;
 
   VNumber m_selectedGroupId;
   VNumber m_groupChatOpened;

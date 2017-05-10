@@ -29,7 +29,7 @@
 
 
 GuiCreateGroup::GuiCreateGroup( QWidget *parent )
-  : QDialog( parent ), m_selectedName( "" ), m_selectedUsersId()
+  : QDialog( parent ), m_selectedName( "" ), m_selectedUsersId(), m_privateId( "" )
 {
   setupUi( this );
   setObjectName( "GuiCreateGroup" );
@@ -48,10 +48,11 @@ GuiCreateGroup::GuiCreateGroup( QWidget *parent )
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
 
-void GuiCreateGroup::init( const QString& group_name, const QList<VNumber>& group_members )
+void GuiCreateGroup::init( const QString& group_name, const QList<VNumber>& group_members, const QString& private_id )
 {
   m_selectedName = group_name;
   m_selectedUsersId = group_members;
+  m_privateId = private_id;
 }
 
 void GuiCreateGroup::loadData( bool is_group )
@@ -157,7 +158,7 @@ void GuiCreateGroup::checkAndClose()
   }
 
   Group g = UserManager::instance().findGroupByUsers( m_selectedUsersId );
-  if( g.isValid() )
+  if( g.isValid() && g.privateId() != m_privateId )
   {
     if( QMessageBox::question( this, Settings::instance().programName(),
                                QString( "%1\n%2" ).arg( tr( "There is a group with the same members: %1." ).arg( g.name() ) )

@@ -33,7 +33,7 @@ class GuiChatList : public QWidget, private Ui::GuiChatListWidget
   Q_OBJECT
 
 public:
-  GuiChatList( QWidget* parent = 0 );
+  GuiChatList( QWidget* parent );
 
   void reloadChatList();
 
@@ -41,6 +41,7 @@ signals:
   void chatSelected( VNumber chat_id );
   void chatToClear( VNumber chat_id );
   void chatToRemove( VNumber chat_id );
+  void chatToEdit( VNumber chat_id );
   void createNewChatRequest();
 
 public slots:
@@ -54,21 +55,19 @@ protected slots:
   void openChatSelected();
   void clearChatSelected();
   void removeChatSelected();
+  void editChatSelected();
   void filterText( const QString& );
   void clearFilter();
 
-private:
+protected:
   GuiChatItem* itemFromChatId( VNumber );
 
+private:
   QMenu* mp_menuContext;
   VNumber m_chatSelected;
-  QAction* mp_actClear;
-  QAction* mp_actDelete;
-
-  VNumber m_chatOpened;
   bool m_blockShowChatRequest;
-
   QString m_filter;
+
 };
 
 
