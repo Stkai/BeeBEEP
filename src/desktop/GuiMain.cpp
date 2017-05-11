@@ -217,7 +217,7 @@ void GuiMain::checkWindowFlagsAndShow()
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
   {
-    resize( width(), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
+    resize( qMax( width(), 280 ), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
 
 #ifdef Q_OS_WIN
     move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(),

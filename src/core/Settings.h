@@ -422,6 +422,9 @@ public:
 
   inline bool useLowDelayOptionOnSocket() const;
 
+  inline void setRefusedChats( const QStringList& );
+  inline const QStringList& refusedChats() const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
@@ -658,6 +661,7 @@ private:
   QString m_shareBoxPath;
 
   QMap<QString,QVariant> m_presetMessages;
+  QStringList m_refusedChats;
 
 };
 
@@ -935,5 +939,7 @@ inline void Settings::setShowChatsInOneWindow( bool new_value ) { m_showChatsInO
 inline bool Settings::showChatsInOneWindow() const { return m_showChatsInOneWindow; }
 inline void Settings::setHomeBackgroundColor( const QString& new_value ) { m_homeBackgroundColor = new_value; }
 inline const QString& Settings::homeBackgroundColor() const { return m_homeBackgroundColor; }
+inline void Settings::setRefusedChats( const QStringList& new_value ) { m_refusedChats = new_value; }
+inline const QStringList& Settings::refusedChats() const { return m_refusedChats; }
 
 #endif // BEEBEEP_SETTINGS_H

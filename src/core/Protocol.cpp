@@ -884,11 +884,16 @@ Group Protocol::loadGroup( const QString& group_data_saved )
 
 Message Protocol::groupChatRefuseMessage( const Chat& c )
 {
-  Message m( Message::Group, newId(), "" );
-  m.addFlag( Message::Refused );
   ChatMessageData cmd;
   cmd.setGroupId( c.privateId() );
   cmd.setGroupName( c.name() );
+  return groupChatRefuseMessage( cmd );
+}
+
+Message Protocol::groupChatRefuseMessage( const ChatMessageData& cmd )
+{
+  Message m( Message::Group, newId(), "" );
+  m.addFlag( Message::Refused );
   m.setData( chatMessageDataToString( cmd ) );
   return m;
 }
@@ -1601,6 +1606,28 @@ QList<UserRecord> Protocol::hiveMessageToUserRecordList( const Message& m ) cons
   }
 
   return user_record_list;
+}
+
+QString Protocol::saveChatRecord( const ChatRecord& cr ) const
+{
+  QStringList sl;
+  sl << cr.name();
+  sl << cr.privateId();
+  return sl.join( DATA_FIELD_SEPARATOR );
+}
+
+ChatRecord Protocol::loadChatRecord( const QString& s ) const
+{
+  if( s.isEmpty() )
+    return ChatRecord();
+
+  ChatRecord cr;
+  QStringList sl = s.split( DATA_FIELD_SEPARATOR );
+  if( !sl.isEmpty() )
+    cr.setName( sl.takeFirst() );
+  if( !sl.isEmpty() )
+    cr.setPrivateId( sl.takeFirst() );
+  return cr;
 }
 
 QString Protocol::linkifyText( QString text )

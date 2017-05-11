@@ -854,6 +854,7 @@ void Settings::load()
     m_userStatusList = QStringList();
   m_maxUserStatusDescriptionInList = sets->value( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
   m_presetMessages = sets->value( "PresetMessages", QMap<QString,QVariant>() ).toMap();
+  m_refusedChats = sets->value( "RefusedChats", QStringList() ).toStringList();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -1176,6 +1177,7 @@ void Settings::save()
 
   sets->setValue( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList );
   sets->setValue( "PresetMessages", m_presetMessages );
+  sets->setValue( "RefusedChats", m_refusedChats );
   sets->endGroup();
 
   sets->beginGroup( "VCard" );

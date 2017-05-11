@@ -25,6 +25,7 @@
 #define BEEBEEP_PROTOCOL_H
 
 #include "Chat.h"
+#include "ChatRecord.h"
 #include "FileInfo.h"
 #include "Group.h"
 #include "Message.h"
@@ -57,6 +58,7 @@ public:
   Message groupChatRequestMessage_obsolete( const Chat&, const User& to_user );
   Message groupChatRequestMessage( const Chat&, const User& to_user );
   Message groupChatRefuseMessage( const Chat& );
+  Message groupChatRefuseMessage( const ChatMessageData& );
   QStringList userPathsFromGroupRequestMessage_obsolete( const Message& ) const;
   QList<UserRecord> userRecordsFromGroupRequestMessage( const Message& ) const;
   Message fileInfoToMessage( const FileInfo& );
@@ -134,6 +136,9 @@ public:
 
   QString linkifyText( QString );
   QString formatHtmlText( const QString& );
+
+  QString saveChatRecord( const ChatRecord& ) const;
+  ChatRecord loadChatRecord( const QString& ) const;
 
   QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const;
   QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key ) const;

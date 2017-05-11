@@ -25,6 +25,7 @@
 #define BEEBEEP_CHATMANAGER_H
 
 #include "Chat.h"
+#include "ChatRecord.h"
 
 
 class ChatManager
@@ -70,6 +71,11 @@ public:
 
   void changePrivateChatNameAfterUserNameChanged( VNumber user_id, const QString& new_chat_name );
 
+  void addToRefusedChat( const ChatRecord& );
+  bool isChatRefused( const QString& chat_private_id ) const;
+  inline const QList<ChatRecord>& refusedChats() const;
+
+
   static ChatManager& instance()
   {
     if( !mp_instance )
@@ -95,6 +101,7 @@ private:
   QList<Chat> m_chats;
   QMap<QString, QString> m_history;
   bool m_isLoadHistoryCompleted;
+  QList<ChatRecord> m_refusedChats;
 
 };
 
@@ -110,5 +117,6 @@ inline void ChatManager::removeSavedTextFromChat( const QString& chat_name ) { m
 inline bool ChatManager::isLoadHistoryCompleted() const { return m_isLoadHistoryCompleted; }
 inline const QMap<QString, QString>& ChatManager::constHistoryMap() const { return m_history; }
 inline bool ChatManager::removeChat( const Chat& c ) { return m_chats.removeOne( c ); }
+inline const QList<ChatRecord>& ChatManager::refusedChats() const { return m_refusedChats; }
 
 #endif // BEEBEEP_CHATMANAGER_H

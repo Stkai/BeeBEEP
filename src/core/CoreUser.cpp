@@ -324,7 +324,7 @@ void Core::loadUsersAndGroups()
       u = Protocol::instance().loadUser( user_data );
       if( u.isValid() )
       {
-        qDebug() << "Loading user:" << u.path();
+        qDebug() << "Loading user:" << qPrintable( u.path() );
         UserManager::instance().setUser( u );
         createPrivateChat( u );
       }
@@ -334,11 +334,15 @@ void Core::loadUsersAndGroups()
   if( !Settings::instance().groupList().isEmpty() )
   {
     Group g;
+    qDebug() << "Loading" << Settings::instance().groupList().size() << "saved groups";
     foreach( QString group_data, Settings::instance().groupList() )
     {
       g = Protocol::instance().loadGroup( group_data );
       if( g.isValid() )
+      {
+        qDebug() << "Loading group:" << qPrintable( g.name() );
         addGroup( g );
+      }
     }
   }
 
@@ -353,6 +357,18 @@ void Core::loadUsersAndGroups()
     }
   }
   */
+
+  if( !Settings::instance().refusedChats().isEmpty() )
+  {
+    ChatRecord cr;
+    qDebug() << "Loading" << Settings::instance().refusedChats().size() << "refused chats";
+    foreach( QString chat_record_data, Settings::instance().refusedChats() )
+    {
+      cr = Protocol::instance().loadChatRecord( chat_record_data );
+      if( cr.isValid() )
+        ChatManager::instance().addToRefusedChat( cr );
+    }
+  }
 }
 
 void Core::saveUsersAndGroups()
@@ -384,6 +400,20 @@ void Core::saveUsersAndGroups()
 
   Settings::instance().setGroupList( save_data );
   qDebug() << save_data.size() << "groups are now stored in settings";
+
+  if( !save_data.isEmpty() )
+    save_data.clear();
+
+  if( !ChatManager::instance().refusedChats().isEmpty() )
+  {
+    foreach( ChatRecord cr, ChatManager::instance().refusedChats() )
+    {
+      save_data.append( Protocol::instance().saveChatRecord( cr ) );
+    }
+  }
+
+  Settings::instance().setRefusedChats( save_data );
+  qDebug() << save_data.size() << "refused chats are now stored in settings";
 }
 
 void Core::toggleUserFavorite( VNumber user_id )

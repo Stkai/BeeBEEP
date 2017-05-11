@@ -100,6 +100,10 @@ AskNicknameAtStartup=[true/false] show nickname dialog at connection to BeeBEEP 
 AskPasswordAtStartup=[true/false] show password dialog at connection to BeeBEEP network
 MaxStatusInList=(10) maximum number of status used recently
 SaveUsers=[true/false] save the user list (default=true) [1.0.0]
+StatusList=[StringList]
+MaxStatusDescriptionInList=[integer]
+PresetMessages=[StringList] [3.0.9]
+RefusedChats=[StringList] [3.2.0]
 
 [VCard]
 NickName= your nickname

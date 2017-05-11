@@ -442,6 +442,7 @@ bool Core::removeUserFromChat( const User& u, const QString& chat_private_id )
   {
     UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
     sendGroupChatRefuseMessage( c, group_members );
+    ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
   }
 
   return true;
@@ -470,6 +471,7 @@ bool Core::removeChat( VNumber chat_id )
       qDebug() << "Group chat deleted:" << c.name();
       UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
       sendGroupChatRefuseMessage( c, group_members );
+      ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
       return true;
     }
     else

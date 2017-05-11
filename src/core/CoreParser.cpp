@@ -229,6 +229,13 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
   if( m.hasFlag( Message::Request ) )
   {
+    if( ChatManager::instance().isChatRefused( cmd.groupId() ) )
+    {
+      Message group_refuse_message = Protocol::instance().groupChatRefuseMessage( cmd );
+      sendMessageToLocalNetwork( u, group_refuse_message );
+      return;
+    }
+
     UserList ul;
     ul.set( u ); // User from request
     ul.set( Settings::instance().localUser() );
@@ -301,9 +308,14 @@ void Core::parseGroupMessage( const User& u, const Message& m )
     if( group_chat.isValid() )
     {
       if( group_chat.usersId().contains( ID_LOCAL_USER ) )
+      {
         changeGroupChat( u, group_chat.id(), cmd.groupName(), ul.toUsersId() );
+      }
       else
+      {
         sendGroupChatRefuseMessage( group_chat, ul );
+        ChatManager::instance().addToRefusedChat( ChatRecord( group_chat.name(), group_chat.privateId() ) );
+      }
     }
     else
     {

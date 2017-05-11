@@ -29,7 +29,7 @@ ChatManager* ChatManager::mp_instance = NULL;
 
 
 ChatManager::ChatManager()
-  : m_chats(), m_history(), m_isLoadHistoryCompleted( false )
+  : m_chats(), m_history(), m_isLoadHistoryCompleted( false ), m_refusedChats()
 {
 }
 
@@ -291,4 +291,19 @@ int ChatManager::countNotEmptyChats( bool check_also_history ) const
       num_chats++;
   }
   return num_chats;
+}
+
+void ChatManager::addToRefusedChat( const ChatRecord& cr )
+{
+  if( !m_refusedChats.contains( cr ) )
+    m_refusedChats.append( cr );
+}
+
+bool ChatManager::isChatRefused( const QString& chat_private_id ) const
+{
+  ChatRecord cr( "", chat_private_id );
+  if( cr.isValid() )
+    return m_refusedChats.contains( cr );
+  else
+    return false;
 }

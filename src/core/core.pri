@@ -9,6 +9,7 @@ HEADERS += core/Broadcaster.h \
   core/ChatManager.h \
   core/ChatMessage.h \
   core/ChatMessageData.h \
+  core/ChatRecord.h \
   core/Config.h \
   core/Connection.h \
   core/ConnectionSocket.h \
@@ -52,6 +53,7 @@ SOURCES +=  core/Broadcaster.cpp \
   core/ChatManager.cpp \
   core/ChatMessage.cpp \
   core/ChatMessageData.cpp \
+  core/ChatRecord.cpp \
   core/Connection.cpp \
   core/ConnectionSocket.cpp \
   core/Core.cpp \
