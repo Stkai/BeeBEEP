@@ -202,7 +202,7 @@ void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )
 
   if( col == ColumnCancel && item->data( ColumnFile, TransferInProgress ).toBool() )
   {
-    if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to cancel the transfer of %1?" ).arg( item->text( ColumnFile ) ),
+    if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to cancel the transfer of %1?" ).arg( item->text( ColumnFile ) ),
                            QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::Yes )
     {
       item->setIcon( ColumnCancel, QIcon( ":/images/red-ball.png") );

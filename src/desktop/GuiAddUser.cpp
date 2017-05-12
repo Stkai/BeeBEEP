@@ -53,7 +53,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   mp_twUsers->setAlternatingRowColors( true );
   mp_twUsers->setSortingEnabled( true );
   mp_twUsers->setRootIsDecorated( false );
-  mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu);
+  mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twUsers->setSelectionMode( QAbstractItemView::MultiSelection );
   mp_twUsers->setColumnWidth( 0, 180 );
 

@@ -489,6 +489,9 @@ bool Core::removeOfflineUser( VNumber user_id )
   if( UserManager::instance().removeUser( u ) )
   {
     qDebug() << "User" << qPrintable( u.path() ) << "is removed from list";
+    Chat c = ChatManager::instance().privateChatForUser( u.id() );
+    if( c.isValid() )
+      removeChat( c.id() );
     return true;
   }
   else

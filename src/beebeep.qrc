@@ -155,5 +155,6 @@
         <file>images/network.png</file>
         <file>images/workgroup.png</file>
         <file>images/group-list.png</file>
+        <file>images/refused-chat.png</file>
     </qresource>
 </RCC>

@@ -74,6 +74,7 @@ public:
   void addToRefusedChat( const ChatRecord& );
   bool isChatRefused( const QString& chat_private_id ) const;
   inline const QList<ChatRecord>& refusedChats() const;
+  inline void clearRefusedChats();
 
 
   static ChatManager& instance()
@@ -118,5 +119,6 @@ inline bool ChatManager::isLoadHistoryCompleted() const { return m_isLoadHistory
 inline const QMap<QString, QString>& ChatManager::constHistoryMap() const { return m_history; }
 inline bool ChatManager::removeChat( const Chat& c ) { return m_chats.removeOne( c ); }
 inline const QList<ChatRecord>& ChatManager::refusedChats() const { return m_refusedChats; }
+inline void ChatManager::clearRefusedChats() { m_refusedChats.clear(); }
 
 #endif // BEEBEEP_CHATMANAGER_H

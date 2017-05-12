@@ -310,24 +310,20 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       {
         sendGroupChatRefuseMessage( group_chat, ul );
         ChatManager::instance().addToRefusedChat( ChatRecord( group_chat.name(), group_chat.privateId() ) );
+        qDebug() << "Chat" << qPrintable( group_chat.name() ) << "is added to refused chats after the request of user" << qPrintable( u.name() );
       }
-      return;
-    }
-
-    if( ul.toList().size() < 2 )
-    {
-      qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
-                             tr( "%1 An error occurred when %2 tries to add you to the group chat: %3." )
-                               .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ),
-                             DispatchToChat, ChatMessage::System );
     }
     else
     {
-      QString sys_msg = tr( "%1 %2 has added you to the group chat: %3." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToChat, ChatMessage::System );
-      group_chat = createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
-      dispatchSystemMessage( group_chat.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::System );
+      if( ul.toList().size() >= 2 )
+      {
+        QString sys_msg = tr( "%1 %2 has added you to the group chat: %3." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToChat, ChatMessage::System );
+        group_chat = createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
+        dispatchSystemMessage( group_chat.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::System );
+      }
+      else
+        qWarning() << "Unable to create group chat" << qPrintable( cmd.groupName() ) << "from user" << qPrintable( u.name() ) << "because members are minus than 2";
     }
   }
   else if( m.hasFlag( Message::Refused ) )

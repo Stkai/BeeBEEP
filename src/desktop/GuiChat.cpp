@@ -726,7 +726,7 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
   num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
 
   if( QMessageBox::question( this, Settings::instance().programName(),
-                             tr( "Do you really want to send %1 %2 to the members of this chat?" ).arg( num_files )
+                             tr( "Do you want to send %1 %2 to the members of this chat?" ).arg( num_files )
                              .arg( num_files == 1 ? tr( "file" ) : tr( "files" ) ),
                              tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
   {

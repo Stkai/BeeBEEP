@@ -149,7 +149,7 @@ signals:
   void fileShareAvailable( const User& );
   void localShareListAvailable();
   void savedChatListAvailable();
-  void updateGroup( VNumber );
+  void groupChanged( VNumber );
   void userConnectionStatusChanged( const User& );
   void networkInterfaceIsDown();
   void networkInterfaceIsUp();

@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
-        <translation>%1 Si è verificato un errore quando %2 ha provato ad aggiungerti alla conversazione di gruppo: %3.</translation>
+        <translation type="obsolete">%1 Si è verificato un errore quando %2 ha provato ad aggiungerti alla conversazione di gruppo: %3.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
@@ -702,7 +702,7 @@
     </message>
     <message>
         <source>Do you really want to send %1 %2 to the members of this chat?</source>
-        <translation>Sei sicuro di voler inviare %1 %2 ai membri di questa conversazione?</translation>
+        <translation type="obsolete">Sei sicuro di voler inviare %1 %2 ai membri di questa conversazione?</translation>
     </message>
     <message>
         <source>file</source>
@@ -844,6 +844,10 @@
         <source>Write a message to %1</source>
         <translation>Scrivi un messaggio a %1</translation>
     </message>
+    <message>
+        <source>Do you want to send %1 %2 to the members of this chat?</source>
+        <translation>Sei sicuro di voler inviare %1 %2 ai membri di questa conversazione?</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -868,16 +872,16 @@
         <translation>Crea una conversazione</translation>
     </message>
     <message>
-        <source>Waiting for two or more connected user</source>
-        <translation type="obsolete">Aspetta per due o più utenti connessi</translation>
-    </message>
-    <message>
         <source>Search chat</source>
         <translation>Cerca una conversazione</translation>
     </message>
     <message>
         <source>Please wait for two or more users</source>
         <translation>Aspetta due o più utenti connessi</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Modifica</translation>
     </message>
 </context>
 <context>
@@ -1138,10 +1142,6 @@ Inserisci un nome differente.</translation>
         <translation>Apri la conversazione</translation>
     </message>
     <message>
-        <source>Waiting for two or more connected user</source>
-        <translation type="obsolete">Aspetta per due o più utenti connessi</translation>
-    </message>
-    <message>
         <source>Delete group</source>
         <translation>Cancella gruppo</translation>
     </message>
@@ -1353,7 +1353,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to quit %1?</source>
-        <translation>Vuoi realmente chiudere %1?</translation>
+        <translation type="obsolete">Vuoi realmente chiudere %1?</translation>
     </message>
     <message>
         <source>No new message available</source>
@@ -1465,7 +1465,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to open the file %1?</source>
-        <translation>Vuoi aprire il file %1?</translation>
+        <translation type="obsolete">Vuoi aprire il file %1?</translation>
     </message>
     <message>
         <source>Unable to open %1</source>
@@ -1577,7 +1577,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to clear messages with %1?</source>
-        <translation>Vuoi cancellare i messaggi con %1?</translation>
+        <translation type="obsolete">Vuoi cancellare i messaggi con %1?</translation>
     </message>
     <message>
         <source>Yes and delete history</source>
@@ -1593,7 +1593,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
-        <translation>Vuoi veramente cancellare il gruppo &apos;%1&apos;?</translation>
+        <translation type="obsolete">Vuoi veramente cancellare il gruppo &apos;%1&apos;?</translation>
     </message>
     <message>
         <source>developed by</source>
@@ -1837,7 +1837,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to delete chat with %1?</source>
-        <translation>Vuoi cancellare la conversazione con %1?</translation>
+        <translation type="obsolete">Vuoi cancellare la conversazione con %1?</translation>
     </message>
     <message>
         <source>Please select the new size of the user picture</source>
@@ -1901,7 +1901,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to clear all saved status descriptions?</source>
-        <translation>Vuoi realmente cancellare tutte le descrizioni di stato salvate?</translation>
+        <translation type="obsolete">Vuoi realmente cancellare tutte le descrizioni di stato salvate?</translation>
     </message>
     <message>
         <source>Show status color in background</source>
@@ -2213,7 +2213,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to delete user %1?</source>
-        <translation>Vuoi cancellare l&apos;utente %1?</translation>
+        <translation type="obsolete">Vuoi cancellare l&apos;utente %1?</translation>
     </message>
     <message>
         <source>There is a chat with the same members: %1.</source>
@@ -2238,6 +2238,54 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Right click to open menu</source>
         <translation>Pulsante destro per aprire il menu</translation>
+    </message>
+    <message>
+        <source>Blocked chats</source>
+        <translation>Conversazioni bloccate</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete this saved chat?</source>
+        <translation type="obsolete">Vuoi veramente cancellare questa conversazione?</translation>
+    </message>
+    <message>
+        <source>%1 blocked chats</source>
+        <translation>%1 conversazioni bloccate</translation>
+    </message>
+    <message>
+        <source>Do you want to quit %1?</source>
+        <translation>Vuoi chiudere %1?</translation>
+    </message>
+    <message>
+        <source>Do you want to open the file %1?</source>
+        <translation>Vuoi aprire il file %1?</translation>
+    </message>
+    <message>
+        <source>Do you want to delete this saved chat?</source>
+        <translation>Vuoi  cancellare questa conversazione salvata?</translation>
+    </message>
+    <message>
+        <source>Do you want to delete group &apos;%1&apos;?</source>
+        <translation type="obsolete">Vuoi cancellare il gruppo &apos;%1&apos;?</translation>
+    </message>
+    <message>
+        <source>Do you want to clear messages with %1?</source>
+        <translation>Vuoi cancellare i messaggi con %1?</translation>
+    </message>
+    <message>
+        <source>Do you want to delete chat with %1?</source>
+        <translation>Vuoi cancellare la conversazione con %1?</translation>
+    </message>
+    <message>
+        <source>Do you want to delete user %1?</source>
+        <translation>Vuoi cancellare l&apos;utente %1?</translation>
+    </message>
+    <message>
+        <source>Do you want to clear all saved status descriptions?</source>
+        <translation>Vuoi cancellare tutte le descrizioni di stato salvate?</translation>
+    </message>
+    <message>
+        <source>Do you want to delete group %1?</source>
+        <translation>Vuoi cancellare il gruppo %1?</translation>
     </message>
 </context>
 <context>
@@ -2450,7 +2498,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to delete this preset?</source>
-        <translation>Vuoi cancellare il messaggio predefinito selezionato?</translation>
+        <translation type="obsolete">Vuoi cancellare il messaggio predefinito selezionato?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -2467,6 +2515,52 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Right click on panel to create a new preset message</source>
         <translation>Pulsante destro sul pannello per creare un nuovo messaggio predefinito</translation>
+    </message>
+    <message>
+        <source>Do you want to delete this preset?</source>
+        <translation>Vuoi cancellare il messaggio predefinito selezionato?</translation>
+    </message>
+</context>
+<context>
+    <name>GuiRefusedChat</name>
+    <message>
+        <source>Name</source>
+        <translation>Nome</translation>
+    </message>
+    <message>
+        <source>Blocked hash</source>
+        <translation>Hash bloccato</translation>
+    </message>
+    <message>
+        <source>Remove blocked chat</source>
+        <translation>Sblocca conversazione</translation>
+    </message>
+    <message>
+        <source>Clear all</source>
+        <translation>Cancella tutti</translation>
+    </message>
+    <message>
+        <source>Please select an item in the list.</source>
+        <translation>Seleziona un elemento della lista.</translation>
+    </message>
+    <message>
+        <source>Blocked chats</source>
+        <translation>Conversazioni bloccate</translation>
+    </message>
+</context>
+<context>
+    <name>GuiRefusedChatDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
     </message>
 </context>
 <context>
@@ -2513,18 +2607,6 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Delete</source>
         <translation>Cancella</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete this saved chat?</source>
-        <translation>Vuoi veramente cancellare questa conversazione?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Si</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>No</translation>
     </message>
     <message>
         <source>Link to chat</source>
@@ -2775,7 +2857,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to remove all shared paths?</source>
-        <translation>Vuoi veramente eliminare tutte le condivisioni?</translation>
+        <translation type="obsolete">Vuoi veramente eliminare tutte le condivisioni?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -2787,7 +2869,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to remove this path:</source>
-        <translation>Vuoi realmente eliminare questa condivisione:</translation>
+        <translation type="obsolete">Vuoi realmente eliminare questa condivisione:</translation>
     </message>
     <message>
         <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
@@ -2796,6 +2878,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>disabled</source>
         <translation>disabilitato</translation>
+    </message>
+    <message>
+        <source>Do you want to remove this path:</source>
+        <translation>Vuoi eliminare questa condivisione:</translation>
+    </message>
+    <message>
+        <source>Do you want to remove all shared paths?</source>
+        <translation>Vuoi eliminare tutte le condivisioni?</translation>
     </message>
 </context>
 <context>
@@ -3021,7 +3111,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you really want to cancel the transfer of %1?</source>
-        <translation>Vuoi realmente interrompere il trasferimento di %1?</translation>
+        <translation type="obsolete">Vuoi realmente interrompere il trasferimento di %1?</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -3030,6 +3120,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Ok</source>
         <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Do you want to cancel the transfer of %1?</source>
+        <translation>Vuoi interrompere il trasferimento di %1?</translation>
     </message>
 </context>
 <context>

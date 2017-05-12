@@ -178,6 +178,7 @@ private slots:
   void onLogWindowClosed();
   void onMainTabChanged( int );
   void showWorkgroups();
+  void showRefusedChats();
 
 protected:
   void keyPressEvent( QKeyEvent* );

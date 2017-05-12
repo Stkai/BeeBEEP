@@ -21,44 +21,37 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIADDUSER_H
-#define BEEBEEP_GUIADDUSER_H
+#ifndef BEEBEEP_GUIREFUSEDCHAT_H
+#define BEEBEEP_GUIREFUSEDCHAT_H
 
-#include "ui_GuiAddUser.h"
-#include "UserRecord.h"
+#include "ui_GuiRefusedChat.h"
+#include "ChatRecord.h"
 
 
-class GuiAddUser : public QDialog, private Ui::GuiAddUserDialog
+class GuiRefusedChat : public QDialog, private Ui::GuiRefusedChatDialog
 {
   Q_OBJECT
 
 public:
-  explicit GuiAddUser( QWidget *parent = 0 );
+  explicit GuiRefusedChat( QWidget *parent = 0 );
 
-  void loadUsers();
+  void loadRefusedChats();
 
-  inline const QList<NetworkAddress>& networkAddressesToAdd() const;
+  inline const QList<ChatRecord>& refusedChats() const;
 
 protected slots:
-  void addUser();
-  void saveUsers();
+  void saveAndClose();
   void openCustomMenu( const QPoint& );
-  void removeUserPath();
-  void removeAllUsers();
-  void addUsersAutoFromLan();
+  void removeRefusedChat();
+  void removeAllRefusedChats();
 
 protected:
-  void addNetworkAddressToList( const NetworkAddress& );
-  bool removeUserPathFromList( const QString& );
-  void loadNetworkAddressesInList();
+  void loadRefusedChatsInList();
 
 private:
-  QList<NetworkAddress> m_networkAddresses;
+  QList<ChatRecord> m_refusedChats;
   QMenu* mp_menuContext;
 
 };
 
-// Inline Functions
-inline const QList<NetworkAddress>& GuiAddUser::networkAddressesToAdd() const { return m_networkAddresses; }
-
-#endif // BEEBEEP_GUIADDUSER_H
+#endif // BEEBEEP_GUIREFUSEDCHAT_H

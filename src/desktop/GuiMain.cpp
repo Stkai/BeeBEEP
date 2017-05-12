@@ -42,6 +42,7 @@
 #include "GuiLanguage.h"
 #include "GuiLog.h"
 #include "GuiPluginManager.h"
+#include "GuiRefusedChat.h"
 #include "GuiSavedChat.h"
 #include "GuiSavedChatList.h"
 #include "GuiScreenShot.h"
@@ -124,7 +125,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( mp_core, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
-  connect( mp_core, SIGNAL( updateGroup( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
+  connect( mp_core, SIGNAL( groupChanged( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
@@ -346,7 +347,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
       if( Settings::instance().promptOnCloseEvent() )
       {
-        if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to quit %1?" ).arg( Settings::instance().programName() ),
+        if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to quit %1?" ).arg( Settings::instance().programName() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
         {
           e->ignore();
@@ -765,13 +766,13 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().saveUserList() );
   act->setData( 32 );
   mp_menuUsersSettings->addSeparator();
-  mp_actAddUsers = mp_menuUsersSettings->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
-  mp_menuUsersSettings->addAction( QIcon( ":/images/workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
-  mp_menuUsersSettings->addSeparator();
   act = mp_menuUsersSettings->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().autoUserAway() );
   act->setData( 20 );
+  mp_menuUsersSettings->addSeparator();
+  mp_actAddUsers = mp_menuUsersSettings->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
+  mp_menuUsersSettings->addAction( QIcon( ":/images/workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
 
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
   mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
@@ -793,6 +794,8 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatClearAllReadMessages() );
   act->setData( 47 );
+  mp_menuChatSettings->addSeparator();
+  mp_menuChatSettings->addAction( QIcon( ":/images/refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
 
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
   mp_menuFileTransferSettings->setIcon( QIcon( ":/images/file-transfer.png" ) );
@@ -2277,7 +2280,7 @@ void GuiMain::openUrl( const QUrl& file_url )
     bool is_exe_file = fi.isExecutable() && !fi.isDir();
 #endif
     if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
-                             tr( "Do you really want to open the file %1?" ).arg( file_path ),
+                             tr( "Do you want to open the file %1?" ).arg( file_path ),
                              tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
       return;
 
@@ -2505,7 +2508,7 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
 
 void GuiMain::removeSavedChat( const QString& chat_name )
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to delete this saved chat?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to delete this saved chat?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
     return;
 
   foreach( QWidget* w, qApp->allWidgets() )
@@ -2714,7 +2717,7 @@ void GuiMain::removeGroup( VNumber group_id )
   if( g.isValid() )
   {
     if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
-                               tr( "Do you really want to delete group '%1'?" ).arg( g.name() ),
+                               tr( "Do you want to delete group %1?" ).arg( g.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
       if( mp_core->removeGroup( group_id ) )
@@ -2740,7 +2743,7 @@ void GuiMain::clearChat( VNumber chat_id )
     return;
   }
 
-  QString question_txt = tr( "Do you really want to clear messages with %1?" ).arg( chat_name );
+  QString question_txt = tr( "Do you want to clear messages with %1?" ).arg( chat_name );
   QString button_2_text;
   if( ChatManager::instance().chatHasSavedText( c.name() ) )
     button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
@@ -2769,7 +2772,7 @@ void GuiMain::removeChat( VNumber chat_id )
     return;
   }
 
-  QString question_txt = tr( "Do you really want to delete chat with %1?" ).arg( c.name() );
+  QString question_txt = tr( "Do you want to delete chat with %1?" ).arg( c.name() );
   if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
@@ -3074,16 +3077,20 @@ void GuiMain::createGroupFromChat( VNumber chat_id )
 
 void GuiMain::removeUserFromList( VNumber user_id )
 {
-  QString question_txt = tr( "Do you really want to delete user %1?" ).arg( UserManager::instance().findUser( user_id ).name() );
+  QString question_txt = tr( "Do you want to delete user %1?" ).arg( UserManager::instance().findUser( user_id ).name() );
   if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
   Chat c = ChatManager::instance().privateChatForUser( user_id );
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  if( fl_chat )
+    fl_chat->close();
+
   if( mp_core->removeOfflineUser( user_id ) )
   {
     refreshUserList();
+    mp_chatList->reloadChatList();
     updateTabTitles();
-    removeChat( c.id() );
   }
 }
 
@@ -3237,7 +3244,7 @@ void GuiMain::recentlyUsedUserStatusSelected()
 void GuiMain::clearRecentlyUsedUserStatus()
 {
   if( QMessageBox::question( this, Settings::instance().programName(),
-                             tr( "Do you really want to clear all saved status descriptions?" ),
+                             tr( "Do you want to clear all saved status descriptions?" ),
                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
@@ -3697,6 +3704,17 @@ void GuiMain::showWorkgroups()
 
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
     qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
+}
+
+void GuiMain::showRefusedChats()
+{
+  GuiRefusedChat grc;
+  grc.loadRefusedChats();
+  grc.setModal( true );
+  grc.setSizeGripEnabled( true );
+  grc.show();
+  if( grc.exec() == QDialog::Accepted )
+    showMessage( tr( "%1 blocked chats" ).arg( Settings::instance().refusedChats().size() ), 5000 );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

@@ -451,11 +451,11 @@ bool Core::removeUserFromChat( const User& u, const QString& chat_private_id )
 bool Core::removeChat( VNumber chat_id )
 {
   if( !clearMessagesInChat( chat_id, true ) )
-    return false;
+    return true;
 
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
-    return false;
+    return true;
   if( c.isDefault() )
     return false;
   if( c.isPrivate() )

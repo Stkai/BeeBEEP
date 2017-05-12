@@ -191,7 +191,7 @@ void GuiPresetMessageList::onRename( QTreeWidgetItem* item )
 
 void GuiPresetMessageList::onRemove( QTreeWidgetItem* item )
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to delete this preset?" ),
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to delete this preset?" ),
                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
