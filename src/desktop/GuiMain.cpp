@@ -222,6 +222,8 @@ void GuiMain::checkWindowFlagsAndShow()
 #ifdef Q_OS_WIN
     move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(),
           QApplication::desktop()->availableGeometry().height() - frameGeometry().height() );
+#elif defined BEEBEEP_FOR_RASPBERRY_PI
+    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 40 );
 #else
     move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 0 );
 #endif
