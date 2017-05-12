@@ -122,39 +122,28 @@ void Core::parseUserMessage( const User& u, const Message& m )
     {
       bool color_changed = user_with_new_vcard.color() != u.color();
       bool vcard_changed = !(user_with_new_vcard.vCard() == u.vCard() );
+      VCard vc_tmp = user_with_new_vcard.vCard();
+      vc_tmp.setNickName( u.vCard().nickName() );
+      bool only_user_name_changed = vc_tmp == u.vCard();
 
       if( vcard_changed || color_changed )
       {
         UserManager::instance().setUser( user_with_new_vcard );
-        if( user_with_new_vcard.path() != u.path() )
-          ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), user_with_new_vcard.path() );
-        if( vcard_changed )
+        if( user_with_new_vcard.name() != u.name() )
+        {
+          ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), user_with_new_vcard.name() );
+          showUserNameChanged( user_with_new_vcard, u.name() );
+        }
+        if( vcard_changed && !only_user_name_changed )
           showUserVCardChanged( user_with_new_vcard );
-
         emit userChanged( user_with_new_vcard );
       }
     }
     else
       qWarning() << "Unable to read vCard from" << qPrintable( u.path() );
   }
-  else if( m.hasFlag( Message::UserName ) )
-  {
-    User user_with_new_name = u;
-    if( Protocol::instance().changeUserNameFromMessage( &user_with_new_name, m ) )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "User" << u.path() << "changes his name to" << user_with_new_name.name();
-#endif
-      UserManager::instance().setUser( user_with_new_name );
-      ChatManager::instance().changePrivateChatNameAfterUserNameChanged( u.id(), user_with_new_name.path() );
-      showUserNameChanged( user_with_new_name, u.name() );
-      emit userChanged( u );
-    }
-    else
-      qWarning() << "Unable to change the username of the user" << u.path() << "because message is invalid";
-  }
   else
-    qWarning() << "Invalid flag found in user message (CoreParser)";
+    qWarning() << "Invalid flag" << m.flags() << "found in user message from" << qPrintable( u.name() );
 }
 
 void Core::parseFileMessage( const User& u, const Message& m )
@@ -303,8 +292,14 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
     }
 
-    Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
+    Group g = UserManager::instance().findGroupByPrivateId( cmd.groupId() );
+    if( g.isValid() )
+    {
+      changeGroup( u, g.id(), cmd.groupName(), ul.toUsersId() );
+      return;
+    }
 
+    Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
     if( group_chat.isValid() )
     {
       if( group_chat.usersId().contains( ID_LOCAL_USER ) )
@@ -316,25 +311,23 @@ void Core::parseGroupMessage( const User& u, const Message& m )
         sendGroupChatRefuseMessage( group_chat, ul );
         ChatManager::instance().addToRefusedChat( ChatRecord( group_chat.name(), group_chat.privateId() ) );
       }
+      return;
+    }
+
+    if( ul.toList().size() < 2 )
+    {
+      qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
+                             tr( "%1 An error occurred when %2 tries to add you to the group chat: %3." )
+                               .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ),
+                             DispatchToChat, ChatMessage::System );
     }
     else
     {
-      if( ul.toList().size() < 2 )
-      {
-        qWarning() << "Unable to create group chat" << cmd.groupName() << "from user" << u.path();
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
-                               tr( "%1 An error occurred when %2 tries to add you to the group chat: %3." )
-                                 .arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() ),
-                               DispatchToChat, ChatMessage::System );
-        return;
-      }
-      else
-      {
-        QString sys_msg = tr( "%1 %2 has added you to the group chat: %3." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() );
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToChat, ChatMessage::System );
-        group_chat = createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
-        dispatchSystemMessage( group_chat.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::System );
-      }
+      QString sys_msg = tr( "%1 %2 has added you to the group chat: %3." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToChat, ChatMessage::System );
+      group_chat = createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
+      dispatchSystemMessage( group_chat.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::System );
     }
   }
   else if( m.hasFlag( Message::Refused ) )

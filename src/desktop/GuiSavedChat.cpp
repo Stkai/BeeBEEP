@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "ChatManager.h"
+#include "GuiChatItem.h"
 #include "GuiSavedChat.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
@@ -69,7 +70,10 @@ void GuiSavedChat::showSavedChat( const QString& chat_name )
   QScrollBar *bar = mp_teSavedChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
 
-  setWindowTitle( chat_name );
+  if( chat_name == Settings::instance().defaultChatName() )
+    setWindowTitle( GuiChatItem::defaultChatName() );
+  else
+    setWindowTitle( chat_name );
 }
 
 void GuiSavedChat::customContextMenu( const QPoint& )

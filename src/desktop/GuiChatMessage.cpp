@@ -74,8 +74,15 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   else
     html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
 
-  if( !append_message_to_previous && !Settings::instance().chatCompact() )
+  if( last_user_id == 0 && !cm.isFromSystem() )
+  {
     html_message.prepend( QLatin1String( "<br />" ) );
+  }
+  else
+  {
+    if( !append_message_to_previous && !Settings::instance().chatCompact() )
+      html_message.prepend( QLatin1String( "<br />" ) );
+  }
 
   html_message += QLatin1String( "<br />" );
 

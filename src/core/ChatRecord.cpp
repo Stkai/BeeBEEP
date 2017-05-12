@@ -17,7 +17,7 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id: UserRecord.cpp 874 2017-05-07 17:04:05Z mastroddi $
+// $Id$
 //
 //////////////////////////////////////////////////////////////////////
 

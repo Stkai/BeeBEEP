@@ -348,7 +348,7 @@ bool Core::sendMessageToLocalNetwork( const User& to_user, const Message& m )
   if( !c )
   {
     if( to_user.isStatusConnected() )
-      qWarning() << "Unable to find connection socket for user" << to_user.id();
+      qWarning() << "Unable to find connection socket for user" << to_user.id() << qPrintable( to_user.name() );
     return false;
   }
 
@@ -650,4 +650,16 @@ void Core::addChatHeader( Chat* p_chat )
   }
 
   p_chat->addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );
+}
+
+void Core::linkSavedChat( const QString& from_saved_chat_name, const QString& to_saved_chat_name, bool prepend_to_existing_saved_chat )
+{
+  ChatManager::instance().updateChatSavedText( from_saved_chat_name, to_saved_chat_name, prepend_to_existing_saved_chat );
+  Chat c = ChatManager::instance().findChatByName( from_saved_chat_name );
+  if( c.isValid() )
+    emit chatChanged( c );
+
+  c = ChatManager::instance().findChatByName( to_saved_chat_name );
+  if( c.isValid() )
+    emit chatChanged( c );
 }

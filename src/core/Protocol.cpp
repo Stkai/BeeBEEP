@@ -317,13 +317,6 @@ Message Protocol::userStatusMessage( int user_status, const QString& user_status
   return m;
 }
 
-Message Protocol::localUserNameMessage() const
-{
-  Message m( Message::User, ID_USER_MESSAGE, Settings::instance().localUser().name() );
-  m.addFlag( Message::UserName );
-  return m;
-}
-
 bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
 {
   int user_status = m.data().toInt();
@@ -343,14 +336,6 @@ bool Protocol::changeUserStatusFromMessage( User* u, const Message& m ) const
   }
 
   return status_changed;
-}
-
-bool Protocol::changeUserNameFromMessage( User* u, const Message& m ) const
-{
-  if( m.text().size() < 1 )
-    return false;
-  u->setName( m.text().trimmed() );
-  return true;
 }
 
 QString Protocol::pixmapToString( const QPixmap& pix ) const

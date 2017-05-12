@@ -179,22 +179,7 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   Settings::instance().save();
 
   Message vcard_message = Protocol::instance().localVCardMessage();
-  Message nick_message = Protocol::instance().localUserNameMessage();
-
-  if( isConnected() )
-  {
-    foreach( Connection *c, m_connections )
-    {
-      if( c->protoVersion() == 1 )
-      {
-        if( nick_name_changed )
-          c->sendMessage( nick_message );
-      }
-      else
-        c->sendMessage( vcard_message );
-    }
-  }
-
+  sendMessageToAllConnectedUsers( vcard_message );
   showUserVCardChanged( u );
   if( nick_name_changed )
     showUserNameChanged( u, old_user_name );
@@ -255,7 +240,7 @@ void Core::addGroup( const Group& g )
     createGroupChat( g.name(), g.usersId(), g.privateId(), isConnected() );
 }
 
-void Core::changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& members_id )
+void Core::changeGroup( const User& u, VNumber group_id, const QString& group_name, const QList<VNumber>& members_id )
 {
   Group g = UserManager::instance().group( group_id );
   if( !g.isValid() )
@@ -267,7 +252,8 @@ void Core::changeGroup( VNumber group_id, const QString& group_name, const QList
   emit updateGroup( g.id() );
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
-  changeGroupChat( Settings::instance().localUser(), c.id(), group_name, members_id );
+  if( c.isValid() )
+    changeGroupChat( u, c.id(), group_name, members_id );
 }
 
 bool Core::removeUserFromGroup( const User& u, const QString& group_private_id )
@@ -579,5 +565,7 @@ void Core::changeUserColor( VNumber user_id, const QString& user_color )
 
   u.setColor( user_color );
   UserManager::instance().setUser( u );
-  userChanged( u );
+  if( u.isLocal() )
+    sendMessageToAllConnectedUsers( Protocol::instance().localVCardMessage() );
+  emit userChanged( u );
 }

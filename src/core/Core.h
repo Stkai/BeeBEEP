@@ -69,7 +69,7 @@ public:
   bool setLocalUserVCard( const QString&, const VCard& );
   Group createGroup( const QString&, const QList<VNumber>&, const QString& group_private_id = "" );
   bool createGroupFromChat( VNumber );
-  void changeGroup( VNumber group_id, const QString& group_name, const QList<VNumber>& members_id );
+  void changeGroup( const User&, VNumber group_id, const QString& group_name, const QList<VNumber>& members_id );
   bool removeGroup( VNumber );
   void toggleUserFavorite( VNumber );
   bool removeOfflineUser( VNumber );
@@ -89,6 +89,7 @@ public:
   bool readAllMessagesInChat( VNumber );
   void sendBuzzToUser( VNumber );
   void removeSavedChat( const QString& );
+  void linkSavedChat( const QString& from_saved_chat_name, const QString& to_saved_chat_name, bool prepend_to_existing_saved_chat );
 
   /* CoreFileTransfer */
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );
@@ -200,6 +201,7 @@ protected:
   void createLocalShareMessage();
   bool saveChatMessages();
   void showMessage( const QString&, int ms_to_show );
+  void sendMessageToAllConnectedUsers( const Message& );
 
   /* CoreConnection */
   Connection* connection( VNumber ) const;
@@ -225,7 +227,7 @@ protected:
 #endif
 
   /* CoreUser */
-  void showUserNameChanged( const User&, const QString& );
+  void showUserNameChanged( const User&, const QString& old_user_name );
   void showUserVCardChanged( const User& );
   void sendLocalUserStatus();
   void addGroup( const Group& );

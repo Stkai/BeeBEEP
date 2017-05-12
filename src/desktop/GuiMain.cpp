@@ -683,6 +683,7 @@ void GuiMain::createMenus()
 
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
+  //mp_menuSettings->setIcon( QIcon( ":/images/settings.png" ) );
 
   mp_menuStartupSettings = new QMenu( tr( "On start" ), this );
   mp_menuStartupSettings->setIcon( QIcon( ":/images/settings-start.png" ) );
@@ -1022,7 +1023,6 @@ void GuiMain::createMenus()
   mp_menuTrayIcon = new QMenu( this );
   act = mp_menuTrayIcon->addAction( QIcon( ":/images/beebeep.png" ), tr( "Show" ), this, SLOT( showUp() ) );
   mp_menuTrayIcon->setDefaultAction( act );
-
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
   mp_menuTrayIcon->addSeparator();
@@ -1049,8 +1049,8 @@ void GuiMain::createToolAndMenuBars()
   menuBar()->setCornerWidget( label_version );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
-  mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_actVCard );
+  mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
@@ -1123,7 +1123,7 @@ void GuiMain::onUserChanged( const User& u )
   checkViewActions();
   if( u.isLocal() )
   {
-    updateWindowTitle();
+    updateStatusIcon();
   }
   else
   {
@@ -2035,12 +2035,8 @@ void GuiMain::changeVCard()
   gvc.setUser( Settings::instance().localUser() );
   gvc.setSizeGripEnabled( true );
   gvc.show();
-
   if( gvc.exec() == QDialog::Accepted )
-  {
     mp_core->setLocalUserVCard( gvc.userColor(), gvc.vCard() );
-    updateStatusIcon();
-  }
 }
 
 void GuiMain::showLocalUserVCard()
@@ -2394,7 +2390,7 @@ void GuiMain::editGroup( VNumber group_id )
   gcg.show();
   gcg.setFixedSize( gcg.size() );
   if( gcg.exec() == QDialog::Accepted )
-    mp_core->changeGroup( group_id, gcg.selectedName(), gcg.selectedUsersId() );
+    mp_core->changeGroup( Settings::instance().localUser(), group_id, gcg.selectedName(), gcg.selectedUsersId() );
 }
 
 void GuiMain::createChat()
@@ -2557,24 +2553,7 @@ void GuiMain::linkSavedChat( const QString& chat_name )
 
   }
 
-  ChatManager::instance().updateChatSavedText( chat_name, chat_name_selected, add_to_existing_saved_text );
-  mp_savedChatList->updateSavedChats();
-
-  Chat c = ChatManager::instance().findChatByName( chat_name );
-  if( c.isValid() )
-  {
-    GuiFloatingChat* fl_chat = floatingChat( c.id() );
-    if( fl_chat )
-      fl_chat->setChat( c );
-  }
-
-  c = ChatManager::instance().findChatByName( chat_name_selected );
-  if( c.isValid() )
-  {
-    GuiFloatingChat* fl_chat = floatingChat( c.id() );
-    if( fl_chat )
-      fl_chat->setChat( c );
-  }
+  mp_core->linkSavedChat( chat_name, chat_name_selected, add_to_existing_saved_text );
 }
 
 bool GuiMain::openWebUrl( const QString& web_url )

@@ -21,9 +21,10 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "GuiSavedChatList.h"
-#include "GuiConfig.h"
 #include "ChatManager.h"
+#include "GuiChatItem.h"
+#include "GuiConfig.h"
+#include "GuiSavedChatList.h"
 #include "Settings.h"
 
 
@@ -79,16 +80,16 @@ void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
   }
   else
   {
+    GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
+    m_savedChatSelected = saved_chat_item->chatName();
     QAction* act = mp_menuContext->addAction( QIcon( ":/images/saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
     mp_menuContext->setDefaultAction( act );
     mp_menuContext->addSeparator();
     act = mp_menuContext->addAction( QIcon( ":/images/update.png" ), tr( "Link to chat" ), this, SLOT( linkSavedChatSelected() ) );
-    act->setEnabled( !ChatManager::instance().hasName( m_savedChatSelected ) );
+    act->setEnabled( ChatManager::instance().constChatList().size() > 1 );
     mp_menuContext->addSeparator();
     mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
     m_blockShowChatRequest = true;
-    GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
-    m_savedChatSelected = saved_chat_item->chatName();
     clearSelection();
   }
 
@@ -127,8 +128,17 @@ void GuiSavedChatList::updateSavedChats()
     item = new GuiSavedChatItem( this );
     item->setChatName( it.key() );
     item->setIcon( 0, QIcon( ":/images/saved-chat.png" ) );
-    item->setText( 0, it.key() );
-    item->setToolTip( 0, QObject::tr( "Click to view chat history: %1" ).arg( it.key() ) );
+    QFont f = this->font();
+    f.setItalic( true );
+    if( it.key() == Settings::instance().defaultChatName() )
+    {
+      item->setText( 0, GuiChatItem::defaultChatName() );
+      f.setBold( true );
+    }
+    else
+      item->setText( 0, it.key() );
+    item->setFont( 0, f );
+    item->setToolTip( 0, QObject::tr( "Click to view chat history: %1" ).arg( item->text( 0 ) ) );
     ++it;
   }
 }

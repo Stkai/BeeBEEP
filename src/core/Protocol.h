@@ -83,8 +83,6 @@ public:
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
   bool changeUserStatusFromMessage( User*, const Message& ) const;
-  Message localUserNameMessage() const;
-  bool changeUserNameFromMessage( User*, const Message& ) const;
   Message localVCardMessage() const;
   bool changeVCardFromMessage( User*, const Message& ) const;
 
