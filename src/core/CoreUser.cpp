@@ -467,7 +467,7 @@ bool Core::removeOfflineUser( VNumber user_id )
   if( !u.isValid() )
   {
     qWarning() << "User" << user_id << "is already removed from list";
-    return false;
+    return true;
   }
 
   if( isUserConnected( u.id() ) )
@@ -494,7 +494,7 @@ bool Core::removeOfflineUser( VNumber user_id )
     emit userRemoved( u );
     Chat c = ChatManager::instance().privateChatForUser( u.id() );
     if( c.isValid() )
-      removeChat( c.id() );
+      removeChat( c.id(), true );
     return true;
   }
   else

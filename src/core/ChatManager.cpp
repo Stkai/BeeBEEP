@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "ChatManager.h"
+#include "GuiChatMessage.h"
 #include "User.h"
 #include "Settings.h"
 
@@ -306,4 +307,14 @@ bool ChatManager::isChatRefused( const QString& chat_private_id ) const
     return m_refusedChats.contains( cr );
   else
     return false;
+}
+
+void ChatManager::setChatToSavedChats( const Chat& c )
+{
+  QString saved_chat_text = GuiChatMessage::chatToHtml( c, true, true, true );
+  if( saved_chat_text.isEmpty() )
+    return;
+  if( chatHasSavedText( c.name() ) )
+    saved_chat_text.prepend( chatSavedText( c.name() ) );
+  m_history.insert( c.name(), saved_chat_text );
 }

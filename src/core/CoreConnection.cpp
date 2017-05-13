@@ -320,9 +320,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     u.setColor( user_found.color() );
   }
   else
-  {
-    qDebug() << "New user is connected from" << u.path();
-  }
+    qDebug() << "New user is connected from" << qPrintable( u.path() );
 
   if( !ColorManager::instance().isValidColor( u.color() ) )
     u.setColor( ColorManager::instance().unselectedQString() );
@@ -330,17 +328,12 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   UserManager::instance().setUser( u );
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "User" << u.path() << "added with id" << u.id() << "and color" << u.color();
+  qDebug() << "User" << qPrintable( u.path() ) << "added with id" << u.id() << "and color" << qPrintable( u.color() );
 #endif
 
   Chat default_chat = ChatManager::instance().defaultChat();
   if( default_chat.addUser( u.id() ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Adding user" << u.path() << "to default chat";
-#endif
     ChatManager::instance().setChat( default_chat );
-  }
 
   Chat private_chat = ChatManager::instance().privateChatForUser( u.id() );
   if( private_chat.isValid() )

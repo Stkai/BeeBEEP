@@ -840,7 +840,8 @@ Group Protocol::loadGroup( const QString& group_data_saved )
       user_nickname = User::nameFromPath( user_path );
       user_na = NetworkAddress::fromString( User::hostAddressAndPortFromPath( user_path ) );
 #ifdef BEEBEEP_DEBUG
-      qWarning() << "Invalid network address found in" << qPrintable( user_nickname ) << "of group" << qPrintable( g.name() );
+      if( !user_na.isHostAddressValid() && !user_na.isHostPortValid() )
+        qWarning() << "Invalid network address found in" << qPrintable( user_nickname ) << "of group" << qPrintable( g.name() );
 #endif
       user_account_name = sl.takeFirst();
       if( read_user_hash && !sl.isEmpty() )

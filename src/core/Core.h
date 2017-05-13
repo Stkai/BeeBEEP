@@ -83,13 +83,13 @@ public:
   Chat createGroupChat( const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
   void changeGroupChat( const User&, VNumber chat_id, const QString& chat_name, const QList<VNumber>& members_is );
   bool clearMessagesInChat( VNumber, bool clear_history );
-  bool removeUserFromChat( const User&, const QString& chat_private_id );
   bool removeUserFromGroup( const User&, const QString& group_private_id );
-  bool removeChat( VNumber );
+  bool removeChat( VNumber, bool save_chat_messages );
   bool readAllMessagesInChat( VNumber );
   void sendBuzzToUser( VNumber );
   void removeSavedChat( const QString& );
   void linkSavedChat( const QString& from_saved_chat_name, const QString& to_saved_chat_name, bool prepend_to_existing_saved_chat );
+  bool removeUserFromChat( const User&, const QString& chat_private_id );
 
   /* CoreFileTransfer */
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );

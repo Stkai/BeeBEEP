@@ -448,42 +448,38 @@ bool Core::removeUserFromChat( const User& u, const QString& chat_private_id )
   return true;
 }
 
-bool Core::removeChat( VNumber chat_id )
+bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
 {
-  if( !clearMessagesInChat( chat_id, true ) )
-    return true;
-
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return true;
+
   if( c.isDefault() )
     return false;
+
+  if( save_chat_messages )
+    ChatManager::instance().setChatToSavedChats( c );
+  clearMessagesInChat( c.id(), !save_chat_messages );
+
   if( c.isPrivate() )
   {
-    if( UserManager::instance().findUser( c.privateUserId() ).isValid() )
-      return true;
+    if( !removeOfflineUser( c.privateUserId() ) )
+      return false;
   }
 
-  if( ChatManager::instance().removeChat( c ) )
+  ChatManager::instance().removeChat( c );
+  emit chatRemoved( c );
+  if( c.isGroup() )
   {
-    emit chatRemoved( c );
-    if( c.isGroup() )
-    {
-      qDebug() << "Group chat removed:" << c.name();
-      UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
-      sendGroupChatRefuseMessage( c, group_members );
-      ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
-      return true;
-    }
-    else
-    {
-      qDebug() << "Private chat removed:" << c.name();
-      return true;
-    }
+    qDebug() << "Group chat removed:" << c.name();
+    UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+    sendGroupChatRefuseMessage( c, group_members );
+    ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
   }
+  else
+    qDebug() << "Private chat removed:" << c.name();
 
-  qWarning() << "Unable to delete chat with id" << c.id() << "and name" << c.name();
-  return false;
+  return true;
 }
 
 void Core::checkOfflineMessagesForUser( const User& u )

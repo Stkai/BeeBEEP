@@ -1713,7 +1713,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Broadcast to network</source>
-        <translation>Cerca nella rete</translation>
+        <translation type="obsolete">Cerca nella rete</translation>
     </message>
     <message>
         <source>Show the user&apos;s picture</source>
@@ -2294,6 +2294,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>%1 removed</source>
         <translation>%1 cancellato</translation>
+    </message>
+    <message>
+        <source>Search users</source>
+        <translation>Cerca utenti</translation>
     </message>
 </context>
 <context>

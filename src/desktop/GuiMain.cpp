@@ -548,7 +548,10 @@ void GuiMain::initGuiItems()
   }
 
   mp_actBroadcast->setEnabled( enable );
-
+  mp_userList->updateUsers();
+  mp_chatList->updateChats();
+  mp_groupList->updateGroups();
+  mp_savedChatList->updateSavedChats();
   updateStatusIcon();
   updateNewMessageAction();
   checkViewActions();
@@ -622,7 +625,7 @@ void GuiMain::createActions()
   mp_actStartStopCore = new QAction( this );
   connect( mp_actStartStopCore, SIGNAL( triggered() ), this, SLOT( startStopCore() ) );
 
-  mp_actBroadcast = new QAction( QIcon( ":/images/broadcast.png" ), tr( "Broadcast to network" ), this );
+  mp_actBroadcast = new QAction( QIcon( ":/images/broadcast.png" ), tr( "Search users" ), this );
   connect( mp_actBroadcast, SIGNAL( triggered() ), this, SLOT( sendBroadcastMessage() ) );
 
   mp_actConfigureNetwork = new QAction( QIcon( ":/images/network.png"), tr( "Configure network..."), this );
@@ -2789,7 +2792,7 @@ void GuiMain::removeChat( VNumber chat_id )
   if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
-  if( !mp_core->removeChat( chat_id ) )
+  if( !mp_core->removeChat( chat_id, true ) )
     QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "Unable to delete %1." ).arg( c.name() ) );
 }
 
