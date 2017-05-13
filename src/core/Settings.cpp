@@ -311,6 +311,7 @@ void Settings::loadRcFile()
   }
 
   QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
+  sets->setFallbacksEnabled( false );
   sets->beginGroup( "BeeBEEP" );
   m_enableSaveData = sets->value( "EnableSaveData", m_enableSaveData ).toBool();
   m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
@@ -761,7 +762,10 @@ QSettings* Settings::objectSettings() const
   QSettings *sets;
 
   if( m_useSettingsFileIni )
+  {
     sets = new QSettings( defaultSettingsFilePath(), QSettings::IniFormat );
+    sets->setFallbacksEnabled( false );
+  }
   else
     sets = new QSettings( QSettings::NativeFormat, QSettings::UserScope, organizationName(), programName() );
 

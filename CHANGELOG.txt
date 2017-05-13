@@ -1,4 +1,4 @@
-BEEBEEP (Secure Lan Messanger) - CHANGELOG
+BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 3.2.0
 - Changed all the main user interface

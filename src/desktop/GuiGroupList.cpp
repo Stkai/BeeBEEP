@@ -73,7 +73,7 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
 }
 
-void GuiGroupList::loadGroups()
+void GuiGroupList::updateGroups()
 {
   setIconSize( Settings::instance().avatarIconSize() );
   if( topLevelItemCount() > 0 )
@@ -87,17 +87,13 @@ void GuiGroupList::loadGroups()
   }
 }
 
-void GuiGroupList::updateGroup( VNumber group_id )
+void GuiGroupList::updateGroup( const Group& g )
 {
-  Group g = UserManager::instance().group( group_id );
-  if( !g.isValid() )
-    return;
-
-  GuiGroupItem* group_item = itemFromId( group_id );
+  GuiGroupItem* group_item = itemFromId( g.id() );
   if( !group_item )
   {
     group_item = new GuiGroupItem( this );
-    group_item->init( group_id, true );
+    group_item->init( g.id(), true );
   }
   group_item->updateGroup( g );
   sortItems( 0, Qt::AscendingOrder );

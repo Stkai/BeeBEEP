@@ -233,7 +233,7 @@ bool Core::createGroupFromChat( VNumber chat_id )
 void Core::addGroup( const Group& g )
 {
   UserManager::instance().setGroup( g );
-  emit updateGroup( g.id() );
+  emit groupChanged( g.id() );
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
@@ -249,7 +249,7 @@ void Core::changeGroup( const User& u, VNumber group_id, const QString& group_na
   g.setName( group_name );
   g.setUsers( members_id );
   UserManager::instance().setGroup( g );
-  emit updateGroup( g.id() );
+  emit groupChanged( g.id() );
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( c.isValid() )
@@ -274,7 +274,7 @@ bool Core::removeUserFromGroup( const User& u, const QString& group_private_id )
     }
 
     UserManager::instance().setGroup( g );
-    emit updateGroup( g.id() );
+    emit groupChanged( g.id() );
   }
 
   return true;
@@ -289,10 +289,12 @@ bool Core::removeGroup( VNumber group_id )
     return false;
   }
 
-  if( UserManager::instance().removeGroup( group_id ) )
+  if( UserManager::instance().removeGroup( g ) )
   {
-    QString sHtmlMsg = tr( "%1 You have deleted group: %2." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), g.name() );
+    qDebug() << "Group" << qPrintable( g.name() ) << "is removed";
+    QString sHtmlMsg = tr( "%1 %2 is removed from groups." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), g.name() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
+    emit groupRemoved( g );
     return true;
   }
   else
@@ -427,7 +429,7 @@ void Core::toggleUserFavorite( VNumber user_id )
   }
 
   UserManager::instance().setUser( u );
-
+  emit userChanged( u );
   QString sHtmlMsg = QString( "%1 %2 %3." ).arg( favorite_icon, u.name(), favorite_txt );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToDefaultAndPrivateChat, ChatMessage::UserInfo );
 }
@@ -470,25 +472,26 @@ bool Core::removeOfflineUser( VNumber user_id )
 
   if( isUserConnected( u.id() ) )
   {
-    qWarning() << "User" << qPrintable( u.path() ) << "is connected and cannot be removed from list";
+    qWarning() << "User" << qPrintable( u.name() ) << "is connected and cannot be removed from list";
     return false;
   }
 
   if( UserManager::instance().isUserInGroups( u.id() ) )
   {
-    qWarning() << "User" << qPrintable( u.path() ) << "is in some groups and cannot be removed from list";
+    qWarning() << "User" << qPrintable( u.name() ) << "is in some groups and cannot be removed from list";
     return false;
   }
 
   if( ChatManager::instance().userIsInGroupChat( u.id() ) )
   {
-    qWarning() << "User" << qPrintable( u.path() ) << "is in a group chat and cannot be removed from list";
+    qWarning() << "User" << qPrintable( u.name() ) << "is in a group chat and cannot be removed from list";
     return false;
   }
 
   if( UserManager::instance().removeUser( u ) )
   {
-    qDebug() << "User" << qPrintable( u.path() ) << "is removed from list";
+    qDebug() << "User" << qPrintable( u.name() ) << "is removed from list";
+    emit userRemoved( u );
     Chat c = ChatManager::instance().privateChatForUser( u.id() );
     if( c.isValid() )
       removeChat( c.id() );
@@ -496,7 +499,7 @@ bool Core::removeOfflineUser( VNumber user_id )
   }
   else
   {
-    qWarning() << "User" << u.path() << "cannot be removed from list";
+    qWarning() << "User" << qPrintable( u.name() ) << "cannot be removed from list";
     return false;
   }
 }

@@ -466,9 +466,10 @@ bool Core::removeChat( VNumber chat_id )
 
   if( ChatManager::instance().removeChat( c ) )
   {
+    emit chatRemoved( c );
     if( c.isGroup() )
     {
-      qDebug() << "Group chat deleted:" << c.name();
+      qDebug() << "Group chat removed:" << c.name();
       UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
       sendGroupChatRefuseMessage( c, group_members );
       ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
@@ -476,7 +477,7 @@ bool Core::removeChat( VNumber chat_id )
     }
     else
     {
-      qDebug() << "Private chat deleted:" << c.name();
+      qDebug() << "Private chat removed:" << c.name();
       return true;
     }
   }

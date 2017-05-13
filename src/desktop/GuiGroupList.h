@@ -34,8 +34,8 @@ class GuiGroupList : public QTreeWidget
 public:
   GuiGroupList( QWidget* parent );
 
-  void loadGroups();
-  void updateGroup( VNumber );
+  void updateGroups();
+  void updateGroup( const Group& );
   void updateUser( const User& );
   void updateChat( const Chat& );
 

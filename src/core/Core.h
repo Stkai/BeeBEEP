@@ -138,7 +138,9 @@ public slots:
 signals:
   void userChanged( const User& );
   void userIsWriting( const User&, VNumber );
+  void userRemoved( const User& );
   void chatChanged( const Chat& );
+  void chatRemoved( const Chat& );
   void newChatMessage( const Chat&, const ChatMessage& );
   void chatReadByUser( const Chat&, const User& );
   void fileDownloadRequest( const User&, const FileInfo& );
@@ -150,6 +152,7 @@ signals:
   void localShareListAvailable();
   void savedChatListAvailable();
   void groupChanged( VNumber );
+  void groupRemoved( const Group& );
   void userConnectionStatusChanged( const User& );
   void networkInterfaceIsDown();
   void networkInterfaceIsUp();

@@ -118,20 +118,24 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( onUserChanged( const User& ) ) );
+  connect( mp_core, SIGNAL( userRemoved( const User& ) ), this, SLOT( onUserRemoved( const User& ) ) );
   connect( mp_core, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
   connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
   connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
   connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( mp_core, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
+  connect( mp_core, SIGNAL( chatRemoved( const Chat& ) ), this, SLOT( onChatRemoved( const Chat& ) ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
-  connect( mp_core, SIGNAL( groupChanged( VNumber ) ), this, SLOT( checkGroup( VNumber ) ) );
+  connect( mp_core, SIGNAL( groupChanged( const Group& ) ), this, SLOT( onGroupChanged( const Group& ) ) );
+  connect( mp_core, SIGNAL( groupRemoved( const Group& ) ), this, SLOT( onGroupRemoved( const Group& ) ) );
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
   connect( mp_core, SIGNAL( chatReadByUser( const Chat&, const User& ) ), this, SLOT( onChatReadByUser( const Chat&, const User& ) ) );
   connect( mp_core, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
   connect( mp_core, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
+
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
 #endif
@@ -544,7 +548,6 @@ void GuiMain::initGuiItems()
   }
 
   mp_actBroadcast->setEnabled( enable );
-  refreshUserList();
 
   updateStatusIcon();
   updateNewMessageAction();
@@ -1114,35 +1117,6 @@ void GuiMain::startExternalApplicationFromActionData()
     QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1" ).arg( application_path ), tr( "Ok" ) );
 }
 
-void GuiMain::onUserChanged( const User& u )
-{
-  mp_userList->setUser( u, true );
-  mp_groupList->updateUser( u );
-  mp_chatList->updateUser( u );
-  if( mp_fileSharing )
-    mp_fileSharing->onUserChanged( u );
- foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-    fl_chat->updateUser( u );
-  checkViewActions();
-  if( u.isLocal() )
-  {
-    updateStatusIcon();
-  }
-  else
-  {
-    if( m_coreIsConnecting && u.isStatusConnected() && mp_tabMain->currentWidget() == mp_home )
-    {
-      m_coreIsConnecting = false;
-      mp_tabMain->setCurrentWidget( mp_userList );
-    }
-  }
-}
-
-void GuiMain::refreshUserList()
-{
-  mp_userList->updateUsers( mp_core->isConnected() );
-}
-
 void GuiMain::settingsChanged()
 {
   QAction* act = qobject_cast<QAction*>( sender() );
@@ -1422,7 +1396,7 @@ void GuiMain::settingsChanged()
   }
 
   if( refresh_users )
-    refreshUserList();
+    mp_userList->updateUsers();
 
   if( refresh_chat )
   {
@@ -2480,7 +2454,7 @@ void GuiMain::loadSession()
   QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   mp_tabMain->setCurrentWidget( mp_home );
   mp_home->loadSystemMessages();
-  mp_groupList->loadGroups();
+  mp_groupList->updateGroups();
 }
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )
@@ -2647,22 +2621,66 @@ void GuiMain::changeUserColor( VNumber user_id, const QString& user_color )
     mp_core->changeUserColor( user_id, c.name() );
 }
 
-void GuiMain::checkGroup( VNumber group_id )
+void GuiMain::onUserChanged( const User& u )
 {
-  if( UserManager::instance().group( group_id ).isValid() )
-    mp_groupList->updateGroup( group_id );
+  mp_userList->setUser( u, true );
+  mp_groupList->updateUser( u );
+  mp_chatList->updateUser( u );
+ foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->updateUser( u );
+  checkViewActions();
+  if( u.isLocal() )
+  {
+    updateStatusIcon();
+  }
   else
-    mp_groupList->loadGroups();
+  {
+    if( m_coreIsConnecting && u.isStatusConnected() && mp_tabMain->currentWidget() == mp_home )
+    {
+      m_coreIsConnecting = false;
+      mp_tabMain->setCurrentWidget( mp_userList );
+    }
+  }
+}
+
+void GuiMain::onUserRemoved( const User& u )
+{
+  showMessage( tr( "%1 removed" ).arg( u.name() ), 2000 );
+  mp_userList->updateUsers();
+  updateTabTitles();
+}
+
+void GuiMain::onGroupChanged( const Group& g )
+{
+  mp_groupList->updateGroup( g );
+}
+
+void GuiMain::onGroupRemoved( const Group& g )
+{
+  showMessage( tr( "%1 removed" ).arg( g.name() ), 2000 );
+  mp_groupList->updateGroups();
+  updateTabTitles();
 }
 
 void GuiMain::onChatChanged( const Chat& c )
 {
   mp_userList->updateChat( c );
   mp_chatList->updateChat( c );
-  mp_savedChatList->updateSavedChats();
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
     fl_chat->setChat( c );
+  mp_savedChatList->updateSavedChats();
+  updateTabTitles();
+}
+
+void GuiMain::onChatRemoved( const Chat& c )
+{
+  showMessage( tr( "%1 removed" ).arg( c.name() ), 2000 );
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  if( fl_chat )
+    fl_chat->close();
+  mp_chatList->updateChats();
+  mp_savedChatList->updateSavedChats();
   updateTabTitles();
 }
 
@@ -2700,7 +2718,7 @@ void GuiMain::leaveGroupChat( VNumber chat_id )
       return;
     }
 
-    mp_groupList->loadGroups();
+    mp_groupList->updateGroups();
     updateTabTitles();
   }
 
@@ -2720,12 +2738,7 @@ void GuiMain::removeGroup( VNumber group_id )
                                tr( "Do you want to delete group %1?" ).arg( g.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
     {
-      if( mp_core->removeGroup( group_id ) )
-      {
-        mp_groupList->loadGroups();
-        updateTabTitles();
-      }
-      else
+      if( !mp_core->removeGroup( group_id ) )
         QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot delete %1." ).arg( g.name() ) );
     }
   }
@@ -2776,15 +2789,7 @@ void GuiMain::removeChat( VNumber chat_id )
   if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
-  if( mp_core->removeChat( chat_id ) )
-  {
-    mp_chatList->reloadChatList();
-    updateTabTitles();
-    GuiFloatingChat* fl_chat = floatingChat( chat_id );
-    if( fl_chat )
-      fl_chat->close();
-  }
-  else
+  if( !mp_core->removeChat( chat_id ) )
     QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "Unable to delete %1." ).arg( c.name() ) );
 }
 
@@ -3044,9 +3049,6 @@ void GuiMain::showConnectionStatusChanged( const User& u )
     mp_trayIcon->showUserStatusChanged( c.id(), msg );
   else
     mp_trayIcon->showUserStatusChanged( ID_DEFAULT_CHAT, msg );
-
-  if( mp_fileSharing )
-    mp_fileSharing->onUserChanged( u );
 }
 
 void GuiMain::changeAvatarSizeInList()
@@ -3058,16 +3060,15 @@ void GuiMain::changeAvatarSizeInList()
     return;
 
   Settings::instance().setAvatarIconSize( QSize( avatar_size, avatar_size ) );
-  refreshUserList();
-  mp_chatList->reloadChatList();
-  mp_groupList->loadGroups();
+  mp_userList->updateUsers();
+  mp_chatList->updateChats();
+  mp_groupList->updateGroups();
   mp_savedChatList->updateSavedChats();
 }
 
 void GuiMain::toggleUserFavorite( VNumber user_id )
 {
   mp_core->toggleUserFavorite( user_id );
-  refreshUserList();
 }
 
 void GuiMain::createGroupFromChat( VNumber chat_id )
@@ -3080,18 +3081,7 @@ void GuiMain::removeUserFromList( VNumber user_id )
   QString question_txt = tr( "Do you want to delete user %1?" ).arg( UserManager::instance().findUser( user_id ).name() );
   if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
-
-  Chat c = ChatManager::instance().privateChatForUser( user_id );
-  GuiFloatingChat* fl_chat = floatingChat( c.id() );
-  if( fl_chat )
-    fl_chat->close();
-
-  if( mp_core->removeOfflineUser( user_id ) )
-  {
-    refreshUserList();
-    mp_chatList->reloadChatList();
-    updateTabTitles();
-  }
+  mp_core->removeOfflineUser( user_id );
 }
 
 void GuiMain::openResourceFolder()
@@ -3257,7 +3247,7 @@ void GuiMain::clearRecentlyUsedUserStatus()
 
 void GuiMain::loadSavedChatsCompleted()
 {
-  mp_chatList->reloadChatList();
+  mp_chatList->updateChats();
   mp_savedChatList->updateSavedChats();
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->setChat( ChatManager::instance().chat( fl_chat->guiChat()->chatId() ) );
@@ -3600,6 +3590,7 @@ void GuiMain::showFileSharingWindow()
     connect( mp_fileSharing, SIGNAL( sendFileRequest( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
     connect( mp_fileSharing, SIGNAL( downloadSharedFileRequest( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
     connect( mp_fileSharing, SIGNAL( downloadSharedFilesRequest( const QList<SharedFileInfo>& ) ), this, SLOT( downloadSharedFiles( QList<SharedFileInfo> ) ) );
+    connect( mp_core, SIGNAL( userChanged( const User& ) ), mp_fileSharing, SLOT( onUserChanged( const User& ) ) );
   }
 
   mp_fileSharing->showUp();

@@ -101,18 +101,9 @@ Group UserManager::findGroupByUsers( const QList<VNumber>& group_members ) const
   return Group();
 }
 
-bool UserManager::removeGroup( VNumber group_id )
+bool UserManager::removeGroup( const Group& g )
 {
-  Group g = group( group_id );
-  if( g.isValid() && m_groups.removeOne( g ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Group is removed from group list:" << qPrintable( g.name() );
-#endif
-    return true;
-  }
-  else
-    return false;
+  return m_groups.removeOne( g );
 }
 
 bool UserManager::isUserInGroups( VNumber user_id ) const

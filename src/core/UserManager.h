@@ -52,7 +52,7 @@ public:
   bool hasGroupName( const QString& ) const;
   Group findGroupByPrivateId( const QString& ) const;
   Group findGroupByUsers( const QList<VNumber>& ) const;
-  bool removeGroup( VNumber );
+  bool removeGroup( const Group& );
   bool isUserInGroups( VNumber ) const;
 
   static UserManager& instance()

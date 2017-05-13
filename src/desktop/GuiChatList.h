@@ -35,7 +35,7 @@ class GuiChatList : public QWidget, private Ui::GuiChatListWidget
 public:
   GuiChatList( QWidget* parent );
 
-  void reloadChatList();
+  void updateChats();
 
 signals:
   void chatSelected( VNumber chat_id );

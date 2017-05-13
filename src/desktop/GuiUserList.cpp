@@ -46,7 +46,6 @@ GuiUserList::GuiUserList( QWidget* parent )
                         "background-position: bottom center;";
   mp_twUsers->setStyleSheet( w_stylesheet );
 
-  m_coreIsConnected = false;
   m_filter = "";
   m_blockShowChatRequest = false;
 #if QT_VERSION >= 0x040700
@@ -79,9 +78,8 @@ void GuiUserList::resetList()
   mp_twUsers->setIconSize( Settings::instance().avatarIconSize() );
 }
 
-void GuiUserList::updateUsers( bool is_connected )
+void GuiUserList::updateUsers()
 {
-  m_coreIsConnected = is_connected;
   resetList();
   foreach( User u, UserManager::instance().userList().toList() )
   {
@@ -248,7 +246,7 @@ void GuiUserList::filterText( const QString& txt )
     return;
 
   m_filter = new_filter;
-  updateUsers( m_coreIsConnected );
+  updateUsers();
 }
 
 void GuiUserList::clearFilter()

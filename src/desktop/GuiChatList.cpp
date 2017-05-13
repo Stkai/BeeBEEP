@@ -63,7 +63,7 @@ GuiChatList::GuiChatList( QWidget* parent )
   connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
 }
 
-void GuiChatList::reloadChatList()
+void GuiChatList::updateChats()
 {
   mp_twChatList->clearSelection();
   mp_twChatList->clear();
@@ -225,7 +225,7 @@ void GuiChatList::filterText( const QString& txt )
     return;
 
   m_filter = new_filter;
-  reloadChatList();
+  updateChats();
 }
 
 void GuiChatList::clearFilter()

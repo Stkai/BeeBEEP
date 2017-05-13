@@ -33,6 +33,7 @@
 class Core;
 class Chat;
 class ChatMessage;
+class Group;
 class GuiChat;
 class GuiChatList;
 class GuiFileSharing;
@@ -76,8 +77,12 @@ private slots:
   void showLicense();
   void onUserChanged( const User& );
   void showWritingUser( const User&, VNumber );
+  void onUserRemoved( const User& );
   void onNewChatMessage( const Chat&, const ChatMessage& );
   void onChatChanged( const Chat& );
+  void onChatRemoved( const Chat& );
+  void onGroupChanged( const Group& );
+  void onGroupRemoved( const Group& );
   void sendMessage( VNumber, const QString& );
   void showTipOfTheDay();
   void showFactOfTheDay();
@@ -123,7 +128,6 @@ private slots:
   void openHelpPage();
   void openFacebookPage();
   void clearChat( VNumber );
-  void checkGroup( VNumber );
   void leaveGroupChat( VNumber );
   void removeGroup( VNumber );
   void removeChat( VNumber );
@@ -197,7 +201,6 @@ private:
   void createMenus();
   void createToolAndMenuBars();
   void createMainWidgets();
-  void refreshUserList();
   void updateWindowTitle();
   void initGuiItems();
   void updadePluginMenu();

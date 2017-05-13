@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>%1 You have deleted group: %2.</source>
-        <translation>%1 Hai cancellato il gruppo: %2.</translation>
+        <translation type="obsolete">%1 Hai cancellato il gruppo: %2.</translation>
     </message>
     <message>
         <source>All paths are removed from file sharing</source>
@@ -421,6 +421,10 @@
     <message>
         <source>%1 users connected</source>
         <translation>%1 utenti connessi</translation>
+    </message>
+    <message>
+        <source>%1 %2 is removed from groups.</source>
+        <translation>%1 %2 è stato rimosso dai gruppi.</translation>
     </message>
 </context>
 <context>
@@ -2261,7 +2265,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation>Vuoi  cancellare questa conversazione salvata?</translation>
+        <translation>Vuoi cancellare questa conversazione salvata?</translation>
     </message>
     <message>
         <source>Do you want to delete group &apos;%1&apos;?</source>
@@ -2286,6 +2290,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Do you want to delete group %1?</source>
         <translation>Vuoi cancellare il gruppo %1?</translation>
+    </message>
+    <message>
+        <source>%1 removed</source>
+        <translation>%1 cancellato</translation>
     </message>
 </context>
 <context>

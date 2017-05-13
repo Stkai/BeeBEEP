@@ -41,7 +41,7 @@ public:
   void removeUser( const User& );
   void setUnreadMessages( VNumber private_chat_id, int );
   void setMessages( VNumber private_chat_id, int );
-  void updateUsers( bool );
+  void updateUsers();
   void updateChat( const Chat& );
 
   inline void setMenuSettings( QMenu* );
@@ -70,7 +70,6 @@ private:
   void resetList();
 
   QString m_filter;
-  bool m_coreIsConnected;
 
   QMenu* mp_menuSettings;
   QMenu* mp_menuUsers;
