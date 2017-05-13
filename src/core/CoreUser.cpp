@@ -233,7 +233,7 @@ bool Core::createGroupFromChat( VNumber chat_id )
 void Core::addGroup( const Group& g )
 {
   UserManager::instance().setGroup( g );
-  emit groupChanged( g.id() );
+  emit groupChanged( g );
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( !c.isValid() )
@@ -249,7 +249,7 @@ void Core::changeGroup( const User& u, VNumber group_id, const QString& group_na
   g.setName( group_name );
   g.setUsers( members_id );
   UserManager::instance().setGroup( g );
-  emit groupChanged( g.id() );
+  emit groupChanged( g );
 
   Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
   if( c.isValid() )
@@ -274,7 +274,7 @@ bool Core::removeUserFromGroup( const User& u, const QString& group_private_id )
     }
 
     UserManager::instance().setGroup( g );
-    emit groupChanged( g.id() );
+    emit groupChanged( g );
   }
 
   return true;
