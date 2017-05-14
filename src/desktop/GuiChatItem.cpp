@@ -92,8 +92,7 @@ bool GuiChatItem::updateItem( const Chat& c )
     if( c.isGroup() )
     {
       chat_name = c.name();
-      if( UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() )
-        m_defaultIcon = QIcon( ":/images/group.png" );
+      m_defaultIcon = QIcon( ":/images/group.png" );
     }
     else
       chat_name = sl.isEmpty() ? c.name() : sl.first();

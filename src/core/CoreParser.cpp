@@ -292,19 +292,14 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
     }
 
-    Group g = UserManager::instance().findGroupByPrivateId( cmd.groupId() );
-    if( g.isValid() )
-    {
-      changeGroup( u, g.id(), cmd.groupName(), ul.toUsersId() );
-      return;
-    }
-
     Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
     if( group_chat.isValid() )
     {
       if( group_chat.usersId().contains( ID_LOCAL_USER ) )
       {
-        changeGroupChat( u, group_chat.id(), cmd.groupName(), ul.toUsersId() );
+        if( cmd.groupLastModified().isValid() && cmd.groupLastModified() <= group_chat.lastModified() )
+          return;
+        changeGroupChat( u, group_chat.group() );
       }
       else
       {
@@ -315,24 +310,15 @@ void Core::parseGroupMessage( const User& u, const Message& m )
     }
     else
     {
-      if( ul.toList().size() >= 2 )
-      {
-        QString sys_msg = tr( "%1 %2 has added you to the group chat: %3." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), u.name(), cmd.groupName() );
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg, DispatchToChat, ChatMessage::System );
-        group_chat = createGroupChat( cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
-        dispatchSystemMessage( group_chat.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::System );
-      }
+      if( ul.toList().size() > 2 )
+        createGroupChat( u, cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
       else
         qWarning() << "Unable to create group chat" << qPrintable( cmd.groupName() ) << "from user" << qPrintable( u.name() ) << "because members are minus than 2";
     }
   }
   else if( m.hasFlag( Message::Refused ) )
   {
-    removeUserFromGroup( u, cmd.groupId() );
-    removeUserFromChat( u, cmd.groupId() );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 has left the group: %3." )
-                                                      .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name(), cmd.groupName() ),
-                           DispatchToChat, ChatMessage::System );
+    removeUserFromGroupChat( u, cmd.groupId() );
   }
   else
     qWarning() << "Invalid flag found in group message from" << qPrintable( u.path() );

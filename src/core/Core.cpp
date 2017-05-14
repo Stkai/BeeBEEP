@@ -49,6 +49,7 @@ Core::Core( QObject* parent )
   mp_listener = new Listener( this );
   qDebug() << "Listener created";
   mp_broadcaster = new Broadcaster( this );
+  mp_broadcaster->setAddOfflineUsersInNetworkAddresses( false );
   qDebug() << "Broadcaster created";
   mp_fileTransfer = new FileTransfer( this );
   qDebug() << "FileTransfer created";
@@ -533,6 +534,9 @@ void Core::onTickEvent( int ticks )
     if( (ticks % AUTO_BROADCAST_CHECK_TICK == 0) && m_connections.isEmpty() )
       mp_broadcaster->setNewBroadcastRequested( true );
   }
+
+  if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalCheckNetwork() ) )
+    QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
 
   if( Protocol::instance().currentId() >= Protocol::instance().maxId() )
   {

@@ -755,35 +755,36 @@ UserStatusRecord Protocol::loadUserStatusRecord( const QString& s ) const
   return usr;
 }
 
-Chat Protocol::createChat( const QList<VNumber>& user_list, const QString& chat_private_id )
+Chat Protocol::createDefaultChat()
 {
   Chat c;
-  c.setId( newId() );
-  if( user_list.size() > 1 )
-  {
-    if( chat_private_id.isEmpty() )
-      c.setPrivateId( newMd5Id() );
-    else
-      c.setPrivateId( chat_private_id );
-  }
-  foreach( VNumber user_id, user_list )
-    c.addUser( user_id );
-  c.addUser( ID_LOCAL_USER );
+  Group g;
+  g.setId( ID_DEFAULT_CHAT );
+  g.setName( Settings::instance().defaultChatName() );
+  g.addUser( ID_LOCAL_USER );
+  g.setPrivateId( Settings::instance().defaultChatPrivateId() );
+  c.setGroup( g );
   return c;
 }
 
-Group Protocol::createGroup( const QString& group_name, const QString& group_private_id, const QList<VNumber>& user_list )
+Chat Protocol::createChat( const QString& chat_name, const QList<VNumber>& chat_users_id, const QString& chat_private_id )
 {
+  Chat c;
   Group g;
   g.setId( newId() );
-  g.setName( group_name );
-  g.setUsers( user_list );
-  if( group_private_id.isEmpty() )
-    g.setPrivateId( newMd5Id() );
-  else
-    g.setPrivateId( group_private_id );
+  g.setName( chat_name );
+  if( chat_users_id.size() > 1 )
+  {
+    if( chat_private_id.isEmpty() )
+      g.setPrivateId( newMd5Id() );
+    else
+      g.setPrivateId( chat_private_id );
+  }
+  foreach( VNumber user_id, chat_users_id )
+    g.addUser( user_id );
   g.addUser( ID_LOCAL_USER );
-  return g;
+  c.setGroup( g );
+  return c;
 }
 
 QString Protocol::saveGroup( const Group& g ) const
@@ -907,6 +908,7 @@ Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
   ChatMessageData cmd;
   cmd.setGroupId( c.privateId() );
   cmd.setGroupName( c.name() );
+  cmd.setGroupLastModified( c.lastModified() );
   m.setData( chatMessageDataToString( cmd ) );
   return m;
 }
@@ -1488,6 +1490,13 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
   else
     cmd.setGroupName( sl.takeFirst() );
 
+  if( sl.isEmpty() )
+    return cmd;
+
+  QString s_group_last_modified = sl.takeFirst();
+  if( !s_group_last_modified.isEmpty() )
+    cmd.setGroupLastModified( QDateTime::fromString( s_group_last_modified, Qt::ISODate ) );
+
   return cmd;
 }
 
@@ -1497,6 +1506,7 @@ QString Protocol::chatMessageDataToString( const ChatMessageData& cmd )
   sl << (cmd.textColor().isValid() ? cmd.textColor().name() : "");
   sl << (cmd.groupId().size() > 0 ? cmd.groupId() : "");
   sl << (cmd.groupName().size() > 0 ? cmd.groupName() : "");
+  sl << (cmd.groupLastModified().isValid() ? cmd.groupLastModified().toString( Qt::ISODate ) : "");
   return sl.join( DATA_FIELD_SEPARATOR );
 }
 

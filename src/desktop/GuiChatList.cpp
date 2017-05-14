@@ -91,6 +91,9 @@ void GuiChatList::updateChat( const Chat& c )
   if( !c.isValid() )
     return;
 
+  if( c.isEmpty() && !c.isDefault() )
+    return;
+
   if( !m_filter.isEmpty() )
   {
     if( c.isDefault() )
@@ -154,7 +157,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
       mp_menuContext->addSeparator();
     }
 
-    act = mp_menuContext->addAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this, SIGNAL( createNewChatRequest() ) );
+    act = mp_menuContext->addAction( QIcon( ":/images/group-create.png" ), tr( "Create group chat" ), this, SIGNAL( createNewChatRequest() ) );
     act->setEnabled( create_chat_is_enabled );
   }
   else
@@ -171,14 +174,11 @@ void GuiChatList::showChatMenu( const QPoint& p )
     act = mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
     act->setToolTip( tr( "Clear all chat messages" ) );
     act->setDisabled( ChatManager::instance().isChatEmpty( c, true ) );
-    mp_menuContext->addSeparator();
     if( c.isGroup() )
     {
-      mp_menuContext->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit" ), this, SLOT( editChatSelected() ) );
       mp_menuContext->addSeparator();
+      mp_menuContext->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit" ), this, SLOT( editChatSelected() ) );
     }
-    act = mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Delete" ), this, SLOT( removeChatSelected() ) );
-    act->setDisabled( c.isDefault() || c.isPrivate() );
     m_blockShowChatRequest = true;
     mp_twChatList->clearSelection();
   }
@@ -194,11 +194,6 @@ void GuiChatList::openChatSelected()
 void GuiChatList::clearChatSelected()
 {
   emit chatToClear( m_chatSelected );
-}
-
-void GuiChatList::removeChatSelected()
-{
-  emit chatToRemove( m_chatSelected );
 }
 
 void GuiChatList::editChatSelected()

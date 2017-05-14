@@ -25,7 +25,7 @@
 
 
 ChatMessageData::ChatMessageData()
-  : m_textColor(), m_groupId( "" ), m_groupName( "" )
+  : m_textColor(), m_groupId( "" ), m_groupName( "" ), m_groupLastModified()
 {
 
 }
@@ -42,6 +42,7 @@ ChatMessageData& ChatMessageData::operator=( const ChatMessageData& cmd )
     m_textColor = cmd.m_textColor;
     m_groupId = cmd.m_groupId;
     m_groupName = cmd.m_groupName;
+    m_groupLastModified = cmd.m_groupLastModified;
   }
 
   return *this;

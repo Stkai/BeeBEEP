@@ -150,11 +150,6 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
       remove_is_enabled = false;
       remove_tooltip = tr( "You cannot remove an user who is connected" );
     }
-    else if( UserManager::instance().isUserInGroups( u.id() ) )
-    {
-      remove_is_enabled = false;
-      remove_tooltip = tr( "You cannot remove an user who is in group" );
-    }
     else if( ChatManager::instance().userIsInGroupChat( u.id() ) )
     {
       remove_is_enabled = false;

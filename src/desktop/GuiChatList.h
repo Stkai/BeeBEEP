@@ -40,7 +40,6 @@ public:
 signals:
   void chatSelected( VNumber chat_id );
   void chatToClear( VNumber chat_id );
-  void chatToRemove( VNumber chat_id );
   void chatToEdit( VNumber chat_id );
   void createNewChatRequest();
 
@@ -54,7 +53,6 @@ protected slots:
   void showChatMenu( const QPoint& );
   void openChatSelected();
   void clearChatSelected();
-  void removeChatSelected();
   void editChatSelected();
   void filterText( const QString& );
   void clearFilter();

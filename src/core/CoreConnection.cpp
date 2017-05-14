@@ -60,15 +60,6 @@ bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
     }
   }
 
-  User u = UserManager::instance().findUserByHostAddressAndPort( sender_ip, sender_port );
-  if( u.isValid() && isUserConnected( u.id() ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "User from" << qPrintable( sender_ip.toString() ) << sender_port << "is already connected";
-#endif
-    return true;
-  }
-
   return false;
 }
 
@@ -85,7 +76,8 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
   if( !isConnected() )
     return;
 
-  if( hasConnection( sender_ip, sender_port ) )
+  NetworkAddress na( sender_ip, sender_port );
+  if( isUserConnected( na ) )
     return;
 
   qDebug() << "Connecting to new peer" << qPrintable( sender_ip.toString() ) << sender_port;
@@ -170,7 +162,7 @@ void Core::closeConnection( Connection *c )
     User u = UserManager::instance().findUser( c->userId() );
     if( u.isValid() )
     {
-      qDebug() << "User" << u.path() << "goes offline";
+      qDebug() << "User" << qPrintable( u.path() ) << "goes offline";
       u.setStatus( User::Offline );
       UserManager::instance().setUser( u );
 
@@ -191,9 +183,6 @@ void Core::closeConnection( Connection *c )
   c->disconnect();
   c->abortConnection();
   // do not delete later connection... socket notifier in qabstractsocket.cpp can crash
-
-  if( isConnected() && m_connections.isEmpty() )
-    QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
 }
 
 void Core::checkUserAuthentication( const QByteArray& auth_byte_array )

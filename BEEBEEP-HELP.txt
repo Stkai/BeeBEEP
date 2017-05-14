@@ -155,6 +155,7 @@ ShowEmoticonMenu=[true/false] show the emoticon menu when the chat window is rai
 EmoticonSizeInEdit= emoticon size in message edit window (default: 18)
 EmoticonSizeInChat= emoticon size in chat windows (default: 24)
 EmoticonSizeInMenu= emoticon size in menu (default: 24)
+EmoticonsInRecentMenu=[integer] the maximum number of emoticons in recent menu (default: 48) [3.2.0]
 LoadMinimizedAtStartup= if enabled BeeBEEP is load minimized at startup
 PromptOnCloseEvent=[true/false] enable it if you want to be asked on closing (it prompts only if BeeBEEP is connected)
 ShowMinimizedAtStartup=[true/false] show minimized at start up

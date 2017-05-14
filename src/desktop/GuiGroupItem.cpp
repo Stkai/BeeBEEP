@@ -70,37 +70,6 @@ void GuiGroupItem::setGroupName( const QString& group_name, int unread_messages 
   setToolTip( 0, QObject::tr( "Click to send message to group: %1" ).arg( group_name ) );
 }
 
-bool GuiGroupItem::updateGroup( const Group& g )
-{
-  if( itemId() != g.id() )
-    return false;
-  if( !isGroup() )
-    return false;
-
-  setIcon( 0, QIcon( ":/images/group.png" ) );
-  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
-  if( c.isValid() )
-    setGroupName( g.name(), c.unreadMessages() );
-  else
-    setGroupName( g.name(), 0 );
-
-  takeChildren();
-
-  UserList user_list = UserManager::instance().userList().fromUsersId( g.usersId() );
-  foreach( User u, user_list.toList() )
-  {
-    if( !u.isLocal() )
-    {
-      GuiGroupItem* user_item = new GuiGroupItem( this );
-      user_item->init( u.id(), false );
-      user_item->updateUser( u );
-      addChild( user_item );
-    }
-  }
-
-  return true;
-}
-
 bool GuiGroupItem::updateUser( const User& u )
 {
   if( itemId() != u.id() )
@@ -124,16 +93,26 @@ bool GuiGroupItem::updateChat( const Chat& c )
     return false;
   if( !c.isGroup() )
     return false;
-
-  Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
-  if( !g.isValid() )
+  if( c.id() != itemId() )
     return false;
 
-  if( g.id() == itemId() )
+  setIcon( 0, QIcon( ":/images/group.png" ) );
+  setGroupName( c.name(), c.unreadMessages() );
+
+  QList<QTreeWidgetItem*> group_children = takeChildren();
+  qDeleteAll( group_children );
+
+  UserList user_list = UserManager::instance().userList().fromUsersId( c.usersId() );
+  foreach( User u, user_list.toList() )
   {
-    setGroupName( g.name(), c.unreadMessages() );
-    return true;
+    if( !u.isLocal() )
+    {
+      GuiGroupItem* user_item = new GuiGroupItem( this );
+      user_item->init( u.id(), false );
+      user_item->updateUser( u );
+      addChild( user_item );
+    }
   }
-  else
-    return false;
+
+  return true;
 }

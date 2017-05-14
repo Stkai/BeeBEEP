@@ -1,6 +1,6 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
-BeeBEEP 3.2.0
+BeeBEEP 4.0.0
 - Changed all the main user interface
 - All the main options are now grouped in the Settings menu
 - Added status description option in user list

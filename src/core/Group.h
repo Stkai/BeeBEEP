@@ -46,18 +46,22 @@ public:
   inline const QList<VNumber>& usersId() const;
   bool addUser( VNumber );
   inline bool hasUser( VNumber ) const;
+  bool hasUsers( const QList<VNumber>& ) const;
   inline bool removeUser( VNumber );
   void setUsers( const QList<VNumber>& );
-  bool hasUsers( const QList<VNumber>& ) const;
 
   inline const QString& privateId() const;
   inline void setPrivateId( const QString& );
+
+  inline const QDateTime& lastModified() const;
+  inline void setLastModified( const QDateTime& );
 
 private:
   VNumber m_id;
   QString m_name;
   QList<VNumber> m_usersId;
   QString m_privateId;
+  QDateTime m_lastModified;
 
 };
 
@@ -74,5 +78,7 @@ inline bool Group::hasUser( VNumber user_id ) const { return m_usersId.contains(
 inline bool Group::removeUser( VNumber user_id ) { return m_usersId.removeOne( user_id ); }
 inline const QString& Group::privateId() const { return m_privateId; }
 inline void Group::setPrivateId( const QString& new_value ) { m_privateId = new_value; }
+inline const QDateTime& Group::lastModified() const { return m_lastModified; }
+inline void Group::setLastModified( const QDateTime& new_value ) { m_lastModified = new_value; }
 
 #endif // BEEBEEP_GROUP_H

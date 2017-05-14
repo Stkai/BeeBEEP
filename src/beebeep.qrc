@@ -82,7 +82,6 @@
         <file>images/file-beep.png</file>
         <file>images/play.png</file>
         <file>images/group-add.png</file>
-        <file>images/chat-create.png</file>
         <file>images/log.png</file>
         <file>images/saved-chat-list.png</file>
         <file>images/saved-chat.png</file>
@@ -125,7 +124,6 @@
         <file>images/os2.png</file>
         <file>images/linux.png</file>
         <file>images/windows.png</file>
-        <file>images/group-wizard.png</file>
         <file>images/thumbup.png</file>
         <file>images/save-window.png</file>
         <file>images/warning.png</file>
@@ -156,5 +154,6 @@
         <file>images/workgroup.png</file>
         <file>images/group-list.png</file>
         <file>images/refused-chat.png</file>
+        <file>images/group-create.png</file>
     </qresource>
 </RCC>

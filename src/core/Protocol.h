@@ -95,8 +95,8 @@ public:
 
   User createUser( const Message&, const QHostAddress& );
   User createTemporaryUser( const UserRecord& );
-  Chat createChat( const QList<VNumber>& user_list, const QString& chat_private_id );
-  Group createGroup( const QString& group_name, const QString& group_private_id, const QList<VNumber>& user_list );
+  Chat createDefaultChat();
+  Chat createChat( const QString& chat_name, const QList<VNumber>& chat_users_id, const QString& chat_private_id );
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
 

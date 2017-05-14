@@ -44,10 +44,11 @@ public slots:
 
 private slots:
   void emoticonClicked();
+  void loadEmoticons( int );
 
 protected:
   QSize sizeHint() const;
-  int addEmoticonTab( GuiEmoticonWidget*, const QList<Emoticon>&, const QIcon&, const QString& );
+  int addEmoticonTab( GuiEmoticonWidget*, Emoticon::Group, const QString& );
   void setRecentEmoticons( const QList<Emoticon>& );
   void setEmoticonToButton( const Emoticon&, QPushButton* );
   Emoticon emoticonFromObject( QObject* );
@@ -67,8 +68,10 @@ public:
   inline void setEmoticonSize( int );
   inline QSize emoticonSize() const;
   inline QSize emoticonButtonSize() const;
-  inline void setEmoticonButtons( const QList<QPushButton*>& );
+  void setEmoticonButtons( const QList<QPushButton*>& );
   inline const QList<QPushButton*>& emoticonButtons() const;
+  inline void setEmoticonGroup( Emoticon::Group );
+  inline Emoticon::Group emoticonGroup() const;
 
 protected:
   void paintEmoticonButtons( int );
@@ -80,6 +83,7 @@ private:
   QList<QPushButton*> m_buttons;
   bool m_hasPainted;
   int m_emoticonSize;
+  Emoticon::Group m_emoticonGroup;
 
 };
 
@@ -88,7 +92,8 @@ private:
 inline void GuiEmoticonWidget::setEmoticonSize( int new_value ) { m_emoticonSize = new_value; }
 inline QSize GuiEmoticonWidget::emoticonSize() const { return QSize( m_emoticonSize, m_emoticonSize ); }
 inline QSize GuiEmoticonWidget::emoticonButtonSize() const { return QSize( m_emoticonSize + 4, m_emoticonSize + 4 ); }
-inline void GuiEmoticonWidget::setEmoticonButtons( const QList<QPushButton*>& new_value ) { m_buttons = new_value; }
 inline const QList<QPushButton*>& GuiEmoticonWidget::emoticonButtons() const { return m_buttons; }
+inline void GuiEmoticonWidget::setEmoticonGroup( Emoticon::Group new_value ) { m_emoticonGroup = new_value; }
+inline Emoticon::Group GuiEmoticonWidget::emoticonGroup() const { return m_emoticonGroup; }
 
 #endif // BEEBEEP_GUIEMOTICONS_H

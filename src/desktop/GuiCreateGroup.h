@@ -25,7 +25,7 @@
 #define BEEBEEP_GUICREATEGROUP_H
 
 #include "ui_GuiCreateGroup.h"
-#include "Config.h"
+#include "Group.h"
 
 
 class GuiCreateGroup : public QDialog, private Ui::GuiCreateGroup
@@ -35,27 +35,25 @@ class GuiCreateGroup : public QDialog, private Ui::GuiCreateGroup
 public:
   explicit GuiCreateGroup( QWidget *parent = 0 );
 
-  void init( const QString& group_name, const QList<VNumber>&, const QString& private_id );
-  void loadData( bool is_group );
+  void init( const Group& );
+  void loadData();
 
-  inline const QString& selectedName() const;
-  inline const QList<VNumber>& selectedUsersId() const;
-  inline const QString& privateId() const;
+  inline const Group& group() const;
+  inline bool leaveGroup() const;
 
 protected slots:
   void checkAndClose();
+  void leaveGroupAndClose();
 
 private:
-  QString m_selectedName;
-  QList<VNumber> m_selectedUsersId;
-  QString m_privateId;
+  Group m_group;
+  bool m_leaveGroup;
 
 };
 
 
 // Inline Functions
-inline const QString& GuiCreateGroup::selectedName() const { return m_selectedName; }
-inline const QList<VNumber>& GuiCreateGroup::selectedUsersId() const { return m_selectedUsersId; }
-inline const QString& GuiCreateGroup::privateId() const { return m_privateId; }
+inline const Group& GuiCreateGroup::group() const { return m_group; }
+inline bool GuiCreateGroup::leaveGroup() const { return m_leaveGroup; }
 
 #endif // BEEBEEP_GUICREATEGROUP_H

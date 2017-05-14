@@ -14,48 +14,7 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="mp_labelName">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="3">
-    <widget class="QLineEdit" name="mp_leName"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="mp_labelText">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="3">
-    <widget class="QTreeWidget" name="mp_twUsers">
-     <property name="columnCount">
-      <number>1</number>
-     </property>
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item row="4" column="0">
+   <item row="4" column="1">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -68,17 +27,78 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="1">
+   <item row="4" column="3">
+    <widget class="QPushButton" name="mp_pbCancel">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
     <widget class="QPushButton" name="mp_pbOk">
      <property name="text">
       <string>Ok</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="2">
-    <widget class="QPushButton" name="mp_pbCancel">
+   <item row="4" column="0">
+    <widget class="QPushButton" name="mp_pbLeave">
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Cancel</string>
+      <string>Leave this group</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../beebeep.qrc">
+       <normaloff>:/images/group-remove.png</normaloff>:/images/group-remove.png</iconset>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="4">
+    <widget class="QTreeWidget" name="mp_twUsers">
+     <property name="columnCount">
+      <number>1</number>
+     </property>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="QLineEdit" name="mp_leName"/>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QLabel" name="mp_labelName">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Group chat name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="4">
+    <widget class="QLabel" name="mp_labelText">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Members</string>
      </property>
     </widget>
    </item>
@@ -87,9 +107,12 @@
  <tabstops>
   <tabstop>mp_leName</tabstop>
   <tabstop>mp_twUsers</tabstop>
+  <tabstop>mp_pbLeave</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../beebeep.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -143,7 +143,7 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
     window_title = tr( "Chat with all connected users" );
     m_mainWindowIcon = QIcon( ":/images/default-chat-online.png" );
   }
-  else if( UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() )
+  else if( c.isGroup() )
   {
     window_title = c.name();
     m_mainWindowIcon = QIcon( ":/images/group.png" );
@@ -464,5 +464,5 @@ void GuiFloatingChat::showChatMessage( const Chat& c, const ChatMessage& cm )
 
 void GuiFloatingChat::showGroupMenu()
 {
-  mp_chat->groupMenu()->exec( QCursor::pos() );
+  mp_chat->editChatMembers();
 }

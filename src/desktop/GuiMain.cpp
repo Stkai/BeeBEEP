@@ -127,8 +127,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
   connect( mp_core, SIGNAL( chatRemoved( const Chat& ) ), this, SLOT( onChatRemoved( const Chat& ) ) );
   connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
-  connect( mp_core, SIGNAL( groupChanged( const Group& ) ), this, SLOT( onGroupChanged( const Group& ) ) );
-  connect( mp_core, SIGNAL( groupRemoved( const Group& ) ), this, SLOT( onGroupRemoved( const Group& ) ) );
   connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
   connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
@@ -147,17 +145,15 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
   connect( mp_userList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
 
-  connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChatForGroup( VNumber ) ) );
-  connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroup() ) );
-  connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroup( VNumber ) ) );
+  connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
+  connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroupChat() ) );
+  connect( mp_groupList, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
   connect( mp_groupList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
-  connect( mp_groupList, SIGNAL( removeGroupRequest( VNumber ) ), this, SLOT( removeGroup( VNumber ) ) );
 
   connect( mp_chatList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
-  connect( mp_chatList, SIGNAL( chatToRemove( VNumber ) ), this, SLOT( removeChat( VNumber ) ) );
-  connect( mp_chatList, SIGNAL( chatToEdit( VNumber ) ), this, SLOT( editChat( VNumber ) ) );
-  connect( mp_chatList, SIGNAL( createNewChatRequest() ), this, SLOT( createChat() ) );
+  connect( mp_chatList, SIGNAL( chatToEdit( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
+  connect( mp_chatList, SIGNAL( createNewChatRequest() ), this, SLOT( createGroupChat() ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
@@ -194,11 +190,9 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( gui_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
-  connect( gui_chat, SIGNAL( editGroupRequestFromChat( VNumber ) ), this, SLOT( editChat( VNumber ) ) );
+  connect( gui_chat, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
-  connect( gui_chat, SIGNAL( leaveThisChat( VNumber ) ), this, SLOT( leaveGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
-  connect( gui_chat, SIGNAL( createGroupFromChatRequest( VNumber ) ), this, SLOT( createGroupFromChat( VNumber ) ) );
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -304,11 +298,11 @@ void GuiMain::updateTabTitles()
     mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_userList->toolTip() ) );
 
   tab_index = mp_tabMain->indexOf( mp_chatList );
-  current_value = ChatManager::instance().constChatList().size();
+  current_value = ChatManager::instance().countNotEmptyChats( false );
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
 
   tab_index = mp_tabMain->indexOf( mp_groupList );
-  current_value = UserManager::instance().groups().size();
+  current_value = ChatManager::instance().countGroupChats();
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
 
   tab_index = mp_tabMain->indexOf( mp_savedChatList );
@@ -562,8 +556,7 @@ void GuiMain::checkViewActions()
   bool is_connected = mp_core->isConnected();
   int connected_users = mp_core->connectedUsers();
 
-  mp_actCreateGroup->setEnabled( is_connected && UserManager::instance().userList().size() >= 2 );
-  mp_actCreateGroupChat->setEnabled( is_connected && connected_users > 1 );
+  mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
   mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
   mp_actEnableFileSharing->setEnabled( Settings::instance().enableFileTransfer() && !Settings::instance().disableFileSharing() );
   mp_menuExistingFile->setEnabled( Settings::instance().enableFileTransfer() );
@@ -643,11 +636,8 @@ void GuiMain::createActions()
   mp_actAbout->setMenuRole( QAction::AboutRole );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
 
-  mp_actCreateGroupChat = new QAction( QIcon( ":/images/chat-create.png" ), tr( "Create chat" ), this );
-  connect( mp_actCreateGroupChat, SIGNAL( triggered() ), this, SLOT( createChat() ) );
-
-  mp_actCreateGroup = new QAction(  QIcon( ":/images/group-add.png" ), tr( "Create group" ), this );
-  connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SLOT( createGroup() ) );
+  mp_actCreateGroupChat = new QAction( QIcon( ":/images/group-create.png" ), tr( "Create group chat" ), this );
+  connect( mp_actCreateGroupChat, SIGNAL( triggered() ), this, SLOT( createGroupChat() ) );
 
   mp_actViewNewMessage = new QAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this );
   connect( mp_actViewNewMessage, SIGNAL( triggered() ), this, SLOT( showNextChat() ) );
@@ -671,9 +661,6 @@ void GuiMain::createMenus()
   /* Main Menu */
   mp_menuMain = new QMenu( tr( "Main" ), this );
   mp_menuMain->addAction( mp_actStartStopCore );
-  mp_menuMain->addSeparator();
-  mp_menuMain->addAction( mp_actCreateGroupChat );
-  mp_menuMain->addAction( mp_actCreateGroup );
   mp_menuMain->addSeparator();
   mp_menuMain->addMenu( mp_menuPlugins );
   mp_menuMain->addSeparator();
@@ -1060,6 +1047,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addAction( mp_actVCard );
   mp_barMain->addAction( mp_actBroadcast );
+  mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
@@ -2325,112 +2313,57 @@ void GuiMain::playBeep()
   AudioManager::instance().playBeep();
 }
 
-void GuiMain::createGroup()
+void GuiMain::createGroupChat()
 {
   GuiCreateGroup gcg;
-  gcg.loadData( true );
+  gcg.loadData();
   gcg.setModal( true );
   gcg.show();
   gcg.setFixedSize( gcg.size() );
-  if( gcg.exec() == QDialog::Accepted )
+  if( gcg.exec() != QDialog::Accepted )
+    return;
+
+  if( gcg.leaveGroup() )
+    return;
+
+  Group g = gcg.group();
+
+  Chat c = ChatManager::instance().findGroupChatByUsers( g.usersId() );
+  if( c.isValid() )
   {
-    Chat c = ChatManager::instance().findGroupChatByUsers( gcg.selectedUsersId() );
-    if( c.isValid() )
-    {
-      switch( QMessageBox::question( this, Settings::instance().programName(),
+    if( QMessageBox::question( this, Settings::instance().programName(),
                                      QString( "%1\n%2" ).arg( tr( "There is a chat with the same members: %1." ).arg( c.name() ) )
                                                         .arg( "How do you want to continue?" ),
-                                     tr( "Create new group" ), tr( "Create group from chat" ), tr( "Cancel" ), 1, 2 ) )
-      {
-      case 0: break;
-      case 1:
-        createGroupFromChat( c.id() );
-        return;
-      default:
-        return;
-      }
+                                     tr( "Create new group chat" ), tr( "Cancel" ), QString::null, 1, 1 ) == 1 )
+    {
+      return;
     }
-
-    Group g = mp_core->createGroup( gcg.selectedName(), gcg.selectedUsersId() );
-    if( g.isValid() )
-      showChatForGroup( g.id() );
   }
+
+  c = mp_core->createGroupChat( Settings::instance().localUser(), g.name(), g.usersId(), "", true );
+  if( c.isValid() )
+    showChat( c.id() );
 }
 
-void GuiMain::editGroup( VNumber group_id )
+void GuiMain::editGroupChat( VNumber chat_id )
 {
-  Group g = UserManager::instance().group( group_id );
-  if( !g.isValid() )
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
     return;
 
   GuiCreateGroup gcg( activeWindow() );
-  gcg.init( g.name(), g.usersId(), g.privateId() );
-  gcg.loadData( true );
-  gcg.setModal( true );
-  gcg.show();
-  gcg.setFixedSize( gcg.size() );
-  if( gcg.exec() == QDialog::Accepted )
-    mp_core->changeGroup( Settings::instance().localUser(), group_id, gcg.selectedName(), gcg.selectedUsersId() );
-}
-
-void GuiMain::createChat()
-{
-  switch( QMessageBox::question( this, Settings::instance().programName(),
-                 tr( "Group chat will be deleted when all members goes offline." ) + QString( " " ) +
-                 tr( "If you want a persistent chat please consider to make a Group instead." ) + QString( " " ) +
-                 tr( "Do you wish to continue or create group?" ),
-                 tr( "Continue" ), tr( "Create Group" ), tr( "Cancel" ), 0, 2 ) )
-  {
-  case 0:
-    // do nothing
-    break;
-  case 1:
-    createGroup();
-    return;
-  default:
-    return;
-  }
-
-  GuiCreateGroup gcg;
-  gcg.loadData( false );
+  gcg.init( c.group() );
+  gcg.loadData();
   gcg.setModal( true );
   gcg.show();
   gcg.setFixedSize( gcg.size() );
   if( gcg.exec() == QDialog::Accepted )
   {
-    Chat c = mp_core->createGroupChat( gcg.selectedName(), gcg.selectedUsersId(), "", true );
-    if( c.isValid() )
-      showChat( c.id() );
+    if( gcg.leaveGroup() )
+      removeChat( chat_id );
+    else
+      mp_core->changeGroupChat( Settings::instance().localUser(), gcg.group() );
   }
-}
-
-void GuiMain::editChat( VNumber chat_id )
-{
-  Chat group_chat_tmp = ChatManager::instance().chat( chat_id );
-  if( !group_chat_tmp.isValid() )
-    return;
-
-  if( !group_chat_tmp.isGroup() )
-  {
-    qWarning() << "Unable to edit chat" << chat_id << qPrintable( group_chat_tmp.name() ) << "because it is not a group";
-    return;
-  }
-
-  Group g = UserManager::instance().findGroupByPrivateId( group_chat_tmp.privateId() );
-  if( g.isValid() )
-  {
-    editGroup( g.id() );
-    return;
-  }
-
-  GuiCreateGroup gcg( activeWindow() );
-  gcg.init( group_chat_tmp.name(), group_chat_tmp.usersId(), group_chat_tmp.privateId() );
-  gcg.loadData( false );
-  gcg.setModal( true );
-  gcg.show();
-  gcg.setFixedSize( gcg.size() );
-  if( gcg.exec() == QDialog::Accepted )
-    mp_core->changeGroupChat( Settings::instance().localUser(), group_chat_tmp.id(), gcg.selectedName(), gcg.selectedUsersId() );
 }
 
 void GuiMain::checkAutoStartOnBoot( bool add_service )
@@ -2653,22 +2586,11 @@ void GuiMain::onUserRemoved( const User& u )
   updateTabTitles();
 }
 
-void GuiMain::onGroupChanged( const Group& g )
-{
-  mp_groupList->updateGroup( g );
-}
-
-void GuiMain::onGroupRemoved( const Group& g )
-{
-  showMessage( tr( "%1 removed" ).arg( g.name() ), 2000 );
-  mp_groupList->updateGroups();
-  updateTabTitles();
-}
-
 void GuiMain::onChatChanged( const Chat& c )
 {
   mp_userList->updateChat( c );
   mp_chatList->updateChat( c );
+  mp_groupList->updateChat( c );
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
     fl_chat->setChat( c );
@@ -2683,6 +2605,7 @@ void GuiMain::onChatRemoved( const Chat& c )
   if( fl_chat )
     fl_chat->close();
   mp_chatList->updateChats();
+  mp_groupList->updateGroups();
   mp_savedChatList->updateSavedChats();
   updateTabTitles();
 }
@@ -2697,54 +2620,6 @@ bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
        return false;
   }
   return true;
-}
-
-void GuiMain::leaveGroupChat( VNumber chat_id )
-{
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( !c.isValid() )
-    return;
-  if( !c.hasUser( ID_LOCAL_USER ) )
-    return;
-
-  Group g = UserManager::instance().findGroupByPrivateId( c.privateId() );
-  if( g.isValid() )
-  {
-    if( QMessageBox::warning( activeWindow(), Settings::instance().programName(),
-                              tr( "%1 is a your group. You cannot leave the chat until the group exists." ).arg( g.name() ),
-                              tr( "Delete this group" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
-        return;
-
-    if( !mp_core->removeGroup( g.id() ) )
-    {
-      QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot delete %1." ).arg( g.name() ) );
-      return;
-    }
-
-    mp_groupList->updateGroups();
-    updateTabTitles();
-  }
-
-  if( !checkAllChatMembersAreConnected( c.usersId() ) )
-    return;
-
-  if( !mp_core->removeUserFromChat( Settings::instance().localUser(), c.privateId() ) )
-    QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot leave %1." ).arg( c.name() ) );
-}
-
-void GuiMain::removeGroup( VNumber group_id )
-{
-  Group g = UserManager::instance().group( group_id );
-  if( g.isValid() )
-  {
-    if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
-                               tr( "Do you want to delete group %1?" ).arg( g.name() ),
-                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
-    {
-      if( !mp_core->removeGroup( group_id ) )
-        QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "You cannot delete %1." ).arg( g.name() ) );
-    }
-  }
 }
 
 void GuiMain::clearChat( VNumber chat_id )
@@ -2788,25 +2663,16 @@ void GuiMain::removeChat( VNumber chat_id )
     return;
   }
 
-  QString question_txt = tr( "Do you want to delete chat with %1?" ).arg( c.name() );
-  if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+  QString button_2_text;
+  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+    button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
+  QString question_txt = tr( "Do you want to leave the chat with %1?" ).arg( c.name() );
+  int answer_id = QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 );
+  if( answer_id == 1 )
     return;
 
-  if( !mp_core->removeChat( chat_id, true ) )
-    QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "Unable to delete %1." ).arg( c.name() ) );
-}
-
-void GuiMain::showChatForGroup( VNumber group_id )
-{
-  Group g = UserManager::instance().group( group_id );
-  if( !g.isValid() )
-    return;
-
-  Chat c = ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID );
-  if( !c.isValid() )
-    c = mp_core->createGroupChat( g.name(), g.usersId(), g.privateId(), true );
-
-  showChat( c.id() );
+  if( !mp_core->removeChat( chat_id, answer_id == 0 ) )
+    QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "Unable to leave the chat with %1." ).arg( c.name() ) );
 }
 
 void GuiMain::showSharesForUser( const User& u )
@@ -3072,11 +2938,6 @@ void GuiMain::changeAvatarSizeInList()
 void GuiMain::toggleUserFavorite( VNumber user_id )
 {
   mp_core->toggleUserFavorite( user_id );
-}
-
-void GuiMain::createGroupFromChat( VNumber chat_id )
-{
-  mp_core->createGroupFromChat( chat_id );
 }
 
 void GuiMain::removeUserFromList( VNumber user_id )
@@ -3413,14 +3274,9 @@ void GuiMain::onNetworkInterfaceUp()
     QTimer::singleShot( 5000, this, SLOT( startCore() ) );
 }
 
-static bool IsTimeToCheck( int ticks, int tick_for_check ) { return ticks % tick_for_check == 0; }
-
 void GuiMain::onTickEvent( int ticks )
 {
-  if( IsTimeToCheck( ticks, Settings::instance().tickIntervalCheckNetwork() ) )
-    QMetaObject::invokeMethod( mp_core, "checkNetworkInterface", Qt::QueuedConnection );
-
-  if( IsTimeToCheck( ticks, Settings::instance().tickIntervalCheckIdle() ) )
+  if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalCheckIdle() ) )
   {
     BeeApplication* bee_app = (BeeApplication*)qApp;
     if( bee_app->idleTimeout() > 0 )

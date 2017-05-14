@@ -294,6 +294,17 @@ int ChatManager::countNotEmptyChats( bool check_also_history ) const
   return num_chats;
 }
 
+int ChatManager::countGroupChats() const
+{
+  int num_chats = 0;
+  foreach( Chat c, m_chats )
+  {
+    if( c.isGroup() )
+      num_chats++;
+  }
+  return num_chats;
+}
+
 void ChatManager::addToRefusedChat( const ChatRecord& cr )
 {
   if( !m_refusedChats.contains( cr ) )

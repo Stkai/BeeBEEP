@@ -42,18 +42,9 @@ public:
   User findUserByPath( const QString& ) const;
   User findUserByAccountName( const QString& ) const;
   User findUserByHash( const QString& ) const;
-  User findUserByHostAddressAndPort( const QHostAddress&, int );
   User findUserByNickname( const QString& ) const;
   User findUserByUserRecord( const UserRecord& ) const;
-
-  inline const QList<Group>& groups() const;
-  void setGroup( const Group& );
-  Group group( VNumber ) const;
-  bool hasGroupName( const QString& ) const;
-  Group findGroupByPrivateId( const QString& ) const;
-  Group findGroupByUsers( const QList<VNumber>& ) const;
-  bool removeGroup( const Group& );
-  bool isUserInGroups( VNumber ) const;
+  User findUserByNetworkAddress( const NetworkAddress& ) const;
 
   static UserManager& instance()
   {
@@ -76,7 +67,6 @@ protected:
 
 private:
   UserList m_users;
-  QList<Group> m_groups;
 
 };
 
@@ -85,6 +75,5 @@ private:
 inline User UserManager::findUser( VNumber user_id ) const { return m_users.find( user_id ); }
 inline bool UserManager::removeUser( const User& u ) { return u.isLocal() ? false : m_users.remove( u ); }
 inline const UserList& UserManager::userList() const { return m_users; }
-inline const QList<Group>& UserManager::groups() const { return m_groups; }
 
 #endif // BEEBEEP_USERMANAGER_H

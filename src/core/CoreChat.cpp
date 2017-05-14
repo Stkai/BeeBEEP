@@ -39,11 +39,7 @@
 void Core::createDefaultChat()
 {
   qDebug() << "Creating default chat";
-  Chat c;
-  c.setId( ID_DEFAULT_CHAT );
-  c.setName( Settings::instance().defaultChatName() );
-  c.addUser( ID_LOCAL_USER );
-  c.setPrivateId( Settings::instance().defaultChatPrivateId() );
+  Chat c = Protocol::instance().createDefaultChat();
   qDebug() << "Default chat private id:" << c.privateId();
   addChatHeader( &c );
   QString sHtmlMsg;
@@ -82,8 +78,7 @@ void Core::createPrivateChat( const User& u )
   qDebug() << "Creating private chat room for user" << u.id() << u.path();
   QList<VNumber> user_list;
   user_list.append( u.id() );
-  Chat c = Protocol::instance().createChat( user_list, "" );
-  c.setName( u.name() );
+  Chat c = Protocol::instance().createChat( u.name(), user_list, "" );
   addChatHeader( &c );
   ChatManager::instance().setChat( c );
   emit chatChanged( c );
@@ -102,60 +97,66 @@ void Core::checkGroupChatAfterUserReconnect( const User& u )
   }
 }
 
-Chat Core::createGroupChat( const QString& chat_name, const QList<VNumber>& users_id, const QString& chat_private_id, bool broadcast_message )
+Chat Core::createGroupChat( const User& u, const QString& chat_name, const QList<VNumber>& users_id, const QString& chat_private_id, bool broadcast_message )
 {
   UserList ul = UserManager::instance().userList().fromUsersId( users_id );
   QString sHtmlMsg;
 
-  Chat c = Protocol::instance().createChat( users_id, chat_private_id );
-  c.setName( chat_name );
+  Chat c = Protocol::instance().createChat( chat_name, users_id, chat_private_id );
+  qDebug() << "Creating group chat named" << qPrintable( c.name() ) << "with private id" << qPrintable( c.privateId() ) << "by user" << qPrintable( u.name() );
+  addChatHeader( &c );
 
-  if( chat_private_id.isEmpty() )
+  if( chat_private_id.isEmpty() ) // to prevent creation message on load from settings
   {
-    sHtmlMsg = tr( "%1 You have created chat: %2." ).arg( Bee::iconToHtml( ":/images/chat-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( chat_name ) );
+    sHtmlMsg = tr( "%1 You have created group chat %2." ).arg( Bee::iconToHtml( ":/images/group-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( chat_name ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
   }
 
-  qDebug() << "Creating group chat named" << chat_name << "with private id:" << c.privateId();
+  if( !u.isLocal() )
+  {
+    sHtmlMsg = tr( "%1 %2 has added you to the group chat %3." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( chat_name ) );
+    c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+  }
 
-  addChatHeader( &c );
+  if( !sHtmlMsg.isEmpty() )
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
+
+  c.setLastModified();
   ChatManager::instance().setChat( c );
+  emit chatChanged( c );
 
   if( broadcast_message && isConnected() )
     sendGroupChatRequestMessage( c, ul );
 
-  emit chatChanged( c );
   return c;
 }
 
-void Core::changeGroupChat( const User& u, VNumber chat_id, const QString& chat_name, const QList<VNumber>& members_id )
+void Core::changeGroupChat( const User& u, const Group& g )
 {
-  Chat c = ChatManager::instance().chat( chat_id );
+  Chat c = ChatManager::instance().chat( g.id() );
   if( !c.isValid() )
   {
-    qWarning() << "Unable to change chat" << chat_name << "with id" << chat_id << "because it is not in the list";
+    qWarning() << "Unable to change chat" << qPrintable( g.name() ) << "with id" << g.id() << "because it is not in the list";
     return;
   }
 
-  UserList group_new_members = UserManager::instance().userList().fromUsersId( members_id );
+  UserList group_new_members = UserManager::instance().userList().fromUsersId( g.usersId() );
   QStringList user_added_string_list;
   QStringList user_string_list;
   QString sHtmlMsg;
   bool chat_changed = false;
 
-  if( c.name() != chat_name )
+  if( c.name() != g.name() )
   {
-    sHtmlMsg = tr( "%1 %2 has changed the group name: %3." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), u.name(), chat_name );
+    if( u.isLocal() )
+      sHtmlMsg = tr( "%1 You have changed the group name from %2 to %3." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), c.name(), QString( "<b>%1</b>" ).arg( g.name() ) );
+    else
+      sHtmlMsg = tr( "%1 %2 has changed the group name from %3 to %4." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), u.name(), c.name(), QString( "<b>%1</b>" ).arg( g.name() ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     chat_changed = true;
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Changing saved chat from" << c.name() << "to" << chat_name;
-#endif
-      ChatManager::instance().updateChatSavedText( c.name(), chat_name, false );
-    }
-    c.setName( chat_name );
+      ChatManager::instance().updateChatSavedText( c.name(), g.name(), false );
+    c.setName( g.name() );
   }
 
   foreach( User u, group_new_members.toList() )
@@ -170,7 +171,10 @@ void Core::changeGroupChat( const User& u, VNumber chat_id, const QString& chat_
 
   if( user_added_string_list.size() > 0 )
   {
-    sHtmlMsg = tr( "%1 %2 has added members to the group: %3." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
+    if( u.isLocal() )
+      sHtmlMsg = tr( "%1 You have added members: %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), Bee::stringListToTextString( user_added_string_list ) );
+    else
+      sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
     c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
@@ -179,13 +183,73 @@ void Core::changeGroupChat( const User& u, VNumber chat_id, const QString& chat_
 
   if( chat_changed )
   {
-    qDebug() << "Changing group chat" << chat_name << "by user" << qPrintable( u.path() );
+    qDebug() << "Changing group chat" << qPrintable( c.name() ) << "by user" << qPrintable( u.name() );
+    c.setLastModified();
     ChatManager::instance().setChat( c );
     emit chatChanged( c );
 
     if( u.isLocal() && isConnected() )
       sendGroupChatRequestMessage( c, group_new_members );
   }
+}
+
+bool Core::removeUserFromGroupChat( const User& u, const QString& chat_private_id )
+{
+  Chat c = ChatManager::instance().findChatByPrivateId( chat_private_id, true, ID_INVALID );
+  if( !c.isValid() )
+    return true;
+  if( !c.isGroup() )
+    return false;
+
+  if( u.isLocal() )
+    return removeChat( c.id(), true );
+
+  QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
+  c.removeUser( u.id() );
+  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
+  emit chatChanged( c );
+  return true;
+}
+
+bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return true;
+
+  if( c.isDefault() )
+    return false;
+
+  if( save_chat_messages )
+  {
+    ChatManager::instance().setChatToSavedChats( c );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 %2 is added to saved chats." )
+                                                      .arg( Bee::iconToHtml( ":/images/saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( c.name() ) ),
+                           DispatchToChat, ChatMessage::System );
+    clearMessagesInChat( c.id(), !save_chat_messages );
+  }
+
+  if( c.isPrivate() )
+  {
+    if( !removeOfflineUser( c.privateUserId() ) )
+      return false;
+  }
+
+  ChatManager::instance().removeChat( c );
+  emit chatRemoved( c );
+  if( c.isGroup() )
+  {
+    qDebug() << "Group chat removed:" << c.name();
+    Settings::instance().setNotificationEnabledForGroup( c.privateId(), false ); // reset notification in settings
+    UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+    sendGroupChatRefuseMessage( c, group_members );
+    ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
+  }
+  else
+    qDebug() << "Private chat removed:" << c.name();
+
+  return true;
 }
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )
@@ -415,70 +479,6 @@ bool Core::clearMessagesInChat( VNumber chat_id, bool clear_history )
   addChatHeader( &c );
   ChatManager::instance().setChat( c );
   emit chatChanged( c );
-  return true;
-}
-
-bool Core::removeUserFromChat( const User& u, const QString& chat_private_id )
-{
-  Chat c = ChatManager::instance().findChatByPrivateId( chat_private_id, true, ID_INVALID );
-  if( !c.isValid() )
-    return true;
-  if( !c.isGroup() )
-    return false;
-
-  QString sHtmlMsg;
-
-  if( u.isLocal() )
-    sHtmlMsg = tr( "%1 You have left the group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) );
-  else
-    sHtmlMsg = tr( "%1 %2 has left the group." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name() );
-
-  c.removeUser( u.id() );
-  c.addMessage( ChatMessage( ID_LOCAL_USER, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-  ChatManager::instance().setChat( c );
-  emit chatChanged( c );
-
-  if( u.isLocal() )
-  {
-    UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
-    sendGroupChatRefuseMessage( c, group_members );
-    ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
-  }
-
-  return true;
-}
-
-bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
-{
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( !c.isValid() )
-    return true;
-
-  if( c.isDefault() )
-    return false;
-
-  if( save_chat_messages )
-    ChatManager::instance().setChatToSavedChats( c );
-  clearMessagesInChat( c.id(), !save_chat_messages );
-
-  if( c.isPrivate() )
-  {
-    if( !removeOfflineUser( c.privateUserId() ) )
-      return false;
-  }
-
-  ChatManager::instance().removeChat( c );
-  emit chatRemoved( c );
-  if( c.isGroup() )
-  {
-    qDebug() << "Group chat removed:" << c.name();
-    UserList group_members = UserManager::instance().userList().fromUsersId( c.usersId() );
-    sendGroupChatRefuseMessage( c, group_members );
-    ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
-  }
-  else
-    qDebug() << "Private chat removed:" << c.name();
-
   return true;
 }
 

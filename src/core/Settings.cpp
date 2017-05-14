@@ -105,7 +105,7 @@ Settings::Settings()
   QFont f = QApplication::font();
   setChatFont( f );
   m_emoticonSizeInMenu = 24;
-  m_emoticonInRecentMenu = 30;
+  m_emoticonInRecentMenu = 48;
   m_confirmOnDownloadFile = false;
   m_promptOnCloseEvent = true;
   m_saveUserList = true;
@@ -946,7 +946,7 @@ void Settings::load()
   m_emoticonSizeInEdit = qMax( 12, (int)sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
   m_emoticonSizeInChat = qMax( 12, (int)sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
   m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
-  m_emoticonInRecentMenu = sets->value( "EmoticonInRecentMenu", m_emoticonInRecentMenu ).toInt();
+  m_emoticonInRecentMenu = sets->value( "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useNativeEmoticons = sets->value( "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
   m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", m_startMinimized ).toBool();
@@ -1233,7 +1233,7 @@ void Settings::save()
   sets->setValue( "EmoticonSizeInEdit", m_emoticonSizeInEdit );
   sets->setValue( "EmoticonSizeInChat", m_emoticonSizeInChat );
   sets->setValue( "EmoticonSizeInMenu", m_emoticonSizeInMenu );
-  sets->setValue( "EmoticonInRecentMenu", m_emoticonInRecentMenu );
+  sets->setValue( "EmoticonsInRecentMenu", m_emoticonInRecentMenu );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
   sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
   sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );

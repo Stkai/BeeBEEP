@@ -90,8 +90,6 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_menuContext = new QMenu( this );
   mp_menuFilters = new QMenu( this );
-  mp_menuGroup = new QMenu( this );
-  mp_menuGroup->setIcon( QIcon( ":/images/group.png" ) );
 
   mp_scFocusInChat = new QShortcut( this );
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
@@ -120,10 +118,6 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_actFindTextInChat = new QAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this );
   connect( mp_actFindTextInChat, SIGNAL( triggered() ), this, SLOT( showFindTextInChatDialog() ) );
-
-  mp_actGroupWizard = mp_menuGroup->addAction( QIcon( ":/images/group-wizard.png" ), tr( "Create group from chat" ), this, SLOT( showGroupWizard() ) );
-  mp_actGroupAdd = mp_menuGroup->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this, SLOT( editChatMembers() ) );
-  mp_actLeave = mp_menuGroup->addAction( QIcon( ":/images/group-remove.png" ), tr( "Leave the group" ), this, SLOT( leaveThisGroup() ) );
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -167,16 +161,11 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   mp_teChat->setEnabled( c.isValid() );
 
   bool local_user_is_member = c.hasUser( Settings::instance().localUser().id() );
-  bool is_group_chat = c.isGroup();
-  bool local_group_exists = is_group_chat ? UserManager::instance().findGroupByPrivateId( c.privateId() ).isValid() : false;
   bool chat_is_empty = c.isEmpty();
 
   mp_actClear->setDisabled( chat_is_empty );
   mp_actSendFile->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && connected_users > 0 );
   mp_actSendFolder->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && connected_users > 0 );
-  mp_actGroupWizard->setEnabled( local_user_is_member && is_group_chat && !local_group_exists );
-  mp_actGroupAdd->setEnabled( local_user_is_member && is_connected && is_group_chat );
-  mp_actLeave->setEnabled( local_user_is_member && is_connected && is_group_chat );
 
   if( !is_connected )
   {
@@ -392,15 +381,11 @@ bool GuiChat::setChat( const Chat& c )
   {
     setChatBackgroundColor( Settings::instance().defaultChatBackgroundColor() );
     mp_actSelectBackgroundColor->setEnabled( true );
-    mp_menuGroup->setEnabled( false );
-    mp_menuGroup->menuAction()->setVisible( false );
   }
   else
   {
     mp_teChat->setPalette( m_defaultChatPalette );
     mp_actSelectBackgroundColor->setEnabled( false );
-    mp_menuGroup->setEnabled( c.isGroup() );
-    mp_menuGroup->menuAction()->setVisible( c.isGroup() );
   }
 
   QString html_text = "";
@@ -635,11 +620,6 @@ void GuiChat::clearChat()
   emit chatToClear( m_chatId );
 }
 
-void GuiChat::leaveThisGroup()
-{
-  emit leaveThisChat( m_chatId );
-}
-
 void GuiChat::sendFile()
 {
   emit sendFileFromChatRequest( m_chatId, QString( "" ) );
@@ -756,15 +736,9 @@ void GuiChat::dropEvent( QDropEvent *event )
     checkAndSendUrls( event->mimeData() );
 }
 
-void GuiChat::showGroupWizard()
-{
-  mp_actGroupWizard->setEnabled( false );
-  emit createGroupFromChatRequest( m_chatId );
-}
-
 void GuiChat::editChatMembers()
 {
-  emit editGroupRequestFromChat( m_chatId );
+  emit editGroupRequest( m_chatId );
 }
 
 void GuiChat::updateShortcuts()

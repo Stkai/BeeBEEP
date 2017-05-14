@@ -25,8 +25,7 @@
 
 
 Chat::Chat()
-  : m_id( ID_INVALID ), m_name( "" ), m_usersId(), m_messages(),
-    m_lastMessageTimestamp(), m_unreadMessages( 0 ), m_privateId( "" ),
+  : m_group(), m_messages(), m_lastMessageTimestamp(), m_unreadMessages( 0 ),
     m_unreadMessageUsersId()
 {
 }
@@ -40,24 +39,13 @@ Chat& Chat::operator=( const Chat& c )
 {
   if( this != &c )
   {
-    m_id = c.m_id;
-    m_name = c.m_name;
-    m_usersId = c.m_usersId;
+    m_group = c.m_group;
     m_messages = c.m_messages;
     m_lastMessageTimestamp = c.m_lastMessageTimestamp;
     m_unreadMessages = c.m_unreadMessages;
-    m_privateId = c.m_privateId;
     m_unreadMessageUsersId = c.m_unreadMessageUsersId;
   }
   return *this;
-}
-
-bool Chat::addUser( VNumber user_id )
-{
-  if( hasUser( user_id ) )
-    return false;
-  m_usersId.append( user_id );
-  return true;
 }
 
 bool Chat::isEmpty() const
@@ -72,22 +60,12 @@ bool Chat::isEmpty() const
 
 VNumber Chat::privateUserId() const
 {
-  foreach( VNumber user_id, m_usersId )
+  foreach( VNumber user_id, m_group.usersId() )
   {
     if( user_id != ID_LOCAL_USER )
       return user_id;
   }
   return ID_INVALID;
-}
-
-bool Chat::hasUsers( const QList<VNumber>& user_list )
-{
-  foreach( VNumber user_id, user_list )
-  {
-    if( !hasUser( user_id ) )
-      return false;
-  }
-  return true;
 }
 
 void Chat::clearMessages()
@@ -117,7 +95,7 @@ void Chat::addMessage( const ChatMessage& cm )
 
   if( cm.isFromLocalUser() && cm.type() == ChatMessage::Chat )
   {
-    foreach( VNumber user_id, m_usersId )
+    foreach( VNumber user_id, m_group.usersId() )
     {
       if( user_id == ID_LOCAL_USER )
         continue;
@@ -126,4 +104,15 @@ void Chat::addMessage( const ChatMessage& cm )
         m_unreadMessageUsersId.append( user_id );
     }
   }
+}
+
+bool Chat::hasMinimumUsersForGroup() const
+{
+  int chat_members = 0;
+  foreach( VNumber user_id, m_group.usersId() )
+  {
+    if( user_id != ID_LOCAL_USER )
+      chat_members++;
+  }
+  return chat_members >= 2;
 }

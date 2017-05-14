@@ -67,10 +67,6 @@ public:
   void setLocalUserStatus( int );
   void setLocalUserStatusDescription( int, const QString&, bool );
   bool setLocalUserVCard( const QString&, const VCard& );
-  Group createGroup( const QString&, const QList<VNumber>&, const QString& group_private_id = "" );
-  bool createGroupFromChat( VNumber );
-  void changeGroup( const User&, VNumber group_id, const QString& group_name, const QList<VNumber>& members_id );
-  bool removeGroup( VNumber );
   void toggleUserFavorite( VNumber );
   bool removeOfflineUser( VNumber );
   void changeUserColor( VNumber, const QString& );
@@ -80,16 +76,14 @@ public:
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
   void showTipOfTheDay();
   void showFactOfTheDay();
-  Chat createGroupChat( const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
-  void changeGroupChat( const User&, VNumber chat_id, const QString& chat_name, const QList<VNumber>& members_is );
+  Chat createGroupChat( const User&, const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
+  void changeGroupChat( const User&, const Group& );
   bool clearMessagesInChat( VNumber, bool clear_history );
-  bool removeUserFromGroup( const User&, const QString& group_private_id );
   bool removeChat( VNumber, bool save_chat_messages );
   bool readAllMessagesInChat( VNumber );
   void sendBuzzToUser( VNumber );
   void removeSavedChat( const QString& );
   void linkSavedChat( const QString& from_saved_chat_name, const QString& to_saved_chat_name, bool prepend_to_existing_saved_chat );
-  bool removeUserFromChat( const User&, const QString& chat_private_id );
 
   /* CoreFileTransfer */
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );
@@ -151,8 +145,6 @@ signals:
   void fileShareAvailable( const User& );
   void localShareListAvailable();
   void savedChatListAvailable();
-  void groupChanged( const Group& );
-  void groupRemoved( const Group& );
   void userConnectionStatusChanged( const User& );
   void networkInterfaceIsDown();
   void networkInterfaceIsUp();
@@ -235,6 +227,7 @@ protected:
   void sendLocalUserStatus();
   void addGroup( const Group& );
   void sendLocalConnectedUsersTo( const User& );
+  bool isUserConnected( const NetworkAddress& ) const; // to prevent multiple connections in Core::newPeerFound(...)
 
   /* CoreChat */
   void createDefaultChat();
@@ -244,6 +237,7 @@ protected:
   void checkGroupChatAfterUserReconnect( const User& );
   void sendLocalUserHasReadChatMessage( const Chat& );
   void addChatHeader( Chat* );
+  bool removeUserFromGroupChat( const User&, const QString& chat_private_id );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };

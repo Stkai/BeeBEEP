@@ -41,85 +41,6 @@ void UserManager::setUser( const User& u )
     m_users.set( u );
 }
 
-void UserManager::setGroup( const Group& g )
-{
-  if( m_groups.contains( g ) )
-    m_groups.removeOne( g );
-  m_groups.append( g );
-}
-
-Group UserManager::group( VNumber group_id ) const
-{
-  foreach( Group g, m_groups )
-  {
-    if( g.id() == group_id )
-      return g;
-  }
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find group with id:" << group_id;
-#endif
-  return Group();
-}
-
-bool UserManager::hasGroupName( const QString& group_name ) const
-{
-  foreach( Group g, m_groups )
-  {
-    if( g.name().toLower() == group_name.toLower() )
-      return true;
-  }
-  return false;
-}
-
-Group UserManager::findGroupByPrivateId( const QString& group_private_id ) const
-{
-  if( group_private_id.isEmpty() )
-    return Group();
-
-  foreach( Group g, m_groups )
-  {
-    if( g.privateId() == group_private_id )
-      return g;
-  }
-  return Group();
-}
-
-Group UserManager::findGroupByUsers( const QList<VNumber>& group_members ) const
-{
-  if( group_members.size() < 2 )
-    return Group();
-
-  foreach( Group g, m_groups )
-  {
-    if( g.usersId().size() == group_members.size() )
-    {
-      if( g.hasUsers( group_members ) )
-        return g;
-    }
-  }
-  return Group();
-}
-
-bool UserManager::removeGroup( const Group& g )
-{
-  return m_groups.removeOne( g );
-}
-
-bool UserManager::isUserInGroups( VNumber user_id ) const
-{
-  if( user_id == ID_LOCAL_USER )
-    return true;
-
-  foreach( Group g, m_groups )
-  {
-    if( g.hasUser( user_id ) )
-      return true;
-  }
-
-  return false;
-}
-
 User UserManager::findUserByPath( const QString& user_path ) const
 {
   if( user_path.isEmpty() )
@@ -207,29 +128,6 @@ User UserManager::findUserByHash( const QString& user_hash ) const
   return User();
 }
 
-User UserManager::findUserByHostAddressAndPort( const QHostAddress& host_address, int host_port )
-{
- if( host_address.isNull() || host_port < 1 )
-   return User();
-
-  NetworkAddress network_address( host_address, host_port );
-
-  if( Settings::instance().localUser().networkAddress() == network_address )
-    return Settings::instance().localUser();
-
-  foreach( User u, m_users.toList() )
-  {
-    if( u.networkAddress() == network_address )
-      return u;
-  }
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with IP address:" << qPrintable( network_address.toString() );
-#endif
-
-  return User();
-}
-
 User UserManager::findUserByNickname( const QString& user_nickname ) const
 {
   if( user_nickname.isEmpty() )
@@ -264,4 +162,20 @@ User UserManager::findUserByUserRecord( const UserRecord& ur ) const
 
     return u;
   }
+}
+
+User UserManager::findUserByNetworkAddress( const NetworkAddress& na ) const
+{
+  if( na.isHostAddressValid() && na.isHostPortValid() )
+  {
+    if( Settings::instance().localUser().networkAddress() == na )
+      return Settings::instance().localUser();
+
+    foreach( User u, m_users.toList() )
+    {
+      if( u.networkAddress() == na )
+        return u;
+    }
+  }
+  return User();
 }

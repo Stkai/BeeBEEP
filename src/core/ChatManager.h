@@ -50,6 +50,7 @@ public:
 
   bool isChatEmpty( const Chat&, bool check_also_history ) const;
   int countNotEmptyChats( bool check_also_history ) const;
+  int countGroupChats() const;
 
   inline bool hasName( const QString& ) const;
   int unreadMessages() const;

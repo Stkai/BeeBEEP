@@ -29,7 +29,7 @@
 
 
 GuiCreateGroup::GuiCreateGroup( QWidget *parent )
-  : QDialog( parent ), m_selectedName( "" ), m_selectedUsersId(), m_privateId( "" )
+  : QDialog( parent ), m_group(), m_leaveGroup( false )
 {
   setupUi( this );
   setObjectName( "GuiCreateGroup" );
@@ -46,43 +46,27 @@ GuiCreateGroup::GuiCreateGroup( QWidget *parent )
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndClose() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_pbLeave, SIGNAL( clicked() ), this, SLOT( leaveGroupAndClose() ) );
 }
 
-void GuiCreateGroup::init( const QString& group_name, const QList<VNumber>& group_members, const QString& private_id )
+void GuiCreateGroup::init( const Group& g )
 {
-  m_selectedName = group_name;
-  m_selectedUsersId = group_members;
-  m_privateId = private_id;
+  m_group = g;
 }
 
-void GuiCreateGroup::loadData( bool is_group )
+void GuiCreateGroup::loadData()
 {
-  if( is_group )
+  if( m_group.isValid() )
   {
-    mp_labelName->setText( tr( "Group name" ) );
-    mp_labelText->setText( tr( "Please add member in the group:" ) );
+    mp_leName->setText( m_group.name() );
+    setWindowTitle( QString( "%1 - %2" ).arg( tr( "Edit group chat" ) ).arg( Settings::instance().programName() ) );
+    mp_pbLeave->setEnabled( true );
   }
   else
-  {
-    mp_labelName->setText( tr( "Chat name" ) );
-    mp_labelText->setText( tr( "Please add member in the chat:" ) );
-  }
-
-  if( m_selectedName.isEmpty() )
   {
     mp_leName->setText( "" );
-    if( is_group )
-      setWindowTitle( tr( "Create Group - %1" ).arg( Settings::instance().programName() ) );
-    else
-      setWindowTitle( tr( "Create Chat - %1" ).arg( Settings::instance().programName() ) );
-  }
-  else
-  {
-    mp_leName->setText( m_selectedName );
-    if( is_group )
-      setWindowTitle( tr( "Edit Group - %1" ).arg( Settings::instance().programName() ) );
-    else
-      setWindowTitle( tr( "Edit Chat - %1" ).arg( Settings::instance().programName() ) );
+    setWindowTitle( QString( "%1 - %2" ).arg( tr( "Create group chat" ) ).arg( Settings::instance().programName() ) );
+    mp_pbLeave->setEnabled( false );
   }
 
   if( mp_twUsers->topLevelItemCount() > 0 )
@@ -98,7 +82,7 @@ void GuiCreateGroup::loadData( bool is_group )
     item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
     item->setCheckState( 0, Qt::Checked );
 
-    if( m_selectedUsersId.contains( u.id() ) )
+    if( m_group.hasUser( u.id() ) )
     {
       item->setCheckState( 0, Qt::Checked );
       item->setDisabled( true );
@@ -106,6 +90,8 @@ void GuiCreateGroup::loadData( bool is_group )
     else
       item->setCheckState( 0, Qt::Unchecked );
   }
+
+
 }
 
 void GuiCreateGroup::checkAndClose()
@@ -133,9 +119,9 @@ void GuiCreateGroup::checkAndClose()
     return;
   }
 
-  if( group_name_tmp != m_selectedName )
+  if( group_name_tmp != m_group.name() )
   {
-    if( UserManager::instance().hasGroupName( group_name_tmp ) || ChatManager::instance().hasName( group_name_tmp ) )
+    if( ChatManager::instance().hasName( group_name_tmp ) )
     {
       QMessageBox::information( this, Settings::instance().programName(), tr( "%1 already exists as group name or chat name.\nPlease select a different name." ).arg( group_name_tmp ) );
       mp_leName->setFocus();
@@ -143,32 +129,25 @@ void GuiCreateGroup::checkAndClose()
     }
   }
 
-  m_selectedName = group_name_tmp;
+  m_group.setName( group_name_tmp );
 
-  if( m_selectedUsersId.size() > 0 )
-    m_selectedUsersId.clear();
-  m_selectedUsersId.append( ID_LOCAL_USER );
+  QList<VNumber> selected_users_id;
+  selected_users_id.append( ID_LOCAL_USER );
 
   VNumber user_id = 0;
   foreach( QTreeWidgetItem* item, item_list )
   {
     user_id = Bee::qVariantToVNumber( item->data( 0, Qt::UserRole+1 ) );
-    if( !m_selectedUsersId.contains( user_id ) )
-      m_selectedUsersId.append( user_id );
+    if( !selected_users_id.contains( user_id ) )
+      selected_users_id.append( user_id );
   }
 
-  Group g = UserManager::instance().findGroupByUsers( m_selectedUsersId );
-  if( g.isValid() && g.privateId() != m_privateId )
-  {
-    if( QMessageBox::question( this, Settings::instance().programName(),
-                               QString( "%1\n%2" ).arg( tr( "There is a group with the same members: %1." ).arg( g.name() ) )
-                                                  .arg( "How do you want to continue?" ),
-                               tr( "Create new group" ), tr( "Cancel" ), QString::null, 1, 1 ) == 1 )
-    {
-      mp_leName->setFocus();
-      return;
-    }
-  }
+  m_group.setUsers( selected_users_id );
+  accept();
+}
 
+void GuiCreateGroup::leaveGroupAndClose()
+{
+  m_leaveGroup = true;
   accept();
 }

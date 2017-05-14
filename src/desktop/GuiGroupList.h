@@ -35,7 +35,6 @@ public:
   GuiGroupList( QWidget* parent );
 
   void updateGroups();
-  void updateGroup( const Group& );
   void updateUser( const User& );
   void updateChat( const Chat& );
 
@@ -44,14 +43,12 @@ signals:
   void createGroupRequest();
   void editGroupRequest( VNumber );
   void showVCardRequest( VNumber );
-  void removeGroupRequest( VNumber );
 
 protected slots:
   void showGroupMenu( const QPoint& );
   void checkItemClicked( QTreeWidgetItem*, int );
   void openGroupChatSelected();
   void editGroupSelected();
-  void removeGroupSelected();
   void enableGroupNotification();
   void disableGroupNotification();
 
@@ -61,7 +58,6 @@ private:
   QAction* mp_actCreateGroup;
   QAction* mp_actEditGroup;
   QAction* mp_actOpenChat;
-  QAction* mp_actRemoveGroup;
   QAction* mp_actEnableGroupNotification;
   QAction* mp_actDisableGroupNotification;
 

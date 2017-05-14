@@ -81,8 +81,6 @@ private slots:
   void onNewChatMessage( const Chat&, const ChatMessage& );
   void onChatChanged( const Chat& );
   void onChatRemoved( const Chat& );
-  void onGroupChanged( const Group& );
-  void onGroupRemoved( const Group& );
   void sendMessage( VNumber, const QString& );
   void showTipOfTheDay();
   void showFactOfTheDay();
@@ -114,10 +112,8 @@ private slots:
   void selectBeepFile();
   void testBeepFile();
   void playBeep();
-  void editChat( VNumber );
-  void createChat();
-  void createGroup();
-  void editGroup( VNumber );
+  void editGroupChat( VNumber );
+  void createGroupChat();
   void showSavedChatSelected( const QString& );
   void removeSavedChat( const QString& );
   void linkSavedChat( const QString& );
@@ -128,10 +124,7 @@ private slots:
   void openHelpPage();
   void openFacebookPage();
   void clearChat( VNumber );
-  void leaveGroupChat( VNumber );
-  void removeGroup( VNumber );
   void removeChat( VNumber );
-  void showChatForGroup( VNumber );
   void showSharesForUser( const User& );
   void selectLanguage();
   void showLocalUserVCard();
@@ -143,7 +136,6 @@ private slots:
   void showConnectionStatusChanged( const User& );
   void changeAvatarSizeInList();
   void toggleUserFavorite( VNumber );
-  void createGroupFromChat( VNumber );
   void removeUserFromList( VNumber );
   void openDataFolder();
   void openResourceFolder();
@@ -278,7 +270,6 @@ private:
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
   QAction* mp_actAddUsers;
-  QAction* mp_actCreateGroup;
   QAction* mp_actCreateGroupChat;
   QAction* mp_actEnableFileSharing;
   QAction* mp_actSelectDownloadFolder;

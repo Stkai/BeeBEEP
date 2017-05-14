@@ -50,7 +50,7 @@ public:
   bool appendChatMessage( const Chat&, const User&, const ChatMessage& );
 
   inline QSplitter* chatSplitter() const;
-  inline QMenu* groupMenu() const;
+  void editChatMembers();
 
 signals:
   void newMessage( VNumber, const QString& );
@@ -58,10 +58,8 @@ signals:
   void nextChat();
   void openUrl( const QUrl& );
   void sendFileFromChatRequest( VNumber, const QString& );
-  void createGroupFromChatRequest( VNumber );
-  void editGroupRequestFromChat( VNumber );
+  void editGroupRequest( VNumber );
   void chatToClear( VNumber );
-  void leaveThisChat( VNumber );
   void showChatMenuRequest();
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
@@ -97,11 +95,8 @@ private slots:
   void selectFont();
   void saveChat();
   void clearChat();
-  void leaveThisGroup();
   void sendFile();
   void sendFolder();
-  void showGroupWizard();
-  void editChatMembers();
   void checkAndSendUrls( const QMimeData* );
   void checkAndSendImage( const QMimeData* );
   void onUseReturnToSendMessageClicked();
@@ -122,13 +117,9 @@ private:
 
   QMenu* mp_menuContext;
   QMenu* mp_menuFilters;
-  QMenu* mp_menuGroup;
   QAction* mp_actSendFile;
-  QAction* mp_actGroupAdd;
   QAction* mp_actClear;
-  QAction* mp_actLeave;
   QAction* mp_actSelectBackgroundColor;
-  QAction* mp_actGroupWizard;
   QAction* mp_actSpellChecker;
   QAction* mp_actCompleter;
   QAction* mp_actUseReturnToSendMessage;
@@ -152,6 +143,5 @@ private:
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
-inline QMenu* GuiChat::groupMenu() const { return mp_menuGroup; }
 
 #endif // BEEBEEP_GUICHAT_H

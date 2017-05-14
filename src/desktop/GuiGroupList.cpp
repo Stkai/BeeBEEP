@@ -21,8 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "GuiGroupList.h"
 #include "GuiConfig.h"
+#include "GuiGroupList.h"
 #include "ChatManager.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -66,9 +66,6 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   mp_actDisableGroupNotification = new QAction( QIcon( ":/images/notification-enabled.png" ), tr( "Disable notifications" ), this );
   connect( mp_actDisableGroupNotification, SIGNAL( triggered() ), this, SLOT( disableGroupNotification() ) );
 
-  mp_actRemoveGroup = new QAction( QIcon( ":/images/group-remove.png" ), tr( "Delete group" ), this );
-  connect( mp_actRemoveGroup, SIGNAL( triggered() ), this, SLOT( removeGroupSelected() ) );
-
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
 }
@@ -79,23 +76,40 @@ void GuiGroupList::updateGroups()
   if( topLevelItemCount() > 0 )
     clear();
 
-  foreach( Group g, UserManager::instance().groups() )
+  foreach( Chat c, ChatManager::instance().constChatList() )
   {
-    GuiGroupItem* group_item = new GuiGroupItem( this );
-    group_item->init( g.id(), true );
-    group_item->updateGroup( g );
+    if( c.isGroup() )
+    {
+      GuiGroupItem* group_item = new GuiGroupItem( this );
+      group_item->init( c.id(), true );
+      group_item->updateChat( c );
+    }
   }
 }
 
-void GuiGroupList::updateGroup( const Group& g )
+void GuiGroupList::updateUser( const User& u )
 {
-  GuiGroupItem* group_item = itemFromId( g.id() );
+  GuiGroupItem* item;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    item = (GuiGroupItem*)(*it);
+    if( item->itemId() == u.id() )
+      item->updateUser( u );
+    ++it;
+  }
+  sortItems( 0, Qt::AscendingOrder );
+}
+
+void GuiGroupList::updateChat( const Chat& c )
+{
+  GuiGroupItem* group_item = itemFromId( c.id() );
   if( !group_item )
   {
     group_item = new GuiGroupItem( this );
-    group_item->init( g.id(), true );
+    group_item->init( c.id(), true );
   }
-  group_item->updateGroup( g );
+  group_item->updateChat( c );
   sortItems( 0, Qt::AscendingOrder );
 }
 
@@ -143,7 +157,7 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
     }
 
     mp_contextMenu->addAction( mp_actCreateGroup );
-    mp_actCreateGroup->setEnabled( UserManager::instance().userList().toList().size() >= 2 );
+    mp_actCreateGroup->setEnabled( UserManager::instance().userList().toList().size() > 1 );
     mp_contextMenu->exec( QCursor::pos() );
     return;
   }
@@ -160,13 +174,11 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
     mp_contextMenu->addSeparator();
     mp_contextMenu->addAction( mp_actEditGroup );
     mp_contextMenu->addSeparator();
-    Group g = UserManager::instance().group( m_selectedGroupId );
-    if( Settings::instance().isNotificationDisabledForGroup( g.privateId() ) )
+    Chat c = ChatManager::instance().chat( m_selectedGroupId );
+    if( Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
       mp_contextMenu->addAction( mp_actEnableGroupNotification );
     else
       mp_contextMenu->addAction( mp_actDisableGroupNotification );
-    mp_contextMenu->addSeparator();
-    mp_contextMenu->addAction( mp_actRemoveGroup );
     mp_contextMenu->exec( QCursor::pos() );
   }
   else
@@ -196,57 +208,18 @@ void GuiGroupList::editGroupSelected()
   }
 }
 
-void GuiGroupList::removeGroupSelected()
-{
-  if( m_selectedGroupId != ID_INVALID )
-  {
-    emit removeGroupRequest( m_selectedGroupId );
-    m_selectedGroupId = ID_INVALID;
-  }
-}
-
-void GuiGroupList::updateUser( const User& u )
-{
-  GuiGroupItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
-  {
-    item = (GuiGroupItem*)(*it);
-    if( item->itemId() == u.id() )
-      item->updateUser( u );
-    ++it;
-  }
-  sortItems( 0, Qt::AscendingOrder );
-}
-
-void GuiGroupList::updateChat( const Chat& c )
-{
-  GuiGroupItem* item;
-  QTreeWidgetItemIterator it( this );
-  while( *it )
-  {
-    item = (GuiGroupItem*)(*it);
-    if( item->updateChat( c ) )
-    {
-      sortItems( 0, Qt::AscendingOrder );
-      return;
-    }
-    ++it;
-  }
-}
-
 void GuiGroupList::enableGroupNotification()
 {
   if( m_selectedGroupId != ID_INVALID )
   {
-    Group g = UserManager::instance().group( m_selectedGroupId );
-    if( !g.isValid() )
+    Chat c = ChatManager::instance().chat( m_selectedGroupId );
+    if( !c.isValid() )
     {
       qWarning() << "Invalid id" << m_selectedGroupId << "found in enable group notification";
       return;
     }
-    qDebug() << "Enable notification for group:" << g.name();
-    Settings::instance().setNotificationEnabledForGroup( g.privateId(), true );
+    qDebug() << "Enable notification for group chat:" << qPrintable( c.name() );
+    Settings::instance().setNotificationEnabledForGroup( c.privateId(), true );
     m_selectedGroupId = ID_INVALID;
   }
 }
@@ -255,14 +228,14 @@ void GuiGroupList::disableGroupNotification()
 {
   if( m_selectedGroupId != ID_INVALID )
   {
-    Group g = UserManager::instance().group( m_selectedGroupId );
-    if( !g.isValid() )
+    Chat c = ChatManager::instance().chat( m_selectedGroupId );
+    if( !c.isValid() )
     {
       qWarning() << "Invalid id" << m_selectedGroupId << "found in disable group notification";
       return;
     }
-    qDebug() << "Disable notification for group:" << g.name();
-    Settings::instance().setNotificationEnabledForGroup( g.privateId(), false );
+    qDebug() << "Disable notification for group:" << c.name();
+    Settings::instance().setNotificationEnabledForGroup( c.privateId(), false );
     m_selectedGroupId = ID_INVALID;
   }
 }

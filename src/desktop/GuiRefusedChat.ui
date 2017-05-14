@@ -51,7 +51,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QTreeWidget" name="mp_twRefusedChats">
      <property name="columnCount">
-      <number>2</number>
+      <number>1</number>
      </property>
      <attribute name="headerMinimumSectionSize">
       <number>160</number>
@@ -62,11 +62,6 @@
      <column>
       <property name="text">
        <string notr="true">1</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string notr="true">2</string>
       </property>
      </column>
     </widget>

@@ -48,7 +48,6 @@ public:
   inline VNumber itemId() const;
   inline bool isGroup() const;
 
-  bool updateGroup( const Group& );
   bool updateUser( const User& );
   bool updateChat( const Chat& );
 
