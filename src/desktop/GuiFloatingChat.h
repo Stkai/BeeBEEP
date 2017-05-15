@@ -52,6 +52,7 @@ public:
 public slots:
   void updateEmoticon();
   void showUp();
+  void raiseOnTop();
 
 signals:
   void readAllMessages( VNumber );

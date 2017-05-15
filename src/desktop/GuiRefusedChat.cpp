@@ -35,9 +35,9 @@ GuiRefusedChat::GuiRefusedChat( QWidget *parent )
   setWindowIcon( QIcon( ":/images/refused-chat.png" ) );
   Bee::removeContextHelpButton( this );
 
-  mp_twRefusedChats->setColumnCount( 1 );
+  mp_twRefusedChats->setColumnCount( 2 );
   QStringList labels;
-  labels << tr( "Name" );
+  labels << tr( "Name" ) << tr( "Blocked chat ID" );
   mp_twRefusedChats->setHeaderLabels( labels );
   mp_twRefusedChats->setAlternatingRowColors( true );
   mp_twRefusedChats->setSortingEnabled( true );
@@ -73,7 +73,7 @@ void GuiRefusedChat::loadRefusedChatsInList()
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twRefusedChats );
     item->setText( 0, cr.name() );
     item->setIcon( 0, QIcon( ":/images/refused-chat.png" ));
-    item->setData( 0, Qt::UserRole, cr.privateId() );
+    item->setText( 1, cr.privateId() );
   }
 }
 
@@ -123,7 +123,7 @@ void GuiRefusedChat::removeRefusedChat()
 
   foreach( QTreeWidgetItem* item, items )
   {
-    ChatRecord cr( item->text( 0 ), item->data( 0, Qt::UserRole ).toString() );
+    ChatRecord cr( item->text( 0 ), item->text( 1 ) );
     m_refusedChats.removeOne( cr );
   }
 

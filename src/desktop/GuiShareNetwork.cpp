@@ -37,6 +37,7 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
 
   setObjectName( "GuiShareNetwork" );
   mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Files and folders shared in your network" ) ) );
+  mp_twShares->setToolTip( tr( "Right click to open menu" ) );
 
   m_fileInfoList.initTree( mp_twShares, false );
 
@@ -60,8 +61,9 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_actReload->setEnabled( false );
 
   /* Download button */
-  mp_actDownload = bar->addAction( QIcon( ":/images/download-box.png" ), tr( "Download" ), this, SLOT( downloadSelected() ) );
+  mp_actDownload = bar->addAction( QIcon( ":/images/download.png" ), tr( "Download" ), this, SLOT( downloadSelected() ) );
   mp_actDownload->setStatusTip( tr( "Download single or multiple files simultaneously" ) );
+  mp_actDownload->setEnabled( false );
 
   /* filter by keywords */
   label = new QLabel( bar );
@@ -197,6 +199,7 @@ void GuiShareNetwork::loadShares( const User& u )
   }
 
   m_fileInfoList.setUpdatesEnabled( true );
+  mp_actDownload->setEnabled( !m_fileInfoList.isEmpty() );
 
   mp_comboUsers->blockSignals( true );
   if( file_shared > 0 )
@@ -217,7 +220,6 @@ void GuiShareNetwork::loadShares( const User& u )
 
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 1 );
   mp_comboUsers->blockSignals( false );
-  mp_actDownload->setEnabled( !m_fileInfoList.isEmpty() );
 
   QString status_msg = tr( "%1 has shared %2 files (%3)" ).arg( u.name() ).arg( file_shared ).arg( Bee::bytesToString( share_size ) );
 #ifdef BEEBEEP_DEBUG
@@ -249,9 +251,11 @@ void GuiShareNetwork::processNextItemInQueue()
       item->setFilePath( "" );
       item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to download %1" ).arg(  ufi.second.name() ) );
     }
+    item->setToolTip( GuiFileInfoItem::ColumnFile, QString( "%1\n%2" ).arg( item->toolTip( GuiFileInfoItem::ColumnFile ), mp_twShares->toolTip() ) );
   }
 
   m_fileInfoList.setUpdatesEnabled( true );
+  mp_actDownload->setEnabled( !m_fileInfoList.isEmpty() );
 
   setCursor( Qt::ArrowCursor );
 
@@ -387,9 +391,15 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& p )
 
     mp_menuContext->addSeparator();
     mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
-    mp_menuContext->addSeparator();
+
+  }
+  else
+  {
+    mp_menuContext->addAction( mp_actScan );
+    mp_menuContext->addAction( mp_actReload );
   }
 
+  mp_menuContext->addSeparator();
   mp_menuContext->addAction( QIcon( ":/images/add.png" ), tr( "Expand all items" ), mp_twShares, SLOT( expandAll() ) );
   mp_menuContext->addAction( QIcon( ":/images/remove.png" ), tr( "Collapse all items" ), mp_twShares, SLOT( collapseAll() ) );
   mp_menuContext->exec( QCursor::pos() );
@@ -446,9 +456,9 @@ void GuiShareNetwork::updateUser( const User& u )
   }
 }
 
-void GuiShareNetwork::onFileTransferProgress( VNumber file_info_id, const User& u, const FileInfo& fi, FileSizeType bytes )
+void GuiShareNetwork::onFileTransferProgress( VNumber /* unused_peer_id */, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
-  GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), file_info_id );
+  GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), fi.id() );
   if( !item )
     return;
 
@@ -468,9 +478,9 @@ void GuiShareNetwork::onFileTransferProgress( VNumber file_info_id, const User& 
   item->setText( GuiFileInfoItem::ColumnStatus, file_transfer_progress );
 }
 
-void GuiShareNetwork::onFileTransferCompleted( VNumber file_info_id, const User& u, const FileInfo& file_info )
+void GuiShareNetwork::onFileTransferCompleted( VNumber /* unused_peer_id */, const User& u, const FileInfo& file_info )
 {
-  GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), file_info_id );
+  GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), file_info.id() );
   if( !item )
     return;
 
@@ -481,8 +491,7 @@ void GuiShareNetwork::showFileTransferCompleted( GuiFileInfoItem* item, const QS
 {
   item->setFilePath( file_path );
   item->setToolTip( GuiFileInfoItem::ColumnFile, tr( "Double click to open %1" ).arg( file_path ) );
-  if( item->text( GuiFileInfoItem::ColumnStatus ).isEmpty() )
-    item->setText( GuiFileInfoItem::ColumnStatus, tr( "Transfer completed" ) );
+  item->setText( GuiFileInfoItem::ColumnStatus, tr( "Transfer completed" ) );
   for( int i = 0; i < mp_twShares->columnCount(); i++ )
     item->setBackgroundColor( i, QColor( "#91D606" ) );
 }

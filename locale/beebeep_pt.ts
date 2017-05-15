@@ -159,23 +159,23 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="179"/>
-        <location filename="../src/core/CoreChat.cpp" line="634"/>
-        <location filename="../src/core/CoreChat.cpp" line="646"/>
+        <location filename="../src/core/CoreChat.cpp" line="635"/>
+        <location filename="../src/core/CoreChat.cpp" line="647"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat com %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="629"/>
+        <location filename="../src/core/CoreChat.cpp" line="630"/>
         <source>Chat with all connected users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="634"/>
+        <location filename="../src/core/CoreChat.cpp" line="635"/>
         <source>Unknown %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="259"/>
+        <location filename="../src/core/CoreChat.cpp" line="260"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Impossével envia a Mensagem. Você não está conectado.</translation>
     </message>
@@ -220,52 +220,44 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="265"/>
+        <location filename="../src/core/CoreChat.cpp" line="266"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Impossível enviar a mensagem: Chat desabilitado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="299"/>
+        <location filename="../src/core/CoreChat.cpp" line="300"/>
         <source>Unable to send the message to %1.</source>
         <translation>Impossível enviar Mensagem para  %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="327"/>
+        <location filename="../src/core/CoreChat.cpp" line="328"/>
         <source>The message will be delivered to %1.</source>
         <translation>Esta mensagem será entregue para: %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="332"/>
+        <location filename="../src/core/CoreChat.cpp" line="333"/>
         <source>Nobody has received the message.</source>
         <translation>Nenhum usuário Selecionado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="450"/>
+        <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>%1 saved chats are added to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="506"/>
+        <location filename="../src/core/CoreChat.cpp" line="507"/>
         <source>Offline messages sent to %2.</source>
         <translation>Mensagem Offline enviada para %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="587"/>
+        <location filename="../src/core/CoreChat.cpp" line="588"/>
         <source>%1 You have buzzed %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="403"/>
+        <location filename="../src/core/CoreChat.cpp" line="404"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 Sem informações que você deixou o Grupo.</translation>
-    </message>
-    <message>
-        <source>%1 You have left the group.</source>
-        <translation type="obsolete">%1 Você saiu do Grupo.</translation>
-    </message>
-    <message>
-        <source>%1 %2 has left the group.</source>
-        <translation type="obsolete">%1 %2 deixou o Grupo.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="391"/>
@@ -438,10 +430,6 @@
         <translation>%1 %2 está enviando o arquivo: %3.</translation>
     </message>
     <message>
-        <source>%1 An error occurred when %2 tries to add you to the group chat: %3.</source>
-        <translation type="obsolete">%1 Ocorreu um Erro %2 tentativas de adicioná-lo ao chat: %3.</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreParser.cpp" line="337"/>
         <source>%1 has removed shared files</source>
         <translation type="unfinished"></translation>
@@ -490,14 +478,6 @@
         <location filename="../src/core/CoreUser.cpp" line="104"/>
         <source>%1 shares this information</source>
         <translation>%1 compartilha esta informação</translation>
-    </message>
-    <message>
-        <source>%1 You have created group from chat: %2.</source>
-        <translation type="obsolete">%1 Você criou o Grupo: %2.</translation>
-    </message>
-    <message>
-        <source>%1 You have deleted group: %2.</source>
-        <translation type="obsolete">%1 Você excluiu o Grupo: %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="307"/>
@@ -931,14 +911,6 @@
         <translation>Limpar Mensagens</translation>
     </message>
     <message>
-        <source>Create group from chat</source>
-        <translation type="obsolete">Criar Grupo a partir do Chat</translation>
-    </message>
-    <message>
-        <source>Leave the group</source>
-        <translation type="obsolete">Abandonar o Grupo</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiChat.cpp" line="174"/>
         <source>You are not connected</source>
         <translation type="unfinished"></translation>
@@ -984,10 +956,6 @@
         <translation>Última Mensagem: %1</translation>
     </message>
     <message>
-        <source>Edit group</source>
-        <translation type="obsolete">Editar Grupo</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiChat.cpp" line="420"/>
         <source>last %1 messages</source>
         <translation>Últimas %1 mensagens</translation>
@@ -1021,10 +989,6 @@
         <location filename="../src/desktop/GuiChat.cpp" line="661"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Impossível salvar arquivo temporário: %1</translation>
-    </message>
-    <message>
-        <source>Do you really want to send %1 %2 to the members of this chat?</source>
-        <translation type="obsolete">Confirma o envio %1 %2 para os participantes do Chat?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="710"/>
@@ -1071,7 +1035,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
-        <source>Create group chat</source>
+        <source>Create new group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1095,17 +1059,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation type="obsolete">Apagar</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="155"/>
         <source>Please wait for two or more users</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create chat</source>
-        <translation type="obsolete">Criar novo Chat</translation>
     </message>
 </context>
 <context>
@@ -1144,10 +1100,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation type="obsolete">TextLabel</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="40"/>
         <source>Ok</source>
         <translation>OK</translation>
@@ -1158,33 +1110,9 @@
         <translation>Cancelar</translation>
     </message>
     <message>
-        <source>Group name</source>
-        <translation type="obsolete">Nome do Grupo</translation>
-    </message>
-    <message>
-        <source>Please add member in the group:</source>
-        <translation type="obsolete">Adicione participante ao Grupo:</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="39"/>
         <source>Users</source>
         <translation>Usuários</translation>
-    </message>
-    <message>
-        <source>Create Group - %1</source>
-        <translation type="obsolete">Criar Grupop - %1</translation>
-    </message>
-    <message>
-        <source>Create Chat - %1</source>
-        <translation type="obsolete">Iniciar Chat p - %1</translation>
-    </message>
-    <message>
-        <source>Edit Group - %1</source>
-        <translation type="obsolete">Editar Grupo p - %1</translation>
-    </message>
-    <message>
-        <source>Edit Chat - %1</source>
-        <translation type="obsolete">Editar Chat p - %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="62"/>
@@ -1193,7 +1121,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="68"/>
-        <source>Create group chat</source>
+        <source>Create new group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1328,11 +1256,6 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished">Mostrar arquivos compartilhados da Rede</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
-        <source>Show the shared boxes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="279"/>
         <source>%1 has shared %2 files</source>
         <translation type="unfinished">%1 compartilhou %2 arquivos</translation>
@@ -1341,6 +1264,11 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="155"/>
         <source>Show the bar of local file sharing</source>
         <translation type="unfinished">Mostrar barra local do compartilhamento</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
+        <source>Show the ShareBox</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="168"/>
@@ -1410,13 +1338,13 @@ Selecione um nome diferente.</translation>
     <name>GuiGroupList</name>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="54"/>
-        <source>Create group</source>
-        <translation>Criar Grupo</translation>
+        <source>Create new group chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="57"/>
-        <source>Edit group</source>
-        <translation>Editar Grupo</translation>
+        <source>Edit group chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="60"/>
@@ -1432,10 +1360,6 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiGroupList.cpp" line="66"/>
         <source>Disable notifications</source>
         <translation>Desabilitar Notificações</translation>
-    </message>
-    <message>
-        <source>Delete group</source>
-        <translation type="obsolete">Excluir Grupo</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="155"/>
@@ -1691,10 +1615,6 @@ Selecione um nome diferente.</translation>
         <translation>Offline</translation>
     </message>
     <message>
-        <source>Do you really want to quit %1?</source>
-        <translation type="obsolete">Deseja realmente sair %1?</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="349"/>
         <location filename="../src/desktop/GuiMain.cpp" line="373"/>
         <location filename="../src/desktop/GuiMain.cpp" line="390"/>
@@ -1942,10 +1862,6 @@ Selecione um nome diferente.</translation>
         <translation>Principal</translation>
     </message>
     <message>
-        <source>Broadcast to network</source>
-        <translation type="obsolete">Transmitir para Rede</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="937"/>
         <source>Show the user&apos;s picture</source>
         <translation>Mostrar fotos dos usuários</translation>
@@ -1990,14 +1906,6 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="385"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Mensagens do Chat não podem ser salvas &lt;/b&gt;. Caminho:</translation>
-    </message>
-    <message>
-        <source>Create chat</source>
-        <translation type="obsolete">Criar novo Chat</translation>
-    </message>
-    <message>
-        <source>Create group</source>
-        <translation type="obsolete">Criar Grupo</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="668"/>
@@ -2231,11 +2139,6 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="639"/>
-        <source>Create group chat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="685"/>
         <source>Prompts for change user</source>
         <translation type="unfinished"></translation>
@@ -2403,12 +2306,10 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create group from chat</source>
-        <translation type="obsolete">Criar Grupo a partir do Chat</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete this saved chat?</source>
-        <translation type="obsolete">Quer realmente Excluir este chat?</translation>
+        <location filename="../src/desktop/GuiMain.cpp" line="639"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2337"/>
+        <source>Create new group chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3056"/>
@@ -2419,10 +2320,6 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="3065"/>
         <source>in a meeting</source>
         <translation>em uma reunião</translation>
-    </message>
-    <message>
-        <source>Do you really want to clear all saved status descriptions?</source>
-        <translation type="obsolete">Quer mesmo excluir todos as descrições de status?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3243"/>
@@ -2473,10 +2370,6 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2045"/>
         <source>is a plugin developed by</source>
         <translation>é um plugin desenvolvido por</translation>
-    </message>
-    <message>
-        <source>Do you really want to open the file %1?</source>
-        <translation type="obsolete">Quer realmenteabrir o arquivo %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
@@ -2591,26 +2484,6 @@ Selecione um nome diferente.</translation>
         <translation>Padrão BEEP será usado</translation>
     </message>
     <message>
-        <source>Group chat will be deleted when all members goes offline.</source>
-        <translation type="obsolete">Grupo de Chat será excluído quando todos usuários saírem.</translation>
-    </message>
-    <message>
-        <source>If you want a persistent chat please consider to make a Group instead.</source>
-        <translation type="obsolete">Para ter um chat consistente considere criar um Grupo.</translation>
-    </message>
-    <message>
-        <source>Do you wish to continue or create group?</source>
-        <translation type="obsolete">Continua ou quer criar um Grupo ?</translation>
-    </message>
-    <message>
-        <source>Continue</source>
-        <translation type="obsolete">Continua</translation>
-    </message>
-    <message>
-        <source>Create Group</source>
-        <translation type="obsolete">Criar um Grupo</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2374"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Agora %1 será iniciado com o Wndows.</translation>
@@ -2723,11 +2596,6 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2337"/>
-        <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2389"/>
         <source>Starting</source>
         <translation type="unfinished"></translation>
@@ -2741,10 +2609,6 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2618"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Nem todos os membros deste chat estão Online. Mudanças podem ser perdidas. Continua?</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete chat with %1?</source>
-        <translation type="obsolete">Quer realmente excluir chat com %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2767"/>
@@ -2839,22 +2703,10 @@ Selecione um nome diferente.</translation>
         <translation>Chat com %1 está vazio.</translation>
     </message>
     <message>
-        <source>Do you really want to clear messages with %1?</source>
-        <translation type="obsolete">Quer realemtne limpar as mensagens com %1?</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2640"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2668"/>
         <source>Yes and delete history</source>
         <translation>Sim e exclua o hostórico</translation>
-    </message>
-    <message>
-        <source>Delete this group</source>
-        <translation type="obsolete">Excluir este Grupo</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete group &apos;%1&apos;?</source>
-        <translation type="obsolete">Deseja realmente excluir o grupo %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2702"/>
@@ -3116,7 +2968,7 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Excluir</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="49"/>
@@ -3166,6 +3018,11 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="40"/>
         <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiRefusedChat.cpp" line="40"/>
+        <source>Blocked chat ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3238,7 +3095,7 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="103"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Excluir</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="196"/>
@@ -3371,7 +3228,7 @@ Selecione um nome diferente.</translation>
     <name>GuiShareBox</name>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="54"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="324"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="330"/>
         <source>ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3382,51 +3239,66 @@ Selecione um nome diferente.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="64"/>
+        <source>Create folder in your ShareBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
+        <source>Show current folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Update ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="109"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
+        <source>Create folder in ShareBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="113"/>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="148"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="153"/>
         <source>Your ShareBox is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="177"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="183"/>
         <source>ShareBox is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="275"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="281"/>
         <source>%1 - Select the ShareBox folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="314"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="320"/>
         <source>%1: access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="324"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="330"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="324"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="330"/>
         <source>is unavailable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="452"/>
         <source>Please insert the new folder name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="452"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="458"/>
         <source>%1 already exists.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3467,7 +3339,7 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.ui" line="435"/>
+        <location filename="../src/desktop/GuiShareBox.ui" line="473"/>
         <source>Select box</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3585,10 +3457,6 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you really want to remove all shared paths?</source>
-        <translation type="obsolete">Quer realmente excluir todos os caminhos compartilhados ?</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="158"/>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="172"/>
         <source>Yes</source>
@@ -3632,47 +3500,47 @@ Selecione um nome diferente.</translation>
 <context>
     <name>GuiShareNetwork</name>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="100"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="102"/>
         <source>User</source>
         <translation>Usuário</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="54"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="55"/>
         <source>Scan network</source>
         <translation>Procurar na Rede</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="55"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="56"/>
         <source>Search shared files in your network</source>
         <translation>Procurar arquivos compartilhados na rede</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="58"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="59"/>
         <source>Reload list</source>
         <translation>Recarregar Lista</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="59"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="60"/>
         <source>Clear and reload list</source>
         <translation>Limpar e recarregar lista</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="76"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="78"/>
         <source>Search</source>
         <translation>Procurar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="85"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="87"/>
         <source>File Type</source>
         <translation>Tipo de Arquivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="91"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="93"/>
         <source>All Files</source>
         <translation>Todos os Arquivos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="63"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="64"/>
         <source>Download</source>
         <translation>Baixar</translation>
     </message>
@@ -3682,97 +3550,102 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="64"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="65"/>
         <source>Download single or multiple files simultaneously</source>
         <translation>Baixar um ou vários arquivos simultâneos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="70"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="72"/>
         <source>Filter</source>
         <translation>Fltro</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="118"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="120"/>
         <source>All Users</source>
         <translation>Tdos Usuários</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="144"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="146"/>
         <source>%1 is searching shared files in your network</source>
         <translation>%1 está procurando arquivos compartilhados na rede</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="250"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="252"/>
         <source>Double click to download %1</source>
         <translation>Duplo click para fazer o download %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="222"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="224"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation>%1 compartilhou arquivos %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="463"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="473"/>
         <source>Downloading</source>
         <translation type="unfinished">Baixando</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="463"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="473"/>
         <source>Uploading</source>
         <translation type="unfinished">uploadind</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="483"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="493"/>
         <source>Double click to open %1</source>
         <translation>Duplo click para abrir %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="485"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="494"/>
         <source>Transfer completed</source>
         <translation>Transferência completa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="333"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="337"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation>%1 arquivos mostrados na lista (%2 disponíveis na rede)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="335"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="40"/>
+        <source>Right click to open menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="339"/>
         <source>%1 files shared in your network</source>
         <translation>%1 arquivos compartilhados na rede</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="381"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="385"/>
         <source>You cannot download more than %1 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="385"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="389"/>
         <source>Download single file</source>
         <translation>Baixar arquivo único</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="385"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="389"/>
         <source>Download %1 selected files</source>
         <translation>Baixar %1 arquivos selecionados</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="389"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="393"/>
         <source>Clear selection</source>
         <translation>Limpar Seleção</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="393"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="403"/>
         <source>Expand all items</source>
         <translation>Expandir todos os ítens</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="394"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="404"/>
         <source>Collapse all items</source>
         <translation>Esconder todos os ítens</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="405"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="415"/>
         <source>Please select one or more files to download.</source>
         <translation>Selcione um ou mais arquivos para baixar.</translation>
     </message>
@@ -3897,10 +3770,6 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="205"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to cancel the transfer of %1?</source>
-        <translation type="obsolete">Quer realmente cancelar a transferência de %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="236"/>

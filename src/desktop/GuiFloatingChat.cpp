@@ -292,14 +292,6 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 
 void GuiFloatingChat::showUp()
 {
-  bool on_top_flag_added = false;
-
-  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
-  {
-    Bee::setWindowStaysOnTop( this, true );
-    on_top_flag_added = true;
-  }
-
   if( isMinimized() )
     showNormal();
 
@@ -308,10 +300,32 @@ void GuiFloatingChat::showUp()
 
   raise();
 
-  if( on_top_flag_added )
-    Bee::setWindowStaysOnTop( this, false );
-
   mp_chat->ensureLastMessageVisible();
+}
+
+void GuiFloatingChat::raiseOnTop()
+{
+  bool on_top_flag_added = false;
+  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
+  {
+#if defined Q_OS_WIN && QT_VERSION < 0x050000
+    ::SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+    Bee::setWindowStaysOnTop( this, true );
+#endif
+    on_top_flag_added = true;
+  }
+
+  showUp();
+
+  if( on_top_flag_added )
+  {
+#if defined Q_OS_WIN && QT_VERSION < 0x050000
+    ::SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+    Bee::setWindowStaysOnTop( this, false );
+#endif
+  }
 }
 
 void GuiFloatingChat::setFocusInChat()

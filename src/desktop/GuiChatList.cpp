@@ -157,7 +157,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
       mp_menuContext->addSeparator();
     }
 
-    act = mp_menuContext->addAction( QIcon( ":/images/group-create.png" ), tr( "Create group chat" ), this, SIGNAL( createNewChatRequest() ) );
+    act = mp_menuContext->addAction( QIcon( ":/images/group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
     act->setEnabled( create_chat_is_enabled );
   }
   else

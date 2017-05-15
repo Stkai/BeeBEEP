@@ -67,6 +67,7 @@ public slots:
   void exitFromIdle();
   void showMessage( const QString&, int );
   void showUp();
+  void raiseOnTop();
   void onTickEvent( int );
   void saveSession( QSessionManager& );
 

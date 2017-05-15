@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
-    <height>338</height>
+    <width>587</width>
+    <height>354</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,7 +78,7 @@
     <property name="verticalSpacing">
      <number>2</number>
     </property>
-    <item row="0" column="3">
+    <item row="0" column="4">
      <widget class="QLabel" name="mp_lMyBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -138,7 +138,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="4">
+    <item row="2" column="0" colspan="5">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <spacer name="horizontalSpacer">
@@ -219,7 +219,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="5">
+    <item row="1" column="0" colspan="6">
      <widget class="GuiShareBoxFileInfoList" name="mp_myBox">
       <property name="sortingEnabled">
        <bool>true</bool>
@@ -250,7 +250,7 @@
       </column>
      </widget>
     </item>
-    <item row="0" column="2">
+    <item row="0" column="3">
      <widget class="QPushButton" name="mp_pbMyCreateFolder">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -276,6 +276,44 @@
       <property name="icon">
        <iconset resource="../beebeep.qrc">
         <normaloff>:/images/folder-add.png</normaloff>:/images/folder-add.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="mp_pbMyOpenFolder">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../beebeep.qrc">
+        <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -515,6 +553,7 @@
  <tabstops>
   <tabstop>mp_pbSelectMyBox</tabstop>
   <tabstop>mp_pbMyUpdate</tabstop>
+  <tabstop>mp_pbMyOpenFolder</tabstop>
   <tabstop>mp_pbMyCreateFolder</tabstop>
   <tabstop>mp_myBox</tabstop>
   <tabstop>mp_cbEnableMyBox</tabstop>

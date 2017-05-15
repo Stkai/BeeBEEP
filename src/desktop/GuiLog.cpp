@@ -122,12 +122,7 @@ void GuiLog::showUp()
   if( !isVisible() )
     show();
 
-#ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
   raise();
-#endif
 
   static bool log_first_show = true;
   if( log_first_show )

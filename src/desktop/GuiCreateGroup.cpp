@@ -65,7 +65,7 @@ void GuiCreateGroup::loadData()
   else
   {
     mp_leName->setText( "" );
-    setWindowTitle( QString( "%1 - %2" ).arg( tr( "Create group chat" ) ).arg( Settings::instance().programName() ) );
+    setWindowTitle( QString( "%1 - %2" ).arg( tr( "Create new group chat" ) ).arg( Settings::instance().programName() ) );
     mp_pbLeave->setEnabled( false );
   }
 

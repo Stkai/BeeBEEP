@@ -249,13 +249,6 @@ void GuiMain::checkWindowFlagsAndShow()
 
 void GuiMain::showUp()
 {
-  bool on_top_flag_added = false;
-  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
-  {
-    Bee::setWindowStaysOnTop( this, true );
-    on_top_flag_added = true;
-  }
-
   if( isMinimized() )
     showNormal();
 
@@ -263,9 +256,31 @@ void GuiMain::showUp()
     show();
 
   raise();
+}
+
+void GuiMain::raiseOnTop()
+{
+  bool on_top_flag_added = false;
+  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
+  {
+#if defined Q_OS_WIN && QT_VERSION < 0x050000
+    ::SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+    Bee::setWindowStaysOnTop( this, true );
+#endif
+    on_top_flag_added = true;
+  }
+
+  showUp();
 
   if( on_top_flag_added )
+  {
+#if defined Q_OS_WIN && QT_VERSION < 0x050000
+    ::SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
     Bee::setWindowStaysOnTop( this, false );
+#endif
+  }
 }
 
 void GuiMain::updateWindowTitle()
@@ -636,7 +651,7 @@ void GuiMain::createActions()
   mp_actAbout->setMenuRole( QAction::AboutRole );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
 
-  mp_actCreateGroupChat = new QAction( QIcon( ":/images/group-create.png" ), tr( "Create group chat" ), this );
+  mp_actCreateGroupChat = new QAction( QIcon( ":/images/group-create.png" ), tr( "Create new group chat" ), this );
   connect( mp_actCreateGroupChat, SIGNAL( triggered() ), this, SLOT( createGroupChat() ) );
 
   mp_actViewNewMessage = new QAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this );
@@ -788,6 +803,7 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().chatClearAllReadMessages() );
   act->setData( 47 );
   mp_menuChatSettings->addSeparator();
+  mp_menuChatSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuChatSettings->addAction( QIcon( ":/images/refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
 
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
@@ -869,7 +885,6 @@ void GuiMain::createMenus()
   mp_menuSettings->addSeparator();
   mp_menuSettings->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
   mp_menuSettings->addAction( QIcon( ":/images/language.png" ), tr( "Select language") + QString( "..." ), this, SLOT( selectLanguage() ) );
-  mp_menuSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
@@ -1445,7 +1460,7 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 
     if( Settings::instance().raiseOnNewMessageArrived() )
     {
-      fl_chat->showUp();
+      fl_chat->raiseOnTop();
       show_message_in_tray = false;
     }
 
@@ -1455,8 +1470,8 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
   else
   {
     if( Settings::instance().raiseOnNewMessageArrived() )
-      showUp();
-    QApplication::alert( this, 2000 );
+      raiseOnTop();
+    mp_actViewNewMessage->setEnabled( true );
   }
 
   if( show_message_in_tray )
@@ -1768,8 +1783,8 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
       if( isMinimized() || !isActiveWindow() )
       {
         if( Settings::instance().raiseOnNewMessageArrived() )
-          showUp();
-        QApplication::alert( this, 0 );
+          raiseOnTop();
+        mp_actViewNewMessage->setEnabled( true );
       }
       QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
       msg_result = QMessageBox::question( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
@@ -2192,9 +2207,12 @@ void GuiMain::trayMessageClicked()
   {
     VNumber chat_id = mp_trayIcon->chatId();
     showChat( chat_id );
+    GuiFloatingChat* fl_chat = floatingChat( chat_id );
+    if( fl_chat && !fl_chat->chatIsVisible() )
+      QTimer::singleShot( 0, fl_chat, SLOT( raiseOnTop() ) );
   }
   else
-    QMetaObject::invokeMethod( this, "showUp", Qt::QueuedConnection );
+    QTimer::singleShot( 0, this, SLOT( raiseOnTop() ) );
 }
 
 void GuiMain::addToShare( const QString& share_path )
@@ -2210,7 +2228,7 @@ void GuiMain::removeFromShare( const QString& share_path )
 void GuiMain::openUrl( const QUrl& file_url )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Opening url (not encoded):" << file_url.toString();
+  qDebug() << "Opening url (not encoded):" << qPrintable( file_url.toString() );
 #endif
 
   if( file_url.scheme() == QLatin1String( "beeshowfileinfolder" ) )
@@ -3393,11 +3411,14 @@ void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const Fil
   Q_UNUSED( peer_id );
   if( fi.isDownload() && Settings::instance().showFileTransferCompletedOnTray() )
   {
-    VNumber chat_id = ID_DEFAULT_CHAT;
     Chat c = ChatManager::instance().privateChatForUser( u.id() );
     if( c.isValid() )
-      chat_id = c.id();
-    mp_trayIcon->showNewFileArrived( chat_id, tr( "New file from %1" ).arg( u.name() ), false );
+    {
+      mp_userList->updateChat( c );
+      mp_chatList->updateChat( c );
+      mp_trayIcon->showNewFileArrived( c.id(), tr( "New file from %1" ).arg( u.name() ), false );
+    }
+    updateNewMessageAction();
   }
 }
 

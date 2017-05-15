@@ -51,6 +51,7 @@ public slots:
   void onFileUploadCompleted( VNumber, const FileInfo& );
 
 protected slots:
+  void openMyBox();
   void updateMyBox();
   void updateOutBox();
   void enableMyUpdateButton();

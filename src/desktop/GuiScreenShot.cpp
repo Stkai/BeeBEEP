@@ -118,12 +118,7 @@ void GuiScreenShot::showUp()
   if( !isVisible() )
     show();
 
-#ifdef Q_OS_WIN
-  SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-  SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
   raise();
-#endif
 }
 
 void GuiScreenShot::updateScreenShot()

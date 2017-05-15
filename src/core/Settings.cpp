@@ -974,7 +974,7 @@ void Settings::load()
   m_maxLogLines = sets->value( "MaxLogLines", m_maxLogLines ).toInt();
   m_useSpellChecker = sets->value( "UseSpellChecker", false ).toBool();
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
-  m_dictionaryPath = checkFolderPath( sets->value( "DictionaryPath", "" ).toString(), "" );
+  m_dictionaryPath = checkFilePath( sets->value( "DictionaryPath", "" ).toString(), "" );
   m_checkNewVersionAtStartup = sets->value( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "SendAnonymousUsageStatistics", m_postUsageStatistics ).toBool();
   m_applicationUuid = sets->value( "Uuid", "" ).toString();

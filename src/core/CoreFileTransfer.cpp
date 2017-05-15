@@ -657,7 +657,7 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, boo
   if( user_id != ID_LOCAL_USER )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ShareBox sends request to user" << user_id << "for folder" << folder_name;
+    qDebug() << "ShareBox sends request to user" << user_id << "for folder" << qPrintable( folder_name );
 #endif
     Message m = Protocol::instance().shareBoxRequestPathList( folder_name, create_folder );
     Connection* c = connection( user_id );
@@ -675,7 +675,7 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, boo
 void Core::buildShareBoxFileList( const User& u, const QString& folder_name, bool create_folder )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Sharebox builds file list in folder" << qPrintable( folder_name ) << "for user" << u.path();
+  qDebug() << "Sharebox builds file list in folder" << qPrintable( folder_name ) << "for user" << qPrintable( u.path() );
 #endif
   QString folder_path = QString( "%1%2%3" ).arg( Settings::instance().shareBoxPath() ).arg( QDir::separator() ).arg( folder_name );
   if( create_folder )

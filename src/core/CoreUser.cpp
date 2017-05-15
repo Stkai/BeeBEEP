@@ -138,51 +138,41 @@ bool Core::changeLocalUser( const QString& user_name )
 
 bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
 {
+  bool color_changed = user_color != Settings::instance().localUser().color();
+  bool vc_changed = !(vc == Settings::instance().localUser().vCard());
+  bool nickname_changed = vc_changed && vc.nickName() != Settings::instance().localUser().vCard().nickName();
+
   User u = Settings::instance().localUser();
-  bool nick_name_changed = false;
-  bool color_changed = false;
-  bool vc_changed = true;
-  QString old_user_name = "";
+  QString old_user_nickname = "";
 
-  if( u.vCard().nickName() != vc.nickName() )
+  if( color_changed )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Local user nickname is changed";
-#endif
-    nick_name_changed = true;
-    old_user_name = u.vCard().nickName();
-  }
-
-  if( u.color() != user_color )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Local user color is changed";
-#endif
     u.setColor( user_color );
-    color_changed = true;
+    qDebug() << "Local user color is changed to" << qPrintable( user_color );
   }
 
-  if( u.vCard() == vc )
+  if( nickname_changed )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Local user vCard is changed";
-#endif
-    vc_changed = false;
+    old_user_nickname = u.vCard().nickName();
+    qDebug() << "Local user nickname is changed from" << qPrintable( old_user_nickname ) << "to" << qPrintable( vc.nickName() );
   }
-  else
-    u.setVCard( vc );
 
-  if( !nick_name_changed && !color_changed && !vc_changed )
+  if( vc_changed )
+  {
+    u.setVCard( vc );
+    qDebug() << "Local user vCard is changed";
+  }
+
+  if( !color_changed && !vc_changed )
     return false;
 
   Settings::instance().setLocalUser( u );
   Settings::instance().save();
 
-  Message vcard_message = Protocol::instance().localVCardMessage();
-  sendMessageToAllConnectedUsers( vcard_message );
+  sendMessageToAllConnectedUsers( Protocol::instance().localVCardMessage() );
   showUserVCardChanged( u );
-  if( nick_name_changed )
-    showUserNameChanged( u, old_user_name );
+  if( nickname_changed )
+    showUserNameChanged( u, old_user_nickname );
   emit userChanged( u );
   return true;
 }

@@ -31,7 +31,7 @@ GuiEmoticons::GuiEmoticons( QWidget* parent )
   : QTabWidget( parent )
 {
   setObjectName( "GuiEmoticons" );
-  setTabPosition( QTabWidget::South );
+  setTabPosition( QTabWidget::West );
   setUsesScrollButtons( true );
   setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Expanding );
   connect( this, SIGNAL( currentChanged( int ) ), this, SLOT( loadEmoticons( int ) ) );
@@ -117,7 +117,7 @@ void GuiEmoticons::loadEmoticons( int current_index )
   if( gwe == mp_recent )
   {
     emoticon_list = EmoticonManager::instance().recentEmoticons();
-    while( emoticon_list.size() <= Settings::instance().emoticonInRecentMenu() )
+    while( emoticon_list.size() < Settings::instance().emoticonInRecentMenu() )
       emoticon_list << Emoticon();
   }
   else

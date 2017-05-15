@@ -51,10 +51,10 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   m_groupChatOpened = ID_INVALID;
   m_blockShowChatRequest = false;
 
-  mp_actCreateGroup = new QAction( QIcon( ":/images/group-add.png" ), tr( "Create group" ), this );
+  mp_actCreateGroup = new QAction( QIcon( ":/images/group-add.png" ), tr( "Create new group chat" ), this );
   connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SIGNAL( createGroupRequest() ) );
 
-  mp_actEditGroup = new QAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group" ), this );
+  mp_actEditGroup = new QAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group chat" ), this );
   connect( mp_actEditGroup, SIGNAL( triggered() ), this, SLOT( editGroupSelected() ) );
 
   mp_actOpenChat = new QAction( QIcon( ":/images/chat.png" ), tr( "Open chat" ), this );

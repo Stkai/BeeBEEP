@@ -61,7 +61,10 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   m_userId = ID_INVALID;
 
   mp_pbMyUpdate->setToolTip( tr( "Update your ShareBox" ) );
+  mp_pbMyCreateFolder->setToolTip( tr( "Create folder in your ShareBox" ) );
+  mp_pbMyOpenFolder->setToolTip( tr( "Show current folder" ) );
   mp_pbOutUpdate->setToolTip( tr( "Update ShareBox" ) );
+  mp_pbOutCreateFolder->setToolTip( tr( "Create folder in ShareBox" ) );
 
   connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( onShareBoxSelected( int ) ) );
   connect( mp_pbSelectMyBox, SIGNAL( clicked() ), this, SLOT( selectMyShareBoxFolder() ) );
@@ -74,6 +77,7 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   connect( mp_outBox, SIGNAL( dropEventRequest( const QString& ) ), this, SLOT( dropInOutBox( const QString& ) ) );
   connect( mp_pbMyCreateFolder, SIGNAL( clicked() ), this, SLOT( createFolderInMyBox() ) );
   connect( mp_pbOutCreateFolder, SIGNAL( clicked() ), this, SLOT( createFolderInOutBox() ) );
+  connect( mp_pbMyOpenFolder, SIGNAL( clicked() ), this, SLOT( openMyBox() ) );
 }
 
 void GuiShareBox::updateShareBoxes()
@@ -139,6 +143,7 @@ void GuiShareBox::updateMyBox()
     emit shareBoxRequest( ID_LOCAL_USER, m_myCurrentFolder, false );
     QTimer::singleShot( 10000, this, SLOT( enableMyUpdateButton() ) );
     mp_pbMyCreateFolder->setEnabled( true );
+    mp_pbMyOpenFolder->setEnabled( true );
   }
   else
   {
@@ -148,6 +153,7 @@ void GuiShareBox::updateMyBox()
     mp_lMyBox->setText( tr( "Your ShareBox is disabled" ) );
     mp_myBox->setDisabled( true );
     mp_pbMyCreateFolder->setEnabled( false );
+    mp_pbMyOpenFolder->setEnabled( !Settings::instance().shareBoxPath().isEmpty() );
   }
 }
 
@@ -465,4 +471,15 @@ void GuiShareBox::createFolderInMyBox()
 void GuiShareBox::createFolderInOutBox()
 {
   createFolderInBox( m_userId );
+}
+
+void GuiShareBox::openMyBox()
+{
+  QString folder_path = m_myCurrentFolder.isEmpty() ? Settings::instance().shareBoxPath() : QString( "%1%2%3" ).arg( Settings::instance().shareBoxPath() ).arg( QDir::separator() ).arg( m_myCurrentFolder );
+  if( folder_path.isEmpty() )
+  {
+    mp_pbMyOpenFolder->setEnabled( false );
+    return;
+  }
+  emit openUrlRequest( QUrl::fromLocalFile( folder_path ) );
 }

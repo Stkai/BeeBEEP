@@ -227,8 +227,9 @@ bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 %2 is added to saved chats." )
                                                       .arg( Bee::iconToHtml( ":/images/saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( c.name() ) ),
                            DispatchToChat, ChatMessage::System );
-    clearMessagesInChat( c.id(), !save_chat_messages );
   }
+
+  clearMessagesInChat( c.id(), !save_chat_messages );
 
   if( c.isPrivate() )
   {
