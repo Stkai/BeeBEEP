@@ -72,6 +72,8 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   connect( mp_outBox, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onOutItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_myBox, SIGNAL( dropEventRequest( const QString& ) ), this, SLOT( dropInMyBox( const QString& ) ) );
   connect( mp_outBox, SIGNAL( dropEventRequest( const QString& ) ), this, SLOT( dropInOutBox( const QString& ) ) );
+  connect( mp_pbMyCreateFolder, SIGNAL( clicked() ), this, SLOT( createFolderInMyBox() ) );
+  connect( mp_pbOutCreateFolder, SIGNAL( clicked() ), this, SLOT( createFolderInOutBox() ) );
 }
 
 void GuiShareBox::updateShareBoxes()
@@ -132,10 +134,11 @@ void GuiShareBox::updateMyBox()
   if( mp_cbEnableMyBox->isChecked() )
   {
     mp_myBox->setEnabled( true );
-    QString my_path = QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() ).arg( m_myCurrentFolder );
+    QString my_path = QString( "%1%2%3" ).arg( Settings::instance().shareBoxPath() ).arg( QDir::separator() ).arg( m_myCurrentFolder );
     mp_lMyBox->setToolTip( my_path );
-    emit shareBoxRequest( ID_LOCAL_USER, m_myCurrentFolder );
+    emit shareBoxRequest( ID_LOCAL_USER, m_myCurrentFolder, false );
     QTimer::singleShot( 10000, this, SLOT( enableMyUpdateButton() ) );
+    mp_pbMyCreateFolder->setEnabled( true );
   }
   else
   {
@@ -144,6 +147,7 @@ void GuiShareBox::updateMyBox()
     mp_lMyBox->setToolTip( "" );
     mp_lMyBox->setText( tr( "Your ShareBox is disabled" ) );
     mp_myBox->setDisabled( true );
+    mp_pbMyCreateFolder->setEnabled( false );
   }
 }
 
@@ -159,9 +163,10 @@ void GuiShareBox::updateOutBox()
   {
     mp_outBox->setEnabled( true );
     if( user_id != m_userId )
-      emit shareBoxRequest( user_id, "" );
+      emit shareBoxRequest( user_id, "", false );
     else
-      emit shareBoxRequest( user_id, m_outCurrentFolder );
+      emit shareBoxRequest( user_id, m_outCurrentFolder, false );
+    mp_pbOutCreateFolder->setEnabled( true );
     QTimer::singleShot( 10000, this, SLOT( enableOutUpdateButton() ) );
   }
   else
@@ -170,6 +175,7 @@ void GuiShareBox::updateOutBox()
     mp_outBox->clearTree();
     m_outCurrentFolder = "";
     mp_lOutBox->setText( tr( "ShareBox is not available" ) );
+    mp_pbOutCreateFolder->setEnabled( false );
   }
 }
 
@@ -233,8 +239,8 @@ void GuiShareBox::onMyItemDoubleClicked( QTreeWidgetItem* item, int )
     else if( m_myCurrentFolder.isEmpty() )
       new_folder = QString( "%1" ).arg( file_info_item->fileInfo().name() );
     else
-      new_folder = QString( "%1/%2" ).arg( m_myCurrentFolder ).arg( file_info_item->fileInfo().name() );
-    emit shareBoxRequest( ID_LOCAL_USER, new_folder );
+      new_folder = QString( "%1%2%3" ).arg( m_myCurrentFolder ).arg( QDir::separator() ).arg( file_info_item->fileInfo().name() );
+    emit shareBoxRequest( ID_LOCAL_USER, new_folder, false );
   }
   else
   {
@@ -258,8 +264,8 @@ void GuiShareBox::onOutItemDoubleClicked( QTreeWidgetItem* item, int )
     else if( m_outCurrentFolder.isEmpty() )
       new_folder = QString( "%1" ).arg( file_info_item->fileInfo().name() );
     else
-      new_folder = QString( "%1/%2" ).arg( m_outCurrentFolder ).arg( file_info_item->fileInfo().name() );
-    emit shareBoxRequest( m_userId, new_folder );
+      new_folder = QString( "%1%2%3" ).arg( m_outCurrentFolder ).arg( QDir::separator() ).arg( file_info_item->fileInfo().name() );
+    emit shareBoxRequest( m_userId, new_folder, false );
   }
 }
 
@@ -272,7 +278,7 @@ void GuiShareBox::selectMyShareBoxFolder()
   if( folder_path.isEmpty() )
     return;
 
-  Settings::instance().setShareBoxPath( folder_path );
+  Settings::instance().setShareBoxPath( Bee::convertToNativeFolderSeparator( folder_path ) );
   Settings::instance().save();
   m_myCurrentFolder = "";
   updateMyBox();
@@ -294,17 +300,20 @@ void GuiShareBox::onShareBoxSelected( int )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ShareBox requests list for user" << current_user_id;
 #endif
-    emit shareBoxRequest( current_user_id, m_outCurrentFolder );
+    emit shareBoxRequest( current_user_id, m_outCurrentFolder, false );
   }
 }
 
 void GuiShareBox::onShareFolderUnavailable( const User& u, const QString& folder_path )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( u.path() ) << "has not shared box folder" << folder_path;
+  qDebug() << qPrintable( u.path() ) << "has not shared box folder" << qPrintable( folder_path );
 #endif
   if( u.isLocal() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "%1: access denied." ).arg( folder_path ) );
     return;
+  }
 
 #if QT_VERSION >= 0x050000
   if( u.id() == Bee::qVariantToVNumber( mp_comboUsers->currentData() ) )
@@ -331,7 +340,7 @@ void GuiShareBox::dropInMyBox( const QString& share_path )
   foreach( FileInfo file_info, selected_list )
   {
 #ifdef BEEBEEP_DEBUG
-    QString from_path = file_info.shareFolder().isEmpty() ? file_info.name() : QString( "%1/%2" ).arg( file_info.shareFolder(), file_info.name() );
+    QString from_path = file_info.shareFolder().isEmpty() ? file_info.name() : QString( "%1%2%3" ).arg( file_info.shareFolder() ).arg( QDir::separator() ).arg( file_info.name() );
     qDebug() << "Drop in MY sharebox the file" << file_info.name() << "->" << from_path;
 #endif
     QString to_path;
@@ -393,7 +402,7 @@ void GuiShareBox::updateUser( const User& u )
 void GuiShareBox::onFileUploadCompleted( VNumber user_id, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "ShareBox (upload completed) update list of the folder" << fi.shareFolder() << "and user" << user_id;
+  qDebug() << "ShareBox (upload completed) update list of the folder" << qPrintable( fi.shareFolder() ) << "and user" << user_id;
 #else
   Q_UNUSED( fi );
 #endif
@@ -404,9 +413,56 @@ void GuiShareBox::onFileUploadCompleted( VNumber user_id, const FileInfo& fi )
 void GuiShareBox::onFileDownloadCompleted( VNumber, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "ShareBox (download completed) update list of the folder" << fi.shareFolder();
+  qDebug() << "ShareBox (download completed) update list of the folder" << qPrintable( fi.shareFolder() );
 #else
   Q_UNUSED( fi );
 #endif
   updateMyBox();
+}
+
+bool GuiShareBox::isValidNewFolderName( QTreeWidget* tw, const QString& name_to_check )
+{
+  QTreeWidgetItemIterator it( tw );
+  while( *it )
+  {
+    if( (*it)->text( GuiShareBoxFileInfoItem::ColumnFile ).toLower() == name_to_check.toLower() )
+      return false;
+    ++it;
+  }
+  return true;
+}
+
+void GuiShareBox::createFolderInBox( VNumber user_id )
+{
+  if( user_id == ID_INVALID )
+    return;
+
+  QTreeWidget* tw = user_id == ID_LOCAL_USER ? mp_myBox : mp_outBox;
+  if( !tw->isEnabled() )
+    return;
+
+  QString current_folder = user_id == ID_LOCAL_USER ? m_myCurrentFolder : m_outCurrentFolder;
+
+  QString folder_to_create = QInputDialog::getText( tw, Settings::instance().programName(), tr( "Please insert the new folder name" ) );
+  if( folder_to_create.isEmpty() )
+    return;
+
+  if( !isValidNewFolderName( tw, folder_to_create ) )
+  {
+    QMessageBox::information( tw, Settings::instance().programName(), tr( "%1 already exists." ).arg( folder_to_create ) );
+    return;
+  }
+
+  QString new_folder_path = current_folder.isEmpty() ? folder_to_create : QString( "%1%2%3" ).arg( current_folder ).arg( QDir::separator() ).arg( folder_to_create );
+  emit shareBoxRequest( user_id, new_folder_path, true );
+}
+
+void GuiShareBox::createFolderInMyBox()
+{
+  createFolderInBox( ID_LOCAL_USER );
+}
+
+void GuiShareBox::createFolderInOutBox()
+{
+  createFolderInBox( m_userId );
 }

@@ -78,7 +78,7 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SIGNAL( openUrlRequest( const QUrl& ) ) );
   connect( mp_shareNetwork, SIGNAL( updateStatus( const QString&, int ) ), statusBar(), SLOT( showMessage( const QString&, int ) ) );
 
-  connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString& ) ), this, SLOT( onShareBoxRequest( VNumber, const QString& ) ) );
+  connect( mp_shareBox, SIGNAL( shareBoxRequest( VNumber, const QString&, bool ) ), this, SLOT( onShareBoxRequest( VNumber, const QString&, bool ) ) );
   connect( mp_shareBox, SIGNAL( openUrlRequest( const QUrl& ) ), this, SIGNAL( openUrlRequest( const QUrl& ) ) );
   connect( mp_shareBox, SIGNAL( shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_shareBox, SIGNAL( shareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ) );
@@ -248,9 +248,9 @@ void GuiFileSharing::onTickEvent( int )
 
 }
 
-void GuiFileSharing::onShareBoxRequest( VNumber user_id, const QString& share_box_path )
+void GuiFileSharing::onShareBoxRequest( VNumber user_id, const QString& share_box_path, bool create_folder )
 {
-  mp_core->sendShareBoxRequest( user_id, share_box_path );
+  mp_core->sendShareBoxRequest( user_id, share_box_path, create_folder );
 }
 
 void GuiFileSharing::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )

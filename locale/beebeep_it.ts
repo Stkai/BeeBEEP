@@ -140,11 +140,11 @@
     </message>
     <message>
         <source>%1 You have left the group.</source>
-        <translation>%1 Hai lasciato il gruppo.</translation>
+        <translation type="obsolete">%1 Hai lasciato il gruppo.</translation>
     </message>
     <message>
         <source>%1 %2 has left the group.</source>
-        <translation>%1 %2 ha lasciato il gruppo.</translation>
+        <translation type="obsolete">%1 %2 ha lasciato il gruppo.</translation>
     </message>
     <message>
         <source>%1 %2 cannot be informed that you have left the group.</source>
@@ -260,7 +260,7 @@
     </message>
     <message>
         <source>%1 You have created group from chat: %2.</source>
-        <translation>%1 Hai creato il gruppo dalla conversazione: %2.</translation>
+        <translation type="obsolete">%1 Hai creato il gruppo dalla conversazione: %2.</translation>
     </message>
     <message>
         <source>%1 You have deleted group: %2.</source>
@@ -360,23 +360,23 @@
     </message>
     <message>
         <source>%1 %2 has left the group: %3.</source>
-        <translation>%1 %2 ha lasciato il gruppo: %3.</translation>
+        <translation type="obsolete">%1 %2 ha lasciato il gruppo: %3.</translation>
     </message>
     <message>
         <source>%1 You have created group: %2.</source>
-        <translation>%1 Hai creato il gruppo: %2.</translation>
+        <translation type="obsolete">%1 Hai creato il gruppo: %2.</translation>
     </message>
     <message>
         <source>%1 You have created chat: %2.</source>
-        <translation>%1 Hai creato la conversazione: %2.</translation>
+        <translation type="obsolete">%1 Hai creato la conversazione: %2.</translation>
     </message>
     <message>
         <source>%1 %2 has changed the group name: %3.</source>
-        <translation>%1 %2 ha cambiato il nome del gruppo: %3.</translation>
+        <translation type="obsolete">%1 %2 ha cambiato il nome del gruppo: %3.</translation>
     </message>
     <message>
         <source>%1 %2 has added members to the group: %3.</source>
-        <translation>%1 %2 ha aggiunto dei membri al gruppo: %3.</translation>
+        <translation type="obsolete">%1 %2 ha aggiunto dei membri al gruppo: %3.</translation>
     </message>
     <message>
         <source>Unknown %1</source>
@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>%1 %2 has added you to the group chat: %3.</source>
-        <translation>%1 %2 ti ha aggiunto alla conversazione di gruppo: %3.</translation>
+        <translation type="obsolete">%1 %2 ti ha aggiunto alla conversazione di gruppo: %3.</translation>
     </message>
     <message>
         <source>%1 saved chats are added to history</source>
@@ -424,7 +424,39 @@
     </message>
     <message>
         <source>%1 %2 is removed from groups.</source>
-        <translation>%1 %2 è stato rimosso dai gruppi.</translation>
+        <translation type="obsolete">%1 %2 è stato rimosso dai gruppi.</translation>
+    </message>
+    <message>
+        <source>%1 You have created group chat %2.</source>
+        <translation>%1 Hai creato il gruppo %2.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has added you to the group chat %3.</source>
+        <translation>%1 %2 ti ha aggiunto al gruppo %3.</translation>
+    </message>
+    <message>
+        <source>%1 You have changed the group name from %2 to %3.</source>
+        <translation>%1 Hai cambiato il nome del gruppo da %2 a %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has changed the group name from %3 to %4.</source>
+        <translation>%1 %2 ha cambiato il nome del gruppo da %3 a %4.</translation>
+    </message>
+    <message>
+        <source>%1 You have added members: %2.</source>
+        <translation>%1 Hai aggiunto i seguenti menbri: %2.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has added members: %3.</source>
+        <translation>%1 %2 ha aggiunto i seguenti membri: %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has left the group chat %3.</source>
+        <translation>%1 %2 ha abbandonato il gruppo %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 is added to saved chats.</source>
+        <translation>%1 La conversazione con %2 è stata salvata.</translation>
     </message>
 </context>
 <context>
@@ -698,7 +730,7 @@
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>Lascia il gruppo</translation>
+        <translation type="obsolete">Lascia il gruppo</translation>
     </message>
     <message>
         <source>Last message %1</source>
@@ -750,11 +782,11 @@
     </message>
     <message>
         <source>Create group from chat</source>
-        <translation>Crea il gruppo dalla conversazione</translation>
+        <translation type="obsolete">Crea il gruppo dalla conversazione</translation>
     </message>
     <message>
         <source>Edit group</source>
-        <translation>Modifica gruppo</translation>
+        <translation type="obsolete">Modifica gruppo</translation>
     </message>
     <message>
         <source>Unable to save temporary file: %1</source>
@@ -869,11 +901,11 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation type="obsolete">Cancella</translation>
     </message>
     <message>
         <source>Create chat</source>
-        <translation>Crea una conversazione</translation>
+        <translation type="obsolete">Crea una conversazione</translation>
     </message>
     <message>
         <source>Search chat</source>
@@ -886,6 +918,10 @@
     <message>
         <source>Edit</source>
         <translation>Modifica</translation>
+    </message>
+    <message>
+        <source>Create group chat</source>
+        <translation>Crea un nuovo gruppo</translation>
     </message>
 </context>
 <context>
@@ -906,10 +942,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -919,11 +951,11 @@
     </message>
     <message>
         <source>Group name</source>
-        <translation>Nome del gruppo</translation>
+        <translation type="obsolete">Nome del gruppo</translation>
     </message>
     <message>
         <source>Please add member in the group:</source>
-        <translation>Aggiungi membri al gruppo:</translation>
+        <translation type="obsolete">Aggiungi membri al gruppo:</translation>
     </message>
     <message>
         <source>Users</source>
@@ -931,11 +963,11 @@
     </message>
     <message>
         <source>Create Group - %1</source>
-        <translation>Crea Gruppo - %1</translation>
+        <translation type="obsolete">Crea Gruppo - %1</translation>
     </message>
     <message>
         <source>Edit Group - %1</source>
-        <translation>Modifica Gruppo - %1</translation>
+        <translation type="obsolete">Modifica Gruppo - %1</translation>
     </message>
     <message>
         <source>Please select two or more member for the group.</source>
@@ -953,26 +985,46 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create Chat - %1</source>
-        <translation>Crea una conversazione - %1</translation>
+        <translation type="obsolete">Crea una conversazione - %1</translation>
     </message>
     <message>
         <source>Edit Chat - %1</source>
-        <translation>Modifica una conversazione - %1</translation>
+        <translation type="obsolete">Modifica una conversazione - %1</translation>
     </message>
     <message>
         <source>Chat name</source>
-        <translation>Nome della conversazione</translation>
+        <translation type="obsolete">Nome della conversazione</translation>
     </message>
     <message>
         <source>Please add member in the chat:</source>
-        <translation>Aggiungi membri nella conversazione:</translation>
+        <translation type="obsolete">Aggiungi membri nella conversazione:</translation>
     </message>
     <message>
         <source>There is a group with the same members: %1.</source>
-        <translation>Esiste già un gruppo con gli stessi membri: %1.</translation>
+        <translation type="obsolete">Esiste già un gruppo con gli stessi membri: %1.</translation>
     </message>
     <message>
         <source>Create new group</source>
+        <translation type="obsolete">Crea un nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>Leave this group</source>
+        <translation>Abbandona questo gruppo</translation>
+    </message>
+    <message>
+        <source>Group chat name</source>
+        <translation>Nome del gruppo</translation>
+    </message>
+    <message>
+        <source>Members</source>
+        <translation>Membri</translation>
+    </message>
+    <message>
+        <source>Edit group chat</source>
+        <translation>Modifica il gruppo</translation>
+    </message>
+    <message>
+        <source>Create group chat</source>
         <translation>Crea un nuovo gruppo</translation>
     </message>
 </context>
@@ -1147,7 +1199,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Delete group</source>
-        <translation>Cancella gruppo</translation>
+        <translation type="obsolete">Cancella gruppo</translation>
     </message>
     <message>
         <source>Enable notifications</source>
@@ -1593,7 +1645,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Delete this group</source>
-        <translation>Cancella questo gruppo</translation>
+        <translation type="obsolete">Cancella questo gruppo</translation>
     </message>
     <message>
         <source>Do you really want to delete group &apos;%1&apos;?</source>
@@ -1781,23 +1833,23 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Group chat will be deleted when all members goes offline.</source>
-        <translation>La conversazione di gruppo sarà cancellata non appena tutti i membri saranno disconnessi.</translation>
+        <translation type="obsolete">La conversazione di gruppo sarà cancellata non appena tutti i membri saranno disconnessi.</translation>
     </message>
     <message>
         <source>If you want a persistent chat please consider to make a Group instead.</source>
-        <translation>Se vuoi una conversazione persistente considera invece di creare un gruppo.</translation>
+        <translation type="obsolete">Se vuoi una conversazione persistente considera invece di creare un gruppo.</translation>
     </message>
     <message>
         <source>Do you wish to continue or create group?</source>
-        <translation>Vuoi continuare o creare un gruppo?</translation>
+        <translation type="obsolete">Vuoi continuare o creare un gruppo?</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Continua</translation>
+        <translation type="obsolete">Continua</translation>
     </message>
     <message>
         <source>Create Group</source>
-        <translation>Create Gruppo</translation>
+        <translation type="obsolete">Create Gruppo</translation>
     </message>
     <message>
         <source>Close button minimize to tray icon</source>
@@ -1937,11 +1989,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create chat</source>
-        <translation>Crea una conversazione</translation>
+        <translation type="obsolete">Crea una conversazione</translation>
     </message>
     <message>
         <source>Create group</source>
-        <translation>Crea gruppo</translation>
+        <translation type="obsolete">Crea gruppo</translation>
     </message>
     <message>
         <source>Add +1 user to anonymous usage statistics</source>
@@ -2069,7 +2121,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>You cannot leave %1.</source>
-        <translation>Non puoi abbandonare %1.</translation>
+        <translation type="obsolete">Non puoi abbandonare %1.</translation>
     </message>
     <message>
         <source>Activities</source>
@@ -2077,15 +2129,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>%1 is a your group. You cannot leave the chat until the group exists.</source>
-        <translation>%1 è un gruppo creato da te, non puoi lasciare la conversazione finchè esiste il gruppo.</translation>
+        <translation type="obsolete">%1 è un gruppo creato da te, non puoi lasciare la conversazione finchè esiste il gruppo.</translation>
     </message>
     <message>
         <source>You cannot delete %1.</source>
-        <translation>Non puoi cancellare %1.</translation>
+        <translation type="obsolete">Non puoi cancellare %1.</translation>
     </message>
     <message>
         <source>Unable to delete %1.</source>
-        <translation>Impossibile cancellare %1.</translation>
+        <translation type="obsolete">Impossibile cancellare %1.</translation>
     </message>
     <message>
         <source>Show the chat in compact view mode</source>
@@ -2225,11 +2277,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create new group</source>
-        <translation>Crea un nuovo gruppo</translation>
+        <translation type="obsolete">Crea un nuovo gruppo</translation>
     </message>
     <message>
         <source>Create group from chat</source>
-        <translation>Crea il gruppo dalla conversazione</translation>
+        <translation type="obsolete">Crea il gruppo dalla conversazione</translation>
     </message>
     <message>
         <source>Configure network...</source>
@@ -2277,7 +2329,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you want to delete chat with %1?</source>
-        <translation>Vuoi cancellare la conversazione con %1?</translation>
+        <translation type="obsolete">Vuoi cancellare la conversazione con %1?</translation>
     </message>
     <message>
         <source>Do you want to delete user %1?</source>
@@ -2289,7 +2341,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you want to delete group %1?</source>
-        <translation>Vuoi cancellare il gruppo %1?</translation>
+        <translation type="obsolete">Vuoi cancellare il gruppo %1?</translation>
     </message>
     <message>
         <source>%1 removed</source>
@@ -2298,6 +2350,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Search users</source>
         <translation>Cerca utenti</translation>
+    </message>
+    <message>
+        <source>Create group chat</source>
+        <translation>Crea un nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>Create new group chat</source>
+        <translation>Crea un nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>Do you want to leave the chat with %1?</source>
+        <translation>Vuoi abbandonare la conversazione con %1?</translation>
+    </message>
+    <message>
+        <source>Unable to leave the chat with %1.</source>
+        <translation>Impossibile abbandonare la conversazione con %1.</translation>
     </message>
 </context>
 <context>
@@ -2541,7 +2609,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Blocked hash</source>
-        <translation>Hash bloccato</translation>
+        <translation type="obsolete">Hash bloccato</translation>
     </message>
     <message>
         <source>Remove blocked chat</source>
@@ -2745,6 +2813,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>is unavailable</source>
         <translation>non è dispobibile</translation>
+    </message>
+    <message>
+        <source>%1: access denied.</source>
+        <translation>%1: accesso negato.</translation>
+    </message>
+    <message>
+        <source>Please insert the new folder name</source>
+        <translation>Inserisci il nome della nuova cartella da creare</translation>
+    </message>
+    <message>
+        <source>%1 already exists.</source>
+        <translation>%1 esiste già.</translation>
     </message>
 </context>
 <context>
@@ -3181,7 +3261,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>You cannot remove an user who is in group</source>
-        <translation>Non puoi cancellare un utente presente in un gruppo</translation>
+        <translation type="obsolete">Non puoi cancellare un utente presente in un gruppo</translation>
     </message>
     <message>
         <source>You cannot remove an user who is in group chat</source>

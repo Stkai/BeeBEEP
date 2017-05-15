@@ -652,32 +652,48 @@ void Core::addFolderToFileTransfer()
 
 }
 
-void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name )
+void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, bool create_folder )
 {
   if( user_id != ID_LOCAL_USER )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ShareBox sends request to user" << user_id << "for folder" << folder_name;
 #endif
-    Message m = Protocol::instance().shareBoxRequestPathList( folder_name );
+    Message m = Protocol::instance().shareBoxRequestPathList( folder_name, create_folder );
     Connection* c = connection( user_id );
     if( c && c->sendMessage( m ) )
       return;
 
     User u = UserManager::instance().findUser( user_id );
-    qWarning() << "Unable to send share box request to offline user" << u.path();
+    qWarning() << "Unable to send share box request to offline user" << qPrintable( u.path() );
     emit shareBoxUnavailable( u, folder_name );
   }
   else
-    buildShareBoxFileList( Settings::instance().localUser(), folder_name );
+    buildShareBoxFileList( Settings::instance().localUser(), folder_name, create_folder );
 }
 
-void Core::buildShareBoxFileList( const User& u, const QString& folder_name )
+void Core::buildShareBoxFileList( const User& u, const QString& folder_name, bool create_folder )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Sharebox builds file list in folder" << folder_name << "for user" << u.path();
+  qDebug() << "Sharebox builds file list in folder" << qPrintable( folder_name ) << "for user" << u.path();
 #endif
-  QString folder_path = QString( "%1/%2" ).arg( Settings::instance().shareBoxPath(), folder_name );
+  QString folder_path = QString( "%1%2%3" ).arg( Settings::instance().shareBoxPath() ).arg( QDir::separator() ).arg( folder_name );
+  if( create_folder )
+  {
+    QDir share_box_folder( Settings::instance().shareBoxPath() );
+    if( !share_box_folder.mkpath( folder_path ) )
+    {
+      qWarning() << "ShareBox is unable to create folder" << qPrintable( folder_path ) << "for user" << qPrintable( u.path() );
+      if( u.isLocal() )
+        emit shareBoxUnavailable( u, folder_name );
+      else
+        sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, true ) );
+      return;
+    }
+    else
+      qDebug() << "ShareBox creates folder" << qPrintable( folder_path ) << "for user" << qPrintable( u.path() );
+  }
+
   BuildFileList *bfl = new BuildFileList;
   bfl->init( folder_name, folder_path, u.id() );
   connect( bfl, SIGNAL( listCompleted() ), this, SLOT( sendShareBoxList() ) );
@@ -704,7 +720,7 @@ void Core::sendShareBoxList()
   bfl->deleteLater();
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Sharebox has found" << file_info_list.size() << "files in folder" << folder_name;
+  qDebug() << "Sharebox has found" << file_info_list.size() << "files in folder" << qPrintable( folder_name );
 #endif
 
   if( to_user_id != ID_LOCAL_USER )
@@ -714,7 +730,7 @@ void Core::sendShareBoxList()
 
     Message m;
     if( error_found )
-      m = Protocol::instance().refuseToShareBoxPath( folder_name );
+      m = Protocol::instance().refuseToShareBoxPath( folder_name, false );
     else
       m = Protocol::instance().acceptToShareBoxPath( folder_name, file_info_list, mp_fileTransfer->serverPort() );
 

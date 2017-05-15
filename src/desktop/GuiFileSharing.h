@@ -63,7 +63,7 @@ private slots:
   void raiseShareBoxView();
   void addToShare( const QString& );
   void removeFromShare( const QString& );
-  void onShareBoxRequest( VNumber, const QString& );
+  void onShareBoxRequest( VNumber, const QString&, bool );
   void onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
   void onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
 

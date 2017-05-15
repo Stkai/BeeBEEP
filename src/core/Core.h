@@ -94,7 +94,7 @@ public:
   void stopFileTransferServer();
   void addPathToShare( const QString& );
   void removePathFromShare( const QString& );
-  void sendShareBoxRequest( VNumber, const QString& );
+  void sendShareBoxRequest( VNumber, const QString&, bool create_folder );
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
   void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -253,7 +253,7 @@ protected:
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();
   bool sendFolder( const User&, const QFileInfo&, const QString& chat_private_id );
-  void buildShareBoxFileList( const User&, const QString& );
+  void buildShareBoxFileList( const User&, const QString&, bool create_folder );
 
 private:
   QList<Connection*> m_connections;

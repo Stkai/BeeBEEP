@@ -1099,7 +1099,7 @@ bool Protocol::fileCanBeShared( const QFileInfo& file_info )
 {
   if( !file_info.exists() )
   {
-    qWarning() << "Path" << file_info.absoluteFilePath() << "not exists and cannot be shared";
+    qWarning() << "Path" << qPrintable( file_info.absoluteFilePath() ) << "not exists and cannot be shared";
     return false;
   }
 
@@ -1111,19 +1111,19 @@ bool Protocol::fileCanBeShared( const QFileInfo& file_info )
 
   if( !file_info.isReadable() )
   {
-    qWarning() << "Path" << file_info.absoluteFilePath() << "is not readable and cannot be shared";
+    qWarning() << "Path" << qPrintable( file_info.absoluteFilePath() ) << "is not readable and cannot be shared";
     return false;
   }
 
   if( file_info.isSymLink() )
   {
-    qDebug() << "Path" << file_info.absoluteFilePath() << "is a symbolic link and cannot be shared";
+    qDebug() << "Path" << qPrintable( file_info.absoluteFilePath() ) << "is a symbolic link and cannot be shared";
     return false;
   }
 
   if( file_info.isHidden() )
   {
-    qDebug() << "Path" << file_info.absoluteFilePath() << "is hidden and cannot be shared";
+    qDebug() << "Path" << qPrintable( file_info.absoluteFilePath() ) << "is hidden and cannot be shared";
     return false;
   }
 
@@ -1322,26 +1322,32 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
   return file_info_list;
 }
 
-Message Protocol::shareBoxRequestPathList( const QString& folder_name )
+Message Protocol::shareBoxRequestPathList( const QString& folder_name, bool set_create_flag )
 {
   Message m( Message::ShareBox, ID_SHAREBOX_MESSAGE, "" );
   QStringList msg_data;
   msg_data << QString::number( 0 );
   msg_data << folder_name;
   m.setData( msg_data.join( DATA_FIELD_SEPARATOR ) );
-  m.addFlag( Message::Request );
+  if( set_create_flag )
+    m.addFlag( Message::Create );
+  else
+    m.addFlag( Message::Request );
   return m;
 }
 
-Message Protocol::refuseToShareBoxPath( const QString& folder_name )
+Message Protocol::refuseToShareBoxPath( const QString& folder_name, bool set_create_flag )
 {
   Message m( Message::ShareBox, ID_SHAREBOX_MESSAGE, "" );
   QStringList msg_data;
   msg_data << QString::number( 0 );
   msg_data << folder_name;
   m.setData( msg_data.join( DATA_FIELD_SEPARATOR ) );
-  m.addFlag( Message::Request );
   m.addFlag( Message::Refused );
+  if( set_create_flag )
+    m.addFlag( Message::Create );
+  else
+    m.addFlag( Message::Request );
   return m;
 }
 

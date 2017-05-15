@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>531</width>
-    <height>347</height>
+    <width>534</width>
+    <height>338</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,7 +78,7 @@
     <property name="verticalSpacing">
      <number>2</number>
     </property>
-    <item row="0" column="2">
+    <item row="0" column="3">
      <widget class="QLabel" name="mp_lMyBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -100,38 +100,45 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="GuiShareBoxFileInfoList" name="mp_myBox">
-      <property name="sortingEnabled">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="mp_pbMyUpdate">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../beebeep.qrc">
+        <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="flat">
        <bool>true</bool>
       </property>
-      <property name="allColumnsShowFocus">
-       <bool>true</bool>
-      </property>
-      <property name="columnCount">
-       <number>3</number>
-      </property>
-      <attribute name="headerStretchLastSection">
-       <bool>false</bool>
-      </attribute>
-      <column>
-       <property name="text">
-        <string notr="true">1</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string notr="true">2</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string notr="true">3</string>
-       </property>
-      </column>
      </widget>
     </item>
-    <item row="2" column="0" colspan="3">
+    <item row="2" column="0" colspan="4">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <spacer name="horizontalSpacer">
@@ -212,8 +219,39 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="mp_pbMyUpdate">
+    <item row="1" column="0" colspan="5">
+     <widget class="GuiShareBoxFileInfoList" name="mp_myBox">
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="allColumnsShowFocus">
+       <bool>true</bool>
+      </property>
+      <property name="columnCount">
+       <number>3</number>
+      </property>
+      <attribute name="headerStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string notr="true">1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string notr="true">2</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string notr="true">3</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="mp_pbMyCreateFolder">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -237,7 +275,7 @@
       </property>
       <property name="icon">
        <iconset resource="../beebeep.qrc">
-        <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
+        <normaloff>:/images/folder-add.png</normaloff>:/images/folder-add.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -324,7 +362,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item row="0" column="2">
      <widget class="QLabel" name="mp_lOutBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -346,7 +384,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="2">
+    <item row="1" column="0" colspan="3">
      <widget class="GuiShareBoxFileInfoList" name="mp_outBox">
       <property name="sortingEnabled">
        <bool>true</bool>
@@ -377,7 +415,7 @@
       </column>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
+    <item row="2" column="0" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QLabel" name="mp_lUsers">
@@ -426,6 +464,44 @@
       </item>
      </layout>
     </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="mp_pbOutCreateFolder">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../beebeep.qrc">
+        <normaloff>:/images/folder-add.png</normaloff>:/images/folder-add.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -439,9 +515,11 @@
  <tabstops>
   <tabstop>mp_pbSelectMyBox</tabstop>
   <tabstop>mp_pbMyUpdate</tabstop>
+  <tabstop>mp_pbMyCreateFolder</tabstop>
   <tabstop>mp_myBox</tabstop>
   <tabstop>mp_cbEnableMyBox</tabstop>
   <tabstop>mp_pbOutUpdate</tabstop>
+  <tabstop>mp_pbOutCreateFolder</tabstop>
   <tabstop>mp_outBox</tabstop>
   <tabstop>mp_comboUsers</tabstop>
  </tabstops>

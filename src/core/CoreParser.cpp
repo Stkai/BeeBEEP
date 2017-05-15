@@ -448,11 +448,14 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 
 void Core::parseShareBoxMessage( const User& u, const Message& m )
 {
+  QString folder_name = Protocol::instance().folderNameFromShareBoxMessage( m );
+
   if( !Settings::instance().enableFileTransfer() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file transfer disabled)";
 #endif
+    sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, m.hasFlag( Message::Create ) ) );
     return;
   }
 
@@ -461,10 +464,18 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file sharing disabled)";
 #endif
+    sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, m.hasFlag( Message::Create ) ) );
     return;
   }
 
-  QString folder_name = Protocol::instance().folderNameFromShareBoxMessage( m );
+  if( !Settings::instance().useShareBox() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(share box disabled)";
+#endif
+    sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, m.hasFlag( Message::Create ) ) );
+    return;
+  }
 
   if( m.hasFlag( Message::List ) )
   {
@@ -473,15 +484,17 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Request ) )
   {
-    if( !m.hasFlag( Message::Refused ) )
-    {
-      if( Settings::instance().useShareBox() )
-        buildShareBoxFileList( u, folder_name );
-      else
-        sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name ) );
-    }
-    else
+    if( m.hasFlag( Message::Refused ) )
       emit shareBoxUnavailable( u, folder_name );
+    else
+      buildShareBoxFileList( u, folder_name, false );
+  }
+  else if( m.hasFlag( Message::Create ) )
+  {
+    if( m.hasFlag( Message::Refused ) )
+      emit shareBoxUnavailable( u, folder_name );
+    else
+      buildShareBoxFileList( u, folder_name, true );
   }
   else
     qWarning() << "Invalid flag found in share box message from user" << qPrintable( u.path() );

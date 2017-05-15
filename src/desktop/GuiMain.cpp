@@ -3378,21 +3378,6 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
   Settings::instance().save();
 }
 
-void GuiMain::onShareBoxRequest( VNumber user_id, const QString& share_box_path )
-{
-  mp_core->sendShareBoxRequest( user_id, share_box_path );
-}
-
-void GuiMain::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
-{
-  mp_core->downloadFromShareBox( user_id, fi, to_path );
-}
-
-void GuiMain::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
-{
-  mp_core->uploadToShareBox( user_id, fi, to_path );
-}
-
 void GuiMain::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
   mp_fileTransfer->setProgress( peer_id, u, fi, bytes );

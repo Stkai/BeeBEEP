@@ -152,9 +152,6 @@ private slots:
   void onChatReadByUser( const Chat&, const User& );
   void saveGeometryAndState();
   void onChangeSettingOnExistingFile( QAction* );
-  void onShareBoxRequest( VNumber, const QString& );
-  void onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
-  void onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopImageAvailable( const User&, const QPixmap& );
   void onShareDesktopCloseEvent( VNumber );

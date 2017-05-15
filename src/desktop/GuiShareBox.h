@@ -39,7 +39,7 @@ public:
   void updateUser( const User& );
 
 signals:
-  void shareBoxRequest( VNumber, const QString& );
+  void shareBoxRequest( VNumber, const QString&, bool );
   void openUrlRequest( const QUrl& );
   void shareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
   void shareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
@@ -62,6 +62,9 @@ protected slots:
   void onShareBoxSelected( int );
 
   void selectMyShareBoxFolder();
+  void createFolderInMyBox();
+  void createFolderInOutBox();
+  void createFolderInBox( VNumber );
 
   void dropInMyBox( const QString& );
   void dropInOutBox( const QString& );
@@ -69,6 +72,7 @@ protected slots:
 protected:
   void updateMyBox( const QString&, const QList<FileInfo>& );
   void updateOutBox( const User&, const QString&, const QList<FileInfo>& );
+  bool isValidNewFolderName( QTreeWidget*, const QString& );
 
 private:
   QAction* mp_actUpdate;

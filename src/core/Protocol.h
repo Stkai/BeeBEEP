@@ -117,8 +117,8 @@ public:
   QString saveNetworkAddress( const NetworkAddress& ) const;
   NetworkAddress loadNetworkAddress( const QString& ) const;
 
-  Message shareBoxRequestPathList( const QString& );
-  Message refuseToShareBoxPath( const QString& );
+  Message shareBoxRequestPathList( const QString&, bool set_create_flag );
+  Message refuseToShareBoxPath( const QString&, bool set_create_flag );
   Message acceptToShareBoxPath( const QString&, const QList<FileInfo>&, int );
   QString folderNameFromShareBoxMessage( const Message& ) const;
   QList<FileInfo> messageToShareBoxFileList( const Message&, const QHostAddress& ) const;
