@@ -1253,6 +1253,7 @@ void Settings::save()
   sets->setValue( "SortUsersAscending", m_sortUsersAscending );
   sets->setValue( "ShowChatTextInModeRTL", m_showTextInModeRTL );
   sets->setValue( "PlayBuzzSound", m_playBuzzSound );
+  sets->setValue( "ShowChatsInOneWindow", m_showChatsInOneWindow );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

@@ -112,13 +112,7 @@ void GuiScreenShot::resizeEvent( QResizeEvent* )
 
 void GuiScreenShot::showUp()
 {
-  if( isMinimized() )
-    showNormal();
-
-  if( !isVisible() )
-    show();
-
-  raise();
+  Bee::showUp( this );
 }
 
 void GuiScreenShot::updateScreenShot()

@@ -224,23 +224,7 @@ void GuiFileSharing::raiseShareBoxView()
 
 void GuiFileSharing::showUp()
 {
-  bool on_top_flag_added = false;
-  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
-  {
-    Bee::setWindowStaysOnTop( this, true );
-    on_top_flag_added = true;
-  }
-
-  if( isMinimized() )
-    showNormal();
-
-  if( !isVisible() )
-    show();
-
-  raise();
-
-  if( on_top_flag_added )
-    Bee::setWindowStaysOnTop( this, false );
+  Bee::showUp( this );
 }
 
 void GuiFileSharing::onTickEvent( int )

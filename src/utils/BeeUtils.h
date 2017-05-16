@@ -78,7 +78,8 @@ namespace Bee
   QString stringListToTextString( const QStringList& );
   void removeContextHelpButton( QWidget* );
   inline bool isTimeToCheck( int ticks, int tick_for_check );
-
+  void showUp( QWidget* );
+  void raiseOnTop( QWidget* );
 }
 
 

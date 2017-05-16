@@ -116,13 +116,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
 
 void GuiLog::showUp()
 {
-  if( isMinimized() )
-    showNormal();
-
-  if( !isVisible() )
-    show();
-
-  raise();
+  Bee::showUp( this );
 
   static bool log_first_show = true;
   if( log_first_show )

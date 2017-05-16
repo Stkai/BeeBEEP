@@ -249,38 +249,12 @@ void GuiMain::checkWindowFlagsAndShow()
 
 void GuiMain::showUp()
 {
-  if( isMinimized() )
-    showNormal();
-
-  if( !isVisible() )
-    show();
-
-  raise();
+  Bee::showUp( this );
 }
 
 void GuiMain::raiseOnTop()
 {
-  bool on_top_flag_added = false;
-  if( !(windowFlags() & Qt::WindowStaysOnTopHint) )
-  {
-#if defined Q_OS_WIN && QT_VERSION < 0x050000
-    ::SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
-    Bee::setWindowStaysOnTop( this, true );
-#endif
-    on_top_flag_added = true;
-  }
-
-  showUp();
-
-  if( on_top_flag_added )
-  {
-#if defined Q_OS_WIN && QT_VERSION < 0x050000
-    ::SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
-    Bee::setWindowStaysOnTop( this, false );
-#endif
-  }
+  Bee::raiseOnTop( this );
 }
 
 void GuiMain::updateWindowTitle()
@@ -1458,21 +1432,22 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
     if( fl_chat->chatIsVisible() )
       return;
 
+    fl_chat->setMainIcon( true );
+    QApplication::alert( fl_chat, 0 );
+
     if( Settings::instance().raiseOnNewMessageArrived() )
     {
       fl_chat->raiseOnTop();
       show_message_in_tray = false;
     }
-
-    fl_chat->setMainIcon( true );
-    QApplication::alert( fl_chat, 0 );
   }
   else
   {
     if( Settings::instance().raiseOnNewMessageArrived() )
       raiseOnTop();
-    mp_actViewNewMessage->setEnabled( true );
   }
+
+  updateNewMessageAction();
 
   if( show_message_in_tray )
   {
@@ -3316,8 +3291,13 @@ void GuiMain::onTickEvent( int ticks )
   if( mp_core->hasFileTransferInProgress() )
     mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? QIcon( ":/images/file-transfer-progress.png" ) : QIcon( ":/images/file-transfer.png" ) );
 
-  if( mp_actViewNewMessage->isEnabled() )
-    QApplication::alert( this, 1000 );
+  if( ticks % 2 == 0 && mp_actViewNewMessage->isEnabled() )
+  {
+    Chat c = ChatManager::instance().firstChatWithUnreadMessages();
+    GuiFloatingChat* fl_chat = floatingChat( c.id() );
+    if( !fl_chat )
+      QApplication::alert( this, 1000 );
+  }
 }
 
 void GuiMain::onChatReadByUser( const Chat& c, const User& u )

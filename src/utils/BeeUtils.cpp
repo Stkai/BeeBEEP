@@ -754,3 +754,38 @@ void Bee::removeContextHelpButton( QWidget* w )
   w->setWindowFlags( w_flags );
 }
 
+void Bee::showUp( QWidget* w )
+{
+  if( w->isMinimized() )
+    w->showNormal();
+
+  if( !w->isVisible() )
+    w->show();
+
+  w->raise();
+}
+
+void Bee::raiseOnTop( QWidget* w )
+{
+  bool on_top_flag_added = false;
+  if( !(w->windowFlags() & Qt::WindowStaysOnTopHint) )
+  {
+#if defined Q_OS_WIN && QT_VERSION < 0x050000
+    ::SetWindowPos( (HWND)w->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+    Bee::setWindowStaysOnTop( w, true );
+#endif
+    on_top_flag_added = true;
+  }
+
+  Bee::showUp( w );
+
+  if( on_top_flag_added )
+  {
+#if defined Q_OS_WIN && QT_VERSION < 0x050000
+    ::SetWindowPos( (HWND)w->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+#else
+    Bee::setWindowStaysOnTop( w, false );
+#endif
+  }
+}
