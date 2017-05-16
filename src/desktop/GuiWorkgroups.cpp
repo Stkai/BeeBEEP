@@ -77,8 +77,14 @@ void GuiWorkgroups::loadWorkgroups()
 
 void GuiWorkgroups::saveWorkgroups()
 {
+  if( mp_cbAcceptOnlyWorkgroups->isChecked() != Settings::instance().acceptConnectionsOnlyFromWorkgroups() ||
+      !Bee::areStringListEqual( m_workgroups, Settings::instance().workgroups() ) )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "You have to restart your connection to apply changes." ), tr( "Ok" ) );
+  }
   Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptOnlyWorkgroups->isChecked() );
   Settings::instance().setWorkgroups( m_workgroups );
+  Settings::instance().save();
   accept();
 }
 

@@ -55,10 +55,7 @@ void GuiGroupItem::init( VNumber item_id, bool is_group )
 
 bool GuiGroupItem::operator<( const GuiGroupItem& item ) const
 {
-  QString user_item_name = text( 0 ).toLower();
-  QString other_name = item.text( 0 ).toLower();
-
-  return user_item_name > other_name; // correct order
+  return text( 0 ).toLower() < item.text( 0 ).toLower();
 }
 
 void GuiGroupItem::setGroupName( const QString& group_name, int unread_messages )

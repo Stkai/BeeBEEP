@@ -115,7 +115,7 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
   }
   else
   {
-    qWarning() << "Encryption handshake error. Too many public key arrived";
+    qWarning() << "Encryption handshake error. Too many public key arrived from" << qPrintable( m_networkAddress.toString() );;
     return false;
   }
 
@@ -332,7 +332,9 @@ void ConnectionSocket::sendQuestionHello()
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket has sent question HELLO to" << qPrintable( m_networkAddress.toString() );
+#endif
     m_isHelloSent = true;
   }
   else
@@ -350,7 +352,9 @@ void ConnectionSocket::sendAnswerHello()
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey2 ) ) )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket has sent answer HELLO to" << qPrintable( m_networkAddress.toString() );
+#endif
     m_isHelloSent = true;
   }
   else
@@ -381,7 +385,9 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   {
     if( !Protocol::instance().acceptConnectionFromWorkgroup( m ) )
     {
-      qWarning() << "ConnectionSocket drops user of external workgroup from" << qPrintable( m_networkAddress.toString() );
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "ConnectionSocket drops user of external workgroup from" << qPrintable( m_networkAddress.toString() );
+#endif
       emit abortRequest();
       return;
     }
@@ -398,7 +404,9 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   if( peer_datastream_version > 0 )
   {
     m_datastreamVersion = qMax( 0, (int)qMin( peer_datastream_version, Protocol::instance().datastreamMaxVersion() ) );
+#ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket uses handshaked datastream version" << m_datastreamVersion;
+#endif
   }
   else
     m_datastreamVersion = 0;

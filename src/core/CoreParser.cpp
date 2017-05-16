@@ -433,12 +433,15 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 #endif
     foreach( UserRecord ur, user_record_list )
     {
-      if( Hive::instance().addNetworkAddress( ur.networkAddress() ) && !hasConnection( ur.networkAddress().hostAddress(), ur.networkAddress().hostPort() ) )
+      if( !UserManager::instance().findUserByNetworkAddress( ur.networkAddress() ).isValid() )
       {
+        if( Hive::instance().addNetworkAddress( ur.networkAddress() ) )
+        {
 #ifdef BEEBEEP_DEBUG
-        qDebug() << "Hive message contains this path" << qPrintable( ur.networkAddress().toString() ) << "and it is added to contact list";
+          qDebug() << "Hive message contains this path" << qPrintable( ur.networkAddress().toString() ) << "and it is added to contact list";
 #endif
-        mp_broadcaster->setNewBroadcastRequested( true );
+          mp_broadcaster->setNewBroadcastRequested( true );
+        }
       }
     }
   }

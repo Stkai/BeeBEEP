@@ -400,7 +400,7 @@ QBrush Bee::defaultTextBrush()
 
 QBrush Bee::defaultBackgroundBrush()
 {
-  return qApp->palette().base();
+  return QBrush( Qt::transparent );
 }
 
 QBrush Bee::defaultHighlightedTextBrush()
@@ -788,4 +788,17 @@ void Bee::raiseOnTop( QWidget* w )
     Bee::setWindowStaysOnTop( w, false );
 #endif
   }
+}
+
+bool Bee::areStringListEqual( const QStringList& sl1, const QStringList& sl2, Qt::CaseSensitivity cs )
+{
+  if( sl1.size() != sl2.size() )
+    return false;
+
+  foreach( QString s, sl1 )
+  {
+    if( !sl2.contains( s, cs ) )
+      return false;
+  }
+  return true;
 }

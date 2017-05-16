@@ -100,12 +100,14 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiChatList.ui \
   desktop/GuiCreateGroup.ui \
   desktop/GuiEditVCard.ui \
+  desktop/GuiGroupList.ui \
   desktop/GuiHome.ui \
   desktop/GuiLanguage.ui \
   desktop/GuiNetwork.ui \
   desktop/GuiPluginManager.ui \
   desktop/GuiRefusedChat.ui \
   desktop/GuiSavedChat.ui \
+  desktop/GuiSavedChatList.ui \
   desktop/GuiShareBox.ui \
   desktop/GuiShareLocal.ui \
   desktop/GuiShareNetwork.ui \

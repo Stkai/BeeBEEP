@@ -29,28 +29,38 @@
 
 
 GuiSavedChatList::GuiSavedChatList( QWidget* parent )
-  : QTreeWidget( parent ), m_savedChatSelected( "" )
+  : QWidget( parent )
 {
   setObjectName( "GuiSavedChatList" );
+  setupUi( this );
 
-  setColumnCount( 1 );
-  header()->hide();
-  setRootIsDecorated( false );
-  setSortingEnabled( true );
+  mp_twSavedChatList->setColumnCount( 1 );
+  mp_twSavedChatList->setRootIsDecorated( false );
+  mp_twSavedChatList->setSortingEnabled( true );
   QString w_stylesheet = "background: white url(:/images/saved-chat-list.png);"
                         "background-repeat: no-repeat;"
                         "background-position: bottom center;";
-  setStyleSheet( w_stylesheet );
+  mp_twSavedChatList->setStyleSheet( w_stylesheet );
 
-  setContextMenuPolicy( Qt::CustomContextMenu );
-  setMouseTracking( true );
+  mp_twSavedChatList->setContextMenuPolicy( Qt::CustomContextMenu );
+  mp_twSavedChatList->setMouseTracking( true );
+  mp_twSavedChatList->setIconSize( Settings::instance().avatarIconSize() );
+  mp_twSavedChatList->setHeaderHidden( true );
 
+  m_savedChatSelected = "";
   m_blockShowChatRequest = false;
+  m_filter = "";
+
+#if QT_VERSION >= 0x040700
+  mp_leFilter->setPlaceholderText( tr( "Search saved chat" ) );
+#endif
 
   mp_menuContext = new QMenu( parent );
 
-  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
-  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
+  connect( mp_twSavedChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
+  connect( mp_twSavedChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
+  connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
+  connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
 }
 
 void GuiSavedChatList::savedChatClicked( QTreeWidgetItem* item, int )
@@ -71,7 +81,7 @@ void GuiSavedChatList::savedChatClicked( QTreeWidgetItem* item, int )
 
 void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
 {
-  QTreeWidgetItem* item = itemAt( p );
+  QTreeWidgetItem* item = mp_twSavedChatList->itemAt( p );
   mp_menuContext->clear();
 
   if( !item )
@@ -90,7 +100,7 @@ void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
     mp_menuContext->addSeparator();
     mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
     m_blockShowChatRequest = true;
-    clearSelection();
+    mp_twSavedChatList->clearSelection();
   }
 
   mp_menuContext->exec( QCursor::pos() );
@@ -113,32 +123,60 @@ void GuiSavedChatList::linkSavedChatSelected()
 
 void GuiSavedChatList::updateSavedChats()
 {
-  setIconSize( Settings::instance().avatarIconSize() );
+  mp_twSavedChatList->setIconSize( Settings::instance().avatarIconSize() );
 
-  if( topLevelItemCount() > 0 )
-    clear();
+  if( mp_twSavedChatList->topLevelItemCount() > 0 )
+    mp_twSavedChatList->clear();
 
   if( ChatManager::instance().constHistoryMap().isEmpty() )
     return;
 
   GuiSavedChatItem *item;
+  QString saved_chat_name;
+  bool saved_chat_is_default = false;
   QMap<QString, QString>::const_iterator it = ChatManager::instance().constHistoryMap().constBegin();
   while( it !=  ChatManager::instance().constHistoryMap().constEnd() )
   {
-    item = new GuiSavedChatItem( this );
+    saved_chat_is_default = it.key() == Settings::instance().defaultChatName();
+
+    saved_chat_name = saved_chat_is_default ? QString( " %1" ).arg( GuiChatItem::defaultChatName() ) : it.key();
+
+    if( !m_filter.isEmpty() )
+    {
+      if( !saved_chat_name.contains( m_filter, Qt::CaseInsensitive ) )
+      {
+        ++it;
+        continue;
+      }
+    }
+
+    item = new GuiSavedChatItem( mp_twSavedChatList );
     item->setChatName( it.key() );
     item->setIcon( 0, QIcon( ":/images/saved-chat.png" ) );
     QFont f = this->font();
     f.setItalic( true );
-    if( it.key() == Settings::instance().defaultChatName() )
-    {
-      item->setText( 0, GuiChatItem::defaultChatName() );
-      f.setBold( true );
-    }
-    else
-      item->setText( 0, it.key() );
+    f.setBold( saved_chat_is_default );
+    item->setText( 0, saved_chat_name );
     item->setFont( 0, f );
-    item->setToolTip( 0, QObject::tr( "Click to view chat history: %1" ).arg( item->text( 0 ) ) );
+    item->setToolTip( 0, tr( "Click to view saved chat with %1" ).arg( saved_chat_name ) );
     ++it;
   }
+
+  mp_twSavedChatList->sortItems( 0, Qt::AscendingOrder );
+}
+
+void GuiSavedChatList::filterText( const QString& txt )
+{
+  QString new_filter = txt.trimmed().toLower();
+  if( m_filter == new_filter )
+    return;
+
+  m_filter = new_filter;
+  updateSavedChats();
+}
+
+void GuiSavedChatList::clearFilter()
+{
+  mp_leFilter->setText( "" );
+  mp_leFilter->setFocus();
 }

@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiSavedChatItem.h"
-#include "BeeUtils.h"
+#include "GuiChatItem.h"
 
 
 GuiSavedChatItem::GuiSavedChatItem( QTreeWidget* parent )
@@ -32,8 +32,5 @@ GuiSavedChatItem::GuiSavedChatItem( QTreeWidget* parent )
 
 bool GuiSavedChatItem::operator<( const QTreeWidgetItem& item ) const
 {
-  QString user_item_name = data( 0, GuiSavedChatItem::ChatName ).toString().toLower();
-  QString other_name = item.data( 0, GuiSavedChatItem::ChatName ).toString().toLower();
-
-  return user_item_name > other_name; // correct order
+  return text( 0 ).toLower() < item.text( 0 ).toLower();
 }

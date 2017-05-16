@@ -1097,6 +1097,10 @@ Inserisci un nome differente.</translation>
         <source>Edit group chat</source>
         <translation>Modifica il gruppo</translation>
     </message>
+    <message>
+        <source>Search group</source>
+        <translation>Cerca un gruppo</translation>
+    </message>
 </context>
 <context>
     <name>GuiHome</name>
@@ -2468,6 +2472,14 @@ Inserisci un nome differente.</translation>
         <source>Please select an item</source>
         <translation>Seleziona un elemento</translation>
     </message>
+    <message>
+        <source>Search saved chat</source>
+        <translation>Cerca una conversazione salvata</translation>
+    </message>
+    <message>
+        <source>Click to view saved chat with %1</source>
+        <translation>Click per vedere la conversazione salvata con %1</translation>
+    </message>
 </context>
 <context>
     <name>GuiScreenShot</name>
@@ -3214,6 +3226,14 @@ Inserisci un nome differente.</translation>
         <source>This workgroup is already in list.</source>
         <translation>Questo gruppo di lavoro è già presente nella lista.</translation>
     </message>
+    <message>
+        <source>You have to restart your connection to apply changes.</source>
+        <translation>Devi disconnetterti e poi connetterti di nuovo per vedere le modifiche.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
 </context>
 <context>
     <name>GuiWorkgroupsDialog</name>
@@ -3278,10 +3298,6 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Click to send message to group: %1</source>
         <translation>Click per inviare un messaggio al gruppo: %1</translation>
-    </message>
-    <message>
-        <source>Click to view chat history: %1</source>
-        <translation>Click per vedere i messaggi salvati: %1</translation>
     </message>
     <message>
         <source>Click to open chat with all local users</source>

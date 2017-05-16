@@ -25,9 +25,10 @@
 #define BEEBEEP_GUISAVEDCHATLIST_H
 
 #include "GuiSavedChatItem.h"
+#include "ui_GuiSavedChatList.h"
 
 
-class GuiSavedChatList : public QTreeWidget
+class GuiSavedChatList : public QWidget, private Ui::GuiSavedChatListWidget
 {
   Q_OBJECT
 
@@ -48,11 +49,14 @@ protected slots:
   void showSavedChatSelected();
   void removeSavedChatSelected();
   void linkSavedChatSelected();
+  void filterText( const QString& );
+  void clearFilter();
 
 private:
   QString m_savedChatSelected;
   QMenu* mp_menuContext;
   bool m_blockShowChatRequest;
+  QString m_filter;
 
 };
 

@@ -348,7 +348,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     if( c->protoVersion() > 1 )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Sending my VCard to" << u.path();
+      qDebug() << "Sending my VCard to" << qPrintable( u.path() );
 #endif
       c->sendMessage( Protocol::instance().localVCardMessage() );
     }

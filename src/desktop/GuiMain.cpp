@@ -433,7 +433,12 @@ void GuiMain::showNextChat()
 #endif
   Chat c = ChatManager::instance().firstChatWithUnreadMessages();
   if( c.isValid() )
+  {
     showChat( c.id() );
+    GuiFloatingChat* fl_chat = floatingChat( c.id() );
+    if( fl_chat && !fl_chat->isActiveWindow() )
+      QApplication::setActiveWindow( fl_chat );
+  }
   else
     showMessage( tr( "No new message available" ), 5000 );
 }
@@ -1011,7 +1016,7 @@ void GuiMain::createMenus()
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
   mp_menuTrayIcon->addSeparator();
-  mp_menuTrayIcon->addMenu( mp_menuNetworkStatus );
+  mp_menuTrayIcon->addAction( mp_actViewNewMessage );
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this, SLOT( forceShutdown() ) );
 
@@ -2141,21 +2146,12 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 
   if( ar == QSystemTrayIcon::Trigger )
   {
-    if( mp_menuTrayIcon->isVisible() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "TrayIcon is activated with trigger click and menu will be hided";
-#endif
-      mp_menuTrayIcon->hide();
-      return;
-    }
-
     if( !isActiveWindow() || isMinimized() )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "TrayIcon is activated with trigger click and main window will be showed";
 #endif
-      trayMessageClicked();
+      QTimer::singleShot( 0, this, SLOT( raiseOnTop() ) );
     }
     else
     {
@@ -2170,6 +2166,8 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "TrayIcon is activated with unknown click";
 #endif
+    if( !mp_menuTrayIcon->isVisible() )
+      mp_menuTrayIcon->popup( QCursor::pos() );
   }
 #endif
 }

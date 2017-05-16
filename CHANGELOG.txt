@@ -15,7 +15,7 @@ BeeBEEP 4.0.0
 - Users can be also recognized by their hash
 - Change local user option added in Settings/OnStart menu
 - Message are now sent with UTC timestamp and converted to local time when received
-- Fixed the save of dictionary selected
+- Fixed save of the dictionary selected
 
 BeeBEEP 3.0.9
 - The emoticon icon is now showed in detached chat (bug fixed)

@@ -80,6 +80,7 @@ namespace Bee
   inline bool isTimeToCheck( int ticks, int tick_for_check );
   void showUp( QWidget* );
   void raiseOnTop( QWidget* );
+  bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
 }
 
 

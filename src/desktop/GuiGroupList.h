@@ -25,9 +25,10 @@
 #define BEEBEEP_GUIGROUPLIST_H
 
 #include "GuiGroupItem.h"
+#include "ui_GuiGroupList.h"
 
 
-class GuiGroupList : public QTreeWidget
+class GuiGroupList : public QWidget, private Ui::GuiGroupListWidget
 {
   Q_OBJECT
 
@@ -51,6 +52,8 @@ protected slots:
   void editGroupSelected();
   void enableGroupNotification();
   void disableGroupNotification();
+  void filterText( const QString& );
+  void clearFilter();
 
 private:
   GuiGroupItem* itemFromId( VNumber );
@@ -66,6 +69,8 @@ private:
   VNumber m_selectedGroupId;
   VNumber m_groupChatOpened;
   bool m_blockShowChatRequest;
+
+  QString m_filter;
 
 };
 

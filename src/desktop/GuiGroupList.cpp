@@ -29,27 +29,35 @@
 
 
 GuiGroupList::GuiGroupList( QWidget* parent )
-  : QTreeWidget( parent )
+  : QWidget( parent )
 {
   setObjectName( "GuiGroupList" );
+  setupUi( this );
 
-  setColumnCount( 1 );
-  header()->hide();
-  setRootIsDecorated( true );
-  setSortingEnabled( true );
+  mp_twGroupList->setColumnCount( 1 );
+  mp_twGroupList->setRootIsDecorated( true );
+  mp_twGroupList->setSortingEnabled( true );
   QString w_stylesheet = "background: white url(:/images/group-list.png);"
                         "background-repeat: no-repeat;"
                         "background-position: bottom center;";
-  setStyleSheet( w_stylesheet );
+  mp_twGroupList->setStyleSheet( w_stylesheet );
 
-  setContextMenuPolicy( Qt::CustomContextMenu );
-  setMouseTracking( true );
+  mp_twGroupList->setContextMenuPolicy( Qt::CustomContextMenu );
+  mp_twGroupList->setMouseTracking( true );
+  mp_twGroupList->setSortingEnabled( true );
+  mp_twGroupList->setIconSize( Settings::instance().avatarIconSize() );
+  mp_twGroupList->setHeaderHidden( true );
+
+#if QT_VERSION >= 0x040700
+  mp_leFilter->setPlaceholderText( tr( "Search group" ) );
+#endif
 
   mp_contextMenu = new QMenu( parent );
 
   m_selectedGroupId = ID_INVALID;
   m_groupChatOpened = ID_INVALID;
   m_blockShowChatRequest = false;
+  m_filter = "";
 
   mp_actCreateGroup = new QAction( QIcon( ":/images/group-add.png" ), tr( "Create new group chat" ), this );
   connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SIGNAL( createGroupRequest() ) );
@@ -66,31 +74,41 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   mp_actDisableGroupNotification = new QAction( QIcon( ":/images/notification-enabled.png" ), tr( "Disable notifications" ), this );
   connect( mp_actDisableGroupNotification, SIGNAL( triggered() ), this, SLOT( disableGroupNotification() ) );
 
-  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
-  connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
+  connect( mp_twGroupList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
+  connect( mp_twGroupList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
+  connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
+  connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
 }
 
 void GuiGroupList::updateGroups()
 {
-  setIconSize( Settings::instance().avatarIconSize() );
-  if( topLevelItemCount() > 0 )
-    clear();
+  mp_twGroupList->setIconSize( Settings::instance().avatarIconSize() );
+  if( mp_twGroupList->topLevelItemCount() > 0 )
+    mp_twGroupList->clear();
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
     if( c.isGroup() )
     {
-      GuiGroupItem* group_item = new GuiGroupItem( this );
+      if( !m_filter.isEmpty() )
+      {
+        if( !c.name().contains( m_filter, Qt::CaseInsensitive ) )
+          continue;
+      }
+
+      GuiGroupItem* group_item = new GuiGroupItem( mp_twGroupList );
       group_item->init( c.id(), true );
       group_item->updateChat( c );
     }
   }
+
+  mp_twGroupList->sortItems( 0, Qt::AscendingOrder );
 }
 
 void GuiGroupList::updateUser( const User& u )
 {
   GuiGroupItem* item;
-  QTreeWidgetItemIterator it( this );
+  QTreeWidgetItemIterator it( mp_twGroupList );
   while( *it )
   {
     item = (GuiGroupItem*)(*it);
@@ -98,7 +116,7 @@ void GuiGroupList::updateUser( const User& u )
       item->updateUser( u );
     ++it;
   }
-  sortItems( 0, Qt::AscendingOrder );
+  mp_twGroupList->sortItems( 0, Qt::AscendingOrder );
 }
 
 void GuiGroupList::updateChat( const Chat& c )
@@ -106,17 +124,17 @@ void GuiGroupList::updateChat( const Chat& c )
   GuiGroupItem* group_item = itemFromId( c.id() );
   if( !group_item )
   {
-    group_item = new GuiGroupItem( this );
+    group_item = new GuiGroupItem( mp_twGroupList );
     group_item->init( c.id(), true );
   }
   group_item->updateChat( c );
-  sortItems( 0, Qt::AscendingOrder );
+  mp_twGroupList->sortItems( 0, Qt::AscendingOrder );
 }
 
 GuiGroupItem* GuiGroupList::itemFromId( VNumber item_id )
 {
   GuiGroupItem* item;
-  QTreeWidgetItemIterator it( this );
+  QTreeWidgetItemIterator it( mp_twGroupList );
   while( *it )
   {
     item = (GuiGroupItem*)(*it);
@@ -145,7 +163,7 @@ void GuiGroupList::checkItemClicked( QTreeWidgetItem* item, int )
 
 void GuiGroupList::showGroupMenu( const QPoint& p )
 {
-  QTreeWidgetItem* item = itemAt( p );
+  QTreeWidgetItem* item = mp_twGroupList->itemAt( p );
   mp_contextMenu->clear();
 
   if( !item )
@@ -186,14 +204,14 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
     emit showVCardRequest( group_item->itemId() );
   }
 
-  clearSelection();
+  mp_twGroupList->clearSelection();
 }
 
 void GuiGroupList::openGroupChatSelected()
 {
   if( m_selectedGroupId != ID_INVALID )
   {
-    clearSelection();
+    mp_twGroupList->clearSelection();
     emit openChatForGroupRequest( m_selectedGroupId );
     m_selectedGroupId = ID_INVALID;
   }
@@ -238,4 +256,20 @@ void GuiGroupList::disableGroupNotification()
     Settings::instance().setNotificationEnabledForGroup( c.privateId(), false );
     m_selectedGroupId = ID_INVALID;
   }
+}
+
+void GuiGroupList::filterText( const QString& txt )
+{
+  QString new_filter = txt.trimmed().toLower();
+  if( m_filter == new_filter )
+    return;
+
+  m_filter = new_filter;
+  updateGroups();
+}
+
+void GuiGroupList::clearFilter()
+{
+  mp_leFilter->setText( "" );
+  mp_leFilter->setFocus();
 }

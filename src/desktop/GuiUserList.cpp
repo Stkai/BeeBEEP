@@ -45,13 +45,14 @@ GuiUserList::GuiUserList( QWidget* parent )
                         "background-repeat: no-repeat;"
                         "background-position: bottom center;";
   mp_twUsers->setStyleSheet( w_stylesheet );
+  mp_twUsers->setMouseTracking( true );
+  mp_twUsers->setHeaderHidden( true );
 
   m_filter = "";
   m_blockShowChatRequest = false;
 #if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "Search user" ) );
 #endif
-  mp_twUsers->setHeaderHidden( true );
   resetList();
 
   connect( mp_twUsers, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
@@ -252,6 +253,7 @@ void GuiUserList::filterText( const QString& txt )
 void GuiUserList::clearFilter()
 {
   mp_leFilter->setText( "" );
+  mp_leFilter->setFocus();
 }
 
 void GuiUserList::showMenuSettings()

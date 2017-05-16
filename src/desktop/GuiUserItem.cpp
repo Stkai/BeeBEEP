@@ -175,8 +175,8 @@ void GuiUserItem::showUserStatus()
 
   if( userId() == ID_LOCAL_USER )
     setBackground( 0, Bee::defaultBackgroundBrush() );
-  else if( !Settings::instance().showUserPhoto() )
-    setBackground( 0, Bee::defaultBackgroundBrush() );
+  //else if( !Settings::instance().showUserPhoto() )
+  //  setBackground( 0, Bee::defaultBackgroundBrush() );
   else if( Settings::instance().showUserStatusBackgroundColor() )
     setBackground( 0, Bee::userStatusBackgroundBrush( user_status ) );
   else

@@ -35,7 +35,6 @@ GuiChatList::GuiChatList( QWidget* parent )
   setupUi( this );
 
   mp_twChatList->setColumnCount( 1 );
-  mp_twChatList->header()->hide();
   mp_twChatList->setRootIsDecorated( false );
   mp_twChatList->setSortingEnabled( true );
   mp_twChatList->setIconSize( Settings::instance().avatarIconSize() );
@@ -226,4 +225,5 @@ void GuiChatList::filterText( const QString& txt )
 void GuiChatList::clearFilter()
 {
   mp_leFilter->setText( "" );
+  mp_leFilter->setFocus();
 }
