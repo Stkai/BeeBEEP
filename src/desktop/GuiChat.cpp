@@ -85,7 +85,7 @@ GuiChat::GuiChat( QWidget *parent )
   setChatFontColor( Settings::instance().chatFontColor() );
 
   m_chatId = ID_DEFAULT_CHAT;
-  m_lastMessageUserId = 0;
+  m_lastMessageUserId = ID_SYSTEM_MESSAGE;
   m_lastTextFound = "";
 
   mp_menuContext = new QMenu( this );
@@ -162,10 +162,25 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 
   bool local_user_is_member = c.hasUser( Settings::instance().localUser().id() );
   bool chat_is_empty = c.isEmpty();
+  bool can_send_files = false;
+  if( connected_users > 0 )
+  {
+    UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+    foreach( User u, chat_members.toList() )
+    {
+      if( u.isLocal() )
+        continue;
+      if( u.isStatusConnected() )
+      {
+        can_send_files = true;
+        break;
+      }
+    }
+  }
 
   mp_actClear->setDisabled( chat_is_empty );
-  mp_actSendFile->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && connected_users > 0 );
-  mp_actSendFolder->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && connected_users > 0 );
+  mp_actSendFile->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
+  mp_actSendFolder->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
 
   if( !is_connected )
   {
@@ -336,24 +351,27 @@ void GuiChat::checkAnchorClicked( const QUrl& url )
   emit openUrl( url );
 }
 
-QString GuiChat::chatMessageToText( const User& u, const ChatMessage& cm )
+QString GuiChat::chatMessageToText( const ChatMessage& cm )
 {
   QString s = "";
 
   if( !messageCanBeShowed( cm ) )
     return s;
 
-  if( cm.isFromSystem() )
+  if( !cm.isFromSystem() )
   {
-    s = GuiChatMessage::formatSystemMessage( cm, Settings::instance().chatShowMessageTimestamp(), false );
-    m_lastMessageUserId = 0;
+    User u = UserManager::instance().findUser( cm.userId() );
+    if( !u.isValid() )
+    {
+      qWarning() << "User" << cm.userId() << "not found for message:" << cm.message();
+      return "";
+    }
+    s = GuiChatMessage::formatMessage( u, cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false, false );
   }
   else
-  {
-    s = GuiChatMessage::formatMessage( u, cm, Settings::instance().showMessagesGroupByUser() ? m_lastMessageUserId : 0, Settings::instance().chatShowMessageTimestamp(), false );
-    m_lastMessageUserId = cm.userId();
-  }
+    s = GuiChatMessage::formatSystemMessage( cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false );
 
+  m_lastMessageUserId = cm.userId();
   return s;
 }
 
@@ -401,29 +419,35 @@ bool GuiChat::setChat( const Chat& c )
       html_text += ChatManager::instance().chatSavedText( c.name() );
 
     if( !html_text.isEmpty() )
-      html_text.append( "<br />" );
+      html_text += QLatin1String( "<br />" );
   }
 
   int num_lines = c.messages().size();
   bool max_lines_message_written = false;
-  m_lastMessageUserId = 0;
-  UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+  m_lastMessageUserId = ID_SYSTEM_MESSAGE;
 
   foreach( ChatMessage cm, c.messages() )
   {
     num_lines--;
 
-    if( Settings::instance().chatMaxMessagesToShow() && num_lines > Settings::instance().chatMessagesToShow() )
+    if( Settings::instance().chatMaxMessagesToShow() && num_lines >= Settings::instance().chatMessagesToShow() )
     {
       if( !max_lines_message_written )
       {
-        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=gray><i>... %1 ...</i></font><br /><br />" ).arg( tr( "last %1 messages" ).arg( Settings::instance().chatMessagesToShow() ) );
+        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=gray><i>... %1 ...</i></font><br />" ).arg( tr( "only the last %1 messages are shown" ).arg( Settings::instance().chatMessagesToShow() ) );
         max_lines_message_written = true;
       }
       continue;
     }
     else
-      html_text += chatMessageToText( chat_members.find( cm.userId() ), cm );
+    {
+      if( max_lines_message_written )
+      {
+        m_lastMessageUserId = cm.isFromSystem() ? ID_LOCAL_USER : ID_SYSTEM_MESSAGE;
+        max_lines_message_written = false;
+      }
+      html_text += chatMessageToText( cm );
+    }
   }
 
 #ifdef BEEBEEP_DEBUG
@@ -487,7 +511,7 @@ void GuiChat::ensureLastMessageVisible()
     mp_teChat->ensureCursorVisible();
 }
 
-bool GuiChat::appendChatMessage( const Chat& c, const User& u, const ChatMessage& cm )
+bool GuiChat::appendChatMessage( const Chat& c, const ChatMessage& cm )
 {
   if( m_chatId != c.id() )
   {
@@ -500,15 +524,10 @@ bool GuiChat::appendChatMessage( const Chat& c, const User& u, const ChatMessage
     qWarning() << "Invalid chat" << m_chatId << "found in GuiChat::appendChatMessage(...)";
     return false;
   }
-  if( !u.isValid() )
-  {
-    qWarning() << "Invalid user" << cm.userId() << "found in GuiChat::appendChatMessage(...)";
-    return false;
-  }
 
   bool show_timestamp_last_message = !cm.isFromLocalUser() && !cm.isFromSystem();
   mp_actClear->setDisabled( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) );
-  QString text_message = chatMessageToText( u, cm );
+  QString text_message = chatMessageToText( cm );
 
   if( !text_message.isEmpty() )
   {

@@ -168,7 +168,7 @@ void Settings::createApplicationUuid()
   {
     int uuid_days_life = m_applicationUuidCreationDate.daysTo( QDate::currentDate() );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Application uuid is created" << uuid_days_life << "days ago...";
+    qDebug() << "Application uuid is created" << uuid_days_life << "days ago";
 #endif
     if( uuid_days_life > 31 )
     {

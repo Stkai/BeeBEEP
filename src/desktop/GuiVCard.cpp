@@ -57,7 +57,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
                                            : u.accountPath() );
   m_userColor = u.color();
 
-  QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? u.vCard().fullName() : u.name() );
+  QString name_txt = QString( "<b>%1</b>" ).arg( u.vCard().hasFullName() ? QString( "%1 (%2)" ).arg( u.vCard().fullName(), u.name() ) : u.name() );
   mp_lName->setText( QString( "<font color=""%1"">%2</font>" ).arg( u.color(), name_txt ) );
 
   mp_lStatusDescription->setText( u.statusDescription().isEmpty() ? QString( "" ) : QString( "<i>%1</i>" ).arg( u.statusDescription() ) );

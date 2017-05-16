@@ -441,10 +441,9 @@ void GuiFloatingChat::setChatReadByUser( const Chat& c, const User& u )
 
 void GuiFloatingChat::showChatMessage( const Chat& c, const ChatMessage& cm )
 {
-  User u = UserManager::instance().findUser( cm.userId() );
-  if( mp_chat->appendChatMessage( c, u, cm ) )
+  if( mp_chat->appendChatMessage( c, cm ) )
   {
-    if( cm.isFromLocalUser() && !cm.isFromSystem() )
+    if( cm.isFromLocalUser() )
       updateChatMembers( c );
   }
 }

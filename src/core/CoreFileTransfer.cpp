@@ -181,7 +181,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
       file_url.setScheme( QLatin1String( "beeshowfileinfolder" ) );
       sys_msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
-      sys_msg += QString( "<br />" );
+      //sys_msg += QString( "<br />" );
     }
   }
 

@@ -35,8 +35,8 @@ class GuiChatMessage
 public:
   static QString datetimestampToString( const ChatMessage&, bool show_timestamp, bool show_datestamp );
   static QString chatToHtml( const Chat&, bool skip_system_message, bool force_timestamp, bool force_datestamp );
-  static QString formatMessage( const User&, const ChatMessage&, VNumber last_user_id, bool show_timestamp, bool show_datestamp );
-  static QString formatSystemMessage( const ChatMessage&, bool show_timestamp, bool show_datestamp );
+  static QString formatMessage( const User&, const ChatMessage&, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool skip_system_message );
+  static QString formatSystemMessage( const ChatMessage&, VNumber last_user_id, bool show_timestamp, bool show_datestamp );
   static bool messageCanBeShowedInActivity( const ChatMessage& );
   static bool messageCanBeShowedInDefaultChat( const ChatMessage& );
 

@@ -86,7 +86,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt )
 {
   Message m = Protocol::instance().systemMessage( msg );
-  ChatMessage cm( from_user_id, m, cmt );
+  ChatMessage cm( ID_SYSTEM_MESSAGE, m, cmt );
 
   if( chat_id == ID_INVALID )
     chat_id = ID_DEFAULT_CHAT;

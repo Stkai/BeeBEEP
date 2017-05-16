@@ -47,7 +47,7 @@ public:
   void updateShortcuts();
   void updateActionsOnFocusChanged();
   void setChatFont( const QFont& );
-  bool appendChatMessage( const Chat&, const User&, const ChatMessage& );
+  bool appendChatMessage( const Chat&, const ChatMessage& );
 
   inline QSplitter* chatSplitter() const;
   void editChatMembers();
@@ -72,7 +72,7 @@ public slots:
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
-  QString chatMessageToText( const User&, const ChatMessage& );
+  QString chatMessageToText( const ChatMessage& );
   bool messageCanBeShowed( const ChatMessage& );
   bool historyCanBeShowed();
   void setChatFontColor( const QString& );
