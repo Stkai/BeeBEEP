@@ -26,7 +26,7 @@
 
 UserRecord::UserRecord()
  : m_name( "" ), m_account( "" ), m_networkAddress( QHostAddress(), DEFAULT_LISTENER_PORT ),
-   m_isFavorite( false ), m_color( "#000000" ), m_hash( "" )
+   m_isFavorite( false ), m_color( "#000000" ), m_hash( "" ), m_domainName( "" )
 {
 }
 
@@ -37,7 +37,7 @@ UserRecord::UserRecord( const UserRecord& ur )
 
 UserRecord::UserRecord( const QString& user_name, const QString& user_account, const QString& user_hash )
  : m_name( user_name ), m_account( user_account ), m_networkAddress( QHostAddress::LocalHost, DEFAULT_LISTENER_PORT ),
-   m_isFavorite( false ), m_color( "#000000" ), m_hash( user_hash )
+   m_isFavorite( false ), m_color( "#000000" ), m_hash( user_hash ), m_domainName( "" )
 {
 }
 
@@ -51,6 +51,7 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
     m_isFavorite = ur.m_isFavorite;
     m_color = ur.m_color;
     m_hash = ur.m_hash;
+    m_domainName = ur.m_domainName;
   }
   return *this;
 }

@@ -59,6 +59,8 @@ public:
   inline const VCard& vCard() const;
   inline void setAccountName( const QString& );
   inline const QString& accountName() const;
+  inline void setDomainName( const QString& );
+  inline const QString& domainName() const;
   inline void setVersion( const QString& );
   inline const QString& version() const;
   inline void setHash( const QString& );
@@ -73,7 +75,6 @@ public:
   inline const QDateTime& statusChangedIn() const;
 
   inline QString path() const;
-  inline QString accountPath() const;
 
   bool isBirthDay() const;
 
@@ -88,6 +89,7 @@ private:
   QString m_statusDescription;
   QString m_color;
   QString m_accountName;
+  QString m_domainName;
   QString m_version;
   QString m_hash;
   bool m_isFavorite;
@@ -119,6 +121,8 @@ inline void  User::setVCard( const VCard& new_value ) { m_vCard = new_value; }
 inline const VCard& User::vCard() const { return m_vCard; }
 inline void User::setAccountName( const QString& new_value ) { m_accountName = new_value; }
 inline const QString& User::accountName() const { return m_accountName; }
+inline void User::setDomainName( const QString& new_value ) { m_domainName = new_value; }
+inline const QString& User::domainName() const { return m_domainName; }
 inline void User::setVersion( const QString& new_value ) { m_version = new_value; }
 inline const QString& User::version() const { return m_version; }
 inline void User::setHash( const QString& new_value ) { m_hash = new_value; }
@@ -132,6 +136,5 @@ inline int User::protocolVersion() const { return m_protocolVersion; }
 inline void User::setStatusChangedIn( const QDateTime& new_value ) { m_statusChangedIn = new_value; }
 inline const QDateTime& User::statusChangedIn() const { return m_statusChangedIn; }
 inline QString User::path() const { return QString( "%1@%2" ).arg( name().toLower(), m_networkAddress.toString() ); }
-inline QString User::accountPath() const { return QString( "%1@%2" ).arg( m_accountName.toLower(), m_networkAddress.toString() ); }
 
 #endif // BEEBEEP_USER_H

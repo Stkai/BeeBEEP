@@ -86,22 +86,36 @@ User UserManager::findUserByPath( const QString& user_path ) const
   return User();
 }
 
-User UserManager::findUserByAccountName( const QString& user_account_name ) const
+User UserManager::findUserByAccountName( const QString& account_name, const QString& domain_name ) const
 {
-  if( user_account_name.isEmpty() )
+  if( account_name.isEmpty() )
     return User();
 
-  if( user_account_name.toLower() == Settings::instance().localUser().accountName().toLower() )
-    return Settings::instance().localUser();
+  bool user_found = false;
+  if( account_name.toLower() == Settings::instance().localUser().accountName().toLower() )
+  {
+    user_found = true;
+    if( !domain_name.isEmpty() && !Settings::instance().localUser().domainName().isEmpty() )
+      user_found = domain_name.toLower() == Settings::instance().localUser().domainName().toLower();
+    if( user_found )
+      return Settings::instance().localUser();
+  }
 
   foreach( User u, m_users.toList() )
   {
-    if( u.accountName().toLower() == user_account_name.toLower() )
-      return u;
+    if( u.accountName().toLower() == account_name.toLower() )
+    {
+      user_found = true;
+      if( !domain_name.isEmpty() && !u.domainName().isEmpty() )
+        user_found = domain_name.toLower() == u.domainName().toLower();
+      if( user_found )
+        return u;
+    }
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with account name" << user_account_name;
+  qDebug() << "Unable to find user with account name" << qPrintable( account_name )
+           << "and domain" << qPrintable( domain_name.isEmpty() ? "<vuoto>" : domain_name );
 #endif
 
   return User();
@@ -152,7 +166,7 @@ User UserManager::findUserByUserRecord( const UserRecord& ur ) const
 {
   if( Settings::instance().trustSystemAccount() )
   {
-    return findUserByAccountName( ur.account() );
+    return findUserByAccountName( ur.account(), ur.domainName() );
   }
   else
   {

@@ -28,7 +28,7 @@
 
 
 GuiWorkgroups::GuiWorkgroups( QWidget *parent )
-  : QDialog( parent ), m_workgroups()
+  : QDialog( parent ), m_workgroups(), m_restartConnection( false )
 {
   setupUi( this );
   setWindowTitle( tr( "Workgroups" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
@@ -72,6 +72,7 @@ void GuiWorkgroups::loadWorkgroups()
 {
   mp_cbAcceptOnlyWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
   m_workgroups = Settings::instance().workgroups();
+  m_restartConnection = false;
   updateWorkgroupList();
 }
 
@@ -80,7 +81,7 @@ void GuiWorkgroups::saveWorkgroups()
   if( mp_cbAcceptOnlyWorkgroups->isChecked() != Settings::instance().acceptConnectionsOnlyFromWorkgroups() ||
       !Bee::areStringListEqual( m_workgroups, Settings::instance().workgroups() ) )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "You have to restart your connection to apply changes." ), tr( "Ok" ) );
+    m_restartConnection = true;
   }
   Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptOnlyWorkgroups->isChecked() );
   Settings::instance().setWorkgroups( m_workgroups );

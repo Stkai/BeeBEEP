@@ -50,6 +50,8 @@ public:
   inline const QString& color() const;
   inline void setHash( const QString& );
   inline const QString& hash() const;
+  inline void setDomainName( const QString& );
+  inline const QString& domainName() const;
 
 private:
   QString m_name;
@@ -58,6 +60,7 @@ private:
   bool m_isFavorite;
   QString m_color;
   QString m_hash;
+  QString m_domainName;
 
 };
 
@@ -76,5 +79,7 @@ inline void UserRecord::setColor( const QString& new_value ) { m_color = new_val
 inline const QString& UserRecord::color() const { return m_color; }
 inline void UserRecord::setHash( const QString& new_value ) { m_hash = new_value; }
 inline const QString& UserRecord::hash() const { return m_hash; }
+inline void UserRecord::setDomainName( const QString& new_value ) { m_domainName = new_value; }
+inline const QString& UserRecord::domainName() const { return m_domainName; }
 
 #endif // BEEBEEP_USERRECORD_H

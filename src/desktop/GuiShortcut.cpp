@@ -124,6 +124,11 @@ void GuiShortcut::checkItemClicked( QTreeWidgetItem* item, int )
 
   if( !shortcut_key.isEmpty() )
   {
+    if( shortcut_key.contains( "," ) )
+    {
+      QMessageBox::information( this, Settings::instance().programName(), tr( "You cannot use the comma for your shortcut." ), tr( "Ok" ) );
+      return;
+    }
 #ifdef Q_OS_MAC
     shortcut_key.replace( QString( "Ctrl" ), QString( "Meta" ) );
     shortcut_key.replace( QString( "Cmd" ), QString( "Ctrl" ) );

@@ -37,6 +37,7 @@ public:
   void loadWorkgroups();
 
   inline const QStringList& workgroups() const;
+  inline bool restartConnection() const;
 
 protected slots:
   void addWorkgroup();
@@ -51,10 +52,12 @@ protected:
 private:
   QStringList m_workgroups;
   QMenu* mp_menuContext;
+  bool m_restartConnection;
 
 };
 
 // Inline Functions
 inline const QStringList& GuiWorkgroups::workgroups() const { return m_workgroups; }
+inline bool GuiWorkgroups::restartConnection() const { return m_restartConnection; }
 
 #endif // BEEBEEP_GUIWORKGROUPS_H

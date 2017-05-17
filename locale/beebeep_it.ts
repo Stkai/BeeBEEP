@@ -319,18 +319,6 @@
         <translation>%1 %2 ti ha inviato un trillo.</translation>
     </message>
     <message>
-        <source>%1 Connection closed to user %2 because it uses your nickname.</source>
-        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso soprannome.</translation>
-    </message>
-    <message>
-        <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3.</source>
-        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso nome di sistema dell&apos;utente connesso %3.</translation>
-    </message>
-    <message>
-        <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3.</source>
-        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso soprannome dell&apos;utente connesso %3.</translation>
-    </message>
-    <message>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 è stata condivisa in rete con %2 file, %3</translation>
     </message>
@@ -345,10 +333,6 @@
     <message>
         <source>Chat with all connected users</source>
         <translation>Parla con tutti gli utenti connessi</translation>
-    </message>
-    <message>
-        <source>%1 Connection closed to user %2 because it uses your account name.</source>
-        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso account di sistema.</translation>
     </message>
     <message>
         <source>%1 saved chats are added to history</source>
@@ -409,6 +393,22 @@
     <message>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 La conversazione con %2 è stata salvata.</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso account di sistema: %3.</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso soprannome: %3.</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso account di sistema dell&apos;utente connesso %3: %4.</translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso soprannome dell&apos;utente connesso %3: %4.</translation>
     </message>
 </context>
 <context>
@@ -717,10 +717,6 @@
         <translation>Mostra solo i messaggi nella conversazione con tutti</translation>
     </message>
     <message>
-        <source>last %1 messages</source>
-        <translation>ultimi %1 messaggi</translation>
-    </message>
-    <message>
         <source>Change background color</source>
         <translation>Cambia il colore di sfondo</translation>
     </message>
@@ -819,6 +815,10 @@
     <message>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Sei sicuro di voler inviare %1 %2 ai membri di questa conversazione?</translation>
+    </message>
+    <message>
+        <source>only the last %1 messages are shown</source>
+        <translation>solo gli ultimi %1 messaggi sono visualizzati</translation>
     </message>
 </context>
 <context>
@@ -1612,14 +1612,6 @@ Inserisci un nome differente.</translation>
         <translation>per</translation>
     </message>
     <message>
-        <source>Disconnect</source>
-        <translation>Disconnetti</translation>
-    </message>
-    <message>
-        <source>Connect</source>
-        <translation>Connetti</translation>
-    </message>
-    <message>
         <source>Quit</source>
         <translation>Esci</translation>
     </message>
@@ -2146,6 +2138,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Create new group chat</source>
         <translation>Crea un nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>You have to restart your connection to apply changes.</source>
+        <translation>Devi disconnetterti e poi connetterti di nuovo per vedere le modifiche.</translation>
     </message>
 </context>
 <context>
@@ -2927,6 +2923,14 @@ Inserisci un nome differente.</translation>
         <source>Insert shorcut for the action: %1</source>
         <translation>Inserisci la combinazione di tasti per l&apos;azione: %1</translation>
     </message>
+    <message>
+        <source>You cannot use the comma for your shortcut.</source>
+        <translation>Non puoi usare la virgola in una combinazione.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
 </context>
 <context>
     <name>GuiShortcutDialog</name>
@@ -3054,6 +3058,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Remove this user</source>
         <translation>Cancella questo utente</translation>
+    </message>
+    <message>
+        <source>is</source>
+        <translation>è</translation>
     </message>
 </context>
 <context>
@@ -3226,14 +3234,6 @@ Inserisci un nome differente.</translation>
         <source>This workgroup is already in list.</source>
         <translation>Questo gruppo di lavoro è già presente nella lista.</translation>
     </message>
-    <message>
-        <source>You have to restart your connection to apply changes.</source>
-        <translation>Devi disconnetterti e poi connetterti di nuovo per vedere le modifiche.</translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
-    </message>
 </context>
 <context>
     <name>GuiWorkgroupsDialog</name>
@@ -3378,6 +3378,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>and</source>
         <translation>e</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Sconosciuto</translation>
     </message>
 </context>
 <context>

@@ -247,7 +247,7 @@ void GuiChat::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   QAction* act = mp_menuContext->addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
-  act = mp_menuContext->addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+  act = mp_menuContext->addAction( QIcon( ":/images/network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actClear );

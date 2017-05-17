@@ -76,6 +76,7 @@ public:
   QString version( bool qt_version, bool debug_info ) const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
+  QString hunspellVersion() const;
   QString programName() const;
   QString organizationName() const;
   QString organizationDomain() const;

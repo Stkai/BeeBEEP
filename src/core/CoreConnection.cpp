@@ -224,11 +224,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   if( Settings::instance().trustSystemAccount() )
   {
-    user_found = UserManager::instance().findUserByAccountName( u.accountName() );
+    user_found = UserManager::instance().findUserByAccountName( u.accountName(), u.domainName() );
     if( user_found.isValid() )
     {
       user_has_same_account_name = true;
       qDebug() << "User found in list with account name:" << qPrintable( u.accountName() );
+      if( !u.domainName().isEmpty() )
+        qDebug() << "User found in list also with domain name:" << qPrintable( u.domainName() );
     }
   }
   else
@@ -259,13 +261,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
       {
         if( user_has_same_account_name )
         {
-          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name." )
-                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.accountPath() );
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
+                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.accountName() );
         }
         else
         {
-          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname." )
-                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path() );
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname: %3." )
+                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.name() );
         }
 
         dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
@@ -282,13 +284,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
       {
         if( user_has_same_account_name )
         {
-          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3." )
-                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.accountPath(), user_found.accountPath() );
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
+                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path(), u.accountName() );
         }
         else
         {
-          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3." )
-                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path() );
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4." )
+                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
         }
       }
 

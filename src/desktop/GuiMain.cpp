@@ -208,6 +208,9 @@ void GuiMain::checkWindowFlagsAndShow()
 #endif
   }
 
+  if( mp_tabMain->currentWidget() != mp_home )
+    mp_tabMain->setCurrentWidget( mp_home );
+
   Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
   setWindowFlags( windowFlags() & ~Qt::WindowMaximizeButtonHint );
 
@@ -468,9 +471,6 @@ void GuiMain::startCore()
   if( mp_core->isConnected() )
     return;
 
-  if( mp_tabMain->currentWidget() != mp_home )
-    mp_tabMain->setCurrentWidget( mp_home );
-
   if( Settings::instance().firstTime() )
   {
     Settings::instance().setFirstTime( false );
@@ -516,6 +516,8 @@ bool GuiMain::promptConnectionPassword()
 
 void GuiMain::stopCore()
 {
+  if( mp_tabMain->currentWidget() != mp_home )
+    mp_tabMain->setCurrentWidget( mp_home );
   mp_core->stop();
   initGuiItems();
 }
@@ -523,17 +525,6 @@ void GuiMain::stopCore()
 void GuiMain::initGuiItems()
 {
   bool enable = mp_core->isConnected();
-
-  if( enable )
-  {
-    mp_actStartStopCore->setIcon( QIcon( ":/images/disconnect.png") );
-    mp_actStartStopCore->setText( tr( "Disconnect" ) );
-  }
-  else
-  {
-    mp_actStartStopCore->setIcon( QIcon( ":/images/connect.png") );
-    mp_actStartStopCore->setText( tr( "Connect" ) );
-  }
 
   mp_actBroadcast->setEnabled( enable );
   mp_userList->updateUsers();
@@ -609,9 +600,6 @@ void GuiMain::showLicense()
 
 void GuiMain::createActions()
 {
-  mp_actStartStopCore = new QAction( this );
-  connect( mp_actStartStopCore, SIGNAL( triggered() ), this, SLOT( startStopCore() ) );
-
   mp_actBroadcast = new QAction( QIcon( ":/images/broadcast.png" ), tr( "Search users" ), this );
   connect( mp_actBroadcast, SIGNAL( triggered() ), this, SLOT( sendBroadcastMessage() ) );
 
@@ -654,14 +642,13 @@ void GuiMain::createMenus()
 
   /* Main Menu */
   mp_menuMain = new QMenu( tr( "Main" ), this );
-  mp_menuMain->addAction( mp_actStartStopCore );
-  mp_menuMain->addSeparator();
-  mp_menuMain->addMenu( mp_menuPlugins );
-  mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( QIcon( ":/images/resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
   mp_menuMain->addAction( QIcon( ":/images/data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
+  mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actViewLog );
+  mp_menuMain->addSeparator();
+  mp_menuMain->addMenu( mp_menuPlugins );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actQuit );
 
@@ -718,7 +705,7 @@ void GuiMain::createMenus()
   act->setData( 29 );
 
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
-  mp_menuNetworkStatus->setIcon( QIcon( ":/images/connect.png" ) );
+  mp_menuNetworkStatus->setIcon( QIcon( ":/images/network.png" ) );
   mp_menuSettings->addMenu( mp_menuNetworkStatus );
   mp_menuNetworkStatus->addAction( mp_actConfigureNetwork );
   mp_menuNetworkStatus->addSeparator();
@@ -1124,6 +1111,7 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 2:
+    showRestartConnectionAlertMessage();
     Settings::instance().setTrustUserHash( !act->isChecked() );
     break;
   case 3:
@@ -3536,6 +3524,9 @@ void GuiMain::showWorkgroups()
   if( gw.exec() != QDialog::Accepted )
     return;
 
+  if( gw.restartConnection() )
+    showRestartConnectionAlertMessage();
+
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
     qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
 }
@@ -3549,6 +3540,11 @@ void GuiMain::showRefusedChats()
   grc.show();
   if( grc.exec() == QDialog::Accepted )
     showMessage( tr( "%1 blocked chats" ).arg( Settings::instance().refusedChats().size() ), 5000 );
+}
+
+void GuiMain::showRestartConnectionAlertMessage()
+{
+  QMessageBox::information( this, Settings::instance().programName(), tr( "You have to restart your connection to apply changes." ), tr( "Ok" ) );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

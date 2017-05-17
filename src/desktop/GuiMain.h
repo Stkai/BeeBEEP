@@ -216,6 +216,7 @@ private:
   void updateNewMessageAction();
   void updateTabTitles();
   QString tabToolTip( int );
+  void showRestartConnectionAlertMessage();
 
 private:
   QTabWidget* mp_tabMain;
@@ -253,7 +254,6 @@ private:
 
   QToolBar* mp_barMain;
 
-  QAction* mp_actStartStopCore;
   QAction* mp_actConfigureNetwork;
   QAction* mp_actBroadcast;
   QAction* mp_actQuit;

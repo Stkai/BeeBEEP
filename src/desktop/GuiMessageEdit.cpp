@@ -438,14 +438,11 @@ void GuiMessageEdit::insertCompletion( const QString& completion )
     return;
 
   QTextCursor tc = textCursor();
-#ifdef BEEBEEP_USE_HUNSPELL
-  int extra = completion.length() - SpellChecker::instance().completerPrefix().length();
-#else
-  int extra = 0;
-#endif
   tc.movePosition( Settings::instance().showTextInModeRTL() ? QTextCursor::Right : QTextCursor::Left );
   tc.movePosition( QTextCursor::EndOfWord );
-  tc.insertText( completion.right( extra ) );
+  for( int i = 0; i < SpellChecker::instance().completerPrefix().size(); i++ )
+    tc.deletePreviousChar();
+  tc.insertText( completion );
   tc.insertText( " " );
   setTextCursor( tc );
 }

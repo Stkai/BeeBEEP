@@ -23,6 +23,7 @@
 
 #ifdef BEEBEEP_USE_HUNSPELL
 
+#include "Settings.h"
 #include "SpellChecker.h"
 #include "hunspell.hxx"
 
@@ -38,7 +39,7 @@ SpellChecker::SpellChecker()
   mp_completer->setWrapAround( false );
   mp_completer->setCompletionMode( QCompleter::PopupCompletion );
   updateCompleter( "" );
-  qDebug() << "SpellChecker started with Hunspell version 1.3.3";
+  qDebug() << "SpellChecker started with Hunspell library version" << qPrintable( Settings::instance().hunspellVersion() );
 }
 
 SpellChecker::~SpellChecker()
@@ -186,15 +187,9 @@ QStringList SpellChecker::suggest( const QString& word )
   for( int i = 0; i < num_suggestions; i++ )
   {
     word_to_append = mp_codec->toUnicode( suggest_word_list[ i ] );
-    if( word_to_append.startsWith( word ) )
-      suggest_list.append( word_to_append );
+    suggest_list.append( word_to_append );
     free( suggest_word_list[ i ] );
   }
-
-#ifdef BEEBEEP_DEBUG
-  foreach( QString s, suggest_list )
-    qDebug() << "Suggested word:" << s;
-#endif
 
   return suggest_list;
 }
@@ -254,7 +249,6 @@ void SpellChecker::updateCompleter( const QString& word_to_complete )
   qDebug() << "SpellChecker suggests" << slm->rowCount() << "words";
 #endif
   mp_completer->setModel( slm );
- // mp_completer->setCompletionPrefix( word_to_complete ); // this method is not working...
 }
 
 #endif // BEEBEEP_USE_HUNSPELL

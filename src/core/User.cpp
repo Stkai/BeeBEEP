@@ -26,17 +26,17 @@
 
 User::User()
   : m_id( ID_INVALID ), m_vCard(), m_networkAddress(), m_status( User::Offline ),
-    m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ), m_version( "" ),
-    m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
-    m_statusChangedIn()
+    m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
+    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ),
+    m_qtVersion( "0" ), m_protocolVersion( 0 ), m_statusChangedIn()
 {
 }
 
 User::User( VNumber new_id )
   : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( "127.0.0.1" ), DEFAULT_LISTENER_PORT ),
     m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ), m_protocolVersion( 0 ),
-    m_statusChangedIn()
+    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ),
+    m_protocolVersion( 0 ), m_statusChangedIn()
 {
   setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
 }
@@ -57,6 +57,7 @@ User& User::operator=( const User& u )
     m_statusDescription = u.m_statusDescription;
     m_color = u.m_color;
     m_accountName = u.m_accountName;
+    m_domainName = u.m_domainName;
     m_version = u.m_version;
     m_hash = u.m_hash;
     m_isFavorite = u.m_isFavorite;

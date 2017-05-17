@@ -95,7 +95,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>mp_twChatList</tabstop>
+  <tabstop>mp_twSavedChatList</tabstop>
   <tabstop>mp_leFilter</tabstop>
   <tabstop>mp_pbClearFilter</tabstop>
  </tabstops>

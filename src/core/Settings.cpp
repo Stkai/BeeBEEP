@@ -148,8 +148,8 @@ Settings::Settings()
   m_maxUsersToConnectInATick = 25;
   m_showTextInModeRTL = false;
   m_showChatsInOneWindow = true;
-  m_homeBackgroundColor = "#E8E8E8";
-  m_defaultChatBackgroundColor = "#E8E8E8";
+  m_homeBackgroundColor = "#f5f5f5";
+  m_defaultChatBackgroundColor = "#f5f5f5";
   m_maxLogLines = 5000;
 
   m_enableFileTransfer = true;
@@ -216,18 +216,22 @@ void Settings::createLocalUser()
     m_localUser.setName( sName );
   m_localUser.setQtVersion( qtMajorVersion() );
   m_localUser.setProtocolVersion( protoVersion() );
-  qDebug() << "User name:" << m_localUser.name();
-  qDebug() << "System Account:" << m_localUser.accountName();
+  m_localUser.setDomainName( QHostInfo::localDomainName() );
+  qDebug() << "User name:" << qPrintable( m_localUser.name() );
+  qDebug() << "System account:" << qPrintable( m_localUser.accountName() );
+  qDebug() << "Local domain name:" << qPrintable( m_localUser.domainName() );
+  qDebug() << "Local host name:" << qPrintable( QHostInfo::localHostName() );
   if( m_localUser.hash().isEmpty() )
     m_localUser.setHash( Settings::instance().createLocalUserHash() );
 }
 
 QString Settings::createLocalUserHash()
 {
-  QString hash_parameters = QString( "%1%2%3%4" ).arg( m_localUser.accountName() ).arg( m_localUser.name() )
-          .arg( version( true, true ) ).arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
+  QString hash_parameters = QString( "%1%2%3%4%5" ).arg( m_localUser.accountName() ).arg( m_localUser.name() )
+                                                   .arg( m_localUser.domainName() ).arg( version( true, true ) )
+                                                   .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
-  qDebug() << "Local user HASH created:" << local_user_hash;
+  qDebug() << "Local user HASH created:" << qPrintable( local_user_hash );
   return local_user_hash;
 }
 
@@ -236,7 +240,7 @@ bool Settings::createDefaultRcFile()
   QFileInfo rc_file_info = defaultRcFilePath( false );
   if( rc_file_info.exists() )
   {
-    qDebug() << "RC default configuration file exists in" << rc_file_info.absoluteFilePath();
+    qDebug() << "RC default configuration file exists in" << qPrintable( rc_file_info.absoluteFilePath() );
     return false;
   }
 
@@ -282,11 +286,11 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "TrustSystemAccount", m_trustSystemAccount );
     sets->endGroup();
     sets->sync();
-    qDebug() << "RC default configuration file created in" << sets->fileName();
+    qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
     rc_file_created = true;
   }
   else
-    qWarning() << "Unable to create RC default configuration file in" << sets->fileName();
+    qWarning() << "Unable to create RC default configuration file in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
 
   sets->deleteLater();
   return rc_file_created;
@@ -508,6 +512,10 @@ QString Settings::copyMastroWebSite() const
   return QString( COPYMASTRO_WEBSITE );
 }
 
+QString Settings::hunspellVersion() const
+{
+  return QString( HUNSPELL_VERSION );
+}
 
 QString Settings::operatingSystem( bool use_long_name  ) const
 {

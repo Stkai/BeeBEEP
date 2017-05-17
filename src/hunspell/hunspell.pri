@@ -10,8 +10,7 @@ HEADERS +=  hunspell/hunspell.h \
             hunspell/atypes.hxx \
             hunspell/baseaffix.hxx \
             hunspell/csutil.hxx \
-            hunspell/dictmgr.hxx \
-            hunspell/filemgr.hxx \
+             hunspell/filemgr.hxx \
             hunspell/hashmgr.hxx \
             hunspell/htypes.hxx \
             hunspell/hunspell.hxx \
@@ -26,7 +25,6 @@ SOURCES +=  hunspell/utf_info.cxx \
             hunspell/affentry.cxx \
             hunspell/affixmgr.cxx \
             hunspell/csutil.cxx \
-            hunspell/dictmgr.cxx \
             hunspell/filemgr.cxx \
             hunspell/hashmgr.cxx \
             hunspell/hunspell.cxx \

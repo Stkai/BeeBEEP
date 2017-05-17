@@ -294,6 +294,7 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
     data_list << Settings::instance().localUser().statusChangedIn().toString( Qt::ISODate );
   else
     data_list << QString( "" );
+  data_list << Settings::instance().localUser().domainName();
   Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m, 1 );
@@ -523,6 +524,10 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
       status_changed_in = QDateTime::fromString( s_datetime, Qt::ISODate );
   }
 
+  QString user_domain_name = "";
+  if( !sl.isEmpty() )
+    user_domain_name = sl.takeFirst();
+
   /* Create User */
   User u( newId() );
   u.setName( user_name );
@@ -531,6 +536,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setStatusChangedIn( status_changed_in );
   u.setStatusDescription( user_status_description );
   u.setAccountName( user_account_name.isEmpty() ? user_name : user_account_name );
+  u.setDomainName( user_domain_name );
   u.setVersion( user_version );
   u.setHash( user_hash.isEmpty() ? newMd5Id() : user_hash );
   u.setColor( user_color );
@@ -558,6 +564,7 @@ User Protocol::createTemporaryUser( const UserRecord& ur )
     u.setHash( newMd5Id() );
   else
     u.setHash( ur.hash() );
+  u.setDomainName( ur.domainName() );
   u.setStatus( User::Offline );
   return u;
 }
@@ -571,6 +578,7 @@ QString Protocol::saveUser( const User& u ) const
   ur.setFavorite( u.isFavorite() );
   ur.setColor( u.color() );
   ur.setHash( u.hash() );
+  ur.setDomainName( u.domainName() );
   return saveUserRecord( ur, true );
 }
 
@@ -652,6 +660,7 @@ QString Protocol::saveUserRecord( const UserRecord& ur, bool add_extras ) const
       sl << QString( "" );
     sl << ur.color();
     sl << ur.hash();
+    sl << ur.domainName();
   }
   return sl.join( DATA_FIELD_SEPARATOR );
 }
@@ -714,6 +723,12 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   {
     ur.setHash( sl.takeFirst() );
     qDebug() << "User" << qPrintable( ur.name() ) << "has hash saved:" << qPrintable( ur.hash() );
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setDomainName( sl.takeFirst() );
+    qDebug() << "User" << qPrintable( ur.name() ) << "has domain name saved:" << qPrintable( ur.domainName() );
   }
 
   return ur;

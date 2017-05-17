@@ -91,7 +91,7 @@ void GuiSavedChat::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   if( !mp_teSavedChat->textCursor().selectedText().isEmpty() )
   {
-    mp_menuContext->addAction( QIcon( ":/images/connect.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+    mp_menuContext->addAction( QIcon( ":/images/network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
     mp_menuContext->addSeparator();
   }
   act = mp_menuContext->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
