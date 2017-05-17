@@ -980,7 +980,7 @@ void Settings::load()
   sets->beginGroup( "Tools" );
   m_logToFile = sets->value( "LogToFile", false ).toBool();
   m_maxLogLines = sets->value( "MaxLogLines", m_maxLogLines ).toInt();
-  m_useSpellChecker = sets->value( "UseSpellChecker", false ).toBool();
+  m_useSpellChecker = sets->value( "UseSpellChecker", true ).toBool();
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
   m_dictionaryPath = checkFilePath( sets->value( "DictionaryPath", "" ).toString(), "" );
   m_checkNewVersionAtStartup = sets->value( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();

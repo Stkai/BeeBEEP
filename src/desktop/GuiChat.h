@@ -106,6 +106,7 @@ private slots:
   void showFindTextInChatDialog();
   void findNextTextInChat();
   void openSelectedTextAsUrl();
+  void resetChatFontToDefault();
 
 protected:
   void findTextInChat( const QString& );
@@ -127,6 +128,7 @@ private:
   QAction* mp_actFindTextInChat;
   QAction* mp_actSendFolder;
   QAction* mp_actSaveAs;
+  QAction* mp_actRestoreDefaultFont;
 
   QSplitter* mp_splitter;
 

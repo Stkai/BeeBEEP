@@ -280,7 +280,6 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     }
   }
 
-  bool reset_font = false;
   Qt::KeyboardModifiers mods = e->modifiers();
 
   m_messageChanged = true;
@@ -321,11 +320,6 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     }
   }
 
-  if( e->key() == Qt::Key_Backspace || e->key() == Qt::Key_Delete || e->key() == Qt::Key_Cancel )
-  {
-    reset_font = true;
-  }
-
   QTextEdit::keyPressEvent( e );
 
   if( mp_completer && Settings::instance().useWordCompleter() )
@@ -334,10 +328,13 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
   HistoryManager::instance().clearTemporaryMessage();
 
   // Fixed: when the text is fully cancelled the message box looses the color and the size... patched with the line below
-  if( reset_font )
+  if( e->key() == Qt::Key_Backspace || e->key() == Qt::Key_Delete || e->key() == Qt::Key_Cancel )
   {
-    setTextColor( QColor( Settings::instance().chatFontColor() ) );
-    setFontPointSize( Settings::instance().chatFont().pointSize() );
+    if( textCursor().position() == 0 )
+    {
+      setTextColor( QColor( Settings::instance().chatFontColor() ) );
+      setFont( Settings::instance().chatFont() );
+    }
   }
 
   if( !mp_timer->isActive() )

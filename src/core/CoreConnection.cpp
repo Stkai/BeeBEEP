@@ -235,7 +235,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   }
   else
   {
-    user_found = UserManager::instance().findUserByNickname( u.name() );
+    user_found = UserManager::instance().findUserByNicknameAndHash( u.name(), u.hash() );
     if( !user_found.isValid() )
     {
       if( Settings::instance().trustUserHash() )
@@ -244,9 +244,15 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         if( user_found.isValid() )
           qDebug() << "User found in list with hash:" << qPrintable( u.hash() );
       }
+      else
+      {
+        user_found = UserManager::instance().findUserByNickname( u.name() );
+        if( user_found.isValid() )
+          qDebug() << "User found in list with nickname:" << qPrintable( u.name() );
+      }
     }
     else
-      qDebug() << "User found in list with name:" << qPrintable( u.name() );
+      qDebug() << "User found in list with nickname and hash:" << qPrintable( u.name() );
   }
 
   bool user_path_changed = false;
@@ -262,12 +268,12 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         if( user_has_same_account_name )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
-                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.accountName() );
+                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.accountName() );
         }
         else
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname: %3." )
-                          .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.name() );
+                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.name() );
         }
 
         dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );

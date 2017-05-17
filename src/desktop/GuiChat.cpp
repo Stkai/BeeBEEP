@@ -81,9 +81,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
 
-  setChatFont( Settings::instance().chatFont() );
-  setChatFontColor( Settings::instance().chatFontColor() );
-
   m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = ID_SYSTEM_MESSAGE;
   m_lastTextFound = "";
@@ -119,6 +116,12 @@ GuiChat::GuiChat( QWidget *parent )
   mp_actFindTextInChat = new QAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this );
   connect( mp_actFindTextInChat, SIGNAL( triggered() ), this, SLOT( showFindTextInChatDialog() ) );
 
+  mp_actRestoreDefaultFont = new QAction( QIcon( ":/images/font.png" ), tr( "Restore the default font" ), this );
+  connect( mp_actRestoreDefaultFont, SIGNAL( triggered() ), this, SLOT( resetChatFontToDefault() ) );
+
+  setChatFont( Settings::instance().chatFont() );
+  setChatFontColor( Settings::instance().chatFontColor() );
+
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
@@ -150,6 +153,10 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
 
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
+  QAction* act = new QAction( mp_teMessage );
+  act->setSeparator( true );
+  mp_teMessage->addActionToContextMenu( act );
+  mp_teMessage->addActionToContextMenu( mp_actRestoreDefaultFont );
 }
 
 void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_users )
@@ -254,6 +261,8 @@ void GuiChat::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actSendFile );
   mp_menuContext->addAction( mp_actSendFolder );
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( mp_actRestoreDefaultFont );
   mp_menuContext->exec( QCursor::pos() );
 }
 
@@ -557,6 +566,7 @@ void GuiChat::setChatFont( const QFont& f )
 {
   mp_teChat->setFont( f );
   mp_teMessage->setFont( f );
+  mp_actRestoreDefaultFont->setEnabled( f != QApplication::font() );
 }
 
 void GuiChat::selectFont()
@@ -928,7 +938,7 @@ void GuiChat::printChat()
   printer.setFullPage( true );
   QPrintDialog *dlg = new QPrintDialog( &printer, this );
   dlg->setOptions( QAbstractPrintDialog::PrintSelection | QAbstractPrintDialog::PrintPageRange |
-                   QAbstractPrintDialog::PrintShowPageSize |  QAbstractPrintDialog::PrintCollateCopies |
+                   QAbstractPrintDialog::PrintShowPageSize | QAbstractPrintDialog::PrintCollateCopies |
 #if QT_VERSION >= 0x040700
                    QAbstractPrintDialog::PrintCurrentPage |
 #endif
@@ -997,4 +1007,12 @@ void GuiChat::openSelectedTextAsUrl()
     QUrl url = QUrl::fromUserInput( selected_text );
     emit openUrl( url );
   }
+}
+
+void GuiChat::resetChatFontToDefault()
+{
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to restore the default font?" ), tr( "Yes" ), tr( "No" ), QString::null, 0, 1 ) == 1 )
+    return;
+  Settings::instance().setChatFont( QApplication::font() );
+  setChatFont( Settings::instance().chatFont() );
 }

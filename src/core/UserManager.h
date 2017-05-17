@@ -41,6 +41,7 @@ public:
   inline User findUser( VNumber ) const;
   User findUserByPath( const QString& ) const;
   User findUserByAccountName( const QString& account_name, const QString& domain_name ) const;
+  User findUserByNicknameAndHash( const QString& user_nickname, const QString& user_hash ) const;
   User findUserByHash( const QString& ) const;
   User findUserByNickname( const QString& ) const;
   User findUserByUserRecord( const UserRecord& ) const;

@@ -121,6 +121,27 @@ User UserManager::findUserByAccountName( const QString& account_name, const QStr
   return User();
 }
 
+User UserManager::findUserByNicknameAndHash( const QString& user_nickname, const QString& user_hash ) const
+{
+  if( user_nickname.isEmpty() || user_hash.isEmpty() )
+    return User();
+
+  if( user_nickname == Settings::instance().localUser().name() && user_hash == Settings::instance().localUser().hash() )
+    return Settings::instance().localUser();
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.name() == user_nickname && u.hash() == user_hash )
+      return u;
+  }
+
+  #ifdef BEEBEEP_DEBUG
+    qDebug() << "Unable to find user with nickname" << qPrintable( user_nickname ) << "and hash" << qPrintable( user_hash );
+  #endif
+
+    return User();
+}
+
 User UserManager::findUserByHash( const QString& user_hash ) const
 {
   if( user_hash.isEmpty() )

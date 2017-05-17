@@ -820,6 +820,14 @@
         <source>only the last %1 messages are shown</source>
         <translation>solo gli ultimi %1 messaggi sono visualizzati</translation>
     </message>
+    <message>
+        <source>Restore the default font</source>
+        <translation>Ripristina il carattere predefinito</translation>
+    </message>
+    <message>
+        <source>Do you want to restore the default font?</source>
+        <translation>Vuoi ripristinare il carattere predefinito?</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>

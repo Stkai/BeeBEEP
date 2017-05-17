@@ -156,7 +156,7 @@ bool SpellChecker::isGoodWord( const QString& word )
   if( mp_hunspell )
   {
 #ifdef BEEBEEP_DEBUG
-    int spell_code = mp_hunspell->spell( mp_codec->fromUnicode( word ).constData() );
+    int spell_code = mp_hunspell->spell( std::string( mp_codec->fromUnicode( word ).constData() ) );
     qDebug() << "Spell check if" << word << "is good:" << spell_code;
     return spell_code != 0;
 #else
@@ -180,15 +180,13 @@ QStringList SpellChecker::suggest( const QString& word )
   if( word.isEmpty() )
     return suggest_list;
 
-  char **suggest_word_list;
-  int num_suggestions = mp_hunspell->suggest( &suggest_word_list, mp_codec->fromUnicode( word ).constData() );
+  std::vector<std::string> suggest_word_list = mp_hunspell->suggest( std::string( mp_codec->fromUnicode( word ).constData() ) );
   QString word_to_append;
 
-  for( int i = 0; i < num_suggestions; i++ )
+  for( std::vector<std::string>::size_type i = 0; i < suggest_word_list.size(); i++ )
   {
-    word_to_append = mp_codec->toUnicode( suggest_word_list[ i ] );
+    word_to_append = mp_codec->toUnicode( suggest_word_list[ i ].c_str() );
     suggest_list.append( word_to_append );
-    free( suggest_word_list[ i ] );
   }
 
   return suggest_list;
@@ -207,11 +205,11 @@ bool SpellChecker::addWord( const QString& word )
 {
   if( !mp_hunspell )
   {
-    qWarning() << "SpellChecker has not HUNSPELL instance. Unable to add word:" << word;
+    qWarning() << "SpellChecker has not HUNSPELL instance. Unable to add word:" << qPrintable( word );
     return false;
   }
 
-  mp_hunspell->add( mp_codec->fromUnicode( word ).constData() );
+  mp_hunspell->add( word.toStdString() );
   return true;
 }
 

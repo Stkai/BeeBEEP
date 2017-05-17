@@ -41,7 +41,7 @@ SpellCheckerHighlighter::SpellCheckerHighlighter( QTextDocument* text_document )
 
 void SpellCheckerHighlighter::highlightWord( const QString& all_text, const QString& word )
 {
-  QRegExp re( word );
+  QRegExp re( QString( "\\b%1\\b" ).arg( word ) );
   int index = all_text.indexOf( re );
   while( index >= 0 )
   {
