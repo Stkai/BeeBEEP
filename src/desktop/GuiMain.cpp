@@ -846,7 +846,7 @@ void GuiMain::createMenus()
   mp_menuTrayIconSettings = new QMenu( tr( "System tray icon" ), this );
   mp_menuTrayIconSettings->setIcon( QIcon( ":/images/settings-tray-icon.png" ) );
   mp_menuSettings->addMenu( mp_menuTrayIconSettings );
-  act = mp_menuTrayIconSettings->addAction( tr( "Enable tray icon notification" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuTrayIconSettings->addAction( tr( "Enable tray icon notifications" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showNotificationOnTray()  );
   act->setData( 19 );
@@ -858,7 +858,7 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatMessageOnTray() );
   act->setData( 46 );
-  act = mp_menuTrayIconSettings->addAction( tr( "Show file notification" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuTrayIconSettings->addAction( tr( "Show file notifications" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showFileTransferCompletedOnTray() );
   act->setData( 48 );
@@ -1442,7 +1442,7 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
   if( c.isValid() && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Notification disabled for group:" << c.privateId() << c.name();
+    qDebug() << "Notifications disabled for group:" << c.privateId() << c.name();
 #endif
     return;
   }

@@ -1757,11 +1757,6 @@ Selecione um nome diferente.</translation>
         <translation>Criar nome de arquivo automático</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Habilitar ícone de Notificação</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation>Habilitar trasnferência de Arquivos</translation>
@@ -2106,11 +2101,6 @@ Selecione um nome diferente.</translation>
         <translation>Transferência de Arquivos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="288"/>
         <source>connected</source>
         <translation type="unfinished"></translation>
@@ -2203,6 +2193,16 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

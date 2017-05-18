@@ -1746,11 +1746,6 @@ Please select a different name.</source>
         <translation>Générer automatiquement un nom de fichier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Activer les notifications</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation>Activer le transfert de fichier</translation>
@@ -2039,6 +2034,16 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="880"/>
         <source>Start %1 automatically</source>
         <translation type="unfinished"></translation>
@@ -2310,11 +2315,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="857"/>
         <source>Show chat message preview</source>
         <translation>Afficher l&apos;aperçu du message de chat</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1712"/>

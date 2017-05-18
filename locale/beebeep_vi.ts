@@ -1757,11 +1757,6 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Tạo tên tệp tự động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Bật thông báo ở  khay hệ thống</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation>Bật chuyển tập tin</translation>
@@ -2050,11 +2045,6 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Hiện xem trước tin nhắn chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation>Hiện thông báo tập tin</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1076"/>
         <source>Groups</source>
         <translation>Các nhóm</translation>
@@ -2202,6 +2192,16 @@ Vui lòng chọn một tên khác nhau.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

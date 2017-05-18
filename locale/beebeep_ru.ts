@@ -1672,11 +1672,6 @@ Please select a different name.</source>
         <translation>Генерировать автоматические имена файлов</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Включить уведомления в значке области уведомлений</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2682"/>
         <source>Do you want to leave the chat with %1?</source>
         <translation type="unfinished"></translation>
@@ -1841,11 +1836,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="857"/>
         <source>Show chat message preview</source>
         <translation>Показывать предпросмотр сообщения чата</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1081"/>
@@ -2180,6 +2170,16 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

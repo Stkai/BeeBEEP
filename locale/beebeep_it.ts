@@ -1460,10 +1460,6 @@ Inserisci un nome differente.</translation>
         <translation>Salva i messaggi</translation>
     </message>
     <message>
-        <source>Enable tray icon notification</source>
-        <translation>Abilita le nofiche all&apos;icona di sistema </translation>
-    </message>
-    <message>
         <source>Check for new version...</source>
         <translation>Controlla gli aggiornamenti...</translation>
     </message>
@@ -1856,10 +1852,6 @@ Inserisci un nome differente.</translation>
         <translation>Cancella tutti i messaggi letti alla chiusura della finestra</translation>
     </message>
     <message>
-        <source>Show file notification</source>
-        <translation>Mostra le notifiche sul trasferimento dei file</translation>
-    </message>
-    <message>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation>Usa la nuova applicazione per copiare i file e le cartelle sviluppata da Marco Mastroddi</translation>
     </message>
@@ -2170,6 +2162,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Save groups</source>
         <translation>Salva i gruppi</translation>
+    </message>
+    <message>
+        <source>Enable tray icon notifications</source>
+        <translation>Abilita le nofiche all&apos;icona di sistema</translation>
+    </message>
+    <message>
+        <source>Show file notifications</source>
+        <translation>Mostra le notifiche sul trasferimento dei file</translation>
     </message>
 </context>
 <context>

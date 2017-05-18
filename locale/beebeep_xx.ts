@@ -1761,11 +1761,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation type="unfinished"></translation>
@@ -2064,11 +2059,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1076"/>
         <source>Groups</source>
         <translation type="unfinished"></translation>
@@ -2301,6 +2291,16 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

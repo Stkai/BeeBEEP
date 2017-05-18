@@ -1747,11 +1747,6 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Generovat jména souborů automaticky</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Povolit oznámení v systémové liště</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation>Povolit přenos souborů</translation>
@@ -2040,6 +2035,16 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="880"/>
         <source>Start %1 automatically</source>
         <translation type="unfinished"></translation>
@@ -2311,11 +2316,6 @@ Vyberte prosím jiné jméno.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="857"/>
         <source>Show chat message preview</source>
         <translation>Zobrazit náhled zprávy</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation>Zobrazit upozornění na soubor</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2083"/>

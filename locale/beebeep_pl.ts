@@ -1757,11 +1757,6 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Wygeneruj nazwę pliku automatycznie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Włącz powiadomienia w zasobniku systemowym</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation>Włącz transfer pliku</translation>
@@ -2050,11 +2045,6 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Pokaż podgląd wiadomości czatu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation>Pokaż powiadomienie pliku</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1076"/>
         <source>Groups</source>
         <translation>Grupy</translation>
@@ -2267,6 +2257,16 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

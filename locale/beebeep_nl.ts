@@ -1842,11 +1842,6 @@ Gebruik aub een andere naam.</translation>
         <translation>Toon chatbericht preview</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation>Waarschuwen bij binnenkomend bestand</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2083"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation>Start de nieuwe Beebeep om bestanden en mappen te kopiëren door Marco Mastroddi</translation>
@@ -2036,11 +2031,6 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="814"/>
         <source>Generate automatic filename</source>
         <translation>Genereer automatische bestandsnaam</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Taakbalkicoon tonen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
@@ -2283,6 +2273,16 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -1767,11 +1767,6 @@ Välj ett annat namn.</translation>
         <translation>Generera filnamn automatiskt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Aktivera avisering i meddelandefältet</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation>Aktivera filöverföring</translation>
@@ -2100,11 +2095,6 @@ Välj ett annat namn.</translation>
         <translation>Filöverföringar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation>Visa filaviseringar</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2083"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation type="unfinished">Starta det nya programmet för att kopiera filer och mappar av Marco Mastroddi</translation>
@@ -2202,6 +2192,16 @@ Välj ett annat namn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

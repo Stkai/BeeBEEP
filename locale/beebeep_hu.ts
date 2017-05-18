@@ -1815,11 +1815,6 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Automatikus fájlnév generálása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
-        <source>Enable tray icon notification</source>
-        <translation>Engedélyezi a tálca ikon értesítést</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Enable file transfer</source>
         <translation>File átvitel engedéjezése</translation>
@@ -2164,11 +2159,6 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>File átvitel</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
-        <source>Show file notification</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="288"/>
         <source>connected</source>
         <translation type="unfinished"></translation>
@@ -2256,6 +2246,16 @@ Kérjük, válassz egy másik nevet.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Save groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="849"/>
+        <source>Enable tray icon notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
+        <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
