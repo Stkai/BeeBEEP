@@ -76,8 +76,8 @@ public:
   int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
   void showTipOfTheDay();
   void showFactOfTheDay();
-  Chat createGroupChat( const User&, const QString& chat_name, const QList<VNumber>&, const QString& chat_private_id, bool broadcast_message );
-  void changeGroupChat( const User&, const Group& );
+  Chat createGroupChat( const User&, const Group&, bool broadcast_message );
+  bool changeGroupChat( const User&, const Group& );
   bool clearMessagesInChat( VNumber, bool clear_history );
   bool removeChat( VNumber, bool save_chat_messages );
   bool readAllMessagesInChat( VNumber );
@@ -233,7 +233,7 @@ protected:
   void createDefaultChat();
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
   void sendGroupChatRequestMessage( const Chat&, const UserList& );
-  void sendGroupChatRefuseMessage( const Chat&, const UserList& );
+  void sendRefuseMessageToGroupChat( const Chat& );
   void checkGroupChatAfterUserReconnect( const User& );
   void sendLocalUserHasReadChatMessage( const Chat& );
   void addChatHeader( Chat* );

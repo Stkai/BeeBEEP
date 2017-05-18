@@ -87,6 +87,7 @@ private slots:
   void showFactOfTheDay();
   void searchUsers();
   void settingsChanged();
+  void settingsChanged( QAction* );
   void showNextChat();
   void statusSelected();
   void changeStatusDescription();
@@ -272,13 +273,12 @@ private:
   QAction* mp_actEnableFileSharing;
   QAction* mp_actSelectDownloadFolder;
   QAction* mp_actSaveWindowGeometry;
-
   QActionGroup* mp_actGroupExistingFile;
   QAction* mp_actOverwriteExistingFile;
   QAction* mp_actGenerateAutomaticFilename;
   QAction* mp_actAskToDoOnExistingFile;
-
   QAction* mp_actBeepOnNewMessage;
+  QActionGroup* mp_actGroupRecognizeUsers;
 
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;

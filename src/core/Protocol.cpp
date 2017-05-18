@@ -443,6 +443,51 @@ bool Protocol::acceptConnectionFromWorkgroup( const Message& hello_message ) con
   return false;
 }
 
+User Protocol::recognizeUser( const User& u, int user_recognition_method ) const
+{
+  User user_found;
+  if( user_recognition_method == Settings::RecognizeByAccountAndDomain )
+  {
+    user_found = UserManager::instance().findUserByAccountNameAndDomainName( u.accountName(), u.domainName() );
+    if( user_found.isValid() )
+      qDebug() << "User found in list with account path" << qPrintable( u.accountPath() );
+  }
+  else if( user_recognition_method == Settings::RecognizeByAccount )
+  {
+    user_found = UserManager::instance().findUserByAccountName( u.accountName() );
+    if( user_found.isValid() )
+      qDebug() << "User found in list with account name" << qPrintable( u.accountName() );
+  }
+  else if( user_recognition_method == Settings::RecognizeByNicknameAndHash )
+  {
+    user_found = UserManager::instance().findUserByNicknameAndHash( u.name(), u.hash() );
+    if( !user_found.isValid() )
+    {
+      user_found = UserManager::instance().findUserByHash( u.hash() );
+      if( user_found.isValid() )
+        qDebug() << "User found in list with hash" << qPrintable( u.hash() );
+    }
+    else
+      qDebug() << "User found in list with nickname" << qPrintable( u.name() ) << "and hash" << qPrintable( u.hash() );
+  }
+  else if( user_recognition_method == Settings::RecognizeByNickname )
+  {
+    user_found = UserManager::instance().findUserByNickname( u.name() );
+    if( user_found.isValid() )
+      qDebug() << "User found in list with nickname:" << qPrintable( u.name() );
+  }
+  else
+    qWarning() << "Invalid user recognition method found" << user_recognition_method;
+
+  return user_found;
+}
+
+User Protocol::recognizeUser( const UserRecord& ur, int user_recognition_method ) const
+{
+  User user_tmp( ur );
+  return recognizeUser( user_tmp, user_recognition_method );
+}
+
 User Protocol::createUser( const Message& hello_message, const QHostAddress& peer_address )
 {
   /* Read User Field Data */
@@ -546,102 +591,18 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
 User Protocol::createTemporaryUser( const UserRecord& ur )
 {
-  User u;
+  User u( ur );
   u.setId( newId() );
   if( ur.name().isEmpty() )
     u.setName( QString( "Bee%1" ).arg( u.id() ) );
-  else
-    u.setName( ur.name() );
-  if( ur.networkAddressIsValid() )
-    u.setNetworkAddress( ur.networkAddress() );
-  else
+  if( !ur.networkAddressIsValid() )
     u.setNetworkAddress( NetworkAddress( QHostAddress::LocalHost, DEFAULT_LISTENER_PORT ) );
   if( ur.account().isEmpty() )
     u.setAccountName( u.name() );
-  else
-    u.setAccountName( ur.account() );
   if( ur.hash().isEmpty() )
     u.setHash( newMd5Id() );
-  else
-    u.setHash( ur.hash() );
-  u.setDomainName( ur.domainName() );
   u.setStatus( User::Offline );
   return u;
-}
-
-QString Protocol::saveUser( const User& u ) const
-{
-  UserRecord ur;
-  ur.setName( u.name() );
-  ur.setAccount( u.accountName() );
-  ur.setNetworkAddress( u.networkAddress() );
-  ur.setFavorite( u.isFavorite() );
-  ur.setColor( u.color() );
-  ur.setHash( u.hash() );
-  ur.setDomainName( u.domainName() );
-  return saveUserRecord( ur, true );
-}
-
-User Protocol::loadUser( const QString& s )
-{
-  UserRecord ur = loadUserRecord( s );
-  if( ur.name().isEmpty() || !ur.networkAddressIsValid() )
-    return User();
-
-  User u = createTemporaryUser( ur );
-
-  u.setIsFavorite( ur.isFavorite() );
-
-  if( ColorManager::instance().isValidColor( ur.color() ) )
-  {
-    u.setColor( ur.color() );
-    ColorManager::instance().setColorSelected( ur.color() );
-  }
-
-  if( !ur.hash().isEmpty() )
-    u.setHash( ur.hash() );
-
-  return u;
-}
-
-QString Protocol::saveNetworkAddress( const NetworkAddress& na ) const
-{
-  QStringList sl;
-  sl << na.hostAddress().toString();
-  sl << QString::number( na.hostPort() );
-  sl << na.info();
-  return sl.join( DATA_FIELD_SEPARATOR );
-}
-
-NetworkAddress Protocol::loadNetworkAddress( const QString& s ) const
-{
-  QStringList sl = s.split( DATA_FIELD_SEPARATOR );
-  if( sl.size() < 2 )
-  {
-    qWarning() << "Invalid network address found in data:" << s << "(size error)";
-    return NetworkAddress();
-  }
-
-  QHostAddress user_host_address = QHostAddress( sl.takeFirst() );
-  if( user_host_address.isNull() )
-  {
-    qWarning() << "Invalid network address found in data:" << s << "(host address error)";
-    return NetworkAddress();
-  }
-
-  bool ok = false;
-  int host_port = sl.takeFirst().toInt( &ok, 10 );
-  if( !ok || host_port < 1 || host_port > 65535 )
-  {
-    qWarning() << "Invalid network address found in data:" << s << "(host port error)";
-    return NetworkAddress();
-  }
-
-  NetworkAddress na( user_host_address, host_port );
-  if( !sl.isEmpty() )
-    na.setInfo( sl.takeFirst() );
-
-  return na;
 }
 
 QString Protocol::saveUserRecord( const UserRecord& ur, bool add_extras ) const
@@ -734,6 +695,72 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   return ur;
 }
 
+QString Protocol::saveUser( const User& u ) const
+{
+  UserRecord ur;
+  ur.setName( u.name() );
+  ur.setAccount( u.accountName() );
+  ur.setNetworkAddress( u.networkAddress() );
+  ur.setFavorite( u.isFavorite() );
+  ur.setColor( u.color() );
+  ur.setHash( u.hash() );
+  ur.setDomainName( u.domainName() );
+  return saveUserRecord( ur, true );
+}
+
+User Protocol::loadUser( const QString& s )
+{
+  UserRecord ur = loadUserRecord( s );
+  if( ur.name().isEmpty() || !ur.networkAddressIsValid() )
+    return User();
+
+  User u = createTemporaryUser( ur );
+  u.setIsFavorite( ur.isFavorite() );
+  if( ColorManager::instance().isValidColor( ur.color() ) )
+    ColorManager::instance().setColorSelected( ur.color() );
+  return u;
+}
+
+QString Protocol::saveNetworkAddress( const NetworkAddress& na ) const
+{
+  QStringList sl;
+  sl << na.hostAddress().toString();
+  sl << QString::number( na.hostPort() );
+  sl << na.info();
+  return sl.join( DATA_FIELD_SEPARATOR );
+}
+
+NetworkAddress Protocol::loadNetworkAddress( const QString& s ) const
+{
+  QStringList sl = s.split( DATA_FIELD_SEPARATOR );
+  if( sl.size() < 2 )
+  {
+    qWarning() << "Invalid network address found in data:" << s << "(size error)";
+    return NetworkAddress();
+  }
+
+  QHostAddress user_host_address = QHostAddress( sl.takeFirst() );
+  if( user_host_address.isNull() )
+  {
+    qWarning() << "Invalid network address found in data:" << s << "(host address error)";
+    return NetworkAddress();
+  }
+
+  bool ok = false;
+  int host_port = sl.takeFirst().toInt( &ok, 10 );
+  if( !ok || host_port < 1 || host_port > 65535 )
+  {
+    qWarning() << "Invalid network address found in data:" << s << "(host port error)";
+    return NetworkAddress();
+  }
+
+  NetworkAddress na( user_host_address, host_port );
+  if( !sl.isEmpty() )
+    na.setInfo( sl.takeFirst() );
+
+  return na;
+}
+
 QString Protocol::saveUserStatusRecord( const UserStatusRecord& usr ) const
 {
   QStringList sl;
@@ -772,33 +799,31 @@ UserStatusRecord Protocol::loadUserStatusRecord( const QString& s ) const
 
 Chat Protocol::createDefaultChat()
 {
-  Chat c;
   Group g;
   g.setId( ID_DEFAULT_CHAT );
   g.setName( Settings::instance().defaultChatName() );
-  g.addUser( ID_LOCAL_USER );
   g.setPrivateId( Settings::instance().defaultChatPrivateId() );
-  c.setGroup( g );
-  return c;
+  return createChat( g );
 }
 
-Chat Protocol::createChat( const QString& chat_name, const QList<VNumber>& chat_users_id, const QString& chat_private_id )
+Chat Protocol::createPrivateChat( const User& u )
 {
-  Chat c;
   Group g;
-  g.setId( newId() );
-  g.setName( chat_name );
-  if( chat_users_id.size() > 1 )
-  {
-    if( chat_private_id.isEmpty() )
-      g.setPrivateId( newMd5Id() );
-    else
-      g.setPrivateId( chat_private_id );
-  }
-  foreach( VNumber user_id, chat_users_id )
-    g.addUser( user_id );
-  g.addUser( ID_LOCAL_USER );
-  c.setGroup( g );
+  g.setName( u.name() );
+  g.addUser( u.id() );
+  return createChat( g );
+}
+
+Chat Protocol::createChat( const Group& g )
+{
+  Group g_to_check = g;
+  if( !g_to_check.isValid() )
+    g_to_check.setId( newId() );
+  if( g_to_check.privateId().isEmpty() && g_to_check.usersId().size() > 1 )
+    g_to_check.setPrivateId( newMd5Id() );
+  g_to_check.addUser( ID_LOCAL_USER );
+  Chat c;
+  c.setGroup( g_to_check );
   return c;
 }
 
@@ -814,17 +839,21 @@ QString Protocol::saveGroup( const Group& g ) const
 
   foreach( User u, ul.toList() )
   {
-    sl << u.path();
+    sl << u.name();
     sl << u.accountName();
     sl << u.hash();
+    sl << u.domainName();
+    sl << ""; // for future use
   }
+
+  sl << g.lastModified().toString( Qt::ISODate );
 
   return sl.join( DATA_FIELD_SEPARATOR );
 }
 
 Group Protocol::loadGroup( const QString& group_data_saved )
 {
-  QStringList sl = group_data_saved.split( DATA_FIELD_SEPARATOR );
+  QStringList sl = group_data_saved.split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
   if( sl.size() < 5 )
     return Group();
 
@@ -838,40 +867,44 @@ Group Protocol::loadGroup( const QString& group_data_saved )
     return Group();
 
   UserList member_list;
-  QString user_path = "";
   QString user_nickname = "";
   QString user_account_name = "";
   QString user_hash = "";
-  NetworkAddress user_na;
+  QString user_domain = "";
 
   member_list.set( Settings::instance().localUser() );
 
-  bool read_user_hash = sl.size() > (members*2);
+  bool read_user_extra_fields = sl.size() > (members*2);
 
   for( int i = 0; i < members; i++ )
   {
     if( sl.size() >= 2 )
     {
-      user_path = sl.takeFirst();
-      user_nickname = User::nameFromPath( user_path );
-      user_na = NetworkAddress::fromString( User::hostAddressAndPortFromPath( user_path ) );
-#ifdef BEEBEEP_DEBUG
-      if( !user_na.isHostAddressValid() && !user_na.isHostPortValid() )
-        qWarning() << "Invalid network address found in" << qPrintable( user_nickname ) << "of group" << qPrintable( g.name() );
-#endif
+      user_nickname = User::nameFromPath( sl.takeFirst() );
       user_account_name = sl.takeFirst();
-      if( read_user_hash && !sl.isEmpty() )
-        user_hash = sl.takeFirst();
-      else
-        user_hash = "";
+      user_hash = "";
+      user_domain = "";
 
-      UserRecord ur( user_nickname, user_account_name, user_hash );
-      ur.setNetworkAddress( user_na );
-      User u = UserManager::instance().findUserByUserRecord( ur );
+      if( read_user_extra_fields )
+      {
+        if( !sl.isEmpty() )
+          user_hash = sl.takeFirst();
+
+        if( !sl.isEmpty() )
+          user_domain = sl.takeFirst();
+
+        if( !sl.isEmpty() )
+          sl.takeFirst(); // for future use
+      }
+
+      UserRecord ur( user_nickname, user_account_name, user_hash, user_domain );
+      ur.setDomainName( user_domain );
+      User u = recognizeUser( ur, Settings::instance().userRecognitionMethod() );
 
       if( !u.isValid() )
       {
         u = createTemporaryUser( ur );
+        qDebug() << "Group chat" << qPrintable( g.name() ) << "has created temporary user" << u.id() << qPrintable( u.name() );
         UserManager::instance().setUser( u );
       }
 
@@ -880,6 +913,9 @@ Group Protocol::loadGroup( const QString& group_data_saved )
   }
 
   g.setUsers( member_list.toUsersId() );
+
+  if( !sl.isEmpty() )
+    g.setLastModified( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
 
   return g;
 }
@@ -912,9 +948,10 @@ Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
   sl << QString::number( ul.size() );
   foreach( User u, ul.toList() )
   {
-    sl << u.path();
+    sl << u.name();
     sl << u.accountName();
     sl << u.hash();
+    sl << u.domainName();
   }
 
   if( ul.size() >= 1 )
@@ -944,16 +981,14 @@ QList<UserRecord> Protocol::userRecordsFromGroupRequestMessage( const Message& m
 
   for( int i = 0; i < members; i++ )
   {
-    if( sl.size() >= 3 )
+    if( sl.size() >= 4 )
     {
       UserRecord ur;
-      QString user_path = sl.takeFirst();
-      ur.setName( User::nameFromPath( user_path ) );
+      ur.setName( User::nameFromPath( sl.takeFirst() ) );  // fixme
+      //ur.setName( sl.takeFirst() ) );  // fixme
       ur.setAccount( sl.takeFirst() );
       ur.setHash( sl.takeFirst() );
-      QString user_host_and_port = User::hostAddressAndPortFromPath( user_path );
-      if( !user_host_and_port.isEmpty() )
-        ur.setNetworkAddress( NetworkAddress::fromString( user_host_and_port ) );
+      ur.setDomainName( sl.takeFirst() );
       user_records.append( ur );
     }
     else

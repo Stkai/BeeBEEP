@@ -720,33 +720,50 @@ void GuiMain::createMenus()
   mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
   mp_menuUsersSettings->setIcon( QIcon( ":/images/user-list.png" ) );
   mp_menuSettings->addMenu( mp_menuUsersSettings );
-  if( Settings::instance().trustSystemAccount() )
-  {
-    act = mp_menuUsersSettings->addAction( tr( "Recognize users by system or domain account" ) );
-    act->setCheckable( true );
-    act->setChecked( true );
-    act->setDisabled( true );
-  }
-  else
-  {
-    act = mp_menuUsersSettings->addAction( tr( "Recognize users only by nickname" ), this, SLOT( settingsChanged() ) );
-    act->setCheckable( true );
-    act->setChecked( !Settings::instance().trustUserHash() );
-    act->setData( 2 );
-  }
+
+  QMenu* menu_recognize_users = mp_menuUsersSettings->addMenu( tr( "Recognize users" ) + QString( "..." ) );
+  menu_recognize_users->setIcon( QIcon( ":/images/user-list.png" ) );
+  mp_actGroupRecognizeUsers = new QActionGroup( this );
+  mp_actGroupRecognizeUsers->setExclusive( true );
+  act = menu_recognize_users->addAction( tr( "By account name and domain name" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain );
+  act->setData( 57 );
+  mp_actGroupRecognizeUsers->addAction( act );
+  act = menu_recognize_users->addAction( tr( "By account name" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccount );
+  act->setData( 58 );
+  mp_actGroupRecognizeUsers->addAction( act );
+  menu_recognize_users->addSeparator();
+  act = menu_recognize_users->addAction( tr( "By nickname and user private id" ) + QString( " (%1)" ).arg( tr( "default" ) ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByNicknameAndHash );
+  act->setData( 59 );
+  mp_actGroupRecognizeUsers->addAction( act );
+  act = menu_recognize_users->addAction( tr( "By nickname" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByNickname );
+  act->setData( 60 );
+  mp_actGroupRecognizeUsers->addAction( act );
+  connect( mp_actGroupRecognizeUsers, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
+  mp_menuUsersSettings->addSeparator();
+  mp_actAddUsers = mp_menuUsersSettings->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
+  mp_menuUsersSettings->addAction( QIcon( ":/images/workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
   mp_menuUsersSettings->addSeparator();
   act = mp_menuUsersSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().saveUserList() );
   act->setData( 32 );
+  act = mp_menuUsersSettings->addAction( tr( "Save groups" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().saveGroupList() );
+  act->setData( 2 );
   mp_menuUsersSettings->addSeparator();
   act = mp_menuUsersSettings->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().autoUserAway() );
   act->setData( 20 );
-  mp_menuUsersSettings->addSeparator();
-  mp_actAddUsers = mp_menuUsersSettings->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
-  mp_menuUsersSettings->addAction( QIcon( ":/images/workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
 
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
   mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
@@ -788,20 +805,18 @@ void GuiMain::createMenus()
 
   mp_menuFileTransferSettings->addSeparator();
   mp_menuExistingFile = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
+  mp_menuExistingFile->setIcon( QIcon( ":/images/file-add.png" ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
-  mp_actOverwriteExistingFile = mp_menuExistingFile->addAction( tr( "Overwrite" ), this, SLOT( settingsChanged() ) );
+  mp_actOverwriteExistingFile = mp_menuExistingFile->addAction( tr( "Overwrite" ) );
   mp_actOverwriteExistingFile->setCheckable( true );
   mp_actOverwriteExistingFile->setChecked( Settings::instance().overwriteExistingFiles() );
-  mp_actOverwriteExistingFile->setData( 99 );
-  mp_actGenerateAutomaticFilename = mp_menuExistingFile->addAction( tr( "Generate automatic filename" ), this, SLOT( settingsChanged() ) );
+  mp_actGenerateAutomaticFilename = mp_menuExistingFile->addAction( tr( "Generate automatic filename" ) );
   mp_actGenerateAutomaticFilename->setCheckable( true );
   mp_actGenerateAutomaticFilename->setChecked( Settings::instance().automaticFileName() );
-  mp_actGenerateAutomaticFilename->setData( 99 );
-  mp_actAskToDoOnExistingFile = mp_menuExistingFile->addAction( tr( "Ask me" ), this, SLOT( settingsChanged() ) );
+  mp_actAskToDoOnExistingFile = mp_menuExistingFile->addAction( tr( "Ask me" ) );
   mp_actAskToDoOnExistingFile->setCheckable( true );
   mp_actAskToDoOnExistingFile->setChecked( !Settings::instance().automaticFileName() && !Settings::instance().overwriteExistingFiles() );
-  mp_actAskToDoOnExistingFile->setData( 99 );
   mp_actGroupExistingFile->addAction( mp_actOverwriteExistingFile );
   mp_actGroupExistingFile->addAction( mp_actGenerateAutomaticFilename );
   mp_actGroupExistingFile->addAction( mp_actAskToDoOnExistingFile );
@@ -884,29 +899,30 @@ void GuiMain::createMenus()
   QActionGroup* sorting_users_action_group = new QActionGroup( this );
   sorting_users_action_group->setExclusive( true );
 
-  act = sorting_users_menu->addAction( tr( "Default mode" ), this, SLOT( settingsChanged() ) );
+  act = sorting_users_menu->addAction( tr( "Default mode" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() < 1 || Settings::instance().userSortingMode() > 3 );
   act->setData( 50 );
   sorting_users_action_group->addAction( act );
 
-  act = sorting_users_menu->addAction( tr( "By user name" ), this, SLOT( settingsChanged() ) );
+  act = sorting_users_menu->addAction( tr( "By user name" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() == 1 );
   act->setData( 51 );
   sorting_users_action_group->addAction( act );
 
-  act = sorting_users_menu->addAction( tr( "By user status" ), this, SLOT( settingsChanged() ) );
+  act = sorting_users_menu->addAction( tr( "By user status" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() == 2 );
   act->setData( 52 );
   sorting_users_action_group->addAction( act );
 
-  act = sorting_users_menu->addAction( tr( "By unread messages" ), this, SLOT( settingsChanged() ) );
+  act = sorting_users_menu->addAction( tr( "By unread messages" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() == 3 );
   act->setData( 53 );
   sorting_users_action_group->addAction( act );
+  connect( sorting_users_action_group, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
 
   mp_menuUserList->addSeparator();
 
@@ -1092,9 +1108,12 @@ void GuiMain::startExternalApplicationFromActionData()
 void GuiMain::settingsChanged()
 {
   QAction* act = qobject_cast<QAction*>( sender() );
-  if( !act )
-    return;
+  if( act )
+    settingsChanged( act );
+}
 
+void GuiMain::settingsChanged( QAction* act )
+{
   bool refresh_users = false;
   bool refresh_chat = false;
   int settings_data_id = act->data().toInt();
@@ -1111,8 +1130,7 @@ void GuiMain::settingsChanged()
     refresh_chat = true;
     break;
   case 2:
-    showRestartConnectionAlertMessage();
-    Settings::instance().setTrustUserHash( !act->isChecked() );
+    Settings::instance().setSaveGroupList( act->isChecked() );
     break;
   case 3:
     Settings::instance().setChatShowMessageTimestamp( act->isChecked() );
@@ -1361,6 +1379,22 @@ void GuiMain::settingsChanged()
     break;
   case 56:
     Settings::instance().setPlayBuzzSound( act->isChecked() );
+    break;
+  case 57:
+    showRestartConnectionAlertMessage();
+    Settings::instance().setUserRecognitionMethod( Settings::RecognizeByAccountAndDomain );
+    break;
+  case 58:
+    showRestartConnectionAlertMessage();
+    Settings::instance().setUserRecognitionMethod( Settings::RecognizeByAccount );
+    break;
+  case 59:
+    showRestartConnectionAlertMessage();
+    Settings::instance().setUserRecognitionMethod( Settings::RecognizeByNicknameAndHash );
+    break;
+  case 60:
+    showRestartConnectionAlertMessage();
+    Settings::instance().setUserRecognitionMethod( Settings::RecognizeByNickname );
     break;
   case 99:
     break;
@@ -2319,7 +2353,7 @@ void GuiMain::createGroupChat()
     }
   }
 
-  c = mp_core->createGroupChat( Settings::instance().localUser(), g.name(), g.usersId(), "", true );
+  c = mp_core->createGroupChat( Settings::instance().localUser(), g, true );
   if( c.isValid() )
     showChat( c.id() );
 }

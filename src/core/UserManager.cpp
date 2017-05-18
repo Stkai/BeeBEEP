@@ -86,31 +86,21 @@ User UserManager::findUserByPath( const QString& user_path ) const
   return User();
 }
 
-User UserManager::findUserByAccountName( const QString& account_name, const QString& domain_name ) const
+User UserManager::findUserByAccountNameAndDomainName( const QString& account_name, const QString& domain_name ) const
 {
   if( account_name.isEmpty() )
     return User();
 
-  bool user_found = false;
-  if( account_name.toLower() == Settings::instance().localUser().accountName().toLower() )
+  if( account_name.toLower() == Settings::instance().localUser().accountName().toLower() &&
+      domain_name.toLower() == Settings::instance().localUser().domainName().toLower() )
   {
-    user_found = true;
-    if( !domain_name.isEmpty() && !Settings::instance().localUser().domainName().isEmpty() )
-      user_found = domain_name.toLower() == Settings::instance().localUser().domainName().toLower();
-    if( user_found )
-      return Settings::instance().localUser();
+    return Settings::instance().localUser();
   }
 
   foreach( User u, m_users.toList() )
   {
-    if( u.accountName().toLower() == account_name.toLower() )
-    {
-      user_found = true;
-      if( !domain_name.isEmpty() && !u.domainName().isEmpty() )
-        user_found = domain_name.toLower() == u.domainName().toLower();
-      if( user_found )
-        return u;
-    }
+    if( u.accountName().toLower() == account_name.toLower() && domain_name.toLower() == u.domainName().toLower() )
+      return u;
   }
 
 #ifdef BEEBEEP_DEBUG
@@ -121,17 +111,42 @@ User UserManager::findUserByAccountName( const QString& account_name, const QStr
   return User();
 }
 
+User UserManager::findUserByAccountName( const QString& account_name ) const
+{
+  if( account_name.isEmpty() )
+    return User();
+
+
+  if( account_name.toLower() == Settings::instance().localUser().accountName().toLower() )
+    return Settings::instance().localUser();
+
+  foreach( User u, m_users.toList() )
+  {
+    if( u.accountName().toLower() == account_name.toLower() )
+      return u;
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Unable to find user with account name" << qPrintable( account_name );
+#endif
+
+  return User();
+}
+
 User UserManager::findUserByNicknameAndHash( const QString& user_nickname, const QString& user_hash ) const
 {
   if( user_nickname.isEmpty() || user_hash.isEmpty() )
     return User();
 
-  if( user_nickname == Settings::instance().localUser().name() && user_hash == Settings::instance().localUser().hash() )
+  if( user_nickname.toLower() == Settings::instance().localUser().name().toLower()
+      && user_hash == Settings::instance().localUser().hash() )
+  {
     return Settings::instance().localUser();
+  }
 
   foreach( User u, m_users.toList() )
   {
-    if( u.name() == user_nickname && u.hash() == user_hash )
+    if( u.name().toLower() == user_nickname.toLower() && u.hash() == user_hash )
       return u;
   }
 
@@ -157,7 +172,7 @@ User UserManager::findUserByHash( const QString& user_hash ) const
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with hash:" << qPrintable( user_hash );
+  qDebug() << "Unable to find user with hash" << qPrintable( user_hash );
 #endif
 
   return User();
@@ -178,25 +193,9 @@ User UserManager::findUserByNickname( const QString& user_nickname ) const
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Unable to find user with nickname:" << qPrintable( user_nickname );
+  qDebug() << "Unable to find user with nickname" << qPrintable( user_nickname );
 #endif
   return User();
-}
-
-User UserManager::findUserByUserRecord( const UserRecord& ur ) const
-{
-  if( Settings::instance().trustSystemAccount() )
-  {
-    return findUserByAccountName( ur.account(), ur.domainName() );
-  }
-  else
-  {
-    User u = findUserByNickname( ur.name() );
-    if( !u.isValid() && Settings::instance().trustUserHash() )
-      u = findUserByHash( ur.hash() );
-
-    return u;
-  }
 }
 
 User UserManager::findUserByNetworkAddress( const NetworkAddress& na ) const

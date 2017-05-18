@@ -93,10 +93,13 @@ public:
   QList<FileInfo> messageToFileShare( const Message&, const QHostAddress& ) const;
   Message fileShareRequestMessage() const;
 
+  User recognizeUser( const User&, int user_recognition_method ) const;
+  User recognizeUser( const UserRecord&, int user_recognition_method ) const;
   User createUser( const Message&, const QHostAddress& );
   User createTemporaryUser( const UserRecord& );
   Chat createDefaultChat();
-  Chat createChat( const QString& chat_name, const QList<VNumber>& chat_users_id, const QString& chat_private_id );
+  Chat createPrivateChat( const User& );
+  Chat createChat( const Group& );
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
 

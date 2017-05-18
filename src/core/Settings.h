@@ -52,11 +52,13 @@ public:
   inline bool firstTime() const;
   inline void setFirstTime( bool );
 
-  inline bool allowMultipleInstances() const;
-  inline bool trustSystemAccount() const;
-  inline void setTrustUserHash( bool );
-  inline bool trustUserHash() const;
+  enum UserRecognitionMethods { RecognizeByDefaultMethod, RecognizeByAccountAndDomain, RecognizeByAccount,
+                                RecognizeByNicknameAndHash, RecognizeByNickname, NumUserRecognitionMethods };
+  void setUserRecognitionMethod( int );
+  inline int userRecognitionMethod() const;
+  inline bool userRecognitionUsesDefaultMethod() const;
 
+  inline bool allowMultipleInstances() const;
   inline void setCheckNewVersionAtStartup( bool );
   inline bool checkNewVersionAtStartup() const;
   inline void setPostUsageStatistics( bool );
@@ -354,6 +356,8 @@ public:
   bool removeStartOnSystemBoot();
   bool hasStartOnSystemBoot() const;
 
+  inline void setSaveGroupList( bool );
+  inline bool saveGroupList() const;
   inline void setGroupList( const QStringList& );
   inline const QStringList& groupList() const;
 
@@ -462,8 +466,6 @@ private:
 
   // RC
   bool m_useSettingsFileIni;
-  bool m_trustSystemAccount;
-  bool m_trustUserHash;
   bool m_broadcastOnlyToHostsIni;
   int m_defaultBroadcastPort;
   int m_defaultListenerPort;
@@ -488,6 +490,7 @@ private:
   bool m_useOnlyTextEmoticons;
   bool m_disablePrivateChats;
   bool m_disableFileSharing;
+  int m_userRecognitionMethod;
 
   // Ini
   bool m_firstTime;
@@ -622,6 +625,7 @@ private:
   int m_maxSimultaneousDownloads;
   int m_maxQueuedDownloads;
 
+  bool m_saveGroupList;
   QStringList m_groupList;
   QStringList m_networkAddressList;
   QStringList m_groupSilenced;
@@ -674,11 +678,10 @@ inline const QString& Settings::dataFolder() const { return m_dataFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline void Settings::setLocalUserStatus( User::Status new_value ) { m_localUser.setStatus( new_value ); }
+inline int Settings::userRecognitionMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod ? RecognizeByNicknameAndHash : m_userRecognitionMethod; }
+inline bool Settings::userRecognitionUsesDefaultMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod; }
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
-inline bool Settings::trustSystemAccount() const { return m_trustSystemAccount; }
-inline void Settings::setTrustUserHash( bool new_value ) { m_trustUserHash = new_value; }
-inline bool Settings::trustUserHash() const { return m_trustUserHash; }
 inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }
 inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
@@ -821,6 +824,8 @@ inline void Settings::setConfirmOnDownloadFile( bool new_value ) { m_confirmOnDo
 inline int Settings::maxSimultaneousDownloads() const { return m_maxSimultaneousDownloads; }
 inline int Settings::maxQueuedDownloads() const { return m_maxQueuedDownloads; }
 inline const QDate& Settings::settingsCreationDate() const { return m_settingsCreationDate; }
+inline void Settings::setSaveGroupList( bool new_value ) { m_saveGroupList = new_value; }
+inline bool Settings::saveGroupList() const { return m_saveGroupList; }
 inline void Settings::setGroupList( const QStringList& new_value ) { m_groupList = new_value; }
 inline const QStringList& Settings::groupList() const { return m_groupList; }
 inline const QDateTime& Settings::lastSave() const { return m_lastSave; }

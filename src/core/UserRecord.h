@@ -32,7 +32,7 @@ class UserRecord
 public:
   UserRecord();
   UserRecord( const UserRecord& );
-  UserRecord( const QString& user_name, const QString& user_account, const QString& user_hash );
+  UserRecord( const QString& user_name, const QString& user_account, const QString& user_hash, const QString& domain_name );
 
   UserRecord& operator=( const UserRecord& );
 

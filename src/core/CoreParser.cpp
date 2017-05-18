@@ -218,11 +218,33 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
   if( m.hasFlag( Message::Request ) )
   {
+ #ifdef BEEBEEP_DEBUG
+    qDebug() << "Group chat request from" << qPrintable( u.path() );
+ #endif
     if( ChatManager::instance().isChatRefused( cmd.groupId() ) )
     {
-      Message group_refuse_message = Protocol::instance().groupChatRefuseMessage( cmd );
-      sendMessageToLocalNetwork( u, group_refuse_message );
+      qWarning() << "Group chat request from" << qPrintable( u.name() ) << "is refused because the chat"
+                 << qPrintable( cmd.groupName() ) << "is blocked on id" << qPrintable( cmd.groupId() );
+      sendMessageToLocalNetwork( u, Protocol::instance().groupChatRefuseMessage( cmd ) );
       return;
+    }
+
+    Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
+    if( group_chat.isValid() )
+    {
+      if( cmd.groupLastModified().isValid() && cmd.groupLastModified() <= group_chat.lastModified() )
+      {
+        qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it is old:" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
+        return;
+      }
+
+      if( !group_chat.usersId().contains( ID_LOCAL_USER ) )
+      {
+        ChatManager::instance().addToRefusedChat( ChatRecord( group_chat.name(), group_chat.privateId() ) );
+        qWarning() << "Group chat request from" << qPrintable( u.name() ) << "is refused because you have left the chat" << qPrintable( group_chat.name() );
+        sendMessageToLocalNetwork( u, Protocol::instance().groupChatRefuseMessage( cmd ) );
+        return;
+      }
     }
 
     UserList ul;
@@ -234,33 +256,42 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       QStringList user_paths = Protocol::instance().userPathsFromGroupRequestMessage_obsolete( m );
       if( user_paths.isEmpty() )
       {
-        qWarning() << "Invalid group message request from" << qPrintable( u.path() ) << "for chat" << qPrintable( cmd.groupName() );
+        qWarning() << "(obsolete) Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has not members";
         return;
       }
+      else
+        qDebug() << "(obsolete) Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has" << user_paths.size() << "members";
 
       foreach( QString user_path, user_paths )
       {
         if( user_path.isEmpty() )
         {
-          qWarning() << "Invalid group message with empty user path from" << qPrintable( u.path() ) << "for chat" << qPrintable( cmd.groupName() );
+          qWarning() << "(obsolete) Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has a NULL member";
           continue;
         }
 
-        User user_tmp = UserManager::instance().findUserByPath( user_path );
+        User user_tmp = UserManager::instance().findUserByNickname( User::nameFromPath( user_path ) );
         if( user_tmp.isValid() )
         {
           if( !user_tmp.isLocal() )
+          {
+#ifdef BEEBEEP_DEBUG
+            qDebug() << "(obsolete) Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has found member" << qPrintable( user_tmp.name() );
+#endif
             ul.set( user_tmp );
+          }
         }
         else
         {
-          UserRecord ur( User::nameFromPath( user_path ), "", "" );
+          UserRecord ur( User::nameFromPath( user_path ), "", "", "" );
           ur.setNetworkAddress( NetworkAddress::fromString( User::hostAddressAndPortFromPath( user_path ) ) );
           if( !ur.networkAddressIsValid() )
-            qWarning() << "Invalid network address found in user" << qPrintable( user_path ) << "from group request of" << qPrintable( u.name() );
+            qWarning() << "(obsolete) Invalid network address found in user" << qPrintable( user_path ) << "from group request of" << qPrintable( u.name() );
           user_tmp = Protocol::instance().createTemporaryUser( ur );
-          qDebug() << "Temporary user" << user_tmp.path() << "created by group request of" << qPrintable( u.name() );
+          qDebug() << "(obsolete) Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has created temporary user" << user_tmp.id() << qPrintable( user_tmp.name() );
           UserManager::instance().setUser( user_tmp );
+          createPrivateChat( user_tmp );
+          emit userChanged( user_tmp );
           ul.set( user_tmp );
         }
       }
@@ -270,13 +301,15 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       QList<UserRecord> user_records = Protocol::instance().userRecordsFromGroupRequestMessage( m );
       if( user_records.isEmpty() )
       {
-        qWarning() << "Invalid group message request with empty user records from" << qPrintable( u.path() ) << "for chat" << qPrintable( cmd.groupName() );;
+        qWarning() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has not user records";
         return;
       }
+      else
+        qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has" << user_records.size() << "members";
 
       foreach( UserRecord ur, user_records )
       {
-        User group_member = UserManager::instance().findUserByUserRecord( ur );
+        User group_member = Protocol::instance().recognizeUser( ur, Settings::instance().userRecognitionMethod() );
         if( group_member.isLocal() )
           continue;
 
@@ -284,7 +317,8 @@ void Core::parseGroupMessage( const User& u, const Message& m )
         {
           group_member = Protocol::instance().createTemporaryUser( ur );
           UserManager::instance().setUser( group_member );
-          qDebug() << "Temporary user" << group_member.path() << "created by group request of" << u.name();
+          qDebug() << "Temporary user" << group_member.id() << qPrintable( group_member.name() ) << "is created after request of" << qPrintable( u.name() ) << "for group" << qPrintable( cmd.groupName() );
+          createPrivateChat( group_member );
           emit userChanged( group_member );
         }
 
@@ -292,28 +326,33 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       }
     }
 
-    Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
     if( group_chat.isValid() )
     {
-      if( group_chat.usersId().contains( ID_LOCAL_USER ) )
-      {
-        if( cmd.groupLastModified().isValid() && cmd.groupLastModified() <= group_chat.lastModified() )
-          return;
-        changeGroupChat( u, group_chat.group() );
-      }
-      else
-      {
-        sendGroupChatRefuseMessage( group_chat, ul );
-        ChatManager::instance().addToRefusedChat( ChatRecord( group_chat.name(), group_chat.privateId() ) );
-        qDebug() << "Chat" << qPrintable( group_chat.name() ) << "is added to refused chats after the request of user" << qPrintable( u.name() );
-      }
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is accepted to make changes";
+#endif
+      Group g = group_chat.group();
+      g.setName( cmd.groupName() );
+      g.setUsers( ul.toUsersId() );
+      if( cmd.groupLastModified().isValid() )
+        g.setLastModified( cmd.groupLastModified() );
+      changeGroupChat( u, g );
     }
     else
     {
       if( ul.toList().size() > 2 )
-        createGroupChat( u, cmd.groupName(), ul.toUsersId(), cmd.groupId(), false );
+      {
+        Group g;
+        g.setName( cmd.groupName() );
+        g.setPrivateId( cmd.groupId() );
+        g.setUsers( ul.toUsersId() );
+        if( cmd.groupLastModified().isValid() )
+          g.setLastModified( cmd.groupLastModified() );
+
+        createGroupChat( u, g, false );
+      }
       else
-        qWarning() << "Unable to create group chat" << qPrintable( cmd.groupName() ) << "from user" << qPrintable( u.name() ) << "because members are minus than 2";
+        qWarning() << "Unable to create group chat" << qPrintable( cmd.groupName() ) << "from user" << qPrintable( u.name() ) << "because members are minus than 3";
     }
   }
   else if( m.hasFlag( Message::Refused ) )

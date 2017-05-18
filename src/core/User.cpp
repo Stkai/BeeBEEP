@@ -25,20 +25,30 @@
 
 
 User::User()
-  : m_id( ID_INVALID ), m_vCard(), m_networkAddress(), m_status( User::Offline ),
-    m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ),
-    m_qtVersion( "0" ), m_protocolVersion( 0 ), m_statusChangedIn()
+ : m_id( ID_INVALID ), m_vCard(), m_networkAddress(), m_status( User::Offline ),
+   m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
+   m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ),
+   m_qtVersion( "0" ), m_protocolVersion( 0 ), m_statusChangedIn()
 {
 }
 
 User::User( VNumber new_id )
-  : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( "127.0.0.1" ), DEFAULT_LISTENER_PORT ),
-    m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
-    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ),
-    m_protocolVersion( 0 ), m_statusChangedIn()
+ : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( "127.0.0.1" ), DEFAULT_LISTENER_PORT ),
+   m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
+   m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ),
+   m_protocolVersion( 0 ), m_statusChangedIn()
 {
   setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
+}
+
+User::User( const UserRecord& ur )
+ : m_id( ID_INVALID ), m_vCard(), m_networkAddress( ur.networkAddress() ), m_status( User::Offline ),
+   m_statusDescription( "" ), m_color( ur.color() ), m_accountName( ur.account() ),
+   m_domainName( ur.domainName() ), m_version( "" ), m_hash( ur.hash() ), m_isFavorite( ur.isFavorite() ),
+   m_qtVersion( "0" ), m_protocolVersion( 0 ), m_statusChangedIn()
+{
+  if( !ur.name().isEmpty() )
+    setName( ur.name() );
 }
 
 User::User( const User& u )

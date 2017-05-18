@@ -219,42 +219,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   else
     qDebug() << qPrintable( u.path() ) << "has completed the authentication";
 
-  User user_found;
-  bool user_has_same_account_name = false;
-
-  if( Settings::instance().trustSystemAccount() )
-  {
-    user_found = UserManager::instance().findUserByAccountName( u.accountName(), u.domainName() );
-    if( user_found.isValid() )
-    {
-      user_has_same_account_name = true;
-      qDebug() << "User found in list with account name:" << qPrintable( u.accountName() );
-      if( !u.domainName().isEmpty() )
-        qDebug() << "User found in list also with domain name:" << qPrintable( u.domainName() );
-    }
-  }
-  else
-  {
-    user_found = UserManager::instance().findUserByNicknameAndHash( u.name(), u.hash() );
-    if( !user_found.isValid() )
-    {
-      if( Settings::instance().trustUserHash() )
-      {
-        user_found = UserManager::instance().findUserByHash( u.hash() );
-        if( user_found.isValid() )
-          qDebug() << "User found in list with hash:" << qPrintable( u.hash() );
-      }
-      else
-      {
-        user_found = UserManager::instance().findUserByNickname( u.name() );
-        if( user_found.isValid() )
-          qDebug() << "User found in list with nickname:" << qPrintable( u.name() );
-      }
-    }
-    else
-      qDebug() << "User found in list with nickname and hash:" << qPrintable( u.name() );
-  }
-
+  User user_found = Protocol::instance().recognizeUser( u, Settings::instance().userRecognitionMethod() );
   bool user_path_changed = false;
 
   if( user_found.isValid() )
@@ -265,7 +230,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       if( user_path_changed )
       {
-        if( user_has_same_account_name )
+        if( user_found.accountName() == u.accountName() )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
                         .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.accountName() );
@@ -288,7 +253,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       if( user_path_changed )
       {
-        if( user_has_same_account_name )
+        if( user_found.accountName() == u.accountName() )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
                         .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path(), u.accountName() );

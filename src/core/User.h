@@ -35,6 +35,7 @@ public:
   User();
   User( const User& );
   explicit User( VNumber );
+  explicit User( const UserRecord& );
 
   User& operator=( const User& );
   inline bool operator==( const User& ) const;
@@ -75,6 +76,7 @@ public:
   inline const QDateTime& statusChangedIn() const;
 
   inline QString path() const;
+  inline QString accountPath() const;
 
   bool isBirthDay() const;
 
@@ -136,5 +138,6 @@ inline int User::protocolVersion() const { return m_protocolVersion; }
 inline void User::setStatusChangedIn( const QDateTime& new_value ) { m_statusChangedIn = new_value; }
 inline const QDateTime& User::statusChangedIn() const { return m_statusChangedIn; }
 inline QString User::path() const { return QString( "%1@%2" ).arg( name().toLower(), m_networkAddress.toString() ); }
+inline QString User::accountPath() const { return m_domainName.isEmpty() ? m_accountName : QString( "%1@%2" ).arg( m_accountName, m_domainName ); }
 
 #endif // BEEBEEP_USER_H

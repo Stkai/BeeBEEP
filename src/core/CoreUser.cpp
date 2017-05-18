@@ -191,6 +191,7 @@ void Core::loadUsersAndGroups()
         qDebug() << "Loading user:" << qPrintable( u.path() );
         UserManager::instance().setUser( u );
         createPrivateChat( u );
+        emit userChanged( u );
       }
     }
   }
@@ -204,9 +205,23 @@ void Core::loadUsersAndGroups()
       g = Protocol::instance().loadGroup( group_data );
       if( g.isValid() )
       {
-        qDebug() << "Loading group chat:" << qPrintable( g.name() );
+        qDebug() << "Loading group chat" << qPrintable( g.name() );
+        /* check for temporary users created */
+        foreach( VNumber user_id, g.usersId() )
+        {
+          if( user_id == ID_LOCAL_USER )
+            continue;
+
+          if( !ChatManager::instance().privateChatForUser( user_id ).isValid() )
+          {
+            User u_tmp = UserManager::instance().findUser( user_id );
+            createPrivateChat( u_tmp );
+            emit userChanged( u_tmp );
+          }
+        }
+
         if( !ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID ).isValid() )
-          createGroupChat( Settings::instance().localUser(), g.name(), g.usersId(), g.privateId(), false );
+          createGroupChat( Settings::instance().localUser(), g, false );
       }
     }
   }
@@ -255,10 +270,13 @@ void Core::saveUsersAndGroups()
   if( !save_data.isEmpty() )
     save_data.clear();
 
-  foreach( Chat c, ChatManager::instance().constChatList() )
+  if( Settings::instance().saveGroupList() )
   {
-    if( c.isGroup() )
-      save_data.append( Protocol::instance().saveGroup( c.group() ) );
+    foreach( Chat c, ChatManager::instance().constChatList() )
+    {
+      if( c.isGroup() )
+        save_data.append( Protocol::instance().saveGroup( c.group() ) );
+    }
   }
 
   Settings::instance().setGroupList( save_data );

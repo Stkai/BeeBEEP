@@ -2036,14 +2036,6 @@ Inserisci un nome differente.</translation>
         <translation>connessi</translation>
     </message>
     <message>
-        <source>Recognize users by system or domain account</source>
-        <translation>Riconosci gli utenti dal loro account di dominio o di sistema</translation>
-    </message>
-    <message>
-        <source>Recognize users only by nickname</source>
-        <translation>Riconosci gli utenti solo dal soprannome</translation>
-    </message>
-    <message>
         <source>news</source>
         <translation>nuove</translation>
     </message>
@@ -2150,6 +2142,34 @@ Inserisci un nome differente.</translation>
     <message>
         <source>You have to restart your connection to apply changes.</source>
         <translation>Devi disconnetterti e poi connetterti di nuovo per vedere le modifiche.</translation>
+    </message>
+    <message>
+        <source>Recognize users</source>
+        <translation>Riconoscimento degli utenti</translation>
+    </message>
+    <message>
+        <source>By account name and domain name</source>
+        <translation>Dall&apos;utente di sistema associato al dominio</translation>
+    </message>
+    <message>
+        <source>By account name</source>
+        <translation>Dall&apos;utente di sistema</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation>predefinito</translation>
+    </message>
+    <message>
+        <source>By nickname and user private id</source>
+        <translation>Dal soprannome e dal suo identificativo privato</translation>
+    </message>
+    <message>
+        <source>By nickname</source>
+        <translation>Dal soprannome</translation>
+    </message>
+    <message>
+        <source>Save groups</source>
+        <translation>Salva i gruppi</translation>
     </message>
 </context>
 <context>

@@ -46,9 +46,9 @@ const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect"; // aHR0c
 const char* BEEBEEP_GA_EVENT_VERSION = "1";
 const char* HUNSPELL_VERSION = "1.6.1";
 const char* BEEBEEP_VERSION = "4.0.0";
-const int BEEBEEP_PROTO_VERSION = 68;
-const int BEEBEEP_SETTINGS_VERSION = 8;
-const int BEEBEEP_BUILD = 894;
+const int BEEBEEP_PROTO_VERSION = 70;
+const int BEEBEEP_SETTINGS_VERSION = 9;
+const int BEEBEEP_BUILD = 895;
 
 #endif // BEEBEEP_VERSION_H
 

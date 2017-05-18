@@ -71,8 +71,6 @@ Settings::Settings()
 #endif
 
   m_allowMultipleInstances = false;
-  m_trustSystemAccount = false;
-  m_trustUserHash = true;
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
   m_preferredSubnets = "";
@@ -98,6 +96,7 @@ Settings::Settings()
   m_signature = "";
   m_useOnlyTextEmoticons = false;
   m_disablePrivateChats = false;
+  m_userRecognitionMethod = RecognizeByDefaultMethod;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -109,6 +108,7 @@ Settings::Settings()
   m_confirmOnDownloadFile = false;
   m_promptOnCloseEvent = true;
   m_saveUserList = true;
+  m_saveGroupList = true;
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false, false ) );
   setPassword( defaultPassword() );
@@ -281,9 +281,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "Signature", m_signature );
     sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
     sets->setValue( "DisablePrivateChats", m_disablePrivateChats );
-    sets->endGroup();
-    sets->beginGroup( "Groups" );
-    sets->setValue( "TrustSystemAccount", m_trustSystemAccount );
+    sets->setValue( "UserRecognitionMethod", m_userRecognitionMethod );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -316,6 +314,11 @@ void Settings::loadRcFile()
 
   QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
   sets->setFallbacksEnabled( false );
+
+  sets->beginGroup( "Groups" );
+  bool trust_system_account = sets->value( "TrustSystemAccount", false ).toBool(); // for compatibility
+  sets->endGroup();
+
   sets->beginGroup( "BeeBEEP" );
   m_enableSaveData = sets->value( "EnableSaveData", m_enableSaveData ).toBool();
   m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
@@ -358,12 +361,9 @@ void Settings::loadRcFile()
   m_signature = sets->value( "Signature", m_signature ).toString();
   m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();
   m_disablePrivateChats = sets->value( "DisablePrivateChats", m_disablePrivateChats ).toBool();
+  int user_recognition_method = sets->value( "UserRecognitionMethod", -1 ).toInt();
+  setUserRecognitionMethod( (user_recognition_method < 0 && trust_system_account) ? RecognizeByAccount : user_recognition_method );
   sets->endGroup();
-
-  sets->beginGroup( "Groups" );
-  m_trustSystemAccount = sets->value( "TrustSystemAccount", m_trustSystemAccount ).toBool();
-  sets->endGroup();
-
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
     qDebug() << "RC read ->" << qPrintable( key ) << "=" << qPrintable( sets->value( key ).toString() );
@@ -424,6 +424,14 @@ bool Settings::createDefaultHostsFile()
     qWarning() << "Unable to create the HOSTS default configuration file in" << file_host_ini.fileName();
     return false;
   }
+}
+
+void Settings::setUserRecognitionMethod( int new_value )
+{
+  if( new_value <= 0 || new_value >= NumUserRecognitionMethods )
+    m_userRecognitionMethod = RecognizeByDefaultMethod;
+  else
+    m_userRecognitionMethod = new_value;
 }
 
 QString Settings::version( bool qt_version, bool debug_info ) const
@@ -615,7 +623,7 @@ QByteArray Settings::hash( const QString& string_to_hash ) const
 QString Settings::simpleHash( const QString& string_to_hash ) const
 {
 #if QT_VERSION >= 0x050000
-  QByteArray hash_generated = QCryptographicHash::hash( string_to_hash.toUtf8(), QCryptographicHash::Sha512 );
+  QByteArray hash_generated = QCryptographicHash::hash( string_to_hash.toUtf8(), QCryptographicHash::Sha256 );
 #else
   QByteArray hash_generated = QCryptographicHash::hash( string_to_hash.toUtf8(), QCryptographicHash::Sha1 );
 #endif
@@ -827,7 +835,11 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "User" );
-  m_trustUserHash = sets->value( "TrustUserHash", m_trustUserHash ).toBool();
+  if( m_userRecognitionMethod == RecognizeByDefaultMethod )
+  {
+    int user_recognition_method = sets->value( "RecognitionMethod", m_userRecognitionMethod ).toInt();
+    setUserRecognitionMethod( user_recognition_method );
+  }
   m_localUser.setHash( sets->value( "LocalHash", "" ).toString() );
   m_localUser.setName( sets->value( "LocalName", "" ).toString() ); // For Backward compatibility, if empty the name is set after
   m_localUser.setColor( sets->value( "LocalColor", "#000000" ).toString() );
@@ -1071,6 +1083,7 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Group" );
+  m_saveGroupList = sets->value( "SaveGroups", m_saveGroupList ).toBool();
   m_groupSilenced = sets->value( "Silenced", QStringList() ).toStringList();
   m_groupList = sets->value( "List", QStringList() ).toStringList();
   sets->endGroup();
@@ -1148,7 +1161,8 @@ void Settings::save()
   sets->setValue( "ClearAllReadMessages", m_chatClearAllReadMessages );
   sets->endGroup();
   sets->beginGroup( "User" );
-  sets->setValue( "TrustUserHash", m_trustUserHash );
+  if( m_userRecognitionMethod != RecognizeByDefaultMethod )
+    sets->setValue( "RecognitionMethod", m_userRecognitionMethod );
   sets->setValue( "LocalHash", m_localUser.hash() );
   sets->setValue( "LocalColor", m_localUser.color() );
   sets->setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
@@ -1316,13 +1330,14 @@ void Settings::save()
   sets->setValue( "ShareList", m_localShare );
   sets->endGroup();
 
-  if( !m_groupList.isEmpty() )
+  sets->beginGroup( "Group" );
+  sets->setValue( "SaveGroups", m_saveGroupList );
+  if( m_saveGroupList && !m_groupList.isEmpty() )
   {
-    sets->beginGroup( "Group" );
     sets->setValue( "Silenced", m_groupSilenced );
     sets->setValue( "List", m_groupList );
-    sets->endGroup();
   }
+  sets->endGroup();
 
   if( !m_pluginSettings.isEmpty() )
   {
