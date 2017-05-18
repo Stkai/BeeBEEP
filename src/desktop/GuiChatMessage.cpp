@@ -102,7 +102,7 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
                            .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
                            .arg( cm.message() );
 
-  if( last_user_id != ID_SYSTEM_MESSAGE )
+  if( cm.type() != ChatMessage::Other && last_user_id != ID_SYSTEM_MESSAGE )
     html_message.prepend( QLatin1String( "<br />" ) );
 
   return html_message;
