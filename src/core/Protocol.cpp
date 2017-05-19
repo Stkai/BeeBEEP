@@ -1613,6 +1613,7 @@ QString Protocol::newMd5Id()
   sl << QString::number( newId() );
   sl << QString::number( Random::d100() );
   sl << Settings::instance().localUser().path();
+  sl << QHostInfo::localHostName();
   sl << QString::number( Random::d100() );
   sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" );
   sl << QString::number( Random::d100() );

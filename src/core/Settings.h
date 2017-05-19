@@ -217,8 +217,6 @@ public:
   void setNotificationEnabledForGroup( const QString&, bool );
   inline void setUseNativeEmoticons( bool );
   inline bool useNativeEmoticons() const;
-  inline void setShowImagePreview( bool );
-  inline bool showImagePreview() const;
   inline int imagePreviewHeight() const;
   inline void setFloatingChatGeometry( const QByteArray& );
   inline void setFloatingChatState( const QByteArray& );
@@ -546,7 +544,6 @@ private:
   int m_chatMessagesToShow;
   bool m_showEmoticonMenu;
   bool m_useNativeEmoticons;
-  bool m_showImagePreview;
   int m_imagePreviewHeight;
   bool m_showUserStatusBackgroundColor;
   bool m_showUserStatusDescription;
@@ -854,8 +851,6 @@ inline const QStringList& Settings::recentEmoticons() const { return m_recentEmo
 inline bool Settings::isNotificationDisabledForGroup( const QString& group_id ) const { return group_id.isEmpty() ? false : m_groupSilenced.contains( group_id ); }
 inline void Settings::setUseNativeEmoticons( bool new_value ) { m_useNativeEmoticons = new_value; }
 inline bool Settings::useNativeEmoticons() const { return m_useNativeEmoticons; }
-inline void Settings::setShowImagePreview( bool new_value ) { m_showImagePreview = new_value; }
-inline bool Settings::showImagePreview() const { return m_showImagePreview; }
 inline int Settings::imagePreviewHeight() const { return m_imagePreviewHeight; }
 inline void Settings::setPromptOnCloseEvent( bool new_value ) { m_promptOnCloseEvent = new_value; }
 inline bool Settings::promptOnCloseEvent() const { return m_promptOnCloseEvent; }

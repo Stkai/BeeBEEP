@@ -313,7 +313,8 @@ static const char* ChatMessageTypeToString[] =
   QT_TRANSLATE_NOOP( "ChatMessage", "User Information" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "File Transfer" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "History" ),
-  QT_TRANSLATE_NOOP( "ChatMessage", "Other" )
+  QT_TRANSLATE_NOOP( "ChatMessage", "Other" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "Image Preview" )
 };
 
 QString Bee::chatMessageTypeToString( int cmt )

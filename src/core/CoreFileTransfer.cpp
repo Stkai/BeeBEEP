@@ -137,6 +137,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
   QString action_txt = fi.isDownload() ? tr( "Download" ) : tr( "Upload" );
   QString sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), u.name(), msg );
+  QString sys_msg_img_preview = "";
   QString sys_msg_open_file = "";
 
   FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
@@ -146,7 +147,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     {
       if( fi.isDownload() )
         FileShare::instance().addDownloadedFile( fi );
-      if( Settings::instance().showImagePreview() && Bee::isFileTypeImage( fi.suffix() ) )
+      if( Bee::isFileTypeImage( fi.suffix() ) )
       {
         QImage img;
         QImageReader img_reader( fi.path() );
@@ -169,7 +170,8 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
           else
             img_preview_height = img.height();
 
-          sys_msg += QString( "<br><div align=center><img src=\"%1\" height=\"%2\" /></div>" )
+          // I have to add <br /> to center the image on the first display (maybe Qt bug)
+          sys_msg_img_preview = QString( "<br /><div align=center><img src=\"%1\" height=\"%2\" /></div>" )
                   .arg( QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
         }
         else
@@ -178,7 +180,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
       QString s_open = tr( "Open" );
       QUrl file_url = QUrl::fromLocalFile( fi.path() );
-      sys_msg_open_file += QString( "%1" ).arg( icon_html );
+      sys_msg_open_file = QString( "%1" ).arg( icon_html );
       sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
       file_url.setScheme( QLatin1String( "beeshowfileinfolder" ) );
       sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
@@ -193,6 +195,8 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   }
 
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+  if( !sys_msg_img_preview.isEmpty() )
+    dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_img_preview, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::ImagePreview );
   if( !sys_msg_open_file.isEmpty() )
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
 

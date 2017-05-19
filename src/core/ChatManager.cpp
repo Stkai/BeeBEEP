@@ -43,7 +43,7 @@ Chat ChatManager::chat( VNumber chat_id ) const
       if( c.id() == chat_id )
         return c;
     }
-    qWarning() << "Unable to find chat with id:" << chat_id;
+    qWarning() << "Unable to find chat" << chat_id;
   }
   return Chat();
 }
@@ -59,7 +59,7 @@ Chat ChatManager::privateChatForUser( VNumber user_id ) const
       return c;
   }
 
-  qWarning() << "Unable to find private chat for user id:" << user_id;
+  qWarning() << "Unable to find private chat for user" << user_id;
   return Chat();
 }
 
@@ -73,7 +73,7 @@ Chat ChatManager::findChatByName( const QString& chat_name ) const
         return c;
     }
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to find group chat with name:" << chat_name;
+    qWarning() << "Unable to find group chat" << chat_name;
 #endif
   }
 #ifdef BEEBEEP_DEBUG
@@ -96,7 +96,7 @@ Chat ChatManager::findChatByPrivateId( const QString& chat_private_id, bool skip
         return c;
     }
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to find group chat with private id:" << chat_private_id;
+    qWarning() << "Unable to find group chat with private id" << chat_private_id;
 #endif
     return Chat();
   }

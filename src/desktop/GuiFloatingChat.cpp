@@ -120,11 +120,11 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
       QString user_status_description = u.status() != User::Offline ? u.statusDescription() : "";
 
       if( !user_status.isEmpty() && !user_status_description.isEmpty() )
-        window_title = QString( "%1 (%2 - %3)" ).arg( u.name(), Bee::userStatusToString( u.status() ), user_status_description );
+        window_title = QString( "%1 [%2 - %3]" ).arg( u.name(), Bee::userStatusToString( u.status() ), user_status_description );
       else if( !user_status.isEmpty() )
         window_title = QString( "%1 (%2)" ).arg( u.name(), user_status );
       else if( !user_status_description.isEmpty() )
-        window_title = QString( "%1 (%2)" ).arg( u.name(), user_status_description );
+        window_title = QString( "%1 [%2]" ).arg( u.name(), user_status_description );
       else
         window_title = u.name();
 

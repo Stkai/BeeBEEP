@@ -162,6 +162,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_savedChatList, SIGNAL( savedChatRemoved( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
   connect( mp_savedChatList, SIGNAL( savedChatLinkRequest( const QString& ) ), this, SLOT( linkSavedChat( const QString& ) ) );
 
+  connect( statusBar(), SIGNAL( messageChanged( const QString& ) ), this, SLOT( onStatusBarMessageChanged( const QString& ) ) );
+
   initShortcuts();
   initGuiItems();
   updateShortcuts();
@@ -1295,7 +1297,7 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setSaveUserList( act->isChecked() );
     break;
   case 33:
-    Settings::instance().setShowImagePreview( act->isChecked() );
+    // free
     break;
   case 34:
     Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
@@ -1544,10 +1546,9 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   {
     showAlertForMessage( c, cm );
     mp_groupList->updateChat( c ); // for unread messages
+    mp_userList->updateChat( c ); // to sort users
+    mp_chatList->updateChat( c ); // to sort chats
   }
-
-  mp_userList->updateChat( c ); // to sort users
-  mp_chatList->updateChat( c ); // to sort chats
 
   updateNewMessageAction();
 }
@@ -1640,6 +1641,7 @@ void GuiMain::changeStatusDescription()
   mp_core->setLocalUserStatusDescription( Settings::instance().localUser().status(), status_description, true );
   loadUserStatusRecentlyUsed();
   updateStatusIcon();
+  updateLocalStatusMessage();
 }
 
 void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
@@ -2551,9 +2553,24 @@ void GuiMain::exitFromIdle()
   updateStatusIcon();
 }
 
+void GuiMain::updateLocalStatusMessage()
+{
+  showMessage( Settings::instance().localUser().statusDescription(), 0 );
+}
+
+void GuiMain::onStatusBarMessageChanged( const QString& msg )
+{
+  if( msg.isEmpty() && !Settings::instance().localUser().statusDescription().isEmpty() )
+    QTimer::singleShot( 0, this, SLOT( updateLocalStatusMessage() ) );
+}
+
 void GuiMain::showMessage( const QString& status_msg, int time_out )
 {
   statusBar()->showMessage( status_msg, time_out );
+  if( status_msg == Settings::instance().localUser().statusDescription() )
+    statusBar()->setToolTip( tr( "Your status description" ) );
+  else
+    statusBar()->setToolTip( "" );
 }
 
 void GuiMain::changeUserColor( VNumber user_id, const QString& user_color )
@@ -2753,11 +2770,6 @@ void GuiMain::showChatSettingsMenu()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
-
-  act = mp_menuChat->addAction( tr( "Show preview of the images" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showImagePreview() );
-  act->setData( 33 );
 
   act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -3325,6 +3337,9 @@ void GuiMain::readAllMessagesInChat( VNumber chat_id )
   if( mp_core->readAllMessagesInChat( chat_id ) )
   {
     Chat c = ChatManager::instance().chat( chat_id );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Updating chat with" << qPrintable( c.name() ) << "after read all messages";
+#endif
     mp_userList->setUnreadMessages( c.id(), 0 );
     mp_chatList->updateChat( c );
     mp_groupList->updateChat( c );

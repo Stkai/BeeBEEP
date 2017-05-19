@@ -174,6 +174,8 @@ private slots:
   void onMainTabChanged( int );
   void showWorkgroups();
   void showRefusedChats();
+  void updateLocalStatusMessage();
+  void onStatusBarMessageChanged( const QString& );
 
 protected:
   void keyPressEvent( QKeyEvent* );

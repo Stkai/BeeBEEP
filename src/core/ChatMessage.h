@@ -31,7 +31,7 @@ class Message;
 class ChatMessage
 {
 public:
-  enum Type { Header, System, Chat, Connection, UserInfo, FileTransfer, History, Other, NumTypes };
+  enum Type { Header, System, Chat, Connection, UserInfo, FileTransfer, History, Other, ImagePreview, NumTypes };
 
   ChatMessage();
   ChatMessage( const ChatMessage& );

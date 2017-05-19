@@ -81,9 +81,6 @@ bool GuiGroupItem::updateUser( const User& u )
   else
     setToolTip( 0, "" );
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiGroupItem update user" << qPrintable( u.name() ) << "in" << treeWidget()->topLevelItemCount() << "in list";
-#endif
   return true;
 }
 
@@ -112,10 +109,6 @@ bool GuiGroupItem::updateChat( const Chat& c )
       addChild( user_item );
     }
   }
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiGroupItem update chat" << qPrintable( c.name() ) << "in" << treeWidget()->topLevelItemCount() << "in list";
-#endif
 
   return true;
 }

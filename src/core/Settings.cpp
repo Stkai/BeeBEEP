@@ -825,7 +825,6 @@ void Settings::load()
   if( m_chatMessageFilter.size() < (int)ChatMessage::NumTypes )
     m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
   m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
-  m_showImagePreview = sets->value( "ShowImagePreview", true ).toBool();
   m_chatMessagesToShow = sets->value( "ChatMessagesToShow", 80 ).toInt();
   m_chatMaxMessagesToShow = sets->value( "ChatMaxMessagesToShow", false ).toBool();
   m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
@@ -1152,7 +1151,6 @@ void Settings::save()
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
   sets->setValue( "MessageFilter", m_chatMessageFilter );
   sets->setValue( "ShowOnlyMessagesInDefaultChat", m_showOnlyMessagesInDefaultChat );
-  sets->setValue( "ShowImagePreview", m_showImagePreview );
   sets->setValue( "ChatMessagesToShow", m_chatMessagesToShow );
   sets->setValue( "ChatMaxMessagesToShow", m_chatMaxMessagesToShow );
   sets->setValue( "ImagePreviewHeight", m_imagePreviewHeight );

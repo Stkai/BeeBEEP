@@ -372,10 +372,11 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
     User u = UserManager::instance().findUser( cm.userId() );
     if( !u.isValid() )
     {
-      qWarning() << "User" << cm.userId() << "not found for message:" << cm.message();
+      qWarning() << "User" << cm.userId() << "not found for message:" << qPrintable( cm.message() );
       return "";
     }
-    s = GuiChatMessage::formatMessage( u, cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false, false );
+    s = GuiChatMessage::formatMessage( u, cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false, false,
+                                       Settings::instance().showMessagesGroupByUser(), Settings::instance().chatUseYourNameInsteadOfYou(), Settings::instance().chatCompact() );
   }
   else
     s = GuiChatMessage::formatSystemMessage( cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false );

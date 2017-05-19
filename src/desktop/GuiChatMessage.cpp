@@ -45,7 +45,8 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
   return date_time_stamp_format.isEmpty() ? date_time_stamp_format : cm.timestamp().toString( date_time_stamp_format );
 }
 
-QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool skip_system_message )
+QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool skip_system_message,
+                                       bool show_message_group_by_user, bool use_your_name, bool use_chat_compact )
 {
   QString text_formatted = cm.message();
   if( cm.textColor().isValid() )
@@ -54,22 +55,22 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
     text_formatted.append( QLatin1String( "</font>" ) );
   }
 
-  bool append_message_to_previous = Settings::instance().showMessagesGroupByUser() && last_user_id == u.id();
+  bool append_message_to_previous = show_message_group_by_user && last_user_id == u.id();
 
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
   QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=#808080>(%1)</font>" ).arg( date_time_stamp );
-  QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !Settings::instance().chatUseYourNameInsteadOfYou()) ? QObject::tr( "You" ) : (u.isValid() ? u.name() : QObject::tr( "Unknown" ));
+  QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? u.name() : QObject::tr( "Unknown" ));
   QString html_user_name = user_name.isEmpty() ? user_name : QString( "<font color=%1><b>%2</b></font>%3%4" )
                                                                .arg( u.color() )
                                                                .arg( user_name )
                                                                .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
-                                                               .arg( (Settings::instance().chatCompact() && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br />" ) );
+                                                               .arg( (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br />" ) );
 
   QString html_message;
 
   if( Settings::instance().showTextInModeRTL() )
     html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
-  else if( Settings::instance().chatCompact() )
+  else if( use_chat_compact )
     html_message = QString( "%1 %2 %3" ).arg( html_date_time_stamp ).arg( html_user_name.isEmpty() ? QLatin1String( "&nbsp;&nbsp;" ) : html_user_name ).arg( text_formatted );
   else
     html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
@@ -81,7 +82,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   }
   else
   {
-    if( !append_message_to_previous && !Settings::instance().chatCompact() )
+    if( !append_message_to_previous && !use_chat_compact )
       html_message.prepend( QLatin1String( "<br />" ) );
   }
 
@@ -97,8 +98,7 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
 
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
 
-  QString html_message = QString( "%1<font color=#808080>%2%3</font><br />" )
-                           .arg( Settings::instance().chatCompact() ? QLatin1String( "" ) : QLatin1String( "<br />" ) )
+  QString html_message = QString( "<font color=#808080>%1%2</font><br />" )
                            .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
                            .arg( cm.message() );
 
@@ -138,7 +138,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, boo
         if( u.isValid() )
           chat_users.set( u );
       }
-      html_text += formatMessage( u, cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, skip_system_message );
+      html_text += formatMessage( u, cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, skip_system_message, false, true, true );
     }
 
     last_message_user_id = cm.userId();
@@ -160,6 +160,7 @@ bool GuiChatMessage::messageCanBeShowedInDefaultChat( const ChatMessage& cm )
   case ChatMessage::Chat:
   case ChatMessage::History:
   case ChatMessage::Other:
+  case ChatMessage::ImagePreview:
     return true;
   default:
     return false;

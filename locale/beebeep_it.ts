@@ -35,6 +35,10 @@
         <source>Header</source>
         <translation>Intestazione</translation>
     </message>
+    <message>
+        <source>Image Preview</source>
+        <translation>Anteprima immagini</translation>
+    </message>
 </context>
 <context>
     <name>Core</name>
@@ -1720,10 +1724,6 @@ Inserisci un nome differente.</translation>
         <translation>%1 non è più in linea</translation>
     </message>
     <message>
-        <source>Show preview of the images</source>
-        <translation>Mostra l&apos;anteprima delle immagini</translation>
-    </message>
-    <message>
         <source>or more</source>
         <translation>o più di uno</translation>
     </message>
@@ -2152,10 +2152,6 @@ Inserisci un nome differente.</translation>
         <translation>predefinito</translation>
     </message>
     <message>
-        <source>By nickname and user private id</source>
-        <translation>Dal soprannome e dal suo identificativo privato</translation>
-    </message>
-    <message>
         <source>By nickname</source>
         <translation>Dal soprannome</translation>
     </message>
@@ -2170,6 +2166,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show file notifications</source>
         <translation>Mostra le notifiche sul trasferimento dei file</translation>
+    </message>
+    <message>
+        <source>Your status description</source>
+        <translation>La descrizione dello tuo stato</translation>
     </message>
 </context>
 <context>
