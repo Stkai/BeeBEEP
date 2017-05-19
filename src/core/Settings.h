@@ -53,7 +53,7 @@ public:
   inline void setFirstTime( bool );
 
   enum UserRecognitionMethods { RecognizeByDefaultMethod, RecognizeByAccountAndDomain, RecognizeByAccount,
-                                RecognizeByNicknameAndHash, RecognizeByNickname, NumUserRecognitionMethods };
+                                RecognizeByNickname, NumUserRecognitionMethods };
   void setUserRecognitionMethod( int );
   inline int userRecognitionMethod() const;
   inline bool userRecognitionUsesDefaultMethod() const;
@@ -678,7 +678,7 @@ inline const QString& Settings::dataFolder() const { return m_dataFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline void Settings::setLocalUserStatus( User::Status new_value ) { m_localUser.setStatus( new_value ); }
-inline int Settings::userRecognitionMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod ? RecognizeByNicknameAndHash : m_userRecognitionMethod; }
+inline int Settings::userRecognitionMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod ? RecognizeByNickname : m_userRecognitionMethod; }
 inline bool Settings::userRecognitionUsesDefaultMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod; }
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }

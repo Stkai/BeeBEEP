@@ -23,6 +23,7 @@
 
 #include "GuiChatItem.h"
 #include "Chat.h"
+#include "ChatManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -34,27 +35,23 @@ GuiChatItem::GuiChatItem( QTreeWidget* parent )
 
 bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
 {
-  QString user_item_name = data( 0, GuiChatItem::ChatName ).toString().toLower();
-  QString other_name = item.data( 0, GuiChatItem::ChatName ).toString().toLower();
-
   if( chatId() == ID_DEFAULT_CHAT )
     return false;
 
   if( Bee::qVariantToVNumber( item.data( 0, GuiChatItem::ChatId ) ) == ID_DEFAULT_CHAT )
     return true;
 
-  if( isGroup() && !item.data( 0, GuiChatItem::ChatIsGroup ).toBool() )
-    return false;
+  int chat_messages = unreadMessages();
+  int other_messages = item.data( 0, GuiChatItem::ChatUnreadMessages ).toInt();
+  if( chat_messages != other_messages )
+    return chat_messages < other_messages;
 
-  if( !isGroup() && item.data( 0, GuiChatItem::ChatIsGroup ).toBool() )
-    return true;
+  chat_messages = data( 0, GuiChatItem::ChatMessages ).toInt();
+  other_messages = item.data( 0, GuiChatItem::ChatMessages ).toInt();
+  if( chat_messages != other_messages )
+    return chat_messages < other_messages;
 
-  int chat_unread_messages = unreadMessages();
-  int other_unread_messages = item.data( 0, GuiChatItem::ChatUnreadMessages ).toInt();
-  if( chat_unread_messages != other_unread_messages )
-    return chat_unread_messages > other_unread_messages;
-  else
-    return user_item_name > other_name; // correct order
+  return data( 0, GuiChatItem::ChatName ).toString().toLower() < item.data( 0, GuiChatItem::ChatName ).toString().toLower();
 }
 
 QString GuiChatItem::defaultChatName()
@@ -110,6 +107,7 @@ bool GuiChatItem::updateItem( const Chat& c )
   setText( 0, chat_name );
   setToolTip( 0, tool_tip );
   setData( 0, ChatUnreadMessages, c.unreadMessages() );
+  setData( 0, ChatMessages, c.messages().size() + ChatManager::instance().savedChatSize( c.name() ) );
   if( m_defaultIcon.isNull() )
     m_defaultIcon = QIcon( ":/images/chat.png" );
   if( !chatHasOnlineUsers( c ) )

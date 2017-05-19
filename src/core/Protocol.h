@@ -99,7 +99,7 @@ public:
   User createTemporaryUser( const UserRecord& );
   Chat createDefaultChat();
   Chat createPrivateChat( const User& );
-  Chat createChat( const Group& );
+  Chat createChat( const Group&, Group::ChatType );
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
 

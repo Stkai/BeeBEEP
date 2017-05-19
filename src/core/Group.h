@@ -56,12 +56,17 @@ public:
   inline const QDateTime& lastModified() const;
   inline void setLastModified( const QDateTime& );
 
+  enum ChatType { DefaultChat, PrivateChat, GroupChat, NumChatTypes };
+  inline void setChatType( Group::ChatType );
+  inline Group::ChatType chatType() const;
+
 private:
   VNumber m_id;
   QString m_name;
   QList<VNumber> m_usersId;
   QString m_privateId;
   QDateTime m_lastModified;
+  ChatType m_chatType;
 
 };
 
@@ -80,5 +85,7 @@ inline const QString& Group::privateId() const { return m_privateId; }
 inline void Group::setPrivateId( const QString& new_value ) { m_privateId = new_value; }
 inline const QDateTime& Group::lastModified() const { return m_lastModified; }
 inline void Group::setLastModified( const QDateTime& new_value ) { m_lastModified = new_value; }
+inline void Group::setChatType( Group::ChatType new_value ) { m_chatType = new_value; }
+inline Group::ChatType Group::chatType() const { return m_chatType; }
 
 #endif // BEEBEEP_GROUP_H

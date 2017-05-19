@@ -725,6 +725,11 @@ void GuiMain::createMenus()
   menu_recognize_users->setIcon( QIcon( ":/images/user-list.png" ) );
   mp_actGroupRecognizeUsers = new QActionGroup( this );
   mp_actGroupRecognizeUsers->setExclusive( true );
+  act = menu_recognize_users->addAction( tr( "By nickname" ) + QString( " (%1)" ).arg( tr( "default" ) ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByNickname );
+  act->setData( 59 );
+  mp_actGroupRecognizeUsers->addAction( act );
   act = menu_recognize_users->addAction( tr( "By account name and domain name" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain );
@@ -736,16 +741,6 @@ void GuiMain::createMenus()
   act->setData( 58 );
   mp_actGroupRecognizeUsers->addAction( act );
   menu_recognize_users->addSeparator();
-  act = menu_recognize_users->addAction( tr( "By nickname and user private id" ) + QString( " (%1)" ).arg( tr( "default" ) ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByNicknameAndHash );
-  act->setData( 59 );
-  mp_actGroupRecognizeUsers->addAction( act );
-  act = menu_recognize_users->addAction( tr( "By nickname" ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().userRecognitionMethod() == Settings::RecognizeByNickname );
-  act->setData( 60 );
-  mp_actGroupRecognizeUsers->addAction( act );
   connect( mp_actGroupRecognizeUsers, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
   mp_menuUsersSettings->addSeparator();
   mp_actAddUsers = mp_menuUsersSettings->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
@@ -1390,10 +1385,6 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 59:
     showRestartConnectionAlertMessage();
-    Settings::instance().setUserRecognitionMethod( Settings::RecognizeByNicknameAndHash );
-    break;
-  case 60:
-    showRestartConnectionAlertMessage();
     Settings::instance().setUserRecognitionMethod( Settings::RecognizeByNickname );
     break;
   case 99:
@@ -1435,6 +1426,7 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 #else
   mp_core->sendChatMessage( chat_id, msg );
 #endif
+  mp_chatList->updateChat( ChatManager::instance().chat( chat_id ) ); // to sort the chats
 }
 
 void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
@@ -1551,10 +1543,11 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   else
   {
     showAlertForMessage( c, cm );
-    mp_userList->updateChat( c );
-    mp_chatList->updateChat( c );
-    mp_groupList->updateChat( c );
+    mp_groupList->updateChat( c ); // for unread messages
   }
+
+  mp_userList->updateChat( c ); // to sort users
+  mp_chatList->updateChat( c ); // to sort chats
 
   updateNewMessageAction();
 }

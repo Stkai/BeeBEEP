@@ -32,7 +32,7 @@ class GuiChatItem : public QTreeWidgetItem
 {
 
 public:
-  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup, ChatUnreadMessages };
+  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup, ChatUnreadMessages, ChatMessages };
 
   GuiChatItem( QTreeWidget* );
 

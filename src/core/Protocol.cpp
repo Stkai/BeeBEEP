@@ -458,9 +458,9 @@ User Protocol::recognizeUser( const User& u, int user_recognition_method ) const
     if( user_found.isValid() )
       qDebug() << "User found in list with account name" << qPrintable( u.accountName() );
   }
-  else if( user_recognition_method == Settings::RecognizeByNicknameAndHash )
+  else if( user_recognition_method == Settings::RecognizeByNickname )
   {
-    user_found = UserManager::instance().findUserByNicknameAndHash( u.name(), u.hash() );
+    user_found = UserManager::instance().findUserByNickname( u.name() );
     if( !user_found.isValid() )
     {
       user_found = UserManager::instance().findUserByHash( u.hash() );
@@ -469,12 +469,6 @@ User Protocol::recognizeUser( const User& u, int user_recognition_method ) const
     }
     else
       qDebug() << "User found in list with nickname" << qPrintable( u.name() ) << "and hash" << qPrintable( u.hash() );
-  }
-  else if( user_recognition_method == Settings::RecognizeByNickname )
-  {
-    user_found = UserManager::instance().findUserByNickname( u.name() );
-    if( user_found.isValid() )
-      qDebug() << "User found in list with nickname:" << qPrintable( u.name() );
   }
   else
     qWarning() << "Invalid user recognition method found" << user_recognition_method;
@@ -803,7 +797,7 @@ Chat Protocol::createDefaultChat()
   g.setId( ID_DEFAULT_CHAT );
   g.setName( Settings::instance().defaultChatName() );
   g.setPrivateId( Settings::instance().defaultChatPrivateId() );
-  return createChat( g );
+  return createChat( g, Group::DefaultChat );
 }
 
 Chat Protocol::createPrivateChat( const User& u )
@@ -811,15 +805,17 @@ Chat Protocol::createPrivateChat( const User& u )
   Group g;
   g.setName( u.name() );
   g.addUser( u.id() );
-  return createChat( g );
+  return createChat( g, Group::PrivateChat );
 }
 
-Chat Protocol::createChat( const Group& g )
+Chat Protocol::createChat( const Group& g, Group::ChatType chat_type )
 {
   Group g_to_check = g;
+  if( g_to_check.chatType() != (int)chat_type )
+    g_to_check.setChatType( chat_type );
   if( !g_to_check.isValid() )
     g_to_check.setId( newId() );
-  if( g_to_check.privateId().isEmpty() && g_to_check.usersId().size() > 1 )
+  if( g_to_check.chatType() == Group::GroupChat && g_to_check.privateId().isEmpty() )
     g_to_check.setPrivateId( newMd5Id() );
   g_to_check.addUser( ID_LOCAL_USER );
   Chat c;
@@ -917,6 +913,7 @@ Group Protocol::loadGroup( const QString& group_data_saved )
   if( !sl.isEmpty() )
     g.setLastModified( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
 
+  g.setChatType( Group::GroupChat );
   return g;
 }
 
@@ -984,8 +981,7 @@ QList<UserRecord> Protocol::userRecordsFromGroupRequestMessage( const Message& m
     if( sl.size() >= 4 )
     {
       UserRecord ur;
-      ur.setName( User::nameFromPath( sl.takeFirst() ) );  // fixme
-      //ur.setName( sl.takeFirst() ) );  // fixme
+      ur.setName( sl.takeFirst() );
       ur.setAccount( sl.takeFirst() );
       ur.setHash( sl.takeFirst() );
       ur.setDomainName( sl.takeFirst() );

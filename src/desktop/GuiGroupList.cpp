@@ -121,6 +121,9 @@ void GuiGroupList::updateUser( const User& u )
 
 void GuiGroupList::updateChat( const Chat& c )
 {
+  if( !c.isGroup() )
+    return;
+
   GuiGroupItem* group_item = itemFromId( c.id() );
   if( !group_item )
   {

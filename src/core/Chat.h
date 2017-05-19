@@ -85,7 +85,7 @@ private:
 // Inline Functions
 inline bool Chat::operator==( const Chat& c ) const { return m_group.id() == c.m_group.id(); }
 inline bool Chat::isValid() const { return m_group.isValid(); }
-inline bool Chat::isDefault() const { return m_group.id() == ID_DEFAULT_CHAT; }
+inline bool Chat::isDefault() const { return m_group.chatType() == Group::DefaultChat; }
 inline void Chat::setGroup( const Group& new_value ) { m_group = new_value; }
 inline const Group& Chat::group() const { return m_group; }
 inline VNumber Chat::id() const { return m_group.id(); }
@@ -93,13 +93,13 @@ inline void  Chat::setName( const QString& new_value ) { m_group.setName( new_va
 inline const QString& Chat::name() const { return m_group.name(); }
 inline const QList<VNumber>& Chat::usersId() const { return m_group.usersId(); }
 inline const QString& Chat::privateId() const { return m_group.privateId(); }
-inline bool Chat::isGroup() const { return !m_group.privateId().isEmpty() && !isDefault(); }
+inline bool Chat::isGroup() const { return m_group.chatType() == Group::GroupChat; }
 inline bool Chat::hasUser( VNumber user_id ) const { return isDefault() ? true : m_group.hasUser( user_id ); }
 inline bool Chat::hasUsers( const QList<VNumber>& users_id ) const { return isDefault() ? true : m_group.hasUsers( users_id ); }
 inline bool Chat::addUser( VNumber user_id ) { return m_group.addUser( user_id ); }
 inline bool Chat::removeUser( VNumber user_id ) { return m_group.removeUser( user_id ); }
-inline bool Chat::isPrivateForUser( VNumber user_id ) const { return !isDefault() && !isGroup() && m_group.usersId().size() == 2 && m_group.hasUser( user_id ); }
-inline bool Chat::isPrivate() const { return isPrivateForUser( ID_LOCAL_USER ); }
+inline bool Chat::isPrivateForUser( VNumber user_id ) const { return isPrivate() && m_group.hasUser( user_id ); }
+inline bool Chat::isPrivate() const { return m_group.chatType() == Group::PrivateChat;  }
 inline const QDateTime& Chat::lastMessageTimestamp() const { return m_lastMessageTimestamp; }
 inline void Chat::setLastMessageTimestamp( const QDateTime& new_value ) { m_lastMessageTimestamp = new_value; }
 inline int Chat::unreadMessages() const { return m_unreadMessages; }

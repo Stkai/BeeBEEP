@@ -346,6 +346,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
         g.setName( cmd.groupName() );
         g.setPrivateId( cmd.groupId() );
         g.setUsers( ul.toUsersId() );
+        g.setChatType( Group::GroupChat );
         if( cmd.groupLastModified().isValid() )
           g.setLastModified( cmd.groupLastModified() );
 

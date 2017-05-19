@@ -26,7 +26,7 @@
 
 Group::Group()
   : m_id( ID_INVALID ), m_name( "" ), m_usersId(),
-    m_privateId( "" ), m_lastModified()
+    m_privateId( "" ), m_lastModified(), m_chatType( DefaultChat )
 {
 }
 
@@ -44,6 +44,7 @@ Group& Group::operator=( const Group& g )
     m_usersId = g.m_usersId;
     m_privateId = g.m_privateId;
     m_lastModified = g.m_lastModified;
+    m_chatType = g.m_chatType;
   }
   return *this;
 }

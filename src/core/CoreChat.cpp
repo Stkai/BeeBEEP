@@ -99,7 +99,7 @@ Chat Core::createGroupChat( const User& u, const Group& g, bool broadcast_messag
 {
   QString sHtmlMsg;
 
-  Chat c = Protocol::instance().createChat( g );
+  Chat c = Protocol::instance().createChat( g, Group::GroupChat );
   qDebug() << "Creating group chat named" << qPrintable( c.name() ) << "with private id" << qPrintable( c.privateId() ) << "by user" << qPrintable( u.name() );
   addChatHeader( &c );
 
