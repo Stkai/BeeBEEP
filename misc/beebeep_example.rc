@@ -26,6 +26,4 @@ StartMinimized=false
 Signature=
 UseOnlyTextEmoticons=false
 DisablePrivateChats=false
-
-[Groups]
-TrustSystemAccount=false
+UserRecognitionMethod=0

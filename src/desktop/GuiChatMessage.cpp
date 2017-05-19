@@ -96,7 +96,7 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
   if( cm.message().isEmpty() )
     return QString( "" );
 
-  QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
+  QString date_time_stamp = cm.type() != ChatMessage::ImagePreview ? datetimestampToString( cm, show_timestamp, show_datestamp ) : QString( "" );
 
   QString html_message = QString( "<font color=#808080>%1%2</font><br />" )
                            .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
